@@ -1,0 +1,4 @@
+interface:
+  display_name: "Documentation Localeo"
+  short_description: "Réorganiser les sources, liens et exports Localeo"
+  default_prompt: "Utilise $localeo-documentation pour réorganiser cette documentation et vérifier ses consommateurs."

@@ -1,10 +1,10 @@
 # Architectures par EPIC
 
-Chaque document de ce dossier explique les choix d'architecture applicative faits pour repondre a une EPIC.
+Ce dossier conserve les conceptions et synthèses d'architecture existantes. Les documents restent utiles pour comprendre leurs décisions, y compris lorsqu'une EPIC a été abandonnée ou remplacée ; ils ne constituent pas un nouveau backlog.
 
 ## Template
 
-Utiliser le template [epic-architecture-template.md](../../templates/epic-architecture-template.md) pour toute nouvelle EPIC ou retro-documentation.
+Pour une nouvelle initiative, partir des [spécifications canoniques](../../../specifications/INDEX.md) et enrichir le dossier du sujet. Une conception existante peut rester ici si la spécification y renvoie. Le [template de conception](../../templates/epic-architecture-template.md) aide à structurer un document nécessaire ; il n'impose pas d'en créer un second. Les décisions transverses se tracent dans les [ADR](../../decisions/README.md), et la [roadmap](../../../roadmap/README.md) porte l'état courant.
 
 ## Index
 

@@ -430,10 +430,11 @@ Principe :
 
 ## 8. Références du projet
 
-- Contrat API : `api/localeo-openapi.json`
-- Documentation API simplifiée : [docs/api.md](contrats-api.md)
-- Epic édition des prestations : [docs/backlog/epic-animation-edition-prestations.md](../../roadmap/terminees/epic-animation-edition-prestations.md)
-- Spécifications validation : [docs/backlog/spec-validation-prestation-flow.md](../archives/validation-prestation-deux-scans.md)
+- Contrat API attendu dans le dépôt commerçant : `api/localeo-openapi.json`. Son absence au 18 septembre 2026 et les consommateurs affectés sont décrits dans [la source des contrats](contrats-api.md#source-des-contrats--pro-012).
+- [Contrats API consommés](contrats-api.md).
+- [EPIC édition des prestations](../../roadmap/terminees/epic-animation-edition-prestations.md).
+- [Parcours canonique de validation des prestations](../validation-prestations/README.md).
+- [Ancien parcours de validation à deux scans](../archives/validation-prestation-deux-scans.md), conservé comme archive et non comme contrat d'implémentation.
 
 
 ## 9. Règles de remédiation préproduction

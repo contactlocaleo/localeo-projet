@@ -1,56 +1,25 @@
-# PWA & Offline
+# PWA, installation et WebPush
 
-- `manifest.webmanifest` : manifeste d'application genere au build.
-- `public/sw.js` : service worker de l'application.
-- `icon.svg` : icone de l'app.
-- `display: 'standalone'`.
-- `theme_color: '#0078d4'`.
+## Installation et manifeste
 
-## Web Push Epic 32
+Le manifeste `manifest.webmanifest` est servi en développement et généré au build par [vite.config.js](../../../../../localeo-commercant/vite.config.js). Il déclare `display: 'standalone'`, une orientation portrait et les icônes [192 px](../../../../../localeo-commercant/public/icon-192.png) et [512 px](../../../../../localeo-commercant/public/icon-512.png). Aucun fichier `icon.svg` n'est fourni.
 
-Dans Localeo, le WebPush sert au live tracking achats cote commercant.
-Il permet de prevenir un appareil abonne lorsqu'un achat confirme contient une prestation du commerce.
-Le commercant garde la main sur deux niveaux d'activation : la preference de compte et l'abonnement de chaque appareil.
+Au 18 septembre 2026, le manifeste conserve `theme_color: '#0078d4'` et `background_color: '#f5f9ff'`. Ces valeurs diffèrent des tokens de l'[interface actuelle](ui-components.md) ; cette description ne modifie pas la configuration de build.
 
-Ce canal ne remplace pas les emails ou les SMS.
-Il est concu comme une alerte immediate de l'application commercant, soumise aux permissions du navigateur et au support WebPush de l'appareil.
+[src/main.jsx](../../../../../localeo-commercant/src/main.jsx) enregistre `/sw.js` au chargement et laisse l'application utilisable si l'enregistrement échoue. L'interface d'installation est portée par [PwaInstallButton.jsx](../../../../../localeo-commercant/src/app/PwaInstallButton.jsx).
 
-- `public/sw.js` gere la reception des evenements `push` et transporte uniquement un deeplink opaque vers l'application au clic.
-- `src/lib/webPush.js` gere les preferences live tracking, l'abonnement navigateur, l'enregistrement backend et la resolution du deeplink.
-- L'activation est exposee dans `Mes informations personnelles` sous `Live tracking achats`.
-- La reception d'une notification ne cree jamais de session commercant. La resolution du deeplink se fait seulement apres authentification.
+## WebPush Epic 32
 
-Variables d'environnement :
+Le WebPush avertit un appareil abonné lorsqu'un achat confirmé contient une prestation du commerce. Le commerçant choisit sa préférence de compte et l'abonnement de chaque appareil. Ce canal complète les emails et SMS ; il dépend des permissions du navigateur et du support WebPush de l'appareil.
 
-- `LOCALEO_WEB_PUSH_PUBLIC_KEY` : cle publique VAPID obligatoire pour abonner un navigateur.
-- `LOCALEO_WEB_PUSH_PREFERENCES_ENDPOINT` : endpoint protege des preferences, par defaut `/commercants/me/notifications/preferences`.
-- `LOCALEO_WEB_PUSH_SUBSCRIPTIONS_ENDPOINT` : endpoint protege des abonnements, par defaut `/commercants/me/webpush/abonnements`.
-- `LOCALEO_WEB_PUSH_DEEPLINK_RESOLUTION_ENDPOINT` : endpoint protege de resolution, par defaut `/commercants/me/webpush/deeplinks/resoudre`.
+- [public/sw.js](../../../../../localeo-commercant/public/sw.js) reçoit `push`, affiche la notification et ouvre ou remet au premier plan l'application au clic. Il transmet le deeplink opaque à la page de suivi.
+- [src/lib/webPush.js](../../../../../localeo-commercant/src/lib/webPush.js) gère les préférences, l'abonnement navigateur, son enregistrement backend et la résolution du deeplink. La clé publique `LOCALEO_WEB_PUSH_PUBLIC_KEY` est nécessaire à l'abonnement ; ce module définit les éventuels endpoints configurables et leurs valeurs par défaut.
+- L'activation est présentée dans « Mes informations personnelles », sous « Live tracking achats ». Les [contrats de notifications](../../../specifications/espace-commercant/contrats-api.md#notifications-webpush) décrivent les appels protégés.
 
-Contrat backend attendu :
+Une notification ne crée jamais de session commerçant. Son deeplink reste opaque et n'est résolu qu'après authentification. Le payload ne doit exposer ni données personnelles, ni `achat_id`, `coffret_id` ou autre identifiant métier direct. Le type d'alerte achat est `ACHAT_COFFRET_CONTENANT_PRESTATION`.
 
-- `GET /protected/commercants/me/notifications/preferences`.
-- `PATCH /protected/commercants/me/notifications/preferences` avec `{ "live_tracking_achats_active": true }`.
-- `GET /protected/commercants/me/webpush/abonnements`.
-- `POST /protected/commercants/me/webpush/abonnements` avec `endpoint`, `keys`, `device_label` et `user_agent`.
-- `DELETE /protected/commercants/me/webpush/abonnements/{abonnement_id}`.
-- `POST /protected/commercants/me/webpush/deeplinks/resoudre` avec `{ "deeplink": "localeo://commercant/live-tracking/{opaque_reference}" }`.
+## Limite hors ligne
 
-Payload WebPush cible :
+Le service worker actuel écoute `push` et `notificationclick` ; il n'a aucun gestionnaire `fetch` ni stratégie de cache hors ligne. L'installation de la PWA ne garantit donc pas l'accès aux données sans réseau.
 
-```json
-{
-  "type": "ACHAT_COFFRET_CONTENANT_PRESTATION",
-  "title": "Un coffret contenant votre offre vient d'être acheté",
-  "body": "Coffret Découverte locale - 1 prestation chez vous",
-  "deeplink": "localeo://commercant/live-tracking/{opaque_reference}"
-}
-```
-
-Le payload WebPush ne doit pas contenir de donnees personnelles, `achat_id`, `coffret_id` ou autre identifiant metier direct.
-Le deeplink doit rester opaque pour que sa resolution cote backend se fasse uniquement apres authentification du commercant.
-
-## Etapes suivantes
-
-1. Gerer la mise en cache des ressources statiques et API.
-2. Ajouter une strategie de renouvellement de service worker.
+Ne pas introduire implicitement de cache pour les API authentifiées, de rejeu de mutation ou de validation simulée après une indisponibilité réseau. Une évolution du cache statique ou du cycle de mise à jour du service worker demande un périmètre et des tests dédiés ; elle n'est pas implémentée par ce document.

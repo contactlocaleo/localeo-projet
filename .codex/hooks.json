@@ -1,0 +1,16 @@
+{
+  "description": "Contexte de workspace Localeo au démarrage et après compaction ; lecture seule, sans réseau.",
+  "hooks": {
+    "SessionStart": [{
+      "matcher": "^(startup|resume|clear|compact)$",
+      "hooks": [{
+        "type": "command",
+        "command": "node \"$(git rev-parse --show-toplevel)/scripts/codex_context.cjs\"",
+        "commandWindows": "powershell.exe -NoProfile -NonInteractive -Command \"$r = git rev-parse --show-toplevel; if ($LASTEXITCODE -ne 0) { exit 1 }; & node (Join-Path $r 'scripts/codex_context.cjs'); exit $LASTEXITCODE\"",
+        "timeout": 10,
+        "statusMessage": "Repérage des dépôts Localeo",
+        "additionalContextLimit": 1800
+      }]
+    }]
+  }
+}

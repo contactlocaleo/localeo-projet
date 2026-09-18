@@ -1,19 +1,18 @@
-# Architecture applicative
+# Architecture du backend
 
-Ce repertoire regroupe les decisions d'architecture applicative du backend Localeo.
+Ce répertoire conserve les descriptions et décisions d'architecture du backend Localeo. Les règles et contrats partagés avec les interfaces restent dans les [spécifications canoniques par fonctionnalité](../../specifications/INDEX.md).
 
-## Organisation
+## Repères
 
-- [Architectures par EPIC](epics/README.md) : un dossier applicatif par initiative produit ou technique.
-- [Architecture transverse](../transverse/README.md) : conventions communes, decoupage solution, API, back-office et securite.
-- [ADR](../decisions/README.md) : decisions d'architecture ponctuelles, datees et tracables.
-- [Templates](../templates/README.md) : modeles a utiliser pour creer ou reprendre une documentation d'architecture.
+- [Architectures par EPIC](epics/README.md) : conceptions et synthèses existantes, avec leur portée historique.
+- [Architecture transverse](../transverse/README.md) : conventions communes, couches, API, back-office et sécurité.
+- [ADR](../decisions/README.md) : décisions structurantes, datées et traçables.
+- [Templates](../templates/README.md) : structures de conception et de décision à utiliser selon le besoin.
 
-## Regles d'usage
+## Faire évoluer la conception
 
-- Une EPIC significative doit avoir un document dans `epics/`.
-- Les documents EPIC decrivent l'architecture applicative et les objets manipules, sans descendre dans le detail d'implementation des classes.
-- Les choix transverses partages par plusieurs EPIC doivent etre documentes dans `transverse/`.
-- Une decision structurante et reversible ou discutable doit etre formalisee en ADR.
-- Les nouveaux documents EPIC doivent partir du template [epic-architecture-template.md](../templates/epic-architecture-template.md).
+Pour une nouvelle initiative, enrichir d'abord la spécification canonique du sujet : règles, invariants, contrats, applications concernées et preuves attendues. Réutiliser son dossier et ses identifiants d'arbitrage. Ne pas créer systématiquement un document concurrent dans `epics/`.
 
+Une conception longue déjà présente ici peut rester sa référence d'architecture, avec un lien explicite depuis la spécification. Son ancienneté ne prouve ni le statut produit courant ni le déploiement ; consulter la [roadmap commune](../../roadmap/README.md) pour le suivi.
+
+Les choix applicables à plusieurs sujets relèvent des [conventions transverses](../transverse/README.md). Une décision structurante se trace dans une ADR reliée au sujet. Les documents décrivent responsabilités, objets, transitions et contrats ; ils ne doivent pas recopier un catalogue de classes que le code maintient déjà.

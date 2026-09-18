@@ -2,7 +2,7 @@
 
 ## Contrat local
 
-Le contrat de reference est `api/localeo-openapi.json`. La convention de routage exposee par ce contrat est :
+Le contrat local attendu par les consommateurs est `api/localeo-openapi.json`, dans le dépôt commerçant. Ce fichier est actuellement absent ; voir [la source des contrats et la limite de validation](#source-des-contrats--pro-012). La convention de routage est :
 
 - `/public/{domaine}/*` : endpoints publics sans authentification.
 - `/protected/{domaine}/*` : endpoints app avec session commercant ou token applicatif selon l'endpoint.
@@ -174,7 +174,11 @@ indisponible ; la validation de la prestation ou de l’étape reste à confirme
 
 ### Source des contrats — PRO-012
 
-`api/localeo-openapi.json` et sa copie de compatibilité `docs/openapi.json` sont régénérés ensemble depuis `localeo-backend/app.main:app`, dans le runner isolé sans dotenv ni réseau. Ils décrivent le code local, pas la preuve de son déploiement. Le guide de formation et la procédure de production complètent le contrat technique.
+L'[exporteur du dépôt commerçant](../../../../localeo-commercant/scripts/export-openapi.py) utilise `localeo-backend/app.main:app` via le [lanceur isolé](../../../../localeo-backend/scripts/validation/test_isolated.py), sans charger dotenv ni ouvrir de connexion réseau. Il écrit uniquement `api/localeo-openapi.json` ; aucune copie `docs/openapi.json` n'est produite.
+
+Constat au 18 septembre 2026 : le fichier et son dossier `api/` sont absents après leur suppression dans le dépôt commerçant. [contracts.test.js](../../../../localeo-commercant/src/lib/api/contracts.test.js) importe toujours le fichier, et [check-deployment.mjs](../../../../localeo-commercant/scripts/check-deployment.mjs) le lit pour comparer un déploiement. Ces contrôles ne peuvent pas être déclarés réussis en cet état.
+
+L'exporteur nécessite les dépendances Python du backend voisin et un dossier de sortie existant : il ne crée pas `api/`. Les prérequis sont dans le [README commerçant](../../../../localeo-commercant/README.md#contrat-openapi-manquant). Le [contrat documentaire canonique EPIC 41](../epic-41-api/openapi.json) reste consultable, mais les consommateurs ci-dessus ne le chargent pas automatiquement. Cette mise à jour ne restaure ni ne génère d'artefact. Un export décrit le code local ; il ne prouve pas son déploiement.
 
 ### Contrat signé du commerçant
 

@@ -1,14 +1,14 @@
 # Templates d'architecture
 
-## Templates disponibles
+## Modèles disponibles
 
-- [epic-architecture-template.md](epic-architecture-template.md) : structure obligatoire pour un document d'architecture applicative d'EPIC.
-- [adr-template.md](adr-template.md) : structure pour documenter une decision d'architecture ponctuelle.
+- [Conception d'une EPIC](epic-architecture-template.md) : structure de référence lorsqu'un document de conception est nécessaire.
+- [ADR](adr-template.md) : structure d'une décision d'architecture datée et argumentée.
 
-## Principes
+## Utilisation
 
-- Le template EPIC doit rester stable pour permettre une lecture homogene des dossiers.
-- Le document EPIC doit faire apparaitre les objets manipules ou crees par l'EPIC.
-- Les diagrammes Mermaid sont privilegies pour rester lisibles dans le depot.
-- PlantUML peut etre utilise si le diagramme devient trop complexe pour Mermaid.
+Enrichir d'abord le dossier de [spécification canonique](../../specifications/INDEX.md) du sujet. Un template n'impose ni document supplémentaire pour une petite correction, ni copie concurrente d'une conception existante. Conserver un lien vers les architectures historiques encore utiles et vers les ADR applicables.
 
+Le document doit rendre lisibles les responsabilités, les objets manipulés, les invariants, les contrats et les preuves attendues. Adapter le niveau de détail au changement ; les sections sans objet doivent rester explicites plutôt qu'être remplies artificiellement.
+
+Préférer Mermaid pour des diagrammes lisibles dans le dépôt ; PlantUML reste possible lorsqu'il répond à un besoin de représentation plus complexe. Garder les modèles cohérents avec les [conventions transverses](../transverse/README.md).

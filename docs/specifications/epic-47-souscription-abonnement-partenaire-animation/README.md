@@ -220,6 +220,12 @@ durée déterminée, sans renouvellement automatique. Lorsqu'un référencement
 couvre plusieurs communes, une commande consolidee porte une ligne par
 souscription et produit un paiement Stripe unique.
 
+### Écart documentaire sur les métadonnées Stripe
+
+Constat de lecture du code au 18 septembre 2026 : la proposition ci-dessus mentionne `souscription_id`, `partenaire_id` et `offre_code`, tandis que la [passerelle de paiement](../../../../localeo-backend/app/infrastructure/paiement/paiement_gateway.py) place `commande_souscription_id`, `partenaire_id` et `contexte_type=ABONNEMENT_ANIMATION` sur la session Checkout et le PaymentIntent. `souscription_id` est porté par les métadonnées de produit des lignes. Le [traitement des souscriptions](../../../../localeo-backend/app/application/abonnements_plateforme/service_souscriptions.py) lit le contexte et l'identifiant de commande pour reconnaître le webhook.
+
+Cette différence entre proposition et implémentation doit être prise en compte lors d'une reprise d'intégration. Le constat conserve les deux descriptions ; il ne modifie ni le besoin métier, ni les arbitrages, et ne prouve pas le déploiement de ce code.
+
 ### Webhook
 
 Le routeur `POST /public/stripe/webhook` doit distribuer les événements de
@@ -388,6 +394,8 @@ convention comptable commune avec le CA coffrets.
 
 Ces routes sont réservées à l'administration. Le parcours public ne reçoit
 qu'une page de retour informative ; il ne peut pas activer l'abonnement.
+
+Le même constat de lecture relève un écart pour l'annulation : le tableau proposé cible une souscription, alors que le [routeur implémenté](../../../../localeo-backend/app/api/abonnements_plateforme_api.py) expose `POST /internal/abonnements-plateforme/commandes/{commande_id}/annuler`. Cette différence de ressource est à confronter au parcours attendu avant de modifier un consommateur ; la présente revue ne tranche pas une évolution du périmètre d'annulation.
 
 ## Configuration proposée
 

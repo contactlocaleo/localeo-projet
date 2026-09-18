@@ -210,7 +210,7 @@ Partenaire + convention       Prestation + donnees factuelles
 - contrats d'API et contraintes d'idempotence documentes ;
 - plan de tests et de deploiement progressif accepte.
 
-La conception technique est implementee dans ce depot. Les validations
+Le bilan d'origine annonce la conception technique implémentée dans le [backend Localeo](../../../../localeo-backend/README.md), et non dans ce dépôt documentaire. Les validations
 documentaires restantes sont externalisees et les fonctions concernees restent
 desactivees jusqu'a leur approbation et leur recette.
 

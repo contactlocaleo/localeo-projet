@@ -19,21 +19,25 @@ Ouvrir [localeo.code-workspace](localeo.code-workspace) dans VS Code, avec les c
 - [Exploitation](docs/exploitation/INDEX.md), [juridique](docs/juridique/INDEX.md), [audits](docs/audits/INDEX.md)
 - [Livrables](livrables/INDEX.md) et [releases](releases/INDEX.md)
 - [Compte rendu de réorganisation](docs/organisation/compte-rendu-reorganisation-2026-09-18.md)
+- [Travailler avec Codex](docs/organisation/codex.md) : contexte ciblé, invariants, skills, hooks et sous-agents.
 
 ## Modifier la documentation
+
+Prérequis : Git et Python dans un environnement activé. Les vérificateurs de ce dépôt utilisent la bibliothèque standard. Le hook de contexte Codex utilise également Node.
 
 Éditer les sources dans ce dépôt. Les contrats OpenAPI documentaires du backend sont également centralisés ici ; leurs générateurs restent dans le backend. Les lecteurs de l’ERP et les outils juridiques utilisent directement ce dépôt voisin ou la racine définie par `LOCALEO_DOCUMENTATION_ROOT`.
 
 ```console
 python scripts/sync_documentation.py --check-sources
-python scripts/check_workspace.py
-python -m unittest discover -s tests
+python scripts/check_guidance.py
 ```
+
+Pour un changement des outils, ajouter leurs tests ciblés. Les contrôles plus larges `python scripts/check_workspace.py` et `python -m unittest discover -s tests` incluent respectivement le manifeste historique de migration et la couverture des procédures opératoires. Leurs limites connues et les commandes ciblées sont détaillées dans le [guide Codex](docs/organisation/codex.md). Ne pas confondre un contrôle de liens réussi avec une validation métier.
 
 Pour livrer le backend seul, préparer un bundle non versionné puis vérifier ses empreintes. Les commandes, chemins et modalités de déploiement sont dans le [guide de documentation centralisée](docs/exploitation/technique/reference-documentation-centralisee.md). Le synchroniseur refuse d’écraser un bundle modifié localement. La CI backend teste les lecteurs et le contrôle d’intégrité sur des fixtures indépendantes ; le bundle réel se vérifie lors de la préparation du déploiement.
 
 ## Livrer une évolution
 
-Identifier les applications affectées dans la spécification ; garder les détails propres à chaque moteur ou interface dans le même dossier métier. Réutiliser les identifiants d’arbitrage existants. Pour un changement transverse, vérifier et commiter séparément chaque dépôt concerné, puis renseigner les SHAs livrés dans un manifeste de release. Aucun sous-module ni dépôt Git parent n’est requis.
+Identifier les applications affectées dans la spécification ; garder les détails propres à chaque moteur ou interface dans le même dossier métier. Réutiliser les identifiants d’arbitrage existants. Vérifier séparément chaque dépôt concerné. Si des commits sont demandés, les créer par dépôt ; si une release est préparée, renseigner ses SHAs dans un manifeste. Un commit local ne constitue ni un push ni un déploiement. Aucun sous-module ni dépôt Git parent n’est requis.
 
 [repositories.json](repositories.json) décrit les chemins relatifs et les commandes. [Le manifeste initial](releases/reorganisation-2026-09-18.json) enregistre les HEAD avant réorganisation ; il ne représente pas une release déployée.

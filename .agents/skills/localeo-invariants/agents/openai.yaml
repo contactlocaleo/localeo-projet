@@ -1,0 +1,4 @@
+interface:
+  display_name: "Invariants Localeo"
+  short_description: "Vérifier les règles métier et leurs contrats partagés"
+  default_prompt: "Utilise $localeo-invariants pour vérifier le placement de cette règle et les tests nécessaires."

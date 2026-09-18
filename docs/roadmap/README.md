@@ -61,7 +61,6 @@ Epics 50 et 63, restent documentees dans leurs dossiers.
 - [Suivi backlog et historique des stories](suivi-backlog.md).
 - [Roadmap securite et performance](a-faire/security-performance-roadmap.md).
 - [Sprint securite immediate](a-faire/sprint-1-securite-immediate.md).
-- [Notes de cadrage](envrac.md).
 
 Lors d'un changement d'etat, deplacer tous les documents de l'epic, actualiser
 les index et les deux syntheses, puis verifier les liens entrants et sortants.

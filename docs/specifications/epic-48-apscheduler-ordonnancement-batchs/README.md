@@ -362,10 +362,12 @@ deux sources automatiques ne doivent jamais rester actives simultanément.
 - APScheduler est désactivé par défaut jusqu'à la fin de la recette de bascule ;
 - le déploiement de la migration du lease précède l'activation dans FastAPI.
 
-## Implémentation livrée
+## Bilan historique de livraison
+
+Le décompte ci-dessous décrit le périmètre de la livraison initiale. Le [registre des batchs et planifications](../../../../localeo-backend/app/application/exploitation/services/batchs.py) est la source à consulter pour l'inventaire courant ; les batchs ajoutés ensuite ne rouvrent pas cette EPIC.
 
 - dépendance `APScheduler>=3.11.3,<4.0` ;
-- catalogue `BATCH_SCHEDULE_DEFINITIONS` de 17 planifications pour 16 batchs ;
+- catalogue initial `BATCH_SCHEDULE_DEFINITIONS` de 17 planifications pour 16 batchs ;
 - coordinateur leader/standby dans le lifespan FastAPI ;
 - acquisition et renouvellement atomiques du lease avec l'heure PostgreSQL ;
 - job store mémoire, `coalesce=true`, `max_instances=1` et misfires bornés ;

@@ -1,0 +1,469 @@
+{
+  "date": "2026-09-18",
+  "scope": "Guides et outillage Codex des cinq depots",
+  "baseline_repositories": [
+    {
+      "repository": "localeo-projet",
+      "head": "e3522cd570369ffff10bfda94c0b5c699951553e",
+      "guides": 47,
+      "edited": 11,
+      "bytes_before": 217727,
+      "bytes_after": 224608,
+      "modified": [
+        {
+          "path": "AGENTS.md",
+          "bytes_before": 1849,
+          "bytes_after": 3507
+        },
+        {
+          "path": "README.md",
+          "bytes_before": 3493,
+          "bytes_after": 4297
+        },
+        {
+          "path": "docs/architecture/backend/README.md",
+          "bytes_before": 1114,
+          "bytes_after": 1651
+        },
+        {
+          "path": "docs/architecture/backend/epics/README.md",
+          "bytes_before": 4019,
+          "bytes_after": 4524
+        },
+        {
+          "path": "docs/architecture/templates/README.md",
+          "bytes_before": 646,
+          "bytes_after": 1137
+        },
+        {
+          "path": "docs/exploitation/README.md",
+          "bytes_before": 3541,
+          "bytes_after": 4325
+        },
+        {
+          "path": "docs/roadmap/README.md",
+          "bytes_before": 4203,
+          "bytes_after": 4170
+        },
+        {
+          "path": "docs/specifications/epic-47-souscription-abonnement-partenaire-animation/README.md",
+          "bytes_before": 23272,
+          "bytes_after": 24730
+        },
+        {
+          "path": "docs/specifications/epic-48-apscheduler-ordonnancement-batchs/README.md",
+          "bytes_before": 17160,
+          "bytes_after": 17479
+        },
+        {
+          "path": "docs/specifications/epic-50-conformite-fiscale-bum/README.md",
+          "bytes_before": 13152,
+          "bytes_after": 13265
+        },
+        {
+          "path": "docs/specifications/espace-commercant/README.md",
+          "bytes_before": 22696,
+          "bytes_after": 22940
+        }
+      ]
+    },
+    {
+      "repository": "localeo-backend",
+      "head": "63fab3db8748695e0bdca73fa4839d1c760f241a",
+      "guides": 12,
+      "edited": 7,
+      "bytes_before": 37520,
+      "bytes_after": 26832,
+      "modified": [
+        {
+          "path": "AGENT.md",
+          "bytes_before": 24114,
+          "bytes_after": 8636
+        },
+        {
+          "path": "AGENTS.md",
+          "bytes_before": 1002,
+          "bytes_after": 708
+        },
+        {
+          "path": "README.md",
+          "bytes_before": 1693,
+          "bytes_after": 4707
+        },
+        {
+          "path": "demonstrations/README.md",
+          "bytes_before": 1801,
+          "bytes_after": 2122
+        },
+        {
+          "path": "scripts/README.md",
+          "bytes_before": 1278,
+          "bytes_after": 2070
+        },
+        {
+          "path": "scripts/demonstration/AGENTS.md",
+          "bytes_before": 784,
+          "bytes_after": 1735
+        },
+        {
+          "path": "scripts/demonstration/assets/README.md",
+          "bytes_before": 1251,
+          "bytes_after": 1257
+        }
+      ]
+    },
+    {
+      "repository": "localeo-animation",
+      "head": "da55504e18100d1918d5f4b5e18e81eb7f3cc862",
+      "guides": 4,
+      "edited": 4,
+      "bytes_before": 1986,
+      "bytes_after": 8531,
+      "modified": [
+        {
+          "path": "AGENTS.md",
+          "bytes_before": 416,
+          "bytes_after": 3081
+        },
+        {
+          "path": "README.md",
+          "bytes_before": 589,
+          "bytes_after": 3386
+        },
+        {
+          "path": "assets/localeo-app-icons/README.md",
+          "bytes_before": 719,
+          "bytes_after": 1222
+        },
+        {
+          "path": "docs/README.md",
+          "bytes_before": 262,
+          "bytes_after": 842
+        }
+      ]
+    },
+    {
+      "repository": "localeo-commercant",
+      "head": "c3c919a7f2a808bfa851dc42a2ce542483122c0f",
+      "guides": 3,
+      "edited": 3,
+      "bytes_before": 2989,
+      "bytes_after": 8711,
+      "modified": [
+        {
+          "path": "AGENTS.md",
+          "bytes_before": 417,
+          "bytes_after": 2987
+        },
+        {
+          "path": "README.md",
+          "bytes_before": 2309,
+          "bytes_after": 4718
+        },
+        {
+          "path": "docs/README.md",
+          "bytes_before": 263,
+          "bytes_after": 1006
+        }
+      ]
+    },
+    {
+      "repository": "localeo-marketplace",
+      "head": "59506255612611c2a2b276d02954b27b2180cf77",
+      "guides": 4,
+      "edited": 4,
+      "bytes_before": 9428,
+      "bytes_after": 9977,
+      "modified": [
+        {
+          "path": "AGENT.md",
+          "bytes_before": 5856,
+          "bytes_after": 3878
+        },
+        {
+          "path": "AGENTS.md",
+          "bytes_before": 380,
+          "bytes_after": 628
+        },
+        {
+          "path": "README.md",
+          "bytes_before": 2928,
+          "bytes_after": 4542
+        },
+        {
+          "path": "docs/README.md",
+          "bytes_before": 264,
+          "bytes_after": 929
+        }
+      ]
+    }
+  ],
+  "external_links": {
+    "checked_at": "2026-09-18T21:03:48.306841+00:00",
+    "guides": 73,
+    "unique_urls": 13,
+    "references": 13,
+    "summary": {
+      "reachable": 11,
+      "broken": 0,
+      "not_verifiable": 1,
+      "excluded": 1
+    },
+    "scope": "Git-visible guidance and docs/organisation/codex.md; Markdown links, autolinks and bare HTTP(S), excluding fences and inline code.",
+    "safety": "Only public documentation allowlist requested; no product/operator API requests; redirects rechecked; 3 workers; HEAD, GET only on 405/501; no cookies or credentials.",
+    "limits": "HTTP accessibility only: anchors/content are not validated. 403/auth/network failures are not classified as missing pages.",
+    "links": [
+      {
+        "url": "https://apscheduler.readthedocs.io/en/3.x/userguide.html",
+        "sources": [
+          {
+            "source": "localeo-projet/docs/specifications/epic-48-apscheduler-ordonnancement-batchs/README.md",
+            "line": 50
+          }
+        ],
+        "method": "HEAD",
+        "http_status": 200,
+        "final_url": "https://apscheduler.readthedocs.io/en/3.x/userguide.html",
+        "classification": "reachable"
+      },
+      {
+        "url": "https://geo.api.gouv.fr/decoupage-administratif/communes",
+        "sources": [
+          {
+            "source": "localeo-projet/docs/specifications/epic-52-accueil-marketplace-geolocalise/README.md",
+            "line": 65
+          }
+        ],
+        "method": "HEAD",
+        "http_status": 200,
+        "final_url": "https://geo.api.gouv.fr/decoupage-administratif/communes",
+        "classification": "reachable"
+      },
+      {
+        "url": "https://github.com/googlefonts/OswaldFont",
+        "sources": [
+          {
+            "source": "localeo-backend/app/infrastructure/animation_locale/assets/fonts/README.md",
+            "line": 9
+          }
+        ],
+        "method": "HEAD",
+        "http_status": 200,
+        "final_url": "https://github.com/googlefonts/OswaldFont",
+        "classification": "reachable"
+      },
+      {
+        "url": "https://github.com/googlefonts/dm-fonts",
+        "sources": [
+          {
+            "source": "localeo-backend/app/infrastructure/animation_locale/assets/fonts/README.md",
+            "line": 9
+          }
+        ],
+        "method": "HEAD",
+        "http_status": 200,
+        "final_url": "https://github.com/googlefonts/dm-fonts",
+        "classification": "reachable"
+      },
+      {
+        "url": "https://learn.chatgpt.com/docs/agent-configuration/agents-md",
+        "sources": [
+          {
+            "source": "localeo-projet/docs/organisation/codex.md",
+            "line": 7
+          }
+        ],
+        "method": "HEAD",
+        "http_status": 200,
+        "final_url": "https://learn.chatgpt.com/docs/agent-configuration/agents-md",
+        "classification": "reachable"
+      },
+      {
+        "url": "https://learn.chatgpt.com/docs/agent-configuration/subagents",
+        "sources": [
+          {
+            "source": "localeo-projet/docs/organisation/codex.md",
+            "line": 34
+          }
+        ],
+        "method": "HEAD",
+        "http_status": 200,
+        "final_url": "https://learn.chatgpt.com/docs/agent-configuration/subagents",
+        "classification": "reachable"
+      },
+      {
+        "url": "https://learn.chatgpt.com/docs/build-skills",
+        "sources": [
+          {
+            "source": "localeo-projet/docs/organisation/codex.md",
+            "line": 27
+          }
+        ],
+        "method": "HEAD",
+        "http_status": 200,
+        "final_url": "https://learn.chatgpt.com/docs/build-skills",
+        "classification": "reachable"
+      },
+      {
+        "url": "https://learn.chatgpt.com/docs/hooks",
+        "sources": [
+          {
+            "source": "localeo-projet/docs/organisation/codex.md",
+            "line": 40
+          }
+        ],
+        "method": "HEAD",
+        "http_status": 200,
+        "final_url": "https://learn.chatgpt.com/docs/hooks",
+        "classification": "reachable"
+      },
+      {
+        "url": "https://pypi.org/project/APScheduler/",
+        "sources": [
+          {
+            "source": "localeo-projet/docs/specifications/epic-48-apscheduler-ordonnancement-batchs/README.md",
+            "line": 49
+          }
+        ],
+        "method": "HEAD",
+        "http_status": 200,
+        "final_url": "https://pypi.org/project/APScheduler/",
+        "classification": "reachable"
+      },
+      {
+        "url": "https://render.com/docs/deploys",
+        "sources": [
+          {
+            "source": "localeo-projet/docs/specifications/epic-48-apscheduler-ordonnancement-batchs/README.md",
+            "line": 51
+          }
+        ],
+        "method": "HEAD",
+        "http_status": 200,
+        "final_url": "https://render.com/docs/deploys",
+        "classification": "reachable"
+      },
+      {
+        "url": "https://render.com/docs/free",
+        "sources": [
+          {
+            "source": "localeo-projet/docs/specifications/epic-48-apscheduler-ordonnancement-batchs/README.md",
+            "line": 52
+          }
+        ],
+        "method": "HEAD",
+        "http_status": 200,
+        "final_url": "https://render.com/docs/free",
+        "classification": "reachable"
+      },
+      {
+        "url": "https://unsplash.com/license",
+        "sources": [
+          {
+            "source": "localeo-backend/scripts/demonstration/assets/README.md",
+            "line": 13
+          }
+        ],
+        "method": "HEAD",
+        "http_status": 307,
+        "classification": "not_verifiable",
+        "reason": "redirect_to_non_documentation_challenge_not_followed",
+        "redirect_path": "/.within.website",
+        "redirect_query_omitted": true
+      },
+      {
+        "url": "https://www.figma.com/design/KvMa5gaa4PkbpLfwqftqAN/Localeo-Animation",
+        "sources": [
+          {
+            "source": "localeo-animation/README.md",
+            "line": 5
+          }
+        ],
+        "method": null,
+        "http_status": null,
+        "classification": "excluded",
+        "reason": "design_or_operator_link_not_public_documentation"
+      }
+    ]
+  },
+  "validation": {
+    "guidance_tests": {
+      "passed": 14
+    },
+    "sync_tests": {
+      "passed": 15,
+      "skipped": 1
+    },
+    "documentation_sources": {
+      "passed": 117
+    },
+    "hook_tests": {
+      "passed": 1
+    },
+    "animation_tests": {
+      "passed": 13,
+      "command": "node --test tests/auth-memory.test.mjs tests/http-context.test.mjs tests/pwa.test.mjs tests/build-environment.test.mjs"
+    },
+    "commercant_contract": {
+      "failed_suites": 1,
+      "executed_tests": 0,
+      "reason": "Artefact api/localeo-openapi.json absent",
+      "command": "node node_modules/vitest/vitest.mjs run src/lib/api/contracts.test.js --maxWorkers=2"
+    },
+    "skills": {
+      "quick_validate_passed": 2,
+      "discovery_confirmed": true,
+      "ui_metadata_validated": true
+    },
+    "custom_agents": {
+      "toml_valid": 2,
+      "native_spawn_verified": false
+    },
+    "hooks": {
+      "session_start_created": true,
+      "windows_command_tested": true,
+      "native_trust_registered": false,
+      "git_pre_commit_installed": false,
+      "windows_command_subdirectory_tested": true,
+      "git_pre_commit_yaml_validated": true
+    },
+    "migration_manifest": {
+      "missing_targets": 10
+    },
+    "local_guidance": {
+      "mode": "working-tree",
+      "changed_only": false,
+      "repositories": [
+        "localeo-projet",
+        "localeo-backend",
+        "localeo-animation",
+        "localeo-commercant",
+        "localeo-marketplace"
+      ],
+      "checked_guides": 78,
+      "checked_links": 749,
+      "errors": [],
+      "warnings": []
+    },
+    "git_diff_check": {
+      "repositories": 5,
+      "passed": true
+    },
+    "central_readme_review": {
+      "readme_files": 46,
+      "readme_files_updated": 8
+    }
+  },
+  "actions": {
+    "commit": false,
+    "push": false,
+    "deployment": false
+  },
+  "summary": {
+    "existing_guides_reviewed": 70,
+    "existing_guides_modified": 29,
+    "skills_created": 2,
+    "review_profiles_created": 2,
+    "hook_definitions_created": 2
+  }
+}

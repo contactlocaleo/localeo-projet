@@ -1,6 +1,6 @@
 # Guide transverse Localeo
 
-Lire le [README](README.md), la spécification du périmètre, les [conventions transverses](docs/architecture/transverse/README.md) et les instructions locales de chaque application touchée avant de modifier son code.
+Lire le [README](README.md), puis la spécification du périmètre et les instructions locales des applications touchées. L'[index des conventions](docs/architecture/transverse/README.md) sert à sélectionner les règles utiles ; ne pas charger tous les backlogs et historiques à chaque tâche.
 
 - Conserver les cinq dépôts Git indépendants. Documenter les applications affectées et les contrats partagés ; ne pas créer une documentation concurrente par application.
 - Le domaine backend porte les règles métier ; l’application orchestre et les interfaces présentent. Respecter les instructions techniques locales.
@@ -11,3 +11,17 @@ Lire le [README](README.md), la spécification du périmètre, les [conventions 
 - Les commits, push et déploiements sont des opérations distinctes ; suivre la demande en cours. Ne jamais déposer les quatre applications dans un Git parent.
 
 Les guides voisins ne sont pas hérités automatiquement : leurs AGENTS.md renvoient explicitement à ce fichier. Si un dépôt voisin manque, le signaler et continuer les tâches qui n’en dépendent pas.
+
+## Invariants et vérification
+
+Avant une modification métier, identifier la règle qui doit rester vraie, son propriétaire dans le domaine, ses entrées API/ERP/batch et le comportement observable à tester. Utiliser la [matrice de contrôles](docs/architecture/transverse/controle-architecture.md) pour choisir les preuves. Les routes, vues et tâches ne doivent pas réimplémenter cette règle.
+
+Choisir les tests selon le changement ; un build ou un test d’import ne prouve pas un invariant métier. Distinguer succès, échec, contrôle non exécuté et dette préexistante. Ne pas affaiblir une assertion ni ajouter un skip pour obtenir un résultat vert.
+
+Pour les guides, lancer `python scripts/check_guidance.py` depuis ce dépôt. Pour les sources exportées, ajouter `python scripts/sync_documentation.py --check-sources`. Une validation documentaire ne remplace pas les tests des lecteurs quand leur contrat change.
+
+## Travail avec Codex
+
+Le [guide Codex](docs/organisation/codex.md) décrit le contexte à lire par tâche, les skills locaux et les contrôles disponibles. Utiliser les skills ciblés pour les réorganisations et audits documentaires, ou les évolutions et revues des invariants/contrats.
+
+Déléguer une exploration ou une revue indépendante quand elle réduit le délai ou améliore la couverture. Donner à chaque sous-agent un périmètre précis, les preuves attendues et, s’il écrit, des fichiers distincts. L’agent principal intègre les résultats et vérifie les écarts. Ne pas multiplier les agents pour une petite correction.

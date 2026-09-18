@@ -28,7 +28,7 @@ artificiellement dans une entité. SQLAdmin reste un adaptateur couplé aux ORM.
 
 ## Contrôles exécutables
 
-Depuis la racine, dans l'environnement Python du projet :
+Depuis la racine de `localeo-backend`, dans son environnement Python :
 
 ```bash
 python scripts/validation/test_isolated.py tests/architecture tests/domain/test_domain_dedicated_classes.py tests/application/use_cases/test_use_case_business_test_coverage.py -q
@@ -80,13 +80,13 @@ en place. Cette configuration distante n'est pas appliquée par ce document.
 
 ## Découverte du guide par les agents
 
-`AGENTS.md` renvoie à `AGENT.md`, qui reste la source unique des consignes.
+Dans `localeo-backend`, `AGENTS.md` renvoie à `AGENT.md`, référence technique locale, et au guide transverse de `localeo-projet`.
 Codex recherche le nom standard `AGENTS.md` ; un autre nom dépend des noms de
 repli configurés. Ce point d'entrée évite une dépendance à la configuration
 personnelle d'un développeur, sans dupliquer toutes les instructions.
-[Référence officielle](https://developers.openai.com/fr-FR/docs/agent-configuration/agents-md).
+[Référence officielle](https://learn.chatgpt.com/docs/agent-configuration/agents-md).
 
-Dans une nouvelle session ouverte dans ce dépôt, vérifier que le guide est
+Dans une nouvelle session ouverte dans le backend, vérifier que le guide est
 pris en compte avant l'édition ; les instructions des sous-dossiers restent
 applicables. Ce mécanisme facilite la lecture, mais les tests et la revue restent
 nécessaires pour vérifier le respect des principes.
