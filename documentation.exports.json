@@ -1,0 +1,473 @@
+{
+  "schema_version": 1,
+  "entries": [
+    {
+      "path": "docs/juridique/PLAN_PUBLICATION_DOCUMENTS_JURIDIQUES_2026-09-14.md",
+      "source_path": "docs/juridique/PLAN_PUBLICATION_DOCUMENTS_JURIDIQUES_2026-09-14.md"
+    },
+    {
+      "path": "docs/juridique/REVUE_FINALE_V1_2026-09-13.md",
+      "source_path": "docs/juridique/REVUE_FINALE_V1_2026-09-13.md"
+    },
+    {
+      "path": "docs/juridique/SUIVI_CORRECTIONS_V1_2026-09-13.md",
+      "source_path": "docs/juridique/SUIVI_CORRECTIONS_V1_2026-09-13.md"
+    },
+    {
+      "path": "docs/juridique/animation/LOCALEO - Annexe protection des données partenaire Animation - V1.pdf",
+      "source_path": "docs/juridique/animation/LOCALEO - Annexe protection des données partenaire Animation - V1.pdf"
+    },
+    {
+      "path": "docs/juridique/animation/LOCALEO - Conditions particulières Localeo Animation - V1.pdf",
+      "source_path": "docs/juridique/animation/LOCALEO - Conditions particulières Localeo Animation - V1.pdf"
+    },
+    {
+      "path": "docs/juridique/animation/LOCALEO - Règlement type d'une animation - V1.pdf",
+      "source_path": "docs/juridique/animation/LOCALEO - Règlement type d'une animation - V1.pdf"
+    },
+    {
+      "path": "docs/juridique/commercant/LOCALEO - Contrat de Partenariat Commerçant avec fiche prestations - V1.pdf",
+      "source_path": "docs/juridique/commercant/LOCALEO - Contrat de Partenariat Commerçant avec fiche prestations - V1.pdf"
+    },
+    {
+      "path": "docs/juridique/communs/LOCALEO - Déclaration d'accessibilité - V1.pdf",
+      "source_path": "docs/juridique/communs/LOCALEO - Déclaration d'accessibilité - V1.pdf"
+    },
+    {
+      "path": "docs/juridique/communs/LOCALEO - Mentions Légales - V1.pdf",
+      "source_path": "docs/juridique/communs/LOCALEO - Mentions Légales - V1.pdf"
+    },
+    {
+      "path": "docs/juridique/communs/LOCALEO - Politique de Confidentialité - V1.pdf",
+      "source_path": "docs/juridique/communs/LOCALEO - Politique de Confidentialité - V1.pdf"
+    },
+    {
+      "path": "docs/juridique/communs/LOCALEO - Politique de Cookies - V1.pdf",
+      "source_path": "docs/juridique/communs/LOCALEO - Politique de Cookies - V1.pdf"
+    },
+    {
+      "path": "docs/juridique/interne/Annexe A - Registre simplifié des traitements et tableau de conservation des données - V1.pdf",
+      "source_path": "docs/juridique/interne/Annexe A - Registre simplifié des traitements et tableau de conservation des données - V1.pdf"
+    },
+    {
+      "path": "docs/juridique/interne/Annexe B - Registre des sous-traitants - V1.pdf",
+      "source_path": "docs/juridique/interne/Annexe B - Registre des sous-traitants - V1.pdf"
+    },
+    {
+      "path": "docs/juridique/interne/Annexe C - Gestion des Flux financiers Localeo - V1.pdf",
+      "source_path": "docs/juridique/interne/Annexe C - Gestion des Flux financiers Localeo - V1.pdf"
+    },
+    {
+      "path": "docs/juridique/interne/Annexe E - Vérification DPF CCT - V1.pdf",
+      "source_path": "docs/juridique/interne/Annexe E - Vérification DPF CCT - V1.pdf"
+    },
+    {
+      "path": "docs/juridique/live/LOCALEO - Conditions Générales d'Utilisation Localeo Live - V1.pdf",
+      "source_path": "docs/juridique/live/LOCALEO - Conditions Générales d'Utilisation Localeo Live - V1.pdf"
+    },
+    {
+      "path": "docs/juridique/live/LOCALEO - Notice de confidentialité Localeo Live - V1.pdf",
+      "source_path": "docs/juridique/live/LOCALEO - Notice de confidentialité Localeo Live - V1.pdf"
+    },
+    {
+      "path": "docs/juridique/marketplace/LOCALEO - Conditions Générales de Vente Marketplace - V1.pdf",
+      "source_path": "docs/juridique/marketplace/LOCALEO - Conditions Générales de Vente Marketplace - V1.pdf"
+    },
+    {
+      "path": "docs/juridique/marketplace/LOCALEO - Formulaire de Rétractation Localeo - V1.pdf",
+      "source_path": "docs/juridique/marketplace/LOCALEO - Formulaire de Rétractation Localeo - V1.pdf"
+    },
+    {
+      "path": "docs/juridique/publication/catalogue.json",
+      "source_path": "docs/juridique/publication/catalogue.json"
+    },
+    {
+      "path": "docs/juridique/publication/environments.json",
+      "source_path": "docs/juridique/publication/environments.json"
+    },
+    {
+      "path": "docs/ops/MODELE-PROCEDURE.md",
+      "source_path": "docs/exploitation/MODELE-PROCEDURE.md"
+    },
+    {
+      "path": "docs/ops/README.md",
+      "source_path": "docs/exploitation/README.md"
+    },
+    {
+      "path": "docs/ops/animation-session-navigateur.md",
+      "source_path": "docs/architecture/transverse/authentification/animation-session-navigateur.md"
+    },
+    {
+      "path": "docs/ops/dashboard-commercial-backoffice.md",
+      "source_path": "docs/architecture/backend/backoffice/dashboard-commercial-backoffice.md"
+    },
+    {
+      "path": "docs/ops/demonstration/README.md",
+      "source_path": "docs/exploitation/demonstration/README.md"
+    },
+    {
+      "path": "docs/ops/demonstration/configuration-cli.md",
+      "source_path": "docs/exploitation/demonstration/configuration-cli.md"
+    },
+    {
+      "path": "docs/ops/demonstration/donnees-generation.md",
+      "source_path": "docs/exploitation/demonstration/donnees-generation.md"
+    },
+    {
+      "path": "docs/ops/demonstration/exploitation.md",
+      "source_path": "docs/exploitation/demonstration/exploitation.md"
+    },
+    {
+      "path": "docs/ops/demonstration/installation-restauration.md",
+      "source_path": "docs/exploitation/demonstration/installation-restauration.md"
+    },
+    {
+      "path": "docs/ops/demonstration/realisation-recette.md",
+      "source_path": "docs/exploitation/demonstration/realisation-recette.md"
+    },
+    {
+      "path": "docs/ops/design-system-interfaces-admin-specifiques.md",
+      "source_path": "docs/architecture/backend/backoffice/design-system-interfaces-admin-specifiques.md"
+    },
+    {
+      "path": "docs/ops/exploitation/README.md",
+      "source_path": "docs/exploitation/exploitation/README.md"
+    },
+    {
+      "path": "docs/ops/exploitation/activer-epic-50.md",
+      "source_path": "docs/exploitation/exploitation/activer-epic-50.md"
+    },
+    {
+      "path": "docs/ops/exploitation/annuler-validation-prestation.md",
+      "source_path": "docs/exploitation/exploitation/annuler-validation-prestation.md"
+    },
+    {
+      "path": "docs/ops/exploitation/corriger-accents-contenus-animation.md",
+      "source_path": "docs/exploitation/exploitation/corriger-accents-contenus-animation.md"
+    },
+    {
+      "path": "docs/ops/exploitation/creer-offre-animation.md",
+      "source_path": "docs/exploitation/exploitation/creer-offre-animation.md"
+    },
+    {
+      "path": "docs/ops/exploitation/desactiver-antivirus-documentaire.md",
+      "source_path": "docs/exploitation/exploitation/desactiver-antivirus-documentaire.md"
+    },
+    {
+      "path": "docs/ops/exploitation/gerer-acces-animation.md",
+      "source_path": "docs/exploitation/exploitation/gerer-acces-animation.md"
+    },
+    {
+      "path": "docs/ops/exploitation/gerer-secret-pagination-api.md",
+      "source_path": "docs/exploitation/exploitation/gerer-secret-pagination-api.md"
+    },
+    {
+      "path": "docs/ops/exploitation/gerer-souscriptions-animation.md",
+      "source_path": "docs/exploitation/exploitation/gerer-souscriptions-animation.md"
+    },
+    {
+      "path": "docs/ops/exploitation/localeo-ops.md",
+      "source_path": "docs/exploitation/exploitation/localeo-ops.md"
+    },
+    {
+      "path": "docs/ops/exploitation/localeo-support.md",
+      "source_path": "docs/exploitation/exploitation/localeo-support.md"
+    },
+    {
+      "path": "docs/ops/exploitation/maintenir-georeferencement-communes.md",
+      "source_path": "docs/exploitation/exploitation/maintenir-georeferencement-communes.md"
+    },
+    {
+      "path": "docs/ops/exploitation/menu-animation-erp.md",
+      "source_path": "docs/exploitation/exploitation/menu-animation-erp.md"
+    },
+    {
+      "path": "docs/ops/exploitation/onboarder-commercant-stripe-connect.md",
+      "source_path": "docs/exploitation/exploitation/onboarder-commercant-stripe-connect.md"
+    },
+    {
+      "path": "docs/ops/exploitation/piloter-reversements-stripe-connect.md",
+      "source_path": "docs/exploitation/exploitation/piloter-reversements-stripe-connect.md"
+    },
+    {
+      "path": "docs/ops/exploitation/profil-facturation-localeo.md",
+      "source_path": "docs/exploitation/exploitation/profil-facturation-localeo.md"
+    },
+    {
+      "path": "docs/ops/exploitation/publier-actualite-localeo-live.md",
+      "source_path": "docs/exploitation/exploitation/publier-actualite-localeo-live.md"
+    },
+    {
+      "path": "docs/ops/exploitation/reconcilier-commande-lots-animation.md",
+      "source_path": "docs/exploitation/exploitation/reconcilier-commande-lots-animation.md"
+    },
+    {
+      "path": "docs/ops/exploitation/reconstituer-historique-validation-reversement.md",
+      "source_path": "docs/exploitation/exploitation/reconstituer-historique-validation-reversement.md"
+    },
+    {
+      "path": "docs/ops/exploitation/reconstruire-vente-stripe-apres-incident.md",
+      "source_path": "docs/exploitation/exploitation/reconstruire-vente-stripe-apres-incident.md"
+    },
+    {
+      "path": "docs/ops/exploitation/reference-guide-backoffice.md",
+      "source_path": "docs/exploitation/exploitation/reference-guide-backoffice.md"
+    },
+    {
+      "path": "docs/ops/exploitation/relancer-communication-client.md",
+      "source_path": "docs/exploitation/exploitation/relancer-communication-client.md"
+    },
+    {
+      "path": "docs/ops/exploitation/renvoyer-acces-coffret.md",
+      "source_path": "docs/exploitation/exploitation/renvoyer-acces-coffret.md"
+    },
+    {
+      "path": "docs/ops/exploitation/reprise-commissions.md",
+      "source_path": "docs/exploitation/exploitation/reprise-commissions.md"
+    },
+    {
+      "path": "docs/ops/exploitation/traiter-blocage-reversement-stripe-connect.md",
+      "source_path": "docs/exploitation/exploitation/traiter-blocage-reversement-stripe-connect.md"
+    },
+    {
+      "path": "docs/ops/exploitation/traiter-blocage-wording-acquisition-bum.md",
+      "source_path": "docs/exploitation/exploitation/traiter-blocage-wording-acquisition-bum.md"
+    },
+    {
+      "path": "docs/ops/exploitation/traiter-fermeture-refus-commercant.md",
+      "source_path": "docs/exploitation/exploitation/traiter-fermeture-refus-commercant.md"
+    },
+    {
+      "path": "docs/ops/exploitation/traiter-message-support.md",
+      "source_path": "docs/exploitation/exploitation/traiter-message-support.md"
+    },
+    {
+      "path": "docs/ops/exploitation/traiter-remboursement-achat.md",
+      "source_path": "docs/exploitation/exploitation/traiter-remboursement-achat.md"
+    },
+    {
+      "path": "docs/ops/exploitation/valider-prestation-mode-secours.md",
+      "source_path": "docs/exploitation/exploitation/valider-prestation-mode-secours.md"
+    },
+    {
+      "path": "docs/ops/formation/README.md",
+      "source_path": "docs/produit/formation/backend/README.md"
+    },
+    {
+      "path": "docs/ops/formation/guide-animation-preproduction.md",
+      "source_path": "docs/produit/formation/backend/guide-animation-preproduction.md"
+    },
+    {
+      "path": "docs/ops/formation/guide-backoffice-localeo.md",
+      "source_path": "docs/produit/formation/backend/guide-backoffice-localeo.md"
+    },
+    {
+      "path": "docs/ops/guide-corrections-marketplace-2026-09-06.md",
+      "source_path": "docs/exploitation/guide-corrections-marketplace-2026-09-06.md"
+    },
+    {
+      "path": "docs/ops/pilotage-multi-territoires-backoffice.md",
+      "source_path": "docs/architecture/backend/backoffice/pilotage-multi-territoires-backoffice.md"
+    },
+    {
+      "path": "docs/ops/recette/README.md",
+      "source_path": "docs/exploitation/recette/README.md"
+    },
+    {
+      "path": "docs/ops/recette/acces-commercant-avant-activation.md",
+      "source_path": "docs/exploitation/recette/acces-commercant-avant-activation.md"
+    },
+    {
+      "path": "docs/ops/recette/aptitudes-et-reouverture-onboard.md",
+      "source_path": "docs/exploitation/recette/aptitudes-et-reouverture-onboard.md"
+    },
+    {
+      "path": "docs/ops/recette/cahier-recette-generale-avant-mep.md",
+      "source_path": "docs/exploitation/recette/cahier-recette-generale-avant-mep.md"
+    },
+    {
+      "path": "docs/ops/recette/cahier-tests-backoffice.md",
+      "source_path": "docs/exploitation/recette/cahier-tests-backoffice.md"
+    },
+    {
+      "path": "docs/ops/recette/campagne-ouverture-base-vide/00-pilotage.md",
+      "source_path": "docs/exploitation/recette/campagne-ouverture-base-vide/00-pilotage.md"
+    },
+    {
+      "path": "docs/ops/recette/campagne-ouverture-base-vide/01-backoffice.md",
+      "source_path": "docs/exploitation/recette/campagne-ouverture-base-vide/01-backoffice.md"
+    },
+    {
+      "path": "docs/ops/recette/campagne-ouverture-base-vide/02-marketplace.md",
+      "source_path": "docs/exploitation/recette/campagne-ouverture-base-vide/02-marketplace.md"
+    },
+    {
+      "path": "docs/ops/recette/campagne-ouverture-base-vide/03-localeo-animation.md",
+      "source_path": "docs/exploitation/recette/campagne-ouverture-base-vide/03-localeo-animation.md"
+    },
+    {
+      "path": "docs/ops/recette/campagne-ouverture-base-vide/04-localeo-commercant.md",
+      "source_path": "docs/exploitation/recette/campagne-ouverture-base-vide/04-localeo-commercant.md"
+    },
+    {
+      "path": "docs/ops/recette/correctif-commission-prestation-euros.md",
+      "source_path": "docs/exploitation/recette/correctif-commission-prestation-euros.md"
+    },
+    {
+      "path": "docs/ops/recette/correctif-modeles-onboard.md",
+      "source_path": "docs/exploitation/recette/correctif-modeles-onboard.md"
+    },
+    {
+      "path": "docs/ops/recette/correctif-suivi-convention-onboard.md",
+      "source_path": "docs/exploitation/recette/correctif-suivi-convention-onboard.md"
+    },
+    {
+      "path": "docs/ops/recette/correctifs-anomalies-septembre-2026.md",
+      "source_path": "docs/exploitation/recette/correctifs-anomalies-septembre-2026.md"
+    },
+    {
+      "path": "docs/ops/recette/rapport-routes-administration-2026-09-06.md",
+      "source_path": "docs/exploitation/recette/rapport-routes-administration-2026-09-06.md"
+    },
+    {
+      "path": "docs/ops/recette/recette-backoffice-preproduction.md",
+      "source_path": "docs/exploitation/recette/recette-backoffice-preproduction.md"
+    },
+    {
+      "path": "docs/ops/recette/registre-routes-administration-2026-09-06.csv",
+      "source_path": "docs/exploitation/recette/registre-routes-administration-2026-09-06.csv"
+    },
+    {
+      "path": "docs/ops/recette/reinitialiser-base-recette.md",
+      "source_path": "docs/exploitation/recette/reinitialiser-base-recette.md"
+    },
+    {
+      "path": "docs/ops/recette/resultats-acces-administration-2026-09-06.csv",
+      "source_path": "docs/exploitation/recette/resultats-acces-administration-2026-09-06.csv"
+    },
+    {
+      "path": "docs/ops/support-navigation-transverse-backoffice.md",
+      "source_path": "docs/architecture/backend/backoffice/support-navigation-transverse-backoffice.md"
+    },
+    {
+      "path": "docs/ops/technique/README.md",
+      "source_path": "docs/exploitation/technique/README.md"
+    },
+    {
+      "path": "docs/ops/technique/configurer-un-environnement.md",
+      "source_path": "docs/exploitation/technique/configurer-un-environnement.md"
+    },
+    {
+      "path": "docs/ops/technique/deployer-et-verifier-schema.md",
+      "source_path": "docs/exploitation/technique/deployer-et-verifier-schema.md"
+    },
+    {
+      "path": "docs/ops/technique/diagnostiquer-incident-backend.md",
+      "source_path": "docs/exploitation/technique/diagnostiquer-incident-backend.md"
+    },
+    {
+      "path": "docs/ops/technique/diagnostiquer-sante-systeme.md",
+      "source_path": "docs/exploitation/technique/diagnostiquer-sante-systeme.md"
+    },
+    {
+      "path": "docs/ops/technique/executer-campagne-tests-performance-api.md",
+      "source_path": "docs/exploitation/technique/executer-campagne-tests-performance-api.md"
+    },
+    {
+      "path": "docs/ops/technique/faire-rotation-cles-qr.md",
+      "source_path": "docs/exploitation/technique/faire-rotation-cles-qr.md"
+    },
+    {
+      "path": "docs/ops/technique/gerer-api-keys-internes.md",
+      "source_path": "docs/exploitation/technique/gerer-api-keys-internes.md"
+    },
+    {
+      "path": "docs/ops/technique/planifier-et-superviser-batchs.md",
+      "source_path": "docs/exploitation/technique/planifier-et-superviser-batchs.md"
+    },
+    {
+      "path": "docs/ops/technique/provisionner-referentiels.md",
+      "source_path": "docs/exploitation/technique/provisionner-referentiels.md"
+    },
+    {
+      "path": "docs/ops/technique/publier-documents-juridiques.md",
+      "source_path": "docs/exploitation/technique/publier-documents-juridiques.md"
+    },
+    {
+      "path": "docs/ops/technique/rattraper-payouts-stripe-connect.md",
+      "source_path": "docs/exploitation/technique/rattraper-payouts-stripe-connect.md"
+    },
+    {
+      "path": "docs/ops/technique/reference-batchs.md",
+      "source_path": "docs/exploitation/technique/reference-batchs.md"
+    },
+    {
+      "path": "docs/ops/technique/reference-configuration-environnement.md",
+      "source_path": "docs/exploitation/technique/reference-configuration-environnement.md"
+    },
+    {
+      "path": "docs/ops/technique/reference-guide-exploitation-plateforme.md",
+      "source_path": "docs/exploitation/technique/reference-guide-exploitation-plateforme.md"
+    },
+    {
+      "path": "docs/ops/technique/reprendre-expiration-coffrets.md",
+      "source_path": "docs/exploitation/technique/reprendre-expiration-coffrets.md"
+    },
+    {
+      "path": "docs/ops/technique/reprendre-notifications-sortantes.md",
+      "source_path": "docs/exploitation/technique/reprendre-notifications-sortantes.md"
+    },
+    {
+      "path": "docs/ops/technique/sessions-administration.md",
+      "source_path": "docs/exploitation/technique/sessions-administration.md"
+    },
+    {
+      "path": "docs/ops/ux-menu-backoffice.md",
+      "source_path": "docs/architecture/backend/backoffice/ux-menu-backoffice.md"
+    },
+    {
+      "path": "output/pdf/localeo_ops_backoffice_aide_operationnelle.pdf",
+      "source_path": "livrables/exploitation/backend/localeo_ops_backoffice_aide_operationnelle.pdf"
+    },
+    {
+      "path": "output/pdf/localeo_ops_backoffice_localeo_guide_formation.pdf",
+      "source_path": "livrables/exploitation/backend/localeo_ops_backoffice_localeo_guide_formation.pdf"
+    },
+    {
+      "path": "output/pdf/localeo_ops_cahier_tests_backoffice.pdf",
+      "source_path": "livrables/exploitation/backend/localeo_ops_cahier_tests_backoffice.pdf"
+    },
+    {
+      "path": "output/pdf/localeo_ops_configuration_environnement.pdf",
+      "source_path": "livrables/exploitation/backend/localeo_ops_configuration_environnement.pdf"
+    },
+    {
+      "path": "output/pdf/localeo_ops_exploitation.pdf",
+      "source_path": "livrables/exploitation/backend/localeo_ops_exploitation.pdf"
+    },
+    {
+      "path": "output/pdf/localeo_ops_mode_secours_telephonique.pdf",
+      "source_path": "livrables/exploitation/backend/localeo_ops_mode_secours_telephonique.pdf"
+    },
+    {
+      "path": "output/pdf/localeo_ops_onboarding_commercant_stripe_connect.pdf",
+      "source_path": "livrables/exploitation/backend/localeo_ops_onboarding_commercant_stripe_connect.pdf"
+    },
+    {
+      "path": "output/pdf/localeo_ops_ordonnancement_batchs.pdf",
+      "source_path": "livrables/exploitation/backend/localeo_ops_ordonnancement_batchs.pdf"
+    },
+    {
+      "path": "output/pdf/localeo_ops_reversements_stripe_connect.pdf",
+      "source_path": "livrables/exploitation/backend/localeo_ops_reversements_stripe_connect.pdf"
+    },
+    {
+      "path": "docs/ops/technique/reference-documentation-centralisee.md",
+      "source_path": "docs/exploitation/technique/reference-documentation-centralisee.md"
+    },
+    {
+      "path": "docs/ops/technique/reference-scripts-backend.md",
+      "source_path": "docs/exploitation/technique/reference-scripts-backend.md"
+    }
+  ]
+}

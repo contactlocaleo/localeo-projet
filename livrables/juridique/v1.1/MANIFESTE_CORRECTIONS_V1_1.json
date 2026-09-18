@@ -1,0 +1,118 @@
+{
+  "revision": "1.1",
+  "date": "2026-09-13",
+  "documents": [
+    {
+      "key": "annexe-c",
+      "canonical_pdf": "docs/juridique/interne/Annexe C - Gestion des Flux financiers Localeo - V1.pdf",
+      "pages": 4,
+      "pdf_sha256": "5adc75f7be9f43ab4bafe0d4834c756b68113d977d3318b5bc7c3ac2a74f8d8d",
+      "docx_sha256": "2da4ae8440af7c0718644bc34cda48490dd56305ac48cb2d66dd4ba8a101622c",
+      "previous_pdf_sha256": "b5a3dd1f6b4c7b58406f51fe9b24bffd508e4e6f5351affd1a3f18f4f85c9627",
+      "changes": [
+        {
+          "before": "Version 1.0 — 13 septembre 2026",
+          "after": "Version 1.1 — 13 septembre 2026"
+        },
+        {
+          "before": "Cette annexe décrit les paiements des coffrets Localeo, les sommes dues aux commerçants partenaires et leur règlement. Elle complète le contrat de partenariat et son récapitulatif tarifaire individualisé. Elle distingue les décisions prises par Localeo des opérations exécutées par Stripe et n'attribue à aucune partie un statut réglementaire qu'elle ne détient pas.",
+          "after": "Ce document interne décrit le traitement des paiements des coffrets Localeo, des sommes dues aux commerçants partenaires et de leur règlement. Les engagements contractuels envers les commerçants résultent du contrat de partenariat et de sa fiche intégrée des prestations et commissions. Cette procédure ne constitue pas une annexe contractuelle à faire signer. Elle distingue les décisions prises par Localeo des opérations exécutées par Stripe et n'attribue à aucune partie un statut réglementaire qu'elle ne détient pas."
+        },
+        {
+          "before": "La présente annexe ne concerne pas les abonnements Animation, les achats professionnels à crédit ni les conditions propres aux organismes publics.",
+          "after": "Le déroulement ci-dessous concerne les achats de coffrets hors lots Animation. Il ne décrit pas les abonnements Animation, les achats professionnels à crédit ni les conditions propres aux organismes publics. Pour les lots Animation, le paiement réserve les lots ; leur activation intervient lors de leur attribution et de leur mise à disposition au gagnant, selon les Conditions particulières Animation. Le paiement de la commande de lots ne déclenche donc pas à lui seul leur activation."
+        },
+        {
+          "before": "Lorsque le taux de commission est appliqué à la contrepartie brute TTC, les arrondis suivent l'Annexe D. Les frais facturés par Stripe à la plateforme sont supportés par Localeo, sauf stipulation particulière explicite. Un transfert Stripe qui ne comporte pas de frais propres ne signifie pas que le paiement initial du client n'a occasionné aucun frais.",
+          "after": "Le calcul de la commission et les arrondis suivent l'article 7 du contrat de partenariat commerçant ; la valeur et le taux convenus sont renseignés dans sa fiche intégrée. Les frais facturés par Stripe à la plateforme sont supportés par Localeo, sauf stipulation particulière explicite. Un transfert Stripe qui ne comporte pas de frais propres ne signifie pas que le paiement initial du client n'a occasionné aucun frais."
+        },
+        {
+          "before": "Les réserves décidées par Stripe relèvent de ses conditions. Toute réserve supplémentaire imposée contractuellement par Localeo nécessite un accord précisant son assiette, son plafond, son motif, sa durée et sa libération. Aucune réserve Localeo n'est créée par la présente annexe.",
+          "after": "Les réserves décidées par Stripe relèvent de ses conditions. Toute réserve supplémentaire imposée contractuellement par Localeo nécessite un accord précisant son assiette, son plafond, son motif, sa durée et sa libération. Aucune réserve Localeo n'est créée par la présente procédure."
+        },
+        {
+          "before": "L'utilisation de Stripe ne constitue pas, par elle-même, une garantie de remboursement intégral, de disponibilité immédiate ou d'absence de risque. Cette annexe ne présente les soldes Stripe ni comme un compte séquestre propre à chaque coffret ni comme des fonds bénéficiant automatiquement d'une garantie des dépôts.",
+          "after": "L'utilisation de Stripe ne constitue pas, par elle-même, une garantie de remboursement intégral, de disponibilité immédiate ou d'absence de risque. Cette procédure ne présente les soldes Stripe ni comme un compte séquestre propre à chaque coffret ni comme des fonds bénéficiant automatiquement d'une garantie des dépôts."
+        },
+        {
+          "before": "Le justificatif d'achat du coffret, la facture de prestation du commerçant, la facture de commission Localeo et les relevés Stripe correspondent à des objets différents. Le Partenaire émet ses propres factures ; Localeo n'agit pas comme émetteur de factures en son nom sur le fondement de cette annexe.",
+          "after": "Le justificatif d'achat du coffret, la facture de prestation du commerçant, la facture de commission Localeo et les relevés Stripe correspondent à des objets différents. Le Partenaire émet ses propres factures ; Localeo n'agit pas comme émetteur de factures en son nom sur le fondement de cette procédure."
+        }
+      ],
+      "export_pdf": "docs/juridique/interne/Annexe C - Gestion des Flux financiers Localeo - V1.pdf",
+      "editable_docx": "livrables/juridique/v1.1/Annexe C - Gestion des Flux financiers Localeo - V1.docx"
+    },
+    {
+      "key": "cgv",
+      "canonical_pdf": "docs/juridique/marketplace/LOCALEO - Conditions Générales de Vente Marketplace - V1.pdf",
+      "pages": 7,
+      "pdf_sha256": "27c701ce847016d46ded83b26ac0e33ad0ea651f797b5b8b9ea5dc1b8a26b077",
+      "docx_sha256": "11bcc99f75efcd7869ad02d25e3594bbe5d91beb4c4081ff37930f4aafac9a5b",
+      "previous_pdf_sha256": "48e71836f4de0ecd58fd53bcb25c898c43e19322d24f9f4b849d2b3ceac41a42",
+      "changes": [
+        {
+          "before": "Version 1.0 — 13 septembre 2026",
+          "after": "Version 1.1 — 13 septembre 2026"
+        },
+        {
+          "before": "Localeo remet un justificatif de la commande. La qualification fiscale d'un bon dépend des caractéristiques réelles de l'offre : un coffret n'est pas automatiquement un bon à usages multiples parce qu'il comprend plusieurs prestations.\n\nLorsque le coffret constitue un bon à usages multiples, son acquisition est distincte de la prestation sous-jacente pour l'application de la TVA. Le professionnel réalisant la prestation émet les documents fiscaux requis pour son opération. Localeo établit les documents relatifs à ses propres opérations et ne facture pas au nom du commerçant. Pour obtenir le justificatif correspondant à votre situation, contactez le support en précisant la commande et le destinataire du document.",
+          "after": "Les coffrets numériques Localeo SOLO et MULTI régis par les présentes conditions sont des bons à usages multiples (BUM). Leur émission et leur vente avant utilisation ne donnent pas lieu à facturation de TVA sur la valeur du bon. Localeo remet un justificatif de commande, distinct de la facture de la prestation réalisée.\n\nLors de l'utilisation du coffret, le commerçant applique aux biens et services effectivement fournis son régime fiscal, notamment de TVA, et émet les documents requis. Le justificatif d'acquisition du bon ne constitue pas une facture détaillée de ces biens et services. Localeo établit séparément les documents relatifs à ses propres opérations et ne facture pas au nom du commerçant. Pour obtenir le justificatif correspondant à votre situation, contactez le support en précisant la commande et le destinataire du document."
+        }
+      ],
+      "export_pdf": "docs/juridique/marketplace/LOCALEO - Conditions Générales de Vente Marketplace - V1.pdf",
+      "editable_docx": "livrables/juridique/v1.1/LOCALEO - Conditions Générales de Vente Marketplace - V1.docx"
+    },
+    {
+      "key": "animation",
+      "canonical_pdf": "docs/juridique/animation/LOCALEO - Conditions particulières Localeo Animation - V1.pdf",
+      "pages": 6,
+      "pdf_sha256": "99690abd83325fd2eda216f813518b9ddd3c0545a06ad1bd4971c6b9d0806513",
+      "docx_sha256": "7d3e5ae0de9cb1dd911358714656ee2832d9bd6e938874ccb4487872fa2cd4c4",
+      "previous_pdf_sha256": "9e7bb3f130aa211b6a8d486c034b22b256a2632115e58196effa5c7cb5fcaa71",
+      "changes": [
+        {
+          "before": "Version 1.0 — 13 septembre 2026",
+          "after": "Version 1.1 — 13 septembre 2026"
+        },
+        {
+          "before": "9. Annulation et remboursement",
+          "after": "9. Annulation, report des lots et remboursement"
+        },
+        {
+          "before": "Une commande de lots peut être annulée avant la publication de l’animation si aucune instance n’a été activée. Les sommes payées pour les lots annulés sont remboursées par le moyen d’origine ; un crédit d’achat utilisé est reconstitué à hauteur de la part correspondante. Le remboursement n’est confirmé qu’après traitement effectif par le prestataire concerné.\n\nAprès la publication ou l’activation d’un coffret, une demande est examinée avec Localeo à contact@localeo.city, en tenant compte des engagements pris envers les participants et des droits déjà attribués. Cette procédure n’exclut aucun remboursement ou recours imposé par la loi ou résultant d’une inexécution contractuelle.\n\nL’annulation d’une animation par le partenaire n’annule pas automatiquement la souscription au service. Pour les souscriptions professionnelles ordinaires, aucune faculté générale de rétractation de quatorze jours n’est accordée du seul fait de la conclusion en ligne. Lorsque les conditions de l’article L. 221-3 du Code de la consommation sont réunies pour un contrat conclu hors établissement, les protections légales correspondantes, dont le droit de rétractation, s’appliquent. Le formulaire Localeo et les informations légales sont alors remis avec le contrat.",
+          "after": "Une commande de lots peut être annulée avant la publication de l'animation si aucune instance n'a été activée. Les sommes payées pour les lots annulés sont remboursées par le moyen d'origine ; un crédit d'achat utilisé est reconstitué à hauteur de la part correspondante. Le remboursement n'est confirmé qu'après traitement effectif par le prestataire concerné.\n\nAprès la clôture des attributions, les lots financés restant disponibles sont reportables sur une autre animation du même partenaire, sans remboursement automatique. Le partenaire adresse sa demande à contact@localeo.city. Localeo vérifie que les coffrets ne sont ni activés ni consommés et qu'aucun droit d'un gagnant ou d'un suppléant ne s'oppose au report. Un lot attribué mais non envoyé ne redevient disponible qu'après une renonciation ou une décision conforme au règlement, dans le respect de l'ordre des suppléants et des délais annoncés.\n\nUn coffret déjà activé reste utilisable par son bénéficiaire jusqu'à son échéance, sous réserve des restrictions légales ou de sécurité justifiées. La clôture de l'animation, l'expiration de la souscription, l'absence d'ouverture du courriel ou la seule non-utilisation du coffret ne permettent pas de le reporter ni d'en retirer les droits au bénéficiaire.\n\nLe report est organisé avec Localeo après ces vérifications et confirmé par un récapitulatif accepté par le partenaire. Celui-ci précise les lots, quantités, valeur affectée au report, animation de destination et conditions de validité et d'utilisation. Toute adaptation du contenu ou des conditions de la commande initiale nécessite l'accord du partenaire et ne peut porter atteinte aux droits déjà acquis. Le report porte sur les lots ; l'accès à une nouvelle animation reste régi par les droits de souscription applicables.\n\nLes autres demandes après publication ou activation sont examinées avec Localeo en tenant compte des engagements envers les participants. Les présentes règles n'excluent aucun remboursement ni recours imposé par la loi ou résultant d'une inexécution contractuelle.\n\nL'annulation d'une animation par le partenaire n'annule pas automatiquement la souscription au service. Pour les souscriptions professionnelles ordinaires, aucune faculté générale de rétractation de quatorze jours n'est accordée du seul fait de la conclusion en ligne. Lorsque les conditions de l'article L. 221-3 du Code de la consommation sont réunies pour un contrat conclu hors établissement, les protections légales correspondantes, dont le droit de rétractation, s'appliquent. Le formulaire Localeo et les informations légales sont alors remis avec le contrat."
+        }
+      ],
+      "export_pdf": "docs/juridique/animation/LOCALEO - Conditions particulières Localeo Animation - V1.pdf",
+      "editable_docx": "livrables/juridique/v1.1/LOCALEO - Conditions particulières Localeo Animation - V1.docx"
+    },
+    {
+      "key": "confidentialite",
+      "canonical_pdf": "docs/juridique/communs/LOCALEO - Politique de Confidentialité - V1.pdf",
+      "pages": 6,
+      "pdf_sha256": "c33240fe9163c5e39d9390c10fea2e7f067ef6b944e89fa8bc352795bf1ffc49",
+      "docx_sha256": "96e6c0631597310884646b62dcc35f48dd99a5dee5f2c5b8647510c144d35a2b",
+      "previous_pdf_sha256": "944bb712d11a7dc60ce34011c278b537b79dfd84df1151a8b3455dfe1f3c4b14",
+      "changes": [
+        {
+          "before": "Version 1.0 — 13 septembre 2026",
+          "after": "Version 1.1 — 13 septembre 2026"
+        },
+        {
+          "before": "L’utilisation de prestataires internationaux peut entraîner des traitements ou des accès depuis des pays situés hors de l’Espace économique européen, notamment les États-Unis. La localisation d’un serveur en Europe ne suffit pas à exclure un accès international par le support ou un sous-traitant.\n\nLe cadre applicable à ces transferts est celui du chapitre V du RGPD : décision d’adéquation de la Commission européenne lorsque son champ couvre le destinataire et le traitement, ou garanties appropriées telles que les clauses contractuelles types, accompagnées des mesures supplémentaires nécessaires. Le cadre UE–États-Unis de protection des données ne concerne que les entités et activités couvertes par une certification active.\n\nLes conditions publiées par Render et Stripe prévoient des mécanismes d’encadrement des transferts. Les renseignements sur les destinataires, pays et garanties applicables à vos données, ainsi qu’une copie de ces garanties sous réserve de la protection des informations confidentielles, peuvent être demandés à contact@localeo.city.",
+          "after": "L’utilisation de prestataires internationaux peut entraîner des traitements ou des accès depuis des pays situés hors de l’Espace économique européen, notamment les États-Unis. La localisation d’un serveur en Europe ne suffit pas à exclure un accès international par le support ou un sous-traitant.\n\nLe cadre applicable à ces transferts est celui du chapitre V du RGPD : décision d’adéquation de la Commission européenne lorsque son champ couvre le destinataire et le traitement, ou garanties appropriées telles que les clauses contractuelles types, accompagnées des mesures supplémentaires nécessaires. Le cadre UE–États-Unis de protection des données ne concerne que les entités et activités couvertes par une certification active.\n\nPour l'hébergement applicatif, le DPA publié par Render Services, Inc. décrit des traitements aux États-Unis. Pour le paiement, le DPA de Stripe décrit notamment des transferts vers Stripe, LLC aux États-Unis ; son annexe relative aux transferts précise leur encadrement. Ces documents prévoient le cadre UE-États-Unis dans son champ d'application et les clauses contractuelles types dans les cas qu'ils définissent.\n\nPour les courriels, Brevo publie ses informations sur les lieux de stockage et indique l'accord de traitement intégré à ses conditions. Pour les documents, Scaleway publie son accord de traitement et sa liste de sous-traitants. Ces documents décrivent les engagements généraux de chaque fournisseur ; un stockage dans l'Union européenne ne suffit pas à exclure des accès internationaux.\n\nLorsque vous activez les notifications de l'appareil, leur transport fait intervenir le service de votre navigateur ou système, notamment Google, Mozilla ou Apple. La notice de confidentialité de Localeo Live décrit les données concernées et les réglages disponibles.\n\nLes informations sur les destinataires, les pays et les garanties applicables à vos données, ainsi qu'une copie de ces garanties sous réserve de la protection des informations confidentielles, peuvent être demandées à contact@localeo.city."
+        }
+      ],
+      "export_pdf": "docs/juridique/communs/LOCALEO - Politique de Confidentialité - V1.pdf",
+      "editable_docx": "livrables/juridique/v1.1/LOCALEO - Politique de Confidentialité - V1.docx"
+    }
+  ],
+  "verification": {
+    "pdf_count": 16,
+    "modified_pdf_count": 4,
+    "unchanged_pdf_count": 12,
+    "total_pages": 70,
+    "modified_pages_visually_checked": 23
+  },
+  "paths_relative_to": "localeo-projet"
+}

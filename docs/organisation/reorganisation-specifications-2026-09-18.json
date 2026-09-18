@@ -1,0 +1,1739 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-18",
+  "scope": "docs/specifications",
+  "backup": "C:\\Users\\casta\\AppData\\Local\\Temp\\localeo-specifications-reorganisation-20260918\\localeo-projet-before.zip",
+  "summary": {
+    "files_before": 159,
+    "files_after": 145,
+    "moved": 40,
+    "merged_variants": 19,
+    "created": 5,
+    "functional_folders": 24
+  },
+  "files": [
+    {
+      "path": "docs/specifications/corrections-marketplace-2026-09-06.marketplace.md",
+      "sha256_before": "8f175c70490d0c34d227bc77b5c853800c2f2c4ecf6c728d5b3e2166263e7d2c",
+      "bytes_before": 5284,
+      "action": "fusionne",
+      "target": "docs/specifications/securisation-production/corrections-marketplace-2026-09-06.md",
+      "sha256_after": "0af90bbce864fedc89344d10eedcd3c8efe41a18b668acec19b6c5ecc455e105"
+    },
+    {
+      "path": "docs/specifications/corrections-marketplace-2026-09-06.md",
+      "sha256_before": "d99fc315c52b9f8b9688e1182f97edd60acceb9dd8a38b1da107f9ed173040b6",
+      "bytes_before": 4470,
+      "action": "deplace",
+      "target": "docs/specifications/securisation-production/corrections-marketplace-2026-09-06.md",
+      "sha256_after": "0af90bbce864fedc89344d10eedcd3c8efe41a18b668acec19b6c5ecc455e105"
+    },
+    {
+      "path": "docs/specifications/corrections-marketplace-2026-09-06.openapi.json",
+      "sha256_before": "bb2d589d7b62c97fa3b5c41379b6dfe8e6d820ccff0cb2a488674bf86e4b7906",
+      "bytes_before": 38652,
+      "action": "conserve",
+      "target": "docs/specifications/corrections-marketplace-2026-09-06.openapi.json",
+      "sha256_after": "bb2d589d7b62c97fa3b5c41379b6dfe8e6d820ccff0cb2a488674bf86e4b7906"
+    },
+    {
+      "path": "docs/specifications/epic-41-actualites-animation-localeo-animation.md",
+      "sha256_before": "bdb3b22c14d735c88d7995dc7dc33cb352278e7221992d64523be5c32a46966d",
+      "bytes_before": 8908,
+      "action": "deplace",
+      "target": "docs/specifications/epic-41-api/actualites-interface-animation.md",
+      "sha256_after": "de32f83c32acf1dd0b382ddf0d4907ff48f36049f0eb568667d9d3d50e0558de"
+    },
+    {
+      "path": "docs/specifications/epic-41-actualites-animation-localeo-live.md",
+      "sha256_before": "5ed765cd4d7f9b9692c0a538acb0a00f5141f4691cfeb046f72b17f9ef2250be",
+      "bytes_before": 8755,
+      "action": "deplace",
+      "target": "docs/specifications/epic-41-api/actualites-localeo-live.md",
+      "sha256_after": "0b3cd4d36fc5a32c2155df9d69a17c5036518f1d46d2d6f7838adf7744d29d04"
+    },
+    {
+      "path": "docs/specifications/epic-41-actualites-animation.md",
+      "sha256_before": "8150aa5dd371987a2915a4a30e90495438e36a832bed777ea584aa687ae92a6f",
+      "bytes_before": 8851,
+      "action": "deplace",
+      "target": "docs/specifications/epic-41-api/actualites.md",
+      "sha256_after": "de53396a0529a076946b88ca74188d622b7248c4501ac1fe13d59bbe174efcbd"
+    },
+    {
+      "path": "docs/specifications/epic-41-animation-locale-analyse-api-maquette.animation.md",
+      "sha256_before": "61c73df345f9530409e4c8edcf3a991f48a096723b5950e5bb606c7764e55de6",
+      "bytes_before": 31051,
+      "action": "fusionne",
+      "target": "docs/specifications/epic-41-api/analyse-api-maquette.md",
+      "sha256_after": "86e66a0719e44786a315879f61024d35515a3c17b5d95deef33f6a41acf8bd65"
+    },
+    {
+      "path": "docs/specifications/epic-41-animation-locale-analyse-api-maquette.md",
+      "sha256_before": "b31febd516cefe09810f157b580a7ec68945e24da3e27669dcddec44435d2495",
+      "bytes_before": 31084,
+      "action": "deplace",
+      "target": "docs/specifications/epic-41-api/analyse-api-maquette.md",
+      "sha256_after": "86e66a0719e44786a315879f61024d35515a3c17b5d95deef33f6a41acf8bd65"
+    },
+    {
+      "path": "docs/specifications/epic-41-animation-locale-dct.animation.md",
+      "sha256_before": "ebe39dae9b1e86f66a629e90841f9735fab5c4f38d4369239a1cebfe1a061b03",
+      "bytes_before": 49348,
+      "action": "fusionne",
+      "target": "docs/specifications/epic-41-api/dct.md",
+      "sha256_after": "85b7c5ba27ca29536d366d58a26fdd90acab9cfb8386087a2e4b36cf8af223f1"
+    },
+    {
+      "path": "docs/specifications/epic-41-animation-locale-dct.md",
+      "sha256_before": "2dec6426173ee78f139e40fc12acd3db2493ebea3802ecc76b7bbf7a7e158219",
+      "bytes_before": 51327,
+      "action": "deplace",
+      "target": "docs/specifications/epic-41-api/dct.md",
+      "sha256_after": "85b7c5ba27ca29536d366d58a26fdd90acab9cfb8386087a2e4b36cf8af223f1"
+    },
+    {
+      "path": "docs/specifications/epic-41-application-commercant.md",
+      "sha256_before": "2d1a18488d047f86d986bd986c7f2fff72452598170e3a675d39dbe702327efb",
+      "bytes_before": 36908,
+      "action": "deplace",
+      "target": "docs/specifications/epic-41-api/application-commercant.md",
+      "sha256_after": "2d1a18488d047f86d986bd986c7f2fff72452598170e3a675d39dbe702327efb"
+    },
+    {
+      "path": "docs/specifications/epic-41-flyer-direction-artistique.md",
+      "sha256_before": "e785388e68d515e39758695f809755437f10a8385f47b8d142ed2f900be4204c",
+      "bytes_before": 14815,
+      "action": "deplace",
+      "target": "docs/specifications/epic-41-api/flyer-direction-artistique.md",
+      "sha256_after": "10cfea8dc289fdeb6caa5997f711f7b55c4481331323c8a26ee9e735013161eb"
+    },
+    {
+      "path": "docs/specifications/epic-41-indicateurs-economiques-animation.animation.md",
+      "sha256_before": "47ff781ac3dfbb40f72f5f00c6aff2de8ca9b45fdd8511a8ceb4d576c12148f9",
+      "bytes_before": 7795,
+      "action": "fusionne",
+      "target": "docs/specifications/epic-41-api/indicateurs-economiques.md",
+      "sha256_after": "dd5c4b655a1f0764190e5c1372eec16567ea1201fa286a0d2416ca63735c2d18"
+    },
+    {
+      "path": "docs/specifications/epic-41-indicateurs-economiques-animation.md",
+      "sha256_before": "83b2c96c357fdc56e3b0bcbfb73c06ec9017097c866369ac5e6f5e0b268363b4",
+      "bytes_before": 8476,
+      "action": "deplace",
+      "target": "docs/specifications/epic-41-api/indicateurs-economiques.md",
+      "sha256_after": "dd5c4b655a1f0764190e5c1372eec16567ea1201fa286a0d2416ca63735c2d18"
+    },
+    {
+      "path": "docs/specifications/epic-52-accueil-marketplace-geolocalise.md",
+      "sha256_before": "fba3cc366808d5e3fa4ce39c8bc428b0c7630348acbe8b73b72dc1c002076bf2",
+      "bytes_before": 9314,
+      "action": "deplace",
+      "target": "docs/specifications/epic-52-accueil-marketplace-geolocalise/parcours-utilisateur.md",
+      "sha256_after": "240c2844d7ed3d4332b4dc1a333d5937c8b298c0f048cc73c57f703cef2a57b4"
+    },
+    {
+      "path": "docs/specifications/INDEX.md",
+      "sha256_before": "e8e831e11f7c859d31bcd0a930a8c9b2c7be93c2ac84ba35e99493212b991436",
+      "bytes_before": 15872,
+      "action": "actualise",
+      "target": "docs/specifications/INDEX.md",
+      "sha256_after": "26fcd739dc9b0d76343a5e85c9405bdb3825660d9f55056ceecc204db01257f8"
+    },
+    {
+      "path": "docs/specifications/securisation-production.md",
+      "sha256_before": "cf817a28d6a05efe51817230c9a2b742e9f42b95ee4a1ba2a24db82d05770c65",
+      "bytes_before": 1977,
+      "action": "deplace",
+      "target": "docs/specifications/securisation-production/README.md",
+      "sha256_after": "1d217a2a622cba5272b35744e371de7a2e1f4cd02d1b439538a287c93ed09648"
+    },
+    {
+      "path": "docs/specifications/animation/activation-gestionnaire.md",
+      "sha256_before": "a1dd3e2af43eed0a7c42bca0af0708a5d804f130312d8e7938b95b9cfa763052",
+      "bytes_before": 880,
+      "action": "deplace",
+      "target": "docs/specifications/identite-acces/activation-gestionnaire.md",
+      "sha256_after": "a1dd3e2af43eed0a7c42bca0af0708a5d804f130312d8e7938b95b9cfa763052"
+    },
+    {
+      "path": "docs/specifications/animation/ano-ani-02-backend.patch",
+      "sha256_before": "cceccd693f9576a6ae63f54bd4da7f43672665d041ff00992dc608c96ba87804",
+      "bytes_before": 21154,
+      "action": "deplace",
+      "target": "docs/specifications/epic-50-conformite-fiscale-bum/ano-ani-02-backend.patch",
+      "sha256_after": "cceccd693f9576a6ae63f54bd4da7f43672665d041ff00992dc608c96ba87804"
+    },
+    {
+      "path": "docs/specifications/animation/ano-ani-02-facturation-animation.md",
+      "sha256_before": "c3ac341ad01325cdf144d192b8042112e5e9937a624bb791afb742162ba542b0",
+      "bytes_before": 3340,
+      "action": "deplace",
+      "target": "docs/specifications/epic-50-conformite-fiscale-bum/ano-ani-02-facturation-animation.md",
+      "sha256_after": "c3ac341ad01325cdf144d192b8042112e5e9937a624bb791afb742162ba542b0"
+    },
+    {
+      "path": "docs/specifications/animation/live-evenements.md",
+      "sha256_before": "c27dd0123414cbdb33210f598af62073251d47e1fa158184e6f952366302527a",
+      "bytes_before": 2134,
+      "action": "deplace",
+      "target": "docs/specifications/epic-45-vision-360-animation/live-evenements.md",
+      "sha256_after": "c27dd0123414cbdb33210f598af62073251d47e1fa158184e6f952366302527a"
+    },
+    {
+      "path": "docs/specifications/animation/session-navigateur.md",
+      "sha256_before": "42174c8629edfeadfcbbaf72504de1c90ce247636b82853fed811f075fa3bd35",
+      "bytes_before": 12042,
+      "action": "deplace",
+      "target": "docs/specifications/identite-acces/session-animation.md",
+      "sha256_after": "42174c8629edfeadfcbbaf72504de1c90ce247636b82853fed811f075fa3bd35"
+    },
+    {
+      "path": "docs/specifications/animation/preproduction-animation/contrats-corriges.md",
+      "sha256_before": "a032efe2cb91b6c35d182b52d523b06d84722a472ea84ec578af74d5a2c54d9b",
+      "bytes_before": 4216,
+      "action": "deplace",
+      "target": "docs/specifications/securisation-production/contrats-animation.md",
+      "sha256_after": "456bfedd58e21e19d59edc89c31786619ce18618c8d6b54e1eaedb8760b405ad"
+    },
+    {
+      "path": "docs/specifications/backend/back-001-revocation-session-commercant.md",
+      "sha256_before": "ce91d734d9b7183269bcafa3d304b2b114761239aee576841b1c2ab1a66c94fc",
+      "bytes_before": 1344,
+      "action": "deplace",
+      "target": "docs/specifications/identite-acces/revocation-session-commercant.md",
+      "sha256_after": "ce91d734d9b7183269bcafa3d304b2b114761239aee576841b1c2ab1a66c94fc"
+    },
+    {
+      "path": "docs/specifications/backend/catalogue-coffrets-pagination.md",
+      "sha256_before": "1a448f35e17c0c69b2b826c4148463601b87c5bbec05ef1d66e749031a121cf8",
+      "bytes_before": 3232,
+      "action": "deplace",
+      "target": "docs/specifications/epic-57-bornage-pagination-api-marketplace/catalogue-coffrets.md",
+      "sha256_after": "1a448f35e17c0c69b2b826c4148463601b87c5bbec05ef1d66e749031a121cf8"
+    },
+    {
+      "path": "docs/specifications/backend/commission-par-prestation.md",
+      "sha256_before": "0f72f0c8af1c907ad5e7b96202b12c03e0eee882473c805b1150c29e6450fde6",
+      "bytes_before": 2689,
+      "action": "deplace",
+      "target": "docs/specifications/epic-60-vision-360-commercialisation/commission-par-prestation.md",
+      "sha256_after": "0f72f0c8af1c907ad5e7b96202b12c03e0eee882473c805b1150c29e6450fde6"
+    },
+    {
+      "path": "docs/specifications/backend/corrections-audit-commercant-2026-09-05.md",
+      "sha256_before": "f0f7da33dee5b4af1a51c33bffe5d08fd4d744b25a63207d97b55e562ab1ab6b",
+      "bytes_before": 3775,
+      "action": "deplace",
+      "target": "docs/specifications/securisation-production/corrections-commercant-2026-09-05.md",
+      "sha256_after": "199a3855951a29cc258fa09df8ecb197f7359b30f607e8d30590b973d1506e44"
+    },
+    {
+      "path": "docs/specifications/backend/pro-005-scan-commercant.md",
+      "sha256_before": "24052a77acb3f74c0ae322ddc554eb498cb54288c048fe66caabbd28871dc446",
+      "bytes_before": 1971,
+      "action": "deplace",
+      "target": "docs/specifications/validation-prestations/scan-commercant.md",
+      "sha256_after": "24052a77acb3f74c0ae322ddc554eb498cb54288c048fe66caabbd28871dc446"
+    },
+    {
+      "path": "docs/specifications/backend/assets/epic-41/flyer-direction-artistique-validee.png",
+      "sha256_before": "b3231067c2415b3828c8edf184e7ba7df97eee188ed5114abb75764d9bec83a5",
+      "bytes_before": 1896281,
+      "action": "deplace",
+      "target": "docs/specifications/epic-41-api/assets/flyer-direction-artistique-validee.png",
+      "sha256_after": "b3231067c2415b3828c8edf184e7ba7df97eee188ed5114abb75764d9bec83a5"
+    },
+    {
+      "path": "docs/specifications/backend/assets/epic-41/flyer-marketplace-v4.png",
+      "sha256_before": "d671dbc9427da5905dbfc364ef858a41889410f01c1b7727e26afb97fc913506",
+      "bytes_before": 809372,
+      "action": "deplace",
+      "target": "docs/specifications/epic-41-api/assets/flyer-marketplace-v4.png",
+      "sha256_after": "d671dbc9427da5905dbfc364ef858a41889410f01c1b7727e26afb97fc913506"
+    },
+    {
+      "path": "docs/specifications/commercant/api.md",
+      "sha256_before": "cfa10563f4ca9516f8f4c0ebbe4901aad64c4fbfe3d3edb8881e2e7719dc5188",
+      "bytes_before": 10796,
+      "action": "deplace",
+      "target": "docs/specifications/espace-commercant/contrats-api.md",
+      "sha256_after": "cfa10563f4ca9516f8f4c0ebbe4901aad64c4fbfe3d3edb8881e2e7719dc5188"
+    },
+    {
+      "path": "docs/specifications/commercant/chargement-initial.md",
+      "sha256_before": "581c715911194469bb76e1d48ba292190b47325454b3c5cd5446b67122dddc8e",
+      "bytes_before": 1603,
+      "action": "deplace",
+      "target": "docs/specifications/securisation-production/chargement-initial-commercant.md",
+      "sha256_after": "581c715911194469bb76e1d48ba292190b47325454b3c5cd5446b67122dddc8e"
+    },
+    {
+      "path": "docs/specifications/commercant/chorus-mandat-fiabilite.md",
+      "sha256_before": "4d5cbe746c029c1203ba601caef8f017036e4e81400bdc4325bdf1ae9f24e47b",
+      "bytes_before": 1256,
+      "action": "deplace",
+      "target": "docs/specifications/epic-50-conformite-fiscale-bum/chorus-mandat-fiabilite.md",
+      "sha256_after": "4d5cbe746c029c1203ba601caef8f017036e4e81400bdc4325bdf1ae9f24e47b"
+    },
+    {
+      "path": "docs/specifications/commercant/corrections-audit-2026-09-05.md",
+      "sha256_before": "339ebe520ee0278fdcd2ae420bdb9363e69c8d67198c1cc175375aba2fa31e70",
+      "bytes_before": 12528,
+      "action": "fusionne",
+      "target": "docs/specifications/securisation-production/corrections-commercant-2026-09-05.md",
+      "sha256_after": "199a3855951a29cc258fa09df8ecb197f7359b30f607e8d30590b973d1506e44"
+    },
+    {
+      "path": "docs/specifications/commercant/session-bearer-limites.md",
+      "sha256_before": "8d32dc30313f0c26a172bd52c6909bd7aff005641a7b06ac7b41b9feb29a70e6",
+      "bytes_before": 2223,
+      "action": "deplace",
+      "target": "docs/specifications/identite-acces/session-bearer-commercant.md",
+      "sha256_after": "8d32dc30313f0c26a172bd52c6909bd7aff005641a7b06ac7b41b9feb29a70e6"
+    },
+    {
+      "path": "docs/specifications/commercant/spec-technique-epic-10-auth-login-password-front.md",
+      "sha256_before": "d5c8b2fdd09680eb3f3badd73ec2a15b5d086358dcae9b5ec1c4849ee3934fb4",
+      "bytes_before": 12628,
+      "action": "deplace",
+      "target": "docs/specifications/identite-acces/authentification-commercant.md",
+      "sha256_after": "c1c661540839e8c8b37d2843636e574fd418fea791c89eef90ca98217e8f9ef4"
+    },
+    {
+      "path": "docs/specifications/commercant/spec-validation-prestation-flow.md",
+      "sha256_before": "fed207ade4c8ae988ccc1fe97a1272d6df63c098245cd2d1e5fbc89eb4cc4681",
+      "bytes_before": 8165,
+      "action": "archive-historique",
+      "target": "docs/specifications/archives/validation-prestation-deux-scans.md",
+      "sha256_after": "a250c8dae634387516e0e5d48c2f87616ca0f7beefe13d5bcc28d4feb5007b1d"
+    },
+    {
+      "path": "docs/specifications/commercant/spec-validation-prestation-openapi-mapping.md",
+      "sha256_before": "9004c1fb4f276c191241bc6aae212d5d846abfa6f6ab66b5dcf10b8da291a229",
+      "bytes_before": 4260,
+      "action": "deplace",
+      "target": "docs/specifications/validation-prestations/contrats-api.md",
+      "sha256_after": "08020d01c14cc33614a0d5c6dd21630abdd75a9f9ca04d6b78ab802d5f23ce68"
+    },
+    {
+      "path": "docs/specifications/commercant/specification-version-actuelle.md",
+      "sha256_before": "1f4b5e11bf6703b3e0a91d85f810b74485d53d3ad585e19ca5ecff6bf23cefc6",
+      "bytes_before": 21759,
+      "action": "deplace",
+      "target": "docs/specifications/espace-commercant/README.md",
+      "sha256_after": "864ba34bec42f7222e50413d7680d723a0e873487c6a5959f22e7135a1f55ed8"
+    },
+    {
+      "path": "docs/specifications/commercant/validation-accessibilite-animation.md",
+      "sha256_before": "503af8451f8907d96897ed8bb16590a1ea96a5a00551900134cef0e597b33e0f",
+      "bytes_before": 603,
+      "action": "deplace",
+      "target": "docs/specifications/securisation-production/accessibilite-commercant.md",
+      "sha256_after": "503af8451f8907d96897ed8bb16590a1ea96a5a00551900134cef0e597b33e0f"
+    },
+    {
+      "path": "docs/specifications/epic-41-api/catalogue-api.animation.md",
+      "sha256_before": "0cb4336e938092383e261e17834b768060fab83c10af17e8cd7fa0335728812d",
+      "bytes_before": 19790,
+      "action": "fusionne",
+      "target": "docs/specifications/epic-41-api/catalogue-api.md",
+      "sha256_after": "3b6ccf2deed8b3bbb02f92ab015a8be0e527fa1eed05098b9fa03ee4ecefc471"
+    },
+    {
+      "path": "docs/specifications/epic-41-api/catalogue-api.md",
+      "sha256_before": "2dcd7184c3fadce22bc189509f3d8ad85d63ea9224cb244eb02373bbc2286f11",
+      "bytes_before": 21774,
+      "action": "actualise",
+      "target": "docs/specifications/epic-41-api/catalogue-api.md",
+      "sha256_after": "3b6ccf2deed8b3bbb02f92ab015a8be0e527fa1eed05098b9fa03ee4ecefc471"
+    },
+    {
+      "path": "docs/specifications/epic-41-api/checklist-mise-en-production.animation.md",
+      "sha256_before": "15c00488a12a0dee692e8cc07c820806c5a60e4c2ceb75f7efb6fa9352a0f89e",
+      "bytes_before": 1871,
+      "action": "fusionne",
+      "target": "docs/specifications/epic-41-api/checklist-mise-en-production.md",
+      "sha256_after": "2265dabbcbec2d6e547f03fb4426b495a1c58b143030806f8fbea4945366e647"
+    },
+    {
+      "path": "docs/specifications/epic-41-api/checklist-mise-en-production.md",
+      "sha256_before": "b8c1d9329609ea0a9f8c04877aa4c3cfee92bd725f64db4f66ff18ca69a8cfa9",
+      "bytes_before": 2044,
+      "action": "actualise",
+      "target": "docs/specifications/epic-41-api/checklist-mise-en-production.md",
+      "sha256_after": "2265dabbcbec2d6e547f03fb4426b495a1c58b143030806f8fbea4945366e647"
+    },
+    {
+      "path": "docs/specifications/epic-41-api/conventions-contrats.animation.md",
+      "sha256_before": "1276daccd41e17ea192624d0f41b336d21b6ca7eb66f40ab200800eac7eca01b",
+      "bytes_before": 8154,
+      "action": "fusionne",
+      "target": "docs/specifications/epic-41-api/conventions-contrats.md",
+      "sha256_after": "b210687226eab422120c09a8613b49463d755b514b36e3effd08ca912ed724a0"
+    },
+    {
+      "path": "docs/specifications/epic-41-api/conventions-contrats.md",
+      "sha256_before": "ea5bdeb9e194575ffb70d3ec94f2847d4be176aaed75b7aa7ad33f053fa1a0df",
+      "bytes_before": 11353,
+      "action": "actualise",
+      "target": "docs/specifications/epic-41-api/conventions-contrats.md",
+      "sha256_after": "b210687226eab422120c09a8613b49463d755b514b36e3effd08ca912ed724a0"
+    },
+    {
+      "path": "docs/specifications/epic-41-api/openapi.json",
+      "sha256_before": "dfc150ffebee38757d49dbf095beab0dd5d966a8aa4ed7a6319817311ddccb99",
+      "bytes_before": 1547284,
+      "action": "conserve",
+      "target": "docs/specifications/epic-41-api/openapi.json",
+      "sha256_after": "dfc150ffebee38757d49dbf095beab0dd5d966a8aa4ed7a6319817311ddccb99"
+    },
+    {
+      "path": "docs/specifications/epic-41-api/rapport-apis-manquantes.md",
+      "sha256_before": "6792a600d34f5381394541579c567ae3478f1159695bd60d986fa39db4d7fbc7",
+      "bytes_before": 9051,
+      "action": "actualise",
+      "target": "docs/specifications/epic-41-api/rapport-apis-manquantes.md",
+      "sha256_after": "3bb91de67cf39d1c5f048a061ddf1e208707d377449ee6a3425ef0eb74e5ed7e"
+    },
+    {
+      "path": "docs/specifications/epic-41-api/README.animation.md",
+      "sha256_before": "d5e9491dab2b19f824023afb0da4acbbc41fb23ee06ec9365464744ccb8ee08d",
+      "bytes_before": 5246,
+      "action": "fusionne",
+      "target": "docs/specifications/epic-41-api/README.md",
+      "sha256_after": "df8bf835fe015aa45087bf740e219d130ff61cef9322c917eee88de4339aa63a"
+    },
+    {
+      "path": "docs/specifications/epic-41-api/README.md",
+      "sha256_before": "19c6c27c24ced13438fb936207bceac2556aec0e0ef0c40eb0442ef7fd8d4d0e",
+      "bytes_before": 5186,
+      "action": "actualise",
+      "target": "docs/specifications/epic-41-api/README.md",
+      "sha256_after": "df8bf835fe015aa45087bf740e219d130ff61cef9322c917eee88de4339aa63a"
+    },
+    {
+      "path": "docs/specifications/epic-41-api/registre-arbitrages.animation.md",
+      "sha256_before": "46250e25904f5f5f6feb0c7fb59b4c25b3a8efd084bbc5d21d5ed3352f9e114f",
+      "bytes_before": 34340,
+      "action": "fusionne",
+      "target": "docs/specifications/epic-41-api/registre-arbitrages.md",
+      "sha256_after": "c7b0190fe45201627a6270070c45e8bc4724c0823ec7b707982e2692aebf9f33"
+    },
+    {
+      "path": "docs/specifications/epic-41-api/registre-arbitrages.md",
+      "sha256_before": "b07bc10ded3a287cb02ed7c49a06bcdf15dce9a624d492b0ead6b12352e2a763",
+      "bytes_before": 34992,
+      "action": "actualise",
+      "target": "docs/specifications/epic-41-api/registre-arbitrages.md",
+      "sha256_after": "c7b0190fe45201627a6270070c45e8bc4724c0823ec7b707982e2692aebf9f33"
+    },
+    {
+      "path": "docs/specifications/epic-42-localeo-live/backend-api.md",
+      "sha256_before": "22816e96c0cdeed7146673833b146bbb184ae134c88c034a1dd9d9123f318557",
+      "bytes_before": 15064,
+      "action": "conserve",
+      "target": "docs/specifications/epic-42-localeo-live/backend-api.md",
+      "sha256_after": "22816e96c0cdeed7146673833b146bbb184ae134c88c034a1dd9d9123f318557"
+    },
+    {
+      "path": "docs/specifications/epic-42-localeo-live/carnet-partage-backend.md",
+      "sha256_before": "05913558b77dff0ce4f5f3594ac6974a1c42627bb96a2940b1ff90b2ec0f9250",
+      "bytes_before": 24046,
+      "action": "conserve",
+      "target": "docs/specifications/epic-42-localeo-live/carnet-partage-backend.md",
+      "sha256_after": "05913558b77dff0ce4f5f3594ac6974a1c42627bb96a2940b1ff90b2ec0f9250"
+    },
+    {
+      "path": "docs/specifications/epic-42-localeo-live/carnet-partage-frontend.md",
+      "sha256_before": "2d02295aaefdb1f88caf6db2da6c418870f9d408bd0d0bc8d0033b8f6af26f07",
+      "bytes_before": 16964,
+      "action": "conserve",
+      "target": "docs/specifications/epic-42-localeo-live/carnet-partage-frontend.md",
+      "sha256_after": "2d02295aaefdb1f88caf6db2da6c418870f9d408bd0d0bc8d0033b8f6af26f07"
+    },
+    {
+      "path": "docs/specifications/epic-42-localeo-live/frontend-pwa.md",
+      "sha256_before": "1ffbd61882343edeaa464e60e42efe3d875f7d5dd79a7b2345d69e947dfe168a",
+      "bytes_before": 20220,
+      "action": "actualise",
+      "target": "docs/specifications/epic-42-localeo-live/frontend-pwa.md",
+      "sha256_after": "a9bb49254e9260e13e4914795d7fc56b563cd5d315962e554592e3fc3e1980ab"
+    },
+    {
+      "path": "docs/specifications/epic-42-localeo-live/openapi.json",
+      "sha256_before": "36a0ccfe6a2675d344a6390cb01d2d97a8fe87c8f45252cc8c900816d5dc8d6d",
+      "bytes_before": 553865,
+      "action": "conserve",
+      "target": "docs/specifications/epic-42-localeo-live/openapi.json",
+      "sha256_after": "36a0ccfe6a2675d344a6390cb01d2d97a8fe87c8f45252cc8c900816d5dc8d6d"
+    },
+    {
+      "path": "docs/specifications/epic-42-localeo-live/README.md",
+      "sha256_before": "5699bb0f7539d367b728b7a4e69dca76398036086cbf4dd6b820d67a508bc8d1",
+      "bytes_before": 5799,
+      "action": "actualise",
+      "target": "docs/specifications/epic-42-localeo-live/README.md",
+      "sha256_after": "51edd397605df15550bd48fcc861dc89ed7494417b17f7dbe18fc125823c993e"
+    },
+    {
+      "path": "docs/specifications/epic-42-localeo-live/registre-arbitrages.md",
+      "sha256_before": "5ec2f2373977629c607b74c911f4f79c18bf7f4703619fd79563a0982b1bbb45",
+      "bytes_before": 13034,
+      "action": "conserve",
+      "target": "docs/specifications/epic-42-localeo-live/registre-arbitrages.md",
+      "sha256_after": "5ec2f2373977629c607b74c911f4f79c18bf7f4703619fd79563a0982b1bbb45"
+    },
+    {
+      "path": "docs/specifications/epic-45-vision-360-animation/openapi.json",
+      "sha256_before": "d8bb366a9bfc114659642f66e4d51594f6cd530920725160e83cc5a259012fe1",
+      "bytes_before": 5995,
+      "action": "conserve",
+      "target": "docs/specifications/epic-45-vision-360-animation/openapi.json",
+      "sha256_after": "d8bb366a9bfc114659642f66e4d51594f6cd530920725160e83cc5a259012fe1"
+    },
+    {
+      "path": "docs/specifications/epic-45-vision-360-animation/README.md",
+      "sha256_before": "9ef0901099379f780b84d5e4ac782e99dc5e94c166a6ef6dc009f007bc4cfa45",
+      "bytes_before": 2243,
+      "action": "actualise",
+      "target": "docs/specifications/epic-45-vision-360-animation/README.md",
+      "sha256_after": "b21fa7925bf5b91a1949e5d292d85aae741fc964a4809a0f466c675475d4f78e"
+    },
+    {
+      "path": "docs/specifications/epic-46-paiement-lots-animation/analyse-ecarts.md",
+      "sha256_before": "d919201ee0f25792d79091a92975c8dfcfc7f477fbe4a62624e7ed768572edad",
+      "bytes_before": 4380,
+      "action": "conserve",
+      "target": "docs/specifications/epic-46-paiement-lots-animation/analyse-ecarts.md",
+      "sha256_after": "d919201ee0f25792d79091a92975c8dfcfc7f477fbe4a62624e7ed768572edad"
+    },
+    {
+      "path": "docs/specifications/epic-46-paiement-lots-animation/architecture-modele.md",
+      "sha256_before": "1e56b320f33af0604048f6829d8cef0898c7df66ed798057612e313636efcd91",
+      "bytes_before": 7392,
+      "action": "conserve",
+      "target": "docs/specifications/epic-46-paiement-lots-animation/architecture-modele.md",
+      "sha256_after": "1e56b320f33af0604048f6829d8cef0898c7df66ed798057612e313636efcd91"
+    },
+    {
+      "path": "docs/specifications/epic-46-paiement-lots-animation/contrats-api.md",
+      "sha256_before": "2190fe368fbead0e07fe2608090558f188dcc05fef239f64e4bf0aece655e9f3",
+      "bytes_before": 8781,
+      "action": "actualise",
+      "target": "docs/specifications/epic-46-paiement-lots-animation/contrats-api.md",
+      "sha256_after": "6e7702402d4125172898e7d8ffa4d034be81f2ec19daa27ebaf3909ac3c5c13b"
+    },
+    {
+      "path": "docs/specifications/epic-46-paiement-lots-animation/flux-stripe-reconciliation.md",
+      "sha256_before": "c40bff4620d05fe4aac03b0934df9fa3d220a2530209a6097b9eb086d6943b06",
+      "bytes_before": 6577,
+      "action": "conserve",
+      "target": "docs/specifications/epic-46-paiement-lots-animation/flux-stripe-reconciliation.md",
+      "sha256_after": "c40bff4620d05fe4aac03b0934df9fa3d220a2530209a6097b9eb086d6943b06"
+    },
+    {
+      "path": "docs/specifications/epic-46-paiement-lots-animation/plan-implementation.md",
+      "sha256_before": "9e710b406acd79d5b159b36628579ba823b47dd0b5d4891225e4a80a8707e952",
+      "bytes_before": 5320,
+      "action": "conserve",
+      "target": "docs/specifications/epic-46-paiement-lots-animation/plan-implementation.md",
+      "sha256_after": "9e710b406acd79d5b159b36628579ba823b47dd0b5d4891225e4a80a8707e952"
+    },
+    {
+      "path": "docs/specifications/epic-46-paiement-lots-animation/README.md",
+      "sha256_before": "5700579fb53b5fc8f5231f4f359405b75bce9c4342d9f9872cba5b4d8ffacfd0",
+      "bytes_before": 3775,
+      "action": "actualise",
+      "target": "docs/specifications/epic-46-paiement-lots-animation/README.md",
+      "sha256_after": "2fe5290264095e3f84aa790c3445a7b0d08beebeb051cd93fdd3936f8c389642"
+    },
+    {
+      "path": "docs/specifications/epic-46-paiement-lots-animation/registre-arbitrages.md",
+      "sha256_before": "0b535cf9210521e7739c2ba8df75838e7e0e31a82b5817692adf879c5154d7ab",
+      "bytes_before": 13454,
+      "action": "conserve",
+      "target": "docs/specifications/epic-46-paiement-lots-animation/registre-arbitrages.md",
+      "sha256_after": "0b535cf9210521e7739c2ba8df75838e7e0e31a82b5817692adf879c5154d7ab"
+    },
+    {
+      "path": "docs/specifications/epic-47-souscription-abonnement-partenaire-animation/procedure-exploitation.animation.md",
+      "sha256_before": "6189ab389b4625c91701b4517df9b0f845c80ad9243fb89164b8b8fbbca79d8d",
+      "bytes_before": 2784,
+      "action": "fusionne",
+      "target": "docs/specifications/epic-47-souscription-abonnement-partenaire-animation/procedure-exploitation.md",
+      "sha256_after": "53825d44a979a5954e3eb40d7183d4bfea71bc98924e2668d5ae44497fa129ad"
+    },
+    {
+      "path": "docs/specifications/epic-47-souscription-abonnement-partenaire-animation/procedure-exploitation.md",
+      "sha256_before": "f5f3dec792353f07a7d5afde16be33d7b9cdfc2640d64d3be0bfb9f0f3829eaa",
+      "bytes_before": 4301,
+      "action": "actualise",
+      "target": "docs/specifications/epic-47-souscription-abonnement-partenaire-animation/procedure-exploitation.md",
+      "sha256_after": "53825d44a979a5954e3eb40d7183d4bfea71bc98924e2668d5ae44497fa129ad"
+    },
+    {
+      "path": "docs/specifications/epic-47-souscription-abonnement-partenaire-animation/README.animation.md",
+      "sha256_before": "e1390dd98e5050c5c81875cbc435c5fc2896df5529102da91143eb0dff225105",
+      "bytes_before": 18370,
+      "action": "fusionne",
+      "target": "docs/specifications/epic-47-souscription-abonnement-partenaire-animation/README.md",
+      "sha256_after": "fef643f9f4288b8e4f53c59e66d950629d9a049d5362e8bd34f6e54b424cdff1"
+    },
+    {
+      "path": "docs/specifications/epic-47-souscription-abonnement-partenaire-animation/README.md",
+      "sha256_before": "b9eb5c5e9926e8aae6a5e227176030da0cc4c5f4bc8dd484cd8bd2b755bff30e",
+      "bytes_before": 23195,
+      "action": "actualise",
+      "target": "docs/specifications/epic-47-souscription-abonnement-partenaire-animation/README.md",
+      "sha256_after": "fef643f9f4288b8e4f53c59e66d950629d9a049d5362e8bd34f6e54b424cdff1"
+    },
+    {
+      "path": "docs/specifications/epic-47-souscription-abonnement-partenaire-animation/registre-arbitrages.md",
+      "sha256_before": "40ef5646a05020fb04f6323709462a460efd5bc6566f69aa2e2fb64af1e2318a",
+      "bytes_before": 9909,
+      "action": "conserve",
+      "target": "docs/specifications/epic-47-souscription-abonnement-partenaire-animation/registre-arbitrages.md",
+      "sha256_after": "40ef5646a05020fb04f6323709462a460efd5bc6566f69aa2e2fb64af1e2318a"
+    },
+    {
+      "path": "docs/specifications/epic-48-apscheduler-ordonnancement-batchs/README.md",
+      "sha256_before": "769ac0f09df3ce74469bdfef59f536f03c738faf339f7cdf150a7c1f2c82b676",
+      "bytes_before": 16866,
+      "action": "actualise",
+      "target": "docs/specifications/epic-48-apscheduler-ordonnancement-batchs/README.md",
+      "sha256_after": "093188d122c680ffa957006ee23519fd8444dbcaf48cf3058fffdfd4339d93f9"
+    },
+    {
+      "path": "docs/specifications/epic-48-apscheduler-ordonnancement-batchs/registre-arbitrages.md",
+      "sha256_before": "affadb6f70e27b5d0144127195668e3c0ce53a1ccf86fa7c7c7ec6b079e29699",
+      "bytes_before": 6478,
+      "action": "conserve",
+      "target": "docs/specifications/epic-48-apscheduler-ordonnancement-batchs/registre-arbitrages.md",
+      "sha256_after": "affadb6f70e27b5d0144127195668e3c0ce53a1ccf86fa7c7c7ec6b079e29699"
+    },
+    {
+      "path": "docs/specifications/epic-49-animations-marketplace/backend-api.md",
+      "sha256_before": "ed84453c8f17b92f398bb57e6137097d6d3ba676726a499f2e9ae15db26ae20b",
+      "bytes_before": 11783,
+      "action": "conserve",
+      "target": "docs/specifications/epic-49-animations-marketplace/backend-api.md",
+      "sha256_after": "ed84453c8f17b92f398bb57e6137097d6d3ba676726a499f2e9ae15db26ae20b"
+    },
+    {
+      "path": "docs/specifications/epic-49-animations-marketplace/frontend-marketplace.md",
+      "sha256_before": "34ecc06e4789be4afd331f1250a09083260cfe6a5f42a9e14e09674d5b338aca",
+      "bytes_before": 10339,
+      "action": "conserve",
+      "target": "docs/specifications/epic-49-animations-marketplace/frontend-marketplace.md",
+      "sha256_after": "34ecc06e4789be4afd331f1250a09083260cfe6a5f42a9e14e09674d5b338aca"
+    },
+    {
+      "path": "docs/specifications/epic-49-animations-marketplace/README.md",
+      "sha256_before": "4d74295ce49a7a8672bd25efb259578ab0fdee7271183360a5052ae3b8fe979a",
+      "bytes_before": 6163,
+      "action": "actualise",
+      "target": "docs/specifications/epic-49-animations-marketplace/README.md",
+      "sha256_after": "b98b3b952974822dac03746c2933510294c33ef4d3152ee2e1c04b230dfc49e5"
+    },
+    {
+      "path": "docs/specifications/epic-49-animations-marketplace/registre-arbitrages.md",
+      "sha256_before": "9de0a64f57dae97906b4a9800bfccadd2f9808a674988485bfb3fcd9bc1cb244",
+      "bytes_before": 5488,
+      "action": "conserve",
+      "target": "docs/specifications/epic-49-animations-marketplace/registre-arbitrages.md",
+      "sha256_after": "9de0a64f57dae97906b4a9800bfccadd2f9808a674988485bfb3fcd9bc1cb244"
+    },
+    {
+      "path": "docs/specifications/epic-50-conformite-fiscale-bum/analyse-existant-impacts.md",
+      "sha256_before": "c1a01728d3faad5fe42b9cfedff5d5048695553646e65fcd8ea1d0923a9f88d3",
+      "bytes_before": 13155,
+      "action": "conserve",
+      "target": "docs/specifications/epic-50-conformite-fiscale-bum/analyse-existant-impacts.md",
+      "sha256_after": "c1a01728d3faad5fe42b9cfedff5d5048695553646e65fcd8ea1d0923a9f88d3"
+    },
+    {
+      "path": "docs/specifications/epic-50-conformite-fiscale-bum/checklist-contractuelle-bum-facturation.md",
+      "sha256_before": "7597bba996d25f5efb5bbcc2127236f1a1a2671ca65f36d1f6a3f5f7405cfbde",
+      "bytes_before": 21787,
+      "action": "conserve",
+      "target": "docs/specifications/epic-50-conformite-fiscale-bum/checklist-contractuelle-bum-facturation.md",
+      "sha256_after": "7597bba996d25f5efb5bbcc2127236f1a1a2671ca65f36d1f6a3f5f7405cfbde"
+    },
+    {
+      "path": "docs/specifications/epic-50-conformite-fiscale-bum/conception-technique.md",
+      "sha256_before": "2ae1bda9a8c523ce35167e4e78c92936f785bebc17b48d2a33b34dd39058e0c7",
+      "bytes_before": 48906,
+      "action": "conserve",
+      "target": "docs/specifications/epic-50-conformite-fiscale-bum/conception-technique.md",
+      "sha256_after": "2ae1bda9a8c523ce35167e4e78c92936f785bebc17b48d2a33b34dd39058e0c7"
+    },
+    {
+      "path": "docs/specifications/epic-50-conformite-fiscale-bum/credit-achat-b2b.md",
+      "sha256_before": "7ba45daa3ebbb24ed9b23228336ee6c1c4b7e3a820c55b3bd7f67465c5c101d0",
+      "bytes_before": 14337,
+      "action": "conserve",
+      "target": "docs/specifications/epic-50-conformite-fiscale-bum/credit-achat-b2b.md",
+      "sha256_after": "7ba45daa3ebbb24ed9b23228336ee6c1c4b7e3a820c55b3bd7f67465c5c101d0"
+    },
+    {
+      "path": "docs/specifications/epic-50-conformite-fiscale-bum/factures-localeo.md",
+      "sha256_before": "7bfb864351a82b23853f1ca913ce904a1ab9f68eaa2415a91b3904c268f077c8",
+      "bytes_before": 6026,
+      "action": "conserve",
+      "target": "docs/specifications/epic-50-conformite-fiscale-bum/factures-localeo.md",
+      "sha256_after": "7bfb864351a82b23853f1ca913ce904a1ab9f68eaa2415a91b3904c268f077c8"
+    },
+    {
+      "path": "docs/specifications/epic-50-conformite-fiscale-bum/localeo-animation.animation.md",
+      "sha256_before": "8b04406c38a023c35bedbc4f3913ea457921216680ddffc9d1a883148844ead6",
+      "bytes_before": 16512,
+      "action": "fusionne",
+      "target": "docs/specifications/epic-50-conformite-fiscale-bum/localeo-animation.md",
+      "sha256_after": "ec6e2e77773d0b1c36331c5f50726efa0228c77ed20f3c4a78a63a5929c8ceb4"
+    },
+    {
+      "path": "docs/specifications/epic-50-conformite-fiscale-bum/localeo-animation.md",
+      "sha256_before": "f645c6b61c335251125ade0b635f08a6912327882f37f4476e3bd352773ac4f6",
+      "bytes_before": 17822,
+      "action": "actualise",
+      "target": "docs/specifications/epic-50-conformite-fiscale-bum/localeo-animation.md",
+      "sha256_after": "ec6e2e77773d0b1c36331c5f50726efa0228c77ed20f3c4a78a63a5929c8ceb4"
+    },
+    {
+      "path": "docs/specifications/epic-50-conformite-fiscale-bum/localeo-commercant.md",
+      "sha256_before": "cd46a8570539c3c06d967823b8fa5f99f41e0cc7e30a8b8d48929c8011575bc5",
+      "bytes_before": 19740,
+      "action": "conserve",
+      "target": "docs/specifications/epic-50-conformite-fiscale-bum/localeo-commercant.md",
+      "sha256_after": "cd46a8570539c3c06d967823b8fa5f99f41e0cc7e30a8b8d48929c8011575bc5"
+    },
+    {
+      "path": "docs/specifications/epic-50-conformite-fiscale-bum/localeo-live.md",
+      "sha256_before": "9dbfe9e7bfbe9d7237be26cbd2bc0e0266d3348bf63eb5d3f63954104f4a1fb1",
+      "bytes_before": 12503,
+      "action": "conserve",
+      "target": "docs/specifications/epic-50-conformite-fiscale-bum/localeo-live.md",
+      "sha256_after": "9dbfe9e7bfbe9d7237be26cbd2bc0e0266d3348bf63eb5d3f63954104f4a1fb1"
+    },
+    {
+      "path": "docs/specifications/epic-50-conformite-fiscale-bum/localeo-marketplace.md",
+      "sha256_before": "68350849402446be43d7e274a54ff8c4e0b934f7eb8fdb01375f86abac57767f",
+      "bytes_before": 17753,
+      "action": "actualise",
+      "target": "docs/specifications/epic-50-conformite-fiscale-bum/localeo-marketplace.md",
+      "sha256_after": "d0111376db4516aa7b2744f03d000e156a11814cfe078bbbf0cc4274657c7525"
+    },
+    {
+      "path": "docs/specifications/epic-50-conformite-fiscale-bum/onboarding-commercant-mobile.md",
+      "sha256_before": "85ab6482c602fc3f7c69979c83d4eaa6ba9129a6aee35413eb0de1dd012ebd55",
+      "bytes_before": 23911,
+      "action": "actualise",
+      "target": "docs/specifications/epic-50-conformite-fiscale-bum/onboarding-commercant-mobile.md",
+      "sha256_after": "d47ec0927c29bb7a7bf11c9e1be10ad3078f8306b422cefcf80fb12b8b27d569"
+    },
+    {
+      "path": "docs/specifications/epic-50-conformite-fiscale-bum/README.md",
+      "sha256_before": "8228abf22a0ee5886f896260396dfcf26b7e2358576c26cfadbeb340269cd1dd",
+      "bytes_before": 12571,
+      "action": "actualise",
+      "target": "docs/specifications/epic-50-conformite-fiscale-bum/README.md",
+      "sha256_after": "b7be22870dddbf91ef0376718f03187944dad43f2c2a77ecad97439552087cba"
+    },
+    {
+      "path": "docs/specifications/epic-50-conformite-fiscale-bum/registre-arbitrages.md",
+      "sha256_before": "f54549378591bb9e53a6338abc30540042571e917be67add71b6c7ba9b4b5362",
+      "bytes_before": 31065,
+      "action": "conserve",
+      "target": "docs/specifications/epic-50-conformite-fiscale-bum/registre-arbitrages.md",
+      "sha256_after": "f54549378591bb9e53a6338abc30540042571e917be67add71b6c7ba9b4b5362"
+    },
+    {
+      "path": "docs/specifications/epic-50-conformite-fiscale-bum/specification-fonctionnelle.md",
+      "sha256_before": "8ead680570f97e2373f00c7057830da0d161adc20a55375937ab4223ad5c628b",
+      "bytes_before": 17738,
+      "action": "conserve",
+      "target": "docs/specifications/epic-50-conformite-fiscale-bum/specification-fonctionnelle.md",
+      "sha256_after": "8ead680570f97e2373f00c7057830da0d161adc20a55375937ab4223ad5c628b"
+    },
+    {
+      "path": "docs/specifications/epic-50-conformite-fiscale-bum/workflow-demandes-factures.md",
+      "sha256_before": "fc80badc25cde046ee8915ab98886e484130c52f78a1a2e721124c01aad6816e",
+      "bytes_before": 25662,
+      "action": "conserve",
+      "target": "docs/specifications/epic-50-conformite-fiscale-bum/workflow-demandes-factures.md",
+      "sha256_after": "fc80badc25cde046ee8915ab98886e484130c52f78a1a2e721124c01aad6816e"
+    },
+    {
+      "path": "docs/specifications/epic-51-vision-360-achats/conception-technique.md",
+      "sha256_before": "43bf275b18b5ec1aeaed68af27d8818d1fb5005672150a122d2a3f41fe1d3bd6",
+      "bytes_before": 25633,
+      "action": "conserve",
+      "target": "docs/specifications/epic-51-vision-360-achats/conception-technique.md",
+      "sha256_after": "43bf275b18b5ec1aeaed68af27d8818d1fb5005672150a122d2a3f41fe1d3bd6"
+    },
+    {
+      "path": "docs/specifications/epic-52-accueil-marketplace-geolocalise/README.md",
+      "sha256_before": "cc68fe009860acefd245737568ea52e6c8fef1267e46cf6569f2f84e97b36f3f",
+      "bytes_before": 11729,
+      "action": "actualise",
+      "target": "docs/specifications/epic-52-accueil-marketplace-geolocalise/README.md",
+      "sha256_after": "9766aed3b3ff0aa8768104b13ee4d58dd92e0e2797f91b72fff1e289694720ea"
+    },
+    {
+      "path": "docs/specifications/epic-52-accueil-marketplace-geolocalise/registre-arbitrages.md",
+      "sha256_before": "bfda4cbf4bc5f7dcbc26df53c49621ac2d6b5700b5f1ccfab50bbc5f54f251bf",
+      "bytes_before": 6855,
+      "action": "conserve",
+      "target": "docs/specifications/epic-52-accueil-marketplace-geolocalise/registre-arbitrages.md",
+      "sha256_after": "bfda4cbf4bc5f7dcbc26df53c49621ac2d6b5700b5f1ccfab50bbc5f54f251bf"
+    },
+    {
+      "path": "docs/specifications/epic-53-tombola-locale/conception-technique.animation.md",
+      "sha256_before": "96f73c091be25e3fc910bb08317bc83afb944c8c0000753d334a457b48e2c3ab",
+      "bytes_before": 4255,
+      "action": "fusionne",
+      "target": "docs/specifications/epic-53-tombola-locale/conception-technique.md",
+      "sha256_after": "c4e1da970f200ec27540485c8b7a7980b6e8b03ccd3ecfd97f7ed382317077fe"
+    },
+    {
+      "path": "docs/specifications/epic-53-tombola-locale/conception-technique.md",
+      "sha256_before": "a87462bc59a0ea7f84ece0ea9afdddd4f87080988367006f7c41559040052da7",
+      "bytes_before": 27749,
+      "action": "actualise",
+      "target": "docs/specifications/epic-53-tombola-locale/conception-technique.md",
+      "sha256_after": "c4e1da970f200ec27540485c8b7a7980b6e8b03ccd3ecfd97f7ed382317077fe"
+    },
+    {
+      "path": "docs/specifications/epic-53-tombola-locale/README.animation.md",
+      "sha256_before": "4b24d0ce56bfeaec3ebfcc87f4076911204bd146411415f0ccececc5849c126b",
+      "bytes_before": 3827,
+      "action": "fusionne",
+      "target": "docs/specifications/epic-53-tombola-locale/README.md",
+      "sha256_after": "4489006c6de9154f6595b378f50ebf03a063f48fbeefbc38537b0c72ddc77c9c"
+    },
+    {
+      "path": "docs/specifications/epic-53-tombola-locale/README.md",
+      "sha256_before": "f278e0affb61248775221fd64203d8afbda2d505bf2954f4de188aea787ab575",
+      "bytes_before": 4718,
+      "action": "actualise",
+      "target": "docs/specifications/epic-53-tombola-locale/README.md",
+      "sha256_after": "4489006c6de9154f6595b378f50ebf03a063f48fbeefbc38537b0c72ddc77c9c"
+    },
+    {
+      "path": "docs/specifications/epic-53-tombola-locale/registre-arbitrages.animation.md",
+      "sha256_before": "fe0bfcf201b74db3c839db8256dab4bcb98d762733a6e2fe5dbbd6299307337b",
+      "bytes_before": 1761,
+      "action": "fusionne",
+      "target": "docs/specifications/epic-53-tombola-locale/registre-arbitrages.md",
+      "sha256_after": "ea0255178bdca0fbafe8c9a043de0c967f95961087aee023d84353306dc2474c"
+    },
+    {
+      "path": "docs/specifications/epic-53-tombola-locale/registre-arbitrages.md",
+      "sha256_before": "e136079483289a9820dfd09c336a93c4621c0c35830b8ae886a01e960fbc1799",
+      "bytes_before": 4133,
+      "action": "actualise",
+      "target": "docs/specifications/epic-53-tombola-locale/registre-arbitrages.md",
+      "sha256_after": "ea0255178bdca0fbafe8c9a043de0c967f95961087aee023d84353306dc2474c"
+    },
+    {
+      "path": "docs/specifications/epic-54-calendrier-avent-local/README.md",
+      "sha256_before": "0864efe92d4fe8eddafffa3599f78aef1a92ed6ae21cf2fdcae952dc05123ae1",
+      "bytes_before": 2359,
+      "action": "actualise",
+      "target": "docs/specifications/epic-54-calendrier-avent-local/README.md",
+      "sha256_after": "e97fef1d70e233c48928c3bbcad1a2555924dfad4fd961ee1ace05c4e2e35142"
+    },
+    {
+      "path": "docs/specifications/epic-54-calendrier-avent-local/registre-arbitrages.md",
+      "sha256_before": "575e1343077ed4b5febff6df6c8a9791a9318e5ef096cf60ee42fae00bfc6e99",
+      "bytes_before": 2539,
+      "action": "conserve",
+      "target": "docs/specifications/epic-54-calendrier-avent-local/registre-arbitrages.md",
+      "sha256_after": "575e1343077ed4b5febff6df6c8a9791a9318e5ef096cf60ee42fae00bfc6e99"
+    },
+    {
+      "path": "docs/specifications/epic-56-validation-participation-commercants-animation/avertissement-lots-sans-participant.md",
+      "sha256_before": "5d5f612f3374247629bd58f6661dfbd1dd4050700866f3de40178952ad5cca60",
+      "bytes_before": 1746,
+      "action": "conserve",
+      "target": "docs/specifications/epic-56-validation-participation-commercants-animation/avertissement-lots-sans-participant.md",
+      "sha256_after": "5d5f612f3374247629bd58f6661dfbd1dd4050700866f3de40178952ad5cca60"
+    },
+    {
+      "path": "docs/specifications/epic-56-validation-participation-commercants-animation/conception-technique.md",
+      "sha256_before": "c89b126dabc77e6ca285fe983c6673bbab9f36bcdd1a080c732ba47a4df774e8",
+      "bytes_before": 44245,
+      "action": "conserve",
+      "target": "docs/specifications/epic-56-validation-participation-commercants-animation/conception-technique.md",
+      "sha256_after": "c89b126dabc77e6ca285fe983c6673bbab9f36bcdd1a080c732ba47a4df774e8"
+    },
+    {
+      "path": "docs/specifications/epic-56-validation-participation-commercants-animation/README.md",
+      "sha256_before": "0cd6f377d47d9f37bcc9eb6ebddff17141df246af7b5102a2a1b9bc5211b698f",
+      "bytes_before": 9768,
+      "action": "actualise",
+      "target": "docs/specifications/epic-56-validation-participation-commercants-animation/README.md",
+      "sha256_after": "f2bf4e3019d05427cc2b2636b933a9f024ffb0405463dfacf6921a7473c714fd"
+    },
+    {
+      "path": "docs/specifications/epic-56-validation-participation-commercants-animation/registre-arbitrages.md",
+      "sha256_before": "b3e783b7521fa72a55764399f6737eee0875f0d699c4134b5fa3553ccfa23668",
+      "bytes_before": 7409,
+      "action": "conserve",
+      "target": "docs/specifications/epic-56-validation-participation-commercants-animation/registre-arbitrages.md",
+      "sha256_after": "b3e783b7521fa72a55764399f6737eee0875f0d699c4134b5fa3553ccfa23668"
+    },
+    {
+      "path": "docs/specifications/epic-57-bornage-pagination-api-marketplace/README.md",
+      "sha256_before": "d12cd1373f7c0af917c32f818650bfe0976d5a013ad7e9b7cb349dd2f73f6926",
+      "bytes_before": 2049,
+      "action": "actualise",
+      "target": "docs/specifications/epic-57-bornage-pagination-api-marketplace/README.md",
+      "sha256_after": "2be07ba778c6e299557627b4137bfdc2cbd3e78810f488b8a119285613cdc74c"
+    },
+    {
+      "path": "docs/specifications/epic-57-bornage-pagination-api-marketplace/registre-arbitrages.md",
+      "sha256_before": "3f57fe8745f04e61b11c1467b5abf52184fb179150afb35bf009d2e1d526c581",
+      "bytes_before": 9685,
+      "action": "conserve",
+      "target": "docs/specifications/epic-57-bornage-pagination-api-marketplace/registre-arbitrages.md",
+      "sha256_after": "3f57fe8745f04e61b11c1467b5abf52184fb179150afb35bf009d2e1d526c581"
+    },
+    {
+      "path": "docs/specifications/epic-58-filtre-annuel-global/conception-technique.animation.md",
+      "sha256_before": "528d3d6dcf9dc7766df4bcea56e203482acedd6ae764b8e4002b5f98b00e2ec7",
+      "bytes_before": 5642,
+      "action": "fusionne",
+      "target": "docs/specifications/epic-58-filtre-annuel-global/conception-technique.md",
+      "sha256_after": "4080bdfcb9b4b52ab39a50520b91d86ce85057494213fe665550a2be607065f4"
+    },
+    {
+      "path": "docs/specifications/epic-58-filtre-annuel-global/conception-technique.md",
+      "sha256_before": "fcd83cc05616102f2a75bc673653c1b7258de725d2437c91c636302a5476d4c9",
+      "bytes_before": 5643,
+      "action": "actualise",
+      "target": "docs/specifications/epic-58-filtre-annuel-global/conception-technique.md",
+      "sha256_after": "4080bdfcb9b4b52ab39a50520b91d86ce85057494213fe665550a2be607065f4"
+    },
+    {
+      "path": "docs/specifications/epic-58-filtre-annuel-global/README.animation.md",
+      "sha256_before": "d3409332c409e5b6f6c03f731d05910418b0ad6e762d52d49fa68767977376bc",
+      "bytes_before": 3103,
+      "action": "fusionne",
+      "target": "docs/specifications/epic-58-filtre-annuel-global/README.md",
+      "sha256_after": "6686b68af6eaa216bc3295e1d47c0c6eb6e2e73e45ac9800f544cc1acd9c9a5c"
+    },
+    {
+      "path": "docs/specifications/epic-58-filtre-annuel-global/README.md",
+      "sha256_before": "1352f1d33997f3327ccc6120605207f7f6af546835629f4ee9b550bc8eef1913",
+      "bytes_before": 3250,
+      "action": "actualise",
+      "target": "docs/specifications/epic-58-filtre-annuel-global/README.md",
+      "sha256_after": "6686b68af6eaa216bc3295e1d47c0c6eb6e2e73e45ac9800f544cc1acd9c9a5c"
+    },
+    {
+      "path": "docs/specifications/epic-58-filtre-annuel-global/registre-arbitrages.animation.md",
+      "sha256_before": "7b2e8ae7943b84fddc74226376d6a5eb7693bb023e6b895d01069dc22cd7deec",
+      "bytes_before": 1992,
+      "action": "fusionne",
+      "target": "docs/specifications/epic-58-filtre-annuel-global/registre-arbitrages.md",
+      "sha256_after": "707c853da6110eb1098351a73c8d15dadca686696f9ca115e742044420524d93"
+    },
+    {
+      "path": "docs/specifications/epic-58-filtre-annuel-global/registre-arbitrages.md",
+      "sha256_before": "b302059f30a4f4d41074391b02add6ba6989f8f7319cdbbb8b5ebe2cc40081d2",
+      "bytes_before": 1993,
+      "action": "actualise",
+      "target": "docs/specifications/epic-58-filtre-annuel-global/registre-arbitrages.md",
+      "sha256_after": "707c853da6110eb1098351a73c8d15dadca686696f9ca115e742044420524d93"
+    },
+    {
+      "path": "docs/specifications/epic-59-tests-performance-api/conception-technique.md",
+      "sha256_before": "5197c64ccf8eb83405004812d846fec879a5b23b05581c7f6124d9cc8ac5d12b",
+      "bytes_before": 29668,
+      "action": "conserve",
+      "target": "docs/specifications/epic-59-tests-performance-api/conception-technique.md",
+      "sha256_after": "5197c64ccf8eb83405004812d846fec879a5b23b05581c7f6124d9cc8ac5d12b"
+    },
+    {
+      "path": "docs/specifications/epic-59-tests-performance-api/README.md",
+      "sha256_before": "215de6c0a65e51e0a3c3de7730f7e0e37f094cd873cf31faff2083f235591659",
+      "bytes_before": 5137,
+      "action": "actualise",
+      "target": "docs/specifications/epic-59-tests-performance-api/README.md",
+      "sha256_after": "43015b6d419d319afbdbdb4b31b946ed5924c47b4c1177721e3a2532b46b81af"
+    },
+    {
+      "path": "docs/specifications/epic-59-tests-performance-api/registre-arbitrages.md",
+      "sha256_before": "f755c046a1c3c8aa3d84cdd071c5fc0c330e745d298e84bd9f2a862941a20f73",
+      "bytes_before": 4124,
+      "action": "conserve",
+      "target": "docs/specifications/epic-59-tests-performance-api/registre-arbitrages.md",
+      "sha256_after": "f755c046a1c3c8aa3d84cdd071c5fc0c330e745d298e84bd9f2a862941a20f73"
+    },
+    {
+      "path": "docs/specifications/epic-60-vision-360-commercialisation/analyse-parcours-erp.md",
+      "sha256_before": "ed7cece219497bd5dfb9f9a6eeff2aaf3e079f48e93ae32eb142029c85e2152c",
+      "bytes_before": 17175,
+      "action": "conserve",
+      "target": "docs/specifications/epic-60-vision-360-commercialisation/analyse-parcours-erp.md",
+      "sha256_after": "ed7cece219497bd5dfb9f9a6eeff2aaf3e079f48e93ae32eb142029c85e2152c"
+    },
+    {
+      "path": "docs/specifications/epic-60-vision-360-commercialisation/cadrage-v1.md",
+      "sha256_before": "633841bfbe7c19f543ddd431c436142c90dce4a5833e995485c2bc6ecf404666",
+      "bytes_before": 10990,
+      "action": "conserve",
+      "target": "docs/specifications/epic-60-vision-360-commercialisation/cadrage-v1.md",
+      "sha256_after": "633841bfbe7c19f543ddd431c436142c90dce4a5833e995485c2bc6ecf404666"
+    },
+    {
+      "path": "docs/specifications/epic-60-vision-360-commercialisation/conception-technique.md",
+      "sha256_before": "3ddfd04af1df05fd98e102b0235c4881071e53eeaff09f427de79144fe6b5543",
+      "bytes_before": 26354,
+      "action": "conserve",
+      "target": "docs/specifications/epic-60-vision-360-commercialisation/conception-technique.md",
+      "sha256_after": "3ddfd04af1df05fd98e102b0235c4881071e53eeaff09f427de79144fe6b5543"
+    },
+    {
+      "path": "docs/specifications/epic-60-vision-360-commercialisation/contrats-api.md",
+      "sha256_before": "3330a576c55e4d321f475060db977a3a0a34f9afd3615739e8a8d978e0c2e469",
+      "bytes_before": 8672,
+      "action": "conserve",
+      "target": "docs/specifications/epic-60-vision-360-commercialisation/contrats-api.md",
+      "sha256_after": "3330a576c55e4d321f475060db977a3a0a34f9afd3615739e8a8d978e0c2e469"
+    },
+    {
+      "path": "docs/specifications/epic-60-vision-360-commercialisation/livraison-v1.md",
+      "sha256_before": "94fa1dc644fc371b15a29940f139ff0dc9fa62811a951f8b54af58b756d4a881",
+      "bytes_before": 6153,
+      "action": "conserve",
+      "target": "docs/specifications/epic-60-vision-360-commercialisation/livraison-v1.md",
+      "sha256_after": "94fa1dc644fc371b15a29940f139ff0dc9fa62811a951f8b54af58b756d4a881"
+    },
+    {
+      "path": "docs/specifications/epic-60-vision-360-commercialisation/plan-livraison-unifie.md",
+      "sha256_before": "24bb645ecac81f8dbb9448b1932afe6491c2f1581705afc73f7a48bdd83a3585",
+      "bytes_before": 7080,
+      "action": "conserve",
+      "target": "docs/specifications/epic-60-vision-360-commercialisation/plan-livraison-unifie.md",
+      "sha256_after": "24bb645ecac81f8dbb9448b1932afe6491c2f1581705afc73f7a48bdd83a3585"
+    },
+    {
+      "path": "docs/specifications/epic-60-vision-360-commercialisation/plan-tests-et-livraison.md",
+      "sha256_before": "aacfd765916f151f690131bb7b7befbce51dc71cf8c00ecc26bad43ac2cc3214",
+      "bytes_before": 13577,
+      "action": "conserve",
+      "target": "docs/specifications/epic-60-vision-360-commercialisation/plan-tests-et-livraison.md",
+      "sha256_after": "aacfd765916f151f690131bb7b7befbce51dc71cf8c00ecc26bad43ac2cc3214"
+    },
+    {
+      "path": "docs/specifications/epic-60-vision-360-commercialisation/rapport-developpement-v1.md",
+      "sha256_before": "b34e8c9a1d18bbc5baa7aea7a855e376004a33967c338ef143be8366057dda1a",
+      "bytes_before": 7466,
+      "action": "conserve",
+      "target": "docs/specifications/epic-60-vision-360-commercialisation/rapport-developpement-v1.md",
+      "sha256_after": "b34e8c9a1d18bbc5baa7aea7a855e376004a33967c338ef143be8366057dda1a"
+    },
+    {
+      "path": "docs/specifications/epic-60-vision-360-commercialisation/README.md",
+      "sha256_before": "be4650f44b80e64e4c0b0d8b3eff422153472dbac3026a2e6a1a2fa0a9ec8cee",
+      "bytes_before": 11509,
+      "action": "actualise",
+      "target": "docs/specifications/epic-60-vision-360-commercialisation/README.md",
+      "sha256_after": "91de497e6d32f7e7bca4ae70abb88715b23e5dcafa79dcc86a5cfbd11fed64c6"
+    },
+    {
+      "path": "docs/specifications/epic-60-vision-360-commercialisation/registre-arbitrages.md",
+      "sha256_before": "c258e2d75751d3967a9ad4c75b0779e25a366e21233ec1fa5f3b73c55c1f61cb",
+      "bytes_before": 14740,
+      "action": "conserve",
+      "target": "docs/specifications/epic-60-vision-360-commercialisation/registre-arbitrages.md",
+      "sha256_after": "c258e2d75751d3967a9ad4c75b0779e25a366e21233ec1fa5f3b73c55c1f61cb"
+    },
+    {
+      "path": "docs/specifications/epic-60-vision-360-commercialisation/revue-produit-iteration-2.md",
+      "sha256_before": "2785e87d8edaa9496410980f59e5b71cedd356df91e9012bc409a08866f0e626",
+      "bytes_before": 13316,
+      "action": "conserve",
+      "target": "docs/specifications/epic-60-vision-360-commercialisation/revue-produit-iteration-2.md",
+      "sha256_after": "2785e87d8edaa9496410980f59e5b71cedd356df91e9012bc409a08866f0e626"
+    },
+    {
+      "path": "docs/specifications/epic-60-vision-360-commercialisation/specifications-fonctionnelles.md",
+      "sha256_before": "659c794c23ae5fd014e7ea877f9711786f86edc00d9daf31c1b2172440215a79",
+      "bytes_before": 22394,
+      "action": "actualise",
+      "target": "docs/specifications/epic-60-vision-360-commercialisation/specifications-fonctionnelles.md",
+      "sha256_after": "5e58a8769bcd374d338565ada45ef6ecabfe530f0a5b6da6753f78f6e0f8991c"
+    },
+    {
+      "path": "docs/specifications/epic-63-demonstrations-communes/architecture.md",
+      "sha256_before": "e64355beea2df49fcd2943a91091f1a6b3f333092cf8e46215fe2f3364836791",
+      "bytes_before": 5034,
+      "action": "conserve",
+      "target": "docs/specifications/epic-63-demonstrations-communes/architecture.md",
+      "sha256_after": "e64355beea2df49fcd2943a91091f1a6b3f333092cf8e46215fe2f3364836791"
+    },
+    {
+      "path": "docs/specifications/epic-63-demonstrations-communes/livraison-recette.md",
+      "sha256_before": "573dc9f97ebe459e93754e4d15d3ad8b8b34e24c8cdb8e0675a2ee4e3e6de9fb",
+      "bytes_before": 5716,
+      "action": "conserve",
+      "target": "docs/specifications/epic-63-demonstrations-communes/livraison-recette.md",
+      "sha256_after": "573dc9f97ebe459e93754e4d15d3ad8b8b34e24c8cdb8e0675a2ee4e3e6de9fb"
+    },
+    {
+      "path": "docs/specifications/epic-63-demonstrations-communes/README.md",
+      "sha256_before": "9a3c7aa8235a64351621f2f59745c4c14f416cd9e0a4650d75c00c254c12fb9c",
+      "bytes_before": 2447,
+      "action": "actualise",
+      "target": "docs/specifications/epic-63-demonstrations-communes/README.md",
+      "sha256_after": "b3498aafe9dcb57b1bd6059a287dedaefb20b815504377152ec766d918c19dac"
+    },
+    {
+      "path": "docs/specifications/live-inscriptions-multiples/README.md",
+      "sha256_before": "4f0afd6861b65679133121e715d019560f6e3b88d2fd44c2751e7f0a43f7e9b0",
+      "bytes_before": 1803,
+      "action": "deplace",
+      "target": "docs/specifications/epic-42-localeo-live/inscriptions-multiples.md",
+      "sha256_after": "4f0afd6861b65679133121e715d019560f6e3b88d2fd44c2751e7f0a43f7e9b0"
+    },
+    {
+      "path": "docs/specifications/marketplace/catalogue-public-sans-contacts.md",
+      "sha256_before": "4c4388b72c6e0f424d2b66151632ecb64fae973ab87a1b3c1f0d7eff5703ca51",
+      "bytes_before": 583,
+      "action": "deplace",
+      "target": "docs/specifications/epic-57-bornage-pagination-api-marketplace/catalogue-public-sans-contacts.md",
+      "sha256_after": "4c4388b72c6e0f424d2b66151632ecb64fae973ab87a1b3c1f0d7eff5703ca51"
+    },
+    {
+      "path": "docs/specifications/marketplace/confirmation-contraste-production.md",
+      "sha256_before": "8cc94f91974eee1aab667b8da1c7bc46ff9a3ff6afe0c780b6a98aa33b994a36",
+      "bytes_before": 1065,
+      "action": "deplace",
+      "target": "docs/specifications/securisation-production/confirmation-contraste-marketplace.md",
+      "sha256_after": "8cc94f91974eee1aab667b8da1c7bc46ff9a3ff6afe0c780b6a98aa33b994a36"
+    },
+    {
+      "path": "docs/specifications/marketplace/identifiant-qr-validation.md",
+      "sha256_before": "e51189fc93faa1af5c319608b19cb6fbed07e7f4d67ecd86ce066619fdf1be09",
+      "bytes_before": 1547,
+      "action": "deplace",
+      "target": "docs/specifications/validation-prestations/identifiant-qr.md",
+      "sha256_after": "e51189fc93faa1af5c319608b19cb6fbed07e7f4d67ecd86ce066619fdf1be09"
+    },
+    {
+      "path": "docs/specifications/marketplace/liens-consultation-usage-unique.md",
+      "sha256_before": "d4c45b192a8cb0761b50f0fb7afefc7ed808305f26328da772f8aabc47edcad0",
+      "bytes_before": 2520,
+      "action": "deplace",
+      "target": "docs/specifications/identite-acces/acces-coffrets-usage-unique.md",
+      "sha256_after": "d4c45b192a8cb0761b50f0fb7afefc7ed808305f26328da772f8aabc47edcad0"
+    },
+    {
+      "path": "docs/specifications/marketplace/live-email-achat-inscription.md",
+      "sha256_before": "f21dc8fec7eb85891f7d2f3408e0bb7a8220ce925517972d4deab826ec3287f5",
+      "bytes_before": 994,
+      "action": "deplace",
+      "target": "docs/specifications/epic-42-localeo-live/email-achat-inscription.md",
+      "sha256_after": "f21dc8fec7eb85891f7d2f3408e0bb7a8220ce925517972d4deab826ec3287f5"
+    },
+    {
+      "path": "docs/specifications/marketplace/securisation-ouverture-production.md",
+      "sha256_before": "1b9b424a8b485afab28066bd8386982ee49510cecbeceb49cb08b22b2dd90159",
+      "bytes_before": 16351,
+      "action": "deplace",
+      "target": "docs/specifications/securisation-production/ouverture-marketplace.md",
+      "sha256_after": "1b9b424a8b485afab28066bd8386982ee49510cecbeceb49cb08b22b2dd90159"
+    },
+    {
+      "path": "docs/specifications/moteur-animation/localeo_animation_engine_spec.md",
+      "sha256_before": "67be424f47475fe8115208b87575b5841f51feeba8a49cc5af4056b266f2de83",
+      "bytes_before": 202619,
+      "action": "actualise",
+      "target": "docs/specifications/moteur-animation/localeo_animation_engine_spec.md",
+      "sha256_after": "112d47b2859507e453e0b16ffb7e6376c14f0d4e6357c34053fa6958291f3eba"
+    },
+    {
+      "path": "docs/specifications/securisation-production/contre-audit-integrite.md",
+      "sha256_before": "410e390cda2a045fc8f284f367a1edf03df86c2237591ab5914bd0c68d84bfc2",
+      "bytes_before": 6607,
+      "action": "conserve",
+      "target": "docs/specifications/securisation-production/contre-audit-integrite.md",
+      "sha256_after": "410e390cda2a045fc8f284f367a1edf03df86c2237591ab5914bd0c68d84bfc2"
+    },
+    {
+      "path": "docs/specifications/securisation-production/f03-webpush.md",
+      "sha256_before": "adbbfde849618985bb2a68e7229a8302e28bb1c24513a2dcfdfe63bc537204e4",
+      "bytes_before": 1208,
+      "action": "conserve",
+      "target": "docs/specifications/securisation-production/f03-webpush.md",
+      "sha256_after": "adbbfde849618985bb2a68e7229a8302e28bb1c24513a2dcfdfe63bc537204e4"
+    },
+    {
+      "path": "docs/specifications/securisation-production/f04-corps-http.md",
+      "sha256_before": "0ad78764d540c03513c65aac987135318433428ba8d6c883ea64e6246951b821",
+      "bytes_before": 691,
+      "action": "conserve",
+      "target": "docs/specifications/securisation-production/f04-corps-http.md",
+      "sha256_after": "0ad78764d540c03513c65aac987135318433428ba8d6c883ea64e6246951b821"
+    },
+    {
+      "path": "docs/specifications/securisation-production/f05-limitation.md",
+      "sha256_before": "05ec52d6c0c7826e866ff41c3adc5048934305e137d5f82fca98b0dda4c9919c",
+      "bytes_before": 825,
+      "action": "conserve",
+      "target": "docs/specifications/securisation-production/f05-limitation.md",
+      "sha256_after": "05ec52d6c0c7826e866ff41c3adc5048934305e137d5f82fca98b0dda4c9919c"
+    },
+    {
+      "path": "docs/specifications/securisation-production/f06-checkout-durable.md",
+      "sha256_before": "fdba6ffdfda91110a8c02be1709142daef345e36474ed6a848e3b17bbd392371",
+      "bytes_before": 1143,
+      "action": "conserve",
+      "target": "docs/specifications/securisation-production/f06-checkout-durable.md",
+      "sha256_after": "fdba6ffdfda91110a8c02be1709142daef345e36474ed6a848e3b17bbd392371"
+    },
+    {
+      "path": "docs/specifications/securisation-production/f07-reprise-webpush.md",
+      "sha256_before": "af578d1bebad8029c86c045e31ff1e361d207c1f3d9562d503e20614d5fa6be5",
+      "bytes_before": 885,
+      "action": "conserve",
+      "target": "docs/specifications/securisation-production/f07-reprise-webpush.md",
+      "sha256_after": "af578d1bebad8029c86c045e31ff1e361d207c1f3d9562d503e20614d5fa6be5"
+    },
+    {
+      "path": "docs/specifications/securisation-production/f08-entrees-asynchrones.md",
+      "sha256_before": "2c1b314fc1388d09cc5251ecbc2d3c600203382f7b9266f8de8af8484c038d8e",
+      "bytes_before": 447,
+      "action": "conserve",
+      "target": "docs/specifications/securisation-production/f08-entrees-asynchrones.md",
+      "sha256_after": "2c1b314fc1388d09cc5251ecbc2d3c600203382f7b9266f8de8af8484c038d8e"
+    },
+    {
+      "path": "docs/specifications/securisation-production/f10-endpoints-publics.md",
+      "sha256_before": "2181a9495bcf42f10c82a94c82917d5b9e121045f41afefe91d7cd2bed14f33b",
+      "bytes_before": 792,
+      "action": "conserve",
+      "target": "docs/specifications/securisation-production/f10-endpoints-publics.md",
+      "sha256_after": "2181a9495bcf42f10c82a94c82917d5b9e121045f41afefe91d7cd2bed14f33b"
+    },
+    {
+      "path": "docs/specifications/securisation-production/f11-lectures-prestations.md",
+      "sha256_before": "5d3d9002432942a2873a0cb4dfd70a714ff01cfe1c36353311c0a15dc5a2b068",
+      "bytes_before": 268,
+      "action": "conserve",
+      "target": "docs/specifications/securisation-production/f11-lectures-prestations.md",
+      "sha256_after": "5d3d9002432942a2873a0cb4dfd70a714ff01cfe1c36353311c0a15dc5a2b068"
+    },
+    {
+      "path": "docs/specifications/securisation-production/f12-cles-api.md",
+      "sha256_before": "5350fdae4769535e508e8c041a073aea186951ba37ccef5d80643473c86c3abf",
+      "bytes_before": 412,
+      "action": "conserve",
+      "target": "docs/specifications/securisation-production/f12-cles-api.md",
+      "sha256_after": "5350fdae4769535e508e8c041a073aea186951ba37ccef5d80643473c86c3abf"
+    },
+    {
+      "path": "docs/specifications/securisation-production/f13-validation-reproductible.md",
+      "sha256_before": "62c89077930ca99e2592d4b47d740c081976e88826db78a2bb2122bbd94250e6",
+      "bytes_before": 1556,
+      "action": "conserve",
+      "target": "docs/specifications/securisation-production/f13-validation-reproductible.md",
+      "sha256_after": "62c89077930ca99e2592d4b47d740c081976e88826db78a2bb2122bbd94250e6"
+    },
+    {
+      "path": "docs/specifications/securisation-production/f14-retour-checkout.md",
+      "sha256_before": "9165bf2e0a16d9b9ef1f49212c6e2f16a4fb1db4fc8809e667e91cbeb1acfe5b",
+      "bytes_before": 1066,
+      "action": "conserve",
+      "target": "docs/specifications/securisation-production/f14-retour-checkout.md",
+      "sha256_after": "9165bf2e0a16d9b9ef1f49212c6e2f16a4fb1db4fc8809e667e91cbeb1acfe5b"
+    },
+    {
+      "path": "docs/specifications/securisation-production/f15-acteur-audit.md",
+      "sha256_before": "9893c6e3e5d3b841c903fa5ee57b9638e849f9e8a16e4ee5b1fd39752aff6c77",
+      "bytes_before": 347,
+      "action": "conserve",
+      "target": "docs/specifications/securisation-production/f15-acteur-audit.md",
+      "sha256_after": "9893c6e3e5d3b841c903fa5ee57b9638e849f9e8a16e4ee5b1fd39752aff6c77"
+    },
+    {
+      "path": "docs/specifications/securisation-production/integrite-donnees.md",
+      "sha256_before": "8329024db0f9ca84564d397ecc2c57e82df1c87599dcd2d7bcceab2e6bc6a124",
+      "bytes_before": 18798,
+      "action": "conserve",
+      "target": "docs/specifications/securisation-production/integrite-donnees.md",
+      "sha256_after": "8329024db0f9ca84564d397ecc2c57e82df1c87599dcd2d7bcceab2e6bc6a124"
+    },
+    {
+      "path": "docs/specifications/securisation-production/migrations.md",
+      "sha256_before": "b67c10e7bc575f12c9cbc241dfd8dd52791bc3a301490b280430fc0ccb130363",
+      "bytes_before": 640,
+      "action": "conserve",
+      "target": "docs/specifications/securisation-production/migrations.md",
+      "sha256_after": "b67c10e7bc575f12c9cbc241dfd8dd52791bc3a301490b280430fc0ccb130363"
+    },
+    {
+      "path": "docs/specifications/securisation-production/sast-complementaire.md",
+      "sha256_before": "f8da494d6d6d28a3e5963a7e4da0f4aa450db3353c6ee1cdec8173bfde913a8c",
+      "bytes_before": 1115,
+      "action": "conserve",
+      "target": "docs/specifications/securisation-production/sast-complementaire.md",
+      "sha256_after": "f8da494d6d6d28a3e5963a7e4da0f4aa450db3353c6ee1cdec8173bfde913a8c"
+    }
+  ],
+  "created": [
+    {
+      "path": "docs/specifications/archives/README.md",
+      "sha256": "bcb991260ed284760aa19fa80428d85b8498735b88c9c1cc6f31a05991fabfdd"
+    },
+    {
+      "path": "docs/specifications/epic-51-vision-360-achats/README.md",
+      "sha256": "fa4437f7e2cc93b178217162c9a02db4f47880ccc96ec283dc7a009ce582e575"
+    },
+    {
+      "path": "docs/specifications/identite-acces/README.md",
+      "sha256": "54da416e8c774391fd03d92e7f1d71f1fc03d18eb8a8578c064f23505727c2ae"
+    },
+    {
+      "path": "docs/specifications/moteur-animation/README.md",
+      "sha256": "1d29925d7b25a9c7639e09f70a84050cb540d7768a1fde6236b057befaebab83"
+    },
+    {
+      "path": "docs/specifications/validation-prestations/README.md",
+      "sha256": "5db7b30875abbeb52a37be440ac9a15bd0b229f3392777e18abdfa865c8e4864"
+    }
+  ],
+  "roadmap_moves_observed": {
+    "docs/roadmap/a-faire/epic-55-chasse-tresor-commercante-backlog.md": "docs/roadmap/en-cours/epic-55-chasse-tresor-commercante-backlog.md",
+    "docs/roadmap/en-cours/epic-marketplace-54-harmonisation-identite-visuelle-marketplace-backlog.md": "docs/roadmap/a-faire/epic-marketplace-54-harmonisation-identite-visuelle-marketplace-backlog.md",
+    "docs/roadmap/security-performance-roadmap.md": "docs/roadmap/a-faire/security-performance-roadmap.md",
+    "docs/roadmap/sprint-1-securite-immediate.md": "docs/roadmap/a-faire/sprint-1-securite-immediate.md"
+  },
+  "reference_updates": [
+    {
+      "repo": "localeo-projet",
+      "path": "livrables/INDEX.md",
+      "target": "livrables/INDEX.md",
+      "links": 1
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/archives/commercant/index-avant-reorganisation.md",
+      "target": "docs/archives/commercant/index-avant-reorganisation.md",
+      "links": 3
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/specifications/epic-41-actualites-animation-localeo-live.md",
+      "target": "docs/specifications/epic-41-api/actualites-localeo-live.md",
+      "links": 2
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/specifications/epic-41-actualites-animation-localeo-animation.md",
+      "target": "docs/specifications/epic-41-api/actualites-interface-animation.md",
+      "links": 3
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/specifications/corrections-marketplace-2026-09-06.md",
+      "target": "docs/specifications/securisation-production/corrections-marketplace-2026-09-06.md",
+      "links": 3
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/specifications/securisation-production.md",
+      "target": "docs/specifications/securisation-production/README.md",
+      "links": 15
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/specifications/commercant/specification-version-actuelle.md",
+      "target": "docs/specifications/espace-commercant/README.md",
+      "links": 3
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/specifications/commercant/spec-validation-prestation-openapi-mapping.md",
+      "target": "docs/specifications/validation-prestations/contrats-api.md",
+      "links": 2
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/specifications/commercant/spec-validation-prestation-flow.md",
+      "target": "docs/specifications/archives/validation-prestation-deux-scans.md",
+      "links": 2
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/specifications/commercant/spec-technique-epic-10-auth-login-password-front.md",
+      "target": "docs/specifications/identite-acces/authentification-commercant.md",
+      "links": 2
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/specifications/backend/corrections-audit-commercant-2026-09-05.md",
+      "target": "docs/specifications/securisation-production/corrections-commercant-2026-09-05.md",
+      "links": 2
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/specifications/moteur-animation/localeo_animation_engine_spec.md",
+      "target": "docs/specifications/moteur-animation/localeo_animation_engine_spec.md",
+      "links": 1
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/architecture/frontends/marketplace/specification-technique-marketplace.md",
+      "target": "docs/architecture/frontends/marketplace/specification-technique-marketplace.md",
+      "links": 1
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/specifications/INDEX.md",
+      "target": "docs/specifications/INDEX.md",
+      "links": 56
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/specifications/animation/preproduction-animation/contrats-corriges.md",
+      "target": "docs/specifications/securisation-production/contrats-animation.md",
+      "links": 2
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/specifications/epic-60-vision-360-commercialisation/specifications-fonctionnelles.md",
+      "target": "docs/specifications/epic-60-vision-360-commercialisation/specifications-fonctionnelles.md",
+      "links": 1
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/architecture/backend/specification-technique.md",
+      "target": "docs/architecture/backend/specification-technique.md",
+      "links": 2
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/roadmap/terminees/epic-marketplace-18-google-analytics-marketplace-backlog.md",
+      "target": "docs/roadmap/terminees/epic-marketplace-18-google-analytics-marketplace-backlog.md",
+      "links": 1
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/roadmap/terminees/epic-animation-edition-prestations.md",
+      "target": "docs/roadmap/terminees/epic-animation-edition-prestations.md",
+      "links": 1
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/roadmap/terminees/epic-7-tokens-de-consultation-achat-et-coffret-instance-backlog.md",
+      "target": "docs/roadmap/terminees/epic-7-tokens-de-consultation-achat-et-coffret-instance-backlog.md",
+      "links": 1
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/roadmap/terminees/epic-53-tombola-locale-backlog.md",
+      "target": "docs/roadmap/terminees/epic-53-tombola-locale-backlog.md",
+      "links": 4
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/roadmap/terminees/epic-52-accueil-marketplace-geolocalise-backlog.md",
+      "target": "docs/roadmap/terminees/epic-52-accueil-marketplace-geolocalise-backlog.md",
+      "links": 1
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/roadmap/terminees/epic-41-plateforme-animation-locale-mvp-backlog.md",
+      "target": "docs/roadmap/terminees/epic-41-plateforme-animation-locale-mvp-backlog.md",
+      "links": 13
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/architecture/backend/epics/epic-41-animation-locale-architecture.md",
+      "target": "docs/architecture/backend/epics/epic-41-animation-locale-architecture.md",
+      "links": 2
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/architecture/backend/epics/epic-41-animation-locale-architecture.animation.md",
+      "target": "docs/architecture/backend/epics/epic-41-animation-locale-architecture.animation.md",
+      "links": 3
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/roadmap/suivi-backlog.md",
+      "target": "docs/roadmap/suivi-backlog.md",
+      "links": 1
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/roadmap/README.md",
+      "target": "docs/roadmap/README.md",
+      "links": 3
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/roadmap/product-roadmap.md",
+      "target": "docs/roadmap/product-roadmap.md",
+      "links": 2
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/specifications/epic-41-flyer-direction-artistique.md",
+      "target": "docs/specifications/epic-41-api/flyer-direction-artistique.md",
+      "links": 4
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/specifications/epic-52-accueil-marketplace-geolocalise.md",
+      "target": "docs/specifications/epic-52-accueil-marketplace-geolocalise/parcours-utilisateur.md",
+      "links": 2
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/organisation/variantes-a-harmoniser.md",
+      "target": "docs/organisation/variantes-a-harmoniser.md",
+      "links": 1
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/organisation/consolidation-roadmap-2026-09-18.md",
+      "target": "docs/organisation/consolidation-roadmap-2026-09-18.md",
+      "links": 1
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/specifications/epic-41-animation-locale-analyse-api-maquette.md",
+      "target": "docs/specifications/epic-41-api/analyse-api-maquette.md",
+      "links": 6
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/specifications/epic-41-actualites-animation.md",
+      "target": "docs/specifications/epic-41-api/actualites.md",
+      "links": 4
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/specifications/epic-41-animation-locale-dct.md",
+      "target": "docs/specifications/epic-41-api/dct.md",
+      "links": 11
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/roadmap/a-faire/security-performance-roadmap.md",
+      "target": "docs/roadmap/a-faire/security-performance-roadmap.md",
+      "links": 36
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/roadmap/a-faire/epic-58-filtre-annuel-global-backlog.md",
+      "target": "docs/roadmap/a-faire/epic-58-filtre-annuel-global-backlog.md",
+      "links": 3
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/specifications/epic-41-api/registre-arbitrages.md",
+      "target": "docs/specifications/epic-41-api/registre-arbitrages.md",
+      "links": 2
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/specifications/epic-41-api/README.md",
+      "target": "docs/specifications/epic-41-api/README.md",
+      "links": 8
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/specifications/epic-41-api/checklist-mise-en-production.md",
+      "target": "docs/specifications/epic-41-api/checklist-mise-en-production.md",
+      "links": 1
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/produit/specification-fonctionnelle.md",
+      "target": "docs/produit/specification-fonctionnelle.md",
+      "links": 2
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/specifications/epic-45-vision-360-animation/README.md",
+      "target": "docs/specifications/epic-45-vision-360-animation/README.md",
+      "links": 1
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/produit/marketplace/specification-fonctionnelle-marketplace.md",
+      "target": "docs/produit/marketplace/specification-fonctionnelle-marketplace.md",
+      "links": 1
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/specifications/epic-42-localeo-live/README.md",
+      "target": "docs/specifications/epic-42-localeo-live/README.md",
+      "links": 1
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/specifications/epic-42-localeo-live/frontend-pwa.md",
+      "target": "docs/specifications/epic-42-localeo-live/frontend-pwa.md",
+      "links": 1
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/specifications/epic-46-paiement-lots-animation/contrats-api.md",
+      "target": "docs/specifications/epic-46-paiement-lots-animation/contrats-api.md",
+      "links": 1
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/specifications/epic-50-conformite-fiscale-bum/onboarding-commercant-mobile.md",
+      "target": "docs/specifications/epic-50-conformite-fiscale-bum/onboarding-commercant-mobile.md",
+      "links": 1
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/specifications/epic-50-conformite-fiscale-bum/localeo-marketplace.md",
+      "target": "docs/specifications/epic-50-conformite-fiscale-bum/localeo-marketplace.md",
+      "links": 1
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/produit/animation/etat-application-animation.md",
+      "target": "docs/produit/animation/etat-application-animation.md",
+      "links": 5
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/audits/marketplace/suivi-corrections-ouverture-2026-09-05.md",
+      "target": "docs/audits/marketplace/suivi-corrections-ouverture-2026-09-05.md",
+      "links": 1
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/audits/animation/remediation-2026-09-06.md",
+      "target": "docs/audits/animation/remediation-2026-09-06.md",
+      "links": 2
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/audits/marketplace/suivi-corrections-backend-marketplace-2026-09-06.md",
+      "target": "docs/audits/marketplace/suivi-corrections-backend-marketplace-2026-09-06.md",
+      "links": 1
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/audits/marketplace/audit-preproduction-2026-09-06.md",
+      "target": "docs/audits/marketplace/audit-preproduction-2026-09-06.md",
+      "links": 2
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/audits/backend/suivi-implementation-performance-2026-09-12.md",
+      "target": "docs/audits/backend/suivi-implementation-performance-2026-09-12.md",
+      "links": 1
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/audits/backend/2026-09-05-correctifs-production.md",
+      "target": "docs/audits/backend/2026-09-05-correctifs-production.md",
+      "links": 1
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/audits/commercant/audit-approfondi-2026-09-05.md",
+      "target": "docs/audits/commercant/audit-approfondi-2026-09-05.md",
+      "links": 2
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/audits/commercant/validation-finale-preproduction-2026-09-07.md",
+      "target": "docs/audits/commercant/validation-finale-preproduction-2026-09-07.md",
+      "links": 2
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/audits/commercant/audit-preproduction-2026-09-06.md",
+      "target": "docs/audits/commercant/audit-preproduction-2026-09-06.md",
+      "links": 2
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/exploitation/animation/deploiement-render.md",
+      "target": "docs/exploitation/animation/deploiement-render.md",
+      "links": 1
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/exploitation/animation/deploiement-demo.md",
+      "target": "docs/exploitation/animation/deploiement-demo.md",
+      "links": 1
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/exploitation/commercant/verification-deploiement-audit.md",
+      "target": "docs/exploitation/commercant/verification-deploiement-audit.md",
+      "links": 1
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/exploitation/recette/correctif-commission-prestation-euros.md",
+      "target": "docs/exploitation/recette/correctif-commission-prestation-euros.md",
+      "links": 1
+    },
+    {
+      "repo": "localeo-projet",
+      "path": "docs/exploitation/recette/campagne-ouverture-base-vide/00-pilotage.md",
+      "target": "docs/exploitation/recette/campagne-ouverture-base-vide/00-pilotage.md",
+      "links": 1
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "AGENT.md",
+      "target": "AGENT.md",
+      "links": 4
+    },
+    {
+      "path": "docs/organisation/migration-2026-09-18.json",
+      "targets": 73
+    }
+  ],
+  "checks": {
+    "original_sources_accounted_for": 159,
+    "json_png_patch_unchanged": 7,
+    "export_sources": 117,
+    "synchronization_tests": {
+      "passed": 15,
+      "skipped": 1
+    },
+    "known_preexisting_missing_migration_targets": 10,
+    "navigation": {
+      "reachable_files": 145,
+      "unreachable_files": 0,
+      "broken_links_in_specifications": 0,
+      "duplicate_status_notes": 0
+    },
+    "known_preexisting_broken_links_outside_specifications": [
+      {
+        "file": "docs/roadmap/README.md",
+        "line": 64,
+        "target": "envrac.md"
+      },
+      {
+        "file": "docs/audits/marketplace/audit-preproduction-2026-09-06.md",
+        "line": 170,
+        "target": "../../../../localeo-marketplace/api/localeo-openapi.json"
+      },
+      {
+        "file": "docs/archives/commercant/index-avant-reorganisation.md",
+        "line": 14,
+        "target": "../../roadmap/commercant/backlog-validation-prestation.md"
+      }
+    ]
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "repositories": [
+    {
+      "name": "localeo-projet",
+      "path": ".",
+      "role": "connaissance et coordination"
+    },
+    {
+      "name": "localeo-backend",
+      "path": "../localeo-backend",
+      "commands": {
+        "install": "python -m pip install -r requirements.txt",
+        "dev": "uvicorn app.main:app --reload",
+        "test": "python scripts/validation/test_isolated.py -q"
+      }
+    },
+    {
+      "name": "localeo-marketplace",
+      "path": "../localeo-marketplace",
+      "commands": {
+        "install": "npm ci",
+        "dev": "npm run dev",
+        "build": "npm run build:test",
+        "test": "npm run test:server"
+      }
+    },
+    {
+      "name": "localeo-commercant",
+      "path": "../localeo-commercant",
+      "commands": {
+        "install": "npm ci",
+        "dev": "npm run dev",
+        "build": "npm run build:demo",
+        "test": "npm test"
+      }
+    },
+    {
+      "name": "localeo-animation",
+      "path": "../localeo-animation",
+      "commands": {
+        "install": "corepack enable && pnpm install --frozen-lockfile",
+        "dev": "pnpm run dev",
+        "build": "pnpm run build:demo",
+        "test": "pnpm test"
+      }
+    }
+  ]
+}

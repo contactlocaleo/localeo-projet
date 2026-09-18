@@ -1,0 +1,1406 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Contrats des corrections MARKET-002/004/007/008/009/010",
+    "version": "2026-09-07"
+  },
+  "paths": {
+    "/public/gestion-achats/paiements/initialiser": {
+      "post": {
+        "tags": [
+          "Gestion achats"
+        ],
+        "summary": "Initialiser Paiement",
+        "operationId": "initialiser_paiement_public_gestion_achats_paiements_initialiser_post",
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 128
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Idempotency-Key"
+            }
+          },
+          {
+            "name": "X-Localeo-Live-Secret",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Localeo-Live-Secret"
+            }
+          },
+          {
+            "name": "X-Payment-Return-Token",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 64,
+                  "maxLength": 64
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Payment-Return-Token"
+            }
+          },
+          {
+            "name": "X-Localeo-Credit-Session",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Localeo-Credit-Session"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaiementInitialisationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaiementInitialisationResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/public/gestion-achats/paiements/retour/{achat_id}": {
+      "get": {
+        "tags": [
+          "Gestion achats"
+        ],
+        "summary": "Consulter Retour Paiement",
+        "operationId": "consulter_retour_paiement_public_gestion_achats_paiements_retour__achat_id__get",
+        "parameters": [
+          {
+            "name": "achat_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Achat Id"
+            }
+          },
+          {
+            "name": "X-Payment-Return-Token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 64,
+              "maxLength": 64,
+              "title": "X-Payment-Return-Token"
+            }
+          },
+          {
+            "name": "X-Checkout-Session",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 255
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Checkout-Session"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaiementRetourResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/gestion-achats/paiements/conditions-achat-pro": {
+      "get": {
+        "tags": [
+          "Gestion achats"
+        ],
+        "summary": "Consulter Conditions Achat Pro",
+        "operationId": "consulter_conditions_achat_pro_public_gestion_achats_paiements_conditions_achat_pro_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Erreur de validation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/gestion-achats/qrcode/detail": {
+      "get": {
+        "tags": [
+          "Gestion achats"
+        ],
+        "summary": "Consulter Detail Qr",
+        "operationId": "consulter_detail_qr_public_gestion_achats_qrcode_detail_get",
+        "parameters": [
+          {
+            "name": "X-QR-Token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4096,
+              "description": "Jeton QR a analyser.",
+              "title": "X-Qr-Token"
+            },
+            "description": "Jeton QR a analyser."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QrTokenDetailPayload"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/public/animation-locale/animations/{animation_id}/inscriptions": {
+      "post": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Creer Inscription Animation",
+        "operationId": "creer_inscription_animation",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreerInscriptionAnimationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InscriptionAnimationPayload"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Cette adresse email est deja inscrite a l'animation.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/animation-locale/participants/{token}": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Consulter Participant Animation",
+        "operationId": "consulter_participant_animation",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Token"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ParticipantPublicAnimationPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/protected/gestion-achats/achats/depuis-session/{session_id}": {
+      "get": {
+        "tags": [
+          "Gestion achats"
+        ],
+        "summary": "Consulter Achat Depuis Session",
+        "operationId": "consulter_achat_depuis_session_protected_gestion_achats_achats_depuis_session__session_id__get",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "name": "x-management-token",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Management-Token"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AchatDepuisSessionPayload"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "PaiementInitialisationRequest": {
+        "properties": {
+          "coffret_id": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "Coffret Id"
+          },
+          "email_client": {
+            "type": "string",
+            "maxLength": 320,
+            "minLength": 3,
+            "title": "Email Client"
+          },
+          "telephone_client": {
+            "type": "string",
+            "maxLength": 40,
+            "minLength": 6,
+            "title": "Telephone Client"
+          },
+          "type_client": {
+            "type": "string",
+            "enum": [
+              "PARTICULIER",
+              "PROFESSIONNEL"
+            ],
+            "title": "Type Client",
+            "default": "PARTICULIER"
+          },
+          "quantite": {
+            "type": "integer",
+            "maximum": 1000,
+            "minimum": 1,
+            "title": "Quantite",
+            "default": 1
+          },
+          "nom_entreprise": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 200
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nom Entreprise"
+          },
+          "nom_contact": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 200
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nom Contact"
+          },
+          "siret": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 14
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Siret"
+          },
+          "credit_terms_accepted": {
+            "type": "boolean",
+            "title": "Credit Terms Accepted",
+            "default": false
+          },
+          "credit_terms_version": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 100
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Credit Terms Version"
+          },
+          "localeo_live_installation_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 64
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Localeo Live Installation Id"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "coffret_id",
+          "email_client",
+          "telephone_client"
+        ],
+        "title": "PaiementInitialisationRequest"
+      },
+      "PaiementInitialisationResponse": {
+        "properties": {
+          "payment_return_supported": {
+            "type": "boolean",
+            "title": "Payment Return Supported",
+            "default": true
+          },
+          "achat_id": {
+            "type": "string",
+            "title": "Achat Id",
+            "description": "Identifiant de l'achat créé avant redirection vers le paiement."
+          },
+          "checkout_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Checkout Url",
+            "description": "URL de checkout Stripe, absente si le credit couvre la totalite."
+          },
+          "type_client": {
+            "type": "string",
+            "title": "Type Client",
+            "description": "Type de client retenu pour l'achat."
+          },
+          "quantite": {
+            "type": "integer",
+            "title": "Quantite",
+            "description": "Nombre de coffrets commandés."
+          },
+          "nom_entreprise": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nom Entreprise",
+            "description": "Nom de l'entreprise acheteuse pour un achat professionnel."
+          },
+          "nom_contact": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nom Contact",
+            "description": "Nom du contact acheteur pour un achat professionnel."
+          },
+          "idempotent_replay": {
+            "type": "boolean",
+            "title": "Idempotent Replay",
+            "description": "Indique si la réponse réutilise une initialisation déjà créée avec la même clé d'idempotence.",
+            "default": false
+          },
+          "credit_applique_centimes": {
+            "type": "integer",
+            "title": "Credit Applique Centimes",
+            "description": "Part du total reservee sur le credit d'achat B2B.",
+            "default": 0
+          },
+          "montant_stripe_centimes": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Montant Stripe Centimes",
+            "description": "Part restant a regler par Stripe."
+          }
+        },
+        "type": "object",
+        "required": [
+          "achat_id",
+          "type_client",
+          "quantite"
+        ],
+        "title": "PaiementInitialisationResponse"
+      },
+      "ApiErrorResponse": {
+        "properties": {
+          "detail": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "object"
+                }
+              }
+            ],
+            "title": "Detail"
+          },
+          "correlationId": {
+            "type": "string",
+            "title": "Correlationid",
+            "description": "Reference d'erreur canonique a communiquer au support."
+          },
+          "request_id": {
+            "type": "string",
+            "title": "Request Id",
+            "deprecated": true,
+            "description": "Alias deprecie de correlationId."
+          }
+        },
+        "type": "object",
+        "required": [
+          "detail",
+          "correlationId",
+          "request_id"
+        ],
+        "title": "ApiErrorResponse"
+      },
+      "PaiementRetourResponse": {
+        "properties": {
+          "achat_id": {
+            "type": "string",
+            "title": "Achat Id"
+          },
+          "statut_achat": {
+            "type": "string",
+            "title": "Statut Achat"
+          },
+          "type_client": {
+            "type": "string",
+            "title": "Type Client"
+          },
+          "quantite": {
+            "type": "integer",
+            "title": "Quantite"
+          },
+          "coffret_nom": {
+            "type": "string",
+            "title": "Coffret Nom"
+          },
+          "session_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Session Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "achat_id",
+          "statut_achat",
+          "type_client",
+          "quantite",
+          "coffret_nom"
+        ],
+        "title": "PaiementRetourResponse"
+      },
+      "QrTokenDetailPayload": {
+        "properties": {
+          "coffret_instance_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Coffret Instance Id",
+            "description": "Identifiant de l'instance de coffret associee au QR."
+          },
+          "verification_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Verification Code",
+            "description": "Code court de verification de l'instance associee."
+          },
+          "qr_token": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Qr Token",
+            "description": "Jeton QR transmis en entree."
+          },
+          "payload": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Payload",
+            "description": "Payload metier decode depuis le token quand il est lisible."
+          },
+          "kid": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Kid",
+            "description": "Identifiant de cle ayant servi a signer le QR, si disponible."
+          },
+          "type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Type",
+            "description": "Type metier du QR (`achat_coffret`, etc.)."
+          },
+          "validite": {
+            "type": "string",
+            "title": "Validite",
+            "description": "Etat de validite du QR (`ABSENT`, `VALIDE`, `EXPIRE`, `INVALIDE`, `NON_VERIFIE`)."
+          },
+          "validite_detail": {
+            "type": "string",
+            "title": "Validite Detail",
+            "description": "Detail lisible expliquant le statut de validite."
+          },
+          "image_svg": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Image Svg",
+            "description": "Representation SVG du QR code, directement affichable en HTML."
+          }
+        },
+        "type": "object",
+        "required": [
+          "validite",
+          "validite_detail"
+        ],
+        "title": "QrTokenDetailPayload"
+      },
+      "CreerInscriptionAnimationRequest": {
+        "properties": {
+          "nom": {
+            "type": "string",
+            "maxLength": 120,
+            "minLength": 1,
+            "title": "Nom"
+          },
+          "prenom": {
+            "type": "string",
+            "maxLength": 120,
+            "minLength": 1,
+            "title": "Prenom"
+          },
+          "email": {
+            "type": "string",
+            "maxLength": 320,
+            "minLength": 3,
+            "title": "Email"
+          },
+          "telephone": {
+            "type": "string",
+            "maxLength": 40,
+            "minLength": 6,
+            "title": "Telephone"
+          },
+          "consentement_reglement": {
+            "type": "boolean",
+            "const": true,
+            "title": "Consentement Reglement"
+          },
+          "consentement_notifications": {
+            "type": "boolean",
+            "title": "Consentement Notifications",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "nom",
+          "prenom",
+          "email",
+          "telephone",
+          "consentement_reglement"
+        ],
+        "title": "CreerInscriptionAnimationRequest"
+      },
+      "InscriptionAnimationPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "animation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animation Id"
+          },
+          "participant_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Participant Id"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          },
+          "participant_url": {
+            "type": "string",
+            "title": "Participant Url"
+          },
+          "qr_envoye": {
+            "type": "boolean",
+            "title": "Qr Envoye"
+          }
+        },
+        "additionalProperties": true,
+        "type": "object",
+        "required": [
+          "id",
+          "animation_id",
+          "participant_id",
+          "statut",
+          "participant_url",
+          "qr_envoye"
+        ],
+        "title": "InscriptionAnimationPayload"
+      },
+      "ParticipantPublicAnimationPayload": {
+        "properties": {
+          "animation": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Animation"
+          },
+          "participant": {
+            "$ref": "#/components/schemas/ParticipantAnimationPayload"
+          },
+          "qr_url": {
+            "type": "string",
+            "title": "Qr Url"
+          },
+          "etapes": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Etapes"
+          }
+        },
+        "additionalProperties": true,
+        "type": "object",
+        "required": [
+          "animation",
+          "participant",
+          "qr_url",
+          "etapes"
+        ],
+        "title": "ParticipantPublicAnimationPayload"
+      },
+      "ParticipantAnimationPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "animation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animation Id"
+          },
+          "nom_affiche": {
+            "type": "string",
+            "title": "Nom Affiche"
+          },
+          "email_masque": {
+            "type": "string",
+            "title": "Email Masque"
+          },
+          "telephone_masque": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Telephone Masque"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          },
+          "progression": {
+            "type": "number",
+            "title": "Progression"
+          },
+          "validations": {
+            "type": "integer",
+            "title": "Validations",
+            "default": 0
+          },
+          "inscrit_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Inscrit At"
+          },
+          "reference": {
+            "type": "string",
+            "title": "Reference"
+          }
+        },
+        "additionalProperties": true,
+        "type": "object",
+        "required": [
+          "id",
+          "animation_id",
+          "nom_affiche",
+          "email_masque",
+          "statut",
+          "progression",
+          "reference"
+        ],
+        "title": "ParticipantAnimationPayload"
+      },
+      "AchatDepuisSessionPayload": {
+        "properties": {
+          "achat_id": {
+            "type": "string",
+            "title": "Achat Id",
+            "description": "Identifiant unique de l'achat."
+          },
+          "coffret_nom": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Coffret Nom",
+            "description": "Nom du coffret acheté."
+          },
+          "type_coffret": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Type Coffret",
+            "description": "Code du type de coffret acheté."
+          },
+          "email_acheteur": {
+            "type": "string",
+            "title": "Email Acheteur",
+            "description": "Adresse email de l'acheteur."
+          },
+          "telephone_acheteur": {
+            "type": "string",
+            "title": "Telephone Acheteur",
+            "description": "Téléphone de l'acheteur."
+          },
+          "statut_achat": {
+            "type": "string",
+            "title": "Statut Achat",
+            "description": "Statut courant de l'achat."
+          },
+          "date_paiement": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date Paiement",
+            "description": "Date de paiement confirmée au format ISO 8601 UTC."
+          },
+          "duree_validite_jours": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Duree Validite Jours",
+            "description": "Durée de validité du coffret acheté, en jours."
+          },
+          "date_fin_validite": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date Fin Validite",
+            "description": "Date de fin de validité calculée au format ISO 8601 UTC."
+          },
+          "type_client": {
+            "type": "string",
+            "title": "Type Client",
+            "description": "Type de client à l'origine de l'achat."
+          },
+          "quantite": {
+            "type": "integer",
+            "title": "Quantite",
+            "description": "Nombre de coffrets commandés."
+          },
+          "montant": {
+            "type": "number",
+            "title": "Montant",
+            "description": "Montant total payé, en euros."
+          },
+          "reference_transaction": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reference Transaction",
+            "description": "Référence de transaction de paiement si disponible."
+          },
+          "coffret_instances": {
+            "items": {
+              "$ref": "#/components/schemas/AchatCoffretInstanceSummaryPayload"
+            },
+            "type": "array",
+            "title": "Coffret Instances",
+            "description": "Instances de coffret créées pour cet achat."
+          },
+          "session_id": {
+            "type": "string",
+            "title": "Session Id",
+            "description": "Identifiant de la session de checkout du prestataire de paiement."
+          },
+          "payment_status": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Payment Status",
+            "description": "Statut de paiement remonté par le prestataire."
+          },
+          "checkout_status": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Checkout Status",
+            "description": "Statut global de la session de checkout."
+          }
+        },
+        "type": "object",
+        "required": [
+          "achat_id",
+          "email_acheteur",
+          "telephone_acheteur",
+          "statut_achat",
+          "type_client",
+          "quantite",
+          "montant",
+          "coffret_instances",
+          "session_id"
+        ],
+        "title": "AchatDepuisSessionPayload"
+      },
+      "AchatCoffretInstanceSummaryPayload": {
+        "properties": {
+          "coffret_instance_id": {
+            "type": "string",
+            "title": "Coffret Instance Id",
+            "description": "Identifiant unique de l'instance de coffret."
+          },
+          "verification_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Verification Code",
+            "description": "Code court de verification de l'instance, lisible a l'oral."
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut",
+            "description": "Statut courant de l'instance de coffret."
+          },
+          "email_beneficiaire": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Email Beneficiaire",
+            "description": "Email du bénéficiaire final si renseigné."
+          },
+          "date_activation": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date Activation",
+            "description": "Date d'activation au format ISO 8601 UTC."
+          },
+          "date_expiration": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date Expiration",
+            "description": "Date d'expiration au format ISO 8601 UTC."
+          },
+          "consultation_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Consultation Url",
+            "description": "URL front de consultation securisee de l'instance de coffret apres activation."
+          }
+        },
+        "type": "object",
+        "required": [
+          "coffret_instance_id",
+          "statut"
+        ],
+        "title": "AchatCoffretInstanceSummaryPayload"
+      }
+    },
+    "securitySchemes": {
+      "XApiKey": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-KEY",
+        "description": "Cle API interne. La cle est verifiee par hash et scope en base `api_keys`."
+      },
+      "AdminSessionCookie": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "session",
+        "description": "Cookie de session admin signe. La session doit contenir `admin_authenticated=true`."
+      },
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Session commercant ou token de gestion transmis via `Authorization: Bearer ...`."
+      },
+      "CommercantSessionBearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Session commercant transmise via `Authorization: Bearer <session_token>`."
+      },
+      "ManagementTokenBearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Management token achat transmis via `Authorization: Bearer <management_token>`."
+      },
+      "ActivationTokenBearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Token d'activation coffret instance transmis via `Authorization: Bearer <activation_token>`."
+      },
+      "ConsultationTokenBearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Token de consultation coffret instance transmis via `Authorization: Bearer <consultation_token>`."
+      },
+      "ManagementTokenHeader": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-Management-Token",
+        "description": "Token de gestion achat transmis dans le header `X-Management-Token`."
+      }
+    }
+  }
+}

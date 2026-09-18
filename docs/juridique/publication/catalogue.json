@@ -1,0 +1,301 @@
+{
+  "schema_version": 1,
+  "documents": [
+    {
+      "id": "mentions-legales",
+      "title": "Mentions légales",
+      "language": "fr",
+      "version": "1.0",
+      "render_revision": "1",
+      "document_date": "2026-09-13",
+      "effective_date": null,
+      "surfaces": [
+        "marketplace",
+        "live",
+        "commercant",
+        "animation"
+      ],
+      "kind": "document",
+      "source": "communs/LOCALEO - Mentions Légales - V1.pdf",
+      "pdf_sha256": "5af575593aed7f27c282d2035a93814ced87d941e5e6f43d680f83dbb5a7566b",
+      "legacy_routes": [
+        "/mentions-legales"
+      ],
+      "related_ids": [
+        "confidentialite",
+        "cookies",
+        "accessibilite"
+      ]
+    },
+    {
+      "id": "confidentialite",
+      "title": "Politique de confidentialité et de protection des données personnelles",
+      "language": "fr",
+      "version": "1.1",
+      "render_revision": "1",
+      "document_date": "2026-09-13",
+      "effective_date": null,
+      "surfaces": [
+        "marketplace",
+        "live",
+        "commercant",
+        "animation"
+      ],
+      "kind": "document",
+      "source": "communs/LOCALEO - Politique de Confidentialité - V1.pdf",
+      "pdf_sha256": "c33240fe9163c5e39d9390c10fea2e7f067ef6b944e89fa8bc352795bf1ffc49",
+      "legacy_routes": [
+        "/confidentialite"
+      ],
+      "related_ids": [
+        "cookies",
+        "confidentialite-live",
+        "donnees-animation"
+      ]
+    },
+    {
+      "id": "cookies",
+      "title": "Politique de cookies et autres stockages sur l’appareil",
+      "language": "fr",
+      "version": "1.0",
+      "render_revision": "1",
+      "document_date": "2026-09-13",
+      "effective_date": null,
+      "surfaces": [
+        "marketplace",
+        "live",
+        "commercant",
+        "animation"
+      ],
+      "kind": "document",
+      "source": "communs/LOCALEO - Politique de Cookies - V1.pdf",
+      "pdf_sha256": "ccb76d3d874d70e36af832a14cb58b41e434d1ea80ce8dd10bc03bfc59a55c0c",
+      "legacy_routes": [
+        "/cookies"
+      ],
+      "related_ids": [
+        "confidentialite"
+      ]
+    },
+    {
+      "id": "accessibilite",
+      "title": "Déclaration d’accessibilité",
+      "language": "fr",
+      "version": "1.0",
+      "render_revision": "1",
+      "document_date": "2026-09-13",
+      "effective_date": null,
+      "surfaces": [
+        "marketplace",
+        "live",
+        "commercant",
+        "animation"
+      ],
+      "kind": "document",
+      "source": "communs/LOCALEO - Déclaration d'accessibilité - V1.pdf",
+      "pdf_sha256": "d08ea547aa854f20bedb8e880ac8234ca498daf3c435a16f56fda032df88185f",
+      "legacy_routes": [
+        "/accessibilite"
+      ],
+      "related_ids": [
+        "mentions-legales"
+      ]
+    },
+    {
+      "id": "cgv-marketplace",
+      "title": "Conditions générales de vente Marketplace",
+      "language": "fr",
+      "version": "1.1",
+      "render_revision": "1",
+      "document_date": "2026-09-13",
+      "effective_date": null,
+      "surfaces": [
+        "marketplace"
+      ],
+      "kind": "document",
+      "source": "marketplace/LOCALEO - Conditions Générales de Vente Marketplace - V1.pdf",
+      "pdf_sha256": "27c701ce847016d46ded83b26ac0e33ad0ea651f797b5b8b9ea5dc1b8a26b077",
+      "legacy_routes": [
+        "/cgv"
+      ],
+      "related_ids": [
+        "retractation-marketplace",
+        "confidentialite"
+      ]
+    },
+    {
+      "id": "retractation-marketplace",
+      "title": "Formulaire de rétractation",
+      "language": "fr",
+      "version": "1.0",
+      "render_revision": "1",
+      "document_date": "2026-09-13",
+      "effective_date": null,
+      "surfaces": [
+        "marketplace"
+      ],
+      "kind": "template",
+      "source": "marketplace/LOCALEO - Formulaire de Rétractation Localeo - V1.pdf",
+      "pdf_sha256": "ed56d6788657de3a1f00733944cd7affdfefa3641d08dd45033d69e839606345",
+      "legacy_routes": [
+        "/retractation"
+      ],
+      "related_ids": [
+        "cgv-marketplace"
+      ]
+    },
+    {
+      "id": "cgu-live",
+      "title": "Conditions générales d’utilisation de Localeo Live",
+      "language": "fr",
+      "version": "1.0",
+      "render_revision": "1",
+      "document_date": "2026-09-13",
+      "effective_date": null,
+      "surfaces": [
+        "marketplace",
+        "live"
+      ],
+      "kind": "document",
+      "source": "live/LOCALEO - Conditions Générales d'Utilisation Localeo Live - V1.pdf",
+      "pdf_sha256": "ad79b2cc0f76b0fdd984474ca9e46ca9b3443db90dee95f99fda3fbb334fb7d2",
+      "legacy_routes": [
+        "/conditions-utilisation"
+      ],
+      "related_ids": [
+        "confidentialite-live",
+        "cookies"
+      ]
+    },
+    {
+      "id": "confidentialite-live",
+      "title": "Notice de confidentialité de Localeo Live",
+      "language": "fr",
+      "version": "1.0",
+      "render_revision": "1",
+      "document_date": "2026-09-13",
+      "effective_date": null,
+      "surfaces": [
+        "marketplace",
+        "live"
+      ],
+      "kind": "document",
+      "source": "live/LOCALEO - Notice de confidentialité Localeo Live - V1.pdf",
+      "pdf_sha256": "89efc7c6c718fe2ad75445e46fcbca02f0b8454b112a9de716fb7a4a930e9bdc",
+      "legacy_routes": [
+        "/confidentialite-live"
+      ],
+      "related_ids": [
+        "confidentialite",
+        "cgu-live",
+        "cookies"
+      ]
+    },
+    {
+      "id": "contrat-commercant",
+      "title": "Contrat de partenariat commerçant avec fiche prestations",
+      "language": "fr",
+      "version": "1.0",
+      "render_revision": "1",
+      "document_date": "2026-09-13",
+      "effective_date": null,
+      "surfaces": [
+        "commercant"
+      ],
+      "kind": "template",
+      "source": "commercant/LOCALEO - Contrat de Partenariat Commerçant avec fiche prestations - V1.pdf",
+      "pdf_sha256": "a03ec9180fb544aaebe90855e261cfd1230a6fa57038be4aedfb3f64caecb567",
+      "legacy_routes": [],
+      "related_ids": [
+        "confidentialite"
+      ]
+    },
+    {
+      "id": "conditions-animation",
+      "title": "Conditions particulières Localeo Animation",
+      "language": "fr",
+      "version": "1.1",
+      "render_revision": "1",
+      "document_date": "2026-09-13",
+      "effective_date": null,
+      "surfaces": [
+        "animation"
+      ],
+      "kind": "document",
+      "source": "animation/LOCALEO - Conditions particulières Localeo Animation - V1.pdf",
+      "pdf_sha256": "99690abd83325fd2eda216f813518b9ddd3c0545a06ad1bd4971c6b9d0806513",
+      "legacy_routes": [],
+      "related_ids": [
+        "donnees-animation",
+        "reglement-animation",
+        "confidentialite"
+      ]
+    },
+    {
+      "id": "donnees-animation",
+      "title": "Annexe de protection des données du partenaire Animation",
+      "language": "fr",
+      "version": "1.0",
+      "render_revision": "1",
+      "document_date": "2026-09-13",
+      "effective_date": null,
+      "surfaces": [
+        "animation"
+      ],
+      "kind": "template",
+      "source": "animation/LOCALEO - Annexe protection des données partenaire Animation - V1.pdf",
+      "pdf_sha256": "3c2da8e17ae4fba059e1a0e149ac99c33eff10ece17e28e9a65645a0d93dedec",
+      "legacy_routes": [],
+      "related_ids": [
+        "conditions-animation",
+        "confidentialite"
+      ]
+    },
+    {
+      "id": "reglement-animation",
+      "title": "Règlement général des animations locales",
+      "language": "fr",
+      "version": "1.0",
+      "render_revision": "1",
+      "document_date": "2026-09-13",
+      "effective_date": null,
+      "surfaces": [
+        "animation"
+      ],
+      "kind": "template",
+      "source": "animation/LOCALEO - Règlement type d'une animation - V1.pdf",
+      "pdf_sha256": "d259cd10f684b7a067aa33859ed9b67ae211aa83e1fc39c864bcc0aab2a3ff53",
+      "legacy_routes": [],
+      "related_ids": [
+        "conditions-animation",
+        "donnees-animation"
+      ]
+    }
+  ],
+  "excluded_documents": [
+    {
+      "id": "registre-traitements",
+      "source": "interne/Annexe A - Registre simplifié des traitements et tableau de conservation des données - V1.pdf",
+      "pdf_sha256": "09d55b5d06ed23b7926071faf0bb09728d52dd7c3044dbcea3ddcdc1370551f0",
+      "reason": "internal"
+    },
+    {
+      "id": "registre-sous-traitants",
+      "source": "interne/Annexe B - Registre des sous-traitants - V1.pdf",
+      "pdf_sha256": "a29b44d240da9b05a26344e5a5a42b06b813cc778986f801f83a5143f02cfdb1",
+      "reason": "internal"
+    },
+    {
+      "id": "flux-financiers",
+      "source": "interne/Annexe C - Gestion des Flux financiers Localeo - V1.pdf",
+      "pdf_sha256": "5adc75f7be9f43ab4bafe0d4834c756b68113d977d3318b5bc7c3ac2a74f8d8d",
+      "reason": "internal"
+    },
+    {
+      "id": "garanties-transferts",
+      "source": "interne/Annexe E - Vérification DPF CCT - V1.pdf",
+      "pdf_sha256": "bbb28246953a57b52aa8af2e544bc4171c1ba833c91f75e7e213a5eba8b00baf",
+      "reason": "internal"
+    }
+  ]
+}

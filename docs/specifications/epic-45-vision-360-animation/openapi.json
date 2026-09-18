@@ -1,0 +1,60 @@
+{
+  "openapi": "3.1.0",
+  "info": {"title": "Localeo - Vision 360 Animation", "version": "1.1.0"},
+  "paths": {
+    "/internal/animation-locale/vision-360/animations": {"get": {"operationId": "rechercher_animations_vision_360", "summary": "Rechercher les animations", "security": [{"AdminSessionCookie": []}], "responses": {"200": {"description": "Liste paginee"}, "401": {"description": "Session absente"}, "403": {"description": "Profil refuse"}}}},
+    "/internal/animation-locale/vision-360/animations/{animation_id}": {"get": {"operationId": "consulter_animation_vision_360", "summary": "Consulter la synthese", "security": [{"AdminSessionCookie": []}], "parameters": [{"$ref": "#/components/parameters/AnimationId"}], "responses": {"200": {"description": "Synthese consolidee"}, "404": {"description": "Animation absente ou hors perimetre"}}}},
+    "/internal/animation-locale/vision-360/animations/{animation_id}/indicateurs": {"get": {"operationId": "consulter_indicateurs_animation_vision_360", "summary": "Consulter les KPI, series et indicateurs economiques des gains", "security": [{"AdminSessionCookie": []}], "parameters": [{"$ref": "#/components/parameters/AnimationId"}, {"$ref": "#/components/parameters/HorizonExpirationJours"}], "responses": {"200": {"description": "Indicateurs bornes", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/IndicateursVision360Animation"}}}}, "422": {"description": "Horizon invalide"}}}},
+    "/internal/animation-locale/vision-360/animations/{animation_id}/chronologie": {"get": {"operationId": "consulter_chronologie_animation_vision_360", "summary": "Consulter la chronologie", "security": [{"AdminSessionCookie": []}], "parameters": [{"$ref": "#/components/parameters/AnimationId"}], "responses": {"200": {"description": "Chronologie paginee par curseur"}}}},
+    "/internal/animation-locale/vision-360/animations/{animation_id}/participants": {"get": {"operationId": "consulter_participants_animation_vision_360", "summary": "Consulter les participants", "security": [{"AdminSessionCookie": []}], "parameters": [{"$ref": "#/components/parameters/AnimationId"}], "responses": {"200": {"description": "Participants pagines et masques selon le role"}, "403": {"description": "Coordonnees completes refusees"}}}},
+    "/internal/animation-locale/vision-360/animations/{animation_id}/alertes": {"get": {"operationId": "consulter_alertes_animation_vision_360", "summary": "Consulter les alertes", "security": [{"AdminSessionCookie": []}], "parameters": [{"$ref": "#/components/parameters/AnimationId"}], "responses": {"200": {"description": "Alertes actionnables"}}}}
+  },
+  "components": {
+    "securitySchemes": {"AdminSessionCookie": {"type": "apiKey", "in": "cookie", "name": "session"}},
+    "parameters": {
+      "AnimationId": {"name": "animation_id", "in": "path", "required": true, "schema": {"type": "string", "format": "uuid"}},
+      "HorizonExpirationJours": {"name": "horizon_expiration_jours", "in": "query", "required": false, "description": "Horizon des coffrets entierement non consommes proches expiration.", "schema": {"type": "integer", "minimum": 1, "maximum": 365, "default": 30}}
+    },
+    "schemas": {
+      "IndicateursVision360Animation": {
+        "type": "object",
+        "required": ["animation_id", "periode", "kpis", "series", "consommation_financiere", "generated_at"],
+        "properties": {
+          "animation_id": {"type": "string", "format": "uuid"},
+          "periode": {"type": "object", "additionalProperties": true},
+          "kpis": {"type": "object", "additionalProperties": {"type": "number"}},
+          "series": {"type": "array", "items": {"type": "object", "additionalProperties": true}},
+          "consommation_financiere": {"$ref": "#/components/schemas/ConsommationFinanciereAnimation"},
+          "generated_at": {"type": "string", "format": "date-time"}
+        }
+      },
+      "ConsommationFinanciereAnimation": {
+        "type": "object",
+        "required": ["devise", "montant_reinjecte_centimes", "montant_potentiel_restant_a_reinjecter_centimes", "coffrets_non_consommes_expirant_bientot", "horizon_expiration_jours", "nombre_coffrets_avec_premiere_consommation", "nombre_commercants_sans_aucune_validation", "nombre_commercants_participants_effectifs", "repartition_montant_reinjecte_par_commercant"],
+        "properties": {
+          "devise": {"type": "string", "const": "EUR"},
+          "montant_reinjecte_centimes": {"type": "integer", "minimum": 0},
+          "montant_potentiel_restant_a_reinjecter_centimes": {"type": "integer", "minimum": 0},
+          "coffrets_non_consommes_expirant_bientot": {"type": "integer", "minimum": 0},
+          "horizon_expiration_jours": {"type": "integer", "minimum": 1, "maximum": 365},
+          "delai_moyen_envoi_gain_premiere_consommation_heures": {"type": ["number", "null"], "minimum": 0},
+          "nombre_coffrets_avec_premiere_consommation": {"type": "integer", "minimum": 0},
+          "nombre_commercants_sans_aucune_validation": {"type": "integer", "minimum": 0},
+          "nombre_commercants_participants_effectifs": {"type": "integer", "minimum": 0},
+          "repartition_montant_reinjecte_par_commercant": {"type": "array", "items": {"$ref": "#/components/schemas/RepartitionMontantReinjecteCommercant"}}
+        }
+      },
+      "RepartitionMontantReinjecteCommercant": {
+        "type": "object",
+        "required": ["commercant_id", "nom_commercant", "montant_reinjecte_centimes", "nombre_prestations_consommees", "part_du_montant_reinjecte_pourcentage"],
+        "properties": {
+          "commercant_id": {"type": ["string", "null"], "format": "uuid"},
+          "nom_commercant": {"type": "string"},
+          "montant_reinjecte_centimes": {"type": "integer", "minimum": 0},
+          "nombre_prestations_consommees": {"type": "integer", "minimum": 0},
+          "part_du_montant_reinjecte_pourcentage": {"type": "number", "minimum": 0, "maximum": 100}
+        }
+      }
+    }
+  }
+}

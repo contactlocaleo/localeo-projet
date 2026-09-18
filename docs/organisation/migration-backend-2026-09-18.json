@@ -1,0 +1,1217 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-18",
+  "files": [
+    {
+      "repo": "localeo-backend",
+      "path": "docs/juridique/PLAN_PUBLICATION_DOCUMENTS_JURIDIQUES_2026-09-14.md",
+      "sha256": "aa6fa24d25eb6b28ce3d7c81fb49ab8e13ca3b216adf5c9b19e9c8ee5ae56a94",
+      "target_repo": "localeo-projet",
+      "target": "docs/juridique/PLAN_PUBLICATION_DOCUMENTS_JURIDIQUES_2026-09-14.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/juridique/REVUE_FINALE_V1_2026-09-13.md",
+      "sha256": "27bcb718a517a3fe697e1e6f81f0ba6aadd67f6f46ac76980f16d13f34c5ad0d",
+      "target_repo": "localeo-projet",
+      "target": "docs/juridique/REVUE_FINALE_V1_2026-09-13.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/juridique/SUIVI_CORRECTIONS_V1_2026-09-13.md",
+      "sha256": "01a797f3d6f02314c697dfa0a51361262bfa6134d7dc1a49cec27f44cb7b3fef",
+      "target_repo": "localeo-projet",
+      "target": "docs/juridique/SUIVI_CORRECTIONS_V1_2026-09-13.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/juridique/animation/LOCALEO - Annexe protection des données partenaire Animation - V1.pdf",
+      "sha256": "3c2da8e17ae4fba059e1a0e149ac99c33eff10ece17e28e9a65645a0d93dedec",
+      "target_repo": "localeo-projet",
+      "target": "docs/juridique/animation/LOCALEO - Annexe protection des données partenaire Animation - V1.pdf",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/juridique/animation/LOCALEO - Conditions particulières Localeo Animation - V1.pdf",
+      "sha256": "99690abd83325fd2eda216f813518b9ddd3c0545a06ad1bd4971c6b9d0806513",
+      "target_repo": "localeo-projet",
+      "target": "docs/juridique/animation/LOCALEO - Conditions particulières Localeo Animation - V1.pdf",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/juridique/animation/LOCALEO - Règlement type d'une animation - V1.pdf",
+      "sha256": "d259cd10f684b7a067aa33859ed9b67ae211aa83e1fc39c864bcc0aab2a3ff53",
+      "target_repo": "localeo-projet",
+      "target": "docs/juridique/animation/LOCALEO - Règlement type d'une animation - V1.pdf",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/juridique/commercant/LOCALEO - Contrat de Partenariat Commerçant avec fiche prestations - V1.pdf",
+      "sha256": "a03ec9180fb544aaebe90855e261cfd1230a6fa57038be4aedfb3f64caecb567",
+      "target_repo": "localeo-projet",
+      "target": "docs/juridique/commercant/LOCALEO - Contrat de Partenariat Commerçant avec fiche prestations - V1.pdf",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/juridique/communs/LOCALEO - Déclaration d'accessibilité - V1.pdf",
+      "sha256": "d08ea547aa854f20bedb8e880ac8234ca498daf3c435a16f56fda032df88185f",
+      "target_repo": "localeo-projet",
+      "target": "docs/juridique/communs/LOCALEO - Déclaration d'accessibilité - V1.pdf",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/juridique/communs/LOCALEO - Mentions Légales - V1.pdf",
+      "sha256": "5af575593aed7f27c282d2035a93814ced87d941e5e6f43d680f83dbb5a7566b",
+      "target_repo": "localeo-projet",
+      "target": "docs/juridique/communs/LOCALEO - Mentions Légales - V1.pdf",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/juridique/communs/LOCALEO - Politique de Confidentialité - V1.pdf",
+      "sha256": "c33240fe9163c5e39d9390c10fea2e7f067ef6b944e89fa8bc352795bf1ffc49",
+      "target_repo": "localeo-projet",
+      "target": "docs/juridique/communs/LOCALEO - Politique de Confidentialité - V1.pdf",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/juridique/communs/LOCALEO - Politique de Cookies - V1.pdf",
+      "sha256": "ccb76d3d874d70e36af832a14cb58b41e434d1ea80ce8dd10bc03bfc59a55c0c",
+      "target_repo": "localeo-projet",
+      "target": "docs/juridique/communs/LOCALEO - Politique de Cookies - V1.pdf",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/juridique/interne/Annexe A - Registre simplifié des traitements et tableau de conservation des données - V1.pdf",
+      "sha256": "09d55b5d06ed23b7926071faf0bb09728d52dd7c3044dbcea3ddcdc1370551f0",
+      "target_repo": "localeo-projet",
+      "target": "docs/juridique/interne/Annexe A - Registre simplifié des traitements et tableau de conservation des données - V1.pdf",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/juridique/interne/Annexe B - Registre des sous-traitants - V1.pdf",
+      "sha256": "a29b44d240da9b05a26344e5a5a42b06b813cc778986f801f83a5143f02cfdb1",
+      "target_repo": "localeo-projet",
+      "target": "docs/juridique/interne/Annexe B - Registre des sous-traitants - V1.pdf",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/juridique/interne/Annexe C - Gestion des Flux financiers Localeo - V1.pdf",
+      "sha256": "5adc75f7be9f43ab4bafe0d4834c756b68113d977d3318b5bc7c3ac2a74f8d8d",
+      "target_repo": "localeo-projet",
+      "target": "docs/juridique/interne/Annexe C - Gestion des Flux financiers Localeo - V1.pdf",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/juridique/interne/Annexe E - Vérification DPF CCT - V1.pdf",
+      "sha256": "bbb28246953a57b52aa8af2e544bc4171c1ba833c91f75e7e213a5eba8b00baf",
+      "target_repo": "localeo-projet",
+      "target": "docs/juridique/interne/Annexe E - Vérification DPF CCT - V1.pdf",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/juridique/live/LOCALEO - Conditions Générales d'Utilisation Localeo Live - V1.pdf",
+      "sha256": "ad79b2cc0f76b0fdd984474ca9e46ca9b3443db90dee95f99fda3fbb334fb7d2",
+      "target_repo": "localeo-projet",
+      "target": "docs/juridique/live/LOCALEO - Conditions Générales d'Utilisation Localeo Live - V1.pdf",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/juridique/live/LOCALEO - Notice de confidentialité Localeo Live - V1.pdf",
+      "sha256": "89efc7c6c718fe2ad75445e46fcbca02f0b8454b112a9de716fb7a4a930e9bdc",
+      "target_repo": "localeo-projet",
+      "target": "docs/juridique/live/LOCALEO - Notice de confidentialité Localeo Live - V1.pdf",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/juridique/marketplace/LOCALEO - Conditions Générales de Vente Marketplace - V1.pdf",
+      "sha256": "27c701ce847016d46ded83b26ac0e33ad0ea651f797b5b8b9ea5dc1b8a26b077",
+      "target_repo": "localeo-projet",
+      "target": "docs/juridique/marketplace/LOCALEO - Conditions Générales de Vente Marketplace - V1.pdf",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/juridique/marketplace/LOCALEO - Formulaire de Rétractation Localeo - V1.pdf",
+      "sha256": "ed56d6788657de3a1f00733944cd7affdfefa3641d08dd45033d69e839606345",
+      "target_repo": "localeo-projet",
+      "target": "docs/juridique/marketplace/LOCALEO - Formulaire de Rétractation Localeo - V1.pdf",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/juridique/publication/catalogue.json",
+      "sha256": "f5d302dd8395a777b2dd925fec180b19dd2dc7db7b26ae546f661e4f124f16ff",
+      "target_repo": "localeo-projet",
+      "target": "docs/juridique/publication/catalogue.json",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/juridique/publication/environments.json",
+      "sha256": "90752b9bd3b7beac89b678a9538cb0edd0a86b32a8c815e3888ef1969f5b9c8a",
+      "target_repo": "localeo-projet",
+      "target": "docs/juridique/publication/environments.json",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/MODELE-PROCEDURE.md",
+      "sha256": "12c16f56010653c01ca0c1eb36c480e5f642005f8c46c69d37d862e15722277f",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/MODELE-PROCEDURE.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/README.md",
+      "sha256": "6979e76873310c1dabc1f368fc3254bccf0c43d128996b947ef065b1c078a1f9",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/README.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/animation-session-navigateur.md",
+      "sha256": "fe32005f5e0261d60763e495061a6455374062240da834b7eb52a7b01d3fe497",
+      "target_repo": "localeo-projet",
+      "target": "docs/architecture/transverse/authentification/animation-session-navigateur.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/dashboard-commercial-backoffice.md",
+      "sha256": "b77af1ff536156d9507c86d993a26917343509f57ca8eb46838b772c6503ac55",
+      "target_repo": "localeo-projet",
+      "target": "docs/architecture/backend/backoffice/dashboard-commercial-backoffice.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/demonstration/README.md",
+      "sha256": "616f21bb5c8c4bd0b77796d5aa47bd750f675518ba46e4e3ce414a6a358fa7c2",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/demonstration/README.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/demonstration/configuration-cli.md",
+      "sha256": "bdda2cb4faa8404dba8aaade457bfe45a16a389189143d503951a94a7699c7b9",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/demonstration/configuration-cli.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/demonstration/donnees-generation.md",
+      "sha256": "618c411d6396773d59c0a5f4068bcba74cd22f9df48587ff34097812091df77b",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/demonstration/donnees-generation.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/demonstration/exploitation.md",
+      "sha256": "4c34cce2d9957bf6213e37c00676b093e877a51ab650ddf21923df0d7a1de245",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/demonstration/exploitation.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/demonstration/installation-restauration.md",
+      "sha256": "3632ef542c89ffc4d19c8ce68d55dce9adf663ea374612f47866985ad6e5d104",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/demonstration/installation-restauration.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/demonstration/realisation-recette.md",
+      "sha256": "5dac5bb27f012e3a46838989fdf542847da53cbf82ba4f2ba1df61ba54d28b99",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/demonstration/realisation-recette.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/design-system-interfaces-admin-specifiques.md",
+      "sha256": "6e730b2fc2d1ec1d20020e4c9b0793af88fe42d76fae6a0babe05c740d3a3647",
+      "target_repo": "localeo-projet",
+      "target": "docs/architecture/backend/backoffice/design-system-interfaces-admin-specifiques.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/exploitation/README.md",
+      "sha256": "9c3dc19e0e01a26c5405662be71b957fe076a22a088ee5a1cf490f98898bd8d3",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/exploitation/README.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/exploitation/activer-epic-50.md",
+      "sha256": "25194c216ae24a5b804c0357e220cd5de6a89ad3ec8ad3af3e8aa4b22a964764",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/exploitation/activer-epic-50.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/exploitation/annuler-validation-prestation.md",
+      "sha256": "99ba4319d1cd7b48ce906d83a0c029ae6b88586ea2b461a66ed20d92a1e83214",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/exploitation/annuler-validation-prestation.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/exploitation/corriger-accents-contenus-animation.md",
+      "sha256": "c17087d401dcb8e9cf252b86aab24c01411f024b5b1d9a15d5c0099b069fe79e",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/exploitation/corriger-accents-contenus-animation.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/exploitation/creer-offre-animation.md",
+      "sha256": "f944d469ef3430651fbfcfe69e8a627f9315f7657464a854c8846494c748c3b1",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/exploitation/creer-offre-animation.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/exploitation/desactiver-antivirus-documentaire.md",
+      "sha256": "fd8d03e02ccc04cc99ae737f2818159b31d60147bb0d45aa26d689947c736b81",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/exploitation/desactiver-antivirus-documentaire.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/exploitation/gerer-acces-animation.md",
+      "sha256": "ec855f4af7e2c1d648a72e9f1f2fa1e35cb0daca7c859aa57e57372ef5d00090",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/exploitation/gerer-acces-animation.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/exploitation/gerer-secret-pagination-api.md",
+      "sha256": "e3b17c5728675384e59c86ab1386fc0c010b834c0b1c79bc47ee9757522eb7cf",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/exploitation/gerer-secret-pagination-api.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/exploitation/gerer-souscriptions-animation.md",
+      "sha256": "fbec84ed70fd639a23011b6088ece09184fa587457580cf17546ec8c23144a28",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/exploitation/gerer-souscriptions-animation.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/exploitation/localeo-ops.md",
+      "sha256": "0f736bb3ccd27c8716dd23f26ee0c412e1a94c7a7de7604dd6062a86d24964bc",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/exploitation/localeo-ops.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/exploitation/localeo-support.md",
+      "sha256": "a476ca8bfaaad0f4408fbe6a4a2e1000ab71d14ce4492864980907e905c37f05",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/exploitation/localeo-support.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/exploitation/maintenir-georeferencement-communes.md",
+      "sha256": "9a7f3ce0d965c4234171544f2392c4c61a9705cb9b3c5dc99c058c76209e25c6",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/exploitation/maintenir-georeferencement-communes.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/exploitation/menu-animation-erp.md",
+      "sha256": "9ed8b6c055f61f9fa901446469abc961c124e966b66f8074c69ad21ceba02424",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/exploitation/menu-animation-erp.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/exploitation/onboarder-commercant-stripe-connect.md",
+      "sha256": "ce3c7e00eb7a4b44a03c247239e0c3cdc6e4c19caea5f4cf02b3220f2799acc4",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/exploitation/onboarder-commercant-stripe-connect.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/exploitation/piloter-reversements-stripe-connect.md",
+      "sha256": "cc655fbf6bf8d7404ce47e517e58207e43c1ebcbf2d55dccb480ffb052104e35",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/exploitation/piloter-reversements-stripe-connect.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/exploitation/profil-facturation-localeo.md",
+      "sha256": "866d7f1795bee474089181d76f4174c305492bfee5bc1b02945e277195f10d2f",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/exploitation/profil-facturation-localeo.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/exploitation/publier-actualite-localeo-live.md",
+      "sha256": "d1ca48c4673d185b4ae3e59eea1c1c3bbabe951bd24124c43573158a9bc81db8",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/exploitation/publier-actualite-localeo-live.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/exploitation/reconcilier-commande-lots-animation.md",
+      "sha256": "1ae250059b56b2a443612b3af26ea42cb8acdcccc6e20b1989f616553cfb2a23",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/exploitation/reconcilier-commande-lots-animation.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/exploitation/reconstituer-historique-validation-reversement.md",
+      "sha256": "848fc0756525fec9e0f10a7a2d37ca98bbf3fc3bf11836b3a3b6221a1e279cfb",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/exploitation/reconstituer-historique-validation-reversement.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/exploitation/reconstruire-vente-stripe-apres-incident.md",
+      "sha256": "a7a6fc9c8125a8c878c941b5cce0c604c23cd8d8b48a4d8349c3aa28c6ff0739",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/exploitation/reconstruire-vente-stripe-apres-incident.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/exploitation/reference-guide-backoffice.md",
+      "sha256": "c86c90330f4151938558939d9a54d8c91ec60ac2b1db310b430eb616f66627ca",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/exploitation/reference-guide-backoffice.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/exploitation/relancer-communication-client.md",
+      "sha256": "8f5bc23c566fab191909c58230c8e058d42bef1c585f3b8eec7de6caa9d993f5",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/exploitation/relancer-communication-client.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/exploitation/renvoyer-acces-coffret.md",
+      "sha256": "afb99f74768ee2c0dfa56acdce6ecbab97015271b39e15bdd7b5347faeac4538",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/exploitation/renvoyer-acces-coffret.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/exploitation/reprise-commissions.md",
+      "sha256": "0aee7c6710acf194f3e1a56da75a7b1261010c0ef6019f0d237497879ca5805b",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/exploitation/reprise-commissions.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/exploitation/traiter-blocage-reversement-stripe-connect.md",
+      "sha256": "78dc873a9397b6b7cec8974cb9baa6821e6efe7920633a19f4ff60b570cbcfc3",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/exploitation/traiter-blocage-reversement-stripe-connect.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/exploitation/traiter-blocage-wording-acquisition-bum.md",
+      "sha256": "6d0568f91b76a759bff9d3c1a681cfd3ea7107f8c6982aa9a394082308c3d532",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/exploitation/traiter-blocage-wording-acquisition-bum.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/exploitation/traiter-fermeture-refus-commercant.md",
+      "sha256": "8deca8e46f9136cc085dfff8dd6a55fcfa21d49ed699e32d51b94ef815341c11",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/exploitation/traiter-fermeture-refus-commercant.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/exploitation/traiter-message-support.md",
+      "sha256": "fc896a8e8e7bbce9f5e8c5cf83040f251256b365099ddcb4fbee3f480846a7bc",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/exploitation/traiter-message-support.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/exploitation/traiter-remboursement-achat.md",
+      "sha256": "bf62d6cea946370af707eec6d9a40a4945cb8800bd649b6210b18584f974e49b",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/exploitation/traiter-remboursement-achat.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/exploitation/valider-prestation-mode-secours.md",
+      "sha256": "b2517076a165ed028286cf4d7891ca543b14f32cec89e81aeae7e93d93cafbb4",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/exploitation/valider-prestation-mode-secours.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/formation/README.md",
+      "sha256": "446d64fa7ff3eff7ea8031279082f9d5fc9873606bc27bfc0e28552d7093140a",
+      "target_repo": "localeo-projet",
+      "target": "docs/produit/formation/backend/README.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/formation/guide-animation-preproduction.md",
+      "sha256": "432b6406a3043bd88aea3294b79b7d67b3957e6e6c17ae68e2fbf2fa954f3790",
+      "target_repo": "localeo-projet",
+      "target": "docs/produit/formation/backend/guide-animation-preproduction.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/formation/guide-backoffice-localeo.md",
+      "sha256": "fdd65d3a6c2a5f04a3c6b5ebcb8b51832d8202c66a04afe82c82ebf67956e65e",
+      "target_repo": "localeo-projet",
+      "target": "docs/produit/formation/backend/guide-backoffice-localeo.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/guide-corrections-marketplace-2026-09-06.md",
+      "sha256": "55f8fd65231fe866338a2895c8503c428f4b95d2e9a750b1cf370b35068a71a2",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/guide-corrections-marketplace-2026-09-06.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/pilotage-multi-territoires-backoffice.md",
+      "sha256": "e2b330fa872690ffd1bbb4e98091a3f2a2c888fe6dbdda763aaddc5207def9e0",
+      "target_repo": "localeo-projet",
+      "target": "docs/architecture/backend/backoffice/pilotage-multi-territoires-backoffice.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/recette/README.md",
+      "sha256": "b3d03404c0b9f9facc93b2700f5dace545115079e7d9b47660748984c87e0ab9",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/recette/README.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/recette/acces-commercant-avant-activation.md",
+      "sha256": "5f75aee4675c0b895b91986dd7d9e1443e9313ebcc2afd6d20c7f5ba4d569e90",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/recette/acces-commercant-avant-activation.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/recette/aptitudes-et-reouverture-onboard.md",
+      "sha256": "812f81650154e0661df3b7df74b2a54a55147ac4a6756f10832948798a17fdb3",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/recette/aptitudes-et-reouverture-onboard.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/recette/cahier-recette-generale-avant-mep.md",
+      "sha256": "8636a8ad34f45e07a13e9cb92d465da12bb87d938f7645386934301ea20b7e51",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/recette/cahier-recette-generale-avant-mep.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/recette/cahier-tests-backoffice.md",
+      "sha256": "3eaf96782faa6d0cb08037340294e03235775a51c0d04d31e9d6290aeb09d289",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/recette/cahier-tests-backoffice.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/recette/campagne-ouverture-base-vide/00-pilotage.md",
+      "sha256": "462dc81220fd23fd9c1b901ca731bd932c656ca69dad00ab6dd7724ca9d5df91",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/recette/campagne-ouverture-base-vide/00-pilotage.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/recette/campagne-ouverture-base-vide/01-backoffice.md",
+      "sha256": "094457a1b23b53823aebc709f7c212a39d3afeb97cd5c817a62d6ed34660554a",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/recette/campagne-ouverture-base-vide/01-backoffice.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/recette/campagne-ouverture-base-vide/02-marketplace.md",
+      "sha256": "43fb01f2b36f995ee8ec20cc99268139045649ff92ad36592841342c338ee877",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/recette/campagne-ouverture-base-vide/02-marketplace.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/recette/campagne-ouverture-base-vide/03-localeo-animation.md",
+      "sha256": "383c800fa5f89873d8a37ca8036f17252adfd611d270552a4d80404b6555a847",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/recette/campagne-ouverture-base-vide/03-localeo-animation.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/recette/campagne-ouverture-base-vide/04-localeo-commercant.md",
+      "sha256": "90a6abe48d417a01d32b276c0b3b9a4610f8ae27e3eecc68ac2de01aea1627c1",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/recette/campagne-ouverture-base-vide/04-localeo-commercant.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/recette/correctif-commission-prestation-euros.md",
+      "sha256": "1b1e19b8e478a01886d7cd3584b1556d77958fecf35028681f77bedc08351504",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/recette/correctif-commission-prestation-euros.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/recette/correctif-modeles-onboard.md",
+      "sha256": "5babf762a3f6ea9aa868a0de9dd42deef48fb02e991f013f5b1c46787744ce9e",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/recette/correctif-modeles-onboard.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/recette/correctif-suivi-convention-onboard.md",
+      "sha256": "fcb07b9faca8efcc508307b31c1608b7e1a11a7c3af5bbf7f7bd545b677e69d9",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/recette/correctif-suivi-convention-onboard.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/recette/correctifs-anomalies-septembre-2026.md",
+      "sha256": "fa5874c4334847047c9fc48e3c49a2eb5bbd2bf8afe96e45d3fe009bb210db32",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/recette/correctifs-anomalies-septembre-2026.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/recette/rapport-routes-administration-2026-09-06.md",
+      "sha256": "0bc094825332293220f30cba290ff645589d1b88fc048fb65fcd8aaedbd45bf8",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/recette/rapport-routes-administration-2026-09-06.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/recette/recette-backoffice-preproduction.md",
+      "sha256": "de32092c505f711290e993d1a5f6ae0f262ecdebd1ae702eb7b95270910a10df",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/recette/recette-backoffice-preproduction.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/recette/registre-routes-administration-2026-09-06.csv",
+      "sha256": "382f88e7923435bc4cacd8c74b4b6344c1ead275767ff2265eb330ab27e1b02f",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/recette/registre-routes-administration-2026-09-06.csv",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/recette/reinitialiser-base-recette.md",
+      "sha256": "9afa0bfbdee1d9d1e1c6c88f538de47c3174bcec9376d8c8e083d4a9b04bf821",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/recette/reinitialiser-base-recette.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/recette/resultats-acces-administration-2026-09-06.csv",
+      "sha256": "da376855ef3673f59eb21ece6f4803977e24f8f71f3b638b5c49d65414f4b519",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/recette/resultats-acces-administration-2026-09-06.csv",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/support-navigation-transverse-backoffice.md",
+      "sha256": "0224cb7ccdd88dae04140d524f925fc6afcda229bcaa8553fc5aa1ba7fc175cf",
+      "target_repo": "localeo-projet",
+      "target": "docs/architecture/backend/backoffice/support-navigation-transverse-backoffice.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/technique/README.md",
+      "sha256": "d50e572e32ecdc83c24bf31f18ebbe2fbe77aba50d4dcb6b910712ac5f336a10",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/technique/README.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/technique/configurer-un-environnement.md",
+      "sha256": "5181c9a9682a98eef1304605bbd0389e7a098d45448b706108cc739103bdcea9",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/technique/configurer-un-environnement.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/technique/deployer-et-verifier-schema.md",
+      "sha256": "e7e5f78e5d59fe20de9ee48bfcaaa9d0084f43ddee7bc4e55d5f6a1b85c9a78d",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/technique/deployer-et-verifier-schema.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/technique/diagnostiquer-incident-backend.md",
+      "sha256": "3cdc2aff85e1de8312d370fef9de2394aab29b6a0f352b1a1a0ef966d3ab63b4",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/technique/diagnostiquer-incident-backend.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/technique/diagnostiquer-sante-systeme.md",
+      "sha256": "cfd1dc9595fef565e3eb134321a3536e7ad39ac8b818881f5c66904d143422f3",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/technique/diagnostiquer-sante-systeme.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/technique/executer-campagne-tests-performance-api.md",
+      "sha256": "e8700ac944b36fa90746f8d9a551ab100d3154cc5bed384d37733f0bdfdb47d2",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/technique/executer-campagne-tests-performance-api.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/technique/faire-rotation-cles-qr.md",
+      "sha256": "5c53cea00edcf99a1613dc8a3db4c1c34b5b2a1eabba3b5740cfc143eac8214c",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/technique/faire-rotation-cles-qr.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/technique/gerer-api-keys-internes.md",
+      "sha256": "ac7c0c41f6c98ef5a9194b3ff0a0be7aea30f68a900603a744591a067b36cc76",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/technique/gerer-api-keys-internes.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/technique/planifier-et-superviser-batchs.md",
+      "sha256": "bf372e2351b561bcd72889ec865db7ed1e45ea5e57757a300e321ebda3229a0c",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/technique/planifier-et-superviser-batchs.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/technique/provisionner-referentiels.md",
+      "sha256": "b41fd85790184ef2a9b58957172aebc0b527babbb867291597164157f6397d8b",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/technique/provisionner-referentiels.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/technique/publier-documents-juridiques.md",
+      "sha256": "1096caab23e7d5cba840fc7d4115dbf97b3aee69aad73643b5650d8244747a5b",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/technique/publier-documents-juridiques.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/technique/rattraper-payouts-stripe-connect.md",
+      "sha256": "5188eea146a601d934dd9cc475584c02ad8d269ab30ba6e8b2dcdea35467967a",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/technique/rattraper-payouts-stripe-connect.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/technique/reference-batchs.md",
+      "sha256": "2119cbe08e17aed98baf7fce9890d8a27c527c5b1f26d42732b12e7fc5d476e6",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/technique/reference-batchs.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/technique/reference-configuration-environnement.md",
+      "sha256": "3e271d7a6462daabd1cade3997b2fd1d675b9f0d667b19ce3f7f0df0aad60ff0",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/technique/reference-configuration-environnement.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/technique/reference-guide-exploitation-plateforme.md",
+      "sha256": "56000e7c2ccf2474785064e6c5436432a471b4d9fa928c9258936de6020cde29",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/technique/reference-guide-exploitation-plateforme.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/technique/reprendre-expiration-coffrets.md",
+      "sha256": "f229dac0061d96793e155fb62eaba36305fc347f430904cd362e55b54e4e96f3",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/technique/reprendre-expiration-coffrets.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/technique/reprendre-notifications-sortantes.md",
+      "sha256": "af23abbba2b493d79e00860e7c55a01946d3df01726d55eac44b4baa1a0783f8",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/technique/reprendre-notifications-sortantes.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/technique/sessions-administration.md",
+      "sha256": "48aa3505f3a22904074584d7bf0e7bcdd20f73726d8a4bc34e9a8c49a185003a",
+      "target_repo": "localeo-projet",
+      "target": "docs/exploitation/technique/sessions-administration.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/ux-menu-backoffice.md",
+      "sha256": "8d778524a4aafb93c9a8fef4b1fc1557396d0931620c046792089d1416e94ad3",
+      "target_repo": "localeo-projet",
+      "target": "docs/architecture/backend/backoffice/ux-menu-backoffice.md",
+      "action": "doublon-supprime",
+      "reason": "Export déjà vérifié contre la source canonique ; aucune modification locale."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "output/pdf/localeo_ops_backoffice_aide_operationnelle.pdf",
+      "sha256": "81fc44b30fa1a5c0cc8f71a75676e0cfc263d6264ebe2cd463b85b7e05239671",
+      "target_repo": "localeo-projet",
+      "target": "livrables/exploitation/backend/localeo_ops_backoffice_aide_operationnelle.pdf",
+      "action": "deplace",
+      "reason": "PDF utile aux procédures ERP, désormais centralisé."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "output/pdf/localeo_ops_backoffice_localeo_guide_formation.pdf",
+      "sha256": "568297ae88c6f4b20dca623065eb4b514574049db236263cf33e431aaf2a87c7",
+      "target_repo": "localeo-projet",
+      "target": "livrables/exploitation/backend/localeo_ops_backoffice_localeo_guide_formation.pdf",
+      "action": "deplace",
+      "reason": "PDF utile aux procédures ERP, désormais centralisé."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "output/pdf/localeo_ops_cahier_tests_backoffice.pdf",
+      "sha256": "7f801e5da05e0c11c190e55b2711c14b2b29cbb6a83adba538a54ebed0f845ae",
+      "target_repo": "localeo-projet",
+      "target": "livrables/exploitation/backend/localeo_ops_cahier_tests_backoffice.pdf",
+      "action": "deplace",
+      "reason": "PDF utile aux procédures ERP, désormais centralisé."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "output/pdf/localeo_ops_configuration_environnement.pdf",
+      "sha256": "5e2cbcf5fb59a771888e8c736fc6dd1e8f74e9ae8ffac1b09da9cec73d21abb7",
+      "target_repo": "localeo-projet",
+      "target": "livrables/exploitation/backend/localeo_ops_configuration_environnement.pdf",
+      "action": "deplace",
+      "reason": "PDF utile aux procédures ERP, désormais centralisé."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "output/pdf/localeo_ops_exploitation.pdf",
+      "sha256": "4b7ace95011f2dbfdaed2be629d2ec185ce1816da785612026c404e9f5afd250",
+      "target_repo": "localeo-projet",
+      "target": "livrables/exploitation/backend/localeo_ops_exploitation.pdf",
+      "action": "deplace",
+      "reason": "PDF utile aux procédures ERP, désormais centralisé."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "output/pdf/localeo_ops_mode_secours_telephonique.pdf",
+      "sha256": "e27745a2431bdcb1d701c85f781af05dde886f826aaebb6b7a104a69b10d4551",
+      "target_repo": "localeo-projet",
+      "target": "livrables/exploitation/backend/localeo_ops_mode_secours_telephonique.pdf",
+      "action": "deplace",
+      "reason": "PDF utile aux procédures ERP, désormais centralisé."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "output/pdf/localeo_ops_onboarding_commercant_stripe_connect.pdf",
+      "sha256": "1e65a2e0ec25a368898f2e8deb932f4ab546c9d203070f654e40013a7a33913f",
+      "target_repo": "localeo-projet",
+      "target": "livrables/exploitation/backend/localeo_ops_onboarding_commercant_stripe_connect.pdf",
+      "action": "deplace",
+      "reason": "PDF utile aux procédures ERP, désormais centralisé."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "output/pdf/localeo_ops_ordonnancement_batchs.pdf",
+      "sha256": "73b3df46625a312148f5940cf7cd9a4457f2b4ec0fb379bc6d9a20224ccf466d",
+      "target_repo": "localeo-projet",
+      "target": "livrables/exploitation/backend/localeo_ops_ordonnancement_batchs.pdf",
+      "action": "deplace",
+      "reason": "PDF utile aux procédures ERP, désormais centralisé."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "output/pdf/localeo_ops_procedures_operationnelles.pdf",
+      "sha256": "b1fcd3fcd0f8a4d7a099bf8490a126ed9e77ceb6cd5421367ab310bad4884e4d",
+      "target_repo": "localeo-projet",
+      "target": "livrables/exploitation/backend/archives/localeo_ops_procedures_operationnelles.pdf",
+      "action": "archive-deplacee",
+      "reason": "Recueil historique sans source reproductible ; les procédures Markdown actuelles font autorité."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "output/pdf/localeo_ops_reversements_paiements_manuels.pdf",
+      "sha256": "5d6bb68e2623ea2bb7438d1940431f1eef7c36bd2479ef0c7fa824b060867a49",
+      "target_repo": null,
+      "target": null,
+      "action": "obsolete-supprime",
+      "reason": "EPIC 12 : flux de paiements manuels décommissionné ; procédure Stripe Connect courante."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "output/pdf/localeo_ops_reversements_stripe_connect.pdf",
+      "sha256": "eca4ba988650fb25c6a2e1d28af9f1b38c5d6b0b3b6c0b05041924497e27253f",
+      "target_repo": "localeo-projet",
+      "target": "livrables/exploitation/backend/localeo_ops_reversements_stripe_connect.pdf",
+      "action": "deplace",
+      "reason": "PDF utile aux procédures ERP, désormais centralisé."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "output/pdf/v1.1/Annexe C - Gestion des Flux financiers Localeo - V1.pdf",
+      "sha256": "5adc75f7be9f43ab4bafe0d4834c756b68113d977d3318b5bc7c3ac2a74f8d8d",
+      "target_repo": "localeo-projet",
+      "target": "docs/juridique/interne/Annexe C - Gestion des Flux financiers Localeo - V1.pdf",
+      "action": "doublon-identique-supprime",
+      "reason": "Empreinte SHA-256 identique au document canonique."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "output/pdf/v1.1/LOCALEO - Conditions Générales de Vente Marketplace - V1.pdf",
+      "sha256": "27c701ce847016d46ded83b26ac0e33ad0ea651f797b5b8b9ea5dc1b8a26b077",
+      "target_repo": "localeo-projet",
+      "target": "docs/juridique/marketplace/LOCALEO - Conditions Générales de Vente Marketplace - V1.pdf",
+      "action": "doublon-identique-supprime",
+      "reason": "Empreinte SHA-256 identique au document canonique."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "output/pdf/v1.1/LOCALEO - Conditions particulières Localeo Animation - V1.pdf",
+      "sha256": "99690abd83325fd2eda216f813518b9ddd3c0545a06ad1bd4971c6b9d0806513",
+      "target_repo": "localeo-projet",
+      "target": "docs/juridique/animation/LOCALEO - Conditions particulières Localeo Animation - V1.pdf",
+      "action": "doublon-identique-supprime",
+      "reason": "Empreinte SHA-256 identique au document canonique."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "output/pdf/v1.1/LOCALEO - Politique de Confidentialité - V1.pdf",
+      "sha256": "c33240fe9163c5e39d9390c10fea2e7f067ef6b944e89fa8bc352795bf1ffc49",
+      "target_repo": "localeo-projet",
+      "target": "docs/juridique/communs/LOCALEO - Politique de Confidentialité - V1.pdf",
+      "action": "doublon-identique-supprime",
+      "reason": "Empreinte SHA-256 identique au document canonique."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "output/docx/v1.1/Annexe C - Gestion des Flux financiers Localeo - V1.docx",
+      "sha256": "2da4ae8440af7c0718644bc34cda48490dd56305ac48cb2d66dd4ba8a101622c",
+      "target_repo": "localeo-projet",
+      "target": "livrables/juridique/v1.1/Annexe C - Gestion des Flux financiers Localeo - V1.docx",
+      "action": "deplace",
+      "reason": "Source éditable et traçabilité juridique à conserver."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "output/docx/v1.1/LOCALEO - Conditions Générales de Vente Marketplace - V1.docx",
+      "sha256": "11bcc99f75efcd7869ad02d25e3594bbe5d91beb4c4081ff37930f4aafac9a5b",
+      "target_repo": "localeo-projet",
+      "target": "livrables/juridique/v1.1/LOCALEO - Conditions Générales de Vente Marketplace - V1.docx",
+      "action": "deplace",
+      "reason": "Source éditable et traçabilité juridique à conserver."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "output/docx/v1.1/LOCALEO - Conditions particulières Localeo Animation - V1.docx",
+      "sha256": "7d3e5ae0de9cb1dd911358714656ee2832d9bd6e938874ccb4487872fa2cd4c4",
+      "target_repo": "localeo-projet",
+      "target": "livrables/juridique/v1.1/LOCALEO - Conditions particulières Localeo Animation - V1.docx",
+      "action": "deplace",
+      "reason": "Source éditable et traçabilité juridique à conserver."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "output/docx/v1.1/LOCALEO - Politique de Confidentialité - V1.docx",
+      "sha256": "96e6c0631597310884646b62dcc35f48dd99a5dee5f2c5b8647510c144d35a2b",
+      "target_repo": "localeo-projet",
+      "target": "livrables/juridique/v1.1/LOCALEO - Politique de Confidentialité - V1.docx",
+      "action": "deplace",
+      "reason": "Source éditable et traçabilité juridique à conserver."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "output/docx/v1.1/MANIFESTE_CORRECTIONS_V1_1.json",
+      "sha256": "e2153e081934666f1fc27fb39b7be303984b7dffccb9d5b678b0609a04ebea1d",
+      "target_repo": "localeo-projet",
+      "target": "livrables/juridique/v1.1/MANIFESTE_CORRECTIONS_V1_1.json",
+      "action": "deplace",
+      "reason": "Source éditable et traçabilité juridique à conserver."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "ux/localeo-animation/localeo-animation-maquette-v1.zip",
+      "sha256": "055296997b3c3404f0dcabc0a42a84d5381c8e4f7d9abf9219b1a5038799b5ab",
+      "target_repo": "localeo-projet",
+      "target": "livrables/design/animation/localeo-animation-maquette-v1.zip",
+      "action": "deplace",
+      "reason": "Maquette référencée par les spécifications ; V1 historique et V2 courante."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "ux/localeo-animation/localeo-animation-maquette-v2.zip",
+      "sha256": "031da5f0edd40b0d916817d451f1abe2723a4f71fb8357f2348a6772322149c8",
+      "target_repo": "localeo-projet",
+      "target": "livrables/design/animation/localeo-animation-maquette-v2.zip",
+      "action": "deplace",
+      "reason": "Maquette référencée par les spécifications ; V1 historique et V2 courante."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/README.md",
+      "sha256": "f2a69f4a77f8d15accb4c0d15b9f68fdd2d270e2ce483e491ec9c827f696c0fc",
+      "target_repo": "localeo-projet",
+      "target": "README.md",
+      "action": "renvoi-obsolete-supprime",
+      "reason": "Ancien index des copies runtime ; instructions remplacées par README backend et guide central."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/demonstration/demo.example.json",
+      "sha256": "2aa940dcbc19ad8d47312e8beee080093e4c5536b2a5eb334674d15c4e929a55",
+      "target_repo": "localeo-backend",
+      "target": "scripts/demonstration/examples/demo.example.json",
+      "action": "outil-relocalise",
+      "reason": "Exemple ou script exécutable conservé avec son outillage, copie documentaire retirée."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/demonstration/operator.example.json",
+      "sha256": "c3a4d75519ce4e329bf448283adc9d47a89ecb3d6e88b593e1786242a3dc6a2f",
+      "target_repo": "localeo-backend",
+      "target": "scripts/demonstration/examples/operator.example.json",
+      "action": "outil-relocalise",
+      "reason": "Exemple ou script exécutable conservé avec son outillage, copie documentaire retirée."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/ops/technique/scripts/generer_api_key.ps1",
+      "sha256": "e86b73f2bc5ec25e2fb2067f460be659dcf3e6114e81136796052a7cc6c9100b",
+      "target_repo": "localeo-backend",
+      "target": "scripts/securite/generer_api_key.ps1",
+      "action": "outil-relocalise",
+      "reason": "Exemple ou script exécutable conservé avec son outillage, copie documentaire retirée.",
+      "target_before_scripts_reorganisation": "scripts/generer_api_key.ps1"
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/specifications/epic-41-api/openapi.json",
+      "sha256": "1da75fa40e3abf0d103963b909fbde2b22d5cb856acee8cfb2c61b9b782b8acc",
+      "target_repo": "localeo-projet",
+      "target": "docs/specifications/epic-41-api/openapi.json",
+      "target_before_sha256": "9d685d665d42b836c26aba696c0024ae98c8dfd61dac668f18db1bd5ff65f306",
+      "target_sha256": "dfc150ffebee38757d49dbf095beab0dd5d966a8aa4ed7a6319817311ddccb99",
+      "action": "contrat-consolide",
+      "reason": "Contrat régénéré depuis le code courant ; chemins et annotations utiles conservés, anciennes méthodes non implémentées retirées."
+    },
+    {
+      "repo": "localeo-backend",
+      "path": "docs/specifications/epic-42-localeo-live/openapi.json",
+      "sha256": "77dcdd08d13e6fbb421b2722502c018ebfed948abf5419df994c4318d1658f05",
+      "target_repo": "localeo-projet",
+      "target": "docs/specifications/epic-42-localeo-live/openapi.json",
+      "target_before_sha256": "616694dc2398412d48f021d3bc9c39fa217c7855a63494b9783e823400b2cd5b",
+      "target_sha256": "36a0ccfe6a2675d344a6390cb01d2d97a8fe87c8f45252cc8c900816d5dc8d6d",
+      "action": "contrat-consolide",
+      "reason": "Contrat régénéré depuis le code courant ; chemins et annotations utiles conservés, anciennes méthodes non implémentées retirées."
+    }
+  ]
+}

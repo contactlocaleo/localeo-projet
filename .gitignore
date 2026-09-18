@@ -1,0 +1,12 @@
+.env
+.env.*
+!.env.example
+__pycache__/
+*.py[cod]
+.pytest_cache/
+tmp/
+*.zip
+
+# Sources de conception canoniques, référencées par les spécifications.
+!livrables/design/animation/localeo-animation-maquette-v1.zip
+!livrables/design/animation/localeo-animation-maquette-v2.zip

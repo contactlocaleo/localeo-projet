@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Localeo — Proposition de hero</title>
+  <link rel="stylesheet" href="hero.css">
+</head>
+<body>
+  <header class="header">
+    <a class="brand" href="/accueil" target="_top" aria-label="Localeo, accueil"><img src="../../../../../localeo-marketplace/public/img/header-mark.svg" alt="" width="35" height="35"><span>localeo<span class="brand-dot">.</span></span></a>
+    <nav aria-label="Navigation principale"><a href="/recherche" target="_top">Les coffrets</a><a href="/recherche?scope=commercants" target="_top">Les bonnes adresses</a></nav>
+    <a class="header-cta" href="/recherche" target="_top">Explorer le local <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main"></main>
+  <script>
+    const variants = {
+      1: { name: 'Immersion', image: '16-boulangerie-generations.png', alt: 'Une enfant, un père et une femme âgée découvrent ensemble les pâtisseries en vitrine, accueillis par une boulangère dans une rue animée.', kicker: 'Les belles découvertes commencent ici', title: 'Tout près.<br>Tellement à vivre.', text: 'Des expériences chez vos commerçants, réunies dans un coffret à offrir ou à s’offrir.', note: 'Un coffret numérique. De vraies rencontres.' },
+      2: { name: 'Éditorial', image: '17-primeur-generations.png', alt: 'Un jeune adulte goûte un fruit tandis qu’une femme âgée échange avec la commerçante lors d’une dégustation de quartier.', kicker: 'Des adresses. Des visages. Des moments.', title: 'Le bonheur <br>est au coin<br>de la rue.', text: 'Entrez chez les commerçants qui font vivre votre ville. Découvrez leurs expériences avec les coffrets Localeo.', note: 'À découvrir près de chez vous' },
+      3: { name: 'À partager', image: '18-chocolatier-generations.png', alt: 'Une jeune femme, un homme âgé et un jeune homme découvrent ensemble le travail d’une chocolatière, à côté d’une terrasse animée.', kicker: 'Les cadeaux qui nous rapprochent', title: 'Offrez du local.<br>Partagez l’essentiel.', text: 'Une pause gourmande, une belle découverte, un moment ensemble. Tout commence avec un coffret Localeo.', note: 'À recevoir par e-mail. À vivre sur place.' }
+    };
+    const id = ['1', '2', '3'].includes(new URLSearchParams(location.search).get('v')) ? new URLSearchParams(location.search).get('v') : '1';
+    const v = variants[id];
+    document.body.className = 'variant-' + id;
+    document.title = 'Localeo — ' + v.name;
+    const search = `<form class="search" action="/recherche" target="_top" role="search"><label class="sr-only" for="q">Ville, commerce ou envie</label><span class="search-icon" aria-hidden="true">⌕</span><input id="q" name="q" placeholder="Une ville, une envie…" autocomplete="off"><button type="submit" aria-label="Rechercher"><span class="search-label">Explorer</span> <span aria-hidden="true">→</span></button></form>`;
+    const actions = id === '1' ? search : `<div class="actions"><a class="primary" href="/recherche" target="_top">${id === '2' ? 'Découvrir les coffrets' : 'Trouver le bon coffret'} <span aria-hidden="true">↗</span></a>${id === '3' ? '' : '<a class="secondary" href="/recherche?scope=commercants" target="_top">Explorer les adresses <span aria-hidden="true">→</span></a>'}</div>`;
+    document.getElementById('main').innerHTML = `<section class="hero" aria-labelledby="hero-title"><div class="visual"><img src="../hero-variantes/${v.image}" alt="${v.alt}" fetchpriority="high"></div><div class="copy"><p class="kicker">${v.kicker}</p><h1 id="hero-title">${v.title}</h1><div class="details"><p class="lead">${v.text}</p>${actions}<p class="note">${v.note}</p></div></div><div class="signature"><span>Découvrir · Offrir · Vivre local</span><span aria-hidden="true">↘</span></div></section>`;
+  </script>
+</body>
+</html>
+

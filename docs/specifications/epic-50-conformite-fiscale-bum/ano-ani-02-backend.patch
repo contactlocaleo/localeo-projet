@@ -1,0 +1,369 @@
+diff --git a/app/domaine/conformite_fiscale_bum/dossier_facturation_animation.py b/app/domaine/conformite_fiscale_bum/dossier_facturation_animation.py
+new file mode 100644
+--- /dev/null
++++ b/app/domaine/conformite_fiscale_bum/dossier_facturation_animation.py
+@@ -0,0 +1,38 @@
++from datetime import timedelta
++
++from app.domaine.shared.exceptions.regle_metier_violee import RegleMetierViolee
++
++
++def synthese_facturation(droits, validations, demandes, *, lots_materialises):
++    """Count coverage of each expected right, never just existing requests."""
++    remplacees = {d["previous_id"] for d in demandes if d["status"] != "CANCELLED" and d["previous_id"]}
++    actives = [d for d in demandes if d["status"] != "CANCELLED" and d["id"] not in remplacees]
++    couvertes = set()
++    demandees = set()
++    for demande in actives:
++        demandees.update(demande["validations"])
++        if demande["status"] == "PROVIDED" and demande["document"] and demande["correction_type"] != "CREDIT_NOTE":
++            couvertes.update(demande["validations"])
++    attendus = set(droits)
++    executes = {droit for droit in attendus if droit in validations}
++    recus = {droit for droit in executes if validations[droit] in couvertes}
++    sans_demande = {droit for droit in executes if validations[droit] not in demandees}
++    return {
++        "expectedPrestations": len(attendus), "executedPrestations": len(executes),
++        "receivedPrestations": len(recus), "notExecutedPrestations": len(attendus - executes),
++        "missingRequests": len(sans_demande),
++        "pendingPrestations": len(executes - recus - sans_demande),
++        "lotsMaterialized": lots_materialises,
++        "complete": bool(attendus) and lots_materialises and recus == attendus,
++    }
++
++
++def prochaine_relance(created_at, last_reminded_at):
++    return (last_reminded_at or created_at) + timedelta(days=1)
++
++
++def verifier_relance(status, now, available_at, *, replaced=False):
++    if replaced or status not in {"REQUESTED", "ACKNOWLEDGED", "PROCESSING"}:
++        raise RegleMetierViolee("Cette demande ne peut pas etre relancee")
++    if now < available_at:
++        raise RegleMetierViolee("Une relance est possible au plus tot 24 heures apres le dernier envoi")
+diff --git a/app/application/conformite_fiscale_bum/service_dossier_facturation_animation.py b/app/application/conformite_fiscale_bum/service_dossier_facturation_animation.py
+new file mode 100644
+--- /dev/null
++++ b/app/application/conformite_fiscale_bum/service_dossier_facturation_animation.py
+@@ -0,0 +1,131 @@
++import hashlib
++from html import escape
++from uuid import UUID
++
++from sqlalchemy import select
++from sqlalchemy.orm import selectinload
++
++from app.application.conformite_fiscale_bum.service_demandes_facture_groupees import ServiceDemandesFactureGroupees
++from app.application.exploitation.services.service_preparation_email import ServicePreparationEmail
++from app.domaine.conformite_fiscale_bum.dossier_facturation_animation import (
++    prochaine_relance, synthese_facturation, verifier_relance,
++)
++from app.domaine.shared.exceptions.regle_metier_violee import RegleMetierViolee
++from app.domaine.shared.exceptions.ressource_domaine_introuvable import RessourceDomaineIntrouvable
++from app.infrastructure.persistence.epic50_models import DemandeFactureGroupeeOrm, LigneDemandeFactureGroupeeOrm
++from app.infrastructure.persistence.mappers import from_email_sortant
++from app.infrastructure.persistence.models import (
++    AchatCoffretOrm, AnimationOrm, CoffretInstanceOrm, CommandeAchatOrm,
++    CommercantOrm, EvenementAuditOrm, StatutPrestationCoffretInstanceOrm, ValidationPrestationOrm,
++)
++from app.utils.dates import utc_now_naive
++
++RELANCE = "ANIMATION_INVOICE_REQUEST_REMINDED"
++
++
++class ServiceDossierFacturationAnimation:
++    def __init__(self, session):
++        self.session = session
++        self.demandes = ServiceDemandesFactureGroupees(session)
++
++    def _animation(self, animation_id, partenaire_id, commune_id):
++        animation = self.session.execute(select(AnimationOrm).where(
++            AnimationOrm.id == UUID(str(animation_id)), AnimationOrm.partenaire_id == UUID(str(partenaire_id)),
++            AnimationOrm.commune_id == commune_id,
++        )).scalar_one_or_none()
++        if animation is None:
++            raise RessourceDomaineIntrouvable("Animation introuvable")
++        return animation
++
++    def _relances(self, request_id):
++        return self.session.execute(select(EvenementAuditOrm).where(
++            EvenementAuditOrm.action == RELANCE, EvenementAuditOrm.ressource_type == "demande_facture_groupee",
++            EvenementAuditOrm.ressource_id == str(request_id),
++        ).order_by(EvenementAuditOrm.date_evenement.desc())).scalars().all()
++
++    def _payload(self, row, replaced=False):
++        payload = self.demandes._payload(row)
++        merchant = self.session.get(CommercantOrm, row.commercant_id)
++        reminders = self._relances(row.id)
++        last = reminders[0].date_evenement if reminders else None
++        available = prochaine_relance(row.created_at, last)
++        payload.update({
++            "commandeId": str(row.commande_id),
++            "commercantNom": merchant.nom if merchant else "Commercant non renseigne",
++            "reminderCount": len(reminders), "lastRemindedAt": last,
++            "nextReminderAt": available,
++            "canRemind": not replaced and row.statut in {"REQUESTED", "ACKNOWLEDGED", "PROCESSING"}
++                and utc_now_naive() >= available and bool(merchant and merchant.contact_email),
++        })
++        return payload
++
++    def consulter(self, animation_id, partenaire_id, commune_id):
++        animation = self._animation(animation_id, partenaire_id, commune_id)
++        orders = self.session.execute(select(CommandeAchatOrm).where(
++            CommandeAchatOrm.contexte_type == "ANIMATION_LOTS", CommandeAchatOrm.contexte_id == animation.id,
++        ).options(selectinload(CommandeAchatOrm.lignes))).scalars().all()
++        order_ids = [order.id for order in orders]
++        rows = self.session.execute(self.demandes._requete_demandeur("ANIMATION_PARTNER", partenaire_id, commune_id)
++            .where(DemandeFactureGroupeeOrm.commande_id.in_(order_ids))
++            .order_by(DemandeFactureGroupeeOrm.created_at.desc())).scalars().all()
++        instances = self.session.execute(select(CoffretInstanceOrm).join(AchatCoffretOrm,
++            AchatCoffretOrm.id == CoffretInstanceOrm.achat_id).where(
++            AchatCoffretOrm.commande_achat_id.in_(order_ids),
++        )).scalars().all()
++        instance_ids = [instance.id for instance in instances]
++        rights = self.session.execute(select(StatutPrestationCoffretInstanceOrm).where(
++            StatutPrestationCoffretInstanceOrm.coffret_instance_id.in_(instance_ids),
++        )).scalars().all()
++        validations = self.session.execute(select(ValidationPrestationOrm).where(
++            ValidationPrestationOrm.coffret_instance_id.in_(instance_ids), ValidationPrestationOrm.annulee_at.is_(None),
++        )).scalars().all()
++        lines = self.session.execute(select(LigneDemandeFactureGroupeeOrm).where(
++            LigneDemandeFactureGroupeeOrm.demande_id.in_([row.id for row in rows]),
++        )).scalars().all()
++        expected_instances = sum(line.quantite for order in orders if order.paid_at for line in order.lignes)
++        materialized = expected_instances > 0 and len(instances) >= expected_instances
++        # A missing rights snapshot must not make a partially loaded lot complete.
++        materialized = materialized and set(instance_ids) <= {right.coffret_instance_id for right in rights}
++        summary = synthese_facturation(
++            {str(right.id) for right in rights},
++            {str(v.statut_prestation_coffret_instance_id): str(v.id) for v in validations},
++            [{"id": str(row.id), "status": row.statut, "previous_id": str(row.previous_request_id) if row.previous_request_id else None,
++              "document": bool(row.invoice_document_id), "correction_type": row.correction_type,
++              "validations": {str(line.validation_prestation_id) for line in lines if line.demande_id == row.id}} for row in rows],
++            lots_materialises=materialized,
++        )
++        replaced = {row.previous_request_id for row in rows if row.statut != "CANCELLED" and row.previous_request_id}
++        return {"animationId": str(animation.id), "animationNom": animation.nom, "summary": summary,
++                "requests": [self._payload(row, row.id in replaced) for row in rows]}
++
++    def relancer(self, request_id, partenaire_id, commune_id, key):
++        # Lock the same row used by merchant transitions, serializing concurrent reminders.
++        row = self.session.execute(self.demandes._requete_demandeur("ANIMATION_PARTNER", partenaire_id, commune_id)
++            .where(DemandeFactureGroupeeOrm.id == UUID(str(request_id)))
++            .with_for_update(of=DemandeFactureGroupeeOrm)).scalar_one_or_none()
++        if row is None:
++            raise RessourceDomaineIntrouvable("Demande groupee introuvable")
++        digest = hashlib.sha256(key.encode()).hexdigest()
++        reminders = self._relances(row.id)
++        if any(event.event_metadata.get("idempotencyHash") == digest for event in reminders):
++            return {"id": str(row.id), "idempotentReplay": True}
++        replaced = self.session.execute(select(DemandeFactureGroupeeOrm.id).where(
++            DemandeFactureGroupeeOrm.previous_request_id == row.id, DemandeFactureGroupeeOrm.statut != "CANCELLED",
++        )).first() is not None
++        now = utc_now_naive()
++        verifier_relance(row.statut, now, prochaine_relance(row.created_at,
++            reminders[0].date_evenement if reminders else None), replaced=replaced)
++        merchant = self.session.get(CommercantOrm, row.commercant_id)
++        if merchant is None or not merchant.contact_email:
++            raise RegleMetierViolee("Le commercant ne dispose pas d'une adresse email de contact")
++        message = f"La facture de la demande {row.reference} est toujours attendue. Consultez votre espace Localeo Finance."
++        email = ServicePreparationEmail().preparer_email(
++            merchant.contact_email, f"Relance de la demande {row.reference}", f"<p>{escape(message)}</p>", message,
++            "RELANCE_DEMANDE_FACTURE_GROUPEE", correlation_id=str(row.id),
++            source_type="RELANCE_DEMANDE_FACTURE_GROUPEE", source_id=f"{row.id}:{digest}",
++        )
++        self.session.add(from_email_sortant(email))
++        self.session.add(EvenementAuditOrm(action=RELANCE, phase="success", date_evenement=now,
++            acteur=f"partenaire-animation:{partenaire_id}", commercant_id=row.commercant_id,
++            ressource_type="demande_facture_groupee", ressource_id=str(row.id), event_metadata={"idempotencyHash": digest}))
++        return {"id": str(row.id), "idempotentReplay": False, "nextReminderAt": prochaine_relance(row.created_at, now)}
+diff --git a/tests/security/test_animation_invoice_dossier.py b/tests/security/test_animation_invoice_dossier.py
+new file mode 100644
+--- /dev/null
++++ b/tests/security/test_animation_invoice_dossier.py
+@@ -0,0 +1,108 @@
++from datetime import datetime, timedelta
++from types import SimpleNamespace
++from uuid import UUID
++
++import pytest
++
++from app.domaine.conformite_fiscale_bum.dossier_facturation_animation import (
++    prochaine_relance, synthese_facturation, verifier_relance,
++)
++from app.domaine.shared.exceptions.regle_metier_violee import RegleMetierViolee
++
++
++def demande(id="request", status="PROVIDED", **kwargs):
++    return {"id": id, "status": status, "previous_id": None, "document": True,
++            "correction_type": None, "validations": {"v1"}, **kwargs}
++
++
++def test_complete_requires_all_expected_prestations_not_only_existing_requests():
++    summary = synthese_facturation({"right1", "right2"}, {"right1": "v1"}, [demande()], lots_materialises=True)
++    assert summary["complete"] is False
++    assert summary["receivedPrestations"] == 1
++    assert summary["notExecutedPrestations"] == 1
++    summary = synthese_facturation({"right1", "right2"}, {"right1": "v1", "right2": "v2"}, [demande()], lots_materialises=True)
++    assert summary["complete"] is False
++    assert summary["missingRequests"] == 1
++
++
++@pytest.mark.parametrize("rows,materialized", [([], True), ([demande()], False), ([demande(status="PROCESSING")], True),
++    ([demande(document=False)], True), ([demande(status="CANCELLED")], True),
++    ([demande(correction_type="CREDIT_NOTE")], True)])
++def test_unconfirmed_missing_cancelled_or_credited_documents_never_complete(rows, materialized):
++    assert not synthese_facturation({"r"}, {"r": "v1"}, rows, lots_materialises=materialized)["complete"]
++
++
++def test_all_documents_complete_and_corrections_supersede_original():
++    original = demande()
++    assert synthese_facturation({"r"}, {"r": "v1"}, [original], lots_materialises=True)["complete"]
++    correction = demande("correction", "PROCESSING", previous_id="request")
++    assert not synthese_facturation({"r"}, {"r": "v1"}, [original, correction], lots_materialises=True)["complete"]
++    correction["status"] = "PROVIDED"
++    assert synthese_facturation({"r"}, {"r": "v1"}, [original, correction], lots_materialises=True)["complete"]
++    assert not synthese_facturation(set(), {}, [], lots_materialises=True)["complete"]
++
++
++def test_reminders_are_limited_to_pending_requests_after_24_hours():
++    now = datetime(2026, 9, 7, 12)
++    available = prochaine_relance(now, None)
++    assert available == now + timedelta(days=1)
++    with pytest.raises(RegleMetierViolee):
++        verifier_relance("REQUESTED", now, available)
++    verifier_relance("REQUESTED", available, available)
++    for status in ("PROVIDED", "CANCELLED", "UNKNOWN"):
++        with pytest.raises(RegleMetierViolee):
++            verifier_relance(status, available, available)
++    with pytest.raises(RegleMetierViolee):
++        verifier_relance("PROCESSING", available, available, replaced=True)
++
++
++def test_service_does_not_serialize_an_animation_from_another_commune():
++    from app.application.conformite_fiscale_bum.service_dossier_facturation_animation import ServiceDossierFacturationAnimation
++    from app.domaine.shared.exceptions.ressource_domaine_introuvable import RessourceDomaineIntrouvable
++    class Session:
++        def execute(self, query):
++            params = query.compile().params
++            assert all(UUID(int=i) in params.values() for i in (1, 2, 3))
++            return SimpleNamespace(scalar_one_or_none=lambda: None)
++    with pytest.raises(RessourceDomaineIntrouvable):
++        ServiceDossierFacturationAnimation(Session()).consulter(UUID(int=1), UUID(int=2), UUID(int=3))
++
++
++def test_reminder_replay_locks_and_checks_partner_and_commune_without_new_email():
++    import hashlib
++    from app.application.conformite_fiscale_bum.service_dossier_facturation_animation import ServiceDossierFacturationAnimation
++    key = "replay-key"
++    class Session:
++        def execute(self, query):
++            compiled = query.compile()
++            assert all(UUID(int=i) in compiled.params.values() or str(UUID(int=i)) in compiled.params.values() for i in (1, 2, 3))
++            assert "FOR UPDATE" in str(compiled)
++            return SimpleNamespace(scalar_one_or_none=lambda: SimpleNamespace(id=UUID(int=1)))
++        def add(self, row):
++            pytest.fail("Replay must not enqueue another email")
++    service = ServiceDossierFacturationAnimation(Session())
++    service._relances = lambda id: [SimpleNamespace(event_metadata={"idempotencyHash": hashlib.sha256(key.encode()).hexdigest()})]
++    assert service.relancer(UUID(int=1), UUID(int=2), UUID(int=3), key)["idempotentReplay"] is True
++
++
++def test_successful_reminder_enqueues_email_and_audit_in_the_same_session(monkeypatch):
++    import app.application.conformite_fiscale_bum.service_dossier_facturation_animation as module
++    row = SimpleNamespace(id=UUID(int=1), commercant_id=UUID(int=4), reference="DFG-1", statut="REQUESTED", created_at=datetime(2020, 1, 1))
++    added = []
++    class Session:
++        def execute(self, query):
++            return SimpleNamespace(scalar_one_or_none=lambda: row, first=lambda: None)
++        def get(self, model, id):
++            return SimpleNamespace(contact_email="merchant@example.test")
++        def add(self, value):
++            added.append(value)
++    email = SimpleNamespace(kind="email")
++    monkeypatch.setattr(module, "ServicePreparationEmail", lambda: SimpleNamespace(preparer_email=lambda *args, **kwargs: email))
++    monkeypatch.setattr(module, "from_email_sortant", lambda value: value)
++    service = module.ServiceDossierFacturationAnimation(Session())
++    service._relances = lambda id: []
++    result = service.relancer(UUID(int=1), UUID(int=2), UUID(int=3), "new-reminder-key")
++    assert result["idempotentReplay"] is False
++    assert added[0] is email
++    assert added[1].action == module.RELANCE
++    assert len(added) == 2
+diff --git a/docs/specifications/epic-50-conformite-fiscale-bum/ano-ani-02.md b/docs/specifications/epic-50-conformite-fiscale-bum/ano-ani-02.md
+new file mode 100644
+--- /dev/null
++++ b/docs/specifications/epic-50-conformite-fiscale-bum/ano-ani-02.md
+@@ -0,0 +1,25 @@
++# ANO-ANI-02 - Dossier de facturation Animation
++
++- GET `/protected/animation-locale/facturation/demandes-groupees/animations/{animation_id}/dossier` : LIRE, partenaire et commune active.
++- POST `/protected/animation-locale/facturation/demandes-groupees/{demande_id}/relancer` : MODIFIER, meme cloisonnement, Idempotency-Key obligatoire (8-128 caracteres).
++
++Le dossier expose animationId, animationNom, requests et summary. La synthese
++compte expectedPrestations, executedPrestations, receivedPrestations,
++notExecutedPrestations, missingRequests, pendingPrestations, lotsMaterialized
++et complete. Lots non materialises, droits sans preuve d'execution active et
++prestations sans facture empechent complete. Les corrections actives remplacent
++l'original ; un avoir seul ne couvre pas la prestation. Une prestation expiree
++ou annulee sans facture garde le dossier incomplet, sans regularisation implicite.
++
++Chaque demande expose commercantNom, canRemind, reminderCount,
++lastRemindedAt, nextReminderAt. Relance au plus tot 24 heures apres la creation
++ou la derniere relance, uniquement pour REQUESTED, ACKNOWLEDGED, PROCESSING,
++avec adresse commercant disponible et sans correction active remplacante.
++
++La demande est verrouillee. L'empreinte de la cle est inscrite dans l'audit.
++Un rejeu ne cree pas de nouvel email. Audit et email sont ajoutes a la meme
++session ; le batch outbox assure l'envoi. Aucune migration necessaire.
++
++Tests : `pytest tests/security/test_animation_invoice_dossier.py`.
++Recette API avec deux communes, facture partielle, correction en attente,
++relance et rejeu de sa cle a effectuer avant deploiement.
+diff --git a/app/api/demandes_facture_commercant_api.py b/app/api/demandes_facture_commercant_api.py
+--- a/app/api/demandes_facture_commercant_api.py
++++ b/app/api/demandes_facture_commercant_api.py
+@@ -1,3 +1,5 @@
++from uuid import UUID
++from app.application.conformite_fiscale_bum.service_dossier_facturation_animation import ServiceDossierFacturationAnimation
+ from datetime import date
+ from typing import Any
+ from urllib.parse import quote
+@@ -617,12 +619,37 @@
+             raise HTTPException(status_code=404, detail="Facture assistee non disponible")
+         document, content = GestionDocumentaireService().lire_contenu(
+             uow.session,
+             facture.document_id,
+             acteur=f"commercant:{commercant_id}",
+         )
+         uow.commit()
+         return Response(
+             content=content,
+             media_type="application/pdf",
+             headers={"Content-Disposition": f"attachment; filename*=UTF-8''{quote(document.filename)}"},
+         )
++
++
++@grouped_animation_router.get("/animations/{animation_id}/dossier", dependencies=[Depends(_require_feature)])
++def consulter_dossier_facturation_animation(
++    animation_id: UUID,
++    contexte=Depends(require_animation_permission(PermissionAnimation.LIRE)),
++):
++    with SqlAlchemyUnitOfWork() as uow:
++        return ServiceDossierFacturationAnimation(uow.session).consulter(
++            animation_id, contexte["partenaire"].id, contexte["session"].commune_active_id,
++        )
++
++
++@grouped_animation_router.post("/{demande_id}/relancer", dependencies=[Depends(_require_feature)])
++def relancer_demande_facturation_animation(
++    demande_id: UUID,
++    idempotency_key: str = Header(alias="Idempotency-Key", min_length=8, max_length=128),
++    contexte=Depends(require_animation_permission(PermissionAnimation.MODIFIER)),
++):
++    with SqlAlchemyUnitOfWork() as uow:
++        result = ServiceDossierFacturationAnimation(uow.session).relancer(
++            demande_id, contexte["partenaire"].id, contexte["session"].commune_active_id, idempotency_key,
++        )
++        uow.commit()
++        return result

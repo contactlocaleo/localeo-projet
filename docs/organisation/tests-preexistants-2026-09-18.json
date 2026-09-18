@@ -1,0 +1,36 @@
+{
+  "before": [
+    "catalogue:docs/ops/exploitation",
+    "catalogue:docs/ops/technique",
+    "corriger-accents-contenus-animation.md",
+    "creer-offre-animation.md",
+    "desactiver-antivirus-documentaire.md",
+    "gerer-acces-animation.md",
+    "gerer-souscriptions-animation.md",
+    "localeo-ops.md",
+    "localeo-support.md",
+    "menu-animation-erp.md",
+    "profil-facturation-localeo.md",
+    "provisionner-referentiels.md",
+    "publier-documents-juridiques.md",
+    "reprise-commissions.md",
+    "sessions-administration.md"
+  ],
+  "after": [
+    "catalogue:docs/ops/exploitation",
+    "catalogue:docs/ops/technique",
+    "corriger-accents-contenus-animation.md",
+    "creer-offre-animation.md",
+    "desactiver-antivirus-documentaire.md",
+    "gerer-acces-animation.md",
+    "gerer-souscriptions-animation.md",
+    "localeo-ops.md",
+    "localeo-support.md",
+    "menu-animation-erp.md",
+    "profil-facturation-localeo.md",
+    "provisionner-referentiels.md",
+    "publier-documents-juridiques.md",
+    "reprise-commissions.md",
+    "sessions-administration.md"
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "folders": [
+    {
+      "name": "Localeo — projet",
+      "path": "."
+    },
+    {
+      "name": "localeo-backend",
+      "path": "../localeo-backend"
+    },
+    {
+      "name": "localeo-marketplace",
+      "path": "../localeo-marketplace"
+    },
+    {
+      "name": "localeo-commercant",
+      "path": "../localeo-commercant"
+    },
+    {
+      "name": "localeo-animation",
+      "path": "../localeo-animation"
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "**/__pycache__": true
+    },
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/.venv": true,
+      "**/tmp": true,
+      "**/dist": true
+    }
+  }
+}

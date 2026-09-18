@@ -1,0 +1,162 @@
+{
+  "date": "2026-09-18",
+  "scope": "Classement et fusion des backlogs applicatifs par sujet et etat",
+  "files": [
+    {
+      "source": "docs/roadmap/animation/epic-41-plateforme-animation-locale-mvp-backlog.md",
+      "target": "docs/roadmap/terminees/epic-41-plateforme-animation-locale-mvp-backlog.md",
+      "source_sha256": "2b2c656540bf5d6036adb54b3b6a05dc2262d823d5caa1d7fbef5b953e20edd9",
+      "state": "terminees"
+    },
+    {
+      "source": "docs/roadmap/commercant/epic-41-application-commercant.md",
+      "target": "docs/roadmap/terminees/epic-41-plateforme-animation-locale-mvp-backlog.md",
+      "source_sha256": "b07d86e34e5927c00275db59fa799ad19f5454965b6e7375a95b60978a99217d",
+      "state": "terminees"
+    },
+    {
+      "source": "docs/roadmap/animation/epic-46-paiement-lots-animation.md",
+      "target": "docs/roadmap/terminees/epic-46-paiement-lots-animation.md",
+      "source_sha256": "efad82ffd0d09d26dd6073a679f0490b27c6a1bdf742307eb6b512af5b36eb89",
+      "state": "terminees"
+    },
+    {
+      "source": "docs/roadmap/animation/epic-53-tombola-locale-backlog.md",
+      "target": "docs/roadmap/terminees/epic-53-tombola-locale-backlog.md",
+      "source_sha256": "cc85d1af2faeeaecd323201cb4fe7f72698158aee55e9bcd7f8ecb5806027c5b",
+      "state": "terminees"
+    },
+    {
+      "source": "docs/roadmap/animation/epic-58-filtre-annuel-global-backlog.md",
+      "target": "docs/roadmap/a-faire/epic-58-filtre-annuel-global-backlog.md",
+      "source_sha256": "c5af42c43254d8071085d37d47783a995c83e65dff2af07d74abd415c2738ebb",
+      "state": "a-faire"
+    },
+    {
+      "source": "docs/roadmap/commercant/epic-10-authentification-commercant-login-password-backlog.md",
+      "target": "docs/roadmap/terminees/epic-10-authentification-commercant-login-password-backlog.md",
+      "source_sha256": "6a7621e56309921bf983ad3965d0c0c013813de53705e3de5f72ab0891ccb0c5",
+      "state": "terminees"
+    },
+    {
+      "source": "docs/roadmap/commercant/epic-11-gestion-informations-contact-commercant-backlog.md",
+      "target": "docs/roadmap/terminees/epic-11-espace-commercant-informations-contact-backlog.md",
+      "source_sha256": "4c933421f2fe9e3ee78ea32a32a234627c0bfbaffc8fd2b3d203eac320cbde41",
+      "state": "terminees"
+    },
+    {
+      "source": "docs/roadmap/commercant/epic-18-page-commercant-immersive-backlog.md",
+      "target": "docs/roadmap/terminees/epic-18-page-commercant-immersive-backlog.md",
+      "source_sha256": "34c3f8ab212502315bddcbf0f8f34915d123a3fb5061e73c0f237626ed322388",
+      "state": "terminees"
+    },
+    {
+      "source": "docs/roadmap/commercant/epic-19-dashboard-operationnel-commercant-backlog.md",
+      "target": "docs/roadmap/terminees/epic-19-dashboard-operationnel-commercant-backlog.md",
+      "source_sha256": "ced05c3a8781670a8cbc646d5c0593530451229cc7667b240e110ea454029f9e",
+      "state": "terminees"
+    },
+    {
+      "source": "docs/roadmap/commercant/epic-31-annulation-validation-prestation-backoffice.md",
+      "target": "docs/roadmap/terminees/epic-31-annulation-validation-prestation-backoffice.md",
+      "source_sha256": "08c131f8fbde5760b05cdae8b74d8f70ca4e818eed54ac5d664eb5327d686f4f",
+      "state": "terminees"
+    },
+    {
+      "source": "docs/roadmap/commercant/epic-32-live-tracking-webpush-commercants-backlog.md",
+      "target": "docs/roadmap/terminees/epic-32-live-tracking-webpush-commercants-backlog.md",
+      "source_sha256": "1d6b39cdc2f78878dd09c6aedaa84c467b51ec982543f8f4c1318c7ed5409689",
+      "state": "terminees"
+    },
+    {
+      "source": "docs/roadmap/commercant/epic-39-impacts-application-commercant.md",
+      "target": "docs/roadmap/terminees/epic-39-stripe-connect-psp-backlog.md",
+      "source_sha256": "ffc91b28270c31a51feec38194cb21e4d40354cf29f09ea7b41e84cf25433740",
+      "state": "terminees"
+    },
+    {
+      "source": "docs/roadmap/terminees/epic-39-impacts-application-commercant.md",
+      "target": "docs/roadmap/terminees/epic-39-stripe-connect-psp-backlog.md",
+      "source_sha256": "3e9213beef279091e2205306952945b8007c69702f70cfb66d06d06452aee61e",
+      "state": "terminees"
+    },
+    {
+      "source": "docs/roadmap/commercant/epic-56-validation-participation-commercants-animation-backlog.md",
+      "target": "docs/roadmap/terminees/epic-56-validation-participation-commercants-animation-backlog.md",
+      "source_sha256": "b5d3f7d238f9302adb38bfbd19bd9353d3f0464c6b1e4b046ab08667c28e5d57",
+      "state": "terminees"
+    },
+    {
+      "source": "docs/roadmap/commercant/epic-animation-edition-prestations.md",
+      "target": "docs/roadmap/terminees/epic-animation-edition-prestations.md",
+      "source_sha256": "25ffd38aebc92da59e54374960684032e8d5805d50ce41e99571328cdefc3e18",
+      "state": "terminees"
+    },
+    {
+      "source": "docs/roadmap/marketplace/epic-16-feed-activite-locale-marketplace-backlog.md",
+      "target": "docs/roadmap/terminees/epic-16-feed-activite-locale-marketplace-backlog.md",
+      "source_sha256": "95f806c2b05047259facc167381adabd30884caf8f65b8c057181005bc795bd7",
+      "state": "terminees"
+    },
+    {
+      "source": "docs/roadmap/marketplace/epic-17-feedback-client-post-prestation-backlog.md",
+      "target": "docs/roadmap/terminees/epic-17-feedback-client-post-prestation-backlog.md",
+      "source_sha256": "8a8061b34d11878da5fa8e6aa7fac087ec44a656ed1a1b0eee54394586bd6b0e",
+      "state": "terminees"
+    },
+    {
+      "source": "docs/roadmap/marketplace/epic-18-google-analytics-marketplace-backlog.md",
+      "target": "docs/roadmap/terminees/epic-marketplace-18-google-analytics-marketplace-backlog.md",
+      "source_sha256": "4258dd1fcd7c0f31190e4d29cfecc319d1cece910c58076e102e5149243f503c",
+      "state": "terminees"
+    },
+    {
+      "source": "docs/roadmap/marketplace/epic-33-recherche-multiscope-marketplace-backlog.md",
+      "target": "docs/roadmap/terminees/epic-33-recherche-multiscope-marketplace-backlog.md",
+      "source_sha256": "5a25a14ec37c4bae03b8cb90d6bc6e2edddaca2f929435d3e68550db119b072e",
+      "state": "terminees"
+    },
+    {
+      "source": "docs/roadmap/marketplace/epic-42-localeo-live-grand-public-backlog.md",
+      "target": "docs/roadmap/terminees/epic-42-localeo-live-grand-public-backlog.md",
+      "source_sha256": "9ce889765b0b59238a723c20667d6402de6c4da6ba8bc7a91144a2ad96d82ba3",
+      "state": "terminees"
+    },
+    {
+      "source": "docs/roadmap/marketplace/epic-49-animations-marketplace-backlog.md",
+      "target": "docs/roadmap/terminees/epic-49-animations-marketplace-backlog.md",
+      "source_sha256": "f8c9fe6b3ddba21ff8f22ea8320653beee11c434998066e339478aa483364f95",
+      "state": "terminees"
+    },
+    {
+      "source": "docs/roadmap/marketplace/epic-52-accueil-marketplace-geolocalise-backlog.md",
+      "target": "docs/roadmap/terminees/epic-52-accueil-marketplace-geolocalise-backlog.md",
+      "source_sha256": "90b366dd2054d78a48a73de414ea9aaf323f69a3939a0ded90f5de42e9c4b507",
+      "state": "terminees"
+    },
+    {
+      "source": "docs/roadmap/marketplace/epic-53-bornage-pagination-api-marketplace-backlog.md",
+      "target": "docs/roadmap/terminees/epic-57-bornage-pagination-api-marketplace-backlog.md",
+      "source_sha256": "c7f74f826fa75740b3f21f6f9960e1dcc73a738c9c0e8c888356fcce8ea65794",
+      "state": "terminees"
+    },
+    {
+      "source": "docs/roadmap/marketplace/epic-54-harmonisation-identite-visuelle-marketplace-backlog.md",
+      "target": "docs/roadmap/en-cours/epic-marketplace-54-harmonisation-identite-visuelle-marketplace-backlog.md",
+      "source_sha256": "edee7c71de6dab57e63e2848e9aaab2a73d3080fa6e4e2572576a914cbd87adb",
+      "state": "en-cours"
+    },
+    {
+      "source": "docs/roadmap/terminees/epic-25-tests-fonctionnels-plan-detaille.md",
+      "target": "docs/roadmap/terminees/epic-25-tests-fonctionnels-domaine-application-backlog.md",
+      "source_sha256": "0302524b37f14461b3ed939f8a16d77bf9f2794390c972702deabb3ac07ad527",
+      "state": "terminees"
+    },
+    {
+      "source": "docs/roadmap/terminees/epic-43-impacts-application-commercant.md",
+      "target": "docs/roadmap/terminees/epic-43-suivi-payouts-bancaires-stripe-connect-backlog.md",
+      "source_sha256": "7dc5f2cd1770345349eb83969d08bfa341eb18c2b824ece26264bf1b08e306b1",
+      "state": "terminees"
+    }
+  ]
+}

@@ -1,0 +1,1004 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-18",
+  "repository": "localeo-backend",
+  "backup": "localeo-backend-scripts-reorganisation-20260918",
+  "deleted_scripts": 0,
+  "files": [
+    {
+      "path": "scripts/activate_bum_policy_2026_02.py",
+      "target": "scripts/exploitation/activate_bum_policy_2026_02.py",
+      "bytes_before": 11732,
+      "sha256_before": "9571eca37818e622d083ea3bcd5c9c6d30a7b2487bedef010be87b5da9968272",
+      "sha256_after": "6de30a1b93411c4b4450cceddb924f82eec72b4df10c4ab6efd047632b95b2e4",
+      "action": "deplace",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/apply_migrations.py",
+      "target": "scripts/database/apply_migrations.py",
+      "bytes_before": 10865,
+      "sha256_before": "9d6f1c2ef23dbc514e01805a60b4bdee4b73f2b3aeb36ae2518e27086834272b",
+      "sha256_after": "b185f0f299beb1fd4dfa09095acc3ac2760c388c240a8797fa4e753e2113150a",
+      "action": "deplace",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/check_backoffice_preproduction.py",
+      "target": "scripts/validation/check_backoffice_preproduction.py",
+      "bytes_before": 2480,
+      "sha256_before": "cdd386455ce01e01dc05484ba0851c40c94777b632c01fb7fc470e5ea3b5e05a",
+      "sha256_after": "0c52076012826d71eb015c21981de5e6f0108136e02eb0aad5578d1af436ff33",
+      "action": "deplace",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/check_documentation_snapshot.py",
+      "target": "scripts/documentation/check_documentation_snapshot.py",
+      "bytes_before": 4879,
+      "sha256_before": "872480c2677bee87adf55aad4a960414dec34d87ef0f5ddfa1437bdbb8d36ff0",
+      "sha256_after": "e67f72886515442fb6807814237b2a1d7e184f17fef19bd7f73b8bdb012f188c",
+      "action": "deplace",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demo.py",
+      "target": "scripts/demonstration/__main__.py",
+      "bytes_before": 638,
+      "sha256_before": "6dbcf10dcf43665c6f1d23b444d7c3087a127ea5aa257e52d505f1280affca4e",
+      "sha256_after": "936f4f1b4c5c48b91e211d165eddbcd512eb46146572458a6a248d2b87008a90",
+      "action": "deplace",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/export_openapi_offline.py",
+      "target": "scripts/documentation/export_openapi_offline.py",
+      "bytes_before": 1397,
+      "sha256_before": "b2b59ae9255a6c4e4338fc6024127418fc548fdd8395cf47e9429eb4d24f375f",
+      "sha256_after": "15da08c6101e2446fb3e07ac12efcc705abec3e05f7be477596b2af958257ade",
+      "action": "deplace",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/generate_app_summary_pdf.py",
+      "target": "scripts/documentation/generate_app_summary_pdf.py",
+      "bytes_before": 10674,
+      "sha256_before": "aeaa510feeffe2e0a88aaa3cfb300d66e2263c04ee01aa577b44af23f37dfd4d",
+      "sha256_after": "aa32852227f5f0bbd401b7f87149284c3a4a88588a8e856413558e00f076055a",
+      "action": "deplace",
+      "recommendation": "conservation-optionnelle"
+    },
+    {
+      "path": "scripts/generate_epic41_openapi.py",
+      "target": "scripts/documentation/generate_epic41_openapi.py",
+      "bytes_before": 3107,
+      "sha256_before": "90dd5ffad578e70830c455aeebbb0d574d241caa6293f43dd0979d6d57bda12c",
+      "sha256_after": "50c1c4d1c7dac1d619b2131a4d085ac2c3837fb86218459fe740111319e41948",
+      "action": "deplace",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/generate_epic42_openapi.py",
+      "target": "scripts/documentation/generate_epic42_openapi.py",
+      "bytes_before": 2566,
+      "sha256_before": "5ea0eff92c8f265cd8ba71eae26187457a5020663ff40371f49f8285e5642c68",
+      "sha256_after": "da264c208868ae55ec6d69e8a05f355282a72286dfa699c7fd6abc54c7334229",
+      "action": "deplace",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/generate_ops_pdfs.js",
+      "target": "scripts/documentation/generate_ops_pdfs.js",
+      "bytes_before": 10316,
+      "sha256_before": "515c002f9d6dfa9c8ca3cfdbb6d082d31f043fa2535227da5d41a6c472e7f381",
+      "sha256_after": "d6326f5a959e835f7a487b6fe410c93b23ff9491b87165efb28c0df8d3572832",
+      "action": "deplace",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/generate_schema_catchup.py",
+      "target": "scripts/archives/generate_schema_catchup.py",
+      "bytes_before": 11084,
+      "sha256_before": "3fc69038830c75f7a7fca509ae042994985d7275c7d594aaa2d86aec68797c25",
+      "sha256_after": "3fc69038830c75f7a7fca509ae042994985d7275c7d594aaa2d86aec68797c25",
+      "action": "archive-conservee",
+      "recommendation": "candidat-au-retrait"
+    },
+    {
+      "path": "scripts/generer_api_key.ps1",
+      "target": "scripts/securite/generer_api_key.ps1",
+      "bytes_before": 378,
+      "sha256_before": "e86b73f2bc5ec25e2fb2067f460be659dcf3e6114e81136796052a7cc6c9100b",
+      "sha256_after": "e86b73f2bc5ec25e2fb2067f460be659dcf3e6114e81136796052a7cc6c9100b",
+      "action": "deplace",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/init_db.sql",
+      "target": "scripts/archives/init_db.sql",
+      "bytes_before": 18,
+      "sha256_before": "8d96ce344c5c218746496a6268961c19d37096fa14b176b060672408ce6fd078",
+      "sha256_after": "8d96ce344c5c218746496a6268961c19d37096fa14b176b060672408ce6fd078",
+      "action": "archive-conservee",
+      "recommendation": "candidat-au-retrait"
+    },
+    {
+      "path": "scripts/postdate_activites_locales.py",
+      "target": "scripts/exploitation/postdate_activites_locales.py",
+      "bytes_before": 6898,
+      "sha256_before": "a4d6b4ed078e236696a5bd3e530a7d1785508cf034e96d863065edce1b2c9ca3",
+      "sha256_after": "5da2f22c64d01c5eedc30b6c68f9d872f6603200a730ab435fd12663785b8ac7",
+      "action": "deplace",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/preview_emails.py",
+      "target": "scripts/emails/preview_emails.py",
+      "bytes_before": 14356,
+      "sha256_before": "73b53025d3e88da479b63e85344c002ad431cf38757c7cf64e3e3fc350bf44a0",
+      "sha256_after": "82b76bd077bf3bb2a0f04c6bfcf650a6de98ad382395954dd5af77dfb25a7e76",
+      "action": "deplace",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/provision_references.py",
+      "target": "scripts/references/provision_references.py",
+      "bytes_before": 17040,
+      "sha256_before": "9eb1657705839f0e3422940792a9ac246fd4fc8f11be2ec7b46b15445d60712a",
+      "sha256_after": "0d61055d4032ab2f8f5cf0a8153177f03460fd920941574caeeac4d8f6c2812e",
+      "action": "deplace",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/reset_recette.py",
+      "target": "scripts/database/reset_recette.py",
+      "bytes_before": 14241,
+      "sha256_before": "a74de52d0b0a6d62d0816558681382d0c45514b96a803ddf41efaffdc15df099",
+      "sha256_after": "a74de52d0b0a6d62d0816558681382d0c45514b96a803ddf41efaffdc15df099",
+      "action": "deplace",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/run_animation_audit_tests.py",
+      "target": "scripts/validation/run_animation_audit_tests.py",
+      "bytes_before": 1255,
+      "sha256_before": "cdba352552bd1b2e6c34d8e6473c378be51c4540bced6119f6f0f092d2e9b161",
+      "sha256_after": "f5c1bc1adbf83499ac8cea7a4157765d93f37a300829be497baf0d557ac10912",
+      "action": "deplace",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/run_market_postgres_tests.py",
+      "target": "scripts/archives/run_market_postgres_tests.py",
+      "bytes_before": 2079,
+      "sha256_before": "39d58ef56d37057afebc630fa49d23efbb65b3b35f06ba2d532675a71cc08e35",
+      "sha256_after": "39d58ef56d37057afebc630fa49d23efbb65b3b35f06ba2d532675a71cc08e35",
+      "action": "archive-conservee",
+      "recommendation": "candidat-au-retrait"
+    },
+    {
+      "path": "scripts/run_market_tests.py",
+      "target": "scripts/archives/run_market_tests.py",
+      "bytes_before": 1525,
+      "sha256_before": "48cb3e98ff8ac74e2def8591060a16480a93e50bcd62de1ebb12e26145f67f07",
+      "sha256_after": "48cb3e98ff8ac74e2def8591060a16480a93e50bcd62de1ebb12e26145f67f07",
+      "action": "archive-conservee",
+      "recommendation": "candidat-au-retrait"
+    },
+    {
+      "path": "scripts/seed_demo.py",
+      "target": "scripts/archives/seed_demo.py",
+      "bytes_before": 66,
+      "sha256_before": "ab50e50160edcaf9b02a9881b909d519f147c71100773d33c436780fb8b7e560",
+      "sha256_after": "ab50e50160edcaf9b02a9881b909d519f147c71100773d33c436780fb8b7e560",
+      "action": "archive-conservee",
+      "recommendation": "candidat-au-retrait"
+    },
+    {
+      "path": "scripts/test_isolated.py",
+      "target": "scripts/validation/test_isolated.py",
+      "bytes_before": 4020,
+      "sha256_before": "57419fe41094b7ffe3fa4bf7e5e65b0f94f14cfd8e4dd788338c8d67d36bc79f",
+      "sha256_after": "12c0bf3a81d235de58cccf29ea489be6d62743fae0e9b97c15d6bc161bcf8168",
+      "action": "deplace",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/update_existing_database.ps1",
+      "target": "scripts/archives/update_existing_database.ps1",
+      "bytes_before": 7425,
+      "sha256_before": "61ff1edd4931bbdf35cd9d8f83fd6f6d4316d447926f9823a5ac319e9de18cab",
+      "sha256_after": "61ff1edd4931bbdf35cd9d8f83fd6f6d4316d447926f9823a5ac319e9de18cab",
+      "action": "archive-conservee",
+      "recommendation": "candidat-au-retrait"
+    },
+    {
+      "path": "scripts/audits/2026-09-05-verifications.py",
+      "target": "scripts/archives/2026-09-05-verifications.py",
+      "bytes_before": 10840,
+      "sha256_before": "19b2fd014e563aee47fd4972ed2783c22b924d7fddbfecf6e504f363832f773a",
+      "sha256_after": "19b2fd014e563aee47fd4972ed2783c22b924d7fddbfecf6e504f363832f773a",
+      "action": "archive-conservee",
+      "recommendation": "candidat-au-retrait"
+    },
+    {
+      "path": "scripts/demonstration/access.py",
+      "target": "scripts/demonstration/access.py",
+      "bytes_before": 2102,
+      "sha256_before": "f93b650beb14541baa7b519464988992863bc529efebcb0373b10e36d55816da",
+      "sha256_after": "f93b650beb14541baa7b519464988992863bc529efebcb0373b10e36d55816da",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/access_report.py",
+      "target": "scripts/demonstration/access_report.py",
+      "bytes_before": 2938,
+      "sha256_before": "1594d75c51b41bec1d1ce118d6e8dfc4169841f00b688443321aedc5855e7226",
+      "sha256_after": "1594d75c51b41bec1d1ce118d6e8dfc4169841f00b688443321aedc5855e7226",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/AGENTS.md",
+      "target": "scripts/demonstration/AGENTS.md",
+      "bytes_before": 784,
+      "sha256_before": "d824e4696419b675d3d0b4dded0ca7384da9ca2a758a8e4261564c26401e08e8",
+      "sha256_after": "d824e4696419b675d3d0b4dded0ca7384da9ca2a758a8e4261564c26401e08e8",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/antivirus.py",
+      "target": "scripts/demonstration/antivirus.py",
+      "bytes_before": 1580,
+      "sha256_before": "0e9eaecc1bf0624a7b17a31ddd97f1b2d41d0381bece60c82a35de338267d809",
+      "sha256_after": "0e9eaecc1bf0624a7b17a31ddd97f1b2d41d0381bece60c82a35de338267d809",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/archive.py",
+      "target": "scripts/demonstration/archive.py",
+      "bytes_before": 5282,
+      "sha256_before": "70850af4a2b8588606a07b7e62fd120da0b494e67d45c7add517bf951f6f63ca",
+      "sha256_after": "b36b5629c86dd83c34d86a0cda0032f61185a01b5c0057b0a2d2a043d3ff5a84",
+      "action": "consommateur-adapte",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/bum.py",
+      "target": "scripts/demonstration/bum.py",
+      "bytes_before": 2843,
+      "sha256_before": "e65616d9105f5b5b67c99f94ce16f1e09ea537329f05624a2c16c66bc9c2d68c",
+      "sha256_after": "e65616d9105f5b5b67c99f94ce16f1e09ea537329f05624a2c16c66bc9c2d68c",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/checks.py",
+      "target": "scripts/demonstration/checks.py",
+      "bytes_before": 1803,
+      "sha256_before": "52a8275786ddd51b059597be5c928d92707f70b4b98effc12c66c63161f62c39",
+      "sha256_after": "52a8275786ddd51b059597be5c928d92707f70b4b98effc12c66c63161f62c39",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/cleanup.py",
+      "target": "scripts/demonstration/cleanup.py",
+      "bytes_before": 722,
+      "sha256_before": "9237b0872e9b2b996e3df9b808cfca97d99b6bffde1b5e22a435264141f82da5",
+      "sha256_after": "9237b0872e9b2b996e3df9b808cfca97d99b6bffde1b5e22a435264141f82da5",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/cli.py",
+      "target": "scripts/demonstration/cli.py",
+      "bytes_before": 12471,
+      "sha256_before": "f1c42dd472371f19cc594f01b224df1fbffd2e9b63a326f7ca7da7f1be659834",
+      "sha256_after": "36c4af116e1a1f0b46e5f8f5ca23fa46f41826f10cdcddcfbd245bd4bc283c09",
+      "action": "consommateur-adapte",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/common.py",
+      "target": "scripts/demonstration/common.py",
+      "bytes_before": 3323,
+      "sha256_before": "5d8662659d544c68060ec7ee41b001c6d6d2ec8475ecfbbb247b2ff675090b52",
+      "sha256_after": "5d8662659d544c68060ec7ee41b001c6d6d2ec8475ecfbbb247b2ff675090b52",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/configuration.py",
+      "target": "scripts/demonstration/configuration.py",
+      "bytes_before": 5150,
+      "sha256_before": "69a5df38091576b5c650766986c391ea2b0cd2466c9a132293c31bfaaf603f88",
+      "sha256_after": "69a5df38091576b5c650766986c391ea2b0cd2466c9a132293c31bfaaf603f88",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/content.py",
+      "target": "scripts/demonstration/content.py",
+      "bytes_before": 12234,
+      "sha256_before": "fc09fd2f9240df39be5f29b2dfc5727583d26afabea2014e73f66c3dd6823d35",
+      "sha256_after": "fc09fd2f9240df39be5f29b2dfc5727583d26afabea2014e73f66c3dd6823d35",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/conventions.py",
+      "target": "scripts/demonstration/conventions.py",
+      "bytes_before": 4899,
+      "sha256_before": "acf2ae70f160f4b6d8c7459b3d74c615837218fa6211ee2c9516e69ea042bac7",
+      "sha256_after": "acf2ae70f160f4b6d8c7459b3d74c615837218fa6211ee2c9516e69ea042bac7",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/database.py",
+      "target": "scripts/demonstration/database.py",
+      "bytes_before": 15155,
+      "sha256_before": "fefd7b54ec8112dc4adfc4decffff159e8ada7bb3242c491769dfdc059a884e2",
+      "sha256_after": "fefd7b54ec8112dc4adfc4decffff159e8ada7bb3242c491769dfdc059a884e2",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/editorial.py",
+      "target": "scripts/demonstration/editorial.py",
+      "bytes_before": 3279,
+      "sha256_before": "b956fbe3970884881eeda12b31a41a5fc5a3cf451cc60ac1a3f9890cb2e41ffa",
+      "sha256_after": "b956fbe3970884881eeda12b31a41a5fc5a3cf451cc60ac1a3f9890cb2e41ffa",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/files.py",
+      "target": "scripts/demonstration/files.py",
+      "bytes_before": 5297,
+      "sha256_before": "e35b13d198e116bb445de2da344b4b609ac0254adfff7b7b9e29f69a9cc5d5a8",
+      "sha256_after": "e35b13d198e116bb445de2da344b4b609ac0254adfff7b7b9e29f69a9cc5d5a8",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/generator.py",
+      "target": "scripts/demonstration/generator.py",
+      "bytes_before": 54620,
+      "sha256_before": "5ba441d46002f9d2909f6ab2ead80d90550b6fecdf1f3a9130c1515df2540f50",
+      "sha256_after": "5ba441d46002f9d2909f6ab2ead80d90550b6fecdf1f3a9130c1515df2540f50",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/geography.py",
+      "target": "scripts/demonstration/geography.py",
+      "bytes_before": 1354,
+      "sha256_before": "3d297500609f315e0ae0123a4f88795ef3faed34d920fe890e6dd3653e954b42",
+      "sha256_after": "3d297500609f315e0ae0123a4f88795ef3faed34d920fe890e6dd3653e954b42",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/guide.py",
+      "target": "scripts/demonstration/guide.py",
+      "bytes_before": 6242,
+      "sha256_before": "4139bf302735ab35baca17c36a5ea21dde6215252cd8c56bc8d61615e1fe6229",
+      "sha256_after": "4139bf302735ab35baca17c36a5ea21dde6215252cd8c56bc8d61615e1fe6229",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/images.py",
+      "target": "scripts/demonstration/images.py",
+      "bytes_before": 3783,
+      "sha256_before": "4ee69aca4b75e9e6148a5021dfd73756d7e13b536c931002e8b9c7855ab7bfa7",
+      "sha256_after": "4ee69aca4b75e9e6148a5021dfd73756d7e13b536c931002e8b9c7855ab7bfa7",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/lifecycle.py",
+      "target": "scripts/demonstration/lifecycle.py",
+      "bytes_before": 8480,
+      "sha256_before": "8556759d1e7d413962c03cd01b4533bf64110b19613f7956fb0616f690fa69d1",
+      "sha256_after": "ceac866f3735b1e18332299aec33eefd47150d195fb744c6b6fad8b684f7ee91",
+      "action": "consommateur-adapte",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/onboarding.py",
+      "target": "scripts/demonstration/onboarding.py",
+      "bytes_before": 5031,
+      "sha256_before": "bb0c26fcd5b95cdfa3d3b093fc490296604da057c5030e20835077d2578a2404",
+      "sha256_after": "bb0c26fcd5b95cdfa3d3b093fc490296604da057c5030e20835077d2578a2404",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/operations.py",
+      "target": "scripts/demonstration/operations.py",
+      "bytes_before": 12329,
+      "sha256_before": "16a4c7d5b87d43602cad244fd3c4857117acdb8da5653d3adf6adb416b49ff79",
+      "sha256_after": "e12e8640726c1a05fb92b3b3a3b1db9633aa8cbb4ace55728e89de91150b4a8c",
+      "action": "consommateur-adapte",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/operator.py",
+      "target": "scripts/demonstration/operator.py",
+      "bytes_before": 4178,
+      "sha256_before": "49981670abfe6b6c0d560d6bb8841e90bf13ffdc499585c1e6fe2af75ee8f07d",
+      "sha256_after": "5bec63dfc55fff1a8b60350f997088538879f07f80ae41a4e510346c6be3765d",
+      "action": "consommateur-adapte",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/pricing.py",
+      "target": "scripts/demonstration/pricing.py",
+      "bytes_before": 1022,
+      "sha256_before": "6b4ae6b6c687955cd33e66abd169c7fd0d8b9089dd582538b40c2aedb18b1422",
+      "sha256_after": "6b4ae6b6c687955cd33e66abd169c7fd0d8b9089dd582538b40c2aedb18b1422",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/providers.py",
+      "target": "scripts/demonstration/providers.py",
+      "bytes_before": 10732,
+      "sha256_before": "f43a930c5f7c694908bc2d72979096ce81290c9e28fa3f285dc62dee9775345b",
+      "sha256_after": "f43a930c5f7c694908bc2d72979096ce81290c9e28fa3f285dc62dee9775345b",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/reference_additions.py",
+      "target": "scripts/demonstration/reference_additions.py",
+      "bytes_before": 3966,
+      "sha256_before": "a4962bfcf8b9e6551cef409d62922c926deb0bc12fa99958f435929914c0ce88",
+      "sha256_after": "a4962bfcf8b9e6551cef409d62922c926deb0bc12fa99958f435929914c0ce88",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/reference_completions.py",
+      "target": "scripts/demonstration/reference_completions.py",
+      "bytes_before": 3101,
+      "sha256_before": "ff625fbf6af502dfb87c080f48fcabf38ac802a164a04c31fab5f8aec3231e55",
+      "sha256_after": "ff625fbf6af502dfb87c080f48fcabf38ac802a164a04c31fab5f8aec3231e55",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/schema.py",
+      "target": "scripts/demonstration/schema.py",
+      "bytes_before": 2328,
+      "sha256_before": "022030649b5b175555eb21603069f46e940d5e26789e7675c1d4fe5cc61c5280",
+      "sha256_after": "d7fdd7192265b95d0b25700989daf8bcd7d0ff0d1b479bcde4345215d67627bf",
+      "action": "consommateur-adapte",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/stripe_pool.py",
+      "target": "scripts/demonstration/stripe_pool.py",
+      "bytes_before": 1656,
+      "sha256_before": "b71fe2906fa228ff791cda0b8629cdbb193496374393c84b729494e48bd3d1e4",
+      "sha256_after": "b71fe2906fa228ff791cda0b8629cdbb193496374393c84b729494e48bd3d1e4",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/table_registry.json",
+      "target": "scripts/demonstration/table_registry.json",
+      "bytes_before": 5843,
+      "sha256_before": "3b70eed55e77b965ec0e750a6850bda0fab6199f6291c3e11b86f9db1ef53285",
+      "sha256_after": "3b70eed55e77b965ec0e750a6850bda0fab6199f6291c3e11b86f9db1ef53285",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/verification.py",
+      "target": "scripts/demonstration/verification.py",
+      "bytes_before": 8038,
+      "sha256_before": "9c9efcecd5bee72a85519ae5ab20dbcc2c19de61b05e033155073a487fa09692",
+      "sha256_after": "9c9efcecd5bee72a85519ae5ab20dbcc2c19de61b05e033155073a487fa09692",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/__init__.py",
+      "target": "scripts/demonstration/__init__.py",
+      "bytes_before": 77,
+      "sha256_before": "deaffc128deabdf06b15fa3160501e10fbce8ef31dcf43bc1ea953d56095027e",
+      "sha256_after": "deaffc128deabdf06b15fa3160501e10fbce8ef31dcf43bc1ea953d56095027e",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/assets/atelier-poterie.jpg",
+      "target": "scripts/demonstration/assets/atelier-poterie.jpg",
+      "bytes_before": 254484,
+      "sha256_before": "ace03cdf67106399c894ff7ba01feafe8dbec2101bbf49afbaa12fb6762716b8",
+      "sha256_after": "ace03cdf67106399c894ff7ba01feafe8dbec2101bbf49afbaa12fb6762716b8",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/assets/balade-urbaine.jpg",
+      "target": "scripts/demonstration/assets/balade-urbaine.jpg",
+      "bytes_before": 373884,
+      "sha256_before": "70d746be7880d91c63e800206a636df1c035dcaf9df29d152b805a7dfeceb070",
+      "sha256_after": "70d746be7880d91c63e800206a636df1c035dcaf9df29d152b805a7dfeceb070",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/assets/balade-velo.jpg",
+      "target": "scripts/demonstration/assets/balade-velo.jpg",
+      "bytes_before": 502985,
+      "sha256_before": "5e60610d968adf6ad4b31250b3bf4387abe8fd93fdd617906fdfe99a33a69881",
+      "sha256_after": "5e60610d968adf6ad4b31250b3bf4387abe8fd93fdd617906fdfe99a33a69881",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/assets/boulangerie.jpg",
+      "target": "scripts/demonstration/assets/boulangerie.jpg",
+      "bytes_before": 318562,
+      "sha256_before": "c7e47dd6b9ab4c3cf669da571530bf3052490baeb03ab39768e7d4698067914d",
+      "sha256_after": "c7e47dd6b9ab4c3cf669da571530bf3052490baeb03ab39768e7d4698067914d",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/assets/bouquet.jpg",
+      "target": "scripts/demonstration/assets/bouquet.jpg",
+      "bytes_before": 129254,
+      "sha256_before": "106b6a1ae3ef8835e835033247d2e80fc034f70a6ce6822e5c2a0b7205c0bc5e",
+      "sha256_after": "106b6a1ae3ef8835e835033247d2e80fc034f70a6ce6822e5c2a0b7205c0bc5e",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/assets/cagettes.jpg",
+      "target": "scripts/demonstration/assets/cagettes.jpg",
+      "bytes_before": 301850,
+      "sha256_before": "0e9ed003b410bccd453afbb9b7adc538c18e05847455931e2d6d3a9fc8493943",
+      "sha256_after": "0e9ed003b410bccd453afbb9b7adc538c18e05847455931e2d6d3a9fc8493943",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/assets/coffret-bien-etre.webp",
+      "target": "scripts/demonstration/assets/coffret-bien-etre.webp",
+      "bytes_before": 38368,
+      "sha256_before": "8922588c1c0657ac3aae8be2243d9bdad71091937ff320bb1803160bea1ffe8c",
+      "sha256_after": "8922588c1c0657ac3aae8be2243d9bdad71091937ff320bb1803160bea1ffe8c",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/assets/coffret-decouverte-documentaire.jpg",
+      "target": "scripts/demonstration/assets/coffret-decouverte-documentaire.jpg",
+      "bytes_before": 249162,
+      "sha256_before": "cb5bd739efb6b86a4a505ddb992e663f033fa72715c83b39468d90d584f19f40",
+      "sha256_after": "cb5bd739efb6b86a4a505ddb992e663f033fa72715c83b39468d90d584f19f40",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/assets/coffret-gourmand.webp",
+      "target": "scripts/demonstration/assets/coffret-gourmand.webp",
+      "bytes_before": 61348,
+      "sha256_before": "d4e25964b73612681809ca21728d182d9d9ef260947c8e86439e7b3784f38706",
+      "sha256_after": "d4e25964b73612681809ca21728d182d9d9ef260947c8e86439e7b3784f38706",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/assets/coffret-malin.webp",
+      "target": "scripts/demonstration/assets/coffret-malin.webp",
+      "bytes_before": 59074,
+      "sha256_before": "b03830a48978c0ba5206d26be9f3f1391ffe8d6023439883c8bab67523e97aa3",
+      "sha256_after": "b03830a48978c0ba5206d26be9f3f1391ffe8d6023439883c8bab67523e97aa3",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/assets/coffret-saveurs-locales.webp",
+      "target": "scripts/demonstration/assets/coffret-saveurs-locales.webp",
+      "bytes_before": 77026,
+      "sha256_before": "34ae791892dfab6e3b1d14dddd6969f99c83d8bab80c86ee91ccc09584627754",
+      "sha256_after": "34ae791892dfab6e3b1d14dddd6969f99c83d8bab80c86ee91ccc09584627754",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/assets/degustation.jpg",
+      "target": "scripts/demonstration/assets/degustation.jpg",
+      "bytes_before": 328268,
+      "sha256_before": "33242663c1b255a5ee7e30c94abecfceb45a27c066842e33480bf70f30502b2a",
+      "sha256_after": "33242663c1b255a5ee7e30c94abecfceb45a27c066842e33480bf70f30502b2a",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/assets/fleuriste.jpg",
+      "target": "scripts/demonstration/assets/fleuriste.jpg",
+      "bytes_before": 515693,
+      "sha256_before": "4cb93cfba2425cef65f1a15fdca781af1d670f80853ca8c4d323c63043e389c0",
+      "sha256_after": "4cb93cfba2425cef65f1a15fdca781af1d670f80853ca8c4d323c63043e389c0",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/assets/librairie.jpg",
+      "target": "scripts/demonstration/assets/librairie.jpg",
+      "bytes_before": 348908,
+      "sha256_before": "6f3574aa34deb2fc68f395a2bbd352b116461c38b733d670109ef8568d593e9a",
+      "sha256_after": "6f3574aa34deb2fc68f395a2bbd352b116461c38b733d670109ef8568d593e9a",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/assets/livres.jpg",
+      "target": "scripts/demonstration/assets/livres.jpg",
+      "bytes_before": 422937,
+      "sha256_before": "10834018b270209abd5d9cba600bd93db885c4a80aeee7ace6f060cfe932ae19",
+      "sha256_after": "10834018b270209abd5d9cba600bd93db885c4a80aeee7ace6f060cfe932ae19",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/assets/localeo-artisan-documentaire.jpg",
+      "target": "scripts/demonstration/assets/localeo-artisan-documentaire.jpg",
+      "bytes_before": 216283,
+      "sha256_before": "18b157fda11a50b383a073d9dd10de3486f46822999c3717c92d1e3e7fa47e9a",
+      "sha256_after": "18b157fda11a50b383a073d9dd10de3486f46822999c3717c92d1e3e7fa47e9a",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/assets/localeo-experience-documentaire.jpg",
+      "target": "scripts/demonstration/assets/localeo-experience-documentaire.jpg",
+      "bytes_before": 231108,
+      "sha256_before": "bb34283deb04f8ed816d419ea82c1687b7bbdba93b09c1a9b98e5b366bf16f78",
+      "sha256_after": "bb34283deb04f8ed816d419ea82c1687b7bbdba93b09c1a9b98e5b366bf16f78",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/assets/localeo-marche-documentaire.jpg",
+      "target": "scripts/demonstration/assets/localeo-marche-documentaire.jpg",
+      "bytes_before": 262022,
+      "sha256_before": "1b752a3d7eefc60c9f478ab4ef8ddc8ab60f6728eb50c6300b67b37401efc7e0",
+      "sha256_after": "1b752a3d7eefc60c9f478ab4ef8ddc8ab60f6728eb50c6300b67b37401efc7e0",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/assets/marche.jpg",
+      "target": "scripts/demonstration/assets/marche.jpg",
+      "bytes_before": 144375,
+      "sha256_before": "c3c889dcff21f8ce79e2787cfbbb8e4f22eab5fd47cdb1a47bcc4aacf52321f0",
+      "sha256_after": "c3c889dcff21f8ce79e2787cfbbb8e4f22eab5fd47cdb1a47bcc4aacf52321f0",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/assets/modelage.jpg",
+      "target": "scripts/demonstration/assets/modelage.jpg",
+      "bytes_before": 271786,
+      "sha256_before": "5e9c51dd22eebd6606ac66101cf17eb67d8d4a48df4976965d4f23be6bccf192",
+      "sha256_after": "5e9c51dd22eebd6606ac66101cf17eb67d8d4a48df4976965d4f23be6bccf192",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/assets/pain.jpg",
+      "target": "scripts/demonstration/assets/pain.jpg",
+      "bytes_before": 151151,
+      "sha256_before": "cb111369febaaf5ca41942ff107b212931dc72280fe428f0f59022d7087b6d18",
+      "sha256_after": "cb111369febaaf5ca41942ff107b212931dc72280fe428f0f59022d7087b6d18",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/assets/README.md",
+      "target": "scripts/demonstration/assets/README.md",
+      "bytes_before": 1251,
+      "sha256_before": "31939af892de8c860105d91ea3890855738e5795dd02aceef92eb711ad446c5b",
+      "sha256_after": "31939af892de8c860105d91ea3890855738e5795dd02aceef92eb711ad446c5b",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/assets/relaxation.jpg",
+      "target": "scripts/demonstration/assets/relaxation.jpg",
+      "bytes_before": 117335,
+      "sha256_before": "ac30f6569020bd6989fcaae664fae382c467f3afe4549ff33c6d5ff2cea29999",
+      "sha256_after": "ac30f6569020bd6989fcaae664fae382c467f3afe4549ff33c6d5ff2cea29999",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/assets/restaurant.jpg",
+      "target": "scripts/demonstration/assets/restaurant.jpg",
+      "bytes_before": 202469,
+      "sha256_before": "4abc710aef968a223cc181371a3fb970d9f005fc53e275acc04cbf76317a0a65",
+      "sha256_after": "4abc710aef968a223cc181371a3fb970d9f005fc53e275acc04cbf76317a0a65",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/assets/seance-photo.jpg",
+      "target": "scripts/demonstration/assets/seance-photo.jpg",
+      "bytes_before": 91445,
+      "sha256_before": "c09a8254dbd18d317a3216e3aae19eb64c8c6287b67f984c888d48215c185fb5",
+      "sha256_after": "c09a8254dbd18d317a3216e3aae19eb64c8c6287b67f984c888d48215c185fb5",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/assets/serviettes.jpg",
+      "target": "scripts/demonstration/assets/serviettes.jpg",
+      "bytes_before": 279996,
+      "sha256_before": "60889fbdaec62416cc4a7a45ba1cb55f5de2cec002842e08d7ff249352b457e3",
+      "sha256_after": "60889fbdaec62416cc4a7a45ba1cb55f5de2cec002842e08d7ff249352b457e3",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/assets/sources.json",
+      "target": "scripts/demonstration/assets/sources.json",
+      "bytes_before": 11265,
+      "sha256_before": "6e03bd02b42f507d24085ad54b84502634c9942ca8faaa21592e8353506b2fb9",
+      "sha256_after": "6e03bd02b42f507d24085ad54b84502634c9942ca8faaa21592e8353506b2fb9",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/assets/studio.jpg",
+      "target": "scripts/demonstration/assets/studio.jpg",
+      "bytes_before": 80626,
+      "sha256_before": "3f1b56bcab6033b7c95aaebed4d5e46e59fd79f9585d9cb2bd13c16a079de776",
+      "sha256_after": "3f1b56bcab6033b7c95aaebed4d5e46e59fd79f9585d9cb2bd13c16a079de776",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/assets/table.jpg",
+      "target": "scripts/demonstration/assets/table.jpg",
+      "bytes_before": 98905,
+      "sha256_before": "5a18ee9b1a5c4c90a2fe9f61cade5cad8bf4d7f3151c0ed3321d23d3fcf91cf1",
+      "sha256_after": "5a18ee9b1a5c4c90a2fe9f61cade5cad8bf4d7f3151c0ed3321d23d3fcf91cf1",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/assets/the.jpg",
+      "target": "scripts/demonstration/assets/the.jpg",
+      "bytes_before": 125673,
+      "sha256_before": "8b1538a26e7abd659c43fe15ea8809c9ded7ba3a4cc551bfecdef88738320f0b",
+      "sha256_after": "8b1538a26e7abd659c43fe15ea8809c9ded7ba3a4cc551bfecdef88738320f0b",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/examples/demo.example.json",
+      "target": "scripts/demonstration/examples/demo.example.json",
+      "bytes_before": 954,
+      "sha256_before": "2aa940dcbc19ad8d47312e8beee080093e4c5536b2a5eb334674d15c4e929a55",
+      "sha256_after": "2aa940dcbc19ad8d47312e8beee080093e4c5536b2a5eb334674d15c4e929a55",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/demonstration/examples/operator.example.json",
+      "target": "scripts/demonstration/examples/operator.example.json",
+      "bytes_before": 2813,
+      "sha256_before": "c3a4d75519ce4e329bf448283adc9d47a89ecb3d6e88b593e1786242a3dc6a2f",
+      "sha256_after": "c3a4d75519ce4e329bf448283adc9d47a89ecb3d6e88b593e1786242a3dc6a2f",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/juridique/preparation.py",
+      "target": "scripts/juridique/preparation.py",
+      "bytes_before": 24772,
+      "sha256_before": "df6ad4d33044973cc3e3cd6e9475d3f7a0c848fd477f50dbafaebb0105f78fe0",
+      "sha256_after": "df6ad4d33044973cc3e3cd6e9475d3f7a0c848fd477f50dbafaebb0105f78fe0",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/juridique/publier_documents.py",
+      "target": "scripts/juridique/publier_documents.py",
+      "bytes_before": 19002,
+      "sha256_before": "e507bc6a12195bb8f8cde1a0dc170fd9b7ac5bdfed88692ff3257107287c6d59",
+      "sha256_after": "e507bc6a12195bb8f8cde1a0dc170fd9b7ac5bdfed88692ff3257107287c6d59",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/juridique/requirements.txt",
+      "target": "scripts/juridique/requirements.txt",
+      "bytes_before": 151,
+      "sha256_before": "c91dfa730a1eb0a3ca8a09b7726b7628c3a462d8020618abfa4c70b6edce0d38",
+      "sha256_after": "c91dfa730a1eb0a3ca8a09b7726b7628c3a462d8020618abfa4c70b6edce0d38",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/juridique/verification_sites.py",
+      "target": "scripts/juridique/verification_sites.py",
+      "bytes_before": 13357,
+      "sha256_before": "e172943268079e7749f3911b6ed118cf1b4d192cdb7b46936540ffbb22e1bbd0",
+      "sha256_after": "e172943268079e7749f3911b6ed118cf1b4d192cdb7b46936540ffbb22e1bbd0",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/juridique/__init__.py",
+      "target": "scripts/juridique/__init__.py",
+      "bytes_before": 85,
+      "sha256_before": "64168aba6e9aa117dccc5cbb68dc9a82771ea4ba1b30000e78621379973a490c",
+      "sha256_after": "64168aba6e9aa117dccc5cbb68dc9a82771ea4ba1b30000e78621379973a490c",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/performance/benchmark_public_reads.py",
+      "target": "scripts/performance/benchmark_public_reads.py",
+      "bytes_before": 6576,
+      "sha256_before": "1e08e98f5df388b6fc0c1a56fb13bdaa0d6344779049bf5cf501a4f49cf26c8a",
+      "sha256_after": "1e08e98f5df388b6fc0c1a56fb13bdaa0d6344779049bf5cf501a4f49cf26c8a",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/performance/build-dataset.ps1",
+      "target": "scripts/performance/build-dataset.ps1",
+      "bytes_before": 3768,
+      "sha256_before": "21756c90241efd9ce3a25a9500ebcc7b52a4730c5b08defeccad14db1cb640d5",
+      "sha256_after": "21756c90241efd9ce3a25a9500ebcc7b52a4730c5b08defeccad14db1cb640d5",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/performance/build_dataset.py",
+      "target": "scripts/performance/build_dataset.py",
+      "bytes_before": 8600,
+      "sha256_before": "2f7bd8fb05a1a1b00d591c5f27b6ee79295c1074e094f37d47913413a7959420",
+      "sha256_after": "1ee996ebe8adc04145146bda7f21914a9d0101603daa50176d09049c1da37e15",
+      "action": "consommateur-adapte",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/performance/common.py",
+      "target": "scripts/performance/common.py",
+      "bytes_before": 5289,
+      "sha256_before": "79c6a30c992a308623ea3d6ff259178e58af9cabd0f85bce7f6daf2945dac132",
+      "sha256_after": "79c6a30c992a308623ea3d6ff259178e58af9cabd0f85bce7f6daf2945dac132",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/performance/dataset_small.py",
+      "target": "scripts/performance/dataset_small.py",
+      "bytes_before": 28575,
+      "sha256_before": "c0264a9f3439e625e1b7fc658f781716b2fc49b3e835805222915b97db6b3cc0",
+      "sha256_after": "c0264a9f3439e625e1b7fc658f781716b2fc49b3e835805222915b97db6b3cc0",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/performance/install-k6.ps1",
+      "target": "scripts/performance/install-k6.ps1",
+      "bytes_before": 5615,
+      "sha256_before": "6d5ef4a7a23743649ed3475113a523c6a4e55624536e510c3c4d95ba73d4b448",
+      "sha256_after": "6d5ef4a7a23743649ed3475113a523c6a4e55624536e510c3c4d95ba73d4b448",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/performance/load-secrets.ps1",
+      "target": "scripts/performance/load-secrets.ps1",
+      "bytes_before": 751,
+      "sha256_before": "be6e93f8d08bacdbd16a6f71bea94c130299b2f068d06c02ee5556c9c8e0ce3f",
+      "sha256_after": "be6e93f8d08bacdbd16a6f71bea94c130299b2f068d06c02ee5556c9c8e0ce3f",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/performance/profile_catalogue_indexes.py",
+      "target": "scripts/performance/profile_catalogue_indexes.py",
+      "bytes_before": 13894,
+      "sha256_before": "586a6e1eaa596fa948c64b22bea20d40bf2e31094e19c62da3ca15136e25bd3b",
+      "sha256_after": "586a6e1eaa596fa948c64b22bea20d40bf2e31094e19c62da3ca15136e25bd3b",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/performance/profile_read_volume.py",
+      "target": "scripts/performance/profile_read_volume.py",
+      "bytes_before": 9873,
+      "sha256_before": "4000b7493260fbc547952352959f95d933b80165452c91277fca0b5fa3ebf21e",
+      "sha256_after": "4000b7493260fbc547952352959f95d933b80165452c91277fca0b5fa3ebf21e",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/performance/run-campaign.ps1",
+      "target": "scripts/performance/run-campaign.ps1",
+      "bytes_before": 1536,
+      "sha256_before": "c6ea4754c73ebd79f7669f1e0ad2c1df152bc72d15df4dc8d773e817ddb4a22d",
+      "sha256_after": "c6ea4754c73ebd79f7669f1e0ad2c1df152bc72d15df4dc8d773e817ddb4a22d",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/performance/run-k6.ps1",
+      "target": "scripts/performance/run-k6.ps1",
+      "bytes_before": 1591,
+      "sha256_before": "e64123b1da33b3aea8793c35d90d1aef569a8f32e426056d9149859ac7223cd7",
+      "sha256_after": "e64123b1da33b3aea8793c35d90d1aef569a8f32e426056d9149859ac7223cd7",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/performance/run_campaign.py",
+      "target": "scripts/performance/run_campaign.py",
+      "bytes_before": 13587,
+      "sha256_before": "12054cb5590c84df410aa60a5296b18ac501602fde08a90a9595ba2a561ae84f",
+      "sha256_after": "9237cd987a1edb19c91b75c4a0f9ce9a552f20ddad9d8e097c5f2711ea14361e",
+      "action": "consommateur-adapte",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/performance/__init__.py",
+      "target": "scripts/performance/__init__.py",
+      "bytes_before": 60,
+      "sha256_before": "1536e2133057171a5110e24ecf5377483c17862b4d6d8b70bb025e3708dbaf15",
+      "sha256_after": "1536e2133057171a5110e24ecf5377483c17862b4d6d8b70bb025e3708dbaf15",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/references/profil-facturation.localeo.template.json",
+      "target": "scripts/references/profil-facturation.localeo.template.json",
+      "bytes_before": 696,
+      "sha256_before": "c1970a9b67d89ed569577e6fcc78b820288c70ece6a9103bbfa3fdd9fcbbb331",
+      "sha256_after": "c1970a9b67d89ed569577e6fcc78b820288c70ece6a9103bbfa3fdd9fcbbb331",
+      "action": "conserve",
+      "recommendation": "conserver"
+    },
+    {
+      "path": "scripts/references/references.example.json",
+      "target": "scripts/references/references.example.json",
+      "bytes_before": 17528,
+      "sha256_before": "0f5f168e8197e0fe804ef00343bea70752c69733f2711f96f8ce1ee32bb8be41",
+      "sha256_after": "0f5f168e8197e0fe804ef00343bea70752c69733f2711f96f8ce1ee32bb8be41",
+      "action": "conserve",
+      "recommendation": "conserver"
+    }
+  ],
+  "new_navigation_files": [
+    "scripts/README.md",
+    "scripts/archives/README.md"
+  ],
+  "validation": {
+    "targeted_backend_passed": 144,
+    "targeted_backend_skipped": 2,
+    "architecture_passed": 357,
+    "architecture_preexisting_failed": 2,
+    "project_bundle_tests_passed": 15,
+    "project_bundle_tests_skipped": 1,
+    "script_imports_missing": 0,
+    "archive_content_changes": 0
+  }
+}

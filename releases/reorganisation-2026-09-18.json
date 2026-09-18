@@ -1,0 +1,10 @@
+{
+  "status": "baseline-avant-reorganisation-non-deployee",
+  "date": "2026-09-18",
+  "repositories": {
+    "localeo-backend": "ac6defb95b6050d18251d8e180b60765b8ced180",
+    "localeo-marketplace": "a1995e1d26be47a929227ff1abca12d41db050aa",
+    "localeo-commercant": "963964357cf3ea3b2af078f520fca177a7b345c0",
+    "localeo-animation": "6765b47d5d67faab46bef7220bcf061b48ba82b9"
+  }
+}

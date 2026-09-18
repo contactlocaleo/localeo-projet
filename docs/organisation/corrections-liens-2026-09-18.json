@@ -1,0 +1,32 @@
+{
+  "corrected_files": [
+    "docs\\juridique\\INDEX.md",
+    "docs/roadmap/security-performance-roadmap.md",
+    "docs/specifications/epic-41-animation-locale-analyse-api-maquette.animation.md",
+    "docs/roadmap/commercant/epic-56-validation-participation-commercants-animation-backlog.md",
+    "docs/specifications/epic-47-souscription-abonnement-partenaire-animation/README.animation.md",
+    "releases/backend/securite-lots1-2-validation.md"
+  ],
+  "missing_historical_sources": [
+    {
+      "file": "docs/architecture/backend/epics/epic-39-stripe-connect-architecture.md",
+      "label": "Annexe contractuelle - Flux financiers Stripe Connect",
+      "historical_target": "../../juridique/annexe-flux-financiers-stripe-connect.md"
+    },
+    {
+      "file": "docs/architecture/backend/epics/epic-39-stripe-connect-architecture.md",
+      "label": "Validation conformite Stripe Connect",
+      "historical_target": "../../juridique/lot-0-dossier-validation-conformite-stripe-connect.md"
+    },
+    {
+      "file": "docs/architecture/backend/epics/epic-39-stripe-connect-architecture.md",
+      "label": "Documentation onboarding commercant Stripe Connect",
+      "historical_target": "../../juridique/onboarding-commercant-stripe-connect.md"
+    },
+    {
+      "file": "docs/roadmap/terminees/epic-39-stripe-connect-psp-backlog.md",
+      "label": "Annexe contractuelle - Flux financiers Stripe Connect",
+      "historical_target": "../../juridique/annexe-flux-financiers-stripe-connect.md"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-18",
+  "type": "coordination-des-commits",
+  "scope": "Centralisation documentaire, purges approuvees et reorganisation des scripts et specifications",
+  "deployed": false,
+  "documentation": {
+    "repository": "localeo-projet",
+    "branch": "main",
+    "note": "Le commit contenant ce manifeste porte les sources documentaires communes."
+  },
+  "applications": [
+    {
+      "name": "localeo-backend",
+      "commit": "462a496b8a668eecb275d5f153e422ddc6aa404a",
+      "branch": "main",
+      "remote": "https://github.com/contactlocaleo/localeo-backend.git"
+    },
+    {
+      "name": "localeo-animation",
+      "commit": "59a21b664478ed14f09e9f0eb5dfbf8a79cb838c",
+      "branch": "main",
+      "remote": "https://github.com/contactlocaleo/localeo-animation.git"
+    },
+    {
+      "name": "localeo-commercant",
+      "commit": "2eb408b8ff81b16c563824213ee47190132b292d",
+      "branch": "main",
+      "remote": "https://github.com/contactlocaleo/localeo-commercant.git"
+    },
+    {
+      "name": "localeo-marketplace",
+      "commit": "39278fd25706f2ae634514aa56347bff50db7fbc",
+      "branch": "main",
+      "remote": "https://github.com/contactlocaleo/localeo-marketplace.git"
+    }
+  ],
+  "validation": {
+    "specification_files": 145,
+    "broken_specification_links": 0,
+    "export_sources": 117,
+    "documentation_sync": {
+      "passed": 15,
+      "skipped": 1
+    }
+  },
+  "known_limits": [
+    "Dix destinations historiques de roadmap sont deja absentes avant la reorganisation des specifications.",
+    "Trois liens historiques hors specifications restent a examiner.",
+    "Les reserves metier conservees et les controles applicatifs sont detailles dans les comptes rendus de reorganisation."
+  ],
+  "working_changes_not_included": [
+    "Modifications metier Marketplace preexistantes et nouveaux fichiers de travail associes.",
+    "Fichier local backend .env.demo.",
+    "Suppressions recentes des contrats API frontend et de figma/Localeo Animation.zip."
+  ]
+}

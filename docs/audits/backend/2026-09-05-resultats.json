@@ -1,0 +1,100 @@
+﻿{
+  "python": "3.12.14",
+  "checks": [
+    {
+      "check": "F01_host_path",
+      "reproduced": true,
+      "normal_status": 401,
+      "malformed_host_reaches_downstream": true,
+      "scope_path_unchanged": true,
+      "dependency_model": "Starlette 0.50.0 source semantics; not ASGI integration"
+    },
+    {
+      "check": "F02_hybrid_access",
+      "reproduced": true,
+      "unrelated_merchant_accepted": true,
+      "beneficiary_field_returned": true,
+      "auth": "valid-session verifier mocked; real dependency and real use-case definitions"
+    },
+    {
+      "check": "F05_F15_untrusted_headers",
+      "reproduced": true,
+      "ip_overrides_transport": true,
+      "actor_overrides_authentication": true
+    },
+    {
+      "check": "F09_admin_guard",
+      "reproduced": true,
+      "renaming_username_bypasses_default_password_guard": true,
+      "all_configuration_values_synthetic": true
+    },
+    {
+      "check": "F11_n_plus_one",
+      "reproduced": true,
+      "measurements": [
+        {
+          "prestations": 1,
+          "individual_repository_reads": 1
+        },
+        {
+          "prestations": 10,
+          "individual_repository_reads": 10
+        },
+        {
+          "prestations": 100,
+          "individual_repository_reads": 100
+        }
+      ],
+      "sql_latency_measured": false
+    },
+    {
+      "check": "F03_F07_webpush_sink",
+      "reproduced": true,
+      "private_destination_passed_to_provider": true,
+      "explicit_timeout": false,
+      "outbound_request_made": false,
+      "cryptographic_encoding_tested": false
+    },
+    {
+      "check": "F14_checkout_logging",
+      "reproduced": true,
+      "synthetic_checkout_identifier_survives_text_redaction": true
+    }
+  ],
+  "inventory": {
+    "python_files_parsed": {
+      "app": 514,
+      "tests": 450,
+      "scripts": 15
+    },
+    "syntax_errors": [],
+    "http_route_declarations": 468,
+    "async_route_declarations": 81,
+    "largest_modules": [
+      {
+        "file": "app/infrastructure/admin/admin.py",
+        "lines": 15263
+      },
+      {
+        "file": "app/api/animation_locale_api.py",
+        "lines": 3065
+      },
+      {
+        "file": "app/infrastructure/persistence/models.py",
+        "lines": 2187
+      },
+      {
+        "file": "app/application/exploitation/services/service_preparation_email.py",
+        "lines": 1569
+      },
+      {
+        "file": "app/infrastructure/persistence/repositories/animation_locale_repositories.py",
+        "lines": 1456
+      },
+      {
+        "file": "app/api/localeo_live_api.py",
+        "lines": 1287
+      }
+    ]
+  }
+}

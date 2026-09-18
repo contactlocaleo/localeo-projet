@@ -1,0 +1,17 @@
+{
+  "environments": {
+    "test": {
+      "expected_environment": "test",
+      "api_base_url": "https://test-api.localeo.city",
+      "sites": {
+        "marketplace": {"url": "https://test-marketplace.localeo.city", "reader_path": "/juridique"},
+        "live": {"url": "https://test-marketplace.localeo.city", "reader_path": "/live/juridique"},
+        "commercant": {"url": "https://test-commercant.localeo.city", "reader_path": "/juridique"},
+        "animation": {
+          "url": "https://test-animation.localeo.city", "reader_path": "/juridique",
+          "api_base_url": "https://test-backoffice.localeo.city"
+        }
+      }
+    }
+  }
+}
