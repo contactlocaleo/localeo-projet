@@ -1033,6 +1033,14 @@ Le pilotage s'intègre à l'ERP/BackOffice Localeo existant ; il ne repose pas s
 
 **Présentation ERP retenue (TRE-ARB-74, choix 15.A du 19 septembre 2026) :** liste filtrable avec statuts et fiche détaillée. Afficher notamment partenaire, commune, ancienneté, prochaine action autorisée et erreurs ; la fiche donne accès au prompt, au dépôt du résultat, aux contrôles et à l’historique. La prochaine action dépend de l’état serveur et des droits, sans exécuter automatiquement une transition. La V1 n’exige pas une seconde vue en colonnes par statut. Le placement précis dans la navigation reste à aligner à l’ERP existant.
 
+#### Parcours guidé de traitement (T6-UX02)
+
+Le parcours principal présente les demandes par nom d'animation, avec état lisible et prochaine action. Sélectionner une demande ouvre son contexte et trois étapes : **Copier le prompt**, **Vérifier la réponse**, **Traiter la demande**. Le prompt complet apparaît dès qu'il est disponible ; sa copie inclut tous les messages et le schéma JSON attendu. Les exports restent accessibles.
+
+La réponse peut être collée ou chargée depuis un fichier. **Vérifier la réponse** appelle le validateur du moteur sans dépôt ni consommation de quota : erreurs avec emplacement, contrôle des références/médias, puis aperçu des textes, missions commerçantes, défis, réponses attendues et illustrations. Un rapport conforme autorise **Enregistrer la réponse** ; le dépôt durable reste contrôlé côté serveur. Toute modification du texte, du prompt ou de la version invalide cette pré-vérification.
+
+Après contrôle de la tentative enregistrée, l'opérateur confirme sa relecture puis choisit **Traiter la demande**. Cette acceptation complète le brouillon du gestionnaire ; elle ne publie pas l'animation au public. Les états, droits et reçus restent ceux du moteur. Les actions complémentaires et références techniques sont repliées pour laisser le parcours principal lisible ; elles restent disponibles aux acteurs autorisés. Les précisions techniques sont en [T6-UX02 de la conception](conception-technique.md).
+
 #### File de demandes
 
 Afficher identifiant, type, commune, partenaire, demandeur, date, statut, dernière activité, opérateur chargé du traitement, version du prompt, résultat disponible, dernière erreur et lien vers le brouillon ou l'instance finale. Proposer filtres par type, commune, partenaire, statut, opérateur et ancienneté, avec recherche par identifiant/nom. Les compteurs distinguent demandes en attente manuelle, résultats à contrôler et finalisations échouées. Afficher l’ancienneté et le mois de réservation du quota ; permettre tri/filtre pour retrouver les demandes anciennes. Une attente prolongée n’entraîne aucune annulation automatique, y compris après 30 jours ou un changement de mois. L’opérateur autorisé peut annuler manuellement la demande pour libérer sa réservation, avec motif et audit ; une consommation déjà réalisée n’est pas remboursée.

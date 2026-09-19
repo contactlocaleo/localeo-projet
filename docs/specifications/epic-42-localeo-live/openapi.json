@@ -15757,6 +15757,20 @@
             "format": "uuid",
             "title": "Animationid"
           },
+          "animationName": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 200,
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Animationname"
+          },
           "partenaireId": {
             "type": "string",
             "format": "uuid",
@@ -16042,6 +16056,20 @@
             "type": "string",
             "format": "uuid",
             "title": "Animationid"
+          },
+          "animationName": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 200,
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Animationname"
           },
           "partenaireId": {
             "type": "string",
