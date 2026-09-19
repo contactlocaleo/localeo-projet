@@ -280,6 +280,8 @@ Refus à couvrir : commerce inconnu/non autorisé, période invalide, acteur non
 
 #### 4.3.3 Template Passeport délégué à un provider
 
+**Évolution du 20 septembre 2026 — T6-UX03 :** dans Localeo Animation, le Passeport se crée et se configure manuellement, sans choix de préparation ni panneau Léo. La capacité technique historique décrite ci-dessous reste conservée dans les contrats ; elle ne doit pas être exposée comme un parcours IA pour le gestionnaire.
+
 **Décision utilisateur :** le moteur Passeport doit prévoir la génération d'un template via un provider de type LLM. Le contrat de délégation sépare la préparation de la requête et le traitement de la réponse. En V1, la préparation fonctionne, mais aucun appel LLM n'est exécuté automatiquement : une action humaine récupère le prompt, l'exécute hors projet et publie le résultat pour reprendre la création.
 
 Le template désigne une définition de présentation et de contenus du Passeport : titre, introduction, consignes, libellés de progression et contenus autorisés liés aux commerces. Il peut référencer des assets approuvés. Il ne contient pas de composant exécutable, de HTML libre ou de règle de qualification privilégiée. Le template de l'animation est distinct du gabarit de prompt utilisé pour le produire.
