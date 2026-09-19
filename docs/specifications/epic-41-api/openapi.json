@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Backend - contrat implemente EPIC 41",
     "description": "OpenAPI complet du backend, dont les parcours Animation locale. Genere hors ligne depuis le code local pour les integrations et les mocks ; cet instantane ne prouve pas son deploiement.",
-    "version": "1.0.0+43f7495"
+    "version": "1.0.0+0655811"
   },
   "paths": {
     "/internal/erp/api/instances": {
@@ -12525,78 +12525,6 @@
         ]
       }
     },
-    "/public/localeo-live/participations/{participation_id}": {
-      "get": {
-        "tags": [
-          "Localeo Live"
-        ],
-        "summary": "Consulter Participation Live",
-        "operationId": "consulter_participation_live_public_localeo_live_participations__participation_id__get",
-        "parameters": [
-          {
-            "name": "participation_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid",
-              "title": "Participation Id"
-            }
-          },
-          {
-            "name": "inclure_contact",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "boolean",
-              "default": false,
-              "title": "Inclure Contact"
-            }
-          },
-          {
-            "name": "Authorization",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Authorization"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "CommercantSessionBearer": []
-          }
-        ]
-      }
-    },
     "/public/localeo-live/participations/{participation_id}/qrcode": {
       "get": {
         "tags": [
@@ -12657,6 +12585,302 @@
             "CommercantSessionBearer": []
           }
         ]
+      }
+    },
+    "/public/localeo-live/participations/{participation_id}": {
+      "get": {
+        "tags": [
+          "Moteur de jeu Live"
+        ],
+        "summary": "Lire",
+        "operationId": "consulter_participation_moteur_live",
+        "parameters": [
+          {
+            "name": "participation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Participation Id"
+            }
+          },
+          {
+            "name": "inclure_contact",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Inclure Contact"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ParticipationLivePayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/localeo-live/participations/{participation_id}/commandes": {
+      "post": {
+        "tags": [
+          "Moteur de jeu Live"
+        ],
+        "summary": "Commander",
+        "operationId": "executer_commande_participation_moteur",
+        "parameters": [
+          {
+            "name": "participation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Participation Id"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommandeJoueurInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecuCommande"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/localeo-live/participations/{participation_id}/commandes/{cle}": {
+      "get": {
+        "tags": [
+          "Moteur de jeu Live"
+        ],
+        "summary": "Recu",
+        "operationId": "reconcilier_commande_participation_moteur",
+        "parameters": [
+          {
+            "name": "participation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Participation Id"
+            }
+          },
+          {
+            "name": "cle",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Cle"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecuCommandeConfirmee"
+                }
+              }
+            }
+          },
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecuCommandeEnCours"
+                }
+              }
+            },
+            "description": "Accepted"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/localeo-live/participations/{participation_id}/etapes/{step_id}/resultat": {
+      "get": {
+        "tags": [
+          "Moteur de jeu Live"
+        ],
+        "summary": "Resultat",
+        "operationId": "consulter_resultat_etape_participation",
+        "parameters": [
+          {
+            "name": "participation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Participation Id"
+            }
+          },
+          {
+            "name": "step_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Step Id"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultatEtapeParticipant"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/public/profils/commercants/{commercant_id}/page": {
@@ -14516,7 +14740,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ParticipantPublicAnimationPayload"
+                  "$ref": "#/components/schemas/ParticipationLivePayload"
                 }
               }
             }
@@ -30645,9 +30869,21 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/GenerationRetrouvee"
+                }
               }
             }
+          },
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeEnCours"
+                }
+              }
+            },
+            "description": "Accepted"
           },
           "422": {
             "description": "Validation Error",
@@ -30695,9 +30931,21 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeConfirmee_GenerationMutationPayload_"
+                }
               }
             }
+          },
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeEnCours"
+                }
+              }
+            },
+            "description": "Accepted"
           },
           "422": {
             "description": "Validation Error",
@@ -30760,7 +31008,10 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
               }
             }
           },
@@ -30811,7 +31062,10 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
               }
             }
           },
@@ -31360,9 +31614,21 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeConfirmee_PreparationMutationPayload_"
+                }
               }
             }
+          },
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeEnCours"
+                }
+              }
+            },
+            "description": "Accepted"
           },
           "422": {
             "description": "Validation Error",
@@ -31714,9 +31980,21 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeConfirmee_PoiAnimationPayload_"
+                }
               }
             }
+          },
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeEnCours"
+                }
+              }
+            },
+            "description": "Accepted"
           },
           "422": {
             "description": "Validation Error",
@@ -31798,9 +32076,21 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeConfirmee_PoiAnimationPayload_"
+                }
               }
             }
+          },
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeEnCours"
+                }
+              }
+            },
+            "description": "Accepted"
           },
           "422": {
             "description": "Validation Error",
@@ -32072,9 +32362,21 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeConfirmee_TemplateGenerationPayload_"
+                }
               }
             }
+          },
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeEnCours"
+                }
+              }
+            },
+            "description": "Accepted"
           },
           "422": {
             "description": "Validation Error",
@@ -32156,9 +32458,21 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeConfirmee_ReutilisationTemplateGenerationPayload_"
+                }
               }
             }
+          },
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeEnCours"
+                }
+              }
+            },
+            "description": "Accepted"
           },
           "422": {
             "description": "Validation Error",
@@ -32612,9 +32926,21 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/GenerationRetrouvee"
+                }
               }
             }
+          },
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeEnCours"
+                }
+              }
+            },
+            "description": "Accepted"
           },
           "422": {
             "description": "Validation Error",
@@ -32667,9 +32993,21 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeConfirmee_GenerationMutationPayload_"
+                }
               }
             }
+          },
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeEnCours"
+                }
+              }
+            },
+            "description": "Accepted"
           },
           "422": {
             "description": "Validation Error",
@@ -32737,7 +33075,10 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
               }
             }
           },
@@ -32793,7 +33134,10 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
               }
             }
           },
@@ -33387,9 +33731,21 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeConfirmee_PreparationMutationPayload_"
+                }
               }
             }
+          },
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeEnCours"
+                }
+              }
+            },
+            "description": "Accepted"
           },
           "422": {
             "description": "Validation Error",
@@ -33761,9 +34117,21 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeConfirmee_PoiAnimationPayload_"
+                }
               }
             }
+          },
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeEnCours"
+                }
+              }
+            },
+            "description": "Accepted"
           },
           "422": {
             "description": "Validation Error",
@@ -33850,9 +34218,21 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeConfirmee_PoiAnimationPayload_"
+                }
               }
             }
+          },
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeEnCours"
+                }
+              }
+            },
+            "description": "Accepted"
           },
           "422": {
             "description": "Validation Error",
@@ -34144,9 +34524,21 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeConfirmee_TemplateGenerationPayload_"
+                }
               }
             }
+          },
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeEnCours"
+                }
+              }
+            },
+            "description": "Accepted"
           },
           "422": {
             "description": "Validation Error",
@@ -34233,9 +34625,21 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeConfirmee_ReutilisationTemplateGenerationPayload_"
+                }
               }
             }
+          },
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeEnCours"
+                }
+              }
+            },
+            "description": "Accepted"
           },
           "422": {
             "description": "Validation Error",
@@ -34357,9 +34761,21 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeConfirmee_QuotaGenerationPayload_"
+                }
               }
             }
+          },
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeEnCours"
+                }
+              }
+            },
+            "description": "Accepted"
           },
           "422": {
             "description": "Validation Error",
@@ -34565,9 +34981,21 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeConfirmee_RecuPreparationPayload_"
+                }
               }
             }
+          },
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeEnCours"
+                }
+              }
+            },
+            "description": "Accepted"
           },
           "422": {
             "description": "Validation Error",
@@ -34658,9 +35086,21 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeConfirmee_Union_RecuPreparationPayload__RecuQrLieuPayload__"
+                }
               }
             }
+          },
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeEnCours"
+                }
+              }
+            },
+            "description": "Accepted"
           },
           "422": {
             "description": "Validation Error",
@@ -35206,9 +35646,21 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeConfirmee_RecuPreparationPayload_"
+                }
               }
             }
+          },
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeEnCours"
+                }
+              }
+            },
+            "description": "Accepted"
           },
           "422": {
             "description": "Validation Error",
@@ -35309,9 +35761,21 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeConfirmee_Union_RecuPreparationPayload__RecuQrLieuPayload__"
+                }
               }
             }
+          },
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeEnCours"
+                }
+              }
+            },
+            "description": "Accepted"
           },
           "422": {
             "description": "Validation Error",
@@ -35902,9 +36366,21 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeConfirmee_OperationAnimationPayload_"
+                }
               }
             }
+          },
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeEnCours"
+                }
+              }
+            },
+            "description": "Accepted"
           },
           "422": {
             "description": "Validation Error",
@@ -35961,7 +36437,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/CycleGenerationPayload"
+                }
               }
             }
           },
@@ -38012,9 +38490,21 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeConfirmee_list_DemandeParticipationCommercantPayload__"
+                }
               }
             }
+          },
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeEnCours"
+                }
+              }
+            },
+            "description": "Accepted"
           },
           "422": {
             "description": "Validation Error",
@@ -38319,9 +38809,21 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeConfirmee_Union_RecuGestionParticipationPayload__DemandeParticipationCommercantPayload__"
+                }
               }
             }
+          },
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeEnCours"
+                }
+              }
+            },
+            "description": "Accepted"
           },
           "422": {
             "description": "Validation Error",
@@ -39243,9 +39745,21 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeConfirmee_OperationAnimationPayload_"
+                }
               }
             }
+          },
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeEnCours"
+                }
+              }
+            },
+            "description": "Accepted"
           },
           "422": {
             "description": "Validation Error",
@@ -40193,9 +40707,21 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeConfirmee_OperationAnimationPayload_"
+                }
               }
             }
+          },
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeEnCours"
+                }
+              }
+            },
+            "description": "Accepted"
           },
           "422": {
             "description": "Validation Error",
@@ -40394,7 +40920,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ValiderEtapeAnimationRequest"
+                "$ref": "#/components/schemas/AttesterEtapeInput"
               }
             }
           }
@@ -41162,9 +41688,21 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeConfirmee_Union_RecuDecisionMissionPayload__DemandeParticipationCommercantPayload__"
+                }
               }
             }
+          },
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeEnCours"
+                }
+              }
+            },
+            "description": "Accepted"
           },
           "422": {
             "description": "Validation Error",
@@ -44321,7 +44859,94 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/ResolutionScanPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/animation-locale/commercants/me/participants/{participant_id}/attestations/commandes/{cle}": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Lire Recu Attestation",
+        "operationId": "lire_recu_attestation_commercant",
+        "parameters": [
+          {
+            "name": "participant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Participant Id"
+            }
+          },
+          {
+            "name": "cle",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Cle"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:validation`.",
+              "title": "Authorization"
+            },
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:validation`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/AttestationConfirmeePayload"
+                    },
+                    {
+                      "$ref": "#/components/schemas/AttestationEnCoursPayload"
+                    }
+                  ],
+                  "title": "Response Lire Recu Attestation Commercant"
+                }
               }
             }
           },
@@ -46433,6 +47058,56 @@
         ],
         "title": "AnimationDetailPayload"
       },
+      "AnimationParticipationLive": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "nom": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Nom"
+          },
+          "type": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Type"
+          },
+          "statut": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Statut"
+          },
+          "ville": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VilleParticipationLive"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "nom",
+          "type",
+          "statut",
+          "ville"
+        ],
+        "title": "AnimationParticipationLive"
+      },
       "AnimationPubliquePayload": {
         "properties": {
           "id": {
@@ -46573,6 +47248,25 @@
           "detail_url"
         ],
         "title": "AnimationPubliquePayload"
+      },
+      "AnimationScanPayload": {
+        "properties": {
+          "nom": {
+            "type": "string",
+            "title": "Nom"
+          },
+          "commune": {
+            "type": "string",
+            "title": "Commune"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "nom",
+          "commune"
+        ],
+        "title": "AnimationScanPayload"
       },
       "AnimationSummaryPayload": {
         "properties": {
@@ -46938,6 +47632,86 @@
           "ids"
         ],
         "title": "ArchiverAnimationsRequest"
+      },
+      "AttestationConfirmeePayload": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "CONFIRMEE",
+            "title": "Status"
+          },
+          "result": {
+            "$ref": "#/components/schemas/RecuAttestationPayload"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "result"
+        ],
+        "title": "AttestationConfirmeePayload"
+      },
+      "AttestationEnCoursPayload": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "EN_COURS",
+            "title": "Status"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "title": "AttestationEnCoursPayload"
+      },
+      "AttesterEtapeInput": {
+        "properties": {
+          "qr_token": {
+            "type": "string",
+            "maxLength": 512,
+            "minLength": 20,
+            "title": "Qr Token"
+          },
+          "etape_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Etape Id"
+          },
+          "engineContractVersion": {
+            "type": "string",
+            "const": "1.0",
+            "title": "Enginecontractversion"
+          },
+          "definitionVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Definitionversion"
+          },
+          "expectedProgressionVersion": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Expectedprogressionversion"
+          },
+          "expectedExploitationRevision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expectedexploitationrevision"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "qr_token",
+          "etape_id",
+          "engineContractVersion",
+          "definitionVersion",
+          "expectedProgressionVersion",
+          "expectedExploitationRevision"
+        ],
+        "title": "AttesterEtapeInput"
       },
       "AuditAnimationPayload": {
         "properties": {
@@ -49129,6 +49903,395 @@
         ],
         "title": "CoffretsPagePayload"
       },
+      "CommandeConfirmee_GenerationMutationPayload_": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "CONFIRMEE",
+            "title": "Status"
+          },
+          "result": {
+            "$ref": "#/components/schemas/GenerationMutationPayload"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "result"
+        ],
+        "title": "CommandeConfirmee[GenerationMutationPayload]"
+      },
+      "CommandeConfirmee_OperationAnimationPayload_": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "CONFIRMEE",
+            "title": "Status"
+          },
+          "result": {
+            "$ref": "#/components/schemas/OperationAnimationPayload"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "result"
+        ],
+        "title": "CommandeConfirmee[OperationAnimationPayload]"
+      },
+      "CommandeConfirmee_PoiAnimationPayload_": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "CONFIRMEE",
+            "title": "Status"
+          },
+          "result": {
+            "$ref": "#/components/schemas/PoiAnimationPayload"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "result"
+        ],
+        "title": "CommandeConfirmee[PoiAnimationPayload]"
+      },
+      "CommandeConfirmee_PreparationMutationPayload_": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "CONFIRMEE",
+            "title": "Status"
+          },
+          "result": {
+            "$ref": "#/components/schemas/PreparationMutationPayload"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "result"
+        ],
+        "title": "CommandeConfirmee[PreparationMutationPayload]"
+      },
+      "CommandeConfirmee_QuotaGenerationPayload_": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "CONFIRMEE",
+            "title": "Status"
+          },
+          "result": {
+            "$ref": "#/components/schemas/QuotaGenerationPayload"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "result"
+        ],
+        "title": "CommandeConfirmee[QuotaGenerationPayload]"
+      },
+      "CommandeConfirmee_RecuPreparationPayload_": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "CONFIRMEE",
+            "title": "Status"
+          },
+          "result": {
+            "$ref": "#/components/schemas/RecuPreparationPayload"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "result"
+        ],
+        "title": "CommandeConfirmee[RecuPreparationPayload]"
+      },
+      "CommandeConfirmee_ReutilisationTemplateGenerationPayload_": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "CONFIRMEE",
+            "title": "Status"
+          },
+          "result": {
+            "$ref": "#/components/schemas/ReutilisationTemplateGenerationPayload"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "result"
+        ],
+        "title": "CommandeConfirmee[ReutilisationTemplateGenerationPayload]"
+      },
+      "CommandeConfirmee_TemplateGenerationPayload_": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "CONFIRMEE",
+            "title": "Status"
+          },
+          "result": {
+            "$ref": "#/components/schemas/TemplateGenerationPayload"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "result"
+        ],
+        "title": "CommandeConfirmee[TemplateGenerationPayload]"
+      },
+      "CommandeConfirmee_Union_RecuDecisionMissionPayload__DemandeParticipationCommercantPayload__": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "CONFIRMEE",
+            "title": "Status"
+          },
+          "result": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RecuDecisionMissionPayload"
+              },
+              {
+                "$ref": "#/components/schemas/DemandeParticipationCommercantPayload"
+              }
+            ],
+            "title": "Result"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "result"
+        ],
+        "title": "CommandeConfirmee[Union[RecuDecisionMissionPayload, DemandeParticipationCommercantPayload]]"
+      },
+      "CommandeConfirmee_Union_RecuGestionParticipationPayload__DemandeParticipationCommercantPayload__": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "CONFIRMEE",
+            "title": "Status"
+          },
+          "result": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RecuGestionParticipationPayload"
+              },
+              {
+                "$ref": "#/components/schemas/DemandeParticipationCommercantPayload"
+              }
+            ],
+            "title": "Result"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "result"
+        ],
+        "title": "CommandeConfirmee[Union[RecuGestionParticipationPayload, DemandeParticipationCommercantPayload]]"
+      },
+      "CommandeConfirmee_Union_RecuPreparationPayload__RecuQrLieuPayload__": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "CONFIRMEE",
+            "title": "Status"
+          },
+          "result": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RecuPreparationPayload"
+              },
+              {
+                "$ref": "#/components/schemas/RecuQrLieuPayload"
+              }
+            ],
+            "title": "Result"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "result"
+        ],
+        "title": "CommandeConfirmee[Union[RecuPreparationPayload, RecuQrLieuPayload]]"
+      },
+      "CommandeConfirmee_list_DemandeParticipationCommercantPayload__": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "CONFIRMEE",
+            "title": "Status"
+          },
+          "result": {
+            "items": {
+              "$ref": "#/components/schemas/DemandeParticipationCommercantPayload"
+            },
+            "type": "array",
+            "title": "Result"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "result"
+        ],
+        "title": "CommandeConfirmee[list[DemandeParticipationCommercantPayload]]"
+      },
+      "CommandeDebut": {
+        "properties": {
+          "engineContractVersion": {
+            "type": "string",
+            "const": "1.0",
+            "title": "Enginecontractversion"
+          },
+          "definitionVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Definitionversion"
+          },
+          "expectedProgressionVersion": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Expectedprogressionversion"
+          },
+          "expectedExploitationRevision": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Expectedexploitationrevision"
+          },
+          "action": {
+            "type": "string",
+            "const": "START_GAME",
+            "title": "Action"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/PayloadVide"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "engineContractVersion",
+          "definitionVersion",
+          "expectedProgressionVersion",
+          "expectedExploitationRevision",
+          "action",
+          "payload"
+        ],
+        "title": "CommandeDebut"
+      },
+      "CommandeEnCours": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "EN_COURS",
+            "title": "Status"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "title": "CommandeEnCours"
+      },
+      "CommandeEtape": {
+        "properties": {
+          "engineContractVersion": {
+            "type": "string",
+            "const": "1.0",
+            "title": "Enginecontractversion"
+          },
+          "definitionVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Definitionversion"
+          },
+          "expectedProgressionVersion": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Expectedprogressionversion"
+          },
+          "expectedExploitationRevision": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Expectedexploitationrevision"
+          },
+          "action": {
+            "type": "string",
+            "enum": [
+              "CONTINUE",
+              "REQUEST_HINT",
+              "REQUEST_HELP"
+            ],
+            "title": "Action"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/PayloadEtape"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "engineContractVersion",
+          "definitionVersion",
+          "expectedProgressionVersion",
+          "expectedExploitationRevision",
+          "action",
+          "payload"
+        ],
+        "title": "CommandeEtape"
+      },
+      "CommandeJoueurInput": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/CommandeDebut"
+          },
+          {
+            "$ref": "#/components/schemas/CommandeQr"
+          },
+          {
+            "$ref": "#/components/schemas/CommandeReponse"
+          },
+          {
+            "$ref": "#/components/schemas/CommandeEtape"
+          }
+        ],
+        "title": "CommandeJoueurInput",
+        "discriminator": {
+          "propertyName": "action",
+          "mapping": {
+            "CONTINUE": "#/components/schemas/CommandeEtape",
+            "REQUEST_HELP": "#/components/schemas/CommandeEtape",
+            "REQUEST_HINT": "#/components/schemas/CommandeEtape",
+            "SCAN_QR": "#/components/schemas/CommandeQr",
+            "START_GAME": "#/components/schemas/CommandeDebut",
+            "SUBMIT_ANSWER": "#/components/schemas/CommandeReponse"
+          }
+        }
+      },
       "CommandeLotsAnimationPayload": {
         "properties": {
           "commande_id": {
@@ -49277,6 +50440,92 @@
           "action"
         ],
         "title": "CommandeLotsAnimationPayload"
+      },
+      "CommandeQr": {
+        "properties": {
+          "engineContractVersion": {
+            "type": "string",
+            "const": "1.0",
+            "title": "Enginecontractversion"
+          },
+          "definitionVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Definitionversion"
+          },
+          "expectedProgressionVersion": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Expectedprogressionversion"
+          },
+          "expectedExploitationRevision": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Expectedexploitationrevision"
+          },
+          "action": {
+            "type": "string",
+            "const": "SCAN_QR",
+            "title": "Action"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/PayloadQr"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "engineContractVersion",
+          "definitionVersion",
+          "expectedProgressionVersion",
+          "expectedExploitationRevision",
+          "action",
+          "payload"
+        ],
+        "title": "CommandeQr"
+      },
+      "CommandeReponse": {
+        "properties": {
+          "engineContractVersion": {
+            "type": "string",
+            "const": "1.0",
+            "title": "Enginecontractversion"
+          },
+          "definitionVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Definitionversion"
+          },
+          "expectedProgressionVersion": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Expectedprogressionversion"
+          },
+          "expectedExploitationRevision": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Expectedexploitationrevision"
+          },
+          "action": {
+            "type": "string",
+            "const": "SUBMIT_ANSWER",
+            "title": "Action"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/PayloadReponse"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "engineContractVersion",
+          "definitionVersion",
+          "expectedProgressionVersion",
+          "expectedExploitationRevision",
+          "action",
+          "payload"
+        ],
+        "title": "CommandeReponse"
       },
       "CommandeSouscriptionPayload": {
         "properties": {
@@ -49792,6 +51041,60 @@
           "statut"
         ],
         "title": "CommercantPublicPayload"
+      },
+      "CommerceParticipant": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "nom": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Nom"
+          },
+          "adresse": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 20000,
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Adresse"
+          },
+          "valide": {
+            "type": "boolean",
+            "title": "Valide"
+          },
+          "dateValidation": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Datevalidation"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "nom",
+          "valide"
+        ],
+        "title": "CommerceParticipant"
       },
       "CommuneActualiteAnimationPayload": {
         "properties": {
@@ -51268,6 +52571,30 @@
       },
       "CreerInscriptionAnimationRequest": {
         "properties": {
+          "declaration_adulte": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Declaration Adulte"
+          },
+          "reglement_version": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reglement Version"
+          },
           "nom": {
             "type": "string",
             "maxLength": 120,
@@ -51303,6 +52630,7 @@
             "default": false
           }
         },
+        "additionalProperties": false,
         "type": "object",
         "required": [
           "nom",
@@ -51619,6 +52947,29 @@
           "configurationVersion"
         ],
         "title": "CreerQrLieuInput"
+      },
+      "CycleGenerationPayload": {
+        "properties": {
+          "traitees": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Traitees"
+          },
+          "resultats": {
+            "items": {
+              "$ref": "#/components/schemas/ResultatWorkerGenerationPayload"
+            },
+            "type": "array",
+            "title": "Resultats"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "traitees",
+          "resultats"
+        ],
+        "title": "CycleGenerationPayload"
       },
       "DashboardOperationnelCommercantPayload": {
         "properties": {
@@ -52022,6 +53373,49 @@
         ],
         "title": "DefiAssociation"
       },
+      "DefiAssociationJouable": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "ASSOCIATION",
+            "title": "Type"
+          },
+          "question": {
+            "type": "string",
+            "maxLength": 20000,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Question"
+          },
+          "leftItems": {
+            "items": {
+              "$ref": "#/components/schemas/ElementJouable"
+            },
+            "type": "array",
+            "maxItems": 6,
+            "minItems": 2,
+            "title": "Leftitems"
+          },
+          "rightItems": {
+            "items": {
+              "$ref": "#/components/schemas/ElementJouable"
+            },
+            "type": "array",
+            "maxItems": 6,
+            "minItems": 2,
+            "title": "Rightitems"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "type",
+          "question",
+          "leftItems",
+          "rightItems"
+        ],
+        "title": "DefiAssociationJouable"
+      },
       "DefiInformation": {
         "properties": {
           "type": {
@@ -52050,6 +53444,35 @@
           "bouton"
         ],
         "title": "DefiInformation"
+      },
+      "DefiInformationJouable": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "INFORMATION",
+            "title": "Type"
+          },
+          "text": {
+            "type": "string",
+            "maxLength": 20000,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Text"
+          },
+          "buttonLabel": {
+            "type": "string",
+            "const": "Continuer",
+            "title": "Buttonlabel"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "type",
+          "text",
+          "buttonLabel"
+        ],
+        "title": "DefiInformationJouable"
       },
       "DefiOrdre": {
         "properties": {
@@ -52113,6 +53536,39 @@
         ],
         "title": "DefiOrdre"
       },
+      "DefiOrdreJouable": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "ORDERING",
+            "title": "Type"
+          },
+          "question": {
+            "type": "string",
+            "maxLength": 20000,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Question"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ElementJouable"
+            },
+            "type": "array",
+            "maxItems": 6,
+            "minItems": 3,
+            "title": "Items"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "type",
+          "question",
+          "items"
+        ],
+        "title": "DefiOrdreJouable"
+      },
       "DefiQcm": {
         "properties": {
           "question": {
@@ -52169,6 +53625,39 @@
           "bonneReponseId"
         ],
         "title": "DefiQcm"
+      },
+      "DefiQcmJouable": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "SINGLE_CHOICE",
+            "title": "Type"
+          },
+          "question": {
+            "type": "string",
+            "maxLength": 20000,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Question"
+          },
+          "choices": {
+            "items": {
+              "$ref": "#/components/schemas/ElementJouable"
+            },
+            "type": "array",
+            "maxItems": 6,
+            "minItems": 2,
+            "title": "Choices"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "type",
+          "question",
+          "choices"
+        ],
+        "title": "DefiQcmJouable"
       },
       "DefiTexte": {
         "properties": {
@@ -52229,6 +53718,38 @@
           "reponsesAcceptees"
         ],
         "title": "DefiTexte"
+      },
+      "DefiTexteJouable": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "TEXT_INPUT",
+            "title": "Type"
+          },
+          "question": {
+            "type": "string",
+            "maxLength": 20000,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Question"
+          },
+          "normalization": {
+            "type": "string",
+            "enum": [
+              "TEXTE",
+              "CODE"
+            ],
+            "title": "Normalization"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "type",
+          "question",
+          "normalization"
+        ],
+        "title": "DefiTexteJouable"
       },
       "DemandeGenerationChasse": {
         "properties": {
@@ -53267,6 +54788,31 @@
         ],
         "title": "ElementDefi"
       },
+      "ElementJouable": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Id"
+          },
+          "label": {
+            "type": "string",
+            "maxLength": 20000,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Label"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "label"
+        ],
+        "title": "ElementJouable"
+      },
       "EligibleAnimationPayload": {
         "properties": {
           "id": {
@@ -53787,6 +55333,221 @@
           "defi"
         ],
         "title": "EtapeNonCommercante"
+      },
+      "EtapeParticipant": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "titre": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Titre"
+          },
+          "lieu": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/LieuPhysiqueJouable"
+              },
+              {
+                "$ref": "#/components/schemas/LieuVirtuelJouable"
+              }
+            ],
+            "title": "Lieu"
+          },
+          "texteJoueur": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 20000,
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Textejoueur"
+          },
+          "consigne": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 20000,
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Consigne"
+          },
+          "interactionCommercant": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 20000,
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Interactioncommercant"
+          },
+          "defi": {
+            "anyOf": [
+              {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/DefiQcmJouable"
+                  },
+                  {
+                    "$ref": "#/components/schemas/DefiInformationJouable"
+                  },
+                  {
+                    "$ref": "#/components/schemas/DefiAssociationJouable"
+                  },
+                  {
+                    "$ref": "#/components/schemas/DefiOrdreJouable"
+                  },
+                  {
+                    "$ref": "#/components/schemas/DefiTexteJouable"
+                  }
+                ],
+                "discriminator": {
+                  "propertyName": "type",
+                  "mapping": {
+                    "ASSOCIATION": "#/components/schemas/DefiAssociationJouable",
+                    "INFORMATION": "#/components/schemas/DefiInformationJouable",
+                    "ORDERING": "#/components/schemas/DefiOrdreJouable",
+                    "SINGLE_CHOICE": "#/components/schemas/DefiQcmJouable",
+                    "TEXT_INPUT": "#/components/schemas/DefiTexteJouable"
+                  }
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Defi"
+          },
+          "illustration": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/IllustrationPublique"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "themeVisuel": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ThemePublic"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "conditionsManquantes": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "QR_LIEU",
+                "RESOLUTION_DEFI",
+                "ATTESTATION_COMMERCANT"
+              ]
+            },
+            "type": "array",
+            "title": "Conditionsmanquantes"
+          },
+          "indiceDisponible": {
+            "type": "boolean",
+            "title": "Indicedisponible"
+          },
+          "aideDisponible": {
+            "type": "boolean",
+            "title": "Aidedisponible"
+          },
+          "indice": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 20000,
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Indice"
+          },
+          "aideResolution": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 20000,
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Aideresolution"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "titre",
+          "lieu",
+          "conditionsManquantes",
+          "indiceDisponible",
+          "aideDisponible"
+        ],
+        "title": "EtapeParticipant"
+      },
+      "EtapeScanPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "commercant_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Commercant Id"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "VALIDEE",
+              "A_VALIDER"
+            ],
+            "title": "Statut"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "commercant_id",
+          "statut"
+        ],
+        "title": "EtapeScanPayload"
       },
       "EtatResponse": {
         "properties": {
@@ -55039,6 +56800,33 @@
         ],
         "title": "GenerationOperationPayload"
       },
+      "GenerationRetrouvee": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "CONFIRMEE",
+            "title": "Status"
+          },
+          "operationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Operationid"
+          },
+          "animationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animationid"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "operationId",
+          "animationId"
+        ],
+        "title": "GenerationRetrouvee"
+      },
       "GestionDemandeParticipationInput": {
         "properties": {
           "expectedVersion": {
@@ -55232,6 +57020,43 @@
           "format"
         ],
         "title": "Illustration"
+      },
+      "IllustrationPublique": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Id"
+          },
+          "texteAlternatif": {
+            "type": "string",
+            "maxLength": 20000,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Textealternatif"
+          },
+          "ratio": {
+            "type": "string",
+            "const": "16:9",
+            "title": "Ratio"
+          },
+          "format": {
+            "type": "string",
+            "const": "image/webp",
+            "title": "Format"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "texteAlternatif",
+          "ratio",
+          "format"
+        ],
+        "title": "IllustrationPublique"
       },
       "ImageMetaPayload": {
         "properties": {
@@ -55939,6 +57764,46 @@
         ],
         "title": "LieuCommercant"
       },
+      "LieuPhysiqueJouable": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "MERCHANT",
+              "POI"
+            ],
+            "title": "Type"
+          },
+          "refId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Refid"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Name"
+          },
+          "address": {
+            "type": "string",
+            "maxLength": 20000,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Address"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "type",
+          "refId",
+          "name",
+          "address"
+        ],
+        "title": "LieuPhysiqueJouable"
+      },
       "LieuPoi": {
         "properties": {
           "type": {
@@ -55959,6 +57824,26 @@
           "id"
         ],
         "title": "LieuPoi"
+      },
+      "LieuVirtuelJouable": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "VIRTUAL",
+            "title": "Type"
+          },
+          "refId": {
+            "type": "null",
+            "title": "Refid"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "type",
+          "refId"
+        ],
+        "title": "LieuVirtuelJouable"
       },
       "LigneCommandeLotsPayload": {
         "properties": {
@@ -58238,6 +60123,40 @@
         ],
         "title": "NouvelleOffre"
       },
+      "ObjetParticipant": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Id"
+          },
+          "libelle": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Libelle"
+          },
+          "provenance": {
+            "type": "string",
+            "enum": [
+              "REUSSITE",
+              "DISPENSE"
+            ],
+            "title": "Provenance"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "libelle",
+          "provenance"
+        ],
+        "title": "ObjetParticipant"
+      },
       "OperationAnimationPayload": {
         "properties": {
           "operation_id": {
@@ -59477,6 +61396,31 @@
         ],
         "title": "PaireDefi"
       },
+      "PaireJouable": {
+        "properties": {
+          "leftId": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Leftid"
+          },
+          "rightId": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Rightid"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "leftId",
+          "rightId"
+        ],
+        "title": "PaireJouable"
+      },
       "ParametresPreparationPayload": {
         "properties": {
           "animationId": {
@@ -59632,38 +61576,181 @@
         ],
         "title": "ParticipantAnimationPayload"
       },
-      "ParticipantPublicAnimationPayload": {
+      "ParticipantScanPayload": {
         "properties": {
-          "animation": {
-            "additionalProperties": true,
-            "type": "object",
-            "title": "Animation"
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
           },
-          "participant": {
-            "$ref": "#/components/schemas/ParticipantAnimationPayload"
+          "reference": {
+            "type": "string",
+            "title": "Reference"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "reference"
+        ],
+        "title": "ParticipantScanPayload"
+      },
+      "ParticipationLivePayload": {
+        "properties": {
+          "participation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Participation Id"
+          },
+          "reference": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Reference"
+          },
+          "statut": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Statut"
+          },
+          "inscrit_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Inscrit At"
+          },
+          "animation": {
+            "$ref": "#/components/schemas/AnimationParticipationLive"
+          },
+          "progression": {
+            "$ref": "#/components/schemas/ProgressionResumeLive"
+          },
+          "jeu": {
+            "$ref": "#/components/schemas/ProjectionParticipant"
           },
           "qr_url": {
             "type": "string",
+            "maxLength": 20000,
+            "minLength": 1,
+            "pattern": "\\S",
             "title": "Qr Url"
           },
-          "etapes": {
-            "items": {
-              "additionalProperties": true,
-              "type": "object"
-            },
-            "type": "array",
-            "title": "Etapes"
+          "email_inscription": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 20000,
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Email Inscription"
           }
         },
-        "additionalProperties": true,
+        "additionalProperties": false,
         "type": "object",
         "required": [
+          "participation_id",
+          "reference",
+          "statut",
+          "inscrit_at",
           "animation",
-          "participant",
-          "qr_url",
-          "etapes"
+          "progression",
+          "jeu",
+          "qr_url"
         ],
-        "title": "ParticipantPublicAnimationPayload"
+        "title": "ParticipationLivePayload"
+      },
+      "PayloadEtape": {
+        "properties": {
+          "stepId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Stepid"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "stepId"
+        ],
+        "title": "PayloadEtape"
+      },
+      "PayloadQr": {
+        "properties": {
+          "stepId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Stepid"
+          },
+          "qrToken": {
+            "type": "string",
+            "maxLength": 1024,
+            "minLength": 1,
+            "title": "Qrtoken"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "stepId",
+          "qrToken"
+        ],
+        "title": "PayloadQr"
+      },
+      "PayloadReponse": {
+        "properties": {
+          "stepId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Stepid"
+          },
+          "answer": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/ReponseQcm"
+              },
+              {
+                "$ref": "#/components/schemas/ReponseAssociation"
+              },
+              {
+                "$ref": "#/components/schemas/ReponseOrdre"
+              },
+              {
+                "$ref": "#/components/schemas/ReponseTexte"
+              }
+            ],
+            "title": "Answer",
+            "discriminator": {
+              "propertyName": "type",
+              "mapping": {
+                "ASSOCIATION": "#/components/schemas/ReponseAssociation",
+                "ORDERING": "#/components/schemas/ReponseOrdre",
+                "SINGLE_CHOICE": "#/components/schemas/ReponseQcm",
+                "TEXT_INPUT": "#/components/schemas/ReponseTexte"
+              }
+            }
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "stepId",
+          "answer"
+        ],
+        "title": "PayloadReponse"
+      },
+      "PayloadVide": {
+        "properties": {},
+        "additionalProperties": false,
+        "type": "object",
+        "title": "PayloadVide"
       },
       "PeriodeAnimation": {
         "properties": {
@@ -60766,6 +62853,35 @@
         ],
         "title": "PrestationOnboardRequest"
       },
+      "PreuveARegulariser": {
+        "properties": {
+          "stepId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Stepid"
+          },
+          "commercantId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Commercantid"
+          },
+          "nom": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Nom"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "stepId",
+          "commercantId",
+          "nom"
+        ],
+        "title": "PreuveARegulariser"
+      },
       "ProfilCommercantPayload": {
         "properties": {
           "id": {
@@ -61241,6 +63357,475 @@
           "country"
         ],
         "title": "ProfilLocaleoCommande"
+      },
+      "ProgressionParticipant": {
+        "properties": {
+          "terminees": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Terminees"
+          },
+          "requises": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Requises"
+          },
+          "pourcentage": {
+            "type": "number",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Pourcentage"
+          },
+          "eligible": {
+            "type": "boolean",
+            "title": "Eligible"
+          },
+          "chances": {
+            "type": "integer",
+            "enum": [
+              0,
+              1
+            ],
+            "title": "Chances"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "terminees",
+          "requises",
+          "pourcentage",
+          "eligible",
+          "chances"
+        ],
+        "title": "ProgressionParticipant"
+      },
+      "ProgressionResumeLive": {
+        "properties": {
+          "total": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Total"
+          },
+          "validees": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Validees"
+          },
+          "pourcentage": {
+            "type": "number",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Pourcentage"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "total",
+          "validees",
+          "pourcentage"
+        ],
+        "title": "ProgressionResumeLive"
+      },
+      "ProjectionParticipant": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/ProjectionParticipantChasse"
+          },
+          {
+            "$ref": "#/components/schemas/ProjectionParticipantPasseport"
+          },
+          {
+            "$ref": "#/components/schemas/ProjectionParticipantTombola"
+          }
+        ],
+        "title": "ProjectionParticipant",
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "CHASSE_TRESOR_COMMERCANTE": "#/components/schemas/ProjectionParticipantChasse",
+            "PASSEPORT_COMMERCANT": "#/components/schemas/ProjectionParticipantPasseport",
+            "TOMBOLA_LOCALE": "#/components/schemas/ProjectionParticipantTombola"
+          }
+        }
+      },
+      "ProjectionParticipantChasse": {
+        "properties": {
+          "participantId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Participantid"
+          },
+          "animationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animationid"
+          },
+          "engineContractVersion": {
+            "type": "string",
+            "const": "1.0",
+            "title": "Enginecontractversion"
+          },
+          "definitionVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Definitionversion"
+          },
+          "progressionVersion": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Progressionversion"
+          },
+          "exploitationRevision": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Exploitationrevision"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "INSCRIT",
+              "EN_ATTENTE_DEBUT",
+              "EN_COURS",
+              "TERMINE",
+              "A_REGULARISER",
+              "CLOTURE"
+            ],
+            "title": "Statut"
+          },
+          "actionsAutorisees": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "START_GAME",
+                "SCAN_QR",
+                "SUBMIT_ANSWER",
+                "CONTINUE",
+                "REQUEST_HINT",
+                "REQUEST_HELP"
+              ]
+            },
+            "type": "array",
+            "title": "Actionsautorisees"
+          },
+          "progression": {
+            "$ref": "#/components/schemas/ProgressionParticipant"
+          },
+          "medias": {
+            "items": {
+              "$ref": "#/components/schemas/MediaEmbarque"
+            },
+            "type": "array",
+            "title": "Medias"
+          },
+          "themeVisuel": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ThemePublic"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "type": {
+            "type": "string",
+            "const": "CHASSE_TRESOR_COMMERCANTE",
+            "title": "Type"
+          },
+          "etatVue": {
+            "type": "string",
+            "enum": [
+              "AVANT_DEBUT",
+              "A_DEMARRER",
+              "SE_RENDRE_SUR_PLACE",
+              "DEFI_DISPONIBLE",
+              "ATTENTE_ATTESTATION",
+              "ETAPE_TERMINEE",
+              "REGULARISATION_REQUISE",
+              "PARCOURS_TERMINE",
+              "FERME"
+            ],
+            "title": "Etatvue",
+            "default": "A_DEMARRER"
+          },
+          "etapeCourante": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/EtapeParticipant"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "objets": {
+            "items": {
+              "$ref": "#/components/schemas/ObjetParticipant"
+            },
+            "type": "array",
+            "title": "Objets"
+          },
+          "preuvesARegulariser": {
+            "items": {
+              "$ref": "#/components/schemas/PreuveARegulariser"
+            },
+            "type": "array",
+            "title": "Preuvesaregulariser"
+          },
+          "dernierResultat": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ResultatEtapeParticipant"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "participantId",
+          "animationId",
+          "engineContractVersion",
+          "definitionVersion",
+          "progressionVersion",
+          "exploitationRevision",
+          "statut",
+          "actionsAutorisees",
+          "progression",
+          "medias",
+          "type",
+          "objets",
+          "preuvesARegulariser"
+        ],
+        "title": "ProjectionParticipantChasse"
+      },
+      "ProjectionParticipantPasseport": {
+        "properties": {
+          "participantId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Participantid"
+          },
+          "animationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animationid"
+          },
+          "engineContractVersion": {
+            "type": "string",
+            "const": "1.0",
+            "title": "Enginecontractversion"
+          },
+          "definitionVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Definitionversion"
+          },
+          "progressionVersion": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Progressionversion"
+          },
+          "exploitationRevision": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Exploitationrevision"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "INSCRIT",
+              "EN_ATTENTE_DEBUT",
+              "EN_COURS",
+              "TERMINE",
+              "A_REGULARISER",
+              "CLOTURE"
+            ],
+            "title": "Statut"
+          },
+          "actionsAutorisees": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "START_GAME",
+                "SCAN_QR",
+                "SUBMIT_ANSWER",
+                "CONTINUE",
+                "REQUEST_HINT",
+                "REQUEST_HELP"
+              ]
+            },
+            "type": "array",
+            "title": "Actionsautorisees"
+          },
+          "progression": {
+            "$ref": "#/components/schemas/ProgressionParticipant"
+          },
+          "medias": {
+            "items": {
+              "$ref": "#/components/schemas/MediaEmbarque"
+            },
+            "type": "array",
+            "title": "Medias"
+          },
+          "themeVisuel": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ThemePublic"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "type": {
+            "type": "string",
+            "const": "PASSEPORT_COMMERCANT",
+            "title": "Type"
+          },
+          "commerces": {
+            "items": {
+              "$ref": "#/components/schemas/CommerceParticipant"
+            },
+            "type": "array",
+            "title": "Commerces"
+          },
+          "nombreRequis": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Nombrerequis"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "participantId",
+          "animationId",
+          "engineContractVersion",
+          "definitionVersion",
+          "progressionVersion",
+          "exploitationRevision",
+          "statut",
+          "actionsAutorisees",
+          "progression",
+          "medias",
+          "type",
+          "commerces",
+          "nombreRequis"
+        ],
+        "title": "ProjectionParticipantPasseport"
+      },
+      "ProjectionParticipantTombola": {
+        "properties": {
+          "participantId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Participantid"
+          },
+          "animationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animationid"
+          },
+          "engineContractVersion": {
+            "type": "string",
+            "const": "1.0",
+            "title": "Enginecontractversion"
+          },
+          "definitionVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Definitionversion"
+          },
+          "progressionVersion": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Progressionversion"
+          },
+          "exploitationRevision": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Exploitationrevision"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "INSCRIT",
+              "EN_ATTENTE_DEBUT",
+              "EN_COURS",
+              "TERMINE",
+              "A_REGULARISER",
+              "CLOTURE"
+            ],
+            "title": "Statut"
+          },
+          "actionsAutorisees": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "START_GAME",
+                "SCAN_QR",
+                "SUBMIT_ANSWER",
+                "CONTINUE",
+                "REQUEST_HINT",
+                "REQUEST_HELP"
+              ]
+            },
+            "type": "array",
+            "title": "Actionsautorisees"
+          },
+          "progression": {
+            "$ref": "#/components/schemas/ProgressionParticipant"
+          },
+          "medias": {
+            "items": {
+              "$ref": "#/components/schemas/MediaEmbarque"
+            },
+            "type": "array",
+            "title": "Medias"
+          },
+          "themeVisuel": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ThemePublic"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "type": {
+            "type": "string",
+            "const": "TOMBOLA_LOCALE",
+            "title": "Type"
+          },
+          "attestationAchatEffective": {
+            "type": "boolean",
+            "title": "Attestationachateffective"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "participantId",
+          "animationId",
+          "engineContractVersion",
+          "definitionVersion",
+          "progressionVersion",
+          "exploitationRevision",
+          "statut",
+          "actionsAutorisees",
+          "progression",
+          "medias",
+          "type",
+          "attestationAchatEffective"
+        ],
+        "title": "ProjectionParticipantTombola"
       },
       "PromptGenerationResumePayload": {
         "properties": {
@@ -62273,6 +64858,148 @@
         ],
         "title": "ReconciliationCommandesLotsPayload"
       },
+      "RecuAttestationPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "participant_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Participant Id"
+          },
+          "etape_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Etape Id"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "VALIDEE",
+              "ANOMALIE"
+            ],
+            "title": "Statut"
+          },
+          "validated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Validated At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "participant_id",
+          "etape_id",
+          "statut",
+          "validated_at"
+        ],
+        "title": "RecuAttestationPayload"
+      },
+      "RecuCommande": {
+        "properties": {
+          "commandId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Commandid"
+          },
+          "outcome": {
+            "type": "string",
+            "enum": [
+              "STARTED",
+              "PLACE_VALIDATED",
+              "ANSWER_CORRECT",
+              "ANSWER_INCORRECT",
+              "CONTENT_CONFIRMED",
+              "HINT_OPENED",
+              "HELP_APPLIED",
+              "ALREADY_APPLIED"
+            ],
+            "title": "Outcome"
+          },
+          "stepId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Stepid"
+          },
+          "progressionVersion": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Progressionversion"
+          },
+          "exploitationRevision": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Exploitationrevision"
+          },
+          "replayed": {
+            "type": "boolean",
+            "title": "Replayed"
+          },
+          "correlationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Correlationid"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "commandId",
+          "outcome",
+          "stepId",
+          "progressionVersion",
+          "exploitationRevision",
+          "replayed",
+          "correlationId"
+        ],
+        "title": "RecuCommande"
+      },
+      "RecuCommandeConfirmee": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "CONFIRMEE",
+            "title": "Status"
+          },
+          "result": {
+            "$ref": "#/components/schemas/RecuCommande"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "result"
+        ],
+        "title": "RecuCommandeConfirmee"
+      },
+      "RecuCommandeEnCours": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "EN_COURS",
+            "title": "Status"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "title": "RecuCommandeEnCours"
+      },
       "RecuDecisionMissionPayload": {
         "properties": {
           "id": {
@@ -62706,6 +65433,104 @@
         ],
         "title": "RepondreMessageContactRequest"
       },
+      "ReponseAssociation": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "ASSOCIATION",
+            "title": "Type"
+          },
+          "pairs": {
+            "items": {
+              "$ref": "#/components/schemas/PaireJouable"
+            },
+            "type": "array",
+            "maxItems": 6,
+            "minItems": 2,
+            "title": "Pairs"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "type",
+          "pairs"
+        ],
+        "title": "ReponseAssociation"
+      },
+      "ReponseOrdre": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "ORDERING",
+            "title": "Type"
+          },
+          "orderedIds": {
+            "items": {
+              "type": "string",
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "type": "array",
+            "maxItems": 6,
+            "minItems": 3,
+            "title": "Orderedids"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "type",
+          "orderedIds"
+        ],
+        "title": "ReponseOrdre"
+      },
+      "ReponseQcm": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "SINGLE_CHOICE",
+            "title": "Type"
+          },
+          "choiceId": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Choiceid"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "type",
+          "choiceId"
+        ],
+        "title": "ReponseQcm"
+      },
+      "ReponseTexte": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "TEXT_INPUT",
+            "title": "Type"
+          },
+          "text": {
+            "type": "string",
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Text"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "type",
+          "text"
+        ],
+        "title": "ReponseTexte"
+      },
       "ReprendreGenerationInput": {
         "properties": {
           "expectedVersion": {
@@ -62867,6 +65692,37 @@
         ],
         "title": "ResolutionInscriptionAnimationPayload"
       },
+      "ResolutionScanPayload": {
+        "properties": {
+          "animation": {
+            "$ref": "#/components/schemas/AnimationScanPayload"
+          },
+          "participant": {
+            "$ref": "#/components/schemas/ParticipantScanPayload"
+          },
+          "versions": {
+            "$ref": "#/components/schemas/VersionsAttestationPayload"
+          },
+          "etapes": {
+            "items": {
+              "$ref": "#/components/schemas/EtapeScanPayload"
+            },
+            "type": "array",
+            "maxItems": 1,
+            "minItems": 1,
+            "title": "Etapes"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "animation",
+          "participant",
+          "versions",
+          "etapes"
+        ],
+        "title": "ResolutionScanPayload"
+      },
       "ResoudreScanParticipantRequest": {
         "properties": {
           "qr_token": {
@@ -62882,6 +65738,90 @@
           "qr_token"
         ],
         "title": "ResoudreScanParticipantRequest"
+      },
+      "ResultatEtapeParticipant": {
+        "properties": {
+          "stepId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Stepid"
+          },
+          "resolution": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "REUSSITE",
+                  "AIDE",
+                  "CONFIRMATION",
+                  "DISPENSE"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Resolution"
+          },
+          "indice": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 20000,
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Indice"
+          },
+          "aideResolution": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 20000,
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Aideresolution"
+          },
+          "message": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 20000,
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Message"
+          },
+          "illustration": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/IllustrationPublique"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "stepId"
+        ],
+        "title": "ResultatEtapeParticipant"
       },
       "ResultatFinalisationGenerationPayload": {
         "properties": {
@@ -63094,6 +66034,63 @@
           "medias"
         ],
         "title": "ResultatGenerationPasseport"
+      },
+      "ResultatWorkerGenerationPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "status": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "PREPARATION_PROMPT",
+                  "ATTENTE_TRAITEMENT_MANUEL",
+                  "RESULTAT_DEPOSE",
+                  "RESULTAT_INVALIDE",
+                  "A_VALIDER",
+                  "RESULTAT_PUBLIE",
+                  "FINALISATION_INSTANCE",
+                  "ECHEC_FINALISATION",
+                  "ECHEC_PREPARATION",
+                  "ECHEC_CONTROLE",
+                  "OBSOLETE",
+                  "ANNULEE",
+                  "TERMINEE"
+                ]
+              },
+              {
+                "type": "string",
+                "const": "CLAIM_OBSOLETE"
+              }
+            ],
+            "title": "Status"
+          },
+          "error": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 20000,
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Error"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "status"
+        ],
+        "title": "ResultatWorkerGenerationPayload"
       },
       "RetirerParticipationCommercantRequest": {
         "properties": {
@@ -64787,6 +67784,43 @@
         "type": "object",
         "title": "ThemeInitialisationGeneration"
       },
+      "ThemePublic": {
+        "properties": {
+          "polices": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PolicesVisuelles"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "couleurs": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CouleursVisuelles"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "illustrationCouverture": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/IllustrationPublique"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "ThemePublic"
+      },
       "ThemeVisuel": {
         "properties": {
           "polices": {
@@ -65283,26 +68317,6 @@
         ],
         "title": "ValidationSessionCommercantPayload"
       },
-      "ValiderEtapeAnimationRequest": {
-        "properties": {
-          "qr_token": {
-            "type": "string",
-            "minLength": 20,
-            "title": "Qr Token"
-          },
-          "etape_id": {
-            "type": "string",
-            "format": "uuid",
-            "title": "Etape Id"
-          }
-        },
-        "type": "object",
-        "required": [
-          "qr_token",
-          "etape_id"
-        ],
-        "title": "ValiderEtapeAnimationRequest"
-      },
       "VerificationMissionPayload": {
         "properties": {
           "stepId": {
@@ -65680,6 +68694,62 @@
           "render_revision"
         ],
         "title": "VersionResponse"
+      },
+      "VersionsAttestationPayload": {
+        "properties": {
+          "engineContractVersion": {
+            "type": "string",
+            "const": "1.0",
+            "title": "Enginecontractversion"
+          },
+          "definitionVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Definitionversion"
+          },
+          "expectedProgressionVersion": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Expectedprogressionversion"
+          },
+          "expectedExploitationRevision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expectedexploitationrevision"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "engineContractVersion",
+          "definitionVersion",
+          "expectedProgressionVersion",
+          "expectedExploitationRevision"
+        ],
+        "title": "VersionsAttestationPayload"
+      },
+      "VilleParticipationLive": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "nom": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Nom"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "nom"
+        ],
+        "title": "VilleParticipationLive"
       },
       "VillePayload": {
         "properties": {

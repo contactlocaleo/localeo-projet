@@ -9,7 +9,7 @@ Branche commune : `feat-moteur-animation`, dans les cinq dépôts indépendants.
 | T1 — Socle et contrats | Livré et vérifié localement | Registre des trois moteurs, modèles fermés et exports consommés, coordination SQL, exécutions, transaction commune des commandes historiques. Détails ci-dessous. |
 | T2 — Générer et préparer | Livré et vérifié localement | Brouillon et quota atomiques, workflow manuel et worker, import complet/médias, ERP et préparation guidée. |
 | T3 — Confirmer les missions | Livré et vérifié localement | Accords par mission, préparation vérifiée, QR, compilation et publication atomique ; interfaces Animation, Commerçant et ERP. |
-| T4 — Jouer et reprendre | À réaliser | Projections privées, commandes persistées, trois renderers et cinq défis, QR/preuves et reprise. |
+| T4 — Jouer et reprendre | Livré et vérifié localement | Définition publiée, inscription adulte, projections filtrées, commandes/reçus, trois rendus Live, cinq activités et attestations commerçantes. |
 | T5 — Exploiter et clôturer | À réaliser | Neutralisation, correction, qualification, population figée, audit et indicateurs. |
 | T6 — Conserver et ouvrir | À réaliser | Purge/conversion, contrôles croisés et préparation de recette. Le pilote humain et le déploiement effectif restent des opérations distinctes. |
 
@@ -116,9 +116,44 @@ Les objets PDF/PNG préparés avant une transaction peuvent rester sans rattache
 Le contrôle automatique d’approbation a refusé l’octroi proposé du droit de publication d’événement aux comptes ERP ADMIN, faute d’autorisation explicitement établie. Aucun droit n’a été ajouté. La publication reste utilisable par le portail Animation avec sa permission existante ; l’ERP conserve préparation et publication du résultat IA selon ses droits actuels. Cette limite ne bloque pas le parcours de publication de l’événement.
 
 
+## T4 — Jouer et reprendre
+
+### Réalisé
+
+- Publication des trois moteurs sur une définition figée ; accès, inscription et récupération utilisent sa configuration explicite. Déclaration adulte et version du règlement vérifiées pour Chasse, sans données enfant.
+- Commandes joueur fermées, versions, clé stable, reçu et traces atomiques. Une mauvaise réponse valide compte comme tentative ; un payload invalide ne compte pas. Normalisation du mot/code et des associations pour l’empreinte, ordre conservé pour la remise en ordre.
+- Migration v241 : état structuré des étapes, dates/ordres persistés, tentatives privées et effets uniques ; FK du reçu différée et contraintes de portée des preuves. Les GET n’initialisent aucun état en base.
+- Projections par moteur construites avec des champs autorisés : contenu et image du défi après accès au lieu, résultats déjà ouverts uniquement, aucune solution ou destination future. Médias WebP hydratés hors transaction, budgets vérifiés avant publication et à la lecture.
+- QR de lieu signé distinct de l’attestation personnelle ; rotation de signature contrôlée. Indice et aide après première erreur, sans preuve fictive. Une correction de preuve conserve les acquis ; sa régularisation reste explicite.
+- Attestations commerçantes réautorisées et versionnées, limitées à leur étape actuelle ou passée à régulariser. Lecture de reçu, reprise explicite et résultat minimal ; mission/consigne du commerce issues de la définition publiée.
+- Live : trois rendus, cinq activités au clavier, mobile et ordinateur, QR/caméra ou saisie, aides, progression et qualification distinctes. Les liens personnels par e-mail utilisent le même composant. Aucun calcul de réponse ou d’éligibilité dans le navigateur.
+- Carnet IndexedDB limité aux accès/résumés autorisés ; nettoyage à la lecture et à l’import. Saisie temporaire de l’onglet sur 24 h, aucun envoi automatique ; QR de lieu seulement en mémoire. Images en BlobURL révoquées et service worker limité au shell.
+- Reçus de préparation et génération T2/T3 décrits par des réponses typées dans OpenAPI, vérification des modèles à la réconciliation ; téléchargements privés décrits comme fichiers.
+
+### Vérifications
+
+Les scénarios SQL utilisent PostgreSQL jetable ; les navigateurs simulent les API. Les nombres des groupes se recoupent et ne s’additionnent pas.
+
+- Runtime et frontières : **70 tests réussis**, dont PostgreSQL, deux appareils, même clé concurrente, rotation du QR/token, délai après verrou, rollback d’audit, perte de réponse, aide sans preuve et hydratation WebP hors transaction. Les cinq contrôles HTTP ont ensuite repassé après fermeture du DTO de réconciliation.
+- Persistance : **13 tests PostgreSQL réussis**, migration v241, contraintes de portée, unicité des effets/tentatives et ordres/dates immuables.
+- Attestations/publication classiques : groupes ciblés **38**, puis **17** réussites et un rejeu après correction/révocation vérifié. La suite élargie finale a réussi 120 tests et révélé quatre écarts, corrigés ensuite : fixture de récupération, identifiant d’étape et réponses OpenAPI non typées.
+- Commerçant : **24 tests Vitest** et **7 tests Chromium** réussis, sortie 0 ; mobile 390 px et bureau 1280 px, réponse perdue, 202/404, reprise, conflit et anomalie. Capture mobile inspectée.
+- Animation : **7 tests** registre/manifeste et contrats HTTP réussis après export.
+
+- Couverture publique : **27 tests réussis**, dont WebP réel lu/décodé hors SQL, refus des références absentes et configuration publiée conservée malgré un brouillon plus récent. Le catalogue ne révèle aucun commerce futur et n’utilise que la couverture déclarée.
+- Vérification finale contrats/ERP/architecture : **446 réussites**, les deux seuls échecs restant les recensements des huit classes et trois use cases préexistants. Les régressions de récupération, d’identifiant et d’OpenAPI ont été corrigées et revérifiées. Aucun skip ajouté.
+- Live : **24 tests Node réussis** (dont vraie IndexedDB), lint et build isolé réussis. Navigateur : **14/14**, puis **8/8** après correction de l’enregistrement du contact, soit **19 scénarios distincts**, sorties 0 ; captures 390/1280 inspectées. La configuration alternative documentée sépare le serveur du runner pour éviter le blocage de fermeture Playwright Windows observé auparavant.
+- **70 fichiers de contrats** identiques dans les trois consommateurs ; OpenAPI réel et projections documentaires EPIC 41/42 synchronisés. Les consoles ERP à périmètre sont disponibles sous `/internal/erp/animations/generations` et `/internal/erp/animations/preparation` ; les alias SQLAdmin restent ADMIN.
+- Des démarrages Python ont émis le diagnostic WMI Windows `0x8007000e` puis poursuivi. Les résultats de sortie des groupes concernés sont indiqués séparément de ce diagnostic.
+
+
+### Limites et suite
+
+T5 complète le retrait global, les corrections après gel, les indicateurs et la clôture depuis les faits du moteur. T6 couvre la conservation et la conversion avant ouverture. La caméra réelle sur appareils et le pilote humain ne sont pas revendiqués par les simulations navigateur. Aucun envoi réel, déploiement ou ouverture publique n’est effectué.
+
 ## Décisions d’implémentation
 
-Les précisions T1-D01 à T1-D04 sont inscrites dans la [conception technique, section 9.3](conception-technique.md#93-précisions-dimplémentation-t1--19-septembre-2026) : clés JSON, composition explicite des transactions, commits par dépôt concerné et noms du DSL. Les précisions T2-D01 à T2-D14 sont inscrites en section 9.4 de la conception : routes/reçus, interface, stockage privé/provenance, faits de lieux, import fidèle, images, templates, conservation, catalogue, ordonnanceur, identités et dépendances. Les précisions T3-D01 à T3-D10 sont inscrites en section 9.5 : engagements, compilation, dossier/QR, contrôles, publication et limites ERP. Aucun arbitrage fonctionnel n’est remplacé par ce compte rendu.
+Les précisions T1-D01 à T1-D04 sont inscrites dans la [conception technique, section 9.3](conception-technique.md#93-précisions-dimplémentation-t1--19-septembre-2026) : clés JSON, composition explicite des transactions, commits par dépôt concerné et noms du DSL. Les précisions T2-D01 à T2-D14 sont inscrites en section 9.4 de la conception : routes/reçus, interface, stockage privé/provenance, faits de lieux, import fidèle, images, templates, conservation, catalogue, ordonnanceur, identités et dépendances. Les précisions T3-D01 à T3-D10 sont inscrites en section 9.5 : engagements, compilation, dossier/QR, contrôles, publication et limites ERP. Les précisions T4-D01 à T4-D10 sont inscrites en section 9.6 : projections, traces, présentation, reçus, consentement et frontières de données. Aucun arbitrage fonctionnel n’est remplacé par ce compte rendu.
 
 ## Commits
 
@@ -131,6 +166,10 @@ Aucun push ni déploiement n’est inclus. Le commit documentaire central de cha
 | T2 | `43f7495` | `58a34d2` | `cd2277d` | `6d05e35` | `docs(animation): documenter la livraison du lot T2` |
 
 | T3 | `0655811` | `90ddcb9` | `baffe0e` | `9c3e568` | `docs(animation): documenter la livraison du lot T3` |
+
+| T4 | `acee4dd` | `6792e26` | `d274260` | `16e4653` | `docs(animation): documenter la livraison du lot T4` |
+
+Contrôles documentaires T4 : 76 guides, 740 liens locaux, aucune erreur ni avertissement ; 117 sources exportées vérifiées.
 
 Contrôles documentaires T3 : 79 guides, 751 liens locaux, aucune erreur ni avertissement ; 117 sources exportées vérifiées.
 
