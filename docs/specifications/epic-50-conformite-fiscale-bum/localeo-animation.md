@@ -214,8 +214,22 @@ Une commande payee ou dont les instances sont reservees expose :
 - `GET /protected/animation-locale/animations/{animationId}/commande-lots/{commandeId}/documents/{documentId}/telecharger`.
 
 Chaque element fournit `document_id`, `type_document`, `reference_document`,
-`fichier_nom`, `date_generation` et `download_url`. La liste contient le recu
-consolide et les justificatifs d'acquisition BUM des achats sous-jacents.
+`fichier_nom`, `date_generation` et `download_url`.
+
+**Decision utilisateur du 20 septembre 2026 :** une commande de lots expose
+un seul recu de paiement consolide (`RECU_PAIEMENT_CONSOLIDE`), comprenant
+tous les types de coffrets, leurs quantites et montants, ainsi que le total
+de la commande. La regle d'affichage de la repartition credit/Stripe reste
+celle ci-dessous, lorsqu'elle figure dans le snapshot.
+La materialisation des achats sous-jacents ne genere plus de recus de paiement
+unitaires pour une commande d'animation. Les donnees d'acquisition BUM sont
+conservees pour la tracabilite interne. Les anciens recus unitaires restent
+archives mais sont exclus de la liste et du telechargement des documents de
+cette commande ; les autres documents historiques conservent leur acces.
+La confirmation de paiement reste unique par commande, y compris en cas de
+rejeu du traitement. Les achats de coffrets hors animation ne changent pas.
+Cette decision remplace la presentation anterieure du recu consolide accompagne
+des justificatifs de chaque achat sous-jacent.
 
 Regles de presentation :
 
