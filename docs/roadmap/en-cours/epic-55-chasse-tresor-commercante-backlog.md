@@ -3,7 +3,7 @@
 ## Suivi
 
 - Criticite : `Moyenne`.
-- Statut : `En cours - arbitrages fonctionnels validés, conception technique documentée, réalisation et recette à mener`.
+- Statut : `En cours - socle T1 implémenté et vérifié localement, lots T2–T6 et recette à mener`.
 - Catalogue V1 : `PASSEPORT_COMMERCANT`, `TOMBOLA_LOCALE`, `CHASSE_TRESOR_COMMERCANTE`.
 - Dependances : Epics 41, 42, 46, 47 et 49.
 
@@ -13,6 +13,8 @@ La [specification detaillee unique](../../specifications/moteur-animation/locale
 
 - [x] Dossier de conception couvrant contrats, persistance, concurrence, API/droits, médias et exploitation, établi à partir du code et relu le 19 septembre 2026 : [référence technique V1](../../specifications/moteur-animation/conception-technique.md).
 - [ ] Réaliser les lots T1–T6 et vérifier leurs critères de sortie ; le dossier et ses revues statiques ne constituent pas une recette du moteur.
+
+Compte rendu par lot, décisions et preuves : [suivi d’implémentation](../../specifications/moteur-animation/suivi-implementation.md). Les cases ci-dessous portent la livraison complète et ne sont pas cochées sur la seule présence du socle.
 
 ## Livraison proposee
 

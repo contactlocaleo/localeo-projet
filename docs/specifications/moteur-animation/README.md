@@ -4,7 +4,7 @@
 
 La [spécification unique du moteur](localeo_animation_engine_spec.md) décrit l'Animation générique, le DSL JSON, les moteurs spécialisés et le catalogue V1 : Passeport commerçant, Tombola locale et Chasse au trésor.
 
-La Chasse V1 prévoit cinq activités : QCM, information, association, remise en ordre et saisie d’un mot/code (TRE-ARB-88, section 4.6.3). Les trois nouvelles activités sont spécifiées ; leurs validateurs serveur et rendus restent à implémenter.
+La Chasse V1 prévoit cinq activités : QCM, information, association, remise en ordre et saisie d’un mot/code (TRE-ARB-88, section 4.6.3). Les cinq validateurs métier et leurs contrats sont implémentés dans le socle T1 ; la persistance du jeu et les rendus restent prévus en T4. Le [compte rendu d’implémentation](suivi-implementation.md) détaille les preuves et les limites par lot.
 
 Le catalogue doit pouvoir accueillir de nouveaux types via des modules enregistrés (schéma, règles, commandes, projections et renderer). Le profil linéaire est propre à la Chasse V1 ; il ne limite pas le socle commun. Voir la section 4.8 et TRE-ARB-56 de la spécification.
 
@@ -20,7 +20,7 @@ Le thème visuel de l’animation peut être complété par une illustration et 
 
 ## Conception technique V1
 
-Le [lot technique du 19 septembre 2026](conception-technique.md) fixe les six sujets : contrats de production, stockage/versions, concurrence/reprise, API/droits/projections, médias/budgets et exploitation/recette. Il s’appuie sur le code existant et définit les lots T1–T6 avec leurs preuves de sortie. Les décisions métier restent dans la spécification ; les mécanismes décrits restent à implémenter et tester.
+Le [lot technique du 19 septembre 2026](conception-technique.md) fixe les six sujets : contrats de production, stockage/versions, concurrence/reprise, API/droits/projections, médias/budgets et exploitation/recette. Il s’appuie sur le code existant et définit les lots T1–T6 avec leurs preuves de sortie. Les décisions métier restent dans la spécification ; le [suivi T1–T6](suivi-implementation.md) distingue les mécanismes implémentés, leurs tests et ce qui reste à raccorder.
 
 ## Exemples et documents d’entrée
 

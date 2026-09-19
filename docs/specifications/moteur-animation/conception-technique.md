@@ -449,4 +449,12 @@ Dette préexistante identifiée par lecture : `localeo-commercant/api/localeo-op
 
 Les points encore à vérifier par l’exécution sont les performances du gel/neutralisation, l’absence de deadlocks, les budgets de projection maximaux, la recette accessibilité et la conservation réelle. Les logistiques du pilote (commune, participants, dates), la comparaison fournisseur et le rallye après V1 restent suivis séparément ; ils ne constituent pas des contrats techniques laissés ouverts par ce dossier.
 
+### 9.3 Précisions d’implémentation T1 — 19 septembre 2026
+
+- **T1-D01 — Clés de configuration :** `parametres.preparation_chasse` conserve la préparation ; `parametres.definition_animation` conserve le DSL assemblé. Les colonnes et révisions décrites en section 4 restent leur enveloppe. La capacité provient de `common.registration.maxParticipants`, sans seconde clé concurrente.
+- **T1-D02 — Transaction composée :** un service applicatif commun injecte explicitement une factory d’UoW jointe aux services historiques concernés. Leurs commits internes sont différés ; une erreur/annulation interne interdit le commit extérieur. Le reçu idempotent, les effets métier, l’audit et l’outbox sont validés ensemble. Aucune session ambiante, aucune mutation de factory globale, aucun déplacement de règle métier dans une route.
+- **T1-D03 — Historique Git :** chaque lot produit un commit dans chaque dépôt effectivement modifié, relié dans le compte rendu central. Les cinq historiques restent indépendants ; aucun commit vide imposé à une application non concernée par un lot.
+
+- **T1-D04 — Noms du DSL des défis :** `ASSOCIATION.leftItems/rightItems`, `validation.expected:[{leftId,rightId}]` ; `ORDERING.items` et `validation.expected` (IDs ordonnés) ; `TEXT_INPUT.normalization` et `validation.expected` (variantes). Les textes d’aide sont `content.hint` et `content.resolutionHelp`. Ce mapping des champs éditoriaux français vers le DSL conserve les règles et normalisations de la section 4.6.3 de la spécification.
+
 [Retour au moteur d’animation](README.md).
