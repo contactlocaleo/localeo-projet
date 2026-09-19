@@ -11,7 +11,7 @@ Branche commune : `feat-moteur-animation`, dans les cinq dépôts indépendants.
 | T3 — Confirmer les missions | Livré et vérifié localement | Accords par mission, préparation vérifiée, QR, compilation et publication atomique ; interfaces Animation, Commerçant et ERP. |
 | T4 — Jouer et reprendre | Livré et vérifié localement | Définition publiée, inscription adulte, projections filtrées, commandes/reçus, trois rendus Live, cinq activités et attestations commerçantes. |
 | T5 — Exploiter et clôturer | Livré et vérifié localement | Retrait avec aperçu, continuité, correction des preuves, qualification effective, gel et indicateurs ; interfaces Animation, Live et ERP. |
-| T6 — Conserver et ouvrir | À réaliser | Purge/conversion, contrôles croisés et préparation de recette. Le pilote humain et le déploiement effectif restent des opérations distinctes. |
+| T6 — Conserver et ouvrir | Code livré et vérifié localement ; ouverture à effectuer | Conversion, conservation, paramètres publiés, recette transversale et procédure. Restent la conversion sur cible, le pilote humain et le déploiement. |
 
 ## T1 — Socle et contrats
 
@@ -151,34 +151,6 @@ Les scénarios SQL utilisent PostgreSQL jetable ; les navigateurs simulent les A
 
 T5 complète le retrait global, les corrections après gel, les indicateurs et la clôture depuis les faits du moteur. T6 couvre la conservation et la conversion avant ouverture. La caméra réelle sur appareils et le pilote humain ne sont pas revendiqués par les simulations navigateur. Aucun envoi réel, déploiement ou ouverture publique n’est effectué.
 
-## Décisions d’implémentation
-
-Les précisions T1-D01 à T1-D04 sont inscrites dans la [conception technique, section 9.3](conception-technique.md#93-précisions-dimplémentation-t1--19-septembre-2026) : clés JSON, composition explicite des transactions, commits par dépôt concerné et noms du DSL. Les précisions T2-D01 à T2-D14 sont inscrites en section 9.4 de la conception : routes/reçus, interface, stockage privé/provenance, faits de lieux, import fidèle, images, templates, conservation, catalogue, ordonnanceur, identités et dépendances. Les précisions T3-D01 à T3-D10 sont inscrites en section 9.5 : engagements, compilation, dossier/QR, contrôles, publication et limites ERP. Les précisions T4-D01 à T4-D10 sont inscrites en section 9.6 : projections, traces, présentation, reçus, consentement et frontières de données. Aucun arbitrage fonctionnel n’est remplacé par ce compte rendu.
-
-## Commits
-
-Aucun push ni déploiement n’est inclus. Le commit documentaire central de chaque lot est identifiable par son message dans son historique ; il ne peut contenir sa propre empreinte.
-
-| Lot | Backend | Animation | Commerçant | Marketplace/Live | Documentation centrale |
-| --- | --- | --- | --- | --- | --- |
-| T1 | `96bb488` | `d813be8` | `e57cbcd` | `5190106` | `docs(animation): documenter la livraison du socle T1` |
-
-| T2 | `43f7495` | `58a34d2` | `cd2277d` | `6d05e35` | `docs(animation): documenter la livraison du lot T2` |
-
-| T3 | `0655811` | `90ddcb9` | `baffe0e` | `9c3e568` | `docs(animation): documenter la livraison du lot T3` |
-
-| T4 | `acee4dd` | `6792e26` | `d274260` | `16e4653` | `docs(animation): documenter la livraison du lot T4` |
-| T5 | `4e7b1fc` | `81acd10` | `ea710ce` | `f92780c` | `docs(animation): documenter la livraison du lot T5` |
-
-Contrôles documentaires T4 : 76 guides, 740 liens locaux, aucune erreur ni avertissement ; 117 sources exportées vérifiées.
-
-Contrôles documentaires T3 : 79 guides, 751 liens locaux, aucune erreur ni avertissement ; 117 sources exportées vérifiées.
-
-Contrôles documentaires T2 : 76 guides, 734 liens locaux, aucune erreur ni avertissement ; 117 sources exportées vérifiées.
-
-[Retour au dossier moteur](README.md).
-
-
 ## T5 — Exploiter et clôturer
 
 ### Réalisé
@@ -209,3 +181,81 @@ Contrôles documentaires T2 : 76 guides, 734 liens locaux, aucune erreur ni aver
 ### Limites et suite
 
 Les tests de navigateur emploient une API simulée, complétée par les tests HTTP et PostgreSQL réels isolés. La charge vérifiée localement ne vaut pas mesure de production. Les corrections ne constituent jamais une dispense individuelle ; les résultats du tirage et les gains ne sont pas recalculés après gel. Le lot T6 reste consacré à la conservation, à la conversion et aux contrôles d'ouverture ; aucun environnement réel n'a été déployé ni purgé.
+
+## T6 — Conservation, conversion et recette transversale
+
+### Réalisé
+
+- Conversion avant ouverture par CLI à cible explicite : simulation paginée de 50, manifeste fermé avec empreintes, une transaction par animation, application/rejeu contrôlés, journal et contrôle global de disponibilité. Les brouillons incomplets restent éditables ; une correction exige une nouvelle simulation. Toute publication détectée bloque la conversion. Aucun quota, génération, publication ou envoi n’est déclenché.
+- Conservation quotidienne par catégories, simulations requises avant exécution, lots reprenables, curseurs, baux et exclusion des références utiles/gels. Les fichiers sont marqués avant suppression hors transaction ; une erreur laisse une reprise durable. Le registre des fichiers préparés couvre aussi un crash avant rattachement. Aucun inventaire global du stockage ni suppression de fichier inconnu.
+- Échéances des contenus inutilisés, essais, accès et identités ; mois calendaires calculés en UTC. Archives nominatives réservées aux besoins encore actifs, tirages/substitutions tardifs depuis les preuves conservées, sans recréer de qualification ni envoyer au pseudonyme. Le besoin est réévalué jusqu’à suppression de l’archive ; la durée des preuves ne prolonge pas automatiquement les coordonnées.
+- Batch `animations.conserver` à 03:30 UTC, simulation par défaut, supervision commune et signalement des erreurs/retards. Console ERP ADMIN de rapports et gels avec motifs, confirmation de levée et réconciliation. Le menu, les API bornées, le CSRF et les reçus sont raccordés ; aucun bouton de purge réelle.
+- [Complément technique du registre interne](../../juridique/interne/registre-interne-moteur-animation-2026-09-19.md) : catégories, échéances, références utiles, archives, gels, reprises et sauvegardes. Les PDF juridiques restent les références documentaires existantes ; le complément décrit le code local vérifié et les contrôles avant activation.
+- Paramètres opérationnels après publication : début/fin/fermeture/capacité séparés du DSL, historique append-only, CAS sur animation/définition/exploitation et audit des anciennes/nouvelles valeurs. Un résolveur commun alimente jeu, scan, inscription/reprise, catalogues/listes, calendrier, clôture, flyers et conservation. La prolongation réaligne les accès et reçus utiles sans réactiver les accès révoqués.
+- Interfaces des paramètres dans Animation et ERP : horaires Europe/Paris, contrôles affectés, champs omis/null, motif, réouverture explicite et annonce des supports à rééditer. Les sessions ERP actuelles restent en lecture seule pour ces paramètres, car aucun droit `animation:modifier` n’a été ajouté.
+- Recette PostgreSQL des services réels : préparation → accords → publication et QR → inscription → jeu et attestation → retrait/continuité → correction/régularisation → prolongation → clôture/gel → tirage → anomalie après gel → purge. Les preuves, acquis, compteurs, reçus utiles, population et gains restent inchangés par la purge.
+- Correction des écarts révélés par cette recette : publication fondée sur les missions structurées choisies, application de la fin effective, échéances UTC, fichiers préparés avant transactions finales, lectures de contenus purgés et enveloppes d’erreurs conformes à l’OpenAPI. L’ancienne configuration publiée mène désormais aux paramètres du Live. Le retrait classique est pris en compte par les commerces autorisés effectifs, sans modification de la définition publiée ni suppression des preuves historiques.
+- Migrations additives `v243`, `v244`, `v245`. **97 fichiers JSON** (96 schémas et manifeste) générés et identiques dans les trois consommateurs ; **608 chemins OpenAPI**, dont **45** dans la projection documentaire Live.
+
+### Vérifications
+
+Les commandes utilisent le lanceur backend isolé et PostgreSQL jetable local. Les recettes navigateur bloquent les accès externes et simulent les API ; elles complètent la recette transactionnelle, sans la remplacer.
+
+Les groupes ci-dessous se recouvrent parfois ; leurs nombres ne constituent pas un total de tests distincts de l’EPIC.
+
+- Conversion : **23 contrôles réussis**, domaine/CLI/PostgreSQL, manifeste, correction puis nouvelle simulation, concurrence et absence d’effets externes.
+- Conservation : **54 contrôles distincts réussis** sur ce périmètre, dont migration réelle, pagination, gels, courses, incident SQL, suppression reprise après panne, écriture tardive, réimport et archives nécessaires aux gains.
+- Paramètres et lecteurs : groupe final **22/22 réussi**, incluant filtre de dates sur la configuration publiée, support régénéré et retrait effectif dans les projections SQL ; **42/42 régressions des lecteurs réussies**. Expiration après prolongation, UTC, capacité, CAS, rollback et contrôles métier vérifiés.
+- Recette transversale et publication : **68 cas backend distincts vérifiés** dans ce périmètre ; dernier groupe **11/11 réussi**, dont prolongation avec purge à la nouvelle fin +90 jours et conservation des preuves, de la population et des gains.
+- Retrait classique : **6/6 nouveaux cas PostgreSQL**, puis **10/10 régressions après injection de l’adaptateur de flyer**. Seuil/minimum, population gelée, concurrence scan/retrait, preuves historiques, reçus réautorisés et qualification contrôlés. **33/33 contrôles existants** supplémentaires réussis sur API retrait, compilation/publication classiques et attestations T4.
+- HTTP, erreurs et ordonnanceur : groupe **59/59 réussi** ; vérification complémentaire contrats/projections/OpenAPI/sécurité **79/79 réussie**, incluant refus CSRF sur l’ancienne purge et erreurs sans contenu privé.
+- Architecture et recensements : exécution finale **414 réussites, 2 échecs préexistants**. Les huit anciennes classes et trois anciens use cases manquants sont inchangés ; aucune classe nouvelle non couverte. Un premier lancement a rencontré un refus d’accès au répertoire temporaire Windows ; relancé avec un répertoire temporaire propre du workspace, il ne conserve que cette dette antérieure. Aucun skip ni assertion affaiblie.
+- Animation : **22 tests Node ciblés réussis**, TypeScript, ESLint et build isolé réussis. Recette navigateur à **390 et 1280 px** : entrée depuis la configuration publiée, capacité, CSRF, réponse perdue, réconciliation 202/404, renvoi identique, conflit, prolongation, réouverture et lecture seule. Captures inspectées, aucun débordement. Avertissement de taille du bundle conservé.
+- ERP : **6 scénarios conservation, 6 paramètres et 6 régressions exploitation** réussis ; parcours génération à **390/1280 px** incluant le brut purgé. Les paramètres sont aussi testés avec fuseau navigateur Montréal. Captures inspectées ; permissions simulées distinguées des droits ERP réels.
+- Commerçant : **47 tests de contrats réussis** et build isolé réussi. Marketplace/Live : **13 tests ciblés réussis**, ESLint et build isolé réussis ; fichiers publics de configuration inchangés.
+- Contrats : régénération de référence hors bootstrap comparée en lecture seule, **97 fichiers conformes dans chaque consommateur**, OpenAPI **608/608/608/45 chemins** concordants pour Animation, Commerçant et les deux projections documentaires.
+- Documentation : contrôles du projet central `check_guidance.py` et `sync_documentation.py --check-sources` ; les liens du complément de registre ont également été contrôlés avec l’index juridique et la procédure d’exploitation (38 liens locaux).
+
+Certains imports Python ont émis le diagnostic WMI Windows `0x8007000e` puis poursuivi. Les résultats ci-dessus proviennent des sorties finales des lanceurs, et non des seules traces de démarrage.
+
+### Décisions tracées
+
+La [conception](conception-technique.md) porte les précisions CV01–CV06 (conversion), R01–R11 (conservation et documents), E01–E08 (exposition, planification et présentation) et QA01–QA03 (écarts de recette). Les contrôles opérationnels restent hors du prompt IA. Aucune évolution de droit ERP n’est implicite.
+
+### Non exécuté ou non livré dans ce périmètre
+
+- Déploiement, migrations/conversion sur une cible d’exploitation, activation d’une purge réelle et ouverture publique : procédures documentées, aucune exécution sur un environnement réel.
+- Pilote humain, scans caméra sur appareils réels, validation du trajet et essai avec des familles : [fiche de recette préparée](recette-pilote.md), à exécuter sur la commune et la période retenues.
+- Appel automatisé à un fournisseur IA : laissé au traitement manuel comme prévu pour la V1. Comparaison opérationnelle des fournisseurs non réalisée ici ; intégration après pilote, rallye à ordre libre et adaptation intercommunes restent les évolutions prévues.
+- Élargissement du droit de publication ERP : non appliqué. La revue automatique d’approbation a refusé cet élargissement pendant T3, faute d’autorisation suffisamment explicite ; la publication reste accessible au rôle Animation qui possède déjà ce droit. Les droits de modification et de clôture ERP restent également inchangés.
+- Dette de tests préexistante : deux contrôles de recensement restent en échec ; ils sont distingués des tests fonctionnels du moteur et des nouvelles classes couvertes.
+
+La [procédure d’exploitation](exploitation-moteur.md) décrit les contrôles à réaliser avant ouverture. Les commits locaux ne constituent ni un push ni un déploiement.
+
+## Décisions d’implémentation
+
+Les précisions T1-D01 à T1-D04 sont inscrites dans la [conception technique, section 9.3](conception-technique.md#93-précisions-dimplémentation-t1--19-septembre-2026) : clés JSON, composition explicite des transactions, commits par dépôt concerné et noms du DSL. Les précisions T2-D01 à T2-D14 sont inscrites en section 9.4 de la conception : routes/reçus, interface, stockage privé/provenance, faits de lieux, import fidèle, images, templates, conservation, catalogue, ordonnanceur, identités et dépendances. Les précisions T3-D01 à T3-D10 sont inscrites en section 9.5 : engagements, compilation, dossier/QR, contrôles, publication et limites ERP. Les précisions T4-D01 à T4-D10 sont inscrites en section 9.6 : projections, traces, présentation, reçus, consentement et frontières de données. Aucun arbitrage fonctionnel n’est remplacé par ce compte rendu.
+
+## Commits
+
+Aucun push ni déploiement n’est inclus. Le commit documentaire central de chaque lot est identifiable par son message dans son historique ; il ne peut contenir sa propre empreinte.
+
+| Lot | Backend | Animation | Commerçant | Marketplace/Live | Documentation centrale |
+| --- | --- | --- | --- | --- | --- |
+| T1 | `96bb488` | `d813be8` | `e57cbcd` | `5190106` | `docs(animation): documenter la livraison du socle T1` |
+
+| T2 | `43f7495` | `58a34d2` | `cd2277d` | `6d05e35` | `docs(animation): documenter la livraison du lot T2` |
+
+| T3 | `0655811` | `90ddcb9` | `baffe0e` | `9c3e568` | `docs(animation): documenter la livraison du lot T3` |
+
+| T4 | `acee4dd` | `6792e26` | `d274260` | `16e4653` | `docs(animation): documenter la livraison du lot T4` |
+| T5 | `4e7b1fc` | `81acd10` | `ea710ce` | `f92780c` | `docs(animation): documenter la livraison du lot T5` |
+| T6 | `cd4bb07` | `cd03903` | `166a5f4` | `9f28154` | `docs(animation): documenter la livraison du lot T6` |
+
+Contrôles documentaires T4 : 76 guides, 740 liens locaux, aucune erreur ni avertissement ; 117 sources exportées vérifiées.
+
+Contrôles documentaires T3 : 79 guides, 751 liens locaux, aucune erreur ni avertissement ; 117 sources exportées vérifiées.
+
+Contrôles documentaires T2 : 76 guides, 734 liens locaux, aucune erreur ni avertissement ; 117 sources exportées vérifiées.
+
+[Retour au dossier moteur](README.md).

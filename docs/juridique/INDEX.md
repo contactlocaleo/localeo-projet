@@ -24,3 +24,7 @@ Documents approuvés, catalogue de publication, intégrations et licences. Cette
 - [marketplace/LOCALEO - Formulaire de Rétractation Localeo - V1.pdf](<marketplace/LOCALEO - Formulaire de Rétractation Localeo - V1.pdf>)
 - [publication/frontends.md](publication/frontends.md)
 - [publication/marketplace.md](publication/marketplace.md)
+
+## Compl?ments techniques internes
+
+- [Registre interne ? moteur d?animation, 19 septembre 2026](interne/registre-interne-moteur-animation-2026-09-19.md) : cat?gories et contr?les de conservation valid?s, ?tat d?impl?mentation local ; compl?ment ? l?Annexe A, sans modification des PDF juridiques.

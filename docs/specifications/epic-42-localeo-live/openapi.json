@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Live - API backend Epic 42",
     "description": "Vue OpenAPI 3.1 des contrats publics, editoriaux et techniques de Localeo Live.",
-    "version": "1.0.0+acee4dd"
+    "version": "1.0.0+4e7b1fc"
   },
   "paths": {
     "/public/exploitation/activites-locales/metriques": {
@@ -1477,8 +1477,108 @@
               }
             }
           },
+          "400": {
+            "description": "Demande invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentification requise",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Action non autorisée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ressource ou reçu introuvable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Version, aperçu ou état en conflit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Accès expiré",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Document trop volumineux",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Encodage non supporté",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
           "422": {
-            "description": "Validation Error",
+            "description": "Contenu invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Fréquence dépassée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Transaction indisponible, consulter le reçu",
             "content": {
               "application/json": {
                 "schema": {
@@ -1557,8 +1657,108 @@
               }
             }
           },
+          "400": {
+            "description": "Demande invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentification requise",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Action non autorisée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ressource ou reçu introuvable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Version, aperçu ou état en conflit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Accès expiré",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Document trop volumineux",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Encodage non supporté",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
           "422": {
-            "description": "Validation Error",
+            "description": "Contenu invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Fréquence dépassée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Transaction indisponible, consulter le reçu",
             "content": {
               "application/json": {
                 "schema": {
@@ -1625,6 +1825,116 @@
               }
             }
           },
+          "400": {
+            "description": "Demande invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentification requise",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Action non autorisée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ressource ou reçu introuvable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Version, aperçu ou état en conflit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Accès expiré",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Document trop volumineux",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Encodage non supporté",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Contenu invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Fréquence dépassée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Transaction indisponible, consulter le reçu",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
           "202": {
             "content": {
               "application/json": {
@@ -1634,16 +1944,6 @@
               }
             },
             "description": "Accepted"
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
           }
         }
       }
@@ -1704,8 +2004,108 @@
               }
             }
           },
+          "400": {
+            "description": "Demande invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentification requise",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Action non autorisée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ressource ou reçu introuvable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Version, aperçu ou état en conflit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Accès expiré",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Document trop volumineux",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Encodage non supporté",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
           "422": {
-            "description": "Validation Error",
+            "description": "Contenu invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Fréquence dépassée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Transaction indisponible, consulter le reçu",
             "content": {
               "application/json": {
                 "schema": {
@@ -8305,6 +8705,25 @@
         ],
         "title": "CommandeConfirmee[DemandeParticipationCommercantPayload]"
       },
+      "CommandeConfirmee_GelConservationPayload_": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "CONFIRMEE",
+            "title": "Status"
+          },
+          "result": {
+            "$ref": "#/components/schemas/GelConservationPayload"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "result"
+        ],
+        "title": "CommandeConfirmee[GelConservationPayload]"
+      },
       "CommandeConfirmee_GenerationMutationPayload_": {
         "properties": {
           "status": {
@@ -8342,6 +8761,25 @@
           "result"
         ],
         "title": "CommandeConfirmee[OperationAnimationPayload]"
+      },
+      "CommandeConfirmee_ParametresExploitationPayload_": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "CONFIRMEE",
+            "title": "Status"
+          },
+          "result": {
+            "$ref": "#/components/schemas/ParametresExploitationPayload"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "result"
+        ],
+        "title": "CommandeConfirmee[ParametresExploitationPayload]"
       },
       "CommandeConfirmee_PoiAnimationPayload_": {
         "properties": {
@@ -12799,6 +13237,39 @@
         ],
         "title": "DepotResultatGenerationInput"
       },
+      "DetailRapportPurgePayload": {
+        "properties": {
+          "rapport": {
+            "$ref": "#/components/schemas/RapportPurgePayload"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ElementPurgePayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "rapport",
+          "items",
+          "nextCursor"
+        ],
+        "title": "DetailRapportPurgePayload"
+      },
       "DiagnosticAnimationPayload": {
         "properties": {
           "animation": {
@@ -13385,6 +13856,86 @@
         ],
         "title": "ElementJouable"
       },
+      "ElementPurgePayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "runId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Runid"
+          },
+          "typeCible": {
+            "type": "string",
+            "title": "Typecible"
+          },
+          "cibleId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Cibleid"
+          },
+          "eligibleAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Eligibleat"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "SIMULATION",
+              "EXCLU",
+              "PURGE_EN_COURS",
+              "PURGE",
+              "ECHEC"
+            ],
+            "title": "Statut"
+          },
+          "motif": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motif"
+          },
+          "erreurCode": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Erreurcode"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updatedat"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "runId",
+          "typeCible",
+          "cibleId",
+          "eligibleAt",
+          "statut",
+          "motif",
+          "erreurCode",
+          "updatedAt"
+        ],
+        "title": "ElementPurgePayload"
+      },
       "EligibleAnimationPayload": {
         "properties": {
           "id": {
@@ -13769,6 +14320,49 @@
           "confirmer_version_configuration"
         ],
         "title": "EnvoyerDemandesParticipationRequest"
+      },
+      "ErreurContratMoteurPayload": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "title": "Code"
+          },
+          "detail": {
+            "type": "string",
+            "title": "Detail"
+          },
+          "correlationId": {
+            "type": "string",
+            "title": "Correlationid"
+          },
+          "request_id": {
+            "type": "string",
+            "title": "Request Id"
+          },
+          "violations": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/ViolationContratMoteurPayload"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Violations"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "code",
+          "detail",
+          "correlationId",
+          "request_id"
+        ],
+        "title": "ErreurContratMoteurPayload"
       },
       "EtapeCommercante": {
         "properties": {
@@ -14269,6 +14863,31 @@
           "animation_id"
         ],
         "title": "EvenementAnimationPayload"
+      },
+      "ExecuterConservationBatchInput": {
+        "properties": {
+          "limit": {
+            "type": "integer",
+            "maximum": 1000.0,
+            "minimum": 1.0,
+            "title": "Limit",
+            "default": 100
+          },
+          "dryRun": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Dryrun"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "ExecuterConservationBatchInput"
       },
       "ExecutionBatchPayload": {
         "properties": {
@@ -14948,6 +15567,138 @@
         ],
         "title": "GainAnimationPayload"
       },
+      "GelConservationPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "typeCible": {
+            "type": "string",
+            "enum": [
+              "ANIMATION",
+              "PROMPT",
+              "REPONSE",
+              "ARTEFACT",
+              "FICHIER_PREPARE",
+              "PARTICIPANT",
+              "NOTIFICATION",
+              "NOTIFICATION_COMMERCANT",
+              "ESSAI",
+              "TOKEN",
+              "RECU",
+              "ARCHIVE_IDENTITE"
+            ],
+            "title": "Typecible"
+          },
+          "cibleId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Cibleid"
+          },
+          "animationId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Animationid"
+          },
+          "partenaireId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Partenaireid"
+          },
+          "communeId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Communeid"
+          },
+          "motif": {
+            "type": "string",
+            "title": "Motif"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Createdat"
+          },
+          "createdBy": {
+            "type": "string",
+            "title": "Createdby"
+          },
+          "leveAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Leveat"
+          },
+          "leveBy": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Leveby"
+          },
+          "motifLevee": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motiflevee"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "typeCible",
+          "cibleId",
+          "animationId",
+          "partenaireId",
+          "communeId",
+          "motif",
+          "createdAt",
+          "createdBy",
+          "leveAt",
+          "leveBy",
+          "motifLevee"
+        ],
+        "title": "GelConservationPayload"
+      },
       "GelExploitationPayload": {
         "properties": {
           "populationId": {
@@ -15213,22 +15964,29 @@
             "title": "Tentatives"
           },
           "demande": {
-            "oneOf": [
+            "anyOf": [
               {
-                "$ref": "#/components/schemas/DemandeGenerationChasse"
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/DemandeGenerationChasse"
+                  },
+                  {
+                    "$ref": "#/components/schemas/DemandeGenerationPasseport"
+                  }
+                ],
+                "discriminator": {
+                  "propertyName": "type",
+                  "mapping": {
+                    "CHASSE_TRESOR_COMMERCANTE": "#/components/schemas/DemandeGenerationChasse",
+                    "PASSEPORT_COMMERCANT": "#/components/schemas/DemandeGenerationPasseport"
+                  }
+                }
               },
               {
-                "$ref": "#/components/schemas/DemandeGenerationPasseport"
+                "type": "null"
               }
             ],
-            "title": "Demande",
-            "discriminator": {
-              "propertyName": "type",
-              "mapping": {
-                "CHASSE_TRESOR_COMMERCANTE": "#/components/schemas/DemandeGenerationChasse",
-                "PASSEPORT_COMMERCANT": "#/components/schemas/DemandeGenerationPasseport"
-              }
-            }
+            "title": "Demande"
           },
           "resultat": {
             "anyOf": [
@@ -16611,6 +17369,29 @@
           "sections"
         ],
         "title": "LectureResponse"
+      },
+      "LeverGelConservationInput": {
+        "properties": {
+          "motif": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 5,
+            "pattern": "\\S",
+            "title": "Motif"
+          },
+          "confirmer": {
+            "type": "boolean",
+            "const": true,
+            "title": "Confirmer"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "motif",
+          "confirmer"
+        ],
+        "title": "LeverGelConservationInput"
       },
       "LienCourtResolutionPayload": {
         "properties": {
@@ -18608,6 +19389,110 @@
         "type": "object",
         "title": "ModifierDossierRequest"
       },
+      "ModifierParametresExploitationInput": {
+        "properties": {
+          "expectedVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expectedversion"
+          },
+          "definitionVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Definitionversion"
+          },
+          "expectedExploitationRevision": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Expectedexploitationrevision"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Motif"
+          },
+          "startsAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Startsat"
+          },
+          "endsAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Endsat"
+          },
+          "closesAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Closesat"
+          },
+          "maxParticipants": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Maxparticipants"
+          },
+          "rouvrirInscriptions": {
+            "type": "boolean",
+            "title": "Rouvririnscriptions",
+            "default": false
+          },
+          "verifications": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/VerificationExploitation"
+            },
+            "propertyNames": {
+              "enum": [
+                "horaires",
+                "accord_lieux",
+                "trajet",
+                "accessibilite",
+                "consignes"
+              ]
+            },
+            "type": "object",
+            "title": "Verifications"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expectedVersion",
+          "definitionVersion",
+          "expectedExploitationRevision",
+          "motif"
+        ],
+        "title": "ModifierParametresExploitationInput"
+      },
       "ModifierParametresPreparationInput": {
         "properties": {
           "expectedVersion": {
@@ -20023,6 +20908,35 @@
         ],
         "title": "PageCurseurVision360AnimationPayload"
       },
+      "PageGelsConservationPayload": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/GelConservationPayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "nextCursor"
+        ],
+        "title": "PageGelsConservationPayload"
+      },
       "PageGenerationPayload": {
         "properties": {
           "items": {
@@ -20080,6 +20994,35 @@
           "nextCursor"
         ],
         "title": "PagePoiAnimationPayload"
+      },
+      "PageRapportsPurgePayload": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/RapportPurgePayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "nextCursor"
+        ],
+        "title": "PageRapportsPurgePayload"
       },
       "PageRechercheVision360AnimationPayload": {
         "properties": {
@@ -20604,6 +21547,151 @@
           "rightId"
         ],
         "title": "PaireJouable"
+      },
+      "ParametresExploitationPayload": {
+        "properties": {
+          "animationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animationid"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "definitionVersion": {
+            "type": "integer",
+            "title": "Definitionversion"
+          },
+          "exploitationRevision": {
+            "type": "integer",
+            "title": "Exploitationrevision"
+          },
+          "timeZone": {
+            "type": "string",
+            "const": "Europe/Paris",
+            "title": "Timezone"
+          },
+          "startsAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Startsat"
+          },
+          "endsAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Endsat"
+          },
+          "closesAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Closesat"
+          },
+          "maxParticipants": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Maxparticipants"
+          },
+          "allowedActions": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "MODIFIER_PARAMETRES",
+                "ROUVRIR_INSCRIPTIONS"
+              ]
+            },
+            "type": "array",
+            "title": "Allowedactions"
+          },
+          "modifiableFields": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "startsAt",
+                "endsAt",
+                "closesAt",
+                "maxParticipants"
+              ]
+            },
+            "type": "array",
+            "title": "Modifiablefields"
+          },
+          "requiredVerifications": {
+            "additionalProperties": {
+              "items": {
+                "type": "string",
+                "enum": [
+                  "horaires",
+                  "accord_lieux",
+                  "trajet",
+                  "accessibilite",
+                  "consignes"
+                ]
+              },
+              "type": "array"
+            },
+            "propertyNames": {
+              "enum": [
+                "startsAt",
+                "endsAt",
+                "closesAt",
+                "maxParticipants"
+              ]
+            },
+            "type": "object",
+            "title": "Requiredverifications"
+          },
+          "nombreInscrits": {
+            "type": "integer",
+            "title": "Nombreinscrits"
+          },
+          "inscriptionsFermees": {
+            "type": "boolean",
+            "title": "Inscriptionsfermees"
+          },
+          "capaciteAtteinte": {
+            "type": "boolean",
+            "title": "Capaciteatteinte"
+          },
+          "supportsARegenerer": {
+            "type": "boolean",
+            "title": "Supportsaregenerer"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "animationId",
+          "version",
+          "definitionVersion",
+          "exploitationRevision",
+          "timeZone",
+          "startsAt",
+          "endsAt",
+          "closesAt",
+          "maxParticipants",
+          "allowedActions",
+          "modifiableFields",
+          "requiredVerifications",
+          "nombreInscrits",
+          "inscriptionsFermees",
+          "capaciteAtteinte",
+          "supportsARegenerer"
+        ],
+        "title": "ParametresExploitationPayload"
       },
       "ParametresPreparationPayload": {
         "properties": {
@@ -21292,6 +22380,48 @@
           "version"
         ],
         "title": "PolitiqueBumRequest"
+      },
+      "PoserGelConservationInput": {
+        "properties": {
+          "typeCible": {
+            "type": "string",
+            "enum": [
+              "ANIMATION",
+              "PROMPT",
+              "REPONSE",
+              "ARTEFACT",
+              "FICHIER_PREPARE",
+              "PARTICIPANT",
+              "NOTIFICATION",
+              "NOTIFICATION_COMMERCANT",
+              "ESSAI",
+              "TOKEN",
+              "RECU",
+              "ARCHIVE_IDENTITE"
+            ],
+            "title": "Typecible"
+          },
+          "cibleId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Cibleid"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 5,
+            "pattern": "\\S",
+            "title": "Motif"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "typeCible",
+          "cibleId",
+          "motif"
+        ],
+        "title": "PoserGelConservationInput"
       },
       "PositionPreparation": {
         "properties": {
@@ -23067,6 +24197,28 @@
             "type": "string",
             "pattern": "^[0-9a-f]{64}$",
             "title": "Requesthash"
+          },
+          "purgeEtat": {
+            "type": "string",
+            "enum": [
+              "ACTIF",
+              "PURGE_EN_COURS",
+              "PURGE"
+            ],
+            "title": "Purgeetat",
+            "default": "ACTIF"
+          },
+          "purgedAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Purgedat"
           }
         },
         "additionalProperties": false,
@@ -23709,6 +24861,148 @@
           "disponible"
         ],
         "title": "QuotaGenerationPayload"
+      },
+      "RapportPurgePayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "politique": {
+            "type": "string",
+            "title": "Politique"
+          },
+          "categorie": {
+            "type": "string",
+            "enum": [
+              "GENERATION",
+              "FICHIERS_PREPARES",
+              "ESSAIS",
+              "TOKENS",
+              "PARTICIPANTS",
+              "NOTIFICATIONS",
+              "RECUS_PARTICIPATION",
+              "ARCHIVES_IDENTITE"
+            ],
+            "title": "Categorie"
+          },
+          "dateExecution": {
+            "type": "string",
+            "format": "date",
+            "title": "Dateexecution"
+          },
+          "dryRun": {
+            "type": "boolean",
+            "title": "Dryrun"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "EN_COURS",
+              "A_REPRENDRE",
+              "TERMINE",
+              "ECHEC"
+            ],
+            "title": "Statut"
+          },
+          "startedAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Startedat"
+          },
+          "finishedAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Finishedat"
+          },
+          "leaseUntil": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Leaseuntil"
+          },
+          "examines": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Examines"
+          },
+          "supprimes": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Supprimes"
+          },
+          "eligiblesSimulation": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Eligiblessimulation"
+          },
+          "exclus": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Exclus"
+          },
+          "erreurs": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Erreurs"
+          },
+          "erreurCode": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Erreurcode"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "politique",
+          "categorie",
+          "dateExecution",
+          "dryRun",
+          "statut",
+          "startedAt",
+          "finishedAt",
+          "leaseUntil",
+          "examines",
+          "supprimes",
+          "eligiblesSimulation",
+          "exclus",
+          "erreurs",
+          "nextCursor"
+        ],
+        "title": "RapportPurgePayload"
       },
       "RapportValidationGenerationPayload": {
         "properties": {
@@ -25446,6 +26740,23 @@
         ],
         "title": "ResultatGenerationPasseport"
       },
+      "ResultatPurgeQuotidiennePayload": {
+        "properties": {
+          "runs": {
+            "items": {
+              "$ref": "#/components/schemas/RapportPurgePayload"
+            },
+            "type": "array",
+            "title": "Runs"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "runs"
+        ],
+        "title": "ResultatPurgeQuotidiennePayload"
+      },
       "ResultatWorkerGenerationPayload": {
         "properties": {
           "id": {
@@ -27136,6 +28447,28 @@
             "type": "string",
             "format": "date-time",
             "title": "Createdat"
+          },
+          "purgeEtat": {
+            "type": "string",
+            "enum": [
+              "ACTIF",
+              "PURGE_EN_COURS",
+              "PURGE"
+            ],
+            "title": "Purgeetat",
+            "default": "ACTIF"
+          },
+          "purgedAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Purgedat"
           }
         },
         "additionalProperties": false,
@@ -27755,6 +29088,29 @@
           "commercant"
         ],
         "title": "ValidationSessionCommercantPayload"
+      },
+      "VerificationExploitation": {
+        "properties": {
+          "confirme": {
+            "type": "boolean",
+            "const": true,
+            "title": "Confirme"
+          },
+          "detail": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Detail"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "confirme",
+          "detail"
+        ],
+        "title": "VerificationExploitation"
       },
       "VerificationMissionPayload": {
         "properties": {
@@ -28381,6 +29737,30 @@
           "message"
         ],
         "title": "ViolationApi"
+      },
+      "ViolationContratMoteurPayload": {
+        "properties": {
+          "path": {
+            "type": "string",
+            "title": "Path"
+          },
+          "code": {
+            "type": "string",
+            "title": "Code"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "path",
+          "code",
+          "message"
+        ],
+        "title": "ViolationContratMoteurPayload"
       },
       "ViolationGenerationPayload": {
         "properties": {
