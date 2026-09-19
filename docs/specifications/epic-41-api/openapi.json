@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Backend - contrat implemente EPIC 41",
     "description": "OpenAPI complet du backend, dont les parcours Animation locale. Genere hors ligne depuis le code local pour les integrations et les mocks ; cet instantane ne prouve pas son deploiement.",
-    "version": "1.0.0+0655811"
+    "version": "1.0.0+acee4dd"
   },
   "paths": {
     "/internal/erp/api/instances": {
@@ -34843,6 +34843,1185 @@
         ]
       }
     },
+    "/protected/animation-locale/animations/{animation_id}/exploitation": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Lire",
+        "operationId": "lire_protected_animation_locale_animations__animation_id__exploitation_get",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExploitationAnimationPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/protected/animation-locale/animations/{animation_id}/etapes/{step_id}/neutralisation/apercu": {
+      "post": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Apercu",
+        "operationId": "apercu_protected_animation_locale_animations__animation_id__etapes__step_id__neutralisation_apercu_post",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "step_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Step Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApercuNeutralisationPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/protected/animation-locale/animations/{animation_id}/etapes/{step_id}/neutralisation": {
+      "post": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Neutraliser",
+        "operationId": "neutraliser_protected_animation_locale_animations__animation_id__etapes__step_id__neutralisation_post",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "step_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Step Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NeutraliserEtapeInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecuNeutralisation"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/protected/animation-locale/animations/{animation_id}/etapes/{step_id}/neutralisation/commandes/{cle}": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Recu Neutralisation",
+        "operationId": "recu_neutralisation_protected_animation_locale_animations__animation_id__etapes__step_id__neutralisation_commandes__cle__get",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "step_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Step Id"
+            }
+          },
+          {
+            "name": "cle",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Cle"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeConfirmee_RecuNeutralisation_"
+                }
+              }
+            }
+          },
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeEnCours"
+                }
+              }
+            },
+            "description": "Accepted"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/protected/animation-locale/animations/{animation_id}/exploitation/cloture": {
+      "post": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Cloturer",
+        "operationId": "cloturer_protected_animation_locale_animations__animation_id__exploitation_cloture_post",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CloturerMoteurInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecuClotureMoteur"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/protected/animation-locale/animations/{animation_id}/exploitation/cloture/commandes/{cle}": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Recu Cloture",
+        "operationId": "recu_cloture_protected_animation_locale_animations__animation_id__exploitation_cloture_commandes__cle__get",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "cle",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Cle"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeConfirmee_RecuClotureMoteur_"
+                }
+              }
+            }
+          },
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeEnCours"
+                }
+              }
+            },
+            "description": "Accepted"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/internal/animation-locale/animations/{animation_id}/exploitation": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Lire",
+        "operationId": "lire_internal_animation_locale_animations__animation_id__exploitation_get",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExploitationAnimationPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/animation-locale/animations/{animation_id}/etapes/{step_id}/neutralisation/apercu": {
+      "post": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Apercu",
+        "operationId": "apercu_internal_animation_locale_animations__animation_id__etapes__step_id__neutralisation_apercu_post",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "step_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Step Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApercuNeutralisationPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/animation-locale/animations/{animation_id}/etapes/{step_id}/neutralisation": {
+      "post": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Neutraliser",
+        "operationId": "neutraliser_internal_animation_locale_animations__animation_id__etapes__step_id__neutralisation_post",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "step_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Step Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NeutraliserEtapeInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecuNeutralisation"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/animation-locale/animations/{animation_id}/etapes/{step_id}/neutralisation/commandes/{cle}": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Recu Neutralisation",
+        "operationId": "recu_neutralisation_internal_animation_locale_animations__animation_id__etapes__step_id__neutralisation_commandes__cle__get",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "step_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Step Id"
+            }
+          },
+          {
+            "name": "cle",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Cle"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeConfirmee_RecuNeutralisation_"
+                }
+              }
+            }
+          },
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeEnCours"
+                }
+              }
+            },
+            "description": "Accepted"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/animation-locale/animations/{animation_id}/exploitation/cloture": {
+      "post": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Cloturer",
+        "operationId": "cloturer_internal_animation_locale_animations__animation_id__exploitation_cloture_post",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CloturerMoteurInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecuClotureMoteur"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/animation-locale/animations/{animation_id}/exploitation/cloture/commandes/{cle}": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Recu Cloture",
+        "operationId": "recu_cloture_internal_animation_locale_animations__animation_id__exploitation_cloture_commandes__cle__get",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "cle",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Cle"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeConfirmee_RecuClotureMoteur_"
+                }
+              }
+            }
+          },
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeEnCours"
+                }
+              }
+            },
+            "description": "Accepted"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/protected/animation-locale/animations/{animation_id}/validations/{validation_id}/correction/apercu": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Apercu",
+        "operationId": "apercu_protected_animation_locale_animations__animation_id__validations__validation_id__correction_apercu_get",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "validation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Validation Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApercuCorrectionPreuvePayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/protected/animation-locale/animations/{animation_id}/validations/{validation_id}/correction": {
+      "post": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Corriger",
+        "operationId": "corriger_protected_animation_locale_animations__animation_id__validations__validation_id__correction_post",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "validation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Validation Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CorrigerPreuveInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecuCorrectionPreuve"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/protected/animation-locale/animations/{animation_id}/validations/{validation_id}/correction/commandes/{cle}": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Recu",
+        "operationId": "recu_protected_animation_locale_animations__animation_id__validations__validation_id__correction_commandes__cle__get",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "validation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Validation Id"
+            }
+          },
+          {
+            "name": "cle",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Cle"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeConfirmee_RecuCorrectionPreuve_"
+                }
+              }
+            }
+          },
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeEnCours"
+                }
+              }
+            },
+            "description": "Accepted"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/internal/animation-locale/animations/{animation_id}/validations/{validation_id}/correction/apercu": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Apercu",
+        "operationId": "apercu_internal_animation_locale_animations__animation_id__validations__validation_id__correction_apercu_get",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "validation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Validation Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApercuCorrectionPreuvePayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/animation-locale/animations/{animation_id}/validations/{validation_id}/correction": {
+      "post": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Corriger",
+        "operationId": "corriger_internal_animation_locale_animations__animation_id__validations__validation_id__correction_post",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "validation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Validation Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CorrigerPreuveInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecuCorrectionPreuve"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/animation-locale/animations/{animation_id}/validations/{validation_id}/correction/commandes/{cle}": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Recu",
+        "operationId": "recu_internal_animation_locale_animations__animation_id__validations__validation_id__correction_commandes__cle__get",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "validation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Validation Id"
+            }
+          },
+          {
+            "name": "cle",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Cle"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeConfirmee_RecuCorrectionPreuve_"
+                }
+              }
+            }
+          },
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeEnCours"
+                }
+              }
+            },
+            "description": "Accepted"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
     "/protected/animation-locale/animations/{animation_id}/preparation/parametres": {
       "get": {
         "tags": [
@@ -38843,6 +40022,276 @@
         ]
       }
     },
+    "/protected/animation-locale/animations/{animation_id}/demandes-participation/{demande_id}/retrait/apercu": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Apercu Retrait Mission Animation",
+        "operationId": "apercu_retrait_mission_animation",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "demande_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Demande Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApercuRetraitMissionPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/animation-locale/animations/{animation_id}/demandes-participation/{demande_id}/retrait/commandes/{cle}": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Lire Recu Retrait Mission Animation",
+        "operationId": "lire_recu_retrait_mission_animation",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "demande_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Demande Id"
+            }
+          },
+          {
+            "name": "cle",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Cle"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeConfirmee_RecuRetraitMission_"
+                }
+              }
+            }
+          },
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeEnCours"
+                }
+              }
+            },
+            "description": "Accepted"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/animation-locale/animations/{animation_id}/demandes-participation/{demande_id}/retrait/refuser/commandes/{cle}": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Lire Recu Refus Retrait Mission Animation",
+        "operationId": "lire_recu_refus_retrait_mission_animation",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "demande_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Demande Id"
+            }
+          },
+          {
+            "name": "cle",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Cle"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeConfirmee_DemandeParticipationCommercantPayload_"
+                }
+              }
+            }
+          },
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeEnCours"
+                }
+              }
+            },
+            "description": "Accepted"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
     "/protected/animation-locale/animations/{animation_id}/demandes-participation/{demande_id}/retrait/accepter": {
       "post": {
         "tags": [
@@ -38906,7 +40355,15 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/RetirerParticipationCommercantRequest"
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/AccepterRetraitMissionInput"
+                  },
+                  {
+                    "$ref": "#/components/schemas/RetirerParticipationCommercantRequest"
+                  }
+                ],
+                "title": "Payload"
               }
             }
           }
@@ -38917,7 +40374,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DemandeParticipationCommercantPayload"
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/RecuRetraitMission"
+                    },
+                    {
+                      "$ref": "#/components/schemas/DemandeParticipationCommercantPayload"
+                    }
+                  ],
+                  "title": "Response Accepter Retrait Participation Commercant Animation"
                 }
               }
             }
@@ -39802,33 +41267,25 @@
               "maxLength": 128,
               "title": "Idempotency-Key"
             }
-          },
-          {
-            "name": "Authorization",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Session Animation au format `Bearer <token>`.",
-              "title": "Authorization"
-            },
-            "description": "Session Animation au format `Bearer <token>`."
           }
         ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CloturerMoteurInput"
+              }
+            }
+          }
+        },
         "responses": {
-          "201": {
+          "200": {
             "description": "Successful Response",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/OperationAnimationPayload"
+                  "$ref": "#/components/schemas/RecuClotureMoteur"
                 }
               }
             }
@@ -39843,12 +41300,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "CommercantSessionBearer": []
-          }
-        ]
+        }
       }
     },
     "/protected/animation-locale/animations/{animation_id}/annuler": {
@@ -42538,22 +43990,15 @@
             }
           },
           {
-            "name": "Authorization",
+            "name": "Idempotency-Key",
             "in": "header",
-            "required": false,
+            "required": true,
             "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Session Animation au format `Bearer <token>`.",
-              "title": "Authorization"
-            },
-            "description": "Session Animation au format `Bearer <token>`."
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
           }
         ],
         "requestBody": {
@@ -42561,7 +44006,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AnnulerValidationAnimationRequest"
+                "$ref": "#/components/schemas/CorrigerPreuveInput"
               }
             }
           }
@@ -42572,7 +44017,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ValidationAnimationPayload"
+                  "$ref": "#/components/schemas/RecuCorrectionPreuve"
                 }
               }
             }
@@ -42587,12 +44032,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "CommercantSessionBearer": []
-          }
-        ]
+        }
       }
     },
     "/protected/animation-locale/notifications": {
@@ -45345,6 +46785,59 @@
         ],
         "title": "AccepterResultatGenerationInput"
       },
+      "AccepterRetraitMissionInput": {
+        "properties": {
+          "confirmer": {
+            "type": "boolean",
+            "const": true,
+            "title": "Confirmer"
+          },
+          "expectedVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expectedversion"
+          },
+          "definitionVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Definitionversion"
+          },
+          "stepId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Stepid"
+          },
+          "previewHash": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Previewhash"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Motif"
+          },
+          "expectedDemandeVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expecteddemandeversion"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "confirmer",
+          "expectedVersion",
+          "definitionVersion",
+          "stepId",
+          "previewHash",
+          "motif",
+          "expectedDemandeVersion"
+        ],
+        "title": "AccepterRetraitMissionInput"
+      },
       "AccueilMarketplaceContextualisePayload": {
         "properties": {
           "contexte": {
@@ -47538,6 +49031,168 @@
         ],
         "title": "AnnulerValidationAnimationRequest"
       },
+      "ApercuCorrectionPreuvePayload": {
+        "properties": {
+          "animationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animationid"
+          },
+          "validationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Validationid"
+          },
+          "participantId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Participantid"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "ANNULATION_PREUVE",
+              "ANOMALIE_APRES_GEL"
+            ],
+            "title": "Mode"
+          },
+          "definitionVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Definitionversion"
+          },
+          "expectedProgressionVersion": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Expectedprogressionversion"
+          },
+          "expectedExploitationRevision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expectedexploitationrevision"
+          },
+          "previewHash": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Previewhash"
+          },
+          "impact": {
+            "$ref": "#/components/schemas/ImpactCorrectionPreuvePayload"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "animationId",
+          "validationId",
+          "participantId",
+          "mode",
+          "definitionVersion",
+          "expectedProgressionVersion",
+          "expectedExploitationRevision",
+          "previewHash",
+          "impact"
+        ],
+        "title": "ApercuCorrectionPreuvePayload"
+      },
+      "ApercuNeutralisationPayload": {
+        "properties": {
+          "animationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animationid"
+          },
+          "definitionVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Definitionversion"
+          },
+          "expectedVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expectedversion"
+          },
+          "stepId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Stepid"
+          },
+          "previewHash": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Previewhash"
+          },
+          "impact": {
+            "$ref": "#/components/schemas/ImpactNeutralisationPayload"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "animationId",
+          "definitionVersion",
+          "expectedVersion",
+          "stepId",
+          "previewHash",
+          "impact"
+        ],
+        "title": "ApercuNeutralisationPayload"
+      },
+      "ApercuRetraitMissionPayload": {
+        "properties": {
+          "animationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animationid"
+          },
+          "definitionVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Definitionversion"
+          },
+          "expectedVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expectedversion"
+          },
+          "stepId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Stepid"
+          },
+          "previewHash": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Previewhash"
+          },
+          "impact": {
+            "$ref": "#/components/schemas/ImpactNeutralisationPayload"
+          },
+          "demandeId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Demandeid"
+          },
+          "expectedDemandeVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expecteddemandeversion"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "animationId",
+          "definitionVersion",
+          "expectedVersion",
+          "stepId",
+          "previewHash",
+          "impact",
+          "demandeId",
+          "expectedDemandeVersion"
+        ],
+        "title": "ApercuRetraitMissionPayload"
+      },
       "ApiErrorResponse": {
         "properties": {
           "detail": {
@@ -48918,6 +50573,39 @@
         ],
         "title": "ChronologieResponse"
       },
+      "CloturerMoteurInput": {
+        "properties": {
+          "confirmer": {
+            "type": "boolean",
+            "const": true,
+            "title": "Confirmer"
+          },
+          "expectedVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expectedversion"
+          },
+          "definitionVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Definitionversion"
+          },
+          "expectedExploitationRevision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expectedexploitationrevision"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "confirmer",
+          "expectedVersion",
+          "definitionVersion",
+          "expectedExploitationRevision"
+        ],
+        "title": "CloturerMoteurInput"
+      },
       "CodeConsultationRequest": {
         "properties": {
           "code": {
@@ -49903,6 +51591,25 @@
         ],
         "title": "CoffretsPagePayload"
       },
+      "CommandeConfirmee_DemandeParticipationCommercantPayload_": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "CONFIRMEE",
+            "title": "Status"
+          },
+          "result": {
+            "$ref": "#/components/schemas/DemandeParticipationCommercantPayload"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "result"
+        ],
+        "title": "CommandeConfirmee[DemandeParticipationCommercantPayload]"
+      },
       "CommandeConfirmee_GenerationMutationPayload_": {
         "properties": {
           "status": {
@@ -49998,6 +51705,63 @@
         ],
         "title": "CommandeConfirmee[QuotaGenerationPayload]"
       },
+      "CommandeConfirmee_RecuClotureMoteur_": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "CONFIRMEE",
+            "title": "Status"
+          },
+          "result": {
+            "$ref": "#/components/schemas/RecuClotureMoteur"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "result"
+        ],
+        "title": "CommandeConfirmee[RecuClotureMoteur]"
+      },
+      "CommandeConfirmee_RecuCorrectionPreuve_": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "CONFIRMEE",
+            "title": "Status"
+          },
+          "result": {
+            "$ref": "#/components/schemas/RecuCorrectionPreuve"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "result"
+        ],
+        "title": "CommandeConfirmee[RecuCorrectionPreuve]"
+      },
+      "CommandeConfirmee_RecuNeutralisation_": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "CONFIRMEE",
+            "title": "Status"
+          },
+          "result": {
+            "$ref": "#/components/schemas/RecuNeutralisation"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "result"
+        ],
+        "title": "CommandeConfirmee[RecuNeutralisation]"
+      },
       "CommandeConfirmee_RecuPreparationPayload_": {
         "properties": {
           "status": {
@@ -50016,6 +51780,25 @@
           "result"
         ],
         "title": "CommandeConfirmee[RecuPreparationPayload]"
+      },
+      "CommandeConfirmee_RecuRetraitMission_": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "CONFIRMEE",
+            "title": "Status"
+          },
+          "result": {
+            "$ref": "#/components/schemas/RecuRetraitMission"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "result"
+        ],
+        "title": "CommandeConfirmee[RecuRetraitMission]"
       },
       "CommandeConfirmee_ReutilisationTemplateGenerationPayload_": {
         "properties": {
@@ -51975,6 +53758,53 @@
           "merchantResponsibilityConfirmed"
         ],
         "title": "CorrigerFactureAssisteeRequest"
+      },
+      "CorrigerPreuveInput": {
+        "properties": {
+          "definitionVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Definitionversion"
+          },
+          "expectedProgressionVersion": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Expectedprogressionversion"
+          },
+          "expectedExploitationRevision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expectedexploitationrevision"
+          },
+          "previewHash": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Previewhash"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 5,
+            "pattern": "\\S",
+            "title": "Motif"
+          },
+          "confirmer": {
+            "type": "boolean",
+            "const": true,
+            "title": "Confirmer"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "definitionVersion",
+          "expectedProgressionVersion",
+          "expectedExploitationRevision",
+          "previewHash",
+          "motif",
+          "confirmer"
+        ],
+        "title": "CorrigerPreuveInput"
       },
       "CouleursVisuelles": {
         "properties": {
@@ -54194,6 +56024,53 @@
         ],
         "title": "DemandeParticipationCommercantPayload"
       },
+      "DependanceObjetContinuite": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "COLLECTIBLE",
+            "title": "Type"
+          },
+          "id": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Id"
+          },
+          "collectibleId": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Collectibleid"
+          },
+          "sourceStepId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Sourcestepid"
+          },
+          "consumerStepIds": {
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "type": "array",
+            "minItems": 1,
+            "title": "Consumerstepids"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "type",
+          "id",
+          "collectibleId",
+          "sourceStepId",
+          "consumerStepIds"
+        ],
+        "title": "DependanceObjetContinuite"
+      },
       "DepotResultatGenerationInput": {
         "properties": {
           "expectedVersion": {
@@ -55239,6 +57116,41 @@
         ],
         "title": "EtapeCommercante"
       },
+      "EtapeExploitationPayload": {
+        "properties": {
+          "stepId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Stepid"
+          },
+          "titre": {
+            "type": "string",
+            "title": "Titre"
+          },
+          "typeLieu": {
+            "type": "string",
+            "enum": [
+              "MERCHANT",
+              "POI",
+              "VIRTUAL"
+            ],
+            "title": "Typelieu"
+          },
+          "neutralisee": {
+            "type": "boolean",
+            "title": "Neutralisee"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "stepId",
+          "titre",
+          "typeLieu",
+          "neutralisee"
+        ],
+        "title": "EtapeExploitationPayload"
+      },
       "EtapeNonCommercante": {
         "properties": {
           "lieu": {
@@ -55797,6 +57709,80 @@
         ],
         "title": "ExecutionBatchPayload"
       },
+      "ExploitationAnimationPayload": {
+        "properties": {
+          "animationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animationid"
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Version"
+          },
+          "definitionVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Definitionversion"
+          },
+          "exploitationRevision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Exploitationrevision"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          },
+          "allowedActions": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "NEUTRALISER_ETAPE",
+                "CLOTURER",
+                "CORRIGER_PREUVE"
+              ]
+            },
+            "type": "array",
+            "title": "Allowedactions"
+          },
+          "metriques": {
+            "$ref": "#/components/schemas/MetriquesExploitationPayload"
+          },
+          "etapes": {
+            "items": {
+              "$ref": "#/components/schemas/EtapeExploitationPayload"
+            },
+            "type": "array",
+            "title": "Etapes"
+          },
+          "gel": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/GelExploitationPayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "animationId",
+          "version",
+          "definitionVersion",
+          "exploitationRevision",
+          "statut",
+          "allowedActions",
+          "metriques",
+          "etapes",
+          "gel"
+        ],
+        "title": "ExploitationAnimationPayload"
+      },
       "FacturerAbonnementAnimationRequest": {
         "properties": {
           "billingSnapshot": {
@@ -56266,6 +58252,39 @@
           "coffret_nom"
         ],
         "title": "GainAnimationPayload"
+      },
+      "GelExploitationPayload": {
+        "properties": {
+          "populationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Populationid"
+          },
+          "definitionVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Definitionversion"
+          },
+          "exploitationRevision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Exploitationrevision"
+          },
+          "nombreEligibles": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Nombreeligibles"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "populationId",
+          "definitionVersion",
+          "exploitationRevision",
+          "nombreEligibles"
+        ],
+        "title": "GelExploitationPayload"
       },
       "GenerationMutationPayload": {
         "properties": {
@@ -57212,6 +59231,114 @@
         ],
         "title": "ImagePayload"
       },
+      "ImpactCorrectionPreuvePayload": {
+        "properties": {
+          "eligibleAvant": {
+            "type": "boolean",
+            "title": "Eligibleavant"
+          },
+          "eligibleApres": {
+            "type": "boolean",
+            "title": "Eligibleapres"
+          },
+          "chancesAvant": {
+            "type": "integer",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Chancesavant"
+          },
+          "chancesApres": {
+            "type": "integer",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Chancesapres"
+          },
+          "progressionConservee": {
+            "type": "boolean",
+            "const": true,
+            "title": "Progressionconservee"
+          },
+          "objetsConserves": {
+            "type": "boolean",
+            "const": true,
+            "title": "Objetsconserves"
+          },
+          "populationGeleeConservee": {
+            "type": "boolean",
+            "title": "Populationgeleeconservee"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "eligibleAvant",
+          "eligibleApres",
+          "chancesAvant",
+          "chancesApres",
+          "progressionConservee",
+          "objetsConserves",
+          "populationGeleeConservee"
+        ],
+        "title": "ImpactCorrectionPreuvePayload"
+      },
+      "ImpactNeutralisationPayload": {
+        "properties": {
+          "inscrits": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Inscrits"
+          },
+          "parcoursModifies": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Parcoursmodifies"
+          },
+          "qualificationsGagnees": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Qualificationsgagnees"
+          },
+          "qualificationsPerdues": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Qualificationsperdues"
+          },
+          "etapesRequisesApres": {
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "type": "array",
+            "title": "Etapesrequisesapres"
+          },
+          "objetsFournis": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Objetsfournis"
+          },
+          "informationsFournies": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Informationsfournies"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "inscrits",
+          "parcoursModifies",
+          "qualificationsGagnees",
+          "qualificationsPerdues",
+          "etapesRequisesApres",
+          "objetsFournis",
+          "informationsFournies"
+        ],
+        "title": "ImpactNeutralisationPayload"
+      },
       "IncidentCommandeLotsPayload": {
         "properties": {
           "code": {
@@ -57283,6 +59410,133 @@
           "generated_at"
         ],
         "title": "IndicateursVision360AnimationPayload"
+      },
+      "InformationContinuite": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "INFORMATION",
+            "title": "Type"
+          },
+          "id": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Id"
+          },
+          "sourceStepId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Sourcestepid"
+          },
+          "consumerStepIds": {
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "type": "array",
+            "minItems": 1,
+            "title": "Consumerstepids"
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Title"
+          },
+          "content": {
+            "type": "string",
+            "maxLength": 20000,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Content"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "type",
+          "id",
+          "sourceStepId",
+          "consumerStepIds",
+          "title",
+          "content"
+        ],
+        "title": "InformationContinuite"
+      },
+      "InformationContinuiteParticipant": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Id"
+          },
+          "titre": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Titre"
+          },
+          "contenu": {
+            "type": "string",
+            "maxLength": 20000,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Contenu"
+          },
+          "sourceStepId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Sourcestepid"
+          },
+          "provenance": {
+            "type": "string",
+            "enum": [
+              "REUSSITE",
+              "DISPENSE"
+            ],
+            "title": "Provenance"
+          },
+          "neutralisationId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Neutralisationid"
+          },
+          "exploitationRevision": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Exploitationrevision"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "titre",
+          "contenu",
+          "sourceStepId",
+          "provenance"
+        ],
+        "title": "InformationContinuiteParticipant"
       },
       "InitialisationGeneration": {
         "properties": {
@@ -58438,6 +60692,118 @@
           "description"
         ],
         "title": "MetadonneesAnimation"
+      },
+      "MetriquesExploitationPayload": {
+        "properties": {
+          "inscrits": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Inscrits"
+          },
+          "parcoursDebutes": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Parcoursdebutes"
+          },
+          "parcoursTermines": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Parcourstermines"
+          },
+          "eligibles": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Eligibles"
+          },
+          "preuvesEffectives": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Preuveseffectives"
+          },
+          "preuvesAnnulees": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Preuvesannulees"
+          },
+          "preuvesSignalees": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Preuvessignalees"
+          },
+          "anomaliesApresGel": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Anomaliesapresgel"
+          },
+          "aides": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Aides"
+          },
+          "indices": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Indices"
+          },
+          "tentatives": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Tentatives"
+          },
+          "erreursReponse": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Erreursreponse"
+          },
+          "neutralisations": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Neutralisations"
+          },
+          "dureeMoyenneSecondes": {
+            "anyOf": [
+              {
+                "type": "number",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Dureemoyennesecondes"
+          },
+          "generationsBloquees": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Generationsbloquees"
+          },
+          "generationsEnAttenteHumaine": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Generationsenattentehumaine"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "inscrits",
+          "parcoursDebutes",
+          "parcoursTermines",
+          "eligibles",
+          "preuvesEffectives",
+          "preuvesAnnulees",
+          "preuvesSignalees",
+          "anomaliesApresGel",
+          "aides",
+          "indices",
+          "tentatives",
+          "erreursReponse",
+          "neutralisations",
+          "dureeMoyenneSecondes",
+          "generationsBloquees",
+          "generationsEnAttenteHumaine"
+        ],
+        "title": "MetriquesExploitationPayload"
       },
       "MettreAJourContactCommercantRequest": {
         "properties": {
@@ -59877,6 +62243,53 @@
         ],
         "title": "MouvementReversementAReverserPayload"
       },
+      "NeutraliserEtapeInput": {
+        "properties": {
+          "confirmer": {
+            "type": "boolean",
+            "const": true,
+            "title": "Confirmer"
+          },
+          "expectedVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expectedversion"
+          },
+          "definitionVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Definitionversion"
+          },
+          "stepId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Stepid"
+          },
+          "previewHash": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Previewhash"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Motif"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "confirmer",
+          "expectedVersion",
+          "definitionVersion",
+          "stepId",
+          "previewHash",
+          "motif"
+        ],
+        "title": "NeutraliserEtapeInput"
+      },
       "Note": {
         "properties": {
           "contenu": {
@@ -60123,8 +62536,84 @@
         ],
         "title": "NouvelleOffre"
       },
+      "ObjetCollecte": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Id"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "SYMBOL",
+              "INGREDIENT",
+              "KEY",
+              "LETTER",
+              "MAP_FRAGMENT",
+              "OBJECT"
+            ],
+            "title": "Type"
+          },
+          "label": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Label"
+          },
+          "assetRef": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 64,
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Assetref"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "label"
+        ],
+        "title": "ObjetCollecte"
+      },
       "ObjetParticipant": {
         "properties": {
+          "neutralisationId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Neutralisationid"
+          },
+          "exploitationRevision": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Exploitationrevision"
+          },
           "id": {
             "type": "string",
             "maxLength": 64,
@@ -62285,6 +64774,34 @@
       },
       "PreparationChasse": {
         "properties": {
+          "collectibles": {
+            "items": {
+              "$ref": "#/components/schemas/ObjetCollecte"
+            },
+            "type": "array",
+            "title": "Collectibles"
+          },
+          "continuityElements": {
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/DependanceObjetContinuite"
+                },
+                {
+                  "$ref": "#/components/schemas/InformationContinuite"
+                }
+              ],
+              "discriminator": {
+                "propertyName": "type",
+                "mapping": {
+                  "COLLECTIBLE": "#/components/schemas/DependanceObjetContinuite",
+                  "INFORMATION": "#/components/schemas/InformationContinuite"
+                }
+              }
+            },
+            "type": "array",
+            "title": "Continuityelements"
+          },
           "preparation_revision": {
             "type": "integer",
             "minimum": 1.0,
@@ -63566,6 +66083,18 @@
             },
             "type": "array",
             "title": "Objets"
+          },
+          "informationsContinuite": {
+            "items": {
+              "$ref": "#/components/schemas/InformationContinuiteParticipant"
+            },
+            "type": "array",
+            "title": "Informationscontinuite"
+          },
+          "parcoursAdapte": {
+            "type": "boolean",
+            "title": "Parcoursadapte",
+            "default": false
           },
           "preuvesARegulariser": {
             "items": {
@@ -64900,6 +67429,45 @@
         ],
         "title": "RecuAttestationPayload"
       },
+      "RecuClotureMoteur": {
+        "properties": {
+          "animationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animationid"
+          },
+          "populationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Populationid"
+          },
+          "populationVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Populationversion"
+          },
+          "exploitationRevision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Exploitationrevision"
+          },
+          "nombreEligibles": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Nombreeligibles"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "animationId",
+          "populationId",
+          "populationVersion",
+          "exploitationRevision",
+          "nombreEligibles"
+        ],
+        "title": "RecuClotureMoteur"
+      },
       "RecuCommande": {
         "properties": {
           "commandId": {
@@ -65000,6 +67568,84 @@
         ],
         "title": "RecuCommandeEnCours"
       },
+      "RecuCorrectionPreuve": {
+        "properties": {
+          "animationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animationid"
+          },
+          "validationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Validationid"
+          },
+          "participantId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Participantid"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "ANNULATION_PREUVE",
+              "ANOMALIE_APRES_GEL"
+            ],
+            "title": "Mode"
+          },
+          "anomalieId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Anomalieid"
+          },
+          "populationId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Populationid"
+          },
+          "definitionVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Definitionversion"
+          },
+          "progressionVersion": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Progressionversion"
+          },
+          "exploitationRevision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Exploitationrevision"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "animationId",
+          "validationId",
+          "participantId",
+          "mode",
+          "definitionVersion",
+          "progressionVersion",
+          "exploitationRevision"
+        ],
+        "title": "RecuCorrectionPreuve"
+      },
       "RecuDecisionMissionPayload": {
         "properties": {
           "id": {
@@ -65073,6 +67719,45 @@
         ],
         "title": "RecuGestionParticipationPayload"
       },
+      "RecuNeutralisation": {
+        "properties": {
+          "neutralisationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Neutralisationid"
+          },
+          "animationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animationid"
+          },
+          "stepId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Stepid"
+          },
+          "definitionVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Definitionversion"
+          },
+          "exploitationRevision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Exploitationrevision"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "neutralisationId",
+          "animationId",
+          "stepId",
+          "definitionVersion",
+          "exploitationRevision"
+        ],
+        "title": "RecuNeutralisation"
+      },
       "RecuPreparationPayload": {
         "properties": {
           "animationId": {
@@ -65126,6 +67811,37 @@
           "qrRevision"
         ],
         "title": "RecuQrLieuPayload"
+      },
+      "RecuRetraitMission": {
+        "properties": {
+          "animationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animationid"
+          },
+          "demandeId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Demandeid"
+          },
+          "demandeVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Demandeversion"
+          },
+          "neutralisation": {
+            "$ref": "#/components/schemas/RecuNeutralisation"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "animationId",
+          "demandeId",
+          "demandeVersion",
+          "neutralisation"
+        ],
+        "title": "RecuRetraitMission"
       },
       "ReferenceActualiteAnimationPayload": {
         "properties": {
@@ -66445,6 +69161,34 @@
           }
         ],
         "properties": {
+          "collectibles": {
+            "items": {
+              "$ref": "#/components/schemas/ObjetCollecte"
+            },
+            "type": "array",
+            "title": "Collectibles"
+          },
+          "continuityElements": {
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/DependanceObjetContinuite"
+                },
+                {
+                  "$ref": "#/components/schemas/InformationContinuite"
+                }
+              ],
+              "discriminator": {
+                "propertyName": "type",
+                "mapping": {
+                  "COLLECTIBLE": "#/components/schemas/DependanceObjetContinuite",
+                  "INFORMATION": "#/components/schemas/InformationContinuite"
+                }
+              }
+            },
+            "type": "array",
+            "title": "Continuityelements"
+          },
           "expectedVersion": {
             "type": "integer",
             "minimum": 0.0,

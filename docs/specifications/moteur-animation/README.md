@@ -22,7 +22,7 @@ Le thème visuel de l’animation peut être complété par une illustration et 
 
 Le [lot technique du 19 septembre 2026](conception-technique.md) fixe les six sujets : contrats de production, stockage/versions, concurrence/reprise, API/droits/projections, médias/budgets et exploitation/recette. Il s’appuie sur le code existant et définit les lots T1–T6 avec leurs preuves de sortie. Les décisions métier restent dans la spécification ; le [suivi T1–T6](suivi-implementation.md) distingue les mécanismes implémentés, leurs tests et ce qui reste à raccorder.
 
-Le lot T2 est implémenté et vérifié localement : génération manuelle, quota, worker, import des WebP, préparation guidée, console ERP, POI et bibliothèque privée. Le lot T3 complète les accords, contrôles, QR, compilation et publication, vérifiés localement ; voir le [compte rendu](suivi-implementation.md). Le lot T4 raccorde le jeu, les preuves, la reprise et les liens personnels dans Live. L’exploitation et la conservation restent à finaliser en T5/T6.
+Le lot T2 est implémenté et vérifié localement : génération manuelle, quota, worker, import des WebP, préparation guidée, console ERP, POI et bibliothèque privée. Le lot T3 complète les accords, contrôles, QR, compilation et publication, vérifiés localement ; voir le [compte rendu](suivi-implementation.md). Le lot T4 raccorde le jeu, les preuves, la reprise et les liens personnels dans Live. Le lot T5 apporte retrait global, continuité, corrections tracées, population figée et suivi d’exploitation. La conservation et les contrôles d’ouverture restent à finaliser en T6.
 
 ## Exemples et documents d’entrée
 

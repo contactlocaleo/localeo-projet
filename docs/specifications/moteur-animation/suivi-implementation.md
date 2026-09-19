@@ -10,7 +10,7 @@ Branche commune : `feat-moteur-animation`, dans les cinq dépôts indépendants.
 | T2 — Générer et préparer | Livré et vérifié localement | Brouillon et quota atomiques, workflow manuel et worker, import complet/médias, ERP et préparation guidée. |
 | T3 — Confirmer les missions | Livré et vérifié localement | Accords par mission, préparation vérifiée, QR, compilation et publication atomique ; interfaces Animation, Commerçant et ERP. |
 | T4 — Jouer et reprendre | Livré et vérifié localement | Définition publiée, inscription adulte, projections filtrées, commandes/reçus, trois rendus Live, cinq activités et attestations commerçantes. |
-| T5 — Exploiter et clôturer | À réaliser | Neutralisation, correction, qualification, population figée, audit et indicateurs. |
+| T5 — Exploiter et clôturer | Livré et vérifié localement | Retrait avec aperçu, continuité, correction des preuves, qualification effective, gel et indicateurs ; interfaces Animation, Live et ERP. |
 | T6 — Conserver et ouvrir | À réaliser | Purge/conversion, contrôles croisés et préparation de recette. Le pilote humain et le déploiement effectif restent des opérations distinctes. |
 
 ## T1 — Socle et contrats
@@ -168,6 +168,7 @@ Aucun push ni déploiement n’est inclus. Le commit documentaire central de cha
 | T3 | `0655811` | `90ddcb9` | `baffe0e` | `9c3e568` | `docs(animation): documenter la livraison du lot T3` |
 
 | T4 | `acee4dd` | `6792e26` | `d274260` | `16e4653` | `docs(animation): documenter la livraison du lot T4` |
+| T5 | `4e7b1fc` | `81acd10` | `ea710ce` | `f92780c` | `docs(animation): documenter la livraison du lot T5` |
 
 Contrôles documentaires T4 : 76 guides, 740 liens locaux, aucune erreur ni avertissement ; 117 sources exportées vérifiées.
 
@@ -176,3 +177,35 @@ Contrôles documentaires T3 : 79 guides, 751 liens locaux, aucune erreur ni aver
 Contrôles documentaires T2 : 76 guides, 734 liens locaux, aucune erreur ni avertissement ; 117 sources exportées vérifiées.
 
 [Retour au dossier moteur](README.md).
+
+
+## T5 — Exploiter et clôturer
+
+### Réalisé
+
+- Neutralisation globale d'une étape physique, avec aperçu calculé depuis les faits, empreinte, versions, motif et confirmation. Recontrôle sous barrière exclusive ; décision, révision, audit, notifications génériques Live et reçu atomiques. La dernière étape requise reste protégée.
+- Dépendances de continuité préparées et compilées : objets et informations liés aux UUID stables des positions, consommateurs ultérieurs, contrôle des références. L'éditeur réutilise les seuls médias contrôlés. L'exécution fournit les éléments acquis/dispensés avec provenance sans divulguer le futur ; Live affiche le parcours adapté.
+- Correction des preuves sous permission explicite, aperçu et verrou de participation. Annulation avant gel avec narration/objets conservés ; nouvelle attestation reliée à la preuve annulée. Après gel, anomalie séparée sans modification de la preuve, de la population ni du gain.
+- Acceptation d'un retrait commerçant publiée dans la même transaction que la neutralisation. Aperçu lié à la demande, permissions cumulatives, reçu consultable. Le refus possède également un reçu consultable sans nouveau POST.
+- Clôture commune versionnée, y compris l'ancien endpoint. Recalcul depuis définition publiée, résolution, preuves et dispenses ; matérialisation des parcours réellement changés ; population de tirage existante figée avec provenance et FK de protection. Exclusion des participants anonymisés conforme aux invariants existants.
+- Liste organisateur recalculée avant filtre/pagination, sans écriture lors d'un GET ; après gel, lecture de la provenance figée. Faits groupés par animation, sans réponses privées. Métriques calculées depuis les traces structurées, y compris après purge future des essais détaillés.
+- Interfaces Animation pour exploitation, correction, retrait et continuité ; console ERP `/internal/erp/animations/exploitation`. Actions conditionnées aux droits serveur, aucune extension des droits de clôture ERP. Réconciliation 200/202/404, renvoi explicite identique et nouvel aperçu après conflit.
+- Migration additive `v242`, sans modification des historiques SQL. **82 fichiers de contrats** générés et identiques dans les trois consommateurs ; OpenAPI backend **597 chemins**, projection documentaire Live **45 chemins**.
+
+### Vérifications
+
+- Exploitation/continuité : **30 tests réussis** dans la suite finale (domaine/DTO, PostgreSQL et port), plus le scénario PostgreSQL d'édition de préparation. Qualification anonyme, filtres avant pagination, provenance du gel et rollback vérifiés. Les faits de **101 participants** sont chargés en trois requêtes sans lire les tentatives privées.
+- Correction/retrait : **30 tests distincts réussis**, dont courses, replay, rollback, droits, empreintes, FK de régularisation, refus réconcilié et conservation du gel. Le correctif de l'aperçu anonymisé est couvert par la dernière exécution ciblée.
+- HTTP et console ERP : **20 tests distincts réussis**, session/CSRF, commune, contrats fermés, confirmation booléenne exacte, corps borné, réconciliation et clôture historique raccordée.
+- Contrats, réponses OpenAPI et architecture : **432 tests réussis**. Les diagnostics Windows WMI `0x8007000e` observés pendant certains imports n'ont pas empêché les suites correspondantes d'atteindre un résultat pytest vert, code 0.
+- Console ERP : **6 scénarios Chromium** à 390/1280 px, avec API simulée, aperçu, permissions, correction après gel, réponse perdue, 404 puis renvoi identique et conflit d'aperçu. Captures mobile et ordinateur inspectées, aucun débordement horizontal.
+- Retrait Animation : **8 scénarios Chromium** à 390/1280 px, navigation clavier, perte avant/après commit simulé, aperçu périmé et refus selon permissions ; types, lint et build isolé réussis.
+
+- Animation : **137 tests Node réussis**, TypeScript, ESLint et build isolé réussis. Deux parcours navigateur complets à 390/1280 px couvrent exploitation, droits, correction, gel, trois moteurs et édition de la continuité ; captures inspectées.
+- Marketplace Live : **8 tests Node** (jeu, carnet et contrats) et **9 scénarios Chromium** réussis, incluant les deux nouveaux scénarios de continuité et la régression des cinq activités ; ESLint réussi, captures inspectées. Les serveurs de recette ont été arrêtés après les contrôles.
+- Commerçant : **44 tests de contrats réussis**. Une ancienne fixture d'attestation a été complétée avec les versions déjà transmises par les deux écrans réels ; aucune assertion n'a été supprimée.
+- Documentation : **76 guides, 747 liens locaux, aucune erreur ni avertissement ; 117 sources exportées vérifiées**.
+
+### Limites et suite
+
+Les tests de navigateur emploient une API simulée, complétée par les tests HTTP et PostgreSQL réels isolés. La charge vérifiée localement ne vaut pas mesure de production. Les corrections ne constituent jamais une dispense individuelle ; les résultats du tirage et les gains ne sont pas recalculés après gel. Le lot T6 reste consacré à la conservation, à la conversion et aux contrôles d'ouverture ; aucun environnement réel n'a été déployé ni purgé.
