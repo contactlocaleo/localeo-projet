@@ -42282,7 +42282,7 @@
         },
         "security": [
           {
-            "AdminSessionCookie": []
+            "XApiKey": []
           }
         ]
       }
@@ -50348,7 +50348,7 @@
         },
         "security": [
           {
-            "AdminSessionCookie": []
+            "XApiKey": []
           }
         ]
       }

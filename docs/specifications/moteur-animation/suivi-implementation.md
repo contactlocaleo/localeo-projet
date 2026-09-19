@@ -289,3 +289,14 @@ Contrôles documentaires T3 : 79 guides, 751 liens locaux, aucune erreur ni aver
 Contrôles documentaires T2 : 76 guides, 734 liens locaux, aucune erreur ni avertissement ; 117 sources exportées vérifiées.
 
 [Retour au dossier moteur](README.md).
+
+
+## Correctif après T6 — Préparation du prompt bloquée dans l’ERP (19 septembre 2026)
+
+- **Cause vérifiée :** demande de test en `PREPARATION_PROMPT`, aucun prompt et aucun claim ; ordonnanceur actif avec cron chaque minute, mais aucune exécution `animations.generer`. La pile HTTP réelle reproduit un `401 Admin session required` même avec une clé batch valide : le middleware de session interceptait les batchs moteur avant leur authentification par clé.
+- **Correction T6-QA07, backend `3b893d4` :** exception limitée aux deux couples POST/chemin des batchs génération et conservation, avec contrôle existant de clé active `internal:batch`. Aucune extension des droits ERP. OpenAPI et ses quatre exports sont synchronisés ; pas de changement de DTO ou de migration. L’ERP explique l’attente technique et l’actualisation ; les actions restent fournies par le backend.
+- **Preuves :** nouveau test HTTP passant par l’application complète, contrôle réel des clés sur SQLite isolée et doubles des traitements : 10 échecs reproduits avant correction, puis 17 cas réussis. Ensemble ciblé authentification/CSRF/session : **73 réussis**. Recette Chromium 390/1280 px : attente sans export/dépôt, actualisation vers les deux exports et le dépôt, relecture, reçu après réponse perdue et purge réussis. Contrôles architecture : **414 réussis, 2 échecs de recensement préexistants**, mêmes huit classes et trois use cases que le bilan précédent ; aucun affaiblissement.
+- **Intervention test :** reprise ponctuelle du seul prompt en attente via `BatchRunner` et `WorkerGenerationAnimation` (`limit=1`), sans appel IA, dépôt, invitation ni publication. Le moteur a détecté un brouillon passé de version 1 à 2 après la demande et l’a placée en `OBSOLETE` (« Contexte à actualiser »), sans enregistrer de prompt. La demande reste à réviser dans l’ERP avec le brief relu ; cette intervention ne constitue pas une génération réussie.
+- **Mise en service :** correctif local à pousser et déployer sur le backend. Après déploiement, créer la révision dans le détail de la demande puis actualiser après le passage du batch. Aucun déploiement réalisé et aucun résultat IA déposé pendant l’intervention. Les exports Animation/Commerçant reflètent seulement le contrat d’authentification ; leurs interfaces applicatives ne changent pas.
+
+Contrats vérifiés : 97 DTO identiques dans chacun des trois consommateurs ; exports OpenAPI conformes (608 chemins Backend/Animation/Commerçant, 45 Live). Documentation : 76 guides et 755 liens contrôlés sans erreur, 117 sources exportables vérifiées.
