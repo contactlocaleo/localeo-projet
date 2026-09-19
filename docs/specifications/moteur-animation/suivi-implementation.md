@@ -232,6 +232,15 @@ La [conception](conception-technique.md) porte les précisions CV01–CV06 (conv
 
 La [procédure d’exploitation](exploitation-moteur.md) décrit les contrôles à réaliser avant ouverture. Les commits locaux ne constituent ni un push ni un déploiement.
 
+## Correctif après T6 — Navigation ERP (19 septembre 2026)
+
+- **Constat sur `cd4bb07` :** l’entrée des demandes de création n’était exposée que dans SQLAdmin, pas dans le workspace ERP principal. De plus, la route générique `/internal/erp/{page}/{identifiant}` interceptait les quatre consoles du moteur et renvoyait 404. Le nouveau test reproduisait neuf échecs sur dix avant correction.
+- **Correction backend `09d1c11` :** lien **Animation → Demandes de création** dans le menu principal et sur la page Animation ; composition des routes précises des consoles avant les routes génériques du workspace. Décision tracée en **T6-QA04** dans la [conception](conception-technique.md). Les sessions, rôles et périmètres restent inchangés, avec conservation réservée à ADMIN. Aucun contrat métier ni migration supplémentaire.
+- **Vérifications :** 35 tests HTTP ciblés réussis, dont les dix nouveaux cas de navigation, priorité des quatre consoles et refus d’accès. Recette Chromium `tests/browser/generation-erp.cjs` réussie à 390 et 1280 px depuis le menu principal, avec assets réels et API simulée ; lien de la page Animation, relecture, réponse perdue et réconciliation également vérifiés. Captures inspectées, aucun débordement horizontal.
+- **Architecture :** 414 réussites et les deux échecs de recensement préexistants, concernant les mêmes huit anciennes classes et trois anciens use cases. Aucune assertion affaiblie ni exclusion ajoutée.
+- **Contrats :** comparaison hors bootstrap des 97 fichiers embarqués dans chacun des trois consommateurs et des projections OpenAPI (608/608/608/45 chemins) ; contrats inchangés, hors métadonnée de version contenant le SHA du build.
+- **Livraison :** commit local sur `feat-moteur-animation`, à pousser et déployer sur le backend. Cette correction ne réalise aucun déploiement ni opération sur une base. L’accès ADMIN historique `/admin/animations-generations` reste disponible dans le code antérieur.
+
 ## Décisions d’implémentation
 
 Les précisions T1-D01 à T1-D04 sont inscrites dans la [conception technique, section 9.3](conception-technique.md#93-précisions-dimplémentation-t1--19-septembre-2026) : clés JSON, composition explicite des transactions, commits par dépôt concerné et noms du DSL. Les précisions T2-D01 à T2-D14 sont inscrites en section 9.4 de la conception : routes/reçus, interface, stockage privé/provenance, faits de lieux, import fidèle, images, templates, conservation, catalogue, ordonnanceur, identités et dépendances. Les précisions T3-D01 à T3-D10 sont inscrites en section 9.5 : engagements, compilation, dossier/QR, contrôles, publication et limites ERP. Les précisions T4-D01 à T4-D10 sont inscrites en section 9.6 : projections, traces, présentation, reçus, consentement et frontières de données. Aucun arbitrage fonctionnel n’est remplacé par ce compte rendu.
