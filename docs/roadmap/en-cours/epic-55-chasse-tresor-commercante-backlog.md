@@ -3,7 +3,7 @@
 ## Suivi
 
 - Criticite : `Moyenne`.
-- Statut : `En cours - socle T1 implémenté et vérifié localement, lots T2–T6 et recette à mener`.
+- Statut : `En cours - lots T1–T2 implémentés et vérifiés localement, lots T3–T6 et recette à mener`.
 - Catalogue V1 : `PASSEPORT_COMMERCANT`, `TOMBOLA_LOCALE`, `CHASSE_TRESOR_COMMERCANTE`.
 - Dependances : Epics 41, 42, 46, 47 et 49.
 

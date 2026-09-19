@@ -22,6 +22,8 @@ Le thème visuel de l’animation peut être complété par une illustration et 
 
 Le [lot technique du 19 septembre 2026](conception-technique.md) fixe les six sujets : contrats de production, stockage/versions, concurrence/reprise, API/droits/projections, médias/budgets et exploitation/recette. Il s’appuie sur le code existant et définit les lots T1–T6 avec leurs preuves de sortie. Les décisions métier restent dans la spécification ; le [suivi T1–T6](suivi-implementation.md) distingue les mécanismes implémentés, leurs tests et ce qui reste à raccorder.
 
+Le lot T2 est implémenté et vérifié localement : génération manuelle, quota, worker, import des WebP, préparation guidée, console ERP, POI et bibliothèque privée. La publication Chasse reste contrôlée par les travaux T3 ; voir le [compte rendu](suivi-implementation.md#t2--générer-et-préparer).
+
 ## Exemples et documents d’entrée
 
 - [Dossier des exemples](exemples/README.md) : prompt, réponse générée et requête exportée pour Latresne.
