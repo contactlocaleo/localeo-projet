@@ -1,0 +1,872 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Proposition préparatoire de chasse avec missions et illustrations WebP embarquées",
+  "type": "object",
+  "properties": {
+    "titre": {
+      "type": "string",
+      "minLength": 1
+    },
+    "synopsis": {
+      "type": "string",
+      "minLength": 1
+    },
+    "dureeEstimeeMinutes": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "difficulte": {
+      "type": "string",
+      "minLength": 1
+    },
+    "introduction": {
+      "type": "string",
+      "minLength": 1
+    },
+    "etapes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "oneOf": [
+          {
+            "$ref": "#/$defs/etapeCommercante"
+          },
+          {
+            "$ref": "#/$defs/etapeNonCommercante"
+          }
+        ]
+      },
+      "description": "Parcours proposé dans son ordre de jeu : une position par lieu. Une étape commerçante contient des missions alternatives non encore acceptées. Assemblage jouable après décision des commerçants et relecture finale ; pas de statut ni de sélection dans la sortie IA."
+    },
+    "conclusion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "themeVisuel": {
+      "$ref": "#/$defs/themeVisuel"
+    },
+    "medias": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/mediaEmbarque"
+      },
+      "description": "Images réelles de la même opération de génération, dédupliquées par id. [] si aucune illustration. Tout id référencé par couverture, position ou mission candidate doit correspondre exactement à un média ; références, unicité et budget UTF-8 contrôlés par le domaine."
+    }
+  },
+  "required": [
+    "titre",
+    "synopsis",
+    "dureeEstimeeMinutes",
+    "difficulte",
+    "introduction",
+    "etapes",
+    "conclusion",
+    "medias"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "qcm": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "SINGLE_CHOICE"
+        },
+        "question": {
+          "type": "string",
+          "minLength": 1
+        },
+        "choix": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 6,
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "texte": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "id",
+              "texte"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "bonneReponseId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "indice": {
+          "type": "string",
+          "minLength": 1
+        },
+        "aideResolution": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "type",
+        "question",
+        "choix",
+        "bonneReponseId",
+        "indice",
+        "aideResolution"
+      ],
+      "additionalProperties": false
+    },
+    "information": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "INFORMATION"
+        },
+        "texte": {
+          "type": "string",
+          "minLength": 1
+        },
+        "bouton": {
+          "const": "Continuer"
+        }
+      },
+      "required": [
+        "type",
+        "texte",
+        "bouton"
+      ],
+      "additionalProperties": false
+    },
+    "element": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "\\S"
+        },
+        "texte": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        }
+      },
+      "required": [
+        "id",
+        "texte"
+      ],
+      "additionalProperties": false
+    },
+    "paire": {
+      "type": "object",
+      "properties": {
+        "gaucheId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "\\S"
+        },
+        "droiteId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "\\S"
+        }
+      },
+      "required": [
+        "gaucheId",
+        "droiteId"
+      ],
+      "additionalProperties": false
+    },
+    "association": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "ASSOCIATION"
+        },
+        "question": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "elementsGauche": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 6,
+          "items": {
+            "$ref": "#/$defs/element"
+          },
+          "uniqueItems": true
+        },
+        "elementsDroite": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 6,
+          "items": {
+            "$ref": "#/$defs/element"
+          },
+          "uniqueItems": true
+        },
+        "pairesAttendues": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 6,
+          "items": {
+            "$ref": "#/$defs/paire"
+          },
+          "uniqueItems": true
+        },
+        "indice": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "aideResolution": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        }
+      },
+      "required": [
+        "type",
+        "question",
+        "elementsGauche",
+        "elementsDroite",
+        "pairesAttendues",
+        "indice",
+        "aideResolution"
+      ],
+      "additionalProperties": false,
+      "description": "Association un-à-un. Le domaine contrôle tailles égales, identifiants uniques par liste et bijection complète. pairesAttendues est privé."
+    },
+    "ordering": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "ORDERING"
+        },
+        "question": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "elements": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 6,
+          "items": {
+            "$ref": "#/$defs/element"
+          },
+          "uniqueItems": true
+        },
+        "ordreAttendu": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 6,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "\\S"
+          },
+          "uniqueItems": true
+        },
+        "indice": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "aideResolution": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        }
+      },
+      "required": [
+        "type",
+        "question",
+        "elements",
+        "ordreAttendu",
+        "indice",
+        "aideResolution"
+      ],
+      "additionalProperties": false,
+      "description": "Remise en ordre à solution unique. Le domaine vérifie que ordreAttendu est une permutation complète des identifiants. La solution reste privée ; la présentation joueur est mélangée."
+    },
+    "textInput": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "TEXT_INPUT"
+        },
+        "question": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "normalisation": {
+          "enum": [
+            "TEXTE",
+            "CODE"
+          ]
+        },
+        "reponsesAcceptees": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 10,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80,
+            "pattern": "\\S"
+          },
+          "uniqueItems": true
+        },
+        "indice": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "aideResolution": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        }
+      },
+      "required": [
+        "type",
+        "question",
+        "normalisation",
+        "reponsesAcceptees",
+        "indice",
+        "aideResolution"
+      ],
+      "additionalProperties": false,
+      "description": "Mot, courte expression ou code ; correction déterministe serveur selon §4.6.3.1. Aucune évaluation libre par IA. Les variantes acceptées restent privées.",
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "normalisation": {
+                "const": "CODE"
+              }
+            },
+            "required": [
+              "normalisation"
+            ]
+          },
+          "then": {
+            "properties": {
+              "reponsesAcceptees": {
+                "items": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9-]{1,32}(?![\\s\\S])"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "missionProposee": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "titre": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "preparationCommercant": {
+          "type": "object",
+          "properties": {
+            "demande": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "elementsAConfirmer": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "uniqueItems": true
+            },
+            "supportAFournir": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "minLength": 1,
+              "pattern": "\\S"
+            }
+          },
+          "required": [
+            "demande",
+            "elementsAConfirmer",
+            "supportAFournir"
+          ],
+          "additionalProperties": false
+        },
+        "texteJoueur": {
+          "type": "string",
+          "minLength": 1
+        },
+        "consigne": {
+          "type": "string",
+          "minLength": 1
+        },
+        "interactionCommercant": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Suggestion facultative de dialogue joueur-commerçant liée à son métier ; null sans échange. Ce texte ne configure ni preuve, ni attestation, ni condition de validation."
+        },
+        "consigneCommercant": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S",
+          "description": "Consigne privée de la mission candidate, avec préparation et rôle du commerçant. Peut inclure le message exact à installer. Aucun accord effectif ne peut être généré."
+        },
+        "defi": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/qcm"
+            },
+            {
+              "$ref": "#/$defs/information"
+            },
+            {
+              "$ref": "#/$defs/association"
+            },
+            {
+              "$ref": "#/$defs/ordering"
+            },
+            {
+              "$ref": "#/$defs/textInput"
+            }
+          ]
+        },
+        "presentation": {
+          "$ref": "#/$defs/presentationEtape"
+        }
+      },
+      "required": [
+        "id",
+        "titre",
+        "preparationCommercant",
+        "texteJoueur",
+        "consigne",
+        "interactionCommercant",
+        "consigneCommercant",
+        "defi"
+      ],
+      "additionalProperties": false
+    },
+    "etapeCommercante": {
+      "type": "object",
+      "properties": {
+        "lieu": {
+          "enum": [
+            "Lisons sous la pluie",
+            "Mirga",
+            "Mode de Biche"
+          ]
+        },
+        "titre": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "missionsProposees": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 2,
+          "items": {
+            "$ref": "#/$defs/missionProposee"
+          },
+          "description": "Deux alternatives souhaitées ; une seule proposition reste possible après relecture. Le commerçant choisit exactement une mission. Ces alternatives comptent comme une seule étape."
+        },
+        "presentation": {
+          "$ref": "#/$defs/presentationEtape"
+        }
+      },
+      "required": [
+        "lieu",
+        "titre",
+        "missionsProposees"
+      ],
+      "additionalProperties": false
+    },
+    "etapeNonCommercante": {
+      "type": "object",
+      "properties": {
+        "lieu": {
+          "enum": [
+            "Ancienne gare de Latresne",
+            "Château de la Salargue",
+            null
+          ]
+        },
+        "titre": {
+          "type": "string",
+          "minLength": 1
+        },
+        "texteJoueur": {
+          "type": "string",
+          "minLength": 1
+        },
+        "consigne": {
+          "type": "string",
+          "minLength": 1
+        },
+        "interactionCommercant": {
+          "type": "null"
+        },
+        "defi": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/qcm"
+            },
+            {
+              "$ref": "#/$defs/information"
+            },
+            {
+              "$ref": "#/$defs/association"
+            },
+            {
+              "$ref": "#/$defs/ordering"
+            },
+            {
+              "$ref": "#/$defs/textInput"
+            }
+          ]
+        },
+        "consigneCommercant": {
+          "type": "null"
+        },
+        "presentation": {
+          "$ref": "#/$defs/presentationEtape"
+        }
+      },
+      "required": [
+        "lieu",
+        "titre",
+        "texteJoueur",
+        "consigne",
+        "interactionCommercant",
+        "defi",
+        "consigneCommercant"
+      ],
+      "additionalProperties": false
+    },
+    "policesVisuelles": {
+      "type": "object",
+      "properties": {
+        "titres": {
+          "enum": [
+            "OSWALD",
+            "DM_SANS"
+          ]
+        },
+        "texte": {
+          "enum": [
+            "OSWALD",
+            "DM_SANS"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "description": "Polices embarquées par Localeo Live ; propriété absente = héritage. Aucune URL de police ni police libre."
+    },
+    "couleursVisuelles": {
+      "type": "object",
+      "properties": {
+        "fond": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}(?![\\s\\S])"
+        },
+        "surface": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}(?![\\s\\S])"
+        },
+        "texte": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}(?![\\s\\S])"
+        },
+        "primaire": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}(?![\\s\\S])"
+        },
+        "surPrimaire": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}(?![\\s\\S])"
+        },
+        "accent": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}(?![\\s\\S])"
+        },
+        "surAccent": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}(?![\\s\\S])"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Couleurs opaques HEX à six chiffres. Héritage par propriété ; contraste des combinaisons effectives vérifié avant publication."
+    },
+    "illustration": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9_-]+(?![\\s\\S])",
+          "description": "Référence logique opaque dans cette animation, sans solution encodée. Ce n’est ni une URL ni la preuve qu’un fichier existe."
+        },
+        "promptGeneration": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S",
+          "description": "Intention privée destinée au fournisseur d’images et à la relecture ; pas de solution, code, QR ni lieu futur."
+        },
+        "texteAlternatif": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S",
+          "description": "Description accessible du visuel, sans solution ni lieu futur. L’illustration reste facultative pour résoudre le défi."
+        },
+        "style": {
+          "enum": [
+            "ILLUSTRATION",
+            "PHOTO"
+          ],
+          "description": "PHOTO désigne un rendu photographique de fiction ; ne certifie jamais le lieu, son stock ou sa participation."
+        },
+        "ratio": {
+          "const": "16:9"
+        },
+        "format": {
+          "const": "image/webp"
+        }
+      },
+      "required": [
+        "id",
+        "promptGeneration",
+        "texteAlternatif",
+        "style",
+        "ratio",
+        "format"
+      ],
+      "additionalProperties": false,
+      "description": "Description et référence d’une illustration produite dans la même demande de génération. Son image WebP est stockée une seule fois dans medias[]. Les prompts restent privés ; aucune URL ni base64 factice."
+    },
+    "surchargeThemeVisuel": {
+      "type": "object",
+      "properties": {
+        "polices": {
+          "$ref": "#/$defs/policesVisuelles"
+        },
+        "couleurs": {
+          "$ref": "#/$defs/couleursVisuelles"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Surcharge partielle du thème, par propriété ; ne modifie ni navigation, ni disposition, ni règles de jeu."
+    },
+    "themeVisuel": {
+      "type": "object",
+      "properties": {
+        "nom": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "ambiance": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "polices": {
+          "$ref": "#/$defs/policesVisuelles"
+        },
+        "couleurs": {
+          "$ref": "#/$defs/couleursVisuelles"
+        },
+        "illustrationCouverture": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/illustration"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "description": "Thème facultatif de l’animation ; propriétés absentes héritées de Localeo Live. La couverture concerne la fiche et le carnet, pas un repli automatique pour toutes les étapes. nom et ambiance ne sont jamais interprétés comme du CSS."
+    },
+    "presentationEtape": {
+      "type": "object",
+      "properties": {
+        "illustration": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/illustration"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Absente dans une mission : hérite de la position. null : supprime le visuel de la position. Objet : remplace entièrement le visuel ; aucun mélange de prompts."
+        },
+        "themeVisuel": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/surchargeThemeVisuel"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Surcharge par propriété : mission puis position puis animation puis Live. Absence ou null conserve le thème hérité."
+        }
+      },
+      "additionalProperties": false,
+      "description": "Présentation optionnelle de la position ou de sa mission. Aucun script, HTML, CSS, URL ni composant libre."
+    },
+    "mediaEmbarque": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9_-]+(?![\\s\\S])"
+        },
+        "format": {
+          "const": "image/webp"
+        },
+        "largeur": {
+          "enum": [
+            960,
+            768,
+            640
+          ]
+        },
+        "hauteur": {
+          "enum": [
+            540,
+            432,
+            360
+          ]
+        },
+        "octets": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 44000,
+          "description": "Poids binaire décodé, avant base64."
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}(?![\\s\\S])"
+        },
+        "base64": {
+          "type": "string",
+          "minLength": 4,
+          "maxLength": 58668,
+          "contentEncoding": "base64",
+          "contentMediaType": "image/webp",
+          "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?(?![\\s\\S])",
+          "description": "Base64 canonique du vrai WebP, sans préfixe data:, sans espace ni retour ligne. Métadonnées et base64 réunis : objet JSON compact UTF-8 ≤ 60 000 octets, cible 50 000."
+        }
+      },
+      "required": [
+        "id",
+        "format",
+        "largeur",
+        "hauteur",
+        "octets",
+        "sha256",
+        "base64"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "largeur": {
+                "const": 960
+              }
+            },
+            "required": [
+              "largeur"
+            ]
+          },
+          "then": {
+            "properties": {
+              "hauteur": {
+                "const": 540
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "largeur": {
+                "const": 768
+              }
+            },
+            "required": [
+              "largeur"
+            ]
+          },
+          "then": {
+            "properties": {
+              "hauteur": {
+                "const": 432
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "largeur": {
+                "const": 640
+              }
+            },
+            "required": [
+              "largeur"
+            ]
+          },
+          "then": {
+            "properties": {
+              "hauteur": {
+                "const": 360
+              }
+            }
+          }
+        }
+      ],
+      "description": "Une seule image 16:9 pour PC et mobile. La validation applicative décode le WebP, vérifie dimensions réelles, ratio, nombre d’octets, SHA-256, base64 canonique et taille compacte totale ≤ 60 000 octets. Le LLM textuel seul ne peut pas produire ce média."
+    }
+  }
+}

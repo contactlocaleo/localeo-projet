@@ -1,0 +1,452 @@
+# Moteur d’animation — lot de conception technique V1
+
+Date : 19 septembre 2026. Statut : **conception de référence pour l’implémentation**, sans code métier, migration exécutée ni recette fonctionnelle livrés par ce document.
+
+Ce lot concrétise les six sujets techniques identifiés après la [spécification fonctionnelle](localeo_animation_engine_spec.md). Il ne rouvre pas les arbitrages TRE-ARB-60 à TRE-ARB-91. Le [backlog EPIC 55](../../roadmap/en-cours/epic-55-chasse-tresor-commercante-backlog.md) conserve l’état produit **En cours**. Les noms et protocoles ci-dessous fixent la cible d’implémentation ; les exemples antérieurs restent des supports de conception et ne prouvent pas la présence de ces API.
+
+## 1. Décisions et périmètre
+
+| Sujet | Décision technique | Sections |
+| --- | --- | --- |
+| Contrats de production | Modèles backend fermés, exports automatiques, séparation génération/préparation/définition/projections ; registre par type/version. | 3 |
+| Stockage et versions | Réutiliser Animation, configurations, participants, validations, demandes EPIC 56 et opérations ; ajouter les données d’exécution et de génération manquantes. | 4 |
+| Concurrence et reprise | PostgreSQL : barrière commune par animation, verrou exclusif par participation, reçu idempotent dans la transaction métier et clôture exclusive. | 5 |
+| API, droits et confidentialité | Étendre les routes existantes, permissions par action et périmètre, projections construites par liste de champs autorisés. | 6 |
+| Médias et limites | Import autonome WebP/base64 contrôlé, limites distinctes média/document/commande ; aucune image future dans Live. | 7 |
+| Exploitation et recette | Traitements PostgreSQL reprenables, purge quotidienne contrôlée, audit existant, bascule directe et livraison par parcours complets. | 8–9 |
+
+Les trois moteurs V1 sont `PASSEPORT_COMMERCANT`, `TOMBOLA_LOCALE` et `CHASSE_TRESOR_COMMERCANTE`. Le dernier code est fixé pour l’implémentation. La génération automatique intégrée reste après le pilote : en V1, on produit le prompt, attend une exécution manuelle outillée puis importe le JSON complet. Aucun nouveau broker, moteur de workflow ou service IA pendant le jeu.
+
+## 2. Ancrage dans le code existant
+
+Inspection statique du workspace au 19 septembre 2026, sans import de `app.main`, chargement de secrets, accès à une base ni appel externe. Les chemins ci-dessous sont relatifs à la racine du dépôt nommé ; les nouveaux chemins de la section 3 sont explicitement des cibles.
+
+| Dépôt / point d’entrée existant | Réemploi et adaptation nécessaires |
+| --- | --- |
+| Backend — `app/domaine/animation_locale/services/registre_strategies_modeles_animation.py` | `RegistreStrategiesModelesAnimation` connaît Passeport/Tombola. L’étendre en registre type/version ; ne pas ajouter de dispatch de chasse dans chaque route. |
+| Backend — `app/domaine/animation_locale/entities/operation_animation.py` | Réutiliser `OperationAnimation` ; ses six états actuels ne décrivent pas l’attente humaine. Ajouter les phases de génération et les leases définis ci-dessous. |
+| Backend — `AnimationOrm`, `ConfigurationAnimationOrm`, `ParticipantAnimationOrm`, `ValidationAnimationOrm` | Conserver identités, liens commerciaux et preuves ; la configuration est déjà JSONB. Les versions de progression et la coordination par participation sont à ajouter. |
+| Backend — `ServiceDemandesParticipationCommercants` | Réutiliser les invitations EPIC 56, leurs notifications et décisions. Étendre le snapshot par commerçant avec alternatives, choix unique et confirmations versionnées. |
+| Backend — `ServiceValidationsAnimation`, `ServiceTiragesAnimation` | Le verrou animation actuel sérialise les validations. Toutes les entrées rejoignent la barrière de la section 5 ; la clôture requalifie avant de figer. |
+| Backend — `ServiceConservationAnimation` | Conserver les règles existantes participants/tokens ; ajouter les catégories de jeu et génération, leurs références utiles et gels. |
+| Marketplace — `src/live/LiveApp.jsx`, `src/services/api.js`, `src/live/liveLibrary.js`, `public/live/sw.js` | Réutiliser accès personnels, carnet et shell ; remplacer la projection complète des commerces pour la chasse, isoler les saisies temporaires et exclure API/médias privés du cache PWA. |
+
+Une table ou un helper portant un nom d’idempotence n’est pas une preuve d’atomicité : le contrôle de clé, la mutation, le reçu et l’outbox doivent partager la même UoW. Une liste d’opérations exécutables n’est pas un worker avec claim/reprise ; ce worker reste à réaliser.
+
+## 3. Contrats de production et frontières
+
+### 3.1 Source et exports
+
+Le domaine `animation_locale` possède les règles et objets-valeur sans Pydantic, ORM, HTTP ni fournisseur. Les DTO Pydantic fermés appartiennent à une cible `app/application/animation_locale/contrats_moteur/`, réutilisée par API, ERP, import et export, distincte du fichier `contracts.py` existant. Les adaptateurs traduisent ces DTO en objets du domaine ; aucun endpoint ne devient le seul gardien d’un invariant.
+
+Un générateur à créer dans `localeo-backend/scripts/documentation/` exporte les JSON Schema depuis ces modèles, sans bootstrap applicatif ni base. Il produit un manifeste `{type, contractVersion, schemaName, sha256}` et les schémas de génération, définition, commandes et projections. Les contrats OpenAPI documentaires restent dans le projet central ; les contrats embarqués restent auprès de leurs consommateurs. La CI compare les exports régénérés et les empreintes consommées. Aucun second schéma de production écrit à la main.
+
+Le [schéma Latresne révision 8](contrats/reponse-generation-chasse.schema.json) reste un **document d’entrée** et une fixture à porter lors du premier lot. Son numéro de révision n’est pas `engineConfigVersion`. La maquette est un support UX, jamais la source du protocole backend.
+
+### 3.2 Documents distincts
+
+| Contrat cible | Contenu et propriétaire |
+| --- | --- |
+| `DemandeGenerationInput` | `animation_id` facultatif, `type`, `engine_contract_version`, paramètres d’initialisation autorisés et `brief`. Sans animation existante, création atomique d’un brouillon unique. Avec un brouillon, rattachement après contrôle de périmètre/version. |
+| `BriefGenerationChasse` | `commercants[]`, `poi[]`, `nombreEtapes:{min,max}`, `dureeCibleMinutes`, `publicVise`, `difficulte`, `theme`. Le serveur photographie les lieux autorisés et faits utiles. Dates, minimum de commerçants, accords et checklist appartiennent à la préparation et ne deviennent pas des instructions créatives obligatoires. |
+| `ResultatGenerationChasse` | Structure éditoriale issue de la révision 8 : titre, synopsis, durée estimée, difficulté, introduction, étapes ordonnées, conclusion, thème facultatif, `medias` obligatoire. Une position commerçante contient les missions candidates, sans mission choisie ni accord. |
+| `PreparationChasse` | Révision de préparation, résultat source, ordre et identifiants stables des positions/missions/conditions, minimum de commerçants, références des décisions EPIC 56 et vérifications de préparation/POI. Les statuts de consentement sont lus depuis EPIC 56, jamais modifiables via ce JSON. |
+| `DefinitionAnimationV1` | Enveloppe `schemaVersion`, `definitionVersion`, `type`, `engineConfigVersion`, `common`, `engineConfig`. Construction serveur ; uniquement les missions retenues. Elle ne contient pas les états de participants. |
+| Projections | Quatre modèles distincts : public, participant, commerçant, organisateur. Une projection n’est ni le document éditorial ni une définition privée expurgée après sérialisation. |
+
+Identifiants persistants en UUID ; identifiants locaux de défi opaques, chaînes de 1 à 64 caractères. Dates d’API ISO 8601 avec fuseau, normalisées en UTC ; durées en minutes entières positives. Pour le brief, `difficulte` reste une indication éditoriale courte (1–80 caractères) et `publicVise` un texte (1–500) : aucune nouvelle échelle métier obligatoire. `min >= 1`, `max >= min` ; un résultat hors fourchette déclenche l’avertissement déjà décidé, pas un échec de schéma ni un ajustement silencieux du brief. Pas de nombre d’étapes fixé par le schéma.
+
+Le contrat générique de production remplace les noms de lieux comme clés par `lieu:{type:COMMERCANT|POI,id:UUID}` ou `null` pour le virtuel. Le schéma instancié pour une demande restreint les couples type/id aux lieux du brief. Les noms/adresses sont des faits fournis dans le prompt puis résolus depuis le snapshot autorisé, jamais des identités à deviner. Le portage de la fixture Latresne résout ses noms explicitement et refuse une correspondance absente/ambiguë ; aucune compatibilité de production historique n’est requise.
+
+Tous les objets sont fermés (`extra=forbid`). En particulier, le résultat fournisseur ne reçoit ni propriétaire, dates opérationnelles, gains, règles de qualification, choix commerçant, permissions ni code exécutable. L’import fournit séparément `prompt_id`, `request_hash` et la réponse. Les contrôles de structure précèdent les contrôles du domaine et la relecture.
+
+### 3.3 Assemblage déterministe
+
+1. Importer une proposition valide en conservant son brut et sa provenance. Attribuer les UUID stables de préparation ; une révision qui conserve une mission conserve son identité, une nouvelle alternative reçoit une nouvelle identité.
+2. Avant invitation, photographier pour chaque commerce la mission proposée et les engagements applicables. La version de confirmation porte sur les conditions stables de cette révision, jamais sur leur index dans un tableau.
+3. Après stabilisation, retenir exactement la mission confirmée de chaque commerce conservé. Refuser les décisions obsolètes, prérequis manquants, invitations encore en attente ou minimum non atteint.
+4. Compiler l’ordre en `startStepId`, une transition `SUCCESS/targetStepId` par étape non terminale et `transitions:[]` à la fin. Une seule position par identité de commerce. Préserver les dépendances explicites et vérifier qu’aucune suite ne dépend du code particulier d’une variante écartée.
+5. Construire `common` depuis les paramètres serveur et les références autorisées ; appliquer la matrice défi/validation, les contrôles de thème/médias et la checklist. Attribuer une nouvelle version de configuration, son empreinte et le contrat moteur.
+6. La commande de publication fige cette version. L’acceptation du résultat IA complète seulement le brouillon ; elle ne publie pas l’événement.
+
+Le début/la finale sont des rôles distincts du lieu : `roles` vaut `[]`, `["START"]`, `["FINAL"]` ou `["START","FINAL"]`. Le compilateur les dérive de la première/dernière position ; une étape unique porte les deux. Il fixe `location` en `MERCHANT`, `POI` ou `VIRTUAL`, avec `refId` requis pour un lieu physique et nul pour le virtuel. Une position portant `FINAL` reçoit `Step.type=FINAL` ; les autres catégories suivent la matrice de la spécification, sans second choix indépendant du rôle. Un départ/finale physique conserve les obligations de son lieu ; un rôle narratif ne les efface pas. Le renderer est choisi par `challenge.type`. Les catégories éditoriales observation/recherche deviennent `SINGLE_CHOICE`, sans nouvelle primitive.
+
+### 3.4 Module et versionnement
+
+Étendre le registre existant avec un descripteur `(type, contractVersion)` et les références internes vers : validateurs de configuration, commandes, état, qualification, projections, capacités, préparation et génération facultative. Séparer le registre de fonctions métier pures et l’assemblage applicatif qui lui associe DTO/adaptateurs ; le domaine n’importe aucun renderer ou schéma Pydantic.
+
+Interface métier cible : `valider_configuration`, `initialiser_etat`, `decider_commande`, `qualifier`, `calculer_impact_retrait`. Les entrées sont des faits immuables chargés par l’application ; la sortie est une décision et des intentions d’effets, jamais un commit, paiement ou envoi direct. Les constructeurs de projection appliquent les règles de visibilité exposées par le moteur et énumèrent leurs champs.
+
+| Version | Usage |
+| --- | --- |
+| `schemaVersion="1.0"` | Contrat de l’enveloppe commune. |
+| `engineConfigVersion="1.0"` | Contrat coordonné configuration/commandes/projections pour le type. Refuser une version absente du registre ; aucun repli sur Chasse. |
+| `definitionVersion` | Version immuable du contenu accepté/publié ; liée à la version de configuration persistée. |
+| `preparation_revision` | Retouches et engagements avant publication ; peut invalider seulement les accords affectés. |
+| `revision_exploitation` | Retrait global, changement autorisé de dates/capacité, clôture ; ne réécrit pas le contenu publié. |
+| `progression_version` | Toute mutation des acquis/essais/aides d’une participation ; utilisée pour les commandes concurrentes. |
+| Prompt/résultat | Révision de prompt et identifiant de tentative distincts ; aucun écrasement d’une version acceptée. |
+
+Les trois interfaces enregistrent leurs renderers avec la même version de contrat. L’ouverture du catalogue est conditionnée au déploiement coordonné des versions supportées ; aucune sélection de composant par nom fourni dans le JSON. Pas de migration d’une partie publiée vers une nouvelle version au milieu du jeu.
+
+## 4. Modèle physique et workflows
+
+### 4.1 Principes de persistance
+
+Les noms SQL ci-dessous fixent les **ajouts cibles**, à introduire par nouvelles migrations, sans réécriture des migrations appliquées. UUID pour les identités, `timestamptz` pour les instants, `bigint` positif pour les révisions, JSONB pour les documents de configuration. Foreign keys explicites et suppressions `RESTRICT` sur provenance, preuves et versions utilisées ; pas de cascade depuis les essais vers participation/tirage.
+
+`Animation` reste l’événement métier. Il n’est créé ni second agrégat commercial `AnimationInstance`, ni nouveau participant pour la chasse. `ConfigurationAnimation` conserve le JSON de préparation et le DSL accepté dans des clés distinctes typées de `parametres`; une version publiée ne s’édite plus. Une configuration peut référencer un template réutilisable ; le template conserve sa provenance et n’emporte jamais accords, tokens ou participations.
+
+| Table cible / adaptation | Données et contraintes principales |
+| --- | --- |
+| `animation_coordinations` (ajout) | PK/FK `animation_id`, `revision_exploitation`, `preparation_revision`. Ligne créée avec toute animation et rétroremplie avant activation ; barrière de verrouillage, sans compteur de participants. |
+| Configurations existantes | Ajouter discriminant moteur/version, empreinte du DSL et référence à la version publiée. Unicité `(animation_id,version)`. Le JSON de préparation et la définition restent privés. |
+| Participants existants | Conserver identité/accès ; déclaration adulte et version de règlement/checklist référencées. Le comptage de capacité porte sur inscriptions uniques, pas les sessions. |
+| `animation_executions` (ajout) | PK `participant_id`, FK animation/configuration jouable, `progression_version`, état spécifique typé, `started_at`, `completed_at`, `revision_exploitation_appliquee`. Une exécution par participation ; le détail Chasse est structuré dans les tables suivantes. |
+| `animation_executions_etapes` (ajout) | UNIQUE `(participant_id,step_id)` ; dates de déblocage/QR/résolution/aide/confirmation, statut narratif, référence de preuve effective, compteur d’essais et ordre de présentation persistant. Les compteurs ne remplacent pas le contrôle de la preuve. |
+| `animation_tentatives_defi` (ajout) | UUID, participant/étape/commande, réponse privée, résultat, date ; UNIQUE `(command_receipt_id)` pour une soumission. Index `(animation_id,created_at,id)` pour purge. |
+| `animation_effets_participation` (ajout) | UNIQUE `(participant_id,definition_version,effect_key)` ; origine étape, type, provenance `REUSSITE` ou `DISPENSE`, date. Même clé pour l’effet acquis normalement ou fourni par dispense. |
+| `animation_neutralisations_etapes` (ajout) | UNIQUE `(animation_id,definition_version,step_id)` ; motif, auteur, révision exploitation, date et dépendances à fournir. Pas de neutralisation individuelle V1. |
+| `animation_qr_lieux` (ajout) | UUID opaque, animation, version publiée, étape, révision de QR, condensat du secret, activation/révocation. FK vers le lieu autorisé et UNIQUE sur la révision ; ne réutilise pas un QR participant. |
+| Bibliothèque POI et éditions (ajouts) | `animation_poi` : partenaire, identité, adresse et faits ; `animation_poi_versions` : snapshot immuable ; `animation_poi_verifications` : animation, version POI, auteur/date, emplacement QR, observations, photo facultative, checklist versionnée. Publication lie la version vérifiée. |
+| Demandes EPIC 56 existantes | Ajouter révision/snapshot de missions du commerce, identifiant de mission choisie, confirmations par ID et empreinte des engagements. Unicité de la demande courante par animation/commerce conservée, sans interdire les cycles historiques ; décisions auditables et historique des révisions. |
+| Population de tirage existante | Compléter le snapshot de clôture par configuration/contrat moteur/révision exploitation et références de preuves nécessaires. L’appartenance figée ne dépend plus du détail des essais. |
+
+Un scan commerçant conserve une `ValidationAnimation` authentifiée, avec statut effectif/annulé et historique. Conserver l’unicité partielle d’une validation `VALIDEE` par participant/étape et l’unicité commerçant/clé existantes ; le domaine impose en plus une seule étape par commerce. Une régularisation crée une nouvelle preuve effective liée à celle annulée, sans effacer l’annulation ni attribuer un second effet.
+
+### 4.2 Génération, prompts, templates et quota
+
+| Table / responsabilité cible | Clés et index |
+| --- | --- |
+| Opérations existantes | Nouveau `type_operation=GENERATION_TEMPLATE`, `resource_type=ANIMATION`, `resource_id` = brouillon dès création. Ajouter `version`, `phase_attempts`, `lease_owner`, `lease_until`, `claim_version`, références prompt/tentative acceptée, opérateur affecté. Le statut de demande est celui de cette opération uniquement. |
+| `animation_generation_prompts` | PK UUID, FK opération, UNIQUE `(operation_id,revision)` ; messages exacts, contexte, schéma, paramètres, versions et empreinte. Index `(operation_id,created_at)` ; brut immutable hors purge autorisée. |
+| `animation_generation_reponses` | PK UUID, FK prompt, numéro de tentative, brut, empreinte, rapport de validation, auteur/date, provenance manuelle ; UNIQUE `(prompt_id,numero)` et `(prompt_id,sha256)` pour dédupliquer un même dépôt. Une correction crée une nouvelle tentative. |
+| `animation_templates` / `animation_template_versions` | Identité de bibliothèque et versions immuables du contenu réutilisable, partenaire/type/contrat, source prompt/réponse ; UNIQUE `(template_id,version)`. Références explicites depuis configurations. Pas de données personnelles de participants. |
+| `animation_quotas_generation` | PK `(partenaire_id,mois_paris)` ; plafond de période et auteur/date de modification. Aucune colonne « solde restant ». Paramètre partenaire pour les prochains mois ; snapshots des mois passés conservés. |
+| `animation_usages_generation` | PK/FK `operation_id`, partenaire/mois d’origine, état `RESERVEE|CONSOMMEE|LIBEREE`, dates ; index `(partenaire_id,mois_paris,etat)`. Une ligne d’état effectif par demande, événements de transition dans l’audit. |
+
+Création : sous verrou partenaire/quota, réserver et créer/rattacher le brouillon + opération + usage dans une seule transaction. Une demande indépendante peut viser le même brouillon ; elle a son quota propre et une version source. Sa finalisation exige que cette version soit encore courante. Il n’y a donc pas d’unicité « une seule demande pour toujours par animation » ; l’unicité garantit un brouillon par demande et un seul résultat appliqué par demande.
+
+Mois calculé en `Europe/Paris` à la réservation, stocké comme premier jour civil du mois ; dates techniques en UTC. `disponible=max(0,plafond-count(CONSOMMEE)-count(RESERVEE))`. Un changement de plafond verrouille le partenaire puis les mois concernés dans l’ordre, modifie le mois courant et la valeur par défaut future, sans réécrire les périodes passées. Une demande acceptée le mois suivant consomme son mois d’origine. Ni attente prolongée, ni échec d’image, ni purge ne libère une réservation.
+
+### 4.3 Machine d’état de génération
+
+Étendre `StatutOperationAnimation` pour `GENERATION_TEMPLATE` avec les phases suivantes ; les anciens types gardent leur cycle actuel. Les serializers, compteurs ERP et prédicats `terminee` dispatchent par famille d’opération ; le dictionnaire de libellés actuel doit être mis à jour dans le même lot.
+
+| Statut cible | Entrée / sortie autorisée |
+| --- | --- |
+| `PREPARATION_PROMPT` | Worker prépare les messages/schéma puis persiste une révision et passe en attente. Erreur technique : reprises bornées §8.1, puis `ECHEC_PREPARATION` si épuisées. |
+| `ATTENTE_TRAITEMENT_MANUEL` | Export autorisé ; aucun worker ni délai d’expiration actif. Dépôt → `RESULTAT_DEPOSE`. |
+| `RESULTAT_DEPOSE` | Worker contrôle la tentative courante → `RESULTAT_INVALIDE` ou `A_VALIDER`. Erreur technique : reprises bornées, puis `ECHEC_CONTROLE`, sans confondre panne et contenu invalide. |
+| `RESULTAT_INVALIDE` | Erreurs localisées ; nouveau dépôt ou nouvelle révision de prompt, même réservation. |
+| `A_VALIDER` | Relecture de la tentative exacte ; acceptation explicite → `RESULTAT_PUBLIE`. |
+| `RESULTAT_PUBLIE` | Transaction d’acceptation : tentative figée + usage `CONSOMMEE` + reprise durable. Worker → `FINALISATION_INSTANCE`. |
+| `FINALISATION_INSTANCE` | Compléter le même brouillon avec la préparation et la provenance → `TERMINEE`; échec → `ECHEC_FINALISATION`. Pas d’assemblage de missions non encore choisies en parcours public. |
+| `ECHEC_FINALISATION` | Reprendre le résultat accepté sans nouvel appel ni décompte. Un conflit de contenu exige une résolution explicite, jamais l’écrasement du brouillon courant. |
+| `ECHEC_PREPARATION` / `ECHEC_CONTROLE` | Non terminaux ; reprise explicite vers la phase correspondante sur la même demande, ou annulation. Aucune libération automatique du quota ni démarrage du délai de purge. |
+| `OBSOLETE` | Aucun résultat applicable ; nouvelle révision de prompt explicite autorisée si non consommée, ou annulation. La réservation reste active tant qu’il n’y a ni acceptation ni annulation. |
+| `ANNULEE` / `TERMINEE` | Terminaux. Annuler libère seulement une réservation non consommée. L’annulation ne supprime pas le brouillon ni le résultat accepté. |
+
+Un nouveau dépôt n’écrase pas une tentative acceptée. L’acceptation compare `operation.version`, le prompt courant, `request_hash`, la tentative relue et la révision source. Une acceptation concurrente avec annulation a exactement un gagnant. Le contrôle hors transaction produit un rapport lié à ses empreintes ; la transaction d’acceptation revérifie qu’aucune dépendance n’a changé.
+
+Empreintes documentaires : SHA-256 du JSON UTF-8 canonisé côté backend (`sort_keys=True`, séparateurs compacts, `ensure_ascii=False`, `allow_nan=False`) après conversion explicite des UUID/dates en chaînes. Conserver les octets exportés ; le navigateur ne reconstruit pas sa propre empreinte à partir d’un JSON reformaté. La réponse brute est conservée séparément du résultat normalisé.
+
+## 5. Protocole transactionnel, idempotence et reprise
+
+### 5.1 Ordre des verrous
+
+Utiliser les transactions SQLAlchemy/PostgreSQL existantes, en isolation `READ COMMITTED` avec verrous explicites. Une transaction métier ne comporte aucun appel réseau, décodage d’image ou envoi de notification. Après acquisition d’un verrou, recharger les faits avec `populate_existing`/requête fraîche : un objet de l’identity map lu avant l’attente ne fait pas autorité.
+
+Ordre total à respecter dans API, ERP, worker et batch :
+
+1. Portée d’idempotence `(acteur stable, opération canonique, ressource, clé)` ; adapter le verrou transactionnel existant et sa contrainte unique. Pour toutes les commandes joueur, famille unique `COMMANDES_PARTICIPATION`, ressource = UUID de participation, action dans l’empreinte seulement : le GET par clé est ainsi non ambigu. Encoder famille/ressource dans la colonne `route` existante, sans la confondre avec l’URL du proxy.
+2. Partenaire puis périodes de quota concernées, triées par `(partenaire_id,mois)` si la commande touche la génération ; utiliser le même ordre pour création de période et changement de plafond.
+3. `animation_coordinations`, UUID triés : **`FOR SHARE` pour les commandes individuelles, `FOR UPDATE` pour les mutations globales**.
+4. Ligne `Animation` si elle doit être modifiée ; aucun incrément de cette ligne à chaque réponse joueur.
+5. Participants puis exécutions concernés, UUID triés, **`FOR UPDATE`** pour les écritures individuelles.
+6. Demandes commerçantes, validations, opérations, artefacts parents : ordre fixe par famille puis UUID. Références de dépendance/gels sous le verrou de leur artefact parent.
+7. Écritures enfants, reçu idempotent, audit et outbox ; un commit unique.
+
+Interdire les upgrades partagé → exclusif et les acquisitions inverses. Déterminer le mode de coordination avant le premier verrou. Les recherches d’identifiants préalables sont possibles sans mutation ; relire les faits ensuite. Le claim d’un worker se termine avant la transaction métier et ne garde pas son verrou d’opération en prenant une coordination.
+
+| Action | Coordination et effet |
+| --- | --- |
+| Réponse, aide, QR de lieu, attestation/régularisation commerçante | Animation partagée + participation exclusive. Deux participations différentes avancent simultanément ; deux appareils d’une même participation se sérialisent. |
+| Inscription / suppression autorisée de participation | Animation exclusive, recomptage de capacité et contrôle de l’inscription existante. Le rejeu/reprise retrouve l’identité existante avant de tester une nouvelle place. |
+| Retouche de préparation, décision EPIC 56, publication, modification d’exploitation, retrait global, annulation | Animation exclusive. Les décisions restent atomiques avec la révision et les dépendances qui justifient l’action. |
+| Clôture / tirage | Animation exclusive ; clôture requalifie et fige, tirage lit uniquement le snapshot figé. |
+| Purge d’un artefact | Verrou de son opération si concernée, puis parent d’artefact ; jamais acquisition ultérieure de la coordination animation. Les commandes créant une dépendance respectent le même ordre et verrouillent ce parent. |
+
+La barrière doit remplacer les prises de verrou incompatibles dans `validations_animation`, `participants_animation`, `tirages_animation`, `gestion_animations`, `publication_animation`, `synchronisation_statuts_animation` et toutes les décisions/retraits EPIC 56. Un ancien chemin ERP ou batch qui écrit sans cette barrière invalide la garantie ; sa migration est un critère de livraison du socle, pas une amélioration ultérieure.
+
+### 5.2 Contrat de commande
+
+`POST /public/localeo-live/participations/{id}/commandes` : Bearer personnel existant, `Idempotency-Key` UUID opaque (validation commune 8–128 caractères). Corps fermé :
+
+```json
+{
+  "engineContractVersion": "1.0",
+  "definitionVersion": 3,
+  "expectedProgressionVersion": 7,
+  "expectedExploitationRevision": 2,
+  "action": "SUBMIT_ANSWER",
+  "payload": {"stepId": "22222222-2222-4222-8222-222222222222", "answer": {"type": "SINGLE_CHOICE", "choiceId": "choix-opaque"}}
+}
+```
+
+L’identifiant d’acteur vient de l’accès authentifié, jamais du corps. Pour le joueur, acteur stable = participation, indépendant de la rotation du token ; pour le commerçant/ERP, identité authentifiée. L’empreinte inclut ressource, action, versions et payload normalisé, mais aucun header d’accès. Réordonner les paires d’association pour l’empreinte ; conserver l’ordre pour `ORDERING`. Pour une saisie, appliquer le profil `TEXTE`/`CODE` de la définition immuable visée, sans contrôle d’état courant avant recherche du reçu. Pour le QR, hacher le token exact dans la préimage éphémère, sans conserver ni journaliser ce token ; résoudre/contrôler activation et révocation seulement pour une commande nouvelle. Un rejeu exact reste donc possible après rotation/révocation du QR initial, sous réserve de l’accès personnel courant.
+
+| Action | Payload fermé et effet |
+| --- | --- |
+| `START_GAME` | `{}` ; initialise le début de jeu, uniquement dans la période et pour l’inscrit. GET reste une lecture. |
+| `SCAN_QR` | `{stepId,qrToken}` ; preuve d’accès au lieu de l’étape atteignable, jamais attestation commerçante. |
+| `SUBMIT_ANSWER` | `{stepId,answer}` ; union discriminée : `choiceId`, `pairs:[{leftId,rightId}]`, `orderedIds`, ou `text` selon le défi. Contrat des bornes/normalisations en §4.6.3 de la spécification. |
+| `CONTINUE` | `{stepId}` ; confirme un contenu INFORMATION, sans remplacer les autres conditions. |
+| `REQUEST_HINT` | `{stepId}` ; indice après une première mauvaise réponse valide. |
+| `REQUEST_HELP` | `{stepId}` ; résolution avec aide après première erreur, sans pénalité ni preuve fictive. |
+
+La progression vers le successeur est calculée quand toutes les conditions sont réunies. Le bouton de maquette `NEXT` est une transition d’affichage du résultat, pas une permission de débloquer une étape. `RECONCILE` devient la lecture du reçu puis de la participation. `MERCHANT_PROOF` reste une simulation : la production utilise la route d’attestation authentifiée. Aucune commande joueur `CONFIRM_INTERACTION` ne crée une preuve.
+
+Succès HTTP 200 : `{commandId,outcome,stepId,progressionVersion,exploitationRevision,replayed,correlationId}` (`stepId` nul pour START_GAME). `outcome` est fermé (`STARTED`, `PLACE_VALIDATED`, `ANSWER_CORRECT`, `ANSWER_INCORRECT`, `CONTENT_CONFIRMED`, `HINT_OPENED`, `HELP_APPLIED`, `ALREADY_APPLIED`) avec le résultat minimal approprié. Le reçu ne conserve ni solution complète, ni média, ni projection privée à rejouer plus tard. Après un reçu, le client relit la participation et son `dernierResultat` serveur ; il ne régresse jamais vers une version plus ancienne. Les aides déjà demandées restent consultables pour l’étape concernée selon §6.3, même si son achèvement a immédiatement débloqué la suivante.
+
+Une mauvaise réponse est un 200 traité, avec une tentative et une nouvelle version ; un payload invalide est un 422 sans tentative ni ouverture d’aide. Les refus métier après normalisation peuvent avoir un reçu de refus avec leur code stable, sans effet métier. Authentification invalide, JSON illisible et payload structurellement invalide ne réservent pas de clé durable.
+
+### 5.3 Algorithme atomique et résultats incertains
+
+Après authentification et validation de structure :
+
+1. Ouvrir la transaction, verrouiller la portée idempotente. Si un reçu existe, même empreinte → résultat initial sans mutation ; autre empreinte → 409. Recontrôler l’accès avant toute restitution.
+2. Prendre la coordination et la participation dans l’ordre défini, relire définition/état/preuves. Comparer les versions et lire l’heure serveur **après l’attente des verrous**. À `endsAt` ou après, une nouvelle action de jeu est refusée même si elle est partie du téléphone avant.
+3. Réconcilier la progression avec la révision d’exploitation, faire décider le domaine. Persister une seule fois essais, preuve/effets, qualification, version, reçu, audit et intentions d’envoi.
+4. Commit ; l’envoi des emails/push reste asynchrone. Une panne HTTP après commit est récupérable par le reçu. Un rollback ne laisse ni tentative, ni chance, ni reçu de succès.
+
+Conserver les reçus des commandes de participation jusqu’à l’expiration de l’accès (fin + 90 jours), sans réponses brutes. Pour les opérations de génération, conserver les métadonnées de rejouabilité tant que la demande est active ou son résultat utile, puis selon la politique de ses preuves ; la purge du brut n’efface pas les contraintes d’unicité métier. Les heures/durées de conservation ne se prolongent pas à chaque consultation.
+
+`GET …/commandes/{cle}` prend brièvement le verrou de la même portée avant de conclure : reçu → 200 ; commande transactionnelle encore en cours → 202 `EN_COURS`; absence constatée après verrou → 404 `COMMANDE_NON_ENREGISTREE`. L’absence ne prouve pas qu’un ancien paquet réseau ne peut plus arriver. La nouvelle soumission **explicite** réutilise donc la même clé et le même contenu si la commande reste identique ; après changement de contenu/version, elle emploie une nouvelle clé et le contrôle de version empêche deux mutations concurrentes sur l’ancien état. Aucun POST de reprise automatique.
+
+Si la lecture elle-même échoue, rester en état « validation non confirmée ». Ne jamais afficher une bonne réponse, une preuve ou une étape acquise sur le seul état local. Des réponses HTTP arrivées dans le désordre sont comparées par versions de progression/exploitation ; les anciennes sont ignorées pour l’affichage courant.
+
+### 5.4 Retrait, correction et gel
+
+La neutralisation est une décision globale persistée sous verrou exclusif, avec aperçu d’impact, motif, empreinte de l’aperçu et révision attendue. Recalculer le retrait sur l’ensemble des étapes encore requises ; refuser la suppression de la dernière. Une décision périmée exige un nouvel aperçu. Aucun basculement vers la deuxième mission après publication.
+
+La réconciliation avec les retraits est déterministe : donner les objets indispensables seulement à l’arrivée à la position retirée (immédiatement pour un participant déjà arrivé/passé), sans doublon ni révélation future. Les lectures construisent l’état effectif sur la révision courante ; les écritures matérialisent les effets sous verrou participant. Une qualification stockée sur une ancienne révision n’est jamais utilisée seule par les métriques, l’ERP ou la clôture. Pas de transaction de retrait qui verrouille tous les participants en sens inverse.
+
+Une correction de preuve avant clôture retire la qualification si nécessaire, mais conserve défis résolus, objets et progression. Le scan de régularisation cible une étape déjà atteinte et sa preuve annulée. Après gel, seule une anomalie séparée est enregistrée : aucune mutation du snapshot, nouvelle chance ou réouverture.
+
+La clôture prend la barrière exclusive après les commandes individuelles déjà engagées, relit l’heure et les obligations de la révision courante, recalcule les qualifications puis fige la population et sa provenance dans une transaction. Un seul snapshot par clôture/version, protégé par unicité. Le tirage existant lit ce snapshot, pas un recalcul des essais. Tester charge et durée sur PostgreSQL avant ouverture ; si la transaction échoue, aucun gel partiel n’est rendu visible et aucune notification de clôture n’est envoyée.
+
+## 6. API, habilitations et projections
+
+### 6.1 Routes existantes et extensions
+
+Les chemins ci-dessous sont ceux du backend ; `/api` reste un préfixe éventuel de proxy frontend. Les alias exploratoires `/api/live/game-sessions` de la spécification ne créent pas de second circuit.
+
+| Route | Statut et contrat cible |
+| --- | --- |
+| `GET /public/animation-locale/animations` et `/{id}` | Existantes ; builder public par type, chasse sans liste de lieux. |
+| `POST /public/animation-locale/animations/{id}/inscriptions` et `/inscriptions/renvoyer-lien` | Existantes ; même participant/circuit de récupération. Ajouter déclaration adulte explicite de chasse et référence du règlement accepté. |
+| `GET /public/localeo-live/participations/{id}` et `/{id}/qrcode` | Existantes ; Bearer personnel correspondant exactement à l’ID. Le secret d’installation Live ne donne pas ce droit. |
+| `POST /public/localeo-live/participations/{id}/commandes`, `GET …/commandes/{cle}` | Nouvelles ; §5, sans nouvelle identité de session de jeu. |
+| `GET /public/localeo-live/participations/{id}/etapes/{step_id}/resultat` | Nouvelle ; résultat déjà atteint et contenus explicitement ouverts à cette participation, sans nouvelle aide ni exposition d’une étape future. |
+| `POST /protected/animation-locale/commercants/me/participants/resoudre` | Existante ; uniquement l’étape attestable par ce commerce ou une régularisation autorisée. Aucun parcours futur. |
+| `POST /protected/animation-locale/validations` | Existante ; seule entrée d’attestation commerçante, raccordée au moteur et au protocole commun. |
+| `/protected/animation-locale/animations/{id}/configuration` et `/validation-publication` | Existantes ; contrat versionné et contrôles communs, pas de PUT direct sur le DSL publié. |
+| `POST /protected/animation-locale/animations/{id}/generations` | Nouvelle ; demande sur brouillon existant. `POST /protected/animation-locale/generations` couvre création atomique d’un brouillon et de sa première demande. Réponse 202 avec liens opération/animation. |
+| `GET /protected/animation-locale/operations/{id}` | Existante ; état de génération, versions, prochaine action autorisée, erreurs et lien vers le même brouillon. |
+| Sous `/protected/animation-locale/operations/{id}` | Nouvelles : `GET /prompts/{prompt_id}/export?format=json|texte`, `POST /reponses`, `POST /reponses/{reponse_id}/accepter`, `POST /reviser-prompt`, `/reprendre`, `/annuler`, `/affectation`. |
+| Sous `/protected/animation-locale/animations/{id}/etapes/{step_id}` | Nouvelles : `POST /neutralisation/apercu` sans mutation, `POST /neutralisation` avec motif/empreinte d’aperçu/versions attendues. |
+| Routes EPIC 56 de demandes de participation | Existantes ; acceptation Chasse enrichie, autres types inchangés. |
+
+Les mutations de préparation/opération/neutralisation portent `expectedVersion` (version de leur agrégat), plus les révisions de contexte utilisées, et la clé idempotente. L’acceptation d’un résultat référence exactement la tentative prévisualisée. Les nouvelles listes de génération/exploitation sont paginées par curseur stable `(created_at,id)`, `limit=50`, maximum 100 ; filtres autorisés par partenaire, commune, type, phase, opérateur et ancienneté. Les listes existantes, notamment EPIC 56 en `page/page_size`, conservent leur contrat. Aucun brut/base64 dans les listes.
+
+Le formulaire ERP utilise les mêmes use cases et politiques d’autorisation ; ses handlers SQLAdmin ne modifient pas directement les statuts. L’ERP peut être une entrée autorisée d’une création initiale sans ouvrir une seconde API métier à comportement divergent.
+
+### 6.2 Droits par action
+
+Réutiliser sessions/CSRF de Localeo Animation, session ERP et Bearer commerçant. Conserver les permissions existantes `animation:lire`, `creer`, `modifier`, `publier`, `cloturer`, `tirer`, `exporter`, `gerer_participations_commercants`. Toute décision vérifie partenaire propriétaire, commune autorisée et ressource ; hors périmètre → 404 suivant la convention existante.
+
+| Permission cible supplémentaire | Attribution dans les profils et portée |
+| --- | --- |
+| `animation:generer` | Organisateur habilité à créer/modifier, dans ses communes ; permet initier/réviser/annuler une demande non acceptée. |
+| `animation:generation_lire` | Organisateur de l’animation et opérateur de traitement autorisé ; détail et export privé du prompt/résultat. |
+| `animation:generation_deposer` | Profil opérateur de génération ; dépôt/correction. |
+| `animation:generation_accepter` | Profil opérateur de génération habilité ; accepter/reprendre. Distinct de `animation:publier`, cumul autorisé sans second approbateur imposé. |
+| `animation:neutraliser_etape` | Profil organisateur exploitant et support ERP habilité, sur leur périmètre ; aperçu + application. |
+| `animation:regulariser_preuve` | Support ERP habilité pour correction/anomalie ; les nouvelles attestations restent soumises aux droits commerçants existants. |
+| `animation:quota_generation_modifier` | Administration ERP uniquement ; cible partenaire explicite, motif obligatoire. Aucun droit implicite pour le partenaire lui-même. |
+| `animation:exploitation_lire` | Exploitant ERP pour rapports de traitements/purge ; filtrage de périmètre. |
+
+Les profils sont des regroupements de permissions existantes et nouvelles, attribués via les mécanismes d’habilitation actuels. Une migration ne donne pas automatiquement un droit de publication/régularisation à tous les lecteurs. Le commerçant utilise `commercant:animation` pour décider et `commercant:validation` pour attester, sur son commerce uniquement.
+
+L’adaptateur applicatif `ContexteAutoriseAnimation` unifie identité, permissions, partenaire cible, communes autorisées et corrélation. Il est construit depuis la session Animation ou depuis `contexte_erp`, jamais depuis les champs du corps. La session ERP expose actuellement `ADMIN`/`EXPLOITATION` et non un `ContexteAnimation` : appliquer la traduction explicite suivante pour les **nouveaux** droits, en conservant le comportement des droits existants.
+
+| Source d’habilitation | Attribution initiale des nouvelles permissions | Périmètre |
+| --- | --- | --- |
+| Session Animation avec `creer` et `modifier` | `generer`, `generation_lire` ; les lecteurs simples n’acquièrent ni dépôt ni acceptation. | Partenaire de session et communes habilitées, dont la commune active. |
+| Profil Animation exploitant, attribué explicitement | Ajoute `neutraliser_etape` au profil organisateur. Aucune déduction depuis le seul droit `lire`. | Même périmètre Animation. |
+| ERP `ADMIN` | Toutes les nouvelles permissions du tableau, par table de traduction explicite. | Portée globale déjà autorisée ; partenaire/animation cible explicites et cohérents. |
+| ERP `EXPLOITATION` | `generation_lire`, `generation_deposer`, `generation_accepter`, `exploitation_lire`. Ni changement de quota, ni correction de preuve, ni neutralisation accordés implicitement. | Seulement `commune_ids` de la session ; un ensemble vide n’est pas global. Résolution du partenaire depuis la ressource autorisée. |
+
+Les handlers ERP conservent `verifier_csrf` (`X-CSRF-Token`) ; ils n’usurpent pas une session partenaire pour appeler une route protégée. L’acteur ERP d’audit reste `admin:<admin_username>` vérifié ; pour la colonne UUID d’idempotence existante, dériver un UUIDv5 stable avec `NAMESPACE_URL` et `localeo:erp:<admin_username>` normalisé comme la session. Aucun UUID aléatoire par requête, aucun username fourni librement. Les autres acteurs gardent leurs identifiants existants ; tester séparément chaque adaptation de contexte.
+
+Acceptation Chasse : corps fermé `{expectedVersion,presentedRevision,presentedHash,missionId,confirmedRequirementIds[]}`. Toutes et seulement les conditions de la mission choisie sont confirmées ; refuser IDs étrangers, doublons, deux choix, date dépassée et version périmée. Comparer une empreinte des engagements **par commerce**, incluant les dépendances communes pertinentes (dates/règlement). Une retouche propre à A n’invalide pas B. L’acceptation atteste la capacité à préparer ; la checklist avant publication atteste la préparation vérifiée.
+
+### 6.3 Projections et UI
+
+| Audience | Champs autorisés / interdits |
+| --- | --- |
+| Public | Identité, type/version, titre, période, présentation/thème de couverture relus, durée/difficulté/public, nombre d’étapes, inscription et gains publics autorisés. Pour la chasse : aucun commerce/POI futur, coordonnée, solution ou préparatif. |
+| Participant | Identité de sa participation, versions, statut, progression/objets autorisés, étape courante, actions permises, preuves à régulariser déjà connues. Lieu courant nommé/adressé dès déblocage ; défi, illustration d’étape et aides uniquement après leurs conditions d’accès. Futur = compteur, sans tableau détaillé. |
+| Commerçant | Sa demande et ses alternatives privées avant choix ; mission retenue et consignes/supports après stabilisation ; participant minimal et action d’attestation autorisée. Aucun contenu des autres commerces ni destination suivante. |
+| Organisateur / ERP | Préparation complète, variantes, solutions et contrôles selon permissions ; le rapport d’audit ne contient pas de copie de ces textes. Aperçu privé explicite. |
+
+Le constructeur participant **Chasse** émet une union d’états `AVANT_DEBUT`, `A_DEMARRER`, `SE_RENDRE_SUR_PLACE`, `DEFI_DISPONIBLE`, `ATTENTE_ATTESTATION`, `ETAPE_TERMINEE`, `REGULARISATION_REQUISE`, `PARCOURS_TERMINE`, `FERME`, avec `allowedActions`. Passeport et Tombola conservent leurs projections et calculs propres. Ces états sont des projections dérivées, pas de nouvelles sources de statut commercial. Pour chaque état, les champs de contenu absents sont réellement omis ; un `null` ne masque pas un objet déjà sérialisé.
+
+`currentStep` contient au plus `{id,title,roles,location,content,playerInteraction,challenge,presentation,proofState}` selon l’accès. `content` énumère `introduction`, `instruction`, `information`, `accessibleAlternative`, `hint` et `resolutionHelp` selon les droits acquis ; `playerInteraction` exclut la consigne commerçante. `challenge` exclut le bloc de correction. `presentation` est le thème résolu et les médias accessibles, sans `promptGeneration`. Après première erreur, l’action d’indice/aide devient disponible ; son texte n’est transmis qu’après la demande correspondante.
+
+Les exécutions d’étape conservent la provenance du résultat et les dates d’ouverture de l’indice/aide. La projection `dernierResultat:{stepId,outcome,successMessage,hint,resolutionHelp,grantedObjects}` reconstruit les champs autorisés depuis cette exécution et la définition jouée ; le même résultat est consultable par la route d’étape ci-dessus. Cela permet d’expliquer une résolution aidée après progression automatique, y compris au rafraîchissement. Les solutions non demandées, consignes privées et autres étapes restent absentes. L’historique détaillé est chargé à la demande, jamais préchargé dans son entier.
+
+Le carnet IndexedDB conserve ses accès/résumés actuels, pas la projection narrative complète dans `detail`. `sessionStorage` conserve uniquement la saisie et le descripteur minimal de commande incertaine, clé `(participation,definitionVersion,stepId)`, expiration **24 heures après la dernière édition**, sans prolongation par simple lecture. Retirer après validation confirmée, obsolescence ou expiration. Pas de token, réponse serveur, solution ou base64 ajouté à ce stockage. Si indisponible : repli mémoire et information sur la perte possible au rafraîchissement. Une commande incertaine ne devient jamais automatiquement un échec à l’expiration du brouillon : relecture serveur obligatoire.
+
+API privée : `Cache-Control: no-store`; pas de préchargement des étapes futures. Le service worker conserve seulement ses ressources publiques autorisées. Images base64 converties en Blob en mémoire puis URL objet révoquée au changement d’écran ; pas de stockage de média de jeu dans IndexedDB. Clavier/lecteur d’écran pour associer et réordonner, textes alternatifs disponibles avec leur contenu. Aucun GPS requis ; le lien cartographique externe contient seulement la destination actuellement autorisée.
+
+### 6.4 Erreurs
+
+Conserver `ApiErrorResponse` (`code`, `detail`, `correlationId`, alias historique `request_id`). Ajouter des violations structurées facultatives `{path,code,message}` sans valeur d’entrée. La liste n’inclut ni bonne réponse, token, texte brut de prompt ni base64.
+
+| HTTP / code stable cible | Traitement UI |
+| --- | --- |
+| 401 / 410 accès absent ou expiré | Circuit de récupération existant ; aucune inscription supplémentaire implicite. |
+| 403 permission insuffisante / 404 hors périmètre | Action indisponible ; pas d’information sur une autre participation. |
+| 409 `IDEMPOTENCY_CONFLICT` | Même clé, autre empreinte ; pas de mutation. |
+| 409 `VERSION_OBSOLETE`, `CONTEXTE_OBSOLETE` | Relire l’état / refaire l’aperçu ; aucune fusion silencieuse. |
+| 409 `ETAPE_HORS_ORDRE`, `ACTION_INDISPONIBLE`, `ANIMATION_FERMEE` | Afficher le contexte courant autorisé, jamais la prochaine solution. |
+| 422 `REPONSE_INVALIDE`, `MEDIA_INVALIDE`, `DEFINITION_INVALIDE` | Erreurs localisées ; pas de tentative joueur pour un payload invalide. |
+| 413 `DOCUMENT_TROP_VOLUMINEUX` | Taille reçue/plafond technique, sans corps recopié. |
+| 429 | Limiteur existant, `Retry-After`; pas de retry d’écriture automatique. |
+| 503 `TRANSACTION_INDISPONIBLE` | Verrou/traitement indisponible ; réconciliation si résultat HTTP incertain. |
+
+## 7. Médias, validation et budgets
+
+### 7.1 Résultat autonome et stockage privé
+
+Le contrat d’échange conserve **toutes les illustrations candidates en `medias[].base64` dans le JSON final**, avant choix des commerçants. L’adaptateur textuel dérive le sous-contrat éditorial sans octets ; l’exécution manuelle outillée produit les images, les encode puis assemble un seul résultat. Le backend V1 importe ce résultat et le contrôle ; il ne simule pas un appel d’image ni un coût fournisseur.
+
+Le JSON brut autonome est conservé comme artefact privé via le stockage documentaire existant (`app/infrastructure/storage/document_storage.py`, derrière un port applicatif dédié). Les prompts/messages sont du texte en base ; les lignes de réponses référencent le brut privé et un contenu éditorial normalisé JSONB. Les WebP décodés peuvent être dédupliqués dans ce même stockage privé, avec une table `animation_medias` (UUID, partenaire, ID logique, SHA-256, format, dimensions, octets, document privé). `animation_references_medias` relie explicitement chaque média à ses versions de réponse/template/configuration. Les octets ne sont pas recopiés dans chaque ligne d’exécution.
+
+L’export autorisé réassemble systématiquement le JSON autonome avec base64 ; cette organisation interne ne remplace pas le contrat demandé par des URL. La projection Live peut embarquer uniquement les médias accessibles sous la même forme. Ne pas enregistrer ces images narratives dans le catalogue public `media_assets` ni les servir via `/public/images` : publier une animation n’autorise pas ses images futures.
+
+Écriture d’artefact : préparer un fichier privé temporaire, vérifier son empreinte, puis enregistrer référence et dépendance en transaction. Un rollback laisse un candidat au nettoyage, jamais un lien publié cassé. Les clés de stockage sont générées côté serveur, sans chemin fourni par le JSON. Déduplication dans le périmètre autorisé ; l’existence d’un hash d’un autre partenaire n’est pas révélée. La lecture/purge vérifie aussi les références utiles du brut et des médias extraits.
+
+### 7.2 Pipeline de contrôle
+
+1. Borner le flux avant chargement JSON, refuser les clés dupliquées, nombres non finis et structure trop profonde. Le body d’import n’est jamais repris dans une erreur ni loggé.
+2. Valider le schéma du type/version et les références du brief. Vérifier les limites textuelles avant rendu.
+3. Pour chaque média unique : décoder la base64 canonique stricte, contrôler que le réencodage est identique, décoder réellement le WebP statique dans un adaptateur borné. Pas de SVG, WebP animé, fichier tronqué ni simple validation du suffixe.
+4. Comparer MIME réel, dimensions autorisées, ratio 16:9, longueur binaire, `octets`, SHA-256, longueur base64 et poids UTF-8 de l’objet compact. Toutes les références, y compris missions non encore sélectionnées, doivent être satisfaites ; aucun orphelin ni ID contradictoire.
+5. Faire valider au domaine les références, l’héritage et les règles de présentation à partir du résultat technique de décodage. Le domaine ne dépend pas de Pillow/libwebp. Relecture : lisibilité PC/mobile, fidélité illustrative, absence de solution/lieu futur et cohérence après retouche d’une mission.
+6. Produire un rapport immuable lié aux empreintes et à la version des validateurs. Une nouvelle réponse invalide n’efface pas les médias valides précédents. Un résultat incomplet reste non acceptable ; l’opérateur peut réimporter les médias corrigés dans un JSON complet ou retirer explicitement une illustration facultative avec ses références.
+
+L’encodeur de l’outillage descend de 960×540 à 768×432 puis 640×360 en ajustant la qualité ; s’il n’obtient pas une image lisible dans le budget, régénérer/simplifier. Il ne tronque jamais une chaîne base64. La pipeline automatique fournisseur éventuelle réutilisera ces contrôles après le pilote, sans ajouter de réservation de génération par image.
+
+### 7.3 Paramètres techniques initiaux
+
+Ces valeurs fixent des limites d’intégration, configurables côté exploitation et documentées dans les modèles de configuration sans secret. Ce ne sont ni un nombre imposé d’étapes ni de nouveaux quotas commerciaux. Une modification de limite ne modifie pas silencieusement un contenu publié.
+
+| Paramètre / valeur initiale | Application et refus |
+| --- | --- |
+| Média JSON ≤ **60 000 octets** ; cible 50 000 | Taille compacte UTF-8, métadonnées comprises ; règle contractuelle TRE-ARB-91, non relevée par une simple configuration d’exploitation. |
+| WebP ≤ 44 000 octets ; base64 ≤ 58 668 caractères | Un seul visuel par ID, résolution 960×540 / 768×432 / 640×360. |
+| Import complet ≤ **8 000 000 octets** | Taille du body décodé, contrôlée au proxy et dans l’API même sans Content-Length ; refuser Content-Encoding compressé pour cet import V1. Ne pas accepter un JSON compact puis exporter un fichier dépassant cette limite sans signalement. |
+| Texte éditorial total hors base64 ≤ **512 000 octets UTF-8** | Propositions, variantes, aides et descriptions incluses ; pas de troncature automatique. |
+| Chaîne éditoriale ≤ 20 000 caractères ; titre ≤ 200 ; ID local ≤ 64 | Les bornes plus strictes d’une activité, d’une mission EPIC 56 ou du brief restent prioritaires. Profondeur JSON maximum 32. |
+| Commande joueur ≤ **16 384 octets** | Contrôle avant parsing ; `TEXT_INPUT` garde sa borne 80 points de code/32 caractères CODE. |
+| Lecture Live ≤ **256 000 octets** | Budget d’une projection avec uniquement les images autorisées ; tester avec les textes maximaux. En cas de dépassement détecté en préparation, corriger la présentation plutôt que couper une consigne en jeu. |
+| Saisie temporaire : 24 h ; polling opération 2 s puis 5 s | Polling seulement au premier plan, pause si hors ligne ; relecture immédiate au retour. Aucun polling d’écriture. |
+| Limiteur : 30 commandes/min/participation ; 5 imports/min/opérateur | Réutiliser `appliquer_rate_limit_public` et le dispositif protégé, en complément des limites existantes ; clé stable, jamais token brut. Paramètres ajustables sur mesures du pilote. |
+| Verrous HTTP : attente max 3 s ; traitement SQL ordinaire max 15 s | Retour contrôlé et réconciliation ; pas de retry automatique d’une mutation dont le résultat est inconnu. Clôture/purge sont des opérations suivies avec budgets dédiés, pas une requête Live longue. |
+| Contrôle d’un import : budget 30 s ; 2 tâches par worker | CPU/décodage hors transaction. Une saturation conserve une opération visible et reprenable ; aucun succès partiel. |
+
+L’export lisible pour copier un prompt ne compte pas comme un import de résultat. Les transports volumineux restent privés ; les listes et reçus n’embarquent jamais le JSON complet. Les seuils métier de publication et le quota de 10 générations/mois restent séparés de ces protections techniques.
+
+## 8. Exploitation, conservation et bascule
+
+### 8.1 Worker et reprises
+
+Étendre le traitement d’opérations du backend, sans présenter `lister_executables` comme un worker déjà disponible. Claim en transaction courte par `FOR UPDATE SKIP LOCKED`, bail initial 120 s, renouvellement toutes les 30 s si nécessaire et `claim_version` croissante. Maximum deux tâches simultanées par processus. Le verrou SQL de claim est relâché après commit, avant toute prise des verrous métier ; le bail reste actif jusqu’au rattachement/échec. Une annulation ou révision gagne contre un résultat tardif grâce au contrôle du statut/version/claim au rattachement.
+
+Seuls `PREPARATION_PROMPT`, `RESULTAT_DEPOSE`, `RESULTAT_PUBLIE` et `FINALISATION_INSTANCE` sont exécutables automatiquement, **dans tous les cas avec bail absent/expiré et échéance `prochaine_execution_at` atteinte**. Le claim recontrôle atomiquement ces conditions. Les états d’attente humaine, invalidité, validation humaine et obsolescence ne consomment ni thread ni tentative. Les erreurs techniques transitoires conservent la phase et planifient au plus trois reprises par phase avec délais 30 s, 120 s, 600 s ; après épuisement, passer respectivement en `ECHEC_PREPARATION`, `ECHEC_CONTROLE` ou `ECHEC_FINALISATION`, puis reprise explicite. Ces échecs ne terminent pas la demande pour conservation/quota. Une erreur de contenu n’est pas un échec réseau à retenter. Les compteurs de tentative sont techniques par phase ; le quota métier reste attaché à la demande.
+
+La file ERP est **Animations → Demandes de création**, liste filtrée et fiche. Afficher état métier, bail/tentative technique si erreur, opérateur affecté, ancienneté, prochaine action autorisée, mois de réservation, brouillon lié, révisions et rapports. « Publier le résultat » montre la tentative exacte et reste distinct de « Publier l’animation ». Le dépassement de délai d’une attente humaine est un indicateur, jamais une annulation automatique.
+
+Audit commun (`evenements_audit`) : catégories `ANIMATION_GENERATION`, `ANIMATION_MISSION`, `ANIMATION_JEU`, `ANIMATION_PREUVE`, `ANIMATION_NEUTRALISATION`, `ANIMATION_QUALIFICATION`, `ANIMATION_PURGE`, `ANIMATION_CONVERSION`. Enregistrer acteur, périmètre, ressource, action, résultat, date serveur, versions avant/après, ID de commande/opération et `correlationId`. Aucun token, QR brut, réponse brute, prompt ou base64 dans l’audit. Réutiliser les outbox emails/webpush pour les notifications, écrites dans la transaction d’origine.
+
+Métriques issues des faits persistés : inscriptions uniques, débuts/fins de parcours, passages actuellement `VALIDEE`, aides, tentatives, neutralisations, erreurs, durée et files bloquées. Historique des annulations et anomalies après clôture séparés des passages valides. Agrégats calculés en requête V1, sans table de solde/compteur métier concurrente ; toute optimisation future reste reconstruisible.
+
+### 8.2 Conservation et purge
+
+Conserver les politiques existantes participants/notifications (12 mois selon registre), tokens (fin + 90 jours), preuves de tirage/gain et archives. Le code actuel utilise notamment 365 jours pour l’usage nominatif ; son alignement calendaire avec le registre doit être vérifié dans le lot conservation sans le remplacer par les nouvelles durées de jeu.
+
+Pour les catégories nouvelles, une « journée » de délai technique représente 24 h après l’instant UTC persisté : `terminated_at + 30 days` pour un brut de génération devenu inutile ; `animation.ends_at + 90 days` pour le détail des essais. Une prolongation autorisée de fin recalcule l’échéance des essais ; l’heure du navigateur et la dernière consultation n’interviennent pas.
+
+Ajouter `animation_gels_conservation` (cible précise, motif, auteur, dates/levée), les liens de dépendance utiles, et `animation_purge_runs`/`animation_purge_items` (politique, catégorie, curseur, résultat par item, compteurs, erreurs). Les seules métadonnées ne constituent pas une autorisation d’effacer les preuves conservées ; qualifier chaque catégorie.
+
+Traitement quotidien à **03:30 UTC**, lot initial **100 objets**, transactions par objet ou petit groupe homogène, reprise par `(eligible_at,id)`. Une exécution quotidienne est elle-même identifiée de façon unique par politique/date/catégorie ; le mécanisme d’exploitation empêche deux propriétaires actifs sur le même lot.
+
+1. Sélectionner des candidats, sans considérer une demande en attente/invalide/reprise comme terminée.
+2. Verrouiller l’opération si pertinente puis chaque parent d’artefact dans l’ordre §5.1. Relire échéance, état, références de template/configuration, gels et usages probatoires. Une commande réutilisant un contenu ou posant un gel doit prendre ce même verrou avant son lien.
+3. Si protégé : compter une exclusion motivée et reconsidérer à une prochaine exécution. Sinon marquer `PURGE_EN_COURS` sur l’artefact et écrire l’intention de suppression dans la transaction. Ce marquage est le point de non-retour : toute nouvelle référence **ou pose de gel** sur ce contenu est refusée explicitement (« purge déjà engagée »). Un gel accepté avant le marquage interdit celui-ci ; aucun gel accepté ne peut être ignoré par une suppression externe.
+4. Pour le stockage externe, supprimer hors transaction puis enregistrer `PURGE` ; « déjà absent » est un succès idempotent. Une panne conserve la tâche et le marqueur, jamais un faux succès. Retirer les copies actives/export temporaires gérés du même périmètre.
+5. Conserver les métadonnées minimales nécessaires et le rapport sans brut ; supprimer les essais indépendamment des reçus minimaux/preuves/qualifications. Aucun effet sur le quota ou la population figée. Les sauvegardes suivent leur rotation et une restauration réapplique les suppressions dues.
+
+Rapport ERP : identifiant/politique, heures, catégories, examinés/supprimés/exclus/erreurs, motifs et prochain curseur. Alerte d’exploitation sur échec ou exécution quotidienne absente, sans données brutes. Mode simulation avant activation. Mettre à jour le registre interne et éprouver ces traitements avant livraison ; ce dossier ne modifie ni le PDF juridique ni une base d’exploitation.
+
+### 8.3 Conversion et ouverture
+
+Convertisseur dans le backend, nouvelles migrations SQL seulement via `scripts/database/apply_migrations.py`. Attribuer leur numéro lors de l’implémentation, sans modifier les SQL/checksums historiques.
+
+Ajouter un journal `animation_conversions` : source/configuration, version convertisseur, empreinte source/cible, résultat, dates, erreurs, UNIQUE `(source_configuration_id,converter_version,source_hash)`. Simulation d’abord ; conversion par lots de 50 animations, une transaction par animation, coordination exclusive et contrôle d’empreinte après verrou. Une reprise compare la cible existante ; un changement de source devient un conflit visible, jamais un écrasement.
+
+Conserver IDs, missions, paramètres valides et provenance des brouillons ; signaler tout écart. Aucun appel IA, quota de génération, publication, email, paiement ou tirage pendant la conversion. Inventorier explicitement les données de démonstration sans suppression implicite. Vérifier sur la cible l’absence d’animation publiée avant la bascule ; si ce prérequis déclaré n’est pas vrai, arrêter la procédure et rendre l’écart visible, sans inventer une migration de parties actives.
+
+Ouvrir seulement après conversion complète du périmètre retenu, alignement backend/Animation/Commerçant/Marketplace et recette. Aucun ancien moteur maintenu en parallèle. Un retour technique avant ouverture utilise les sauvegardes et la procédure de déploiement ; il ne supprime pas les traces de conversion. Les modalités de déploiement effectif suivent une demande distincte.
+
+## 9. Lots d’implémentation et preuves de sortie
+
+Le dossier fige les choix techniques ; l’existence des fichiers ne prouve pas les garanties. Livrer les parcours verticalement après un socle minimal, avec tests métier, adaptateurs et consommateurs.
+
+| Lot | Réalisation | Preuves de sortie exigées |
+| --- | --- | --- |
+| T1 — Socle et contrats | Registre trois types/versions, modèles fermés, exports, clés/versionnage, coordination et reçus atomiques ; raccordement de toutes les écritures existantes. | Domaine sans framework ; type/version inconnu refusé ; diff d’exports contrôlé ; tests PostgreSQL de dernière place et commandes simultanées. |
+| T2 — Générer et préparer | Brouillon atomique, quota, opérations/worker, prompts, import complet, médias, ERP et préparation guidée. | Deux réservations pour la dernière place : une seule ; même demande/rejeu : même brouillon ; résultat invalide non acceptable ; attente humaine sans lease active ni expiration ; timeout après acceptation sans seconde consommation. |
+| T3 — Confirmer les missions | Alternatives, snapshots propres aux commerces, corps d’acceptation, checklist, assemblage et publication. | A/B indépendants ; deux confirmations concurrentes sur anciennes versions refusées ; minimum et demandes en attente contrôlés ; publication vs décision/retrait déterministe ; une seule mission dans le DSL. |
+| T4 — Jouer et reprendre | Inscription commune, trois renderers, cinq défis de chasse, preuves/QR, indices/aides, projections et carnet. | Parcours complets des trois moteurs ; QR POI distinct de preuve commerçante ; aide sans preuve ; absence de lieux/solutions futurs dans tous les canaux ; clavier/mobile ; deux appareils et perte de réponse avant/après commit. |
+| T5 — Exploiter et clôturer | Retrait global, correction/régularisation, qualification, gel, tirage existant, audit, métriques. | Retrait de dernière étape refusé ; retrait/réussite sans double objet ; correction/scan/clôture avec résultat cohérent ; pas de modification du snapshot après gel ; panne outbox sans rollback d’un jeu confirmé. |
+| T6 — Conserver et ouvrir | Purge, registre interne, conversion, jeux de fixtures, contrôles des dépôts et pilote. | Course purge/réutilisation/gel ; reprise de suppression stockage ; aucune preuve de gain supprimée ; conversion rejouable sans effet externe ; exports frontends alignés ; recette complète avant ouverture. |
+
+### 9.1 Matrice des courses à automatiser
+
+| Course / panne | Assertion observable |
+| --- | --- |
+| Même clé/même payload, deux requêtes | Un reçu, une tentative au maximum, même résultat métier. |
+| Même clé/autre payload | 409, aucun second effet. |
+| Deux clés/même version, même participation | Une mutation puis conflit de version ; deux participations distinctes ne se bloquent pas mutuellement sur le jeu. |
+| Réponse perdue après commit / lecture de reçu avant arrivée tardive | Réconciliation, puis éventuel nouvel envoi explicite cohérent ; aucun retry silencieux ou double tentative. |
+| Dernier scan vs clôture | Seul l’ordre transactionnel décide ; aucune preuve validée après le gel ne modifie sa population. |
+| Retrait vs réussite, deux retraits concurrents | Effets uniques, provenance conservée, au moins une étape globalement requise. |
+| Dernière place d’inscription / quota génération | Une seule nouvelle inscription/réservation ; récupération d’une identité existante ne prend pas de place. |
+| Acceptation résultat vs annulation/révision | Consommation ou libération cohérente ; aucun résultat tardif appliqué. |
+| Expiration de lease vs ancien worker | Seul le propriétaire de la version de claim courante peut rattacher son résultat. |
+| Purge vs référence utile ou gel | Une référence utile conservée, ou un contenu déjà marqué à purger refusé à la réutilisation ; jamais de référence vers un brut supprimé sans statut explicite. |
+| Import image mensonger | Base64, dimensions, poids réel, hash, références ou décodage invalide : refus localisé ; pas de résultat complet fictif. |
+
+### 9.2 Vérifications et limites de ce lot de conception
+
+À exécuter pour ce lot documentaire : contrôle des guides et liens des documents modifiés, sources exportées, relecture des six sujets contre le code, contrôle du diff. Aucun test métier, PostgreSQL, navigateur, import fournisseur ou mesure de charge n’est revendiqué ici.
+
+Dette préexistante identifiée par lecture : `localeo-commercant/api/localeo-openapi.json` attendu par ses consommateurs/tests est absent du workspace. T1/T3 doivent le produire depuis le générateur backend avec les autres contrats embarqués, sans fabriquer une copie divergente. Les helpers HTTP actuels qui lisent/mémorisent l’idempotence dans des UoW séparées doivent être remplacés pour les mutations raccordées au moteur.
+
+Les points encore à vérifier par l’exécution sont les performances du gel/neutralisation, l’absence de deadlocks, les budgets de projection maximaux, la recette accessibilité et la conservation réelle. Les logistiques du pilote (commune, participants, dates), la comparaison fournisseur et le rallye après V1 restent suivis séparément ; ils ne constituent pas des contrats techniques laissés ouverts par ce dossier.
+
+[Retour au moteur d’animation](README.md).

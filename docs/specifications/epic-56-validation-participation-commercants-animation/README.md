@@ -34,6 +34,14 @@ Le nom technique retenu est `mission_commercant`. Localeo Animation la consulte 
 
 La demande de participation ne possede pas une mission editable autonome. Elle conserve seulement l'identifiant ou l'instantane de la version de configuration presentee au moment de l'envoi, afin de prouver le contenu sur lequel le commercant a pris sa decision.
 
+## Extension de préparation des chasses — à réaliser dans EPIC 55
+
+Le [moteur Chasse, section 8.1.1](../moteur-animation/localeo_animation_engine_spec.md#811-préparation-et-choix-des-missions-commerçantes), étend la mission versionnée à des alternatives par commerçant (TRE-ARB-89). Cette extension cible n’est pas couverte par le statut historique « Terminée » de l’EPIC 56. Elle réutilise ses demandes, droits, échéances, envois et décisions.
+
+La configuration Chasse contient idéalement deux missions candidates par commerce. Après relecture de l’organisateur, l’invitation présente la version concernée. L’acceptation doit sélectionner une mission et confirmer tous ses prérequis (produit, message, mise en place), avec référence de variante et version, auteur/date et audit ; aucun choix ni accord n’est généré par le LLM. La demande conserve sa référence/son snapshot et n’a pas de mission éditable autonome. La préparation effective est vérifiée avant publication ; une mission n’est pas réputée installée parce que le commerce a accepté de la réaliser.
+
+Les conditions de publication et de renouvellement des accords ci-dessous restent applicables. Une modification substantielle du contenu ou des préparatifs invalide l’accord concerné et nécessite un nouvel envoi. Seule la mission retenue intègre le parcours joué ; les alternatives non retenues restent privées. Les refus sont traités dans le brouillon par adaptation ou annulation explicite, sans bascule silencieuse vers une autre mission. Pour chaque chasse, l’organisateur fixe un minimum de commerces retenus avec accord valide et mission confirmée, au moins égal au minimum éventuel du type. En dessous, la publication est bloquée ; adaptation ou annulation restent sa décision explicite. Aucune annulation automatique ni réduction automatique du minimum. Les autres conditions de publication restent exigées, notamment l’absence de demande EN_ATTENTE. Les règles Passeport/Tombola ne sont pas modifiées par cette extension.
+
 ## Evolution du modele existant
 
 La liste `configuration.parametres.commercant_ids` ne doit plus etre interpretee comme une liste de participants effectifs. Elle peut servir de liste de commercants selectionnes pendant la transition, mais l'etat metier est porte par une demande de participation persistante.

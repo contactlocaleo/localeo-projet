@@ -1,0 +1,1034 @@
+{
+  "example_notice": "Reconstitution documentaire ; orchestration récit et images en une demande, résultat final avec WebP base64. Générateur backend non implémenté.",
+  "id": "DEMO-PROMPT-LATRESNE-20260919-008",
+  "revision": 8,
+  "animation_type": "CHASSE_TRESOR_COMMERCANTE",
+  "prompt_template_version": "latresne-missions-visuels-embarques-8",
+  "response_schema_version": "latresne-preparation-medias-base64-8",
+  "messages_json": [
+    {
+      "role": "system",
+      "content": "Tu conçois des chasses au trésor Localeo qui font découvrir une commune et rencontrer ses commerçants.\n\nÀ partir du brief, propose un récit et un parcours linéaire respectant la fourchette d’étapes, la durée approximative, le public, la difficulté et le thème. Choisis et ordonne les lieux disponibles.\n\nPour chaque commerce, prévois une seule position dans le parcours et idéalement deux missions alternatives, réellement différentes et personnalisées selon son métier. Chaque mission contient sa préparation, les éléments à faire confirmer au commerçant, ses textes joueur, sa consigne privée et son défi complet. Une seule mission sera choisie après relecture de l’organisateur et réponse du commerçant ; tu ne choisis pas à sa place.\n\nTu peux proposer la présence d’un produit, une observation en boutique ou un message à cacher. Présente ces éléments comme des demandes à confirmer dans `preparationCommercant`, jamais comme des faits déjà établis. Fournis le texte exact de tout support à préparer. Les contenus joueur sont des versions candidates, utilisables seulement si leurs prérequis sont confirmés. Prévois des alternatives dont les exigences matérielles diffèrent.\n\nRègles de jeu :\n- Aucun achat obligatoire, score ou classement ; une seule étape par commerce, quel que soit le nombre de missions proposées.\n- Défis sur place ; le joueur reçoit le lieu, il ne doit pas deviner le commerce de destination.\n- Choisis parmi QCM à réponse unique (2–6 choix), association (2–6 paires), remise en ordre (3–6 éléments), saisie courte TEXTE/CODE et information avec « Continuer ».\n- Pour chaque défi corrigé, prépare la solution, l’indice et l’aide complète. Une observation peut dépendre d’un élément installé et confirmé ; les cinq formats restent corrigés sans IA pendant le jeu.\n- `interactionCommercant` propose un dialogue facultatif au joueur. `consigneCommercant` est privée : préparation, accueil et rôle du commerçant. La préparation matérielle peut être nécessaire même si le dialogue est facultatif.\n- Les alternatives d’une étape doivent rester compatibles avec la suite du récit. Ne fais pas dépendre une autre étape d’une réponse propre à une alternative.\n- Distingue fiction, faits connus et conditions à confirmer. Ne dévoile pas les lieux suivants dans les textes joueur. Prévois des supports lisibles sans manipulation de denrées ni recherche dans les espaces réservés.\n\nPropose aussi, si utile, `themeVisuel` pour l’animation et une `presentation` par étape ou mission. Génère les illustrations dans cette même demande, sans attendre le choix des missions, et livre le JSON avec les images WebP réelles en base64 dans `medias`, une seule fois par identifiant. Chaque illustration fournit son prompt et un texte alternatif ; elle accompagne le récit sans révéler solution, code ou lieu futur.\n\nUtilise un outil de génération d’images puis un encodage WebP/base64 : ne fabrique jamais une chaîne ressemblant à une image. Pour chaque image, vise 50 Ko et ne dépasse pas 60 000 octets pour l’objet média JSON compact, base64 et métadonnées compris : WebP de 44 000 octets maximum, en 960 × 540, 768 × 432 ou 640 × 360 selon la lisibilité. Fournis les dimensions, le poids binaire et le SHA-256 réels. `medias` est vide sans illustration. Aucun fichier externe, URL, CSS ou HTML à inventer. Si la génération d’image échoue ou n’est pas disponible, signale l’échec de l’opération ; ne présente pas un résultat incomplet comme terminé.\n\nRéponds uniquement en JSON selon le schéma joint. Ne génère aucun statut d’accord, aucune mission sélectionnée, aucune confirmation effective ni checklist terrain : ces décisions sont gérées ensuite par le moteur."
+    },
+    {
+      "role": "user",
+      "content": "Prépare une chasse à Latresne, en Gironde.\n- Période envisagée pour cet exemple : 31 octobre 2026, de 14 h à 18 h, heure de Paris.\n- Parcours de 4 à 6 étapes, départ et finale inclus s’ils constituent des étapes.\n- Durée approximative par groupe : 60 minutes, déplacements et échanges compris.\n- Public : familles et participants de plusieurs générations.\n- Difficulté : facile.\n- Thème : Halloween, petits frissons et rencontres chaleureuses.\n- Direction visuelle de cet exemple : gouache bleu nuit et orange, scènes de découverte intergénérationnelles et cosmopolites ; identité Localeo Live, titres Oswald et texte DM Sans. Les visuels de commerces sont imaginaires ; ils ne prouvent pas une installation réelle.\n\nCommerçants à solliciter :\n- Lisons sous la pluie — librairie, 25 avenue de la Libération.\n- Mirga — fromagerie, 53 avenue de la Libération.\n- Mode de Biche — mode, décoration et fleurs, 2T rue de la Salargue.\n\nPOI disponibles dans le brief :\n- Ancienne gare de Latresne — avenue de la Libération.\n- Château de la Salargue — rue de la Salargue.\n\nInvente le fil narratif et propose deux missions par commerce, par exemple autour d’un produit à prévoir ou d’un message à installer. Aucun commerce n’a encore confirmé sa participation ou sa capacité à préparer ces éléments. L’organisateur relira le parcours avant de solliciter chacun."
+    }
+  ],
+  "response_schema_json": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "Proposition préparatoire de chasse avec missions et illustrations WebP embarquées",
+    "type": "object",
+    "properties": {
+      "titre": {
+        "type": "string",
+        "minLength": 1
+      },
+      "synopsis": {
+        "type": "string",
+        "minLength": 1
+      },
+      "dureeEstimeeMinutes": {
+        "type": "integer",
+        "minimum": 1
+      },
+      "difficulte": {
+        "type": "string",
+        "minLength": 1
+      },
+      "introduction": {
+        "type": "string",
+        "minLength": 1
+      },
+      "etapes": {
+        "type": "array",
+        "minItems": 1,
+        "items": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/etapeCommercante"
+            },
+            {
+              "$ref": "#/$defs/etapeNonCommercante"
+            }
+          ]
+        },
+        "description": "Parcours proposé dans son ordre de jeu : une position par lieu. Une étape commerçante contient des missions alternatives non encore acceptées. Assemblage jouable après décision des commerçants et relecture finale ; pas de statut ni de sélection dans la sortie IA."
+      },
+      "conclusion": {
+        "type": "string",
+        "minLength": 1
+      },
+      "themeVisuel": {
+        "$ref": "#/$defs/themeVisuel"
+      },
+      "medias": {
+        "type": "array",
+        "items": {
+          "$ref": "#/$defs/mediaEmbarque"
+        },
+        "description": "Images réelles de la même opération de génération, dédupliquées par id. [] si aucune illustration. Tout id référencé par couverture, position ou mission candidate doit correspondre exactement à un média ; références, unicité et budget UTF-8 contrôlés par le domaine."
+      }
+    },
+    "required": [
+      "titre",
+      "synopsis",
+      "dureeEstimeeMinutes",
+      "difficulte",
+      "introduction",
+      "etapes",
+      "conclusion",
+      "medias"
+    ],
+    "additionalProperties": false,
+    "$defs": {
+      "qcm": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "const": "SINGLE_CHOICE"
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1
+          },
+          "choix": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 6,
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "texte": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "id",
+                "texte"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "bonneReponseId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "indice": {
+            "type": "string",
+            "minLength": 1
+          },
+          "aideResolution": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "type",
+          "question",
+          "choix",
+          "bonneReponseId",
+          "indice",
+          "aideResolution"
+        ],
+        "additionalProperties": false
+      },
+      "information": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "const": "INFORMATION"
+          },
+          "texte": {
+            "type": "string",
+            "minLength": 1
+          },
+          "bouton": {
+            "const": "Continuer"
+          }
+        },
+        "required": [
+          "type",
+          "texte",
+          "bouton"
+        ],
+        "additionalProperties": false
+      },
+      "element": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "\\S"
+          },
+          "texte": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          }
+        },
+        "required": [
+          "id",
+          "texte"
+        ],
+        "additionalProperties": false
+      },
+      "paire": {
+        "type": "object",
+        "properties": {
+          "gaucheId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "\\S"
+          },
+          "droiteId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "\\S"
+          }
+        },
+        "required": [
+          "gaucheId",
+          "droiteId"
+        ],
+        "additionalProperties": false
+      },
+      "association": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "const": "ASSOCIATION"
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "elementsGauche": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 6,
+            "items": {
+              "$ref": "#/$defs/element"
+            },
+            "uniqueItems": true
+          },
+          "elementsDroite": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 6,
+            "items": {
+              "$ref": "#/$defs/element"
+            },
+            "uniqueItems": true
+          },
+          "pairesAttendues": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 6,
+            "items": {
+              "$ref": "#/$defs/paire"
+            },
+            "uniqueItems": true
+          },
+          "indice": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "aideResolution": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          }
+        },
+        "required": [
+          "type",
+          "question",
+          "elementsGauche",
+          "elementsDroite",
+          "pairesAttendues",
+          "indice",
+          "aideResolution"
+        ],
+        "additionalProperties": false,
+        "description": "Association un-à-un. Le domaine contrôle tailles égales, identifiants uniques par liste et bijection complète. pairesAttendues est privé."
+      },
+      "ordering": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "const": "ORDERING"
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "elements": {
+            "type": "array",
+            "minItems": 3,
+            "maxItems": 6,
+            "items": {
+              "$ref": "#/$defs/element"
+            },
+            "uniqueItems": true
+          },
+          "ordreAttendu": {
+            "type": "array",
+            "minItems": 3,
+            "maxItems": 6,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 64,
+              "pattern": "\\S"
+            },
+            "uniqueItems": true
+          },
+          "indice": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "aideResolution": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          }
+        },
+        "required": [
+          "type",
+          "question",
+          "elements",
+          "ordreAttendu",
+          "indice",
+          "aideResolution"
+        ],
+        "additionalProperties": false,
+        "description": "Remise en ordre à solution unique. Le domaine vérifie que ordreAttendu est une permutation complète des identifiants. La solution reste privée ; la présentation joueur est mélangée."
+      },
+      "textInput": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "const": "TEXT_INPUT"
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "normalisation": {
+            "enum": [
+              "TEXTE",
+              "CODE"
+            ]
+          },
+          "reponsesAcceptees": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 10,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 80,
+              "pattern": "\\S"
+            },
+            "uniqueItems": true
+          },
+          "indice": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "aideResolution": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          }
+        },
+        "required": [
+          "type",
+          "question",
+          "normalisation",
+          "reponsesAcceptees",
+          "indice",
+          "aideResolution"
+        ],
+        "additionalProperties": false,
+        "description": "Mot, courte expression ou code ; correction déterministe serveur selon §4.6.3.1. Aucune évaluation libre par IA. Les variantes acceptées restent privées.",
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "normalisation": {
+                  "const": "CODE"
+                }
+              },
+              "required": [
+                "normalisation"
+              ]
+            },
+            "then": {
+              "properties": {
+                "reponsesAcceptees": {
+                  "items": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z0-9-]{1,32}(?![\\s\\S])"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "missionProposee": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
+          },
+          "titre": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "preparationCommercant": {
+            "type": "object",
+            "properties": {
+              "demande": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "elementsAConfirmer": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "\\S"
+                },
+                "uniqueItems": true
+              },
+              "supportAFournir": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "minLength": 1,
+                "pattern": "\\S"
+              }
+            },
+            "required": [
+              "demande",
+              "elementsAConfirmer",
+              "supportAFournir"
+            ],
+            "additionalProperties": false
+          },
+          "texteJoueur": {
+            "type": "string",
+            "minLength": 1
+          },
+          "consigne": {
+            "type": "string",
+            "minLength": 1
+          },
+          "interactionCommercant": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Suggestion facultative de dialogue joueur-commerçant liée à son métier ; null sans échange. Ce texte ne configure ni preuve, ni attestation, ni condition de validation."
+          },
+          "consigneCommercant": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S",
+            "description": "Consigne privée de la mission candidate, avec préparation et rôle du commerçant. Peut inclure le message exact à installer. Aucun accord effectif ne peut être généré."
+          },
+          "defi": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/qcm"
+              },
+              {
+                "$ref": "#/$defs/information"
+              },
+              {
+                "$ref": "#/$defs/association"
+              },
+              {
+                "$ref": "#/$defs/ordering"
+              },
+              {
+                "$ref": "#/$defs/textInput"
+              }
+            ]
+          },
+          "presentation": {
+            "$ref": "#/$defs/presentationEtape"
+          }
+        },
+        "required": [
+          "id",
+          "titre",
+          "preparationCommercant",
+          "texteJoueur",
+          "consigne",
+          "interactionCommercant",
+          "consigneCommercant",
+          "defi"
+        ],
+        "additionalProperties": false
+      },
+      "etapeCommercante": {
+        "type": "object",
+        "properties": {
+          "lieu": {
+            "enum": [
+              "Lisons sous la pluie",
+              "Mirga",
+              "Mode de Biche"
+            ]
+          },
+          "titre": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "missionsProposees": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 2,
+            "items": {
+              "$ref": "#/$defs/missionProposee"
+            },
+            "description": "Deux alternatives souhaitées ; une seule proposition reste possible après relecture. Le commerçant choisit exactement une mission. Ces alternatives comptent comme une seule étape."
+          },
+          "presentation": {
+            "$ref": "#/$defs/presentationEtape"
+          }
+        },
+        "required": [
+          "lieu",
+          "titre",
+          "missionsProposees"
+        ],
+        "additionalProperties": false
+      },
+      "etapeNonCommercante": {
+        "type": "object",
+        "properties": {
+          "lieu": {
+            "enum": [
+              "Ancienne gare de Latresne",
+              "Château de la Salargue",
+              null
+            ]
+          },
+          "titre": {
+            "type": "string",
+            "minLength": 1
+          },
+          "texteJoueur": {
+            "type": "string",
+            "minLength": 1
+          },
+          "consigne": {
+            "type": "string",
+            "minLength": 1
+          },
+          "interactionCommercant": {
+            "type": "null"
+          },
+          "defi": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/qcm"
+              },
+              {
+                "$ref": "#/$defs/information"
+              },
+              {
+                "$ref": "#/$defs/association"
+              },
+              {
+                "$ref": "#/$defs/ordering"
+              },
+              {
+                "$ref": "#/$defs/textInput"
+              }
+            ]
+          },
+          "consigneCommercant": {
+            "type": "null"
+          },
+          "presentation": {
+            "$ref": "#/$defs/presentationEtape"
+          }
+        },
+        "required": [
+          "lieu",
+          "titre",
+          "texteJoueur",
+          "consigne",
+          "interactionCommercant",
+          "defi",
+          "consigneCommercant"
+        ],
+        "additionalProperties": false
+      },
+      "policesVisuelles": {
+        "type": "object",
+        "properties": {
+          "titres": {
+            "enum": [
+              "OSWALD",
+              "DM_SANS"
+            ]
+          },
+          "texte": {
+            "enum": [
+              "OSWALD",
+              "DM_SANS"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "description": "Polices embarquées par Localeo Live ; propriété absente = héritage. Aucune URL de police ni police libre."
+      },
+      "couleursVisuelles": {
+        "type": "object",
+        "properties": {
+          "fond": {
+            "type": "string",
+            "pattern": "^#[0-9a-fA-F]{6}(?![\\s\\S])"
+          },
+          "surface": {
+            "type": "string",
+            "pattern": "^#[0-9a-fA-F]{6}(?![\\s\\S])"
+          },
+          "texte": {
+            "type": "string",
+            "pattern": "^#[0-9a-fA-F]{6}(?![\\s\\S])"
+          },
+          "primaire": {
+            "type": "string",
+            "pattern": "^#[0-9a-fA-F]{6}(?![\\s\\S])"
+          },
+          "surPrimaire": {
+            "type": "string",
+            "pattern": "^#[0-9a-fA-F]{6}(?![\\s\\S])"
+          },
+          "accent": {
+            "type": "string",
+            "pattern": "^#[0-9a-fA-F]{6}(?![\\s\\S])"
+          },
+          "surAccent": {
+            "type": "string",
+            "pattern": "^#[0-9a-fA-F]{6}(?![\\s\\S])"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Couleurs opaques HEX à six chiffres. Héritage par propriété ; contraste des combinaisons effectives vérifié avant publication."
+      },
+      "illustration": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9_-]+(?![\\s\\S])",
+            "description": "Référence logique opaque dans cette animation, sans solution encodée. Ce n’est ni une URL ni la preuve qu’un fichier existe."
+          },
+          "promptGeneration": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S",
+            "description": "Intention privée destinée au fournisseur d’images et à la relecture ; pas de solution, code, QR ni lieu futur."
+          },
+          "texteAlternatif": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S",
+            "description": "Description accessible du visuel, sans solution ni lieu futur. L’illustration reste facultative pour résoudre le défi."
+          },
+          "style": {
+            "enum": [
+              "ILLUSTRATION",
+              "PHOTO"
+            ],
+            "description": "PHOTO désigne un rendu photographique de fiction ; ne certifie jamais le lieu, son stock ou sa participation."
+          },
+          "ratio": {
+            "const": "16:9"
+          },
+          "format": {
+            "const": "image/webp"
+          }
+        },
+        "required": [
+          "id",
+          "promptGeneration",
+          "texteAlternatif",
+          "style",
+          "ratio",
+          "format"
+        ],
+        "additionalProperties": false,
+        "description": "Description et référence d’une illustration produite dans la même demande de génération. Son image WebP est stockée une seule fois dans medias[]. Les prompts restent privés ; aucune URL ni base64 factice."
+      },
+      "surchargeThemeVisuel": {
+        "type": "object",
+        "properties": {
+          "polices": {
+            "$ref": "#/$defs/policesVisuelles"
+          },
+          "couleurs": {
+            "$ref": "#/$defs/couleursVisuelles"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Surcharge partielle du thème, par propriété ; ne modifie ni navigation, ni disposition, ni règles de jeu."
+      },
+      "themeVisuel": {
+        "type": "object",
+        "properties": {
+          "nom": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "ambiance": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "polices": {
+            "$ref": "#/$defs/policesVisuelles"
+          },
+          "couleurs": {
+            "$ref": "#/$defs/couleursVisuelles"
+          },
+          "illustrationCouverture": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/illustration"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "description": "Thème facultatif de l’animation ; propriétés absentes héritées de Localeo Live. La couverture concerne la fiche et le carnet, pas un repli automatique pour toutes les étapes. nom et ambiance ne sont jamais interprétés comme du CSS."
+      },
+      "presentationEtape": {
+        "type": "object",
+        "properties": {
+          "illustration": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/illustration"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Absente dans une mission : hérite de la position. null : supprime le visuel de la position. Objet : remplace entièrement le visuel ; aucun mélange de prompts."
+          },
+          "themeVisuel": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/surchargeThemeVisuel"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Surcharge par propriété : mission puis position puis animation puis Live. Absence ou null conserve le thème hérité."
+          }
+        },
+        "additionalProperties": false,
+        "description": "Présentation optionnelle de la position ou de sa mission. Aucun script, HTML, CSS, URL ni composant libre."
+      },
+      "mediaEmbarque": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9_-]+(?![\\s\\S])"
+          },
+          "format": {
+            "const": "image/webp"
+          },
+          "largeur": {
+            "enum": [
+              960,
+              768,
+              640
+            ]
+          },
+          "hauteur": {
+            "enum": [
+              540,
+              432,
+              360
+            ]
+          },
+          "octets": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 44000,
+            "description": "Poids binaire décodé, avant base64."
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}(?![\\s\\S])"
+          },
+          "base64": {
+            "type": "string",
+            "minLength": 4,
+            "maxLength": 58668,
+            "contentEncoding": "base64",
+            "contentMediaType": "image/webp",
+            "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?(?![\\s\\S])",
+            "description": "Base64 canonique du vrai WebP, sans préfixe data:, sans espace ni retour ligne. Métadonnées et base64 réunis : objet JSON compact UTF-8 ≤ 60 000 octets, cible 50 000."
+          }
+        },
+        "required": [
+          "id",
+          "format",
+          "largeur",
+          "hauteur",
+          "octets",
+          "sha256",
+          "base64"
+        ],
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "largeur": {
+                  "const": 960
+                }
+              },
+              "required": [
+                "largeur"
+              ]
+            },
+            "then": {
+              "properties": {
+                "hauteur": {
+                  "const": 540
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "largeur": {
+                  "const": 768
+                }
+              },
+              "required": [
+                "largeur"
+              ]
+            },
+            "then": {
+              "properties": {
+                "hauteur": {
+                  "const": 432
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "largeur": {
+                  "const": 640
+                }
+              },
+              "required": [
+                "largeur"
+              ]
+            },
+            "then": {
+              "properties": {
+                "hauteur": {
+                  "const": 360
+                }
+              }
+            }
+          }
+        ],
+        "description": "Une seule image 16:9 pour PC et mobile. La validation applicative décode le WebP, vérifie dimensions réelles, ratio, nombre d’octets, SHA-256, base64 canonique et taille compacte totale ≤ 60 000 octets. Le LLM textuel seul ne peut pas produire ce média."
+      }
+    }
+  },
+  "context_snapshot_json": {
+    "commune": "Latresne, Gironde",
+    "fourchetteEtapes": {
+      "min": 4,
+      "max": 6
+    },
+    "dureeApproximativeMinutes": 60,
+    "public": "Familles et participants de plusieurs générations",
+    "difficulte": "Facile",
+    "themeGeneral": "Halloween : une aventure familiale à petits frissons, drôle et chaleureuse",
+    "commercants": [
+      {
+        "nom": "Lisons sous la pluie",
+        "adresse": "25 avenue de la Libération, 33360 Latresne",
+        "activite": "Librairie"
+      },
+      {
+        "nom": "Mirga",
+        "adresse": "53 avenue de la Libération, 33360 Latresne",
+        "activite": "Fromagerie"
+      },
+      {
+        "nom": "Mode de Biche",
+        "adresse": "2T rue de la Salargue, 33360 Latresne",
+        "activite": "Mode, décoration et fleurs"
+      }
+    ],
+    "poi": [
+      {
+        "nom": "Ancienne gare de Latresne",
+        "adresse": "Avenue de la Libération, 33360 Latresne"
+      },
+      {
+        "nom": "Château de la Salargue",
+        "adresse": "Rue de la Salargue, 33360 Latresne"
+      }
+    ],
+    "orientationExemple": "Deux missions candidates par commerce, fondées sur des éléments matériels à confirmer ; aucune participation effective supposée.",
+    "periodeEnvisagee": {
+      "debut": "2026-10-31T14:00:00+01:00",
+      "fin": "2026-10-31T18:00:00+01:00",
+      "fuseau": "Europe/Paris",
+      "illustrative": true
+    },
+    "directionVisuelle": "Gouache bleu nuit et orange ; découverte intergénérationnelle et cosmopolite ; Oswald / DM Sans ; visuels fictifs."
+  },
+  "source_catalog_not_sent_to_model": {
+    "locations": [
+      {
+        "name": "Ancienne gare de Latresne",
+        "kind": "POI",
+        "address": "Avenue de la Libération, 33360 Latresne",
+        "sourceIds": [
+          "SRC-GARE"
+        ]
+      },
+      {
+        "name": "Lisons sous la pluie",
+        "kind": "MERCHANT",
+        "address": "25 avenue de la Libération, 33360 Latresne",
+        "sourceIds": [
+          "SRC-LIBRAIRIE"
+        ]
+      },
+      {
+        "name": "Mirga",
+        "kind": "MERCHANT",
+        "address": "53 avenue de la Libération, 33360 Latresne",
+        "sourceIds": [
+          "SRC-MIRGA",
+          "SRC-ANNUAIRE"
+        ]
+      },
+      {
+        "name": "Mode de Biche",
+        "kind": "MERCHANT",
+        "address": "2T rue de la Salargue, 33360 Latresne",
+        "sourceIds": [
+          "SRC-ANNUAIRE",
+          "SRC-MODE"
+        ]
+      },
+      {
+        "name": "Château de la Salargue",
+        "kind": "POI",
+        "address": "Rue de la Salargue, 33360 Latresne",
+        "sourceIds": [
+          "SRC-SALARGUE"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "SRC-GARE",
+        "title": "Ancienne gare de Latresne — donnée Office de tourisme de l’Entre-deux-Mers diffusée sur Cirkwi",
+        "url": "https://www.cirkwi.com/fr/point-interet/882729-ancienne-gare-de-latresne",
+        "sourceUpdatedAt": "2025-06-18",
+        "consultedAt": "2026-09-19"
+      },
+      {
+        "id": "SRC-LIBRAIRIE",
+        "title": "Site de la librairie Lisons sous la pluie",
+        "url": "https://lisons-sous-la-pluie.fr/",
+        "sourceUpdatedAt": null,
+        "consultedAt": "2026-09-19"
+      },
+      {
+        "id": "SRC-ANNUAIRE",
+        "title": "Annuaire municipal des commerces de Latresne",
+        "url": "https://www.mairie-latresne.fr/commerces-entreprises-et-artisans/",
+        "sourceUpdatedAt": null,
+        "consultedAt": "2026-09-19"
+      },
+      {
+        "id": "SRC-MIRGA",
+        "title": "Annuaire des entreprises — établissement Fromagerie Mirga Latresne",
+        "url": "https://annuaire-entreprises.data.gouv.fr/entreprise/949096861",
+        "sourceUpdatedAt": null,
+        "consultedAt": "2026-09-19"
+      },
+      {
+        "id": "SRC-MODE",
+        "title": "Site de Mode de Biche",
+        "url": "https://modedebiche.fr/",
+        "sourceUpdatedAt": null,
+        "consultedAt": "2026-09-19"
+      },
+      {
+        "id": "SRC-SALARGUE",
+        "title": "Inventaire du patrimoine — Château de la Salargue, notice IA00056818",
+        "url": "https://pop.culture.gouv.fr/notice/merimee/IA00056818",
+        "sourceUpdatedAt": "2020-02-27",
+        "consultedAt": "2026-09-19"
+      }
+    ]
+  },
+  "generation_parameters_json": {
+    "provider": null,
+    "model": null,
+    "note": "Fournisseur backend non arrêté ; schéma du résultat final assemblé. Les outils de récit, génération image et encodage peuvent nécessiter plusieurs appels dans une même opération. Aucun appel backend exécuté."
+  },
+  "request_hash": "458eb65cdeda23f5c8b2fdd10e0335e6b64323b31a005874d7436058ee2ddecd",
+  "request_hash_algorithm": "SHA-256",
+  "request_hash_scope": "messages_json et response_schema_json : JSON UTF-8, clés triées récursivement, ensure_ascii=false, séparateurs virgule/deux-points sans espaces. Le reste de l’export est hors empreinte et hors requête au modèle."
+}
