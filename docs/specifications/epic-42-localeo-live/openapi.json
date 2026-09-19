@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Live - API backend Epic 42",
     "description": "Vue OpenAPI 3.1 des contrats publics, editoriaux et techniques de Localeo Live.",
-    "version": "1.0.0+96bb488"
+    "version": "1.0.0+43f7495"
   },
   "paths": {
     "/public/exploitation/activites-locales/metriques": {
@@ -3179,6 +3179,49 @@
           "proofDocumentId"
         ],
         "title": "AccepterMandatChorusRequest"
+      },
+      "AccepterMissionChasseInput": {
+        "properties": {
+          "expectedVersion": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Expectedversion"
+          },
+          "presentedRevision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Presentedrevision"
+          },
+          "presentedHash": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Presentedhash"
+          },
+          "missionId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Missionid"
+          },
+          "confirmedRequirementIds": {
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "type": "array",
+            "minItems": 1,
+            "title": "Confirmedrequirementids"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expectedVersion",
+          "presentedRevision",
+          "presentedHash",
+          "missionId",
+          "confirmedRequirementIds"
+        ],
+        "title": "AccepterMissionChasseInput"
       },
       "AccepterResultatGenerationInput": {
         "properties": {
@@ -6562,6 +6605,51 @@
           "commune_id"
         ],
         "title": "ChangerCommuneActiveRequest"
+      },
+      "ChecklistChassePayload": {
+        "properties": {
+          "configurationVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Configurationversion"
+          },
+          "preparationRevision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Preparationrevision"
+          },
+          "reglementVersion": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Reglementversion"
+          },
+          "items": {
+            "$ref": "#/components/schemas/RubriquesChecklistChasse"
+          },
+          "auteurId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Auteurid"
+          },
+          "validatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Validatedat"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "configurationVersion",
+          "preparationRevision",
+          "reglementVersion",
+          "items",
+          "auteurId",
+          "validatedAt"
+        ],
+        "title": "ChecklistChassePayload"
       },
       "ChronologieResponse": {
         "properties": {
@@ -10023,6 +10111,51 @@
         ],
         "title": "CreerMessageContactConsommateurRequest"
       },
+      "CreerQrLieuInput": {
+        "properties": {
+          "expectedVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expectedversion"
+          },
+          "configurationVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Configurationversion"
+          },
+          "poiVersionId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Poiversionid"
+          },
+          "merchantRefId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Merchantrefid"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expectedVersion",
+          "configurationVersion"
+        ],
+        "title": "CreerQrLieuInput"
+      },
       "DashboardOperationnelCommercantPayload": {
         "properties": {
           "commercant_id": {
@@ -11413,6 +11546,84 @@
         ],
         "title": "DossierCommande"
       },
+      "DossierVerificationsPayload": {
+        "properties": {
+          "animationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animationid"
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Version"
+          },
+          "configurationVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Configurationversion"
+          },
+          "preparationRevision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Preparationrevision"
+          },
+          "reglementVersion": {
+            "type": "string",
+            "title": "Reglementversion"
+          },
+          "checklistVersion": {
+            "type": "string",
+            "title": "Checklistversion"
+          },
+          "checklist": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ChecklistChassePayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "missions": {
+            "items": {
+              "$ref": "#/components/schemas/VerificationMissionPayload"
+            },
+            "type": "array",
+            "title": "Missions"
+          },
+          "poi": {
+            "items": {
+              "$ref": "#/components/schemas/VerificationPoiPayload"
+            },
+            "type": "array",
+            "title": "Poi"
+          },
+          "qrs": {
+            "items": {
+              "$ref": "#/components/schemas/QrLieuPreparationPayload"
+            },
+            "type": "array",
+            "title": "Qrs"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "animationId",
+          "version",
+          "configurationVersion",
+          "preparationRevision",
+          "reglementVersion",
+          "checklistVersion",
+          "checklist",
+          "missions",
+          "poi",
+          "qrs"
+        ],
+        "title": "DossierVerificationsPayload"
+      },
       "EchecReconciliationCommandeLotsPayload": {
         "properties": {
           "commande_id": {
@@ -11804,6 +12015,45 @@
           "idempotencyKey"
         ],
         "title": "EmettreFactureLocaleoRequest"
+      },
+      "EnregistrerChecklistInput": {
+        "properties": {
+          "expectedVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expectedversion"
+          },
+          "configurationVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Configurationversion"
+          },
+          "preparationRevision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Preparationrevision"
+          },
+          "reglementVersion": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Reglementversion"
+          },
+          "items": {
+            "$ref": "#/components/schemas/RubriquesChecklistChasse"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expectedVersion",
+          "configurationVersion",
+          "preparationRevision",
+          "reglementVersion",
+          "items"
+        ],
+        "title": "EnregistrerChecklistInput"
       },
       "EnregistrerDepotManuelRequest": {
         "properties": {
@@ -13325,6 +13575,21 @@
         ],
         "title": "GenerationOperationPayload"
       },
+      "GestionDemandeParticipationInput": {
+        "properties": {
+          "expectedVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expectedversion"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expectedVersion"
+        ],
+        "title": "GestionDemandeParticipationInput"
+      },
       "GestionnaireAnimationPayload": {
         "properties": {
           "id": {
@@ -14436,6 +14701,33 @@
           "ordre"
         ],
         "title": "LotAnimationRequest"
+      },
+      "LotPreparationChasse": {
+        "properties": {
+          "coffret_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Coffret Id"
+          },
+          "quantite": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Quantite"
+          },
+          "ordre": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Ordre"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "coffret_id",
+          "quantite",
+          "ordre"
+        ],
+        "title": "LotPreparationChasse"
       },
       "MasquerProfilCommercantRequest": {
         "properties": {
@@ -15905,6 +16197,51 @@
         },
         "type": "object",
         "title": "ModifierDossierRequest"
+      },
+      "ModifierParametresPreparationInput": {
+        "properties": {
+          "expectedVersion": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Expectedversion"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/MetadonneesAnimation"
+          },
+          "schedule": {
+            "$ref": "#/components/schemas/PeriodeAnimation"
+          },
+          "registration": {
+            "$ref": "#/components/schemas/InscriptionAnimation"
+          },
+          "lots": {
+            "items": {
+              "$ref": "#/components/schemas/LotPreparationChasse"
+            },
+            "type": "array",
+            "title": "Lots"
+          },
+          "reglement": {
+            "$ref": "#/components/schemas/ReglementPreparationChasse"
+          },
+          "dateLimiteReponseCommercants": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Datelimitereponsecommercants"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expectedVersion",
+          "metadata",
+          "schedule",
+          "registration",
+          "lots",
+          "reglement",
+          "dateLimiteReponseCommercants"
+        ],
+        "title": "ModifierParametresPreparationInput"
       },
       "ModifierQuotaGenerationInput": {
         "properties": {
@@ -17676,6 +18013,64 @@
         ],
         "title": "PaireDefi"
       },
+      "ParametresPreparationPayload": {
+        "properties": {
+          "animationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animationid"
+          },
+          "expectedVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expectedversion"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/MetadonneesAnimation"
+          },
+          "schedule": {
+            "$ref": "#/components/schemas/PeriodeAnimation"
+          },
+          "registration": {
+            "$ref": "#/components/schemas/InscriptionAnimation"
+          },
+          "lots": {
+            "items": {
+              "$ref": "#/components/schemas/LotPreparationChasse"
+            },
+            "type": "array",
+            "title": "Lots"
+          },
+          "reglement": {
+            "$ref": "#/components/schemas/ReglementPreparationChasse"
+          },
+          "dateLimiteReponseCommercants": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Datelimitereponsecommercants"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "animationId",
+          "expectedVersion",
+          "metadata",
+          "schedule",
+          "registration",
+          "lots",
+          "reglement",
+          "dateLimiteReponseCommercants"
+        ],
+        "title": "ParametresPreparationPayload"
+      },
       "PartenaireAnimationPayload": {
         "properties": {
           "id": {
@@ -19410,6 +19805,36 @@
         ],
         "title": "PromptGenerationResumePayload"
       },
+      "PublicationEnCoursPayload": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "EN_COURS",
+            "title": "Status"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "title": "PublicationEnCoursPayload"
+      },
+      "PublierAnimationInput": {
+        "properties": {
+          "expectedVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expectedversion"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expectedVersion"
+        ],
+        "title": "PublierAnimationInput"
+      },
       "Purchase360Alerts": {
         "properties": {
           "rootKey": {
@@ -19703,6 +20128,69 @@
           "sessions_purgees"
         ],
         "title": "PurgeSessionsCommercantPayload"
+      },
+      "QrLieuPreparationPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "stepId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Stepid"
+          },
+          "poiVersionId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Poiversionid"
+          },
+          "merchantRefId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Merchantrefid"
+          },
+          "revision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Revision"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "PREPARE",
+              "ACTIF",
+              "REVOQUE"
+            ],
+            "title": "Statut"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "stepId",
+          "poiVersionId",
+          "merchantRefId",
+          "revision",
+          "statut"
+        ],
+        "title": "QrLieuPreparationPayload"
       },
       "QrTokenDetailPayload": {
         "properties": {
@@ -20321,6 +20809,133 @@
         ],
         "title": "ReconciliationCommandesLotsPayload"
       },
+      "RecuDecisionMissionPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "animation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animation Id"
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Version"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "ACCEPTEE",
+              "REFUSEE",
+              "ANNULEE"
+            ],
+            "title": "Statut"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "animation_id",
+          "version",
+          "statut"
+        ],
+        "title": "RecuDecisionMissionPayload"
+      },
+      "RecuGestionParticipationPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "animation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animation Id"
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Version"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "EN_ATTENTE",
+              "ANNULEE"
+            ],
+            "title": "Statut"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "animation_id",
+          "version",
+          "statut"
+        ],
+        "title": "RecuGestionParticipationPayload"
+      },
+      "RecuPreparationPayload": {
+        "properties": {
+          "animationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animationid"
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Version"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "animationId",
+          "version"
+        ],
+        "title": "RecuPreparationPayload"
+      },
+      "RecuQrLieuPayload": {
+        "properties": {
+          "animationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animationid"
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Version"
+          },
+          "qrId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Qrid"
+          },
+          "qrRevision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Qrrevision"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "animationId",
+          "version",
+          "qrId",
+          "qrRevision"
+        ],
+        "title": "RecuQrLieuPayload"
+      },
       "ReferenceActualiteAnimationPayload": {
         "properties": {
           "id": {
@@ -20349,6 +20964,45 @@
         ],
         "title": "ReferenceActualiteAnimationPayload"
       },
+      "RefuserMissionChasseInput": {
+        "properties": {
+          "expectedVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expectedversion"
+          },
+          "presentedRevision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Presentedrevision"
+          },
+          "presentedHash": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Presentedhash"
+          },
+          "motif": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 1000
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motif"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expectedVersion",
+          "presentedRevision",
+          "presentedHash"
+        ],
+        "title": "RefuserMissionChasseInput"
+      },
       "RefuserParticipationCommercantRequest": {
         "properties": {
           "motif": {
@@ -20364,6 +21018,7 @@
             "title": "Motif"
           }
         },
+        "additionalProperties": false,
         "type": "object",
         "title": "RefuserParticipationCommercantRequest"
       },
@@ -20404,6 +21059,45 @@
           "motif_refus"
         ],
         "title": "RefuserProfilCommercantVersionRequest"
+      },
+      "ReglementPreparationChasse": {
+        "properties": {
+          "version": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Version"
+          },
+          "titre": {
+            "type": "string",
+            "maxLength": 160,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Titre"
+          },
+          "format": {
+            "type": "string",
+            "const": "MARKDOWN",
+            "title": "Format"
+          },
+          "contenu": {
+            "type": "string",
+            "maxLength": 20000,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Contenu"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "version",
+          "titre",
+          "format",
+          "contenu"
+        ],
+        "title": "ReglementPreparationChasse"
       },
       "ReinitialiserMotDePasseCommercantRequest": {
         "properties": {
@@ -20952,6 +21646,7 @@
             "title": "Motif"
           }
         },
+        "additionalProperties": false,
         "type": "object",
         "title": "RetirerParticipationCommercantRequest"
       },
@@ -21208,6 +21903,57 @@
         },
         "type": "object",
         "title": "RotationSecretLiveRequest"
+      },
+      "RubriqueChecklistChasse": {
+        "properties": {
+          "confirme": {
+            "type": "boolean",
+            "title": "Confirme"
+          },
+          "detail": {
+            "type": "string",
+            "maxLength": 20000,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Detail"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "confirme",
+          "detail"
+        ],
+        "title": "RubriqueChecklistChasse"
+      },
+      "RubriquesChecklistChasse": {
+        "properties": {
+          "horaires": {
+            "$ref": "#/components/schemas/RubriqueChecklistChasse"
+          },
+          "accord_lieux": {
+            "$ref": "#/components/schemas/RubriqueChecklistChasse"
+          },
+          "trajet": {
+            "$ref": "#/components/schemas/RubriqueChecklistChasse"
+          },
+          "accessibilite": {
+            "$ref": "#/components/schemas/RubriqueChecklistChasse"
+          },
+          "consignes": {
+            "$ref": "#/components/schemas/RubriqueChecklistChasse"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "horaires",
+          "accord_lieux",
+          "trajet",
+          "accessibilite",
+          "consignes"
+        ],
+        "title": "RubriquesChecklistChasse"
       },
       "SavePreparationInput": {
         "allOf": [
@@ -21856,6 +22602,73 @@
           "description"
         ],
         "title": "SupportCreate"
+      },
+      "SupportQrLieuPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "revision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Revision"
+          },
+          "poiVersionId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Poiversionid"
+          },
+          "merchantRefId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Merchantrefid"
+          },
+          "stepId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Stepid"
+          },
+          "token": {
+            "type": "string",
+            "maxLength": 128,
+            "minLength": 40,
+            "title": "Token"
+          },
+          "imageBase64": {
+            "type": "string",
+            "maxLength": 200000,
+            "minLength": 1,
+            "title": "Imagebase64"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "revision",
+          "poiVersionId",
+          "merchantRefId",
+          "stepId",
+          "token",
+          "imageBase64"
+        ],
+        "title": "SupportQrLieuPayload"
       },
       "SupportUpdate": {
         "properties": {
@@ -23026,6 +23839,172 @@
         ],
         "title": "ValiderEtapeAnimationRequest"
       },
+      "VerificationMissionPayload": {
+        "properties": {
+          "stepId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Stepid"
+          },
+          "missionId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Missionid"
+          },
+          "presentedHash": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Presentedhash"
+          },
+          "confirme": {
+            "type": "boolean",
+            "title": "Confirme"
+          },
+          "observations": {
+            "type": "string",
+            "maxLength": 20000,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Observations"
+          },
+          "auteurId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Auteurid"
+          },
+          "validatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Validatedat"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "stepId",
+          "missionId",
+          "presentedHash",
+          "confirme",
+          "observations",
+          "auteurId",
+          "validatedAt"
+        ],
+        "title": "VerificationMissionPayload"
+      },
+      "VerificationPoiPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "poiId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Poiid"
+          },
+          "poiVersionId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Poiversionid"
+          },
+          "stepId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Stepid"
+          },
+          "qrId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Qrid"
+          },
+          "qrRevision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Qrrevision"
+          },
+          "responsable": {
+            "type": "string",
+            "maxLength": 20000,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Responsable"
+          },
+          "auteur": {
+            "type": "string",
+            "maxLength": 20000,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Auteur"
+          },
+          "dateVerification": {
+            "type": "string",
+            "format": "date",
+            "title": "Dateverification"
+          },
+          "emplacementQr": {
+            "type": "string",
+            "maxLength": 20000,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Emplacementqr"
+          },
+          "observations": {
+            "type": "string",
+            "maxLength": 20000,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Observations"
+          },
+          "photoMediaId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Photomediaid"
+          },
+          "validatedBy": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Validatedby"
+          },
+          "validatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Validatedat"
+          },
+          "dependencyHash": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Dependencyhash"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "poiId",
+          "poiVersionId",
+          "stepId",
+          "qrId",
+          "qrRevision",
+          "responsable",
+          "auteur",
+          "dateVerification",
+          "emplacementQr",
+          "observations",
+          "photoMediaId",
+          "validatedBy",
+          "validatedAt",
+          "dependencyHash"
+        ],
+        "title": "VerificationPoiPayload"
+      },
       "VerificationProfilCommercantRequest": {
         "properties": {
           "statut": {
@@ -23051,6 +24030,159 @@
           "statut"
         ],
         "title": "VerificationProfilCommercantRequest"
+      },
+      "VerifierMissionInput": {
+        "properties": {
+          "expectedVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expectedversion"
+          },
+          "configurationVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Configurationversion"
+          },
+          "stepId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Stepid"
+          },
+          "missionId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Missionid"
+          },
+          "presentedHash": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Presentedhash"
+          },
+          "confirme": {
+            "type": "boolean",
+            "title": "Confirme"
+          },
+          "observations": {
+            "type": "string",
+            "maxLength": 20000,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Observations"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expectedVersion",
+          "configurationVersion",
+          "stepId",
+          "missionId",
+          "presentedHash",
+          "confirme",
+          "observations"
+        ],
+        "title": "VerifierMissionInput"
+      },
+      "VerifierPoiInput": {
+        "properties": {
+          "expectedVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expectedversion"
+          },
+          "configurationVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Configurationversion"
+          },
+          "preparationRevision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Preparationrevision"
+          },
+          "stepId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Stepid"
+          },
+          "poiVersionId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Poiversionid"
+          },
+          "qrId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Qrid"
+          },
+          "qrRevision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Qrrevision"
+          },
+          "responsable": {
+            "type": "string",
+            "maxLength": 20000,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Responsable"
+          },
+          "auteur": {
+            "type": "string",
+            "maxLength": 20000,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Auteur"
+          },
+          "dateVerification": {
+            "type": "string",
+            "format": "date",
+            "title": "Dateverification"
+          },
+          "emplacementQr": {
+            "type": "string",
+            "maxLength": 20000,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Emplacementqr"
+          },
+          "observations": {
+            "type": "string",
+            "maxLength": 20000,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Observations"
+          },
+          "photoMediaId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Photomediaid"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expectedVersion",
+          "configurationVersion",
+          "preparationRevision",
+          "stepId",
+          "poiVersionId",
+          "qrId",
+          "qrRevision",
+          "responsable",
+          "auteur",
+          "dateVerification",
+          "emplacementQr",
+          "observations"
+        ],
+        "title": "VerifierPoiInput"
       },
       "VersionCommande": {
         "properties": {

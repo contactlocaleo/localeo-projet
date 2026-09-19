@@ -22,7 +22,7 @@ Le thème visuel de l’animation peut être complété par une illustration et 
 
 Le [lot technique du 19 septembre 2026](conception-technique.md) fixe les six sujets : contrats de production, stockage/versions, concurrence/reprise, API/droits/projections, médias/budgets et exploitation/recette. Il s’appuie sur le code existant et définit les lots T1–T6 avec leurs preuves de sortie. Les décisions métier restent dans la spécification ; le [suivi T1–T6](suivi-implementation.md) distingue les mécanismes implémentés, leurs tests et ce qui reste à raccorder.
 
-Le lot T2 est implémenté et vérifié localement : génération manuelle, quota, worker, import des WebP, préparation guidée, console ERP, POI et bibliothèque privée. La publication Chasse reste contrôlée par les travaux T3 ; voir le [compte rendu](suivi-implementation.md#t2--générer-et-préparer).
+Le lot T2 est implémenté et vérifié localement : génération manuelle, quota, worker, import des WebP, préparation guidée, console ERP, POI et bibliothèque privée. Le lot T3 complète les accords, contrôles, QR, compilation et publication, vérifiés localement ; voir le [compte rendu](suivi-implementation.md). Le jeu et l’exploitation restent à raccorder en T4/T5.
 
 ## Exemples et documents d’entrée
 
@@ -32,7 +32,7 @@ Le lot T2 est implémenté et vérifié localement : génération manuelle, quot
 
 [Retour à l’index des spécifications](../INDEX.md)
 
-La préparation des chasses prévoit désormais des missions alternatives à confirmer par chaque commerçant (TRE-ARB-89, section 8.1.1), raccordées aux demandes de participation EPIC 56. Le parcours publié ne conserve que les missions acceptées ; cette évolution est à réaliser.
+La préparation des chasses prévoit désormais des missions alternatives à confirmer par chaque commerçant (TRE-ARB-89, section 8.1.1), raccordées aux demandes de participation EPIC 56. Le parcours publié ne conserve que les missions acceptées ; cette préparation est implémentée en T3.
 
 ## Support UX Localeo Live
 
