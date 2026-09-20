@@ -397,3 +397,37 @@ génération qui les utilise. Aucun remplissage automatique n’est prévu.
 Un commit local par dépôt modifié, sur `feat-moteur-animation`. Cette livraison
 ne comprend ni push ni déploiement, et la migration n’a été exécutée que sur la
 base de test jetable locale.
+
+
+## Correctif — lecture de la préparation absente (20 septembre 2026)
+
+Signalement : `GET /protected/animation-locale/animations/{id}/preparation`
+retournait 404 pour un brouillon existant sans parcours enregistré. La projection
+`PreparationPayload` prévoyait déjà un contenu nul, mais le service rejetait
+cet état avant de construire la réponse. La précision est tracée en **T6-UX04**
+dans la [conception technique](conception-technique.md#t6-ux04--consultation-dune-animation-en-preparation).
+
+- **Backend :** consultation autorisée sans parcours en 200 (`revision: 0`,
+  `sourceOperationId: null`, `preparation: null`). Vérification du partenaire,
+  de la commune et de la permission avant cette réponse. Les commandes restent
+  conditionnées à l'existence du parcours ; aucune donnée n'est créée par le GET.
+- **Localeo Animation :** les vérifications attendent une préparation non nulle.
+  Le brief et les paramètres restent consultables ; une nouvelle lecture après
+  acceptation charge le parcours et ses contrôles habituels.
+- **Contrats :** même DTO et mêmes schémas embarqués, sans migration. Livrer
+  l'interface Animation avant le backend pour qu'elle gère la réponse vide.
+
+Vérifications locales :
+
+| Contrôle | Résultat |
+| --- | --- |
+| API : `test_preparation_animation_lecture.py`, `test_generation_animation_api_t2.py`, `test_generation_animation_integration_review_t2.py` avec le lanceur isolé | 36 réussites : lecture répétée sans parcours, parcours existant, inconnue, autre partenaire/commune, absence de permission, édition refusée sans parcours. Ports mémoire, aucune base distante. |
+| Architecture et recensement | 416 réussites ; deux échecs préexistants de recensement des classes du domaine et des use cases, déjà documentés dans le contrôle d'architecture. Aucun changement de ces classes ni de ces contrôles. |
+| Animation : TypeScript, ESLint, `scripts/build-generation-tests.mjs` | Réussis ; avertissement existant sur la taille du bundle supérieur à 500 ko. Build sans environnement opérateur. |
+| Animation : `tests/browser/hunt-preparation.mjs` | 30 contrôles réussis, API simulée à 390/1280 px : brouillon sans alerte ni vérification prématurée, parcours accepté, invitations, QR, vérifications et publication. |
+| Documentation | Liens et sources exportées vérifiés. |
+
+Livraison sur `feat-moteur-animation` ; déployer Localeo Animation avant le backend. Le push Git ne constitue pas une vérification du déploiement.
+Le 500 précédemment signalé sur `validation-publication` n'a pas été reproduit
+dans le diagnostic métier ; ce correctif du 404 ne constitue pas une résolution
+confirmée de ce second incident.
