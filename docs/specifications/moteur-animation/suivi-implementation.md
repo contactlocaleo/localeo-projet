@@ -335,3 +335,65 @@ Contrats vérifiés : 97 DTO identiques dans chacun des trois consommateurs ; ex
 - **Correction backend `cceca57` :** la matérialisation ne génère plus de reçu par type de coffret. La liste et le téléchargement de la commande proposent le reçu consolidé avec toutes les lignes, quantités, montants et total. Les anciens reçus unitaires restent archivés et sont exclus de ce parcours ; les autres documents historiques restent accessibles. Snapshots BUM conservés. Les achats hors animation gardent leur fonctionnement et la confirmation email reste unique en cas de rejeu. La déclaration d’encodage du PDF est corrigée pour préserver les noms accentués des coffrets.
 - **Preuves : 68 tests ciblés réussis.** 21 tests sur le reçu unique, PDF réel, archives, téléchargement, commandes impayées/autre animation, snapshots, rejeu et traitement de la commande ; 47 tests sur le paiement hors animation et la préparation des emails. Nouveau fichier : `tests/application/animation_locale/test_recu_unique_commande_lots.py`. `git diff --check` réussi. Aucun contrat API ni migration modifié. Le rendu détaillé du financement crédit/Stripe n’a pas été étendu par ce correctif.
 - **Mise en service :** déployer le backend ; le filtrage s’applique aussi aux commandes déjà payées, sans supprimer de fichier ni régénérer leurs acquisitions. Aucun email réel, paiement réel ou déploiement effectué pendant les tests.
+
+
+## Évolution transverse — Adresse postale du commerce (20 septembre 2026)
+
+La demande utilisateur est implémentée selon la [spécification commune de
+l’adresse](../espace-commercant/adresse-postale.md). Les décisions de périmètre
+sont tracées : France, adresse de l’établissement distincte de l’adresse fiscale,
+absence historique conservée sans valeur inventée, pas de validation externe de
+l’existence du lieu ni de révocation des comptes actifs.
+
+### Livraison
+
+| Dépôt | Éléments livrés |
+| --- | --- |
+| Backend | Objet-valeur `AdressePostale`, normalisation postale, migration additive v247, persistance et projections ; modification de sa propre adresse avec version ; ERP, backoffice SQLAdmin et Onboard lisent et modifient la même fiche. |
+| Backend — Onboard | Contrôle obligatoire `POSTAL_ADDRESS_COMPLETE` ; validation, revalidation et clôture bloquées sans adresse complète ; saisie en création et édition, conservation si champ omis, effacement explicite refusé. |
+| Animation | Suppression de la saisie d’adresse propre à l’animation. Brief entrant `{id, faits}` par commerçant ; nom et adresse résolus côté serveur. Affichage de l’adresse de la fiche et blocage explicite si elle manque. Révision dans l’ERP adaptée. |
+| Commerçant | Formulaire d’adresse dans le profil, disponible en préparation du compte ; enregistrement versionné, erreurs, conflit et relecture après réponse incertaine. |
+| Marketplace / Live | Contrats du moteur régénérés. La projection backend du Passeport expose l’adresse canonique quand elle existe. Aucun changement du rendu ou stockage navigateur. |
+| Projet central | Règle canonique, contrats API, Onboard, T2-D04 et T2-D14 mis à jour ; OpenAPI documentaire régénéré. |
+
+Les snapshots historiques restent lisibles. Les prompts, résultats et parcours
+déjà publiés conservent leur contenu ; un changement d’adresse pendant une
+génération en attente est détecté comme contexte obsolète. Les nouveaux prompts
+portent la provenance `FICHE_COMMERCANT`. Le schéma de réponse créative du LLM
+reste inchangé.
+
+### Preuves exécutées
+
+Les tests Python utilisent `python scripts/validation/test_isolated.py`, sans
+configuration opérateur. Les tests navigateur utilisent des API simulées et
+des builds isolés. Les commandes sont exécutées à la racine du dépôt concerné.
+
+| Vérification | Résultat |
+| --- | --- |
+| Backend : objet-valeur, use case, API, persistance et référencement (`test_adresse_postale_dedicated.py`, `test_mettre_a_jour_adresse_postale_commercant.py`, `test_adresse_postale_commercant_api.py`, `test_adresse_postale_commercant.py`, `test_referencement_use_cases.py`) | 63 tests réussis : normalisation, limites postales, droits, version et écritures concurrentes, null historique, refus d’effacement. |
+| Backend : Onboard, ERP, droits et backoffice | Ensemble ciblé : 99 réussites ; fichier `tests/application/conformite_fiscale_bum/test_adresse_onboard_erp.py` : 22 réussites après deux preuves supplémentaires (rejet du null ERP et formulaire SQLAdmin réel). |
+| Backend : génération et contrats | 112 tests réussis ; projection Live/Passeport : 6 réussites. Adresse serveur, refus d’adresse client ou manquante, changement de contexte et conservation du snapshot vérifiés. |
+| PostgreSQL jetable | Migration v247 : 2 réussites. Suite `test_generation_animation_postgres.py` : 23 réussites puis dernier scénario de chasse illustrée réussi après adaptation de sa fixture au brief par références (24 scénarios couverts). |
+| Architecture | 416 réussites ; les deux contrôles de recensement préexistants restent en échec, sur les mêmes huit classes et trois use cases documentés le 18 septembre. L’objet-valeur et le use case ajoutés possèdent leurs tests dédiés. Aucune exclusion ni assertion affaiblie. |
+| Animation | `node --test tests/animation-engine-registry.test.mjs tests/generation-http-contracts.test.mjs tests/generation-preparation.test.mjs` : 13 réussites ; types, lint et build isolé réussis. Avertissement de taille de bundle supérieur à 500 ko déjà présent. |
+| Animation / ERP — génération | Recette `tests/browser/generation-preparation.mjs` : 26 contrôles à 390/1280 px ; `tests/browser/generation-erp.cjs` réussi aux deux tailles. Révision sans adresse client vérifiée. |
+| Commerçant | Vitest : contrats API et formulaire d’adresse, 34 réussites ; formulaire d’adresse et section contrat, 12 réussites. Playwright `tests/e2e/merchant-address.spec.js tests/e2e/workspaces.spec.js --workers=1` : 3 réussites, dont saisie à 390/1280 px. |
+| ERP / Onboard | `node tests/browser/adresse-commercant-erp-onboard.cjs` réussi à 390/1280 px : création, édition, absence historique, invalidité, non-effacement et protections de session/version. Pagination JavaScript : 2 réussites. Formulaire SQLAdmin structuré réellement généré et contrôlé. |
+| Marketplace | `node --test tests/security/animation-engine-registry.test.cjs tests/security/live-game.test.cjs` : 9 réussites. |
+| Exports | 97 fichiers du moteur vérifiés dans chacun des trois consommateurs. OpenAPI Animation, Commerçant et EPIC 41 : 610 chemins conformes ; projection Live EPIC 42 : 45. Comparaison avec la génération backend isolée, hors métadonnée SHA de build. |
+
+Captures des formulaires et de la préparation Animation inspectées sur mobile et
+bureau. La suite métier complète et la CI distante ne sont pas annoncées comme
+exécutées. Aucun message, email ou paiement réel n’a été envoyé par ces recettes.
+
+### Mise en service
+
+Appliquer **v247**, puis déployer le backend et les frontends correspondants.
+Onboard, ERP et backoffice font partie du déploiement backend. Les nouveaux
+frontends exigent le contrat mis à jour ; coordonner leur livraison.
+Compléter les fiches historiques avant validation de leur onboarding ou nouvelle
+génération qui les utilise. Aucun remplissage automatique n’est prévu.
+
+Un commit local par dépôt modifié, sur `feat-moteur-animation`. Cette livraison
+ne comprend ni push ni déploiement, et la migration n’a été exécutée que sur la
+base de test jetable locale.

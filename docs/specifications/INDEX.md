@@ -16,7 +16,7 @@ Commencer par le README du sujet, puis consulter ses règles, contrats et arbitr
 | --- | --- | --- |
 | [Identité et accès](identite-acces/README.md) | Authentification, sessions, activation, accès aux coffrets | Backend, Animation, Commerçant, Marketplace |
 | [Validation des prestations](validation-prestations/README.md) | Scan client, QR et contrats API | Backend, Commerçant, Marketplace |
-| [Espace commerçant](espace-commercant/README.md) | Vue fonctionnelle et contrats consommés | Backend, Commerçant |
+| [Espace commerçant](espace-commercant/README.md) | Vue fonctionnelle, contrats et [adresse postale](espace-commercant/adresse-postale.md) | Backend, Commerçant, Animation, Onboard |
 | [Sécurisation de la production](securisation-production/README.md) | Correctifs d'audit, intégrité, accessibilité et résilience | Backend et trois interfaces |
 
 ## Spécifications par EPIC

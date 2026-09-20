@@ -1,5 +1,7 @@
 # Espace commerçant — spécification fonctionnelle et technique
 
+Voir également l’[adresse postale du commerce](adresse-postale.md), règle commune aux profils, à Onboard et aux animations (20 septembre 2026).
+
 ## 1. Objet
 
 Les [règles de correction de l'audit](../securisation-production/corrections-commercant-2026-09-05.md) complètent cette spécification et prévalent pour les comportements corrigés.

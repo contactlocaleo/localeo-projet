@@ -176,9 +176,13 @@ indisponible ; la validation de la prestation ou de l’étape reste à confirme
 
 L'[exporteur du dépôt commerçant](../../../../localeo-commercant/scripts/export-openapi.py) utilise `localeo-backend/app.main:app` via le [lanceur isolé](../../../../localeo-backend/scripts/validation/test_isolated.py), sans charger dotenv ni ouvrir de connexion réseau. Il écrit uniquement `api/localeo-openapi.json` ; aucune copie `docs/openapi.json` n'est produite.
 
-Constat au 18 septembre 2026 : le fichier et son dossier `api/` sont absents après leur suppression dans le dépôt commerçant. [contracts.test.js](../../../../localeo-commercant/src/lib/api/contracts.test.js) importe toujours le fichier, et [check-deployment.mjs](../../../../localeo-commercant/scripts/check-deployment.mjs) le lit pour comparer un déploiement. Ces contrôles ne peuvent pas être déclarés réussis en cet état.
-
-L'exporteur nécessite les dépendances Python du backend voisin et un dossier de sortie existant : il ne crée pas `api/`. Les prérequis sont dans le [README commerçant](../../../../localeo-commercant/README.md#contrat-openapi-manquant). Le [contrat documentaire canonique EPIC 41](../epic-41-api/openapi.json) reste consultable, mais les consommateurs ci-dessus ne le chargent pas automatiquement. Cette mise à jour ne restaure ni ne génère d'artefact. Un export décrit le code local ; il ne prouve pas son déploiement.
+Le contrat embarqué a été restauré depuis ce constat historique et régénéré le
+20 septembre 2026 pour l’adresse postale (610 chemins). L’exporteur crée son
+dossier de sortie si nécessaire. Les prérequis et la commande sont dans le
+[README commerçant](../../../../localeo-commercant/README.md#contrat-openapi-embarqué).
+Le [contrat documentaire canonique EPIC 41](../epic-41-api/openapi.json) est généré
+depuis le même backend ; les consommateurs utilisent leur propre export.
+Un export décrit le code local et ne prouve pas son déploiement.
 
 ### Contrat signé du commerçant
 
@@ -191,3 +195,8 @@ avec la même session, et enregistre le fichier original sous son nom documentai
 Le serveur contrôle le rattachement au commerçant. Aucun modèle public de contrat
 ne remplace le document personnel ; l’absence et les erreurs restent explicites.
 Raccourci « Mon contrat » dans le menu Compte et dans la préparation du compte.
+
+
+## Adresse postale du commerce — 20 septembre 2026
+
+Le profil inclut `adresse_postale` et `version_referentiel`. Le commerce connecté peut modifier sa propre adresse avec `PATCH /protected/referencement/commercants/me/adresse-postale`, corps `{adresse_postale, version_referentiel}`. La structure, les contrôles et les droits sont définis dans la [spécification commune](adresse-postale.md).

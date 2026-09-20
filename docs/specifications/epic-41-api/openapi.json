@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Backend - contrat implemente EPIC 41",
     "description": "OpenAPI complet du backend, dont les parcours Animation locale. Genere hors ligne depuis le code local pour les integrations et les mocks ; cet instantane ne prouve pas son deploiement.",
-    "version": "1.0.0+4e7b1fc"
+    "version": "1.0.0+cceca57"
   },
   "paths": {
     "/internal/erp/api/instances": {
@@ -22229,6 +22229,112 @@
               }
             },
             "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/referencement/commercants/me/adresse-postale": {
+      "patch": {
+        "tags": [
+          "Referencement"
+        ],
+        "summary": "Mettre A Jour Mon Adresse Postale Commercant",
+        "operationId": "mettre_a_jour_mon_adresse_postale_commercant_protected_referencement_commercants_me_adresse_postale_patch",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:profil`.",
+              "title": "Authorization"
+            },
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:profil`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MettreAJourAdressePostaleCommercantRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdressePostaleCommercantMiseAJourPayload"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
           }
         },
         "security": [
@@ -50911,7 +51017,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/EligibleAnimationPayload"
+                    "$ref": "#/components/schemas/CommercantEligibleAnimationPayload"
                   },
                   "title": "Response Lister Commercants Eligibles Animation"
                 }
@@ -61271,6 +61377,115 @@
         ],
         "title": "AdresseFacturationCommandeLotsRequest"
       },
+      "AdressePostaleCommercantMiseAJourPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "adresse_postale": {
+            "$ref": "#/components/schemas/AdressePostalePayload"
+          },
+          "version_referentiel": {
+            "type": "integer",
+            "title": "Version Referentiel"
+          },
+          "date_modification": {
+            "type": "string",
+            "title": "Date Modification"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "adresse_postale",
+          "version_referentiel",
+          "date_modification"
+        ],
+        "title": "AdressePostaleCommercantMiseAJourPayload"
+      },
+      "AdressePostalePayload": {
+        "properties": {
+          "complement_destinataire": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 38
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Complement Destinataire",
+            "description": "Ligne 2 : service, étage, appartement."
+          },
+          "complement_geographique": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 38
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Complement Geographique",
+            "description": "Ligne 3 : bâtiment, résidence, entrée."
+          },
+          "voie": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 38
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Voie",
+            "description": "Ligne 4 : numéro, complément du numéro et libellé de voie."
+          },
+          "lieu_dit": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 38
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lieu Dit",
+            "description": "Ligne 5 : lieu-dit ou distribution spéciale."
+          },
+          "code_postal": {
+            "type": "string",
+            "pattern": "^[0-9]{5}$",
+            "title": "Code Postal",
+            "description": "Code postal français à cinq chiffres, zéros initiaux conservés."
+          },
+          "localite": {
+            "type": "string",
+            "maxLength": 32,
+            "minLength": 1,
+            "title": "Localite",
+            "description": "Localité postale : ligne 6 avec le code postal, 38 caractères maximum."
+          },
+          "pays": {
+            "type": "string",
+            "const": "FR",
+            "title": "Pays",
+            "default": "FR"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "code_postal",
+          "localite"
+        ],
+        "title": "AdressePostalePayload"
+      },
       "AdressePrefillFacturationPayload": {
         "properties": {
           "ligne1": {
@@ -63464,7 +63679,7 @@
         "properties": {
           "commercants": {
             "items": {
-              "$ref": "#/components/schemas/LieuBrief"
+              "$ref": "#/components/schemas/ReferenceCommercantBrief"
             },
             "type": "array",
             "title": "Commercants"
@@ -63517,7 +63732,105 @@
         ],
         "title": "BriefGenerationChasse"
       },
+      "BriefGenerationChasseSnapshot": {
+        "properties": {
+          "commercants": {
+            "items": {
+              "$ref": "#/components/schemas/LieuBrief"
+            },
+            "type": "array",
+            "title": "Commercants"
+          },
+          "poi": {
+            "items": {
+              "$ref": "#/components/schemas/LieuBrief"
+            },
+            "type": "array",
+            "title": "Poi"
+          },
+          "nombreEtapes": {
+            "$ref": "#/components/schemas/FourchetteEtapes"
+          },
+          "dureeCibleMinutes": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Dureecibleminutes"
+          },
+          "publicVise": {
+            "type": "string",
+            "maxLength": 500,
+            "minLength": 1,
+            "title": "Publicvise"
+          },
+          "difficulte": {
+            "type": "string",
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Difficulte"
+          },
+          "theme": {
+            "type": "string",
+            "maxLength": 20000,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Theme"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "commercants",
+          "poi",
+          "nombreEtapes",
+          "dureeCibleMinutes",
+          "publicVise",
+          "difficulte",
+          "theme"
+        ],
+        "title": "BriefGenerationChasseSnapshot"
+      },
       "BriefGenerationPasseport": {
+        "properties": {
+          "commercants": {
+            "items": {
+              "$ref": "#/components/schemas/ReferenceCommercantBrief"
+            },
+            "type": "array",
+            "minItems": 1,
+            "title": "Commercants"
+          },
+          "theme": {
+            "type": "string",
+            "maxLength": 20000,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Theme"
+          },
+          "ton": {
+            "type": "string",
+            "maxLength": 20000,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Ton"
+          },
+          "langue": {
+            "type": "string",
+            "maxLength": 10,
+            "minLength": 2,
+            "title": "Langue",
+            "default": "fr"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "commercants",
+          "theme",
+          "ton"
+        ],
+        "title": "BriefGenerationPasseport"
+      },
+      "BriefGenerationPasseportSnapshot": {
         "properties": {
           "commercants": {
             "items": {
@@ -63556,7 +63869,7 @@
           "theme",
           "ton"
         ],
-        "title": "BriefGenerationPasseport"
+        "title": "BriefGenerationPasseportSnapshot"
       },
       "CampagneTransfersStripePayload": {
         "properties": {
@@ -65627,6 +65940,16 @@
       },
       "CommercantCommande": {
         "properties": {
+          "adresse_postale": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AdressePostalePayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "nom": {
             "type": "string",
             "maxLength": 200,
@@ -65779,6 +66102,58 @@
         "type": "object",
         "title": "CommercantContactPayload"
       },
+      "CommercantEligibleAnimationPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "nom": {
+            "type": "string",
+            "title": "Nom"
+          },
+          "eligible": {
+            "type": "boolean",
+            "title": "Eligible"
+          },
+          "raisons_non_eligibilite": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Raisons Non Eligibilite"
+          },
+          "metadata": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Metadata"
+          },
+          "adresse_postale": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AdressePostalePayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "version_referentiel": {
+            "type": "integer",
+            "title": "Version Referentiel",
+            "default": 1
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "nom",
+          "eligible",
+          "raisons_non_eligibilite"
+        ],
+        "title": "CommercantEligibleAnimationPayload"
+      },
       "CommercantPayload": {
         "properties": {
           "id": {
@@ -65841,6 +66216,21 @@
             ],
             "title": "Vignette Url",
             "description": "URL publique de la vignette du commerçant."
+          },
+          "adresse_postale": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AdressePostalePayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "version_referentiel": {
+            "type": "integer",
+            "title": "Version Referentiel",
+            "default": 1
           },
           "contact": {
             "$ref": "#/components/schemas/CommercantContactPayload",
@@ -67342,6 +67732,16 @@
       },
       "CreerCommercantEtDossierRequest": {
         "properties": {
+          "adressePostale": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AdressePostalePayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "nom": {
             "type": "string",
             "maxLength": 300,
@@ -68849,6 +69249,65 @@
         ],
         "title": "DemandeGenerationChasse"
       },
+      "DemandeGenerationChasseSnapshot": {
+        "properties": {
+          "animation_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Animation Id"
+          },
+          "type": {
+            "type": "string",
+            "const": "CHASSE_TRESOR_COMMERCANTE",
+            "title": "Type"
+          },
+          "engine_contract_version": {
+            "type": "string",
+            "const": "1.0",
+            "title": "Engine Contract Version"
+          },
+          "expectedVersion": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Expectedversion"
+          },
+          "initialisation": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/InitialisationGeneration"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "brief": {
+            "$ref": "#/components/schemas/BriefGenerationChasseSnapshot"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "type",
+          "engine_contract_version",
+          "brief"
+        ],
+        "title": "DemandeGenerationChasseSnapshot"
+      },
       "DemandeGenerationInput": {
         "oneOf": [
           {
@@ -68925,6 +69384,65 @@
           "brief"
         ],
         "title": "DemandeGenerationPasseport"
+      },
+      "DemandeGenerationPasseportSnapshot": {
+        "properties": {
+          "animation_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Animation Id"
+          },
+          "type": {
+            "type": "string",
+            "const": "PASSEPORT_COMMERCANT",
+            "title": "Type"
+          },
+          "engine_contract_version": {
+            "type": "string",
+            "const": "1.0",
+            "title": "Engine Contract Version"
+          },
+          "expectedVersion": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Expectedversion"
+          },
+          "initialisation": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/InitialisationGeneration"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "brief": {
+            "$ref": "#/components/schemas/BriefGenerationPasseportSnapshot"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "type",
+          "engine_contract_version",
+          "brief"
+        ],
+        "title": "DemandeGenerationPasseportSnapshot"
       },
       "DemandeLienInscriptionAnimationPayload": {
         "properties": {
@@ -72058,17 +72576,17 @@
               {
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/DemandeGenerationChasse"
+                    "$ref": "#/components/schemas/DemandeGenerationChasseSnapshot"
                   },
                   {
-                    "$ref": "#/components/schemas/DemandeGenerationPasseport"
+                    "$ref": "#/components/schemas/DemandeGenerationPasseportSnapshot"
                   }
                 ],
                 "discriminator": {
                   "propertyName": "type",
                   "mapping": {
-                    "CHASSE_TRESOR_COMMERCANTE": "#/components/schemas/DemandeGenerationChasse",
-                    "PASSEPORT_COMMERCANT": "#/components/schemas/DemandeGenerationPasseport"
+                    "CHASSE_TRESOR_COMMERCANTE": "#/components/schemas/DemandeGenerationChasseSnapshot",
+                    "PASSEPORT_COMMERCANT": "#/components/schemas/DemandeGenerationPasseportSnapshot"
                   }
                 }
               },
@@ -74385,6 +74903,25 @@
         ],
         "title": "MetriquesExploitationPayload"
       },
+      "MettreAJourAdressePostaleCommercantRequest": {
+        "properties": {
+          "adresse_postale": {
+            "$ref": "#/components/schemas/AdressePostalePayload"
+          },
+          "version_referentiel": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Version Referentiel"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "adresse_postale",
+          "version_referentiel"
+        ],
+        "title": "MettreAJourAdressePostaleCommercantRequest"
+      },
       "MettreAJourContactCommercantRequest": {
         "properties": {
           "contact_nom": {
@@ -75274,6 +75811,16 @@
       },
       "ModifierCommercantCommande": {
         "properties": {
+          "adresse_postale": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AdressePostalePayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "nom": {
             "type": "string",
             "maxLength": 200,
@@ -75667,6 +76214,16 @@
       },
       "ModifierReferentielCommercantRequest": {
         "properties": {
+          "adressePostale": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AdressePostalePayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "nom": {
             "anyOf": [
               {
@@ -79391,6 +79948,21 @@
             "title": "Vignette Url",
             "description": "URL publique de la vignette du commerçant."
           },
+          "adresse_postale": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AdressePostalePayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "version_referentiel": {
+            "type": "integer",
+            "title": "Version Referentiel",
+            "default": 1
+          },
           "contact": {
             "$ref": "#/components/schemas/CommercantContactPayload",
             "description": "Coordonnées de contact du commerçant."
@@ -81963,6 +82535,33 @@
           "commune"
         ],
         "title": "ReferenceActualiteAnimationPayload"
+      },
+      "ReferenceCommercantBrief": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "faits": {
+            "items": {
+              "type": "string",
+              "maxLength": 20000,
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "type": "array",
+            "title": "Faits"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "faits"
+        ],
+        "title": "ReferenceCommercantBrief",
+        "description": "Le client référence la fiche ; le serveur photographie son nom et son adresse."
       },
       "RefuserMissionChasseInput": {
         "properties": {

@@ -1,5 +1,14 @@
 # Epic 50 - Onboarding commercant mobile
 
+## Adresse du commerce obligatoire — 20 septembre 2026
+
+L’[adresse postale de la fiche commerçant](../espace-commercant/adresse-postale.md)
+est saisissable dans Onboard et requise pour valider ou revalider le dossier.
+Le contrôle `POSTAL_ADDRESS_COMPLETE` ne peut pas être remplacé par une adresse
+de facturation ou une commune de rattachement. Les vues ERP et le portail
+Commerçant partagent cette source et sa validation.
+
+
 ## Pagination du portefeuille - 12 septembre 2026
 
 `GET /internal/onboard/api/dossiers` conserve le champ `dossiers` et ajoute
