@@ -660,7 +660,25 @@ La consultation du brouillon ne suppose pas de définition publiée. L’onglet 
 
 Précision du 20 septembre 2026 : pour une animation existante dans le périmètre autorisé, `GET /animations/{animation_id}/preparation` retourne **200** avec `revision: 0`, `sourceOperationId: null` et `preparation: null` tant qu'aucun parcours n'est enregistré. Ce cas est déjà prévu par `PreparationPayload` ; il ne représente ni une préparation validée ni une autorisation de publier. Le client attend une préparation non nulle avant les vérifications. Les animations inexistantes ou hors périmètre restent en **404**, les permissions manquantes en **403**. Les commandes d'édition et leurs reçus continuent d'exiger une préparation existante. Aucun schéma, migration ou contrat embarqué supplémentaire n'est nécessaire.
 
+La consultation `GET /animations/{animation_id}/validation-publication` doit également accepter un brouillon créé par la génération avant le choix des lots : une clé `lots` absente, nulle ou vide représente une sélection vide pour le contrôle d’éligibilité. Le rapport reste en **200** avec `valide: false` et les prérequis métier non satisfaits (préparation, participation, financement). Les commerçants et coffrets effectivement sélectionnés restent contrôlés. Aucune configuration n’est complétée ni enregistrée par cette lecture ; la publication reste refusée tant que les conditions requises ne sont pas remplies. Les droits, le périmètre, le contrat de réponse et les règles de financement restent inchangés.
+
 Les onglets Validations et Live d’une animation avant publication présentent un état explicatif et un accès à Configuration ; ils ne demandent pas encore les données d’exploitation d’une définition publiée. Le statut serveur guide cette présentation, sans remplacer les autorisations backend. L’API des participants retourne une page vide pour une animation BROUILLON ou CONFIGUREE sans configuration publiée seulement si le compteur réel de participations est nul, après contrôle des droits et du périmètre. Une participation présente sans définition, ou une animation publiée sans définition, reste une incohérence signalée. Aucun parcours ni participant fictif n’est produit ; inscription, jeu et validation conservent leurs prérequis de publication. Aucun changement de contrat ou de migration.
+
+### T6-UX05 — Lectures partagées dans la configuration
+
+L'ouverture de la configuration d'une Chasse effectue une seule lecture des
+modèles, des commerçants éligibles et de la préparation. Le détail transmet le
+modèle au formulaire ; le bloc limité au financement ne charge pas le catalogue
+des commerçants. L'éditeur et les vérifications consomment la même lecture du
+parcours, conservée en mémoire uniquement pendant la présence de cet écran.
+
+Une sauvegarde confirmée relit le parcours une fois et transmet cette version aux
+vérifications. Une actualisation explicite relit le serveur ; les erreurs restent
+visibles et peuvent être reprises. Les vérifications attendent une préparation
+non nulle ; elles sont réévaluées après changement des paramètres communs.
+Les réponses tardives d'un écran ou contexte quitté ne doivent pas rétablir ses
+données. Aucun cache persistant ni délai de fraîcheur n'est introduit ; les
+contrats backend, contrôles d'accès et commandes idempotentes restent inchangés.
 
 ### T6-FIN01 — Un reçu de paiement pour les lots de l’animation
 

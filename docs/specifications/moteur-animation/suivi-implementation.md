@@ -431,3 +431,81 @@ Livraison sur `feat-moteur-animation` ; déployer Localeo Animation avant le bac
 Le 500 précédemment signalé sur `validation-publication` n'a pas été reproduit
 dans le diagnostic métier ; ce correctif du 404 ne constitue pas une résolution
 confirmée de ce second incident.
+
+
+## Correctif — validation du brouillon sans lots (20 septembre 2026)
+
+La trace complémentaire du 500 `validation-publication` identifie
+`KeyError: 'lots'`. Un brouillon créé par `ServiceGenerationAnimation._parametres`
+ne contient pas encore cette clé. Quand aucune commande ne couvre les lots,
+`ServicePublicationAnimation.valider` appelle le contrôle d'éligibilité qui
+accédait directement à `config["lots"]`. Ce scénario a été reproduit par la route
+HTTP avec les paramètres issus du générateur.
+
+Le backend lit désormais la sélection facultative avec `config.get("lots") or []`,
+comme les autres contrôles de financement et d'éligibilité des lots. La lecture
+retourne le rapport **200**, avec `valide: false` et les blocages existants.
+Les coffrets et commerçants sélectionnés restent contrôlés ; la commande de
+publication reste refusée en **422** sur cette route historique tant que la
+configuration est incomplète. Aucun état, lot, paiement ou parcours n'est créé
+par cette correction. La précision est intégrée à **T6-UX04**.
+
+Vérifications avec le lanceur isolé, sans base distante ni configuration opérateur :
+
+- `tests/api/test_validation_publication_brouillon.py` : huit scénarios couvrent
+  lots absents, nuls ou vides, deux consultations successives sans mutation,
+  publication refusée, sélections inéligibles et refus d'accès hors droits ou
+  périmètre. Route réelle, services de validation/financement réels et ports
+  mémoire ; authentification injectée et droit d'abonnement simulé.
+- Avec `tests/api/test_publication_api_t3.py` et
+  `tests/application/animation_locale/test_financement_lots_animation.py` :
+  **25 tests réussis**.
+- Architecture et recensement : **416 réussites, deux échecs préexistants**
+  des contrôles de recensement, déjà documentés. Aucun ajout de skip ni exclusion.
+- Guide et sources documentaires : vérifiés.
+
+Livraison sur `feat-moteur-animation` par commits séparés dans `localeo-backend`
+et `localeo-projet`, sans nouveau schéma, contrat frontend ni migration. Le
+backend de test répondait encore `1.0.0+0cb250c` pendant le diagnostic : il doit
+recevoir ce correctif pour que la résolution soit effective à distance. Le push
+ne constitue pas une vérification du déploiement ; aucune recette distante de ce
+correctif n’a été effectuée.
+
+
+## Optimisation — requêtes de configuration partagées (20 septembre 2026)
+
+Plusieurs composants du même écran chargeaient indépendamment les modèles,
+les commerçants éligibles et la préparation. La mutualisation des GET simultanés
+du transport ne supprimait pas les lectures lancées après la fin de la première.
+La décision est tracée en **T6-UX05**.
+
+- Le détail Animation fournit son modèle au formulaire de configuration.
+- Le bloc financier de la Chasse ne consulte plus les commerçants, qui restent
+  chargés par le brief.
+- L'éditeur transmet sa lecture du parcours aux vérifications. La sauvegarde
+  confirmée partage aussi une seule relecture. Une actualisation explicite
+  consulte le serveur ; les changements des paramètres communs relancent les
+  contrôles concernés. Les erreurs, reprises et saisies en cours sont conservées.
+- État en mémoire limité à l'écran, invalidation de session/commune du transport
+  conservée et réponses tardives écartées. Aucun cache persistant, changement de
+  contrat API, répétition automatique de commande ou migration.
+
+Preuves locales, sans configuration opérateur ni backend distant :
+
+| Vérification | Résultat |
+| --- | --- |
+| `tests/browser/hunt-preparation.mjs` | 60 contrôles à 390/1280 px : un GET par endpoint ciblé à l'ouverture, relecture unique après sauvegarde, actualisation, erreur/reprise et échec initial ; invitations, QR, checklist et publication conservés. |
+| `tests/browser/generation-preparation.mjs` | 26 contrôles à 390/1280 px : création et préparation avec Léo, composant également utilisé hors de l'écran partagé. |
+| Tests Node ciblés : `http-context`, `hunt-preparation`, `generation-preparation`, `generation-http-contracts` | 18 réussites ; contexte périmé, déconnexion, contrats et commandes idempotentes. |
+| TypeScript, ESLint, build navigateur isolé | Réussis ; avertissement existant de taille du bundle supérieur à 500 ko. |
+
+Une exécution navigateur a été interrompue par `ERR_NETWORK_IO_SUSPENDED` sur
+le serveur local ; la recette finale a ensuite abouti. Les attentes réseau et
+d'affichage du test sont explicites, sans masquer les erreurs ni assouplir les
+compteurs de requêtes.
+
+Livraison sur `feat-moteur-animation` par commits séparés dans
+`localeo-animation` et `localeo-projet`. Le correctif backend `KeyError: 'lots'`
+est livré dans son propre commit. Déployer le frontend pour appliquer
+l'optimisation sur l'environnement de test ; le push ne constitue pas une
+vérification du déploiement et aucune recette distante n’a été effectuée.
