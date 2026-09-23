@@ -5,6 +5,7 @@ __pycache__/
 *.py[cod]
 .pytest_cache/
 tmp/
+.artifacts/
 *.zip
 
 # Sources de conception canoniques, référencées par les spécifications.

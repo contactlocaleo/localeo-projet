@@ -6,10 +6,19 @@
       "hooks": [{
         "type": "command",
         "command": "node \"$(git rev-parse --show-toplevel)/scripts/codex_context.cjs\"",
-        "commandWindows": "powershell.exe -NoProfile -NonInteractive -Command \"$r = git rev-parse --show-toplevel; if ($LASTEXITCODE -ne 0) { exit 1 }; & node (Join-Path $r 'scripts/codex_context.cjs'); exit $LASTEXITCODE\"",
+        "commandWindows": "node -e \"require(require('node:path').join(require('node:child_process').execFileSync('git', ['rev-parse','--show-toplevel'], {encoding:'utf8',timeout:1500,windowsHide:true}).trim(), 'scripts/codex_context.cjs')).run()\"",
         "timeout": 10,
         "statusMessage": "Repérage des dépôts Localeo",
         "additionalContextLimit": 1800
+      }]
+    }],
+    "Stop": [{
+      "hooks": [{
+        "type": "command",
+        "command": "node \"$(git rev-parse --show-toplevel)/scripts/codex_finish.cjs\"",
+        "commandWindows": "node -e \"require(require('node:path').join(require('node:child_process').execFileSync('git', ['rev-parse','--show-toplevel'], {encoding:'utf8',timeout:1500,windowsHide:true}).trim(), 'scripts/codex_finish.cjs')).run()\"",
+        "timeout": 10,
+        "statusMessage": "Rappel des preuves Localeo"
       }]
     }]
   }

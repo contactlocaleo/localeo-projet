@@ -1,0 +1,119 @@
+name: Documentation and Codex controls
+
+on:
+  pull_request:
+  push:
+  workflow_dispatch:
+    inputs:
+      project_ref:
+        description: Exact project commit to verify with its consumers
+        required: true
+        type: string
+      backend_ref:
+        description: Exact backend commit
+        required: true
+        type: string
+      animation_ref:
+        description: Exact animation commit
+        required: true
+        type: string
+      commercant_ref:
+        description: Exact commercant commit
+        required: true
+        type: string
+      marketplace_ref:
+        description: Exact marketplace commit
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  local-controls:
+    name: Project tooling and export sources (not workspace links)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: python scripts/quality.py run --profile documentation-local
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: documentation-local-evidence
+          path: .artifacts/quality/
+
+  workspace-links:
+    name: Five pinned repositories and cross-repository links
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require configured read access and immutable refs
+        env:
+          WORKSPACE_TOKEN: ${{ secrets.LOCALEO_WORKSPACE_READ_TOKEN }}
+          PROJECT_REF: ${{ inputs.project_ref }}
+          BACKEND_REF: ${{ inputs.backend_ref }}
+          ANIMATION_REF: ${{ inputs.animation_ref }}
+          COMMERCANT_REF: ${{ inputs.commercant_ref }}
+          MARKETPLACE_REF: ${{ inputs.marketplace_ref }}
+        run: |
+          python - <<'PY'
+          import os, re
+          if not os.environ.get('WORKSPACE_TOKEN'):
+              raise SystemExit('Configure LOCALEO_WORKSPACE_READ_TOKEN with read access to the five repositories; no workspace validation has run.')
+          for name in ('PROJECT_REF', 'BACKEND_REF', 'ANIMATION_REF', 'COMMERCANT_REF', 'MARKETPLACE_REF'):
+              if not re.fullmatch(r'[0-9a-fA-F]{40}', os.environ[name]):
+                  raise SystemExit(f'{name}: full immutable Git SHA required')
+          PY
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.project_ref }}
+          path: localeo-projet
+          token: ${{ secrets.LOCALEO_WORKSPACE_READ_TOKEN }}
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository_owner }}/localeo-backend
+          ref: ${{ inputs.backend_ref }}
+          path: localeo-backend
+          token: ${{ secrets.LOCALEO_WORKSPACE_READ_TOKEN }}
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository_owner }}/localeo-animation
+          ref: ${{ inputs.animation_ref }}
+          path: localeo-animation
+          token: ${{ secrets.LOCALEO_WORKSPACE_READ_TOKEN }}
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository_owner }}/localeo-commercant
+          ref: ${{ inputs.commercant_ref }}
+          path: localeo-commercant
+          token: ${{ secrets.LOCALEO_WORKSPACE_READ_TOKEN }}
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository_owner }}/localeo-marketplace
+          ref: ${{ inputs.marketplace_ref }}
+          path: localeo-marketplace
+          token: ${{ secrets.LOCALEO_WORKSPACE_READ_TOKEN }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: python scripts/quality.py run --profile documentation-workspace
+        working-directory: localeo-projet
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: documentation-workspace-evidence
+          path: localeo-projet/.artifacts/quality/

@@ -18,10 +18,11 @@ function hookOutput(states) {
     'Workspace Localeo : cinq depots Git independants. Lire AGENTS.md puis seulement les guides utiles au perimetre ; les guides voisins ne sont pas herites.',
     `Depots absents : ${names('absent')}. Travaux locaux presents : ${names('modifie')}. Statut non verifie : ${names('non-verifie')}.`,
     'Preserver les travaux locaux ; commit, push et deploiement suivent la demande en cours. La roadmap commune porte les etats ; le domaine backend porte les invariants.',
-    'Routage et preuves : localeo-projet/docs/organisation/codex.md. Les profils de revue et skills de ce depot sont disponibles selon leur decouverte par le client.'
+    'Routage : localeo-projet/docs/organisation/codex.md ; usage developpement et correctif : docs/organisation/utiliser-workflows-codex.md. Charger le skill de la phase, pas tous les workflows. Les selections IDE sans rapport sont du contexte, pas la demande. Rapporter les preuves et les controles non executes.'
   ].join('\n') } };
 }
-if (require.main === module) {
+function run() {
   process.stdout.write(JSON.stringify(hookOutput(inspectWorkspace(path.resolve(__dirname, '..')))) + '\n');
 }
-module.exports = { inspectWorkspace, hookOutput };
+if (require.main === module) run();
+module.exports = { inspectWorkspace, hookOutput, run };

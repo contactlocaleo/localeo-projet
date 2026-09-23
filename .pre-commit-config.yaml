@@ -3,7 +3,7 @@ repos:
     hooks:
       - id: localeo-guidance
         name: Liens des guides Localeo dans l'index Git
-        entry: python scripts/check_guidance.py --repo . --staged
+        entry: python scripts/check_guidance.py --repo . --staged --changed --all-markdown
         language: system
         pass_filenames: false
         always_run: true

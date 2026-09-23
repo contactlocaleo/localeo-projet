@@ -1,5 +1,7 @@
 # Releases
 
+- [Préparer une livraison vérifiable](../docs/organisation/preparer-livraison.md) : références des cinq dépôts, preuves, migrations et contrôles opérateur.
+
 - [Commits coordonnés de la réorganisation du 18 septembre 2026](reorganisation-coordonnee-2026-09-18.json) : SHAs des quatre applications ; aucun déploiement effectué.
 
 Notes historiques et coordination des livraisons entre dépôts indépendants.

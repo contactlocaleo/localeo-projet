@@ -91,6 +91,31 @@ class RepositoryTests(unittest.TestCase):
     def check(self, **options):
         return guidance.check_guidance(self.repo, [self.repo], **options)
 
+    def test_changed_functional_document_is_checked_without_loading_historical_debt(self):
+        self.write('docs/old-spec.md', '[old](already-missing.md)')
+        self.commit()
+        self.write('docs/new-feature.md', '[broken](absent.md)')
+        self.git('add', 'docs/new-feature.md')
+        result = self.check(staged=True, changed=True, all_markdown=True)
+        self.assertEqual(result['checked_guides'], 1)
+        self.assertEqual(len(result['errors']), 1)
+        self.assertEqual(result['errors'][0]['destination'], 'absent.md')
+
+    def test_deleted_target_rechecks_unchanged_functional_document(self):
+        self.write('docs/ops.md', '[procedure](procedure.md)')
+        self.write('docs/procedure.md')
+        self.commit()
+        self.git('rm', 'docs/procedure.md')
+        result = self.check(staged=True, changed=True, all_markdown=True)
+        self.assertEqual(len(result['errors']), 1)
+        self.assertEqual(result['errors'][0]['destination'], 'procedure.md')
+
+    def test_staged_functional_document_is_not_repaired_by_unstaged_edit(self):
+        self.write('docs/feature.md', '[broken](missing.md)')
+        self.git('add', 'docs/feature.md')
+        self.write('docs/feature.md', 'Working tree repaired but not staged')
+        self.assertEqual(len(self.check(staged=True, changed=True, all_markdown=True)['errors']), 1)
+
     def test_tracked_and_untracked_guidance_exclude_ignored_and_outputs(self):
         self.write("README.md", "[target](target.md)\n")
         self.write("target.md")

@@ -176,11 +176,11 @@ def _paths(repo: Path, *arguments: str) -> set[str]:
     return {item.decode("utf-8", errors="surrogateescape") for item in _git(repo, *arguments).split(b"\0") if item}
 
 
-def _is_guidance(relative: str) -> bool:
+def _is_guidance(relative: str, all_markdown: bool = False) -> bool:
     path = Path(relative)
     if EXCLUDED_PARTS.intersection(path.parts) or path.parts[:2] == ("demonstrations", "prive"):
         return False
-    return path.name in {"AGENTS.md", "AGENT.md", "README.md"} or (
+    return (all_markdown and path.suffix.lower() == '.md') or path.name in {"AGENTS.md", "AGENT.md", "README.md"} or (
         path.name == "SKILL.md" and path.parts[0] == ".agents")
 
 
@@ -192,7 +192,7 @@ def _relative(path: Path, repo: Path) -> str | None:
 
 
 def check_guidance(root: Path, repos: list[Path] | None = None, *, documents: list[Path] | None = None,
-                   staged: bool = False, changed: bool = False) -> dict:
+                   staged: bool = False, changed: bool = False, all_markdown: bool = False) -> dict:
     root = Path(os.path.abspath(root))
     explicit_repos = repos is not None
     selected = repos if explicit_repos else [root, *(root.parent / name for name in APPLICATIONS)]
@@ -225,7 +225,7 @@ def check_guidance(root: Path, repos: list[Path] | None = None, *, documents: li
                 updates |= _paths(candidate, *arguments, "--name-only", "-z", "--") | untracked
                 deleted = _paths(candidate, *arguments, "--diff-filter=D", "--name-only", "-z", "--")
             states.append({"repo": candidate, "indexed": indexed, "visible": visible,
-                           "guides": {name for name in visible if _is_guidance(name)},
+                           "guides": {name for name in visible if _is_guidance(name, all_markdown)},
                            "updates": updates, "deleted": deleted})
             result["repositories"].append(str(candidate))
         except (RuntimeError, OSError) as error:
@@ -242,6 +242,8 @@ def check_guidance(root: Path, repos: list[Path] | None = None, *, documents: li
     for state in states:
         repo = state["repo"]
         for name in sorted(state["guides"]):
+            if changed and name not in state["updates"] and not deleted_paths:
+                continue
             source = repo / name
             if not staged and not source.exists():
                 continue  # A deleted guide has no working-tree content to validate.
@@ -288,8 +290,9 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--report", help="Write a JSON report to this path, or '-' for stdout")
     parser.add_argument("--staged", action="store_true", help="Read guidance and same-repository destinations from the Git index")
     parser.add_argument("--changed", action="store_true", help="Check changed guides and guides referring to deleted paths")
+    parser.add_argument("--all-markdown", action="store_true", help="Include functional/ops Markdown documents, useful with --changed --staged")
     args = parser.parse_args(argv)
-    result = check_guidance(args.root, args.repo, documents=args.document, staged=args.staged, changed=args.changed)
+    result = check_guidance(args.root, args.repo, documents=args.document, staged=args.staged, changed=args.changed, all_markdown=args.all_markdown)
     report = json.dumps(result, ensure_ascii=False, indent=2) + "\n"
     if args.report == "-":
         print(report, end="")

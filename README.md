@@ -20,6 +20,7 @@ Ouvrir [localeo.code-workspace](localeo.code-workspace) dans VS Code, avec les c
 - [Livrables](livrables/INDEX.md) et [releases](releases/INDEX.md)
 - [Compte rendu de réorganisation](docs/organisation/compte-rendu-reorganisation-2026-09-18.md)
 - [Travailler avec Codex](docs/organisation/codex.md) : contexte ciblé, invariants, skills, hooks et sous-agents.
+- [Utiliser les workflows Codex](docs/organisation/utiliser-workflows-codex.md) : demandes types, cycle de développement, correctif, vérification et préparation de livraison.
 
 ## Modifier la documentation
 

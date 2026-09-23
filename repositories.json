@@ -45,5 +45,295 @@
         "test": "pnpm test"
       }
     }
-  ]
+  ],
+  "quality": {
+    "release_profile": "workspace",
+    "profiles": {
+      "documentation-local": [
+        "documentation-sources",
+        "guidance-tests",
+        "documentation-tests",
+        "quality-tests",
+        "codex-workflows",
+        "codex-workflow-tests",
+        "context-hook-tests",
+        "finish-hook-tests",
+        "git-hook-tests"
+      ],
+      "documentation-workspace": [
+        "documentation-sources",
+        "guidance-links",
+        "guidance-tests",
+        "documentation-tests",
+        "quality-tests",
+        "codex-workflows",
+        "codex-workflow-tests",
+        "context-hook-tests",
+        "finish-hook-tests",
+        "git-hook-tests"
+      ],
+      "backend": [
+        "backend-tests"
+      ],
+      "marketplace": [
+        "marketplace-lint",
+        "marketplace-security",
+        "marketplace-tests",
+        "marketplace-build"
+      ],
+      "commercant": [
+        "commercant-tests",
+        "commercant-build"
+      ],
+      "animation": [
+        "animation-tests",
+        "animation-typecheck",
+        "animation-lint",
+        "animation-build"
+      ],
+      "workspace": [
+        "documentation-sources",
+        "guidance-links",
+        "guidance-tests",
+        "documentation-tests",
+        "quality-tests",
+        "codex-workflows",
+        "codex-workflow-tests",
+        "context-hook-tests",
+        "backend-tests",
+        "marketplace-lint",
+        "marketplace-security",
+        "marketplace-tests",
+        "marketplace-build",
+        "commercant-tests",
+        "commercant-build",
+        "animation-tests",
+        "animation-typecheck",
+        "animation-lint",
+        "animation-build",
+        "finish-hook-tests",
+        "git-hook-tests"
+      ],
+      "demonstration": [
+        "demonstration-postgres"
+      ]
+    },
+    "checks": {
+      "documentation-sources": {
+        "repository": "localeo-projet",
+        "argv": [
+          "python",
+          "scripts/sync_documentation.py",
+          "--check-sources"
+        ]
+      },
+      "guidance-links": {
+        "repository": "localeo-projet",
+        "requires": [
+          "localeo-projet",
+          "localeo-backend",
+          "localeo-animation",
+          "localeo-commercant",
+          "localeo-marketplace"
+        ],
+        "argv": [
+          "python",
+          "scripts/check_guidance.py"
+        ]
+      },
+      "guidance-tests": {
+        "repository": "localeo-projet",
+        "argv": [
+          "python",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_guidance.py"
+        ]
+      },
+      "documentation-tests": {
+        "repository": "localeo-projet",
+        "argv": [
+          "python",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_sync_documentation.py"
+        ]
+      },
+      "quality-tests": {
+        "repository": "localeo-projet",
+        "argv": [
+          "python",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_quality.py"
+        ]
+      },
+      "codex-workflows": {
+        "repository": "localeo-projet",
+        "argv": [
+          "python",
+          "scripts/check_codex_workflows.py"
+        ]
+      },
+      "codex-workflow-tests": {
+        "repository": "localeo-projet",
+        "argv": [
+          "python",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_codex_workflows.py"
+        ]
+      },
+      "context-hook-tests": {
+        "repository": "localeo-projet",
+        "argv": [
+          "node",
+          "--test",
+          "tests/test_codex_context.cjs"
+        ]
+      },
+      "backend-tests": {
+        "repository": "localeo-backend",
+        "argv": [
+          "python",
+          "scripts/validation/test_isolated.py",
+          "-q"
+        ]
+      },
+      "marketplace-tests": {
+        "repository": "localeo-marketplace",
+        "argv": [
+          "npm",
+          "run",
+          "test:server"
+        ]
+      },
+      "marketplace-build": {
+        "repository": "localeo-marketplace",
+        "argv": [
+          "node",
+          "node_modules/vite/bin/vite.js",
+          "build",
+          "--mode",
+          "production"
+        ],
+        "env": {
+          "LOCALEO_ISOLATED_TESTS": "1",
+          "LOCALEO_APP_ENVIRONMENT": "test",
+          "LOCALEO_API_BASE_URL": "/api",
+          "LOCALEO_FEATURE_ANALYTICS_ENABLED": "false"
+        }
+      },
+      "commercant-tests": {
+        "repository": "localeo-commercant",
+        "argv": [
+          "npm",
+          "test"
+        ]
+      },
+      "commercant-build": {
+        "repository": "localeo-commercant",
+        "argv": [
+          "npm",
+          "run",
+          "build:demo"
+        ]
+      },
+      "animation-tests": {
+        "repository": "localeo-animation",
+        "argv": [
+          "pnpm",
+          "test"
+        ]
+      },
+      "animation-typecheck": {
+        "repository": "localeo-animation",
+        "argv": [
+          "pnpm",
+          "run",
+          "typecheck"
+        ]
+      },
+      "animation-lint": {
+        "repository": "localeo-animation",
+        "argv": [
+          "pnpm",
+          "run",
+          "lint"
+        ]
+      },
+      "animation-build": {
+        "repository": "localeo-animation",
+        "argv": [
+          "pnpm",
+          "run",
+          "build:demo"
+        ]
+      },
+      "finish-hook-tests": {
+        "repository": "localeo-projet",
+        "argv": [
+          "node",
+          "--test",
+          "tests/test_codex_finish.cjs"
+        ]
+      },
+      "git-hook-tests": {
+        "repository": "localeo-projet",
+        "argv": [
+          "python",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_install_hooks.py"
+        ]
+      },
+      "demonstration-postgres": {
+        "repository": "localeo-backend",
+        "argv": [
+          "python",
+          "scripts/validation/run_demo_compatibility_tests.py",
+          "--disposable-postgres",
+          "127.0.0.1:55439,127.0.0.1:55448",
+          "--pg-bin-dir",
+          "{pg_bin_dir}"
+        ]
+      },
+      "marketplace-lint": {
+        "repository": "localeo-marketplace",
+        "argv": [
+          "npm",
+          "run",
+          "lint"
+        ]
+      },
+      "marketplace-security": {
+        "repository": "localeo-marketplace",
+        "argv": [
+          "npm",
+          "run",
+          "test:security"
+        ]
+      }
+    }
+  }
 }
