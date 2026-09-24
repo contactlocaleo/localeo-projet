@@ -776,7 +776,12 @@ Le catalogue des commerçants est lu jusqu’à sa dernière page.
 
 Le fil d’Ariane utilise le même composant : étapes numérotées reliées sur grand
 écran, liste de navigation sur mobile, étape courante annoncée et navigation
-au clavier. Les rubriques suivent les opérations réellement disponibles :
+au clavier. Les trois modèles partagent aussi la structure de la page de
+création : en-tête, fil d’Ariane directement dessous, contenu de même largeur
+qui défile séparément, et commandes de navigation en bas. L’aide Léo, le quota
+et la bibliothèque de la Chasse restent dans le contenu ; ils ne déplacent
+pas le fil d’Ariane à partir de l’étape Commune.
+Les rubriques suivent les opérations réellement disponibles :
 la Chasse recueille son brief avant génération, puis propose ses six rubriques
 de préparation T6-UX06. Les coffrets restent configurés après création de son
 brouillon. La navigation ne génère, n’enregistre et ne valide rien ; une étape
@@ -797,6 +802,12 @@ Les minima de sélection, seuils du Passeport, quantités, autorisations,
 Un coffret enregistré absent du catalogue reste visible et retirable lorsque
 la modification est autorisée. Les détails restent consultables en lecture
 seule. Les sélections de commerçants ne valent jamais acceptation.
+À la demande de l’utilisateur du 24 septembre 2026, sélectionner un commerce
+ne révèle plus le champ « Activité et particularités » et ne permet aucune
+édition de sa fiche dans le brief. La consultation reste disponible en popin ;
+l’adresse référentielle et son contrôle de complétude sont préservés. Les faits
+existants d’une demande ou issus de la fiche restent transmis dans le contrat
+actuel, sans être modifiés par un champ local.
 
 Impacts : présentation et pagination dans `localeo-animation`, documentation
 canonique ici ; contrats HTTP existants réutilisés, aucun changement des

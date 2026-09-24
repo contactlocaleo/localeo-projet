@@ -43,6 +43,32 @@ sans impact. Ces recettes utilisent des API simulées et ne constituent pas
 une recette sur environnement déployé. Aucun commit, push ou déploiement
 réalisé pour cette évolution.
 
+### Complément E55-UX-08 — agencement des pages et fiche commerçant
+
+Sur la base Animation `0d9f95c`, le passage à Commune dans la Chasse déplaçait
+le fil d’Ariane sous l’aide Léo et dans une colonne plus étroite. Reproduction
+navigateur avant correction à 1280 px : ordonnée 267 px au lieu de 149 px,
+largeur 915 px au lieu de 1070 px ; le pied de navigation commun était absent.
+
+`AnimationCreationLayout` est désormais utilisé par Passeport, Tombola et
+Chasse : même en-tête, navigation immédiatement dessous, contenu centré et
+défilant, commandes en bas. L’aide Léo et le quota sont dans le contenu. Le
+formulaire Chasse reste associé à ses boutons de soumission par son ID natif,
+avec validations et commandes explicites inchangées. La demande complémentaire
+retire l’affichage et la saisie « Activité et particularités » lors de la
+sélection ; adresse, popins et faits déjà enregistrés sont conservés.
+
+La recette `leo-assistant.mjs` compare les positions et dimensions de la
+navigation et du pied de page avant/après le choix de Chasse puis à l’étape
+suivante, à 390/1280 px. Elle échouait avant le correctif et passe après.
+`generation-preparation.mjs` passe 38 contrôles incluant l’absence du champ et
+de textarea à la sélection, la génération et la révision. Les recettes
+Passeport et lots/Tombola, les types, le lint et le build isolé vérifient les
+parcours voisins. Captures mobile/bureau inspectées. API simulées, sans preuve
+de déploiement. Impacts limités à Animation et documentation ; contrats,
+permissions, migrations et générateur sans modification car seuls la
+présentation et le champ de saisie local changent.
+
 ## État des lots
 
 | Lot | État | Résultat et reste à faire |
