@@ -566,3 +566,55 @@ dans les trois dépôts modifiés.
 Ces preuves locales ne constituent ni une recette humaine sur le terrain ni
 une vérification des environnements déployés. Commit, push et déploiement restent
 des opérations distinctes de cette correction.
+
+## 24 septembre 2026 — T6-UX07 : configuration visuelle du parcours de Chasse
+
+Défaut signalé : l'éditeur imbriqué rend difficile la lecture de l'enchaînement
+et la configuration d'une étape. Reproduction locale sur la base Animation
+`92da72f` : la recette exigeant la navigation « Étapes du parcours » échoue,
+car l'éditeur précédent ne la propose pas. Base documentaire : `ad704a1`.
+
+La correction décrite dans la [conception](conception-technique.md) remplace
+l'édition générique des étapes par une liste ordonnée et le détail de l'étape
+sélectionnée. Le [guide d'usage](exploitation-moteur.md) explique la navigation,
+l'édition des activités, les missions alternatives et l'aperçu joueur.
+
+- Les déplacements conservent l'étape sélectionnée et le focus clavier.
+- Les champs joueur, l'activité et les préparatifs privés sont regroupés.
+- Les corrections se configurent à partir des libellés des réponses.
+- Les suppressions d'étapes ou de missions et les remplacements d'activités
+  nécessitent une confirmation explicite.
+- Les cinq types d'activité disposent d'un aperçu interactif local, accessible
+  aussi en lecture seule. L'indice et la correction sont ouverts à la demande.
+- Les IDs, champs non édités et médias partagés restent conservés ; les essais
+  et la mission consultée ne deviennent ni réponses ni choix métier enregistrés.
+
+La revue indépendante a identifié un état d'aperçu conservé après suppression
+d'une étape virtuelle suivie d'une activité identique. La réinitialisation de
+l'essai a été corrigée. Les recettes ont également révélé des noms accessibles
+de menus contenant le texte de leurs options ; les libellés ont été explicités.
+
+Preuves locales :
+
+| Vérification | Résultat |
+| --- | --- |
+| `node --test tests/*.test.mjs` | 153 tests réussis, aucun échec ni test ignoré ; déplacement, sélection, IDs et références des activités couverts. |
+| Types TypeScript et ESLint Animation | Réussis. |
+| `node scripts/build-generation-tests.mjs` | Build isolé réussi ; avertissement préexistant de bundle supérieur à 500 ko. |
+| `node tests/browser/hunt-preparation.mjs` | 194 contrôles réussis à 1280/390 px : sélection et déplacement, alternatives, cinq aperçus, ajout/retrait d'association, confirmation de retrait, sauvegarde des IDs, lecture seule et réinitialisation après suppression de deux activités identiques. Les contrôles existants de préparation et de publication restent actifs. |
+| `node tests/browser/generation-preparation.mjs` | 30 contrôles réussis à 1280/390 px ; le test ouvre explicitement la présentation globale avant son édition. |
+| `node tests/browser/exploitation.mjs` | Réussi à 1280/390 px : exploitation, correction/gel, droits, continuité et trois moteurs. |
+| Captures mobile et bureau | Navigation, édition bureau, aperçu et lecture seule inspectés ; absence de débordement horizontal contrôlée. Les captures supplémentaires des champs sur mobile sont prévues par le script mais n'ont pas été exécutées. |
+| Revue indépendante | Identités, médias, alternatives, lecture seule et préservation des corrections relus ; défaut de réinitialisation d'aperçu corrigé. |
+
+Les contrôles documentaires `check_guidance.py` et
+`sync_documentation.py --check-sources` vérifient respectivement 85 guides,
+833 liens locaux et 117 sources exportées. `git diff --check` passe dans les
+deux dépôts modifiés.
+
+Impacts : `localeo-animation` et les sources canoniques `localeo-projet`.
+Aucun changement d'API, de domaine backend, de schéma persistant ou de données
+de démonstration. Aucun environnement distant n'a été modifié. Les preuves
+navigateur utilisent des données synthétiques et une API simulée ; elles ne
+valident pas le rendu de Localeo Live ni une recette terrain. Commit, push et
+déploiement restent distincts de cette correction.

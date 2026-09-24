@@ -728,3 +728,39 @@ secondaires. Aucun changement de phase ni envoi n'est déclenché par la navigat
 
 La [procédure d'usage](exploitation-moteur.md) décrit ces étapes. Les preuves
 locales et leurs limites sont consignées dans le [suivi](suivi-implementation.md).
+
+### T6-UX07 — Édition visuelle du parcours et aperçu d'une étape
+
+La correction du 24 septembre 2026 complète le guidage de T6-UX06 dans sa
+rubrique **Parcours**. L'éditeur générique imbriqué est remplacé, pour les
+résultats contenant des étapes de Chasse, par une liste ordonnée et un panneau
+de détail d'une seule étape. La liste présente titre, lieu et activité ; la
+sélection de l'étape est un état d'interface, sans enregistrement implicite.
+Les commandes de déplacement sont accessibles au clavier et conservent la
+sélection. L'ajout ouvre la nouvelle étape ; un retrait exige une confirmation.
+
+L'édition sépare le contenu destiné au joueur, l'activité et les préparatifs
+privés du commerce. Les missions alternatives restent dans la même position
+du commerce. Le sélecteur de mission sert à consulter ou modifier une
+proposition ; il ne choisit pas la mission acceptée par le commerçant. Les
+corrections des activités utilisent des libellés, des choix et des commandes de
+réorganisation plutôt que des identifiants à saisir. Les identifiants existants
+et les références des réponses sont conservés dans le contenu transmis.
+
+Le mode **Aperçu joueur** simule la présentation de l'étape et de la mission
+consultée : textes, illustration disponible, consigne et activité interactive.
+Les consignes privées, préparatifs et lieux suivants ne sont pas injectés dans
+cet aperçu. L'indice et la correction configurée peuvent être ouverts
+explicitement par l'organisateur. Les cinq activités sont manipulables
+localement ; aucune réponse, preuve, progression, acceptation ou correction
+métier n'est envoyée au serveur. Le rendu publié demeure celui de Localeo Live ;
+l'aperçu n'est pas une validation du jeu et le précise.
+
+L'aperçu reste accessible en lecture seule, tandis que les commandes d'édition
+suivent le droit existant. Aucun état d'interface, champ technique d'éditeur ou
+essai de réponse n'est ajouté au JSON éditorial. L'enregistrement conserve son
+contrat, ses versions attendues, la réconciliation des commandes et le contrôle
+serveur. Les liens de continuité restent gérés par leurs identités serveur ;
+une modification des étapes exige leur enregistrement avant édition de ces
+liens, conformément à T5. Aucune migration ou évolution du générateur de
+démonstration n'est nécessaire pour cette réorganisation de l'interface.
