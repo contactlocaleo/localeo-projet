@@ -818,3 +818,76 @@ compatible avec le backend courant, sans ordre coordonné supplémentaire.
 Les preuves attendues couvrent navigation, sélection, consultation, refus et
 conservation des saisies sur mobile et bureau, ainsi que la non-régression des
 commandes de génération, de configuration et de paiement.
+
+## Évolution du 24 septembre 2026 — kit commerçant et préparation du démarrage
+
+Cette évolution prolonge EPIC 55 et le parcours d’invitation EPIC 56 sans modifier
+leur bilan historique. Elle remplace la préférence de TRE-ARB-89 pour deux
+alternatives par une seule proposition dans les nouveaux prompts Chasse.
+Les critères et preuves propres à cette évolution sont suivis ci-dessous.
+
+### Comportements attendus
+
+- **E55-KIT-01 — Proposition unique.** Le prompt Chasse `1.2` demande exactement
+  une mission par commerce ; son schéma exporté borne `missionsProposees` à un
+  élément. Les résultats historiques à deux missions restent lisibles et
+  importables. Un prompt déjà persisté reste immuable ; une révision explicite
+  est nécessaire pour bénéficier de la nouvelle consigne.
+- **E55-KIT-02 — Support joueur.** `supportAFournir` porte le texte destiné aux
+  participants, accessible sur téléphone en scannant un QR de flyer. Ce texte
+  exclut corrigés, consignes privées et lieux futurs. Les indices utiles au défi
+  restent possibles. L’IA ne fabrique ni URL ni QR ; le backend produit ces
+  supports depuis la mission retenue. Le marqueur explicite `supportAccessibleParQr: true` est nécessaire ;
+  son absence conserve les anciens supports privés. Le QR de support reste distinct d’une
+  preuve de présence : ouvrir une page ne valide pas une étape.
+- **E55-KIT-03 — Kit privé.** Un commerçant dont l’invitation courante est acceptée
+  télécharge depuis son application uniquement son kit : mode opératoire simple
+  et flyers imprimables utilisant la charte et l’illustration adaptées de
+  l’animation. Il peut préparer son commerce avant le lancement. Le guide indique
+  quoi télécharger, imprimer, installer, tester et comment accueillir les joueurs.
+  Les autres commerçants et utilisateurs anonymes ne peuvent pas lire ce kit.
+  Le support joueur applique une projection explicite, sans publication du kit.
+- **E55-SUIVI-01 — Option à la création.** Les trois types d’animation proposent
+  le suivi de préparation, désactivé par défaut. L’acceptation d’une invitation
+  n’est jamais assimilée à une déclaration « prêt ». Les animations existantes
+  conservent leur fonctionnement sans suivi.
+- **E55-SUIVI-02 — Déclaration et suivi.** Seul le commerçant concerné, avec une
+  invitation acceptée et encore participante, peut déclarer son commerce prêt.
+  Le gestionnaire voit les déclarations datées et leur synthèse ; les répétitions
+  ne produisent pas de doublon. Une invitation remplacée ne réutilise pas la
+  déclaration précédente comme accord de préparation du nouveau contenu.
+- **E55-SUIVI-03 — Barrière de démarrage.** Si le suivi est actif, tous les
+  commerçants participants doivent être prêts avant ouverture effective du jeu.
+  Le domaine backend applique cette règle au démarrage et aux accès joueurs,
+  y compris lorsque la date de début est atteinte avec un statut `PUBLIEE`.
+  Invitations refusées/annulées ne sont pas comptées comme participants ; les
+  contrôles existants de consentement et minimum de commerces restent requis.
+- **E55-SUIVI-04 — Forçage.** Le gestionnaire habilité peut lever explicitement
+  la seule barrière de préparation, avec confirmation et motif tracé. Le forçage
+  n’avance pas la date de début, ne publie pas un brouillon et ne contourne ni
+  consentement, ni financement, ni contrôles terrain existants.
+
+### Responsabilités et compatibilité
+
+Le domaine Animation possède la règle d’ouverture. L’application charge les
+invitations/déclarations, coordonne les écritures et l’audit ; les interfaces
+présentent les décisions serveur. Le rendu des PDF, ZIP, QR et pages de support
+appartient à l’infrastructure. La page de support dédiée ne modifie pas le moteur
+Live et ne divulgue pas les autres étapes. Les médias privés ne deviennent pas
+un catalogue public : seuls les éléments autorisés du support sont rendus.
+
+La persistance du suivi est additive, avec défaut désactivé pour l’existant.
+Livrer la migration et le backend avant les interfaces. Les prompts enregistrés,
+accords et préparations historiques restent conservés. Les contrats canoniques
+et embarqués des consommateurs sont exportés ensemble après implémentation.
+
+### Matrice de traçabilité de l’évolution
+
+| Critère | Propriétaire / comportement | Preuves prévues | Documentation / contrats | Fixtures / exploitation |
+| --- | --- | --- | --- | --- |
+| E55-KIT-01 | Service de préparation de prompt, aucune décision de consentement | Prompt déterministe, borne un, import historique conservé | Consigne 1.2, exemple documentaire identifié historiquement | Fixtures à deux missions conservées pour compatibilité ; aucune génération IA réelle |
+| E55-KIT-02/03 | Projection applicative limitée ; adaptateur documents | Kit propre commerce, refus intercommerce, PDF imprimable/QR, public sans secrets ni mutation | API kit et support, guide commerçant | Artefacts locaux synthétiques ; aucun email ou document diffusé en environnement réel |
+| E55-SUIVI-01/02 | Domaine et orchestration transactionnelle | Défaut sans suivi, déclaration acceptée, refus tiers/invitation non acceptée, répétition | Création et invitation, synthèse gestionnaire | Migration additive ; adaptation fixtures selon champs obligatoires |
+| E55-SUIVI-03/04 | Domaine propriétaire de l’ouverture | Pas prêt refusé, tous prêts autorisé, forçage explicite tracé, dates et autres barrières préservées | Actions API et parcours Animation/Commerçant | Vérifier démarrage planifié et actions Live ; pas de déploiement implicite |
+
+Les preuves locales ont été exécutées : le [suivi d’implémentation](suivi-implementation.md#e55-kit--e55-suivi--24-septembre-2026) consigne les commandes, résultats et limites. Cette validation locale ne vaut pas déploiement ni impression physique.

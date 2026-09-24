@@ -42,3 +42,12 @@ La préparation des chasses prévoit désormais des missions alternatives à con
 ## Support UX Localeo Live
 
 La [maquette navigable de la chasse Halloween à Latresne](exemples/latresne/maquettes-live/index.html) illustre le parcours joueur, les cinq activités, les preuves et les états de reprise. Son [guide](exemples/latresne/maquettes-live/README.md) décrit les simulations et leurs limites. Les illustrations WebP et les thèmes sont résolus depuis les données de l’animation.
+
+## Kit commerçant et suivi de préparation — évolution du 24 septembre 2026
+
+Les nouveaux prompts Chasse `1.2` demandent une seule mission par commerce et
+distinguent le support joueur accessible par QR des consignes privées. Le kit
+imprimable, son mode opératoire et le suivi facultatif de préparation sont
+spécifiés dans [E55-KIT/E55-SUIVI](conception-technique.md#évolution-du-24-septembre-2026--kit-commerçant-et-préparation-du-démarrage).
+Le bilan de cette évolution figure dans le [suivi](suivi-implementation.md).
+Les exemples Latresne à deux alternatives documentent le contrat historique.

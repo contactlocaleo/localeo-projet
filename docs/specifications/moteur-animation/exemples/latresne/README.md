@@ -1,5 +1,11 @@
 # Exemple de préparation de chasse — Latresne
 
+> Exemple historique à deux alternatives, conservé pour documenter la compatibilité.
+> Depuis E55-KIT-01 (24 septembre 2026), les nouveaux prompts Chasse demandent
+> une seule mission et des supports joueurs explicitement autorisés par QR.
+> Utiliser le prompt exporté par l’application pour une nouvelle génération,
+> et non la requête historique ci-dessous. Voir la [conception actuelle](../../conception-technique.md#évolution-du-24-septembre-2026--kit-commerçant-et-préparation-du-démarrage).
+
 - [Prompt à envoyer avec le schéma](prompt-complet.md).
 - [Schéma de réponse — entrée documentaire de la spécification](../../contrats/reponse-generation-chasse.schema.json).
 - [Requête exportée](requete-exemple.json).

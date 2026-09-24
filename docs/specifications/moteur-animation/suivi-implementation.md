@@ -446,6 +446,7 @@ des builds isolés. Les commandes sont exécutées à la racine du dépôt conce
 | Animation / ERP — génération | Recette `tests/browser/generation-preparation.mjs` : 26 contrôles à 390/1280 px ; `tests/browser/generation-erp.cjs` réussi aux deux tailles. Révision sans adresse client vérifiée. |
 | Commerçant | Vitest : contrats API et formulaire d’adresse, 34 réussites ; formulaire d’adresse et section contrat, 12 réussites. Playwright `tests/e2e/merchant-address.spec.js tests/e2e/workspaces.spec.js --workers=1` : 3 réussites, dont saisie à 390/1280 px. |
 | ERP / Onboard | `node tests/browser/adresse-commercant-erp-onboard.cjs` réussi à 390/1280 px : création, édition, absence historique, invalidité, non-effacement et protections de session/version. Pagination JavaScript : 2 réussites. Formulaire SQLAdmin structuré réellement généré et contrôlé. |
+| Commerçant | Vitest kit, pages et contrats API ; build isolé `node scripts/build-browser-tests.mjs` ; `tests/e2e/animation-kit.spec.js` | **36 tests ciblés** et **23 tests de régression** réussis (groupes se recouvrant), build réussi, **2 scénarios navigateur** à 390/1280 px |
 | Marketplace | `node --test tests/security/animation-engine-registry.test.cjs tests/security/live-game.test.cjs` : 9 réussites. |
 | Exports | 97 fichiers du moteur vérifiés dans chacun des trois consommateurs. OpenAPI Animation, Commerçant et EPIC 41 : 610 chemins conformes ; projection Live EPIC 42 : 45. Comparaison avec la génération backend isolée, hors métadonnée SHA de build. |
 
@@ -685,3 +686,95 @@ de démonstration. Aucun environnement distant n'a été modifié. Les preuves
 navigateur utilisent des données synthétiques et une API simulée ; elles ne
 valident pas le rendu de Localeo Live ni une recette terrain. Commit, push et
 déploiement restent distincts de cette correction.
+
+## E55-KIT / E55-SUIVI — 24 septembre 2026
+
+Évolution demandée après T1–T6 : proposition unique par commerce, support joueur
+par QR sur flyer illustré, kit privé commerçant et suivi facultatif de préparation.
+Référence : [critères et matrice](conception-technique.md#évolution-du-24-septembre-2026--kit-commerçant-et-préparation-du-démarrage).
+
+### Comportement implémenté
+
+Le prompt Chasse `1.2` demande une mission, y compris dans son schéma exporté.
+Les anciens imports à deux alternatives restent acceptés et les prompts déjà
+persistés restent immuables. `supportAccessibleParQr: true` autorise explicitement
+le support joueur ; absence et false conservent les anciens supports privés.
+Le ZIP contient un mode opératoire HTML imprimable privé et un flyer PDF public,
+aux couleurs et illustration de la mission. Sans illustration narrative, le
+visuel Localeo existant est utilisé. L'application commerçant propose le kit dans
+les détails d'animation et d'invitation acceptée, Chasse comprise.
+
+La page publique limite son contenu au titre, texte autorisé et illustration de
+l'étape, sans créer de preuve de passage. Elle refuse les lectures avant
+publication, hors période, après retrait ou neutralisation et pendant le blocage
+de préparation. Les erreurs attendues affichent une page HTML générique.
+
+Les trois modèles proposent le suivi à la création, désactivé par défaut.
+L'onglet Préparation terrain affiche les déclarations datées des participants.
+Le commerçant accepté confirme « Je suis prêt » ; une notification in-app informe
+le gestionnaire. Le domaine porte la barrière appliquée au démarrage automatique,
+au jeu, aux scans et attestations. Le forçage exige permission de publication,
+motif et version attendue ; il conserve les déclarations réelles et respecte
+les dates et la publication. Coordination, reçus d'idempotence et audit sont
+réutilisés.
+
+### Dépôts, contrats et données
+
+Bases Git : projet `a998042`, backend `0dec6aa`, Animation `4e310f4`, Commerçant
+`566d7c5`, Marketplace `dc73def`, avec modifications locales. Marketplace change
+seulement ses contrats ; Live continue de présenter les décisions du backend.
+OpenAPI EPIC 41/42 et contrats embarqués Animation/Commerçant régénérés hors ligne,
+97 contrats moteur et manifestes alignés dans les trois consommateurs.
+Les exemples Latresne à deux alternatives sont identifiés comme historiques.
+
+Migration additive `v248_suivi_preparation_animation.sql` : dates/auteurs/motif du
+forçage et acquittement de l'invitation, colonnes nullables. Les configurations
+sans option conservent le suivi désactivé. Aucune nouvelle table ni permission.
+Le générateur de démonstration reste compatible : tables déjà recensées,
+colonnes optionnelles, contrôles animations et registre réussis. Aucune
+génération réelle, restauration complète, action fournisseur ou ouverture
+publique n'est réalisée par cette évolution locale.
+
+### Preuves locales
+
+Tests Python via `scripts/validation/test_isolated.py`, sans dotenv opérateur ni
+services réels. Python 3.14, Node 24 et PostgreSQL 18 jetable propre à la recette,
+arrêté après les contrôles. Les décomptes ci-dessous se recouvrent partiellement.
+
+| Périmètre | Commande / artefact | Résultat |
+| --- | --- | --- |
+| Architecture et règles finales | `tests/architecture tests/domain/test_domain_dedicated_classes.py tests/application/use_cases/test_use_case_business_test_coverage.py tests/domain/animation_locale/test_suivi_preparation.py tests/application/animation_locale/test_suivi_preparation_animation.py tests/application/animation_locale/test_kit_animation_commercant.py tests/api/test_suivi_preparation_animation_api.py tests/api/test_kit_animation_api.py -q` | **457 réussis**, aucun skip |
+| Prompt et contrats | `tests/application/services/test_contenu_generation_t2.py tests/application/test_contrats_moteur_t1.py -q` | **60 réussis**, proposition unique demandée et compatibilité historique |
+| Suivi, accès et invitations | `tests/domain/animation_locale/test_suivi_preparation.py tests/application/animation_locale/test_suivi_preparation_animation.py tests/api/test_suivi_preparation_animation_api.py tests/security/test_merchant_animation_scan.py tests/application/services/test_contact_expediteur_participation.py -q` | **35 réussis**, refus, répétition, notification et gardes Live/scan |
+| PostgreSQL | `tests/security/test_suivi_preparation_postgres.py --postgres-test-url postgresql+psycopg://audit_test@127.0.0.1:55458/localeo_audit_test -q` | **4 réussis**, migration littérale, persistance, dernier prêt, rollback et concurrence avec forçage/clôture |
+| Démonstration | Architecture et `tests/unit/test_demonstration_animations.py tests/unit/test_demonstration_registry.py -q` | **433 réussis** au contrôle intermédiaire ; pas de génération/restauration d'un jeu complet |
+| Animation | `node --test tests/*.test.mjs`, types, lint, build isolé | **163 réussis**, types/lint/build réussis ; avertissement de taille de chunk |
+| Parcours Animation | `node tests/browser/preparation-tracking.mjs` et `node tests/browser/generation-preparation.mjs`, après build isolé | Réussis à 390/1280 px : option des trois modèles, suivi, forçage, refus et perte de réponse ; 38 contrôles de génération |
+| Marketplace | `node --test --test-concurrency=1 tests/security/animation-engine-registry.test.cjs tests/security/live-game.test.cjs` | **9 réussis**, manifeste et consommation Live |
+| Flyer final | Backend `tmp/kit-qa/flyer.pdf` et rendu `flyer-pdf.png`, outils QA pypdfium2/zxing-cpp dans tmp uniquement | PDF rasterisé, QR décodé vers l'URL exacte, rendu inspecté sans troncature |
+
+La revue indépendante du suivi n'a pas identifié de contournement. Celle du kit
+a confirmé projection limitée, opt-in historique, média sélectionné et refus
+retrait/neutralisation ; elle a demandé de distinguer refus 409 certain et
+réponse réseau incertaine dans l'interface commerçante. Les contrôles ne peuvent
+pas déterminer si un texte volontairement marqué public par un rédacteur contient
+lui-même une solution : sa relecture éditoriale reste nécessaire.
+
+Le parcours Chasse existant a aussi passé **194 contrôles** (`node tests/browser/hunt-preparation.mjs`), dont conservation des anciennes alternatives et opt-in QR après édition. La confirmation commerçante couvre une réponse tardive après changement de session, le renvoi explicite identique après réponse réseau perdue, et un nouvel intent après refus 409/relecture. Un test de page commerçante a dépassé son délai de cinq secondes lors du passage concurrent ; la relance ciblée séquentielle a réussi sans modifier délai ni assertion. Les serveurs de recette et PostgreSQL ont été arrêtés.
+
+Les recettes navigateur utilisent des API simulées ; elles ne prouvent ni un
+parcours connecté déployé, ni une impression physique. Ordre de livraison et
+contrôles sur cible dans [l'exploitation](exploitation-moteur.md#kit-commerçant-et-suivi-de-préparation--livraison-du-24-septembre-2026).
+
+Bilan : E55-KIT-01 à 03 et E55-SUIVI-01 à 04 implémentés et vérifiés localement. Les guides, liens et sources exportées ont été contrôlés ; aucun commit, push ni déploiement ne fait partie de cette demande.
+
+### Application de v248 en environnement de test — 24 septembre 2026
+
+À la demande explicite de l'utilisateur, `v248_suivi_preparation_animation.sql`
+a été appliquée à la base Render désignée par `localeo-backend/.env.test`, distincte
+de la production. Le précontrôle a confirmé un historique à v247 et v248 seule
+en attente. Exécution avec verrou et transaction du runner officiel, sans autre
+migration. Vérification après commit sur une nouvelle connexion : enregistrement
+v248, empreinte conforme et cinq colonnes nullables présentes avec les types
+attendus. SHA-256 : `d08b9a74b514b1f558adffc8ef5aad2b3c0d8422599b92f8d887fee0912d1d53`.
+Aucun déploiement applicatif ni redémarrage n'a été réalisé par cette opération.

@@ -128,7 +128,22 @@ décrit les comportements et impacts ; le [suivi d’implémentation](../../spec
 consigne les preuves. Cette extension ne change ni le statut de l’epic ni les
 conditions métier de publication, et ne nécessite aucune migration.
 
-## References de suivi
+## Évolution du 24 septembre 2026 — kit et suivi de préparation
+
+Demande utilisateur : une mission générée par commerce, supports joueurs par QR
+sur flyers illustrés, kit et mode opératoire dans l’application commerçant,
+option de suivi bloquant le démarrage tant que les participants ne sont pas prêts,
+sauf forçage explicite. Voir les critères **E55-KIT-01 à 03** et
+**E55-SUIVI-01 à 04** dans la
+[conception canonique](../../specifications/moteur-animation/conception-technique.md#évolution-du-24-septembre-2026--kit-commerçant-et-préparation-du-démarrage).
+
+- [x] Livrer et vérifier les nouveaux prompts et les kits accessibles au seul commerce concerné.
+- [x] Livrer et vérifier le suivi facultatif et sa barrière serveur, avec forçage tracé.
+- [x] Aligner les contrats, interfaces, guides et preuves de non-régression.
+
+Cette évolution n’efface ni le bilan T1–T6 ni les travaux d’ouverture restants.
+
+## Références
 
 - [Registre TRE-ARB-01 a TRE-ARB-89](../../specifications/moteur-animation/localeo_animation_engine_spec.md#arbitrages).
 - [Besoins PRD-520 a PRD-532 et lots proposes](../../specifications/moteur-animation/localeo_animation_engine_spec.md#livraison).

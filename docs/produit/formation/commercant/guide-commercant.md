@@ -27,6 +27,30 @@ L'annulation est proposée seulement si le serveur fournit les informations néc
 
 Consultez les informations et le règlement avant d'accepter, refuser ou demander un retrait. Après une erreur réseau, une nouvelle tentative de la même décision réutilise sa clé de commande. En cas de conflit, relisez la demande actualisée avant de choisir à nouveau. Une date prolongée doit être enregistrée par le partenaire ; l'application ne contourne pas une échéance serveur.
 
+## Préparer son commerce pour une animation
+
+Après avoir accepté l’invitation, ouvrez l’animation ou l’invitation et choisissez
+**Télécharger mon kit**. Le kit concerne uniquement votre commerce. Décompressez
+le fichier, ouvrez le mode opératoire et imprimez le flyer PDF à taille réelle.
+Le guide contient les instructions réservées à votre équipe : affichez seulement
+le flyer destiné aux participants.
+
+Préparez les objets éventuels indiqués dans votre mission, installez le flyer à
+l’emplacement convenu et vérifiez que son QR est lisible. Le QR de support ouvre
+le contenu destiné aux joueurs pendant la période de jeu ; il peut être
+indisponible avant le lancement. Ce QR ne valide pas un passage : conservez le
+parcours de validation du QR personnel du participant dans l’application.
+
+Si le suivi de préparation est activé, choisissez **Je suis prêt** une fois les
+préparatifs terminés. Le gestionnaire reçoit une notification. Accepter
+l’invitation ne suffit pas à déclarer votre commerce prêt. En cas de perte de
+connexion, relisez l’état affiché avant toute nouvelle tentative. Si vous
+rencontrez un problème, contactez le gestionnaire avant le lancement.
+
+Les supports d’anciennes missions ne deviennent pas automatiquement publics.
+Leur contenu reste réservé à votre équipe tant qu’il n’a pas été explicitement
+préparé pour un accès joueur par QR.
+
 ## Finance, notifications et support
 
 Les options Finance ne sont visibles que lorsqu'elles sont activées. Les montants affichés proviennent du serveur. Une erreur de lecture n'indique pas l'absence de factures. N'émettez pas une nouvelle facture pour corriger une simple erreur d'affichage.

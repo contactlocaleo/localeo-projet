@@ -157,3 +157,17 @@ Les seize arbitrages du registre sont valides. Le motif de refus reste facultati
 - propagation de la liste acceptee aux projections Marketplace et aux validations terrain.
 
 [Retour à l’index des spécifications](../INDEX.md)
+
+## Évolution associée du 24 septembre 2026 — kit et déclaration de préparation
+
+Le statut historique de l’EPIC 56 reste **Terminée**. La nouvelle demande de kit
+commerçant, supports joueurs par QR et déclaration « prêt » est suivie dans
+[E55-KIT/E55-SUIVI](../moteur-animation/conception-technique.md#évolution-du-24-septembre-2026--kit-commerçant-et-préparation-du-démarrage).
+Elle distingue le consentement à participer de la réalisation des préparatifs :
+le kit appartient au seul commerce de l’invitation acceptée et la déclaration
+est liée à cette invitation. Le suivi est facultatif à la création ; lorsqu’il
+est actif, il bloque l’ouverture du jeu tant que les commerçants participants
+ne sont pas prêts, sauf forçage explicite et tracé par le gestionnaire habilité.
+Le [suivi d’implémentation E55](../moteur-animation/suivi-implementation.md) porte
+ses preuves et limites propres ; la clôture historique ne vaut pas validation
+de ce nouveau périmètre.
