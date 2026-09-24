@@ -110,6 +110,24 @@ Demande : améliorer l’accueil des joueurs grâce à une image mettant en scè
 
 Impacts, critères et preuves dans la [spécification canonique, section 8.1.2](../../specifications/moteur-animation/localeo_animation_engine_spec.md#812-thème-visuel-et-illustrations-de-lanimation). Aucun changement de statut de l’epic, de schéma ou de règle de publication. Les animations et prompts déjà enregistrés ne sont pas réécrits.
 
+## Évolution du 24 septembre 2026 — E55-UX-08
+
+Demande : harmoniser les sélections des commerçants et des coffrets, ainsi que
+le fil d’Ariane, en prenant le Passeport commerçant comme référence. Ajouter
+une consultation directe des commerçants en popin et des prestations des
+coffrets. Avant cette évolution, la Chasse utilisait des listes et une
+navigation différentes, et seuls les coffrets avaient une fiche consultable.
+
+- [x] E55-UX-08-A : sélecteurs communs aux trois modèles, en création et configuration ; éligibilité, quantités et sélections conservées.
+- [x] E55-UX-08-B : détails marchands accessibles depuis la sélection et les prestations des coffrets ; consultation sans mutation, erreurs réessayables et retour du focus.
+- [x] E55-UX-08-C : fil d’Ariane commun sur bureau/mobile, navigation sans sauvegarde implicite ni perte des saisies ; phases de Chasse et blocages conservés.
+- [x] E55-UX-08-D : preuves navigateur sur les trois modèles, non-régression des commandes et vérifications frontend/documentaires.
+
+La [conception T6-UX08](../../specifications/moteur-animation/conception-technique.md#t6-ux08--sélections-et-fil-dariane-communs-e55-ux-08)
+décrit les comportements et impacts ; le [suivi d’implémentation](../../specifications/moteur-animation/suivi-implementation.md)
+consigne les preuves. Cette extension ne change ni le statut de l’epic ni les
+conditions métier de publication, et ne nécessite aucune migration.
+
 ## References de suivi
 
 - [Registre TRE-ARB-01 a TRE-ARB-89](../../specifications/moteur-animation/localeo_animation_engine_spec.md#arbitrages).

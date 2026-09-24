@@ -2,6 +2,47 @@
 
 Branche commune : `feat-moteur-animation`, dans les cinq dépôts indépendants. Source de vérité : [spécification](localeo_animation_engine_spec.md), [conception technique](conception-technique.md) et [documents d’entrée](contrats/README.md). Ce suivi distingue code local vérifié, fonctionnalités raccordées et recette avant ouverture.
 
+## 24 septembre 2026 — E55-UX-08 : sélections et navigation communes
+
+Évolution [T6-UX08](conception-technique.md#t6-ux08--sélections-et-fil-dariane-communs-e55-ux-08)
+de l’[epic 55](../../roadmap/en-cours/epic-55-chasse-tresor-commercante-backlog.md),
+vérifiée localement sur les arbres de travail à partir d’Animation `ef5bbc7`
+et Projet `b8ac7db`. Le statut de l’epic et sa recette terrain restent inchangés.
+
+Les sélecteurs partagés remplacent les variantes de création/configuration.
+Les fiches marchands s’ouvrent depuis les sélections et les prestations des
+coffrets. Le catalogue marchand parcourt toutes les pages. Le fil d’Ariane
+partagé reprend le Passeport sur bureau/mobile ; la Chasse conserve ses phases
+de génération puis de préparation. Ses cinq premières rubriques de création
+sont Modèle, Commune, Informations, Commerçants et Mission & règles, puis le
+récapitulatif précède la demande explicite de proposition.
+
+| Critères | Preuves exécutées dans `localeo-animation` | Résultat |
+| --- | --- | --- |
+| A, B, C | `node tests/browser/animation-selection.mjs` | Passeport à 390/1280 px : sélection clavier, inéligibilité, popins chargées à l’ouverture, erreur/réessai, focus, fiche marchand imbriquée, quantités et retours sans mutation. |
+| A, B, D | `node tests/browser/animation-lots.mjs` | Tombola, détails et configuration : choix/quantités persistés, retrait des coffrets absents, concurrence paiement et verrous après paiement/publication ; mobile et bureau. |
+| A, C, D | `node tests/browser/generation-preparation.mjs` | 34 contrôles à 390/1280 px ; brief guidé, réutilisation, confirmations et réconciliation préservés. |
+| A, C, D | `node tests/browser/hunt-preparation.mjs` | 194 contrôles à 390/1280 px ; navigation, conservation des brouillons, commandes incertaines, financement et contrôles de préparation. |
+| C, D | `node tests/browser/leo-assistant.mjs` | Trois modèles, entrée Passeport/Tombola manuelle et Chasse avec Léo, mobile/bureau. |
+| D | `node --test tests/*.test.mjs` | 161 tests réussis, aucun échec ni test ignoré ; pagination, lecture seule, éligibilité, prix partiels et contrats inclus. |
+| D | TypeScript, ESLint et `node scripts/build-generation-tests.mjs` | Réussis ; avertissement de bundle supérieur à 500 ko déjà présent avant cette évolution. |
+
+Les captures de sélection, détail et navigation ont été inspectées aux deux
+tailles. La revue indépendante de l’intégration a relevé un message vide
+ambigu en consultation ; corrigé pour distinguer catalogue vide et absence
+de sélection. Deux attentes anciennes de la recette lots ont été actualisées :
+les sélections sont désormais des cases natives et une animation publiée
+propose les paramètres d’exploitation, sans bouton de modification des lots.
+Le réessai de deux fiches marchands attend chaque résultat avant le suivant.
+
+Contrôles documentaires réussis : `check_guidance.py` et
+`sync_documentation.py --check-sources` (117 sources). Dépôts modifiés :
+`localeo-animation` et `localeo-projet`. Aucun contrat de commande, schéma,
+permission, migration ou générateur modifié ; les autres applications sont
+sans impact. Ces recettes utilisent des API simulées et ne constituent pas
+une recette sur environnement déployé. Aucun commit, push ou déploiement
+réalisé pour cette évolution.
+
 ## État des lots
 
 | Lot | État | Résultat et reste à faire |

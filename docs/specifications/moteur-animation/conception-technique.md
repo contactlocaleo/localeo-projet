@@ -764,3 +764,46 @@ serveur. Les liens de continuité restent gérés par leurs identités serveur ;
 une modification des étapes exige leur enregistrement avant édition de ces
 liens, conformément à T5. Aucune migration ou évolution du générateur de
 démonstration n'est nécessaire pour cette réorganisation de l'interface.
+
+### T6-UX08 — Sélections et fil d’Ariane communs (E55-UX-08)
+
+L’évolution du 24 septembre 2026 prend le Passeport commerçant comme référence
+pour les trois modèles disponibles : Passeport, Tombola et Chasse. Les listes
+disparates de commerçants et de coffrets deviennent des sélecteurs partagés,
+en création comme en configuration : sélection explicite, éligibilité visible,
+quantité et estimation des lots, boutons de consultation indépendants.
+Le catalogue des commerçants est lu jusqu’à sa dernière page.
+
+Le fil d’Ariane utilise le même composant : étapes numérotées reliées sur grand
+écran, liste de navigation sur mobile, étape courante annoncée et navigation
+au clavier. Les rubriques suivent les opérations réellement disponibles :
+la Chasse recueille son brief avant génération, puis propose ses six rubriques
+de préparation T6-UX06. Les coffrets restent configurés après création de son
+brouillon. La navigation ne génère, n’enregistre et ne valide rien ; une étape
+visitée n’est pas présentée comme une validation métier. Les saisies sont
+conservées lors des retours et les commandes en cours ou incertaines bloquent
+toujours la navigation concernée.
+
+La fiche d’un commerçant s’ouvre dans une popin accessible sans changer la
+sélection. Son contenu public est chargé à l’ouverture, avec chargement,
+indisponibilité et réessai. La popin du coffret présente ses prestations,
+descriptions et valeurs disponibles, et permet d’ouvrir la fiche du commerçant
+associé. Échap ferme la popin et restitue le focus. Les champs absents ne sont
+pas inventés, les réponses tardives après démontage sont ignorées et les
+requêtes restent soumises à l’invalidation du contexte.
+
+Les minima de sélection, seuils du Passeport, quantités, autorisations,
+éligibilité et verrous financiers restent ceux des propriétaires existants.
+Un coffret enregistré absent du catalogue reste visible et retirable lorsque
+la modification est autorisée. Les détails restent consultables en lecture
+seule. Les sélections de commerçants ne valent jamais acceptation.
+
+Impacts : présentation et pagination dans `localeo-animation`, documentation
+canonique ici ; contrats HTTP existants réutilisés, aucun changement des
+commandes, permissions ou données persistées. Backend, Live et application
+Commerçant sans modification ; migration et générateur de démonstration sans
+objet car schémas, fixtures et règles métier inchangés. Déploiement frontend
+compatible avec le backend courant, sans ordre coordonné supplémentaire.
+Les preuves attendues couvrent navigation, sélection, consultation, refus et
+conservation des saisies sur mobile et bureau, ainsi que la non-régression des
+commandes de génération, de configuration et de paiement.
