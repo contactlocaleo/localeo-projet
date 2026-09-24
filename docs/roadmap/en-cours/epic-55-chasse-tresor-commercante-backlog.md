@@ -100,6 +100,16 @@ Points ouverts : la CLI de conversion et les contrats coordonnés sont testés, 
 
 La comparaison fournisseur prépare la suite pendant le développement. Le traitement manuel reste celui de la V1 ; intégration IA réelle, rallye et adaptation intercommunes ne sont pas des fonctionnalités requises pour la première livraison.
 
+## Évolution du 24 septembre 2026 — E55-ILL-01
+
+Demande : améliorer l’accueil des joueurs grâce à une image mettant en scène chaque étape de la chasse. Le prompt backend demandait déjà une couverture, mais les illustrations d’étape restaient facultatives. L’évolution exige dans le prompt une scène adaptée à chaque étape et à chaque mission candidate, par héritage pertinent ou surcharge, sans divulguer la solution ni les lieux futurs.
+
+- [x] E55-ILL-01-A : modifier le prompt backend et l’exemple documentaire Latresne ; conserver les budgets WebP/base64 et signaler toute image manquante comme résultat incomplet dans les instructions.
+- [x] E55-ILL-01-B : vérifier la non-régression de l’héritage, de la sélection des médias et des projections existantes ; suite ciblée et architecture : 505 tests réussis sous Python 3.14.
+- [ ] Évaluer une génération outillée et la compréhension des scènes par des joueurs ; aucune génération réelle réalisée pour cette modification de prompt.
+
+Impacts, critères et preuves dans la [spécification canonique, section 8.1.2](../../specifications/moteur-animation/localeo_animation_engine_spec.md#812-thème-visuel-et-illustrations-de-lanimation). Aucun changement de statut de l’epic, de schéma ou de règle de publication. Les animations et prompts déjà enregistrés ne sont pas réécrits.
+
 ## References de suivi
 
 - [Registre TRE-ARB-01 a TRE-ARB-89](../../specifications/moteur-animation/localeo_animation_engine_spec.md#arbitrages).

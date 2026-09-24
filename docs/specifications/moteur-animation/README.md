@@ -16,7 +16,7 @@ Les spécifications [EPIC 41](../epic-41-api/README.md), [Tombola — EPIC 53](.
 
 [Exemple de prompt simplifié — Latresne](exemples/latresne/README.md) : listes de commerçants et POI, fourchette d’étapes, durée, public, difficulté et thème ; export JSON et schéma de réponse séparé.
 
-Le thème visuel de l’animation peut être complété par une illustration et des surcharges par étape ou mission. La même demande génère le récit et les images WebP réelles, embarquées en base64 dans le JSON final. Chaque média reste sous 60 000 octets, base64 et métadonnées compris ; sa résolution s’adapte au budget PC/mobile. Le rendu se fonde sur les éléments déclarés dans l’animation (TRE-ARB-90, [section 8.1.2](localeo_animation_engine_spec.md#812-thème-visuel-et-illustrations-de-lanimation)).
+Le prompt de génération de chasse demande une couverture et une illustration mettant en scène chaque étape, départ et finale compris, pour faciliter l’accueil des joueurs (E55-ILL-01, 24 septembre 2026). Chaque mission candidate hérite d’une scène adaptée ou reçoit son propre visuel. La même demande génère le récit et les images WebP réelles, embarquées en base64 dans le JSON final. Chaque média reste sous 60 000 octets, base64 et métadonnées compris ; sa résolution s’adapte au budget PC/mobile. Le rendu se fonde sur les éléments déclarés dans l’animation ; le contrat conserve les présentations facultatives pour les contenus existants (TRE-ARB-90, [section 8.1.2](localeo_animation_engine_spec.md#812-thème-visuel-et-illustrations-de-lanimation)).
 
 ## Conception technique V1
 
