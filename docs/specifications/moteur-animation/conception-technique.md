@@ -685,3 +685,46 @@ contrats backend, contrôles d'accès et commandes idempotentes restent inchang�
 ### T6-FIN01 — Un reçu de paiement pour les lots de l’animation
 
 La demande utilisateur du 20 septembre 2026 impose un seul reçu de paiement par commande de lots, quelle que soit la quantité ou la diversité des coffrets. Le reçu consolidé détaille toutes les lignes de la commande et le total. La règle antérieure de présentation de la répartition crédit/Stripe, si elle figure dans le snapshot, est conservée. La règle documentaire canonique est la [fonction 5 de la spécification Animation EPIC 50](../epic-50-conformite-fiscale-bum/localeo-animation.md#fonction-5---documents-dacquisition). Les acquisitions sous-jacentes gardent leurs données de traçabilité ; leurs anciens reçus unitaires restent archivés, mais ne sont plus proposés dans les documents de la commande d’animation. Les achats hors animation conservent leur comportement.
+
+### T6-UX06 — Préparation guidée et traitement ERP par étapes
+
+La correction demandée le 23 septembre 2026 traite la difficulté à identifier
+l'action courante dans les formulaires de préparation existants. Elle réorganise
+les interfaces de T2/T3 sans introduire de nouvel état métier, de permission,
+de contrat API ou de migration.
+
+Dans Localeo Animation, **Configuration** d'une Chasse présente six étapes :
+**Parcours**, **Paramètres et lots**, **Commerces**, **Terrain**, **Financement**,
+**Publication**. Une seule étape est affichée à la fois. Le gestionnaire voit
+sa position, la tâche à réaliser et une aide contextualisée ; il peut revenir
+aux étapes précédentes. Les participations restent accessibles depuis leur
+onglet existant et sont également proposées dans le parcours guidé.
+
+La navigation n'enregistre aucune donnée et ne confirme aucun contrôle métier.
+Une étape consultée n'est pas déclarée terminée. Les saisies des étapes déjà
+ouvertes restent en mémoire pendant la présence dans Configuration ; elles
+doivent être enregistrées par leur commande explicite. Aucun stockage navigateur
+de ces données n'est ajouté. Une commande en cours ou dont le résultat reste
+incertain garde son écran de résolution accessible avant de poursuivre.
+Les modifications non enregistrées sont signalées avec leur rubrique ; elles
+empêchent la publication tant qu'elles ne sont pas résolues. Un retour de
+paiement reconnu ouvre le financement et conserve la lecture partagée du
+parcours ; le marqueur d'URL ne confirme jamais un paiement.
+
+La réponse acceptée dans l'ERP rend le parcours disponible à l'organisateur.
+Elle ne confirme ni les missions des commerces ni les vérifications terrain.
+La publication exige toujours le contrôle serveur courant et sa confirmation
+explicite. Les lectures partagées de T6-UX05, les versions attendues, les droits
+et la réconciliation des reçus restent applicables.
+
+Dans l'ERP, les trois étapes **Générer**, **Importer**, **Valider** remplacent
+l'affichage simultané des trois formulaires. La phase serveur indique l'étape
+utile et l'action suivante ; la navigation permet la relecture sans mutation.
+Le dépôt par fichier et le collage de JSON sont accessibles au même endroit.
+La pré-vérification, l'enregistrement durable et la relecture avant transmission
+au gestionnaire restent distincts. Une reprise autorisée ou une actualisation
+nécessaire est proposée près du blocage ; l'historique conserve les opérations
+secondaires. Aucun changement de phase ni envoi n'est déclenché par la navigation.
+
+La [procédure d'usage](exploitation-moteur.md) décrit ces étapes. Les preuves
+locales et leurs limites sont consignées dans le [suivi](suivi-implementation.md).

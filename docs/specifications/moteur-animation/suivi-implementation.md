@@ -509,3 +509,60 @@ Livraison sur `feat-moteur-animation` par commits séparés dans
 est livré dans son propre commit. Déployer le frontend pour appliquer
 l'optimisation sur l'environnement de test ; le push ne constitue pas une
 vérification du déploiement et aucune recette distante n’a été effectuée.
+
+## 23 septembre 2026 — T6-UX06 : préparation guidée et traitement ERP
+
+Défaut signalé : après réception de la proposition, le gestionnaire ne sait pas
+où il en est ni quelle action réaliser dans la configuration. Le code local
+empilait parcours, paramètres, terrain, financement et publication. Dans l'ERP,
+les trois blocs restaient affichés ensemble malgré le repère d'étapes.
+La version distante signalée n'a pas été consultée. Base locale : Animation
+`45100bb`, backend `94f33bb`, projet `7c085fa`, avec les changements de ce correctif.
+
+Correction décrite par T6-UX06 dans la [conception](conception-technique.md) et
+le [guide d'usage](exploitation-moteur.md) :
+
+- Animation : six étapes navigables, une visible à la fois, état du parcours,
+  action attendue, aide et retour aux rubriques. Les invitations sont intégrées.
+- Les formulaires déjà ouverts restent montés pour conserver leurs saisies.
+  Une visite ne vaut pas validation. Les modifications non enregistrées du
+  parcours, des paramètres et du terrain sont signalées et empêchent de publier.
+- Les commandes incertaines conservent leur résolution visible ; la navigation
+  ne provoque aucune écriture. Le retour de paiement ouvre le suivi financier
+  tout en conservant la lecture partagée du parcours.
+- La relecture des conditions de publication invalide immédiatement toute
+  confirmation précédente, y compris si la nouvelle lecture échoue.
+- ERP : **Générer → Importer → Valider**, dépôt par texte ou fichier visible,
+  reprise et actualisation du contexte accessibles près du blocage. La
+  pré-vérification, l'enregistrement et la transmission après relecture restent
+  explicites ; la transmission complète le brouillon et ne le publie pas.
+
+Preuves locales avec données synthétiques et API simulées pour le navigateur :
+
+| Vérification | Résultat |
+| --- | --- |
+| Reproduction avant correction | Le test exigeant la navigation « Étapes de configuration » échoue sur l'interface antérieure, qui ne la contient pas. |
+| `node --test tests/*.test.mjs` dans Animation | 143 tests réussis, aucun échec ni test ignoré. |
+| Types TypeScript et ESLint Animation | Réussis. |
+| `node scripts/build-generation-tests.mjs` | Build isolé réussi ; avertissement de taille du bundle supérieur à 500 ko, également observé avant modification. |
+| `node tests/browser/hunt-preparation.mjs` | 106 contrôles à 1280/390 px : étapes, lecture seule, saisies conservées, absence d'écriture de navigation, lectures partagées, invitations, QR, contrôles terrain, reçus perdus, publication, erreur/reprise, retour de paiement et saisies non enregistrées. |
+| `node tests/browser/generation-preparation.mjs` | 26 contrôles à 1280/390 px. L'attente de relecture cible désormais le titre de l'aperçu chargé ; l'ancien sélecteur pouvait prendre le titre de phase avant la fin du GET. |
+| `node tests/browser/exploitation.mjs` | Réussi à 1280/390 px : exploitation, correction/gel, droits, continuité et trois moteurs. |
+| `node tests/browser/generation-erp.cjs` dans le backend | Réussi à 1280/390 px : panneaux exclusifs, saisie conservée, reprise visible, validation sans écriture, dépôt, réconciliation et relecture obligatoire. |
+| Lanceur backend isolé : `test_generation_animation_api_t2.py`, `test_verification_reponse_generation_api.py`, `test_generation_animation_integration_review_t2.py` | 29 tests réussis. |
+| Captures mobile et bureau | Inspectées ; aucun débordement horizontal dans les recettes. |
+| Revue indépendante | Droits, saisies, retours de paiement et confirmations relus ; les risques identifiés de retour financier masqué et de confirmation périmée ont été corrigés. |
+
+Impacts : aucune modification de contrat API, de règle métier backend, de schéma
+persistant ou de générateur de démonstration. Les fixtures conservent leurs
+données ; les parcours navigateur sont adaptés à la nouvelle navigation. Aucune
+génération sur environnement réel, migration, réparation de données ni opération
+de paiement réelle n'a été exécutée. Les sources canoniques d'usage et de
+conception sont mises à jour. `check_guidance.py` contrôle 85 documents et 831
+liens sans erreur ni avertissement ; `sync_documentation.py --check-sources`
+valide les 117 sources exportées. Les vérifications `git diff --check` passent
+dans les trois dépôts modifiés.
+
+Ces preuves locales ne constituent ni une recette humaine sur le terrain ni
+une vérification des environnements déployés. Commit, push et déploiement restent
+des opérations distinctes de cette correction.
