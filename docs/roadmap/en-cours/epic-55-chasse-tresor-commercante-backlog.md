@@ -143,6 +143,25 @@ sauf forçage explicite. Voir les critères **E55-KIT-01 à 03** et
 
 Cette évolution n’efface ni le bilan T1–T6 ni les travaux d’ouverture restants.
 
+## Évolution du 25 septembre 2026 — E55-UX-09
+
+Simplifier Localeo Animation pour un gestionnaire non technique : demande de
+génération, réception du parcours graphique, consultation et configuration de
+chaque étape, puis préparatifs et publication dans le même espace. Exploiter
+la largeur desktop ; réserver prompts, requêtes et imports à l'ERP.
+
+- [x] A : demande sans étape Commune de lecture ni outils techniques opérateur.
+- [x] B : parcours illustré, ordre explicite, aperçu initial et inspecteur adaptable.
+- [x] C : espace permanent, organisation/lots/financement regroupés et retour paiement.
+- [x] D : invitations groupées avec destinataires explicites ; contrôle de publication automatique à l'ouverture.
+- [x] E : préserver droits, saisies, relecture, accords, versions et résolution des commandes incertaines.
+
+Critères, impacts et preuves dans la [conception E55-UX-09](../../specifications/moteur-animation/conception-technique.md#e55-ux-09--préparation-centrée-sur-le-parcours-25-septembre-2026)
+et le [suivi d'implémentation](../../specifications/moteur-animation/suivi-implementation.md).
+Le remplacement éventuel des attestations métier et une prédiction détaillée
+des accords invalidés restent à préciser ; aucune preuve existante n'est
+supprimée implicitement. Le statut de l'epic reste **En cours**.
+
 ## Références
 
 - [Registre TRE-ARB-01 a TRE-ARB-89](../../specifications/moteur-animation/localeo_animation_engine_spec.md#arbitrages).

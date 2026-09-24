@@ -891,3 +891,77 @@ et embarqués des consommateurs sont exportés ensemble après implémentation.
 | E55-SUIVI-03/04 | Domaine propriétaire de l’ouverture | Pas prêt refusé, tous prêts autorisé, forçage explicite tracé, dates et autres barrières préservées | Actions API et parcours Animation/Commerçant | Vérifier démarrage planifié et actions Live ; pas de déploiement implicite |
 
 Les preuves locales ont été exécutées : le [suivi d’implémentation](suivi-implementation.md#e55-kit--e55-suivi--24-septembre-2026) consigne les commandes, résultats et limites. Cette validation locale ne vaut pas déploiement ni impression physique.
+
+## E55-UX-09 — Préparation centrée sur le parcours (25 septembre 2026)
+
+Direction validée par l'utilisateur : demander une génération, recevoir et
+comprendre le parcours, configurer une étape à la demande, puis préparer le
+lancement. Le gestionnaire n'intervient plus dans les échanges techniques avec
+le générateur. Cette évolution remplace la navigation séquentielle T6-UX06 et
+la hiérarchie initiale T6-UX07 ; elle conserve leurs règles métier.
+
+### Critères et comportements
+
+- **E55-UX-09-A** — Après le modèle, le brief commence sur Informations ; la
+  commune active reste affichée et récapitulée. Aucun export/relecture de
+  prompt ou requête, dépôt/import JSON, affectation opérateur ou acceptation de
+  réponse technique n'est proposé dans Localeo Animation, même si la session
+  possède les permissions correspondantes. Ces opérations restent dans l'ERP.
+  L'attente, l'actualisation et la modification/annulation autorisée d'une
+  demande sont formulées dans le vocabulaire du gestionnaire. La réception du
+  résultat ERP rend directement le parcours consultable.
+- **E55-UX-09-B** — Le parcours occupe la largeur disponible, sans conteneur
+  central de largeur maximale. Étapes illustrées depuis leurs médias, numéros
+  et liens montrent un ordre unique sans serpent ni défilement horizontal.
+  Aucune étape n'est imposée à l'ouverture : la sélection ouvre l'aperçu joueur,
+  puis Configurer donne accès à l'édition. L'inspecteur est latéral lorsque la
+  largeur réelle le permet, avec retour au parcours sur petit écran. La
+  fermeture rend le focus au déclencheur. Déplacement clavier, cinq activités,
+  alternatives historiques et séparation des contenus privés sont conservés.
+- **E55-UX-09-C** — Le parcours reste le support principal. Les rubriques
+  Organisation et lots, Commerces, Terrain, Publication s'ouvrent à la demande
+  dans un panneau adjacent sur grand écran et remplacent temporairement le
+  parcours sur petit écran. Les panneaux visités conservent leurs saisies.
+  Le financement est accessible dans Organisation et lots, après les choix ;
+  le gestionnaire est invité à attendre la stabilisation des participations.
+  Toute saisie de paramètres non enregistrée empêche d'engager un paiement.
+  Un retour du prestataire ouvre cette rubrique et son financement, sans
+  attribuer de valeur probante à l'URL.
+- **E55-UX-09-D** — Valider le parcours et continuer enregistre la relecture
+  via la commande existante puis ouvre Commerces après résultat confirmé.
+  Cela n'envoie aucune invitation. La sélection groupée ne concerne que les
+  demandes à envoyer ; le gestionnaire peut retirer un destinataire et envoie
+  explicitement le groupe avec son décompte. Un refus permet de revenir adapter
+  le parcours. Le contrôle de publication se charge à l'ouverture ; les erreurs
+  restent visibles, et publier exige toujours une confirmation explicite.
+- **E55-UX-09-E** — Navigation, aperçu et sélection ne créent ni consentement,
+  ni publication, ni paiement. Relecture du parcours même sans retouche,
+  contrôles terrain, checklist et déclaration prêt restent distincts. Saisies
+  non enregistrées bloquent la publication ; commandes en cours/incertaines
+  conservent leur résolution accessible, sans répétition automatique. Permissions,
+  clés et versions restent celles du backend. Les animations publiées ne sont
+  pas présentées comme prêtes sur la seule base de leur réception ou visite.
+
+L'allègement des attestations exige de définir la preuve et son propriétaire
+de remplacement. Une prévision précise, avant sauvegarde, des commerces dont
+l'accord sera invalidé nécessite une décision du domaine ou un contrat d'aperçu.
+Ces deux extensions restent ouvertes, sans calcul local de consentement ni
+suppression silencieuse d'un invariant. Aucun changement de domaine n'est
+nécessaire pour le lot d'interface ci-dessus.
+
+### Impacts et traçabilité
+
+Sources de départ : Animation `48c05875a5c8c36820063becd7fbb20d8332f38c`,
+backend `d106f273758b71de33167ae41cb66e2b67c391b9`, projet
+`446fa7c48b01b24a5388aabebc7820f2a500fc0a`. Modifications utilisateur dans les
+guides/skills du projet préservées. Le backend reste propriétaire de la
+relecture (`revision_relue`), du consentement, du financement et de la publication.
+
+| Critères | Preuves prévues | Documentation / contrats | Démonstration / fixtures | Exploitation / livraison |
+| --- | --- | --- | --- | --- |
+| A | Génération simulée reçue de l'ERP, absence outils même avec droits, adresses/quota/reprise | Guide moteur ; commandes API inchangées | Adapter fixtures navigateur ; schéma générateur inchangé | Interface Animation seule ; ERP existant requis pour traiter les demandes |
+| B | Desktop/mobile, largeur réelle, clavier, cinq activités, aucune écriture en aperçu | Conception et guide ; aucun export de contrat | Médias synthétiques locaux, aucun nouvel asset produit | Bundle frontend ; ni migration ni configuration supplémentaire |
+| C | Saisies conservées, paiement bloqué avant sauvegarde, retour prestataire sans écriture | Guide d'exploitation moteur | Recettes API simulées, aucun paiement réel | Serveur seul autorité financière, aucun déploiement implicite |
+| D, E | Destinataires exacts, relecture, réponse perdue, publication et droits | Contrats/reçus existants conservés | Invitations fictives ; générateur sans impact car données/états inchangés | ERP, Commerçant et Marketplace non modifiés ; aucun effet sur jeu publié |
+
+Les résultats réels et limites figurent dans le suivi d'implémentation.

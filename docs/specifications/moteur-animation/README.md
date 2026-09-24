@@ -51,3 +51,15 @@ imprimable, son mode opératoire et le suivi facultatif de préparation sont
 spécifiés dans [E55-KIT/E55-SUIVI](conception-technique.md#évolution-du-24-septembre-2026--kit-commerçant-et-préparation-du-démarrage).
 Le bilan de cette évolution figure dans le [suivi](suivi-implementation.md).
 Les exemples Latresne à deux alternatives documentent le contrat historique.
+
+## Préparation simplifiée — E55-UX-09, 25 septembre 2026
+
+Localeo Animation présente la demande puis le parcours graphique reçu, sans
+prompts, requêtes ou imports techniques. La vue exploite la largeur desktop,
+ouvre un aperçu d'étape avant l'édition et conserve les préparatifs dans le même
+espace. Organisation et lots regroupe les paramètres et le financement ; les
+invitations proposent une sélection groupée avec envoi explicite. Les contrôles
+métier restent portés par le backend. Voir la
+[conception](conception-technique.md#e55-ux-09--préparation-centrée-sur-le-parcours-25-septembre-2026),
+le [guide d'utilisation](exploitation-moteur.md#préparer-la-chasse-après-réception-par-le-gestionnaire)
+et les [preuves locales](suivi-implementation.md#e55-ux-09--préparation-simplifiée-25-septembre-2026).

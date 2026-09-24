@@ -778,3 +778,64 @@ migration. Vérification après commit sur une nouvelle connexion : enregistreme
 v248, empreinte conforme et cinq colonnes nullables présentes avec les types
 attendus. SHA-256 : `d08b9a74b514b1f558adffc8ef5aad2b3c0d8422599b92f8d887fee0912d1d53`.
 Aucun déploiement applicatif ni redémarrage n'a été réalisé par cette opération.
+
+## E55-UX-09 — Préparation simplifiée (25 septembre 2026)
+
+Lot d'interface livré dans `localeo-animation`, documentation dans
+`localeo-projet`, sur les SHAs de départ relevés dans la
+[conception](conception-technique.md#e55-ux-09--préparation-centrée-sur-le-parcours-25-septembre-2026)
+avec modifications locales non committées. Les modifications utilisateur des
+guides et skills sont conservées. Backend, Marketplace et Commerçant ne sont
+pas modifiés ; ni contrat, ni migration, ni données générées ne changent.
+
+Le gestionnaire demande une proposition puis consulte directement le parcours
+transmis par l'ERP. Les outils opérateur disparaissent de son interface même
+avec des permissions élargies. Le parcours illustré occupe l'espace disponible,
+avec aperçu initial à la sélection, inspecteur réglable au clavier sur grand
+écran et retour au parcours sur mobile. Les rubriques de préparation restent
+dans le même espace, les lots et leur financement sont regroupés. La validation
+du parcours ouvre Commerces seulement après enregistrement confirmé ; la
+sélection groupée ne déclenche aucun envoi. Les accords, vérifications, quorum
+et publication restent contrôlés par le serveur.
+
+### Résultats locaux
+
+Node 24.14.0, navigateurs Chromium avec API synthétiques et réseau externe
+bloqué ; aucun envoi, paiement, génération IA ou publication réels. Les tests
+documentaires utilisent Python 3.14 installé hors PATH.
+
+| Critères | Commande / preuve | Résultat |
+| --- | --- | --- |
+| A, D, E | `node tests/browser/generation-preparation.mjs` après build isolé | **50 contrôles**, 1280/390 px : réception ERP par lecture, absence outils techniques, contexte inactif, conflit/reprise et sauvegarde avant navigation |
+| B, E | `node tests/browser/hunt-route-visual.mjs` (build autonome sans environnement opérateur) | **70 contrôles**, 1600/1280/390 px : cinq activités, alternatives, clavier, sélection après déplacement, largeur réelle 750 px, inspecteur réglable, images invalides/limites, révocation blobs, absence d'écriture en aperçu |
+| C, D, E | `node tests/browser/hunt-preparation.mjs` après build isolé | **210 contrôles**, 1280/390 px : brouillons, sauvegarde, sélection groupée, réponse perdue, QR/terrain, publication, retour paiement et exclusion des actions financières concurrentes |
+| A, E | `node tests/browser/leo-assistant.mjs` et `node tests/browser/preparation-tracking.mjs` | Réussis : catalogue/brief et suivi des trois modèles à 1280/390 px |
+| C, E | `node tests/browser/animation-lots.mjs` | Réussi : création/paiement, commandes interrompues, concurrence, lots indisponibles et verrous après paiement/publication |
+| Transverse frontend | `node --test tests/*.test.mjs` | **163 réussis**, aucun échec ni skip |
+| Types / lint | `node node_modules/typescript/bin/tsc --noEmit` ; `node node_modules/eslint/bin/eslint.js src vite.config.ts` | Réussis |
+| Build navigateur | `node scripts/build-generation-tests.mjs` | Réussi, aucun fichier d'environnement lu |
+| Build configuration réelle et PWA | API Vite avec `vite.config.ts`, `envDir:false`, mode `test`, cible staging explicite et origine `https://api.test.invalid` ; cwd temporaire vide pour `loadEnv`, sortie `tmp/production-check-dist` | Réussi, `sw.js` généré ; avertissement de chunk principal >500 kB (environ 812 kB minifié) |
+| Documentation | `scripts/check_guidance.py` et `scripts/sync_documentation.py --check-sources` | Réussis ; contrôle des documents ciblés complété avec le bilan |
+
+Les captures du composant dans `tmp/hunt-route-visual/` et du parcours intégré
+dans `tmp/generation-browser-captures/` ont été inspectées. Les illustrations
+de la recette isolée sont synthétiques ; en usage réel, seuls les médias de la
+préparation sont affichés. Cette recette ne remplace pas un essai connecté ou
+le pilote terrain.
+
+La revue indépendante a identifié puis fait corriger deux risques liés aux
+panneaux côte à côte : modification de demande depuis le panneau inactif et
+annulation financière pendant une sauvegarde des paramètres. Les blocages de
+présentation sont distincts des permissions et des commandes en cours : ils
+n'empêchent pas la confirmation ou la résolution de la propre action financière.
+Les nouvelles assertions navigateur passent après correction ; la relecture
+finale n'a relevé aucun nouveau défaut concret.
+
+**Bilan : E55-UX-09-A à E couverts localement.** Remplacement des attestations
+métier et prévision détaillée des accords invalidés avant sauvegarde restent
+hors de ce lot, à spécifier. Le générateur de démonstration conserve les mêmes
+schémas, permissions et états ; seuls les scénarios navigateur sont adaptés.
+Livraison : bundle Animation, aucune migration ni ordre coordonné nouveau ; le
+traitement ERP existant reste nécessaire pour recevoir les propositions.
+Aucun commit, push ou déploiement réalisé ; les travaux d'ouverture de l'EPIC 55
+restent ouverts.
