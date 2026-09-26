@@ -171,3 +171,68 @@ ne sont pas prêts, sauf forçage explicite et tracé par le gestionnaire habili
 Le [suivi d’implémentation E55](../moteur-animation/suivi-implementation.md) porte
 ses preuves et limites propres ; la clôture historique ne vaut pas validation
 de ce nouveau périmètre.
+
+## E56-UX-01 — préparation commerçant simplifiée (26 septembre 2026)
+
+L’évolution rattachée au [backlog E56](../../roadmap/terminees/epic-56-validation-participation-commercants-animation-backlog.md)
+remplace les confirmations répétées par deux moments : accepter la participation,
+puis préparer le commerce et signaler qu’il est prêt. Elle s’applique aux demandes
+génériques et aux missions privées de chasse (E55).
+
+Avant acceptation, les dates, l’organisateur et la mission restent visibles.
+Le règlement versionné, la description et les informations complémentaires
+restent consultables dans des sections repliables. Le bouton d’acceptation porte
+la décision explicite : il n’ouvre plus une seconde confirmation.
+
+Pour une chasse, une seule mission ne requiert plus de sélection ; si plusieurs
+missions sont proposées, le choix reste obligatoire. La liste complète des
+préparatifs de la mission choisie est visible, suivie d’un accord global non
+précoché. Cet accord transmet exactement tous les identifiants de conditions
+attendus, avec la version, révision et empreinte présentées. Changer de mission
+ou relire après conflit efface cet accord. Le refus et le retrait conservent une
+confirmation et un motif facultatif.
+
+Après acceptation, la préparation met le téléchargement du kit et la déclaration
+« Je suis prêt » en évidence. Le guide intégral reste dépliable, y compris ses
+consignes métier et supports privés : aucune ligne n’est filtrée selon son titre.
+La lecture et le téléchargement ne constituent jamais une déclaration de
+préparation. Les droits backend et le suivi facultatif déterminent la présence
+de l’action. Le flyer séparé s’ouvre à la demande, selon ses droits existants.
+
+Les commandes restent verrouillées pendant l’envoi. Une réponse incertaine exige
+une relecture explicite avant renvoi ; aucun succès ni renvoi automatique.
+L’acceptation de chasse conserve son protocole de reçu et sa clé ; la participation
+générique et la déclaration « prêt » relisent l’état serveur et conservent leur
+clé pour une même intention incertaine.
+
+Impacts : frontend Commerçant et documentation fonctionnelle/formation. Les
+propriétaires backend restent `missions_commercantes.verifier_choix`, la demande
+de participation et le service de préparation. Aucune règle, permission, API,
+donnée ou migration ne change ; les contrats embarqués, autres consommateurs,
+ERP, batchs et générateur de démonstration sont sans impact. Les fixtures de
+parcours sont adaptées au consentement global et aux informations dépliables.
+Aucune configuration ni ordre de déploiement interapplications nouveau ; le
+frontend demeure compatible avec le backend existant. Les reprises réseau
+restent documentées dans le [guide commerçant](../../produit/formation/commercant/guide-commercant.md).
+
+### Bilan local
+
+Arbres de travail : Commerçant à partir de `574ab07`, Projet à partir de `c2ff6e0`,
+branche `feat-moteur-animation`. Les critères E56-UX-01-A à D sont couverts :
+
+- **98 tests Vitest** du périmètre `src/features/animations` réussis : accord global,
+  mission unique, choix historique, changement de version, double clic, réponse
+  perdue, relecture et préparation distincte.
+- **13 scénarios Playwright** réussis (`hunt-missions`, `animation-kit`,
+  `animations`, `animation-flyer`) : clavier, mobile/bureau, téléchargement
+  authentifié, guide dépliable, réception perdue sans second POST et retour liste.
+- Build isolé `scripts/build-browser-tests.mjs` réussi ; captures relues.
+- `check_guidance.py` : 87 guides, 869 liens, aucun écart ;
+  `sync_documentation.py --check-sources` : 118 documents vérifiés.
+- Revue indépendante du consentement et des reprises : aucun point bloquant.
+
+Les anciennes assertions de double confirmation et de flyer immédiatement
+visible ont été remplacées par les attentes E56-UX-01, en conservant les contrôles
+de droits et de contenu. Les erreurs réseau sont simulées et aucune recette avec
+un backend déployé n’est revendiquée. Pas de commit, push ni déploiement dans
+ce périmètre ; la clôture historique E56 et le statut E55 restent inchangés.

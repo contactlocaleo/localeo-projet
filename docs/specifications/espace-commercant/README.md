@@ -267,13 +267,19 @@ Le détail d'une demande restitue la version présentée par le backend : organi
 
 Le commerçant peut :
 
-- accepter après une confirmation explicite ;
+- accepter directement avec un engagement explicite visible, sans écran de confirmation supplémentaire ; pour une chasse, confirmer globalement les préparatifs affichés de la mission choisie (accord non précoché) ;
 - refuser après une confirmation explicite, avec un motif facultatif limité à 1 000 caractères ;
 - retirer une acceptation, directement avant publication ou sous forme de demande traitée par le partenaire après publication.
 
 Une échéance dépassée désactive les décisions et explique que le partenaire doit prolonger la date limite. Les commandes portent une clé d'idempotence. Les liens reçus par notification ouvrent directement la demande, mais la route reste protégée par la session commerçant.
 
 Après acceptation et publication, le détail de l'animation affiche la mission et le règlement courants. Un bloc « Flyer de l’animation » figure dans cette vue ainsi que dans le détail d’une participation acceptée. Lorsque le backend confirme sa disponibilité, le commerçant peut télécharger le PDF ou l’ouvrir pour impression. Pendant le chargement ou en cas de réponse `404`, le bouton de téléchargement reste désactivé et un message explique l’indisponibilité. « Actualiser le flyer » permet de vérifier à nouveau sa disponibilité sans quitter la fiche. Le document reste inaccessible avant publication.
+
+L’évolution [E56-UX-01](../epic-56-validation-participation-commercants-animation/README.md#e56-ux-01--préparation-commerçant-simplifiée-26-septembre-2026)
+donne priorité à la mission et aux deux gestes de préparation : télécharger le
+kit, puis déclarer le commerce prêt lorsque le serveur l’autorise. Règlement,
+guide complet et flyer séparé se consultent à la demande. L’accord de participation
+et la déclaration de préparation restent deux décisions distinctes.
 
 ## 4. APIs utilisées
 

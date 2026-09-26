@@ -4,6 +4,26 @@
 
 ## Synthese
 
+### Évolution du 26 septembre 2026 — E56-UX-01, préparation commerçant simplifiée
+
+Le statut historique **Terminée** reste inchangé. Cette évolution de présentation
+concerne Localeo Commerçant et les missions de chasse de l’EPIC 55. Elle remplace
+l’écran de confirmation supplémentaire de l’acceptation et les cases séparées
+par préparatif, sans modifier les conditions de participation.
+
+| Critère | Comportement attendu | Preuves ciblées |
+| --- | --- | --- |
+| E56-UX-01-A | Dates et mission immédiatement lisibles ; règlement, détails et guide accessibles à la demande, sans suppression des consignes | Pages invitation/animation, tests navigateur bureau et mobile |
+| E56-UX-01-B | Mission unique présentée sans sélection inutile ; plusieurs propositions restent un choix explicite ; tous les préparatifs visibles, un accord global non précoché puis acceptation directe | `HuntInvitationDetail.test.jsx`, `hunt-missions.spec.js` |
+| E56-UX-01-C | Après acceptation, kit et déclaration « Je suis prêt » distincts ; télécharger ou consulter ne déclare jamais prêt ; refus et retrait conservent leur confirmation | Tests kit et participation, `animation-kit.spec.js` |
+| E56-UX-01-D | Un clic pendant une commande ne la répète pas ; résultat incertain relu avant renvoi ; changement de mission ou conflit remet le consentement à zéro | Tests commande, invitation et kit |
+
+La [spécification](../../specifications/epic-56-validation-participation-commercants-animation/README.md#e56-ux-01--préparation-commerçant-simplifiée-26-septembre-2026)
+porte les impacts et le bilan de cette évolution. La clôture initiale ne vaut
+pas preuve de ce nouveau périmètre.
+
+### Bilan initial
+
 - Criticite : `Haute`.
 - Statut : `Termine`.
 - Objectif : obtenir l'accord explicite de chaque commercant avant de le rendre participant et visible dans une animation, lui fournir les informations et supports necessaires, puis mesurer l'avancement des reponses.

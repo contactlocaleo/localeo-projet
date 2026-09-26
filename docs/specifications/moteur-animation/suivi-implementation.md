@@ -2,6 +2,82 @@
 
 Branche commune : `feat-moteur-animation`, dans les cinq dépôts indépendants. Source de vérité : [spécification](localeo_animation_engine_spec.md), [conception technique](conception-technique.md) et [documents d’entrée](contrats/README.md). Ce suivi distingue code local vérifié, fonctionnalités raccordées et recette avant ouverture.
 
+## 26 septembre 2026 — E55-UX-11 : Terrain simplifié
+
+Évolution [E55-UX-11](conception-technique.md#e55-ux-11--terrain-simplifié-26-septembre-2026),
+à partir de Backend `c4a0d99`, Animation `9bc47d4` et Projet `c2ff6e0` sur
+`feat-moteur-animation`, avec les modifications locales de préparation Commerçant
+antérieures conservées. L’epic reste **En cours**.
+
+Terrain présente les supports QR et les déclarations de préparation des commerces.
+Le guide est facultatif. Fiches de visite, vérification de chaque mission et
+checklist organisateur ne sont plus proposées ni exigées pour publier. Le domaine
+conserve accords et conditions confirmées, références des lieux, cohérence du
+parcours, dates, QR, financement et publication explicite. La jauge retire les
+trois anciens contrôles de son dénominateur (dix contrôles au maximum, Terrain
+limité aux QR applicables), sans les valider artificiellement.
+
+La revue a identifié puis fait corriger une dépendance auparavant portée par
+la fiche POI : le QR doit correspondre à l’édition courante du lieu. Le helper
+de domaine commun vérifie ce point avant publication et dans l’exploitation
+après publication, sans nouvelle attestation. Les recontrôles spécifiques des
+changements de période/capacité restent inchangés.
+
+Preuves locales exécutées :
+
+| Périmètre | Résultat |
+| --- | --- |
+| Backend ciblé | **136 tests réussis** : compilation, préparation QR, paramètres, assemblage sans attestations, jauge, catalogue Chasse/readiness, API protégée/interne, contrats de préparation et générateur de démonstration. |
+| Architecture backend | **421 tests réussis**, via le runner isolé : `tests/architecture`, recensement domaine et couverture des use cases. |
+| Animation | **163 tests Node réussis**, types et lint réussis, build isolé réussi. |
+| Préparation intégrée navigateur | **244 contrôles réussis** à 1280/390 px : absence des anciens formulaires, QR et téléchargement, reprise réseau, jauge actualisée, suivi replié/inactif/indisponible, publication et lecture seule sans mutation. |
+| Autres parcours navigateur | `hunt-progress.mjs` : **86 contrôles réussis** à 1600/390 px ; `preparation-tracking.mjs` réussi à 1280/390 px. |
+| Documentation | `check_guidance.py` et `sync_documentation.py --check-sources` réussis ; 118 documents exportés vérifiés. |
+
+Commandes frontend : `node --test tests/*.test.mjs`, `node node_modules/typescript/bin/tsc --noEmit`,
+lint via ESLint local, `node scripts/build-generation-tests.mjs`, puis
+`node tests/browser/hunt-preparation.mjs`, `node tests/browser/hunt-progress.mjs`
+et `node tests/browser/preparation-tracking.mjs`. Captures synthétiques dans
+`localeo-animation/tmp/generation-browser-captures/hunt-terrain-*.png`.
+
+La revue indépendante a contrôlé la convergence des routes ERP/portail,
+l’absence de fausses validations et les contrôles QR ; le cas applicatif
+postpublication couvre aussi un QR actif d’une ancienne édition POI.
+Les scénarios PostgreSQL de publication et d’édition POI sont adaptés, mais
+**non exécutés** faute de base jetable fournie.
+
+La suite backend élargie a produit **624 réussites, 7 skips et 10 échecs**.
+Les dix échecs sont reproduits à l’identique sur `HEAD c4a0d99`, extrait dans une
+copie indépendante (`tmp/terrain-baseline-python`) : **10 échecs et 8 réussites**
+sur les quatre fichiers concernés. Journal local :
+`localeo-backend/tmp/terrain-baseline-results.txt`. Dette confirmée :
+`test_lot3_catalogue.py` (1), `test_missions_medias_t3.py` (2),
+`test_modification_animation_en_cours.py` (3), `test_tirage_tous_lots_animation.py`
+(4). Les sept skips existants concernent les repositories PostgreSQL dédiés
+conservation, conversion, exploitation, exécution, paramètres et préparation,
+dont la fixture exige une base jetable explicite ; aucun skip ajouté.
+
+Les preuves nouvelles sont notamment dans `test_assemblage_sans_attestation_terrain.py`,
+`test_compilation_chasse_t3.py`, `test_preparation_verifiee.py`,
+`test_avancement_preparation.py` et `test_avancement_preparation_api.py`.
+Elles vérifient aussi les refus à conserver, pas seulement l’absence des
+anciennes erreurs de checklist. Les scénarios PostgreSQL restent une limite
+d’intégration ; la suite élargie n’est pas déclarée entièrement verte.
+
+Contrats HTTP et schémas conservés : aucune migration ni génération de faux
+dossiers. Les anciennes données/API restent disponibles. Le générateur de
+démonstration utilise des moteurs classiques et ne fabrique pas de telles
+attestations ; aucune adaptation de données ni génération réelle demandée.
+Marketplace et Commerçant restent compatibles. Livrer le backend avant Animation.
+Aucun commit, push ou déploiement réalisé ; aucune recette sur une cible réelle.
+
+## 26 septembre 2026 — préparation côté commerçant (E56-UX-01)
+
+L’évolution du 26 septembre simplifiant la préparation dans **Localeo Commerçant**
+est suivie sous [E56-UX-01](../epic-56-validation-participation-commercants-animation/README.md#e56-ux-01--préparation-commerçant-simplifiée-26-septembre-2026).
+Elle conserve les règles E55 de choix de mission, les conditions confirmées,
+l’accès privé au kit et la distinction acceptation/préparation terminée.
+
 ## 24 septembre 2026 — E55-UX-08 : sélections et navigation communes
 
 Évolution [T6-UX08](conception-technique.md#t6-ux08--sélections-et-fil-dariane-communs-e55-ux-08)

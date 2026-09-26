@@ -25,7 +25,17 @@ L'annulation est proposée seulement si le serveur fournit les informations néc
 
 ## Invitations Animation
 
-Consultez les informations et le règlement avant d'accepter, refuser ou demander un retrait. Après une erreur réseau, une nouvelle tentative de la même décision réutilise sa clé de commande. En cas de conflit, relisez la demande actualisée avant de choisir à nouveau. Une date prolongée doit être enregistrée par le partenaire ; l'application ne contourne pas une échéance serveur.
+Consultez les dates et votre mission ; ouvrez « Présentation et règlement » pour
+les détails (pour une chasse : « Consulter le règlement et les détails de
+l’animation »). S’il y a plusieurs missions, choisissez celle que vous pouvez
+réaliser. Pour une chasse, lisez tous les préparatifs affichés puis cochez l’accord
+unique. Le bouton d’acceptation enregistre directement votre décision.
+
+Le refus et le retrait demandent une confirmation ; leur motif reste facultatif.
+Après une erreur réseau, utilisez « Vérifier ma décision » avant de retenter.
+En cas de conflit, la demande actualisée exige un nouvel accord. Une date
+prolongée doit être enregistrée par le partenaire ; l’application ne contourne
+pas une échéance serveur.
 
 ## Préparer son commerce pour une animation
 
@@ -34,6 +44,10 @@ Après avoir accepté l’invitation, ouvrez l’animation ou l’invitation et 
 le fichier, ouvrez le mode opératoire et imprimez le flyer PDF à taille réelle.
 Le guide contient les instructions réservées à votre équipe : affichez seulement
 le flyer destiné aux participants.
+
+Le bouton **Voir le guide de préparation** permet aussi de consulter toutes les
+consignes dans l’application. Les informations complémentaires restent repliées
+pour laisser visibles votre mission et les actions utiles.
 
 Préparez les objets éventuels indiqués dans votre mission, installez le flyer à
 l’emplacement convenu et vérifiez que son QR est lisible. Le QR de support ouvre

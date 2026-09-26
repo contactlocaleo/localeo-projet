@@ -32,6 +32,19 @@ une animation se termine au minuit suivant. Un changement d'heure ne rajoute ni
 ne supprime une journée du calendrier. Les échéances de réponse commerçant restent
 valables pendant toute la journée choisie à Paris.
 
+## Préparer le terrain d’une chasse
+
+La rubrique **Terrain** se limite à deux points :
+
+1. **Supports à installer** : préparer et télécharger les QR des lieux du parcours.
+2. **Préparation des participants** : consulter les commerces qui se sont déclarés
+   prêts, si ce suivi a été activé. Ouvrir le détail seulement si nécessaire.
+
+Il n’y a plus de checklist obligatoire, de fiche de visite ni de confirmation
+à saisir pour chaque mission. Le guide pratique reste disponible à la demande.
+Accepter de participer, déclarer son commerce prêt et publier l’animation restent
+des actions distinctes. La jauge indique les préparatifs réellement nécessaires.
+
 ## Payer, suivre et clôturer
 
 Après un retour Stripe ou un timeout, consulter la commande existante. Attendre

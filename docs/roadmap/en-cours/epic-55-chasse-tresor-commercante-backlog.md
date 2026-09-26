@@ -175,6 +175,24 @@ détail des actions restantes, alimentés par les contrôles serveur enregistré
 Critères et impacts dans la [conception E55-UX-10](../../specifications/moteur-animation/conception-technique.md#e55-ux-10--avancement-de-la-préparation-26-septembre-2026).
 Les résultats sont consignés dans le [suivi d'implémentation](../../specifications/moteur-animation/suivi-implementation.md).
 
+## Évolution du 26 septembre 2026 — E55-UX-11, Terrain simplifié
+
+Le gestionnaire doit préparer l’animation sans constituer un dossier de contrôle
+par lieu ou mission. Cette décision remplace explicitement les obligations
+terrain T3 et complète E55-UX-09/10 ; le statut de l’epic reste **En cours**.
+
+- [x] A : deux blocs « Supports à installer » et « Préparation des participants »,
+  sans formulaire de visite, contrôle de mission ni checklist obligatoire.
+- [x] B : publication possible sans ces anciens dossiers ; accords, versions,
+  lieux autorisés, supports QR nécessaires et contrôles de publication conservés.
+- [x] C : jauge et bilan exempts des vérifications supprimées, sans validation
+  fictive ni suivi « prêt » rendu obligatoire pour toutes les animations.
+- [x] D : QR utilisables, droits, réception incertaine, clavier/mobile et données
+  historiques préservés ; compatibilité avec l’exploitation après publication.
+
+Critères et impacts dans la [conception E55-UX-11](../../specifications/moteur-animation/conception-technique.md#e55-ux-11--terrain-simplifié-26-septembre-2026).
+Les preuves exécutées sont consignées dans le [suivi](../../specifications/moteur-animation/suivi-implementation.md).
+
 ## Références
 
 - [Registre TRE-ARB-01 a TRE-ARB-89](../../specifications/moteur-animation/localeo_animation_engine_spec.md#arbitrages).

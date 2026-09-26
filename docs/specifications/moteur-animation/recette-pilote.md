@@ -39,7 +39,7 @@ Ces cases ne déclarent pas un déploiement effectué. Les succès locaux sont r
 | Parcours | Thème, difficulté, durée cible, fourchette d’étapes, liste vérifiée des commerces/POI. |
 | Conditions de participation | Règlement présenté et sa version, déclaration adulte, absence d’achat obligatoire. |
 | Commerçants | Deux propositions lorsqu’elles existent, mission sélectionnée, exigences confirmées, disponibilité et support. |
-| Préparation des lieux | QR actif associé à la bonne position, emplacement, auteur/date de contrôle, horaires, trajet, accessibilité et consignes. |
+| Préparation des lieux | Support QR associé à la bonne position, disponible puis actif à la publication ; deux blocs Terrain sans fiche de visite ni checklist imposée (E55-UX-11). Les horaires, trajet, accès et consignes peuvent être relus dans le guide facultatif. |
 | Continuité | Source et consommateurs des objets/informations ; réponse prévue en cas de retrait global d’une étape. |
 | Visuels | Thème déclaré, polices autorisées, médias de l’animation ; poids/résolution/texte alternatif. Aucun ajout décoratif spécifique dans le lecteur. |
 | Appareils | Au moins un Android et un iPhone réels, navigateurs/versions, ordinateur et parcours clavier. |

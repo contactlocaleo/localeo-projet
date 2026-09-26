@@ -54,6 +54,12 @@ Les exemples Latresne à deux alternatives documentent le contrat historique.
 
 ## Préparation simplifiée — E55-UX-09, 25 septembre 2026
 
+L’évolution [E55-UX-11](conception-technique.md#e55-ux-11--terrain-simplifié-26-septembre-2026)
+réduit Terrain à « Supports à installer » et « Préparation des participants ».
+Les fiches de vérification par mission/lieu et la checklist obligatoire ne
+bloquent plus la publication et ne figurent plus dans la jauge. Les accords,
+QR nécessaires et contrôles métier conservés restent décidés par le backend.
+
 L'évolution [E55-UX-10](conception-technique.md#e55-ux-10--avancement-de-la-préparation-26-septembre-2026)
 ajoute une jauge globale et le détail des contrôles restants par rubrique,
 calculés depuis les données enregistrées. Le

@@ -290,7 +290,7 @@ L’adaptateur applicatif `ContexteAutoriseAnimation` unifie identité, permissi
 
 Les handlers ERP conservent `verifier_csrf` (`X-CSRF-Token`) ; ils n’usurpent pas une session partenaire pour appeler une route protégée. L’acteur ERP d’audit reste `admin:<admin_username>` vérifié ; pour la colonne UUID d’idempotence existante, dériver un UUIDv5 stable avec `NAMESPACE_URL` et `localeo:erp:<admin_username>` normalisé comme la session. Aucun UUID aléatoire par requête, aucun username fourni librement. Les autres acteurs gardent leurs identifiants existants ; tester séparément chaque adaptation de contexte.
 
-Acceptation Chasse : corps fermé `{expectedVersion,presentedRevision,presentedHash,missionId,confirmedRequirementIds[]}`. Toutes et seulement les conditions de la mission choisie sont confirmées ; refuser IDs étrangers, doublons, deux choix, date dépassée et version périmée. Comparer une empreinte des engagements **par commerce**, incluant les dépendances communes pertinentes (dates/règlement). Une retouche propre à A n’invalide pas B. L’acceptation atteste la capacité à préparer ; la checklist avant publication atteste la préparation vérifiée.
+Acceptation Chasse : corps fermé `{expectedVersion,presentedRevision,presentedHash,missionId,confirmedRequirementIds[]}`. Toutes et seulement les conditions de la mission choisie sont confirmées ; refuser IDs étrangers, doublons, deux choix, date dépassée et version périmée. Comparer une empreinte des engagements **par commerce**, incluant les dépendances communes pertinentes (dates/règlement). Une retouche propre à A n’invalide pas B. L’acceptation atteste la capacité à préparer ; depuis E55-UX-11, aucune checklist organisateur ne constitue un prérequis de publication. La déclaration commerçante « prêt » demeure une étape distincte lorsque le suivi est actif.
 
 ### 6.3 Projections et UI
 
@@ -1028,3 +1028,74 @@ contrôles dépendants qui n'ont pas encore pu être évalués.
 
 Le statut de l'epic reste En cours. Les preuves exécutées et limites sont
 consignées dans le suivi d'implémentation.
+
+## E55-UX-11 — Terrain simplifié (26 septembre 2026)
+
+Décision utilisateur : la préparation doit faire gagner du temps au gestionnaire
+de collectivité ou d’association. Les fiches de vérification de chaque mission,
+les formulaires de visite POI et les cinq rubriques commentées de la checklist
+organisateur sont supprimés du parcours et des conditions de publication.
+Deux blocs les remplacent, sans deux nouvelles attestations obligatoires.
+
+### Critères et règles conservées
+
+- **E55-UX-11-A — Deux blocs utiles.** « Supports à installer » donne accès aux
+  QR des lieux physiques du parcours ; le gestionnaire peut préparer, consulter
+  et télécharger le support utile. « Préparation des participants » affiche les
+  déclarations des commerces lorsque le suivi est actif, avec détail à la demande.
+  Aucun responsable, auteur/date de visite, observation ou validation par lieu
+  n’est exigé. Les conseils horaires, accès, trajet et consignes restent facultatifs.
+- **E55-UX-11-B — Publication cohérente.** L’absence ou l’obsolescence d’une
+  vérification mission, POI ou checklist ne bloque plus la compilation ni la
+  publication. Le domaine reste propriétaire des accords valides, minimum de
+  commerces, demandes en attente, références/version des lieux, QR nécessaires,
+  contenu jouable, règlement, dates et financement. Rien n’est accepté ni publié
+  automatiquement. Les contrôles spécifiques d’une modification de période ou
+  capacité après publication restent distincts ; ils ne doivent plus dépendre
+  d’un ancien dossier de vérification prépublication.
+- **E55-UX-11-C — Avancement utile.** La projection d’avancement retire les
+  vérifications supprimées de ses contrôles et de son dénominateur. Elle ne les
+  transforme pas en contrôles « validés ». Les QR requis continuent à alimenter
+  Terrain ; une commande QR confirmée actualise le bilan. Le compteur de commerces
+  prêts relève du suivi facultatif de démarrage et ne crée aucun nouveau blocage
+  de publication ni double confirmation par le gestionnaire.
+- **E55-UX-11-D — Droits et reprise.** Préserver les permissions, versions,
+  idempotence et reçus des QR, ainsi que l’activation à la publication. Une réponse
+  incertaine impose la réconciliation existante, jamais une répétition automatique.
+  L’interface reste utilisable au clavier et sur mobile ; une erreur ne signifie
+  ni « aucun support » ni « tous prêts ». Aucune ancienne saisie n’est effacée.
+
+### Décisions remplacées et compatibilité
+
+Cette section remplace la portée **bloquante avant publication** de T3-D03,
+de la préparation vérifiée prévue par TRE-ARB-89 et de la checklist évoquée dans
+E55-UX-09. T3-D04 (supports QR), les accords et E55-KIT/E55-SUIVI restent applicables.
+Les observations/dossiers historiques et leurs commandes peuvent rester
+consultables via les anciennes interfaces/API ; leur présence ne vaut plus
+condition de publication. Aucun document de visite ni accord fictif n’est créé.
+
+Le changement porte sur le domaine de compilation, ses faits applicatifs,
+les consommateurs de l’évaluation après publication et la projection de jauge.
+Les interfaces consomment ce résultat sans réimplémenter le choix des blocages.
+Le DSL publié et les preuves des joueurs ne changent pas.
+
+La suppression des fiches POI conserve la vérification automatique de leur QR :
+`qr_correspond_au_lieu` dans le domaine exige identité et édition courantes,
+en statut préparé avant publication et actif lors des contrôles applicables
+après publication. Modifier un POI impose donc de préparer son nouveau support,
+sans formulaire de visite. Les contrôles spécifiques `requiredVerifications`
+des modifications de période/capacité restent inchangés.
+
+### Matrice des impacts et preuves prévues
+
+| Périmètre | Impact et preuve |
+| --- | --- |
+| Domaine backend | Publication sans anciens dossiers, données historiques obsolètes tolérées ; accords/QR et autres refus préservés. |
+| Application backend | Assemblage et exploitation compatibles, projection sans jalons supprimés ; tests d’orchestration et garde-fous d’architecture. |
+| Animation | Deux blocs, guide facultatif, QR et suivi existants ; tests navigateur mobile/bureau, erreurs, lecture seule et commande perdue ; types/lint/build isolé. |
+| API et consommateurs | Formats et anciennes routes conservés ; changement de sémantique des contrôles de publication, sans champ obligatoire nouveau. Marketplace et Commerçant conservent leurs contrats et leurs règles de jeu/préparation. |
+| Données et migrations | Aucun état stocké ajouté ou supprimé ; anciennes saisies conservées, aucune migration. |
+| Démonstration | Générateur examiné : scénarios de moteurs classiques, aucune fabrication de fiche terrain Chasse ; pas de modification nécessaire. Tests isolés du générateur inclus dans la validation ciblée, aucune génération réelle exécutée. |
+| Fonctionnel et exploitation | Guide gestionnaire, recette, backlog et présent document actualisés ; backend à livrer avant le frontend. |
+
+Les preuves exécutées et les limites figurent dans le suivi d’implémentation.
