@@ -608,3 +608,33 @@ La meme file BackOffice Chorus Pro est reutilisee lorsque Localeo facture direct
 ### Evolution V2
 
 Une integration API PISTE OAuth2 ou le recours a un operateur deja raccorde est hors perimetre V1. Elle pourra automatiser la creation et le suivi des depots en reutilisant `ChorusDeposit`, les snapshots et les statuts stables de Localeo.
+
+## Correctif du 26 septembre 2026 — contenu du justificatif d'achat
+
+Sur le backend `b56fcf3`, deux défauts sont reproduits par tests isolés : le PDF
+répète l'email lorsque le nom du client est absent ; la collection ORM des lignes
+reste vide en mémoire après leur création par clé étrangère seule. Le premier
+justificatif peut donc omettre les prestations malgré leur enregistrement.
+
+La création des lignes alimente désormais la relation du snapshot, disponible
+immédiatement pour le rendu. Le PDF affiche l'email une fois, le téléphone, les
+dates et la durée enregistrées, avec un libellé pour chaque donnée. Les prestations
+sont placées dans « Votre coffret », avec libellé, commerçant et description,
+avant « Votre achat ». Leurs textes peuvent se poursuivre sur plusieurs pages.
+L'échéance est explicitement qualifiée de prévue, car l'activation différée des
+achats entreprise/collectivité peut fixer une expiration ultérieure. Aucun calcul
+de validité ni changement du wording fiscal n'est introduit par ce correctif.
+
+Contrôles via `scripts/validation/test_isolated.py` : tests
+`tests/application/use_cases/test_receipt_pdf.py` et
+`tests/application/use_cases/test_receipt_snapshot_lines.py`, puis architecture,
+classes de domaine et couverture des use cases. Les scénarios vérifient accents,
+caractères réservés, valeurs absentes, ordre, longs textes, mentions BUM et premier
+PDF. Les exemples synthétiques de deux et quatre pages dans
+`tmp/pdfs/receipt-correction/` sont rendus en PNG et inspectés sans chevauchement
+ni texte tronqué.
+
+Dépôts concernés : backend et documentation centrale. Pas de modification des
+frontends, contrats HTTP, schémas, migrations ou données de démonstration : les
+champs existent déjà. Aucun email réel envoyé, aucune régénération des documents
+déjà transmis, aucun commit, push ou déploiement réalisé pour cette correction.

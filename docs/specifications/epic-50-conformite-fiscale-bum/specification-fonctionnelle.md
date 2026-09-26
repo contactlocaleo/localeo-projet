@@ -71,6 +71,19 @@ pas la TVA des prestations sous-jacentes. Le document snapshotte l'identite des
 parties, le contenu contractuel, les montants, la politique et le wording
 utilises lors de son emission.
 
+Chaque donnée du récapitulatif porte un libellé explicite : email (affiché une
+seule fois), téléphone, date d'achat, durée et date de fin de validité prévue,
+références, coordonnées et montant acquitté. Le nom du client, lorsqu'il est
+absent, n'est pas remplacé par une seconde occurrence de l'email. La section
+« Votre coffret » contient les prestations photographiées à l'achat, avec leur
+libellé, le commerçant et leur description disponible, dans l'ordre enregistré.
+Les informations absentes ne sont pas inventées.
+
+La date de fin prévue provient du snapshot d'achat. Elle ne remplace pas la date
+d'expiration définitive d'une instance activée ultérieurement : les règles
+d'activation et de validité restent inchangées. Les mentions BUM versionnées
+restent conservées intégralement.
+
 ### 5.3 Execution, reversement et facture de prestation
 
 La validation de la prestation constitue le fait generateur applicatif. Elle
