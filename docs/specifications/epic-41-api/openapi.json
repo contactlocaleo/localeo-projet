@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Backend - contrat implemente EPIC 41",
     "description": "OpenAPI complet du backend, dont les parcours Animation locale. Genere hors ligne depuis le code local pour les integrations et les mocks ; cet instantane ne prouve pas son deploiement.",
-    "version": "1.0.0+c7f6e6b"
+    "version": "1.0.0+7049de7"
   },
   "paths": {
     "/internal/erp/api/instances": {
@@ -63475,7 +63475,7 @@
       "AnimationDetailPayload": {
         "properties": {
           "animation": {
-            "$ref": "#/components/schemas/AnimationSummaryPayload"
+            "$ref": "#/components/schemas/AnimationDetailSummaryPayload"
           },
           "configuration": {
             "$ref": "#/components/schemas/ConfigurationAnimationLecturePayload"
@@ -63519,6 +63519,120 @@
           "actions"
         ],
         "title": "AnimationDetailPayload"
+      },
+      "AnimationDetailSummaryPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "reference": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reference"
+          },
+          "nom": {
+            "type": "string",
+            "title": "Nom"
+          },
+          "commune": {
+            "$ref": "#/components/schemas/CommuneAnimationPayload"
+          },
+          "modele_code": {
+            "type": "string",
+            "title": "Modele Code"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          },
+          "date_debut": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date Debut"
+          },
+          "date_fin": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date Fin"
+          },
+          "participants": {
+            "type": "integer",
+            "title": "Participants",
+            "default": 0
+          },
+          "validations": {
+            "type": "integer",
+            "title": "Validations",
+            "default": 0
+          },
+          "alertes": {
+            "type": "integer",
+            "title": "Alertes",
+            "default": 0
+          },
+          "workflow": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "title": "Workflow"
+          },
+          "next_action": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Action"
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Version",
+            "description": "Version de l'animation attendue par les commandes versionnées."
+          }
+        },
+        "additionalProperties": true,
+        "type": "object",
+        "required": [
+          "id",
+          "nom",
+          "commune",
+          "modele_code",
+          "statut",
+          "workflow",
+          "version"
+        ],
+        "title": "AnimationDetailSummaryPayload"
       },
       "AnimationParticipationLive": {
         "properties": {

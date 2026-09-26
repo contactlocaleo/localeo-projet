@@ -1118,3 +1118,56 @@ Marketplace et Commerçant ne consomment pas cette nouvelle lecture. Livrer le
 backend avant le frontend. Les tests utilisent des données synthétiques ;
 aucune recette PostgreSQL ou vérification sur un environnement déployé,
 aucun commit, push ou déploiement effectué pour cette évolution.
+
+## Correctif du 26 septembre 2026 — publication Passeport et Tombola
+
+Signalement en test : `RequestValidationError` sur `POST
+/protected/animation-locale/animations/{animation_id}/publier`, corrélation
+`LOC-60cd645b-65ca-42f0-8f3f-bbf346a79fae`. La trace seule ne détaille pas les
+champs invalides ni le SHA déployé. La reproduction locale démontre que le
+consommateur classique envoyait un corps absent alors que T3-D07 impose
+`{expectedVersion}` et une clé d’idempotence explicite.
+
+Correction conforme à T3-D07 : le détail privé expose `animation.version`
+(version d’agrégat, distincte de `configuration_version`). Le bloc classique
+relit cette version, les permissions et les prérequis avant confirmation.
+Le POST conserve sa clé et son corps ; une réponse perdue ou `EN_COURS` se
+réconcilie par GET du reçu. Un reçu absent permet uniquement un renvoi
+explicite identique. Un conflit exige relecture et nouvelle confirmation.
+Les refus du domaine, les accords commerçants et les contrôles de financement
+restent inchangés. Le même bloc sert au Passeport et à la Tombola.
+
+Preuves sur Backend `7049de7` et Animation `f9de3ab` avec modifications locales :
+
+- Reproduction frontend : échec attendu avant correctif (`undefined` au lieu
+  de `{expectedVersion: 7}`), puis succès du test de contrat consommateur.
+- Reproduction backend : trois échecs sur version absente avant correction,
+  puis **37 tests ciblés réussis**, dont `test_animation_publication_version.py`
+  (trois modèles, version d’agrégat 7 et de configuration 3),
+  `test_publication_api_t3.py`, `test_animation_locale_openapi_responses.py`,
+  `test_validation_publication_brouillon.py` et `test_catalogue_chasse_t2.py`.
+- **422 contrôles backend réussis** : architecture, classes de domaine et
+  couverture des use cases, via `scripts/validation/test_isolated.py`.
+- **164 tests Node réussis**, types et lint réussis ; pnpm absent du PATH,
+  commandes équivalentes exécutées via les binaires Node déjà installés.
+- `tests/browser/passport-publication.mjs` : **158 contrôles réussis** à
+  1280/390 px, transport réel vers API simulée, doubles clics, droits, version
+  absente, prérequis refusés, erreur de lecture, conflit, perte de réponse,
+  reçu confirmé/en cours/absent et rejeu identique. Captures relues.
+- `tests/browser/animation-lots.mjs` : recette intégrée réussie ; fixture
+  adaptée au contrat détail et aux droits de publication, assertions conservées.
+- Build isolé `scripts/build-generation-tests.mjs` réussi ; avertissement de
+  taille du bundle principal (environ 813 Ko). Aucun fichier opérateur chargé.
+- Revue indépendante du contrat et du consommateur : aucun écart bloquant.
+
+Impacts : Backend, Animation et documentation centrale. OpenAPI canonique
+EPIC 41 et embarqué Animation régénérés hors ligne (619 routes). Aucun état
+persisté ou règle métier nouveau : pas de migration, réparation de données,
+adaptation du générateur de démonstration ni modification de Marketplace ou
+Commerçant. **Livrer le backend avant Animation**, car l’interface refuse une
+publication si la version d’agrégat manque. Le parcours métier reste identique ;
+les consignes de reprise sont visibles dans l’écran et le README Animation.
+Les recettes utilisent des données synthétiques ; la conservation d’une
+tentative après fermeture/rechargement de l’application n’est pas couverte.
+Aucun test PostgreSQL, commit, push ou déploiement effectué pour ce correctif.
+La résolution sur l’environnement de test reste à vérifier après livraison.
