@@ -114,6 +114,10 @@
       "source_path": "docs/exploitation/demonstration/donnees-generation.md"
     },
     {
+      "path": "docs/ops/demonstration/environnements.md",
+      "source_path": "docs/exploitation/demonstration/environnements.md"
+    },
+    {
       "path": "docs/ops/demonstration/exploitation.md",
       "source_path": "docs/exploitation/demonstration/exploitation.md"
     },

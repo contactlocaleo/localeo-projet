@@ -17,6 +17,7 @@ Ouvrir [localeo.code-workspace](localeo.code-workspace) dans VS Code, avec les c
 - [Spécifications par fonctionnalité](docs/specifications/INDEX.md), [moteur d’animation](docs/specifications/moteur-animation/localeo_animation_engine_spec.md)
 - [Roadmap commune](docs/roadmap/README.md) et [anomalies](docs/roadmap/anomalies)
 - [Exploitation](docs/exploitation/INDEX.md), [juridique](docs/juridique/INDEX.md), [audits](docs/audits/INDEX.md)
+- [Profils et jeux installés en test et démo](docs/exploitation/demonstration/environnements.md)
 - [Livrables](livrables/INDEX.md) et [releases](releases/INDEX.md)
 - [Compte rendu de réorganisation](docs/organisation/compte-rendu-reorganisation-2026-09-18.md)
 - [Travailler avec Codex](docs/organisation/codex.md) : contexte ciblé, invariants, skills, hooks et sous-agents.
