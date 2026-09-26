@@ -1,5 +1,7 @@
 # Guide commerçant — validation et incidents réseau
 
+Pour l’onboarding et l’usage quotidien, remettre le [guide pédagogique en quatre pages](../../../../livrables/formation/commercant/guide-quotidien-localeo-commercant.pdf), dont la [source éditable](guide-quotidien-commercant.md) est maintenue ici. Le présent document conserve les détails de validation et de reprise d’incident.
+
 ## Connexion
 
 Connectez-vous avec votre login et votre mot de passe, ou utilisez votre carte QR. Une session expirée demande une nouvelle connexion. La déconnexion quitte immédiatement le compte sur cet appareil ; si le réseau empêche la révocation distante, un message le précise. Ne partagez ni carte QR ni lien de mot de passe.

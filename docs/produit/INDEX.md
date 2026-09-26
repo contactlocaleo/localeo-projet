@@ -11,6 +11,7 @@ Vision fonctionnelle, parcours, identité visuelle et formations.
 - [formation/backend/guide-animation-preproduction.md](formation/backend/guide-animation-preproduction.md)
 - [formation/backend/guide-backoffice-localeo.md](formation/backend/guide-backoffice-localeo.md)
 - [formation/commercant/guide-commercant.md](formation/commercant/guide-commercant.md)
+- [Guide quotidien commerçant : source éditable](formation/commercant/guide-quotidien-commercant.md) et [PDF à remettre lors de l’onboarding (4 pages)](../../livrables/formation/commercant/guide-quotidien-localeo-commercant.pdf).
 - [identite-visuelle/marketplace/hero-centre-bourg.md](identite-visuelle/marketplace/hero-centre-bourg.md)
 - [identite-visuelle/marketplace/hero-fromager.md](identite-visuelle/marketplace/hero-fromager.md)
 - [identite-visuelle/marketplace/hero-prestation-localeo.md](identite-visuelle/marketplace/hero-prestation-localeo.md)
