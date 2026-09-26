@@ -28,6 +28,7 @@ Lire d'abord `git status` et le diff du périmètre ; rechercher les symboles/ch
 | [localeo-creer-epic](../../.agents/skills/localeo-creer-epic/SKILL.md) | Cadrer un besoin en vérifiant la roadmap existante | « Crée ou enrichis l'epic correspondant à ce besoin. » |
 | [localeo-specifier-epic](../../.agents/skills/localeo-specifier-epic/SKILL.md) | Transformer le cadrage en comportements et contrats testables | « Spécifie cette epic et ses impacts transverses. » |
 | [localeo-implementer-epic](../../.agents/skills/localeo-implementer-epic/SKILL.md) | Réaliser une spécification avec preuves et documentation | « Implémente ces critères et vérifie leurs consommateurs. » |
+| [localeo-faire-evoluer-epic](../../.agents/skills/localeo-faire-evoluer-epic/SKILL.md) | Faire évoluer une epic existante avec traçabilité, compatibilité et non-régression | « Fais évoluer cette epic ; actualise la spécification, implémente et vérifie les impacts. » |
 | [localeo-corriger](../../.agents/skills/localeo-corriger/SKILL.md) | Reproduire, diagnostiquer et corriger une anomalie | « Corrige cette erreur avec une preuve de non-régression. » |
 | [localeo-verifier-demonstration](../../.agents/skills/localeo-verifier-demonstration/SKILL.md) | Compatibilité des données générées avec le produit | « Vérifie le générateur après cette migration. » |
 | [localeo-preparer-deploiement](../../.agents/skills/localeo-preparer-deploiement/SKILL.md) | Rassembler versions, contrôles et procédures de livraison | « Prépare le dossier de livraison vers cet environnement. » |

@@ -43,6 +43,38 @@ Résultat attendu : dossier traçable et [manifeste de préparation](preparer-li
 
 Les demandes Git et exploitation sont distinctes. Exemples : « Commit les changements de cette epic dans chaque dépôt concerné », puis « Push ces commits ». Une demande explicite de déploiement doit identifier la cible ; les vérifications de la procédure s'appliquent alors.
 
+## Exemple : faire évoluer une epic existante
+
+Le skill [localeo-faire-evoluer-epic](../../.agents/skills/localeo-faire-evoluer-epic/SKILL.md)
+coordonne le cadrage de l'écart, la spécification et l'implémentation selon la
+demande. Les exigences du [cycle d'epic](cycle-epic.md) restent applicables :
+principes d'architecture et invariants, contrats, documentation, démonstration,
+exploitation et preuves de non-régression.
+
+Pour une évolution complète :
+
+> Utilise $localeo-faire-evoluer-epic sur [référence ou chemin de l'epic]. Aujourd'hui [comportement], je souhaite [cible]. À préserver : […]. Actualise la spécification, implémente l'évolution et vérifie les tests, les consommateurs, la documentation fonctionnelle et d'exploitation ainsi que le générateur lorsqu'ils sont concernés.
+
+Pour préparer la conception sans coder :
+
+> Utilise $localeo-faire-evoluer-epic sur [epic]. Spécifie seulement cette évolution : […]. Identifie les critères modifiés, les impacts et les preuves à produire ; n'implémente pas encore.
+
+Résultat attendu : évolution identifiée dans le suivi canonique, description
+avant/après, critères stables, décisions remplacées tracées et matrice d'impact.
+Pour une implémentation, chaque critère est relié aux preuves exécutées et aux
+limites éventuelles ; les documents et le générateur affectés sont mis à jour.
+« Sans impact » exige une justification et « à vérifier » reste un travail ouvert.
+
+Une epic terminée conserve son bilan et son état historique. L'évolution a une
+section datée distincte, avec son propre reste à faire ; elle n'est pas considérée
+livrée parce que l'epic d'origine est terminée. Codex ne crée pas automatiquement
+une nouvelle epic et ne modifie pas implicitement les états de la roadmap.
+
+Si la demande décrit une violation du comportement déjà attendu, Codex la
+rattache à `localeo-corriger`. Si elle mêle anomalie et nouveau besoin, il sépare
+leurs critères. Une décision produit manquante bloque seulement les travaux
+qui en dépendent. Commit, push et déploiement suivent la demande courante.
+
 ## Exemple : corriger une anomalie
 
 > Utilise $localeo-corriger. Dans [écran/API], quand [étapes], j'obtiens [erreur exacte]. J'attends [résultat]. Environnement/version : […]. Référence d'erreur : […]. Reproduis, identifie la cause, corrige et vérifie la non-régression. Voici les chemins ou fichiers utiles : […].

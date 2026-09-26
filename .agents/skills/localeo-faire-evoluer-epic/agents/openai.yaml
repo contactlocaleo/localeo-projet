@@ -1,0 +1,4 @@
+interface:
+  display_name: "Localeo Faire evoluer une Epic"
+  short_description: "Évolutions tracées, spécifiées et vérifiées"
+  default_prompt: "Utilise $localeo-faire-evoluer-epic pour faire évoluer l’epic indiquée selon le besoin et la phase demandés, en respectant les principes du projet, la documentation, la compatibilité et les preuves de non-régression."

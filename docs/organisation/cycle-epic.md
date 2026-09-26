@@ -57,6 +57,44 @@ Les travaux parallèles doivent avoir des fichiers ou worktrees distincts et des
 
 Ces critères ne clôturent pas automatiquement une epic ni ne prouvent sa mise en production. Ne pas présenter une livraison partielle comme la fin de l'epic. Commit, push, préparation de livraison et déploiement restent des opérations distinctes suivant la demande en cours.
 
+## Faire évoluer une epic existante
+
+Utiliser [localeo-faire-evoluer-epic](../../.agents/skills/localeo-faire-evoluer-epic/SKILL.md)
+pour ajouter ou modifier un comportement dans le périmètre d'une epic existante.
+Un écart au comportement déjà attendu relève du [cycle de correctif](cycle-correctif.md).
+Une demande mixte distingue ces deux périmètres ; un besoin autonome passe par
+le cadrage d'une epic. Respecter la phase demandée : une spécification seule
+n'autorise pas le développement ; une demande complète poursuit les phases
+nécessaires sans approbation intermédiaire systématique.
+
+Identifier l'évolution dans le backlog ou suivi canonique existant, avec une
+référence stable, le comportement actuel vérifié, la cible, les critères ajoutés
+ou modifiés et les comportements à préserver. Conserver les IDs des critères
+et tracer les décisions remplacées. Actualiser la spécification canonique,
+sans recopier l'epic dans un second dossier de conception.
+
+Pour une epic terminée, ajouter une section d'évolution datée, distincte du bilan
+livré, qui expose son reste à faire et ses preuves propres. Le statut et la
+clôture historique de l'epic restent inchangés ; ils ne valent pas validation
+de cette évolution. Ne pas rouvrir, déplacer ou reclôturer implicitement l'epic.
+Si un changement d'état est demandé ou arbitré, appliquer les règles de la
+roadmap. Respecter les décisions de fusion et d'abandon au même titre que pour
+un nouveau cadrage.
+
+Les critères de préparation, la matrice de traçabilité et les critères de fin
+de ce cycle s'appliquent intégralement au périmètre de l'évolution. Examiner les
+principes d'architecture, les contrats et consommateurs, les données et versions
+existantes, la documentation fonctionnelle et d'exploitation, les fixtures,
+le générateur de démonstration et les modalités de livraison. Justifier les
+impacts sans objet ; un impact non examiné reste ouvert. Une modification de
+test liée à une attente produit remplacée doit être justifiée par la décision
+tracée, sans affaiblir les preuves de comportements à préserver.
+
+Le bilan distingue le résultat de cette évolution du bilan historique et du
+reste de l'epic. Les tests prévus, indisponibles ou ignorés ne deviennent pas
+des preuves réussies. Les limites empêchant de vérifier un critère restent
+bloquantes pour sa déclaration de fin, sans empêcher le travail indépendant.
+
 ## Documenter les preuves et préparer la livraison
 
 Un résultat de contrôle indique le dépôt, le chemin du test ou de la commande, le contexte testé (SHA si l'arbre est propre, ou SHA de base et modifications locales), l'environnement pertinent et le résultat. Référencer les rapports CI ou artefacts existants sans recopier les journaux ni leurs secrets. Des résultats obtenus sur un autre arbre ne valident pas automatiquement le changement courant.

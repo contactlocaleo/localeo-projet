@@ -839,3 +839,88 @@ Livraison : bundle Animation, aucune migration ni ordre coordonné nouveau ; le
 traitement ERP existant reste nécessaire pour recevoir les propositions.
 Aucun commit, push ou déploiement réalisé ; les travaux d'ouverture de l'EPIC 55
 restent ouverts.
+
+## Correctif du 26 septembre 2026 — liste des participations avec suivi actif
+
+La trace Render fournie signale `AttributeError: 'str' object has no attribute
+'value'` à la lecture des participations d'une animation. Le SHA distant n'est
+pas fourni. Le défaut est reproduit localement sur le backend `d106f27` : le
+chargement groupé transmet un `AnimationOrm` au suivi de préparation, qui attend
+une entité `Animation` avec son statut typé et ses méthodes de domaine.
+
+Le chargement passe désormais par `AnimationRepository.obtenir_par_ids` et le
+mapper existant, en une requête groupée. Les listes gestionnaire, commerçant et
+ERP, ainsi que les accords du parcours de préparation de chasse, bénéficient
+de la correction. Les règles de participation, droits, dates et acquittement
+restent inchangés. La revue indépendante du diff n'a relevé aucun défaut concret.
+
+Preuves sur `d106f27` avec le correctif local, Python 3.14, via
+`scripts/validation/test_isolated.py` :
+
+- Reproduction avant correction : échec avec la même exception et la même chaîne
+  d'appels dans `test_projection_preparation_participations.py`.
+- **90 tests réussis** : projections des trois listes (huit situations chacune),
+  résumés d'invitation, repository, suivi de préparation domaine/application/API
+  et contact expéditeur. Les trois tests de résumé échouaient déjà avant le
+  correctif sur leurs doubles incomplets ; leurs fixtures utilisent maintenant
+  des entités métier et une configuration explicite, sans affaiblir les assertions.
+- **421 tests réussis** : `tests/architecture`,
+  `tests/domain/test_domain_dedicated_classes.py` et
+  `tests/application/use_cases/test_use_case_business_test_coverage.py`.
+
+Seuls le backend et ce suivi documentaire changent pour cette anomalie. Aucun
+contrat HTTP, frontend, schéma, migration ou donnée de démonstration ne change :
+le défaut concerne la conversion à la lecture, pas les données stockées.
+Le générateur et les procédures d'exploitation restent compatibles. Tests
+isolés sans base distante ; aucune recette PostgreSQL ni vérification sur Render
+n'est réalisée pour ce correctif. Aucun commit, push ou déploiement effectué.
+
+## Correctif du 26 septembre 2026 — retour visuel et protection des actions
+
+Dans Localeo Animation, les actions cliquables présentent maintenant un curseur
+de lien et les contrôles désactivés un curseur d'indisponibilité. Une action
+asynchrone affiche un indicateur tournant, un curseur d'attente et un état
+accessible pendant son traitement. Le réglage de réduction des animations
+conserve l'indicateur mais arrête sa rotation. Les interactions locales
+synchrones, comme ouvrir une étape, restent immédiates.
+
+`ActionButton` et `ActionForm` mutualisent ce comportement dans les écrans de
+l'application. Un verrou synchrone empêche une deuxième activation avant même
+le rendu React suivant ; il reste actif jusqu'au règlement de la promesse.
+Les soumissions clavier et la validation native des champs sont conservées.
+Les callbacks retournent leur promesse ; les boutons extérieurs à un formulaire
+utilisent son état de chargement. Les permissions, conflits, résultats incertains
+et clés d'idempotence restent gérés par les parcours existants, sans répétition
+automatique d'écriture. Le lien de téléchargement juridique conserve sa nature
+de lien avec un verrou et un indicateur d'attente.
+
+La publication d'une actualité conserve aussi son état occupé entre
+l'enregistrement du brouillon et la réponse de publication : les commandes
+et la fermeture ne se réactivent plus entre les deux requêtes.
+
+Preuves locales sur Animation `7dc3551` avec modifications locales :
+
+- `node tests/browser/action-feedback.mjs` : **80 contrôles** à 1280/390 px,
+  incluant clics rapprochés, clavier, erreur puis reprise, validation des champs,
+  boutons externes au formulaire et réduction des animations ; captures dans
+  `tmp/action-feedback/`.
+- `node tests/browser/news-action-feedback.mjs` : **82 contrôles** à 1280/390 px,
+  publication réellement traversée depuis le composant avec API simulée : une
+  création et une publication malgré les clics répétés, maintien du verrou entre
+  les requêtes, erreur visible puis reprise avec le même brouillon et la même clé
+  d'idempotence. Captures dans `tmp/news-action-feedback/`.
+- `node --test tests/*.test.mjs` : **163 tests réussis** ; le chargeur de test
+  résout maintenant les dépendances TSX pour tester les vrais composants partagés.
+- `node tests/browser/generation-preparation.mjs` : **50 contrôles réussis** ;
+  `node tests/browser/hunt-preparation.mjs` : **210 contrôles réussis**.
+- `node tests/browser/animation-lots.mjs` et
+  `node tests/browser/preparation-tracking.mjs` : réussis à 1280/390 px,
+  incluant refus, reprise d'erreur et protections de paiement.
+- TypeScript, lint et build isolé `scripts/build-generation-tests.mjs` réussis.
+  Le build signale toujours un bundle principal supérieur à 500 Ko.
+
+Périmètre : interface Animation et documentation centrale. Aucun contrat API,
+changement métier backend, migration, donnée ou générateur de démonstration
+n'est modifié pour ce correctif. Les contrôles navigateur utilisent des données
+synthétiques et bloquent les services externes ; aucune vérification sur
+l'environnement déployé, aucun commit, push ou déploiement effectué.
