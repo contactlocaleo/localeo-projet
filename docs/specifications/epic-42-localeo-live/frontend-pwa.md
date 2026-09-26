@@ -90,7 +90,7 @@ La categorie canonique des preferences editoriales est `ACTUALITE_EDITORIALE`. L
 - le CTA direct de l'email doit utiliser `https://{marketplace}/live/coffrets/ajouter/{coffret_instance_id}#token={consultation_token}` ; un lien contenant uniquement l'identifiant de l'instance est incomplet et doit etre refuse ;
 - le token n'est transmis ni aux logs, ni aux analytics, ni au service worker et ne figure jamais dans un parametre de requete du nouveau parcours ;
 - l'action explicite `Ajouter a mes coffrets`, effectuée sur la fiche ou dans l'aperçu du lien externe, enregistre la ressource dans la bibliotheque IndexedDB après vérification ;
-- l'action distincte `Me prevenir des prochaines etapes` rattache ensuite la ressource a l'installation et peut declencher la demande WebPush ; refuser le Push n'annule jamais l'ajout local ;
+- depuis E42-UX-01 (26 septembre 2026), les options du coffret ne proposent plus l'action `Me prévenir des prochaines étapes` ni ses messages d'activation ; l'ajout local ne déclenche pas de suivi distant de remplacement ;
 - l'email de confirmation conserve son lien de consultation ; lorsqu'un CTA direct `Ajouter a Localeo Live` est présent, il utilise le meme contrat d'entree. Son caractère systématique ou facultatif reste une divergence documentaire, détaillée ci-dessous.
 
 ### Refonte du carnet — septembre 2026, origine Marketplace
@@ -98,7 +98,7 @@ La categorie canonique des preferences editoriales est `ACTUALITE_EDITORIALE`. L
 - `/live/` ouvre la dernière rubrique du carnet consultée ; par défaut, « Mes coffrets ».
 - Deux rubriques stables : « Mes coffrets » (`/live/passeports`) et « Mes animations » (`/live/animations`). Le terme passeport reste interne aux anciennes URL compatibles.
 - Le catalogue des animations se trouve sur `/live/decouvrir` et les actualités sur `/live/actualites` ; les deux destinations principales et les accès d'en-tête sont définis en section 3.
-- Les cartes personnelles présentent un état principal et un accès volontaire au QR. Le détail, le retrait et les préférences de suivi restent accessibles sans encombrer l’action principale.
+- Les cartes personnelles présentent un état principal et un accès volontaire au QR. Le détail et le retrait restent accessibles sans encombrer l’action principale ; les notifications générales se gèrent dans Réglages.
 - « Actualiser mon coffret » recharge les données depuis la liste ou le détail, sans recharger la page. Le bouton indique le chargement puis la réussite ; en cas d’erreur, les dernières informations restent visibles et l’action peut être relancée. La dernière réponse actualisée est conservée dans le carnet local si le stockage est disponible.
 - Aucune bienvenue modale ne précède l’ajout. La confirmation d’enregistrement propose facultativement l’installation sur l’écran d’accueil.
 - L'intention explicite « Ajouter à mon carnet » est transmise dans l'état de navigation ; le parcours de confirmation est celui défini ci-dessus. Cette évolution Marketplace remplace la confirmation systématique de la version initiale.
@@ -217,3 +217,29 @@ Evenements minimaux : exposition/clic du CTA marketplace, resultat d'installatio
 La bibliothèque conserve les participations distinctes d'une famille selon la
 refonte Marketplace. Les règles détaillées d'inscription et de reprise sont
 référencées dans [Inscriptions multiples et récupération](inscriptions-multiples.md).
+
+## 10. E42-UX-01 — retrait du suivi facultatif des coffrets, 26 septembre 2026
+
+À la demande produit, supprimer « Me prévenir des prochaines étapes » dans
+les options des coffrets du carnet. Cette évolution remplace l'action de suivi
+distincte décrite précédemment lors de l'ajout d'un coffret ; elle ne change pas
+la séparation entre ajout local et consentement WebPush de LIVE-ARB-38.
+
+- **E42-UX-01-A** : aucun bouton d'activation, message « Suivi des prochaines
+  étapes activé » ou erreur de cette ancienne action n'est présenté, y compris
+  pour une entrée historique contenant `followId` ou `followStatus`.
+- **E42-UX-01-B** : supprimer le gestionnaire d'activation depuis les coffrets,
+  sans créer de suivi automatique à l'ajout, à l'ouverture ou à l'actualisation.
+- **E42-UX-01-C** : préserver l'ajout et la consultation des coffrets, leur
+  actualisation, le QR et le retrait du carnet. Les notifications générales,
+  l'inbox et le suivi des participations Animation restent inchangés. Les
+  suivis déjà enregistrés ne sont pas révoqués automatiquement ; la gestion
+  existante du retrait du carnet reste applicable.
+
+Impact : interface Marketplace/Live et documentation centrale seulement.
+Le contrat des suivis reste consommé par les participations Animation ; aucun
+endpoint, droit ou règle backend n'est supprimé. Aucune migration ni modification
+des données, du générateur de démonstration ou de sa configuration n'est requise.
+La livraison porte uniquement sur le bundle Marketplace. Les preuves ciblées
+et leur résultat figurent dans le backlog de l'epic, dont la clôture historique
+est conservée.

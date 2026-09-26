@@ -258,3 +258,37 @@ décrites dans le corps commun et les registres d'arbitrage ; elles ne les rempl
 | F8 | `En cours` | Responsive mobile, cibles tactiles, focus visible, libelles accessibles, `prefers-reduced-motion` et compilation Vite de production validee. | Effectuer la recette WCAG 2.2 AA, hors ligne, navigateurs, Core Web Vitals, mises a jour du service worker et analytics responsables. |
 
 Le frontend livre a ce stade une experience navigable et demonstrable. Les donnees metier affichees dans Live sont des mocks structures : elles ne constituent pas encore une recette integree avec les API B1 a B5.
+
+## Évolution du 26 septembre 2026 — E42-UX-01
+
+Retirer « Me prévenir des prochaines étapes » des options des coffrets du
+carnet Localeo Live. Critères et impacts dans la
+[spécification frontend](../../specifications/epic-42-localeo-live/frontend-pwa.md#10-e42-ux-01--retrait-du-suivi-facultatif-des-coffrets-26-septembre-2026).
+
+- [x] A : supprimer l'action et ses messages, même pour les entrées historiques.
+- [x] B : supprimer son gestionnaire sans activation automatique de remplacement.
+- [x] C : vérifier les parcours conservés du carnet et les contrôles locaux ; limite préexistante documentée ci-dessous.
+
+Le statut **Terminée** et le bilan historique de l'epic sont conservés.
+Cette évolution ne retire ni les réglages généraux de notifications ni les
+suivis existants et ne modifie aucun contrat backend.
+
+Preuves locales sur Marketplace `d5c6c73` avec cette suppression :
+
+- ESLint de `src/live/LiveApp.jsx` et build Vite isolé réussis, sans chargement
+  des `.env` ni réécriture des fichiers publics de configuration.
+- `node node_modules/@playwright/test/cli.js test --config=playwright.live-game.config.cjs tests/visual/live-carnet.spec.cjs --workers=1`,
+  avec le serveur isolé démarré séparément : **11 scénarios réussis, 1 échec**,
+  code de sortie 1. Parcours coffrets, QR, actualisation, ajout et navigation
+  vérifiés ; rendus à 320/390/1280 px, capture mobile inspectée.
+- L'échec « inscription et enregistrement avec stockage à reprendre » attend
+  « Votre inscription existe » mais reçoit « Synthetic storage failure ».
+  Rejoué avec le contenu exact de `LiveApp.jsx` au commit `d5c6c73`, injecté
+  uniquement dans un build isolé : **même échec**, code de sortie 1.
+  Les sources de travail n'ont pas été remplacées ; le bundle courant a été
+  reconstruit ensuite. Traces dans `test-results/live-game/` et
+  `test-results/live-baseline/`. Défaut préexistant du parcours Animation,
+  non corrigé par cette suppression ; aucune assertion modifiée ou ignorée.
+- Vérification documentaire ciblée : **86 guides, 848 liens, zéro erreur**.
+
+Aucune API réelle sollicitée, aucun commit, push ou déploiement effectué.
