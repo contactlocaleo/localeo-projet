@@ -162,6 +162,19 @@ Le remplacement éventuel des attestations métier et une prédiction détaillé
 des accords invalidés restent à préciser ; aucune preuve existante n'est
 supprimée implicitement. Le statut de l'epic reste **En cours**.
 
+## Évolution du 26 septembre 2026 — E55-UX-10
+
+Jauge globale en haut à droite de la préparation, compteurs par rubrique et
+détail des actions restantes, alimentés par les contrôles serveur enregistrés.
+
+- [x] A : jauge et compteurs accessibles sur bureau et mobile.
+- [x] B : contrôles restants, prérequis et blocages avec accès aux rubriques.
+- [x] C : actualisation, erreurs, brouillons et isolation des réponses tardives.
+- [x] D : projection serveur privée, sans modification des règles de publication.
+
+Critères et impacts dans la [conception E55-UX-10](../../specifications/moteur-animation/conception-technique.md#e55-ux-10--avancement-de-la-préparation-26-septembre-2026).
+Les résultats sont consignés dans le [suivi d'implémentation](../../specifications/moteur-animation/suivi-implementation.md).
+
 ## Références
 
 - [Registre TRE-ARB-01 a TRE-ARB-89](../../specifications/moteur-animation/localeo_animation_engine_spec.md#arbitrages).

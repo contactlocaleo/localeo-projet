@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Backend - contrat implemente EPIC 41",
     "description": "OpenAPI complet du backend, dont les parcours Animation locale. Genere hors ligne depuis le code local pour les integrations et les mocks ; cet instantane ne prouve pas son deploiement.",
-    "version": "1.0.0+0dec6aa"
+    "version": "1.0.0+a512a51"
   },
   "paths": {
     "/internal/erp/api/instances": {
@@ -46499,6 +46499,149 @@
         ]
       }
     },
+    "/protected/animation-locale/animations/{animation_id}/preparation/avancement": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Lire Avancement",
+        "operationId": "lire_avancement_protected_animation_locale_animations__animation_id__preparation_avancement_get",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AvancementPreparationPayload"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Demande invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentification requise",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Action non autorisée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ressource ou reçu introuvable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Version, aperçu ou état en conflit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Accès expiré",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Document trop volumineux",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Encodage non supporté",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Contenu invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Fréquence dépassée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Transaction indisponible, consulter le reçu",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/protected/animation-locale/animations/{animation_id}/preparation/parametres": {
       "get": {
         "tags": [
@@ -48252,6 +48395,154 @@
             }
           }
         }
+      }
+    },
+    "/internal/animation-locale/animations/{animation_id}/preparation/avancement": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Lire Avancement",
+        "operationId": "lire_avancement_internal_animation_locale_animations__animation_id__preparation_avancement_get",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AvancementPreparationPayload"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Demande invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentification requise",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Action non autorisée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ressource ou reçu introuvable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Version, aperçu ou état en conflit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Accès expiré",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Document trop volumineux",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Encodage non supporté",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Contenu invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Fréquence dépassée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Transaction indisponible, consulter le reçu",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
       }
     },
     "/internal/animation-locale/animations/{animation_id}/preparation/parametres": {
@@ -61659,6 +61950,30 @@
         ],
         "title": "AcheteurCommandeLotsRequest"
       },
+      "ActionAvancementPreparation": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "title": "Code"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          },
+          "chemin": {
+            "type": "string",
+            "title": "Chemin"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "code",
+          "message",
+          "chemin"
+        ],
+        "title": "ActionAvancementPreparation"
+      },
       "ActionCommande": {
         "properties": {
           "version": {
@@ -63915,6 +64230,77 @@
           "password"
         ],
         "title": "AuthentificationCommercantRequest"
+      },
+      "AvancementPreparationPayload": {
+        "properties": {
+          "animationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animationid"
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Version"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "EN_PREPARATION",
+              "PRETE",
+              "NON_MODIFIABLE"
+            ],
+            "title": "Statut"
+          },
+          "valide": {
+            "type": "boolean",
+            "title": "Valide"
+          },
+          "valides": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Valides"
+          },
+          "total": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Total"
+          },
+          "pourcentage": {
+            "type": "number",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Pourcentage"
+          },
+          "rubriques": {
+            "items": {
+              "$ref": "#/components/schemas/RubriqueAvancementPreparation"
+            },
+            "type": "array",
+            "title": "Rubriques"
+          },
+          "blocages": {
+            "items": {
+              "$ref": "#/components/schemas/ActionAvancementPreparation"
+            },
+            "type": "array",
+            "title": "Blocages"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "animationId",
+          "version",
+          "statut",
+          "valide",
+          "valides",
+          "total",
+          "pourcentage",
+          "rubriques",
+          "blocages"
+        ],
+        "title": "AvancementPreparationPayload"
       },
       "BailGenerationPayload": {
         "properties": {
@@ -68352,6 +68738,43 @@
           "permissions"
         ],
         "title": "ContextePortailAnimationPayload"
+      },
+      "ControleAvancementPreparation": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "VALIDE",
+              "A_FAIRE",
+              "A_VERIFIER"
+            ],
+            "title": "Statut"
+          },
+          "actions": {
+            "items": {
+              "$ref": "#/components/schemas/ActionAvancementPreparation"
+            },
+            "type": "array",
+            "title": "Actions"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "libelle",
+          "statut",
+          "actions"
+        ],
+        "title": "ControleAvancementPreparation"
       },
       "ControleResponse": {
         "properties": {
@@ -85611,6 +86034,51 @@
         },
         "type": "object",
         "title": "RotationSecretLiveRequest"
+      },
+      "RubriqueAvancementPreparation": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "enum": [
+              "PARCOURS",
+              "ORGANISATION",
+              "COMMERCES",
+              "TERRAIN"
+            ],
+            "title": "Id"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "valides": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Valides"
+          },
+          "total": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Total"
+          },
+          "controles": {
+            "items": {
+              "$ref": "#/components/schemas/ControleAvancementPreparation"
+            },
+            "type": "array",
+            "title": "Controles"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "libelle",
+          "valides",
+          "total",
+          "controles"
+        ],
+        "title": "RubriqueAvancementPreparation"
       },
       "RubriqueChecklistChasse": {
         "properties": {

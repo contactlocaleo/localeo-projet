@@ -965,3 +965,66 @@ relecture (`revision_relue`), du consentement, du financement et de la publicati
 | D, E | Destinataires exacts, relecture, réponse perdue, publication et droits | Contrats/reçus existants conservés | Invitations fictives ; générateur sans impact car données/états inchangés | ERP, Commerçant et Marketplace non modifiés ; aucun effet sur jeu publié |
 
 Les résultats réels et limites figurent dans le suivi d'implémentation.
+
+## E55-UX-10 — avancement de la préparation (26 septembre 2026)
+
+Demande : montrer au gestionnaire ce qui reste à faire dans Parcours,
+Organisation et lots, Commerces et Terrain, depuis une jauge en haut à droite.
+L'indicateur mesure les contrôles de préparation enregistrés, jamais les visites
+de rubriques, le temps passé ni la publication effective.
+
+### Critères d'acceptation
+
+- **E55-UX-10-A** — Sur bureau, une jauge compacte occupe la droite de l'en-tête,
+  sans limiter la largeur du parcours. Sur mobile elle se place sous le titre,
+  sans débordement horizontal. Pourcentage global et compteurs des quatre
+  rubriques restent visibles ; le détail se déplie au clavier.
+- **E55-UX-10-B** — Le détail présente les contrôles restant à effectuer et les
+  messages serveur, avec accès à chaque rubrique et au bilan de publication.
+  Un contrôle en attente d'un prérequis reste « à vérifier » et n'est jamais
+  compté valide. Les contrôles non applicables sont exclus du total. Les
+  blocages généraux restent visibles même si les préparatifs sont complets.
+- **E55-UX-10-C** — Le bilan se relit à l'ouverture, après sauvegarde, lors du
+  changement de rubrique et après résolution d'une action bloquante. Une
+  actualisation manuelle permet de récupérer une réponse commerçant externe.
+  Aucun polling d'attente humaine. Chargement, erreur et action en cours ne
+  montrent aucun pourcentage périmé ; une réponse d'un ancien contexte est
+  ignorée. Les saisies non enregistrées sont signalées et ne font pas progresser
+  la jauge. Une erreur de lecture peut être réessayée sans mutation.
+- **E55-UX-10-D** — Le serveur reste propriétaire des accords, vérifications,
+  financement et conditions de publication. La lecture de progression est
+  accessible avec `animation:generation_lire`, dans le tenant actif, sans
+  exiger le droit de publier. Cent pour cent n'effectue aucune publication et
+  ne contourne ni ses droits ni sa confirmation. Le bouton de publication
+  conserve son contrôle serveur indépendant.
+
+### Projection et contrat
+
+`GET /protected/animation-locale/animations/{id}/preparation/avancement`
+est une lecture privée sans effet de bord. Sa projection applicative réutilise
+les anomalies de l'assemblage de Chasse et les évaluations de participation,
+financement et publication ; elle ne crée pas de nouvelle règle métier.
+Les validations métier restent dans leurs propriétaires existants du domaine.
+
+Le contrat expose `animationId`, `version`, `statut`, `valide`, `valides`,
+`total`, `pourcentage`, `rubriques` et `blocages`. Chaque rubrique possède des
+contrôles nommés, un statut `VALIDE`, `A_FAIRE` ou `A_VERIFIER`, et des actions
+décrites par `code`, `message`, `chemin`. Le pourcentage global est le rapport
+des contrôles valides aux contrôles applicables, et non une moyenne des quatre
+rubriques. Les anomalies inconnues ne disparaissent pas : elles restent des
+blocages généraux. L'absence de préparation ne valide pas implicitement les
+contrôles dépendants qui n'ont pas encore pu être évalués.
+
+### Impacts et preuves prévues
+
+| Périmètre | Impact et preuve |
+| --- | --- |
+| Backend | Projection et route privée ; tests préparation absente, partielle, complète, dépendances invalidées, droits/tenant et contrat ; garde-fous architecture. |
+| Animation | Client API et jauge ; navigateur bureau/mobile, navigation sans écriture, erreurs, brouillons et réponses tardives ; types, lint et build isolé. |
+| Contrats | Export canonique et contrat embarqué Animation synchronisés ; ajout compatible, aucune commande modifiée. |
+| Documentation fonctionnelle et ops | Présente section, backlog, suivi et guide du moteur ; livrer le backend avant le frontend pour rendre la lecture disponible. |
+| Marketplace, Commerçant, ERP | Aucun consommateur de la nouvelle lecture ; commandes et projections existantes conservées. |
+| Migrations et démonstration | Sans impact : aucun stockage ni état métier ajouté ; fixtures synthétiques adaptées aux tests, générateur inchangé. |
+
+Le statut de l'epic reste En cours. Les preuves exécutées et limites sont
+consignées dans le suivi d'implémentation.

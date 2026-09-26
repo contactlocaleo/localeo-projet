@@ -54,6 +54,12 @@ Les exemples Latresne à deux alternatives documentent le contrat historique.
 
 ## Préparation simplifiée — E55-UX-09, 25 septembre 2026
 
+L'évolution [E55-UX-10](conception-technique.md#e55-ux-10--avancement-de-la-préparation-26-septembre-2026)
+ajoute une jauge globale et le détail des contrôles restants par rubrique,
+calculés depuis les données enregistrées. Le
+[guide d'utilisation](exploitation-moteur.md#suivre-lavancement-des-préparatifs)
+distingue avancement, prérequis et publication explicite.
+
 Localeo Animation présente la demande puis le parcours graphique reçu, sans
 prompts, requêtes ou imports techniques. La vue exploite la largeur desktop,
 ouvre un aperçu d'étape avant l'édition et conserve les préparatifs dans le même

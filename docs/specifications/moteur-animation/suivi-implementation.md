@@ -924,3 +924,61 @@ changement métier backend, migration, donnée ou générateur de démonstration
 n'est modifié pour ce correctif. Les contrôles navigateur utilisent des données
 synthétiques et bloquent les services externes ; aucune vérification sur
 l'environnement déployé, aucun commit, push ou déploiement effectué.
+
+## E55-UX-10 — avancement de la préparation, 26 septembre 2026
+
+La jauge globale occupe la droite de l'en-tête sur bureau et s'adapte au mobile.
+Elle présente les points validés dans Parcours, Organisation et lots, Commerces
+et Terrain. Son détail indique les actions restantes et leurs prérequis,
+identifie les étapes et rubriques de checklist concernées, et permet d'ouvrir
+la rubrique ou le bilan de publication sans écriture.
+
+La nouvelle lecture privée `preparation/avancement` réutilise les contrôles
+d'assemblage, de participation, de financement et de publication. Les points
+non évalués restent à vérifier ; les contrôles non applicables sont exclus.
+Le client affiche les données enregistrées, signale les brouillons, masque le
+bilan pendant un chargement ou une action bloquante et ignore les réponses
+d'un ancien contexte. Cent pour cent ne publie rien ; les blocages généraux et
+le contrôle final de publication restent distincts. Aucun polling humain ajouté.
+
+Preuves frontend exécutées :
+
+- `node tests/browser/hunt-progress.mjs` : **86 contrôles réussis** à 1600/390 px,
+  dont clavier, navigation sans écriture, erreurs/réessai, données inconnues,
+  brouillons, actions bloquantes et réponse tardive. Captures finales inspectées
+  dans `tmp/hunt-progress/`.
+- `node tests/browser/hunt-preparation.mjs` : **216 contrôles réussis** à
+  1280/390 px, incluant la jauge intégrée et l'ouverture des commerces sans
+  mutation. Captures inspectées dans `tmp/generation-browser-captures/`.
+- `node --test tests/*.test.mjs` : **163 tests réussis**. Après ajout de la
+  vérification de la nouvelle route et synchronisation des contrats, les
+  suites registre/génération/préparation ont été rejouées : **15 tests réussis**.
+- Types, lint et build isolé réussis ; avertissement de taille du bundle
+  principal (environ 817 Ko) conservé.
+
+Preuves backend : la suite isolée a validé **528 tests**, dont **421 contrôles
+d'architecture** et **107 tests ciblés** du moteur, de la publication et des
+contrats. Les cas couvrent notamment la préparation absente, les accords
+manquants, les confirmations obsolètes, le financement, les permissions et
+l'isolation du tenant. L'export moteur comprend **98 fichiers conformes** ;
+OpenAPI canonique et embarqué exposent **618 routes**.
+Après les derniers ajustements des libellés, du `sourceIndex` et des données
+malformées, les **26 tests** des fichiers
+`tests/application/animation_locale/test_avancement_preparation.py` et
+`tests/api/test_avancement_preparation_api.py` ont été rejoués avec succès via
+`scripts/validation/test_isolated.py`. Les contrôles documentaires réussissent :
+**84 guides, 833 liens, zéro erreur/avertissement et 117 sources exportées**.
+
+Revue indépendante du contrat : droits et tenant vérifiés avant calcul,
+contrôles interrompus non validés implicitement, publication existante
+conservée. Les messages initialement génériques ont été contextualisés ;
+l'association des étapes utilise leur `sourceIndex` même si les positions
+sont réordonnées.
+
+Périmètre : Backend, Animation et documentation centrale. Contrat JSON,
+manifest et OpenAPI canonique/embarqué synchronisés. Aucune migration ni
+modification du générateur de démonstration, car aucun état stocké n'est ajouté.
+Marketplace et Commerçant ne consomment pas cette nouvelle lecture. Livrer le
+backend avant le frontend. Les tests utilisent des données synthétiques ;
+aucune recette PostgreSQL ou vérification sur un environnement déployé,
+aucun commit, push ou déploiement effectué pour cette évolution.
