@@ -281,6 +281,21 @@ kit, puis déclarer le commerce prêt lorsque le serveur l’autorise. Règlemen
 guide complet et flyer séparé se consultent à la demande. L’accord de participation
 et la déclaration de préparation restent deux décisions distinctes.
 
+Depuis E55-UX-12, le kit d’une chasse contient aussi `qr-lieu.pdf`, QR opaque
+`LQL1` du lieu à scanner dans Localeo Live. Ce document est distinct de
+`flyer-joueurs.pdf`, dont le QR URL ouvre le support explicitement autorisé
+(`supportAccessibleParQr: true`) ou l’inscription. Les consignes et le guide
+privés ne sont pas rendus publics par cette évolution.
+
+Le backend prépare le QR commerce dans la transaction d’acceptation. Pour les
+accords historiques, **Télécharger mon kit** appelle la commande de préparation
+avant de lire le ZIP, sans demander une confirmation supplémentaire. Les GET
+du kit restent sans écriture. L’interface verrouille le téléchargement pendant
+la commande ; un refus ou un résultat incertain reste visible et ne déclenche
+aucun renvoi automatique. **Je suis prêt** conserve sa commande indépendante.
+Le gestionnaire prépare uniquement les supports des POI ; son bloc disparaît
+si le parcours ne comporte aucun lieu public.
+
 ## 4. APIs utilisées
 
 ## 4.1 Authentification / session

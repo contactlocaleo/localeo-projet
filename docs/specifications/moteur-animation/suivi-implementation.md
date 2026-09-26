@@ -2,6 +2,66 @@
 
 Branche commune : `feat-moteur-animation`, dans les cinq dépôts indépendants. Source de vérité : [spécification](localeo_animation_engine_spec.md), [conception technique](conception-technique.md) et [documents d’entrée](contrats/README.md). Ce suivi distingue code local vérifié, fonctionnalités raccordées et recette avant ouverture.
 
+## 26 septembre 2026 — E55-UX-12 : supports par responsable
+
+Évolution [E55-UX-12](conception-technique.md#e55-ux-12--supports-par-responsable-26-septembre-2026),
+à partir de Backend `c7f6e6b`, Animation `c8b41b7`, Commerçant `5e0c212`
+et Projet `bc78c97`, sur `feat-moteur-animation`. L’epic reste **En cours**.
+
+Le gestionnaire ne voit que les supports des POI ; sans POI, la rubrique est
+absente et le suivi des commerces demeure. À l’acceptation d’une mission Chasse,
+le backend prépare son QR dans la transaction de décision. Le kit commerçant
+contient `qr-lieu.pdf`, distinct du flyer d’accès au support public/inscription et
+du guide privé. Les anciens accords utilisent la commande versionnée
+`POST /kit/preparer` lors du téléchargement ; les GET restent sans mutation.
+Un QR actif valide est réutilisé et « Je suis prêt » reste indépendant.
+
+La jauge attribue désormais les supports commerçants à Commerces et les supports
+POI à Terrain ; les contrôles inapplicables sont exclus. Les contrats OpenAPI
+canonique et embarqués Animation/Commerçant sont régénérés depuis les 619 routes
+du producteur isolé. Marketplace conserve le contrat de scan existant.
+
+Preuves locales :
+
+| Périmètre | Résultat |
+| --- | --- |
+| Backend ciblé | **88 tests réussis**, **24 tests PostgreSQL non exécutés** faute de cible jetable : acceptation atomique, reprise historique, refus et versions, absence de rotation silencieuse, lectures pures, QR PDF et jauge. Après stabilisation de l’horloge du test, les 14 tests de supports concernés repassent. |
+| Architecture backend | **422 tests réussis**, runner isolé : architecture, classes domaine et couverture des use cases. |
+| Animation | **163 tests Node réussis**, types/lint/build isolé réussis ; **254 contrôles navigateur** préparation à 1280/390 px et **108 contrôles de jauge** à 1600/390 px, dont commerce sans QR orienté vers Commerces, sans contrôle Terrain inapplicable. |
+| Commerçant | **106 tests Animation réussis** (105 dans la suite puis ajout et passage du scénario de support devenu indisponible, composant 12/12), **31 contrôles de contrat API réussis**, build isolé réussi, **13 scénarios navigateur réussis**. |
+| Visuel | Captures bureau/mobile des deux interfaces et `qr-lieu.pdf` synthétique examinés ; aucun débordement constaté. |
+| Documentation | Contrôle des guides/liens et des 118 sources exportées réussi. |
+
+Commandes Commerçant : Vitest local sur `src/features/animations` et
+`src/lib/api/contracts.test.js` ; `node scripts/build-browser-tests.mjs` ;
+Playwright sur `animation-kit.spec.js`, `hunt-missions.spec.js`,
+`animations.spec.js` et `animation-flyer.spec.js`, serveur isolé sur 4173.
+La perte de réponse POST est simulée dans le navigateur desktop ; le téléchargement
+suivant réutilise le support sans deuxième préparation.
+
+La revue indépendante couvre rôles, confidentialité, ordre des verrous,
+atomicité et conservation des supports imprimés. Elle a demandé de vérifier la
+version de définition du QR publié, en plus de l’identifiant de configuration,
+et de porter au domaine le refus de recréer un QR après publication.
+Ces constats sont corrigés et relus ; les assertions PostgreSQL vérifient aussi
+un seul QR lors d’un rejeu concurrent et aucun QR après échec du reçu.
+
+Commande backend : `scripts/validation/test_isolated.py` sur les tests
+`application/animation_locale/test_supports_commerce_chasse.py`,
+`test_kit_animation_commercant.py`, `test_avancement_preparation.py`,
+`test_assemblage_sans_attestation_terrain.py`, les tests domaine
+`test_supports_commerce_chasse.py` et `test_preparation_verifiee.py`, les API
+`test_kit_animation_api.py`, `test_missions_commercantes_api_t3.py`,
+`test_avancement_preparation_api.py`, et les scénarios sécurité PostgreSQL
+`test_missions_commercantes_postgres.py`, `test_preparation_chasse_postgres.py`.
+
+Limites de livraison : scénarios PostgreSQL non exécutés faute de cible jetable,
+aucune recette physique avec téléphone ni déploiement réalisés. Les échecs de
+la suite élargie documentés pour E55-UX-11 n’ont pas été réexécutés pour cette
+évolution ciblée. Aucune migration ni génération de données réelle n’est requise.
+Livrer backend puis Commerçant avant Animation pour préserver le parcours des
+anciens accords. Aucun commit ou push réalisé au titre de cette évolution.
+
 ## 26 septembre 2026 — E55-UX-11 : Terrain simplifié
 
 Évolution [E55-UX-11](conception-technique.md#e55-ux-11--terrain-simplifié-26-septembre-2026),

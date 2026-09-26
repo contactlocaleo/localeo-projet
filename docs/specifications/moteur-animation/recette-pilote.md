@@ -39,7 +39,7 @@ Ces cases ne déclarent pas un déploiement effectué. Les succès locaux sont r
 | Parcours | Thème, difficulté, durée cible, fourchette d’étapes, liste vérifiée des commerces/POI. |
 | Conditions de participation | Règlement présenté et sa version, déclaration adulte, absence d’achat obligatoire. |
 | Commerçants | Deux propositions lorsqu’elles existent, mission sélectionnée, exigences confirmées, disponibilité et support. |
-| Préparation des lieux | Support QR associé à la bonne position, disponible puis actif à la publication ; deux blocs Terrain sans fiche de visite ni checklist imposée (E55-UX-11). Les horaires, trajet, accès et consignes peuvent être relus dans le guide facultatif. |
+| Préparation des lieux | QR commerce automatique à l’acceptation, remis dans le kit ; seul le QR des POI est préparé par le gestionnaire. Le bloc Supports des lieux publics disparaît sans POI (E55-UX-12). Aucune fiche de visite ni checklist imposée. Les horaires, trajet, accès et consignes restent dans le guide facultatif. |
 | Continuité | Source et consommateurs des objets/informations ; réponse prévue en cas de retrait global d’une étape. |
 | Visuels | Thème déclaré, polices autorisées, médias de l’animation ; poids/résolution/texte alternatif. Aucun ajout décoratif spécifique dans le lecteur. |
 | Appareils | Au moins un Android et un iPhone réels, navigateurs/versions, ordinateur et parcours clavier. |
@@ -52,6 +52,9 @@ Ces cases ne déclarent pas un déploiement effectué. Les succès locaux sont r
 | Inscription et reprise | Déclaration adulte/règlement explicites, lien personnel récupérable, capacité respectée. | Non exécuté sur cible réelle |
 | Départ avant puis pendant la période | Défi masqué avant ouverture ; lieu courant uniquement ; départ activé au bon instant. | Non exécuté sur cible réelle |
 | QR de lieu et QR personnel | Le QR de lieu ouvre le défi ; seul le scan commerçant habilité apporte l’attestation. | Caméra réelle non exécutée |
+| Kit commerçant | `qr-lieu.pdf` contient le QR opaque `LQL1` scannable dans Localeo Live ; `flyer-joueurs.pdf` contient un QR URL de support public autorisé ou d’inscription. Le guide privé reste privé. | Impression et caméra réelles non exécutées |
+| Accord historique et reprise | Télécharger prépare le support manquant avant lecture du ZIP, sans étape supplémentaire ni double écriture. Une erreur reste visible ; consulter le kit seul ne crée aucun QR. Je suis prêt reste indépendant. | Non exécuté sur cible réelle |
+| Terrain mixte ou sans POI | Le gestionnaire voit uniquement les lieux publics dans le sélecteur. Sans POI, le bloc disparaît et le suivi des commerces reste visible ; une erreur de lecture n’est pas traitée comme une absence de POI. | Non exécuté sur cible réelle |
 | Cinq activités | Information, choix unique, association, ordre, texte/code utilisables au toucher et au clavier. Erreur, indice, aide et succès compréhensibles. | Validation terrain non exécutée |
 | Réseau interrompu | Commande bloquée/reçue clairement distinguée ; réconciliation et renvoi explicite sans double tentative. | Réseau mobile réel non exécuté |
 | Commerce indisponible | Aperçu organisateur, motif et confirmation ; avis de parcours adapté, continuité disponible au bon moment. | Non exécuté sur cible réelle |

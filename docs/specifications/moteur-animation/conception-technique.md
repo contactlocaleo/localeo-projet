@@ -1099,3 +1099,69 @@ des modifications de période/capacité restent inchangés.
 | Fonctionnel et exploitation | Guide gestionnaire, recette, backlog et présent document actualisés ; backend à livrer avant le frontend. |
 
 Les preuves exécutées et les limites figurent dans le suivi d’implémentation.
+
+## E55-UX-12 — Supports par responsable (26 septembre 2026)
+
+Décision utilisateur : l’installation dans un commerce appartient au commerçant.
+E55-UX-11-A/C exposait encore tous les QR dans Terrain, avec une préparation
+manuelle gestionnaire. La cible supprime cette tâche pour les étapes commerçantes
+et conserve les supports des lieux publics à la charge du gestionnaire.
+
+### Critères et invariants
+
+- **E55-UX-12-A — Gestionnaire.** « Supports des lieux publics » présente seulement
+  les étapes POI. Sans POI, ce bloc est absent ; une lecture échouée reste une
+  erreur visible. Le suivi facultatif des commerces reste accessible, sans
+  nouvelle checklist ni attestation.
+- **E55-UX-12-B — Commerçant.** Accepter une mission Chasse prépare dans la même
+  transaction son QR de lieu. Le kit fournit `qr-lieu.pdf` pour sa propre étape,
+  à scanner depuis Localeo Live. `flyer-joueurs.pdf` conserve son URL de support
+  public explicitement autorisé ou d’inscription. Le guide de mission reste privé.
+  Ces trois usages ne sont pas interchangeables. Télécharger plusieurs fois
+  réutilise le support valide ; cela ne confirme jamais « Je suis prêt ».
+- **E55-UX-12-C — Reprise.** Les accords historiques sans QR peuvent préparer
+  leur support lors du clic « Télécharger mon kit », sans bouton technique
+  supplémentaire. Une commande explicite, versionnée et idempotente réalise
+  cette écriture ; les GET de métadonnées et de ZIP n’en effectuent aucune.
+  Après résultat incertain, le frontend relit l’état ; il bloque la répétition
+  jusqu’à réconciliation, conserve l’intention si elle reste valable et exige
+  une nouvelle intention après conflit. Les réponses d’un ancien compte sont ignorées.
+- **E55-UX-12-D — Cohérence.** Le domaine conserve l’accord courant, la mission
+  choisie, le commerce et l’étape associés, les versions, le statut du QR et la
+  configuration publiée applicable. Un QR d’un autre commerce ne doit jamais
+  être livré. Refus, retrait accepté et accès étrangers restent interdits.
+  L’activation à la publication est conservée ; aucun QR actif valide n’est
+  remplacé au téléchargement. Les QR commerçants manquants alimentent Commerces
+  (`QR_COMMERCANT_NON_PREPARE`), les POI Terrain (`QR_LIEU_NON_PREPARE`).
+
+### Contrat et responsabilités
+
+Sous `/protected/animation-locale/commercants/me/animations/{animationId}` :
+
+| Opération | Contrat |
+| --- | --- |
+| `GET /kit` | Métadonnées existantes plus `qrLieuPret: boolean \| null` ; `null` hors mission Chasse, `false` si le support doit être préparé, `true` s’il est restituable. `version` reste la version de demande de participation. |
+| `POST /kit/preparer` | Corps fermé `{expectedVersion}`, en-tête `Idempotency-Key` requis ; réponse `{animationId, version, qrLieuPret: true}`. Ne modifie pas la version de l’accord. |
+| `GET /kit/download` | ZIP privé ; aucune écriture et refus si le QR requis ne peut pas être restitué. |
+
+Le domaine décide de l’éligibilité et de la cohérence ; l’application orchestre
+verrous, signature, persistance et rendu. Routes et interfaces ne recréent pas
+ces règles. La décision, le QR et le reçu doivent réussir ou échouer ensemble.
+L’ordre des verrous est animation puis demande, compatible avec publication et
+édition. La commande historique vérifie également la définition effective d’une
+animation publiée et les étapes neutralisées. Un changement de clé de signature
+ne provoque aucune rotation silencieuse lors d’une lecture.
+
+### Impacts et preuves
+
+| Périmètre | Impact et preuve attendue |
+| --- | --- |
+| Backend domaine/application | Acceptation et QR atomiques, rejeu stable, mauvais compte/accord obsolète refusés, préparation historique avant/après publication, lectures pures, QR réel dans le PDF, jauge correctement attribuée. |
+| Commerçant | Un téléchargement prépare au besoin le support ; double clic, réponse perdue, conflit, ancien compte et confirmation « prêt » indépendante ; tests unitaires et navigateur bureau/mobile. |
+| Animation | Sélection POI seule, bloc absent sans POI, droits et erreurs conservés ; tests navigateur, types/lint/build. |
+| Contrats/lecteurs | OpenAPI canonique et copies frontend actualisés ; aucune nouvelle commande joueur ni modification du DSL. Marketplace conserve les mêmes QR et règles de scan. |
+| Stockage | Réutilisation des QR et reçus existants, aucune migration ni suppression d’historique. |
+| Démonstration | Générateur classique sans mission Chasse : pas de nouvelle donnée obligatoire ; fixtures de tests adaptées, aucune génération réelle demandée. |
+| Guides et exploitation | Répartition des rôles et distinction des supports documentées ; backend puis Commerçant avant Animation pour ne pas masquer le parcours historique sans remplacement disponible. |
+
+Les preuves exécutées et limites figurent dans le suivi d’implémentation.

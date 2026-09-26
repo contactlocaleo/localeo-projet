@@ -55,7 +55,10 @@ Les exemples Latresne à deux alternatives documentent le contrat historique.
 ## Préparation simplifiée — E55-UX-09, 25 septembre 2026
 
 L’évolution [E55-UX-11](conception-technique.md#e55-ux-11--terrain-simplifié-26-septembre-2026)
-réduit Terrain à « Supports à installer » et « Préparation des participants ».
+réduit Terrain aux supports et à la préparation des participants.
+L’évolution [E55-UX-12](conception-technique.md#e55-ux-12--supports-par-responsable-26-septembre-2026)
+réserve « Supports des lieux publics » aux POI ; les commerçants reçoivent le QR
+de leur étape dans leur kit. Le bloc gestionnaire disparaît sans lieu public.
 Les fiches de vérification par mission/lieu et la checklist obligatoire ne
 bloquent plus la publication et ne figurent plus dans la jauge. Les accords,
 QR nécessaires et contrôles métier conservés restent décidés par le backend.

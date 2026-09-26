@@ -41,19 +41,32 @@ pas une échéance serveur.
 
 Après avoir accepté l’invitation, ouvrez l’animation ou l’invitation et choisissez
 **Télécharger mon kit**. Le kit concerne uniquement votre commerce. Décompressez
-le fichier, ouvrez le mode opératoire et imprimez le flyer PDF à taille réelle.
-Le guide contient les instructions réservées à votre équipe : affichez seulement
-le flyer destiné aux participants.
+le fichier, ouvrez le mode opératoire et imprimez les supports destinés aux joueurs
+à taille réelle. Le guide contient les instructions réservées à votre équipe :
+ne l’affichez pas aux participants.
+
+Pour une chasse, le kit distingue deux documents :
+
+- **qr-lieu.pdf** : le QR de votre étape, à scanner depuis Localeo Live pour
+  accéder au défi. Installez-le à l’endroit prévu dans votre commerce.
+- **flyer-joueurs.pdf** : le flyer dont le QR ouvre le support public autorisé
+  de la mission, ou l’inscription à l’animation. Il ne remplace pas le QR d’étape.
+
+Le QR d’étape est préparé automatiquement lorsque vous acceptez la mission.
+Pour une ancienne invitation déjà acceptée, le clic sur **Télécharger mon kit**
+effectue la préparation nécessaire avant le téléchargement, sans nouvelle étape
+à remplir. Si cette action échoue ou reste incertaine, suivez le message de reprise
+affiché ; ne multipliez pas les clics. Une simple consultation ne prépare rien.
 
 Le bouton **Voir le guide de préparation** permet aussi de consulter toutes les
 consignes dans l’application. Les informations complémentaires restent repliées
 pour laisser visibles votre mission et les actions utiles.
 
-Préparez les objets éventuels indiqués dans votre mission, installez le flyer à
-l’emplacement convenu et vérifiez que son QR est lisible. Le QR de support ouvre
-le contenu destiné aux joueurs pendant la période de jeu ; il peut être
-indisponible avant le lancement. Ce QR ne valide pas un passage : conservez le
-parcours de validation du QR personnel du participant dans l’application.
+Préparez les objets éventuels indiqués dans votre mission et installez les
+supports à l’emplacement convenu. Les accès peuvent être indisponibles avant
+le lancement. Ni l’ouverture du flyer ni le scan du QR d’étape ne remplacent
+l’attestation commerçante : conservez le parcours de validation du QR personnel
+du participant dans l’application.
 
 Si le suivi de préparation est activé, choisissez **Je suis prêt** une fois les
 préparatifs terminés. Le gestionnaire reçoit une notification. Accepter

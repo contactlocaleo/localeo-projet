@@ -193,6 +193,26 @@ terrain T3 et complète E55-UX-09/10 ; le statut de l’epic reste **En cours**.
 Critères et impacts dans la [conception E55-UX-11](../../specifications/moteur-animation/conception-technique.md#e55-ux-11--terrain-simplifié-26-septembre-2026).
 Les preuves exécutées sont consignées dans le [suivi](../../specifications/moteur-animation/suivi-implementation.md).
 
+## Évolution du 26 septembre 2026 — E55-UX-12, supports par responsable
+
+Le commerçant installe les supports de sa propre étape. Le gestionnaire conserve
+uniquement les supports des lieux publics. Cette évolution précise E55-UX-11-A/C,
+sans remettre en place de checklist ni de double confirmation.
+
+- [x] A : Terrain ne présente que les POI et masque ce bloc sans POI ; le suivi
+  des commerces reste accessible.
+- [x] B : l’acceptation d’une mission prépare son QR ; le kit contient le support
+  de cette étape, distinct du flyer et du guide privé.
+- [x] C : les anciennes acceptations disposent d’une reprise explicite au
+  téléchargement, versionnée et idempotente ; les lectures n’écrivent rien.
+- [x] D : isolation commerçant, QR utilisable, publication, jauge, reprise réseau
+  et déclaration « prêt » indépendante sont préservés.
+
+Voir la [conception E55-UX-12](../../specifications/moteur-animation/conception-technique.md#e55-ux-12--supports-par-responsable-26-septembre-2026)
+et le [suivi](../../specifications/moteur-animation/suivi-implementation.md).
+Implémentation vérifiée localement ; la recette PostgreSQL et le scan physique
+restent à exécuter avant livraison. Le statut de l’epic reste **En cours**.
+
 ## Références
 
 - [Registre TRE-ARB-01 a TRE-ARB-89](../../specifications/moteur-animation/localeo_animation_engine_spec.md#arbitrages).

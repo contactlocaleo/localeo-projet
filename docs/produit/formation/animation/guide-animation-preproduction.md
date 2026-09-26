@@ -34,11 +34,17 @@ valables pendant toute la journée choisie à Paris.
 
 ## Préparer le terrain d’une chasse
 
-La rubrique **Terrain** se limite à deux points :
+La rubrique **Terrain** distingue les préparatifs de votre équipe et ceux des commerces :
 
-1. **Supports à installer** : préparer et télécharger les QR des lieux du parcours.
+1. **Supports des lieux publics** : préparer et télécharger les QR à installer
+   dans les lieux publics du parcours. Ce bloc disparaît s’il n’y en a aucun.
 2. **Préparation des participants** : consulter les commerces qui se sont déclarés
    prêts, si ce suivi a été activé. Ouvrir le détail seulement si nécessaire.
+
+Chaque commerçant reçoit les supports de son étape dans son kit et les installe
+lui-même. Vous n’avez aucun QR commerce à créer ni à confirmer à sa place.
+Une erreur de chargement demande une actualisation ; elle ne signifie pas que
+le parcours ne contient aucun lieu public.
 
 Il n’y a plus de checklist obligatoire, de fiche de visite ni de confirmation
 à saisir pour chaque mission. Le guide pratique reste disponible à la demande.

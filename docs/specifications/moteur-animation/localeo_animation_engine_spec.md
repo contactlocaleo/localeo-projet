@@ -2,6 +2,13 @@
 
 Version documentaire : 1.18 — 19 septembre 2026. Epic 55, statut produit : **En cours** (classement de la roadmap au 18 septembre 2026).
 
+**Évolution du 26 septembre 2026 — E55-UX-12 :** les
+[supports suivent leur responsable](conception-technique.md#e55-ux-12--supports-par-responsable-26-septembre-2026).
+Le commerçant reçoit le QR de son étape dans son kit et installe ses supports.
+Le gestionnaire ne prépare que ceux des lieux publics ; la rubrique est masquée
+si le parcours n’en comporte aucun. Télécharger le kit ne déclare pas le commerce
+prêt et ne publie pas l’animation.
+
 **Évolution du 26 septembre 2026 — E55-UX-11 :** la
 [préparation Terrain simplifiée](conception-technique.md#e55-ux-11--terrain-simplifié-26-septembre-2026)
 remplace les obligations historiques de checklist et de vérification sur place
