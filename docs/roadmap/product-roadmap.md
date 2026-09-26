@@ -1,14 +1,14 @@
 # Roadmap produit
 
-## État global consolidé au 18 septembre 2026
+## État global consolidé au 26 septembre 2026
 
-Le tronc commun conserve 64 identifiants : 56 epics terminees, 4 a faire,
+Le tronc commun comprend 65 identifiants : 56 epics terminees, 5 a faire,
 1 en cours, 2 abandonnees et 1 fusionnee. L'Epic 61 est absorbee par l'Epic 60.
 Les documents sont ranges par etat dans l'[index de la roadmap](README.md).
 
 | Etat | Epics |
 | --- | --- |
-| A faire | `EPIC-54`, `EPIC-58`, `EPIC-62`, `EPIC-64` |
+| A faire | `EPIC-54`, `EPIC-58`, `EPIC-62`, `EPIC-64`, `EPIC-65` |
 | En cours | `EPIC-55` |
 | Termine | 56 epics : toutes les autres epics de `EPIC-01` a `EPIC-60`, et `EPIC-63`, hors `EPIC-05` et `EPIC-12` |
 | Abandonne | `EPIC-05` : QR commercant remplace par l'Epic 10 ; `EPIC-12` : flux manuel decommissionne par l'Epic 39 |
@@ -23,7 +23,7 @@ un seul fichier par sujet. Trois identifiants applicatifs complètent ce tronc :
 | [EPIC-MARKETPLACE-54](a-faire/epic-marketplace-54-harmonisation-identite-visuelle-marketplace-backlog.md) | Identité visuelle ; distinct du calendrier de l'Avent 54 | À faire (classement courant ; implémentation locale documentée, revue et recette attendues) |
 | [EPIC-PRES-CONTENU-001](terminees/epic-animation-edition-prestations.md) | Édition directe des prestations ; le futur sas reste dans l'EPIC 62 | Terminée (parcours existant) |
 
-Le total consolidé est de **67 identifiants : 58 terminés, 5 à faire, 1 en cours,
+Le total consolidé est de **68 identifiants : 58 terminés, 6 à faire, 1 en cours,
 2 abandonnés et 1 fusionné**. L'ancien numéro local Marketplace 53 (pagination)
 est rattaché à l'EPIC 57, sans ajouter d'identifiant ni le confondre avec la tombola.
 
@@ -35,6 +35,14 @@ Le classement du 15 septembre corrige les anciens libelles globaux des Epics
 la confirmation produit de l'utilisateur le 15 septembre 2026.
 
 Derniere evolution suivie :
+
+- [Epic 65 — Vues ERP audit, paiements et reversements](a-faire/epic-65-vues-erp-audit-paiements-reversements-backlog.md) :
+  cadrage du 26 septembre 2026 ; trois vues intégrées, recherche, filtres et détail,
+  accès ADMIN conservé ; paiements et reversements sous « Paiements et facturation ».
+  Réutiliser les lectures et le suivi 360 existants, sans nouveau flux financier.
+  [Spécification V1 disponible](../specifications/epic-65-vues-erp/README.md),
+  hypothèses de périmètre explicites et implémentation à réaliser ; les epics 30, 39, 43, 44, 51 et 60
+  conservent leur clôture historique.
 
 - [Epic 64 - Parcours de retractation en ligne depuis le site](a-faire/epic-64-parcours-retractation-en-ligne-backlog.md) :
   priorite critique ; obligation applicable depuis le 19 juin 2026 aux nouveaux

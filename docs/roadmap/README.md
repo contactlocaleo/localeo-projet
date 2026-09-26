@@ -1,18 +1,19 @@
 # Roadmap par etat
 
-Classement consolidé le 18 septembre 2026. Les backlogs des applications sont
+Classement consolidé le 18 septembre 2026, complété le 26 septembre par l’EPIC 65. Les backlogs des applications sont
 réunis dans les dossiers d'état, avec un seul fichier par EPIC. Le suivi inclut
-les 64 identifiants du tronc commun et trois identifiants applicatifs distincts.
+les 65 identifiants du tronc commun et trois identifiants applicatifs distincts.
 
 | Etat | Epics | Dossier |
 | --- | ---: | --- |
 | Terminees | 58 | [terminees/](terminees/README.md) |
-| A faire | 5 | [a-faire/](a-faire/README.md) |
+| A faire | 6 | [a-faire/](a-faire/README.md) |
 | En cours | 1 | [en-cours/](en-cours/README.md) |
 | Abandonnees | 2 | [abandonnees/](abandonnees/README.md) |
 | Fusionnee | 1 | Epic 61 reprise dans l'[Epic 60](terminees/epic-60-vision-360-commercialisation-backlog.md) |
 
-Les 64 identifiants du tronc commun et leurs états sont conservés. Les Epics 3 et 4 n'ont pas de fichier dedie :
+Les 64 identifiants historiques et leurs états sont conservés ; l’EPIC 65 ajoute
+les vues ERP d’audit, paiements et reversements, à faire. Les Epics 3 et 4 n'ont pas de fichier dedie :
 leurs descriptions dans la roadmap produit sont referencees depuis le dossier
 des epics terminees. Aucun fichier autonome de l'Epic 61 n'est recree.
 
@@ -45,6 +46,7 @@ précise la provenance et les divergences historiques conservées.
 | 47 | Terminee | Cloture produit confirmee par l'utilisateur le 15 septembre 2026 ; l'ancienne reserve de recette reste une reference d'exploitation. |
 | 54, 58, 62, 64 et EPIC-MARKETPLACE-54 | A faire | Classement courant des dossiers ; voir les réserves de chaque backlog. |
 | 55 | En cours | Moteur commun et chasse au trésor ; conception, arbitrages et livraison suivis dans le backlog. |
+| 65 | A faire | Cadrage des trois vues ERP audit, paiements et reversements ; réutilisation des règles et lectures existantes, sans rouvrir les epics terminées. |
 | 61 | Fusionnee | Contenu repris dans l'Epic 60 ; une fusion n'est pas un abandon. |
 | Autres identifiants du tronc commun | Terminees | Statut produit consolide conserve ; les anciennes mentions de stories a faire ne rouvrent pas ces epics. |
 
