@@ -2,7 +2,7 @@
 
 Guides PDF, prompts, visuels et prototypes produits. Les versions historiques restent identifiables.
 
-Guide actuel pour l’onboarding commerçant : [Votre guide au quotidien (4 pages)](formation/commercant/guide-quotidien-localeo-commercant.pdf), édition septembre 2026. [Source éditable](../docs/produit/formation/commercant/guide-quotidien-commercant.md). Les guides de prise en main v7 à v11 ci-dessous sont conservés comme versions historiques.
+Guide actuel pour l’onboarding commerçant : [Votre guide au quotidien (8 pages illustrées)](formation/commercant/guide-quotidien-localeo-commercant.pdf), édition détaillée de septembre 2026, avec des captures de l’application de test. Il couvre accès, compte, page publique, prestations, validation, activité, reversements, animations, facturation, alertes et aide. [Source éditable](../docs/produit/formation/commercant/guide-quotidien-commercant.md). Les guides de prise en main v7 à v11 ci-dessous sont conservés comme versions historiques.
 
 - [design/marketplace/hero-compositions/README.md](design/marketplace/hero-compositions/README.md)
 - [design/marketplace/hero-compositions/hero.html](design/marketplace/hero-compositions/hero.html)

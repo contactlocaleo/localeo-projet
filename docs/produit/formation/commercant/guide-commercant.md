@@ -1,6 +1,6 @@
 # Guide commerçant — validation et incidents réseau
 
-Pour l’onboarding et l’usage quotidien, remettre le [guide pédagogique en quatre pages](../../../../livrables/formation/commercant/guide-quotidien-localeo-commercant.pdf), dont la [source éditable](guide-quotidien-commercant.md) est maintenue ici. Le présent document conserve les détails de validation et de reprise d’incident.
+Pour l’onboarding et l’usage quotidien, remettre le [guide pédagogique illustré en huit pages](../../../../livrables/formation/commercant/guide-quotidien-localeo-commercant.pdf), dont la [source éditable](guide-quotidien-commercant.md) est maintenue ici. Le présent document conserve les détails de validation et de reprise d’incident.
 
 ## Connexion
 
