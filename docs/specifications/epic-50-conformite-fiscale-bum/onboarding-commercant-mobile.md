@@ -1,5 +1,65 @@
 # Epic 50 - Onboarding commercant mobile
 
+## Avancement acquis et réponses obsolètes — 26 septembre 2026
+
+Le pourcentage présenté dans Localeo OnBoard représente désormais l’**avancement
+acquis** du dossier. Le domaine conserve le meilleur palier atteint, y compris
+après un rechargement, une réouverture ou une modification des données. Les
+contrôles recommandés du catalogue et les éléments non applicables ne participent
+plus au calcul de l’avancement courant de l’inscription.
+
+Les preuves, blocages et capacités restent évalués sur les données actuelles.
+Un dossier à 100 % acquis peut donc signaler une pièce à renouveler, un accès
+bloqué ou un nouveau prérequis : ces actions sont affichées avec les contrôles
+obligatoires actuels et restent bloquantes pour la validation. Le palier acquis
+n’accorde aucune capacité et ne remplace jamais un diagnostic.
+
+Deux régressions ont été reproduites localement : un contrôle facultatif ajouté
+à quatorze contrôles complets faisait passer le taux de 100 à 93,3 % ; une
+réponse réseau ancienne reçue après la réponse récente pouvait afficher 100 %,
+puis 93 %. L’action précise à l’origine du signalement utilisateur n’est pas
+connue ; aucune attribution à des données distantes n’est affirmée.
+
+### Contrat interne et persistance
+
+- `progress: {completed, total, rate}` expose le palier acquis. Les compteurs
+  désignent le palier historique, pas la checklist actuelle.
+- `currentProgress: {completed, total, rate}` expose les seuls contrôles
+  obligatoires applicables du dernier diagnostic.
+- Liste et détail utilisent le taux serveur ; les indicateurs de portefeuille
+  agrègent les mêmes paliers via le champ conservé `currentCompletionRate`.
+  Les blocages agrégés restent les blocages actuels.
+- La PWA ignore les lectures dépassées et les réponses d’un autre dossier ;
+  la version empêche une réponse de commande ancienne de remplacer une récente.
+  **Actualiser** relit aussi le détail sélectionné.
+- Le domaine `conformite_fiscale_bum.onboarding` porte le calcul et la
+  conservation du palier. Le service le persiste dans `progression_snapshot`
+  avec la checklist, sous le contrôle optimiste de version existant.
+
+### Livraison et preuves
+
+Appliquer **v249_onboard_progression_acquise.sql avant le nouveau backend** par
+la [procédure de migration](../../exploitation/technique/deployer-et-verifier-schema.md).
+La migration ajoute un champ JSON et initialise les anciens dossiers à partir
+de leurs compteurs existants, sans modifier pièces, checklist ni capacités.
+Un ancien maximum qui n’a jamais été conservé n’est pas reconstituable ; le
+recalcul corrige les contrôles facultatifs et les nouveaux paliers sont conservés.
+Les snapshots historiques de rendez-vous déjà enregistrés ne sont pas réécrits.
+
+Le correctif concerne le backend et sa PWA OnBoard ; les trois frontends séparés
+ne consomment pas ce contrat interne. Les champs existants sont conservés, les
+champs de lecture ajoutés sont calculés côté serveur. Le générateur de
+démonstration utilise le même diagnostic : aucune nouvelle donnée ni écriture
+spécifique au générateur n’est nécessaire après migration. Aucun environnement
+test, démo ou production n’a été modifié par les vérifications locales.
+
+Preuves : tests de domaine et d’application sur les recommandations, paliers et
+refus de validation ; tests PostgreSQL de migration, pagination, agrégats,
+relecture et concurrence ; tests Node de réponses désordonnées, changement de
+dossier et actualisation ; recette navigateur du parcours ERP/OnBoard à 390 et
+1280 px, avec API simulée. Les contrôles d’architecture et le test unitaire du
+générateur OnBoard complètent ces scénarios.
+
 ## Adresse du commerce obligatoire — 20 septembre 2026
 
 L’[adresse postale de la fiche commerçant](../espace-commercant/adresse-postale.md)
@@ -24,9 +84,11 @@ Les indicateurs globaux ne sont pas relus a chaque changement de page ou filtre,
 mais sont actualises au chargement, au rafraichissement et apres les actions.
 
 Les indicateurs agregent les snapshots en base en une lecture : compteurs
-et moyennes, distribution des progressions, principaux blocages. Le calcul
-conserve les controles non applicables, l'arrondi de chaque checklist, les
-snapshots de rendez-vous et le perimetre d'autorisation.
+et moyennes, distribution des progressions, principaux blocages. Depuis le
+correctif du 26 septembre, ils reprennent l'avancement acquis et excluent les
+controles recommandes et non applicables du calcul courant. L'arrondi de chaque
+dossier, les snapshots historiques de rendez-vous et le perimetre d'autorisation
+restent preserves.
 
 ## Modeles reutilisables visibles dans OnBoard - 8 septembre 2026
 
