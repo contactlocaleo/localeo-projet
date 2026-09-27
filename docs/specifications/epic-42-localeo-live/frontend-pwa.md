@@ -243,3 +243,50 @@ des données, du générateur de démonstration ou de sa configuration n'est req
 La livraison porte uniquement sur le bundle Marketplace. Les preuves ciblées
 et leur résultat figurent dans le backlog de l'epic, dont la clôture historique
 est conservée.
+
+## 11. Correctif du 26 septembre 2026 — détail et installation Live invalide
+
+Signalement test : `GET /public/localeo-live/installations/{installation_id}/animations/{animation_id}`
+refusé en 401 `SessionInvalide`, corrélation
+`LOC-ac5e1260-8d0c-4d1c-858a-6528835b495e`. L'authentification de l'installation
+précède la lecture de l'animation. Le backend refuse une installation absente,
+inactive, sans secret ou dont le secret ne correspond plus ; cette trace ne
+permet pas de départager ces causes. La publication d'une animation ne renouvelle
+pas l'identité de l'appareil.
+
+Le détail Live utilisait directement l'installation locale, sans la reprise
+déjà disponible dans `withLiveInstallation`. Il utilise désormais ce helper :
+après le seul refus explicite 401 « Installation Localeo Live invalide », relire
+l'identité sous le verrou partagé, renouveler l'installation refusée si nécessaire,
+puis refaire une seule lecture avec le nouveau secret. Un second refus est
+affiché avec « Réessayer » ; un autre 401, une indisponibilité ou une erreur
+réseau ne déclenche pas de remplacement automatique. Aucun suivi, inscription
+ou accès participant n'est recréé par cette consultation.
+
+L'authentification de la projection personnalisée reste obligatoire. Le carnet
+local et ses accès sont conservés ; renouveler une installation ne restaure
+pas implicitement ses anciens rattachements serveur et ne confirme pas une
+inscription. Les liens personnels du carnet restent distincts de cette identité.
+
+Preuves sur Marketplace `298373f` avec correctif local :
+
+- Le scénario navigateur reproduit avant correction l'écran « Animation
+  indisponible / Installation Localeo Live invalide » au lieu du détail.
+- `tests/visual/live-detail-installation.spec.cjs` : **10 scénarios réussis**
+  à 390/1280 px, identité valide, renouvellement, second refus, 401 sans rapport,
+  503, secret envoyé, nombre de créations et conservation d'un accès du carnet.
+- `tests/security/live-installation.test.cjs` et `library-backup.test.cjs` :
+  **10 tests réussis**, dont concurrence entre onglets, reprise du stockage et
+  absence de boucle de renouvellement.
+- Build isolé Vite et lint de `src` et du nouveau test réussis. Le lint global
+  `eslint .` est bloqué par `EPERM` sur le dossier de sortie local
+  `output/demo-generation/pytest-bum-registry` ; aucun contrôle n'est désactivé.
+- Le port habituel 8173 était occupé : recette sur serveur temporaire isolé
+  8174, sans configuration opérateur ni API distante. Captures relues.
+
+Périmètre : Marketplace/Live et documentation centrale. Aucun changement de
+contrat ou de backend, migration, données de démonstration ou adaptation des
+applications Animation et Commerçant. Les protections serveur restent
+inchangées. Livrer le bundle Marketplace ; la version réellement déployée et
+la cause exacte d'invalidation de cet appareil ne sont pas connues. Aucun
+commit, push, déploiement ou effacement du carnet effectué pour ce correctif.
