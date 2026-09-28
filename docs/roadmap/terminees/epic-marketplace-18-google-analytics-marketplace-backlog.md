@@ -446,8 +446,16 @@ Resultats attendus :
 
 ## MARKET-001 ? Jetons dans Analytics (2026-09-06)
 
-Collecte suspendue dans le code et script tiers retire de la CSP. La reactivation exige une recette reseau et une revue du transport ; le flag seul est sans effet. Voir [contrat et exploitation](../../specifications/securisation-production/corrections-marketplace-2026-09-06.md).
+Au 28 septembre 2026, correctif local de réactivation avec vocabulaire fermé,
+consentement et tests HTTP/navigateur, sans script tiers. L'adaptateur serveur Google
+Measurement Protocol est ajouté après autorisation explicite ; il exige un secret
+privé et une configuration production. Aucun paramètre opérateur n'est modifié ;
+aucune activation ou livraison en production n'est annoncée.
+Voir [contrat et preuves](../../specifications/securisation-production/corrections-marketplace-2026-09-06.md).
 
 ## MARKET-005 - Retrait Analytics
 
-Retrait et remise a zero synchronises entre onglets, signal fournisseur et suppression des cookies GA accessibles. Maintenir la suspension MARKET-001.
+Retrait et remise à zéro synchronisés entre onglets, annulation des requêtes en
+attente et suppression des cookies GA historiques accessibles. Un échec d'écriture
+du stockage ne rétablit plus un ancien consentement. L'envoi externe reste désactivé
+sans configuration privée valide.

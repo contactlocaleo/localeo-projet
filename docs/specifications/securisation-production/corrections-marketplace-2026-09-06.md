@@ -9,12 +9,66 @@
 
 ## MARKET-001 — Jetons dans Analytics
 
-Analytics est suspendu dans le code, y compris avec un consentement ancien et un
-flag runtime actif. Le serveur ne permet plus le script Google dans sa CSP.
-La reactivation exige un correctif revu et une recette reseau des navigations SPA
-sensibles ; changer une variable ne reactive pas la collecte.
+Au 28 septembre 2026, le correctif local remplace le tag navigateur par un transport
+serveur contrôlé vers Google Measurement Protocol. Le serveur ne permet toujours
+pas le script Google dans sa CSP. L'activation nécessite le consentement, les flags,
+l'environnement production, l'identifiant GA et le secret privé du serveur.
+Ce constat local ne constitue pas une activation de la plateforme déployée.
 
-Test : `node --test tests/security/analytics-suspension.test.cjs`.
+L'invariant technique est porté par `analyticsPolicy.mjs`, partagé entre le
+navigateur et le serveur Marketplace : seul un nom d'événement connu et ses
+attributs énumérés sont admis. Aucune URL, query, ancre, titre, label libre,
+coordonnée, identifiant métier ou capacité d'accès n'est transmis. Une route
+personnelle est réduite à une catégorie fixe (`participant`, `feedback`, `live`,
+etc.). Les anciennes fonctions de marquage conservent leur interface, mais leurs
+labels et identifiants sont éliminés.
+
+`POST /analytics/events` est un endpoint technique du serveur Node Marketplace,
+sans appel au domaine backend ni persistance. Son JSON comporte exactement
+`client_id` (UUID v4 aléatoire éphémère), `session_id` (début de session en secondes)
+et `event` (`name`, `params`). `app_environment=production` est requis côté serveur.
+Le client utilise un identifiant uniquement en mémoire, distinct des accès Live,
+supprimé au retrait et à la sortie du document. Aucun cookie Analytics n'est créé.
+
+Le serveur vérifie origine, méthode, type JSON, taille (4 Ko), schéma fermé,
+débit et concurrence. Il reconstruit le payload ; les headers, cookies, IP et
+Referer ne traversent jamais la frontière vers le destinataire injecté. Les erreurs
+ne contiennent aucune valeur reçue. Aucun rejeu automatique ni file persistante.
+La disponibilité publique `LOCALEO_ANALYTICS_TRANSPORT_AVAILABLE` est calculée
+par le serveur et reste fausse sans configuration privée valide.
+`analytics-google.cjs` transmet exclusivement le payload reconstruit vers
+`https://www.google-analytics.com/mp/collect`, sans redirection ni rejeu, avec
+annulation et délai de trois secondes. Seuls l'identifiant GA et le secret du
+serveur sont ajoutés à l'URL Google ; ils ne proviennent jamais de la requête
+navigateur. Aucune erreur du fournisseur ou URL contenant le secret n'est journalisée.
+Le secret `LOCALEO_GA_API_SECRET` est exclu du bundle et de `/app-config.js`.
+L'adaptateur réel utilise une fonction HTTP simulée dans les tests.
+
+Preuves locales : `tests/security/analytics-collection.test.cjs`,
+`analytics-consent.test.cjs`, `analytics-transport.test.cjs` et
+`tests/visual/analytics-collection.spec.cjs` dans Marketplace. Les tests navigateur
+inspectent le réseau sur accès directs et navigation SPA avec sentinelles privées,
+puis la réception par le serveur et l'adaptateur Google à la frontière HTTP simulée. Ils ne prouvent pas
+l'ingestion dans une propriété Google réelle.
+
+Résultats locaux du 28 septembre après branchement de l'adaptateur : 100 tests de
+sécurité, 18 scénarios navigateur et 12 tests serveur réussis, y compris les cas
+du fournisseur simulé. Les événements d'inscription ont été raccourcis en
+`animation_registration_started`, `animation_registration_succeeded` et
+`animation_registration_failed` pour respecter la limite GA4 de 40 caractères.
+Build isolé et lint des sources/scripts/tests
+concernés réussis. Le lint global `eslint .` rencontre un accès `EPERM` dans une
+sortie préexistante `output/demo-generation/pytest-bum-registry` ; le lint ciblé
+n'a pas ce blocage. Aucun appel fournisseur, secret opérateur ou déploiement.
+
+Reste à réaliser sur la cible : fournir le secret privé côté serveur, effectuer
+la recette fournisseur et déployer. L'ajout de l'adaptateur a été autorisé par
+l'utilisateur après la revue des preuves locales. Aucun paramètre opérateur
+n'a été modifié. Le Measurement Protocol seul n'offre pas toute l'attribution
+automatique du tag navigateur ; les identifiants en mémoire ne permettent pas de
+reconnaître un visiteur entre plusieurs documents. Le champ fixe
+`engagement_time_msec=1` n'est pas une mesure du temps de lecture.
+Aucune migration, contrat métier backend ou donnée de démonstration n'est modifiée.
 
 Exploitation : livrer les nouveaux assets et headers, recharger les onglets de
 l'ancienne version et desactiver tout tag injecte par un hebergeur externe.
@@ -52,7 +106,14 @@ POST initialiser exige un corps JSON valide. GET qrcode/detail exige X-QR-Token 
 
 ## MARKET-005 - Retrait Analytics
 
-Refus, remise a zero et changement storage entre onglets propagent le retrait au fournisseur deja charge, activent ga-disable et retirent les cookies GA accessibles sur le domaine. Les cookies applicatifs restent intacts. Analytics reste suspendu par MARKET-001 ; aucun flag ne contourne cette suspension.
+Refus, remise à zéro et changement de stockage entre onglets arrêtent les nouveaux
+envois et annulent les requêtes encore en attente côté navigateur. Le stockage est
+relu avant chaque émission ; un refus ou une remise à zéro reste prioritaire même
+si son écriture échoue. Les écrans Marketplace et Live suivent les changements
+entre onglets. Le nettoyage du fournisseur historique active `ga-disable` et
+retire ses cookies accessibles, sans toucher aux cookies applicatifs. Un retrait
+ne rappelle pas un événement déjà reçu par un destinataire. La collecte externe
+reste indisponible sans la configuration privée de MARKET-001.
 
 ## MARKET-006 - Priorite des .env
 
