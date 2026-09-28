@@ -85,6 +85,15 @@ de reglement. La cle d'idempotence est fondee sur le paiement Localeo ou, a
 defaut, sur le `payment_intent` Stripe. Un rejeu du webhook retrouve la facture
 existante.
 
+Depuis l'évolution `E39-CLOVER` du 27 septembre 2026, la lecture des factures
+Stripe Billing couvre les formats historiques et `2026-01-28.clover`.
+La référence du paiement et la clé d'idempotence restent stables entre formats ;
+les nouveaux emplacements des champs Stripe ne changent ni le numéro fiscal ni
+le snapshot déjà émis. Les montants fiscaux incomplets doivent être refusés
+avant émission, sans supposer une TVA nulle. Voir la
+[migration Stripe Clover](../../architecture/backend/epics/epic-39-stripe-connect-architecture.md#migration-stripe-clover-du-27-septembre-2026)
+pour le mapping, les preuves et l'ordre de livraison.
+
 La facture remplace la simple preuve de paiement comme document fiscal, tout en
 conservant cette preuve dans l'audit. Elle est mise a disposition dans Localeo
 Animation et envoyee au contact de facturation. Pour une entite publique, elle

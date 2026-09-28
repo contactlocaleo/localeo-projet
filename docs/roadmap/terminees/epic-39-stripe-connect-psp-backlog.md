@@ -23,6 +23,34 @@
 - Decision d'architecture : Stripe devient la source d'execution financiere ; les objets internes `Paiement`, `MouvementReversement`, `Reversement` et `PaiementReversement` restent le modele metier/back-office Localeo, mais sont alimentes par les notifications Stripe ou declenchent des operations Stripe.
 - Extension : le suivi du virement bancaire (`payout` Stripe) depuis le solde Stripe connecte jusqu'au compte bancaire du commercant est porte par [l'EPIC 43](epic-43-suivi-payouts-bancaires-stripe-connect-backlog.md), sans rouvrir le perimetre termine des Transfers de cette epic.
 
+## Évolution du 27 septembre 2026 — API Stripe Clover
+
+Référence : `E39-CLOVER`. Cette évolution conserve la clôture historique de
+l'EPIC 39. Elle remplace la cible technique `2024-06-20` / SDK Python 10.12.0
+par `2026-01-28.clover` / SDK Python 14.3.0 ; elle ne change ni les règles de
+reversement ni les droits métier. État de référence : backend `eec63d2`,
+documentation `696d487`, avant les modifications locales de cette évolution.
+
+| Critère ajouté | Résultat attendu |
+| --- | --- |
+| `E39-CLOVER-01` | Les appels Checkout et Connect utilisent la version configurée, y compris lorsque Connect est désactivé ; le SDK et son verrou de dépendances correspondent à la cible Clover. |
+| `E39-CLOVER-02` | Les factures d'abonnement Stripe Billing sont reconnues dans les formats historique et Clover. Le passage entre formats conserve la référence de paiement et ne crée pas une seconde facture. |
+| `E39-CLOVER-03` | Les montants HT, TVA et TTC restent exacts ; un payload fiscal incomplet est refusé sans émission plutôt que transformé en facture à TVA nulle. |
+| `E39-CLOVER-04` | Les achats, commandes de lots, souscriptions Checkout, remboursements, comptes connectés, transfers et payouts conservent leurs comportements et leur idempotence. |
+| `E39-CLOVER-05` | L'ordre de livraison, les deux destinations webhook, les droits de lecture Stripe supplémentaires et la recette en environnement test sont documentés ; aucune activation de production n'est implicite. |
+
+Spécification, matrice de preuves et procédure :
+[migration Clover](../../architecture/backend/epics/epic-39-stripe-connect-architecture.md#migration-stripe-clover-du-27-septembre-2026).
+Les critères historiques `PRD-309` à `PRD-311` et les invariants d'exécution
+financière restent à préserver. La facturation relève aussi de
+[l'EPIC 50](../../specifications/epic-50-conformite-fiscale-bum/factures-localeo.md).
+
+Les résultats locaux et leurs limites sont consignés dans la
+[validation de la migration](../../architecture/backend/epics/epic-39-stripe-connect-architecture.md#validation-locale).
+Reste à faire propre à l'évolution : réaliser la recette Stripe test avant
+toute bascule réelle.
+La préparation du code ne vaut ni déploiement ni validation des flux réels.
+
 ## Documents d'architecture
 
 - [Architecture applicative EPIC 39 - Delegation des flux financiers a Stripe Connect](../../architecture/backend/epics/epic-39-stripe-connect-architecture.md)

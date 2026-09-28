@@ -11,6 +11,174 @@
 - Portee : architecture applicative cible pour la delegation paiement et reversement a Stripe Connect, incluant les invariants de conformite PSP et de protection des fonds
 - Hors portee : schema SQL detaille, mapping exhaustif des champs Stripe et specification technique des classes.
 
+## Migration Stripe Clover du 27 septembre 2026
+
+Évolution `E39-CLOVER`, distincte de la clôture historique de l'EPIC 39.
+La cible est l'API `2026-01-28.clover`, avec `stripe==14.3.0`, dont la
+[version native est Clover](https://raw.githubusercontent.com/stripe/stripe-python/v14.3.0/stripe/_api_version.py).
+Le verrou des dépendances Python et ses empreintes doivent être actualisés.
+Le backend porte l'adaptation des payloads produits par Stripe. Les domaines
+`gestion_achats`, `gestion_reversement` et `conformite_fiscale_bum` conservent
+leurs règles, notamment l'unicité du paiement et de la facture, la maîtrise
+des transfers par campagne et l'immutabilité des snapshots fiscaux.
+
+Exception d'architecture circonscrite à cette migration : le mapping des
+factures fournisseur reste dans le handler applicatif historique
+`ServiceWebhookFacturationAbonnement`. La lecture réseau et la pagination
+`InvoicePayment` restent dans l'adaptateur Stripe, injecté au handler.
+Aucune nouvelle règle métier ou fiscale n'est introduite dans ce mapping.
+Les tests de mapping, de rejeu interformats et de refus avant émission
+compensent cette exception ; l'extraction complète du mapping dans un
+adaptateur est à reprendre lors de la prochaine évolution Stripe Billing.
+
+### Contrats et coexistence
+
+La version des requêtes est épinglée par `LOCALEO_STRIPE_API_VERSION` pour
+Checkout comme pour Connect, indépendamment de l'activation de Connect. La
+version des évènements est configurée séparément sur chaque destination Stripe.
+Les destinations restent au format API v1 Snapshot ; les évènements v2 Thin
+ne sont pas pris en charge.
+
+Le handler des factures conserve la lecture des évènements historiques
+`2024-06-20`, qui peuvent être rejoués après la bascule, et accepte Clover :
+
+- abonnement : `invoice.subscription` historiquement ; sous Clover,
+  `invoice.parent.subscription_details.subscription`, avec contrôle du type
+  `subscription_details` ([changement Stripe](https://docs.stripe.com/changelog/basil/2025-03-31/adds-new-parent-field-to-invoicing-objects)) ;
+- référence du paiement : ancien `invoice.payment_intent` ou relation
+  `InvoicePayment` Clover ; la résolution du paiement par défaut conserve
+  le PaymentIntent utilisé dans la clé d'idempotence existante. Une liste
+  `payments` absente ou tronquée nécessite une lecture Stripe, et ne justifie
+  pas de remplacer silencieusement la référence par l'identifiant de facture.
+  La pagination est parcourue entièrement ; plusieurs paiements par défaut
+  ou un PaymentIntent déclaré sans identifiant provoquent un refus. Le repli
+  historique sur l'identifiant de facture reste possible après lecture complète
+  lorsqu'aucun paiement par défaut de type PaymentIntent n'existe ;
+- tarification : les snapshots Localeo existants restent prioritaires.
+  En leur absence, adapter les montants et taxes du format Clover et refuser
+  les données insuffisantes ou incohérentes. Ne pas déduire une TVA nulle de
+  la seule absence d'un champ historique.
+
+Une livraison répétée, ou le traitement du même paiement dans les deux formats,
+retrouve la facture existante sans nouveau numéro ni notification supplémentaire.
+Un échec de lecture Stripe ne doit pas produire une nouvelle clé d'idempotence.
+Une donnée fiscale insuffisante reste en erreur et doit être corrigée avant
+rejeu ; aucun snapshot émis n'est recalculé.
+
+Sous Clover, plusieurs paiements peuvent contribuer à une facture : le handler
+ne déclenche l'émission que lorsque `invoice.status=paid` et que le solde restant
+est nul. Un évènement de paiement partiel est ignoré, sans émettre de facture
+Localeo ni confirmer prématurément le règlement complet de l'abonnement.
+
+Les souscriptions Animation réglées par Checkout `mode=payment` suivent leur
+circuit existant ; elles ne deviennent pas des abonnements Stripe Billing.
+Les changements Stripe relatifs aux subscriptions Checkout ne modifient donc
+pas ce mode de vente.
+Les évènements `invoice.paid` et `invoice.payment_succeeded` sont exclus du
+routage des souscriptions Checkout par métadonnée `ABONNEMENT_ANIMATION` :
+ils restent dirigés vers la facturation Billing même avec cette métadonnée.
+Le routage des autres évènements conserve son comportement historique.
+
+### Impacts et preuves
+
+| Critère | Comportement et propriétaire | Preuve prévue puis résultat | Documentation / contrat | Démonstration / fixtures | Exploitation / livraison |
+| --- | --- | --- | --- | --- | --- |
+| `E39-CLOVER-01` | Adaptateurs Stripe : version des appels Checkout et Connect, Connect actif ou inactif | Tests de configuration et requêtes sérialisées avec SDK 14.3.0 ; preuves locales : voir le bilan ci-dessous | Configuration ci-dessous ; aucun contrat HTTP Localeo modifié | Fixtures sans clés ni réseau réel | SDK et verrou à livrer ensemble ; variable explicite sur chaque environnement déployé |
+| `E39-CLOVER-02` | Facturation : association à l'abonnement et référence de paiement stable entre formats | Factures anciennes/Clover, paiement par défaut/ambigu, liste omise/tronquée, pagination SDK sur deux pages, rejeu interformats et routage avec métadonnée Animation ; preuves locales : voir le bilan ci-dessous | EPIC 50 : conservation des clés et snapshots | Payloads Stripe représentatifs des deux versions | Vérifier l'accès de la clé restreinte à la lecture InvoicePayment et la reprise après erreur |
+| `E39-CLOVER-03` | Facturation : exactitude et refus avant émission | Lignes avec TVA incluse/exclue, snapshot absent, payload incomplet, paiement partiel ignoré puis règlement complet ; preuves locales : voir le bilan ci-dessous | Aucun changement de règle fiscale ni de rendu documentaire | Fixtures de montants et taxes | Contrôler les erreurs de facturation et les factures manquantes après bascule |
+| `E39-CLOVER-04` | Achats/reversements : effets métier et idempotence conservés | Tests isolés des Checkout achat/lot/souscription, remboursement, Connect, transfer/payout ; preuves locales : voir le bilan ci-dessous | API Localeo et contrats embarqués des fronts inchangés | Les providers Stripe du générateur utilisent les mêmes opérations SDK ; contrôler leurs tests, sans régénérer de données réelles | Recette Stripe test puis surveillance des deux destinations |
+| `E39-CLOVER-05` | Exploitation : changement maîtrisé des versions | Contrôles documentaires et recette décrite ci-dessous ; recette réelle non exécutée à ce stade | Référence de configuration et présente procédure | Aucun nouveau scénario métier ou profil de démonstration requis | Bascule réelle et secrets hors de l'implémentation locale |
+
+Sans migration SQL : aucune structure persistée ni référence Stripe existante
+n'est renommée. Sans modification des fronts, de leurs contrats embarqués ni
+des permissions métier : les réponses HTTP Localeo et les actions utilisateur
+restent identiques. Les données déjà émises conservent leurs snapshots. La seule
+permission fournisseur supplémentaire à vérifier pour une clé restreinte est
+la lecture des paiements de facture utilisés pour résoudre le PaymentIntent.
+
+### Validation locale
+
+Validation réalisée sous Windows avec Python 3.14.3 et SDK Stripe 14.3.0
+chargé par `PYTHONPATH` depuis `localeo-backend/tmp/stripe-clover-sdk`.
+Le SDK 10 de l'environnement partagé n'a pas été remplacé. Une première
+suite étendue a réussi 693 tests, puis la suite de facturation ciblée a
+réussi 27 tests après ajustements. La relance globale a réussi **697 tests**
+en 26,48 secondes. Ces nombres ne s'additionnent pas. Le dernier resserrement
+du routage des factures a été vérifié par 49 tests réussis (webhooks,
+threadpool et souscriptions), puis 11 tests de routage réussis incluant les
+remboursements et PaymentIntent des souscriptions.
+La revue indépendante finale n'a relevé aucun constat bloquant.
+
+Commande de la suite étendue, depuis le backend avec cet environnement SDK :
+
+```powershell
+python scripts/validation/test_isolated.py -q `
+  tests/architecture `
+  tests/domain/test_domain_dedicated_classes.py `
+  tests/application/use_cases/test_use_case_business_test_coverage.py `
+  tests/infrastructure/paiement `
+  tests/api/test_stripe_webhooks_api.py `
+  tests/api/test_stripe_webhook_threadpool.py `
+  tests/api/test_stripe_connect_api.py `
+  tests/application/conformite_fiscale_bum `
+  tests/application/use_cases/test_stripe_connect_onboarding.py `
+  tests/application/use_cases/test_transfers_stripe.py `
+  tests/application/services/test_payouts_stripe.py `
+  tests/application/use_cases/test_valider_paiement.py `
+  tests/application/use_cases/test_valider_paiement_commande_lots.py `
+  tests/application/test_souscriptions_regressions.py `
+  tests/unit/test_demonstration.py `
+  tests/unit/test_demonstration_reset_schema.py
+```
+
+`pip check` a réussi dans cet environnement. Le téléchargement Stripe avec
+`pip download --no-deps --require-hashes`, sur l'entrée extraite du verrou,
+a vérifié ses empreintes. `requirements.in` et `requirements.txt` ne changent
+que Stripe : les contraintes existantes de `requests` et `typing_extensions`
+sont compatibles. Les tests ont produit 11 avertissements non bloquants :
+9 dépréciations `to_dict_recursive` et 2 `utcfromtimestamp`.
+
+Les contrôles documentaires ont réussi sur le bilan final :
+86 guides, 854 liens locaux sans erreur ni avertissement, et 118 sources
+exportées vérifiées.
+Ces preuves locales couvrent le code et les contrats simulés, sans connexion
+Stripe, sans PostgreSQL réel et sans exécution sous Python 3.12. La recette
+Stripe test ci-dessous reste nécessaire avant la bascule déployée.
+
+### Ordre de livraison et recette
+
+1. Installer le SDK verrouillé et déployer le code lisant les deux formats,
+   avec la version API antérieure encore explicitement configurée. Ne pas
+   basculer les destinations avant que tous les workers utilisent ce code.
+2. Dans l'environnement test, configurer `LOCALEO_STRIPE_API_VERSION=2026-01-28.clover`,
+   puis la même version sur les destinations plateforme `/public/stripe/webhook`
+   et comptes connectés `/public/stripe-connect/webhook`. Conserver les filtres
+   d'évènements métier documentés dans la
+   [référence de configuration](../../../exploitation/technique/reference-configuration-environnement.md#paiement-stripe).
+   Si une destination est recréée, renseigner son propre secret de signature
+   dans l'environnement concerné ; ne pas multiplier les destinations actives
+   sans contrôler les doublons et l'idempotence.
+3. Avec des moyens de paiement et comptes Stripe test, vérifier un achat de
+   coffret, une commande de lots, une souscription Animation, une facture
+   Billing, l'expiration/échec d'un paiement et un remboursement. Contrôler
+   références, montants HT/TVA/TTC, facture unique et notifications uniques.
+4. Vérifier création/reprise d'onboarding Express, synchronisation des
+   capacités, transfer après prestation validée, suivi du payout et incident
+   de payout. Rejouer un évènement et un ancien payload : aucun second paiement,
+   transfer, remboursement ou document ne doit apparaître. Contrôler aussi
+   les évènements reçus hors ordre et la reprise après échec de lecture Stripe.
+5. Archiver versions, résultats et références d'opérations test. La bascule
+   production reste une opération de livraison distincte après cette recette
+   et les validations d'exploitation existantes. Aucun secret local ou déployé
+   n'est modifié par la seule livraison du code.
+
+Avant la bascule, le repli consiste à conserver les versions API et destinations
+antérieures avec le code à double lecture. Après la bascule, diagnostiquer les
+évènements en échec et les rejouer après correction ; un retour de configuration
+doit être vérifié avec les destinations concernées. Il n'annule jamais les
+paiements, factures ou transfers exécutés. Ne pas réinstaller un ancien handler
+incapable de lire les payloads Clover déjà produits.
+
 ## Objectif applicatif
 
 L'EPIC 39 met en place une architecture applicative permettant a Localeo de deleguer les flux financiers a Stripe Connect, sans perdre la maitrise metier du cycle paiement, validation, transfer, remboursement et support.
