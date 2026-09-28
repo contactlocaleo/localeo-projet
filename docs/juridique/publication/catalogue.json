@@ -195,16 +195,16 @@
       "id": "contrat-commercant",
       "title": "Contrat de partenariat commerçant avec fiche prestations",
       "language": "fr",
-      "version": "1.0",
+      "version": "1.1",
       "render_revision": "1",
-      "document_date": "2026-09-13",
+      "document_date": "2026-09-28",
       "effective_date": null,
       "surfaces": [
         "commercant"
       ],
       "kind": "template",
       "source": "commercant/LOCALEO - Contrat de Partenariat Commerçant avec fiche prestations - V1.pdf",
-      "pdf_sha256": "a03ec9180fb544aaebe90855e261cfd1230a6fa57038be4aedfb3f64caecb567",
+      "pdf_sha256": "e285e2afaa1e9f4cb075d4693a048723c1404c4a3a26ded5daabb509e0ffd6fd",
       "legacy_routes": [],
       "related_ids": [
         "confidentialite"
