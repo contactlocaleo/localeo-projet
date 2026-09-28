@@ -18,3 +18,27 @@ fiche prestations sont conservées. La source historique reste dans
 `versions-de-travail`. Le catalogue est actualisé avec la nouvelle version et
 l'empreinte du PDF. Aucune publication distante ni modification des contrats
 déjà signés n'est réalisée par cette correction locale.
+
+## Publication en production du 28 septembre 2026
+
+Le balisage des tableaux du contrat commerçant a été corrigé dans la source Word
+et son export PDF pour permettre la conversion en lecture web. Le texte des huit
+pages reste identique ; l'empreinte du catalogue est actualisée.
+
+Le lot `1b64688ccf906fcdc2c0b525080270ed493b24202a12774e2c4dbadae24561c1`
+a été publié en production : 12 documents publics, dont le contrat commerçant
+1.1, sans retrait de document. Les contrôles API des fichiers et les contrôles
+des lecteurs web ont réussi sur les quatre surfaces :
+
+- [Commerçant](https://commercants.localeo.city/juridique) : 5 documents.
+- [Animation](https://animation.localeo.city/juridique) : 7 documents.
+- [Coffrets](https://coffrets.localeo.city/juridique) : 8 documents.
+- [Live](https://coffrets.localeo.city/live/juridique) : 6 documents.
+
+Certains documents sont communs à plusieurs surfaces. Tous les documents ont
+été vérifiés sur ordinateur, ainsi qu'un document représentatif sur mobile par
+surface, sans débordement horizontal ni erreur JavaScript. La clé temporaire de
+publication a été révoquée après les contrôles. Les rapports et le lot exact sont
+conservés hors Git dans `localeo-backend/tmp/juridique-prod-20260928/`.
+Cette publication documentaire ne constitue pas un déploiement du code des
+applications.
