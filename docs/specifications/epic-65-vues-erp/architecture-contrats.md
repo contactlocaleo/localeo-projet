@@ -1,6 +1,6 @@
 # EPIC 65 — Architecture et contrats cibles
 
-Spécification V1, 26 septembre 2026. [Parcours et périmètre](README.md),
+Spécification V1.1, revue le 27 septembre 2026. [Parcours et périmètre](README.md),
 [preuves attendues](verification-livraison.md). Les routes et DTO **nouveaux**
 ci-dessous sont à implémenter ; ils ne décrivent pas une API actuellement déployée.
 
@@ -60,7 +60,8 @@ SQL, agrégation, règles et présentation. L’extraction fait partie de l’EP
    et son export existant ; ne modifier ni leur portée financière ni leurs droits.
 4. Prouver la parité des dossiers sélectionnés. Tracer les corrections de lecture
    assumées : exigences Stripe dues, devises séparées, remboursements hors sélection
-   non incorporés et absence de faux « tout viré » fondé sur le dernier payout.
+   non incorporés, conservation des paiements sources explicitement liés et
+   absence de faux « tout viré » fondé sur le dernier payout.
 
 Le filtre de campagne de la consultation n’est **pas** le paramètre d’exécution
 du lancement historique. Le lien de traitement ne promet pas que les dossiers
@@ -91,7 +92,7 @@ Les déclarations de routes doivent éviter que `suivi` ou une section soit capt
 comme UUID. Aucun POST/PATCH/DELETE E65. Les pages IHM sont celles du README ;
 les sections du tableau sont implémentées comme routes explicites, pas comme
 paramètre enum FastAPI générique, afin qu’une section inconnue réponde 404.
-le détail d’un commerce financier peut rester un filtre `commercantId` de la
+Le détail d’un commerce financier peut rester un filtre `commercantId` de la
 page Reversements, avec lien vers la fiche commerçant canonique.
 
 **Session :** cookie interne et rôle ADMIN vérifié dans chaque route HTML/JSON.
@@ -149,6 +150,14 @@ sélectionnées utilisent des bornes UTC, affichées comme telles. Sans dates,
 la campagne courante est choisie selon la date Europe/Paris : 1–15 ou 16–fin
 du mois. `campaign` vaut `FIRST_HALF` ou `SECOND_HALF`, accompagné de `month`
 au format YYYY-MM ; ces paramètres sont exclusifs d’une paire de dates explicites.
+`campaign` et `month` forment une paire obligatoire dès que l’un est fourni :
+un mois seul, une campagne seule, un mois invalide ou leur combinaison avec
+`dateFrom`/`dateTo` répond 422. Les paramètres de campagne sont propres au suivi
+des commerces ; Audit et Paiements les refusent. Les détails Audit, Paiement
+et Reversement par identifiant, ainsi que leurs sections complètes, n’acceptent
+pas de filtre de période : leur accès direct doit retrouver le même objet même
+lorsque la liste change de campagne. Le résumé et les sections de suivi d’un
+commerce conservent, eux, les filtres de période/campagne de la liste des commerces.
 Le serveur retourne toujours les dates effectives ; février et années bissextiles
 sont calculés au calendrier, pas par nombre fixe de jours.
 
@@ -228,9 +237,28 @@ le paiement ni lui inventer un achat.
 sont donc nullables. `sourceStatus` vaut `COMPLETE` ou `INCOMPLETE` ; un ID source
 persisté peut rester visible lorsque le dossier cible manque, sans lien navigable.
 
+**Parité avec le dossier Vision 360 Achats.** Pour une racine COMMANDE, la lecture
+commune sélectionne l’union des paiements directement rattachés à la commande et
+des paiements rattachés à chacun de ses achats enfants, dédoublonnée par ID de
+paiement. Le schéma actuel autorise ces deux formes de rattachement ;
+`ServiceVision360Achats._paiements` ne sélectionne actuellement que la première.
+L’EPIC doit donc adapter cette lecture et ses diagnostics consommateurs avec la
+projection ERP, sans modifier les rattachements persistés ou les commandes de paiement.
+
+Exemple de recette : commande C, achat enfant A, paiement réussi P attaché à A
+et paiement réussi Q attaché à C. E65 et le dossier canonique présentent P et Q
+sous C ; le diagnostic existant de succès multiples reste visible (`AMBIGUOUS`).
+Ne pas fusionner ces paiements ou choisir Q au motif qu’il est directement lié
+à la commande. Les listes filtrées restent filtrées ; le dossier présente toutes
+les tentatives de sa racine, même celles hors période de la liste.
+
 `/achats` pagine les achats enfants réels de la racine, avec `achatId`, référence,
 liens vers consultation des documents et demandes existants. Une commande peut
-en avoir plusieurs. La lecture documentaire existante `/internal/achats/{id}/documents`
+en avoir plusieurs. Une racine ACHAT sans commande retourne cet achat une seule
+fois. Tri stable par `AchatCoffretOrm.date_creation DESC, id DESC` (dates nulles
+en dernier), date exposée comme `createdAt`, total calculé avant pagination ;
+aucun filtre de période de la liste des paiements ne retranche un achat enfant.
+La lecture documentaire existante `/internal/achats/{id}/documents`
 est réutilisée avec ses droits ; `receipt.pdf` en POST et `pack.zip` décommissionné
 ne sont jamais déclenchés/proposés comme téléchargement existant.
 
@@ -320,12 +348,35 @@ Les sections sont paginées indépendamment, avec les tris et champs suivants :
 | sources | `paymentId`, `rootKey`, `sourceStatus`, `grossAmountCents`, `currency`, `createdAt` ; ID du paiement source comme ID de ligne | `PaiementOrm.date_creation` |
 | virements | Champs d’association et de payout décrits ci-dessous ; ID d’association comme ID de ligne | `Association.date_rapprochement` |
 
-Les dates nulles sont placées **après** les dates connues (`NULLS LAST`), puis
-triées par ID. Elles affichent « Date non renseignée ». Les UUID de rattachement,
-références fournisseur et montants absents sont nullables ; aucune chaîne vide
-ne remplace une absence. Les achats enfants de paiement sont triés par
-`AchatCoffretOrm.date_creation DESC, id DESC`, exposé comme `createdAt`.
-Pas de limite cachée dans le détail.
+Les dates nulles sont placées en dernier (`NULLS LAST`) avant le départage par
+ID et affichent « Date non renseignée ». Les UUID de rattachement, références
+fournisseur et montants absents restent nullables ; aucune chaîne vide ne remplace
+une absence. Ce tri et le calcul du total s’appliquent en base avant pagination
+pour chaque section, sans limite cachée dans le détail.
+
+### Rattachement des paiements sources
+
+La section `sources` conserve chaque `MouvementReversement.paiement_id` explicite
+retrouvé, dédoublonné par **ID de paiement**, jamais par achat. Deux mouvements
+liés à deux paiements du même achat conservent donc leurs deux sources ; plusieurs
+mouvements liés au même paiement n’en créent qu’une ligne. Ces montants de source
+ne s’ajoutent pas aux sommes des mouvements ou reversements.
+
+Pour un mouvement sans ID de paiement, les références d’achat historiques
+(`transfer_group` de forme `achat:<UUID>` ou `metadata_stripe.achat_id`) permettent
+un repli seulement si l’achat est univoque et possède un seul paiement candidat.
+Des références contradictoires, plusieurs tentatives ou un ID explicite introuvable
+produisent `sourceStatus: INCOMPLETE` sur le mouvement et un diagnostic lié à son
+ID. Aucun repli sur le dernier paiement, ni sélection supposée du paiement réussi.
+Le dossier achat connu reste consultable ; aucune fausse ligne de paiement source
+n’est créée. Un ID explicite manquant reste visible sans lien vers un paiement
+inexistant. Le total de `sources` compte seulement les paiements effectivement
+rattachés, les mouvements incomplets étant signalés séparément dans leur section.
+
+Cette correction de lecture est volontaire : `_build_reversements_360_data`
+réduit actuellement ses résultats dans `paiements_par_achat`, ce qui ne garantit
+pas la conservation de plusieurs références explicites. L’extraction commune doit
+supprimer cette ambiguïté sans modifier les liens persistés ni lancer de rapprochement.
 
 Références d’encaissement source : priorité au `paiement_id` explicite, puis à la
 provenance d’achat canonique déjà reconnue ; dédoublonnage et absence visibles.
@@ -334,6 +385,8 @@ globaux du constructeur historique ne sont pas intégrés au total du commerce
 filtré. La V1 renvoie vers le dossier achat pour leur détail ; conserver dans
 la console historique un éventuel indicateur global seulement avec son périmètre
 distinct explicite, sans le faire passer pour un remboursement du commerce.
+
+### Suivi bancaire
 
 Section `virements` : `associationId`, `paymentId`, `payoutId`, état Stripe,
 `reconciliationStatus`, `publicStatus` calculé par le domaine, `includedAmountCents`,

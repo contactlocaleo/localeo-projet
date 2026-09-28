@@ -2,7 +2,7 @@
 
 Référence : [parcours](README.md), [architecture et contrats](architecture-contrats.md),
 [critères du backlog](../../roadmap/a-faire/epic-65-vues-erp-audit-paiements-reversements-backlog.md).
-État au 26 septembre 2026 : **spécification seulement**. Les tests et scénarios
+État au 27 septembre 2026 : **spécification seulement**. Les tests et scénarios
 ci-dessous sont prévus, pas exécutés ni déclarés réussis.
 
 ## Matrice de traçabilité
@@ -30,6 +30,10 @@ unique des critères, à enrichir avec commandes, résultats et limites réels.
 
 - Politique partagée des états de paiement : conserver la normalisation de
   Vision 360, sans valeur « succès » par défaut pour un statut inconnu.
+- Parité E65 / Vision 360 : une commande avec un paiement réussi direct et un
+  second sur son achat enfant conserve les deux paiements et le diagnostic
+  `AMBIGUOUS` ; une tentative hors période de liste reste visible dans le dossier.
+  Tester la sélection SQL commune, pas uniquement le mapping d’un DTO simulé.
 - Classement pur des mouvements, éligibilité Stripe via le commerçant et suivi
   bancaire via le payout. Tester les règles sans ORM ni fournisseur.
 - Nouveaux tests `tests/application/exploitation/test_epic65_audit.py`,
@@ -47,6 +51,16 @@ unique des critères, à enrichir avec commandes, résultats et limites réels.
   historiques et journées Paris de 23/25 heures pour Audit/Paiements.
 - Campagnes février, année bissextile, fin de mois, première/seconde moitié ;
   filtres inversés/incomplets/excessifs refusés, jamais inversés silencieusement.
+- Couples `campaign`/`month` incomplets ou combinés à des dates refusés ; détails
+  Audit/Paiement/Reversement refusant les filtres de période, suivi d’un commerce
+  conservant ces filtres ; dates nulles triées en dernier et
+  achats enfants paginés par date puis UUID, y compris une racine ACHAT isolée.
+- Sources des reversements : deux paiements explicitement liés au même achat
+  tous deux conservés, un paiement partagé entre mouvements affiché une seule
+  fois ; référence absente, références d’achat contradictoires et plusieurs
+  tentatives sans lien explicite signalées incomplètes. Une tentative récente
+  échouée ne remplace pas un paiement explicitement lié plus ancien. Vérifier
+  aussi la console historique après extraction, sans écriture de rapprochement.
 - `tests/api/test_epic65_consultations.py` à créer : schémas fermés, statuts HTTP,
   cache no-store, aucune route de mutation et sérialisation sans données brutes.
 - Confronter les requêtes réelles du navigateur au contrat Pydantic exporté ;
@@ -129,7 +143,7 @@ droits des anciennes actions, liens entrants, pages lentes et erreurs corrélée
 Les volumes de référence doivent être mesurés avant de fixer une durée cible ;
 aucun SLA ni date de livraison n’est supposé accepté.
 
-## Résultats de cette phase
+## Résultats de la spécification initiale — 26 septembre
 
 - Lecture des sources et analyse indépendantes des paiements/audit et reversements réalisées.
 - Revue indépendante de contrat réalisée puis relue après corrections : dates et
@@ -144,3 +158,21 @@ aucun SLA ni date de livraison n’est supposé accepté.
   comportement de l’API cible ni la couverture des scénarios de recette.
 - Hypothèses H01/H02 et volumes d’exploitation : voir le README. Ils ne doivent
   pas être transformés en décisions utilisateur supposées.
+
+## Revue de spécification V1.1 — 27 septembre
+
+- Sources locales confrontées au backend `eec63d2` et au projet `696d487` ; aucune
+  vérification d’un environnement déployé.
+- Revue indépendante des contrats audit/paiements/droits effectuée. Le cas des
+  paiements attachés aux achats enfants est intégré à la lecture commune et aux
+  preuves prévues. Les sources de reversements multiples ou ambiguës sont
+  explicites ; période du suivi commerce et détails complets restent distincts.
+- Périmètre conservateur H01/H02 exploitable pour l’implémentation ; abonnements
+  agrégés et nouveaux formulaires financiers restent exclus. Volumes et index
+  à mesurer lors de l’implémentation, sans promesse de performance chiffrée.
+- Contrôles documentaires : `check_guidance.py` avec les cinq documents modifiés
+  explicitement sélectionnés, **90 guides et 924 liens locaux, aucune erreur ni
+  avertissement** ; `sync_documentation.py --check-sources`, **118 documents** ;
+  `git diff --check` réussi.
+- Aucun code applicatif modifié ; tests métier, PostgreSQL et navigateur
+  **non exécutés**. L’état produit reste **À faire**.

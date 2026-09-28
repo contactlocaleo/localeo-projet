@@ -2,7 +2,7 @@
 
 ## Statut et périmètre
 
-Spécification V1 du **26 septembre 2026**, issue du
+Spécification V1 du **26 septembre 2026**, revue V1.1 le **27 septembre 2026**, issue du
 [backlog EPIC 65](../../roadmap/a-faire/epic-65-vues-erp-audit-paiements-reversements-backlog.md).
 État produit : **À faire**, selon la [roadmap](../../roadmap/README.md).
 Ce dossier décrit une cible à implémenter ; aucune route nouvelle, migration
@@ -38,7 +38,8 @@ n’empêche pas de préparer Audit et les composants de lecture communs.
 
 ## Existant vérifié
 
-Lecture du backend `7049de7`, documentation de base `631fd10` avec cadrage local.
+Constat initial sur le backend `7049de7`, documentation de base `631fd10` avec
+cadrage local ; revue ciblée sur le backend `eec63d2` et le projet `696d487`.
 Ce constat ne prouve pas l’état déployé.
 
 | Surface | Code existant | Écart à traiter |
@@ -51,6 +52,13 @@ Ce constat ne prouve pas l’état déployé.
 
 Sources applicatives dans le [backend](../../../../localeo-backend/README.md) ;
 les correspondances et frontières sont précisées dans l’architecture.
+
+La revue du 27 septembre précise le rattachement des paiements sources des
+reversements : conserver tous les liens explicites, signaler les cas ambigus
+et ne pas réduire plusieurs paiements au dernier paiement d’un achat. Elle
+précise aussi la sélection commune des paiements directs et des achats enfants
+dans la Vision 360 Achats, les couples de filtres de campagne et les tris des sections.
+Les dix critères d’acceptation, les droits et les exclusions restent conservés.
 
 ## Parcours commun — E65-CA-01, 07, 08, 09, 10
 

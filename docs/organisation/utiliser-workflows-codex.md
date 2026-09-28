@@ -75,6 +75,16 @@ rattache à `localeo-corriger`. Si elle mêle anomalie et nouveau besoin, il sé
 leurs critères. Une décision produit manquante bloque seulement les travaux
 qui en dépendent. Commit, push et déploiement suivent la demande courante.
 
+## Exemple : vérifier la prise en compte d'une exigence
+
+> Utilise $localeo-verifier-exigence pour vérifier cette exigence : [formulation ou identifiant]. Source connue : [document ou epic, si disponible]. Vérifie sa prise en compte dans les spécifications, les applications concernées et les tests. Exécute les contrôles ciblés disponibles et rends un verdict par critère avec les preuves, les écarts et les vérifications manquantes.
+
+Le skill [localeo-verifier-exigence](../../.agents/skills/localeo-verifier-exigence/SKILL.md) suit le comportement jusqu'aux consommateurs concernés. Il distingue ce qui est documenté, implémenté et réellement vérifié. Une exigence sans identifiant peut être examinée à partir de sa formulation ; une ambiguïté produit reste explicite.
+
+Par exemple : « Vérifie que chaque étape de la chasse est illustrée par une image adaptée à sa scène. Distingue les consignes du prompt, les contrôles d'import, l'affichage joueur et les preuves sur les images réellement générées. »
+
+Résultat attendu : verdict **vérifié**, **partiel**, **non satisfait** ou **non vérifiable en l'état**, par critère, avec chemins et résultats des contrôles. Les éléments sans objet sont justifiés. Une vérification locale ne prouve pas un déploiement et un prompt ne garantit pas la qualité de sa sortie. La demande de vérification seule ne déclenche pas de correction ni de changement de statut de roadmap ; les suites recommandées sont rattachées aux écarts constatés.
+
 ## Exemple : corriger une anomalie
 
 > Utilise $localeo-corriger. Dans [écran/API], quand [étapes], j'obtiens [erreur exacte]. J'attends [résultat]. Environnement/version : […]. Référence d'erreur : […]. Reproduis, identifie la cause, corrige et vérifie la non-régression. Voici les chemins ou fichiers utiles : […].

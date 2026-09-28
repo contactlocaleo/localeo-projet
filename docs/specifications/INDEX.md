@@ -6,7 +6,7 @@ Commencer par le README du sujet, puis consulter ses règles, contrats et arbitr
 
 ## Priorités en cours et à cadrer
 
-- **À faire : EPIC 65**, [vues ERP audit, paiements et reversements](epic-65-vues-erp/README.md), spécification V1 du 26 septembre 2026 ; périmètre de consultation ADMIN, hypothèses financières et tests prévus documentés.
+- **À faire : EPIC 65**, [vues ERP audit, paiements et reversements](epic-65-vues-erp/README.md), spécification V1.1 revue le 27 septembre 2026 ; périmètre de consultation ADMIN, hypothèses financières et tests prévus documentés.
 - **En cours : EPIC 55**, [moteur commun et chasse au trésor](moteur-animation/README.md).
 - **À faire :** [EPIC 54 — Calendrier de l'Avent](epic-54-calendrier-avent-local/README.md) et [EPIC 58 — Filtre annuel](epic-58-filtre-annuel-global/README.md).
 - Cadrage encore porté par la roadmap : [EPIC 62 — Validation des modifications de prestations](../roadmap/a-faire/epic-62-validation-modifications-prestations-backlog.md), [EPIC 64 — Rétractation](../roadmap/a-faire/epic-64-parcours-retractation-en-ligne-backlog.md) et [EPIC-MARKETPLACE-54 — Identité visuelle](../roadmap/a-faire/epic-marketplace-54-harmonisation-identite-visuelle-marketplace-backlog.md). Aucun dossier de spécification détaillée supplémentaire n'est créé sans contenu.

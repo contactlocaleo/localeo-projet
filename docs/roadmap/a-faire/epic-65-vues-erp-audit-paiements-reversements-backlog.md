@@ -8,7 +8,7 @@
 - État produit : **À faire**, selon la [roadmap commune](../README.md).
 - Demande : disposer dans Localeo ERP d’une vue des événements d’audit et de
   deux vues de suivi, « Paiements » et « Reversements », sous « Paiements et facturation ».
-- Phase réalisée : **cadrage et spécification V1** ; voir le
+- Phase réalisée : **cadrage et spécification V1.1**, revue le 27 septembre 2026 ; voir le
   [dossier canonique](../../specifications/epic-65-vues-erp/README.md).
   Aucune implémentation livrée. Priorité et date de livraison non fixées.
 
@@ -153,7 +153,7 @@ en bout avant d’être annoncée disponible ; cet ordre reste une proposition.
 
 ## Questions ouvertes pour la spécification
 
-La [spécification du 26 septembre](../../specifications/epic-65-vues-erp/README.md)
+La [spécification revue le 27 septembre](../../specifications/epic-65-vues-erp/README.md)
 répond à l’inventaire des sources et formalise les hypothèses H01/H02 : paiements
 d’achats/commandes existants, souscriptions hors agrégation, consultation et liens
 vers actions existantes. Les questions ci-dessous conservent leur portée produit ;
