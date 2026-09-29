@@ -1,10 +1,10 @@
 # Localeo Commerçant · Votre guide au quotidien
 
-<!-- Source du guide remis à l’onboarding. Les huit sections de niveau 2 correspondent aux huit pages du PDF. Édition détaillée, septembre 2026. -->
+<!-- Source du guide remis à l’onboarding. Les huit sections de niveau 2 correspondent aux huit pages du PDF. Édition détaillée mise à jour le 29 septembre 2026. -->
 
 ## 1 · Se connecter et se repérer
 
-Ce guide vous accompagne au comptoir et dans le suivi de votre commerce. Retrouvez chaque action à partir du nom de la rubrique affichée dans l’application.
+Votre compagnon au comptoir et dans le suivi du commerce. Retrouvez ce PDF dans **Aide et contact > Consulter le guide commerçant** ; gardez-en une copie sur votre appareil si besoin.
 
 ![Depuis l’accueil, ouvrez Scanner ou choisissez une rubrique dans le menu.](illustrations/guide-quotidien/01-accueil.png)
 
@@ -29,11 +29,13 @@ Sur téléphone, la barre du bas propose **Accueil**, **Scanner**, **Activité**
 
 ### Garder l’application à portée de main
 
-Choisissez **Installer** lorsque cette action est proposée. Sur iPhone, suivez l’aide affichée : **Partager**, **Sur l’écran d’accueil**, puis **Ajouter**.
+En haut de l’écran, choisissez **Installer**. Sur Android ou ordinateur, confirmez l’installation proposée ; sinon, suivez l’aide du navigateur. Sur iPhone ou iPad, ouvrez Safari : **Partager > Sur l’écran d’accueil**, activez **Ouvrir comme app web** si proposé, puis **Ajouter**. Lancez ensuite **Localeo Pro** depuis son icône.
 
-**Mot de passe oublié ?** Depuis la connexion, choisissez **Mot de passe oublié**, renseignez votre email et cliquez sur **Demander le lien**. Ouvrez le lien reçu, saisissez et confirmez votre nouveau mot de passe, puis **Valider le mot de passe**.
+**Une nouvelle version ?** Terminez et enregistrez votre action avant de choisir **Mettre à jour**, puis confirmez. L’application se recharge après votre accord. Si la mise à jour échoue, retrouvez une connexion Internet et réessayez.
 
-> Captures de l’application de test, avec des données d’exemple. Certaines rubriques dépendent des services activés. Une connexion Internet reste nécessaire pour enregistrer vos actions.
+**Mot de passe oublié ?** Depuis la connexion, choisissez **Mot de passe oublié**, puis **Demander le lien** avec votre email. Ouvrez le lien reçu, saisissez et confirmez le nouveau mot de passe, puis **Valider le mot de passe**.
+
+> Captures de test et de recette locale, avec des données d’exemple. Certaines rubriques dépendent des services activés. Une connexion Internet reste nécessaire pour enregistrer vos actions.
 
 ## 2 · Présenter votre commerce
 
@@ -84,7 +86,7 @@ Vérifiez que le navigateur est autorisé à utiliser la caméra. Essayez **Réi
 ### Si la connexion coupe pendant la validation
 
 - **Aucune confirmation :** utilisez **Vérifier le résultat**, si proposé. L’action a pu être enregistrée malgré la coupure ; ne cliquez pas à répétition.
-- **Validation confirmée, affichage ancien :** rescannez le coffret pour relire son état, sans valider à nouveau.
+- **Validation confirmée, affichage ancien :** choisissez **Actualiser l’état du coffret**, si proposé. La validation est déjà enregistrée : attendez la relecture sans la valider de nouveau.
 - **Résultat toujours incertain :** contactez Localeo avec la référence affichée et l’heure de l’action, depuis **Aide et contact**.
 
 ### Annuler une validation faite par erreur
@@ -140,7 +142,7 @@ Une animation peut vous proposer d’accueillir des participants, de présenter 
 
 Pour une invitation classique, choisissez **Accepter la participation**.
 
-Pour une chasse au trésor, choisissez votre mission si plusieurs sont proposées. Lisez les préparatifs, puis cochez **Je peux réaliser cette mission et tous les préparatifs ci-dessus.** Cliquez sur **Accepter cette mission**. Attendez la confirmation ; le kit devient alors accessible.
+Pour une chasse au trésor, choisissez votre mission si plusieurs sont proposées. Ouvrez **Ce que liront les participants chez vous** pour leurs consignes. Lisez les préparatifs, puis cochez **Je peux réaliser cette mission et tous les préparatifs ci-dessus.** Cliquez sur **Accepter cette mission**. Attendez la confirmation ; le kit devient alors accessible.
 
 ### Refuser ou signaler un empêchement
 
@@ -150,7 +152,7 @@ Après acceptation, consultez **Contact et suivi de ma participation**, si propo
 
 ### Retrouver votre décision
 
-Les invitations conservent un historique. **Mes animations** donne accès aux animations acceptées, avec les périodes proposées à l’écran. Ouvrez **Voir le détail** pour retrouver la mission et préparer votre commerce.
+Les invitations conservent un historique. **Mes animations** donne accès aux animations acceptées, classées **En cours**, **À venir** et **Terminées**. Ouvrez **Voir le détail** pour retrouver la mission et préparer votre commerce.
 
 > Après une coupure de connexion, choisissez **Vérifier ma décision** avant de recommencer. Si la date limite est dépassée, contactez l’organisateur : lui seul peut prolonger le délai.
 
@@ -174,7 +176,7 @@ Après acceptation, l’essentiel se trouve dans le détail de l’animation : v
 
 ### Accueillir et valider un passage
 
-Relisez **Votre mission** avant le lancement. Si elle prévoit une validation par votre commerce, ouvrez **Scanner un QR**, lisez le QR personnel du participant, vérifiez l’animation et l’étape, puis choisissez **Valider cette étape**. Attendez la confirmation. Le scan du QR de lieu par le joueur ne remplace pas cette validation lorsqu’elle est demandée.
+Relisez **Votre mission** avant le lancement. Si elle prévoit une validation par votre commerce, **Scanner un QR** apparaît lorsque les validations sont ouvertes. Ouvrez-le, lisez le QR personnel du participant, vérifiez l’animation et l’étape, puis choisissez **Valider cette étape**. Attendez la confirmation. Le scan du QR de lieu par le joueur ne remplace pas cette validation lorsqu’elle est demandée.
 
 Consultez **Suivi chez votre commerce**, si affiché, pour voir les validations et la dernière activité.
 
@@ -186,7 +188,7 @@ Dans **Animations > Notifications**, ouvrez **Voir la demande** ou **Voir l’an
 
 ## 7 · Traiter vos factures
 
-La rubrique **Facturation** apparaît lorsque ce service est activé. Elle distingue vos factures de prestation et les factures de commissions émises par Localeo.
+La rubrique **Facturation** apparaît lorsque ce service est activé. **Vue d’ensemble** résume les demandes à traiter. Sur téléphone, dépliez **Rechercher et filtrer** pour choisir recherche et statuts.
 
 ![Choisissez Demandes pour une facture unitaire ou Demandes groupées pour plusieurs prestations.](illustrations/guide-quotidien/11-facturation.png)
 
@@ -208,7 +210,7 @@ Pour une demande groupée déjà fournie, utilisez **Créer une correction disti
 
 ### Télécharger les factures Localeo
 
-Dans **Factures Localeo**, retrouvez commissions et avoirs, puis **Télécharger le PDF**. Conservez-les avec votre suivi comptable ; ils ne remplacent pas votre facture de prestation.
+Si l’onglet **Factures Localeo** apparaît, retrouvez commissions et avoirs, puis choisissez **Télécharger le PDF**. Conservez-les avec votre suivi comptable ; ils ne remplacent pas votre facture de prestation.
 
 ### Options disponibles selon votre compte
 
@@ -220,9 +222,11 @@ Dans **Factures Localeo**, retrouvez commissions et avoirs, puis **Télécharger
 
 ## 8 · Gérer vos alertes et vos demandes
 
-Gardez un accès à jour, recevez les informations utiles et retrouvez les réponses de Localeo dans votre espace.
+Retrouvez ce guide, les informations utiles et les réponses de Localeo dans votre espace.
 
-![Dans Compte, les alertes d’achat se règlent depuis Live tracking achats.](illustrations/guide-quotidien/10-alertes.png)
+![Dans Aide et contact, le guide reste accessible avant vos demandes à Localeo.](illustrations/guide-quotidien/13-guide-aide.png)
+
+**Besoin d’un rappel ?** Ouvrez **Aide et contact > Consulter le guide commerçant**. Le PDF s’ouvre dans un nouvel onglet ; utilisez le lecteur pour le télécharger ou l’imprimer.
 
 ### Recevoir les alertes d’achat
 
