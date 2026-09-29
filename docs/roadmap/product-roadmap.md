@@ -1,15 +1,15 @@
 # Roadmap produit
 
-## État global consolidé au 26 septembre 2026
+## État global consolidé au 29 septembre 2026
 
-Le tronc commun comprend 65 identifiants : 56 epics terminees, 5 a faire,
-1 en cours, 2 abandonnees et 1 fusionnee. L'Epic 61 est absorbee par l'Epic 60.
+Le tronc commun comprend 67 identifiants : 56 epics terminees, 6 a faire,
+2 en cours, 2 abandonnees et 1 fusionnee. L'Epic 61 est absorbee par l'Epic 60.
 Les documents sont ranges par etat dans l'[index de la roadmap](README.md).
 
 | Etat | Epics |
 | --- | --- |
-| A faire | `EPIC-54`, `EPIC-58`, `EPIC-62`, `EPIC-64`, `EPIC-65` |
-| En cours | `EPIC-55` |
+| A faire | `EPIC-54`, `EPIC-58`, `EPIC-62`, `EPIC-64`, `EPIC-65`, `EPIC-67` |
+| En cours | `EPIC-55`, `EPIC-66` |
 | Termine | 56 epics : toutes les autres epics de `EPIC-01` a `EPIC-60`, et `EPIC-63`, hors `EPIC-05` et `EPIC-12` |
 | Abandonne | `EPIC-05` : QR commercant remplace par l'Epic 10 ; `EPIC-12` : flux manuel decommissionne par l'Epic 39 |
 | Fusionnee | `EPIC-61` dans `EPIC-60` ; non comptee comme terminee |
@@ -23,7 +23,7 @@ un seul fichier par sujet. Trois identifiants applicatifs complètent ce tronc :
 | [EPIC-MARKETPLACE-54](a-faire/epic-marketplace-54-harmonisation-identite-visuelle-marketplace-backlog.md) | Identité visuelle ; distinct du calendrier de l'Avent 54 | À faire (classement courant ; implémentation locale documentée, revue et recette attendues) |
 | [EPIC-PRES-CONTENU-001](terminees/epic-animation-edition-prestations.md) | Édition directe des prestations ; le futur sas reste dans l'EPIC 62 | Terminée (parcours existant) |
 
-Le total consolidé est de **68 identifiants : 58 terminés, 6 à faire, 1 en cours,
+Le total consolidé est de **70 identifiants : 58 terminés, 7 à faire, 2 en cours,
 2 abandonnés et 1 fusionné**. L'ancien numéro local Marketplace 53 (pagination)
 est rattaché à l'EPIC 57, sans ajouter d'identifiant ni le confondre avec la tombola.
 
@@ -35,6 +35,31 @@ Le classement du 15 septembre corrige les anciens libelles globaux des Epics
 la confirmation produit de l'utilisateur le 15 septembre 2026.
 
 Derniere evolution suivie :
+
+- [Epic 35 — Profils Lecteur, Backoffice et Admin](terminees/epic-35-profils-backoffice-differencies-backlog.md) :
+  évolution `E35-PROFILS-20260928`, treize critères ; lecture métier, gestion métier
+  et administration complète séparées, protections serveur et transition des
+  comptes/sessions. Cadrage à spécifier et implémenter, clôture historique conservée.
+
+- [Epic 67 — Communautés de communes et coffrets intercommunaux](a-faire/epic-67-communautes-communes-coffrets-intercommunaux-backlog.md) :
+  cadrage du 28 septembre 2026 ; référentiel des groupements et communes membres,
+  composition d'un coffret partagé, découverte et commercialisation, droits
+  territoriaux explicites et conservation des achats existants. Extension du
+  parcours IA d'Atelier portée ici ; quatorze critères, spécification à réaliser.
+
+- [Epic 66 — Localeo Atelier : coffrets assistés par IA](en-cours/epic-66-localeo-atelier-coffrets-assistes-ia-backlog.md) :
+  cadrage du 28 septembre 2026 ; sélection de prestations d'une commune, prompt
+  copiable pour une IA externe, réponse normalisée, aperçu et création automatique
+  d'un coffret brouillon après validation. Le même prompt produit l'image WebP
+  intégrée en base64 au JSON, strictement inférieure à 150 Ko après décodage ;
+  publication et contrôles métier existants conservés.
+  Nom Localeo Atelier, contrat court, erreurs en français et reprise selon les
+  droits ERP validés par l'utilisateur le 28 septembre 2026.
+  [Spécification V1.1 du 29 septembre](../specifications/epic-66-localeo-atelier/README.md)
+  disponible : contrat JSON, création atomique en brouillon, médias et adaptations
+  Marketplace, douze critères reliés aux preuves prévues. Conservation validée à
+  30 jours après dernière modification. Implémentation locale réalisée,
+  validation en cours ; aucune clôture ni livraison d'environnement déclarée.
 
 - [Epic 65 — Vues ERP audit, paiements et reversements](a-faire/epic-65-vues-erp-audit-paiements-reversements-backlog.md) :
   cadrage du 26 septembre 2026 ; trois vues intégrées, recherche, filtres et détail,
@@ -1689,6 +1714,10 @@ Cette roadmap produit structure les evolutions autour de trois enjeux metier :
 ---
 
 ## Epic 35. Profils back-office differencies
+
+Évolution du 28 septembre 2026 : `E35-PROFILS-20260928`, profils Lecteur,
+Backoffice et Admin, cadrée dans le backlog ci-dessous. Cette évolution n'est
+pas livrée ; le statut et les stories qui suivent décrivent le périmètre historique.
 
 - Criticite : `Elevee`
 - Statut : `Termine`

@@ -21,6 +21,14 @@ frontends ne consomment pas ces nouveaux écrans ni leurs API internes.
 
 ### Choix et hypothèses
 
+Évolution ultérieure cadrée le 28 septembre 2026 :
+[E35-PROFILS-20260928](../../roadmap/terminees/epic-35-profils-backoffice-differencies-backlog.md)
+demande une lecture métier pour Lecteur et des droits métier complets pour
+Backoffice, sans technique/exploitation. Elle nécessite de réviser `E65-D02`
+pour les paiements/reversements, avec Audit global proposé comme Admin seul.
+Ce changement reste à spécifier et implémenter ; la matrice et les tests de
+refus de la présente V1.1 ne constituent pas les preuves de cette nouvelle cible.
+
 | Référence | Décision ou hypothèse | Conséquence |
 | --- | --- | --- |
 | E65-D01 | Demande acquise : trois vues intégrées à l’ERP, Audit dans Supervision, Paiements et Reversements dans « Paiements et facturation ». | Remplacer les raccourcis vers les listes SQLAdmin pour ces consultations. |

@@ -1,30 +1,30 @@
 # Suivi backlog
 
-Mise à jour du classement : 2026-09-26 (ajout EPIC-65 ; états antérieurs conservés)
+Mise à jour du classement : 2026-09-29 (EPIC-66 en cours, implémentation locale en validation ; autres états conservés)
 
 ## Synthese
 
-- Identifiants EPIC suivis : 68 ; 65 du tronc commun et 3 identifiants applicatifs distincts.
-- EPICs a faire : 6 ; EPICs en cours : 1 (EPIC-55).
+- Identifiants EPIC suivis : 70 ; 67 du tronc commun et 3 identifiants applicatifs distincts.
+- EPICs a faire : 7 ; EPICs en cours : 2 (EPIC-55 et EPIC-66).
 - EPICs fusionnees : 1 (EPIC-61 vers EPIC-60).
 - EPICs terminees : 58 (56 du tronc commun et 2 applicatives) ; EPICs abandonnees : 2.
 - US / PRD detaillees dans le tableau historique : 415, jusqu'a `EPIC-45`.
 - Source prioritaire : fichier backlog dedie quand disponible, sinon `product-roadmap.md`.
-- Référence de pilotage : EPIC-55 est en cours. EPIC-54, EPIC-58, EPIC-62,
-  EPIC-64, EPIC-65 et EPIC-MARKETPLACE-54 sont à faire. EPIC-47 est terminée,
+- Référence de pilotage : EPIC-55 et EPIC-66 sont en cours. EPIC-54, EPIC-58, EPIC-62,
+  EPIC-64, EPIC-65, EPIC-67 et EPIC-MARKETPLACE-54 sont à faire. EPIC-47 est terminée,
   clôture produit confirmée. EPIC-05 et EPIC-12 sont abandonnées ;
   EPIC-61 est fusionnée dans EPIC-60. Les autres EPIC du tronc commun sont terminées.
 - Classement et motifs : [index de la roadmap](README.md).
 - Le tableau detaille des US ci-dessous reste un historique consolide. Pour les
-  epics 46 a 65, les backlogs dedies portent le detail et le tableau `Sources
+  epics 46 a 67, les backlogs dedies portent le detail et le tableau `Sources
   consolidees` porte l'etat global courant.
 
 ### Repartition des EPICs par etat retenu
 
 | Etat | Nombre |
 | --- | ---: |
-| A faire | 6 |
-| En cours | 1 |
+| A faire | 7 |
+| En cours | 2 |
 | Abandonne | 2 |
 | Fusionnee | 1 |
 | Termine | 58 |
@@ -44,6 +44,11 @@ ci-dessous conservent ce périmètre initial.
 
 ### Epics restant a livrer
 
+Évolution complémentaire à livrer, sans réouverture de son epic historique :
+[EPIC 35 — Lecteur, Backoffice et Admin](terminees/epic-35-profils-backoffice-differencies-backlog.md),
+`E35-PROFILS-20260928`, treize critères cadrés, spécification et implémentation à
+réaliser. Le statut « Terminé » des PRD-251 à PRD-260 ne couvre pas cette évolution.
+
 | Epic | Objet | Niveau de preparation |
 | --- | --- | --- |
 | EPIC-54 | Calendrier de l'Avent local | Arbitrages et conception technique a finaliser |
@@ -52,6 +57,8 @@ ci-dessous conservent ce périmètre initial.
 | EPIC-62 | Validation des modifications de prestations, BUM et Localeo Support | Cadrage initial ; perimetre multi-copies et habilitations a confirmer |
 | EPIC-64 | Parcours de retractation en ligne depuis le site | Critique ; cadrage initial, exigences legales, parcours et 10 stories a developper |
 | EPIC-65 | Vues ERP audit, paiements et reversements | Spécification V1 disponible ; dix critères reliés aux contrats/tests prévus ; hypothèses paiements et actions explicites, implémentation à réaliser |
+| EPIC-66 | Localeo Atelier : coffrets assistés par IA | Spécification V1.1 du 29 septembre disponible ; douze critères, JSON unique avec WebP base64 (< 150 Ko décodés), import média/proposition et création atomiques ; conservation validée à 30 jours, implémentation à réaliser |
+| EPIC-67 | Communautés de communes et coffrets intercommunaux | Cadrage initial ; quatorze critères, référentiel et commercialisation multi-communes, extension Atelier ; règles d'évolution des adhésions et droits à spécifier |
 
 Epic 63 recentree : script autonome, plateforme vivante et restauration controles,
 sans aucun impact sur le code applicatif ; adaptations du mode demo retirees ;
@@ -537,7 +544,7 @@ anciennes US restent historiques.
 | EPIC-32 | Termine | product-roadmap.md, terminees/epic-32-live-tracking-webpush-commercants-backlog.md |
 | EPIC-33 | Termine | product-roadmap.md, terminees/epic-33-recherche-multiscope-marketplace-backlog.md |
 | EPIC-34 | Termine | product-roadmap.md, terminees/epic-34-pwa-exploitation-live-dashboard-backlog.md |
-| EPIC-35 | Termine | product-roadmap.md, terminees/epic-35-profils-backoffice-differencies-backlog.md |
+| EPIC-35 | Termine (historique) | [Backlog](terminees/epic-35-profils-backoffice-differencies-backlog.md) ; évolution `E35-PROFILS-20260928` cadrée, non livrée |
 | EPIC-36 | Termine | product-roadmap.md, terminees/epic-36-fermeture-commercant-remplacement-prestations-backlog.md |
 | EPIC-37 | Termine | product-roadmap.md, terminees/epic-37-vision-360-client-backoffice-backlog.md |
 | EPIC-38 | Termine | product-roadmap.md, terminees/epic-38-gestion-documentaire-backlog.md |
@@ -568,3 +575,5 @@ anciennes US restent historiques.
 | EPIC-63 | Termine | terminees/epic-63-jeux-demonstration-communes-backlog.md ; [specification technique](../specifications/epic-63-demonstrations-communes/README.md) |
 | EPIC-64 | A faire | [epic-64-parcours-retractation-en-ligne-backlog.md](a-faire/epic-64-parcours-retractation-en-ligne-backlog.md) |
 | EPIC-65 | A faire | [backlog](a-faire/epic-65-vues-erp-audit-paiements-reversements-backlog.md), [spécification V1](../specifications/epic-65-vues-erp/README.md) |
+| EPIC-66 | En cours | [backlog](en-cours/epic-66-localeo-atelier-coffrets-assistes-ia-backlog.md), [spécification V1](../specifications/epic-66-localeo-atelier/README.md) ; implémentation locale réalisée, validation en cours |
+| EPIC-67 | A faire | [backlog](a-faire/epic-67-communautes-communes-coffrets-intercommunaux-backlog.md) |

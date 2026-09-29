@@ -14,6 +14,12 @@ compatibilite ; le plafond absolu prix >= reversements reste applicable.
 
 ## 1. Decisions et hypotheses d'implementation
 
+La préparation assistée de coffrets dans **Localeo Atelier** est décrite par
+l'[EPIC 66](../epic-66-localeo-atelier/README.md) et son
+[guide opérateur et exploitation](../../exploitation/technique/localeo-atelier.md).
+Elle compose des brouillons dans la transaction ERP existante ; les contrôles
+commerciaux, la qualification et la publication restent dans le dossier canonique.
+
 | ID | Decision prise sous delegation | Origine |
 | --- | --- | --- |
 | H01 | La file diagnostic est en lecture ; reevaluation POST seulement. Les mutations passent par les ateliers. | COM360-ARB-05 |

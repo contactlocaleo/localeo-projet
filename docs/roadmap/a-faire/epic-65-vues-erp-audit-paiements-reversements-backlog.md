@@ -14,6 +14,14 @@
 
 ### Rattachement et dépendances
 
+**Impact à intégrer, 28 septembre 2026 :** l'évolution
+[E35-PROFILS-20260928](../terminees/epic-35-profils-backoffice-differencies-backlog.md)
+cadre Lecteur, Backoffice et Admin. Elle porte l'ouverture des lectures métier
+paiements/reversements aux deux profils métier, avec Audit global proposé comme
+réservé à Admin. La règle ADMIN exclusive de la spécification V1.1 reste la
+référence de cette version ; sa révision, ses contrats et preuves sont à traiter
+dans la spécification de l'évolution EPIC 35 avant livraison combinée.
+
 L’[EPIC 60](../terminees/epic-60-vision-360-commercialisation-backlog.md) fournit
 le socle ERP, sa navigation et les ateliers de référencement/commercialisation.
 Cette nouvelle epic porte trois vues opérationnelles identifiables, au-delà des

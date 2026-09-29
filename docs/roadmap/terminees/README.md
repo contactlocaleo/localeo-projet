@@ -45,7 +45,7 @@ Les recettes d'environnement restantes ne modifient pas ce classement.
 - [Backlog Epic 32 - Live tracking WebPush commercants](epic-32-live-tracking-webpush-commercants-backlog.md)
 - [Backlog Epic 33 - Recherche multi-scope marketplace](epic-33-recherche-multiscope-marketplace-backlog.md)
 - [Backlog Epic 34 - Localeo Control](epic-34-pwa-exploitation-live-dashboard-backlog.md)
-- [Backlog Epic 35 - Profils back-office differencies](epic-35-profils-backoffice-differencies-backlog.md)
+- [Backlog Epic 35 - Profils back-office differencies](epic-35-profils-backoffice-differencies-backlog.md) — historique terminé ; évolution Lecteur/Backoffice/Admin cadrée le 28 septembre 2026, à spécifier et implémenter.
 - [Epic 36 - Fermeture commercant et remplacement des prestations achetees](epic-36-fermeture-commercant-remplacement-prestations-backlog.md)
 - [Epic 37 - Vision 360 client backoffice](epic-37-vision-360-client-backoffice-backlog.md)
 - [Epic 38 - Gestion documentaire transverse](epic-38-gestion-documentaire-backlog.md)
