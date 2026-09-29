@@ -4,6 +4,8 @@ Mise à jour du classement : 2026-09-29 (EPIC-66 en cours, implémentation local
 
 ## Synthese
 
+Évolution transverse du 29 septembre 2026 : [PWA-20260929 — installation et mise à jour](../specifications/installation-mise-a-jour-pwa.md), appliquée aux sept PWA existantes. Les états et clôtures historiques des EPIC restent inchangés ; preuves locales et recette appareil sont distinguées dans la spécification.
+
 - Identifiants EPIC suivis : 70 ; 67 du tronc commun et 3 identifiants applicatifs distincts.
 - EPICs a faire : 7 ; EPICs en cours : 2 (EPIC-55 et EPIC-66).
 - EPICs fusionnees : 1 (EPIC-61 vers EPIC-60).
@@ -57,7 +59,7 @@ réaliser. Le statut « Terminé » des PRD-251 à PRD-260 ne couvre pas cette �
 | EPIC-62 | Validation des modifications de prestations, BUM et Localeo Support | Cadrage initial ; perimetre multi-copies et habilitations a confirmer |
 | EPIC-64 | Parcours de retractation en ligne depuis le site | Critique ; cadrage initial, exigences legales, parcours et 10 stories a developper |
 | EPIC-65 | Vues ERP audit, paiements et reversements | Spécification V1 disponible ; dix critères reliés aux contrats/tests prévus ; hypothèses paiements et actions explicites, implémentation à réaliser |
-| EPIC-66 | Localeo Atelier : coffrets assistés par IA | Spécification V1.1 du 29 septembre disponible ; douze critères, JSON unique avec WebP base64 (< 150 Ko décodés), import média/proposition et création atomiques ; conservation validée à 30 jours, implémentation à réaliser |
+| EPIC-66 | Localeo Atelier : coffrets assistés par IA | V1.1 : douze critères, JSON/WebP, création atomique, conservation 30 jours. V1.2 : PWA/menu (13 à 17), prix TTC proposé modifiable (18 à 21) et prompt expérience (22/23) implémentés et testés localement ; recette appareils déployés restante, preuves dans le bilan. |
 | EPIC-67 | Communautés de communes et coffrets intercommunaux | Cadrage initial ; quatorze critères, référentiel et commercialisation multi-communes, extension Atelier ; règles d'évolution des adhésions et droits à spécifier |
 
 Epic 63 recentree : script autonome, plateforme vivante et restauration controles,

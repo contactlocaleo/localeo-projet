@@ -4,6 +4,10 @@
 
 ## Responsabilités
 
+La V1.1 ci-dessous décrit le socle implémenté. Les sections **Extensions V1.2**
+précisent l'évolution implémentée localement et priment pour les comportements
+modifiés ; les limites de validation restent dans le bilan V1.2.
+
 Conception conforme à l'[ADR domaine d'abord](../../architecture/decisions/ADR-2026-08-28-domaine-avant-services-applicatifs.md).
 Le domaine **commercialisation** porte la préparation, la cohérence du retour et
 la création du coffret. Référencement fournit les faits des commerçants/modèles ;
@@ -253,3 +257,148 @@ les services existants. Les descriptions éditoriales ne doivent jamais remplace
 les mentions contractuelles dans le panier, le reçu ou les droits du bénéficiaire.
 La vérité factuelle du texte reste soumise à la relecture humaine avant création
 et à la préparation habituelle avant publication.
+
+## Extensions V1.2 — invariants et prix
+
+| Référence | Règle et propriétaire | Entrées / preuves |
+| --- | --- | --- |
+| E66-I08 | Commercialisation : en AUTO, le prix enregistré découle de la somme exacte des valeurs TTC autorisées et versionnées ; le client ne fournit pas le total de référence. En MANUEL, aucun changement de sélection n'écrase le prix. | Création/modification de préparation, émission/import/création ; CA-18 à 21. |
+| E66-I09 | Commercialisation : un GET ne revalorise jamais une préparation, un coffret ou un achat. Les faits périmés bloquent la progression jusqu'à actualisation explicite. | DTO, candidats, commandes et reprise ; CA-15/21. |
+| E66-I10 | Identité/accès : shell PWA, anciennes URL et API imposent les mêmes droits ; une installation et un cache ne sont pas des droits d'accès. | Navigation, middleware, session et API ; CA-13 à 17. |
+| E66-I11 | Construction du prompt : les consignes d'expérience sont fixes et prioritaires sur les données libres ; aucun prix ou secret supplémentaire n'est exporté. | Émission du prompt ; CA-03/22/23. |
+
+### Calcul pur et orchestration
+
+Étendre les règles pures de préparation avec le mode et le calcul à partir de
+faits autorisés, sans ORM ni JavaScript comme propriétaire du calcul. L'application
+charge sous verrou les modèles puis les commerçants dans l'ordre stable existant.
+Elle contrôle ensemble exact, versions, commune, droits et éligibilité avant de
+transmettre les montants au domaine. Les valeurs absentes, non entières ou négatives
+sont refusées ; zéro est un tarif connu, pas une absence. La somme utilise des
+entiers en centimes, sans float ni arrondi successif. Les doublons sont refusés.
+
+Séparer l'éligibilité des sources et le budget global dans les règles d'Atelier :
+ne plus simuler un coffret à prix artificiellement élevé pour les candidats.
+Un candidat structurellement éligible reste sélectionnable même si son reversement
+dépasse l'ancien prix. Après validation des sources, calculer la somme complète
+puis appliquer les contrôles de budget au prix effectif, jamais avant le calcul.
+Le rattachement historique ERP conserve ses contrôles ; il réutilise les mêmes
+fonctions de domaine avec le contexte de budget approprié.
+
+Sauvegarder sélection, mode, prix et référence de calcul dans la même transaction.
+Un prix manuel hors budget mais dans les bornes monétaires peut être conservé
+comme préparation à corriger ; afficher le blocage dérivé. Émission, import et
+création exigent prix complet et budget valide. Une sélection invalide ou une
+source périmée refuse toute la commande, sans changer le mode, prix ou échéance.
+En AUTO, somme nulle, sélection vide ou total supérieur à 99 999 999 donnent
+`prix_centimes: null`, avec motif ; le total exact reste visible si calculable.
+Passer en MANUEL permet un prix valide indépendant de la somme, sous les contrôles
+financiers existants. Aucun prix n'est plafonné silencieusement.
+
+### Stockage, contexte et anciennes préparations
+
+Conserver dans le JSONB `parametres` existant : `mode_prix` (AUTO/MANUEL),
+`prix_centimes` effectif, et `reference_prix` serveur uniquement, contenant
+`selection: [{modele_id, version, valeur_centimes}]` et `total_centimes`.
+La sélection de référence est triée par UUID, bornée à 20 lignes ; pas de libellés,
+données personnelles ni copie du prompt. Une sélection vide a une référence vide
+et un total 0. Le DTO expose `mode_prix` et `total_prestations_centimes` ; il
+n'aplatit pas le snapshot interne. Les écritures remplacent explicitement l'objet
+JSONB afin d'être suivies par SQLAlchemy.
+
+Sans `mode_prix` historique, lire **MANUEL**, même si le prix coïncide avec le
+total. Préserver le prix, y compris null, et ne rien écrire pendant cette lecture.
+Sans référence historique, le DTO peut calculer un total indicatif à partir des
+versions encore identiques, sans le persister ; si une version manque ou diffère,
+retourner total null et blocage source obsolète. À la première mutation volontaire
+de sélection/prix/mode, écrire mode et référence ; les autres modifications ne
+forcent pas une lecture/migration de sources anciennes. Une émission explicite
+de prompt V2 matérialise aussi mode MANUEL et référence manquants à partir des
+sources revalidées, dans la transaction d'émission, en conservant le prix historique.
+Si les sources ne sont plus valides, elle échoue sans écrire ces métadonnées.
+
+Pour une référence existante, comparer aussi les montants de ses faits aux sources,
+même si leur numéro de version n'a pas changé. Un écart rend la lecture obsolète
+et bloque émission/import/création. Recharger puis confirmer explicitement la
+sélection (PATCH avec le tableau `selection`, même si les IDs sont identiques)
+autorise une nouvelle référence des faits courants après revalidation ; une simple
+modification d'intention/type/validité ne vaut pas confirmation de nouveaux tarifs.
+
+Les nouveaux paramètres ne sont pas injectés rétroactivement dans les anciennes
+empreintes. Ajouter au contexte émis `version_empreinte: 2` pour la V1.2 : cette
+version inclut mode effectif et référence ainsi que les faits/paramètres existants.
+Pour un contexte sans version, calculer l'empreinte historique avec les paramètres
+historiques uniquement, sans les deux nouvelles clés. Un contexte ancien peut
+donc être relu/importé si ses faits n'ont pas changé. Toute modification effective
+des paramètres ou de la sélection invalide explicitement ce contexte comme
+aujourd'hui ; retouches éditoriales et remplacement de média conservent le contexte
+selon leurs règles V1.1. Une émission explicite crée un nouveau contexte. Un rejeu
+de commande réussie ne migre ni ne réémet le contexte. Les résultats CREEE et
+leurs versions confirmées restent inchangés. Le nettoyage existant efface aussi
+les nouvelles métadonnées de préparation, sans toucher au prix canonique du coffret.
+
+Pas de DDL requis : aucun index/colonne/table nouveau, v250 immuable. Les fixtures
+et restauration doivent couvrir des JSONB anciens et nouveaux. En cas de retour
+à l'ancien backend, désactiver Atelier et empêcher les commandes avec l'ancien
+code sur des préparations AUTO ; ce code ne sait pas préserver leur mode.
+Ne pas convertir en masse ni réécrire les prix pour permettre ce retour arrière.
+
+## Extensions V1.2 — frontières PWA et session
+
+Servir une coquille dédiée `/internal/atelier/` depuis le backend. Réutiliser
+`atelier-assiste.js` par injection des chemins de navigation et du contexte UI ;
+aucune duplication des use cases, règles de prix ou contrôles d'import. Les anciennes
+routes ERP redirigent vers les nouvelles, après vérification d'accès. Ajouter le
+préfixe au garde `interface_interne_avec_perimetre`, sans élargir les rôles ERP.
+
+Le menu partagé reçoit une capacité serveur, pas une déduction de rôle en JS.
+Étendre le contexte ERP avec `applications.atelier: {disponible, url}` (voir
+contrats). L'échec de lecture masque uniquement Atelier ; ne pas supprimer les
+autres liens historiques. ADMIN et EXPLOITATION autorisés sont les rôles actuels ;
+pour ce dernier, exiger au moins une commune accessible. Les futures capacités
+Lecteur/Backoffice seront intégrées avec l'EPIC 35, sans anticipation.
+
+Le manifeste, les icônes et le worker sont publics, neutres et explicitement
+autorisés par le middleware global ; aucune donnée de session ou de préparation.
+Les autres routes requièrent session/droits/flag. Le worker ne prend en charge
+que les navigations dans `/internal/atelier/`, avec réseau prioritaire et réponse
+statique 503 en cas d'erreur réseau. Il ne gère ni ne met en cache les fetch API,
+les médias DAM, la page de login ou d'autres applications. Aucun Cache Storage,
+IndexedDB, localStorage ou sessionStorage pour les contenus métier, jetons ou
+commandes. La page de secours neutre peut être embarquée dans le worker.
+
+Ne pas appeler `skipWaiting` ou recharger via `controllerchange` sans choix
+explicite de l'opérateur si une saisie existe. Limiter les opérations de worker
+à son propre scope, sans désinscrire les workers Control, Support ou Ops.
+Les HTML et données authentifiées sont `no-store` ; sur restauration de page ou
+retour de visibilité, masquer provisoirement le contenu puis revalider la session.
+Le contrôle technique de session utilise le moniteur partagé, en préservant ses
+événements. L'API reste l'autorité, même si l'interface n'a pas encore reçu un retrait
+de droits. Un 401/403 supprime les données affichées et bloque les commandes.
+
+Le moniteur actuel ne publie pas d'événement lors de toute expiration détectée.
+Étendre son contrat pour émettre `localeo:session-expired` une fois lors du passage
+à l'état expiré, sur échéance locale et sur 401 de synchronisation ; ses propres
+listeners ne doivent pas réémettre en boucle. Atelier masque et vide le contenu
+à cet événement, y compris sur un onglet visible sans action métier. Conserver
+`localeo:session-restored` pour la reprise après revalidation complète. Vérifier
+les autres applications consommatrices et la propagation de logout entre onglets ;
+aucune saisie ni donnée personnelle n'est transmise dans ces événements.
+
+Ajouter un retour de connexion Atelier fermé : seuls `/internal/atelier/` et
+`/internal/atelier/preparations/{UUID}` sont acceptés après normalisation, sans
+query ni fragment. Rejeter URLs absolues, `//`, antislashs et encodages contournant
+la liste ; repli `/internal/atelier/`. Transmettre cette destination par le flux
+login, la consommer une seule fois après succès et recontrôler droits/flag à l'arrivée.
+L'ouverture d'un nouvel onglet pour se reconnecter conserve l'onglet initial mais
+n'autorise pas le rejeu d'une commande ; il recharge son contexte CSRF et l'état
+serveur avant reprise. Le logout reste celui du backoffice, avec masquage immédiat
+des contenus et propagation via le mécanisme partagé de suivi de session.
+
+La nouvelle lecture de contexte par le menu et la coquille peut être concurrente.
+Pour une session serveur réelle sans ancien `erp_csrf`, dériver le jeton CSRF par
+HMAC-SHA256 à partir du secret de session et de son token serveur, avec séparation
+de domaine `localeo:erp:csrf:v1`. Ne pas écrire un nouveau jeton aléatoire dans le
+cookie lors de ces lectures concurrentes. Garder les anciens `erp_csrf` tant que
+leur session existe ; le login renouvelle la session et le jeton dérivé. La
+comparaison constante, le contrôle Origin et la révocation restent inchangés.

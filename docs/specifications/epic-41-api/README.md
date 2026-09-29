@@ -1,5 +1,7 @@
 # Specifications techniques API - EPIC 41 Animation locale
 
+Évolution UI du 29 septembre 2026 : [installation et mise à jour PWA](../installation-mise-a-jour-pwa.md), commune à Animation et six autres applications ; aucun contrat métier ni état historique de l'EPIC modifié.
+
 > Suivi produit au 18 septembre 2026 : **Terminée** — [backlog de référence](../../roadmap/terminees/epic-41-plateforme-animation-locale-mvp-backlog.md). Les bilans techniques datés ci-dessous conservent leur portée historique.
 
 > Consolidation documentaire du 18 septembre 2026 : contributions Backend et Animation réunies. Les écarts sur les aperçus de flyers restent exposés dans le [registre commun](registre-arbitrages.md#divergence-documentaire-sur-les-flyers), sans nouvelle décision produit.

@@ -17,6 +17,10 @@ les vues ERP d’audit, paiements et reversements, et l’EPIC 66 ajoute Localeo
 pour composer des coffrets avec l’aide de l’IA. L’EPIC 67 ajoute les communautés
 de communes et les coffrets intercommunaux. Les EPIC 65 et 67 sont à faire ;
 l'EPIC 66 est en cours depuis le 29 septembre, avec une implémentation locale en validation.
+La spécification V1.2 couvre ses extensions `E66-PWA-20260929` (PWA/menu ERP),
+`E66-PRIX-20260929` (prix proposé modifiable) et `E66-EXPERIENCE-20260929`
+(expérience multi-prestations, sans coffret matériel). Elles sont implémentées et
+testées localement ; la recette des appareils déployés reste à faire, sans changement d'état produit.
 L'[EPIC 35](terminees/epic-35-profils-backoffice-differencies-backlog.md)
 porte aussi un cadrage d'évolution du 28 septembre vers les profils Lecteur,
 Backoffice et Admin, à spécifier et implémenter ; sa clôture historique et les
@@ -55,7 +59,7 @@ précise la provenance et les divergences historiques conservées.
 | 54, 58, 62, 64 et EPIC-MARKETPLACE-54 | A faire | Classement courant des dossiers ; voir les réserves de chaque backlog. |
 | 55 | En cours | Moteur commun et chasse au trésor ; conception, arbitrages et livraison suivis dans le backlog. |
 | 65 | A faire | Cadrage des trois vues ERP audit, paiements et reversements ; réutilisation des règles et lectures existantes, sans rouvrir les epics terminées. |
-| 66 | En cours | [Localeo Atelier](en-cours/epic-66-localeo-atelier-coffrets-assistes-ia-backlog.md) : [spécification V1.1](../specifications/epic-66-localeo-atelier/README.md), prompt IA externe et JSON avec image WebP base64, création atomique en brouillon ; implémentation locale réalisée, validation en cours. |
+| 66 | En cours | [Localeo Atelier](en-cours/epic-66-localeo-atelier-coffrets-assistes-ia-backlog.md) : [V1.2](../specifications/epic-66-localeo-atelier/README.md) implémentée localement, PWA, prix automatique modifiable et prompt expérience testés ; limites de recette dans le bilan, aucune clôture. |
 | 67 | A faire | [Communautés de communes](a-faire/epic-67-communautes-communes-coffrets-intercommunaux-backlog.md) : référentiel, coffrets intercommunaux, commercialisation et extension de Localeo Atelier ; droits et achats existants préservés. |
 | 61 | Fusionnee | Contenu repris dans l'Epic 60 ; une fusion n'est pas un abandon. |
 | 35 | Terminee (historique) | Évolution `E35-PROFILS-20260928` cadrée dans son backlog : trois profils et séparation métier/technique, non livrée ; aucun nouvel identifiant créé. |

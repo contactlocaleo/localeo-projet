@@ -2,6 +2,8 @@
 
 ## Références
 
+Évolution complémentaire `PWA-20260929` : [installation dans le header et mise à jour explicite](../../specifications/installation-mise-a-jour-pwa.md). Ses critères et preuves sont transverses aux sept applications ; elle ne clôture pas l'EPIC 66.
+
 - Date de cadrage : **28 septembre 2026**.
 - Identifiant : **EPIC-66**, disponible après recherche dans la roadmap commune,
   les namespaces applicatifs et les index documentaires des dépôts voisins.
@@ -9,9 +11,16 @@
 - Demande : une application du backoffice pour sélectionner une commune et des
   prestations, générer un prompt IA, puis coller une réponse normalisée pour créer
   le coffret avec son contenu éditorial et sa vignette.
-- Phase réalisée : **cadrage et spécification V1.1 du 29 septembre 2026**, dans le
+- Phase réalisée : **cadrage et spécification V1.2 du 29 septembre 2026**, dans le
   [dossier canonique](../../specifications/epic-66-localeo-atelier/README.md).
-  Implémentation locale réalisée, validation en cours ; aucune clôture ni livraison déclarée.
+  Socle V1.1 et extensions V1.2 implémentés et testés localement. Bilan de preuves
+  et limites de recette dans le dossier canonique ; aucune clôture ni livraison déclarée.
+- Extension du **29 septembre 2026**, `E66-PWA-20260929` : accès à Localeo Atelier
+  comme application PWA et depuis le menu déroulant Applications de l'ERP.
+  Implémentée en V1.2 ; recette d'installation sur appareils déployés restante.
+- Précision du **29 septembre 2026**, `E66-PRIX-20260929` : le prix TTC proposé
+  à la création est la somme des prix TTC des prestations sélectionnées ;
+  l'opérateur peut le modifier. Implémentée et testée localement en V1.2.
 - Précision utilisateur du **28 septembre 2026** : les visuels du coffret sont au
   format **WebP** et d'un poids **strictement inférieur à 150 Ko**.
 - Choix validés par l'utilisateur le **28 septembre 2026** : nom **Localeo Atelier**,
@@ -135,6 +144,13 @@ intégrer au JSON, sans fichier séparé ni instructions pour une seconde géné
 Les consignes visuelles du prompt rappellent le format **WebP** et la limite de
 **moins de 150 Ko**. Cette consigne ne remplace pas le contrôle du fichier réel.
 
+**Précision utilisateur du 29 septembre 2026 — E66-EXPERIENCE-20260929 :**
+le prompt doit explicitement définir le coffret comme une **expérience réunissant
+plusieurs prestations physiques, vécues sur place auprès des commerçants**, et
+non comme un objet matériel. Il demande une image de l'expérience proposée,
+sans boîte, coffret cadeau, panier garni ou emballage représentant le produit vendu.
+Cette exigence est cadrée ci-dessous et reste à intégrer au générateur de prompt.
+
 Le contrat de réponse reste **court**, limité aux informations utiles à l'import
 et aux références nécessaires aux contrôles. Ce principe est validé ; les champs
 éditoriaux canoniques, le format définitif et leurs limites seront
@@ -187,7 +203,7 @@ Les contrôles et erreurs restent accessibles au clavier, sans dépendre du surv
 
 ## Périmètre
 
-**Inclus V1 :** entrée backoffice, sélection communale et versionnée, préparation
+**Inclus socle V1.1 :** entrée backoffice, sélection communale et versionnée, préparation
 reprenable, prompt copiable, import normalisé avec prévisualisation, édition des
 textes, ajout/choix de vignette et création d'un coffret brouillon avec sa composition.
 
@@ -195,6 +211,10 @@ textes, ajout/choix de vignette et création d'un coffret brouillon avec sa comp
 IA, sélection intercommunale, génération en masse, modification d'un coffret déjà
 vendu, écriture des prestations sources, calcul de prix/commission ou décision
 fiscale par l'IA, activation automatique, nouvelle application à déployer séparément.
+
+L'extension `E66-PWA-20260929` ajoute une application PWA identifiable et installable,
+servie par le backend existant. L'exclusion d'un déploiement séparé demeure ; elle
+n'exclut plus une présentation autonome d'Atelier.
 
 **Contraintes :** réutiliser le socle ERP et les règles backend. Le prompt est
 exporté manuellement et ne contient ni secret, jeton, coordonnées personnelles
@@ -250,3 +270,200 @@ relie les douze critères aux preuves de validation et aux impacts de déploieme
 L'état produit est **En cours** au 29 septembre 2026 : implémentation locale
 réalisée et validation en cours. Le bilan de preuves est maintenu dans le dossier
 de spécification ; ce passage ne vaut ni clôture ni déploiement.
+
+## Extension du 29 septembre 2026 — Localeo Atelier en PWA
+
+Référence stable : **E66-PWA-20260929**. Demande utilisateur : disposer de Localeo
+Atelier comme application PWA, à l'image de Localeo Control et Localeo Support,
+et l'ouvrir depuis la liste déroulante des applications disponibles dans l'ERP.
+L'epic reste **En cours** ; aucun nouvel identifiant ni dépôt n'est nécessaire.
+
+### Problème et résultat attendu
+
+**Constat vérifié dans le backend `a28592d` :** les routes
+`/internal/erp/atelier` et `/internal/erp/atelier/preparations/{id}` servent la
+coquille ERP via [erp_ui.py](../../../../localeo-backend/app/api/erp_ui.py).
+Le [menu partagé Applications](../../../../localeo-backend/app/infrastructure/erp/app-header.js)
+ne référence pas Atelier. La navigation latérale ERP comporte déjà un lien Atelier.
+[Support](../../../../localeo-backend/app/api/support_ui.py) et
+[Control](../../../../localeo-backend/app/api/pwa_exploitation_api.py) possèdent un
+manifeste avec une ouverture autonome. Ce constat de code n'est pas une recette
+de leur installation sur tous les navigateurs.
+
+**Acteur :** opérateur habilité à utiliser Atelier, avec ses droits ERP actuels.
+Depuis « Applications », il choisit **Localeo Atelier**, retrouve directement ses
+préparations et peut installer l'application sur son appareil lorsque le navigateur
+le permet. Une fois installée, elle s'ouvre sous son propre nom et son icône, avec
+une navigation centrée sur la composition de coffrets et un retour explicite à l'ERP.
+Les préparations sont les mêmes depuis l'ERP et depuis l'application installée.
+
+### Périmètre et contraintes
+
+- Une entrée applicative dédiée avec identité **Localeo Atelier**, icônes,
+  manifeste et ouverture autonome ; présentation adaptée à l'ordinateur et au mobile.
+- Un lien **Localeo Atelier** dans le menu déroulant Applications de l'ERP ;
+  cohérence avec le menu partagé et les autres accès Atelier déjà présents.
+- Un accès direct aux préparations enregistrées et un retour à la fiche ERP du
+  coffret créé, sans dupliquer le parcours métier ni les données.
+- Réutilisation de la session backoffice, des permissions et du périmètre communal.
+  Le flag `LOCALEO_FEATURE_ATELIER_COFFRETS_ENABLED` reste la condition d'activation.
+- Proposition de cadrage : **usage métier en ligne**. Une coupure affiche un état
+  compréhensible et permet de réessayer ; aucune file de commandes métier hors
+  connexion, aucun rejeu automatique de création, aucun cache persistant des
+  préparations, prompts, réponses IA ou données authentifiées.
+- Les douze critères initiaux restent applicables, dont idempotence, conservation
+  de 30 jours, import WebP/base64 et création en brouillon sans publication implicite.
+
+**Exclus :** application native ou publication dans un store, nouveau compte,
+nouveau rôle, notifications push, fournisseur IA intégré, nouveau domaine métier,
+nouveau dépôt ou déploiement autonome. L'évolution des profils reste portée par
+l'EPIC 35 ; la PWA ne lui attribue pas de droits anticipés.
+
+### Critères ajoutés
+
+| Critère | Acteur et préconditions | Action | Résultat observable et effets interdits |
+| --- | --- | --- | --- |
+| E66-CA-13 | Opérateur habilité, Atelier activé | Ouvrir le menu déroulant Applications de l'ERP et choisir Localeo Atelier | Une entrée unique, utilisable au clavier et sur mobile, ouvre l'application dédiée. Les accès Atelier existants conduisent au même parcours et les autres applications restent accessibles. |
+| E66-CA-14 | Navigateur compatible avec l'installation PWA, environnement HTTPS | Installer puis relancer Localeo Atelier | Nom et icône propres, ouverture autonome sur Atelier ; aucune installation obligatoire pour l'usage web. Si l'installation n'est pas proposée par le navigateur, le parcours web reste utilisable. |
+| E66-CA-15 | Préparation enregistrée et accès autorisé | Ouvrir son lien direct, actualiser, puis la reprendre dans la PWA | Même préparation et même état serveur ; navigation adaptée à la largeur, retour ERP accessible et ouverture de la fiche canonique après création. Aucun doublon ni copie locale concurrente. |
+| E66-CA-16 | Session absente, expirée ou droits retirés ; ou Atelier désactivé | Ouvrir l'application ou son lien direct, y compris depuis une installation existante | Connexion requise ou refus explicite selon le cas ; contrôle serveur inchangé et aucune donnée protégée affichée depuis un cache. Le menu ne propose pas un accès utilisable lorsque la fonctionnalité est désactivée ou les droits insuffisants. |
+| E66-CA-17 | Application ouverte, coupure réseau ou nouvelle version disponible | Tenter une action puis retrouver la connexion ; reprendre après mise à jour | État explicite en français, aucune fausse confirmation ni création différée automatique. Reprise fondée sur l'état serveur et l'idempotence existante ; une mise à jour ne recharge pas silencieusement un formulaire non enregistré. Le mécanisme PWA ne contrôle ni ne met en cache les autres applications. |
+
+### Analyse d'impact initiale
+
+Les mentions « à examiner » ci-dessous conservent la trace du cadrage initial.
+La V1.2 du dossier canonique arrête désormais les routes PWA, la politique de
+session/cache et les preuves ; le tableau ne constitue pas un second contrat.
+
+| Sujet | Impact et travail attendu |
+| --- | --- |
+| Applications et propriétaire | **Concerné : backend**, interface Atelier, navigation ERP partagée et distribution PWA. Commercialisation reste propriétaire des règles ; réutiliser les services existants. Aucun changement fonctionnel attendu dans Marketplace, Commerçant, Animation ou Live. |
+| API et consommateurs | **Concerné :** nouvelles ressources de présentation PWA et gestion de session/liens directs. Réutiliser le contrat métier Atelier sans variante mobile. Vérifier la compatibilité des anciennes URL et les menus partagés de Support, Ops, OnBoard et ERP. |
+| Persistance et migrations | **Sans nouvelle donnée métier attendue :** mêmes préparations et coffrets. Aucune migration prévue pour ce seul accès PWA ; à confirmer en conception. Ne pas modifier la migration 250 déjà appliquée en test. |
+| Démonstration et fixtures | **Concerné pour les preuves :** scénario existant Atelier accessible par menu et lien direct, profils autorisé/refusé, flag désactivé, session expirée et réseau coupé. Aucun nouveau jeu métier ni génération distante nécessaire au cadrage. |
+| Documentation fonctionnelle | **Concerné :** compléter la spécification et le guide Atelier avec l'ouverture, l'installation facultative, le retour ERP et la reprise ; conserver une seule source canonique. |
+| Exploitation et livraison | **Concerné :** ressources HTTPS, identité/manifeste, périmètre du mécanisme PWA, politique de cache, mise à jour et non-régression entre applications. Même déploiement backend ; aucune activation d'environnement à cette phase. |
+
+### Spécification de l'extension PWA
+
+Le [dossier V1.2](../../specifications/epic-66-localeo-atelier/README.md) précise
+l'URL `/internal/atelier/`, les redirections des anciens liens, le retour de
+connexion validé, le manifeste, les contrôles d'accès et le worker sans cache
+de données métier. Les preuves navigateur sont planifiées dans la matrice canonique.
+Les critères E66-CA-13 à 17 sont **implémentés et vérifiés localement**, avec les
+limites de recette du bilan V1.2 ; le contrôle Chromium local ne prouve pas
+l'installation effective sur tous les appareils cibles.
+
+## Extension du 29 septembre 2026 — Prix TTC proposé automatiquement
+
+Référence stable : **E66-PRIX-20260929**. Le besoin prolonge la création de coffrets
+dans Localeo Atelier, accessible depuis l'ERP et la future PWA. L'epic reste
+**En cours** ; les autres parcours de modification d'un coffret existant ne sont
+pas transformés implicitement.
+
+### Besoin et règle cible
+
+**Demande acquise :** proposer automatiquement un prix TTC égal à la somme des
+prix TTC des prestations sélectionnées, avec possibilité de le modifier.
+Exemple : des prestations de **25 €**, **40 €** et **15 €** proposent un coffret
+à **80 € TTC** ; l'opérateur peut saisir **75 € TTC**, sous réserve des contrôles
+économiques existants.
+
+**Constat vérifié sur le backend `a28592d` :** la préparation contient un prix
+en centimes saisi par l'opérateur. Les sources portent une valeur TTC
+`valeur_centimes` et un reversement distinct. Les
+[règles d'Atelier](../../../../localeo-backend/app/domaine/commercialisation/services/regles_atelier.py)
+exigent un prix positif couvrant le total des reversements. Le prix proposé
+utilise la **valeur TTC des versions de prestations sélectionnées**, une fois
+par prestation ; il ne somme ni les reversements ni les commissions.
+
+**Comportement proposé pour les changements de sélection :** tant que le prix
+n'a pas été personnalisé, l'ajout ou le retrait d'une prestation actualise le
+prix proposé. Après une saisie manuelle, conserver ce prix et afficher séparément
+le nouveau total des prestations ; une action **Utiliser le total des prestations**
+permet de revenir au calcul automatique. Sauvegarder puis reprendre une préparation
+conserve ce choix. Une modification des tarifs sources suit le contrôle de version
+existant : aucun changement silencieux de prix ou de sélection enregistrée.
+
+La règle appartient au domaine commercialisation ; les interfaces présentent
+le résultat et les services applicatifs orchestrent son calcul et sa sauvegarde.
+L'IA ne fixe aucun montant. Le prix confirmé reste celui utilisé pour créer
+le coffret ; les règles existantes d'invalidation du contexte du prompt lors d'un
+changement de prix ou de sélection restent applicables.
+
+### Critères ajoutés
+
+| Critère | Acteur et préconditions | Action | Résultat observable et effets interdits |
+| --- | --- | --- | --- |
+| E66-CA-18 | Nouvelle préparation, prestations aux valeurs TTC connues | Sélectionner les prestations puis en ajouter ou retirer une, sans personnaliser le prix | Prix TTC prérempli et actualisé à leur somme exacte en centimes, sans cumul de doublons ni approximation flottante. Aucun tarif absent ne devient implicitement zéro ; une sélection vide ne permet pas de créer un coffret. |
+| E66-CA-19 | Prix proposé automatiquement | Saisir un prix différent puis modifier la sélection, sauvegarder et reprendre | Prix personnalisé conservé et total des prestations visible séparément. « Utiliser le total des prestations » rétablit le prix calculé et ses actualisations ultérieures. |
+| E66-CA-20 | Prix proposé ou personnalisé | Confirmer la création depuis l'ERP ou la PWA | Prix confirmé utilisé pour le brouillon ; mêmes contrôles serveur de droits, versions, limites monétaires et budget. Prix nul/négatif ou inférieur aux reversements refusé en français, sans écriture partielle ni prix corrigé silencieusement. |
+| E66-CA-21 | Tarif source modifié depuis la préparation ou coffret déjà créé | Reprendre la préparation puis tenter de créer ; consulter un coffret existant | Sources périmées signalées et revalidation requise selon le parcours existant ; aucun recalcul rétroactif des coffrets, achats ou prix déjà enregistrés. |
+
+### Impacts et passage à la spécification
+
+Les impacts initialement ouverts ci-dessous sont résolus dans la V1.2 canonique :
+champs HTTP additionnels, métadonnées JSONB compatibles et aucune nouvelle migration
+SQL. Le détail contractuel se lit dans le dossier de spécification.
+
+| Sujet | Impact initial |
+| --- | --- |
+| Applications et domaine | **Concerné : backend/ERP et future PWA Atelier**, calcul métier partagé et affichage du prix/total. Pas de modification des prix dans les lecteurs Marketplace, Commerçant, Animation ou Live : ils continuent à utiliser le prix canonique du coffret. |
+| Contrats et persistance | **À spécifier :** distinguer calcul automatique et prix personnalisé, exposer le total, conserver ce choix à la reprise. Examiner la compatibilité des préparations existantes en préservant leur prix, sans déduire leur mode de la seule égalité avec le total. Migration éventuelle à déterminer ; ne pas modifier v250 déjà appliquée en test. Le JSON IA n'acquiert aucun champ financier. |
+| Démonstration et preuves | **Concerné :** sommes avec centimes, ajout/retrait, personnalisation puis retour au total, reprise, budget insuffisant et tarif source périmé. Adapter les fixtures ; aucune génération réelle requise au cadrage. |
+| Documentation et exploitation | **Concerné :** compléter les spécifications et l'aide Atelier, préciser le comportement des préparations existantes et l'ordre de livraison si le contrat ou le stockage évolue. Aucun fournisseur ou secret supplémentaire. |
+
+La V1.2 retient la conservation du prix personnalisé et l'action de retour au total
+comme choix de conception. Elle spécifie modes AUTO/MANUEL, compatibilité des
+anciennes préparations, calcul serveur et contrats additionnels ; aucune migration
+SQL nouvelle n'est nécessaire. Les critères E66-CA-18 à 21 sont **implémentés et
+testés localement** ; les nouvelles preuves sont consignées dans le bilan V1.2.
+
+## Précision du 29 septembre 2026 — Représenter une expérience, pas une boîte
+
+Référence stable : **E66-EXPERIENCE-20260929**. Besoin utilisateur acquis : éviter
+que le mot « coffret » conduise l'IA à représenter un produit physique à recevoir.
+Le coffret Localeo regroupe plusieurs prestations réelles chez les commerçants ;
+il n'est pas lui-même une boîte ou un colis. Le nom métier « coffret » est conservé.
+
+**Constat vérifié sur le backend `a28592d` :** le
+[générateur de prompt](../../../../localeo-backend/app/domaine/commercialisation/services/preparation_coffret_assiste.py)
+demande un coffret cohérent et son image réelle, sans expliciter cette distinction.
+Le cadrage renforce E66-CA-03 ; il ne constate pas qu'une image incorrecte a été
+produite sur un environnement déployé.
+
+**Consigne cible à intégrer explicitement au prompt :**
+
+> Le coffret Localeo n'est pas un objet physique : c'est une expérience composée
+> de plusieurs prestations à vivre sur place auprès des commerçants sélectionnés.
+> Ne représente pas de boîte, de coffret cadeau, de panier garni, de colis ou
+> d'emballage comme s'il s'agissait du produit vendu. Illustre l'expérience et
+> les activités réellement proposées par les prestations sélectionnées, avec une
+> scène ou une composition cohérente. N'invente pas d'activité, d'objet offert,
+> de livraison ou d'avantage absent de la sélection. Le titre, la description et
+> le texte alternatif doivent eux aussi présenter une expérience, sans promettre
+> un coffret matériel à recevoir.
+
+Les objets effectivement nécessaires aux prestations peuvent être représentés
+(par exemple un plat pour un repas ou des outils pour un atelier). L'interdiction
+porte sur la présentation du coffret lui-même comme marchandise emballée ; elle
+n'interdit pas de montrer le contenu réel d'une prestation sélectionnée.
+
+| Critère | Acteur et préconditions | Action | Résultat observable et effets interdits |
+| --- | --- | --- | --- |
+| E66-CA-22 | Préparation valide, toute sélection de prestations | Copier le prompt | Le texte contient explicitement la définition d'expérience multi-prestations sur place et l'interdiction de représenter un coffret matériel ; ces consignes demeurent présentes même si une intention libre demande une boîte cadeau. Les faits de la sélection restent des données, pas des instructions remplaçant ces règles. |
+| E66-CA-23 | Réponse IA importée | Examiner le visuel et les textes avant création | L'aperçu permet de vérifier leur cohérence avec l'expérience et les prestations choisies. Une représentation de boîte vendue ou une promesse de livraison n'est pas conforme au résultat attendu ; l'opérateur peut refaire générer la proposition avant confirmation. Aucun contrôle automatique de la signification d'une image n'est prétendu acquis par sa seule validation WebP. |
+
+**Impacts :** backend, consignes du prompt et tests de leur présence/priorité ;
+spécification et aide de relecture Atelier à compléter. Prévoir des fixtures
+illustrant une expérience conforme et une boîte non conforme, sans appel IA réel
+obligatoire. Le format JSON, le WebP < 150 Ko en base64, les droits et les règles
+de création restent inchangés. Aucune migration, nouveau service d'analyse d'image
+ou modification des coffrets déjà créés n'est prévu. Les autres applications
+continuent à lire les contenus canoniques, sans nouveau contrat consommateur.
+
+Pas d'arbitrage produit ouvert. Cette précision est **implémentée en V1.2** :
+template `atelier-coffret-v2`, contrat JSON de réponse V1 inchangé,
+relecture guidée de l'aperçu. Les preuves prévues distinguent contenu du prompt
+réellement généré et relecture du résultat visuel ; aucune obéissance universelle
+d'une IA externe n'est supposée.

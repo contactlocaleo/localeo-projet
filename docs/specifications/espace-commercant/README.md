@@ -1,5 +1,7 @@
 # Espace commerçant — spécification fonctionnelle et technique
 
+Évolution du 29 septembre 2026 : [installation et mise à jour PWA](../installation-mise-a-jour-pwa.md), avec accès depuis le header Commerçant, aide iOS/Android et mise à jour après accord. Les notifications WebPush et la session conservent leurs règles.
+
 Voir également l’[adresse postale du commerce](adresse-postale.md), règle commune aux profils, à Onboard et aux animations (20 septembre 2026).
 
 ## 1. Objet

@@ -17,6 +17,8 @@ Ce dossier cadre `Localeo Live`, la PWA grand public destinee aux clients finaux
 
 ## Documents
 
+- [Évolution installation et mise à jour PWA du 29 septembre 2026](../installation-mise-a-jour-pwa.md)
+
 - [Specification backend et API](backend-api.md)
 - [Specification frontend PWA](frontend-pwa.md)
 - [Carnet partage - specification backend](carnet-partage-backend.md)

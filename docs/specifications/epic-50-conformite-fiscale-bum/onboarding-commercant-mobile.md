@@ -1,5 +1,7 @@
 # Epic 50 - Onboarding commercant mobile
 
+Évolution du 29 septembre 2026 : [installation et mise à jour PWA](../installation-mise-a-jour-pwa.md), depuis le header OnBoard. Les liens d'entrée historiques et les droits restent conservés ; l'installation utilise le point d'entrée canonique dans le scope de l'application.
+
 ## Avancement acquis et réponses obsolètes — 26 septembre 2026
 
 Le pourcentage présenté dans Localeo OnBoard représente désormais l’**avancement

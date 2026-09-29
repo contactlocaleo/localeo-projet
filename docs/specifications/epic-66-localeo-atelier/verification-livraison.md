@@ -4,6 +4,75 @@
 
 ## État des preuves
 
+**V1.2 du 29 septembre : implémentation locale.** PWA, prix AUTO/MANUEL et
+consigne expérience (E66-CA-13 à 23) disposent des preuves spécifiques du bilan
+V1.2 ci-dessous. Les résultats V1.1 ne couvrent pas seuls ces ajouts.
+Les contrôles de liens/export ne sont pas une recette produit, et la vérification
+locale de la PWA ne prouve pas son installation sur chaque appareil déployé.
+
+## Bilan d'implémentation V1.2 — 29 septembre 2026
+
+Arbre backend fondé sur `a28592d`, projet sur `0c5b0d9`, avec modifications locales
+V1.2 non committées. Dépôts modifiés : backend et projet ; aucun changement des
+frontends Marketplace, Commerçant ou Animation, des fichiers `.env` ou d'une base
+d'exploitation. Pas de nouvelle migration : v250 est préservée. Les tests de base
+ont utilisé uniquement PostgreSQL 18 local jetable, arrêté après validation.
+
+Livré localement : shell Atelier PWA et menu Applications avec capacité serveur,
+anciens liens redirigés, prix AUTO/MANUEL et compatibilité des préparations/contextes
+anciens, template `atelier-coffret-v2` et relecture expérience. OpenAPI métier
+régénéré hors ligne (neuf chemins, champ `mode_prix` additionnel). Les sources et
+écritures atomiques partagent les règles commerciales existantes.
+
+Preuves exécutées, sans skip sur ce périmètre :
+
+- Runner isolé, contrôles d'architecture et recensements obligatoires, domaine et
+  application Atelier, API, rattachement, parseur WebP, sécurité PWA et session :
+  **611 tests réussis** en 30,21 s ; détail de la commande ci-dessous.
+- PostgreSQL : `test_atelier_prix_postgres.py` + `test_atelier_http_postgres.py` :
+  **11 réussis**, prix final, JSONB, concurrence, API et compatibilité. Socle
+  `test_atelier_assiste_postgres.py` + `test_atelier_conservation_postgres.py` :
+  **13 réussis**, création/idempotence, migration additive et conservation.
+- `node tests/browser/atelier-assiste-erp.cjs` : réussi à 1280/390 px, import,
+  image, erreurs, retries et confirmation avant abandon des retouches.
+- `node tests/browser/atelier-prix.cjs` : réussi à 1280/390 px, AUTO/MANUEL,
+  personnalisation conservée, retour au total, reprise, confirmation de tarifs,
+  refus d'une notation numérique ambiguë, conflit et réponse tardive après expiration.
+- `node tests/browser/atelier-pwa.cjs` : serveur HTTP loopback réel, worker enregistré
+  et scope vérifié, panne réseau/API et page neutre 503, caches vides, menu et accès
+  dégradé, session expirée/restaurée, logout entre onglets, retrait partiel des
+  communes et montage lent concurrent à une revalidation ; réussi à 1280/390 px.
+  Chromium CDP ne rapporte aucune erreur d'installabilité. Les captures desktop/mobile
+  ont été inspectées dans `tmp/atelier-pwa-captures` (non versionné).
+
+Commande de consolidation backend (Python 3.14, hors dotenv/services externes) :
+
+```console
+python scripts/validation/test_isolated.py tests/architecture tests/domain/test_domain_dedicated_classes.py tests/application/use_cases/test_use_case_business_test_coverage.py tests/domain/test_preparation_coffret_assiste_dedicated.py tests/domain/test_rattachement_modele.py tests/application/test_atelier_assiste.py tests/api/test_atelier_assiste.py tests/infrastructure/test_reponse_atelier.py tests/security/test_atelier_pwa.py tests/security/test_admin_session_cookie.py tests/security/test_admin_session_lifecycle.py tests/security/test_erp_session_access.py -q -p no:cacheprovider
+```
+
+Revue indépendante : trois défauts corrigés et couverts (prix exponentiel,
+retouches perdues au rechargement, réaffichage après retrait partiel des droits),
+puis correction de la course montage/revalidation. Le chargement concurrent du
+menu et du shell a aussi conduit à stabiliser le jeton CSRF par session sans
+affaiblir les contrôles Origin et de révocation. Deux lectures HTTP issues du même
+cookie initial suivies d'un POST réel sont couvertes, ainsi que l'absence de jeton
+ajouté dans les cookies retournés et les refus d'origine/session différente.
+
+Contrôles documentaires finaux : **92 guides, 957 liens locaux, zéro erreur et
+zéro avertissement**, **118 sources exportées vérifiées** ; diff sans erreur
+d'espacement. Les avertissements de normalisation CRLF/LF de Git ne changent pas
+le résultat de ces contrôles.
+
+Limites : aucune installation réelle OS sur Chrome/Edge/Android/Safari iOS ni
+recette HTTPS d'un environnement déployé ; cette partie de CA-14 reste à vérifier.
+La présence des consignes et du rappel visuel ne garantit pas l'obéissance d'une
+IA externe : aucune génération commerciale réelle n'a été soumise à recette.
+Les suites complètes de tous les domaines ne sont pas déclarées vertes : seules
+les suites listées ont été exécutées pour V1.2. Les avertissements observés concernent
+les adaptateurs datetime SQLite et les cycles de clés étrangères des fixtures
+historiques ; ils ne sont pas masqués. Ni commit, ni push, ni déploiement réalisés.
+
 L'implémentation locale du **29 septembre 2026** couvre le parcours ERP, le contrat
 JSON/WebP, la création en brouillon, les lecteurs Marketplace et la conservation.
 Les preuves réellement exécutées sont récapitulées dans le bilan ci-dessous ;
@@ -53,7 +122,61 @@ prestations, achats, médias partagés et marqueurs d'unicité ; vérifier le re
 des textes/contextes/images de travail orphelines et l'absence de recréation après
 purge. Un snapshot restauré conserve ses échéances passées, sans redémarrer 30 jours.
 
-## Suites et couches de vérification
+## Matrice V1.2 — preuves à produire
+
+Cette table conserve le plan de preuve ; les exécutions et limites réelles sont
+consignées dans le bilan V1.2 ci-dessous. Réutiliser les
+tests de domaine/API/HTTP PostgreSQL et navigateur Atelier existants en les étendant,
+sans remplacer leurs preuves V1.1. Les chemins désignent les suites à enrichir.
+
+| Critère | Propriétaire / preuves attendues | Contrat et guide | Démonstration / fixtures | Livraison |
+| --- | --- | --- | --- | --- |
+| CA-13 | Navigation : `tests/browser/atelier-assiste-erp.cjs`, accès par menu à 390/1280 px et clavier, une entrée Atelier, autres liens conservés ; flag/droit absent masque seulement Atelier | Capacité contexte, routes et guide PWA | ADMIN, EXPLOITATION avec/sans commune, profil refusé | Backend et assets ensemble ; garder anciens liens |
+| CA-14 | PWA : tests HTTP manifeste/icônes/SW publics neutres et scope ; recette réelle HTTPS installation puis lancement autonome sur Chrome/Edge desktop et Android, Safari iOS avec ajout écran d'accueil si disponible | Manifeste/installation facultative | Aucun compte fournisseur ; compte ERP de recette autorisé | Captures et navigateur/version ; indiquer les plateformes non testées, ne pas déduire installabilité du seul manifeste |
+| CA-15 | Navigateur + API : deep link, reload, ancien lien 303, login puis retour sûr, même ID/version, fiche ERP après succès | Routes/retour login | Préparation existante, créée, expirée, hors commune | Pas de nouvelle base ou copie locale |
+| CA-16 | `tests/integration/test_atelier_http_postgres.py` + navigateur : 401/403/404, retrait droits/flag, deux onglets et logout, retour arrière/bfcache/visibilité ; vérifier contenu masqué et aucune donnée protégée dans stockages/cache | Session/capacité et no-store | Profil révoqué après installation | Nouvelle entrée dans les gardes globaux ; aucune généralisation d'accès |
+| CA-17 | Navigateur réseau : panne initiale, panne avant envoi, réponse perdue après commit, update avec saisie non enregistrée ; une création, aucune file/rejeu automatique, aucun worker des autres apps perturbé | Worker et reprise idempotente | Réponses simulées/DB jetable, pas de prod | Vérifier refus réseau et scope réel sous HTTPS |
+| CA-18 | `tests/domain/test_preparation_coffret_assiste_dedicated.py` + application : somme 2500+4000+1500=8000, 10+20=30 centimes, ajout/retrait, doublon, 20 lignes dont hors pagination, zéro, null, négatif, dépassement plafond | AUTO, candidats éligibles avant budget | Prestations avec prix TTC distincts des reversements | Pas de migration SQL ; valider candidats plus chers que l'ancien prix |
+| CA-19 | Application/PostgreSQL/navigateur : MANUEL 7500 conservé après ajout, égalité manuelle au total, retour AUTO, sauvegarde/reprise, requêtes en retard et conflits entre onglets | Table des commandes et mode JSONB | Préparations sans mode, null et modes nouveaux | Ancien client/prix sans mode ; nouvel UI/backend compatible |
+| CA-20 | Domaine/API/HTTP : prix zéro/négatif refusé, budget insuffisant bloque prompt/import/création, total fourni en entrée refusé, rollback au commit, retry sans nouveau calcul/échéance, prix final exact | Contrat fermé et invariants I08/I09 | Budget juste/insuffisant et mode contradictoire | Rejouer CA-07/08 transaction/idempotence |
+| CA-21 | PostgreSQL : source modifiée avec/sans incrément de version, mutation concurrente, GET sans réécriture, actualisation explicite, anciens contextes toujours compatibles si faits stables ; aucun achat/coffret retarifé | Versions d'empreinte, historique et droits | JSONB V1.1/V1.2, source supprimée, CREEE nettoyée | Sauvegarde/restauration mixte ; rollback avec Atelier désactivé |
+| CA-22 | Domaine prompt : consigne présente avant/après données, intention « boîte cadeau » ne remplace pas les instructions, prestas seulement, pas de montants/contact ; V1 stocké inchangé, réémission V2/version empreinte2 | Template V2, JSON réponse V1 inchangé | Texte contradictoire, données libres, anciens prompts | Aucun appel IA réel obligatoire pour automatisation |
+| CA-23 | Navigateur : rappel expérience, relecture sans case ajoutée, nouvel import refusé conserve ancien aperçu, remplacement valide ; revue humaine d'images expérience/boîte et textes promettant un colis | Aide relecture et limites du contrôle WebP | Illustrations fictives métier ; ne pas utiliser le carré WebP technique comme preuve sémantique | Relecture humaine distincte du test de présence de consigne ; aucune conformité universelle IA annoncée |
+
+### Conditions de livraison V1.2
+
+La revue indépendante de contrat a relevé trois ambiguïtés corrigées dans la
+conception : invalidation limitée aux paramètres/sélection/mode, matérialisation
+transactionnelle des métadonnées à la première émission V2 historique, notification
+d'expiration du moniteur partagé. Ajouter explicitement aux tests CA-21 l'émission
+V2 directe d'une ancienne préparation sans mutation préalable et la modification
+de tarif sans incrément de version ; aux tests CA-16, un onglet visible laissé
+inactif jusqu'à échéance et un 401 du moniteur sans requête métier.
+Cette revue documentaire n'est pas une exécution de ces tests.
+
+1. Implémenter backend/règles/DTO/guards/login et module UI partagé ; étendre le
+   générateur OpenAPI puis régénérer son export avec les contrats réels.
+2. Exécuter les contrôles d'architecture obligatoires et les suites ciblées de la
+   table sur des fixtures locales, dont PostgreSQL pour concurrence/commit ;
+   tester le schéma V1.1 existant sans migration et la conservation des données.
+3. Livrer backend et assets de même révision avec activation Atelier maîtrisée.
+   Aucun nouveau secret ou fournisseur ; migrer v250 seulement sur une cible qui
+   ne l'a pas encore. Aucune intervention distante n'est autorisée par cette spec.
+4. Recetter sous HTTPS menu, connexion, installation, reprise, prix et prompt V2.
+   Les navigateurs non testés restent une limite explicite ; seules les preuves
+   réellement exécutées peuvent lever les réserves de livraison.
+5. Retour arrière : désactiver Atelier, conserver les préparations et résultats,
+   revenir à la révision précédente et vérifier refus des URL/API. Le worker
+   réseau ne garde pas de données ; ne pas réactiver les écritures de l'ancien
+   backend sur des préparations AUTO sans correctif de compatibilité.
+
+Impacts démo : fixtures et parcours de validation évoluent ; aucune nouvelle table
+dans le registre ni génération distante nécessaire. Marketplace, Commerçant,
+Animation et Live : contrats métier publics inchangés ; vérifier le prix canonique
+du coffret créé et l'absence de changement dans les achats existants. Les menus et
+connexions partagés ERP/Ops/Support/OnBoard/Control demandent une non-régression.
+
+## Suites et couches de vérification V1.1
 
 - Domaine pur : préparation, proposition, transitions, sélection, contexte, budget,
   statuts initiaux et unicité logique. Aucun ORM, FastAPI ou fournisseur dans les tests.

@@ -163,6 +163,14 @@
                     "minimum": 1,
                     "maximum": 99999999
                   },
+                  "mode_prix": {
+                    "type": "string",
+                    "enum": [
+                      "AUTO",
+                      "MANUEL"
+                    ],
+                    "description": "AUTO interdit toute clé prix_centimes, même null ; calcul serveur."
+                  },
                   "duree_validite_jours": {
                     "type": [
                       "integer",
@@ -330,6 +338,14 @@
                     ],
                     "minimum": 1,
                     "maximum": 99999999
+                  },
+                  "mode_prix": {
+                    "type": "string",
+                    "enum": [
+                      "AUTO",
+                      "MANUEL"
+                    ],
+                    "description": "AUTO interdit toute clé prix_centimes, même null ; calcul serveur."
                   },
                   "duree_validite_jours": {
                     "type": [

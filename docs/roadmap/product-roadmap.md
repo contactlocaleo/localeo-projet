@@ -55,11 +55,18 @@ Derniere evolution suivie :
   publication et contrôles métier existants conservés.
   Nom Localeo Atelier, contrat court, erreurs en français et reprise selon les
   droits ERP validés par l'utilisateur le 28 septembre 2026.
-  [Spécification V1.1 du 29 septembre](../specifications/epic-66-localeo-atelier/README.md)
+  [Spécification V1.2 du 29 septembre](../specifications/epic-66-localeo-atelier/README.md)
   disponible : contrat JSON, création atomique en brouillon, médias et adaptations
   Marketplace, douze critères reliés aux preuves prévues. Conservation validée à
   30 jours après dernière modification. Implémentation locale réalisée,
   validation en cours ; aucune clôture ni livraison d'environnement déclarée.
+  Extension `E66-PWA-20260929` : application PWA installable et lien dans le menu
+  Applications de l'ERP, cinq critères supplémentaires implémentés localement, recette appareils restante.
+  Précision `E66-PRIX-20260929` : prix TTC proposé par somme des prestations et
+  modifiable, quatre critères supplémentaires implémentés et testés localement.
+  Précision `E66-EXPERIENCE-20260929` : expliciter dans le prompt une expérience
+  multi-prestations sur place et exclure l'image d'un coffret matériel à recevoir ;
+  critères 22 et 23 implémentés ; tests du prompt et de l'aperçu, relecture humaine du résultat IA maintenue.
 
 - [Epic 65 — Vues ERP audit, paiements et reversements](a-faire/epic-65-vues-erp-audit-paiements-reversements-backlog.md) :
   cadrage du 26 septembre 2026 ; trois vues intégrées, recherche, filtres et détail,

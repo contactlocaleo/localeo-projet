@@ -65,7 +65,21 @@ refusé, même si le reste de la réponse est utilisable.
 
 ### Construction du prompt
 
-Template versionné `atelier-coffret-v1`, assemblé côté serveur :
+Template V1.1 implémenté `atelier-coffret-v1` ; cible V1.2
+`atelier-coffret-v2`, assemblée côté serveur. Le JSON de réponse conserve
+`schema_version: "1"` : seuls les instructions et le numéro du template évoluent.
+Les anciens prompts sauvegardés restent lisibles ; une réémission explicite crée
+un nouveau contexte V2 et invalide l'ancienne proposition. Ne pas remplacer le
+texte d'un contexte déjà émis dans un GET. L'absence de version de template dans
+un ancien contexte désigne V1 ; les nouvelles émissions stockent `template_version`.
+
+L'interface identifie un prompt historique V1 et propose **Actualiser le prompt**
+avant de le copier dans le nouveau parcours. Cette action avertit de l'invalidation
+de l'aperçu puis émet explicitement V2. La simple consultation de l'historique ne
+réécrit rien ; une réponse V1 déjà attendue reste importable si son contexte et
+ses sources sont valides, avec le rappel de relecture expérience dans l'aperçu.
+
+Contenu du template :
 
 1. Mission en français : proposer un coffret cohérent à partir des seules
    prestations sélectionnées, sans inventer bénéfice, certification ou engagement.
@@ -102,6 +116,26 @@ Le prompt est borné à **131 072 octets UTF-8**. En cas de dépassement, affich
 « La sélection contient trop de texte pour ce prompt » ; ne pas tronquer une
 condition importante d'une prestation ni supprimer silencieusement un élément.
 Les textes fournis sont délimités comme données et ne peuvent modifier le schéma.
+
+**Instruction normative V2**, présente avant les données et rappelée après leur
+bloc, à chaque génération (E66-CA-22) :
+
+> Le coffret Localeo n'est pas un objet physique : c'est une expérience composée
+> de plusieurs prestations à vivre sur place auprès des commerçants sélectionnés.
+> Ne représente pas de boîte, de coffret cadeau, de panier garni, de colis ou
+> d'emballage comme s'il s'agissait du produit vendu. Illustre l'expérience et
+> les activités réellement proposées par les prestations sélectionnées, avec une
+> scène ou une composition cohérente. N'invente pas d'activité, d'objet offert,
+> de livraison ou d'avantage absent de la sélection. Le titre, la description et
+> le texte alternatif doivent eux aussi présenter une expérience, sans promettre
+> un coffret matériel à recevoir.
+
+Les objets servant une prestation réelle (plat, outils, etc.) restent possibles.
+Les intentions/descriptions sont des données citées, jamais des instructions
+prioritaires ; le template précise de ne pas suivre leurs demandes contraires.
+Cela ne prouve pas l'obéissance d'une IA externe. Le contrôle sémantique du résultat
+reste la relecture de l'aperçu par l'opérateur, sans classifier d'image implicite.
+Le schéma JSON et son exemple technique ne changent pas pour cette exigence.
 
 ## API interne
 
@@ -277,7 +311,104 @@ Préserver les snapshots et documents des achats passés. Les sélecteurs de lot
 Animation, lecteurs Commerçant et Live doivent tolérer ces ajouts et conserver
 leurs données métier ; les contrats embarqués stricts sont à examiner avant release.
 
-## Contrat de conservation
+## Extensions V1.2 — prix et compatibilité HTTP
+
+Producteur : API interne Atelier ; consommateurs : module Atelier partagé ERP/PWA.
+Schémas canoniques documentaires : ce contrat et `openapi.json` généré par
+`scripts/documentation/generate_epic66_openapi.py` dans le backend. L'OpenAPI
+versionné a été régénéré hors ligne depuis le code V1.2 (neuf chemins).
+L'admission `PARAMS`, les schémas documentaires backend, le validateur de domaine,
+les DTO et le module UI ont été adaptés ensemble. Cet export couvre les routes
+métier Atelier ; les routes de présentation PWA restent décrites ci-dessous.
+
+POST/PATCH préparation acceptent le champ plat optionnel
+`mode_prix: "AUTO" | "MANUEL"` (null et valeurs inconnues refusés). Les bornes et
+le transport du `prix_centimes` existant restent inchangés. Les champs calculés
+`total_prestations_centimes` et `reference_prix` sont interdits en entrée.
+
+| Commande | Mode résolu / effet |
+| --- | --- |
+| POST sans mode ni prix, ou prix null | AUTO ; calcul depuis la sélection, prix null si préparation incomplète ou total non admissible. |
+| POST sans mode avec prix positif | MANUEL pour compatibilité avec l'ancien client ; ne pas écraser le prix fourni. |
+| POST/PATCH avec mode AUTO | `prix_centimes` doit être absent ; tout prix fourni, même null, donne 422. Calcul serveur depuis la sélection résultante. |
+| POST/PATCH avec mode MANUEL | Prix explicite positif ou null (brouillon incomplet) ; au PATCH, prix omis conserve le prix effectif existant. |
+| PATCH sans mode ni prix | Conserve le mode courant, MANUEL si historique. Si sélection change, actualise le total et, en AUTO seulement, le prix. |
+| PATCH sans mode avec prix présent | MANUEL, y compris null ; respecte l'intention de l'ancien client qui envoie un prix. |
+
+Le nouveau client AUTO omet toujours le prix calculé lorsqu'il renvoie une commande.
+Il envoie explicitement MANUEL lors d'une personnalisation, et AUTO sans prix
+pour **Utiliser le total des prestations**. Un corps contradictoire est refusé
+atomiquement (`422 ATELIER_MODE_PRIX_INVALIDE`). Le PATCH de sélection porte
+l'ensemble résultant, pas un delta ; les limites 20 et unicité demeurent.
+Un changement de commune confirmé vide la sélection comme auparavant : en AUTO,
+total 0/prix null ; en MANUEL, prix conservé mais progression bloquée sans sélection.
+
+Exemple de retour non nettoyé (champs additionnels, les autres champs restent présents) :
+
+```json
+{"mode_prix":"AUTO","prix_centimes":8000,"total_prestations_centimes":8000}
+```
+
+`total_prestations_centimes` est un entier >=0, ou null quand les sources ne sont
+pas évaluables. Le total peut dépasser le plafond du prix : aucun clamp. Les
+blocages expliquent `ATELIER_PRIX_NON_CALCULABLE` (tarif absent/invalide),
+`ATELIER_PRIX_HORS_LIMITES` (total nul ou trop élevé en AUTO), et le budget
+`ERP_BUDGET_EXCEEDED`. Ces blocages sont dérivés en lecture ; sauvegarder un état
+incomplet n'est pas une validation pour l'émission ou la création. Si une source
+invalide est soumise en mutation, réponse 422 sans écriture ; version périmée :
+409 `ATELIER_SOURCE_OBSOLETE`. Les DTO minimaux après nettoyage n'ajoutent pas
+de données de prix effacées. Les nouvelles clés de stockage sont explicitement
+filtrées de la projection, sans sérialisation générique du snapshot.
+
+La liste des candidats conserve son format mais `rattachable` exprime l'éligibilité
+de la source (pas le budget de l'ancien prix). Le budget de l'ensemble est présenté
+au niveau de la préparation et recontrôlé aux commandes finales. Le client n'a pas
+à augmenter artificiellement le prix pour pouvoir sélectionner une prestation.
+
+Concurrence et idempotence inchangées : expected_version, verrou de préparation,
+contrôle des sources et écriture atomique. Le hash de commande intègre le mode
+transmis. Une même clé/body rejoue le résultat, même clé/body différent donne 409.
+La relecture d'un résultat idempotent ancien peut ne pas contenir les champs
+additionnels : l'UI recharge le détail avant une nouvelle mutation.
+
+## Extensions V1.2 — routes PWA et capacité
+
+| Route GET | Contrat cible |
+| --- | --- |
+| `/internal/atelier/` | HTML dédié, session ERP + flag + capacité, `no-store`. |
+| `/internal/atelier/preparations/{id}` | Même shell et contrôles, UUID valide ; chargement détail soumis aux droits de commune. |
+| `/internal/erp/atelier` et `/internal/erp/atelier/preparations/{id}` | 303 vers la destination Atelier correspondante après contrôle ; `no-store`, aucun contenu dupliqué. |
+| `/internal/atelier/manifest.webmanifest` | Public, données statiques, MIME manifeste ; `id`, `start_url`, `scope` = `/internal/atelier/`, name/short_name = Localeo Atelier, display = standalone, lang = fr. |
+| `/internal/atelier/icons/{nom}` | Liste fermée de PNG 192 et 512 px, plus variante maskable 512 px testée ; pas de lecture de chemin libre. |
+| `/internal/atelier/sw.js` | Worker public neutre, JavaScript, `no-cache`, scope limité à `/internal/atelier/` sans en-tête élargissant ce scope. |
+
+Manifeste/icônes/SW ne portent aucune donnée d'environnement privée. Les ressources
+publiques restent disponibles flag désactivé pour une installation existante ;
+le shell et les API demeurent interdits. Les assets UI restent servis selon leur
+contrat actuel ; aucune extension générale des exceptions du middleware interne.
+Le chemin `/internal/atelier` sans slash redirige vers `/internal/atelier/`.
+
+Étendre de façon additive `GET /internal/erp/api/contexte` avec
+`applications.atelier: {disponible: boolean, url: "/internal/atelier/"}`,
+`Cache-Control: no-store`. `disponible` est vrai seulement si flag actif et capacité
+ERP autorisée avec au moins une commune pour EXPLOITATION. Conserver csrfToken,
+role et communes existants. Un profil refusé par ce contexte obtient toujours 403,
+pas un contexte plus permissif pour construire le menu. Le menu partagé exploite
+la même capacité ; un échec masque Atelier seul, les autres entrées restent intactes.
+
+La nouvelle URL doit être intégrée aux contrôles globaux avant les routes : une
+exception locale FastAPI ne suffit pas. Navigation anonyme : 303 login avec retour
+Atelier strictement validé selon l'architecture ; API anonyme : 401, aucun HTML.
+Session valide non autorisée : 403 ; flag inactif : 404 ; ressource hors commune :
+404 selon le contrat existant. L'ordre reste authentification, autorisation puis
+flag/données. Les anciennes URL appliquent les mêmes contrôles avant redirection.
+
+La PWA n'introduit pas de nouvel endpoint métier ni de file de synchronisation.
+Les routes API demeurent `/internal/commercialisation/atelier`, avec CSRF, Origin,
+no-store, admission bornée et idempotence. L'action finale ouvre le dossier ERP
+canonique ; elle ne transforme pas la PWA en parcours de publication.
+
+## Contrat de conservation (inchangé en V1.2)
 
 `POST /protected/commercialisation/batch/atelier/conserver` exige le scope
 `internal:batch`. Paramètres de query : `limit`, entier 1..500 (100 par défaut),

@@ -4,6 +4,10 @@
 
 ## Synthese
 
+### Évolution du 29 septembre 2026 — PWA-20260929
+
+L'installation de Live rejoint le header et conserve une aide Safari iOS ou navigateur Android. Le retour dans l'application vérifie les nouvelles versions ; le report d'une proposition conserve un bouton permettant de la retrouver. [Critères, impacts, preuves et limites communs aux sept PWA](../../specifications/installation-mise-a-jour-pwa.md). Cette évolution conserve la clôture historique de l'EPIC et la protection des saisies entre onglets.
+
 - Criticite : `Haute`
 - Statut : `Termine`
 - Objectif : creer une application grand public `Localeo Live` dediee aux utilisateurs finaux, distincte des surfaces internes et partenaires, pour decouvrir l'activite locale, suivre ses participations, ses coffrets, ses animations et recevoir des notifications utiles.
