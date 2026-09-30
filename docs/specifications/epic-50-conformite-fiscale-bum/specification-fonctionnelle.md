@@ -64,6 +64,48 @@ de prendre au niveau du coffret une decision motivee et historisee. Un
 diagnostic central interdit toute publication lorsque la qualification est
 absente, obsolete ou incompatible avec la politique BUM.
 
+**Correctif du 30 septembre 2026 — signal BUU potentiel.** Le diagnostic de
+prestation ne retourne pas `AUTO_ELIGIBLE` lorsque
+`lieu_imposition_connu_emission` et `tva_due_connue_emission` sont tous deux
+affirmatifs : `OUI` (casse/espaces normalisés) ou booléen JSON `true`.
+Il retourne `REVIEW_REQUIRED` avec le motif
+`POTENTIAL_SINGLE_PURPOSE:KNOWN_TAX_AND_PLACE`, même si la politique ne contient
+pas d'exclusion explicite. Ce contrôle appartient au domaine
+`conformite_fiscale_bum`, dans `evaluer_reponses_bum`.
+
+Les champs requis manquants et les exclusions `INELIGIBLE` de la politique
+conservent leur priorité ; les autres motifs de revue sont conservés. Un seul
+élément connu ne suffit pas à déclencher ce signal. Le diagnostic reste un
+screening : aucune qualification `SINGLE_PURPOSE`, suspension ou dépublication
+automatique n'en découle. La décision motivée de l'administrateur sur le coffret
+reste distincte.
+
+Le statut existe déjà et les motifs sont des chaînes : aucun changement de
+schéma API, de contrat embarqué des frontends ou de migration SQL. API interne,
+OnBoard et générateur de démonstration utilisent le même diagnostic. OnBoard
+affiche le résultat de revue ; les motifs détaillés restent accessibles dans
+la réponse API. Les anciens diagnostics persistés nécessitent un recalcul
+explicite ; les snapshots des décisions antérieures restent conservés.
+
+Preuves locales du correctif, backend de base `3252c72` avec modifications :
+reproduction avant correction (**5 échecs attendus, 15 succès**), puis **39 tests
+réussis** via `scripts/validation/test_isolated.py` sur
+`tests/domain/conformite_fiscale_bum/test_evaluation_bum.py`,
+`tests/application/conformite_fiscale_bum/test_diagnostic_bum.py`,
+`test_validation_bum_simplifiee.py`, `test_garde_bum.py` du même dossier et
+`tests/unit/test_demo_bum.py`. Ces preuves couvrent le domaine, la restitution
+et la mise à jour applicatives, la qualification manuelle conservée et la
+détection des diagnostics de démonstration devenus incohérents. Elles ne
+constituent ni un déploiement ni un recalcul en production.
+
+Contrôles complémentaires réussis : **427 tests d'architecture/recensement**
+via le runner isolé (`tests/architecture`,
+`tests/domain/test_domain_dedicated_classes.py`,
+`tests/application/use_cases/test_use_case_business_test_coverage.py`),
+revue indépendante sans écart bloquant, `check_guidance.py` (**89 guides,
+906 liens, aucune erreur**), `sync_documentation.py --check-sources`
+(**118 documents**) et `git diff --check` dans les deux dépôts.
+
 ### 5.2 Acquisition et documents
 
 Apres paiement, l'acheteur recoit un justificatif d'acquisition qui ne presente
