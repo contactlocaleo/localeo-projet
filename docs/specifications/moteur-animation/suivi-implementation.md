@@ -2,6 +2,46 @@
 
 Branche commune : `feat-moteur-animation`, dans les cinq dépôts indépendants. Source de vérité : [spécification](localeo_animation_engine_spec.md), [conception technique](conception-technique.md) et [documents d’entrée](contrats/README.md). Ce suivi distingue code local vérifié, fonctionnalités raccordées et recette avant ouverture.
 
+## 1er octobre 2026 — correctif du flyer dans le kit commerçant
+
+Le kit régénérait un flyer de mission à la place du flyer officiel téléchargé
+depuis Animation. Le correctif sépare les usages : `flyer-animation.pdf` reprend
+exactement les octets du PDF officiel courant, s’il est publié et diffusable
+dans `APPLICATION_COMMERCANT` ; la sélection commune à Animation n’effectue
+aucun repli vers un ancien PDF si le document courant n’est pas diffusable.
+`support-mission.pdf` existe uniquement pour un
+support public autorisé. `qr-lieu.pdf` et le mode opératoire privé sont conservés.
+Le fichier historique `flyer-joueurs.pdf` n’est plus produit.
+
+Avant publication ou sans flyer officiel disponible, le kit reste téléchargeable
+et le guide explique l’absence du PDF et invite à télécharger à nouveau après
+publication. Aucun aperçu privé n’est exposé. Chaque téléchargement relit la
+version courante ; une archive déjà téléchargée reste inchangée.
+
+Périmètre : backend et documentation canonique. Le contrat JSON reste inchangé,
+les interfaces consomment toujours le même téléchargement ZIP : aucune
+modification frontend n’est nécessaire. Aucune migration ni régénération du
+jeu de démonstration n’est requise, car le correctif assemble les documents
+existants à la lecture. La recette attendue est décrite dans
+[l’exploitation](exploitation-moteur.md#kit-commerçant-et-suivi-de-préparation--livraison-du-24-septembre-2026)
+et la [recette pilote](recette-pilote.md).
+
+Preuves locales sur le backend de base `9c937af` avec les modifications locales
+du correctif :
+
+| Contrôle | Résultat |
+| --- | --- |
+| Reproduction avant correction | Échec attendu sur l’absence de `flyer-animation.pdf` dans le ZIP. |
+| Tests backend ciblés | **41 réussis**. |
+| Architecture et flyer | **444 réussis**, **2 contrôles QA de décodage QR ignorés**, dépendance optionnelle `zxing-cpp` absente. |
+| Documentation | Guides et liens contrôlés : **956 liens**, aucune erreur ni avertissement ; **118 sources exportées** vérifiées. |
+| Consommateur Commerçant | **17 tests réussis** : `npm.cmd test -- src/features/animations/components/AnimationKitSection.test.jsx src/features/animations/flyerApi.test.js`. |
+| Diff backend | `git diff --check` réussi. |
+
+Total : **485 tests backend et 17 tests frontend réussis**. Les deux contrôles
+QA ignorés restent non exécutés. Aucun déploiement ni
+validation sur une cible réelle n’a été réalisé au titre de ce correctif.
+
 ## 26 septembre 2026 — E55-UX-12 : supports par responsable
 
 Évolution [E55-UX-12](conception-technique.md#e55-ux-12--supports-par-responsable-26-septembre-2026),
@@ -835,10 +875,12 @@ Le prompt Chasse `1.2` demande une mission, y compris dans son schéma exporté.
 Les anciens imports à deux alternatives restent acceptés et les prompts déjà
 persistés restent immuables. `supportAccessibleParQr: true` autorise explicitement
 le support joueur ; absence et false conservent les anciens supports privés.
-Le ZIP contient un mode opératoire HTML imprimable privé et un flyer PDF public,
+À cette date, le ZIP contient un mode opératoire HTML imprimable privé et un flyer PDF public,
 aux couleurs et illustration de la mission. Sans illustration narrative, le
 visuel Localeo existant est utilisé. L'application commerçant propose le kit dans
-les détails d'animation et d'invitation acceptée, Chasse comprise.
+les détails d'animation et d'invitation acceptée, Chasse comprise. Le correctif
+du 1er octobre 2026 décrit plus haut remplace ce flyer du kit par le PDF officiel
+et sépare le support de mission.
 
 La page publique limite son contenu au titre, texte autorisé et illustration de
 l'étape, sans créer de preuve de passage. Elle refuse les lectures avant

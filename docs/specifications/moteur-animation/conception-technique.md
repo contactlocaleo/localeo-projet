@@ -841,9 +841,19 @@ Les critères et preuves propres à cette évolution sont suivis ci-dessous.
   son absence conserve les anciens supports privés. Le QR de support reste distinct d’une
   preuve de présence : ouvrir une page ne valide pas une étape.
 - **E55-KIT-03 — Kit privé.** Un commerçant dont l’invitation courante est acceptée
-  télécharge depuis son application uniquement son kit : mode opératoire simple
-  et flyers imprimables utilisant la charte et l’illustration adaptées de
-  l’animation. Il peut préparer son commerce avant le lancement. Le guide indique
+  télécharge depuis son application uniquement son kit : mode opératoire simple,
+  flyer officiel de l’animation et supports de mission distincts. Depuis le
+  correctif du 1er octobre 2026, `flyer-animation.pdf` est la copie binaire exacte
+  du PDF officiel courant, s’il est publié et diffusable dans
+  `APPLICATION_COMMERCANT` ; le kit ne le régénère pas et ne se replie pas sur
+  une ancienne version si le document courant n’est pas diffusable.
+  `support-mission.pdf` est ajouté uniquement lorsqu’un
+  support public de mission est explicitement autorisé. Il peut préparer son
+  commerce avant le lancement : avant publication ou sans flyer officiel
+  disponible, le kit reste téléchargeable et le guide explique l’absence du
+  flyer et la nécessité de télécharger à nouveau après publication. Aucun
+  aperçu privé n’est inclus. Chaque téléchargement relit la version courante ;
+  les ZIP déjà téléchargés restent inchangés. Le guide indique
   quoi télécharger, imprimer, installer, tester et comment accueillir les joueurs.
   Les autres commerçants et utilisateurs anonymes ne peuvent pas lire ce kit.
   Le support joueur applique une projection explicite, sans publication du kit.
@@ -1115,9 +1125,11 @@ et conserve les supports des lieux publics à la charge du gestionnaire.
   nouvelle checklist ni attestation.
 - **E55-UX-12-B — Commerçant.** Accepter une mission Chasse prépare dans la même
   transaction son QR de lieu. Le kit fournit `qr-lieu.pdf` pour sa propre étape,
-  à scanner depuis Localeo Live. `flyer-joueurs.pdf` conserve son URL de support
-  public explicitement autorisé ou d’inscription. Le guide de mission reste privé.
-  Ces trois usages ne sont pas interchangeables. Télécharger plusieurs fois
+  à scanner depuis Localeo Live. Depuis le correctif du 1er octobre 2026,
+  `flyer-animation.pdf` reprend le flyer officiel d’inscription et
+  `support-mission.pdf` porte l’URL du support public explicitement autorisé,
+  lorsqu’il existe. Le guide de mission reste privé. Ces usages ne sont pas
+  interchangeables. Télécharger plusieurs fois
   réutilise le support valide ; cela ne confirme jamais « Je suis prêt ».
 - **E55-UX-12-C — Reprise.** Les accords historiques sans QR peuvent préparer
   leur support lors du clic « Télécharger mon kit », sans bouton technique
