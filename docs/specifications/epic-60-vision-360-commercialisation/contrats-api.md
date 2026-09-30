@@ -21,6 +21,45 @@ contenant des donnees sont Cache-Control: no-store.
 
 ## Routes de la version livree
 
+### Restauration des actions d'accès commerçant
+
+L'onglet **Accès** du dossier commerçant rétablit les quatre actions de l'ancienne
+fiche SQLAdmin, désormais redirigée vers l'ERP : initialiser l'accès, demander
+la réinitialisation, verrouiller et déverrouiller. Ces actions sont réservées à
+ADMIN ; EXPLOITATION peut consulter le dossier mais pas les accès ni leurs commandes.
+
+- GET `/internal/erp/api/commercants/{mid}/acces` expose le login, l'email de
+  contact, l'existence de l'accès, la configuration du mot de passe, le verrou,
+  ses date/motif, les tentatives échouées, la dernière connexion, la fin de
+  limitation LOGIN et une `version` opaque. Aucun mot de passe, hash, token ou
+  lien d'activation n'est exposé.
+- POST sur le même chemin exige `action` (`initialiser`, `reinitialiser`,
+  `verrouiller`, `deverrouiller`), `confirmation: "OUI"` et `expected_version`
+  (version opaque de la lecture). Les protections CSRF, origine, idempotence,
+  périmètre et transaction ERP s'appliquent. Réponse : `action`, `message`, `acces`.
+- L'initialisation utilise l'email de contact et peut aligner le login existant
+  sur cet email, selon le parcours historique. La réinitialisation recherche le
+  compte par son login existant et envoie le lien à l'email de contact du commerce.
+  Le destinataire est présenté avant confirmation. Les emails
+  passent par les use cases et l'outbox ordinaires, dans la transaction de la
+  commande et de son reçu d'idempotence.
+- Le verrouillage révoque aussi les sessions du commerçant. Le déverrouillage
+  remet à zéro les échecs du compte et ses fenêtres LOGIN actives, toutes IP,
+  sans toucher aux autres logins ni aux limites de demande de réinitialisation.
+  Aucun de ces deux gestes ne change le mot de passe ou le statut commercial.
+- Une reprise après réponse réseau incertaine réutilise la clé et le payload
+  initiaux ; les autres actions sont bloquées jusqu'à résolution. Une version
+  obsolète exige une nouvelle lecture avant une nouvelle commande.
+
+Correction de la perte des actions lors de la bascule ERP ; aucun changement
+des portails publics, contrats embarqués frontend ou données de démonstration.
+Aucune migration de schéma. Les contrôles ciblés se trouvent dans
+`tests/api/test_erp_acces_commercant.py`,
+`tests/application/identite_acces/test_gestion_acces_commercant_erp.py` et
+`tests/browser/acces-commercant-erp.cjs` du backend, complétés par les tests de domaine.
+
+### Autres routes
+
 Historique des modeles (migration `v226_historique_modeles_prestation.sql`) :
 
 - GET `/internal/erp/api/commercants/{mid}/modeles/{modele_id}/versions` :
