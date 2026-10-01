@@ -357,7 +357,7 @@ permettre de conserver temporairement une permission révoquée.
   préserver les protections des données personnelles ; les révélations aujourd'hui
   réservées à ADMIN doivent faire l'objet d'un arbitrage explicite, et non d'une
   exposition par le seul accès à un écran métier.
-- [EPIC 66 — Atelier](../en-cours/epic-66-localeo-atelier-coffrets-assistes-ia-backlog.md)
+- [EPIC 66 — Atelier](../terminees/epic-66-localeo-atelier-coffrets-assistes-ia-backlog.md)
   et [EPIC 67 — Communautés](../a-faire/epic-67-communautes-communes-coffrets-intercommunaux-backlog.md) :
   appliquer les capacités métier et les périmètres aux futurs parcours, sans
   rouvrir les règles de composition ou créer de droits intercommunaux implicites.

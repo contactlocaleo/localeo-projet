@@ -5,14 +5,16 @@
 ## Statut et sources
 
 Spécification V1.2 du **29 septembre 2026**, issue du
-[backlog EPIC 66](../../roadmap/en-cours/epic-66-localeo-atelier-coffrets-assistes-ia-backlog.md).
-État produit : **En cours**, selon la [roadmap](../../roadmap/README.md) :
-implémentation locale réalisée, validation en cours.
+[backlog EPIC 66](../../roadmap/terminees/epic-66-localeo-atelier-coffrets-assistes-ia-backlog.md).
+État produit : **Terminée le 1er octobre 2026**, selon la [roadmap](../../roadmap/README.md),
+après confirmation utilisateur du parcours complet et de l'installation/réouverture PWA.
+Cette clôture produit ne déclare pas les contrôles généraux de livraison réussis.
+Les bilans datés ci-dessous conservent leur contexte historique.
 Ce dossier décrit les comportements et leur mise en œuvre ; les preuves et limites
 de livraison sont tenues dans le [document de vérification](verification-livraison.md).
 
-**Extensions V1.2 implémentées localement, en validation :** le cadrage `E66-PWA-20260929` du
-[backlog](../../roadmap/en-cours/epic-66-localeo-atelier-coffrets-assistes-ia-backlog.md)
+**Extensions V1.2 (historique de validation du 29 septembre) :** le cadrage `E66-PWA-20260929` du
+[backlog](../../roadmap/terminees/epic-66-localeo-atelier-coffrets-assistes-ia-backlog.md)
 ajoute une application PWA Localeo Atelier et son entrée dans le menu Applications
 de l'ERP (E66-CA-13 à 17). Il fait évoluer la présentation intégrée décrite par
 E66-C04, tout en conservant le déploiement backend. La présente V1.1 et ses preuves

@@ -13,8 +13,8 @@ Sept EPIC sont classées à faire. Les bilans techniques et réserves de chaque 
 - [EPIC-MARKETPLACE-54 — Identité visuelle](epic-marketplace-54-harmonisation-identite-visuelle-marketplace-backlog.md)
 
 Les [EPIC 55](../en-cours/epic-55-chasse-tresor-commercante-backlog.md),
-[EPIC 65](../en-cours/epic-65-vues-erp-audit-paiements-reversements-backlog.md) et
-[EPIC 66](../en-cours/epic-66-localeo-atelier-coffrets-assistes-ia-backlog.md) sont en cours.
+[EPIC 65](../en-cours/epic-65-vues-erp-audit-paiements-reversements-backlog.md) sont en cours.
+L'[EPIC 66](../terminees/epic-66-localeo-atelier-coffrets-assistes-ia-backlog.md) est terminée depuis le 1er octobre 2026.
 
 ## Plans transverses
 

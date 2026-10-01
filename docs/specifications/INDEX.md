@@ -6,7 +6,7 @@ Commencer par le README du sujet, puis consulter ses règles, contrats et arbitr
 
 ## Priorités en cours et à cadrer
 
-- **En cours : EPIC 66**, [Localeo Atelier](epic-66-localeo-atelier/README.md), V1.2 du 29 septembre 2026 implémentée localement : PWA, prix AUTO/MANUEL et prompt expérience ; 23 critères avec traçabilité et limites de recette dans le bilan, aucun déploiement déclaré.
+- **Terminée : EPIC 66**, [Localeo Atelier](epic-66-localeo-atelier/README.md), V1.2 du 29 septembre 2026 implémentée localement : PWA, prix AUTO/MANUEL et prompt expérience ; 23 critères avec traçabilité, clôture produit confirmée le 1er octobre 2026 ; réserves techniques de livraison dans le bilan.
 - **En cours : EPIC 65**, [vues ERP audit, paiements et reversements](epic-65-vues-erp/README.md), spécification V1.4 du 1er octobre 2026 ; périmètre financier confirmé, implémentation locale ADMIN et bilan des tests ; dépendance aux profils E35 conservée.
 - **En cours : EPIC 55**, [moteur commun et chasse au trésor](moteur-animation/README.md).
 - **À faire :** [EPIC 54 — Calendrier de l'Avent](epic-54-calendrier-avent-local/README.md) et [EPIC 58 — Filtre annuel](epic-58-filtre-annuel-global/README.md).
@@ -46,7 +46,7 @@ Commencer par le README du sujet, puis consulter ses règles, contrats et arbitr
 | 60 | [Vision 360 Commercialisation](epic-60-vision-360-commercialisation/README.md) | Terminée | Backend |
 | 63 | [Démonstrations communes](epic-63-demonstrations-communes/README.md) | Terminée | Backend et trois interfaces |
 | 65 | [Vues ERP audit, paiements et reversements](epic-65-vues-erp/README.md) | En cours | Backend ERP |
-| 66 | [Localeo Atelier — Coffrets assistés par IA](epic-66-localeo-atelier/README.md) | En cours | Backend ERP/PWA/DAM, Marketplace et contrats partagés |
+| 66 | [Localeo Atelier — Coffrets assistés par IA](epic-66-localeo-atelier/README.md) | Terminée | Backend ERP/PWA/DAM, Marketplace et contrats partagés |
 
 ## Contrats et historique
 

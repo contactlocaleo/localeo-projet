@@ -2,15 +2,15 @@
 
 ## État global consolidé au 1er octobre 2026
 
-Le tronc commun comprend 68 identifiants : 56 epics terminees, 6 a faire,
-3 en cours, 2 abandonnees et 1 fusionnee. L'Epic 61 est absorbee par l'Epic 60.
+Le tronc commun comprend 68 identifiants : 57 epics terminees, 6 a faire,
+2 en cours, 2 abandonnees et 1 fusionnee. L'Epic 61 est absorbee par l'Epic 60.
 Les documents sont ranges par etat dans l'[index de la roadmap](README.md).
 
 | Etat | Epics |
 | --- | --- |
 | A faire | `EPIC-54`, `EPIC-58`, `EPIC-62`, `EPIC-64`, `EPIC-67`, `EPIC-68` |
-| En cours | `EPIC-55`, `EPIC-65`, `EPIC-66` |
-| Termine | 56 epics : toutes les autres epics de `EPIC-01` a `EPIC-60`, et `EPIC-63`, hors `EPIC-05` et `EPIC-12` |
+| En cours | `EPIC-55`, `EPIC-65` |
+| Termine | 57 epics : toutes les autres epics de `EPIC-01` a `EPIC-60`, et `EPIC-63`/`EPIC-66`, hors `EPIC-05` et `EPIC-12` |
 | Abandonne | `EPIC-05` : QR commercant remplace par l'Epic 10 ; `EPIC-12` : flux manuel decommissionne par l'Epic 39 |
 | Fusionnee | `EPIC-61` dans `EPIC-60` ; non comptee comme terminee |
 
@@ -23,7 +23,7 @@ un seul fichier par sujet. Trois identifiants applicatifs complètent ce tronc :
 | [EPIC-MARKETPLACE-54](a-faire/epic-marketplace-54-harmonisation-identite-visuelle-marketplace-backlog.md) | Identité visuelle ; distinct du calendrier de l'Avent 54 | À faire (classement courant ; implémentation locale documentée, revue et recette attendues) |
 | [EPIC-PRES-CONTENU-001](terminees/epic-animation-edition-prestations.md) | Édition directe des prestations ; le futur sas reste dans l'EPIC 62 | Terminée (parcours existant) |
 
-Le total consolidé est de **71 identifiants : 58 terminés, 7 à faire, 3 en cours,
+Le total consolidé est de **71 identifiants : 59 terminés, 7 à faire, 2 en cours,
 2 abandonnés et 1 fusionné**. L'ancien numéro local Marketplace 53 (pagination)
 est rattaché à l'EPIC 57, sans ajouter d'identifiant ni le confondre avec la tombola.
 
@@ -53,7 +53,7 @@ Derniere evolution suivie :
   territoriaux explicites et conservation des achats existants. Extension du
   parcours IA d'Atelier portée ici ; quatorze critères, spécification à réaliser.
 
-- [Epic 66 — Localeo Atelier : coffrets assistés par IA](en-cours/epic-66-localeo-atelier-coffrets-assistes-ia-backlog.md) :
+- [Epic 66 — Localeo Atelier : coffrets assistés par IA](terminees/epic-66-localeo-atelier-coffrets-assistes-ia-backlog.md) :
   cadrage du 28 septembre 2026 ; sélection de prestations d'une commune, prompt
   copiable pour une IA externe, réponse normalisée, aperçu et création automatique
   d'un coffret brouillon après validation. Le même prompt produit l'image WebP
@@ -65,9 +65,11 @@ Derniere evolution suivie :
   disponible : contrat JSON, création atomique en brouillon, médias et adaptations
   Marketplace, douze critères reliés aux preuves prévues. Conservation validée à
   30 jours après dernière modification. Implémentation locale réalisée,
-  validation en cours ; aucune clôture ni livraison d'environnement déclarée.
+  clôture produit confirmée le 1er octobre 2026 après recette déclarée par l'utilisateur ;
+  contrôles techniques de livraison et réserves distincts dans le bilan.
   Extension `E66-PWA-20260929` : application PWA installable et lien dans le menu
-  Applications de l'ERP, cinq critères supplémentaires implémentés localement, recette appareils restante.
+  Applications de l'ERP, cinq critères supplémentaires ; installation/réouverture
+  confirmées par l'utilisateur, appareils et environnement non précisés.
   Précision `E66-PRIX-20260929` : prix TTC proposé par somme des prestations et
   modifiable, quatre critères supplémentaires implémentés et testés localement.
   Précision `E66-EXPERIENCE-20260929` : expliciter dans le prompt une expérience

@@ -2,6 +2,127 @@
 
 [Spécification V1](README.md) · [Architecture](architecture.md) · [Contrats](contrats.md)
 
+## Clôture produit et préparation de livraison — 1er octobre 2026
+
+**EPIC 66 terminée côté produit**, à la demande de l'utilisateur, après son « oui »
+à la confirmation du parcours complet Atelier (création et affichage Marketplace)
+et de l'installation puis réouverture de la PWA. L'environnement, les navigateurs,
+les appareils et les références des coffrets de recette n'ont pas été précisés.
+Cette déclaration opérateur n'est pas une observation directe de l'agent et ne
+prouve pas une recette de toutes les plateformes ni une version déployée donnée.
+
+La clôture est enregistrée dans le [backlog canonique](../../roadmap/terminees/epic-66-localeo-atelier-coffrets-assistes-ia-backlog.md).
+Les bilans du 29 septembre ci-dessous restent historiques. Les réserves techniques
+de livraison demeurent ouvertes : le manifeste automatique est **`blocked`**,
+et aucun déploiement, commit ou push n'est effectué dans cette préparation.
+
+### Versions examinées
+
+Les cinq arbres étaient propres avant les contrôles. Seule la documentation de
+clôture est modifiée ensuite ; les preuves métier concernent les SHAs ci-dessous.
+La référence de la précédente livraison d'environnement n'est pas connue : aucune
+comparaison avec la version réellement déployée n'est déclarée.
+
+| Dépôt | SHA complet |
+| --- | --- |
+| Projet | `6beb93fa5349393c603249e66411472ce117089c` |
+| Backend | `d1a16e82ff5ee037a8a6bff324d9bf87cd7cdd74` |
+| Marketplace | `4e948f1f52ffb86a3bf992e015ce6107daae6545` |
+| Commerçant | `38ff5ad32b1a4231de432d61474b00eb71cbf9c8` |
+| Animation | `cac5eb431b3d8a8a18bc1311635f4f2f9e78c27c` |
+
+### Preuves renouvelées
+
+- **621 tests backend réussis**, aucun ignoré, 64,01 s : commande de consolidation
+  V1.2 ci-dessous exécutée sur le SHA courant. 134 avertissements de dépréciation
+  de l'adaptateur datetime SQLite, conservés dans le résultat.
+- **24 tests PostgreSQL réussis**, aucun ignoré, 292,61 s : assemblage (6),
+  conservation (7), prix (4), HTTP (7). Les quatre fichiers sont
+  `test_atelier_assiste_postgres.py`, `test_atelier_conservation_postgres.py`,
+  `test_atelier_prix_postgres.py` et `test_atelier_http_postgres.py`, sous
+  `tests/integration/`, via `scripts/validation/test_isolated.py` avec
+  `--postgres-test-url postgresql+psycopg://audit_test@127.0.0.1:55465/localeo_audit_test`.
+  PostgreSQL 18 jetable, schémas synthétiques, instance arrêtée après exécution.
+  26 avertissements : 24 cycles de clés étrangères de fixture et 2 dépréciations
+  de `datetime.utcnow()` ; aucun contournement ajouté.
+- **Trois scripts navigateur backend réussis** : `atelier-assiste-erp.cjs`,
+  `atelier-prix.cjs`, `atelier-pwa.cjs`, sous `tests/browser/`, lancés par `node`.
+  Largeurs 1280/390 px, réponses métier simulées, worker loopback réel ; cela ne
+  constitue pas une nouvelle installation OS ni une recette distante.
+- **Trois scénarios visuels Marketplace réussis**, 24,5 s, sortie normale :
+  `node node_modules/@playwright/test/cli.js test --config=playwright.desktop.config.cjs tests/visual/coffret-editorial.spec.cjs`.
+  Cette exécution lève la réserve de terminaison du runner signalée le 29 septembre.
+- Bundle documentaire local construit et vérifié : **118 sources exportées**,
+  **119 documents distribués avec le manifeste**. Empreinte du snapshot dans le
+  manifeste de préparation ; les sorties restent sous `.artifacts/quality/`,
+  hors Git. Les contrôles documentaires sont renouvelés après la clôture.
+
+Revue indépendante en lecture du code et des preuves : aucun défaut bloquant
+d'Atelier identifié. CA-14 s'appuie désormais sur la déclaration utilisateur,
+sans matrice d'appareils. Pour CA-23, le prompt expérience et l'aide de relecture
+sont testés ; les fixtures techniques ne prouvent pas le sens d'une image.
+La confirmation du parcours ne constitue pas une preuve séparée de comparaison
+de visuels « expérience » / « boîte ». Cette limite reste visible, et la relecture
+humaine demeure nécessaire pour chaque proposition IA avant création.
+
+### Contrôles généraux de livraison et blocages conservés
+
+`python scripts/quality.py run --profile workspace` : **17 contrôles réussis sur
+21**, quatre en échec. Le rapport conserve leurs codes de sortie :
+
+| Contrôle | Constat |
+| --- | --- |
+| `backend-tests` | Collecte interrompue par trois noms de modules présents à la fois sous `tests/integration/` et `tests/security/` : `test_coffret_rate_limit`, `test_consultation_link_exchange`, `test_qr_revocation`. Trois tests ignorés lors de cette collecte ne valent pas réussite. |
+| `marketplace-lint` | `EPERM` sur le dossier local `output/bum-politique/pytest-approval-1`. |
+| `marketplace-security` | Empreintes des contrats moteur différentes dans l'arbre Windows. Vérification indépendante : les 198 entrées divergentes correspondent aux blobs Git HEAD et après normalisation CRLF vers LF. Aucun manifeste ni assertion modifié pour masquer l'échec. |
+| `commercant-tests` | 376 tests réussis, un échec d'empreinte moteur. Même vérification des 198 entrées : blobs HEAD conformes, divergence locale CRLF/LF. |
+
+Les builds des trois frontends passent ; Animation compte 169 tests réussis et
+ses contrôles de types/lint passent. Le profil documentaire comprend un test
+ignoré, conservé explicitement comme tel. Ces résultats ne rendent pas le profil
+workspace globalement vert et ne remplacent pas la recette cible.
+
+Artefacts de travail : `epic66-20261001-workspace.json`,
+`epic66-20261001-release.json` et dossier `epic66-20261001-documentation`, dans
+`.artifacts/quality/` du projet. Le manifeste est produit par :
+
+```console
+python scripts/quality.py release --report .artifacts/quality/epic66-20261001-workspace.json --bundle .artifacts/quality/epic66-20261001-documentation --output .artifacts/quality/epic66-20261001-release.json
+```
+
+Après la mise à jour documentaire de clôture, le projet est non committé : le
+manifeste renouvelé conserve aussi cette limite de fraîcheur. Il faudra enregistrer
+la documentation, résoudre les contrôles en échec et renouveler les preuves avant
+de déclarer le dossier `prepared_for_review`.
+
+### Conditions opérationnelles maintenues
+
+- Backend et assets Atelier ensemble ; lecteurs Marketplace compatibles avant
+  ouverture. Aucun changement applicatif effectué dans cette préparation.
+- Migration `v250_localeo_atelier.sql` inchangée depuis `a28592d` ; checksum SHA-256
+  normalisé selon le migrateur :
+  `b43c591e5a57788b6179518795c1bcdb1b1b8ada086f3e004b7a1c78c78eacd2`.
+  Sa présence et son checksum sur cible restent à contrôler selon la
+  [procédure schéma](../../exploitation/technique/deployer-et-verifier-schema.md).
+- Configurations à contrôler, sans valeurs privées :
+  `LOCALEO_FEATURE_ATELIER_COFFRETS_ENABLED`, `LOCALEO_SCHEDULER_ENABLED`,
+  `LOCALEO_DOCUMENTATION_ROOT`. Pas de nouveau fournisseur ni secret IA.
+  Le build autonome doit utiliser la révision documentaire choisie explicitement
+  (`prepare_documentation.py --revision <SHA-complet>`), ou le bundle préparé et vérifié.
+- Profil `demonstration` planifié dans `epic66-20261001-demonstration-plan.json` ;
+  transfert/restauration intégral du générateur non réexécuté dans cette passe.
+  Aucun jeu ni environnement régénéré. Les tests PostgreSQL Atelier renouvellent
+  la preuve de conservation et de roundtrip des préparations, sans valoir recette
+  complète du générateur ni restauration d'exploitation.
+- Avant livraison : sauvegarde et restauration adaptées à la cible, migrations
+  puis readiness ; arrêter en cas de checksum différent ou de lecture indisponible.
+  Contrôler ensuite droits, brouillon créé, prix, contenu Marketplace, reprise PWA
+  et ordonnanceur de conservation. Leurs reçus opérateur restent à renseigner.
+- Reprise : désactiver Atelier, conserver préparations, coffrets et sentinelles ;
+  ne pas supprimer v250 ni réactiver les écritures d'un ancien backend sur des
+  préparations AUTO sans compatibilité vérifiée. Voir le
+  [guide d'activation et de conservation](../../exploitation/technique/localeo-atelier.md).
+
 ## État des preuves
 
 **V1.2 du 29 septembre : implémentation locale.** PWA, prix AUTO/MANUEL et

@@ -1,5 +1,19 @@
 # EPIC 66 — Localeo Atelier : composer des coffrets avec l'aide de l'IA
 
+## Clôture produit — 1er octobre 2026
+
+Clôture demandée par l'utilisateur, qui confirme ensuite avoir validé le parcours
+complet Atelier (création du coffret et affichage Marketplace) ainsi que
+l'installation et la réouverture de la PWA. Environnement, navigateurs et appareils
+non précisés ; aucune couverture de toutes les plateformes n'est déduite de ce « oui ».
+
+Le [bilan de livraison](../../specifications/epic-66-localeo-atelier/verification-livraison.md)
+distingue cette acceptation produit, les preuves locales renouvelées et les blocages
+techniques du profil workspace. Aucun nouveau déploiement n'est réalisé lors de
+cette clôture. La relecture du sens des images reste humaine et nécessaire à chaque
+proposition ; aucun contrôle automatique de conformité visuelle n'est revendiqué.
+Les références et extensions datées ci-dessous conservent leur état historique.
+
 ## Références
 
 Évolution complémentaire `PWA-20260929` : [installation dans le header et mise à jour explicite](../../specifications/installation-mise-a-jour-pwa.md). Ses critères et preuves sont transverses aux sept applications ; elle ne clôture pas l'EPIC 66.
@@ -7,7 +21,7 @@
 - Date de cadrage : **28 septembre 2026**.
 - Identifiant : **EPIC-66**, disponible après recherche dans la roadmap commune,
   les namespaces applicatifs et les index documentaires des dépôts voisins.
-- État produit : **En cours**, selon la [roadmap commune](../README.md).
+- État produit : **Terminée le 1er octobre 2026**, selon la [roadmap commune](../README.md).
 - Demande : une application du backoffice pour sélectionner une commune et des
   prestations, générer un prompt IA, puis coller une réponse normalisée pour créer
   le coffret avec son contenu éditorial et sa vignette.

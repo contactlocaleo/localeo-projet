@@ -18,7 +18,7 @@ de l'[EPIC 60 — ERP et commercialisation](../terminees/epic-60-vision-360-comm
 et de l'[EPIC 52 — Accueil contextualisé](../terminees/epic-52-accueil-marketplace-geolocalise-backlog.md),
 dont les états restent inchangés. Réutiliser leurs parcours, règles et projections.
 
-L'[EPIC 66 — Localeo Atelier](../en-cours/epic-66-localeo-atelier-coffrets-assistes-ia-backlog.md)
+L'[EPIC 66 — Localeo Atelier](../terminees/epic-66-localeo-atelier-coffrets-assistes-ia-backlog.md)
 cadre une première composition communale avec prompt IA externe. **L'EPIC 67 porte
 son extension intercommunale** : choix d'une communauté, sélection de ses
 prestations, contexte du prompt et validation du retour. L'initialisation du
