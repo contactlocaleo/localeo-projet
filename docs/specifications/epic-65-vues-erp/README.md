@@ -2,7 +2,7 @@
 
 ## Statut et périmètre
 
-Spécification V1 du **26 septembre 2026**, revue V1.1 le **27 septembre 2026**, issue du
+Spécification V1 du **26 septembre 2026**, revue **V1.2 le 30 septembre 2026**, issue du
 [backlog EPIC 65](../../roadmap/a-faire/epic-65-vues-erp-audit-paiements-reversements-backlog.md).
 État produit : **À faire**, selon la [roadmap](../../roadmap/README.md).
 Ce dossier décrit une cible à implémenter ; aucune route nouvelle, migration
@@ -26,8 +26,9 @@ frontends ne consomment pas ces nouveaux écrans ni leurs API internes.
 demande une lecture métier pour Lecteur et des droits métier complets pour
 Backoffice, sans technique/exploitation. Elle nécessite de réviser `E65-D02`
 pour les paiements/reversements, avec Audit global proposé comme Admin seul.
-Ce changement reste à spécifier et implémenter ; la matrice et les tests de
-refus de la présente V1.1 ne constituent pas les preuves de cette nouvelle cible.
+Ce changement reste à spécifier et implémenter dans E35 ; la V1.2 conserve
+le socle ADMIN et explicite ci-dessous les conditions de livraison combinée.
+Les tests de refus de ce socle ne constituent pas les preuves des nouveaux profils.
 
 | Référence | Décision ou hypothèse | Conséquence |
 | --- | --- | --- |
@@ -44,11 +45,36 @@ ce périmètre conservateur. Une demande d’agrégation des abonnements ou d’
 intégrées doit compléter ses contrats avant d’implémenter ces extensions ; elle
 n’empêche pas de préparer Audit et les composants de lecture communs.
 
+### Dépendance aux profils E35
+
+| Surface | Livraison E65 autonome | Cible combinée E35 / E65 |
+| --- | --- | --- |
+| Audit global, recherche et détail | ADMIN | Admin seulement |
+| Paiements, reversements, synthèses et sections métier | ADMIN | Lecteur, Backoffice et Admin dans leur périmètre effectif |
+| Liens vers actions financières existantes | ADMIN, droits actuels de la destination | Backoffice/Admin vers un parcours métier habilité ; aucun lien de commande pour Lecteur |
+| Console historique mixte, références techniques et révélations personnelles | Droits ADMIN existants | Ne pas ouvrir la console ou les champs techniques par le seul droit de lecture métier ; classification et masquage portés par E35 |
+
+La colonne combinée reprend `E35-PROF-11`, sans créer dès maintenant des rôles
+acceptés par les routes. Avant son activation, E35 doit définir la politique
+de capacités, le périmètre de chaque projection et des totaux, les champs
+autorisés et la réévaluation des sessions. Le contrôle s'applique aussi aux
+sections, pièces et liens directs, avant chargement. Les tests futurs doivent
+prouver à la fois l'accès métier et les refus techniques, ainsi que la révocation.
+L'ouverture financière est bloquée tant que ces conditions ne sont pas remplies ;
+la conception et l'implémentation du socle ADMIN restent indépendantes.
+
 ## Existant vérifié
 
 Constat initial sur le backend `7049de7`, documentation de base `631fd10` avec
 cadrage local ; revue ciblée sur le backend `eec63d2` et le projet `696d487`.
 Ce constat ne prouve pas l’état déployé.
+
+Relecture V1.2 : backend `3252c72`, projet `484f10d` avant les modifications
+documentaires de cette tâche. Les raccourcis SQLAdmin, le garde ERP
+ADMIN/EXPLOITATION et la politique ADMIN des interfaces historiques sont
+toujours présents. Les nouvelles routes E65 ne sont pas déclarées dans le code
+examiné. Le fichier de suivi des environnements, déjà modifié localement, reste
+hors de cette intervention.
 
 | Surface | Code existant | Écart à traiter |
 | --- | --- | --- |
@@ -56,7 +82,7 @@ Ce constat ne prouve pas l’état déployé.
 | Audit | `EvenementAuditOrm`, repository `EvenementAuditRepositorySqlAlchemy`, `EvenementAuditAdmin` | Lecture seule existante, mais `lister(limit=200)` ne fournit pas une recherche globale filtrée/paginée. Des écritures ORM directes imposent d’assainir aussi les données historiques à la lecture. |
 | Paiements | `PaiementOrm`, `PaiementAdmin`, `ServiceVision360Achats._payment_payload` et `.paiements` | Recherche globale paginée absente ; mapping des états/montants et racine achat/commande déjà disponible. `date_creation` n’est pas une date d’encaissement. |
 | Reversements | `_build_reversements_360_data`, console `/internal/reversements/vue-360`, API finance | Suivi métier existant, à extraire en projection réutilisable ; le rendu HTML et ses agrégats actuels ne constituent pas un contrat paginé à copier dans l’ERP. |
-| Facturation | Documents consultés par achat enfant, dossiers de facturation existants | Aucune relation directe pièce→paiement à inventer ; un achat racine peut avoir plusieurs achats enfants. Générer un reçu est une commande, exclue des lectures. |
+| Facturation | Traces consultées par achat enfant, dossiers de facturation existants | La page actuelle n'atteste pas la disponibilité d'un fichier et contient un lien GET vers un reçu généré seulement en POST. Corriger ce lien dans le parcours réutilisé ; distinguer trace et téléchargement. Aucune relation directe pièce→paiement à inventer. |
 
 Sources applicatives dans le [backend](../../../../localeo-backend/README.md) ;
 les correspondances et frontières sont précisées dans l’architecture.
@@ -67,6 +93,11 @@ et ne pas réduire plusieurs paiements au dernier paiement d’un achat. Elle
 précise aussi la sélection commune des paiements directs et des achats enfants
 dans la Vision 360 Achats, les couples de filtres de campagne et les tris des sections.
 Les dix critères d’acceptation, les droits et les exclusions restent conservés.
+
+La revue V1.2 précise les refus HTTP, la pagination sur un jeu stable,
+l'assainissement des chemins d'audit et les liens documentaires réellement
+consultables. Elle ne transforme ni les hypothèses H01/H02 ni l'évolution E35
+en fonctionnalités livrées.
 
 ## Parcours commun — E65-CA-01, 07, 08, 09, 10
 
@@ -148,7 +179,9 @@ Le détail sépare trois zones :
    nette estimée ; état/date de synchronisation et incident assaini. Une valeur
    inconnue est indiquée comme telle, jamais remplacée par zéro.
 3. **Pièces et facturation** : achats enfants concernés et liens vers leurs
-   documents et demandes existants. Aucun reçu, facture ou remboursement n’est
+   dossiers de traces, documents effectivement disponibles et demandes existantes.
+   Une trace seule est libellée « Trace disponible, téléchargement indisponible » ;
+   une erreur de lecture n'est pas une absence de pièce. Aucun reçu, facture ou remboursement n’est
    généré au chargement ; les anciennes routes supprimées, dont `pack.zip`, ne
    sont pas proposées.
 

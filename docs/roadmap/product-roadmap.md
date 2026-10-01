@@ -1,14 +1,14 @@
 # Roadmap produit
 
-## État global consolidé au 29 septembre 2026
+## État global consolidé au 30 septembre 2026
 
-Le tronc commun comprend 67 identifiants : 56 epics terminees, 6 a faire,
+Le tronc commun comprend 68 identifiants : 56 epics terminees, 7 a faire,
 2 en cours, 2 abandonnees et 1 fusionnee. L'Epic 61 est absorbee par l'Epic 60.
 Les documents sont ranges par etat dans l'[index de la roadmap](README.md).
 
 | Etat | Epics |
 | --- | --- |
-| A faire | `EPIC-54`, `EPIC-58`, `EPIC-62`, `EPIC-64`, `EPIC-65`, `EPIC-67` |
+| A faire | `EPIC-54`, `EPIC-58`, `EPIC-62`, `EPIC-64`, `EPIC-65`, `EPIC-67`, `EPIC-68` |
 | En cours | `EPIC-55`, `EPIC-66` |
 | Termine | 56 epics : toutes les autres epics de `EPIC-01` a `EPIC-60`, et `EPIC-63`, hors `EPIC-05` et `EPIC-12` |
 | Abandonne | `EPIC-05` : QR commercant remplace par l'Epic 10 ; `EPIC-12` : flux manuel decommissionne par l'Epic 39 |
@@ -23,7 +23,7 @@ un seul fichier par sujet. Trois identifiants applicatifs complètent ce tronc :
 | [EPIC-MARKETPLACE-54](a-faire/epic-marketplace-54-harmonisation-identite-visuelle-marketplace-backlog.md) | Identité visuelle ; distinct du calendrier de l'Avent 54 | À faire (classement courant ; implémentation locale documentée, revue et recette attendues) |
 | [EPIC-PRES-CONTENU-001](terminees/epic-animation-edition-prestations.md) | Édition directe des prestations ; le futur sas reste dans l'EPIC 62 | Terminée (parcours existant) |
 
-Le total consolidé est de **70 identifiants : 58 terminés, 7 à faire, 2 en cours,
+Le total consolidé est de **71 identifiants : 58 terminés, 8 à faire, 2 en cours,
 2 abandonnés et 1 fusionné**. L'ancien numéro local Marketplace 53 (pagination)
 est rattaché à l'EPIC 57, sans ajouter d'identifiant ni le confondre avec la tombola.
 
@@ -35,6 +35,12 @@ Le classement du 15 septembre corrige les anciens libelles globaux des Epics
 la confirmation produit de l'utilisateur le 15 septembre 2026.
 
 Derniere evolution suivie :
+
+- [Epic 68 — Parcours commerçant de préparation et finalisation de l'onboarding](a-faire/epic-68-parcours-commercant-preparation-onboarding-backlog.md) :
+  cadrage du 30 septembre 2026 ; préparation partagée avant le rendez-vous d'une
+  heure, pédagogie Stripe, documents et lecture du contrat, examen des prestations,
+  confirmation de réception et boucle questions, prise en main et suivi. Dix-sept
+  critères ; J−7 et quatre phases proposés, délais et déroulé à arbitrer.
 
 - [Epic 35 — Profils Lecteur, Backoffice et Admin](terminees/epic-35-profils-backoffice-differencies-backlog.md) :
   évolution `E35-PROFILS-20260928`, treize critères ; lecture métier, gestion métier

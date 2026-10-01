@@ -8,7 +8,7 @@
 - État produit : **À faire**, selon la [roadmap commune](../README.md).
 - Demande : disposer dans Localeo ERP d’une vue des événements d’audit et de
   deux vues de suivi, « Paiements » et « Reversements », sous « Paiements et facturation ».
-- Phase réalisée : **cadrage et spécification V1.1**, revue le 27 septembre 2026 ; voir le
+- Phase réalisée : **cadrage et spécification V1.2**, revue le 30 septembre 2026 ; voir le
   [dossier canonique](../../specifications/epic-65-vues-erp/README.md).
   Aucune implémentation livrée. Priorité et date de livraison non fixées.
 
@@ -20,7 +20,9 @@ cadre Lecteur, Backoffice et Admin. Elle porte l'ouverture des lectures métier
 paiements/reversements aux deux profils métier, avec Audit global proposé comme
 réservé à Admin. La règle ADMIN exclusive de la spécification V1.1 reste la
 référence de cette version ; sa révision, ses contrats et preuves sont à traiter
-dans la spécification de l'évolution EPIC 35 avant livraison combinée.
+dans la spécification de l'évolution EPIC 35 avant livraison combinée. La V1.2
+E65 conserve ce socle ADMIN et précise les conditions de cette dépendance,
+sans déclarer l'évolution des profils disponible.
 
 L’[EPIC 60](../terminees/epic-60-vision-360-commercialisation-backlog.md) fournit
 le socle ERP, sa navigation et les ateliers de référencement/commercialisation.
@@ -57,6 +59,11 @@ Les listes Audit, Paiements et Reversements sont déjà en lecture seule. La vue
 paiements porte `PaiementOrm`, relié aux achats et commandes ; une projection
 de paiements par achat existe dans la Vision 360 Achats. Aucun moteur financier
 nouveau n’est nécessaire. Ce constat ne constitue pas une recette de l’environnement déployé.
+
+Revue du 30 septembre : raccourcis et gardes confirmés sur backend `3252c72`,
+projet `484f10d`. La V1.2 précise les lectures documentaires (trace distincte du
+fichier), les rattachements financiers et l'assainissement d'audit ; aucun code
+applicatif n'est modifié durant cette phase.
 
 **Acteurs :** exploitation et support habilités pour l’audit, finance et support
 habilités pour les paiements et reversements. **Accès initial conservé : ADMIN.**
@@ -143,7 +150,7 @@ en bout avant d’être annoncée disponible ; cet ordre reste une proposition.
 | E65-CA-04 | Paiement avec pièce ou demande liée, et autre sans pièce | Consulter la section facturation | Liens existants ou absence explicite ; paiement et facturation restent distincts, aucun document ni nouvelle demande n’est créé par consultation. |
 | E65-CA-05 | Finance, reversement composé de plusieurs mouvements | Filtrer par période/commerce et ouvrir le détail | Composition, totaux, étapes et blocages concordent avec la vue métier canonique ; les accès aux actions existantes restent soumis aux mêmes droits. |
 | E65-CA-06 | Reversement transféré, virement en attente/échoué/groupé | Consulter la progression bancaire | Transfert et virement apparaissent séparément ; ni faux versement bancaire confirmé, ni montant groupé attribué à chaque commerce. |
-| E65-CA-07 | Liste sur plusieurs pages et, le cas échéant, plusieurs devises | Filtrer, paginer, ouvrir puis revenir | Aucun élément omis ou doublonné ; filtres conservés ; compteurs et totaux portent sur tout le périmètre filtré et gardent les devises séparées. |
+| E65-CA-07 | Liste sur plusieurs pages et, le cas échéant, plusieurs devises | Filtrer, paginer, ouvrir puis revenir | Sur un jeu stable, aucun élément omis ou doublonné ; filtres conservés ; compteurs et totaux cohérents pour chaque lecture portent sur tout le périmètre filtré et gardent les devises séparées. Les résultats peuvent évoluer entre requêtes ; une reprise de liste est disponible. |
 | E65-CA-08 | Acteur sans rôle ADMIN, dont EXPLOITATION, ou hors périmètre autorisé | Accéder par menu, URL directe, API ou lien documentaire | Refus serveur cohérent ; l’accès au socle ERP ne suffit pas. Aucune fuite de données personnelles, bancaires, secrets ou métadonnées brutes non autorisées. |
 | E65-CA-09 | Réseau indisponible ou réponse partielle | Charger/actualiser l’une des trois vues | Erreur ou incomplet visible avec reprise de lecture ; jamais « aucun paiement », « tout payé » ou total zéro fabriqué ; aucune commande financière ni appel fournisseur de mutation. |
 | E65-CA-10 | Opérateur bureau, clavier ou petit écran | Filtrer, consulter le détail et revenir | Largeur desktop exploitée, actions lisibles et accessibles, détail secondaire à la demande, aucune information essentielle inaccessible. |
@@ -161,7 +168,7 @@ en bout avant d’être annoncée disponible ; cet ordre reste une proposition.
 
 ## Questions ouvertes pour la spécification
 
-La [spécification revue le 27 septembre](../../specifications/epic-65-vues-erp/README.md)
+La [spécification revue le 30 septembre](../../specifications/epic-65-vues-erp/README.md)
 répond à l’inventaire des sources et formalise les hypothèses H01/H02 : paiements
 d’achats/commandes existants, souscriptions hors agrégation, consultation et liens
 vers actions existantes. Les questions ci-dessous conservent leur portée produit ;
@@ -188,7 +195,9 @@ Le besoin et les trois vues sont spécifiés selon le
 [cycle d’epic](../../organisation/cycle-epic.md). Les
 [contrats et responsabilités](../../specifications/epic-65-vues-erp/architecture-contrats.md)
 et la [matrice de preuves](../../specifications/epic-65-vues-erp/verification-livraison.md)
-portent la préparation de l’implémentation. Les dix critères restent inchangés.
+portent la préparation de l’implémentation. Les dix identifiants de critères
+sont conservés ; V1.2 explicite pour CA-07 la garantie sur jeu stable et les
+lectures concurrentes, sans promettre un export figé absent du contrat V1.1.
 Les extensions H01/H02 restent à confirmer si elles sont souhaitées ; le périmètre
 de consultation décrit peut être préparé indépendamment. Les tests fonctionnels
 et la recette sont **à réaliser** ; le contrôle de liens documentaire ne vaut

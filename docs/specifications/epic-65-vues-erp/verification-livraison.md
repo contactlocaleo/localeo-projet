@@ -2,7 +2,7 @@
 
 Référence : [parcours](README.md), [architecture et contrats](architecture-contrats.md),
 [critères du backlog](../../roadmap/a-faire/epic-65-vues-erp-audit-paiements-reversements-backlog.md).
-État au 27 septembre 2026 : **spécification seulement**. Les tests et scénarios
+État au 30 septembre 2026 (V1.2) : **spécification seulement**. Les tests et scénarios
 ci-dessous sont prévus, pas exécutés ni déclarés réussis.
 
 ## Matrice de traçabilité
@@ -14,9 +14,9 @@ unique des critères, à enrichir avec commandes, résultats et limites réels.
 | Critère | Comportement et propriétaire | Preuves prévues | Documentation / contrat | Démonstration | Exploitation |
 | --- | --- | --- | --- | --- | --- |
 | E65-CA-01 | Navigation ERP, adaptateur IHM et contrôle d’accès | Tests HTML/URL directe et navigateur des trois listes/détails, absence de redirection SQLAdmin pour consulter ; liens d’actions inchangés | README E65, `erp_ui.py`, guide back-office | ADMIN et EXPLOITATION | Livraison commune assets/API, anciennes URL conservées |
-| E65-CA-02 | Projection audit, domaine exploitation | Plus de 500 événements hors filtre devant un événement pertinent ; filtres combinés en SQL, ordre à dates égales, métadonnées historiques contenant secrets/HTML/URL hostile, acteur absent | Contrat Audit, guide support/audit | Succès/échec/phase inconnue, ressources manquantes | Index et volumétrie, aucun log de corps sensible |
+| E65-CA-02 | Projection audit, domaine exploitation | Plus de 500 événements hors filtre devant un événement pertinent ; filtres combinés en SQL, ordre à dates égales, métadonnées et chemins historiques contenant secrets/HTML/URL hostile, acteur absent/unknown/anonymous | Contrat Audit, guide support/audit | Succès/échec/phase inconnue, ressources manquantes | Index et volumétrie, aucun log de corps sensible |
 | E65-CA-03 | Projection paiements et politique d’état gestion achats | Tous états bruts/normalisés, dates source, origines, racine achat/commande, deux succès ambigus, frais inconnus/connus et aucun appel Stripe | Contrat Paiements, guide finance | Paiement simple, commande multi-achats, tentatives échouées puis succès | Dépendance aux projections existantes, disponibilité visible |
-| E65-CA-04 | Projection de rattachement et domaine documentaire | Achats enfants paginés, pièce absente/existante, demande liée ; espion sur générateur pour prouver aucun appel ; POST reçu/ancien pack jamais proposé comme lecture | Contrat section achats, guide finance/documents | Commande avec plusieurs achats et disponibilité documentaire différente | Droits des liens documentaires vérifiés séparément |
+| E65-CA-04 | Projection de rattachement et domaine documentaire | Achats enfants paginés, trace seule/fichier disponible/absence/lecture indisponible, demande liée ; espion sur générateur pour prouver aucun appel ; aucun faux téléchargement du reçu dans E65 ou la page de traces liée | Contrat section achats, guide finance/documents | Commande avec plusieurs achats et disponibilité documentaire différente | Droits des liens documentaires vérifiés séparément |
 | E65-CA-05 | Domaine reversement et port de lecture commun | ERP/360 sur même jeu ; mouvements sans reversement, dossiers fermés hors fenêtre, état annulé, requirements_due non vide, référence manquante ; aucun double comptage | Politique de pipeline, contrat périmètre, guide finance | À préparer, en cours, transféré, échec | Corriger les écarts de lecture identifiés sans changer les commandes |
 | E65-CA-06 | Payout et associations du domaine | Transfer sans association ; paid/pending/failed, rapprochement inconnu, un payout pour deux reversements, multiples tentatives et échec tardif ; montant inclus distinct du global ; associations A_ENRICHIR/legacy, devise incohérente et rattachements ambigus exclus de preuve complète | DTO virements et guide financier | Couverture bancaire complète/partielle/inconnue | Aucun nouveau Transfer/Payout ni rapprochement en GET |
 | E65-CA-07 | Ports SQL et projections cohérentes | Plus de 100 objets, jointures multiples, pages extrêmes, totaux avant pagination, deux devises/devise absente, null vs zéro, lecture cohérente, changement concurrent visible | Enveloppes et sémantique des dates | Plusieurs pages, dates égales, anciennes références | `EXPLAIN` représentatif, migration d’index si justifiée |
@@ -67,6 +67,38 @@ unique des critères, à enrichir avec commandes, résultats et limites réels.
   une requête en erreur n’est pas transformée en résultat vide dans l’UI.
 - Vérifier les liens documents sur une vraie source de test ; une réponse HTTP
   réussie sur un contrat simulé ne prouve pas la bonne association aux achats.
+  Une trace sans route de lecture sûre produit `TRACE_ONLY`, aucun `documentLink` ;
+  une erreur produit `UNKNOWN`, jamais `NONE`. La page de traces liée ne propose
+  plus le GET reçu invalide ; aucune génération n'est déclenchée pour le remplacer.
+  Plus de 20 liens/diagnostics vérifient compteurs avant limite, troncature
+  explicite et accès aux détails ; aucun chemin de stockage ne devient un href.
+- Audit : jeton dans un segment de `path` ou dans `resourceId`, query/fragment,
+  metadata imbriquée et clé inconnue ne sont pas sérialisés. Vérifier le gabarit
+  reconnu ou null, les UUID/entiers admis, les booléens refusés comme compteurs,
+  `metadataRedacted` distinct de `metadataTruncated` et la recherche par ID d'événement.
+- Repli d'une source sans `paiement_id` : achat enfant avec paiement direct de
+  commande unique ; puis ajout d'un paiement sur un autre enfant, qui rend le
+  repli incomplet. Ne pas éliminer une tentative échouée ou hors période.
+- Payout : deux BalanceTransactions différentes (Transfer et compte connecté)
+  mais références destination/compte cohérentes sont acceptées ; comptes ou
+  destinations contradictoires sont signalés. Deux tentatives du même flux ne
+  doublent pas la couverture, quel que soit leur statut bancaire.
+- Paramètres répétés/inconnus, page après la dernière et jeu stable à dates
+  égales ; insertion entre deux pages et reprise explicite à la première.
+  `generatedAt` ne sert pas de jeton d'instantané. Tester les statuts HTML
+  séparément des erreurs JSON et le refus de rôle avant recherche d'un UUID.
+
+### Dépendance de recette E35
+
+La matrice ci-dessus valide le socle ADMIN. Pour une livraison combinée avec
+`E35-PROFILS-20260928`, compléter E65-CA-01/04/08/09 par les preuves E35-PROF-11 :
+lectures financières Lecteur/Backoffice/Admin, audit Admin seul, périmètres
+identiques entre listes, synthèses, détails et pièces ; aucun lien vers console
+technique pour les profils métier et aucune commande pour Lecteur. Révoquer ou
+réduire le profil dans un autre onglet doit produire le refus dès la requête
+suivante et effacer les données devenues interdites. Ces tests dépendent de la
+politique et des contrats E35 ; ils ne sont ni exécutables ni réputés réussis
+sur la seule base des gardes ADMIN actuels.
 
 ### Suites existantes à préserver
 
@@ -176,3 +208,30 @@ aucun SLA ni date de livraison n’est supposé accepté.
   `git diff --check` réussi.
 - Aucun code applicatif modifié ; tests métier, PostgreSQL et navigateur
   **non exécutés**. L’état produit reste **À faire**.
+
+## Revue de spécification V1.2 — 30 septembre
+
+- Sources locales relues sur backend `3252c72` et projet `484f10d`, puis
+  modifications documentaires locales E65. La modification préexistante du
+  suivi des environnements de démonstration est hors périmètre et préservée.
+- Revue indépendante paiements/reversements et relecture des corrections :
+  traces documentaires distinctes des fichiers, candidats sources communs à
+  la Vision 360, transactions Stripe plateforme/compte connecté distinguées,
+  diagnostics et liens bornés. Constats intégrés au contrat et aux preuves prévues.
+- Contrôles de session/droits et sources audit relus ; garde ADMIN conservé,
+  dépendance E35 explicite, chemins d'audit avec jetons occultés, pagination
+  et statuts HTTP précisés. Les identifiants CA-01 à CA-10 sont conservés.
+- Préparation : socle ADMIN exploitable pour H01/H02. L'ouverture E35 attend sa
+  politique, ses périmètres/masquages et ses preuves ; agrégation d'abonnements
+  et nouveaux formulaires financiers restent hors périmètre sans complément.
+  Plans SQL, index et volumes restent à mesurer à l'implémentation.
+- Aucun code applicatif ni OpenAPI publié modifié ; aucun test métier,
+  PostgreSQL ou navigateur exécuté. Aucun commit, push ou déploiement.
+  L'état produit reste **À faire**.
+- Contrôles documentaires réussis : `scripts/check_guidance.py`, avec les six
+  documents E65/backlog/index/roadmap modifiés explicitement sélectionnés :
+  **91 guides, 982 liens locaux, 0 erreur, 0 avertissement** ;
+  `scripts/sync_documentation.py --check-sources` : **118 documents vérifiés** ;
+  `git diff --check` réussi. L'interpréteur configuré par `localeo.python` a
+  été utilisé après constat que `python` n'était pas accessible dans le PATH
+  du bac à sable. Ces contrôles ne prouvent pas les comportements cibles.

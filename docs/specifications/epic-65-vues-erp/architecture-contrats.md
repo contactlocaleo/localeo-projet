@@ -1,6 +1,6 @@
 # EPIC 65 — Architecture et contrats cibles
 
-Spécification V1.1, revue le 27 septembre 2026. [Parcours et périmètre](README.md),
+Spécification V1.2, revue le 30 septembre 2026. [Parcours et périmètre](README.md),
 [preuves attendues](verification-livraison.md). Les routes et DTO **nouveaux**
 ci-dessous sont à implémenter ; ils ne décrivent pas une API actuellement déployée.
 
@@ -138,6 +138,25 @@ page devenue vide, proposer un retour à la première page. Les détails font
 autorité à leur propre date de lecture ; aucun statut conservé en navigateur
 ne vaut confirmation financière.
 
+Pour `E65-CA-07`, l'absence d'omission/doublon est vérifiée sur un jeu stable,
+y compris dates égales et jointures multiples. Des insertions ou changements
+d'état entre deux pages peuvent déplacer les lignes : `generatedAt` est une
+date de lecture, pas un jeton d'instantané ni une preuve de changement.
+L'interface indique que les résultats peuvent évoluer et permet de reprendre
+la première page ; cette V1 ne promet pas une traversée figée sous concurrence.
+Une page au-delà du total renvoie 200, `items: []`, `hasMore: false` et le vrai
+total/synthèse, sans remplacer ceux-ci par zéro.
+
+La recherche textuelle est une sous-chaîne insensible à la casse, sauf les
+références exactes explicitement indiquées pour Reversements. Après trim, une
+recherche vide équivaut à l'absence de recherche. Les égalités de filtres restent
+exactes après leur normalisation documentée ; des critères différents se
+combinent par ET. Un paramètre scalaire répété est refusé en 422, afin de ne pas
+laisser serveur et navigateur sélectionner des valeurs différentes. Un détail
+Audit/Paiement/Reversement accepte uniquement son identifiant ; ses sections
+acceptent pagination et filtres de section expressément prévus, jamais les
+filtres de liste hérités implicitement de l'URL précédente.
+
 ### Dates et périmètres
 
 Audit : `date_evenement`; Paiements : `date_creation`. Bornes de journées
@@ -181,7 +200,7 @@ filtre de date. Dédoublonner chaque ensemble sur son propre ID avant agrégatio
 Filtres supplémentaires : `action`, `phase`, `actor`, `requestId`,
 `resourceType`, `resourceId`, `merchantId`, `purchaseId`, `instanceId` ; les trois
 derniers sont UUID. Les autres sont des égalités textuelles bornées, pas des enums
-fermés inventés pour des historiques libres. `query` cherche action, requestId,
+fermés inventés pour des historiques libres. `query` cherche id, action, requestId,
 resourceId et identifiants métier textuels ; acteur via filtre explicite.
 Tri : `(date_evenement DESC, id DESC)`.
 
@@ -206,6 +225,38 @@ Tout autre champ, objet imbriqué ou valeur ne respectant pas ce type est omis.
 La liste de codes/noms admis reprend les producteurs déjà recensés lors de
 l’implémentation ; un inconnu est occulté, sans empêcher l’affichage de l’événement.
 Étendre cette liste impose un test de non-divulgation, pas un repli en JSON brut.
+
+Compléments V1.2 issus du producteur de validation
+[`ServiceValidationPrestation`](../../../../localeo-backend/app/application/exploitation/services/service_validation_prestation.py) :
+`validation_id`, `prestation_coffret_id`, `mouvement_reversement_id` sont admis
+comme UUID ; `prestation_version`, `prestations_restantes` comme entiers non
+négatifs. Un booléen n'est pas admis comme entier. Tant qu'un code ou nom de
+champ n'est pas recensé dans une liste positive testée, il est occulté.
+`metadataRedacted: boolean` signale les champs/valeurs omis ;
+`metadataTruncated` ne concerne que les bornes de taille. Aucun nom de clé
+inconnu n'est renvoyé pour expliquer une occultation.
+
+L'assainissement porte aussi sur les colonnes hors metadata. Retirer query et
+fragment d'un chemin ne suffit pas : un jeton peut être un segment d'URL.
+`path: string|null` est un gabarit interne reconnu, avec paramètres remplacés
+par leurs noms, jamais le chemin historique brut. Si le chemin n'est pas
+reconnu, retourner null. `method` est une méthode HTTP reconnue ou null.
+`resourceId` n'est une référence navigable que si le type et le format sont
+reconnus ; un chemin, une URL ou une valeur suspecte est occulté. Les champs
+textuels exposés sont bornés et assainis avant sérialisation, puis échappés
+par l'interface. Aucun lien ne résulte d'une concaténation de texte historique.
+L'acteur persisté vide ou `unknown` devient null / « Non renseigné » ;
+`anonymous` désigne explicitement un acteur anonyme. Ne pas les remplacer par
+l'identité de l'opérateur courant ni leur attribuer une identité nominative.
+
+Ces règles complètent, sans la modifier, la collecte actuelle :
+[`ServiceAudit`](../../../../localeo-backend/app/application/exploitation/services/service_audit.py)
+masque certaines clés à l'écriture, tandis que
+[`erp_api.py`](../../../../localeo-backend/app/api/erp_api.py) écrit aussi des
+événements ORM directement. Le repository global
+[`EvenementAuditRepositorySqlAlchemy`](../../../../localeo-backend/app/infrastructure/persistence/repositories/repositories_sqlalchemy.py)
+reste limité à 200 sans filtres ; sa projection Animation spécialisée n'est
+pas le contrat global E65.
 
 ## Paiements : filtres, sources et DTO
 
@@ -258,9 +309,37 @@ en avoir plusieurs. Une racine ACHAT sans commande retourne cet achat une seule
 fois. Tri stable par `AchatCoffretOrm.date_creation DESC, id DESC` (dates nulles
 en dernier), date exposée comme `createdAt`, total calculé avant pagination ;
 aucun filtre de période de la liste des paiements ne retranche un achat enfant.
-La lecture documentaire existante `/internal/achats/{id}/documents`
-est réutilisée avec ses droits ; `receipt.pdf` en POST et `pack.zip` décommissionné
-ne sont jamais déclenchés/proposés comme téléchargement existant.
+La page `/internal/achats/{id}/documents` est un **dossier de traces** : elle
+ne fournit pas actuellement un téléchargement des fichiers de chaque trace.
+Dans `admin.py`, son lien GET `receipt.pdf` vise une route seulement POST qui
+génère un reçu ; `pack.zip` est décommissionné (410). L'intégration E65 doit
+retirer ce faux lien de téléchargement du parcours de consultation, y compris
+de la page de traces réutilisée. Les commandes de génération existantes restent
+dans leurs parcours explicites autorisés.
+
+Pour chaque achat, le DTO distingue `documentTraceCount: int|null`,
+`documentAvailability: AVAILABLE|TRACE_ONLY|NONE|UNKNOWN`, `documentDossierUrl: string|null`
+et `documentLinks: [{documentId,label,href}]`. `AVAILABLE` exige au moins une
+pièce dont le fichier et une route de lecture habilitée sont effectivement
+disponibles ; `TRACE_ONLY` signifie traces existantes sans téléchargement
+attesté ; `NONE` exige une lecture réussie sans trace ni pièce ; `UNKNOWN`
+signale une lecture indisponible (compteur null). Plusieurs états de pièces
+peuvent coexister : la disponibilité d'une pièce ne certifie pas les autres.
+Le lien du dossier de traces ne figure pas parmi `documentLinks`. Les demandes
+de facture conservent leurs propres liens/états et ne prouvent pas la présence
+d'un fichier. Aucun fichier n'est généré pour rendre un lien disponible ; si
+aucune lecture sûre n'existe, afficher cette limite et le dossier de traces.
+La V1 ne crée pas un service de téléchargement universel. Les détails des
+traces restent dans leur dossier, pas une liste non bornée embarquée dans E65.
+`documentLinks` est vide pour `TRACE_ONLY`, `NONE` et `UNKNOWN`. Pour `AVAILABLE`,
+il contient au plus 20 liens triés par date de document décroissante puis UUID,
+avec `documentLinkCount: int|null` (total avant limite, null si indisponible)
+et `documentLinksTruncated: boolean`. Les autres traces se consultent depuis
+leur dossier, sans promettre un téléchargement par ce lien ; aucune troncature
+n'est silencieuse. Un nom de fichier, hash ou
+`stockage_path` seul n'atteste pas un téléchargement : aucun href construit
+depuis ce chemin ni par substitution d'un ID `DocumentAchatCoffretOrm` dans une
+route du modèle distinct `DocumentOrm`.
 
 `PagePaiements.summary` regroupe **par devise et statut normalisé**, avec nombre
 de paiements et agrégats bruts/frais/net/commissions. Chaque agrégat fournit
@@ -299,6 +378,15 @@ Champs obligatoires de `SuiviCommerce` : `merchantId: UUID`, `merchantName: stri
 `summary` reprend ces mêmes agrégats/compteurs avec `merchantCount`, sans `links`
 ni identité. Chaque lien est `{rel,label,href}` construit par l’adaptateur depuis
 une destination interne autorisée ; les ressources d’un diagnostic peuvent être nulles.
+
+`blockers` est un aperçu borné à 20 diagnostics, ordonnés par code, type et ID
+de ressource ; les doublons `(code, resourceType, resourceId)` sont éliminés.
+`blockerCount` compte l'ensemble avant limite et `blockersTruncated` signale
+les diagnostics supplémentaires. Même contrat dans `DetailReversement`.
+Les sections paginées portent les diagnostics de leurs objets ; les anomalies
+de source sont sur les mouvements, celles d'association sur les virements.
+Les blocages du commerce sans ressource restent dans son résumé. La limite de
+présentation ne modifie ni un compteur, ni la synthèse financière, ni l'éligibilité.
 
 La synthèse classe chaque mouvement une seule fois selon **son statut** dans
 les quatre postes historiques de `_reversement_pipeline`, sans le déduire du
@@ -365,6 +453,12 @@ ne s’ajoutent pas aux sommes des mouvements ou reversements.
 Pour un mouvement sans ID de paiement, les références d’achat historiques
 (`transfer_group` de forme `achat:<UUID>` ou `metadata_stripe.achat_id`) permettent
 un repli seulement si l’achat est univoque et possède un seul paiement candidat.
+Les candidats sont l'ensemble canonique du dossier : paiement de l'achat seul
+s'il n'a pas de commande, sinon union des paiements directs de sa commande et
+des paiements de ses achats enfants, dédoublonnée par ID. Aucun filtre de date
+ou de succès ne réduit cet ensemble pour fabriquer une unicité. Si la racine
+est absente ou incohérente, aucun repli n'est attesté. Ce rattachement explique
+une provenance, jamais l'affectation d'une fraction de paiement à un mouvement.
 Des références contradictoires, plusieurs tentatives ou un ID explicite introuvable
 produisent `sourceStatus: INCOMPLETE` sur le mouvement et un diagnostic lié à son
 ID. Aucun repli sur le dernier paiement, ni sélection supposée du paiement réussi.
@@ -418,6 +512,21 @@ restent affichés mais exclus d’une preuve de couverture complète. La source
 résultat concerne le payout seulement. L’enrichissement relève du traitement
 existant et n’est jamais lancé à la lecture.
 
+La cohérence des références utilise les faits du producteur
+[`payouts_stripe.py`](../../../../localeo-backend/app/application/gestion_reversement/services/payouts_stripe.py) :
+`destination_payment_id` de l'association doit correspondre au paiement de
+reversement ; le compte connecté du payout doit correspondre à sa destination.
+Contrôler également devise et montant inclus. `connected_balance_transaction_id`
+désigne le flux du **compte connecté** ; il n'est pas le
+`stripe_balance_transaction_id` enregistré à partir du Transfer sur le paiement
+de reversement. Deux identifiants différents ne constituent donc pas à eux seuls
+une anomalie. Pour identifier un même flux bancaire, utiliser compte connecté,
+destination payment et transaction connectée ; les tentatives successives restent
+affichées, mais ne multiplient pas la somme couverte. Références absentes,
+contradictoires ou incompatibles : couverture non attestée, sans appel Stripe.
+Ces références servent au contrôle interne ; le DTO ne doit pas exposer pour
+autant une charge utile prestataire brute.
+
 Les objets reversement/paiement historiques exprimés en euros gardent cette devise
 issue du domaine. Les mouvements/payouts ont leur devise persistée ; une divergence
 produit une anomalie, pas une conversion ni une somme mélangée. Convertir les
@@ -427,14 +536,21 @@ produit une anomalie, pas une conversion ni une somme mélangée. Convertir les
 
 Erreurs conformes au socle API : 401 session absente/incomplète, 403 rôle interdit,
 404 ressource absente ou section inconnue, 422 UUID/filtre/date/page invalide,
-503 lecture indispensable indisponible. Réutiliser `ApiErrorResponse` : `code`
+503 lecture indispensable indisponible. Ces statuts concernent les API JSON.
+Les pages HTML conservent la convention ERP : 303 vers `/admin/login` sans
+session complète, 403 pour un rôle interdit, 404 pour une page ou un UUID
+de détail invalide. Vérifier le rôle avant toute recherche de ressource ;
+un non-ADMIN ne doit pas distinguer un UUID existant d'un UUID absent.
+Réutiliser `ApiErrorResponse` : `code`
 optionnel, `detail` assaini, `correlationId`, alias historique `request_id` et
 `violations` éventuelles ; sans SQL ni corps prestataire. Un échec de synthèse financière fait
 échouer la réponse liste+synthèse ; une section indépendante du détail peut
 afficher son propre échec, sans inventer un résultat vide.
 
 À l’implémentation, le contrat Pydantic producteur sera exporté hors ligne vers
-`docs/specifications/epic-41-api/openapi.json` par le générateur backend existant.
+`docs/specifications/epic-41-api/openapi.json` par
+[`generate_epic41_openapi.py`](../../../../localeo-backend/scripts/documentation/generate_epic41_openapi.py),
+qui utilise le chargeur isolé `export_openapi_offline.py`.
 Ne pas modifier aujourd’hui cet OpenAPI pour annoncer des routes inexistantes.
 L’ERP ne doit pas embarquer un deuxième schéma maintenu à la main. Les anciens
 contrats publics/protégés et les trois frontends restent inchangés ; les routes

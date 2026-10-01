@@ -1,13 +1,13 @@
 # Roadmap par etat
 
-Classement consolidé le 18 septembre 2026, complété le 28 septembre par l’EPIC 67. Les backlogs des applications sont
+Classement consolidé le 18 septembre 2026, complété le 30 septembre par l’EPIC 68. Les backlogs des applications sont
 réunis dans les dossiers d'état, avec un seul fichier par EPIC. Le suivi inclut
-les 67 identifiants du tronc commun et trois identifiants applicatifs distincts.
+les 68 identifiants du tronc commun et trois identifiants applicatifs distincts.
 
 | Etat | Epics | Dossier |
 | --- | ---: | --- |
 | Terminees | 58 | [terminees/](terminees/README.md) |
-| A faire | 7 | [a-faire/](a-faire/README.md) |
+| A faire | 8 | [a-faire/](a-faire/README.md) |
 | En cours | 2 | [en-cours/](en-cours/README.md) |
 | Abandonnees | 2 | [abandonnees/](abandonnees/README.md) |
 | Fusionnee | 1 | Epic 61 reprise dans l'[Epic 60](terminees/epic-60-vision-360-commercialisation-backlog.md) |
@@ -15,7 +15,8 @@ les 67 identifiants du tronc commun et trois identifiants applicatifs distincts.
 Les 64 identifiants historiques et leurs états sont conservés ; l’EPIC 65 ajoute
 les vues ERP d’audit, paiements et reversements, et l’EPIC 66 ajoute Localeo Atelier
 pour composer des coffrets avec l’aide de l’IA. L’EPIC 67 ajoute les communautés
-de communes et les coffrets intercommunaux. Les EPIC 65 et 67 sont à faire ;
+de communes et les coffrets intercommunaux. L'EPIC 68 ajoute le parcours commerçant
+de préparation et finalisation de l'onboarding. Les EPIC 65, 67 et 68 sont à faire ;
 l'EPIC 66 est en cours depuis le 29 septembre, avec une implémentation locale en validation.
 La spécification V1.2 couvre ses extensions `E66-PWA-20260929` (PWA/menu ERP),
 `E66-PRIX-20260929` (prix proposé modifiable) et `E66-EXPERIENCE-20260929`
@@ -58,9 +59,10 @@ précise la provenance et les divergences historiques conservées.
 | 47 | Terminee | Cloture produit confirmee par l'utilisateur le 15 septembre 2026 ; l'ancienne reserve de recette reste une reference d'exploitation. |
 | 54, 58, 62, 64 et EPIC-MARKETPLACE-54 | A faire | Classement courant des dossiers ; voir les réserves de chaque backlog. |
 | 55 | En cours | Moteur commun et chasse au trésor ; conception, arbitrages et livraison suivis dans le backlog. |
-| 65 | A faire | Cadrage des trois vues ERP audit, paiements et reversements ; réutilisation des règles et lectures existantes, sans rouvrir les epics terminées. |
+| 65 | A faire | Spécification V1.2 du 30 septembre des trois vues ERP audit, paiements et reversements ; socle ADMIN et dépendance E35 explicités, aucune implémentation livrée. |
 | 66 | En cours | [Localeo Atelier](en-cours/epic-66-localeo-atelier-coffrets-assistes-ia-backlog.md) : [V1.2](../specifications/epic-66-localeo-atelier/README.md) implémentée localement, PWA, prix automatique modifiable et prompt expérience testés ; limites de recette dans le bilan, aucune clôture. |
 | 67 | A faire | [Communautés de communes](a-faire/epic-67-communautes-communes-coffrets-intercommunaux-backlog.md) : référentiel, coffrets intercommunaux, commercialisation et extension de Localeo Atelier ; droits et achats existants préservés. |
+| 68 | A faire | [Préparation de l'onboarding](a-faire/epic-68-parcours-commercant-preparation-onboarding-backlog.md) : parcours partagé avant un rendez-vous d'une heure, Stripe, documents, contrat, prestations et questions ; dix-sept critères cadrés, calendrier et déroulé à arbitrer. |
 | 61 | Fusionnee | Contenu repris dans l'Epic 60 ; une fusion n'est pas un abandon. |
 | 35 | Terminee (historique) | Évolution `E35-PROFILS-20260928` cadrée dans son backlog : trois profils et séparation métier/technique, non livrée ; aucun nouvel identifiant créé. |
 | Autres identifiants du tronc commun | Terminees | Statut produit consolide conserve ; les anciennes mentions de stories a faire ne rouvrent pas ces epics. |
