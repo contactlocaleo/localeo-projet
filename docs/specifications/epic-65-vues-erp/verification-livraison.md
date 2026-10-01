@@ -1,9 +1,123 @@
-# EPIC 65 — Vérification et livraison prévues
+# EPIC 65 — Vérification et livraison
+
+## Bilan d'implémentation V1.4
+
+Le 1er octobre 2026, l'utilisateur a confirmé H01/H02 : achats et commandes
+(lots Animation inclus), consultation et liens vers les actions existantes.
+Les trois lots sont implémentés localement. L'EPIC est **En cours**, sans clôture,
+commit, push ou déploiement réalisé dans cette intervention.
+
+Contexte : backend `ad42635` et projet `92f3d2a`, avec modifications locales.
+Les modifications documentaires V1.3 préexistantes sont conservées. Aucun
+frontend séparé n'est modifié : l'ERP est servi par le backend.
+
+### Comportements et preuves
+
+| Critères | Implémentation et preuves locales |
+| --- | --- |
+| CA-01/08 | Routes HTML intégrées, API session ADMIN et middleware après registre persisté. `tests/api/test_epic65_consultations.py` monte le garde global réel sans bootstrap : cookie incomplet, rôle interdit, session expirée/révoquée, panne du registre, refus avant projection, 401 JSON même avec Accept HTML et no-store. |
+| CA-02 | `ServiceConsultationAudit`, port dédié et SQL filtré avant pagination. Tests application et adaptateur : plus de 500 événements, égalités/UUID, `%` et `_` littéraux, dates égales, DST 23/25 h, historique contenant secrets/HTML/URL. PostgreSQL : pages au-delà du total et instantané conservé malgré insertion concurrente. |
+| CA-03/04 | `ServiceConsultationPaiements`, normalisation et union de paiements partagées avec Vision 360 et sa recherche. SQL réel SQLite/PostgreSQL : 207 paiements et 205 achats enfants, devises, frais inconnus, commandes et succès multiples. Demandes de facture bornées à 20 avec compte total. Faux lien GET du reçu supprimé ; traces seules explicitement distinguées d'un fichier. |
+| CA-05/06 | `ServiceConsultationReversements` partagé ERP/console, décisions pures `lecture_suivi.py`. PostgreSQL : fermeture des dossiers, sources explicites multiples, repli historique unique ou incomplet, exigences Stripe dues, compte historique, tentatives bancaires et échec tardif. Les montants du payout restent contextuels. |
+| CA-07 | Pagination/compteurs/agrégats en SQL et lectures financières REPEATABLE READ READ ONLY. Banque parcourue par curseur serveur borné et politique pure par flux ; faits de page chargés par lots. Régressions de requêtes par ligne et de faux repli de source couvertes par `test_epic65_projection_bornage.py`. |
+| CA-09/10 | Recettes Playwright Audit et Finance à 390/1440/1920 px : navigation, listes/détails/sections, filtres, retour/focus, erreurs, annulation des réponses obsolètes, purge après expiration, aucune mutation. Captures locales inspectées ; API simulées pour ces recettes. Contrats HTTP séparément vérifiés sur PostgreSQL réel. |
+
+Les tests PostgreSQL emploient PostgreSQL 18.3 jetable, lié uniquement à
+`127.0.0.1:55465`, base `localeo_audit_test`, avec schémas synthétiques isolés et
+supprimés après chaque test. Aucun accès à la démo, à la production ou à Stripe.
+Les fichiers de travail/captures restent ignorés sous `localeo-backend/tmp/`.
+
+### Revue indépendante et corrections
+
+- Session/audit : chaîne et occultation relues ; borne `date.min` corrigée en
+  erreur 422, sélection des métadonnées supprimée de la requête de liste.
+- Reversements : la première version faisait 16 puis 184 requêtes pour 1 puis
+  25 commerces, et 15 puis 303 pour les reversements. La revue a imposé la lecture
+  par lots et les curseurs bornés avant acceptation ; les tests reproduisent
+  ces défauts puis contrôlent leur correction.
+- Provenance : un candidat de paiement mal rattaché ne peut plus être éliminé
+  avant de compter les tentatives et fabriquer un repli unique. Les références
+  explicites restent conservées sans choisir le dernier paiement d'un achat.
+- Couverture : des montants contradictoires pour le même flux ne produisent
+  plus une preuve partielle. Les tentatives sont consommées sans stocker toutes
+  les associations en mémoire ni additionner plusieurs fois le même flux.
+- Paiements : le payeur historique anormal ne doit pas interrompre la liste ;
+  les statuts financiers inconnus restent non renseignés avec diagnostic.
+
+### Exécutions et limites
+
+Validation locale du 1er octobre 2026 :
+
+| Contrôle | Résultat |
+| --- | --- |
+| Suite intégrée : architecture, domaine, application, API, PostgreSQL, sécurité et non-régressions ERP/360 | **760 tests réussis**, aucun ignoré, 159,63 s. 13 avertissements SQLAlchemy sur le cycle de tables `profils_commercants` / `profils_commercants_versions` dans la fixture EPIC 60 inchangée. |
+| Dernier passage ciblé Paiements / Vision 360 après revue | **110 tests réussis**, 19,27 s ; recoupe la suite intégrée, ne s'y additionne pas. |
+| Compatibilité du générateur : registre et démonstration | **15 tests réussis**, 1,57 s ; aucune génération d'environnement. |
+| Recettes navigateur Audit et Finance | Deux scripts réussis à **390, 1440 et 1920 px**, avec captures inspectées. |
+| Export OpenAPI hors ligne | **645 chemins** ; 26 ajouts, aucun ancien chemin retiré ou modifié. Parmi les ajouts, 15 concernent E65 et 11 rattrapent des routes déjà présentes dans le backend. |
+| Documentation, dernier contrôle standard | **87 guides**, **908 liens locaux** et **118 sources exportées** contrôlés ; aucune erreur ni avertissement documentaire. |
+
+Les tests de bornage constatent un nombre de requêtes constant entre des pages
+de 1 et 25 lignes : **13/13** pour les commerces, **15/15** pour la section
+reversements et **3/3** pour les virements. Les EXPLAIN ANALYZE Paiements sur
+2 000 lignes synthétiques (1 200 sélectionnées) donnent 13,668 ms pour la page
+de 25 lignes et 11,98 ms pour la synthèse d'un groupe ; ces mesures locales
+ne constituent pas un engagement de performance.
+
+Points d'entrée reproductibles depuis le backend :
+
+```powershell
+python scripts/validation/test_isolated.py tests/architecture tests/domain/test_domain_dedicated_classes.py tests/application/use_cases/test_use_case_business_test_coverage.py -q
+python scripts/validation/test_isolated.py tests/infrastructure/persistence/test_epic65_audit_postgres.py tests/infrastructure/persistence/test_suivi_reversements_postgres.py tests/infrastructure/persistence/test_epic65_projection_bornage.py tests/infrastructure/admin/test_epic65_console_parite_postgres.py --postgres-test-url postgresql+psycopg://audit_test@127.0.0.1:55465/localeo_audit_test -q
+python scripts/validation/test_isolated.py tests/unit/test_demonstration_registry.py tests/unit/test_demonstration.py -q
+node tests/browser/epic65-audit-erp.cjs
+node tests/browser/epic65-finance-erp.cjs
+python scripts/documentation/generate_epic41_openapi.py
+```
+
+Les deux premières commandes extraient des sous-ensembles de la suite intégrée
+citée ci-dessus ; elles ne représentent pas deux exécutions supplémentaires.
+La commande PostgreSQL exige de recréer une instance jetable locale au préalable.
+Depuis le dépôt projet : `python scripts/check_guidance.py` puis
+`python scripts/sync_documentation.py --check-sources`. `git diff --check`
+réussit dans les deux dépôts.
+
+Les scénarios navigateur utilisent des réponses simulées. La recette sur un
+environnement déployé et des sessions réelles reste à faire ; voir la
+[recette back-office](../../exploitation/recette/recette-backoffice-preproduction.md).
+Les EXPLAIN sur jeux synthétiques vérifient les requêtes, sans prouver une
+capacité ou un temps de réponse en production. Aucun nouvel index n'est ajouté
+sans mesure représentative. La console et l'export historiques parcourent
+toutes les pages du périmètre ; ils restent des sorties complètes, distinctes
+de la consultation ERP paginée.
+
+### Impacts et livraison
+
+- **Contrats** : OpenAPI canonique exporté hors ligne depuis le code. L'export
+  complet reprend aussi des routes Atelier et accès commerçant déjà présentes
+  dans le backend mais absentes du précédent instantané ; aucune ancienne route
+  n'a été retirée. Aucun contrat embarqué des trois frontends n'est consommateur E65.
+- **Données/migrations** : aucune nouvelle table, colonne, transition ou donnée
+  obligatoire. Aucun backfill, réécriture de compte Stripe ou rapprochement.
+- **Démonstration** : générateur inchangé, les projections lisent les tables
+  existantes. Les cas rares sont couverts par les fixtures synthétiques ; aucun
+  jeu réel ni accès privé n'est généré ou copié dans la documentation.
+- **Fonctionnel/ops** : guides formation/exploitation et recette actualisés.
+  CSV 360 : colonnes devise, montants connus/inconnus, couverture et dossier ERP ;
+  retrait de l'état bancaire déduit du dernier payout. URL, campagne, export et
+  audit d'export historiques conservés ; nouvelles vues sans écriture métier.
+- **Reprise** : livrer backend et assets ERP ensemble. Aucun ordre de migration
+  ou secret nouveau. Une version applicative précédente retrouve ses vues
+  historiques sans restauration de données, puisque la consultation n'en modifie pas.
+
+L'évolution E35 Lecteur/Backoffice reste exclue de cette livraison. Les tests
+ADMIN ne valent pas validation de ces futurs profils.
 
 Référence : [parcours](README.md), [architecture et contrats](architecture-contrats.md),
-[critères du backlog](../../roadmap/a-faire/epic-65-vues-erp-audit-paiements-reversements-backlog.md).
-État au 30 septembre 2026 (V1.2) : **spécification seulement**. Les tests et scénarios
-ci-dessous sont prévus, pas exécutés ni déclarés réussis.
+[critères du backlog](../../roadmap/en-cours/epic-65-vues-erp-audit-paiements-reversements-backlog.md).
+La matrice initiale V1.3 ci-dessous conserve les preuves prévues. Le
+[bilan V1.4](#bilan-dimplementation-v14) distingue les exécutions locales
+du 1er octobre 2026, les limites et les opérations d'environnement non réalisées.
 
 ## Matrice de traçabilité
 
@@ -36,6 +150,9 @@ unique des critères, à enrichir avec commandes, résultats et limites réels.
   Tester la sélection SQL commune, pas uniquement le mapping d’un DTO simulé.
 - Classement pur des mouvements, éligibilité Stripe via le commerçant et suivi
   bancaire via le payout. Tester les règles sans ORM ni fournisseur.
+- Devises : EUR/eur/espaces réunis dans un même groupe, filtre normalisé,
+  absence et format invalide sans repli EUR ; EUR/USD restent distincts. Une
+  différence de casse seule ne rend pas le rapprochement bancaire incohérent.
 - Nouveaux tests `tests/application/exploitation/test_epic65_audit.py`,
   `tests/application/gestion_achats/test_epic65_paiements.py` et
   `tests/application/gestion_reversement/test_epic65_suivi.py` : orchestration,
@@ -43,6 +160,10 @@ unique des critères, à enrichir avec commandes, résultats et limites réels.
   des faits, sans recopier la politique métier.
 - Refus d’accès testé avant toute requête aux données ; pas seulement absence
   de bouton dans la page.
+- La preuve d'absence de mutation espionne les ports métier et fournisseurs,
+  sans interdire la vérification technique de session. Liste, détail, section
+  et actualisation n'appellent ni Stripe, ni un générateur documentaire, ni
+  une commande financière, même si une donnée financière manque.
 
 ### Adaptateurs et contrats
 
@@ -61,8 +182,21 @@ unique des critères, à enrichir avec commandes, résultats et limites réels.
   tentatives sans lien explicite signalées incomplètes. Une tentative récente
   échouée ne remplace pas un paiement explicitement lié plus ancien. Vérifier
   aussi la console historique après extraction, sans écriture de rapprochement.
+- Compte Stripe historique : reversement vers A et compte commerçant courant B,
+  payout vers A correctement associé reste cohérent ; payout vers B ne prouve
+  pas le flux vers A. Destination historisée manquante ou intention présente
+  contradictoire : couverture non attestée. L'absence d'intention seule ne
+  disqualifie pas une destination historisée cohérente. Aucune réparation ni
+  appel Stripe en GET.
 - `tests/api/test_epic65_consultations.py` à créer : schémas fermés, statuts HTTP,
   cache no-store, aucune route de mutation et sérialisation sans données brutes.
+- Monter également `AdminSessionMiddleware` et le garde global dans le montage
+  isolé : cookie signé mais session persistée absente/expirée/révoquée refusé,
+  registre indisponible en 503, projection non appelée. Une API E65 anonyme
+  répond 401 JSON même avec `Accept: text/html` ; une page HTML redirige en 303.
+  Vérifier `no-store` sur tous les refus et l'ordre des nouvelles routes avant
+  les captures génériques du shell. Les tests avec cookie seul ne remplacent
+  pas ces scénarios.
 - Confronter les requêtes réelles du navigateur au contrat Pydantic exporté ;
   une requête en erreur n’est pas transformée en résultat vide dans l’UI.
 - Vérifier les liens documents sur une vraie source de test ; une réponse HTTP
@@ -235,3 +369,32 @@ aucun SLA ni date de livraison n’est supposé accepté.
   `git diff --check` réussi. L'interpréteur configuré par `localeo.python` a
   été utilisé après constat que `python` n'était pas accessible dans le PATH
   du bac à sable. Ces contrôles ne prouvent pas les comportements cibles.
+
+## Revue de spécification V1.3 — 1er octobre
+
+- Sources examinées : backend `ad42635`, projet `92f3d2a`, sans modification
+  applicative. Routes E65 toujours absentes ; navigation Audit/Paiements/
+  Reversements vers SQLAdmin confirmée. Les statuts de la roadmap restent
+  **À faire**, les identifiants E65-CA-01 à E65-CA-10 sont conservés.
+- Session : distinction registre persistant, cookie ERP et garde ADMIN ;
+  scénarios de révocation/indisponibilité à tester dans la chaîne complète.
+  Refus JSON malgré `Accept: text/html`, cache des refus et ordre des routes
+  IHM précisés. Les écritures techniques de session ne sont pas des mutations
+  financières et ne sont pas interdites par les assertions de lecture seule.
+- Revue indépendante des contrats financiers intégrée : normalisation commune
+  EUR/eur pour filtres, comparaisons et agrégats ; compte Stripe historisé du
+  reversement, sans remplacement par le compte commerçant courant. Une intention
+  absente n'invalide pas seule cette référence ; une contradiction est signalée.
+- Lots L01/L02/L03 et dépendances explicités. H01/H02 ont été représentées à
+  l'utilisateur sans réponse enregistrée dans cette revue ; elles restent des
+  hypothèses. Aucune extension abonnements, commande intégrée ou profil E35
+  n'est considérée approuvée implicitement. L01 reste indépendant.
+- Contrôles documentaires : `scripts/check_guidance.py`, avec les huit documents
+  modifiés sélectionnés, **93 guides, 1 087 liens, 0 erreur, 0 avertissement** ;
+  `scripts/sync_documentation.py --check-sources`, **118 documents vérifiés** ;
+  `git diff --check` réussi. L'interpréteur Python local a exécuté ces contrôles
+  depuis le dépôt documentaire.
+- Aucun test métier, PostgreSQL, navigateur, export OpenAPI ni générateur de
+  démonstration exécuté pour cette spécification. Aucun commit, push ou déploiement
+  effectué dans cette phase. Les tests ajoutés au plan restent à produire lors
+  de l'implémentation ; les preuves documentaires ne les remplacent pas.

@@ -1,15 +1,15 @@
 # Roadmap produit
 
-## État global consolidé au 30 septembre 2026
+## État global consolidé au 1er octobre 2026
 
-Le tronc commun comprend 68 identifiants : 56 epics terminees, 7 a faire,
-2 en cours, 2 abandonnees et 1 fusionnee. L'Epic 61 est absorbee par l'Epic 60.
+Le tronc commun comprend 68 identifiants : 56 epics terminees, 6 a faire,
+3 en cours, 2 abandonnees et 1 fusionnee. L'Epic 61 est absorbee par l'Epic 60.
 Les documents sont ranges par etat dans l'[index de la roadmap](README.md).
 
 | Etat | Epics |
 | --- | --- |
-| A faire | `EPIC-54`, `EPIC-58`, `EPIC-62`, `EPIC-64`, `EPIC-65`, `EPIC-67`, `EPIC-68` |
-| En cours | `EPIC-55`, `EPIC-66` |
+| A faire | `EPIC-54`, `EPIC-58`, `EPIC-62`, `EPIC-64`, `EPIC-67`, `EPIC-68` |
+| En cours | `EPIC-55`, `EPIC-65`, `EPIC-66` |
 | Termine | 56 epics : toutes les autres epics de `EPIC-01` a `EPIC-60`, et `EPIC-63`, hors `EPIC-05` et `EPIC-12` |
 | Abandonne | `EPIC-05` : QR commercant remplace par l'Epic 10 ; `EPIC-12` : flux manuel decommissionne par l'Epic 39 |
 | Fusionnee | `EPIC-61` dans `EPIC-60` ; non comptee comme terminee |
@@ -23,7 +23,7 @@ un seul fichier par sujet. Trois identifiants applicatifs complètent ce tronc :
 | [EPIC-MARKETPLACE-54](a-faire/epic-marketplace-54-harmonisation-identite-visuelle-marketplace-backlog.md) | Identité visuelle ; distinct du calendrier de l'Avent 54 | À faire (classement courant ; implémentation locale documentée, revue et recette attendues) |
 | [EPIC-PRES-CONTENU-001](terminees/epic-animation-edition-prestations.md) | Édition directe des prestations ; le futur sas reste dans l'EPIC 62 | Terminée (parcours existant) |
 
-Le total consolidé est de **71 identifiants : 58 terminés, 8 à faire, 2 en cours,
+Le total consolidé est de **71 identifiants : 58 terminés, 7 à faire, 3 en cours,
 2 abandonnés et 1 fusionné**. L'ancien numéro local Marketplace 53 (pagination)
 est rattaché à l'EPIC 57, sans ajouter d'identifiant ni le confondre avec la tombola.
 
@@ -74,12 +74,12 @@ Derniere evolution suivie :
   multi-prestations sur place et exclure l'image d'un coffret matériel à recevoir ;
   critères 22 et 23 implémentés ; tests du prompt et de l'aperçu, relecture humaine du résultat IA maintenue.
 
-- [Epic 65 — Vues ERP audit, paiements et reversements](a-faire/epic-65-vues-erp-audit-paiements-reversements-backlog.md) :
+- [Epic 65 — Vues ERP audit, paiements et reversements](en-cours/epic-65-vues-erp-audit-paiements-reversements-backlog.md) :
   cadrage du 26 septembre 2026 ; trois vues intégrées, recherche, filtres et détail,
   accès ADMIN conservé ; paiements et reversements sous « Paiements et facturation ».
   Réutiliser les lectures et le suivi 360 existants, sans nouveau flux financier.
-  [Spécification V1 disponible](../specifications/epic-65-vues-erp/README.md),
-  hypothèses de périmètre explicites et implémentation à réaliser ; les epics 30, 39, 43, 44, 51 et 60
+  [Spécification V1.4 et bilan d’implémentation](../specifications/epic-65-vues-erp/README.md),
+  périmètre financier confirmé et implémentation locale en validation ; les epics 30, 39, 43, 44, 51 et 60
   conservent leur clôture historique.
 
 - [Epic 64 - Parcours de retractation en ligne depuis le site](a-faire/epic-64-parcours-retractation-en-ligne-backlog.md) :

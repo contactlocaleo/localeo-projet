@@ -2,11 +2,14 @@
 
 [Retour à la roadmap](../README.md)
 
-Deux EPIC sont classées en cours. Ce classement ne vaut ni clôture ni déploiement.
+Trois EPIC sont classées en cours. Ce classement ne vaut ni clôture ni déploiement.
 
 - [EPIC 55 — Moteur commun et chasse au trésor](epic-55-chasse-tresor-commercante-backlog.md) :
   conception, arbitrages et suivi de livraison. La [spécification unique](../../specifications/moteur-animation/localeo_animation_engine_spec.md)
   décrit la cible ; ce classement ne vaut pas validation de l'implémentation.
+- [EPIC 65 — Vues ERP audit, paiements et reversements](epic-65-vues-erp-audit-paiements-reversements-backlog.md) :
+  périmètre financier confirmé le 1er octobre ; implémentation et validation locales,
+  [spécification et preuves](../../specifications/epic-65-vues-erp/README.md).
 - [EPIC 66 — Localeo Atelier : coffrets assistés par IA](epic-66-localeo-atelier-coffrets-assistes-ia-backlog.md) :
   implémentation locale réalisée, validation en cours ;
   [spécification et preuves](../../specifications/epic-66-localeo-atelier/README.md).

@@ -1,5 +1,38 @@
 # Guide de formation au back-office Localeo
 
+## Consultations ERP Audit, Paiements et Reversements — EPIC 65
+
+La version implémentée localement le 1er octobre 2026 ajoute trois vues réservées
+aux administrateurs. Leur présence sur un environnement dépend de sa livraison.
+Le [bilan E65](../../../specifications/epic-65-vues-erp/verification-livraison.md)
+distingue les tests locaux et la recette d'environnement.
+
+- **Supervision technique → Événements d'audit** (`/internal/erp/audit`) :
+  rechercher une référence, filtrer les événements et ouvrir leur détail.
+  Les métadonnées sensibles sont occultées ; « Non renseigné » ne désigne pas
+  l'administrateur qui consulte. Les dates sont celles des événements.
+- **Paiements et facturation → Paiements** (`/internal/erp/paiements`) :
+  achats et commandes, y compris les lots Animation. Les tentatives restent
+  distinctes, les frais inconnus restent inconnus, les totaux sont par devise.
+  La période porte sur la création du paiement, pas sur sa date d'encaissement.
+  Depuis le détail, ouvrir les achats et leurs traces ou demandes de facture ;
+  une trace ne garantit pas qu'un fichier soit téléchargeable.
+- **Paiements et facturation → Reversements** (`/internal/erp/reversements`) :
+  commerces concernés par une campagne ou une période, puis mouvements,
+  reversements, paiements et virements associés. La composition du dossier
+  reste complète, y compris les mouvements hors période signalés.
+
+Un transfert crédite le compte Stripe du commerce. Il ne prouve pas un virement
+sur sa banque. La couverture « complète » décrit la qualité des rattachements ;
+consulter la section Virements pour leur état bancaire, qui peut être en échec.
+Le bouton Actualiser relit les faits enregistrés sans appeler Stripe ni générer
+de document. Les commandes financières restent dans la console existante.
+
+Les filtres partagés sont conservés dans l'URL ; la recherche libre et l'acteur
+restent dans l'onglet. Après expiration de session, les résultats sont effacés.
+Une erreur d'actualisation n'est pas une absence d'opérations : le message
+« Données non actualisées » accompagne les anciens résultats conservés.
+
 ## Objet
 
 Ce document sert de guide de formation pour une personne qui doit prendre en charge le back-office Localeo.

@@ -5,12 +5,12 @@
 - Date de cadrage : **26 septembre 2026**.
 - Identifiant : **EPIC-65**, disponible après recherche dans la roadmap commune,
   ses identifiants applicatifs et les documents des dépôts voisins.
-- État produit : **À faire**, selon la [roadmap commune](../README.md).
+- État produit : **En cours**, selon la [roadmap commune](../README.md).
 - Demande : disposer dans Localeo ERP d’une vue des événements d’audit et de
   deux vues de suivi, « Paiements » et « Reversements », sous « Paiements et facturation ».
-- Phase réalisée : **cadrage et spécification V1.2**, revue le 30 septembre 2026 ; voir le
+- Phase réalisée : **spécification V1.4 et implémentation locale**, le 1er octobre 2026 ; voir le
   [dossier canonique](../../specifications/epic-65-vues-erp/README.md).
-  Aucune implémentation livrée. Priorité et date de livraison non fixées.
+  Validation locale et limites dans le bilan ; aucun déploiement effectué.
 
 ### Rattachement et dépendances
 
@@ -62,8 +62,7 @@ nouveau n’est nécessaire. Ce constat ne constitue pas une recette de l’envi
 
 Revue du 30 septembre : raccourcis et gardes confirmés sur backend `3252c72`,
 projet `484f10d`. La V1.2 précise les lectures documentaires (trace distincte du
-fichier), les rattachements financiers et l'assainissement d'audit ; aucun code
-applicatif n'est modifié durant cette phase.
+fichier), les rattachements financiers et l'assainissement d'audit ; ce constat décrit la phase de spécification, avant l'implémentation du 1er octobre.
 
 **Acteurs :** exploitation et support habilités pour l’audit, finance et support
 habilités pour les paiements et reversements. **Accès initial conservé : ADMIN.**
@@ -168,7 +167,7 @@ en bout avant d’être annoncée disponible ; cet ordre reste une proposition.
 
 ## Questions ouvertes pour la spécification
 
-La [spécification revue le 30 septembre](../../specifications/epic-65-vues-erp/README.md)
+La [spécification revue le 1er octobre](../../specifications/epic-65-vues-erp/README.md)
 répond à l’inventaire des sources et formalise les hypothèses H01/H02 : paiements
 d’achats/commandes existants, souscriptions hors agrégation, consultation et liens
 vers actions existantes. Les questions ci-dessous conservent leur portée produit ;
@@ -198,7 +197,24 @@ et la [matrice de preuves](../../specifications/epic-65-vues-erp/verification-li
 portent la préparation de l’implémentation. Les dix identifiants de critères
 sont conservés ; V1.2 explicite pour CA-07 la garantie sur jeu stable et les
 lectures concurrentes, sans promettre un export figé absent du contrat V1.1.
+La V1.3 précise la chaîne de session persistée, les refus HTML/JSON et le cache,
+la normalisation des devises et le compte Stripe historique des reversements.
+Les lots L01 (Audit), L02 (Paiements) et L03 (Reversements) et leurs dépendances
+sont décrits dans le dossier canonique ; aucun code applicatif n'est ajouté.
 Les extensions H01/H02 restent à confirmer si elles sont souhaitées ; le périmètre
 de consultation décrit peut être préparé indépendamment. Les tests fonctionnels
 et la recette sont **à réaliser** ; le contrôle de liens documentaire ne vaut
-ni validation métier ni livraison des vues. L’état produit reste **À faire**.
+ni validation métier ni livraison des vues. À l'issue de cette phase V1.3,
+l'état produit restait **À faire**.
+
+## Implémentation V1.4 — 1er octobre 2026
+
+L'utilisateur confirme H01/H02 : paiements d'achats et commandes, lots Animation
+inclus, consultation et liens vers les actions existantes. Les lots Audit,
+Paiements et Reversements sont implémentés localement, avec projections partagées
+pour Vision 360 et console financière, protections de session et vues ERP.
+
+Le [bilan canonique](../../specifications/epic-65-vues-erp/verification-livraison.md#bilan-dimplementation-v14)
+consigne les tests, revues et limites. Le backlog passe **En cours** ; aucune
+clôture, ouverture des profils E35 ou disponibilité déployée n'est déduite des
+preuves locales. Les dix critères restent conservés.

@@ -1,8 +1,8 @@
 # EPIC 65 — Architecture et contrats cibles
 
-Spécification V1.2, revue le 30 septembre 2026. [Parcours et périmètre](README.md),
-[preuves attendues](verification-livraison.md). Les routes et DTO **nouveaux**
-ci-dessous sont à implémenter ; ils ne décrivent pas une API actuellement déployée.
+Spécification V1.4, implémentation locale le 1er octobre 2026. [Parcours et périmètre](README.md),
+[preuves attendues](verification-livraison.md). Les routes et DTO ci-dessous sont implémentés localement ; le contrat exporté
+provient du code. Cela ne prouve pas leur disponibilité sur un environnement déployé.
 
 ## Propriétaires et frontières
 
@@ -107,6 +107,45 @@ Pas d’état sensible en stockage persistant navigateur. Les GET n’exigent pa
 clé d’idempotence ; répétition autorisée sans effet métier. Le mécanisme de
 session et les logs d’observabilité existants restent applicables. Aucune nouvelle
 écriture d’audit de consultation n’est introduite qui alimenterait sa propre liste.
+
+### Intégration dans la chaîne de session existante
+
+La relecture du backend `ad42635` distingue trois contrôles complémentaires :
+[`AdminSessionMiddleware`](../../../../localeo-backend/app/security/admin_session.py)
+vérifie la session persistée et sa révocation ;
+[`contexte_erp`](../../../../localeo-backend/app/security/erp.py) vérifie les
+attributs d'identité et de rôle du cookie ; la politique ADMIN refuse ensuite
+les lectures globales aux autres profils. Le cookie seul ne prouve pas que la
+session est encore valide. Une indisponibilité du registre des sessions renvoie
+503 et ne doit jamais permettre une lecture des données E65.
+
+Les tests actuels `test_erp_session_access.py` montent le routeur avec le seul
+`SessionMiddleware` : ils prouvent les contrôles du cookie, pas la révocation
+persistée. Les nouveaux tests E65 doivent aussi monter la chaîne complète dans
+une application isolée, avec un double explicite du registre, puis vérifier
+session active, expirée, révoquée et registre indisponible. Le rôle ADMIN est
+contrôlé avant la projection métier, y compris sur une section ou un UUID absent.
+
+Le middleware global de `main.py` choisit aujourd'hui certaines redirections
+selon `Accept: text/html`. Pour les nouvelles API JSON E65, une requête anonyme
+reste un 401 JSON, même avec cet en-tête ; seule une page HTML de consultation
+redirige en 303 vers la connexion. Adapter cette classification pour les routes
+E65 identifiées, sans exempter globalement leurs préfixes de l'authentification.
+Les erreurs 401/403/404/422/503, comme les succès, portent `Cache-Control: no-store`.
+
+Le routeur IHM actuel n'admet ni les trois nouvelles pages ni leurs détails.
+Ajouter leurs routes et garde ADMIN avant les routes génériques du shell ;
+garder les assets dans l'allowlist du serveur. Les rubriques Finance/Supervision
+restent accessibles selon les droits actuels, mais leurs nouvelles destinations
+E65 sont proposées seulement aux ADMIN. Aucune redirection générale des anciennes
+URL SQLAdmin n'est requise : leurs accès historiques restent disponibles.
+
+« Lecture sans mutation » vise les données métier : aucun paiement, mouvement,
+document ou événement d'audit ne change. Le registre de session et le mécanisme
+existant de renouvellement d'activité restent autorisés. La lecture cohérente
+des projections n'englobe pas la transaction technique de vérification de session.
+E65 n'introduit ni renouvellement de rôle depuis un nouveau référentiel ni
+refonte des profils : ces évolutions restent dans E35.
 
 ## Paramètres et enveloppe commune
 
@@ -273,7 +312,7 @@ Tri : `(date_creation DESC, id DESC)`.
 | `createdAt` | `date_creation` UTC, pas `paidAt`. |
 | `rootKey`, `rootType`, `rootId`, `origin` | Racine canonique `COMMANDE:<uuid>` ou `ACHAT:<uuid>` ; achat enfant rattaché à sa commande. Conserver aussi `sourceAchatId`/`sourceCommandeId` pour expliquer le rattachement original. |
 | `payerLabel` | Libellé masqué issu du dossier racine ; coordonnées complètes accessibles seulement par le parcours existant habilité/audité, jamais copiées dans la liste. |
-| `grossAmountCents`, `currency` | `montant_brut_centimes`, `devise` ; nullables, aucune valeur EUR inventée. |
+| `grossAmountCents`, `currency` | `montant_brut_centimes`, `devise` normalisée selon la règle commune ci-dessous ; nullables, aucune valeur EUR inventée. |
 | `stripeFeeAmountCents`, `stripeNetAmountCents` | `stripe_fee_amount`, `stripe_net_amount`, nullables. |
 | `localeoGrossCommissionCents`, `localeoEstimatedNetCommissionCents` | Colonnes de commission existantes ; estimation explicitement nommée. |
 | `financialsStatus`, `financialsSyncedAt` | `stripe_financials_status` (`PENDING`, `COMPLETE`, `FAILED`, `NOT_APPLICABLE`) et date persistée. |
@@ -516,6 +555,15 @@ La cohérence des références utilise les faits du producteur
 [`payouts_stripe.py`](../../../../localeo-backend/app/application/gestion_reversement/services/payouts_stripe.py) :
 `destination_payment_id` de l'association doit correspondre au paiement de
 reversement ; le compte connecté du payout doit correspondre à sa destination.
+La destination de référence est le compte **historisé sur le reversement**
+(`ReversementOrm.stripe_account_id`), confronté à la destination de l'intention
+persistée lorsqu'elle existe
+(`metadata_stripe.intention_transfer.requete.destination_account_id`). Le compte
+Stripe actuel du commerçant ne remplace pas cette preuve historique : son
+changement ne doit ni déplacer un ancien flux ni invalider une association
+cohérente vers l'ancien compte. Si les faits historiques se contredisent ou
+ne permettent pas d'attester la destination, la couverture reste non attestée.
+La consultation ne réécrit ni le compte historisé ni les associations.
 Contrôler également devise et montant inclus. `connected_balance_transaction_id`
 désigne le flux du **compte connecté** ; il n'est pas le
 `stripe_balance_transaction_id` enregistré à partir du Transfer sur le paiement
@@ -532,6 +580,28 @@ issue du domaine. Les mouvements/payouts ont leur devise persistée ; une diverg
 produit une anomalie, pas une conversion ni une somme mélangée. Convertir les
 `Numeric` exactement en unités mineures par `Decimal`, jamais via `float`.
 
+### Normalisation commune des devises — CA-03, CA-05, CA-06, CA-07
+
+La relecture des producteurs montre deux représentations : les paiements
+validés et mouvements utilisent notamment `EUR`, tandis que le service payouts
+conserve la valeur fournisseur, notamment `eur`. Une différence de casse ne
+constitue pas une différence de monnaie.
+
+La politique pure commune applique trim puis majuscules ASCII avant comparaison,
+regroupement ou égalité de filtre ; un code exploitable contient trois lettres
+ASCII. Une valeur absente, vide ou mal formée devient inconnue et conserve son
+compteur d'incomplétude, sans repli EUR. Un filtre devise vide ou mal formé est
+refusé en 422 ; un code bien formé sans résultat retourne une liste vide. Le DTO
+`currency` expose cette valeur normalisée ou null. Cette normalisation n'écrit
+pas dans les lignes source, ne convertit aucun montant et ne modifie pas les
+unités monétaires des modèles historiques.
+
+Ainsi `EUR`, `eur` et ` EUR ` composent un même groupe EUR ; un payout `eur`
+peut couvrir un paiement EUR si les autres preuves concordent. EUR et USD
+restent deux groupes et une association EUR/USD reste incohérente. Partager
+cette politique entre projection paiements, suivi ERP et adaptateur 360 ;
+aucune normalisation ou conversion supplémentaire dans le JavaScript.
+
 ## Refus, compatibilité et données
 
 Erreurs conformes au socle API : 401 session absente/incomplète, 403 rôle interdit,
@@ -547,11 +617,12 @@ optionnel, `detail` assaini, `correlationId`, alias historique `request_id` et
 échouer la réponse liste+synthèse ; une section indépendante du détail peut
 afficher son propre échec, sans inventer un résultat vide.
 
-À l’implémentation, le contrat Pydantic producteur sera exporté hors ligne vers
+Le contrat Pydantic producteur a été exporté hors ligne vers
 `docs/specifications/epic-41-api/openapi.json` par
 [`generate_epic41_openapi.py`](../../../../localeo-backend/scripts/documentation/generate_epic41_openapi.py),
 qui utilise le chargeur isolé `export_openapi_offline.py`.
-Ne pas modifier aujourd’hui cet OpenAPI pour annoncer des routes inexistantes.
+L'export V1.4 décrit les routes implémentées et a été contrôlé sémantiquement
+contre l'instantané précédent ; voir le bilan de vérification.
 L’ERP ne doit pas embarquer un deuxième schéma maintenu à la main. Les anciens
 contrats publics/protégés et les trois frontends restent inchangés ; les routes
 historiques de consultation/actions conservent leurs chemins et permissions.
@@ -569,3 +640,38 @@ décrits ici doivent être matérialisés et couverts par tests avant
 de déclarer les vues prêtes. Ils ne justifient ni réemploi aveugle de l’ancien
 constructeur ni élargissement des permissions. Les choix H01/H02 du README
 limitent explicitement la couverture financière de cette version.
+
+
+## Contrats implémentés — précisions V1.4
+
+- Les schémas fermés sont dans `consultation_audit_api.py`,
+  `consultation_paiements_api.py` et `consultation_reversements_api.py` ; tags
+  `internal` et domaine propriétaire. Les routes HTML précèdent le shell générique.
+- `ConsultationErpMiddleware` intervient après le contrôle de session persistée
+  et avant le garde global HTML : une API anonyme conserve un 401 JSON, quel que
+  soit `Accept`. Les dépendances répètent le contrôle ADMIN avant toute projection.
+- `DetailAudit.method` est la méthode HTTP assainie. `businessReferences` et
+  `links` utilisent `type: MERCHANT|PURCHASE|INSTANCE` et UUID. Les codes et champs
+  modifiés non recensés restent occultés ; aucune clé inconnue n'est renvoyée.
+- `summary.groups` des paiements contient les groupes devise/état normalisé et
+  cinq agrégats monétaires. `invoiceRequests` des achats est borné à 20 demandes,
+  avec `invoiceRequestCount` et `invoiceRequestsTruncated`. Les tables de traces
+  disponibles ne prouvent pas un téléchargement : elles produisent `TRACE_ONLY`
+  ou `NONE`, jamais un faux `AVAILABLE`. Une panne de lecture indispensable
+  répond 503, sans retourner un faux zéro ni une fausse absence de pièce.
+- Le suivi des reversements expose `cancelledCount`, un code `status` de synthèse
+  et un `pipeline` sous forme de liste `{stage,count,amount}`. Un mouvement expose
+  `outsidePeriod` dans le suivi filtré du commerce. Les sections sans période
+  conservent la composition complète sans inventer une fenêtre de référence.
+- Les champs de section `blockers` portent les diagnostics de leurs objets.
+  La couverture bancaire reste un enum `NONE|UNKNOWN|PARTIAL|COMPLETE` ; les états
+  du payout sont distincts, y compris après un échec tardif. Les associations
+  de tentatives du même flux sont dédupliquées ; des montants contradictoires
+  ne constituent même pas une preuve partielle de ce flux.
+- La console historique et son CSV consomment la projection partagée. Le CSV
+  sépare les devises et indique la complétude des montants et la couverture des
+  rattachements, au lieu d'attribuer à tout un commerce l'état de son dernier payout.
+  L'URL d'export et les commandes financières existantes sont conservées.
+
+Les détails des résultats réellement exécutés et des écarts examinés sont dans
+le [bilan de validation](verification-livraison.md#bilan-dimplementation-v14).

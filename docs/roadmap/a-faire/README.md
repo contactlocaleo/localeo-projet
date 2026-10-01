@@ -2,18 +2,18 @@
 
 [Retour à la roadmap](../README.md)
 
-Huit EPIC sont classées à faire. Les bilans techniques et réserves de chaque backlog restent conservés.
+Sept EPIC sont classées à faire. Les bilans techniques et réserves de chaque backlog restent conservés.
 
 - [EPIC 54 — Calendrier de l'Avent local](epic-54-calendrier-avent-local-backlog.md)
 - [EPIC 58 — Filtre annuel global Animation](epic-58-filtre-annuel-global-backlog.md)
 - [EPIC 62 — Validation des modifications de prestations](epic-62-validation-modifications-prestations-backlog.md)
 - [EPIC 64 — Rétractation en ligne](epic-64-parcours-retractation-en-ligne-backlog.md)
-- [EPIC 65 — Vues ERP audit, paiements et reversements](epic-65-vues-erp-audit-paiements-reversements-backlog.md)
 - [EPIC 67 — Communautés de communes et coffrets intercommunaux](epic-67-communautes-communes-coffrets-intercommunaux-backlog.md)
 - [EPIC 68 — Parcours commerçant de préparation et finalisation de l'onboarding](epic-68-parcours-commercant-preparation-onboarding-backlog.md)
 - [EPIC-MARKETPLACE-54 — Identité visuelle](epic-marketplace-54-harmonisation-identite-visuelle-marketplace-backlog.md)
 
-Les [EPIC 55](../en-cours/epic-55-chasse-tresor-commercante-backlog.md) et
+Les [EPIC 55](../en-cours/epic-55-chasse-tresor-commercante-backlog.md),
+[EPIC 65](../en-cours/epic-65-vues-erp-audit-paiements-reversements-backlog.md) et
 [EPIC 66](../en-cours/epic-66-localeo-atelier-coffrets-assistes-ia-backlog.md) sont en cours.
 
 ## Plans transverses

@@ -1,19 +1,19 @@
 # Suivi backlog
 
-Mise à jour du classement : 2026-09-30 (EPIC-68 ajoutée à faire ; autres états conservés)
+Mise à jour du classement : 2026-10-01 (EPIC-65 en cours ; implémentation et validation locales)
 
 ## Synthese
 
 Évolution transverse du 29 septembre 2026 : [PWA-20260929 — installation et mise à jour](../specifications/installation-mise-a-jour-pwa.md), appliquée aux sept PWA existantes. Les états et clôtures historiques des EPIC restent inchangés ; preuves locales et recette appareil sont distinguées dans la spécification.
 
 - Identifiants EPIC suivis : 71 ; 68 du tronc commun et 3 identifiants applicatifs distincts.
-- EPICs a faire : 8 ; EPICs en cours : 2 (EPIC-55 et EPIC-66).
+- EPICs a faire : 7 ; EPICs en cours : 3 (EPIC-55, EPIC-65 et EPIC-66).
 - EPICs fusionnees : 1 (EPIC-61 vers EPIC-60).
 - EPICs terminees : 58 (56 du tronc commun et 2 applicatives) ; EPICs abandonnees : 2.
 - US / PRD detaillees dans le tableau historique : 415, jusqu'a `EPIC-45`.
 - Source prioritaire : fichier backlog dedie quand disponible, sinon `product-roadmap.md`.
-- Référence de pilotage : EPIC-55 et EPIC-66 sont en cours. EPIC-54, EPIC-58, EPIC-62,
-  EPIC-64, EPIC-65, EPIC-67, EPIC-68 et EPIC-MARKETPLACE-54 sont à faire. EPIC-47 est terminée,
+- Référence de pilotage : EPIC-55, EPIC-65 et EPIC-66 sont en cours. EPIC-54, EPIC-58, EPIC-62,
+  EPIC-64, EPIC-67, EPIC-68 et EPIC-MARKETPLACE-54 sont à faire. EPIC-47 est terminée,
   clôture produit confirmée. EPIC-05 et EPIC-12 sont abandonnées ;
   EPIC-61 est fusionnée dans EPIC-60. Les autres EPIC du tronc commun sont terminées.
 - Classement et motifs : [index de la roadmap](README.md).
@@ -25,8 +25,8 @@ Mise à jour du classement : 2026-09-30 (EPIC-68 ajoutée à faire ; autres éta
 
 | Etat | Nombre |
 | --- | ---: |
-| A faire | 8 |
-| En cours | 2 |
+| A faire | 7 |
+| En cours | 3 |
 | Abandonne | 2 |
 | Fusionnee | 1 |
 | Termine | 58 |
@@ -58,7 +58,7 @@ réaliser. Le statut « Terminé » des PRD-251 à PRD-260 ne couvre pas cette �
 | EPIC-58 | Filtre annuel global Animation | Cadrage et conception disponibles ; arbitrages a valider |
 | EPIC-62 | Validation des modifications de prestations, BUM et Localeo Support | Cadrage initial ; perimetre multi-copies et habilitations a confirmer |
 | EPIC-64 | Parcours de retractation en ligne depuis le site | Critique ; cadrage initial, exigences legales, parcours et 10 stories a developper |
-| EPIC-65 | Vues ERP audit, paiements et reversements | Spécification V1 disponible ; dix critères reliés aux contrats/tests prévus ; hypothèses paiements et actions explicites, implémentation à réaliser |
+| EPIC-65 | Vues ERP audit, paiements et reversements | Spécification V1.4 du 1er octobre ; périmètre financier confirmé, implémentation et validation locales ; preuves et limites dans le bilan |
 | EPIC-66 | Localeo Atelier : coffrets assistés par IA | V1.1 : douze critères, JSON/WebP, création atomique, conservation 30 jours. V1.2 : PWA/menu (13 à 17), prix TTC proposé modifiable (18 à 21) et prompt expérience (22/23) implémentés et testés localement ; recette appareils déployés restante, preuves dans le bilan. |
 | EPIC-67 | Communautés de communes et coffrets intercommunaux | Cadrage initial ; quatorze critères, référentiel et commercialisation multi-communes, extension Atelier ; règles d'évolution des adhésions et droits à spécifier |
 | EPIC-68 | Parcours commerçant de préparation et finalisation de l'onboarding | Cadrage initial ; dix-sept critères, préparation avant J, réception confirmée et questions, Stripe/contrat/documents/prestations, rendez-vous d'une heure et autonomie ; délais et déroulé à arbitrer |
@@ -577,7 +577,7 @@ anciennes US restent historiques.
 | EPIC-62 | A faire | a-faire/epic-62-validation-modifications-prestations-backlog.md |
 | EPIC-63 | Termine | terminees/epic-63-jeux-demonstration-communes-backlog.md ; [specification technique](../specifications/epic-63-demonstrations-communes/README.md) |
 | EPIC-64 | A faire | [epic-64-parcours-retractation-en-ligne-backlog.md](a-faire/epic-64-parcours-retractation-en-ligne-backlog.md) |
-| EPIC-65 | A faire | [backlog](a-faire/epic-65-vues-erp-audit-paiements-reversements-backlog.md), [spécification V1](../specifications/epic-65-vues-erp/README.md) |
+| EPIC-65 | En cours | [backlog](en-cours/epic-65-vues-erp-audit-paiements-reversements-backlog.md), [spécification V1.4](../specifications/epic-65-vues-erp/README.md) |
 | EPIC-66 | En cours | [backlog](en-cours/epic-66-localeo-atelier-coffrets-assistes-ia-backlog.md), [spécification V1](../specifications/epic-66-localeo-atelier/README.md) ; implémentation locale réalisée, validation en cours |
 | EPIC-67 | A faire | [backlog](a-faire/epic-67-communautes-communes-coffrets-intercommunaux-backlog.md) |
 | EPIC-68 | A faire | [backlog](a-faire/epic-68-parcours-commercant-preparation-onboarding-backlog.md) |

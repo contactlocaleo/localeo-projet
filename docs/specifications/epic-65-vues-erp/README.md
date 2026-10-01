@@ -2,11 +2,12 @@
 
 ## Statut et périmètre
 
-Spécification V1 du **26 septembre 2026**, revue **V1.2 le 30 septembre 2026**, issue du
-[backlog EPIC 65](../../roadmap/a-faire/epic-65-vues-erp-audit-paiements-reversements-backlog.md).
-État produit : **À faire**, selon la [roadmap](../../roadmap/README.md).
-Ce dossier décrit une cible à implémenter ; aucune route nouvelle, migration
-ou recette métier n’est déclarée livrée.
+Spécification V1 du **26 septembre 2026**, implémentation **V1.4 le 1er octobre 2026**, issue du
+[backlog EPIC 65](../../roadmap/en-cours/epic-65-vues-erp-audit-paiements-reversements-backlog.md).
+État produit : **En cours**, selon la [roadmap](../../roadmap/README.md).
+Les trois consultations sont implémentées localement dans le backend ; les
+preuves et limites figurent dans le [bilan](verification-livraison.md#bilan-dimplementation-v14).
+Aucun déploiement ni changement de profils E35 n'est déclaré réalisé.
 
 - [Architecture et contrats cibles](architecture-contrats.md).
 - [Traçabilité, tests et livraison](verification-livraison.md).
@@ -26,7 +27,7 @@ frontends ne consomment pas ces nouveaux écrans ni leurs API internes.
 demande une lecture métier pour Lecteur et des droits métier complets pour
 Backoffice, sans technique/exploitation. Elle nécessite de réviser `E65-D02`
 pour les paiements/reversements, avec Audit global proposé comme Admin seul.
-Ce changement reste à spécifier et implémenter dans E35 ; la V1.2 conserve
+Ce changement reste à spécifier et implémenter dans E35 ; la V1.3 conserve
 le socle ADMIN et explicite ci-dessous les conditions de livraison combinée.
 Les tests de refus de ce socle ne constituent pas les preuves des nouveaux profils.
 
@@ -34,16 +35,15 @@ Les tests de refus de ce socle ne constituent pas les preuves des nouveaux profi
 | --- | --- | --- |
 | E65-D01 | Demande acquise : trois vues intégrées à l’ERP, Audit dans Supervision, Paiements et Reversements dans « Paiements et facturation ». | Remplacer les raccourcis vers les listes SQLAdmin pour ces consultations. |
 | E65-D02 | Conservation des droits existants : ADMIN exclusivement. | EXPLOITATION reste refusé même avec une session ERP et des communes ; aucune permission nouvelle accordée. |
-| E65-H01 | Hypothèse de première livraison, soumise à précision utilisateur : paiements de `PaiementOrm`, achats et commandes d’achat. | Abonnements et commandes de souscription restent dans leurs dossiers existants ; pas d’agrégation de sources financières différentes. Les achats de lots Animation représentés par une commande d’achat sont inclus. |
-| E65-H02 | Hypothèse de première livraison, soumise à précision utilisateur : consultation ERP et liens vers les actions financières existantes. | Pas de nouveau formulaire de lancement/reprise de campagne dans ces vues ; les contrôles d’accès et de commande des écrans actuels sont conservés. |
+| E65-H01 | Confirmé par l'utilisateur le 1er octobre 2026 : paiements de `PaiementOrm`, achats et commandes d’achat. | Abonnements et commandes de souscription restent dans leurs dossiers existants ; pas d’agrégation de sources financières différentes. Les achats de lots Animation représentés par une commande d’achat sont inclus. |
+| E65-H02 | Confirmé par l'utilisateur le 1er octobre 2026 : consultation ERP et liens vers les actions financières existantes. | Pas de nouveau formulaire de lancement/reprise de campagne dans ces vues ; les contrôles d’accès et de commande des écrans actuels sont conservés. |
 | E65-D03 | Contrainte conservée : lecture sans mutation métier ni appel Stripe. | L’actualisation ne synchronise pas les frais, ne réconcilie rien, ne génère pas de document. |
 | E65-D04 | Choix technique : projections paginées, filtrage en base, détails bornés, dates et montants explicites. | Ne pas exposer une liste ORM ni tronquer des données en mémoire à 200 lignes. |
 
-Les deux questions H01/H02 ont été posées pendant la spécification ; leur absence
-de réponse ne vaut pas validation. La conception ci-dessous est complète pour
-ce périmètre conservateur. Une demande d’agrégation des abonnements ou d’actions
-intégrées doit compléter ses contrats avant d’implémenter ces extensions ; elle
-n’empêche pas de préparer Audit et les composants de lecture communs.
+Les références H01/H02 sont conservées pour la traçabilité : l'utilisateur a
+confirmé ce périmètre avant l'implémentation des lots financiers. Abonnements
+et nouvelles actions intégrées restent exclus. Les consultations utilisent
+les mêmes droits ADMIN que l'audit, sans élargissement implicite E35.
 
 ### Dépendance aux profils E35
 
@@ -75,6 +75,13 @@ ADMIN/EXPLOITATION et la politique ADMIN des interfaces historiques sont
 toujours présents. Les nouvelles routes E65 ne sont pas déclarées dans le code
 examiné. Le fichier de suivi des environnements, déjà modifié localement, reste
 hors de cette intervention.
+
+Relecture V1.3 : backend `ad42635`, projet `92f3d2a`, arbres propres au démarrage.
+Les trois destinations renvoient toujours aux listes SQLAdmin et les routes
+internes E65 restent absentes. La vérification de session persistée est portée
+par `AdminSessionMiddleware`, distinct du contrôle des attributs du cookie ERP.
+La revue des producteurs financiers précise les devises EUR/eur et le compte
+Stripe historisé du reversement ; les contrats ci-dessous intègrent ces points.
 
 | Surface | Code existant | Écart à traiter |
 | --- | --- | --- |
@@ -233,13 +240,23 @@ ne justifie aucun nouveau POST dans les trois vues de consultation.
 
 ## Préparation de l’implémentation
 
-Audit, navigation ADMIN et composants de lecture peuvent être implémentés selon
-ces contrats. Les vues financières sont décrites pour H01/H02, sans traiter ces
-hypothèses comme un consentement à étendre les flux. La couverture des modèles
-de souscription et l’intégration d’actions supplémentaires nécessitent un
-complément si elles sont retenues.
+La V1.3 complète les contrats et les preuves, sans changer les dix critères ni
+ouvrir de nouveaux droits. Le découpage suivant permet de livrer des vues
+complètes et de garder explicites les dépendances :
 
-La disponibilité effective dépendra des tests de contrats, d’isolation et des
-requêtes sur base jetable, puis de la recette bureau/mobile. Les limites, jeux
-et contrôles prévus figurent dans le document de vérification ; aucun résultat
-de test applicatif n’est annoncé sur la seule base de cette spécification.
+| Lot | Périmètre et résultat vérifiable | Condition de préparation |
+| --- | --- | --- |
+| E65-L01 | Navigation ADMIN, chaîne de session, Audit liste/détail, filtres, pagination et occultation | Indépendant de H01/H02 et des nouveaux profils E35 ; tests CA-01/02/07/08/09/10 prévus |
+| E65-L02 | Paiements d'achats/commandes, parité Vision 360, synthèses par devise et pièces disponibles | Contrats décrits pour H01, avec liens existants selon H02 ; aucune souscription agrégée ou commande supplémentaire déduite de l'absence de réponse |
+| E65-L03 | Projection commune ERP/360 des reversements, sources et couverture bancaire | Politique de lecture partagée, compte de destination historique et devises normalisées ; tests CA-05/06 et non-régression de la console |
+
+L01/L02/L03 sont implémentés dans le périmètre ADMIN ; H01/H02 ont été confirmés
+le 1er octobre. Leur validation et les limites restantes sont suivies dans le bilan.
+L'extension E35 n'est pas incluse dans ces lots. Les plans SQL sont examinés sur
+base jetable, sans en déduire une capacité de production ou un index nécessaire.
+La couverture des modèles de souscription et l'intégration d'actions nouvelles
+restent des extensions à spécifier si elles sont retenues.
+
+Le [bilan de validation](verification-livraison.md#bilan-dimplementation-v14)
+porte les tests réellement exécutés, les revues, les captures et les limites.
+La disponibilité sur un environnement réel dépend d'une livraison distincte.
