@@ -7,7 +7,7 @@ Spécification V1 du **26 septembre 2026**, implémentation **V1.4 le 1er octobr
 État produit : **En cours**, selon la [roadmap](../../roadmap/README.md).
 Les trois consultations sont implémentées localement dans le backend ; les
 preuves et limites figurent dans le [bilan](verification-livraison.md#bilan-dimplementation-v14).
-Aucun déploiement ni changement de profils E35 n'est déclaré réalisé.
+Aucun déploiement ni changement de profils E69 n'est déclaré réalisé.
 
 - [Architecture et contrats cibles](architecture-contrats.md).
 - [Traçabilité, tests et livraison](verification-livraison.md).
@@ -22,12 +22,12 @@ frontends ne consomment pas ces nouveaux écrans ni leurs API internes.
 
 ### Choix et hypothèses
 
-Évolution ultérieure cadrée le 28 septembre 2026 :
-[E35-PROFILS-20260928](../../roadmap/terminees/epic-35-profils-backoffice-differencies-backlog.md)
-demande une lecture métier pour Lecteur et des droits métier complets pour
-Backoffice, sans technique/exploitation. Elle nécessite de réviser `E65-D02`
-pour les paiements/reversements, avec Audit global proposé comme Admin seul.
-Ce changement reste à spécifier et implémenter dans E35 ; la V1.3 conserve
+Le cadrage des profils est porté depuis le 1er octobre 2026 par la nouvelle
+[EPIC 69](../../roadmap/en-cours/epic-69-profils-acces-erp-satellites-backlog.md) :
+Lecteur, Backoffice, Finance et cumul Backoffice + Finance. Elle nécessite de
+réviser `E65-D02` pour les lectures financières selon leur périmètre, en gardant
+Audit global, SQLAdmin et commandes d'argent réservés à l'admin historique.
+Ce changement reste à spécifier et implémenter dans E69 ; la V1.3 conserve
 le socle ADMIN et explicite ci-dessous les conditions de livraison combinée.
 Les tests de refus de ce socle ne constituent pas les preuves des nouveaux profils.
 
@@ -43,19 +43,19 @@ Les tests de refus de ce socle ne constituent pas les preuves des nouveaux profi
 Les références H01/H02 sont conservées pour la traçabilité : l'utilisateur a
 confirmé ce périmètre avant l'implémentation des lots financiers. Abonnements
 et nouvelles actions intégrées restent exclus. Les consultations utilisent
-les mêmes droits ADMIN que l'audit, sans élargissement implicite E35.
+les mêmes droits ADMIN que l'audit, sans élargissement implicite E69.
 
-### Dépendance aux profils E35
+### Dépendance aux profils E69
 
-| Surface | Livraison E65 autonome | Cible combinée E35 / E65 |
+| Surface | Livraison E65 autonome | Cible combinée E69 / E65 |
 | --- | --- | --- |
 | Audit global, recherche et détail | ADMIN | Admin seulement |
-| Paiements, reversements, synthèses et sections métier | ADMIN | Lecteur, Backoffice et Admin dans leur périmètre effectif |
-| Liens vers actions financières existantes | ADMIN, droits actuels de la destination | Backoffice/Admin vers un parcours métier habilité ; aucun lien de commande pour Lecteur |
-| Console historique mixte, références techniques et révélations personnelles | Droits ADMIN existants | Ne pas ouvrir la console ou les champs techniques par le seul droit de lecture métier ; classification et masquage portés par E35 |
+| Paiements, reversements, synthèses et sections métier | ADMIN | Lecteur, Backoffice, Finance et Admin dans leur périmètre effectif |
+| Liens vers actions financières existantes | ADMIN, droits actuels de la destination | Suivi financier spécialisé à Finance/Admin ; commandes d'argent à Admin seul, même pour Backoffice + Finance ; aucune commande pour Lecteur |
+| Console historique mixte, références techniques et révélations personnelles | Droits ADMIN existants | SQLAdmin reste admin seul ; classification et masquage portés par E69, aucun accès technique induit par la lecture métier |
 
-La colonne combinée reprend `E35-PROF-11`, sans créer dès maintenant des rôles
-acceptés par les routes. Avant son activation, E35 doit définir la politique
+La colonne combinée reprend `E69-CA-11/20`, sans créer dès maintenant des rôles
+acceptés par les routes. Avant son activation, E69 doit définir la politique
 de capacités, le périmètre de chaque projection et des totaux, les champs
 autorisés et la réévaluation des sessions. Le contrôle s'applique aussi aux
 sections, pièces et liens directs, avant chargement. Les tests futurs doivent
@@ -103,7 +103,7 @@ Les dix critères d’acceptation, les droits et les exclusions restent conserv�
 
 La revue V1.2 précise les refus HTTP, la pagination sur un jeu stable,
 l'assainissement des chemins d'audit et les liens documentaires réellement
-consultables. Elle ne transforme ni les hypothèses H01/H02 ni l'évolution E35
+consultables. Elle ne transforme ni les hypothèses H01/H02 ni les profils E69
 en fonctionnalités livrées.
 
 ## Parcours commun — E65-CA-01, 07, 08, 09, 10
@@ -246,13 +246,13 @@ complètes et de garder explicites les dépendances :
 
 | Lot | Périmètre et résultat vérifiable | Condition de préparation |
 | --- | --- | --- |
-| E65-L01 | Navigation ADMIN, chaîne de session, Audit liste/détail, filtres, pagination et occultation | Indépendant de H01/H02 et des nouveaux profils E35 ; tests CA-01/02/07/08/09/10 prévus |
+| E65-L01 | Navigation ADMIN, chaîne de session, Audit liste/détail, filtres, pagination et occultation | Indépendant de H01/H02 et des nouveaux profils E69 ; tests CA-01/02/07/08/09/10 prévus |
 | E65-L02 | Paiements d'achats/commandes, parité Vision 360, synthèses par devise et pièces disponibles | Contrats décrits pour H01, avec liens existants selon H02 ; aucune souscription agrégée ou commande supplémentaire déduite de l'absence de réponse |
 | E65-L03 | Projection commune ERP/360 des reversements, sources et couverture bancaire | Politique de lecture partagée, compte de destination historique et devises normalisées ; tests CA-05/06 et non-régression de la console |
 
 L01/L02/L03 sont implémentés dans le périmètre ADMIN ; H01/H02 ont été confirmés
 le 1er octobre. Leur validation et les limites restantes sont suivies dans le bilan.
-L'extension E35 n'est pas incluse dans ces lots. Les plans SQL sont examinés sur
+L'EPIC 69 n'est pas incluse dans ces lots. Les plans SQL sont examinés sur
 base jetable, sans en déduire une capacité de production ou un index nécessaire.
 La couverture des modèles de souscription et l'intégration d'actions nouvelles
 restent des extensions à spécifier si elles sont retenues.

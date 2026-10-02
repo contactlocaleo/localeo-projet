@@ -472,6 +472,10 @@
     {
       "path": "docs/ops/technique/reference-scripts-backend.md",
       "source_path": "docs/exploitation/technique/reference-scripts-backend.md"
+    },
+    {
+      "path": "docs/ops/formation/gerer-utilisateurs-internes.md",
+      "source_path": "docs/specifications/epic-69-acces-internes/guide-backoffice.md"
     }
   ]
 }

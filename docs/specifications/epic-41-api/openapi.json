@@ -3,9 +3,1926 @@
   "info": {
     "title": "Localeo Backend - contrat implemente EPIC 41",
     "description": "OpenAPI complet du backend, dont les parcours Animation locale. Genere hors ligne depuis le code local pour les integrations et les mocks ; cet instantane ne prouve pas son deploiement.",
-    "version": "1.0.0+ad42635"
+    "version": "1.0.0+d1a16e8"
   },
   "paths": {
+    "/public/identite-acces/interne/connexion": {
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Connexion",
+        "operationId": "connexion_public_identite_acces_interne_connexion_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Connexion"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/identite-acces/interne/initialisation": {
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Initialiser",
+        "operationId": "initialiser_public_identite_acces_interne_initialisation_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Initialisation"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/identite-acces/interne/reinitialisation": {
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Recuperer",
+        "operationId": "recuperer_public_identite_acces_interne_reinitialisation_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Initialisation"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/internal/identite-acces/utilisateurs": {
+      "get": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Lister Utilisateurs",
+        "operationId": "lister_utilisateurs_internal_identite_acces_utilisateurs_get",
+        "parameters": [
+          {
+            "name": "recherche",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 120,
+              "default": "",
+              "title": "Recherche"
+            }
+          },
+          {
+            "name": "etat",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "EN_ATTENTE_INITIALISATION",
+                    "ACTIF",
+                    "DESACTIVE"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Etat"
+            }
+          },
+          {
+            "name": "role",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "LECTEUR",
+                    "BACKOFFICE",
+                    "FINANCE"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Role"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1,
+              "title": "Page"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Pagesize"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Creer Utilisateur",
+        "operationId": "creer_utilisateur_internal_identite_acces_utilisateurs_post",
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreationUtilisateur"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/identite-acces/utilisateurs/{identifiant}": {
+      "get": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Lire Utilisateur",
+        "operationId": "lire_utilisateur_internal_identite_acces_utilisateurs__identifiant__get",
+        "parameters": [
+          {
+            "name": "identifiant",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Identifiant"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Modifier Utilisateur",
+        "operationId": "modifier_utilisateur_internal_identite_acces_utilisateurs__identifiant__patch",
+        "parameters": [
+          {
+            "name": "identifiant",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Identifiant"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModificationUtilisateur"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/identite-acces/utilisateurs/{identifiant}/invitation": {
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Inviter Utilisateur",
+        "operationId": "inviter_utilisateur_internal_identite_acces_utilisateurs__identifiant__invitation_post",
+        "parameters": [
+          {
+            "name": "identifiant",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Identifiant"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Version"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/identite-acces/utilisateurs/{identifiant}/reinitialisation": {
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Reinitialiser Utilisateur",
+        "operationId": "reinitialiser_utilisateur_internal_identite_acces_utilisateurs__identifiant__reinitialisation_post",
+        "parameters": [
+          {
+            "name": "identifiant",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Identifiant"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Version"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/identite-acces/utilisateurs/{identifiant}/annuler-invitation": {
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Annuler Invitation",
+        "operationId": "annuler_invitation_internal_identite_acces_utilisateurs__identifiant__annuler_invitation_post",
+        "parameters": [
+          {
+            "name": "identifiant",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Identifiant"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AnnulationInvitation"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/identite-acces/utilisateurs/{identifiant}/desactiver": {
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Desactiver Utilisateur",
+        "operationId": "desactiver_utilisateur_internal_identite_acces_utilisateurs__identifiant__desactiver_post",
+        "parameters": [
+          {
+            "name": "identifiant",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Identifiant"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AvecMotif"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/identite-acces/utilisateurs/{identifiant}/reactiver": {
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Reactiver Utilisateur",
+        "operationId": "reactiver_utilisateur_internal_identite_acces_utilisateurs__identifiant__reactiver_post",
+        "parameters": [
+          {
+            "name": "identifiant",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Identifiant"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AvecMotif"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/identite-acces/utilisateurs/{identifiant}/revoquer-sessions": {
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Revoquer Sessions",
+        "operationId": "revoquer_sessions_internal_identite_acces_utilisateurs__identifiant__revoquer_sessions_post",
+        "parameters": [
+          {
+            "name": "identifiant",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Identifiant"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AvecMotif"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/identite-acces/session": {
+      "get": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Lire Session",
+        "operationId": "lire_session_internal_identite_acces_session_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Erreur de validation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/identite-acces/deconnexion": {
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Deconnexion",
+        "operationId": "deconnexion_internal_identite_acces_deconnexion_post",
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Erreur de validation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/erp/api/suivi-financier/{type_source}/{identifiant}/demandes": {
+      "get": {
+        "tags": [
+          "Suivi financier"
+        ],
+        "summary": "Lister",
+        "operationId": "lister_internal_erp_api_suivi_financier__type_source___identifiant__demandes_get",
+        "parameters": [
+          {
+            "name": "type_source",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/TypeSourceFinanciere"
+            }
+          },
+          {
+            "name": "identifiant",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Identifiant"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1,
+              "title": "Page"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Pagesize"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Suivi financier"
+        ],
+        "summary": "Creer",
+        "operationId": "creer_internal_erp_api_suivi_financier__type_source___identifiant__demandes_post",
+        "parameters": [
+          {
+            "name": "type_source",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/TypeSourceFinanciere"
+            }
+          },
+          {
+            "name": "identifiant",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Identifiant"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SupportCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/erp/api/suivi-financier/{type_source}/{identifiant}/intervenants": {
+      "get": {
+        "tags": [
+          "Suivi financier"
+        ],
+        "summary": "Intervenants",
+        "operationId": "intervenants_internal_erp_api_suivi_financier__type_source___identifiant__intervenants_get",
+        "parameters": [
+          {
+            "name": "type_source",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/TypeSourceFinanciere"
+            }
+          },
+          {
+            "name": "identifiant",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Identifiant"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1,
+              "title": "Page"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Pagesize"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/erp/api/suivi-financier/{type_source}/{identifiant}/demandes/{ticket_id}": {
+      "patch": {
+        "tags": [
+          "Suivi financier"
+        ],
+        "summary": "Modifier",
+        "operationId": "modifier_internal_erp_api_suivi_financier__type_source___identifiant__demandes__ticket_id__patch",
+        "parameters": [
+          {
+            "name": "type_source",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/TypeSourceFinanciere"
+            }
+          },
+          {
+            "name": "identifiant",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Identifiant"
+            }
+          },
+          {
+            "name": "ticket_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Ticket Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SupportUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/erp/api/suivi-financier/{type_source}/{identifiant}/demandes/{ticket_id}/notes": {
+      "get": {
+        "tags": [
+          "Suivi financier"
+        ],
+        "summary": "Notes",
+        "operationId": "notes_internal_erp_api_suivi_financier__type_source___identifiant__demandes__ticket_id__notes_get",
+        "parameters": [
+          {
+            "name": "type_source",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/TypeSourceFinanciere"
+            }
+          },
+          {
+            "name": "identifiant",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Identifiant"
+            }
+          },
+          {
+            "name": "ticket_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Ticket Id"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1,
+              "title": "Page"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Pagesize"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Suivi financier"
+        ],
+        "summary": "Ajouter Note",
+        "operationId": "ajouter_note_internal_erp_api_suivi_financier__type_source___identifiant__demandes__ticket_id__notes_post",
+        "parameters": [
+          {
+            "name": "type_source",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/TypeSourceFinanciere"
+            }
+          },
+          {
+            "name": "identifiant",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Identifiant"
+            }
+          },
+          {
+            "name": "ticket_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Ticket Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Note"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/erp/api/support-financier/{type_source}/{identifiant}/demandes": {
+      "get": {
+        "tags": [
+          "Support financier"
+        ],
+        "summary": "Lister",
+        "operationId": "lister_internal_erp_api_support_financier__type_source___identifiant__demandes_get",
+        "parameters": [
+          {
+            "name": "type_source",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/TypeSourceFinanciere"
+            }
+          },
+          {
+            "name": "identifiant",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Identifiant"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1,
+              "title": "Page"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Pagesize"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Support financier"
+        ],
+        "summary": "Creer",
+        "operationId": "creer_internal_erp_api_support_financier__type_source___identifiant__demandes_post",
+        "parameters": [
+          {
+            "name": "type_source",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/TypeSourceFinanciere"
+            }
+          },
+          {
+            "name": "identifiant",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Identifiant"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SupportCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/erp/api/support-financier/{type_source}/{identifiant}/intervenants": {
+      "get": {
+        "tags": [
+          "Support financier"
+        ],
+        "summary": "Intervenants",
+        "operationId": "intervenants_internal_erp_api_support_financier__type_source___identifiant__intervenants_get",
+        "parameters": [
+          {
+            "name": "type_source",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/TypeSourceFinanciere"
+            }
+          },
+          {
+            "name": "identifiant",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Identifiant"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1,
+              "title": "Page"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Pagesize"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/erp/api/support-financier/{type_source}/{identifiant}/demandes/{ticket_id}": {
+      "patch": {
+        "tags": [
+          "Support financier"
+        ],
+        "summary": "Modifier",
+        "operationId": "modifier_internal_erp_api_support_financier__type_source___identifiant__demandes__ticket_id__patch",
+        "parameters": [
+          {
+            "name": "type_source",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/TypeSourceFinanciere"
+            }
+          },
+          {
+            "name": "identifiant",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Identifiant"
+            }
+          },
+          {
+            "name": "ticket_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Ticket Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SupportUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/erp/api/support-financier/{type_source}/{identifiant}/demandes/{ticket_id}/notes": {
+      "get": {
+        "tags": [
+          "Support financier"
+        ],
+        "summary": "Notes",
+        "operationId": "notes_internal_erp_api_support_financier__type_source___identifiant__demandes__ticket_id__notes_get",
+        "parameters": [
+          {
+            "name": "type_source",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/TypeSourceFinanciere"
+            }
+          },
+          {
+            "name": "identifiant",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Identifiant"
+            }
+          },
+          {
+            "name": "ticket_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Ticket Id"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1,
+              "title": "Page"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Pagesize"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Support financier"
+        ],
+        "summary": "Ajouter Note",
+        "operationId": "ajouter_note_internal_erp_api_support_financier__type_source___identifiant__demandes__ticket_id__notes_post",
+        "parameters": [
+          {
+            "name": "type_source",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/TypeSourceFinanciere"
+            }
+          },
+          {
+            "name": "identifiant",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Identifiant"
+            }
+          },
+          {
+            "name": "ticket_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Ticket Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Note"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/erp/api/factures": {
+      "get": {
+        "tags": [
+          "Factures métier"
+        ],
+        "summary": "Lister Factures Metier",
+        "operationId": "lister_factures_metier_internal_erp_api_factures_get",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1,
+              "title": "Page"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Pagesize"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/erp/api/factures/{facture_id}/telecharger": {
+      "get": {
+        "tags": [
+          "Factures métier"
+        ],
+        "summary": "Telecharger Facture Metier",
+        "operationId": "telecharger_facture_metier_internal_erp_api_factures__facture_id__telecharger_get",
+        "parameters": [
+          {
+            "name": "facture_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Facture Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/erp/api/documents/{document_id}": {
+      "get": {
+        "tags": [
+          "Documents métier"
+        ],
+        "summary": "Lire",
+        "operationId": "lire_internal_erp_api_documents__document_id__get",
+        "parameters": [
+          {
+            "name": "document_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Document Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
     "/internal/erp/api/instances": {
       "get": {
         "tags": [
@@ -2219,6 +4136,144 @@
         ]
       }
     },
+    "/internal/gestion-achats/paiements/export-metier.csv": {
+      "get": {
+        "tags": [
+          "Gestion achats"
+        ],
+        "summary": "Exporter Metier",
+        "operationId": "exporter_metier_internal_gestion_achats_paiements_export_metier_csv_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/gestion-achats/paiements/export-finance.csv": {
+      "get": {
+        "tags": [
+          "Gestion achats"
+        ],
+        "summary": "Exporter Finance",
+        "operationId": "exporter_finance_internal_gestion_achats_paiements_export_finance_csv_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
     "/internal/gestion-achats/paiements/{payment_id}/achats": {
       "get": {
         "tags": [
@@ -2564,6 +4619,262 @@
               "minimum": 1,
               "default": 25,
               "maximum": 100
+            }
+          }
+        ],
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/gestion-reversement/suivi/export-metier.csv": {
+      "get": {
+        "tags": [
+          "Gestion reversement"
+        ],
+        "summary": "Exporter Metier",
+        "operationId": "exporter_metier_internal_gestion_reversement_suivi_export_metier_csv_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "parameters": [
+          {
+            "name": "dateFrom",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "dateTo",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "campaign",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "FIRST_HALF",
+                "SECOND_HALF"
+              ]
+            }
+          },
+          {
+            "name": "month",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 150
+            }
+          },
+          {
+            "name": "commercantId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 150
+            }
+          }
+        ],
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/gestion-reversement/suivi/export-finance.csv": {
+      "get": {
+        "tags": [
+          "Gestion reversement"
+        ],
+        "summary": "Exporter Finance",
+        "operationId": "exporter_finance_internal_gestion_reversement_suivi_export_finance_csv_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "parameters": [
+          {
+            "name": "dateFrom",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "dateTo",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "campaign",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "FIRST_HALF",
+                "SECOND_HALF"
+              ]
+            }
+          },
+          {
+            "name": "month",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 150
+            }
+          },
+          {
+            "name": "commercantId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 150
             }
           }
         ],
@@ -67692,6 +70003,36 @@
         ],
         "title": "AnimationSummaryPayload"
       },
+      "AnnulationInvitation": {
+        "properties": {
+          "version": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Version"
+          },
+          "invitationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Invitationid"
+          },
+          "finalite": {
+            "type": "string",
+            "enum": [
+              "INITIALISATION",
+              "REINITIALISATION"
+            ],
+            "title": "Finalite"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "version",
+          "invitationId",
+          "finalite"
+        ],
+        "title": "AnnulationInvitation"
+      },
       "AnnulationSouscriptionPayload": {
         "properties": {
           "motif": {
@@ -68192,6 +70533,29 @@
         ],
         "title": "AttesterEtapeInput"
       },
+      "Attribution": {
+        "properties": {
+          "role": {
+            "type": "string",
+            "enum": [
+              "LECTEUR",
+              "BACKOFFICE",
+              "FINANCE"
+            ],
+            "title": "Role"
+          },
+          "scope": {
+            "$ref": "#/components/schemas/Scope"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "role",
+          "scope"
+        ],
+        "title": "Attribution"
+      },
       "AuditAnimationPayload": {
         "properties": {
           "id": {
@@ -68430,6 +70794,28 @@
           "blocages"
         ],
         "title": "AvancementPreparationPayload"
+      },
+      "AvecMotif": {
+        "properties": {
+          "version": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Version"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 1,
+            "title": "Motif"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "version",
+          "motif"
+        ],
+        "title": "AvecMotif"
       },
       "BailGenerationPayload": {
         "properties": {
@@ -72798,6 +75184,29 @@
         "type": "object",
         "title": "ConfirmerPreparationInput"
       },
+      "Connexion": {
+        "properties": {
+          "email": {
+            "type": "string",
+            "maxLength": 254,
+            "minLength": 1,
+            "title": "Email"
+          },
+          "motDePasse": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Motdepasse"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "email",
+          "motDePasse"
+        ],
+        "title": "Connexion"
+      },
       "ConnexionAnimationRequest": {
         "properties": {
           "email": {
@@ -73459,6 +75868,46 @@
           "permissions"
         ],
         "title": "CreationAcces"
+      },
+      "CreationUtilisateur": {
+        "properties": {
+          "nom": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Nom"
+          },
+          "prenom": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Prenom"
+          },
+          "email": {
+            "type": "string",
+            "maxLength": 254,
+            "minLength": 3,
+            "title": "Email"
+          },
+          "attributions": {
+            "items": {
+              "$ref": "#/components/schemas/Attribution"
+            },
+            "type": "array",
+            "maxItems": 2,
+            "minItems": 1,
+            "title": "Attributions"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "nom",
+          "prenom",
+          "email",
+          "attributions"
+        ],
+        "title": "CreationUtilisateur"
       },
       "CreerAbonnementLiveRequest": {
         "properties": {
@@ -81076,6 +83525,36 @@
         ],
         "title": "InformationContinuiteParticipant"
       },
+      "Initialisation": {
+        "properties": {
+          "token": {
+            "type": "string",
+            "maxLength": 128,
+            "minLength": 40,
+            "title": "Token"
+          },
+          "motDePasse": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Motdepasse"
+          },
+          "confirmation": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Confirmation"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "token",
+          "motDePasse",
+          "confirmation"
+        ],
+        "title": "Initialisation"
+      },
       "InitialisationGeneration-Input": {
         "properties": {
           "metadata": {
@@ -83314,6 +85793,76 @@
           "statut"
         ],
         "title": "ModificationHabilitation"
+      },
+      "ModificationUtilisateur": {
+        "properties": {
+          "version": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Version"
+          },
+          "nom": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 100,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nom"
+          },
+          "prenom": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 100,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Prenom"
+          },
+          "email": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 254,
+                "minLength": 3
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Email"
+          },
+          "attributions": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/Attribution"
+                },
+                "type": "array",
+                "maxItems": 2,
+                "minItems": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Attributions"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "version"
+        ],
+        "title": "ModificationUtilisateur"
       },
       "ModifierActualiteAnimationRequest": {
         "properties": {
@@ -93526,6 +96075,33 @@
         ],
         "title": "SchemaReadinessPayload"
       },
+      "Scope": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "GLOBAL",
+              "COMMUNES"
+            ],
+            "title": "Type"
+          },
+          "communeIds": {
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "type": "array",
+            "title": "Communeids"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "type",
+          "communeIds"
+        ],
+        "title": "Scope"
+      },
       "SectionResponse": {
         "properties": {
           "title": {
@@ -95510,6 +98086,16 @@
         ],
         "title": "TypeReferentielPayload"
       },
+      "TypeSourceFinanciere": {
+        "type": "string",
+        "enum": [
+          "PAIEMENT",
+          "REVERSEMENT",
+          "MOUVEMENT",
+          "FACTURE"
+        ],
+        "title": "TypeSourceFinanciere"
+      },
       "UsageQuotaGenerationPayload": {
         "properties": {
           "mois": {
@@ -96138,6 +98724,21 @@
           "observations"
         ],
         "title": "VerifierPoiInput"
+      },
+      "Version": {
+        "properties": {
+          "version": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Version"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "version"
+        ],
+        "title": "Version"
       },
       "VersionCommande": {
         "properties": {
@@ -96828,7 +99429,7 @@
         "type": "apiKey",
         "in": "cookie",
         "name": "session",
-        "description": "Cookie de session admin signe. La session doit contenir `admin_authenticated=true`."
+        "description": "Cookie signé de session interne : admin historique ou référence opaque de session nominative E69. Les capacités et périmètres sont relus côté serveur. Le nom historique du schéma ne confère aucun privilège admin."
       },
       "BearerAuth": {
         "type": "http",

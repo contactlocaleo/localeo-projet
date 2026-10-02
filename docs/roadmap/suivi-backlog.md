@@ -6,27 +6,27 @@ Mise à jour du classement : 2026-10-01 (EPIC-66 terminée après confirmation d
 
 Évolution transverse du 29 septembre 2026 : [PWA-20260929 — installation et mise à jour](../specifications/installation-mise-a-jour-pwa.md), appliquée aux sept PWA existantes. Les états et clôtures historiques des EPIC restent inchangés ; preuves locales et recette appareil sont distinguées dans la spécification.
 
-- Identifiants EPIC suivis : 71 ; 68 du tronc commun et 3 identifiants applicatifs distincts.
-- EPICs a faire : 7 ; EPICs en cours : 2 (EPIC-55 et EPIC-65).
+- Identifiants EPIC suivis : 73 ; 70 du tronc commun et 3 identifiants applicatifs distincts.
+- EPICs a faire : 8 ; EPICs en cours : 3 (EPIC-55, EPIC-65 et EPIC-69).
 - EPICs fusionnees : 1 (EPIC-61 vers EPIC-60).
 - EPICs terminees : 59 (57 du tronc commun et 2 applicatives) ; EPICs abandonnees : 2.
 - US / PRD detaillees dans le tableau historique : 415, jusqu'a `EPIC-45`.
 - Source prioritaire : fichier backlog dedie quand disponible, sinon `product-roadmap.md`.
-- Référence de pilotage : EPIC-55 et EPIC-65 sont en cours. EPIC-66 est terminée après confirmation utilisateur. EPIC-54, EPIC-58, EPIC-62,
-  EPIC-64, EPIC-67, EPIC-68 et EPIC-MARKETPLACE-54 sont à faire. EPIC-47 est terminée,
+- Référence de pilotage : EPIC-55, EPIC-65 et EPIC-69 sont en cours. EPIC-66 est terminée après confirmation utilisateur. EPIC-54, EPIC-58, EPIC-62,
+  EPIC-64, EPIC-67, EPIC-68, EPIC-70 et EPIC-MARKETPLACE-54 sont à faire. EPIC-47 est terminée,
   clôture produit confirmée. EPIC-05 et EPIC-12 sont abandonnées ;
   EPIC-61 est fusionnée dans EPIC-60. Les autres EPIC du tronc commun sont terminées.
 - Classement et motifs : [index de la roadmap](README.md).
 - Le tableau detaille des US ci-dessous reste un historique consolide. Pour les
-  epics 46 a 68, les backlogs dedies portent le detail et le tableau `Sources
+  epics 46 a 70, les backlogs dedies portent le detail et le tableau `Sources
   consolidees` porte l'etat global courant.
 
 ### Repartition des EPICs par etat retenu
 
 | Etat | Nombre |
 | --- | ---: |
-| A faire | 7 |
-| En cours | 2 |
+| A faire | 8 |
+| En cours | 3 |
 | Abandonne | 2 |
 | Fusionnee | 1 |
 | Termine | 59 |
@@ -46,10 +46,14 @@ ci-dessous conservent ce périmètre initial.
 
 ### Epics restant a livrer
 
-Évolution complémentaire à livrer, sans réouverture de son epic historique :
-[EPIC 35 — Lecteur, Backoffice et Admin](terminees/epic-35-profils-backoffice-differencies-backlog.md),
-`E35-PROFILS-20260928`, treize critères cadrés, spécification et implémentation à
-réaliser. Le statut « Terminé » des PRD-251 à PRD-260 ne couvre pas cette évolution.
+Nouvelle [EPIC 69 — Profils et accès ERP/satellites](en-cours/epic-69-profils-acces-erp-satellites-backlog.md),
+créée sur demande explicite, reprenant le cadrage complémentaire de l'EPIC 35 :
+vingt-sept critères cadrés : trois rôles métier et cumul Backoffice + Finance,
+admin historique conservé, SQLAdmin et commandes d'argent réservés à cet admin,
+ERP/Support/Atelier protégés ; création d'utilisateur par l'admin, invitation email
+et initialisation du mot de passe avec suivi et renvoi. [Conception V1.2](../specifications/epic-69-acces-internes/README.md)
+rédigée ; invitation/récupération validées, Finance via Support, trois actions métier ouvertes à Backoffice ; implémentation locale et contrôles. Le statut « Terminé »
+des PRD-251 à PRD-260 de l'EPIC 35 ne couvre pas cette nouvelle epic.
 
 | Epic | Objet | Niveau de preparation |
 | --- | --- | --- |
@@ -61,7 +65,18 @@ réaliser. Le statut « Terminé » des PRD-251 à PRD-260 ne couvre pas cette �
 | EPIC-65 | Vues ERP audit, paiements et reversements | Spécification V1.4 du 1er octobre ; périmètre financier confirmé, implémentation et validation locales ; preuves et limites dans le bilan |
 | EPIC-66 | Localeo Atelier : coffrets assistés par IA | V1.1 : douze critères, JSON/WebP, création atomique, conservation 30 jours. V1.2 : PWA/menu (13 à 17), prix TTC proposé modifiable (18 à 21) et prompt expérience (22/23) implémentés et testés localement ; clôture produit le 1er octobre après confirmation utilisateur du parcours et de la PWA, réserves techniques dans le bilan. |
 | EPIC-67 | Communautés de communes et coffrets intercommunaux | Cadrage initial ; quatorze critères, référentiel et commercialisation multi-communes, extension Atelier ; règles d'évolution des adhésions et droits à spécifier |
-| EPIC-68 | Parcours commerçant de préparation et finalisation de l'onboarding | Cadrage initial ; dix-sept critères, préparation avant J, réception confirmée et questions, Stripe/contrat/documents/prestations, rendez-vous d'une heure et autonomie ; délais et déroulé à arbitrer |
+| EPIC-68 | Parcours commerçant de préparation et finalisation de l'onboarding | Recadrage et neuf recommandations acceptées le 1er octobre ; trente et un critères, dossier dès référencement, checklist alimentée automatiquement et accès limité ; confirmation immédiate avec calendrier, mail/SMS J−7 configurable avec supports, secours SMS, rappel J−1 et contact humain ; préparation/rendez-vous/finalisation distincts, quatre phases 10/15/10/25, contenus figés et prévisualisables ; temps backoffice et relances à mesurer ; guide à produire avec les spécifications et accessible dans l'ERP |
+
+Nouvelle entrée à faire : [EPIC-70 — Validation sur le téléphone client](a-faire/epic-70-validation-prestation-telephone-client-backlog.md),
+28 critères ; PIN dédié retenu, contexte transactionnel et parcours sur le seul
+téléphone client. Gestion commerçant du PIN avec validité, remplacement et révocation ;
+compromis de droits limités explicite, incidents et risque résiduel documentés.
+
+Entrée en cours : **EPIC-69 — Profils et sécurisation ERP/satellites**,
+27 critères E69-CA-01 à 27 ; conception V1.2, contrats/scopes/exports, guide et preuves rédigés.
+Trois arbitrages utilisateur résolus : invitation 24 h/récupération admin/matrice fixe,
+Finance via Support, BUM/activation déjà à zéro/annulation impayée non active ouvertes
+à Backoffice ; preuves locales dans le dossier de vérification, aucun déploiement effectué.
 
 Epic 63 recentree : script autonome, plateforme vivante et restauration controles,
 sans aucun impact sur le code applicatif ; adaptations du mode demo retirees ;
@@ -547,7 +562,7 @@ anciennes US restent historiques.
 | EPIC-32 | Termine | product-roadmap.md, terminees/epic-32-live-tracking-webpush-commercants-backlog.md |
 | EPIC-33 | Termine | product-roadmap.md, terminees/epic-33-recherche-multiscope-marketplace-backlog.md |
 | EPIC-34 | Termine | product-roadmap.md, terminees/epic-34-pwa-exploitation-live-dashboard-backlog.md |
-| EPIC-35 | Termine (historique) | [Backlog](terminees/epic-35-profils-backoffice-differencies-backlog.md) ; évolution `E35-PROFILS-20260928` cadrée, non livrée |
+| EPIC-35 | Termine (historique) | [Backlog](terminees/epic-35-profils-backoffice-differencies-backlog.md) ; cadrage des nouveaux rôles transféré à E69 |
 | EPIC-36 | Termine | product-roadmap.md, terminees/epic-36-fermeture-commercant-remplacement-prestations-backlog.md |
 | EPIC-37 | Termine | product-roadmap.md, terminees/epic-37-vision-360-client-backoffice-backlog.md |
 | EPIC-38 | Termine | product-roadmap.md, terminees/epic-38-gestion-documentaire-backlog.md |
@@ -581,3 +596,5 @@ anciennes US restent historiques.
 | EPIC-66 | Termine | [backlog](terminees/epic-66-localeo-atelier-coffrets-assistes-ia-backlog.md), [spécification V1](../specifications/epic-66-localeo-atelier/README.md) ; clôture produit confirmée le 1er octobre 2026, bilan de livraison avec réserves |
 | EPIC-67 | A faire | [backlog](a-faire/epic-67-communautes-communes-coffrets-intercommunaux-backlog.md) |
 | EPIC-68 | A faire | [backlog](a-faire/epic-68-parcours-commercant-preparation-onboarding-backlog.md) |
+| EPIC-69 | En cours | [backlog](en-cours/epic-69-profils-acces-erp-satellites-backlog.md) |
+| EPIC-70 | A faire | [backlog](a-faire/epic-70-validation-prestation-telephone-client-backlog.md) |

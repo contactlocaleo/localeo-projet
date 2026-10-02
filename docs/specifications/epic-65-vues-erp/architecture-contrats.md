@@ -145,7 +145,9 @@ document ou événement d'audit ne change. Le registre de session et le mécanis
 existant de renouvellement d'activité restent autorisés. La lecture cohérente
 des projections n'englobe pas la transaction technique de vérification de session.
 E65 n'introduit ni renouvellement de rôle depuis un nouveau référentiel ni
-refonte des profils : ces évolutions restent dans E35.
+refonte des profils : ces évolutions sont désormais portées par la nouvelle
+[EPIC 69](../../roadmap/en-cours/epic-69-profils-acces-erp-satellites-backlog.md),
+qui reprend le cadrage initialement rattaché à E35.
 
 ## Paramètres et enveloppe commune
 

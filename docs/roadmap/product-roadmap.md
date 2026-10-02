@@ -2,14 +2,14 @@
 
 ## État global consolidé au 1er octobre 2026
 
-Le tronc commun comprend 68 identifiants : 57 epics terminees, 6 a faire,
-2 en cours, 2 abandonnees et 1 fusionnee. L'Epic 61 est absorbee par l'Epic 60.
+Le tronc commun comprend 70 identifiants : 57 epics terminees, 7 a faire,
+3 en cours, 2 abandonnees et 1 fusionnee. L'Epic 61 est absorbee par l'Epic 60.
 Les documents sont ranges par etat dans l'[index de la roadmap](README.md).
 
 | Etat | Epics |
 | --- | --- |
-| A faire | `EPIC-54`, `EPIC-58`, `EPIC-62`, `EPIC-64`, `EPIC-67`, `EPIC-68` |
-| En cours | `EPIC-55`, `EPIC-65` |
+| A faire | `EPIC-54`, `EPIC-58`, `EPIC-62`, `EPIC-64`, `EPIC-67`, `EPIC-68`, `EPIC-70` |
+| En cours | `EPIC-55`, `EPIC-65`, `EPIC-69` |
 | Termine | 57 epics : toutes les autres epics de `EPIC-01` a `EPIC-60`, et `EPIC-63`/`EPIC-66`, hors `EPIC-05` et `EPIC-12` |
 | Abandonne | `EPIC-05` : QR commercant remplace par l'Epic 10 ; `EPIC-12` : flux manuel decommissionne par l'Epic 39 |
 | Fusionnee | `EPIC-61` dans `EPIC-60` ; non comptee comme terminee |
@@ -23,7 +23,7 @@ un seul fichier par sujet. Trois identifiants applicatifs complètent ce tronc :
 | [EPIC-MARKETPLACE-54](a-faire/epic-marketplace-54-harmonisation-identite-visuelle-marketplace-backlog.md) | Identité visuelle ; distinct du calendrier de l'Avent 54 | À faire (classement courant ; implémentation locale documentée, revue et recette attendues) |
 | [EPIC-PRES-CONTENU-001](terminees/epic-animation-edition-prestations.md) | Édition directe des prestations ; le futur sas reste dans l'EPIC 62 | Terminée (parcours existant) |
 
-Le total consolidé est de **71 identifiants : 59 terminés, 7 à faire, 2 en cours,
+Le total consolidé est de **73 identifiants : 59 terminés, 8 à faire, 3 en cours,
 2 abandonnés et 1 fusionné**. L'ancien numéro local Marketplace 53 (pagination)
 est rattaché à l'EPIC 57, sans ajouter d'identifiant ni le confondre avec la tombola.
 
@@ -36,16 +36,43 @@ la confirmation produit de l'utilisateur le 15 septembre 2026.
 
 Derniere evolution suivie :
 
-- [Epic 68 — Parcours commerçant de préparation et finalisation de l'onboarding](a-faire/epic-68-parcours-commercant-preparation-onboarding-backlog.md) :
-  cadrage du 30 septembre 2026 ; préparation partagée avant le rendez-vous d'une
-  heure, pédagogie Stripe, documents et lecture du contrat, examen des prestations,
-  confirmation de réception et boucle questions, prise en main et suivi. Dix-sept
-  critères ; J−7 et quatre phases proposés, délais et déroulé à arbitrer.
+- [EPIC 70 — Validation sur le téléphone du client](a-faire/epic-70-validation-prestation-telephone-client-backlog.md) :
+  cadrage du 1er octobre, 28 critères. PIN dédié retenu : contexte transactionnel,
+  gestion de validité/remplacement/révocation depuis l'accès commerçant et parcours
+  sur le téléphone client sans matériel. Compromis de droits limités accepté,
+  sans prétendre empêcher la capture du PIN ; paramètres à spécifier.
+  Sécurité équivalente exigée mais non démontrée ; choix du moyen et comparaison
+  des garanties avant implémentation. L'ancien QR commerçant reste abandonné.
 
-- [Epic 35 — Profils Lecteur, Backoffice et Admin](terminees/epic-35-profils-backoffice-differencies-backlog.md) :
-  évolution `E35-PROFILS-20260928`, treize critères ; lecture métier, gestion métier
-  et administration complète séparées, protections serveur et transition des
-  comptes/sessions. Cadrage à spécifier et implémenter, clôture historique conservée.
+- [Epic 68 — Parcours commerçant de préparation et finalisation de l'onboarding](a-faire/epic-68-parcours-commercant-preparation-onboarding-backlog.md) :
+  cadrage du 30 septembre, repris le 1er octobre 2026 : dossier dès référencement
+  du commerçant, date et heure du rendez-vous final d'une heure (Teams ou physique),
+  checklist et suivi des actions de préparation côté backoffice. Participation
+  commerçant, pédagogie Stripe, documents/contrat, prestations et questions conservés.
+  Mail avec deux supports joints (déroulé et boucle Localeo/Stripe) et SMS à J−7
+  configurable, suivi par canal dans le dossier. Confirmation/questions depuis
+  le mail, pièces personnalisées/contrat, calendrier `.ics`, rappel J−1 et contact
+  humain retenus. Guide backoffice accessible dans l'ERP demandé avec les
+  spécifications. Trente et un critères ; neuf recommandations de la revue du
+  1er octobre acceptées : checklist alimentée automatiquement, préparation/issue
+  du rendez-vous/finalisation distinctes, confirmation immédiate avec calendrier,
+  SMS de secours, accès limité avec récupération, configuration globale, mail
+  hiérarchisé et prévisualisable, versions envoyées figées et traçables.
+  Rendez-vous retenu en quatre phases de 10/15/10/25 minutes ; temps de gestion
+  backoffice et relances manuelles à mesurer. Horaires, rattrapage et contrats
+  détaillés restent à préciser avant implémentation.
+
+- [Epic 69 — Profils et sécurisation des accès ERP et applications internes](en-cours/epic-69-profils-acces-erp-satellites-backlog.md) :
+  epic en cours, créée le 1er octobre à la demande de l'utilisateur ;
+  vingt-sept critères, dont vingt-deux repris du cadrage E35 ; rôles Lecteur/Backoffice/Finance
+  et cumul explicite Backoffice + Finance, admin historique conservé, SQLAdmin et
+  commandes d'argent réservés à celui-ci en V1, protection ERP/Support/Atelier.
+  Référencement par l'admin et invitation email pour définir le mot de passe,
+  avec suivi et renvoi, sur le modèle Animation. [Conception V1.2](../specifications/epic-69-acces-internes/README.md)
+  rédigée : invitation 24 h, récupération admin et matrice fixe validées ; Finance via
+  Support existant ; BUM, activation déjà à zéro et annulation impayée non active
+  ouvertes à Backoffice. Contrats, guide et 27 critères actualisés ; implémentation locale et contrôles, recette déployée attendue.
+  Clôture historique de l'EPIC 35 conservée.
 
 - [Epic 67 — Communautés de communes et coffrets intercommunaux](a-faire/epic-67-communautes-communes-coffrets-intercommunaux-backlog.md) :
   cadrage du 28 septembre 2026 ; référentiel des groupements et communes membres,
@@ -1730,9 +1757,10 @@ Cette roadmap produit structure les evolutions autour de trois enjeux metier :
 
 ## Epic 35. Profils back-office differencies
 
-Évolution du 28 septembre 2026 : `E35-PROFILS-20260928`, profils Lecteur,
-Backoffice et Admin, cadrée dans le backlog ci-dessous. Cette évolution n'est
-pas livrée ; le statut et les stories qui suivent décrivent le périmètre historique.
+Le cadrage complémentaire des nouveaux rôles est transféré à la nouvelle
+[EPIC 69](en-cours/epic-69-profils-acces-erp-satellites-backlog.md), à la demande
+de l'utilisateur le 1er octobre 2026. Les 22 critères transférés ne sont pas livrés ;
+le statut et les stories ci-dessous décrivent uniquement le périmètre historique.
 
 - Criticite : `Elevee`
 - Statut : `Termine`

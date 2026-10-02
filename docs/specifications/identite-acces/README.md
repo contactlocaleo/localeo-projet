@@ -7,6 +7,7 @@ Règles de session, d'authentification et de liens de consultation. Le backend p
 - [Révocation de session commerçant — BACK-001](revocation-session-commercant.md)
 - [Activation du gestionnaire Animation](activation-gestionnaire.md)
 - [Session navigateur Animation](session-animation.md)
+- [Comptes et rôles internes — EPIC 69](../epic-69-acces-internes/README.md) : conception des accès ERP et satellites, invitation et sessions ; non implémentée.
 - [Accès aux coffrets à usage unique](acces-coffrets-usage-unique.md)
 
 La divergence historique sur le QR d'authentification est explicitée dans la [vue de l'espace commerçant](../espace-commercant/README.md). Elle ne concerne pas le [QR client de validation d'une prestation](../validation-prestations/README.md).

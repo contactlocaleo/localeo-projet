@@ -1,14 +1,14 @@
 # Roadmap par etat
 
-Classement consolidé le 18 septembre 2026, complété le 30 septembre par l’EPIC 68. Les backlogs des applications sont
+Classement consolidé le 18 septembre 2026, complété le 1er octobre par l’EPIC 70. Les backlogs des applications sont
 réunis dans les dossiers d'état, avec un seul fichier par EPIC. Le suivi inclut
-les 68 identifiants du tronc commun et trois identifiants applicatifs distincts.
+les 70 identifiants du tronc commun et trois identifiants applicatifs distincts.
 
 | Etat | Epics | Dossier |
 | --- | ---: | --- |
 | Terminees | 59 | [terminees/](terminees/README.md) |
-| A faire | 7 | [a-faire/](a-faire/README.md) |
-| En cours | 2 | [en-cours/](en-cours/README.md) |
+| A faire | 8 | [a-faire/](a-faire/README.md) |
+| En cours | 3 | [en-cours/](en-cours/README.md) |
 | Abandonnees | 2 | [abandonnees/](abandonnees/README.md) |
 | Fusionnee | 1 | Epic 61 reprise dans l'[Epic 60](terminees/epic-60-vision-360-commercialisation-backlog.md) |
 
@@ -18,15 +18,32 @@ pour composer des coffrets avec l’aide de l’IA. L’EPIC 67 ajoute les commu
 de communes et les coffrets intercommunaux. L'EPIC 68 ajoute le parcours commerçant
 de préparation et finalisation de l'onboarding. Les EPIC 67 et 68 sont à faire ; l'EPIC 65 est en cours depuis le 1er octobre ;
 l'EPIC 66 est terminée depuis le 1er octobre, après confirmation de recette par l'utilisateur.
+Le cadrage de l'[EPIC 68](a-faire/epic-68-parcours-commercant-preparation-onboarding-backlog.md)
+intègre les neuf recommandations acceptées le 1er octobre : suivi sans double saisie,
+confirmation immédiate, pack J−7 et secours SMS, préparation commerçant accessible
+avant activation, rendez-vous en quatre phases et guide ERP. Ses 31 critères restent
+à spécifier et implémenter ; cette validation ne change pas son état « À faire ».
 La spécification V1.2 couvre ses extensions `E66-PWA-20260929` (PWA/menu ERP),
 `E66-PRIX-20260929` (prix proposé modifiable) et `E66-EXPERIENCE-20260929`
 (expérience multi-prestations, sans coffret matériel). Elles sont implémentées et
 testées localement ; la recette du parcours et de la PWA est confirmée par l'utilisateur.
 Les réserves techniques de préparation de livraison restent explicites dans le bilan.
-L'[EPIC 35](terminees/epic-35-profils-backoffice-differencies-backlog.md)
-porte aussi un cadrage d'évolution du 28 septembre vers les profils Lecteur,
-Backoffice et Admin, à spécifier et implémenter ; sa clôture historique et les
-totaux ci-dessus restent inchangés.
+La nouvelle [EPIC 69](en-cours/epic-69-profils-acces-erp-satellites-backlog.md)
+porte les accès ERP et satellites, en cours :
+trois rôles métier retenus, Lecteur, Backoffice et Finance, avec cumul explicite
+Backoffice + Finance ; admin historique conservé, SQLAdmin et commandes d'argent
+réservés à celui-ci, protection des satellites Support/Atelier.
+Ses 27 critères incluent la création d'un utilisateur par l'admin et l'invitation
+email pour initialiser le mot de passe. La [conception V1.2](../specifications/epic-69-acces-internes/README.md)
+intègre les décisions : invitation 24 h, récupération admin, matrice fixe, Finance via Support,
+BUM/activation à zéro/annulation impayée non active ouvertes à Backoffice ; implémentation locale et contrôles, recette déployée attendue. L'EPIC 35 conserve sa clôture
+historique ; son ancien cadrage complémentaire est transféré à E69 sur demande utilisateur.
+La nouvelle [EPIC 70](a-faire/epic-70-validation-prestation-telephone-client-backlog.md)
+cadre une validation entièrement sur téléphone client, sans matériel dédié imposé.
+Le PIN dédié est retenu avec un compromis de droits limités : contexte transactionnel,
+gestion du PIN depuis l'accès commerçant et parcours client. Ses 28 critères couvrent
+validité, révocation, concurrence, incidents et absence d'accès professionnel.
+
 Les Epics 3 et 4 n'ont pas de fichier dedie :
 leurs descriptions dans la roadmap produit sont referencees depuis le dossier
 des epics terminees. Aucun fichier autonome de l'Epic 61 n'est recree.
@@ -63,9 +80,11 @@ précise la provenance et les divergences historiques conservées.
 | 65 | En cours | Périmètre achats/commandes et consultation confirmé le 1er octobre ; trois vues ERP et projections partagées en validation locale, bilan dans la spécification V1.4. Aucun déploiement ni ouverture E35. |
 | 66 | Terminee | [Localeo Atelier](terminees/epic-66-localeo-atelier-coffrets-assistes-ia-backlog.md) : [V1.2](../specifications/epic-66-localeo-atelier/README.md) implémentée et testée ; clôture produit le 1er octobre après confirmation utilisateur du parcours et de la PWA, réserves de livraison conservées dans le bilan. |
 | 67 | A faire | [Communautés de communes](a-faire/epic-67-communautes-communes-coffrets-intercommunaux-backlog.md) : référentiel, coffrets intercommunaux, commercialisation et extension de Localeo Atelier ; droits et achats existants préservés. |
-| 68 | A faire | [Préparation de l'onboarding](a-faire/epic-68-parcours-commercant-preparation-onboarding-backlog.md) : parcours partagé avant un rendez-vous d'une heure, Stripe, documents, contrat, prestations et questions ; dix-sept critères cadrés, calendrier et déroulé à arbitrer. |
+| 68 | A faire | [Préparation de l'onboarding](a-faire/epic-68-parcours-commercant-preparation-onboarding-backlog.md) : dossier, rendez-vous d'une heure, checklist ; mail/SMS à J−7 configurable, confirmation/questions, pièces/contrat, calendrier et rappel J−1 ; guide backoffice accessible dans l'ERP attendu, trente et un critères. |
 | 61 | Fusionnee | Contenu repris dans l'Epic 60 ; une fusion n'est pas un abandon. |
-| 35 | Terminee (historique) | Évolution `E35-PROFILS-20260928` cadrée dans son backlog : trois profils et séparation métier/technique, non livrée ; aucun nouvel identifiant créé. |
+| 35 | Terminee (historique) | Clôture conservée ; le cadrage non livré des nouveaux rôles est transféré à l'EPIC 69 sur demande explicite du 1er octobre. |
+| 69 | En cours | [Profils et accès ERP/satellites](en-cours/epic-69-profils-acces-erp-satellites-backlog.md) : Lecteur/Backoffice/Finance et cumul Backoffice + Finance, admin historique conservé ; référencement par l'admin et invitation email, 27 critères. |
+| 70 | A faire | [Validation sur téléphone client](a-faire/epic-70-validation-prestation-telephone-client-backlog.md) : PIN dédié retenu, 28 critères ; contexte transactionnel, gestion commerçant du PIN et parcours client sans matériel ; risque résiduel borné par les droits, validité et révocation. |
 | Autres identifiants du tronc commun | Terminees | Statut produit consolide conserve ; les anciennes mentions de stories a faire ne rouvrent pas ces epics. |
 
 Les changements des Epics 5, 12 et 47 corrigent des incoherences entre les

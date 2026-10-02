@@ -2,7 +2,7 @@
 
 [Retour à la roadmap](../README.md)
 
-Deux EPIC sont classées en cours. Ce classement ne vaut ni clôture ni déploiement.
+Trois EPIC sont classées en cours. Ce classement ne vaut ni clôture ni déploiement.
 
 - [EPIC 55 — Moteur commun et chasse au trésor](epic-55-chasse-tresor-commercante-backlog.md) :
   conception, arbitrages et suivi de livraison. La [spécification unique](../../specifications/moteur-animation/localeo_animation_engine_spec.md)
@@ -13,3 +13,5 @@ Deux EPIC sont classées en cours. Ce classement ne vaut ni clôture ni déploie
 
 L'[identité visuelle Marketplace](../a-faire/epic-marketplace-54-harmonisation-identite-visuelle-marketplace-backlog.md)
 est classée à faire, avec son bilan d'implémentation locale conservé.
+
+- [EPIC 69 — Accès ERP et satellites](epic-69-profils-acces-erp-satellites-backlog.md) : implémentation locale et contrôles ; [preuves et livraison](../../specifications/epic-69-acces-internes/verification-livraison.md).

@@ -14,6 +14,8 @@ procédure correspondante dans `exploitation/` ou `technique/`.
 | Administrateur Localeo | [`guide-backoffice-localeo.md`](guide-backoffice-localeo.md) | Navigation, objets métier, actions sensibles et parcours de formation progressif |
 | Administrateur Localeo | [`PDF publié`](/internal/docs/procedures/localeo_ops_backoffice_localeo_guide_formation.pdf) | Version diffusable du guide back-office |
 
+- [Gérer les utilisateurs internes ERP](../../../specifications/epic-69-acces-internes/guide-backoffice.md) : invitation, rôles, périmètres, récupération et révocation (E69).
+
 ## Parcours conseillé
 
 1. Comprendre la navigation et les conventions du back-office.

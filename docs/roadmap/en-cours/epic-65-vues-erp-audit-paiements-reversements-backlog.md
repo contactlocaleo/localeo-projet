@@ -14,15 +14,13 @@
 
 ### Rattachement et dépendances
 
-**Impact à intégrer, 28 septembre 2026 :** l'évolution
-[E35-PROFILS-20260928](../terminees/epic-35-profils-backoffice-differencies-backlog.md)
-cadre Lecteur, Backoffice et Admin. Elle porte l'ouverture des lectures métier
-paiements/reversements aux deux profils métier, avec Audit global proposé comme
-réservé à Admin. La règle ADMIN exclusive de la spécification V1.1 reste la
-référence de cette version ; sa révision, ses contrats et preuves sont à traiter
-dans la spécification de l'évolution EPIC 35 avant livraison combinée. La V1.2
-E65 conserve ce socle ADMIN et précise les conditions de cette dépendance,
-sans déclarer l'évolution des profils disponible.
+**Impact à intégrer, actualisé le 1er octobre 2026 :** la nouvelle
+[EPIC 69](../en-cours/epic-69-profils-acces-erp-satellites-backlog.md)
+porte Lecteur, Backoffice, Finance et le cumul Backoffice + Finance, avec admin
+historique conservé. Elle ouvre les lectures financières selon périmètre ; Audit,
+SQLAdmin et commandes d'argent restent admin seuls. E65 conserve son socle ADMIN
+actuel : les contrats et preuves E69 sont nécessaires avant livraison combinée,
+sans déclarer ces nouveaux droits disponibles.
 
 L’[EPIC 60](../terminees/epic-60-vision-360-commercialisation-backlog.md) fournit
 le socle ERP, sa navigation et les ateliers de référencement/commercialisation.

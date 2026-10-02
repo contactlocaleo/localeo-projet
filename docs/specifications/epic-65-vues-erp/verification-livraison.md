@@ -222,16 +222,21 @@ unique des critères, à enrichir avec commandes, résultats et limites réels.
   `generatedAt` ne sert pas de jeton d'instantané. Tester les statuts HTML
   séparément des erreurs JSON et le refus de rôle avant recherche d'un UUID.
 
-### Dépendance de recette E35
+### Dépendance de recette E69
+
+Le cadrage initialement nommé E35 dans les bilans datés ci-dessous est désormais
+porté par l'EPIC 69 ; cette correction de rattachement ne change pas leurs résultats.
 
 La matrice ci-dessus valide le socle ADMIN. Pour une livraison combinée avec
-`E35-PROFILS-20260928`, compléter E65-CA-01/04/08/09 par les preuves E35-PROF-11 :
-lectures financières Lecteur/Backoffice/Admin, audit Admin seul, périmètres
+la nouvelle [EPIC 69](../../roadmap/en-cours/epic-69-profils-acces-erp-satellites-backlog.md),
+compléter E65-CA-01/04/08/09 par les preuves E69-CA-11/20 :
+lectures financières Lecteur/Backoffice/Finance/Admin, audit Admin seul, périmètres
 identiques entre listes, synthèses, détails et pièces ; aucun lien vers console
-technique pour les profils métier et aucune commande pour Lecteur. Révoquer ou
+technique pour les profils métier, aucune commande pour Lecteur et commandes
+d'argent refusées à Backoffice/Finance, y compris cumulés. Révoquer ou
 réduire le profil dans un autre onglet doit produire le refus dès la requête
 suivante et effacer les données devenues interdites. Ces tests dépendent de la
-politique et des contrats E35 ; ils ne sont ni exécutables ni réputés réussis
+politique et des contrats E69 ; ils ne sont ni exécutables ni réputés réussis
 sur la seule base des gardes ADMIN actuels.
 
 ### Suites existantes à préserver
