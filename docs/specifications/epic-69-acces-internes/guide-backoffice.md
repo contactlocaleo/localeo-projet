@@ -33,6 +33,15 @@ non active, quelle que soit sa commune. Les confirmations et conditions métier 
 obligatoires. Finance seul ne dispose pas de ces trois actions ; les remboursements,
 transferts, avoirs et annulations de factures restent réservés à l'admin.
 
+Après livraison du correctif Backoffice du 2 octobre, le menu **Animation** permet
+aussi de créer une offre catalogue, traiter les demandes de création, préparer
+une chasse et consulter son suivi. Ces actions couvrent toutes les communes.
+Les plafonds de génération, neutralisations d'étapes, corrections de preuves et
+commandes sensibles d'exploitation restent réservés à l'admin. La publication
+se fait toujours depuis Localeo Animation avec un compte partenaire habilité.
+Les consoles proposent un retour vers l'espace Animation de l'ERP ; elles ne
+donnent pas accès aux vues SQLAdmin historiques.
+
 ## Créer un utilisateur
 
 1. Se connecter avec l'admin historique, puis ouvrir **Utilisateurs internes**

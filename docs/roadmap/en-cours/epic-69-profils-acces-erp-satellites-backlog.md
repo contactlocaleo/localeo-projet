@@ -28,6 +28,23 @@ Le [bilan](../../specifications/epic-69-acces-internes/verification-livraison.md
 détaille l'écart, le lot de commit à préparer et les prérequis de déploiement.
 Statut et chemin conservés ; aucun critère supprimé ou réduit.
 
+Incident du 2 octobre rattaché à **E69-CA-24/25** : un email d'initialisation
+préparé en test pointe vers `backoffice.localeo.city`, qui redirige vers
+`/admin/login`. Le formulaire public répond sur `test-backoffice.localeo.city`.
+Corriger l'origine `LOCALEO_ERP_URL` du backend de test et préparer une nouvelle
+invitation ; diagnostic et recette restante consignés dans le
+[bilan](../../specifications/epic-69-acces-internes/verification-livraison.md).
+Aucune nouvelle epic, aucun jeton publié, aucun renvoi réel effectué.
+
+Correctif Backoffice du 2 octobre rattaché à **E69-CA-04/13** : certains liens
+métier affichés conduisaient au refus « Action non autorisée pour ce profil ».
+Alignement explicite du catalogue de scopes pour Opérations et les parcours
+Animation (offres, génération, préparation, lecture du suivi), adaptation de
+l'identité/CSRF nominative et revalidation avant commandes/reçus. SQLAdmin,
+commandes financières et actions techniques restent fermés. Preuves et limites
+de livraison dans le [bilan](../../specifications/epic-69-acces-internes/verification-livraison.md).
+Ce correctif ne clôture pas CA-18 et n'est pas un déploiement.
+
 Intervention suivante du 2 octobre, sur demande utilisateur : **base de test
 migrée v250 → v253**, sauvegarde et contrôles après migration effectués ;
 compatibilité v252 corrigée pour une table de notes précréée par l'ORM. Aucun

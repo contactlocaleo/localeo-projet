@@ -2,6 +2,111 @@
 
 Version **V1.4 — scopes fonctionnels globaux, décision du 2 octobre 2026**. État : **En cours**.
 
+## Correctif des refus Backoffice — 2 octobre 2026
+
+Signalement : refus « Action non autorisée pour ce profil » avec un compte
+Backoffice, corrélation `LOC-7ed07a53-ccea-4b71-9ba8-24ab9f136ce9`.
+Les journaux de cette requête distante n'ont pas été consultés. La reproduction
+locale sur la base backend `4635820` démontre les refus des pages Opérations,
+Nouvelle offre Animation et configuration des offres : entrées absentes du
+catalogue fermé. L'API des offres et l'adaptateur moteur conservaient aussi des
+gardes historiques incompatibles avec le principal nominatif ; les consoles
+moteur utilisaient le jeton CSRF historique.
+
+Corrections : classification explicite des pages/API métier, offres via
+`animation.gerer`, UUID et auteur interne conservés dans les opérations moteur,
+CSRF nominatif dans les trois consoles. Chaque transaction du moteur revalide
+la session et le scope avant lecture/rejeu/effet, dans sa propre UOW ; aucune
+connexion d'autorité supplémentaire gardée pendant les appels métier ou le
+stockage. Les liens SQLAdmin inutilisables sont retirés des parcours nominatifs.
+Les formulaires de création commerçant/coffret exigent désormais le même scope
+de gestion que leurs commandes, sans ouvrir la création au Lecteur.
+
+Les gardes SQLAdmin, comptes internes, Audit, quotas, neutralisation, régularisation,
+conservation, batchs et mouvements de fonds restent distinctes. Les parcours
+partenaires et les sessions historiques conservent leurs contrats. La matrice
+[permissions/surfaces](permissions-surfaces.md) précise les opérations ouvertes.
+
+Reproduction initiale : **5 échecs / 41 succès** dans les tests HTTP des surfaces
+réelles (trois refus Backoffice et deux formulaires trop ouverts au Lecteur).
+Preuves finales exécutées avec `python scripts/validation/test_isolated.py`
+depuis le backend, arguments `-q --tb=short`, sur l'arbre corrigé :
+
+- **108 réussis** : `tests/security/test_acces_internes_surfaces.py`,
+  `tests/api/test_offres_animation_erp.py`,
+  `tests/domain/abonnements_plateforme/test_creation_offre.py`,
+  `tests/application/abonnements_plateforme/test_creation_offre_animation.py`,
+  `tests/security/test_erp_session_access.py`.
+- **109 réussis** : `tests/api/test_e69_generation_interne.py`,
+  `tests/application/services/test_autorisations_moteur.py`,
+  `tests/api/test_generation_animation_api_t2.py`,
+  `tests/api/test_navigation_consoles_animation_erp.py`,
+  `tests/api/test_avancement_preparation_api.py`,
+  `tests/api/test_exploitation_animation_api_t5.py`,
+  `tests/api/test_parametres_exploitation_api_t6.py`,
+  `tests/security/test_animation_batch_http.py`.
+- **445 réussis** : `tests/architecture`,
+  `tests/domain/test_domain_dedicated_classes.py`,
+  `tests/application/use_cases/test_use_case_business_test_coverage.py`.
+
+Les nouvelles preuves utilisent les gardes HTTP réels et un pool SQLite borné à
+une connexion pour l'enveloppe transactionnelle. Elles couvrent le retrait de
+scope/session avant effet ou reçu, puis entre deux phases de stockage ; les I/O
+fournisseur restent hors transaction. La revue indépendante a vérifié le
+catalogue fermé, les consommateurs de la factory et les liens des consoles.
+Pas de nouvelle recette navigateur ni de scénario PostgreSQL concurrent pour
+ce correctif ; aucun accès aux services ou à la base d'exploitation pendant les tests.
+Les contrôles des guides, des sources exportées et `git diff --check` réussissent.
+
+Impacts : backend et documentation E69 ; aucun changement de DTO, de schéma SQL,
+de rôle stocké ou de données de démonstration, donc aucune migration, régénération
+de jeu ni nouvelle variable requise. Les applications publiques restent hors
+du correctif. Livraison à prévoir : backend avec ses templates et bundle
+documentaire actualisé, puis recette avec un compte Backoffice sur la cible
+(Opérations, offres, génération/préparation/suivi, et refus SQLAdmin).
+Au terme de la validation locale, aucun commit, push ni déploiement n'avait été
+effectué. Publication Git demandée ensuite : backend
+`72f690c8e62c0d96ff0ebae30f0e7fbc57bff343` committé et poussé sur `origin/main`.
+Le commit documentaire associé porte cette note, la matrice, le guide et le
+suivi E69 en attente. Aucun déploiement applicatif n'a été exécuté ou vérifié.
+La disparition du signalement distant reste à vérifier après livraison. **CA-18 reste ouvert** ;
+cette correction des accès ne constitue pas une preuve de traçabilité des refus.
+
+## Réexamen de clôture après publication — 2 octobre 2026
+
+**Verdict inchangé : clôture bloquée par CA-18.** Révisions relues : backend
+`4635820843402af9ed6f99da09567315d3e56ecc`, projet
+`ba04181594b45d3ff2dbf27fce43f608fe74cc41`. Les deux arbres étaient propres et
+les index vides au début de ce réexamen. La migration test v253 et la publication
+Git sont acquises ; elles ne remplacent pas le correctif de traçabilité des refus.
+
+Relecture du garde `_contexte_erp`, du middleware de session et de l'audit :
+le refus intervient toujours avant `verified_actor`, et les événements génériques
+ne portent toujours pas l'auteur interne et le scope demandé. La comparaison
+avec le socle `86199b1` confirme que le commit publié ne corrige pas ce comportement.
+Le diagnostic isolé des trois refus ERP/Support/Atelier et les tests V1.4 consignés
+plus bas sont donc **réutilisés, sans nouvelle exécution**. Les suites migration
+(12 réussis), architecture (445 réussis) et navigateur création/édition (390/1280)
+restent valables pour le contenu publié ; elles ne prouvent pas CA-18.
+
+La matrice des 27 critères et les actions correctives du premier bilan restent
+applicables. Aucun critère retiré, aucun statut ou chemin modifié. Ce réexamen
+ne réalise ni changement applicatif, ni migration, ni recette distante, ni commit,
+push ou déploiement. Lot de commit préparé : **ce seul fichier**, message proposé
+`docs(epic69): consigner le reexamen de cloture apres publication` ; index laissé vide.
+
+Configuration/livraison restante : base test déjà en v253 ; pour les autres cibles,
+appliquer les migrations manquantes dans l'ordre indiqué plus bas. Vérifier
+`LOCALEO_ERP_URL` (origine HTTPS), transport mail et limites de renvoi 60 s / 5 par
+24 h par défaut. La révision documentaire publiée `ba04181594b45d3ff2dbf27fce43f608fe74cc41`
+contient le guide global E69 : elle peut être sélectionnée au build après contrôle
+des empreintes. Le pin backend reste `b496d3efaa07c8a3806d8a499270c06529a5df1f`,
+qui n'embarque pas ce guide. Déployer API et assets ERP/satellites ensemble, puis
+recetter invitation, profils globaux, retrait/révocation et reprise admin.
+La correction de CA-18 reste nécessaire avant de demander de nouveau la clôture.
+
+## Publications et interventions précédentes
+
 **Publication Git du 2 octobre, après les interventions ci-dessous :** backend
 `4635820843402af9ed6f99da09567315d3e56ecc` committé et poussé sur `origin/main`.
 Il inclut les scopes globaux, le formulaire sans périmètre territorial, la
@@ -360,6 +465,45 @@ d’autorisation. Nouvelle invitation admin nécessaire, ancien mot de passe inv
 Le reçu distingue l’empreinte originale et l’empreinte de restauration sécurisée.
 
 ## Migrations, configuration et livraison ordonnées
+
+### Incident d'initialisation : email test vers l'hôte de production — 2 octobre 2026
+
+Signalement : après ouverture du lien d'initialisation, arrivée sur
+`/admin/login` avec un fragment d'activation. Incident rattaché à **E69-CA-24/25**,
+déjà couverts par l'epic ; aucune nouvelle epic ni modification des critères.
+Le jeton signalé n'est ni recopié dans ce dossier, ni utilisé dans les contrôles.
+
+Constats en lecture seule :
+
+- `https://test-backoffice.localeo.city/internal/initialiser-acces` et ses assets
+  publics répondent HTTP 200 sans session ; aucune redirection vers SQLAdmin.
+  Même résultat sur l'alias `test-api.localeo.city`.
+- Le dernier email `INVITATION_INTERNE` dans la base de test, créé le
+  **2 octobre 2026 à 13:22:45 UTC**, statut `ENVOYE`, contient en HTML/texte la
+  destination **`https://backoffice.localeo.city/internal/initialiser-acces`**.
+  Seuls l'hôte et le chemin sont rapportés, aucun destinataire ou secret.
+- L'ouverture sans jeton de cette destination renvoie **303 vers `/admin/login`**.
+  Cette différence d'hôte explique le symptôme pour cet email ; la rétention du
+  fragment lors d'une redirection n'implique pas un lien initial vers SQLAdmin.
+- Le producteur `app/infrastructure/email/acces_interne.py` prend l'origine dans
+  `LOCALEO_ERP_URL`, impose le chemin `/internal/initialiser-acces` et n'utilise pas
+  l'hôte de la requête. Le constat porte sur le mail stocké : la valeur effective
+  actuelle de la configuration hébergée n'a pas été lue ou modifiée.
+
+Reprise à effectuer sur le **backend de test** : définir
+`LOCALEO_ERP_URL=https://test-backoffice.localeo.city`, appliquer cette configuration
+au processus hébergé, puis renvoyer une invitation depuis la fiche utilisateur.
+Le changement de variable ne réécrit pas un email déjà préparé ou envoyé ; le
+renvoi explicite remplace le précédent lien. Vérifier dans le nouveau mail l'hôte
+`test-backoffice.localeo.city`, puis l'ouverture du formulaire sans session admin,
+l'initialisation et la première connexion. Ne pas déplacer un jeton vers la
+production pour diagnostiquer l'incident.
+
+Impact : configuration et recette E69, sans migration ni changement du contrat,
+du générateur ou des droits. Aucun compte modifié, mot de passe initialisé, email
+renvoyé ou paramètre distant changé pendant le diagnostic. Cette ouverture GET
+ne prouve pas la consommation POST ni la remise du nouveau mail ; recette après
+correction de configuration à compléter. Le blocage CA-18 reste distinct.
 
 ### Diagnostic du formulaire territorial encore affiché — 2 octobre 2026
 

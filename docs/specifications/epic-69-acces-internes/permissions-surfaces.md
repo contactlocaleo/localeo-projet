@@ -24,7 +24,7 @@ conversion vers les scopes techniques des batchs. B+F est leur union ; les refus
 | `finance.support.consulter` | Non | Non | Oui | Oui | Projection de demandes financières autorisées uniquement, jamais alias de `support.consulter` |
 | `atelier.consulter` | Oui | Oui | Non | Oui | Préparation existante et médias autorisés, pas de génération implicite |
 | `atelier.gerer` | Non | Oui | Non | Oui | Génération IA, préparation et création de coffret ; coûts IA ne sont pas des commandes de mouvement de fonds PSP |
-| `animation.gerer` | Non | Oui | Non | Oui | Opérations métier, hors droits internes et commandes financières réservées |
+| `animation.gerer` | Non | Oui | Non | Oui | Offres catalogue, génération et préparation Animation, consultation du suivi ; hors droits internes et commandes financières réservées |
 | `catalogue.qualifier_bum` | Non | Oui | Non | Oui | VALIDER/SUSPENDRE sur le coffret autorisé ; aucune modification de politique fiscale globale |
 | `animation.activer_gratuitement` | Non | Oui | Non | Oui | Montant déjà nul et éligibilité vérifiée ; ne permet pas de remise à zéro |
 | `animation.annuler_impayee` | Non | Oui | Non | Oui | Commande impayée non active uniquement ; pas d'annulation de facture, paiement ou remboursement |
@@ -129,6 +129,18 @@ confirmations, contrôle de version, idempotence et audit existants.
 | Même route : `email-paiement` | Envoi du lien déjà actif sans modification du montant ni appel PSP : B/admin ; F non accordé par défaut, éventuelle extension à classifier |
 | Même route : `activer-gratuitement` | Active des droits pour une commande déjà à zéro ; ne ramène pas un prix positif à zéro. B/admin sur toutes les communes ; F seul refusé |
 | Même route : `annuler` | Annule commande impayée/non active, sans remboursement ; décision potentiellement engageante. B/admin sur toutes les communes ; F seul refusé |
+| GET `/internal/erp/operations` | Hub métier accessible avec `metier.consulter` ; aucun accès implicite aux outils techniques liés |
+| `/internal/erp/nouvelle-offre-animation`, GET configuration et POST `/internal/erp/api/offres-animation` | B/admin via `animation.gerer` ; création d'une définition au catalogue, aucun paiement ni activation de droits partenaire |
+| Consoles ERP `animations/generations`, `preparation`, `exploitation` et API moteur explicitement classifiées | B/admin : génération, dépôt/vérification/acceptation d'une réponse, reprise/révision/annulation/affectation, préparation, POI et modèles ; suivi d'exploitation en lecture. Identité interne réelle, CSRF nominatif et droits courants contrôlés dans les transactions métier |
+
+Le correctif du 2 octobre aligne ces liens métier déjà affichés avec leurs gardes
+serveur. Le catalogue fermé reste la référence : il ne rend pas tout
+`/internal/animation-locale` accessible aux comptes internes. Augmenter le quota,
+neutraliser une étape, régulariser une preuve, modifier les paramètres
+d'exploitation, clôturer le moteur et exécuter la conservation restent hors de
+cette ouverture. La publication continue par le parcours Animation habilité.
+Les formulaires de création commerçant/coffret exigent `catalogue.gerer`, comme
+leurs commandes ; le Lecteur consulte les fiches existantes.
 
 Sources complémentaires :
 [gestion des accès commerçants](../../../../localeo-backend/app/application/identite_acces/services/gestion_acces_commercant_erp.py),
