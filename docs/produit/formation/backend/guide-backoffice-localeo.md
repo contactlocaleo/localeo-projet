@@ -2,8 +2,11 @@
 
 ## Consultations ERP Audit, Paiements et Reversements — EPIC 65
 
-La version implémentée localement le 1er octobre 2026 ajoute trois vues réservées
-aux administrateurs. Leur présence sur un environnement dépend de sa livraison.
+Les trois vues E65 sont clôturées le 2 octobre 2026. Audit reste réservé à
+l'admin historique ; Paiements et Reversements sont consultables par Lecteur,
+Backoffice, Finance et le cumul Backoffice + Finance via leurs scopes globaux E69.
+Les données et liens dépendent des droits ; les commandes d'argent restent admin.
+Leur présence sur un environnement dépend de sa livraison.
 Le [bilan E65](../../../specifications/epic-65-vues-erp/verification-livraison.md)
 distingue les tests locaux et la recette d'environnement.
 

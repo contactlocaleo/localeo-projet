@@ -6,9 +6,9 @@ les 70 identifiants du tronc commun et trois identifiants applicatifs distincts.
 
 | Etat | Epics | Dossier |
 | --- | ---: | --- |
-| Terminees | 60 | [terminees/](terminees/README.md) |
+| Terminees | 61 | [terminees/](terminees/README.md) |
 | A faire | 8 | [a-faire/](a-faire/README.md) |
-| En cours | 2 | [en-cours/](en-cours/README.md) |
+| En cours | 1 | [en-cours/](en-cours/README.md) |
 | Abandonnees | 2 | [abandonnees/](abandonnees/README.md) |
 | Fusionnee | 1 | Epic 61 reprise dans l'[Epic 60](terminees/epic-60-vision-360-commercialisation-backlog.md) |
 
@@ -16,7 +16,7 @@ Les 64 identifiants historiques et leurs états sont conservés ; l’EPIC 65 aj
 les vues ERP d’audit, paiements et reversements, et l’EPIC 66 ajoute Localeo Atelier
 pour composer des coffrets avec l’aide de l’IA. L’EPIC 67 ajoute les communautés
 de communes et les coffrets intercommunaux. L'EPIC 68 ajoute le parcours commerçant
-de préparation et finalisation de l'onboarding. Les EPIC 67 et 68 sont à faire ; l'EPIC 65 est en cours depuis le 1er octobre ;
+de préparation et finalisation de l'onboarding. Les EPIC 67 et 68 sont à faire ; l'EPIC 65 est terminée depuis le 2 octobre après validation locale des dix critères ;
 l'EPIC 66 est terminée depuis le 1er octobre, après confirmation de recette par l'utilisateur.
 Le cadrage de l'[EPIC 68](a-faire/epic-68-parcours-commercant-preparation-onboarding-backlog.md)
 intègre les neuf recommandations acceptées le 1er octobre : suivi sans double saisie,
@@ -85,7 +85,7 @@ précise la provenance et les divergences historiques conservées.
 | 47 | Terminee | Cloture produit confirmee par l'utilisateur le 15 septembre 2026 ; l'ancienne reserve de recette reste une reference d'exploitation. |
 | 54, 58, 62, 64 et EPIC-MARKETPLACE-54 | A faire | Classement courant des dossiers ; voir les réserves de chaque backlog. |
 | 55 | En cours | Moteur commun et chasse au trésor ; conception, arbitrages et livraison suivis dans le backlog. |
-| 65 | En cours | Périmètre achats/commandes et consultation confirmé le 1er octobre ; trois vues ERP et projections partagées en validation locale, bilan dans la spécification V1.4. Aucun déploiement ni ouverture E35. |
+| 65 | Terminee | Trois vues ERP et projections partagées, dix critères vérifiés le 2 octobre ; scopes E69 intégrés, 691 tests et parcours navigateur réussis. Configuration et recette cible dans le bilan, aucun déploiement implicite. |
 | 66 | Terminee | [Localeo Atelier](terminees/epic-66-localeo-atelier-coffrets-assistes-ia-backlog.md) : [V1.2](../specifications/epic-66-localeo-atelier/README.md) implémentée et testée ; clôture produit le 1er octobre après confirmation utilisateur du parcours et de la PWA, réserves de livraison conservées dans le bilan. |
 | 67 | A faire | [Communautés de communes](a-faire/epic-67-communautes-communes-coffrets-intercommunaux-backlog.md) : référentiel, coffrets intercommunaux, commercialisation et extension de Localeo Atelier ; droits et achats existants préservés. |
 | 68 | A faire | [Préparation de l'onboarding](a-faire/epic-68-parcours-commercant-preparation-onboarding-backlog.md) : dossier, rendez-vous d'une heure, checklist ; mail/SMS à J−7 configurable, confirmation/questions, pièces/contrat, calendrier et rappel J−1 ; guide backoffice accessible dans l'ERP attendu, trente et un critères. |

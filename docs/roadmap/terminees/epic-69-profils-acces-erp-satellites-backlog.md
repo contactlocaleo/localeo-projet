@@ -263,7 +263,7 @@ permettre de conserver temporairement une permission révoquée.
 - [EPIC 60 — ERP](../terminees/epic-60-vision-360-commercialisation-backlog.md) : accueil,
   navigation, scopes et commandes métier ; les rôles historiques ne suffisent
   pas à définir automatiquement les nouveaux rôles et leur cumul autorisé.
-- [EPIC 65 — Audit, paiements, reversements](../en-cours/epic-65-vues-erp-audit-paiements-reversements-backlog.md) :
+- [EPIC 65 — Audit, paiements, reversements](../terminees/epic-65-vues-erp-audit-paiements-reversements-backlog.md) :
   sa spécification V1.1 conserve un accès ADMIN exclusif (`E65-D02`). La nouvelle
   cible doit ouvrir les lectures métier paiements/reversements à Lecteur, Backoffice
   et Finance sur toutes les communes, tout en maintenant Audit global et commandes

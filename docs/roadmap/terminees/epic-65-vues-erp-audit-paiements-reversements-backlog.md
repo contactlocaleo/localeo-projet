@@ -5,22 +5,22 @@
 - Date de cadrage : **26 septembre 2026**.
 - Identifiant : **EPIC-65**, disponible après recherche dans la roadmap commune,
   ses identifiants applicatifs et les documents des dépôts voisins.
-- État produit : **En cours**, selon la [roadmap commune](../README.md).
+- État produit : **Terminée le 2 octobre 2026**, selon la [roadmap commune](../README.md).
 - Demande : disposer dans Localeo ERP d’une vue des événements d’audit et de
   deux vues de suivi, « Paiements » et « Reversements », sous « Paiements et facturation ».
 - Phase réalisée : **spécification V1.4 et implémentation locale**, le 1er octobre 2026 ; voir le
   [dossier canonique](../../specifications/epic-65-vues-erp/README.md).
-  Validation locale et limites dans le bilan ; aucun déploiement effectué.
+  Clôture après revue des dix critères, validation locale et alignement E69 ; aucun déploiement effectué par cette clôture.
 
 ### Rattachement et dépendances
 
-**Impact à intégrer, actualisé le 1er octobre 2026 :** la nouvelle
+**Dépendance intégrée, actualisée le 2 octobre 2026 :** l'
 [EPIC 69](../terminees/epic-69-profils-acces-erp-satellites-backlog.md)
 porte Lecteur, Backoffice, Finance et le cumul Backoffice + Finance, avec admin
-historique conservé. Elle ouvre les lectures financières selon périmètre ; Audit,
-SQLAdmin et commandes d'argent restent admin seuls. E65 conserve son socle ADMIN
-actuel : les contrats et preuves E69 sont nécessaires avant livraison combinée,
-sans déclarer ces nouveaux droits disponibles.
+historique conservé. Elle ouvre les lectures financières par scopes globaux ; Audit,
+SQLAdmin et commandes d'argent restent admin seuls. E69 est clôturée, ses contrats
+et preuves complètent le socle historique ADMIN d'E65. Cette validation locale
+ne déclare pas les nouveaux droits déployés.
 
 L’[EPIC 60](../terminees/epic-60-vision-360-commercialisation-backlog.md) fournit
 le socle ERP, sa navigation et les ateliers de référencement/commercialisation.
@@ -148,11 +148,15 @@ en bout avant d’être annoncée disponible ; cet ordre reste une proposition.
 | E65-CA-05 | Finance, reversement composé de plusieurs mouvements | Filtrer par période/commerce et ouvrir le détail | Composition, totaux, étapes et blocages concordent avec la vue métier canonique ; les accès aux actions existantes restent soumis aux mêmes droits. |
 | E65-CA-06 | Reversement transféré, virement en attente/échoué/groupé | Consulter la progression bancaire | Transfert et virement apparaissent séparément ; ni faux versement bancaire confirmé, ni montant groupé attribué à chaque commerce. |
 | E65-CA-07 | Liste sur plusieurs pages et, le cas échéant, plusieurs devises | Filtrer, paginer, ouvrir puis revenir | Sur un jeu stable, aucun élément omis ou doublonné ; filtres conservés ; compteurs et totaux cohérents pour chaque lecture portent sur tout le périmètre filtré et gardent les devises séparées. Les résultats peuvent évoluer entre requêtes ; une reprise de liste est disponible. |
-| E65-CA-08 | Acteur sans rôle ADMIN, dont EXPLOITATION, ou hors périmètre autorisé | Accéder par menu, URL directe, API ou lien documentaire | Refus serveur cohérent ; l’accès au socle ERP ne suffit pas. Aucune fuite de données personnelles, bancaires, secrets ou métadonnées brutes non autorisées. |
+| E65-CA-08 | Acteur sans droit sur la fonction, dont ancien EXPLOITATION ; socle ADMIN étendu explicitement par E69 aux scopes globaux | Accéder par menu, URL directe, API ou lien documentaire | Refus serveur cohérent ; l’accès au socle ERP ne suffit pas. Audit global reste admin seul, lectures financières via `finance.consulter`, projections/pièces bornées aux droits ; aucune fuite de données personnelles, bancaires, secrets ou métadonnées brutes non autorisées. |
 | E65-CA-09 | Réseau indisponible ou réponse partielle | Charger/actualiser l’une des trois vues | Erreur ou incomplet visible avec reprise de lecture ; jamais « aucun paiement », « tout payé » ou total zéro fabriqué ; aucune commande financière ni appel fournisseur de mutation. |
 | E65-CA-10 | Opérateur bureau, clavier ou petit écran | Filtrer, consulter le détail et revenir | Largeur desktop exploitée, actions lisibles et accessibles, détail secondaire à la demande, aucune information essentielle inaccessible. |
 
 ## Impacts à instruire
+
+Le tableau conserve l'inventaire de cadrage ; les impacts réalisés et preuves
+de clôture sont dans le bilan canonique. Les dix critères sont conservés ;
+l'actualisation CA-08 applique l'extension E69 déjà décidée et implémentée.
 
 | Sujet | Impact initial et source à examiner |
 | --- | --- |

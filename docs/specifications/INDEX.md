@@ -7,7 +7,7 @@ Commencer par le README du sujet, puis consulter ses règles, contrats et arbitr
 ## Priorités en cours et à cadrer
 
 - **Terminée : EPIC 66**, [Localeo Atelier](epic-66-localeo-atelier/README.md), V1.2 du 29 septembre 2026 implémentée localement : PWA, prix AUTO/MANUEL et prompt expérience ; 23 critères avec traçabilité, clôture produit confirmée le 1er octobre 2026 ; réserves techniques de livraison dans le bilan.
-- **En cours : EPIC 65**, [vues ERP audit, paiements et reversements](epic-65-vues-erp/README.md), spécification V1.4 du 1er octobre 2026 ; périmètre financier confirmé, implémentation locale ADMIN et bilan des tests ; dépendance aux nouveaux profils E69.
+- **Terminée : EPIC 65**, [vues ERP audit, paiements et reversements](epic-65-vues-erp/README.md), V1.4 clôturée le 2 octobre 2026 ; dix critères vérifiés, droits E69 intégrés ; bilan des tests et configuration de livraison.
 - **Terminée : EPIC 69**, [accès ERP et satellites](epic-69-acces-internes/README.md), V1.4 clôturée le 2 octobre après correction CA-18 : scopes globaux, invitation/récupération, Finance et exceptions Backoffice. Les 27 critères sont conservés ; preuves, migration v253 et configuration de livraison dans le bilan, sans déploiement implicite.
 - **En cours : EPIC 55**, [moteur commun et chasse au trésor](moteur-animation/README.md).
 - **À faire :** [EPIC 54 — Calendrier de l'Avent](epic-54-calendrier-avent-local/README.md) et [EPIC 58 — Filtre annuel](epic-58-filtre-annuel-global/README.md).
@@ -46,7 +46,7 @@ Commencer par le README du sujet, puis consulter ses règles, contrats et arbitr
 | 59 | [Tests de performance API](epic-59-tests-performance-api/README.md) | Terminée | Backend |
 | 60 | [Vision 360 Commercialisation](epic-60-vision-360-commercialisation/README.md) | Terminée | Backend |
 | 63 | [Démonstrations communes](epic-63-demonstrations-communes/README.md) | Terminée | Backend et trois interfaces |
-| 65 | [Vues ERP audit, paiements et reversements](epic-65-vues-erp/README.md) | En cours | Backend ERP |
+| 65 | [Vues ERP audit, paiements et reversements](epic-65-vues-erp/README.md) | Terminée | Backend ERP |
 | 66 | [Localeo Atelier — Coffrets assistés par IA](epic-66-localeo-atelier/README.md) | Terminée | Backend ERP/PWA/DAM, Marketplace et contrats partagés |
 | 69 | [Profils et accès ERP/satellites](epic-69-acces-internes/README.md) | Terminée | Backend ERP, Support, Atelier, OnBoard, documents et sessions |
 

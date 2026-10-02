@@ -4,11 +4,17 @@ Spécification V1.4, implémentation locale le 1er octobre 2026. [Parcours et p�
 [preuves attendues](verification-livraison.md). Les routes et DTO ci-dessous sont implémentés localement ; le contrat exporté
 provient du code. Cela ne prouve pas leur disponibilité sur un environnement déployé.
 
+Clôture le 2 octobre 2026, avec l'extension E69 intégrée : Audit global réservé
+à l'admin historique ; Paiements/Reversements via `finance.consulter`, droits
+globaux et projections selon le profil. Le parcours de connexion est désormais
+`/internal/connexion`. Les constats explicitement datés `ad42635` ci-dessous
+conservent le contexte initial, avant cette extension.
+
 ## Propriétaires et frontières
 
 | Objet / règle conservée | Propriétaire | Contribution E65 |
 | --- | --- | --- |
-| Autorisation des interfaces globales | `identite_acces`, politique ADMIN de `permissions_backoffice.py` | Chaque page et API E65 vérifie ADMIN explicitement ; ne pas élargir la permission historique ni se contenter de `contexte_erp`. |
+| Autorisation des interfaces globales | `identite_acces`, principal et scopes E69 ; politique historique pour Audit | Chaque page/API contrôle `audit.global` (admin historique) ou `finance.consulter` (profils habilités) avant projection ; contexte ERP seul insuffisant, commandes d'argent toujours admin. |
 | Événement d’audit persisté | Domaine `exploitation` | Lecture globale filtrée, sans transition ni réécriture d’événement. Le service applicatif assainit la projection ; l’adaptateur fournit les champs persistés. |
 | Paiement, achat/commande, états financiers | Domaine `gestion_achats` et services financiers existants | Nouvelle projection globale, mapping partagé avec Vision 360 Achats. Déplacer la normalisation pure actuellement applicative vers une politique de domaine partagée si extraite, sans changer ses résultats. |
 | Reversement, paiement de reversement, mouvement | Domaine `gestion_reversement` | Politique pure de classement des montants et refus d’éligibilité ; aucun changement de transition ou d’exécution financière. |
@@ -25,7 +31,7 @@ commune aux entrées qui l’utilisent et testée indépendamment des ORM.
 
 ```mermaid
 flowchart LR
-  ERP[Pages ERP ADMIN] --> API[Routes internes de lecture]
+  ERP[Pages ERP habilitées] --> API[Routes internes de lecture]
   API --> Audit[Consultation audit]
   API --> Achats[Consultation paiements]
   API --> Finance[Consultation reversements]
@@ -95,10 +101,10 @@ paramètre enum FastAPI générique, afin qu’une section inconnue réponde 404
 Le détail d’un commerce financier peut rester un filtre `commercantId` de la
 page Reversements, avec lien vers la fiche commerçant canonique.
 
-**Session :** cookie interne et rôle ADMIN vérifié dans chaque route HTML/JSON.
+**Session :** session persistée vérifiée, puis scope de la fonction dans chaque route HTML/JSON.
 Pas d’accès accordé par une clé `internal:finance` ou `internal:batch` à ces vues
 de session ; leurs API techniques existantes restent distinctes. Réutiliser le
-contexte ERP pour l’identité vérifiée, puis la politique ADMIN. La liste des
+contexte ERP pour l’identité vérifiée, puis la politique E69. La liste des
 préfixes internes et les tests middleware doivent être examinés : `/internal/erp`
 est actuellement exempté du verrou historique global.
 
@@ -110,7 +116,7 @@ session et les logs d’observabilité existants restent applicables. Aucune nou
 
 ### Intégration dans la chaîne de session existante
 
-La relecture du backend `ad42635` distingue trois contrôles complémentaires :
+La relecture historique du backend `ad42635`, avant E69, distinguait trois contrôles complémentaires :
 [`AdminSessionMiddleware`](../../../../localeo-backend/app/security/admin_session.py)
 vérifie la session persistée et sa révocation ;
 [`contexte_erp`](../../../../localeo-backend/app/security/erp.py) vérifie les
@@ -148,7 +154,7 @@ E65 n'introduit ni renouvellement de rôle depuis un nouveau référentiel ni
 refonte des profils : ces évolutions sont désormais portées par la nouvelle
 [EPIC 69](../../roadmap/terminees/epic-69-profils-acces-erp-satellites-backlog.md),
 qui reprend le cadrage initialement rattaché à E35. Le présent passage décrit le
-socle autonome E65 ; l'extension locale E69 V1.3 est détaillée dans sa
+socle autonome E65 ; l'extension E69 V1.4 clôturée est détaillée dans sa
 [matrice de permissions](../epic-69-acces-internes/permissions-surfaces.md).
 Audit demeure admin historique, les lectures financières passent par les capacités
 et projections E69. Ce complément ne constitue pas une preuve de déploiement.
@@ -613,10 +619,10 @@ aucune normalisation ou conversion supplémentaire dans le JavaScript.
 Erreurs conformes au socle API : 401 session absente/incomplète, 403 rôle interdit,
 404 ressource absente ou section inconnue, 422 UUID/filtre/date/page invalide,
 503 lecture indispensable indisponible. Ces statuts concernent les API JSON.
-Les pages HTML conservent la convention ERP : 303 vers `/admin/login` sans
+Les pages HTML suivent la convention E69 : 303 vers `/internal/connexion` sans
 session complète, 403 pour un rôle interdit, 404 pour une page ou un UUID
 de détail invalide. Vérifier le rôle avant toute recherche de ressource ;
-un non-ADMIN ne doit pas distinguer un UUID existant d'un UUID absent.
+un acteur sans droit sur la fonction ne doit pas distinguer un UUID existant d'un UUID absent.
 Réutiliser `ApiErrorResponse` : `code`
 optionnel, `detail` assaini, `correlationId`, alias historique `request_id` et
 `violations` éventuelles ; sans SQL ni corps prestataire. Un échec de synthèse financière fait
@@ -655,7 +661,7 @@ limitent explicitement la couverture financière de cette version.
   `internal` et domaine propriétaire. Les routes HTML précèdent le shell générique.
 - `ConsultationErpMiddleware` intervient après le contrôle de session persistée
   et avant le garde global HTML : une API anonyme conserve un 401 JSON, quel que
-  soit `Accept`. Les dépendances répètent le contrôle ADMIN avant toute projection.
+  soit `Accept`. Les dépendances répètent le contrôle de scope avant toute projection ; Audit global reste admin historique.
 - `DetailAudit.method` est la méthode HTTP assainie. `businessReferences` et
   `links` utilisent `type: MERCHANT|PURCHASE|INSTANCE` et UUID. Les codes et champs
   modifiés non recensés restent occultés ; aucune clé inconnue n'est renvoyée.

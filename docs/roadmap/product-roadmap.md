@@ -9,8 +9,8 @@ Les documents sont ranges par etat dans l'[index de la roadmap](README.md).
 | Etat | Epics |
 | --- | --- |
 | A faire | `EPIC-54`, `EPIC-58`, `EPIC-62`, `EPIC-64`, `EPIC-67`, `EPIC-68`, `EPIC-70` |
-| En cours | `EPIC-55`, `EPIC-65` |
-| Termine | 58 epics : toutes les autres epics de `EPIC-01` a `EPIC-60`, et `EPIC-63`/`EPIC-66`/`EPIC-69`, hors `EPIC-05` et `EPIC-12` |
+| En cours | `EPIC-55` |
+| Termine | 59 epics : toutes les autres epics de `EPIC-01` a `EPIC-60`, et `EPIC-63`/`EPIC-65`/`EPIC-66`/`EPIC-69`, hors `EPIC-05` et `EPIC-12` |
 | Abandonne | `EPIC-05` : QR commercant remplace par l'Epic 10 ; `EPIC-12` : flux manuel decommissionne par l'Epic 39 |
 | Fusionnee | `EPIC-61` dans `EPIC-60` ; non comptee comme terminee |
 
@@ -107,12 +107,12 @@ Derniere evolution suivie :
   multi-prestations sur place et exclure l'image d'un coffret matériel à recevoir ;
   critères 22 et 23 implémentés ; tests du prompt et de l'aperçu, relecture humaine du résultat IA maintenue.
 
-- [Epic 65 — Vues ERP audit, paiements et reversements](en-cours/epic-65-vues-erp-audit-paiements-reversements-backlog.md) :
+- [Epic 65 — Vues ERP audit, paiements et reversements](terminees/epic-65-vues-erp-audit-paiements-reversements-backlog.md) :
   cadrage du 26 septembre 2026 ; trois vues intégrées, recherche, filtres et détail,
-  accès ADMIN conservé ; paiements et reversements sous « Paiements et facturation ».
+  Audit admin historique, lectures financières via scopes E69 ; paiements et reversements sous « Paiements et facturation ».
   Réutiliser les lectures et le suivi 360 existants, sans nouveau flux financier.
   [Spécification V1.4 et bilan d’implémentation](../specifications/epic-65-vues-erp/README.md),
-  périmètre financier confirmé et implémentation locale en validation ; les epics 30, 39, 43, 44, 51 et 60
+  clôturée le 2 octobre avec dix critères vérifiés, 691 tests et parcours navigateur réussis ; les epics 30, 39, 43, 44, 51 et 60
   conservent leur clôture historique.
 
 - [Epic 64 - Parcours de retractation en ligne depuis le site](a-faire/epic-64-parcours-retractation-en-ligne-backlog.md) :

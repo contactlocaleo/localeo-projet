@@ -3,13 +3,18 @@
 ## Statut et périmètre
 
 Spécification V1 du **26 septembre 2026**, implémentation **V1.4 le 1er octobre 2026**, issue du
-[backlog EPIC 65](../../roadmap/en-cours/epic-65-vues-erp-audit-paiements-reversements-backlog.md).
-État produit : **En cours**, selon la [roadmap](../../roadmap/README.md).
+[backlog EPIC 65](../../roadmap/terminees/epic-65-vues-erp-audit-paiements-reversements-backlog.md).
+État produit : **Terminée le 2 octobre 2026**, selon la [roadmap](../../roadmap/README.md).
 Les trois consultations sont implémentées localement dans le backend ; les
 preuves et limites figurent dans le [bilan](verification-livraison.md#bilan-dimplementation-v14).
 L'extension des profils E69 V1.3 évolue en V1.4 le 2 octobre : les scopes
 fonctionnels couvrent toutes les communes, sans attribution territoriale.
 Aucun déploiement ni ouverture réelle de ces accès n'est attesté par ce dossier.
+
+Clôture : dix critères rapprochés, **691 tests réussis** (246 ciblés et
+445 d'architecture), parcours navigateur Audit/Finance à 390/1440/1920 px.
+Les preuves PostgreSQL et démonstration antérieures sont réutilisées pour
+leur périmètre inchangé. Le bilan distingue clôture produit et recette cible.
 
 - [Architecture et contrats cibles](architecture-contrats.md).
 - [Traçabilité, tests et livraison](verification-livraison.md).
@@ -29,8 +34,9 @@ Le cadrage des profils est porté depuis le 1er octobre 2026 par la nouvelle
 Lecteur, Backoffice, Finance et cumul Backoffice + Finance. Elle complète
 `E65-D02` pour les lectures financières selon les scopes fonctionnels, en gardant
 Audit global, SQLAdmin et commandes d'argent réservés à l'admin historique.
-Le socle E69 V1.3 est commité (`86199b1`) ; la V1.4 remplace les restrictions
-territoriales par des scopes globaux et prévoit la migration v253.
+E69 est clôturée et publiée : backend `9d783b4`, projet `d474936`. Sa V1.4
+remplace les restrictions territoriales par des scopes globaux ; v253 a été
+appliquée sur la base test, sans en déduire une recette applicative distante.
 Le socle E65 autonome décrit ci-dessous conserve sa valeur historique ; les
 [preuves E69](../epic-69-acces-internes/verification-livraison.md) documentent
 l'extension, distincte de la recette en environnement partagé.
@@ -60,7 +66,7 @@ aux profils métier le droit d'exécuter une commande d'argent.
 | Console historique mixte, références techniques et révélations personnelles | Droits ADMIN existants | SQLAdmin reste admin seul ; classification et masquage portés par E69, aucun accès technique induit par la lecture métier |
 
 La colonne combinée reprend `E69-CA-11/20`. La politique de capacités, les champs
-autorisés, les totaux territoriaux et la réévaluation des sessions sont implémentés.
+autorisés, les totaux selon les scopes globaux et la réévaluation des sessions sont implémentés.
 Les sections, pièces et liens directs sont contrôlés avant restitution. Les preuves
 locales d'accès, refus et révocation sont conservées dans E69, sans remplacer les
 tests historiques du socle ADMIN. La recette cible reste nécessaire avant ouverture.

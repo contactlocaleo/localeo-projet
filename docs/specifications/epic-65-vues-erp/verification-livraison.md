@@ -1,5 +1,126 @@
 # EPIC 65 — Vérification et livraison
 
+## Clôture produit — 2 octobre 2026
+
+**Terminée sur demande utilisateur**, dix critères conservés. Périmètre confirmé :
+paiements d'achats/commandes, lots Animation inclus, consultation et liens vers
+les actions existantes. Les droits s'appuient désormais sur E69 clôturée :
+`audit.global` réservé à l'admin historique, `finance.consulter` pour les profils
+internes habilités, droits globaux et projections/pièces adaptées. L'actualisation
+de CA-08 applique cette décision existante ; aucune permission nouvelle n'est créée.
+
+Bases relues : backend `9d783b423a53c6af401bee8c40fba9968c9601da`, projet
+`d47493636dd28425151a256f896bdf737f56f18c`, arbres propres au démarrage.
+La seule modification backend de cette clôture aligne le test de redirection
+anonyme sur `/internal/connexion`, parcours introduit par E69. Les assertions
+303, `no-store`, accès admin et refus des identifiants invalides sont conservées.
+Première exécution : **243 réussis, 3 échecs**, tous dus à l'ancienne attente
+`/admin/login`. Aucun changement du code de production ni assertion supprimée.
+
+### Critères rapprochés et verdict
+
+| Critères | Code / comportement | Preuves et documentation | Verdict |
+| --- | --- | --- | --- |
+| CA-01/08 | Vues ERP intégrées ; guards de session et scopes, projections E69 ; Audit et commandes d'argent fermés aux profils métier | API E65 et Finance E69 rejouées ; guides formation/ops et architecture alignés ; trace de sécurité E69 réutilisée | Vérifié |
+| CA-02 | `ServiceConsultationAudit`, occultation et filtres avant pagination | Tests service/API actuels ; preuve PostgreSQL historique inchangée (dates, pages, instantané concurrent) ; guide Audit | Vérifié |
+| CA-03/04 | Projection paiements partagée Vision 360, montants/devise/états et pièces distincts | Tests SQL SQLite/service/API actuels, masquages E69 ; fixture navigateur paiement sans frais ni fichier | Vérifié |
+| CA-05/06 | `ServiceConsultationReversements`, domaine `lecture_suivi.py`, séparation Transfer/payout et provenance des sources | Domaine/service rejoués ; preuves PostgreSQL et console/parité historiques sur règles financières inchangées, gardes/projections E69 vérifiés séparément ; revue indépendante | Vérifié |
+| CA-07 | Comptage avant pagination, agrégats filtrés par devise, ordre stable, snapshot et bornage | Tests paiements actuels ; preuves PostgreSQL snapshot/bornage réutilisées ; pagination/retour navigateur réexécutés | Vérifié |
+| CA-09/10 | Incomplet/erreur distincts du vide, reprise, purge après perte de session, réponse obsolète ignorée, clavier/focus | Deux recettes navigateur réexécutées à 390/1440/1920 px, captures locales inspectées ; scénarios de cible conservés dans la fiche de recette | Vérifié |
+
+Revue indépendante en lecture seule : aucun écart fonctionnel bloquant retrouvé,
+notamment sur compte Stripe historique, tentatives multiples, montant de payout
+groupé, état bancaire distinct de la couverture et absence de mutation en GET.
+Les incohérences des guides « ADMIN exclusivement » ont été corrigées pour
+refléter E69 ; les bilans historiques ci-dessous restent datés.
+
+### Preuves exécutées et réutilisées
+
+Backend, Python 3.14 isolé, commande `python scripts/validation/test_isolated.py`
+avec `-q --tb=short`, résultat **691 réussis, aucun skip**, dont 246 ciblés et
+445 contrôles d'architecture. Fichiers ciblés :
+
+- `tests/api/test_epic65_consultations.py`, `tests/api/test_e69_finance.py`,
+  `tests/api/test_consultation_paiements.py` ;
+- `tests/application/services/test_consultation_paiements.py`,
+  `tests/application/exploitation/test_consultation_audit.py`,
+  `tests/application/gestion_reversement/test_consultation_suivi.py` ;
+- `tests/domain/gestion_reversement/test_epic65_lecture_suivi.py`,
+  `tests/infrastructure/persistence/test_consultation_paiements.py`,
+  `tests/infrastructure/persistence/test_e69_finance.py`,
+  `tests/security/test_erp_session_access.py` ;
+- `tests/architecture`, `tests/domain/test_domain_dedicated_classes.py`,
+  `tests/application/use_cases/test_use_case_business_test_coverage.py`.
+
+`node tests/browser/epic65-audit-erp.cjs` et
+`node tests/browser/epic65-finance-erp.cjs` réussissent aux trois largeurs.
+Les assets sont ceux du backend courant ; API simulées, requêtes GET seulement.
+Captures ignorées sous `tmp/epic65-audit-erp/` et `tmp/epic65-finance-erp/`.
+Cela ne prouve ni remise fournisseur ni recette sur un environnement déployé.
+
+Preuves PostgreSQL historiques de la suite intégrée de 760 tests, EXPLAIN,
+parité console et bornage réutilisées sur le périmètre inchangé : règles de
+`lecture_suivi.py` et tests de parité/bornage non modifiés depuis `d1a16e8`.
+Les évolutions E69 des projections/permissions disposent des preuves actuelles
+ci-dessus et des [preuves E69](../epic-69-acces-internes/verification-livraison.md).
+La projection SQL a reçu les prédicats E69 : ils sont sans restriction communale
+pour les profils globaux courants. Les résultats PostgreSQL historiques ne sont
+pas présentés comme une nouvelle exécution sur ces adaptations.
+Les 15 tests du registre/générateur sont réutilisés : E65 n'a ajouté aucun
+schéma ni donnée obligatoire. Aucun nouveau PostgreSQL, seed, appel Stripe ou
+envoi réel exécuté pendant la clôture. Les groupes se recoupent et ne s'additionnent pas.
+
+### Livraison et configuration
+
+| Composant | Action / valeur | Contrôle |
+| --- | --- | --- |
+| Documentation | Publier le futur commit projet puis sélectionner son SHA complet via `prepare_documentation.py --revision <SHA_PROJET_PUBLIE>` | Bundle et alias des guides formation/exploitation/recette ; pin par défaut `b496d3ef...` insuffisant pour les sources actuelles |
+| Backend ERP | Livrer routes, projections et assets ensemble | Audit dans Supervision ; Paiements/Reversements dans Paiements et facturation ; aucune livraison des trois frontends publics |
+| Base | Aucune migration propre à E65 ; pour les profils E69, appliquer les seules migrations manquantes v251→v253 avec sauvegarde/runner | Base test v253 déjà migrée lors de l'intervention E69 ; démo/prod à inventorier |
+| Sessions / profils | Configuration admin historique existante et attributions E69 ; aucune nouvelle clé Stripe ou variable E65 | Audit admin seul, lectures financières selon scopes, refus SQLAdmin/commandes d'argent pour les profils métier |
+| Invitation E69 si création de comptes | `LOCALEO_ERP_URL` = origine HTTPS ERP cible ; en test `https://test-backoffice.localeo.city` ; transport mail existant | Initialisation sur `/internal/initialiser-acces` et connexion sur `/internal/connexion` ; autres réglages dans le bilan E69 |
+| Observabilité | Collecte existante, `LOCALEO_LOG_LEVEL=INFO`, `LOCALEO_LOG_FORMAT=json` | Corrélation d'erreur et `security.internal_access` sans secret ; Audit E65 persistant distinct des journaux techniques |
+| Après livraison | Recette par profil, listes/détails/pièces, filtres/totaux, Transfer/payout, retrait de droits et reprise admin | Compléter la recette cible ; mesurer volumes réels avant tout index ou engagement de performance |
+
+Ordre : publier la documentation, préparer le bundle, inventorier/migrer E69
+si nécessaire, livrer backend/assets, contrôler les accès et lectures en cible.
+Reprise : conserver données et admin historique ; ne pas revenir à un artefact
+antérieur à la protection E69 des profils nominatifs pour restaurer une navigation.
+Une restauration de base n'est pas nécessaire à cette consultation en lecture seule
+et n'est pas déclarée testée. Clôture produit distincte du déploiement.
+
+### Lots préparés
+
+Index Git conservés vides, aucun commit/push/déploiement dans cette clôture.
+Inventaire et empreintes dans l'artefact ignoré
+`.artifacts/epic65-cloture/20261002/preparation-commit.json` :
+
+- Backend : `tests/api/test_epic65_consultations.py` ; message proposé
+  `test(epic65): aligner la connexion ERP sur les acces internes`.
+- Projet : bilan, périmètre/droits, guides exportés, déplacement, index et liens ;
+  message proposé `docs(epic65): cloturer les vues ERP audit et finance`.
+
+Les captures, bundles, fichiers de configuration et accès privés sont exclus.
+
+### Contrôles documentaires finaux
+
+`check_guidance.py` : **89 guides / 932 liens**, puis
+`--changed --all-markdown` : **15 documents / 370 liens**, sans erreur ni
+avertissement ; `sync_documentation.py --check-sources` : **119 sources**.
+Bundle local `.artifacts/epic65-cloture/20261002/documentation` construit et
+empreintes vérifiées par l'outil backend : **120 fichiers distribués**, manifeste
+d'exports inclus. Le lecteur ERP résout les trois alias suivants vers des
+contenus identiques aux sources actualisées, sans publication distante :
+
+- `formation/guide-backoffice-localeo.md` ;
+- `exploitation/reference-guide-backoffice.md` ;
+- `recette/recette-backoffice-preproduction.md`.
+
+Les contrôles `git diff --check` réussissent dans les deux dépôts. Les trois
+frontends sont propres et inchangés. Le déplacement conserve les dix IDs E65 et
+les liens entrants ; la roadmap passe à **61 terminées, 1 en cours, 8 à faire,
+2 abandonnées et 1 fusionnée**, avec les identifiants applicatifs existants.
+
 ## Bilan d'implémentation V1.4
 
 Le 1er octobre 2026, l'utilisateur a confirmé H01/H02 : achats et commandes
@@ -114,7 +235,7 @@ L'évolution E35 Lecteur/Backoffice reste exclue de cette livraison. Les tests
 ADMIN ne valent pas validation de ces futurs profils.
 
 Référence : [parcours](README.md), [architecture et contrats](architecture-contrats.md),
-[critères du backlog](../../roadmap/en-cours/epic-65-vues-erp-audit-paiements-reversements-backlog.md).
+[critères du backlog](../../roadmap/terminees/epic-65-vues-erp-audit-paiements-reversements-backlog.md).
 La matrice initiale V1.3 ci-dessous conserve les preuves prévues. Le
 [bilan V1.4](#bilan-dimplementation-v14) distingue les exécutions locales
 du 1er octobre 2026, les limites et les opérations d'environnement non réalisées.
