@@ -1,11 +1,42 @@
 # E69 — Architecture et contrats V1.4
 
 Évolution **E69-SCOPES-GLOBAUX-20261002**, du 2 octobre 2026, liée au [périmètre et décisions](README.md).
-Les contrats ci-dessous décrivent la cible V1.4 en cours d'implémentation. Le socle
+Les contrats ci-dessous décrivent la V1.4 clôturée le 2 octobre 2026. Le socle
 et les preuves V1.3 restent historiques ; leur audit documentaire n'atteste pas
 l'exécution des nouveaux scénarios.
 Ils ne prouvent ni migration distante ni recette d’un environnement déployé ;
 les preuves et limites figurent dans le [bilan de vérification](verification-livraison.md).
+
+## Trace des acces internes CA-18
+
+L'adaptateur HTTP émet un événement structuré `security.internal_access` par
+requête interne terminée, via `localeo.security`. Il complète l'audit
+transactionnel des mutations de comptes ; les refus ne créent pas de nouvelle
+transaction dans la table Audit SQLAdmin. Les règles d'autorisation restent
+portées par le principal du domaine et appliquées par les gardes existants.
+
+| Champ | Source et sens |
+| --- | --- |
+| `actor`, `principal_type` | `interne:<UUID>` du principal vérifié côté serveur, admin historique vérifié, ou `anonymous` ; jamais une identité déduite d'un cookie non vérifié |
+| `required_scopes`, `scope_checked` | Scopes distincts triés, séparés par virgules ; `true` si un garde a enregistré la demande. Avant routage, classification du catalogue avec `false`, sans prétendre qu'un garde a été exécuté |
+| `rights_version`, `identity_check` | Version du principal connu et état `verified_at_entry`, `verified_in_transaction`, `invalid`, `unavailable` ou `not_verified` |
+| `route`, `http_method` | Modèle de route sans paramètres concrets, ou `unmatched` ; aucune query ni corps de requête |
+| `status_code`, `outcome` | `success`, `refused` (401/403), `authentication_required` (redirection de connexion), `rejected` (autres 4xx), `technical_error` (5xx/exception) |
+| `correlation_id`, `request_id` | Corrélation existante ; les UUID canoniques ne sont pas altérés par le masquage des téléphones |
+
+Après retrait d'un rôle, la revalidation transactionnelle enregistre le principal
+et sa version actuels avant le refus. Après révocation en cours de requête,
+l'identité déjà vérifiée reste attribuable avec `identity_check=invalid` ; elle
+n'est plus présentée comme actuellement valide. Un rejet CSRF avant vérification
+de session reste anonyme. Aucun mot de passe, jeton, cookie, email ou contenu
+client n'est ajouté à cet événement. Une panne du diagnostic ne change pas la
+réponse métier ; elle produit `security.internal_access.failed` sans détail secret.
+
+Les succès utilisent INFO, les autres résultats WARNING ; le diagnostic de panne
+utilise ERROR. L'exploitation conserve la collecte JSON existante avec un niveau
+permettant INFO et vérifie accès restreint/rétention du collecteur. Pas de nouvelle
+variable ni de migration. Les requêtes rejetées avant le middleware de corrélation
+(par exemple hôte ou taille de corps invalides) ne sont pas couvertes par cet événement.
 
 ## Point de départ et adaptations
 

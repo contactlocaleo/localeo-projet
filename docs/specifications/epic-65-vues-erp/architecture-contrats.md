@@ -146,7 +146,7 @@ existant de renouvellement d'activité restent autorisés. La lecture cohérente
 des projections n'englobe pas la transaction technique de vérification de session.
 E65 n'introduit ni renouvellement de rôle depuis un nouveau référentiel ni
 refonte des profils : ces évolutions sont désormais portées par la nouvelle
-[EPIC 69](../../roadmap/en-cours/epic-69-profils-acces-erp-satellites-backlog.md),
+[EPIC 69](../../roadmap/terminees/epic-69-profils-acces-erp-satellites-backlog.md),
 qui reprend le cadrage initialement rattaché à E35. Le présent passage décrit le
 socle autonome E65 ; l'extension locale E69 V1.3 est détaillée dans sa
 [matrice de permissions](../epic-69-acces-internes/permissions-surfaces.md).

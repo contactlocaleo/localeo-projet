@@ -11,7 +11,7 @@
 
 **Nouveau périmètre :** les profils Lecteur, Backoffice et Finance, le cumul
 Backoffice + Finance, le maintien de l'admin historique et la sécurisation ERP/
-satellites sont cadrés dans la nouvelle [EPIC 69](../en-cours/epic-69-profils-acces-erp-satellites-backlog.md),
+satellites sont cadrés dans la nouvelle [EPIC 69](../terminees/epic-69-profils-acces-erp-satellites-backlog.md),
 à la demande explicite de l'utilisateur le 1er octobre 2026. L'EPIC 35 conserve
 sa clôture historique ; les stories ci-dessous ne prouvent pas la livraison d'E69.
 
@@ -215,7 +215,7 @@ Evolution possible : table `permissions_backoffice` et table de liaison role/per
 
 Les sections `E35-PROFILS-20260928`, `E35-SATELLITES-20261001` et
 `E35-FINANCE-20261001` ont été transférées dans le
-[backlog E69](../en-cours/epic-69-profils-acces-erp-satellites-backlog.md).
+[backlog E69](../terminees/epic-69-profils-acces-erp-satellites-backlog.md).
 Les critères `E35-PROF-01` à `22` y sont repris sous `E69-CA-01` à `22`,
 sans perte de contenu. Ce transfert concerne le cadrage non livré, pas les
 stories historiques de cette epic. La spécification et les preuves nouvelles

@@ -9,8 +9,8 @@ Les documents sont ranges par etat dans l'[index de la roadmap](README.md).
 | Etat | Epics |
 | --- | --- |
 | A faire | `EPIC-54`, `EPIC-58`, `EPIC-62`, `EPIC-64`, `EPIC-67`, `EPIC-68`, `EPIC-70` |
-| En cours | `EPIC-55`, `EPIC-65`, `EPIC-69` |
-| Termine | 57 epics : toutes les autres epics de `EPIC-01` a `EPIC-60`, et `EPIC-63`/`EPIC-66`, hors `EPIC-05` et `EPIC-12` |
+| En cours | `EPIC-55`, `EPIC-65` |
+| Termine | 58 epics : toutes les autres epics de `EPIC-01` a `EPIC-60`, et `EPIC-63`/`EPIC-66`/`EPIC-69`, hors `EPIC-05` et `EPIC-12` |
 | Abandonne | `EPIC-05` : QR commercant remplace par l'Epic 10 ; `EPIC-12` : flux manuel decommissionne par l'Epic 39 |
 | Fusionnee | `EPIC-61` dans `EPIC-60` ; non comptee comme terminee |
 
@@ -62,9 +62,9 @@ Derniere evolution suivie :
   backoffice et relances manuelles à mesurer. Horaires, rattrapage et contrats
   détaillés restent à préciser avant implémentation.
 
-- [Epic 69 — Profils et sécurisation des accès ERP et applications internes](en-cours/epic-69-profils-acces-erp-satellites-backlog.md) :
-  clôture du 2 octobre bloquée par CA-18 (auteur et scope absents des traces de refus internes) ;
-  epic en cours, créée le 1er octobre à la demande de l'utilisateur ;
+- [Epic 69 — Profils et sécurisation des accès ERP et applications internes](terminees/epic-69-profils-acces-erp-satellites-backlog.md) :
+  clôturée le 2 octobre après correction CA-18 et revue des 27 critères ;
+  epic créée le 1er octobre à la demande de l'utilisateur ;
   vingt-sept critères, dont vingt-deux repris du cadrage E35 ; rôles Lecteur/Backoffice/Finance
   et cumul explicite Backoffice + Finance, admin historique conservé, SQLAdmin et
   commandes d'argent réservés à celui-ci en V1, protection ERP/Support/Atelier.
@@ -74,7 +74,7 @@ Derniere evolution suivie :
   invitation 24 h, récupération admin et matrice fixe conservées ; Finance via
   Support existant ; BUM, activation déjà à zéro et annulation impayée non active
   ouvertes à Backoffice. Contrats, guide et 27 critères actualisés ; socle V1.3 poussé,
-  évolution V1.4 locale, sans preuve de déploiement. Écarts UI, révision du bundle documentaire et
+  évolution V1.4 acceptée, correctif CA-18 local sans preuve de déploiement. Écarts UI, révision du bundle documentaire et
   recette cible restent suivis dans le [bilan](../specifications/epic-69-acces-internes/verification-livraison.md).
   Clôture historique de l'EPIC 35 conservée.
 
@@ -1762,7 +1762,7 @@ Cette roadmap produit structure les evolutions autour de trois enjeux metier :
 ## Epic 35. Profils back-office differencies
 
 Le cadrage complémentaire des nouveaux rôles est transféré à la nouvelle
-[EPIC 69](en-cours/epic-69-profils-acces-erp-satellites-backlog.md), à la demande
+[EPIC 69](terminees/epic-69-profils-acces-erp-satellites-backlog.md), à la demande
 de l'utilisateur le 1er octobre 2026. Les 22 critères transférés ne sont pas livrés ;
 le statut et les stories ci-dessous décrivent uniquement le périmètre historique.
 

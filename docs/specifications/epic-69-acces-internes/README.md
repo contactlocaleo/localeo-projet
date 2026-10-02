@@ -1,19 +1,24 @@
 # EPIC 69 — Accès ERP et applications internes
 
-Version **V1.4 — évolution du 2 octobre 2026 : scopes fonctionnels globaux**. État produit : **En cours**,
-selon le [backlog canonique](../../roadmap/en-cours/epic-69-profils-acces-erp-satellites-backlog.md).
+Version **V1.4 — évolution du 2 octobre 2026 : scopes fonctionnels globaux**. État produit : **Terminée le 2 octobre 2026**,
+selon le [backlog canonique](../../roadmap/terminees/epic-69-profils-acces-erp-satellites-backlog.md).
 La V1.4 backend est désormais committée et poussée sur `main` : **`4635820`**,
 scopes globaux, formulaire sans périmètre territorial et correctif de migration
 v252 inclus. La base de test est en v253 ; le déploiement applicatif de ce commit
 n'est pas attesté. Le [bilan](verification-livraison.md) conserve les preuves et
-les constats antérieurs à cette publication. **CA-18 reste ouvert.**
+les constats antérieurs à cette publication. **CA-18 est corrigé et testé localement
+le 2 octobre**, après le correctif Backoffice `72f690c` : trace des succès/refus
+avec identité vérifiée, scopes et corrélation, sans secret. Cette correction
+reste à publier/livrer. La revue finale accepte les 27 critères après 37 scénarios
+de trace réussis, réutilisation des preuves inchangées et contrôle du guide ERP.
+La clôture n'atteste pas le déploiement ni la recette de l'environnement cible.
 
 Ce dossier conserve les 27 critères E69-CA-01 à 27, sans renumérotation. Le socle
 V1.3 est commité et poussé sur `main` (`localeo-backend` : `86199b1` ; documentation
 de référence : `4613ac2`). Ces SHAs et leurs tests ne prouvent pas la V1.4,
 dont l'implémentation locale, la migration v253 et les preuves propres sont
 consignées dans le bilan. La revue de clôture du 2 octobre conserve l'état
-**En cours** : **CA-18 reste partiel**, faute de trace attribuée aux utilisateurs
+**En cours** : **CA-18 était partiel**, faute de trace attribuée aux utilisateurs
 internes pour les refus d'accès. L'intervention suivante, sur demande explicite,
 a migré la **base de test jusqu'à v253** avec sauvegarde et contrôles ; elle n'a
 ni déployé le code applicatif, ni créé de compte réel, ni recetté les parcours.

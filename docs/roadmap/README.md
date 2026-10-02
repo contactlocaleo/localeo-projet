@@ -6,9 +6,9 @@ les 70 identifiants du tronc commun et trois identifiants applicatifs distincts.
 
 | Etat | Epics | Dossier |
 | --- | ---: | --- |
-| Terminees | 59 | [terminees/](terminees/README.md) |
+| Terminees | 60 | [terminees/](terminees/README.md) |
 | A faire | 8 | [a-faire/](a-faire/README.md) |
-| En cours | 3 | [en-cours/](en-cours/README.md) |
+| En cours | 2 | [en-cours/](en-cours/README.md) |
 | Abandonnees | 2 | [abandonnees/](abandonnees/README.md) |
 | Fusionnee | 1 | Epic 61 reprise dans l'[Epic 60](terminees/epic-60-vision-360-commercialisation-backlog.md) |
 
@@ -28,8 +28,8 @@ La spécification V1.2 couvre ses extensions `E66-PWA-20260929` (PWA/menu ERP),
 (expérience multi-prestations, sans coffret matériel). Elles sont implémentées et
 testées localement ; la recette du parcours et de la PWA est confirmée par l'utilisateur.
 Les réserves techniques de préparation de livraison restent explicites dans le bilan.
-La nouvelle [EPIC 69](en-cours/epic-69-profils-acces-erp-satellites-backlog.md)
-porte les accès ERP et satellites, en cours :
+La nouvelle [EPIC 69](terminees/epic-69-profils-acces-erp-satellites-backlog.md)
+porte les accès ERP et satellites, terminée le 2 octobre 2026 :
 trois rôles métier retenus, Lecteur, Backoffice et Finance, avec cumul explicite
 Backoffice + Finance ; admin historique conservé, SQLAdmin et commandes d'argent
 réservés à celui-ci, protection des satellites Support/Atelier.
@@ -42,9 +42,10 @@ documentaire du 2 octobre distingue les commits V1.3 backend/projet poussés du
 déploiement ; écarts UI, révision du bundle et recette cible restent dans le
 [bilan](../specifications/epic-69-acces-internes/verification-livraison.md). L'EPIC 35 conserve sa clôture
 historique ; son ancien cadrage complémentaire est transféré à E69 sur demande utilisateur.
-La revue de clôture du 2 octobre maintient E69 en cours : **CA-18 reste partiel**
-sur la traçabilité des refus internes. Recherche utilisateurs corrigée et recettée ;
-lot de commit et prérequis de livraison consignés dans le bilan.
+La revue finale du 2 octobre clôture E69 après correction de **CA-18** :
+37 scénarios de traçabilité réussis, preuves inchangées réutilisées, guide et
+bundle ERP vérifiés. Lots de commit et prérequis de livraison consignés dans le
+bilan ; la clôture n'atteste ni publication du correctif ni déploiement.
 La nouvelle [EPIC 70](a-faire/epic-70-validation-prestation-telephone-client-backlog.md)
 cadre une validation entièrement sur téléphone client, sans matériel dédié imposé.
 Le PIN dédié est retenu avec un compromis de droits limités : contexte transactionnel,
@@ -90,7 +91,7 @@ précise la provenance et les divergences historiques conservées.
 | 68 | A faire | [Préparation de l'onboarding](a-faire/epic-68-parcours-commercant-preparation-onboarding-backlog.md) : dossier, rendez-vous d'une heure, checklist ; mail/SMS à J−7 configurable, confirmation/questions, pièces/contrat, calendrier et rappel J−1 ; guide backoffice accessible dans l'ERP attendu, trente et un critères. |
 | 61 | Fusionnee | Contenu repris dans l'Epic 60 ; une fusion n'est pas un abandon. |
 | 35 | Terminee (historique) | Clôture conservée ; le cadrage non livré des nouveaux rôles est transféré à l'EPIC 69 sur demande explicite du 1er octobre. |
-| 69 | En cours | [Profils et accès ERP/satellites](en-cours/epic-69-profils-acces-erp-satellites-backlog.md) : Lecteur/Backoffice/Finance et cumul Backoffice + Finance, admin historique conservé ; référencement par l'admin et invitation email, 27 critères. |
+| 69 | Terminee | [Profils et accès ERP/satellites](terminees/epic-69-profils-acces-erp-satellites-backlog.md) : clôture le 2 octobre après validation CA-18, 27 critères conservés ; recette cible et configuration dans le bilan. |
 | 70 | A faire | [Validation sur téléphone client](a-faire/epic-70-validation-prestation-telephone-client-backlog.md) : PIN dédié retenu, 28 critères ; contexte transactionnel, gestion commerçant du PIN et parcours client sans matériel ; risque résiduel borné par les droits, validité et révocation. |
 | Autres identifiants du tronc commun | Terminees | Statut produit consolide conserve ; les anciennes mentions de stories a faire ne rouvrent pas ces epics. |
 

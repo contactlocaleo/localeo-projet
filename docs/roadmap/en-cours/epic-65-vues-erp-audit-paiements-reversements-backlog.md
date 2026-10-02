@@ -15,7 +15,7 @@
 ### Rattachement et dépendances
 
 **Impact à intégrer, actualisé le 1er octobre 2026 :** la nouvelle
-[EPIC 69](../en-cours/epic-69-profils-acces-erp-satellites-backlog.md)
+[EPIC 69](../terminees/epic-69-profils-acces-erp-satellites-backlog.md)
 porte Lecteur, Backoffice, Finance et le cumul Backoffice + Finance, avec admin
 historique conservé. Elle ouvre les lectures financières selon périmètre ; Audit,
 SQLAdmin et commandes d'argent restent admin seuls. E65 conserve son socle ADMIN

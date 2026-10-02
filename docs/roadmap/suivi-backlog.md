@@ -1,18 +1,18 @@
 # Suivi backlog
 
-Mise à jour du classement : 2026-10-01 (EPIC-66 terminée après confirmation de recette ; EPIC-65 en cours)
+Mise à jour du classement : 2026-10-02 (EPIC-69 terminée après validation CA-18 ; EPIC-55 et EPIC-65 en cours)
 
 ## Synthese
 
 Évolution transverse du 29 septembre 2026 : [PWA-20260929 — installation et mise à jour](../specifications/installation-mise-a-jour-pwa.md), appliquée aux sept PWA existantes. Les états et clôtures historiques des EPIC restent inchangés ; preuves locales et recette appareil sont distinguées dans la spécification.
 
 - Identifiants EPIC suivis : 73 ; 70 du tronc commun et 3 identifiants applicatifs distincts.
-- EPICs a faire : 8 ; EPICs en cours : 3 (EPIC-55, EPIC-65 et EPIC-69).
+- EPICs a faire : 8 ; EPICs en cours : 2 (EPIC-55 et EPIC-65).
 - EPICs fusionnees : 1 (EPIC-61 vers EPIC-60).
-- EPICs terminees : 59 (57 du tronc commun et 2 applicatives) ; EPICs abandonnees : 2.
+- EPICs terminees : 60 (58 du tronc commun et 2 applicatives) ; EPICs abandonnees : 2.
 - US / PRD detaillees dans le tableau historique : 415, jusqu'a `EPIC-45`.
 - Source prioritaire : fichier backlog dedie quand disponible, sinon `product-roadmap.md`.
-- Référence de pilotage : EPIC-55, EPIC-65 et EPIC-69 sont en cours. EPIC-66 est terminée après confirmation utilisateur. EPIC-54, EPIC-58, EPIC-62,
+- Référence de pilotage : EPIC-55 et EPIC-65 sont en cours. EPIC-69 est terminée après validation CA-18 ; EPIC-66 après confirmation utilisateur. EPIC-54, EPIC-58, EPIC-62,
   EPIC-64, EPIC-67, EPIC-68, EPIC-70 et EPIC-MARKETPLACE-54 sont à faire. EPIC-47 est terminée,
   clôture produit confirmée. EPIC-05 et EPIC-12 sont abandonnées ;
   EPIC-61 est fusionnée dans EPIC-60. Les autres EPIC du tronc commun sont terminées.
@@ -46,7 +46,7 @@ ci-dessous conservent ce périmètre initial.
 
 ### Epics restant a livrer
 
-Nouvelle [EPIC 69 — Profils et accès ERP/satellites](en-cours/epic-69-profils-acces-erp-satellites-backlog.md),
+Nouvelle [EPIC 69 — Profils et accès ERP/satellites](terminees/epic-69-profils-acces-erp-satellites-backlog.md),
 créée sur demande explicite, reprenant le cadrage complémentaire de l'EPIC 35 :
 vingt-sept critères cadrés : trois rôles métier et cumul Backoffice + Finance,
 admin historique conservé, SQLAdmin et commandes d'argent réservés à cet admin,
@@ -601,5 +601,5 @@ anciennes US restent historiques.
 | EPIC-66 | Termine | [backlog](terminees/epic-66-localeo-atelier-coffrets-assistes-ia-backlog.md), [spécification V1](../specifications/epic-66-localeo-atelier/README.md) ; clôture produit confirmée le 1er octobre 2026, bilan de livraison avec réserves |
 | EPIC-67 | A faire | [backlog](a-faire/epic-67-communautes-communes-coffrets-intercommunaux-backlog.md) |
 | EPIC-68 | A faire | [backlog](a-faire/epic-68-parcours-commercant-preparation-onboarding-backlog.md) |
-| EPIC-69 | En cours | [backlog](en-cours/epic-69-profils-acces-erp-satellites-backlog.md) |
+| EPIC-69 | Termine | [backlog](terminees/epic-69-profils-acces-erp-satellites-backlog.md) ; clôture du 2 octobre 2026 après validation CA-18 |
 | EPIC-70 | A faire | [backlog](a-faire/epic-70-validation-prestation-telephone-client-backlog.md) |

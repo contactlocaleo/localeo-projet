@@ -1,6 +1,138 @@
 # E69 — Vérification et préparation de livraison
 
-Version **V1.4 — scopes fonctionnels globaux, décision du 2 octobre 2026**. État : **En cours**.
+Version **V1.4 — scopes fonctionnels globaux, décision du 2 octobre 2026**. État : **Terminée le 2 octobre 2026**.
+
+## Décision finale de clôture après CA-18 — 2 octobre 2026
+
+**Clôture produit prononcée sur demande utilisateur.** Les 27 critères sont
+acceptés sur les preuves rapprochées ci-dessous, sans changement de périmètre.
+Backlog déplacé dans `terminees`, liens, index et compteurs actualisés.
+Les anciennes décisions bloquées restent historiques. Le code de production
+est inchangé depuis les **173 tests ciblés et 445 contrôles d'architecture** du
+correctif : ces preuves sont réutilisées, pas annoncées comme réexécutées.
+
+Complément exécuté pendant cette clôture :
+`python scripts/validation/test_isolated.py tests/security/test_audit_acces_internes.py -q`
+dans le backend, Python 3.14 isolé : **37 réussis, aucun skip**. Sept cas ajoutés
+prouvent explicitement le succès de Finance sur son accueil ERP et les refus
+SQLAdmin/alias pour Lecteur, Backoffice, Finance et B+F. Ce lot recouvre les
+30 cas du correctif ; les nombres ne doivent pas être additionnés.
+
+La revue indépendante des critères, du code et des preuves ne relève plus
+d'écart bloquant. CA-12 exige une destination autorisée, satisfaite par l'accueil
+ERP ; il n'impose pas le retour automatique au satellite. CA-26 exige le suivi
+et le renvoi disponibles dans la fiche ; le filtre spécialisé absent reste une
+limite de conception. Ces écarts UX et la dette de rétention restent visibles
+ci-dessous. Aucun critère n'est retiré, aucune recette distante n'est inventée.
+
+Révisions de base : backend `72f690c8e62c0d96ff0ebae30f0e7fbc57bff343` + correctif
+CA-18 local et complément de test ; projet `0f551af8c4b4070b1d1006f1122be393ff972dd8`
++ documentation locale. Les trois frontends publics sont propres et inchangés.
+Les migrations, tests PostgreSQL, générateur et parcours navigateur antérieurs
+sont réutilisés pour leurs périmètres inchangés ; aucun nouveau test métier,
+réseau, base distante ou envoi fournisseur n'est implicite.
+
+Le bundle local `.artifacts/epic69-cloture/apres-ca18/documentation` contient
+119 sources. Empreintes contrôlées par le synchroniseur et le vérificateur backend
+(120 fichiers distribués, manifeste d'exports inclus). Le lecteur réel résout
+`formation/gerer-utilisateurs-internes.md` vers un contenu identique au guide,
+avec le diagnostic CA-18. Ce contrôle ne publie rien dans l'ERP distant.
+
+Contrôles finaux exécutés après déplacement : `check_guidance.py` (89 guides,
+932 liens), `--changed --all-markdown` (17 documents, 425 liens), sans erreur ni
+avertissement ; `sync_documentation.py --check-sources` (119 documents). Les
+différences Git sont contrôlées dans les deux dépôts ; aucun ancien lien
+`en-cours/epic-69...` ou `a-faire/epic-69...` ne subsiste dans les sources Markdown.
+
+### Lots de commit de cette clôture
+
+Index laissés vides. Inventaire exact, bases et empreintes SHA-256 préparés dans
+`.artifacts/epic69-cloture/apres-ca18/preparation-commit.json`, non versionné.
+Les deux lots sont dédiés à E69 ; les artefacts, bundles et fichiers `.env*`
+sont exclus. Les anciens inventaires de préparation sont périmés.
+
+| Dépôt | Contenu | Message proposé |
+| --- | --- | --- |
+| Backend | Correctif CA-18, conservation des UUID de trace, tests de sécurité et complément par profil | `fix(epic69): tracer les acces internes et leurs refus sans secret` |
+| Projet | Clôture, bilan, guide et contrat de trace, déplacement du backlog et liens/index | `docs(epic69): cloturer les acces internes apres validation CA-18` |
+
+### Configuration et ordre de livraison
+
+| Étape / composant | Action et valeur attendue | Source / contrôle |
+| --- | --- | --- |
+| 1. Documentation | Publier le futur commit projet, sélectionner son SHA complet au build backend ; le pin par défaut `b496d3ef...` est insuffisant | `scripts/documentation/prepare_documentation.py --revision <SHA_PROJET_PUBLIE>` ; empreintes et alias du guide ERP |
+| 2. Base | Sauvegarde/inventaire puis runner v251 → v252 → v253 pour les seules migrations manquantes | Base test déjà migrée à v253 lors de l'intervention précédente ; démo/prod à inventorier, aucun rejeu brut |
+| 3. URL des emails | `LOCALEO_ERP_URL=https://test-backoffice.localeo.city` en test ; origine HTTPS de la cible ailleurs, sans chemin | `app/infrastructure/email/acces_interne.py` ; lien `/internal/initialiser-acces`, pas `/admin/login` |
+| 3. Invitations | `LOCALEO_INTERNE_INVITATION_INTERVAL_SECONDS=60`, `LOCALEO_INTERNE_INVITATION_MAX_PER_DAY=5` par défaut ; invitation 24 h | `app/infrastructure/persistence/comptes_internes.py` ; renvoi et suivi d'envoi |
+| 3. Mail et admin | Expéditeur/transport existants, clé `BREVO_EMAIL_API_KEY` ou repli `BREVO_API_KEY` ; `EMAIL_DEV_MODE=false` pour remise réelle ; configuration `LOCALEO_ADMIN_*` préservée | `app/config.py` ; réception pilote et reprise admin, secrets provisionnés hors Git |
+| 3. Atelier | `LOCALEO_FEATURE_ATELIER_COFFRETS_ENABLED=true` si utilisé, défaut `false` | Flag distinct des scopes ; accès autorisé et refus selon rôle |
+| 3. Journaux | `LOCALEO_LOG_LEVEL=INFO`, `LOCALEO_LOG_FORMAT=json` pour collecte structurée ; vérifier rétention et accès restreint | `app/logging_config.py` ; `security.internal_access`, UUID et corrélation exploitables ; surveiller `.failed` |
+| 4. Backend et assets | Livrer ensemble API, ERP, Support, Atelier et OnBoard ; bundle embarqué ou `LOCALEO_DOCUMENTATION_ROOT` explicite | Aucun frontend public à livrer pour E69 ; guide réellement lisible depuis l'ERP |
+| 5. Recette cible | Invitation/initialisation, profils, succès/refus, retrait/révocation, SQLAdmin fermé, reprise historique et collecte des traces | Vérification avant ouverture des comptes ; aucune recette distante exécutée pendant cette clôture |
+
+Aucune nouvelle migration ni variable introduite par CA-18. La reprise conserve
+les tables et l'admin historique : fermer l'entrée nominative et révoquer les
+sessions/liens si nécessaire, sans réactiver d'anciens secrets. Une restauration
+de données n'est pas annoncée comme testée. Aucun commit, push ou déploiement
+exécuté par cette clôture.
+
+## Correction CA-18 — traçabilité des accès internes, 2 octobre 2026
+
+**Écart corrigé et vérifié localement**, sur la base backend `72f690c` et projet
+`0f551af`, sans commit ni déploiement de ce correctif. La décision de clôture
+reste à renouveler. Les revues bloquées et lots de commit ci-dessous sont
+historiques ; leurs empreintes ne décrivent plus l'arbre corrigé.
+
+Cause confirmée : les refus des gardes précédaient l'attribution de l'auteur,
+et les journaux HTTP ne portaient pas le contexte d'autorisation. Un événement
+structuré `security.internal_access` complète désormais l'audit métier : auteur
+vérifié, scopes demandés, version des droits, état de vérification, route modèle,
+résultat HTTP et corrélation. Les refus précoces sans identité vérifiée restent
+anonymes. La revalidation transactionnelle conserve la nouvelle version des
+droits, ou signale une session devenue invalide avant tout effet.
+
+Deux tests ont également reproduit un défaut du masquage : certaines séquences
+d'UUID étaient assimilées à un téléphone et altéraient auteur/corrélation.
+Les UUID canoniques de ces champs sont préservés ; les secrets, téléphones et
+autres valeurs gardent leur masquage. Les assertions portent sur le JSON final,
+pas seulement sur les arguments du logger.
+
+Exécution backend via `python scripts/validation/test_isolated.py`, arguments
+`-q --tb=short`, sur l'arbre corrigé :
+
+- **173 tests réussis** : `tests/security/test_audit_acces_internes.py` (30 cas),
+  `tests/security/test_verified_audit_actor.py`,
+  `tests/api/test_e69_generation_interne.py`,
+  `tests/security/test_acces_internes_surfaces.py`,
+  `tests/security/test_admin_session_lifecycle.py`,
+  `tests/security/test_csrf_origin_middleware.py`,
+  `tests/api/test_observability_errors.py`,
+  `tests/test_observability_instrumentation.py`.
+- **445 contrôles réussis** : `tests/architecture`,
+  `tests/domain/test_domain_dedicated_classes.py`,
+  `tests/application/use_cases/test_use_case_business_test_coverage.py`.
+
+Couverture : Lecteur, Backoffice, Finance, cumul B+F sur ERP/Support/Atelier,
+succès/refus, SQLAdmin et alias, CSRF précoce, session invalide, retrait/révocation
+transactionnels, erreurs techniques, absence de secret et unicité de l'événement.
+Les 69 avertissements SQLite datetime préexistants ne sont pas des échecs.
+Les services externes sont neutralisés ; aucune recette distante n'est annoncée.
+
+Contrôles documentaires réussis : `check_guidance.py` (89 guides),
+`check_guidance.py --changed --all-markdown` (5 documents),
+`sync_documentation.py --check-sources` (119 sources) et `git diff --check`
+dans les deux dépôts. Le contrat du lecteur documentaire est inchangé.
+
+Impacts : backend et documentation canonique ; aucune modification des droits,
+DTO HTTP, schémas SQL ou données générées, donc aucune migration, adaptation
+du générateur ou nouvelle variable. Les trois frontends publics ne changent pas.
+Pour livrer : publier le code et le guide, reconstruire le bundle documentaire,
+puis vérifier sur la cible un succès et un refus par rôle/entrée. Garder
+`LOCALEO_LOG_LEVEL=INFO` pour les succès, collecter les journaux JSON existants
+et vérifier leur conservation et leur accès restreint. Les refus sont dans les
+journaux de sécurité, pas ajoutés à la table Audit SQLAdmin. Le
+[contrat de trace](architecture-contrats.md#trace-des-acces-internes-ca-18)
+et le [guide de reprise](guide-backoffice.md#refus-et-reprise) détaillent le diagnostic.
 
 ## Correctif des refus Backoffice — 2 octobre 2026
 
@@ -72,38 +204,71 @@ suivi E69 en attente. Aucun déploiement applicatif n'a été exécuté ou véri
 La disparition du signalement distant reste à vérifier après livraison. **CA-18 reste ouvert** ;
 cette correction des accès ne constitue pas une preuve de traçabilité des refus.
 
-## Réexamen de clôture après publication — 2 octobre 2026
+## Réexamen de clôture après le correctif Backoffice — 2 octobre 2026
 
 **Verdict inchangé : clôture bloquée par CA-18.** Révisions relues : backend
-`4635820843402af9ed6f99da09567315d3e56ecc`, projet
-`ba04181594b45d3ff2dbf27fce43f608fe74cc41`. Les deux arbres étaient propres et
-les index vides au début de ce réexamen. La migration test v253 et la publication
-Git sont acquises ; elles ne remplacent pas le correctif de traçabilité des refus.
+`72f690c8e62c0d96ff0ebae30f0e7fbc57bff343`, projet
+`0f551af8c4b4070b1d1006f1122be393ff972dd8`. Les cinq dépôts étaient propres sur
+`main` et les index vides au début de ce réexamen. La migration test v253 et la
+publication Git sont acquises ; elles ne remplacent pas le correctif de traçabilité
+des refus. Le statut **En cours** et le chemin du backlog sont conservés.
 
 Relecture du garde `_contexte_erp`, du middleware de session et de l'audit :
 le refus intervient toujours avant `verified_actor`, et les événements génériques
 ne portent toujours pas l'auteur interne et le scope demandé. La comparaison
-avec le socle `86199b1` confirme que le commit publié ne corrige pas ce comportement.
-Le diagnostic isolé des trois refus ERP/Support/Atelier et les tests V1.4 consignés
-plus bas sont donc **réutilisés, sans nouvelle exécution**. Les suites migration
-(12 réussis), architecture (445 réussis) et navigateur création/édition (390/1280)
-restent valables pour le contenu publié ; elles ne prouvent pas CA-18.
+entre `4635820` et `72f690c` confirme que le correctif ne change ni `erp.py`, ni
+`admin_session.py`, ni `audit.py`, ni `observability_http.py` ; dans `main.py`,
+seule l'admission des routes métier Animation a changé. La revue indépendante
+confirme ce constat. L'audit des mutations de comptes réussies ne couvre pas
+les refus préalables d'accès.
+
+Le diagnostic isolé des trois refus ERP/Support/Atelier et les preuves V1.4 sont
+**réutilisés, sans nouvelle exécution**. Les **108 + 109 tests** du correctif et
+les **445 contrôles d'architecture**, exécutés avant son commit sans modification
+ultérieure du code, complètent les groupes CA-03/04/05/08/12/13/14/16/20 de la
+matrice existante. Ils prouvent les droits, les refus, les sessions et les
+transactions testés ; ils ne prouvent pas la trace nominative exigée par CA-18.
+Les preuves migration (12 réussis) et navigateur création/édition (390/1280)
+restent réutilisées pour leur périmètre inchangé ; aucune recette déployée nouvelle.
 
 La matrice des 27 critères et les actions correctives du premier bilan restent
-applicables. Aucun critère retiré, aucun statut ou chemin modifié. Ce réexamen
-ne réalise ni changement applicatif, ni migration, ni recette distante, ni commit,
-push ou déploiement. Lot de commit préparé : **ce seul fichier**, message proposé
-`docs(epic69): consigner le reexamen de cloture apres publication` ; index laissé vide.
+applicables. Aucun critère retiré. Pour lever CA-18 : tracer les refus avec
+principal vérifié, action/scope, résultat et corrélation, sans secret ; tester
+succès/refus sur ERP, Support et Atelier, y compris après retrait/révocation.
+Ce correctif transversal n'est pas introduit dans cette revue de clôture.
 
-Configuration/livraison restante : base test déjà en v253 ; pour les autres cibles,
-appliquer les migrations manquantes dans l'ordre indiqué plus bas. Vérifier
-`LOCALEO_ERP_URL` (origine HTTPS), transport mail et limites de renvoi 60 s / 5 par
-24 h par défaut. La révision documentaire publiée `ba04181594b45d3ff2dbf27fce43f608fe74cc41`
-contient le guide global E69 : elle peut être sélectionnée au build après contrôle
-des empreintes. Le pin backend reste `b496d3efaa07c8a3806d8a499270c06529a5df1f`,
-qui n'embarque pas ce guide. Déployer API et assets ERP/satellites ensemble, puis
-recetter invitation, profils globaux, retrait/révocation et reprise admin.
-La correction de CA-18 reste nécessaire avant de demander de nouveau la clôture.
+Vérification documentaire **exécutée** : bundle local de 119 sources construit
+et recontrôlé par `sync_documentation.py --output
+.artifacts/epic69-cloture/revue-72f690c/documentation`, puis `--check` ; contrôle
+backend `check_documentation_snapshot.py --manifest <bundle>/documentation.snapshot.json
+--source ../localeo-projet` réussi (120 fichiers distribués, manifeste inclus).
+Le lecteur réel `resolve_ops_document('formation/gerer-utilisateurs-internes.md')`
+résout l'alias dans ce bundle, avec un contenu identique au guide canonique.
+Cela ne publie aucun document dans l'ERP distant.
+
+Lot de commit préparé : **ce seul fichier**, message proposé
+`docs(epic69): reexaminer la cloture apres le correctif Backoffice`. Inventaire,
+SHA de base et empreinte du fichier dans l'artefact local ignoré
+`.artifacts/epic69-cloture/revue-72f690c/preparation-commit.json`. Index laissé vide ;
+aucun commit, push, changement applicatif, migration ou déploiement dans cette revue.
+
+Configuration/livraison restante, sans nouvelle variable introduite par le correctif :
+
+| Composant | Action nécessaire | Valeur / contrôle |
+| --- | --- | --- |
+| Base | Appliquer uniquement les migrations manquantes v251 → v252 → v253 par le runner | Test déjà migré à v253 lors de l'intervention documentée ; autres cibles à inventorier, pas de rejeu SQL brut |
+| Email d'accès test | Vérifier la valeur effective de `LOCALEO_ERP_URL` dans le service hébergé | `https://test-backoffice.localeo.city`, sans chemin ; l'invitation doit ouvrir `/internal/initialiser-acces` sur cet hôte |
+| Limites d'invitation | Vérifier `LOCALEO_INTERNE_INVITATION_INTERVAL_SECONDS` / `LOCALEO_INTERNE_INVITATION_MAX_PER_DAY` | Défauts 60 secondes / 5 par compte sur 24 h ; pas de nouvelle valeur imposée |
+| Transport mail | Vérifier expéditeur, clé fournisseur et mode existants | `EMAIL_DEV_MODE=false` si remise réelle attendue ; clé `BREVO_EMAIL_API_KEY` ou repli `BREVO_API_KEY`, aucune valeur copiée ; suivi outbox puis réception pilote |
+| Atelier | Vérifier son activation si ce satellite doit être utilisé | `LOCALEO_FEATURE_ATELIER_COFFRETS_ENABLED=true` ; défaut `false`, indépendant des droits Backoffice |
+| Documentation | Sélectionner la révision publiée au build et vérifier le bundle livré | `prepare_documentation.py --revision 0f551af8c4b4070b1d1006f1122be393ff972dd8` contient le guide à jour ; le pin par défaut `b496d3efaa07c8a3806d8a499270c06529a5df1f` reste insuffisant |
+| Livraison et recette | Livrer backend et assets ERP/Support/Atelier/OnBoard ensemble, puis recette par rôle | Invitation, actions Backoffice, SQLAdmin refusé, retrait/révocation et admin historique ; aucun déploiement des trois frontends publics requis |
+
+Ordre : sauvegarde/inventaire, migrations nécessaires, configuration et bundle,
+backend avec ses assets, contrôles des parcours et de la reprise admin. La reprise
+conserve les tables et l'accès historique ; ne pas restaurer d'anciens secrets ou
+réinterpréter un cookie nominatif comme admin. La correction de CA-18 reste
+nécessaire avant la décision de clôture, indépendamment de ces prérequis de livraison.
 
 ## Publications et interventions précédentes
 
@@ -123,7 +288,7 @@ compte réel ni recette en environnement partagé. L'audit documentaire du 2 oct
 confronte les guides au code sans rejouer les tests métier ; les résultats de la
 section « Preuves historiques exécutées — V1.3 » restent les preuves locales
 précédemment consignées. **Ils ne valident pas
-l'évolution V1.4**, qui possède les scénarios et le suivi distincts ci-dessous. Sources : [backlog](../../roadmap/en-cours/epic-69-profils-acces-erp-satellites-backlog.md),
+l'évolution V1.4**, qui possède les scénarios et le suivi distincts ci-dessous. Sources : [backlog](../../roadmap/terminees/epic-69-profils-acces-erp-satellites-backlog.md),
 [contrats](architecture-contrats.md), [permissions](permissions-surfaces.md).
 
 **Intervention postérieure à la revue de clôture, 2 octobre 2026 : base de test
@@ -186,7 +351,9 @@ Les groupes ID/HTTP/PG/TRANSPORT/SUR/MET/FIN/UI/DEMO/DOC sont définis dans les
 preuves historiques plus bas ; leurs adaptations V1.4 et résultats sont consignés
 dans la section suivante. « Vérifié sur scénarios ciblés » indique la portée réelle
 des tests relus, sans certifier toutes les variantes de la grille de référence.
-CA-18 empêche la décision globale d'acceptation, même avec ces suites réussies.
+CA-18 empêchait alors la décision globale d'acceptation. La matrice suivante est
+actualisée par la revue finale : les autres groupes restent vérifiés sur les
+preuves inchangées ; CA-18 dispose désormais de ses preuves exécutées.
 
 | Critères | Code et comportement rapprochés | Preuves exécutées réutilisées, sauf mention | Documentation / exploitation | Verdict |
 | --- | --- | --- | --- | --- |
@@ -197,7 +364,7 @@ CA-18 empêche la décision globale d'acceptation, même avec ces suites réussi
 | CA-09 | Migration v253, conversion GLOBAL sans changement de profils/secrets ; démonstration/restauration | Migration PostgreSQL (1), DEMO unitaires (4) et PostgreSQL (4) | Inventaire et conversion en cible restent prérequis de livraison | Vérifié localement, bascule distante non exécutée |
 | CA-10/11/19 | Projections paiements, pièces autorisées, Support financier et masquages | FIN/SUR (29), UI financier ; GED historique pour règles inchangées | E65, guide Finance et familles documentaires | Vérifié sur scénarios ciblés |
 | CA-12/14 | Navigation, connexion/refus et consommateurs des scopes, purge après retrait | UI accès/OnBoard/Finance et SUR ; UI accès réexécuté après correction de recherche | Guide des libellés, accès directs ; retour automatique au satellite reste une limite UX | Vérifié sur scénarios ciblés ; appareil/PWA cible non recetté |
-| **CA-18** | Audit des commandes de comptes présent ; auteur/contexte manquants sur les refus génériques | Revue des gardes, middleware HTTP et audit ; les succès des suites SUR ne prouvent pas cette exigence | Guide/export présents ; traçabilité des refus à compléter | **Partiel — bloque la clôture** |
+| **CA-18** | Audit métier complété par la trace structurée des succès/refus internes | 173 tests ciblés réutilisés ; 37 scénarios de trace JSON finale exécutés pour clôture | Guide et lecteur/bundle vérifiés ; collecte à contrôler en cible | **Vérifié — blocage levé** |
 | CA-23/24/25 | Création, unicité, invitation, finalité, initialisation et consommation atomique | ID (51), PG/transition (23), UI initialisation et recherche | Guide admin, contrat de création et récupération | Vérifié sur scénarios ciblés |
 | CA-26/27 | Outbox, versions, renvoi explicite, email/état/rôle modifiés pendant transport/activation | ID (51), PG/TRANSPORT (23) | Guide états d'envoi, reprise manuelle et configuration | Vérifié sur scénarios ciblés ; fournisseur réel non testé |
 
@@ -696,7 +863,7 @@ documentée ci-dessus, ne change pas ce constat concernant le code applicatif.
 Après correction de CA-18, renouveler les preuves concernées et la revue de
 clôture avant tout déplacement vers `terminees`.
 
-## Bilan d’acceptation
+## Bilan d’acceptation historique avant correction CA-18
 
 Dépôts modifiés : backend (domaine, application, adaptateurs, ERP et satellites
 embarqués, SQL, générateur, tests) et projet (spécifications, contrats, guide).

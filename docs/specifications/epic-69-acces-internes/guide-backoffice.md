@@ -125,6 +125,19 @@ La fiche utilisateur ne fournit ni mot de passe ni lien d'invitation à copier.
 Les opérateurs suivent les états et envoient les messages par les actions prévues.
 Toute anomalie est remontée avec son identifiant de corrélation, sans secret.
 
+Après livraison du correctif CA-18, l'exploitation recherche cette corrélation
+dans les journaux backend, événement **`security.internal_access`**. La trace
+indique l'identifiant du compte vérifié, les scopes demandés, le résultat et la
+version des droits. Elle complète l'historique des changements de comptes ; les
+refus HTTP ne sont pas ajoutés à la vue Audit SQLAdmin.
+
+Un refus avant vérification de l'identité apparaît comme `anonymous`. Une
+révocation pendant l'action peut conserver l'identifiant précédemment vérifié
+avec `identity_check=invalid` : se reconnecter ou demander à l'admin de vérifier
+le compte, sans élargir ses droits pour contourner le refus. En cas d'événement
+`security.internal_access.failed`, faire vérifier la journalisation par
+l'exploitation. Les succès nécessitent que le niveau INFO soit collecté.
+
 Ce guide est accessible depuis **Guide de gestion des utilisateurs** dans la liste
 des utilisateurs internes. Il décrit les actions de l'admin historique ; la présence
 du document dans un bundle ne prouve pas que les migrations ont été appliquées.

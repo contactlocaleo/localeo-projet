@@ -3,14 +3,14 @@
 ## Synthèse
 
 - Identifiant : **EPIC-69**, disponible après recherche dans la roadmap commune.
-- Statut : **En cours** ; revue de clôture du 2 octobre 2026 bloquée par **CA-18** (traçabilité des refus internes).
+- Statut : **Terminée le 2 octobre 2026**, après correction CA-18 et revue des 27 critères ; clôture produit, sans déploiement implicite.
 - Décision du 1er octobre 2026 : créer une nouvelle epic pour ce besoin.
 - Rôles retenus : **Lecteur, Backoffice, Finance**, cumul explicite **Backoffice + Finance**.
 - Garde-fou : **admin historique conservé**, SQLAdmin et commandes financières
   engageant de l'argent réservés à cet admin en V1.
 - Surfaces : ERP, Support, Atelier et autres satellites internes ; Control reste admin.
 - Référencement : création par l'admin et invitation email pour initialiser le mot de passe.
-- Phase : **V1.4, évolution des scopes globaux en cours**, 27 critères conservés ; aucun accès réel ouvert ni déploiement effectué.
+- Phase : **V1.4 clôturée**, 27 critères conservés ; aucun accès réel ouvert ni déploiement effectué par cette clôture.
 - [Roadmap commune](../README.md) ; [index des spécifications](../../specifications/INDEX.md).
   [Dossier E69](../../specifications/epic-69-acces-internes/README.md) produit le
   1er octobre : architecture/contrats, permissions, guide backoffice et preuves
@@ -21,12 +21,21 @@
 
 ## Évolution E69-SCOPES-GLOBAUX-20261002 — 2 octobre 2026
 
-Revue de clôture : preuves locales V1.4 disponibles, recherche utilisateurs
-corrigée et recettée. Les refus d'accès ne portent pas encore systématiquement
-l'auteur interne et le scope demandé dans l'audit ; **CA-18 reste partiel**.
+Revue de clôture initiale : preuves locales V1.4 disponibles, recherche utilisateurs
+corrigée et recettée, mais traces des refus incomplètes. Le correctif **CA-18**
+ajoute ensuite l'auteur vérifié, les scopes, le résultat et la corrélation aux
+journaux structurés pour ERP/Support/Atelier, y compris après retrait/révocation.
+**173 tests ciblés et 445 contrôles d'architecture réussissent**. Guide de
+diagnostic actualisé ; aucun secret journalisé, aucun droit supplémentaire.
+La correction est locale, sans publication ni déploiement à ce stade.
+Revue finale de clôture : **37 scénarios de trace réussis**, dont succès Finance
+et refus SQLAdmin pour les quatre profils ; les autres preuves sont réutilisées
+sur leur périmètre inchangé. Les 27 critères sont acceptés sans réduction ;
+le guide ERP et son bundle sont vérifiés. Statut passé à Terminée sur demande
+utilisateur, avec configuration et recette cible conservées au bilan.
 Le [bilan](../../specifications/epic-69-acces-internes/verification-livraison.md)
 détaille l'écart, le lot de commit à préparer et les prérequis de déploiement.
-Statut et chemin conservés ; aucun critère supprimé ou réduit.
+Les revues initiales bloquées sont conservées comme historiques ; aucun critère supprimé ou réduit.
 
 Incident du 2 octobre rattaché à **E69-CA-24/25** : un email d'initialisation
 préparé en test pointe vers `backoffice.localeo.city`, qui redirige vers

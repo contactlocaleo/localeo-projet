@@ -228,7 +228,7 @@ Le cadrage initialement nommé E35 dans les bilans datés ci-dessous est désorm
 porté par l'EPIC 69 ; cette correction de rattachement ne change pas leurs résultats.
 
 La matrice ci-dessus valide le socle ADMIN. Pour une livraison combinée avec
-la nouvelle [EPIC 69](../../roadmap/en-cours/epic-69-profils-acces-erp-satellites-backlog.md),
+la nouvelle [EPIC 69](../../roadmap/terminees/epic-69-profils-acces-erp-satellites-backlog.md),
 compléter E65-CA-01/04/08/09 par les preuves E69-CA-11/20 :
 lectures financières Lecteur/Backoffice/Finance/Admin, audit Admin seul, périmètres
 identiques entre listes, synthèses, détails et pièces ; aucun lien vers console

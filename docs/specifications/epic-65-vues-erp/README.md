@@ -25,7 +25,7 @@ frontends ne consomment pas ces nouveaux écrans ni leurs API internes.
 ### Choix et hypothèses
 
 Le cadrage des profils est porté depuis le 1er octobre 2026 par la nouvelle
-[EPIC 69](../../roadmap/en-cours/epic-69-profils-acces-erp-satellites-backlog.md) :
+[EPIC 69](../../roadmap/terminees/epic-69-profils-acces-erp-satellites-backlog.md) :
 Lecteur, Backoffice, Finance et cumul Backoffice + Finance. Elle complète
 `E65-D02` pour les lectures financières selon les scopes fonctionnels, en gardant
 Audit global, SQLAdmin et commandes d'argent réservés à l'admin historique.

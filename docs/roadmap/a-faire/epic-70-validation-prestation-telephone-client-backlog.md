@@ -254,7 +254,7 @@ Ces preuves sont attendues, **pas exécutées à ce stade**.
 | Backend | Concerné : PIN, contexte transactionnel, contrôle des droits, consommation commune, audit et notifications ; aucune nouvelle règle de calcul du reversement |
 | Application Commerçant | Concernée : gestion du PIN, dates/états, révocation, oubli et historique ; accès professionnel nécessaire à la préparation |
 | Marketplace / Localeo Live | Concerné : choix de prestation, passage du téléphone, saisie PIN, refus, reçu et reprise ; droit client requis à cartographier |
-| ERP / Support | Concernés : état du mode/PIN sans secret, incidents et révocation selon habilitations ; lien avec [EPIC 69](../en-cours/epic-69-profils-acces-erp-satellites-backlog.md), aucun rôle supplémentaire implicite |
+| ERP / Support | Concernés : état du mode/PIN sans secret, incidents et révocation selon habilitations ; lien avec [EPIC 69](../terminees/epic-69-profils-acces-erp-satellites-backlog.md), aucun rôle supplémentaire implicite |
 | Animation | Hors validation de participations dans cette V1 ; contrôler la non-régression des consommateurs de services partagés |
 | Contrats API | Concernés : gestion authentifiée du PIN et finalité client distinctes ; sources canoniques ici, contrats embarqués/générateurs dans les dépôts consommateurs |
 | Persistance / migrations | Concernées : vérificateur du PIN, version/dates/état, compteurs, demandes et audit ; aucune activation rétroactive ni PIN par défaut |

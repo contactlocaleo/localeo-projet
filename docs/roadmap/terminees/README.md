@@ -2,9 +2,9 @@
 
 [Retour à la roadmap](../README.md)
 
-59 EPIC terminées : 57 du tronc commun et deux identifiants applicatifs
+60 EPIC terminées : 58 du tronc commun et deux identifiants applicatifs
 (EPIC-MARKETPLACE-18 et EPIC-PRES-CONTENU-001). Les EPIC 3 et 4 restent décrites
-dans la roadmap produit ; les 57 autres disposent chacune d'un fichier ci-dessous.
+dans la roadmap produit ; les 58 autres disposent chacune d'un fichier ci-dessous.
 Les compléments de conception, de tests et d'interface sont réunis dans leur backlog.
 Les recettes d'environnement restantes ne modifient pas ce classement.
 
@@ -16,6 +16,8 @@ Les recettes d'environnement restantes ne modifient pas ce classement.
 - [EPIC 4 — Notifications commerçant sur achat](../product-roadmap.md#epic-4-notifications-commercant-sur-achat-de-coffret).
 
 ## Backlogs uniques
+
+- [EPIC 69 — Profils et accès ERP/satellites](epic-69-profils-acces-erp-satellites-backlog.md) : clôture le 2 octobre 2026 après correction CA-18 ; [preuves et configuration de livraison](../../specifications/epic-69-acces-internes/verification-livraison.md).
 
 - [Backlog Epic 1 - Gouvernance du referencement commercant et prestation](epic-1-gouvernance-du-referencement-commercant-et-prestation-backlog.md)
 - [Backlog Epic 2 - Invalidation d'une validation de prestation V1](epic-2-invalidation-validation-prestation-v1-backlog.md)
