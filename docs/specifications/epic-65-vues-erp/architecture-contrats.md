@@ -147,7 +147,11 @@ des projections n'englobe pas la transaction technique de vérification de sessi
 E65 n'introduit ni renouvellement de rôle depuis un nouveau référentiel ni
 refonte des profils : ces évolutions sont désormais portées par la nouvelle
 [EPIC 69](../../roadmap/en-cours/epic-69-profils-acces-erp-satellites-backlog.md),
-qui reprend le cadrage initialement rattaché à E35.
+qui reprend le cadrage initialement rattaché à E35. Le présent passage décrit le
+socle autonome E65 ; l'extension locale E69 V1.3 est détaillée dans sa
+[matrice de permissions](../epic-69-acces-internes/permissions-surfaces.md).
+Audit demeure admin historique, les lectures financières passent par les capacités
+et projections E69. Ce complément ne constitue pas une preuve de déploiement.
 
 ## Paramètres et enveloppe commune
 

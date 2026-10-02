@@ -63,15 +63,19 @@ Derniere evolution suivie :
   détaillés restent à préciser avant implémentation.
 
 - [Epic 69 — Profils et sécurisation des accès ERP et applications internes](en-cours/epic-69-profils-acces-erp-satellites-backlog.md) :
+  clôture du 2 octobre bloquée par CA-18 (auteur et scope absents des traces de refus internes) ;
   epic en cours, créée le 1er octobre à la demande de l'utilisateur ;
   vingt-sept critères, dont vingt-deux repris du cadrage E35 ; rôles Lecteur/Backoffice/Finance
   et cumul explicite Backoffice + Finance, admin historique conservé, SQLAdmin et
   commandes d'argent réservés à celui-ci en V1, protection ERP/Support/Atelier.
   Référencement par l'admin et invitation email pour définir le mot de passe,
-  avec suivi et renvoi, sur le modèle Animation. [Conception V1.2](../specifications/epic-69-acces-internes/README.md)
-  rédigée : invitation 24 h, récupération admin et matrice fixe validées ; Finance via
+  avec suivi et renvoi, sur le modèle Animation. [V1.4 — scopes globaux](../specifications/epic-69-acces-internes/README.md)
+  du 2 octobre : profils valables sur toutes les communes, sans contexte territorial ;
+  invitation 24 h, récupération admin et matrice fixe conservées ; Finance via
   Support existant ; BUM, activation déjà à zéro et annulation impayée non active
-  ouvertes à Backoffice. Contrats, guide et 27 critères actualisés ; implémentation locale et contrôles, recette déployée attendue.
+  ouvertes à Backoffice. Contrats, guide et 27 critères actualisés ; socle V1.3 poussé,
+  évolution V1.4 locale, sans preuve de déploiement. Écarts UI, révision du bundle documentaire et
+  recette cible restent suivis dans le [bilan](../specifications/epic-69-acces-internes/verification-livraison.md).
   Clôture historique de l'EPIC 35 conservée.
 
 - [Epic 67 — Communautés de communes et coffrets intercommunaux](a-faire/epic-67-communautes-communes-coffrets-intercommunaux-backlog.md) :

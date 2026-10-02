@@ -7,7 +7,9 @@ Spécification V1 du **26 septembre 2026**, implémentation **V1.4 le 1er octobr
 État produit : **En cours**, selon la [roadmap](../../roadmap/README.md).
 Les trois consultations sont implémentées localement dans le backend ; les
 preuves et limites figurent dans le [bilan](verification-livraison.md#bilan-dimplementation-v14).
-Aucun déploiement ni changement de profils E69 n'est déclaré réalisé.
+L'extension des profils E69 V1.3 évolue en V1.4 le 2 octobre : les scopes
+fonctionnels couvrent toutes les communes, sans attribution territoriale.
+Aucun déploiement ni ouverture réelle de ces accès n'est attesté par ce dossier.
 
 - [Architecture et contrats cibles](architecture-contrats.md).
 - [Traçabilité, tests et livraison](verification-livraison.md).
@@ -24,17 +26,19 @@ frontends ne consomment pas ces nouveaux écrans ni leurs API internes.
 
 Le cadrage des profils est porté depuis le 1er octobre 2026 par la nouvelle
 [EPIC 69](../../roadmap/en-cours/epic-69-profils-acces-erp-satellites-backlog.md) :
-Lecteur, Backoffice, Finance et cumul Backoffice + Finance. Elle nécessite de
-réviser `E65-D02` pour les lectures financières selon leur périmètre, en gardant
+Lecteur, Backoffice, Finance et cumul Backoffice + Finance. Elle complète
+`E65-D02` pour les lectures financières selon les scopes fonctionnels, en gardant
 Audit global, SQLAdmin et commandes d'argent réservés à l'admin historique.
-Ce changement reste à spécifier et implémenter dans E69 ; la V1.3 conserve
-le socle ADMIN et explicite ci-dessous les conditions de livraison combinée.
-Les tests de refus de ce socle ne constituent pas les preuves des nouveaux profils.
+Le socle E69 V1.3 est commité (`86199b1`) ; la V1.4 remplace les restrictions
+territoriales par des scopes globaux et prévoit la migration v253.
+Le socle E65 autonome décrit ci-dessous conserve sa valeur historique ; les
+[preuves E69](../epic-69-acces-internes/verification-livraison.md) documentent
+l'extension, distincte de la recette en environnement partagé.
 
 | Référence | Décision ou hypothèse | Conséquence |
 | --- | --- | --- |
 | E65-D01 | Demande acquise : trois vues intégrées à l’ERP, Audit dans Supervision, Paiements et Reversements dans « Paiements et facturation ». | Remplacer les raccourcis vers les listes SQLAdmin pour ces consultations. |
-| E65-D02 | Conservation des droits existants : ADMIN exclusivement. | EXPLOITATION reste refusé même avec une session ERP et des communes ; aucune permission nouvelle accordée. |
+| E65-D02 | Socle E65 autonome : ADMIN exclusivement ; extension explicite par E69, scopes globaux V1.4. | Audit reste admin historique. Les projections financières et leurs exports utilisent les scopes fonctionnels E69 sur toutes les communes ; une ancienne session EXPLOITATION ne devient pas un compte nominatif. |
 | E65-H01 | Confirmé par l'utilisateur le 1er octobre 2026 : paiements de `PaiementOrm`, achats et commandes d’achat. | Abonnements et commandes de souscription restent dans leurs dossiers existants ; pas d’agrégation de sources financières différentes. Les achats de lots Animation représentés par une commande d’achat sont inclus. |
 | E65-H02 | Confirmé par l'utilisateur le 1er octobre 2026 : consultation ERP et liens vers les actions financières existantes. | Pas de nouveau formulaire de lancement/reprise de campagne dans ces vues ; les contrôles d’accès et de commande des écrans actuels sont conservés. |
 | E65-D03 | Contrainte conservée : lecture sans mutation métier ni appel Stripe. | L’actualisation ne synchronise pas les frais, ne réconcilie rien, ne génère pas de document. |
@@ -42,26 +46,24 @@ Les tests de refus de ce socle ne constituent pas les preuves des nouveaux profi
 
 Les références H01/H02 sont conservées pour la traçabilité : l'utilisateur a
 confirmé ce périmètre avant l'implémentation des lots financiers. Abonnements
-et nouvelles actions intégrées restent exclus. Les consultations utilisent
-les mêmes droits ADMIN que l'audit, sans élargissement implicite E69.
+et nouvelles actions financières restent exclus de ces consultations. L'ouverture
+des lectures et du suivi Support relève explicitement d'E69 ; elle ne donne pas
+aux profils métier le droit d'exécuter une commande d'argent.
 
 ### Dépendance aux profils E69
 
-| Surface | Livraison E65 autonome | Cible combinée E69 / E65 |
+| Surface | Socle E65 autonome | Implémentation locale combinée E69 / E65 |
 | --- | --- | --- |
 | Audit global, recherche et détail | ADMIN | Admin seulement |
 | Paiements, reversements, synthèses et sections métier | ADMIN | Lecteur, Backoffice, Finance et Admin dans leur périmètre effectif |
 | Liens vers actions financières existantes | ADMIN, droits actuels de la destination | Suivi financier spécialisé à Finance/Admin ; commandes d'argent à Admin seul, même pour Backoffice + Finance ; aucune commande pour Lecteur |
 | Console historique mixte, références techniques et révélations personnelles | Droits ADMIN existants | SQLAdmin reste admin seul ; classification et masquage portés par E69, aucun accès technique induit par la lecture métier |
 
-La colonne combinée reprend `E69-CA-11/20`, sans créer dès maintenant des rôles
-acceptés par les routes. Avant son activation, E69 doit définir la politique
-de capacités, le périmètre de chaque projection et des totaux, les champs
-autorisés et la réévaluation des sessions. Le contrôle s'applique aussi aux
-sections, pièces et liens directs, avant chargement. Les tests futurs doivent
-prouver à la fois l'accès métier et les refus techniques, ainsi que la révocation.
-L'ouverture financière est bloquée tant que ces conditions ne sont pas remplies ;
-la conception et l'implémentation du socle ADMIN restent indépendantes.
+La colonne combinée reprend `E69-CA-11/20`. La politique de capacités, les champs
+autorisés, les totaux territoriaux et la réévaluation des sessions sont implémentés.
+Les sections, pièces et liens directs sont contrôlés avant restitution. Les preuves
+locales d'accès, refus et révocation sont conservées dans E69, sans remplacer les
+tests historiques du socle ADMIN. La recette cible reste nécessaire avant ouverture.
 
 ## Existant vérifié
 

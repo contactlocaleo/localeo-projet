@@ -34,10 +34,17 @@ trois rôles métier retenus, Lecteur, Backoffice et Finance, avec cumul explici
 Backoffice + Finance ; admin historique conservé, SQLAdmin et commandes d'argent
 réservés à celui-ci, protection des satellites Support/Atelier.
 Ses 27 critères incluent la création d'un utilisateur par l'admin et l'invitation
-email pour initialiser le mot de passe. La [conception V1.2](../specifications/epic-69-acces-internes/README.md)
-intègre les décisions : invitation 24 h, récupération admin, matrice fixe, Finance via Support,
-BUM/activation à zéro/annulation impayée non active ouvertes à Backoffice ; implémentation locale et contrôles, recette déployée attendue. L'EPIC 35 conserve sa clôture
+email pour initialiser le mot de passe. La [V1.4 — scopes globaux](../specifications/epic-69-acces-internes/README.md)
+du 2 octobre applique les profils à toutes les communes, sans contexte territorial.
+Elle conserve les décisions : invitation 24 h, récupération admin, matrice fixe, Finance via Support,
+BUM/activation à zéro/annulation impayée non active ouvertes à Backoffice. L'audit
+documentaire du 2 octobre distingue les commits V1.3 backend/projet poussés du
+déploiement ; écarts UI, révision du bundle et recette cible restent dans le
+[bilan](../specifications/epic-69-acces-internes/verification-livraison.md). L'EPIC 35 conserve sa clôture
 historique ; son ancien cadrage complémentaire est transféré à E69 sur demande utilisateur.
+La revue de clôture du 2 octobre maintient E69 en cours : **CA-18 reste partiel**
+sur la traçabilité des refus internes. Recherche utilisateurs corrigée et recettée ;
+lot de commit et prérequis de livraison consignés dans le bilan.
 La nouvelle [EPIC 70](a-faire/epic-70-validation-prestation-telephone-client-backlog.md)
 cadre une validation entièrement sur téléphone client, sans matériel dédié imposé.
 Le PIN dédié est retenu avec un compromis de droits limités : contexte transactionnel,

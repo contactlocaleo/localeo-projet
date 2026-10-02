@@ -236,8 +236,10 @@ technique pour les profils métier, aucune commande pour Lecteur et commandes
 d'argent refusées à Backoffice/Finance, y compris cumulés. Révoquer ou
 réduire le profil dans un autre onglet doit produire le refus dès la requête
 suivante et effacer les données devenues interdites. Ces tests dépendent de la
-politique et des contrats E69 ; ils ne sont ni exécutables ni réputés réussis
-sur la seule base des gardes ADMIN actuels.
+politique et des contrats E69 ; les gardes ADMIN historiques ne suffisent pas à
+les prouver. Depuis E69 V1.3, les [preuves locales complémentaires](../epic-69-acces-internes/verification-livraison.md)
+sont disponibles : projections, scopes, refus et révocation. La recette déployée
+reste distincte et non attestée.
 
 ### Suites existantes à préserver
 

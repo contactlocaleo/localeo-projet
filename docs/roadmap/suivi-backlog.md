@@ -51,8 +51,9 @@ créée sur demande explicite, reprenant le cadrage complémentaire de l'EPIC 35
 vingt-sept critères cadrés : trois rôles métier et cumul Backoffice + Finance,
 admin historique conservé, SQLAdmin et commandes d'argent réservés à cet admin,
 ERP/Support/Atelier protégés ; création d'utilisateur par l'admin, invitation email
-et initialisation du mot de passe avec suivi et renvoi. [Conception V1.2](../specifications/epic-69-acces-internes/README.md)
-rédigée ; invitation/récupération validées, Finance via Support, trois actions métier ouvertes à Backoffice ; implémentation locale et contrôles. Le statut « Terminé »
+et initialisation du mot de passe avec suivi et renvoi. [V1.4 — scopes globaux](../specifications/epic-69-acces-internes/README.md)
+du 2 octobre : profils valables sur toutes les communes, sans contexte territorial ;
+invitation/récupération, Finance via Support et trois actions métier ouvertes à Backoffice conservées ; implémentation locale et contrôles. Le statut « Terminé »
 des PRD-251 à PRD-260 de l'EPIC 35 ne couvre pas cette nouvelle epic.
 
 | Epic | Objet | Niveau de preparation |
@@ -73,10 +74,14 @@ téléphone client. Gestion commerçant du PIN avec validité, remplacement et r
 compromis de droits limités explicite, incidents et risque résiduel documentés.
 
 Entrée en cours : **EPIC-69 — Profils et sécurisation ERP/satellites**,
-27 critères E69-CA-01 à 27 ; conception V1.2, contrats/scopes/exports, guide et preuves rédigés.
+revue de clôture du 2 octobre bloquée par **CA-18**, traçabilité des refus internes ;
+27 critères E69-CA-01 à 27 ; V1.4 locale, scopes fonctionnels globaux,
+contrats/exports, guide et preuves actualisés ; migration v253 requise.
 Trois arbitrages utilisateur résolus : invitation 24 h/récupération admin/matrice fixe,
 Finance via Support, BUM/activation déjà à zéro/annulation impayée non active ouvertes
-à Backoffice ; preuves locales dans le dossier de vérification, aucun déploiement effectué.
+à Backoffice ; commits backend/projet poussés, sans preuve de déploiement. L'audit
+documentaire du 2 octobre consigne les écarts UI, la révision du bundle documentaire
+à choisir et la recette cible restante dans le [bilan](../specifications/epic-69-acces-internes/verification-livraison.md).
 
 Epic 63 recentree : script autonome, plateforme vivante et restauration controles,
 sans aucun impact sur le code applicatif ; adaptations du mode demo retirees ;

@@ -1,7 +1,9 @@
-# E69 — Architecture et contrats V1.3
+# E69 — Architecture et contrats V1.4
 
-Implémentation locale du 1er octobre 2026, liée au [périmètre et décisions](README.md).
-Les contrats décrivent les changements du backend et de ses interfaces embarquées.
+Évolution **E69-SCOPES-GLOBAUX-20261002**, du 2 octobre 2026, liée au [périmètre et décisions](README.md).
+Les contrats ci-dessous décrivent la cible V1.4 en cours d'implémentation. Le socle
+et les preuves V1.3 restent historiques ; leur audit documentaire n'atteste pas
+l'exécution des nouveaux scénarios.
 Ils ne prouvent ni migration distante ni recette d’un environnement déployé ;
 les preuves et limites figurent dans le [bilan de vérification](verification-livraison.md).
 
@@ -60,7 +62,7 @@ droits humains en présentant un champ acteur dans une commande.
 | Objet | Données utiles / contraintes |
 | --- | --- |
 | UtilisateurInterne | UUID immuable, nom/prénom, email normalisé unique dans cette population, hash nullable, état, version entière, version de sécurité, dates création/modification/initialisation/dernière connexion ; aucun secret dans les DTO |
-| AttributionRoleInterne | Rôle `LECTEUR`, `BACKOFFICE` ou `FINANCE` ; `scope.type=GLOBAL` ou `COMMUNES` avec UUID distincts non vides ; combinaisons autorisées L seul, B seul, F seul, B+F |
+| AttributionRoleInterne | Rôle `LECTEUR`, `BACKOFFICE` ou `FINANCE`, sans commune d'habilitation ; combinaisons L seul, B seul, F seul, B+F ; scopes fonctionnels globaux dérivés de la matrice fixe |
 | InvitationInterne | UUID, utilisateur, finalité INITIALISATION ou REINITIALISATION, empreinte de jeton aléatoire, expiration UTC, date utilisation/annulation, version d'email, génération ; au plus une invitation non consommée par finalité, génération précédente annulée |
 | SessionInterne | Empreinte du secret, utilisateur, version de sécurité, dates création/activité/expiration/révocation ; index par utilisateur pour révocation ; cookie ne porte pas les droits |
 | Reçu de commande | Clé idempotente + acteur stable + opération, empreinte normalisée de la demande et résultat sans secret ; réemploi de clé avec autre payload = conflit |
@@ -68,8 +70,11 @@ droits humains en présentant un champ acteur dans une commande.
 
 Email normalisé : trim et casse normalisée, sans supprimer `+suffixe` ou points
 dans la partie locale. L'unicité ne fusionne jamais un compte Animation/Commerçant.
-La liste de communes est validée depuis le référentiel ; `GLOBAL` nécessite un
-choix explicite de l'admin, jamais un défaut déduit d'une liste vide.
+Le choix explicite porte sur le profil prédéfini, pas sur un territoire. Les
+attributions nominatives sont globales par décision V1.4. Le stockage historique
+`scope_type/commune_ids`, s'il est conservé, est normalisé en `GLOBAL` et liste
+vide ; aucune requête d'attribution `COMMUNES` n'est acceptée. Les communes des
+objets métier restent leurs données, sans devenir un contexte d'autorisation.
 
 États compte : `EN_ATTENTE_INITIALISATION`, `ACTIF`, `DESACTIVE`. L'activation
 initiale passe de l'attente à ACTIF après validation du mot de passe et du lien.
@@ -85,28 +90,31 @@ Remplacer l'email annule les invitations de cette adresse et révoque les sessio
 la réinitialisation vers la nouvelle adresse doit être explicite, sans preuve
 fictive de réception. Le changement ne restitue aucun secret existant.
 
-## Politique d'autorisation et portée
+## Politique d'autorisation par scopes fonctionnels
 
-Entrées de la politique : principal chargé depuis la session, état du compte,
-attributions courantes, capacité demandée et périmètre réel de la ressource.
-Résultat : autorisé/refusé, raison interne stable et projection de données permises.
+Entrées : principal courant chargé depuis la session, état du compte, profils
+prédéfinis, scope exact demandé et faits métier nécessaires. Le domaine
+`identite_acces` calcule la liste triée et sans doublon des scopes accordés.
+Résultat : autorisé/refusé, raison interne stable et projection métier permise.
 
-1. Déclarer chaque lecture et commande dans le catalogue de capacités.
-2. Identifier la ressource et son périmètre depuis le serveur, pas un `commune_id`
-   client. Une liste filtre en base **avant** calcul du total, pagination ou agrégat.
-3. Calculer la portée effective de la capacité demandée par union des seules
-   attributions qui l'accordent, puis vérifier qu'elle couvre entièrement la
-   ressource. Ne jamais unir des territoires associés à des capacités différentes.
-4. Ressource mixte/intercommunale : périmètre propriétaire déterminé par son
-   contrat métier ; sans règle vérifiée, refuser aux comptes limités. Ne pas
-   accepter « au moins une commune correspond » sur un objet contenant d'autres données.
+1. Déclarer chaque lecture/commande dans le catalogue de scopes. Exemples :
+   `metier.consulter`, `catalogue.gerer`, `finance.exporter`.
+2. Vérifier l'appartenance exacte du scope au principal. Pas de joker, préfixe
+   implicite, scope fourni librement par le client ni conversion de rôle en admin.
+3. Appliquer le droit accordé à toutes les communes, y compris ressources mixtes
+   ou intercommunales. Ni absence de commune, ni changement de commune, ni
+   rattachement multi-communes ne constituent une restriction de l'habilitation interne.
+4. Conserver les contrôles métier de propriétaire, famille documentaire,
+   cohérence des sources, état, version et masquage. Une permission de lecture
+   ne donne jamais une permission de commande ou une projection administrative.
+5. Refuser toute entrée inconnue, technique ou interdite au profil.
 
-Une ressource indivisible couvrant A et B peut donc être lue avec B/A + F/B si
-les deux attributions accordent la même capacité de consultation et si son contrat
-métier définit cette couverture complète comme suffisante. La même ressource ne
-peut pas être modifiée avec une capacité catalogue accordée seulement sur A.
-Sans règle métier vérifiée pour la ressource mixte, le refus de l'étape 4 demeure.
-5. Refuser par défaut toute entrée inconnue, technique ou interdite à la V1.
+B+F est l'union des scopes des deux profils. Le retrait de F supprime ses scopes
+spécialisés, même si B conserve `finance.consulter`. Une fonction non accordée
+reste interdite partout ; une fonction accordée n'est jamais limitée à une commune.
+Ce mécanisme reprend le principe des scopes nommés des batchs, **pas leur
+authentification** : clés API, namespaces techniques et sessions humaines restent
+séparés. Aucun scope humain n'ouvre une route de service par lui-même.
 
 La validation métier, la vendabilité ou le remboursement éligible ne sont jamais
 déduits du rôle. Une action métier peut avoir une conséquence économique normale
@@ -119,8 +127,8 @@ activer une souscription dont le montant est déjà nul et annuler une commande
 impayée non active. Ces exceptions métier explicites ne donnent pas `finance.executer`.
 Elles n'autorisent ni réduction d'un montant positif à zéro, ni remboursement,
 ni annulation de facture, ni transfert, ni modification brute d'une dette ou d'un
-état PSP. Finance seul reste refusé. Pour B+F, vérifier le périmètre Backoffice
-pour ces trois commandes, jamais le territoire Finance pour élargir leur portée.
+état PSP. Finance seul reste refusé. Pour B+F, ces trois scopes proviennent de
+Backoffice et sont globaux ; leur présence ne dépend d'aucune commune.
 
 ## Connexion, sessions et CSRF
 
@@ -164,7 +172,8 @@ Les JS ERP/satellites sont embarqués dans le backend ; aucun contrat embarqué
 distinct n'a été identifié pour eux. Les schémas du portail Animation ne représentent
 pas les comptes ERP. L’état de régénération de l’export figure dans le bilan de vérification.
 
-Les routes suivantes sont **implémentées localement** dans le
+Les routes suivantes existent dans le socle V1.3 ; leurs DTO et scopes cibles
+V1.4 sont à vérifier dans le
 [routeur des comptes](../../../../localeo-backend/app/api/comptes_internes_api.py) ; les routes métier existantes
 restent à leur place avec une politique commune. Les pages `/admin/login` et
 `/internal/session` existantes conservent leurs usages historiques ; le monitor
@@ -186,21 +195,27 @@ doit être adapté aux deux types de principal.
 | POST `/public/identite-acces/interne/connexion` | `email,motDePasse` ; 204 + cookie renouvelé | Anonyme, CSRF/Origin et limitation tentatives ; 401 générique |
 | POST `/public/identite-acces/interne/initialisation` | `token,motDePasse,confirmation` ; 204 | Jeton dédié, Origin et CSRF ; pas de session automatique |
 | POST `/public/identite-acces/interne/reinitialisation` | Même structure ; 204, toutes sessions révoquées | Jeton finalité REINITIALISATION ; récupération administrée validée |
-| GET `/internal/identite-acces/session` | `principalType,id,nom,attributions,capabilities,authorizationVersion,expiresAt` | Principal courant ; aucune donnée d'autre utilisateur |
+| GET `/internal/identite-acces/session` | `principalType,id,nom,attributions,scopes,capabilities,authorizationVersion,expiresAt` | Principal courant ; aucune donnée d'autre utilisateur |
 | POST `/internal/identite-acces/deconnexion` | 204 + cookie supprimé | Session courante, CSRF ; révocation serveur |
 
 DTO utilisateur : `id,nom,prenom,email,etat,attributions,version,createdAt,
 initializedAt,lastLoginAt,invitation,envoi`. Pas de hash/password/token/session
-secrets. Attribution : `{role,scope:{type,communeIds}}`. Une projection de capacité
-est un outil d'affichage, jamais une preuve présentée au backend.
+secrets. Attribution canonique : `{role}`. `scopes` contient les identifiants
+fonctionnels exacts déduits des profils. `capabilities` demeure un alias de lecture
+pour les consommateurs antérieurs, jamais une preuve présentée au backend.
 
-### Précisions des schémas et de la compatibilité V1.1
+### Schémas et compatibilité V1.4
 
 Les schémas refusent les champs d'autorité supplémentaires (`ADMIN`,
 `principalType`, hash, token, version de sécurité, état injecté dans PATCH).
 `attributions` comporte un à deux éléments : L seul, B seul, F seul ou B+F,
-sans rôle dupliqué. Pour `GLOBAL`, `communeIds=[]` ; pour `COMMUNES`, liste non
-vide d'UUID existants et distincts. Un champ manquant ou null n'est jamais GLOBAL.
+sans rôle dupliqué. Chaque élément nouveau s'écrit `{role}`. Pour coexistence
+avec les anciens clients, `{role,scope:{type:"GLOBAL",communeIds:[]}}` est accepté
+et normalisé vers la même attribution. `scope:null`, type `COMMUNES` (même vide),
+`GLOBAL` avec communes non vides et champs inconnus sont refusés 422, sans mutation.
+L'absence du champ `scope` est la nouvelle forme canonique explicitement globale ;
+l'absence d'`attributions` à la création reste invalide. Les scopes effectifs ne
+sont pas éditables individuellement et un champ d'entrée `scopes` n'accorde aucun droit.
 
 POST exige identité et attributions complètes. PATCH modifie uniquement les champs
 présents ; `attributions` remplace atomiquement la collection entière, sans fusion
@@ -213,7 +228,7 @@ Trois versions ont des responsabilités distinctes :
 | Version | Événements | Effet |
 | --- | --- | --- |
 | `version` du compte | Toute mutation réussie du compte et commande de gestion affectant son cycle d'accès | Contrôle optimiste des formulaires admin ; un rejeu idempotent ne l'incrémente pas |
-| `authorizationVersion` | Modification des attributions/périmètres ou de l'état d'accès | Recalcul de navigation/projections ; les droits serveur restent relus même si le client présente la dernière valeur |
+| `authorizationVersion` | Modification des profils ou de l'état d'accès ; conversion territoriale explicite v253 | Recalcul de navigation/projections ; les droits serveur restent relus même si le client présente la dernière valeur |
 | `securityVersion` | Désactivation, changement d'email, reset consommé ou révocation des sessions | Invalidation des sessions portant l'ancienne valeur ; jamais modifiable par le client |
 
 Les mises à jour techniques de dernière activité/dernière connexion et de transport
@@ -225,18 +240,22 @@ jamais une ancienne `securityVersion`.
 Le DTO de session est une union discriminée, pas un faux compte nominatif admin :
 
 - `UTILISATEUR_INTERNE` : `id` UUID, nom, attributions, versions d'autorisation,
-  capacités bornées et dates d'expiration ; aucune `securityVersion` ni empreinte.
+  scopes fonctionnels globaux et dates d'expiration ; aucune `securityVersion` ni empreinte.
 - `ADMIN_HISTORIQUE` : `id=null`, nom d'affichage, `attributions=[]`,
-  `authorizationVersion=null`, capacités admin explicites et dates d'expiration.
+  `authorizationVersion=null`, scopes admin explicites et dates d'expiration.
   Ce résultat provient uniquement du registre historique, jamais d'un DTO fourni.
 
-`capabilities` est une liste de `{code,scope:{type,communeIds}}`. La portée d'une
-capacité est l'union des seules attributions qui l'accordent. Cette projection
-sert aux écrans, sans remplacer le contrôle de la ressource sur le serveur.
-`expiresAt` est l'échéance effective courante (minimum inactivité/absolue), avec
-`idleExpiresAt` et `absoluteExpiresAt` explicites ; dates ISO 8601 UTC.
+`scopes` est une liste de chaînes exactes, triée et sans doublon, calculée côté
+serveur depuis la matrice fixe. `capabilities` est l'alias de compatibilité :
+pour chaque scope `code`, une entrée `{code,scope:{type:"GLOBAL",communeIds:[]}}`.
+Les deux représentations expriment les mêmes droits ; aucun `communeIds` de
+contexte, territoire actif ou attribution territoriale n'est transmis aux écrans.
+L'alias ne justifie pas de réintroduire une sélection de communes.
 
-Exemple de création (identifiants de communes fictifs) :
+`expiresAt` est le minimum des échéances d'inactivité et absolue ;
+`idleExpiresAt` et `absoluteExpiresAt` sont explicites, en ISO 8601 UTC.
+
+Exemple de création canonique :
 
 ```json
 {
@@ -244,24 +263,26 @@ Exemple de création (identifiants de communes fictifs) :
   "prenom": "Camille",
   "email": "camille@example.test",
   "attributions": [
-    {"role": "BACKOFFICE", "scope": {"type": "COMMUNES", "communeIds": ["11111111-1111-4111-8111-111111111111"]}},
-    {"role": "FINANCE", "scope": {"type": "COMMUNES", "communeIds": ["22222222-2222-4222-8222-222222222222"]}}
+    {"role": "BACKOFFICE"},
+    {"role": "FINANCE"}
   ]
 }
 ```
 
-Le résultat ne donne pas le droit de gérer le catalogue de la deuxième commune.
-Les capacités d'export métier et d'export spécialisé sont distinctes dans la
-[matrice](permissions-surfaces.md). Un rôle unique de compatibilité ne peut pas
-représenter B+F sans perdre cette information.
+Ce compte obtient l'union des scopes B et F sur toutes les communes, sans recevoir
+`finance.executer`, `comptes.administrer`, `technique`, `audit.global` ou `sqladmin`.
+Les exports métier et spécialisés restent distincts dans la [matrice](permissions-surfaces.md).
 
 ### Contexte ERP et monitor de session
 
-Le contexte ERP V2 expose le principal typé, les capacités bornées et la version
-d’autorisation ; il filtre les référentiels par tâche. Aucun rôle synthétique
+Le contexte ERP V2 expose le principal typé, `scopes: list[str]`, l'alias
+`capabilities` intégralement GLOBAL et la version d'autorisation. Il n'expose
+aucun contexte de commune pour un utilisateur interne. Les référentiels sont
+sélectionnés selon la tâche fonctionnelle, jamais selon des communes d'habilitation. Aucun rôle synthétique
 ADMIN/EXPLOITATION nominatif n’est produit pour satisfaire un ancien JavaScript.
 Le champ role est conservé pour le principal historique ; les modules se fondent
-sur les capacités et refusent un ancien contexte non compatible.
+sur les scopes (alias `capabilities` pour compatibilité) et refusent un contexte
+non compatible. Aucun calcul de droits territorial n'est conservé dans les menus.
 
 Consommateurs adaptés ensemble : `erp.js`, navigation, modules finance, Audit,
 instances/Support, accès commerçant/Animation, offres/souscriptions et Atelier.
@@ -288,7 +309,7 @@ Pour les erreurs métier des comptes, detail porte code/message ; les erreurs
 de validation peuvent conserver une chaîne ou une liste de violations.
 400 lien invalide générique,
 401 session/credentials invalides, 403 capacité refusée, 404 ressource absente ou
-hors périmètre, 409 version obsolète/doublon/clé réutilisée/transition impossible,
+non accessible à cette fonction, 409 version obsolète/doublon/clé réutilisée/transition impossible,
 422 champs ou combinaison de rôles invalides, 429 avec Retry-After, 503 service
 d'autorisation indisponible. Refus d'accès avant chargement de données sensibles.
 Pages : redirection vers connexion autorisée pour 401, rendu 403 explicite pour
@@ -352,12 +373,17 @@ Invitation INITIALISATION et récupération administrée REINITIALISATION : **24
 finalités et générations séparées. Configuration implémentée :
 
 - `LOCALEO_ERP_URL` : origine HTTPS de l’ERP, indépendante du Host client ; HTTP
-  uniquement sur localhost/127.0.0.1 en développement.
+  uniquement sur localhost/127.0.0.1 en développement. Exemple fictif :
+  `https://erp.example.test`, sans `/internal/erp`. L'adaptateur reconstruit le
+  chemin fixe `/internal/initialiser-acces` ; un chemin, une query ou un fragment
+  fourni dans la configuration est ignoré, sans rejet spécifique de ces suffixes.
 - `LOCALEO_INTERNE_INVITATION_INTERVAL_SECONDS` : 60 par défaut.
 - `LOCALEO_INTERNE_INVITATION_MAX_PER_DAY` : 5 par défaut, fenêtre glissante de 24 h.
 - Limites de connexion et de verrouillage : politique d’authentification existante ;
   mot de passe validé par son port, limite bcrypt de 72 octets conservée.
 
+La [configuration des comptes internes](../../exploitation/technique/reference-configuration-environnement.md#comptes-internes-erp--epic-69)
+décrit les valeurs attendues et les URL de connexion et d'invitation.
 Les valeurs effectives et la remise fournisseur restent à vérifier en cible.
 La reprise d’un envoi engagé sans résultat certain ne réexpédie pas aveuglément
 le lien : rapprocher sa remise avant une nouvelle invitation explicite.
@@ -427,7 +453,8 @@ propres. Retirer Finance retire l’export spécialisé sans élargir le métier
 /internal/erp/api/factures propose la liste autorisée et /{id}/telecharger sert
 uniquement un PDF FACTURE_LOCALEO publié déjà produit. Le contrôle vérifie la
 facture courante, son propriétaire, les rattachements et la cohérence avec source
-et destinataire. Pas de rendu caché, pièce KYC ou document partagé hors périmètre.
+et destinataire. Pas de rendu caché ni pièce KYC. Les règles de rattachement et
+de famille documentaire restent strictes, même avec des scopes humains globaux.
 
 ### Migration des comptes et compatibilité
 
@@ -437,6 +464,26 @@ et index. La [v252](../../../../localeo-backend/sql/v252_support_financier.sql) 
 les tickets Support et leurs notes financières. Elles ont des preuves PostgreSQL
 locales ; aucune n’a été appliquée à un environnement partagé dans cette phase.
 Les dates sont UTC, avec rendu utilisateur local.
+
+**Évolution V1.4 :** `v253_scopes_internes_globaux.sql` suit v251/v252 sans les
+réécrire. Elle convertit explicitement les anciennes attributions en `GLOBAL`
+avec `commune_ids=[]`. Pour chaque compte dont une attribution territoriale est
+convertie, `version` et `authorizationVersion` sont incrémentées une fois, afin
+de rendre les anciens formulaires obsolètes et de renouveler les projections.
+Les comptes déjà globaux ne reçoivent pas de changement de version injustifié.
+`securityVersion`, sessions, secrets, états et profils ne sont pas modifiés ;
+les sessions restent valides et relisent obligatoirement l'autorité courante.
+La migration ne crée aucun compte, invitation, email ou rôle ADMIN. Le suivi des
+migrations par version/checksum empêche une seconde application : le SQL brut
+avec ajout de contrainte n'est pas annoncé idempotent. Chaque compte converti
+reçoit une seule augmentation de version par application. La preuve PostgreSQL
+et le contrôle d'inventaire sont suivis
+séparément dans le bilan V1.4. Appliquer v253 **avant** le nouveau backend, pendant
+une fenêtre de maintenance suspendant les commandes internes : le nouveau modèle
+refuse de charger d'anciennes attributions COMMUNES. Aucune nouvelle variable
+d'environnement n'est introduite.
+L'élargissement à toutes les communes est la décision E69-SCOPES-GLOBAUX-20261002,
+pas une équivalence silencieuse de l'ancien modèle.
 
 Pas de conversion automatique du compte configuré en compte métier. Inventorier
 éventuels anciens rôles/supports de comptes, simuler les écarts et faire attribuer
@@ -452,7 +499,11 @@ exceptions middleware prévues pour le login à l'ensemble `/internal/*`.
 
 Backend et JS embarqué ERP/satellites sont livrés ensemble. Ne pas ouvrir les nouveaux
 comptes avec une ancienne interface qui suppose ADMIN, ni assouplir un garde avant
-que la projection soit filtrée et les mutations protégées. Les guards partenaires,
+que les projections soient masquées et les mutations protégées. La livraison
+V1.4 coordonne migration v253, backend, contrat et clients : anciens formulaires
+`COMMUNES` refusés avec rechargement demandé, anciens formulaires GLOBAL vides
+acceptés. La version du compte empêche un PATCH antérieur d'annuler silencieusement
+la conversion. Ni migration ni tests distants ne sont exécutés par cette rédaction. Les guards partenaires,
 API keys de batch et cookies publics sont inchangés dans leur contrat.
 
 Retour arrière : fermer l'entrée nominative, révoquer les sessions internes,
@@ -463,6 +514,11 @@ neutralise sessions, invitations et outbox internes, efface les anciens hash de
 mot de passe et augmente les versions de sécurité. Les comptes actifs restaurés
 retournent en attente d’initialisation, les désactivés restent désactivés ; une
 nouvelle invitation admin est nécessaire. Identités, emails et attributions sont
-conservés. Le hash de la sauvegarde originale est vérifié avant transformation,
+conservés. Le générateur V1.4 crée des attributions globales. La neutralisation
+d'une restauration ne convertit pas les anciennes attributions territoriales :
+une ancienne sauvegarde exige la procédure de compatibilité et la migration
+v253 explicitement contrôlée avant ouverture au nouveau backend. La lecture
+des anciens formats par un rapport ne prouve pas leur migration automatique.
+Le hash de la sauvegarde originale est vérifié avant transformation,
 puis une empreinte distincte prouve la restauration neutralisée ; `initialized_at`
 reste une information historique, sans rétablir un accès.
