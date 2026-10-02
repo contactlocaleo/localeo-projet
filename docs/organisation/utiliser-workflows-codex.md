@@ -35,7 +35,15 @@ Pour demander explicitement la vérification du jeu généré :
 
 > Utilise $localeo-verifier-demonstration pour vérifier la compatibilité du générateur avec [évolution]. Exécute les tests ciblés et, si les bases jetables requises sont disponibles, le cycle PostgreSQL complet. Distingue les contrôles non exécutés.
 
-### 4. Préparer la livraison
+### 4. Clôturer l'epic
+
+> Utilise $localeo-cloturer-epic sur [numéro ou chemin de l'epic]. Vérifie la documentation utilisateur, backoffice, ops et les spécifications, la couverture par le code et les tests réellement exécutés. Si les critères sont satisfaits, passe l'epic en Terminée et déplace son backlog. Prépare le commit par dépôt et donne les actions de configuration nécessaires au déploiement.
+
+Résultat attendu : bilan par critère avec preuves et limites, documentation corrigée, statut et liens cohérents. Si une preuve requise manque ou un critère échoue, l'epic reste dans son état actuel et le bilan explique ce qui empêche sa clôture. Une demande limitée à « vérifier si on peut clôturer » produit ce bilan sans changer l'état.
+
+Le lot de commit contient les fichiers et un message proposé ; la préparation seule ne modifie pas l'index Git et ne crée pas de commit. La synthèse de déploiement précise variables, valeurs non sensibles ou valeurs à renseigner, migrations, ordre des opérations et contrôles. Une epic terminée n'est pas nécessairement déployée ; une recette cible exigée par ses critères doit être prouvée avant clôture.
+
+### 5. Préparer la livraison
 
 > Utilise $localeo-preparer-deploiement pour préparer la livraison de [epic/correctif] vers [environnement]. Assemble les versions, preuves, migrations, documents et procédures. Produis le dossier de préparation avec ses blocages éventuels.
 

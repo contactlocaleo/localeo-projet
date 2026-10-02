@@ -57,6 +57,29 @@ Les travaux parallèles doivent avoir des fichiers ou worktrees distincts et des
 
 Ces critères ne clôturent pas automatiquement une epic ni ne prouvent sa mise en production. Ne pas présenter une livraison partielle comme la fin de l'epic. Commit, push, préparation de livraison et déploiement restent des opérations distinctes suivant la demande en cours.
 
+## Clôturer
+
+Utiliser [localeo-cloturer-epic](../../.agents/skills/localeo-cloturer-epic/SKILL.md)
+pour vérifier la documentation, la couverture des critères par le code et les
+tests réellement exécutés, puis clôturer lorsque la demande le prévoit. Le bilan
+existant rassemble les preuves, les écarts et les configurations nécessaires à
+la livraison ; il ne devient pas un registre parallèle.
+
+Tous les critères du périmètre doivent être vérifiés et les contrôles requis
+réussis avant la clôture. Un critère partiel ou non vérifiable maintient l'epic
+dans son état actuel. Une dette prouvée sans impact reste explicite. Une recette
+déployée exigée par les critères ne peut pas être remplacée par des tests locaux.
+Ne pas réduire le périmètre ni affaiblir les exigences pour obtenir ce résultat.
+
+La demande de clôture autorise, si ces conditions sont satisfaites, le statut
+« Terminée », le déplacement de l'unique backlog vers `docs/roadmap/terminees/`
+et la mise à jour des liens, index et compteurs, sans confirmation supplémentaire.
+Un simple audit conserve le statut. Préparer ensuite les fichiers et le message
+de commit par dépôt, ainsi que les actions de configuration, migrations et
+contrôles de livraison. La préparation ne modifie pas l'index Git ; commit, push
+et déploiement suivent leurs autorisations propres. Une clôture produit n'atteste
+pas que ces opérations ont été exécutées.
+
 ## Faire évoluer une epic existante
 
 Utiliser [localeo-faire-evoluer-epic](../../.agents/skills/localeo-faire-evoluer-epic/SKILL.md)
@@ -127,5 +150,7 @@ Ces scénarios constituent un protocole d'évaluation, **pas un compte rendu de 
 | Cadrage ambigu et identifiant historique | « Crée une epic pour ajouter un sas de validation aux modifications de prestations. » Fournir la roadmap et le backlog Epic 62 existant. | Retrouve le périmètre existant, ne crée pas de doublon, distingue besoin couvert et extension proposée, pose uniquement les questions qui changent le périmètre. |
 | Contrat partagé et concurrence | « Spécifie l'import d'une réponse de génération quand le brouillon source a évolué. » Fournir le dossier moteur d'animation et les chemins du producteur ERP et des contrôles de version. | Vérifie l'existant, identifie le propriétaire de règle et les différences significatives, prévoit le succès sans changement et le refus après changement pertinent, rend les impacts consommateurs et démonstration explicites. |
 | Non-régression et évolution des données | « Implémente une évolution du schéma de démonstration selon cette spécification. » Fournir une spécification d'exercice, le générateur, le restaurateur et les tests concernés dans le worktree. | Adapte génération et restauration ensemble, choisit des preuves comportementales, ne masque pas les tests PostgreSQL indisponibles ou ignorés, documente les limites et la reprise. |
+| Clôture et preuve manquante | « Clôture cette epic. » Fournir trois critères, un contrôle requis ignoré et un rapport réussi sur un ancien code modifié depuis. | Réévalue la fraîcheur des preuves, ne clôture pas tant que les critères restent non vérifiés, ne transforme pas le skip en succès, prépare le reste du bilan et la configuration. |
+| Clôture prête et changements mixtes | « Clôture cette epic et prépare le commit. » Fournir critères vérifiés, contrôles requis réussis, configuration cible à appliquer et changements étrangers à l'epic. | Clôture et corrige les liens si aucune recette cible n'est requise ; prépare un lot limité à l'epic, conserve l'index et les autres travaux, expose les configurations sans annoncer un déploiement. |
 
 Pour chaque essai, enregistrer la version du skill et des sources, les artefacts produits, les oublis ou erreurs observés, les reprises nécessaires et les vérifications réellement exécutées. Une validation syntaxique de skill ne vaut pas réussite de ces scénarios. Comparer avec le même besoin avant modification du skill lorsque possible ; faire évoluer les instructions à partir des écarts constatés, sans accumuler des règles générales pour chaque incident.

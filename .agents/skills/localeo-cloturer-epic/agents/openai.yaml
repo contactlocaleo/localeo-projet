@@ -1,0 +1,4 @@
+interface:
+  display_name: "Clôturer une epic Localeo"
+  short_description: "Vérifier les preuves et clôturer une epic Localeo"
+  default_prompt: "Utilise $localeo-cloturer-epic pour clôturer cette epic après vérification des documents, du code et des tests, puis préparer le commit et la configuration de déploiement."
