@@ -7,8 +7,9 @@ dépend du déploiement compatible et de l'activation de la politique des commun
 Ce document est la source canonique de l'aide OnBoard E68.
 
 L'epic met en place ce seul mode opératoire, dans les outils Localeo existants.
-Les sept étapes ci-dessous constituent l'entrée de référence pour le gestionnaire :
-chaque étape indique l'action à faire, le résultat à vérifier et la suite à donner.
+L'écran OnBoard vous guide autour de trois gestes : **activer le commerçant,
+confirmer le mail de préparation, puis suivre le dossier**. Les sept étapes
+ci-dessous détaillent la procédure lorsque vous en avez besoin.
 
 Le référent Localeo suit une checklist dans le dossier OnBoard et accompagne le
 commerçant dans son espace de préparation, avec son compte Localeo existant.
@@ -19,6 +20,24 @@ et le téléphone servent aussi à guider le commerçant avant le rendez-vous d'
 Le profil Backoffice gère le dossier sur l'ensemble des communes. Le droit de
 consultation permet de le lire sans le modifier. Les actions fiscales,
 financières et d'administration conservent leurs habilitations propres.
+
+## Le parcours quotidien en trois gestes
+
+1. Ouvrir le dossier et utiliser l'action d'activation existante si elle est
+   proposée. Vérifier les éléments manquants si elle est bloquée. L'activation
+   ne signifie pas que le dossier est finalisé et n'envoie pas le pack de préparation.
+2. Renseigner le rendez-vous s'il manque, puis ouvrir l'aperçu du mail de
+   préparation. Vérifier les coordonnées, le rendez-vous, le contenu et les pièces
+   jointes avant de confirmer. Si un SMS est prévu avec le mail, il est annoncé
+   dans la confirmation. Fermer ou annuler l'aperçu n'envoie rien.
+3. Revenir au dossier pour lire son état, la date du rendez-vous, le suivi des
+   messages et les points à traiter. Ouvrir les détails uniquement pour répondre
+   à une question, revoir une prestation, noter une action, modifier le rendez-vous
+   ou enregistrer sa fin.
+
+Un message envoyé n'est pas nécessairement lu. Le suivi distingue les états des
+communications et les retours du commerçant. Les blocages et prochaines actions
+restent visibles ; vous n'avez pas à remplir tous les formulaires à chaque visite.
 
 ## 1. Référencer et ouvrir le dossier
 
@@ -192,9 +211,40 @@ sans élargir les droits de documentation générale.
 ## Utiliser les écrans V1.2
 
 Dans la fiche commerçant ERP, ouvrir **Continuer l'onboarding**, puis l'onglet
-**Parcours**. Le même guide est accessible depuis la fiche et depuis cet onglet.
+**À faire et suivi**. Le même guide est accessible depuis la fiche et depuis cet onglet.
 La file peut être filtrée par référent, dates de rendez-vous, absence de rendez-vous,
 envoi à confirmer, réception non confirmée ou action en retard.
+
+Les rubriques permettent de traiter chaque point au bon endroit :
+
+| Rubrique | Utilisation |
+| --- | --- |
+| À faire et suivi | Voir la prochaine action, préparer les communications et suivre le rendez-vous |
+| Informations | Compléter la fiche et les coordonnées du commerçant |
+| Documents | Mettre à disposition le contrat puis enregistrer les pièces contrôlées |
+| Compte commerçant | Accompagner l'accès au compte |
+| Stripe et facturation | Consulter ou compléter les informations de paiement et de facturation autorisées |
+| Prestations | Traiter les prestations du commerçant |
+| Contrôles détaillés | Examiner les vérifications métier et les conditions restantes |
+
+Après un enregistrement dans le même dossier, la rubrique ouverte est conservée.
+Les onglets se parcourent aussi au clavier ; le focus visible aide à repérer
+l'action sélectionnée. **Vérifier le dossier** actualise ses contrôles.
+**Valider le dossier** et **Terminer le dossier** restent des actions distinctes,
+disponibles selon les droits et l'état du dossier ; elles ne remplacent ni les
+preuves requises ni la confirmation des communications.
+
+Pour retrouver un commerçant, commencer par la recherche, l'**État du dossier**
+ou le filtre **À suivre**, directement visibles. Ouvrir **Plus de filtres** pour
+préciser les dates de rendez-vous, le référent, la commune ou un point à traiter.
+Sur téléphone, sélectionner un dossier pour l'ouvrir, puis revenir à la liste
+pour changer de commerçant.
+
+**Nouveau dossier** permet de choisir un **Commerçant existant** ou un **Nouveau
+commerçant**. Le référent est facultatif à cette étape. Le rendez-vous se planifie
+ensuite dans le dossier ; aucun champ de date désactivé n'est à remplir à la création.
+En mode consultation, les dossiers restent lisibles : contacter l'administrateur
+Localeo si une modification est nécessaire.
 
 Planifier date et heure dans le fuseau indiqué, interlocuteur, référent Localeo,
 modalité Teams avec lien HTTPS ou adresse physique. La durée est d'une heure.
@@ -212,15 +262,17 @@ le PDF. Laisser date de signature et signataires vides tant qu'il n'est pas sign
 Après le rendez-vous, déposer la copie signée avec date réelle et signataires réels ;
 aucun nom ni aucune date ne sont automatiquement attestés par Localeo.
 
-Les questions et les revues des prestations sont traitées dans **Parcours**.
+Les questions et les revues des prestations sont accessibles dans les détails
+à déplier de **À faire et suivi**.
 Une réponse Localeo ne vaut pas résolution par le commerçant. Les conditions et la
 capacité d'une prestation existante sont précisées dans la revue si elles ne sont
 pas connues dans le catalogue. L'accord du commerçant porte sur cette version.
 
-Enregistrer le bilan, la durée réellement passée et, si mesuré, le temps de
-préparation Localeo. Un champ vide signifie inconnu ; saisir zéro seulement si
-c'est une mesure réelle. **Bilan du pilote OnBoard** affiche les dénominateurs et
-les données manquantes, avec filtre de cohorte par date d'activation de la préparation.
+Après le rendez-vous, ouvrir les détails de fin de réunion pour enregistrer son
+bilan, la durée réellement passée et, si mesuré, le temps de préparation Localeo.
+Un champ vide signifie inconnu ; saisir zéro seulement si c'est une mesure réelle.
+Le tableau de bilan du pilote est retiré de l'écran quotidien ; les informations
+déjà enregistrées restent conservées.
 
 L'administrateur historique configure la politique des communications et approuve
 les supports. La politique est initialement désactivée ; le calendrier par défaut

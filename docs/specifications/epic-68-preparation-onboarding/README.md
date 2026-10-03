@@ -12,8 +12,9 @@ Les 31 identifiants E68-CA-01 à 31 restent stables.
 Mettre en place un seul processus, du référencement à la finalisation contrôlée
 du dossier. Le gestionnaire est guidé dans l'ERP ; le commerçant prépare son
 rendez-vous d'une heure dans son propre compte puis apprend à utiliser Localeo.
-La navigation, le guide et la recette suivent les mêmes **sept étapes** ci-dessous.
-Une étape affiche sa prochaine action, son responsable et les éléments manquants.
+Les **sept étapes** ci-dessous restent la référence métier et de recette. Elles
+ne doivent pas imposer sept formulaires principaux au gestionnaire : l'écran
+OnBoard privilégie l'action utile et un suivi lisible.
 
 Réutiliser OnBoard, l'identité commerçant, les documents internes, Stripe hébergé,
 le référentiel des prestations, les transports email/SMS, l'ordonnanceur et les
@@ -22,6 +23,38 @@ La V1.2 ne comporte ni dépôt de pièces par le commerçant, ni compte temporai
 ni nouveau fournisseur de signature, ni création automatique Teams. Elle ne crée
 pas de CRM, de moteur générique de workflows, de produit analytique, de refonte
 fiscale/financière ou de sas de modification des prestations déjà applicables.
+
+## Correction ergonomique OnBoard du 3 octobre 2026
+
+La vue courante se concentre sur trois gestes :
+
+1. **Activer le commerçant** avec l'action existante lorsqu'elle est disponible.
+   L'activation et ses conditions restent distinctes de la finalisation du dossier.
+2. **Vérifier et confirmer le mail de préparation**. Planifier le rendez-vous si
+   nécessaire, puis présenter l'aperçu et les destinataires. Le SMS associé est
+   annoncé explicitement lorsqu'il fait partie de la séquence ; aucun envoi ne
+   résulte de la seule activation ou sauvegarde du rendez-vous.
+3. **Suivre l'état du dossier** : rendez-vous, communications et éléments restant
+   à traiter sont lisibles sans ouvrir de formulaire. Les questions, prestations,
+   actions, modifications du rendez-vous et fin de réunion se déplient au besoin.
+
+Les détails de préparation sont repliés par défaut, sans masquer un blocage ni
+supprimer une action métier. La section « Bilan du pilote OnBoard » est retirée
+de l'interface. Les données historiques et API de mesure sont conservées.
+La liste garde la recherche, le statut et le suivi de préparation visibles ; les
+filtres de dates, référent, commune et blocage se regroupent dans « Plus de filtres ».
+La création explique le choix entre commerçant existant et nouveau commerçant ;
+le rendez-vous se renseigne ensuite dans le dossier. Les libellés, l'affichage
+mobile et la navigation au clavier doivent permettre le traitement quotidien
+sans vocabulaire technique de configuration.
+L'onglet principal « À faire et suivi » garde les prochaines actions au premier
+plan. Les rubriques de détail restent accessibles au clavier et l'enregistrement
+conserve la rubrique ouverte dans le même dossier. « Vérifier le dossier »,
+« Valider le dossier » et « Terminer le dossier » nomment les actions existantes
+sans changer leurs conditions d'exécution.
+Les confirmations par séquence, permissions et protections de concurrence restent
+inchangées. Cette correction concerne le rendu ERP, sans modification de contrat,
+de migration, du générateur ou des applications satellites.
 
 ## 1. Référencer et ouvrir le dossier
 
@@ -156,8 +189,9 @@ gardent leurs conditions propres.
 
 ## Exigences transverses et lecture du dossier
 
-- **CA-17 :** bilan pilote à partir des dossiers, durées, relances et autonomie ;
-  dénominateurs explicites et données manquantes visibles, sans produit analytique autonome.
+- **CA-17 :** mesures à partir des dossiers, durées, relances et autonomie ;
+  dénominateurs explicites et données manquantes conservés dans les API existantes.
+  Le tableau pilote ne fait plus partie de l'écran opérationnel OnBoard.
 - **CA-31 :** [guide backoffice](../../produit/formation/backend/guide-preparation-onboarding-commercant.md)
   suivant les mêmes sept étapes, accessible depuis l'ERP et le dossier OnBoard.
 - [Architecture et contrats](architecture-contrats.md) : propriétaires, règles,

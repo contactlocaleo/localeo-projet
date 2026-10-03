@@ -9,8 +9,63 @@ La recette suit exclusivement les sept étapes V1.2 du [parcours](README.md).
 Les 31 critères restent exigibles, avec même compte commerçant, absence de dépôt
 marchand, signature le jour J, copie signée déposée par Localeo après rendez-vous
 et confirmation explicite avant chaque séquence de communication.
-Les étapes servent la navigation et la prochaine action ; elles ne remplacent
+Les étapes servent de référence métier et de recette ; la vue courante regroupe
+activation, confirmation des communications et suivi du dossier. Elles ne remplacent
 pas les statuts métier ni les contrôles de finalisation.
+
+## Correction ergonomique OnBoard du 3 octobre 2026
+
+Constat utilisateur : la préparation du rendez-vous expose trop de saisies et le
+bilan pilote alourdit le parcours quotidien. Le comportement attendu est une vue
+centrée sur l'activation existante, la vérification et confirmation du mail de
+préparation (avec SMS annoncé si prévu), puis le suivi du dossier. Les formulaires
+de questions, prestations, actions, rendez-vous et fin de réunion restent accessibles
+dans des détails à déplier. Un blocage reste visible sans ouvrir ces détails.
+Activer un commerçant ne finalise pas son dossier et n'autorise aucun envoi implicite.
+
+La revue porte aussi sur l'accueil et la création : recherche, statut et suivi
+immédiatement accessibles, filtres avancés repliés, libellés explicites pour créer
+ou retrouver un commerçant et planification différée dans le dossier. Vérifier
+le traitement d'un dossier sur mobile et au clavier, sans champ désactivé de
+rendez-vous à la création ni clé de configuration affichée à l'utilisateur.
+Vérifier aussi l'ouverture sur « À faire et suivi », la navigation clavier entre
+rubriques et le maintien de l'onglet après enregistrement dans le même dossier.
+Les boutons « Vérifier le dossier », « Valider le dossier » et « Terminer le dossier »
+doivent conserver les permissions et conditions des actions correspondantes.
+
+La section « Bilan du pilote OnBoard » est supprimée du rendu ; les API de mesure
+et l'historique sont conservés. Les permissions, confirmations par séquence et
+contrôles de version/concurrence ne changent pas. Les sept étapes métier restent
+la référence de contrôle, sans imposer sept formulaires principaux.
+
+Impacts : rendu ERP/backend et guide canonique exporté. Pas de migration ni de
+réparation de données, puisque la persistance ne change pas ; pas de changement
+des contrats/API, du générateur ou des applications satellites. Le guide exporté
+devra être inclus dans le bundle documentaire de la prochaine livraison.
+
+Preuves locales exécutées le 3 octobre 2026 sur le backend `651df1b` avec les
+modifications de cette correction :
+
+- `node --test tests/frontend/test_onboard_progress.mjs tests/frontend/test_onboard_pagination.mjs tests/frontend/test_preparation_timezone.mjs` : **12 tests réussis**, aucun ignoré.
+- `node tests/frontend/test_preparation_browser.mjs` : **5 scénarios réussis**,
+  dont reprise explicite, lecture seule, réponses tardives et changement Teams/physique.
+- `node tests/frontend/test_communications_simple_browser.mjs` : **6 scénarios réussis**,
+  dont aperçu/annulation sans envoi, double clic, aperçu bloqué, réponse tardive
+  et absence de relance automatique après résultat incertain.
+- `node tests/frontend/test_onboard_simple_browser.mjs` : **2 scénarios complets réussis**,
+  à 390 et 1280 pixels, sur le HTML et les scripts réels avec API simulée : filtres,
+  création, onglets au clavier, maintien de la rubrique et changement de dossier.
+- Captures navigateur examinées sur mobile et ordinateur ; aucun débordement
+  horizontal dans les scénarios. Une revue indépendante a identifié un champ URL
+  Teams masqué qui bloquait un rendez-vous physique : correction et test de régression
+  exécutés avec succès.
+- Contrôles documentaires : `python scripts/check_guidance.py --document docs/produit/formation/backend/guide-preparation-onboarding-commercant.md`
+  et `python scripts/sync_documentation.py --check-sources` ; sources et liens valides.
+
+Les fournisseurs sont simulés : aucun email/SMS réel ni aucune modification de base.
+Les tests Python métier/API n'ont pas été relancés pour cette correction de rendu,
+sans modification de leurs règles ou contrats. Aucun déploiement de cette correction
+n'a été effectué ; les résultats historiques ci-dessous ne prouvent pas sa livraison.
 
 ## Traçabilité des 31 critères
 
@@ -38,10 +93,10 @@ C = [communications](communications-supports.md), G =
 | E68-CA-14 | Réunion : quatre phases | T14 : recette chronométrée et cohérence mail/PDF/guide ; dépassement enregistré | C, G | Agenda 10/15/10/25 | Durée réelle, pas de contrôle omis |
 | E68-CA-15 | Autonomie sans effet financier | T15 : mobile, connexion personnelle, exercice isolé et aide trouvée ; aucun achat/validation réel | G, P | Scénario démonstration isolé | Mode exercice explicite |
 | E68-CA-16 | Bilan/finalisation : preuves actuelles | T16 : tenu+Stripe incomplet, absent, preuve perdue après VALIDE, clôture sans coffret | A, G | Incomplet/absent/sans offre | Pas de clôture/abandon automatique |
-| E68-CA-17 | Mesure : dénominateurs explicites | T17 : agrégats sur cohorte connue avec données manquantes/reports, minutes backoffice | A, G | Cohorte déterministe | Tableau pilote, aucun zéro imputé |
+| E68-CA-17 | Mesure : dénominateurs explicites | T17 : agrégats sur cohorte connue avec données manquantes/reports, minutes backoffice ; API conservée sans tableau pilote dans OnBoard | A, G | Cohorte déterministe | Aucun zéro imputé, historique conservé |
 | E68-CA-18 | Référencement : dossier unique atomique | T18 : ERP/OnBoard/SQLAdmin, rollback et créations simultanées ; même dossier sans email implicite | A producteurs | Marchand nouveau/existant | Migration sans campagne massive |
 | E68-CA-19 | Agenda : 60 min et fuseau | T19 : Teams/physique incomplet refusé, date ambiguë/inexistante, rendu UTC/local | A, C | Changement d'heure | Anciennes dates naïves à reprendre |
-| E68-CA-20 | Checklist : faits actuels et action utile | T20 : sept étapes guidées, prochaine action repérable sans documentation API ni double saisie ; pièce à apporter distincte de reçue ; progression historique != prêt actuel | A, G | Dossier sans date et pièce attendue au rendez-vous | Version des faits source |
+| E68-CA-20 | Checklist : faits actuels et action utile | T20 : activation, confirmation du mail et suivi repérables ; détails repliés accessibles ; sept étapes métier préservées sans sept formulaires principaux ; pièce à apporter distincte de reçue ; progression historique != prêt actuel | A, G | Dossier sans date et pièce attendue au rendez-vous | Version des faits source |
 | E68-CA-21 | Actions humaines seules saisissables | T21 : auteur/date/résultat, preuve auto non modifiable, non applicable justifié | A API actions | Appel réalisé | Audit et contrôle des mutations |
 | E68-CA-22 | File OnBoard et autorisations | T22 : filtres, pagination, tri stable, Lecteur/Backoffice/Finance/admin et toutes communes | A, G | Plusieurs référents | Scopes E69, aucun périmètre commune |
 | E68-CA-23 | Calendrier préparatoire sans autorisation implicite | T23 : échéance J−7→A_CONFIRMER sans appel fournisseur, silence/retard visibles ; horaire/fenêtre, rattrapage avant J, regroupement, politique modifiée invalidant l'accord | A, ARB-01 | RDV demain/ce jour, intention ancienne sans accord | Aucune autorisation créée par migration/batch |
