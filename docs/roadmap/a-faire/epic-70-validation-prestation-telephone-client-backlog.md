@@ -260,7 +260,7 @@ Ces preuves sont attendues, **pas exécutées à ce stade**.
 | Persistance / migrations | Concernées : vérificateur du PIN, version/dates/état, compteurs, demandes et audit ; aucune activation rétroactive ni PIN par défaut |
 | Démonstration | Concernée : PIN fictifs, dates actives/expirées, révocation en cours de demande, blocage, doublon et timeout ; aucun secret réel ou envoi externe |
 | Documentation / exploitation | Concernées : guide ERP publié via le circuit documentaire, notice commerçant, oubli/compromission, suivi des anomalies et procédure de contestation |
-| Onboarding | Dépendance [EPIC 68](epic-68-parcours-commercant-preparation-onboarding-backlog.md) : préparation facultative du PIN et explication des risques, exercice sans consommation réelle |
+| Onboarding | Dépendance [EPIC 68](../en-cours/epic-68-parcours-commercant-preparation-onboarding-backlog.md) : préparation facultative du PIN et explication des risques, exercice sans consommation réelle |
 | Déploiement | À spécifier : ordre backend/interfaces, activation maîtrisée, retour au parcours normal et compatibilité des versions ; aucun déploiement réalisé |
 
 ## Arbitrages et propositions complémentaires

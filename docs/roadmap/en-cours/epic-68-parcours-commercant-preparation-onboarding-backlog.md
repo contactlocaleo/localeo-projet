@@ -1,6 +1,72 @@
-# EPIC 68 — Parcours commerçant de préparation et finalisation de l'onboarding
+# EPIC 68 — Mettre en place le processus d'onboarding commerçant
+
+**État courant : En cours — implémentation V1.2 engagée le 3 octobre 2026.**
+Les paramètres ARB-01/04/06/08/10 sont approuvés par l'utilisateur : Europe/Paris,
+10 h dans la fenêtre 9–18 h, revue J−2, contact humain après 48 h, rappel SMS J−1,
+reprise des anciens dossiers sur décision explicite et grille de revue Backoffice.
+Les [preuves et actions de configuration](../../specifications/epic-68-preparation-onboarding/verification-livraison.md)
+distinguent validation locale, approbation éditoriale des supports et recette déployée.
+Les états antérieurs conservés plus bas décrivent l'historique de conception.
+
+## Périmètre de référence — processus de bout en bout
+
+**E68-PROCESSUS-20261003 — 3 octobre 2026, conception V1.2.** L'epic se limite
+à mettre en place le processus décrit ci-dessous, du référencement à la
+finalisation du dossier. Elle relie et complète les outils existants pour que
+le gestionnaire sache quoi faire et que le commerçant arrive préparé à son
+rendez-vous d'une heure. Les détails techniques et les 31 critères conservés
+servent ce parcours ; ils ne constituent pas des produits supplémentaires.
+
+| Étape | Actions à rendre possibles | Critères du parcours |
+| --- | --- | --- |
+| 1. Référencer et ouvrir le dossier | Créer le commerçant, rattacher son dossier unique, vérifier les coordonnées, affecter le référent ; afficher checklist et prochaine action dans l'ERP | CA-18/20/21/22 |
+| 2. Planifier le rendez-vous | Saisir date/heure, durée d'une heure, Teams ou adresse ; préparer l'email avec calendrier et confirmer explicitement son envoi | CA-01/19/29 |
+| 3. Préparer et confirmer les communications | À J−7 configurable, présenter le pack et ses destinataires au gestionnaire ; confirmer ensemble mail/SMS nominal, suivre chaque canal ; deux supports et rappel des prestations connues dans le mail | CA-03/09/23/24/25/26 |
+| 4. Accompagner la préparation | Même compte commerçant : initialisation/récupération d'accès existante, vue limitée de préparation, réception/questions ; contrat téléchargeable et imprimable, prestations examinées, consignes de pièces, orientation vers Stripe | CA-02/04/05/06/07/08/10/27/28 |
+| 5. Faire le point avant J | Traiter les points ouverts, maintenir/adapter/reporter ; préparer le rappel J−1 et faire confirmer son envoi ; préserver les preuves encore valides | CA-11/12/13/30 |
+| 6. Conduire le rendez-vous | Quatre phases 10/15/10/25 minutes : questions, dossier/contrat/Stripe avec signature jour J, prestations, pratique sans opération financière réelle et bilan | CA-14/15 |
+| 7. Enregistrer et finaliser | Gestionnaire Localeo : dépôt interne et contrôle de la copie signée après rendez-vous, bilan partagé, actions restantes attribuées ; finalisation explicite sur preuves actuelles | CA-16 |
+
+Les deux exigences transverses restent rattachées au processus : **CA-31**, guide
+opérationnel publié et accessible dans l'ERP ; **CA-17**, vérification de son
+efficacité sur un pilote à partir des durées, relances et résultats observés.
+Il n'est pas demandé de produit analytique ou de tableau de bord décisionnel autonome.
+
+**Périmètre à réaliser :** dossier/checklist et file de suivi, rendez-vous,
+préparation et confirmation des envois, espace commerçant guidé, suivi des
+questions et des prestations initiales, déroulé et bilan, rattachement des
+preuves et finalisation, supports et guide ERP. Les cas d'erreur, reports,
+reprises et contrôles d'accès sont les garanties de ce même processus.
+
+**Socles à réutiliser :** identité et accès commerçant, Stripe hébergé, documents
+internes et contrat, référentiel des prestations, transports email/SMS,
+ordonnanceur, habilitations et règles OnBoard de finalisation. Adapter seulement
+leurs points d'intégration nécessaires ; ne pas reconstruire ces fonctions.
+
+**Hors de cette epic :** CRM de prospection (EPIC 71), moteur générique de workflows,
+espace temporaire avec une seconde identité, dépôt de pièces par le commerçant,
+nouvelle signature électronique, création automatique Teams, refonte de Stripe,
+de la BUM, de la finance ou des habilitations, publication commerciale automatique
+et sas de modification des prestations déjà applicables (EPIC 62).
+
+**Résultat de livraison attendu :** un gestionnaire peut conduire le parcours
+complet dans l'ERP, le commerçant sait préparer puis utiliser son compte, et le
+dossier se finalise seulement après contrôle des éléments requis. La signature
+jour J est conservée, puis la copie signée est déposée par Localeo. Aucun envoi
+E68 ne part sans autorisation explicite : le calendrier prépare, l'opérateur confirme.
+Les paramètres encore ouverts restent listés dans le dossier de spécification.
+État maintenu **À faire** : ce recadrage ne vaut ni implémentation ni livraison.
 
 ## Références
+
+Les références datées retracent les décisions successives. Le périmètre V1.2
+ci-dessus et les décisions du 3 octobre priment sur les anciens envois automatiques
+ou propositions de signature avant J ; les autres exigences du parcours sont conservées.
+
+- **E68-SIMPLIFICATION-20261002** : l'utilisateur retire **uniquement le dépôt de
+  pièces commerçant en V1** et demande un parcours simple qui assiste et guide.
+  L'espace de préparation est conservé pour réception, questions, contrat et
+  prestations. Cette précision remplace la composante dépôt de la conception V1.0.
 
 - Date de cadrage : **30 septembre 2026**.
 - Recadrage du **1er octobre 2026**, `E68-PILOTAGE-20261001` : démarrage au
@@ -20,10 +86,13 @@
 - Demande : associer le commerçant à la préparation avant le rendez-vous pour
   finaliser son onboarding en **une heure**, avec des prestations examinées,
   les informations nécessaires à Localeo et un commerçant rassuré et autonome.
-- Phase réalisée : **cadrage repris et revue critique du 1er octobre, sans
-  implémentation** ; spécification détaillée, priorité et date de livraison restent
-  à établir. Les recommandations E68-REV-01 à 09 sont **retenues par l'utilisateur**
-  le 1er octobre ; les décisions de parcours ci-dessous sont actualisées en conséquence.
+- Phase réalisée : **spécification V1.2 du 3 octobre 2026, sans implémentation**,
+  après cadrage et revue critique du 1er octobre. Les recommandations E68-REV-01
+  à 09 sont retenues ; les paramètres non arbitrés restent explicitement ouverts.
+  Priorité et date de livraison ne sont pas fixées.
+- [Dossier de spécification](../../specifications/epic-68-preparation-onboarding/README.md) :
+  parcours, architecture et contrats, communications, guide backoffice et sources
+  des deux supports commerçant ; [matrice des 31 critères et livraison](../../specifications/epic-68-preparation-onboarding/verification-livraison.md).
 
 ### Rattachement et dépendances
 
@@ -42,7 +111,7 @@ Réutiliser également :
   pour le parcours hébergé, les capacités et les reprises ;
 - [EPIC 60 — ERP et commercialisation](../terminees/epic-60-vision-360-commercialisation-backlog.md)
   pour modèles, copies, versions, aptitudes et référentiel commun ;
-- [EPIC 62 — Validation des modifications de prestations](epic-62-validation-modifications-prestations-backlog.md),
+- [EPIC 62 — Validation des modifications de prestations](../a-faire/epic-62-validation-modifications-prestations-backlog.md),
   **à faire**, pour son futur sas sur les prestations déjà applicables. La
   préparation initiale d'une offre relève de l'EPIC 68 ; elle ne livre pas
   implicitement ce sas et ne doit pas permettre d'en contourner les règles ;
@@ -107,6 +176,22 @@ Le succès comprend deux résultats distincts :
   ou encore bloquée identifiée. La fin du rendez-vous ne vaut pas mise en vente.
 
 ## Périmètre
+
+### Priorité à la simplicité — V1.2
+
+Présenter les sept étapes du processus de référence : référencer, planifier,
+préparer/confirmer les communications, accompagner la préparation, faire le point
+avant J, conduire le rendez-vous, enregistrer/finaliser.
+Chaque écran met en avant la prochaine action utile et l'aide du référent, sans
+exiger que l'utilisateur connaisse les états techniques. Les contrôles automatiques
+ne sont pas ressaisis. Le commerçant utilise l'espace léger pour confirmer la
+réception, poser ses questions, consulter le contrat et préparer les prestations ;
+**aucun bouton, formulaire ou API de téléversement de pièces E68 n'est livré**.
+Il prépare ses documents pour le rendez-vous, ou utilise un canal sécurisé déjà
+existant et vérifié. La liste des pièces reste informative ; « à apporter » ne
+signifie ni reçu ni vérifié. Les pièces sensibles ne sont pas demandées par email,
+et les justificatifs Stripe restent dans le parcours hébergé Stripe.
+
 
 ### Démarrer au référencement et piloter depuis un dossier unique
 
@@ -208,7 +293,8 @@ visibles dans le récapitulatif partagé au commerçant.
    Distinguer ce qui est demandé maintenant, ce qui pourra être traité pendant
    le rendez-vous et ce qui conditionne uniquement une capacité ultérieure.
 4. Le commerçant peut soumettre ses éléments progressivement, poser des
-   questions et suivre les demandes de correction. Localeo prépare une réponse,
+   questions et suivre les demandes de correction de ses informations ou prestations,
+   sans dépôt de pièces dans l'espace E68. Localeo prépare une réponse,
    désigne un responsable et vérifie avec lui que la question est résolue.
 5. Avant le rendez-vous, Localeo examine la préparation et partage un récapitulatif
    des éléments prêts, des décisions attendues et des manquants. Un dossier
@@ -216,7 +302,7 @@ visibles dans le récapitulatif partagé au commerçant.
    report, jamais une annulation ni une validation silencieuse.
 
 **Accès retenu :** un espace de préparation limité, utilisable avant activation,
-pour confirmer la réception, poser des questions, déposer les pièces, lire le
+pour confirmer la réception, poser des questions, voir les pièces à préparer, lire le
 contrat et préparer/corriger les prestations. Concevoir ces droits et la reprise
 de session avant les messages qui y renvoient. Réutiliser les mécanismes d'accès
 existants et distinguer leur email d'initialisation des communications de
@@ -268,30 +354,56 @@ décisions documentée dans le [contrôle BUM](../../exploitation/exploitation/t
 
 ### Documents et contrat : donner du temps pour lire
 
-Présenter une liste conditionnelle des pièces avec format attendu, destination,
-statut et éventuel motif de refus. Réutiliser les documents valides déjà présents,
-prévoir un dépôt sécurisé et une aide pour les éléments manquants. Distinguer
-pièce déposée, vérifiée et acceptée ; ne pas assimiler dépôt et conformité.
+Présenter une liste conditionnelle des pièces à préparer, leur motif et la
+consigne (présentation au rendez-vous ou canal sécurisé existant vérifié).
+Réutiliser les documents valides déjà présents. **Pas de dépôt de pièces par le
+commerçant dans la V1 E68**, ni nouveau stockage préparatoire associé. Localeo
+contrôle et enregistre les preuves par ses outils internes autorisés. Distinguer
+à préparer, reçu, vérifié et accepté ; ne pas assimiler une déclaration de préparation
+à une pièce reçue. Une pièce attendue le jour J reste une réserve avant J et
+permet un maintien adapté, sans afficher artificiellement le dossier prêt.
 
 Le contrat complet, sa version et un résumé pédagogique sont accessibles avant
-le rendez-vous. Les clauses financières, engagements et modalités opérationnelles
+le rendez-vous. Le contrat courant est téléchargeable en PDF pour impression
+et lecture en amont. Les clauses financières, engagements et modalités opérationnelles
 peuvent faire l'objet de questions en amont. Distinguer mise à disposition,
 consultation, déclaration de lecture et signature. Aucun délai écoulé ni clic
 d'ouverture ne vaut consentement. Si le contrat change, signaler la nouvelle
-version et rouvrir les confirmations concernées. La signature avant le rendez-vous
-ou pendant celui-ci reste à arbitrer ; aucun nouveau prestataire de signature
-n'est décidé ici.
+version et rouvrir les confirmations concernées. **Décision du 3 octobre 2026 :
+signature le jour J après les questions**, en vérifiant la version imprimée et
+l'habilitation du signataire. Après le rendez-vous, le gestionnaire Localeo dépose
+la copie signée dans le dossier interne et contrôle version, signataires, date
+réelle de signature et lisibilité selon les règles documentaires existantes.
+Le commerçant n'effectue aucun upload. Pour Teams, organiser la remise de la copie
+signée par un moyen existant adapté ; tant qu'elle manque ou n'est pas vérifiée,
+le dossier reste à compléter. La signature ne remplace pas les autres contrôles
+de finalisation. Aucun nouveau prestataire de signature n'est décidé ici.
 
 ### Confirmation à la planification, puis pack préparatoire à J−7
 
+**E68-CONFIRMATION-ENVOIS-20261003 — décision du 3 octobre.** Chaque séquence de
+communication E68 requiert une confirmation explicite du gestionnaire habilité,
+précédée d'un aperçu des destinataires, contenus, pièces jointes et échéance/fenêtre.
+À J−7, le mail et le SMS nominal sont autorisés ensemble par une seule validation.
+La confirmation de rendez-vous, le rappel J−1, le secours SMS et les avis de
+report/annulation ou correctifs ont chacun leur propre validation. Sans accord,
+les messages restent « À confirmer », avec action attribuée et retard visible ;
+aucune émission à la seule échéance. Une modification pertinente invalide la
+validation non encore exécutée. La confirmation est contrôlée côté serveur,
+tracée et idempotente ; fermer l'aperçu ou cliquer deux fois ne provoque aucun
+envoi implicite ou doublon. Les reprises techniques certaines conservent cette
+autorisation uniquement pour le même message inchangé et toujours pertinent.
+Ce choix remplace l'automatisme d'envoi décrit dans les décisions historiques :
+le calendrier prépare les communications, le gestionnaire autorise leur envoi.
+
 **Confirmation immédiate retenue :** dès que date, heure, interlocuteur Localeo
-et lien Teams ou lieu physique sont complets, envoyer un mail bref confirmant
+et lien Teams ou lieu physique sont complets, préparer puis faire confirmer l'envoi d'un mail bref confirmant
 le rendez-vous, avec un fichier `.ics`. Il annonce que les informations de
 préparation suivront. Ce message ne confirme pas à la place du commerçant sa
 présence. Il ne répète pas l'email d'initialisation de compte et ne contient
 pas nécessairement les deux supports du pack J−7.
 
-**Demande acquise :** une fois le rendez-vous planifié, programmer un mail et
+**Demande acquise :** une fois le rendez-vous planifié, programmer la préparation d'un mail et
 un SMS au commerçant **sept jours avant le jour J par défaut**. Le délai doit
 être configurable **globalement en V1, en jours calendaires**, sans dérogation
 par dossier. Afficher le délai retenu et la date/heure calculée ; définir un
@@ -304,7 +416,7 @@ des coordonnées de contact utilisables et des deux supports. Si un élément
 indispensable manque, afficher l'action à corriger et le canal bloqué dans le
 dossier ; ne pas inventer de destinataire ni annoncer un envoi réussi.
 La création du commerçant seule n'envoie pas ces messages : le rendez-vous et
-son échéance pilotent le déclenchement.
+son échéance pilotent la préparation, suivie de la confirmation explicite d'envoi.
 
 **SMS attendu :**
 
@@ -340,8 +452,9 @@ ouvrir les pièces jointes.
 
 **Hiérarchie retenue :** en tête, « Votre rendez-vous » et les actions à réaliser,
 puis le détail des prestations et les supports. Une entrée principale vers la
-préparation permet de confirmer la réception, poser une question et déposer
-ses éléments ; les deux supports demandés restent joints. Le backoffice permet
+préparation permet de confirmer la réception, poser une question et préparer
+ses prestations ; les pièces suivent les consignes sans dépôt E68. Les deux
+supports demandés restent joints. Le backoffice permet
 de prévisualiser le mail et ses PJ avant envoi, sans modifier les données ou
 preuves canoniques depuis cet aperçu. Un aperçu reste indicatif tant que les
 versions destinées à l'envoi n'ont pas été figées.
@@ -554,11 +667,11 @@ dans l'ERP déployé : prévoir une recette d'ouverture et de navigation du guid
 
 | Critère | Acteur et préconditions | Action | Résultat observable et effets interdits |
 | --- | --- | --- | --- |
-| E68-CA-01 | Référent, dossier ouvert et rendez-vous planifié | Compléter les informations nécessaires aux communications | Confirmation légère dès planification complète avec `.ics`, puis pack à J−7 configurable et rappel J−1 ; date/heure, créneau d'une heure, lien Teams ou lieu physique et référent cohérents ; messages équivalents rapprochés coordonnés, aucun doublon ni confirmation de présence supposée |
-| E68-CA-02 | Commerçant avant activation | Ouvrir puis reprendre la préparation sur mobile | Accès limité à son dossier pour réception/questions, pièces, contrat et propositions ; récupération d'accès expiré/remplacé, articulation avec le mail d'initialisation ; pas de droits commerciaux ouverts ni de rôle de signataire déduit du contact |
+| E68-CA-01 | Référent, dossier ouvert et rendez-vous planifié | Compléter les informations puis confirmer explicitement l'envoi de la séquence concernée | Confirmation légère avec `.ics` préparée dès planification complète, pack à J−7 configurable et rappel J−1 ; chaque séquence attend sa validation, aucun envoi à la seule sauvegarde ; date/heure, créneau d'une heure, lien/lieu et référent cohérents ; pas de doublon ni confirmation de présence supposée |
+| E68-CA-02 | Commerçant avant activation | Ouvrir puis reprendre la préparation sur mobile | Espace limité et guidé pour réception/questions, liste des pièces à préparer, contrat et propositions ; aucune fonction de dépôt E68 ; récupération d'accès, pas de droits commerciaux ni pouvoir de signature déduit du contact |
 | E68-CA-03 | Commerçant découvrant Stripe | Consulter l'explication avant de commencer | Rôle, informations demandées, protections réelles, aide et frais Stripe pris en charge par Localeo compris ; commission Localeo distinguée, aucune promesse de garantie absolue |
-| E68-CA-04 | Commerçant, exigences documentaires applicables | Consulter la liste puis déposer une pièce | Liste adaptée avec motif et destination ; dépôt sécurisé, statut de contrôle et correction visible ; réutilisation des preuves valides, aucun document bancaire demandé par email |
-| E68-CA-05 | Commerçant/signataire, contrat disponible en amont | Lire, questionner puis confirmer ou signer selon le parcours retenu | Version identifiée, temps de lecture permis ; consultation, lecture déclarée et signature distinctes ; nouvelle version signalée sans réemploi silencieux de l'accord |
+| E68-CA-04 | Commerçant, exigences documentaires applicables | Consulter les consignes puis préparer les pièces | Liste personnalisée, aide du référent, présentation au rendez-vous ou canal sécurisé existant vérifié ; aucun nouveau dépôt marchand ; réutilisation des preuves valides, à préparer/reçu/vérifié distincts, aucune pièce sensible demandée par email |
+| E68-CA-05 | Commerçant/signataire, contrat disponible en amont | Télécharger/imprimer et lire avant J, questionner puis signer le jour J ; gestionnaire déposant la copie après rendez-vous | Accès borné au contrat du commerçant, PDF lisible/imprimable, version identifiée ; consultation/lecture/signature distinctes ; version imprimée contrôlée, copie signée vérifiée avant finalisation, aucun upload marchand ; nouvelle version signalée sans réemploi silencieux de l'accord |
 | E68-CA-06 | Commerçant, offre sans coffret possible | Proposer puis corriger une prestation avant J | Brouillon reprenable et soumission identifiable ; aucune publication ni modification silencieuse d'une offre déjà applicable |
 | E68-CA-07 | Opérateur habilité, proposition soumise | Examiner avant J la faisabilité et l'économie | Décision sur une version précise, motif et corrections partagés ; accord commerçant sur les conditions traçable ; changement significatif impose un nouvel examen des éléments touchés |
 | E68-CA-08 | Référent, risque fiscal ou autre réserve détecté | Préparer le bilan avant rendez-vous | Réserve, responsable et action visibles ; `REVIEW_REQUIRED` n'est pas affiché comme validation favorable ; acceptation d'une prestation distincte de la qualification BUM du coffret |
@@ -570,20 +683,20 @@ dans l'ERP déployé : prévoir une recette d'ouverture et de navigation du guid
 | E68-CA-14 | Dossier préparé, rendez-vous tenu | Suivre le déroulé expliqué au commerçant | Quatre phases 10/15/10/25 minutes cohérentes avec mail, support joint et guide ; prestations examinées avant J puis confirmées, prise en main et bilan préservés ; cible de 60 minutes sans suppression d'une vérification obligatoire ; dépassement et cause consignés |
 | E68-CA-15 | Commerçant sur son propre appareil | Se connecter et réaliser les gestes de prise en main | Autonomie observée sur scénario représentatif, aide retrouvable ; ni partage de mot de passe ni opération financière réelle de test |
 | E68-CA-16 | Fin du rendez-vous ou absence du commerçant, blocages possibles | Consigner l'issue et partager le bilan puis réaliser le suivi | Préparation, issue du rendez-vous et finalisation de l'inscription distinctes ; rendez-vous tenu avec Stripe en attente laissant le dossier à compléter ; reste à faire attribué avec échéance, absence/injoignable sans abandon automatique ni capacité inventée |
-| E68-CA-17 | Pilote Localeo, dossiers représentatifs | Mesurer le parcours avant/après | Durée du rendez-vous, temps de gestion backoffice par dossier, nombre de relances manuelles, préparation avant J, questions et autonomie suivis avec événements et dénominateurs définis ; chiffres inconnus non remplacés par des succès |
+| E68-CA-17 | Pilote Localeo, dossiers représentatifs | Mesurer le parcours avant/après à partir du suivi des dossiers | Durée du rendez-vous, temps de gestion backoffice, relances manuelles, préparation avant J, questions et autonomie suivis avec événements et dénominateurs définis ; chiffres inconnus non remplacés par des succès ; bilan pilote du processus, sans produit analytique autonome |
 | E68-CA-18 | Opérateur habilité, nouveau commerçant à référencer | Enregistrer le commerçant puis rouvrir sa fiche | Un dossier de préparation rattaché à ce commerçant est disponible sans seconde création manuelle, même sans rendez-vous ; répétition ou modification du profil sans doublon, sans activation ni invitation implicite |
 | E68-CA-19 | Référent, dossier ouvert | Planifier le rendez-vous final | Date et heure enregistrées, créneau d'une heure, choix Teams ou physique avec coordonnées correspondantes ; horaire non ambigu et même information dans le dossier et l'invitation ; lien/lieu manquant explicitement signalé |
-| E68-CA-20 | Référent, nouveau dossier avec ou sans rendez-vous | Consulter la checklist puis planifier le rendez-vous | Envoi, réception des pièces, signature et Stripe alimentés depuis leurs sources, actions humaines identifiées ; sans double saisie d'une preuve connue ; prochaine action attribuée même sans date, échéances liées à J après planification sans perte des acquis valides |
+| E68-CA-20 | Référent, dossier avec ou sans rendez-vous | Consulter la checklist puis planifier | Étapes lisibles et prochaine action utile en premier ; envoi, pièces déjà enregistrées, signature et Stripe alimentés depuis leurs sources, actions humaines identifiées sans double saisie ; échéances liées à J après planification, aucune pièce à apporter assimilée à reçue |
 | E68-CA-21 | Opérateur habilité, action de préparation | Consigner un échange, examen, blocage ou correction | Actions manuelles réservées aux constats et décisions humains, auteur/date et résultat retrouvables ; aucun commentaire obligatoire pour recopier un résultat automatique ; changement de preuve déclenchant la revue concernée, sans validation manuelle de substitution |
 | E68-CA-22 | Référent, plusieurs dossiers à préparer | Consulter et filtrer le suivi backoffice | Dossiers sans rendez-vous, rendez-vous proches, actions en retard et attentes commerçant retrouvables ; ouvrir le même dossier depuis le suivi ou la fiche ; aucune file concurrente ni donnée hors des droits de l'opérateur |
-| E68-CA-23 | Rendez-vous complet à venir, délai global configuré en jours calendaires | Atteindre l'échéance puis rejouer le traitement | Pack mail/SMS à J−7 par défaut, date/heure et fuseau explicites, créneau en journée ; aucun double envoi, dérogation par dossier ou émission fondée sur la seule création du commerçant ; chevauchement des messages et rattrapage selon règle spécifiée |
-| E68-CA-24 | Mail pris en charge, en échec confirmé ou incertain | Déterminer le SMS à émettre | Nominal après prise en charge : date/heure, interlocuteur et adresse du mail envoyé ; secours après échec confirmé si aucun SMS nominal déjà parti : rendez-vous et vérification d'adresse/contact, sans prétendre le mail envoyé ; incertain sans renvoi aveugle, secours borné et suivi dans le dossier |
-| E68-CA-25 | Envoi du mail préparatoire, avec ou sans prestations saisies | Prévisualiser depuis le dossier, composer puis envoyer le mail | Rendez-vous et actions prioritaires en tête, entrée principale vers la préparation ; corps et PJ prévisualisables sans modification des preuves canoniques ; objectif, étapes, rôles, modalités pratiques et résultat attendu du rendez-vous de finalisation expliqués dans le corps, sans promesse d'activation automatique ; préparation et détail des prestations du dossier si présentes, manquants et état d'examen explicites ; absence de prestations sans blocage ni tableau vide ; déroulé du jour J et présentation boucle Localeo/Stripe joints ; frais Stripe portés par Localeo et commission distinguée ; versions envoyées traçables, aucun envoi incomplet si une PJ manque ni note interne divulguée |
-| E68-CA-26 | Échec partiel, report/annulation, modification des coordonnées ou du délai | Reprendre ou reprogrammer les communications | Intention d'envoi distincte du contenu figé ; version du rendez-vous et destinataire vérifiés avant prise en charge ; contenu exact conservé après envoi et correction explicite si nécessaire ; reprise du seul canal concerné, incertain non assimilé à échec certain ou livré ; tests de concurrence sans renvoi aveugle |
+| E68-CA-23 | Rendez-vous complet à venir, délai global configuré en jours calendaires | Atteindre l'échéance puis rejouer le traitement | Pack mail/SMS préparé à J−7 par défaut et restant A_CONFIRMER jusqu'à validation du gestionnaire ; date/heure et fuseau explicites, créneau en journée ; aucun envoi sans autorisation courante, doublon, dérogation par dossier ou émission à la seule création ; retard visible, chevauchement et rattrapage selon règle spécifiée |
+| E68-CA-24 | Pack explicitement autorisé, mail pris en charge, en échec confirmé ou incertain | Déterminer le SMS à émettre | Nominal couvert par l'accord du pack après prise en charge mail : date/heure, interlocuteur et adresse destinataire ; secours après échec certain préparé pour confirmation distincte si aucun nominal engagé, sans prétendre le mail envoyé ; aucun SMS sans autorisation courante, incertain sans renvoi aveugle |
+| E68-CA-25 | Mail préparatoire avec ou sans prestations, gestionnaire habilité | Prévisualiser puis confirmer explicitement l'envoi du pack mail/SMS | Destinataires email/mobile, contenus, PJ et fenêtre présentés ; fermer/annuler sans envoi, accord tracé auteur/date/versions, double clic idempotent ; rendez-vous/actions prioritaires, entrée vers préparation ; objectif, étapes, rôles et modalités sans promesse d'activation automatique ; prestations connues et manquants explicites, absence sans blocage/tableau vide ; déroulé et présentation Localeo/Stripe joints, frais Stripe/commission distingués ; aucun envoi sans accord ou PJ requise, aucun aperçu ne modifie les preuves ni ne divulgue les notes internes |
+| E68-CA-26 | Échec partiel, report/annulation, modification des coordonnées ou du délai | Reprendre ou reprogrammer les communications | Intention, autorisation et contenu figé distincts ; modification des éléments approuvés invalidant l'autorisation avant remise et imposant un nouvel aperçu/accord ; copie exacte conservée, correctif confirmé séparément ; réessai technique du même message sous accord valide, reprise manuelle confirmée, aucun renvoi aveugle ni réémission du mail pour reprendre le SMS |
 | E68-CA-27 | Commerçant destinataire du mail préparatoire | Utiliser « J'ai reçu les informations » ou « J'ai une question » | Confirmation explicite datée ou question liée au bon dossier, visible du référent ; simple ouverture du mail ou préchargement d'un lien sans confirmation ne valide rien ; accès limité au dossier autorisé |
-| E68-CA-28 | Commerçant, exigences et contrat disponibles | Consulter le mail puis préparer ses éléments | Liste de pièces personnalisée et accès au dépôt sécurisé, contrat versionné lisible avant J ; aucune demande d'envoyer des pièces sensibles par retour de mail, lecture et signature distinctes |
+| E68-CA-28 | Commerçant, exigences et contrat disponibles | Consulter le mail puis préparer ses éléments | Liste de pièces adaptée et consignes sans dépôt E68 ; contrat courant lisible avant J, questions et lecture conservées dans l'espace ; aucune demande de pièce sensible par email, déclaration de préparation distincte de réception et lecture distincte de signature |
 | E68-CA-29 | Commerçant, rendez-vous planifié | Ajouter le `.ics` de confirmation immédiate ou du pack J−7 | Même identité de rendez-vous, date/heure/fuseau, durée et lien/lieu cohérents ; report/annulation avec version actualisée à spécifier/tester, sans synchronisation automatique promise ni seconde identité pour le même rendez-vous |
-| E68-CA-30 | Rendez-vous actif à J−1 ou préparation sans confirmation | Exécuter le rappel puis suivre les dossiers nécessitant un contact | Rappel bref prévu à J−1 sans renvoi des supports, canal/horaire à préciser ; échec ou absence de confirmation produit une action humaine attribuée, résultat consigné ; rendez-vous annulé ou passé sans rappel, aucune confirmation supposée |
+| E68-CA-30 | Rendez-vous actif à J−1 ou préparation sans confirmation | Préparer le rappel, confirmer son envoi puis suivre les dossiers nécessitant un contact | Rappel bref à J−1 sans supports ni autorisation héritée du pack, validation explicite du gestionnaire requise ; canal/horaire à préciser ; absence de validation d'envoi ou de retour marchand visible avec action attribuée ; rendez-vous annulé ou passé sans rappel, aucune confirmation supposée |
 | E68-CA-31 | Opérateur habilité, backend et documentation livrés | Ouvrir le guide depuis la documentation ERP et le dossier onboarding | Guide lisible et versionné décrivant étapes, acteurs, checklist, communications et cas de reprise ; liens fonctionnels et droits préservés, lecture vérifiée avec bundle sans dépôt projet voisin ; aucune copie divergente ni fonctionnalité future présentée comme disponible |
 
 ## Impacts à instruire
@@ -598,27 +711,36 @@ dans l'ERP déployé : prévoir une recette d'ouverture et de navigation du guid
 | API et consommateurs | **Concernés** : producteur backend, consommateurs internes et commerçant ; contrat canonique, états/actions, erreurs, droits, concurrence et compatibilité à spécifier, sans exposer les API internes aux commerçants |
 | Persistance, migrations et existant | **À examiner** : liaison unique commerçant/dossier, déclencheur des créations ERP/API/import, rendez-vous et fuseau horaire, actions/responsables/preuves/échéances ; reprise de dossiers ouverts ou clôturés sans créer une seconde préparation ni inventer de lecture/consentement historique ; migration seulement après conception |
 | Email, SMS et traitements | **Concernés** : configuration J−7, ordonnanceur, messages liés au rendez-vous, envoi mail avec deux PJ puis SMS informant de cet envoi, suivi fournisseur par canal et reprises idempotentes ; horaires/fuseau, retards, report/annulation et changement de configuration à spécifier ; respecter la [charte email](../../architecture/transverse/charte-emails-localeo.md) |
-| Documents et accès | **Concernés** : deux supports pédagogiques joints, fichier `.ics`, liste de pièces personnalisée, contrat versionné et dépôt sécurisé ; droits des actions de confirmation/questions, collecte minimale, contrôles et conservation ; aucun document sensible du commerçant joint aux messages |
+| Documents et accès | **Concernés** : deux supports pédagogiques joints, fichier `.ics`, liste de pièces personnalisée, contrat versionné et consignes de préparation sans nouveau dépôt marchand ; droits des actions de confirmation/questions, collecte minimale, contrôles et conservation ; aucun document sensible du commerçant joint aux messages |
 | Générateur / fixtures | **Concernés** : [EPIC 63](../terminees/epic-63-jeux-demonstration-communes-backlog.md), nouveau commerçant sans rendez-vous, dossier réutilisé sans doublon, Teams/physique, checklist partielle ; échéance configurable, pièces jointes manquantes, mail/SMS en échec partiel ou incertain, événement fournisseur répété, report avant/après envoi, rendez-vous tardif ; questions, contrat changé et Stripe en attente ; génération isolée sans envoi réel |
 | Documentation fonctionnelle et publication ERP | **Concernées** : guide opérationnel backoffice à produire avec la spécification, source canonique de formation, entrée documentaire ERP et lien depuis le dossier ; export autorisé, bundle et test du lecteur/recette sur cible ; parcours E50 et aide commerçant à aligner, sans confondre guide interne et supports envoyés |
 | Exploitation / livraison | **Concernées** : supervision mail/SMS et dossiers oubliés, réglage du délai/horaires, canaux absents ou invalides, PJ indisponibles, responsable et délai de réponse, activation progressive sans envoi massif aux anciens dossiers ; ordre backend/consommateurs, recette des deux canaux et reprise à définir |
 
 ## Questions ouvertes
 
+La [table d'arbitrages de la spécification](../../specifications/epic-68-preparation-onboarding/README.md)
+précise les propositions soumises le 2 octobre (calendrier, signature, revue des
+prestations) et les contrats désormais conçus. Aucune absence de réponse ne vaut
+acceptation. Les paramètres ouverts bloquent uniquement les parties dépendantes.
+
 | Arbitrage | Décision attendue et proposition | Effet sur la spécification |
 | --- | --- | --- |
 | E68-ARB-01 | **Partiellement résolu : J−7 configurable globalement, jours calendaires et créneau en journée retenus**, sans dérogation par dossier en V1. Préciser fuseau, heures, effet sur les envois en attente et règle de rattrapage/regroupement des messages proches | Programmation prévisible sans SMS nocturne ni rafale ; aucune replanification silencieuse |
 | E68-ARB-02 | **Résolu : quatre phases de 10/15/10/25 minutes**, revue des prestations avant J, prise en main et bilan renforcés | Même déroulé dans mail, support, guide et recette chronométrée ; vérifications obligatoires préservées |
-| E68-ARB-03 | **Espace de préparation limité et mobile retenu**, avec récupération d'accès et distinction contact/signataire ; intégration dans le parcours existant, contrat et permissions exactes à spécifier avant les communications | Réception/questions, pièces, contrat et propositions accessibles avant activation sans ouverture des droits commerciaux |
+| E68-ARB-03 | **Conception détaillée le 2 octobre** : espace existant, scope limité `commercant:preparation`, identité du dossier dérivée de la session, renouvellement contrôlé des anciennes sessions, récupération d'accès et distinction contact/signataire ; API cibles dans la spécification | Réception/questions, consignes de pièces, contrat et propositions accessibles avant activation sans dépôt marchand ni ouverture des droits commerciaux ; reste à implémenter |
 | E68-ARB-04 | Fixer qui répond et examine, sous quel délai, et les critères du maintien adapté/report ; proposition de revue à J−2 | Organisation de la file, responsabilités, alertes ; le silence ne vaut jamais confirmation |
-| E68-ARB-05 | Arrêter les pièces conditionnelles et le moment de signature : avant J facultatif ou pendant J après questions | Contrat, habilitation du signataire, délai de lecture et preuves ; pas de fournisseur de signature imposé |
+| E68-ARB-05 | **Moment de signature décidé le 3 octobre** : PDF téléchargeable/imprimable avant J, signature le jour J, dépôt interne par Localeo après rendez-vous ; pièces conditionnelles selon exigences applicables | Version et habilitation contrôlées ; copie signée reçue/vérifiée avant finalisation, remise à organiser pour Teams ; aucun dépôt marchand ni nouveau fournisseur de signature |
 | E68-ARB-06 | Définir la grille de viabilité des prestations, les approbateurs et la frontière avec E62 pour les offres existantes | Modèle/proposition/copie, droits d'édition, critères économiques et traitement des réserves BUM |
 | E68-ARB-07 | Deux PJ acquises : déroulé du jour J et présentation boucle Localeo/Stripe vue commerçant ; PDF proposé. Valider rédaction, périmètre exact des frais Stripe pris en charge, protections et limites | Contenus fidèles à la convention, versionnés et lisibles ; ne pas transformer la prise en charge en gratuité universelle de Stripe |
 | E68-ARB-08 | Mail + SMS initiaux, rappel J−1 et contact humain en non-confirmation acquis ; préciser canal/horaire du rappel, délai d'escalade humaine, suivi après J et mesure pilote ; point J+2 encore proposé | Éviter les sollicitations inutiles ; rappel sans supports répétés, responsabilités, accessibilité et mesure pilote |
-| E68-ARB-09 | **Résolu :** confirmation légère dès planification avec `.ics`, pack automatique à J−7 configurable, nominal SMS après prise en charge mail, secours distinct en échec confirmé ; rappel J−1 conservé | Accès initial distinct, messages rapprochés coordonnés ; aucun SMS trompeur ni renvoi aveugle sur résultat incertain |
+| E68-ARB-09 | **Complété le 3 octobre :** calendrier préparatoire et confirmation explicite avant chaque séquence ; pack mail + SMS nominal validé ensemble à J−7, autres messages/rappel J−1/secours à confirmer distinctement | Accès initial distinct ; autorisation côté serveur, aperçu périmé refusé, aucun envoi par sauvegarde ou silence ; dépendance SMS/mail et absence de doublons préservées |
 | E68-ARB-10 | Définir la reprise des commerçants déjà référencés et des dossiers clos ; proposition de conserver les dossiers existants et de proposer une reprise explicite selon leurs droits | Pas de création massive, de réouverture ou d'envoi aux anciens dossiers lors du déploiement ; nouveau référencement et reprise restent distingués |
 
 ## Revue critique avant spécification — 1er octobre 2026
+
+**Trace historique :** les références au dépôt marchand dans cette revue décrivent
+la conception antérieure. E68-SIMPLIFICATION-20261002 retire ce seul mécanisme en V1 ;
+les autres capacités de l'espace et ses contrôles restent au périmètre.
 
 **Conclusion :** le résultat attendu est cohérent, mais les 31 critères couvrent
 à la fois le pilotage backoffice, la communication et un parcours commerçant
@@ -727,6 +849,43 @@ restent à spécifier à partir des producteurs et consommateurs réels.
 
 ## Historique du cadrage
 
+- **3 octobre 2026 — consolidation documentaire V1.2** : spécifications limitées
+  au processus courant en sept étapes ; guide, communications et recette alignés.
+  Anciennes décisions et preuves conservées uniquement dans ce backlog ; les
+  31 critères et arbitrages métier encore ouverts restent inchangés.
+
+- **3 octobre 2026 — E68-PROCESSUS-20261003, V1.2** : recentrage demandé sur
+  la mise en place du seul processus d'onboarding convenu. Synthèse en sept
+  étapes, limites et socles à réutiliser explicités ; 31 critères conservés
+  et rattachés au parcours (CA-01 clarifié, CA-17 borné au bilan pilote).
+  Les garanties d'envoi, l'espace sans dépôt, la signature jour J et le dépôt
+  interne après rendez-vous restent acquis. Documentation seulement, état À faire.
+
+- **3 octobre 2026 — E68-CONFIRMATION-ENVOIS-20261003** : demande utilisateur
+  de confirmation explicite pour éviter les erreurs d'envoi. Échéances conservées
+  mais communications en attente d'une validation humaine par séquence ; pack
+  mail/SMS validé ensemble. CA-23/24/25/26/30 et preuves associées précisés ;
+  guides, contrats cibles et reprise alignés. Changement documentaire, sans code
+  ni migration exécutés ; les autorisations existantes ne sont jamais présumées.
+
+- **3 octobre 2026 — E68-CONTRAT-JJ-20261003** : contrat téléchargeable et
+  imprimable pour lecture avant J, signature le jour J, puis dépôt de la copie
+  signée par le gestionnaire Localeo après le rendez-vous. Moment de signature
+  ARB-05 décidé ; CA-05 et preuve T05 précisés, guides et mail alignés. Pas de
+  nouvelle API d'upload marchand ni de finalisation sans contrôles actuels.
+
+- **2 octobre 2026 — E68-SIMPLIFICATION-20261002, V1.1** : demande de simplicité
+  et précision utilisateur « retirer uniquement le dépôt de pièces ». Espace
+  réception/questions/contrat/prestations conservé ; dépôt/API/stockage marchand
+  de pièces différés. CA-02/04/20/28 et supports alignés, sans clôture ou code.
+
+- **2 octobre 2026 — E68-SPEC-20261002** : spécification V1.0, cartographie des
+  producteurs et consommateurs, règles de préparation/finalisation, API cibles,
+  concurrence des envois et reprise, matrice CA-01 à 31. Guide backoffice et deux
+  supports rédigés/exportables ; accès ERP et PDF restent à réaliser. Paramètres
+  de calendrier, signature, grille de revue, diffusion des supports et reprise
+  historique distingués des décisions déjà acquises. Statut À faire conservé.
+
 - **30 septembre 2026** : parcours partagé, préparation avant J, dix-sept critères
   et hypothèses de calendrier/déroulé.
 - **1er octobre 2026 — E68-PILOTAGE-20261001** : le référencement initial devient
@@ -801,3 +960,92 @@ existera ; aucun dossier de conception vide ni contrat API hypothétique n'est
 créé ici. Les arbitrages ci-dessus bloquent seulement les choix qui en dépendent.
 Ce cadrage n'a déclenché aucun email, aucune modification applicative, ni aucun
 déploiement.
+
+## Archive des contrôles documentaires antérieurs à la consolidation V1.2
+
+Ces résultats sont conservés pour traçabilité. Ils décrivent les sources au moment
+indiqué et ne prouvent pas la version consolidée courante ni une implémentation.
+
+#### Contrôles consignés avant consolidation
+
+Les chiffres ci-dessous retracent les contrôles **V1.0**, antérieurs au recadrage.
+Ils ne prouvent pas la V1.1 ni les fonctions reportées. Les nouveaux contrôles
+documentaires du recadrage sont consignés séparément ci-dessous.
+
+- Lecture des producteurs et consommateurs aux versions backend `33face6` et
+  Commerçant `38ff5ad`, avec explorations indépendantes dossier et canaux.
+- Rédaction de la spécification, du guide et des deux sources publiques ; aucune
+  génération PDF de ces supports ni recette de leur rendu n'est encore réalisée.
+- Revue indépendante `localeo-contract-reviewer` réalisée : accord marchand sur
+  les conditions ajouté comme commande distincte ; idempotence des nouvelles
+  mutations distinguée des anciennes entrées sans corps ; route de préparation
+  ACTIF explicitée. Politique globale et qualification des questions précisées.
+- `check_guidance.py` : **90 guides, 939 liens, 0 erreur, 0 avertissement**.
+- `check_guidance.py --changed --all-markdown` : **12 documents, 141 liens,
+  0 erreur, 0 avertissement** lors du contrôle initial des nouveaux documents.
+- `sync_documentation.py --check-sources` : **122 sources vérifiées**. Bundle
+  local ignoré `.artifacts/epic68-specification/documentation` préparé puis contrôlé
+  par `--check` ; contrôle backend du snapshot : **123 documents distribués et
+  sources canoniques vérifiés** (manifeste inclus).
+- Lecteur réel `resolve_ops_document`, racine explicitement fixée à ce bundle :
+  **3 alias E68 lus avec succès** (guide, déroulé, Localeo/Stripe), sans import
+  de l'application ni chargement des paramètres d'exploitation. Ce test ne prouve
+  ni la future route ERP ni ses droits, à vérifier lors de l'implémentation.
+
+#### Contrôles du recadrage V1.1 — 2 octobre 2026
+
+- Backlog, spécifications, guide ERP, sources des supports et index alignés sur
+  l'arbitrage : seul le dépôt marchand de pièces est différé. Les confirmations,
+  questions, lecture du contrat et préparation des prestations sont conservées.
+- `check_guidance.py --document` sur le backlog : **91 guides, 972 liens,
+  0 erreur, 0 avertissement** ; `--changed --all-markdown` : **16 documents,
+  284 liens, 0 erreur, 0 avertissement**.
+- `sync_documentation.py --check-sources` : **122 sources vérifiées** ; nouveau
+  bundle local ignoré `.artifacts/epic68-simplification/documentation` généré puis
+  contrôlé avec `--check` : **122 documents vérifiés**.
+- Contrôleur backend du snapshot : **123 documents distribués et sources
+  canoniques vérifiés** ; lecteur réel `resolve_ops_document` : **3 alias E68
+  lus avec succès**, racine fixée au nouveau bundle, sans charger l'application.
+- `git diff --check` : succès. Aucun code applicatif ni migration modifié pour
+  ce recadrage documentaire ; aucun test métier exécuté ou déclaré réussi.
+
+#### Décision contrat — 3 octobre 2026
+
+`E68-CONTRAT-JJ-20261003` précise CA-05/T05 : téléchargement et impression avant J,
+signature le jour J, dépôt interne après rendez-vous. Backlog, parcours,
+architecture, mail et guides alignés ; aucun code ni migration modifié.
+Contrôles exécutés : `check_guidance.py --document` sur le backlog, **91 guides,
+972 liens, 0 erreur, 0 avertissement** ; `sync_documentation.py --check-sources`,
+**122 sources vérifiées** ; `git diff --check`, succès. Le rendu du PDF contractuel
+et les scénarios T05 restent à tester à l'implémentation ; les bundles contrôlés
+le 2 octobre sont antérieurs à cette décision et devront être régénérés à la livraison.
+
+#### Confirmation des envois — 3 octobre 2026
+
+`E68-CONFIRMATION-ENVOIS-20261003` remplace l'envoi à échéance par la préparation
+d'une séquence à confirmer explicitement. CA-23/24/25/26/30, contrats cibles,
+guide ERP, messages et index alignés. Revue indépendante en lecture seule :
+aucune contradiction bloquante repérée ; deux compléments de couverture intégrés
+à T01/T12 et T26. Aucun code ni migration exécutés.
+`check_guidance.py --document` : **91 guides, 972 liens, 0 erreur, 0 avertissement** ;
+`sync_documentation.py --check-sources` : **122 sources vérifiées**. Les bundles
+historiques doivent être régénérés à la livraison. Les scénarios d'autorisation
+et de concurrence sont des preuves à produire à l'implémentation.
+
+#### Recentrage sur le processus — 3 octobre 2026, V1.2
+
+`E68-PROCESSUS-20261003` rattache les 31 critères au seul parcours d'onboarding.
+CA-01 explicite la confirmation d'envoi déjà acquise ; CA-17 reste une mesure du
+pilote sans produit analytique autonome. La recette complète ci-dessus relie
+les étapes, les socles à réutiliser et les contrôles à préserver.
+Backlog, spécifications, guide ERP et index alignés. Aucun code, contrat OpenAPI
+exécutable, migration ou générateur modifié dans ce recadrage documentaire ;
+leurs impacts de réalisation restent suivis dans la matrice et la recette.
+Contrôles exécutés : backlog **91 guides, 972 liens, 0 erreur, 0 avertissement** ;
+documents modifiés **16 guides, 284 liens, 0 erreur, 0 avertissement** ; exports
+**122 sources vérifiées** ; `git diff --check`, succès. Les sources ont évolué
+depuis les bundles historiques : les régénérer avant livraison. Ces contrôles
+ne prouvent aucune fonction applicative ni disponibilité du parcours déployé.
+
+Les tests métier de la matrice restent non exécutés. L'epic conserve son statut
+**À faire** ; le dossier distingue les parties conçues des arbitrages encore ouverts.

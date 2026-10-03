@@ -1,5 +1,12 @@
 # Guide de formation au back-office Localeo
 
+## Préparation de l'inscription commerçant — cible EPIC 68
+
+Le [guide de préparation OnBoard](guide-preparation-onboarding-commercant.md)
+décrit le dossier, les échanges en amont, la checklist et le rendez-vous final.
+Il est rédigé pour la conception E68 ; les fonctions et accès ERP associés restent
+à implémenter. Il ne remplace pas les procédures actuellement disponibles.
+
 ## Consultations ERP Audit, Paiements et Reversements — EPIC 65
 
 Les trois vues E65 sont clôturées le 2 octobre 2026. Audit reste réservé à

@@ -1,19 +1,19 @@
 # Suivi backlog
 
-Mise à jour du classement : 2026-10-02 (EPIC-65 et EPIC-69 terminées ; EPIC-55 en cours)
+Mise à jour du classement : 2026-10-03 (EPIC-65 et EPIC-69 terminées ; EPIC-55 et EPIC-68 en cours)
 
 ## Synthese
 
 Évolution transverse du 29 septembre 2026 : [PWA-20260929 — installation et mise à jour](../specifications/installation-mise-a-jour-pwa.md), appliquée aux sept PWA existantes. Les états et clôtures historiques des EPIC restent inchangés ; preuves locales et recette appareil sont distinguées dans la spécification.
 
 - Identifiants EPIC suivis : 73 ; 70 du tronc commun et 3 identifiants applicatifs distincts.
-- EPICs a faire : 8 ; EPICs en cours : 1 (EPIC-55).
+- EPICs a faire : 7 ; EPICs en cours : 2 (EPIC-55 et EPIC-68).
 - EPICs fusionnees : 1 (EPIC-61 vers EPIC-60).
 - EPICs terminees : 61 (59 du tronc commun et 2 applicatives) ; EPICs abandonnees : 2.
 - US / PRD detaillees dans le tableau historique : 415, jusqu'a `EPIC-45`.
 - Source prioritaire : fichier backlog dedie quand disponible, sinon `product-roadmap.md`.
-- Référence de pilotage : EPIC-55 est en cours. EPIC-65 est terminée après revue des dix critères ; EPIC-69 après validation CA-18 ; EPIC-66 après confirmation utilisateur. EPIC-54, EPIC-58, EPIC-62,
-  EPIC-64, EPIC-67, EPIC-68, EPIC-70 et EPIC-MARKETPLACE-54 sont à faire. EPIC-47 est terminée,
+- Référence de pilotage : EPIC-55 et EPIC-68 sont en cours. EPIC-65 est terminée après revue des dix critères ; EPIC-69 après validation CA-18 ; EPIC-66 après confirmation utilisateur. EPIC-54, EPIC-58, EPIC-62,
+  EPIC-64, EPIC-67, EPIC-70 et EPIC-MARKETPLACE-54 sont à faire. EPIC-47 est terminée,
   clôture produit confirmée. EPIC-05 et EPIC-12 sont abandonnées ;
   EPIC-61 est fusionnée dans EPIC-60. Les autres EPIC du tronc commun sont terminées.
 - Classement et motifs : [index de la roadmap](README.md).
@@ -25,11 +25,11 @@ Mise à jour du classement : 2026-10-02 (EPIC-65 et EPIC-69 terminées ; EPIC-55
 
 | Etat | Nombre |
 | --- | ---: |
-| A faire | 8 |
-| En cours | 3 |
+| A faire | 7 |
+| En cours | 2 |
 | Abandonne | 2 |
 | Fusionnee | 1 |
-| Termine | 59 |
+| Termine | 61 |
 
 ### Identifiants applicatifs complémentaires
 
@@ -600,6 +600,6 @@ anciennes US restent historiques.
 | EPIC-65 | Termine | [backlog](terminees/epic-65-vues-erp-audit-paiements-reversements-backlog.md), [spécification V1.4](../specifications/epic-65-vues-erp/README.md) ; clôture le 2 octobre 2026 |
 | EPIC-66 | Termine | [backlog](terminees/epic-66-localeo-atelier-coffrets-assistes-ia-backlog.md), [spécification V1](../specifications/epic-66-localeo-atelier/README.md) ; clôture produit confirmée le 1er octobre 2026, bilan de livraison avec réserves |
 | EPIC-67 | A faire | [backlog](a-faire/epic-67-communautes-communes-coffrets-intercommunaux-backlog.md) |
-| EPIC-68 | A faire | [backlog](a-faire/epic-68-parcours-commercant-preparation-onboarding-backlog.md) |
+| EPIC-68 | En cours | [backlog](en-cours/epic-68-parcours-commercant-preparation-onboarding-backlog.md) — V1.2 : mise en place du seul processus d'onboarding, du référencement à la finalisation ; envois confirmés, signature jour J et dépôt interne, socles réutilisés |
 | EPIC-69 | Termine | [backlog](terminees/epic-69-profils-acces-erp-satellites-backlog.md) ; clôture du 2 octobre 2026 après validation CA-18 |
 | EPIC-70 | A faire | [backlog](a-faire/epic-70-validation-prestation-telephone-client-backlog.md) |

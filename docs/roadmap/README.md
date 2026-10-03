@@ -7,8 +7,8 @@ les 70 identifiants du tronc commun et trois identifiants applicatifs distincts.
 | Etat | Epics | Dossier |
 | --- | ---: | --- |
 | Terminees | 61 | [terminees/](terminees/README.md) |
-| A faire | 8 | [a-faire/](a-faire/README.md) |
-| En cours | 1 | [en-cours/](en-cours/README.md) |
+| A faire | 7 | [a-faire/](a-faire/README.md) |
+| En cours | 2 | [en-cours/](en-cours/README.md) |
 | Abandonnees | 2 | [abandonnees/](abandonnees/README.md) |
 | Fusionnee | 1 | Epic 61 reprise dans l'[Epic 60](terminees/epic-60-vision-360-commercialisation-backlog.md) |
 
@@ -16,13 +16,20 @@ Les 64 identifiants historiques et leurs états sont conservés ; l’EPIC 65 aj
 les vues ERP d’audit, paiements et reversements, et l’EPIC 66 ajoute Localeo Atelier
 pour composer des coffrets avec l’aide de l’IA. L’EPIC 67 ajoute les communautés
 de communes et les coffrets intercommunaux. L'EPIC 68 ajoute le parcours commerçant
-de préparation et finalisation de l'onboarding. Les EPIC 67 et 68 sont à faire ; l'EPIC 65 est terminée depuis le 2 octobre après validation locale des dix critères ;
+de préparation et finalisation de l'onboarding. L'EPIC 67 est à faire et l'EPIC 68 est en cours ; l'EPIC 65 est terminée depuis le 2 octobre après validation locale des dix critères ;
 l'EPIC 66 est terminée depuis le 1er octobre, après confirmation de recette par l'utilisateur.
-Le cadrage de l'[EPIC 68](a-faire/epic-68-parcours-commercant-preparation-onboarding-backlog.md)
+Le cadrage de l'[EPIC 68](en-cours/epic-68-parcours-commercant-preparation-onboarding-backlog.md)
 intègre les neuf recommandations acceptées le 1er octobre : suivi sans double saisie,
 confirmation immédiate, pack J−7 et secours SMS, préparation commerçant accessible
-avant activation, rendez-vous en quatre phases et guide ERP. Ses 31 critères restent
-à spécifier et implémenter ; cette validation ne change pas son état « À faire ».
+avant activation, rendez-vous en quatre phases et guide ERP. La
+[spécification V1.2 du 3 octobre](../specifications/epic-68-preparation-onboarding/README.md)
+trace ses 31 critères, les contrats et les tests attendus ; guide et supports sont
+rédigés. Seul le dépôt de pièces commerçant est différé ; l'espace de préparation
+est conservé, avec sept étapes et une prochaine action visible. Les paramètres ont été validés le 3 octobre et l'implémentation V1.2 est en cours. L'approbation éditoriale des supports et la recette déployée restent distinctes.
+Le 3 octobre, le parcours précise le contrat téléchargeable avant J, signé le
+jour J puis déposé par Localeo, ainsi qu'une confirmation explicite du gestionnaire
+avant chaque séquence d'envoi : pack mail/SMS validé ensemble, rappel et correctifs
+validés séparément. Les échéances seules ne provoquent plus d'envoi.
 La spécification V1.2 couvre ses extensions `E66-PWA-20260929` (PWA/menu ERP),
 `E66-PRIX-20260929` (prix proposé modifiable) et `E66-EXPERIENCE-20260929`
 (expérience multi-prestations, sans coffret matériel). Elles sont implémentées et
@@ -88,7 +95,7 @@ précise la provenance et les divergences historiques conservées.
 | 65 | Terminee | Trois vues ERP et projections partagées, dix critères vérifiés le 2 octobre ; scopes E69 intégrés, 691 tests et parcours navigateur réussis. Configuration et recette cible dans le bilan, aucun déploiement implicite. |
 | 66 | Terminee | [Localeo Atelier](terminees/epic-66-localeo-atelier-coffrets-assistes-ia-backlog.md) : [V1.2](../specifications/epic-66-localeo-atelier/README.md) implémentée et testée ; clôture produit le 1er octobre après confirmation utilisateur du parcours et de la PWA, réserves de livraison conservées dans le bilan. |
 | 67 | A faire | [Communautés de communes](a-faire/epic-67-communautes-communes-coffrets-intercommunaux-backlog.md) : référentiel, coffrets intercommunaux, commercialisation et extension de Localeo Atelier ; droits et achats existants préservés. |
-| 68 | A faire | [Préparation de l'onboarding](a-faire/epic-68-parcours-commercant-preparation-onboarding-backlog.md) : dossier, rendez-vous d'une heure, checklist ; mail/SMS à J−7 configurable, confirmation/questions, pièces/contrat, calendrier et rappel J−1 ; guide backoffice accessible dans l'ERP attendu, trente et un critères. |
+| 68 | En cours | [Processus d'onboarding commerçant](en-cours/epic-68-parcours-commercant-preparation-onboarding-backlog.md) : V1.2 implémentée localement, sept étapes du référencement à la finalisation ; envois confirmés, espace sans dépôt, signature jour J puis dépôt interne. Paramètres validés ; livraison test, approbation des supports et recette cible suivies dans le bilan. |
 | 61 | Fusionnee | Contenu repris dans l'Epic 60 ; une fusion n'est pas un abandon. |
 | 35 | Terminee (historique) | Clôture conservée ; le cadrage non livré des nouveaux rôles est transféré à l'EPIC 69 sur demande explicite du 1er octobre. |
 | 69 | Terminee | [Profils et accès ERP/satellites](terminees/epic-69-profils-acces-erp-satellites-backlog.md) : clôture le 2 octobre après validation CA-18, 27 critères conservés ; recette cible et configuration dans le bilan. |

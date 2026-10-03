@@ -15,6 +15,7 @@ procédure correspondante dans `exploitation/` ou `technique/`.
 | Administrateur Localeo | [`PDF publié`](/internal/docs/procedures/localeo_ops_backoffice_localeo_guide_formation.pdf) | Version diffusable du guide back-office |
 
 - [Gérer les utilisateurs internes ERP](../../../specifications/epic-69-acces-internes/guide-backoffice.md) : invitation, rôles, périmètres, récupération et révocation (E69).
+- [Préparer et finaliser l'inscription d'un commerçant](guide-preparation-onboarding-commercant.md) : guide cible E68 rédigé pendant la spécification ; écrans et publication dans l'ERP restent à implémenter.
 
 ## Parcours conseillé
 

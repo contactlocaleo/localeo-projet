@@ -266,6 +266,18 @@
       "source_path": "docs/produit/formation/backend/guide-backoffice-localeo.md"
     },
     {
+      "path": "docs/ops/formation/guide-preparation-onboarding-commercant.md",
+      "source_path": "docs/produit/formation/backend/guide-preparation-onboarding-commercant.md"
+    },
+    {
+      "path": "docs/ops/formation/commercant/preparation-rendez-vous-localeo.md",
+      "source_path": "docs/produit/formation/commercant/preparation-rendez-vous-localeo.md"
+    },
+    {
+      "path": "docs/ops/formation/commercant/comprendre-localeo-stripe.md",
+      "source_path": "docs/produit/formation/commercant/comprendre-localeo-stripe.md"
+    },
+    {
       "path": "docs/ops/guide-corrections-marketplace-2026-09-06.md",
       "source_path": "docs/exploitation/guide-corrections-marketplace-2026-09-06.md"
     },
