@@ -317,3 +317,10 @@ Arrêt d'urgence : désactiver la politique E68 ; conserver l'historique et le
 rapprochement. Ne pas employer une relance email/SMS générique pour contourner une
 incertitude. Une reprise exige preuve de non-remise et confirmation du contenu
 toujours courant ; un changement de contenu exige une nouvelle intention.
+
+## Livraison sur TEST du 3 octobre 2026
+
+Le [reçu de livraison TEST](livraison-test.md) conserve les commits publiés, les
+migrations exécutées, les contrôles sur la cible et le blocage documentaire
+Render restant. Le code est déployé ; la livraison complète et la clôture ne sont
+pas déclarées tant que ce blocage et la recette attendue ne sont pas levés.
