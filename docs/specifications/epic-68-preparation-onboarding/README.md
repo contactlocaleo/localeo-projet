@@ -73,7 +73,9 @@ un mobile absent bloque le SMS, pas le mail valide, et appelle un autre contact.
 ## 2. Planifier le rendez-vous
 
 **Référent :** saisir date, heure, fuseau, durée d'une heure, interlocuteur Localeo,
-modalité Teams ou présentiel et lien ou adresse. Un rendez-vous incomplet reste
+modalité Teams ou présentiel. Le lien Teams est facultatif et peut être ajouté
+ultérieurement ; s'il est renseigné, il doit être HTTPS. L'adresse est obligatoire
+en présentiel. Un rendez-vous incomplet sur les autres informations requises reste
 à compléter et ne déclenche pas de communication.
 
 **Système :** préparer l'email léger de confirmation avec fichier calendrier,
@@ -105,7 +107,11 @@ un rapprochement avant reprise. Une modification des éléments approuvés avant
 remise invalide l'autorisation et demande une nouvelle confirmation.
 Les confirmations de rendez-vous, rappels, secours et correctifs n'héritent
 jamais de l'autorisation du pack. Les communications d'identité existantes
-restent distinctes des séquences E68.
+restent distinctes des séquences E68, mais leur demande est accessible depuis
+le bouton « Créer mon mot de passe » du pack. La confirmation du pack prépare
+l'identifiant manquant, sans envoyer d'invitation séparée ; le commerçant demande
+ensuite son lien personnel en saisissant son email. Un compte déjà configuré
+peut rejoindre directement sa préparation par le lien secondaire.
 
 **Critères :** CA-03/09/23/24/25/26.
 

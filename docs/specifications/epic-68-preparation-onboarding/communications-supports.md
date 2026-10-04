@@ -30,7 +30,9 @@ un nouvel aperçu et une nouvelle confirmation avant remise.
 
 Réutiliser `render_email` et la charte email Localeo : version HTML et texte,
 variables échappées, bouton principal unique, lecture mobile et sans images.
-L'action principale ouvre l'espace de préparation ; email et téléphone restent
+L'action principale du pack est « Créer mon mot de passe » : elle ouvre la demande
+de lien personnel avec retour vers la préparation. Un lien secondaire ouvre
+directement la préparation pour les comptes déjà configurés. Email et téléphone restent
 des moyens d'aide sans remplacer les confirmations authentifiées du commerçant.
 Expéditeur et réponse utilisent la configuration autorisée de l'environnement.
 Afficher le nom du référent et un contact Localeo validé ; aucun téléphone privé
@@ -38,11 +40,15 @@ de collaborateur déduit automatiquement. Les valeurs ci-dessous sont des variab
 de rendu, jamais du texte à envoyer littéralement.
 
 Avant figement, valider : nom commerçant, date/heure/fuseau, référent, modalité
-et lien ou lieu, contacts destinataires et réponse, URL de préparation HTTPS de
+et lieu physique ou lien Teams facultatif, contacts destinataires et réponse, URL de préparation HTTPS de
 l'environnement, liste des pièces à préparer, contrat accessible ou réserve explicite,
 prestations existantes et deux supports approuvés. Une adresse/ligne SMS manquante
 produit une action de correction ; elle n'est pas inventée. L'absence de SMS
 n'empêche pas le mail valide, mais reste un incident visible.
+
+Sans lien Teams, le rendez-vous reste planifiable et les communications indiquent
+« lien à communiquer » ; aucune URL n'est inventée. L'ajout ultérieur du lien suit
+la révision du rendez-vous et la confirmation habituelle des communications.
 
 Rendu des prestations : nom, description, valeur/prix renseigné, durée ou quantité,
 conditions/réservation/restrictions connues, état de préparation et champs à
@@ -91,19 +97,27 @@ de calendrier documentés dans l'architecture.
 >
 > {{bloc_teams_ou_adresse}}
 >
-> **Avant notre rendez-vous**
+> **1. Créez votre mot de passe**
 >
-> 1. Confirmez dans votre espace que vous avez reçu ces informations et indiquez
+> Première connexion ? Cliquez ci-dessous puis indiquez l'adresse email à laquelle
+> vous recevez ce message. Vous recevrez un lien personnel pour choisir votre mot
+> de passe. Connectez-vous ensuite pour retrouver votre préparation.
+>
+> **Créer mon mot de passe** — {{url_creation_mot_de_passe}}
+>
+> Déjà un mot de passe ? **Accéder à ma préparation** — {{url_preparation}}
+>
+> **2. Préparez votre rendez-vous**
+>
+> Confirmez dans votre espace que vous avez reçu ces informations et indiquez
 >    vos questions, même si votre dossier n'est pas encore complet.
-> 2. Vérifiez les informations de votre établissement et préparez les pièces
+> Vérifiez les informations de votre établissement et préparez les pièces
 >    demandées ci-dessous. Votre référent précise comment les présenter au
 >    rendez-vous ou les faire vérifier par un canal sécurisé existant adapté.
-> 3. Téléchargez votre contrat en PDF dans votre espace. Vous pouvez l'imprimer
+> Téléchargez votre contrat en PDF dans votre espace. Vous pouvez l'imprimer
 >    pour le lire avant le rendez-vous et préparer vos questions. Vérifiez les prestations récapitulées
 >    ci-dessous ; vous pouvez préparer vos propositions et confirmer les conditions
 >    examinées avec votre référent dans votre espace.
->
-> **Accéder à ma préparation** — {{url_preparation}}
 >
 > **Ce que vous devez préparer**
 >
@@ -126,7 +140,7 @@ de calendrier documentés dans l'architecture.
 > Ce rappel reprend les informations connues lors de cet envoi. Les points
 > « à compléter » restent à examiner avec vous ; cet email ne publie pas vos offres.
 >
-> **Comment se déroule l'heure ensemble ?**
+> **3. Le jour du rendez-vous : une heure ensemble**
 >
 > - 10 minutes pour répondre à vos questions et préciser vos attentes.
 > - 15 minutes pour vérifier votre dossier, le contrat et l'avancement Stripe.

@@ -255,7 +255,7 @@ de revue et les responsables restent à préciser selon E68-ARB-04.
 | Action à préparer | Responsable proposé | Résultat à suivre |
 | --- | --- | --- |
 | Confirmer l'interlocuteur et le contact | Référent Localeo | Coordonnées vérifiées, personne à joindre et référent identifiés |
-| Planifier le rendez-vous final | Référent Localeo | Date, heure, créneau d'une heure, Teams avec lien ou physique avec lieu |
+| Planifier le rendez-vous final | Référent Localeo | Date, heure, créneau d'une heure, Teams avec lien facultatif ou physique avec lieu |
 | Transmettre l'invitation et le parcours préparatoire | Envoi automatique, supervisé par le référent | Confirmation immédiate avec calendrier, pack mail avec deux supports joints et SMS à J−7 configurable, rappel J−1 ; programmation, envoi et réception suivis par canal, secours distinct en cas d'échec confirmé du mail |
 | Vérifier la réception et recueillir les questions | Référent et commerçant | Confirmation explicite, questions suivies ou déclaration « aucune question à ce stade » ; silence signalé |
 | Présenter Stripe et accompagner la préparation | Référent et commerçant | Explication des coûts et protections, questions traitées, exigences/capacités Stripe réelles visibles |
@@ -277,7 +277,7 @@ visibles dans le récapitulatif partagé au commerçant.
 
 1. Depuis le dossier ouvert au référencement, Localeo planifie le rendez-vous :
    interlocuteur, coordonnées confirmées, référent, date et heure, créneau d'une
-   heure, Teams avec lien ou présence physique avec lieu, moyen de poser une
+   heure, Teams avec lien facultatif ou présence physique avec lieu, moyen de poser une
    question et de demander un report. Un rendez-vous encore incomplet reste
    visible comme tel, sans être présenté comme une invitation prête à envoyer.
 2. Dès la planification complète, le commerçant reçoit une confirmation légère
@@ -307,6 +307,12 @@ contrat et préparer/corriger les prestations. Concevoir ces droits et la repris
 de session avant les messages qui y renvoient. Réutiliser les mécanismes d'accès
 existants et distinguer leur email d'initialisation des communications de
 rendez-vous : le pack J−7 ne présume pas qu'un ancien lien est encore valide.
+Le bouton principal du pack ouvre la demande de création du mot de passe ; le
+gestionnaire n'a pas à envoyer une invitation séparée. La confirmation du pack
+prépare l'identifiant manquant sans modifier un compte existant. Le commerçant
+demande ensuite son lien personnel en saisissant son email ; après création et
+connexion, il revient à sa préparation. Un lien secondaire conserve l'accès des
+comptes déjà configurés. Aucun secret personnel n'est placé dans l'aperçu du pack.
 Le contact opérationnel n'est pas réputé habilité à signer ; l'identité et les
 droits du signataire restent contrôlés. L'intégration précise de cet espace et
 son contrat devront être définis avec l'application Commerçant.
@@ -397,7 +403,7 @@ Ce choix remplace l'automatisme d'envoi décrit dans les décisions historiques 
 le calendrier prépare les communications, le gestionnaire autorise leur envoi.
 
 **Confirmation immédiate retenue :** dès que date, heure, interlocuteur Localeo
-et lien Teams ou lieu physique sont complets, préparer puis faire confirmer l'envoi d'un mail bref confirmant
+et modalité sont renseignés (adresse obligatoire en physique, lien Teams facultatif), préparer puis faire confirmer l'envoi d'un mail bref confirmant
 le rendez-vous, avec un fichier `.ics`. Il annonce que les informations de
 préparation suivront. Ce message ne confirme pas à la place du commerçant sa
 présence. Il ne répète pas l'email d'initialisation de compte et ne contient
@@ -685,7 +691,7 @@ dans l'ERP déployé : prévoir une recette d'ouverture et de navigation du guid
 | E68-CA-16 | Fin du rendez-vous ou absence du commerçant, blocages possibles | Consigner l'issue et partager le bilan puis réaliser le suivi | Préparation, issue du rendez-vous et finalisation de l'inscription distinctes ; rendez-vous tenu avec Stripe en attente laissant le dossier à compléter ; reste à faire attribué avec échéance, absence/injoignable sans abandon automatique ni capacité inventée |
 | E68-CA-17 | Pilote Localeo, dossiers représentatifs | Mesurer le parcours avant/après à partir du suivi des dossiers | Durée du rendez-vous, temps de gestion backoffice, relances manuelles, préparation avant J, questions et autonomie suivis avec événements et dénominateurs définis ; chiffres inconnus non remplacés par des succès ; bilan pilote du processus, sans produit analytique autonome |
 | E68-CA-18 | Opérateur habilité, nouveau commerçant à référencer | Enregistrer le commerçant puis rouvrir sa fiche | Un dossier de préparation rattaché à ce commerçant est disponible sans seconde création manuelle, même sans rendez-vous ; répétition ou modification du profil sans doublon, sans activation ni invitation implicite |
-| E68-CA-19 | Référent, dossier ouvert | Planifier le rendez-vous final | Date et heure enregistrées, créneau d'une heure, choix Teams ou physique avec coordonnées correspondantes ; horaire non ambigu et même information dans le dossier et l'invitation ; lien/lieu manquant explicitement signalé |
+| E68-CA-19 | Référent, dossier ouvert | Planifier le rendez-vous final | Date et heure enregistrées, créneau d'une heure, choix Teams ou physique avec coordonnées correspondantes ; horaire non ambigu et même information dans le dossier et l'invitation ; lien Teams manquant signalé sans bloquer la planification, URL fournie HTTPS et adresse physique obligatoire |
 | E68-CA-20 | Référent, dossier avec ou sans rendez-vous | Consulter la checklist puis planifier | Étapes lisibles et prochaine action utile en premier ; envoi, pièces déjà enregistrées, signature et Stripe alimentés depuis leurs sources, actions humaines identifiées sans double saisie ; échéances liées à J après planification, aucune pièce à apporter assimilée à reçue |
 | E68-CA-21 | Opérateur habilité, action de préparation | Consigner un échange, examen, blocage ou correction | Actions manuelles réservées aux constats et décisions humains, auteur/date et résultat retrouvables ; aucun commentaire obligatoire pour recopier un résultat automatique ; changement de preuve déclenchant la revue concernée, sans validation manuelle de substitution |
 | E68-CA-22 | Référent, plusieurs dossiers à préparer | Consulter et filtrer le suivi backoffice | Dossiers sans rendez-vous, rendez-vous proches, actions en retard et attentes commerçant retrouvables ; ouvrir le même dossier depuis le suivi ou la fiche ; aucune file concurrente ni donnée hors des droits de l'opérateur |

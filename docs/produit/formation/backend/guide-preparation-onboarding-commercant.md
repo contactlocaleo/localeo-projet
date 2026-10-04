@@ -50,8 +50,10 @@ planification ; le référencement ne déclenche pas le pack ni l'activation com
 
 ## 2. Planifier le rendez-vous
 
-Prévoir une heure, préciser date, heure et fuseau, puis saisir le lien Teams
-créé par l'organisateur ou l'adresse du rendez-vous physique. Vérifier le résumé
+Prévoir une heure, préciser date, heure et fuseau. Le lien Teams créé par
+l'organisateur est facultatif : vous pouvez l'ajouter plus tard, en HTTPS.
+Sans lien, le mail et le calendrier indiquent qu'il reste à communiquer.
+L'adresse du rendez-vous physique reste obligatoire. Vérifier le résumé
 avant confirmation. Un rendez-vous incomplet reste à compléter.
 
 La confirmation du rendez-vous prévoit un email léger et un fichier calendrier,
@@ -146,6 +148,22 @@ La checklist reprend les faits disponibles et distingue les contrôles métier
 des comptes rendus humains. Attribuer chaque action restante à une personne avec
 une échéance. En cas de difficulté d'accès à l'espace, aider à le récupérer sans
 demander le mot de passe ni réutiliser un lien d'initialisation expiré.
+
+### Première connexion depuis le mail de préparation
+
+Vous n'avez plus à envoyer une invitation séparée avant le pack : sa confirmation
+prépare le compte manquant, sans créer de mot de passe ni activer le commerçant.
+Le commerçant clique sur **Créer mon mot de passe**, saisit son adresse email
+puis demande son lien personnel. C'est **à cette demande** que le mail de création
+du mot de passe est mis dans la file d'envoi. Après création du mot de passe et
+connexion, il retrouve sa préparation. S'il a déjà un mot de passe, le lien
+**Accéder à ma préparation** lui permet de se connecter directement.
+
+Une ouverture de mail ou de lien ne déclenche aucun envoi. En cas de lien expiré,
+le commerçant peut renouveler sa demande. Pour un ancien pack envoyé avant cette
+évolution sans compte préparé, l'action **Compte commerçant → Envoyer l'invitation**
+reste disponible après confirmation. Un délai de réception peut venir de la file
+d'envoi ou du fournisseur : une demande enregistrée ne prouve pas la livraison.
 
 ## 5. Faire le point avant J
 
@@ -247,7 +265,7 @@ En mode consultation, les dossiers restent lisibles : contacter l'administrateur
 Localeo si une modification est nécessaire.
 
 Planifier date et heure dans le fuseau indiqué, interlocuteur, référent Localeo,
-modalité Teams avec lien HTTPS ou adresse physique. La durée est d'une heure.
+modalité Teams avec lien HTTPS facultatif ou adresse physique obligatoire. La durée est d'une heure.
 Un report ou une annulation impose de revoir les communications concernées.
 
 Dans **Communications**, préparer l'aperçu du type voulu, lire les destinataires,

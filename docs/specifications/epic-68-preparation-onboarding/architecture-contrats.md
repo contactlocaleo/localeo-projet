@@ -78,7 +78,7 @@ conceptuels ; leur persistance ne crée pas un second référentiel commerçant.
 | Objet / propriétaire | Champs et comportements à protéger |
 | --- | --- |
 | DossierOnboardingCommercant | Identifiant commerçant unique, version, activation explicite du parcours E68, référent, références de preuves ; ouvrir/reprendre/diagnostiquer/finaliser |
-| RendezVousPreparation | UUID stable, révision, début UTC, fuseau IANA, durée 60 min, TEAMS ou PHYSIQUE, URL HTTPS ou adresse, référent/interlocuteur ; brouillon, planifier, reporter, annuler, constater tenue/absence |
+| RendezVousPreparation | UUID stable, révision, début UTC, fuseau IANA, durée 60 min, TEAMS ou PHYSIQUE, URL HTTPS facultative en Teams ou adresse obligatoire en physique, référent/interlocuteur ; brouillon, planifier, reporter, annuler, constater tenue/absence |
 | PolitiquePreparation | Version globale, délai en jours calendaires, fuseau/heure/fenêtre, rappel, délais de revue et escalade ; planifier à partir d'une horloge injectée |
 | ActionPreparation | Code stable, type DERIVEE ou HUMAINE, état, responsable, échéance facultative, preuves/versions, motif non applicable, auteur/date/résultat des seules tâches humaines |
 | ContributionPrestation | Dossier, contenu brouillon, modèle source éventuel/version, auteur, révision ; soumettre/corriger ; aucune référence à un coffret obligatoire |
@@ -197,9 +197,22 @@ Réutiliser les routes d'identité existantes sous
 `/protected/identite-acces/commercants/` : `auth/login`,
 `auth/mot-de-passe-oublie`, `auth/initialiser-mot-de-passe`,
 `auth/reinitialiser-mot-de-passe`, `session/valider`. Les durées de jeton existantes
-s'appliquent. Le pack n'embarque pas le jeton créé au référencement ; son lien
-mène à l'espace de préparation, avec reprise d'une destination locale autorisée
-après connexion/initialisation. Aucun jeton de dossier public dans le lien ou l'ICS.
+s'appliquent. Le pack n'embarque aucun jeton personnel : son bouton principal
+mène à `/mot-de-passe-oublie?retour=%2Fpreparation` sur l'hôte de l'espace
+commerçant. La confirmation explicite d'un PACK prépare l'identifiant s'il manque,
+dans la même transaction, sans invitation supplémentaire ni mot de passe créé.
+Le contact doit correspondre au destinataire confirmé et au login existant ; un
+conflit d'identité bloque sans écraser un compte. Aucun compte n'est créé par
+l'aperçu ou par un GET public.
+
+Le commerçant saisit son email et demande son lien : les limites de fréquence et
+la réponse générique existantes s'appliquent. Pour un compte sans mot de passe et
+un retour `/preparation`, la demande produit un jeton INITIALISATION et le mail
+« Créez votre mot de passe Localeo » ; un compte déjà configuré conserve la
+récupération existante. Un compte absent n'est pas créé par cette route publique.
+L'email personnel passe par la file d'envoi existante. La destination locale est
+reprise après connexion/initialisation ; le lien secondaire du pack ouvre
+directement `/preparation`. Aucun jeton de dossier public dans le pack ou l'ICS.
 
 L'interface doit aussi offrir une route explicite de préparation aux commerçants
 ACTIF dont le dossier a été repris : ne pas dépendre uniquement de l'interception
@@ -232,7 +245,7 @@ client pour choisir le propriétaire. API interne existante étendue sous
 | Marchand POST `/propositions/{id}/accord` | Version proposition/revue et empreinte conditions, ACCEPTE ou REFUSE ; acteur/date serveur et habilitation vérifiée, aucun accord implicite par soumission |
 | Marchand POST `/prestations/{id}/accord` | Même preuve d'accord pour une prestation existante relue ; sujet fixé par le serveur, conditions et capacité explicites dans la revue, sans modifier l'offre applicable |
 | Interne GET liste (route existante à étendre) | Filtres date, non planifié, retard, attente, référent ; pagination stable et bornée, prochaine action calculée |
-| Interne PUT `/preparation/rendez-vous` | `expected_version`, date UTC avec offset et fuseau, modalité/lien ou adresse, référent/interlocuteur ; durée fixée serveur à 60 min, révision et échéances retournées |
+| Interne PUT `/preparation/rendez-vous` | `expected_version`, date UTC avec offset et fuseau, modalité, lien Teams facultatif ou adresse physique obligatoire, référent/interlocuteur ; durée fixée serveur à 60 min, révision et échéances retournées |
 | Interne POST `/preparation/rendez-vous/annulation` | Version, motif ; annule les intentions non remises, prépare information corrective et ICS d'annulation |
 | Interne PATCH `/preparation/actions/{id}` | Tâches humaines seulement : responsable/échéance/résultat/motif ; refuser écriture des preuves dérivées |
 | Interne POST `/preparation/revues` | Sujet/version, décision, réserves partagées, note interne séparée ; preuve et auteur serveur |

@@ -67,6 +67,90 @@ Les tests Python métier/API n'ont pas été relancés pour cette correction de 
 sans modification de leurs règles ou contrats. Aucun déploiement de cette correction
 n'a été effectué ; les résultats historiques ci-dessous ne prouvent pas sa livraison.
 
+## Correction du lien Teams facultatif — 3 octobre 2026
+
+Sur la base backend `2cfcb10` avec cette correction locale, un rendez-vous Teams
+peut être créé sans lien (champ absent, nul ou vide), puis complété ultérieurement.
+`PreparationOnboarding` porte la règle commune aux commandes API/OnBoard ; une URL
+fournie reste soumise au contrôle HTTPS et l'adresse physique reste obligatoire.
+Le formulaire mentionne « facultatif ». Sans lien, le mail et l'ICS indiquent
+qu'il reste à communiquer. Toute modification conserve le versionnement et les
+confirmations des communications ; aucun envoi implicite.
+
+Reproduction avant correction : quatre cas de domaine refusés avec `ENTREE_INVALIDE`
+et formulaire navigateur invalide sans lien. Après correction :
+
+- `test_preparation_onboarding.py`, `test_service_preparation_onboarding.py`,
+  `test_communications_preparation.py`, `test_preparation_onboarding_api.py` et
+  `test_preparation_supports.py`, via `scripts/validation/test_isolated.py` :
+  **100 tests réussis**, dont ajout ultérieur du lien, aperçu/ICS sans lien et absence d'envoi.
+- `node tests/frontend/test_preparation_browser.mjs` : **5 scénarios réussis**,
+  dont création sans lien sur mobile et ordinateur.
+- `tests/architecture`, `tests/domain/test_domain_dedicated_classes.py` et
+  `tests/application/use_cases/test_use_case_business_test_coverage.py`, via le
+  même lanceur isolé : **453 tests réussis**.
+
+Impact : backend/OnBoard, rendu des communications et documentation canonique.
+Pas de migration ni de configuration supplémentaire : le champ est déjà stocké
+dans l'état JSON. Contrat assoupli sans nouvelle route ; les jeux de démonstration
+avec lien restent valides et aucun changement du générateur n'est nécessaire.
+Applications satellites inchangées : le champ reste disponible avec la même forme.
+Aucun déploiement ni envoi réel effectué pour cette correction.
+
+## Mail de préparation et première connexion intégrée — 3 octobre 2026
+
+Demande utilisateur : clarifier le mail et intégrer la création du mot de passe
+au parcours de préparation, sans invitation opérateur distincte. Le pack présente
+trois étapes : créer son mot de passe, préparer le rendez-vous et connaître son
+déroulement. Le bouton principal sans secret ouvre la demande de lien personnel ;
+le lien secondaire ouvre directement la préparation des comptes déjà configurés.
+Le mail personnel affiche « Créer mon mot de passe » avant les autres informations.
+
+La confirmation explicite du PACK prépare l'identifiant manquant dans la même
+transaction, sans mot de passe ni email d'invitation. Le POST marchand existant de
+demande de lien produit INITIALISATION pour un premier accès avec retour
+`/preparation`, sinon le parcours de récupération existant. Réponse générique,
+limites de fréquence, jetons personnels et retour local autorisé sont conservés.
+L'ouverture du mail ou du lien ne crée aucun accès et n'envoie rien.
+
+Déploiement requis : backend et application Commerçant ensemble, avec le bundle
+documentaire actualisé. Pas de nouvelle variable ni migration ; les modèles de
+liens et durées d'identité existants sont réutilisés. La file d'envoi email doit
+fonctionner pour remettre le lien demandé par le commerçant. Les intentions
+préparées avec l'ancien texte doivent être revues puis confirmées avec le nouveau
+contenu. Les emails déjà remis ne changent pas ; un ancien dossier sans compte
+peut utiliser l'invitation explicite existante ou une nouvelle confirmation du pack.
+
+La revue indépendante a contrôlé le périmètre de confirmation, l'absence de secret
+dans l'aperçu, la non-réaffectation de compte et les refus significatifs. La
+consommation concurrente et la révocation des tokens d'initialisation frères
+restent une limite préexistante du parcours d'identité, hors de cette correction.
+La concurrence PostgreSQL réelle n'est pas attestée par les tests SQLite.
+
+Preuves locales (backend `2cfcb10`, commerçant `74a797a`, avec modifications) :
+
+- Architecture, recensements et rendu email : **491 tests Python réussis**
+  (`tests/architecture`, recensements domaine/use cases, `test_preparation_email_copy.py`
+  et `test_service_preparation_email.py`, via le lanceur isolé).
+- Accès et communications : **89 tests ciblés réussis**, couvrant provisionnement
+  à la confirmation seulement, mot de passe existant conservé, compte verrouillé,
+  conflit de login, rollback et collision injectée, HTTP générique, demande et
+  première création effective du mot de passe. Les **5 tests PostgreSQL** adaptés
+  n'ont pas été exécutés faute d'URL de base jetable ; ils ne sont pas comptés
+  comme réussis. Les deux écarts de revue (compte verrouillé et collision SQL)
+  sont corrigés et la relecture indépendante le confirme.
+- Commerçant : **37 tests Vitest réussis** (accès préparation, routes mot de passe,
+  retour de récupération, préparation et disponibilité de session) ; **4 parcours
+  Playwright réussis** avec création, retour après connexion, récupération et
+  première connexion mobile/ordinateur ; `build:test` réussi.
+- Le serveur de test géré par Playwright se bloquait à la fermeture sous Windows :
+  les mêmes quatre scénarios ont été relancés dans le mode documenté
+  `LOCALEO_E2E_EXTERNAL_SERVER=1`, avec sortie zéro puis arrêt du serveur local.
+- Aperçus HTML synthétiques examinés à 390 et 1000 pixels, sans débordement ;
+  bouton visible avant les pièces et les prestations, sans secret dans le pack.
+- Documentation : 90 guides, 944 liens, zéro erreur/avertissement ; 122 sources
+  exportables vérifiées. Aucun email réel, commit, push ou déploiement effectué.
+
 ## Traçabilité des 31 critères
 
 La table définit les scénarios attendus. Le bilan d'exécution ci-dessous indique
@@ -95,7 +179,7 @@ C = [communications](communications-supports.md), G =
 | E68-CA-16 | Bilan/finalisation : preuves actuelles | T16 : tenu+Stripe incomplet, absent, preuve perdue après VALIDE, clôture sans coffret | A, G | Incomplet/absent/sans offre | Pas de clôture/abandon automatique |
 | E68-CA-17 | Mesure : dénominateurs explicites | T17 : agrégats sur cohorte connue avec données manquantes/reports, minutes backoffice ; API conservée sans tableau pilote dans OnBoard | A, G | Cohorte déterministe | Aucun zéro imputé, historique conservé |
 | E68-CA-18 | Référencement : dossier unique atomique | T18 : ERP/OnBoard/SQLAdmin, rollback et créations simultanées ; même dossier sans email implicite | A producteurs | Marchand nouveau/existant | Migration sans campagne massive |
-| E68-CA-19 | Agenda : 60 min et fuseau | T19 : Teams/physique incomplet refusé, date ambiguë/inexistante, rendu UTC/local | A, C | Changement d'heure | Anciennes dates naïves à reprendre |
+| E68-CA-19 | Agenda : 60 min et fuseau | T19 : Teams sans lien accepté et ajout ultérieur versionné ; URL fournie non HTTPS et adresse physique absente refusées, date ambiguë/inexistante, rendu UTC/local | A, C | Changement d'heure | Anciennes dates naïves à reprendre |
 | E68-CA-20 | Checklist : faits actuels et action utile | T20 : activation, confirmation du mail et suivi repérables ; détails repliés accessibles ; sept étapes métier préservées sans sept formulaires principaux ; pièce à apporter distincte de reçue ; progression historique != prêt actuel | A, G | Dossier sans date et pièce attendue au rendez-vous | Version des faits source |
 | E68-CA-21 | Actions humaines seules saisissables | T21 : auteur/date/résultat, preuve auto non modifiable, non applicable justifié | A API actions | Appel réalisé | Audit et contrôle des mutations |
 | E68-CA-22 | File OnBoard et autorisations | T22 : filtres, pagination, tri stable, Lecteur/Backoffice/Finance/admin et toutes communes | A, G | Plusieurs référents | Scopes E69, aucun périmètre commune |
