@@ -13,7 +13,7 @@ Implémentation et vérifications locales le 7 octobre 2026 ; consulter le bilan
   droits, transactions, API, données et compatibilité.
 - [Vérification et livraison](verification-livraison.md) : couverture des 34 critères,
   scénarios de test, migrations, démonstration et limites de validation.
-- EPIC 72 — Accès salariés (spécification publiée avec E72) : acteur nominatif
+- [EPIC 72 — Accès salariés](../epic-72-acces-salaries/README.md) : acteur nominatif
   distinct du PIN partagé, historique et protections de Localeo Pro.
 
 ## Décisions produit acquises

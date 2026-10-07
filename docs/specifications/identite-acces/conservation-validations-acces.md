@@ -2,9 +2,9 @@
 
 Version du **7 octobre 2026**, référence **E70-E72-CONSERVATION-20261007**.
 Ce document précise le rattachement des nouvelles données aux règles existantes
-pour [E70](../epic-70-validation-pin/README.md) et E72 (spécification publiée avec E72).
+pour [E70](../epic-70-validation-pin/README.md) et [E72](../epic-72-acces-salaries/README.md).
 Il complète leurs architectures et matrices de preuves ; il ne remplace pas le
-registre juridique et n'annonce ni purge exécutée ni batch déjà livré.
+registre juridique et ne constitue pas une preuve de purge en exploitation. Les traitements livrés et leurs preuves locales sont décrits aux sections 7 et 8.
 
 ## 1. Source vérifiée et portée
 
@@ -183,3 +183,26 @@ financières historiques conservent leurs propres politiques ; ce traitement ne
 purge pas arbitrairement les tables comptables existantes. L’activation et la
 surveillance du job, les copies externes et les restaurations en exploitation
 restent des contrôles préalables à la mise en service, sans exécution réelle ici.
+
+## 8. Réalisation E72 — 8 octobre 2026
+
+La migration 259 et `scripts/database/conserver_acces_salaries.py` complètent E70.
+La simulation est le mode par défaut. Une fin de relation qualifiée explicitement
+sur un compte révoqué ouvre la conservation de la preuve minimale d’habilitation
+pendant cinq ans ; la suspension de l’option ne détermine jamais cette date.
+Le registre de login est conservé jusqu’à la purge du compte. Les reçus techniques
+expirés gardent un marqueur non authentifiant : leur rejeu produit 410, sans recréer
+un accès ni restituer une identité purgée.
+
+Les audits `acces_salarie.*` et les validations attribuées au salarié rejoignent les
+catégories SQL/JSONL existantes, avec segments dédiés et plafond de douze mois pour
+les journaux ordinaires. Les preuves minimales de consommation Coffret réutilisent
+la conservation de cinq ans, indépendamment de l’historique salarié courant.
+Les verrous des commerces sont pris dans un ordre déterministe avant ceux des
+animations. La course de purge sur deux commerces d’une même animation est testée.
+
+26 tests ciblés de conservation, audit et fixtures passent. Les modalités de
+qualification, gels, configuration et commande sont détaillées dans le
+[guide E72](../epic-72-acces-salaries/guide-utilisation-exploitation.md).
+Aucun job de production ni purge réelle n’a été activé ; les contrôles des copies
+externes, sauvegardes et restaurations restent requis avant mise en service.

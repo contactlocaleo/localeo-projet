@@ -209,3 +209,10 @@ erreur), puis contrôle du lot Git `--staged --changed --all-markdown` (14 docum
 282 liens, aucune erreur) ; `sync_documentation.py --check-sources` (122 documents)
 et `git diff --cached --check` réussis. Commits applicatifs E70 : backend `776e852`,
 Pro `81c9b21`, Marketplace `fa616e6`, Animation `f3dc2e2`.
+
+
+Complément E72 du 8 octobre : les tests PostgreSQL d’identité salariée couvrent
+maintenant l’attribution et le refus de gestion PIN par un salarié, y compris un
+appel direct au service. Le reçu Coffret mémorise aussi une validation gagnée par
+un autre canal pour permettre sa relecture sans double consommation. Les preuves
+et limites sont dans le [bilan E72](../epic-72-acces-salaries/verification-livraison.md).

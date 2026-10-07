@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Backend - contrat implemente EPIC 41",
     "description": "OpenAPI complet du backend, dont les parcours Animation locale. Genere hors ligne depuis le code local pour les integrations et les mocks ; cet instantane ne prouve pas son deploiement.",
-    "version": "1.0.0+760a5c9"
+    "version": "1.0.0+776e852"
   },
   "paths": {
     "/public/identite-acces/interne/connexion": {
@@ -37493,7 +37493,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TransactionValidationResponse"
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/TransactionScanSalarie"
+                    },
+                    {
+                      "$ref": "#/components/schemas/TransactionValidationResponse"
+                    }
+                  ],
+                  "title": "Response Ouvrir Transaction Protected Exploitation Validation Ouvrir Transaction Post"
                 }
               }
             }
@@ -37617,7 +37625,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ValidationPrestationResponse"
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/ConfirmationSalarie"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ValidationPrestationResponse"
+                    }
+                  ],
+                  "title": "Response Valider Protected Exploitation Validation Valider Prestation Post"
                 }
               }
             }
@@ -37681,6 +37697,72 @@
               }
             },
             "description": "Internal Server Error"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/exploitation/validation/transactions/{transaction_id}/resultat": {
+      "get": {
+        "tags": [
+          "Exploitation"
+        ],
+        "summary": "Lire Resultat Transaction",
+        "operationId": "lire_resultat_transaction_protected_exploitation_validation_transactions__transaction_id__resultat_get",
+        "parameters": [
+          {
+            "name": "transaction_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Transaction Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:validation`.",
+              "title": "Authorization"
+            },
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:validation`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultatTransaction"
+                }
+              }
+            }
           },
           "422": {
             "description": "Validation Error",
@@ -69906,6 +69988,887 @@
           }
         ]
       }
+    },
+    "/protected/identite-acces/commercants/me/validations": {
+      "get": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Lister Validations Professionnelles",
+        "operationId": "lister_validations_professionnelles_protected_identite_acces_commercants_me_validations_get",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1,
+              "title": "Page"
+            }
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 20,
+              "title": "Page Size"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "COFFRET",
+                    "ANIMATION"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Type"
+            }
+          },
+          {
+            "name": "mode",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "QR_PRINCIPAL",
+                    "QR_SALARIE",
+                    "PIN"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Mode"
+            }
+          },
+          {
+            "name": "date_debut",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Date Debut"
+            }
+          },
+          {
+            "name": "date_fin",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Date Fin"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:validation`.",
+              "title": "Authorization"
+            },
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:validation`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageValidations"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/identite-acces/commercants/me/validations/{validation_id}": {
+      "get": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Detail Validation Professionnelle",
+        "operationId": "detail_validation_professionnelle_protected_identite_acces_commercants_me_validations__validation_id__get",
+        "parameters": [
+          {
+            "name": "validation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Validation Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:validation`.",
+              "title": "Authorization"
+            },
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:validation`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationHistorique"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/identite-acces/commercants/me/salaries": {
+      "get": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Lister Salaries",
+        "operationId": "lister_salaries_protected_identite_acces_commercants_me_salaries_get",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1,
+              "title": "Page"
+            }
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 20,
+              "title": "Page Size"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:session`.",
+              "title": "Authorization"
+            },
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:session`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageSalaries"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/identite-acces/commercants/me/salaries/invitations": {
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Inviter Salarie",
+        "operationId": "inviter_salarie_protected_identite_acces_commercants_me_salaries_invitations_post",
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Idempotency-Key"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:session`.",
+              "title": "Authorization"
+            },
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:session`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InvitationInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvitationResultat"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/identite-acces/commercants/me/salaries/invitations/{id}/renvoyer": {
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Renvoyer Invitation",
+        "operationId": "renvoyer_invitation_protected_identite_acces_commercants_me_salaries_invitations__id__renvoyer_post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Idempotency-Key"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:session`.",
+              "title": "Authorization"
+            },
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:session`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VersionInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvitationResultat"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/identite-acces/commercants/me/salaries/invitations/{id}/annuler": {
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Annuler Invitation",
+        "operationId": "annuler_invitation_protected_identite_acces_commercants_me_salaries_invitations__id__annuler_post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:session`.",
+              "title": "Authorization"
+            },
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:session`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VersionInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvitationEtat"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/identite-acces/commercants/me/salaries/{id}/revoquer": {
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Revoquer Salarie",
+        "operationId": "revoquer_salarie_protected_identite_acces_commercants_me_salaries__id__revoquer_post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:session`.",
+              "title": "Authorization"
+            },
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:session`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VersionInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SalarieRevoque"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/public/identite-acces/salaries/invitations/resoudre": {
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Resoudre Invitation",
+        "operationId": "resoudre_invitation_public_identite_acces_salaries_invitations_resoudre_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TokenInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LienResolution"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/identite-acces/salaries/invitations/accepter": {
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Accepter Invitation",
+        "operationId": "accepter_invitation_public_identite_acces_salaries_invitations_accepter_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccepterInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatutResultat"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/identite-acces/salaries/auth/mot-de-passe-oublie": {
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Oublier Mot De Passe",
+        "operationId": "oublier_mot_de_passe_public_identite_acces_salaries_auth_mot_de_passe_oublie_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OublierInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatutResultat"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/identite-acces/salaries/auth/reinitialiser-mot-de-passe": {
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Reinitialiser Mot De Passe",
+        "operationId": "reinitialiser_mot_de_passe_public_identite_acces_salaries_auth_reinitialiser_mot_de_passe_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccepterInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatutResultat"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/internal/identite-acces/commercants/{id}/option-salaries": {
+      "get": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Lire Option Salaries",
+        "operationId": "lire_option_salaries_internal_identite_acces_commercants__id__option_salaries_get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OptionDTO"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Modifier Option Salaries",
+        "operationId": "modifier_option_salaries_internal_identite_acces_commercants__id__option_salaries_put",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OptionInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OptionDTO"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
     }
   },
   "components": {
@@ -70142,6 +71105,29 @@
           "keys"
         ],
         "title": "AbonnementWebPushRequest"
+      },
+      "AccepterInput": {
+        "properties": {
+          "token": {
+            "type": "string",
+            "maxLength": 512,
+            "minLength": 16,
+            "title": "Token"
+          },
+          "nouveau_mot_de_passe": {
+            "type": "string",
+            "maxLength": 1024,
+            "minLength": 1,
+            "title": "Nouveau Mot De Passe"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "token",
+          "nouveau_mot_de_passe"
+        ],
+        "title": "AccepterInput"
       },
       "AccepterMandatChorusRequest": {
         "properties": {
@@ -70907,6 +71893,28 @@
           "adresse_facturation"
         ],
         "title": "AcheteurCommandeLotsRequest"
+      },
+      "ActeurSessionPayload": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "PRINCIPAL",
+              "SALARIE"
+            ],
+            "title": "Type"
+          },
+          "id": {
+            "type": "string",
+            "title": "Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "id"
+        ],
+        "title": "ActeurSessionPayload"
       },
       "ActionAccesCommercantCommande": {
         "properties": {
@@ -73542,6 +74550,43 @@
           "requestId"
         ],
         "title": "AuditItem"
+      },
+      "AuteurValidation": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "PRINCIPAL",
+              "SALARIE",
+              "PIN"
+            ],
+            "title": "Type"
+          },
+          "id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Id"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "type",
+          "id",
+          "libelle"
+        ],
+        "title": "AuteurValidation"
       },
       "AuthentificationCommercantRequest": {
         "properties": {
@@ -77473,6 +78518,20 @@
         ],
         "title": "CommercantPublicPayload"
       },
+      "CommerceNom": {
+        "properties": {
+          "nom": {
+            "type": "string",
+            "title": "Nom"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "nom"
+        ],
+        "title": "CommerceNom"
+      },
       "CommerceParticipant": {
         "properties": {
           "id": {
@@ -78080,6 +79139,26 @@
           "confirmed"
         ],
         "title": "ConfirmationInvitationOnboardRequest"
+      },
+      "ConfirmationSalarie": {
+        "properties": {
+          "validation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Validation Id"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "validation_id",
+          "statut"
+        ],
+        "title": "ConfirmationSalarie"
       },
       "ConfirmerPin": {
         "properties": {
@@ -86086,12 +87165,26 @@
             "description": "Statut courant du commercant."
           },
           "ville_id": {
-            "type": "string",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Ville Id",
             "description": "Identifiant de la ville de rattachement du commercant."
           },
           "type_commercant_id": {
-            "type": "string",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Type Commercant Id",
             "description": "Identifiant du type du commercant."
           }
@@ -86100,9 +87193,7 @@
         "required": [
           "id",
           "nom",
-          "statut",
-          "ville_id",
-          "type_commercant_id"
+          "statut"
         ],
         "title": "IdentiteCommercantSessionPayload"
       },
@@ -86760,6 +87851,39 @@
       },
       "InitialiserSessionCommercantPayload": {
         "properties": {
+          "session_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Session Id"
+          },
+          "acteur": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ActeurSessionPayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "capacites": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Capacites"
+          },
+          "option_salaries_active": {
+            "type": "boolean",
+            "title": "Option Salaries Active",
+            "default": false
+          },
           "session_token": {
             "type": "string",
             "title": "Session Token",
@@ -86927,6 +88051,88 @@
           "statut_session"
         ],
         "title": "InvalidationSessionCommercantPayload"
+      },
+      "InvitationEtat": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "etat": {
+            "type": "string",
+            "title": "Etat"
+          },
+          "expires_at": {
+            "type": "string",
+            "title": "Expires At"
+          },
+          "remise": {
+            "type": "string",
+            "title": "Remise"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "etat",
+          "expires_at",
+          "remise"
+        ],
+        "title": "InvitationEtat"
+      },
+      "InvitationInput": {
+        "properties": {
+          "email": {
+            "type": "string",
+            "maxLength": 254,
+            "minLength": 3,
+            "title": "Email"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "email"
+        ],
+        "title": "InvitationInput"
+      },
+      "InvitationResultat": {
+        "properties": {
+          "salarie_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Salarie Id"
+          },
+          "invitation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Invitation Id"
+          },
+          "etat": {
+            "type": "string",
+            "title": "Etat"
+          },
+          "expires_at": {
+            "type": "string",
+            "title": "Expires At"
+          },
+          "remise": {
+            "type": "string",
+            "title": "Remise"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "salarie_id",
+          "invitation_id",
+          "etat",
+          "expires_at",
+          "remise"
+        ],
+        "title": "InvitationResultat"
       },
       "KitAnimationPayload": {
         "properties": {
@@ -87266,6 +88472,29 @@
           "href"
         ],
         "title": "LienDocumentPaiement"
+      },
+      "LienResolution": {
+        "properties": {
+          "commerce": {
+            "$ref": "#/components/schemas/CommerceNom"
+          },
+          "email_masque": {
+            "type": "string",
+            "title": "Email Masque"
+          },
+          "expires_at": {
+            "type": "string",
+            "title": "Expires At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "commerce",
+          "email_masque",
+          "expires_at"
+        ],
+        "title": "LienResolution"
       },
       "LienSuivi": {
         "properties": {
@@ -90653,6 +91882,69 @@
         ],
         "title": "OperationAnimationPayload"
       },
+      "OptionDTO": {
+        "properties": {
+          "active": {
+            "type": "boolean",
+            "title": "Active"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated At"
+          },
+          "updated_by": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated By"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "active",
+          "version",
+          "updated_at",
+          "updated_by"
+        ],
+        "title": "OptionDTO"
+      },
+      "OptionInput": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "active": {
+            "type": "boolean",
+            "title": "Active"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "active"
+        ],
+        "title": "OptionInput"
+      },
       "OrdonnanceurBatchPayload": {
         "properties": {
           "enabled": {
@@ -90844,6 +92136,22 @@
           "termsVersion"
         ],
         "title": "OtpValidationRequest"
+      },
+      "OublierInput": {
+        "properties": {
+          "login": {
+            "type": "string",
+            "maxLength": 254,
+            "minLength": 3,
+            "title": "Login"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "login"
+        ],
+        "title": "OublierInput"
       },
       "OuvrirTransactionRequest": {
         "properties": {
@@ -91615,6 +92923,43 @@
         ],
         "title": "PageResponse"
       },
+      "PageSalaries": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/SalarieDTO"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "page": {
+            "type": "integer",
+            "title": "Page"
+          },
+          "page_size": {
+            "type": "integer",
+            "title": "Page Size"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          },
+          "option_active": {
+            "type": "boolean",
+            "title": "Option Active"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "page",
+          "page_size",
+          "total",
+          "option_active"
+        ],
+        "title": "PageSalaries"
+      },
       "PageSuiviCommerces": {
         "properties": {
           "items": {
@@ -91959,6 +93304,37 @@
           "nextCursor"
         ],
         "title": "PageTemplatesGenerationPayload"
+      },
+      "PageValidations": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationHistorique"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          },
+          "page": {
+            "type": "integer",
+            "title": "Page"
+          },
+          "page_size": {
+            "type": "integer",
+            "title": "Page Size"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "total",
+          "page",
+          "page_size"
+        ],
+        "title": "PageValidations"
       },
       "PaginationAnimationPayload": {
         "properties": {
@@ -94685,6 +96061,31 @@
           "valeurPrestationTtc"
         ],
         "title": "PrestationOnboardRequest"
+      },
+      "PrestationScanSalarie": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "etat": {
+            "type": "string",
+            "title": "Etat"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "libelle",
+          "etat"
+        ],
+        "title": "PrestationScanSalarie"
       },
       "PreuveARegulariser": {
         "properties": {
@@ -98441,6 +99842,64 @@
         ],
         "title": "ResultatPurgeQuotidiennePayload"
       },
+      "ResultatTransaction": {
+        "properties": {
+          "etat": {
+            "type": "string",
+            "enum": [
+              "EN_ATTENTE",
+              "VALIDEE",
+              "EXPIREE",
+              "REFUSEE"
+            ],
+            "title": "Etat"
+          },
+          "validation_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Validation Id"
+          },
+          "date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date"
+          },
+          "service": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Service"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "etat",
+          "validation_id",
+          "date",
+          "service"
+        ],
+        "title": "ResultatTransaction"
+      },
       "ResultatWorkerGenerationPayload": {
         "properties": {
           "id": {
@@ -99000,6 +100459,77 @@
         ],
         "title": "RubriquesChecklistChasse"
       },
+      "SalarieDTO": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "email": {
+            "type": "string",
+            "title": "Email"
+          },
+          "etat": {
+            "type": "string",
+            "title": "Etat"
+          },
+          "acces_effectif": {
+            "type": "boolean",
+            "title": "Acces Effectif"
+          },
+          "invitation": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/InvitationEtat"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "email",
+          "etat",
+          "acces_effectif",
+          "invitation",
+          "version"
+        ],
+        "title": "SalarieDTO"
+      },
+      "SalarieRevoque": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "etat": {
+            "type": "string",
+            "title": "Etat"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "etat",
+          "version"
+        ],
+        "title": "SalarieRevoque"
+      },
       "SavePreparationInput": {
         "allOf": [
           {
@@ -99315,12 +100845,26 @@
             "description": "Statut courant du commercant."
           },
           "ville_id": {
-            "type": "string",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Ville Id",
             "description": "Identifiant de la ville de rattachement du commercant."
           },
           "type_commercant_id": {
-            "type": "string",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Type Commercant Id",
             "description": "Identifiant du type du commercant."
           }
@@ -99329,9 +100873,7 @@
         "required": [
           "commercant_id",
           "nom",
-          "statut",
-          "ville_id",
-          "type_commercant_id"
+          "statut"
         ],
         "title": "SessionCommercantIdentityPayload"
       },
@@ -99599,6 +101141,20 @@
           "statut"
         ],
         "title": "StatutCommande"
+      },
+      "StatutResultat": {
+        "properties": {
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "statut"
+        ],
+        "title": "StatutResultat"
       },
       "StripeConnectOnboardingCommercantPayload": {
         "properties": {
@@ -101041,6 +102597,55 @@
         ],
         "title": "TirageAnimationPayload"
       },
+      "TokenInput": {
+        "properties": {
+          "token": {
+            "type": "string",
+            "maxLength": 512,
+            "minLength": 16,
+            "title": "Token"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "token"
+        ],
+        "title": "TokenInput"
+      },
+      "TransactionScanSalarie": {
+        "properties": {
+          "transaction_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Transaction Id"
+          },
+          "date_expiration": {
+            "type": "string",
+            "title": "Date Expiration"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          },
+          "prestations": {
+            "items": {
+              "$ref": "#/components/schemas/PrestationScanSalarie"
+            },
+            "type": "array",
+            "title": "Prestations"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "transaction_id",
+          "date_expiration",
+          "statut",
+          "prestations"
+        ],
+        "title": "TransactionScanSalarie"
+      },
       "TransactionValidationResponse": {
         "properties": {
           "transaction_id": {
@@ -101306,6 +102911,60 @@
         ],
         "title": "ValidationError"
       },
+      "ValidationHistorique": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "COFFRET",
+              "ANIMATION"
+            ],
+            "title": "Type"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Date"
+          },
+          "resultat": {
+            "type": "string",
+            "title": "Resultat"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "QR_PRINCIPAL",
+              "QR_SALARIE",
+              "PIN"
+            ],
+            "title": "Mode"
+          },
+          "auteur": {
+            "$ref": "#/components/schemas/AuteurValidation"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "libelle",
+          "date",
+          "resultat",
+          "mode",
+          "auteur"
+        ],
+        "title": "ValidationHistorique"
+      },
       "ValidationPrestationResponse": {
         "properties": {
           "validation_id": {
@@ -101383,6 +103042,28 @@
       },
       "ValidationSessionCommercantPayload": {
         "properties": {
+          "acteur": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ActeurSessionPayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "capacites": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Capacites"
+          },
+          "option_salaries_active": {
+            "type": "boolean",
+            "title": "Option Salaries Active",
+            "default": false
+          },
           "session_id": {
             "type": "string",
             "title": "Session Id",
@@ -101824,6 +103505,21 @@
           "expected_version"
         ],
         "title": "VersionCommande"
+      },
+      "VersionInput": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version"
+        ],
+        "title": "VersionInput"
       },
       "VersionResponse": {
         "properties": {

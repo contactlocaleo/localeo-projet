@@ -28,7 +28,7 @@ Le QR commerçant historique reste abandonné ; aucune réactivation de ses cont
 **Extension demandée le 5 octobre 2026 :** la validation terrain d'animation entre
 dans le périmètre. Cette décision remplace explicitement l'exclusion Animation du
 1er octobre ; elle n'autorise pas l'administration des animations. Les accès
-salariés nominatifs sont cadrés séparément dans l'EPIC 72 (spécification publiée avec E72).
+salariés nominatifs sont cadrés séparément dans l'[EPIC 72](../en-cours/epic-72-acces-salaries-validation-localeo-pro-backlog.md).
 
 ## Problème et résultat attendu
 
@@ -323,7 +323,7 @@ Ces preuves sont attendues, **pas exécutées à ce stade**.
 | Démonstration | Concernée : PIN fictifs, coffret et animation, droits participant et commerce autorisé/refusé, dates actives/expirées, révocation en cours de demande, blocage, concurrence QR/PIN, doublon et timeout ; aucun secret réel ou envoi externe |
 | Documentation / exploitation | Concernées : guide ERP publié via le circuit documentaire, notice commerçant, oubli/compromission, suivi des anomalies et procédure de contestation |
 | Onboarding | Dépendance [EPIC 68](../en-cours/epic-68-parcours-commercant-preparation-onboarding-backlog.md) : préparation facultative du PIN et explication des risques, exercice sans consommation réelle |
-| Accès salariés | Coordination EPIC 72 (spécification publiée avec E72) : même règle de validation métier, identité nominative seulement via l'accès salarié ; ce rôle ne gère pas le PIN partagé |
+| Accès salariés | Coordination [EPIC 72](../en-cours/epic-72-acces-salaries-validation-localeo-pro-backlog.md) : même règle de validation métier, identité nominative seulement via l'accès salarié ; ce rôle ne gère pas le PIN partagé |
 | Déploiement | À spécifier : ordre backend/interfaces, activation maîtrisée, retour au parcours normal et compatibilité des versions ; aucun déploiement réalisé |
 
 ## Arbitrages et paramètres restant à spécifier

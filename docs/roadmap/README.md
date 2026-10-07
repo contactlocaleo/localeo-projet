@@ -1,16 +1,16 @@
 # Roadmap par etat
 
-Implémentation locale E70 le 7 octobre 2026 : [spécification et preuves](../specifications/epic-70-validation-pin/README.md), 34 critères, canal fermé par défaut ; aucun déploiement.
+Implémentations locales E70 et E72 vérifiées les 7–8 octobre 2026 : [E70 — PIN](../specifications/epic-70-validation-pin/README.md) et [E72 — salariés](../specifications/epic-72-acces-salaries/README.md). E70 est publiée avant le lot E72 ; les deux epics restent en cours jusqu’à leur recette de mise en service. Aucun déploiement effectué.
 
-Classement consolidé le 18 septembre 2026, complété le 1er octobre par l’EPIC 70. Les backlogs des applications sont
+Classement consolidé le 18 septembre 2026, complété le 5 octobre par l’EPIC 72. Les backlogs des applications sont
 réunis dans les dossiers d'état, avec un seul fichier par EPIC. Le suivi inclut
-les 70 identifiants du tronc commun et trois identifiants applicatifs distincts.
+les 71 identifiants du tronc commun et trois identifiants applicatifs distincts.
 
 | Etat | Epics | Dossier |
 | --- | ---: | --- |
 | Terminees | 61 | [terminees/](terminees/README.md) |
 | A faire | 6 | [a-faire/](a-faire/README.md) |
-| En cours | 3 | [en-cours/](en-cours/README.md) |
+| En cours | 4 | [en-cours/](en-cours/README.md) |
 | Abandonnees | 2 | [abandonnees/](abandonnees/README.md) |
 | Fusionnee | 1 | Epic 61 reprise dans l'[Epic 60](terminees/epic-60-vision-360-commercialisation-backlog.md) |
 
@@ -61,6 +61,12 @@ Le PIN dédié est retenu avec un compromis de droits limités : contexte transa
 gestion du PIN depuis l'accès commerçant et parcours client. Ses 34 critères couvrent
 validité, révocation, concurrence, incidents et absence d'accès professionnel.
 
+Le 5 octobre, l'[EPIC 72 — Accès salariés Localeo Pro](en-cours/epic-72-acces-salaries-validation-localeo-pro-backlog.md)
+ajoute l'invitation email, le compte individuel limité au scanner Coffret/Animation,
+la révocation et l'audit : 22 critères, historique complet du commerce en lecture seule, option ERP désactivée par défaut et sans plafond. L'EPIC 70 est
+étendue aux passages Animation et aux pannes du mobile commerçant : 34 critères,
+PIN automatique valable 7 jours par défaut, configurable jusqu’à 30 jours, notification Localeo Pro à chaque succès. E70 est en cours depuis le 7 octobre ; E72 est également en cours.
+
 Les Epics 3 et 4 n'ont pas de fichier dedie :
 leurs descriptions dans la roadmap produit sont referencees depuis le dossier
 des epics terminees. Aucun fichier autonome de l'Epic 61 n'est recree.
@@ -102,6 +108,7 @@ précise la provenance et les divergences historiques conservées.
 | 35 | Terminee (historique) | Clôture conservée ; le cadrage non livré des nouveaux rôles est transféré à l'EPIC 69 sur demande explicite du 1er octobre. |
 | 69 | Terminee | [Profils et accès ERP/satellites](terminees/epic-69-profils-acces-erp-satellites-backlog.md) : clôture le 2 octobre après validation CA-18, 27 critères conservés ; recette cible et configuration dans le bilan. |
 | 70 | En cours | [Validation sur téléphone client](en-cours/epic-70-validation-prestation-telephone-client-backlog.md) : PIN dédié retenu, 34 critères ; contexte transactionnel, gestion commerçant du PIN et parcours client sans matériel ; risque résiduel borné par les droits, validité et révocation. |
+| 72 | En cours | [Accès salariés Localeo Pro](en-cours/epic-72-acces-salaries-validation-localeo-pro-backlog.md) : implémentation locale vérifiée, 22 critères ; option ERP, invitations, scanner et historique limités, conservation. |
 | Autres identifiants du tronc commun | Terminees | Statut produit consolide conserve ; les anciennes mentions de stories a faire ne rouvrent pas ces epics. |
 
 Les changements des Epics 5, 12 et 47 corrigent des incoherences entre les

@@ -275,3 +275,14 @@ confirmation ; aucune prestation réelle n’est consommée. Une validation comp
 utilise uniquement un jeu de démonstration dédié. Expliquer la reprise après
 réponse perdue et le maintien du QR, ainsi que les limites d’un secret partagé.
 L’existence du guide n’active pas le canal PIN sur un environnement.
+
+
+## Complément E72 — accès individuels salariés
+
+Présenter le [guide salariés](../epic-72-acces-salaries/guide-utilisation-exploitation.md)
+si le commerce emploie du personnel. L’activation relève de Localeo dans l’ERP et
+reste facultative pour l’onboarding. Expliquer l’invitation email, le mot de passe
+individuel, le scanner et l’historique restreint, puis la révocation lors d’un départ.
+Aucun compte principal partagé, mot de passe ou lien d’invitation dans les supports.
+La démonstration utilise uniquement des comptes fictifs et ne valide pas une
+prestation réelle. Le mobile personnel suffit, sans installation obligatoire.

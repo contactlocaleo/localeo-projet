@@ -1,26 +1,26 @@
 # Suivi backlog
 
-Implémentation locale E70 le 7 octobre 2026 : [spécification et preuves](../specifications/epic-70-validation-pin/README.md), 34 critères, canal fermé par défaut ; aucun déploiement.
+Implémentations locales E70 et E72 vérifiées les 7–8 octobre 2026 : [E70 — PIN](../specifications/epic-70-validation-pin/README.md) et [E72 — salariés](../specifications/epic-72-acces-salaries/README.md). E70 est publiée avant le lot E72 ; les deux epics restent en cours jusqu’à leur recette de mise en service. Aucun déploiement effectué.
 
-Mise à jour du classement : 2026-10-03 (EPIC-65 et EPIC-69 terminées ; EPIC-55 et EPIC-68 en cours)
+Mise à jour du classement : 2026-10-08 (EPIC-65 et EPIC-69 terminées ; EPIC-55, EPIC-68, EPIC-70 et EPIC-72 en cours)
 
 ## Synthese
 
 Évolution transverse du 29 septembre 2026 : [PWA-20260929 — installation et mise à jour](../specifications/installation-mise-a-jour-pwa.md), appliquée aux sept PWA existantes. Les états et clôtures historiques des EPIC restent inchangés ; preuves locales et recette appareil sont distinguées dans la spécification.
 
-- Identifiants EPIC suivis : 73 ; 70 du tronc commun et 3 identifiants applicatifs distincts.
-- EPICs a faire : 6 ; EPICs en cours : 3 (EPIC-55, EPIC-68 et EPIC-70).
+- Identifiants EPIC suivis : 74 ; 71 du tronc commun et 3 identifiants applicatifs distincts.
+- EPICs a faire : 6 ; EPICs en cours : 4 (EPIC-55, EPIC-68, EPIC-70 et EPIC-72).
 - EPICs fusionnees : 1 (EPIC-61 vers EPIC-60).
 - EPICs terminees : 61 (59 du tronc commun et 2 applicatives) ; EPICs abandonnees : 2.
 - US / PRD detaillees dans le tableau historique : 415, jusqu'a `EPIC-45`.
 - Source prioritaire : fichier backlog dedie quand disponible, sinon `product-roadmap.md`.
-- Référence de pilotage : EPIC-55, EPIC-68 et EPIC-70 sont en cours. EPIC-65 est terminée après revue des dix critères ; EPIC-69 après validation CA-18 ; EPIC-66 après confirmation utilisateur. EPIC-54, EPIC-58, EPIC-62,
+- Référence de pilotage : EPIC-55, EPIC-68, EPIC-70 et EPIC-72 sont en cours. EPIC-65 est terminée après revue des dix critères ; EPIC-69 après validation CA-18 ; EPIC-66 après confirmation utilisateur. EPIC-54, EPIC-58, EPIC-62,
   EPIC-64, EPIC-67 et EPIC-MARKETPLACE-54 sont à faire. EPIC-47 est terminée,
   clôture produit confirmée. EPIC-05 et EPIC-12 sont abandonnées ;
   EPIC-61 est fusionnée dans EPIC-60. Les autres EPIC du tronc commun sont terminées.
 - Classement et motifs : [index de la roadmap](README.md).
 - Le tableau detaille des US ci-dessous reste un historique consolide. Pour les
-  epics 46 a 70, les backlogs dedies portent le detail et le tableau `Sources
+  epics 46 a 72, les backlogs dedies portent le detail et le tableau `Sources
   consolidees` porte l'etat global courant.
 
 ### Repartition des EPICs par etat retenu
@@ -28,7 +28,7 @@ Mise à jour du classement : 2026-10-03 (EPIC-65 et EPIC-69 terminées ; EPIC-55
 | Etat | Nombre |
 | --- | ---: |
 | A faire | 6 |
-| En cours | 3 |
+| En cours | 4 |
 | Abandonne | 2 |
 | Fusionnee | 1 |
 | Termine | 61 |
@@ -47,6 +47,11 @@ applicatifs ne contiennent plus de copies de backlogs d'EPIC. Les états des
 ci-dessous conservent ce périmètre initial.
 
 ### Epics restant a livrer
+
+Le 5 octobre : [EPIC 72 — Accès salariés Localeo Pro](en-cours/epic-72-acces-salaries-validation-localeo-pro-backlog.md)
+créée le 5 octobre puis passée en cours pour implémentation, 22 critères ; invitation email, accès individuel au scanner
+Coffret/Animation, révocation et audit, historique complet du commerce en lecture seule, option ERP désactivée par défaut et sans plafond. E70 est étendue
+aux passages Animation et aux pannes du mobile commerçant : 34 critères ; PIN automatique valable 7 jours par défaut, configurable jusqu’à 30 jours, notification Localeo Pro à chaque succès.
 
 Nouvelle [EPIC 69 — Profils et accès ERP/satellites](terminees/epic-69-profils-acces-erp-satellites-backlog.md),
 créée sur demande explicite, reprenant le cadrage complémentaire de l'EPIC 35 :
@@ -605,3 +610,4 @@ anciennes US restent historiques.
 | EPIC-68 | En cours | [backlog](en-cours/epic-68-parcours-commercant-preparation-onboarding-backlog.md) — V1.2 : mise en place du seul processus d'onboarding, du référencement à la finalisation ; envois confirmés, signature jour J et dépôt interne, socles réutilisés |
 | EPIC-69 | Termine | [backlog](terminees/epic-69-profils-acces-erp-satellites-backlog.md) ; clôture du 2 octobre 2026 après validation CA-18 |
 | EPIC-70 | En cours | [backlog](en-cours/epic-70-validation-prestation-telephone-client-backlog.md) |
+| EPIC-72 | En cours | [backlog](en-cours/epic-72-acces-salaries-validation-localeo-pro-backlog.md) |
