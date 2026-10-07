@@ -1,15 +1,17 @@
 # Roadmap produit
 
+Implémentation locale E70 le 7 octobre 2026 : [spécification et preuves](../specifications/epic-70-validation-pin/README.md), 34 critères, canal fermé par défaut ; aucun déploiement.
+
 ## État global consolidé au 2 octobre 2026
 
-Le tronc commun comprend 70 identifiants : 59 epics terminees, 6 a faire,
-2 en cours, 2 abandonnees et 1 fusionnee. L'Epic 61 est absorbee par l'Epic 60.
+Le tronc commun comprend 70 identifiants : 59 epics terminees, 5 a faire,
+3 en cours, 2 abandonnees et 1 fusionnee. L'Epic 61 est absorbee par l'Epic 60.
 Les documents sont ranges par etat dans l'[index de la roadmap](README.md).
 
 | Etat | Epics |
 | --- | --- |
-| A faire | `EPIC-54`, `EPIC-58`, `EPIC-62`, `EPIC-64`, `EPIC-67`, `EPIC-70` |
-| En cours | `EPIC-55`, `EPIC-68` |
+| A faire | `EPIC-54`, `EPIC-58`, `EPIC-62`, `EPIC-64`, `EPIC-67` |
+| En cours | `EPIC-55`, `EPIC-68`, `EPIC-70` |
 | Termine | 59 epics : toutes les autres epics de `EPIC-01` a `EPIC-60`, et `EPIC-63`/`EPIC-65`/`EPIC-66`/`EPIC-69`, hors `EPIC-05` et `EPIC-12` |
 | Abandonne | `EPIC-05` : QR commercant remplace par l'Epic 10 ; `EPIC-12` : flux manuel decommissionne par l'Epic 39 |
 | Fusionnee | `EPIC-61` dans `EPIC-60` ; non comptee comme terminee |
@@ -23,7 +25,7 @@ un seul fichier par sujet. Trois identifiants applicatifs complètent ce tronc :
 | [EPIC-MARKETPLACE-54](a-faire/epic-marketplace-54-harmonisation-identite-visuelle-marketplace-backlog.md) | Identité visuelle ; distinct du calendrier de l'Avent 54 | À faire (classement courant ; implémentation locale documentée, revue et recette attendues) |
 | [EPIC-PRES-CONTENU-001](terminees/epic-animation-edition-prestations.md) | Édition directe des prestations ; le futur sas reste dans l'EPIC 62 | Terminée (parcours existant) |
 
-Le total consolidé est de **73 identifiants : 61 terminés, 7 à faire, 2 en cours,
+Le total consolidé est de **73 identifiants : 61 terminés, 6 à faire, 3 en cours,
 2 abandonnés et 1 fusionné**. L'ancien numéro local Marketplace 53 (pagination)
 est rattaché à l'EPIC 57, sans ajouter d'identifiant ni le confondre avec la tombola.
 
@@ -36,8 +38,8 @@ la confirmation produit de l'utilisateur le 15 septembre 2026.
 
 Derniere evolution suivie :
 
-- [EPIC 70 — Validation sur le téléphone du client](a-faire/epic-70-validation-prestation-telephone-client-backlog.md) :
-  cadrage du 1er octobre, 28 critères. PIN dédié retenu : contexte transactionnel,
+- [EPIC 70 — Validation sur le téléphone du client](en-cours/epic-70-validation-prestation-telephone-client-backlog.md) :
+  cadrage du 1er octobre, 34 critères. PIN dédié retenu : contexte transactionnel,
   gestion de validité/remplacement/révocation depuis l'accès commerçant et parcours
   sur le téléphone client sans matériel. Compromis de droits limités accepté,
   sans prétendre empêcher la capture du PIN ; paramètres à spécifier.

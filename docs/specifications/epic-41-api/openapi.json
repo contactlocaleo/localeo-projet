@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Backend - contrat implemente EPIC 41",
     "description": "OpenAPI complet du backend, dont les parcours Animation locale. Genere hors ligne depuis le code local pour les integrations et les mocks ; cet instantane ne prouve pas son deploiement.",
-    "version": "1.0.0+86199b1"
+    "version": "1.0.0+760a5c9"
   },
   "paths": {
     "/public/identite-acces/interne/connexion": {
@@ -3743,7 +3743,7 @@
                 }
               }
             },
-            "description": "Unprocessable Content"
+            "description": "Unprocessable Entity"
           },
           "503": {
             "content": {
@@ -3831,7 +3831,7 @@
                 }
               }
             },
-            "description": "Unprocessable Content"
+            "description": "Unprocessable Entity"
           },
           "503": {
             "content": {
@@ -4116,7 +4116,7 @@
                 }
               }
             },
-            "description": "Unprocessable Content"
+            "description": "Unprocessable Entity"
           },
           "503": {
             "content": {
@@ -4178,7 +4178,7 @@
             }
           },
           "422": {
-            "description": "Unprocessable Content",
+            "description": "Unprocessable Entity",
             "content": {
               "application/json": {
                 "schema": {
@@ -4247,7 +4247,7 @@
             }
           },
           "422": {
-            "description": "Unprocessable Content",
+            "description": "Unprocessable Entity",
             "content": {
               "application/json": {
                 "schema": {
@@ -4365,7 +4365,7 @@
                 }
               }
             },
-            "description": "Unprocessable Content"
+            "description": "Unprocessable Entity"
           },
           "503": {
             "content": {
@@ -4453,7 +4453,7 @@
                 }
               }
             },
-            "description": "Unprocessable Content"
+            "description": "Unprocessable Entity"
           },
           "503": {
             "content": {
@@ -4529,7 +4529,7 @@
                 }
               }
             },
-            "description": "Unprocessable Content"
+            "description": "Unprocessable Entity"
           },
           "503": {
             "content": {
@@ -4678,7 +4678,7 @@
                 }
               }
             },
-            "description": "Unprocessable Content"
+            "description": "Unprocessable Entity"
           },
           "503": {
             "content": {
@@ -4806,7 +4806,7 @@
                 }
               }
             },
-            "description": "Unprocessable Content"
+            "description": "Unprocessable Entity"
           },
           "503": {
             "content": {
@@ -5010,7 +5010,7 @@
                 }
               }
             },
-            "description": "Unprocessable Content"
+            "description": "Unprocessable Entity"
           },
           "503": {
             "content": {
@@ -5098,7 +5098,7 @@
                 }
               }
             },
-            "description": "Unprocessable Content"
+            "description": "Unprocessable Entity"
           },
           "503": {
             "content": {
@@ -5273,7 +5273,7 @@
                 }
               }
             },
-            "description": "Unprocessable Content"
+            "description": "Unprocessable Entity"
           },
           "503": {
             "content": {
@@ -5448,7 +5448,7 @@
                 }
               }
             },
-            "description": "Unprocessable Content"
+            "description": "Unprocessable Entity"
           },
           "503": {
             "content": {
@@ -5623,7 +5623,7 @@
                 }
               }
             },
-            "description": "Unprocessable Content"
+            "description": "Unprocessable Entity"
           },
           "503": {
             "content": {
@@ -5732,7 +5732,7 @@
                 }
               }
             },
-            "description": "Unprocessable Content"
+            "description": "Unprocessable Entity"
           },
           "503": {
             "content": {
@@ -5841,7 +5841,7 @@
                 }
               }
             },
-            "description": "Unprocessable Content"
+            "description": "Unprocessable Entity"
           },
           "503": {
             "content": {
@@ -5950,7 +5950,7 @@
                 }
               }
             },
-            "description": "Unprocessable Content"
+            "description": "Unprocessable Entity"
           },
           "503": {
             "content": {
@@ -6059,7 +6059,7 @@
                 }
               }
             },
-            "description": "Unprocessable Content"
+            "description": "Unprocessable Entity"
           },
           "503": {
             "content": {
@@ -15274,7 +15274,7 @@
             }
           },
           "422": {
-            "description": "Unprocessable Content",
+            "description": "Unprocessable Entity",
             "content": {
               "application/json": {
                 "schema": {
@@ -15355,7 +15355,7 @@
             }
           },
           "422": {
-            "description": "Unprocessable Content",
+            "description": "Unprocessable Entity",
             "content": {
               "application/json": {
                 "schema": {
@@ -15663,7 +15663,7 @@
                 }
               }
             },
-            "description": "Unprocessable Content"
+            "description": "Unprocessable Entity"
           },
           "500": {
             "content": {
@@ -16864,7 +16864,7 @@
             }
           },
           "413": {
-            "description": "Content Too Large",
+            "description": "Request Entity Too Large",
             "content": {
               "application/json": {
                 "schema": {
@@ -17153,7 +17153,7 @@
                 }
               }
             },
-            "description": "Content Too Large"
+            "description": "Request Entity Too Large"
           },
           "415": {
             "content": {
@@ -24921,6 +24921,56 @@
             }
           },
           {
+            "name": "rendezVousDebut",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Rendezvousdebut"
+            }
+          },
+          {
+            "name": "rendezVousFin",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Rendezvousfin"
+            }
+          },
+          {
+            "name": "preparationFiltre",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Preparationfiltre"
+            }
+          },
+          {
             "name": "page",
             "in": "query",
             "required": false,
@@ -26014,6 +26064,1924 @@
             "AdminSessionCookie": []
           }
         ]
+      }
+    },
+    "/internal/onboard/api/dossiers/{dossier_id}/preparation": {
+      "get": {
+        "tags": [
+          "Préparation onboarding"
+        ],
+        "summary": "Consulter Preparation",
+        "operationId": "consulter_preparation_internal_onboard_api_dossiers__dossier_id__preparation_get",
+        "parameters": [
+          {
+            "name": "dossier_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Dossier Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/onboard/api/dossiers/{dossier_id}/preparation/rendez-vous": {
+      "put": {
+        "tags": [
+          "Préparation onboarding"
+        ],
+        "summary": "Planifier Rendez Vous",
+        "operationId": "planifier_rendez_vous_internal_onboard_api_dossiers__dossier_id__preparation_rendez_vous_put",
+        "parameters": [
+          {
+            "name": "dossier_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Dossier Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommandePreparationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/onboard/api/dossiers/{dossier_id}/preparation/rendez-vous/annulation": {
+      "post": {
+        "tags": [
+          "Préparation onboarding"
+        ],
+        "summary": "Annuler Rendez Vous",
+        "operationId": "annuler_rendez_vous_internal_onboard_api_dossiers__dossier_id__preparation_rendez_vous_annulation_post",
+        "parameters": [
+          {
+            "name": "dossier_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Dossier Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommandePreparationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/onboard/api/dossiers/{dossier_id}/preparation/actions/{action_id}": {
+      "patch": {
+        "tags": [
+          "Préparation onboarding"
+        ],
+        "summary": "Modifier Action",
+        "operationId": "modifier_action_internal_onboard_api_dossiers__dossier_id__preparation_actions__action_id__patch",
+        "parameters": [
+          {
+            "name": "dossier_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Dossier Id"
+            }
+          },
+          {
+            "name": "action_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Action Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommandePreparationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/onboard/api/dossiers/{dossier_id}/preparation/revues": {
+      "post": {
+        "tags": [
+          "Préparation onboarding"
+        ],
+        "summary": "Examiner Preparation",
+        "operationId": "examiner_preparation_internal_onboard_api_dossiers__dossier_id__preparation_revues_post",
+        "parameters": [
+          {
+            "name": "dossier_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Dossier Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommandePreparationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/onboard/api/dossiers/{dossier_id}/preparation/questions/{question_id}/reponses": {
+      "post": {
+        "tags": [
+          "Préparation onboarding"
+        ],
+        "summary": "Repondre Question",
+        "operationId": "repondre_question_internal_onboard_api_dossiers__dossier_id__preparation_questions__question_id__reponses_post",
+        "parameters": [
+          {
+            "name": "dossier_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Dossier Id"
+            }
+          },
+          {
+            "name": "question_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Question Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommandePreparationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/onboard/api/dossiers/{dossier_id}/preparation/questions/{question_id}/qualification": {
+      "post": {
+        "tags": [
+          "Préparation onboarding"
+        ],
+        "summary": "Qualifier Question",
+        "operationId": "qualifier_question_internal_onboard_api_dossiers__dossier_id__preparation_questions__question_id__qualification_post",
+        "parameters": [
+          {
+            "name": "dossier_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Dossier Id"
+            }
+          },
+          {
+            "name": "question_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Question Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommandePreparationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/onboard/api/dossiers/{dossier_id}/preparation/decision-rendez-vous": {
+      "post": {
+        "tags": [
+          "Préparation onboarding"
+        ],
+        "summary": "Decider Rendez Vous",
+        "operationId": "decider_rendez_vous_internal_onboard_api_dossiers__dossier_id__preparation_decision_rendez_vous_post",
+        "parameters": [
+          {
+            "name": "dossier_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Dossier Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommandePreparationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/onboard/api/dossiers/{dossier_id}/preparation/bilan": {
+      "post": {
+        "tags": [
+          "Préparation onboarding"
+        ],
+        "summary": "Enregistrer Bilan",
+        "operationId": "enregistrer_bilan_internal_onboard_api_dossiers__dossier_id__preparation_bilan_post",
+        "parameters": [
+          {
+            "name": "dossier_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Dossier Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommandePreparationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/onboard/api/dossiers/{dossier_id}/preparation/reprise": {
+      "post": {
+        "tags": [
+          "Préparation onboarding"
+        ],
+        "summary": "Reprendre Preparation",
+        "operationId": "reprendre_preparation_internal_onboard_api_dossiers__dossier_id__preparation_reprise_post",
+        "parameters": [
+          {
+            "name": "dossier_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Dossier Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommandePreparationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/onboard/api/dossiers/{dossier_id}/preparation/communications": {
+      "get": {
+        "tags": [
+          "Préparation onboarding"
+        ],
+        "summary": "Lister Communications",
+        "operationId": "lister_communications_internal_onboard_api_dossiers__dossier_id__preparation_communications_get",
+        "parameters": [
+          {
+            "name": "dossier_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Dossier Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/onboard/api/dossiers/{dossier_id}/preparation/communications/apercu": {
+      "post": {
+        "tags": [
+          "Préparation onboarding"
+        ],
+        "summary": "Preparer Apercu",
+        "operationId": "preparer_apercu_internal_onboard_api_dossiers__dossier_id__preparation_communications_apercu_post",
+        "parameters": [
+          {
+            "name": "dossier_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Dossier Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApercuCommunicationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/onboard/api/dossiers/{dossier_id}/preparation/communications/{intention_id}/confirmation": {
+      "post": {
+        "tags": [
+          "Préparation onboarding"
+        ],
+        "summary": "Confirmer Communication",
+        "operationId": "confirmer_communication_internal_onboard_api_dossiers__dossier_id__preparation_communications__intention_id__confirmation_post",
+        "parameters": [
+          {
+            "name": "dossier_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Dossier Id"
+            }
+          },
+          {
+            "name": "intention_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Intention Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfirmationCommunicationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/onboard/api/dossiers/{dossier_id}/preparation/communications/{intention_id}/rapprochement": {
+      "post": {
+        "tags": [
+          "Préparation onboarding"
+        ],
+        "summary": "Rapprocher Communication",
+        "operationId": "rapprocher_communication_internal_onboard_api_dossiers__dossier_id__preparation_communications__intention_id__rapprochement_post",
+        "parameters": [
+          {
+            "name": "dossier_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Dossier Id"
+            }
+          },
+          {
+            "name": "intention_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Intention Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/onboard/api/dossiers/{dossier_id}/preparation/communications/{intention_id}/reprise": {
+      "post": {
+        "tags": [
+          "Préparation onboarding"
+        ],
+        "summary": "Reprendre Communication",
+        "operationId": "reprendre_communication_internal_onboard_api_dossiers__dossier_id__preparation_communications__intention_id__reprise_post",
+        "parameters": [
+          {
+            "name": "dossier_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Dossier Id"
+            }
+          },
+          {
+            "name": "intention_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Intention Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RepriseCommunicationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/onboard/api/preparation/politique": {
+      "get": {
+        "tags": [
+          "Préparation onboarding"
+        ],
+        "summary": "Lire Politique",
+        "operationId": "lire_politique_internal_onboard_api_preparation_politique_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Erreur de validation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Préparation onboarding"
+        ],
+        "summary": "Modifier Politique",
+        "operationId": "modifier_politique_internal_onboard_api_preparation_politique_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PolitiqueRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/onboard/api/preparation/indicateurs": {
+      "get": {
+        "tags": [
+          "Préparation onboarding"
+        ],
+        "summary": "Indicateurs Preparation",
+        "operationId": "indicateurs_preparation_internal_onboard_api_preparation_indicateurs_get",
+        "parameters": [
+          {
+            "name": "date_debut",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Date Debut"
+            }
+          },
+          {
+            "name": "date_fin",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Date Fin"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/onboard/api/preparation/politique/apercu": {
+      "post": {
+        "tags": [
+          "Préparation onboarding"
+        ],
+        "summary": "Simuler Politique",
+        "operationId": "simuler_politique_internal_onboard_api_preparation_politique_apercu_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApercuPolitiqueRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/protected/identite-acces/commercants/me/preparation": {
+      "get": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Consulter Preparation Marchand",
+        "operationId": "consulter_preparation_marchand_protected_identite_acces_commercants_me_preparation_get",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:preparation`.",
+              "title": "Authorization"
+            },
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:preparation`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/identite-acces/commercants/me/preparation/contrat/{document_id}": {
+      "get": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Telecharger Contrat Preparation",
+        "operationId": "telecharger_contrat_preparation_protected_identite_acces_commercants_me_preparation_contrat__document_id__get",
+        "parameters": [
+          {
+            "name": "document_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Document Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:preparation`.",
+              "title": "Authorization"
+            },
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:preparation`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/identite-acces/commercants/me/preparation/reception": {
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Confirmer Reception",
+        "operationId": "confirmer_reception_protected_identite_acces_commercants_me_preparation_reception_post",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:preparation`.",
+              "title": "Authorization"
+            },
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:preparation`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommandePreparationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/identite-acces/commercants/me/preparation/questions": {
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Poser Question",
+        "operationId": "poser_question_protected_identite_acces_commercants_me_preparation_questions_post",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:preparation`.",
+              "title": "Authorization"
+            },
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:preparation`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommandePreparationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/identite-acces/commercants/me/preparation/questions/{question_id}/messages": {
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Completer Question",
+        "operationId": "completer_question_protected_identite_acces_commercants_me_preparation_questions__question_id__messages_post",
+        "parameters": [
+          {
+            "name": "question_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Question Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:preparation`.",
+              "title": "Authorization"
+            },
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:preparation`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommandePreparationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/identite-acces/commercants/me/preparation/questions/{question_id}/resolution": {
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Resoudre Question",
+        "operationId": "resoudre_question_protected_identite_acces_commercants_me_preparation_questions__question_id__resolution_post",
+        "parameters": [
+          {
+            "name": "question_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Question Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:preparation`.",
+              "title": "Authorization"
+            },
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:preparation`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommandePreparationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/identite-acces/commercants/me/preparation/contrat/lecture": {
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Declarer Lecture",
+        "operationId": "declarer_lecture_protected_identite_acces_commercants_me_preparation_contrat_lecture_post",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:preparation`.",
+              "title": "Authorization"
+            },
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:preparation`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommandePreparationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/identite-acces/commercants/me/preparation/propositions": {
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Proposer Prestation",
+        "operationId": "proposer_prestation_protected_identite_acces_commercants_me_preparation_propositions_post",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:preparation`.",
+              "title": "Authorization"
+            },
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:preparation`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommandePreparationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/identite-acces/commercants/me/preparation/propositions/{proposition_id}": {
+      "patch": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Corriger Proposition",
+        "operationId": "corriger_proposition_protected_identite_acces_commercants_me_preparation_propositions__proposition_id__patch",
+        "parameters": [
+          {
+            "name": "proposition_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Proposition Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:preparation`.",
+              "title": "Authorization"
+            },
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:preparation`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommandePreparationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/identite-acces/commercants/me/preparation/propositions/{proposition_id}/soumission": {
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Soumettre Proposition",
+        "operationId": "soumettre_proposition_protected_identite_acces_commercants_me_preparation_propositions__proposition_id__soumission_post",
+        "parameters": [
+          {
+            "name": "proposition_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Proposition Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:preparation`.",
+              "title": "Authorization"
+            },
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:preparation`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommandePreparationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/identite-acces/commercants/me/preparation/propositions/{proposition_id}/accord": {
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Confirmer Conditions",
+        "operationId": "confirmer_conditions_protected_identite_acces_commercants_me_preparation_propositions__proposition_id__accord_post",
+        "parameters": [
+          {
+            "name": "proposition_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Proposition Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:preparation`.",
+              "title": "Authorization"
+            },
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:preparation`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommandePreparationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/identite-acces/commercants/me/preparation/prestations/{prestation_id}/accord": {
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Confirmer Conditions Existantes",
+        "operationId": "confirmer_conditions_existantes_protected_identite_acces_commercants_me_preparation_prestations__prestation_id__accord_post",
+        "parameters": [
+          {
+            "name": "prestation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Prestation Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:preparation`.",
+              "title": "Authorization"
+            },
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:preparation`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommandePreparationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/exploitation/onboarding-preparation/batch": {
+      "post": {
+        "tags": [
+          "Exploitation"
+        ],
+        "summary": "Traiter Preparation",
+        "operationId": "traiter_preparation_protected_exploitation_onboarding_preparation_batch_post",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 1000,
+              "minimum": 1,
+              "default": 100,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "X-API-KEY",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Cle API interne avec le scope `internal:batch`.",
+              "title": "X-Api-Key"
+            },
+            "description": "Cle API interne avec le scope `internal:batch`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/protected/exploitation/emails/batch/envoyer": {
@@ -28064,7 +30032,7 @@
                 }
               }
             },
-            "description": "Unprocessable Content"
+            "description": "Unprocessable Entity"
           },
           "500": {
             "content": {
@@ -28180,7 +30148,7 @@
                 }
               }
             },
-            "description": "Unprocessable Content"
+            "description": "Unprocessable Entity"
           }
         },
         "security": [
@@ -67118,6 +69086,826 @@
           }
         }
       }
+    },
+    "/protected/identite-acces/commercants/moi/pin-validation": {
+      "get": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Etat Pin",
+        "operationId": "etat_pin_protected_identite_acces_commercants_moi_pin_validation_get",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:session`.",
+              "title": "Authorization"
+            },
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:session`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EtatPin"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Generer Pin",
+        "operationId": "generer_pin_protected_identite_acces_commercants_moi_pin_validation_post",
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Idempotency-Key"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:session`.",
+              "title": "Authorization"
+            },
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:session`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GenererPin"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PinGenere"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Revoquer Pin",
+        "operationId": "revoquer_pin_protected_identite_acces_commercants_moi_pin_validation_delete",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:session`.",
+              "title": "Authorization"
+            },
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:session`."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/identite-acces/commercants/moi/reauthentification": {
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Reauthentifier Pin",
+        "operationId": "reauthentifier_pin_protected_identite_acces_commercants_moi_reauthentification_post",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:session`.",
+              "title": "Authorization"
+            },
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:session`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReauthentificationPin"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/exploitation/validations-pin/coffrets/demandes": {
+      "post": {
+        "tags": [
+          "Exploitation"
+        ],
+        "summary": "Creer Demande Coffret",
+        "operationId": "creer_demande_coffret_protected_exploitation_validations_pin_coffrets_demandes_post",
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Idempotency-Key"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreerDemandeCoffret"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DemandePin"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/protected/exploitation/validations-pin/animations/demandes": {
+      "post": {
+        "tags": [
+          "Exploitation"
+        ],
+        "summary": "Creer Demande Animation",
+        "operationId": "creer_demande_animation_protected_exploitation_validations_pin_animations_demandes_post",
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Idempotency-Key"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreerDemandeAnimation"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DemandePin"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/protected/exploitation/validations-pin/demandes/{id}/confirmer": {
+      "post": {
+        "tags": [
+          "Exploitation"
+        ],
+        "summary": "Confirmer Demande",
+        "operationId": "confirmer_demande_protected_exploitation_validations_pin_demandes__id__confirmer_post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfirmerPin"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DemandePin"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/protected/exploitation/validations-pin/demandes/{id}": {
+      "get": {
+        "tags": [
+          "Exploitation"
+        ],
+        "summary": "Lire Demande",
+        "operationId": "lire_demande_protected_exploitation_validations_pin_demandes__id__get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DemandePin"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Exploitation"
+        ],
+        "summary": "Annuler Demande",
+        "operationId": "annuler_demande_protected_exploitation_validations_pin_demandes__id__delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/protected/exploitation/commercants/me/notifications-pin": {
+      "get": {
+        "tags": [
+          "Exploitation"
+        ],
+        "summary": "Notifications Pin",
+        "operationId": "notifications_pin_protected_exploitation_commercants_me_notifications_pin_get",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1,
+              "title": "Page"
+            }
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 20,
+              "title": "Page Size"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:session`.",
+              "title": "Authorization"
+            },
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:session`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageNotificationsPin"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/exploitation/commercants/me/notifications-pin/{id}/lecture": {
+      "post": {
+        "tags": [
+          "Exploitation"
+        ],
+        "summary": "Lire Notification Pin",
+        "operationId": "lire_notification_pin_protected_exploitation_commercants_me_notifications_pin__id__lecture_post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:session`.",
+              "title": "Authorization"
+            },
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:session`."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/exploitation/commercants/me/validations-pin/{id}": {
+      "get": {
+        "tags": [
+          "Exploitation"
+        ],
+        "summary": "Detail Validation Pin",
+        "operationId": "detail_validation_pin_protected_exploitation_commercants_me_validations_pin__id__get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:session`.",
+              "title": "Authorization"
+            },
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:session`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DetailValidationPin"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/internal/identite-acces/commercants/{id}/pin-validation/revoquer": {
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Revoquer Pin Erp",
+        "operationId": "revoquer_pin_erp_internal_identite_acces_commercants__id__pin_validation_revoquer_post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RevoquerPin"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/identite-acces/commercants/{id}/pin-validation": {
+      "get": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Etat Pin Erp",
+        "operationId": "etat_pin_erp_internal_identite_acces_commercants__id__pin_validation_get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EtatPin"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
     }
   },
   "components": {
@@ -68261,6 +71049,33 @@
           "expected_version"
         ],
         "title": "ActionDossierCommande"
+      },
+      "ActionValidationPinLive": {
+        "properties": {
+          "etape_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Etape Id"
+          },
+          "libelle": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Libelle"
+          },
+          "versions": {
+            "$ref": "#/components/schemas/EnveloppeCommande"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "etape_id",
+          "libelle",
+          "versions"
+        ],
+        "title": "ActionValidationPinLive"
       },
       "ActivationCommand": {
         "properties": {
@@ -70196,6 +73011,17 @@
         ],
         "title": "AnnulerValidationAnimationRequest"
       },
+      "ApercuCommunicationRequest": {
+        "properties": {
+          "type_communication": {
+            "type": "string",
+            "title": "Type Communication",
+            "default": "PACK"
+          }
+        },
+        "type": "object",
+        "title": "ApercuCommunicationRequest"
+      },
       "ApercuCorrectionPreuvePayload": {
         "properties": {
           "animationId": {
@@ -70302,6 +73128,20 @@
           "impact"
         ],
         "title": "ApercuNeutralisationPayload"
+      },
+      "ApercuPolitiqueRequest": {
+        "properties": {
+          "changements": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Changements"
+          }
+        },
+        "type": "object",
+        "required": [
+          "changements"
+        ],
+        "title": "ApercuPolitiqueRequest"
       },
       "ApercuRetraitMissionPayload": {
         "properties": {
@@ -71270,7 +74110,7 @@
         "properties": {
           "file": {
             "type": "string",
-            "format": "binary",
+            "contentMediaType": "application/octet-stream",
             "title": "File"
           },
           "type_document": {
@@ -71387,7 +74227,7 @@
         "properties": {
           "file": {
             "type": "string",
-            "format": "binary",
+            "contentMediaType": "application/octet-stream",
             "title": "File"
           }
         },
@@ -71402,7 +74242,7 @@
           "files": {
             "items": {
               "type": "string",
-              "format": "binary"
+              "contentMediaType": "application/octet-stream"
             },
             "type": "array",
             "title": "Files"
@@ -71473,7 +74313,7 @@
         "properties": {
           "file": {
             "type": "string",
-            "format": "binary",
+            "contentMediaType": "application/octet-stream",
             "title": "File"
           },
           "nom": {
@@ -71498,7 +74338,7 @@
         "properties": {
           "file": {
             "type": "string",
-            "format": "binary",
+            "contentMediaType": "application/octet-stream",
             "title": "File"
           },
           "nom": {
@@ -71539,7 +74379,7 @@
           },
           "file": {
             "type": "string",
-            "format": "binary",
+            "contentMediaType": "application/octet-stream",
             "title": "File"
           }
         },
@@ -71554,7 +74394,7 @@
         "properties": {
           "file": {
             "type": "string",
-            "format": "binary",
+            "contentMediaType": "application/octet-stream",
             "title": "File"
           },
           "invoiceNumber": {
@@ -71584,7 +74424,7 @@
         "properties": {
           "file": {
             "type": "string",
-            "format": "binary",
+            "contentMediaType": "application/octet-stream",
             "title": "File"
           },
           "invoiceNumber": {
@@ -71624,12 +74464,12 @@
           },
           "pdf": {
             "type": "string",
-            "format": "binary",
+            "contentMediaType": "application/octet-stream",
             "title": "Pdf"
           },
           "content": {
             "type": "string",
-            "format": "binary",
+            "contentMediaType": "application/octet-stream",
             "title": "Content"
           }
         },
@@ -71651,7 +74491,7 @@
           },
           "file": {
             "type": "string",
-            "format": "binary",
+            "contentMediaType": "application/octet-stream",
             "title": "File"
           }
         },
@@ -71666,7 +74506,7 @@
         "properties": {
           "file": {
             "type": "string",
-            "format": "binary",
+            "contentMediaType": "application/octet-stream",
             "title": "File"
           }
         },
@@ -72057,6 +74897,26 @@
           "nextCursor"
         ],
         "title": "ChronologieResponse"
+      },
+      "CibleNotificationPin": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "title": "Type"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "type",
+          "id"
+        ],
+        "title": "CibleNotificationPin"
       },
       "CloturerMoteurInput": {
         "properties": {
@@ -73868,6 +76728,22 @@
         ],
         "title": "CommandeLotsAnimationPayload"
       },
+      "CommandePreparationRequest": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Expected Version"
+          }
+        },
+        "additionalProperties": true,
+        "type": "object",
+        "required": [
+          "expected_version"
+        ],
+        "title": "CommandePreparationRequest",
+        "description": "Le domaine valide les champs propres à la commande nommée par la route."
+      },
       "CommandeQr": {
         "properties": {
           "engineContractVersion": {
@@ -74651,6 +77527,26 @@
         ],
         "title": "CommerceParticipant"
       },
+      "CommercePin": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "nom": {
+            "type": "string",
+            "title": "Nom"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "nom"
+        ],
+        "title": "CommercePin"
+      },
       "CommuneActualiteAnimationPayload": {
         "properties": {
           "id": {
@@ -75144,6 +78040,27 @@
         ],
         "title": "ConfigurationAnimationPayload"
       },
+      "ConfirmationCommunicationRequest": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "empreinte_apercu": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 64,
+            "title": "Empreinte Apercu"
+          }
+        },
+        "type": "object",
+        "required": [
+          "expected_version",
+          "empreinte_apercu"
+        ],
+        "title": "ConfirmationCommunicationRequest"
+      },
       "ConfirmationInvitationOnboardRequest": {
         "properties": {
           "action": {
@@ -75163,6 +78080,21 @@
           "confirmed"
         ],
         "title": "ConfirmationInvitationOnboardRequest"
+      },
+      "ConfirmerPin": {
+        "properties": {
+          "pin": {
+            "type": "string",
+            "pattern": "^[0-9]{6}$",
+            "title": "Pin"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "pin"
+        ],
+        "title": "ConfirmerPin"
       },
       "ConfirmerPreparationInput": {
         "properties": {
@@ -76214,6 +79146,52 @@
           "typeCommercantId"
         ],
         "title": "CreerCommercantEtDossierRequest"
+      },
+      "CreerDemandeAnimation": {
+        "properties": {
+          "participant_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Participant Id"
+          },
+          "etape_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Etape Id"
+          },
+          "versions": {
+            "$ref": "#/components/schemas/VersionsPin"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "participant_id",
+          "etape_id",
+          "versions"
+        ],
+        "title": "CreerDemandeAnimation"
+      },
+      "CreerDemandeCoffret": {
+        "properties": {
+          "coffret_instance_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Coffret Instance Id"
+          },
+          "droit_prestation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Droit Prestation Id"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "coffret_instance_id",
+          "droit_prestation_id"
+        ],
+        "title": "CreerDemandeCoffret"
       },
       "CreerDemandeFactureRequest": {
         "properties": {
@@ -77615,7 +80593,7 @@
           "initialisation": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/InitialisationGeneration-Input"
+                "$ref": "#/components/schemas/InitialisationGeneration"
               },
               {
                 "type": "null"
@@ -77679,7 +80657,7 @@
           "initialisation": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/InitialisationGeneration-Output"
+                "$ref": "#/components/schemas/InitialisationGeneration"
               },
               {
                 "type": "null"
@@ -77761,7 +80739,7 @@
           "initialisation": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/InitialisationGeneration-Input"
+                "$ref": "#/components/schemas/InitialisationGeneration"
               },
               {
                 "type": "null"
@@ -77825,7 +80803,7 @@
           "initialisation": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/InitialisationGeneration-Output"
+                "$ref": "#/components/schemas/InitialisationGeneration"
               },
               {
                 "type": "null"
@@ -77883,6 +80861,19 @@
             "type": "string",
             "title": "Login",
             "description": "Login du commercant."
+          },
+          "retour": {
+            "anyOf": [
+              {
+                "type": "string",
+                "const": "/preparation"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Retour",
+            "description": "Destination locale de reprise du parcours de préparation."
           }
         },
         "type": "object",
@@ -78156,6 +81147,125 @@
           "actions"
         ],
         "title": "DemandeParticipationCommercantPayload"
+      },
+      "DemandePin": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "type": {
+            "type": "string",
+            "title": "Type"
+          },
+          "etat": {
+            "type": "string",
+            "title": "Etat"
+          },
+          "created_at": {
+            "type": "string",
+            "title": "Created At"
+          },
+          "expires_at": {
+            "type": "string",
+            "title": "Expires At"
+          },
+          "server_time": {
+            "type": "string",
+            "title": "Server Time"
+          },
+          "commerce": {
+            "$ref": "#/components/schemas/CommercePin"
+          },
+          "cible": {
+            "$ref": "#/components/schemas/ReferencePin"
+          },
+          "effet_libelle": {
+            "type": "string",
+            "title": "Effet Libelle"
+          },
+          "versions": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VersionsPin"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "validation_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Validation Id"
+          },
+          "mode_effectif": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mode Effectif"
+          },
+          "validated_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Validated At"
+          },
+          "resultat": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Resultat"
+          },
+          "rejoue": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rejoue"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "etat",
+          "created_at",
+          "expires_at",
+          "server_time",
+          "commerce",
+          "cible",
+          "effet_libelle"
+        ],
+        "title": "DemandePin"
       },
       "DependanceObjetContinuite": {
         "properties": {
@@ -79004,6 +82114,45 @@
           "appliedFilters"
         ],
         "title": "DetailSuiviCommerce"
+      },
+      "DetailValidationPin": {
+        "properties": {
+          "validation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Validation Id"
+          },
+          "mode_effectif": {
+            "type": "string",
+            "title": "Mode Effectif"
+          },
+          "type": {
+            "type": "string",
+            "title": "Type"
+          },
+          "cible": {
+            "$ref": "#/components/schemas/ReferencePin"
+          },
+          "validated_at": {
+            "type": "string",
+            "title": "Validated At"
+          },
+          "resultat": {
+            "type": "string",
+            "title": "Resultat"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "validation_id",
+          "mode_effectif",
+          "type",
+          "cible",
+          "validated_at",
+          "resultat"
+        ],
+        "title": "DetailValidationPin"
       },
       "DiagnosticAnimationPayload": {
         "properties": {
@@ -80017,6 +83166,39 @@
         ],
         "title": "EnregistrerTemplateGenerationInput"
       },
+      "EnveloppeCommande": {
+        "properties": {
+          "engineContractVersion": {
+            "type": "string",
+            "const": "1.0",
+            "title": "Enginecontractversion"
+          },
+          "definitionVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Definitionversion"
+          },
+          "expectedProgressionVersion": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Expectedprogressionversion"
+          },
+          "expectedExploitationRevision": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Expectedexploitationrevision"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "engineContractVersion",
+          "definitionVersion",
+          "expectedProgressionVersion",
+          "expectedExploitationRevision"
+        ],
+        "title": "EnveloppeCommande"
+      },
       "EnvironnementResponse": {
         "properties": {
           "environment": {
@@ -80143,7 +83325,7 @@
         ],
         "title": "ErreurContratMoteurPayload"
       },
-      "EtapeCommercante-Input": {
+      "EtapeCommercante": {
         "properties": {
           "lieu": {
             "$ref": "#/components/schemas/LieuCommercant"
@@ -80157,7 +83339,7 @@
           },
           "missionsProposees": {
             "items": {
-              "$ref": "#/components/schemas/MissionProposee-Input"
+              "$ref": "#/components/schemas/MissionProposee"
             },
             "type": "array",
             "maxItems": 2,
@@ -80167,48 +83349,7 @@
           "presentation": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/PresentationEtape-Input"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "lieu",
-          "titre",
-          "missionsProposees"
-        ],
-        "title": "EtapeCommercante"
-      },
-      "EtapeCommercante-Output": {
-        "properties": {
-          "lieu": {
-            "$ref": "#/components/schemas/LieuCommercant"
-          },
-          "titre": {
-            "type": "string",
-            "maxLength": 200,
-            "minLength": 1,
-            "pattern": "\\S",
-            "title": "Titre"
-          },
-          "missionsProposees": {
-            "items": {
-              "$ref": "#/components/schemas/MissionProposee-Output"
-            },
-            "type": "array",
-            "maxItems": 2,
-            "minItems": 1,
-            "title": "Missionsproposees"
-          },
-          "presentation": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/PresentationEtape-Output"
+                "$ref": "#/components/schemas/PresentationEtape"
               },
               {
                 "type": "null"
@@ -80260,7 +83401,7 @@
         ],
         "title": "EtapeExploitationPayload"
       },
-      "EtapeNonCommercante-Input": {
+      "EtapeNonCommercante": {
         "properties": {
           "lieu": {
             "anyOf": [
@@ -80334,102 +83475,7 @@
           "presentation": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/PresentationEtape-Input"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "lieu",
-          "titre",
-          "texteJoueur",
-          "consigne",
-          "interactionCommercant",
-          "consigneCommercant",
-          "defi"
-        ],
-        "title": "EtapeNonCommercante"
-      },
-      "EtapeNonCommercante-Output": {
-        "properties": {
-          "lieu": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/LieuPoi"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "titre": {
-            "type": "string",
-            "maxLength": 200,
-            "minLength": 1,
-            "pattern": "\\S",
-            "title": "Titre"
-          },
-          "texteJoueur": {
-            "type": "string",
-            "maxLength": 20000,
-            "minLength": 1,
-            "pattern": "\\S",
-            "title": "Textejoueur"
-          },
-          "consigne": {
-            "type": "string",
-            "maxLength": 20000,
-            "minLength": 1,
-            "pattern": "\\S",
-            "title": "Consigne"
-          },
-          "interactionCommercant": {
-            "type": "null",
-            "title": "Interactioncommercant"
-          },
-          "consigneCommercant": {
-            "type": "null",
-            "title": "Consignecommercant"
-          },
-          "defi": {
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/DefiQcm"
-              },
-              {
-                "$ref": "#/components/schemas/DefiInformation"
-              },
-              {
-                "$ref": "#/components/schemas/DefiAssociation"
-              },
-              {
-                "$ref": "#/components/schemas/DefiOrdre"
-              },
-              {
-                "$ref": "#/components/schemas/DefiTexte"
-              }
-            ],
-            "title": "Defi",
-            "discriminator": {
-              "propertyName": "type",
-              "mapping": {
-                "ASSOCIATION": "#/components/schemas/DefiAssociation",
-                "INFORMATION": "#/components/schemas/DefiInformation",
-                "ORDERING": "#/components/schemas/DefiOrdre",
-                "SINGLE_CHOICE": "#/components/schemas/DefiQcm",
-                "TEXT_INPUT": "#/components/schemas/DefiTexte"
-              }
-            }
-          },
-          "presentation": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/PresentationEtape-Output"
+                "$ref": "#/components/schemas/PresentationEtape"
               },
               {
                 "type": "null"
@@ -80664,6 +83710,78 @@
           "statut"
         ],
         "title": "EtapeScanPayload"
+      },
+      "EtatPin": {
+        "properties": {
+          "mode_actif": {
+            "type": "boolean",
+            "title": "Mode Actif"
+          },
+          "version": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Version"
+          },
+          "etat": {
+            "type": "string",
+            "title": "Etat"
+          },
+          "generated_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Generated At"
+          },
+          "expires_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Expires At"
+          },
+          "blocked_until": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Blocked Until"
+          },
+          "server_time": {
+            "type": "string",
+            "title": "Server Time"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "mode_actif",
+          "version",
+          "etat",
+          "generated_at",
+          "expires_at",
+          "blocked_until",
+          "server_time"
+        ],
+        "title": "EtatPin"
       },
       "EtatResponse": {
         "properties": {
@@ -82781,6 +85899,20 @@
         ],
         "title": "GenerationRetrouvee"
       },
+      "GenererPin": {
+        "properties": {
+          "duree_jours": {
+            "type": "integer",
+            "maximum": 30.0,
+            "minimum": 1.0,
+            "title": "Duree Jours",
+            "default": 7
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "GenererPin"
+      },
       "GestionDemandeParticipationInput": {
         "properties": {
           "expectedVersion": {
@@ -83554,59 +86686,7 @@
         ],
         "title": "Initialisation"
       },
-      "InitialisationGeneration-Input": {
-        "properties": {
-          "metadata": {
-            "$ref": "#/components/schemas/MetadonneesAnimation"
-          },
-          "organizer": {
-            "$ref": "#/components/schemas/OrganisateurAnimation"
-          },
-          "territory": {
-            "$ref": "#/components/schemas/TerritoireAnimation"
-          },
-          "schedule": {
-            "$ref": "#/components/schemas/PeriodeAnimation"
-          },
-          "registration": {
-            "$ref": "#/components/schemas/InscriptionAnimation"
-          },
-          "assets": {
-            "items": {
-              "$ref": "#/components/schemas/MediaEmbarque"
-            },
-            "type": "array",
-            "maxItems": 0,
-            "title": "Assets"
-          },
-          "rewards": {
-            "$ref": "#/components/schemas/RecompensesAnimation"
-          },
-          "themeVisuel": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/ThemeInitialisationGeneration"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "metadata",
-          "organizer",
-          "territory",
-          "schedule",
-          "registration",
-          "assets",
-          "rewards"
-        ],
-        "title": "InitialisationGeneration"
-      },
-      "InitialisationGeneration-Output": {
+      "InitialisationGeneration": {
         "properties": {
           "metadata": {
             "$ref": "#/components/schemas/MetadonneesAnimation"
@@ -85285,7 +88365,7 @@
             "title": "Id"
           },
           "contenu": {
-            "$ref": "#/components/schemas/MissionProposee-Output"
+            "$ref": "#/components/schemas/MissionProposee"
           },
           "conditions": {
             "items": {
@@ -85304,7 +88384,7 @@
         ],
         "title": "MissionCommercant"
       },
-      "MissionProposee-Input": {
+      "MissionProposee": {
         "properties": {
           "id": {
             "type": "string",
@@ -85391,116 +88471,7 @@
           "presentation": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/PresentationEtape-Input"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "id",
-          "titre",
-          "preparationCommercant",
-          "texteJoueur",
-          "consigne",
-          "interactionCommercant",
-          "consigneCommercant",
-          "defi"
-        ],
-        "title": "MissionProposee"
-      },
-      "MissionProposee-Output": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "maxLength": 64,
-            "minLength": 1,
-            "pattern": "\\S",
-            "title": "Id"
-          },
-          "titre": {
-            "type": "string",
-            "maxLength": 200,
-            "minLength": 1,
-            "pattern": "\\S",
-            "title": "Titre"
-          },
-          "preparationCommercant": {
-            "$ref": "#/components/schemas/PreparationCommercant"
-          },
-          "texteJoueur": {
-            "type": "string",
-            "maxLength": 20000,
-            "minLength": 1,
-            "pattern": "\\S",
-            "title": "Textejoueur"
-          },
-          "consigne": {
-            "type": "string",
-            "maxLength": 20000,
-            "minLength": 1,
-            "pattern": "\\S",
-            "title": "Consigne"
-          },
-          "interactionCommercant": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 20000,
-                "minLength": 1,
-                "pattern": "\\S"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Interactioncommercant"
-          },
-          "consigneCommercant": {
-            "type": "string",
-            "maxLength": 20000,
-            "minLength": 1,
-            "pattern": "\\S",
-            "title": "Consignecommercant"
-          },
-          "defi": {
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/DefiQcm"
-              },
-              {
-                "$ref": "#/components/schemas/DefiInformation"
-              },
-              {
-                "$ref": "#/components/schemas/DefiAssociation"
-              },
-              {
-                "$ref": "#/components/schemas/DefiOrdre"
-              },
-              {
-                "$ref": "#/components/schemas/DefiTexte"
-              }
-            ],
-            "title": "Defi",
-            "discriminator": {
-              "propertyName": "type",
-              "mapping": {
-                "ASSOCIATION": "#/components/schemas/DefiAssociation",
-                "INFORMATION": "#/components/schemas/DefiInformation",
-                "ORDERING": "#/components/schemas/DefiOrdre",
-                "SINGLE_CHOICE": "#/components/schemas/DefiQcm",
-                "TEXT_INPUT": "#/components/schemas/DefiTexte"
-              }
-            }
-          },
-          "presentation": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/PresentationEtape-Output"
+                "$ref": "#/components/schemas/PresentationEtape"
               },
               {
                 "type": "null"
@@ -87338,6 +90309,62 @@
         ],
         "title": "NotificationCommercantAnimationPayload"
       },
+      "NotificationPin": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "type": {
+            "type": "string",
+            "title": "Type"
+          },
+          "titre": {
+            "type": "string",
+            "title": "Titre"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          },
+          "created_at": {
+            "type": "string",
+            "title": "Created At"
+          },
+          "read_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Read At"
+          },
+          "cible": {
+            "$ref": "#/components/schemas/CibleNotificationPin"
+          },
+          "lien_relatif": {
+            "type": "string",
+            "title": "Lien Relatif"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "titre",
+          "message",
+          "created_at",
+          "read_at",
+          "cible",
+          "lien_relatif"
+        ],
+        "title": "NotificationPin"
+      },
       "NotificationsLuesPayload": {
         "properties": {
           "nombre_notifications_lues": {
@@ -88376,6 +91403,38 @@
           "nextCursor"
         ],
         "title": "PageGenerationPayload"
+      },
+      "PageNotificationsPin": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/NotificationPin"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "page": {
+            "type": "integer",
+            "title": "Page"
+          },
+          "page_size": {
+            "type": "integer",
+            "title": "Page Size"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "page",
+          "page_size",
+          "total"
+        ],
+        "title": "PageNotificationsPin"
       },
       "PagePaiements": {
         "properties": {
@@ -90116,6 +93175,13 @@
               }
             ],
             "title": "Email Inscription"
+          },
+          "actions_validation_pin": {
+            "items": {
+              "$ref": "#/components/schemas/ActionValidationPinLive"
+            },
+            "type": "array",
+            "title": "Actions Validation Pin"
           }
         },
         "additionalProperties": false,
@@ -90268,6 +93334,94 @@
           "animation:exploitation_lire"
         ],
         "title": "PermissionAnimation"
+      },
+      "PinGenere": {
+        "properties": {
+          "mode_actif": {
+            "type": "boolean",
+            "title": "Mode Actif"
+          },
+          "version": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Version"
+          },
+          "etat": {
+            "type": "string",
+            "title": "Etat"
+          },
+          "generated_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Generated At"
+          },
+          "expires_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Expires At"
+          },
+          "blocked_until": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Blocked Until"
+          },
+          "server_time": {
+            "type": "string",
+            "title": "Server Time"
+          },
+          "pin": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pin"
+          },
+          "pin_reaffichable": {
+            "type": "boolean",
+            "title": "Pin Reaffichable"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "mode_actif",
+          "version",
+          "etat",
+          "generated_at",
+          "expires_at",
+          "blocked_until",
+          "server_time",
+          "pin_reaffichable"
+        ],
+        "title": "PinGenere"
       },
       "PlanificationBatchPayload": {
         "properties": {
@@ -90574,6 +93728,33 @@
         ],
         "title": "PolitiqueBumRequest"
       },
+      "PolitiqueRequest": {
+        "properties": {
+          "changements": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Changements"
+          },
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 1,
+            "title": "Motif"
+          }
+        },
+        "type": "object",
+        "required": [
+          "changements",
+          "expected_version",
+          "motif"
+        ],
+        "title": "PolitiqueRequest"
+      },
       "PoserGelConservationInput": {
         "properties": {
           "typeCible": {
@@ -90860,7 +94041,7 @@
             "title": "Resultat Source Id"
           },
           "resultat": {
-            "$ref": "#/components/schemas/ResultatGenerationChasse-Output"
+            "$ref": "#/components/schemas/ResultatGenerationChasse"
           },
           "positions": {
             "items": {
@@ -91172,7 +94353,7 @@
             "title": "Resultat Source Id"
           },
           "resultat": {
-            "$ref": "#/components/schemas/ResultatGenerationPasseport-Output"
+            "$ref": "#/components/schemas/ResultatGenerationPasseport"
           },
           "preparation_revision": {
             "type": "integer",
@@ -91285,34 +94466,7 @@
         ],
         "title": "PreparerKitInput"
       },
-      "PresentationEtape-Input": {
-        "properties": {
-          "illustration": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/Illustration"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "themeVisuel": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/SurchargeThemeVisuel"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "title": "PresentationEtape"
-      },
-      "PresentationEtape-Output": {
+      "PresentationEtape": {
         "properties": {
           "illustration": {
             "anyOf": [
@@ -93480,6 +96634,22 @@
         "type": "object",
         "title": "RattrapagePayoutsStripeRequest"
       },
+      "ReauthentificationPin": {
+        "properties": {
+          "mot_de_passe": {
+            "type": "string",
+            "maxLength": 1024,
+            "minLength": 1,
+            "title": "Mot De Passe"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "mot_de_passe"
+        ],
+        "title": "ReauthentificationPin"
+      },
       "RechercheMarketplacePayload": {
         "properties": {
           "query": {
@@ -94264,6 +97434,26 @@
         "title": "ReferenceCommercantBrief",
         "description": "Le client référence la fiche ; le serveur photographie son nom et son adresse."
       },
+      "ReferencePin": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "libelle"
+        ],
+        "title": "ReferencePin"
+      },
       "ReferencesStripe": {
         "properties": {
           "checkoutSessionId": {
@@ -94734,6 +97924,39 @@
         ],
         "title": "RepriseCommande"
       },
+      "RepriseCommunicationRequest": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "empreinte_apercu": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 64,
+            "title": "Empreinte Apercu"
+          },
+          "canal": {
+            "type": "string",
+            "title": "Canal"
+          },
+          "preuve_non_remise": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 1,
+            "title": "Preuve Non Remise"
+          }
+        },
+        "type": "object",
+        "required": [
+          "expected_version",
+          "empreinte_apercu",
+          "canal",
+          "preuve_non_remise"
+        ],
+        "title": "RepriseCommunicationRequest"
+      },
       "ReservationRequest": {
         "properties": {
           "totalCents": {
@@ -95034,7 +98257,7 @@
         ],
         "title": "ResultatFinalisationGenerationPayload"
       },
-      "ResultatGenerationChasse-Input": {
+      "ResultatGenerationChasse": {
         "properties": {
           "titre": {
             "type": "string",
@@ -95072,10 +98295,10 @@
             "items": {
               "anyOf": [
                 {
-                  "$ref": "#/components/schemas/EtapeCommercante-Input"
+                  "$ref": "#/components/schemas/EtapeCommercante"
                 },
                 {
-                  "$ref": "#/components/schemas/EtapeNonCommercante-Input"
+                  "$ref": "#/components/schemas/EtapeNonCommercante"
                 }
               ]
             },
@@ -95122,174 +98345,7 @@
         ],
         "title": "ResultatGenerationChasse"
       },
-      "ResultatGenerationChasse-Output": {
-        "properties": {
-          "titre": {
-            "type": "string",
-            "maxLength": 200,
-            "minLength": 1,
-            "pattern": "\\S",
-            "title": "Titre"
-          },
-          "synopsis": {
-            "type": "string",
-            "maxLength": 20000,
-            "minLength": 1,
-            "pattern": "\\S",
-            "title": "Synopsis"
-          },
-          "dureeEstimeeMinutes": {
-            "type": "integer",
-            "minimum": 1.0,
-            "title": "Dureeestimeeminutes"
-          },
-          "difficulte": {
-            "type": "string",
-            "maxLength": 80,
-            "minLength": 1,
-            "title": "Difficulte"
-          },
-          "introduction": {
-            "type": "string",
-            "maxLength": 20000,
-            "minLength": 1,
-            "pattern": "\\S",
-            "title": "Introduction"
-          },
-          "etapes": {
-            "items": {
-              "anyOf": [
-                {
-                  "$ref": "#/components/schemas/EtapeCommercante-Output"
-                },
-                {
-                  "$ref": "#/components/schemas/EtapeNonCommercante-Output"
-                }
-              ]
-            },
-            "type": "array",
-            "minItems": 1,
-            "title": "Etapes"
-          },
-          "conclusion": {
-            "type": "string",
-            "maxLength": 20000,
-            "minLength": 1,
-            "pattern": "\\S",
-            "title": "Conclusion"
-          },
-          "themeVisuel": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/ThemeVisuel"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "medias": {
-            "items": {
-              "$ref": "#/components/schemas/MediaEmbarque"
-            },
-            "type": "array",
-            "title": "Medias"
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "titre",
-          "synopsis",
-          "dureeEstimeeMinutes",
-          "difficulte",
-          "introduction",
-          "etapes",
-          "conclusion",
-          "medias"
-        ],
-        "title": "ResultatGenerationChasse"
-      },
-      "ResultatGenerationPasseport-Input": {
-        "properties": {
-          "type": {
-            "type": "string",
-            "const": "PASSEPORT_COMMERCANT",
-            "title": "Type"
-          },
-          "contractVersion": {
-            "type": "string",
-            "const": "1.0",
-            "title": "Contractversion"
-          },
-          "titre": {
-            "type": "string",
-            "maxLength": 200,
-            "minLength": 1,
-            "pattern": "\\S",
-            "title": "Titre"
-          },
-          "introduction": {
-            "type": "string",
-            "maxLength": 20000,
-            "minLength": 1,
-            "pattern": "\\S",
-            "title": "Introduction"
-          },
-          "consignes": {
-            "type": "string",
-            "maxLength": 20000,
-            "minLength": 1,
-            "pattern": "\\S",
-            "title": "Consignes"
-          },
-          "libelleProgression": {
-            "type": "string",
-            "maxLength": 200,
-            "minLength": 1,
-            "pattern": "\\S",
-            "title": "Libelleprogression"
-          },
-          "commercants": {
-            "items": {
-              "$ref": "#/components/schemas/ContenuCommercantPasseport"
-            },
-            "type": "array",
-            "title": "Commercants"
-          },
-          "themeVisuel": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/ThemeVisuel"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "medias": {
-            "items": {
-              "$ref": "#/components/schemas/MediaEmbarque"
-            },
-            "type": "array",
-            "title": "Medias"
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "type",
-          "contractVersion",
-          "titre",
-          "introduction",
-          "consignes",
-          "libelleProgression",
-          "commercants",
-          "medias"
-        ],
-        "title": "ResultatGenerationPasseport"
-      },
-      "ResultatGenerationPasseport-Output": {
+      "ResultatGenerationPasseport": {
         "properties": {
           "type": {
             "type": "string",
@@ -95526,7 +98582,7 @@
             "default": false
           },
           "initialisation": {
-            "$ref": "#/components/schemas/InitialisationGeneration-Input"
+            "$ref": "#/components/schemas/InitialisationGeneration"
           },
           "animation_id": {
             "anyOf": [
@@ -95821,6 +98877,22 @@
         ],
         "title": "RevoquerMandatChorusRequest"
       },
+      "RevoquerPin": {
+        "properties": {
+          "motif": {
+            "type": "string",
+            "maxLength": 500,
+            "minLength": 5,
+            "title": "Motif"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "motif"
+        ],
+        "title": "RevoquerPin"
+      },
       "RotationSecretLiveRequest": {
         "properties": {
           "revoquer_abonnements_existants": {
@@ -95993,10 +99065,10 @@
           "resultat": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/ResultatGenerationChasse-Input"
+                "$ref": "#/components/schemas/ResultatGenerationChasse"
               },
               {
-                "$ref": "#/components/schemas/ResultatGenerationPasseport-Input"
+                "$ref": "#/components/schemas/ResultatGenerationPasseport"
               }
             ],
             "title": "Resultat"
@@ -98803,6 +101875,35 @@
           "expectedExploitationRevision"
         ],
         "title": "VersionsAttestationPayload"
+      },
+      "VersionsPin": {
+        "properties": {
+          "engineContractVersion": {
+            "type": "string",
+            "title": "Enginecontractversion"
+          },
+          "definitionVersion": {
+            "type": "integer",
+            "title": "Definitionversion"
+          },
+          "expectedProgressionVersion": {
+            "type": "integer",
+            "title": "Expectedprogressionversion"
+          },
+          "expectedExploitationRevision": {
+            "type": "integer",
+            "title": "Expectedexploitationrevision"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "engineContractVersion",
+          "definitionVersion",
+          "expectedProgressionVersion",
+          "expectedExploitationRevision"
+        ],
+        "title": "VersionsPin"
       },
       "VilleParticipationLive": {
         "properties": {

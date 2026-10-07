@@ -260,3 +260,18 @@ de débordement et de note interne, cohérence avec les conditions réellement a
 La prise en charge des frais n'est pas une promesse de gratuité universelle de
 Stripe. Ni le mail ni la PJ ne garantissent absence de contestation, paiement
 irrévocable, disponibilité immédiate des fonds ou validation immédiate du compte.
+
+
+## Complément E70 — préparation facultative du PIN
+
+Lors de l’accompagnement, présenter le [guide de validation par PIN](../epic-70-validation-pin/guide-utilisation-exploitation.md)
+et expliquer que le commerçant saisit lui-même le code sur le téléphone du client.
+La préparation reste facultative et ne bloque pas l’onboarding. Faire parcourir
+l’écran de gestion, la durée choisie, l’affichage unique et l’invalidation ; ne
+jamais consigner le PIN dans le dossier, un support ou un compte rendu.
+
+L’exercice client montre le récapitulatif puis abandonne la demande avant
+confirmation ; aucune prestation réelle n’est consommée. Une validation complète
+utilise uniquement un jeu de démonstration dédié. Expliquer la reprise après
+réponse perdue et le maintien du QR, ainsi que les limites d’un secret partagé.
+L’existence du guide n’active pas le canal PIN sur un environnement.

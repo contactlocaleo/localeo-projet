@@ -1,5 +1,7 @@
 # Roadmap par etat
 
+Implémentation locale E70 le 7 octobre 2026 : [spécification et preuves](../specifications/epic-70-validation-pin/README.md), 34 critères, canal fermé par défaut ; aucun déploiement.
+
 Classement consolidé le 18 septembre 2026, complété le 1er octobre par l’EPIC 70. Les backlogs des applications sont
 réunis dans les dossiers d'état, avec un seul fichier par EPIC. Le suivi inclut
 les 70 identifiants du tronc commun et trois identifiants applicatifs distincts.
@@ -7,8 +9,8 @@ les 70 identifiants du tronc commun et trois identifiants applicatifs distincts.
 | Etat | Epics | Dossier |
 | --- | ---: | --- |
 | Terminees | 61 | [terminees/](terminees/README.md) |
-| A faire | 7 | [a-faire/](a-faire/README.md) |
-| En cours | 2 | [en-cours/](en-cours/README.md) |
+| A faire | 6 | [a-faire/](a-faire/README.md) |
+| En cours | 3 | [en-cours/](en-cours/README.md) |
 | Abandonnees | 2 | [abandonnees/](abandonnees/README.md) |
 | Fusionnee | 1 | Epic 61 reprise dans l'[Epic 60](terminees/epic-60-vision-360-commercialisation-backlog.md) |
 
@@ -53,10 +55,10 @@ La revue finale du 2 octobre clôture E69 après correction de **CA-18** :
 37 scénarios de traçabilité réussis, preuves inchangées réutilisées, guide et
 bundle ERP vérifiés. Lots de commit et prérequis de livraison consignés dans le
 bilan ; la clôture n'atteste ni publication du correctif ni déploiement.
-La nouvelle [EPIC 70](a-faire/epic-70-validation-prestation-telephone-client-backlog.md)
+La nouvelle [EPIC 70](en-cours/epic-70-validation-prestation-telephone-client-backlog.md)
 cadre une validation entièrement sur téléphone client, sans matériel dédié imposé.
 Le PIN dédié est retenu avec un compromis de droits limités : contexte transactionnel,
-gestion du PIN depuis l'accès commerçant et parcours client. Ses 28 critères couvrent
+gestion du PIN depuis l'accès commerçant et parcours client. Ses 34 critères couvrent
 validité, révocation, concurrence, incidents et absence d'accès professionnel.
 
 Les Epics 3 et 4 n'ont pas de fichier dedie :
@@ -99,7 +101,7 @@ précise la provenance et les divergences historiques conservées.
 | 61 | Fusionnee | Contenu repris dans l'Epic 60 ; une fusion n'est pas un abandon. |
 | 35 | Terminee (historique) | Clôture conservée ; le cadrage non livré des nouveaux rôles est transféré à l'EPIC 69 sur demande explicite du 1er octobre. |
 | 69 | Terminee | [Profils et accès ERP/satellites](terminees/epic-69-profils-acces-erp-satellites-backlog.md) : clôture le 2 octobre après validation CA-18, 27 critères conservés ; recette cible et configuration dans le bilan. |
-| 70 | A faire | [Validation sur téléphone client](a-faire/epic-70-validation-prestation-telephone-client-backlog.md) : PIN dédié retenu, 28 critères ; contexte transactionnel, gestion commerçant du PIN et parcours client sans matériel ; risque résiduel borné par les droits, validité et révocation. |
+| 70 | En cours | [Validation sur téléphone client](en-cours/epic-70-validation-prestation-telephone-client-backlog.md) : PIN dédié retenu, 34 critères ; contexte transactionnel, gestion commerçant du PIN et parcours client sans matériel ; risque résiduel borné par les droits, validité et révocation. |
 | Autres identifiants du tronc commun | Terminees | Statut produit consolide conserve ; les anciennes mentions de stories a faire ne rouvrent pas ces epics. |
 
 Les changements des Epics 5, 12 et 47 corrigent des incoherences entre les

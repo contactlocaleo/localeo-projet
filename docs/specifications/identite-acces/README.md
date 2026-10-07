@@ -13,3 +13,5 @@ Règles de session, d'authentification et de liens de consultation. Le backend p
 La divergence historique sur le QR d'authentification est explicitée dans la [vue de l'espace commerçant](../espace-commercant/README.md). Elle ne concerne pas le [QR client de validation d'une prestation](../validation-prestations/README.md).
 
 [Retour à l’index des spécifications](../INDEX.md)
+
+- [Conservation des accès et validations — E70/E72](conservation-validations-acces.md)
