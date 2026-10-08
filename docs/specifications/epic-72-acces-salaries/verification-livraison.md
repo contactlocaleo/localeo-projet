@@ -27,6 +27,28 @@ contrôle, l’accès au tableau de bord nécessitant une connexion. La recette 
 d’activation reste à effectuer après ouverture technique selon le
 [guide d’exploitation](guide-utilisation-exploitation.md#activation-erp-indisponible).
 
+## Clarification des variables — 8 octobre 2026
+
+Sur la base backend `d7a9e63`, les variables d’ouverture et de chiffrement des
+invitations adoptent le préfixe `LOCALEO_PRO_ACCESS_SALARIES_` et les clés remplacent
+`REMISE` par `INVITATION_ENCRYPTION`. L’API, le traitement email, la démonstration
+et leurs fixtures utilisent les nouveaux noms. L’URL dédiée salariés est supprimée :
+les liens d’invitation et de récupération réutilisent l’origine HTTPS du modèle
+d’initialisation du responsable, sans en reprendre le chemin ni les paramètres.
+
+Preuves locales : 493 tests réussis, incluant contrôles d’architecture obligatoires,
+API, option ERP, démonstration unitaire et composition email. Après ajout du contrôle
+du drapeau actif/inactif, les 17 tests de configuration email réussissent. Les
+tests vérifient le chiffrement réel avec les nouvelles variables, les deux chemins
+salariés, le fragment du jeton et le refus des origines invalides.
+
+Aucune migration SQL ni modification des routes frontend : seule la configuration
+des consommateurs backend change. La fixture d’intégration du jeu de démonstration
+est renommée ; génération complète PostgreSQL non réexécutée pour ce changement.
+Le [guide](guide-utilisation-exploitation.md#renommage-de-configuration--8-octobre-2026)
+décrit la bascule des variables en conservant les clés et identifiants existants.
+Configuration distante, commit, push et déploiement non effectués pour ce lot.
+
 ## Matrice exhaustive des critères
 
 Les lignes suivantes sont les scénarios de référence ; leurs preuves locales figurent dans le bilan ci-dessous. Les codes D/I/F/O désignent les impacts détaillés après la matrice, pas une preuve de succès.

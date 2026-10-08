@@ -106,7 +106,7 @@ Les chemins de session existants sous `/protected/identite-acces/commercants`, s
 Erreurs cibles dans l'enveloppe API commune, code stable et identifiant de corrélation : 401 `SESSION_INVALIDE` ; 403 `ACTION_NON_AUTORISEE`, `OPTION_SALARIES_INACTIVE`, `ACCES_SALARIE_REVOQUE` pour session connue ; 404 `RESSOURCE_INTROUVABLE` pour ressource tierce ; 409 `IDENTITE_PRO_INDISPONIBLE`, `VERSION_OBSOLETE`, `IDEMPOTENCE_CONFLIT` ; 400 `LIEN_INDISPONIBLE` sans distinguer token inconnu/expiré/utilisé ; 422 payload/politique mot de passe ; 429 limitation avec `Retry-After`. Login public reste générique et ne révèle ni commerce ni révocation.
 
 Exception technique à distinguer des refus d’habilitation : le `PUT` ERP demandant
-`active=true` alors que `LOCALEO_SALARIES_ENABLED=false` répond **409
+`active=true` alors que `LOCALEO_PRO_ACCESS_SALARIES_ENABLED=false` répond **409
 `OPTION_SALARIES_INACTIVE`**, sans mutation. L’ERP conserve la session et explique
 que la configuration de l’environnement doit être finalisée. La lecture et la
 désactivation restent disponibles aux rôles autorisés ; les refus salariés
