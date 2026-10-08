@@ -4,12 +4,12 @@ Implémentations locales E70 et E72 vérifiées les 7–8 octobre 2026 : [E70 �
 
 Classement consolidé le 18 septembre 2026, complété le 5 octobre par l’EPIC 72. Les backlogs des applications sont
 réunis dans les dossiers d'état, avec un seul fichier par EPIC. Le suivi inclut
-les 71 identifiants du tronc commun et trois identifiants applicatifs distincts.
+les 72 identifiants du tronc commun et trois identifiants applicatifs distincts.
 
 | Etat | Epics | Dossier |
 | --- | ---: | --- |
 | Terminees | 61 | [terminees/](terminees/README.md) |
-| A faire | 6 | [a-faire/](a-faire/README.md) |
+| A faire | 7 | [a-faire/](a-faire/README.md) |
 | En cours | 4 | [en-cours/](en-cours/README.md) |
 | Abandonnees | 2 | [abandonnees/](abandonnees/README.md) |
 | Fusionnee | 1 | Epic 61 reprise dans l'[Epic 60](terminees/epic-60-vision-360-commercialisation-backlog.md) |
@@ -61,6 +61,13 @@ Le PIN dédié est retenu avec un compromis de droits limités : contexte transa
 gestion du PIN depuis l'accès commerçant et parcours client. Ses 34 critères couvrent
 validité, révocation, concurrence, incidents et absence d'accès professionnel.
 
+La nouvelle [EPIC 71](a-faire/epic-71-crm-prospection-animation-coffrets-pro-backlog.md)
+cadre le CRM de prospection : Animation, commerçants partenaires et commandes de
+coffrets pour entreprises/CSE. Import XLSX avec rapprochement et validation du mapping,
+organisations/contacts/opportunités, étapes, historique, tâches et rappels internes,
+carte de France par commune et conversion explicite vers les parcours métier.
+Le fichier Gironde V2 a été examiné en lecture seule ; 24 critères, sans import réel.
+
 Le 5 octobre, l'[EPIC 72 — Accès salariés Localeo Pro](en-cours/epic-72-acces-salaries-validation-localeo-pro-backlog.md)
 ajoute l'invitation email, le compte individuel limité au scanner Coffret/Animation,
 la révocation et l'audit : 22 critères, historique complet du commerce en lecture seule, option ERP désactivée par défaut et sans plafond. L'EPIC 70 est
@@ -108,6 +115,7 @@ précise la provenance et les divergences historiques conservées.
 | 35 | Terminee (historique) | Clôture conservée ; le cadrage non livré des nouveaux rôles est transféré à l'EPIC 69 sur demande explicite du 1er octobre. |
 | 69 | Terminee | [Profils et accès ERP/satellites](terminees/epic-69-profils-acces-erp-satellites-backlog.md) : clôture le 2 octobre après validation CA-18, 27 critères conservés ; recette cible et configuration dans le bilan. |
 | 70 | En cours | [Validation sur téléphone client](en-cours/epic-70-validation-prestation-telephone-client-backlog.md) : PIN dédié retenu, 34 critères ; contexte transactionnel, gestion commerçant du PIN et parcours client sans matériel ; risque résiduel borné par les droits, validité et révocation. |
+| 71 | A faire | [CRM de prospection](a-faire/epic-71-crm-prospection-animation-coffrets-pro-backlog.md) : trois axes commerciaux, fichier Gironde V2 examiné, import contrôlé, carte communale, historique, tâches et rappels internes ; 24 critères, cadrage initial sans implémentation. |
 | 72 | En cours | [Accès salariés Localeo Pro](en-cours/epic-72-acces-salaries-validation-localeo-pro-backlog.md) : implémentation locale vérifiée, 22 critères ; option ERP, invitations, scanner et historique limités, conservation. |
 | Autres identifiants du tronc commun | Terminees | Statut produit consolide conserve ; les anciennes mentions de stories a faire ne rouvrent pas ces epics. |
 
