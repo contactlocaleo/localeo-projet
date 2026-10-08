@@ -105,6 +105,13 @@ Les chemins de session existants sous `/protected/identite-acces/commercants`, s
 
 Erreurs cibles dans l'enveloppe API commune, code stable et identifiant de corrélation : 401 `SESSION_INVALIDE` ; 403 `ACTION_NON_AUTORISEE`, `OPTION_SALARIES_INACTIVE`, `ACCES_SALARIE_REVOQUE` pour session connue ; 404 `RESSOURCE_INTROUVABLE` pour ressource tierce ; 409 `IDENTITE_PRO_INDISPONIBLE`, `VERSION_OBSOLETE`, `IDEMPOTENCE_CONFLIT` ; 400 `LIEN_INDISPONIBLE` sans distinguer token inconnu/expiré/utilisé ; 422 payload/politique mot de passe ; 429 limitation avec `Retry-After`. Login public reste générique et ne révèle ni commerce ni révocation.
 
+Exception technique à distinguer des refus d’habilitation : le `PUT` ERP demandant
+`active=true` alors que `LOCALEO_SALARIES_ENABLED=false` répond **409
+`OPTION_SALARIES_INACTIVE`**, sans mutation. L’ERP conserve la session et explique
+que la configuration de l’environnement doit être finalisée. La lecture et la
+désactivation restent disponibles aux rôles autorisés ; les refus salariés
+d’option inactive restent en 403.
+
 Idempotence des invitations : même acteur/commande/clé et même corps normalisé retourne le reçu ; corps différent donne 409. Le reçu ne contient jamais le token. Renvoi crée au plus une génération et une intention email. Le fournisseur email n'est pas transactionnel : outbox dédupliquée par invitation/génération, worker revérifiant annulation/expiration avant émission. Le token est persisté uniquement sous forme de hash côté identité. Pour la livraison
 email asynchrone, la donnée permettant de construire le lien est chiffrée dans
 une charge de remise protégée, accessible au seul worker par un port de chiffrement ;

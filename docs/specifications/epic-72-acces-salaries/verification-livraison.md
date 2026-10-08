@@ -2,6 +2,31 @@
 
 Ce document conserve la matrice de conception du 5 octobre et le bilan local des 7–8 octobre ci-dessous. Aucun déploiement ni envoi email réel n’a été effectué. Références : [parcours](README.md), [architecture et contrats](architecture-contrats.md), [backlog](../../roadmap/en-cours/epic-72-acces-salaries-validation-localeo-pro-backlog.md).
 
+## Correctif ERP — 8 octobre 2026
+
+Sur le test exécutant `1.0.0+07942f4`, cinq refus d’activation
+`OPTION_SALARIES_INACTIVE` sont relevés dans l’audit entre 11:33 et 11:46 UTC.
+L’ouverture technique globale est fermée. Le statut 403 faisait également traiter
+ce refus par l’ERP comme une session expirée.
+
+Correction locale : statut 409 pour cette seule activation techniquement
+indisponible, conservation du code d’erreur par le client ERP, message explicite et
+session conservée. Aucun contournement de l’option globale ou des permissions.
+Les tests reproduisent l’échec avant correction puis vérifient le refus sans
+transaction, la lecture et la désactivation toujours possibles, et le parcours
+ERP mobile/ordinateur avant puis après ouverture technique.
+
+Preuves : 473 tests Python réussis (architecture obligatoire, orchestration ciblée
+et API E72), scénario navigateur `tests/browser/acces-commercant-erp.cjs` réussi
+en 390 et 1280 pixels. Pas de migration ni de modification du générateur : aucune
+donnée, transition métier ou structure persistée ne change. Pro, Marketplace et
+Animation ne consomment pas cette commande ERP ; aucun changement requis.
+
+Limite : correctif non déployé et configuration Render non modifiée lors de ce
+contrôle, l’accès au tableau de bord nécessitant une connexion. La recette réelle
+d’activation reste à effectuer après ouverture technique selon le
+[guide d’exploitation](guide-utilisation-exploitation.md#activation-erp-indisponible).
+
 ## Matrice exhaustive des critères
 
 Les lignes suivantes sont les scénarios de référence ; leurs preuves locales figurent dans le bilan ci-dessous. Les codes D/I/F/O désignent les impacts détaillés après la matrice, pas une preuve de succès.
