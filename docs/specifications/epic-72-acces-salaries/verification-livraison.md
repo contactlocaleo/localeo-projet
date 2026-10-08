@@ -174,3 +174,34 @@ Aucune base de démonstration partagée ou de production n’a été modifiée.
 
 Les commits et leur publication sont distincts de l’application des migrations,
 du déploiement et de l’activation de l’option. Ces opérations ne sont pas réalisées.
+
+
+## Migration de la base de test — 8 octobre 2026
+
+Sur demande explicite, les migrations 256 à 259 ont été appliquées à la cible
+configurée par `.env.test`, contrôlée distincte de la production. Le gestionnaire
+officiel ne signale plus aucune migration en attente. Le contrôle final confirme
+le registre de tous les identifiants principaux, les deux déclencheurs actifs et
+zéro option salariés activée. Aucune génération de données ni invitation envoyée.
+
+La première tentative a appliqué 256/257 puis annulé 258 sur `42P07` : le bootstrap
+avait déjà créé les six tables salariées vides, sans les nouvelles colonnes des
+tables existantes ni les defaults SQL et CHECK attendus. La correction de
+compatibilité complète ce schéma sans supprimer de données. Les empreintes LF/CRLF
+de la version initiale 258 sont explicitement reconnues par le gestionnaire : une
+base déjà migrée ne rejoue pas cette migration, et le contrôle d’intégrité subsiste.
+
+Reproduction locale : nominal réussi, précréation ORM en échec avant correction.
+Après correction : **15 tests réussis**, dont bootstrap partiel/complet, préservation
+d’une session salariée et de comptes révoqués, defaults et CHECK, refus des
+collisions et compatibilité du gestionnaire. Revue indépendante sans blocage restant.
+Les migrations 258/259 ont ensuite réussi sur la cible de test, avec contrôle final.
+Contrats API et interfaces inchangés ; les scénarios de migration couvrent également
+la création nominale utilisée par le générateur. Aucun accès à la production.
+
+La sauvegarde locale complète proposée avant opération a été refusée par le
+contrôle automatique, car elle aurait copié des données potentiellement sensibles
+hors du périmètre demandé. Aucune copie n’a été créée. Les migrations ont été
+exécutées dans les transactions du gestionnaire ; aucune restauration n’a été faite.
+Ce résultat prouve la migration de test, pas une recette fonctionnelle à distance
+ni l’activation des fonctionnalités.
