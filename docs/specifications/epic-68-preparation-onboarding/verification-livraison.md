@@ -463,3 +463,39 @@ Le [reçu de livraison TEST](livraison-test.md) conserve les commits publiés, l
 migrations exécutées, les contrôles sur la cible et le blocage documentaire
 Render restant. Le code est déployé ; la livraison complète et la clôture ne sont
 pas déclarées tant que ce blocage et la recette attendue ne sont pas levés.
+
+
+## E68-EVOL-20261008-ADMIN — bilan local du 8 octobre 2026
+
+**E68-CA-32 ajouté**, sans modifier les règles CA-23/25/26 ni le statut de l’epic.
+Le formulaire commun quitte les dossiers pour **OnBoard → Administration**,
+accessible à l’administrateur seul, sans dossier obligatoire, avec lien direct
+`/internal/onboard#administration`, rechargement et retour **Dossiers**.
+
+| Preuve exécutée | Résultat |
+| --- | --- |
+| `node tests/browser/onboard-administration.cjs` | 6 scénarios réussis : 390/1280 px, absence de politique dans un dossier, aperçu puis confirmation versionnée/CSRF, accès direct sans dossier et rechargement, autre profil refusé, saisie pendant aperçu, navigation avec réponse tardive, conflit 409, retrait de droits confirmé par 403 et formulaire supprimé après fin des requêtes. |
+| `node tests/frontend/test_communications_simple_browser.mjs` | 6 scénarios réussis : aperçu/confirmation de pack, blocage, réponse incertaine sans renvoi et reprise ; aucun envoi réel. |
+| `node tests/frontend/test_preparation_browser.mjs` | 5 scénarios réussis : préparation 390/1280 px, réponses tardives, reprise explicite et consultation seule. |
+| `node tests/browser/epic69-onboard.cjs` | Parcours Lecteur/Backoffice, périmètres, changement de droits et purge de session réussis. |
+| Runner Python isolé : contrats OnBoard, permissions préparation et trois suites obligatoires d’architecture/couverture | 494 tests réussis ; aucune base distante utilisée. |
+| Vérification visuelle | Captures locales 390 et 1280 px examinées ; aucune largeur débordante. |
+
+Les fixtures isolant l’API JavaScript ont été adaptées à la nouvelle navigation,
+sans retrait d’assertion. La fixture E69 inclut désormais la lecture de préparation.
+Sa vérification du profil Lecteur a conduit à retirer les boutons de soumission
+inactifs dans la préparation en consultation seule ; les contrôles serveur ne
+changent pas. Après retrait de session depuis Administration, le message de
+reconnexion reste visible sur mobile. La revue indépendante a également fait
+renforcer la preuve de retrait de droits pour attendre la réponse 403, et non un
+simple écran transitoire de chargement.
+
+Périmètre : backend hébergeant OnBoard et documentation projet. Routes métier,
+contrats OpenAPI, données, migrations, configuration, autres applications et
+fixtures du générateur inchangés. Aucun message, accès distant, déploiement ou
+activation effectués. Les ressources OnBoard sont versionnées ensemble et le
+nouveau script figure dans la liste des ressources autorisées.
+
+Contrôles documentaires : `check_guidance.py` réussi (92 guides, 970 liens au
+premier passage), `sync_documentation.py --check-sources` réussi (122 documents).
+Les travaux E71 demeurent indépendants de cette évolution locale.

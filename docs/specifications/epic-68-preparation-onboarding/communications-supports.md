@@ -286,3 +286,22 @@ individuel, le scanner et l’historique restreint, puis la révocation lors d�
 Aucun compte principal partagé, mot de passe ou lien d’invitation dans les supports.
 La démonstration utilise uniquement des comptes fictifs et ne valide pas une
 prestation réelle. Le mobile personnel suffit, sans installation obligatoire.
+
+
+## Administration des réglages communs — évolution du 8 octobre 2026
+
+Dans **Localeo OnBoard → Administration**, l’administrateur retrouve les réglages
+pour tous les commerçants. Cette rubrique remplace le panneau auparavant répété
+dans chaque dossier ; elle ne requiert ni dossier sélectionné ni rendez-vous.
+Les opérateurs continuent à confirmer les messages depuis le dossier concerné.
+
+Renseigner les paramètres et le motif, consulter les impacts avec **Vérifier les
+messages concernés**, puis **Confirmer la politique globale**. Une modification
+après l’aperçu impose de vérifier à nouveau les impacts. Une réponse d’aperçu reçue
+après une nouvelle saisie ou après avoir quitté la rubrique ne permet pas de
+confirmer une version périmée. Un conflit de version demande une actualisation.
+
+Les paramètres, approbations éditoriales, droits administrateur, contrôle de version
+et confirmations individuelles restent identiques. Enregistrer des réglages ne
+vaut jamais autorisation d’envoyer un message. Le retour **Dossiers** permet de
+reprendre l’accompagnement ; aucune politique globale n’est chargée dans ces vues.

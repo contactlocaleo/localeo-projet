@@ -497,3 +497,26 @@ reports et absences. Comparer cohortes et même fenêtre, sans imputer zéro aux
 Hors périmètre : CRM autonome, nouvelle politique de reversement, sas E62,
 signature électronique nouvelle, création Teams automatique, campagnes marketing
 et mesure intrusive d'ouverture comme preuve de compréhension.
+
+
+## E68-EVOL-20261008-ADMIN — isolation de la présentation globale
+
+La rubrique Administration d’OnBoard porte seule le formulaire de politique.
+La navigation et le montage du formulaire sont indépendants de l’identité d’un
+dossier. Les réponses asynchrones sont bornées à la vue et à la session courantes ;
+un changement de formulaire invalide l’aperçu correspondant.
+
+Les routes existantes `GET/PUT /internal/onboard/api/preparation/politique` et
+`POST /internal/onboard/api/preparation/politique/apercu` sont réutilisées sans
+changement de schéma. Le serveur conserve le contrôle administrateur, les capacités,
+le CSRF, l’idempotence et la version attendue. Le domaine des communications reste
+propriétaire des autorisations et de leur invalidation ; aucune règle métier
+n’est déplacée dans l’interface.
+
+Impact limité au backend hébergeant la PWA OnBoard et à la documentation canonique.
+Aucun changement des autres frontends, données, migrations ou variables de
+configuration. Les fixtures métier et le générateur restent valables : ni rôle,
+identité, permission ni état de données n’évolue. La recette navigateur utilise
+uniquement des réponses fictives et couvre le rôle administrateur existant.
+Livrer ensemble le HTML et les ressources OnBoard versionnées ; aucune activation
+fonctionnelle ou manipulation de base ne fait partie de cette évolution.

@@ -5,7 +5,7 @@ Spécification **V1.2 — 3 octobre 2026**. État produit : **En cours**, selon 
 Ce dossier décrit la V1.2 implémentée localement ; les preuves et limites figurent
 dans la [vérification de livraison](verification-livraison.md). Aucun envoi réel
 ni recette déployée n'est attesté. L'historique des décisions reste dans le backlog.
-Les 31 identifiants E68-CA-01 à 31 restent stables.
+Les 31 identifiants E68-CA-01 à 31 restent stables. L’évolution du 8 octobre ajoute E68-CA-32 pour la rubrique Administration.
 
 ## Objectif et périmètre
 
@@ -225,3 +225,20 @@ distinctes. Un lot partiel ne vaut pas livraison du processus complet.
 ARB-02 (durées), ARB-03 (même espace sans dépôt), ARB-05 (signature jour J et dépôt
 interne après rendez-vous) et ARB-09 (confirmations d'envoi) sont résolus et intégrés
 aux étapes ci-dessus. Seule l'approbation éditoriale ARB-07 reste attendue avant diffusion.
+
+
+## Évolution du 8 octobre 2026 — Administration
+
+Référence **E68-EVOL-20261008-ADMIN**, critère **E68-CA-32**. L’administrateur ouvre
+**Administration** depuis la navigation de Localeo OnBoard pour consulter et
+modifier les réglages communs des communications. La rubrique est accessible
+sans sélectionner de commerçant, y compris si la liste des dossiers est vide.
+Le lien direct conserve cette rubrique lors d’un rechargement. **Dossiers** ramène
+au travail d’accompagnement.
+
+« Réglages pour tous les commerçants (administrateur) » disparaît des dossiers,
+qui conservent leurs aperçus, confirmations et suivis de messages individuels.
+Les autres profils ne disposent pas de cette entrée et ne peuvent pas accéder
+aux réglages par une adresse directe. Les droits du serveur restent la référence.
+Voir les [modalités de réglage](communications-supports.md) et les
+[preuves de cette évolution](verification-livraison.md).

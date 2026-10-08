@@ -1055,3 +1055,23 @@ ne prouvent aucune fonction applicative ni disponibilité du parcours déployé.
 
 Les tests métier de la matrice restent non exécutés. L'epic conserve son statut
 **À faire** ; le dossier distingue les parties conçues des arbitrages encore ouverts.
+
+
+## Évolution E68-EVOL-20261008-ADMIN — rubrique Administration OnBoard
+
+Décision utilisateur du 8 octobre 2026 : déplacer « Réglages pour tous les
+commerçants (administrateur) » dans une rubrique **Administration** dédiée de
+Localeo OnBoard, et retirer cette section de toutes les vues individuelles.
+Le placement précédent dans chaque dossier est remplacé ; les réglages restent
+globaux et réservés à l’administrateur existant. Le statut **En cours** et les
+critères E68-CA-01 à 31 sont conservés.
+
+| Critère ajouté | Contexte et action | Résultat attendu |
+| --- | --- | --- |
+| E68-CA-32 | Administrateur dans OnBoard, avec ou sans dossier ; ouvrir Administration, régler puis revenir aux dossiers | Rubrique autonome accessible directement et après rechargement, aucun réglage ni chargement de politique dans les vues commerçants. Autres profils exclus, y compris accès direct. Aperçu des impacts, motif, version et confirmation explicite conservés ; saisie modifiée ou réponse tardive ne valide pas un ancien aperçu. Aucun envoi de message par simple navigation ou sauvegarde des réglages. |
+
+Les CA-23, 25 et 26 gardent leurs règles de calendrier, autorisation et concurrence.
+La [spécification](../../specifications/epic-68-preparation-onboarding/README.md)
+et le [bilan dédié](../../specifications/epic-68-preparation-onboarding/verification-livraison.md)
+portent l’implémentation et ses preuves. Aucun nouveau rôle, contrat API, paramètre
+métier ni changement de données n’est demandé.
