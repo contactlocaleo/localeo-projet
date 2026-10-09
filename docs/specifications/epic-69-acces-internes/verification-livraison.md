@@ -880,3 +880,36 @@ V1.4 sont réutilisés, et la recette navigateur affectée a été réexécutée
 **L’EPIC reste en cours.** La revue de clôture n'avait exécuté aucune migration
 distante ; l'intervention suivante a migré la base de test jusqu'à v253. Aucune
 clôture ni recette applicative déployée n'est annoncée.
+
+
+## Correctif de démarrage Support — 9 octobre 2026
+
+Sur la base backend `6eff051` (également intégrée à démo `4b5729d`), le chargement
+du vrai module `instances.js` échoue dans Chromium avec une erreur de syntaxe.
+La page Support reste sur « Chargement de votre espace… » avant tout appel
+métier. Une condition ternaire incomplète autour du formulaire de mise à jour
+d’un ticket est corrigée : ce formulaire reste réservé à `support.gerer`.
+Le nom du rendu de chronologie est également séparé du prédicat d’accès
+administrateur historique, pour ne pas masquer ce dernier dans le module.
+
+Le module étant partagé, le correctif concerne Support et les dossiers d’instance
+de l’ERP. Il restaure les permissions E69 existantes ; il ne rouvre pas l’epic et
+ne change ni API, règle backend, schéma SQL ni configuration. Le générateur et
+les données de démonstration sont sans impact : la panne précède leur lecture.
+La fixture du test de cycle PWA sert désormais la dépendance `permissions.js`
+et un contexte nominatif autorisé, au lieu d’un ancien contexte incomplet.
+
+Les contrôles sont locaux avec réponses API simulées ; la version du service
+signalé et la résolution distante ne sont pas vérifiées. Aucun déploiement pour
+ce lot.
+
+Preuves après correction : `node tests/browser/support-loading.cjs` réussit
+sur quatre profils (consultation, gestion, administrateur historique et refus
+sans capacité Support), avec
+les vrais modules, recherche puis dossier, tickets, historique et objets associés,
+absence de liens administratifs pour les profils nominatifs et aucune erreur JS.
+`node tests/browser/pwa-lifecycle.cjs` réussit sur les quatre satellites : mises
+à jour, préservation des saisies, session, autres onglets et mode hors ligne.
+Contrôles documentaires : 92 guides, 970 liens, aucune erreur ; 122 sources
+exportées vérifiées. Aucun code Python modifié, donc suite d’architecture Python
+non réexécutée pour ce correctif JavaScript ciblé.
