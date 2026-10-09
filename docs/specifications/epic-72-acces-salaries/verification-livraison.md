@@ -49,6 +49,33 @@ Le [guide](guide-utilisation-exploitation.md#renommage-de-configuration--8-octob
 décrit la bascule des variables en conservant les clés et identifiants existants.
 Configuration distante, commit, push et déploiement non effectués pour ce lot.
 
+## Correctif CORS connexion Pro — 9 octobre 2026
+
+Sur le test `1.0.0+0a0057c`, reproduction sans identifiants du précontrôle
+`OPTIONS /protected/identite-acces/commercants/auth/login` : origine
+`https://test-commercant.localeo.city`, méthode POST et en-têtes
+`content-type,x-localeo-pro-contract` donnent 400 `Disallowed CORS headers`.
+L’origine est acceptée ; l’en-tête de compatibilité E72 manque dans la liste backend.
+Le navigateur bloque donc la connexion avant toute vérification du mot de passe.
+
+Le premier correctif CORS (479 tests réussis) est remplacé avant publication par
+l’arbitrage du 9 octobre : suppression de l’en-tête de compatibilité, aucune
+ancienne version déployée n’étant à prendre en charge. Pro ne l’envoie plus ;
+login et validation de session backend n’exigent plus ce marqueur. Les contrôles
+serveur du compte, du mot de passe, de l’option, du commerce et des générations de
+session restent en place. Aucun ajout manuel CORS nécessaire pour le nouveau client.
+Les tests de précontrôle couvrent les en-têtes réellement utilisés et maintiennent
+les refus des origines et en-têtes inconnus. Aucun impact SQL, données de
+démonstration ou schéma OpenAPI (l’en-tête était lu directement dans la requête).
+Backend et Pro doivent être livrés ensemble ; pas de déploiement effectué ici.
+
+Preuves après suppression : 482 tests backend réussis (architecture obligatoire,
+API et CORS), puis les 14 tests de sécurité salariés exécutés séparément sur
+PostgreSQL jetable réussissent, sans skip. Pro : 19 tests session/salariés réussis.
+Le précontrôle couvre POST login et GET validation de session. Les contrôles
+documentaires et des 122 sources exportées passent. Aucune connexion réelle ni
+livraison distante réalisée ; modifications locales non committées.
+
 ## Matrice exhaustive des critères
 
 Les lignes suivantes sont les scénarios de référence ; leurs preuves locales figurent dans le bilan ci-dessous. Les codes D/I/F/O désignent les impacts détaillés après la matrice, pas une preuve de succès.
