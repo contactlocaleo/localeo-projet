@@ -2,6 +2,36 @@
 
 Ce document conserve la matrice de conception du 5 octobre et le bilan local des 7–8 octobre ci-dessous. Aucun déploiement ni envoi email réel n’a été effectué. Références : [parcours](README.md), [architecture et contrats](architecture-contrats.md), [backlog](../../roadmap/en-cours/epic-72-acces-salaries-validation-localeo-pro-backlog.md).
 
+## Correctif UX salariée — 9 octobre 2026
+
+**E72-CORR-20261009-UX**, base Pro `03005fd` et changements locaux : le salarié
+utilisait un en-tête et un menu dédiés, distincts du cadre de l’accès commerçant.
+La correction réutilise les composants communs d’en-tête, de navigation mobile
+et latérale et de menu du compte. Le scanner et l’historique reprennent les styles
+opérationnels. Les destinations restent limitées aux capacités salariées ; aucun
+chargement de profil ou de finance n’est ajouté. Les états de session, refus,
+reprise incertaine et confirmation explicite restent applicables.
+
+La revue indépendante du shell ne relève pas d’écart de permissions ou de
+régression du principal. Les liens juridiques du pied de page restent accessibles
+par les routes publiques. Preuves locales : **38 tests unitaires** réussis (navigation et compte principal/
+salarié, session et caméra) et **13 scénarios navigateur** réussis, dont sept
+salariés et six de non-régression de l’en-tête principal. Les scénarios salariés
+contrôlent le scanner et l’historique à 320, 390 et 1 280 pixels, les deux entrées
+autorisées, le compte réduit, l’absence d’appels de gestion et de débordement
+horizontal, ainsi que l’arrivée automatique sur le scanner. Sources :
+`tests/e2e/employees.spec.js`, tests de navigation, compte et salariés dans Pro.
+Après ajustement de l’espacement du panneau scanner, les trois scénarios
+responsive sont réexécutés avec succès. Builds production et navigateur réussis.
+Captures locales contrôlées dans `localeo-commercant/tmp/employee-shared-shell-final/`.
+La caméra est simulée dans les tests ; aucune recette sur appareil physique
+ou environnement de test déployé n’est revendiquée.
+
+Périmètre : Pro et documentation. Aucun contrat API, schéma SQL, paramètre de
+configuration, donnée ou scénario du générateur ne change ; aucune migration ou
+nouvelle génération nécessaire. Backend, Marketplace et Animation inchangés.
+Aucun déploiement ni recette distante effectué pour ce correctif.
+
 ## Correctif ERP — 8 octobre 2026
 
 Sur le test exécutant `1.0.0+07942f4`, cinq refus d’activation

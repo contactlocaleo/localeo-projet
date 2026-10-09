@@ -20,6 +20,15 @@ Le responsable saisit l'email du salarié dans Localeo Pro. Le salarié reçoit 
 
 ## Périmètre
 
+### Correctif E72-CORR-20261009-UX
+
+Demande du 9 octobre : reprendre pour le salarié le menu et le style de l’accès
+commerçant. Les critères E72-CA-06/09/18 conservent leurs identifiants : shell
+commun, navigation Scanner/Historique selon capacités, menu du compte limité à
+la récupération et à la déconnexion, en-tête mobile sur une ligne. Aucun nouveau
+droit ; les URL interdites restent refusées et le scanner s’ouvre directement.
+Les preuves figurent dans le [bilan E72](../../specifications/epic-72-acces-salaries/verification-livraison.md).
+
 ### Évolution E72-EVOL-20261009-ACCUEIL
 
 Demande du 9 octobre : contextualiser l’invitation et rendre le scan immédiatement

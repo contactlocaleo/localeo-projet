@@ -20,6 +20,23 @@ Version du 5 octobre 2026 ; [périmètre et parcours](README.md), [22 critères 
 
 Les primitives de mot de passe, aléa cryptographique, hash des tokens, email/outbox et limitation d'authentification sont réutilisées. Les états ERP et les tokens principaux ne deviennent pas des états/tokens salariés par simple alias.
 
+## Présentation salariée partagée — E72-CORR-20261009-UX
+
+Localeo Pro réutilise `ApplicationFrame`, `MobileNavigation` et
+`MerchantSessionHeader` pour les deux types d’acteur. La variante salariée
+présente uniquement les destinations correspondant à ses capacités de scan et
+d’historique ; le menu du compte exclut profil et contrat du responsable.
+`EmployeePortal` conserve les états de vérification de session, d’indisponibilité
+et de refus d’une URL interdite. Partager la présentation ne déclenche aucun
+chargement de profil ou de données financières du compte principal et ne remplace
+pas les autorisations backend. Les styles opérationnels communs habillent le
+scanner et l’historique sans changer les commandes ou la confirmation explicite.
+
+Sans impact sur les contrats API, les migrations, la configuration et le
+générateur de démonstration : mêmes identités, capacités et données ; seul le
+consommateur Pro et sa documentation changent. La recette utilise des sessions
+et réponses simulées, sans invitation ni validation sur un environnement réel.
+
 ## Domaine et données cibles
 
 Le domaine `identite_acces` possède les nouveaux agrégats et la politique pure d'autorisation. `exploitation` possède la consommation Coffret ; `animation_locale` possède passage/progression/récompense. Application : chargement sous verrou, faits d'autorisation, UoW, ports, audit et outbox. Adaptateurs : ORM, HTTP, email et ERP. Conformité à l'[ADR domaine d'abord](../../architecture/decisions/ADR-2026-08-28-domaine-avant-services-applicatifs.md).

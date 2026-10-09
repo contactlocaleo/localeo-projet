@@ -15,6 +15,17 @@ Le responsable invite par email. Le lien est à usage unique et valable 24 heure
 
 Le salarié utilise son navigateur mobile personnel sans installation obligatoire. Après connexion, il arrive sur le scanner Coffret/Animation. Il peut consulter toutes les validations du commerce, quel que soit l'auteur ou le mode, en lecture seule et sans donnée financière. Les autres fonctionnalités, notamment PIN, catalogue, profil commercial, remboursements, exports, messages, facturation et administration Animation, lui sont interdites, y compris par API.
 
+## Présentation commune Localeo Pro
+
+Correctif **E72-CORR-20261009-UX** : l’espace salarié reprend l’en-tête, le menu
+du compte, la navigation et les styles de l’espace commerçant. Sur mobile,
+l’en-tête reste sur une ligne et la navigation donne accès au scanner et à
+l’historique ; sur ordinateur, ces mêmes entrées figurent dans le menu latéral.
+Les entrées affichées respectent les capacités de la session salariée.
+Le menu du compte propose la récupération de l’accès et la déconnexion, sans
+profil commercial, contrat ni fonctions réservées au responsable. L’arrivée
+directe sur le scanner et les contrôles serveur restent applicables.
+
 ## Parcours et refus
 
 Évolution **E72-EVOL-20261009-ACCUEIL** : l’email d’initialisation contextualise

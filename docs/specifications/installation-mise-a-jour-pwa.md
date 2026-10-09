@@ -43,7 +43,7 @@ dans les menus/dialogues ; aucun traitement métier ou protocole PWA ne change.
 | Surface | Preuves locales |
 | --- | --- |
 | Pro | 6 scénarios de header à 320/360/390/720/768/820 px, 3 scénarios PWA (accessibilité et cycle réel du worker), 19 tests Vitest et build isolé réussis |
-| Pro salarié | Complément lors de `E72-EVOL-20261009-ACCUEIL` : header dédié sur une rangée à 320/390 px, commerce tronqué et menu accessible conservant les actions ; preuves intégrées aux 6 scénarios navigateur E72 |
+| Pro salarié | Depuis `E72-CORR-20261009-UX` : en-tête et navigation partagés avec le principal, menu du compte réduit et entrées Scanner/Historique ; une rangée vérifiée à 320/390 px et présentation desktop à 1 280 px dans les scénarios navigateur E72 |
 | Live | 6 scénarios de header aux mêmes largeurs, 5 tests de mise à jour et ESLint ciblé réussis ; état installé et ouverture des réglages vérifiés |
 | Animation | Recette PWA à 320/360/390/720/1280 px avec installation et mise à jour simultanées, commune longue, clavier et dialogues ; 9 tests PWA, build isolé, types et lint réussis |
 | OnBoard/Ops/Support/Atelier et ERP | `node tests/browser/header-mobile.cjs` réussi sur les cinq identités à 320/360/390/720/768/820 px : même rangée, absence de recouvrement/débordement, cibles de 44 px, navigation et aide d’installation ; 24 tests Python PWA réussis |
