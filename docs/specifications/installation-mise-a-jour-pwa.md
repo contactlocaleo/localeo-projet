@@ -21,6 +21,46 @@ Une version plus récente détectée est proposée par un bouton **Mettre à jou
 | PWA-CA5 | Échec et réseau indisponible sont récupérables, doubles clics bloqués | Tests des erreurs, bouton occupé, réessai |
 | PWA-CA6 | Aucun nouveau cache d'API, document privé, jeton ou page authentifiée ; droits et sessions inchangés | Tests SW et accès aux ressources publiques exactes, non-régression sessions |
 | PWA-CA7 | Boutons et aides utilisables au clavier, sur mobile et bureau ; installation réelle iOS/Android | Recette navigateur responsive puis recette sur appareils physiques |
+| PWA-CA8 | Sur mobile, le header principal reste sur une seule rangée, sans débordement ni recouvrement, même avec installation, mise à jour et compte visibles | Contrôles géométriques à 320, 360, 390 et 720 px ; boutons tactiles d’au moins 44 px, libellés accessibles et menus utilisables |
+
+Correction du 9 octobre 2026 : les actions du header deviennent compactes sur
+mobile, avec leurs noms accessibles conservés. Les noms longs sont tronqués si
+nécessaire et restent consultables via les menus correspondants. Les menus,
+dialogues et messages ouverts ne sont pas contraints à une ligne : leur contenu
+doit rester lisible. Ce comportement concerne Pro, Live, Animation et le header
+partagé OnBoard/Ops/Support/Atelier (également utilisé par l’ERP), ainsi que le
+header distinct de Control. Control conserve son fonctionnement PWA existant.
+
+### Vérification du header mobile — 9 octobre 2026
+
+Les règles ajoutées avec l’installation PWA autorisaient explicitement le retour
+à la ligne des actions. Le défaut a été reproduit avant correction sur Pro
+(décalage vertical de 51 px à 320 px), Live (48 px) et le header interne partagé.
+Les captures corrigées à 320 px ont été inspectées pour Pro, Live, Animation et
+OnBoard. Les actions restent nommées pour les lecteurs d’écran et accessibles
+dans les menus/dialogues ; aucun traitement métier ou protocole PWA ne change.
+
+| Surface | Preuves locales |
+| --- | --- |
+| Pro | 6 scénarios de header à 320/360/390/720/768/820 px, 3 scénarios PWA (accessibilité et cycle réel du worker), 19 tests Vitest et build isolé réussis |
+| Pro salarié | Complément lors de `E72-EVOL-20261009-ACCUEIL` : header dédié sur une rangée à 320/390 px, commerce tronqué et menu accessible conservant les actions ; preuves intégrées aux 6 scénarios navigateur E72 |
+| Live | 6 scénarios de header aux mêmes largeurs, 5 tests de mise à jour et ESLint ciblé réussis ; état installé et ouverture des réglages vérifiés |
+| Animation | Recette PWA à 320/360/390/720/1280 px avec installation et mise à jour simultanées, commune longue, clavier et dialogues ; 9 tests PWA, build isolé, types et lint réussis |
+| OnBoard/Ops/Support/Atelier et ERP | `node tests/browser/header-mobile.cjs` réussi sur les cinq identités à 320/360/390/720/768/820 px : même rangée, absence de recouvrement/débordement, cibles de 44 px, navigation et aide d’installation ; 24 tests Python PWA réussis |
+| Control | `node tests/browser/control-header-mobile.cjs` (Python du projet via `TEST_PYTHON`) réussi à 320/360/390/720/1280 px : header compact, action administration de 44 px, absence de chevauchement et navigation clavier ; capture 320 px inspectée. Extraction isolée du HTML, polices réseau bloquées : rendu de repli contrôlé |
+
+Suite backend finale après adaptation de Control : **491 tests réussis**, dont
+les contrôles d’architecture obligatoires et les 24 tests PWA. Documentation :
+93 guides, 977 liens locaux et 122 sources exportées vérifiés sans erreur.
+
+Limites indépendantes : le scénario étendu `pwa-lifecycle.cjs` bloque sur le champ
+Support `[name="description"]`, avec le header corrigé **et avec les ressources
+du HEAD antérieur**. Cette recette complète ne constitue donc pas une réussite
+pour ce lot ; le test ciblé des headers passe. Le lint global Marketplace rencontre
+un accès refusé à `output/demo-generation/pytest-bum-registry` ; le lint des deux
+sources modifiées passe. Aucun changement API, SQL, habilitations, données de
+démonstration ou configuration d’exploitation. Pas de déploiement ni de recette
+sur appareils physiques réalisés pour ce correctif.
 
 ## Architecture et impacts
 
