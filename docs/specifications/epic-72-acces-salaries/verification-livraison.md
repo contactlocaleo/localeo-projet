@@ -356,3 +356,47 @@ hors du périmètre demandé. Aucune copie n’a été créée. Les migrations o
 exécutées dans les transactions du gestionnaire ; aucune restauration n’a été faite.
 Ce résultat prouve la migration de test, pas une recette fonctionnelle à distance
 ni l’activation des fonctionnalités.
+
+
+## Évolution des états du scan Coffret — 9 octobre 2026
+
+**PRO-SCAN-20261009-ETATS**, base Pro `66be333` et changements locaux.
+Le [parcours commun](../validation-prestations/scan-commercant.md#lisibilité-du-résultat-coffret--9-octobre-2026)
+précise E72-CA-07/09/11/18 : disponibilité verte, absence de prestation rouge,
+prestation déjà validée et confirmation serveur bleues, attente et résultat
+incertain explicités. Les deux profils utilisent une présentation commune,
+avec texte et icône. Les états non reconnus ne proposent pas de validation.
+
+La source active du responsable est `src/ActionWorkspaces.jsx` ; le composant
+homonyme sous `src/features/validation/` n’est pas son point d’entrée. Le salarié
+conserve `EmployeeScanner` et sa projection limitée. Le reçu du responsable
+conserve l’attente de rafraîchissement et le contrôle du résultat serveur.
+Le scan ne valide jamais implicitement et les données financières ou fonctions
+du responsable ne sont pas exposées au salarié.
+
+Impacts : Pro et documentation uniquement. Ni contrat backend, configuration,
+migration, données de démonstration ni droits ajoutés. Tests navigateur avec
+réponses simulées ; aucune validation métier ou invitation réelle envoyée.
+Aucun commit, push ou déploiement pour ce lot.
+
+Preuves unitaires : **48 tests réussis**, dont le parcours à plusieurs prestations,
+la désactivation des commandes pendant l’envoi et la relecture d’un résultat
+incertain confirmant la prise en compte sans renvoyer la commande. La revue
+indépendante ne relève pas de nouveau droit ni de succès prématuré ; le message
+contradictoire « à valider » pour un état indisponible a été retiré.
+
+Preuves navigateur : **37 scénarios réussis, sortie 0**, dont 16 cas couvrant
+les deux profils à 320/390 pixels et les états disponible, déjà validé, absent
+et expiré, avec vérification des couleurs, de la visibilité de l’action et de
+l’absence de débordement. Les scénarios existants couvrent également le reçu,
+la reprise et le scan salarié. Un premier lancement avait terminé les scénarios
+mais bloqué à l’arrêt du serveur ; le résultat retenu provient de la relance
+avec serveur indépendant, terminée normalement.
+
+Après harmonisation finale des styles de cartes et badges, les 16 scénarios
+responsive sont réexécutés avec succès ; build production réussi. Les captures
+finales sont dans `localeo-commercant/tmp/coffret-states-final/` (non versionné).
+Inspection visuelle à 320/390 pixels : actions lisibles, états cohérents entre
+résumé et prestation. Vérifications documentaires et `git diff --check` réussis.
+La recette sur téléphone physique et la vérification d’un déploiement restent
+non exécutées ; les scénarios locaux utilisent Chromium et des réponses simulées.

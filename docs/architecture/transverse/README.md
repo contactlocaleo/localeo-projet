@@ -13,3 +13,5 @@ Ce dossier documente les choix communs a plusieurs EPIC.
 - [Contrôle d'architecture](controle-architecture.md) : principes applicables, preuves de revue, contrôles CI et limites.
 - [ADR domaine d'abord](../decisions/ADR-2026-08-28-domaine-avant-services-applicatifs.md) : placement des invariants et correction progressive de la dette.
 
+
+- [Affichage des dates](affichage-dates.md) : heure de Paris commune aux interfaces, dates civiles et preuves.

@@ -20,6 +20,14 @@ Le responsable saisit l'email du salarié dans Localeo Pro. Le salarié reçoit 
 
 ## Périmètre
 
+### Évolution PRO-SCAN-20261009-ETATS
+
+Les critères E72-CA-07/09/11/18 sont précisés sans changer leurs identifiants :
+l’état de chaque prestation Coffret est visible par couleur, icône et texte,
+avec action explicite seulement lorsque disponible, confirmation serveur et
+résultat incertain distingués. L’évolution s’applique au salarié et au responsable.
+Voir la [présentation commune du scan](../../specifications/validation-prestations/scan-commercant.md#lisibilité-du-résultat-coffret--9-octobre-2026).
+
 ### Correctif E72-CORR-20261009-UX
 
 Demande du 9 octobre : reprendre pour le salarié le menu et le style de l’accès
