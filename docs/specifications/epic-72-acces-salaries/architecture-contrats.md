@@ -133,6 +133,23 @@ Le producteur est FastAPI ; conception canonique ici, OpenAPI documentaire dans 
 
 ## Audit et conservation
 
+### E72-EVOL-20261009-ACCUEIL — invitation et caméra
+
+Le worker de remise transmet au composeur d’email le nom du commerce déjà chargé
+par le rattachement salarié et l’échéance enregistrée de l’invitation. Le rendu
+commun échappe les valeurs dynamiques et produit un texte équivalent. Le nom est
+résolu au moment de la remise, y compris pour une invitation existante en attente.
+Aucun HTML/token brut n’est ajouté à l’outbox persistée ; la charge chiffrée et
+ses règles de retrait restent inchangées. Les liens d’initialisation et de reset
+gardent leurs routes et finalités distinctes. Aucun changement OpenAPI ni SQL.
+
+Pro conserve le routage salarié vers le scanner. Le cycle caméra appartient à
+l’interface : démarrage à l’entrée, autorisation navigateur, arrêt des pistes à
+la sortie/détection et si l’ouverture se termine après démontage. L’état de
+reprise d’une validation incertaine interdit le démarrage automatique. Les
+capacités serveur et la confirmation explicite restent les seules autorisations
+d’effet métier. Le repli manuel ne contourne pas ces contrôles.
+
 Événements : invitation/renvoi/annulation/acceptation, reset, login/refus, révocation, changement option, validation et refus. Attributs : acteur authentifié type/ID, commerce, cible, action, date serveur, résultat/code sûr, corrélation, mode, version avant/après. Exclure email complet des logs techniques lorsque ID suffit, mot de passe, token invitation/session/reset et QR. L'auteur du reset public n'est identifié qu'après validation du token. Les erreurs d'envoi ne publient pas le lien dans l'ERP.
 
 Appliquer le [rattachement commun de conservation](../identite-acces/conservation-validations-acces.md), établi sur l'Annexe A le 7 octobre : journaux ordinaires au maximum 12 mois, preuves nécessaires de consommation Coffret 5 ans selon l'événement qualifié, preuves d'habilitation 5 ans après la fin de relation correspondante. Secrets et notifications suivent leurs catégories propres. Les archives probatoires sortent de l'historique opérationnel salarié et restent soumises aux habilitations internes. Les jobs et leurs protections SQL/JSONL restent à réaliser et à tester ; le rattachement documentaire est établi.

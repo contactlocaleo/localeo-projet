@@ -20,6 +20,24 @@ Le responsable saisit l'email du salarié dans Localeo Pro. Le salarié reçoit 
 
 ## Périmètre
 
+### Évolution E72-EVOL-20261009-ACCUEIL
+
+Demande du 9 octobre : contextualiser l’invitation et rendre le scan immédiatement
+utilisable après connexion. État **En cours** et identifiants des 22 critères
+conservés. E72-CA-01/02 sont précisés : l’email indique le commerce rattaché,
+l’origine de l’invitation (responsable du commerce), les droits limités, la
+création d’un mot de passe personnel, l’échéance réelle du lien et la suite du
+parcours dans Localeo Pro. E72-CA-06/18 sont précisés : arrivée directe sur le
+scanner, tentative d’ouverture de la caméra sans bouton intermédiaire ; refus ou
+indisponibilité expliqués avec saisie manuelle et réessai. L’autorisation du
+navigateur reste requise ; la confirmation métier n’est jamais automatique.
+Un résultat incertain à relire reste prioritaire sur un nouveau scan.
+
+L’enrichissement éditorial est une évolution ; l’arrivée directe au scanner
+précise et corrige le parcours déjà attendu. Aucun droit, durée d’invitation,
+quota, schéma SQL ou nouveau paramètre d’environnement n’est ajouté. Les preuves
+sont rattachées au [bilan E72](../../specifications/epic-72-acces-salaries/verification-livraison.md).
+
 Décisions utilisateur reportées le 5 octobre 2026 : l’option est sans plafond de
 salariés et désactivée par défaut. Seul Localeo peut l’activer ou la désactiver
 pour un commerce depuis l’ERP : Admin et Backoffice autorisés, Lecteur et Finance

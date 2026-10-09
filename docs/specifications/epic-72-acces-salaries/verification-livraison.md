@@ -78,6 +78,53 @@ livraison distante réalisée ; modifications locales non committées.
 
 ## Matrice exhaustive des critères
 
+### E72-EVOL-20261009-ACCUEIL — contextualisation et scan immédiat
+
+Critères précisés sans renumérotation : **CA-01/02** (email d’initialisation),
+**CA-06** (arrivée directement au scan), **CA-18** (autorisation/refus caméra et
+reprise). CA-07/08/11/12/15/16 restent à préserver : confirmation explicite,
+unicité, révocation, secrets et récupération distincte.
+
+Le worker transmet le nom du commerce et l’échéance persistée au composeur,
+sans modifier le stockage chiffré. HTML échappé et texte décrivent le rattachement,
+les droits, le mot de passe personnel, la connexion au scanner et l’aide. Les
+invitations déjà en attente bénéficient du nouveau contenu lors de leur remise.
+La destination salariée reste `/validation`. Le formulaire de connexion perdait
+les champs `acteur`, `capacites` et `option_salaries_active` avant de transmettre
+la session : leur conservation corrige le détour initial par le parcours principal.
+La session et la route courante sont vérifiées avant montage du scanner, afin
+d’éviter une double ouverture de caméra pendant les transitions de connexion.
+La caméra est ouverte à l’entrée si autorisée et si aucune validation incertaine
+n’attend une relecture.
+
+Backend : **467 contrôles d’architecture**, **21 tests unitaires email** et
+**4 tests PostgreSQL ciblés** réussis. Ils couvrent nom malveillant échappé,
+échéance réelle, finalités initialisation/reset, propagation du contexte serveur,
+envoi hors transaction, non-persistance des secrets, clé absente et remise
+incertaine non rejouée. Aperçu synthétique mobile à 390 px inspecté, ressources
+externes bloquées ; aucun email réel envoyé. Revue indépendante code/tests sans
+écart identifié sur le périmètre email et caméra.
+
+Pro : **24 tests Vitest** et **6 scénarios navigateur** réussis après correction
+de la transmission d’identité à la connexion. Ils vérifient attente de la
+vérification serveur, ouverture caméra unique sans clic, QR Coffret/Animation sans
+confirmation automatique, refus/réessai, décodeur absent, arrêt des pistes et
+résultats/permissions tardifs ignorés. Le flux vidéo est simulé ; la capture mobile
+atteste l’écran d’arrivée, pas une lecture physique de caméra.
+Le header salarié, distinct de celui du responsable, est également compacté
+selon la demande mobile précédente : marque/commerce sur une ligne, menu clavier
+avec historique/récupération/déconnexion, contrôles à 320 et 390 px. Les autres
+travaux locaux sur les headers PWA restent conservés séparément.
+
+Impacts : backend et Pro concernés ; pas de route ni DTO OpenAPI modifié, aucune
+migration SQL/configuration supplémentaire. Marketplace et Animation ne consomment
+pas le parcours salarié. Générateur sans changement de données ou d’habilitation :
+ses comptes utilisent les mêmes flux ; fixtures email adaptées au contexte du
+composeur. Pas de génération réelle, commit, push ou déploiement pour ce lot.
+L’autorisation caméra reste celle du navigateur ; sans API de décodage QR prise
+en charge, le repli manuel reste nécessaire. La recette sur appareils physiques
+reste distincte des simulations locales.
+
 Les lignes suivantes sont les scénarios de référence ; leurs preuves locales figurent dans le bilan ci-dessous. Les codes D/I/F/O désignent les impacts détaillés après la matrice, pas une preuve de succès.
 
 | Critère | Propriétaire/comportement | Preuve prévue et refus déterminant | Impacts |

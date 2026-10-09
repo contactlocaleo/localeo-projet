@@ -17,6 +17,20 @@ Le salarié utilise son navigateur mobile personnel sans installation obligatoir
 
 ## Parcours et refus
 
+Évolution **E72-EVOL-20261009-ACCUEIL** : l’email d’initialisation contextualise
+l’invitation par le responsable, nomme le commerce et explique les droits
+scanner/historique, le mot de passe personnel, l’expiration effective et la
+connexion suivante. Les données proviennent du rattachement serveur ; aucun
+nom de responsable n’est inventé. Le mail de récupération reste distinct.
+
+Après connexion salariée, le scanner tente immédiatement d’ouvrir la caméra,
+sous réserve de l’autorisation du navigateur et des capacités disponibles.
+Aucun passage par un tableau de bord ni clic « Ouvrir la caméra » n’est requis
+dans le cas nominal. En cas de refus ou d’incompatibilité, la saisie manuelle et
+un réessai explicite restent proposés. Le scanner ne confirme jamais à la place
+du salarié et ne démarre pas un nouveau scan si un résultat incertain doit être
+relu. Quitter le scanner ou lire un QR libère la caméra.
+
 1. **Inviter** : responsable connecté, option activée ; saisie email, confirmation d'envoi ou état d'échec récupérable. L'invitation n'accorde aucun droit. L'ancien lien est annulé lors d'un renvoi. Une invitation expirée peut être renvoyée ; aucune création de compte doublon.
 2. **Accepter** : écran public Localeo Pro, email masqué et commerce non modifiables, obtenus par résolution du lien sans le consommer, choix du mot de passe ; acceptation atomique puis invitation à se connecter. Lien expiré, annulé ou utilisé : message générique et orientation vers le responsable, sans révéler de comptes tiers.
 3. **Valider** : scanner, récapitulatif minimal, confirmation explicite, résultat serveur ; même éligibilité, consommation et progression que le principal. Un échec réseau ne produit jamais de succès local. Après réponse incertaine, relire le reçu avant toute nouvelle commande.
