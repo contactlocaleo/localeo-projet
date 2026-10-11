@@ -216,3 +216,9 @@ maintenant l’attribution et le refus de gestion PIN par un salarié, y compris
 appel direct au service. Le reçu Coffret mémorise aussi une validation gagnée par
 un autre canal pour permettre sa relecture sans double consommation. Les preuves
 et limites sont dans le [bilan E72](../epic-72-acces-salaries/verification-livraison.md).
+
+## Correctif du 9 octobre — diagnostic du refus de création dans Localeo Pro
+
+Signalement test : HTTP 409 sur `/protected/identite-acces/commercants/moi/reauthentification`. Dans les sources examinées, le contrôle d’ouverture refuse la réauthentification avec `PIN_INDISPONIBLE` lorsque `LOCALEO_PRO_PIN_VALIDATION_ENABLED` est faux ; lecture d’état et révocation restent possibles. Le corps de réponse du serveur test est demandé pour confirmer ce diagnostic, aucune configuration distante n’a été lue/modifiée.
+
+Défaut frontend reproduit : `PIN_INDISPONIBLE` était masqué par un message générique invitant à actualiser. Localeo Pro affiche désormais un message d’indisponibilité et la possibilité du scan QR, sans contourner la réauthentification ni rejouer la génération. Test dédié initialement rouge puis corrigé ; vérification PIN ciblée exécutée dans le dépôt Commerçant. Configuration à vérifier par l’opérateur : `LOCALEO_PRO_PIN_VALIDATION_ENABLED=true`, puis trousseau `LOCALEO_PIN_VALIDATION_KEYS_JSON` et identifiant `LOCALEO_PIN_VALIDATION_ACTIVE_KEY` cohérents pour la génération. Aucune clé réelle dans les logs/documentation. Pas de migration, contrat API ou générateur de démonstration modifié ; pas de déploiement effectué.

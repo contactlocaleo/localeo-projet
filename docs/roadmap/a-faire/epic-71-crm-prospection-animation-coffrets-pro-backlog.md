@@ -11,8 +11,7 @@
   Coffrets (commerçants partenaires et clients de l'offre Pro), initialiser le CRM
   depuis un fichier, visualiser les prospects par ville sur une carte interactive
   de France et suivre états, historique, prochaines actions et rappels.
-- Phase réalisée : **cadrage initial**, sans spécification détaillée, import réel,
-  implémentation, contact de prospects ou déploiement.
+- Phase réalisée : cadrage puis [spécification V0.1 du 9 octobre](../../specifications/epic-71-crm-prospection/README.md), avec contrats cibles et matrice des 24 critères ; sans import réel, implémentation, contact de prospects ou déploiement.
 - Décisions utilisateur du 2 octobre : **offre Pro = coffrets pour entreprises/CSE**,
   destinés à leurs salariés ou clients ; **tâches et rappels internes d'abord**.
 - Fichier source fourni et examiné en lecture seule :
@@ -34,8 +33,7 @@ les référentiels d'organisations/villes et les parcours métier existants :
 [Animation E41](../terminees/epic-41-plateforme-animation-locale-mvp-backlog.md),
 [abonnement Animation E47](../terminees/epic-47-souscription-abonnement-partenaire-animation-backlog.md),
 [commandes et achats E51](../terminees/epic-51-vision-360-achats-backoffice-backlog.md).
-Les liens exacts entre opportunité, partenaire, commerçant et commande seront
-spécifiés après vérification de leurs producteurs.
+Les producteurs et liens exacts sont décrits dans l’[architecture E71](../../specifications/epic-71-crm-prospection/architecture-contrats.md).
 
 ### Existant vérifié en lecture
 
@@ -129,7 +127,7 @@ présentée → Décision attendue → Gagnée / Perdue**.
 Une opportunité peut être mise en pause avec motif et date de réexamen, ou
 réouverte avec justification. Tous les prospects ne passent pas artificiellement
 par chaque étape : un saut motivé conserve l'acteur, la date et le motif. Les
-conditions de passage « gagnée » doivent être définies par axe avant spécification.
+conditions de passage « gagnée » ont été validées le 9 octobre : référencement accepté avec dossier OnBoard lié, souscription Animation activée payée/gratuite, commande Pro payée.
 La création d'un compte partenaire ou d'une commande impayée ne prouve pas un gain.
 
 L'état de joignabilité, une opposition à la prospection, l'archivage de la fiche,
@@ -280,12 +278,10 @@ sans devenir propriétaire des statuts d'activation, paiement ou onboarding.
 Une conversion répétée ou concurrente ne crée pas deux objets métier. Toute
 modification ultérieure de données opérationnelles suit leur parcours propriétaire.
 
-Intégration souhaitée dans l'ERP, avec scopes E69 globaux. Proposition de matrice
-à confirmer : Backoffice gère la prospection ; Lecteur consulte un périmètre
+Intégration souhaitée dans l'ERP, avec scopes E69 globaux. Matrice validée le 9 octobre : Backoffice gère la prospection ; Lecteur consulte un périmètre
 fonctionnel explicite ; Finance n'obtient pas automatiquement accès à toutes les
 notes/contact prospects ; admin historique conserve configuration et administration.
-Les droits d'import, export éventuel, fusion, correction et conversion seront
-définis par action, vérifiés côté serveur et reflétés dans l'interface. Aucun nouveau
+Les droits d'import (Backoffice/admin), de correction sensible et d'opposition (admin), et de conversion (droits CRM et métier cumulés) sont détaillés dans la spécification et contrôlés côté serveur. Export massif et fusion destructive restent proposés hors V1, à confirmer. Aucun nouveau
 rôle « Commercial » ou découpage territorial n'est imposé sans arbitrage.
 
 ### Hors périmètre proposé pour la première version
@@ -357,11 +353,12 @@ présentés comme déjà acceptés.
 | E71-ARB-01 | **Fichier fourni et structure examinée** : XLSX requis. Reste à valider mapping par onglet/ligne, traitement de l'anomalie X/Y, colonnes d'enrichissement, CSV complémentaire et volume futur | Assistant d'import et fixture anonymisée ; aucun import réel pendant le cadrage |
 | E71-ARB-02 | **Résolu : coffrets pour entreprises/CSE**, confirmé le 2 octobre | Axe Pro et rattachement au domaine achats, sans nouvelle offre inventée |
 | E71-ARB-03 | **Résolu sur le périmètre : tâches et rappels internes d'abord**. File ERP proposée ; résumé email interne éventuel et cadence à préciser | Aucune relance externe automatique V1 ; échéances et suivi interne inclus |
-| E71-ARB-04 | Valider les trois axes et le parcours d'étapes proposé ; définir ce qui prouve « gagnée » pour chaque axe et qui peut le constater | Transitions, métriques et conservation des anciens statuts importés |
-| E71-ARB-05 | Proposition : Backoffice gestion, Lecteur consultation bornée, Finance sans accès CRM implicite, admin configuration ; décider import/fusion/export et conversion par action | Matrice scopes E69 et affichage des données de contact/notes |
+| E71-ARB-04 | **Gain validé le 9 octobre** : référencement accepté + dossier OnBoard lié ; souscription Animation activée payée/gratuite ; commande Pro payée. Trois axes retenus | Parcours d’étapes détaillé proposé ; adaptation des preuves canoniques et décision d’acceptation explicite décrites dans l’architecture |
+| E71-ARB-04b | Complément proposé : une seule opportunité gagnée par preuve de vente | Décider l’unicité inter-affaires ; ne pas confondre avec l’idempotence sur une même opportunité |
+| E71-ARB-05 | **Validé le 9 octobre** : Backoffice consulte/gère/importe ; Lecteur consulte fiches/contacts ; Finance sans accès implicite ; admin corrections sensibles/oppositions ; droits métier additionnels pour conversion | Ajouter les scopes et contrôles E69 ; aucun accès SQLAdmin implicite |
 | E71-ARB-06 | Carte communale France proposée ; préciser métropole/Outre-mer, sites multiples/zone de prospection, volume cible et nombre d'utilisateurs | Données géographiques, fournisseur à sélectionner, recette performance et couverture |
 | E71-ARB-07 | Définir les règles d'origine des contacts, opposition, conservation et purge des fichiers/notes selon la politique Localeo | Publication des procédures et import exploitable ; pas d'accord commercial fabriqué à partir d'un fichier |
-| E71-ARB-08 | Définir le degré de conversion V1 : rattachement et ouverture des parcours existants proposés, puis création orchestrée quand les contrats le permettent | Atomicité inter-domaines, invitation explicite, aucun changement des règles d'achats ou onboarding |
+| E71-ARB-08 | **Validé le 9 octobre** : rattacher un objet existant ou ouvrir son parcours actuel puis rattacher le résultat ; aucune création automatique CRM | Reprise de lien et droits métier à implémenter ; aucune transaction inter-domaines atomique promise |
 
 ## Découpage et passage à la spécification
 
@@ -375,5 +372,16 @@ La carte fait partie de l'epic proposée, même si elle est livrée après le so
 Une première livraison de fiches ne vaut pas réalisation de tous les critères.
 Le [cycle d'epic](../../organisation/cycle-epic.md) s'applique : arbitrages ayant un
 effet métier explicites, producteurs/consommateurs examinés, conception canonique
-et matrice de preuves avant implémentation. Aucun dossier de spécification vide
-n'est créé à cette phase ; priorité et date de livraison restent à décider.
+et matrice de preuves avant implémentation. Le [dossier de spécification](../../specifications/epic-71-crm-prospection/README.md) détaille désormais parcours, contrats, import/carte et preuves. Les arbitrages encore ouverts y sont distingués des décisions du 9 octobre ; priorité et date de livraison restent à décider.
+
+## Évolution E71-EVOL-01 — import mensuel avec deltas (9 octobre 2026)
+
+**Demande confirmée :** le classeur Gironde est reçu tous les mois ; permettre un chargement simple sans écraser les modifications faites ensuite dans le CRM. La [spécification V0.2](../../specifications/epic-71-crm-prospection/import-carte.md) ajoute un profil d’import réutilisable et une comparaison par champ entre dernière source reconnue, CRM actuel et nouveau fichier.
+
+Critères précisés, IDs conservés : CA-08 mapping mémorisé et écarts de structure ciblés ; CA-09 vue des nouveautés/modifications/conflits/absents ; CA-10 rapprochement stable malgré tri des lignes ; CA-11 protection persistante des corrections locales, conflits après aperçu et mois hors ordre ; CA-12 historique des décisions et reprise ; CA-24 plages V2 indicatives et traitement conditionnel X/Y sur les fichiers suivants. Une absence ne supprime ni n’archive une fiche. Un champ vide n’efface rien implicitement. Aucun import réel ni développement réalisé à cette phase.
+
+## Évolution E71-EVOL-02 — Pipeline structuré et fiches communes (9 octobre 2026)
+
+**Décision utilisateur :** seul « Pipeline qualifié » crée/complète les objets CRM structurés. Pour chaque commune de « Coffrets & élus 2026 », reprendre toutes les colonnes dans la section homonyme de sa fiche commune CRM. Les autres onglets sont exclus. Cette décision remplace les propositions précédentes d’enrichissement Budgets et de création de prospects depuis Coffrets & élus ; l’analyse historique du classeur reste conservée comme constat.
+
+[Spécification V0.3 et mapping des 33 colonnes](../../specifications/epic-71-crm-prospection/import-carte.md). CA-08/09/10/11/12/24 précisés : deux destinations dans le même assistant, rattachement communal confirmé, aucun prospect/contact supplémentaire depuis l’onglet communal, comparaison mensuelle par champ et protection des corrections locales. CA-07/13/14/19/22 : fiche territoriale hors catalogue public, accès CRM, totaux distincts des prospects. Aucun import réel ni code applicatif modifié.

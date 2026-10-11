@@ -12,7 +12,7 @@ Sept EPIC sont classées à faire. Les bilans techniques et réserves de chaque 
 - [EPIC 64 — Rétractation en ligne](epic-64-parcours-retractation-en-ligne-backlog.md)
 - [EPIC 67 — Communautés de communes et coffrets intercommunaux](epic-67-communautes-communes-coffrets-intercommunaux-backlog.md)
 - [EPIC-MARKETPLACE-54 — Identité visuelle](epic-marketplace-54-harmonisation-identite-visuelle-marketplace-backlog.md)
-- [EPIC 71 — CRM de prospection Animation, commerçants et offre Pro](epic-71-crm-prospection-animation-coffrets-pro-backlog.md) : import XLSX Gironde V2, organisations/contacts/opportunités, carte communale, étapes et historique, tâches/rappels internes ; coffrets pour entreprises/CSE confirmés, 24 critères à spécifier.
+- [EPIC 71 — CRM de prospection Animation, commerçants et offre Pro](epic-71-crm-prospection-animation-coffrets-pro-backlog.md) : import XLSX Gironde V2, organisations/contacts/opportunités, carte communale, étapes et historique, tâches/rappels internes ; coffrets pour entreprises/CSE confirmés, [spécification V0.1](../../specifications/epic-71-crm-prospection/README.md) et 24 critères reliés aux preuves prévues.
 
 
 Le 5 octobre, E70 est étendue aux passages Animation et aux pannes du mobile commerçant ; elle compte désormais 34 critères. Le PIN est généré automatiquement : 7 jours par défaut, durée configurable jusqu’à 30 jours, notification Localeo Pro à chaque succès.

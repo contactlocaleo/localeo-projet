@@ -6,6 +6,8 @@ Commencer par le README du sujet, puis consulter ses règles, contrats et arbitr
 
 ## Priorités en cours et à cadrer
 
+- **À faire : EPIC 71**, [CRM de prospection](epic-71-crm-prospection/README.md), conception V0.1 du 9 octobre : parcours, droits, gain, import XLSX, carte et rattachements ; 24 critères reliés aux preuves prévues, arbitrages restants explicites.
+
 - **En cours : EPIC 70**, [validation par PIN sur téléphone client](epic-70-validation-pin/README.md), spécification V1 du 5 octobre : droits, contrats, concurrence QR/PIN, notifications et 34 critères reliés aux preuves ; implémentation et tests locaux du 7 octobre, sans déploiement.
 - **En cours : EPIC 72**, [accès salariés Localeo Pro](epic-72-acces-salaries/README.md), spécification V1 du 5 octobre : invitations, option ERP, isolation des droits, sessions et 22 critères ; implémentation et vérification locales après publication E70.
 
@@ -55,6 +57,7 @@ Commencer par le README du sujet, puis consulter ses règles, contrats et arbitr
 | 68 | [Préparation et finalisation de l'onboarding](epic-68-preparation-onboarding/README.md) | En cours | Backend ERP/OnBoard, communications, documents, Commerçant |
 | 69 | [Profils et accès ERP/satellites](epic-69-acces-internes/README.md) | Terminée | Backend ERP, Support, Atelier, OnBoard, documents et sessions |
 | 70 | [Validation par PIN sur téléphone client](epic-70-validation-pin/README.md) | En cours | Backend/ERP, Commerçant, Marketplace/Live ; contrats Animation partagés |
+| 71 | [CRM de prospection](epic-71-crm-prospection/README.md) | À faire | Backend ERP ; liens OnBoard, Animation et Achats |
 | 72 | [Accès salariés Localeo Pro](epic-72-acces-salaries/README.md) | En cours | Backend/ERP, Commerçant ; attribution des validations partagées |
 
 ## Contrats et historique
