@@ -12,6 +12,10 @@ La conception garde les cinq dépôts indépendants. Les règles sont dans le do
 
 Le [suivi d’implémentation locale](suivi-implementation.md) consigne le plan en dix lots, les preuves, les commits par dépôt et les limites ; aucun push ni déploiement n’est autorisé par la réalisation lancée le 18 octobre.
 
+La [procédure des bons numériques](../../exploitation/exploitation/gerer-bons-numeriques-animation.md)
+décrit les configurations préparées, les workers, les reprises et les contrôles
+de conservation restant nécessaires avant ouverture.
+
 | Document | Contenu |
 | --- | --- |
 | [Architecture et contrats](architecture-contrats.md) | Propriétaires, invariants, transactions, producteurs/consommateurs, compatibilité, migrations, conservation et impacts ERP/CRM/Atelier |

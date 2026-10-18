@@ -23,7 +23,7 @@ Implémentation, bases jetables locales, tests isolés et commits locaux uniquem
 | 02 | US11–13 ; parties US24/36, périmètres et onboarding | Backend/ERP/OnBoard, Commerçant, Animation, Projet | Implémenté et vérifié localement pour les produits existants ; Backend `261ebdc` et raccord asset `59d89d0`, Pro `bc9d1ac`, Animation `7cab528`, Projet `afd77cd` ; branches numériques et exploitabilité reprises aux lots 05/10 |
 | 03 | US03,14–17,27–28 ; souscriptions/modules/finance | Backend, Animation, Pro (contrat), Projet | Implémenté et vérifié localement ; Backend `4f3a3b1`, Animation `79903e3`, Pro `8212252`, Projet `6a3d747` ; activation des modules futurs aux lots 06/07/08 |
 | 04 | US01–02,04 ; branche externe US07–08 | Backend, Animation, Marketplace/Live, Pro (contrat), Projet | Implémenté et vérifié localement ; Backend `7502282`, Animation `d0b92f7`, Marketplace `1473e05`, Pro `30aeed3`, sources dans le commit documentaire lot 04 ; branche numérique au lot 05 |
-| 05 | US05–10 ; complément numérique US07–08 | Backend, Animation, Commerçant, Marketplace/Live, Projet | À réaliser |
+| 05 | US05–10 ; complément numérique US07–08 | Backend, Animation, Commerçant, Marketplace/Live, Projet | Parcours implémentés et vérifiés localement ; commits et limites de conservation/performance ci-dessous ; aucune mise en service |
 | 06 | US19–20 ; import/deltas/reprise | Backend, Animation, Projet | À réaliser |
 | 07 | US18,30 ; chasse et préparation accompagnée | Backend, Animation, Projet | À réaliser ; dépendance readiness E55 |
 | 08 | US21–22 ; communication participants | Backend, Animation, Marketplace/Live, Projet | À réaliser |
@@ -388,3 +388,169 @@ Le commit backend `7502282` clôt le travail applicatif local du lot 04. Les
 générations transverses des dix lots, la charge simultanée, les recettes humaines
 et les preuves d’hébergement restent à réaliser selon leur lot. Aucun push,
 envoi fournisseur ou déploiement n’a eu lieu.
+
+### Lot 05 — Bons numériques (en cours)
+
+Le lot 04 documentaire est enregistré dans `87badb3`. Avant le lot numérique,
+`tests/api/test_pin_validation_e70.py` passe **14 tests** (4,40 s, trois
+dépréciations), runner isolé `tmp/e73-lot05-pin-baseline-01`.
+
+Le protocole de préparation privée/scellement est étendu aux bons numériques
+dans [tirage-libre-protocole.md](tirage-libre-protocole.md). `BonLot` possède la
+validité, la consommation unique, la rotation, la révocation et la correction.
+Les canaux QR/PIN partagent ce cœur ; le service de tirage conserve la politique
+de population et remplacement. L'ordre de verrou a été précisé en faveur de
+l'ordre E70 existant (demande avant cible), sans changer les règles produit.
+Les preuves exécutées ci-dessous complètent ce protocole ; la finalisation du
+flux d’historique et du cycle complet de démonstration reste en cours.
+
+Périmètre réalisé : CA30 (modèles/version/exemplaires), CA31 (affectation et
+libération explicite), branche numérique CA32/33 (tirage, attribution, email et
+bon), CA34/35 (QR et PIN), CA36 (cycle et incidents). Les compléments CA15/19–22
+réutilisent les périmètres courants et les acteurs principal/salarié, avec
+continuité limitée au bon attribué. Cela ne clôt pas US24/36–38 ni l’epic entière.
+
+Le bon appartient à `animation_locale`. Les capacités de consultation, la
+signature QR et le rendu email sont des adaptateurs ; le PIN E70 orchestre la
+même transition de remise. Une consommation active unique subsiste sous deux
+scans salariés ou QR/PIN concurrents. Une correction conserve la preuve initiale
+et n’autorise pas le rejeu d’une ancienne demande à consommer de nouveau.
+Les gardes du commerce précèdent les verrous de demande/cible ; la suspension
+et la révocation personnelle restent prioritaires sur toute continuité.
+
+La migration `v272` crée onze tables numériques, les références et contraintes
+d’exclusivité ainsi que les index. L’origine de lien existante est réutilisée.
+Les clés QR et flags de workers sont documentés sans secret dans le modèle de
+configuration et la [procédure des bons numériques](../../exploitation/exploitation/gerer-bons-numeriques-animation.md).
+Les trois branches de dotation restent explicites et exclusives.
+
+### Preuves locales du lot 05
+
+Toutes les commandes Python ci-dessous utilisent
+`.artifacts/python-e70/runtime/python.exe scripts/validation/test_isolated.py`
+depuis le backend, avec `--basetemp` neuf. Les tests SQL utilisent exclusivement
+`127.0.0.1:55473/localeo_audit_test` ou la base de migrations jetable dédiée.
+Les suites se recouvrent : leurs nombres ne sont pas un total de tests distincts.
+
+| Contrôle | Résultat réel |
+| --- | --- |
+| Architecture, recensement domaine et use cases | `tests/architecture tests/domain/test_domain_dedicated_classes.py tests/application/use_cases/test_use_case_business_test_coverage.py`, `tmp/e73-lot05-architecture-final-02` : **519 réussites** (10,02 s) |
+| Inventaire, BonLot, ports, crypto et choix de dotation | 28 réussites initiales ; après correction des métadonnées des huit types dédiés, **21 réussites** domaine/registre/crypto, sans exclusion de contrôle |
+| PG inventaire/remise, conservation numérique et Animation, API inventaire | `test_inventaire_bons_postgres.py`, `test_conservation_bons_numeriques_e73.py`, `test_conservation_postgres_t6.py`, `test_inventaire_bons_lots_e73.py` : **32 réussites** (120,08 s), `tmp/e73-lot05-inventaire-conservation-03` |
+| Compléments inventaire et droits | Génération 251 unités en 100/100/51, reprises concurrentes, isolation de reçus, libération de surplus : **3 réussites** (10,48 s) ; lecture Lecteur sans commande, isolation/rejeu : **3 réussites** (9,94 s) |
+| Tirage numérique, email, accès personnel et scellement | **51 tests uniques réussis** : suite principale 50/50 (279,66 s), puis 15/15 sur les tirages après ajout du contrôle de budget avant chaque page, dont un nouveau test ; `tmp/e73-lot05-w2-final` et `tmp/e73-lot05-w2-budget-final` |
+| PIN numérique | `test_pin_bons_lots_postgres.py` : **9 réussites** (65,03 s), `tmp/e73-lot05-pin-pg-03` : courses QR/PIN principal/salarié, correction/rejeu, rotation, rollback de notification, PIN bloqué mais QR autorisé, retrait et suspension |
+| Transport API PIN | `test_pin_bon_lot_e73.py test_pin_validation_e70.py` : **22 réussites** (11,93 s), `tmp/e73-lot05-pin-transport-02` |
+| Régression PIN Coffrets/Animation/salariés | Suite initiale : 19 réussites, deux échecs sur le formatage SQL de l’historique ; correction puis reprise des trois cas concernés : **3 réussites** (65,36 s), `tmp/e73-lot05-pin-regressions-02` ; 21 tests distincts finalement validés |
+| Migration complète et rejeu | `test_data015_migrations.py` jusqu’à v272 : **3 réussites** (83,40 s), avant l’ajout éventuel des index du flux d’historique ; contrôle final à compléter |
+| Animation | **197 tests Node réussis** après copie des contrats ; types, lint et build isolé réussis ; navigateur **38 scénarios/416 assertions** de régression lot 04 et **10 scénarios/100 assertions** numériques à 320/1 280 px |
+| Localeo Pro | QR bons et contrats : **60 tests ciblés distincts** validés, build et quatre scénarios navigateur réussis avant passage de l’historique au flux ; complément à enregistrer |
+| Live, stockage et discriminants | `node --test tests/security/library-backup.test.cjs tests/security/animation-gain.test.cjs` : **8 réussites** (8,76 s), restauration d’accès propre à chaque bon, aucun QR/consigne/coordonnée privée persisté |
+| Live, navigateur | `digital-lot.spec.cjs` : **4 scénarios réussis** en production locale après correction de contraste ; même suite **4 réussites sous React StrictMode** avant retouche de présentation, capacité de fragment préservée ; 320/1 280 px, heure de Paris malgré navigateur New York, états terminaux, réseau indisponible, PIN dont la réponse est perdue |
+| Live, analyse et build | ESLint ciblé réussi et Vite isolé réussi ; la limite préexistante du lint global sur le répertoire de travail EPERM reste celle du lot 04 |
+| Générateur ciblé | **14 tests PG/registre** (6,57 s), puis **6 tests unitaires** ; deux modèles, cinq exemplaires, trois affectés et deux disponibles, aucun bon/QR/email prématuré ; onze tables classées `replace` |
+
+Le scellement numérique a été mesuré avec 10 000 candidats, 1 000 bons et
+120 commerces : **37 requêtes, deux écritures finales, environ 716 Ko de mémoire**,
+au plus seize lectures par tranche préparatoire. Les gardes de commerce sont
+prises seulement au scellement, par pages de cent ; délai de verrou de trois
+secondes et budget de vingt secondes avec rollback/reprise testés. Ce n’est
+pas encore la preuve de charge simultanée transverse du lot 10.
+
+Deux revues indépendantes ont contrôlé les branches tirage/bon et PIN/droits.
+Elles ont conduit à corriger les reçus inter-organisations, les actions proposées
+aux Lecteurs et le calcul UTC des quatre-vingt-dix jours d’historique Animation.
+Six tests de frontière échouaient avant correction (changement d’heure,
+configuration/date/surcharge). Le flux par curseur est désormais intégré dans
+Pro ; ses **19 tests PostgreSQL/API** passent, sans skip (83,67 s), puis les
+quatre tests API repassent après contrôle des dates HTTP extrêmes (3,60 s).
+L’ancienne route reste compatible avec un offset limité à 10 000.
+
+Le cycle complet de démonstration a révélé **quatre échecs et trois réussites**
+sur une clé étrangère modèle/version lors de la génération. Ce défaut a été
+reproduit et corrigé ; le cycle final passe **7 tests** en 557,78 s, avec quatre
+avertissements SQLAlchemy de réflexion `dialect_options`, sans skip.
+Le runner `scripts/validation/run_demo_compatibility_tests.py` a utilisé
+uniquement les clusters jetables `127.0.0.1:10407` et `127.0.0.1:55448`, avec
+sortie `tmp/e73-lot05-demo-compatibility-20261018-final03` : génération,
+dump/installation, échec contrôlé, restauration et reset. Le refus initial
+sur une base jetable non vide a été résolu en recréant seulement cette base,
+après vérification de son répertoire local et de l’absence de connexions.
+Aucun environnement partagé n’a été contacté.
+
+Le besoin nominatif du gain numérique est raccordé à la conservation existante :
+remise/révocation ferment ce besoin, correction le réouvre ; un engagement
+expiré mais non résolu et les autres gains/gels conservent leur effet propre.
+La purge physique bornée des capacités et contextes expirés/révoqués sera
+raccordée au dispositif commun au **lot 10, avant ouverture**. Les preuves
+humaines, le transport réel et l’hébergement restent non exécutés.
+
+Compléments de finalisation :
+
+- PIN numérique/API E70 et contrats moteur relancés après les corrections :
+  `test_pin_bons_lots_postgres.py test_pin_bon_lot_e73.py
+  test_pin_validation_e70.py test_contrats_moteur_t1.py`,
+  `tmp/e73-lot05-root-pin-final-04` : **51 réussites** (36,18 s), trois
+  avertissements de dépréciation, zéro skip.
+- Le défaut de clé étrangère est reproduit avec les contraintes réelles dans
+  `test_modele_generation_et_unites_meme_uow_respectent_vraies_cles_etrangeres`.
+  `sauver_modele()` persiste maintenant la version avant l’opération suivante,
+  sans commit intermédiaire ; le test passe (**1 réussite**, 5,20 s). Le
+  générateur ne contourne aucune contrainte.
+- Après ajout des cinq index du flux Pro dans v272 : migrations/rejeu et
+  générateurs OpenAPI, `tmp/e73-lot05-migrations-contrats-final-03` :
+  **11 réussites** (54,82 s). E41 expose 828 routes, E42 en expose 55 ; copie
+  consommateur Animation/Pro effectuée, quatre contrats Pro réussis.
+- Live : le scénario de changement de bon ignore la réponse tardive du précédent
+  et masque immédiatement son QR. La suite finale sous React StrictMode passe
+  **5 scénarios**, dont 320/1 280 px et les états de remise. Les callbacks du carnet
+  sont également liés au bon courant. Le serveur passe **13 tests**, dont le
+  fallback SPA du lien personnel avec `no-store`. Les fermetures Playwright
+  Windows nécessitent l’arrêt du seul serveur local créé par le test après
+  exécution réussie ; aucun service distant ou autre processus n’est arrêté.
+- Pro : **67 tests unitaires** puis 27 revalidés après la normalisation d’erreur,
+  **11 scénarios navigateur** (six nouveaux/Paris et cinq régressions), build
+  isolé et quatre contrats finaux réussis. Les filtres suivent les journées
+  Europe/Paris même depuis New York, y compris les transitions de 23/25 heures.
+
+- Pro, relecture d’un résultat incertain : identité du bon et de l’opération
+  vérifiées ensemble ; aucun rejeu avec le contexte d’un autre bon. **17 tests
+  unitaires et quatre scénarios navigateur** passent après ce durcissement.
+- Architecture finale : même commande que ci-dessus,
+  `tmp/e73-lot05-architecture-final-03` : **519 réussites** (15,46 s).
+- Régression des passages salariés E72 : remplacement du test d’une méthode
+  privée supprimée par les lectures SQL avant/à l’échéance, avec contrôle du
+  maintien des preuves. Échec reproduit puis fichier entier
+  `test_animation_salaries_e72.py` : **4 réussites**, aucun skip (9 s),
+  `tmp/e73-lot05-historique-salarie-final`.
+- Animation : copie isolée HEAD + seuls fichiers du lot 05 dans
+  `tmp/e73-lot05-staged`, sans configuration opérateur ni modifications
+  préexistantes « Clôturer » : types, lint, build et **huit tests de contrats**
+  réussis ; manifestes d’empreintes conservés dans les artefacts locaux.
+
+### Performance de l’historique et limites à solder au lot 10
+
+Le nouveau flux effectue six requêtes repository constantes, sans `COUNT` ni
+`OFFSET`. Les essais avec 30 000 occurrences, une page profonde à 27 000,
+des filtres de mode et collisions de date/UUID entre types utilisent les index
+avec au plus 26 occurrences par branche pour une page de 25. La rétention
+des bons s’appuie sur une borne calendaire indexée exacte de cinq ans,
+y compris les années bissextiles. Avec 10 000 bons expirés : aucune occurrence
+lue ni jointure, environ 0,52 ms dans la mesure locale.
+
+**Exception transitoire E73-PERF-02/04 à solder au lot 10 avant ouverture :**
+la sélection des anciennes validations Coffrets/Animation dépend encore de
+l’expiration portée par leurs objets parents. Les plans avec 10 000 occurrences
+expirées lisent 10 000 validations et interrogent leurs archives/surcharges
+(environ 38 ms Coffrets et 206 ms Animation). La réponse et le nombre de requêtes
+sont bornés, mais ce travail SQL augmente avec les archives. Le lot 10 doit
+raccorder un filtrage indexable à la politique canonique d’expiration, puis
+rejouer ces plans ; ne pas présenter le flux comme une preuve de coût constant
+pour tous les historiques. Les plans sont enregistrés dans
+`.artifacts/e73-historique-flux-performance.json` et
+`.artifacts/e73-historique-flux-expiration.json` du backend.
+
+Commits locaux du lot 05 : backend `1cd9564`, Animation `2eee756`, Pro `63b64bc`,
+Marketplace/Live `8e54957` ; sources dans le commit documentaire du lot 05.
+Les seules modifications étrangères à ce lot sont
+préservées hors index. Aucun push ni déploiement.

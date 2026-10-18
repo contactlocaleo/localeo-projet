@@ -67,3 +67,47 @@ Les plans avec statistiques actualisées utilisent `uq_animation_population_memb
 Les preuves exigées sont : plans `EXPLAIN (ANALYZE, BUFFERS)` avec 10 000 membres ; mémoire applicative et taille des lots de résultats ; coût de scellement indépendant de la réserve ; rejet des préparations dans tous les lecteurs ; deux confirmations concurrentes ; rollback avant marqueur ; timeout puis relecture ; reprise après interruption ; collision de clés simulée ; unicité et stabilité de la permutation ; un lot maximum par participant ; zéro candidat ; remplacement et correction concurrents ; aucun effet Coffrets ni envoi réel.
 
 Les résultats d'exécution sont consignés dans [le suivi d'implémentation](suivi-implementation.md) et [la vérification de livraison](verification-livraison.md). Ce document décrit le protocole et ne vaut pas preuve de disponibilité en environnement.
+
+## Extension numérique — protocole du lot 05
+
+Les étapes d'indexation et de classement restent bornées à 500 candidats, sans
+garde commerce. Les affectations numériques publiées remplacent les lignes
+externes comme source des unités, par pages et dans leur ordre immuable.
+Attributions, bons et intentions d'envoi initiaux sont préparés privés. Tous
+leurs lecteurs, protections d'engagement et traitements exigent le marqueur
+`confirmed_at` de l'opération ; un enregistrement privé ne constitue pas un bon
+attribué. L'origine métier est `COALESCE(bon.attributed_at, tirage.confirmed_at)`.
+L'échéance initiale dérive de cette origine et de la durée publiée, sans mettre
+à jour tous les bons au scellement.
+
+Seule la phase de scellement prend, après l'autorité organisatrice, les gardes
+de commune puis de tous les commerces de la dotation dans un ordre stable,
+par pages de 100. Elle prend ensuite animation/opération, puis exemplaires
+gagnants triés, et revérifie configuration, droits normaux, absence de
+suspension, affectations et préparations. Le marqueur de confirmation et son
+audit activent atomiquement gains, bons et intentions ; aucun email ni capacité
+personnelle n'est créé avant cette confirmation. Le coût final dépend des
+commerces et exemplaires gagnants, pas de la réserve des suppléants. Sa mémoire,
+ses requêtes, ses verrous et son délai doivent être mesurés ; dépasser un budget
+technique laisse l'opération diagnostiquée et reprenable, sans tronquer le tirage.
+
+Un remplacement direct prend la garde du commerce avant l'animation et le bon.
+Il exige un droit normal à un nouvel engagement ; un droit résiduel ne suffit
+pas. Révocation de l'ancien bon, nouveau bon daté de la nouvelle attribution,
+suppléant utilisé et intention d'envoi sont transactionnels. Pour un retirage
+préparé, ces effets n'interviennent qu'au scellement ; l'ancien bon reste intact
+si aucun candidat ou un commerce indisponible empêche le remplacement.
+
+QR et PIN appellent le même cœur de consommation sans commit interne. L'ordre
+E70 place la demande/contexte avant la cible. Le reçu durable conserve son
+occurrence historique et expose aussi l'état courant après une correction.
+La protection lors du retrait du périmètre vise le bon exact, jamais seulement
+l'animation. Une ancienne participation ne donne aucun droit sur un bon nouveau.
+
+La capacité personnelle d'un bon est distincte de son QR et de l'accès de jeu.
+Elle est hashée, limitée à ce bon et valable 400 jours techniques après émission,
+ce qui couvre la durée métier maximale de 365 jours et sa consultation historique.
+Cette borne ne prolonge ni le bon ni la conservation des données. Une rotation
+QR invalide les anciennes présentations de scan/PIN sans supprimer le chemin de
+consultation du gagnant. L'ancien bon remplacé montre seulement sa révocation,
+sans information sur son successeur. Les tokens restent hors URL d'API et traces.

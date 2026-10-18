@@ -134,6 +134,31 @@ les coordonnées, les corps d'erreur, les tokens ou les QR.
 
 ## Scénarios de recette avant activation
 
+### Lots libres numériques
+
+Dans **Lots numériques**, créer un modèle avec son commerce de remise et ses
+consignes, puis générer les exemplaires. Attendre la fin de cette génération
+avant de les affecter à une animation. Choisir explicitement la dotation
+**Lots libres**, puis **Bons numériques**, et ordonner les exemplaires affectés
+avant publication. Les lots sont remis en une seule fois ; leur validité est
+de 90 jours par défaut, configurable de 1 à 365 jours avant publication.
+
+Après clôture, le tirage prépare ses résultats puis les confirme. L’état de
+l’email est distinct de l’attribution. Le gagnant reçoit un bon personnel qui
+indique où et jusqu’à quand retirer le lot. Le commerce le valide par QR dans
+Localeo Pro ou par son PIN sur le téléphone du gagnant. Un salarié autorisé
+utilise le même parcours de scan et l’historique du commerce.
+
+Depuis le gain, les actions disponibles permettent de renvoyer le bon, remplacer
+son QR perdu, prolonger sa validité dans la limite prévue ou le révoquer.
+La correction d’une remise erronée exige un motif et conserve la trace initiale.
+Après une réponse incertaine, consulter le résultat avant de recommencer.
+Les exemplaires restés non attribués peuvent être libérés explicitement après
+les attributions ; un bon déjà attribué ne retourne pas automatiquement au stock.
+Voir la [procédure opératoire](../../../exploitation/exploitation/gerer-bons-numeriques-animation.md).
+
+### Parcours communs
+
 | Scénario | Résultat attendu |
 | --- | --- |
 | Deux communes du même partenaire | Refus des accès croisés, fichiers compris |

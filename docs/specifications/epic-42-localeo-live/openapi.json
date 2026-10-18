@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Live - API backend Epic 42",
     "description": "Vue OpenAPI 3.1 des contrats publics, editoriaux et techniques de Localeo Live.",
-    "version": "1.0.0+4f3a3b1"
+    "version": "1.0.0+7502282"
   },
   "paths": {
     "/public/exploitation/activites-locales/metriques": {
@@ -3853,6 +3853,118 @@
         }
       }
     },
+    "/protected/animation-locale/bons-lots/{bon_id}/acces": {
+      "post": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Acceder",
+        "operationId": "acceder_protected_animation_locale_bons_lots__bon_id__acces_post",
+        "parameters": [
+          {
+            "name": "bon_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Bon Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccesBonCommande"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BonPersonnel"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/protected/animation-locale/bons-lots/{bon_id}": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Consulter",
+        "operationId": "consulter_protected_animation_locale_bons_lots__bon_id__get",
+        "parameters": [
+          {
+            "name": "bon_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Bon Id"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BonPersonnel"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/protected/exploitation/validations-pin/coffrets/demandes": {
       "post": {
         "tags": [
@@ -4017,6 +4129,68 @@
         },
         "responses": {
           "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DemandePin"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/protected/exploitation/validations-pin/bons-lots/demandes": {
+      "post": {
+        "tags": [
+          "Exploitation"
+        ],
+        "summary": "Creer Demande Bon",
+        "operationId": "creer_demande_bon_protected_exploitation_validations_pin_bons_lots_demandes_post",
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Idempotency-Key"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreerDemandeBon"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
             "description": "Successful Response",
             "content": {
               "application/json": {
@@ -4619,6 +4793,22 @@
           "expectedDemandeVersion"
         ],
         "title": "AccepterRetraitMissionInput"
+      },
+      "AccesBonCommande": {
+        "properties": {
+          "token": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 32,
+            "title": "Token"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "token"
+        ],
+        "title": "AccesBonCommande"
       },
       "AccesGainCommande": {
         "properties": {
@@ -6330,6 +6520,53 @@
         "type": "object",
         "title": "AdressePrefillFacturationPayload"
       },
+      "AffectationLot": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "exemplaire_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Exemplaire Id"
+          },
+          "ordre": {
+            "type": "integer",
+            "title": "Ordre"
+          },
+          "snapshot": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Snapshot"
+          },
+          "ever_attribue": {
+            "type": "boolean",
+            "title": "Ever Attribue"
+          },
+          "liberee_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Liberee At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "exemplaire_id",
+          "ordre",
+          "snapshot",
+          "ever_attribue"
+        ],
+        "title": "AffectationLot"
+      },
       "AffecterGenerationInput": {
         "properties": {
           "expectedVersion": {
@@ -6357,6 +6594,39 @@
           "operatorId"
         ],
         "title": "AffecterGenerationInput"
+      },
+      "AffecterLots": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "exemplaire_ids": {
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "type": "array",
+            "maxItems": 100,
+            "minItems": 1,
+            "title": "Exemplaire Ids"
+          },
+          "ordre": {
+            "type": "integer",
+            "maximum": 2147483647.0,
+            "minimum": 1.0,
+            "title": "Ordre"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "exemplaire_ids",
+          "ordre"
+        ],
+        "title": "AffecterLots"
       },
       "AgregatPaiement": {
         "properties": {
@@ -8256,6 +8526,25 @@
         ],
         "title": "BatchExecutionsPayload"
       },
+      "BatchExemplaires": {
+        "properties": {
+          "simulation": {
+            "type": "boolean",
+            "title": "Simulation",
+            "default": true
+          },
+          "limit": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 1.0,
+            "title": "Limit",
+            "default": 25
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "BatchExemplaires"
+      },
       "BatchHealthItemPayload": {
         "properties": {
           "code": {
@@ -9055,6 +9344,166 @@
           "file"
         ],
         "title": "Body_televerser_media_prestation_onboard_internal_onboard_api_dossiers__dossier_id__prestations__prestation_id__media_post"
+      },
+      "BonPersonnel": {
+        "properties": {
+          "contract_version": {
+            "type": "string",
+            "const": "1",
+            "title": "Contract Version",
+            "default": "1"
+          },
+          "nature": {
+            "type": "string",
+            "const": "BON_NUMERIQUE",
+            "title": "Nature"
+          },
+          "bon_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Bon Id"
+          },
+          "attribution_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Attribution Id"
+          },
+          "exemplaire_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Exemplaire Id"
+          },
+          "animation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animation Id"
+          },
+          "animation_nom": {
+            "type": "string",
+            "title": "Animation Nom"
+          },
+          "organisateur_nom": {
+            "type": "string",
+            "title": "Organisateur Nom"
+          },
+          "etat": {
+            "type": "string",
+            "enum": [
+              "VALIDE",
+              "EXPIRE",
+              "REVOQUE",
+              "CONSOMME"
+            ],
+            "title": "Etat"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "generation_qr": {
+            "type": "integer",
+            "title": "Generation Qr"
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Expires At"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "consignes": {
+            "type": "string",
+            "title": "Consignes",
+            "default": ""
+          },
+          "commerce": {
+            "$ref": "#/components/schemas/CommercePersonnelBon"
+          },
+          "qr_token": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Qr Token"
+          },
+          "qr_image_svg": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Qr Image Svg"
+          },
+          "pin_disponible": {
+            "type": "boolean",
+            "title": "Pin Disponible"
+          },
+          "validation_active_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Validation Active Id"
+          },
+          "validation_active": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Validation Active"
+          },
+          "actions_disponibles": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Actions Disponibles"
+          }
+        },
+        "type": "object",
+        "required": [
+          "nature",
+          "bon_id",
+          "attribution_id",
+          "exemplaire_id",
+          "animation_id",
+          "animation_nom",
+          "organisateur_nom",
+          "etat",
+          "version",
+          "generation_qr",
+          "expires_at",
+          "libelle",
+          "description",
+          "commerce",
+          "qr_token",
+          "pin_disponible",
+          "actions_disponibles"
+        ],
+        "title": "BonPersonnel"
       },
       "BriefGenerationChasse": {
         "properties": {
@@ -10901,6 +11350,28 @@
         ],
         "title": "CoffretsPagePayload"
       },
+      "CommandeBon": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 3,
+            "title": "Motif"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "motif"
+        ],
+        "title": "CommandeBon"
+      },
       "CommandeConfirmee_DemandeParticipationCommercantPayload_": {
         "properties": {
           "status": {
@@ -12410,6 +12881,69 @@
         ],
         "title": "CommercantPublicPayload"
       },
+      "CommerceBon": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "nom": {
+            "type": "string",
+            "title": "Nom"
+          },
+          "adresse": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Adresse"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "nom"
+        ],
+        "title": "CommerceBon"
+      },
+      "CommerceGainNumerique": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "nom": {
+            "type": "string",
+            "title": "Nom"
+          },
+          "adresse": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Adresse"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "nom"
+        ],
+        "title": "CommerceGainNumerique"
+      },
       "CommerceNom": {
         "properties": {
           "nom": {
@@ -12692,6 +13226,37 @@
         ],
         "title": "CommercePayload"
       },
+      "CommercePersonnelBon": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "nom": {
+            "type": "string",
+            "title": "Nom"
+          },
+          "adresse": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Adresse"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "nom"
+        ],
+        "title": "CommercePersonnelBon"
+      },
       "CommercePin": {
         "properties": {
           "id": {
@@ -12711,6 +13276,56 @@
           "nom"
         ],
         "title": "CommercePin"
+      },
+      "CommerceRemiseBon": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "nom": {
+            "type": "string",
+            "title": "Nom"
+          },
+          "adresse": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Adresse"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "nom"
+        ],
+        "title": "CommerceRemiseBon"
+      },
+      "CommerceSelection": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "nom": {
+            "type": "string",
+            "title": "Nom"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "nom"
+        ],
+        "title": "CommerceSelection"
       },
       "CommuneActualiteAnimationPayload": {
         "properties": {
@@ -13572,6 +14187,27 @@
         ],
         "title": "ConsommationGainAnimationPayload"
       },
+      "ConsommerBon": {
+        "properties": {
+          "contexte_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Contexte Id"
+          },
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "contexte_id",
+          "expected_version"
+        ],
+        "title": "ConsommerBon"
+      },
       "ContactCommercantMisAJourPayload": {
         "properties": {
           "id": {
@@ -14021,6 +14657,40 @@
           "action"
         ],
         "title": "CorrigerAnimationRequest"
+      },
+      "CorrigerBon": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 3,
+            "title": "Motif"
+          },
+          "validation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Validation Id"
+          },
+          "absence_remise_reelle": {
+            "type": "boolean",
+            "const": true,
+            "title": "Absence Remise Reelle"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "motif",
+          "validation_id",
+          "absence_remise_reelle"
+        ],
+        "title": "CorrigerBon"
       },
       "CorrigerDemandeGroupeeRequest": {
         "properties": {
@@ -14674,6 +15344,27 @@
           "versions"
         ],
         "title": "CreerDemandeAnimation"
+      },
+      "CreerDemandeBon": {
+        "properties": {
+          "bon_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Bon Id"
+          },
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "bon_id",
+          "expected_version"
+        ],
+        "title": "CreerDemandeBon"
       },
       "CreerDemandeCoffret": {
         "properties": {
@@ -16912,6 +17603,20 @@
             "anyOf": [
               {
                 "$ref": "#/components/schemas/VersionsPin"
+              },
+              {
+                "$ref": "#/components/schemas/VersionsBonPin"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Versions"
+          },
+          "etat_courant": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/EtatCourantBonPin"
               },
               {
                 "type": "null"
@@ -19922,6 +20627,95 @@
         ],
         "title": "EtapeScanPayload"
       },
+      "EtatCourantBon": {
+        "properties": {
+          "etat": {
+            "type": "string",
+            "enum": [
+              "VALIDE",
+              "EXPIRE",
+              "REVOQUE",
+              "CONSOMME"
+            ],
+            "title": "Etat"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "generation_qr": {
+            "type": "integer",
+            "title": "Generation Qr"
+          },
+          "validation_active_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Validation Active Id"
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Expires At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "etat",
+          "version",
+          "generation_qr",
+          "expires_at"
+        ],
+        "title": "EtatCourantBon"
+      },
+      "EtatCourantBonPin": {
+        "properties": {
+          "etat": {
+            "type": "string",
+            "title": "Etat"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "generation_qr": {
+            "type": "integer",
+            "title": "Generation Qr"
+          },
+          "validation_active_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Validation Active Id"
+          },
+          "expires_at": {
+            "type": "string",
+            "title": "Expires At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "etat",
+          "version",
+          "generation_qr",
+          "validation_active_id",
+          "expires_at"
+        ],
+        "title": "EtatCourantBonPin"
+      },
       "EtatPin": {
         "properties": {
           "mode_actif": {
@@ -20397,6 +21191,87 @@
           "statut"
         ],
         "title": "ExecutionBatchPayload"
+      },
+      "ExemplaireLot": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "modele_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Modele Id"
+          },
+          "modele_version": {
+            "type": "integer",
+            "title": "Modele Version"
+          },
+          "reference": {
+            "type": "string",
+            "title": "Reference"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "consignes": {
+            "type": "string",
+            "title": "Consignes"
+          },
+          "commerce": {
+            "$ref": "#/components/schemas/CommerceBon"
+          },
+          "etat": {
+            "type": "string",
+            "enum": [
+              "DISPONIBLE",
+              "AFFECTE",
+              "ATTRIBUE"
+            ],
+            "title": "Etat"
+          },
+          "animation_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Animation Id"
+          },
+          "ever_attribue": {
+            "type": "boolean",
+            "title": "Ever Attribue"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "modele_id",
+          "modele_version",
+          "reference",
+          "version",
+          "libelle",
+          "description",
+          "consignes",
+          "commerce",
+          "etat",
+          "ever_attribue"
+        ],
+        "title": "ExemplaireLot"
       },
       "ExploitationAnimationPayload": {
         "properties": {
@@ -21328,6 +22203,45 @@
         ],
         "title": "FluxEvenementsAnimationPayload"
       },
+      "FluxValidations": {
+        "properties": {
+          "contract_version": {
+            "type": "string",
+            "const": "1",
+            "title": "Contract Version",
+            "default": "1"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationHistorique"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "next_cursor",
+          "has_more"
+        ],
+        "title": "FluxValidations"
+      },
       "FlyerAnimationPayload": {
         "properties": {
           "id": {
@@ -21549,6 +22463,455 @@
         ],
         "title": "GainAnimationPayload"
       },
+      "GainBonNumerique": {
+        "properties": {
+          "contract_version": {
+            "type": "string",
+            "const": "1",
+            "title": "Contract Version",
+            "default": "1"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "attribution_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Attribution Id"
+          },
+          "animation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animation Id"
+          },
+          "tirage_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Tirage Id"
+          },
+          "participant_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Participant Id"
+          },
+          "rang": {
+            "type": "integer",
+            "title": "Rang"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "consignes": {
+            "type": "string",
+            "title": "Consignes"
+          },
+          "organisateur_nom": {
+            "type": "string",
+            "title": "Organisateur Nom"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "ATTRIBUE",
+              "REMPLACE"
+            ],
+            "title": "Statut"
+          },
+          "email_statut": {
+            "type": "string",
+            "enum": [
+              "EN_ATTENTE",
+              "ENVOYE",
+              "ECHEC"
+            ],
+            "title": "Email Statut"
+          },
+          "premier_envoi_reussi_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Premier Envoi Reussi At"
+          },
+          "attributed_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Attributed At"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "actions_disponibles": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Actions Disponibles"
+          },
+          "raisons_remplacement_autorisees": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Raisons Remplacement Autorisees"
+          },
+          "participant_nom": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Participant Nom"
+          },
+          "participant_prenom": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Participant Prenom"
+          },
+          "operation_remplacement_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Operation Remplacement Id"
+          },
+          "operation_remplacement_statut": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Operation Remplacement Statut"
+          },
+          "nature": {
+            "type": "string",
+            "const": "BON_NUMERIQUE",
+            "title": "Nature"
+          },
+          "bon_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Bon Id"
+          },
+          "exemplaire_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Exemplaire Id"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "commerce_remise": {
+            "$ref": "#/components/schemas/CommerceRemiseBon"
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Expires At"
+          },
+          "statut_remise": {
+            "type": "string",
+            "enum": [
+              "NON_CONSOMME",
+              "CONSOMME"
+            ],
+            "title": "Statut Remise"
+          },
+          "etat_bon": {
+            "type": "string",
+            "enum": [
+              "VALIDE",
+              "EXPIRE",
+              "REVOQUE",
+              "CONSOMME"
+            ],
+            "title": "Etat Bon"
+          },
+          "bon_version": {
+            "type": "integer",
+            "title": "Bon Version"
+          },
+          "generation_qr": {
+            "type": "integer",
+            "title": "Generation Qr"
+          },
+          "validation_active_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Validation Active Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "attribution_id",
+          "animation_id",
+          "tirage_id",
+          "participant_id",
+          "rang",
+          "libelle",
+          "consignes",
+          "organisateur_nom",
+          "statut",
+          "email_statut",
+          "premier_envoi_reussi_at",
+          "attributed_at",
+          "version",
+          "actions_disponibles",
+          "raisons_remplacement_autorisees",
+          "nature",
+          "bon_id",
+          "exemplaire_id",
+          "description",
+          "commerce_remise",
+          "expires_at",
+          "statut_remise",
+          "etat_bon",
+          "bon_version",
+          "generation_qr"
+        ],
+        "title": "GainBonNumerique"
+      },
+      "GainBonNumeriqueParticipant": {
+        "properties": {
+          "nature": {
+            "type": "string",
+            "const": "BON_NUMERIQUE",
+            "title": "Nature"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "attribution_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Attribution Id"
+          },
+          "animation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animation Id"
+          },
+          "tirage_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Tirage Id"
+          },
+          "participant_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Participant Id"
+          },
+          "rang": {
+            "type": "integer",
+            "title": "Rang"
+          },
+          "bon_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Bon Id"
+          },
+          "bon_url": {
+            "type": "string",
+            "title": "Bon Url"
+          },
+          "exemplaire_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Exemplaire Id"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "consignes": {
+            "type": "string",
+            "title": "Consignes"
+          },
+          "organisateur_nom": {
+            "type": "string",
+            "title": "Organisateur Nom"
+          },
+          "commerce_remise": {
+            "$ref": "#/components/schemas/CommerceGainNumerique"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "ATTRIBUE",
+              "REMPLACE"
+            ],
+            "title": "Statut"
+          },
+          "statut_remise": {
+            "type": "string",
+            "enum": [
+              "NON_CONSOMME",
+              "CONSOMME"
+            ],
+            "title": "Statut Remise"
+          },
+          "etat_bon": {
+            "type": "string",
+            "enum": [
+              "VALIDE",
+              "EXPIRE",
+              "REVOQUE",
+              "CONSOMME"
+            ],
+            "title": "Etat Bon"
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Expires At"
+          },
+          "bon_version": {
+            "type": "integer",
+            "title": "Bon Version"
+          },
+          "generation_qr": {
+            "type": "integer",
+            "title": "Generation Qr"
+          },
+          "validation_active_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Validation Active Id"
+          },
+          "email_statut": {
+            "type": "string",
+            "enum": [
+              "EN_ATTENTE",
+              "ENVOYE",
+              "ECHEC"
+            ],
+            "title": "Email Statut"
+          },
+          "premier_envoi_reussi_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Premier Envoi Reussi At"
+          },
+          "attributed_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Attributed At"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "actions_disponibles": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Actions Disponibles"
+          },
+          "raisons_remplacement_autorisees": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Raisons Remplacement Autorisees"
+          },
+          "participant_nom": {
+            "type": "null",
+            "title": "Participant Nom"
+          },
+          "participant_prenom": {
+            "type": "null",
+            "title": "Participant Prenom"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "nature",
+          "id",
+          "attribution_id",
+          "animation_id",
+          "tirage_id",
+          "participant_id",
+          "rang",
+          "bon_id",
+          "bon_url",
+          "exemplaire_id",
+          "libelle",
+          "description",
+          "consignes",
+          "organisateur_nom",
+          "commerce_remise",
+          "statut",
+          "statut_remise",
+          "etat_bon",
+          "expires_at",
+          "bon_version",
+          "generation_qr",
+          "email_statut",
+          "premier_envoi_reussi_at",
+          "attributed_at",
+          "version",
+          "actions_disponibles",
+          "raisons_remplacement_autorisees"
+        ],
+        "title": "GainBonNumeriqueParticipant"
+      },
       "GainCoffretParticipant": {
         "properties": {
           "nature": {
@@ -21769,11 +23132,6 @@
             "title": "Contract Version",
             "default": "1"
           },
-          "nature": {
-            "type": "string",
-            "const": "LOT_EXTERNE",
-            "title": "Nature"
-          },
           "id": {
             "type": "string",
             "format": "uuid",
@@ -21803,22 +23161,9 @@
             "type": "integer",
             "title": "Rang"
           },
-          "ligne_id": {
-            "type": "string",
-            "format": "uuid",
-            "title": "Ligne Id"
-          },
-          "index_unite": {
-            "type": "integer",
-            "title": "Index Unite"
-          },
           "libelle": {
             "type": "string",
             "title": "Libelle"
-          },
-          "responsable_remise": {
-            "type": "string",
-            "title": "Responsable Remise"
           },
           "consignes": {
             "type": "string",
@@ -21835,14 +23180,6 @@
               "REMPLACE"
             ],
             "title": "Statut"
-          },
-          "statut_remise": {
-            "type": "string",
-            "enum": [
-              "NON_RENSEIGNEE",
-              "REMISE_DECLAREE"
-            ],
-            "title": "Statut Remise"
           },
           "email_statut": {
             "type": "string",
@@ -21933,6 +23270,32 @@
             ],
             "title": "Operation Remplacement Statut"
           },
+          "nature": {
+            "type": "string",
+            "const": "LOT_EXTERNE",
+            "title": "Nature"
+          },
+          "ligne_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Ligne Id"
+          },
+          "index_unite": {
+            "type": "integer",
+            "title": "Index Unite"
+          },
+          "responsable_remise": {
+            "type": "string",
+            "title": "Responsable Remise"
+          },
+          "statut_remise": {
+            "type": "string",
+            "enum": [
+              "NON_RENSEIGNEE",
+              "REMISE_DECLAREE"
+            ],
+            "title": "Statut Remise"
+          },
           "animation_nom": {
             "type": "string",
             "title": "Animation Nom"
@@ -21940,27 +23303,27 @@
         },
         "type": "object",
         "required": [
-          "nature",
           "id",
           "attribution_id",
           "animation_id",
           "tirage_id",
           "participant_id",
           "rang",
-          "ligne_id",
-          "index_unite",
           "libelle",
-          "responsable_remise",
           "consignes",
           "organisateur_nom",
           "statut",
-          "statut_remise",
           "email_statut",
           "premier_envoi_reussi_at",
           "attributed_at",
           "version",
           "actions_disponibles",
           "raisons_remplacement_autorisees",
+          "nature",
+          "ligne_id",
+          "index_unite",
+          "responsable_remise",
+          "statut_remise",
           "animation_nom"
         ],
         "title": "GainExternePersonnel"
@@ -21973,11 +23336,6 @@
             "title": "Contract Version",
             "default": "1"
           },
-          "nature": {
-            "type": "string",
-            "const": "LOT_EXTERNE",
-            "title": "Nature"
-          },
           "id": {
             "type": "string",
             "format": "uuid",
@@ -22007,22 +23365,9 @@
             "type": "integer",
             "title": "Rang"
           },
-          "ligne_id": {
-            "type": "string",
-            "format": "uuid",
-            "title": "Ligne Id"
-          },
-          "index_unite": {
-            "type": "integer",
-            "title": "Index Unite"
-          },
           "libelle": {
             "type": "string",
             "title": "Libelle"
-          },
-          "responsable_remise": {
-            "type": "string",
-            "title": "Responsable Remise"
           },
           "consignes": {
             "type": "string",
@@ -22039,14 +23384,6 @@
               "REMPLACE"
             ],
             "title": "Statut"
-          },
-          "statut_remise": {
-            "type": "string",
-            "enum": [
-              "NON_RENSEIGNEE",
-              "REMISE_DECLAREE"
-            ],
-            "title": "Statut Remise"
           },
           "email_statut": {
             "type": "string",
@@ -22136,31 +23473,57 @@
               }
             ],
             "title": "Operation Remplacement Statut"
+          },
+          "nature": {
+            "type": "string",
+            "const": "LOT_EXTERNE",
+            "title": "Nature"
+          },
+          "ligne_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Ligne Id"
+          },
+          "index_unite": {
+            "type": "integer",
+            "title": "Index Unite"
+          },
+          "responsable_remise": {
+            "type": "string",
+            "title": "Responsable Remise"
+          },
+          "statut_remise": {
+            "type": "string",
+            "enum": [
+              "NON_RENSEIGNEE",
+              "REMISE_DECLAREE"
+            ],
+            "title": "Statut Remise"
           }
         },
         "type": "object",
         "required": [
-          "nature",
           "id",
           "attribution_id",
           "animation_id",
           "tirage_id",
           "participant_id",
           "rang",
-          "ligne_id",
-          "index_unite",
           "libelle",
-          "responsable_remise",
           "consignes",
           "organisateur_nom",
           "statut",
-          "statut_remise",
           "email_statut",
           "premier_envoi_reussi_at",
           "attributed_at",
           "version",
           "actions_disponibles",
-          "raisons_remplacement_autorisees"
+          "raisons_remplacement_autorisees",
+          "nature",
+          "ligne_id",
+          "index_unite",
+          "responsable_remise",
+          "statut_remise"
         ],
         "title": "GainLotExterne"
       },
@@ -22328,6 +23691,99 @@
           "nombreEligibles"
         ],
         "title": "GelExploitationPayload"
+      },
+      "GenerationCommande": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "quantite": {
+            "type": "integer",
+            "maximum": 2147483647.0,
+            "minimum": 1.0,
+            "title": "Quantite"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "quantite"
+        ],
+        "title": "GenerationCommande"
+      },
+      "GenerationLot": {
+        "properties": {
+          "contract_version": {
+            "type": "string",
+            "const": "1",
+            "title": "Contract Version",
+            "default": "1"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "modele_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Modele Id"
+          },
+          "modele_version": {
+            "type": "integer",
+            "title": "Modele Version"
+          },
+          "quantite": {
+            "type": "integer",
+            "title": "Quantite"
+          },
+          "created_count": {
+            "type": "integer",
+            "title": "Created Count"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "EN_ATTENTE",
+              "EN_COURS",
+              "TERMINEE",
+              "BLOQUEE"
+            ],
+            "title": "Statut"
+          },
+          "erreur": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Erreur"
+          },
+          "actions_disponibles": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Actions Disponibles"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "modele_id",
+          "modele_version",
+          "quantite",
+          "created_count",
+          "statut",
+          "actions_disponibles"
+        ],
+        "title": "GenerationLot"
       },
       "GenerationMutationPayload": {
         "properties": {
@@ -24568,6 +26024,38 @@
         ],
         "title": "LeverGelConservationInput"
       },
+      "LibererLots": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "exemplaire_ids": {
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "type": "array",
+            "maxItems": 100,
+            "minItems": 1,
+            "title": "Exemplaire Ids"
+          },
+          "confirmation": {
+            "type": "boolean",
+            "const": true,
+            "title": "Confirmation"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "exemplaire_ids",
+          "confirmation"
+        ],
+        "title": "LibererLots"
+      },
       "LienAudit": {
         "properties": {
           "type": {
@@ -26354,99 +27842,75 @@
         ],
         "title": "ModeleAnimationPayload"
       },
-      "ModeleCommande": {
+      "ModeleLot": {
         "properties": {
+          "contract_version": {
+            "type": "string",
+            "const": "1",
+            "title": "Contract Version",
+            "default": "1"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "partenaire_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Partenaire Id"
+          },
+          "commune_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Commune Id"
+          },
+          "commercant_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Commercant Id"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
           "libelle": {
             "type": "string",
-            "maxLength": 200,
-            "minLength": 1,
             "title": "Libelle"
           },
           "description": {
             "type": "string",
-            "maxLength": 5000,
-            "minLength": 1,
             "title": "Description"
           },
-          "image_uri": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 1000
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Image Uri"
-          },
-          "valeur_centimes": {
-            "type": "integer",
-            "maximum": 99999999.0,
-            "minimum": 0.0,
-            "title": "Valeur Centimes"
-          },
-          "reversement_centimes": {
-            "anyOf": [
-              {
-                "type": "integer",
-                "maximum": 99999999.0,
-                "minimum": 0.0
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Reversement Centimes"
-          },
-          "taux_commission_pourcent": {
-            "anyOf": [
-              {
-                "type": "number",
-                "maximum": 100.0,
-                "minimum": 0.0
-              },
-              {
-                "type": "string",
-                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d{0,2}0*$"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Taux Commission Pourcent"
-          },
-          "statut": {
+          "consignes": {
             "type": "string",
-            "enum": [
-              "BROUILLON",
-              "ACTIVE",
-              "ARCHIVE"
-            ],
-            "title": "Statut",
-            "default": "BROUILLON"
+            "title": "Consignes"
           },
-          "expected_version": {
-            "anyOf": [
-              {
-                "type": "integer",
-                "minimum": 1.0
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Expected Version"
+          "commerce": {
+            "$ref": "#/components/schemas/CommerceBon"
+          },
+          "actions_disponibles": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Actions Disponibles"
           }
         },
-        "additionalProperties": false,
         "type": "object",
         "required": [
+          "id",
+          "partenaire_id",
+          "commune_id",
+          "commercant_id",
+          "version",
           "libelle",
           "description",
-          "valeur_centimes"
+          "consignes",
+          "commerce",
+          "actions_disponibles"
         ],
-        "title": "ModeleCommande"
+        "title": "ModeleLot"
       },
       "ModificationAcces": {
         "properties": {
@@ -27418,6 +28882,46 @@
           "dotation"
         ],
         "title": "ModifierDotationInput"
+      },
+      "ModifierModele": {
+        "properties": {
+          "libelle": {
+            "type": "string",
+            "maxLength": 160,
+            "minLength": 1,
+            "title": "Libelle"
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 4000,
+            "title": "Description",
+            "default": ""
+          },
+          "consignes": {
+            "type": "string",
+            "maxLength": 4000,
+            "title": "Consignes",
+            "default": ""
+          },
+          "commercant_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Commercant Id"
+          },
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "libelle",
+          "commercant_id",
+          "expected_version"
+        ],
+        "title": "ModifierModele"
       },
       "ModifierParametresExploitationInput": {
         "properties": {
@@ -29758,6 +31262,38 @@
         ],
         "title": "PageBilansAnimationPayload"
       },
+      "PageBons": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ProjectionBon"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "has_more"
+        ],
+        "title": "PageBons"
+      },
       "PageCommandes": {
         "properties": {
           "items": {
@@ -29961,7 +31497,7 @@
         ],
         "title": "PageGenerationPayload"
       },
-      "PageLibre_GainLotExterne_": {
+      "PageLibre_Annotated_Union_GainLotExterne__GainBonNumerique___FieldInfo_annotation_NoneType__required_True__discriminator__nature____": {
         "properties": {
           "contract_version": {
             "type": "string",
@@ -29971,7 +31507,21 @@
           },
           "items": {
             "items": {
-              "$ref": "#/components/schemas/GainLotExterne"
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/GainLotExterne"
+                },
+                {
+                  "$ref": "#/components/schemas/GainBonNumerique"
+                }
+              ],
+              "discriminator": {
+                "propertyName": "nature",
+                "mapping": {
+                  "BON_NUMERIQUE": "#/components/schemas/GainBonNumerique",
+                  "LOT_EXTERNE": "#/components/schemas/GainLotExterne"
+                }
+              }
             },
             "type": "array",
             "title": "Items"
@@ -29998,7 +31548,7 @@
           "has_more",
           "next_cursor"
         ],
-        "title": "PageLibre[GainLotExterne]"
+        "title": "PageLibre[Annotated[Union[GainLotExterne, GainBonNumerique], FieldInfo(annotation=NoneType, required=True, discriminator='nature')]]"
       },
       "PageLibre_SuiviLotExterne_": {
         "properties": {
@@ -30077,6 +31627,166 @@
           "next_cursor"
         ],
         "title": "PageLibre[SuppleantLibre]"
+      },
+      "PageLots_AffectationLot_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/AffectationLot"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "has_more"
+        ],
+        "title": "PageLots[AffectationLot]"
+      },
+      "PageLots_CommerceSelection_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/CommerceSelection"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "has_more"
+        ],
+        "title": "PageLots[CommerceSelection]"
+      },
+      "PageLots_ExemplaireLot_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ExemplaireLot"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "has_more"
+        ],
+        "title": "PageLots[ExemplaireLot]"
+      },
+      "PageLots_GenerationLot_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/GenerationLot"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "has_more"
+        ],
+        "title": "PageLots[GenerationLot]"
+      },
+      "PageLots_ModeleLot_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ModeleLot"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "has_more"
+        ],
+        "title": "PageLots[ModeleLot]"
       },
       "PageNotificationsPin": {
         "properties": {
@@ -31982,11 +33692,15 @@
                   },
                   {
                     "$ref": "#/components/schemas/GainExterneParticipant"
+                  },
+                  {
+                    "$ref": "#/components/schemas/GainBonNumeriqueParticipant"
                   }
                 ],
                 "discriminator": {
                   "propertyName": "nature",
                   "mapping": {
+                    "BON_NUMERIQUE": "#/components/schemas/GainBonNumeriqueParticipant",
                     "COFFRET": "#/components/schemas/GainCoffretParticipant",
                     "LOT_EXTERNE": "#/components/schemas/GainExterneParticipant"
                   }
@@ -34380,6 +36094,154 @@
         ],
         "title": "ProgressionResumeLive"
       },
+      "ProjectionBon": {
+        "properties": {
+          "contract_version": {
+            "type": "string",
+            "const": "1",
+            "title": "Contract Version",
+            "default": "1"
+          },
+          "bon_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Bon Id"
+          },
+          "attribution_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Attribution Id"
+          },
+          "exemplaire_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Exemplaire Id"
+          },
+          "animation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animation Id"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "generation_qr": {
+            "type": "integer",
+            "title": "Generation Qr"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "consignes": {
+            "type": "string",
+            "title": "Consignes"
+          },
+          "commerce": {
+            "$ref": "#/components/schemas/CommerceBon"
+          },
+          "etat": {
+            "type": "string",
+            "enum": [
+              "VALIDE",
+              "EXPIRE",
+              "REVOQUE",
+              "CONSOMME",
+              "COMMERCE_NON_AUTORISE"
+            ],
+            "title": "Etat"
+          },
+          "attributed_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Attributed At"
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Expires At"
+          },
+          "validation_active": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ValidationBon"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "validation_active_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Validation Active Id"
+          },
+          "actions_disponibles": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Actions Disponibles"
+          },
+          "operation_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Operation Id"
+          },
+          "etat_courant": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/EtatCourantBon"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "rejoue": {
+            "type": "boolean",
+            "title": "Rejoue",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "bon_id",
+          "attribution_id",
+          "exemplaire_id",
+          "animation_id",
+          "version",
+          "generation_qr",
+          "libelle",
+          "description",
+          "consignes",
+          "commerce",
+          "etat",
+          "attributed_at",
+          "expires_at",
+          "actions_disponibles"
+        ],
+        "title": "ProjectionBon"
+      },
       "ProjectionParticipant": {
         "oneOf": [
           {
@@ -34790,6 +36652,34 @@
           "attestationAchatEffective"
         ],
         "title": "ProjectionParticipantTombola"
+      },
+      "ProlongerBon": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 3,
+            "title": "Motif"
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Expires At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "motif",
+          "expires_at"
+        ],
+        "title": "ProlongerBon"
       },
       "PromptGenerationResumePayload": {
         "properties": {
@@ -35265,6 +37155,22 @@
           "sessions_purgees"
         ],
         "title": "PurgeSessionsCommercantPayload"
+      },
+      "QRBon": {
+        "properties": {
+          "qr_token": {
+            "type": "string",
+            "maxLength": 512,
+            "minLength": 20,
+            "title": "Qr Token"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "qr_token"
+        ],
+        "title": "QRBon"
       },
       "QrLieuPreparationPayload": {
         "properties": {
@@ -36130,6 +38036,33 @@
         "type": "object",
         "title": "RecompensesAnimation"
       },
+      "ReconciliationBon": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "CONFIRMEE",
+              "COMMANDE_NON_ENREGISTREE"
+            ],
+            "title": "Status"
+          },
+          "result": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ProjectionBon"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "title": "ReconciliationBon"
+      },
       "ReconciliationCommandesLotsPayload": {
         "properties": {
           "traitees": {
@@ -36159,6 +38092,40 @@
           "echecs"
         ],
         "title": "ReconciliationCommandesLotsPayload"
+      },
+      "ReconciliationInventaire": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "CONFIRMEE",
+              "COMMANDE_NON_ENREGISTREE"
+            ],
+            "title": "Status"
+          },
+          "result": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ModeleLot"
+              },
+              {
+                "$ref": "#/components/schemas/GenerationLot"
+              },
+              {
+                "$ref": "#/components/schemas/RecuSelectionLots"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Result"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "title": "ReconciliationInventaire"
       },
       "RecuAttestationPayload": {
         "properties": {
@@ -36201,6 +38168,79 @@
           "validated_at"
         ],
         "title": "RecuAttestationPayload"
+      },
+      "RecuBon": {
+        "properties": {
+          "contract_version": {
+            "type": "string",
+            "const": "1",
+            "title": "Contract Version",
+            "default": "1"
+          },
+          "operation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Operation Id"
+          },
+          "resource_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Resource Id"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "resultat": {
+            "type": "string",
+            "const": "LOT_REMIS",
+            "title": "Resultat"
+          },
+          "validation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Validation Id"
+          },
+          "validated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Validated At"
+          },
+          "mode_effectif": {
+            "type": "string",
+            "enum": [
+              "QR",
+              "PIN"
+            ],
+            "title": "Mode Effectif"
+          },
+          "rejoue": {
+            "type": "boolean",
+            "title": "Rejoue"
+          },
+          "server_time": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Server Time"
+          },
+          "etat_courant": {
+            "$ref": "#/components/schemas/EtatCourantBon"
+          }
+        },
+        "type": "object",
+        "required": [
+          "operation_id",
+          "resource_id",
+          "version",
+          "resultat",
+          "validation_id",
+          "validated_at",
+          "mode_effectif",
+          "rejoue",
+          "server_time",
+          "etat_courant"
+        ],
+        "title": "RecuBon"
       },
       "RecuClotureMoteur": {
         "properties": {
@@ -36512,7 +38552,21 @@
           "resultat": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/GainLotExterne"
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/GainLotExterne"
+                  },
+                  {
+                    "$ref": "#/components/schemas/GainBonNumerique"
+                  }
+                ],
+                "discriminator": {
+                  "propertyName": "nature",
+                  "mapping": {
+                    "BON_NUMERIQUE": "#/components/schemas/GainBonNumerique",
+                    "LOT_EXTERNE": "#/components/schemas/GainLotExterne"
+                  }
+                }
               },
               {
                 "$ref": "#/components/schemas/EtatTirageLibre"
@@ -36652,6 +38706,46 @@
           "neutralisation"
         ],
         "title": "RecuRetraitMission"
+      },
+      "RecuSelectionLots": {
+        "properties": {
+          "contract_version": {
+            "type": "string",
+            "const": "1",
+            "title": "Contract Version",
+            "default": "1"
+          },
+          "animation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animation Id"
+          },
+          "revision": {
+            "type": "integer",
+            "title": "Revision"
+          },
+          "exemplaire_ids": {
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "type": "array",
+            "title": "Exemplaire Ids"
+          },
+          "operation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Operation Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "animation_id",
+          "revision",
+          "exemplaire_ids",
+          "operation_id"
+        ],
+        "title": "RecuSelectionLots"
       },
       "RecuperationResponsable": {
         "properties": {
@@ -37408,6 +39502,12 @@
           "text"
         ],
         "title": "ReponseTexte"
+      },
+      "ReprendreGeneration": {
+        "properties": {},
+        "additionalProperties": false,
+        "type": "object",
+        "title": "ReprendreGeneration"
       },
       "ReprendreGenerationInput": {
         "properties": {
@@ -38994,6 +41094,166 @@
           "resultat"
         ],
         "title": "SavePreparationInput"
+      },
+      "ScanBon": {
+        "properties": {
+          "contract_version": {
+            "type": "string",
+            "const": "1",
+            "title": "Contract Version",
+            "default": "1"
+          },
+          "bon_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Bon Id"
+          },
+          "attribution_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Attribution Id"
+          },
+          "exemplaire_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Exemplaire Id"
+          },
+          "animation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animation Id"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "generation_qr": {
+            "type": "integer",
+            "title": "Generation Qr"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "consignes": {
+            "type": "string",
+            "title": "Consignes"
+          },
+          "commerce": {
+            "$ref": "#/components/schemas/CommerceBon"
+          },
+          "etat": {
+            "type": "string",
+            "enum": [
+              "VALIDE",
+              "EXPIRE",
+              "REVOQUE",
+              "CONSOMME",
+              "COMMERCE_NON_AUTORISE"
+            ],
+            "title": "Etat"
+          },
+          "attributed_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Attributed At"
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Expires At"
+          },
+          "validation_active": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ValidationBon"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "validation_active_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Validation Active Id"
+          },
+          "actions_disponibles": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Actions Disponibles"
+          },
+          "operation_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Operation Id"
+          },
+          "etat_courant": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/EtatCourantBon"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "rejoue": {
+            "type": "boolean",
+            "title": "Rejoue",
+            "default": false
+          },
+          "contexte_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Contexte Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "bon_id",
+          "attribution_id",
+          "exemplaire_id",
+          "animation_id",
+          "version",
+          "generation_qr",
+          "libelle",
+          "description",
+          "consignes",
+          "commerce",
+          "etat",
+          "attributed_at",
+          "expires_at",
+          "actions_disponibles"
+        ],
+        "title": "ScanBon"
       },
       "SchemaReadinessCheckPayload": {
         "properties": {
@@ -41590,6 +43850,35 @@
         ],
         "title": "ValidationAnimationPayload"
       },
+      "ValidationBon": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "validated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Validated At"
+          },
+          "mode_effectif": {
+            "type": "string",
+            "enum": [
+              "QR",
+              "PIN"
+            ],
+            "title": "Mode Effectif"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "validated_at",
+          "mode_effectif"
+        ],
+        "title": "ValidationBon"
+      },
       "ValidationDemande": {
         "properties": {
           "expected_version": {
@@ -41691,7 +43980,8 @@
             "type": "string",
             "enum": [
               "COFFRET",
-              "ANIMATION"
+              "ANIMATION",
+              "BON_LOT"
             ],
             "title": "Type"
           },
@@ -42407,6 +44697,27 @@
         ],
         "title": "VersionsAttestationPayload"
       },
+      "VersionsBonPin": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "generation_qr": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Generation Qr"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "generation_qr"
+        ],
+        "title": "VersionsBonPin"
+      },
       "VersionsPin": {
         "properties": {
           "engineContractVersion": {
@@ -43046,6 +45357,134 @@
           "actions"
         ],
         "title": "WorkflowAnimationPayload"
+      },
+      "app__api__erp_schemas__ModeleCommande": {
+        "properties": {
+          "libelle": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Libelle"
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 5000,
+            "minLength": 1,
+            "title": "Description"
+          },
+          "image_uri": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 1000
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Image Uri"
+          },
+          "valeur_centimes": {
+            "type": "integer",
+            "maximum": 99999999.0,
+            "minimum": 0.0,
+            "title": "Valeur Centimes"
+          },
+          "reversement_centimes": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 99999999.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reversement Centimes"
+          },
+          "taux_commission_pourcent": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 100.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "string",
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d{0,2}0*$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Taux Commission Pourcent"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "BROUILLON",
+              "ACTIVE",
+              "ARCHIVE"
+            ],
+            "title": "Statut",
+            "default": "BROUILLON"
+          },
+          "expected_version": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Expected Version"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "libelle",
+          "description",
+          "valeur_centimes"
+        ],
+        "title": "ModeleCommande"
+      },
+      "app__api__inventaire_lots_api__ModeleCommande": {
+        "properties": {
+          "libelle": {
+            "type": "string",
+            "maxLength": 160,
+            "minLength": 1,
+            "title": "Libelle"
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 4000,
+            "title": "Description",
+            "default": ""
+          },
+          "consignes": {
+            "type": "string",
+            "maxLength": 4000,
+            "title": "Consignes",
+            "default": ""
+          },
+          "commercant_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Commercant Id"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "libelle",
+          "commercant_id"
+        ],
+        "title": "ModeleCommande"
       }
     },
     "securitySchemes": {

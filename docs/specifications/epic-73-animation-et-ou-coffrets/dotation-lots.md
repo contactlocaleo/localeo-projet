@@ -226,7 +226,7 @@ Erreurs ciblées : `DOTATION_NON_RENSEIGNEE`, `DOTATION_FIGEE`, `LOT_INDISPONIBL
 
 ## Transactions, concurrence et effets secondaires
 
-Le service applicatif charge les faits et verrouille dans un ordre constant : garde du commerce/PIN si nécessaire, animation, exemplaires triés, attribution/bon, demande et reçu. Les chemins QR et PIN partagent le verrou du même bon et la même commande de consommation. L’ordre final est vérifié avec les verrous E70 existants par un test PostgreSQL ; aucune branche ne prend les mêmes verrous en ordre inverse.
+Le service applicatif charge les faits et verrouille dans un ordre constant : autorité organisatrice si concernée, gardes commune/commerce, option salarié/identité/session, PIN et demande ou contexte de scan, animation/opération, exemplaires triés, attribution/bon, droit personnel, puis occurrence/reçu/audit/outbox. La demande PIN précède donc la cible, conformément à E70 ; une prélecture sans verrou repère seulement sa hiérarchie. Les chemins QR et PIN partagent le verrou du même bon et la même commande de consommation, sans UoW imbriquée ni commit interne. L’ordre final est vérifié avec les verrous E70 existants par un test PostgreSQL ; aucune branche ne prend les mêmes verrous en ordre inverse.
 
 | Course / panne | Résultat exigé |
 | --- | --- |
