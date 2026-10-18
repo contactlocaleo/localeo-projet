@@ -106,6 +106,8 @@ Le générateur aléatoire est un port ; le domaine reçoit son résultat contr�
 
 ### Volumétrie du tirage
 
+Le [protocole SQL du tirage libre préparé](tirage-libre-protocole.md) précise les bornes, index, reprises et le marqueur de visibilité retenus avant l'implémentation LOT04.
+
 La réserve de suppléants contient potentiellement toute la population non gagnante : le travail total et son stockage sont proportionnels à cette population, même avec un seul lot. Ne pas charger cette population et sa permutation intégralement dans une requête interactive, ni exécuter `ORDER BY random()` sur les participations vivantes comme raccourci. Préparer un résultat privé depuis la population figée/versionnée, en flux ou avec stockage temporaire borné et tri externe adapté, sous une opération durable/idempotente. La méthode conserve une permutation aléatoire sans biais ; la vérification porte sur l’unicité, la population et la reproductibilité de la reprise, sans rendre le tirage prévisible au client.
 
 La préparation ne donne aucun gagnant officiel, bon utilisable, réservation concurrente cachée ou email. Le résultat préparé est scellé et lié à l’opération demandée ; une reprise ne relance pas une sélection pour obtenir un autre résultat. La confirmation finale revérifie versions, droits des commerces et disponibilité des unités. Les lignes préparées ne deviennent des faits métier qu’avec une confirmation atomique identifiée ; tous les lecteurs, workers et commandes doivent exclure les résultats non confirmés. Les réservations/unicités acquises et le marqueur de confirmation sont commités ensemble. Un conflit ne publie aucun résultat partiel.

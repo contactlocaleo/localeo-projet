@@ -21,8 +21,8 @@ Implémentation, bases jetables locales, tests isolés et commits locaux uniquem
 | 00 | Sources, référence initiale, protocole UX et suivi | Projet ; lecture des quatre applications | Sources et contrôles de référence : commit Projet `be776b1` ; matérialisation des squelettes UX poursuivie dans les lots applicatifs |
 | 01 | US25–26 comptes, équipe, organisation, récupération, transfert | Backend, Animation, Projet | Implémenté et vérifié localement pour CA50–53 ; backend `45d0b56` et preuve complémentaire `a17e3f4`, Animation `05c0561`, Projet `9519696` ; limites de conservation et recette hébergée ci-dessous |
 | 02 | US11–13 ; parties US24/36, périmètres et onboarding | Backend/ERP/OnBoard, Commerçant, Animation, Projet | Implémenté et vérifié localement pour les produits existants ; Backend `261ebdc` et raccord asset `59d89d0`, Pro `bc9d1ac`, Animation `7cab528`, Projet `afd77cd` ; branches numériques et exploitabilité reprises aux lots 05/10 |
-| 03 | US03,14–17,27–28 ; souscriptions/modules/finance | Backend, Animation, Pro (contrat), Projet | Implémenté et vérifié localement ; Backend `4f3a3b1`, Animation `79903e3`, Pro `8212252` ; activation des modules futurs aux lots 06/07/08 |
-| 04 | US01–02,04 ; branche externe US07–08 | Backend, Animation, Marketplace/Live, Projet | À réaliser |
+| 03 | US03,14–17,27–28 ; souscriptions/modules/finance | Backend, Animation, Pro (contrat), Projet | Implémenté et vérifié localement ; Backend `4f3a3b1`, Animation `79903e3`, Pro `8212252`, Projet `6a3d747` ; activation des modules futurs aux lots 06/07/08 |
+| 04 | US01–02,04 ; branche externe US07–08 | Backend, Animation, Marketplace/Live, Pro (contrat), Projet | Implémenté et vérifié localement ; Backend `7502282`, Animation `d0b92f7`, Marketplace `1473e05`, Pro `30aeed3`, sources dans le commit documentaire lot 04 ; branche numérique au lot 05 |
 | 05 | US05–10 ; complément numérique US07–08 | Backend, Animation, Commerçant, Marketplace/Live, Projet | À réaliser |
 | 06 | US19–20 ; import/deltas/reprise | Backend, Animation, Projet | À réaliser |
 | 07 | US18,30 ; chasse et préparation accompagnée | Backend, Animation, Projet | À réaliser ; dépendance readiness E55 |
@@ -258,3 +258,133 @@ rapprocher, sans créditer deux droits. Aucun fournisseur réel, worker distant,
 push ni livraison n'a été utilisé. Le lot 03 est enregistré localement ; les
 branches de continuité import/chasse/messages seront complétées avec leurs
 opérations réelles dans les lots 06 à 08.
+
+### Lot 04 — Animation et lots externes
+
+Le domaine `ConfigurationDotation` possède le choix et son gel ; le domaine
+d'attribution libre possède le suivi et les conditions de remplacement. Les
+lots externes n'entraînent aucun achat, activation ou reversement Coffrets.
+Le [protocole de tirage libre](tirage-libre-protocole.md) décrit la préparation
+privée bornée et sa confirmation. Les écrans présentent séparément attribution,
+envoi de l'email et déclaration de remise. Les bons numériques restent
+indisponibles jusqu'au lot 05.
+
+Premières preuves locales, complétées par les vérifications finales plus bas :
+
+- Backend : `tests/security/test_gains_live_projection_postgres.py` et
+  `tests/api/test_localeo_live_animations_inscription.py`, runner isolé,
+  PostgreSQL local, `.artifacts/e73-lot04-live-04` : **7 réussites** (6,44 s).
+  La projection de catalogue ne lit que les participations des animations de
+  la page. Sur 10 000 participations et 10 000 gains, 3 requêtes constantes
+  pour 1 ou 25 racines, sous-requêtes limitées et index réel ; mesure ponctuelle
+  0,139 ms pour la projection de gain. Aucun gain privé n'est exposé avant
+  confirmation, ni à un autre participant. Ce contrôle ne prouve pas le trafic
+  simultané du lot 10.
+- Générateur : `test_demo_dotations_animation.py` et
+  `test_demonstration_registry.py`, runner isolé PostgreSQL,
+  `.artifacts/e73-lot04-demo-01` : **10 réussites** (3,23 s). Le premier brouillon
+  synthétique utilise deux lignes de lots externes et trois unités ; les
+  historiques publiés conservent une dotation Coffrets explicite et gelée par
+  le domaine. Le registre classe les neuf tables du lot comme données du jeu
+  à remplacer, sans importer les anciens gagnants. La génération transverse
+  complète reste à réaliser au lot 10.
+- Marketplace : `node --test tests/security/animation-gain.test.cjs
+  tests/security/library-backup.test.cjs` : **5 réussites**. Nature inconnue
+  refusée, ancien gain Coffret compatible, absence de coordonnées/consignes
+  privées dans le carnet IndexedDB et ses exports.
+- Marketplace : ESLint ciblé et build Vite en mode isolé réussis. Le lint global
+  rencontre un **EPERM de lecture** dans
+  `output/demo-generation/pytest-bum-registry` ; aucune suppression de ce
+  répertoire de travail ni modification des règles de lint.
+- Navigateur Marketplace : contrat public de détail existant et
+  `tests/visual/external-animation-gain.spec.cjs`, serveur local isolé :
+  **3 scénarios réussis** (19,8 s), dont accès gagnant direct à 320/1 280 px,
+  heure de Paris malgré navigateur New York, actualisation au clavier,
+  remise déclarée puis attribution remplacée et refus de nature inconnue.
+  Le gain précède la progression de jeu et aucun QR de lot Coffret n'est
+  fabriqué pour une remise externe.
+
+Les migrations complètes, la revue indépendante, les contrats et les contrôles
+du parcours organisateur/tirage ont ensuite été exécutés comme suit.
+
+Preuves de finalisation avant enregistrement :
+
+| Contrôle | Résultat réel / artefact |
+| --- | --- |
+| Domaine, architecture, contrats moteur, projection Live et générateur ciblé | Runner isolé, `tests/architecture`, recensement domaine/use cases, `test_gains_live_projection_postgres.py`, API Live, dotation de démonstration, registre et `test_contrats_moteur_t1.py` ; `.artifacts/e73-lot04-integration-02` : **545 réussites** (39,61 s) |
+| Configuration, publication, génération, jeu, financement et anciens tirages | Suite core sur quinze fichiers, `.artifacts/e73-lot04-core-final-12` : **161 réussites**, deux avertissements de dépendances ; inclut paiement Coffrets tardif à rapprocher sans émission d’instances |
+| Conservation d’identité | `tests/security/test_conservation_postgres_t6.py`, `.artifacts/e73-lot04-conservation-02` : **18 réussites** (57,8 s) ; gains ouverts et réserve préservent l’archive, remise puis purge de l’identité sans effacer la preuve |
+| Migrations complètes et rejeu | `test_data015_migrations.py`, base locale exclusive, `.artifacts/e73-lot04-migrations-02` : **3 réussites** (42,8 s), jusqu’à v271 incluant index réserve et compteur BIGINT |
+| Animation | **191 tests Node**, **416 assertions dans 38 scénarios navigateur** à 320/1 280 px, régression chasse Coffrets **254 contrôles** à 390/1 280 px ; types, lint, build isolé et deux tests de contrats HTTP réussis |
+| Marketplace | `npm run test:security` : **112 réussites** ; ESLint ciblé et build isolé réussis ; `external-animation-gain.spec.cjs` : **5 scénarios réussis** (34,8 s), lien email, reprise/expiration, pagination publique et états Live à 320/1 280 px |
+| Pro, contrats consommateurs | Quatre fichiers Vitest contrat API/préparation/registre moteur/animations : **63 réussites** (13,71 s, export final) ; aucun parcours de consommation de lot externe ajouté |
+
+Ces suites se recouvrent ; leurs nombres ne forment pas un total de tests distincts.
+Les revues croisées ont fait corriger les curseurs malformés (400), l’ordre commun
+de lecture/réservation des suppléants et le total BIGINT des unités. Le carnet Live
+refuse une version inconnue et préserve les discriminants inconnus après stockage
+et réimport ; il ne les requalifie jamais en Coffrets.
+
+Le tirage a été mesuré avec 10 000 candidats et 1 000 lignes de lots : une tranche
+de 500 attributions utilise 16 lectures SQL et environ 2,5 Mo de mémoire. Le
+scellement externe produit deux écritures, indépendamment de la réserve. Les
+plans utilisent les index de population et de classement, sans tri aléatoire ni
+chargement intégral. Une dotation de trois milliards d’unités avec un participant
+ne matérialise qu’une attribution. Cela ne démontre pas encore la charge
+simultanée transverse du lot 10.
+
+Les contrats générés E41/Live et les trois consommateurs moteur sont synchronisés.
+Le [guide organisateur](../../produit/formation/animation/guide-animation-preproduction.md)
+et la [procédure de tirage](../../exploitation/exploitation/gerer-tirages-libres-animation.md)
+décrivent les états et reprises. La liste globale reste nommée **Tirages Coffrets** ;
+les lots libres se suivent depuis chaque animation, avant unification au lot 09.
+Le traitement effectif reste désactivé par défaut. Les recettes humaines et toute
+activation hébergée restent non exécutées.
+
+Dette étayée : `test_modification_animation_en_cours.py` donne **3 échecs et
+1 réussite** (3,81 s) sur les sources du HEAD antérieur `4f3a3b16`, dans une copie
+isolée. Les 2 032 fichiers app/scripts/tests et la configuration pytest sont
+contrôlés contre l’archive Git (`.artifacts/e73-lot04-baseline-proof.json`).
+Ces tests attendent encore le PATCH direct de `date_fin` après publication et
+deux anciens messages ; le domaine exige désormais la commande versionnée des
+paramètres d’exploitation. Le lot 04 ne modifie ni ces tests ni cette règle.
+
+Revue SQL complémentaire : le plan de la deuxième page de suppléants parcourait
+10 000 candidats par semi-jointure malgré le `LIMIT` apparent. La sonde scalaire
+corrélée, bornée et indexable corrige ce parcours. Le test avec les pages initiale,
+suivante et au rang 9 000 vérifie maintenant les requêtes réelles : une ligne
+sondée et 26 lignes de page, aucun candidat filtré, tri final de 26 lignes,
+32 à 33 buffers. Les temps ponctuels sont de 0,19 à 0,46 ms, sans forcer le
+planificateur. Le plan fautif est conservé dans
+`.artifacts/e73-tirage-libre-reserve-plans-avant-correction.json`.
+
+La copie de l’index Animation `tmp/e73-lot04-staged` passe types et build isolé,
+sans les quatre hunks utilisateur « Clôturer ». Le chunk principal de 907,80 ko
+reste à découper au lot 09. Les commits d’interfaces du lot 04 sont locaux :
+Animation `d0b92f7`, Marketplace `1473e05`, Pro `30aeed3`.
+
+Après cette correction SQL, la revue indépendante a réexécuté
+`test_attribution_lot_libre_dedicated.py`, `test_email_lot_externe.py` et
+`test_tirages_libres_postgres.py` : **28 tests distincts réussis**, dont 16
+PostgreSQL en 84,13 s (`tmp/e73-lot04-audit-pg-final-03`), deux avertissements
+Starlette/AnyIO, aucun skip. Les trois plans de réserve sont conservés dans
+`.artifacts/e73-tirage-libre-reserve-plans.json`. Le premier essai interrompu
+pendant la récupération du PostgreSQL local ne vaut pas validation ; seuls
+les résultats terminés sont retenus.
+
+Compatibilité de démonstration complète :
+`scripts/validation/run_demo_compatibility_tests.py --disposable-postgres
+127.0.0.1:10407,127.0.0.1:55448 --pg-bin-dir "C:/Program Files/PostgreSQL/18/bin"
+--output-dir tmp/e73-lot04-demo-compatibility-20261018-resume` : **7 réussites**
+en 586,51 s, trois modules obligatoires, zéro skip, quatre avertissements de
+réflexion SQLAlchemy. Les cycles installation, panne injectée, restauration et
+reset utilisent uniquement les deux clusters jetables de cette tâche. XML et
+log sont conservés dans le répertoire indiqué et son fichier `.log` voisin.
+Les garde-fous du runner passent **31 tests** (0,35 s). Les ports locaux peuvent
+être fournis explicitement et doivent être distincts ; le répertoire de sortie
+doit être neuf dans `tmp/`, aucun résultat antérieur n’est effacé.
+
+Le commit backend `7502282` clôt le travail applicatif local du lot 04. Les
+générations transverses des dix lots, la charge simultanée, les recettes humaines
+et les preuves d’hébergement restent à réaliser selon leur lot. Aucun push,
+envoi fournisseur ou déploiement n’a eu lieu.

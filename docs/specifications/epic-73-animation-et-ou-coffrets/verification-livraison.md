@@ -72,6 +72,25 @@ Chaque ligne associe le CA à une preuve observable ; les identifiants `E73-T-*`
 | E73-CA-62 | Export/fermeture | E73-T-62 : responsable seul, CSV/médias/guide sous 5 jours ouvrés, accès 30 jours, fermeture distincte et continuité | D3 | F11 | L5 |
 | E73-CA-63 | Restauration hébergée | E73-T-63 : chronométrage et cohérence, RPO 4 h/RTO 8 h, preuve manquante/échec interdit mise en service | D4 | F12 | L6 |
 
+### Raccordement des preuves locales du lot 04
+
+Ces résultats portent sur la branche **Libre / Externe**. Les branches numériques
+des critères partagés restent ouvertes jusqu’au lot 05. Les commandes, mesures,
+limites et commits sont consignés dans le [suivi de réalisation](suivi-implementation.md).
+
+| Critères | Preuves exécutées et portée |
+| --- | --- |
+| CA-01, 03, 04, 11 — branche externe | Domaine `test_configuration_dotation_dedicated.py`, PostgreSQL/HTTP `test_dotation_animation_postgres.py`, parcours navigateur Animation `tests/browser/dotation.mjs` : choix explicite, gel, publication sans paiement Coffrets, droits/tenant et reprise |
+| CA-05 | Régressions financement/publication/tirage Coffrets et `test_valider_paiement_commande_lots.py` : paiement tardif après passage Libre à rapprocher, sans émission d’instances Coffrets |
+| CA-06 à 10, 29 — branche externe | Domaine `test_attribution_lot_libre_dedicated.py`, PostgreSQL/HTTP `test_tirages_libres_postgres.py`, navigateur organisateur et `external-animation-gain.spec.cjs` : ordre, manque de candidats, un lot par participant, confirmation privée, email distinct de remise, réserve/remplacement/retirage, erreur et reçu |
+| CA-07, 32 — limites externes | Mêmes tests PostgreSQL : confirmations concurrentes, remplacement contre remise et correction, reprise stable ; aucune preuve de révocation d’un bon numérique annoncée avant lot 05 |
+| CA-08, 09 | Live `test_gains_live_projection_postgres.py`, jeu PostgreSQL, stockage réel IndexedDB et lien gagnant dans le navigateur : gain confirmé seulement, accès privé distinct du jeu, absence de faux QR/Coffret et versions inconnues refusées |
+| Conservation / CA-27 partiel | `test_conservation_postgres_t6.py`, `test_demo_dotations_animation.py`, registre de démonstration et migrations locales : besoin d’identité externe et réserve, purge après remise, dotation synthétique par le domaine. La démonstration transverse de tous les lots et sa restauration restent au lot 10 |
+
+Les preuves de volume couvrent 10 000 candidats, 1 000 lignes de lots, les index
+réels, une préparation bornée et le coût constant du scellement externe. Elles
+ne remplacent ni la charge simultanée transverse du lot 10 ni la recette humaine.
+
 ### Documents et guides associés
 
 - **D1** : [dotation et lots](dotation-lots.md) ; actualiser à l’implémentation les parcours organisateur, les supports de gain, l’aide scanner Pro, E70 et les projections Live. Contrats gagnants discriminés et consommation.

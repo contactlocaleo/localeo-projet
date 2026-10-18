@@ -46,6 +46,48 @@ une animation se termine au minuit suivant. Un changement d'heure ne rajoute ni
 ne supprime une journée du calendrier. Les échéances de réponse commerçant restent
 valables pendant toute la journée choisie à Paris.
 
+## Dotation libre et remise externe — évolution E73, lot 04
+
+Ce parcours est réalisé et vérifié localement ; son ouverture sur un environnement
+reste distincte. À la création, choisir explicitement **Coffrets** ou **Lots libres**,
+puis **Gestion externe** pour les lots remis hors Localeo. Aucun choix n’est précoché.
+Les bons numériques seront complétés au lot 05.
+
+Dans la dotation, renseigner pour chaque lot son libellé, sa quantité, le responsable
+de la remise et les consignes du gagnant. Mettre les lots dans l’ordre d’attribution
+souhaité. Les consignes et le responsable sont réservés au suivi autorisé et au
+gagnant ; la fiche publique présente les libellés et quantités. Les listes sont
+paginées : passer à la page suivante pour voir les autres lots.
+
+Le choix reste modifiable en brouillon tant qu’aucun engagement ne le bloque.
+La publication fige le mode et l’ordre ; elle ne demande pas de paiement Coffrets
+pour une dotation libre. Un paiement Coffrets ancien reçu après un changement de
+mode reste à rapprocher par Localeo, sans transformer la dotation libre.
+
+Après clôture, ouvrir l’animation puis son suivi des lots. Le tirage prépare les
+gagnants et les suppléants en arrière-plan. **En préparation** ne confirme aucune
+attribution : attendre le résultat enregistré et l’actualiser si la réponse a été
+perdue. Un même participant reçoit au maximum un lot. En cas de candidats
+insuffisants, le surplus reste non attribué.
+
+Pour chaque gain, distinguer trois informations : l’attribution, l’état réel de
+l’email et le suivi de remise. Le gagnant reçoit les consignes et un lien de
+consultation ; aucun QR de consommation ni compte commerçant n’est imposé pour
+une remise externe. **Email envoyé** ne signifie jamais **Lot remis**. Un échec
+de préparation du mail se reprend depuis le même gain.
+
+Consigner le contact, la réponse, le refus, l’incident ou la remise déclarée.
+Une correction référence l’événement erroné et conserve son historique. Pour un
+gagnant injoignable, le remplacement est possible après quatorze jours depuis le
+premier email envoyé avec succès ; un refus explicite permet de le faire plus tôt.
+Confirmer le remplacement pour utiliser le premier suppléant encore éligible.
+Si la réserve est épuisée, le retirage est une action distincte et explicite.
+Un lot dont la remise reste déclarée ne peut pas être réattribué.
+
+La rubrique générale **Tirages Coffrets** conserve son périmètre historique.
+Les tirages libres sont accessibles depuis la fiche de chaque animation ; leur
+intégration à une liste globale commune est prévue au lot 09.
+
 ## Préparer le terrain d’une chasse
 
 La rubrique **Terrain** distingue les préparatifs de votre équipe et ceux des commerces :

@@ -1,9 +1,9 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "Localeo Backend - contrat implemente EPIC 41",
-    "description": "OpenAPI complet du backend, dont les parcours Animation locale. Genere hors ligne depuis le code local pour les integrations et les mocks ; cet instantane ne prouve pas son deploiement.",
-    "version": "1.0.0+59d89d0"
+    "title": "Localeo BackOffice V1 (development)",
+    "description": "Convention de routage : `/public/*` sans authentification, `/protected/*` avec `X-API-KEY` ou token applicatif selon l'endpoint, `/internal/*` avec session historique ou nominative et capacité serveur selon la route, sauf les trois operations de publication juridique avec une cle `documentaire:publier` et les deux batchs moteur (generation et conservation) avec une cle `internal:batch`.",
+    "version": "1.0.0+4f3a3b1"
   },
   "paths": {
     "/public/identite-acces/interne/connexion": {
@@ -20339,7 +20339,7 @@
         "tags": [
           "Identite acces"
         ],
-        "summary": "Definir le mot de passe avec une invitation a usage unique",
+        "summary": "Activer Invitation Animation",
         "operationId": "activer_invitation_gestionnaire_animation",
         "requestBody": {
           "content": {
@@ -20720,6 +20720,78 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AnimationPubliquePayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/animation-locale/animations/{animation_id}/lots": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Lister Lots Publics Animation",
+        "operationId": "lister_lots_publics_animation",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2048
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LotsPublicsAnimationPage"
                 }
               }
             }
@@ -22853,7 +22925,7 @@
         "tags": [
           "Abonnements plateforme"
         ],
-        "summary": "Renouveler une invitation gestionnaire (session administrateur obligatoire)",
+        "summary": "Renvoyer Invitation Gestionnaire",
         "operationId": "renvoyer_invitation_gestionnaire_internal_abonnements_plateforme_gestionnaires__gestionnaire_id__invitation_post",
         "parameters": [
           {
@@ -64903,8 +64975,7 @@
                 }
               ],
               "title": "Q"
-            },
-            "description": "Alias compatible maquette du parametre recherche."
+            }
           },
           {
             "name": "Authorization",
@@ -65074,8 +65145,7 @@
           {
             "CommercantSessionBearer": []
           }
-        ],
-        "description": "Supprime definitivement une animation uniquement si son statut est BROUILLON."
+        ]
       },
       "patch": {
         "tags": [
@@ -65803,6 +65873,614 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ConfigurationAnimationLecturePayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/animation-locale/animations/{animation_id}/dotation": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Consulter Dotation Animation",
+        "operationId": "consulter_dotation_animation",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DotationPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Modifier Dotation Animation",
+        "operationId": "modifier_dotation_animation",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModifierDotationInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DotationPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/animation-locale/animations/{animation_id}/dotation/recus/{cle}": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Lire Recu Dotation Animation",
+        "operationId": "lire_recu_dotation_animation",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "cle",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Cle"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeConfirmee_DotationPayload_"
+                }
+              }
+            }
+          },
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeEnCours"
+                }
+              }
+            },
+            "description": "Accepted"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/animation-locale/animations/{animation_id}/dotation/lignes": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Lister Lignes Lots Externes",
+        "operationId": "lister_lignes_lots_externes",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2048
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LignesLotsExternesPage"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Ajouter Ligne Lot Externe",
+        "operationId": "ajouter_ligne_lot_externe",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MutationLigneLotExterneInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DotationPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/animation-locale/animations/{animation_id}/dotation/lignes/{ligne_id}": {
+      "put": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Modifier Ligne Lot Externe",
+        "operationId": "modifier_ligne_lot_externe",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "ligne_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Ligne Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MutationLigneLotExterneInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DotationPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Supprimer Ligne Lot Externe",
+        "operationId": "supprimer_ligne_lot_externe",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "ligne_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Ligne Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SupprimerLigneLotExterneInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DotationPayload"
                 }
               }
             }
@@ -71403,8 +72081,7 @@
                 }
               ],
               "title": "Periode"
-            },
-            "description": "Raccourci de periode. Les dates explicites restent prioritaires."
+            }
           },
           {
             "name": "Authorization",
@@ -71840,8 +72517,7 @@
                 }
               ],
               "title": "After Cursor"
-            },
-            "description": "Alias Figma de cursor."
+            }
           },
           {
             "name": "Authorization",
@@ -73595,6 +74271,1099 @@
         "security": [
           {
             "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/public/animation-locale/gains-libres/acces": {
+      "post": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Acces Gain",
+        "operationId": "acces_gain_public_animation_locale_gains_libres_acces_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccesGainCommande"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GainExternePersonnel"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/protected/animation-locale/animations/{animation_id}/tirage-libre": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Etat",
+        "operationId": "etat_protected_animation_locale_animations__animation_id__tirage_libre_get",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EtatTirageLibre"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Demander",
+        "operationId": "demander_protected_animation_locale_animations__animation_id__tirage_libre_post",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 200,
+              "title": "Idempotency-Key"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TirageCommande"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EtatTirageLibre"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/animation-locale/animations/{animation_id}/tirage-libre/operations/{operation_id}": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Operation",
+        "operationId": "operation_protected_animation_locale_animations__animation_id__tirage_libre_operations__operation_id__get",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "operation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Operation Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EtatTirageLibre"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/animation-locale/animations/{animation_id}/gains-libres": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Gains",
+        "operationId": "gains_protected_animation_locale_animations__animation_id__gains_libres_get",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 1024
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageLibre_GainLotExterne_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/animation-locale/animations/{animation_id}/suppleants-libres": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Suppleants",
+        "operationId": "suppleants_protected_animation_locale_animations__animation_id__suppleants_libres_get",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 1024
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageLibre_SuppleantLibre_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/animation-locale/animations/{animation_id}/gains-libres/{gain_id}/suivi-externe": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Historique",
+        "operationId": "historique_protected_animation_locale_animations__animation_id__gains_libres__gain_id__suivi_externe_get",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "gain_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Gain Id"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 1024
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageLibre_SuiviLotExterne_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Suivre",
+        "operationId": "suivre_protected_animation_locale_animations__animation_id__gains_libres__gain_id__suivi_externe_post",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "gain_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Gain Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 200,
+              "title": "Idempotency-Key"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SuiviCommande"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GainLotExterne"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/animation-locale/animations/{animation_id}/gains-libres/{gain_id}/commandes/{cle}": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Recu",
+        "operationId": "recu_protected_animation_locale_animations__animation_id__gains_libres__gain_id__commandes__cle__get",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "gain_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Gain Id"
+            }
+          },
+          {
+            "name": "cle",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Cle"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecuLibre"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/animation-locale/animations/{animation_id}/gains-libres/{gain_id}/remplacer": {
+      "post": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Remplacer",
+        "operationId": "remplacer_protected_animation_locale_animations__animation_id__gains_libres__gain_id__remplacer_post",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "gain_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Gain Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 200,
+              "title": "Idempotency-Key"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RemplacementCommande"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GainLotExterne"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/animation-locale/animations/{animation_id}/gains-libres/{gain_id}/retirer-au-sort": {
+      "post": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Retirer",
+        "operationId": "retirer_protected_animation_locale_animations__animation_id__gains_libres__gain_id__retirer_au_sort_post",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "gain_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Gain Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 200,
+              "title": "Idempotency-Key"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RetirageCommande"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EtatTirageLibre"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/animation-locale/animations/{animation_id}/gains-libres/{gain_id}/email/reprendre": {
+      "post": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Reprendre Email",
+        "operationId": "reprendre_email_protected_animation_locale_animations__animation_id__gains_libres__gain_id__email_reprendre_post",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "gain_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Gain Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 200,
+              "title": "Idempotency-Key"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VersionCommande"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GainLotExterne"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/internal/animation-locale/tirages-libres/traiter": {
+      "post": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Traiter",
+        "operationId": "traiter_internal_animation_locale_tirages_libres_traiter_post",
+        "parameters": [
+          {
+            "name": "X-API-KEY",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Cle API interne avec le scope `internal:batch`.",
+              "title": "X-Api-Key"
+            },
+            "description": "Cle API interne avec le scope `internal:batch`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BatchCommande"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BatchLibre"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "XApiKey": []
           }
         ]
       }
@@ -75966,6 +77735,22 @@
         ],
         "title": "AccepterRetraitMissionInput"
       },
+      "AccesGainCommande": {
+        "properties": {
+          "token": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 32,
+            "title": "Token"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "token"
+        ],
+        "title": "AccesGainCommande"
+      },
       "AccueilMarketplaceContextualisePayload": {
         "properties": {
           "contexte": {
@@ -78324,6 +80109,34 @@
             "type": "array",
             "title": "Lots"
           },
+          "dotation": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Dotation"
+          },
+          "lots_next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lots Next Cursor"
+          },
+          "lots_has_more": {
+            "type": "boolean",
+            "title": "Lots Has More",
+            "default": false
+          },
           "regles": {
             "additionalProperties": true,
             "type": "object",
@@ -79465,6 +81278,25 @@
         ],
         "title": "BailGenerationPayload"
       },
+      "BatchCommande": {
+        "properties": {
+          "simulation": {
+            "type": "boolean",
+            "title": "Simulation",
+            "default": true
+          },
+          "limit": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 1.0,
+            "title": "Limit",
+            "default": 25
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "BatchCommande"
+      },
       "BatchCommerceCommande": {
         "properties": {
           "simulation": {
@@ -79755,6 +81587,38 @@
           "batchs"
         ],
         "title": "BatchInventairePayload"
+      },
+      "BatchLibre": {
+        "properties": {
+          "contract_version": {
+            "type": "string",
+            "const": "1",
+            "title": "Contract Version",
+            "default": "1"
+          },
+          "simulation": {
+            "type": "boolean",
+            "title": "Simulation"
+          },
+          "traites": {
+            "type": "integer",
+            "title": "Traites"
+          },
+          "operations": {
+            "items": {
+              "$ref": "#/components/schemas/TraitementLibre"
+            },
+            "type": "array",
+            "title": "Operations"
+          }
+        },
+        "type": "object",
+        "required": [
+          "simulation",
+          "traites",
+          "operations"
+        ],
+        "title": "BatchLibre"
       },
       "BatchSmsPayload": {
         "properties": {
@@ -80888,6 +82752,54 @@
           "validatedAt"
         ],
         "title": "ChecklistChassePayload"
+      },
+      "ChoixDotationPayload": {
+        "properties": {
+          "nature": {
+            "type": "string",
+            "enum": [
+              "COFFRETS",
+              "LIBRE"
+            ],
+            "title": "Nature"
+          },
+          "gestion_libre": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "EXTERNE",
+                  "NUMERIQUE"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Gestion Libre"
+          },
+          "disponible": {
+            "type": "boolean",
+            "title": "Disponible"
+          },
+          "motif": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motif"
+          }
+        },
+        "type": "object",
+        "required": [
+          "nature",
+          "disponible"
+        ],
+        "title": "ChoixDotationPayload"
       },
       "ChoixOrganisation": {
         "properties": {
@@ -82122,6 +84034,25 @@
           "result"
         ],
         "title": "CommandeConfirmee[DemandeParticipationCommercantPayload]"
+      },
+      "CommandeConfirmee_DotationPayload_": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "CONFIRMEE",
+            "title": "Status"
+          },
+          "result": {
+            "$ref": "#/components/schemas/DotationPayload"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "result"
+        ],
+        "title": "CommandeConfirmee[DotationPayload]"
       },
       "CommandeConfirmee_GelConservationPayload_": {
         "properties": {
@@ -84241,6 +86172,16 @@
       },
       "ConfigurationAnimationLecturePayload": {
         "properties": {
+          "dotation": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DotationInput"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "suivi_preparation": {
             "type": "boolean",
             "title": "Suivi Preparation",
@@ -84365,6 +86306,9 @@
       },
       "ConfigurationAnimationPayload": {
         "properties": {
+          "dotation": {
+            "$ref": "#/components/schemas/DotationInput"
+          },
           "suivi_preparation": {
             "type": "boolean",
             "title": "Suivi Preparation",
@@ -84461,6 +86405,7 @@
         },
         "type": "object",
         "required": [
+          "dotation",
           "nom",
           "date_debut",
           "date_fin"
@@ -87363,6 +89308,16 @@
       },
       "DemandeGenerationChasse": {
         "properties": {
+          "dotation": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DotationInput"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "animation_id": {
             "anyOf": [
               {
@@ -87427,6 +89382,16 @@
       },
       "DemandeGenerationChasseSnapshot": {
         "properties": {
+          "dotation": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DotationInput"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "animation_id": {
             "anyOf": [
               {
@@ -87509,6 +89474,16 @@
       },
       "DemandeGenerationPasseport": {
         "properties": {
+          "dotation": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DotationInput"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "animation_id": {
             "anyOf": [
               {
@@ -87573,6 +89548,16 @@
       },
       "DemandeGenerationPasseportSnapshot": {
         "properties": {
+          "dotation": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DotationInput"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "animation_id": {
             "anyOf": [
               {
@@ -89478,6 +91463,229 @@
         ],
         "title": "DossierVerificationsPayload"
       },
+      "DotationInput": {
+        "properties": {
+          "nature": {
+            "type": "string",
+            "enum": [
+              "COFFRETS",
+              "LIBRE"
+            ],
+            "title": "Nature"
+          },
+          "gestion_libre": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "EXTERNE",
+                  "NUMERIQUE"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Gestion Libre"
+          },
+          "validite_jours": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 365.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Validite Jours"
+          },
+          "lignes_externes": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/LigneLotExterneInput"
+                },
+                "type": "array",
+                "maxItems": 100
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lignes Externes"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "nature"
+        ],
+        "title": "DotationInput"
+      },
+      "DotationPayload": {
+        "properties": {
+          "contract_version": {
+            "type": "string",
+            "const": "1",
+            "title": "Contract Version",
+            "default": "1"
+          },
+          "animation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animation Id"
+          },
+          "revision": {
+            "type": "integer",
+            "title": "Revision"
+          },
+          "nature": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "COFFRETS",
+                  "LIBRE"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nature"
+          },
+          "gestion_libre": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "EXTERNE",
+                  "NUMERIQUE"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Gestion Libre"
+          },
+          "validite_jours": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Validite Jours"
+          },
+          "lignes_externes": {
+            "items": {
+              "$ref": "#/components/schemas/LigneLotExterneInput"
+            },
+            "type": "array",
+            "title": "Lignes Externes"
+          },
+          "lignes_next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lignes Next Cursor"
+          },
+          "lignes_has_more": {
+            "type": "boolean",
+            "title": "Lignes Has More",
+            "default": false
+          },
+          "nombre_lignes": {
+            "type": "integer",
+            "title": "Nombre Lignes"
+          },
+          "nombre_unites": {
+            "type": "integer",
+            "title": "Nombre Unites"
+          },
+          "prochain_ordre": {
+            "type": "integer",
+            "title": "Prochain Ordre"
+          },
+          "published_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Published At"
+          },
+          "configuration_publiee_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Configuration Publiee Id"
+          },
+          "modifiable": {
+            "type": "boolean",
+            "title": "Modifiable"
+          },
+          "motif_blocage": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motif Blocage"
+          },
+          "actions": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Actions"
+          },
+          "choix_disponibles": {
+            "items": {
+              "$ref": "#/components/schemas/ChoixDotationPayload"
+            },
+            "type": "array",
+            "title": "Choix Disponibles"
+          }
+        },
+        "type": "object",
+        "required": [
+          "animation_id",
+          "revision",
+          "nature",
+          "lignes_externes",
+          "nombre_lignes",
+          "nombre_unites",
+          "prochain_ordre",
+          "modifiable",
+          "actions",
+          "choix_disponibles"
+        ],
+        "title": "DotationPayload"
+      },
       "DroitChasseHistorique": {
         "properties": {
           "quantite": {
@@ -90945,6 +93153,137 @@
         ],
         "title": "EtatResponse"
       },
+      "EtatTirageLibre": {
+        "properties": {
+          "contract_version": {
+            "type": "string",
+            "const": "1",
+            "title": "Contract Version",
+            "default": "1"
+          },
+          "id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Id"
+          },
+          "animation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animation Id"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "NON_LANCE",
+              "EN_ATTENTE",
+              "PREPARATION",
+              "CONFIRMEE",
+              "BLOQUEE"
+            ],
+            "title": "Statut"
+          },
+          "phase": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "INDEXATION",
+                  "CLASSEMENT",
+                  "SCELLEMENT",
+                  "TERMINE"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Phase"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "population_version": {
+            "type": "integer",
+            "title": "Population Version"
+          },
+          "nombre_eligibles": {
+            "type": "integer",
+            "title": "Nombre Eligibles"
+          },
+          "nombre_lots": {
+            "type": "integer",
+            "title": "Nombre Lots"
+          },
+          "nombre_gagnants": {
+            "type": "integer",
+            "title": "Nombre Gagnants"
+          },
+          "nombre_suppleants": {
+            "type": "integer",
+            "title": "Nombre Suppleants"
+          },
+          "prepared_count": {
+            "type": "integer",
+            "title": "Prepared Count"
+          },
+          "confirmed_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Confirmed At"
+          },
+          "erreur": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Erreur"
+          },
+          "actions_disponibles": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Actions Disponibles"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "animation_id",
+          "statut",
+          "phase",
+          "version",
+          "population_version",
+          "nombre_eligibles",
+          "nombre_lots",
+          "nombre_gagnants",
+          "nombre_suppleants",
+          "prepared_count",
+          "confirmed_at",
+          "erreur",
+          "actions_disponibles"
+        ],
+        "title": "EtatTirageLibre"
+      },
       "EvenementAnimationPayload": {
         "properties": {
           "commercant_nom": {
@@ -92240,6 +94579,12 @@
       },
       "GainAnimationPayload": {
         "properties": {
+          "nature": {
+            "type": "string",
+            "const": "COFFRET",
+            "title": "Nature",
+            "default": "COFFRET"
+          },
           "id": {
             "type": "string",
             "format": "uuid",
@@ -92318,6 +94663,621 @@
           "coffret_nom"
         ],
         "title": "GainAnimationPayload"
+      },
+      "GainCoffretParticipant": {
+        "properties": {
+          "nature": {
+            "type": "string",
+            "const": "COFFRET",
+            "title": "Nature"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          },
+          "coffret_instance_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Coffret Instance Id"
+          },
+          "disponible": {
+            "type": "boolean",
+            "title": "Disponible"
+          },
+          "ajout_carnet_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ajout Carnet Url"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "nature",
+          "id",
+          "statut",
+          "coffret_instance_id",
+          "disponible"
+        ],
+        "title": "GainCoffretParticipant"
+      },
+      "GainExterneParticipant": {
+        "properties": {
+          "nature": {
+            "type": "string",
+            "const": "LOT_EXTERNE",
+            "title": "Nature"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "attribution_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Attribution Id"
+          },
+          "animation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animation Id"
+          },
+          "tirage_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Tirage Id"
+          },
+          "participant_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Participant Id"
+          },
+          "rang": {
+            "type": "integer",
+            "title": "Rang"
+          },
+          "ligne_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Ligne Id"
+          },
+          "index_unite": {
+            "type": "integer",
+            "title": "Index Unite"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "responsable_remise": {
+            "type": "string",
+            "title": "Responsable Remise"
+          },
+          "consignes": {
+            "type": "string",
+            "title": "Consignes"
+          },
+          "organisateur_nom": {
+            "type": "string",
+            "title": "Organisateur Nom"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "ATTRIBUE",
+              "REMPLACE"
+            ],
+            "title": "Statut"
+          },
+          "statut_remise": {
+            "type": "string",
+            "enum": [
+              "NON_RENSEIGNEE",
+              "REMISE_DECLAREE"
+            ],
+            "title": "Statut Remise"
+          },
+          "email_statut": {
+            "type": "string",
+            "enum": [
+              "EN_ATTENTE",
+              "ENVOYE",
+              "ECHEC"
+            ],
+            "title": "Email Statut"
+          },
+          "premier_envoi_reussi_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Premier Envoi Reussi At"
+          },
+          "attributed_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Attributed At"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "actions_disponibles": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Actions Disponibles"
+          },
+          "raisons_remplacement_autorisees": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Raisons Remplacement Autorisees"
+          },
+          "participant_nom": {
+            "type": "null",
+            "title": "Participant Nom"
+          },
+          "participant_prenom": {
+            "type": "null",
+            "title": "Participant Prenom"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "nature",
+          "id",
+          "attribution_id",
+          "animation_id",
+          "tirage_id",
+          "participant_id",
+          "rang",
+          "ligne_id",
+          "index_unite",
+          "libelle",
+          "responsable_remise",
+          "consignes",
+          "organisateur_nom",
+          "statut",
+          "statut_remise",
+          "email_statut",
+          "premier_envoi_reussi_at",
+          "attributed_at",
+          "version",
+          "actions_disponibles",
+          "raisons_remplacement_autorisees"
+        ],
+        "title": "GainExterneParticipant"
+      },
+      "GainExternePersonnel": {
+        "properties": {
+          "contract_version": {
+            "type": "string",
+            "const": "1",
+            "title": "Contract Version",
+            "default": "1"
+          },
+          "nature": {
+            "type": "string",
+            "const": "LOT_EXTERNE",
+            "title": "Nature"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "attribution_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Attribution Id"
+          },
+          "animation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animation Id"
+          },
+          "tirage_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Tirage Id"
+          },
+          "participant_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Participant Id"
+          },
+          "rang": {
+            "type": "integer",
+            "title": "Rang"
+          },
+          "ligne_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Ligne Id"
+          },
+          "index_unite": {
+            "type": "integer",
+            "title": "Index Unite"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "responsable_remise": {
+            "type": "string",
+            "title": "Responsable Remise"
+          },
+          "consignes": {
+            "type": "string",
+            "title": "Consignes"
+          },
+          "organisateur_nom": {
+            "type": "string",
+            "title": "Organisateur Nom"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "ATTRIBUE",
+              "REMPLACE"
+            ],
+            "title": "Statut"
+          },
+          "statut_remise": {
+            "type": "string",
+            "enum": [
+              "NON_RENSEIGNEE",
+              "REMISE_DECLAREE"
+            ],
+            "title": "Statut Remise"
+          },
+          "email_statut": {
+            "type": "string",
+            "enum": [
+              "EN_ATTENTE",
+              "ENVOYE",
+              "ECHEC"
+            ],
+            "title": "Email Statut"
+          },
+          "premier_envoi_reussi_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Premier Envoi Reussi At"
+          },
+          "attributed_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Attributed At"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "actions_disponibles": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Actions Disponibles"
+          },
+          "raisons_remplacement_autorisees": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Raisons Remplacement Autorisees"
+          },
+          "participant_nom": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Participant Nom"
+          },
+          "participant_prenom": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Participant Prenom"
+          },
+          "operation_remplacement_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Operation Remplacement Id"
+          },
+          "operation_remplacement_statut": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Operation Remplacement Statut"
+          },
+          "animation_nom": {
+            "type": "string",
+            "title": "Animation Nom"
+          }
+        },
+        "type": "object",
+        "required": [
+          "nature",
+          "id",
+          "attribution_id",
+          "animation_id",
+          "tirage_id",
+          "participant_id",
+          "rang",
+          "ligne_id",
+          "index_unite",
+          "libelle",
+          "responsable_remise",
+          "consignes",
+          "organisateur_nom",
+          "statut",
+          "statut_remise",
+          "email_statut",
+          "premier_envoi_reussi_at",
+          "attributed_at",
+          "version",
+          "actions_disponibles",
+          "raisons_remplacement_autorisees",
+          "animation_nom"
+        ],
+        "title": "GainExternePersonnel"
+      },
+      "GainLotExterne": {
+        "properties": {
+          "contract_version": {
+            "type": "string",
+            "const": "1",
+            "title": "Contract Version",
+            "default": "1"
+          },
+          "nature": {
+            "type": "string",
+            "const": "LOT_EXTERNE",
+            "title": "Nature"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "attribution_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Attribution Id"
+          },
+          "animation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animation Id"
+          },
+          "tirage_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Tirage Id"
+          },
+          "participant_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Participant Id"
+          },
+          "rang": {
+            "type": "integer",
+            "title": "Rang"
+          },
+          "ligne_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Ligne Id"
+          },
+          "index_unite": {
+            "type": "integer",
+            "title": "Index Unite"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "responsable_remise": {
+            "type": "string",
+            "title": "Responsable Remise"
+          },
+          "consignes": {
+            "type": "string",
+            "title": "Consignes"
+          },
+          "organisateur_nom": {
+            "type": "string",
+            "title": "Organisateur Nom"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "ATTRIBUE",
+              "REMPLACE"
+            ],
+            "title": "Statut"
+          },
+          "statut_remise": {
+            "type": "string",
+            "enum": [
+              "NON_RENSEIGNEE",
+              "REMISE_DECLAREE"
+            ],
+            "title": "Statut Remise"
+          },
+          "email_statut": {
+            "type": "string",
+            "enum": [
+              "EN_ATTENTE",
+              "ENVOYE",
+              "ECHEC"
+            ],
+            "title": "Email Statut"
+          },
+          "premier_envoi_reussi_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Premier Envoi Reussi At"
+          },
+          "attributed_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Attributed At"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "actions_disponibles": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Actions Disponibles"
+          },
+          "raisons_remplacement_autorisees": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Raisons Remplacement Autorisees"
+          },
+          "participant_nom": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Participant Nom"
+          },
+          "participant_prenom": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Participant Prenom"
+          },
+          "operation_remplacement_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Operation Remplacement Id"
+          },
+          "operation_remplacement_statut": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Operation Remplacement Statut"
+          }
+        },
+        "type": "object",
+        "required": [
+          "nature",
+          "id",
+          "attribution_id",
+          "animation_id",
+          "tirage_id",
+          "participant_id",
+          "rang",
+          "ligne_id",
+          "index_unite",
+          "libelle",
+          "responsable_remise",
+          "consignes",
+          "organisateur_nom",
+          "statut",
+          "statut_remise",
+          "email_statut",
+          "premier_envoi_reussi_at",
+          "attributed_at",
+          "version",
+          "actions_disponibles",
+          "raisons_remplacement_autorisees"
+        ],
+        "title": "GainLotExterne"
       },
       "GelConservationPayload": {
         "properties": {
@@ -95199,6 +98159,94 @@
         ],
         "title": "LigneCommercePayload"
       },
+      "LigneLotExterneInput": {
+        "properties": {
+          "id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Id"
+          },
+          "libelle": {
+            "type": "string",
+            "maxLength": 160,
+            "minLength": 1,
+            "title": "Libelle"
+          },
+          "quantite": {
+            "type": "integer",
+            "maximum": 2147483647.0,
+            "minimum": 1.0,
+            "title": "Quantite"
+          },
+          "responsable_remise": {
+            "type": "string",
+            "maxLength": 250,
+            "minLength": 1,
+            "title": "Responsable Remise"
+          },
+          "consignes": {
+            "type": "string",
+            "maxLength": 4000,
+            "minLength": 1,
+            "title": "Consignes"
+          },
+          "ordre": {
+            "type": "integer",
+            "maximum": 2147483647.0,
+            "minimum": 1.0,
+            "title": "Ordre"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "libelle",
+          "quantite",
+          "responsable_remise",
+          "consignes",
+          "ordre"
+        ],
+        "title": "LigneLotExterneInput"
+      },
+      "LignesLotsExternesPage": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/LigneLotExterneInput"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "has_more"
+        ],
+        "title": "LignesLotsExternesPage"
+      },
       "LimiteModule": {
         "properties": {
           "unite": {
@@ -95405,6 +98453,39 @@
           "ordre"
         ],
         "title": "LotPreparationChasse"
+      },
+      "LotsPublicsAnimationPage": {
+        "properties": {
+          "items": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "has_more"
+        ],
+        "title": "LotsPublicsAnimationPage"
       },
       "ManquantProduitPayload": {
         "properties": {
@@ -97434,6 +100515,25 @@
         "type": "object",
         "title": "ModifierDossierRequest"
       },
+      "ModifierDotationInput": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Expected Version"
+          },
+          "dotation": {
+            "$ref": "#/components/schemas/DotationInput"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "dotation"
+        ],
+        "title": "ModifierDotationInput"
+      },
       "ModifierParametresExploitationInput": {
         "properties": {
           "expectedVersion": {
@@ -97561,6 +100661,9 @@
             "type": "array",
             "title": "Lots"
           },
+          "dotation": {
+            "$ref": "#/components/schemas/DotationInput"
+          },
           "reglement": {
             "$ref": "#/components/schemas/ReglementPreparationChasse"
           },
@@ -97578,6 +100681,7 @@
           "schedule",
           "registration",
           "lots",
+          "dotation",
           "reglement",
           "dateLimiteReponseCommercants"
         ],
@@ -98322,6 +101426,25 @@
           "links"
         ],
         "title": "MouvementSuivi"
+      },
+      "MutationLigneLotExterneInput": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "ligne": {
+            "$ref": "#/components/schemas/LigneLotExterneInput"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "ligne"
+        ],
+        "title": "MutationLigneLotExterneInput"
       },
       "NeutraliserEtapeInput": {
         "properties": {
@@ -99952,6 +103075,123 @@
           "nextCursor"
         ],
         "title": "PageGenerationPayload"
+      },
+      "PageLibre_GainLotExterne_": {
+        "properties": {
+          "contract_version": {
+            "type": "string",
+            "const": "1",
+            "title": "Contract Version",
+            "default": "1"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/GainLotExterne"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "has_more",
+          "next_cursor"
+        ],
+        "title": "PageLibre[GainLotExterne]"
+      },
+      "PageLibre_SuiviLotExterne_": {
+        "properties": {
+          "contract_version": {
+            "type": "string",
+            "const": "1",
+            "title": "Contract Version",
+            "default": "1"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/SuiviLotExterne"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "has_more",
+          "next_cursor"
+        ],
+        "title": "PageLibre[SuiviLotExterne]"
+      },
+      "PageLibre_SuppleantLibre_": {
+        "properties": {
+          "contract_version": {
+            "type": "string",
+            "const": "1",
+            "title": "Contract Version",
+            "default": "1"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/SuppleantLibre"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "has_more",
+          "next_cursor"
+        ],
+        "title": "PageLibre[SuppleantLibre]"
       },
       "PageNotificationsPin": {
         "properties": {
@@ -101623,6 +104863,16 @@
             "type": "array",
             "title": "Lots"
           },
+          "dotation": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DotationInput"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "reglement": {
             "$ref": "#/components/schemas/ReglementPreparationChasse"
           },
@@ -101832,6 +105082,36 @@
             },
             "type": "array",
             "title": "Actions Validation Pin"
+          },
+          "a_gagne_un_lot": {
+            "type": "boolean",
+            "title": "A Gagne Un Lot",
+            "default": false
+          },
+          "gain": {
+            "anyOf": [
+              {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/GainCoffretParticipant"
+                  },
+                  {
+                    "$ref": "#/components/schemas/GainExterneParticipant"
+                  }
+                ],
+                "discriminator": {
+                  "propertyName": "nature",
+                  "mapping": {
+                    "COFFRET": "#/components/schemas/GainCoffretParticipant",
+                    "LOT_EXTERNE": "#/components/schemas/GainExterneParticipant"
+                  }
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Gain"
           }
         },
         "additionalProperties": false,
@@ -106327,6 +109607,43 @@
         ],
         "title": "RecuGestionParticipationPayload"
       },
+      "RecuLibre": {
+        "properties": {
+          "contract_version": {
+            "type": "string",
+            "const": "1",
+            "title": "Contract Version",
+            "default": "1"
+          },
+          "operation": {
+            "type": "string",
+            "title": "Operation"
+          },
+          "statut": {
+            "type": "string",
+            "const": "REUSSIE",
+            "title": "Statut"
+          },
+          "resultat": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/GainLotExterne"
+              },
+              {
+                "$ref": "#/components/schemas/EtatTirageLibre"
+              }
+            ],
+            "title": "Resultat"
+          }
+        },
+        "type": "object",
+        "required": [
+          "operation",
+          "statut",
+          "resultat"
+        ],
+        "title": "RecuLibre"
+      },
       "RecuNeutralisation": {
         "properties": {
           "neutralisationId": {
@@ -107000,6 +110317,37 @@
           "actions_disponibles"
         ],
         "title": "RemboursementPayload"
+      },
+      "RemplacementCommande": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "raison": {
+            "type": "string",
+            "enum": [
+              "REFUS",
+              "SANS_REPONSE"
+            ],
+            "title": "Raison"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 3,
+            "title": "Motif"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "raison",
+          "motif"
+        ],
+        "title": "RemplacementCommande"
       },
       "RemplacerGainAnimationRequest": {
         "properties": {
@@ -107952,6 +111300,43 @@
         ],
         "title": "ResultatWorkerGenerationPayload"
       },
+      "RetirageCommande": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "raison": {
+            "type": "string",
+            "enum": [
+              "REFUS",
+              "SANS_REPONSE"
+            ],
+            "title": "Raison"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 3,
+            "title": "Motif"
+          },
+          "confirmation": {
+            "type": "boolean",
+            "const": true,
+            "title": "Confirmation"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "raison",
+          "motif",
+          "confirmation"
+        ],
+        "title": "RetirageCommande"
+      },
       "RetirerParticipationCommercantRequest": {
         "properties": {
           "motif": {
@@ -108052,6 +111437,16 @@
       },
       "ReutiliserTemplateGenerationInput": {
         "properties": {
+          "dotation": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DotationInput"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "suiviPreparation": {
             "type": "boolean",
             "title": "Suivipreparation",
@@ -109353,6 +112748,59 @@
         ],
         "title": "StripeConnectOnboardingCommercantPayload"
       },
+      "SuiviCommande": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "CONTACT",
+              "REPONSE",
+              "REFUS",
+              "INCIDENT",
+              "REMISE_DECLAREE",
+              "CORRECTION"
+            ],
+            "title": "Type"
+          },
+          "occurred_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Occurred At"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 3,
+            "title": "Motif"
+          },
+          "evenement_corrige_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Evenement Corrige Id"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "type",
+          "occurred_at",
+          "motif"
+        ],
+        "title": "SuiviCommande"
+      },
       "SuiviCommerce": {
         "properties": {
           "movementCount": {
@@ -109512,6 +112960,61 @@
         ],
         "title": "SuiviLiveRequest"
       },
+      "SuiviLotExterne": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "type": {
+            "type": "string",
+            "title": "Type"
+          },
+          "motif": {
+            "type": "string",
+            "title": "Motif"
+          },
+          "occurred_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Occurred At"
+          },
+          "recorded_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Recorded At"
+          },
+          "acteur": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Acteur"
+          },
+          "evenement_corrige_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Evenement Corrige Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "motif",
+          "occurred_at",
+          "recorded_at",
+          "acteur",
+          "evenement_corrige_id"
+        ],
+        "title": "SuiviLotExterne"
+      },
       "SuiviPreparationPayload": {
         "properties": {
           "actif": {
@@ -109616,6 +113119,47 @@
           "kpis"
         ],
         "title": "SupervisionLiveAnimationPayload"
+      },
+      "SuppleantLibre": {
+        "properties": {
+          "participant_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Participant Id"
+          },
+          "rang": {
+            "type": "integer",
+            "title": "Rang"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "DISPONIBLE",
+              "UTILISE",
+              "INELIGIBLE"
+            ],
+            "title": "Statut"
+          },
+          "motif": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motif"
+          }
+        },
+        "type": "object",
+        "required": [
+          "participant_id",
+          "rang",
+          "statut",
+          "motif"
+        ],
+        "title": "SuppleantLibre"
       },
       "SupportCreate": {
         "properties": {
@@ -109780,6 +113324,21 @@
           "expected_version"
         ],
         "title": "SupportUpdate"
+      },
+      "SupprimerLigneLotExterneInput": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version"
+        ],
+        "title": "SupprimerLigneLotExterneInput"
       },
       "SurchargeThemeVisuel": {
         "properties": {
@@ -110693,6 +114252,33 @@
         ],
         "title": "TirageAnimationPayload"
       },
+      "TirageCommande": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "population_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Population Version"
+          },
+          "confirmation": {
+            "type": "boolean",
+            "const": true,
+            "title": "Confirmation"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "population_version",
+          "confirmation"
+        ],
+        "title": "TirageCommande"
+      },
       "TokenInput": {
         "properties": {
           "token": {
@@ -110720,6 +114306,87 @@
         "additionalProperties": false,
         "type": "object",
         "title": "TraitementCommerce"
+      },
+      "TraitementLibre": {
+        "properties": {
+          "contract_version": {
+            "type": "string",
+            "const": "1",
+            "title": "Contract Version",
+            "default": "1"
+          },
+          "traite": {
+            "type": "boolean",
+            "title": "Traite"
+          },
+          "simulation": {
+            "type": "boolean",
+            "title": "Simulation"
+          },
+          "operation_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Operation Id"
+          },
+          "attribution_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Attribution Id"
+          },
+          "statut": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Statut"
+          },
+          "phase": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Phase"
+          },
+          "erreur": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Erreur"
+          }
+        },
+        "type": "object",
+        "required": [
+          "traite",
+          "simulation"
+        ],
+        "title": "TraitementLibre"
       },
       "TransactionScanSalarie": {
         "properties": {

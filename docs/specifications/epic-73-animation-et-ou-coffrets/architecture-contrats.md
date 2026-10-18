@@ -181,6 +181,36 @@ pas cette preuve de conservation.
 
 Le RPO cible est **4 heures** et le RTO **8 heures**, avec réouverture des parcours essentiels après contrôles. Le [plan de vérification et livraison](verification-livraison.md) précise l’exercice et ses preuves. Une sauvegarde restaurée doit réappliquer suppressions/révocations plus récentes et rapprocher les opérations externes incertaines avant reprise des workers ; le RPO n’autorise pas une seconde remise de lot ou un second paiement.
 
+Rattachement de réalisation du lot 04 : `configurations_dotation_animation`
+et `lignes_lots_externes_animation` sont les paramètres de la dotation ; après
+publication ils constituent des références de la preuve d'attribution.
+`animation_tirages_libres`, `animation_candidats_tirage_libre`,
+`animation_attributions_lots_externes` et `animation_suivis_lots_externes`
+relèvent des preuves Animation de tirage, attribution et remise (circuit
+probatoire existant de cinq ans). L'instant de confirmation et les dates
+réelles d'attribution, déclaration ou correction sont les sources ; une
+consultation n'en repousse pas l'échéance. Le gel et le besoin d'un suppléant
+encore mobilisable sont réexaminés avant purge. La graine privée de préparation
+est un secret technique, à retirer séparément dès disparition du besoin de
+reprise ; elle n'est exposée ni dans les API ni dans l'audit.
+`animation_envois_lots_externes` conserve le lien vers le transport et la
+première réussite utile au délai de remplacement ; le corps et le lien
+personnel suivent le retrait des secrets du transport existant.
+`animation_recus_tirage_libre` est un reçu technique d'idempotence et ne
+prolonge pas la conservation des coordonnées. `animation_acces_gains_externes`
+ne conserve que l'empreinte de la capacité de consultation, sa référence de
+gain, ses dates de création, expiration et révocation. Les 90 jours techniques
+de validité du lien ne prolongent ni le jeu ni la conservation des données.
+Les coordonnées courantes des
+participants restent soumises à la fin effective +12 mois calendaires et à
+l'archive restreinte de besoin, sans copie nominative dans le lot. Le carnet
+local conserve un état minimal, jamais les consignes privées ou coordonnées
+du responsable de remise. Le test PostgreSQL de conservation prouve que le
+gain externe ouvert et sa réserve préservent l'archive d'identité nécessaire,
+puis que la remise permet sa purge sans effacer les preuves minimales ni
+réhydrater le participant anonymisé. La purge des autres familles nouvelles
+et la reprise après restauration restent à vérifier au lot 10 avant mise en service.
+
 ## 7. ERP, CRM et autres consommateurs
 
 CA-25 : les fiches, filtres et exports présentent séparément périmètres commerce, type de moteur, catégorie commerciale et dotation. Les agrégats financiers ne comptent que les commandes financières réelles ; une valeur descriptive de lot libre n’est pas un chiffre d’affaires Coffrets. Support peut consulter les faits autorisés sans obtenir les secrets PIN/QR ; Ops voit les erreurs et reprises, pas un bouton de mutation contournant le domaine.
