@@ -16,6 +16,11 @@ La [procédure des bons numériques](../../exploitation/exploitation/gerer-bons-
 décrit les configurations préparées, les workers, les reprises et les contrôles
 de conservation restant nécessaires avant ouverture.
 
+La [procédure d’import des commerçants](../../exploitation/exploitation/importer-commercants-animation.md)
+décrit le parcours livré localement au lot 06, les décisions ERP, le worker et
+la conservation des fichiers. Les résultats sont consignés dans le suivi ;
+aucun environnement n’a été activé.
+
 | Document | Contenu |
 | --- | --- |
 | [Architecture et contrats](architecture-contrats.md) | Propriétaires, invariants, transactions, producteurs/consommateurs, compatibilité, migrations, conservation et impacts ERP/CRM/Atelier |

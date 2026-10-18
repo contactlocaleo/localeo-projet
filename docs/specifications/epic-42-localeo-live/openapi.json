@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Live - API backend Epic 42",
     "description": "Vue OpenAPI 3.1 des contrats publics, editoriaux et techniques de Localeo Live.",
-    "version": "1.0.0+7502282"
+    "version": "1.0.0+1cd9564"
   },
   "paths": {
     "/public/exploitation/activites-locales/metriques": {
@@ -4311,6 +4311,28 @@
   },
   "components": {
     "schemas": {
+      "Abandon": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 1,
+            "title": "Motif"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "motif"
+        ],
+        "title": "Abandon"
+      },
       "AbonnementAnimationPayload": {
         "properties": {
           "id": {
@@ -9199,6 +9221,38 @@
         ],
         "title": "Body_creer_image_public_dam_images_post"
       },
+      "Body_deposer_import_protected_referencement_imports_commercants_post": {
+        "properties": {
+          "fichier": {
+            "type": "string",
+            "contentMediaType": "application/octet-stream",
+            "title": "Fichier"
+          },
+          "commune_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Commune Id"
+          },
+          "flux_source_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Flux Source Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "fichier",
+          "commune_id"
+        ],
+        "title": "Body_deposer_import_protected_referencement_imports_commercants_post"
+      },
       "Body_deposer_media_internal_commercialisation_atelier_preparations__pid__medias_post": {
         "properties": {
           "expected_version": {
@@ -10006,6 +10060,98 @@
         ],
         "title": "CatalogueResponse"
       },
+      "ChampDTO": {
+        "properties": {
+          "champ": {
+            "type": "string",
+            "title": "Champ"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "source_precedente": {
+            "title": "Source Precedente"
+          },
+          "localeo": {
+            "title": "Localeo"
+          },
+          "source_nouvelle": {
+            "title": "Source Nouvelle"
+          },
+          "decision": {
+            "type": "string",
+            "enum": [
+              "CONSERVER",
+              "APPLIQUER",
+              "CONVERGENT",
+              "CONFLIT",
+              "ABSENT"
+            ],
+            "title": "Decision"
+          },
+          "choix": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "LOCALEO",
+                  "SOURCE"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Choix"
+          },
+          "protection_locale": {
+            "type": "boolean",
+            "title": "Protection Locale"
+          },
+          "affichage_source_precedente": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Affichage Source Precedente"
+          },
+          "affichage_localeo": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Affichage Localeo"
+          },
+          "affichage_source_nouvelle": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Affichage Source Nouvelle"
+          }
+        },
+        "type": "object",
+        "required": [
+          "champ",
+          "libelle",
+          "decision",
+          "protection_locale"
+        ],
+        "title": "ChampDTO"
+      },
       "ChangementMotDePasseAnimation": {
         "properties": {
           "motDePasseActuel": {
@@ -10086,6 +10232,47 @@
           "validatedAt"
         ],
         "title": "ChecklistChassePayload"
+      },
+      "ChoixChamp": {
+        "properties": {
+          "ligne_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Ligne Id"
+          },
+          "champ": {
+            "type": "string",
+            "enum": [
+              "nom",
+              "adresse_postale",
+              "commune_id",
+              "siret",
+              "contact_email",
+              "contact_nom",
+              "contact_telephone",
+              "type_commercant_id",
+              "description",
+              "site_web_url"
+            ],
+            "title": "Champ"
+          },
+          "choix": {
+            "type": "string",
+            "enum": [
+              "LOCALEO",
+              "SOURCE"
+            ],
+            "title": "Choix"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "ligne_id",
+          "champ",
+          "choix"
+        ],
+        "title": "ChoixChamp"
       },
       "ChoixDotationPayload": {
         "properties": {
@@ -11349,6 +11536,24 @@
           "has_more"
         ],
         "title": "CoffretsPagePayload"
+      },
+      "ColonneDTO": {
+        "properties": {
+          "index": {
+            "type": "integer",
+            "title": "Index"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          }
+        },
+        "type": "object",
+        "required": [
+          "index",
+          "libelle"
+        ],
+        "title": "ColonneDTO"
       },
       "CommandeBon": {
         "properties": {
@@ -12912,6 +13117,54 @@
         ],
         "title": "CommerceBon"
       },
+      "CommerceDTO": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "nom": {
+            "type": "string",
+            "title": "Nom"
+          },
+          "commune_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Commune Id"
+          },
+          "siret": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Siret"
+          },
+          "adresse_postale": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Adresse Postale"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "nom",
+          "commune_id"
+        ],
+        "title": "CommerceDTO"
+      },
       "CommerceGainNumerique": {
         "properties": {
           "id": {
@@ -13559,6 +13812,69 @@
         ],
         "title": "CompteurStatutSuivi"
       },
+      "CompteursDTO": {
+        "properties": {
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          },
+          "creations": {
+            "type": "integer",
+            "title": "Creations"
+          },
+          "mises_a_jour": {
+            "type": "integer",
+            "title": "Mises A Jour"
+          },
+          "inchanges": {
+            "type": "integer",
+            "title": "Inchanges"
+          },
+          "conflits": {
+            "type": "integer",
+            "title": "Conflits"
+          },
+          "erreurs": {
+            "type": "integer",
+            "title": "Erreurs"
+          },
+          "attente_localeo": {
+            "type": "integer",
+            "title": "Attente Localeo"
+          },
+          "selectionnees": {
+            "type": "integer",
+            "title": "Selectionnees"
+          },
+          "reussies": {
+            "type": "integer",
+            "title": "Reussies"
+          },
+          "ecartees": {
+            "type": "integer",
+            "title": "Ecartees"
+          },
+          "restantes": {
+            "type": "integer",
+            "title": "Restantes"
+          }
+        },
+        "type": "object",
+        "required": [
+          "total",
+          "creations",
+          "mises_a_jour",
+          "inchanges",
+          "conflits",
+          "erreurs",
+          "attente_localeo",
+          "selectionnees",
+          "reussies",
+          "ecartees",
+          "restantes"
+        ],
+        "title": "CompteursDTO"
+      },
       "CompteursSectionsReversement": {
         "properties": {
           "mouvements": {
@@ -13911,6 +14227,43 @@
           "date_fin"
         ],
         "title": "ConfigurationAnimationPayload"
+      },
+      "Confirmation": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "plan_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Plan Version"
+          },
+          "ligne_ids": {
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "type": "array",
+            "maxItems": 100,
+            "minItems": 1,
+            "title": "Ligne Ids"
+          },
+          "accepter_import_partiel": {
+            "type": "boolean",
+            "title": "Accepter Import Partiel"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "plan_version",
+          "ligne_ids",
+          "accepter_import_partiel"
+        ],
+        "title": "Confirmation"
       },
       "ConfirmationCommunicationRequest": {
         "properties": {
@@ -16405,6 +16758,37 @@
           "retrait_commercial_demande"
         ],
         "title": "DecisionRemboursement"
+      },
+      "DecisionVerificationImport": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "decision": {
+            "type": "string",
+            "enum": [
+              "ACCEPTER",
+              "REJETER"
+            ],
+            "title": "Decision"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 1,
+            "title": "Motif"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "decision",
+          "motif"
+        ],
+        "title": "DecisionVerificationImport"
       },
       "DefiAssociation": {
         "properties": {
@@ -20241,6 +20625,35 @@
         ],
         "title": "ErreurContratMoteurPayload"
       },
+      "ErreurDTO": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "title": "Code"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          },
+          "champ": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Champ"
+          }
+        },
+        "type": "object",
+        "required": [
+          "code",
+          "message"
+        ],
+        "title": "ErreurDTO"
+      },
       "EtapeCommercante": {
         "properties": {
           "lieu": {
@@ -21659,6 +22072,24 @@
         ],
         "title": "FeedbackPrestationSoumisPayload"
       },
+      "FeuilleDTO": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "libelle"
+        ],
+        "title": "FeuilleDTO"
+      },
       "FiltresAchatsPaiement": {
         "properties": {
           "paymentId": {
@@ -22175,6 +22606,101 @@
         "additionalProperties": false,
         "type": "object",
         "title": "FiltresSuiviAppliques"
+      },
+      "FluxCommande": {
+        "properties": {
+          "commune_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Commune Id"
+          },
+          "libelle": {
+            "type": "string",
+            "maxLength": 160,
+            "minLength": 1,
+            "title": "Libelle"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "commune_id",
+          "libelle"
+        ],
+        "title": "FluxCommande"
+      },
+      "FluxDTO": {
+        "properties": {
+          "contract_version": {
+            "type": "string",
+            "const": "1",
+            "title": "Contract Version",
+            "default": "1"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "commune_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Commune Id"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "import_en_cours_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Import En Cours Id"
+          },
+          "actions_disponibles": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Actions Disponibles"
+          },
+          "operation_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Operation Id"
+          },
+          "rejoue": {
+            "type": "boolean",
+            "title": "Rejoue",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "commune_id",
+          "libelle",
+          "version",
+          "actions_disponibles"
+        ],
+        "title": "FluxDTO"
       },
       "FluxEvenementsAnimationPayload": {
         "properties": {
@@ -23548,7 +24074,8 @@
               "ESSAI",
               "TOKEN",
               "RECU",
-              "ARCHIVE_IDENTITE"
+              "ARCHIVE_IDENTITE",
+              "IMPORT_COMMERCANTS"
             ],
             "title": "Typecible"
           },
@@ -26532,6 +27059,136 @@
         ],
         "title": "LigneCommercePayload"
       },
+      "LigneDTO": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "numero": {
+            "type": "integer",
+            "title": "Numero"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "A_VERIFIER",
+              "PRETE",
+              "CONFLIT",
+              "ERREUR",
+              "ATTENTE_LOCALEO",
+              "CONFIRMEE",
+              "REUSSIE",
+              "ECHEC_TECHNIQUE",
+              "CONFLIT_VERSION",
+              "ECARTEE"
+            ],
+            "title": "Statut"
+          },
+          "proposition": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "CREATION",
+                  "MISE_A_JOUR",
+                  "INCHANGE"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Proposition"
+          },
+          "commerce": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CommerceDTO"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "candidats": {
+            "items": {
+              "$ref": "#/components/schemas/CommerceDTO"
+            },
+            "type": "array",
+            "title": "Candidats"
+          },
+          "champs": {
+            "items": {
+              "$ref": "#/components/schemas/ChampDTO"
+            },
+            "type": "array",
+            "title": "Champs"
+          },
+          "erreurs": {
+            "items": {
+              "$ref": "#/components/schemas/ErreurDTO"
+            },
+            "type": "array",
+            "title": "Erreurs"
+          },
+          "verification_localeo_requise": {
+            "type": "boolean",
+            "title": "Verification Localeo Requise"
+          },
+          "demande_correction_ids": {
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "type": "array",
+            "title": "Demande Correction Ids"
+          },
+          "selectionnable": {
+            "type": "boolean",
+            "title": "Selectionnable"
+          },
+          "resultat": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ResultatLigneDTO"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "actions_disponibles": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Actions Disponibles"
+          },
+          "verifications_localeo": {
+            "items": {
+              "$ref": "#/components/schemas/VerificationLocaleoDTO"
+            },
+            "type": "array",
+            "title": "Verifications Localeo"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "numero",
+          "statut",
+          "candidats",
+          "champs",
+          "erreurs",
+          "verification_localeo_requise",
+          "demande_correction_ids",
+          "selectionnable",
+          "actions_disponibles"
+        ],
+        "title": "LigneDTO"
+      },
       "LigneLotExterneInput": {
         "properties": {
           "id": {
@@ -26800,6 +27457,217 @@
         ],
         "title": "LotAnimationRequest"
       },
+      "LotDTO": {
+        "properties": {
+          "contract_version": {
+            "type": "string",
+            "const": "1",
+            "title": "Contract Version",
+            "default": "1"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "commune_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Commune Id"
+          },
+          "flux_source_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Flux Source Id"
+          },
+          "flux_source_libelle": {
+            "type": "string",
+            "title": "Flux Source Libelle"
+          },
+          "nom_fichier": {
+            "type": "string",
+            "title": "Nom Fichier"
+          },
+          "format": {
+            "type": "string",
+            "enum": [
+              "CSV",
+              "XLSX"
+            ],
+            "title": "Format"
+          },
+          "source_disponible": {
+            "type": "boolean",
+            "title": "Source Disponible",
+            "default": false
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "DEPOSE",
+              "A_CONFIGURER",
+              "PREVISUALISE",
+              "CONFIRME",
+              "EN_COURS",
+              "TERMINE",
+              "TERMINE_PARTIEL",
+              "SUSPENDU",
+              "ECHEC_TECHNIQUE_REPRENABLE",
+              "ABANDONNE"
+            ],
+            "title": "Statut"
+          },
+          "feuilles": {
+            "items": {
+              "$ref": "#/components/schemas/FeuilleDTO"
+            },
+            "type": "array",
+            "title": "Feuilles"
+          },
+          "feuille_selectionnee": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Feuille Selectionnee"
+          },
+          "ligne_entete": {
+            "type": "integer",
+            "title": "Ligne Entete"
+          },
+          "colonnes": {
+            "items": {
+              "$ref": "#/components/schemas/ColonneDTO"
+            },
+            "type": "array",
+            "title": "Colonnes"
+          },
+          "mapping": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Mapping"
+          },
+          "plan_version": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Plan Version"
+          },
+          "compteurs": {
+            "$ref": "#/components/schemas/CompteursDTO"
+          },
+          "erreur": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ErreurDTO"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "created_at": {
+            "type": "string",
+            "title": "Created At"
+          },
+          "started_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Started At"
+          },
+          "finished_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Finished At"
+          },
+          "artefacts_expires_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Artefacts Expires At"
+          },
+          "rapport_disponible": {
+            "type": "boolean",
+            "title": "Rapport Disponible"
+          },
+          "actions_disponibles": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Actions Disponibles"
+          },
+          "operation_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Operation Id"
+          },
+          "rejoue": {
+            "type": "boolean",
+            "title": "Rejoue",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "version",
+          "commune_id",
+          "flux_source_id",
+          "flux_source_libelle",
+          "nom_fichier",
+          "format",
+          "statut",
+          "feuilles",
+          "ligne_entete",
+          "colonnes",
+          "mapping",
+          "compteurs",
+          "created_at",
+          "rapport_disponible",
+          "actions_disponibles"
+        ],
+        "title": "LotDTO"
+      },
       "LotPreparationChasse": {
         "properties": {
           "coffret_id": {
@@ -26899,6 +27767,46 @@
           "label"
         ],
         "title": "ManquantProduitPayload"
+      },
+      "MappingCommande": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "feuille": {
+            "type": "string",
+            "maxLength": 160,
+            "minLength": 1,
+            "title": "Feuille"
+          },
+          "ligne_entete": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 1.0,
+            "title": "Ligne Entete"
+          },
+          "mapping": {
+            "additionalProperties": {
+              "type": "integer",
+              "maximum": 49.0,
+              "minimum": 0.0
+            },
+            "type": "object",
+            "maxProperties": 14,
+            "title": "Mapping"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "feuille",
+          "ligne_entete",
+          "mapping"
+        ],
+        "title": "MappingCommande"
       },
       "MasquerProfilCommercantRequest": {
         "properties": {
@@ -31439,6 +32347,141 @@
         ],
         "title": "PageCurseurVision360AnimationPayload"
       },
+      "PageDTO_FluxDTO_": {
+        "properties": {
+          "contract_version": {
+            "type": "string",
+            "const": "1",
+            "title": "Contract Version",
+            "default": "1"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/FluxDTO"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More"
+          },
+          "actions_disponibles": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Actions Disponibles"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "has_more"
+        ],
+        "title": "PageDTO[FluxDTO]"
+      },
+      "PageDTO_LigneDTO_": {
+        "properties": {
+          "contract_version": {
+            "type": "string",
+            "const": "1",
+            "title": "Contract Version",
+            "default": "1"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/LigneDTO"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More"
+          },
+          "actions_disponibles": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Actions Disponibles"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "has_more"
+        ],
+        "title": "PageDTO[LigneDTO]"
+      },
+      "PageDTO_LotDTO_": {
+        "properties": {
+          "contract_version": {
+            "type": "string",
+            "const": "1",
+            "title": "Contract Version",
+            "default": "1"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/LotDTO"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More"
+          },
+          "actions_disponibles": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Actions Disponibles"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "has_more"
+        ],
+        "title": "PageDTO[LotDTO]"
+      },
       "PageGelsConservationPayload": {
         "properties": {
           "items": {
@@ -32444,6 +33487,45 @@
           "page_size"
         ],
         "title": "PageValidations"
+      },
+      "PageVerificationsImport": {
+        "properties": {
+          "contract_version": {
+            "type": "string",
+            "const": "1",
+            "title": "Contract Version"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/VerificationImportPayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          }
+        },
+        "type": "object",
+        "required": [
+          "contract_version",
+          "items",
+          "has_more",
+          "next_cursor"
+        ],
+        "title": "PageVerificationsImport"
       },
       "PaginationAnimationPayload": {
         "properties": {
@@ -34372,7 +35454,8 @@
               "ESSAI",
               "TOKEN",
               "RECU",
-              "ARCHIVE_IDENTITE"
+              "ARCHIVE_IDENTITE",
+              "IMPORT_COMMERCANTS"
             ],
             "title": "Typecible"
           },
@@ -37732,6 +38815,27 @@
         ],
         "title": "RapportValidationGenerationPayload"
       },
+      "Rapprochement": {
+        "properties": {
+          "ligne_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Ligne Id"
+          },
+          "commerce_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Commerce Id"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "ligne_id",
+          "commerce_id"
+        ],
+        "title": "Rapprochement"
+      },
       "RattachementCommande": {
         "properties": {
           "expected_version": {
@@ -38458,6 +39562,50 @@
           "exploitationRevision"
         ],
         "title": "RecuCorrectionPreuve"
+      },
+      "RecuDTO": {
+        "properties": {
+          "operation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Operation Id"
+          },
+          "lot_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lot Id"
+          },
+          "flux_source_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Flux Source Id"
+          },
+          "rejoue": {
+            "type": "boolean",
+            "const": true,
+            "title": "Rejoue",
+            "default": true
+          }
+        },
+        "type": "object",
+        "required": [
+          "operation_id"
+        ],
+        "title": "RecuDTO"
       },
       "RecuDecisionMissionPayload": {
         "properties": {
@@ -39812,6 +40960,43 @@
         ],
         "title": "ResolutionScanPayload"
       },
+      "Resolutions": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "plan_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Plan Version"
+          },
+          "rapprochements": {
+            "items": {
+              "$ref": "#/components/schemas/Rapprochement"
+            },
+            "type": "array",
+            "maxItems": 100,
+            "title": "Rapprochements"
+          },
+          "champs": {
+            "items": {
+              "$ref": "#/components/schemas/ChoixChamp"
+            },
+            "type": "array",
+            "maxItems": 1000,
+            "title": "Champs"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "plan_version"
+        ],
+        "title": "Resolutions"
+      },
       "ResoudreScanParticipantRequest": {
         "properties": {
           "qr_token": {
@@ -40152,6 +41337,41 @@
           "medias"
         ],
         "title": "ResultatGenerationPasseport"
+      },
+      "ResultatLigneDTO": {
+        "properties": {
+          "commerce_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Commerce Id"
+          },
+          "version_referentiel": {
+            "type": "integer",
+            "title": "Version Referentiel"
+          },
+          "cree": {
+            "type": "boolean",
+            "title": "Cree"
+          },
+          "plan_version": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Plan Version"
+          }
+        },
+        "type": "object",
+        "required": [
+          "commerce_id",
+          "version_referentiel",
+          "cree"
+        ],
+        "title": "ResultatLigneDTO"
       },
       "ResultatPurgeQuotidiennePayload": {
         "properties": {
@@ -44256,6 +45476,185 @@
         ],
         "title": "VerificationExploitation"
       },
+      "VerificationImportPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "commerce_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Commerce Id"
+          },
+          "commune_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Commune Id"
+          },
+          "import_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Import Id"
+          },
+          "ligne_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Ligne Id"
+          },
+          "champ": {
+            "type": "string",
+            "enum": [
+              "siret",
+              "commune_id",
+              "animation"
+            ],
+            "title": "Champ"
+          },
+          "valeur_proposee": {
+            "type": "string",
+            "title": "Valeur Proposee"
+          },
+          "adresse_proposee": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Adresse Proposee"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "DEMANDEE",
+              "ACCEPTEE",
+              "REJETEE"
+            ],
+            "title": "Statut"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "motif": {
+            "type": "string",
+            "title": "Motif"
+          },
+          "created_at": {
+            "type": "string",
+            "title": "Created At"
+          },
+          "decision_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Decision At"
+          },
+          "motif_decision": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motif Decision"
+          },
+          "message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Message"
+          },
+          "actions_disponibles": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Actions Disponibles"
+          },
+          "rejoue": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rejoue"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "commerce_id",
+          "commune_id",
+          "import_id",
+          "ligne_id",
+          "champ",
+          "valeur_proposee",
+          "statut",
+          "version",
+          "motif",
+          "created_at",
+          "decision_at",
+          "motif_decision",
+          "actions_disponibles"
+        ],
+        "title": "VerificationImportPayload"
+      },
+      "VerificationLocaleoDTO": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "champ": {
+            "type": "string",
+            "title": "Champ"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          },
+          "motif_decision": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motif Decision"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "champ",
+          "statut"
+        ],
+        "title": "VerificationLocaleoDTO"
+      },
       "VerificationMissionPayload": {
         "properties": {
           "stepId": {
@@ -44600,21 +45999,6 @@
           "observations"
         ],
         "title": "VerifierPoiInput"
-      },
-      "Version": {
-        "properties": {
-          "version": {
-            "type": "integer",
-            "exclusiveMinimum": 0.0,
-            "title": "Version"
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "version"
-        ],
-        "title": "Version"
       },
       "VersionCommande": {
         "properties": {
@@ -45358,6 +46742,21 @@
         ],
         "title": "WorkflowAnimationPayload"
       },
+      "app__api__comptes_internes_api__Version": {
+        "properties": {
+          "version": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Version"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "version"
+        ],
+        "title": "Version"
+      },
       "app__api__erp_schemas__ModeleCommande": {
         "properties": {
           "libelle": {
@@ -45451,6 +46850,21 @@
           "valeur_centimes"
         ],
         "title": "ModeleCommande"
+      },
+      "app__api__imports_commercants_api__Version": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version"
+        ],
+        "title": "Version"
       },
       "app__api__inventaire_lots_api__ModeleCommande": {
         "properties": {

@@ -24,8 +24,8 @@ Implémentation, bases jetables locales, tests isolés et commits locaux uniquem
 | 03 | US03,14–17,27–28 ; souscriptions/modules/finance | Backend, Animation, Pro (contrat), Projet | Implémenté et vérifié localement ; Backend `4f3a3b1`, Animation `79903e3`, Pro `8212252`, Projet `6a3d747` ; activation des modules futurs aux lots 06/07/08 |
 | 04 | US01–02,04 ; branche externe US07–08 | Backend, Animation, Marketplace/Live, Pro (contrat), Projet | Implémenté et vérifié localement ; Backend `7502282`, Animation `d0b92f7`, Marketplace `1473e05`, Pro `30aeed3`, sources dans le commit documentaire lot 04 ; branche numérique au lot 05 |
 | 05 | US05–10 ; complément numérique US07–08 | Backend, Animation, Commerçant, Marketplace/Live, Projet | Parcours implémentés et vérifiés localement ; commits et limites de conservation/performance ci-dessous ; aucune mise en service |
-| 06 | US19–20 ; import/deltas/reprise | Backend, Animation, Projet | À réaliser |
-| 07 | US18,30 ; chasse et préparation accompagnée | Backend, Animation, Projet | À réaliser ; dépendance readiness E55 |
+| 06 | US19–20 ; import/deltas/reprise | Backend, Animation, Projet | Implémenté et vérifié localement ; Backend `bb4e1e8`, Animation `955fb94`, sources dans le commit documentaire du lot 06 ; preuves et limites ci-dessous |
+| 07 | US18,30 ; chasse et préparation accompagnée | Backend, Animation, Projet | En cours : service accompagné, calendrier explicite, préparation/validation terrain, sélecteurs paginés et suivi ERP/portail |
 | 08 | US21–22 ; communication participants | Backend, Animation, Marketplace/Live, Projet | À réaliser |
 | 09 | US23,29,31–33 ; parcours/site/assistance/bilans | Backend, Animation, Marketplace/Live, Projet | À réaliser |
 | 10 | US34–38 ; finalisation US24, exploitabilité/pilote | Les cinq dépôts selon impact | À réaliser localement ; aucune activation distante autorisée |
@@ -554,3 +554,105 @@ Commits locaux du lot 05 : backend `1cd9564`, Animation `2eee756`, Pro `63b64bc`
 Marketplace/Live `8e54957` ; sources dans le commit documentaire du lot 05.
 Les seules modifications étrangères à ce lot sont
 préservées hors index. Aucun push ni déploiement.
+
+### Lot 06 — Import et protection des corrections locales
+
+Périmètre : US19–20 / CA42–45, avec consommation des droits du lot 03.
+Le domaine Référencement porte le lot d’import, les résolutions et la
+provenance à trois versions. L’application orchestre une transaction par
+ligne, avec le référencement et OnBoard ; le portail expose les décisions
+et la progression. Le transport reste dans le namespace d’import, distinct
+des mutations ERP. La [procédure d’import](../../exploitation/exploitation/importer-commercants-animation.md)
+décrit les commandes et contrôles vérifiés localement.
+
+Première preuve d’intégration :
+`scripts/validation/test_isolated.py tests/security/test_imports_browser_e73.py
+tests/security/test_animation_browser_session.py -q --tb=short
+--basetemp tmp/e73-lot06-browser-root-01` : **118 réussites** (14 s), deux
+avertissements de dépréciation, aucun skip. Dépôt multipart avec origine,
+cookie/CSRF, lecture privée et refus des routes Référencement/ERP étrangères.
+Cette preuve de transport ne valide pas encore le traitement métier complet.
+
+
+Parcours intégrés : source Excel/CSV privée, flux stable, mapping explicite,
+aperçu et rapprochement email avec contrôle d’identité, choix champ par champ,
+import partiel, commandes idempotentes et reprise des seules lignes restantes.
+Les créations passent par Référencement et OnBoard : brouillon à vérifier,
+sans compte, invitation, périmètre actif ni participation. Les corrections
+SIRET/commune sont décidées dans l’ERP ; un déplacement de commune rend la
+fiche opaque à l’ancien import. Une incohérence avec le profil financier
+courant bloque les nouveaux usages concernés, sans modifier les documents
+émis. Après demande ERP, le mapping est figé pour préserver sa preuve ; un
+nouveau dépôt dans le même flux permet de corriger les colonnes.
+
+La migration locale `v273_imports_commercants.sql` crée les sept tables et les
+index des flux/plans/provenances/vérifications, et accepte une catégorie
+absente uniquement pour une fiche en brouillon. L’ouverture reste désactivée
+par défaut (`LOCALEO_IMPORTS_COMMERCANTS_APPLY=false`) ; le catalogue ne propose
+pas l’achat d’un parcours fermé. Le middleware borne aussi le corps multipart
+avant parsing, indépendamment de Content-Length ; parseur, stockage et SQL
+du dépôt s’exécutent hors boucle ASGI.
+
+Revue croisée : correction d’un reçu créé avant la disponibilité effective du
+fichier. Le client conserve fichier et clé jusqu’à disponibilité confirmée ;
+panne avant/après stockage puis reprise explicite ne crée pas de second lot.
+Les contrôles de version, les gels de conservation, la reprise après premier
+traitement et les mises à jour de commune ont fait l’objet de cas PostgreSQL.
+Les gels sont exclus de la sélection des purges puis revérifiés sous verrou,
+pour ne pas bloquer les opérations suivantes. Les sources et instantanés de
+travail sont purgés après trente jours ; provenance et audit restent distincts.
+
+Preuves finales disponibles (préfixe backend :
+`.artifacts/python-e70/runtime/python.exe scripts/validation/test_isolated.py` ;
+les suites se recouvrent, leurs totaux ne s’additionnent pas) :
+
+| Contrôle | Résultat local |
+| --- | --- |
+| Domaine import, API et rejet ERP/remapping | **38 réussites**, `tmp/e73-lot06-core-final-06.xml` ; dépôt hors boucle ASGI inclus |
+| Changement de commune bout en bout | **1 réussite**, `tmp/e73-lot06-core-commune-07.xml` ; adresse atomique et confidentialité après déplacement |
+| Référencement/OnBoard, corrections ERP, domaine/API/assets | **23 réussites**, `tmp/e73-lot06-preparation-final-03.log` ; concurrence et correction de commune incluses |
+| Raccord fiscal et facture assistée existante | **23 réussites**, `tmp/e73-lot06-fiscal-coherence-01.log` ; snapshots inchangés et usages incohérents refusés |
+| Garde-fous architecture, recensement, transport navigateur, limites multipart, parseur adversarial et readiness catalogue | **576 réussites**, `tmp/e73-lot06-architecture-final-03` ; deux avertissements de dépendances, aucun skip |
+| Migration depuis la base vide, rejeu et compatibilité modèles | **3 réussites**, `tmp/e73-lot06-migrations-final-04` ; PostgreSQL jetable uniquement |
+| Animation, copie HEAD + seuls fichiers du lot 06 | **206 tests Node**, types/lint/build réussis ; **22 scénarios navigateur, 292 assertions**, 320/1 280 px ; pas de configuration opérateur ni des changements préexistants Clôturer dans la copie |
+| ERP vérifications d’import | Navigateur réussi à 320/1 280 px : motif, lecture seule, CSRF/idempotence, réponse perdue réconciliée, textes échappés |
+| Sources et liens documentaires | **94 guides / 1 001 liens**, zéro erreur/alerte ; **126 sources exportées** vérifiées |
+
+Performance : une prévisualisation de **100 lignes parmi 10 000 commerces**
+utilise **trois requêtes groupées**, avec candidats bornés et enrichissement par
+clé ; aucun balayage de la table des commerces dans le plan mesuré. Les pages
+d’imports de 1 et 100 éléments prennent toutes deux **13 requêtes**, avec pics
+mémoire Python d’environ 454 et 664 ko. La page profonde après 9 000 imports
+utilise un Index Scan de 26 lignes, sans OFFSET. Ces mesures locales ne valent
+pas preuve de capacité hébergée. Artefacts backend :
+`.artifacts/e73-import-preparation-performance.json` et
+`.artifacts/e73-imports-pagination-performance.json`.
+
+Le chunk import Animation est chargé séparément (40,82 ko). L’avertissement
+sur le bundle principal de 934,60 ko reste rattaché au lot 09. Pro et Live ne
+consomment aucune nouvelle route d’import et ne reçoivent aucun accès implicite ;
+aucune modification fonctionnelle n’y est nécessaire pour ce lot. La recette
+humaine Localeo/Martignas-sur-Jalle et les essais d’hébergement restent à faire.
+
+Derniers contrôles : **16 tests PostgreSQL complets du noyau import réussis**
+(311,03 s, `tmp/e73-lot06-core-proof.md` dans le backend) ; **10 tests des
+exports OpenAPI réussis**, `tmp/e73-lot06-contracts-final` (72,37 s).
+Les exports canoniques E41/E42 comportent respectivement 844 et 55 routes ;
+E42 conserve ses routes Live et reçoit seulement les schémas communs actualisés.
+La copie embarquée Animation est synchronisée. Les fins de lignes et espaces
+terminaux SQL sont normalisés sans changement sémantique.
+
+Générateur et restauration complète : **7 tests réussis**, quatre avertissements
+SQLAlchemy de réflexion, 855,49 s. Commande exécutée dans le backend :
+`scripts/validation/run_demo_compatibility_tests.py --disposable-postgres
+127.0.0.1:10407,127.0.0.1:55448 --pg-bin-dir "C:/Program Files/PostgreSQL/18/bin"
+--output-dir tmp/e73-lot06-demo-complete-01`. Deux imports synthétiques passent
+par les services, conservent une correction locale puis purgent leurs sources
+avant export. Le wrapper transactionnel du générateur restaure ses budgets
+SQL après chaque sous-transaction ; les limites runtime restent inchangées.
+Les premiers essais incomplets ne servent pas de preuve finale.
+
+Commits locaux du lot 06 : Backend `bb4e1e8`, Animation `955fb94`, sources dans
+le commit documentaire du lot 06. Les changements préexistants
+Clôturer/Exploitation/README restent hors commit ; les fichiers de préparation
+du lot 07 sont exclus du commit backend du lot 06. Aucun push ni déploiement.
