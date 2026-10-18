@@ -160,6 +160,25 @@ Rattachement de réalisation du lot 01 : les appartenances et décisions de resp
 
 Rattachement de réalisation du lot 02 : `historique_perimetres_commercants` et les décisions de revue communale sont les preuves T1 de la décision d’habilitation produit ; les instantanés restent limités aux états et références nécessaires. `engagements_proteges_commercants` conserve les références des obligations à honorer et suit la conservation de leur preuve métier (Animation ou Coffrets), sans copie du contenu financier ou du secret QR/PIN. `recus_perimetres_commercants` est un reçu technique d’idempotence distinct de l’historique probatoire ; il ne doit pas prolonger la conservation des données de la décision. Les dates serveur de retrait/décision servent de sources, jamais la dernière consultation. Le registre du générateur couvre les six tables du lot pour export/restauration synthétique ; le raccordement des purges à T1/T8 et aux gels des obligations reste à vérifier au lot 10 avant mise en service.
 
+Rattachement de réalisation du lot 03 : les versions de catalogue et périodes
+conservent la preuve des conditions acquises ; `historique_modules_plateforme`
+porte les décisions motivées d'octroi, retrait et reprise historique (T1).
+Les dossiers commerciaux, réservations et remboursements suivent la catégorie
+financière existante de leur commande/facture/avoir, avec leur date d'émission
+ou de décision comme origine ; une reprise technique ne repousse pas cette date.
+Les reçus d'idempotence et effets d'outbox sont des traces techniques distinctes
+de la preuve financière. Une opération incertaine conserve les éléments minimaux
+nécessaires au rapprochement et le gel correspondant ; elle ne justifie pas de
+conserver indéfiniment un payload fournisseur ou une URL de paiement.
+`facturations_organisations_animation` est la coordonnée courante pour les futurs
+documents, distincte des instantanés des documents émis. Les compteurs/consommations
+sont des preuves d'usage rattachées à la période et à ses engagements, sans copie
+des participants. Le registre de démonstration inclut les quatorze tables nouvelles,
+y compris les fenêtres de compteur des essais, distinctes du journal d'usage.
+Le lot 10 doit prouver les purges, gels et reprises après restauration de ces
+familles avant mise en service ; les tests d'expiration des droits ne constituent
+pas cette preuve de conservation.
+
 Le RPO cible est **4 heures** et le RTO **8 heures**, avec réouverture des parcours essentiels après contrôles. Le [plan de vérification et livraison](verification-livraison.md) précise l’exercice et ses preuves. Une sauvegarde restaurée doit réappliquer suppressions/révocations plus récentes et rapprocher les opérations externes incertaines avant reprise des workers ; le RPO n’autorise pas une seconde remise de lot ou un second paiement.
 
 ## 7. ERP, CRM et autres consommateurs

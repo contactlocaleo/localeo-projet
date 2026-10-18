@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Backend - contrat implemente EPIC 41",
     "description": "OpenAPI complet du backend, dont les parcours Animation locale. Genere hors ligne depuis le code local pour les integrations et les mocks ; cet instantane ne prouve pas son deploiement.",
-    "version": "1.0.0+a17e3f4"
+    "version": "1.0.0+59d89d0"
   },
   "paths": {
     "/public/identite-acces/interne/connexion": {
@@ -33640,10 +33640,10 @@
                   "type": "null"
                 }
               ],
-              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:validation`.",
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:reversement`.",
               "title": "Authorization"
             },
-            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:validation`."
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:reversement`."
           }
         ],
         "responses": {
@@ -33711,10 +33711,10 @@
                   "type": "null"
                 }
               ],
-              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:validation`.",
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:reversement`.",
               "title": "Authorization"
             },
-            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:validation`."
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:reversement`."
           }
         ],
         "responses": {
@@ -33774,10 +33774,10 @@
                   "type": "null"
                 }
               ],
-              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:validation`.",
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:reversement`.",
               "title": "Authorization"
             },
-            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:validation`."
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:reversement`."
           }
         ],
         "requestBody": {
@@ -33847,10 +33847,10 @@
                   "type": "null"
                 }
               ],
-              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:validation`.",
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:reversement`.",
               "title": "Authorization"
             },
-            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:validation`."
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:reversement`."
           }
         ],
         "requestBody": {
@@ -33920,10 +33920,10 @@
                   "type": "null"
                 }
               ],
-              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:validation`.",
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:reversement`.",
               "title": "Authorization"
             },
-            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:validation`."
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:reversement`."
           }
         ],
         "requestBody": {
@@ -33993,10 +33993,10 @@
                   "type": "null"
                 }
               ],
-              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:validation`.",
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:reversement`.",
               "title": "Authorization"
             },
-            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:validation`."
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:reversement`."
           }
         ],
         "requestBody": {
@@ -34066,10 +34066,10 @@
                   "type": "null"
                 }
               ],
-              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:validation`.",
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:reversement`.",
               "title": "Authorization"
             },
-            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:validation`."
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:reversement`."
           }
         ],
         "responses": {
@@ -34127,10 +34127,10 @@
                   "type": "null"
                 }
               ],
-              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:validation`.",
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:reversement`.",
               "title": "Authorization"
             },
-            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:validation`."
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:reversement`."
           }
         ],
         "responses": {
@@ -34188,10 +34188,10 @@
                   "type": "null"
                 }
               ],
-              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:validation`.",
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:reversement`.",
               "title": "Authorization"
             },
-            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:validation`."
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:reversement`."
           }
         ],
         "requestBody": {
@@ -34261,10 +34261,10 @@
                   "type": "null"
                 }
               ],
-              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:validation`.",
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:reversement`.",
               "title": "Authorization"
             },
-            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:validation`."
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:reversement`."
           }
         ],
         "requestBody": {
@@ -34334,10 +34334,10 @@
                   "type": "null"
                 }
               ],
-              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:validation`.",
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:reversement`.",
               "title": "Authorization"
             },
-            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:validation`."
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:reversement`."
           }
         ],
         "requestBody": {
@@ -34407,10 +34407,10 @@
                   "type": "null"
                 }
               ],
-              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:validation`.",
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:reversement`.",
               "title": "Authorization"
             },
-            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:validation`."
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:reversement`."
           }
         ],
         "requestBody": {
@@ -34489,10 +34489,10 @@
                   "type": "null"
                 }
               ],
-              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:validation`.",
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:reversement`.",
               "title": "Authorization"
             },
-            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:validation`."
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:reversement`."
           }
         ],
         "responses": {
@@ -34572,10 +34572,10 @@
                   "type": "null"
                 }
               ],
-              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:validation`.",
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:reversement`.",
               "title": "Authorization"
             },
-            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:validation`."
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:reversement`."
           }
         ],
         "responses": {
@@ -34643,10 +34643,10 @@
                   "type": "null"
                 }
               ],
-              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:validation`.",
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:reversement`.",
               "title": "Authorization"
             },
-            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:validation`."
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:reversement`."
           }
         ],
         "responses": {
@@ -34706,10 +34706,10 @@
                   "type": "null"
                 }
               ],
-              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:validation`.",
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:reversement`.",
               "title": "Authorization"
             },
-            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:validation`."
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:reversement`."
           }
         ],
         "requestBody": {
@@ -34779,10 +34779,10 @@
                   "type": "null"
                 }
               ],
-              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:validation`.",
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:reversement`.",
               "title": "Authorization"
             },
-            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:validation`."
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:reversement`."
           }
         ],
         "requestBody": {
@@ -34852,10 +34852,10 @@
                   "type": "null"
                 }
               ],
-              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:validation`.",
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:reversement`.",
               "title": "Authorization"
             },
-            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:validation`."
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:reversement`."
           }
         ],
         "requestBody": {
@@ -35558,10 +35558,10 @@
                   "type": "null"
                 }
               ],
-              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:validation`.",
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:reversement`.",
               "title": "Authorization"
             },
-            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:validation`."
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:reversement`."
           }
         ],
         "responses": {
@@ -35610,10 +35610,10 @@
                   "type": "null"
                 }
               ],
-              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:validation`.",
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:reversement`.",
               "title": "Authorization"
             },
-            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:validation`."
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:reversement`."
           }
         ],
         "requestBody": {
@@ -35683,10 +35683,10 @@
                   "type": "null"
                 }
               ],
-              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:validation`.",
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:reversement`.",
               "title": "Authorization"
             },
-            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:validation`."
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:reversement`."
           }
         ],
         "requestBody": {
@@ -40828,6 +40828,2504 @@
         "security": [
           {
             "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/abonnements-plateforme/catalogue": {
+      "get": {
+        "tags": [
+          "Modules et conditions acquises"
+        ],
+        "summary": "Catalogue",
+        "operationId": "catalogue_internal_abonnements_plateforme_catalogue_get",
+        "parameters": [
+          {
+            "name": "commune_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Commune Id"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2048
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CataloguePage"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/protected/abonnements-plateforme/catalogue": {
+      "get": {
+        "tags": [
+          "Modules et conditions acquises"
+        ],
+        "summary": "Catalogue",
+        "operationId": "catalogue_protected_abonnements_plateforme_catalogue_get",
+        "parameters": [
+          {
+            "name": "commune_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Commune Id"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2048
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CataloguePage"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/internal/abonnements-plateforme/souscriptions": {
+      "get": {
+        "tags": [
+          "Modules et conditions acquises"
+        ],
+        "summary": "Souscriptions",
+        "operationId": "souscriptions_internal_abonnements_plateforme_souscriptions_get",
+        "parameters": [
+          {
+            "name": "commune_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Commune Id"
+            }
+          },
+          {
+            "name": "partenaire_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Partenaire Id"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2048
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModulesPage"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/protected/abonnements-plateforme/souscriptions": {
+      "get": {
+        "tags": [
+          "Modules et conditions acquises"
+        ],
+        "summary": "Souscriptions",
+        "operationId": "souscriptions_protected_abonnements_plateforme_souscriptions_get",
+        "parameters": [
+          {
+            "name": "commune_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Commune Id"
+            }
+          },
+          {
+            "name": "partenaire_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Partenaire Id"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2048
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModulesPage"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/internal/abonnements-plateforme/souscriptions/{identifiant}/modules": {
+      "get": {
+        "tags": [
+          "Modules et conditions acquises"
+        ],
+        "summary": "Modules",
+        "operationId": "modules_internal_abonnements_plateforme_souscriptions__identifiant__modules_get",
+        "parameters": [
+          {
+            "name": "identifiant",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Identifiant"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModulesPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/protected/abonnements-plateforme/souscriptions/{identifiant}/modules": {
+      "get": {
+        "tags": [
+          "Modules et conditions acquises"
+        ],
+        "summary": "Modules",
+        "operationId": "modules_protected_abonnements_plateforme_souscriptions__identifiant__modules_get",
+        "parameters": [
+          {
+            "name": "identifiant",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Identifiant"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModulesPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/internal/abonnements-plateforme/souscriptions/{identifiant}/historique": {
+      "get": {
+        "tags": [
+          "Modules et conditions acquises"
+        ],
+        "summary": "Historique",
+        "operationId": "historique_internal_abonnements_plateforme_souscriptions__identifiant__historique_get",
+        "parameters": [
+          {
+            "name": "identifiant",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Identifiant"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2048
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HistoriqueModulesPage"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/protected/abonnements-plateforme/souscriptions/{identifiant}/historique": {
+      "get": {
+        "tags": [
+          "Modules et conditions acquises"
+        ],
+        "summary": "Historique",
+        "operationId": "historique_protected_abonnements_plateforme_souscriptions__identifiant__historique_get",
+        "parameters": [
+          {
+            "name": "identifiant",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Identifiant"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2048
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HistoriqueModulesPage"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/internal/abonnements-plateforme/souscriptions/{identifiant}/droits": {
+      "get": {
+        "tags": [
+          "Modules et conditions acquises"
+        ],
+        "summary": "Droits",
+        "operationId": "droits_internal_abonnements_plateforme_souscriptions__identifiant__droits_get",
+        "parameters": [
+          {
+            "name": "identifiant",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Identifiant"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2048
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DroitsModulesPage"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/protected/abonnements-plateforme/souscriptions/{identifiant}/droits": {
+      "get": {
+        "tags": [
+          "Modules et conditions acquises"
+        ],
+        "summary": "Droits",
+        "operationId": "droits_protected_abonnements_plateforme_souscriptions__identifiant__droits_get",
+        "parameters": [
+          {
+            "name": "identifiant",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Identifiant"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2048
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DroitsModulesPage"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/internal/abonnements-plateforme/souscriptions/{identifiant}/reprise": {
+      "get": {
+        "tags": [
+          "Modules et conditions acquises"
+        ],
+        "summary": "Reprise",
+        "operationId": "reprise_internal_abonnements_plateforme_souscriptions__identifiant__reprise_get",
+        "parameters": [
+          {
+            "name": "identifiant",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Identifiant"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RepriseModulesPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Modules et conditions acquises"
+        ],
+        "summary": "Confirmer Reprise",
+        "operationId": "confirmer_reprise_internal_abonnements_plateforme_souscriptions__identifiant__reprise_post",
+        "parameters": [
+          {
+            "name": "identifiant",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Identifiant"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfirmationReprise"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RepriseModulesPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/abonnements-plateforme/souscriptions/{identifiant}/octrois-modules": {
+      "post": {
+        "tags": [
+          "Modules et conditions acquises"
+        ],
+        "summary": "Octroyer",
+        "operationId": "octroyer_internal_abonnements_plateforme_souscriptions__identifiant__octrois_modules_post",
+        "parameters": [
+          {
+            "name": "identifiant",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Identifiant"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OctroiModule"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModulesPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/abonnements-plateforme/octrois-modules/{identifiant}": {
+      "patch": {
+        "tags": [
+          "Modules et conditions acquises"
+        ],
+        "summary": "Modifier",
+        "operationId": "modifier_internal_abonnements_plateforme_octrois_modules__identifiant__patch",
+        "parameters": [
+          {
+            "name": "identifiant",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Identifiant"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModificationOctroi"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModulesPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/abonnements-plateforme/droits-modules/{identifiant}/retirer": {
+      "post": {
+        "tags": [
+          "Modules et conditions acquises"
+        ],
+        "summary": "Retirer",
+        "operationId": "retirer_internal_abonnements_plateforme_droits_modules__identifiant__retirer_post",
+        "parameters": [
+          {
+            "name": "identifiant",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Identifiant"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RetraitModule"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModulesPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/abonnements-plateforme/catalogue/versions": {
+      "post": {
+        "tags": [
+          "Modules et conditions acquises"
+        ],
+        "summary": "Publier",
+        "operationId": "publier_internal_abonnements_plateforme_catalogue_versions_post",
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PublicationCatalogue"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CatalogueItem"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/protected/abonnements-plateforme/souscriptions/{id}/devis": {
+      "post": {
+        "tags": [
+          "Commerce souscriptions"
+        ],
+        "summary": "Devis",
+        "operationId": "devis_protected_abonnements_plateforme_souscriptions__id__devis_post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 200,
+              "title": "Idempotency-Key"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DevisCommande"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommercePayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/abonnements-plateforme/devis/{id}": {
+      "get": {
+        "tags": [
+          "Commerce souscriptions"
+        ],
+        "summary": "Lire Devis",
+        "operationId": "lire_devis_protected_abonnements_plateforme_devis__id__get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommercePayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/abonnements-plateforme/devis/{id}/commander": {
+      "post": {
+        "tags": [
+          "Commerce souscriptions"
+        ],
+        "summary": "Commander",
+        "operationId": "commander_protected_abonnements_plateforme_devis__id__commander_post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 200,
+              "title": "Idempotency-Key"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccepterDevis"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommercePayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/abonnements-plateforme/commandes/{id}": {
+      "get": {
+        "tags": [
+          "Commerce souscriptions"
+        ],
+        "summary": "Lire Commande",
+        "operationId": "lire_commande_protected_abonnements_plateforme_commandes__id__get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommercePayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/abonnements-plateforme/souscriptions/{id}/commandes": {
+      "get": {
+        "tags": [
+          "Commerce souscriptions"
+        ],
+        "summary": "Commandes",
+        "operationId": "commandes_protected_abonnements_plateforme_souscriptions__id__commandes_get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 1024
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageCommandes"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/abonnements-plateforme/commandes/{id}/checkout": {
+      "post": {
+        "tags": [
+          "Commerce souscriptions"
+        ],
+        "summary": "Checkout",
+        "operationId": "checkout_protected_abonnements_plateforme_commandes__id__checkout_post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 200,
+              "title": "Idempotency-Key"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommandeVersionnee"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommercePayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/abonnements-plateforme/souscriptions/{id}/arret": {
+      "post": {
+        "tags": [
+          "Commerce souscriptions"
+        ],
+        "summary": "Arret",
+        "operationId": "arret_protected_abonnements_plateforme_souscriptions__id__arret_post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 200,
+              "title": "Idempotency-Key"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommandeMotivee"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModulesPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/abonnements-plateforme/commandes/{id}/demandes-remboursement": {
+      "post": {
+        "tags": [
+          "Commerce souscriptions"
+        ],
+        "summary": "Demander Remboursement",
+        "operationId": "demander_remboursement_protected_abonnements_plateforme_commandes__id__demandes_remboursement_post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 200,
+              "title": "Idempotency-Key"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommandeMotivee"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RemboursementPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/abonnements-plateforme/organisations/{id}/facturation": {
+      "get": {
+        "tags": [
+          "Commerce souscriptions"
+        ],
+        "summary": "Facturation",
+        "operationId": "facturation_protected_abonnements_plateforme_organisations__id__facturation_get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FacturationPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Commerce souscriptions"
+        ],
+        "summary": "Modifier Facturation",
+        "operationId": "modifier_facturation_protected_abonnements_plateforme_organisations__id__facturation_patch",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 200,
+              "title": "Idempotency-Key"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FacturationCommande"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FacturationPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/internal/abonnements-plateforme/remboursements": {
+      "get": {
+        "tags": [
+          "Commerce souscriptions"
+        ],
+        "summary": "Remboursements",
+        "operationId": "remboursements_internal_abonnements_plateforme_remboursements_get",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 1024
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "statut",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 40
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Statut"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageRemboursements"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/abonnements-plateforme/remboursements/{id}": {
+      "get": {
+        "tags": [
+          "Commerce souscriptions"
+        ],
+        "summary": "Remboursement",
+        "operationId": "remboursement_internal_abonnements_plateforme_remboursements__id__get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RemboursementPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/abonnements-plateforme/remboursements/{id}/decider": {
+      "post": {
+        "tags": [
+          "Commerce souscriptions"
+        ],
+        "summary": "Decider",
+        "operationId": "decider_internal_abonnements_plateforme_remboursements__id__decider_post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 200,
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DecisionRemboursement"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RemboursementPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/abonnements-plateforme/remboursements/{id}/reprendre": {
+      "post": {
+        "tags": [
+          "Commerce souscriptions"
+        ],
+        "summary": "Reprendre",
+        "operationId": "reprendre_internal_abonnements_plateforme_remboursements__id__reprendre_post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 200,
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommandeVersionnee"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RemboursementPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/abonnements-plateforme/traitements/executer": {
+      "post": {
+        "tags": [
+          "Commerce souscriptions"
+        ],
+        "summary": "Traiter",
+        "operationId": "traiter_internal_abonnements_plateforme_traitements_executer_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TraitementCommerce"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EffetCommercePayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/abonnements-plateforme/batch/traiter": {
+      "post": {
+        "tags": [
+          "Commerce souscriptions"
+        ],
+        "summary": "Batch Commerce",
+        "operationId": "batch_commerce_internal_abonnements_plateforme_batch_traiter_post",
+        "parameters": [
+          {
+            "name": "X-API-KEY",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Cle API interne avec le scope `internal:batch`.",
+              "title": "X-Api-Key"
+            },
+            "description": "Cle API interne avec le scope `internal:batch`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BatchCommerceCommande"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CycleCommercePayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "XApiKey": []
           }
         ]
       }
@@ -73218,6 +75716,39 @@
         ],
         "title": "AbonnementWebPushRequest"
       },
+      "AccepterDevis": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "conditions_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Conditions Version"
+          },
+          "conditions_acceptees": {
+            "type": "boolean",
+            "const": true,
+            "title": "Conditions Acceptees"
+          },
+          "facturation_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Facturation Version"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "conditions_version",
+          "conditions_acceptees",
+          "facturation_version"
+        ],
+        "title": "AccepterDevis"
+      },
       "AccepterInput": {
         "properties": {
           "token": {
@@ -74891,6 +77422,55 @@
           "titre"
         ],
         "title": "ActualiteEditorialeRequest"
+      },
+      "AdresseFacturation": {
+        "properties": {
+          "line1": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Line1"
+          },
+          "line2": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 200
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Line2"
+          },
+          "postalCode": {
+            "type": "string",
+            "maxLength": 20,
+            "minLength": 1,
+            "title": "Postalcode"
+          },
+          "city": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "City"
+          },
+          "country": {
+            "type": "string",
+            "maxLength": 2,
+            "minLength": 2,
+            "title": "Country"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "line1",
+          "postalCode",
+          "city",
+          "country"
+        ],
+        "title": "AdresseFacturation"
       },
       "AdresseFacturationCommandeLotsRequest": {
         "properties": {
@@ -76885,6 +79465,31 @@
         ],
         "title": "BailGenerationPayload"
       },
+      "BatchCommerceCommande": {
+        "properties": {
+          "simulation": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Simulation"
+          },
+          "limit": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 1.0,
+            "title": "Limit",
+            "default": 25
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "BatchCommerceCommande"
+      },
       "BatchEmailsPayload": {
         "properties": {
           "emails_pris": {
@@ -78016,6 +80621,156 @@
           "mode"
         ],
         "title": "CapaciteProduitPayload"
+      },
+      "CatalogueItem": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "code": {
+            "type": "string",
+            "title": "Code"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "nature": {
+            "type": "string",
+            "enum": [
+              "FORFAIT",
+              "MODULE"
+            ],
+            "title": "Nature"
+          },
+          "offre_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Offre Id"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "prix_ht_centimes": {
+            "type": "integer",
+            "title": "Prix Ht Centimes"
+          },
+          "devise": {
+            "type": "string",
+            "title": "Devise"
+          },
+          "duree_mois": {
+            "type": "integer",
+            "title": "Duree Mois"
+          },
+          "modele_service": {
+            "type": "string",
+            "title": "Modele Service"
+          },
+          "droits": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Droits"
+          },
+          "limites": {
+            "items": {
+              "$ref": "#/components/schemas/LimiteModule"
+            },
+            "type": "array",
+            "title": "Limites"
+          },
+          "prerequis": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Prerequis"
+          },
+          "disponibilite": {
+            "type": "string",
+            "enum": [
+              "DISPONIBLE",
+              "BIENTOT_DISPONIBLE"
+            ],
+            "title": "Disponibilite"
+          },
+          "actions_disponibles": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Actions Disponibles"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "code",
+          "version",
+          "nature",
+          "libelle",
+          "prix_ht_centimes",
+          "devise",
+          "duree_mois",
+          "modele_service",
+          "droits",
+          "limites",
+          "prerequis",
+          "disponibilite",
+          "actions_disponibles"
+        ],
+        "title": "CatalogueItem"
+      },
+      "CataloguePage": {
+        "properties": {
+          "commune_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Commune Id"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/CatalogueItem"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More"
+          }
+        },
+        "type": "object",
+        "required": [
+          "commune_id",
+          "items",
+          "next_cursor",
+          "has_more"
+        ],
+        "title": "CataloguePage"
       },
       "CatalogueResponse": {
         "properties": {
@@ -80035,6 +82790,28 @@
         ],
         "title": "CommandeLotsAnimationPayload"
       },
+      "CommandeMotivee": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 3,
+            "title": "Motif"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "motif"
+        ],
+        "title": "CommandeMotivee"
+      },
       "CommandePerimetre": {
         "properties": {
           "expected_version": {
@@ -80264,6 +83041,21 @@
           "email_facturation"
         ],
         "title": "CommandeSouscriptionPayload"
+      },
+      "CommandeVersionnee": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version"
+        ],
+        "title": "CommandeVersionnee"
       },
       "CommercantCommande": {
         "properties": {
@@ -80870,6 +83662,220 @@
         ],
         "title": "CommerceParticipant"
       },
+      "CommercePayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          },
+          "partenaire_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Partenaire Id"
+          },
+          "commune_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Commune Id"
+          },
+          "souscription_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Souscription Id"
+          },
+          "nature": {
+            "type": "string",
+            "title": "Nature"
+          },
+          "conditions_version": {
+            "type": "integer",
+            "title": "Conditions Version"
+          },
+          "facturation_version": {
+            "type": "integer",
+            "title": "Facturation Version"
+          },
+          "debut_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Debut At"
+          },
+          "fin_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Fin At"
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Expires At"
+          },
+          "fraction_restante": {
+            "$ref": "#/components/schemas/FractionPayload"
+          },
+          "lignes": {
+            "items": {
+              "$ref": "#/components/schemas/LigneCommercePayload"
+            },
+            "type": "array",
+            "title": "Lignes"
+          },
+          "total_ht_centimes": {
+            "type": "integer",
+            "title": "Total Ht Centimes"
+          },
+          "total_tva_centimes": {
+            "type": "integer",
+            "title": "Total Tva Centimes"
+          },
+          "total_ttc_centimes": {
+            "type": "integer",
+            "title": "Total Ttc Centimes"
+          },
+          "devise": {
+            "type": "string",
+            "title": "Devise"
+          },
+          "actions_disponibles": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Actions Disponibles"
+          },
+          "devis_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Devis Id"
+          },
+          "commande_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Commande Id"
+          },
+          "operation_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Operation Id"
+          },
+          "checkout_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Checkout Url"
+          },
+          "paiement_statut": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Paiement Statut"
+          },
+          "activation_statut": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Activation Statut"
+          },
+          "documents": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Documents"
+          },
+          "derniere_erreur": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Derniere Erreur"
+          },
+          "disponible_centimes": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Disponible Centimes"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "version",
+          "statut",
+          "partenaire_id",
+          "commune_id",
+          "souscription_id",
+          "nature",
+          "conditions_version",
+          "facturation_version",
+          "debut_at",
+          "fin_at",
+          "expires_at",
+          "fraction_restante",
+          "lignes",
+          "total_ht_centimes",
+          "total_tva_centimes",
+          "total_ttc_centimes",
+          "devise",
+          "actions_disponibles"
+        ],
+        "title": "CommercePayload"
+      },
       "CommercePin": {
         "properties": {
           "id": {
@@ -81174,6 +84180,65 @@
         ],
         "title": "ConditionMission"
       },
+      "ConditionsReprise": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 2,
+            "title": "Code"
+          },
+          "libelle": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Libelle"
+          },
+          "prix_ht_centimes": {
+            "type": "integer",
+            "maximum": 2147483647.0,
+            "minimum": 0.0,
+            "title": "Prix Ht Centimes"
+          },
+          "droits": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 50,
+            "title": "Droits"
+          },
+          "quota_animations": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Quota Animations"
+          },
+          "modele_service": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "Modele Service"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "code",
+          "libelle",
+          "prix_ht_centimes",
+          "droits",
+          "quota_animations",
+          "modele_service"
+        ],
+        "title": "ConditionsReprise"
+      },
       "ConfigurationAnimationLecturePayload": {
         "properties": {
           "suivi_preparation": {
@@ -81442,6 +84507,49 @@
           "confirmed"
         ],
         "title": "ConfirmationInvitationOnboardRequest"
+      },
+      "ConfirmationReprise": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Expected Version"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 3,
+            "title": "Motif"
+          },
+          "reference_preuve": {
+            "type": "string",
+            "maxLength": 500,
+            "minLength": 3,
+            "title": "Reference Preuve"
+          },
+          "conditions_confirmees": {
+            "$ref": "#/components/schemas/ConditionsReprise"
+          },
+          "droit_chasse_historique": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DroitChasseHistorique"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "motif",
+          "reference_preuve",
+          "conditions_confirmees"
+        ],
+        "title": "ConfirmationReprise"
       },
       "ConfirmationSalarie": {
         "properties": {
@@ -81971,6 +85079,92 @@
         ],
         "title": "ControleResponse"
       },
+      "CoordonneesFacturation": {
+        "properties": {
+          "buyerType": {
+            "type": "string",
+            "enum": [
+              "INDIVIDUAL",
+              "BUSINESS",
+              "ASSOCIATION",
+              "PUBLIC_ENTITY"
+            ],
+            "title": "Buyertype"
+          },
+          "legalName": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Legalname"
+          },
+          "billingEmail": {
+            "type": "string",
+            "maxLength": 254,
+            "pattern": "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$",
+            "title": "Billingemail"
+          },
+          "address": {
+            "$ref": "#/components/schemas/AdresseFacturation"
+          },
+          "siret": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^\\d{14}$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Siret"
+          },
+          "vatNumber": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 40
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Vatnumber"
+          },
+          "serviceCode": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 100
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Servicecode"
+          },
+          "engagementNumber": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 100
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Engagementnumber"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "buyerType",
+          "legalName",
+          "billingEmail",
+          "address"
+        ],
+        "title": "CoordonneesFacturation"
+      },
       "CorrigerAnimationRequest": {
         "properties": {
           "motif": {
@@ -82298,10 +85492,14 @@
           "autorisationsDediees": {
             "items": {
               "type": "string",
-              "const": "commercants:perimetres_gerer"
+              "enum": [
+                "commercants:perimetres_gerer",
+                "abonnements:modules_octroyer",
+                "abonnements:remboursements_decider"
+              ]
             },
             "type": "array",
-            "maxItems": 1,
+            "maxItems": 3,
             "title": "Autorisationsdediees"
           }
         },
@@ -83197,6 +86395,37 @@
         ],
         "title": "CreerQrLieuInput"
       },
+      "CycleCommercePayload": {
+        "properties": {
+          "simulation": {
+            "type": "boolean",
+            "title": "Simulation"
+          },
+          "traites": {
+            "type": "integer",
+            "title": "Traites"
+          },
+          "echecs_reprenables": {
+            "type": "integer",
+            "title": "Echecs Reprenables"
+          },
+          "operations": {
+            "items": {
+              "$ref": "#/components/schemas/EffetCommercePayload"
+            },
+            "type": "array",
+            "title": "Operations"
+          }
+        },
+        "type": "object",
+        "required": [
+          "simulation",
+          "traites",
+          "echecs_reprenables",
+          "operations"
+        ],
+        "title": "CycleCommercePayload"
+      },
       "CycleGenerationPayload": {
         "properties": {
           "traitees": {
@@ -83607,6 +86836,54 @@
           "version"
         ],
         "title": "DecisionPerimetrePayload"
+      },
+      "DecisionRemboursement": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 3,
+            "title": "Motif"
+          },
+          "decision": {
+            "type": "string",
+            "enum": [
+              "APPROUVEE",
+              "REFUSEE"
+            ],
+            "title": "Decision"
+          },
+          "montant_centimes": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "exclusiveMinimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Montant Centimes"
+          },
+          "retrait_commercial_demande": {
+            "type": "boolean",
+            "title": "Retrait Commercial Demande"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "motif",
+          "decision",
+          "retrait_commercial_demande"
+        ],
+        "title": "DecisionRemboursement"
       },
       "DefiAssociation": {
         "properties": {
@@ -85730,6 +89007,51 @@
         ],
         "title": "DetailValidationPin"
       },
+      "DevisCommande": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "nature": {
+            "type": "string",
+            "enum": [
+              "ACHAT_MODULES",
+              "RENOUVELLEMENT",
+              "MONTEE_GAMME"
+            ],
+            "title": "Nature"
+          },
+          "module_codes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 20,
+            "title": "Module Codes"
+          },
+          "offre_code": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 64
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Offre Code"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "nature"
+        ],
+        "title": "DevisCommande"
+      },
       "DiagnosticAnimationPayload": {
         "properties": {
           "animation": {
@@ -86156,6 +89478,61 @@
         ],
         "title": "DossierVerificationsPayload"
       },
+      "DroitChasseHistorique": {
+        "properties": {
+          "quantite": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Quantite"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "quantite"
+        ],
+        "title": "DroitChasseHistorique"
+      },
+      "DroitsModulesPage": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ModuleDroit"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "next_cursor",
+          "has_more"
+        ],
+        "title": "DroitsModulesPage"
+      },
       "EchecReconciliationCommandeLotsPayload": {
         "properties": {
           "commande_id": {
@@ -86309,6 +89686,64 @@
           "history_url"
         ],
         "title": "EditionResponse"
+      },
+      "EffetCommercePayload": {
+        "properties": {
+          "traite": {
+            "type": "boolean",
+            "title": "Traite"
+          },
+          "operation_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Operation Id"
+          },
+          "simulation": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Simulation"
+          },
+          "statut": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Statut"
+          },
+          "erreur": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Erreur"
+          }
+        },
+        "type": "object",
+        "required": [
+          "traite"
+        ],
+        "title": "EffetCommercePayload"
       },
       "ElementDefi": {
         "properties": {
@@ -87813,6 +91248,50 @@
         ],
         "title": "ExploitationAnimationPayload"
       },
+      "FacturationCommande": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "coordonnees": {
+            "$ref": "#/components/schemas/CoordonneesFacturation"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "coordonnees"
+        ],
+        "title": "FacturationCommande"
+      },
+      "FacturationPayload": {
+        "properties": {
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "coordonnees": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Coordonnees"
+          },
+          "effet": {
+            "type": "string",
+            "const": "FUTURS_DOCUMENTS",
+            "title": "Effet"
+          }
+        },
+        "type": "object",
+        "required": [
+          "version",
+          "coordonnees",
+          "effet"
+        ],
+        "title": "FacturationPayload"
+      },
       "FacturerAbonnementAnimationRequest": {
         "properties": {
           "billingSnapshot": {
@@ -88740,6 +92219,24 @@
           "max"
         ],
         "title": "FourchetteEtapes"
+      },
+      "FractionPayload": {
+        "properties": {
+          "numerateur": {
+            "type": "integer",
+            "title": "Numerateur"
+          },
+          "denominateur": {
+            "type": "integer",
+            "title": "Denominateur"
+          }
+        },
+        "type": "object",
+        "required": [
+          "numerateur",
+          "denominateur"
+        ],
+        "title": "FractionPayload"
       },
       "GainAnimationPayload": {
         "properties": {
@@ -89723,6 +93220,80 @@
         },
         "type": "object",
         "title": "HTTPValidationError"
+      },
+      "HistoriqueModule": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "action": {
+            "type": "string",
+            "title": "Action"
+          },
+          "acteur": {
+            "type": "string",
+            "title": "Acteur"
+          },
+          "motif": {
+            "type": "string",
+            "title": "Motif"
+          },
+          "date_effet": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Date Effet"
+          },
+          "cible_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Cible Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "action",
+          "acteur",
+          "motif",
+          "date_effet",
+          "cible_id"
+        ],
+        "title": "HistoriqueModule"
+      },
+      "HistoriqueModulesPage": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/HistoriqueModule"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "next_cursor",
+          "has_more"
+        ],
+        "title": "HistoriqueModulesPage"
       },
       "HistoriquePerimetrePayload": {
         "properties": {
@@ -91535,6 +95106,134 @@
         ],
         "title": "LigneCommandeLotsPayload"
       },
+      "LigneCommercePayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "nature": {
+            "type": "string",
+            "title": "Nature"
+          },
+          "module_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Module Code"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "conditions": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Conditions"
+          },
+          "periode_souscription_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Periode Souscription Id"
+          },
+          "debut_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Debut At"
+          },
+          "fin_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Fin At"
+          },
+          "montant_ht_centimes": {
+            "type": "integer",
+            "title": "Montant Ht Centimes"
+          },
+          "montant_tva_centimes": {
+            "type": "integer",
+            "title": "Montant Tva Centimes"
+          },
+          "montant_ttc_centimes": {
+            "type": "integer",
+            "title": "Montant Ttc Centimes"
+          },
+          "taux_tva": {
+            "type": "string",
+            "title": "Taux Tva"
+          },
+          "quota": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Quota"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "nature",
+          "module_code",
+          "libelle",
+          "conditions",
+          "periode_souscription_id",
+          "debut_at",
+          "fin_at",
+          "montant_ht_centimes",
+          "montant_tva_centimes",
+          "montant_ttc_centimes",
+          "taux_tva",
+          "quota"
+        ],
+        "title": "LigneCommercePayload"
+      },
+      "LimiteModule": {
+        "properties": {
+          "unite": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "Unite"
+          },
+          "periode": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "Periode"
+          },
+          "quantite": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Quantite"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "unite",
+          "periode"
+        ],
+        "title": "LimiteModule"
+      },
       "ListeAbonnementsWebPushPayload": {
         "properties": {
           "feature_enabled": {
@@ -92958,6 +96657,67 @@
         ],
         "title": "ModificationMembreCommande"
       },
+      "ModificationOctroi": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "debut_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Debut At"
+          },
+          "fin_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fin At"
+          },
+          "limites": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/LimiteModule"
+                },
+                "type": "array",
+                "maxItems": 10
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Limites"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 3,
+            "title": "Motif"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "motif"
+        ],
+        "title": "ModificationOctroi"
+      },
       "ModificationUtilisateur": {
         "properties": {
           "version": {
@@ -93025,10 +96785,14 @@
               {
                 "items": {
                   "type": "string",
-                  "const": "commercants:perimetres_gerer"
+                  "enum": [
+                    "commercants:perimetres_gerer",
+                    "abonnements:modules_octroyer",
+                    "abonnements:remboursements_decider"
+                  ]
                 },
                 "type": "array",
-                "maxItems": 1
+                "maxItems": 3
               },
               {
                 "type": "null"
@@ -93960,6 +97724,257 @@
         ],
         "title": "ModifierReferentielCommercantRequest"
       },
+      "ModuleDroit": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "module_code": {
+            "type": "string",
+            "title": "Module Code"
+          },
+          "origine": {
+            "type": "string",
+            "title": "Origine"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          },
+          "debut_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Debut At"
+          },
+          "fin_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Fin At"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "limites": {
+            "items": {
+              "$ref": "#/components/schemas/LimiteModule"
+            },
+            "type": "array",
+            "title": "Limites"
+          },
+          "actions_disponibles": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Actions Disponibles"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "module_code",
+          "origine",
+          "statut",
+          "debut_at",
+          "fin_at",
+          "version",
+          "limites",
+          "actions_disponibles"
+        ],
+        "title": "ModuleDroit"
+      },
+      "ModulesPage": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ModulesPayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More"
+          },
+          "courant_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Courant Id"
+          },
+          "derniere_expiree_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Derniere Expiree Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "next_cursor",
+          "has_more"
+        ],
+        "title": "ModulesPage"
+      },
+      "ModulesPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "partenaire_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Partenaire Id"
+          },
+          "commune_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Commune Id"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          },
+          "debut_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Debut At"
+          },
+          "fin_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Fin At"
+          },
+          "conditions_version": {
+            "type": "integer",
+            "title": "Conditions Version"
+          },
+          "reprise_statut": {
+            "type": "string",
+            "enum": [
+              "VALIDEE",
+              "A_CONTROLER"
+            ],
+            "title": "Reprise Statut"
+          },
+          "offre": {
+            "$ref": "#/components/schemas/OffreAcquise"
+          },
+          "droits": {
+            "items": {
+              "$ref": "#/components/schemas/ModuleDroit"
+            },
+            "type": "array",
+            "title": "Droits"
+          },
+          "droits_next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Droits Next Cursor"
+          },
+          "droits_has_more": {
+            "type": "boolean",
+            "title": "Droits Has More",
+            "default": false
+          },
+          "modules_renouvelables": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Modules Renouvelables"
+          },
+          "modules_deja_acquis": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Modules Deja Acquis"
+          },
+          "quotas": {
+            "items": {
+              "$ref": "#/components/schemas/QuotaModule"
+            },
+            "type": "array",
+            "title": "Quotas"
+          },
+          "actions_disponibles": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Actions Disponibles"
+          },
+          "arret_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Arret At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "partenaire_id",
+          "commune_id",
+          "version",
+          "statut",
+          "debut_at",
+          "fin_at",
+          "conditions_version",
+          "reprise_statut",
+          "offre",
+          "droits",
+          "quotas",
+          "actions_disponibles"
+        ],
+        "title": "ModulesPayload"
+      },
       "MontantSuivi": {
         "properties": {
           "knownAmountCents": {
@@ -94766,6 +98781,139 @@
           "provenance"
         ],
         "title": "ObjetParticipant"
+      },
+      "OctroiModule": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "module_code": {
+            "type": "string",
+            "enum": [
+              "CHASSE_TRESOR",
+              "IMPORT_COMMERCANTS",
+              "COMMUNICATION_PARTICIPANTS"
+            ],
+            "title": "Module Code"
+          },
+          "origine": {
+            "type": "string",
+            "enum": [
+              "OFFERT",
+              "ESSAI"
+            ],
+            "title": "Origine"
+          },
+          "debut_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Debut At"
+          },
+          "fin_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fin At"
+          },
+          "limites": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/LimiteModule"
+                },
+                "type": "array",
+                "maxItems": 10
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Limites"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 3,
+            "title": "Motif"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "module_code",
+          "origine",
+          "motif"
+        ],
+        "title": "OctroiModule"
+      },
+      "OffreAcquise": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "title": "Code"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "prix_ht_centimes": {
+            "type": "integer",
+            "title": "Prix Ht Centimes"
+          },
+          "droits": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Droits"
+          },
+          "quota_animations": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Quota Animations"
+          },
+          "modele_service": {
+            "type": "string",
+            "title": "Modele Service"
+          }
+        },
+        "type": "object",
+        "required": [
+          "code",
+          "version",
+          "libelle",
+          "prix_ht_centimes",
+          "droits",
+          "quota_animations",
+          "modele_service"
+        ],
+        "title": "OffreAcquise"
       },
       "OperationAnimationPayload": {
         "properties": {
@@ -95602,6 +99750,39 @@
         ],
         "title": "PageBilansAnimationPayload"
       },
+      "PageCommandes": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/CommercePayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "next_cursor",
+          "has_more"
+        ],
+        "title": "PageCommandes"
+      },
       "PageCommercantsPayload": {
         "properties": {
           "items": {
@@ -95949,6 +100130,39 @@
           "generated_at"
         ],
         "title": "PageRechercheVision360AnimationPayload"
+      },
+      "PageRemboursements": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/RemboursementPayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "next_cursor",
+          "has_more"
+        ],
+        "title": "PageRemboursements"
       },
       "PageResponse": {
         "properties": {
@@ -100461,6 +104675,108 @@
         ],
         "title": "PromptGenerationResumePayload"
       },
+      "PublicationCatalogue": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Expected Version"
+          },
+          "code": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 2,
+            "title": "Code"
+          },
+          "libelle": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Libelle"
+          },
+          "nature": {
+            "type": "string",
+            "enum": [
+              "FORFAIT",
+              "MODULE"
+            ],
+            "title": "Nature"
+          },
+          "offre_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Offre Id"
+          },
+          "prix_ht_centimes": {
+            "type": "integer",
+            "maximum": 2147483647.0,
+            "minimum": 0.0,
+            "title": "Prix Ht Centimes"
+          },
+          "devise": {
+            "type": "string",
+            "const": "EUR",
+            "title": "Devise",
+            "default": "EUR"
+          },
+          "duree_mois": {
+            "type": "integer",
+            "maximum": 120.0,
+            "minimum": 1.0,
+            "title": "Duree Mois"
+          },
+          "droits": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 50,
+            "title": "Droits"
+          },
+          "limites": {
+            "items": {
+              "$ref": "#/components/schemas/LimiteModule"
+            },
+            "type": "array",
+            "maxItems": 10,
+            "title": "Limites"
+          },
+          "modele_service": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "Modele Service"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 3,
+            "title": "Motif"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "code",
+          "libelle",
+          "nature",
+          "prix_ht_centimes",
+          "duree_mois",
+          "droits",
+          "limites",
+          "modele_service",
+          "motif"
+        ],
+        "title": "PublicationCatalogue"
+      },
       "PublicationEnCoursPayload": {
         "properties": {
           "status": {
@@ -101092,6 +105408,62 @@
           "disponible"
         ],
         "title": "QuotaGenerationPayload"
+      },
+      "QuotaModule": {
+        "properties": {
+          "unite": {
+            "type": "string",
+            "title": "Unite"
+          },
+          "fenetre": {
+            "type": "string",
+            "title": "Fenetre"
+          },
+          "plafond": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Plafond"
+          },
+          "utilise": {
+            "type": "integer",
+            "title": "Utilise"
+          },
+          "disponible": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Disponible"
+          },
+          "controle_statut": {
+            "type": "string",
+            "enum": [
+              "VALIDE",
+              "A_RECONSTRUIRE"
+            ],
+            "title": "Controle Statut",
+            "default": "VALIDE"
+          }
+        },
+        "type": "object",
+        "required": [
+          "unite",
+          "fenetre",
+          "plafond",
+          "utilise",
+          "disponible"
+        ],
+        "title": "QuotaModule"
       },
       "RapportPurgePayload": {
         "properties": {
@@ -102488,6 +106860,147 @@
         ],
         "title": "RelanceSmsPayload"
       },
+      "RemboursementPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "commande_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Commande Id"
+          },
+          "partenaire_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Partenaire Id"
+          },
+          "commune_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Commune Id"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          },
+          "motif_demande": {
+            "type": "string",
+            "title": "Motif Demande"
+          },
+          "motif_decision": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motif Decision"
+          },
+          "montant_centimes": {
+            "type": "integer",
+            "title": "Montant Centimes"
+          },
+          "reserve_centimes": {
+            "type": "integer",
+            "title": "Reserve Centimes"
+          },
+          "disponible_centimes": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Disponible Centimes"
+          },
+          "devise": {
+            "type": "string",
+            "title": "Devise"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "decided_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Decided At"
+          },
+          "acteur_decision": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Acteur Decision"
+          },
+          "retrait_commercial_demande": {
+            "type": "boolean",
+            "title": "Retrait Commercial Demande"
+          },
+          "derniere_erreur": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Derniere Erreur"
+          },
+          "actions_disponibles": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Actions Disponibles"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "commande_id",
+          "partenaire_id",
+          "commune_id",
+          "version",
+          "statut",
+          "motif_demande",
+          "motif_decision",
+          "montant_centimes",
+          "reserve_centimes",
+          "devise",
+          "created_at",
+          "decided_at",
+          "acteur_decision",
+          "retrait_commercial_demande",
+          "derniere_erreur",
+          "actions_disponibles"
+        ],
+        "title": "RemboursementPayload"
+      },
       "RemplacerGainAnimationRequest": {
         "properties": {
           "motif": {
@@ -102732,6 +107245,84 @@
           "preuve_non_remise"
         ],
         "title": "RepriseCommunicationRequest"
+      },
+      "RepriseModulesPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "reprise_statut": {
+            "type": "string",
+            "enum": [
+              "VALIDEE",
+              "A_CONTROLER"
+            ],
+            "title": "Reprise Statut"
+          },
+          "preuve_snapshot_disponible": {
+            "type": "boolean",
+            "title": "Preuve Snapshot Disponible"
+          },
+          "conditions": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ConditionsReprise"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "debut_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Debut At"
+          },
+          "fin_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fin At"
+          },
+          "actions_disponibles": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Actions Disponibles"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "version",
+          "reprise_statut",
+          "preuve_snapshot_disponible",
+          "conditions",
+          "debut_at",
+          "fin_at",
+          "actions_disponibles"
+        ],
+        "title": "RepriseModulesPayload"
       },
       "ReservationRequest": {
         "properties": {
@@ -103403,6 +107994,28 @@
           "expected_version"
         ],
         "title": "RetraitCommande"
+      },
+      "RetraitModule": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 3,
+            "title": "Motif"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "motif"
+        ],
+        "title": "RetraitModule"
       },
       "ReutilisationTemplateGenerationPayload": {
         "properties": {
@@ -106095,6 +110708,18 @@
           "token"
         ],
         "title": "TokenInput"
+      },
+      "TraitementCommerce": {
+        "properties": {
+          "simulation": {
+            "type": "boolean",
+            "title": "Simulation",
+            "default": true
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "TraitementCommerce"
       },
       "TransactionScanSalarie": {
         "properties": {

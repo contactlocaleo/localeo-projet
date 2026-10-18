@@ -20,8 +20,8 @@ Implémentation, bases jetables locales, tests isolés et commits locaux uniquem
 | --- | --- | --- | --- |
 | 00 | Sources, référence initiale, protocole UX et suivi | Projet ; lecture des quatre applications | Sources et contrôles de référence : commit Projet `be776b1` ; matérialisation des squelettes UX poursuivie dans les lots applicatifs |
 | 01 | US25–26 comptes, équipe, organisation, récupération, transfert | Backend, Animation, Projet | Implémenté et vérifié localement pour CA50–53 ; backend `45d0b56` et preuve complémentaire `a17e3f4`, Animation `05c0561`, Projet `9519696` ; limites de conservation et recette hébergée ci-dessous |
-| 02 | US11–13 ; parties US24/36, périmètres et onboarding | Backend/ERP/OnBoard, Commerçant, Animation, Projet | Implémenté et vérifié localement pour les produits existants ; Backend `261ebdc`, Pro `bc9d1ac`, Animation `7cab528` ; branches numériques et exploitabilité reprises aux lots 05/10 |
-| 03 | US03,14–17,27–28 ; souscriptions/modules/finance | Backend, Animation, Projet | À réaliser |
+| 02 | US11–13 ; parties US24/36, périmètres et onboarding | Backend/ERP/OnBoard, Commerçant, Animation, Projet | Implémenté et vérifié localement pour les produits existants ; Backend `261ebdc` et raccord asset `59d89d0`, Pro `bc9d1ac`, Animation `7cab528`, Projet `afd77cd` ; branches numériques et exploitabilité reprises aux lots 05/10 |
+| 03 | US03,14–17,27–28 ; souscriptions/modules/finance | Backend, Animation, Pro (contrat), Projet | Implémenté et vérifié localement ; Backend `4f3a3b1`, Animation `79903e3`, Pro `8212252` ; activation des modules futurs aux lots 06/07/08 |
 | 04 | US01–02,04 ; branche externe US07–08 | Backend, Animation, Marketplace/Live, Projet | À réaliser |
 | 05 | US05–10 ; complément numérique US07–08 | Backend, Animation, Commerçant, Marketplace/Live, Projet | À réaliser |
 | 06 | US19–20 ; import/deltas/reprise | Backend, Animation, Projet | À réaliser |
@@ -144,3 +144,117 @@ Preuves backend complémentaires, préfixe commun `.artifacts/python-e70/runtime
 | Attestations moteur PostgreSQL et salariés E72 ; `.artifacts/e73-perimetres-recus-final-01`, puis reçu après retrait sans engagement `.artifacts/e73-perimetres-recu-clos-final` | **11 réussites**, puis **1 réussite** supplémentaire pour la lecture historique d’une animation close |
 
 Les deux listes de factures marchandes conservent leur tableau JSON et annoncent la page suivante dans `X-Next-Cursor` (exposé au navigateur), avec `limit=25`, maximum 100. Le curseur est lié au commerce, à la famille, au tri et à la version. Les actions sont calculées en lectures groupées, sans cache de droits persistant. Sur 10 000 demandes simples et 10 000 groupées : 9/10 requêtes constantes pour 2 ou 51 racines lues ; plans réels indexés sans forçage, mesures ponctuelles 0,229/0,565 ms. Les anciennes listes acheteur/Animation conservent leur contrat et leur dette de pagination, sans nouveau calcul marchand par ligne ; cette dette doit être traitée dans les lots finance/parcours concernés. Ces mesures ne démontrent pas les dix utilisateurs simultanés ni la charge mêlée du lot 10.
+
+Raccord complémentaire : le module `perimetres-commercants.js` était absent de la liste des fichiers servis par le shell ERP. Le commit local `59d89d0` l’ajoute ; `tests/api/test_erp_perimetres_asset.py`, runner isolé, `.artifacts/e73-lot02-asset` : **1 réussite**, chargement HTTP et cache privé vérifiés. Cette preuve complète la recette navigateur qui intercepte les fichiers locaux.
+
+### Lot 03 — Souscriptions et modules (en cours)
+
+L’accès au catalogue est réservé aux administrateurs. Les anciennes écritures directes SQLAdmin d’offre sont fermées au profit de versions explicites. Les autorisations `abonnements:modules_octroyer` (Backoffice) et `abonnements:remboursements_decider` (Finance) sont attribuées séparément ; aucun changement de profil ne les attribue implicitement. La migration `v267_autorisations_modules_internes.sql` étend seulement les codes permis, sans accorder de droit.
+
+Premières preuves, sans validation finale du lot :
+
+- `tests/application/test_autorisations_dediees_internes.py tests/domain/identite_acces/test_acces_interne_dedicated.py`, runner isolé `.artifacts/e73-lot03-grants-02` : **36 réussites**.
+- `tests/api/test_offres_animation_erp.py tests/security/test_acces_internes_surfaces.py tests/infrastructure/admin/test_catalogue_versionne_erp.py tests/api/test_erp_perimetres_asset.py`, `.artifacts/e73-lot03-admin-02` : **72 réussites**. La première passe avait 71 réussites et une attente Backoffice obsolète ; E73 restreint désormais cette création aux administrateurs, avec assertion de refus avant SQL.
+- `node tests/browser/epic69-acces-internes.cjs` : réussi à 390/1 280 px après extension des autorisations dédiées.
+- `node tests/browser/epic73-modules-erp.cjs` : réussi à 320/1 280 px sur réponses synthétiques locales : octroi versionné, dates Paris avec navigateur réglé à New York, conflit et saisie conservée, historique borné, catalogue versionné, décision de remboursement sans retrait implicite.
+
+Les contrôles de droits/quota/paiement, migrations complètes et contrats réels restent en cours. Les trois modules seront proposés à l’achat seulement après réalisation et vérification de leurs parcours dans les lots 06/07/08 ; leur présence au catalogue n’atteste pas leur disponibilité.
+
+Contrôles supplémentaires de l'intégration (lot encore en cours) :
+
+- `tests/integration/test_comptes_internes_postgres.py`, `.artifacts/e73-lot03-grants-pg` : **8 réussites** ; persistance des grants et retrait sur session existante.
+- `tests/application/test_souscriptions_regressions.py`, `.artifacts/e73-lot03-e47-regressions-04` : **38 réussites** ; activation commerciale séparée de l'identité, rollback et replay, invitation explicite après habilitation, réinitialisation d'une heure. La fixture a été raccordée aux tables E73 ; un doublon de fonction qui masquait un test a été retiré.
+- `tests/integration/test_demo_modules_abonnements.py tests/unit/test_demonstration_registry.py tests/api/test_erp_perimetres_asset.py tests/api/test_modules_dates_contract.py`, `.artifacts/e73-lot03-demo-03`, PostgreSQL local : **12 réussites**. Le premier essai métier a détecté l'absence de reprise des débits dans le générateur ; correction par le service normal, sans validation automatique de la reprise.
+- `tests/integration/test_data015_migrations.py`, `.artifacts/e73-lot03-migrations-01`, base exclusive `localeo_audit_migrations_test` : **3 réussites**, migrations complètes jusqu'à v267, rejeu et atomicité.
+- `node tests/browser/epic73-modules-erp.cjs` : nouvelle réussite à 320/1 280 px incluant perte de réponse puis reprise avec exactement la même clé/corps, et confirmation motivée des conditions historiques ; formats d'unités alignés sur les vrais DTO.
+- Première passe architecture/application intégrée, `.artifacts/e73-lot03-integration-01` : **533 réussites, 3 échecs**. Deux régressions de transition d'expiration après 30 jours sont renvoyées au propriétaire du service ; le troisième échec détecte le nom/format des déclarations de classes de tests dédiées. Correction en cours, aucune assertion supprimée ou affaiblie.
+
+Le contrat hors ligne contient à cette étape **786 routes** ; il est recopié dans
+les consommateurs Animation et Pro, sans prétendre à leur livraison. Les
+anciennes éditions directes du catalogue ne constituent plus un chemin de mutation.
+
+Recette Animation : **183 tests Node réussis**, types/lint/build isolé réussis,
+**484 assertions dans 36 scénarios navigateur** à 320/1 280 px. Le navigateur
+réglé à New York vérifie les heures affichées à Paris ; les scénarios couvrent
+expiration sans abonnement courant, période future, quota/historique paginés,
+premières coordonnées de facturation, perte de réponse et reprise explicite.
+Les quatre hunks préexistants « Clôturer » restent intacts et exclus du futur commit.
+La revue frontend/producer a détecté puis fait corriger les dates sans fuseau et
+le calcul « déjà acheté » dépendant de la première page des droits.
+
+`tests/security/test_commerce_animation_browser.py`, runner isolé
+`.artifacts/e73-commerce-browser-real-01` : **4 réussites** avec la vraie pile
+cookie/CORS/CSRF et une session révoquée ; refus avant appel métier. Le service
+commercial est simulé dans cette preuve de transport, séparée des preuves SQL.
+
+Pro : **42 tests de contrats réussis** avec
+`node node_modules/vitest/vitest.mjs run src/lib/api/contracts.test.js src/lib/api/preparation.contract.test.js --config tmp/e73-lot03-vitest.config.mjs --maxWorkers=2`.
+La configuration jetable impose `envDir:false` et des valeurs publiques synthétiques.
+Le premier lancement avec la configuration Vite habituelle n'est pas retenu
+comme preuve d'isolation. Seul le contrat embarqué Pro est modifié dans ce lot.
+
+Contrôles documentaires intermédiaires : `check_guidance.py` **94 guides,
+1 000 liens, zéro erreur/avertissement** ; `sync_documentation.py --check-sources`
+**123 sources vérifiées**. Le lot reste en cours : revue des nouveaux octrois
+sur conditions historiques, suspension sur plusieurs périodes et raccordement
+du Checkout ERP historique à une intention durable, sans appel fournisseur
+sous verrou métier.
+
+Après corrections, `.artifacts/e73-lot03-integration-02` réunit architecture,
+couverture des classes métier/use cases, régressions E47, démonstration SQL et
+contrat des dates : **539 réussites**, deux dépréciations `utcfromtimestamp`
+préexistantes dans le parcours Checkout historique. Les échecs d'expiration
+de la première passe sont corrigés ; les classes de tests dédiées sont détectées
+par le contrôle sans modifier celui-ci. Le test périmètres du lot 02 est renommé
+`test_perimetres_commercant_dedicated.py`, avec ses assertions conservées.
+
+Finalisation du lot 03 :
+
+- Migrations complètes et rejeu jusqu'à **v268**, base locale exclusive,
+  `.artifacts/e73-lot03-migrations-02` : **3 réussites** (68,13 s).
+- Finance, droits assemblés, factures, API et worker : runner isolé PostgreSQL,
+  `.artifacts/e73-commerce-final-01` ; fichiers
+  `tests/security/test_commerce_droits_integration_postgres.py`,
+  `test_checkout_erp_async_postgres.py`, `test_commerce_abonnements_postgres.py`,
+  tests domaine commande/devis/prorata/avoirs, traitement commerce, gateway et
+  webhooks Stripe : **56 réussites** (38,54 s), trois dépréciations.
+  Deux anciens échecs de fixture supposaient un rôle interne ADMIN nommé
+  inexistant ; les scénarios corrigés prouvent le refus Finance et suspension,
+  sans élargir la permission historique `finance.executer`.
+- `node tests/browser/epic73-checkout-erp.cjs` : **réussi à 320/1 280 px**,
+  intention durable, attente explicite et lien visible après confirmation.
+- `node tests/browser/epic73-modules-erp.cjs` : **réussi à 320/1 280 px** avec
+  compteur divergent ; le libellé mobile ajouté par CSS empêchait la recherche
+  accessible exacte du test, désormais ciblée sur la cellule Disponible avec
+  assertion exacte « Indisponible ». Aucune assertion métier retirée.
+- Animation : **502 assertions dans 38 scénarios navigateur**, types/lint/build
+  isolé réussis ; `tests/modules-http-contracts.test.mjs` **2 réussites** après
+  export final. Les nombres remplacent les comptages intermédiaires recouvrants.
+
+Les lectures de quotas sont vérifiées avec 10 000 droits et 10 000 consommations,
+sans recompter le journal. Les listes de commandes/remboursements sont vérifiées
+sur 10 000 lignes chacune avec plans PostgreSQL et curseurs. Ces preuves ne
+constituent pas encore le test de trafic transverse du lot 10. Les fournisseurs
+restent simulés, les modules futurs indisponibles et la recette humaine non exécutée.
+
+Dernière suite core : `test_modules_plateforme_postgres.py`,
+`test_modules_plateforme_api.py`, `test_modules_acquis_dedicated.py`,
+`test_souscriptions_regressions.py`, `test_verification_droit_plateforme.py`,
+runner isolé et PostgreSQL local `.artifacts/e73-core-final-08` : **66 réussites**
+(18,86 s), quatre dépréciations. La revue indépendante finale des compteurs et
+du Checkout ERP n'a trouvé aucun nouvel écart concret ; c'est une revue de code
+et des tests persistés, distincte de leur exécution par les auteurs/intégrateur.
+
+Une copie de l'index Animation dans `tmp/e73-lot03-staged` exclut les quatre
+hunks utilisateur : `npm.cmd run typecheck` et le build isolé y réussissent.
+Le chunk principal de 863,29 ko conserve la dette de découpage identifiée pour
+le lot 09. Les contrôles finaux de documentation donnent **94 guides,
+1 000 liens, zéro erreur/avertissement**, **123 sources vérifiées**.
+
+Limites opératoires préparées : un compteur divergent exige le service motivé
+de contrôle/reconstruction, sans écran supplémentaire dans ce lot ; un second
+paiement concurrent portant sur une période devenue incompatible reste à
+rapprocher, sans créditer deux droits. Aucun fournisseur réel, worker distant,
+push ni livraison n'a été utilisé. Le lot 03 est enregistré localement ; les
+branches de continuité import/chasse/messages seront complétées avec leurs
+opérations réelles dans les lots 06 à 08.

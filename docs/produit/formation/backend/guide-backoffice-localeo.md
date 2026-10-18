@@ -1,5 +1,15 @@
 # Guide de formation au back-office Localeo
 
+## Souscriptions et modules — évolution E73
+
+Fonctions en cours de réalisation locale ; leur présence ici ne vaut pas livraison sur un environnement. Depuis **Animation → Gestion des souscriptions**, ouvrir une souscription activée puis **Gérer les modules**. L’écran distingue le forfait acquis, ses dates, les quotas consommés et chaque droit inclus, acheté, offert ou en essai. Les droits de la commune concernée restent séparés de ceux des autres communes du partenaire.
+
+L’autorisation **Offrir des modules et gérer les essais** doit être attribuée explicitement à un Backoffice par un administrateur. Elle permet un octroi motivé, sa modification et son retrait. Un essai dure 14 jours par défaut ; un cadeau se termine au plus tard avec la souscription. Les capacités et les dates sont contrôlées par le serveur. Aucun cadeau ou essai ne devient automatiquement un achat. Les dates de saisie et d’affichage utilisent Europe/Paris. En cas de conflit, conserver la saisie affichée, puis actualiser le dossier avant toute nouvelle décision.
+
+Le **Catalogue commercial** est réservé aux administrateurs. Chaque modification publie une nouvelle version ; elle ne réécrit pas les conditions acquises. Un module indiqué en préparation technique n’ouvre pas de parcours d’achat. Les anciennes fiches techniques d’offre restent consultables ; les modifications passent par le catalogue versionné.
+
+La rubrique **Remboursements** permet de consulter les demandes. L’autorisation **Décider les remboursements de souscriptions et modules** est réservée à un Finance explicitement habilité ou à un administrateur. L’approbation exige un montant et un motif ; le montant disponible tient compte des remboursements confirmés et déjà réservés. L’enregistrement d’une décision ne prouve pas le succès fournisseur. Un retrait commercial est une décision distincte, avec continuité des engagements ; il ne découle pas d’un remboursement partiel.
+
 ## Périmètres commerçants — évolution E73
 
 Fonctions préparées localement, sans déploiement implicite. Ouvrir **Commerçants → fiche → Périmètres** pour consulter les produits Animation/Coffrets, les prérequis et l’historique paginé des décisions. Les étapes sont distinctes : revue manuelle des produits souhaités, préparation OnBoard, puis activation explicite. Chaque décision exige un motif et peut être refusée si le dossier a changé ; relire alors l’état avant de recommencer.

@@ -418,3 +418,45 @@ Vérifier PostgreSQL : verrous de quota avec deux connexions, fréquence avec de
 Démonstration à adapter dans le backend : communes A/B, responsables et collaborateurs habilités/non habilités, modules actif/futur/offert/essai/expiré, derniers crédits, campagne sans Push mais Live autorisé, import avec delta local et doublon email, coûts partiels et alerte. Aucune donnée privée ni fichier utilisateur dans les fixtures ; le générateur appelle les règles du produit et ne crée pas de raccourci d'activation.
 
 Documentation à mettre à jour lors de l'implémentation : catalogue/vente et conditions de prorata, écrans Mes modules et import, guide de communication/préférences, support paiement incertain et reprise, procédures ERP d'octroi/remboursement, Ops de diffusion/coût et conservation. Les règles d'onboarding/périmètre, droits d'équipe, origine Animation et remise des lots restent dans les documents liés ; leurs tests sont des dépendances de cette couverture.
+
+## 12. Contrats réalisés au lot 03
+
+Le contrat de transport provient du backend local et de son [OpenAPI exporté](../epic-41-api/openapi.json).
+Il ne constitue pas une preuve de déploiement. Les familles suivantes sont
+consommées par le portail Animation et l'ERP :
+
+| Famille | Contrat et comportement |
+| --- | --- |
+| Catalogue, périodes, droits, historique | Préfixes `/protected/abonnements-plateforme` et `/internal/abonnements-plateforme` ; listes à curseur, 25 éléments par défaut, 100 maximum ; aucun chargement de table complète pour composer une page |
+| Période courante | `courant_id` et `derniere_expiree_id` sont projetés indépendamment de la pagination ; une période future payée ne devient pas active avant sa date |
+| Droits commerciaux | `droits_next_cursor`/`droits_has_more` paginent la consultation ; `modules_renouvelables` et `modules_deja_acquis` sont des faits bornés distincts, jamais déduits de cette première page |
+| Octroi et catalogue ERP | Commandes motivées et versionnées, `Idempotency-Key`, contrôle CSRF et autorisation revérifiée dans la transaction ; aucune attribution automatique du grant Backoffice/Finance |
+| Reprise historique | `GET/POST /internal/abonnements-plateforme/souscriptions/{id}/reprise` ; version 0 si période non reconstituée, preuve commerciale explicite, conservation des usages ; administrateur seul confirme |
+| Commerce | Devis immuable puis commande, demande de Checkout asynchrone, état relisible après réponse perdue ; arrêt, demande et décision de remboursement séparés |
+| Facturation | Coordonnées actuelles par organisation, version attendue ; aucun changement rétroactif des documents émis |
+| Checkout ERP historique | La commande renvoie `status=queued` et `operationId`. La lecture expose `checkoutPreparation` (`A_TRAITER`, `EN_COURS`, `ECHEC_REPRENABLE`, `TERMINE`, `SUSPENDU`). L'intention `CHECKOUT_E47` utilise la même file durable et le même worker ; l'acceptation ne prouve ni la création du lien ni un email envoyé |
+
+Le worker reste en simulation par défaut. `LOCALEO_ABONNEMENTS_COMMERCE_APPLY`
+est requis pour une exécution réelle, y compris la commande interne
+`/traitements/executer`. Les appels fournisseur se font hors des transactions
+métier. Les permissions actuelles sont revérifiées avant une tâche non commencée.
+
+Les compteurs d'usage sont autoritaires et mis à jour dans la transaction du
+journal. Une lecture interactive ne recompte pas ce journal. Un compteur
+`A_RECONSTRUIRE` bloque les nouveaux usages concernés et expose un plafond et
+un disponible inconnus ; les interfaces indiquent « Compteur à vérifier »,
+jamais « Illimité ». La reconstruction exige une action motivée.
+
+Les instants HTTP portent explicitement UTC ; les interfaces affichent l'heure
+de Paris. La saisie ERP d'un horaire local refuse un instant inexistant ou ambigu
+au changement d'heure. Les expirations sont exclusives. Une réponse réseau perdue
+conserve le corps et la clé de la demande ; une reprise explicite relit/rejoue le
+reçu après contrôle des droits, sans second octroi ni seconde commande.
+
+Migrations préparées : `v265_e73_modules_conditions_acquises.sql`,
+`v266_commerce_abonnements.sql`, `v267_autorisations_modules_internes.sql` et
+`v268_e73_compteurs_usage_autoritaires.sql`.
+Le générateur utilise le service normal pour préparer les preuves synthétiques
+à contrôler, avec leurs consommations historiques ; il n'offre pas de module
+et ne confirme aucun paiement. Les preuves exécutées et les écarts restants
+figurent dans le [suivi de réalisation](suivi-implementation.md).
