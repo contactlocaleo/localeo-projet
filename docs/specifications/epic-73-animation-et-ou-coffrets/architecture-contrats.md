@@ -295,4 +295,58 @@ calendrier figé ne contient aucune coordonnée participante. Les purges, gels e
 reprises après restauration de ces nouvelles familles sont à démontrer au lot 10
 avant mise en service, avec les familles des lots précédents.
 
-Les 147 décisions du backlog sont la référence produit ; pas de nouvelle fonctionnalité commerciale ou de tarif implicite. Les choix techniques ici (versions, objets, ordre transactionnel, contrats) préparent l’implémentation. Les sources applicatives décrivent un arbre local, dont des modifications préexistantes dans Animation ; elles ne prouvent pas un déploiement. L’OpenAPI futur, les migrations effectives, les mappings de conservation et les tests runtime seront vérifiés pendant l’implémentation ; leur absence aujourd’hui ne doit pas être assimilée à une réussite.
+### Réalisation locale du lot 08
+
+Le domaine Communication porte la campagne, sa fenêtre effective, l'audience,
+les préférences et la décision de sollicitation. Les services orchestrent les
+autorisations courantes, les transactions et les ports de dépôt/transport. Un
+compte client possède l'autorisation dédiée Communication ; l'ERP requiert
+`animation:sollicitation_gerer` pour régler ou clôturer une alerte, en plus de
+son accès interne courant. Le reçu réautorise l'acteur dans la transaction.
+
+Le claim du worker est commité avant la transaction métier. L'ordre commun est
+identité/tenant, compteur si premier débit, animation/campagne, politique puis
+destinataire. Le premier dépôt Live et l'engagement commercial sont atomiques.
+La continuation prend une garde partagée de tenant compatible avec les lectures,
+mais incompatible avec une suspension ; elle ne reprend pas le verrou exclusif
+de débit pour chaque destinataire. Le dépôt et l'intention Push sont durables
+avant tout transport externe. Les états acceptés ou en cours ne valent pas succès.
+
+La capture SQL d'une animation est durable et cohérente ; ses membres sont
+préparés par lots bornés avant scellement. Une campagne engagée conserve cette
+audience, même si d'autres participants s'inscrivent. Les préférences, la fenêtre,
+la fréquence et les suspensions sont revérifiées avant chaque dépôt. Les reçus
+de commande, versions et clés stables empêchent de rejouer un débit ou un message.
+
+L'identité de fréquence est communale et pseudonymisée par HMAC. Un registre
+contrôle le trousseau et ses anciennes clés ; les alias d'une correction d'email
+ne remettent pas la fréquence à zéro. Les tables de fréquence ne stockent pas
+l'email. Les messages personnels Live restent accessibles aux consentants sans
+installation Push ; leur liaison ultérieure exige une preuve de carnet valide.
+Les notifications automatiques et leurs préférences restent indépendantes.
+
+`v275_campagnes_organisateur.sql` ajoute les familles Communication, les index
+des pages et des traitements, ainsi que les instants effectifs de publication
+et de clôture. Le backfill exige des preuves d'opérations réussies et un gel de
+population pour la clôture ; une ambiguïté reste `A_VERIFIER`, sans date inventée.
+Une nouvelle permission ERP n'est pas attribuée aux comptes historiques.
+
+Les listes utilisent 25 éléments par défaut, 100 au maximum, des curseurs stables
+et des faits groupés. La messagerie fusionne deux pages bornées de sources Live,
+sans charger tous les messages ; les alertes communales filtrent et recherchent
+le curseur sur leur index communal, y compris en page profonde. Les agrégats de
+rapport distinguent dépôt Live, transport Push, exclusion et erreur, sans exposer
+l'identité des participants ni affirmer une lecture. Les preuves et cardinalités
+mesurées sont dans le [suivi local](suivi-implementation.md).
+
+Le contenu des messages suit la conservation Live existante. Préférences et
+actions métier relèvent des preuves minimales T1 ; reçus, baux, captures et erreurs
+techniques restent classés T8. Les alias pseudonymisés nécessaires au contrôle de
+fréquence sont séparés des liens nominatifs supprimables. Le raccord complet aux
+gels et purges de ces familles, puis leur reprise après restauration, reste une
+obligation du lot 10 avant mise en service. La durée de vie de l'archive ou du
+message ne constitue pas une durée nouvelle de conservation d'audit.
+
+Les 147 décisions du backlog restent la référence produit. Les réalisations
+locales et leurs preuves ne valent ni déploiement ni validation de capacité sur
+l'hébergement cible. Les résultats et limites sont suivis lot par lot.

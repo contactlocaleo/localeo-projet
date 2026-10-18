@@ -91,6 +91,24 @@ Les preuves de volume couvrent 10 000 candidats, 1 000 lignes de lots, les index
 réels, une préparation bornée et le coût constant du scellement externe. Elles
 ne remplacent ni la charge simultanée transverse du lot 10 ni la recette humaine.
 
+### Raccordement des preuves locales du lot 08
+
+Les preuves ci-dessous complètent les règles commerciales du lot 03. Le
+[suivi de réalisation](suivi-implementation.md#lot-08--communication-participants)
+consigne les commandes exécutées, résultats, mesures et reprises de tests.
+
+| Critères | Preuves exécutées et portée |
+| --- | --- |
+| CA-47 | Domaine `test_campagnes_organisateur_dedicated.py`, PostgreSQL `test_campagnes_organisateur_postgres.py` : débit unique au premier dépôt, concurrence du dernier crédit, audience sans destinataire autorisé sans débit, ouverture technique indépendante des notifications automatiques |
+| CA-48 | Mêmes suites, `test_messages_organisateur_postgres.py` et navigateur Animation/Live : quatre groupes, préférence explicite, fenêtre publication/+30 jours, contrôle courant de session et autorisation, message Live sans installation Push, liaison personnelle vérifiée et retrait |
+| CA-49 | `test_diffusion_messages_organisateur.py`, `test_execution_campagnes_organisateur.py`, `test_sollicitation_postgres_e73.py` et navigateur ERP : baux/reprises, absence de double dépôt, suspension et confirmation, réglage 1/24 h et seuil 3×, alerte regroupée et outbox transactionnelle |
+| Performance / frontières | Suites `test_campagnes_organisateur_performance.py`, `test_messages_organisateur_performance.py` et cas volumineux de sollicitation : pages SQL bornées, index réels, audience traitée par lots, dix lecteurs locaux ; contrôles d'architecture et de contrat HTTP |
+
+Ces preuves locales ne constituent pas un envoi fournisseur réel, une recette
+humaine ni une capacité démontrée de l'hébergement. La purge transversale, les
+gels et la réapplication des règles après restauration restent à vérifier au
+lot 10 ; aucune durée supplémentaire n'est introduite pour ce lot.
+
 ### Documents et guides associés
 
 - **D1** : [dotation et lots](dotation-lots.md) ; actualiser à l’implémentation les parcours organisateur, les supports de gain, l’aide scanner Pro, E70 et les projections Live. Contrats gagnants discriminés et consommation.

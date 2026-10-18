@@ -508,6 +508,10 @@
     {
       "path": "docs/ops/exploitation/preparer-chasse-accompagnee.md",
       "source_path": "docs/exploitation/exploitation/preparer-chasse-accompagnee.md"
+    },
+    {
+      "path": "docs/ops/exploitation/communiquer-participants-animation.md",
+      "source_path": "docs/exploitation/exploitation/communiquer-participants-animation.md"
     }
   ]
 }

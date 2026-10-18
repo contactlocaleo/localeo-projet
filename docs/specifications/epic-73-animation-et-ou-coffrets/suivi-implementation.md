@@ -25,8 +25,8 @@ Implémentation, bases jetables locales, tests isolés et commits locaux uniquem
 | 04 | US01–02,04 ; branche externe US07–08 | Backend, Animation, Marketplace/Live, Pro (contrat), Projet | Implémenté et vérifié localement ; Backend `7502282`, Animation `d0b92f7`, Marketplace `1473e05`, Pro `30aeed3`, sources dans le commit documentaire lot 04 ; branche numérique au lot 05 |
 | 05 | US05–10 ; complément numérique US07–08 | Backend, Animation, Commerçant, Marketplace/Live, Projet | Parcours implémentés et vérifiés localement ; commits et limites de conservation/performance ci-dessous ; aucune mise en service |
 | 06 | US19–20 ; import/deltas/reprise | Backend, Animation, Projet | Implémenté et vérifié localement ; Backend `bb4e1e8`, Animation `955fb94`, sources dans le commit documentaire du lot 06 ; preuves et limites ci-dessous |
-| 07 | US18,30 ; chasse et préparation accompagnée | Backend, Animation, Projet | Implémenté et vérifié localement ; commits par dépôt, recette humaine et hébergement non exécutés |
-| 08 | US21–22 ; communication participants | Backend, Animation, Marketplace/Live, Projet | En cours : campagnes, préférences Live, quotas, fréquence et alertes internes |
+| 07 | US18,30 ; chasse et préparation accompagnée | Backend, Animation, Projet | Implémenté et vérifié localement ; Backend `44c6429`, Animation `8979893`, Projet `7f80a6c` ; recette humaine et hébergement non exécutés |
+| 08 | US21–22 ; communication participants | Backend, Animation, Marketplace/Live, Projet | Implémenté et vérifié localement : campagnes, préférences Live, quotas, fréquence et alertes internes ; consolidation conservation/restauration au lot 10 |
 | 09 | US23,29,31–33 ; parcours/site/assistance/bilans | Backend, Animation, Marketplace/Live, Projet | À réaliser |
 | 10 | US34–38 ; finalisation US24, exploitabilité/pilote | Les cinq dépôts selon impact | À réaliser localement ; aucune activation distante autorisée |
 
@@ -754,3 +754,110 @@ Pro et Marketplace ne consomment pas ces nouvelles routes. Les deux sélecteurs
 historiques exhaustifs restant dans App et le bundle principal Animation sont
 suivis aux lots 09/10. La conservation physique des nouvelles familles reste
 à prouver au lot 10. Recette humaine et hébergement : non exécutés.
+
+### Lot 08 — Communication participants
+
+Périmètre : US21–22, CA47–49. Le portail propose préparation, aperçu,
+programmation, confirmation, rapport et reprise d'une campagne. Les quatre
+groupes restent limités à une animation. L'état de traitement, le dépôt Live
+et le résultat Push sont distincts. Les dates sont affichées en Europe/Paris.
+Les formulaires préservent les propositions et réconcilient une réponse perdue
+par reçu avant toute répétition explicite de la même commande.
+
+Le domaine possède les transitions et décisions de fenêtre, préférence,
+sollicitation et audience. L'application capture puis prépare une audience
+durable par lots, débite un crédit au premier dépôt Live et reprend sans
+modifier audience ou compteur. Le transport est séparé, avec baux et intentions
+durables ; les fournisseurs sont simulés dans toutes les preuves. Une campagne
+sans destinataire autorisé ne consomme aucun crédit.
+
+La préférence organisateur est explicite et indépendante du consentement
+historique aux notifications. Le message est disponible sans installation Push,
+puis peut être lu après liaison personnelle vérifiée d'un carnet. Les listes
+fusionnent des pages bornées et n'exposent aucun endpoint ou secret. Un retrait
+de préférence, de droit ou une suspension reste contrôlé côté serveur.
+
+L'ERP permet de consulter le réglage communal et les alertes, puis de les
+modifier avec l'autorisation dédiée `animation:sollicitation_gerer`, un motif et
+une version. La configuration initiale reste 1 message/24 h et un seuil à 3×.
+Les alertes sont regroupées par commune/période, avec un email interne à leur
+ouverture ; ni reprise ni clôture ne remettent la fréquence à zéro. Une garde
+partagée du réglage empêche sa modification concurrente pendant la décision.
+
+Migration `v275_campagnes_organisateur.sql` : 23 tables dédiées, index de listes,
+files et purges, nouvelles dates effectives Animation et permission ERP sans
+octroi automatique. Le backfill exige des preuves de publication et de clôture,
+dont un gel de population pour cette dernière. L'absence de preuve conserve une
+fenêtre à vérifier. La migration n'active aucun module ni worker.
+
+Preuves root déjà exécutées (runner backend isolé ; suites recouvrantes) :
+
+| Contrôle | Résultat local |
+| --- | --- |
+| ERP PostgreSQL/API/configuration | **24 réussites**, `tmp/e73-lot08-root-pg04.xml` : CAS, concurrence, rollback email/alerte, grant/session révoqués dans la composition réelle, garde tenant contre suspension |
+| Disponibilité commerciale et configuration finale | **13 réussites**, `tmp/e73-lot08-readiness02.xml` ; trousseau, emails internes, VAPID et flags des deux workers requis pour les nouveaux usages |
+| Exécuteur campagnes | **8 réussites**, `tmp/e73-lot08-execution.xml` ; simulation sans claim/écriture et budget avant le lot suivant |
+| Migration vide/rejeu/atomicité/modèles et reprise historique | **4 réussites**, 62,44 s, `tmp/e73-lot08-migrations02.xml` ; PostgreSQL local jetable, schéma final des 23 tables |
+| Réponses HTTP Animation | **11 réussites**, `tmp/e73-lot08-responses02.xml` ; deux réponses antérieures complétées dans OpenAPI sans changer leur JSON |
+| ERP mobile/bureau | `node tests/browser/epic73-sollicitations.cjs` réussi à 320/1 280 px : 404 du reçu puis renvoi de même clé, attente202, CAS409 avec proposition reprise et confirmation, pagination, lecture seule, texte échappé et Paris |
+| Chargement réel du module ERP | **6 réussites**, deux avertissements de dépréciation, `tmp/e73-lot08-assets03.xml` : contrôle HTTP de la page et du module `sollicitations.js` ; ajout de ce fichier à la liste d'assets autorisés, oubli non détectable par la recette navigateur servie sur des fixtures |
+| Campagnes : domaine, PostgreSQL, HTTP réel, HMAC et performance | **54 réussites**, 182,49 s, `tmp/e73-lot08-pg12.xml` ; débit concurrent du dernier crédit, rollback du premier dépôt, audience figée et fenêtre après démarrage |
+| Participants et synchronisation existants | **8 réussites**, `tmp/e73-lot08-legacy01.xml` |
+| Derniers cas campagnes et recensement | **33 réussites**, `tmp/e73-lot08-target14.xml` : 30 tests domaine, recensement complet et roundtrip UTC sous fuseau SQL Europe/Paris ; reprise du cas de fixture signalé dans `final13` |
+| Architecture et API antérieures | **586 réussites** dans `tmp/e73-lot08-architecture02.xml` et un échec de déclaration de preuve ; ce dernier est corrigé et rejoué dans `target14`, sans skip ni exclusion |
+| Exports documentaires et contrat Live | **10 réussites**, `tmp/e73-lot08-contracts03.xml` ; E41 **896 routes**, E42 **60 routes** |
+| Live, préférences, transport, concurrence et purge | Ensemble de **47 tests distincts** validés au fil des suites W2 : 17 PostgreSQL, 11 domaine, 9 API, 9 transport/CLI et 1 performance ; détails dans la note locale backend `tmp/e73-lot08-preuves-w2.md` |
+| Animation, seuls fichiers du lot dans une copie du HEAD | **220 tests Node**, types/lint/build réussis ; **36 scénarios navigateur / 684 assertions**, 320/1 280 px et fuseau Los Angeles ; trois contrats campagnes rejoués après l'export définitif |
+| Marketplace / Live | **113 tests de sécurité**, lint ciblé réussi, **12 scénarios navigateur** (neuf antérieurs et trois nouveaux) ; les trois nouveaux rejoués avec code natif 0 après un avertissement de l'enveloppe PowerShell |
+| Accessibilité Live additionnelle | **1 scénario réussi**, 21,3 s : 320 px et texte agrandi à 200 %, navigation clavier, accord/retrait/lecture/fermeture sans débordement ; le débordement du titre constaté à la première passe a été corrigé, captures inspectées |
+| Démonstration et cycle complet sauvegarde/transfert/restauration | **9 réussites**, aucun échec ni skip, 509,77 s, `tmp/e73-lot08-demo-complete02/results.xml` ; scénario Communication avec les deux flags finaux ; six avertissements SQLAlchemy de réflexion. L'exécution précédente interrompue ne constitue pas une preuve |
+
+La page profonde d'alertes parmi **20 000 lignes** (10 000 dans la commune et
+10 000 ailleurs) utilise l'index communal et lit 26 lignes pour une page de 25,
+sans OFFSET ni balayage de l'autre commune. Une première assertion avait détecté
+l'emploi de l'index global ; le curseur inclut désormais la commune dans la
+comparaison, sans forcer le plan ni affaiblir le test. Artefact local backend :
+`.artifacts/e73-sollicitation-performance.json`.
+
+Campagnes : sur **10 communes et 10 000 participants**, les pages de 1 et 100
+éléments utilisent chacune 20 requêtes. Dix lecteurs simultanés ont pris de
+0,191 à 1,039 s par lecture sur le poste local ; la capture de 1 000 participants
+a pris 0,260 s. Les index sont vérifiés sans forçage du plan. Messagerie :
+10 000 messages personnels, 10 000 notifications historiques et 10 000
+participants ; deux pages et leurs cent faits exigent cinq requêtes, sans
+balayage des grandes tables. Ces mesures ciblées ne démontrent ni le mélange
+de parcours du lot 10 ni la capacité de l'hébergement cible.
+
+Le chunk Communication est chargé à la demande (36,32 ko ; gzip 9,91 ko).
+L'avertissement sur le bundle principal Animation reste pris en charge au lot
+09. Le commit local Animation est `08f4d98` ; il contient seulement les 21
+fichiers vérifiés, avec les quatre hunks Clôturer et les autres modifications
+utilisateur préexistantes laissés hors index.
+
+Marketplace : commits locaux `0fa79e4`, puis `c16bb30` pour le correctif
+320 px/texte à 200 %, sans réécriture d'historique. Son lint global rencontre
+un refus d'accès Windows dans le répertoire historique de sortie
+`output/demo-generation/pytest-bum-registry` ; le lint des sources et des tests
+touchés a réussi, sans ajout d'exclusion pour masquer ce refus.
+
+Backend : commit local `2cda9d6`, 92 fichiers explicitement indexés. La commande
+finale `run_demo_compatibility_tests.py --disposable-postgres
+127.0.0.1:10407,127.0.0.1:55448 --pg-bin-dir "C:/Program Files/PostgreSQL/18/bin"
+--output-dir tmp/e73-lot08-demo-complete02` a terminé avec le code 0. La base
+de construction jetable a été recréée avant cette exécution après le retrait
+d'espaces de fin de ligne dans v275 ; aucune empreinte de migration appliquée
+n'a été contournée. Les sources et l'index sont restés figés pendant la preuve.
+
+La revue indépendante a corrigé la fenêtre +30 jours dans les reprises et la
+projection du rapport pour ne pas restituer de compteur technique hors contrat.
+Les contrôles globaux ont également révélé deux réponses anciennes non décrites
+(batch d'exemplaires et demande de mot de passe), désormais modélisées. Les
+premiers contrôles de recensement ont signalé des classes sans preuve dédiée ;
+leurs résultats ne sont pas présentés comme une suite verte.
+
+La [procédure Communication](../../exploitation/exploitation/communiquer-participants-animation.md)
+décrit réglages, préférences, workers, rotations de clés et reprise. Les contenus
+des messages suivent la politique Live existante ; le raccord transversal aux
+gels/purges et la preuve après restauration des nouvelles familles restent au
+lot 10. Les essais utilisateurs Localeo/Martignas et toute capacité hébergée sont
+non exécutés. Aucun fournisseur réel ni environnement partagé n'a été utilisé.

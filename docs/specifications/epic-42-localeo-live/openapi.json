@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Live - API backend Epic 42",
     "description": "Vue OpenAPI 3.1 des contrats publics, editoriaux et techniques de Localeo Live.",
-    "version": "1.0.0+bb4e1e8"
+    "version": "1.0.0+44c6429"
   },
   "paths": {
     "/public/exploitation/activites-locales/metriques": {
@@ -3604,6 +3604,1066 @@
         }
       }
     },
+    "/public/localeo-live/participations/{participant_id}/preferences-organisateur": {
+      "get": {
+        "tags": [
+          "Messages organisateur"
+        ],
+        "summary": "Lire Preference",
+        "operationId": "lire_preference_public_localeo_live_participations__participant_id__preferences_organisateur_get",
+        "parameters": [
+          {
+            "name": "participant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Participant Id"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PreferencePayload"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Demande invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentification requise",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Action non autorisée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ressource ou reçu introuvable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Version, aperçu ou état en conflit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Accès expiré",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Document trop volumineux",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Encodage non supporté",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Contenu invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Fréquence dépassée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Transaction indisponible, consulter le reçu",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Messages organisateur"
+        ],
+        "summary": "Decider Preference",
+        "operationId": "decider_preference_public_localeo_live_participations__participant_id__preferences_organisateur_put",
+        "parameters": [
+          {
+            "name": "participant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Participant Id"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "name": "idempotency-key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PreferenceRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PreferencePayload"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Demande invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentification requise",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Action non autorisée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ressource ou reçu introuvable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Version, aperçu ou état en conflit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Accès expiré",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Document trop volumineux",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Encodage non supporté",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Contenu invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Fréquence dépassée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Transaction indisponible, consulter le reçu",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/localeo-live/participations/{participant_id}/preferences-organisateur/commandes/{cle}": {
+      "get": {
+        "tags": [
+          "Messages organisateur"
+        ],
+        "summary": "Recu Preference",
+        "operationId": "recu_preference_public_localeo_live_participations__participant_id__preferences_organisateur_commandes__cle__get",
+        "parameters": [
+          {
+            "name": "participant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Participant Id"
+            }
+          },
+          {
+            "name": "cle",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Cle"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecuPreferencePayload"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Demande invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentification requise",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Action non autorisée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ressource ou reçu introuvable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Version, aperçu ou état en conflit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Accès expiré",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Document trop volumineux",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Encodage non supporté",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Contenu invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Fréquence dépassée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Transaction indisponible, consulter le reçu",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/localeo-live/installations/{installation_id}/participations-personnelles": {
+      "post": {
+        "tags": [
+          "Messages organisateur"
+        ],
+        "summary": "Lier Participation",
+        "operationId": "lier_participation_public_localeo_live_installations__installation_id__participations_personnelles_post",
+        "parameters": [
+          {
+            "name": "installation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Installation Id"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          },
+          {
+            "name": "x-localeo-live-secret",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Localeo-Live-Secret"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LiaisonRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LiaisonPayload"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Demande invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentification requise",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Action non autorisée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ressource ou reçu introuvable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Version, aperçu ou état en conflit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Accès expiré",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Document trop volumineux",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Encodage non supporté",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Contenu invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Fréquence dépassée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Transaction indisponible, consulter le reçu",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/localeo-live/installations/{installation_id}/messages": {
+      "get": {
+        "tags": [
+          "Messages organisateur"
+        ],
+        "summary": "Lister Messages",
+        "operationId": "lister_messages_public_localeo_live_installations__installation_id__messages_get",
+        "parameters": [
+          {
+            "name": "installation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Installation Id"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 300
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "x-localeo-live-secret",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Localeo-Live-Secret"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageMessagesPayload"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Demande invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentification requise",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Action non autorisée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ressource ou reçu introuvable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Version, aperçu ou état en conflit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Accès expiré",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Document trop volumineux",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Encodage non supporté",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Contenu invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Fréquence dépassée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Transaction indisponible, consulter le reçu",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/localeo-live/installations/{installation_id}/messages/{nature}/{message_id}/lecture": {
+      "post": {
+        "tags": [
+          "Messages organisateur"
+        ],
+        "summary": "Lire Message",
+        "operationId": "lire_message_public_localeo_live_installations__installation_id__messages__nature___message_id__lecture_post",
+        "parameters": [
+          {
+            "name": "installation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Installation Id"
+            }
+          },
+          {
+            "name": "nature",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "enum": [
+                "ORGANISATEUR",
+                "NOTIFICATION"
+              ],
+              "type": "string",
+              "title": "Nature"
+            }
+          },
+          {
+            "name": "message_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Message Id"
+            }
+          },
+          {
+            "name": "x-localeo-live-secret",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Localeo-Live-Secret"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LecturePayload"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Demande invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentification requise",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Action non autorisée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ressource ou reçu introuvable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Version, aperçu ou état en conflit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Accès expiré",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Document trop volumineux",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Encodage non supporté",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Contenu invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Fréquence dépassée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Transaction indisponible, consulter le reçu",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/public/animation-locale/animations/{animation_id}/supports/{step_id}": {
       "get": {
         "tags": [
@@ -6735,6 +7795,164 @@
         ],
         "title": "AjustementCreditRequest"
       },
+      "AlerteMutationPayload": {
+        "properties": {
+          "operation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Operation Id"
+          },
+          "rejoue": {
+            "type": "boolean",
+            "title": "Rejoue"
+          },
+          "alerte": {
+            "$ref": "#/components/schemas/AlertePayload"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "operation_id",
+          "rejoue",
+          "alerte"
+        ],
+        "title": "AlerteMutationPayload"
+      },
+      "AlertePayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "commune_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Commune Id"
+          },
+          "periode_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Periode Id"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "OUVERTE",
+              "FERMEE"
+            ],
+            "title": "Statut"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At"
+          },
+          "close_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Close At"
+          },
+          "nombre_destinataires": {
+            "type": "integer",
+            "title": "Nombre Destinataires"
+          },
+          "nombre_signalements": {
+            "type": "integer",
+            "title": "Nombre Signalements"
+          },
+          "maximum_tentatives_24h": {
+            "type": "integer",
+            "title": "Maximum Tentatives 24H"
+          },
+          "dernier_seuil": {
+            "type": "integer",
+            "title": "Dernier Seuil"
+          },
+          "politique_version": {
+            "type": "integer",
+            "title": "Politique Version"
+          },
+          "email_statut": {
+            "type": "string",
+            "enum": [
+              "NON_CONFIGURE",
+              "EN_FILE"
+            ],
+            "title": "Email Statut"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "commune_id",
+          "periode_id",
+          "version",
+          "statut",
+          "created_at",
+          "updated_at",
+          "close_at",
+          "nombre_destinataires",
+          "nombre_signalements",
+          "maximum_tentatives_24h",
+          "dernier_seuil",
+          "politique_version",
+          "email_statut"
+        ],
+        "title": "AlertePayload"
+      },
+      "AlertesPage": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/AlertePayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "next_cursor",
+          "has_more"
+        ],
+        "title": "AlertesPage"
+      },
       "AlertesVision360AnimationPayload": {
         "properties": {
           "items": {
@@ -7730,6 +8948,75 @@
         ],
         "title": "AnnulerValidationAnimationRequest"
       },
+      "ApercuCampagneDTO": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "campagne_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Campagne Version"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "ciblees": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Ciblees"
+          },
+          "autorisees": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Autorisees"
+          },
+          "exclues_preferences": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Exclues Preferences"
+          },
+          "exclues_frequence": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Exclues Frequence"
+          },
+          "sans_push": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Sans Push"
+          },
+          "contexte": {
+            "$ref": "#/components/schemas/ContexteCommunicationDTO"
+          },
+          "avertissements": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Avertissements"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "campagne_version",
+          "created_at",
+          "ciblees",
+          "autorisees",
+          "exclues_preferences",
+          "exclues_frequence",
+          "sans_push",
+          "contexte",
+          "avertissements"
+        ],
+        "title": "ApercuCampagneDTO"
+      },
       "ApercuCommunicationRequest": {
         "properties": {
           "type_communication": {
@@ -8586,6 +9873,34 @@
         "additionalProperties": false,
         "type": "object",
         "title": "BatchExemplaires"
+      },
+      "BatchExemplairesResultat": {
+        "properties": {
+          "simulation": {
+            "type": "boolean",
+            "title": "Simulation"
+          },
+          "traites": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Traites"
+          },
+          "operations": {
+            "items": {
+              "$ref": "#/components/schemas/OperationExemplairesResultat"
+            },
+            "type": "array",
+            "title": "Operations"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "simulation",
+          "traites",
+          "operations"
+        ],
+        "title": "BatchExemplairesResultat"
       },
       "BatchHealthItemPayload": {
         "properties": {
@@ -9774,6 +11089,189 @@
           "ton"
         ],
         "title": "BriefGenerationPasseportSnapshot"
+      },
+      "CampagneDTO": {
+        "properties": {
+          "titre": {
+            "type": "string",
+            "maxLength": 120,
+            "minLength": 1,
+            "title": "Titre"
+          },
+          "corps": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 1,
+            "title": "Corps"
+          },
+          "groupe": {
+            "type": "string",
+            "enum": [
+              "TOUS",
+              "PARCOURS_NON_TERMINE",
+              "PARCOURS_TERMINE",
+              "GAGNANTS"
+            ],
+            "title": "Groupe"
+          },
+          "deeplink": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 255
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Deeplink"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "animation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animation Id"
+          },
+          "commune_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Commune Id"
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Version"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "BROUILLON",
+              "PROGRAMMEE",
+              "PRETE",
+              "EN_COURS",
+              "TERMINEE",
+              "TERMINEE_PARTIELLE",
+              "ANNULEE_AVANT_DEMARRAGE",
+              "SUSPENDUE_DROIT",
+              "SUSPENDUE_QUOTA",
+              "SUSPENDUE_HABILITATION",
+              "HORS_FENETRE",
+              "SANS_DESTINATAIRE",
+              "ECHEC_REPRENABLE"
+            ],
+            "title": "Statut"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At"
+          },
+          "programmee_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Programmee At"
+          },
+          "commencee_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Commencee At"
+          },
+          "terminee_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Terminee At"
+          },
+          "timezone": {
+            "type": "string",
+            "const": "Europe/Paris",
+            "title": "Timezone"
+          },
+          "raison_suspension": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Raison Suspension"
+          },
+          "phase": {
+            "type": "string",
+            "enum": [
+              "AUCUNE",
+              "CAPTURE",
+              "PREPARATION_AUDIENCE",
+              "DIFFUSION",
+              "TERMINEE"
+            ],
+            "title": "Phase"
+          },
+          "progression": {
+            "$ref": "#/components/schemas/ProgressionCampagneDTO"
+          },
+          "actions_disponibles": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Actions Disponibles"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "titre",
+          "corps",
+          "groupe",
+          "id",
+          "animation_id",
+          "commune_id",
+          "version",
+          "statut",
+          "created_at",
+          "updated_at",
+          "programmee_at",
+          "commencee_at",
+          "terminee_at",
+          "timezone",
+          "raison_suspension",
+          "phase",
+          "progression",
+          "actions_disponibles"
+        ],
+        "title": "CampagneDTO"
       },
       "CampagneTransfersStripePayload": {
         "properties": {
@@ -14308,6 +15806,32 @@
         ],
         "title": "Confirmation"
       },
+      "ConfirmationCampagneInput": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "apercu_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Apercu Id"
+          },
+          "confirme": {
+            "type": "boolean",
+            "title": "Confirme"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "apercu_id",
+          "confirme"
+        ],
+        "title": "ConfirmationCampagneInput"
+      },
       "ConfirmationCommunicationRequest": {
         "properties": {
           "expected_version": {
@@ -14629,6 +16153,52 @@
         ],
         "title": "ContactCommercantMisAJourPayload"
       },
+      "ContenuCampagneInput": {
+        "properties": {
+          "titre": {
+            "type": "string",
+            "maxLength": 120,
+            "minLength": 1,
+            "title": "Titre"
+          },
+          "corps": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 1,
+            "title": "Corps"
+          },
+          "groupe": {
+            "type": "string",
+            "enum": [
+              "TOUS",
+              "PARCOURS_NON_TERMINE",
+              "PARCOURS_TERMINE",
+              "GAGNANTS"
+            ],
+            "title": "Groupe"
+          },
+          "deeplink": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 255
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Deeplink"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "titre",
+          "corps",
+          "groupe"
+        ],
+        "title": "ContenuCampagneInput"
+      },
       "ContenuCommercantPasseport": {
         "properties": {
           "commercantId": {
@@ -14751,6 +16321,61 @@
           "notifications_non_lues"
         ],
         "title": "ContexteCommercantAnimationPayload"
+      },
+      "ContexteCommunicationDTO": {
+        "properties": {
+          "module_disponible": {
+            "type": "boolean",
+            "title": "Module Disponible"
+          },
+          "communication_autorisee": {
+            "type": "boolean",
+            "title": "Communication Autorisee"
+          },
+          "quota": {
+            "$ref": "#/components/schemas/QuotaCommunicationDTO"
+          },
+          "frequence": {
+            "$ref": "#/components/schemas/FrequenceCommunicationDTO"
+          },
+          "fenetre": {
+            "$ref": "#/components/schemas/FenetreCommunicationDTO"
+          },
+          "liens_autorises": {
+            "items": {
+              "$ref": "#/components/schemas/LienCommunicationDTO"
+            },
+            "type": "array",
+            "title": "Liens Autorises"
+          },
+          "actions_disponibles": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Actions Disponibles"
+          },
+          "motifs_indisponibilite": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Motifs Indisponibilite"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "module_disponible",
+          "communication_autorisee",
+          "quota",
+          "frequence",
+          "fenetre",
+          "liens_autorises",
+          "actions_disponibles",
+          "motifs_indisponibilite"
+        ],
+        "title": "ContexteCommunicationDTO"
       },
       "ContextePortailAnimationPayload": {
         "properties": {
@@ -15391,6 +17016,7 @@
               "enum": [
                 "commercants:perimetres_gerer",
                 "abonnements:modules_octroyer",
+                "animation:sollicitation_gerer",
                 "abonnements:remboursements_decider"
               ]
             },
@@ -17651,6 +19277,20 @@
         ],
         "title": "DemandeMotDePasseAnimation"
       },
+      "DemandeMotDePasseAnimationResultat": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Message"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "message"
+        ],
+        "title": "DemandeMotDePasseAnimationResultat"
+      },
       "DemandeMotDePasseOublieCommercantPayload": {
         "properties": {
           "message": {
@@ -19776,6 +21416,58 @@
           "erreur"
         ],
         "title": "EchecReconciliationCommandeLotsPayload"
+      },
+      "EditionCampagneInput": {
+        "properties": {
+          "titre": {
+            "type": "string",
+            "maxLength": 120,
+            "minLength": 1,
+            "title": "Titre"
+          },
+          "corps": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 1,
+            "title": "Corps"
+          },
+          "groupe": {
+            "type": "string",
+            "enum": [
+              "TOUS",
+              "PARCOURS_NON_TERMINE",
+              "PARCOURS_TERMINE",
+              "GAGNANTS"
+            ],
+            "title": "Groupe"
+          },
+          "deeplink": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 255
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Deeplink"
+          },
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "titre",
+          "corps",
+          "groupe",
+          "expected_version"
+        ],
+        "title": "EditionCampagneInput"
       },
       "EditionResponse": {
         "properties": {
@@ -22192,6 +23884,74 @@
         ],
         "title": "FeedbackPrestationSoumisPayload"
       },
+      "FenetreCommunicationDTO": {
+        "properties": {
+          "debut_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Debut At"
+          },
+          "fin_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fin At"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "OUVERTE",
+              "NON_PUBLIEE",
+              "FERMEE",
+              "A_VERIFIER"
+            ],
+            "title": "Statut"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "debut_at",
+          "fin_at",
+          "statut"
+        ],
+        "title": "FenetreCommunicationDTO"
+      },
+      "FermerAlerteInput": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 1,
+            "title": "Motif"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "motif"
+        ],
+        "title": "FermerAlerteInput"
+      },
       "FeuilleDTO": {
         "properties": {
           "id": {
@@ -23204,6 +24964,27 @@
           "denominateur"
         ],
         "title": "FractionPayload"
+      },
+      "FrequenceCommunicationDTO": {
+        "properties": {
+          "limite_24h": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Limite 24H"
+          },
+          "politique_version": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Politique Version"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "limite_24h",
+          "politique_version"
+        ],
+        "title": "FrequenceCommunicationDTO"
       },
       "GainAnimationPayload": {
         "properties": {
@@ -26709,6 +28490,44 @@
         "type": "object",
         "title": "LancerTirageAnimationRequest"
       },
+      "LectureCampagneDTO": {
+        "properties": {
+          "campagne": {
+            "$ref": "#/components/schemas/CampagneDTO"
+          },
+          "contexte": {
+            "$ref": "#/components/schemas/ContexteCommunicationDTO"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "campagne",
+          "contexte"
+        ],
+        "title": "LectureCampagneDTO"
+      },
+      "LecturePayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "lue_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Lue At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "lue_at"
+        ],
+        "title": "LecturePayload"
+      },
       "LectureResponse": {
         "properties": {
           "id": {
@@ -26895,6 +28714,47 @@
         ],
         "title": "LeverGelConservationInput"
       },
+      "LiaisonPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "participant_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Participant Id"
+          },
+          "lie": {
+            "type": "boolean",
+            "title": "Lie"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "participant_id",
+          "lie"
+        ],
+        "title": "LiaisonPayload"
+      },
+      "LiaisonRequest": {
+        "properties": {
+          "participant_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Participant Id"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "participant_id"
+        ],
+        "title": "LiaisonRequest"
+      },
       "LibererLots": {
         "properties": {
           "expected_version": {
@@ -26961,6 +28821,25 @@
           "href"
         ],
         "title": "LienAudit"
+      },
+      "LienCommunicationDTO": {
+        "properties": {
+          "valeur": {
+            "type": "string",
+            "title": "Valeur"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "valeur",
+          "libelle"
+        ],
+        "title": "LienCommunicationDTO"
       },
       "LienCourtResolutionPayload": {
         "properties": {
@@ -28535,6 +30414,93 @@
         ],
         "title": "MessageContactPayload"
       },
+      "MessagePayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "nature": {
+            "type": "string",
+            "enum": [
+              "ORGANISATEUR",
+              "NOTIFICATION"
+            ],
+            "title": "Nature"
+          },
+          "categorie": {
+            "type": "string",
+            "title": "Categorie"
+          },
+          "titre": {
+            "type": "string",
+            "title": "Titre"
+          },
+          "corps": {
+            "type": "string",
+            "title": "Corps"
+          },
+          "deeplink": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Deeplink"
+          },
+          "date_creation": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Date Creation"
+          },
+          "lue_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lue At"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          },
+          "animation_nom": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Animation Nom"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "nature",
+          "categorie",
+          "titre",
+          "corps",
+          "deeplink",
+          "date_creation",
+          "lue_at",
+          "statut",
+          "animation_nom"
+        ],
+        "title": "MessagePayload"
+      },
       "MesureParcoursCommande": {
         "properties": {
           "parcours_id": {
@@ -29470,6 +31436,7 @@
                   "enum": [
                     "commercants:perimetres_gerer",
                     "abonnements:modules_octroyer",
+                    "animation:sollicitation_gerer",
                     "abonnements:remboursements_decider"
                   ]
                 },
@@ -31091,6 +33058,40 @@
         ],
         "title": "MouvementSuivi"
       },
+      "MutationCampagneDTO": {
+        "properties": {
+          "campagne": {
+            "$ref": "#/components/schemas/CampagneDTO"
+          },
+          "operation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Operation Id"
+          },
+          "rejoue": {
+            "type": "boolean",
+            "title": "Rejoue"
+          },
+          "apercu": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ApercuCampagneDTO"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "campagne",
+          "operation_id",
+          "rejoue"
+        ],
+        "title": "MutationCampagneDTO"
+      },
       "MutationLigneLotExterneInput": {
         "properties": {
           "expected_version": {
@@ -31851,6 +33852,71 @@
           "status"
         ],
         "title": "OperationAnimationPayload"
+      },
+      "OperationExemplairesResultat": {
+        "properties": {
+          "traite": {
+            "type": "boolean",
+            "title": "Traite"
+          },
+          "simulation": {
+            "type": "boolean",
+            "title": "Simulation"
+          },
+          "operation_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Operation Id"
+          },
+          "statut": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Statut"
+          },
+          "created_count": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created Count"
+          },
+          "erreur": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Erreur"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "traite",
+          "simulation"
+        ],
+        "title": "OperationExemplairesResultat"
       },
       "OptionDTO": {
         "properties": {
@@ -32623,6 +34689,44 @@
         ],
         "title": "PageBons"
       },
+      "PageCampagnesDTO": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/CampagneDTO"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More"
+          },
+          "contexte": {
+            "$ref": "#/components/schemas/ContexteCommunicationDTO"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "next_cursor",
+          "has_more",
+          "contexte"
+        ],
+        "title": "PageCampagnesDTO"
+      },
       "PageCommandes": {
         "properties": {
           "items": {
@@ -33251,6 +35355,40 @@
           "has_more"
         ],
         "title": "PageLots[ModeleLot]"
+      },
+      "PageMessagesPayload": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/MessagePayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "next_cursor",
+          "has_more"
+        ],
+        "title": "PageMessagesPayload"
       },
       "PageNotificationsPin": {
         "properties": {
@@ -36036,6 +38174,101 @@
         ],
         "title": "PolitiqueBumRequest"
       },
+      "PolitiqueInput": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Expected Version"
+          },
+          "limite_24h": {
+            "type": "integer",
+            "maximum": 2147483647.0,
+            "minimum": 1.0,
+            "title": "Limite 24H"
+          },
+          "multiplicateur_alerte": {
+            "type": "integer",
+            "maximum": 2147483647.0,
+            "minimum": 1.0,
+            "title": "Multiplicateur Alerte"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 1,
+            "title": "Motif"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "limite_24h",
+          "multiplicateur_alerte",
+          "motif"
+        ],
+        "title": "PolitiqueInput"
+      },
+      "PolitiqueMutationPayload": {
+        "properties": {
+          "operation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Operation Id"
+          },
+          "rejoue": {
+            "type": "boolean",
+            "title": "Rejoue"
+          },
+          "politique": {
+            "$ref": "#/components/schemas/PolitiquePayload"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "operation_id",
+          "rejoue",
+          "politique"
+        ],
+        "title": "PolitiqueMutationPayload"
+      },
+      "PolitiquePayload": {
+        "properties": {
+          "commune_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Commune Id"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "limite_24h": {
+            "type": "integer",
+            "title": "Limite 24H"
+          },
+          "multiplicateur_alerte": {
+            "type": "integer",
+            "title": "Multiplicateur Alerte"
+          },
+          "seuil_alerte": {
+            "type": "integer",
+            "title": "Seuil Alerte"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "commune_id",
+          "version",
+          "limite_24h",
+          "multiplicateur_alerte",
+          "seuil_alerte"
+        ],
+        "title": "PolitiquePayload"
+      },
       "PolitiqueRequest": {
         "properties": {
           "changements": {
@@ -36176,6 +38409,107 @@
           "amount"
         ],
         "title": "PosteSuivi"
+      },
+      "PreferencePayload": {
+        "properties": {
+          "participant_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Participant Id"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "autorise": {
+            "type": "boolean",
+            "title": "Autorise"
+          },
+          "texte_version": {
+            "type": "string",
+            "title": "Texte Version"
+          },
+          "texte": {
+            "type": "string",
+            "title": "Texte"
+          },
+          "accepte_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Accepte At"
+          },
+          "retire_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Retire At"
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "participant_id",
+          "version",
+          "autorise",
+          "texte_version",
+          "texte",
+          "accepte_at",
+          "retire_at",
+          "updated_at"
+        ],
+        "title": "PreferencePayload"
+      },
+      "PreferenceRequest": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Expected Version"
+          },
+          "autorise": {
+            "type": "boolean",
+            "title": "Autorise"
+          },
+          "texte_version": {
+            "type": "string",
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Texte Version"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "autorise",
+          "texte_version"
+        ],
+        "title": "PreferenceRequest"
       },
       "PreferencesLiveRequest": {
         "properties": {
@@ -37732,6 +40066,90 @@
         ],
         "title": "ProfilLocaleoCommande"
       },
+      "ProgrammationCampagneInput": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "apercu_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Apercu Id"
+          },
+          "confirme": {
+            "type": "boolean",
+            "title": "Confirme"
+          },
+          "programmee_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Programmee At"
+          },
+          "timezone": {
+            "type": "string",
+            "const": "Europe/Paris",
+            "title": "Timezone"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "apercu_id",
+          "confirme",
+          "programmee_at",
+          "timezone"
+        ],
+        "title": "ProgrammationCampagneInput"
+      },
+      "ProgressionCampagneDTO": {
+        "properties": {
+          "audience_ciblee": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Audience Ciblee"
+          },
+          "audience_preparee": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Audience Preparee"
+          },
+          "candidats_traites": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Candidats Traites"
+          },
+          "messages_live": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Messages Live"
+          },
+          "exclus": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Exclus"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "audience_ciblee",
+          "audience_preparee",
+          "candidats_traites",
+          "messages_live",
+          "exclus"
+        ],
+        "title": "ProgressionCampagneDTO"
+      },
       "ProgressionParticipant": {
         "properties": {
           "terminees": {
@@ -39143,6 +41561,77 @@
         ],
         "title": "QualificationCommande"
       },
+      "QuotaCommunicationDTO": {
+        "properties": {
+          "unite": {
+            "type": "string",
+            "const": "CAMPAGNE",
+            "title": "Unite"
+          },
+          "periode": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Periode"
+          },
+          "limite": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Limite"
+          },
+          "consomme": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Consomme"
+          },
+          "disponible": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Disponible"
+          },
+          "controle_statut": {
+            "type": "string",
+            "title": "Controle Statut"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "unite",
+          "periode",
+          "limite",
+          "consomme",
+          "disponible",
+          "controle_statut"
+        ],
+        "title": "QuotaCommunicationDTO"
+      },
       "QuotaGenerationPayload": {
         "properties": {
           "partenaireId": {
@@ -39243,6 +41732,118 @@
           "disponible"
         ],
         "title": "QuotaModule"
+      },
+      "RapportCampagneDTO": {
+        "properties": {
+          "campagne_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Campagne Id"
+          },
+          "calcule_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Calcule At"
+          },
+          "ciblees": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Ciblees"
+          },
+          "autorisees": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Autorisees"
+          },
+          "messages_live": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Messages Live"
+          },
+          "exclus_preferences": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Exclus Preferences"
+          },
+          "exclus_frequence": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Exclus Frequence"
+          },
+          "exclus_acces": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Exclus Acces"
+          },
+          "sans_push": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Sans Push"
+          },
+          "push_en_attente": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Push En Attente"
+          },
+          "push_remis_service": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Push Remis Service"
+          },
+          "push_echecs": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Push Echecs"
+          },
+          "push_incertains": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Push Incertains"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "BROUILLON",
+              "PROGRAMMEE",
+              "PRETE",
+              "EN_COURS",
+              "TERMINEE",
+              "TERMINEE_PARTIELLE",
+              "ANNULEE_AVANT_DEMARRAGE",
+              "SUSPENDUE_DROIT",
+              "SUSPENDUE_QUOTA",
+              "SUSPENDUE_HABILITATION",
+              "HORS_FENETRE",
+              "SANS_DESTINATAIRE",
+              "ECHEC_REPRENABLE"
+            ],
+            "title": "Statut"
+          },
+          "reprise_disponible": {
+            "type": "boolean",
+            "title": "Reprise Disponible"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "campagne_id",
+          "calcule_at",
+          "ciblees",
+          "autorisees",
+          "messages_live",
+          "exclus_preferences",
+          "exclus_frequence",
+          "exclus_acces",
+          "sans_push",
+          "push_en_attente",
+          "push_remis_service",
+          "push_echecs",
+          "push_incertains",
+          "statut",
+          "reprise_disponible"
+        ],
+        "title": "RapportCampagneDTO"
       },
       "RapportPurgePayload": {
         "properties": {
@@ -39856,6 +42457,59 @@
         ],
         "title": "ReconciliationInventaire"
       },
+      "ReconfirmationCampagneInput": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "apercu_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Apercu Id"
+          },
+          "confirme": {
+            "type": "boolean",
+            "title": "Confirme"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "IMMEDIAT",
+              "PROGRAMME"
+            ],
+            "title": "Mode"
+          },
+          "programmee_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Programmee At"
+          },
+          "timezone": {
+            "type": "string",
+            "const": "Europe/Paris",
+            "title": "Timezone"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "apercu_id",
+          "confirme",
+          "mode",
+          "timezone"
+        ],
+        "title": "ReconfirmationCampagneInput"
+      },
       "RecuAttestationPayload": {
         "properties": {
           "id": {
@@ -40394,6 +43048,25 @@
           "exploitationRevision"
         ],
         "title": "RecuNeutralisation"
+      },
+      "RecuPreferencePayload": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "CONFIRMEE",
+            "title": "Status"
+          },
+          "result": {
+            "$ref": "#/components/schemas/PreferencePayload"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "result"
+        ],
+        "title": "RecuPreferencePayload"
       },
       "RecuPreparationPayload": {
         "properties": {
@@ -46954,6 +49627,21 @@
           "observations"
         ],
         "title": "VerifierPoiInput"
+      },
+      "VersionCampagneInput": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version"
+        ],
+        "title": "VersionCampagneInput"
       },
       "VersionCommande": {
         "properties": {

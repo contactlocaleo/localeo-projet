@@ -25,6 +25,10 @@ La [procédure de préparation accompagnée](../../exploitation/exploitation/pre
 décrit le suivi ERP/portail, le calendrier, la validation terrain et les alertes
 du lot 07. Ses preuves figurent dans le suivi de réalisation.
 
+La [procédure de communication participants](../../exploitation/exploitation/communiquer-participants-animation.md)
+décrit les préférences Live, les campagnes, leurs quotas et les alertes du lot 08,
+ainsi que les réglages et traitements préparés pour une ouverture ultérieure.
+
 | Document | Contenu |
 | --- | --- |
 | [Architecture et contrats](architecture-contrats.md) | Propriétaires, invariants, transactions, producteurs/consommateurs, compatibilité, migrations, conservation et impacts ERP/CRM/Atelier |
