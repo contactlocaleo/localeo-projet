@@ -15,6 +15,7 @@ leurs impacts identifiés sur les autres applications.
 | Écran ou commande ERP | [Back-office](conventions-backoffice.md) | Navigation rattachée au domaine ; invariants identiques aux API/batchs ; ORM réservé aux responsabilités techniques des vues et adaptateurs. |
 | Email système | [Charte email](charte-emails-localeo.md) | Rendu commun, échappement, QR/liens/texte conservés ; tests et aperçus adaptés, sans envoi réel implicite. |
 | Persistance ou intégration | [Architecture](architecture-solution.md), [guide opérateur](../../exploitation/technique/reference-guide-exploitation-plateforme.md) | Ports et mapping explicites, migrations additives/checksums préservés, documents binaires hors base selon leur contrat ; tests d'adaptateurs, pas d'accès à une base d'exploitation. |
+| Liste, recherche, agrégation, export ou hausse de trafic | [Performance et volumétrie](performance-volumetrie.md) | Filtrage/pagination en stockage, lectures et mémoire bornées, index reliés aux requêtes, absence de N+1, transactions/worker bornés ; plans PostgreSQL et mesures séparant volume et trafic, budgets déclarés avant recette. |
 
 Avant de coder, identifier les invariants et transitions avant les endpoints et
 services applicatifs. Une correction courte peut le faire dans son plan/compte

@@ -66,7 +66,17 @@ Identifier producteur, source canonique, générateurs et consommateurs réels. 
 
 Décrire la persistance affectée, la migration des données existantes et la reprise en cas d'échec. Identifier les adaptations du générateur de démonstration, des fixtures et de la restauration ; préciser les scénarios à tester. Justifier une absence d'impact plutôt que la supposer.
 
-## Securite / audit / idempotence
+## Performance et volumétrie
+
+Appliquer la [convention transverse](../transverse/performance-volumetrie.md). Pour les chemins concernés, remplir une ligne par famille de requêtes/traitements ; justifier « sans impact » si aucune lecture, écriture, volumétrie ou fréquence ne change.
+
+| Parcours / propriétaire | Population et trafic | Filtres, tri, projection et borne | Accès / index attendu | Mémoire, transactions et reprise | Budget et preuve prévue puis mesurée |
+| --- | --- | --- | --- | --- | --- |
+| API, ERP, frontend ou worker | Total, tenant actif, historique, concurrence | Page/lot, enfants et total éventuel | Clés, égalités, plages, index et plan à vérifier | Lots, verrous, cache, saturation | Requêtes, lignes/objets lus, p95/p99, mémoire, débit ; N/10N et charge mixte |
+
+Identifier les opérations nécessairement proportionnelles au volume et leur exécution durable. Décrire compatibilité des curseurs, migrations d’index et coûts d’écriture. Définir les bornes de conception maintenant ; compléter les budgets de capacité et preuves E59 avant activation, sans présenter une cible comme mesurée.
+
+## Sécurité, audit et idempotence
 
 Seulement si concerne.
 

@@ -40,7 +40,11 @@ Les contrats peuvent etre exposes en trois vues :
 - protected : routes avec authentification applicative ;
 - internal : routes reservees a l'exploitation interne, aux batchs ou aux integrations controlees.
 
-## Migration
+## Listes et coût des lectures
+
+Appliquer la [convention performance et volumétrie](performance-volumetrie.md) aux nouvelles listes et aux lectures modifiées : pagination effective côté stockage, filtres d’accès avant limite, tri total, curseur par clé, `limit` par défaut 25 et maximum 100, enrichissements bornés et absence de total exhaustif systématique. Le schéma documente curseur, bornes, filtres/tris, cohérence de navigation et erreurs. Les sélecteurs, enfants de fiche et routes internes sont concernés. Les anciennes routes conservent leur contrat jusqu’à une migration explicite de leurs consommateurs ; leur dette n’autorise pas une nouvelle lecture non bornée.
+
+## Migration des chemins
 
 Pour les reorganisations structurelles type EPIC 40, la cible est une migration one-shot sans coexistence durable entre anciens et nouveaux chemins.
 

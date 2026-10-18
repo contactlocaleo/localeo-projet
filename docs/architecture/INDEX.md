@@ -2,6 +2,8 @@
 
 Conventions transverses, décisions et architecture de chaque application.
 
+- [Performance et volumétrie](transverse/performance-volumetrie.md) : règles de conception transverses et preuves attendues.
+
 - [backend/README.md](backend/README.md)
 - [backend/backoffice/dashboard-commercial-backoffice.md](backend/backoffice/dashboard-commercial-backoffice.md)
 - [backend/backoffice/design-system-interfaces-admin-specifiques.md](backend/backoffice/design-system-interfaces-admin-specifiques.md)

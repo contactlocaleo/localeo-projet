@@ -27,6 +27,8 @@ La conception rapproche le comportement existant vérifié et le comportement ci
 
 Un contrat partagé indique son producteur, sa source canonique, ses générateurs et consommateurs. La spécification précise la compatibilité avec les données et versions existantes, les migrations nécessaires et l'ordre de livraison lorsque les applications ne peuvent évoluer indépendamment. Ne pas inventer de compatibilité ascendante ni de migration réversible sans preuve.
 
+Pour toute évolution de lecture, écriture, traitement ou trafic, appliquer la [convention performance et volumétrie](../architecture/transverse/performance-volumetrie.md) : bornes de page/lot, requêtes et index, mémoire, concurrence et saturation, puis preuves N/10N et charge mixte. Intégrer ces points à la conception canonique avec le modèle d’architecture. Les contrôles de liens et la présence d’un index ne prouvent pas la tenue en charge ; les budgets chiffrés et mesures de capacité sont requis avant activation du périmètre concerné.
+
 ### Matrice de traçabilité
 
 Conserver cette matrice dans la spécification ou son bilan existant, pas dans un nouveau registre parallèle. Elle peut regrouper plusieurs critères partageant les mêmes impacts. « Sans objet » exige une raison ; « à examiner » n'équivaut pas à « aucun impact ».

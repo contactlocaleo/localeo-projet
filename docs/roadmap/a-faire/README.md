@@ -4,7 +4,7 @@ Spécifications V1 du 5 octobre : [E70 — PIN](../../specifications/epic-70-val
 
 [Retour à la roadmap](../README.md)
 
-Sept EPIC sont classées à faire. Les bilans techniques et réserves de chaque backlog restent conservés.
+Huit EPIC sont classées à faire. Les bilans techniques et réserves de chaque backlog restent conservés.
 
 - [EPIC 54 — Calendrier de l'Avent local](epic-54-calendrier-avent-local-backlog.md)
 - [EPIC 58 — Filtre annuel global Animation](epic-58-filtre-annuel-global-backlog.md)
@@ -13,6 +13,7 @@ Sept EPIC sont classées à faire. Les bilans techniques et réserves de chaque 
 - [EPIC 67 — Communautés de communes et coffrets intercommunaux](epic-67-communautes-communes-coffrets-intercommunaux-backlog.md)
 - [EPIC-MARKETPLACE-54 — Identité visuelle](epic-marketplace-54-harmonisation-identite-visuelle-marketplace-backlog.md)
 - [EPIC 71 — CRM de prospection Animation, commerçants et offre Pro](epic-71-crm-prospection-animation-coffrets-pro-backlog.md) : import XLSX Gironde V2, organisations/contacts/opportunités, carte communale, étapes et historique, tâches/rappels internes ; coffrets pour entreprises/CSE confirmés, [spécification V0.1](../../specifications/epic-71-crm-prospection/README.md) et 24 critères reliés aux preuves prévues.
+- [EPIC 73 — Localeo Animation et/ou Coffrets](epic-73-animation-et-ou-coffrets-backlog.md) : vente séparée ou combinée, lots libres externes ou bons numériques QR/PIN, modules achetables ou accordés sur souscription (import, chasse, Web Push organisateur vers les participants, non inclus par défaut ; notifications automatiques préservées), catalogue, périmètres ERP, onboarding/Pro et site `animations.localeo.city` partagé. Compléments SaaS : autonomie comptes/équipes/souscription, accompagnement/support, réemploi, valeur/coûts, réversibilité/reprise ; 38 US (32 P1, 6 P2 proposés), 63 critères, dix-huit arbitrages résolus, aucun ouvert recensé. [Spécification détaillée V1 du 17 octobre](../../specifications/epic-73-animation-et-ou-coffrets/README.md) disponible ; implémentation à réaliser.
 
 
 Le 5 octobre, E70 est étendue aux passages Animation et aux pannes du mobile commerçant ; elle compte désormais 34 critères. Le PIN est généré automatiquement : 7 jours par défaut, durée configurable jusqu’à 30 jours, notification Localeo Pro à chaque succès.
