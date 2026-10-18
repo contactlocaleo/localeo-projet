@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Live - API backend Epic 42",
     "description": "Vue OpenAPI 3.1 des contrats publics, editoriaux et techniques de Localeo Live.",
-    "version": "1.0.0+1cd9564"
+    "version": "1.0.0+bb4e1e8"
   },
   "paths": {
     "/public/exploitation/activites-locales/metriques": {
@@ -8012,6 +8012,26 @@
         ],
         "title": "ArchiverAnimationsRequest"
       },
+      "AttenteServicePayload": {
+        "properties": {
+          "startedAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Startedat"
+          },
+          "motifPublic": {
+            "type": "string",
+            "title": "Motifpublic"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "startedAt",
+          "motifPublic"
+        ],
+        "title": "AttenteServicePayload"
+      },
       "AttestationConfirmeePayload": {
         "properties": {
           "status": {
@@ -13785,6 +13805,29 @@
           "nombre_en_cours"
         ],
         "title": "CommuneSyntheseAnimationsPayload"
+      },
+      "ComplementServiceInput": {
+        "properties": {
+          "expectedVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expectedversion"
+          },
+          "texte": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Texte"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expectedVersion",
+          "texte"
+        ],
+        "title": "ComplementServiceInput"
       },
       "CompteurStatutSuivi": {
         "properties": {
@@ -20654,6 +20697,35 @@
         ],
         "title": "ErreurDTO"
       },
+      "EstimationServiceInput": {
+        "properties": {
+          "expectedVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expectedversion"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 3,
+            "pattern": "\\S",
+            "title": "Motif"
+          },
+          "estimation": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Estimation"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expectedVersion",
+          "motif",
+          "estimation"
+        ],
+        "title": "EstimationServiceInput"
+      },
       "EtapeCommercante": {
         "properties": {
           "lieu": {
@@ -21446,6 +21518,54 @@
         ],
         "title": "EvenementAnimationPayload"
       },
+      "EvenementServicePayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "type": {
+            "type": "string",
+            "title": "Type"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Createdat"
+          },
+          "textePublic": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Textepublic"
+          },
+          "acteurType": {
+            "type": "string",
+            "enum": [
+              "LOCALEO",
+              "ORGANISATEUR",
+              "SYSTEME"
+            ],
+            "title": "Acteurtype"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "createdAt",
+          "textePublic",
+          "acteurType"
+        ],
+        "title": "EvenementServicePayload"
+      },
       "ExecuterConservationBatchInput": {
         "properties": {
           "limit": {
@@ -22089,6 +22209,189 @@
           "libelle"
         ],
         "title": "FeuilleDTO"
+      },
+      "FileServicePreparationPayload": {
+        "properties": {
+          "operationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Operationid"
+          },
+          "animationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animationid"
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Version"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "A_COMPLETER",
+              "EN_PREPARATION",
+              "ATTENTE_COMPLEMENT",
+              "PRETE",
+              "ECHEC_A_REPRENDRE",
+              "ANNULEE"
+            ],
+            "title": "Statut"
+          },
+          "completeAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Completeat"
+          },
+          "targetDueAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Targetdueat"
+          },
+          "calendarVersion": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Calendarversion"
+          },
+          "calendarStatus": {
+            "type": "string",
+            "enum": [
+              "CONFIGURE",
+              "INDISPONIBLE"
+            ],
+            "title": "Calendarstatus"
+          },
+          "echeanceVersion": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Echeanceversion"
+          },
+          "revisedEstimateAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Revisedestimateat"
+          },
+          "enRetard": {
+            "type": "boolean",
+            "title": "Enretard"
+          },
+          "attenteCourante": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AttenteServicePayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "derniereRelanceAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Derniererelanceat"
+          },
+          "preparationRevision": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Preparationrevision"
+          },
+          "validationTerrain": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ValidationTerrainPayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "allowedActions": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Allowedactions"
+          },
+          "animationTitre": {
+            "type": "string",
+            "title": "Animationtitre"
+          },
+          "communeId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Communeid"
+          },
+          "communeNom": {
+            "type": "string",
+            "title": "Communenom"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "operationId",
+          "animationId",
+          "version",
+          "statut",
+          "completeAt",
+          "targetDueAt",
+          "calendarVersion",
+          "calendarStatus",
+          "echeanceVersion",
+          "revisedEstimateAt",
+          "enRetard",
+          "attenteCourante",
+          "derniereRelanceAt",
+          "preparationRevision",
+          "validationTerrain",
+          "allowedActions",
+          "animationTitre",
+          "communeId",
+          "communeNom"
+        ],
+        "title": "FileServicePreparationPayload"
       },
       "FiltresAchatsPaiement": {
         "properties": {
@@ -24557,6 +24860,17 @@
             "type": "array",
             "title": "Tentatives"
           },
+          "tentativesNextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tentativesnextcursor"
+          },
           "demande": {
             "anyOf": [
               {
@@ -24586,6 +24900,16 @@
             "anyOf": [
               {
                 "$ref": "#/components/schemas/ResultatFinalisationGenerationPayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "servicePreparation": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ServicePreparationPayload"
               },
               {
                 "type": "null"
@@ -26527,6 +26851,26 @@
           "sections"
         ],
         "title": "LectureResponse"
+      },
+      "LectureServicePayload": {
+        "properties": {
+          "servicePreparation": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ServicePreparationPayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "servicePreparation"
+        ],
+        "title": "LectureServicePayload"
       },
       "LeverGelConservationInput": {
         "properties": {
@@ -30492,6 +30836,29 @@
         ],
         "title": "MotifContactPayload"
       },
+      "MotifServiceInput": {
+        "properties": {
+          "expectedVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expectedversion"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 3,
+            "pattern": "\\S",
+            "title": "Motif"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expectedVersion",
+          "motif"
+        ],
+        "title": "MotifServiceInput"
+      },
       "MouvementReversementAReverserPayload": {
         "properties": {
           "mouvement_id": {
@@ -30742,6 +31109,60 @@
           "ligne"
         ],
         "title": "MutationLigneLotExterneInput"
+      },
+      "MutationServicePayload": {
+        "properties": {
+          "operationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Operationid"
+          },
+          "operationCommandeId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Operationcommandeid"
+          },
+          "rejoue": {
+            "type": "boolean",
+            "title": "Rejoue"
+          },
+          "servicePreparation": {
+            "$ref": "#/components/schemas/ServicePreparationPayload"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "operationId",
+          "operationCommandeId",
+          "rejoue",
+          "servicePreparation"
+        ],
+        "title": "MutationServicePayload"
+      },
+      "MutationTerrainPayload": {
+        "properties": {
+          "operationCommandeId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Operationcommandeid"
+          },
+          "rejoue": {
+            "type": "boolean",
+            "title": "Rejoue"
+          },
+          "terrain": {
+            "$ref": "#/components/schemas/TerrainPreparationPayload"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "operationCommandeId",
+          "rejoue",
+          "terrain"
+        ],
+        "title": "MutationTerrainPayload"
       },
       "NeutraliserEtapeInput": {
         "properties": {
@@ -33112,6 +33533,176 @@
         ],
         "title": "PageSalaries"
       },
+      "PageSelecteurPreparation_CommercantEligibleAnimationPayload_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/CommercantEligibleAnimationPayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          },
+          "hasMore": {
+            "type": "boolean",
+            "title": "Hasmore"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "nextCursor",
+          "hasMore"
+        ],
+        "title": "PageSelecteurPreparation[CommercantEligibleAnimationPayload]"
+      },
+      "PageSelecteurPreparation_PoiAnimationPayload_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/PoiAnimationPayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          },
+          "hasMore": {
+            "type": "boolean",
+            "title": "Hasmore"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "nextCursor",
+          "hasMore"
+        ],
+        "title": "PageSelecteurPreparation[PoiAnimationPayload]"
+      },
+      "PageSelecteurPreparation_TemplateGenerationPayload_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/TemplateGenerationPayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          },
+          "hasMore": {
+            "type": "boolean",
+            "title": "Hasmore"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "nextCursor",
+          "hasMore"
+        ],
+        "title": "PageSelecteurPreparation[TemplateGenerationPayload]"
+      },
+      "PageServicePayload_EvenementServicePayload_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/EvenementServicePayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          },
+          "hasMore": {
+            "type": "boolean",
+            "title": "Hasmore"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "nextCursor",
+          "hasMore"
+        ],
+        "title": "PageServicePayload[EvenementServicePayload]"
+      },
+      "PageServicePayload_FileServicePreparationPayload_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/FileServicePreparationPayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          },
+          "hasMore": {
+            "type": "boolean",
+            "title": "Hasmore"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "nextCursor",
+          "hasMore"
+        ],
+        "title": "PageServicePayload[FileServicePreparationPayload]"
+      },
       "PageSuiviCommerces": {
         "properties": {
           "items": {
@@ -33456,6 +34047,40 @@
           "nextCursor"
         ],
         "title": "PageTemplatesGenerationPayload"
+      },
+      "PageTentativesGenerationPayload": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/TentativeGenerationPayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          },
+          "hasMore": {
+            "type": "boolean",
+            "title": "Hasmore"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "nextCursor",
+          "hasMore"
+        ],
+        "title": "PageTentativesGenerationPayload"
       },
       "PageValidations": {
         "properties": {
@@ -42589,6 +43214,224 @@
         ],
         "title": "SectionsPaiement"
       },
+      "SelectionPreparation_CommercantEligibleAnimationPayload_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/CommercantEligibleAnimationPayload"
+            },
+            "type": "array",
+            "title": "Items"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items"
+        ],
+        "title": "SelectionPreparation[CommercantEligibleAnimationPayload]"
+      },
+      "SelectionPreparation_PoiAnimationPayload_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/PoiAnimationPayload"
+            },
+            "type": "array",
+            "title": "Items"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items"
+        ],
+        "title": "SelectionPreparation[PoiAnimationPayload]"
+      },
+      "SelectionPreparation_TemplateGenerationPayload_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/TemplateGenerationPayload"
+            },
+            "type": "array",
+            "title": "Items"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items"
+        ],
+        "title": "SelectionPreparation[TemplateGenerationPayload]"
+      },
+      "ServicePreparationPayload": {
+        "properties": {
+          "operationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Operationid"
+          },
+          "animationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animationid"
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Version"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "A_COMPLETER",
+              "EN_PREPARATION",
+              "ATTENTE_COMPLEMENT",
+              "PRETE",
+              "ECHEC_A_REPRENDRE",
+              "ANNULEE"
+            ],
+            "title": "Statut"
+          },
+          "completeAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Completeat"
+          },
+          "targetDueAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Targetdueat"
+          },
+          "calendarVersion": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Calendarversion"
+          },
+          "calendarStatus": {
+            "type": "string",
+            "enum": [
+              "CONFIGURE",
+              "INDISPONIBLE"
+            ],
+            "title": "Calendarstatus"
+          },
+          "echeanceVersion": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Echeanceversion"
+          },
+          "revisedEstimateAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Revisedestimateat"
+          },
+          "enRetard": {
+            "type": "boolean",
+            "title": "Enretard"
+          },
+          "attenteCourante": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AttenteServicePayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "derniereRelanceAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Derniererelanceat"
+          },
+          "preparationRevision": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Preparationrevision"
+          },
+          "validationTerrain": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ValidationTerrainPayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "allowedActions": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Allowedactions"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "operationId",
+          "animationId",
+          "version",
+          "statut",
+          "completeAt",
+          "targetDueAt",
+          "calendarVersion",
+          "calendarStatus",
+          "echeanceVersion",
+          "revisedEstimateAt",
+          "enRetard",
+          "attenteCourante",
+          "derniereRelanceAt",
+          "preparationRevision",
+          "validationTerrain",
+          "allowedActions"
+        ],
+        "title": "ServicePreparationPayload"
+      },
       "SessionAnimationPayload": {
         "properties": {
           "session_id": {
@@ -44386,6 +45229,65 @@
         ],
         "title": "TentativeGenerationPayload"
       },
+      "TerrainPreparationPayload": {
+        "properties": {
+          "animationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animationid"
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Version"
+          },
+          "preparationRevision": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Preparationrevision"
+          },
+          "empreintePreparation": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Empreintepreparation"
+          },
+          "validationTerrain": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ValidationTerrainPayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "allowedActions": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Allowedactions"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "animationId",
+          "version",
+          "preparationRevision",
+          "empreintePreparation",
+          "validationTerrain",
+          "allowedActions"
+        ],
+        "title": "TerrainPreparationPayload"
+      },
       "TerritoireAnimation": {
         "properties": {
           "communeId": {
@@ -45453,6 +46355,59 @@
         ],
         "title": "ValidationSessionCommercantPayload"
       },
+      "ValidationTerrainInput": {
+        "properties": {
+          "expectedVersion": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Expectedversion"
+          },
+          "preparationRevision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Preparationrevision"
+          },
+          "empreintePreparation": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Empreintepreparation"
+          },
+          "confirme": {
+            "type": "boolean",
+            "title": "Confirme"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expectedVersion",
+          "preparationRevision",
+          "empreintePreparation",
+          "confirme"
+        ],
+        "title": "ValidationTerrainInput"
+      },
+      "ValidationTerrainPayload": {
+        "properties": {
+          "preparationRevision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Preparationrevision"
+          },
+          "validatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Validatedat"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "preparationRevision",
+          "validatedAt"
+        ],
+        "title": "ValidationTerrainPayload"
+      },
       "VerificationExploitation": {
         "properties": {
           "confirme": {
@@ -46047,6 +47002,21 @@
           "render_revision"
         ],
         "title": "VersionResponse"
+      },
+      "VersionServiceInput": {
+        "properties": {
+          "expectedVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expectedversion"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expectedVersion"
+        ],
+        "title": "VersionServiceInput"
       },
       "VersionsAttestationPayload": {
         "properties": {

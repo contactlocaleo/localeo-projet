@@ -258,4 +258,41 @@ Cible initiale du 18 octobre : **10 communes, 10 000 participants au total sur c
 
 ## 9. Limites de conception et preuves à produire
 
+### Réalisation locale du lot 07
+
+Le service de préparation accompagnée possède son propre état et son calendrier
+de traitement, distincts des tentatives techniques de génération E55. Le domaine
+calcule les cinq jours ouvrés sur un calendrier explicitement fourni et figé ;
+l’application orchestre le suivi, les reçus et l’email ordinaire. Une erreur
+transitoire avec reprise automatique ne place pas prématurément le service en
+attente d’une intervention humaine. L’adaptateur des opérations stocke les
+instants UTC dans les colonnes historiques sans fuseau et compare leurs
+échéances dans cette même représentation.
+
+`v274_preparation_accompagnee.sql` ajoute le suivi, ses événements et la preuve
+terrain liée à l’animation, sa révision et son empreinte. Les opérations et
+tentatives restent les sources techniques E55 ; leurs listes projettent les
+seuls champs nécessaires à une page. Les tentatives ont une référence
+`operation_id` contrôlée par rapport à leur prompt, pour une recherche indexée
+sans parcourir tous les prompts. Les projections de commune des modèles et de
+tenant des opérations viennent de leur animation d’origine. Un historique
+ambigu ou incohérent fait échouer la migration atomiquement ; aucun rattachement
+n’est inventé. Le rejeu conserve les données et les mêmes index.
+
+Les listes du portail et de l’ERP utilisent des curseurs, 25 éléments par défaut
+et 100 au maximum. Les sélecteurs de lieux, modèles et commerces recherchent par
+préfixe normalisé avec index de portée ; la résolution des choix est limitée à
+100 IDs. Les listes d’opérations n’hydratent ni réponses de génération ni contexte
+volumineux. Les index de tenant/commune et ceux de la file globale répondent à
+des requêtes distinctes. Les preuves PostgreSQL locales et leurs cardinalités
+figurent dans le [suivi de réalisation](suivi-implementation.md).
+
+Les événements de service et preuves terrain relèvent de la preuve minimale
+Animation/T1 ; les reçus et erreurs techniques restent distincts en T8. Les
+dates de qualification, transition et validation sont leurs sources, pas la
+dernière lecture. Les emails utilisent la politique de l’outbox existante. Le
+calendrier figé ne contient aucune coordonnée participante. Les purges, gels et
+reprises après restauration de ces nouvelles familles sont à démontrer au lot 10
+avant mise en service, avec les familles des lots précédents.
+
 Les 147 décisions du backlog sont la référence produit ; pas de nouvelle fonctionnalité commerciale ou de tarif implicite. Les choix techniques ici (versions, objets, ordre transactionnel, contrats) préparent l’implémentation. Les sources applicatives décrivent un arbre local, dont des modifications préexistantes dans Animation ; elles ne prouvent pas un déploiement. L’OpenAPI futur, les migrations effectives, les mappings de conservation et les tests runtime seront vérifiés pendant l’implémentation ; leur absence aujourd’hui ne doit pas être assimilée à une réussite.

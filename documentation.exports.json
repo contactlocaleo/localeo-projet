@@ -504,6 +504,10 @@
     {
       "path": "docs/ops/formation/gerer-utilisateurs-internes.md",
       "source_path": "docs/specifications/epic-69-acces-internes/guide-backoffice.md"
+    },
+    {
+      "path": "docs/ops/exploitation/preparer-chasse-accompagnee.md",
+      "source_path": "docs/exploitation/exploitation/preparer-chasse-accompagnee.md"
     }
   ]
 }

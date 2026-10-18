@@ -21,6 +21,10 @@ décrit le parcours livré localement au lot 06, les décisions ERP, le worker e
 la conservation des fichiers. Les résultats sont consignés dans le suivi ;
 aucun environnement n’a été activé.
 
+La [procédure de préparation accompagnée](../../exploitation/exploitation/preparer-chasse-accompagnee.md)
+décrit le suivi ERP/portail, le calendrier, la validation terrain et les alertes
+du lot 07. Ses preuves figurent dans le suivi de réalisation.
+
 | Document | Contenu |
 | --- | --- |
 | [Architecture et contrats](architecture-contrats.md) | Propriétaires, invariants, transactions, producteurs/consommateurs, compatibilité, migrations, conservation et impacts ERP/CRM/Atelier |

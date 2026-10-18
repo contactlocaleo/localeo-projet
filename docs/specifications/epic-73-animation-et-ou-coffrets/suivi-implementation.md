@@ -25,8 +25,8 @@ Implémentation, bases jetables locales, tests isolés et commits locaux uniquem
 | 04 | US01–02,04 ; branche externe US07–08 | Backend, Animation, Marketplace/Live, Pro (contrat), Projet | Implémenté et vérifié localement ; Backend `7502282`, Animation `d0b92f7`, Marketplace `1473e05`, Pro `30aeed3`, sources dans le commit documentaire lot 04 ; branche numérique au lot 05 |
 | 05 | US05–10 ; complément numérique US07–08 | Backend, Animation, Commerçant, Marketplace/Live, Projet | Parcours implémentés et vérifiés localement ; commits et limites de conservation/performance ci-dessous ; aucune mise en service |
 | 06 | US19–20 ; import/deltas/reprise | Backend, Animation, Projet | Implémenté et vérifié localement ; Backend `bb4e1e8`, Animation `955fb94`, sources dans le commit documentaire du lot 06 ; preuves et limites ci-dessous |
-| 07 | US18,30 ; chasse et préparation accompagnée | Backend, Animation, Projet | En cours : service accompagné, calendrier explicite, préparation/validation terrain, sélecteurs paginés et suivi ERP/portail |
-| 08 | US21–22 ; communication participants | Backend, Animation, Marketplace/Live, Projet | À réaliser |
+| 07 | US18,30 ; chasse et préparation accompagnée | Backend, Animation, Projet | Implémenté et vérifié localement ; commits par dépôt, recette humaine et hébergement non exécutés |
+| 08 | US21–22 ; communication participants | Backend, Animation, Marketplace/Live, Projet | En cours : campagnes, préférences Live, quotas, fréquence et alertes internes |
 | 09 | US23,29,31–33 ; parcours/site/assistance/bilans | Backend, Animation, Marketplace/Live, Projet | À réaliser |
 | 10 | US34–38 ; finalisation US24, exploitabilité/pilote | Les cinq dépôts selon impact | À réaliser localement ; aucune activation distante autorisée |
 
@@ -656,3 +656,101 @@ Commits locaux du lot 06 : Backend `bb4e1e8`, Animation `955fb94`, sources dans
 le commit documentaire du lot 06. Les changements préexistants
 Clôturer/Exploitation/README restent hors commit ; les fichiers de préparation
 du lot 07 sont exclus du commit backend du lot 06. Aucun push ni déploiement.
+
+### Lot 07 — Chasse et préparation accompagnée
+
+Périmètre : US18/30, CA46/57. La chasse conserve son quota dédié, consommé à
+publication et non à la demande, au complément ou à la reprise technique. Le
+suivi accompagné distingue complétude, préparation, complément attendu,
+préparation prête, reprise et annulation. La cible de cinq jours ouvrés repose
+sur un calendrier Localeo explicite et figé ; une attente suspend ce décompte.
+Le portail présente cible initiale, estimation révisée et retard séparément.
+L’ERP permet le traitement sans dépendre de l’Atelier Coffrets. Les messages de
+service passent par l’outbox email ordinaire, indépendamment du futur module
+Communication participants.
+
+La validation terrain est une preuve de l’animation, de sa révision et de son
+empreinte. Une modification pertinente l’invalide ; un modèle réutilisé ne la
+transporte pas à la nouvelle édition. Les sessions et habilitations courantes
+sont revérifiées avant les commandes et reçus. Le catalogue commercial et les
+anciennes commandes de forfait contenant la chasse consomment la même
+disponibilité technique injectée : ouverture explicite et calendrier valide.
+
+Migration locale : `v274_preparation_accompagnee.sql`, suivi/événements/terrain,
+projections et index des sélecteurs, opérations et tentatives. Les reprises de
+données incohérentes échouent atomiquement avec un diagnostic ; elles ne
+créent aucun droit ni service historique fictif. La surveillance des retards
+est bornée, simulée par défaut, et indépendante de l’ouverture de nouvelles
+demandes. Elle écrit une alerte unique par demande/version d’échéance, sans
+modifier la version métier à chaque passage. Ops lit au plus 26 références
+et affiche une borne `25+` si nécessaire.
+
+La [procédure de préparation accompagnée](../../exploitation/exploitation/preparer-chasse-accompagnee.md)
+décrit les responsabilités, le calendrier et les configurations préparées :
+`LOCALEO_PREPARATIONS_ACCOMPAGNEES_APPLY`,
+`LOCALEO_PREPARATIONS_ACCOMPAGNEES_ALERTES_APPLY`,
+`LOCALEO_CALENDRIER_SERVICE_JSON`. Aucune valeur d’horaire métier ni ouverture
+d’environnement n’a été imposée.
+
+Preuves exécutées à ce stade, sans additionner les suites qui se recouvrent :
+
+| Contrôle | Résultat local |
+| --- | --- |
+| Architecture, recensements, domaine, application et API | **621 réussites**, 31,96 s ; `tmp/e73-lot07-architecture-final18.xml`. La passe précédente avait 15 erreurs de préparation du répertoire Windows global, résolues par le répertoire isolé du dépôt sans changer les assertions |
+| Génération E55, suivi accompagné, conservation et pagination PostgreSQL | **53 réussites**, 194,77 s ; `tmp/e73-lot07-pg-final16.xml` |
+| Préparation historique et contrôle de publication terrain | **38 réussites**, `tmp/e73-lot07-publication15.xml` |
+| Exports OpenAPI documentaires | **10 réussites**, 76,66 s ; `tmp/e73-lot07-contracts-final-01`. E41 : 876 chemins ; E42 : 55. E41 embarqué Animation identique au canonique après normalisation des fins de ligne |
+| Calendrier, surveillance, disponibilité catalogue et régression tableau Ops | **29 réussites**, `tmp/e73-lot07-root-final-02` |
+| Disponibilité injectée dans les commandes de forfait et régressions souscriptions | **43 réussites**, quatre avertissements de dépréciation ; `tmp/e73-lot07-readiness-regression-01` |
+| Migration complète depuis une base vide, rejeu et modèles | **3 réussites**, 78,46 s ; `tmp/e73-lot07-migrations-final-03` |
+| Reprise de projections historiques et rollback sur incohérence | **2 réussites**, `tmp/e73-lot07-reprise-01` |
+| Surveillance concurrente et lecture Ops avec historique volumineux | **2 réussites**, `tmp/e73-lot07-surveillance-pg-03` |
+| Sélecteurs PostgreSQL | **3 réussites** ; 26 plans sur 10 000 lieux, 10 000 modèles et 10 000 commerces ; deux requêtes par page, aucun balayage séquentiel des catalogues |
+| Portail Animation, copie HEAD + seuls fichiers du lot | **212 tests Node**, types/lint/build réussis ; suivi **18 scénarios/234 assertions**, génération **74**, préparation chasse **258**, mobile/bureau et affichage Paris |
+| ERP préparation et génération | Recettes navigateur 320/1 280 px et 390/1 280 px réussies ; action accessible sans Atelier Coffrets |
+| Sonde du générateur synthétique | **1 réussite**, 85,09 s ; vérification globale du jeu, droits client/lecteur, complément réel et absence de débit de publication |
+
+Les performances des opérations ont été éprouvées avec 10 000 opérations du
+tenant, 10 000 opérations antérieures d’autres tenants et 10 000 tentatives :
+pages 1/100 en deux requêtes, sans plan forcé et sans chargement des gros
+résultats. Le détail borne ses tentatives à 25 et fournit la suite paginée.
+La surveillance a également été mesurée avec 10 000 archives, 10 000 demandes
+en attente et 201 actives, sur les index partiels de file et d’Ops. Artefacts :
+`.artifacts/e73-preparation-pagination-performance.json`,
+`.artifacts/e73-selecteurs-performance.json` et
+`.artifacts/e73-preparations-alertes-performance.json`.
+
+Revue croisée : corrections des contrats de curseur, de la revalidation de
+session, du lien d’email vers la route réelle du portail et de deux dépendances
+vers l’infrastructure. Les reprises automatiques E55 ne sont pas bloquées dès
+la première erreur transitoire ; leurs dates historiques sans fuseau sont
+écrites et comparées en UTC. Les sources du générateur préservent l’ordre
+global des verrous et emploient une période annuelle cohérente avec les droits.
+
+La revue indépendante des raccords de surveillance et de disponibilité n’a
+relevé aucun défaut bloquant (`tmp/e73-lot07-revue-root-w2.md` dans le backend).
+Les contrôles documentaires passent : **94 guides / 1 003 liens**, aucune erreur
+ni alerte, et **127 sources exportées**. Le premier contrôle d’export a détecté
+un identifiant de bundle utilisant le chemin source ; il a été corrigé vers
+le namespace documentaire `docs/ops`, sans déplacer la source canonique.
+
+Générateur et restauration : la suite complète a réussi **7 scénarios sur 8**
+(360,05 s, quatre avertissements de réflexion SQLAlchemy,
+`tmp/e73-lot07-demo-complete-02`). Le huitième a identifié un contrôle de fixture
+qui comptait les versions de configuration comme des animations distinctes.
+La correction vérifie toutes les versions, dix animations avec chacune un
+visuel cohérent et dix visuels distincts. Elle conserve les contrôles stricts
+de neutralisation des emails et emploie de vraies sessions synthétiques pour
+les lectures produit désormais protégées. Ce seul scénario a été rejoué avec
+succès : **1 réussite**, 56,50 s, un avertissement de réflexion,
+`tmp/e73-lot07-demo-relations-reprise-01.log`. Les sept scénarios non modifiés,
+dont export/restauration, n’ont pas été rejoués inutilement. Aucun échec n’est
+masqué. Une ligne vide finale de v274 a été supprimée au contrôle Git, sans
+modifier son SQL ; aucune base partagée n’a été touchée.
+
+Commits locaux du lot 07 : Backend `44c6429`, Animation `8979893`, sources dans
+le commit documentaire du lot 07. Aucun push ni déploiement.
+Pro et Marketplace ne consomment pas ces nouvelles routes. Les deux sélecteurs
+historiques exhaustifs restant dans App et le bundle principal Animation sont
+suivis aux lots 09/10. La conservation physique des nouvelles familles reste
+à prouver au lot 10. Recette humaine et hébergement : non exécutés.
