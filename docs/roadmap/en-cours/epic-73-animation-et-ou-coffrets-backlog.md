@@ -3,7 +3,7 @@
 ## Références
 
 - Identifiant : **EPIC-73**, vérifié dans la roadmap commune et les identifiants applicatifs ; aucun cadrage concurrent identifié.
-- État produit : **À faire**, selon la [roadmap commune](../README.md).
+- État produit : **En cours** depuis le 18 octobre 2026, selon la [roadmap commune](../README.md). Réalisation locale par lots, sans push ni déploiement ; [preuves et avancement](../../specifications/epic-73-animation-et-ou-coffrets/suivi-implementation.md).
 - Cadrage initial : **14 octobre 2026**, à la demande du porteur produit.
 - Revue des impacts : **15 octobre 2026**, à partir des sources locales ; aucune recette d’environnement réalisée.
 - Arbitrages interactifs du **16 octobre 2026** : choix de dotation et de gestion des lots libres confirmés pour US02 (ARB-04 résolu).
@@ -25,7 +25,7 @@
 | [E56 — Participation des commerçants](../terminees/epic-56-validation-participation-commercants-animation-backlog.md), [E68 — Onboarding](../en-cours/epic-68-parcours-commercant-preparation-onboarding-backlog.md) | Distinguer périmètre produit, préparation du compte et accord pour chaque animation ; adapter étapes, pièces, contrats et communications |
 | [E70 — PIN](../en-cours/epic-70-validation-prestation-telephone-client-backlog.md), [E72 — Salariés](../en-cours/epic-72-acces-salaries-validation-localeo-pro-backlog.md) | Étendre le parcours PIN E70 aux bons de lots libres selon DEC-41 ; scan/PIN/historique et salariés respectent les droits du commerce, sans élargissement implicite des rôles |
 | [E42 — Localeo Live](../terminees/epic-42-localeo-live-grand-public-backlog.md) | Inscription, carnet, QR, progression et gains restent utilisables sans achat de coffret ; préserver les accès déjà distribués |
-| [E71 — CRM](epic-71-crm-prospection-animation-coffrets-pro-backlog.md) | Qualifier les ventes Animation seule / Coffrets seuls / ensemble et le périmètre du commerçant ; aligner conversions et preuves de gain sans créer de vente ou droit depuis une simple étiquette CRM |
+| [E71 — CRM](../a-faire/epic-71-crm-prospection-animation-coffrets-pro-backlog.md) | Qualifier les ventes Animation seule / Coffrets seuls / ensemble et le périmètre du commerçant ; aligner conversions et preuves de gain sans créer de vente ou droit depuis une simple étiquette CRM |
 
 ## Problème et résultat attendu
 

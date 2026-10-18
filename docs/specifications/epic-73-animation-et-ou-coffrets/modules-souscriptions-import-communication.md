@@ -2,7 +2,7 @@
 
 ## Statut, périmètre et références
 
-Spécification cible du 17 octobre 2026, **à implémenter**. Elle détaille US03, US14 à 22, US27/28 et US34 du [backlog canonique](../../roadmap/a-faire/epic-73-animation-et-ou-coffrets-backlog.md), notamment CA-12 à 14, CA-37 à 49, CA-54/55 et CA-61. Les décisions DEC-20 à 32, DEC-60 à 108, DEC-120 à 124 et DEC-135 à 137 s'appliquent intégralement. Les descriptions de stockage et les nouvelles routes ci-dessous sont des contrats proposés pour l'implémentation ; leur présence ici ne prouve ni une API déployée ni un paiement possible.
+Spécification cible du 17 octobre 2026, **à implémenter**. Elle détaille US03, US14 à 22, US27/28 et US34 du [backlog canonique](../../roadmap/en-cours/epic-73-animation-et-ou-coffrets-backlog.md), notamment CA-12 à 14, CA-37 à 49, CA-54/55 et CA-61. Les décisions DEC-20 à 32, DEC-60 à 108, DEC-120 à 124 et DEC-135 à 137 s'appliquent intégralement. Les descriptions de stockage et les nouvelles routes ci-dessous sont des contrats proposés pour l'implémentation ; leur présence ici ne prouve ni une API déployée ni un paiement possible.
 
 Lire avec [architecture et contrats](architecture-contrats.md), [périmètres et parcours SaaS](perimetres-parcours-saas.md), [dotations et lots](dotation-lots.md) et [preuves et livraison](verification-livraison.md). Les comptes, délégations et rattachements de commune sont définis dans le document de parcours ; ce document en consomme les décisions sans créer un deuxième modèle d'identité.
 

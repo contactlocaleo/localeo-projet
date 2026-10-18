@@ -10,10 +10,24 @@ rechargement. Les factures et demandes de deux communes d'un même partenaire
 restent séparées. En cas de confirmation réseau perdue, le contexte du serveur
 est relu. Une facture historique sans commune doit être traitée par le support.
 
-La session n'est pas conservée après un rechargement complet. Elle expire même
-si aucune action n'est effectuée. La déconnexion ferme immédiatement la session
-locale; un message indique si le serveur n'a pas confirmé sa révocation.
+Le rechargement vérifie la session serveur avant de présenter les vues privées.
+Elle expire même si aucune action n'est effectuée. La déconnexion ferme immédiatement
+la session locale ; un message indique si le serveur n'a pas confirmé sa révocation.
 Après reconnexion, la page demandée reste accessible si les droits le permettent.
+
+## Compte et équipe — évolution E73
+
+Ce parcours fait partie de la [réalisation locale E73](../../../specifications/epic-73-animation-et-ou-coffrets/suivi-implementation.md) ; son ouverture sur un environnement reste une opération distincte.
+
+Depuis la connexion, **Mot de passe oublié** prépare un lien valable une heure. Le même message apparaît que l’adresse corresponde ou non à un compte. Après utilisation, reconnectez-vous avec le nouveau mot de passe ; les anciennes sessions sont fermées. Depuis **Compte et équipe**, le changement de mot de passe exige également votre mot de passe actuel.
+
+Le responsable invite un collaborateur par email, choisit son profil et ses communes parmi celles vérifiées par Localeo, puis attribue séparément les autorisations complémentaires. Le lien d’invitation dure sept jours. Renvoyer une invitation invalide le précédent lien. Un collaborateur ayant déjà un compte se connecte puis accepte explicitement le rattachement ; il garde son compte et ses autres organisations.
+
+Pour la toute première invitation du responsable, Localeo utilise **ERP → Accès Animation → Demandes d’organisation → Invitations initiales**. Si le lien a expiré, le renvoi prépare un nouveau message et invalide l’ancien lien. Il ne confirme ni la réception de l’email ni l’acceptation du responsable.
+
+Pour changer de responsable, proposez le transfert à un collaborateur actif. Vous restez responsable jusqu’à son acceptation. En cas de perte de tous les accès responsables, contactez Localeo : la récupération exige une vérification d’identité et d’autorité, enregistrée dans l’ERP.
+
+Le choix d’organisation recharge le contexte ; vérifiez ensuite la commune avant de travailler. Un compte sans commune accessible peut accepter une invitation et gérer son mot de passe, mais n’ouvre aucun écran métier. Une erreur réseau sur une commande laisse son résultat incertain : actualisez les informations avant de confirmer une reprise. Le simple clic ne prouve pas l’enregistrement.
 
 ## Préparer et publier une animation
 

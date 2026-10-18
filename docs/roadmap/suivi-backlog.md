@@ -2,20 +2,20 @@
 
 Implémentations locales E70 et E72 vérifiées les 7–8 octobre 2026 : [E70 — PIN](../specifications/epic-70-validation-pin/README.md) et [E72 — salariés](../specifications/epic-72-acces-salaries/README.md). E70 est publiée avant le lot E72 ; les deux epics restent en cours jusqu’à leur recette de mise en service. Aucun déploiement effectué.
 
-Mise à jour du classement : 2026-10-15 (EPIC-71 et EPIC-73 à faire ; EPIC-65 et EPIC-69 terminées ; EPIC-55, EPIC-68, EPIC-70 et EPIC-72 en cours)
+Mise à jour du classement : 2026-10-18 (EPIC-71 à faire ; EPIC-65 et EPIC-69 terminées ; EPIC-55, EPIC-68, EPIC-70, EPIC-72 et EPIC-73 en cours)
 
 ## Synthese
 
 Évolution transverse du 29 septembre 2026 : [PWA-20260929 — installation et mise à jour](../specifications/installation-mise-a-jour-pwa.md), appliquée aux sept PWA existantes. Les états et clôtures historiques des EPIC restent inchangés ; preuves locales et recette appareil sont distinguées dans la spécification.
 
 - Identifiants EPIC suivis : 76 ; 73 du tronc commun et 3 identifiants applicatifs distincts.
-- EPICs a faire : 8 ; EPICs en cours : 4 (EPIC-55, EPIC-68, EPIC-70 et EPIC-72).
+- EPICs a faire : 7 ; EPICs en cours : 5 (EPIC-55, EPIC-68, EPIC-70, EPIC-72 et EPIC-73).
 - EPICs fusionnees : 1 (EPIC-61 vers EPIC-60).
 - EPICs terminees : 61 (59 du tronc commun et 2 applicatives) ; EPICs abandonnees : 2.
 - US / PRD detaillees dans le tableau historique : 415, jusqu'a `EPIC-45`.
 - Source prioritaire : fichier backlog dedie quand disponible, sinon `product-roadmap.md`.
-- Référence de pilotage : EPIC-55, EPIC-68, EPIC-70 et EPIC-72 sont en cours. EPIC-65 est terminée après revue des dix critères ; EPIC-69 après validation CA-18 ; EPIC-66 après confirmation utilisateur. EPIC-54, EPIC-58, EPIC-62,
-  EPIC-64, EPIC-67, EPIC-71, EPIC-73 et EPIC-MARKETPLACE-54 sont à faire. EPIC-47 est terminée,
+- Référence de pilotage : EPIC-55, EPIC-68, EPIC-70, EPIC-72 et EPIC-73 sont en cours. EPIC-65 est terminée après revue des dix critères ; EPIC-69 après validation CA-18 ; EPIC-66 après confirmation utilisateur. EPIC-54, EPIC-58, EPIC-62,
+  EPIC-64, EPIC-67, EPIC-71 et EPIC-MARKETPLACE-54 sont à faire. EPIC-47 est terminée,
   clôture produit confirmée. EPIC-05 et EPIC-12 sont abandonnées ;
   EPIC-61 est fusionnée dans EPIC-60. Les autres EPIC du tronc commun sont terminées.
 - Classement et motifs : [index de la roadmap](README.md).
@@ -27,8 +27,8 @@ Mise à jour du classement : 2026-10-15 (EPIC-71 et EPIC-73 à faire ; EPIC-65 e
 
 | Etat | Nombre |
 | --- | ---: |
-| A faire | 8 |
-| En cours | 4 |
+| A faire | 7 |
+| En cours | 5 |
 | Abandonne | 2 |
 | Fusionnee | 1 |
 | Termine | 61 |
@@ -48,7 +48,7 @@ ci-dessous conservent ce périmètre initial.
 
 ### Epics restant a livrer
 
-Nouvelle entrée à faire : [EPIC-73 — Animation et/ou Coffrets](a-faire/epic-73-animation-et-ou-coffrets-backlog.md),
+En cours depuis le 18 octobre : [EPIC-73 — Animation et/ou Coffrets](en-cours/epic-73-animation-et-ou-coffrets-backlog.md),
 cadrage des 14–15 octobre, 38 US et 63 critères ; dotation libre, animations standard/à la carte,
 périmètres commerçants et onboarding/Pro adaptés, présence web Animation. Trois
 arbitrages résolus le 15 octobre : suivi de remise déclarée, périmètres gérés uniquement
@@ -62,7 +62,7 @@ notifications automatiques existantes conservées). Compléments SaaS : autonomi
 comptes/équipes et souscriptions, première animation, aide/support, réemploi,
 valeur/coûts, réversibilité et preuve de reprise hébergée. Priorités proposées :
 32 US P1 et 6 US P2, toutes à faire ; les dix-huit groupes d’arbitrages recensés sont résolus.
-La [spécification détaillée V1 du 17 octobre](../specifications/epic-73-animation-et-ou-coffrets/README.md) couvre les parcours, invariants, contrats, migrations et preuves attendues des 63 critères ; aucune implémentation E73 annoncée.
+La [spécification détaillée V1 du 17 octobre](../specifications/epic-73-animation-et-ou-coffrets/README.md) couvre les parcours, invariants, contrats, migrations et preuves attendues des 63 critères ; réalisation locale engagée le 18 octobre, preuves dans le suivi du dossier.
 Le 16 octobre, US02 est arbitrée (choix explicites, mode unique, modification en
 brouillon sans lot engagé puis gel à la publication) ; portée des modules confirmée
 sur la commune de la souscription concernée.
@@ -638,4 +638,4 @@ anciennes US restent historiques.
 | EPIC-70 | En cours | [backlog](en-cours/epic-70-validation-prestation-telephone-client-backlog.md) |
 | EPIC-71 | A faire | [backlog](a-faire/epic-71-crm-prospection-animation-coffrets-pro-backlog.md) |
 | EPIC-72 | En cours | [backlog](en-cours/epic-72-acces-salaries-validation-localeo-pro-backlog.md) |
-| EPIC-73 | A faire | [backlog](a-faire/epic-73-animation-et-ou-coffrets-backlog.md) ; 38 US, 63 critères, dix-huit arbitrages résolus, aucun ouvert recensé ; lots libres externes/numériques, modules (import, chasse, Web Push) et compléments SaaS (autonomie, accompagnement, valeur/coûts, réversibilité/reprise), cadrage des 14–15 octobre 2026 |
+| EPIC-73 | En cours | [backlog](en-cours/epic-73-animation-et-ou-coffrets-backlog.md) ; 38 US, 63 critères, dix-huit arbitrages résolus, aucun ouvert recensé ; lots libres externes/numériques, modules (import, chasse, Web Push) et compléments SaaS (autonomie, accompagnement, valeur/coûts, réversibilité/reprise), cadrage des 14–15 octobre 2026 |

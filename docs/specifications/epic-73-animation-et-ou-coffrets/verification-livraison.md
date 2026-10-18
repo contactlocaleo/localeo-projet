@@ -1,6 +1,6 @@
 # E73 — Vérification, migration et livraison
 
-Version du **17 octobre 2026**. [Dossier](README.md), [architecture](architecture-contrats.md), [critères canoniques](../../roadmap/a-faire/epic-73-animation-et-ou-coffrets-backlog.md). **Tous les tests métier ci-dessous sont prévus, non exécutés pour E73.** Un lien vérifié ou une revue documentaire ne valide pas un comportement applicatif.
+Version de conception du **17 octobre 2026**, réalisation locale commencée le **18 octobre 2026**. [Dossier](README.md), [architecture](architecture-contrats.md), [critères canoniques](../../roadmap/en-cours/epic-73-animation-et-ou-coffrets-backlog.md). La matrice décrit les preuves attendues ; leur exécution effective et leurs limites sont enregistrées par lot dans le [suivi de réalisation](suivi-implementation.md). Un scénario sans preuve enregistrée reste non exécuté. Un lien vérifié ou une revue documentaire ne valide pas un comportement applicatif.
 
 ## 1. Traçabilité des 63 critères
 

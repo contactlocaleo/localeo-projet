@@ -1,6 +1,6 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
-Spécification détaillée **V1 du 17 octobre 2026**, fondée sur les **147 décisions**, **38 user stories** et **63 critères** du [backlog canonique](../../roadmap/a-faire/epic-73-animation-et-ou-coffrets-backlog.md). Les 18 groupes d’arbitrages produit recensés sont résolus. L’état produit demeure **À faire** selon la [roadmap](../../roadmap/README.md) : ce dossier décrit la cible, sans annoncer son implémentation ni son déploiement.
+Spécification détaillée **V1 du 17 octobre 2026**, fondée sur les **147 décisions**, **38 user stories** et **63 critères** du [backlog canonique](../../roadmap/en-cours/epic-73-animation-et-ou-coffrets-backlog.md). Les 18 groupes d’arbitrages produit recensés sont résolus. L’état produit est **En cours** depuis le 18 octobre 2026 selon la [roadmap](../../roadmap/README.md) : ce dossier décrit la cible et le suivi local en précise les preuves, sans annoncer de déploiement.
 
 ## Résultat attendu
 

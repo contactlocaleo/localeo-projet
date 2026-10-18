@@ -2,7 +2,7 @@
 
 ## Portée et statut
 
-Spécification cible du 17 octobre 2026, **non implémentée par ce document**. Les choix produit restent ceux du [backlog E73](../../roadmap/a-faire/epic-73-animation-et-ou-coffrets-backlog.md), notamment DEC-01 à 03, 07, 10 à 12, 19, 33 à 51. Ce chapitre couvre US01, US02 et US04 à US10 ; les périmètres et droits résiduels sont définis dans [les parcours SaaS](perimetres-parcours-saas.md), les conventions communes dans [l’architecture](architecture-contrats.md), les preuves dans [la vérification de livraison](verification-livraison.md).
+Spécification cible du 17 octobre 2026, **non implémentée par ce document**. Les choix produit restent ceux du [backlog E73](../../roadmap/en-cours/epic-73-animation-et-ou-coffrets-backlog.md), notamment DEC-01 à 03, 07, 10 à 12, 19, 33 à 51. Ce chapitre couvre US01, US02 et US04 à US10 ; les périmètres et droits résiduels sont définis dans [les parcours SaaS](perimetres-parcours-saas.md), les conventions communes dans [l’architecture](architecture-contrats.md), les preuves dans [la vérification de livraison](verification-livraison.md).
 
 Trois branches métier sont distinguées :
 

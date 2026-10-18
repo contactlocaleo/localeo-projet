@@ -6,7 +6,7 @@ Commencer par le README du sujet, puis consulter ses règles, contrats et arbitr
 
 ## Priorités en cours et à cadrer
 
-- **À faire : EPIC 73**, [Animation et/ou Coffrets](epic-73-animation-et-ou-coffrets/README.md), spécification détaillée V1 du 17 octobre : 38 US, 63 critères, 147 décisions ; lots libres/QR/PIN, périmètres commerçants, modules/import/communication, parcours SaaS, migrations et reprise. Contrats et preuves prévus ; aucune implémentation E73 annoncée.
+- **En cours : EPIC 73**, [Animation et/ou Coffrets](epic-73-animation-et-ou-coffrets/README.md), spécification détaillée V1 du 17 octobre : 38 US, 63 critères, 147 décisions ; lots libres/QR/PIN, périmètres commerçants, modules/import/communication, parcours SaaS, migrations et reprise. Contrats et preuves prévus ; réalisation locale engagée le 18 octobre, preuves dans le suivi du dossier.
 
 - **À faire : EPIC 71**, [CRM de prospection](epic-71-crm-prospection/README.md), conception V0.1 du 9 octobre : parcours, droits, gain, import XLSX, carte et rattachements ; 24 critères reliés aux preuves prévues, arbitrages restants explicites.
 
@@ -61,7 +61,7 @@ Commencer par le README du sujet, puis consulter ses règles, contrats et arbitr
 | 70 | [Validation par PIN sur téléphone client](epic-70-validation-pin/README.md) | En cours | Backend/ERP, Commerçant, Marketplace/Live ; contrats Animation partagés |
 | 71 | [CRM de prospection](epic-71-crm-prospection/README.md) | À faire | Backend ERP ; liens OnBoard, Animation et Achats |
 | 72 | [Accès salariés Localeo Pro](epic-72-acces-salaries/README.md) | En cours | Backend/ERP, Commerçant ; attribution des validations partagées |
-| 73 | [Animation et/ou Coffrets](epic-73-animation-et-ou-coffrets/README.md) | À faire | Backend/ERP et satellites, Animation, Commerçant, Marketplace/Live |
+| 73 | [Animation et/ou Coffrets](epic-73-animation-et-ou-coffrets/README.md) | En cours | Backend/ERP et satellites, Animation, Commerçant, Marketplace/Live |
 
 ## Contrats et historique
 

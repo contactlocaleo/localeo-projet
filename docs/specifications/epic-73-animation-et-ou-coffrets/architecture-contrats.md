@@ -1,6 +1,6 @@
 # E73 — Architecture et contrats transverses
 
-Version de conception du **17 octobre 2026**. [Dossier](README.md), [backlog et décisions](../../roadmap/a-faire/epic-73-animation-et-ou-coffrets-backlog.md). Cible à implémenter ; les noms nouveaux ci-dessous sont des contrats de conception, pas des routes déjà disponibles. L’état produit reste **À faire**.
+Version de conception du **17 octobre 2026**. [Dossier](README.md), [backlog et décisions](../../roadmap/en-cours/epic-73-animation-et-ou-coffrets-backlog.md). Cible à implémenter ; les noms nouveaux ci-dessous sont des contrats de conception, pas des routes déjà disponibles. L’état produit reste **À faire**.
 
 ## 1. Propriété des règles
 
@@ -155,6 +155,8 @@ Réutiliser le [rattachement accès/validations](../identite-acces/conservation-
 | Compteurs, sources d’inscription, satisfaction, coûts | Minimiser les dimensions identifiantes ; rattacher les identifiants participants à la politique Animation, les coûts/factures à leur catégorie propre. Aucun consentement publicitaire déduit d’une source QR ; pas de conservation illimitée d’un commentaire au motif de statistiques |
 
 La migration de chaque famille consigne catégorie, date de départ source, dépendances actives, gel éventuel, date de réexamen et suppression attendue. Une catégorie non mappée ou une date requise absente est un écart de préparation à résoudre avant activation de la famille ; ne pas inventer de durée ni purger à une date supposée. Un gel limité ne rend jamais un bon ou jeton expiré à nouveau utilisable.
+
+Rattachement de réalisation du lot 01 : les appartenances et décisions de responsabilité sont des preuves T1. Le journal minimal conserve les identifiants, rôles, statuts, communes et autorisations avant/après, la date d’effet et, pour une révocation de relation, sa date de fin. Une suspension ne devient pas une fin de relation. Les événements techniques de session, reset et invitation relèvent de T8 ; leurs dates serveur ne sont pas repoussées par consultation. Les empreintes des invitations de sept jours et resets d’une heure restent des secrets techniques, exclus de l’archive probatoire. Les corps d’email contenant un lien suivent le circuit de retrait des secrets, séparément de la preuve minimale d’envoi. La suppression effective de ces nouvelles familles et sa reprise après restauration doivent être raccordées et prouvées au lot 10 avant toute mise en service ; les contrôles d’expiration/rejeu du lot 01 ne prouvent pas cette purge.
 
 Le RPO cible est **4 heures** et le RTO **8 heures**, avec réouverture des parcours essentiels après contrôles. Le [plan de vérification et livraison](verification-livraison.md) précise l’exercice et ses preuves. Une sauvegarde restaurée doit réappliquer suppressions/révocations plus récentes et rapprocher les opérations externes incertaines avant reprise des workers ; le RPO n’autorise pas une seconde remise de lot ou un second paiement.
 

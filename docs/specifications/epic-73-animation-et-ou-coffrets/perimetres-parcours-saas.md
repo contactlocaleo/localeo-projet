@@ -1,6 +1,6 @@
 # E73 — Périmètres commerçants et parcours SaaS
 
-Spécification cible du 17 octobre 2026. Source des choix : [backlog E73](../../roadmap/a-faire/epic-73-animation-et-ou-coffrets-backlog.md), notamment DEC-42, 51 à 59, 109 à 119, 125 à 134 et 138 à 144. Ce document couvre US11 à 13, US23 à 26, US29 à 33 et US35 ; il ne déclare ni leur implémentation ni leur déploiement. Les conventions communes, lots et modules sont décrits dans [architecture et contrats](architecture-contrats.md), [dotation et lots](dotation-lots.md) et [modules et souscriptions](modules-souscriptions-import-communication.md).
+Spécification cible du 17 octobre 2026. Source des choix : [backlog E73](../../roadmap/en-cours/epic-73-animation-et-ou-coffrets-backlog.md), notamment DEC-42, 51 à 59, 109 à 119, 125 à 134 et 138 à 144. Ce document couvre US11 à 13, US23 à 26, US29 à 33 et US35 ; il ne déclare ni leur implémentation ni leur déploiement. Les conventions communes, lots et modules sont décrits dans [architecture et contrats](architecture-contrats.md), [dotation et lots](dotation-lots.md) et [modules et souscriptions](modules-souscriptions-import-communication.md).
 
 ## 1. Existant vérifié et changements nécessaires
 

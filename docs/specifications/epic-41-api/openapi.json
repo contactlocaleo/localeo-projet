@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Backend - contrat implemente EPIC 41",
     "description": "OpenAPI complet du backend, dont les parcours Animation locale. Genere hors ligne depuis le code local pour les integrations et les mocks ; cet instantane ne prouve pas son deploiement.",
-    "version": "1.0.0+776e852"
+    "version": "1.0.0+31807b6"
   },
   "paths": {
     "/public/identite-acces/interne/connexion": {
@@ -38852,6 +38852,1582 @@
         ]
       }
     },
+    "/protected/identite-acces/animation/organisations": {
+      "get": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Organisations",
+        "operationId": "organisations_protected_identite_acces_animation_organisations_get",
+        "parameters": [
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 1024
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganisationsPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/identite-acces/animation/organisation-active": {
+      "put": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Changer Organisation",
+        "operationId": "changer_organisation_protected_identite_acces_animation_organisation_active_put",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChoixOrganisation"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/identite-acces/animation/organisations/{organisation_id}/equipe": {
+      "get": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Equipe",
+        "operationId": "equipe_protected_identite_acces_animation_organisations__organisation_id__equipe_get",
+        "parameters": [
+          {
+            "name": "organisation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Organisation Id"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 1024
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "invitationsCursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 1024
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Invitationscursor"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EquipePayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/identite-acces/animation/organisations/{organisation_id}/invitations": {
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Inviter",
+        "operationId": "inviter_protected_identite_acces_animation_organisations__organisation_id__invitations_post",
+        "parameters": [
+          {
+            "name": "organisation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Organisation Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InvitationEquipeCommande"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EquipePayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/identite-acces/animation/organisations/{organisation_id}/invitations/{invitation_id}/renvoyer": {
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Renvoyer",
+        "operationId": "renvoyer_protected_identite_acces_animation_organisations__organisation_id__invitations__invitation_id__renvoyer_post",
+        "parameters": [
+          {
+            "name": "organisation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Organisation Id"
+            }
+          },
+          {
+            "name": "invitation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Invitation Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommandeEquipe"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EquipePayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/identite-acces/animation/organisations/{organisation_id}/invitations/{invitation_id}/revoquer": {
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Revoquer",
+        "operationId": "revoquer_protected_identite_acces_animation_organisations__organisation_id__invitations__invitation_id__revoquer_post",
+        "parameters": [
+          {
+            "name": "organisation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Organisation Id"
+            }
+          },
+          {
+            "name": "invitation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Invitation Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommandeEquipe"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EquipePayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/identite-acces/animation/organisations/{organisation_id}/equipe/{membre_id}": {
+      "patch": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Modifier Membre",
+        "operationId": "modifier_membre_protected_identite_acces_animation_organisations__organisation_id__equipe__membre_id__patch",
+        "parameters": [
+          {
+            "name": "organisation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Organisation Id"
+            }
+          },
+          {
+            "name": "membre_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Membre Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModificationMembreCommande"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EquipePayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/identite-acces/animation/organisations/{organisation_id}/transferts-responsabilite": {
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Proposer Transfert",
+        "operationId": "proposer_transfert_protected_identite_acces_animation_organisations__organisation_id__transferts_responsabilite_post",
+        "parameters": [
+          {
+            "name": "organisation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Organisation Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransfertCommande"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EquipePayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/identite-acces/animation/organisations/{organisation_id}/transferts-responsabilite/{transfert_id}/accepter": {
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Accepter Transfert",
+        "operationId": "accepter_transfert_protected_identite_acces_animation_organisations__organisation_id__transferts_responsabilite__transfert_id__accepter_post",
+        "parameters": [
+          {
+            "name": "organisation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Organisation Id"
+            }
+          },
+          {
+            "name": "transfert_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Transfert Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommandeEquipe"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EquipePayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/identite-acces/animation/organisations/{organisation_id}/transferts-responsabilite/{transfert_id}/annuler": {
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Annuler Transfert",
+        "operationId": "annuler_transfert_protected_identite_acces_animation_organisations__organisation_id__transferts_responsabilite__transfert_id__annuler_post",
+        "parameters": [
+          {
+            "name": "organisation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Organisation Id"
+            }
+          },
+          {
+            "name": "transfert_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Transfert Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommandeEquipe"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EquipePayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/public/identite-acces/animation/invitations/accepter": {
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Accepter Invitation",
+        "operationId": "accepter_invitation_public_identite_acces_animation_invitations_accepter_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccepterInvitation"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/identite-acces/animation/organisations/demandes": {
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Demander Organisation",
+        "operationId": "demander_organisation_public_identite_acces_animation_organisations_demandes_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DemandeOrganisation"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/internal/identite-acces/animation/organisations/{organisation_id}/responsable/valider": {
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Valider Responsable",
+        "operationId": "valider_responsable_internal_identite_acces_animation_organisations__organisation_id__responsable_valider_post",
+        "parameters": [
+          {
+            "name": "organisation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Organisation Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ValidationResponsable"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/identite-acces/animation/organisations/demandes": {
+      "get": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Demandes Organisations",
+        "operationId": "demandes_organisations_internal_identite_acces_animation_organisations_demandes_get",
+        "parameters": [
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 1024
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "statut",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "enum": [
+                "A_VERIFIER",
+                "VALIDEE"
+              ],
+              "type": "string",
+              "default": "A_VERIFIER",
+              "title": "Statut"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/identite-acces/animation/organisations/demandes/{demande_id}/valider": {
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Valider Demande",
+        "operationId": "valider_demande_internal_identite_acces_animation_organisations_demandes__demande_id__valider_post",
+        "parameters": [
+          {
+            "name": "demande_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Demande Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ValidationDemande"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/identite-acces/animation/organisations/{organisation_id}/equipe": {
+      "get": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Equipe Erp",
+        "operationId": "equipe_erp_internal_identite_acces_animation_organisations__organisation_id__equipe_get",
+        "parameters": [
+          {
+            "name": "organisation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Organisation Id"
+            }
+          },
+          {
+            "name": "gestionnaireId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Gestionnaireid"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 1024
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/identite-acces/animation/organisations/{organisation_id}/responsable/recuperations": {
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Recuperer Responsable",
+        "operationId": "recuperer_responsable_internal_identite_acces_animation_organisations__organisation_id__responsable_recuperations_post",
+        "parameters": [
+          {
+            "name": "organisation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Organisation Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RecuperationResponsable"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/identite-acces/animation/organisations/{organisation_id}/invitations/{invitation_id}/renvoyer": {
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Renvoyer Invitation Initiale",
+        "operationId": "renvoyer_invitation_initiale_internal_identite_acces_animation_organisations__organisation_id__invitations__invitation_id__renvoyer_post",
+        "parameters": [
+          {
+            "name": "organisation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Organisation Id"
+            }
+          },
+          {
+            "name": "invitation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Invitation Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommandeEquipe"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EquipePayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/public/identite-acces/animation/mot-de-passe/demandes": {
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Demander",
+        "operationId": "demander_public_identite_acces_animation_mot_de_passe_demandes_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DemandeMotDePasseAnimation"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/identite-acces/animation/mot-de-passe/reinitialisations": {
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Reinitialiser",
+        "operationId": "reinitialiser_public_identite_acces_animation_mot_de_passe_reinitialisations_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReinitialisationMotDePasseAnimation"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/protected/identite-acces/animation/mot-de-passe/changement": {
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Changer",
+        "operationId": "changer_protected_identite_acces_animation_mot_de_passe_changement_post",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangementMotDePasseAnimation"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
     "/protected/animation-locale/generations": {
       "post": {
         "tags": [
@@ -71129,6 +72705,35 @@
         ],
         "title": "AccepterInput"
       },
+      "AccepterInvitation": {
+        "properties": {
+          "token": {
+            "type": "string",
+            "maxLength": 128,
+            "minLength": 40,
+            "title": "Token"
+          },
+          "motDePasseInitial": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 72,
+                "minLength": 8
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motdepasseinitial"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "token"
+        ],
+        "title": "AccepterInvitation"
+      },
       "AccepterMandatChorusRequest": {
         "properties": {
           "action": {
@@ -75855,6 +77460,28 @@
         ],
         "title": "CatalogueResponse"
       },
+      "ChangementMotDePasseAnimation": {
+        "properties": {
+          "motDePasseActuel": {
+            "type": "string",
+            "maxLength": 256,
+            "minLength": 1,
+            "title": "Motdepasseactuel"
+          },
+          "nouveauMotDePasse": {
+            "type": "string",
+            "maxLength": 72,
+            "minLength": 1,
+            "title": "Nouveaumotdepasse"
+          }
+        },
+        "type": "object",
+        "required": [
+          "motDePasseActuel",
+          "nouveauMotDePasse"
+        ],
+        "title": "ChangementMotDePasseAnimation"
+      },
       "ChangerCommuneActiveRequest": {
         "properties": {
           "commune_id": {
@@ -75913,6 +77540,33 @@
           "validatedAt"
         ],
         "title": "ChecklistChassePayload"
+      },
+      "ChoixOrganisation": {
+        "properties": {
+          "organisationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Organisationid"
+          },
+          "communeId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Communeid"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "organisationId"
+        ],
+        "title": "ChoixOrganisation"
       },
       "ChronologieResponse": {
         "properties": {
@@ -77549,6 +79203,21 @@
         ],
         "title": "CommandeEnCours"
       },
+      "CommandeEquipe": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version"
+        ],
+        "title": "CommandeEquipe"
+      },
       "CommandeEtape": {
         "properties": {
           "engineContractVersion": {
@@ -78671,6 +80340,25 @@
         ],
         "title": "CommuneAnimationPayload"
       },
+      "CommuneEquipePayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "nom": {
+            "type": "string",
+            "title": "Nom"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "nom"
+        ],
+        "title": "CommuneEquipePayload"
+      },
       "CommuneOriginePayload": {
         "properties": {
           "nom": {
@@ -79466,6 +81154,13 @@
             },
             "type": "array",
             "title": "Permissions"
+          },
+          "autorisations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Autorisations"
           },
           "notifications_non_lues": {
             "type": "integer",
@@ -81920,6 +83615,21 @@
         ],
         "title": "DemandeLienInscriptionAnimationPayload"
       },
+      "DemandeMotDePasseAnimation": {
+        "properties": {
+          "email": {
+            "type": "string",
+            "maxLength": 320,
+            "minLength": 3,
+            "title": "Email"
+          }
+        },
+        "type": "object",
+        "required": [
+          "email"
+        ],
+        "title": "DemandeMotDePasseAnimation"
+      },
       "DemandeMotDePasseOublieCommercantPayload": {
         "properties": {
           "message": {
@@ -81960,6 +83670,37 @@
           "login"
         ],
         "title": "DemandeMotDePasseOublieCommercantRequest"
+      },
+      "DemandeOrganisation": {
+        "properties": {
+          "organisation": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Organisation"
+          },
+          "responsable": {
+            "$ref": "#/components/schemas/ResponsableDemande"
+          },
+          "communesDemandees": {
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "type": "array",
+            "maxItems": 100,
+            "minItems": 1,
+            "title": "Communesdemandees"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "organisation",
+          "responsable",
+          "communesDemandees"
+        ],
+        "title": "DemandeOrganisation"
       },
       "DemandeParticipationCommercantPayload": {
         "properties": {
@@ -84360,6 +86101,113 @@
           "confirmer_version_configuration"
         ],
         "title": "EnvoyerDemandesParticipationRequest"
+      },
+      "EquipePayload": {
+        "properties": {
+          "organisationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Organisationid"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "roleCourant": {
+            "type": "string",
+            "title": "Rolecourant"
+          },
+          "communesValidees": {
+            "items": {
+              "$ref": "#/components/schemas/CommuneEquipePayload"
+            },
+            "type": "array",
+            "title": "Communesvalidees"
+          },
+          "membres": {
+            "items": {
+              "$ref": "#/components/schemas/MembrePayload"
+            },
+            "type": "array",
+            "title": "Membres"
+          },
+          "invitations": {
+            "items": {
+              "$ref": "#/components/schemas/InvitationEquipePayload"
+            },
+            "type": "array",
+            "title": "Invitations"
+          },
+          "transfert": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TransfertPayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          },
+          "allowedActions": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Allowedactions"
+          },
+          "invitationsNextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Invitationsnextcursor"
+          },
+          "rolesDelegables": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Rolesdelegables"
+          },
+          "autorisationsDelegables": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Autorisationsdelegables"
+          }
+        },
+        "type": "object",
+        "required": [
+          "organisationId",
+          "version",
+          "roleCourant",
+          "communesValidees",
+          "membres",
+          "invitations",
+          "transfert",
+          "nextCursor",
+          "allowedActions",
+          "invitationsNextCursor",
+          "rolesDelegables",
+          "autorisationsDelegables"
+        ],
+        "title": "EquipePayload"
       },
       "ErreurContratMoteurPayload": {
         "properties": {
@@ -88052,6 +89900,125 @@
         ],
         "title": "InvalidationSessionCommercantPayload"
       },
+      "InvitationEquipeCommande": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "email": {
+            "type": "string",
+            "maxLength": 254,
+            "pattern": "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$",
+            "title": "Email"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "GESTIONNAIRE",
+              "LECTEUR"
+            ],
+            "title": "Role"
+          },
+          "communeIds": {
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "type": "array",
+            "maxItems": 100,
+            "minItems": 1,
+            "title": "Communeids"
+          },
+          "autorisations": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "ACHAT",
+                "IMPORT",
+                "COMMUNICATION"
+              ]
+            },
+            "type": "array",
+            "maxItems": 3,
+            "title": "Autorisations"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "email",
+          "role",
+          "communeIds"
+        ],
+        "title": "InvitationEquipeCommande"
+      },
+      "InvitationEquipePayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "role": {
+            "type": "string",
+            "title": "Role"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          },
+          "communeIds": {
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "type": "array",
+            "title": "Communeids"
+          },
+          "autorisations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Autorisations"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "email": {
+            "type": "string",
+            "title": "Email"
+          },
+          "expiresAt": {
+            "type": "string",
+            "title": "Expiresat"
+          },
+          "allowedActions": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Allowedactions"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "role",
+          "statut",
+          "communeIds",
+          "autorisations",
+          "version",
+          "email",
+          "expiresAt",
+          "allowedActions"
+        ],
+        "title": "InvitationEquipePayload"
+      },
       "InvitationEtat": {
         "properties": {
           "id": {
@@ -89011,6 +90978,95 @@
           "base64"
         ],
         "title": "MediaEmbarque"
+      },
+      "MembrePayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "role": {
+            "type": "string",
+            "title": "Role"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          },
+          "communeIds": {
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "type": "array",
+            "title": "Communeids"
+          },
+          "autorisations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Autorisations"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "gestionnaireId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Gestionnaireid"
+          },
+          "email": {
+            "type": "string",
+            "title": "Email"
+          },
+          "nom": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nom"
+          },
+          "prenom": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Prenom"
+          },
+          "allowedActions": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Allowedactions"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "role",
+          "statut",
+          "communeIds",
+          "autorisations",
+          "version",
+          "gestionnaireId",
+          "email",
+          "nom",
+          "prenom",
+          "allowedActions"
+        ],
+        "title": "MembrePayload"
       },
       "MessageContactPayload": {
         "properties": {
@@ -89992,6 +92048,65 @@
           "statut"
         ],
         "title": "ModificationHabilitation"
+      },
+      "ModificationMembreCommande": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "RESPONSABLE",
+              "GESTIONNAIRE",
+              "LECTEUR"
+            ],
+            "title": "Role"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "SUSPENDUE",
+              "REVOQUEE"
+            ],
+            "title": "Statut"
+          },
+          "communeIds": {
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "type": "array",
+            "maxItems": 100,
+            "minItems": 1,
+            "title": "Communeids"
+          },
+          "autorisations": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "ACHAT",
+                "IMPORT",
+                "COMMUNICATION"
+              ]
+            },
+            "type": "array",
+            "maxItems": 3,
+            "title": "Autorisations"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "role",
+          "statut",
+          "communeIds"
+        ],
+        "title": "ModificationMembreCommande"
       },
       "ModificationUtilisateur": {
         "properties": {
@@ -92066,6 +94181,57 @@
         ],
         "title": "OrganisateurAnimation"
       },
+      "OrganisationPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "role": {
+            "type": "string",
+            "title": "Role"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          },
+          "communeIds": {
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "type": "array",
+            "title": "Communeids"
+          },
+          "autorisations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Autorisations"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "nom": {
+            "type": "string",
+            "title": "Nom"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "role",
+          "statut",
+          "communeIds",
+          "autorisations",
+          "version",
+          "nom"
+        ],
+        "title": "OrganisationPayload"
+      },
       "OrganisationRequest": {
         "properties": {
           "siret": {
@@ -92088,6 +94254,34 @@
           "billingEmail"
         ],
         "title": "OrganisationRequest"
+      },
+      "OrganisationsPayload": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/OrganisationPayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "nextCursor"
+        ],
+        "title": "OrganisationsPayload"
       },
       "OtpRequest": {
         "properties": {
@@ -98755,6 +100949,34 @@
         ],
         "title": "RecuRetraitMission"
       },
+      "RecuperationResponsable": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "successeurId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Successeurid"
+          },
+          "preuve": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 5,
+            "title": "Preuve"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "successeurId",
+          "preuve"
+        ],
+        "title": "RecuperationResponsable"
+      },
       "ReferenceActualiteAnimationPayload": {
         "properties": {
           "id": {
@@ -99046,6 +101268,29 @@
           "contenu"
         ],
         "title": "ReglementPreparationChasse"
+      },
+      "ReinitialisationMotDePasseAnimation": {
+        "properties": {
+          "token": {
+            "type": "string",
+            "maxLength": 43,
+            "minLength": 43,
+            "pattern": "^[A-Za-z0-9_-]+$",
+            "title": "Token"
+          },
+          "motDePasse": {
+            "type": "string",
+            "maxLength": 72,
+            "minLength": 1,
+            "title": "Motdepasse"
+          }
+        },
+        "type": "object",
+        "required": [
+          "token",
+          "motDePasse"
+        ],
+        "title": "ReinitialisationMotDePasseAnimation"
       },
       "ReinitialiserMotDePasseCommercantRequest": {
         "properties": {
@@ -99528,6 +101773,35 @@
           "qr_token"
         ],
         "title": "ResoudreScanParticipantRequest"
+      },
+      "ResponsableDemande": {
+        "properties": {
+          "email": {
+            "type": "string",
+            "maxLength": 254,
+            "pattern": "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$",
+            "title": "Email"
+          },
+          "nom": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Nom"
+          },
+          "prenom": {
+            "type": "string",
+            "maxLength": 100,
+            "title": "Prenom",
+            "default": ""
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "email",
+          "nom"
+        ],
+        "title": "ResponsableDemande"
       },
       "ResultatEtapeParticipant": {
         "properties": {
@@ -100812,6 +103086,11 @@
               }
             ],
             "title": "Commune Active Id"
+          },
+          "identite_seule": {
+            "type": "boolean",
+            "title": "Identite Seule",
+            "default": false
           }
         },
         "type": "object",
@@ -102684,6 +104963,65 @@
         ],
         "title": "TransactionValidationResponse"
       },
+      "TransfertCommande": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "successeurId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Successeurid"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "successeurId"
+        ],
+        "title": "TransfertCommande"
+      },
+      "TransfertPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "successeurId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Successeurid"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "allowedActions": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Allowedactions"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "successeurId",
+          "statut",
+          "version",
+          "allowedActions"
+        ],
+        "title": "TransfertPayload"
+      },
       "TransitionDemandeGroupeeRequest": {
         "properties": {
           "target": {
@@ -102871,6 +105209,56 @@
         ],
         "title": "ValidationAnimationPayload"
       },
+      "ValidationDemande": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "nomOrganisation": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Nomorganisation"
+          },
+          "typePartenaire": {
+            "type": "string",
+            "enum": [
+              "COLLECTIVITE",
+              "ASSOCIATION",
+              "ENTREPRISE"
+            ],
+            "title": "Typepartenaire"
+          },
+          "communeIds": {
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "type": "array",
+            "maxItems": 100,
+            "minItems": 1,
+            "title": "Communeids"
+          },
+          "preuve": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 5,
+            "title": "Preuve"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "nomOrganisation",
+          "typePartenaire",
+          "communeIds",
+          "preuve"
+        ],
+        "title": "ValidationDemande"
+      },
       "ValidationError": {
         "properties": {
           "loc": {
@@ -103039,6 +105427,45 @@
           "avertissements"
         ],
         "title": "ValidationPublicationAnimationPayload"
+      },
+      "ValidationResponsable": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "gestionnaireId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Gestionnaireid"
+          },
+          "communeIds": {
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "type": "array",
+            "maxItems": 100,
+            "minItems": 1,
+            "title": "Communeids"
+          },
+          "preuve": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 5,
+            "title": "Preuve"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "gestionnaireId",
+          "communeIds",
+          "preuve"
+        ],
+        "title": "ValidationResponsable"
       },
       "ValidationSessionCommercantPayload": {
         "properties": {

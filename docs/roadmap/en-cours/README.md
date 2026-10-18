@@ -2,7 +2,9 @@
 
 [Retour à la roadmap](../README.md)
 
-Quatre EPIC sont classées en cours. Ce classement ne vaut ni clôture ni déploiement.
+Cinq EPIC sont classées en cours. Ce classement ne vaut ni clôture ni déploiement.
+
+- [EPIC 73 — Localeo Animation et/ou Coffrets](epic-73-animation-et-ou-coffrets-backlog.md) : réalisation locale des 38 US / 63 critères en dix lots, commencée le 18 octobre ; [suivi des preuves et commits](../../specifications/epic-73-animation-et-ou-coffrets/suivi-implementation.md). Aucun push ni déploiement autorisé.
 
 - [EPIC 55 — Moteur commun et chasse au trésor](epic-55-chasse-tresor-commercante-backlog.md) :
   conception, arbitrages et suivi de livraison. La [spécification unique](../../specifications/moteur-animation/localeo_animation_engine_spec.md)

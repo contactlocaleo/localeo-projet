@@ -2,16 +2,16 @@
 
 Implémentations locales E70 et E72 vérifiées les 7–8 octobre 2026 : [E70 — PIN](../specifications/epic-70-validation-pin/README.md) et [E72 — salariés](../specifications/epic-72-acces-salaries/README.md). E70 est publiée avant le lot E72 ; les deux epics restent en cours jusqu’à leur recette de mise en service. Aucun déploiement effectué.
 
-## État global consolidé au 15 octobre 2026
+## État global consolidé au 18 octobre 2026
 
-Le tronc commun comprend 73 identifiants : 59 epics terminees, 7 a faire,
-4 en cours, 2 abandonnees et 1 fusionnee. L'Epic 61 est absorbee par l'Epic 60.
+Le tronc commun comprend 73 identifiants : 59 epics terminees, 6 a faire,
+5 en cours, 2 abandonnees et 1 fusionnee. L'Epic 61 est absorbee par l'Epic 60.
 Les documents sont ranges par etat dans l'[index de la roadmap](README.md).
 
 | Etat | Epics |
 | --- | --- |
-| A faire | `EPIC-54`, `EPIC-58`, `EPIC-62`, `EPIC-64`, `EPIC-67`, `EPIC-71`, `EPIC-73` |
-| En cours | `EPIC-55`, `EPIC-68`, `EPIC-70`, `EPIC-72` |
+| A faire | `EPIC-54`, `EPIC-58`, `EPIC-62`, `EPIC-64`, `EPIC-67`, `EPIC-71` |
+| En cours | `EPIC-55`, `EPIC-68`, `EPIC-70`, `EPIC-72`, `EPIC-73` |
 | Termine | 59 epics : toutes les autres epics de `EPIC-01` a `EPIC-60`, et `EPIC-63`/`EPIC-65`/`EPIC-66`/`EPIC-69`, hors `EPIC-05` et `EPIC-12` |
 | Abandonne | `EPIC-05` : QR commercant remplace par l'Epic 10 ; `EPIC-12` : flux manuel decommissionne par l'Epic 39 |
 | Fusionnee | `EPIC-61` dans `EPIC-60` ; non comptee comme terminee |
@@ -38,7 +38,7 @@ la confirmation produit de l'utilisateur le 15 septembre 2026.
 
 Derniere evolution suivie :
 
-- [EPIC 73 — Localeo Animation et/ou Coffrets](a-faire/epic-73-animation-et-ou-coffrets-backlog.md) :
+- [EPIC 73 — Localeo Animation et/ou Coffrets](en-cours/epic-73-animation-et-ou-coffrets-backlog.md) :
   cadrage des 14–15 octobre, 38 US et 63 critères ; vente séparée/combinée, lots libres avec
   tirage et mise en relation, catalogue standard/à la carte, périmètres commerçants
   pilotant onboarding et Pro, présence web Animation et migration. Le 15 octobre,

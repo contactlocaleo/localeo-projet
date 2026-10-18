@@ -64,6 +64,19 @@ après confirmation serveur. Ce marqueur ne donne aucun droit d’accès.
 
 ## Droits, commune et continuité du parcours
 
+### Évolution E73 — réalisation locale par lots
+
+Le [lot 01 E73](../epic-73-animation-et-ou-coffrets/suivi-implementation.md) ajoute les comptes et équipes ; les preuves et limites sont consignées dans ce suivi. Ces modifications locales ne valent pas mise en service.
+
+- Une identité peut appartenir à plusieurs organisations. Le choix de l’organisation active précède celui de la commune. Le serveur recharge l’appartenance, le rôle et les habilitations ; un retrait s’applique à la requête suivante. Le frontend invalide les données et réponses du contexte précédent.
+- Une nouvelle connexion sans contexte communal disponible peut ouvrir une session limitée à l’identité, permettant notamment d’accepter une invitation. Elle ne donne accès ni au tableau de bord ni aux données d’une organisation. Une session complète dont le contexte est révoqué reste refusée ; elle n’est pas silencieusement transformée en session limitée.
+- Les invitations d’appartenance durent sept jours et se distinguent des anciens liens d’activation initiale. Le renvoi invalide le lien précédent. Un compte existant conserve son identité et ses autres appartenances ; son rattachement exige une acceptation authentifiée.
+- « Mot de passe oublié » répond uniformément pour un email connu ou inconnu. Le lien dure une heure et ne fonctionne qu’une fois. Un changement connecté vérifie le mot de passe courant. Les deux opérations révoquent les sessions et anciens liens de récupération du seul compte, puis demandent une reconnexion.
+- Les liens d’invitation et de récupération transmettent leur secret dans un fragment, nettoyé dès lecture. Les commandes envoient ce secret dans le corps POST ; aucune persistance navigateur ni cache de page sensible. Le formulaire de récupération évite une restauration concurrente de session.
+- Le dernier responsable est protégé : le transfert exige l’acceptation d’un collaborateur actif. La récupération assistée et la validation initiale appartiennent à Localeo dans l’ERP, après vérification d’identité/autorité tracée.
+
+Les migrations locales `v260_e73_equipes_organisations.sql` et `v261_reinitialisation_mot_de_passe_animation.sql` précèdent les consommateurs de ces nouveaux contrats. Les comptes historiques deviennent des appartenances gestionnaires sans attribution automatique de responsabilité. Les rattachements communaux demandés restent à vérifier par Localeo. La section de déploiement ci-dessous décrit le socle antérieur ; elle n’autorise aucune livraison E73.
+
 Ces exigences déjà présentes dans l'ancien document ANIM-012/014 restent applicables :
 
 - le client ne déduit aucun droit d'un jeton opaque ; le serveur vérifie la session,
