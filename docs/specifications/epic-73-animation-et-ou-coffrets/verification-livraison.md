@@ -109,6 +109,22 @@ humaine ni une capacité démontrée de l'hébergement. La purge transversale, l
 gels et la réapplication des règles après restauration restent à vérifier au
 lot 10 ; aucune durée supplémentaire n'est introduite pour ce lot.
 
+### Raccordement des preuves locales du lot 09 — vérifié localement
+
+| Critères | Preuves et limites |
+| --- | --- |
+| CA-23/24 | Site public Animation, fiche commerce, source d'inscription, continuité explicite du carnet et satisfaction Live ; navigateur mobile/bureau et texte agrandi. Origines/DNS et recette hébergée non exécutés |
+| CA-56 | `test_assistant_animation_api.py` et `test_assistant_quota_postgres.py` : contrôles propriétaires sans publication, synchronisation de statut ni débit lors d'une lecture ; refus de session et de quota |
+| CA-58 | `test_demande_organisation_dedicated.py`, `test_support_organisations_postgres.py`, `test_support_organisations_http_postgres.py`, `epic73-support-organisations.cjs` : deux jours ouvrés, notes privées, droits courants, concurrence, rollback, email unique, reçus et saisie préservée |
+| CA-59/60 | Domaine Valorisation, `test_valorisation_animation_postgres.py`, API et navigateur : nouvelle édition sans données personnelles copiées, provenance, objectifs, sources, satisfaction et mesures agrégées ; réconciliation explicite hors GET |
+| CA-27, partiel | Migration v276 depuis une base vide, rejeu, atomicité et correspondance aux modèles : trois réussites locales. Générateur/registre : 23 réussites ; démonstration complète, reprise après interruption et restauration : dix réussites, 571,16 s, aucune base partagée. La preuve hébergée et la consolidation de conservation restent au lot 10 |
+
+Les résultats finaux, artefacts et corrections de revue sont consignés dans le
+[suivi](suivi-implementation.md). Le [guide des parcours et du support](../../exploitation/exploitation/parcours-plateforme-animation.md)
+décrit l'exploitation. Le lot 09 est terminé localement ; les critères du lot 10,
+la recette humaine et les vérifications hébergées restent non réalisés. Le lot 10
+n'est pas commencé, conformément à la consigne du 19 octobre.
+
 ### Documents et guides associés
 
 - **D1** : [dotation et lots](dotation-lots.md) ; actualiser à l’implémentation les parcours organisateur, les supports de gain, l’aide scanner Pro, E70 et les projections Live. Contrats gagnants discriminés et consommation.
@@ -247,4 +263,4 @@ Les bornes techniques de capture/lot et les durées de transaction des campagnes
 
 À l’implémentation, lancer le [runner isolé backend](../../../../localeo-backend/scripts/validation/test_isolated.py) sur tests domaine/application/API ciblés, puis tests PostgreSQL/concurrence et contrôles d’architecture selon le [guide backend](../../../../localeo-backend/AGENT.md). Les scénarios E73-T-* doivent être rattachés aux fichiers réels dans cette matrice avec commande, SHA/arbre, environnement et résultat. Les contrats générés et consommateurs doivent être contrôlés ensemble. La démonstration utilise le [runner de compatibilité](../../../../localeo-backend/scripts/validation/run_demo_compatibility_tests.py) et ses bases jetables.
 
-Contrôles de rédaction réalisés et revue indépendante : voir le bilan du [README](README.md). Contrôles applicatifs, migrations, envois, recette navigateur, exercice hébergé et déploiement : **non exécutés**, aucune implémentation E73 dans cette tâche. Les travaux préexistants des dépôts voisins et du suivi moteur restent préservés.
+Lors de la rédaction initiale de la spécification, seuls les contrôles documentaires et la revue indépendante du [README](README.md) avaient été réalisés ; aucun contrôle applicatif ni déploiement n'avait été exécuté. Les preuves d'implémentation ajoutées depuis sont raccordées par lot ci-dessus et détaillées dans le [suivi de réalisation](suivi-implementation.md). Les exercices hébergés, la recette humaine et les déploiements restent non exécutés. Les travaux préexistants des dépôts voisins et du suivi moteur sont préservés.

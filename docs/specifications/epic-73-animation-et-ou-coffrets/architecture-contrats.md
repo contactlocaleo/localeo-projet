@@ -350,3 +350,43 @@ message ne constitue pas une durée nouvelle de conservation d'audit.
 Les 147 décisions du backlog restent la référence produit. Les réalisations
 locales et leurs preuves ne valent ni déploiement ni validation de capacité sur
 l'hébergement cible. Les résultats et limites sont suivis lot par lot.
+
+## Réalisation locale du lot 09 — parcours, support et valorisation
+
+Le diagnostic de publication et l'assistant sont des lectures : aucune
+synchronisation de statut ni validation intermédiaire de transaction. La commande
+de publication reprend les contrôles courants dans sa transaction, y compris la
+session et l'appartenance organisateur avant restitution d'un reçu. La composition
+injecte la disponibilité commerciale ; le service applicatif n'importe pas la
+configuration d'un adaptateur. Le refus de publication annule aussi le débit du
+quota. Ces propriétés font l'objet de tests PostgreSQL indépendants du diagnostic UI.
+
+Les nouvelles éditions, objectifs, sources et satisfactions appartiennent à
+`animation_locale.valorisation`. Une édition conserve sa provenance et les
+révalidations nécessaires, sans copier les participations ou les engagements.
+Les lectures de bilans utilisent `lectures_bilans_animation` : agrégats SQL, pages
+de commentaires/sources et mesures de progression explicites. La réconciliation
+de mesures passe par une file et un worker borné ; un GET n'exécute pas ce travail.
+
+La demande privée appartient à `DemandeSupportOrganisation`. Le stockage Contact
+commun conserve ses messages ; les notes internes ont leur propre table et aucun
+schéma client ne les contient. Les anciens points d'entrée Contact, dont les
+exports SQLAdmin et compteurs, excluent ce canal. Autorisation courante, verrou
+d'identité puis de dossier, version et reçu protègent les commandes. La réponse et
+son intention email sont atomiques, leur succès et leur livraison sont distincts.
+Le calendrier figé fixe la cible de première réponse humaine ; une note interne
+ne satisfait pas cette cible.
+
+`v276_e73_parcours_support_valorisation.sql` ajoute les huit tables des mesures,
+éditions et demandes privées, leurs index, la file de reprise et la projection
+normalisée de recherche. Les suggestions publiques utilisent B-tree et `pg_trgm`
+avant leur limite. Le backfill est explicite et borné ; une projection publique
+manquante donne une indisponibilité temporaire, jamais un catalogue tronqué présenté
+comme complet. Les sélecteurs Coffrets paginent en SQL et résolvent les sélections
+déjà connues par une liste d'identifiants bornée.
+
+Satisfaction et acquisition restent rattachées aux participations ; les échanges
+privés suivent la catégorie Support existante. Notes internes et reçus ne
+deviennent pas des archives sans échéance. Leur raccordement aux purges et gels
+est consolidé au lot 10. La migration locale, les plans mesurés et les limites
+de vérification sont consignés dans le [suivi](suivi-implementation.md).

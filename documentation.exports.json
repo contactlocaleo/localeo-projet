@@ -512,6 +512,10 @@
     {
       "path": "docs/ops/exploitation/communiquer-participants-animation.md",
       "source_path": "docs/exploitation/exploitation/communiquer-participants-animation.md"
+    },
+    {
+      "path": "docs/ops/exploitation/parcours-plateforme-animation.md",
+      "source_path": "docs/exploitation/exploitation/parcours-plateforme-animation.md"
     }
   ]
 }

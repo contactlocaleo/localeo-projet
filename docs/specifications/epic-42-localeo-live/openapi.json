@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Live - API backend Epic 42",
     "description": "Vue OpenAPI 3.1 des contrats publics, editoriaux et techniques de Localeo Live.",
-    "version": "1.0.0+44c6429"
+    "version": "1.0.0+2cda9d6"
   },
   "paths": {
     "/public/exploitation/activites-locales/metriques": {
@@ -3600,6 +3600,521 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/public/animation-locale/participants/{participant_id}/satisfaction": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Lire Satisfaction",
+        "operationId": "lire_satisfaction_public_animation_locale_participants__participant_id__satisfaction_get",
+        "parameters": [
+          {
+            "name": "participant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Participant Id"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SatisfactionDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Demande invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentification requise",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Action non autorisée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ressource ou reçu introuvable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Version, aperçu ou état en conflit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Accès expiré",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Document trop volumineux",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Encodage non supporté",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Contenu invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Fréquence dépassée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Transaction indisponible, consulter le reçu",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Enregistrer Satisfaction",
+        "operationId": "enregistrer_satisfaction_public_animation_locale_participants__participant_id__satisfaction_put",
+        "parameters": [
+          {
+            "name": "participant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Participant Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SatisfactionInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SatisfactionDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Demande invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentification requise",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Action non autorisée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ressource ou reçu introuvable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Version, aperçu ou état en conflit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Accès expiré",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Document trop volumineux",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Encodage non supporté",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Contenu invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Fréquence dépassée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Transaction indisponible, consulter le reçu",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/animation-locale/participants/{participant_id}/satisfaction/commandes/{cle}": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Recu Satisfaction",
+        "operationId": "recu_satisfaction_public_animation_locale_participants__participant_id__satisfaction_commandes__cle__get",
+        "parameters": [
+          {
+            "name": "participant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Participant Id"
+            }
+          },
+          {
+            "name": "cle",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Cle"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeConfirmee_SatisfactionDTO_"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Demande invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentification requise",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Action non autorisée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ressource ou reçu introuvable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Version, aperçu ou état en conflit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Accès expiré",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Document trop volumineux",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Encodage non supporté",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Contenu invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Fréquence dépassée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Transaction indisponible, consulter le reçu",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeEnCours"
+                }
+              }
+            },
+            "description": "Accepted"
           }
         }
       }
@@ -9299,6 +9814,48 @@
         ],
         "title": "ArchiverAnimationsRequest"
       },
+      "AssistantAnimationPayload": {
+        "properties": {
+          "animationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animationid"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "titre": {
+            "type": "string",
+            "title": "Titre"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          },
+          "etapes": {
+            "items": {
+              "$ref": "#/components/schemas/EtapeAssistantAnimation"
+            },
+            "type": "array",
+            "title": "Etapes"
+          },
+          "publication": {
+            "$ref": "#/components/schemas/PublicationAssistantAnimation"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "animationId",
+          "version",
+          "titre",
+          "statut",
+          "etapes",
+          "publication"
+        ],
+        "title": "AssistantAnimationPayload"
+      },
       "AttenteServicePayload": {
         "properties": {
           "startedAt": {
@@ -10202,6 +10759,17 @@
             "format": "uuid",
             "title": "Animation Id"
           },
+          "titre": {
+            "type": "string",
+            "title": "Titre"
+          },
+          "communeNom": {
+            "type": "string",
+            "title": "Communenom"
+          },
+          "mesures": {
+            "$ref": "#/components/schemas/MesuresAnimationDTO"
+          },
           "generated_at": {
             "type": "string",
             "format": "date-time",
@@ -10212,7 +10780,14 @@
             "title": "Participants"
           },
           "participants_eligibles": {
-            "type": "integer",
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Participants Eligibles"
           },
           "validations": {
@@ -10220,7 +10795,14 @@
             "title": "Validations"
           },
           "taux_completion": {
-            "type": "number",
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Taux Completion"
           },
           "gains_envoyes": {
@@ -10265,7 +10847,14 @@
           },
           "indicateurs": {
             "additionalProperties": {
-              "type": "integer"
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ]
             },
             "type": "object",
             "title": "Indicateurs"
@@ -10274,6 +10863,9 @@
         "type": "object",
         "required": [
           "animation_id",
+          "titre",
+          "communeNom",
+          "mesures",
           "generated_at",
           "participants",
           "participants_eligibles",
@@ -11089,6 +11681,21 @@
           "ton"
         ],
         "title": "BriefGenerationPasseportSnapshot"
+      },
+      "CalendrierDemandeSupport": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version"
+        ],
+        "title": "CalendrierDemandeSupport"
       },
       "CampagneDTO": {
         "properties": {
@@ -12838,6 +13445,43 @@
         ],
         "title": "CoffretPrestationPayload"
       },
+      "CoffretSelection": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "nom": {
+            "type": "string",
+            "title": "Nom"
+          },
+          "eligible": {
+            "type": "boolean",
+            "title": "Eligible"
+          },
+          "raisons_non_eligibilite": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Raisons Non Eligibilite"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/MetadataCoffretSelection"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "nom",
+          "eligible",
+          "raisons_non_eligibilite",
+          "metadata"
+        ],
+        "title": "CoffretSelection"
+      },
       "CoffretSummaryPayload": {
         "properties": {
           "accroche": {
@@ -13095,6 +13739,25 @@
         ],
         "title": "CommandeBon"
       },
+      "CommandeConfirmee_CreationEditionDTO_": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "CONFIRMEE",
+            "title": "Status"
+          },
+          "result": {
+            "$ref": "#/components/schemas/CreationEditionDTO"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "result"
+        ],
+        "title": "CommandeConfirmee[CreationEditionDTO]"
+      },
       "CommandeConfirmee_DemandeParticipationCommercantPayload_": {
         "properties": {
           "status": {
@@ -13170,6 +13833,44 @@
           "result"
         ],
         "title": "CommandeConfirmee[GenerationMutationPayload]"
+      },
+      "CommandeConfirmee_MutationSupportPayload_": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "CONFIRMEE",
+            "title": "Status"
+          },
+          "result": {
+            "$ref": "#/components/schemas/MutationSupportPayload"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "result"
+        ],
+        "title": "CommandeConfirmee[MutationSupportPayload]"
+      },
+      "CommandeConfirmee_ObjectifsDTO_": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "CONFIRMEE",
+            "title": "Status"
+          },
+          "result": {
+            "$ref": "#/components/schemas/ObjectifsDTO"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "result"
+        ],
+        "title": "CommandeConfirmee[ObjectifsDTO]"
       },
       "CommandeConfirmee_OperationAnimationPayload_": {
         "properties": {
@@ -13379,6 +14080,44 @@
           "result"
         ],
         "title": "CommandeConfirmee[ReutilisationTemplateGenerationPayload]"
+      },
+      "CommandeConfirmee_SatisfactionDTO_": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "CONFIRMEE",
+            "title": "Status"
+          },
+          "result": {
+            "$ref": "#/components/schemas/SatisfactionDTO"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "result"
+        ],
+        "title": "CommandeConfirmee[SatisfactionDTO]"
+      },
+      "CommandeConfirmee_SourceDiffusionDTO_": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "CONFIRMEE",
+            "title": "Status"
+          },
+          "result": {
+            "$ref": "#/components/schemas/SourceDiffusionDTO"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "result"
+        ],
+        "title": "CommandeConfirmee[SourceDiffusionDTO]"
       },
       "CommandeConfirmee_TemplateGenerationPayload_": {
         "properties": {
@@ -14066,6 +14805,31 @@
           "expected_version"
         ],
         "title": "CommandeVersionnee"
+      },
+      "CommentaireBilanDTO": {
+        "properties": {
+          "commentaireId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Commentaireid"
+          },
+          "note": {
+            "type": "integer",
+            "title": "Note"
+          },
+          "commentaire": {
+            "type": "string",
+            "title": "Commentaire"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "commentaireId",
+          "note",
+          "commentaire"
+        ],
+        "title": "CommentaireBilanDTO"
       },
       "CommercantCommande": {
         "properties": {
@@ -15303,6 +16067,44 @@
           "nombre_en_cours"
         ],
         "title": "CommuneSyntheseAnimationsPayload"
+      },
+      "ComparaisonMesuresDTO": {
+        "properties": {
+          "reference": {
+            "$ref": "#/components/schemas/MesuresAnimationDTO"
+          },
+          "comparee": {
+            "$ref": "#/components/schemas/MesuresAnimationDTO"
+          },
+          "comparable": {
+            "type": "boolean",
+            "title": "Comparable"
+          },
+          "motifs": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Motifs"
+          },
+          "variations": {
+            "items": {
+              "$ref": "#/components/schemas/VariationMesureDTO"
+            },
+            "type": "array",
+            "title": "Variations"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "reference",
+          "comparee",
+          "comparable",
+          "motifs",
+          "variations"
+        ],
+        "title": "ComparaisonMesuresDTO"
       },
       "ComplementServiceInput": {
         "properties": {
@@ -16926,6 +17728,48 @@
         "type": "object",
         "title": "CouleursVisuelles"
       },
+      "CouvertureMesuresDTO": {
+        "properties": {
+          "statut": {
+            "type": "string",
+            "enum": [
+              "COMPLETE",
+              "PARTIELLE",
+              "NON_COLLECTEE"
+            ],
+            "title": "Statut"
+          },
+          "participants": {
+            "type": "integer",
+            "title": "Participants"
+          },
+          "participantsMesures": {
+            "type": "integer",
+            "title": "Participantsmesures"
+          },
+          "observedThroughAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Observedthroughat"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "statut",
+          "participants",
+          "participantsMesures",
+          "observedThroughAt"
+        ],
+        "title": "CouvertureMesuresDTO"
+      },
       "CreationAcces": {
         "properties": {
           "partenaire_id": {
@@ -16980,6 +17824,179 @@
           "permissions"
         ],
         "title": "CreationAcces"
+      },
+      "CreationDemandeSupport": {
+        "properties": {
+          "communeId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Communeid"
+          },
+          "animationId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Animationid"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 150,
+            "minLength": 3,
+            "pattern": "\\S",
+            "title": "Motif"
+          },
+          "message": {
+            "type": "string",
+            "maxLength": 4000,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Message"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "communeId",
+          "motif",
+          "message"
+        ],
+        "title": "CreationDemandeSupport"
+      },
+      "CreationEditionDTO": {
+        "properties": {
+          "animationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animationid"
+          },
+          "configurationVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Configurationversion"
+          },
+          "statut": {
+            "type": "string",
+            "const": "BROUILLON",
+            "title": "Statut"
+          },
+          "source": {
+            "$ref": "#/components/schemas/ProvenanceEditionDTO"
+          },
+          "revalidations": {
+            "items": {
+              "$ref": "#/components/schemas/RevalidationEditionDTO"
+            },
+            "type": "array",
+            "title": "Revalidations"
+          },
+          "rejoue": {
+            "type": "boolean",
+            "title": "Rejoue"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "animationId",
+          "configurationVersion",
+          "statut",
+          "source",
+          "revalidations",
+          "rejoue"
+        ],
+        "title": "CreationEditionDTO"
+      },
+      "CreationEditionInput": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "sourceConfigurationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Sourceconfigurationid"
+          },
+          "sourceConfigurationHash": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Sourceconfigurationhash"
+          },
+          "communeId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Communeid"
+          },
+          "nom": {
+            "type": "string",
+            "maxLength": 160,
+            "minLength": 1,
+            "title": "Nom"
+          },
+          "dateDebut": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Datedebut"
+          },
+          "dateFin": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Datefin"
+          },
+          "sections": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "TEXTES",
+                "VISUELS",
+                "SCENARIO_PARAMETRES"
+              ]
+            },
+            "type": "array",
+            "maxItems": 3,
+            "title": "Sections"
+          },
+          "dotation": {
+            "$ref": "#/components/schemas/DotationEdition"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "sourceConfigurationId",
+          "sourceConfigurationHash",
+          "communeId",
+          "nom",
+          "dateDebut",
+          "dateFin",
+          "sections",
+          "dotation"
+        ],
+        "title": "CreationEditionInput"
+      },
+      "CreationSourceInput": {
+        "properties": {
+          "libelle": {
+            "type": "string",
+            "maxLength": 120,
+            "minLength": 1,
+            "title": "Libelle"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "libelle"
+        ],
+        "title": "CreationSourceInput"
       },
       "CreationUtilisateur": {
         "properties": {
@@ -17561,6 +18578,18 @@
       },
       "CreerInscriptionAnimationRequest": {
         "properties": {
+          "source_diffusion_code": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 128
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Diffusion Code"
+          },
           "declaration_adulte": {
             "anyOf": [
               {
@@ -19762,6 +20791,173 @@
         ],
         "title": "DemandePin"
       },
+      "DemandeSupportPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "organisationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Organisationid"
+          },
+          "communeId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Communeid"
+          },
+          "organisationNom": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Organisationnom"
+          },
+          "communeNom": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Communenom"
+          },
+          "animationId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Animationid"
+          },
+          "motif": {
+            "type": "string",
+            "title": "Motif"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "OUVERT",
+              "EN_COURS",
+              "REPONDU",
+              "CLOTURE"
+            ],
+            "title": "Statut"
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Version"
+          },
+          "createdAt": {
+            "type": "string",
+            "title": "Createdat"
+          },
+          "lastMessageAt": {
+            "type": "string",
+            "title": "Lastmessageat"
+          },
+          "lastAuthorType": {
+            "type": "string",
+            "enum": [
+              "ORGANISATEUR",
+              "LOCALEO"
+            ],
+            "title": "Lastauthortype"
+          },
+          "targetDueAt": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Targetdueat"
+          },
+          "calendarVersion": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Calendarversion"
+          },
+          "calendarStatus": {
+            "type": "string",
+            "enum": [
+              "CONFIGURE",
+              "INDISPONIBLE"
+            ],
+            "title": "Calendarstatus"
+          },
+          "firstHumanResponseAt": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Firsthumanresponseat"
+          },
+          "enRetard": {
+            "type": "boolean",
+            "title": "Enretard"
+          },
+          "allowedActions": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "REPONDRE",
+                "AJOUTER_NOTE",
+                "CHANGER_STATUT",
+                "RACCORDER_CALENDRIER"
+              ]
+            },
+            "type": "array",
+            "title": "Allowedactions"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "organisationId",
+          "communeId",
+          "animationId",
+          "motif",
+          "statut",
+          "version",
+          "createdAt",
+          "lastMessageAt",
+          "lastAuthorType",
+          "targetDueAt",
+          "calendarVersion",
+          "calendarStatus",
+          "firstHumanResponseAt",
+          "enRetard",
+          "allowedActions"
+        ],
+        "title": "DemandeSupportPayload"
+      },
       "DependanceObjetContinuite": {
         "properties": {
           "type": {
@@ -21120,6 +22316,52 @@
         ],
         "title": "DossierVerificationsPayload"
       },
+      "DotationEdition": {
+        "properties": {
+          "nature": {
+            "type": "string",
+            "enum": [
+              "COFFRETS",
+              "LIBRE"
+            ],
+            "title": "Nature"
+          },
+          "gestion_libre": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "EXTERNE",
+                  "NUMERIQUE"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Gestion Libre"
+          },
+          "validite_jours": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 365.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Validite Jours"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "nature"
+        ],
+        "title": "DotationEdition"
+      },
       "DotationInput": {
         "properties": {
           "nature": {
@@ -22417,6 +23659,95 @@
           "estimation"
         ],
         "title": "EstimationServiceInput"
+      },
+      "EtapeAssistantAnimation": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "enum": [
+              "IDENTITE",
+              "COMMUNE",
+              "OFFRE",
+              "DATES",
+              "COMMERCANTS",
+              "PREPARATION",
+              "DOTATION",
+              "REGLEMENT",
+              "PUBLICATION"
+            ],
+            "title": "Code"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "etat": {
+            "type": "string",
+            "enum": [
+              "ACQUIS",
+              "MANQUANT",
+              "A_VERIFIER",
+              "NON_APPLICABLE"
+            ],
+            "title": "Etat"
+          },
+          "messages": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Messages"
+          },
+          "action": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "NAV_IDENTITE",
+                  "NAV_OFFRE",
+                  "NAV_DATES",
+                  "NAV_COMMERCANTS",
+                  "NAV_PREPARATION",
+                  "NAV_DOTATION",
+                  "NAV_REGLEMENT",
+                  "NAV_PUBLICATION",
+                  "SUPPORT"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Action"
+          },
+          "acteur": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "ORGANISATEUR",
+                  "LOCALEO",
+                  "COMMERCANTS"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Acteur"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "code",
+          "libelle",
+          "etat",
+          "messages",
+          "action",
+          "acteur"
+        ],
+        "title": "EtapeAssistantAnimation"
       },
       "EtapeCommercante": {
         "properties": {
@@ -23929,6 +25260,50 @@
           "statut"
         ],
         "title": "FenetreCommunicationDTO"
+      },
+      "FenetreMesuresDTO": {
+        "properties": {
+          "debutAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Debutat"
+          },
+          "finAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Finat"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "EN_COURS",
+              "EDITION_COMPLETE"
+            ],
+            "title": "Mode"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "debutAt",
+          "finAt",
+          "mode"
+        ],
+        "title": "FenetreMesuresDTO"
       },
       "FermerAlerteInput": {
         "properties": {
@@ -27701,6 +29076,88 @@
         ],
         "title": "IncidentCommandeLotsPayload"
       },
+      "IndicateurAnimationDTO": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "enum": [
+              "INSCRITS",
+              "PARCOURS_COMMENCES",
+              "PARCOURS_TERMINES",
+              "PASSAGES",
+              "GAGNANTS",
+              "LOTS_REMIS",
+              "PARCOURS_NON_TERMINES"
+            ],
+            "title": "Code"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "unite": {
+            "type": "string",
+            "title": "Unite"
+          },
+          "disponibilite": {
+            "type": "string",
+            "enum": [
+              "MESURE",
+              "NON_COLLECTE",
+              "NON_APPLICABLE"
+            ],
+            "title": "Disponibilite"
+          },
+          "valeur": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Valeur"
+          },
+          "objectif": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Objectif"
+          },
+          "population": {
+            "type": "string",
+            "title": "Population"
+          },
+          "definition": {
+            "type": "string",
+            "title": "Definition"
+          },
+          "definitionVersion": {
+            "type": "string",
+            "title": "Definitionversion"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "code",
+          "libelle",
+          "unite",
+          "disponibilite",
+          "valeur",
+          "objectif",
+          "population",
+          "definition",
+          "definitionVersion"
+        ],
+        "title": "IndicateurAnimationDTO"
+      },
       "IndicateursVision360AnimationPayload": {
         "properties": {
           "animation_id": {
@@ -30501,6 +31958,56 @@
         ],
         "title": "MessagePayload"
       },
+      "MessageSupportPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "auteurType": {
+            "type": "string",
+            "enum": [
+              "ORGANISATEUR",
+              "LOCALEO"
+            ],
+            "title": "Auteurtype"
+          },
+          "auteurNom": {
+            "type": "string",
+            "title": "Auteurnom"
+          },
+          "contenu": {
+            "type": "string",
+            "title": "Contenu"
+          },
+          "createdAt": {
+            "type": "string",
+            "title": "Createdat"
+          },
+          "emailStatut": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Emailstatut"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "auteurType",
+          "auteurNom",
+          "contenu",
+          "createdAt"
+        ],
+        "title": "MessageSupportPayload"
+      },
       "MesureParcoursCommande": {
         "properties": {
           "parcours_id": {
@@ -30542,6 +32049,149 @@
           "duree_ms"
         ],
         "title": "MesureParcoursCommande"
+      },
+      "MesuresAnimationDTO": {
+        "properties": {
+          "animationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animationid"
+          },
+          "titre": {
+            "type": "string",
+            "title": "Titre"
+          },
+          "communeId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Communeid"
+          },
+          "typeMoteur": {
+            "type": "string",
+            "title": "Typemoteur"
+          },
+          "observedAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Observedat"
+          },
+          "configurationVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Configurationversion"
+          },
+          "exploitationRevision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Exploitationrevision"
+          },
+          "definitionVersion": {
+            "type": "string",
+            "const": "E73-MESURES-1",
+            "title": "Definitionversion"
+          },
+          "fenetre": {
+            "$ref": "#/components/schemas/FenetreMesuresDTO"
+          },
+          "couverture": {
+            "$ref": "#/components/schemas/CouvertureMesuresDTO"
+          },
+          "indicateurs": {
+            "items": {
+              "$ref": "#/components/schemas/IndicateurAnimationDTO"
+            },
+            "type": "array",
+            "title": "Indicateurs"
+          },
+          "satisfaction": {
+            "$ref": "#/components/schemas/SyntheseSatisfactionDTO"
+          },
+          "acquisition": {
+            "$ref": "#/components/schemas/SyntheseAcquisitionDTO"
+          },
+          "allowedActions": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "CREER_EDITION",
+                "CREER_SOURCE",
+                "MODIFIER_OBJECTIFS"
+              ]
+            },
+            "type": "array",
+            "title": "Allowedactions"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "animationId",
+          "titre",
+          "communeId",
+          "typeMoteur",
+          "observedAt",
+          "configurationVersion",
+          "exploitationRevision",
+          "definitionVersion",
+          "fenetre",
+          "couverture",
+          "indicateurs",
+          "satisfaction",
+          "acquisition",
+          "allowedActions"
+        ],
+        "title": "MesuresAnimationDTO"
+      },
+      "MetadataCoffretSelection": {
+        "properties": {
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          },
+          "prix_centimes": {
+            "type": "integer",
+            "title": "Prix Centimes"
+          },
+          "image_uri": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Image Uri"
+          },
+          "avertissements": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Avertissements"
+          },
+          "couverture_participant": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Couverture Participant"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "statut",
+          "prix_centimes",
+          "image_uri",
+          "avertissements",
+          "couverture_participant"
+        ],
+        "title": "MetadataCoffretSelection"
       },
       "MetadonneeAudit": {
         "properties": {
@@ -31304,6 +32954,25 @@
           "communeIds"
         ],
         "title": "ModificationMembreCommande"
+      },
+      "ModificationObjectifsInput": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "objectifs": {
+            "$ref": "#/components/schemas/ObjectifsValeurs"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "objectifs"
+        ],
+        "title": "ModificationObjectifsInput"
       },
       "ModificationOctroi": {
         "properties": {
@@ -33141,6 +34810,31 @@
         ],
         "title": "MutationServicePayload"
       },
+      "MutationSupportPayload": {
+        "properties": {
+          "demande": {
+            "$ref": "#/components/schemas/DemandeSupportPayload"
+          },
+          "messageId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Messageid"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "demande"
+        ],
+        "title": "MutationSupportPayload"
+      },
       "MutationTerrainPayload": {
         "properties": {
           "operationCommandeId": {
@@ -33243,6 +34937,60 @@
           "contenu"
         ],
         "title": "NoteCommande"
+      },
+      "NoteDemandeSupport": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "contenu": {
+            "type": "string",
+            "maxLength": 4000,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Contenu"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "contenu"
+        ],
+        "title": "NoteDemandeSupport"
+      },
+      "NoteInterneSupportPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "auteurId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Auteurid"
+          },
+          "contenu": {
+            "type": "string",
+            "title": "Contenu"
+          },
+          "createdAt": {
+            "type": "string",
+            "title": "Createdat"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "auteurId",
+          "contenu",
+          "createdAt"
+        ],
+        "title": "NoteInterneSupportPayload"
       },
       "NotificationAnimationPayload": {
         "properties": {
@@ -33513,6 +35261,136 @@
           "active"
         ],
         "title": "NouvelleOffre"
+      },
+      "ObjectifsDTO": {
+        "properties": {
+          "animationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animationid"
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Version"
+          },
+          "configurationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Configurationid"
+          },
+          "figes": {
+            "type": "boolean",
+            "title": "Figes"
+          },
+          "objectifs": {
+            "$ref": "#/components/schemas/ObjectifsValeurs"
+          },
+          "allowedActions": {
+            "items": {
+              "type": "string",
+              "const": "MODIFIER_OBJECTIFS"
+            },
+            "type": "array",
+            "title": "Allowedactions"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "animationId",
+          "version",
+          "configurationId",
+          "figes",
+          "objectifs",
+          "allowedActions"
+        ],
+        "title": "ObjectifsDTO"
+      },
+      "ObjectifsValeurs": {
+        "properties": {
+          "inscrits": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 2147483647.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Inscrits"
+          },
+          "parcoursCommences": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 2147483647.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parcourscommences"
+          },
+          "parcoursTermines": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 2147483647.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parcourstermines"
+          },
+          "passages": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 2147483647.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Passages"
+          },
+          "gagnants": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 2147483647.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Gagnants"
+          },
+          "lotsRemis": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 2147483647.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lotsremis"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "ObjectifsValeurs"
       },
       "ObjetCollecte": {
         "properties": {
@@ -34760,6 +36638,40 @@
         ],
         "title": "PageCommandes"
       },
+      "PageCommentairesDTO": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/CommentaireBilanDTO"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          },
+          "hasMore": {
+            "type": "boolean",
+            "title": "Hasmore"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "nextCursor",
+          "hasMore"
+        ],
+        "title": "PageCommentairesDTO"
+      },
       "PageCommercantsPayload": {
         "properties": {
           "items": {
@@ -35006,6 +36918,49 @@
           "has_more"
         ],
         "title": "PageDTO[LotDTO]"
+      },
+      "PageDemandesSupport": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/DemandeSupportPayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          },
+          "hasMore": {
+            "type": "boolean",
+            "title": "Hasmore"
+          },
+          "allowedActions": {
+            "items": {
+              "type": "string",
+              "const": "CREER_DEMANDE"
+            },
+            "type": "array",
+            "title": "Allowedactions"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "nextCursor",
+          "hasMore",
+          "allowedActions"
+        ],
+        "title": "PageDemandesSupport"
       },
       "PageGelsConservationPayload": {
         "properties": {
@@ -35390,6 +37345,74 @@
         ],
         "title": "PageMessagesPayload"
       },
+      "PageMessagesSupport": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/MessageSupportPayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          },
+          "hasMore": {
+            "type": "boolean",
+            "title": "Hasmore"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "nextCursor",
+          "hasMore"
+        ],
+        "title": "PageMessagesSupport"
+      },
+      "PageNotesInternesSupport": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/NoteInterneSupportPayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          },
+          "hasMore": {
+            "type": "boolean",
+            "title": "Hasmore"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "nextCursor",
+          "hasMore"
+        ],
+        "title": "PageNotesInternesSupport"
+      },
       "PageNotificationsPin": {
         "properties": {
           "items": {
@@ -35671,6 +37694,40 @@
         ],
         "title": "PageSalaries"
       },
+      "PageSelecteurPreparation_CoffretSelection_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/CoffretSelection"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          },
+          "hasMore": {
+            "type": "boolean",
+            "title": "Hasmore"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "nextCursor",
+          "hasMore"
+        ],
+        "title": "PageSelecteurPreparation[CoffretSelection]"
+      },
       "PageSelecteurPreparation_CommercantEligibleAnimationPayload_": {
         "properties": {
           "items": {
@@ -35840,6 +37897,93 @@
           "hasMore"
         ],
         "title": "PageServicePayload[FileServicePreparationPayload]"
+      },
+      "PageSourcesBilanDTO": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/SourceBilanDTO"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          },
+          "hasMore": {
+            "type": "boolean",
+            "title": "Hasmore"
+          },
+          "inconnue": {
+            "type": "integer",
+            "title": "Inconnue"
+          },
+          "nonCollectes": {
+            "type": "integer",
+            "title": "Noncollectes"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "nextCursor",
+          "hasMore",
+          "inconnue",
+          "nonCollectes"
+        ],
+        "title": "PageSourcesBilanDTO"
+      },
+      "PageSourcesDiffusionDTO": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/SourceDiffusionDTO"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          },
+          "hasMore": {
+            "type": "boolean",
+            "title": "Hasmore"
+          },
+          "allowedActions": {
+            "items": {
+              "type": "string",
+              "const": "CREER_SOURCE"
+            },
+            "type": "array",
+            "title": "Allowedactions"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "nextCursor",
+          "hasMore",
+          "allowedActions"
+        ],
+        "title": "PageSourcesDiffusionDTO"
       },
       "PageSuiviCommerces": {
         "properties": {
@@ -38814,6 +40958,44 @@
         ],
         "title": "PreparationConfirmeePayload"
       },
+      "PreparationEditionDTO": {
+        "properties": {
+          "source": {
+            "$ref": "#/components/schemas/SourceEditionDTO"
+          },
+          "sections": {
+            "items": {
+              "$ref": "#/components/schemas/SectionEditionDTO"
+            },
+            "type": "array",
+            "title": "Sections"
+          },
+          "revalidations": {
+            "items": {
+              "$ref": "#/components/schemas/RevalidationEditionDTO"
+            },
+            "type": "array",
+            "title": "Revalidations"
+          },
+          "allowedActions": {
+            "items": {
+              "type": "string",
+              "const": "CREER_EDITION"
+            },
+            "type": "array",
+            "title": "Allowedactions"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "source",
+          "sections",
+          "revalidations",
+          "allowedActions"
+        ],
+        "title": "PreparationEditionDTO"
+      },
       "PreparationFinanciereOnboardRequest": {
         "properties": {
           "profilId": {
@@ -40855,6 +43037,63 @@
           "requestHash"
         ],
         "title": "PromptGenerationResumePayload"
+      },
+      "ProvenanceEditionDTO": {
+        "properties": {
+          "animationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animationid"
+          },
+          "configurationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Configurationid"
+          },
+          "configurationVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Configurationversion"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "animationId",
+          "configurationId",
+          "configurationVersion"
+        ],
+        "title": "ProvenanceEditionDTO"
+      },
+      "PublicationAssistantAnimation": {
+        "properties": {
+          "valide": {
+            "type": "boolean",
+            "title": "Valide"
+          },
+          "erreurs": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Erreurs"
+          },
+          "avertissements": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Avertissements"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "valide",
+          "erreurs",
+          "avertissements"
+        ],
+        "title": "PublicationAssistantAnimation"
       },
       "PublicationCatalogue": {
         "properties": {
@@ -43876,6 +46115,29 @@
         ],
         "title": "ReponseAssociation"
       },
+      "ReponseDemandeSupport": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "message": {
+            "type": "string",
+            "maxLength": 4000,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Message"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "message"
+        ],
+        "title": "ReponseDemandeSupport"
+      },
       "ReponseOrdre": {
         "properties": {
           "type": {
@@ -44990,6 +47252,30 @@
         ],
         "title": "ReutiliserTemplateGenerationInput"
       },
+      "RevalidationEditionDTO": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "title": "Code"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "acteurAttendu": {
+            "type": "string",
+            "title": "Acteurattendu"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "code",
+          "libelle",
+          "acteurAttendu"
+        ],
+        "title": "RevalidationEditionDTO"
+      },
       "ReversementEffectuePayload": {
         "properties": {
           "reversement_id": {
@@ -45519,6 +47805,106 @@
         ],
         "title": "SalarieRevoque"
       },
+      "SatisfactionDTO": {
+        "properties": {
+          "version": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Version"
+          },
+          "disponible": {
+            "type": "boolean",
+            "title": "Disponible"
+          },
+          "raisonIndisponibilite": {
+            "anyOf": [
+              {
+                "type": "string",
+                "const": "ANIMATION_NON_CLOTUREE"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Raisonindisponibilite"
+          },
+          "note": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Note"
+          },
+          "commentaire": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Commentaire"
+          },
+          "allowedActions": {
+            "items": {
+              "type": "string",
+              "const": "ENREGISTRER"
+            },
+            "type": "array",
+            "title": "Allowedactions"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "version",
+          "disponible",
+          "raisonIndisponibilite",
+          "note",
+          "commentaire",
+          "allowedActions"
+        ],
+        "title": "SatisfactionDTO"
+      },
+      "SatisfactionInput": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Expected Version"
+          },
+          "note": {
+            "type": "integer",
+            "maximum": 5.0,
+            "minimum": 1.0,
+            "title": "Note"
+          },
+          "commentaire": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2000
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Commentaire"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "note"
+        ],
+        "title": "SatisfactionInput"
+      },
       "SavePreparationInput": {
         "allOf": [
           {
@@ -45851,6 +48237,43 @@
         "title": "Scope",
         "description": "Entrée historique conservée uniquement pour les profils déjà globaux."
       },
+      "SectionEditionDTO": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "enum": [
+              "TEXTES",
+              "VISUELS",
+              "SCENARIO_PARAMETRES"
+            ],
+            "title": "Code"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "disponible": {
+            "type": "boolean",
+            "title": "Disponible"
+          },
+          "motifsIndisponibilite": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Motifsindisponibilite"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "code",
+          "libelle",
+          "disponible",
+          "motifsIndisponibilite"
+        ],
+        "title": "SectionEditionDTO"
+      },
       "SectionResponse": {
         "properties": {
           "title": {
@@ -45886,6 +48309,23 @@
           "achats"
         ],
         "title": "SectionsPaiement"
+      },
+      "SelectionPreparation_CoffretSelection_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/CoffretSelection"
+            },
+            "type": "array",
+            "title": "Items"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items"
+        ],
+        "title": "SelectionPreparation[CoffretSelection]"
       },
       "SelectionPreparation_CommercantEligibleAnimationPayload_": {
         "properties": {
@@ -46372,6 +48812,131 @@
         ],
         "title": "SoumettreFeedbackPrestationRequest"
       },
+      "SourceBilanDTO": {
+        "properties": {
+          "sourceId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Sourceid"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "inscrits": {
+            "type": "integer",
+            "title": "Inscrits"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "sourceId",
+          "libelle",
+          "inscrits"
+        ],
+        "title": "SourceBilanDTO"
+      },
+      "SourceDiffusionDTO": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "code": {
+            "type": "string",
+            "title": "Code"
+          },
+          "url": {
+            "type": "string",
+            "title": "Url"
+          },
+          "qrUrl": {
+            "type": "string",
+            "title": "Qrurl"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Createdat"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "libelle",
+          "code",
+          "url",
+          "qrUrl",
+          "createdAt"
+        ],
+        "title": "SourceDiffusionDTO"
+      },
+      "SourceEditionDTO": {
+        "properties": {
+          "animationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animationid"
+          },
+          "titre": {
+            "type": "string",
+            "title": "Titre"
+          },
+          "communeId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Communeid"
+          },
+          "communeNom": {
+            "type": "string",
+            "title": "Communenom"
+          },
+          "typeMoteur": {
+            "type": "string",
+            "title": "Typemoteur"
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Version"
+          },
+          "configurationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Configurationid"
+          },
+          "configurationVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Configurationversion"
+          },
+          "configurationHash": {
+            "type": "string",
+            "title": "Configurationhash"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "animationId",
+          "titre",
+          "communeId",
+          "communeNom",
+          "typeMoteur",
+          "version",
+          "configurationId",
+          "configurationVersion",
+          "configurationHash"
+        ],
+        "title": "SourceEditionDTO"
+      },
       "SourceReversementSuivi": {
         "properties": {
           "id": {
@@ -46513,6 +49078,31 @@
           "statut"
         ],
         "title": "StatutCommande"
+      },
+      "StatutDemandeSupport": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "OUVERT",
+              "EN_COURS",
+              "CLOTURE"
+            ],
+            "title": "Statut"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "statut"
+        ],
+        "title": "StatutDemandeSupport"
       },
       "StatutResultat": {
         "properties": {
@@ -47398,6 +49988,38 @@
         ],
         "title": "SynchroniserAnnuaireChorusRequest"
       },
+      "SyntheseAcquisitionDTO": {
+        "properties": {
+          "collecteDepuis": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Collectedepuis"
+          },
+          "inscritsAttribues": {
+            "type": "integer",
+            "title": "Inscritsattribues"
+          },
+          "nonCollectes": {
+            "type": "integer",
+            "title": "Noncollectes"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "collecteDepuis",
+          "inscritsAttribues",
+          "nonCollectes"
+        ],
+        "title": "SyntheseAcquisitionDTO"
+      },
       "SyntheseAnimationsPubliquesPayload": {
         "properties": {
           "total_a_decouvrir": {
@@ -47443,6 +50065,57 @@
           "communes"
         ],
         "title": "SyntheseAnimationsPubliquesPayload"
+      },
+      "SyntheseBilansDTO": {
+        "properties": {
+          "observedAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Observedat"
+          },
+          "animations": {
+            "type": "integer",
+            "title": "Animations"
+          },
+          "inscrits": {
+            "type": "integer",
+            "title": "Inscrits"
+          },
+          "passages": {
+            "type": "integer",
+            "title": "Passages"
+          },
+          "gagnants": {
+            "type": "integer",
+            "title": "Gagnants"
+          },
+          "lotsRemis": {
+            "type": "integer",
+            "title": "Lotsremis"
+          },
+          "editionComplete": {
+            "type": "integer",
+            "title": "Editioncomplete"
+          },
+          "definitionVersion": {
+            "type": "string",
+            "const": "E73-MESURES-1",
+            "title": "Definitionversion"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "observedAt",
+          "animations",
+          "inscrits",
+          "passages",
+          "gagnants",
+          "lotsRemis",
+          "editionComplete",
+          "definitionVersion"
+        ],
+        "title": "SyntheseBilansDTO"
       },
       "SyntheseCommerces": {
         "properties": {
@@ -47692,6 +50365,41 @@
           "oldestEvaluationAt"
         ],
         "title": "SyntheseResponse"
+      },
+      "SyntheseSatisfactionDTO": {
+        "properties": {
+          "disponibilite": {
+            "type": "string",
+            "enum": [
+              "MESURE",
+              "NON_COLLECTE"
+            ],
+            "title": "Disponibilite"
+          },
+          "moyenne": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Moyenne"
+          },
+          "nombreReponses": {
+            "type": "integer",
+            "title": "Nombrereponses"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "disponibilite",
+          "moyenne",
+          "nombreReponses"
+        ],
+        "title": "SyntheseSatisfactionDTO"
       },
       "SyntheseVision360AnimationPayload": {
         "properties": {
@@ -49080,6 +51788,44 @@
           "validatedAt"
         ],
         "title": "ValidationTerrainPayload"
+      },
+      "VariationMesureDTO": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "title": "Code"
+          },
+          "ecart": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ecart"
+          },
+          "taux": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Taux"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "code",
+          "ecart",
+          "taux"
+        ],
+        "title": "VariationMesureDTO"
       },
       "VerificationExploitation": {
         "properties": {

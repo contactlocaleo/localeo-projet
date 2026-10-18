@@ -6,6 +6,9 @@ Début : **18 octobre 2026**. [Spécification](README.md), [backlog](../../roadm
 
 Implémentation, bases jetables locales, tests isolés et commits locaux uniquement. **Aucun push, pipeline distant, déploiement, migration/configuration de test/démo/production, envoi réel ou paiement réel.** Les vérifications humaines et hébergées restent des étapes futures explicites. Ne pas confondre commits et livraison.
 
+**Consigne du 19 octobre 2026 : terminer le lot 09 puis s'arrêter, sans commencer
+le lot 10.** Les obligations de ce dernier restent identifiées et non réalisées.
+
 | Dépôt / branche | HEAD initial | Travaux préexistants à préserver |
 | --- | --- | --- |
 | Projet / main | `cc9991dd3679075e232f53844362405acfdc77a2` | Spécification E73 et règles associées à committer séparément ; modification étrangère `docs/specifications/moteur-animation/suivi-implementation.md` exclue |
@@ -27,8 +30,8 @@ Implémentation, bases jetables locales, tests isolés et commits locaux uniquem
 | 06 | US19–20 ; import/deltas/reprise | Backend, Animation, Projet | Implémenté et vérifié localement ; Backend `bb4e1e8`, Animation `955fb94`, sources dans le commit documentaire du lot 06 ; preuves et limites ci-dessous |
 | 07 | US18,30 ; chasse et préparation accompagnée | Backend, Animation, Projet | Implémenté et vérifié localement ; Backend `44c6429`, Animation `8979893`, Projet `7f80a6c` ; recette humaine et hébergement non exécutés |
 | 08 | US21–22 ; communication participants | Backend, Animation, Marketplace/Live, Projet | Implémenté et vérifié localement : campagnes, préférences Live, quotas, fréquence et alertes internes ; consolidation conservation/restauration au lot 10 |
-| 09 | US23,29,31–33 ; parcours/site/assistance/bilans | Backend, Animation, Marketplace/Live, Projet | À réaliser |
-| 10 | US34–38 ; finalisation US24, exploitabilité/pilote | Les cinq dépôts selon impact | À réaliser localement ; aucune activation distante autorisée |
+| 09 | US23,29,31–33 ; parcours/site/assistance/bilans | Backend, Animation, Marketplace/Live, Projet | Implémenté et vérifié localement ; Backend `76103d7`, Animation `eb3def9`, Marketplace `70d7128`, sources dans le commit documentaire du lot 09 ; démonstration complète : dix réussites |
+| 10 | US34–38 ; finalisation US24, exploitabilité/pilote | Les cinq dépôts selon impact | Non commencé, conformément à la consigne du 19 octobre ; aucune activation distante autorisée |
 
 Les US partagées ne sont acquises qu’après toutes leurs branches. Reprendre les identifiants CA du plan de vérification, sans en changer la portée. Chaque bilan de lot doit enregistrer fichiers/contrats, migrations, fixtures, commandes, résultats, revue, limites et commits par dépôt. Si nécessaire, subdiviser un lot en incréments explicitement non terminaux ; aucune validation par simple présence d’un fichier.
 
@@ -861,3 +864,145 @@ des messages suivent la politique Live existante ; le raccord transversal aux
 gels/purges et la preuve après restauration des nouvelles familles restent au
 lot 10. Les essais utilisateurs Localeo/Martignas et toute capacité hébergée sont
 non exécutés. Aucun fournisseur réel ni environnement partagé n'a été utilisé.
+
+### Lot 09 — Parcours, site, assistance et mesure
+
+Les parcours sont implémentés et vérifiés localement ; les contrôles communs,
+la démonstration complète et les commits applicatifs sont terminés. Le
+[guide opératoire](../../exploitation/exploitation/parcours-plateforme-animation.md)
+décrit l'assistant, les éditions, les bilans, la recherche et le support privé.
+Cette réalisation locale ne vaut pas mise en service ni clôture de l'epic.
+
+Le support utilise le stockage Contact commun pour les messages et un canal privé
+exclu des anciennes listes, détails et exports SQLAdmin. La portée de la demande,
+les réponses et les notes internes relèvent de `DemandeSupportOrganisation` ; les
+notes ne constituent pas une première réponse. Les droits courants sont contrôlés
+avant lecture, écriture et réconciliation de reçu. Une réponse et son intention
+email sont atomiques ; un échec de préparation annule l'ensemble.
+
+L'assistant consulte les propriétaires des règles sans publier, modifier les
+statuts ni consommer de crédit. La disponibilité du module est injectée depuis la
+composition ; l'application ne lit pas un adaptateur de configuration. Un brouillon
+peut être préparé avec un droit actif et un quota de publication épuisé.
+
+Preuves exécutées par l'intégration :
+
+- Support domaine et PostgreSQL : **20 réussites**, `tmp/e73-lot09-support-pg04.xml`.
+- HTTP privé, ancien SQLAdmin et CLI de réconciliation : **9 réussites**, deux
+  avertissements de dépréciation, `tmp/e73-lot09-support-http02.xml`. Le premier
+  essai HTTP avait quatre réussites et un échec de fixture sans session Starlette ;
+  cette fixture a été corrigée puis rejouée, sans changement d'assertion.
+- Assistant, disponibilité et régression publication : **15 réussites**, deux
+  avertissements, `tmp/e73-lot09-assistant01.xml`. Le contrôle PostgreSQL du quota
+  sans écriture a également réussi dans `tmp/e73-lot09-support-http01.xml`.
+- Support navigateur : commande `node tests/browser/epic73-support-organisations.cjs`
+  réussie à 320 et 1 280 px, avec agrandissement effectif de chaque texte à 200 %,
+  reçus 404/202, rechargement, conflit de version, pagination, notes et lecture seule.
+  Captures locales inspectées ; dernier ajustement des libellés de succès rejoué
+  avec le code 0 : réponse, note interne et changement de statut restent distincts.
+- Migration depuis base vide, rejeu, atomicité et correspondance de tous les modèles :
+  **3 réussites**, 221,45 s, `tmp/e73-lot09-migrations01.xml`, PostgreSQL local jetable
+  `localeo_audit_migrations_test`. Aucun SQL appliqué à un environnement partagé.
+- Premier contrôle d'architecture : 563 réussites, 15 erreurs de permissions du
+  répertoire temporaire Windows et un échec de déclaration des preuves de quatre
+  classes. Les déclarations ont été corrigées ; reprise avec `--basetemp` dédié :
+  **586 réussites**, 44,52 s, deux avertissements, `tmp/e73-lot09-architecture02.xml`.
+  Cette reprise vérifie aussi les routes HTML et le chargement réel du module Support.
+- Régression Support et recherche publique temporairement indisponible : **65
+  réussites**, 52,10 s, deux avertissements, `tmp/e73-lot09-support-regression01.xml` ;
+  HTTP 503 explicite, sans cache ni détail interne, lorsque la projection manque.
+- Architecture et recensement final après correction de publication : **580
+  réussites**, 17,25 s, `tmp/e73-lot09-architecture-final.xml`.
+- Contrats OpenAPI, export documentaire et réponses Animation : **21 réussites**,
+  29,85 s, `tmp/e73-lot09-contracts-final.xml` ; E41 **925 routes**, E42 **62 routes**.
+  Le contrat runtime final est recopié en LF auprès du consommateur Animation.
+
+La revue indépendante a relevé une validation de publication historique susceptible
+de synchroniser un statut après le débit du quota. Le contrôle est désormais sans
+écriture : **16 tests PostgreSQL** prouvent la lecture pure, le rollback du débit et
+le refus des reçus/commandes après révocation. Les fixtures T3 gardent leurs assertions,
+avec une dotation explicite et un journal de débit réellement transactionnel. La
+dernière régression HTTP brouillon/bilan a **14 réussites** après correction de huit
+fixtures utilisant l'ancien appel de génération ; les assertions de refus restent
+inchangées. Les entrées ERP conservent leur contrôle d'identité à l'entrée de requête.
+
+Valorisation : **29 tests domaine/API/PostgreSQL**, puis **46 contrôles de
+réconciliation/moteur/bilan** et **11 contrôles API historiques** réussis dans des
+suites qui se recouvrent. La parité Coffrets est vérifiée sur PostgreSQL : deux
+instances, deux prestations consommées sur trois, 20 euros et gagnants distincts.
+Les mesures de progression restent indisponibles quand leur couverture est incomplète.
+
+Performances locales, sans forçage du plan PostgreSQL :
+
+- Bilans : **10 communes, 10 000 participants, 10 lecteurs simultanés** ; une requête
+  d'agrégation pour une ou dix éditions, aucune population hydratée, pic mémoire
+  observé 113 759 octets, p95 710 ms et maximum 714 ms. Artefact backend
+  `.artifacts/e73-lot09-valorisation-performance.json`.
+- Support : **20 100 demandes**, page profonde à 19 000, six filtres ; une requête
+  et au plus 26 objets pour 25 résultats, plans indexés, 10 à 29 ms observés.
+  Artefact `.artifacts/e73-lot09-support-performance.json`.
+- Sélecteur Coffrets : **20 000 coffrets**, quatre requêtes pour une page de 25
+  comme de 100 ; parité de couverture prouvée par six cas PostgreSQL. Artefact
+  `.artifacts/e73-coffrets-selecteur-performance.json` et `tmp/e73-lot09-coffrets04.xml`.
+- Recherche publique : **10 005 animations**, deux requêtes, tri/visibilité avant
+  limite et plans indexés ; trois cas PostgreSQL réussis. L'ancien test de classement
+  en mémoire a été adapté à la frontière SQL puis les **17 tests** ont réussi dans
+  `tmp/e73-lot09-search-unit-final.xml`, après un échec de compilation du double SQL.
+
+Animation : **230 tests Node**, trois contrats HTTP rejoués sur l'export final,
+types/lint/build réussis sur une copie ne contenant pas les changements préexistants.
+**26 scénarios navigateur / 293 assertions**, 320/1 280 px et texte 200 %, auxquels
+s'ajoutent les régressions sélection et lots/configuration. La recette de création
+vérifie désormais l'arrivée dans l'Assistant avant d'ouvrir la Configuration ; les
+assertions de paiement, quantités et droits sont conservées. Les filtres du bilan
+global sont préservés au retour, avec deux scénarios supplémentaires réussis.
+Le bundle principal est ramené à **498,18 ko / 127,89 ko gzip** par chargement différé.
+
+Marketplace/Live : **115 tests de sécurité**, **13 tests serveur**, lint ciblé et
+build isolé réussis ; **10 scénarios navigateur**, puis une reprise mobile après
+le dernier ajustement de la synthèse des communes. Les deux surfaces partagent le
+socle et la valeur par défaut reste Coffrets. Aucun domaine n'est créé ni configuré.
+
+La migration **v276** prépare les huit tables Support/Valorisation, leurs index,
+le motif Support privé et la projection de recherche publique. La reprise de
+recherche est une commande explicite, bornée et simulée par défaut ; aucune
+configuration opérateur ni donnée d'exploitation n'est modifiée ici.
+
+La démonstration a d'abord refusé une base de construction non vide. Après
+vérification de la cible locale jetable et de l'absence d'animations/commerces,
+cette seule base a été recréée. La passe suivante a été interrompue après cinq
+échecs : le scénario ajoutait des objectifs sur une nouvelle édition dont l'UUID
+ne respectait pas l'ordre des coordinations déjà verrouillées par le générateur.
+Le scénario règle désormais les objectifs sur le brouillon historique déjà
+verrouillé et conserve l'édition nouvellement créée vierge. Le produit et ses
+contrôles de verrous ne sont pas assouplis. La reprise ciblée réussit : **1 test**,
+77,06 s, `tmp/e73-lot09-demo-target01.xml`, avec rechargement des huit tables.
+Les unités du générateur et son registre comptent **23 réussites**, aucun skip.
+Ces passes intermédiaires ne remplacent pas le résultat du runner complet.
+
+Le runner complet a ensuite réussi sur les sources finales : **10 réussites**,
+aucun échec ni skip, **571,16 s**, sept avertissements SQLAlchemy de réflexion
+`dialect_options`, code de sortie 0. Artefact backend :
+`tmp/e73-lot09-demo-complete03/results.xml`. Commande :
+`scripts/validation/run_demo_compatibility_tests.py --disposable-postgres
+127.0.0.1:10407,127.0.0.1:55448 --pg-bin-dir "C:/Program Files/PostgreSQL/18/bin"
+--output-dir tmp/e73-lot09-demo-complete03`, avec le runtime Python local isolé.
+Elle couvre les scénarios métier, le transfert, la reprise après interruption
+et la restauration de la base d'origine jetable. Aucun fournisseur réel ni
+environnement partagé n'a été utilisé.
+
+Contrôles documentaires finaux : **98 guides, 1 085 liens, zéro erreur ni
+avertissement** ; **129 documents exportables** vérifiés. Les contrats E41/E42,
+le contrat embarqué Animation et le guide opératoire sont synchronisés.
+
+Commits locaux applicatifs : Backend **`76103d7`** (94 fichiers), Animation
+**`eb3def9`** (30 fichiers), Marketplace **`70d7128`** (21 fichiers). Les quatre
+modifications préexistantes Clôturer d'`App.tsx`, ainsi que le README, la vue
+Exploitation et son test, restent hors commit Animation. Le suivi moteur
+préexistant du dépôt Projet reste également exclu. Aucun push ni déploiement.
+
+Les pages de sélection et suggestions publiques sont désormais bornées ; la vue
+Coffrets globale et ses totaux historiques, repérés pendant la revue, restent à
+traiter dans le lot 10, non commencé à la demande de l'utilisateur. Les recettes
+humaines et hébergées restent non exécutées ; ces mesures ne constituent pas le
+test de charge mixte ni une garantie de capacité sur l'hébergement cible.

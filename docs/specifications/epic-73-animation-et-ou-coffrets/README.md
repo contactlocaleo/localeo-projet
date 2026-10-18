@@ -29,6 +29,10 @@ La [procédure de communication participants](../../exploitation/exploitation/co
 décrit les préférences Live, les campagnes, leurs quotas et les alertes du lot 08,
 ainsi que les réglages et traitements préparés pour une ouverture ultérieure.
 
+Le [guide des parcours, bilans et support](../../exploitation/exploitation/parcours-plateforme-animation.md)
+décrit l'assistant, le site public, les nouvelles éditions, les mesures et les
+échanges privés du lot 09, ainsi que leurs reprises historiques bornées.
+
 | Document | Contenu |
 | --- | --- |
 | [Architecture et contrats](architecture-contrats.md) | Propriétaires, invariants, transactions, producteurs/consommateurs, compatibilité, migrations, conservation et impacts ERP/CRM/Atelier |
