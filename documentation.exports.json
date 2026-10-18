@@ -274,6 +274,10 @@
       "source_path": "docs/produit/formation/commercant/preparation-rendez-vous-localeo.md"
     },
     {
+      "path": "docs/ops/formation/commercant/preparation-rendez-vous-animation.md",
+      "source_path": "docs/produit/formation/commercant/preparation-rendez-vous-animation.md"
+    },
+    {
       "path": "docs/ops/formation/commercant/comprendre-localeo-stripe.md",
       "source_path": "docs/produit/formation/commercant/comprendre-localeo-stripe.md"
     },

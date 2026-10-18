@@ -1,5 +1,15 @@
 # Guide de formation au back-office Localeo
 
+## Périmètres commerçants — évolution E73
+
+Fonctions préparées localement, sans déploiement implicite. Ouvrir **Commerçants → fiche → Périmètres** pour consulter les produits Animation/Coffrets, les prérequis et l’historique paginé des décisions. Les étapes sont distinctes : revue manuelle des produits souhaités, préparation OnBoard, puis activation explicite. Chaque décision exige un motif et peut être refusée si le dossier a changé ; relire alors l’état avant de recommencer.
+
+Les administrateurs et les Backoffice dotés de **Gérer les périmètres Animation et Coffrets des commerces** peuvent décider. L’administrateur attribue cette autorisation dans la gestion des utilisateurs internes ; sélectionner le profil Backoffice ne la coche pas automatiquement. Un changement vers un profil sans Backoffice exige de retirer explicitement cette autorisation.
+
+**Consulter la revue de la commune** ouvre le suivi collectif. Les accès historiques restent appliqués tant que sa bascule n’a pas été confirmée. Chaque commerce doit avoir été examiné ; la bascule exige une confirmation distincte. Le retrait d’un produit bloque les nouveaux engagements mais conserve les opérations autorisées sur les engagements antérieurs ; une suspension administrative reste prioritaire.
+
+Les vues techniques SQLAdmin Commerçant et Prestation Coffret sont en consultation. Leurs liens **Ouvrir dans l’ERP** conduisent aux parcours qui vérifient les règles et enregistrent les mutations dans une transaction cohérente.
+
 ## Préparation de l'inscription commerçant — cible EPIC 68
 
 Le [guide de préparation OnBoard](guide-preparation-onboarding-commercant.md)

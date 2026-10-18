@@ -6,6 +6,16 @@ explicitement confirmés. Ce guide accompagne les écrans V1.2. Leur disponibili
 dépend du déploiement compatible et de l'activation de la politique des communications.
 Ce document est la source canonique de l'aide OnBoard E68.
 
+## Adaptation aux produits Animation et Coffrets — E73
+
+Évolution locale E73, soumise à livraison ultérieure : la fiche distingue **le compte**, **l’ouverture de chaque produit** et **la finalisation du dossier**. Dans la fiche commerçant ERP, onglet **Périmètres**, Localeo saisit manuellement les produits demandés, puis les active après vérification de leurs prérequis. La gestion exige une autorisation dédiée ; la consultation ne la donne pas.
+
+Pour Animation seule, OnBoard affiche les informations du commerce, l’accès Pro, les conventions et la participation. Les prestations et la préparation financière Coffrets ne sont pas demandées. L’ajout de Coffrets ouvre les compléments correspondants sans interrompre Animation. Les produits non encore revus conservent leur préparation historique jusqu’à la revue et à la bascule de leur commune.
+
+Dans **Documents → Couverture des conventions par produit**, choisir une pièce réellement signée, vérifier le produit couvert et confirmer avec un motif. Une pièce mixte demande deux confirmations explicites. Un complément peut être rattaché sur un dossier clos, sans rouvrir toutes ses étapes ; une pièce modifiée devra être contrôlée à nouveau. L’enregistrement d’une preuve n’active pas le produit.
+
+Le pack Animation seule utilise le [support Animation](../commercant/preparation-rendez-vous-animation.md). L’aperçu, les destinataires et l’envoi restent soumis aux confirmations décrites ci-dessous ; un changement de périmètre n’envoie rien à lui seul.
+
 L'epic met en place ce seul mode opératoire, dans les outils Localeo existants.
 L'écran OnBoard vous guide autour de trois gestes : **activer le commerçant,
 confirmer le mail de préparation, puis suivre le dossier**. Les sept étapes

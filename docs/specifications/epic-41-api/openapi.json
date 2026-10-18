@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Backend - contrat implemente EPIC 41",
     "description": "OpenAPI complet du backend, dont les parcours Animation locale. Genere hors ligne depuis le code local pour les integrations et les mocks ; cet instantane ne prouve pas son deploiement.",
-    "version": "1.0.0+31807b6"
+    "version": "1.0.0+a17e3f4"
   },
   "paths": {
     "/public/identite-acces/interne/connexion": {
@@ -25364,6 +25364,61 @@
         ]
       }
     },
+    "/internal/onboard/api/dossiers/{dossier_id}/conventions-produits": {
+      "post": {
+        "tags": [
+          "Localeo OnBoard"
+        ],
+        "summary": "Confirmer Convention Produit",
+        "operationId": "confirmer_convention_produit_internal_onboard_api_dossiers__dossier_id__conventions_produits_post",
+        "parameters": [
+          {
+            "name": "dossier_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Dossier Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfirmerConventionProduitRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
     "/internal/onboard/api/dossiers/{dossier_id}/commercant": {
       "patch": {
         "tags": [
@@ -33544,6 +33599,35 @@
         "operationId": "lister_demandes_facture_protected_commercants_me_facturation_demandes_get",
         "parameters": [
           {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 512
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
             "name": "Authorization",
             "in": "header",
             "required": false,
@@ -33568,6 +33652,14 @@
             "content": {
               "application/json": {
                 "schema": {}
+              }
+            },
+            "headers": {
+              "X-Next-Cursor": {
+                "description": "Curseur opaque de la page suivante ; absent en fin de liste.",
+                "schema": {
+                  "type": "string"
+                }
               }
             }
           },
@@ -34439,6 +34531,35 @@
         "operationId": "lister_demandes_facture_groupees_protected_commercants_me_facturation_demandes_groupees_get",
         "parameters": [
           {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 512
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
             "name": "Authorization",
             "in": "header",
             "required": false,
@@ -34463,6 +34584,14 @@
             "content": {
               "application/json": {
                 "schema": {}
+              }
+            },
+            "headers": {
+              "X-Next-Cursor": {
+                "description": "Curseur opaque de la page suivante ; absent en fin de liste.",
+                "schema": {
+                  "type": "string"
+                }
               }
             }
           },
@@ -40274,6 +40403,413 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/EquipePayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/referencement/commercants/{commercant_id}/perimetres": {
+      "get": {
+        "tags": [
+          "Referencement"
+        ],
+        "summary": "Lire",
+        "operationId": "lire_internal_referencement_commercants__commercant_id__perimetres_get",
+        "parameters": [
+          {
+            "name": "commercant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Commercant Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PerimetresCommercantPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/referencement/commercants/{commercant_id}/perimetres/historique": {
+      "get": {
+        "tags": [
+          "Referencement"
+        ],
+        "summary": "Historique",
+        "operationId": "historique_internal_referencement_commercants__commercant_id__perimetres_historique_get",
+        "parameters": [
+          {
+            "name": "commercant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Commercant Id"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Pagesize"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2048
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HistoriquePerimetrePayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/referencement/commercants/{commercant_id}/perimetres/revue": {
+      "post": {
+        "tags": [
+          "Referencement"
+        ],
+        "summary": "Revoir",
+        "operationId": "revoir_internal_referencement_commercants__commercant_id__perimetres_revue_post",
+        "parameters": [
+          {
+            "name": "commercant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Commercant Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RevuePerimetre"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PerimetresCommercantPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/referencement/commercants/{commercant_id}/perimetres/{produit}/{action}": {
+      "post": {
+        "tags": [
+          "Referencement"
+        ],
+        "summary": "Commander",
+        "operationId": "commander_internal_referencement_commercants__commercant_id__perimetres__produit___action__post",
+        "parameters": [
+          {
+            "name": "commercant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Commercant Id"
+            }
+          },
+          {
+            "name": "produit",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "enum": [
+                "ANIMATION",
+                "COFFRETS"
+              ],
+              "type": "string",
+              "title": "Produit"
+            }
+          },
+          {
+            "name": "action",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "enum": [
+                "demander",
+                "activer",
+                "retirer"
+              ],
+              "type": "string",
+              "title": "Action"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommandePerimetre"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PerimetresCommercantPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/referencement/communes/{commune_id}/perimetres/revue": {
+      "get": {
+        "tags": [
+          "Referencement"
+        ],
+        "summary": "Commune",
+        "operationId": "commune_internal_referencement_communes__commune_id__perimetres_revue_get",
+        "parameters": [
+          {
+            "name": "commune_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Commune Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RevueCommunePayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/referencement/communes/{commune_id}/perimetres/basculer": {
+      "post": {
+        "tags": [
+          "Referencement"
+        ],
+        "summary": "Basculer",
+        "operationId": "basculer_internal_referencement_communes__commune_id__perimetres_basculer_post",
+        "parameters": [
+          {
+            "name": "commune_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Commune Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommandePerimetre"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RevueCommunePayload"
                 }
               }
             }
@@ -77424,6 +77960,63 @@
         ],
         "title": "CampagneTransfersStripePayload"
       },
+      "CapaciteProduitPayload": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "title": "Code"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "NORMAL",
+              "CONTINUITE",
+              "LECTURE",
+              "PREPARATION"
+            ],
+            "title": "Mode"
+          },
+          "produits": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "ANIMATION",
+                "COFFRETS"
+              ]
+            },
+            "type": "array",
+            "title": "Produits"
+          },
+          "filtre": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Filtre"
+          },
+          "motif": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motif"
+          }
+        },
+        "type": "object",
+        "required": [
+          "code",
+          "mode"
+        ],
+        "title": "CapaciteProduitPayload"
+      },
       "CatalogueResponse": {
         "properties": {
           "schema_version": {
@@ -79442,6 +80035,28 @@
         ],
         "title": "CommandeLotsAnimationPayload"
       },
+      "CommandePerimetre": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 1,
+            "title": "Motif"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "motif"
+        ],
+        "title": "CommandePerimetre"
+      },
       "CommandePreparationRequest": {
         "properties": {
           "expected_version": {
@@ -80848,6 +81463,55 @@
         ],
         "title": "ConfirmationSalarie"
       },
+      "ConfirmerConventionProduitRequest": {
+        "properties": {
+          "produit": {
+            "type": "string",
+            "enum": [
+              "ANIMATION",
+              "COFFRETS"
+            ],
+            "title": "Produit"
+          },
+          "documentId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Documentid"
+          },
+          "documentVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Documentversion"
+          },
+          "expectedVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expectedversion"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 1,
+            "title": "Motif"
+          },
+          "couvertureConfirmee": {
+            "type": "boolean",
+            "const": true,
+            "title": "Couvertureconfirmee"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "produit",
+          "documentId",
+          "documentVersion",
+          "expectedVersion",
+          "motif",
+          "couvertureConfirmee"
+        ],
+        "title": "ConfirmerConventionProduitRequest"
+      },
       "ConfirmerPin": {
         "properties": {
           "pin": {
@@ -81177,6 +81841,34 @@
           "permissions"
         ],
         "title": "ContextePortailAnimationPayload"
+      },
+      "ContinuiteCommercantPayload": {
+        "properties": {
+          "produit": {
+            "type": "string",
+            "enum": [
+              "ANIMATION",
+              "COFFRETS"
+            ],
+            "title": "Produit"
+          },
+          "nature": {
+            "type": "string",
+            "title": "Nature"
+          },
+          "nombre": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Nombre"
+          }
+        },
+        "type": "object",
+        "required": [
+          "produit",
+          "nature",
+          "nombre"
+        ],
+        "title": "ContinuiteCommercantPayload"
       },
       "ControleAvancementPreparation": {
         "properties": {
@@ -81602,6 +82294,15 @@
             "maxItems": 2,
             "minItems": 1,
             "title": "Attributions"
+          },
+          "autorisationsDediees": {
+            "items": {
+              "type": "string",
+              "const": "commercants:perimetres_gerer"
+            },
+            "type": "array",
+            "maxItems": 1,
+            "title": "Autorisationsdediees"
           }
         },
         "additionalProperties": false,
@@ -82851,6 +83552,61 @@
           "animations_a_action"
         ],
         "title": "DashboardPerformanceAnimationPayload"
+      },
+      "DecisionPerimetrePayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "action": {
+            "type": "string",
+            "title": "Action"
+          },
+          "acteurId": {
+            "type": "string",
+            "title": "Acteurid"
+          },
+          "motif": {
+            "type": "string",
+            "title": "Motif"
+          },
+          "dateEffet": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Dateeffet"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "produit": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "ANIMATION",
+                  "COFFRETS"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Produit"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "action",
+          "acteurId",
+          "motif",
+          "dateEffet",
+          "version"
+        ],
+        "title": "DecisionPerimetrePayload"
       },
       "DefiAssociation": {
         "properties": {
@@ -88968,6 +89724,33 @@
         "type": "object",
         "title": "HTTPValidationError"
       },
+      "HistoriquePerimetrePayload": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/DecisionPerimetrePayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items"
+        ],
+        "title": "HistoriquePerimetrePayload"
+      },
       "HistoriqueResponse": {
         "properties": {
           "items": {
@@ -89699,6 +90482,33 @@
       },
       "InitialiserSessionCommercantPayload": {
         "properties": {
+          "perimetres": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PerimetresCommercantPayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "capabilities": {
+            "items": {
+              "$ref": "#/components/schemas/CapaciteProduitPayload"
+            },
+            "type": "array",
+            "title": "Capabilities"
+          },
+          "preparation": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PreparationProduitPayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "session_id": {
             "anyOf": [
               {
@@ -90896,6 +91706,46 @@
           "ordre"
         ],
         "title": "LotPreparationChasse"
+      },
+      "ManquantProduitPayload": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "title": "Code"
+          },
+          "label": {
+            "type": "string",
+            "title": "Label"
+          },
+          "nextAction": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextaction"
+          },
+          "product": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Product"
+          }
+        },
+        "type": "object",
+        "required": [
+          "code",
+          "label"
+        ],
+        "title": "ManquantProduitPayload"
       },
       "MasquerProfilCommercantRequest": {
         "properties": {
@@ -92169,6 +93019,22 @@
               }
             ],
             "title": "Attributions"
+          },
+          "autorisationsDediees": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string",
+                  "const": "commercants:perimetres_gerer"
+                },
+                "type": "array",
+                "maxItems": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Autorisationsdediees"
           }
         },
         "additionalProperties": false,
@@ -96853,6 +97719,78 @@
         "type": "object",
         "title": "PayloadVide"
       },
+      "PerimetresCommercantPayload": {
+        "properties": {
+          "commercantId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Commercantid"
+          },
+          "communeId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Communeid"
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Version"
+          },
+          "revue": {
+            "type": "string",
+            "enum": [
+              "A_REVOIR",
+              "VALIDEE"
+            ],
+            "title": "Revue"
+          },
+          "basculeCommune": {
+            "type": "boolean",
+            "title": "Basculecommune"
+          },
+          "modeApplication": {
+            "type": "string",
+            "enum": [
+              "HISTORIQUE",
+              "PERIMETRES"
+            ],
+            "title": "Modeapplication"
+          },
+          "produits": {
+            "items": {
+              "$ref": "#/components/schemas/ProduitCommercantPayload"
+            },
+            "type": "array",
+            "title": "Produits"
+          },
+          "continuite": {
+            "items": {
+              "$ref": "#/components/schemas/ContinuiteCommercantPayload"
+            },
+            "type": "array",
+            "title": "Continuite"
+          },
+          "allowedActions": {
+            "items": {
+              "type": "string",
+              "const": "REVOIR"
+            },
+            "type": "array",
+            "title": "Allowedactions"
+          }
+        },
+        "type": "object",
+        "required": [
+          "commercantId",
+          "communeId",
+          "version",
+          "revue",
+          "basculeCommune",
+          "modeApplication",
+          "produits"
+        ],
+        "title": "PerimetresCommercantPayload"
+      },
       "PeriodeAnimation": {
         "properties": {
           "startsAt": {
@@ -97989,6 +98927,41 @@
         ],
         "title": "PreparationPayload"
       },
+      "PreparationProduitPayload": {
+        "properties": {
+          "disponible": {
+            "type": "boolean",
+            "title": "Disponible"
+          },
+          "produits": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "ANIMATION",
+                "COFFRETS"
+              ]
+            },
+            "type": "array",
+            "title": "Produits"
+          },
+          "url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Url"
+          }
+        },
+        "type": "object",
+        "required": [
+          "disponible"
+        ],
+        "title": "PreparationProduitPayload"
+      },
       "PreparationResponse": {
         "properties": {
           "status": {
@@ -98035,6 +99008,66 @@
           "expectedVersion"
         ],
         "title": "PreparerKitInput"
+      },
+      "PrerequisProduitPayload": {
+        "properties": {
+          "produit": {
+            "type": "string",
+            "enum": [
+              "ANIMATION",
+              "COFFRETS"
+            ],
+            "title": "Produit"
+          },
+          "valide": {
+            "type": "boolean",
+            "title": "Valide"
+          },
+          "validationRef": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Validationref"
+          },
+          "policyVersion": {
+            "type": "string",
+            "title": "Policyversion"
+          },
+          "manquants": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Manquants"
+          },
+          "manquantsDetails": {
+            "items": {
+              "$ref": "#/components/schemas/ManquantProduitPayload"
+            },
+            "type": "array",
+            "title": "Manquantsdetails"
+          },
+          "checklist": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Checklist"
+          }
+        },
+        "type": "object",
+        "required": [
+          "produit",
+          "valide",
+          "policyVersion"
+        ],
+        "title": "PrerequisProduitPayload"
       },
       "PresentationEtape": {
         "properties": {
@@ -98309,6 +99342,103 @@
           "nom"
         ],
         "title": "PreuveARegulariser"
+      },
+      "ProduitCommercantPayload": {
+        "properties": {
+          "produit": {
+            "type": "string",
+            "enum": [
+              "ANIMATION",
+              "COFFRETS"
+            ],
+            "title": "Produit"
+          },
+          "etat": {
+            "type": "string",
+            "enum": [
+              "NON_DEMANDE",
+              "A_PREPARER",
+              "ACTIF",
+              "RETIRE"
+            ],
+            "title": "Etat"
+          },
+          "demandeAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Demandeat"
+          },
+          "activationAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Activationat"
+          },
+          "retraitAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Retraitat"
+          },
+          "evidenceRef": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Evidenceref"
+          },
+          "prerequis": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PrerequisProduitPayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "allowedActions": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "DEMANDER",
+                "ACTIVER",
+                "RETIRER"
+              ]
+            },
+            "type": "array",
+            "title": "Allowedactions"
+          }
+        },
+        "type": "object",
+        "required": [
+          "produit",
+          "etat"
+        ],
+        "title": "ProduitCommercantPayload"
       },
       "ProfilCommercantPayload": {
         "properties": {
@@ -102626,6 +103756,80 @@
         ],
         "title": "RevoquerPin"
       },
+      "RevueCommunePayload": {
+        "properties": {
+          "communeId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Communeid"
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Version"
+          },
+          "bascule": {
+            "type": "boolean",
+            "title": "Bascule"
+          },
+          "restantARevoir": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Restantarevoir"
+          },
+          "allowedActions": {
+            "items": {
+              "type": "string",
+              "const": "BASCULER"
+            },
+            "type": "array",
+            "title": "Allowedactions"
+          }
+        },
+        "type": "object",
+        "required": [
+          "communeId",
+          "version",
+          "bascule",
+          "restantARevoir"
+        ],
+        "title": "RevueCommunePayload"
+      },
+      "RevuePerimetre": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 1,
+            "title": "Motif"
+          },
+          "produitsDemandes": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "ANIMATION",
+                "COFFRETS"
+              ]
+            },
+            "type": "array",
+            "maxItems": 2,
+            "title": "Produitsdemandes"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "motif",
+          "produitsDemandes"
+        ],
+        "title": "RevuePerimetre"
+      },
       "RotationSecretLiveRequest": {
         "properties": {
           "revoquer_abonnements_existants": {
@@ -105469,6 +106673,33 @@
       },
       "ValidationSessionCommercantPayload": {
         "properties": {
+          "perimetres": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PerimetresCommercantPayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "capabilities": {
+            "items": {
+              "$ref": "#/components/schemas/CapaciteProduitPayload"
+            },
+            "type": "array",
+            "title": "Capabilities"
+          },
+          "preparation": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PreparationProduitPayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "acteur": {
             "anyOf": [
               {

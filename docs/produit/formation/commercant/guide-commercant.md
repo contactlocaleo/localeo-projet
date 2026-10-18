@@ -6,6 +6,14 @@ Pour l’onboarding et l’usage quotidien, remettre le [guide pédagogique illu
 
 Connectez-vous avec votre login et votre mot de passe, ou utilisez votre carte QR. Une session expirée demande une nouvelle connexion. La déconnexion quitte immédiatement le compte sur cet appareil ; si le réseau empêche la révocation distante, un message le précise. Ne partagez ni carte QR ni lien de mot de passe.
 
+## Fonctions ouvertes pour votre commerce
+
+Localeo active séparément les produits Animation et Coffrets après vérification de votre dossier. Les menus présentent les fonctions disponibles pour votre commerce et votre accès personnel. Un commerce Animation seule peut participer aux animations et valider les passages sans préparer de prestations Coffrets ni de reversements. L’ajout d’un produit peut demander un complément dans **Préparation**, tout en conservant les fonctions déjà ouvertes.
+
+Si un produit est retiré, les nouveaux engagements correspondants sont bloqués. Les actions nécessaires aux engagements antérieurs restent proposées lorsqu’elles sont autorisées ; l’historique reste consultable selon vos droits. Une suspension du compte bloque également cette continuité. Un accès salarié conserve son entrée directe dans le scanner et son historique autorisé, sans accès à la gestion ni à la facturation.
+
+Les demandes de factures se consultent par pages. Utilisez la navigation de liste pour poursuivre la consultation ; les éléments affichés ne constituent pas un total de toutes les demandes. Les boutons proposés correspondent à l’état courant et à vos droits. Après un refus ou un résultat incertain, actualisez la demande avant de reprendre.
+
 ## Scanner et valider
 
 1. Ouvrez « Scanner un QR » et scannez le QR du client, ou utilisez la saisie de secours.
