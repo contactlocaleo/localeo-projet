@@ -6,7 +6,7 @@ Version de conception du **17 octobre 2026**, réalisation locale commencée le 
 
 Chaque ligne associe le CA à une preuve observable ; les identifiants `E73-T-*` nomment des scénarios à réaliser, pas des fichiers déjà présents. Les tests de domaine utilisent horloge/faits et ports doubles, les tests transactionnels une base PostgreSQL jetable, les contrats les DTO réels, les parcours navigateur des comptes synthétiques. Les références de documents, fixtures et livraison sont décrites après la matrice.
 
-| Critère | Comportement / propriétaire | Preuve prévue (résultat : non exécuté) | Contrat / guide | Fixture | Livraison |
+| Critère | Comportement / propriétaire | Preuve attendue — résultats dans les raccordements et le journal | Contrat / guide | Fixture | Livraison |
 | --- | --- | --- | --- | --- | --- |
 | E73-CA-01 | Cycle Animation seul, `animation_locale` | E73-T-01 : externe et numérique jusqu’à remise sans commande Coffret | D1 | F1/F2 | L2/L4 |
 | E73-CA-02 | Coffrets seul, commercialisation/achats | E73-T-02 : acheter et consommer sans souscription ou onboarding Animation | D1/D3 | F3 | L1/L4 |
@@ -72,6 +72,35 @@ Chaque ligne associe le CA à une preuve observable ; les identifiants `E73-T-*`
 | E73-CA-62 | Export/fermeture | E73-T-62 : responsable seul, CSV/médias/guide sous 5 jours ouvrés, accès 30 jours, fermeture distincte et continuité | D3 | F11 | L5 |
 | E73-CA-63 | Restauration hébergée | E73-T-63 : chronométrage et cohérence, RPO 4 h/RTO 8 h, preuve manquante/échec interdit mise en service | D4 | F12 | L6 |
 
+### Lecture de la couverture par user story
+
+Cette table relie les **38 US** aux lots effectivement réalisés et aux **63 CA**
+ci-dessus. Elle ne remplace pas les résultats du [journal](suivi-implementation.md)
+et ne transforme pas une preuve locale en validation humaine ou hébergée.
+Les règles et parcours applicatifs sont distingués des opérations de bascule.
+
+| US | Lots de réalisation | CA concernés | Limite d'acceptation |
+| --- | --- | --- | --- |
+| 01–02, 04–10 | 04–05, régressions Coffrets et continuité dans 02/10 | 01–11, 29–36 | Trois dotations couvertes par les tests locaux ; fournisseurs réels non sollicités |
+| 03, 14–17, 27–28 | 03 puis raccords 06–08/10 | 12–14, 37–41, 54–55 | Catalogue, droits et facturation testés avec paiements/transports isolés |
+| 11–13 | 02 puis numérique 05 et historique 10 | 15–22 | Périmètres/OnBoard/Pro testés ; aucune activation réelle de commerce |
+| 18, 30 | 07 | 46, 57 | Quota et préparation accompagnée ; validation terrain de l'organisateur requise |
+| 19–20 | 06 | 42–45 | Import/deltas/reprise synthétiques ; aucun fichier opérateur chargé dans un environnement |
+| 21–22 | 08 puis conservation 10 | 47–49 | Campagnes/Live et refus locaux ; pas de livraison Push réelle |
+| 23, 29, 31–33 | 09 | 23–24, 56, 58–60 | Site, assistant, support et résultats locaux ; DNS/origines et parcours hébergés non validés |
+| 24 | 02 et 10 | 25 | ERP/Support et sélection Atelier ; E71 demeure une epic distincte, aucune vente automatique depuis une projection |
+| 25–26 | 01 puis fermeture/conservation 10 | 50–53 | Identités et habilitations locales ; secrets/envois réels non activés |
+| 34 | 10 | 61 | Coûts/alertes internes ; un coût estimé ou une marge indisponible n'est pas présenté comme constaté |
+| 35 | 10 | 62 | Export et fermeture locaux ; seules les reprises réellement exécutables sont proposées |
+| 36 | 02 et consolidation 10 | 26 | Outils de revue manuelle et refus testés ; saisie des périmètres existants et bascule communale non réalisées |
+| 37 | 01–10 | 27 | Générateur et restauration locale ; résultat terminal du runner consigné dans le journal |
+| 38 | 10 | 28, 63 | Procédures, contrats et contrôles locaux ; pilote, restauration hébergée RPO/RTO et mise en service **non exécutés** |
+
+Les **CA-28 et CA-63 ne sont pas acquis** par cette implémentation. Les branches
+hébergées des CA-23/24 et les recettes humaines transverses restent également
+à réaliser. L'état produit de l'epic reste **En cours**, même lorsque tous les
+commits d'implémentation sont présents localement.
+
 ### Raccordement des preuves locales du lot 04
 
 Ces résultats portent sur la branche **Libre / Externe**. Les branches numériques
@@ -124,6 +153,29 @@ Les résultats finaux, artefacts et corrections de revue sont consignés dans le
 décrit l'exploitation. Le lot 09 est terminé localement ; les critères du lot 10,
 la recette humaine et les vérifications hébergées restent non réalisés. Le lot 10
 n'est pas commencé, conformément à la consigne du 19 octobre.
+
+### Raccordement des preuves locales du lot 10
+
+Les commandes, résultats finaux et éventuels écarts de ces contrôles sont
+consignés dans le [journal de réalisation](suivi-implementation.md). Les tests
+ci-dessous s'exécutent sur les sources locales et des bases jetables, sans
+transport externe. Leur existence ne remplace pas un résultat d'exécution.
+
+| Couverture | Tests backend et consommateurs | Frontière vérifiée |
+| --- | --- | --- |
+| CA-25 / US24 | `test_suivi_produits_postgres.py`, `test_suivi_produits_api.py`, `epic73-suivi-produits.cjs` | ERP/Support réels, produits distincts, scope communal, trois dotations, attribution/remise/correction, CSV de page et index |
+| CA-61 / US34 | `test_pilotage_economique_dedicated.py`, `test_pilotage_economique_postgres.py`, `test_pilotage_economique_http_postgres.py`, `test_pilotage_economique_performance.py`, `epic73-pilotage-economique.cjs` | Mesures constatées/estimées/absentes, corrections, budgets, alertes, droits internes et absence d'effet commercial |
+| CA-62 / US35 | `test_reversibilite_organisation_dedicated.py`, `test_reversibilite_organisations_postgres.py`, `test_reversibilite_organisations_api.py`, `epic73-reversibilite.cjs` ; Animation `reversibilite-catalogue.mjs` | Export privé et médias, capture/reprise, révocation du responsable, engagements, fermeture et reprise réellement disponible |
+| US37 / conservation | `test_conservation_saas_postgres.py`, `test_conservation_audit_saas_postgres.py`, `test_conservation_saas_live_postgres.py`, `test_conservation_saas_cli.py`, `test_conservation_saas_structure.py` | Dates sourcées, gels, dépendances, copies SQL/JSONL/Live, reçus expirés, minimisation et reprise |
+| CA-63 / US38, partie locale | Tests de reprise dans `test_conservation_saas_postgres.py` et runner de compatibilité démonstration | Journal indépendant, droits et secrets restaurés, purge avant réouverture, refus HTTP/readiness ; **ne prouve pas RPO/RTO hébergés** |
+| PERF-01/02/04/08, partie locale | `test_lectures_globales_animation_postgres.py`, `test_compteurs_lectures_v283.py`, `test_historique_cibles_v280.py`, `test_e73_charge_mixte_locale.py` ; Animation `global-read.mjs` | Pages et compteurs, fraîcheur, scopes, rollback, suppression, croissance et concurrence mesurées |
+| Contrats et raccordement | `test_erp_animation_equipe_shell.py`, `test_saas_exploitation_batch.py`, tests OpenAPI ; Animation `lot10-http-contracts.test.mjs` | Modules JS réellement servis, tâches inactives par défaut, commandes/reçus/pages conformes au producteur |
+
+Les suites de chaque lot se recouvrent : leurs nombres ne doivent pas être
+additionnés pour annoncer un nombre de tests distincts. Les limites de charge
+du banc et les dettes historiques restent explicitement séparées des preuves.
+L'ouverture du pilote et la recette humaine Localeo puis Martignas-sur-Jalle,
+ainsi que l'exercice sur l'hébergement, restent des étapes futures.
 
 ### Documents et guides associés
 

@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Live - API backend Epic 42",
     "description": "Vue OpenAPI 3.1 des contrats publics, editoriaux et techniques de Localeo Live.",
-    "version": "1.0.0+2cda9d6"
+    "version": "1.0.0+76103d7"
   },
   "paths": {
     "/public/exploitation/activites-locales/metriques": {
@@ -6305,6 +6305,28 @@
         ],
         "title": "AccepterMissionChasseInput"
       },
+      "AccepterPriseEnCharge": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "preuve": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 3,
+            "title": "Preuve"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "preuve"
+        ],
+        "title": "AccepterPriseEnCharge"
+      },
       "AccepterResultatGenerationInput": {
         "properties": {
           "expectedVersion": {
@@ -8310,6 +8332,80 @@
         ],
         "title": "AjustementCreditRequest"
       },
+      "Alerte": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "organisationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Organisationid"
+          },
+          "mois": {
+            "type": "string",
+            "title": "Mois"
+          },
+          "budgetVersion": {
+            "type": "integer",
+            "title": "Budgetversion"
+          },
+          "seuils": {
+            "items": {
+              "type": "integer",
+              "enum": [
+                80,
+                100
+              ]
+            },
+            "type": "array",
+            "title": "Seuils"
+          },
+          "baseCentimes": {
+            "type": "string",
+            "title": "Basecentimes"
+          },
+          "estimationIncluse": {
+            "type": "boolean",
+            "title": "Estimationincluse"
+          },
+          "couvertureIncomplete": {
+            "type": "boolean",
+            "title": "Couvertureincomplete"
+          },
+          "emailStatut": {
+            "type": "string",
+            "enum": [
+              "A_PREPARER",
+              "PREPARE",
+              "NON_CONFIGURE"
+            ],
+            "title": "Emailstatut"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updatedat"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "organisationId",
+          "mois",
+          "budgetVersion",
+          "seuils",
+          "baseCentimes",
+          "estimationIncluse",
+          "couvertureIncomplete",
+          "emailStatut",
+          "updatedAt"
+        ],
+        "title": "Alerte"
+      },
       "AlerteMutationPayload": {
         "properties": {
           "operation_id": {
@@ -9162,6 +9258,137 @@
           "commune"
         ],
         "title": "AnimationScanPayload"
+      },
+      "AnimationSuivi": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "reference": {
+            "type": "string",
+            "title": "Reference"
+          },
+          "nom": {
+            "type": "string",
+            "title": "Nom"
+          },
+          "organisationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Organisationid"
+          },
+          "organisationNom": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Organisationnom"
+          },
+          "communeId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Communeid"
+          },
+          "communeNom": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Communenom"
+          },
+          "moteur": {
+            "type": "string",
+            "title": "Moteur"
+          },
+          "categorieCommerciale": {
+            "type": "string",
+            "enum": [
+              "STANDARD",
+              "A_LA_CARTE",
+              "A_VERIFIER"
+            ],
+            "title": "Categoriecommerciale"
+          },
+          "dotation": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "COFFRETS",
+                  "LIBRE"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Dotation"
+          },
+          "gestionLibre": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "EXTERNE",
+                  "NUMERIQUE"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Gestionlibre"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Createdat"
+          },
+          "sourceDotation": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sourcedotation"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "reference",
+          "nom",
+          "organisationId",
+          "organisationNom",
+          "communeId",
+          "communeNom",
+          "moteur",
+          "categorieCommerciale",
+          "dotation",
+          "gestionLibre",
+          "statut",
+          "createdAt",
+          "sourceDotation"
+        ],
+        "title": "AnimationSuivi"
       },
       "AnimationSummaryPayload": {
         "properties": {
@@ -10884,6 +11111,124 @@
         ],
         "title": "BilanAnimationPayload"
       },
+      "BilanEconomique": {
+        "properties": {
+          "organisationId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Organisationid"
+          },
+          "organisationNom": {
+            "type": "string",
+            "title": "Organisationnom"
+          },
+          "mois": {
+            "type": "string",
+            "title": "Mois"
+          },
+          "devise": {
+            "type": "string",
+            "const": "EUR",
+            "title": "Devise"
+          },
+          "postes": {
+            "items": {
+              "$ref": "#/components/schemas/PostePayload"
+            },
+            "type": "array",
+            "title": "Postes"
+          },
+          "baseSuiviCentimes": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Basesuivicentimes"
+          },
+          "couverture": {
+            "type": "string",
+            "enum": [
+              "COMPLETE",
+              "INCOMPLETE"
+            ],
+            "title": "Couverture"
+          },
+          "calculeAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Calculeat"
+          },
+          "budget": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/BudgetPayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "budgetVersion": {
+            "type": "integer",
+            "title": "Budgetversion"
+          },
+          "marge": {
+            "type": "null",
+            "title": "Marge"
+          },
+          "motifMarge": {
+            "type": "string",
+            "title": "Motifmarge"
+          },
+          "allowedActions": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "MODIFIER_BUDGET",
+                "RAPPROCHER_COUT",
+                "SAISIR_TEMPS"
+              ]
+            },
+            "type": "array",
+            "title": "Allowedactions"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "organisationId",
+          "organisationNom",
+          "mois",
+          "devise",
+          "postes",
+          "baseSuiviCentimes",
+          "couverture",
+          "calculeAt",
+          "budget",
+          "budgetVersion",
+          "motifMarge",
+          "allowedActions"
+        ],
+        "title": "BilanEconomique"
+      },
       "Body_admin_creer_document_admin_api_documentaire_documents_admin_post": {
         "properties": {
           "file": {
@@ -11681,6 +12026,96 @@
           "ton"
         ],
         "title": "BriefGenerationPasseportSnapshot"
+      },
+      "BudgetInput": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Expected Version"
+          },
+          "montant_centimes": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 1000000000000.0,
+                "exclusiveMinimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Montant Centimes"
+          },
+          "devise": {
+            "type": "string",
+            "const": "EUR",
+            "title": "Devise",
+            "default": "EUR"
+          },
+          "mois_effet": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}$",
+            "title": "Mois Effet"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 3,
+            "title": "Motif"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "mois_effet",
+          "motif"
+        ],
+        "title": "BudgetInput"
+      },
+      "BudgetPayload": {
+        "properties": {
+          "montant_centimes": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Montant Centimes"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "mois_effet": {
+            "type": "string",
+            "format": "date",
+            "title": "Mois Effet"
+          },
+          "motif": {
+            "type": "string",
+            "title": "Motif"
+          },
+          "devise": {
+            "type": "string",
+            "const": "EUR",
+            "title": "Devise"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "montant_centimes",
+          "version",
+          "mois_effet",
+          "motif",
+          "devise"
+        ],
+        "title": "BudgetPayload"
       },
       "CalendrierDemandeSupport": {
         "properties": {
@@ -13699,6 +14134,103 @@
         ],
         "title": "CoffretsPagePayload"
       },
+      "CollecteInput": {
+        "properties": {
+          "source": {
+            "type": "string",
+            "enum": [
+              "EMAIL",
+              "SMS",
+              "PREPARATION_CHASSE",
+              "STOCKAGE",
+              "WEB_PUSH"
+            ],
+            "title": "Source"
+          },
+          "mois": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}$",
+            "title": "Mois"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "source",
+          "mois"
+        ],
+        "title": "CollecteInput"
+      },
+      "CollectePayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "source": {
+            "type": "string",
+            "title": "Source"
+          },
+          "mois": {
+            "type": "string",
+            "title": "Mois"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "A_TRAITER",
+              "EN_COURS",
+              "TERMINEE",
+              "ECHEC"
+            ],
+            "title": "Statut"
+          },
+          "traites": {
+            "type": "integer",
+            "title": "Traites"
+          },
+          "ajoutes": {
+            "type": "integer",
+            "title": "Ajoutes"
+          },
+          "erreur": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Erreur"
+          },
+          "limiteAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Limiteat"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updatedat"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "source",
+          "mois",
+          "statut",
+          "traites",
+          "ajoutes",
+          "erreur",
+          "limiteAt",
+          "updatedAt"
+        ],
+        "title": "CollectePayload"
+      },
       "ColonneDTO": {
         "properties": {
           "index": {
@@ -13796,6 +14328,44 @@
         ],
         "title": "CommandeConfirmee[DotationPayload]"
       },
+      "CommandeConfirmee_ExportOrganisationPayload_": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "CONFIRMEE",
+            "title": "Status"
+          },
+          "result": {
+            "$ref": "#/components/schemas/ExportOrganisationPayload"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "result"
+        ],
+        "title": "CommandeConfirmee[ExportOrganisationPayload]"
+      },
+      "CommandeConfirmee_FermetureOrganisationPayload_": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "CONFIRMEE",
+            "title": "Status"
+          },
+          "result": {
+            "$ref": "#/components/schemas/FermetureOrganisationPayload"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "result"
+        ],
+        "title": "CommandeConfirmee[FermetureOrganisationPayload]"
+      },
       "CommandeConfirmee_GelConservationPayload_": {
         "properties": {
           "status": {
@@ -13852,6 +14422,25 @@
           "result"
         ],
         "title": "CommandeConfirmee[MutationSupportPayload]"
+      },
+      "CommandeConfirmee_Mutation_": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "CONFIRMEE",
+            "title": "Status"
+          },
+          "result": {
+            "$ref": "#/components/schemas/Mutation"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "result"
+        ],
+        "title": "CommandeConfirmee[Mutation]"
       },
       "CommandeConfirmee_ObjectifsDTO_": {
         "properties": {
@@ -16787,6 +17376,35 @@
         ],
         "title": "ConfirmerConventionProduitRequest"
       },
+      "ConfirmerFermeture": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 3,
+            "title": "Motif"
+          },
+          "informationsConservation": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 3,
+            "title": "Informationsconservation"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "motif",
+          "informationsConservation"
+        ],
+        "title": "ConfirmerFermeture"
+      },
       "ConfirmerPin": {
         "properties": {
           "pin": {
@@ -17238,6 +17856,57 @@
           "permissions"
         ],
         "title": "ContextePortailAnimationPayload"
+      },
+      "ContexteReversibilite": {
+        "properties": {
+          "organisationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Organisationid"
+          },
+          "organisationNom": {
+            "type": "string",
+            "title": "Organisationnom"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "OUVERT",
+              "FERMETURE_EN_COURS",
+              "FERMEE"
+            ],
+            "title": "Statut"
+          },
+          "allowedActions": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "DEMANDER_EXPORT",
+                "DEMANDER_FERMETURE"
+              ]
+            },
+            "type": "array",
+            "title": "Allowedactions"
+          },
+          "fermeture": {
+            "$ref": "#/components/schemas/FermetureOrganisationPayload"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "organisationId",
+          "organisationNom",
+          "version",
+          "statut",
+          "allowedActions",
+          "fermeture"
+        ],
+        "title": "ContexteReversibilite"
       },
       "ContinuiteCommercantPayload": {
         "properties": {
@@ -17728,6 +18397,67 @@
         "type": "object",
         "title": "CouleursVisuelles"
       },
+      "CoutInput": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "nature": {
+            "type": "string",
+            "enum": [
+              "CONSTATE",
+              "ESTIME",
+              "INDISPONIBLE"
+            ],
+            "title": "Nature"
+          },
+          "montant_centimes": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 1e+17,
+                "minimum": 0.0
+              },
+              {
+                "type": "string",
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Montant Centimes"
+          },
+          "source": {
+            "type": "string",
+            "maxLength": 500,
+            "minLength": 3,
+            "title": "Source"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 3,
+            "title": "Motif"
+          },
+          "corriger_constat": {
+            "type": "boolean",
+            "title": "Corriger Constat",
+            "default": false
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "nature",
+          "source",
+          "motif"
+        ],
+        "title": "CoutInput"
+      },
       "CouvertureMesuresDTO": {
         "properties": {
           "statut": {
@@ -18034,11 +18764,14 @@
                 "commercants:perimetres_gerer",
                 "abonnements:modules_octroyer",
                 "animation:sollicitation_gerer",
-                "abonnements:remboursements_decider"
+                "abonnements:remboursements_decider",
+                "organisations.gerer",
+                "pilotage_economique.consulter",
+                "pilotage_economique.gerer"
               ]
             },
             "type": "array",
-            "maxItems": 3,
+            "maxItems": 7,
             "title": "Autorisationsdediees"
           }
         },
@@ -20958,6 +21691,43 @@
         ],
         "title": "DemandeSupportPayload"
       },
+      "DemanderExport": {
+        "properties": {
+          "format": {
+            "type": "string",
+            "const": "CSV_MEDIAS",
+            "title": "Format"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "format"
+        ],
+        "title": "DemanderExport"
+      },
+      "DemanderFermeture": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 3,
+            "title": "Motif"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "motif"
+        ],
+        "title": "DemanderFermeture"
+      },
       "DependanceObjetContinuite": {
         "properties": {
           "type": {
@@ -23247,6 +24017,81 @@
         ],
         "title": "EmettreFactureLocaleoRequest"
       },
+      "EngagementFermeturePayload": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "title": "Type"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "domaine": {
+            "type": "string",
+            "title": "Domaine"
+          },
+          "communeId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Communeid"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          },
+          "transfertPossible": {
+            "type": "boolean",
+            "title": "Transfertpossible"
+          },
+          "motifTransfertIndisponible": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motiftransfertindisponible"
+          },
+          "priseEnCharge": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PriseEnChargeEngagementPayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "type",
+          "id",
+          "libelle",
+          "domaine",
+          "communeId",
+          "statut",
+          "transfertPossible",
+          "motifTransfertIndisponible"
+        ],
+        "title": "EngagementFermeturePayload"
+      },
       "EnregistrerChecklistInput": {
         "properties": {
           "expectedVersion": {
@@ -24541,6 +25386,79 @@
         ],
         "title": "EvenementAnimationPayload"
       },
+      "EvenementLotSuivi": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "type": {
+            "type": "string",
+            "title": "Type"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Date"
+          },
+          "acteur": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Acteur"
+          },
+          "motif": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motif"
+          },
+          "mode": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mode"
+          },
+          "corrigeAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Corrigeat"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "date",
+          "acteur",
+          "motif"
+        ],
+        "title": "EvenementLotSuivi"
+      },
       "EvenementServicePayload": {
         "properties": {
           "id": {
@@ -24902,6 +25820,168 @@
           "gel"
         ],
         "title": "ExploitationAnimationPayload"
+      },
+      "ExportOrganisationPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "organisationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Organisationid"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "DEMANDE",
+              "EN_PREPARATION",
+              "DISPONIBLE",
+              "ECHEC_REPRENABLE",
+              "EXPIRE",
+              "ANNULE"
+            ],
+            "title": "Statut"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "format": {
+            "type": "string",
+            "const": "CSV_MEDIAS",
+            "title": "Format",
+            "default": "CSV_MEDIAS"
+          },
+          "formatVersion": {
+            "type": "string",
+            "title": "Formatversion",
+            "default": "1"
+          },
+          "requestedAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Requestedat"
+          },
+          "targetDueAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Targetdueat"
+          },
+          "calendarStatus": {
+            "type": "string",
+            "enum": [
+              "CONFIGURE",
+              "INDISPONIBLE"
+            ],
+            "title": "Calendarstatus"
+          },
+          "snapshotAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Snapshotat"
+          },
+          "availableAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Availableat"
+          },
+          "expiresAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Expiresat"
+          },
+          "progression": {
+            "$ref": "#/components/schemas/ProgressionExport"
+          },
+          "erreurCode": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Erreurcode"
+          },
+          "enRetard": {
+            "type": "boolean",
+            "title": "Enretard"
+          },
+          "emailStatut": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Emailstatut"
+          },
+          "allowedActions": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "REPRENDRE",
+                "ANNULER",
+                "TELECHARGER"
+              ]
+            },
+            "type": "array",
+            "title": "Allowedactions"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "organisationId",
+          "statut",
+          "version",
+          "requestedAt",
+          "targetDueAt",
+          "calendarStatus",
+          "snapshotAt",
+          "availableAt",
+          "expiresAt",
+          "progression",
+          "erreurCode",
+          "enRetard",
+          "allowedActions"
+        ],
+        "title": "ExportOrganisationPayload"
       },
       "FacturationCommande": {
         "properties": {
@@ -25327,6 +26407,94 @@
         ],
         "title": "FermerAlerteInput"
       },
+      "FermetureOrganisationPayload": {
+        "properties": {
+          "organisationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Organisationid"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "OUVERT",
+              "FERMETURE_EN_COURS",
+              "FERMEE"
+            ],
+            "title": "Statut"
+          },
+          "requestedAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Requestedat"
+          },
+          "closedAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Closedat"
+          },
+          "motif": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motif"
+          },
+          "informationsConservation": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Informationsconservation"
+          },
+          "allowedActions": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Allowedactions"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "organisationId",
+          "version",
+          "statut",
+          "requestedAt",
+          "closedAt",
+          "motif",
+          "informationsConservation",
+          "allowedActions"
+        ],
+        "title": "FermetureOrganisationPayload"
+      },
       "FeuilleDTO": {
         "properties": {
           "id": {
@@ -25344,6 +26512,78 @@
           "libelle"
         ],
         "title": "FeuilleDTO"
+      },
+      "FichierExportPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "nom": {
+            "type": "string",
+            "title": "Nom"
+          },
+          "categorie": {
+            "type": "string",
+            "title": "Categorie"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "A_PREPARER",
+              "PRET",
+              "OMIS",
+              "PURGE"
+            ],
+            "title": "Statut"
+          },
+          "tailleOctets": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tailleoctets"
+          },
+          "sha256": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sha256"
+          },
+          "motifOmission": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motifomission"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "nom",
+          "categorie",
+          "statut",
+          "tailleOctets",
+          "sha256",
+          "motifOmission"
+        ],
+        "title": "FichierExportPayload"
       },
       "FileServicePreparationPayload": {
         "properties": {
@@ -30869,6 +32109,54 @@
         ],
         "title": "LigneDTO"
       },
+      "LigneFermetureOrganisation": {
+        "properties": {
+          "organisationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Organisationid"
+          },
+          "organisationNom": {
+            "type": "string",
+            "title": "Organisationnom"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "FERMETURE_EN_COURS",
+              "FERMEE"
+            ],
+            "title": "Statut"
+          },
+          "requestedAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Requestedat"
+          },
+          "closedAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Closedat"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "organisationId",
+          "organisationNom",
+          "statut",
+          "requestedAt",
+          "closedAt"
+        ],
+        "title": "LigneFermetureOrganisation"
+      },
       "LigneLotExterneInput": {
         "properties": {
           "id": {
@@ -31374,6 +32662,188 @@
           "ordre"
         ],
         "title": "LotPreparationChasse"
+      },
+      "LotSuivi": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "animationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animationid"
+          },
+          "nature": {
+            "type": "string",
+            "enum": [
+              "COFFRET",
+              "LOT_EXTERNE",
+              "BON_NUMERIQUE"
+            ],
+            "title": "Nature"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "reference": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reference"
+          },
+          "beneficiaire": {
+            "type": "string",
+            "title": "Beneficiaire"
+          },
+          "participantId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Participantid"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          },
+          "courante": {
+            "type": "boolean",
+            "title": "Courante"
+          },
+          "rang": {
+            "type": "integer",
+            "title": "Rang"
+          },
+          "remiseAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Remiseat"
+          },
+          "bonId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bonid"
+          },
+          "exemplaireId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Exemplaireid"
+          },
+          "instanceId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Instanceid"
+          },
+          "attributionPrecedenteId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Attributionprecedenteid"
+          },
+          "attribueAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Attribueat"
+          },
+          "expireAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Expireat"
+          },
+          "commercantId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Commercantid"
+          },
+          "commercantNom": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Commercantnom"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "animationId",
+          "nature",
+          "libelle",
+          "reference",
+          "beneficiaire",
+          "participantId",
+          "statut",
+          "courante",
+          "rang",
+          "remiseAt"
+        ],
+        "title": "LotSuivi"
       },
       "LotsPublicsAnimationPage": {
         "properties": {
@@ -32049,6 +33519,176 @@
           "duree_ms"
         ],
         "title": "MesureParcoursCommande"
+      },
+      "MesurePayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "poste": {
+            "type": "string",
+            "enum": [
+              "EMAIL",
+              "SMS",
+              "PREPARATION_CHASSE",
+              "STOCKAGE",
+              "WEB_PUSH",
+              "SUPPORT"
+            ],
+            "title": "Poste"
+          },
+          "unite": {
+            "type": "string",
+            "title": "Unite"
+          },
+          "quantite": {
+            "type": "string",
+            "title": "Quantite"
+          },
+          "serviceAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Serviceat"
+          },
+          "recueAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Recueat"
+          },
+          "source": {
+            "type": "string",
+            "title": "Source"
+          },
+          "couverture": {
+            "type": "string",
+            "enum": [
+              "COMPLETE",
+              "PARTIELLE"
+            ],
+            "title": "Couverture"
+          },
+          "active": {
+            "type": "boolean",
+            "title": "Active"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "nature": {
+            "type": "string",
+            "enum": [
+              "CONSTATE",
+              "ESTIME",
+              "INDISPONIBLE"
+            ],
+            "title": "Nature"
+          },
+          "montantCentimes": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Montantcentimes"
+          },
+          "sourceValorisation": {
+            "type": "string",
+            "title": "Sourcevalorisation"
+          },
+          "motif": {
+            "type": "string",
+            "title": "Motif"
+          },
+          "communeId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Communeid"
+          },
+          "souscriptionId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Souscriptionid"
+          },
+          "moduleCode": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modulecode"
+          },
+          "remplaceId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Remplaceid"
+          },
+          "referenceTravail": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Referencetravail"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "poste",
+          "unite",
+          "quantite",
+          "serviceAt",
+          "recueAt",
+          "source",
+          "couverture",
+          "active",
+          "version",
+          "nature",
+          "montantCentimes",
+          "sourceValorisation",
+          "motif",
+          "communeId",
+          "souscriptionId",
+          "moduleCode",
+          "remplaceId",
+          "referenceTravail"
+        ],
+        "title": "MesurePayload"
       },
       "MesuresAnimationDTO": {
         "properties": {
@@ -33106,11 +34746,14 @@
                     "commercants:perimetres_gerer",
                     "abonnements:modules_octroyer",
                     "animation:sollicitation_gerer",
-                    "abonnements:remboursements_decider"
+                    "abonnements:remboursements_decider",
+                    "organisations.gerer",
+                    "pilotage_economique.consulter",
+                    "pilotage_economique.gerer"
                   ]
                 },
                 "type": "array",
-                "maxItems": 3
+                "maxItems": 7
               },
               {
                 "type": "null"
@@ -34727,6 +36370,39 @@
         ],
         "title": "MouvementSuivi"
       },
+      "Mutation": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "operation": {
+            "type": "string",
+            "enum": [
+              "BUDGET_MODIFIE",
+              "COUT_RAPPROCHE",
+              "TARIF_CREE",
+              "TEMPS_ENREGISTRE",
+              "COLLECTE_PLANIFIEE",
+              "COLLECTE_REPRISE"
+            ],
+            "title": "Operation"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "version",
+          "operation"
+        ],
+        "title": "Mutation"
+      },
       "MutationCampagneDTO": {
         "properties": {
           "campagne": {
@@ -35980,6 +37656,26 @@
         ],
         "title": "OrganisateurAnimation"
       },
+      "Organisation": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "nom": {
+            "type": "string",
+            "title": "Nom"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "nom"
+        ],
+        "title": "Organisation"
+      },
       "OrganisationPayload": {
         "properties": {
           "id": {
@@ -36436,6 +38132,35 @@
           "pagination"
         ],
         "title": "PageAnimationPayload[ValidationAnimationPayload]"
+      },
+      "PageAnimationsSuivi": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/AnimationSuivi"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "nextCursor"
+        ],
+        "title": "PageAnimationsSuivi"
       },
       "PageAudit": {
         "properties": {
@@ -36962,6 +38687,176 @@
         ],
         "title": "PageDemandesSupport"
       },
+      "PageEngagementsFermeture": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/EngagementFermeturePayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          },
+          "hasMore": {
+            "type": "boolean",
+            "title": "Hasmore"
+          },
+          "nonPrisEnCharge": {
+            "type": "boolean",
+            "title": "Nonprisencharge"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "nextCursor",
+          "hasMore",
+          "nonPrisEnCharge"
+        ],
+        "title": "PageEngagementsFermeture"
+      },
+      "PageEvenementsLotSuivi": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/EvenementLotSuivi"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "nextCursor"
+        ],
+        "title": "PageEvenementsLotSuivi"
+      },
+      "PageExportsOrganisations": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ExportOrganisationPayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          },
+          "hasMore": {
+            "type": "boolean",
+            "title": "Hasmore"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "nextCursor",
+          "hasMore"
+        ],
+        "title": "PageExportsOrganisations"
+      },
+      "PageFermeturesOrganisations": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/LigneFermetureOrganisation"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          },
+          "hasMore": {
+            "type": "boolean",
+            "title": "Hasmore"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "nextCursor",
+          "hasMore"
+        ],
+        "title": "PageFermeturesOrganisations"
+      },
+      "PageFichiersExport": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/FichierExportPayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          },
+          "hasMore": {
+            "type": "boolean",
+            "title": "Hasmore"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "nextCursor",
+          "hasMore"
+        ],
+        "title": "PageFichiersExport"
+      },
       "PageGelsConservationPayload": {
         "properties": {
           "items": {
@@ -37150,6 +39045,35 @@
           "next_cursor"
         ],
         "title": "PageLibre[SuppleantLibre]"
+      },
+      "PageLotsSuivi": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/LotSuivi"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "nextCursor"
+        ],
+        "title": "PageLotsSuivi"
       },
       "PageLots_AffectationLot_": {
         "properties": {
@@ -37496,6 +39420,53 @@
         ],
         "title": "PagePaiements"
       },
+      "PageParticipants": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ParticipantLecture"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          },
+          "hasMore": {
+            "type": "boolean",
+            "title": "Hasmore"
+          },
+          "synthese": {
+            "$ref": "#/components/schemas/SyntheseParticipants"
+          },
+          "allowedActions": {
+            "items": {
+              "type": "string",
+              "const": "SUPPRIMER_PARTICIPANT"
+            },
+            "type": "array",
+            "title": "Allowedactions"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "nextCursor",
+          "hasMore",
+          "synthese",
+          "allowedActions"
+        ],
+        "title": "PageParticipants"
+      },
       "PagePoiAnimationPayload": {
         "properties": {
           "items": {
@@ -37524,6 +39495,40 @@
           "nextCursor"
         ],
         "title": "PagePoiAnimationPayload"
+      },
+      "PagePreneursEngagement": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/PreneurEngagementPayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          },
+          "hasMore": {
+            "type": "boolean",
+            "title": "Hasmore"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "nextCursor",
+          "hasMore"
+        ],
+        "title": "PagePreneursEngagement"
       },
       "PageRapportsPurgePayload": {
         "properties": {
@@ -38364,37 +40369,6 @@
         ],
         "title": "PageTentativesGenerationPayload"
       },
-      "PageValidations": {
-        "properties": {
-          "items": {
-            "items": {
-              "$ref": "#/components/schemas/ValidationHistorique"
-            },
-            "type": "array",
-            "title": "Items"
-          },
-          "total": {
-            "type": "integer",
-            "title": "Total"
-          },
-          "page": {
-            "type": "integer",
-            "title": "Page"
-          },
-          "page_size": {
-            "type": "integer",
-            "title": "Page Size"
-          }
-        },
-        "type": "object",
-        "required": [
-          "items",
-          "total",
-          "page",
-          "page_size"
-        ],
-        "title": "PageValidations"
-      },
       "PageVerificationsImport": {
         "properties": {
           "contract_version": {
@@ -38433,6 +40407,244 @@
           "next_cursor"
         ],
         "title": "PageVerificationsImport"
+      },
+      "Page_Alerte_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/Alerte"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "hasMore": {
+            "type": "boolean",
+            "title": "Hasmore"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "hasMore",
+          "nextCursor"
+        ],
+        "title": "Page[Alerte]"
+      },
+      "Page_CollectePayload_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/CollectePayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "hasMore": {
+            "type": "boolean",
+            "title": "Hasmore"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "hasMore",
+          "nextCursor"
+        ],
+        "title": "Page[CollectePayload]"
+      },
+      "Page_MesurePayload_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/MesurePayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "hasMore": {
+            "type": "boolean",
+            "title": "Hasmore"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "hasMore",
+          "nextCursor"
+        ],
+        "title": "Page[MesurePayload]"
+      },
+      "Page_Organisation_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/Organisation"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "hasMore": {
+            "type": "boolean",
+            "title": "Hasmore"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "hasMore",
+          "nextCursor"
+        ],
+        "title": "Page[Organisation]"
+      },
+      "Page_Revision_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/Revision"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "hasMore": {
+            "type": "boolean",
+            "title": "Hasmore"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "hasMore",
+          "nextCursor"
+        ],
+        "title": "Page[Revision]"
+      },
+      "Page_TarifPayload_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/TarifPayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "hasMore": {
+            "type": "boolean",
+            "title": "Hasmore"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "hasMore",
+          "nextCursor"
+        ],
+        "title": "Page[TarifPayload]"
+      },
+      "Page_Ventilation_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/Ventilation"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "hasMore": {
+            "type": "boolean",
+            "title": "Hasmore"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "hasMore",
+          "nextCursor"
+        ],
+        "title": "Page[Ventilation]"
       },
       "PaginationAnimationPayload": {
         "properties": {
@@ -39584,6 +41796,91 @@
         ],
         "title": "ParticipantAnimationPayload"
       },
+      "ParticipantLecture": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "animationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animationid"
+          },
+          "animationNom": {
+            "type": "string",
+            "title": "Animationnom"
+          },
+          "reference": {
+            "type": "string",
+            "title": "Reference"
+          },
+          "nom": {
+            "type": "string",
+            "title": "Nom"
+          },
+          "email": {
+            "type": "string",
+            "title": "Email"
+          },
+          "telephone": {
+            "type": "string",
+            "title": "Telephone"
+          },
+          "inscritAt": {
+            "type": "string",
+            "title": "Inscritat"
+          },
+          "qualifie": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Qualifie"
+          },
+          "termine": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Termine"
+          },
+          "mesureCourante": {
+            "type": "boolean",
+            "title": "Mesurecourante"
+          },
+          "validations": {
+            "type": "integer",
+            "title": "Validations"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "animationId",
+          "animationNom",
+          "reference",
+          "nom",
+          "email",
+          "telephone",
+          "inscritAt",
+          "qualifie",
+          "termine",
+          "mesureCourante",
+          "validations"
+        ],
+        "title": "ParticipantLecture"
+      },
       "ParticipantScanPayload": {
         "properties": {
           "id": {
@@ -40525,6 +42822,91 @@
         ],
         "title": "PositionPreparation"
       },
+      "PostePayload": {
+        "properties": {
+          "poste": {
+            "type": "string",
+            "enum": [
+              "EMAIL",
+              "SMS",
+              "PREPARATION_CHASSE",
+              "STOCKAGE",
+              "WEB_PUSH",
+              "SUPPORT"
+            ],
+            "title": "Poste"
+          },
+          "mesures": {
+            "type": "integer",
+            "title": "Mesures"
+          },
+          "indisponibles": {
+            "type": "integer",
+            "title": "Indisponibles"
+          },
+          "constateCentimes": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Constatecentimes"
+          },
+          "estimeCentimes": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Estimecentimes"
+          },
+          "coutConnuCentimes": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Coutconnucentimes"
+          },
+          "couverture": {
+            "type": "string",
+            "enum": [
+              "COMPLETE",
+              "INCOMPLETE"
+            ],
+            "title": "Couverture"
+          },
+          "unites": {
+            "items": {
+              "$ref": "#/components/schemas/Unite"
+            },
+            "type": "array",
+            "title": "Unites"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "poste",
+          "mesures",
+          "indisponibles",
+          "constateCentimes",
+          "estimeCentimes",
+          "coutConnuCentimes",
+          "couverture",
+          "unites"
+        ],
+        "title": "PostePayload"
+      },
       "PosteSuivi": {
         "properties": {
           "stage": {
@@ -40786,6 +43168,30 @@
           "adresse_facturation"
         ],
         "title": "PrefillFacturationPartenairePayload"
+      },
+      "PreneurEngagementPayload": {
+        "properties": {
+          "acteur": {
+            "type": "string",
+            "title": "Acteur"
+          },
+          "nom": {
+            "type": "string",
+            "title": "Nom"
+          },
+          "prenom": {
+            "type": "string",
+            "title": "Prenom"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "acteur",
+          "nom",
+          "prenom"
+        ],
+        "title": "PreneurEngagementPayload"
       },
       "PreparationChasse": {
         "properties": {
@@ -41660,6 +44066,54 @@
         ],
         "title": "PreuveARegulariser"
       },
+      "PriseEnChargeEngagementPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "destinataire": {
+            "type": "string",
+            "title": "Destinataire"
+          },
+          "destinataireNom": {
+            "type": "string",
+            "title": "Destinatairenom"
+          },
+          "peutAccepter": {
+            "type": "boolean",
+            "title": "Peutaccepter"
+          },
+          "acceptedAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Acceptedat"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "destinataire",
+          "destinataireNom",
+          "peutAccepter",
+          "acceptedAt",
+          "version"
+        ],
+        "title": "PriseEnChargeEngagementPayload"
+      },
       "ProduitCommercantPayload": {
         "properties": {
           "produit": {
@@ -42331,6 +44785,57 @@
           "exclus"
         ],
         "title": "ProgressionCampagneDTO"
+      },
+      "ProgressionExport": {
+        "properties": {
+          "phase": {
+            "type": "string",
+            "enum": [
+              "ATTENTE",
+              "CAPTURE",
+              "ASSEMBLAGE",
+              "TERMINE",
+              "PURGE"
+            ],
+            "title": "Phase"
+          },
+          "segments": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Segments"
+          },
+          "fichiersPrets": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Fichiersprets"
+          },
+          "fichiersTotal": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Fichierstotal"
+          },
+          "lignes": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Lignes"
+          },
+          "octets": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Octets"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "phase",
+          "segments",
+          "fichiersPrets",
+          "fichiersTotal",
+          "lignes",
+          "octets"
+        ],
+        "title": "ProgressionExport"
       },
       "ProgressionParticipant": {
         "properties": {
@@ -43037,6 +45542,55 @@
           "requestHash"
         ],
         "title": "PromptGenerationResumePayload"
+      },
+      "PropositionPriseEnCharge": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 3,
+            "title": "Motif"
+          },
+          "engagementType": {
+            "type": "string",
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Engagementtype"
+          },
+          "engagementId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Engagementid"
+          },
+          "destinataire": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Destinataire"
+          },
+          "preuve": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 3,
+            "title": "Preuve"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "motif",
+          "engagementType",
+          "engagementId",
+          "destinataire",
+          "preuve"
+        ],
+        "title": "PropositionPriseEnCharge"
       },
       "ProvenanceEditionDTO": {
         "properties": {
@@ -47465,6 +50019,63 @@
         ],
         "title": "ReversementItem"
       },
+      "Revision": {
+        "properties": {
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "nature": {
+            "type": "string",
+            "enum": [
+              "CONSTATE",
+              "ESTIME",
+              "INDISPONIBLE"
+            ],
+            "title": "Nature"
+          },
+          "montantCentimes": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Montantcentimes"
+          },
+          "source": {
+            "type": "string",
+            "title": "Source"
+          },
+          "motif": {
+            "type": "string",
+            "title": "Motif"
+          },
+          "acteur": {
+            "type": "string",
+            "title": "Acteur"
+          },
+          "recueAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Recueat"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "version",
+          "nature",
+          "montantCentimes",
+          "source",
+          "motif",
+          "acteur",
+          "recueAt"
+        ],
+        "title": "Revision"
+      },
       "RevisionPoiAnimationInput": {
         "properties": {
           "expectedVersion": {
@@ -50117,6 +52728,45 @@
         ],
         "title": "SyntheseBilansDTO"
       },
+      "SyntheseCatalogueCoffrets": {
+        "properties": {
+          "catalogue": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Catalogue"
+          },
+          "disponibles": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Disponibles"
+          },
+          "attribues": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Attribues"
+          },
+          "consommes": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Consommes"
+          },
+          "observedAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Observedat"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "catalogue",
+          "disponibles",
+          "attribues",
+          "consommes",
+          "observedAt"
+        ],
+        "title": "SyntheseCatalogueCoffrets"
+      },
       "SyntheseCommerces": {
         "properties": {
           "movementCount": {
@@ -50302,6 +52952,47 @@
         ],
         "title": "SynthesePaiements"
       },
+      "SyntheseParticipants": {
+        "properties": {
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          },
+          "termines": {
+            "type": "integer",
+            "title": "Termines"
+          },
+          "qualifies": {
+            "type": "integer",
+            "title": "Qualifies"
+          },
+          "actualisation": {
+            "type": "integer",
+            "title": "Actualisation"
+          },
+          "observedAt": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Observedat"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "total",
+          "termines",
+          "qualifies",
+          "actualisation",
+          "observedAt"
+        ],
+        "title": "SyntheseParticipants"
+      },
       "SyntheseResponse": {
         "properties": {
           "asOf": {
@@ -50401,6 +53092,35 @@
         ],
         "title": "SyntheseSatisfactionDTO"
       },
+      "SyntheseValidations": {
+        "properties": {
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          },
+          "validees": {
+            "type": "integer",
+            "title": "Validees"
+          },
+          "anomalies": {
+            "type": "integer",
+            "title": "Anomalies"
+          },
+          "commercants": {
+            "type": "integer",
+            "title": "Commercants"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "total",
+          "validees",
+          "anomalies",
+          "commercants"
+        ],
+        "title": "SyntheseValidations"
+      },
       "SyntheseVision360AnimationPayload": {
         "properties": {
           "id": {
@@ -50494,6 +53214,144 @@
         ],
         "title": "SyntheseVision360AnimationPayload"
       },
+      "TarifInput": {
+        "properties": {
+          "poste": {
+            "type": "string",
+            "enum": [
+              "EMAIL",
+              "SMS",
+              "PREPARATION_CHASSE",
+              "STOCKAGE",
+              "WEB_PUSH",
+              "SUPPORT"
+            ],
+            "title": "Poste"
+          },
+          "unite": {
+            "type": "string",
+            "maxLength": 40,
+            "minLength": 3,
+            "title": "Unite"
+          },
+          "debut": {
+            "type": "string",
+            "format": "date",
+            "title": "Debut"
+          },
+          "fin": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fin"
+          },
+          "prix_unitaire_centimes": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 1e+17,
+                "minimum": 0.0
+              },
+              {
+                "type": "string",
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
+              }
+            ],
+            "title": "Prix Unitaire Centimes"
+          },
+          "source": {
+            "type": "string",
+            "maxLength": 500,
+            "minLength": 3,
+            "title": "Source"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 3,
+            "title": "Motif"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "poste",
+          "unite",
+          "debut",
+          "prix_unitaire_centimes",
+          "source",
+          "motif"
+        ],
+        "title": "TarifInput"
+      },
+      "TarifPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "poste": {
+            "type": "string",
+            "enum": [
+              "EMAIL",
+              "SMS",
+              "PREPARATION_CHASSE",
+              "STOCKAGE",
+              "WEB_PUSH",
+              "SUPPORT"
+            ],
+            "title": "Poste"
+          },
+          "unite": {
+            "type": "string",
+            "title": "Unite"
+          },
+          "debut": {
+            "type": "string",
+            "format": "date",
+            "title": "Debut"
+          },
+          "fin": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fin"
+          },
+          "prixUnitaireCentimes": {
+            "type": "string",
+            "title": "Prixunitairecentimes"
+          },
+          "source": {
+            "type": "string",
+            "title": "Source"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "poste",
+          "unite",
+          "debut",
+          "fin",
+          "prixUnitaireCentimes",
+          "source"
+        ],
+        "title": "TarifPayload"
+      },
       "TemplateGenerationPayload": {
         "properties": {
           "id": {
@@ -50543,6 +53401,62 @@
           "communeId"
         ],
         "title": "TemplateGenerationPayload"
+      },
+      "TempsInput": {
+        "properties": {
+          "poste": {
+            "type": "string",
+            "enum": [
+              "SUPPORT",
+              "PREPARATION_CHASSE"
+            ],
+            "title": "Poste"
+          },
+          "reference_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Reference Id"
+          },
+          "minutes": {
+            "type": "integer",
+            "maximum": 1440.0,
+            "minimum": 1.0,
+            "title": "Minutes"
+          },
+          "service_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Service At"
+          },
+          "remplace_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Remplace Id"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 3,
+            "title": "Motif"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "poste",
+          "reference_id",
+          "minutes",
+          "service_at",
+          "motif"
+        ],
+        "title": "TempsInput"
       },
       "TentativeGenerationPayload": {
         "properties": {
@@ -51253,6 +54167,25 @@
         ],
         "title": "TypeSourceFinanciere"
       },
+      "Unite": {
+        "properties": {
+          "unite": {
+            "type": "string",
+            "title": "Unite"
+          },
+          "quantite": {
+            "type": "string",
+            "title": "Quantite"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "unite",
+          "quantite"
+        ],
+        "title": "Unite"
+      },
       "UsageQuotaGenerationPayload": {
         "properties": {
           "mois": {
@@ -51526,6 +54459,70 @@
           "auteur"
         ],
         "title": "ValidationHistorique"
+      },
+      "ValidationLecture": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "animationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animationid"
+          },
+          "animationNom": {
+            "type": "string",
+            "title": "Animationnom"
+          },
+          "participantId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Participantid"
+          },
+          "participantNom": {
+            "type": "string",
+            "title": "Participantnom"
+          },
+          "commerceId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Commerceid"
+          },
+          "commerceNom": {
+            "type": "string",
+            "title": "Commercenom"
+          },
+          "etapeId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Etapeid"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          },
+          "validatedAt": {
+            "type": "string",
+            "title": "Validatedat"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "animationId",
+          "animationNom",
+          "participantId",
+          "participantNom",
+          "commerceId",
+          "commerceNom",
+          "etapeId",
+          "statut",
+          "validatedAt"
+        ],
+        "title": "ValidationLecture"
       },
       "ValidationPrestationResponse": {
         "properties": {
@@ -51826,6 +54823,107 @@
           "taux"
         ],
         "title": "VariationMesureDTO"
+      },
+      "Ventilation": {
+        "properties": {
+          "poste": {
+            "type": "string",
+            "enum": [
+              "EMAIL",
+              "SMS",
+              "PREPARATION_CHASSE",
+              "STOCKAGE",
+              "WEB_PUSH",
+              "SUPPORT"
+            ],
+            "title": "Poste"
+          },
+          "unite": {
+            "type": "string",
+            "title": "Unite"
+          },
+          "communeId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Communeid"
+          },
+          "souscriptionId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Souscriptionid"
+          },
+          "moduleCode": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modulecode"
+          },
+          "quantite": {
+            "type": "string",
+            "title": "Quantite"
+          },
+          "constateCentimes": {
+            "type": "string",
+            "title": "Constatecentimes"
+          },
+          "estimeCentimes": {
+            "type": "string",
+            "title": "Estimecentimes"
+          },
+          "indisponibles": {
+            "type": "integer",
+            "title": "Indisponibles"
+          },
+          "mesures": {
+            "type": "integer",
+            "title": "Mesures"
+          },
+          "partiels": {
+            "type": "integer",
+            "title": "Partiels"
+          },
+          "calculeAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Calculeat"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "poste",
+          "unite",
+          "communeId",
+          "souscriptionId",
+          "moduleCode",
+          "quantite",
+          "constateCentimes",
+          "estimeCentimes",
+          "indisponibles",
+          "mesures",
+          "partiels",
+          "calculeAt"
+        ],
+        "title": "Ventilation"
       },
       "VerificationExploitation": {
         "properties": {
@@ -52436,6 +55534,21 @@
           "render_revision"
         ],
         "title": "VersionResponse"
+      },
+      "VersionReversibilite": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version"
+        ],
+        "title": "VersionReversibilite"
       },
       "VersionServiceInput": {
         "properties": {
@@ -53255,6 +56368,37 @@
         ],
         "title": "ModeleCommande"
       },
+      "app__api__historique_validations_api__PageValidations": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationHistorique"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          },
+          "page": {
+            "type": "integer",
+            "title": "Page"
+          },
+          "page_size": {
+            "type": "integer",
+            "title": "Page Size"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "total",
+          "page",
+          "page_size"
+        ],
+        "title": "PageValidations"
+      },
       "app__api__imports_commercants_api__Version": {
         "properties": {
           "expected_version": {
@@ -53303,6 +56447,52 @@
           "commercant_id"
         ],
         "title": "ModeleCommande"
+      },
+      "app__api__lectures_globales_animation_api__PageValidations": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationLecture"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          },
+          "hasMore": {
+            "type": "boolean",
+            "title": "Hasmore"
+          },
+          "synthese": {
+            "$ref": "#/components/schemas/SyntheseValidations"
+          },
+          "allowedActions": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Allowedactions"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "nextCursor",
+          "hasMore",
+          "synthese",
+          "allowedActions"
+        ],
+        "title": "PageValidations"
       }
     },
     "securitySchemes": {

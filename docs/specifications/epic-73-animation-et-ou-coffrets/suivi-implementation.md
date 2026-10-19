@@ -6,8 +6,15 @@ Début : **18 octobre 2026**. [Spécification](README.md), [backlog](../../roadm
 
 Implémentation, bases jetables locales, tests isolés et commits locaux uniquement. **Aucun push, pipeline distant, déploiement, migration/configuration de test/démo/production, envoi réel ou paiement réel.** Les vérifications humaines et hébergées restent des étapes futures explicites. Ne pas confondre commits et livraison.
 
-**Consigne du 19 octobre 2026 : terminer le lot 09 puis s'arrêter, sans commencer
-le lot 10.** Les obligations de ce dernier restent identifiées et non réalisées.
+**Ancienne consigne du 19 octobre 2026 : terminer le lot 09 puis s'arrêter, sans
+commencer le lot 10.** Elle a été remplacée par la reprise ci-dessous. Les réserves
+« à réaliser au lot 10 » dans les bilans antérieurs décrivent leur état à cette date ;
+le bilan du lot 10 indique leur traitement et les limites encore présentes.
+
+**Reprise autorisée le 19 octobre 2026 : implémenter le lot 10 et terminer le
+travail local de l'epic.** Cette nouvelle demande remplace l'arrêt précédent ;
+les interdictions de push et de déploiement restent applicables. Les recettes
+humaines et preuves sur l'hébergement cible ne sont pas autorisées par cette reprise.
 
 | Dépôt / branche | HEAD initial | Travaux préexistants à préserver |
 | --- | --- | --- |
@@ -31,7 +38,7 @@ le lot 10.** Les obligations de ce dernier restent identifiées et non réalisé
 | 07 | US18,30 ; chasse et préparation accompagnée | Backend, Animation, Projet | Implémenté et vérifié localement ; Backend `44c6429`, Animation `8979893`, Projet `7f80a6c` ; recette humaine et hébergement non exécutés |
 | 08 | US21–22 ; communication participants | Backend, Animation, Marketplace/Live, Projet | Implémenté et vérifié localement : campagnes, préférences Live, quotas, fréquence et alertes internes ; consolidation conservation/restauration au lot 10 |
 | 09 | US23,29,31–33 ; parcours/site/assistance/bilans | Backend, Animation, Marketplace/Live, Projet | Implémenté et vérifié localement ; Backend `76103d7`, Animation `eb3def9`, Marketplace `70d7128`, sources dans le commit documentaire du lot 09 ; démonstration complète : dix réussites |
-| 10 | US34–38 ; finalisation US24, exploitabilité/pilote | Les cinq dépôts selon impact | Non commencé, conformément à la consigne du 19 octobre ; aucune activation distante autorisée |
+| 10 | US34–38 ; finalisation US24, exploitabilité/pilote | Backend/ERP/Support/Ops, Animation, Projet ; vérification Pro/Live et démonstration | Implémentation et contrôles locaux terminés : Backend `7f74166`, Animation `da86e39` et `3801cc5`, sources dans le commit documentaire lot 10 ; recette humaine et preuves hébergées non exécutées |
 
 Les US partagées ne sont acquises qu’après toutes leurs branches. Reprendre les identifiants CA du plan de vérification, sans en changer la portée. Chaque bilan de lot doit enregistrer fichiers/contrats, migrations, fixtures, commandes, résultats, revue, limites et commits par dépôt. Si nécessaire, subdiviser un lot en incréments explicitement non terminaux ; aucune validation par simple présence d’un fichier.
 
@@ -1001,8 +1008,221 @@ modifications préexistantes Clôturer d'`App.tsx`, ainsi que le README, la vue
 Exploitation et son test, restent hors commit Animation. Le suivi moteur
 préexistant du dépôt Projet reste également exclu. Aucun push ni déploiement.
 
-Les pages de sélection et suggestions publiques sont désormais bornées ; la vue
-Coffrets globale et ses totaux historiques, repérés pendant la revue, restent à
-traiter dans le lot 10, non commencé à la demande de l'utilisateur. Les recettes
+À la fin du lot 09, les pages de sélection et suggestions publiques sont bornées ;
+la vue Coffrets globale et ses totaux historiques restent alors à traiter dans le
+lot 10. Cette réserve est reprise ci-dessous après l'autorisation de poursuivre. Les recettes
 humaines et hébergées restent non exécutées ; ces mesures ne constituent pas le
 test de charge mixte ni une garantie de capacité sur l'hébergement cible.
+
+### Lot 10 — Exploitation, réversibilité et consolidation
+
+Reprise explicitement autorisée le **19 octobre 2026**. Le lot complète le
+pilotage économique interne (US34), la réversibilité et la fermeture accompagnée
+(US35), les lectures ERP/Support (US24), la conservation et les outils de reprise.
+La [prise en main par lot](prise-en-main-par-lot.md) décrit les accès des dix lots ;
+le [guide opératoire](../../exploitation/exploitation/exploiter-saas-animation.md)
+décrit les traitements préparés, leurs paramètres et les étapes de mise en service
+qui restent à exécuter séparément.
+
+**Comportements implémentés.** Le suivi économique distingue faits constatés,
+estimations et données indisponibles. Les corrections sont historisées, les
+budgets déclenchent des alertes internes à 80/100 %, sans effet commercial.
+Les mesures archivées ne peuvent pas être réactivées par une nouvelle
+valorisation ; les marges restent indisponibles tant qu'aucun rapprochement
+comparable des revenus n'est établi.
+
+L'export est demandé par le responsable, capturé dans un instantané cohérent,
+assemblé par segments et téléchargé après nouvelle vérification des droits.
+Il contient CSV, médias transmissibles, manifeste et guide, jamais les secrets
+QR/PIN, mots de passe, notes internes ni données d'une autre organisation.
+La fermeture interdit les nouveaux usages, inventorie les engagements selon
+leurs états métier réels et exige leur résolution. Seules les préparations
+accompagnées disposent en V1 d'une reprise interne effective ; aucun bouton de
+transfert fictif n'est présenté pour les autres engagements.
+
+L'ERP et le Support disposent d'**Animations et lots**, de listes et CSV de page
+avec contrôle courant du périmètre communal. Les vues globales Participants,
+Validations et Coffrets du portail utilisent désormais des pages serveur et
+des synthèses distinctes. L'historique Pro ne parcourt plus toutes les preuves
+expirées pour constituer une page. Les compteurs SQL sont des projections de
+lecture transactionnelles, jamais une autorité pour qualifier ou tirer un gagnant.
+
+La conservation rattache les familles aux durées existantes, traite gels,
+copies SQL/JSONL/Live et fichiers privés, et conserve une preuve minimale.
+Une date de fin absente est signalée, sans repli sur une date de création.
+La reprise exige un journal indépendant et ferme les capacités restaurées,
+y compris sessions internes et QR de bons, avant réouverture. Le lot et ses
+droits commerciaux ne sont pas révoqués par cette fermeture technique.
+
+**Migrations locales préparées et vérifiées :** v277 coûts, v278 réversibilité,
+v279 conservation/reprise, v280 projection d'historique Pro, v281 index ERP/Support,
+v282 pages globales, v283 compteurs de lecture. Le rejeu depuis une base vide,
+l'atomicité, la correspondance des modèles et la disponibilité des colonnes/index
+requis passent : **3 tests**, 51,45 s, `tmp/e73-lot10-migrations-final.xml`.
+Aucune base partagée n'a été migrée.
+
+**Contrôles transverses.** Architecture, recensement des classes de domaine,
+couverture des use cases, Ops, ERP, batchs et readiness : **640 réussites**, deux
+avertissements de dépréciation Starlette/AnyIO, 30,53 s,
+`tmp/e73-lot10-final-architecture02.xml`. Le premier appel avec un chemin de test
+inexistant n'a exécuté aucun test ; il a été corrigé, sans retrait de contrôle.
+Les contrats canoniques E41/E42 et le contrat embarqué Animation ont été
+régénérés hors ligne (985/62/985 chemins). Contrats API et registre démo :
+28 réussites ; les quatre erreurs initiales d'accès au répertoire temporaire
+Windows sont résolues par un répertoire local explicite, avec **8 réussites**
+du fichier de tests documentaires complet au second passage. Les comptes de
+ces suites se recouvrent et ne doivent pas être additionnés.
+
+**Portail.** **233 tests Node**, zéro échec ou skip ; les deux nouveaux tests
+rejouent les contrats HTTP fermés du producteur. Types, lint ciblé et compilation
+réussissent sur le candidat isolant les changements préexistants. Le bundle
+principal vaut 480,48 ko / 124,76 ko gzip. Navigateur : **12 scénarios / 100
+assertions** export/fermeture/catalogue et **4 scénarios / 60 assertions** listes
+globales, à 320/1 280 px, texte 200 %, clavier, fuseau Paris depuis un navigateur
+réglé Los Angeles, réponse perdue et refus d'accès. Commit local Animation :
+**`da86e39`**. Les quatre modifications Clôturer d'App.tsx, le README, la vue
+Exploitation et son test restent hors de ce commit.
+
+**Périmètre de performance.** Les nouvelles pages hydratent un volume borné et
+les projections évitent les scans complets de participants/passages. La recherche
+textuelle conserve un agrégat SQL exact sur les correspondances : son coût n'est
+pas constant. Les agrégats acquisition/satisfaction/gains ont leurs propres
+volumétries ; un essai à 100 000 participants ne prouve pas leur croissance.
+La revue a aussi confirmé au HEAD du lot 09 les chargements historiques complets
+de l'index Animation, des vues Tirages/Flyers et des participants d'une fiche.
+Ils ne sont pas présentés comme corrigés ni comme couverts par les mesures des
+nouvelles pages globales. La spécification n'impose pas une refonte générale de
+ces lecteurs historiques ; leur dette reste à traiter avant de leur annoncer
+les mêmes garanties de volume.
+
+Les preuves finales de conservation, réversibilité, charge avec workers et
+compatibilité démonstration sont consolidées ci-dessous après leur exécution.
+
+**Réversibilité et lectures ERP/Support : 75 réussites**, aucun skip ou échec,
+140,94 s, deux dépréciations Starlette/AnyIO,
+`tmp/e73-lot10-portal-final02.xml`. Les contre-preuves couvrent notamment les
+états terminaux réels des producteurs (tirages, gains Coffrets, remboursements),
+les bons expirés encore prolongeables, la portée actuelle de l'opérateur, les
+gels concurrents de fichiers/captures et le nettoyage borné de 103 segments par
+pages de 25. Les quatre CSV et le ZIP ont leurs contrats binaires explicites.
+
+**Conservation : 41 scénarios distincts finalement réussis**, aucun skip ni
+échec restant, après déduplication des XML `e73-conservation14`, `date16`, `17`,
+`18` et `19` sous `tmp/`. Le premier passage comptait 30 réussites et dix erreurs
+de préparation liées au répertoire temporaire Windows. La reprise locale a aussi
+corrigé deux fixtures : date historique UTC écrite naïve dans une colonne sans
+fuseau, et sélection de l'email de renvoi par son identifiant d'opération plutôt
+que du premier email du bon. Le test conserve le refus du QR/lien ancien, le code
+d'erreur réel et l'acceptation du bon réémis. Le code de reprise traite explicitement
+les dates UTC sans offset, sans dépendre du fuseau de l'hôte ou de PostgreSQL.
+La revue indépendante des contrôles de conservation, des permissions du bilan
+et du transfert/restauration démo est consignée dans les rapports de travail ;
+ses constats ont donné lieu aux corrections et contre-preuves, sans skip ajouté.
+
+**Démonstration complète : 10 réussites**, aucun échec ni skip, **729,58 s**,
+sept avertissements SQLAlchemy de réflexion `dialect_options`,
+`tmp/e73-lot10-demo-complete01/results.xml`. Le runner migre jusqu'à v283,
+génère les scénarios des lots précédents, transfère les données, simule une
+interruption, reprend puis restaure la base d'origine. Le registre classe les
+24 nouvelles tables ; les quatre projections déclenchées par triggers sont
+restaurées après leurs sources. Les contrôles locaux de purge et de reprise ne
+sont pas transférés avec un jeu, mais le dump complet vérifie leur empreinte ;
+altérer le verrou de reprise dans la base d'essai fait refuser sa réutilisation.
+Les **63 tests ciblés** du registre, des reprises et du runner passent également
+(`tmp/e73-lot10-demo-units-final.xml`). Aucun service fournisseur ni base partagée
+n'a été appelé. Après cette passe, seules les fins de ligne/espaces finaux du SQL
+v277 généré et du module d'index de conservation ont été normalisés, avec contrôle
+d'identité du contenu hors espaces ; le rejeu de migrations est vérifié à nouveau.
+
+**Cœur coûts/lectures : 43 réussites**, deux dépréciations, 42,60 s. La dernière
+contre-preuve purge réellement une mesure puis tente sa recollecte pendant et
+après la transaction : aucune mesure, tête, valorisation ou projection n'est
+recréée. La vérification du reçu d'effacement partage les verrous de la purge.
+Le bilan réutilise seulement les permissions vérifiées dans sa transaction :
+une nouvelle requête après révocation perd les actions puis l'accès de lecture.
+
+**Charge locale et limites.** Le bilan Gestionnaire corrigé passe : un test,
+22,68 s, p95 364 ms / p99 374 ms pour un budget p95 de 900 ms. À nombre
+d'animations affichées fixe, les populations ne sont pas hydratées.
+Le banc de services applicatifs/PostgreSQL, avec un worker de coûts et dix
+acteurs, donne les résultats suivants (millisecondes, p95) :
+
+| Participants / distribution | Bilan | Participants | Validations | Remise |
+| --- | ---: | ---: | ---: | ---: |
+| 10 000 équilibrés | 462 | 537 | 465 | 603 |
+| 10 000 concentrés | 393 | 372 | 252 | 620 |
+| 100 000 équilibrés | 407 | 578 | 542 | 639 |
+| 100 000 concentrés | 416 | 397 | 387 | 513 |
+
+Les budgets restent 900/700/700/1 000 ms. L'essai 10 000 équilibrés initial
+partageait le CPU avec un build ; le rejeu est isolé. Le premier 100 000 équilibré
+atteignait 707 ms pour les validations ; une vérification isolée unique donne
+542 ms. Les résultats initiaux sont conservés. À vingt acteurs, plusieurs budgets
+sont dépassés (jusqu'à 1 497 ms pour une remise) : cette capacité supplémentaire
+**n'est pas acquise**. Huit actions par acteur, pause de 20 ms : ces essais courts
+ne démontrent pas un débit soutenu de production.
+
+Le scénario **E73-PERF-08 à cinq workers réels** passe : **un test, 119,14 s**,
+aucun échec/skip (`tmp/e73-lot10-workers-performance-final02.xml`). Dix communes,
+10 000 participants, dix acteurs, import/campagne/export/tirage/coûts démarrés
+ensemble, sans charge extérieure. Les p95/p99 sont respectivement : bilan
+463/514 ms, participants 575/583 ms, validations 482/534 ms, remise 779/877 ms.
+Zéro erreur ; 80 actions pendant une phase de 16,993 s, soit 4,71 actions/s ;
+pic RSS 147 Mio, 15 connexions de pool et six sessions en attente de verrou au
+maximum observé (ce dernier indicateur n'est pas une durée d'attente).
+
+L'export termine en 16,97 s, le tirage en 5,63 s dont 102 ms pour le scellement.
+Après 18 tours de reprise, 89,39 s, les comptes finaux sont vérifiés : **100
+commerces importés, 1 000 messages Live, 100 attributions, 700 faits de coûts**
+sans doublon, et archive disponible de **10 000 participants** segmentés par 100.
+Le premier essai échouait parce que la fixture omettait les modèles de dossiers
+de souscription ; l'ajout des modèles réels corrige la fixture sans changement
+du produit, ni allègement du volume ou des budgets. Son XML et ses mesures brutes
+restent conservés.
+
+Limites : le trafic passe par les services applicatifs et PostgreSQL locaux,
+sans HTTP/proxy ni fournisseurs externes. La campagne prépare ses destinataires
+pendant la charge ; les dépôts Live sont effectués au drainage. Le tirage porte
+sur une autre commune de la même organisation. Le scénario à cinq workers ne
+porte que sur 10 000 participants/dix acteurs ; les paliers supérieurs ci-dessus
+ont seulement un worker de coûts. Les preuves ne sont pas un SLA hébergé.
+Les artefacts détaillés sont conservés dans `.artifacts/e73-charge-workers-locale.json`
+et `.artifacts/e73-charge-mixte-locale-matrice-finale-brute.json` du backend,
+avec les replays et diagnostics ; ils ne sont pas ajoutés au dépôt documentaire.
+
+**Contrôle final des candidats commités.** Après normalisation des espaces du
+SQL v277, le rejeu complet, les modèles et le contrôle de readiness passent à
+nouveau : **3 tests, 42,71 s**, `tmp/e73-lot10-migrations-final02.xml`. Cette
+modification purement textuelle ne justifie pas de rejouer les douze minutes du
+cycle de démonstration déjà réussi.
+
+Le complément d'annulation des lectures passe ses **17 tests ciblés**, dont huit
+nouveaux, et son lint. L'ensemble du portail compte désormais **241 tests Node
+réussis**, zéro échec/skip, 31,14 s (`tmp/e73-lot10-node-final02.log`). Types,
+lint du candidat et build passent sans charger de configuration opérateur ; le
+bundle principal est de 480,48 ko / 124,75 ko gzip. Les parcours navigateur sont
+rejoués après ce complément : **4 scénarios / 60 assertions** pour les lectures
+globales et **12 scénarios / 100 assertions** pour export/fermeture/catalogue.
+Les signaux interrompent effectivement les GET et leur lecture JSON/ZIP,
+préservent les autres abonnés d'une requête dédupliquée et ne réessayent pas
+une lecture annulée. Les écritures déjà parties restent suivies ; aucun arrêt
+universel d'un SQL serveur déjà engagé n'est revendiqué.
+
+**Bilan local final.** Les dix lots sont implémentés, avec les contrôles,
+contre-preuves et limites consignés dans ce journal. Les parcours accessibles
+par lot sont décrits dans la [prise en main](prise-en-main-par-lot.md), les
+opérations dans le [guide SaaS](../../exploitation/exploitation/exploiter-saas-animation.md).
+Le lot 10 est enregistré localement dans Backend **`7f74166`**, Animation
+**`da86e39`** et **`3801cc5`**, puis dans son commit documentaire. Le complément
+Animation isole la correction d'annulation détectée lors de la revue finale.
+Pro et Marketplace ne nécessitent pas de nouveau changement de code dans ce
+lot : les contrats QR/PIN/Live restent compatibles et sont contrôlés côté
+producteur ; les adaptations antérieures sont dans leurs commits par lot.
+
+L'epic reste **En cours dans la roadmap produit**, car l'acceptation humaine
+Localeo puis Martignas-sur-Jalle, les branches de recette hébergées et la preuve
+RPO **4 h** / RTO **8 h** ne sont pas exécutées. Les CA28/63 ne sont pas acquis
+par des tests locaux. Les limites de charge à vingt acteurs et des lecteurs
+historiques sont maintenues ci-dessus. Aucun push, pipeline distant, déploiement,
+migration partagée ou envoi fournisseur réel n'a été effectué. Les travaux
+préexistants exclus sont conservés dans leurs arbres de travail.

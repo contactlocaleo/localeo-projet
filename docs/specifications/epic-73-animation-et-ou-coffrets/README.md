@@ -12,6 +12,13 @@ La conception garde les cinq dépôts indépendants. Les règles sont dans le do
 
 Le [suivi d’implémentation locale](suivi-implementation.md) consigne le plan en dix lots, les preuves, les commits par dépôt et les limites ; aucun push ni déploiement n’est autorisé par la réalisation lancée le 18 octobre.
 
+La [prise en main par lot](prise-en-main-par-lot.md) présente les fonctionnalités,
+leurs accès dans les applications et des scénarios pour la future recette.
+
+Le [guide d’exploitation SaaS](../../exploitation/exploitation/exploiter-saas-animation.md)
+décrit le pilotage économique, les exports et fermetures, les traitements de
+conservation et le contrôle de réouverture après restauration du lot 10.
+
 La [procédure des bons numériques](../../exploitation/exploitation/gerer-bons-numeriques-animation.md)
 décrit les configurations préparées, les workers, les reprises et les contrôles
 de conservation restant nécessaires avant ouverture.

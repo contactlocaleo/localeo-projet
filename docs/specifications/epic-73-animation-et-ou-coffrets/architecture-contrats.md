@@ -1,6 +1,6 @@
 # E73 — Architecture et contrats transverses
 
-Version de conception du **17 octobre 2026**. [Dossier](README.md), [backlog et décisions](../../roadmap/en-cours/epic-73-animation-et-ou-coffrets-backlog.md). Cible à implémenter ; les noms nouveaux ci-dessous sont des contrats de conception, pas des routes déjà disponibles. L’état produit reste **À faire**.
+Version de conception du **17 octobre 2026**, complétée par les réalisations locales consignées ci-dessous. [Dossier](README.md), [backlog et décisions](../../roadmap/en-cours/epic-73-animation-et-ou-coffrets-backlog.md). Les sections de conception décrivent la cible ; les contrats effectivement disponibles et leurs preuves suivent le [journal de réalisation](suivi-implementation.md). L’état produit est **En cours**, sans déploiement.
 
 ## 1. Propriété des règles
 
@@ -390,3 +390,62 @@ privés suivent la catégorie Support existante. Notes internes et reçus ne
 deviennent pas des archives sans échéance. Leur raccordement aux purges et gels
 est consolidé au lot 10. La migration locale, les plans mesurés et les limites
 de vérification sont consignés dans le [suivi](suivi-implementation.md).
+
+## Réalisation locale du lot 10 — exploitation et lectures
+
+Le pilotage économique conserve des mesures versionnées et leurs valorisations.
+Les projections mensuelles distinguent constaté, estimé et indisponible ; elles
+ne deviennent jamais la source d'une facture ou d'un quota commercial. Les
+seuils 80/100 produisent des alertes internes idempotentes. Les capacités dédiées
+`pilotage_economique.consulter` et `pilotage_economique.gerer` restent internes,
+avec portée globale explicitement requise. Leur absence interdit aussi la
+lecture du résumé économique dans Ops.
+
+La réversibilité appartient au domaine d'organisation. Ses commandes coordonnent
+l'organisation avant les verrous d'identité, de reçu et d'engagement. Une
+fermeture en cours bloque les nouveaux usages, tout en conservant les commandes
+nécessaires aux engagements reconnus. Une reprise interne ne vaut transfert
+que si le preneur a accepté et dispose effectivement des commandes de traitement.
+La V1 implémentée permet cette reprise pour la préparation accompagnée ; les
+autres engagements doivent être résolus avant la fermeture effective.
+
+L'export privé capture un instantané cohérent en isolation `REPEATABLE READ`,
+par segments bornés, puis assemble CSV, médias transmissibles et manifeste.
+Les budgets de capture, mémoire temporaire et bail sont explicites ; un dépassement
+échoue sans annoncer une archive complète. La disponibilité de trente jours
+commence à la mise à disposition. Chaque téléchargement revérifie le responsable
+courant ; aucune URL publique durable n'est créée.
+
+Les migrations locales du lot portent sur les familles suivantes :
+
+| Migration | Rôle |
+| --- | --- |
+| v277 | Mesures, valorisations, projections et budgets économiques |
+| v278 | Exports privés, fermeture, engagements et reprise acceptée |
+| v279 | Références de conservation, gels, preuves minimales, reprise et index de dépendances |
+| v280 | Présence des cibles d'historique Pro, maintenue transactionnellement |
+| v281 | Index des listes ERP/Support et filtres de produits commerçants |
+| v282 | Index chronologiques des pages Participants et Validations |
+| v283 | Compteurs de lecture participants/progression/validations et index de fraîcheur |
+
+Ces compteurs de lecture sont des projections des faits, jamais une décision de
+qualification ou d'éligibilité. Les transitions sources et leurs projections
+sont atomiques ; annulation, correction, effacement et reconstruction doivent
+préserver leur parité. Les mesures d'une ancienne configuration ou révision
+restent inconnues, sans être présentées comme négatives. Les requêtes de page
+appliquent la portée autorisée avant la limite et bornent l'enrichissement.
+Le curseur est lié aux filtres. Les totaux ne sont pas calculés à partir de la
+seule page affichée.
+
+Les API internes `/internal/erp/api/suivi-animations` et
+`/internal/support/api/animations` présentent distinctement moteur, catégorie
+commerciale et dotation, puis attribution, bon et remise. Les droits et la portée
+communale sont revérifiés dans chaque lecture. Les exports CSV sont nommés
+« Exporter cette page » et ne contiennent ni secrets QR/PIN ni coordonnées
+hors de cette portée. Les lots libres ne contribuent pas aux agrégats de vente
+des Coffrets.
+
+Le [guide d'exploitation](../../exploitation/exploitation/exploiter-saas-animation.md)
+décrit conservation, journal indépendant et fermeture des capacités restaurées.
+Les contrats générés, preuves locales et limites de capacité sont enregistrés
+dans le suivi ; aucune migration ni activation distante n'est effectuée ici.

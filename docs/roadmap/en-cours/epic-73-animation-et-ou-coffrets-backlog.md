@@ -3,14 +3,14 @@
 ## Références
 
 - Identifiant : **EPIC-73**, vérifié dans la roadmap commune et les identifiants applicatifs ; aucun cadrage concurrent identifié.
-- État produit : **En cours** depuis le 18 octobre 2026, selon la [roadmap commune](../README.md). Réalisation locale par lots, sans push ni déploiement ; [preuves et avancement](../../specifications/epic-73-animation-et-ou-coffrets/suivi-implementation.md).
+- État produit : **En cours** depuis le 18 octobre 2026, selon la [roadmap commune](../README.md). Les dix lots d’implémentation locale sont terminés, sans push ni déploiement ; recette humaine et preuves hébergées restent non exécutées. Voir les [preuves et limites](../../specifications/epic-73-animation-et-ou-coffrets/suivi-implementation.md) et la [prise en main par lot](../../specifications/epic-73-animation-et-ou-coffrets/prise-en-main-par-lot.md).
 - Cadrage initial : **14 octobre 2026**, à la demande du porteur produit.
 - Revue des impacts : **15 octobre 2026**, à partir des sources locales ; aucune recette d’environnement réalisée.
 - Arbitrages interactifs du **16 octobre 2026** : choix de dotation et de gestion des lots libres confirmés pour US02 (ARB-04 résolu).
 - Objectif : vendre Animation et Coffrets ensemble ou séparément, avec un périmètre commerçant qui conditionne son onboarding et ses fonctionnalités dans Localeo Pro.
 - Extension du 15 octobre : plateforme Animation modulaire, catalogue de composants achetables en complément du forfait ou accordés directement sur une souscription ; premiers cas : import de commerçants en masse, chasse au trésor et Web Push vers les participants, Web Push non inclus et désactivé par défaut. Le 16 octobre, import et chasse sont également confirmés à la carte, non inclus par défaut pour les nouvelles souscriptions (DEC-30).
 - Complément SaaS du 15 octobre : autonomie des comptes, équipes et souscriptions, accompagnement de la première animation, aide/support, réutilisation, mesure de valeur et des coûts, réversibilité et preuves de reprise. **38 user stories et 63 critères**, couverts par la spécification détaillée V1 du 17 octobre ; les socles existants ne valent pas livraison de ces évolutions.
-- Cette epic porte un pivot transverse distinct des socles existants. Elle ne rouvre ni ne remplace leurs clôtures historiques. Elle n’est pas une implémentation et aucun prix ou domaine Internet n’est considéré comme activé.
+- Cette epic porte un pivot transverse distinct des socles existants. Elle ne rouvre ni ne remplace leurs clôtures historiques. Le backlog décrit les exigences ; les implémentations locales et leurs preuves sont consignées dans le suivi. Aucun prix ou domaine Internet n’est considéré comme activé par ces commits.
 - [Spécification détaillée E73 V1 du 17 octobre](../../specifications/epic-73-animation-et-ou-coffrets/README.md) : parcours, invariants, contrats, migrations et preuves attendues ; aucune implémentation ou mise en service effectuée par cette phase.
 
 ### Socles et dépendances

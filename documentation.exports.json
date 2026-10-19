@@ -516,6 +516,10 @@
     {
       "path": "docs/ops/exploitation/parcours-plateforme-animation.md",
       "source_path": "docs/exploitation/exploitation/parcours-plateforme-animation.md"
+    },
+    {
+      "path": "docs/ops/exploitation/exploiter-saas-animation.md",
+      "source_path": "docs/exploitation/exploitation/exploiter-saas-animation.md"
     }
   ]
 }
