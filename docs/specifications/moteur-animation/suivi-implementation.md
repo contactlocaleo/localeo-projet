@@ -1213,3 +1213,35 @@ Les recettes utilisent des données synthétiques ; la conservation d’une
 tentative après fermeture/rechargement de l’application n’est pas couverte.
 Aucun test PostgreSQL, commit, push ou déploiement effectué pour ce correctif.
 La résolution sur l’environnement de test reste à vérifier après livraison.
+
+## Correctif du 11 octobre 2026 — raccourcis de clôture Animation
+
+Signalement : le bouton « Clôturer » de « Test animation » en test semble sans
+effet. Cause reproduite localement : les boutons d’en-tête et de workflow
+sélectionnaient seulement Live ; aucune confirmation n’était ouverte, notamment
+lorsque cet onglet était déjà sélectionné. Le test navigateur échoue avant
+correction sur l’attente de la confirmation.
+
+Les raccourcis demandent maintenant l’ouverture de la confirmation, son défilement
+dans la zone visible et son focus. Une annulation permet une nouvelle ouverture.
+Les droits `allowedActions` du serveur restent déterminants ; un refus affiche
+un message au lieu d’une navigation silencieuse. La case de confirmation reste
+obligatoire ; aucune commande n’est envoyée à l’ouverture. Versions, idempotence,
+gel de population et reprise après résultat incertain restent inchangés.
+
+Vérifications : types et lint réussis via les scripts npm (pnpm absent du PATH,
+aucune installation ni modification du verrou) ; **171 tests Node réussis** ;
+build isolé `scripts/build-generation-tests.mjs` réussi avec avertissement de
+taille du bundle. Recette navigateur avec `EXPLOITATION_CASE=cloture` : réussie
+à **1280 et 390 px**, depuis workflow et Live, réouverture, droits retirés,
+confirmation explicite, perte de réponse et relecture du reçu. Capture mobile
+de confirmation relue. Le scénario complet a également été tenté : il s’arrête
+ensuite dans la préparation sur l’ancien libellé « Enregistrer et valider la
+préparation », remplacé dans ce parcours par « Valider le parcours et continuer ».
+Ce scénario de préparation reste non validé ; ses assertions ne sont pas supprimées.
+
+Impacts limités à Localeo Animation et à la documentation. Aucun contrat, règle
+métier, schéma ou jeu de démonstration modifié ; Backend, Pro et Marketplace sans
+impact applicatif. Pas de migration, d’action sur l’animation réelle, de commit,
+de push ou de déploiement. Le comportement sur la cible reste à vérifier après
+livraison.
