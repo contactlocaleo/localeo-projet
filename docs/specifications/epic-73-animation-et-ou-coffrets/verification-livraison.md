@@ -4,6 +4,10 @@ Version de conception du **17 octobre 2026**, réalisation locale commencée le 
 
 ## 1. Traçabilité des 63 critères
 
+Le [plan de recette métier](recette-metier.md) complète cette matrice par 25 fiches
+fonctionnelles : objet, accès, prérequis, manipulations et résultats observables.
+Il prépare la validation humaine sans remplacer les preuves techniques ci-dessous.
+
 Chaque ligne associe le CA à une preuve observable ; les identifiants `E73-T-*` nomment des scénarios à réaliser, pas des fichiers déjà présents. Les tests de domaine utilisent horloge/faits et ports doubles, les tests transactionnels une base PostgreSQL jetable, les contrats les DTO réels, les parcours navigateur des comptes synthétiques. Les références de documents, fixtures et livraison sont décrites après la matrice.
 
 | Critère | Comportement / propriétaire | Preuve attendue — résultats dans les raccordements et le journal | Contrat / guide | Fixture | Livraison |

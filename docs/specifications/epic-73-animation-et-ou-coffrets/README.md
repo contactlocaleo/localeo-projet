@@ -15,6 +15,10 @@ Le [suivi d’implémentation locale](suivi-implementation.md) consigne le plan 
 La [prise en main par lot](prise-en-main-par-lot.md) présente les fonctionnalités,
 leurs accès dans les applications et des scénarios pour la future recette.
 
+Le [plan de recette métier par fonctionnalité](recette-metier.md) propose 25 fiches
+avec objectif, accès, prérequis, actions et résultats attendus, ainsi qu’une
+traçabilité des 38 US et 63 critères. Les tests restent à exécuter et à consigner.
+
 Le [guide d’exploitation SaaS](../../exploitation/exploitation/exploiter-saas-animation.md)
 décrit le pilotage économique, les exports et fermetures, les traitements de
 conservation et le contrôle de réouverture après restauration du lot 10.

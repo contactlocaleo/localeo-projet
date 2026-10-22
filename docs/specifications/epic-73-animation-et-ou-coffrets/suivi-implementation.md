@@ -1226,3 +1226,38 @@ par des tests locaux. Les limites de charge à vingt acteurs et des lecteurs
 historiques sont maintenues ci-dessus. Aucun push, pipeline distant, déploiement,
 migration partagée ou envoi fournisseur réel n'a été effectué. Les travaux
 préexistants exclus sont conservés dans leurs arbres de travail.
+
+## Correctif du 22 octobre 2026 — module de stockage absent de la livraison
+
+Le démarrage Render signalé échoue à l'import de
+`app.infrastructure.storage.reversibilite` depuis l'API de réversibilité.
+Le commit backend `7f74166` ne contient pas ce fichier, alors que sa copie locale
+permettait aux tests de passer : la règle générale `storage/` du `.gitignore`
+excluait également les nouveaux adaptateurs Python du stockage applicatif.
+
+La règle conserve l'exclusion des données de stockage et ouvre uniquement les
+sources `.py` de `app/infrastructure/storage/`. L'adaptateur existant
+`reversibilite.py` devient ainsi livrable avec le correctif, sans modification de
+sa logique. Les archives privées, caches, sauvegardes et fichiers `.env` restent
+ignorés. Un test d'architecture exerce ces décisions avec Git dans un dépôt
+temporaire ; il échoue sur l'adaptateur avant correction et passe ensuite.
+
+Vérification locale : **618 tests réussis** pour l'architecture, le recensement
+des classes de domaine et cas d'usage, et le contrat HTTP de réversibilité.
+L'absence du module et l'erreur `ModuleNotFoundError` sont également reproduites
+depuis une archive Git du commit, sans les fichiers locaux non versionnés.
+Après ajout du seul adaptateur manquant dans cette archive, **5 tests réussissent**
+(`tests/api/test_reversibilite_organisations_api.py` et
+`tests/api/test_observability_errors.py`), incluant le chargement de `app.main`
+et la génération OpenAPI. Les journaux privés sont dans
+`.artifacts/storage-delivery-fnup7vta/` du backend. Tous ces tests utilisent
+`scripts/validation/test_isolated.py` ; les contrôles documentaires
+`check_guidance.py` et `sync_documentation.py --check-sources` réussissent aussi.
+Deux avertissements de dépréciation FastAPI/Starlette restent
+visibles ; ils ne constituent pas l'erreur de livraison.
+
+Impacts : backend (contenu livré et exclusion Git) et ce suivi documentaire.
+Aucune modification des contrats API, permissions, règles de conservation,
+interfaces ou données de démonstration ; aucune migration supplémentaire.
+La vérification isolée bloque les connexions et les envois externes. Aucun
+commit, push ou redéploiement n'est réalisé par ce correctif local.
