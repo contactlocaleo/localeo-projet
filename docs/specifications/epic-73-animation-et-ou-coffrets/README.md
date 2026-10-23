@@ -10,6 +10,11 @@ La conception garde les cinq dépôts indépendants. Les règles sont dans le do
 
 ## Lire et réaliser le périmètre
 
+L'[évolution des flyers du 22 octobre 2026](flyers-contextualises.md) ajoute la
+contextualisation selon la dotation, les nombres de lots et de commerçants
+confirmés, ainsi qu'une illustration personnalisable propre au flyer
+(E73-CA-FLYER-01 à 05).
+
 Le [suivi d’implémentation locale](suivi-implementation.md) consigne le plan en dix lots, les preuves, les commits par dépôt et les limites ; aucun push ni déploiement n’est autorisé par la réalisation lancée le 18 octobre.
 
 La [prise en main par lot](prise-en-main-par-lot.md) présente les fonctionnalités,
@@ -22,6 +27,10 @@ traçabilité des 38 US et 63 critères. Les tests restent à exécuter et à co
 Le [guide d’exploitation SaaS](../../exploitation/exploitation/exploiter-saas-animation.md)
 décrit le pilotage économique, les exports et fermetures, les traitements de
 conservation et le contrôle de réouverture après restauration du lot 10.
+
+Le [guide de configuration E73 par application](../../exploitation/technique/configurer-epic-73.md)
+détaille les nouvelles clés, les réglages existants à réutiliser, les exemples de
+valeurs, les traitements à programmer et les vérifications avant ouverture.
 
 La [procédure des bons numériques](../../exploitation/exploitation/gerer-bons-numeriques-animation.md)
 décrit les configurations préparées, les workers, les reprises et les contrôles

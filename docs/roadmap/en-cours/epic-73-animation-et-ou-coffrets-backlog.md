@@ -604,6 +604,20 @@ L’analyse couvre les cinq dépôts indépendants ; aucun nouveau dépôt n’e
 
 ## Questions ouvertes
 
+### Évolution du 22 octobre 2026 — flyers contextualisés
+
+**E73-EVO-FLYER**, rattachée aux US02/04/05/06/23/29 : adapter les supports au
+choix Coffrets / lots libres externes / bons numériques ; mettre en évidence le
+nombre d'exemplaires à gagner et de commerçants confirmés ; permettre une image
+personnelle propre au flyer et le retour à l'illustration habituelle. La
+[spécification complémentaire](../../specifications/epic-73-animation-et-ou-coffrets/flyers-contextualises.md)
+définit les **cinq critères ajoutés E73-CA-FLYER-01 à 05**, leurs refus et leurs
+preuves. Les identifiants des 63 critères initiaux, les arbitrages acquis et
+l'état de l'epic sont conservés. La réalisation et ses limites figurent dans le
+[suivi canonique](../../specifications/epic-73-animation-et-ou-coffrets/suivi-implementation.md).
+
+### Arbitrages du périmètre initial
+
 **Les 18 groupes d’arbitrages recensés sont résolus** (E73-ARB-01 à 18) ; les décisions DEC-01 à 147 sont acquises. Aucun arbitrage produit recensé ne reste ouvert à ce stade. Les choix de conception, contrats, procédures et preuves attendues sont détaillés dans le dossier canonique ; leur réalisation et leur validation restent à effectuer ; toute nouvelle question produit réellement bloquante sera explicitée sans remettre implicitement en cause les décisions acquises. Les objectifs de reprise sont fixés, mais leur atteinte sur l’hébergement reste à démontrer.
 
 ## Passage à la spécification

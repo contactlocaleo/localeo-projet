@@ -4,6 +4,11 @@ Version de conception du **17 octobre 2026**, réalisation locale commencée le 
 
 ## 1. Traçabilité des 63 critères
 
+L'évolution du 22 octobre ajoute une [matrice de cinq critères flyer](flyers-contextualises.md#critères-ajoutés)
+E73-CA-FLYER-01 à 05, distincte de la base historique ci-dessous. Ses scénarios
+RM-FLYER-01 à 05 et les preuves du suivi couvrent les modes de dotation, nombres,
+illustration, droits et concurrence.
+
 Le [plan de recette métier](recette-metier.md) complète cette matrice par 25 fiches
 fonctionnelles : objet, accès, prérequis, manipulations et résultats observables.
 Il prépare la validation humaine sans remplacer les preuves techniques ci-dessous.

@@ -1261,3 +1261,145 @@ Aucune modification des contrats API, permissions, règles de conservation,
 interfaces ou données de démonstration ; aucune migration supplémentaire.
 La vérification isolée bloque les connexions et les envois externes. Aucun
 commit, push ou redéploiement n'est réalisé par ce correctif local.
+
+## Correctif du 22 octobre 2026 — invitation ouverte sous le compte de l’invitant
+
+Lors de RM-02-02, l’invitation a été ouverte avec Mathilde, qui l’avait envoyée.
+Ce scénario attend la création du compte destinataire ; l’acceptation avec un
+compte déjà connecté relève de RM-02-03 et exige l’identité invitée. Le domaine
+backend conserve cette vérification. L’écran ne montrait pas l’identité connectée
+et ne permettait pas de changer de compte, ce qui rendait le refus peu exploitable.
+
+Localeo Animation affiche maintenant le nom et l’email du compte connecté,
+explique le choix et propose **Changer de compte**. Cette action réutilise la
+déconnexion serveur existante, puis propose la connexion du destinataire ou la
+création de son premier accès. L’invitation reste uniquement en mémoire dans
+l’onglet ; son secret n’est pas réintroduit dans l’URL ou les stockages navigateur.
+Un échec de déconnexion conserve l’écran de reprise et bloque la suite jusqu’à
+confirmation serveur. Le message de refus indique aussi comment reprendre.
+La réponse `MOT_DE_PASSE_REQUIS` fournie ensuite pendant la recette confirme
+le cas d’un destinataire nouveau : l’interface explique spécifiquement qu’il
+faut changer de compte puis créer le premier accès et définir le mot de passe.
+Le code imbriqué dans `detail.code` est lu sans afficher le détail technique brut.
+
+Preuve locale sur Animation `f0251a5` avec correctif : le banc navigateur
+`tests/browser/account-app.mjs` échoue avant correction sur l’absence de l’email
+connecté, puis réussit **124 assertions** à 1280/320 px, dont changement de compte,
+création, reconnexion du destinataire, absence d’acceptation prématurée et reprise
+d’une déconnexion échouée. Le complément reproduit aussi le 422
+`MOT_DE_PASSE_REQUIS` avant de créer le compte : le test échoue sur le message
+générique, puis confirme l’explication précise et la reprise sans nouvelle invitation.
+API simulées, trafic externe bloqué ; ce banc ne prouve
+pas la réparation d’une invitation hébergée. Le banc adjacent
+`tests/browser/organisation-access.mjs` réussit **111 assertions / 24 scénarios**
+à 1280/390/320 px. Les **18 tests Node ciblés** de
+contrats organisation/session et d’expiration réussissent, ainsi que TypeScript,
+ESLint et le build PWA isolé (`scripts/build-pwa-tests.mjs`). `pnpm` est absent
+du PATH ; types et lint sont exécutés avec les binaires locaux via Node 24.14.0,
+sans installation ni modification du verrou. Les captures du parcours sont dans
+`tmp/generation-browser-dist/invitation-account-*.png` du dépôt Animation.
+Les contrôles documentaires `check_guidance.py` (96 guides, 0 erreur) et
+`sync_documentation.py --check-sources` (130 documents) réussissent également.
+
+Impacts : interface Animation et recette RM-02-02/03 ; aucun changement du
+contrat d’acceptation, de la règle métier ou du générateur, qui émet déjà les
+invitations attendues. Aucune migration ni nouvelle configuration. Aucun accès
+à l’environnement de test, envoi d’email, commit, push ou déploiement effectué.
+
+Point de publication du **23 octobre 2026** : le correctif des invitations décrit
+ci-dessus a été commité et poussé séparément dans `localeo-animation`, sur `main`,
+sous **`4ee90c2`**. Le contenu exact du commit a été vérifié dans une copie isolée
+de l’index : TypeScript, ESLint, build Vite isolé, **18 tests Node**, **124 assertions**
+du parcours compte et **111 assertions / 24 scénarios** d’accès organisation réussis.
+Les modifications de flyers sont restées locales et ne font pas partie de ce
+commit. Le push n’atteste pas la version déployée ni la recette hébergée.
+
+## Évolution du 22 octobre 2026 — E73-EVO-FLYER
+
+Réalisation locale des [flyers contextualisés](flyers-contextualises.md), critères
+ajoutés **E73-CA-FLYER-01 à 05**. Base lue : backend `5aed284`, Animation
+`f0251a5`, projet `6d25510`, avec conservation des travaux locaux antérieurs
+(invitation organisateur, configuration et automatisation de recette).
+
+La charte de rendu passe à `LOCALEO_ANIMATION_MARKETPLACE_V5`. Le domaine prépare
+la promesse Coffrets / lots externes / bons numériques, le nombre d'exemplaires
+et de commerçants effectivement participants. Le compteur des lots libres vient
+de la dotation, sans chargement de ses exemplaires ; une participation publiée
+utilise sa liste figée sans requête inutile sur les invitations. Les faits et
+l'identité de l'image participent à l'empreinte du rendu et sont revérifiés avant
+rattachement. L'ancienne accroche automatique Coffrets est adaptée aux lots
+libres ; une accroche personnalisée reste conservée.
+
+Les commandes d'image portent la version de l'animation et une clé d'idempotence.
+Le normalisateur est injecté depuis la composition infrastructure ; il vérifie
+le contenu réel, les dimensions, la taille et retire les métadonnées. Le document
+privé d'illustration est versionné indépendamment de la couverture publique et
+de la configuration publiée. Le retour au défaut réutilise le visuel historique
+de l'animation, sinon la photo embarquée. L'intention de stockage existante
+couvre également une image préparée mais non rattachée après conflit.
+
+Dans **Localeo Animation → animation → Flyer**, `FlyerWorkspace` propose les
+deux compteurs, le contexte de dotation, le choix d'image avec aperçu,
+l'enregistrement, le retour au défaut, la génération et le téléchargement.
+Un fichier choisi doit être enregistré ou abandonné avant génération. Un PDF
+obsolète reste explicitement identifié comme précédent. Le menu global Flyers
+ouvre directement cet onglet et affiche « PDF disponible » sans prétendre
+calculer la fraîcheur de chaque document ; le compteur et le filtre trompeurs
+« à actualiser / à régénérer » y ont été retirés. Le détail vérifie sa fraîcheur.
+
+| Critères | Preuves locales exécutées |
+| --- | --- |
+| FLYER-01/02 | Tests de contenu et de service, PostgreSQL dotations externe/numérique et participation effective ; rendu réel des trois modes |
+| FLYER-03 | Tests image et PostgreSQL remplacement/retrait/version documentaire, navigateur aperçu/enregistrement/retour au défaut ; PDF final inspecté |
+| FLYER-04 | Validation raster/volume/dimensions/animation/EXIF, refus lecteur/autre tenant, contrat HTTP réel et actions UI masquées |
+| FLYER-05 | Rejeu et clé réutilisée, verrou/version, conflit après stockage avec intention d'orphelin, changement d'image/dotation/acceptation durant préparation, réconciliation navigateur et état périmé |
+
+**Résultats sur l'arbre local final :**
+
+- **61 tests backend ciblés réussis, aucun ignoré**, dont neuf cas PostgreSQL
+  dans `tests/security/test_illustration_flyer_postgres.py`. Le complément couvre
+  `test_flyer_prepare_postgres_t3.py`, les tests domaine de contenu et leur
+  recensement dédié, `tests/application/services/test_flyer_animation.py`, les
+  tests infrastructure du renderer et de l'illustration, et
+  `tests/api/test_animation_locale_flyer_cache.py`.
+- **624 contrôles réussis** : `tests/architecture`, recensements des classes de
+  domaine/cas d'usage et tests de `PolitiqueParticipationPublicationAnimation`.
+- **184 assertions navigateur réussies** pour les trois modes à 320/1280 px,
+  avec lecteur, double clic, conflit de version, réponse perdue/récupération du
+  reçu et actualisation pendant `EN_COURS`. Le parcours application complet
+  depuis la liste Flyers passe aux deux largeurs, y compris l'absence de fausse
+  synthèse de fraîcheur.
+- **12 tests Node ciblés réussis** : dix tests mutation/pagination existants et
+  deux tests `flyer-http-contracts.test.mjs` vérifiant le producteur OpenAPI et
+  les requêtes réelles du client. TypeScript, lint et build PWA isolé réussis.
+- PDF A4 et aperçu PNG des trois modes inspectés ; QR décodés avec l'URL exacte
+  dans les six livrables. Les outils QA optionnels déjà présents dans
+  `tmp/kit-qa/deps` ont été chargés pour exécuter les deux tests de décodage
+  initialement ignorés, sans installation ni modification des dépendances.
+
+Les tests backend utilisent `scripts/validation/test_isolated.py`, le runtime
+Python local et uniquement PostgreSQL jetable sur `127.0.0.1:55473`, base
+`localeo_audit_test`, avec schémas isolés. Les deux avertissements restants sont
+des dépréciations FastAPI/Starlette. Les échantillons PDF/PNG et leur vérification
+QR sont dans `.artifacts/flyers-e73/` du backend ; les captures UI dans
+`tmp/flyer-personnalisation/` d'Animation. Ces fichiers de travail ne sont pas
+déplacés dans le dépôt documentaire.
+
+La revue indépendante a conduit à corriger le retour à l'illustration historique,
+la conservation des fichiers préparés, l'injection du normalisateur, la lecture
+inutile des invitations publiées et la présentation de fraîcheur dans la liste.
+Les contrats sont générés hors ligne dans `epic-41-api/openapi.json` et les
+routes/schémas concernés synchronisés dans le contrat embarqué Animation.
+Les contrôles documentaires finaux réussissent : `check_guidance.py` (94 guides,
+1 018 liens, aucune erreur), `sync_documentation.py --check-sources` (130 documents)
+et `git diff --check` dans les trois dépôts concernés.
+
+**Impacts et limites :** trois dépôts modifiés pour cette évolution : backend,
+Animation et projet. Aucune migration, nouvelle variable, conversion de données
+ni modification du formulaire Pro/Marketplace. Le générateur peut conserver
+l'absence d'image dédiée ; les nouvelles fixtures locales couvrent les trois
+dotations, sans génération distante. Les PDF historiques ne changent qu'après
+régénération. Le corps JSON est lu par le framework avant validation de sa
+longueur ; la borne HTTP du proxy reste applicable, distincte des contrôles
+base64/image. La recette hébergée RM-FLYER-01 à 05 reste à exécuter. Aucun commit,
+push ni déploiement effectué ; l'état global de l'epic reste inchangé.

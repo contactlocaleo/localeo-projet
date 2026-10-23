@@ -1,5 +1,11 @@
 # E73 — Architecture et contrats transverses
 
+Complément du 22 octobre 2026 : l'[évolution E73-EVO-FLYER](flyers-contextualises.md)
+précise les faits de dotation/participation utilisés pour les supports, leur
+empreinte de fraîcheur et les commandes d'illustration privée. Elle conserve les
+transactions courtes, les reçus idempotents et la conservation des fichiers
+préparés ; aucune migration ni nouvelle configuration n'est ajoutée.
+
 Version de conception du **17 octobre 2026**, complétée par les réalisations locales consignées ci-dessous. [Dossier](README.md), [backlog et décisions](../../roadmap/en-cours/epic-73-animation-et-ou-coffrets-backlog.md). Les sections de conception décrivent la cible ; les contrats effectivement disponibles et leurs preuves suivent le [journal de réalisation](suivi-implementation.md). L’état produit est **En cours**, sans déploiement.
 
 ## 1. Propriété des règles

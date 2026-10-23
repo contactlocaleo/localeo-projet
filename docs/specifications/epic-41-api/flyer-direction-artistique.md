@@ -104,6 +104,13 @@ photographie generative non validee en production.
 
 ## Contenus dynamiques
 
+L'[évolution E73 du 22 octobre 2026](../epic-73-animation-et-ou-coffrets/flyers-contextualises.md)
+complète cette direction artistique : promesse propre aux Coffrets, lots libres
+externes ou bons numériques, deux compteurs visibles (exemplaires et commerces
+confirmés), et illustration dédiée au flyer prioritaire sur la sélection
+historique ci-dessus. Le retrait de cette illustration restaure cette sélection.
+Les règles de composition, de QR et de publication restent applicables.
+
 Le gabarit injecte au minimum :
 
 - logo Localeo Animation ;
