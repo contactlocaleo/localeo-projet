@@ -1,5 +1,12 @@
 # Specification frontend PWA - Localeo Live
 
+Évolution du 30 octobre 2026 : la surface Animation affiche désormais Accueil,
+Mes participations et Mes communes. L'accueil personnel et les rappels
+facultatifs sont spécifiés dans
+[E73-EVO-LIVE-ACCUEIL-RAPPELS](../epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-30-octobre-2026--e73-evo-live-accueil-rappels).
+Cette évolution remplace les attentes de navigation ci-dessous pour cette
+surface ; elle conserve le carnet Coffrets et ses accès historiques.
+
 > Document consolidé depuis les spécifications `localeo-marketplace` et
 > `localeo-backend`. La refonte du carnet de septembre remplace la navigation initiale
 > à quatre destinations et la confirmation systématique ; les exigences backend

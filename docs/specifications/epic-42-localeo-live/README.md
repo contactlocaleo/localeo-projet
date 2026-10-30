@@ -1,5 +1,12 @@
 # Specifications Epic 42 - Localeo Live
 
+Complément porté par E73 le **30 octobre 2026 — E73-EVO-LIVE-ACCUEIL-RAPPELS** :
+accueil personnel mobile, parcours presque terminés, échéances à 72 heures et
+deux rappels facultatifs indépendants. Le détail, les contrats et les critères
+de cette évolution restent dans la
+[spécification canonique E73](../epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-30-octobre-2026--e73-evo-live-accueil-rappels),
+sans rouvrir la clôture historique du socle E42.
+
 Évolution portée par l'epic 73 le **30 octobre 2026 — E73-EVO-LIVE-UNIQUE** :
 [découverte et participations depuis Live](../epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md)
 à `animations.localeo.city`, navigation mobile et communes multiples. Aucun

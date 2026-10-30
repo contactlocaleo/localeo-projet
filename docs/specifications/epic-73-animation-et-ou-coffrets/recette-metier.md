@@ -2667,6 +2667,35 @@ La reprise interne disponible pour une préparation ne prouve pas qu’un gain, 
 
 La recette métier ne démontre pas à elle seule l’usage d’index ou l’absence de chargement d’une table complète. Joindre pour RM-X-06 les preuves de pagination, requêtes et charge de la [matrice de performance](architecture-contrats.md). Les lectures historiques non migrées et limites enregistrées dans le suivi doivent rester visibles dans le bilan, sans généraliser la validation de quelques écrans à toute la plateforme.
 
+## Complément du 30 octobre — accueil et rappels Live
+
+Ces six parcours couvrent **E73-EVO-LIVE-ACCUEIL-RAPPELS** et ses
+[critères complémentaires](localeo-live-entree-unique.md). Ils s'ajoutent aux
+130 scénarios initiaux, sans changer leurs numéros ni leurs résultats.
+**Statut : recette hébergée à exécuter.** Les tests automatisés locaux et leurs
+limites sont dans le [suivi d'implémentation](suivi-implementation.md).
+
+Prérequis propres au complément : migration v284, backend et Live compatibles,
+deux participations distinctes à une même animation dans un carnet de recette,
+un parcours presque terminé, un autre incomplet finissant dans les 72 heures et
+un parcours terminé. Préparer ces états par les services ordinaires. Pour les
+rappels, utiliser uniquement un appareil du recetteur, HTTPS et le fournisseur
+de test prévu par le [guide d'exploitation](../../exploitation/exploitation/parcours-plateforme-animation.md).
+Une préférence activée ne prouve ni la permission navigateur ni la réception.
+
+| Test | Actions de recette | Résultat attendu / critères |
+| --- | --- | --- |
+| RM-LIVE-HOME-01 | Ouvrir Live sans carnet puis avec les participations préparées ; consulter la priorité principale, les suivantes et la découverte. Comparer progression et échéance aux participations. | Découverte conservée ; indicateurs réels, parcours terminé sans urgence ni gain inventé. E73-HOME-01/02. |
+| RM-LIVE-HOME-02 | Ouvrir deux accès de la même animation depuis l'accueil ; retirer seulement l'un des accès locaux puis rouvrir son lien. Actualiser les anciens suivis avec leurs tokens existants. | Bonne participation à chaque ouverture ; accès absent sans substitution, refus visible et carnet conservé. E73-HOME-04/05. |
+| RM-LIVE-HOME-03 | Sur mobile 320/390 px, utiliser texte agrandi et clavier ; avec plus de 50 suivis, changer de page puis actualiser pendant un chargement. | Actions utilisables, page remplacée et vue partielle annoncée, ancienne réponse ignorée. E73-HOME-03/06. |
+| RM-LIVE-RAPPEL-01 | Ouvrir Réglages sur installation nouvelle puis existante ; activer une seule préférence, recharger, changer l'autre puis retirer les deux. | Deux choix initialement désactivés, indépendants et mémorisés ; autres catégories/communes conservées, aucun blocage si Push refusé. E73-ALERTE-01. |
+| RM-LIVE-RAPPEL-02 | Avec consentement et abonnement du recetteur, préparer un parcours à une étape restante et une échéance proche ; simuler puis effectuer le traitement autorisé pendant 09–20 h Paris. Ouvrir le rappel. | Simulation sans rappel créé ; motifs regroupés, échéance lisible, bonne participation ouverte. Plusieurs participations ouvrent Mes participations. E73-ALERTE-02/05. |
+| RM-LIVE-RAPPEL-03 | Avec le référent, retirer le consentement ou achever le parcours avant transport ; rejouer les traitements et purger l'inbox. Vérifier séparément hors créneau et après échéance sur une cible isolée. | Aucun envoi devenu interdit ; pas de réarmement après purge, un rappel logique par jour et chaque type une fois par participation. Ne pas avancer l'horloge du TEST partagé. E73-ALERTE-03/04. |
+
+Enregistrer version, appareil, heure de Paris, identifiants sans secrets,
+préparation, tentative fournisseur et réception comme résultats distincts.
+L'absence d'un prérequis n'est pas une validation du parcours.
+
 ## Traçabilité et décision de recette
 
 | Fiche | US E73 | CA E73 principalement exercés |

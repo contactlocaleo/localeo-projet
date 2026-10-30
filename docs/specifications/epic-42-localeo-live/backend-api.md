@@ -1,5 +1,12 @@
 # Specification backend et API - Localeo Live
 
+L'évolution du 30 octobre 2026
+[E73-EVO-LIVE-ACCUEIL-RAPPELS](../epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-30-octobre-2026--e73-evo-live-accueil-rappels)
+ajoute une lecture privée de tableau de bord, des préférences opt-in et des
+rappels personnels dédupliqués. Les contrats générés sont dans
+[OpenAPI Live](openapi.json) ; les états historiques décrits ici ne prouvent
+pas l'activation de ces nouveaux traitements.
+
 > Consolidation des exemplaires `localeo-backend` et `localeo-marketplace`.
 > Le socle backend conserve les compléments absents de l'ancienne copie Marketplace :
 > installation indépendante du Push, façade participation, actualités Animation,

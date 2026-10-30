@@ -2,6 +2,111 @@
 
 Début : **18 octobre 2026**. [Spécification](README.md), [backlog](../../roadmap/en-cours/epic-73-animation-et-ou-coffrets-backlog.md), [matrice des 63 critères et preuves](verification-livraison.md). Objectif : les 38 US, dans les dix lots demandés. Les lignes ci-dessous ne valent pas acceptation tant que les preuves correspondantes ne sont pas enregistrées.
 
+## Accueil et rappels du 30 octobre 2026 — E73-EVO-LIVE-ACCUEIL-RAPPELS
+
+Demande : un accueil personnel mobile donnant priorité aux participations presque
+terminées ou bientôt échues, et deux rappels Web Push facultatifs.
+Les [critères et contrats](localeo-live-entree-unique.md) complètent E73 ; son
+statut global reste **En cours**. Bases Git : projet `55ef32a`, backend `baa559c`,
+Marketplace `feb5d0e`, avec les modifications locales de cette évolution.
+Réalisation enregistrée dans backend `586a51f` et Marketplace `7d9e0fc`.
+
+L'accueil **Mon Live** conserve `/live/decouvrir`, la découverte publique et le
+carnet existant. Les indicateurs proviennent du domaine ; l'interface ne déduit
+ni qualification ni gain. La première priorité, les deux suivantes et les autres
+participations se limitent à la page chargée, au plus 50 éléments ; les pages se
+remplacent, avec état partiel explicite. Le lien personnel retrouve l'identifiant
+exact du carnet, sans substituer le token d'une autre participation.
+
+Les préférences `RAPPEL_PRESQUE_TERMINE` et `RAPPEL_FIN_PROCHE` sont indépendantes
+et désactivées par défaut. La première exige une étape restante pour le Push ;
+le seuil de 80 % concerne uniquement l'accueil. La seconde utilise l'échéance
+effective dans les 72 heures. Préparation et transport revalident les droits et
+états ; les réservations durables empêchent le réarmement par purge de l'inbox.
+Une réservation annulée avant livraison reste consommée : aucun envoi effectif
+ni réception ne peut être déduit du seul compteur de préparation.
+
+| Critères | Preuves locales exécutées |
+| --- | --- |
+| E73-HOME-01/03 | Parcours navigateur mobile/bureau, visiteurs et carnet, ordre stable et entrées distinctes ; trois pages/150 ressources, au plus 50 cartes rendues. |
+| E73-HOME-02 | Politique pure et tests dédiés : commencement, 80 %, une étape, 72 h, borne exacte de fin, inconnus et états terminaux ; régressions du moteur et des projections. |
+| E73-HOME-04 | Tests API et transport réel du client : secret en en-tête, refus croisé, no-store, annulation ; ancien backend et erreur réseau explicites. PostgreSQL : token exact, expiré, révoqué, absent ou supprimé. |
+| E73-HOME-05 | Navigateur : reprise de l'entrée exacte, absence sans substitution, actualisation explicite des accès avec refus partiels ; régressions carnet et Coffrets. |
+| E73-HOME-06 | Captures inspectées à 320 px et texte agrandi à 200 % ; tests 320/390/1280 px, Tab puis Entrée vers le bon accès et cibles tactiles. Styles calculés sous mouvements réduits : transition de 0,2 s ramenée à 0,01 ms par la règle globale existante. |
+| E73-ALERTE-01 | API, domaine et navigateur : défaut false, opt-ins indépendants, retrait, conservation des catégories/communes omises par un ancien client ; aucune demande automatique de permission. |
+| E73-ALERTE-02 | Une étape, échéance effective, fusion des motifs et digest multi-participations ; texte de date en heure de Paris, été/hiver. |
+| E73-ALERTE-03 | PostgreSQL : migration rejouable, deux workers concurrents, réservation unique, rollback et purge de l'inbox sans réarmement. |
+| E73-ALERTE-04 | Domaine, application et worker simulé : fenêtre Paris 09–20, été/hiver, attente, préférence retirée et revalidation avant transport. |
+| E73-ALERTE-05 | Lot borné et curseur durable, simulation et transport fournisseur simulé ; test SQL de pagination 50+5 et lectures groupées. |
+
+Résultats vérifiés, sans additionner les suites qui se recouvrent :
+
+- **786 tests backend réussis sur les sources figées** dans la passe finale
+  unifiée : architecture et recensements des classes/cas d'usage, nouveaux
+  domaine/application/API, registre démo, moteur/projections et régressions
+  Web Push, catégories, notifications Coffrets/Animation, schema readiness,
+  anciennes API et UI Live, inscription et notifications d'actualités.
+- **11 cas PostgreSQL réussis**, aucun ignoré, dans
+  `test_rappels_live_postgres_e73.py`, avec PostgreSQL 18 jetable local. La
+  migration finale est rejouée deux fois et les deux index de clés étrangères
+  sont introspectés. Après regroupement des contextes : **12 SELECT
+  pour 1, 10 et 50 animations distinctes**, préparation active ou inactive.
+  Tests de parité avec la lecture ordinaire et pagination inclus ; ce cas ne
+  prouve pas la capacité ou la latence d'une population hébergée en charge mixte.
+- **129 tests frontend `test:security` réussis**, aucun ignoré. Les contrôles
+  transport du tableau de bord et helpers de tri/progression y sont inclus.
+- **49 scénarios navigateur distincts réussis** au fil des lots, dont quatorze
+  nouveaux. Passe finale de quatorze scénarios réussie après correction de la
+  pagination et des réponses tardives pendant une actualisation ; les échecs intermédiaires d'assertions UI ont été corrigés et
+  rejoués. Build PWA isolé et ESLint sur sources/tests/scripts/configuration
+  réussis. Le lint global reste empêché par un refus local `EPERM` dans
+  `output/bum-politique/pytest-approval-1` ; aucune permission n'a été changée.
+
+Les nouveaux registres suivent le remplacement/restauration du générateur.
+**14 tests du registre réussis**, dont conservation des réservations après purge
+de l'inbox et restauration des dépendances, inclus dans les 786 tests.
+Le runner complet de compatibilité a exécuté dix scénarios : **neuf réussis**,
+dont dump, installation, échec injecté, reset après changement de schéma et
+restauration exacte ; le dixième a échoué uniquement sur la comparaison des
+empreintes sources, un fichier API ayant été édité pendant son exécution.
+Après gel de `app/templates/sql` et application de la migration finale sur le
+builder jetable, ce scénario complet a été **rejoué avec succès** (157,74 s),
+sans affaiblir l'assertion. Les dix scénarios disposent donc d'une réussite,
+obtenue en deux passes. Les sept avertissements du premier passage et celui du
+rejeu concernent la réflexion SQLAlchemy `dialect_options`, sans échec de lecture
+ou de restauration. Les sorties sont dans les répertoires `tmp/live-rappels-demo-*`
+du backend et les captures dans `test-results/live-game` de Marketplace.
+
+La revue indépendante des contrats a conduit à lier le token exact, préserver
+les préférences omises par un ancien client, revalider chaque abonnement avant
+transport et conserver un tag stable. Sa dernière lecture ne relève plus de
+réserve. Les lectures de contexte sont groupées entre animations et l'indicateur
+d'accès à actualiser utilise `EXISTS` ; aucun comptage global des suivis n'est
+nécessaire. Les tests de parité vérifient configuration effective, préparation,
+retrait commerçant et neutralisation de chasse, avec les règles ordinaires.
+
+Les contrats OpenAPI E41 et E42 sont générés hors ligne, avec réponses typées du
+tableau et de la préparation batch et configuration additive. Trois dépôts sont modifiés : projet, backend,
+Marketplace. Animation et Pro n'ont aucun nouveau parcours ni commande.
+La migration additive `v284_e73_priorites_rappels_live.sql` précède backend puis
+frontend. Les anciens suivis ne sont pas rattachés arbitrairement à un token :
+**Actualiser mes accès** utilise les seuls tokens du carnet, sans réinscription
+ni opt-in. Les [consignes d'exploitation](../../exploitation/exploitation/parcours-plateforme-animation.md)
+décrivent les deux batchs, leur simulation et leur activation.
+
+La recette HTTPS sur TEST, les permissions/abonnements de véritables appareils,
+la réception Web Push et les mesures de charge mixte restent à exécuter après
+livraison. Six parcours complémentaires `RM-LIVE-HOME-01` à `03` et
+`RM-LIVE-RAPPEL-01` à `03` sont préparés dans la [recette métier](recette-metier.md),
+sans barrer ni valider leur recette hébergée. Les contrôles documentaires finaux
+réussissent : 94 guides, 1 043 liens locaux, aucune erreur ; 130 sources exportées
+vérifiées. `git diff --check` réussit dans les trois dépôts. Les deux clusters
+PostgreSQL jetables et le serveur navigateur de test sont arrêtés.
+Aucun fournisseur réel, environnement partagé ou navigateur utilisateur
+n'a été sollicité pendant la validation. Les commits applicatifs sont poussés
+sur `origin/main` à la demande de l'utilisateur après cette validation locale ;
+aucune action directe de déploiement n'est exécutée.
+
 ## Complément UX du 30 octobre 2026 — E73-EVO-LIVE-UX
 
 Demande : simplifier la navigation et donner envie de participer grâce à la

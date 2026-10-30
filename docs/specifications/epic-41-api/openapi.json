@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Backend - contrat implemente EPIC 41",
     "description": "OpenAPI complet du backend, dont les parcours Animation locale. Genere hors ligne depuis le code local pour les integrations et les mocks ; cet instantane ne prouve pas son deploiement.",
-    "version": "1.0.0+5aed284"
+    "version": "1.0.0+586a51f"
   },
   "paths": {
     "/public/identite-acces/interne/connexion": {
@@ -3743,7 +3743,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "503": {
             "content": {
@@ -3831,7 +3831,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "503": {
             "content": {
@@ -4116,7 +4116,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "503": {
             "content": {
@@ -4178,7 +4178,7 @@
             }
           },
           "422": {
-            "description": "Unprocessable Entity",
+            "description": "Unprocessable Content",
             "content": {
               "application/json": {
                 "schema": {
@@ -4247,7 +4247,7 @@
             }
           },
           "422": {
-            "description": "Unprocessable Entity",
+            "description": "Unprocessable Content",
             "content": {
               "application/json": {
                 "schema": {
@@ -4365,7 +4365,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "503": {
             "content": {
@@ -4453,7 +4453,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "503": {
             "content": {
@@ -4529,7 +4529,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "503": {
             "content": {
@@ -4678,7 +4678,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "503": {
             "content": {
@@ -4806,7 +4806,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "503": {
             "content": {
@@ -5010,7 +5010,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "503": {
             "content": {
@@ -5098,7 +5098,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "503": {
             "content": {
@@ -5273,7 +5273,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "503": {
             "content": {
@@ -5448,7 +5448,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "503": {
             "content": {
@@ -5623,7 +5623,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "503": {
             "content": {
@@ -5732,7 +5732,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "503": {
             "content": {
@@ -5841,7 +5841,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "503": {
             "content": {
@@ -5950,7 +5950,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "503": {
             "content": {
@@ -6059,7 +6059,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "503": {
             "content": {
@@ -10308,6 +10308,1806 @@
                 "required": [
                   "expected_version"
                 ]
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/erp/api/suivi-animations/commercants/{commerce_id}/perimetres": {
+      "get": {
+        "tags": [
+          "ERP suivi Animation et lots"
+        ],
+        "summary": "Perimetres",
+        "operationId": "perimetres_internal_erp_api_suivi_animations_commercants__commerce_id__perimetres_get",
+        "parameters": [
+          {
+            "name": "commerce_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Commerce Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PerimetresCommercantPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/erp/api/suivi-animations/commercants/{commerce_id}/perimetres/historique": {
+      "get": {
+        "tags": [
+          "ERP suivi Animation et lots"
+        ],
+        "summary": "Historique Perimetres",
+        "operationId": "historique_perimetres_internal_erp_api_suivi_animations_commercants__commerce_id__perimetres_historique_get",
+        "parameters": [
+          {
+            "name": "commerce_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Commerce Id"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2048
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HistoriquePerimetrePayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/erp/api/suivi-animations": {
+      "get": {
+        "tags": [
+          "ERP suivi Animation et lots"
+        ],
+        "summary": "Animations",
+        "operationId": "animations_internal_erp_api_suivi_animations_get",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2048
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "recherche",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 100
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Recherche"
+            }
+          },
+          {
+            "name": "moteur",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 100
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Moteur"
+            }
+          },
+          {
+            "name": "categorieCommerciale",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "STANDARD",
+                    "A_LA_CARTE",
+                    "A_VERIFIER"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Categoriecommerciale"
+            }
+          },
+          {
+            "name": "dotation",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "COFFRETS",
+                    "LIBRE"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Dotation"
+            }
+          },
+          {
+            "name": "gestionLibre",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "EXTERNE",
+                    "NUMERIQUE"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Gestionlibre"
+            }
+          },
+          {
+            "name": "communeId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Communeid"
+            }
+          },
+          {
+            "name": "organisationId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Organisationid"
+            }
+          },
+          {
+            "name": "statut",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 30
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Statut"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageAnimationsSuivi"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/erp/api/suivi-animations/export-page.csv": {
+      "get": {
+        "tags": [
+          "ERP suivi Animation et lots"
+        ],
+        "summary": "Export Animations",
+        "operationId": "export_animations_internal_erp_api_suivi_animations_export_page_csv_get",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2048
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "recherche",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 100
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Recherche"
+            }
+          },
+          {
+            "name": "moteur",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 100
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Moteur"
+            }
+          },
+          {
+            "name": "categorieCommerciale",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "STANDARD",
+                    "A_LA_CARTE",
+                    "A_VERIFIER"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Categoriecommerciale"
+            }
+          },
+          {
+            "name": "dotation",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "COFFRETS",
+                    "LIBRE"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Dotation"
+            }
+          },
+          {
+            "name": "gestionLibre",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "EXTERNE",
+                    "NUMERIQUE"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Gestionlibre"
+            }
+          },
+          {
+            "name": "communeId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Communeid"
+            }
+          },
+          {
+            "name": "organisationId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Organisationid"
+            }
+          },
+          {
+            "name": "statut",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 30
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Statut"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "text/csv": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/erp/api/suivi-animations/{animation_id}": {
+      "get": {
+        "tags": [
+          "ERP suivi Animation et lots"
+        ],
+        "summary": "Animation",
+        "operationId": "animation_internal_erp_api_suivi_animations__animation_id__get",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnimationSuivi"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/erp/api/suivi-animations/{animation_id}/lots": {
+      "get": {
+        "tags": [
+          "ERP suivi Animation et lots"
+        ],
+        "summary": "Lots",
+        "operationId": "lots_internal_erp_api_suivi_animations__animation_id__lots_get",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2048
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageLotsSuivi"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/erp/api/suivi-animations/{animation_id}/lots/export-page.csv": {
+      "get": {
+        "tags": [
+          "ERP suivi Animation et lots"
+        ],
+        "summary": "Export Lots",
+        "operationId": "export_lots_internal_erp_api_suivi_animations__animation_id__lots_export_page_csv_get",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2048
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "text/csv": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/erp/api/suivi-animations/{animation_id}/lots/{lot_id}": {
+      "get": {
+        "tags": [
+          "ERP suivi Animation et lots"
+        ],
+        "summary": "Lot",
+        "operationId": "lot_internal_erp_api_suivi_animations__animation_id__lots__lot_id__get",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "lot_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Lot Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LotSuivi"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/erp/api/suivi-animations/{animation_id}/lots/{lot_id}/evenements": {
+      "get": {
+        "tags": [
+          "ERP suivi Animation et lots"
+        ],
+        "summary": "Evenements",
+        "operationId": "evenements_internal_erp_api_suivi_animations__animation_id__lots__lot_id__evenements_get",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "lot_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Lot Id"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2048
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageEvenementsLotSuivi"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/support/api/animations/commercants/{commerce_id}/perimetres": {
+      "get": {
+        "tags": [
+          "Support"
+        ],
+        "summary": "Perimetres",
+        "operationId": "perimetres_internal_support_api_animations_commercants__commerce_id__perimetres_get",
+        "parameters": [
+          {
+            "name": "commerce_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Commerce Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PerimetresCommercantPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/support/api/animations/commercants/{commerce_id}/perimetres/historique": {
+      "get": {
+        "tags": [
+          "Support"
+        ],
+        "summary": "Historique Perimetres",
+        "operationId": "historique_perimetres_internal_support_api_animations_commercants__commerce_id__perimetres_historique_get",
+        "parameters": [
+          {
+            "name": "commerce_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Commerce Id"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2048
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HistoriquePerimetrePayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/support/api/animations": {
+      "get": {
+        "tags": [
+          "Support"
+        ],
+        "summary": "Animations",
+        "operationId": "animations_internal_support_api_animations_get",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2048
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "recherche",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 100
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Recherche"
+            }
+          },
+          {
+            "name": "moteur",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 100
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Moteur"
+            }
+          },
+          {
+            "name": "categorieCommerciale",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "STANDARD",
+                    "A_LA_CARTE",
+                    "A_VERIFIER"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Categoriecommerciale"
+            }
+          },
+          {
+            "name": "dotation",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "COFFRETS",
+                    "LIBRE"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Dotation"
+            }
+          },
+          {
+            "name": "gestionLibre",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "EXTERNE",
+                    "NUMERIQUE"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Gestionlibre"
+            }
+          },
+          {
+            "name": "communeId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Communeid"
+            }
+          },
+          {
+            "name": "organisationId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Organisationid"
+            }
+          },
+          {
+            "name": "statut",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 30
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Statut"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageAnimationsSuivi"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/support/api/animations/export-page.csv": {
+      "get": {
+        "tags": [
+          "Support"
+        ],
+        "summary": "Export Animations",
+        "operationId": "export_animations_internal_support_api_animations_export_page_csv_get",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2048
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "recherche",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 100
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Recherche"
+            }
+          },
+          {
+            "name": "moteur",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 100
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Moteur"
+            }
+          },
+          {
+            "name": "categorieCommerciale",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "STANDARD",
+                    "A_LA_CARTE",
+                    "A_VERIFIER"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Categoriecommerciale"
+            }
+          },
+          {
+            "name": "dotation",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "COFFRETS",
+                    "LIBRE"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Dotation"
+            }
+          },
+          {
+            "name": "gestionLibre",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "EXTERNE",
+                    "NUMERIQUE"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Gestionlibre"
+            }
+          },
+          {
+            "name": "communeId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Communeid"
+            }
+          },
+          {
+            "name": "organisationId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Organisationid"
+            }
+          },
+          {
+            "name": "statut",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 30
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Statut"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "text/csv": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/support/api/animations/{animation_id}": {
+      "get": {
+        "tags": [
+          "Support"
+        ],
+        "summary": "Animation",
+        "operationId": "animation_internal_support_api_animations__animation_id__get",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnimationSuivi"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/support/api/animations/{animation_id}/lots": {
+      "get": {
+        "tags": [
+          "Support"
+        ],
+        "summary": "Lots",
+        "operationId": "lots_internal_support_api_animations__animation_id__lots_get",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2048
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageLotsSuivi"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/support/api/animations/{animation_id}/lots/export-page.csv": {
+      "get": {
+        "tags": [
+          "Support"
+        ],
+        "summary": "Export Lots",
+        "operationId": "export_lots_internal_support_api_animations__animation_id__lots_export_page_csv_get",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2048
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "text/csv": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/support/api/animations/{animation_id}/lots/{lot_id}": {
+      "get": {
+        "tags": [
+          "Support"
+        ],
+        "summary": "Lot",
+        "operationId": "lot_internal_support_api_animations__animation_id__lots__lot_id__get",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "lot_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Lot Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LotSuivi"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/support/api/animations/{animation_id}/lots/{lot_id}/evenements": {
+      "get": {
+        "tags": [
+          "Support"
+        ],
+        "summary": "Evenements",
+        "operationId": "evenements_internal_support_api_animations__animation_id__lots__lot_id__evenements_get",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "lot_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Lot Id"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2048
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageEvenementsLotSuivi"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
               }
             }
           }
@@ -15316,7 +17116,7 @@
             }
           },
           "422": {
-            "description": "Unprocessable Entity",
+            "description": "Unprocessable Content",
             "content": {
               "application/json": {
                 "schema": {
@@ -15397,7 +17197,7 @@
             }
           },
           "422": {
-            "description": "Unprocessable Entity",
+            "description": "Unprocessable Content",
             "content": {
               "application/json": {
                 "schema": {
@@ -15705,7 +17505,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "500": {
             "content": {
@@ -16906,7 +18706,7 @@
             }
           },
           "413": {
-            "description": "Request Entity Too Large",
+            "description": "Content Too Large",
             "content": {
               "application/json": {
                 "schema": {
@@ -17195,7 +18995,7 @@
                 }
               }
             },
-            "description": "Request Entity Too Large"
+            "description": "Content Too Large"
           },
           "415": {
             "content": {
@@ -17385,7 +19185,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/ConfigurationLivePayload"
+                }
               }
             }
           },
@@ -17906,6 +19708,94 @@
         "responses": {
           "204": {
             "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/localeo-live/installations/{installation_id}/tableau-de-bord": {
+      "get": {
+        "tags": [
+          "Localeo Live"
+        ],
+        "summary": "Consulter Tableau De Bord Live",
+        "operationId": "consulter_tableau_de_bord_live_public_localeo_live_installations__installation_id__tableau_de_bord_get",
+        "parameters": [
+          {
+            "name": "installation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Installation Id"
+            }
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 50,
+              "minimum": 1,
+              "default": 50,
+              "title": "Page Size"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 300
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "x-localeo-live-secret",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Localeo-Live-Secret"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TableauDeBordLivePayload"
+                }
+              }
+            }
           },
           "422": {
             "description": "Validation Error",
@@ -28903,6 +30793,72 @@
         }
       }
     },
+    "/protected/exploitation/localeo-live/rappels/preparer": {
+      "post": {
+        "tags": [
+          "Exploitation"
+        ],
+        "summary": "Preparer Rappels Live",
+        "operationId": "preparer_rappels_live_protected_exploitation_localeo_live_rappels_preparer_post",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 20,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "dry_run",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true,
+              "title": "Dry Run"
+            }
+          },
+          {
+            "name": "X-API-KEY",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Cle API interne avec le scope `internal:batch`.",
+              "title": "X-Api-Key"
+            },
+            "description": "Cle API interne avec le scope `internal:batch`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PreparationRappelsLivePayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/protected/exploitation/localeo-live/editorial/diffuser": {
       "post": {
         "tags": [
@@ -30211,7 +32167,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           },
           "500": {
             "content": {
@@ -30327,7 +32283,7 @@
                 }
               }
             },
-            "description": "Unprocessable Entity"
+            "description": "Unprocessable Content"
           }
         },
         "security": [
@@ -64365,1806 +66321,6 @@
               }
             },
             "description": "Accepted"
-          }
-        },
-        "security": [
-          {
-            "AdminSessionCookie": []
-          }
-        ]
-      }
-    },
-    "/internal/erp/api/suivi-animations/commercants/{commerce_id}/perimetres": {
-      "get": {
-        "tags": [
-          "ERP suivi Animation et lots"
-        ],
-        "summary": "Perimetres",
-        "operationId": "perimetres_internal_erp_api_suivi_animations_commercants__commerce_id__perimetres_get",
-        "parameters": [
-          {
-            "name": "commerce_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid",
-              "title": "Commerce Id"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PerimetresCommercantPayload"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "AdminSessionCookie": []
-          }
-        ]
-      }
-    },
-    "/internal/erp/api/suivi-animations/commercants/{commerce_id}/perimetres/historique": {
-      "get": {
-        "tags": [
-          "ERP suivi Animation et lots"
-        ],
-        "summary": "Historique Perimetres",
-        "operationId": "historique_perimetres_internal_erp_api_suivi_animations_commercants__commerce_id__perimetres_historique_get",
-        "parameters": [
-          {
-            "name": "commerce_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid",
-              "title": "Commerce Id"
-            }
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "maximum": 100,
-              "minimum": 1,
-              "default": 25,
-              "title": "Limit"
-            }
-          },
-          {
-            "name": "cursor",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "maxLength": 2048
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Cursor"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HistoriquePerimetrePayload"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "AdminSessionCookie": []
-          }
-        ]
-      }
-    },
-    "/internal/erp/api/suivi-animations": {
-      "get": {
-        "tags": [
-          "ERP suivi Animation et lots"
-        ],
-        "summary": "Animations",
-        "operationId": "animations_internal_erp_api_suivi_animations_get",
-        "parameters": [
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "maximum": 100,
-              "minimum": 1,
-              "default": 25,
-              "title": "Limit"
-            }
-          },
-          {
-            "name": "cursor",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "maxLength": 2048
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Cursor"
-            }
-          },
-          {
-            "name": "recherche",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "maxLength": 100
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Recherche"
-            }
-          },
-          {
-            "name": "moteur",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "maxLength": 100
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Moteur"
-            }
-          },
-          {
-            "name": "categorieCommerciale",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "enum": [
-                    "STANDARD",
-                    "A_LA_CARTE",
-                    "A_VERIFIER"
-                  ],
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Categoriecommerciale"
-            }
-          },
-          {
-            "name": "dotation",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "enum": [
-                    "COFFRETS",
-                    "LIBRE"
-                  ],
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Dotation"
-            }
-          },
-          {
-            "name": "gestionLibre",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "enum": [
-                    "EXTERNE",
-                    "NUMERIQUE"
-                  ],
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Gestionlibre"
-            }
-          },
-          {
-            "name": "communeId",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "format": "uuid"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Communeid"
-            }
-          },
-          {
-            "name": "organisationId",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "format": "uuid"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Organisationid"
-            }
-          },
-          {
-            "name": "statut",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "maxLength": 30
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Statut"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PageAnimationsSuivi"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "AdminSessionCookie": []
-          }
-        ]
-      }
-    },
-    "/internal/erp/api/suivi-animations/export-page.csv": {
-      "get": {
-        "tags": [
-          "ERP suivi Animation et lots"
-        ],
-        "summary": "Export Animations",
-        "operationId": "export_animations_internal_erp_api_suivi_animations_export_page_csv_get",
-        "parameters": [
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "maximum": 100,
-              "minimum": 1,
-              "default": 25,
-              "title": "Limit"
-            }
-          },
-          {
-            "name": "cursor",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "maxLength": 2048
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Cursor"
-            }
-          },
-          {
-            "name": "recherche",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "maxLength": 100
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Recherche"
-            }
-          },
-          {
-            "name": "moteur",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "maxLength": 100
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Moteur"
-            }
-          },
-          {
-            "name": "categorieCommerciale",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "enum": [
-                    "STANDARD",
-                    "A_LA_CARTE",
-                    "A_VERIFIER"
-                  ],
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Categoriecommerciale"
-            }
-          },
-          {
-            "name": "dotation",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "enum": [
-                    "COFFRETS",
-                    "LIBRE"
-                  ],
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Dotation"
-            }
-          },
-          {
-            "name": "gestionLibre",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "enum": [
-                    "EXTERNE",
-                    "NUMERIQUE"
-                  ],
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Gestionlibre"
-            }
-          },
-          {
-            "name": "communeId",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "format": "uuid"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Communeid"
-            }
-          },
-          {
-            "name": "organisationId",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "format": "uuid"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Organisationid"
-            }
-          },
-          {
-            "name": "statut",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "maxLength": 30
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Statut"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "text/csv": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "AdminSessionCookie": []
-          }
-        ]
-      }
-    },
-    "/internal/erp/api/suivi-animations/{animation_id}": {
-      "get": {
-        "tags": [
-          "ERP suivi Animation et lots"
-        ],
-        "summary": "Animation",
-        "operationId": "animation_internal_erp_api_suivi_animations__animation_id__get",
-        "parameters": [
-          {
-            "name": "animation_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid",
-              "title": "Animation Id"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AnimationSuivi"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "AdminSessionCookie": []
-          }
-        ]
-      }
-    },
-    "/internal/erp/api/suivi-animations/{animation_id}/lots": {
-      "get": {
-        "tags": [
-          "ERP suivi Animation et lots"
-        ],
-        "summary": "Lots",
-        "operationId": "lots_internal_erp_api_suivi_animations__animation_id__lots_get",
-        "parameters": [
-          {
-            "name": "animation_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid",
-              "title": "Animation Id"
-            }
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "maximum": 100,
-              "minimum": 1,
-              "default": 25,
-              "title": "Limit"
-            }
-          },
-          {
-            "name": "cursor",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "maxLength": 2048
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Cursor"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PageLotsSuivi"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "AdminSessionCookie": []
-          }
-        ]
-      }
-    },
-    "/internal/erp/api/suivi-animations/{animation_id}/lots/export-page.csv": {
-      "get": {
-        "tags": [
-          "ERP suivi Animation et lots"
-        ],
-        "summary": "Export Lots",
-        "operationId": "export_lots_internal_erp_api_suivi_animations__animation_id__lots_export_page_csv_get",
-        "parameters": [
-          {
-            "name": "animation_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid",
-              "title": "Animation Id"
-            }
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "maximum": 100,
-              "minimum": 1,
-              "default": 25,
-              "title": "Limit"
-            }
-          },
-          {
-            "name": "cursor",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "maxLength": 2048
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Cursor"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "text/csv": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "AdminSessionCookie": []
-          }
-        ]
-      }
-    },
-    "/internal/erp/api/suivi-animations/{animation_id}/lots/{lot_id}": {
-      "get": {
-        "tags": [
-          "ERP suivi Animation et lots"
-        ],
-        "summary": "Lot",
-        "operationId": "lot_internal_erp_api_suivi_animations__animation_id__lots__lot_id__get",
-        "parameters": [
-          {
-            "name": "animation_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid",
-              "title": "Animation Id"
-            }
-          },
-          {
-            "name": "lot_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid",
-              "title": "Lot Id"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LotSuivi"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "AdminSessionCookie": []
-          }
-        ]
-      }
-    },
-    "/internal/erp/api/suivi-animations/{animation_id}/lots/{lot_id}/evenements": {
-      "get": {
-        "tags": [
-          "ERP suivi Animation et lots"
-        ],
-        "summary": "Evenements",
-        "operationId": "evenements_internal_erp_api_suivi_animations__animation_id__lots__lot_id__evenements_get",
-        "parameters": [
-          {
-            "name": "animation_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid",
-              "title": "Animation Id"
-            }
-          },
-          {
-            "name": "lot_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid",
-              "title": "Lot Id"
-            }
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "maximum": 100,
-              "minimum": 1,
-              "default": 25,
-              "title": "Limit"
-            }
-          },
-          {
-            "name": "cursor",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "maxLength": 2048
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Cursor"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PageEvenementsLotSuivi"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "AdminSessionCookie": []
-          }
-        ]
-      }
-    },
-    "/internal/support/api/animations/commercants/{commerce_id}/perimetres": {
-      "get": {
-        "tags": [
-          "Support"
-        ],
-        "summary": "Perimetres",
-        "operationId": "perimetres_internal_support_api_animations_commercants__commerce_id__perimetres_get",
-        "parameters": [
-          {
-            "name": "commerce_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid",
-              "title": "Commerce Id"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PerimetresCommercantPayload"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "AdminSessionCookie": []
-          }
-        ]
-      }
-    },
-    "/internal/support/api/animations/commercants/{commerce_id}/perimetres/historique": {
-      "get": {
-        "tags": [
-          "Support"
-        ],
-        "summary": "Historique Perimetres",
-        "operationId": "historique_perimetres_internal_support_api_animations_commercants__commerce_id__perimetres_historique_get",
-        "parameters": [
-          {
-            "name": "commerce_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid",
-              "title": "Commerce Id"
-            }
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "maximum": 100,
-              "minimum": 1,
-              "default": 25,
-              "title": "Limit"
-            }
-          },
-          {
-            "name": "cursor",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "maxLength": 2048
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Cursor"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HistoriquePerimetrePayload"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "AdminSessionCookie": []
-          }
-        ]
-      }
-    },
-    "/internal/support/api/animations": {
-      "get": {
-        "tags": [
-          "Support"
-        ],
-        "summary": "Animations",
-        "operationId": "animations_internal_support_api_animations_get",
-        "parameters": [
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "maximum": 100,
-              "minimum": 1,
-              "default": 25,
-              "title": "Limit"
-            }
-          },
-          {
-            "name": "cursor",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "maxLength": 2048
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Cursor"
-            }
-          },
-          {
-            "name": "recherche",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "maxLength": 100
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Recherche"
-            }
-          },
-          {
-            "name": "moteur",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "maxLength": 100
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Moteur"
-            }
-          },
-          {
-            "name": "categorieCommerciale",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "enum": [
-                    "STANDARD",
-                    "A_LA_CARTE",
-                    "A_VERIFIER"
-                  ],
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Categoriecommerciale"
-            }
-          },
-          {
-            "name": "dotation",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "enum": [
-                    "COFFRETS",
-                    "LIBRE"
-                  ],
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Dotation"
-            }
-          },
-          {
-            "name": "gestionLibre",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "enum": [
-                    "EXTERNE",
-                    "NUMERIQUE"
-                  ],
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Gestionlibre"
-            }
-          },
-          {
-            "name": "communeId",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "format": "uuid"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Communeid"
-            }
-          },
-          {
-            "name": "organisationId",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "format": "uuid"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Organisationid"
-            }
-          },
-          {
-            "name": "statut",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "maxLength": 30
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Statut"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PageAnimationsSuivi"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "AdminSessionCookie": []
-          }
-        ]
-      }
-    },
-    "/internal/support/api/animations/export-page.csv": {
-      "get": {
-        "tags": [
-          "Support"
-        ],
-        "summary": "Export Animations",
-        "operationId": "export_animations_internal_support_api_animations_export_page_csv_get",
-        "parameters": [
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "maximum": 100,
-              "minimum": 1,
-              "default": 25,
-              "title": "Limit"
-            }
-          },
-          {
-            "name": "cursor",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "maxLength": 2048
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Cursor"
-            }
-          },
-          {
-            "name": "recherche",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "maxLength": 100
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Recherche"
-            }
-          },
-          {
-            "name": "moteur",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "maxLength": 100
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Moteur"
-            }
-          },
-          {
-            "name": "categorieCommerciale",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "enum": [
-                    "STANDARD",
-                    "A_LA_CARTE",
-                    "A_VERIFIER"
-                  ],
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Categoriecommerciale"
-            }
-          },
-          {
-            "name": "dotation",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "enum": [
-                    "COFFRETS",
-                    "LIBRE"
-                  ],
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Dotation"
-            }
-          },
-          {
-            "name": "gestionLibre",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "enum": [
-                    "EXTERNE",
-                    "NUMERIQUE"
-                  ],
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Gestionlibre"
-            }
-          },
-          {
-            "name": "communeId",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "format": "uuid"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Communeid"
-            }
-          },
-          {
-            "name": "organisationId",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "format": "uuid"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Organisationid"
-            }
-          },
-          {
-            "name": "statut",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "maxLength": 30
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Statut"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "text/csv": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "AdminSessionCookie": []
-          }
-        ]
-      }
-    },
-    "/internal/support/api/animations/{animation_id}": {
-      "get": {
-        "tags": [
-          "Support"
-        ],
-        "summary": "Animation",
-        "operationId": "animation_internal_support_api_animations__animation_id__get",
-        "parameters": [
-          {
-            "name": "animation_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid",
-              "title": "Animation Id"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AnimationSuivi"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "AdminSessionCookie": []
-          }
-        ]
-      }
-    },
-    "/internal/support/api/animations/{animation_id}/lots": {
-      "get": {
-        "tags": [
-          "Support"
-        ],
-        "summary": "Lots",
-        "operationId": "lots_internal_support_api_animations__animation_id__lots_get",
-        "parameters": [
-          {
-            "name": "animation_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid",
-              "title": "Animation Id"
-            }
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "maximum": 100,
-              "minimum": 1,
-              "default": 25,
-              "title": "Limit"
-            }
-          },
-          {
-            "name": "cursor",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "maxLength": 2048
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Cursor"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PageLotsSuivi"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "AdminSessionCookie": []
-          }
-        ]
-      }
-    },
-    "/internal/support/api/animations/{animation_id}/lots/export-page.csv": {
-      "get": {
-        "tags": [
-          "Support"
-        ],
-        "summary": "Export Lots",
-        "operationId": "export_lots_internal_support_api_animations__animation_id__lots_export_page_csv_get",
-        "parameters": [
-          {
-            "name": "animation_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid",
-              "title": "Animation Id"
-            }
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "maximum": 100,
-              "minimum": 1,
-              "default": 25,
-              "title": "Limit"
-            }
-          },
-          {
-            "name": "cursor",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "maxLength": 2048
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Cursor"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "text/csv": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "AdminSessionCookie": []
-          }
-        ]
-      }
-    },
-    "/internal/support/api/animations/{animation_id}/lots/{lot_id}": {
-      "get": {
-        "tags": [
-          "Support"
-        ],
-        "summary": "Lot",
-        "operationId": "lot_internal_support_api_animations__animation_id__lots__lot_id__get",
-        "parameters": [
-          {
-            "name": "animation_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid",
-              "title": "Animation Id"
-            }
-          },
-          {
-            "name": "lot_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid",
-              "title": "Lot Id"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LotSuivi"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "AdminSessionCookie": []
-          }
-        ]
-      }
-    },
-    "/internal/support/api/animations/{animation_id}/lots/{lot_id}/evenements": {
-      "get": {
-        "tags": [
-          "Support"
-        ],
-        "summary": "Evenements",
-        "operationId": "evenements_internal_support_api_animations__animation_id__lots__lot_id__evenements_get",
-        "parameters": [
-          {
-            "name": "animation_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid",
-              "title": "Animation Id"
-            }
-          },
-          {
-            "name": "lot_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid",
-              "title": "Lot Id"
-            }
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "maximum": 100,
-              "minimum": 1,
-              "default": 25,
-              "title": "Limit"
-            }
-          },
-          {
-            "name": "cursor",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "maxLength": 2048
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Cursor"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PageEvenementsLotSuivi"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
           }
         },
         "security": [
@@ -110508,7 +110664,7 @@
         "properties": {
           "file": {
             "type": "string",
-            "contentMediaType": "application/octet-stream",
+            "format": "binary",
             "title": "File"
           },
           "type_document": {
@@ -110625,7 +110781,7 @@
         "properties": {
           "file": {
             "type": "string",
-            "contentMediaType": "application/octet-stream",
+            "format": "binary",
             "title": "File"
           }
         },
@@ -110640,7 +110796,7 @@
           "files": {
             "items": {
               "type": "string",
-              "contentMediaType": "application/octet-stream"
+              "format": "binary"
             },
             "type": "array",
             "title": "Files"
@@ -110711,7 +110867,7 @@
         "properties": {
           "file": {
             "type": "string",
-            "contentMediaType": "application/octet-stream",
+            "format": "binary",
             "title": "File"
           },
           "nom": {
@@ -110736,7 +110892,7 @@
         "properties": {
           "file": {
             "type": "string",
-            "contentMediaType": "application/octet-stream",
+            "format": "binary",
             "title": "File"
           },
           "nom": {
@@ -110772,7 +110928,7 @@
         "properties": {
           "fichier": {
             "type": "string",
-            "contentMediaType": "application/octet-stream",
+            "format": "binary",
             "title": "Fichier"
           },
           "commune_id": {
@@ -110809,7 +110965,7 @@
           },
           "file": {
             "type": "string",
-            "contentMediaType": "application/octet-stream",
+            "format": "binary",
             "title": "File"
           }
         },
@@ -110824,7 +110980,7 @@
         "properties": {
           "file": {
             "type": "string",
-            "contentMediaType": "application/octet-stream",
+            "format": "binary",
             "title": "File"
           },
           "invoiceNumber": {
@@ -110854,7 +111010,7 @@
         "properties": {
           "file": {
             "type": "string",
-            "contentMediaType": "application/octet-stream",
+            "format": "binary",
             "title": "File"
           },
           "invoiceNumber": {
@@ -110894,12 +111050,12 @@
           },
           "pdf": {
             "type": "string",
-            "contentMediaType": "application/octet-stream",
+            "format": "binary",
             "title": "Pdf"
           },
           "content": {
             "type": "string",
-            "contentMediaType": "application/octet-stream",
+            "format": "binary",
             "title": "Content"
           }
         },
@@ -110921,7 +111077,7 @@
           },
           "file": {
             "type": "string",
-            "contentMediaType": "application/octet-stream",
+            "format": "binary",
             "title": "File"
           }
         },
@@ -110936,7 +111092,7 @@
         "properties": {
           "file": {
             "type": "string",
-            "contentMediaType": "application/octet-stream",
+            "format": "binary",
             "title": "File"
           }
         },
@@ -115951,6 +116107,25 @@
         ],
         "title": "CommuneSyntheseAnimationsPayload"
       },
+      "CommuneTableauLivePayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "nom": {
+            "type": "string",
+            "title": "Nom"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "nom"
+        ],
+        "title": "CommuneTableauLivePayload"
+      },
       "ComparaisonMesuresDTO": {
         "properties": {
           "reference": {
@@ -116453,6 +116628,41 @@
           "date_fin"
         ],
         "title": "ConfigurationAnimationPayload"
+      },
+      "ConfigurationLivePayload": {
+        "properties": {
+          "webpush_enabled": {
+            "type": "boolean",
+            "title": "Webpush Enabled"
+          },
+          "vapid_public_key": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Vapid Public Key"
+          },
+          "retention_days": {
+            "type": "integer",
+            "title": "Retention Days"
+          },
+          "rappels_participations_disponibles": {
+            "type": "boolean",
+            "title": "Rappels Participations Disponibles"
+          }
+        },
+        "type": "object",
+        "required": [
+          "webpush_enabled",
+          "vapid_public_key",
+          "retention_days",
+          "rappels_participations_disponibles"
+        ],
+        "title": "ConfigurationLivePayload"
       },
       "Confirmation": {
         "properties": {
@@ -120040,7 +120250,7 @@
           "initialisation": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/InitialisationGeneration"
+                "$ref": "#/components/schemas/InitialisationGeneration-Input"
               },
               {
                 "type": "null"
@@ -120114,7 +120324,7 @@
           "initialisation": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/InitialisationGeneration"
+                "$ref": "#/components/schemas/InitialisationGeneration-Output"
               },
               {
                 "type": "null"
@@ -120206,7 +120416,7 @@
           "initialisation": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/InitialisationGeneration"
+                "$ref": "#/components/schemas/InitialisationGeneration-Input"
               },
               {
                 "type": "null"
@@ -120280,7 +120490,7 @@
           "initialisation": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/InitialisationGeneration"
+                "$ref": "#/components/schemas/InitialisationGeneration-Output"
               },
               {
                 "type": "null"
@@ -122704,6 +122914,51 @@
         ],
         "title": "DroitsModulesPage"
       },
+      "DynamiqueAnimationPubliquePayload": {
+        "properties": {
+          "nombre_participants": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nombre Participants",
+            "description": "Personnes inscrites, tous statuts confondus."
+          },
+          "nombre_gagnants": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nombre Gagnants",
+            "description": "Personnes gagnantes distinctes : gains courants hors suppleants et remplaces, tirages libres confirmes uniquement."
+          },
+          "nombre_lots_a_gagner": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nombre Lots A Gagner",
+            "description": "Unites de dotation prevues au total, sans deduction des gains deja attribues ; pas un stock restant."
+          }
+        },
+        "type": "object",
+        "title": "DynamiqueAnimationPubliquePayload"
+      },
       "EchecReconciliationCommandeLotsPayload": {
         "properties": {
           "commande_id": {
@@ -123888,7 +124143,7 @@
         ],
         "title": "EtapeAssistantAnimation"
       },
-      "EtapeCommercante": {
+      "EtapeCommercante-Input": {
         "properties": {
           "lieu": {
             "$ref": "#/components/schemas/LieuCommercant"
@@ -123902,7 +124157,7 @@
           },
           "missionsProposees": {
             "items": {
-              "$ref": "#/components/schemas/MissionProposee"
+              "$ref": "#/components/schemas/MissionProposee-Input"
             },
             "type": "array",
             "maxItems": 2,
@@ -123912,7 +124167,48 @@
           "presentation": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/PresentationEtape"
+                "$ref": "#/components/schemas/PresentationEtape-Input"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "lieu",
+          "titre",
+          "missionsProposees"
+        ],
+        "title": "EtapeCommercante"
+      },
+      "EtapeCommercante-Output": {
+        "properties": {
+          "lieu": {
+            "$ref": "#/components/schemas/LieuCommercant"
+          },
+          "titre": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Titre"
+          },
+          "missionsProposees": {
+            "items": {
+              "$ref": "#/components/schemas/MissionProposee-Output"
+            },
+            "type": "array",
+            "maxItems": 2,
+            "minItems": 1,
+            "title": "Missionsproposees"
+          },
+          "presentation": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PresentationEtape-Output"
               },
               {
                 "type": "null"
@@ -123964,7 +124260,7 @@
         ],
         "title": "EtapeExploitationPayload"
       },
-      "EtapeNonCommercante": {
+      "EtapeNonCommercante-Input": {
         "properties": {
           "lieu": {
             "anyOf": [
@@ -124038,7 +124334,102 @@
           "presentation": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/PresentationEtape"
+                "$ref": "#/components/schemas/PresentationEtape-Input"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "lieu",
+          "titre",
+          "texteJoueur",
+          "consigne",
+          "interactionCommercant",
+          "consigneCommercant",
+          "defi"
+        ],
+        "title": "EtapeNonCommercante"
+      },
+      "EtapeNonCommercante-Output": {
+        "properties": {
+          "lieu": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/LieuPoi"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "titre": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Titre"
+          },
+          "texteJoueur": {
+            "type": "string",
+            "maxLength": 20000,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Textejoueur"
+          },
+          "consigne": {
+            "type": "string",
+            "maxLength": 20000,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Consigne"
+          },
+          "interactionCommercant": {
+            "type": "null",
+            "title": "Interactioncommercant"
+          },
+          "consigneCommercant": {
+            "type": "null",
+            "title": "Consignecommercant"
+          },
+          "defi": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/DefiQcm"
+              },
+              {
+                "$ref": "#/components/schemas/DefiInformation"
+              },
+              {
+                "$ref": "#/components/schemas/DefiAssociation"
+              },
+              {
+                "$ref": "#/components/schemas/DefiOrdre"
+              },
+              {
+                "$ref": "#/components/schemas/DefiTexte"
+              }
+            ],
+            "title": "Defi",
+            "discriminator": {
+              "propertyName": "type",
+              "mapping": {
+                "ASSOCIATION": "#/components/schemas/DefiAssociation",
+                "INFORMATION": "#/components/schemas/DefiInformation",
+                "ORDERING": "#/components/schemas/DefiOrdre",
+                "SINGLE_CHOICE": "#/components/schemas/DefiQcm",
+                "TEXT_INPUT": "#/components/schemas/DefiTexte"
+              }
+            }
+          },
+          "presentation": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PresentationEtape-Output"
               },
               {
                 "type": "null"
@@ -129836,6 +130227,24 @@
         ],
         "title": "IndicateurAnimationDTO"
       },
+      "IndicateursTableauLivePayload": {
+        "properties": {
+          "presque_terminee": {
+            "type": "boolean",
+            "title": "Presque Terminee"
+          },
+          "fin_proche": {
+            "type": "boolean",
+            "title": "Fin Proche"
+          }
+        },
+        "type": "object",
+        "required": [
+          "presque_terminee",
+          "fin_proche"
+        ],
+        "title": "IndicateursTableauLivePayload"
+      },
       "IndicateursVision360AnimationPayload": {
         "properties": {
           "animation_id": {
@@ -130047,7 +130456,59 @@
         ],
         "title": "Initialisation"
       },
-      "InitialisationGeneration": {
+      "InitialisationGeneration-Input": {
+        "properties": {
+          "metadata": {
+            "$ref": "#/components/schemas/MetadonneesAnimation"
+          },
+          "organizer": {
+            "$ref": "#/components/schemas/OrganisateurAnimation"
+          },
+          "territory": {
+            "$ref": "#/components/schemas/TerritoireAnimation"
+          },
+          "schedule": {
+            "$ref": "#/components/schemas/PeriodeAnimation"
+          },
+          "registration": {
+            "$ref": "#/components/schemas/InscriptionAnimation"
+          },
+          "assets": {
+            "items": {
+              "$ref": "#/components/schemas/MediaEmbarque"
+            },
+            "type": "array",
+            "maxItems": 0,
+            "title": "Assets"
+          },
+          "rewards": {
+            "$ref": "#/components/schemas/RecompensesAnimation"
+          },
+          "themeVisuel": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ThemeInitialisationGeneration"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "metadata",
+          "organizer",
+          "territory",
+          "schedule",
+          "registration",
+          "assets",
+          "rewards"
+        ],
+        "title": "InitialisationGeneration"
+      },
+      "InitialisationGeneration-Output": {
         "properties": {
           "metadata": {
             "$ref": "#/components/schemas/MetadonneesAnimation"
@@ -133599,7 +134060,7 @@
             "title": "Id"
           },
           "contenu": {
-            "$ref": "#/components/schemas/MissionProposee"
+            "$ref": "#/components/schemas/MissionProposee-Output"
           },
           "conditions": {
             "items": {
@@ -133618,7 +134079,7 @@
         ],
         "title": "MissionCommercant"
       },
-      "MissionProposee": {
+      "MissionProposee-Input": {
         "properties": {
           "id": {
             "type": "string",
@@ -133705,7 +134166,116 @@
           "presentation": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/PresentationEtape"
+                "$ref": "#/components/schemas/PresentationEtape-Input"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "titre",
+          "preparationCommercant",
+          "texteJoueur",
+          "consigne",
+          "interactionCommercant",
+          "consigneCommercant",
+          "defi"
+        ],
+        "title": "MissionProposee"
+      },
+      "MissionProposee-Output": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Id"
+          },
+          "titre": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Titre"
+          },
+          "preparationCommercant": {
+            "$ref": "#/components/schemas/PreparationCommercant"
+          },
+          "texteJoueur": {
+            "type": "string",
+            "maxLength": 20000,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Textejoueur"
+          },
+          "consigne": {
+            "type": "string",
+            "maxLength": 20000,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Consigne"
+          },
+          "interactionCommercant": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 20000,
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Interactioncommercant"
+          },
+          "consigneCommercant": {
+            "type": "string",
+            "maxLength": 20000,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Consignecommercant"
+          },
+          "defi": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/DefiQcm"
+              },
+              {
+                "$ref": "#/components/schemas/DefiInformation"
+              },
+              {
+                "$ref": "#/components/schemas/DefiAssociation"
+              },
+              {
+                "$ref": "#/components/schemas/DefiOrdre"
+              },
+              {
+                "$ref": "#/components/schemas/DefiTexte"
+              }
+            ],
+            "title": "Defi",
+            "discriminator": {
+              "propertyName": "type",
+              "mapping": {
+                "ASSOCIATION": "#/components/schemas/DefiAssociation",
+                "INFORMATION": "#/components/schemas/DefiInformation",
+                "ORDERING": "#/components/schemas/DefiOrdre",
+                "SINGLE_CHOICE": "#/components/schemas/DefiQcm",
+                "TEXT_INPUT": "#/components/schemas/DefiTexte"
+              }
+            }
+          },
+          "presentation": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PresentationEtape-Output"
               },
               {
                 "type": "null"
@@ -141451,6 +142021,107 @@
         ],
         "title": "ParticipationLivePayload"
       },
+      "ParticipationTableauLivePayload": {
+        "properties": {
+          "participation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Participation Id"
+          },
+          "animation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animation Id"
+          },
+          "nom": {
+            "type": "string",
+            "title": "Nom"
+          },
+          "commune": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CommuneTableauLivePayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Type"
+          },
+          "statut_participation": {
+            "type": "string",
+            "title": "Statut Participation"
+          },
+          "date_fin": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date Fin"
+          },
+          "progression": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ProgressionTableauLivePayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "commencee": {
+            "type": "boolean",
+            "title": "Commencee"
+          },
+          "terminee": {
+            "type": "boolean",
+            "title": "Terminee"
+          },
+          "disponible": {
+            "type": "boolean",
+            "title": "Disponible"
+          },
+          "indicateurs": {
+            "$ref": "#/components/schemas/IndicateursTableauLivePayload"
+          },
+          "deeplink": {
+            "type": "string",
+            "title": "Deeplink"
+          }
+        },
+        "type": "object",
+        "required": [
+          "participation_id",
+          "animation_id",
+          "nom",
+          "commune",
+          "type",
+          "statut_participation",
+          "date_fin",
+          "progression",
+          "commencee",
+          "terminee",
+          "disponible",
+          "indicateurs",
+          "deeplink"
+        ],
+        "title": "ParticipationTableauLivePayload"
+      },
       "PayloadEtape": {
         "properties": {
           "stepId": {
@@ -142672,7 +143343,7 @@
             "title": "Resultat Source Id"
           },
           "resultat": {
-            "$ref": "#/components/schemas/ResultatGenerationChasse"
+            "$ref": "#/components/schemas/ResultatGenerationChasse-Output"
           },
           "positions": {
             "items": {
@@ -143022,7 +143693,7 @@
             "title": "Resultat Source Id"
           },
           "resultat": {
-            "$ref": "#/components/schemas/ResultatGenerationPasseport"
+            "$ref": "#/components/schemas/ResultatGenerationPasseport-Output"
           },
           "preparation_revision": {
             "type": "integer",
@@ -143122,6 +143793,45 @@
           "disponible"
         ],
         "title": "PreparationProduitPayload"
+      },
+      "PreparationRappelsLivePayload": {
+        "properties": {
+          "dry_run": {
+            "type": "boolean",
+            "title": "Dry Run"
+          },
+          "installations": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Installations"
+          },
+          "participations": {
+            "type": "integer",
+            "maximum": 5000.0,
+            "minimum": 0.0,
+            "title": "Participations"
+          },
+          "rappels": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Rappels"
+          },
+          "hors_fenetre": {
+            "type": "boolean",
+            "title": "Hors Fenetre"
+          }
+        },
+        "type": "object",
+        "required": [
+          "dry_run",
+          "installations",
+          "participations",
+          "rappels",
+          "hors_fenetre"
+        ],
+        "title": "PreparationRappelsLivePayload"
       },
       "PreparationResponse": {
         "properties": {
@@ -143230,7 +143940,34 @@
         ],
         "title": "PrerequisProduitPayload"
       },
-      "PresentationEtape": {
+      "PresentationEtape-Input": {
+        "properties": {
+          "illustration": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Illustration"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "themeVisuel": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SurchargeThemeVisuel"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "PresentationEtape"
+      },
+      "PresentationEtape-Output": {
         "properties": {
           "illustration": {
             "anyOf": [
@@ -144344,6 +145081,39 @@
           "pourcentage"
         ],
         "title": "ProgressionResumeLive"
+      },
+      "ProgressionTableauLivePayload": {
+        "properties": {
+          "total": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Total"
+          },
+          "validees": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Validees"
+          },
+          "restantes": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Restantes"
+          },
+          "pourcentage": {
+            "type": "number",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Pourcentage"
+          }
+        },
+        "type": "object",
+        "required": [
+          "total",
+          "validees",
+          "restantes",
+          "pourcentage"
+        ],
+        "title": "ProgressionTableauLivePayload"
       },
       "ProjectionBon": {
         "properties": {
@@ -148723,7 +149493,7 @@
         ],
         "title": "ResultatFinalisationGenerationPayload"
       },
-      "ResultatGenerationChasse": {
+      "ResultatGenerationChasse-Input": {
         "properties": {
           "titre": {
             "type": "string",
@@ -148761,10 +149531,10 @@
             "items": {
               "anyOf": [
                 {
-                  "$ref": "#/components/schemas/EtapeCommercante"
+                  "$ref": "#/components/schemas/EtapeCommercante-Input"
                 },
                 {
-                  "$ref": "#/components/schemas/EtapeNonCommercante"
+                  "$ref": "#/components/schemas/EtapeNonCommercante-Input"
                 }
               ]
             },
@@ -148811,7 +149581,174 @@
         ],
         "title": "ResultatGenerationChasse"
       },
-      "ResultatGenerationPasseport": {
+      "ResultatGenerationChasse-Output": {
+        "properties": {
+          "titre": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Titre"
+          },
+          "synopsis": {
+            "type": "string",
+            "maxLength": 20000,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Synopsis"
+          },
+          "dureeEstimeeMinutes": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Dureeestimeeminutes"
+          },
+          "difficulte": {
+            "type": "string",
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Difficulte"
+          },
+          "introduction": {
+            "type": "string",
+            "maxLength": 20000,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Introduction"
+          },
+          "etapes": {
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/EtapeCommercante-Output"
+                },
+                {
+                  "$ref": "#/components/schemas/EtapeNonCommercante-Output"
+                }
+              ]
+            },
+            "type": "array",
+            "minItems": 1,
+            "title": "Etapes"
+          },
+          "conclusion": {
+            "type": "string",
+            "maxLength": 20000,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Conclusion"
+          },
+          "themeVisuel": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ThemeVisuel"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "medias": {
+            "items": {
+              "$ref": "#/components/schemas/MediaEmbarque"
+            },
+            "type": "array",
+            "title": "Medias"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "titre",
+          "synopsis",
+          "dureeEstimeeMinutes",
+          "difficulte",
+          "introduction",
+          "etapes",
+          "conclusion",
+          "medias"
+        ],
+        "title": "ResultatGenerationChasse"
+      },
+      "ResultatGenerationPasseport-Input": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "PASSEPORT_COMMERCANT",
+            "title": "Type"
+          },
+          "contractVersion": {
+            "type": "string",
+            "const": "1.0",
+            "title": "Contractversion"
+          },
+          "titre": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Titre"
+          },
+          "introduction": {
+            "type": "string",
+            "maxLength": 20000,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Introduction"
+          },
+          "consignes": {
+            "type": "string",
+            "maxLength": 20000,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Consignes"
+          },
+          "libelleProgression": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Libelleprogression"
+          },
+          "commercants": {
+            "items": {
+              "$ref": "#/components/schemas/ContenuCommercantPasseport"
+            },
+            "type": "array",
+            "title": "Commercants"
+          },
+          "themeVisuel": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ThemeVisuel"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "medias": {
+            "items": {
+              "$ref": "#/components/schemas/MediaEmbarque"
+            },
+            "type": "array",
+            "title": "Medias"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "type",
+          "contractVersion",
+          "titre",
+          "introduction",
+          "consignes",
+          "libelleProgression",
+          "commercants",
+          "medias"
+        ],
+        "title": "ResultatGenerationPasseport"
+      },
+      "ResultatGenerationPasseport-Output": {
         "properties": {
           "type": {
             "type": "string",
@@ -149210,7 +150147,7 @@
             "default": false
           },
           "initialisation": {
-            "$ref": "#/components/schemas/InitialisationGeneration"
+            "$ref": "#/components/schemas/InitialisationGeneration-Input"
           },
           "animation_id": {
             "anyOf": [
@@ -150019,10 +150956,10 @@
           "resultat": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/ResultatGenerationChasse"
+                "$ref": "#/components/schemas/ResultatGenerationChasse-Input"
               },
               {
-                "$ref": "#/components/schemas/ResultatGenerationPasseport"
+                "$ref": "#/components/schemas/ResultatGenerationPasseport-Input"
               }
             ],
             "title": "Resultat"
@@ -152651,6 +153588,65 @@
           "generated_at"
         ],
         "title": "SyntheseVision360AnimationPayload"
+      },
+      "TableauDeBordLivePayload": {
+        "properties": {
+          "generated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Generated At"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ParticipationTableauLivePayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "count": {
+            "type": "integer",
+            "maximum": 50.0,
+            "minimum": 0.0,
+            "title": "Count"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          },
+          "incomplet": {
+            "type": "boolean",
+            "title": "Incomplet"
+          },
+          "acces_a_actualiser": {
+            "type": "integer",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Acces A Actualiser",
+            "description": "Indicateur de présence : 1 si au moins un suivi nécessite une capacité valide ; 0 sinon. Aucun comptage exhaustif."
+          },
+          "ordre": {
+            "type": "string",
+            "title": "Ordre"
+          }
+        },
+        "type": "object",
+        "required": [
+          "generated_at",
+          "items",
+          "count",
+          "next_cursor",
+          "incomplet",
+          "acces_a_actualiser",
+          "ordre"
+        ],
+        "title": "TableauDeBordLivePayload"
       },
       "TarifInput": {
         "properties": {
@@ -155931,51 +156927,6 @@
           "allowedActions"
         ],
         "title": "PageValidations"
-      },
-      "DynamiqueAnimationPubliquePayload": {
-        "properties": {
-          "nombre_participants": {
-            "anyOf": [
-              {
-                "type": "integer",
-                "minimum": 0.0
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Nombre Participants",
-            "description": "Personnes inscrites, tous statuts confondus."
-          },
-          "nombre_gagnants": {
-            "anyOf": [
-              {
-                "type": "integer",
-                "minimum": 0.0
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Nombre Gagnants",
-            "description": "Personnes gagnantes distinctes : gains courants hors suppleants et remplaces, tirages libres confirmes uniquement."
-          },
-          "nombre_lots_a_gagner": {
-            "anyOf": [
-              {
-                "type": "integer",
-                "minimum": 0.0
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Nombre Lots A Gagner",
-            "description": "Unites de dotation prevues au total, sans deduction des gains deja attribues ; pas un stock restant."
-          }
-        },
-        "type": "object",
-        "title": "DynamiqueAnimationPubliquePayload"
       }
     },
     "securitySchemes": {

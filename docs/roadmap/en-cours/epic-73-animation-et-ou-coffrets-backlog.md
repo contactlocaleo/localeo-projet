@@ -19,6 +19,16 @@ Le statut de l'epic et les résultats historiques de recette sont conservés.
 
 ## Références
 
+Évolution **E73-EVO-LIVE-ACCUEIL-RAPPELS du 30 octobre 2026** : accueil Live
+personnel centré sur les parcours presque terminés et les échéances proches,
+avec deux rappels Web Push facultatifs, indépendants et dédupliqués. Les US
+complémentaires `US-LIVE-ACCUEIL` et `US-LIVE-RAPPELS`, critères `E73-HOME-01`
+à `06` et `E73-ALERTE-01` à `05`, contrats et impacts figurent dans la
+[même spécification canonique](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-30-octobre-2026--e73-evo-live-accueil-rappels).
+L'accueil remplace le libellé Découvrir sans supprimer son catalogue ; aucun
+nouveau compte, campagne organisateur ou état produit n'est créé. Implémentation
+et preuves propres à cette évolution sont suivies séparément des recettes historiques.
+
 - Identifiant : **EPIC-73**, vérifié dans la roadmap commune et les identifiants applicatifs ; aucun cadrage concurrent identifié.
 - État produit : **En cours** depuis le 18 octobre 2026, selon la [roadmap commune](../README.md). Les dix lots d’implémentation locale sont terminés, sans push ni déploiement ; recette humaine et preuves hébergées restent non exécutées. Voir les [preuves et limites](../../specifications/epic-73-animation-et-ou-coffrets/suivi-implementation.md) et la [prise en main par lot](../../specifications/epic-73-animation-et-ou-coffrets/prise-en-main-par-lot.md).
 - Cadrage initial : **14 octobre 2026**, à la demande du porteur produit.

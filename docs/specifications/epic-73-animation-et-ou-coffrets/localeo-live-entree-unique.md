@@ -24,13 +24,17 @@ compte ne s'applique que si un mécanisme existant la permet. L'installation
 anonyme Live n'est pas un compte. Aucune synchronisation de compte n'est ajoutée.
 Les contrôles existants des liens personnels, QR, PIN et WebAuthn restent en place.
 
-Hors périmètre : refonte Coffrets, changement des règles d'animation, catalogue
-ou base de participations distincts, nouvelles notifications et recommandations
-personnalisées. Les notifications existantes restent facultatives.
+Hors périmètre initial : refonte Coffrets, changement des règles d'animation,
+catalogue ou base de participations distincts et recommandations personnalisées.
+Le complément **E73-EVO-LIVE-ACCUEIL-RAPPELS** ci-dessous ajoute l'accueil
+personnel et deux rappels facultatifs ; il remplace l'exclusion initiale des
+nouvelles notifications pour ces deux seuls usages.
 
 ## Parcours et priorité mobile
 
-Navigation basse : **Découvrir**, **Mes participations**, **Mes communes**.
+Navigation basse initiale : **Découvrir**, **Mes participations**, **Mes communes**.
+Le complément Accueil/Rappels remplace le premier libellé par **Accueil**, sans
+changer son URL `/live/decouvrir` ni supprimer la découverte publique.
 Découvrir présente les animations publiques **En ce moment** et **Prochainement**.
 Une fiche montre titre, commune, dates, description, conditions et action autorisée.
 L'inscription réutilise le formulaire existant sous `/live/animations/:id/inscription`.
@@ -108,6 +112,159 @@ existantes alimentent les mêmes lectures ; pas de génération réelle nécessa
 La validation hébergée et les mesures PostgreSQL de volumétrie restent distinctes
 des tests isolés. Les preuves sont consignées dans le suivi d'implémentation.
 
+## Évolution du 30 octobre 2026 — E73-EVO-LIVE-ACCUEIL-RAPPELS
+
+Demande acceptée : un accueil personnel mobile et deux rappels personnels
+facultatifs, pour terminer un parcours et agir avant sa fermeture. Cette
+évolution remplace le premier onglet Découvrir par **Accueil**, conserve ses URL
+et le catalogue public et étend le périmètre antérieurement exclu des nouveaux
+rappels personnalisés. Aucun compte habitant n'est créé. L'EPIC 73 reste
+**En cours** ; les critères et preuves historiques ne sont pas réécrits.
+
+### Parcours et décisions retenues
+
+**US-LIVE-ACCUEIL.** En tant que participant, voir immédiatement les parcours
+proches de leur objectif ou de leur échéance et reprendre le bon accès personnel.
+L'accueil présente une priorité principale illustrée, deux suivantes compactes,
+les autres participations de la page, puis la découverte des communes suivies.
+Les visiteurs sans carnet disposent d'abord de cette découverte. La navigation
+reste à trois entrées : Accueil, Mes participations, Mes communes.
+
+Un parcours est « presque terminé » s'il est commencé, encore accessible et
+incomplet, avec une étape restante ou une progression confirmée d'au moins 80 %.
+Le nombre requis provient de l'objectif métier effectif, jamais du nombre de
+commerces disponibles. « Derniers jours » signifie une échéance effective de
+participation dans les 72 heures à venir, encore strictement future, avec des
+étapes manquantes et une participation encore autorisée. Les deux indications
+peuvent coexister sur une seule entrée. Une progression inconnue ou une erreur
+de lecture ne devient pas zéro, une urgence ou une qualification.
+
+Les priorités de la page sont triées : deux indications réunies, fin proche,
+presque terminé, autres parcours ; puis échéance la plus proche et identifiant
+stable. La page annonce explicitement une suite lorsqu'elle est partielle ;
+aucun compteur ou classement global n'est déduit d'une page. Deux inscriptions
+distinctes à une même animation gardent leurs accès et progressions distincts.
+Le même identifiant de participation n'est pas présenté plusieurs fois.
+
+**US-LIVE-RAPPELS.** En tant que participant, choisir deux rappels automatiques
+indépendants, distincts des campagnes organisateur et sans quota commercial :
+
+- **Mes parcours presque terminés** : une étape réellement restante sur un
+  parcours commencé ; le seuil d'affichage de 80 % ne déclenche pas ce Push.
+- **Mes animations qui se terminent bientôt** : échéance effective dans
+  les 72 heures, participation encore possible, objectif incomplet.
+
+Une participation terminée, annulée, inaccessible ou dont l'accès est révoqué
+ne reçoit pas de rappel. Un parcours achevé en attente de régularisation ou
+de qualification n'est pas réinterprété comme des étapes restant à jouer.
+Les neutralisations et adaptations du parcours suivent les projections métier
+existantes. Une qualification ou un gain reste exclusivement confirmé par le
+backend ; le pourcentage ne les accorde pas.
+
+Un seul rappel logique de chaque type par participation et installation,
+avec au plus un rappel personnel par jour civil et installation. Les deux
+types d'une même participation sont fusionnés ; plusieurs participations
+éligibles peuvent être regroupées dans ce rappel quotidien. Aucun troisième
+rappel à 24 heures n'est ajouté. La purge de la boîte de réception ne réarme
+pas les rappels. Les doublons de transport éventuels réutilisent le même tag.
+
+La préparation et l'envoi sont limités à **09 h incluses–20 h exclues, heure
+de Paris**, avec gestion des changements été/hiver. Les états, préférences,
+liens de suivi et échéances sont revérifiés juste avant l'envoi. Une attente
+hors créneau ne prolonge pas le droit de participer ni une échéance dépassée.
+Le transport peut répéter une remise après un incident réseau ; l'unicité
+garantie porte sur le rappel logique et sa réservation durable.
+
+Les préférences `RAPPEL_PRESQUE_TERMINE` et `RAPPEL_FIN_PROCHE` sont
+**false par défaut**, y compris pour les installations existantes. Elles se
+gèrent séparément dans Réglages ; ni l'inscription ni l'ouverture de l'accueil
+ne demande la permission navigateur. Un refus de Push ne bloque pas l'accueil,
+les participations ou la messagerie. Les catégories et communes antérieures
+sont préservées. La préférence des campagnes organisateur reste indépendante.
+
+### Architecture et contrats
+
+Le domaine `animation_locale` possède la politique de priorisation et de rappel.
+Il consomme la progression du moteur, ses preuves et son calendrier effectif ;
+il ne dépend ni de l'ORM, ni du navigateur, ni du fournisseur Web Push.
+L'application charge les faits, contrôle les accès et orchestre les transactions.
+Le repository borne les lectures et écrit les réservations ; les interfaces
+présentent les décisions, sans recalculer les seuils métier en JavaScript.
+
+Lecture additive : `GET /public/localeo-live/installations/{id}/tableau-de-bord`,
+avec `X-Localeo-Live-Secret` et `Cache-Control: private, no-store`. La réponse
+expose `generated_at`, `items`, `count` de la page et `next_cursor`. Chaque item
+contient `participation_id`, `animation_id`, `nom`, `commune:{id,nom}`, `type`,
+`statut_participation`, `date_fin`, `progression:{total,validees,restantes,pourcentage}`,
+`commencee`, `terminee`, `disponible`, `indicateurs:{presque_terminee,fin_proche}`
+et un `deeplink`. La page est bornée à 50 participations, sans parcours exhaustif
+implicite des pages ou chargement global préalable en mémoire. Seuls les suivis
+autorisés de l'installation authentifiée sont consultables, même hors catalogue
+public. Aucun token, e-mail, identité ou solution privée n'est exposé.
+
+Le lien commun est `/live/animations?participation=<UUID>` : il ouvre uniquement
+l'entrée locale portant cet identifiant. Un carnet absent propose la reprise
+de l'accès ; aucune autre participation à la même animation n'est substituée.
+Un digest de plusieurs participations ouvre Mes participations.
+
+Les anciens suivis ne prouvent pas quel token personnel a été validé. Une
+migration ajoute la référence nullable au token effectivement présenté, sans
+rattachement historique heuristique. Le tableau et les rappels exigent une
+capacité encore valide ; la réponse distingue les accès à actualiser par
+`acces_a_actualiser` (indicateur entier 0 ou 1, sans comptage exhaustif). Depuis
+le carnet local, une action explicite **Actualiser
+mes accès** relie les participations avec leurs propres tokens existants,
+par lots de 50 et deux requêtes concurrentes au plus. Les échecs partiels sont
+visibles. Ni nouveau token, ni inscription, ni autorisation de rappel ne sont
+créés par cette opération ; un token révoqué reste refusé.
+
+Les deux catégories sont ajoutées au contrat de préférences existant. La
+configuration publique expose `rappels_participations_disponibles: true` ; un
+ancien backend sans ce champ conserve ses réglages et son catalogue. Un tableau
+indisponible conserve les accès du carnet et propose une actualisation, sans
+simuler l'absence de participations.
+
+La préparation utilise un traitement batch protégé, borné, simulable par défaut,
+destiné à un passage toutes les 15 minutes. Un curseur durable ou explicitement
+reprenable évite de retraiter indéfiniment les premières installations. Les
+réservations installation/jour et participation/type sont atomiques, uniques et
+indépendantes de la rétention de l'inbox. Le verrou d'installation coordonne
+préférences et rappels concurrents. La notification réutilise l'outbox et les
+claims de transport existants, sans nouvelle intégration fournisseur.
+
+### Critères et preuves attendues
+
+| Critère ajouté | Résultat observable et preuve prévue |
+| --- | --- |
+| E73-HOME-01 | Accueil mobile, première priorité et deux suivantes ; visiteur sans carnet vers découverte ; navigation et anciens liens conservés. |
+| E73-HOME-02 | Indicateurs calculés par le domaine, frontière 80 %, une étape, 72 h, commencement et objectif effectif ; inconnus et états terminaux exclus. |
+| E73-HOME-03 | Tri explicite, absence de doublon par participation, plusieurs accès à la même animation indépendants, pagination et état partiel. |
+| E73-HOME-04 | Secret d'installation, refus croisé, aucune donnée sensible et aucune réponse personnelle mise en cache ; ancien backend et erreurs explicites. |
+| E73-HOME-05 | Reprise exacte depuis l'accueil ou Push, accès absent sans substitution, parcours terminés/qualification/gains conservés. |
+| E73-HOME-06 | 320/390 px et bureau, clavier, cibles tactiles, texte agrandi, mouvements réduits ; aucune nouvelle permission automatique. |
+| E73-ALERTE-01 | Deux préférences opt-in indépendantes, défaut false neuf/existant, retrait effectif sans altérer les autres catégories ou communes. |
+| E73-ALERTE-02 | Une étape restante pour le Push, fin dans 72 h, fusion des deux types et regroupement de participations ; aucun rappel après terminaison. |
+| E73-ALERTE-03 | Un type/participation/installation et un rappel/jour, deux workers concurrents, rollback, purge inbox, reprise après incident sans doublon logique. |
+| E73-ALERTE-04 | Créneau Paris 09–20, été/hiver, expiration pendant attente, revalidation préférences/accès/progression juste avant transport. |
+| E73-ALERTE-05 | Batch borné, simulation sans écriture/envoi, progression du curseur, fournisseur simulé ; recette réelle distincte. |
+
+| Impact | Décision et preuve à produire |
+| --- | --- |
+| Backend / API / batch | Domaine pur, lecture privée, catégories additives, registre durable, refus et concurrence ; tests isolés et PostgreSQL jetable. |
+| Marketplace / Live | Accueil et réglages, mêmes carnet/communes ; contrats et parcours Playwright sur API simulées. |
+| ERP / Animation / Pro | Pas de nouvel écran ni de commande : les nouvelles fonctionnalités sont destinées aux habitants dans Live. |
+| Données / migration | Migration additive du registre et des index, anciennes préférences sans opt-in implicite ; restauration et introspection du générateur à examiner. |
+| Documentation / exploitation | Contrat canonique, guide Live, batch, cadence, limites de transport et ordre backend avant frontend à actualiser. |
+
+Budgets locaux : page de 50 suivis maximum, aucun enrichissement HTTP personnel
+par carte, deux lectures frontend concurrentes au plus, préparation de 100
+installations maximum par lot et absence de transaction englobant l'envoi réseau.
+Les tests vérifient les bornes, accès/index et reprises ; les mesures hébergées
+de latence et de charge mixte restent une vérification d'activation distincte.
+Les preuves locales exécutées et les limites de recette hébergée sont consignées
+dans le [suivi d'implémentation](suivi-implementation.md), sous la référence
+**E73-EVO-LIVE-ACCUEIL-RAPPELS**. Elles ne clôturent pas toute l'EPIC 73.
+
 ## Invariants, contrats et conservation
 
 Le backend reste propriétaire de la visibilité publique, des dates et autorisations
@@ -134,7 +291,11 @@ mêmes identifiants et capacités, sans nouvelle inscription. Aucun token ajout�
 une URL de transition. L'ancien carnet reste présent. Les anciens liens personnels
 restent servis lorsque leur redirection ne peut préserver l'accès sans risque.
 
-## Impacts et ordre de livraison
+## Impacts et ordre de livraison de la bascule initiale
+
+Ce tableau concerne **E73-EVO-LIVE-UNIQUE**. Le complément Accueil/Rappels
+ci-dessus ajoute ensuite une migration backend, un contrat de lecture et un
+traitement batch ; son ordre de livraison et ses impacts priment pour ces ajouts.
 
 | Périmètre | Impact et vérification |
 | --- | --- |
