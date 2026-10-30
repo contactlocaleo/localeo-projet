@@ -2,6 +2,160 @@
 
 Début : **18 octobre 2026**. [Spécification](README.md), [backlog](../../roadmap/en-cours/epic-73-animation-et-ou-coffrets-backlog.md), [matrice des 63 critères et preuves](verification-livraison.md). Objectif : les 38 US, dans les dix lots demandés. Les lignes ci-dessous ne valent pas acceptation tant que les preuves correspondantes ne sont pas enregistrées.
 
+## Correction locale du 30 octobre 2026 — E73-EVO-UX-ERP
+
+Demande : une entrée par fonction dans Animation ERP, en-têtes et retours
+harmonisés. Réalisation dans `localeo-backend`, base `3720a08` avec travaux
+locaux préexistants conservés, et dans cette documentation. Les autres
+applications ne sont pas modifiées par cette intervention.
+
+| Critère | Résultat et preuve |
+| --- | --- |
+| E73-EVO-UX-ERP-01 | 17 destinations directes classées en Animations / Équipes et contrats / Offre et modules / Pilotage ; actions Nouveau dans leurs listes, accueil récapitulatif et anciens fragments conservés. `animation-navigation.test.mjs` vérifie le menu réellement servi et ses destinations ; le navigateur vérifie droits, entrée active et demandes d’organisation distinctes des accès |
+| E73-EVO-UX-ERP-02 | `animation-navigation.js` fournit les en-têtes du shell et des trois modules autonomes ; quatre consoles et Offres et tarifs utilisent la même structure et CSS. Retour liste/espace, détail/liste, lot/animation ; filtres seulement depuis parent de même origine. Captures relues à 320/1280 px ; liens du menu et retours principaux visant 44 px. La saisie reste protégée lors du retour (annulation du départ conserve le champ) |
+| E73-EVO-UX-ERP-03 | Session, droits, lecture seule, CSRF, idempotence, conflits et reprise après réponse perdue conservés ; rendu Support inchangé. Retour des consoles vers l’accueil ERP si la consultation de l’espace Animation n’est pas autorisée ; trois tests rouges avant correction puis réussis, conservation toujours refusée hors ADMIN |
+
+Revue indépendante intégrée : accès aux offres globales rétabli comme fonction
+distincte du catalogue par commune ; impasse des opérateurs spécialisés corrigée.
+Lecture des captures : liens imbriqués initialement affichés en ligne, test de
+reproduction échoué (`inline` au lieu de `block`) puis réussi après correction
+CSS. Les anciennes assertions de libellé de retour ont été adaptées à la
+hiérarchie explicitement demandée, sans supprimer les contrôles clavier,
+de largeur, de données ou de permissions.
+
+Validation sur l’arbre final :
+
+- **767 tests Python réussis**, code 0, via `scripts/validation/test_isolated.py` :
+  architecture/domaine/couverture, navigation des consoles, shell équipe et assets,
+  accès internes, nouveaux tests `test_animation_console_navigation.py` et suites
+  `test_admin_specific_ui_system.py` / `test_animation_locale_admin.py`.
+- **4 tests Node réussis** dans `tests/frontend/animation-navigation.test.mjs` :
+  fonctions actives, menus, parents et refus de référents hostiles.
+- `tests/browser/animation-navigation-erp.cjs` : **26 contrôles réussis** sur
+  320/1280 px, menu, navigation, capacités, formulaire modifié et retours.
+- Les quatre suites `generation-erp.cjs`, `preparation-erp.cjs`,
+  `exploitation-erp.cjs`, `conservation-erp.cjs` passent avec **18 parcours**,
+  y compris les retours et leur cible tactile, les refus et les reprises.
+- Huit suites navigateur adjacentes passent : `epic73-suivi-produits.cjs`
+  (ERP et Support), `epic73-reversibilite.cjs`, `epic73-pilotage-economique.cjs`,
+  `epic73-checkout-erp.cjs`, `epic73-modules-erp.cjs`, `equipes-animation-erp.cjs`,
+  `epic73-preparations-service.cjs`, `epic73-sollicitations.cjs`.
+
+Les effectifs de tests, contrôles et parcours sont distincts et ne s’additionnent
+pas. Vérifications navigateur sur fixtures sans appel externe, base réelle ni
+envoi de message. Les quatre suites consoles utilisent leur HTML réel et les
+nouveaux tests Python utilisent les vrais renderers ; la page des offres est
+couverte sur son rendu HTML/échappement, sans recette d’une édition réelle.
+
+Pas de modification de domaine, contrat OpenAPI, données, migration ou
+générateur : présentation et navigation uniquement. Les assets supplémentaires
+sont servis dans le backend avec session et `no-store`, sans nouveau réglage.
+Les exports documentaires doivent accompagner une livraison backend autonome.
+La recette connectée après livraison reste à effectuer ; aucune conformité
+complète d’accessibilité ni validation terrain n’est déduite de ces tests.
+Aucun commit, push ou déploiement réalisé.
+
+## Évolution locale du 30 octobre 2026 — E73-EVO-UX-PUBLIC
+
+Retours sur le site public TEST : ajout de la géolocalisation volontaire,
+reprise des codes visuels Coffrets et navigation Live centrée sur les animations.
+Les critères et l’analyse UX sont dans les [parcours canoniques](perimetres-parcours-saas.md).
+Périmètre modifié : `localeo-marketplace` et documentation `localeo-projet`.
+Bases respectives `70d7128` et `6e46edd`, avec travaux locaux préexistants conservés.
+
+| Critère | Réalisation et preuve |
+| --- | --- |
+| E73-EVO-UX-PUBLIC-01 | `AnimationLocationPicker` utilise le contexte territorial E52 dans un POST annulable, sans mise en cache des coordonnées ; refus, délai, indisponibilité, commune hors réseau, précision approximative, absence de GPS et réponses tardives couverts par `animation-discovery.spec.cjs`. La revue indépendante a identifié un callback périmé pouvant écraser les filtres et un message périmé après retour navigateur : corrigés avec callback courant et réconciliation du message, scénarios ajoutés |
+| E73-EVO-UX-PUBLIC-02 | En-tête bleu profond, orange et typographies partagées, commune/filtres avant les animations sur ANIMATION, trois étapes de présentation ; composition du catalogue Coffrets conservée. Captures 320/1440 px relues, correction du lien d’évitement et des numéros d’étapes sur mobile ; clavier et texte 200 % couverts par le scénario existant `animation-saas-public.spec.cjs` |
+| E73-EVO-UX-PUBLIC-03 | `LiveCarnetHeader`, `liveStore` et état vide adaptés ; `live-animation-surface.spec.cjs` couvre les deux surfaces, les rubriques mémorisées, le lien direct et l’ajout d’un ancien Coffret avec conservation en IndexedDB. Aucun effacement de carnet |
+
+Reproduction initiale : le scénario GPS échoue sur l’absence du bouton avant
+correction. Les premières passes ont aussi révélé une association de libellé
+à préciser et deux routes de fixture manquantes pour la lecture d’un Coffret ;
+markup et fixtures corrigés sans assouplir les assertions ni le blocage réseau.
+Une passe élargie avec délai local réduit à 30 secondes a affiché 29 succès et
+un dépassement sur la reprise d’avis ; le rejeu avec le délai habituel de
+90 secondes du projet a confirmé ce scénario et les 17 autres de cette passe
+(18 succès, code 0). Les passes se recoupent et ne s’additionnent pas.
+
+Bilan navigateur : **32 scénarios distincts réussis** dans les cinq fichiers
+`animation-discovery`, `live-animation-surface`, `animation-saas-public`,
+`animation-source-merchant` et `discovery-premium` (`tests/visual/*.spec.cjs`).
+Dernière passe après conservation explicite de la composition Coffrets : les
+11 scénarios découverte réussissent (code 0), dont les deux courses GPS, le
+retour navigateur et le catalogue Coffrets. Les 18 scénarios de la passe
+précédente incluent les tests de satisfaction, de reprise et de conservation
+des anciens accès. Les 13 autres couvrent diffusion, commerce et découverte
+Coffrets. Aucun test ignoré. Contrôles documentaires : 98 guides, 1130 liens
+locaux et 130 sources exportées vérifiés sans erreur ; diffs sans erreur.
+
+Autres contrôles : deux tests Node surface/reprise/commande personnelle et
+13 tests serveur réussis (codes 0) ; build Vite isolé des `.env` exécuté par les
+parcours navigateur. ESLint sur `src` et les deux nouveaux fichiers de tests
+réussi. `npm run lint` global n’a pas pu parcourir des dossiers temporaires
+locaux (`output/bum-politique/pytest-approval-1`, puis `tmp/address-architecture`,
+erreurs `EPERM`) ; aucun changement d’ACL, suppression ou exclusion permanente.
+
+Lecture distante sans mutation : le site TEST sert la surface ANIMATION avec
+API `https://test-api.localeo.city`. OPTIONS du POST territorial depuis cette
+origine publique répond 200 avec `Access-Control-Allow-Origin` exact. Aucun
+POST de position réelle envoyé. La permission GPS réelle, la résolution sur
+téléphone et la version déployée après livraison restent à recetter.
+
+Pas de changement backend, OpenAPI, migration, données ni générateur : la
+projection territoriale et les règles de participation/gain sont réutilisées.
+Pas de collecte Analytics supplémentaire ; stockage et accès personnels
+préservés. Les recommandations de confirmation d’inscription, de prochaine
+action et de mise en scène des acquis du jeu sont une analyse, pas une
+implémentation déclarée terminée. Le fil d’actualités Live et ses filtres
+existants, dont Coffrets, restent inchangés. Aucun commit, push ou déploiement.
+
+## Évolution locale du 30 octobre 2026 — E73-EVO-DOMAINES
+
+Décision acceptée : site public `animations.localeo.city`, portail organisateur
+`gestion-animations.localeo.city`, marketplace Coffrets conservée sur un autre
+service. Équivalents TEST : `test-animations`, `test-gestion-animations` et
+`test-marketplace`. Cette évolution remplace le profil TEST qui réutilisait
+l’accueil de la marketplace. Les preuves de recette antérieures restent
+historiques ; aucun nouveau déploiement n’est revendiqué.
+
+| Critères complémentaires | Sources / résultat local | Preuves exécutées |
+| --- | --- | --- |
+| E73-EVO-DOMAINES-01 | Quatre profils Marketplace Coffrets/public, deux profils gestion, exemples et guides distincts ; défaut local Coffrets conservé | 8 tests Marketplace configuration/surface/reprise et 5 tests build-environment Animation ; quatre lectures HTTP locales `app-config.js` et deux validations de profils de gestion |
+| E73-EVO-DOMAINES-02 | Compléments backend production/TEST pour templates publics, portail, origines exactes et retours de paiement ; aucune règle métier modifiée | 98 tests `tests/security/test_animation_browser_session.py` dont contrôle des deux profils : public refusé malgré son autorisation CORS générale ; 618 contrôles architecture/domaine/couverture |
+| E73-EVO-DOMAINES-03 | Contrôle de build Pro autorise le site public exact ; API/Marketplace/Coffrets historiques conservés, gestion et origines TEST refusées en production | 50 tests unitaires Pro ciblés ; 6 tests navigateur `validation-security.spec.js` avec nouveaux QR, anciens QR et refus sans appel de résolution |
+| E73-EVO-DOMAINES-04 | Harnais E73 sépare `publicAnimation` de `marketplace` ; clone historique 18776 compatible, 18778 explicite ; aucune réécriture de campagne privée | 363 tests Node E73 puis 114 ciblés après correction de l’allowlist RM-X-03, qui bloquait la nouvelle origine dans ses contextes de fuseau ; test d’abord en échec puis réussi. Suites recoupées, effectifs non additionnables |
+
+Commandes reproductibles :
+
+- Backend : `python scripts/validation/test_isolated.py tests/security/test_animation_browser_session.py -q` ; contrôles architecture selon le guide backend ; dernier ciblé Node : `node --test tests/frontend/recette-e73-public-operations.test.mjs tests/frontend/recette-e73-core.test.mjs tests/frontend/recette-e73-isolated.test.mjs` (114 succès).
+- Marketplace : `node --test tests/security/public-config.test.cjs tests/security/animation-surface-satisfaction.test.cjs tests/security/library-backup.test.cjs`.
+- Gestion : `node --test tests/build-environment.test.mjs`.
+- Pro : `npm test -- src/lib/api/productionConfig.test.js src/lib/api/demoConfig.test.js src/features/animations/model.test.js src/features/animations/publicOrigins.test.js` ; `npm run test:e2e -- tests/e2e/validation-security.spec.js`.
+
+Le lot Node complet de 363 succès a été exécuté avant le dernier ajout RM-X-03 ;
+il compte désormais 364 tests, sans nouveau passage intégral après ce ciblé.
+Sous PowerShell, son lancement développe explicitement les fichiers :
+
+```powershell
+$recetteTests = @(rg --files tests/frontend | Where-Object { $_ -match 'recette-e73-.*\.test\.mjs$' })
+node --test @recetteTests
+```
+
+Revue indépendante : contrôle de la séparation des origines et des profils,
+compatibilité des anciens QR et clones ; correction de l’allowlist de fuseau et
+ajout des retours de paiement explicites à la procédure de bascule. Le défaut
+était dans le harnais, aucun invariant métier n’a été changé.
+Sans impact sur les schémas OpenAPI, les migrations SQL, les rôles, les
+générateurs ou les données de démonstration : les URL consomment les templates
+existants, et aucune nouvelle donnée ni permission n’est requise.
+
+**Reste à livrer** : DNS/TLS, association aux services, injection des profils,
+reconstruction/déploiement et recette hébergée des nouveaux domaines, anciens
+liens personnels et carnets. Aucun build de livraison, commit, push ou
+déploiement effectué pour cette évolution. Les validations locales ne prouvent
+pas que les domaines pointent déjà vers les services cibles.
+
 ## Restrictions et état initial
 
 Implémentation, bases jetables locales, tests isolés et commits locaux uniquement. **Aucun push, pipeline distant, déploiement, migration/configuration de test/démo/production, envoi réel ou paiement réel.** Les vérifications humaines et hébergées restent des étapes futures explicites. Ne pas confondre commits et livraison.

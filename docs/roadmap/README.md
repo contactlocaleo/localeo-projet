@@ -2,14 +2,14 @@
 
 Implémentations locales E70 et E72 vérifiées les 7–8 octobre 2026 : [E70 — PIN](../specifications/epic-70-validation-pin/README.md) et [E72 — salariés](../specifications/epic-72-acces-salaries/README.md). E70 est publiée avant le lot E72 ; les deux epics restent en cours jusqu’à leur recette de mise en service. Aucun déploiement effectué.
 
-Classement consolidé le 18 septembre 2026, complété le 15 octobre par l’EPIC 73. Les backlogs des applications sont
+Classement consolidé le 18 septembre 2026, complété le 22 octobre par les EPIC 74 et 75. Les backlogs des applications sont
 réunis dans les dossiers d'état, avec un seul fichier par EPIC. Le suivi inclut
-les 73 identifiants du tronc commun et trois identifiants applicatifs distincts.
+les 75 identifiants du tronc commun et trois identifiants applicatifs distincts.
 
 | Etat | Epics | Dossier |
 | --- | ---: | --- |
 | Terminees | 61 | [terminees/](terminees/README.md) |
-| A faire | 7 | [a-faire/](a-faire/README.md) |
+| A faire | 9 | [a-faire/](a-faire/README.md) |
 | En cours | 5 | [en-cours/](en-cours/README.md) |
 | Abandonnees | 2 | [abandonnees/](abandonnees/README.md) |
 | Fusionnee | 1 | Epic 61 reprise dans l'[Epic 60](terminees/epic-60-vision-360-commercialisation-backlog.md) |
@@ -102,6 +102,20 @@ des epics terminees. Aucun fichier autonome de l'Epic 61 n'est recree.
 
 ## Contributions applicatives et collisions de numéros
 
+Le 22 octobre, l'[EPIC 75 — Mots croisés assistés par l’IA](a-faire/epic-75-mots-croises-assistes-ia-backlog.md)
+cadre un nouveau jeu payant sur le modèle de la chasse : préparation assistée,
+grille contrôlée, parcours mobile, qualification et lots sur le socle commun.
+Huit US, dix-huit critères cibles et neuf groupes d'arbitrages, dont un résolu.
+Le 23 octobre sont confirmés les indices chez les commerçants, la préparation
+Localeo validée par l’organisateur et la grille correcte obligatoire pour le tirage.
+Tarif, quota et modalités restantes à décider. État **À faire**, sans implémentation.
+
+Le 22 octobre, l'[EPIC 74 — Tombola publique](a-faire/epic-74-tombola-publique-backlog.md)
+ajoute un cadrage distinct de la tombola commerçante E53 : modèle standard sans
+commerce ni achat requis, participation depuis un QR public, support de stand
+et préparation d'une audience future. Huit US et seize critères cibles ; six
+groupes d'arbitrages explicites. État **À faire**, sans implémentation.
+
 - L'ancien numéro **Marketplace 53**, consacré à la pagination, est fusionné
   dans l'[EPIC 57](terminees/epic-57-bornage-pagination-api-marketplace-backlog.md).
   La tombola conserve le numéro 53.
@@ -140,6 +154,8 @@ précise la provenance et les divergences historiques conservées.
 | 71 | A faire | [CRM de prospection](a-faire/epic-71-crm-prospection-animation-coffrets-pro-backlog.md) : trois axes commerciaux, fichier Gironde V2 examiné, import contrôlé, carte communale, historique, tâches et rappels internes ; 24 critères, [spécification V0.1](../specifications/epic-71-crm-prospection/README.md), arbitrages restants explicites, sans implémentation. |
 | 72 | En cours | [Accès salariés Localeo Pro](en-cours/epic-72-acces-salaries-validation-localeo-pro-backlog.md) : implémentation locale vérifiée, 22 critères ; option ERP, invitations, scanner et historique limités, conservation. |
 | 73 | En cours | [Animation et/ou Coffrets](en-cours/epic-73-animation-et-ou-coffrets-backlog.md) : 38 US, 63 critères ; lots libres externes ou bons numériques, modules achetés/offerts/en essai (import, chasse, Web Push participants), catalogue, périmètres/onboarding/Pro, présence web et compléments SaaS (autonomie, accompagnement, valeur/coûts, réversibilité/reprise) ; aucun arbitrage ouvert recensé. |
+| 74 | A faire | [Tombola publique](a-faire/epic-74-tombola-publique-backlog.md) : modèle standard sans commerçant, participation par QR, supports de stand et audience future ; 8 US, 16 critères cibles, arbitrages ouverts |
+| 75 | A faire | [Mots croisés assistés par l’IA](a-faire/epic-75-mots-croises-assistes-ia-backlog.md) : indices chez les commerçants, préparation Localeo validée par l’organisateur, grille correcte obligatoire pour le tirage ; 8 US, 18 critères cibles, huit groupes d’arbitrages ouverts ou partiels |
 | Autres identifiants du tronc commun | Terminees | Statut produit consolide conserve ; les anciennes mentions de stories a faire ne rouvrent pas ces epics. |
 
 Les changements des Epics 5, 12 et 47 corrigent des incoherences entre les

@@ -130,7 +130,7 @@ Révocation/modification prend effet dès la requête suivante. Une tâche non c
 
 ### 5.1 Deux expériences adaptées à leurs usages
 
-Exigence du **18 octobre 2026** : privilégier la simplicité d’apprentissage et l’accessibilité, avec deux compositions distinctes. La plateforme organisateur adopte les codes d’une **application de gestion** ; le site public Animation ceux d’un **site de communication et de découverte**. Ils partagent identité visuelle, vocabulaire, composants accessibles et règles métier, sans imposer le même squelette de page. L’origine publique retenue dans le cadrage demeure `animations.localeo.city` ; cette distinction UX ne crée pas une seconde origine au singulier.
+Exigence du **18 octobre 2026** : privilégier la simplicité d’apprentissage et l’accessibilité, avec deux compositions distinctes. La plateforme organisateur adopte les codes d’une **application de gestion** ; le site public Animation ceux d’un **site de communication et de découverte**. Ils partagent identité visuelle, vocabulaire, composants accessibles et règles métier, sans imposer le même squelette de page. L’origine publique demeure `animations.localeo.city` ; l’évolution du 30 octobre précise séparément l’origine de gestion `gestion-animations.localeo.city` (§5.4).
 
 | Dimension | Plateforme organisateur | Site public Animation |
 | --- | --- | --- |
@@ -154,6 +154,41 @@ Le retour d’un utilisateur client va à l’accueil de sa plateforme ; un reto
 - À 320 pixels CSS et avec texte agrandi à 200 %, conserver contenu et actions sans défilement horizontal de toute la page. Une table réellement bidimensionnelle peut avoir son défilement local signalé ; fournir un accès lisible aux informations essentielles. Sur mobile, menu repliable nommé, header compact, aucune action essentielle masquée. La préférence d’un header sur une ligne ne justifie jamais une troncature empêchant l’usage au zoom.
 - Respecter la réduction des animations ; aucun carrousel automatique ou effet visuel indispensable à la compréhension. Chargements, états vides et indisponibilités indiquent la prochaine action ; absence de Push ou refus de permission ne bloque pas la lecture/participation déjà autorisée.
 
+#### Navigation Animation dans Localeo ERP — 30 octobre 2026
+
+**E73-EVO-UX-ERP**, complément de l’US24 demandé pour simplifier l’ERP : une
+entrée de menu ouvre une fonctionnalité identifiable, sans passer par une
+section d’une même page carrefour. Les liens sont regroupés visuellement en
+Animations, Équipes et contrats, Offre et modules, Pilotage. La vue d’ensemble
+présente les mêmes fonctions disponibles ; les actions « Nouveau » restent
+dans la liste concernée. Les anciennes routes et les favoris à fragment restent
+résolubles. Les vues SQLAdmin historiques gardent leurs accès existants, sans
+dupliquer la consultation des animations dans le menu métier.
+
+| Critère ajouté | Comportement et preuve attendue |
+| --- | --- |
+| E73-EVO-UX-ERP-01 | Liens directs uniques vers les 17 fonctions existantes ; rubriques et liens filtrés selon les habilitations, une seule entrée active sur liste et détail. Tests Node sur le menu réellement servi et navigateur administrateur/opérateur |
+| E73-EVO-UX-ERP-02 | Même structure fonctionnelle : fil d’Ariane, titre, sous-titre et un retour explicite. Liste → espace Animation, détail → liste, lot → animation. Reprendre les filtres seulement depuis le même parent sur la même origine ; l’arrivée directe n’exige aucun historique navigateur. Tests de navigation, refus de référent hostile, mobile et clavier |
+| E73-EVO-UX-ERP-03 | Souscriptions, commandes, accès et consoles gardent formulaires, commandes, droits, conflits et reprise après résultat incertain ; conservation réservée à ADMIN, rendu Support inchangé. Rejouer les parcours des modules et les contrôles de session/routage |
+
+Les 17 fonctions sont : animations et lots, demandes de création, préparation
+des chasses, préparations accompagnées, exploitation des jeux, messages
+participants, demandes d’organisation, accès partenaires, souscriptions,
+commandes d’abonnement, offres et tarifs, catalogue commercial, modules souscrits, remboursements,
+pilotage économique, fermeture des organisations, conservation des animations.
+La checklist terrain des chasses reste distincte du service accompagné ; la
+consultation des lots ne remplace pas les commandes d’exploitation du jeu.
+Les offres globales SQLAdmin restent distinctes du catalogue tarifaire par
+commune ; leur accès administrateur n’est pas supprimé ni ouvert aux autres profils.
+
+Le changement est porté par la présentation ERP, propriétaire de sa navigation.
+Aucune règle métier ne migre vers les vues ; domaine, API, données, migrations,
+générateur et autres frontends restent inchangés. Deux assets ERP de présentation
+supplémentaires sont servis avec `Cache-Control: no-store` sous la session
+existante. Les commandes continuent d’être autorisées et auditées par leurs
+services backend. Livraison backend nécessaire pour rendre ces sources visibles
+sur TEST ; les preuves locales ne valent pas déploiement.
+
 ### 5.3 Validation des parcours avant généralisation
 
 Avant de décliner tous les écrans, réaliser et examiner deux parcours représentatifs : **organisateur**, de la liste à la création puis au contrôle de publication ; **visiteur**, de la découverte à l’inscription puis au retour dans Live. Étendre ensuite la même grammaire aux lots, imports, campagnes, achats et équipe. La revue porte sur le squelette et les états réels (vide, attente, refus, erreur, succès), pas uniquement sur une maquette nominale.
@@ -162,9 +197,125 @@ La recette associe contrôles automatisés d’accessibilité et vérifications 
 
 Séquence confirmée le 18 octobre : validation initiale par **Localeo**, corrections, puis validation avec la **première commune pilote, Martignas-sur-Jalle**, avant généralisation. Préparer les scénarios organisateur et participant pour ces deux étapes ; les personnes et créneaux de recette seront organisés lors de la réalisation.
 
+### Évolution du 30 octobre 2026 — découverte et carnet Animation
+
+**E73-EVO-UX-PUBLIC**, complément de CA23–24 demandé après ouverture de
+`test-animations.localeo.city`. Le site invite à découvrir et participer aux
+animations ; il reprend l’identité Coffrets (bleu profond, orange, papier,
+DM Sans/Oswald, photographies et boutons) avec une navigation propre à cet usage.
+
+| Critère ajouté | Comportement observable | Preuve prévue |
+| --- | --- | --- |
+| E73-EVO-UX-PUBLIC-01 | « Autour de moi » demande la position uniquement après clic ; sélection de la commune réellement identifiée, pas de la première commune proche ; refus, délai, résolution indisponible et commune hors réseau laissent le choix manuel accessible | Navigateur : permission simulée, commune absente de la synthèse, refus, délai, panne et réponse tardive après choix manuel |
+| E73-EVO-UX-PUBLIC-02 | Commune et filtres avant la sélection éditoriale ; identité visuelle commune aux Coffrets, navigation Animation, accès au carnet ; mobile et clavier sans débordement, mouvements réduits respectés | Navigateur à 320/1440 px et texte 200 %, captures et contrôle visuel |
+| E73-EVO-UX-PUBLIC-03 | Sur la surface ANIMATION, Live masque l’onglet Coffrets et ouvre les animations par défaut, y compris après une ancienne sélection Coffrets ; les accès directs, ajouts, données du carnet et gains Coffrets restent utilisables | Navigateur sur les deux surfaces et parcours direct vers un coffret |
+
+La résolution utilise le contrat existant `POST /public/referencement/villes/proches/accueil`
+d’E52 et uniquement son `contexte.communeOrigine` / `localisationStatut`. Le
+frontend ne recalcule ni distances ni rattachements. Coordonnées en mémoire
+pendant la requête, jamais dans URL, stockage, clés de cache ou Analytics ;
+annulation à la sortie et priorité au choix manuel sur une réponse tardive.
+Une commune hors réseau est nommée sans la remplacer par une commune voisine.
+La page n’affiche pas les widgets marchands de cette projection. Une seule
+résolution par action, pas d’appel par commune ; catalogue paginé à 20 conservé.
+
+Présentation seulement : aucun changement des règles de participation,
+qualification, gain, permission ou consentement ; leurs propriétaires backend
+restent inchangés. API, migrations, données et générateur sans modification.
+Les fixtures navigateur simulent les états de géolocalisation ; la permission
+et la précision réelles sur téléphone restent à vérifier sur l’hébergement HTTPS.
+Déploiement du frontend séparé, sans nouveau paramètre ; vérifier que
+`Permissions-Policy` conserve `geolocation=(self)`.
+
+L’analyse UX recommande ensuite une confirmation d’inscription suivie d’une
+prochaine action claire, et une mise en scène des seuls acquis réels du jeu
+(étape courante, visites confirmées, objets autorisés). Ces recommandations
+ne créent ni points, ni classement, ni récompense, ni révélation d’étape future.
+Une progression à 100 % ne vaut pas qualification. Le suivi distingue ces
+recommandations de la tranche implémentée.
+
+#### Analyse UX du parcours public
+
+Analyse du 30 octobre sur les écrans et sources Marketplace/Live ; elle ne
+remplace pas une observation d’utilisateurs sur le terrain. La direction
+visuelle est celle d’un rendez-vous local vivant : photographies des lieux et
+des participants, fond papier, titres de caractère et une seule couleur
+d’action. L’accueil oriente, la fiche donne envie et explique, Live accompagne.
+Les apparitions et survols restent courts et se désactivent en mode mouvements
+réduits, conformément à la [recommandation W3C](https://www.w3.org/WAI/WCAG22/Techniques/css/C39.html).
+La [géolocalisation navigateur](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/getCurrentPosition)
+nécessite HTTPS et l’accord de l’utilisateur ; elle n’est pas un prérequis de participation.
+
+| Moment | Friction observée dans les sources | Réponse UX et état de cette tranche |
+| --- | --- | --- |
+| Arriver | Identité verte différente des Coffrets, liste de rendez-vous sans orientation territoriale immédiate | Palette et typographies communes, promesse courte et commune avant les animations : implémenté localement |
+| Trouver près de soi | Sélecteur après la mise en avant ; aucune géolocalisation sur cet accueil | « Autour de moi », choix manuel, filtres avant les résultats, pas de substitution de commune : implémenté localement |
+| Comprendre | Visuel, dates et règles disponibles ; bénéfice générique fondé sur les passages commerçants, même pour les autres jeux | Priorité suivante : expliquer « Ce que je vais vivre » selon le moteur et les règles réellement exposées ; conserver une formulation neutre quand l’information manque |
+| S’inscrire | L’appel « S’inscrire et suivre » et la marque Live mêlent plusieurs intentions | Priorité suivante : un verbe principal « Participer » ; expliquer séparément le carnet. Ne supprimer aucun champ contractuel sans étude métier |
+| Commencer | L’inscription peut enchaîner directement sur Live | Priorité suivante : confirmation explicite puis prochaine action (« Continuer mon parcours », présenter son QR ou attendre le départ selon l’état serveur) ; aucune étape de permission Push imposée |
+| Revenir | Onglet Coffrets visible et pouvant être la rubrique mémorisée par défaut | Onglet masqué sur ANIMATION et entrée Live adaptée ; anciens accès et données conservés : implémenté localement |
+| Carnet vide | Le texte oriente surtout vers le scan chez un commerçant alors que l’inscription web existe | Priorité suivante : accès découverte et récupération de l’inscription clairement distingués du simple suivi d’une animation |
+| Progresser | Le moteur expose déjà étape courante, activités, objets et acquis ; ceux-ci peuvent être mieux mis en scène | Proposition d’immersion : chemin des seules étapes autorisées, tampons pour visites confirmées, feedback bref de réussite annoncé aussi en texte ; pas de classement, de points inventés ni de futures énigmes dévoilées |
+
+Mesures proposées pour une future évaluation, sans nouvelle collecte activée :
+temps pour trouver une animation pertinente, compréhension de la prochaine
+action, réussite de l’inscription et capacité à retrouver son parcours. Tester
+un nouveau visiteur, un participant qui revient, un refus GPS, une commune sans
+animation et un téléphone en connexion dégradée. Les recommandations suivantes
+restent à concevoir et vérifier ; l’immersion complète n’est pas déclarée livrée.
+
 ### 5.4 Origines et continuité des parcours
 
 Le dépôt Marketplace demeure le socle partagé : configuration de surface `ANIMATION` pour `animations.localeo.city`, composants et contrats communs, aucune copie indépendante du moteur. Accueil spécialisé : découvrir les animations, commune, fiches des commerces participants, rejoindre son parcours et ouvrir Live ; aucun achat Coffret requis. Le site Coffrets conserve ses propres parcours et liens existants. Une fiche Animation ne présente pas un commerce comme fournisseur de prestations Coffrets sans ce produit.
+
+**Décision du 30 octobre 2026 — E73-EVO-DOMAINES.** Les sites suivants doivent
+coexister sur des services distincts, avec des configurations indépendantes :
+
+| Usage | Production | TEST | Application / surface |
+| --- | --- | --- | --- |
+| Site public des animations | `https://animations.localeo.city` | `https://test-animations.localeo.city` | `localeo-marketplace`, `LOCALEO_PUBLIC_SURFACE=ANIMATION` |
+| Gestion des organisateurs | `https://gestion-animations.localeo.city` | `https://test-gestion-animations.localeo.city` | `localeo-animation` |
+| Marketplace Coffrets | Adresse Coffrets existante, notamment `https://coffrets.localeo.city` | `https://test-marketplace.localeo.city` | `localeo-marketplace`, `LOCALEO_PUBLIC_SURFACE=COFFRETS` |
+
+Le profil TEST du 22 octobre qui basculait l’accueil de la marketplace vers
+Animation est remplacé. Les deux déploiements publics partagent les sources,
+mais ni leur configuration d’accueil ni leur stockage navigateur. Le harnais
+de recette distingue explicitement origine publique Animation et marketplace ;
+les anciennes preuves et configurations privées de clone restent conservées.
+
+| Critère complémentaire | Comportement à vérifier | Preuve ciblée |
+| --- | --- | --- |
+| E73-EVO-DOMAINES-01 | Accueil Coffrets et découverte Animation accessibles simultanément sur deux origines, sans bascule de la marketplace | Profils séparés, résolution de configuration et lectures HTTP locales des deux surfaces ; recette hébergée après livraison |
+| E73-EVO-DOMAINES-02 | Liens de compte/service dirigés vers la gestion ; liens publics/participants vers le site public ; la surface publique n’obtient aucun droit de session de gestion | Templates backend distincts, contrôle d’origine exact et tests transport/session ; aucun wildcard |
+| E73-EVO-DOMAINES-03 | Pro reconnaît les QR du nouveau site public et les origines historiques configurées ; domaine de gestion, domaines hostiles et TEST en production refusés | Contrôle de build Pro, classification et parcours navigateur |
+| E73-EVO-DOMAINES-04 | Anciennes participations, QR, emails et carnets conservés ; changement de portail sans transfert silencieux de session/stockage/Push | Profils de transition, tests de sauvegarde/reprise et refus d’origines ; recette des anciens accès sur hébergement |
+
+Ces critères complètent CA23–24 et les parcours de compte sans modifier leurs
+IDs ni les 63 critères initiaux. Le backend reste propriétaire de l’identité,
+des permissions et de la validation des QR ; aucune règle métier ni donnée ne
+migre pour ce changement de domaines. Les schémas OpenAPI, données de démo et
+générateurs de documents ne changent pas ; leurs URL dépendent des templates
+existants. Les opérateurs doivent appliquer les nouveaux profils aux futures
+préparations ; aucune réécriture des liens distribués ou des campagnes privées.
+
+Les anciens domaines `animation.localeo.city` / `test-animation.localeo.city`
+peuvent rester des alias de la gestion pendant une transition explicitement
+configurée. Ajouter alors ces origines exactes à la liste de session du portail,
+les retirer après validation des anciens liens et informer les utilisateurs
+qu’une reconnexion peut être requise. Pas de redirection globale des routes
+personnelles vers le site public. Conserver les origines QR historiques dans
+Pro et les services nécessaires à la lecture des anciens liens ; la nouvelle
+origine ne modifie ni ne prolonge leurs droits.
+
+Les retours de paiement Animation (achat de lots et souscription) utilisent
+aussi l’origine de gestion : mettre à jour leurs valeurs explicites. Les
+sessions de paiement déjà créées gardent leurs anciens retours ; conserver
+l’accès à ces chemins pendant leur transition. Les retours Coffrets et les
+webhooks backend ne changent pas.
+
+DNS, certificats TLS, association des domaines aux services, configuration des
+origines et déploiement restent des opérations de livraison distinctes. Profils
+versionnés et procédure : [configuration E73](../../exploitation/technique/configurer-epic-73.md).
 
 Conserver les identifiants métier des animations/participations/commerces. Les anciennes routes `/animations`, `/animations/{id}`, `/animations/participants/{token}`, liens courts et QR distribués restent résolubles. Les pages publiques sans secret peuvent rediriger vers la route canonique. Une route contenant un accès personnel doit d’abord entrer dans son traitement existant de lecture/nettoyage, avec `Referrer-Policy: no-referrer`, absence d’analytics sur le secret et absence de cache ; ne pas copier un token dans une URL de suivi ou une redirection arbitraire.
 

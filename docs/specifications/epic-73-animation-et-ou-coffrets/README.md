@@ -1,5 +1,17 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+Retours UX du **30 octobre 2026 — E73-EVO-UX-PUBLIC** : géolocalisation
+volontaire, identité commune aux Coffrets et carnet Live adapté à la surface
+Animation. L’[analyse des parcours](perimetres-parcours-saas.md) distingue les
+corrections locales des propositions d’immersion et de simplification à suivre.
+
+Évolution acceptée du **30 octobre 2026 — E73-EVO-DOMAINES** : site public
+`animations.localeo.city`, gestion organisateur `gestion-animations.localeo.city`,
+marketplace Coffrets sur un service distinct. Les équivalents TEST, critères,
+compatibilité et déploiements sont précisés dans
+[les origines des parcours](perimetres-parcours-saas.md#54-origines-et-continuité-des-parcours)
+et le [guide de configuration](../../exploitation/technique/configurer-epic-73.md).
+
 Spécification détaillée **V1 du 17 octobre 2026**, fondée sur les **147 décisions**, **38 user stories** et **63 critères** du [backlog canonique](../../roadmap/en-cours/epic-73-animation-et-ou-coffrets-backlog.md). Les 18 groupes d’arbitrages produit recensés sont résolus. L’état produit est **En cours** depuis le 18 octobre 2026 selon la [roadmap](../../roadmap/README.md) : ce dossier décrit la cible et le suivi local en précise les preuves, sans annoncer de déploiement.
 
 ## Résultat attendu

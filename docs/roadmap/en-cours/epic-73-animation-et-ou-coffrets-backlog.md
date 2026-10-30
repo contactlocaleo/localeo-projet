@@ -15,6 +15,20 @@
 
 ### Socles et dépendances
 
+Évolution du **30 octobre 2026 — E73-EVO-DOMAINES** : site public
+`animations.localeo.city`, gestion `gestion-animations.localeo.city`,
+marketplace Coffrets conservée sur son propre service. En TEST :
+`test-animations.localeo.city`, `test-gestion-animations.localeo.city` et
+marketplace `test-marketplace.localeo.city`. Cette décision remplace le profil
+du 22 octobre qui réutilisait la marketplace TEST comme surface Animation ; les
+preuves historiques gardent leurs URL. Les anciens portails `animation` /
+`test-animation` peuvent coexister comme alias de gestion pendant une transition
+explicite, sans redirection globale des liens personnels. L’état de l’epic reste
+**En cours**. Critères complémentaires `E73-EVO-DOMAINES-01` à `04`, impacts et
+compatibilité : [origines et continuité](../../specifications/epic-73-animation-et-ou-coffrets/perimetres-parcours-saas.md#54-origines-et-continuité-des-parcours).
+Ils précisent CA23–24 et les liens du portail, sans renuméroter les 63 critères
+initiaux. Preuves locales : [suivi](../../specifications/epic-73-animation-et-ou-coffrets/suivi-implementation.md).
+
 | Socle | Articulation avec E73 |
 | --- | --- |
 | [E41 — Portail Animation](../terminees/epic-41-plateforme-animation-locale-mvp-backlog.md), [E45 — Vision Animation](../terminees/epic-45-vision-360-animation-backend-backlog.md) | Création, publication, suivi, tirage, gagnants et bilans à rendre indépendants des coffrets en dotation libre |
@@ -26,6 +40,22 @@
 | [E70 — PIN](../en-cours/epic-70-validation-prestation-telephone-client-backlog.md), [E72 — Salariés](../en-cours/epic-72-acces-salaries-validation-localeo-pro-backlog.md) | Étendre le parcours PIN E70 aux bons de lots libres selon DEC-41 ; scan/PIN/historique et salariés respectent les droits du commerce, sans élargissement implicite des rôles |
 | [E42 — Localeo Live](../terminees/epic-42-localeo-live-grand-public-backlog.md) | Inscription, carnet, QR, progression et gains restent utilisables sans achat de coffret ; préserver les accès déjà distribués |
 | [E71 — CRM](../a-faire/epic-71-crm-prospection-animation-coffrets-pro-backlog.md) | Qualifier les ventes Animation seule / Coffrets seuls / ensemble et le périmètre du commerçant ; aligner conversions et preuves de gain sans créer de vente ou droit depuis une simple étiquette CRM |
+
+### Évolution du 30 octobre 2026 — découverte publique Animation
+
+**E73-EVO-UX-PUBLIC**, rattachée à CA23–24 : géolocalisation volontaire pour
+identifier la commune, identité visuelle partagée avec Coffrets, parcours public
+centré sur les animations et onglet Coffrets masqué dans Live sur cette surface.
+Les trois critères complémentaires et les comportements à préserver figurent
+dans les [parcours publics](../../specifications/epic-73-animation-et-ou-coffrets/perimetres-parcours-saas.md).
+Les recommandations d’immersion utilisent uniquement les acquis serveur du jeu,
+sans nouvelle règle de gain. État E73 et critères historiques conservés.
+
+Évolution **E73-EVO-UX-ERP**, demandée le 30 octobre 2026 : navigation Animation
+de Localeo ERP avec une entrée directe par fonctionnalité et des en-têtes/retours
+harmonisés. Les trois critères complémentaires figurent dans les
+[parcours canoniques](../../specifications/epic-73-animation-et-ou-coffrets/perimetres-parcours-saas.md).
+Ils précisent l’US24 sans changer les règles métier ni l’état E73.
 
 ## Problème et résultat attendu
 

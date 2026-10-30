@@ -127637,6 +127637,7 @@
             "type": "string",
             "enum": [
               "NON_RENSEIGNEE",
+              "NON_REMIS",
               "REMISE_DECLAREE"
             ],
             "title": "Statut Remise"
@@ -127889,6 +127890,7 @@
             "type": "string",
             "enum": [
               "NON_RENSEIGNEE",
+              "NON_REMIS",
               "REMISE_DECLAREE"
             ],
             "title": "Statut Remise"
@@ -128093,6 +128095,7 @@
             "type": "string",
             "enum": [
               "NON_RENSEIGNEE",
+              "NON_REMIS",
               "REMISE_DECLAREE"
             ],
             "title": "Statut Remise"

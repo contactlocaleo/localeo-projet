@@ -4,9 +4,11 @@ Spécifications V1 du 5 octobre : [E70 — PIN](../../specifications/epic-70-val
 
 [Retour à la roadmap](../README.md)
 
-Sept EPIC sont classées à faire. Les bilans techniques et réserves de chaque backlog restent conservés.
+Neuf EPIC sont classées à faire. Les bilans techniques et réserves de chaque backlog restent conservés.
 
 - [EPIC 54 — Calendrier de l'Avent local](epic-54-calendrier-avent-local-backlog.md)
+- [EPIC 75 — Mots croisés assistés par l’IA](epic-75-mots-croises-assistes-ia-backlog.md) : nouveau jeu payant sur le modèle de la chasse, préparation et contrôle de grille, parcours mobile et lots ; 8 US, 18 critères cibles, arbitrages ouverts.
+- [EPIC 74 — Tombola publique sans commerçant](epic-74-tombola-publique-backlog.md) : modèle inclus au standard, QR public et support de stand, participation autonome et préparation d'une audience future ; cadrage du 22 octobre, 8 US et 16 critères cibles, arbitrages à traiter.
 - [EPIC 58 — Filtre annuel global Animation](epic-58-filtre-annuel-global-backlog.md)
 - [EPIC 62 — Validation des modifications de prestations](epic-62-validation-modifications-prestations-backlog.md)
 - [EPIC 64 — Rétractation en ligne](epic-64-parcours-retractation-en-ligne-backlog.md)

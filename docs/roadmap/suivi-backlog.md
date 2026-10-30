@@ -2,32 +2,32 @@
 
 Implémentations locales E70 et E72 vérifiées les 7–8 octobre 2026 : [E70 — PIN](../specifications/epic-70-validation-pin/README.md) et [E72 — salariés](../specifications/epic-72-acces-salaries/README.md). E70 est publiée avant le lot E72 ; les deux epics restent en cours jusqu’à leur recette de mise en service. Aucun déploiement effectué.
 
-Mise à jour du classement : 2026-10-18 (EPIC-71 à faire ; EPIC-65 et EPIC-69 terminées ; EPIC-55, EPIC-68, EPIC-70, EPIC-72 et EPIC-73 en cours)
+Mise à jour du classement : 2026-10-22 (EPIC-71, EPIC-74 et EPIC-75 à faire ; EPIC-65 et EPIC-69 terminées ; EPIC-55, EPIC-68, EPIC-70, EPIC-72 et EPIC-73 en cours)
 
 ## Synthese
 
 Évolution transverse du 29 septembre 2026 : [PWA-20260929 — installation et mise à jour](../specifications/installation-mise-a-jour-pwa.md), appliquée aux sept PWA existantes. Les états et clôtures historiques des EPIC restent inchangés ; preuves locales et recette appareil sont distinguées dans la spécification.
 
-- Identifiants EPIC suivis : 76 ; 73 du tronc commun et 3 identifiants applicatifs distincts.
-- EPICs a faire : 7 ; EPICs en cours : 5 (EPIC-55, EPIC-68, EPIC-70, EPIC-72 et EPIC-73).
+- Identifiants EPIC suivis : 78 ; 75 du tronc commun et 3 identifiants applicatifs distincts.
+- EPICs a faire : 9 ; EPICs en cours : 5 (EPIC-55, EPIC-68, EPIC-70, EPIC-72 et EPIC-73).
 - EPICs fusionnees : 1 (EPIC-61 vers EPIC-60).
 - EPICs terminees : 61 (59 du tronc commun et 2 applicatives) ; EPICs abandonnees : 2.
 - US / PRD detaillees dans le tableau historique : 415, jusqu'a `EPIC-45`.
 - Source prioritaire : fichier backlog dedie quand disponible, sinon `product-roadmap.md`.
 - Référence de pilotage : EPIC-55, EPIC-68, EPIC-70, EPIC-72 et EPIC-73 sont en cours. EPIC-65 est terminée après revue des dix critères ; EPIC-69 après validation CA-18 ; EPIC-66 après confirmation utilisateur. EPIC-54, EPIC-58, EPIC-62,
-  EPIC-64, EPIC-67, EPIC-71 et EPIC-MARKETPLACE-54 sont à faire. EPIC-47 est terminée,
+  EPIC-64, EPIC-67, EPIC-71, EPIC-74, EPIC-75 et EPIC-MARKETPLACE-54 sont à faire. EPIC-47 est terminée,
   clôture produit confirmée. EPIC-05 et EPIC-12 sont abandonnées ;
   EPIC-61 est fusionnée dans EPIC-60. Les autres EPIC du tronc commun sont terminées.
 - Classement et motifs : [index de la roadmap](README.md).
 - Le tableau detaille des US ci-dessous reste un historique consolide. Pour les
-  epics 46 a 73, les backlogs dedies portent le detail et le tableau `Sources
+  epics 46 a 75, les backlogs dedies portent le detail et le tableau `Sources
   consolidees` porte l'etat global courant.
 
 ### Repartition des EPICs par etat retenu
 
 | Etat | Nombre |
 | --- | ---: |
-| A faire | 7 |
+| A faire | 9 |
 | En cours | 5 |
 | Abandonne | 2 |
 | Fusionnee | 1 |
@@ -639,3 +639,5 @@ anciennes US restent historiques.
 | EPIC-71 | A faire | [backlog](a-faire/epic-71-crm-prospection-animation-coffrets-pro-backlog.md) |
 | EPIC-72 | En cours | [backlog](en-cours/epic-72-acces-salaries-validation-localeo-pro-backlog.md) |
 | EPIC-73 | En cours | [backlog](en-cours/epic-73-animation-et-ou-coffrets-backlog.md) ; 38 US, 63 critères, dix-huit arbitrages résolus, aucun ouvert recensé ; lots libres externes/numériques, modules (import, chasse, Web Push) et compléments SaaS (autonomie, accompagnement, valeur/coûts, réversibilité/reprise), cadrage des 14–15 octobre 2026 |
+| EPIC-74 | A faire | [backlog](a-faire/epic-74-tombola-publique-backlog.md) ; tombola publique standard sans commerçant, QR de participation, supports de stand et audience future ; 8 US, 16 critères cibles, six groupes d'arbitrages, cadrage du 22 octobre 2026 |
+| EPIC-75 | A faire | [backlog](a-faire/epic-75-mots-croises-assistes-ia-backlog.md) ; mots croisés assistés par l’IA, jeu payant sur le modèle de la chasse ; 8 US, 18 critères cibles, neuf groupes d’arbitrages dont un résolu ; décisions du 23 octobre : indices chez les commerçants, préparation Localeo validée par l’organisateur, grille correcte obligatoire pour le tirage |

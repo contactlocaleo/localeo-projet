@@ -249,6 +249,14 @@ L’audit renseigne action, acteur réel, organisation, commune, animation, mod�
 
 ## UX, emails et suivi
 
+Pour un lot externe, la projection de remise conserve trois états :
+`REMISE_DECLAREE` lorsqu'une remise active existe, `NON_REMIS` lorsqu'un refus
+explicite du gagnant est enregistré par l'événement `REFUS`, sinon
+`NON_RENSEIGNEE`. Contact, réponse, incident ou seule correction d'une remise
+ne prouvent pas une non-remise. Cette distinction utilise les faits existants,
+sans nouvel événement ni consommation de bon numérique ; un gain remplacé
+reste présenté comme remplacé.
+
 - **Gestionnaire** : trois branches explicites, stock disponible/affecté/attribué lisible, ordre visible avant publication. Les actions de correction, retrait, remplacement et retirage ont leur confirmation et leur motif. Un indicateur « Envoi en attente/Envoyé/Échec » ne remplace jamais l’état « Lot remis ». Le suivi externe affiche « Remise non renseignée » tant qu’aucune déclaration n’existe.
 - **Gagnant externe** : nom de l’animation, lot, organisateur, responsable et consignes, contact, délai annoncé de 14 jours sans réponse avant remplacement ; aucun faux QR à consommer.
 - **Gagnant numérique** : même contexte, plus le bon, son commerce de remise, échéance en heure de Paris et état courant. Le lien rejoint une entrée de carnet de type bon libre. Le QR personnel et « Faire valider par PIN » sont proposés lorsque leur canal est effectivement disponible ; le PIN reste saisi par le commerçant sur le téléphone du gagnant.

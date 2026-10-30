@@ -6,6 +6,10 @@ Commencer par le README du sujet, puis consulter ses règles, contrats et arbitr
 
 ## Priorités en cours et à cadrer
 
+- **À faire : EPIC 75**, [Mots croisés assistés par l’IA](../roadmap/a-faire/epic-75-mots-croises-assistes-ia-backlog.md) : nouveau jeu payant ; indices chez les commerçants, préparation Localeo validée par l’organisateur et grille correcte obligatoire pour le tirage confirmés le 23 octobre. 8 US et 18 critères cibles ; offre et modalités restantes à arbitrer, aucun dossier de spécification détaillée à ce stade.
+
+- **À faire : EPIC 74**, [Tombola publique sans commerçant](../roadmap/a-faire/epic-74-tombola-publique-backlog.md) : cadrage du 22 octobre, 8 US et 16 critères cibles ; QR public et modèle standard sans achat ni validation commerçante, supports de stand et audience future. Arbitrages explicites ; aucun dossier de spécification détaillée créé à ce stade.
+
 - **En cours : EPIC 73**, [Animation et/ou Coffrets](epic-73-animation-et-ou-coffrets/README.md), spécification détaillée V1 du 17 octobre : 38 US, 63 critères, 147 décisions ; lots libres/QR/PIN, périmètres commerçants, modules/import/communication, parcours SaaS, migrations et reprise. Contrats et preuves prévus ; réalisation locale engagée le 18 octobre, preuves dans le suivi du dossier.
 
 - **À faire : EPIC 71**, [CRM de prospection](epic-71-crm-prospection/README.md), conception V0.1 du 9 octobre : parcours, droits, gain, import XLSX, carte et rattachements ; 24 critères reliés aux preuves prévues, arbitrages restants explicites.

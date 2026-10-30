@@ -2,15 +2,15 @@
 
 Implémentations locales E70 et E72 vérifiées les 7–8 octobre 2026 : [E70 — PIN](../specifications/epic-70-validation-pin/README.md) et [E72 — salariés](../specifications/epic-72-acces-salaries/README.md). E70 est publiée avant le lot E72 ; les deux epics restent en cours jusqu’à leur recette de mise en service. Aucun déploiement effectué.
 
-## État global consolidé au 18 octobre 2026
+## État global consolidé au 22 octobre 2026
 
-Le tronc commun comprend 73 identifiants : 59 epics terminees, 6 a faire,
+Le tronc commun comprend 75 identifiants : 59 epics terminees, 8 a faire,
 5 en cours, 2 abandonnees et 1 fusionnee. L'Epic 61 est absorbee par l'Epic 60.
 Les documents sont ranges par etat dans l'[index de la roadmap](README.md).
 
 | Etat | Epics |
 | --- | --- |
-| A faire | `EPIC-54`, `EPIC-58`, `EPIC-62`, `EPIC-64`, `EPIC-67`, `EPIC-71` |
+| A faire | `EPIC-54`, `EPIC-58`, `EPIC-62`, `EPIC-64`, `EPIC-67`, `EPIC-71`, `EPIC-74`, `EPIC-75` |
 | En cours | `EPIC-55`, `EPIC-68`, `EPIC-70`, `EPIC-72`, `EPIC-73` |
 | Termine | 59 epics : toutes les autres epics de `EPIC-01` a `EPIC-60`, et `EPIC-63`/`EPIC-65`/`EPIC-66`/`EPIC-69`, hors `EPIC-05` et `EPIC-12` |
 | Abandonne | `EPIC-05` : QR commercant remplace par l'Epic 10 ; `EPIC-12` : flux manuel decommissionne par l'Epic 39 |
@@ -25,7 +25,7 @@ un seul fichier par sujet. Trois identifiants applicatifs complètent ce tronc :
 | [EPIC-MARKETPLACE-54](a-faire/epic-marketplace-54-harmonisation-identite-visuelle-marketplace-backlog.md) | Identité visuelle ; distinct du calendrier de l'Avent 54 | À faire (classement courant ; implémentation locale documentée, revue et recette attendues) |
 | [EPIC-PRES-CONTENU-001](terminees/epic-animation-edition-prestations.md) | Édition directe des prestations ; le futur sas reste dans l'EPIC 62 | Terminée (parcours existant) |
 
-Le total consolidé est de **76 identifiants : 61 terminés, 8 à faire, 4 en cours,
+Le total consolidé est de **78 identifiants : 61 terminés, 9 à faire, 5 en cours,
 2 abandonnés et 1 fusionné**. L'ancien numéro local Marketplace 53 (pagination)
 est rattaché à l'EPIC 57, sans ajouter d'identifiant ni le confondre avec la tombola.
 
@@ -37,6 +37,19 @@ Le classement du 15 septembre corrige les anciens libelles globaux des Epics
 la confirmation produit de l'utilisateur le 15 septembre 2026.
 
 Derniere evolution suivie :
+
+- [EPIC 75 — Mots croisés assistés par l’IA](a-faire/epic-75-mots-croises-assistes-ia-backlog.md) :
+  cadrage du 22 octobre, 8 US et 18 critères cibles ; nouveau jeu payant sur le modèle
+  de la chasse, préparation assistée, contrôle de grille et expérience mobile ;
+  décisions du 23 octobre : indices chez les commerçants, préparation Localeo
+  validée par l’organisateur, grille correcte obligatoire pour le tirage.
+  Offre et modalités restantes à arbitrer. État À faire, sans implémentation.
+- [EPIC 74 — Tombola publique sans commerçant](a-faire/epic-74-tombola-publique-backlog.md) :
+  cadrage du 22 octobre, 8 US et 16 critères cibles ; animation standard accessible
+  par QR public, notamment sur un stand, sans achat ni validation commerçante.
+  Tirage et dotation réutilisent les socles existants ; inscription aux prochaines
+  communications distincte de la participation. Six groupes d'arbitrages ouverts,
+  sans spécification détaillée ni implémentation ; E53 conserve son comportement.
 
 - [EPIC 73 — Localeo Animation et/ou Coffrets](en-cours/epic-73-animation-et-ou-coffrets-backlog.md) :
   cadrage des 14–15 octobre, 38 US et 63 critères ; vente séparée/combinée, lots libres avec
