@@ -1,5 +1,12 @@
 # E73 — Périmètres commerçants et parcours SaaS
 
+Décision du **30 octobre 2026 — E73-EVO-LIVE-UNIQUE** : les attentes de site
+public des sections ci-dessous sont remplacées par
+[Localeo Live comme entrée unique](localeo-live-entree-unique.md). Le domaine
+`animations.localeo.city` sert Live ; la surface marketplace Animation est retirée,
+avec compatibilité des anciens accès et reprise volontaire du carnet.
+La gestion organisateur et les règles métier restent inchangées.
+
 Spécification cible du 17 octobre 2026. Source des choix : [backlog E73](../../roadmap/en-cours/epic-73-animation-et-ou-coffrets-backlog.md), notamment DEC-42, 51 à 59, 109 à 119, 125 à 134 et 138 à 144. Ce document couvre US11 à 13, US23 à 26, US29 à 33 et US35 ; il ne déclare ni leur implémentation ni leur déploiement. Les conventions communes, lots et modules sont décrits dans [architecture et contrats](architecture-contrats.md), [dotation et lots](dotation-lots.md) et [modules et souscriptions](modules-souscriptions-import-communication.md).
 
 ## 1. Existant vérifié et changements nécessaires

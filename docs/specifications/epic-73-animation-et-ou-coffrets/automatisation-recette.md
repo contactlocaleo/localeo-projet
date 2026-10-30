@@ -13,6 +13,58 @@ hébergés ; voir [le bilan de l’évolution](suivi-implementation.md#évolutio
 
 ### Reprise des parcours principaux du 30 octobre 2026
 
+#### Compléments essentiels : cohérence Live et absence de double comptage
+
+**Le total reste 40/130 scénarios entièrement validés ; 90 restent non
+intégralement couverts.** Ce passage complète des variantes de RM-21-03 et
+RM-22-01 sur le clone isolé ; aucune nouvelle validation complète annoncée.
+
+- **RM-22-01 : onze contrôles réussis** à 320/1280 px. Le reçu normal
+  `inscrire-v4` (201) fournit le lien participant ; Live retrouve exactement
+  les mêmes participant, animation, gain, bon et état CONSOMME que les
+  projections ERP/Support, Animation et Pro déjà rapprochées. Aucun accès
+  extrait de base ou d'outbox. Les initialisations techniques Live sont bloquées.
+  L'accès Live légitime au gain Coffrets reste à préparer.
+- **RM-21-03 : rescans responsable et salarié vérifiés.** Les deux bons déjà
+  consommés sont reconnus avec les mêmes validation et version, sans bouton
+  de nouvelle remise. Les sept compteurs sont rapprochés des données métier
+  et affichés dans le bilan avant/après : 3 inscrits, 3 parcours commencés,
+  3 terminés, 3 passages, 3 gagnants, 2 lots remis, 0 parcours non terminé.
+  Aucune nouvelle consommation ni revenu déduit. Une relecture sans scan
+  confirme tous les faits inchangés. Il s'agit de consommation de bons ;
+  les nouvelles validations de parcours QR/PIN restent une variante distincte.
+- **RM-21-03 : remplacement et bilan contemporain vérifiés** sur une autre
+  cohorte externe dédiée, après REFUS synthétique par le formulaire normal.
+  Douze contrôles groupés et 21 valeurs de bilan à trois stades confirment
+  5 inscrits, 5 passages, 3 gagnants courants et 0 remise inchangés.
+  Le premier suppléant est utilisé, l'ancienne attribution reste REMPLACE ;
+  les deux autres gains et le second suppléant sont conservés. Reçu durable,
+  auteur du refus, motif et versions concordent. Une commande REFUS et un
+  remplacement acceptés, sans rejeu. Les validations de parcours QR/PIN et
+  leurs rescans restent à couvrir ; RM-21-03 reste non barré.
+
+Les incidents du harnais restent conservés : appel de viewport sur le mauvais
+objet avant toute lecture Live, puis comparaison intégrale trop stricte des
+réponses de bilan. Seuls `generated_at` et `mesures.observedAt` se renouvellent ;
+les autres champs sont comparés strictement. Lors de la relecture, une tentative
+GET de police Google par le portail a été bloquée. Ce blocage est tracé séparément
+des commandes métier ; aucune absence de tentative externe n'est revendiquée.
+Les échecs techniques initiaux ne sont ni supprimés ni transformés en succès.
+
+Preuves privées :
+`essentiels-rm2201-20261030c-live-numerique-reprise1-prive.json` et
+`essentiels-rm2103-20261030c-rescan-qualification.json`, avec les instantanés
+et incidents référencés. Revue indépendante de la provenance du reçu, des deux
+acteurs Pro et de l'égalité des faits métier. Aucun correctif produit démontré
+sur ces compléments ; aucun fichier applicatif ni TEST partagé modifié.
+Le remplacement conserve quinze pièces dans
+`essentiels-rm2103-20261030c-remplacement-preuves-figees.json` ; son premier
+essai a été arrêté pour encodage du harnais, avant toute commande. La reprise
+vérifie le même état initial avant d'agir. Synthèse privée de ce passage :
+`passage-essentiel-20261030c-synthese.json`. Le backend réellement servi reste
+`1.0.0+3720a08` avec les 21 correctifs figés revérifiés ; le nouveau HEAD des
+applications poussé précédemment n'est pas déployé dans ce clone.
+
 #### Nouveau passage essentiel : activation et concurrence
 
 **Bilan courant : 40/130 scénarios entièrement validés ; 90 restent non

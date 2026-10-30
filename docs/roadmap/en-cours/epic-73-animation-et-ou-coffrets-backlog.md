@@ -1,5 +1,16 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+Évolution **E73-EVO-LIVE-UNIQUE**, demandée le **30 octobre 2026** : Live devient
+l'entrée publique des animations sur `animations.localeo.city`. Remplacement de
+l'ancienne surface marketplace Animation, reprise du carnet sans duplication,
+découverte multi-communes et navigation mobile Découvrir / Mes participations /
+Mes communes. L'utilisateur confirme l'absence de nouveau compte habitant.
+Les critères `E73-EVO-LIVE-01` à `12`, contrats et preuves sont dans la
+[spécification canonique](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md).
+Cette évolution remplace la cible d'interface E73-EVO-DOMAINES/UX-PUBLIC,
+conserve le portail de gestion et ne change pas le statut **En cours**.
+La recette DNS/TLS reste distincte de l'implémentation locale.
+
 ## Références
 
 - Identifiant : **EPIC-73**, vérifié dans la roadmap commune et les identifiants applicatifs ; aucun cadrage concurrent identifié.

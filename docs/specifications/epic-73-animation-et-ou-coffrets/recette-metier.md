@@ -2171,6 +2171,33 @@ Les bilans avant/après une nouvelle validation QR/PIN et un remplacement
 restent à vérifier ; scénario non barré. Preuve
 `bilans-remises-principal-preuves-figees.json`.
 
+Complément essentiel du 30 octobre 2026 : les QR des deux bons déjà consommés
+sont saisis à nouveau dans Pro par le responsable puis le salarié. Les deux
+rescans retrouvent les mêmes consommation et version, sans proposer une nouvelle
+remise. Les sept indicateurs sont rapprochés des participants, attributions et
+consommations, puis relus à l'identique dans le bilan avant/après ; aucun revenu
+déduit. Les seules différences des réponses sont les dates techniques de génération
+et d'observation du bilan. Une nouvelle relecture confirme tous les autres faits
+strictement inchangés, sans rejouer de scan. Preuve privée
+`essentiels-rm2103-20261030c-rescan-qualification.json` ; les incidents du harnais
+restent conservés, dont une police externe demandée par le portail et bloquée.
+Ce contrôle de bons ne constitue pas une nouvelle validation de parcours QR/PIN,
+ni une lecture optique ; RM-21-03 reste partiel et non barré.
+
+Sur une autre cohorte externe dédiée avec réserve disponible, un refus
+synthétique est enregistré normalement puis un unique remplacement est accepté.
+Douze contrôles groupés rapprochent les états et 21 valeurs du bilan à trois
+stades : avant, après refus, après remplacement. Les 5 inscrits, 5 parcours
+commencés et terminés, 5 passages, 3 gagnants courants et 0 lot remis restent
+identiques. L'ancien gain REMPLACE est conservé : quatre attributions historiques
+ne deviennent pas quatre gagnants. Le suppléant de rang 4 est utilisé ; celui de
+rang 5, les deux autres gains et leurs événements restent inchangés. Auteur du
+refus, motif, versions et reçu de remplacement sont rapprochés. Aucun rejeu.
+Preuve privée `essentiels-rm2103-20261030c-remplacement-preuves-figees.json`,
+quinze pièces scellées ; incident d'encodage initial conservé avant toute commande.
+Les nouvelles validations de parcours QR/PIN et leurs rescans avec bilans
+contemporains restent à exécuter ; scénario toujours non barré.
+
 ### ~~RM-21-04~~ — **Réussi sur le clone isolé**
 
 **Scénario.** ~~Après clôture, répondre dans Live avec note 1 puis 5 et commentaire facultatif ; tester 0/6, absence de réponse et accès avant clôture.~~
@@ -2225,6 +2252,15 @@ active du même bon, état VALIDEE et canal QR_PRINCIPAL ; l’interface indique
 d’inscription 201 avec les mêmes références. Aucune écriture métier transmise.
 L’accès légitime Live aux deux autres échantillons n’est pas établi ; scénario
 non barré. Preuve `essentiels-rm2201-preuves-20261030.json`.
+
+Nouveau complément du 30 octobre 2026 : **onze contrôles réussis** retrouvent
+dans Live le même gain numérique consommé à 320 et 1280 px, avec les mêmes
+participant, animation, bon et libellé que les projections déjà rapprochées.
+Le lien provient du reçu normal d'inscription 201 conservé (`inscrire-v4`),
+sans extraction depuis la base ou une outbox. Aucune écriture métier ;
+l'enregistrement technique Live est bloqué. Preuve privée
+`essentiels-rm2201-20261030c-live-numerique-reprise1-prive.json`.
+L'accès Live légitime au gain Coffrets reste à préparer ; scénario toujours partiel.
 
 ### ~~RM-22-02~~ — **Réussi sur le clone isolé**
 

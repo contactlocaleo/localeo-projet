@@ -2,6 +2,81 @@
 
 Début : **18 octobre 2026**. [Spécification](README.md), [backlog](../../roadmap/en-cours/epic-73-animation-et-ou-coffrets-backlog.md), [matrice des 63 critères et preuves](verification-livraison.md). Objectif : les 38 US, dans les dix lots demandés. Les lignes ci-dessous ne valent pas acceptation tant que les preuves correspondantes ne sont pas enregistrées.
 
+## Évolution locale du 30 octobre 2026 — E73-EVO-LIVE-UNIQUE
+
+Demande : [Live comme entrée unique](localeo-live-entree-unique.md), à
+`animations.localeo.city`, avec une UX mobile d'abord. Arbitrage utilisateur :
+aucun nouveau compte habitant ; suivi des communes sur l'appareil.
+
+Implémentation dans `localeo-marketplace`, commit `0a2de86` (base `8d42619`) :
+navigation basse Découvrir / Mes participations / Mes communes ; sélection
+multiple persistée, GPS volontaire et repli manuel, contexte de commune partagé
+sans remplacement silencieux des préférences. Catalogue public séparé en deux
+périodes, pages indépendantes et deux lectures concurrentes, résultats progressifs,
+erreurs partielles et sélection temporaire en cas de stockage refusé.
+
+L'ancien catalogue et `surface=animations` quittent l'interface marketplace.
+La configuration choisit l'origine Live ; seuls les contextes publics autorisés
+sont repris. Les liens des menus, cartes, recherche, agenda et présentation
+Animation utilisent cette destination. L'inscription réutilise son formulaire
+et ses commandes sous le scope `/live/`, avec maintien des liens personnels.
+Avant changement d'origine avec un carnet, la reprise volontaire conserve les
+identifiants et accès sans effacement ni nouvelle inscription. L'assistant
+conserve aussi la fiche/inscription, commune et source jusqu'à la destination.
+
+La fiche reste consultable publiquement si l'enrichissement d'une installation
+existante échoue. Aucun nouveau contrat, compte, rôle, schéma, migration SQL,
+référentiel, notification ou recommandation. Pas de changement backend, ERP,
+batch, Pro ou portail organisateur ; les modèles d'anciens liens restent acceptés.
+Les fixtures frontend couvrent les données existantes sans génération réelle.
+
+Le test de stockage bloqué a reproduit et permis de corriger
+[ANO-MPL-E73-LIVE-01](../../roadmap/anomalies/marketplace.md) : la lecture locale
+indicative du carnet ne doit pas masquer un reçu personnel valide. L'inscription
+reste unique et le réessai ne porte que sur l'écriture locale. Les assertions
+de succès, reçu et QR sont conservées. Les attentes de navigation remplacées
+sont adaptées à cette décision produit ; les assertions de dates des coffrets
+utilisent le format français existant du rendu, avec la même échéance précise.
+
+Revue indépendante : stockage refusé et rendu progressif corrigés, contexte
+conservé dans l'assistant, règles de capacité/origine et autorisations serveur
+préservées. L'en-tête mobile conserve la marque et les actions utiles ; l'action
+d'installation reste dans les réglages. Les captures à 320/390 px servent à
+vérifier l'absence de débordement et les cibles tactiles, pas une tenue en charge.
+La revue visuelle à 200 % a révélé des libellés tronqués dans le menu bas :
+hauteur adaptable et réserve mesurée sous le contenu corrigent ce défaut.
+Le test contrôle désormais les limites complètes des libellés et la réserve.
+
+| Critères | Preuves locales et limites |
+| --- | --- |
+| LIVE-01/02/03/06/11 | `live-discovery-unique.spec.cjs`, `live-followed-communes.test.cjs` : lecture publique, communes, périodes, pagination, GPS, stockage, contexte, mobile. |
+| LIVE-04/05/08 | `live-carnet.spec.cjs`, `live-animation-surface.spec.cjs`, sauvegarde/import : inscription et reprise, plusieurs participations, QR, actualisation, anciens Coffrets. |
+| LIVE-09/10 | `live-entry-redirects.spec.cjs`, `live-entry-routing.test.cjs` : anciennes entrées, contexte, destination autorisée, assistant et liens directs. |
+| LIVE-07/12 | Fallback SPA et build locaux contrôlés ; DNS/TLS, domaines hébergés, installation PWA réelle et recette de bascule à exécuter avant activation. |
+
+Validation finale : **53 tests navigateur réussis** en une seule série séquentielle
+sur l'arbre final (`tmp/live-unique-validation-complete.log`, 7,1 minutes),
+**125 tests Node de sécurité** et **13 tests serveur** réussis ; ESLint sur les
+sources et tests touchés réussi. Les scénarios couvrent géolocalisation et replis,
+320/390 px, texte à 200 %, navigation clavier, réduction des mouvements,
+détail public sans installation disponible, inscription sans nouveau compte,
+stockage refusé, avis personnels, export/import du carnet, anciens accès
+Coffrets et liens directs vers Live. Deux séries parallèles ont dépassé le délai
+de cinq secondes sur le chargement initial ; la reprise utilise le worker unique
+prévu par la configuration du dépôt, sans changer les assertions ni les délais.
+La revue indépendante des hauteurs et des liens est favorable.
+
+Contrôles documentaires : **97 guides, 1 065 liens locaux, aucune erreur** ;
+**130 sources exportées vérifiées**. `git diff --check` réussi dans les deux dépôts.
+Les journaux sont conservés dans `localeo-marketplace/tmp/` et les captures
+relues dans `tmp/live-unique-preuves/` (sorties locales ignorées par Git).
+
+Les tests utilisent un build isolé, des API simulées et un garde réseau ; ils
+ne constituent pas une recette sur les domaines hébergés. Aucun scénario
+historique de recette n'est barré par ces tests d'évolution. Le statut E73 reste
+**En cours**. Les commits et leur push sont demandés séparément après cette
+validation. Aucun déploiement n'est effectué ; le clone métier figé reste inchangé.
+
 ## Correction locale du 30 octobre 2026 — E73-EVO-UX-ERP
 
 Demande : une entrée par fonction dans Animation ERP, en-têtes et retours

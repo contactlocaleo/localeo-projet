@@ -7,6 +7,25 @@ Les accents et formulations des anciennes notes sont normalisés sans changer le
 
 ## Signalement identifié
 
+### ANO-MPL-E73-LIVE-01 — Reprise du carnet après inscription et stockage refusé
+
+Reproduit le **30 octobre 2026**, pendant E73-EVO-LIVE-UNIQUE, avec le scénario
+`live-carnet.spec.cjs` « inscription et enregistrement avec stockage à reprendre ».
+Une inscription confirmée par le serveur est suivie d'un échec de la transaction
+IndexedDB du carnet. L'écran affiche l'erreur technique au lieu de proposer de
+reprendre uniquement l'enregistrement local.
+
+Cause : la lecture du carnet utilise une transaction de nettoyage en écriture.
+Son échec interrompt aussi la prévisualisation du reçu personnel, alors que ce
+dernier est valide. Le correctif limite le caractère bloquant de cette lecture
+indicative ; la lecture serveur reste obligatoire et l'écriture du carnet garde
+son erreur explicite et sa reprise. Aucun nouveau POST d'inscription au réessai.
+Le test conserve ses assertions sur l'unique inscription, le reçu, le carnet et
+le QR ; le résultat de rejeu est consigné dans le
+[suivi E73](../../specifications/epic-73-animation-et-ou-coffrets/suivi-implementation.md).
+Correction locale ; aucun changement de contrat, migration, données métier,
+fournisseur, rôle ou déploiement. La synchronisation de compte reste hors périmètre.
+
 | Identifiant | Périmètre | Description | Suivi conservé |
 | --- | --- | --- | --- |
 | ANO-MPL-01 | Global | Les animations en cours et à venir ne s'affichent pas sur la Marketplace, notamment sur l'environnement de recette. | À valider |

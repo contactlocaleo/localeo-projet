@@ -1,5 +1,13 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+Évolution du **30 octobre 2026 — E73-EVO-LIVE-UNIQUE** : Localeo Live devient
+l'entrée publique unique à `animations.localeo.city`, avec découverte multi-communes,
+mes participations et mes communes, en priorité mobile. L'ancienne surface
+marketplace Animation est remplacée avec reprise volontaire du carnet et maintien
+des anciens accès. Aucun nouveau compte habitant. Les
+[douze critères et impacts](localeo-live-entree-unique.md) remplacent les attentes
+d'interface publique des évolutions ci-dessous, sans changer leurs preuves historiques.
+
 Retours UX du **30 octobre 2026 — E73-EVO-UX-PUBLIC** : géolocalisation
 volontaire, identité commune aux Coffrets et carnet Live adapté à la surface
 Animation. L’[analyse des parcours](perimetres-parcours-saas.md) distingue les

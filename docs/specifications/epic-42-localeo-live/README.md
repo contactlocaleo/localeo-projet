@@ -1,5 +1,11 @@
 # Specifications Epic 42 - Localeo Live
 
+Évolution portée par l'epic 73 le **30 octobre 2026 — E73-EVO-LIVE-UNIQUE** :
+[découverte et participations depuis Live](../epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md)
+à `animations.localeo.city`, navigation mobile et communes multiples. Aucun
+nouveau compte habitant ; reprise volontaire des carnets entre origines.
+Le statut terminé et les bilans historiques d'E42 ne valident pas cette évolution.
+
 > Suivi produit au 18 septembre 2026 : **Terminée** — [backlog de référence](../../roadmap/terminees/epic-42-localeo-live-grand-public-backlog.md). Les bilans techniques datés ci-dessous conservent leur portée historique.
 
 > Consolidation des exemplaires backend et Marketplace : un dossier commun,
