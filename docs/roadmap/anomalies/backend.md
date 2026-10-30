@@ -1,5 +1,47 @@
 # Registre des anomalies
 
+## ANO-BE-E73-RECHERCHE-PROJECTION — Recherche globale indisponible sur TEST
+
+Signalement du **30 octobre 2026**, corrélation fournie
+`LOC-0a04e2ae-880a-4d6f-bbb6-f436722d6809`. Reproduction publique sans
+authentification sur `test-api.localeo.city` :
+`GET /public/commercialisation/recherche?q=animation` répond **503**,
+`CATALOGUE_ANIMATION_EN_PREPARATION`
+(`LOC-37da267c-e494-4b91-a4cf-ba448b4af398`). Même refus avec les termes
+`Latresne` et `coffret`. La liste
+`GET /public/animation-locale/animations?page_size=1` répond **200**
+(`LOC-6d6affd5-24ea-4719-bbfc-975e3a70dc33`).
+
+Dans le backend local `3a6f930`, ce code est exclusivement levé par
+`ServiceCatalogueAnimationsPubliques.suggestions` lorsqu'une animation du
+périmètre public possède `nom_recherche = NULL`. La migration `v276` ajoute la
+projection et ses index sans remplir l'historique ; la reprise bornée existante
+reste une étape d'exploitation nécessaire. Les nouveaux compteurs publics ne
+déclenchent pas ce code. La base et les journaux privés de TEST n'ont pas été
+consultés : le nombre de lignes concernées, leur provenance et le SHA déployé
+restent à constater sur le service.
+
+La [procédure de reprise](../../exploitation/exploitation/parcours-plateforme-animation.md#réparer-catalogue_animation_en_preparation)
+précise désormais les commandes de simulation et d'application par lots dans
+le Shell du backend concerné, puis le contrôle de recherche HTTP 200. Le garde
+503 est conservé pour éviter des résultats incomplets. Aucun changement de
+contrat, règle métier, participation, schéma ou migration n'est requis ; aucune
+preuve ne permet d'attribuer les lignes historiques au générateur.
+
+**Reprise distante non exécutée** : l'erreur reproduite reste à lever sur TEST
+avec l'outil de maintenance. Les modifications locales concernent la procédure,
+ce suivi et le test PostgreSQL du retour de la recherche après reprise complète.
+
+Preuves locales sur `3a6f930` avec les deux assertions supplémentaires :
+**19 tests réussis**, incluant une vraie base PostgreSQL jetable, le refus
+initial et après reprise partielle, le retour des résultats après reprise
+complète, la simulation sans écriture, la conservation des versions/dates et
+le contrat HTTP 503. La base locale a été arrêtée après vérification.
+**620 contrôles d'architecture réussis**. Les guides, leurs liens et les
+130 sources exportées sont validés ; `git diff --check` réussit dans les deux
+dépôts touchés. Test enregistré dans le commit backend `baa559c`, à la demande
+de l'utilisateur. Aucun déploiement ou réparation distante vérifié.
+
 ## ANO-BE-E73-CORS-COFFRETS — Origine Coffrets TEST absente du CORS
 
 Signalement du **30 octobre 2026** depuis `https://test-coffrets.localeo.city`.
