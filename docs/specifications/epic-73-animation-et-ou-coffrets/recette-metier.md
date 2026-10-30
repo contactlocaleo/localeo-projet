@@ -14,6 +14,12 @@ Références : [spécification](README.md), [backlog et arbitrages](../../roadma
 
 ## Préparer la campagne de recette
 
+Décision du 30 octobre, `E73-EVO-DOMAINES` : site public `animations.localeo.city`,
+gestion `gestion-animations.localeo.city`, marketplace Coffrets indépendante.
+En TEST : `test-animations`, `test-gestion-animations` et `test-marketplace`.
+Configurer les services distincts avant leur recette hébergée ; les preuves
+historiques conservent leurs URL et ne valident pas cette bascule.
+
 ### Conditions communes de démarrage
 
 Cocher ces conditions avant le premier test. Un contrôle manquant place les scénarios dépendants en **Bloqué**, pas en Échec ni en Validé.
@@ -86,7 +92,7 @@ Chaque test dispose ci-dessous d’une marche numérotée. Lire d’abord les pr
 
 **Marche à suivre**
 
-Ce parcours documente le test déjà déclaré **Réussi** le 22 octobre 2026 ; son ajout ne signifie pas une nouvelle exécution.
+Ce parcours documente le test déjà déclaré **Réussi** le 22 octobre 2026. Une nouvelle exécution automatisée sur TEST a également réussi le **23 octobre 2026** ; voir le [bilan d’automatisation](automatisation-recette.md).
 
 1. Prendre l’adresse du compte organisateur A et une adresse synthétique inconnue de Localeo, toutes deux sous le contrôle de l’équipe de recette.
 2. Ouvrir la connexion du portail Animation sans session active, choisir **Mot de passe oublié**, saisir l’adresse connue puis **Demander un lien**.
@@ -103,7 +109,7 @@ Ce parcours documente le test déjà déclaré **Réussi** le 22 octobre 2026 ; 
 
 **Marche à suivre**
 
-Ce parcours documente le test déjà déclaré **Réussi** le 22 octobre 2026 ; son ajout ne signifie pas une nouvelle exécution.
+Ce parcours documente le test déjà déclaré **Réussi** le 22 octobre 2026. Une nouvelle exécution automatisée sur TEST a également réussi le **23 octobre 2026** ; voir le [bilan d’automatisation](automatisation-recette.md).
 
 1. Prendre le compte organisateur A, ses deux sessions déjà ouvertes dans deux navigateurs et un troisième navigateur connecté avec l’autre compte indépendant.
 2. Ouvrir un lien de récupération valide du compte A ; saisir deux fois un nouveau mot de passe conforme dans le formulaire, puis **Enregistrer mon mot de passe**.
@@ -129,9 +135,9 @@ Ce parcours documente le test déjà déclaré **Réussi** le 22 octobre 2026 ; 
 
 **Résultat attendu.** Lien utilisable seulement avant expiration ; nouveau lien demandé par le parcours normal, sans perte de l’appartenance.
 
-### RM-01-04
+### ~~RM-01-04~~ — **Réussi**
 
-**Scénario.** Changer le mot de passe connecté : d’abord avec une preuve d’identité erronée, puis correcte.
+**Scénario.** ~~Changer le mot de passe connecté : d’abord avec une preuve d’identité erronée, puis correcte.~~
 
 **Marche à suivre**
 
@@ -142,10 +148,15 @@ Ce parcours documente le test déjà déclaré **Réussi** le 22 octobre 2026 ; 
 5. Solliciter une page privée dans les anciennes sessions du compte A : chacune doit demander une reconnexion ; se reconnecter avec le nouveau mot de passe.
 6. Vérifier que l’autre compte conserve sa session et ses droits ; consigner les résultats sans enregistrer les mots de passe.
 
-**Résultat attendu.** Aucun changement sur refus ; succès explicite ensuite et reconnexion requise sur les anciennes sessions du seul compte concerné.
+**Résultat attendu.** ~~Aucun changement sur refus ; succès explicite ensuite et reconnexion requise sur les anciennes sessions du seul compte concerné.~~
 
 
 Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026.
+
+Succès automatisé sur TEST de **RM-01-01, RM-01-02 et RM-01-04** le
+**23 octobre 2026**, pour la campagne `e73-20261022-e856fb` ; preuves et limites
+dans le [bilan d’automatisation](automatisation-recette.md). RM-02-06 reste
+partiel et n’est pas barré.
 
 ## F02 — Organisation, équipe et délégations
 
@@ -219,9 +230,9 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 
 **Résultat attendu.** Refus dès la prochaine requête ; A2 non accordée implicitement ; tâches non commencées nécessitant le droit suspendues. Les traitements déjà engagés suivent leur continuité contrôlée, sans redonner la main au compte révoqué.
 
-### RM-02-05
+### ~~RM-02-05~~ — **Réussi**
 
-**Scénario.** Proposer un transfert de responsabilité ; tenter le départ du dernier responsable avant acceptation ; faire accepter le successeur actif.
+**Scénario.** ~~Proposer un transfert de responsabilité ; tenter le départ du dernier responsable avant acceptation ; faire accepter le successeur actif.~~
 
 **Marche à suivre**
 
@@ -232,7 +243,9 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 5. Avec le successeur connecté, ouvrir la proposition dans **Compte et équipe**, choisir **Accepter la responsabilité** et confirmer.
 6. Actualiser les deux sessions et faire relire l’historique : la responsabilité doit avoir basculé après acceptation, avec auteur et date, et A doit conserver un responsable actif.
 
-**Résultat attendu.** Ancien responsable maintenu avant acceptation, départ bloqué ; transfert tracé après acceptation, aucune organisation sans responsable.
+**Résultat attendu.** ~~Ancien responsable maintenu avant acceptation, départ bloqué ; transfert tracé après acceptation, aucune organisation sans responsable.~~
+
+**Exécution automatique réussie du 23 octobre 2026.** Après correction de l’attente du frontend, un parcours inverse distinct sur l’organisation dédiée T de la campagne `e73-20261022-e856fb` a vérifié proposition en attente, refus du départ du dernier responsable, acceptation, droits des deux sessions et responsable unique. Les traces ERP de proposition et d’acceptation ont été rapprochées par auteur, date et version. Le premier rapport en échec reste conservé. Voir le [suivi d’automatisation](automatisation-recette.md#reprise-du-23-octobre).
 
 ### RM-02-06
 
@@ -277,6 +290,24 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 
 **Résultat attendu.** Seuls les opérateurs ERP autorisés peuvent décider ; auteur et motif visibles. Le commerce ne s’active pas lui-même.
 
+Complément essentiel du 30 octobre 2026, **partiel sur le clone isolé** :
+vingt-six contrôles réussis. Un commerce existant, dont la connexion propriétaire
+Pro est réellement vérifiée, reçoit une convention explicitement fictive ; scan
+ClamAV réel (PDF accepté, témoin EICAR détecté) et statut serveur CLEAN constatés.
+Le Backoffice déjà habilité revoit, demande puis active Animation : version
+1 → 4, auteurs et motifs rapprochés avec l’historique. Le mode HISTORIQUE est
+conservé : ce commerce ne constitue pas un nouveau profil moderne mixte.
+État et ouverture Coffrets, prestations, modèles, engagements, six reversements
+et capacités Pro restent identiques ; le menu Pro est relu après chargement.
+Sur une nouvelle fixture dédiée, la demande Admin est acceptée, puis
+l’activation refusée 409 sans effet faute de convention et d’accès propriétaire
+qualifiés. Aucun prérequis n’est attesté sans preuve. Activation Admin, refus
+Backoffice sans habilitation et décision depuis Pro restent non exécutés :
+scénario non barré. La base de signatures antivirus préexistante est signalée
+ancienne de plus de sept jours ; aucune actualisation revendiquée. Preuves
+`essentiels-rm0301-preuves-finales/index.json`, dix-huit pièces figées et revue
+indépendante sans écart bloquant pour ce statut partiel.
+
 ### RM-03-02
 
 **Scénario.** Ajouter Coffrets à un commerce Animation dont les compléments Coffrets sont incomplets ; terminer les prérequis puis activer.
@@ -292,9 +323,9 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 
 **Résultat attendu.** Coffrets reste en préparation jusqu’à validation ; Animation continue de fonctionner ; le diagnostic indique les compléments attendus.
 
-### RM-03-03
+### ~~RM-03-03~~ — **Réussi sur le clone isolé**
 
-**Scénario.** **Accompagné :** deux opérateurs modifient la même fiche depuis des versions ouvertes avant la première modification.
+**Scénario.** ~~**Accompagné :** deux opérateurs modifient la même fiche depuis des versions ouvertes avant la première modification.~~
 
 **Marche à suivre**
 
@@ -305,7 +336,28 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 5. Actualiser la seconde fiche, contrôler la première décision et, si nécessaire au jeu, soumettre à nouveau une décision devenue explicite après cette relecture.
 6. Relire l’historique avec le référent : états, ordre, auteurs et motifs doivent correspondre aux seules décisions effectivement acceptées.
 
-**Résultat attendu.** Le second ne remplace pas silencieusement la première décision ; conflit/relecture explicite, historique cohérent.
+**Résultat attendu.** ~~Le second ne remplace pas silencieusement la première décision ; conflit/relecture explicite, historique cohérent.~~
+
+Preuve du 30 octobre 2026 : deux opérateurs internes distincts et habilités,
+connectés normalement, ouvrent le même commerce synthétique à la version 2.
+La demande Animation du premier réussit vers la version 3 ; la demande
+Coffrets du second, envoyée avec la version 2, reçoit **409 CONFLIT_VERSION**.
+L’état et l’historique restent identiques après ce refus, avec la seule demande
+acceptée ajoutée et son auteur/motif exacts. La relecture réelle de l’écran B
+confirme Animation « À préparer », Coffrets « Non demandé » et l’historique.
+Mode PERIMETRES déjà présent, commune déjà basculée : aucune bascule exécutée.
+
+Le navigateur initial a été fermé après un délai d’attente du harnais.
+Le même opérateur B s’est reconnecté ; les mêmes objets, états et historiques
+ont été vérifiés inchangés avant de reconstituer une saisie sans la soumettre,
+puis d’accepter la confirmation native d’actualisation. Aucune commande métier
+rejouée pendant cette récupération ; les initialisations techniques de session
+bloquées sont distinguées des écritures métier. Les incidents restent conservés.
+**48 contrôles réussis**, six étapes revues indépendamment ; dix pièces avec
+empreintes vérifiées dans les index privés
+`essentiels-rm0303-20261030b-reprise2-index.json` et
+`essentiels-rm0303-20261030b-relecture2-index.json`.
+Aucune modification du TEST partagé ; cette preuve porte sur le clone figé.
 
 
 ## F04 — Onboarding adapté au produit
@@ -511,9 +563,17 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 
 **Résultat attendu.** Passeport/tombola inclus dans le quota du forfait ; chasse, import et communication optionnels. Variantes couvertes par le droit de leur type, pas d’achat supplémentaire par scénario.
 
-### RM-06-02
+Passage principal du 30 octobre 2026, **partiel sur le clone isolé** : dix
+contrôles réussis. La nouvelle base B1 inclut Animation sans module optionnel
+actif ; Passeport et Tombola s’ouvrent sans achat. Sur A2, Chasse s’ouvre avec
+le droit acquis. Droits, versions, échéances et usages restent inchangés après
+les ouvertures. Le catalogue ne propose qu’un modèle par type : la comparaison
+de plusieurs variantes distinctes reste non exécutée, scénario non barré.
+Preuve `catalogue-variantes-principal-relecture-20261030.json`.
 
-**Scénario.** Vérifier les offres initiales et leur récapitulatif.
+### ~~RM-06-02~~ — **Réussi**
+
+**Scénario.** ~~Vérifier les offres initiales et leur récapitulatif.~~
 
 **Marche à suivre**
 
@@ -524,11 +584,13 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 5. Préparer les récapitulatifs sans payer ; pour chacun, lire la commune, les dates, les prérequis, les capacités et les montants HT, TVA et TTC.
 6. Comparer les trois récapitulatifs au catalogue initial et consigner toute valeur manquante ou ambiguë ; aucun droit ne doit résulter de la seule consultation.
 
-**Résultat attendu.** Chasse : 190 € HT/an, 5 chasses, quota distinct ; import : 49 € HT/an, sans quota commercial ; messages : 49 € HT/an, 5 campagnes/mois. Commune, dates, prérequis, HT/TVA/TTC et capacités sont explicites.
+**Résultat attendu.** ~~Chasse : 190 € HT/an, 5 chasses, quota distinct ; import : 49 € HT/an, sans quota commercial ; messages : 49 € HT/an, 5 campagnes/mois. Commune, dates, prérequis, HT/TVA/TTC et capacités sont explicites.~~
 
-### RM-06-03
+**Exécution automatique réussie du 23 octobre 2026 sur TEST.** Le collaborateur Achat A1 de la campagne `e73-20261022-e856fb` a consulté les trois modules et leurs devis sur une base annuelle complète. Prix, capacités, commune, échéance et HT/TVA/TTC sont vérifiés ; les droits et la liste des commandes restent inchangés. Rapport privé `run-1792768742029-444b`, détaillé dans le [suivi d'automatisation](automatisation-recette.md#contrôles-des-brouillons-après-déblocage-des-créations).
 
-**Scénario.** Avec le module acquis sur A1, tenter l’usage sur A2 ; consulter un droit inclus sans achat.
+### ~~RM-06-03~~ — **Réussi sur le clone isolé**
+
+**Scénario.** ~~Avec le module acquis sur A1, tenter l’usage sur A2 ; consulter un droit inclus sans achat.~~
 
 **Marche à suivre**
 
@@ -539,7 +601,10 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 5. Effectuer une action autorisée par ce droit inclus : elle doit fonctionner sans demander ni créer un paiement fictif pour l’acquérir de nouveau.
 6. Parcourir les modules proposés et comparer les origines des droits : seuls les modules officiels Localeo doivent apparaître, sans extension automatique à l’autre commune.
 
-**Résultat attendu.** Aucun droit automatiquement étendu à A2 ; le droit inclus valide fonctionne sans paiement fictif. Seuls les modules officiels Localeo sont proposés.
+**Résultat attendu.** ~~Aucun droit automatiquement étendu à A2 ; le droit inclus valide fonctionne sans paiement fictif. Seuls les modules officiels Localeo sont proposés.~~
+
+
+Complément vérifié le 24 octobre 2026 : `droit-inclus-principal-clone-sceau-completude.json`. Les six étapes sont couvertes : même compte et mêmes délégations sur A1/A2, Import accessible uniquement sur A1, refus de création sur A2 sans objet ajouté, trois modules officiels. Droit Animation INCLUS identifié dans Abonnement et fonction ouverte en UI, puis publication réelle du brouillon dédié avec accord Pro normal. Une consommation DEBIT relie la publication au droit inclus et à sa période ; usage 0 à 1. Droits et versions inchangés, aucune nouvelle acquisition ni commande ou paiement pour cette action. Les premières preuves partielles sont conservées. Clone isolé uniquement.
 
 ### RM-06-04
 
@@ -673,9 +738,9 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 - [ ] Animation publiée, import confirmé commencé, campagne commencée et campagne seulement programmée.
 - [ ] États d’expiration préparés avec le référent, sans modifier l’horloge commune.
 
-### RM-08-01
+### ~~RM-08-01~~ — **Réussi sur le clone isolé**
 
-**Scénario.** Accorder un essai de chaque module, puis ajuster durée/quota avec motif ; refaire sans habilitation.
+**Scénario.** ~~Accorder un essai de chaque module, puis ajuster durée/quota avec motif ; refaire sans habilitation.~~
 
 **Marche à suivre**
 
@@ -686,7 +751,17 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 5. Tenter une fin au-delà de la base : le dépassement doit être refusé ou présenter une borne corrigée avant confirmation, sans prolonger la base.
 6. Refaire un octroi ou ajustement avec l’opérateur non habilité : refus ; vérifier dans **Finance** qu’aucune facture ni conversion en achat n’est créée par ces essais.
 
-**Résultat attendu.** 14 jours par défaut ; chasse 1 et communication 1 au total, import sans quota commercial. Ajustements tracés, bornés par la base ; aucune facture ou conversion en achat implicite ; refus sans habilitation.
+**Résultat attendu.** ~~14 jours par défaut ; chasse 1 et communication 1 au total, import sans quota commercial. Ajustements tracés, bornés par la base ; aucune facture ou conversion en achat implicite ; refus sans habilitation.~~
+
+**Exécution réussie du 24 octobre 2026 sur le clone isolé.** Les trois essais
+accordés normalement ont été ajustés dans les formulaires ERP : durée réduite,
+quotas Chasse et Communication portés à deux, Import sans quota commercial.
+Identifiants conservés, versions incrémentées, auteur et motif dans l’historique,
+usages conservés et lectures client concordantes. Fin au-delà de la base refusée
+422 dans le formulaire et par l’API ; ajustement refusé 403 à un opérateur
+nominatif existant sans habilitation, sans formulaire accessible. Commandes et
+factures inchangées. Six étapes reliées aux dix artefacts privés de
+`rm0801-principal-preuves-figees-20261024/index.json` ; revue indépendante effectuée.
 
 ### RM-08-02
 
@@ -762,9 +837,9 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 - [ ] Un brouillon distinct pour chaque branche ; dotation externe F10 et numérique F11 préparées.
 - [ ] Un parcours Coffrets seul sans abonnement Animation, et une animation Coffrets historique pour comparaison.
 
-### RM-09-01
+### ~~RM-09-01~~ — **Réussi sur le clone isolé**
 
-**Scénario.** Créer sans choisir la dotation, puis choisir Libre sans mode ; revenir en arrière dans le formulaire.
+**Scénario.** ~~Créer sans choisir la dotation, puis choisir Libre sans mode ; revenir en arrière dans le formulaire.~~
 
 **Marche à suivre**
 
@@ -774,7 +849,9 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 4. Choisir le mode externe, renseigner ses informations, avancer au récapitulatif puis revenir à l’étape précédente.
 5. Vérifier que le choix explicite externe reste affiché dans le formulaire et le récapitulatif ; enregistrer le brouillon et sa référence, sans le publier.
 
-**Résultat attendu.** Aucune présélection silencieuse ; choix manquants signalés. Récapitulatif et navigation conservent le choix explicite.
+**Résultat attendu.** ~~Aucune présélection silencieuse ; choix manquants signalés. Récapitulatif et navigation conservent le choix explicite.~~
+
+Preuve du 23 octobre 2026 : rapport navigateur `run-1792787584279-47ba`, deux étapes réussies sur le clone isolé, depuis les informations et la mission jusqu'au brouillon enregistré puis relu. Aucun engagement ni publication ; aucun déploiement sur TEST partagé.
 
 ### RM-09-02
 
@@ -790,6 +867,16 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 6. Corriger chaque prérequis par le parcours indiqué puis actualiser l’assistant ; vérifier la disparition du blocage correspondant sans publier ces jeux destinés aux vérifications de formulaire.
 
 **Résultat attendu.** Un mode unique par animation ; assistant adapté, blocage précis avec acteur/action attendue ; aucune publication contournant les prérequis.
+
+Passage principal du 24 octobre 2026, **partiel sur le clone isolé** : douze
+contrôles réussis sur trois brouillons distincts, six changements de branche
+persistés, assistants et acteur/action attendus relus. Publication désactivée
+dans l’interface pour les trois prérequis manquants, aucun POST de publication.
+Description externe complétée et une unité numérique créée puis affectée par
+les parcours normaux : blocages correspondants levés, stock sans doublon.
+Le choix d’un Coffret lève l’absence de lot mais laisse le financement requis ;
+cette correction reste incomplète. Les trois animations restent en brouillon.
+Preuve `branches-assistant-principal-preuves-figees.json`, scénario non barré.
 
 ### RM-09-03
 
@@ -849,9 +936,9 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 - [ ] Responsable de remise externe, sans compte Pro, consignes et quantités connues.
 - [ ] Pour le suivi, tirage confirmé de F12 et boîte email gagnant de test.
 
-### RM-10-01
+### ~~RM-10-01~~ — **Réussi sur le clone isolé**
 
-**Scénario.** Créer « Lot A » quantité 2 puis « Lot B » quantité 1 ; saisir responsable/consignes et réordonner avant publication ; essayer quantité nulle.
+**Scénario.** ~~Créer « Lot A » quantité 2 puis « Lot B » quantité 1 ; saisir responsable/consignes et réordonner avant publication ; essayer quantité nulle.~~
 
 **Marche à suivre**
 
@@ -861,7 +948,9 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 4. Tenter de saisir une quantité 0 sur une ligne ; vérifier le refus, puis rétablir sa quantité initiale sans modifier l’ordre.
 5. Relire le brouillon et l’assistant : vérifier les trois unités et l’absence de QR, de création de compte Pro ou d’achat Coffrets imposé.
 
-**Résultat attendu.** Trois positions explicites dans l’ordre choisi ; quantité invalide refusée. Aucun QR, compte Pro ou achat Coffrets imposé.
+**Résultat attendu.** ~~Trois positions explicites dans l’ordre choisi ; quantité invalide refusée. Aucun QR, compte Pro ou achat Coffrets imposé.~~
+
+Preuve du 23 octobre 2026 : rapport navigateur `run-1792787672542-dd44`, trois étapes réussies sur le clone isolé : A×2/B×1, quantité zéro refusée, ordre B/A/A, récapitulatif et brouillon persistants sans QR ni achat imposé. Le premier essai attendait mal le second champ de consignes ; il s'est arrêté avant toute création serveur, puis le sélecteur a été corrigé et le cas rejoué. Aucun déploiement sur TEST partagé.
 
 ### RM-10-02
 
@@ -876,6 +965,15 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 5. Comparer avec un second gain externe dédié dont la non-remise a été explicitement déclarée : distinguer « Non renseigné » et « Non remis », et consigner les références sans les liens privés.
 
 **Résultat attendu.** Lot, responsable et consignes adaptés ; email envoyé ne signifie ni contact réussi ni remise. « Non renseigné » se distingue de « Non remis ».
+
+Passage principal du 24 octobre 2026, **partiel sur le clone isolé** : suivi
+vierge puis suivi corrigé relus séparément de l’état d’envoi. La réception
+effective de l’email et son lien n’ont pas été exécutés. Le refus explicite
+incorrectement affiché « non renseigné » a ensuite été corrigé : `NON_REMIS`
+est relu sur le même refus à 1280/320 px, sans nouvel événement ni changement
+de version. Une correction seule reste « non renseigné ». Voir les
+[anomalies backend](../../roadmap/anomalies/backend.md). Preuves privées :
+`externe-remise-clone-couverture.json`. Aucun succès intégral revendiqué.
 
 ### RM-10-03
 
@@ -892,6 +990,15 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 
 **Résultat attendu.** Événements et correction tracés, historique conservé ; seuls gestionnaires habilités et Localeo peuvent effectuer ces opérations.
 
+Passage principal du 24 octobre 2026, **partiel sur le clone isolé** : contact,
+réponse, remise déclarée puis correction avec le motif prescrit, quatre
+événements conservés ; vrais comptes commerçant et salarié refusés sans ajout.
+L’auteur absent à l’écran a été corrigé puis relu avec les dates sur les mêmes
+événements à 1280/320 px, dix contrôles réussis. L’intervention Localeo en
+écriture reste à traiter ; voir les [anomalies backend](../../roadmap/anomalies/backend.md)
+et [Animation](../../roadmap/anomalies/animation.md). Index privé
+`externe-remise-clone-couverture.json`, scénario non barré.
+
 
 ## F11 — Modèles, exemplaires et affectation des lots numériques
 
@@ -905,9 +1012,9 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 - [ ] Génération d’exemplaires opérationnelle, clés QR configurées et traitement de fond prêt ; aucun secret copié dans les preuves.
 - [ ] Gestionnaire habilité aux lots ; stock vierge réservé à ce test.
 
-### RM-11-01
+### ~~RM-11-01~~ — **Réussi sur le clone isolé**
 
-**Scénario.** Créer un modèle avec un seul commerce de remise, générer 3 exemplaires ; répéter la demande après une réponse incertaine accompagnée.
+**Scénario.** ~~Créer un modèle avec un seul commerce de remise, générer 3 exemplaires ; répéter la demande après une réponse incertaine accompagnée.~~
 
 **Marche à suivre**
 
@@ -918,11 +1025,13 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 5. Vérifier exactement 3 exemplaires distincts liés au modèle, sans exemplaire supplémentaire ; contrôler qu’aucun n’offre un bon utilisable avant attribution.
 6. Examiner les informations de lot : aucune réserve monétaire ou consommation fractionnée ne doit être proposée ; conserver uniquement les références sans QR ni secret.
 
-**Résultat attendu.** Exactement 3 exemplaires distincts, sans création supplémentaire au rejeu ; pas de bon utilisable avant attribution, pas de solde fractionnable.
+**Résultat attendu.** ~~Exactement 3 exemplaires distincts, sans création supplémentaire au rejeu ; pas de bon utilisable avant attribution, pas de solde fractionnable.~~
 
-### RM-11-02
+Preuve du 23 octobre 2026 : `parcours-libre-clone-index-completude.json` relie les six étapes à leurs preuves et empreintes. Vrais formulaires, génération de trois exemplaires, réponse coupée après acceptation serveur, vérification puis reprise de la même demande ; une génération, trois références distinctes et aucun bon avant attribution. Clone isolé uniquement, sans déploiement sur TEST partagé.
 
-**Scénario.** Affecter un exemplaire à une animation ; tenter de l’affecter à la seconde, y compris depuis deux sessions simultanées.
+### ~~RM-11-02~~ — **Réussi sur le clone isolé**
+
+**Scénario.** ~~Affecter un exemplaire à une animation ; tenter de l’affecter à la seconde, y compris depuis deux sessions simultanées.~~
 
 **Marche à suivre**
 
@@ -932,11 +1041,13 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 4. Sur le second exemplaire encore libre, préparer son affectation à une animation différente dans chaque session puis confirmer presque simultanément avec le référent.
 5. Actualiser les deux fiches et le stock : une seule affectation active pour cet exemplaire, un refus/conflit intelligible pour l’autre session et aucun stock négatif.
 
-**Résultat attendu.** Une seule affectation active ; indisponibilité claire pour l’autre, aucun stock négatif.
+**Résultat attendu.** ~~Une seule affectation active ; indisponibilité claire pour l’autre, aucun stock négatif.~~
 
-### RM-11-03
+Preuves vérifiées le 24 octobre 2026 : `cas-complets-libre-clone-index-20261024.json`. Deux sessions A1, affectation puis indisponibilité, course réelle sur positions libres avec succès/refus LOT_INDISPONIBLE et une affectation active par unité. La première course à position occupée est conservée comme contrôle distinct et exclue de la preuve de collision. Clone isolé uniquement ; aucune livraison email fournisseur ni lecture optique physique revendiquée.
 
-**Scénario.** Modifier la description du modèle après engagement ; essayer de changer le commerce de remise et d’utiliser un exemplaire de B1.
+### ~~RM-11-03~~ — **Réussi sur le clone isolé**
+
+**Scénario.** ~~Modifier la description du modèle après engagement ; essayer de changer le commerce de remise et d’utiliser un exemplaire de B1.~~
 
 **Marche à suivre**
 
@@ -946,11 +1057,13 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 4. Tenter de changer le commerce de remise du modèle engagé ; vérifier le refus et la conservation du commerce initial.
 5. Depuis le contexte A1, tenter l’accès ou l’affectation de la référence B1 préparée pour ce contrôle ; vérifier le refus sans divulgation des données de B1.
 
-**Résultat attendu.** Nouvelle description sans altérer les descriptions déjà engagées ; changement de commerce engagé et accès hors commune autorisée refusés.
+**Résultat attendu.** ~~Nouvelle description sans altérer les descriptions déjà engagées ; changement de commerce engagé et accès hors commune autorisée refusés.~~
 
-### RM-11-04
+Preuves vérifiées le 24 octobre 2026 : `cas-complets-libre-clone-index-20261024.json`. Modification du modèle, snapshots initiaux préservés dans les données et visibles dans la dotation et le stock après correctif des deux composants Animation ; commerce engagé non modifiable, véritable référence B1 refusée sans effet. Rejeu sur les mêmes objets, sans migration ni changement de règle métier. Clone isolé uniquement ; aucune livraison email fournisseur ni lecture optique physique revendiquée.
 
-**Scénario.** Choisir la durée 1, 90 puis 365 jours sur des brouillons ; essayer 0 et 366 ; publier et retenter l’édition.
+### ~~RM-11-04~~ — **Réussi sur le clone isolé**
+
+**Scénario.** ~~Choisir la durée 1, 90 puis 365 jours sur des brouillons ; essayer 0 et 366 ; publier et retenter l’édition.~~
 
 **Marche à suivre**
 
@@ -960,11 +1073,13 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 4. Rétablir 90 jours, compléter les prérequis et publier ; tenter ensuite de modifier la durée et vérifier qu’elle reste figée.
 5. Avec un participant éligible et la clôture préparés pour ce jeu, confirmer le tirage ; comparer l’échéance du bon à sa date d’attribution, augmentée de 90 jours, et non à sa date de publication.
 
-**Résultat attendu.** 90 par défaut, bornes 1–365 ; erreurs sur valeurs hors limites ; durée figée à publication, échéance calculée à l’attribution.
+**Résultat attendu.** ~~90 par défaut, bornes 1–365 ; erreurs sur valeurs hors limites ; durée figée à publication, échéance calculée à l’attribution.~~
 
-### RM-11-05
+Preuve du 23 octobre 2026 : `duree-decouverte-clone-preuves-completes.json` relie neuf contrôles navigateur réussis au tirage confirmé du même brouillon. Durées 1/90/365, refus 0/366, gel après publication et refus API sans effet ; le bon unique expire 90 jours après son attribution. Clone isolé uniquement, sans déploiement sur TEST partagé.
 
-**Scénario.** Après attributions, libérer le surplus jamais attribué sur confirmation ; tenter la même chose avec un exemplaire attribué puis révoqué.
+### ~~RM-11-05~~ — **Réussi sur le clone isolé**
+
+**Scénario.** ~~Après attributions, libérer le surplus jamais attribué sur confirmation ; tenter la même chose avec un exemplaire attribué puis révoqué.~~
 
 **Marche à suivre**
 
@@ -974,8 +1089,9 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 4. Sur l’un des exemplaires attribués non consommés, révoquer le bon avec un motif de recette puis tenter de libérer cet exemplaire.
 5. Vérifier le refus, l’absence de retour au stock et la conservation du gain initial ainsi que du bon révoqué dans l’historique.
 
-**Résultat attendu.** Seul le surplus jamais attribué redevient disponible ; bon révoqué et ancien gain restent dans l’historique, sans retour automatique au stock.
+**Résultat attendu.** ~~Seul le surplus jamais attribué redevient disponible ; bon révoqué et ancien gain restent dans l’historique, sans retour automatique au stock.~~
 
+Preuve du 23 octobre 2026 : `parcours-libre-clone-index-completude.json` relie les cinq étapes aux preuves vérifiées. Même animation numérique avec trois exemplaires et deux participants éligibles : seul surplus jamais attribué libéré par confirmation UI ; bon actuellement non consommé révoqué par formulaire, libération de son exemplaire refusée 409 et historique conservé. Le bon révoqué avait une ancienne remise corrigée, sans consommation active au test. Clone isolé uniquement.
 
 ## F12 — Tirage, emails, suppléants et remplacement du gagnant
 
@@ -989,9 +1105,10 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 - [ ] Tirage libre et envois opérationnels ; deux boîtes gagnants et une liste de suppléants de test.
 - [ ] Cas datés « premier email réussi depuis moins de 14 jours / au moins 14 jours », refus explicite et réserve épuisée.
 
-### RM-12-01
 
-**Scénario.** Préparer puis confirmer le tirage pour chacune des quatre populations (0, 2, 3 et 5 éligibles pour 3 lots).
+### ~~RM-12-01~~ — **Réussi sur le clone isolé**
+
+**Scénario.** ~~Préparer puis confirmer le tirage pour chacune des quatre populations (0, 2, 3 et 5 éligibles pour 3 lots).~~
 
 **Marche à suivre**
 
@@ -1002,11 +1119,13 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 5. Comparer les attributions à l’ordre des lots publié ; vérifier que les lots non attribués restent en fin et qu’aucun gagnant n’est inventé.
 6. Ouvrir la réserve : aucun suppléant pour 0, 2 ou 3 éligibles ; les éligibles non gagnants restent disponibles dans leur ordre pour le jeu à 5. Consigner chaque variante séparément.
 
-**Résultat attendu.** Avant confirmation, aucun gain officiel/email/bon utilisable. Après : respectivement 0, 2, 3 et 3 gagnants distincts, au plus un lot chacun ; ordre des lots publié respecté, surplus en fin ; aucun gagnant inventé. Réserve de suppléants seulement s'il reste des éligibles non gagnants.
+**Résultat attendu.** ~~Avant confirmation, aucun gain officiel/email/bon utilisable. Après : respectivement 0, 2, 3 et 3 gagnants distincts, au plus un lot chacun ; ordre des lots publié respecté, surplus en fin ; aucun gagnant inventé. Réserve de suppléants seulement s'il reste des éligibles non gagnants.~~
 
-### RM-12-02
+Preuves vérifiées le 24 octobre 2026 : `cas-complets-libre-clone-index-20261024.json`. Huit nouvelles animations : externe et numérique, populations0/2/3/5. Préparation non confirmée observée, aucun gain officiel/email gagnant/bon avant confirmation ; gagnants0/2/3/3, ordre publié et réserves0/0/0/2 vérifiés par UI et lectures ciblées. Clone isolé uniquement ; aucune livraison email fournisseur ni lecture optique physique revendiquée.
 
-**Scénario.** Recharger, rejouer la confirmation ou reprendre après réponse perdue avec le référent.
+### ~~RM-12-02~~ — **Réussi sur le clone isolé**
+
+**Scénario.** ~~Recharger, rejouer la confirmation ou reprendre après réponse perdue avec le référent.~~
 
 **Marche à suivre**
 
@@ -1016,7 +1135,9 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 4. Confirmer le tirage numérique avec l’incident prévu ; après la perte de réponse, consulter l’état de cette même opération avant toute nouvelle action.
 5. Si une reprise est nécessaire, reprendre la référence existante ; comparer gagnants, suppléants et bons avant/après, avec un seul bon courant par exemplaire et aucun résultat aléatoire renouvelé.
 
-**Résultat attendu.** Mêmes attributions et suppléants, aucun nouveau tirage pour changer le résultat ; un seul bon courant par exemplaire.
+**Résultat attendu.** ~~Mêmes attributions et suppléants, aucun nouveau tirage pour changer le résultat ; un seul bon courant par exemplaire.~~
+
+Preuves vérifiées le 24 octobre 2026 : `cas-complets-libre-clone-index-20261024.json`. Externe et numérique à cinq éligibles : rechargement et rejeu de la même confirmation ; réponse numérique coupée après202, état relu avant reprise. Mêmes opérations, attributions, réserves et bons, sans renouveler le hasard. Clone isolé uniquement ; aucune livraison email fournisseur ni lecture optique physique revendiquée.
 
 ### RM-12-03
 
@@ -1063,9 +1184,9 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 
 **Résultat attendu.** Avant délai : refus sauf refus explicite. Délai compté depuis le premier email envoyé avec succès ; remplacement manuel motivé selon l’ordre des suppléants éligibles.
 
-### RM-12-06
+### ~~RM-12-06~~ — **Réussi sur le clone isolé**
 
-**Scénario.** Remplacer un gagnant numérique non servi ; tester son ancien QR et ouvrir le nouveau bon du suppléant ; refaire avec un lot déjà consommé.
+**Scénario.** ~~Remplacer un gagnant numérique non servi ; tester son ancien QR et ouvrir le nouveau bon du suppléant ; refaire avec un lot déjà consommé.~~
 
 **Marche à suivre**
 
@@ -1075,7 +1196,9 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 4. Dans Pro avec le commerce de remise autorisé, tenter l’ancien QR ; vérifier sa révocation définitive et l’absence de remise.
 5. Relire l’historique des deux attributions, puis demander le remplacement du gain déjà consommé ; vérifier le refus et la conservation de sa consommation.
 
-**Résultat attendu.** Ancien bon définitivement révoqué ; nouveau bon pour le même lot, durée complète depuis nouvelle attribution, historique préservé. Lot déjà consommé non réattribuable.
+**Résultat attendu.** ~~Ancien bon définitivement révoqué ; nouveau bon pour le même lot, durée complète depuis nouvelle attribution, historique préservé. Lot déjà consommé non réattribuable.~~
+
+Preuves vérifiées le 24 octobre 2026 : `cas-complets-libre-clone-index-20261024.json`. Remplacement motivé par formulaire, nouveau bon ouvert depuis le message produit préparé en outbox, même lot et durée complète ; ancien QR refusé dans Pro. Historiques relus et gain déjà consommé non réattribuable, consommation conservée. Clone isolé uniquement ; aucune livraison email fournisseur ni lecture optique physique revendiquée.
 
 ### RM-12-07
 
@@ -1133,9 +1256,9 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 
 **Résultat attendu.** Même effet métier que le scan ; résultat relisible. Trace identifiant le commerce pour le canal PIN, sans inventer un salarié ; PIN absent du reçu et des preuves partagées.
 
-### RM-13-03
+### ~~RM-13-03~~ — **Réussi sur le clone isolé**
 
-**Scénario.** Rescanner/représenter un bon consommé puis consulter son historique.
+**Scénario.** ~~Rescanner/représenter un bon consommé puis consulter son historique.~~
 
 **Marche à suivre**
 
@@ -1145,7 +1268,9 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 4. Ouvrir le reçu proposé et vérifier qu’il correspond à la consommation initiale, sans nouvelle confirmation de remise possible.
 5. Relire l’historique et le suivi des notifications : toujours une seule consommation et aucune nouvelle notification logique due au rejeu.
 
-**Résultat attendu.** État « déjà remis » et reçu existant compréhensibles ; aucune seconde consommation ni nouvelle notification de validation logique au rejeu.
+**Résultat attendu.** ~~État « déjà remis » et reçu existant compréhensibles ; aucune seconde consommation ni nouvelle notification de validation logique au rejeu.~~
+
+Preuves vérifiées le 24 octobre 2026 : `rm1303-clone-preuves-completes.json`. Même bon déjà consommé représenté dans le scanner Pro par saisie de son vrai contenu QR, puis rouvert dans Live ; reçu initial identique, aucune nouvelle confirmation. Les audits avant/après confirment une seule consommation et une seule notification logique. Clone isolé uniquement ; cette vérification du rejeu ne qualifie pas la lecture optique par caméra.
 
 ### RM-13-04
 
@@ -1218,9 +1343,26 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 
 **Résultat attendu.** Seul le bon ciblé change ; plafond absolu respecté, extensions successives non cumulables au-delà ; consommé/révoqué refusé.
 
-### RM-14-03
+Passage principal du 24 octobre et relecture du 29 octobre 2026, **partiel
+sur le clone isolé** : dix-sept contrôles, trois prolongations distinctes
+acceptées jusqu’à attribution initiale +365 jours, quatre refus attendus et
+quatre autres bons inchangés. Trois motifs et versions recoupés avec l’audit
+durable. Le correctif d’auteur est rejoué le 29 : les mêmes prolongations
+affichent Gestionnaire, les consommations restent attribuées au commerçant.
+Aucune commande acceptée rejouée. Bon expiré et lecture Live non vérifiés ;
+scénario non barré. Preuves `prolongations-principales-clone-completude-scellee.json`
+et `prolongations-principales-clone-auteur-apres-correctif-prive.json`.
 
-**Scénario.** Révoquer avec motif un bon non consommé ; tester ensuite QR/PIN et consultation de l’historique.
+Complément du 30 octobre : le lien participant conservé dans un reçu réel
+d’inscription HTTP 201 donne la projection du même bon à 320/1280 px, valide,
+version 4 et échéance au 23 octobre 2027. Quatre contrôles passent sans
+prolongation ni remise supplémentaire. Cela ne prouve ni la réception du lien
+personnel du bon par email, ni sa lecture détaillée ou son QR ; ces limites et
+le bon expiré restent ouverts. Preuve `prolongation-projection-live-20261030-prive.json`.
+
+### ~~RM-14-03~~ — **Réussi sur le clone isolé**
+
+**Scénario.** ~~Révoquer avec motif un bon non consommé ; tester ensuite QR/PIN et consultation de l’historique.~~
 
 **Marche à suivre**
 
@@ -1230,7 +1372,9 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 4. Depuis le téléphone gagnant, tenter le parcours PIN ; vérifier le même blocage, sans remise possible.
 5. Revenir à **Lots**, consulter attribution et historique ; vérifier motif et auteur conservés, bon révoqué et exemplaire non revenu automatiquement au stock.
 
-**Résultat attendu.** Remise bloquée immédiatement, attribution et motif conservés ; pas de retour automatique au stock.
+**Résultat attendu.** ~~Remise bloquée immédiatement, attribution et motif conservés ; pas de retour automatique au stock.~~
+
+Preuves vérifiées le 24 octobre 2026 : `rm1403-clone-preuves-completes.json`. Bon neuf révoqué depuis le formulaire avec le motif exact ; Pro présente le QR comme révoqué, sans remise possible. La demande PIN préparée avant révocation est refusée après celle-ci avec CONFLIT_VERSION ; une relecture fraîche de Live montre le bon annulé sans QR ni action PIN. Audit, auteur et motif conservés, zéro consommation, attribution active et exemplaire non libéré. Le QR a été présenté par saisie manuelle ; aucune lecture optique physique revendiquée. Clone isolé uniquement.
 
 ### RM-14-04
 
@@ -1291,9 +1435,9 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 
 **Résultat attendu.** Chasse consomme uniquement son quota dédié, une fois à publication réussie ; standard consomme le forfait. 5 chasses annuelles ou quota proratisé acquis ; aucun report à échéance.
 
-### RM-15-02
+### ~~RM-15-02~~ — **Réussi sur le clone isolé**
 
-**Scénario.** Déposer une demande complète de préparation puis consulter échéance et état.
+**Scénario.** ~~Déposer une demande complète de préparation puis consulter échéance et état.~~
 
 **Marche à suivre**
 
@@ -1303,7 +1447,9 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 4. Dans le portail, relire état, date de complétude et échéance ; comparer au calendrier de service versionné, en Europe/Paris, pour une cible de cinq jours ouvrés.
 5. Vérifier que le suivi annonce une préparation à distance et réserve la validation sur place à l’organisateur, sans promesse d’intervention terrain de Localeo.
 
-**Résultat attendu.** Préparation à distance, cible de 5 jours ouvrés depuis demande complète ; pas de promesse d’intervention terrain Localeo.
+**Résultat attendu.** ~~Préparation à distance, cible de 5 jours ouvrés depuis demande complète ; pas de promesse d’intervention terrain Localeo.~~
+
+Preuves vérifiées le 24 octobre 2026 : `chasse-principal-clone-completude-scellee.json` et `rm1502-canonical-step-index.json`. Quatorze contrôles pour les cinq étapes : formulaire et brief complet, demande unique, qualification ERP normale, même état et échéance au portail/ERP. Complétude le 24 octobre, cible le 30 octobre à 17 h Paris selon les cinq jours ouvrés du calendrier versionné `e73-clone-calendrier-20261023`. Préparation à distance et contrôle sur place par l’organisateur explicités. Dossier EN_PREPARATION, aucune déclaration PRETE ni validation terrain simulée. Seule la capacité de préparation a été ouverte dans le clone, ordonnanceur et alertes globales toujours fermés. Clone isolé uniquement.
 
 ### RM-15-03
 
@@ -1319,6 +1465,16 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 6. Comparer les références et crédits avant/après : un seul dossier, aucune campagne Communication nécessaire et aucun crédit supplémentaire consommé par le complément.
 
 **Résultat attendu.** Attente clairement affichée, délai suspendu pendant l’information indispensable ; reprise sur le même dossier ; email au demandeur et suivi dans le portail, indépendants du module Communication.
+
+Passage principal du 24 octobre 2026, **partiel sur le clone isolé** : douze
+contrôles réussis sur une demande distincte d’A2 sans module Communication.
+Complément demandé dans l’ERP, attente et motif visibles au portail, réponse
+client puis reprise sur le même dossier ; historique et quotas conservés.
+L’intention email contient le motif, sans tentative de transport ni réception
+revendiquée. Attente réelle un samedi, budget de quarante heures ouvrées
+conservé ; ce passage ne prouve pas une attente sur des heures ouvrées.
+Variante A1, réception email et état « prête » restent à vérifier. Preuves
+`chasse-complement-principal-completude-scellee.json`, scénario non barré.
 
 ### RM-15-04
 
@@ -1377,9 +1533,9 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 - [ ] Stockage privé et worker d’import disponibles ; fichiers synthétiques décrits dans le jeu commun.
 - [ ] Fiches existantes avec référence du dernier import ; aucun fichier de prospection réel nécessaire. Cet import opérationnel est distinct de l’import CRM de l’epic 71.
 
-### RM-16-01
+### ~~RM-16-01~~ — **Réussi**
 
-**Scénario.** Télécharger le modèle ; charger CSV puis XLSX ; choisir une feuille et associer les colonnes avant aperçu.
+**Scénario.** ~~Télécharger le modèle ; charger CSV puis XLSX ; choisir une feuille et associer les colonnes avant aperçu.~~
 
 **Marche à suivre**
 
@@ -1389,11 +1545,13 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 4. Charger le XLSX à plusieurs feuilles dans l’autre dépôt, choisir explicitement une feuille puis associer ses colonnes ; comparer l’aperçu aux seules lignes de cette feuille.
 5. Consulter la liste des commerces avant toute confirmation : aucune fiche créée ou modifiée par ces aperçus ; consigner le choix de feuille et les champs obligatoires/facultatifs reconnus.
 
-**Résultat attendu.** Import limité à la feuille choisie ; aperçu sans écriture. Obligatoires : nom commercial, adresse, commune, SIRET, email de contact. Facultatifs : nom du contact, téléphone, catégorie, description, site web.
+**Résultat attendu.** ~~Import limité à la feuille choisie ; aperçu sans écriture. Obligatoires : nom commercial, adresse, commune, SIRET, email de contact. Facultatifs : nom du contact, téléphone, catégorie, description, site web.~~
 
-### RM-16-02
+**Exécution automatique réussie du 23 octobre 2026 sur TEST.** Le rapport privé `run-1792770510590-ff8a` de la campagne `e73-20261022-e856fb` porte le verdict `REUSSI_AUTOMATIQUE` : modèle téléchargé, CSV et XLSX déposés, feuille et colonnes choisies, aperçus comparés et absence de création ou modification des commerces vérifiée. Ce résultat porte uniquement sur RM-16-01 ; voir le [suivi d'automatisation](automatisation-recette.md#nouveaux-passages-ciblés-du-23-octobre).
 
-**Scénario.** Tester 100 puis 101 lignes ; fichier de 2 000 000 octets puis plus grand ; lignes invalides et formule dans un champ importable.
+### ~~RM-16-02~~ — **Réussi**
+
+**Scénario.** ~~Tester 100 puis 101 lignes ; fichier de 2 000 000 octets puis plus grand ; lignes invalides et formule dans un champ importable.~~
 
 **Marche à suivre**
 
@@ -1404,7 +1562,9 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 5. Ouvrir l’aperçu des lignes invalides et de la formule ; vérifier anomalies explicites et absence d’exécution de la formule, sans confirmer ces lignes.
 6. Contrôler que les dépôts refusés et simples aperçus n’ont créé aucune fiche ; enregistrer taille et compte de lignes réellement préparés pour chaque variante.
 
-**Résultat attendu.** Limites appliquées avant création, sans troncature silencieuse. En-tête exclu, lignes entièrement vides ignorées ; formules non exécutées et anomalies signalées.
+**Résultat attendu.** ~~Limites appliquées avant création, sans troncature silencieuse. En-tête exclu, lignes entièrement vides ignorées ; formules non exécutées et anomalies signalées.~~
+
+**Exécution automatique réussie du 23 octobre 2026 sur TEST.** Le rapport privé `run-1792772585337-3eed` porte le verdict `REUSSI_AUTOMATIQUE` pour les six étapes : bornes 2 000 000/2 000 001 octets et 100/101 lignes, lignes vides ignorées, anomalies et formule XLSX refusées, inventaire ERP inchangé. Aucun import de lignes n'a été confirmé ; voir le [suivi d'automatisation](automatisation-recette.md#nouveaux-passages-ciblés-du-23-octobre).
 
 ### RM-16-03
 
@@ -1421,9 +1581,9 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 
 **Résultat attendu.** Email principal pour rapprochement ; cas ambigus en conflit explicite, aucune fusion ni « dernière ligne gagnante ». Données d’une autre organisation non révélées.
 
-### RM-16-04
+### ~~RM-16-04~~ — **Réussi sur le clone isolé**
 
-**Scénario.** Confirmer uniquement les lignes valides d’un fichier mixte ; télécharger le rapport ; tenter sans module ou permission.
+**Scénario.** ~~Confirmer uniquement les lignes valides d’un fichier mixte ; télécharger le rapport ; tenter sans module ou permission.~~
 
 **Marche à suivre**
 
@@ -1434,11 +1594,13 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 5. Recharger l’import et les fiches : une seule création/mise à jour par ligne confirmée, sans doublon.
 6. Dans chaque contexte non autorisé, tenter un nouvel import dédié ; vérifier le refus effectif pour absence de module, de permission et de droit communal, sans création.
 
-**Résultat attendu.** Lignes sélectionnées créées/mises à jour une fois ; rejetées identifiables. Nouveau commerce à vérifier, demande Animation soumise à Localeo ; aucun compte activé, invitation envoyée ou participation acceptée automatiquement. Refus hors droit.
+**Résultat attendu.** ~~Lignes sélectionnées créées/mises à jour une fois ; rejetées identifiables. Nouveau commerce à vérifier, demande Animation soumise à Localeo ; aucun compte activé, invitation envoyée ou participation acceptée automatiquement. Refus hors droit.~~
 
-### RM-16-05
+Preuve du 23 octobre 2026 : `rm1604-clone-preuves-completes.json` relie par empreintes le parcours navigateur, son worker ciblé, les effets de ses deux créations et le rejeu des refus. Aperçu 2 créations/1 mise à jour/2 erreurs, accord partiel explicite, trois succès uniques et rapport téléchargé. Les fiches restent BROUILLON avec OnBoard et demande Animation DEMANDEE ; aucun compte, token d'invitation, email ou accord de participation n'est créé. Les contextes sans permission, sans module et hors commune sont refusés. Une assertion initiale du vérificateur attendait un autre libellé de refus : seuls ces contrôles ont été rejoués, sans refaire l'import terminé. Correctif de compteur appliqué au clone uniquement ; aucun déploiement sur TEST partagé.
 
-**Scénario.** Importer V1, modifier localement le téléphone ; dans V2 modifier ce téléphone différemment, changer un site non retouché localement, laisser une cellule vide et conserver un autre champ inchangé.
+### ~~RM-16-05~~ — **Réussi**
+
+**Scénario.** ~~Importer V1, modifier localement le téléphone ; dans V2 modifier ce téléphone différemment, changer un site non retouché localement, laisser une cellule vide et conserver un autre champ inchangé.~~
 
 **Marche à suivre**
 
@@ -1449,7 +1611,9 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 5. Résoudre le téléphone avec **Conserver Localeo**, accepter le nouveau site puis confirmer les lignes prêtes.
 6. Relire la fiche et le rapport : téléphone local conservé, site V2 appliqué, description intacte et contact local préservé ; conserver la référence du flux et des deux imports.
 
-**Résultat attendu.** Téléphone en conflit à arbitrer ; site modifiable après confirmation ; cellule vide sans effacement ; modifications locales préservées si le fichier n’a pas changé le champ. Différences présentées champ par champ.
+**Résultat attendu.** ~~Téléphone en conflit à arbitrer ; site modifiable après confirmation ; cellule vide sans effacement ; modifications locales préservées si le fichier n’a pas changé le champ. Différences présentées champ par champ.~~
+
+**Exécution automatique réussie du 23 octobre 2026 sur TEST.** Le rapport privé `run-1792774394870-77f5` porte le verdict `REUSSI_AUTOMATIQUE`. La reprise relie par empreinte les trois étapes antérieures réussies aux valeurs V2 persistées, vérifiées dans l'interface et par un aperçu de relecture non confirmé. Téléphone local, site V2, description intacte, contact local et unicité du commerce sont vérifiés, sans rejouer l'import déjà terminé. Voir le [suivi d'automatisation](automatisation-recette.md#nouveaux-passages-ciblés-du-23-octobre).
 
 ### RM-16-06
 
@@ -1524,6 +1688,20 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 
 **Résultat attendu.** Audience de la seule animation et droits courants ; fenêtre publication à clôture +30 jours respectée. Absence du module ou de permission interdit la campagne, sans bloquer les notifications automatiques d’animation.
 
+Passage principal du 24 octobre 2026, **partiel sur le clone isolé** : quatre
+brouillons et leurs aperçus créés par les formulaires pour une animation
+dédiée de trois participants terminés et gagnants. Comptages concordants :
+tous 3, parcours non terminé 0, terminé 3, gagnants 3 ; quota identique avant et
+après, aucune diffusion. Avec les préférences conservées, aucun destinataire
+n'est autorisé à recevoir ces messages ; les compteurs ci-dessus désignent
+les populations ciblées avant exclusion. Accès Pro responsable et salarié
+refusés, soit sept contrôles réussis au total.
+Les aperçus sont agrégés : ils ne prouvent pas les
+identités de futurs destinataires effectivement servis. Jeux aux populations
+variées, ensemble des refus, fenêtres temporelles et notification automatique
+restent à compléter. Reçus privés :
+`communication-principal-clone-couverture.json`, scénario non barré.
+
 ### RM-17-02
 
 **Scénario.** Envoyer immédiatement aux comptes autorisant les messages, l’un avec Push et l’autre sans ; vérifier l'exclusion d'un participant opposé, d'un participant sans accord explicite et d'un simple abonné à la commune sans participation, même s'ils acceptent le Push ou les notifications automatiques.
@@ -1538,6 +1716,17 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 6. Relire le rapport : dépôt Live, envoi Push et erreurs sont distingués ; aucune ligne ne prouve à elle seule une lecture du participant.
 
 **Résultat attendu.** Message consultable dans Live même sans permission navigateur ; Push uniquement autorisé ; les trois profils exclus ne reçoivent rien, aucun repli email/SMS. La permission navigateur ne vaut pas accord aux messages organisateur. Dépôt Live, envoi Push et erreurs distingués ; aucun de ces résultats ne prouve une lecture.
+
+Passage principal du 24 octobre 2026, **partiel sur le clone isolé** : nouvelle
+animation publiée et cinq profils préparés par les formulaires et réglages
+normaux, sans modification d'anciens participants. Deux consentants sans Push
+reçoivent chacun un seul message Live et le marquent lu ; opposé après retrait
+d'accord, participant sans accord explicite et simple abonné communal ne
+reçoivent aucun message de cette campagne. Le worker normal ciblé capture les
+quatre participants exacts, crée deux messages et exclut les deux autres pour
+préférence. Les cinq carnets sont relus, un seul crédit consommé. Aucun Push
+tenté ; réception Push et contrôles de non-repli email/SMS restent non exécutés.
+Index privé `communication-live-principal-clone-couverture.json`, scénario non barré.
 
 ### RM-17-03
 
@@ -1685,9 +1874,9 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 - [ ] Animation publiée, commerce Animation seul, participant neuf et participant avec ancien carnet incluant des coffrets.
 - [ ] Anciens emails/QR de test ; navigateur ayant accepté puis autre ayant refusé Push.
 
-### RM-18-01
+### ~~RM-18-01~~ — **Réussi sur le clone isolé**
 
-**Scénario.** Découvrir une animation, sa fiche, les commerçants et les modalités ; s’inscrire puis participer.
+**Scénario.** ~~Découvrir une animation, sa fiche, les commerçants et les modalités ; s’inscrire puis participer.~~
 
 **Marche à suivre**
 
@@ -1698,11 +1887,13 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 5. Ouvrir Live par le parcours proposé et commencer une action de participation autorisée pour cette animation.
 6. Vérifier que la participation existe une seule fois, qu’aucun achat de coffret n’a été imposé et que la suite du jeu est compréhensible ; consigner les écrans parcourus et le résultat.
 
-**Résultat attendu.** Parcours autonome sans achat de coffret imposé ; contenus de communication compréhensibles, sans menus d’administration client.
+**Résultat attendu.** ~~Parcours autonome sans achat de coffret imposé ; contenus de communication compréhensibles, sans menus d’administration client.~~
 
-### RM-18-02
+Preuve du 23 octobre 2026 : `public-discovery-clone-rm18-01-completude-scellee.json` relie les six étapes à leurs rapports et empreintes. Surface publique Animation dédiée, découverte, inscription unique, ajout au carnet, Live et présentation du QR personnel réussis ; les liens générés ont été contrôlés après correction de la configuration locale. Clone isolé uniquement ; aucun achat imposé ni déploiement sur TEST partagé.
 
-**Scénario.** Ouvrir la fiche d’un commerce Animation seul et ses animations liées.
+### ~~RM-18-02~~ — **Réussi sur le clone isolé**
+
+**Scénario.** ~~Ouvrir la fiche d’un commerce Animation seul et ses animations liées.~~
 
 **Marche à suivre**
 
@@ -1712,7 +1903,9 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 4. Ouvrir une animation liée puis revenir à la fiche pour vérifier que le parcours reste utilisable.
 5. Vérifier que la fiche ne présente aucune prestation Coffrets ni qualité de fournisseur Coffrets non acquise ; relever tout contenu contradictoire, sans déduire un droit d’une simple présence publique.
 
-**Résultat attendu.** Présence publique Animation ; aucune présentation comme fournisseur de prestations Coffrets sans ce périmètre.
+**Résultat attendu.** ~~Présence publique Animation ; aucune présentation comme fournisseur de prestations Coffrets sans ce périmètre.~~
+
+Preuve du 23 octobre 2026 : `public-discovery-clone-rm18-02-completude-scellee.json` relie les cinq étapes aux rapports et empreintes. Commerce fictif activé Animation seul par les commandes normales dans une nouvelle commune dédiée, convention scannée par antivirus réel, Coffrets non demandé. Fiche publique, description, animation liée et retour réussis ; aucune prestation ni qualité de fournisseur Coffrets présentée. Clone isolé uniquement ; les communes existantes restent hors de cette bascule.
 
 ### RM-18-03
 
@@ -1728,6 +1921,19 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 6. Ouvrir séparément les anciens liens préparés comme inactifs ou expirés ; vérifier qu’un message explique leur situation et permet de comprendre la suite, sans page vide ; consigner chaque variante.
 
 **Résultat attendu.** Mêmes comptes, participations et gains ; aucun doublon ni perte de coffrets déjà présents dans Live. Liens inactifs/expirés expliqués plutôt qu’une page vide.
+
+Complément essentiel du 30 octobre 2026, **partiel sur le clone isolé** : dix
+contrôles réussis. Une participation est ajoutée volontairement au carnet depuis
+le lien conservé dans son reçu réel d’inscription 201, puis transférée par les
+boutons de sauvegarde/import entre la marketplace et le site public Animation
+local distinct. Sept exports contrôlés : second carnet initialement vide,
+identité et empreinte de capacité conservées, réimport sans doublon et carnet
+d’origine intact. La participation importée est rouverte ; la même projection
+du gain est relue, sans transfert d’un bon autonome. Les initialisations Live
+facultatives sont bloquées avant transmission par le garde réseau : la reprise
+locale reste utilisable dans cette indisponibilité. Ancien carnet prérestauration,
+coffret, anciens QR/emails reçus et accès propre au bon non prouvés ; scénario
+non barré. Preuve `essentiels-rm1803-carnet-20261030-reprise2-prive.json`.
 
 ### RM-18-04
 
@@ -1756,9 +1962,9 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 - [ ] Guides/FAQ accessibles, compte client A et agent Support autorisé.
 - [ ] Calendrier de service actif ; demande ancienne sans réponse humaine et autre avec note interne.
 
-### RM-19-01
+### ~~RM-19-01~~ — **Réussi**
 
-**Scénario.** Consulter l’aide puis créer une demande liée à une animation ; répondre côté Support puis client.
+**Scénario.** ~~Consulter l’aide puis créer une demande liée à une animation ; répondre côté Support puis client.~~
 
 **Marche à suivre**
 
@@ -1769,11 +1975,13 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 5. Revenir au compte client, relire le dossier et répondre dans le même échange ; distinguer la réponse enregistrée d’un éventuel email encore en cours d’envoi.
 6. Recharger les deux vues et comparer référence, messages et état ; vérifier l’ordre des échanges et l’absence de duplication, puis consigner le résultat sans note interne ni donnée personnelle réelle.
 
-**Résultat attendu.** Échange persistant dans un même dossier, état et référence lisibles ; pas de duplication après rechargement/reprise.
+**Résultat attendu.** ~~Échange persistant dans un même dossier, état et référence lisibles ; pas de duplication après rechargement/reprise.~~
 
-### RM-19-02
+**Exécution automatique réussie du 23 octobre 2026 sur TEST.** Après constat du backend `1.0.0+3720a08` sur API et BackOffice, le rapport privé `run-1792772538662-5ec2` porte le verdict `REUSSI_AUTOMATIQUE` : aide/FAQ, demande liée au brouillon A1, réponses Support puis client, rechargements et unicité vérifiés. Le suivi distingue le message enregistré du statut email ; aucune réception email n'est déduite d'une mise en file. Voir le [suivi d'automatisation](automatisation-recette.md#nouveaux-passages-ciblés-du-23-octobre).
 
-**Scénario.** Comparer accusé automatique, cible de 2 jours ouvrés et première réponse humaine.
+### ~~RM-19-02~~ — **Réussi sur le clone isolé**
+
+**Scénario.** ~~Comparer accusé automatique, cible de 2 jours ouvrés et première réponse humaine.~~
 
 **Marche à suivre**
 
@@ -1784,11 +1992,28 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 5. Faire répondre l’agent dans **Support → Organisations Animation**, puis relire côté client la première réponse humaine et son horodatage.
 6. Comparer l’attente avant/après la réponse à l’échéance initiale et consigner séparément les deux dossiers ; un calendrier absent ou un état daté non préparé empêche de valider la variante concernée.
 
-**Résultat attendu.** Accusé ne vaut pas prise en charge humaine ; délai et éventuel retard ne sont pas masqués par l’automatisme. Aucune promesse de résolution en 2 jours n’est déduite.
+**Résultat attendu.** ~~Accusé ne vaut pas prise en charge humaine ; délai et éventuel retard ne sont pas masqués par l’automatisme. Aucune promesse de résolution en 2 jours n’est déduite.~~
 
-### RM-19-03
+Preuve complète du 30 octobre 2026 : les onze contrôles du dossier récent A
+créé le 24 sont complétés par dix contrôles sur un dossier B ouvert le 23 et
+resté sans réponse. Chaque dossier est lu par le client habilité de son
+organisation. Les calendriers de création persistés sont lus sans écriture :
+deux jours ouvrés de 9 h à 17 h pour A, de 9 h à 18 h pour B. Week-end et
+changement d’heure compris, cibles respectives au 27 octobre à 17 h et 18 h
+Paris. Le retard de B est constaté naturellement le 30, sans modifier l’horloge.
+Une note interne normale conserve l’absence de première réponse et le retard,
+et reste invisible au client. La réponse Support unique est ensuite horodatée
+après l’échéance, visible côté B ; attente levée, échéance et calendrier
+initiaux conservés. Le dossier récent A est relu inchangé.
+Les six étapes et quinze pièces figées sont reliées dans
+`rm1902-clone-preuves-completes-20261030.json` ; revue indépendante sans écart
+bloquant. Réponse de recette automatisée via session opérateur autorisée,
+de type LOCALEO dans le contrat ; aucune réception email réelle revendiquée.
+Les deux incidents de harnais antérieurs sont conservés, sans commande engagée.
 
-**Scénario.** Consulter avec A une demande de B et chercher les notes internes depuis le compte client.
+### ~~RM-19-03~~ — **Réussi**
+
+**Scénario.** ~~Consulter avec A une demande de B et chercher les notes internes depuis le compte client.~~
 
 **Marche à suivre**
 
@@ -1798,7 +2023,9 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 4. Ouvrir directement le lien de la demande de B dans cette même session A ; vérifier le refus sans affichage du sujet, des messages ou des coordonnées de B.
 5. Revenir à la liste et à la demande de A, puis recharger ; vérifier que ni la demande de B ni la note interne n’apparaissent après ce changement de navigation et consigner les deux refus.
 
-**Résultat attendu.** Données étrangères et notes internes inaccessibles ; seuls échanges destinés au client visibles.
+**Résultat attendu.** ~~Données étrangères et notes internes inaccessibles ; seuls échanges destinés au client visibles.~~
+
+**Exécution automatique réussie du 23 octobre 2026 sur TEST.** Le rapport privé `run-1792773007754-8aca` porte le verdict `REUSSI_AUTOMATIQUE` : échanges publics de A visibles, demande de B et notes internes refusées, absence de divulgation des repères synthétiques vérifiée après retour et rechargement. Voir le [suivi d'automatisation](automatisation-recette.md#nouveaux-passages-ciblés-du-23-octobre).
 
 
 ## F20 — Préparer une nouvelle édition
@@ -1812,9 +2039,9 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 - [ ] Animation source avec dates, contenus, commerçants, participants, gains et accords ; gestionnaire autorisé.
 - [ ] Commune A2 également accessible au gestionnaire pour tester le refus intercommune.
 
-### RM-20-01
+### ~~RM-20-01~~ — **Réussi**
 
-**Scénario.** Choisir les sections à réutiliser et de nouvelles dates ; créer l’édition dans A1 puis tenter A2.
+**Scénario.** ~~Choisir les sections à réutiliser et de nouvelles dates ; créer l’édition dans A1 puis tenter A2.~~
 
 **Marche à suivre**
 
@@ -1825,11 +2052,13 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 5. Reprendre la préparation depuis la même source et tenter une destination A2 par le parcours disponible ; si l’interface ne permet pas cette destination, faire vérifier le refus de la commande correspondante par le référent.
 6. Vérifier qu’aucun brouillon issu de cette source n’a été créé dans A2, même avec les droits du gestionnaire sur A2 ; consigner séparément création A1 et refus A2.
 
-**Résultat attendu.** Nouveau brouillon dans la même commune seulement ; source conservée, provenance identifiable ; A2 refusée même si accessible au gestionnaire.
+**Résultat attendu.** ~~Nouveau brouillon dans la même commune seulement ; source conservée, provenance identifiable ; A2 refusée même si accessible au gestionnaire.~~
 
-### RM-20-02
+**Exécution automatique réussie du 23 octobre 2026 sur TEST.** Rapport privé `run-1792774003896-55cb`, verdict `REUSSI_AUTOMATIQUE` : nouvelle édition créée dans A1, source conservée, refus A2 HTTP 422 `COMMUNE_EDITION_DIFFERENTE` et inventaires des deux communes comparés sans création indue. Voir le [suivi d'automatisation](automatisation-recette.md#nouveaux-passages-ciblés-du-23-octobre).
 
-**Scénario.** Examiner participants, gains, QR, paiements, accords et consentements du brouillon ; tenter sa publication.
+### ~~RM-20-02~~ — **Réussi sur le clone isolé**
+
+**Scénario.** ~~Examiner participants, gains, QR, paiements, accords et consentements du brouillon ; tenter sa publication.~~
 
 **Marche à suivre**
 
@@ -1840,11 +2069,13 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 5. Ouvrir l’assistant de publication du brouillon et contrôler les points à revalider : commerçants, droits actuels, dotation, règlement, accords et préparation selon le type.
 6. Tenter de publier alors qu’un prérequis obligatoire identifié manque ; vérifier le blocage expliqué et le maintien du brouillon, puis consigner le prérequis et l’absence de publication.
 
-**Résultat attendu.** Aucun de ces objets recopié ; commerçants, droits, dotation, règlement et accords à revalider ; publication bloquée tant que nécessaire.
+**Résultat attendu.** ~~Aucun de ces objets recopié ; commerçants, droits, dotation, règlement et accords à revalider ; publication bloquée tant que nécessaire.~~
 
-### RM-20-03
+Preuves vérifiées le 24 octobre 2026 : `edition-objets-clone-sceau-completude.json`. Nouvelle édition créée par le formulaire normal ; les six familles présentes sur la source ne sont pas copiées : participants, gains, QR, paiements, accords et consentements. Contrôle UI/API complété par une relecture SQL strictement en lecture seule. Source inchangée ; prérequis manquants affichés, publication refusée avec HTTP 422 et brouillon conservé. Clone isolé uniquement.
 
-**Scénario.** **Accompagné :** modifier la source après ouverture du formulaire ou reprendre une création après réponse perdue.
+### ~~RM-20-03~~ — **Réussi**
+
+**Scénario.** ~~**Accompagné :** modifier la source après ouverture du formulaire ou reprendre une création après réponse perdue.~~
 
 **Marche à suivre**
 
@@ -1855,7 +2086,9 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 5. Pour le second essai, faire préparer au référent une perte contrôlée de réponse lors de la création, sans modifier les données ; utiliser ensuite le parcours de consultation du résultat ou de reprise de la même opération.
 6. Ouvrir **Animations**, retrouver le résultat et vérifier qu’une seule nouvelle édition correspond à cette création reprise ; relever référence et message de reprise, sans lancer volontairement une seconde création indépendante.
 
-**Résultat attendu.** Conflit de version explicite, pas de copie incohérente ; un seul nouveau brouillon pour une même création reprise.
+**Résultat attendu.** ~~Conflit de version explicite, pas de copie incohérente ; un seul nouveau brouillon pour une même création reprise.~~
+
+**Exécution automatique réussie du 23 octobre 2026 sur TEST.** Rapport privé `run-1792774003896-55cb`, verdict `REUSSI_AUTOMATIQUE` : modification concurrente réelle, conflit explicite et saisie actualisée ; réponse coupée après création serveur puis même reçu consulté, un seul brouillon et aucune seconde commande. Voir le [suivi d'automatisation](automatisation-recette.md#nouveaux-passages-ciblés-du-23-octobre).
 
 
 ## F21 — Objectifs, sources de diffusion, bilans et satisfaction
@@ -1870,9 +2103,9 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 - [ ] Jeu chiffré connu : inscriptions, démarrages, parcours terminés, validations QR/PIN, gains et remises ; une correction de remise et un remplacement de gagnant.
 - [ ] Animation clôturée et au moins deux répondants de test ; compte organisateur sans accès à leur identité via l’enquête.
 
-### RM-21-01
+### ~~RM-21-01~~ — **Réussi sur le clone isolé**
 
-**Scénario.** Fixer les objectifs puis publier ; tenter de changer les objectifs ; comparer résultats et édition comparable.
+**Scénario.** ~~Fixer les objectifs puis publier ; tenter de changer les objectifs ; comparer résultats et édition comparable.~~
 
 **Marche à suivre**
 
@@ -1883,11 +2116,22 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 5. Ouvrir le bilan de la fiche ou **Bilans**, lire les résultats et la comparaison à l’édition préparée ; vérifier que définitions et conditions de comparaison sont compréhensibles.
 6. Comparer les exemples « zéro mesuré » et « absence de données » ; vérifier qu’ils ne sont pas présentés comme équivalents et consigner les objectifs et résultats observés.
 
-**Résultat attendu.** Objectifs facultatifs mais figés à publication ; définitions et comparabilité lisibles ; absence de données distincte de zéro.
+**Résultat attendu.** ~~Objectifs facultatifs mais figés à publication ; définitions et comparabilité lisibles ; absence de données distincte de zéro.~~
 
-### RM-21-02
+**Exécution réussie du 24 octobre 2026 sur le clone isolé.** Le même brouillon
+publié conserve ses objectifs 7/5/3 figés : modification refusée 409 et champs
+désactivés ; zéro mesuré distinct de la satisfaction non collectée. L’autre
+édition publiée n’a aucun objectif. Les deux clôtures ont été réalisées par le
+parcours normal, sans dates forcées : mêmes commune, moteur et définitions,
+fenêtres complètes et couverture complète. Comparaison visible de 0 et 4
+inscrits, écart +4 ; les taux sans base de calcul restent absents.
+Vingt-trois contrôles finaux, six étapes et empreintes dans
+`sources-diffusion-clone-objectifs-comparer-sceau-completude.json` ; ancien
+index partiel conservé, aucune publication rejouée.
 
-**Scénario.** Inscrire via les deux sources et sans source ; contrôler le bilan.
+### ~~RM-21-02~~ — **Réussi sur le clone isolé**
+
+**Scénario.** ~~Inscrire via les deux sources et sans source ; contrôler le bilan.~~
 
 **Marche à suivre**
 
@@ -1898,7 +2142,9 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 5. Comme gestionnaire A1, ouvrir le bilan et consulter les sources ; comparer les variations des deux sources connues et de la catégorie inconnue aux trois inscriptions.
 6. Vérifier que le total correspond aux inscriptions retenues ; faire joindre par le référent la preuve ciblée d’absence de suivi publicitaire entre sites, que les seuls chiffres du bilan ne démontrent pas.
 
-**Résultat attendu.** Attribution à la source connue et catégorie « inconnue », aucun suivi publicitaire entre sites ; total cohérent avec les inscriptions retenues.
+**Résultat attendu.** ~~Attribution à la source connue et catégorie « inconnue », aucun suivi publicitaire entre sites ; total cohérent avec les inscriptions retenues.~~
+
+Preuves vérifiées le 24 octobre 2026 : `sources-diffusion-clone-completude-scellee.json`. Deux sources créées depuis le formulaire organisateur et trois inscriptions réelles avec des participants et contextes distincts : mairie, commerce, accès direct. Bilan UI/API concordant : total 1 à 4, chaque catégorie augmente de un. Les trois traces réseau complètes ne montrent aucune tentative externe ni suivi publicitaire ; configuration et sources servies contrôlées. Les service workers sont bloqués pendant les inscriptions et leur portée Live a été auditée séparément. Les deux tentatives de police externe du portail gestionnaire sont signalées dans la preuve et exclues du constat relatif aux participants. Branche lien exercée, sans lecture optique revendiquée. Clone isolé uniquement.
 
 ### RM-21-03
 
@@ -1915,9 +2161,19 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 
 **Résultat attendu.** Aucun double comptage QR/PIN/rejeu ; indicateurs distincts inscrits, commencés/terminés, passages, gagnants et lots remis. Aucun chiffre d’affaires inventé à partir des passages.
 
-### RM-21-04
+Passage principal du 24 octobre 2026, **partiel sur le clone isolé** :
+quarante-deux valeurs du bilan relues dans l’interface et recoupées avec des
+comptages indépendants en lecture seule. Remise puis correction du seul gain
+externe dédié : lots remis 0 → 1 → 0, autres indicateurs et deux autres gains
+inchangés. Les historiques distinguent attributions anciennes et gagnants
+courants, ainsi que consommations QR/PIN et validations de parcours.
+Les bilans avant/après une nouvelle validation QR/PIN et un remplacement
+restent à vérifier ; scénario non barré. Preuve
+`bilans-remises-principal-preuves-figees.json`.
 
-**Scénario.** Après clôture, répondre dans Live avec note 1 puis 5 et commentaire facultatif ; tester 0/6, absence de réponse et accès avant clôture.
+### ~~RM-21-04~~ — **Réussi sur le clone isolé**
+
+**Scénario.** ~~Après clôture, répondre dans Live avec note 1 puis 5 et commentaire facultatif ; tester 0/6, absence de réponse et accès avant clôture.~~
 
 **Marche à suivre**
 
@@ -1928,7 +2184,9 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 5. Comme gestionnaire, ouvrir le bilan : avec deux seules réponses nouvelles, vérifier un ajout de deux réponses et de six points à la somme des notes, soit une moyenne de 3 si aucune autre note n’existait.
 6. Lire les commentaires et vérifier l’absence d’identité ou d’identifiant participant ; contrôler avec les boîtes de test et le référent qu’aucune notification supplémentaire automatique n’a été produite par cette enquête.
 
-**Résultat attendu.** Enquête facultative accessible après clôture ; bornes respectées ; moyenne et nombre de réponses cohérents, commentaires sans identité affichée à l’organisateur ; aucune notification supplémentaire automatique.
+**Résultat attendu.** ~~Enquête facultative accessible après clôture ; bornes respectées ; moyenne et nombre de réponses cohérents, commentaires sans identité affichée à l’organisateur ; aucune notification supplémentaire automatique.~~
+
+Preuve du 23 octobre 2026 : `rm2104-live-complet-clone-rapport.json` dans le dossier privé de campagne. Dix contrôles réussis dans Live et Animation sur la cible restaurée isolée : refus avant clôture, deux répondants distincts (1 sans commentaire et 5 avec commentaire), bornes 0/6, troisième participant sans réponse, deux réponses et somme six, moyenne trois, commentaire anonyme et cinq canaux de notifications/outbox inchangés. Les erreurs initiales de sélecteur et de transport cookie du vérificateur sont conservées ; le contrôle final reprend en lecture seule, sans rejouer les réponses. Aucun transport fournisseur réel ni déploiement sur TEST partagé n'est revendiqué.
 
 
 ## F22 — Cohérence ERP, Support et Atelier
@@ -1957,9 +2215,20 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 
 **Résultat attendu.** Libellés et états cohérents avec Animation/Pro/Live ; pas de confusion bon/coffret/externe, pas d’objet étranger ; CSV limité à la page affichée, conforme au filtre et aux droits. Il n'est pas présenté comme un export de toutes les pages.
 
-### RM-22-02
+Complément essentiel du 30 octobre 2026, **partiel sur le clone isolé** : sept
+contrôles complètent les quatorze contrôles ERP/Support antérieurs. Les mêmes
+trois gains sont rapprochés dans Animation : Coffret envoyé distinct de ses
+prestations consommées, lot externe sans remise renseignée distinct d’une
+remise déclarée, bon numérique consommé. Pro retrouve exactement la validation
+active du même bon, état VALIDEE et canal QR_PRINCIPAL ; l’interface indique
+« Lot remis ». Dans Live, l’échantillon externe est relu depuis son vrai reçu
+d’inscription 201 avec les mêmes références. Aucune écriture métier transmise.
+L’accès légitime Live aux deux autres échantillons n’est pas établi ; scénario
+non barré. Preuve `essentiels-rm2201-preuves-20261030.json`.
 
-**Scénario.** Vérifier les sommes financières des trois dotations ; tenter de sélectionner le commerce Animation seul comme fournisseur de prestation Coffrets dans Atelier.
+### ~~RM-22-02~~ — **Réussi sur le clone isolé**
+
+**Scénario.** ~~Vérifier les sommes financières des trois dotations ; tenter de sélectionner le commerce Animation seul comme fournisseur de prestation Coffrets dans Atelier.~~
 
 **Marche à suivre**
 
@@ -1970,11 +2239,28 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 5. Vérifier qu’il ne peut pas être retenu pour commander cette prestation ; faire contrôler par le référent le refus serveur d’une commande visant ce fournisseur, même si l’interface le masque.
 6. Vérifier que le fournisseur Coffrets habilité reste sélectionnable selon ses prérequis habituels, sans commander réellement hors du jeu de recette ; consigner refus et comparaison financière.
 
-**Résultat attendu.** Lots libres exclus des achats/commissions/reversements Coffrets ; sélection et commande interdite côté serveur pour le fournisseur non habilité.
+**Résultat attendu.** ~~Lots libres exclus des achats/commissions/reversements Coffrets ; sélection et commande interdite côté serveur pour le fournisseur non habilité.~~
 
-### RM-22-03
+Preuve complète du 30 octobre 2026 : treize contrôles financiers complètent
+les huit contrôles fournisseur rejoués après correction le 29 octobre.
+Les quatre achats Coffrets du jeu totalisent 179,60 € ; les trois mouvements
+uniques représentent 33,84 € dus aux commerçants et 5,96 € de commissions
+constatées. Montants, références et états sont rapprochés dans les vues ERP
+avec les faits indépendants en lecture seule, identiques avant/après.
+Les deux animations libres n’ajoutent aucun achat Coffret, instance,
+reversement ou commission. Le fournisseur Animation seul reste bloqué dans
+l’interface et refusé 403 sans effet côté serveur ; le fournisseur historique
+ouvert Coffrets reste sélectionnable à 320/1280 px. Leur état ACTIF et leur
+commune accessible sont relus le 30 octobre. Aucun nouvel achat, paiement,
+transfert ou correctif financier appliqué ; la lecture des commissions porte
+sur les valeurs existantes, colonne Avant. Les six étapes sont reliées aux
+preuves dans `rm2202-clone-preuves-completes-20261030.json`, avec 29 pièces
+figées pour le passage principal. Anomalie et validation dans le
+[registre backend](../../roadmap/anomalies/backend.md).
 
-**Scénario.** Ouvrir une projection commerciale/CRM disponible et ses liens vers les parcours métier.
+### ~~RM-22-03~~ — **Réussi sur le clone isolé**
+
+**Scénario.** ~~Ouvrir une projection commerciale/CRM disponible et ses liens vers les parcours métier.~~
 
 **Marche à suivre**
 
@@ -1984,8 +2270,9 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 4. Suivre ses liens vers les fiches ou parcours autorisés, puis revenir et recharger la projection.
 5. Comparer les états aux références initiales : la consultation n’a créé aucune vente, paiement, activation ou extension de périmètre ; consigner exactement la projection testée, sans inclure le CRM complet ni l’import E71 dans cette validation.
 
-**Résultat attendu.** Consultation ne crée ni vente, paiement, activation ou périmètre. Le CRM complet et son import E71 ne sont pas considérés comme livrés par E73.
+**Résultat attendu.** ~~Consultation ne crée ni vente, paiement, activation ou périmètre. Le CRM complet et son import E71 ne sont pas considérés comme livrés par E73.~~
 
+Preuve du 23 octobre 2026 : `rm2203-clone-preuves-completes.json` relie cinq contrôles navigateur aux instantanés SQL en lecture seule avant/après. Projection testée : disponibilité du catalogue et diagnostic commercial 360 ; liens métier, retour et rechargement réels. Ventes, paiements, instances, statuts et périmètres des objets concernés restent identiques. Aucun CRM complet ni import E71 déclaré livré ; clone isolé uniquement.
 
 ## F23 — Usages, coûts internes et alertes de budget
 
@@ -1998,6 +2285,7 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 - [ ] Mesures d’emails, SMS, préparation de chasse, stockage, Push et support : valeurs constatées, estimées et indisponibles.
 - [ ] Traitement de pilotage et alertes configurés ; budget synthétique de 100 € pour A et aucun budget pour B.
 - [ ] Profils client et Localeo habilité ; deux périodes mensuelles identifiées.
+
 
 ### RM-23-01
 
@@ -2014,9 +2302,16 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 
 **Résultat attendu.** Interne : postes, période et fiabilité explicites. Client : usages, quotas, factures seulement ; pas de coûts/marges internes. Donnée absente ou estimation jamais présentée comme dépense certaine.
 
-### RM-23-02
+Passage principal du 24 octobre 2026, **partiel sur le clone isolé** : huit
+contrôles réussis sur les deux mois affichés, les six postes, leur ventilation,
+les vues Abonnement/Finance du client et le refus 403 d’une lecture interne
+directe. Les familles de mesures constatées, estimées et non valorisées ne sont
+pas toutes préparées sur deux mois ; le scénario reste non barré. Preuve privée
+`couts-principal-clone-rapport.json`, aucune commande métier exécutée.
 
-**Scénario.** **Accompagné :** faire passer le coût suivi de 79 à 80 puis 100 € ; rejouer les événements ; consulter l’organisation sans budget.
+### ~~RM-23-02~~ — **Réussi sur le clone isolé**
+
+**Scénario.** ~~**Accompagné :** faire passer le coût suivi de 79 à 80 puis 100 € ; rejouer les événements ; consulter l’organisation sans budget.~~
 
 **Marche à suivre**
 
@@ -2027,11 +2322,13 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 5. Faire rejouer exactement les mêmes événements par le mécanisme de reprise, puis relire valeurs et alertes ; vérifier l’absence de double mesure et de doublon logique d’alerte.
 6. Consulter B après traitement de ses mesures : le suivi doit rester disponible sans alerte de budget ; consigner les quatre variantes sans modifier directement les tables.
 
-**Résultat attendu.** Alertes internes aux seuils 80 %/100 %, pas de doublon logique au rejeu ; sans budget, suivi disponible sans alerte de budget.
+**Résultat attendu.** ~~Alertes internes aux seuils 80 %/100 %, pas de doublon logique au rejeu ; sans budget, suivi disponible sans alerte de budget.~~
 
-### RM-23-03
+Preuve du 23 octobre 2026 : `rm2302-clone-preuves-completes.json` relie les commandes économiques normales, leurs rejeux HTTP réels, les lectures ERP/Ops et le canal de test outbox local. Budget 100 €, coûts synthétiques explicitement estimés 79/80/100 €, alerte logique unique aux seuils 80/100, deux intentions de notification et organisation B suivie sans budget ni alerte. Aucune écriture SQL métier, facture ni livraison fournisseur ; clone isolé uniquement.
 
-**Scénario.** Après dépassement, consulter abonnement, quotas et parcours de l’organisateur.
+### ~~RM-23-03~~ — **Réussi sur le clone isolé**
+
+**Scénario.** ~~Après dépassement, consulter abonnement, quotas et parcours de l’organisateur.~~
 
 **Marche à suivre**
 
@@ -2041,8 +2338,9 @@ Succès de RM-01-01 et RM-01-02 confirmé par l’utilisateur le 22 octobre 2026
 4. Comparer aux relevés : aucun supplément facturé, aucune suspension et aucun changement de quota ne doivent provenir de cette seule alerte.
 5. Reprendre le parcours organisateur choisi et vérifier qu’il reste autorisé dans ses droits initiaux ; consigner l’alerte interne et les états client comparés, en distinguant toute consommation normale liée à l’action de test.
 
-**Résultat attendu.** Aucun supplément facturé, suspension ou quota changé par la seule alerte économique.
+**Résultat attendu.** ~~Aucun supplément facturé, suspension ou quota changé par la seule alerte économique.~~
 
+Preuve du 23 octobre 2026 : `rm2303-clone-preuves-completes.json` conserve les relevés immuables du responsable A1 avant/après. Budget interne synthétique 200 €, estimation portée à 201 € par commande normale et alerte constatée. Abonnement, quotas, crédit, demandes/factures et permissions du parcours organisateur sont identiques par API et navigateur ; aucun achat ni supplément facturé. Clone isolé uniquement, sans déploiement sur TEST partagé.
 
 ## F24 — Export complet et fermeture accompagnée
 
