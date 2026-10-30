@@ -1,5 +1,39 @@
 # Registre des anomalies
 
+## ANO-BE-E73-CORS-COFFRETS — Origine Coffrets TEST absente du CORS
+
+Signalement du **30 octobre 2026** depuis `https://test-coffrets.localeo.city`.
+Reproduction HTTP publique, sans authentification, sur
+`https://test-api.localeo.city/public/commercialisation/coffrets/page?avec_prestations=false&page_size=8` :
+GET 200 sans `Access-Control-Allow-Origin`, préflight OPTIONS 400 pour cette
+origine, contre OPTIONS 200 avec origine autorisée pour `test-marketplace`.
+Corrélations : GET `LOC-bbfbe2cc-46be-4299-9de1-6be8935b5084`, OPTIONS refusé
+`LOC-7b4c09d1-05e8-4fbc-83b9-6236a727751b`.
+
+Cause démontrée : l'origine exacte n'est pas autorisée dans la réponse du
+backend TEST. Le profil d'exemple backend et la liste du guide de configuration
+omettaient également ce domaine. Correction locale : ajout de cette seule
+origine, en conservant les origines existantes, sans joker ni élargissement des
+origines de session du portail organisateur. Le middleware et les règles métier
+ne changent pas ; aucun schéma, migration, donnée ou générateur affecté.
+
+Test de reproduction local : GET Coffrets 200 sans en-tête autorisé avant
+correction du profil (une réussite historique, un échec sur la nouvelle origine).
+`tests/api/test_marketplace_cors.py` vérifie le profil versionné, GET et
+préflight, ancienne/nouvelle origine, refus des origines inconnues, ressemblantes
+et HTTP. **22 tests CORS réussis** après correction du profil, incluant les
+contrôles Animation et Pro voisins. Les journaux sont dans
+`localeo-backend/tmp/cors-coffrets-*.log`. Liens documentaires et 130 sources
+exportées vérifiés ; `git diff --check` réussi dans les deux dépôts touchés.
+
+**Configuration distante restant à appliquer** : ajouter
+`https://test-coffrets.localeo.city` à `LOCALEO_CORS_ALLOW_ORIGINS` du service
+qui sert `test-api.localeo.city`, sans supprimer les valeurs présentes, puis
+redémarrer/redéployer et rejouer GET/OPTIONS. La lecture HTTP n'a pas consulté
+les variables ou journaux privés de l'hébergeur. Profil et tests enregistrés dans
+le commit backend `c25d202`, à la demande de l'utilisateur après validation.
+Aucune modification de la configuration distante.
+
 ## Correction du 30 octobre 2026 — navigation Animation ERP
 
 Demande utilisateur : une entrée de menu par fonctionnalité, en-têtes et retours

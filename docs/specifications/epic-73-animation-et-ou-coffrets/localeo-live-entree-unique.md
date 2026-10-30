@@ -66,6 +66,48 @@ Les numéros 01 à 12 reprennent les CA1 à CA12 fournis par l'utilisateur.
 | E73-EVO-LIVE-11 | Découverte, communes, inscription et carnet utilisables à 320/390 px et en PWA ; safe-area et accès au clavier. |
 | E73-EVO-LIVE-12 | Recette de bascule : domaine, lecture anonyme, inscription, reprise des accès, historique, redirections et non-régression Coffrets. Aucune mise en service déclarée sur la seule base d'un build. |
 
+## Complément UX du 30 octobre 2026 — E73-EVO-LIVE-UX
+
+Retour utilisateur après la première version : supprimer le rappel de marque
+au-dessus de Découvrir, clarifier son icône et conserver **Mes communes** comme
+unique écran de gestion. Les anciens accès Réglages `?focus=city` ouvrent cet
+écran ; les réglages de carnet et notifications restent disponibles. Leur
+ouverture ne remplace ni ne synchronise implicitement une commune par défaut.
+
+La découverte présente la dynamique et le défi de chaque animation, en priorité
+mobile, sans faux classement, probabilité de gain ou activité simulée.
+
+| Critère ajouté | Comportement attendu |
+| --- | --- |
+| E73-EVO-LIVE-UX-01 | Marque conservée dans l'en-tête, sans rappel dans le contenu Découvrir ; boussole et libellé Découvrir, repère cartographique pour Mes communes ; suppression du raccourci icône redondant de la surface Animation. |
+| E73-EVO-LIVE-UX-02 | Recherche et modification des communes dans Mes communes ; aucun second sélecteur dans Réglages ; catégories de notification et Push conservent exactement les communes choisies, y compris une sélection vide. |
+| E73-EVO-LIVE-UX-03 | Cartes illustrées : statut serveur, défi configuré s'il existe, nombres publics de participants, gagnants et unités en dotation. Zéro confirmé distinct d'une valeur inconnue ; ancien backend compatible sans compteurs. |
+| E73-EVO-LIVE-UX-04 | À 320/390 px, pas de débordement, liens tactiles et données lisibles ; texte agrandi, clavier et réduction des mouvements préservés. |
+
+Contrat additif catalogue/détail : `dynamique` avec `nombre_participants`,
+`nombre_gagnants`, `nombre_lots_a_gagner`, entiers non négatifs ou valeurs
+inconnues nulles. Participants = inscriptions présentes, tous statuts confondus,
+selon le compteur métier existant. Gagnants = participants disposant d'une
+attribution courante, hors suppléants et attributions remplacées ; pour les lots
+libres, le tirage doit être confirmé, selon les projections de bilan.
+Lots = nombre total d'unités de la dotation, pas nombre de catégories de lots,
+ni stock restant. Cette portée est indiquée sur la carte. Aucune identité,
+capacité personnelle ou donnée de contact n'est publiée.
+
+Le backend fournit cette projection de lecture groupée pour la page publique
+autorisée ; aucun appel par carte et aucun calcul métier côté interface. Le
+frontend omet les valeurs absentes, négatives ou non entières sans les convertir
+en zéro. Le défi reprend le nombre de validations configuré sans fabriquer une
+progression personnelle. Les compteurs sont ceux de la lecture, sans promesse
+de mise à jour en temps réel. L'ancien champ `nombre_lots` reste compatible.
+
+Impacts : backend et contrat OpenAPI documentaire additifs, consommateur Live
+et fixtures adaptés ; pas de migration, nouveau compte, permission, commande
+métier, tâche, fournisseur ou configuration DNS. Les données de démonstration
+existantes alimentent les mêmes lectures ; pas de génération réelle nécessaire.
+La validation hébergée et les mesures PostgreSQL de volumétrie restent distinctes
+des tests isolés. Les preuves sont consignées dans le suivi d'implémentation.
+
 ## Invariants, contrats et conservation
 
 Le backend reste propriétaire de la visibilité publique, des dates et autorisations

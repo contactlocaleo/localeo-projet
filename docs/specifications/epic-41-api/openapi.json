@@ -108471,6 +108471,16 @@
             "title": "Nombre Lots",
             "default": 0
           },
+          "dynamique": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DynamiqueAnimationPubliquePayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "regles_participation": {
             "additionalProperties": true,
             "type": "object",
@@ -155921,6 +155931,51 @@
           "allowedActions"
         ],
         "title": "PageValidations"
+      },
+      "DynamiqueAnimationPubliquePayload": {
+        "properties": {
+          "nombre_participants": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nombre Participants",
+            "description": "Personnes inscrites, tous statuts confondus."
+          },
+          "nombre_gagnants": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nombre Gagnants",
+            "description": "Personnes gagnantes distinctes : gains courants hors suppleants et remplaces, tirages libres confirmes uniquement."
+          },
+          "nombre_lots_a_gagner": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nombre Lots A Gagner",
+            "description": "Unites de dotation prevues au total, sans deduction des gains deja attribues ; pas un stock restant."
+          }
+        },
+        "type": "object",
+        "title": "DynamiqueAnimationPubliquePayload"
       }
     },
     "securitySchemes": {

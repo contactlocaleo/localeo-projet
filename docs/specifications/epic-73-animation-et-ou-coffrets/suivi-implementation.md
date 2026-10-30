@@ -2,6 +2,106 @@
 
 Début : **18 octobre 2026**. [Spécification](README.md), [backlog](../../roadmap/en-cours/epic-73-animation-et-ou-coffrets-backlog.md), [matrice des 63 critères et preuves](verification-livraison.md). Objectif : les 38 US, dans les dix lots demandés. Les lignes ci-dessous ne valent pas acceptation tant que les preuves correspondantes ne sont pas enregistrées.
 
+## Complément UX du 30 octobre 2026 — E73-EVO-LIVE-UX
+
+Demande : simplifier la navigation et donner envie de participer grâce à la
+dynamique réelle des animations. [Critères UX et sémantique des chiffres](localeo-live-entree-unique.md#complément-ux-du-30-octobre-2026--e73-evo-live-ux).
+Bases de validation : Marketplace `0a2de86`, backend `245f7d8`, documentation
+`69e7e84`, avec les modifications décrites ci-dessous. Réalisation enregistrée
+dans Marketplace `feb5d0e` et backend `3a6f930` ; le profil CORS Coffrets TEST
+est enregistré séparément dans le backend `c25d202`.
+Le statut global E73 reste En cours.
+
+- Marque conservée dans l'en-tête, rappel retiré du contenu Découvrir ;
+  raccourci icône redondant supprimé en surface Animation. Boussole Découvrir
+  et repère Mes communes avec leurs libellés ; marque vers la découverte.
+- Recherche de commune retirée de Réglages ; anciens liens `?focus=city`
+  conservés par accès à Mes communes. Pas de première commune choisie
+  automatiquement. Les préférences de notification sont lues à l'ouverture,
+  sans PUT implicite. Une sélection vide explicite reste distincte d'une
+  préférence locale absente ou inaccessible, qui conserve les communes serveur.
+- Cartes illustrées avec statut, défi configuré et trois métriques publiques :
+  inscriptions présentes, gagnants courants distincts et unités de dotation.
+  Les valeurs inconnues ou invalides ne deviennent pas zéro. Le total de lots
+  n'est ni le nombre de types, ni le stock restant. Aucun faux flux d'activité,
+  classement, taux de gain ou progression personnelle n'est inventé.
+- Nouvelle lecture backend groupée sur les identifiants visibles de la page,
+  maximum 50, une instruction SQL supplémentaire, sans lecture par carte.
+  Le compteur d'inscrits et les états d'attribution restent ceux du backend ;
+  aucun contact, token, nom de participant ou donnée personnelle n'est publié.
+  Contrat OpenAPI additif `dynamique`, champs optionnels non négatifs ou nulls.
+
+La revue indépendante vérifie notamment les attributions remplacées, suppléants,
+tirages libres non confirmés, quantités Coffrets et null contre zéro. Les
+retours ont aussi couvert les grands nombres sur mobile et la conservation des
+communes serveur sans choix local explicite. La reproduction de navigation est
+rouge avant correction (`tmp/live-ux-navigation-reproduction.log`). Le premier
+test de case de notification exigeait une modification immédiate : les traces
+montrent le PUT 200 correct ; le scénario attend désormais l'état confirmé,
+avec conservation des assertions de contenu et du refus 503.
+
+Validation backend : **20 tests ciblés réussis** dans
+`tmp/live-dynamique-final.log`, dont 50 identifiants lus en une instruction,
+et **620 contrôles d'architecture réussis** dans
+`tmp/live-dynamique-architecture.log`. Une suite plus large conserve **29
+réussites et un échec OpenAPI préexistant** : la route binaire
+`GET /protected/animation-locale/animations/{animation_id}/flyer/illustration`
+n'est pas recensée dans la liste binaire du test global des response models.
+L'échec est reproduit sur le HEAD initial `245f7d8` dans une copie isolée,
+preuve `tmp/live-dynamique-baseline-api.log` ; aucune assertion ou exclusion
+affaiblie. Le test de coût PostgreSQL est adapté à une lecture supplémentaire
+fixe et bornée, sans être déclaré exécuté sur PostgreSQL.
+
+Le test F12 existant révèle aussi
+[ANO-MPL-E73-LIVE-03](../../roadmap/anomalies/marketplace.md) : les entrées locales
+dans Live rechargeaient le document complet. Les liens du routeur conservent
+la navigation interne, tout en acceptant le domaine configuré lorsqu'il est
+externe. F12 repasse avec les mêmes contrôles de mémoire, de service worker et
+de saisie. Le scénario historique de catalogue attendait les anciens sélecteurs,
+routes et informations de gain dans la découverte : il est adapté au catalogue
+public, et ses assertions de gagnant, lot, QR personnel et historique sont
+conservées dans le détail autorisé et Mes participations (`LiveCatalogContinuity`).
+
+Le contrat E41 est limité aux deux schémas concernés (55 lignes ajoutées).
+L'export complet hors ligne révèle une dérive historique plus large et reste
+dans les sorties de travail ; elle n'est pas incorporée à cette évolution.
+Les vérifications navigateur couvrent **40 scénarios distincts** sur plusieurs
+lots : découverte et métriques, communes, stockage absent/corrompu/vide,
+notifications (401/503 et reprise), anciens Coffrets, avis et sauvegarde,
+dialogues et continuité des accès personnels. Journaux Marketplace :
+`tmp/live-ux-restants-reprise1.log` (23 réussites),
+`tmp/live-ux-integration-finale.log` (quatre scénarios d'avis et reprise réussis,
+puis un échec de chargement initial rejoué dans le lot suivant),
+`tmp/live-ux-notifications-regression.log` (11 réussites et les deux écarts
+ci-dessus), `tmp/live-ux-derniers-rejeux.log` (six réussites après correction et
+adaptation). Des reprises sont nécessaires après des dépassements du délai de
+chargement initial ; aucune assertion de comportement ni délai n'est affaibli.
+La revue des captures à 200 % fait passer les métriques de colonnes fixes à des
+blocs qui se répartissent selon leur contenu, afin de garder les grands nombres
+lisibles. Le défi dit « validations à réaliser », sans laisser croire qu'un
+passage suffit pour une tombola avec achat confirmé. La chasse ne publie pas ce
+seuil numérique. **125 tests Node réussis**, journal `tmp/live-ux-security.log`.
+Le dernier rejeu des quatre scénarios de dynamique passe sur le libellé et le
+CSS finaux (`tmp/live-ux-dynamique-finale.log`), y compris trois milliards d'unités
+en dotation à 390 px et texte 200 %, sans morceler les nombres. Captures relues
+dans `tmp/live-ux-preuves/`. ESLint sources et tests touchés réussi ; contrôles
+documentaires : 97 guides, 1 069 liens locaux, aucune erreur, et 130 sources
+exportées vérifiées. `git diff --check` réussi dans les trois dépôts modifiés.
+Les échecs et reprises de harnais restent dans les sorties privées de travail.
+Les tests navigateur utilisent un build isolé et des fixtures, sans trafic réel.
+Les tests SQL utilisent une base jetable : les plans PostgreSQL et la tenue en
+charge restent à mesurer avant activation. Le cache public existant
+(60 secondes, puis stale-while-revalidate 300 secondes) est conservé : les
+compteurs ne constituent pas une promesse de temps réel.
+
+Impacts : backend, Marketplace et contrat canonique E41 ; pas de migration,
+nouveau rôle, nouveau compte, permission, fournisseur ou paramètre. Les règles
+de participation et les données existantes sont conservées ; les fixtures
+évoluent sans génération de démonstration réelle. Pas de changement ERP, Pro,
+portail organisateur ou batch. Les commits sont créés à la demande de
+l'utilisateur après validation ; aucun déploiement ni mutation du TEST partagé
+pour ce complément. Aucun scénario historique de recette barré.
+
 ## Évolution locale du 30 octobre 2026 — E73-EVO-LIVE-UNIQUE
 
 Demande : [Live comme entrée unique](localeo-live-entree-unique.md), à

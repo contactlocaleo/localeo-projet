@@ -11,6 +11,12 @@ Cette évolution remplace la cible d'interface E73-EVO-DOMAINES/UX-PUBLIC,
 conserve le portail de gestion et ne change pas le statut **En cours**.
 La recette DNS/TLS reste distincte de l'implémentation locale.
 
+Complément **E73-EVO-LIVE-UX du 30 octobre 2026** : découverte immersive avec
+défi et compteurs publics agrégés, marque et raccourcis simplifiés, gestion des
+communes centralisée dans Mes communes. Critères `E73-EVO-LIVE-UX-01` à `04`
+dans la même spécification ; ancien backend compatible sans chiffres inventés.
+Le statut de l'epic et les résultats historiques de recette sont conservés.
+
 ## Références
 
 - Identifiant : **EPIC-73**, vérifié dans la roadmap commune et les identifiants applicatifs ; aucun cadrage concurrent identifié.
