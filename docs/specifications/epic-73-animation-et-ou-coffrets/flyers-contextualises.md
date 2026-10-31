@@ -30,7 +30,7 @@ d'animation. Un scan de passage n'est pas présenté comme une remise de lot.
 | --- | --- | --- |
 | E73-CA-FLYER-01 | PDF, aperçu et informations du portail correspondent aux trois modes de dotation ; aucun texte Coffrets ne subsiste pour les lots libres | Tests de domaine des trois branches et rendu de chaque variante |
 | E73-CA-FLYER-02 | Deux nombres lisibles : exemplaires à gagner et commerçants dont la participation est confirmée ; singulier/pluriel corrects | Plusieurs exemplaires d'un même modèle, invitation en attente/refusée exclue, consommation d'un bon sans diminution artificielle du total annoncé |
-| E73-CA-FLYER-03 | Ajout/remplacement d'une illustration propre au flyer, aperçu et retour à l'image habituelle ; la couverture publique reste indépendante | Aller-retour navigateur et rendu PDF avec images paysage/portrait puis retrait |
+| E73-CA-FLYER-03 | Ajout/remplacement d'une illustration propre au flyer, aperçu et retour à l'image habituelle du PDF ; Live reprend uniquement l'illustration personnalisée si elle existe | Aller-retour navigateur et rendu PDF avec images paysage/portrait puis retrait ; blocs Live avec et sans illustration |
 | E73-CA-FLYER-04 | Seuls les gestionnaires habilités sur l'animation peuvent modifier l'image ; formats, volume et dimensions contrôlés côté serveur | Lecteur/autre organisation refusés, faux fichier image et dépassements refusés sans modification |
 | E73-CA-FLYER-05 | Une modification rend le support obsolète ; régénération explicite, versionnée, cohérente avec les faits métier courants et sans écrasement concurrent | Changement image/dotation/participants, conflit de version, rejeu de commande et publication |
 
@@ -56,8 +56,13 @@ conditionnel. Une modification concurrente ne doit pas publier un rendu annoncé
 à jour sur des faits devenus obsolètes. Les PDF déjà imprimés ne sont pas modifiés :
 le gestionnaire doit télécharger et diffuser la nouvelle version.
 
-L'image est rattachée à l'animation et réservée à son flyer. Son ajout ne change
-ni `visuel_principal_asset_id` ni la couverture du catalogue public. Le stockage
+L'image est rattachée à l'animation. Depuis le correctif du **31 octobre 2026**,
+les blocs de présentation de Localeo Live reprennent aussi cette illustration
+personnalisée, uniquement lorsque l'animation est visible du public. Sans image
+personnalisée, après retrait ou en cas d'échec de chargement, Live n'affiche
+aucune illustration ni emplacement vide. Il n'utilise ni aperçu PDF, ni photo
+par défaut, ni autre asset de l'animation. Le visuel de jeu et
+`visuel_principal_asset_id` restent indépendants. Le stockage
 documentaire existant est réutilisé ; aucune URL distante arbitraire n'est
 téléchargée et aucun accès global au DAM n'est ouvert. PNG, JPEG et WebP sont
 acceptés dans la limite de **5 Mio** ; le serveur vérifie le contenu décodé,
@@ -86,12 +91,18 @@ caractères. L'image doit être fixe, avoir au moins 64 pixels par côté et au 
 24 millions de pixels ; elle est normalisée en PNG RGB de 2 400 pixels maximum
 par côté, puis réduite si nécessaire à 2 Mio maximum pour le stockage documentaire
 existant, sans EXIF ni géolocalisation. Le stockage utilise un document
-`FLYER_ANIMATION_ILLUSTRATION` rattaché à l'animation, privé dans le portail.
+`FLYER_ANIMATION_ILLUSTRATION` rattaché à l'animation. Son administration reste
+privée dans le portail. Sa seule image personnalisée peut être servie par
+`GET /public/animation-locale/animations/{animation_id}/illustration-flyer`,
+après contrôle de visibilité publique de l'animation et de son rattachement
+exact. La projection publique `visuel_url` désigne cette route, ou vaut `null`.
+Le binaire est contrôlé par empreinte et servi sans cache ; les documents
+archivés et les médias des autres animations restent inaccessibles par ce chemin.
 Les illustrations remplacées sont archivées ; les fichiers préparés puis non
 rattachés suivent la conservation des fichiers de flyer. Aucun ajout de colonne
 ou nouvelle clé de configuration n'est requis.
 
-Le retrait de l'image personnalisée rétablit la sélection historique : visuel
+Dans le PDF, le retrait de l'image personnalisée rétablit la sélection historique : visuel
 de l'animation lorsqu'il existe, sinon photographie Localeo embarquée. La
 régénération d'un aperçu brouillon reste privée ; les règles existantes de
 publication documentaire et de téléchargement sont conservées.
@@ -115,8 +126,10 @@ un fichier non image ; disposer d'un gestionnaire autorisé et d'un lecteur.
    d'un bon, régénérer : son utilisation ne doit pas réduire le total annoncé.
 3. **RM-FLYER-03** : choisir le JPEG, vérifier l'aperçu, enregistrer et régénérer.
    Télécharger le PDF puis recommencer avec le PNG portrait. L'image remplace
-   celle du flyer sans affecter la couverture publique ; texte et QR restent
-   visibles. Retirer l'image, régénérer, vérifier le retour au visuel habituel.
+   celle du flyer et des blocs Live publics ; texte et QR restent visibles.
+   Retirer l'image, régénérer, vérifier le retour au visuel habituel du PDF et
+   l'absence d'illustration sur Live. Une image retirée ne doit pas réapparaître
+   depuis un ancien document archivé ou l'aperçu généré.
 4. **RM-FLYER-04** : soumettre un fichier non image puis un fichier dépassant
    5 Mio. Vérifier le refus compréhensible et la conservation de l'image
    enregistrée. Avec le lecteur, vérifier l'absence de commande d'édition.
@@ -136,7 +149,8 @@ validations de l'environnement de test.
 - Localeo Animation : édition du visuel et présentation des informations du
   flyer, consommation des contrats et états de reprise.
 - Pro/Marketplace : pas de nouveau formulaire ; les consommateurs du flyer
-  publié bénéficient du document contextualisé. Couverture publique inchangée.
+  publié bénéficient du document contextualisé. Live affiche l'illustration
+  personnalisée seule dans ses blocs de présentation publics, sans repli.
 - Données historiques : pas de conversion de dotation ; absence d'image dédiée
   compatible avec le comportement antérieur. Les anciens PDF nécessitent une
   régénération pour bénéficier du nouveau contenu.

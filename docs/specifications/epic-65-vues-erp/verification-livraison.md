@@ -1,5 +1,76 @@
 # EPIC 65 — Vérification et livraison
 
+## Harmonisation du gabarit ERP — 31 octobre 2026
+
+Demande utilisateur : homogénéiser menu, en-tête, actions et liens de retour
+des IHMs ERP. Base backend **586a51f** et travaux locaux précédents conservés ;
+aucune modification du statut terminé d'E65 ou des règles financières.
+Le [gabarit canonique](../../architecture/transverse/conventions-backoffice.md#gabarit-des-pages-localeo-erp)
+précise la structure commune et les frontières des applications.
+
+Causes reproduites : deux constructeurs d'en-tête, styles `nav` globaux,
+Instances effaçant le titre ERP, détails Finance/Audit supprimant le fil
+d'Ariane, consoles autonomes sans menu ERP et double bandeau des vues admin
+spécifiques. Un contrôle du gabarit Opérations a échoué avant correction ; les
+contrôles ajoutés aux trois modules ont également reproduit ces écarts.
+
+Correction : sources partagées de menu et de page, largeur de travail commune,
+actions contextualisées et parents structurels. Les anciennes règles de menu
+et de header ont été retirées de leurs sources. Les filtres privés, focus,
+pagination et handlers Finance/Audit sont conservés ; Instances garde son
+gabarit après chargement et actualisation. Les variantes Support sont isolées
+dans leurs sélecteurs. Les quatre consoles Animation et les vues admin
+spécifiques adoptent le même menu et la même structure ; leurs commandes
+locales ne deviennent pas des entrées de menu.
+
+Preuves locales :
+
+- **94 tests Python ciblés réussis** : ressources partagées authentifiées et
+  `no-store`, sessions/refus, routage des consoles et capacités, vues d'équipes,
+  enveloppe admin, retours Animation et version PWA. Le contrôle HTTP de menu
+  vérifie les ressources désormais chargées dynamiquement ; les liens réellement
+  montés sont vérifiés dans le navigateur.
+- **623 contrôles d'architecture, classes du domaine et couverture des use cases
+  réussis**. Rejeu final agrégé avec les contrôles ciblés : **717 tests Python
+  réussis**, aucun ignoré ; 20 avertissements de dépréciation SQLite datetime.
+- `node tests/browser/erp-page-template.cjs` : **24 scénarios** sur six pages
+  (Opérations, Finance, Animation, nouveau commerçant, listes Coffrets et
+  Commerçants), à 1280/1920/320 px et texte 200 %. Header unique, breadcrumb,
+  retour, actions, largeur et menu vérifiés. La revue a relevé puis fait corriger
+  Échap depuis le contenu et l'entrée Finance active pour paiements/reversements.
+  Une réponse de chargement du menu arrivée après expiration de session est
+  ignorée ; la navigation et le contenu privés restent effacés.
+- `node tests/browser/erp-template-modules.cjs` : **78 contrôles** Instances,
+  liste/détail/actualisation, lecture/gestion, filtres, refus d'abandon de saisie,
+  conflit et reprise avec la même clé à 1280/320 px et texte 200 %.
+- Finance et Audit : suites navigateur à 390/1440/1920 px réussies, dont retour
+  filtré, recherche privée, exports autorisés et maintien du fil d'Ariane.
+- Navigation Animation : **26 contrôles** réussis à 320/1280 px, dont 17 fonctions,
+  droits, état actif et protection des saisies. Shell commun, six largeurs de
+  header mobile et checkout différé réussis ; Support sur quatre profils et
+  cycle PWA réussis.
+- Consoles : **12 scénarios** sur les quatre consoles à 1280/320 px et texte
+  200 %, plus **8 scénarios** d'enveloppe administrative et de menu contextuel
+  d'action sur instance réussis. Suites métier
+  génération, préparation, exploitation, conservation et paramètres rejouées.
+  Les formulaires locaux gardent leur token CSRF et leurs handlers.
+- Régressions finales : **12 scénarios** du suivi des animations et **12
+  scénarios** de priorités Ops réussis sur les sources communes finales.
+- Documentation : **96 guides, 1 057 liens**, aucune erreur ; **130 sources
+  exportées** vérifiées et `git diff --check` réussi dans les deux dépôts.
+
+Captures dans `.artifacts/erp-page-template/`, `.artifacts/erp-template-modules/`,
+les sorties des bancs consoles et `tmp/admin-shell/` du backend ; bureau, mobile
+et texte agrandi inspectés. Les tests utilisent des données synthétiques et
+les ressources réelles, sans compte ou service distant.
+
+Impacts : backend ERP et documentation canonique uniquement. Aucun contrat API
+partagé, invariant métier, schéma, migration, donnée, générateur ou paramètre
+d'exploitation à modifier : les mêmes lectures et commandes sont présentées
+dans un gabarit commun. Les autres applications et les formulaires techniques
+standard SQLAdmin gardent leur interface dédiée. Recette hébergée non exécutée ;
+aucun commit, push ou déploiement effectué.
+
 ## Clôture produit — 2 octobre 2026
 
 **Terminée sur demande utilisateur**, dix critères conservés. Périmètre confirmé :

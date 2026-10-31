@@ -59,6 +59,22 @@ L'acteur, l'organisation et les communes sont dérivés de la session et contrô
 
 ### Catalogue initial et unités
 
+Conditions des forfaits confirmées le **31 octobre 2026**, avec ajout de Premium :
+
+| Code | Prix HT | Durée | Animations standard | Service |
+| --- | ---: | --- | --- | --- |
+| `DECOUVERTE` | 390 € | 12 mois | 1 | Clé en main existant |
+| `ESSENTIELLE` | 708 € | 12 mois | Illimitées | Plateforme autonome |
+| `PREMIUM` | 1 490 € | 12 mois | Illimitées | Accompagnement standard de la plateforme, modèle `PLATEFORME_AUTONOME` |
+
+Premium ne comprend **aucun module payant** ni prestation supplémentaire
+d'accompagnement. L'illimité concerne les passeports et tombolas ; les modules
+ci-dessous restent distincts. Il n'y a pas de renouvellement automatique.
+La migration backend `v285_catalogue_animation_premium.sql` ajoute l'offre
+historique et sa publication dans le catalogue versionné, sans modifier les
+conditions acquises. Une offre Premium personnalisée, désactivée ou déjà
+versionnée est conservée : ses conditions doivent être contrôlées avant ouverture.
+
 | Élément | Prix initial HT | Période / capacité | Consommation |
 | --- | --- | --- | --- |
 | Forfaits Animation | Conserver prix et volumes du catalogue existant confirmé ; instantané à l'achat | Passeport et tombola inclus, limite propre au forfait | Première publication réussie, journal standard |
@@ -69,6 +85,17 @@ L'acteur, l'organisation et les communes sont dérivés de la session et contrô
 Le code du module est stable ; son libellé commercial peut être « Messages aux participants — Live et Web Push ». Il ne masque pas le fait qu'un message reste dans Live sans permission Push. La tombola/passeport et leurs variantes restent inclus dans leur droit de type ; les variantes de chasse n'exigent pas un achat par scénario. Les trois modules sont optionnels pour les nouvelles souscriptions. Les droits anciens sont repris factuellement et préservés jusqu'à échéance, sans attribution rétroactive d'un supplément payant.
 
 `VersionCatalogue` est immuable après publication : code, version, libellé, prix HT/devise, durée de référence, liste de droits, limites typées (`unite`, `periode`, `quantite` nullable pour illimité), prérequis, modèle de service. Une édition crée une nouvelle version ; les commandes et droits existants référencent l'ancienne. Une offre retirée du catalogue ne retire pas les droits acquis. Il n'y a pas de chargement de code tiers : les modules officiels activent des fonctionnalités déployées du socle.
+
+Parcours administrateur corrigé le **31 octobre 2026** : depuis **Offres et
+tarifs**, **Publier une nouvelle version** ouvre le **Catalogue commercial** en
+conservant l'offre sélectionnée. Choisir la commune de consultation conserve
+cette cible, y compris pendant la pagination. Les nouvelles conditions portent
+sur le catalogue global pour les futurs achats de cette offre ; les conditions
+déjà acquises restent inchangées. Motif et confirmation explicites sont requis.
+L'édition ORM directe reste interdite, même à ADMIN. L'ancien accès GET
+`/admin/offre-plateforme-orm/edit/{id}` redirige l'administrateur historique vers
+ce parcours ; il ne rétablit aucune écriture SQLAdmin. Une offre absente de la
+page ou sans version publiée est signalée, sans création ni réactivation tacite.
 
 Le panier présente commune, forfait, modules, mode acquis, dates, prix catalogue, prorata, HT/TVA/TTC, volumes et engagements du service. L'essai/gift n'est ni une remise fictive sur une commande ni une facture à zéro créée pour gonfler le chiffre d'affaires.
 
@@ -149,6 +176,27 @@ La ligne de commande porte `nature` (`SOUSCRIPTION`, `MODULE`, `COMPLEMENT_FORFA
 Renouvellement : avant échéance, nouvelle période à la fin exclusive de l'actuelle ; après expiration, nouvelle période à la réactivation confirmée, sans rétrofacturer l'interruption. Préremplir seulement les modules précédemment achetés ; permettre de les retirer, présenter les nouvelles conditions et obtenir confirmation. Ne pas cocher un cadeau/essai en achat. Une période future payée n'est pas un abonnement ACTIF concurrent : elle devient active à son début, sous verrou tenant, en clôturant l'ancienne période effective. Préserver l'unicité SQL du courant.
 
 Montée en gamme : devis du complément proratisé, effet après paiement, même échéance et mêmes consommations ; pas de cumul de deux plafonds de forfait. Baisse : applicable au renouvellement confirmé. Arrêt : jusqu'à fin payée, pas de prélèvement de renouvellement implicite, pas de remboursement automatique. Les factures, avoirs et échéances documentaires suivent leurs propriétaires existants. Les coordonnées de facturation courantes peuvent changer pour le prochain document ; un instantané émis ne se réécrit pas.
+
+Clarification UX du **31 octobre 2026** : le portail n’affiche plus de bouton
+« arrêt à échéance », puisque la période expire déjà sans renouvellement
+automatique. Il affiche l’échéance en heure de Paris et explique que tout
+renouvellement exige confirmation et paiement explicites. Les demandes d’arrêt
+historiques restent consultables ; le contrat `/arret` demeure compatible pour
+ses consommateurs existants. Aucun droit, paiement ni historique n’est modifié.
+
+La page **Abonnement** présente d’abord le forfait, son état, son échéance et
+l’action de renouvellement autorisée. L’ajout de modules et le changement de
+forfait sont secondaires ; modules acquis, usages, facturation et commandes
+constituent des sections distinctes. Le parcours commercial distingue choix,
+revue du devis puis paiement. La revue et le suivi ouverts reçoivent le focus ;
+les confirmations et erreurs ont un titre explicite, un contraste lisible et
+sont ramenées dans la zone visible. L’enregistrement de coordonnées concerne
+seulement les prochains documents ; la demande de remboursement annonce
+l’examen par Localeo, sans promettre un remboursement confirmé. Les formulaires
+administratifs peuvent être annulés sans écriture. Largeur disponible,
+alignement à gauche, lecture mobile, zoom et navigation clavier sont conservés.
+Les protections Achat/actions serveur, version, conditions acceptées et reprise
+idempotente d’un résultat incertain restent obligatoires.
 
 Remboursement : demande client → décision interne motivée `REFUSEE` ou `APPROUVEE` avec montant → exécution fournisseur → `CONFIRMEE` / `ECHEC_REPRENABLE` / `A_RAPPROCHER`. Plafond = encaissements confirmés de la commande moins remboursements confirmés **et montants déjà réservés par des remboursements approuvés/en cours** ; vérifier sous verrou pour que deux opérateurs ne remboursent pas deux fois. Un succès fournisseur sans réponse locale est rapproché avec la même clé ; pas de seconde émission. Le retrait du droit est une décision commerciale explicite associée, avec continuité ; ne pas déduire automatiquement d'un remboursement partiel une durée ou un quota nouveaux. La pièce rectificative n'est produite que par le parcours financier autorisé.
 

@@ -37,6 +37,12 @@ Le complément Accueil/Rappels remplace le premier libellé par **Accueil**, san
 changer son URL `/live/decouvrir` ni supprimer la découverte publique.
 Découvrir présente les animations publiques **En ce moment** et **Prochainement**.
 Une fiche montre titre, commune, dates, description, conditions et action autorisée.
+Les cartes et l'en-tête de fiche reprennent exclusivement l'image personnalisée
+configurée dans **Flyer**, lorsqu'elle existe et que le serveur l'autorise.
+Sans image, après retrait ou si elle ne charge pas, le contenu reste lisible
+sans illustration de remplacement ni colonne vide. La couverture du jeu et
+les illustrations de ses étapes ne servent pas de repli. Voir le
+[contrat Flyer](flyers-contextualises.md#règles-de-conception-et-contrats).
 L'inscription réutilise le formulaire existant sous `/live/animations/:id/inscription`.
 Les participations et lots personnels conservent leurs accès dans le carnet.
 
@@ -85,7 +91,7 @@ mobile, sans faux classement, probabilité de gain ou activité simulée.
 | --- | --- |
 | E73-EVO-LIVE-UX-01 | Marque conservée dans l'en-tête, sans rappel dans le contenu Découvrir ; boussole et libellé Découvrir, repère cartographique pour Mes communes ; suppression du raccourci icône redondant de la surface Animation. |
 | E73-EVO-LIVE-UX-02 | Recherche et modification des communes dans Mes communes ; aucun second sélecteur dans Réglages ; catégories de notification et Push conservent exactement les communes choisies, y compris une sélection vide. |
-| E73-EVO-LIVE-UX-03 | Cartes illustrées : statut serveur, défi configuré s'il existe, nombres publics de participants, gagnants et unités en dotation. Zéro confirmé distinct d'une valeur inconnue ; ancien backend compatible sans compteurs. |
+| E73-EVO-LIVE-UX-03 | Cartes avec l'image personnalisée du Flyer si disponible, sinon sans illustration : statut serveur, défi configuré s'il existe, nombres publics de participants, gagnants et unités en dotation. Zéro confirmé distinct d'une valeur inconnue ; ancien backend compatible sans compteurs. |
 | E73-EVO-LIVE-UX-04 | À 320/390 px, pas de débordement, liens tactiles et données lisibles ; texte agrandi, clavier et réduction des mouvements préservés. |
 
 Contrat additif catalogue/détail : `dynamique` avec `nombre_participants`,
@@ -125,10 +131,34 @@ rappels personnalisés. Aucun compte habitant n'est créé. L'EPIC 73 reste
 
 **US-LIVE-ACCUEIL.** En tant que participant, voir immédiatement les parcours
 proches de leur objectif ou de leur échéance et reprendre le bon accès personnel.
-L'accueil présente une priorité principale illustrée, deux suivantes compactes,
-les autres participations de la page, puis la découverte des communes suivies.
-Les visiteurs sans carnet disposent d'abord de cette découverte. La navigation
+Depuis le correctif UX du **31 octobre 2026**, l'accueil ouvre sur la vie des
+communes suivies : accroche contextualisée, animation à rejoindre avec l'image
+personnalisée du Flyer si disponible, nombre réel de participants à cette
+animation et accès directs aux périodes. Les nombres d'animations sont ceux
+de l'aperçu chargé, dédupliqués par période ; pagination et erreurs sont
+signalées comme un aperçu partiel. Aucune somme d'habitants uniques, activité
+instantanée ou illustration par défaut n'est inventée. Une indisponibilité
+totale propose de réessayer ; le vrai vide propose de modifier les communes.
+
+Une priorité personnelle principale et deux suivantes compactes viennent
+ensuite, avant les cartes publiques. Un raccourci **Mes défis à reprendre**
+dans l'en-tête y mène directement, même sur mobile. Les autres participations
+et les informations de reprise du carnet suivent le programme public.
+**Actualiser** recharge participations et catalogue, avec annulation des
+anciennes lectures et sans parcourir toutes les pages implicitement.
+Les visiteurs sans carnet disposent d'abord de la découverte. La navigation
 reste à trois entrées : Accueil, Mes participations, Mes communes.
+
+Complément graphique du **31 octobre 2026** : privilégier l'image du Flyer en
+pleine largeur plutôt qu'un grand panneau de texte. Limiter l'ouverture à un
+titre local, une animation et des repères chiffrés avec pictogrammes et libellés.
+La progression personnelle prend la forme d'un anneau chiffré, accompagné du
+nombre d'étapes validées et restantes ; elle ne vaut ni qualification ni gain.
+Les descriptions et conditions des cartes restent accessibles dans **En bref**,
+sans être tronquées ; la fiche complète et son inscription restent accessibles.
+Sans image configurée, conserver la présentation structurée sans illustration
+de remplacement. Les pictogrammes d'interface restent décoratifs pour les aides
+techniques ; les valeurs, libellés et noms accessibles portent l'information.
 
 Un parcours est « presque terminé » s'il est commencé, encore accessible et
 incomplet, avec une étape restante ou une progression confirmée d'au moins 80 %.
@@ -236,7 +266,7 @@ claims de transport existants, sans nouvelle intégration fournisseur.
 
 | Critère ajouté | Résultat observable et preuve prévue |
 | --- | --- |
-| E73-HOME-01 | Accueil mobile, première priorité et deux suivantes ; visiteur sans carnet vers découverte ; navigation et anciens liens conservés. |
+| E73-HOME-01 | Accueil mobile ancré dans les communes suivies et leur activité publique ; image Flyer seule, aperçu partiel explicite, accès aux périodes. Première priorité personnelle et deux suivantes, raccourci de reprise immédiate ; visiteur sans carnet vers découverte ; navigation et anciens liens conservés. |
 | E73-HOME-02 | Indicateurs calculés par le domaine, frontière 80 %, une étape, 72 h, commencement et objectif effectif ; inconnus et états terminaux exclus. |
 | E73-HOME-03 | Tri explicite, absence de doublon par participation, plusieurs accès à la même animation indépendants, pagination et état partiel. |
 | E73-HOME-04 | Secret d'installation, refus croisé, aucune donnée sensible et aucune réponse personnelle mise en cache ; ancien backend et erreurs explicites. |

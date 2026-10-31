@@ -133,6 +133,63 @@ Transfert de responsabilité : le responsable désigne un collaborateur actif ; 
 
 Révocation/modification prend effet dès la requête suivante. Une tâche non commencée qui nécessite le droit retiré passe en suspension ; une tâche déjà engagée conserve sa continuité contrôlée, sans permettre à l’acteur révoqué de consulter, relancer ou étendre sa cible. La mutation d’équipe et l’invalidation de contexte sont atomiques ; les workers revérifient le contexte de service et les autorisations de diffusion applicables.
 
+### 4.4 Présentation de Compte et équipe
+
+Précision UX du **31 octobre 2026** : la page occupe la largeur de travail,
+alignée à gauche. Trois accès internes explicites permettent de rejoindre
+**Équipe**, **Mes organisations** et **Mon compte** sans changer de contexte ni
+perdre l’état d’une commande. L’équipe de l’organisation courante vient en
+premier ; **Inviter un collaborateur**, selon l’action autorisée par le serveur,
+est le bouton principal de son en-tête. Les collaborateurs et les invitations
+constituent deux sections distinctes ; actualisation, pagination et modification
+d’un accès sont secondaires.
+
+Un transfert de responsabilité à suivre précède les listes. Son acceptation
+reste accessible au successeur autorisé, y compris sans rôle Responsable.
+Les formulaires d’invitation et d’accès, puis les confirmations de révocation,
+renvoi et transfert, s’ouvrent avant les listes avec focus et défilement vers le
+contenu utile. Annuler rend le focus à l’action d’origine sans écriture. Une
+confirmation sensible masque la saisie concurrente ; succès, refus et résultat
+incertain sont présentés dans des messages titrés et contrastés. Une écriture
+incertaine exige toujours une relecture puis le renvoi explicite du même corps
+avec la même clé ; refermer une rubrique ne détruit pas cet état.
+
+**Mes organisations** indique l’organisation courante et propose séparément
+l’ouverture d’une autre appartenance active. **Mon compte** présente l’identité
+connectée et le changement de mot de passe à la demande, avec reconnexion
+annoncée. **Données et opérations sensibles**, réservé au responsable courant,
+regroupe à la demande l’export et la fermeture, qui conservent leurs confirmations
+et effets distincts. Les composants restent montés au repli pour préserver
+leurs saisies et reprises. Le compte sans organisation conserve les seuls accès
+organisations/sécurité, sans lecture d’équipe ni de réversibilité. Cette
+présentation ne modifie aucun rôle, contrat ou invariant des sections précédentes.
+
+### 4.5 Parcours du gestionnaire interne ERP
+
+Précision UX du **31 octobre 2026** : ces parcours concernent l'opérateur interne
+Localeo, sous ses habilitations existantes ; ils ne donnent aucun nouveau droit
+au gestionnaire d'une organisation.
+
+- **Nouvelle souscription** : partenaire et communes, forfait et droits réels,
+  premier gestionnaire et accès, puis facturation et revue. Une confirmation
+  explicite précède la création ; modifier une saisie invalide la revue.
+  L'accès au dossier créé est direct. Gratuité activée et paiement attendu
+  restent distingués ; l'invitation attend l'activation selon les règles serveur.
+- **Exploitation** : statut et accès « En cours » visibles dès les filtres
+  principaux, contexte conservé, pilotage avant les lots. Les liens vers
+  exploitation et préparation terrain sont soumis aux capacités internes ;
+  aucune action supplémentaire n'apparaît dans la surface Support.
+- **Support** : demandes à traiter et échéances visibles, puis réponse au
+  demandeur en action principale. Notes privées et suivi interne sont distincts.
+  Les compteurs portent sur la page chargée, sans total global inventé. Une
+  demande clôturée expose son historique et n'est plus comptée en retard ouvert.
+
+Les confirmations, refus et résultats incertains sont lisibles et focalisés.
+Consultation, annulation et ouverture d'une rubrique n'envoient aucune commande.
+Permissions, contrôle de version, CSRF, clés d'idempotence et reprises après
+réponse perdue restent ceux du serveur. Présentation alignée à gauche, largeur
+disponible et lecture mobile/texte agrandi vérifiées, sans surcharge CSS globale.
+
 ## 5. Site Animation dédié et continuité Live
 
 ### 5.1 Deux expériences adaptées à leurs usages
@@ -149,6 +206,22 @@ Exigence du **18 octobre 2026** : privilégier la simplicité d’apprentissage 
 | Densité | Informations utiles à la tâche, détails secondaires à la demande ; formulaires regroupés et assistant pour la première création | Lecture progressive, titres explicites, texte court et images accompagnées d’un contenu compréhensible sans elles |
 
 Le retour d’un utilisateur client va à l’accueil de sa plateforme ; un retour ERP n’apparaît que dans un contexte opérateur interne autorisé. « Voir le site public » et « Accéder à mon espace de gestion » annoncent clairement le changement d’espace. Les outils quotidiens ne changent pas de place selon la dotation ; seuls les contenus/étapes utiles sont adaptés. Une fonctionnalité non souscrite est présentée dans le catalogue de modules avec sa condition d’accès, sans multiplier les impasses dans les tâches courantes.
+
+Précision du **31 octobre 2026**, correctif d’affichage du portail organisateur :
+Assistant, Live, Préparation terrain, Validations, Communication, Tirage, Gains
+et remise, Flyer et Bilan occupent la largeur de travail disponible, avec contenu
+aligné à gauche. Les champs, aperçus de documents et dialogues conservent leurs
+dimensions utiles ; retirer les plafonds des conteneurs à leur source, sans
+empiler de surcharges CSS.
+
+Les points d’attention de l’assistant précèdent les étapes à faire ; les étapes
+déjà vérifiées restent consultables à la demande. Une barre d’action reste
+accessible depuis chaque rubrique et ouvre le parcours de l’action suivante,
+avec retour au début utile du contenu, y compris sur mobile. Elle ne confirme
+aucune transition. Les confirmations, droits, versions et clés d’idempotence
+des parcours existants sont conservés. La communication rend explicites les
+trois étapes brouillon, vérification des destinataires et confirmation de
+diffusion ; module, autorisation ou fenêtre indisponibles restent expliqués.
 
 ### 5.2 Lisibilité, actions et accessibilité communes
 

@@ -35,6 +35,53 @@ Les vues specialisees doivent rester rattachees a leur domaine :
 - Les duplications de vues doivent etre limitees a des raccourcis de pilotage.
 - Les libelles de menu doivent rester proches des noms de domaines fonctionnels.
 
+### Gabarit des pages Localeo ERP
+
+Harmonisation du **31 octobre 2026** : les pages métier ERP utilisent la même
+structure, dans le shell principal, les consoles Animation et les vues
+administratives spécifiques ouvertes depuis l'ERP.
+
+1. **En-tête d'application** : identité ERP et menu Applications commun ; pas
+   de deuxième marque Localeo ou de commandes métier dans ce menu.
+2. **Menu ERP** : une source partagée, destinations filtrées par les droits,
+   rubrique courante ouverte et une seule entrée active. Sur mobile, bouton
+   **Rubriques ERP**, ouverture explicite et fermeture avec Échap, même après
+   déplacement du focus dans le contenu.
+3. **Repérage de page** : fil d'Ariane et un seul retour explicite, puis titre
+   unique, description et actions contextualisées. Une arrivée directe conserve
+   un parent structurel ; elle ne dépend pas de l'historique du navigateur.
+4. **Actions** : action de page dans la zone prévue à côté du titre, secondaires
+   à la suite. Création sur l'accueil ou la liste concernée seulement.
+   Actualisation et exports de Finance/Audit utilisent cette zone ; les
+   confirmations et validations de formulaires restent auprès de leur saisie.
+5. **Contenu** : aligné à gauche sur la largeur disponible, marges et typographie
+   communes, tableaux débordants contenus dans leur propre zone. Les champs et
+   textes peuvent garder une largeur de lecture adaptée à leur usage.
+
+Implémentation partagée : `page-layout.js`, `page-layout.css` et
+`erp-navigation.js` dans le backend. La navigation Animation réutilise ce
+gabarit et conserve ses parents spécifiques. Les règles de menu sont limitées
+à sa classe ; aucune règle globale `nav` ne doit recolorer un fil d'Ariane ou
+une navigation métier. Modifier la source commune plutôt qu'empiler des
+surcharges dans chaque écran.
+
+Les retours Finance/Audit conservent leurs filtres privés, leur pagination et
+leur focus sans recopier les recherches sensibles dans une URL partagée. Les
+paramètres d'un parent ne sont repris que depuis son URL de même origine.
+Les protections des saisies non enregistrées, permissions, CSRF, versions,
+confirmations et clés d'idempotence sont conservées. Une réponse de navigation
+arrivée après expiration de session ne doit pas réafficher les liens privés.
+
+Instances utilise le gabarit ERP sans modifier son habillage Support autonome.
+Les pages d'action d'instance conservent leur menu contextuel Support, avec
+la même géométrie et un seul en-tête. Ops, Support, OnBoard, Atelier et les
+écrans de connexion restent des applications ou parcours distincts ; leurs
+menus ne sont pas remplacés par celui de l'ERP. Les formulaires techniques
+standard de SQLAdmin gardent le gabarit de cet outil ; les vues spécifiques
+enveloppées par le backend partagent le gabarit ERP.
+
+Preuves et limites du correctif : [vérification des vues ERP](../../specifications/epic-65-vues-erp/verification-livraison.md#harmonisation-du-gabarit-erp--31-octobre-2026).
+
 ### Navigation Animation dans Localeo ERP
 
 - Une entrée ouvre une fonctionnalité, avec une destination directe. Les

@@ -13,3 +13,14 @@ Lire le [guide transverse](../../../AGENTS.md), le guide de l'application concer
 4. Corriger le périmètre nécessaire à la cause, avec les consommateurs affectés. Préserver les modifications existantes et éviter une refonte voisine sans nécessité. Relier la correction au suivi d'anomalie ou à l'epic existante ; une petite correction n'exige pas une nouvelle epic.
 5. Vérifier la disparition du défaut, le comportement nominal et les refus significatifs ; exécuter les contrôles requis par les guides locaux. Examiner les impacts documentation, contrat, démonstration, migration et exploitation selon la matrice du cycle de correctif. Un correctif urgent conserve les garde-fous et expose les preuves différées.
 6. Rapporter cause démontrée ou hypothèse restante, comportement corrigé, versions testées, commandes/résultats et limites. Une suite ignorée ou indisponible reste non exécutée. Ne pas annoncer un correctif déployé ni des données réparées sans réalisation vérifiée ; commit, push et déploiement suivent la demande courante.
+
+## Correctifs d’interface
+
+Dans Localeo Animation, concevoir des IHM simples et intuitives : points
+d’attention et action principale repérables avant les détails secondaires,
+libellés concrets et navigation prévisible. Les espaces de gestion utilisent
+la largeur disponible et un alignement à gauche ; préserver la lisibilité des
+champs, le mobile, le zoom et l’accès clavier. Corriger les classes ou règles
+CSS à leur source, en retirant les contraintes devenues inutiles, sans empiler
+des surcharges pour masquer la cause. Vérifier visuellement les écrans concernés
+et conserver les confirmations, droits et protections des actions métier.

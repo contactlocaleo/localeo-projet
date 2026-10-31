@@ -23,12 +23,18 @@ Les décisions non encore validées sont centralisées dans le
 
 ## Besoin retenu
 
-Deux offres catalogue sont disponibles :
+Le catalogue initial comprend deux offres :
 
 | Code | Prix HT initial | Contenu |
 |---|---:|---|
 | `DECOUVERTE` | 390,00 € | Une animation clé en main |
 | `ESSENTIELLE` | 708,00 € | Plateforme pendant un an, animations illimitées |
+
+Extension confirmée le **31 octobre 2026** : `PREMIUM`, **1 490 € HT pour
+12 mois**, animations illimitées, accompagnement standard de la plateforme et
+aucun module payant inclus. Les conditions courantes et la publication du
+catalogue sont précisées dans la [spécification E73 des forfaits et modules](../epic-73-animation-et-ou-coffrets/modules-souscriptions-import-communication.md#catalogue-initial-et-unités).
+Cette extension ne modifie ni les ventes acquises ni le statut historique d'E47.
 
 Le prix catalogue est paramétrable. Lors du référencement, l'administrateur
 peut saisir un prix propre à la souscription, y compris `0 €`, pour une

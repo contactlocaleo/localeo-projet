@@ -696,19 +696,19 @@ Complément vérifié le 24 octobre 2026 : `droit-inclus-principal-clone-sceau-c
 
 ### RM-07-05
 
-**Scénario.** Demander l’arrêt puis un remboursement de base ou module ; faire décider un montant partiel/total, et tenter un montant supérieur au solde remboursable.
+**Scénario.** Vérifier l’échéance sans renouvellement automatique puis demander un remboursement de base ou module ; faire décider un montant partiel/total, et tenter un montant supérieur au solde remboursable.
 
 **Marche à suivre**
 
 1. Préparer des commandes de base et de module payées en test avec soldes remboursables connus ; connecter le profil Achat et les opérateurs administrateur/Finance habilités.
-2. Dans **Abonnement**, demander l’arrêt de la base puis vérifier sa date d’effet : l’accès court jusqu’à l’échéance et aucun remboursement ne doit partir automatiquement.
+2. Dans **Abonnement**, relever l’échéance et la mention « Sans renouvellement automatique » : aucune démarche d’arrêt n’est nécessaire et aucun bouton d’arrêt à échéance n’est proposé. L’accès de la période court jusqu’à sa fin exclusive ; aucun renouvellement ni remboursement ne part automatiquement. Si une demande d’arrêt historique existe, elle reste indiquée sans modifier ces droits.
 3. Déposer séparément les demandes de remboursement des commandes retenues, avec leurs motifs ; les retrouver dans ERP → **Remboursements**.
 4. Faire décider un remboursement partiel sur une commande et total sur une autre, par les opérateurs habilités, en saisissant montant et motif ; distinguer décision enregistrée et remboursement effectivement rapproché.
 5. Tenter une décision avec un Finance sans autorisation de remboursement, puis un montant supérieur au solde encore remboursable : aucun des deux ne doit être accepté.
 6. Avec le référent, faire soumettre deux décisions concurrentes sur le même solde depuis deux dossiers ouverts ; relire les montants réservés et remboursés : leur total ne doit jamais dépasser l’encaissé restant.
 7. Contrôler historique, auteur, motif et pièces financières ; vérifier qu’un éventuel retrait commercial demeure une décision distincte avec sa continuité propre.
 
-**Résultat attendu.** Arrêt à échéance sans remboursement automatique. Décision manuelle motivée par administrateur/Finance habilité ; plafond encaissé restant respecté, y compris décisions simultanées accompagnées.
+**Résultat attendu.** Expiration à échéance sans renouvellement ni remboursement automatique. Décision manuelle motivée par administrateur/Finance habilité ; plafond encaissé restant respecté, y compris décisions simultanées accompagnées. Clarification du portail le 31 octobre 2026 ; les preuves historiques d’arrêt et le contrat serveur sont conservés, sans valoir rejeu de la nouvelle présentation.
 
 ### RM-07-06
 

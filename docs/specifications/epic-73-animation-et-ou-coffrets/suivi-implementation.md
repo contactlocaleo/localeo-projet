@@ -2,6 +2,496 @@
 
 Début : **18 octobre 2026**. [Spécification](README.md), [backlog](../../roadmap/en-cours/epic-73-animation-et-ou-coffrets-backlog.md), [matrice des 63 critères et preuves](verification-livraison.md). Objectif : les 38 US, dans les dix lots demandés. Les lignes ci-dessous ne valent pas acceptation tant que les preuves correspondantes ne sont pas enregistrées.
 
+## 31 octobre 2026 — Mon Live : priorité au visuel
+
+Retour utilisateur : privilégier le graphique aux longs textes. Sur la base
+Marketplace **7d9e0fc** avec les correctifs précédents conservés, le contrôle
+navigateur reproduit une image limitée à **130 px** de haut sur mobile, avant
+correction. L'ouverture utilise désormais toute la largeur pour l'image Flyer
+choisie, avec un titre local compact ; les paragraphes d'ambiance redondants
+sont retirés. Aucun visuel de remplacement n'est ajouté.
+
+Participants, gagnants, lots et périodes sont repérés par des pictogrammes
+d'interface, avec leurs valeurs et libellés conservés. La progression personnelle
+est un anneau chiffré accessible, associé aux étapes validées/restantes. Le
+pourcentage ne confère ni qualification ni gain. Les descriptions et conditions
+des cartes restent disponibles dans un volet natif **En bref**, sans troncature
+ni perte de l'accès à la fiche complète. Les règles d'accès, priorités, communes
+et données API restent inchangées. Les styles ont été remplacés à leur source,
+notamment la composition du bandeau et la barre devenue anneau.
+
+Preuves locales : première campagne de **39 tests navigateur**, avec **38 succès**
+et un défaut de présentation des pictogrammes dans les valeurs numériques à
+200 %. Les pictogrammes ont été déplacés dans les libellés ; l'assertion de
+nombre sur une seule ligne est conservée. **12 tests ciblés rejoués avec succès**
+sur le correctif final : compteurs connus/inconnus et zoom 200 %, clavier,
+mouvements réduits, reprise personnelle, rendu 320/390/1280 px, image pleine
+largeur, anneau accessible, ouverture/fermeture des descriptions et conditions,
+panne et programme vide. Captures inspectées dans les sorties Playwright locales.
+ESLint sur `src` et les tests modifiés, contrôles de liens et **130 documents
+exportés** réussis. Aucun test backend relancé : ses règles et contrats n'ont
+pas changé pour ce complément de présentation.
+
+Impacts : Marketplace/Live et spécification graphique E73. Aucun changement
+backend, contrat, migration, générateur ou configuration : seules les projections
+existantes sont présentées autrement. Aucun accès au TEST partagé, commit, push
+ou déploiement ; vérification hébergée non exécutée.
+
+## 31 octobre 2026 — un accueil Mon Live ancré dans la vie des communes
+
+Retour utilisateur : accueil trop institutionnel et figé, activité communale
+insuffisamment mise en avant. Base Marketplace **7d9e0fc**, correctif Flyer et
+autres travaux locaux conservés. L'ancien écran empilait d'abord participations,
+messages de service et informations du carnet avant la découverte publique.
+Le test de reproduction constate l'absence de l'ouverture locale attendue avant
+correction ; les règles de priorisation ne sont pas remises en cause.
+
+Correction de présentation : accroche contextualisée par les communes réellement
+consultées, animation en cours à rejoindre (sinon prochaine), image personnalisée
+du Flyer seule, nombre public de participants de cette animation. Les accès
+**En ce moment** et **Prochainement** indiquent les nombres de l'aperçu chargé ;
+la pagination et les erreurs rendent explicitement cet aperçu partiel. Aucun
+compteur d'habitants uniques, nouvelle activité récente ou temps réel n'est
+inventé. Les communes suivies ne sont pas modifiées par la consultation.
+
+Le raccourci **Mes défis à reprendre** est visible dès l'en-tête lorsque des
+priorités existent. Il rejoint la première priorité et ses deux suivantes,
+avant les cartes publiques ; les autres informations du carnet suivent le
+programme. Les indicateurs, progressions, liens personnels et limites de page
+restent ceux des projections existantes. **Actualiser** recharge aussi le
+catalogue, sans requête supplémentaire par carte ni parcours exhaustif des
+pages. L'indisponibilité propose une relance ; elle ne se confond plus avec le
+programme vide. Les mouvements d'entrée et de survol sont désactivés lorsque
+la réduction des animations est demandée.
+
+La revue indépendante a fait ajouter la reprise directe sur mobile, distinguer
+la panne du vide et porter la marge de défilement sur les titres réellement
+ciblés par les ancres. Les styles de l'en-tête et de la priorité ont été modifiés
+à leur source, sans nouvelle couche de surcharge ; le bloc local possède sa
+feuille de style dédiée.
+
+Preuves finales : **39 tests Playwright réussis**, dont six nouveaux scénarios
+sur l'accueil communal à 320/390/1280 px, texte agrandi à 200 %, navigation par
+ancres sans masquage sous l'en-tête, actualisation du programme, aperçu partiel,
+absence d'image et reprise après panne. Les parcours existants de tri personnel,
+pagination bornée, réponses tardives, accès exacts, sélection des communes,
+préférences et illustrations Flyer restent verts. Le test de réponses retardées
+libère désormais ses requêtes en `finally`, sans changer ses assertions ; une
+exécution initiale bloquée a été interrompue avant rejeu ciblé puis complet.
+**10 tests Node** de tableau de bord/communes réussis ; ESLint sur `src` et les
+trois fichiers de tests concernés réussi. Le runner navigateur reconstruit
+l'application hors configuration privée ; captures inspectées dans
+`localeo-marketplace/test-results/desktop/`. Liens documentaires et **130 sources
+exportées** vérifiés sans erreur.
+
+Impacts : Marketplace/Live et [spécification E73-HOME-01/06](localeo-live-entree-unique.md#critères-et-preuves-attendues).
+Backend, contrats API, règles métier, migrations, générateur, DNS et configuration
+sans changement pour ce correctif : les données publiques et personnelles
+existantes sont réutilisées. Aucun accès au TEST partagé, notification réelle,
+commit, push ou déploiement ; recette hébergée non exécutée.
+
+## 31 octobre 2026 — illustration du Flyer dans les blocs Live
+
+Attendu : la présentation d'une animation utilise l'image personnalisée choisie
+dans **Flyer**, sinon aucune illustration. Reproduction locale sur marketplace
+**7d9e0fc** et backend **586a51f**, avec les travaux précédents conservés : le test
+navigateur attend l'image Flyer mais reçoit une vignette éditoriale historique.
+Sans vignette, Live choisissait une photo Localeo de remplacement. En amont,
+`visuel_url` annonçait des assets génériques ou l'aperçu généré du flyer, au lieu
+de l'illustration personnalisée.
+
+Correction : les cartes de découverte et l'en-tête de fiche Live consomment
+strictement `visuel_url`, sans alias historique ni illustration de remplacement.
+L'absence d'image ou l'échec de chargement supprime le bloc visuel ; titre,
+statut, dates et inscription restent lisibles, sans colonne vide. Le backend
+projette l'illustration personnalisée du Flyer, chargée par une route dédiée
+publique sans cache, après contrôle de visibilité et sélection du dernier
+document du type exact rattaché à l'animation. Les archives sont exclues après
+classement pour ne pas restaurer une ancienne image ; taille et SHA256 sont
+contrôlés hors transaction SQL. Le chemin historique `/visuel`, les illustrations
+de jeu et le rendu PDF gardent leurs règles existantes.
+
+Preuves frontend : test de reproduction en échec avant correction, puis **11
+tests Playwright réussis**, dont six cas à 320/1280 px (image choisie, absente,
+introuvable), parcours découverte vers fiche, inscription accessible, aucune
+requête vers les illustrations historiques, aucun débordement et contenu sur
+toute la largeur sans image. Non-régression des indicateurs publics et de
+l'inscription sans compte incluse ; captures inspectées dans
+`localeo-marketplace/test-results/desktop/`. **10 tests Node** de carnet,
+tableau de bord et transport réussis. ESLint sur `src` et le nouveau test réussi ;
+`npm run lint` global bloqué par des répertoires de sortie temporaires refusés
+par Windows (`EPERM`), sans modification de leurs droits.
+
+Preuves backend : **37 tests application/API/OpenAPI/sécurité réussis** et
+**22 tests PostgreSQL isolés réussis**, sans échec ni skip. Les six nouveaux cas
+SQL couvrent le dépôt réel, le remplacement et le retrait, ainsi que les refus
+sur document archivé, mauvais scope, catégorie, MIME ou type documentaire.
+Les tests existants d'illustration Flyer et de provenance des couvertures de
+chasse restent verts. Le cluster local de test a été arrêté après exécution.
+Les **623 contrôles d'architecture** réussissent sur le correctif final.
+La revue indépendante a fait aligner le tri sur la sélection canonique du Flyer
+(`updated_at` décroissant), sans autre défaut établi. Une animation devenue
+non publique peut conserver une URL dans sa projection personnelle ; le binaire
+public est alors refusé et Live masque l'image, sans exposer de document privé.
+
+Impacts : backend, Marketplace/Live, spécifications Flyer/Live et contrats
+OpenAPI canoniques E41/E42. Aucun schéma de données ni migration, nouveau droit,
+paramètre ou champ obligatoire ; le générateur peut toujours produire une
+animation sans image personnalisée. Aucun accès aux données TEST, aucun commit,
+push ni déploiement. La recette hébergée reste à exécuter après livraison du
+backend puis de Live selon le [guide d'exploitation](../../exploitation/technique/configurer-epic-73.md).
+
+## 31 octobre 2026 — 403 sur le lien d'édition d'une offre
+
+Signalement : `/admin/offre-plateforme-orm/edit/9bfa4730-176d-4f14-9ffa-052add702709`
+renvoie 403 malgré une connexion administrateur. Base backend **586a51f** et
+modifications locales précédentes conservées. Cause démontrée dans les sources :
+`OffrePlateformeAdmin` interdit volontairement l'édition ORM depuis le catalogue
+versionné, mais **Offres et tarifs** proposait encore un lien « Modifier » vers
+cette édition interdite. Le test de rendu a reproduit ce lien avant correction.
+La session distante et l'existence de l'offre signalée n'ont pas été consultées.
+
+Correction : **Publier une nouvelle version** ouvre le catalogue commercial
+existant avec `offre_id`. Le choix de la commune et la pagination conservent
+l'offre cible ; seule cette offre est présentée pour l'édition. La nouvelle
+version reste soumise à l'action autorisée par le serveur, au motif, à la
+confirmation, à la version attendue et à l'idempotence existants. L'interface
+précise la portée des futurs achats dans toutes les communes. L'ancien GET
+d'édition redirige en 303 avec `no-store` après contrôle ADMIN historique et
+validation de l'UUID. Aucune écriture ORM n'est réactivée ; les versions et
+conditions acquises restent protégées. Une offre absente ou non publiée est
+signalée sans publication implicite.
+
+Preuves locales : **4 tests Python ciblés réussis** (rendu corrigé, interdictions
+ORM conservées, redirection ADMIN, refus anonyme/profil métier/compte nominatif,
+identifiant invalide et POST non redirigé, API de création protégée), **623
+contrôles d'architecture réussis**. `node tests/browser/offre-version-navigation.cjs` :
+**3 parcours** à 1280/320 px et texte 200 %, depuis la liste vers la publication
+ciblée en seconde page, aucun POST avant confirmation, même offre/version dans
+la commande et refus lecteur. Le libellé accessible du sélecteur Commune est
+explicite. `node tests/browser/epic73-modules-erp.cjs` réussit à 320/1280 px :
+versions, octrois, conflits, remboursements et dates Paris conservés.
+Captures dans `.artifacts/offres-catalogue/` du backend.
+
+Impacts : backend ERP et [parcours canonique du catalogue](modules-souscriptions-import-communication.md#3-catalogue-et-droits-acquis).
+Pas de changement de règle métier, contrat de publication, calcul de droits,
+migration, configuration ou générateur : le correctif relie la lecture et le
+formulaire de publication déjà existants. Aucune donnée, offre réelle ou
+souscription modifiée ; recette hébergée non exécutée. Aucun commit, push ou
+déploiement effectué.
+
+## 31 octobre 2026 — parcours du gestionnaire interne ERP
+
+Retour utilisateur : simplifier la nouvelle souscription (partenaire, droits,
+accès), l'exploitation des animations en cours et les demandes de support.
+Base backend **586a51f**, travaux locaux des autres dépôts conservés. Les
+reproductions ont montré un ordre de formulaire incohérent, des actions utiles
+peu visibles et une réponse support peu distinguée des opérations internes.
+
+Correction de présentation, sans modification des règles métier :
+
+- Référencement en quatre étapes ordonnées, contenu du forfait lisible, revue
+  et confirmation explicites avant création. Modification de saisie : revue
+  invalidée. Dossier créé directement accessible, gratuité et paiement attendu
+  distingués, invitation toujours conditionnée par l'activation.
+- Suivi des animations : filtres prioritaires et raccourci « En cours »,
+  conservation du contexte, pilotage avant les lots et liens vers les consoles
+  autorisées. Aucun indicateur de dates d'animation absent de l'API n'est inventé.
+- Support : demandes à traiter et échéances repérables, réponse principale,
+  notes privées et suivi interne séparés, messages titrés et focalisés. Les
+  compteurs indiquent leur portée limitée à la page. La revue a reproduit puis
+  corrigé une demande clôturée comptée en retard ouvert : son détail présente
+  désormais l'historique, sans nouvelle échéance de réponse.
+
+Preuves locales :
+
+- `tests/infrastructure/admin/test_referencement_animation_ux.py` : deux
+  reproductions rouges avant correction, vertes après ; tests API/navigation
+  ciblés conservés. `tests/browser/gestionnaire-souscription-ux.cjs` :
+  **63 contrôles** à 1280/320 px et texte 200 %, sans création à la consultation.
+  **17 tests Python** ciblés réussis ; régressions checkout, équipes et accès
+  internes réussies. Navigation ERP : **26 contrôles** réussis.
+- `tests/browser/epic73-operations-ux.cjs`, suivi produits, exploitation et
+  préparation : **26 scénarios** réussis ; profils gestionnaire, lecture et
+  Support, 1280/320 px et texte 200 %, droits et contexte vérifiés.
+- Les deux bancs `epic73-support-organisations*.cjs` passent, dont demande
+  clôturée sans première réponse avec ancien indicateur de retard. Réponse,
+  note privée, conflit, reçu incertain, relecture et rejeu explicite avec même
+  clé/corps vérifiés. **12 tests Node et 14 tests API/navigation** réussis.
+- Contrôles backend obligatoires : **623 tests** d'architecture, classes du
+  domaine et couverture des use cases réussis. Captures locales dans
+  `.artifacts/gestionnaire-ux/`, `tmp/operations-ux-captures/` et
+  `.artifacts/e73-support-organisations-ux/` du backend.
+
+Impacts : backend ERP et [présentation canonique des parcours](perimetres-parcours-saas.md#45-parcours-du-gestionnaire-interne-erp).
+Contrats, domaine, permissions, migrations et générateur sans impact pour cette
+réorganisation : seules les actions existantes sont présentées différemment.
+CSRF, version, idempotence, confirmation et résultats incertains conservés.
+Styles corrigés à leur source et limités à ces écrans. Recette hébergée non
+exécutée ; aucun compte, invitation ou paiement réel créé.
+
+## 31 octobre 2026 — forfait Premium ajouté après confirmation des conditions
+
+Cause reproduite : `v215` et le catalogue de références ne définissaient que
+Découverte et Essentielle. L'utilisateur confirme **1 490 € HT, 12 mois,
+animations illimitées, accompagnement par défaut et aucun module payant inclus**.
+Le modèle retenu est l'accompagnement standard de la plateforme autonome,
+sans nouvelle prestation clé en main. Les [conditions canoniques](modules-souscriptions-import-communication.md#catalogue-initial-et-unités)
+et la présentation historique E47 sont actualisées, sans changer les statuts.
+
+Depuis `v265`, le portail lit `versions_catalogue_modules` : une offre historique
+seule ne suffit pas. La nouvelle migration **v285** ajoute donc Premium aux
+deux sources et les références incluent ses conditions. Elle ne réécrit aucune
+vente acquise ni version publiée ; une offre personnalisée, inactive ou retirée
+est préservée. La publication générique après création ERP/provisionnement reste
+un sujet distinct ; cette correction publie uniquement Premium.
+
+Preuves locales :
+
+- Référence absente : test rouge avant correction ; **48 tests de références**
+  réussis ensuite, dont prix, durée, quota et absence des trois modules payants.
+- **6 tests PostgreSQL isolés** réussis : publication effective par le service
+  de catalogue, idempotence, préservation des conditions acquises et des offres
+  existantes/personnalisées/inactives/retirées. Devis réel de renouvellement :
+  149 000 centimes HT, 178 800 TTC sous TVA synthétique 20 %, une seule ligne
+  forfait, 12 mois et aucun module ; aucun droit activé par le seul devis.
+- Portail Animation : **4 scénarios navigateur, 52 assertions**, à 1280/390/320 px
+  et texte 200 %. Premium apparaît depuis le catalogue serveur, la demande de
+  devis porte son code sans module et aucune commande n'est confirmée sans
+  consentement. Le prix est calculé côté domaine, pas dans le navigateur.
+- Revue indépendante de la migration et des invariants : aucun écart bloquant.
+- Contrat HTTP du consommateur : **2 tests** réussis. Documentation finale :
+  **98 guides, 1 158 liens**, aucune erreur ; **130 sources exportées**
+  vérifiées, `git diff --check` réussi dans les trois dépôts modifiés.
+  Le serveur PostgreSQL jetable a été arrêté après les vérifications.
+
+Impacts : références et migration backend ; spécifications et exploitation ;
+tests du consommateur Animation. Aucun nouveau contrat, droit de module,
+paramètre d'environnement ou ajustement du générateur nécessaire : le forfait
+réutilise les capacités standard existantes. Les anciennes migrations restent
+inchangées. Migration préparée et vérifiée localement uniquement ; **TEST non
+migré vers v285**, aucun fournisseur de paiement sollicité. Aucun commit, push
+ou déploiement effectué pour ces deux correctifs.
+
+## 31 octobre 2026 — hiérarchie de Compte et équipe
+
+Retour utilisateur : actions difficiles à hiérarchiser. Base Animation
+**4ef51b2** avec les autres modifications locales conservées. Reproduction dans
+le navigateur : la rubrique export/fermeture précédait les collaborateurs et
+le bouton d’invitation ; les trois champs de mot de passe restaient toujours
+ouverts, et la page était centrée sous un plafond `max-w-5xl`. Le nouveau
+contrôle d’ordre échouait avant correction pour cette raison.
+
+Correction : équipe courante en premier et invitation principale dès son
+en-tête ; actualisation et modification d’un accès secondaires. Collaborateurs
+et invitations sont séparés. Un transfert à suivre remonte avant les listes,
+y compris pour son successeur non responsable. Les accès rapides **Équipe**,
+**Mes organisations** et **Mon compte** placent le focus dans leur section sans
+changer le contexte. L’organisation courante est nommée et les autres disposent
+d’une ouverture explicite. Mot de passe et opérations sensibles sont à la
+demande ; les composants restent montés au repli pour préserver leur état.
+
+Saisies et confirmations s’ouvrent avant les listes, avec focus et défilement.
+Annuler rend le focus au déclencheur sans écriture ; une confirmation de
+révocation masque la saisie concurrente. Les retours d’équipe réutilisent le
+message contrasté commun à Abonnement ; ils rappellent qu’une invitation ou une
+proposition de transfert attend l’acceptation de son destinataire. La revue indépendante a relevé un nom
+accessible qui omettait « Ouvrir cette organisation » : il inclut désormais
+ce libellé visible, le nom de l’organisation et le rôle. Les deux contrôles de
+changement d’organisation dans l’application ont été adaptés et rejoués.
+
+Preuves locales :
+
+- `node tests/browser/organisation-access.mjs` : **56 scénarios, 388 assertions**,
+  1280/390/320 px et texte à 200 %. Ordre invitation/opérations sensibles,
+  invitation, lecture seule, édition, révocation d’autrui/de soi, renvoi/révocation
+  d’invitation, acceptation du transfert par le successeur, annulations sans
+  mutation, focus clavier, pagination indépendante, mot de passe et reprise
+  après réponse perdue avec corps et clé identiques. Le repli des opérations
+  sensibles conserve la confirmation d’export sans envoyer de commande.
+- `node tests/browser/account-app.mjs` : **16 parcours, 126 assertions**,
+  application réelle à 1280/320 px, largeur du contenu, absence de lectures
+  métier pour identité seule, acceptation d’invitation, changement de contexte,
+  récupération/changement du mot de passe et reconnexion, déconnexion à réessayer.
+- `node tests/browser/reversibilite-catalogue.mjs` : **12 scénarios,
+  100 assertions**, export et reprise incertaine, téléchargement privé, fermeture
+  accompagnée, refus et catalogue. Aucun fournisseur réel sollicité.
+- **244 tests Node réussis**, aucun ignoré ; types, lint, builds application et
+  PWA isolés réussis, sans environnement opérateur. Captures dans
+  `tmp/organisation-access/` et `tmp/generation-browser-dist/` du dépôt Animation ;
+  bureau, mobile et zoom inspectés.
+- Revue indépendante : droits/actions serveur, identité seule, accès du
+  successeur, montage persistant, version et clé de commande, pagination et
+  annulation préservés. Aucun changement des invariants du domaine
+  `identite_acces` ou de la réversibilité.
+- Documentation : **96 guides, 1100 liens**, aucune erreur ; **130 sources
+  exportées** vérifiées et `git diff --check` réussi dans les deux dépôts.
+
+Impacts : Animation et documentation canonique uniquement ;
+[présentation du parcours](perimetres-parcours-saas.md#44-présentation-de-compte-et-équipe)
+actualisée. Aucun contrat, calcul de droits, migration, générateur, donnée ou
+paramètre d’exploitation modifié : la correction organise les actions existantes
+et conserve leurs contrôles serveur. Styles corrigés dans le composant, sans
+nouvelle surcharge CSS. État de l’epic inchangé ; aucun email ou changement
+d’accès réel, commit, push ou déploiement effectué. Recette hébergée non exécutée.
+
+## 31 octobre 2026 — hiérarchie et confirmations de la page Abonnement
+
+Retour utilisateur : actions sans hiérarchie et confirmations peu lisibles.
+Base Animation **4ef51b2**, avec les autres travaux locaux conservés. Cause
+observée dans le navigateur : renouvellement et facturation étaient placés
+après tous les droits et usages, dans la même rangée de boutons secondaires ;
+les messages de confirmation n’avaient ni mise en évidence ni déplacement du
+focus. Le bouton d’arrêt à échéance suggérait une démarche inutile en l’absence
+de renouvellement automatique. Le test ciblé échouait bien sur sa présence.
+
+Correction locale : résumé forfait/état/échéance en tête, renouvellement
+principal, ajout de modules et changement de forfait secondaires. Modules acquis,
+usages, catalogue, facturation et commandes sont séparés. Le devis remplace le
+choix pendant sa revue ; l’acceptation des conditions et le total TTC sont
+repérables. Les confirmations/erreurs sont titrées, contrastées, annoncées et
+ramenées dans la zone visible avec focus. Facturation et demande de remboursement
+peuvent être annulées sans écriture ; la demande de remboursement reste distincte
+de sa décision et de son exécution. Le paiement est l’action principale du suivi
+de commande, sans activation déduite du retour navigateur. Les notifications
+antérieures sont effacées lors d’une nouvelle vérification explicite.
+
+Le portail explique l’expiration sans renouvellement automatique et retire le
+bouton d’arrêt. Les anciennes demandes restent affichées. La clarification est
+dans [la spécification commerciale](modules-souscriptions-import-communication.md#5-achat-renouvellement-facturation-et-remboursement)
+et **RM-07-05**, dont la numérotation et les preuves historiques sont conservées.
+Le contrat serveur `/arret` n’est pas retiré. Les invariants restent dans le
+domaine `abonnements_plateforme` ; aucun calcul de montant, droit ou transition
+n’a été ajouté à l’interface.
+
+Preuves locales :
+
+- `node tests/browser/modules.mjs` : **52 scénarios intégrés, 784 assertions**,
+  à 1280/390/320 px et texte 200 %. Achat, renouvellement actif/expiré, seuls
+  modules achetés précochés, changement de forfait, facturation initiale/modifiée,
+  annulation sans écriture, remboursement, ancien arrêt lisible, période future,
+  lecteur, indisponibilité, conflit, pagination et compteur incertain. Devis et
+  confirmations visibles/focalisés ; commande au clavier et aucune écriture
+  avant confirmation. Retours réseau perdus et reprise avec la même clé vérifiés.
+  Quatre rejeux ciblés Achat (**128 assertions**) ajoutent un contrôle du cadrage
+  complet de la confirmation de paiement dans la zone de contenu de l’application,
+  à chacune des quatre tailles/variantes, au-delà du seul focus.
+- `node tests/browser/commercial-order-ux.mjs` : **24 scénarios** dans le
+  composant réel avec API synthétique : paiement/remboursement, focus et annulation,
+  refus des actions serveur/Achat, lien non HTTPS absent et reprise idempotente.
+  Un manque de largeur à 320 px/200 % a été reproduit puis corrigé à la source :
+  confirmation empilée avec largeur bornée et totaux en colonne. Contrôle du
+  débordement dans le panneau, pas seulement dans la fenêtre.
+- **244 tests Node réussis**, aucun ignoré ; TypeScript et lint réussis.
+  Builds application et PWA isolés réussis, sans environnement opérateur ni
+  fournisseur de paiement. Captures dans `tmp/modules-browser/` et
+  `tmp/commercial-order-ux/` du dépôt Animation ; bureau/mobile/zoom inspectés.
+- Revue indépendante : autorisation Achat et actions serveur, versions,
+  acceptation, conditions de renouvellement et reprise incertaine préservées.
+- Documentation : **97 guides, 1133 liens, aucune erreur**, **130 sources
+  exportées** vérifiées ; `git diff --check` réussi dans les deux dépôts.
+
+Impacts : Animation et documentation canonique uniquement. Pas de contrat,
+backend, migration, générateur, donnée ni configuration d’exploitation à changer :
+il s’agit de présentation des parcours existants, avec compatibilité des anciens
+arrêts. Les styles sont corrigés dans les composants, sans surcharge CSS ajoutée.
+État de l’epic inchangé. Aucune validation sur le site hébergé, aucun paiement
+réel, commit, push ou déploiement effectué pour ce correctif.
+
+## 31 octobre 2026 — correctif d’affichage de Localeo Animation
+
+Retour utilisateur : espaces centrés et trop étroits dans neuf rubriques,
+avertissements de l’assistant tardifs et action suivante peu accessible.
+Base Animation **4ef51b2**, avec les modifications locales ci-dessous ; état de
+l’epic inchangé. Les preuves de migration TEST de la section suivante sont
+conservées et ne valent pas déploiement de ce correctif frontend.
+
+Cause reproduite : à 1600 px, le conteneur Assistant occupait **960 px sur
+1390 disponibles**, avec décalage de 215 px. Communication était plafonnée à
+1080 px sur un écran de 1920 px. Les contraintes `mx-auto max-w-*` étaient dans
+les composants. Elles sont retirées à leur source, sans ajout ni surcharge de
+fichier CSS ; les champs, dialogues et aperçus conservent leurs bornes utiles.
+La correction couvre Assistant, Live et ses événements, Préparation terrain,
+Validations, Communication, Tirage/Gains libres et leur détail, Flyer et Bilan.
+Les variantes Coffrets, déjà en pleine largeur, sont conservées.
+
+L’assistant présente d’abord erreurs et avertissements, puis les étapes à faire ;
+les étapes vérifiées sont repliables. La barre **Action suivante** reste accessible
+depuis les rubriques et ouvre le parcours existant, avec focus et défilement vers
+le début utile. La clôture conserve son aperçu, ses droits et sa confirmation.
+La communication présente brouillon → destinataires → confirmation, avec action
+de création en tête, conditions à la demande et refus visibles. Le lien **Voir
+Mes modules** ouvre `/abonnement` seulement depuis la liste sans brouillon ;
+aucun achat ni activation ne se déclenche.
+
+Preuves locales :
+
+- **244 tests Node réussis**, aucun ignoré ; TypeScript et lint réussis.
+- **32 parcours navigateur** dans `animation-workspace-ux.mjs` : huit rubriques,
+  1600/390/320 px et 320 px avec texte 200 %, hauteur 740 px. Largeur réelle,
+  alignement, ordre des alertes, contenu du Flyer, absence d’écriture et visibilité
+  complète du bouton avant clic après défilement. Le titre de la rubrique cible
+  reste visible après navigation ; le test ne se repose pas sur l’auto-scroll du
+  clic Playwright. Une troncature du CTA au zoom a été reproduite puis corrigée
+  dans le bouton, avec libellé repliable.
+- **12 scénarios UX Communication** à 1920/390/320 px, module actif/absent,
+  autorisation manquante et période fermée ; lien vers les modules seulement
+  depuis la liste et aucune écriture API.
+- Régressions Communication : **36 scénarios, 684 assertions** ; Assistant :
+  deux scénarios mobile/bureau ; Exploitation : deux parcours complets à
+  1280/390 px, correction/retrait/clôture, refus et reprise du même reçu.
+  Préparation terrain à 1280/390 px et navigation Flyer à 1280/320 px réussies.
+  Bons numériques : **12 scénarios, 116 assertions** ; ce banc signale des
+  sélecteurs synthétiques non simulés, renvoyés en 404, sans requête fournisseur
+  ni erreur JavaScript. Leur couverture propre reste celle des tests de contrats.
+- Build application et build PWA isolés réussis, sans fichier d’environnement
+  opérateur. Captures dans `tmp/animation-workspace-ux/` et `tmp/communication-ux/`
+  du dépôt Animation ; captures bureau, mobile et zoom inspectées.
+
+Deux adaptations de bancs ont été nécessaires : le test juridique isolé ne
+simulait pas le titre d’environnement déjà importé par la page ; le scénario
+Exploitation attendait un ancien libellé de validation et ignorait le passage
+actuel vers Commerces. Ces écarts sont constatés dans le HEAD initial ; les
+assertions métier sont conservées, avec retour explicite vers Parcours et DTO
+terrain simulé. La revue indépendante a fait corriger le défilement mobile réel
+et confirme la conservation des droits et confirmations.
+
+Le skill `localeo-corriger` précise désormais la simplicité des IHM Animation,
+la priorité des alertes/actions et la correction des styles à leur source.
+Sa validation `quick_validate.py` réussit, avec PyYAML chargé depuis un
+répertoire temporaire isolé. Contrôles documentaires : **96 guides, 1098 liens,
+aucune erreur**, **130 sources exportées** vérifiées et `git diff --check` réussi.
+Impacts : projet et Animation uniquement ; aucun contrat, backend, schéma,
+générateur ou paramètre d’exploitation modifié par ce correctif visuel.
+La recette hébergée reste à effectuer après livraison. Aucun commit, push ou
+déploiement effectué pour ce correctif.
+
+## 31 octobre 2026 — migration du TEST partagé en v284
+
+Migration demandée et exécutée sur la cible du profil privé backend `.env.test`,
+initialement en v283. Le runner officiel a confirmé puis appliqué uniquement
+`v284_e73_priorites_rappels_live.sql`, depuis backend `586a51f`, avec checksum
+`d1242486cf1cf15eef4e8104aca93582f9444ec954b17d1e7b8f48df00140f61`.
+Une seconde simulation ne trouve plus aucune migration en attente.
+
+Sauvegarde PostgreSQL complète créée avant l'action : **54 935 984 octets**,
+archive intégralement relue par `pg_restore` sans connexion à une base, sans
+restauration en place. Archive, empreinte SHA-256 et reçus avant/après conservés
+hors Git dans le backend :
+`demonstrations/prive/operations/migration-v284-test-20261031T082158Z-5a702630/`.
+
+Les trois nouvelles tables, trois index valides, référence nullable au token,
+clé étrangère `ON DELETE SET NULL` et curseur initial sont vérifiés en SQL.
+Aucun token historique déduit. Les effectifs installations, suivis, notifications
+et participants sont identiques avant/après.
+
+Contrôles HTTP sur `https://test-backoffice.localeo.city` : `/sante` **200**,
+version **1.0.0+586a51f** ; readiness protégée **READY**, **134 contrôles**, aucun
+objet manquant ; configuration publique Live **200** et catalogue public borné
+à un résultat **200**. Aucun redémarrage n'a été nécessaire. Les préférences et
+les traitements de rappel n'ont pas été activés par cette opération ; la recette
+sur appareils et la réception réelle des Web Push restent distinctes.
+
 ## Accueil et rappels du 30 octobre 2026 — E73-EVO-LIVE-ACCUEIL-RAPPELS
 
 Demande : un accueil personnel mobile donnant priorité aux participations presque

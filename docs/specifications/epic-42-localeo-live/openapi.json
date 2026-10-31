@@ -2912,6 +2912,81 @@
         }
       }
     },
+    "/public/animation-locale/animations/{animation_id}/illustration-flyer": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Consulter Illustration Flyer Animation Publique",
+        "description": "Image explicitement choisie pour le flyer d'une animation publique, sans illustration par défaut. Réponse non mise en cache, y compris après retrait.",
+        "operationId": "consulter_illustration_flyer_animation_publique",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "image/png": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            },
+            "headers": {
+              "Cache-Control": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "no-store"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Animation non publique ou illustration absente, retirée ou indisponible.",
+            "headers": {
+              "Cache-Control": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "no-store"
+                  ]
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/public/animation-locale/animations/{animation_id}/visuel": {
       "get": {
         "tags": [
@@ -9346,7 +9421,8 @@
                 "type": "null"
               }
             ],
-            "title": "Visuel Url"
+            "title": "Visuel Url",
+            "description": "Illustration choisie pour le flyer de l'animation ; absente sans image personnalisée. Aucun visuel de remplacement."
           },
           "detail_url": {
             "type": "string",
