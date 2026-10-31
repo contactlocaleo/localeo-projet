@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Live - API backend Epic 42",
     "description": "Vue OpenAPI 3.1 des contrats publics, editoriaux et techniques de Localeo Live.",
-    "version": "1.0.0+586a51f"
+    "version": "1.0.0+c1c57b0"
   },
   "paths": {
     "/public/exploitation/activites-locales/metriques": {
@@ -36772,6 +36772,13 @@
             },
             "type": "array",
             "title": "Modules Deja Acquis"
+          },
+          "modules_actifs": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Modules Actifs"
           },
           "quotas": {
             "items": {

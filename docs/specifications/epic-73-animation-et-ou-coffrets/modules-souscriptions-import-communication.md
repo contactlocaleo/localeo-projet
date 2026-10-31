@@ -169,6 +169,31 @@ La fin de base applique ces règles même si un module a une date mal alignée. 
 
 Parcours portail : choisir commune → voir forfait/modules et prérequis → demander devis → récapituler dates/conditions → confirmer → paiement → état serveur « En attente de confirmation », « Actif » ou « À rapprocher ». Le retour Checkout ne déclenche pas une activation locale. En cas de délai réseau, le client consulte la commande avec sa clé initiale ; il ne crée pas un second achat automatiquement.
 
+Correctif du **31 octobre 2026** : dans **Abonnement → Ajouter des modules**,
+proposer uniquement les modules qui ne sont pas déjà actifs pour la période
+consultée, quelle que soit leur origine : inclus, achetés, offerts ou en essai.
+Les droits restent visibles dans **Mes modules**. Un module expiré, retiré,
+suspendu ou pas encore commencé n'est pas masqué par ce filtre ; ses actions
+commerciales restent soumises aux décisions du serveur. Le renouvellement
+conserve ses modules proposés pour la période suivante et sa présélection des
+modules achetés. Aucun changement de prix, quota ou règle de devis.
+
+La projection de souscription fournit le champ additif **`modules_actifs`** :
+codes officiels distincts, toutes origines, selon le statut effectif du domaine
+et les bornes début inclusif/fin exclusive. Sa lecture est groupée en stockage,
+indépendamment des pages de droits affichées ; le portail ne recalcule ni dates
+ni autorisations. Ce champ décrit les droits, sans remplacer le contrôle de la
+base ou des habilitations. Un module devenu actif à l'actualisation est retiré
+de la sélection et du corps du devis. Quand aucun module supplémentaire n'est
+proposé, la page le signale et conserve le devis désactivé sans sélection.
+
+Compatibilité avec un ancien backend : en l'absence de `modules_actifs`, utiliser
+les statuts effectifs des droits uniquement après lecture complète de leur liste.
+Si d'autres pages restent à consulter, indiquer le chargement nécessaire dans
+**Mes modules** et ne proposer aucun achat de module jusque-là ; aucun parcours
+implicite de toutes les pages. Aucun nouveau paramètre ni migration requis ;
+livrer le backend avant le portail pour disposer directement de la projection.
+
 La ligne de commande porte `nature` (`SOUSCRIPTION`, `MODULE`, `COMPLEMENT_FORFAIT`), souscription/période cible, version de conditions, montant HT/TVA/TTC, fraction, quota et dates acquis. Les tables E47 peuvent être étendues par des lignes typées ; ne pas présenter un module comme un achat de lot Coffrets. Le paiement passe par le port existant, avec une clé fournisseur stable dérivée de la commande ; les événements fournisseurs reçus sont enregistrés et rapprochés une fois.
 
 États cibles : `BROUILLON → EN_ATTENTE_PAIEMENT → PAIEMENT_EN_COURS → PAYEE → ACTIVATION_EN_COURS → ACTIVE` ; branches `ANNULEE`, `EXPIREE`, `A_RAPPROCHER`, `ECHEC_ACTIVATION_REPRENABLE`. Les états de l'ancienne commande E47 restent compatibles par mapping explicite ; une projection `ACTIVE` peut résulter de sous-lignes toutes activées plutôt qu'un remplacement immédiat de ses valeurs persistées. Facture/notification/outbox ont leur propre état : échec email n'annule pas un droit payé. `PAIEMENT_CONFIRME` et émission de droit s'appuient sur une preuve serveur, jamais sur un paramètre de retour.

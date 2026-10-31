@@ -2,6 +2,261 @@
 
 Début : **18 octobre 2026**. [Spécification](README.md), [backlog](../../roadmap/en-cours/epic-73-animation-et-ou-coffrets-backlog.md), [matrice des 63 critères et preuves](verification-livraison.md). Objectif : les 38 US, dans les dix lots demandés. Les lignes ci-dessous ne valent pas acceptation tant que les preuves correspondantes ne sont pas enregistrées.
 
+## 31 octobre 2026 — création des chasses et guidage du gestionnaire
+
+Demande : alléger le récapitulatif, expliciter la prise en compte et rendre
+Assistant et Configuration plus utiles. Bases Animation **69b3ef8**, Projet
+**fc0b32d**, autres modifications locales conservées. La reproduction initiale
+constate un brief plafonné à **630 px pour 1 070 px disponibles** ; le contrôle
+de largeur échoue avant correction. Le récapitulatif réaffichait une longue
+liste de textes et le message de réussite disparaissait lors de la navigation.
+Les formulaires de Configuration étaient comprimés à côté du parcours.
+
+Le brief et son pied d’actions occupent désormais la largeur disponible. Le
+récapitulatif présente des repères illustrés, garde les contenus complets dans
+des détails dépliables et propose des accès Modifier sans perte de saisie.
+L’introduction Léo et la bibliothèque ne sont plus répétées au récapitulatif.
+Après reçu confirmé, un accusé focalisé dans la fiche distingue demande de
+préparation et brouillon réutilisé, avec accès direct à Configuration. Les
+relectures auxiliaires ne conditionnent plus cet accusé. Une réponse perdue
+reste incertaine jusqu’à recherche du reçu ; aucun renvoi automatique.
+L’accusé n’est ni persisté ni partagé entre contextes.
+
+Assistant place les points d’attention en premier, puis une prochaine action
+concrète, son intervenant et des étapes illustrées ; aides et vérifications
+acquises restent consultables à la demande. Configuration affiche une seule
+rubrique en pleine largeur avec consigne, repère et groupes explicites pour
+présentation, dates, règlement et lots. Les panneaux visités restent montés,
+les saisies sont conservées et les protections financières et de publication
+demeurent. Un enregistrement des paramètres confirmé dispose aussi de son
+repère visible et de son focus. Les CSS sont ciblées à leur source.
+
+Preuves locales : types, lint, build de production isolé et **249 tests Node**
+réussis, sans test ignoré. **82 contrôles navigateur** de préparation/génération
+passent à 1280/390 px, dont réponse perdue, reçu confirmé malgré quota indisponible,
+édition depuis le récapitulatif et réutilisation de bibliothèque.
+La recette Léo et les quatre parcours Assistant intégrés passent également.
+Les **268 contrôles** de préparation intégrée et les **40 scénarios /
+448 contrôles** de dotation passent, avec versions, conflits, refus et commandes
+incertaines préservés. La recette de préparation vérifie aussi la pleine largeur,
+le focus de confirmation des paramètres et Configuration à 320 px/texte 200 %.
+Les fixtures devenues anciennes sont alignées sur les sélecteurs bornés déjà
+consommés par l’application ; aucune assertion métier affaiblie.
+
+Les bancs autonomes Assistant et récapitulatif/accusés passent chacun
+**16 scénarios** à 1600/390/320 px, dont texte à 200 %, clavier, focus,
+cibles tactiles, détails conservés et absence de mutation. L’assertion de
+lecture verticale des modalités des lots échoue avant restriction du sélecteur
+CSS et passe après. Captures inspectées sur mobile, bureau et texte agrandi.
+Les tests utilisent uniquement des données synthétiques et bloquent le réseau
+externe, sans configuration opérateur.
+
+Périmètre : portail Animation et documentation canonique E73/E55. Critères
+d’ergonomie précisés ; états de roadmap conservés. Sans impact sur contrats API,
+domaine, migrations, données existantes, générateur ou configuration ops : les
+commandes et validations restent celles existantes. Backend, Pro et Marketplace
+inchangés par ce correctif. Recette hébergée non exécutée ; aucun commit, push
+ni déploiement effectué.
+
+## 31 octobre 2026 — harmonisation du centre de notifications Live
+
+Demande : aligner le centre de notifications sur la charte des autres pages.
+Bases Marketplace **1699216**, Projet **fc0b32d**, changements locaux précédents
+conservés. Cause : styles historiques du centre répartis dans `live.css`,
+angles droits, réglages contradictoires de titre/actions et notifications lues
+rendues par une baisse globale d’opacité. La reproduction depuis
+`/live/messages` constate aussi l’absence de nom accessible du dialogue avant
+interaction clavier : le scénario échoue sur le centre nommé attendu.
+
+Les styles du centre sont consolidés dans `live-inbox.css` et retirés de leurs
+anciennes règles, y compris les branches partagées, sans ajout de `!important`.
+Typographie Live, surfaces et actions arrondies, pictogrammes par catégorie,
+titre et contenu hiérarchisés, mentions **Non lue / Lue** et compteur de
+notifications non lues dans l’aperçu affiché. Les messages lus gardent leur
+contraste. Le bouton Fermer reste dans une barre adhérente ; le dialogue possède
+son nom accessible dès le rendu et le focus initial va à la fermeture.
+Les états vide, chargement et erreur ont leur repère visuel et une annonce
+accessible. Les contenus restent du texte échappé, avec retour à la ligne.
+
+Lecture individuelle, marquage des messages affichés, curseurs, mémorisation
+locale et garde de navigation interne gardent leurs implémentations existantes.
+Pas de nouvelle lecture implicite ni de permission Push. Le compteur n’invente
+pas de total des notifications distantes. Même centre sur Animation et Coffrets,
+avec le fond de leur surface respective ; les autres pages sont conservées.
+
+Preuves locales : **11 scénarios navigateur réussis**, dont les huit nouveaux
+cas du centre, la messagerie directe existante, le parcours à 320 px/texte
+200 % et le confinement clavier des dialogues Live. Couverture à 320/390/1280 px,
+surface Coffrets, états vide/erreur, pagination en échec puis reprise du même
+curseur, lecture individuelle et collective, navigation interne, absence de
+lecture implicite et texte échappé. La fixture compte séparément la lecture du
+badge de l’en-tête et celle du centre à l’ouverture. Les deux scénarios voisins
+d’accord organisateur, réponse perdue et retrait passent également. Captures
+avant/après lecture inspectées sur mobile et bureau, dont texte agrandi.
+Build de production isolé du banc et lint réussis ; le lint exclut uniquement
+les répertoires de travail locaux `output/**` et `tmp/**`, ignorés par Git et
+inaccessibles sous Windows (même contrainte constatée au correctif précédent).
+Contrôles des liens/sources documentaires et `git diff --check` réussis.
+
+Périmètre : Marketplace/Live et documentation canonique. Sans impact sur
+contrats API, domaine, migrations, données existantes, générateur ou
+configuration d’exploitation : seule la présentation utilise les réponses
+existantes. Backend, Pro et portail Animation inchangés par ce correctif.
+Statut de roadmap conservé. Recette hébergée non exécutée ; aucun commit, push
+ni déploiement effectué pour ce correctif.
+
+## 31 octobre 2026 — bloc des communes plus graphique sur l’accueil Live
+
+Demande : remplacer le résumé trop textuel des communes dans Accueil. Bases
+Marketplace **1699216**, Projet **fc0b32d**, autres travaux locaux conservés.
+Cause : `LiveDiscovery` joignait les noms par un séparateur dans un paragraphe,
+avec un lien de modification, sans repères visuels individuels. Le scénario
+avant correction échoue sur l’absence du titre/région **Mes communes** attendu
+dans l’accueil à 320 px.
+
+Le bloc affiche désormais un compteur des communes suivies et des accès
+individuels avec pictogramme de localisation, nom complet et flèche de
+navigation. **Modifier mes communes** reste distinct et rejoint la page
+existante. Les styles sont corrigés à leur source dans `live-discovery.css`,
+en retirant le traitement commun du paragraphe ; pas d’image de remplacement,
+de carte supposée ni de nouvelle statistique d’activité. Le bandeau reste
+après la scène communale et les priorités personnelles gardent leur place.
+
+Le clic sur une commune ouvre `/live/decouvrir?commune=<id>` et conserve la
+sélection locale ; ni écriture API ni demande de position supplémentaire.
+Le parcours partagé, la limite de dix choix et la recherche pour la sélection
+vide restent ceux existants. Icônes décoratives, noms accessibles explicites,
+liens de 44 px minimum, repli des noms longs et mouvements réduits conservés.
+
+Preuves locales : les **4 nouveaux scénarios navigateur** passent à
+320/390/1280 px, dont texte à 200 %, noms longs, dix communes, clavier, contexte
+partagé sans changement de sélection et accès à la gestion. Les **6 tests Node**
+des communes suivies et de la concurrence bornée passent aussi. Captures
+inspectées sur mobile et bureau. Build de production isolé du banc navigateur
+réussi, sans fichiers d’environnement opérateur. Le lint passe avec
+`npm run lint -- --ignore-pattern 'output/**' --ignore-pattern 'tmp/**'` :
+l’appel sans exclusions échouait sur des répertoires de travail ignorés par Git
+et inaccessibles sous Windows (`EPERM`), sans modification de leurs permissions
+ni de la configuration ESLint. Contrôles documentaires et `git diff --check`
+réussis.
+
+La sélection de **29 scénarios navigateur** a d’abord donné 28 succès et une
+expiration dans le test de pagination tardive en erreur de Mes participations.
+Son rejeu isolé réussit. Cause de synchronisation identifiée dans le test :
+l’attente du titre de page ne garantissait pas la fin de la première lecture ;
+le mock de réponse retardée pouvait alors intercepter cette première lecture.
+Le test attend désormais le bouton de pagination avant d’installer ce mock.
+Les deux variantes retardées (succès/erreur) et les quatre nouveaux scénarios
+sont rejoués ensemble : **6 succès**, sans modification ni retrait d’assertion.
+Le code applicatif de pagination n’est pas modifié.
+
+Périmètre : Marketplace/Live et documentation canonique. Aucun impact sur
+les règles métier, contrats API, persistance, migrations, générateur ou
+configuration d’exploitation : ce correctif présente les communes déjà
+sélectionnées et réutilise les routes existantes. Pas de changement du statut
+de roadmap, ni de modification du portail Animation, du backend ou de Pro.
+Vérifications sur fixtures locales ; recette hébergée non exécutée. Aucun
+commit, push ou déploiement demandé/effectué pour ce correctif.
+
+## 31 octobre 2026 — iconographie et actions principales du portail Animation
+
+Demande : mieux distinguer les rubriques de Localeo Animation et les actions
+principales, face à une accumulation de textes et de boutons. Bases Animation
+**69b3ef8**, Projet **fc0b32d**, avec conservation des travaux locaux sur les
+modules actifs. Reproduction locale avant correction : l’assertion navigateur
+d’un pictogramme de section dans l’assistant échoue avec `0 != 1`. Le menu avait
+déjà ses icônes, sans traitement commun dans les espaces de travail.
+
+Le composant partagé `SectionHeading` et sa feuille `section-heading.css`
+associent un pictogramme Lucide au titre, avec description et actions éventuelles.
+Repères appliqués aux espaces principaux et aux rubriques d’une animation :
+assistant, publication, Live, terrain, validations, communication, tirage,
+remise, flyer et bilan ; ainsi qu’abonnement, commandes, équipe, support,
+imports, catalogue de coffrets, participants, bilans et finance. Les onglets
+d’animation reprennent ces repères ; le sélecteur natif mobile reste nommé.
+La communication illustre ses trois étapes sans ajouter un encadré supplémentaire.
+
+Sur le tableau de bord, les animations nécessitant une action précèdent les
+indicateurs et graphiques. Le bouton contrasté reprend le libellé serveur et sa
+destination existante ; sans libellé, il affiche **Ouvrir l’animation**, avec un
+nom accessible complet. Les autres actions de progression, création, devis et
+invitation reçoivent un repère utile ; actualisation et retours restent
+secondaires. Les autorisations, confirmations, gestionnaires de commande et
+protections contre les doubles envois sont conservés.
+
+Les icônes décoratives ne dupliquent pas les libellés accessibles ; titres,
+identifiants, références de focus et ordre sémantique sont préservés. Le texte
+et les actions se replient à petite largeur et à 200 %. La recette a repéré puis
+fait corriger le débordement du bouton d’invitation avec son icône et une cible
+tactile calculée à 41,25 px au lieu de 44 px dans le tableau de bord. Une marge
+de défilement sur le retour commercial évite de rogner son bord et son focus
+lors du retour après commande. Aucune assertion réduite ni scénario ignoré.
+
+Preuves locales : **249 tests Node** réussis ; **40 scénarios** intégrés de
+tableau de bord et rubriques (1600/390/320 px, texte 200 %), **70 scénarios / 994
+assertions** Abonnement, **56 scénarios / 388 assertions** Compte et équipe,
+**126 assertions** de récupération/invitation/changement de compte dans
+l’application complète, **24 scénarios** de commande, **12 scénarios** de
+communication, **8 scénarios / 104 assertions** de support et navigation Flyers
+à 1280/320 px. API synthétiques, aucun fournisseur ni environnement opérateur
+contacté ; les parcours de lecture et raccourcis ne déclenchent pas de mutation.
+Captures bureau et mobile inspectées, dont zoom 200 %. Types, lint, build isolé,
+contrôles documentaires et `git diff --check` réussis.
+
+Périmètre de ce correctif : portail Animation et documentation canonique.
+Les règles métier, critères fonctionnels, contrats API, migrations,
+configuration d’exploitation et générateur de démonstration ne changent pas ;
+aucun contrôle backend supplémentaire requis pour ces repères de présentation.
+Marketplace/Live public et Pro ne sont pas modifiés par ce correctif. Roadmap
+inchangée. Pas de recette hébergée, commit, push ou déploiement effectués.
+
+## 31 octobre 2026 — proposer uniquement les modules non actifs
+
+Demande : dans Abonnement de Localeo Animation, retirer les modules déjà actifs
+du choix d'ajout. Bases Animation **69b3ef8**, backend **c1c57b0**, Projet
+**fc0b32d**. Reproduction avant correctif : la case d'achat de Chasse au trésor
+était présente malgré son droit actif ; le test navigateur échoue avec `1 != 0`.
+
+Le portail filtre désormais **ACHAT_MODULES** avec la projection serveur
+`modules_actifs`, toutes origines couvertes. Mes modules reste consultable,
+renouvellement et changement de forfait conservent leurs parcours. Une sélection
+devenue active après actualisation est supprimée du devis ; si tous les modules
+sont actifs, un état vide explique l'absence de choix. L'ancienne API sans ce
+champ reste compatible, avec attente explicite de lecture complète des droits
+paginés avant de proposer l'ajout.
+
+Le domaine `DroitModule.statut_effectif` reste propriétaire des dates/états.
+Le repository émet une liste DISTINCT de codes officiels pour toutes les périodes
+de la page ; le service de lecture l'ajoute aux projections simples et paginées.
+Aucune règle d'achat/devis, quota, renouvellement, droit acquis ou habilitation
+modifiée. Le test SQL observe **10 requêtes** pour 2 comme pour 25 périodes sur
+10 000 droits : une lecture groupée supplémentaire, sans N+1. Aucun changement
+de schéma SQL ni de données de démonstration ; fixtures navigateur adaptées aux
+achats de modules inactifs. La fixture de commerce réelle est alignée sur sa
+voisine pour créer `finished_at` de v279, sans affaiblir les assertions.
+
+Preuves locales : **126 tests backend** réussis (PostgreSQL jetable, HTTP,
+commerce et domaine), **623 contrôles d'architecture** réussis ; **70 scénarios
+navigateur, 994 assertions** réussis à 1280/390/320 px et texte à 200 %. Ces
+scénarios couvrent droits actifs hors première page, quatre origines, module
+expiré, tous modules actifs, ancienne API paginée, activation pendant la visite,
+renouvellement, achat et retours réseau incertains. Types, lint et build isolé
+Animation réussis. La revue indépendante ne constate aucun défaut fonctionnel.
+Les contrats E41 et E42 sont régénérés avec les générateurs existants depuis
+l'export hors ligne ; le contrat embarqué Animation est actualisé. Cet instantané
+embarqué était antérieur aux contrats canoniques : sa régénération complète
+reprend aussi leurs changements précédents et les métadonnées de validation
+du producteur courant, sans modification manuelle des schémas. La suite Node
+complète Animation vérifie les consommateurs : **249 tests réussis**, aucun
+ignoré, dont le contrat commercial additif. Contrôles des liens et des sources
+exportées, ainsi que `git diff --check`, réussis ; captures mobiles inspectées.
+
+Périmètre : backend, portail Animation et documentation canonique. Pas d'impact
+fonctionnel sur Live, Marketplace ou Pro ; leurs champs inconnus restent sans
+effet. État de roadmap inchangé. Aucun achat réel, commit, push ou déploiement ;
+recette sur l'environnement hébergé non exécutée. Livraison : backend puis
+portail, sans nouvelle configuration.
+
 ## 31 octobre 2026 — Mes lots dans le menu principal Live
 
 Demande utilisateur : sortir **Mes lots** des sous-onglets de Mes participations

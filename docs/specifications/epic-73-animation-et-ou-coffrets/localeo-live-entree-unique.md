@@ -206,6 +206,17 @@ Sans image configurée, conserver la présentation structurée sans illustration
 de remplacement. Les pictogrammes d'interface restent décoratifs pour les aides
 techniques ; les valeurs, libellés et noms accessibles portent l'information.
 
+Sur l’**Accueil**, le résumé des communes suivies prend la forme d’un bandeau
+graphique **Mes communes** : compteur de communes, repères de localisation et
+noms complets sur des accès individuels à leurs animations. Le bouton
+**Modifier mes communes** rejoint la gestion existante. Consulter une commune
+ouvre son contexte partagé sans changer les communes suivies ; le compteur
+porte sur cette sélection locale, jamais sur une activité supposée. Les dix
+choix restent accessibles sans défilement horizontal, y compris avec des noms
+longs et du texte agrandi. Sans commune suivie, conserver la recherche et la
+géolocalisation volontaire existantes. Aucun fond de carte, photo ou statistique
+supplémentaire n’est nécessaire pour ce résumé.
+
 La direction visuelle de Live est un **espace de jeu local** : navigation basse
 en dock avec destination active contrastée, défi personnel sur surface sombre,
 anneau et étapes restantes au premier plan, action de reprise ou de récupération
@@ -223,6 +234,19 @@ progressions réelles, sans points, classement, compte à rebours ni activité e
 temps réel inventés. Les mouvements accompagnent l'entrée ou l'action ; le
 réglage de réduction des animations les supprime. Les textes restent complets
 à 200 %, les cibles tactiles et les marges de sécurité PWA sont conservées.
+
+Le **centre de notifications** reprend la typographie, les couleurs, les
+pictogrammes et les actions arrondies de Live. Les catégories et dates précèdent
+le titre, l’animation éventuelle et le message complet. Les mentions **Non lue /
+Lue** restent lisibles sans dépendre d’une couleur ou d’une baisse d’opacité.
+Le compteur concerne uniquement les messages affichés, y compris après
+pagination ; il ne prétend pas donner le total distant. La fermeture reste
+accessible pendant le défilement et le dialogue est nommé dès son ouverture,
+y compris depuis `/live/messages`. Chargement, absence de nouvelles, erreur et
+pagination conservent leurs états explicites. Consulter le centre ne marque
+aucun message comme lu et ne demande pas de permission Push ; la lecture d’un
+message, le marquage des messages affichés et leurs destinations gardent les
+commandes existantes. Ce composant partagé reste utilisable sur Live Coffrets.
 
 Un parcours est « presque terminé » s'il est commencé, encore accessible et
 incomplet, avec une étape restante ou une progression confirmée d'au moins 80 %.

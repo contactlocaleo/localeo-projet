@@ -223,8 +223,32 @@ des parcours existants sont conservés. La communication rend explicites les
 trois étapes brouillon, vérification des destinataires et confirmation de
 diffusion ; module, autorisation ou fenêtre indisponibles restent expliqués.
 
+Précision du **31 octobre 2026**, création et préparation des chasses : le brief
+et son pied d’actions exploitent toute la largeur disponible. Le récapitulatif
+met en avant commune, dates, commerces et nombre d’étapes avec pictogrammes ;
+présentation complète, sélection des lieux et modalités des lots se déplient
+à la demande. Les accès Modifier conservent les saisies et permettent de revenir
+au récapitulatif déjà visité si tous les éléments requis sont complets.
+
+Un reçu serveur confirmé conduit à un accusé visible et focalisé sur la fiche,
+avec **Suivre ma préparation** ou **Configurer mon animation** pour un parcours
+réutilisé. Une panne de lecture auxiliaire ne masque pas cette confirmation.
+Une réponse perdue exige toujours la recherche du reçu avant tout succès annoncé.
+Cet accusé reste en mémoire et est limité à l’animation et au contexte courants.
+
+L’assistant affiche une prochaine action concrète parmi les actions fournies
+par le serveur, son intervenant et les étapes restant à traiter ; les aides
+secondaires et vérifications acquises restent accessibles à la demande.
+Configuration affiche une seule rubrique à la fois, en pleine largeur, avec
+consigne et repère de progression. Les panneaux visités gardent leurs saisies
+et les blocages liés aux commandes incertaines. Paramètres, dates, règlement et
+dotation ont des groupes explicitement nommés ; leur enregistrement reste
+distinct, sans validation ni publication par simple navigation.
+
 ### 5.2 Lisibilité, actions et accessibilité communes
 
+- Dans Localeo Animation, un pictogramme cohérent relie les rubriques de navigation aux titres des espaces et aux sections utiles (animation, terrain, communication, lots, bilan, abonnement, équipe, support). Il accompagne toujours un libellé ; les icônes décoratives sont masquées aux lecteurs d’écran. Un composant et une feuille de style partagés assurent le même traitement, sans multiplier les encadrés ni les surcharges CSS.
+- Le tableau de bord présente les animations nécessitant une action avant les indicateurs et graphiques. Leur bouton principal reprend l’action recommandée par le serveur ; sans libellé disponible, il propose « Ouvrir l’animation ». Ce raccourci ouvre le parcours existant sans exécuter de transition. Les actions principales sont contrastées et accompagnées d’un repère utile ; actualisation, retours et options secondaires restent discrets et explicitement nommés.
 - Une action principale identifiable par étape ; verbes concrets et vocabulaire utilisateur (« Créer une animation », « Publier », « Lot remis »). Pas de code technique, nom d’agrégat ou statut interne brut dans le parcours.
 - Toujours distinguer brouillon enregistré, opération acceptée/en cours, succès confirmé et échec. Une réponse `202` affiche une progression, jamais une réussite anticipée. Après réponse perdue, consulter l’opération existante ; pas de nouveau tirage ou paiement suggéré à l’aveugle.
 - Erreur à proximité du champ avec explication et correction possible ; récapitulatif accessible pour les formulaires longs. Préserver la saisie après erreur, signaler les changements non enregistrés et annoncer l’enregistrement effectif. Les confirmations sensibles indiquent l’objet et la conséquence ; les actions ordinaires n’ajoutent pas de confirmation inutile.

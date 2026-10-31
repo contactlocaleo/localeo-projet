@@ -930,8 +930,11 @@ la hiérarchie initiale T6-UX07 ; elle conserve leurs règles métier.
   alternatives historiques et séparation des contenus privés sont conservés.
 - **E55-UX-09-C** — Le parcours reste le support principal. Les rubriques
   Organisation et lots, Commerces, Terrain, Publication s'ouvrent à la demande
-  dans un panneau adjacent sur grand écran et remplacent temporairement le
-  parcours sur petit écran. Les panneaux visités conservent leurs saisies.
+  et remplacent temporairement le parcours, sur grand comme sur petit écran.
+  Le correctif E73 du 31 octobre 2026 remplace le panneau adjacent initial par
+  une rubrique en pleine largeur, afin de préserver la lisibilité des formulaires
+  ([présentation canonique](../epic-73-animation-et-ou-coffrets/perimetres-parcours-saas.md#51-deux-expériences-adaptées-à-leurs-usages)).
+  Les panneaux visités restent montés et conservent leurs saisies.
   Le financement est accessible dans Organisation et lots, après les choix ;
   le gestionnaire est invité à attendre la stabilisation des participations.
   Toute saisie de paramètres non enregistrée empêche d'engager un paiement.
