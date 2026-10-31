@@ -35,8 +35,24 @@ nouvelles notifications pour ces deux seuls usages.
 Navigation basse initiale : **Découvrir**, **Mes participations**, **Mes communes**.
 Le complément Accueil/Rappels remplace le premier libellé par **Accueil**, sans
 changer son URL `/live/decouvrir` ni supprimer la découverte publique.
+Depuis le correctif du **31 octobre 2026**, la navigation comporte quatre entrées,
+dans cet ordre : **Accueil**, **Mes participations**, **Mes lots**, **Mes communes**.
+**Mes lots** ouvre directement `/live/lots` avec son propre titre de page et
+remplace le sous-onglet du carnet. La destination reste active dans le détail
+d'un bon ; les URL personnelles et les accès enregistrés sont conservés.
 Découvrir présente les animations publiques **En ce moment** et **Prochainement**.
 Une fiche montre titre, commune, dates, description, conditions et action autorisée.
+Sa présentation sert l'entrée dans le jeu : type d'animation, **Votre défi** et
+action de participation précèdent les textes détaillés. Pour un passeport
+explicitement identifié, un objectif de validations positif configuré est mis
+en chiffres ; tombola et chasse conservent des invitations adaptées à leur type.
+Un type inconnu reste générique. Aucun avancement personnel, classement ni gain
+n'est déduit de cette fiche publique. Les compteurs de `dynamique` connus sont
+accompagnés de pictogrammes, avec une mention de dotation totale pour les lots.
+Les récompenses et adresses participantes restent consultables avec leurs liens
+existants. Description, conditions et règlement sont accessibles dans des volets
+ouvrables, avec raccourcis depuis l'en-tête. Les actions d'inscription, de reprise
+et de récupération gardent leurs autorisations et leur contexte de provenance.
 Les cartes et l'en-tête de fiche reprennent exclusivement l'image personnalisée
 configurée dans **Flyer**, lorsqu'elle existe et que le serveur l'autorise.
 Sans image, après retrait ou si elle ne charge pas, le contenu reste lisible
@@ -56,6 +72,16 @@ restent utilisables. Les libellés de navigation peuvent revenir à la ligne.
 La recherche ajoute ou retire des communes sans changer les inscriptions. Une
 commune partagée par URL constitue un contexte de consultation : son ouverture
 ne modifie pas silencieusement les communes suivies. Le suivi exige une action.
+
+**Mes communes** privilégie les repères graphiques : nombre de communes suivies
+sur ce navigateur, pictogramme de localisation, nom, code postal disponible et
+état de suivi. Chaque commune propose **Voir les animations**, avec un retrait
+secondaire nommé explicitement pour les lecteurs d'écran. Recherche et
+**Autour de moi** sont regroupés ; les détails d'utilisation de la position
+restent accessibles à la demande. Le compteur ne représente ni un nombre
+d'animations ni un score : la borne reste de dix communes. Aucune carte, photo
+ou statistique territoriale n'est inventée. La même présentation sert la page
+dédiée et la sélection initiale intégrée à Découvrir, avec états vide et erreurs.
 
 ## Critères ajoutés et preuves
 
@@ -131,8 +157,10 @@ rappels personnalisés. Aucun compte habitant n'est créé. L'EPIC 73 reste
 
 **US-LIVE-ACCUEIL.** En tant que participant, voir immédiatement les parcours
 proches de leur objectif ou de leur échéance et reprendre le bon accès personnel.
-Depuis le correctif UX du **31 octobre 2026**, l'accueil ouvre sur la vie des
-communes suivies : accroche contextualisée, animation à rejoindre avec l'image
+Depuis le correctif UX du **31 octobre 2026**, l'accueil ouvre sur le défi personnel
+prioritaire lorsqu'il existe, afin de rendre son action visible dès l'arrivée
+sur mobile. La vie des communes suivies vient ensuite, ou ouvre l'accueil en
+l'absence de priorité : accroche contextualisée, animation à rejoindre avec l'image
 personnalisée du Flyer si disponible, nombre réel de participants à cette
 animation et accès directs aux périodes. Les nombres d'animations sont ceux
 de l'aperçu chargé, dédupliqués par période ; pagination et erreurs sont
@@ -140,14 +168,32 @@ signalées comme un aperçu partiel. Aucune somme d'habitants uniques, activité
 instantanée ou illustration par défaut n'est inventée. Une indisponibilité
 totale propose de réessayer ; le vrai vide propose de modifier les communes.
 
-Une priorité personnelle principale et deux suivantes compactes viennent
-ensuite, avant les cartes publiques. Un raccourci **Mes défis à reprendre**
-dans l'en-tête y mène directement, même sur mobile. Les autres participations
-et les informations de reprise du carnet suivent le programme public.
-**Actualiser** recharge participations et catalogue, avec annulation des
+Une priorité personnelle principale et deux suivantes compactes sont présentées
+avant le programme communal. Un raccourci **Mes défis à reprendre**
+dans l'en-tête y mène directement, même sur mobile. L'accueil ne présente plus
+de section **Mes autres participations**, de pagination ni de liaison des accès.
+Le lien **Toutes mes participations** rejoint `/live/animations`.
+Cette page réunit le carnet local et les participations liées à l'installation,
+avec déduplication par identifiant exact de participation ; deux inscriptions
+à la même animation restent distinctes. Les accès distants absents du carnet
+proposent **Retrouver mon accès**, qui ouvre le formulaire e-mail existant sans
+créer ni substituer un token. Une entrée importée sans accès utilisable propose
+aussi une récupération explicite ; elle ne permet pas de présenter un QR.
+
+**Mes participations** reprend les images Flyer disponibles, les pictogrammes,
+les anneaux et les étapes validées/restantes. Les nombres du carnet portent sur
+les entrées présentes sur l'appareil ; les accès distants sont comptés **sur
+cette page**, sans fabriquer un total global. Les gains et qualifications
+conservent leurs statuts serveur, indépendamment du pourcentage. Une progression
+absente ou incohérente n'est pas représentée par un anneau à zéro. La pagination
+distante remplace la page précédente, au plus 50 éléments par page ; les anciens
+accès se relient uniquement sur action explicite, par lots de 50 et avec deux
+requêtes concurrentes au plus. Un échec de synchronisation laisse le carnet
+local utilisable, avec ses informations conservées et l'état d'erreur visible.
+Sur l'accueil, **Actualiser** recharge participations et catalogue, avec annulation des
 anciennes lectures et sans parcourir toutes les pages implicitement.
 Les visiteurs sans carnet disposent d'abord de la découverte. La navigation
-reste à trois entrées : Accueil, Mes participations, Mes communes.
+comporte quatre entrées : Accueil, Mes participations, Mes lots, Mes communes.
 
 Complément graphique du **31 octobre 2026** : privilégier l'image du Flyer en
 pleine largeur plutôt qu'un grand panneau de texte. Limiter l'ouverture à un
@@ -159,6 +205,24 @@ sans être tronquées ; la fiche complète et son inscription restent accessible
 Sans image configurée, conserver la présentation structurée sans illustration
 de remplacement. Les pictogrammes d'interface restent décoratifs pour les aides
 techniques ; les valeurs, libellés et noms accessibles portent l'information.
+
+La direction visuelle de Live est un **espace de jeu local** : navigation basse
+en dock avec destination active contrastée, défi personnel sur surface sombre,
+anneau et étapes restantes au premier plan, action de reprise ou de récupération
+explicite. Le rendez-vous communal associe Flyer, type de jeu, participants et
+dotation connus à une action **Découvrir et participer** si les inscriptions sont
+ouvertes, sinon une consultation. Les cartes mettent l'objectif et l'action avant
+les textes détaillés. Passeport, tombola et chasse utilisent les mêmes libellés
+de type dans l'accueil, le catalogue et la fiche ; seul un passeport explicite
+présente un objectif public de validations. Les participations disposent de
+surfaces distinctes pour lire leur progression et accéder à leur QR.
+
+Cet habillage est limité à la surface Animation et conserve les parcours
+Coffrets. La sensation de jeu repose sur les objectifs configurés et les
+progressions réelles, sans points, classement, compte à rebours ni activité en
+temps réel inventés. Les mouvements accompagnent l'entrée ou l'action ; le
+réglage de réduction des animations les supprime. Les textes restent complets
+à 200 %, les cibles tactiles et les marges de sécurité PWA sont conservées.
 
 Un parcours est « presque terminé » s'il est commencé, encore accessible et
 incomplet, avec une étape restante ou une progression confirmée d'au moins 80 %.
@@ -266,7 +330,7 @@ claims de transport existants, sans nouvelle intégration fournisseur.
 
 | Critère ajouté | Résultat observable et preuve prévue |
 | --- | --- |
-| E73-HOME-01 | Accueil mobile ancré dans les communes suivies et leur activité publique ; image Flyer seule, aperçu partiel explicite, accès aux périodes. Première priorité personnelle et deux suivantes, raccourci de reprise immédiate ; visiteur sans carnet vers découverte ; navigation et anciens liens conservés. |
+| E73-HOME-01 | Accueil de jeu local : priorité personnelle et action visibles d'abord sur mobile, trois priorités au maximum, puis vie des communes suivies ; visiteur sans priorité vers découverte et participation publique. Image Flyer seule, aperçu partiel explicite, accès aux périodes, type de jeu cohérent et compteurs à pictogrammes. Autres participations et pagination sur Mes participations ; navigation et anciens liens conservés. |
 | E73-HOME-02 | Indicateurs calculés par le domaine, frontière 80 %, une étape, 72 h, commencement et objectif effectif ; inconnus et états terminaux exclus. |
 | E73-HOME-03 | Tri explicite, absence de doublon par participation, plusieurs accès à la même animation indépendants, pagination et état partiel. |
 | E73-HOME-04 | Secret d'installation, refus croisé, aucune donnée sensible et aucune réponse personnelle mise en cache ; ancien backend et erreurs explicites. |

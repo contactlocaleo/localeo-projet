@@ -2,6 +2,233 @@
 
 Début : **18 octobre 2026**. [Spécification](README.md), [backlog](../../roadmap/en-cours/epic-73-animation-et-ou-coffrets-backlog.md), [matrice des 63 critères et preuves](verification-livraison.md). Objectif : les 38 US, dans les dix lots demandés. Les lignes ci-dessous ne valent pas acceptation tant que les preuves correspondantes ne sont pas enregistrées.
 
+## 31 octobre 2026 — Mes lots dans le menu principal Live
+
+Demande utilisateur : sortir **Mes lots** des sous-onglets de Mes participations
+et placer son entrée entre **Mes participations** et **Mes communes**. Bases
+Marketplace **8204c80**, projet **e730ee0**, avec les travaux locaux conservés.
+La reproduction navigateur échoue sur les deux surfaces Live : le menu ne
+contient que trois liens, sans Mes lots.
+
+La navigation présente désormais **Accueil / Mes participations / Mes lots /
+Mes communes**, avec un pictogramme cadeau pour les lots. La liste possède son
+titre **Mes lots** ; cette entrée reste la seule active dans la liste et le
+détail d'un bon. Le sous-onglet est retiré du carnet ; sur la surface Animation,
+le bandeau devenu redondant avec un seul onglet est supprimé. Les deux rubriques
+Coffrets/Participations restent disponibles sur la surface Coffrets. Le dock
+conserve sa hauteur mesurée, les safe areas et le retour à la ligne des libellés.
+
+Les URL `/live/lots` et `/live/lots/:id`, les capacités personnelles, le stockage
+volontaire et les états/QR des bons restent inchangés. Périmètre : Marketplace
+et documentation E73. Aucun impact contrat API, règle domaine, migration,
+générateur de démonstration ou configuration d'exploitation : seul l'accès à
+une page existante change. Aucun changement des statuts de roadmap ; vérification
+locale uniquement, sans commit, push ni déploiement.
+
+Preuves : **18 tests navigateur finaux réussis, aucun ignoré**, sur navigation
+des deux surfaces, clavier, accès direct et rechargement, bons sauvegardés,
+QR et refus sans capacité, participations distinctes et carnet importé sans
+token. Les captures et assertions vérifient les quatre entrées sur une ligne
+à 320/390/1280 px ; le texte à 200 % reste lisible et la dernière action ne
+passe pas sous le dock. Les 12 tests du carnet et les six tests de navigation/
+préférences ont également réussi avant l'ajustement final de répartition du
+dock. Le contrôle de mot entier des participations cible désormais le menu
+principal, le sous-onglet ayant été retiré. ESLint, contrôle des liens et des
+sources exportées, ainsi que `git diff --check`, réussissent (codes de sortie 0).
+
+## 31 octobre 2026 — Live comme espace de jeu local
+
+Retour utilisateur : l'ensemble de Live doit évoquer une animation à vivre et
+inciter à participer, au-delà de fiches éditoriales. Base Marketplace **8204c80**,
+projet **e730ee0**, avec les correctifs locaux précédents conservés. Le test de
+reproduction à 320 px constate que l'action du défi personnel a un ratio de
+visibilité nul dans le premier écran, après le grand programme communal.
+
+L'accueil place maintenant la priorité personnelle, puis ses deux suivantes au
+maximum, avant le programme public. La carte principale devient un espace de
+jeu navy/orange : anneau et étapes restantes contrastés, indicateurs métier
+conservés, action de reprise ou récupération au premier plan. Sans priorité,
+le rendez-vous communal ouvre l'accueil, avec Flyer, type de jeu, participants
+et dotation connus, puis une action publique visible. Les cartes mettent leur
+objectif et leur action avant les textes de détail.
+
+Un helper de présentation partagé aligne les types Passeport/Tombola/Chasse de
+l'accueil, du catalogue et de la fiche. L'objectif de validations n'est chiffré
+que pour un Passeport explicite avec entier positif ; une chasse ne récupère
+plus un récit de validations commerçantes provenant d'un ancien champ. Les
+cartes continuent d'ouvrir la fiche publique et ses conditions ; elles ne créent
+pas d'inscription implicite. Le libellé de participation respecte l'ouverture
+serveur des inscriptions.
+
+Le shell Animation reçoit un dock navy avec destination active orange, un
+en-tête compact et un fond clair. Les cartes du carnet utilisent ses variables
+de surface et d'espacement. Les styles de cartes et de scène sont remplacés
+à leur source ; l'habillage de surface est centralisé, avec safe areas, hauteur
+de dock mesurée, clavier, texte agrandi et mouvements réduits. Les parcours
+Coffrets et les libellés/liens de navigation sont conservés.
+
+Preuves initiales : **15 tests navigateur ciblés réussis** après correction,
+incluant reprise visible dans le premier écran, rendez-vous public, 320/390/1280 px,
+texte à 200 %, données partielles, erreurs/vide, bon accès personnel et reprise
+des anciens accès par lots bornés. **Cinq tests Node réussis** sur présentation,
+priorités/progression et transport du tableau de bord. ESLint sur les sources et
+tests modifiés réussit. Les revues indépendantes du shell et des projections
+publiques ne constatent pas de règle ou d'accès inventé. La campagne transversale
+finale réussit : **75 tests navigateur, aucun ignoré**, sur accueil, découverte,
+fiches, images, carnet, communes, navigation, préférences et liens personnels.
+L'inspection à 200 % conduit à laisser le dock et les compteurs de périodes
+revenir à la ligne entre boutons plutôt qu'à couper les mots. **Dix tests ciblés
+rejoués passent** sur cet ajustement final ; ils vérifient aussi que la dernière
+action reste au-dessus du dock après défilement au bas de la page.
+
+Captures mobile, bureau et texte à 200 % inspectées ; aperçus conservés dans
+`tmp/live-play-review/` du Marketplace (fichiers de travail ignorés). Les contrôles
+documentaires réussissent : 96 guides, 1 081 liens sans erreur et 130 documents
+exportés vérifiés. `git diff --check` passe dans les deux dépôts. Aucun test backend
+relancé, ses règles et contrats n'étant pas modifiés.
+
+Impacts : Marketplace/Live et documentation canonique E73. Aucun changement de
+règle backend, contrat API, migration, générateur ou configuration : mêmes
+objectifs, progressions, inscriptions et accès stockés. Aucune animation en temps
+réel, score, classement ou compte à rebours synthétique. Aucun accès au TEST
+partagé, commit, push ou déploiement ; recette hébergée non exécutée. L'état global
+de l'epic reste inchangé.
+
+## 31 octobre 2026 — fiche publique orientée jeu et défi
+
+Retour utilisateur : une fiche d'animation plus graphique et immersive, orientée
+jeux/challenge plutôt qu'éditorial. Base Marketplace **8204c80**, projet **e730ee0**,
+avec les correctifs locaux précédents conservés. L'ancien en-tête plaçait le
+long descriptif avant l'action et imposait un récit de passages commerçants aux
+trois types d'animation. Le test initial constate l'absence du repère **Votre défi**.
+
+La fiche publique présente maintenant le Flyer disponible, le statut, le type
+de jeu, l'objectif et l'action autorisée avant les textes détaillés. Le passeport
+explicitement identifié affiche son objectif positif configuré ; tombola et
+chasse ont des invitations adaptées. Un type ou objectif inconnu reste générique,
+sans progression personnelle ni faux zéro. Participants, gagnants et dotation
+totale connus sont présentés par nombres et pictogrammes. Les dates, raccourcis
+vers lots/adresses/conditions et volets de description/règlement restent lisibles
+sur mobile. Les lots et adresses utilisent leurs médias réels, sinon un
+pictogramme ; aucune photo de remplacement n'est choisie. La pagination des lots
+reste volontaire, avec remplacement de page, retour et reprise après erreur.
+
+Les anciens styles d'introduction et de bénéfice sont retirés de leurs sources,
+y compris les surcharges éditoriales. La présentation est regroupée dans le
+composant d'entrée de défi et sa feuille dédiée. Les gardes d'inscription restent
+dans les parents existants. Lecture anonyme, provenance `source`, récupération
+par e-mail, inscriptions multiples, QR et accès personnels sont conservés.
+
+Preuves locales : **28 tests navigateur réussis** sur fiche, variantes, statuts,
+images Flyer, inscription sans compte, lots externes, pagination, refus et
+récupération. Les tests vérifient 320/390/1280 px, texte à 200 %, objectif connu
+ou invalide, valeurs publiques inconnues, absence d'avancement inventé et
+conservation du texte complet après ouverture des volets. Le parcours de test
+ouvre aussi le volet existant **Lire le règlement complet** avant de vérifier
+son texte ; l'assertion de contenu est conservée. Une revue indépendante des
+champs et des garde-fous n'identifie pas de blocage ; les trois discriminants
+canoniques sont utilisés. **20 scénarios ciblés passent** après le nettoyage des
+styles et l'ajout des pictogrammes de lots/adresses ; ce rejeu inclut un nouveau
+cas de média réel puis en échec. Au total, **29 scénarios distincts** sont vérifiés.
+Trois rejeux à 320/390/1280 px confirment ensuite l'alignement final du bloc défi
+et de l'action principale après retrait de leur contrainte de largeur arbitraire.
+Captures à 320/390/1280 px et texte à 200 % inspectées. Les contrôles de liens et
+de sources exportées réussissent : 96 guides, 1 081 liens sans erreur et
+130 documents vérifiés. Aucun test backend relancé, ses règles et contrats
+n'ayant pas changé.
+
+Impacts : Marketplace/Live, consommateur public partagé et documentation canonique
+E73. Aucun contrat, règle backend, migration, configuration ou générateur modifié :
+la fiche présente les projections existantes et ne modifie aucune participation.
+Aucun accès au TEST partagé, envoi réel d'e-mail, commit, push ou déploiement.
+La recette hébergée reste non exécutée ; l'état global de l'epic ne change pas.
+
+## 31 octobre 2026 — Mes communes : repères graphiques et accès aux animations
+
+Retour utilisateur : rendre la section des communes plus graphique, dans la
+continuité du carnet Live. Base Marketplace **8204c80**, projet **e730ee0**, avec
+les correctifs locaux précédents conservés. La présentation existante associait
+une liste de liens à plusieurs paragraphes, sans compteur ni repère visuel par
+commune. Le scénario à 320 px constate l'absence du compteur avant correction.
+
+**Mes communes** affiche maintenant le nombre de communes suivies dans ce
+navigateur, un repère de localisation, le nom, le code postal disponible et une
+coche de suivi. **Voir les animations** ouvre le contexte public existant ; le
+retrait est secondaire, avec un bouton nommé pour la commune concernée. Recherche
+et géolocalisation sont regroupées. Les explications de localisation restent
+disponibles dans un volet natif. L'en-tête est compact sur mobile ; la liste
+passe sur deux colonnes sur bureau. Aucun visuel territorial ni compteur
+d'animations n'est inventé. Les styles des communes sont retirés de la feuille
+de découverte et regroupés à leur source, sans superposition de correctifs.
+
+Preuves locales : **33 tests navigateur réussis** sur communes, découverte,
+navigation et préférences de notifications. Ils couvrent ajout/retrait et
+persistance, borne de dix choix, absence de doublon, clavier, noms longs,
+320/390/1280 px, texte à 200 %, stockage refusé, recherche vide/en erreur,
+géolocalisation volontaire, refus, délai, service indisponible et réponse
+tardive. Les coordonnées ne sont pas persistées ; les catégories de notification
+et communes partagées restent indépendantes du suivi. **Six tests Node réussis**
+sur normalisation, stockage et lectures bornées. ESLint sur les sources et le
+nouveau test réussit. **Six scénarios navigateur rejoués passent** après le
+compactage final de l'en-tête. Captures mobile, bureau et texte à 200 % inspectées.
+Les contrôles documentaires réussissent : 96 guides, 1 081 liens sans erreur,
+130 documents exportés vérifiés et `git diff --check` dans les deux dépôts.
+
+Impacts : Marketplace/Live et documentation canonique E73 uniquement. Contrats,
+règles backend, migrations, configuration et générateur sans changement : mêmes
+API et mêmes données locales. Aucune écriture distante, aucun commit, push ou
+déploiement. La recette hébergée n'est pas exécutée et l'état global de l'epic
+reste inchangé.
+
+## 31 octobre 2026 — participations regroupées dans leur page dédiée
+
+Retour utilisateur : la section **Mes autres participations** alourdit l'accueil
+et doit rejoindre **Mes participations**, en conservant sa présentation graphique.
+Base Marketplace **8204c80**, projet **e730ee0**, avec changements locaux de ce
+correctif. La cause est locale : l'accueil affichait toutes les pages du tableau
+de bord tandis que la page dédiée ne lisait que le carnet de l'appareil.
+
+L'accueil conserve au plus trois priorités et le lien **Toutes mes participations**.
+La page dédiée réunit carnet et accès liés à l'installation, dédupliqués par
+identifiant de participation, sans fusionner les inscriptions à une même animation.
+Elle reprend anneaux, étapes restantes, compteurs à pictogrammes et images Flyer
+disponibles, sans illustration de remplacement. Les compteurs du carnet sont
+explicitement limités à cet appareil ; ceux des accès distants à la page chargée.
+Une progression absente ou incohérente reste sans anneau. Qualification et gain
+restent issus du serveur, indépendamment du pourcentage.
+
+La pagination et la liaison explicite des anciens accès sont déplacées avec
+leurs bornes existantes : 50 éléments par page, 50 liaisons par action, deux
+requêtes simultanées. Sans accès personnel, la récupération demande l'e-mail
+d'inscription ; elle ne choisit pas une autre inscription et ne crée aucun QR.
+Le cas d'un carnet importé sans token dispose du même parcours. Les composants
+de carte et d'anneau sont partagés ; les anciens styles de barre sont retirés.
+
+Preuves locales : **42 tests navigateur réussis**, couvrant accueil limité à
+trois priorités, récupération, inscriptions multiples, QR distincts, carnet sans
+token, pagination, réponses tardives, liaison bornée, erreurs réseau et stockage,
+rendus à 320/390/1280 px et texte agrandi à 200 %. **10 tests Node réussis**, dont
+progression inconnue et séparation progression/qualification. ESLint sur les
+sources et tests modifiés réussi. Les anciens scénarios de récupération ont été
+adaptés à la fiche publique actuelle et au DTO de jeu actuel, en conservant les
+assertions e-mail et QR.
+
+L'inspection des captures révèle ensuite un mot « participations » coupé à
+320 px : le style des lots imposait trois colonnes même lorsque deux onglets
+étaient présents. Une assertion de plage de texte reproduit la coupure avant
+correction (deux lignes au lieu d'une). La règle fixe est supprimée ; les onglets
+utilisent leur contenu et peuvent revenir à la ligne entre les liens.
+**Cinq tests navigateur rejoués réussissent** sur cette correction finale,
+notamment le mot entier à 320 px et à 200 %, les QR et les rubriques du carnet.
+Captures finales mobile et bureau inspectées. Les contrôles documentaires passent :
+96 guides, 1 081 liens locaux, aucune erreur et 130 documents exportés vérifiés.
+
+Impacts : Marketplace/Live et documentation canonique E73. Sans changement de
+contrat, règle backend, migration, configuration ou générateur : les projections
+existantes sont utilisées et les accès stockés conservés. Aucun appel au TEST
+partagé ni envoi réel d'e-mail. Aucun commit, push ou déploiement ; la recette
+hébergée reste non exécutée. L'état global de l'epic est inchangé.
+
 ## 31 octobre 2026 — Mon Live : priorité au visuel
 
 Retour utilisateur : privilégier le graphique aux longs textes. Sur la base

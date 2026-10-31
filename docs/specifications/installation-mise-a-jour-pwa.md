@@ -10,13 +10,25 @@ Le bouton disparaît dans l'application ouverte en mode autonome et après confi
 
 Une version plus récente détectée est proposée par un bouton **Mettre à jour** ou un bandeau équivalent. L'utilisateur peut continuer son travail et revenir à la proposition. La mise à jour demande une action explicite ; les saisies à terminer sont signalées avant le rechargement. Une activation faite dans un autre onglet ne recharge pas celui-ci. L'échec laisse un message et permet de réessayer. Hors ligne, aucune opération métier n'est rejouée et aucun succès de mise à jour n'est inventé.
 
+La proposition compare la version livrée à celle **déjà chargée dans cet onglet**.
+La présence d'un service worker en attente ne suffit pas : une navigation réseau
+peut avoir déjà chargé la même version. Dans ce cas, le bouton reste masqué, y
+compris si un autre onglet active ensuite ce worker. Une première installation
+ne constitue pas une mise à jour. Une version différente activée ailleurs peut
+laisser la proposition dans un ancien onglet, pour qu'il recharge après accord.
+Dans Live, **Plus tard** conserve un bouton discret tant que la proposition reste
+valable. Une version correspond au contenu livré (scripts, styles et ressources),
+pas uniquement à une nouveauté visible ni à la date de déploiement ; un contenu
+identique garde la même empreinte. Live partage le bundle de la Marketplace :
+une modification de celui-ci peut donc concerner une autre page.
+
 ## Critères d'acceptation
 
 | ID | Comportement à vérifier | Preuve attendue |
 | --- | --- | --- |
 | PWA-CA1 | Les sept headers offrent l'installation ; le mode autonome et `appinstalled` masquent l'action | Tests des headers, simulation du mode autonome et événement navigateur |
 | PWA-CA2 | Demande native unique, refus réessayable, aide iOS et navigateur de secours | Tests clics concurrents, refus, clavier, fermeture et restitution du focus |
-| PWA-CA3 | Une modification des fichiers livrés produit une version détectable ; retour au premier plan vérifie les mises à jour | Tests de version par contenu et de retour dans l'application |
+| PWA-CA3 | Une modification des fichiers livrés produit une version détectable ; retour au premier plan vérifie les mises à jour ; aucun bouton si cette version est déjà chargée | Tests de version par contenu, retour dans l'application et document à jour avec worker en attente ou activé ailleurs |
 | PWA-CA4 | Mise à jour seulement après accord, pas de rechargement forcé des autres onglets ni activation automatique | Cycle réel entre deux workers, conservation d'une saisie dans un autre onglet |
 | PWA-CA5 | Échec et réseau indisponible sont récupérables, doubles clics bloqués | Tests des erreurs, bouton occupé, réessai |
 | PWA-CA6 | Aucun nouveau cache d'API, document privé, jeton ou page authentifiée ; droits et sessions inchangés | Tests SW et accès aux ressources publiques exactes, non-régression sessions |
@@ -61,6 +73,61 @@ un accès refusé à `output/demo-generation/pytest-bum-registry` ; le lint des 
 sources modifiées passe. Aucun changement API, SQL, habilitations, données de
 démonstration ou configuration d’exploitation. Pas de déploiement ni de recette
 sur appareils physiques réalisés pour ce correctif.
+
+## Correctif du 31 octobre 2026 — proposition déjà chargée
+
+Le signalement d'un bouton sans nouveauté conduit à vérifier les implémentations
+existantes. Dans Pro et Animation, un worker en attente déclenchait la proposition
+sans comparaison avec le document courant. Le scénario reproduit est une page B
+chargée depuis le réseau, encore contrôlée par A, avec le worker B en attente :
+la page possède déjà la version annoncée. Deux tests rouges par application
+confirment ce faux positif avant correction. Dans Pro, un worker abandonné pouvait
+aussi laisser la proposition affichée.
+
+Les builds Pro et Animation injectent désormais la même empreinte déterministe
+dans la meta HTML et dans le worker. Sa lecture par MessageChannel ne provoque
+aucune activation ; une réponse identique masque la proposition, avant comme
+après activation depuis un autre onglet. Pro retire également la proposition
+d'un candidat devenu redondant. Les anciens documents sans meta et les workers
+historiques sans réponse conservent le parcours explicite existant ; l'absence
+de réponse après un délai borné ne constitue pas une égalité de versions.
+
+Live possède déjà cette comparaison. La revue identifie toutefois une absence
+de réponse mémorisée pendant toute la vie du document : un worker lent du même
+build pouvait être assimilé à un worker historique puis ne plus être interrogé.
+Ce cas est reproduit dans Live et Pro avant correction. Les versions inconnues
+ne sont plus mises en cache ; le prochain contrôle peut retirer le faux signal,
+y compris le bouton discret déjà différé dans Live. Une réponse tardive ne
+termine pas deux fois sa lecture. La revue des PWA internes confirme une comparaison document/
+serveur pour Ops, Atelier, Support et OnBoard. Control conserve son worker de
+notifications et ne propose pas de bouton de mise à jour. Cette revue backend
+reste en lecture seule, sans exécution de ses tests.
+
+Périmètre du correctif : Pro, Live, Animation et documentation transverse. Aucun contrat
+métier, droit, session, identité de manifest, scope, API ou cache privé modifié ;
+aucune migration SQL, donnée de démonstration ou variable de configuration requise.
+Livrer le HTML et le worker du même build, selon la procédure existante. Les
+versions effectivement déployées et l'affichage sur l'appareil du signalement
+ne sont pas vérifiés par cette recette locale. Aucun commit, push ni déploiement.
+
+Preuves sur les arbres locaux : Marketplace **8204c80**, Pro **7e6b008**,
+Animation **ce8972b**, Projet **e730ee0**, avec les modifications précédentes
+Marketplace/Projet conservées.
+
+| Surface | Contrôles exécutés pour ce correctif |
+| --- | --- |
+| Live | `node --test tests/security/live-update.test.cjs tests/security/service-worker.test.cjs` : **16 succès**. Playwright `live-update.spec.cjs` et `live-update-lifecycle.spec.cjs` : **7 succès**, avec worker réel multionglets et disparition du bouton différé après réponse lente. ESLint ciblé réussi. |
+| Pro | Vitest ciblé `pwaUpdates.test.js`, `pwaWorker.test.js`, `PwaInstallButton.test.jsx` : **22 succès**. `npm run test:e2e -- tests/e2e/pwa.spec.js --workers=1` : **3 succès**, incluant nouveau document déjà à jour, ancien onglet conservé, clavier et Axe. Le runner reconstruit le bundle isolé ; meta et constante du worker concordent. |
+| Animation | `node --test tests/pwa.test.mjs tests/pwa-lifecycle.test.mjs` : **14 succès**. Types, lint et build isolé réussis. `node tests/browser/pwa-smoke.mjs` : **code 0**, avec document déjà à jour sous ancien contrôleur, activation voisine, consentement, hors ligne, échec d'installation et clavier à 1280/720/390/360/320 px. |
+
+Le banc Animation a d'abord échoué sur des contrôles clavier : il envoyait la
+touche suivante pendant la fin du chargement de Support ou l'ouverture du
+dialogue. Il attend désormais le focus de navigation, la fin de l'animation
+d'entrée et la fermeture effective du dialogue. Les assertions de retour du
+focus et l'activation au clavier sont conservées ; aucun parcours produit
+d'installation n'a été modifié. Les suites finales ci-dessus réussissent sans
+cas ignoré. Les contrôles documentaires et `git diff --check` sont également
+exécutés ; l'installation sur appareils physiques reste non exécutée.
 
 ## Architecture et impacts
 
