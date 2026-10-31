@@ -2,6 +2,127 @@
 
 Début : **18 octobre 2026**. [Spécification](README.md), [backlog](../../roadmap/en-cours/epic-73-animation-et-ou-coffrets-backlog.md), [matrice des 63 critères et preuves](verification-livraison.md). Objectif : les 38 US, dans les dix lots demandés. Les lignes ci-dessous ne valent pas acceptation tant que les preuves correspondantes ne sont pas enregistrées.
 
+## 31 octobre 2026 — assistant : alertes identifiables par couleur et pictogramme
+
+Demande : rendre les alertes et avertissements immédiatement reconnaissables.
+Bases Animation **0d45d5e**, Projet **83a7738**, correctifs locaux précédents
+conservés. Cause : toute la synthèse utilisait le même fond ambre, tandis que
+les lignes ne distinguaient leur gravité que par le texte. La reproduction
+navigateur constate **un seul fond pour trois types**, au lieu de trois repères.
+
+Chaque point possède désormais son fond, son liseré et son pictogramme :
+rouge/alerte pour un blocage, orange/triangle pour un avertissement,
+bleu/information pour un point commun informatif. Les libellés explicites
+conservent le sens sans perception des couleurs ; les icônes décoratives
+restent masquées aux lecteurs d’écran. Une erreur de lecture bénéficie aussi
+du repère rouge tout en conservant `role=alert`. Les styles sont modifiés à
+leur source, sans nouvelle couche globale ni changement de classement.
+
+Preuves locales : **24 scénarios Assistant** réussis à 1600/390/320 px,
+dont texte à 200 %, blocage/avertissement/information ensemble, trois formes
+distinctes et contraste calculé des messages et libellés **≥ 4,5:1** sur leur
+fond effectif. Le test de reproduction passe après correction. Les quatre
+parcours Assistant dans l’application complète passent également, sans écriture
+API. Captures inspectées sur bureau, mobile et texte agrandi. Types, lint,
+build isolé et **253 tests Node** réussis, aucun ignoré.
+
+Périmètre : portail Animation et documentation E73. Aucun changement de
+contrat API, gravité métier, règle, migration, générateur ou configuration ops :
+la couleur présente la catégorie déjà calculée par le rendu, sans ajouter de
+blocage. Backend, Pro et Marketplace inchangés ; statuts de roadmap conservés.
+Recette hébergée non exécutée ; aucun commit, push ni déploiement effectué.
+
+## 31 octobre 2026 — assistant : points communs et actions sans répétition
+
+Demande : éviter les alertes répétées, notamment l’échéance de réponse des
+commerçants, et rendre l’assistant plus accessible. Bases Animation **0d45d5e**,
+Projet **83a7738** ; correctif local précédent de navigation conservé.
+Cause confirmée par lecture du producteur : `projeter_assistant` rattache
+`DATE_LIMITE_REPONSE_COMMERCANTS_INVALIDE` à DATES, COMMERCANTS et PUBLICATION,
+puis expose le code dans la synthèse de publication. Le frontend rendait
+séparément chacune de ces listes. La reproduction navigateur échoue avec
+**3 occurrences du même message pour une seule attendue**.
+
+La présentation regroupe désormais chaque point dans une synthèse, avec sa
+gravité serveur, un accès principal et les autres rubriques concernées à la
+demande. Les codes et leurs représentations textuelles connues sont rapprochés ;
+les textes distincts et contrôles inconnus restent conservés, sans rapprochement
+approximatif. Le message ne réapparaît pas dans les étapes dépliées. Une prochaine
+action déjà entièrement couverte par cette synthèse n’est pas dupliquée ; les
+autres étapes, statuts, intervenants, aides et accès Support restent accessibles.
+Les compteurs sont explicitement des **étapes**, distinctes des points uniques.
+
+Pour une chasse, le raccourci Dates ouvre directement **Configuration →
+Organisation et lots** via `preparation=organisation`. Ce choix de rubrique
+n’ouvre pas le financement et ne prouve aucun paiement ; les retours de paiement
+restent distincts. Les gardes de navigation et toutes les validations serveur
+sont conservés. Le propriétaire du contrôle d’échéance reste
+`PolitiqueParticipationPublicationAnimation` ; la publication recharge et
+revérifie ses faits. Aucun calcul de validité de date n’est ajouté à l’assistant.
+Les alertes utiles aux validations de chaque autre parcours restent présentes.
+
+Preuves locales : **20 scénarios navigateur Assistant** réussis à 1600/390/320 px,
+dont texte à 200 %, messages communs et distincts, aides, Support, états prêt/
+attente/refus puis reprise, clavier et absence de toute mutation ou stockage.
+Les **253 tests Node** passent, aucun ignoré, dont les nouveaux contrôles de
+regroupement et de distinction entre ouverture Dates et retour de paiement.
+Les **276 contrôles** de préparation intégrée passent à 1280/390 px, dont accès
+direct au champ de date, financement fermé et absence de commande par navigation.
+Les **40 parcours** voisins d’espaces/tableau de bord et **8 parcours** de
+navigation groupée passent également. Types et lint réussis ; build isolé réussi
+avec avertissement non bloquant Vite sur le chunk principal, environ 500,1 kB.
+Captures inspectées sur mobile, bureau et texte agrandi. La revue indépendante
+a fait préserver l’aide et le badge de la prochaine étape, et cette aide est
+exercée au navigateur. Fixtures synthétiques, sans configuration opérateur.
+
+Périmètre : portail Animation et documentation E73. Aucun changement de règle
+métier, contrat API, schéma, migration, générateur ou configuration ops : seul
+le rendu et le choix de rubrique évoluent. Backend, Pro et Marketplace inchangés ;
+pas de tests backend rejoués pour cette présentation. États de roadmap conservés.
+Recette hébergée non exécutée ; aucun commit, push ni déploiement effectué.
+
+## 31 octobre 2026 — navigation de la fiche Animation sans défilement horizontal
+
+Demande : rendre toutes les rubriques accessibles dans la largeur disponible
+et réduire le nombre d’onglets simultanés. Bases Animation **0d45d5e**, Projet
+**83a7738**. Cause démontrée : une rangée de 14 boutons, 15 avec Actualités,
+combinait `whitespace-nowrap` et `overflow-x-auto`. À 1600 px, le test mesure
+**1430 px de contenu pour 1390 px disponibles** et échoue sur le dépassement.
+
+`AnimationDetailNavigation` remplace cette rangée par **Préparer, Piloter,
+Communiquer, Résultats**, avec au plus quatre sous-rubriques visibles. Grille
+et libellés reviennent à la ligne sans masquer de contenu ni créer de zone
+défilante. Icônes, libellés et états actifs restent associés. Le mobile garde
+un seul sélecteur, organisé par groupes. Le groupe actif dérive de la rubrique,
+sans nouvelle variable d’URL ni mémorisation distincte ; les changements passent
+par `selectTab` et son garde existant. Le chargement différé est contenu dans
+la zone de travail afin de conserver navigation et actions visibles.
+
+Preuves locales : la reproduction passe après correction. Les **8 parcours
+navigateur** dédiés passent à 768/1024/1280/1600 px et sur mobile 390/320 px,
+dont texte à 200 % à 1280 et 320 px. Ils contrôlent les quatre groupes,
+sous-rubriques, géométrie interne, cibles de 44 px, ordre Tab, activation Entrée,
+focus dans la navigation ou le titre de destination, chargement différé retenu
+par une barrière de test, Action suivante, ancien alias, rechargement et
+habilitation Actualités présente/absente. Refuser la sortie d’objectifs modifiés
+conserve groupe, rubrique, URL et saisie ; un garde annulé sans dialogue est
+également respecté. Aucune écriture API dans ces scénarios.
+
+Les **40 parcours** existants de tableau de bord et rubriques passent, ainsi
+que la création/dotation (2 scénarios, 24 contrôles), l’accès Flyer depuis la
+liste (1280/320 px) et la clôture avec confirmation (1280/390 px). Types, lint,
+build isolé et **249 tests Node** réussis, aucun ignoré. Captures inspectées
+à 768/1600 px et texte agrandi à 1280 px ; tests avec données synthétiques,
+sans configuration opérateur ni accès aux services réels. La revue indépendante
+ne relève aucun défaut fonctionnel ; ses demandes de preuve clavier et garde
+annulé sont intégrées au banc.
+
+Périmètre : portail Animation et documentation E73. Sans impact sur contrats API,
+règles métier, migrations, générateur ou configuration d’exploitation : seule
+la navigation change, sans nouvelle commande ni permission. Backend, Pro et
+Marketplace inchangés ; états de roadmap conservés. Recette hébergée non
+exécutée ; aucun commit, push ni déploiement effectué pour ce correctif.
+
 ## 31 octobre 2026 — création des chasses et guidage du gestionnaire
 
 Demande : alléger le récapitulatif, expliciter la prise en compte et rendre

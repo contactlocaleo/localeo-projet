@@ -239,11 +239,54 @@ Cet accusé reste en mémoire et est limité à l’animation et au contexte cou
 L’assistant affiche une prochaine action concrète parmi les actions fournies
 par le serveur, son intervenant et les étapes restant à traiter ; les aides
 secondaires et vérifications acquises restent accessibles à la demande.
+Un point commun à plusieurs étapes n’est affiché qu’une fois dans la synthèse,
+avec sa gravité serveur et ses rubriques concernées. Les codes connus et leurs
+libellés produits correspondent au même point ; aucune fusion approximative de
+messages distincts. Un accès principal ouvre la première étape concernée dotée
+d’une action serveur, avec les autres accès disponibles en détail. Les messages
+restent uniques lorsque les étapes sont dépliées. Une prochaine étape déjà
+entièrement représentée dans la synthèse n’est pas répétée en action prioritaire.
+Le statut précis, l’intervenant, l’aide et l’accès Support restent consultables
+pour chaque étape ; les compteurs d’étapes restent distincts du nombre de points.
+Les points sont identifiables par trois repères concordants : blocage en rouge
+avec pictogramme d’alerte et **À corriger avant publication**, avertissement en
+orange avec triangle et **À vérifier**, information commune en bleu avec
+pictogramme d’information. Fond et liseré distinguent chaque point ; le texte
+de sévérité reste explicite sans perception de la couleur. Les erreurs de
+lecture de l’assistant gardent leur annonce accessible et un repère rouge.
+Pour une chasse, **Ouvrir — Informations et dates** rejoint directement
+**Configuration → Organisation et lots**, sans ouvrir le financement. La
+navigation ne vaut ni enregistrement ni validation de l’échéance.
 Configuration affiche une seule rubrique à la fois, en pleine largeur, avec
 consigne et repère de progression. Les panneaux visités gardent leurs saisies
 et les blocages liés aux commandes incertaines. Paramètres, dates, règlement et
 dotation ont des groupes explicitement nommés ; leur enregistrement reste
 distinct, sans validation ni publication par simple navigation.
+
+Précision du **31 octobre 2026**, navigation de la fiche Animation : remplacer
+la rangée défilante des quinze onglets par quatre espaces. Seules les
+sous-rubriques de l’espace courant sont présentées sur ordinateur.
+
+| Espace | Rubriques |
+| --- | --- |
+| Préparer | Assistant, Configuration, Invitations, Préparation terrain |
+| Piloter | Live, Participants, Validations, Publication et clôture |
+| Communiquer | Communication, Actualités selon habilitation, Flyer |
+| Résultats | Tirage, Gains et remise, Bilan, Audit |
+
+Les groupes et sous-rubriques utilisent la largeur disponible et reviennent
+à la ligne si nécessaire ; aucun défilement horizontal ni libellé coupé.
+Sur mobile, un seul sélecteur reprend les mêmes groupes. Icônes et libellés
+restent associés, avec états actifs explicites et cibles de 44 px minimum.
+L’espace actif découle de la rubrique ouverte, y compris par lien direct,
+ancien alias, rechargement ou Action suivante. Changer d’espace ouvre sa première
+rubrique ; cliquer l’espace déjà actif conserve la rubrique courante.
+
+Chaque changement conserve le garde de sortie existant : si la navigation est
+refusée, groupe, rubrique, URL et saisies restent inchangés. L’habilitation
+Actualités reste contrôlée et l’accès direct interdit reste expliqué.
+Le chargement différé d’une rubrique garde la navigation et les actions
+affichées ; aucune écriture ni transition n’est exécutée par le menu.
 
 ### 5.2 Lisibilité, actions et accessibilité communes
 
