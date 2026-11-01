@@ -46,6 +46,16 @@ relu. Quitter le scanner ou lire un QR libère la caméra.
 2. **Accepter** : écran public Localeo Pro, email masqué et commerce non modifiables, obtenus par résolution du lien sans le consommer, choix du mot de passe ; acceptation atomique puis invitation à se connecter. Lien expiré, annulé ou utilisé : message générique et orientation vers le responsable, sans révéler de comptes tiers.
 3. **Valider** : scanner, récapitulatif minimal, confirmation explicite, résultat serveur ; même éligibilité, consommation et progression que le principal. Un échec réseau ne produit jamais de succès local. Après réponse incertaine, relire le reçu avant toute nouvelle commande.
 4. **Historique** : liste paginée des validations du seul commerce, filtres type/date/mode, détail limité au service ou passage, date, résultat et auteur professionnel. Aucun client nominatif, montant, reversement ou export. Les validations anciennes sans auteur individuel sont étiquetées « Compte principal — historique », jamais attribuées rétroactivement à un salarié.
+
+   Ergonomie du 1er novembre 2026 : présentation commune au responsable et au
+   salarié, avec pictogramme du type, résultat en badge, horaire en heure de Paris,
+   auteur et référence dépliable. Les filtres compacts distinguent saisie en
+   cours et sélection appliquée ; **Aujourd’hui**, **7 derniers jours** et
+   **Réinitialiser** repartent de la première page. **Actualiser** relit la
+   page courante. Le compteur porte uniquement sur les éléments de cette page,
+   sans déduire un total global ni télécharger tout l'historique. Le lien vers
+   le scanner est proposé seulement si les capacités courantes l'autorisent.
+
 5. **Révoquer** : le responsable révoque un salarié ; refus immédiat des anciennes sessions et confirmations postérieures à l'effet de révocation. L'historique et le compte sont conservés. Une nouvelle invitation ou un reset ne contourne pas sa révocation ; la restauration individuelle explicite reste hors de cette conception, sans décréter le compte irréversible ni réserver l’email à vie.
 6. **Désactiver l'option** : ERP, suspension immédiate des salariés et annulation définitive de toutes les invitations en attente. Le compte principal, les comptes salariés et leurs traces sont conservés. Réactivation : salariés non révoqués de nouveau éligibles après nouvelle connexion ; aucune ancienne session ou invitation ressuscitée.
 7. **Récupérer** : email autonome, lien unique valable une heure. Mot de passe modifié : toutes les sessions de ce salarié sont invalidées, pas celles du principal ou de ses collègues. L'opération ne lève ni révocation ni suspension. La perte du téléphone est traitée par cette récupération ou la révocation par le responsable ; aucun transfert de session vers un autre appareil.

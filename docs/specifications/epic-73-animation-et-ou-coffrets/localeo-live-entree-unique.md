@@ -234,21 +234,32 @@ de section **Mes autres participations**, de pagination ni de liaison des accès
 Le lien **Toutes mes participations** rejoint `/live/animations`.
 Cette page réunit le carnet local et les participations liées à l'installation,
 avec déduplication par identifiant exact de participation ; deux inscriptions
-à la même animation restent distinctes. Les accès distants absents du carnet
-proposent **Retrouver mon accès**, qui ouvre le formulaire e-mail existant sans
+à la même animation restent distinctes. Depuis le correctif UX du **1er novembre
+2026**, elles apparaissent dans une seule liste : aucun bloc **Mes accès liés**
+ni compteur technique vide. Les accès distants absents du carnet
+proposent **Retrouver mon inscription**, qui ouvre le formulaire e-mail existant sans
 créer ni substituer un token. Une entrée importée sans accès utilisable propose
 aussi une récupération explicite ; elle ne permet pas de présenter un QR.
 
 **Mes participations** reprend les images Flyer disponibles, les pictogrammes,
 les anneaux et les étapes validées/restantes. Les nombres du carnet portent sur
-les entrées présentes sur l'appareil ; les accès distants sont comptés **sur
-cette page**, sans fabriquer un total global. Les gains et qualifications
+les entrées présentes sur l'appareil, sans fabriquer un total global à partir
+d'une page distante. Les gains et qualifications
 conservent leurs statuts serveur, indépendamment du pourcentage. Une progression
 absente ou incohérente n'est pas représentée par un anneau à zéro. La pagination
 distante remplace la page précédente, au plus 50 éléments par page ; les anciens
 accès se relient uniquement sur action explicite, par lots de 50 et avec deux
 requêtes concurrentes au plus. Un échec de synchronisation laisse le carnet
 local utilisable, avec ses informations conservées et l'état d'erreur visible.
+Une unique action **Actualiser mes participations**, lorsqu'il existe des
+participations ou une lecture à reprendre, recharge la liste et propose la
+liaison explicite des anciens accès utilisables. Un lot supplémentaire reste
+une action volontaire **Actualiser les participations suivantes**. Aucun
+rattachement n'est déclenché par le simple affichage de la page.
+La pagination distante conserve les entrées locales ; ses commandes restent
+disponibles même lorsqu'une page entière est déjà présente dans le carnet.
+Le vide d'accueil n'est présenté qu'après confirmation de l'absence de résultats,
+jamais pendant le chargement ou à la suite d'une erreur de lecture distante.
 Sur l'accueil, **Actualiser** recharge participations et catalogue, avec annulation des
 anciennes lectures et sans parcourir toutes les pages implicitement.
 Les visiteurs sans carnet disposent d'abord de la découverte. La navigation
@@ -389,8 +400,8 @@ migration ajoute la référence nullable au token effectivement présenté, sans
 rattachement historique heuristique. Le tableau et les rappels exigent une
 capacité encore valide ; la réponse distingue les accès à actualiser par
 `acces_a_actualiser` (indicateur entier 0 ou 1, sans comptage exhaustif). Depuis
-le carnet local, une action explicite **Actualiser
-mes accès** relie les participations avec leurs propres tokens existants,
+le carnet local, l'action explicite **Actualiser mes participations** relie les
+participations avec leurs propres tokens existants,
 par lots de 50 et deux requêtes concurrentes au plus. Les échecs partiels sont
 visibles. Ni nouveau token, ni inscription, ni autorisation de rappel ne sont
 créés par cette opération ; un token révoqué reste refusé.

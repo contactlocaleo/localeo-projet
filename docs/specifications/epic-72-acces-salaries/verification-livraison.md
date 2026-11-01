@@ -357,6 +357,79 @@ exécutées dans les transactions du gestionnaire ; aucune restauration n’a é
 Ce résultat prouve la migration de test, pas une recette fonctionnelle à distance
 ni l’activation des fonctionnalités.
 
+## Historique des validations exploitable — 1er novembre 2026
+
+**PRO-HISTORIQUE-UX-20261101**, correctif demandé sur Localeo Pro `/validations`.
+Base Pro **`0c8499e` avec modifications locales**, documentation **`9c74a33`
+avec modifications locales**. Le scénario E70 de remplacement PIN déjà modifié
+reste préservé et hors du présent correctif.
+
+Constat : formulaire vertical emprunté à la gestion PIN, codes de type/mode et
+résultat peu lisibles, référence longue toujours visible, absence de réinitialisation
+et de distinction entre filtres saisis et appliqués. Trois nouveaux tests
+reproduisent ces manques avant correction. La source est `ValidationHistory.jsx`,
+commune au responsable et au salarié ; l'API du flux fonctionne déjà par curseurs.
+
+La page réutilise le template `BusinessWorkspace` et les badges communs, avec
+un module CSS local dédié remplaçant l'emprunt des styles PIN. Header, lien scanner
+selon capacités, filtres type/mode/dates compacts, pictogrammes, résultat en badge,
+date/auteur lisibles et référence dépliable structurent la consultation. Une
+anomalie, une annulation ou un résultat inconnu n'est jamais présenté comme succès.
+Le retrait de l'import de la page de gestion PIN ne modifie pas ses commandes.
+
+**Aujourd’hui** et **7 derniers jours** appliquent des journées civiles de Paris,
+y compris lors des changements d'heure. **Réinitialiser** revient à la première
+page ; **Actualiser** relit le curseur courant. Le résumé indique uniquement le
+nombre d'éléments de cette page. Les résultats restent filtrés par le serveur,
+25 par page, sans téléchargement global ni recherche locale pouvant masquer
+des éléments non chargés. Les libellés de pagination restent accessibles malgré
+les flèches ; le focus rejoint les résultats après filtrage/navigation.
+
+Preuves locales :
+
+- **84 tests Vitest réussis**, sortie 0, aucun skip, dont les 15 tests de
+  l'historique, le contrat embarqué et les formateurs :
+  `npm test -- src/features/employees/ValidationHistory.test.jsx src/lib/api/contracts.test.js src/lib/formatters.test.js`.
+  Reset/curseurs, filtres saisis/appliqués, statuts, droits scanner, erreurs/reprise,
+  session remplacée et réponses incompatibles sont vérifiés.
+- **9 scénarios Chromium réussis**, sortie 0, aucun skip :
+  `npm run test:e2e -- tests/e2e/validation-history.spec.js --workers=1 --output=tmp/pro-validation-history-verified`.
+  Responsable/salarié à 320/1280 pixels, parcours de filtres/détails/reset à
+  390/1280 pixels, état vide et dates depuis New York/Los Angeles (minuit Paris
+  et journées de 23/25 heures). Toutes les lectures sont simulées et bornées,
+  aucune validation ni mutation réelle n'est exécutée.
+- Axe ne relève aucune violation sur la région historique testée à 390/1280 pixels.
+  Captures des deux formats inspectées ; marges, référence longue et absence
+  de débordement contrôlées. Les libellés sans espace peuvent revenir à la ligne.
+  Ce contrôle ne remplace pas une recette sur téléphone physique ou lecteur d'écran.
+
+Le premier passage navigateur après refonte révèle quatre échecs de sélection
+du filtre Type : son label englobait les options du select. Le label est séparé
+et explicitement associé à son champ ; les assertions existantes sont conservées.
+Le rejeu complet réussit, puis est renouvelé après l'ajustement des marges.
+Après ajustement de la largeur du bouton Actualiser, les deux scénarios de
+présentation 390/1280 pixels sont à nouveau exécutés avec succès (sortie 0),
+avec captures et Axe : même commande avec
+`--grep 'validations exploitables' --output=tmp/pro-validation-history-layout`.
+La revue indépendante ne relève pas de régression des curseurs, droits ou statuts ;
+ses demandes de preuve sur les périodes rapides et les libellés longs sont traitées.
+Le build navigateur est isolé, sans `.env` opérateur ni appel à une cible métier.
+L'avertissement de découpage du module importé à la fois statiquement et
+dynamiquement reste signalé, sans empêcher le build ni les tests.
+
+Impacts : **Pro et documentation** (spécification E72 et guide commerçant).
+Aucun changement backend, DTO/contrat embarqué, règle métier, migration,
+configuration, donnée ou générateur. Aucun test PostgreSQL n'est nécessaire à
+ce changement de présentation ; les tests backend des correctifs E70 précédents
+ne sont pas annoncés comme rejoués. Les accès ne gagnent aucun droit financier,
+client nominatif, export ou commande de validation.
+
+La correction reste locale, sans recette hébergée, commit, push ou déploiement.
+Les contrôles `check_guidance.py` (94 guides, 1 050 liens),
+`check_guidance.py --changed --all-markdown` (12 documents, 196 liens),
+`sync_documentation.py --check-sources` (130 documents) et `git diff --check`
+réussissent. Aucun fichier de configuration public ou guide PDF généré n'est modifié.
+
 
 ## Évolution des états du scan Coffret — 9 octobre 2026
 

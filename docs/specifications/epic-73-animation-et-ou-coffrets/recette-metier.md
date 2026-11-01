@@ -364,13 +364,19 @@ Aucune modification du TEST partagé ; cette preuve porte sur le clone figé.
 
 **Objet.** Accueillir un commerce Animation sans lui imposer les prestations et pièces propres aux Coffrets, puis demander les compléments utiles s’il ajoute ce produit.
 
+Évolution du **1er novembre 2026 — OA-01 à OA-04** : les scénarios ci-dessous
+appliquent le parcours Animation sans contrat, Stripe ni rendez-vous imposés.
+Les preuves antérieures restent historiques ; elles ne valident pas à elles
+seules cette évolution. Les nouvelles preuves locales figurent dans le
+[suivi d’implémentation](suivi-implementation.md).
+
 **Accès.** OnBoard → dossier commerçant ; Pro → préparation du dossier lorsque proposée. **US12 ; CA16–18.**
 
 **Prérequis à vérifier**
 
-- [ ] Un dossier Animation seul et un dossier mixte, avec pièces synthétiques et conventions appropriées.
+- [ ] Un dossier Animation seul sans contrat et un dossier mixte avec convention Coffrets synthétique appropriée.
 - [ ] Accès opérateur OnBoard et responsable du commerce ; boîtes de réception de test.
-- [ ] Les modèles de communications/conventions correspondant aux périmètres sont disponibles.
+- [ ] Les supports Animation et Coffrets sont disponibles ; les envois facultatifs disposent de destinataires de test contrôlés et d’un aperçu approuvé.
 
 ### RM-04-01
 
@@ -380,12 +386,19 @@ Aucune modification du TEST partagé ; cette preuve porte sur le clone figé.
 
 1. Avec l’opérateur OnBoard, ouvrir le dossier synthétique du commerce demandant uniquement Animation ; confirmer le produit visé avant de remplir la checklist.
 2. Renseigner l’identité, la commune, le responsable, les coordonnées et les informations utiles à sa participation ; utiliser exclusivement des données de recette.
-3. Avec le responsable du commerce, initialiser ou vérifier l’accès Pro demandé et fournir les engagements et la convention adaptés à Animation.
-4. Faire vérifier les prérequis et pièces Animation par les acteurs compétents ; laisser les prestations et pièces bancaires exclusivement Coffrets non renseignées.
-5. Examiner le diagnostic OnBoard : ces éléments Coffrets doivent être non applicables et ne pas empêcher la recevabilité du dossier Animation complet.
+3. Avec le responsable du commerce, initialiser puis tester l’accès Pro. Ne fournir aucun contrat ni convention Animation.
+4. Faire vérifier les coordonnées et prérequis d’accès par les acteurs compétents ; laisser contrat, Stripe, prestations Coffrets, rendez-vous, pack et bilan non renseignés.
+5. Examiner le diagnostic et finaliser le dossier : ces éléments non applicables ne doivent pas bloquer. Vérifier que la finalisation ne décide pas elle-même l’ouverture du produit.
 6. Faire contrôler l’ouverture Animation par l’opérateur ERP habilité, puis vérifier dans Pro les fonctions Animation ; conserver la checklist démontrant l’absence de blocage artificiel.
 
 **Résultat attendu.** Dossier Animation recevable lorsque ses propres prérequis sont remplis ; aucun blocage bancaire/Coffrets artificiel.
+
+Complément de référencement : créer un nouveau commerce en choisissant Animation,
+Coffrets puis les deux avec un opérateur habilité. Vérifier demande en préparation,
+dossier unique et audit, sans activation ni invitation supplémentaire. Sans droit
+de gestion des périmètres, la sélection n’est pas proposée et une requête directe
+avec produit est refusée ; la création historique reste disponible. Reprendre un
+commerce existant ne doit pas modifier son périmètre par le seul choix du formulaire.
 
 ### RM-04-02
 
@@ -393,7 +406,7 @@ Aucune modification du TEST partagé ; cette preuve porte sur le clone figé.
 
 **Marche à suivre**
 
-1. Préparer un dossier Animation distinct, avec un prérequis obligatoire précis encore manquant, par exemple la convention Animation attendue ; noter ce manque avec le référent.
+1. Préparer un dossier Animation distinct, avec un prérequis obligatoire précis encore manquant, par exemple l’accès Pro non testé ou une adresse incomplète ; noter ce manque avec le référent.
 2. Avec l’opérateur OnBoard, ouvrir le dossier puis consulter sa préparation ; vérifier que le manque et l’acteur attendu pour le corriger sont compréhensibles.
 3. Avec l’opérateur ERP habilité, tenter d’activer Animation depuis les périmètres du commerce : l’activation doit être refusée.
 4. Revenir au dossier OnBoard, utiliser l’action de correction disponible et fournir l’élément manquant ; une simple saisie ne doit pas être assimilée à sa validation.
@@ -419,18 +432,18 @@ Aucune modification du TEST partagé ; cette preuve porte sur le clone figé.
 
 ### RM-04-04
 
-**Scénario.** Préparer/envoyer les communications et conventions d’un dossier Animation seul puis mixte ; consulter leur suivi.
+**Scénario.** Préparer une communication facultative Animation, puis les communications et la convention Coffrets d’un dossier mixte ; consulter leur suivi.
 
 **Marche à suivre**
 
-1. Prendre les dossiers synthétiques Animation seul et mixte, avec leurs destinataires de test et les modèles de conventions disponibles ; ouvrir chacun dans OnBoard.
-2. Préparer l’aperçu des communications et conventions du dossier Animation seul ; vérifier les sujets, produits couverts et destinataires avant envoi.
+1. Prendre les dossiers synthétiques Animation seul sans rendez-vous et mixte, avec leurs destinataires de test et les supports disponibles ; ouvrir chacun dans OnBoard.
+2. Préparer l’aperçu de la communication Animation facultative : informations du commerce, accès Pro et participation, sans contrat ni signature ni Stripe. Vérifier le destinataire avant envoi ; une simple lecture ne doit rien envoyer.
 3. Confirmer l’envoi vers la boîte contrôlée, puis comparer le message reçu, les documents et leur suivi dans OnBoard : le contenu doit couvrir Animation sans exigences Coffrets étrangères.
-4. Refaire la préparation et l’envoi pour le dossier mixte ; vérifier que la couverture Animation/Coffrets est explicite et que les preuves de conventions restent identifiables.
+4. Refaire la préparation et l’envoi pour le dossier mixte ; vérifier que les exigences Coffrets et la convention Coffrets sont explicites, sans seconde convention Animation. L’ajout Coffrets après un aperçu Animation rend cet aperçu inutilisable jusqu’à une nouvelle préparation appropriée.
 5. Sur un envoi distinct, faire préparer par le référent un échec contrôlé du transport de test, puis soumettre l’envoi normalement ; ne pas toucher aux destinataires réels ni à la configuration partagée.
 6. Relire le suivi : l’échec doit être visible et distinct d’un succès, avec historique conservé ; joindre les références des envois sans recopier de données d’accès.
 
-**Résultat attendu.** Contenu adapté aux produits, couverture des conventions explicite ; un échec d’envoi n’apparaît pas comme un succès et le suivi reste conservé.
+**Résultat attendu.** Contenu adapté aux produits et communication Animation facultative ; convention Coffrets seule pour le mixte. Un échec d’envoi n’apparaît pas comme un succès et le suivi reste conservé.
 
 
 ## F05 — Localeo Pro : fonctions utiles et continuité des engagements

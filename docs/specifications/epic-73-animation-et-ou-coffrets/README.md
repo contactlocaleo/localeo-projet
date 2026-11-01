@@ -1,5 +1,11 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+Évolution du **1er novembre 2026 — E73-EVO-ONBOARDING-ANIMATION-SIMPLE** :
+choix Animation/Coffrets dès le référencement et parcours Animation court,
+sans contrat, Stripe ni rendez-vous imposés. Les
+[critères OA-01 à OA-04](perimetres-parcours-saas.md) précisent CA-16/17/18 ;
+les preuves et limites sont consignées dans le [suivi](suivi-implementation.md).
+
 Évolution du **30 octobre 2026 — E73-EVO-LIVE-UNIQUE** : Localeo Live devient
 l'entrée publique unique à `animations.localeo.city`, avec découverte multi-communes,
 mes participations et mes communes, en priorité mobile. L'ancienne surface

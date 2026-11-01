@@ -115061,6 +115061,26 @@
               }
             ],
             "title": "Image Uri"
+          },
+          "produits_demandes": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "ANIMATION",
+                    "COFFRETS"
+                  ]
+                },
+                "type": "array",
+                "maxItems": 2,
+                "minItems": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Produits Demandes"
           }
         },
         "additionalProperties": false,
@@ -118678,6 +118698,26 @@
             },
             "type": "array",
             "title": "Fonctionsvisees"
+          },
+          "produitsDemandes": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "ANIMATION",
+                    "COFFRETS"
+                  ]
+                },
+                "type": "array",
+                "maxItems": 2,
+                "minItems": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Produitsdemandes"
           }
         },
         "type": "object",

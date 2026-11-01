@@ -10,11 +10,42 @@ Ce document est la source canonique de l'aide OnBoard E68.
 
 Évolution locale E73, soumise à livraison ultérieure : la fiche distingue **le compte**, **l’ouverture de chaque produit** et **la finalisation du dossier**. Dans la fiche commerçant ERP, onglet **Périmètres**, Localeo saisit manuellement les produits demandés, puis les active après vérification de leurs prérequis. La gestion exige une autorisation dédiée ; la consultation ne la donne pas.
 
-Pour Animation seule, OnBoard affiche les informations du commerce, l’accès Pro, les conventions et la participation. Les prestations et la préparation financière Coffrets ne sont pas demandées. L’ajout de Coffrets ouvre les compléments correspondants sans interrompre Animation. Les produits non encore revus conservent leur préparation historique jusqu’à la revue et à la bascule de leur commune.
+Depuis l’évolution **E73-EVO-ONBOARDING-ANIMATION-SIMPLE du 1er novembre 2026**, sélectionner **Animation**, **Coffrets** ou **les deux** dès le référencement. Pour Animation seule, vérifier les informations du commerce et son accès Pro, puis traiter les seules actions utiles à la participation. Aucun contrat/convention, rendez-vous, pack ou bilan n’est obligatoire ; Stripe, finance et prestations Coffrets ne sont pas demandés. L’ajout de Coffrets ouvre ses compléments sans interrompre Animation. Les produits non précisés conservent le parcours historique jusqu’à leur qualification explicite.
 
-Dans **Documents → Couverture des conventions par produit**, choisir une pièce réellement signée, vérifier le produit couvert et confirmer avec un motif. Une pièce mixte demande deux confirmations explicites. Un complément peut être rattaché sur un dossier clos, sans rouvrir toutes ses étapes ; une pièce modifiée devra être contrôlée à nouveau. L’enregistrement d’une preuve n’active pas le produit.
+Pour Coffrets, dans **Documents → Couverture des conventions par produit**, choisir une pièce réellement signée et confirmer sa couverture Coffrets avec un motif. Le mixte n’exige pas de seconde convention Animation. Un complément peut être rattaché sur un dossier clos, sans rouvrir toutes ses étapes ; une pièce modifiée devra être contrôlée à nouveau. L’enregistrement d’une preuve n’active pas le produit. Les documents antérieurs sont conservés, même lorsqu’ils ne sont plus exigés.
 
-Le pack Animation seule utilise le [support Animation](../commercant/preparation-rendez-vous-animation.md). L’aperçu, les destinataires et l’envoi restent soumis aux confirmations décrites ci-dessous ; un changement de périmètre n’envoie rien à lui seul.
+Pour **Animation seule**, la date de rendez-vous est masquée et un ancien statut
+« RDV planifié » se présente comme **En préparation**. Le filtre **Rendez-vous
+non planifié** exclut ces dossiers. Les anciennes relances automatiques de
+rendez-vous identifiables ne sont plus proposées ; un suivi manuel distinct reste
+visible. Ces adaptations conservent les dates, statuts enregistrés et l’historique.
+
+Le [support Animation](../commercant/preparation-rendez-vous-animation.md) explique ce parcours court. Une communication facultative reste soumise à l’aperçu, au contrôle du destinataire et à la confirmation décrits ci-dessous ; un changement de périmètre n’envoie rien à lui seul.
+
+Les sept étapes ci-dessous décrivent le parcours complet Coffrets ou historique. Elles ne sont pas des prérequis supplémentaires à imposer à Animation seule. L’acceptation des conditions d’une animation relève de cette animation, après l’ouverture du produit.
+
+### Utiliser le dossier OnBoard
+
+Le dossier affiche d’abord **Animation seule**, **Coffrets**, **Animation et
+Coffrets** ou **Produits à qualifier**, puis les points à traiter en priorité.
+Le périmètre demandé reste distinct du statut d’activation du commerçant.
+
+- Ouvrir un point signalé pour accéder directement à sa rubrique. Pour Animation
+  seule, les raccourcis **Coordonnées** et **Accès Pro** donnent accès au parcours
+  court ; contrat, Stripe et prestations Coffrets ne sont pas proposés.
+- Utiliser **Vérifier le dossier**, puis **Valider le dossier** et **Terminer le
+  dossier** lorsque son statut le permet. Enregistrer les saisies avant ces
+  actions. Le serveur contrôle toujours les preuves et les droits.
+- Dans **À faire et suivi**, consulter les questions et points à vérifier avant
+  les communications facultatives. Les détails d’avancement restent dépliables.
+- Ouvrir **Gestion du dossier**, en bas ou depuis son raccourci dans l’en-tête,
+  pour les réglages des fonctions, le lien vers les produits dans l’ERP et le
+  récapitulatif. La réouverture motivée d’un dossier clos est une action secondaire.
+
+Les onglets disposent d’icônes et restent utilisables au clavier. Un dossier
+terminé reste en consultation ; son statut ne garantit pas que tous les contrôles
+actuels sont satisfaits. Un complément produit conserve ses rubriques autorisées
+sans rouvrir le dossier historique.
 
 L'epic met en place ce seul mode opératoire, dans les outils Localeo existants.
 L'écran OnBoard vous guide autour de trois gestes : **activer le commerçant,

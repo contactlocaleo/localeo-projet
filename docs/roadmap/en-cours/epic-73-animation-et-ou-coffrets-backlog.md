@@ -1,5 +1,15 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+Évolution **E73-EVO-ONBOARDING-ANIMATION-SIMPLE du 1er novembre 2026** : le
+référencement choisit explicitement Animation, Coffrets ou les deux. Animation
+seule conserve identité/coordonnées et accès Pro vérifié, sans contrat/convention,
+Stripe, rendez-vous, pack ou bilan obligatoires. Le mixte conserve les exigences
+Coffrets sans seconde convention Animation. Cette décision précise DEC-53 et
+CA-16/17/18 ; elle remplace l’ancienne obligation de convention Animation.
+Les critères OA-01 à OA-04 et les comportements à préserver figurent dans la
+[spécification canonique](../../specifications/epic-73-animation-et-ou-coffrets/perimetres-parcours-saas.md).
+L’epic demeure **En cours** ; une création n’active aucun produit automatiquement.
+
 Évolution **E73-EVO-LIVE-UNIQUE**, demandée le **30 octobre 2026** : Live devient
 l'entrée publique des animations sur `animations.localeo.city`. Remplacement de
 l'ancienne surface marketplace Animation, reprise du carnet sans duplication,

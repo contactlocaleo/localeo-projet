@@ -1,5 +1,13 @@
 # E68 — Architecture et contrats de préparation
 
+Adaptation **E73 du 1er novembre 2026** : pour un produit Animation seul explicite,
+contrat, rendez-vous, pack et bilan ne sont plus des prérequis de préparation ou
+de finalisation. Les réponses exposent leur applicabilité selon le
+[contrat E73](../epic-73-animation-et-ou-coffrets/architecture-contrats.md).
+Les obligations ci-dessous restent celles des dossiers Coffrets et historiques ;
+les preuves déjà enregistrées sont conservées. L’aperçu et la confirmation des
+communications demeurent obligatoires avant tout envoi volontaire.
+
 Conception V1.2 du 3 octobre 2026, liée au [parcours](README.md) et aux
 [preuves attendues](verification-livraison.md). Tous les ajouts décrits sont des
 **contrats cibles**, pas des routes ou colonnes déjà livrées.

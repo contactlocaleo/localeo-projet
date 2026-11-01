@@ -1,5 +1,39 @@
 # Guide de formation au back-office Localeo
 
+## Retrouver et traiter un commerce dans l’ERP
+
+Correctif local du **1er novembre 2026**, soumis à livraison sur l’environnement.
+Dans **Catalogue et commerçants → Commerçants et prestations**, rechercher un
+commerce par son nom, sa commune et le produit concerné. Le filtre d’état porte
+sur le produit ; il ne remplace pas le statut du compte commerçant. Les badges
+distinguent Animation et Coffrets. Les flèches permettent de parcourir les pages
+en conservant les filtres ; **Effacer les filtres** permet de repartir de la liste.
+
+La fiche s’ouvre sur **Synthèse** : compte, avancement enregistré du dossier,
+produits demandés ou déjà ouverts et coordonnées. Les **points à traiter** utilisent
+le diagnostic courant lorsqu’il est disponible ; l’avancement enregistré reste
+distinct de ces contrôles actuels. Sur mobile, les actions prioritaires passent
+avant le récapitulatif. Un dossier terminé ne relance pas les anciennes étapes ;
+un complément produit conserve ses propres contrôles.
+
+- **Référencement** : informations, adresse postale et présentation du commerce.
+  Les profils en consultation lisent ces données sans formulaire de modification.
+  Le changement de statut se trouve dans **Changer le statut du commerçant**,
+  avec sa confirmation et les vérifications habituelles.
+- **Accès** : gestion du compte Pro et de ses accès, selon les droits.
+- **Périmètres** : état réel des produits, prérequis et décisions ; leur ouverture
+  reste distincte de l’activation du commerce et de la finalisation de son dossier.
+- **Aptitude et suivi** : contrôles du dossier et accès à OnBoard.
+- **Offre et prestations** : modèles, prestations rattachées et vendabilité Coffrets.
+  Ces tableaux ne s’imposent plus à l’ouverture d’une fiche Animation.
+- **Vérifications d’import** et **Activité** : leurs suivis spécialisés.
+
+Les onglets conservent leurs liens directs et demandent confirmation avant de
+quitter une saisie non enregistrée. Une lecture, un changement d’onglet ou une
+recherche n’active aucun produit et n’envoie aucune invitation. Les droits,
+versions et refus du serveur restent applicables. Le retour **Commerçants**
+conserve les filtres lorsque la fiche a été ouverte depuis la liste filtrée.
+
 ## Assistance à la validation par PIN — E70
 
 Parcours implémenté et testé localement ; disponibilité à vérifier sur la version

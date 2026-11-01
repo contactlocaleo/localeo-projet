@@ -1,5 +1,56 @@
 # E73 — Périmètres commerçants et parcours SaaS
 
+## Évolution du 1er novembre 2026 — E73-EVO-ONBOARDING-ANIMATION-SIMPLE
+
+Demande : simplifier le référencement et l’onboarding du commerçant destiné aux
+animations, sans Stripe, contrat ni rendez-vous imposés. Cette décision remplace
+l’obligation de convention Animation de DEC-53 et de la section 3.2 ; les critères
+E73-CA-16/17/18 sont précisés, sans changement de statut de l’epic.
+
+Le domaine `conformite_fiscale_bum` détermine les exigences à partir des produits
+explicitement demandés. L’application transmet cette projection à OnBoard, ERP,
+Pro et aux contenus de préparation. `referencement` reste propriétaire de
+l’ouverture du produit ; un dossier simplifié n’active ni le commerce ni ses
+droits. L’acceptation de chaque participation reste gouvernée par Animation.
+
+| Critère de cette évolution | Comportement et preuve attendue |
+| --- | --- |
+| OA-01 — Référencement contextualisé | ERP et OnBoard proposent Animation, Coffrets ou les deux aux agents disposant du droit existant `commercants:perimetres_gerer`, en plus du droit de référencement. Le choix est enregistré atomiquement avec le commerce et son dossier ; aucune invitation ni activation supplémentaire n’est déclenchée. Sans ce droit, la fiche peut être créée selon le parcours historique puis qualifiée par une personne habilitée ; une requête avec choix explicite est refusée. |
+| OA-02 — Animation seule | Identité, adresse/commune, contact et accès Pro vérifié restent exigés selon les règles existantes. Contrat/convention, signature, Stripe, finance, prestations Coffrets, rendez-vous, pack et bilan ne bloquent pas le dossier. La préparation guide vers les seules actions utiles. |
+| OA-03 — Coffrets et complément | Coffrets seul ou ajouté conserve ses contrôles contractuels et financiers applicables. Le mixte exige la convention Coffrets, pas une seconde convention Animation. Ajouter Coffrets ne retire pas Animation ni ses engagements acquis ; preuves courantes et habilitations restent contrôlées par le serveur. |
+| OA-04 — Continuité et cohérence | Dossiers existants explicitement Animation bénéficient de la règle sans effacer documents, rendez-vous ou audit. Produit non précisé reste prudent. Écrans, actions, réserves et communications n’imposent pas des obligations déclarées non applicables. Une simple lecture n’effectue aucun envoi ni activation. |
+
+Précision du correctif **E73-ONBOARDING-SANS-RDV-20261101** : pour Animation
+seule, ne pas afficher de date de rendez-vous ni présenter un ancien statut
+`RDV_PLANIFIE` comme une étape à accomplir. La liste exclut ces dossiers du
+filtre des rendez-vous non planifiés avant comptage et pagination. Les prochaines
+actions automatiques de rendez-vous reconnues comme devenues inapplicables ne
+doivent plus être proposées ni retenues par les filtres de suivi. Conserver les
+valeurs historiques et les suivis manuels distincts ; aucune lecture ne les efface.
+
+Présentation OnBoard **E73-ONBOARD-DOSSIER-UX-20261101** : afficher le périmètre
+et les points nécessaires en tête, avec accès direct aux rubriques concernées.
+Animation seule présente les coordonnées, l’accès Pro et les actions de
+finalisation autorisées par le statut serveur. Les réglages de fonctions, le
+récapitulatif et la réouverture restent dans une gestion secondaire dépliable.
+Les commandes gardent leurs droits et effets existants ; enregistrer les saisies
+avant de vérifier, finaliser ou rouvrir. Ne pas déduire une conformité actuelle
+du seul statut clos ni rouvrir implicitement un dossier pour un complément.
+
+Les parcours d’import gardent une demande à examiner, sans ouverture automatique.
+Les supports Coffrets historiques restent utilisables ; un support Animation
+ne réclame pas de convention ou de compte Stripe. Les droits, contrôles de version,
+statuts terminaux et refus de sécurité restent applicables. Le passage d’Animation
+seule à Coffrets est testé avec des preuves insuffisantes puis valides et périmées.
+
+Impacts : backend (règles, services, API et projections), ERP/OnBoard et Pro
+(référencement et préparation), contrats documentaires et guides. Aucun changement
+de stockage n’est requis si les produits et faits existants suffisent ; vérifier
+les modèles et le générateur avant de confirmer cette absence de migration.
+Marketplace et gestion organisateur Animation n’ouvrent aucun droit commerçant.
+Les preuves locales et les contrôles non exécutés seront consignés dans le
+[suivi d’implémentation](suivi-implementation.md), séparément du bilan historique.
+
 Décision du **30 octobre 2026 — E73-EVO-LIVE-UNIQUE** : les attentes de site
 public des sections ci-dessous sont remplacées par
 [Localeo Live comme entrée unique](localeo-live-entree-unique.md). Le domaine
@@ -66,7 +117,7 @@ La projection fournit `requirementLevel`, `status`, `applicable`, `applicability
 | --- | --- | --- |
 | Identité commune : nom, adresse, commune, type, responsable et coordonnées | Requis selon validation de profil existante ; réutilisation des données vérifiées | Réutilisation ; seuls compléments manquants demandés |
 | Accès Pro initialisé/testé et sécurité du compte | Exigences E68 conservées, sans activation automatique par import | Identiques ; pas de second compte |
-| Engagements et convention signée | Convention adaptée Animation, version/signataires/date/lisibilité et contrôle antivirus selon politique active ; informations utiles de participation | Convention adaptée au périmètre Coffrets, complément ou version mixte si nécessaire ; conserver la preuve Animation précédente |
+| Engagements et convention signée | Non applicable au référencement Animation seul depuis OA-02 ; acceptation des conditions de chaque animation dans son parcours propre | Convention adaptée au périmètre Coffrets ; pas de seconde convention Animation ; conserver les preuves antérieures |
 | Informations Animation | Coordonnées, lieux et informations utiles à la participation ; acceptation par animation distincte de l’activation du produit | Applicables uniquement si Animation est aussi demandé |
 | Description et fiche publique | Description recommandée, fiche Animation et rattachements aux animations | Présentation Coffrets seulement si ce périmètre est actif et si les offres sont publiables |
 | Prestations, diagnostic fiscal BUM et qualification Coffret | Non applicables au seul produit Animation | Même conditionnalité E68 : suivi des prestations/coffrets réellement rattachés ; pas d’obligation artificielle de créer une prestation pour finaliser le dossier |

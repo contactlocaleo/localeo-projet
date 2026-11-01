@@ -2,18 +2,17 @@
 
 Support destiné aux commerces qui participent aux animations Localeo. Son utilisation accompagne l'ouverture du périmètre Animation ; elle ne vaut pas activation du compte ni acceptation d'une animation.
 
-## Avant le rendez-vous
+## 1. Vérifier votre commerce
 
 - Vérifiez le nom de votre commerce, son adresse, sa commune et les coordonnées du responsable.
 - Préparez les informations utiles aux participants : lieu d'accueil, horaires et consignes pratiques.
 - Retrouvez votre accès Localeo Pro et vérifiez que vous pouvez vous connecter. Ne transmettez jamais votre mot de passe ni votre PIN.
-- Consultez la convention Animation transmise par Localeo et préparez les questions à traiter avant sa signature.
 
-Votre accès Animation seul ne nécessite pas de créer une prestation Coffrets ni de renseigner un compte bancaire pour des reversements Coffrets. Si vous ajoutez ce produit ultérieurement, Localeo vous indiquera les compléments nécessaires.
+Votre accès Animation seul ne nécessite ni contrat ou convention à signer, ni compte Stripe, ni coordonnées bancaires de reversement, ni prestation Coffrets. Aucun rendez-vous ou pack de préparation n’est imposé. Si vous ajoutez Coffrets ultérieurement, Localeo vous indiquera les compléments nécessaires pour ce produit.
 
-## Pendant le rendez-vous
+## 2. Activer votre accès et rejoindre une animation
 
-Nous vérifions ensemble vos coordonnées, les lieux et informations de participation, la convention adaptée et la connexion à Localeo Pro. L'accès au compte, l'ouverture du produit Animation et la finalisation du dossier constituent trois étapes distinctes.
+Vérifiez votre connexion à Localeo Pro. Si une information manque ou si vous avez besoin d’aide, contactez votre interlocuteur Localeo. L’accès au compte, l’ouverture du produit Animation et la finalisation du dossier constituent trois étapes distinctes : la création de votre fiche n’active pas automatiquement tous les accès.
 
 L'ouverture du produit Animation ne vous inscrit pas automatiquement à chaque animation. Votre participation doit être acceptée dans le parcours de l'animation concernée.
 
@@ -23,7 +22,7 @@ Dans Localeo Pro, ouvrez le scanner et présentez le QR du participant. Lisez l'
 
 Lorsque le parcours le propose et que votre commerce dispose d'un PIN actif, le responsable peut valider depuis le téléphone du participant. Les droits du commerce, la validité du PIN et l'état du passage ou du lot restent contrôlés. Un salarié utilise uniquement les fonctions qui lui sont autorisées ; il ne reçoit pas les droits de gestion du responsable.
 
-## Après le rendez-vous
+## Besoin d’aide ?
 
 Complétez les éléments encore demandés dans votre dossier. Localeo vérifie les prérequis avant d'activer le produit. Consultez les informations de l'animation et les consignes de remise applicables : une participation, un lot et une prestation Coffrets restent des opérations distinctes.
 

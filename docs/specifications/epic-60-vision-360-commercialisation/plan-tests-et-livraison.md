@@ -201,3 +201,68 @@ du moteur de vendabilite exige une decision explicite et une recette de parite.
 Une panne de projection ne doit pas empecher un diagnostic canonique courant
 de proteger le paiement. Ne jamais purger les demandes en attente pour masquer
 un incident ; reprendre a partir des generations et curseurs persistants.
+
+## Correctif ERP — vue commerçant exploitable — 1er novembre 2026
+
+Référence **ERP-COMMERCANTS-UX-20261101**, sans modification de l’état historique
+de l’epic. Arbres locaux testés : backend de base `ecfc9f1`, projet `9c74a33`,
+avec les travaux antérieurs conservés, notamment l’onboarding Animation E73.
+
+Constat : la fiche montrait d’abord les tableaux de vendabilité Coffrets et un
+formulaire d’édition, avant les informations utiles au suivi du commerce. La
+liste présentait les produits sous forme de texte continu, et sa pagination
+était peu repérable. Correction limitée au consommateur ERP, dans `erp.js` et
+les classes commerçants de `erp.css` :
+
+- Liste avec recherche par nom, commune, produit et état du produit, badges
+  distincts, compteurs serveur, pagination nommée et états vide/erreur avec reprise.
+  Les filtres restent côté serveur, sans chargement des détails de chaque ligne.
+- Fiche ouverte sur **Synthèse**, navigation avec icônes et onglets sur la largeur
+  disponible, points actuels à traiter, distinction compte/produits/dossier.
+  Sur mobile, les priorités précèdent les faits de synthèse. L’offre Coffrets
+  est déplacée dans **Offre et prestations**.
+- Référencement en consultation sans commande, avec adresse et coordonnées
+  complètes ; changement de statut secondaire et confirmé pour les profils
+  autorisés. Les contrôles de version, CSRF, idempotence et saisies non enregistrées
+  sont conservés. Une réponse tardive d’un ancien onglet n’alimente plus le
+  contenu de l’onglet courant de la fiche.
+
+La revue indépendante a fait corriger deux écarts : le diagnostic courant de
+`aptitudesActuelles.checklist` prime sur le snapshot pour les priorités ; l’adresse
+postale demeure lisible sans droit de modification. L’avancement enregistré
+est explicitement nommé pour ne pas le confondre avec ces prérequis actuels.
+Les contrôles d’un dossier clos/abandonné ne deviennent pas des actions à refaire,
+hors complément produit applicable.
+
+Preuves locales : nouvelle recette `tests/browser/commercants-erp-ux.cjs`, avec
+fixtures synthétiques et interception réseau, 320/1280 px, axe, clavier et texte
+200 % sur liste, synthèse et référencement en consultation. Elle couvre recherche,
+page suivante, changement de filtre revenant à la première page, conservation du
+retour, texte échappé, vide, erreur/retry, absence de commande à la lecture,
+activation versionnée, confirmation annulée, conflit, refus de quitter une saisie,
+réponse obsolète, diagnostic courant distinct du snapshot et dossier terminé.
+Les captures restent dans `localeo-backend/tmp/commercants-erp-ux/`, non versionnées.
+
+Résultats du passage final : **16 scénarios réussis**, aucune violation axe dans
+le contenu de la liste et de la synthèse, aucun débordement de page à 320 px et
+texte 200 %. Les onglets conservent leur focus au clavier sans désactiver le
+bouton de navigation pendant sa lecture ; les commandes métier conservent leur
+verrouillage pendant le traitement.
+
+Non-régressions réussies : `adresse-commercant-erp-onboard.cjs` et
+`acces-commercant-erp.cjs` (390/1280 px), `epic73-perimetres.cjs`,
+`epic73-suivi-produits.cjs` et `epic73-verifications-import.cjs` (320/1280 px),
+ainsi que `shell-navigation.cjs`. Le test de suivi produits a été rejoué après
+restauration des noms accessibles explicites des filtres. Les assertions de
+versions, confirmations, clés de commande, droits et liens directs sont conservées.
+Les contrôles documentaires réussissent : 94 guides / 1 052 liens, plus 23
+documents modifiés / 428 liens, aucune erreur ni avertissement ; 130 sources
+exportables vérifiées. `git diff --check` réussi.
+
+Contrats API, invariants et permissions : inchangés. Aucune migration ni variable
+nouvelle. Le générateur de démonstration et les autres applications ne consomment
+pas cette présentation ; leurs données et contrats restent inchangés. Les tests
+du générateur, PostgreSQL et fournisseurs ne sont pas rejoués pour cette retouche
+de présentation. Le [guide Backoffice](../../produit/formation/backend/guide-backoffice-localeo.md)
+décrit la nouvelle organisation. Vérification hébergée et PWA installée non
+exécutées ; aucun commit, push ou déploiement réalisé.

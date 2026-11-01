@@ -3438,3 +3438,255 @@ du numérique, ni un contrôle manuel par lecteur d’écran et dans une PWA ins
 Aucun commit, push ou déploiement exécuté ; vérification hébergée à réaliser
 après livraison. Les résultats de l’harmonisation de Localeo Animation restent
 distincts de ce correctif Live.
+
+## Simplification de Mes participations — 1er novembre 2026
+
+Demande : supprimer la distinction technique **Mes accès liés** et réunir les
+participations dans une liste compréhensible. Base Marketplace **6c5dd04** et
+documentation **9c74a33**, avec corrections locales. La reproduction navigateur
+échoue avant correction : trois inscriptions attendues dans la liste, seulement
+les deux locales présentes ; la troisième se trouve dans le bloc séparé.
+
+`LiveAnimations` présente désormais les deux sources dans **Mes animations**,
+sans doublon par identifiant exact de participation et sans section technique
+vide. **Retrouver mon inscription** reprend le formulaire e-mail existant pour
+les entrées sans accès personnel. Les cartes gardent anneaux, pictogrammes et
+actions adaptées ; les compteurs du carnet restent explicitement limités à
+l'appareil. Deux inscriptions à la même animation conservent leurs propres
+tokens, QR, e-mails et états. Le composant de section séparée et ses styles
+devenus inutiles sont supprimés.
+
+Une action commune **Actualiser mes participations** conserve la liaison
+volontaire des anciens accès : lots de 50, deux requêtes simultanées au maximum,
+échecs partiels visibles et aucun effacement du carnet. Aucun rattachement
+implicite, nouvelle inscription, token ou consentement n'est créé. La pagination
+remplace uniquement les résultats distants ; les entrées locales et les
+commandes restent disponibles même après déduplication d'une page entière.
+Une actualisation pendant une pagination peut annuler la lecture précédente ;
+ni son succès ni son erreur tardifs ne doivent remplacer l'état courant.
+
+Les états de chargement et d'erreur ne sont pas présentés comme une absence
+d'inscription. Les contrats API et la persistance restent inchangés ; pas de
+migration, de modification backend, de générateur ou de paramètre d'exploitation
+nécessaire pour cette correction de présentation. Les autres applications
+restent hors périmètre.
+
+Preuves locales :
+
+- **38 scénarios navigateur réussis**, aucun ignoré :
+  `live-participations-unified.spec.cjs` (7 nouveaux),
+  `live-participations-graphics.spec.cjs`, `live-carnet-readd.spec.cjs`,
+  `live-home-accesses.spec.cjs`, `live-home.spec.cjs` et
+  `live-habitant-access.spec.cjs`. Deux participations à la même animation,
+  token absent, récupération e-mail, QR exact, lot de 50/concurrence 2/refus,
+  pagination, réponses tardives, chargement/panne et vide confirmés.
+- Le scénario historique de réajout attend désormais l'inscription distante
+  présente dans sa fixture, au lieu de l'ancien écran vide trompeur. Les
+  assertions de droits, e-mails, tokens, QR et conservation du carnet restent
+  vérifiées. Les anciens tests de pagination utilisent les nouveaux libellés.
+- **131 tests Node** et ESLint ciblé réussis. Build de production isolé par le
+  serveur Playwright, sans lecture des `.env` ni réécriture de la configuration
+  publique. Captures bureau/mobile et texte 200 % relues dans
+  `localeo-marketplace/tmp/live-unified-final/`, hors versionnement.
+- Documentation : **96 guides, 1 089 liens**, aucune erreur ni avertissement ;
+  **130 sources exportables** vérifiées. `git diff --check` réussi.
+
+Fixtures synthétiques uniquement ; aucun appel métier distant. Recette hébergée,
+PWA installée et essai avec des habitants non exécutés. Pas de commit, push ou
+déploiement exécuté pour ce correctif.
+
+## 1er novembre 2026 — Onboarding commerçant Animation simplifié
+
+Référence **E73-EVO-ONBOARDING-ANIMATION-SIMPLE**, critères **OA-01 à OA-04**
+de la [spécification canonique](perimetres-parcours-saas.md). Évolution locale de
+CA-16/17/18, remplaçant la convention Animation obligatoire, sans clôture d’E73.
+Arbres de travail avec modifications antérieures conservées : projet `9c74a33`,
+backend `ecfc9f1`, Pro `0c8499e`. Aucun commit, push ni déploiement pour ce lot.
+
+| Critère | Résultat local et preuves |
+| --- | --- |
+| OA-01 | Création ERP/OnBoard avec Animation, Coffrets ou mixte, atomicité du commerce/dossier/produits/audit et rollback sur échec. Choix explicite réservé à `commercants:perimetres_gerer` et à sa portée communale, après relecture de l’autorité et avant rejeu. Omission/null et empreinte ERP historiques conservés. Tests `test_referencement_produits.py`, `test_referencement_produits_postgres.py`, navigateurs ERP/OnBoard. |
+| OA-02 | Identité/adresse/contact et accès Pro testé conservés ; contrat, Stripe, prestations Coffrets, rendez-vous, pack et bilan non applicables à Animation seule. Finalisation réelle sans ces éléments, sans ouverture du produit ni email implicite : `test_onboarding_animation_simple.py`, `test_onboarding_produits_postgres.py`. |
+| OA-03 | Convention Coffrets uniquement en mixte, validation actuelle puis preuve périmée ; exigences Coffrets restaurées lors de l’ajout. Fonctions souhaitées conservées au stockage puis filtrées dynamiquement. Tâches humaines à nouveau visibles après ce changement, avec statut et notes conservés. Tests domaine, PostgreSQL et navigateur `epic73-perimetres.cjs`. |
+| OA-04 | Dossiers historiques sans produit explicite inchangés ; données et preuves acquises conservées. Préparation Pro/OnBoard, emails et PDF contextualisés. Communication Animation facultative, sans rendez-vous, aperçu distinct de l’accord. Ajout Coffrets ou changement de destinataire invalide le message avant envoi ; calendriers/rappels sans rendez-vous refusés. Tests communications, rendu, Pro et navigateurs. |
+
+Le domaine `conformite_fiscale_bum` porte l’applicabilité ; `referencement` reste
+propriétaire de l’ouverture du produit. Les règles d’habilitation, de version,
+de suspension, de participation et d’envoi E68 demeurent applicables. Les
+projections exposent `sections`, `conventionsRequises` et `exigences` ; la version
+des preuves des produits explicites devient `PRODUITS_E73_V2`.
+
+Réalisations par dépôt :
+
+- **Backend** : règles, préparation/finalisation, commandes de création et garde
+  de qualification, API, ERP/OnBoard, communication et support Animation.
+- **Pro** : préparation courte guidée par la projection serveur ; aide secondaire,
+  étapes utiles et absence des sections contractuelles/financières non applicables.
+- **Projet** : décision, critères, contrats, recette F04, guides et exploitation.
+  Les deux champs de création des instantanés OpenAPI E41/E42 sont alignés sur les
+  modèles API par export hors ligne ciblé ; les autres opérations sont conservées.
+- **Marketplace/Live et portail organisateur** : sans changement pour ce lot ;
+  ils ne qualifient pas l’onboarding commerçant.
+
+Preuves exécutées localement sur les modifications courantes :
+
+- **881 tests backend isolés réussis**, aucun ignoré : architecture ; domaine
+  onboarding/produits/préparation/communications ; orchestration ; contrats et
+  permissions API ; référencement ; adresse ; démonstration préparation/adresse.
+  Commande `scripts/validation/test_isolated.py`, Python 3.14, sans `.env`, réseau
+  fournisseur ni base externe. Les contrôles de rendu/PDF ajoutent **6 succès**.
+- **22 tests PostgreSQL réussis**, aucun ignoré, sur PostgreSQL 18.3 local jetable :
+  10 créations/rollback, 4 onboarding/complément/preuve périmée, 5 communications
+  concurrentes/crash/relecture et 3 imports sans ouverture implicite. Passage commun
+  final après correction de l’applicabilité des tâches : **88,10 s**. Les 14
+  avertissements concernent le tri des FK cycliques profils/versions de la fixture ;
+  ils ne sont pas des tests ignorés. Aucune base d’exploitation utilisée.
+- **39 tests Vitest Pro** et **8 scénarios E2E Pro réussis** : préparation,
+  contrat et reprise après authentification ; Animation en 320/1280 px avec axe.
+  Captures mobile/bureau relues dans `localeo-commercant/tmp/`, hors versionnement.
+- Navigateurs backend réussis : `epic73-perimetres.cjs` (320/1280 px),
+  `epic69-onboard.cjs`, `adresse-commercant-erp-onboard.cjs` (390/1280 px),
+  **2 scénarios** `test_onboard_simple_browser.mjs` et **8 scénarios**
+  `test_communications_simple_browser.mjs`, dont Animation facultatif à deux tailles.
+  Le parcours E73 a été rejoué après le dernier ajustement de libellés partagés.
+
+Les fixtures SQLite émulent fidèlement `jsonb_typeof` pour conserver le CHECK
+du modèle. Les fixtures PostgreSQL de communications fournissent les vraies
+tables de commune et de périmètres pour conserver les verrous ; les fixtures
+navigateur chargent le véritable module de dates. Aucune contrainte, assertion
+de refus ou garde métier n’a été supprimée pour obtenir ces succès.
+
+Deux revues indépendantes ont relevé puis fait corriger la permission de
+qualification initiale et les tâches restant masquées après ajout Coffrets.
+Les refus d’habilitation et les deux statuts humains conservés disposent de
+tests dédiés. Les compléments de revue sur l’aperçu Animation devenu obsolète
+ont également été couverts avant confirmation et avant traitement.
+
+Pas de migration, table, variable ou permission nouvelle. Le générateur garde
+ses dossiers historiques non qualifiés et sa demande de revue ; il n’active pas
+les produits. Les tests préparation/adresse de son adaptateur passent ; génération
+complète, transfert/dump/restauration et fournisseurs réels non exécutés pour
+cette évolution. Les données et moyens de contact des tests sont synthétiques.
+
+La [configuration de livraison](../../exploitation/technique/configurer-epic-73.md)
+précise l’ordre backend puis Pro et la nouvelle approbation du support Animation
+si un envoi facultatif est utilisé. Un ancien aperçu/une ancienne empreinte ne
+valident pas un contenu modifié. Recette hébergée et appareils PWA installés
+non exécutés ; les scénarios de recette existants ne sont pas barrés à ce titre.
+
+## Correctif Animation seule sans rendez-vous — 1er novembre 2026
+
+**E73-ONBOARDING-SANS-RDV-20261101**, complément OA-02/OA-04 de la
+[spécification](perimetres-parcours-saas.md). La règle de domaine permettait déjà
+la finalisation sans rendez-vous, mais OnBoard/ERP exposaient encore des libellés
+et une date historiques. La liste conservait aussi les anciennes prochaines
+actions RDV et incluait Animation seule dans le filtre `NON_PLANIFIE`.
+Bases locales backend `ecfc9f1` et projet `9c74a33`, avec les travaux antérieurs
+conservés ; version hébergée non inspectée pour ce correctif.
+
+La projection du domaine reste propriétaire de l’applicabilité. La liste expose
+désormais `sections` et `produitsVises`, lus par lots bornés ; l’adaptateur SQL
+applique les mêmes faits avant filtres, total et pagination. Les commandes de
+préparation enregistrent la provenance de leur prochaine action dans le JSON
+existant. Les lectures masquent un index RDV devenu inapplicable sans effacer
+les données enregistrées ni recalculer toute la préparation pour chaque ligne.
+OnBoard et la fiche ERP masquent la date inapplicable et présentent un ancien
+`RDV_PLANIFIE` comme **En préparation**. Coffrets, mixte et produit non qualifié
+gardent leur parcours existant. L’aide à la création ne demande plus de rendez-vous
+par défaut.
+
+Preuves locales exécutées :
+
+- Reproductions initialement rouges : ancien RDV visible en fiche Animation et
+  prochaine action « Fixer le rendez-vous » remontant dans la liste PostgreSQL.
+- **5 nouveaux tests PostgreSQL réussis** dans
+  `tests/security/test_onboarding_rendez_vous_animation_postgres.py` : cohérence
+  liste/détail/filtres/pagination, conservation des suivis manuels divergents,
+  provenance des commandes, comparaison SQL/domaine sur 33 combinaisons et absence
+  d’écriture par lecture. Une page de 1 ou 8 dossiers utilise les mêmes 5 SELECT.
+- **227 régressions réussies** sur domaine/application onboarding/préparation et
+  preuves PostgreSQL existantes ; **623 contrôles d’architecture réussis**.
+  Lanceur backend `scripts/validation/test_isolated.py`, PostgreSQL 18.3 local
+  jetable, sans base d’exploitation ni fournisseur externe.
+- Navigateurs réussis : `epic73-perimetres.cjs` (320/1280 px, ancien statut/date,
+  contrôles détaillés et retour Coffrets), `epic69-onboard.cjs` (création et droits),
+  `commercants-erp-ux.cjs` (16 scénarios 320/1280 px, axe et texte 200 %).
+
+Limite historique explicite : sans provenance enregistrée, seule l’action
+standard **Fixer le rendez-vous**, préparation active, responsable attendu et
+échéance absente est attribuée à l’ancien index automatique. Une saisie manuelle
+strictement identique est indiscernable ; les autres actions historiques ambiguës
+sont conservées. Les commandes futures permettent cette attribution par leur
+identifiant et les valeurs indexées. Aucune modification des dates, statuts ou
+audits historiques n’est effectuée par consultation.
+
+Dépôts modifiés pour ce correctif : **backend** et **projet**. Pro consomme déjà
+les exigences qui masquent le RDV et ne nécessite pas de nouvelle modification ;
+Marketplace et portail organisateur ne portent pas cet onboarding. Contrat de
+liste enrichi de façon additive, sans nouveau schéma de stockage, variable,
+permission ni migration. Générateur inchangé : ses dossiers non qualifiés restent
+prudents ; les états synthétiques qualifiés/historiques sont couverts ci-dessus,
+sans génération complète supplémentaire. Aucun email, réparation de données,
+commit, push ni déploiement ; recette hébergée restant à exécuter après livraison.
+
+## Dossier OnBoard : priorités et gestion secondaire — 1er novembre 2026
+
+**E73-ONBOARD-DOSSIER-UX-20261101**, complément de présentation OA-02/OA-04,
+sans changement de statut de l’epic. Bases backend `ecfc9f1` et projet `9c74a33`,
+avec les travaux antérieurs conservés. Les rubriques non applicables étaient
+déjà retirées pour Animation seule, mais l’en-tête présentait activation, ouverture
+des produits, récapitulatif et finalisation au même niveau ; la préparation courte
+répétait ses raccourcis et sa vérification.
+
+Le dossier indique maintenant son périmètre et présente les points à compléter
+avant les opérations secondaires. Un raccourci ouvre la bonne rubrique et place
+le focus sur son titre. Animation seule garde coordonnées, accès Pro et action
+de finalisation autorisée par le statut serveur, sans contrat, Stripe, prestations
+ou rendez-vous. Questions et réserves précèdent les communications facultatives ;
+l’avancement de préparation est dépliable. Les onglets illustrés gardent leurs
+noms, les flèches/Home/End et leurs relations ARIA, sans défilement horizontal.
+
+**Gestion du dossier** regroupe les réglages de fonctions, le lien vers les
+périmètres ERP, le récapitulatif et la réouverture motivée. La rubrique est repliée
+par défaut et accessible depuis un raccourci discret d’en-tête. Une activation
+de commerçant autorisée reste disponible, y compris sur dossier clos, sans
+confondre activation du compte et ouverture du produit. Les dossiers terminaux
+sans complément ne relancent pas les anciennes étapes et n’affichent pas de fausse
+conformité ; leurs contrôles restent consultables. Le complément produit garde
+ses autorisations sans réouverture du dossier historique.
+
+Les commandes de vérification, validation, clôture et réouverture refusent de
+remplacer une saisie non enregistrée. Aucun contrat serveur, refus d’habilitation,
+statut ou contrôle de version n’est modifié. Le CSS est corrigé dans ses règles
+existantes : anciennes présentations retirées, largeur disponible utilisée et
+onglets lisibles sur deux colonnes mobiles.
+
+Preuves locales exécutées :
+
+- **20 nouveaux scénarios navigateur réussis**, `node
+  tests/browser/onboard-dossier-ux.cjs`, 320/1280 px : périmètres Animation,
+  Coffrets, mixte et non qualifié ; priorités ; gestion secondaire ; focus et
+  clavier ; cycle vérifier/valider/terminer ; activation avec version/clé/CSRF ;
+  refus dirty et conflit conservant les saisies ; terminaux, compléments et
+  consultation seule. Axe sans violation sur les surfaces auditées ; texte 200 %
+  sans débordement. Reproduction initiale rouge sur l’absence de gestion séparée.
+- Régressions réussies : `epic69-onboard.cjs` (droits, scope et purge de session),
+  `epic73-perimetres.cjs` (Animation/mixte, complément et conflits à 320/1280 px),
+  `adresse-commercant-erp-onboard.cjs` (création/édition à 390/1280 px),
+  `test_onboard_simple_browser.mjs` (**2 parcours**) et
+  `test_preparation_browser.mjs` (**5 parcours** versionnés/permissions/réponses
+  tardives et communications). Les fixtures de préparation chargent maintenant
+  le vrai module partagé de dates, requis lors du retour d’un rendez-vous ; le
+  libellé d’aide de création attendu est aligné sur sa contextualisation précédente.
+- Captures mobile/bureau examinées dans `localeo-backend/tmp/onboard-dossier-ux/`,
+  hors versionnement. La revue indépendante a fait corriger puis couvrir la
+  fausse conformité terminale et l’activation précédemment retirée à ces dossiers.
+
+Impacts : backend (présentation OnBoard et tests) et projet (guide et suivi).
+Pas de changement Python, API, migration, permissions, données ou configuration ;
+pas de nouveau contrôle métier dans l’interface. Le générateur et les autres
+applications ne consomment pas cette présentation : aucun changement nécessaire.
+Les règles de domaine restent couvertes par le lot précédent, sans nouvelle
+exécution complète de sa suite pour ce correctif visuel. Aucun service réel,
+email, commit, push ou déploiement ; vérification hébergée, PWA installée et
+lecteur d’écran manuel non exécutés.

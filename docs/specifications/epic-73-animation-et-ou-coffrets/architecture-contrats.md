@@ -1,5 +1,28 @@
 # E73 — Architecture et contrats transverses
 
+Complément du **1er novembre 2026 — E73-EVO-ONBOARDING-ANIMATION-SIMPLE** :
+les critères OA-01 à OA-04 des [périmètres commerçants](perimetres-parcours-saas.md)
+remplacent le contrat et la préparation obligatoires pour Animation seule.
+La projection du domaine fait autorité ; aucun frontend ne déduit l’applicabilité
+de l’absence d’un document ou de l’URL de navigation.
+
+| Contrat modifié | Sémantique |
+| --- | --- |
+| Création ERP `POST /internal/erp/api/commercants` | `produits_demandes` optionnel : liste non vide, sans doublon, de `ANIMATION` / `COFFRETS`. Absence/null conserve le parcours historique. Demande et dossier sont enregistrés dans la transaction de création, sans activation. |
+| Création OnBoard `POST /internal/onboard/api/commercants-et-dossiers` | Même choix, alias JSON `produitsDemandes`. Même règle et aucune initialisation d’accès supplémentaire. Un choix de produit ne vaut pas envoi de mail. |
+| Détail dossier OnBoard / préparation Pro et interne | `conventionsRequises` : `[]` Animation seule, `["COFFRETS"]` si Coffrets, `null` historique. `sections.convention`, `sections.preparation`, `sections.rendezVous`, `sections.pack`, `sections.bilan` sont faux pour Animation seule. `exigences` de préparation expose les quatre exigences contractuelle, de rendez-vous, de pack et de bilan. Les champs manquants d’une ancienne réponse conservent le comportement historique. |
+| Liste des dossiers OnBoard | Ajout compatible de `sections` et `produitsVises`, selon la même qualification que le détail. Le filtre `NON_PLANIFIE` exclut Animation seule avant total/pagination. Les champs `prochaineAction`, `prochaineActionResponsable`, `prochaineActionEcheance` valent `null` lorsqu’un ancien index de préparation est attribuable à une action RDV devenue inapplicable. La recherche d’action et le filtre d’échéance appliquent la même règle. Aucune écriture par consultation ; les suivis manuels divergents restent exposés. |
+| Communication facultative Animation | Un aperçu `PACK` peut être préparé sans rendez-vous, sans fichier calendrier et sans calendrier de rappels. Aucun envoi avant confirmation habilitée de cet aperçu courant. Les communications calendaires requièrent toujours un rendez-vous. Les garde-fous E68 (fenêtres, politique active, destinataire, empreinte, idempotence, issue incertaine) restent applicables. |
+
+Les changements de produits après référencement passent toujours par les commandes
+de périmètre habilitées et versionnées ; l’édition des coordonnées n’est pas une
+commande d’ouverture. Pas de nouvelle route publique, de table ni de permission.
+La qualification initiale exige aussi `commercants:perimetres_gerer`, contrôlé
+dans la transaction. Sans ce droit, le formulaire omet le choix et annonce le
+périmètre à qualifier ; la création historique reste possible. Le serveur refuse
+un choix explicite non autorisé. Ce contrôle vaut aussi lors d’une répétition
+idempotente et ne donne aucun droit de changer le périmètre d’un commerce existant.
+
 Complément du 22 octobre 2026 : l'[évolution E73-EVO-FLYER](flyers-contextualises.md)
 précise les faits de dotation/participation utilisés pour les supports, leur
 empreinte de fraîcheur et les commandes d'illustration privée. Elle conserve les

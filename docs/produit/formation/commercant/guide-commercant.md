@@ -23,6 +23,24 @@ Les demandes de factures se consultent par pages. Utilisez la navigation de list
 
 Un conflit, un refus ou une validation « à contrôler » ne confirme pas la prestation. Ne traitez jamais un message d'erreur comme « déjà validé ».
 
+## Retrouver une validation
+
+Ouvrez **Historique des validations**. Chaque ligne présente la prestation ou le
+passage, son résultat, l'heure de Paris, le mode de validation et son auteur.
+Une annulation ou une validation **À régulariser** se distingue d'un succès.
+Dépliez **Référence de validation** pour retrouver l'identifiant utile au support.
+
+Choisissez un type, un mode ou des dates, puis **Filtrer**. Les étiquettes au-dessus
+de la liste indiquent la sélection effectivement appliquée ; une saisie en cours
+ne modifie pas encore les résultats. **Aujourd’hui** et **7 derniers jours**
+appliquent directement une période en journées de Paris. **Réinitialiser** efface
+les filtres et revient à la première page.
+
+Les flèches parcourent l'historique page par page. Le nombre affiché concerne
+seulement la page visible. **Actualiser** relit cette page en conservant les filtres.
+Après une erreur, **Réessayer** conserve la page ; si elle n'est plus disponible,
+**Revenir au début** conserve les filtres. Aucun de ces boutons ne rejoue une validation.
+
 ## Coupure réseau et reprise
 
 Si la validation est confirmée mais l'actualisation échoue, sa confirmation reste affichée. Utilisez « Actualiser l'état du coffret » ; les commandes restent bloquées jusqu'à cette vérification. Après rechargement de l'application, le contexte valide de ce compte peut être relu sans rejouer la validation.
