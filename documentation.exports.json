@@ -282,6 +282,14 @@
       "source_path": "docs/produit/formation/backend/guide-preparation-onboarding-commercant.md"
     },
     {
+      "path": "docs/ops/formation/guide-prise-en-main-erp.md",
+      "source_path": "docs/produit/formation/backend/guide-prise-en-main-erp.md"
+    },
+    {
+      "path": "docs/ops/formation/guide-applications-backoffice.md",
+      "source_path": "docs/produit/formation/backend/guide-applications-backoffice.md"
+    },
+    {
       "path": "docs/ops/formation/commercant/preparation-rendez-vous-localeo.md",
       "source_path": "docs/produit/formation/commercant/preparation-rendez-vous-localeo.md"
     },

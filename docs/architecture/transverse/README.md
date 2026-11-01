@@ -4,6 +4,8 @@ Ce dossier documente les choix communs a plusieurs EPIC.
 
 ## Documents
 
+- [Identité des en-têtes des applications](identite-entetes-applications.md) : symbole, couleurs, typographie et adaptation mobile communs aux huit applications.
+
 - [Architecture solution](architecture-solution.md) : vue d'ensemble du backend, couches et integrations.
 - [Domaines fonctionnels](domaines-fonctionnels.md) : decoupage cible issu de l'EPIC 40.
 - [Conventions API et OpenAPI](conventions-api-openapi.md) : organisation des routes, domaines et contrats.

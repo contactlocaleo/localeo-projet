@@ -1,5 +1,134 @@
 # Registre des anomalies
 
+Publication Git du **1er novembre 2026**, après les contrôles locaux décrits
+ci-dessous : backend `daff81c` (contrainte des droits) et `7f131d3` (en-têtes et
+connexion), Animation `d607cb9`, Pro `a946ee2`, Marketplace/Live `bb8b585`,
+committés et poussés sur `main`. Cette publication complète les constats locaux
+des trois anomalies du 1er novembre ; elle ne prouve pas leur déploiement
+applicatif. La correction SQL v286 a été appliquée sur TEST comme indiqué
+ci-dessous ; la migration catalogue v285 y reste en attente.
+
+## ANO-BE-CONNEXION-ERP-20261101 — Connexion interne hors charte ERP
+
+Signalement du 1er novembre 2026 : la connexion interne conserve une ancienne
+palette verte, un nom sans symbole et une présentation distincte de l’ERP.
+La page de choix du mot de passe partage cette ancienne feuille de style.
+
+Correction locale dans le backend : signature statique Localeo ERP, symbole et
+tokens de `app-header.css` réutilisés ; fond clair, en-tête bleu nuit, action
+principale orange, champs lisibles et aide secondaire repliable. Le formulaire
+propose l’affichage volontaire des mots de passe, un état d’attente et des retours
+erreur/succès contrastés avec focus et annonce accessibles. Sans JavaScript,
+l’action reste désactivée et un message explique le prérequis ; aucun secret ne
+doit partir dans une query string. Connexion, initialisation et réinitialisation
+conservent les API, CSRF, confidentialité du fragment et absence d’autoconnexion.
+
+Seuls `app-header.css` et `header-mark.svg` rejoignent les ressources publiques
+exactement autorisées par les deux contrôles HTTP. Aucun chargement du contexte
+ERP ni du script d’en-tête authentifié sur les formulaires publics. Le lien
+d’évitement commun se masque selon sa hauteur réelle pour rester invisible hors
+focus même avec le texte agrandi.
+
+Vérifications locales : 124 tests API/surfaces/sessions et 623 contrôles
+d’architecture réussis ; parcours navigateur E69 à 390/1280 px rejoué avec succès.
+Contrôle dédié à 320/390/1280 px et texte 200 % : logo chargé, absence de débordement,
+clavier, cibles tactiles, visibilité des mots de passe, attente, erreurs 401/429,
+connexion réussie, confirmation, purge du fragment et retour à la connexion.
+Initialisation et réinitialisation vérifiées ; sans JavaScript, bouton désactivé
+et message de prérequis visible (contrôlé via le nœud `noscript` et capture).
+Captures inspectées ; tests des cinq en-têtes partagés rejoués après correction
+du lien d’évitement. Le premier contrôle de succès avait une fixture HTML sans
+charset ; l’encodage de cette seule fixture a été corrigé, sans changer l’assertion.
+
+Périmètre : présentation backend et documentation transverse. Aucun invariant,
+permission métier, contrat de données, migration ou générateur modifié. Travaux
+locaux préexistants conservés ; aucun commit, push ou déploiement pour ce correctif.
+
+## ANO-BE-ACCES-DROITS-20261101 — Compte interne complet refusé en 409
+
+Reproduit sur TEST le 1er novembre 2026 : création nominative Backoffice +
+Finance avec les sept autorisations dédiées, refus `COMPTE_INTERNE_CONFLIT`,
+corrélation `LOC-2b82fa47-343f-45a6-b037-5c529f8a2adc`. La contrainte PostgreSQL
+`ck_utilisateur_autorisations_dediees` issue de v275 ne connaissait que quatre
+codes ; le domaine et l’API en proposent sept. La transaction a annulé le
+compte et son invitation, sans création partielle.
+
+Correction : migration additive au suivi `v286_autorisations_internes_completes.sql`,
+remplaçant cette CHECK par une liste fermée de sept codes et une longueur maximale
+de sept. Aucun octroi automatique, changement de rôle ou modification des comptes
+préexistants. Le domaine reste propriétaire des combinaisons de profils et droits.
+La readiness exige la nouvelle contrainte nommée. API, consommateurs et générateur
+conservent leurs contrats ; aucun nouveau droit ni scénario fonctionnel à ajouter.
+
+Preuves sur PostgreSQL 18 isolé : ancien DDL refusé avec la contrainte attendue,
+migration réelle puis création réussie et rejeu sans double invitation ; droits
+préexistants conservés, codes inconnus, JSON invalide, trop de valeurs et profils
+incompatibles refusés. 52 tests migration/readiness/API/runner et 634 contrôles
+architecture/service comptes réussis, sans skip. Base backend `b66a5a8` avec
+correctif local ; aucun commit ni push dans cette opération.
+
+Application ciblée sur TEST réalisée après sauvegarde complète et lecture intégrale
+de l’archive, sans exercice de restauration. Le runner a d’abord vérifié toutes les
+empreintes, puis appliqué uniquement v286 depuis une copie privée des sources
+excluant v285. Vérification : CHECK validée, empreinte enregistrée, deux comptes
+préexistants conservés avant création du nouvel accès ; rejeu API **201**, puis
+lecture **200** avec les deux profils et les sept autorisations, invitation en file.
+Empreinte v286 : `9dfb8edc75f0247b7345d476dc840bbf6d822fe43c83b6317c2927f75d1b5e7b`.
+Les preuves et la sauvegarde restent dans les opérations privées du backend.
+
+Limites : v285 (catalogue Premium) reste explicitement en attente ; ne pas annoncer
+une mise à niveau complète du schéma. La nouvelle garde readiness n’est pas encore
+déployée. La création des accès ne prouve ni la réception des emails ni la première
+connexion de leurs bénéficiaires. Une prochaine livraison doit inclure v286 avant
+le code de readiness correspondant.
+
+## ANO-TRANSVERSE-HEADER-20261101 — Identités divergentes dans les huit applications
+
+Signalement du 1er novembre 2026 : homogénéiser l’identité dans les en-têtes de
+Pro, Animation, ERP, OnBoard, Live, Ops, Support et Atelier.
+
+Constat local : logo absent des cinq outils internes, tailles et polices
+différentes, séparateur backend, sous-titres Pro/Animation et nom ou symbole
+masqués sur certains petits écrans. Plusieurs générations de règles CSS
+redéfinissaient les mêmes éléments ; Live conservait notamment une règle
+globale imposant sa police éditoriale au nom de l’application.
+
+Correction dans les quatre dépôts applicatifs : symbole SVG identique,
+fond bleu nuit, marque blanche et nom orange, police système et dimensions
+communes. Les actions peuvent passer à la ligne pour garder le nom lisible.
+Les règles de marque sont consolidées à leur source, avec un composant Live
+partagé entre ses entrées et le header commun aux cinq outils backend.
+La [convention transverse](../../architecture/transverse/identite-entetes-applications.md)
+porte les valeurs et les règles d’accessibilité.
+
+Bases locales : backend `b66a5a8`, commerçant `10374cc`, Animation `255629b`,
+Marketplace/Live `6c1aaac`, avec modifications de travail. Aucun déploiement
+ni vérification authentifiée de TEST dans ce correctif.
+
+Impacts : présentation et ressources statiques uniquement ; aucun contrat API
+métier, invariant, migration, droit ou donnée de démonstration modifié.
+Le SVG backend est autorisé par sa route statique existante et entre dans
+l’empreinte PWA. Live conserve son symbole dans le cache public et inclut son
+contenu dans l’empreinte du build ; les réponses privées restent exclues.
+
+Vérifications locales : tests d’en-têtes mobile/bureau, clavier, actions PWA,
+session et texte agrandi ; captures inspectées. Backend : 623 contrôles
+d’architecture, 21 tests HTTP/PWA, menu/permissions, lifecycle quatre PWA,
+24 scénarios de gabarit ERP et 261 contrôles du guide ERP réussis.
+Le contrôle final backend couvre 40 variantes normales, 10 variantes de texte
+à 200 % et 5 variantes de zoom ; gabarit ERP rejoué après l’ajustement rem.
+Animation : types, lint, build isolé, 18 tests ciblés et 10 formats navigateur
+réussis. Pro : 36 tests ciblés, 7 scénarios navigateur et build isolé réussis.
+Live : 16 tests de cache/mise à jour et 16 scénarios navigateur d’en-tête et
+d’installation réussis ; build isolé de production et lint ciblé réussis.
+Le badge TEST final reprend la capsule de Pro ; les 7 cas navigateur 320/390/1280
+et texte agrandi sont rejoués avec succès après cet ajustement.
+
+Limite indépendante : `live-animation-surface.spec.cjs` présente deux échecs
+sur ses attentes d’onglets secondaires (Mes participations / Mes lots).
+Même résultat reproduit sur HEAD `6c1aaac` dans un worktree isolé : 2 réussites,
+2 échecs. Ces attentes ne sont pas modifiées par l’harmonisation des en-têtes.
+
 ## ANO-BE-E73-RECHERCHE-PROJECTION — Recherche globale indisponible sur TEST
 
 Signalement du **30 octobre 2026**, corrélation fournie

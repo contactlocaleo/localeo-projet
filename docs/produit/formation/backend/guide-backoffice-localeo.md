@@ -1,5 +1,11 @@
 # Guide de formation au back-office Localeo
 
+Pour une première utilisation, commencer par le
+[guide de prise en main Localeo ERP](guide-prise-en-main-erp.md) : menus actuels,
+parcours et exercices sur TEST. Ce document de référence conserve aussi des
+sections historiques SQLAdmin, réservées à l'administration technique ; elles
+ne décrivent pas le menu quotidien d'un compte interne.
+
 ## Retrouver et traiter un commerce dans l’ERP
 
 Correctif local du **1er novembre 2026**, soumis à livraison sur l’environnement.
@@ -71,7 +77,7 @@ ne vaut pas recette de l’option sur un commerce réel.
 
 ## Souscriptions et modules — évolution E73
 
-Fonctions en cours de réalisation locale ; leur présence ici ne vaut pas livraison sur un environnement. Depuis **Animation → Gestion des souscriptions**, ouvrir une souscription activée puis **Gérer les modules**. L’écran distingue le forfait acquis, ses dates, les quotas consommés et chaque droit inclus, acheté, offert ou en essai. Les droits de la commune concernée restent séparés de ceux des autres communes du partenaire.
+La présence de ce guide ne vaut pas livraison sur un environnement. Depuis **Animations locales → Équipes et contrats → Souscriptions**, ouvrir une souscription activée puis **Gérer les modules**. L’écran distingue le forfait acquis, ses dates, les quotas consommés et chaque droit inclus, acheté, offert ou en essai. Les droits de la commune concernée restent séparés de ceux des autres communes du partenaire.
 
 L’autorisation **Offrir des modules et gérer les essais** doit être attribuée explicitement à un Backoffice par un administrateur. Elle permet un octroi motivé, sa modification et son retrait. Un essai dure 14 jours par défaut ; un cadeau se termine au plus tard avec la souscription. Les capacités et les dates sont contrôlées par le serveur. Aucun cadeau ou essai ne devient automatiquement un achat. Les dates de saisie et d’affichage utilisent Europe/Paris. En cas de conflit, conserver la saisie affichée, puis actualiser le dossier avant toute nouvelle décision.
 
@@ -89,12 +95,13 @@ Les administrateurs et les Backoffice dotés de **Gérer les périmètres Animat
 
 Les vues techniques SQLAdmin Commerçant et Prestation Coffret sont en consultation. Leurs liens **Ouvrir dans l’ERP** conduisent aux parcours qui vérifient les règles et enregistrent les mutations dans une transaction cohérente.
 
-## Préparation de l'inscription commerçant — cible EPIC 68
+## Préparation de l'inscription commerçant — OnBoard
 
 Le [guide de préparation OnBoard](guide-preparation-onboarding-commercant.md)
-décrit le dossier, les échanges en amont, la checklist et le rendez-vous final.
-Il est rédigé pour la conception E68 ; les fonctions et accès ERP associés restent
-à implémenter. Il ne remplace pas les procédures actuellement disponibles.
+décrit les écrans du dossier, les échanges et les contrôles adaptés aux produits
+demandés. Pour Animation seule, le parcours ne requiert ni rendez-vous ni contrat
+Coffrets. Les étapes complètes Coffrets restent décrites séparément. La
+disponibilité des écrans dépend de la version livrée et des droits.
 
 ## Consultations ERP Audit, Paiements et Reversements — EPIC 65
 
@@ -143,7 +150,9 @@ Il documente :
 - les points d'attention operatoires ;
 - les parcours metier les plus frequents.
 
-Le document est base sur le back-office SQLAdmin expose par `app/infrastructure/admin/admin.py`.
+Les sections historiques ci-dessous sont basées sur le back-office SQLAdmin
+exposé par `app/infrastructure/admin/admin.py`. Pour les rubriques quotidiennes
+de l'ERP, utiliser le guide de prise en main lié en tête de page.
 
 ## Perimetre
 

@@ -8,6 +8,8 @@ Vision fonctionnelle, parcours, identité visuelle et formations.
 - [commercant/experience/ux-espace-commercant.md](commercant/experience/ux-espace-commercant.md)
 - [formation/animation/guide-animation-preproduction.md](formation/animation/guide-animation-preproduction.md)
 - [formation/backend/README.md](formation/backend/README.md)
+- [Prendre en main Localeo ERP : rôles, menus et exercices TEST](formation/backend/guide-prise-en-main-erp.md)
+- [Découvrir Ops, OnBoard, Support et Atelier](formation/backend/guide-applications-backoffice.md)
 - [formation/backend/guide-animation-preproduction.md](formation/backend/guide-animation-preproduction.md)
 - [formation/backend/guide-backoffice-localeo.md](formation/backend/guide-backoffice-localeo.md)
 - [formation/commercant/guide-commercant.md](formation/commercant/guide-commercant.md)
