@@ -510,6 +510,10 @@
       "source_path": "docs/specifications/epic-70-validation-pin/guide-utilisation-exploitation.md"
     },
     {
+      "path": "docs/ops/formation/acces-salaries.md",
+      "source_path": "docs/specifications/epic-72-acces-salaries/guide-utilisation-exploitation.md"
+    },
+    {
       "path": "docs/ops/exploitation/preparer-chasse-accompagnee.md",
       "source_path": "docs/exploitation/exploitation/preparer-chasse-accompagnee.md"
     },

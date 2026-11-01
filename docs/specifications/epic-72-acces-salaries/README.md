@@ -1,6 +1,14 @@
 # EPIC 72 — Accès salariés dans Localeo Pro
 
-Spécification du 5 octobre 2026. Le [backlog E72](../../roadmap/en-cours/epic-72-acces-salaries-validation-localeo-pro-backlog.md) conserve les 22 critères et le statut produit ; implémentation et vérifications locales des 7–8 octobre 2026, après publication E70. Aucun déploiement effectué.
+Spécification du 5 octobre 2026. Le [backlog E72](../../roadmap/en-cours/epic-72-acces-salaries-validation-localeo-pro-backlog.md) conserve les 22 critères et le statut produit ; implémentation et vérifications locales des 7–8 octobre 2026, après publication E70. La publication Git et la migration TEST historique ne prouvent pas la recette fonctionnelle sur une cible déployée.
+
+Revue de clôture du **1er novembre 2026** : **En cours conservé**. L’audit des
+refus salariés, plusieurs preuves intégrées et la recette pilote restent des
+réserves d’acceptation. Le chargement non borné de la liste est une dette
+technique préexistante, distincte de ces réserves. Un correctif technique retire les
+références locales de reprise des lots à la fermeture de session ; il ne lève
+pas ces autres réserves. Les critères, exécutions et limites sont rapprochés
+dans le [bilan de clôture](verification-livraison.md).
 
 - [Utilisation et exploitation](guide-utilisation-exploitation.md).
 - [Architecture, invariants et contrats](architecture-contrats.md).

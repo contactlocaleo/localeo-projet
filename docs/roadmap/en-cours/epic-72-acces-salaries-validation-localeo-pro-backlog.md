@@ -3,6 +3,7 @@
 ## Références
 
 - **EPIC-72**, créée le **5 octobre 2026**, état **En cours** ; priorité et livraison à planifier.
+- Revue de clôture du **1er novembre 2026** : état conservé, sans déplacement du backlog. Audit des refus, preuves intégrées et recette pilote restant à traiter ; dette préexistante de lecture bornée distinguée dans le [bilan](../../specifications/epic-72-acces-salaries/verification-livraison.md), avec les résultats et le correctif technique de nettoyage local.
 - Besoin exprimé : permettre aux salariés d'un commerce de valider des prestations de coffrets et des passages Animation sur leur mobile personnel, sans partager le compte principal ni disposer des autres droits de Localeo Pro.
 - Identifiant recherché dans la documentation et les namespaces de la roadmap : aucune EPIC 72 préexistante relevée.
 - [EPIC 70 — PIN sur le téléphone client](epic-70-validation-prestation-telephone-client-backlog.md) : parcours complémentaire, distinct de l'identité individuelle du salarié. Son extension Animation est demandée le même jour.
@@ -163,7 +164,7 @@ La durée du PIN est fixée dans E70 à 7 jours par défaut, configurable jusqu�
 
 La [spécification V1](../../specifications/epic-72-acces-salaries/README.md) traduit les arbitrages et relie les 22 critères aux preuves et consommateurs selon le [cycle d’epic](../../organisation/cycle-epic.md). Implémentation backend/ERP et Localeo Pro réalisée localement après publication E70 ; aucune invitation réelle ni activation en production.
 
-Rattachement documentaire de conservation établi le **7 octobre 2026** sur l’Annexe A : voir les [catégories, dates et preuves communes E70/E72](../../specifications/identite-acces/conservation-validations-acces.md). La limite de source est levée ; les migrations 258/259, traitements et tests sont livrés localement. Leur application et l’ordonnancement sur la cible restent des opérations de mise en service.
+Rattachement documentaire de conservation établi le **7 octobre 2026** sur l’Annexe A : voir les [catégories, dates et preuves communes E70/E72](../../specifications/identite-acces/conservation-validations-acces.md). La limite de source est levée ; migrations 258/259, traitements et tests sont implémentés. Leur application TEST du 8 octobre est attestée dans le bilan ; elle ne prouve ni l’ordonnancement sur la cible ni la recette fonctionnelle.
 
 
 Le [bilan du 8 octobre](../../specifications/epic-72-acces-salaries/verification-livraison.md)

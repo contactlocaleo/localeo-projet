@@ -499,3 +499,38 @@ nouveau script figure dans la liste des ressources autorisées.
 Contrôles documentaires : `check_guidance.py` réussi (92 guides, 970 liens au
 premier passage), `sync_documentation.py --check-sources` réussi (122 documents).
 Les travaux E71 demeurent indépendants de cette évolution locale.
+
+## Correctif de la liste des dossiers — 1er novembre 2026
+
+**ONBOARD-CORR-20261101-LISTE**, base backend `4f0cfdc` avec modifications
+locales. Un nom commercial long impose sa largeur minimale à la grille d’une
+carte : le texte ne se réduit pas malgré l’ellipse prévue et provoque un
+défilement horizontal interne à la liste. Le contrôle de la seule largeur de
+la page ne détectait pas ce défaut, car le parent masque son débordement.
+
+Correction dans les règles CSS existantes : colonne de carte réductible,
+nom sur deux lignes au maximum, statut conservé et retours à la ligne des
+métadonnées. Les chaînes sans espaces se replient aussi. Le nom complet reste
+dans le DOM et s’affiche dans le dossier ; navigation et sélection au clavier
+sont conservées. Aucune couche CSS supplémentaire ne masque la cause.
+
+`node tests/browser/onboard-dossier-ux.cjs` enrichi d’une file de 16 dossiers
+avec nom long, caractères échappés, commune et référence sans espaces : échec
+avant correction pour débordement réel de la liste à 320 px. Après correction,
+**24 scénarios réussis** à 320/1280 px, texte 100/200 %, sans débordement de la
+file ni des statuts. Accès aux dernières lignes et ouverture du bon dossier
+au clavier vérifiés sans écriture. Les scénarios existants couvrent aussi les
+périmètres, confirmations, conflits, lecture seule et Axe sur le détail.
+Captures locales dans `localeo-backend/tmp/onboard-dossier-ux/` ; contrôle visuel
+du rendu des noms longs et des statuts. Les données et appels API sont simulés.
+
+Périmètre : CSS de la PWA OnBoard hébergée par le backend, recette navigateur
+et ce bilan canonique. Les travaux E72 déjà présents restent distincts et
+préservés. Aucun changement de règle métier, contrat API, permission, donnée,
+migration, configuration, générateur ou application voisine n’est nécessaire.
+Correctif local, sans commit, push ni déploiement.
+
+Contrôles complémentaires : `node tests/frontend/test_onboard_pagination.mjs`
+réussi (**2 tests**, filtres/pages et réponses obsolètes), `check_guidance.py`
+réussi (94 guides, 1 054 liens), `check_guidance.py --changed --all-markdown`
+réussi (8 documents, 110 liens) et `git diff --check` sans erreur.

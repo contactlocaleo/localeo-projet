@@ -12,6 +12,12 @@ les écarts CA-04/33 et les scénarios intégrés manquants ; aucune clôture pr
 Les preuves manquantes et les contrôles rejoués figurent dans le
 [bilan E70](../specifications/epic-70-validation-pin/verification-livraison.md).
 
+Revue de clôture E72 du **1er novembre 2026** : **En cours** conservé, avec les
+22 critères. Le [bilan E72](../specifications/epic-72-acces-salaries/verification-livraison.md)
+distingue les preuves locales, le correctif de nettoyage de session et les
+réserves d’acceptation (audit, preuves et recette pilote), ainsi que la dette de
+lecture bornée ; aucun compteur modifié.
+
 Classement consolidé le 18 septembre 2026, complété le 22 octobre par les EPIC 74 et 75. Les backlogs des applications sont
 réunis dans les dossiers d'état, avec un seul fichier par EPIC. Le suivi inclut
 les 75 identifiants du tronc commun et trois identifiants applicatifs distincts.

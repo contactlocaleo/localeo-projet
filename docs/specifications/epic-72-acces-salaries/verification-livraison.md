@@ -1,6 +1,6 @@
 # E72 — Vérification et livraison
 
-Ce document conserve la matrice de conception du 5 octobre et le bilan local des 7–8 octobre ci-dessous. Aucun déploiement ni envoi email réel n’a été effectué. Références : [parcours](README.md), [architecture et contrats](architecture-contrats.md), [backlog](../../roadmap/en-cours/epic-72-acces-salaries-validation-localeo-pro-backlog.md).
+Ce document conserve les bilans historiques et la revue de clôture du 1er novembre ci-dessous. La migration TEST du 8 octobre est attestée dans sa section ; elle ne prouve pas la recette fonctionnelle. Aucun déploiement, envoi réel ou changement de configuration distante n’est effectué pendant cette revue. Références : [parcours](README.md), [architecture et contrats](architecture-contrats.md), [backlog](../../roadmap/en-cours/epic-72-acces-salaries-validation-localeo-pro-backlog.md).
 
 ## Correctif UX salariée — 9 octobre 2026
 
@@ -473,3 +473,190 @@ Inspection visuelle à 320/390 pixels : actions lisibles, états cohérents entr
 résumé et prestation. Vérifications documentaires et `git diff --check` réussis.
 La recette sur téléphone physique et la vérification d’un déploiement restent
 non exécutées ; les scénarios locaux utilisent Chromium et des réponses simulées.
+
+## Revue de clôture — 1er novembre 2026
+
+**Verdict : clôture bloquée ; E72 reste En cours, avec ses 22 critères et son
+backlog au même emplacement.** Les réserves ne sont pas levées par les bilans
+locaux antérieurs. En particulier, le refus générique perd des attributs d’audit
+exigés par CA-15. Plusieurs variantes intégrées restent à prouver. La pagination
+après chargement complet est une dette technique préexistante, sans nouveau
+critère de clôture ajouté par cette revue. La recette pilote
+demandée dans le backlog et le bilan de mise en service n’est pas attestée.
+La présente revue ne réduit aucun critère pour permettre une clôture.
+
+### Révisions et périmètre de la revue
+
+Bases Git examinées : documentation `f0b735e`, backend/ERP `4f0cfdc`,
+Localeo Pro `23c754a`, Marketplace `6c1aaac`, Animation `04dc06c`.
+Les modifications locales de cette revue concernent la documentation, trois
+fichiers Pro et la fixture PostgreSQL Animation E72. Marketplace et Animation
+restent inchangés. Python 3.14.3, PostgreSQL 18 jetable et Chromium local ;
+aucune base métier, invitation réelle ou configuration distante utilisée.
+Les comptes et secrets des tests sont synthétiques.
+
+Deux revues indépendantes du backend/contrats/exploitation et une revue Pro/ERP
+rapprochent les exigences des producteurs et consommateurs. Elles distinguent
+les défauts de code des assertions absentes. Une absence de preuve ci-dessous
+ne signifie pas qu’un contournement a été reproduit.
+
+### Preuves de cette revue
+
+Les identifiants suivants sont locaux à ce bilan ; les commandes partent du
+dépôt indiqué. Les sorties temporaires ne sont pas des livrables versionnés.
+
+| Référence | Commande ou contrôle | Résultat et portée |
+| --- | --- | --- |
+| P1 — backend isolé | `python scripts/validation/test_isolated.py tests/domain/identite_acces/test_acces_salaries_dedicated.py tests/domain/identite_acces/test_conservation_salaries.py tests/application/identite_acces/test_option_salaries_indisponible.py tests/api/test_salaries_e72.py tests/api/test_historique_salarie_e72.py tests/infrastructure/test_segments_audit_salaries.py tests/unit/test_salaries_email_configuration.py tests/unit/test_demonstration_salaries.py -q --tb=short --basetemp=.artifacts/pytest-e72-closure-isolated` | **44 réussites**, aucun skip. Domaine, option ERP, projections minimales, email et démonstration unitaire. |
+| P2 — PostgreSQL jetable | `python scripts/validation/test_isolated.py tests/security/test_iam_salaries_e72.py tests/security/test_animation_salaries_e72.py tests/security/test_conservation_salaries_postgres.py tests/security/test_migration_salaries_bootstrap_e72.py -q --tb=short --postgres-test-url postgresql+psycopg://audit_test@127.0.0.1:16462/localeo_audit_test --basetemp=.artifacts/pytest-e72-closure-postgres` | Premier passage : **24 réussites, 1 échec**, aucun skip. Fixture historique Animation non alignée sur la v280. Après correction : **25 réussites**, aucun skip, en 148,77 s ; 36 avertissements SQLAlchemy/dates conservés. |
+| P3 — Pro unitaire | `npm test -- src/features/employees src/app/useMerchantSession.test.jsx src/app/merchantNavigation.test.js src/features/session/api.test.js src/features/session/passwordResetReturn.test.js src/lib/api/contracts.test.js` | Premier passage : 95 réussites et 2 échecs de test historique Lot. Après correction du montage et du nettoyage : **98 réussites dans 10 fichiers**, aucun skip. Les 8 tests du hook repassent après renforcement final de l’assertion de conservation pendant une session valide. |
+| P4 — Pro navigateur | `npm run test:e2e -- tests/e2e/employees.spec.js tests/e2e/validation-history.spec.js --workers=1 --output=tmp/e72-closure-pro` | **16 réussites**, aucun skip, avant correction du nettoyage local : 7 salariés et 9 historique. API et caméra simulées ; formats 320/390/1280 px selon scénario. |
+| P5 — Pro après nettoyage | `npm run test:e2e -- tests/e2e/employees.spec.js --workers=1 --output=tmp/e72-closure-pro-after-cleanup` | **7 réussites**, aucun skip ; renouvellement des scénarios salariés affectés, sans les additionner comme de nouveaux scénarios à P4. |
+| P6 — ERP navigateur | `node tests/browser/acces-commercant-erp.cjs` dans le backend | Réussi à **390/1280 px** : commandes, confirmation, conflit, verrouillage et refus de rôle. Échanges simulés ; pas d’activation réelle. |
+| R1 — preuve réutilisée | `tests/security/test_validations_salaries_e72.py`, 10 scénarios PostgreSQL dans la vérification E70 du 1er novembre, antérieure à cette revue | Attribution Coffret, effet unique, reçu gagné par PIN, deux ordres révocation/validation, droits courants, refus de gestion PIN, périmètre historique et archives. Fichier et code correspondant inchangés sur la base backend examinée ; **non réexécutés** ici. |
+| R2 — architecture réutilisée | 623 contrôles d’architecture réussis dans la vérification E70 du 1er novembre | Sources applicatives Python inchangées depuis ce contrôle ; seule une fixture est ajustée ici. **Non réexécutés** pour cette revue. |
+| R3 — démonstration/migration historiques | Sections « Démonstration — résultat final » et « Migration de la base de test » ci-dessus | Le générateur complet avait donné 6 réussites/1 échec, puis le scénario corrigé 1 réussite ; pas de second runner complet revendiqué. Migration TEST du 8 octobre attestée ; aucune migration distante réexécutée aujourd’hui. P1/P2 renouvellent seulement leurs sous-ensembles ciblés. |
+
+Les avertissements de compilation navigateur sur un module importé à la fois
+statiquement et dynamiquement restent visibles. Ils ne sont pas des skips.
+La caméra et les échanges réseau simulés ne prouvent pas un usage sur téléphone
+physique, un lecteur d’écran ou la disponibilité d’un service hébergé.
+
+### Matrice des 22 critères réexaminés
+
+Les sources fonctionnelles restent le [backlog](../../roadmap/en-cours/epic-72-acces-salaries-validation-localeo-pro-backlog.md),
+le [parcours](README.md), les [contrats](architecture-contrats.md) et le
+[guide salarié/ERP/ops](guide-utilisation-exploitation.md). La colonne documentaire
+désigne la section du guide qui porte le comportement attendu ; elle ne constitue
+pas une preuve d’exécution.
+
+| Critère | Propriétaire et comportement examiné | Preuve exécutée ou réutilisée | Documentation / exploitation | Verdict et action restante |
+| --- | --- | --- | --- | --- |
+| E72-CA-01 | `GestionSalaries.inviter`, commerce et acteur dérivés du principal ; schéma strict d’invitation | P1 email contextualisé ; P2 invitation idempotente/collision | Responsable ; ERP | **Partiel** : prouver par les routes l’injection commerce/rôle et un principal d’un autre commerce. |
+| E72-CA-02 | Acceptation atomique du lien, hash du mot de passe, session individuelle | P2 résolution/acceptation puis connexion et mauvais mot de passe ; P4 lien fragment nettoyé | Salarié | **Partiel** : assertion explicite de refus de connexion avant acceptation manquante. |
+| E72-CA-03 | `verifier_lien_salarie` et verrouillage de l’acceptation | P1 borne d’expiration ; P2 une seule acceptation concurrente et refus du rejeu | Responsable ; Salarié | **Partiel** : cas intégrés de l’invitation 24 h avant/à/après échéance et après annulation à compléter. |
+| E72-CA-04 | `agir` / `_emettre`, annulation des anciens liens et charge de remise chiffrée | P2 worker, concurrence, configuration invalide et envoi incertain | Responsable ; Préparer une ouverture | **Partiel** : renvoi réussi puis ancien lien refusé, annulation puis refus acceptation/remise, répétition de clé de renvoi. |
+| E72-CA-05 | Registre de login Pro normalisé et contrainte globale | P2 collision, idempotence, changement de login principal, rollback et suppression | Responsable | **Partiel** : compléter collisions concurrentes entre types et responsable d’un autre commerce. |
+| E72-CA-06 | Capacités fermées côté serveur et navigation Pro réduite au scanner/historique | P1 opération inconnue/finance refusées ; P3/P4/P5 navigation, URLs interdites et scanner initial | Salarié | **Vérifié localement** pour le parcours et les capacités prévus. |
+| E72-CA-07 | Cœur Coffret existant, identité salariée et session courante | R1 attribution, reçu, transaction et validation uniques ; P3/P4 confirmation explicite/reprise | Salarié | **Vérifié localement**, avec R1 réutilisée explicitement. |
+| E72-CA-08 | `ServiceValidationsAnimation`, auteur et règles du moteur commun | P2 attribution, reçu, option retirée, salarié révoqué, concurrence principal/salarié | Salarié | **Partiel** : compléter toute la matrice calendrier/participation/éligibilité et confirmation Animation dans Pro, notamment résultat ANOMALIE et reprise. Le scénario navigateur actuel résout le QR sans confirmer. |
+| E72-CA-09 | Vérificateur de session et capacités serveur, périmètre du commerce | P1 refus fermés ; P2/P3/P4 et R1 isolation ciblée | Salarié ; ERP | **Partiel** : matrice HTTP exhaustive des routes interdites et identifiants d’un autre commerce, sans effet métier. Aucun contournement constaté dans les cas testés. |
+| E72-CA-10 | Contrôles du cœur Coffret/Animation et droits revérifiés avant effet | P2 salarié révoqué sans progression ; R1 droits retirés avant confirmation/reçu | Salarié | **Partiel** : relier ou compléter QR invalide/expiré/consommé et commerce suspendu pour les deux parcours salariés. |
+| E72-CA-11 | Idempotence et verrous métier communs | P2 concurrence principal/salarié Animation, effet unique ; R1 reçu gagné par PIN ; P4 timeout/relecture Coffret | Salarié | **Partiel** : deux salariés concurrents Coffret et course réelle salarié/PIN à prouver ; une relecture après PIN ne prouve pas cette course. |
+| E72-CA-12 | Verrous session/compte et révocation avant confirmation | R1 deux ordres concurrents Coffret ; P2 révocation Animation avant effet | Responsable ; Salarié | **Partiel** : ordre concurrent démontré sur Coffret, pas la course Animation complète. Validations antérieures préservées dans les cas contrôlés. |
+| E72-CA-13 | Opérations salariées fermées et gestion réservée au principal | R1 refus directs état/création/révocation PIN ; P3/P4 navigation interdite | Responsable ; Salarié | **Partiel** : compléter par API les commandes invitation/rôle/configuration et lecture PIN dans la matrice CA-09. |
+| E72-CA-14 | Projection historique minimale, tenant serveur, bornes et archives | P1 DTO exact/no-store ; P2 limite d’usage courant Animation ; R1 autre commerce/archives ; P3/P4 curseurs, filtres et présentation | Salarié ; contrats ancien historique et flux | **Vérifié localement** sur les cas reliés. Aucun export, montant, client nominatif ou secret ajouté. |
+| E72-CA-15 | Audit des opérations nominales et refus | P1 segments/conservation ; P2 succès nominaux ; inspection de `handle_acces_salarie` dans `app/main.py` | ERP ; Conservation et reprise | **Non satisfait** : le refus générique écrit `acteur="requete"`, sans commerce ni cible, même pour certains refus contextualisables. Corriger la capture du contexte vérifié et prouver sa persistance après rollback, sans secret. |
+| E72-CA-16 | Reset salarié, génération de sécurité et purge locale à fermeture de session | P1 borne 1 h ; P2 reset sous option suspendue sans réactivation ; P3/P5 nettoyage local corrigé | Salarié | **Partiel** : reset actif avec session ouverte, expiration/rejeu intégrés, isolation entre deux salariés et formulaire public demande/reset Pro manquent. La purge du contexte Lot est corrigée, pas ces autres variantes. |
+| E72-CA-17 | Migrations 258/259, registre et sessions du principal | P2 migration/bootstrap/collision, session principale conservée ; R3 test historique | Préparer une ouverture | **Partiel** : relier une preuve complète récupération principal E68 après migration ; ne pas déduire cette couverture du seul login/refresh. |
+| E72-CA-18 | Scanner mobile, caméra refusée, réseau interrompu et reçu | P3/P4/P5 caméra simulée, 320/390/1280 px, absence de succès implicite et de reprise hors ligne | Salarié | **Partiel** pour l’acceptation finale : preuves locales disponibles ; recette pilote explicitement demandée dans le backlog non attestée. Aucun appareil physique ou lecteur d’écran annoncé comme testé. |
+| E72-CA-19 | Option ERP par défaut inactive, commandes réservées Admin/Backoffice | P1 schéma strict/CSRF/refus ; P6 Admin et rôle refusé ; P2 défaut inactif | ERP ; Activation ERP indisponible | **Partiel** : compléter la matrice API Admin/Backoffice/Lecteur/Finance et rôles combinés ; CA-15 empêche aussi l’acceptation de l’audit des refus. |
+| E72-CA-20 | Absence de quota métier | P2 six invitations sans plafond puis acceptation concurrente d’une autre ; R3 six actifs générés | Responsable | **Partiel** : le test IAM ne prouve pas cinq actifs puis activation effective du sixième et connexions distinctes. La génération de six lignes actives ne remplace pas ce parcours API. Dette de lecture bornée distinguée ci-dessous. |
+| E72-CA-21 | Désactivation sous verrous, epoch et annulation des liens, principal préservé | P2 anciennes sessions refusées ; R1 confirmation après retrait refusée | ERP | **Partiel** : annulation des invitations en attente/préservation du principal et courses désactivation avec invitation, acceptation et validation à compléter. |
+| E72-CA-22 | Réactivation sans résurrection d’une ancienne session ou d’un révoqué | P1 compte révoqué toujours refusé ; P2 ancienne session refusée après réactivation | ERP | **Partiel** : cycle complet nouvelle connexion active, révoqué refusé, ancien lien annulé refusé et nouvelle invitation utilisable. |
+
+### Anomalies et corrections de cette revue
+
+- **E72-CLOT-20261101-AUDIT** — réserve CA-15/19 : l’orchestration nominale
+  renseigne acteur/commerce/cible ; le handler générique `AccesSalarieRefuse`
+  ne les reprend pas. La correction devra préserver un contexte vérifié y
+  compris lorsque la vérification refuse l’accès, sans faire confiance aux
+  identifiants fournis librement. Ajouter une preuve persistée de refus après
+  rollback, avec corrélation et absence de jeton/mot de passe/QR. **Non corrigé** :
+  correction d’audit transverse à traiter avant clôture, sans réécrire CA-15.
+- **E72-CLOT-20261101-LISTE** — dette technique préexistante au regard de la
+  [convention performance](../../architecture/transverse/performance-volumetrie.md) :
+  `GestionSalaries.lister` appelle `RepositorySalaries.comptes().all()` puis
+  découpe la liste en Python. Pour chaque compte affiché, toutes les invitations
+  sont également chargées. La page HTTP bornée ne prouve donc pas une lecture
+  SQL bornée ; l’absence de quota accroît ce risque. Ce chemin n’est pas modifié
+  par cette revue ; la convention du 18 octobre vise les nouvelles évolutions
+  et les chemins qu’elles modifient. Cette dette ne constitue donc pas, à elle
+  seule, un blocage supplémentaire de clôture. **Non corrigé** : lors d’une
+  prochaine évolution de ce chemin, déplacer
+  pagination et décompte en base, récupérer les dernières invitations en lot,
+  puis prouver la borne de lectures/requêtes sur un volume représentatif.
+  Aucun ralentissement distant ni incident de production n’est inventé.
+- **E72-CLOT-20261101-SESSION** — partie technique de CA-16 **corrigée localement** :
+  `clearStoredMerchantSession` retire désormais aussi
+  `localeo-bon-lot-recovery`. Ce stockage ne contenait ni Bearer ni secret QR,
+  et son propriétaire était déjà contrôlé ; il restait néanmoins présent après
+  déconnexion/expiration. Reproduction ciblée avant correction : 5 échecs et
+  3 réussites du hook ; après correction : 8 réussites. Les tests conservent
+  les préférences et stockages étrangers et la reprise pendant une session valide.
+- **Fixtures de preuve corrigées** : le test `BonLotHistory` monte le routeur
+  requis par la page actuelle et vérifie séparément type, mode et statut de chaque
+  ligne, sans confondre une remise annulée avec un lot remis. La fixture
+  `salarie_animation` installe la section Animation de la vraie v280 avec
+  `installer_projection`, comme les tests du flux E73. Ni assertion métier,
+  résultat attendu, skip ou migration de production modifié.
+
+### Contrats, documentation et publication locale
+
+Les 13 chemins E72 et les schémas transitifs des contrats documentaires E41
+et embarqués Pro sont comparés statiquement : pas de divergence sémantique
+relevée. La différence de nom de référence `PageValidations` est liée à la
+collision de noms des schémas générés. P3 exécute les assertions du consommateur ;
+aucune régénération des contrats n’est nécessaire à cette revue.
+
+Le contrat courant du flux `/validations-flux` est ajouté à la documentation
+d’architecture en conservant l’ancien `/validations`, encore servi. Les
+paragraphes de conservation reflètent les traitements effectivement présents.
+Le guide backoffice et sa référence ops relient la notice E72, désormais exportée
+sous **`docs/ops/formation/acces-salaries.md`**. Cela corrige sa disponibilité
+dans un bundle sans créer une notice concurrente.
+
+Bundle local préparé avec
+`python scripts/sync_documentation.py --output ../localeo-backend/tmp/e72-cloture-20261101-docs` :
+**132 exports**. Le contrôle backend
+`python scripts/documentation/check_documentation_snapshot.py --manifest tmp/e72-cloture-20261101-docs/documentation.snapshot.json --source ../localeo-projet`
+vérifie **133 entrées distribuées**, manifeste compris, et leurs sources.
+Un appel au lecteur réel `resolve_ops_document('formation/acces-salaries.md')`
+confirme l’alias, le contenu et le lien relatif depuis le guide backoffice.
+Ce bundle ignoré par Git n’est ni sélectionné sur un serveur ni publié dans l’ERP.
+
+### Configuration et mise en service à préparer
+
+Aucune variable, permission, migration, règle métier ou donnée de démonstration
+n’est modifiée par le nettoyage Pro et la correction de fixture. Les exigences
+existantes suivantes restent nécessaires à la livraison ; leurs valeurs distantes
+et leur ordonnancement ne sont pas vérifiés pendant cette revue.
+
+| Composant / cible | Action | Valeur attendue ou défaut | Source / contrôle |
+| --- | --- | --- | --- |
+| Backend / cible autorisée | Vérifier l’historique du runner avant migration | v258 puis v259 après E70 ; migrations ultérieures requises par la version déployée, dont v280 pour le flux courant | `sql/v258_acces_salaries.sql`, `sql/v259_conservation_salaries.sql`, `sql/v280_historique_validations_cibles.sql` ; aucune collision de login ni migration requise manquante. La migration TEST du 8 octobre reste une preuve historique. |
+| API et worker email | Configurer l’ouverture technique | `LOCALEO_PRO_ACCESS_SALARIES_ENABLED=false` par défaut ; passage à `true` seulement pour l’ouverture décidée | `app/config.py` ; le flag ne crée ni n’active aucun commerce. |
+| API et worker email | Provisionner le même trousseau privé et la clé active hors Git | `LOCALEO_PRO_ACCESS_SALARIES_INVITATION_ENCRYPTION_KEYS_JSON` et `LOCALEO_PRO_ACCESS_SALARIES_INVITATION_ENCRYPTION_ACTIVE_KEY` ; aucun secret dans ce bilan | Conserver les anciennes clés nécessaires aux charges en attente ; vérifier composition/remise et effacement de la charge sans exposer le lien. |
+| API / Pro | Vérifier l’origine HTTPS des liens et les routes directes | `LOCALEO_FRONT_COMMERCANT_PASSWORD_INIT_URL_TEMPLATE`, origine Pro de la cible ; test attendu selon le guide : `https://test-commercant.localeo.city` | Invitation et récupération salariées en fragment ; routes directes et rechargement, connexion puis scanner. Aucun en-tête de compatibilité à réintroduire. |
+| Traitement email | Vérifier le worker salarié composé par le batch existant | Configuration fournisseur existante, fréquence et supervision cible à attester | État de remise lisible ; pas de rejeu automatique d’une remise fournisseur incertaine. |
+| Conservation / audit | Configurer cible explicite, stockage partagé et ordonnancement surveillé | `LOCALEO_CONSERVATION_DATABASE_URL`, `LOCALEO_AUDIT_EXTERNAL_JSONL_PATH` ; valeurs privées non publiées, fréquence cible à renseigner | `scripts/database/conserver_acces_salaries.py --limit 100` simule par défaut ; `--apply` sur cible autorisée seulement ; rapport et segments persistants. |
+| Documentation / ERP | Publier un bundle depuis le futur commit documentaire et sélectionner cette révision | Alias `formation/acces-salaries.md` et empreintes cohérentes | Régénérer le bundle après commit ; contrôle snapshot puis ouverture de la notice dans l’ERP déployé. Le bundle local ne remplace pas cette étape. |
+| ERP / commerce pilote | Activer explicitement l’option avec un rôle autorisé après résolution des réserves d’acceptation | Inactive par défaut ; Admin ou Backoffice | Recette invitation, connexion salariée, scan Coffret/Animation, reçu après interruption, historique, reset, révocation, désactivation/réactivation, et principal inchangé. |
+
+Ordre : résoudre les réserves d’acceptation et renouveler leurs preuves, préparer le backend
+et les migrations de la version retenue, publier/sélectionner le bundle
+documentaire, livrer backend/worker puis Pro, vérifier la santé et les liens,
+puis effectuer l’activation explicite et la recette pilote autorisée.
+En reprise, désactiver l’option et les sessions avant de retirer un backend
+connaissant ces identités ; préserver les tables, preuves et attributions.
+Après restauration, réappliquer les retraits dus avant retour au trafic.
+Aucun rollback destructif ou restauration non éprouvée n’est promis.
+
+### Lots de commit préparés, sans indexation ni publication
+
+| Dépôt | Fichiers de la revue | Message proposé |
+| --- | --- | --- |
+| `localeo-commercant` | `src/app/useMerchantSession.js`, son test et `src/features/employees/BonLotHistory.test.jsx` ; preuves P3/P5 | `fix(pro): nettoyer les reprises privees a la fermeture de session` |
+| `localeo-backend` | `tests/security/test_animation_salaries_e72.py` ; fixture seule, preuve P2 | `test(e72): aligner la fixture historique Animation sur le flux courant` |
+| `localeo-projet` | Index roadmap, backlog et trois documents de spécification E72, deux guides backoffice, `documentation.exports.json` ; contrôles documentaires et lecteur | `docs(e72): consigner la revue de cloture et publier la notice salaries` |
+
+Les trois lots sont un **bilan/correctif**, pas une clôture. Aucun déplacement
+de backlog, changement de compteur d’état, commit, push ou déploiement réalisé.
+Les critères métier et contrats applicatifs restent inchangés. Les sorties de
+travail et le bundle demeurent hors des commits.
+
+Contrôles documentaires de cette revue : `python scripts/check_guidance.py`
+réussi (94 guides, 1 054 liens), `python scripts/check_guidance.py --changed --all-markdown`
+réussi (7 documents, 102 liens), `python scripts/sync_documentation.py --check-sources`
+réussi (132 exports), et `git diff --check` réussi dans les trois dépôts modifiés.
+Les preuves P1/P2/P3/P4/P5/P6 sont locales et n’attestent pas la recette pilote.

@@ -3690,3 +3690,80 @@ Les règles de domaine restent couvertes par le lot précédent, sans nouvelle
 exécution complète de sa suite pour ce correctif visuel. Aucun service réel,
 email, commit, push ou déploiement ; vérification hébergée, PWA installée et
 lecteur d’écran manuel non exécutés.
+
+## Menus Pro adaptés à Animation seule — 1er novembre 2026
+
+**E73-PRO-MENUS-ANIMATION-20261101**, correctif E73-CA-19. Bases backend
+`4f0cfdc`, Pro `23c754a`, projet `f0b735e`, avec les travaux locaux précédents
+préservés. Cause reproduite : `PerimetresCommercant.capacites` ouvrait les deux
+produits avant la bascule communale, y compris après une qualification explicite
+Animation seule. Pro filtrait déjà ses menus et ses liens directs par ces
+capacités ; un correctif uniquement visuel aurait conservé une projection fausse.
+
+Le domaine distingue maintenant la projection Pro des gardes d’autorisation.
+`projection_pro_dans_uow`, utilisée par la connexion et la validation de session,
+demande les capacités de présentation : produits actifs pour un commerce revu,
+préparation et continuité conservées. Un commerce non revu en zone non basculée
+garde sa présentation historique. Une simple demande `A_PREPARER` n’affiche pas
+les fonctions opérationnelles d’un produit actif. Aucun choix ou activation de
+produit n’est calculé dans le navigateur.
+
+Animation seule ne présente plus Prestations, Reversements, Facturation, le
+tableau de bord financier ou Mon contrat. Scanner, Animations, fiche publique,
+compte, historique, notifications et aide restent soumis aux capacités courantes.
+Le PIN Animation et les accès salariés restent disponibles lorsqu’ils sont
+autorisés. Les deux produits actifs conservent leurs rubriques ; une ancienne
+activité Coffrets retirée garde les consultations et engagements protégés
+prévus. Les routes Coffrets absentes des capacités sont refusées dans Pro avant
+chargement des données financières.
+
+La revue indépendante a détecté que `capacites` servait aussi de garde PIN et
+de filtre des notifications générales. Le paramètre `projection_pro=False`
+conserve exactement leur comportement précédent ; seul le producteur de session
+demande `True`. Un cas de régression vérifie la revue sans aucun produit encore
+actif : préparation seule dans Pro, autorisation PIN et notifications historiques
+conservées avant bascule. Ni `autoriser`, ni `filtre_lecture`, ni les décisions
+de bascule ne changent. La revue finale ne relève pas de défaut concret restant.
+
+Preuves locales exécutées, sans skip :
+
+- Reproduction initiale : **5 échecs et 14 réussites**, domaine et projection
+  de session ; échecs sur l’exposition Coffrets avant bascule, pas sur une
+  indisponibilité d’environnement.
+- Backend : **653 tests réussis**, dont 623 contrôles d’architecture/couverture,
+  26 tests domaine/projection et 4 tests API. Commande :
+  `python scripts/validation/test_isolated.py tests/architecture tests/domain/test_domain_dedicated_classes.py tests/application/use_cases/test_use_case_business_test_coverage.py tests/domain/referencement/test_perimetres_commercant_dedicated.py tests/application/referencement/test_projection_pro_perimetres.py tests/api/test_perimetres_commercants_api.py -q --tb=short --basetemp=.artifacts/pytest-pro-animation-navigation-final`.
+  Matrice Animation/Coffrets/mixte, avant/après bascule, principal/salarié,
+  préparation additive, non-revu et retrait avec continuité. Aucun PostgreSQL
+  ni fournisseur réel requis par cette correction de calcul/projection.
+- Pro : **37 tests Vitest réussis** :
+  `npm test -- src/app/merchantNavigation.test.js src/features/perimetres src/app/MobileNavigation.test.jsx src/app/MerchantSessionHeader.test.jsx src/features/session/api.test.js`.
+- Pro navigateur : **18 scénarios réussis**,
+  `npm run test:e2e -- tests/e2e/perimetres.spec.js --workers=1 --output=tmp/pro-animation-navigation`.
+  Animation seule avant/après bascule à 320/1280 px, menus desktop/mobile,
+  compte sans contrat, PIN disponible, refus des liens directs sans appel
+  financier, préparation additive, mixte, salarié, erreur de vérification et
+  continuité financière. API/caméra simulées ; captures des deux formats
+  contrôlées dans `localeo-commercant/tmp/e73-animation-*-false.png`.
+  Le build navigateur est isolé des fichiers `.env` opérateur ; l’avertissement
+  d’import statique/dynamique de l’historique reste visible, sans empêcher le test.
+
+Impacts : backend (règle de projection et orchestration), tests Pro et
+documentation canonique. Le code de présentation Pro consomme déjà correctement
+les décisions serveur. La structure des DTO et contrats OpenAPI reste identique ;
+seule la présence des codes de capacités est corrigée. Pas de nouvelle migration,
+permission, variable ou changement de données. Le générateur prépare des racines
+non revues et ne sérialise pas ces capacités : aucun changement nécessaire,
+ni génération complète revendiquée. Marketplace et portail organisateur
+Animation ne consomment pas cette projection commerçante.
+
+Livraison : déployer le backend corrigé ; après rechargement ou navigation,
+la revalidation de session actualise les menus sans imposer de nouvelle connexion
+ni de bascule communale. Vérifier sur la cible le périmètre explicitement revu,
+les menus et les liens directs. Aucune réparation distante, migration, invitation,
+activation, commit, push ou déploiement effectué pendant ce correctif.
+
+Contrôles documentaires réussis : `check_guidance.py` (94 guides, 1 054 liens),
+`check_guidance.py --changed --all-markdown` (10 documents, 179 liens),
+`sync_documentation.py --check-sources` (132 sources) et `git diff --check`
+dans les trois dépôts concernés. Aucun état d’epic ni compteur de roadmap modifié.

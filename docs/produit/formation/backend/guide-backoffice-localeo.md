@@ -51,6 +51,24 @@ compromis et vérifier le refus de l’ancien code. Ni cette invalidation ni la
 fermeture du canal ne remboursent ou n’annulent une validation acquise. Le QR
 reste soumis à ses droits habituels. Voir la [notice complète E70](../../../specifications/epic-70-validation-pin/guide-utilisation-exploitation.md).
 
+## Accès salariés — E72
+
+La disponibilité dépend de l’ouverture technique de l’environnement et de
+l’option de chaque commerce. Dans la fiche commerçant, **Accès**, Localeo active
+ou désactive l’option salariés avec ses droits habituels. Admin et Backoffice
+habilités peuvent la gérer ; Lecteur et Finance seuls ne le peuvent pas.
+Une ouverture technique fermée refuse l’activation sans déconnecter l’opérateur.
+
+Le responsable invite ensuite le salarié depuis Pro. Celui-ci choisit son
+mot de passe personnel et dispose du scanner et de l’historique autorisé,
+sans fonctions de gestion. Désactiver l’option annule les invitations en attente
+et invalide les sessions salariées, en conservant comptes et historique. Après
+réactivation, une nouvelle connexion est nécessaire ; les accès révoqués
+individuellement restent refusés. Ne pas partager de mot de passe ou de lien.
+Consulter la [notice salariés](../../../specifications/epic-72-acces-salaries/guide-utilisation-exploitation.md)
+pour le renvoi, la récupération et les incidents ; la publication de cette notice
+ne vaut pas recette de l’option sur un commerce réel.
+
 ## Souscriptions et modules — évolution E73
 
 Fonctions en cours de réalisation locale ; leur présence ici ne vaut pas livraison sur un environnement. Depuis **Animation → Gestion des souscriptions**, ouvrir une souscription activée puis **Gérer les modules**. L’écran distingue le forfait acquis, ses dates, les quotas consommés et chaque droit inclus, acheté, offert ou en essai. Les droits de la commune concernée restent séparés de ceux des autres communes du partenaire.

@@ -142,6 +142,16 @@ La réponse de contexte expose des `capabilities` avec `mode` (`NORMAL`, `CONTIN
 | Coffrets retiré | Prestations antérieurement engagées dans des coffrets vendus honorables selon validité ; règlements consultables par les rôles habilités. Aucun nouveau référencement de prestation/engagement commercial. |
 | Suspension/révocation personnelle | Continuité refusée ; pas de droit implicite pour le salarié ni de contournement par PIN. |
 
+Précision du correctif **E73-PRO-MENUS-ANIMATION-20261101** : dès qu’un commerce
+est explicitement revu (`revue=VALIDEE`), la projection des menus Pro utilise ses
+produits actifs, sa préparation et sa continuité, même avant la bascule de sa
+commune. Le repli de présentation Animation+Coffrets reste réservé aux commerces
+non revus dans une commune non basculée. Le navigateur continue de présenter
+les capacités du serveur, sans les déduire des scopes techniques ni d’un nom de
+produit local. Cette projection ne bascule aucune commune et ne modifie pas les
+autorisations historiques d’admission, de création PIN ou de lecture des
+notifications. Après livraison, la revalidation de session actualise les menus.
+
 Un commerce Animation peut participer à une animation dotée de Coffrets sans fournir lui-même de prestation Coffrets. Au scan, le serveur renvoie la nature, le commerce autorisé, l’état et l’action disponible ; le refus est expliqué sans laisser un bouton de validation actif. Les confirmations de remise/consommation restent celles du dossier [lots](dotation-lots.md). Une erreur réseau garde le résultat incertain jusqu’à relecture ; une couleur ou un toast n’est pas une preuve de validation.
 
 ### 3.4 ERP, Support, CRM et Atelier — US24
