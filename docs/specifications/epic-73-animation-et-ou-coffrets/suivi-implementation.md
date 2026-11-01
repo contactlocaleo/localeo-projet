@@ -3767,3 +3767,153 @@ Contrôles documentaires réussis : `check_guidance.py` (94 guides, 1 054 liens)
 `check_guidance.py --changed --all-markdown` (10 documents, 179 liens),
 `sync_documentation.py --check-sources` (132 sources) et `git diff --check`
 dans les trois dépôts concernés. Aucun état d’epic ni compteur de roadmap modifié.
+
+## Guide Assistant et publication des chasses — 1er novembre 2026
+
+**E73-UX-GUIDE-PUBLICATION**, correction du parcours organisateur, en priorité
+Chasse au trésor. Bases Animation `04dc06c` et projet `a1f8201`, puis modifications
+locales. La présentation cumulait la barre Action suivante, les alertes avec
+leurs propres boutons, les tâches, deux navigations de préparation et les actions
+de formulaire. Les états backend étaient préservés mais leur hiérarchie rendait
+la prochaine action difficile à identifier.
+
+L’Assistant affiche maintenant une étape développée avec sa consigne, son
+intervenant et un seul appel principal provenant du serveur. Les autres étapes,
+les éléments acquis, l’aide et le support restent accessibles à la demande.
+Le premier point d’attention est visible, les suivants sont repliés ; leurs
+messages complets et leurs contextes restent disponibles. Un diagnostic partagé
+ne supprime plus la prochaine action. Les animations sorties de préparation
+ouvrent leur suivi, sans revenir au formulaire de publication.
+
+La Configuration Chasse conserve un guide **Parcours → Organisation et lots →
+Commerces → Terrain → Publication**, avec état courant et validations serveur.
+Sur ordinateur les étapes sont regroupées dans un rail ; sur mobile elles
+restent compactes, nommées pour les technologies d’assistance, sans défilement
+horizontal. Une seule étape occupe la zone de travail. Les contrôles détaillés,
+options de continuité et nouvelle génération d’un parcours existant se déplient
+au besoin ; la validation du parcours reste l’action principale.
+
+Organisation et lots propose quatre écrans successifs. Les rubriques ne forment
+plus une seconde barre permanente. Présentation et Calendrier permettent de
+continuer sans écriture ; le Règlement demande l’enregistrement complet des
+paramètres avant les Lots. Les réglages facultatifs sont secondaires. Une
+confirmation serveur ou la relecture du reçu permet la continuation ; un timeout
+ne devient jamais un succès. La dotation conserve sa commande distincte. Le
+raccourci Commerces reste absent avant les Lots et bloqué par un brouillon.
+
+Les liens de l’Assistant ouvrent directement le calendrier, le règlement, les
+lots, le parcours, les commerces ou la publication. Les retours de paiement
+restent distincts. Le contrôle final privilégie la synthèse et la confirmation
+explicite ; les refus et avertissements détaillés se déplient. Un brouillon
+explique son blocage sans le présenter comme un défaut d’habilitation.
+Annulation et clôture gardent leurs confirmations dans les actions secondaires.
+
+Preuves locales, avec API et données synthétiques :
+
+| Contrôle exécuté | Résultat / portée |
+| --- | --- |
+| `node --test tests/assistant-presentation.test.mjs` | Reproduction utile : 8 réussites et 1 échec sur une prochaine action supprimée par la déduplication ; après correction, 9 réussites. Aucun état ou action serveur réécrit. |
+| `node --test tests/preparation-workflow.test.mjs` puis avec `tests/assistant-navigation.test.mjs` | Reproduction : 3 réussites/1 échec, un lien Commerces revenait au Parcours ; les 7 tests de navigation passent après correction. Un défaut de comparaison entre contextes VM des nouveaux tests est corrigé dans le montage, sans modifier les destinations attendues. |
+| `pnpm test` | 294 tests Node réussis, aucun skip ; contrats consommés, règles de présentation, idempotence et reprise. |
+| `node tests/browser/assistant-guidance-ux.mjs` | 48 scénarios réussis : attentes, prêt avec/sans action serveur, alertes partagées, erreurs, statuts publiés/terminaux, clavier et absence de mutation ; 1600/390/320 px et texte 200 %. |
+| `node tests/browser/hunt-parameters-guidance.mjs` | 268 contrôles réussis : une rubrique visible, navigation sans écriture, champ invalide masqué/replié retrouvé, PUT complet, version/clé, réponse perdue et reçu sans nouvel envoi, droits, blocages et dotation ; 1280/390/320 px et texte 200 %. |
+| `node tests/browser/hunt-preparation.mjs` | 288 contrôles réussis : parcours intégré, financement, commerces, terrain, confirmations, publication, idempotence, reçus et saisies. Les anciennes assertions de structure ont été adaptées aux menus secondaires et au nouveau CTA Assistant, sans retirer les assertions métier. |
+| `node tests/browser/hunt-guided-workflow.mjs` | 3 parcours et 87 contrôles réussis après les derniers ajustements : états serveur, validations absentes/périmées retirées, brouillons conservés entre étapes, publication bloquée par la saisie, aucune écriture implicite ; 1280/390/320 px, texte 200 %. |
+| `node tests/browser/animation-workspace-ux.mjs` | 40 parcours réussis : largeur, alignement, priorités, unicité du CTA Assistant, barre générique conservée dans les autres rubriques et absence de mutation. |
+| Même banc avec `WORKSPACE_CASE=navigation` | 8 parcours réussis : groupes, liens directs, alias, rechargement, focus, droits, sortie avec saisie, contenu différé et destination du suivi après publication. |
+
+Les deux premiers passages des bancs Chasse intégrés échouaient sur les anciens
+accès directs à des actions désormais repliées ; les scénarios passent par les
+contrôles visibles du nouveau parcours et conservent leurs assertions de
+validation, versions, clés et effets. Le banc guidé est renouvelé après repli
+de la génération secondaire et clarification du message de brouillon.
+
+`node scripts/build-generation-tests.mjs` construit l’application complète avec
+configuration synthétique et fichiers `.env` désactivés. Le build PWA production
+isolé `node scripts/build-pwa-tests.mjs` réussit également, avec service worker
+généré. Ces builds ne contactent pas une API métier et ne publient aucun site.
+Captures bureau/mobile/texte 200 % inspectées dans les répertoires temporaires
+Assistant, paramètres, guide Chasse et workspace ; aucun média fictif ajouté.
+
+La revue indépendante ne relève pas de contournement : changements d’étape
+bloqués pendant une commande, brouillons conservés, publication conditionnée
+par ses droits et ses validations, réponses anciennes ignorées. L’interface
+choisit une destination ou une présentation ; elle ne remplace aucune décision
+de domaine. Le service de préparation, l’assistance Localeo et la vérification
+terrain restent distincts et leurs attentes ne sont pas maquillées en validation.
+
+Impacts : **Animation et documentation projet**. Les composants et feuilles
+existants sont corrigés à leur source ; une feuille dédiée remplace le rendu
+inline de Publication. Aucun changement de contrat API, backend, permission,
+règle métier, migration, configuration, stockage ou générateur. Les autres
+applications n’utilisent pas ces composants. Pas de test PostgreSQL requis par
+ce périmètre de présentation. Aucun compte réel, message, paiement, publication,
+commit, push ou déploiement effectué ; la recette hébergée, PWA installée et
+lecteur d’écran manuel restent non exécutés. Le statut de l’epic reste inchangé.
+
+Contrôles finaux : `pnpm typecheck` et `pnpm lint` réussis ; `pnpm test`
+renouvelé après les derniers changements, **294 réussites, zéro échec et zéro
+skip**. `check_guidance.py` réussit (94 guides, 1 054 liens),
+`check_guidance.py --changed --all-markdown` réussit (3 documents, 104 liens),
+`sync_documentation.py --check-sources` vérifie 132 sources. `git diff --check`
+réussit dans Animation et projet. Aucun artefact temporaire n’est versionné.
+
+## Contre-revue du nouvel Assistant — 1er novembre 2026
+
+Suite à la demande de challenger **E73-UX-GUIDE-PUBLICATION**, revue de l’arbre
+local Animation (base `04dc06c` avec la refonte non commitée), du producteur
+`assistant_animation.py` et de parcours synthétiques représentatifs. La revue
+porte sur le guidage du gestionnaire et la reprise de tâche, sans modifier les
+règles de publication ni l’état de la roadmap.
+
+Défauts démontrés et corrigés :
+
+- Avec un seul contrôle restant, consulter un contrôle acquis faisait perdre
+  l’accès direct à la prochaine action. **Reprendre la prochaine action** ramène
+  maintenant au contrôle recommandé, sans appel API ni commande.
+- Un contrôle acquis affichait **À faire maintenant**, une consigne de travail
+  ou une attente faute d’action. Il devient **Point déjà vérifié** ; son accès
+  aux informations reste secondaire. Cela concerne aussi une animation publiée,
+  dont le producteur conserve réellement Identité et Commune acquises.
+- **Identité de l’animation** contrôle le nom de l’animation, alors que le front
+  décrivait les accès de l’équipe et ouvrait `/compte`. Le texte est corrigé et
+  le code du contrôle accompagne l’action serveur dans le callback local :
+  Identité ouvre la configuration, directement Présentation pour une chasse en
+  préparation. Le même code d’action pour Préparation des modèles manuels ouvre
+  leur configuration. Les autres usages de l’action gardent leur destination.
+- Les neuf contrôles étaient présentés comme des étapes, en concurrence avec
+  les cinq étapes du guide Chasse. Le compteur distingue désormais les
+  **contrôles**. Le sélecteur est replié après l’action principale et la sélection
+  déplace le focus sur le titre du point consulté. Les attentes sans action
+  sont explicitement titrées **En attente d’une intervention**.
+
+Reproductions avant correction : le nouveau banc navigateur échoue sur
+l’absence du bouton de reprise ; le test de destination Identité échoue sur
+`/compte` au lieu de la présentation. Les assertions passent après correction.
+La revue indépendante confirme la conservation des décisions/actions serveur
+et l’absence de mutation implicite. Les sélecteurs des recettes existantes
+suivent le nouveau contrôle replié, sans retirer les assertions métier.
+
+Contrôles exécutés : **13 tests unitaires** Assistant/destinations, **48 scénarios
+navigateur** Assistant, **12 scénarios de contre-revue** et **40 parcours intégrés**
+workspace réussis ;
+`pnpm typecheck`, `pnpm lint`, build complet isolé
+`node scripts/build-generation-tests.mjs` et `git diff --check` réussis.
+Les API sont synthétiques, les fichiers opérateur `.env` sont désactivés et
+aucun réseau métier réel n’est utilisé. Captures bureau/mobile/texte 200 %
+inspectées ; pas de débordement horizontal constaté.
+
+Le banc `assistant-resume-ux.mjs` couvre 1600/390/320 pixels (texte à 200 % sur
+320), avec libellés réels, Identité manquante, une ou plusieurs actions restantes
+et état publié. Il vérifie aussi le code du contrôle transmis par le callback
+depuis l’action principale ou secondaire. Les 48 scénarios et les 4 parcours
+intégrés Assistant sont renouvelés après harmonisation finale des libellés
+« contrôles ». Les contrôles documentaires réussissent : 94 guides/1 054 liens,
+3 documents modifiés/104 liens et 132 sources exportées vérifiées.
+
+Impacts : **Animation et documentation projet**. Le contexte additionnel est
+interne au callback React ; aucun changement du contrat API, du backend, des
+permissions, des données, des migrations, du générateur ou de la configuration
+d’exploitation. Les règles serveur et confirmations restent propriétaires.
+Tests utilisateurs avec gestionnaires réels, recette distante et lecteur
+d’écran manuel non exécutés. Aucun commit, push ni déploiement dans ce correctif.

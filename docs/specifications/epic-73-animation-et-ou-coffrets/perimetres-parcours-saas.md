@@ -352,6 +352,49 @@ pendant une commande non résolue. Les reçus et saisies restent montés dans le
 Le pied du guide reste dans le flux sur mobile et texte agrandi pour laisser
 le contenu consultable ; sur grand écran il reste accessible au défilement.
 
+Refonte du **1er novembre 2026 — E73-UX-GUIDE-PUBLICATION** : l’Assistant
+présente une seule étape développée, une consigne courte et une action
+principale issue des actions serveur. La sélection d’une autre étape change
+uniquement la consultation ; elle ne valide rien. Les étapes acquises, aides,
+support et actions secondaires se déplient au besoin. Les points d’attention
+restent dédupliqués et identifiables par texte, couleur et pictogramme ; le
+premier est visible, les autres sont accessibles en détail. Un message partagé
+ne doit jamais faire disparaître la prochaine action utile. Le suivi remplace
+la préparation pour une animation déjà publiée ou terminée.
+
+La chasse conserve les cinq étapes **Parcours → Organisation et lots →
+Commerces → Terrain → Publication** dans un guide unique. Une étape seulement
+occupe l’espace de travail ; les statuts proviennent des validations serveur,
+jamais des visites. Dans Organisation et lots, Présentation, Calendrier,
+Règlement puis Lots se succèdent sans seconde barre permanente. Les paramètres
+facultatifs et la gestion des modifications restent secondaires. Continuer dans
+les deux premières rubriques ne sauvegarde rien ; le passage du règlement aux
+lots attend la confirmation de la commande complète des paramètres. La dotation
+garde son enregistrement distinct. Le raccourci vers Commerces n’apparaît pas
+avant l’étape Lots et reste bloqué par une saisie non enregistrée.
+
+L’Assistant rejoint directement la bonne tâche : calendrier, règlement, lots,
+parcours, commerces ou contrôle final. Ces liens ne déclenchent ni financement
+ni publication. La barre générique Action suivante est retirée de l’Assistant,
+comme du guide de configuration Chasse ; annulation et clôture restent dans
+les actions secondaires avec leurs confirmations. Un parcours existant ne
+présente plus une nouvelle génération au même niveau que sa validation.
+Le contrôle final affiche une synthèse, les détails des refus et une seule
+action de publication, suivie de sa confirmation explicite. Les brouillons,
+versions, habilitations, reçus et commandes incertaines gardent leurs protections.
+
+Contre-revue du **1er novembre 2026** : les neuf éléments de l’Assistant sont
+des **contrôles**, distincts des cinq étapes du guide Chasse. La prochaine
+action précède le choix secondaire **Changer de point à traiter**, replié.
+Consulter un contrôle acquis affiche **Point déjà vérifié**, sans demander de
+le refaire ni afficher une attente. **Reprendre la prochaine action** ramène
+au contrôle recommandé, y compris lorsqu’un seul contrôle reste à traiter ;
+cette reprise ne déclenche aucune commande. La sélection place le focus sur
+le titre du contrôle. Les accès aux informations acquises restent dans les
+actions secondaires. Après publication, leur consultation conserve le suivi.
+Le contrôle **Identité de l’animation** concerne son nom et sa présentation,
+et ouvre sa configuration ; il ne désigne pas le compte du gestionnaire.
+
 Précision du **31 octobre 2026**, navigation de la fiche Animation : remplacer
 la rangée défilante des quinze onglets par quatre espaces. Seules les
 sous-rubriques de l’espace courant sont présentées sur ordinateur.
