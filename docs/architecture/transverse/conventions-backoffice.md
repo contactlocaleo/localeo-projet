@@ -98,3 +98,29 @@ Preuves et limites du correctif : [vérification des vues ERP](../../specificati
 
 Périmètre, compatibilité et preuves : [parcours E73](../../specifications/epic-73-animation-et-ou-coffrets/perimetres-parcours-saas.md).
 
+### Lisibilité du menu ERP — 1er novembre 2026
+
+Le menu partagé distingue **Pilotage**, **Animations locales**, **Activité
+quotidienne**, **Catalogue et commerçants** et **Administration**. Les rubriques
+fonctionnelles sont séparées visuellement et repliables. Animation conserve
+ses quatre sous-rubriques, également repliables : Animations, Équipes et
+contrats, Offre et modules, Pilotage. La page courante ouvre tous ses parents ;
+l’accueil Animation ouvre aussi la première sous-rubrique pour exposer ses
+accès principaux.
+
+Chaque lien garde un libellé visible et reçoit une icône SVG décorative locale,
+sans police ni chargement extérieur. Une couleur contrastée et le repère
+`aria-current` identifient la destination active. Les liens conservent leurs
+URL et leur filtrage par habilitation ; les rubriques sans destination
+autorisée disparaissent. Un accès à une fonction Animation reste visible même
+si l’opérateur n’a pas accès à sa vue d’ensemble.
+
+Les groupes utilisent les éléments natifs `details`/`summary` : Entrée ou
+Espace pour ouvrir, Tab pour les liens visibles. Sur mobile, **Rubriques ERP**
+reste accessible pendant le défilement du menu ; Échap ferme le menu et rend
+le focus au bouton. Cibles d’au moins 44 px et textes agrandis sont préservés.
+Ces principes concernent le menu ERP partagé et ses consoles historiques,
+sans remplacer les menus contextuels Support ni le menu technique SQLAdmin.
+
+Preuves : [vérification du menu ERP](../../specifications/epic-65-vues-erp/verification-livraison.md#lisibilité-du-menu-erp--1er-novembre-2026).
+

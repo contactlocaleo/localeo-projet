@@ -3272,3 +3272,169 @@ ni générateur : les données et commandes existantes sont réutilisées. Les
 parcours Marketplace Coffrets et les applications Animation/Pro ne nécessitent
 pas d'adaptation. Aucune opération sur un environnement hébergé, commit, push
 ou déploiement réalisé ; la vérification sur TEST reste à faire après livraison.
+
+## Correctif du 1er novembre 2026 — cohérence des espaces Localeo Animation
+
+Demande : retrouver les mêmes repères de présentation, navigation, listes et
+retours d’action sur le parcours de gestion. Sur la base Animation `f504b48`
+et projet `e2ba317`, les pages composaient différemment les composants communs :
+retours et contexte déplacés, contraintes de largeur propres à plusieurs pages,
+onglets Finance en défilement horizontal et erreurs parfois réduites à un texte
+isolé. La reproduction d’un résultat incertain constatait deux régions vivantes
+pour le même diagnostic et sa consigne de vérification.
+
+`WorkspaceHeader` réutilise `SectionHeading` : retour, icône, titre, description,
+contexte puis actions suivent le même ordre sur mobile. Les espaces principaux,
+création, détail, communication, compte/équipe, abonnement, support, imports,
+catalogue, participants/validations, finance, flyers et bilans reprennent cette
+composition. Les pages de gestion utilisent la largeur disponible ; les
+dialogues gardent une largeur de lecture adaptée.
+
+`WorkspaceTabs` présente les rubriques courtes sans défilement horizontal,
+avec activation manuelle au clavier et sélection contrôlée. Le sélecteur du
+bilan et les quatre espaces de navigation d’une animation gardent leur
+fonctionnement. Les filtres secondaires se replient sur mobile ; le choix
+principal de l’animation reste visible. Les filtres Flyers annoncent leur
+sélection. Les listes gardent tableaux/fiches mobiles et pagination partagés.
+
+`FeedbackMessage` et `ListState` unifient chargement, vide, erreur, avertissement,
+information et confirmation, y compris les notifications et retours de commandes.
+Un résultat incertain regroupe diagnostic et vérification explicite dans un seul
+avertissement. Les points de focus prévus par les parcours restent volontaires.
+Les contrôles ont aussi reproduit puis corrigé l’entrée clavier d’une sélection
+désactivée/absente, des champs mobiles restant à 16 pixels avec texte agrandi et
+une action Finance « Actualiser » de 15 pixels de haut sur bureau. Le minimum
+mobile est désormais `max(16px, 1rem)` ; la règle commune des actions d’en-tête
+garantit 44 pixels sur tous les formats, sans surcharge spécifique à Finance.
+
+Preuves locales, API synthétiques et configuration isolée sans fichier opérateur :
+
+- `npm run test` : **290 tests réussis**, aucun ignoré. Le test de conversion
+  Paris conserve ses assertions ; son chargeur Node neutralise seulement
+  l’import CSS ajouté par le composant partagé.
+- Types, ESLint et build isolé `node scripts/build-generation-tests.mjs` réussis.
+- Nouveaux bancs : `feedback-consistency.mjs` **220 contrôles**,
+  `workspace-primitives.mjs` **188 contrôles**, `finance-workspace-ux.mjs`
+  **187 contrôles**. Composants réels, clavier, gardes refusées/acceptées,
+  états, ordre contexte/actions, cibles tactiles, 1280/390/320 pixels et texte
+  à 200 %.
+- Parcours rejoués : espaces de l’animation **40 cas** et navigation **8 cas**,
+  abonnement/modules **70 scénarios / 994 assertions**, compte/équipe
+  **56 / 388**, campagnes **36 / 684**, imports **22 / 292**,
+  support/bilans/éditions **26 / 293**, lectures globales **4 / 60**,
+  communication **12 scénarios**, sélecteur d’animation **16 scénarios** et
+  accès Flyers/notifications **2 formats**. Refus, saisies, réconciliation
+  après réponse perdue et clés existantes restent vérifiés.
+- Création/préparation : **82 contrôles navigateur réussis** à 1280/390 pixels.
+  Le banc conserve les assertions de conflit, saisie et réutilisation ; il suit
+  le guide à cinq étapes déjà présent sur la base (`aria-current="step"`, puis
+  Organisation et lots après le parcours, accès explicite à Terrain pour lire
+  sa vérification), au lieu d’attendre l’ancienne composition de la page.
+- Le banc support/bilan compte toutes les étapes de l’assistant, dont la
+  prochaine action hors liste ; l’ancien comptage de neuf éléments `li` omettait
+  cette présentation déjà présente sur la base. Les tests mobiles ouvrent les
+  filtres secondaires avant usage. La fixture de notifications fournit la
+  pagination attendue par le vrai collecteur.
+- Captures relues sur bureau, mobile et texte agrandi ; sorties sous
+  `localeo-animation/tmp/`, hors versionnement. Revue indépendante des primitives,
+  états et écarts résiduels intégrée.
+- Ancien `mobile-smoke.mjs` non démarré : son installation dédiée
+  `tmp/mobile-qa/playwright` est absente. Cette limite reste distincte des bancs
+  ciblés exécutés ; aucune configuration opérateur n’a été chargée.
+- Contrôles documentaires : **94 guides** et **130 documents exportables**
+  vérifiés ; contrôle ciblé des deux sources modifiées : **96 documents**,
+  1 111 liens, aucune erreur ni avertissement.
+
+Impacts : présentation dans `localeo-animation` et principes canoniques en
+[section 5.2](perimetres-parcours-saas.md#52-lisibilité-actions-et-accessibilité-communes).
+Aucun changement de règle métier, contrat API, données, droits, migration,
+configuration ni générateur : commandes, versions et protections restent dans
+les mêmes producteurs et appelants. Backend, Marketplace/Live et Pro ne
+nécessitent pas d’adaptation. L’état de la roadmap reste inchangé.
+Recette hébergée, essai avec utilisateurs et contrôle manuel par lecteur d’écran
+restent à effectuer ; les preuves locales ne valent pas déploiement.
+
+## Correctif du 1er novembre 2026 — audit Live pour un habitant peu familier du numérique
+
+Audit expert sur le frontend Marketplace/Live de base `9cead02`, avec données
+synthétiques locales et spécification canonique, sans essai impliquant de vrais
+habitants. Le projet documentaire est sur `e2ba317` avec les travaux antérieurs
+conservés, notamment l’harmonisation indépendante de Localeo Animation.
+
+Les reproductions initiales échouent sur huit attentes observables : titre de
+récupération incohérent avec son déclencheur, absence de reprise du détail
+personnel en panne, retour public direct vers le carnet, recherche de commune
+impossible à rejouer sans nouvelle saisie, faux bouton de choix communal,
+programme vide présenté comme sélection absente, obligations peu explicites
+dans le formulaire et refus sans focus. Les captures et traces avant correction
+restent dans `localeo-marketplace/tmp/live-habitant-audit-before/`.
+
+Les [principes et corrections](localeo-live-entree-unique.md#audit-dusage-du-1er-novembre-2026--habitant-peu-familier-du-numérique)
+conservent l’univers graphique et les interactions existantes. Les reprises
+utilisent les mêmes lectures, communes et accès personnels. Le retrait du carnet
+devient secondaire dans l’erreur ; la récupération par e-mail se distingue de
+l’inscription et guide la suite. Le formulaire annonce les quatre coordonnées
+obligatoires et le consentement facultatif, focalise son erreur et nomme le
+réessai avec le même corps et la même clé après résultat incertain.
+
+Revue indépendante : identité exacte conservée lors du réessai, retours et
+provenance maintenus, aucune inscription implicite ni nouveau consentement.
+Le retour au champ e-mail après **Utiliser une autre adresse** a été ajouté à
+la suite de cette revue. Les nouvelles recettes sont
+`live-habitant-access.spec.cjs`, `live-habitant-communes.spec.cjs` et
+`live-registration-clarity.spec.cjs` ; les assertions historiques suivent le
+nouveau volet **Pas encore inscrit ?** et le libellé du réessai, en conservant
+les exigences sur la saisie, les clés, les refus et l’absence de faux succès.
+
+La relecture de la capture publique a aussi montré **Mes participations**
+active avant inscription. Le repère de navigation rattache désormais fiche
+publique et formulaire à **Accueil**, tout en conservant la rubrique des accès
+personnels, anciens ajouts au carnet et lots. L’assertion du nouveau banc
+contrôle la fiche, l’entrée en inscription et le détail personnel après reprise.
+
+Impacts : frontend `localeo-marketplace` et documentation centrale uniquement.
+Pas de règle métier, contrat, compte, donnée, migration, configuration DNS/TLS,
+générateur ou nouveau fournisseur ; aucune génération réelle nécessaire.
+L’installation anonyme et le rattachement existant d’un accès après lecture
+réussie restent distincts d’une nouvelle inscription. Les tests contrôlent le
+participant et le Bearer exacts de ce rattachement, sans l’assimiler à une
+nouvelle commande de participation. Aucun changement backend, Pro ou Animation
+pour ce correctif. L’état de l’epic et de la roadmap reste inchangé.
+
+Vérifications :
+
+- `npm run test:security` : **131 tests réussis**, aucun ignoré.
+- Build de production isolé réussi via `scripts/serve-visual-tests.cjs`, sans
+  lecture de fichiers opérateur ni réécriture des configurations publiques.
+- ESLint réussi sur tous les fichiers JavaScript suivis et les trois nouveaux
+  bancs. Le lanceur global `npm run lint` rencontre le même `EPERM` dans
+  `output/bum-politique/pytest-approval-1` que lors de la précédente recette ;
+  le contrôle par liste Git évite ce dossier de travail sans changer ses droits
+  ni la configuration ESLint.
+- La campagne navigateur porte sur les communes, le catalogue et ses erreurs,
+  la fiche publique, les formulaires, la récupération et les inscriptions
+  multiples, les QR personnels, les lots, la reprise de jeu et la surface
+  Coffrets conservée. Les nouveaux bancs couvrent aussi quatre coordonnées
+  requises, consentements, refus `422`, réponse `503` ou accès absent, réessai
+  avec le même corps et la même clé, focus et texte agrandi à 200 %.
+- **94 scénarios ciblés vérifiés** au total, sans additionner les rejeux :
+  campagne de 85 cas avec 83 réussites et deux attentes de recette corrigées,
+  puis **21 réussites** sur les fichiers rejoués et neuf cas complémentaires.
+  Le scénario historique ouvre désormais le volet **Pas encore inscrit ?** ;
+  l’autre attend le rattachement asynchrone existant avec son participant et son
+  Bearer exacts, au lieu d’en vérifier la présence avant la fin de l’effet.
+  Aucune assertion sur le corps, l’identité ou les mutations n’est retirée.
+- Après le dernier ajustement de navigation, **15 scénarios rejoués avec
+  succès** : récupération, reprise personnelle, fiche publique puis inscription,
+  rubrique Lots sur les deux surfaces et accès mobile à l’action principale.
+  Ce sont des cas déjà comptés dans les 94, pas 15 cas supplémentaires.
+- Contrôles documentaires : **96 documents**, **1 089 liens**, aucune erreur
+  ni avertissement ; **130 sources exportables** vérifiées.
+- Captures avant/après relues dans `localeo-marketplace/tmp/`, hors
+  versionnement. Aucun appel à un fournisseur ou environnement métier réel.
+
+Cette recette locale ne remplace pas un essai avec des habitants peu familiers
+du numérique, ni un contrôle manuel par lecteur d’écran et dans une PWA installée.
+Aucun commit, push ou déploiement exécuté ; vérification hébergée à réaliser
+après livraison. Les résultats de l’harmonisation de Localeo Animation restent
+distincts de ce correctif Live.

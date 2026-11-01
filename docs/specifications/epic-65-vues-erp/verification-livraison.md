@@ -1,5 +1,55 @@
 # EPIC 65 — Vérification et livraison
 
+## Lisibilité du menu ERP — 1er novembre 2026
+
+Demande : rendre les rubriques et destinations plus explicites, avec des
+icônes et une hiérarchie visuelle. Vérification sur backend **741e13d** avec
+correctif local ; version hébergée non vérifiée. Les travaux locaux des autres
+applications et les statuts des epics sont conservés.
+
+Constat reproduit : menu partagé sans icônes ; l’ouverture d’Animation déplie
+ses 17 fonctions et repousse les autres rubriques. Le nouveau test navigateur
+échoue avant correction sur l’absence d’icônes ; capture de référence conservée
+dans `.artifacts/erp-menu-before/` du backend.
+
+Correction dans `erp-navigation.js` et `page-layout.css` : cinq repères de
+navigation, séparateurs, pictogrammes SVG avec libellés, état actif contrasté,
+rubriques fonctionnelles repliables et quatre sous-rubriques Animation.
+Ouverture automatique de tous les parents de la page active. Sur mobile, le
+bouton du menu reste accessible pendant son défilement. Les styles sont
+modifiés à leur source commune ; aucun habillage par page n’est ajouté.
+La [convention canonique](../../architecture/transverse/conventions-backoffice.md#lisibilité-du-menu-erp--1er-novembre-2026)
+décrit le comportement attendu.
+
+Preuves locales exécutées :
+
+- `node tests/browser/erp-menu-ux.cjs` : **35 scénarios** sur sept profils,
+  à 320/390/1024/1440 px, dont texte 200 %. Icônes avec texte, destinations
+  uniques, parents actifs ouverts, rubriques vides masquées, clavier des
+  sous-groupes, cibles 44 px, absence de débordement, Échap/focus et expiration
+  de session. Profils Animation ou Accès seuls vérifiés sans droit sur la vue
+  d’ensemble ; Atelier indisponible masqué pour un administrateur.
+- Régressions : `erp-page-template.cjs`, **24 scénarios** ;
+  `animation-navigation-erp.cjs`, **26 contrôles** ; `admin-shell.cjs`, **8
+  scénarios** ; `animation-consoles-shell-ux.cjs`, **12 scénarios** ;
+  `shell-navigation.cjs` réussi. Alias Finance, 17 destinations Animation,
+  saisies non enregistrées, formulaire/CSRF local, menus contextuels, réponse
+  de session tardive et absence d’écriture métier vérifiés.
+- Lanceur Python isolé, fichiers `test_admin_specific_ui_system.py`,
+  `test_erp_sqladmin_menu.py`, `test_sqladmin_ui_system.py` et
+  `test_backoffice_menu_ux.py` : **79 réussis**, aucun ignoré.
+
+Captures bureau/mobile/texte agrandi relues dans `.artifacts/erp-menu-ux/`,
+`.artifacts/animation-navigation/` et `tmp/admin-shell/` du backend. Tests sur
+sources réelles et données synthétiques, sans compte ni service distant.
+
+Impacts : présentation backend ERP et documentation canonique uniquement.
+Pas de contrat API, règle métier, migration, donnée, générateur ou paramètre
+d’exploitation à adapter : mêmes destinations et mêmes autorisations.
+Les autres applications et le menu technique SQLAdmin gardent leur interface.
+Recette hébergée et essai avec de vrais gestionnaires non exécutés. Aucun
+commit, push ou déploiement réalisé pour ce correctif.
+
 ## Harmonisation du gabarit ERP — 31 octobre 2026
 
 Demande utilisateur : homogénéiser menu, en-tête, actions et liens de retour

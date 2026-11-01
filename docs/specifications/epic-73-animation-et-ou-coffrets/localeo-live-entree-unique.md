@@ -110,6 +110,38 @@ d'animations ni un score : la borne reste de dix communes. Aucune carte, photo
 ou statistique territoriale n'est inventée. La même présentation sert la page
 dédiée et la sélection initiale intégrée à Découvrir, avec états vide et erreurs.
 
+## Audit d’usage du 1er novembre 2026 — habitant peu familier du numérique
+
+L’audit expert parcourt la découverte, le choix d’une commune, l’inscription,
+la reprise d’un accès personnel et les lots sur téléphone. Il conserve le Live
+immersif existant : repères visuels et actions de participation avant les
+explications secondaires. Il ne constitue pas un essai avec de vrais habitants.
+
+| Situation | Obstacle constaté | Comportement corrigé |
+| --- | --- | --- |
+| Recherche de commune indisponible | « Réessayez » sans moyen de relancer le même texte | Bouton **Réessayer la recherche**, saisie conservée et aucune sélection automatique |
+| Lien communal invalide | **Choisir une commune** efface le contexte sans ouvrir le choix lorsque des communes sont déjà suivies | Accès réel à **Mes communes**, sans modifier la sélection enregistrée |
+| Programme vide après sélection | Le bandeau demande encore de choisir une commune | Chargement, vrai vide et indisponibilité distingués ; **Modifier mes communes** sur le vrai vide, réessai sur panne |
+| Détail personnel en panne | Le retrait du carnet est l’action proposée dans l’erreur | **Réessayer** reprend le même accès ; conservation locale expliquée, retrait secondaire dans les options |
+| Fiche publique ouverte directement | Le retour aux animations mène au carnet personnel | Retour par défaut à la découverte ; provenance et retour contextuel existants prioritaires |
+| Navigation avant inscription | **Mes participations** apparaît active sur une fiche publique | Fiche et inscription restent rattachées à **Accueil** ; les accès personnels, ajouts au carnet et lots conservent leur rubrique |
+| Retrouver une inscription | Titre « Ajouter une inscription » et nouvelle inscription en concurrence avec la récupération | Titre **Retrouver mon inscription**, e-mail et action principale uniques ; nouvelle inscription sous **Pas encore inscrit ?** |
+| Suite de récupération par e-mail | Étape suivante peu explicite | **Vérifiez votre boîte e-mail**, courriers indésirables, ouverture du dernier lien puis ajout au carnet ; réponse conditionnelle conservant la confidentialité |
+| Inscription refusée ou non confirmée | Champs requis peu explicites et erreur éloignée du focus ; action identique avant/après réponse incertaine | Quatre champs obligatoires annoncés, notifications **Facultatif**, erreur focalisée, **Réessayer la même inscription** sans nouvelle clé ni modification du corps conservé |
+
+Principes retenus : une tâche et une action principale identifiables, mêmes
+termes que la navigation, textes courts donnant une prochaine action réelle,
+saisies préservées après erreur et retrait séparé de la reprise. La fermeture
+rend le focus au déclencheur ; **Utiliser une autre adresse** revient au champ
+e-mail. Mobile, clavier et texte agrandi restent utilisables. Le GPS et
+l’installation de l’application restent facultatifs ; aucun compte habitant
+ni nouvelle étape de connexion n’est ajouté.
+
+L’interface possède ces corrections de présentation. Règles d’inscription,
+participations, consentements, tokens et contrats restent dans leurs producteurs
+existants ; aucune donnée ni migration n’est créée. Les preuves locales et les
+limites de l’audit figurent dans le [suivi d’implémentation](suivi-implementation.md).
+
 ## Critères ajoutés et preuves
 
 Les numéros 01 à 12 reprennent les CA1 à CA12 fournis par l'utilisateur.
