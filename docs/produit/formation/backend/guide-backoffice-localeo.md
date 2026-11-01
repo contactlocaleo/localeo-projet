@@ -1,5 +1,22 @@
 # Guide de formation au back-office Localeo
 
+## Assistance à la validation par PIN — E70
+
+Parcours implémenté et testé localement ; disponibilité à vérifier sur la version
+livrée. Dans la fiche commerçant, onglet **Accès**, la section **Validation par
+PIN** présente l’état et les dates, jamais le code. L’assistance habilitée peut
+invalider le PIN avec un motif ; elle ne le récupère pas et n’en crée pas pour
+le commerçant. Admin/Backoffice avec le droit d’accès externe et la portée
+nécessaire sont autorisés ; Lecteur ou Finance seul ne le sont pas.
+
+Le principal prépare ou remplace son PIN depuis Pro après vérification récente
+de son mot de passe. Le client présente son téléphone ; le commerçant saisit
+lui-même le code. Une réponse perdue impose une relecture, sans renvoi automatique.
+En cas d’incident, préserver l’historique et la corrélation, invalider le moyen
+compromis et vérifier le refus de l’ancien code. Ni cette invalidation ni la
+fermeture du canal ne remboursent ou n’annulent une validation acquise. Le QR
+reste soumis à ses droits habituels. Voir la [notice complète E70](../../../specifications/epic-70-validation-pin/guide-utilisation-exploitation.md).
+
 ## Souscriptions et modules — évolution E73
 
 Fonctions en cours de réalisation locale ; leur présence ici ne vaut pas livraison sur un environnement. Depuis **Animation → Gestion des souscriptions**, ouvrir une souscription activée puis **Gérer les modules**. L’écran distingue le forfait acquis, ses dates, les quotas consommés et chaque droit inclus, acheté, offert ou en essai. Les droits de la commune concernée restent séparés de ceux des autres communes du partenaire.

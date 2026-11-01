@@ -5,6 +5,22 @@ Version **V1 du 5 octobre 2026**. État produit **En cours**, suivi dans la
 [backlog canonique](../../roadmap/en-cours/epic-70-validation-prestation-telephone-client-backlog.md).
 Implémentation et vérifications locales le 7 octobre 2026 ; consulter le bilan pour les preuves. Aucun déploiement ni recette sur une cible réelle.
 
+Revue de clôture du **1er novembre 2026**, demandée pour l'epic 70 : **clôture
+non prononcée**. La borne avant génération du PIN est corrigée localement après
+cette revue pour **CA-03/18**, puis les réserves de présentation client
+**CA-04/13/14** sont corrigées (délai, reçu et reprise après blocage).
+Les preuves locales **CA-19/21/26** sont complétées ensuite sur PostgreSQL
+jetable, avec correction de la sélection UTC des reprises email ; la recette
+cible et les autres réserves du bilan restent distinctes.
+Les constats et résultats actualisés sont dans le [bilan](verification-livraison.md).
+Le statut reste **En cours** ; les 34 critères et le périmètre sont conservés.
+
+La reprise de clôture du même jour après ces correctifs lève les réserves
+précises de confidentialité email **CA-23** et de réauthentification salariée
+**CA-34**. Elle conserve les autres preuves partielles, relève le récapitulatif
+Coffret **CA-04** et l’audit des refus **CA-33**, et n’atteste toujours pas la
+recette cible **CA-16**. Voir la reprise en fin de bilan, sans déplacement du backlog.
+
 ## Documents
 
 - [Utilisation et exploitation](guide-utilisation-exploitation.md) : parcours, incidents, configuration et conservation.
@@ -71,4 +87,4 @@ est appliquée à l'ajout E70 : elle ne retire pas cette règle existante, confo
 à la décision de conserver exactement les conditions et effets du QR. Un résultat
 `ANOMALIE` ne doit jamais être présenté comme un succès de validation.
 
-Les comportements et contrats sont définis pour préparer l'implémentation. Le [rattachement commun de conservation](../identite-acces/conservation-validations-acces.md) est établi depuis le 7 octobre à partir de l'Annexe A : la limite documentaire est levée. Les traitements de conservation et leurs preuves restent à réaliser avant mise en service.
+Le [rattachement commun de conservation](../identite-acces/conservation-validations-acces.md) est établi depuis le 7 octobre à partir de l'Annexe A : la limite documentaire est levée. Les traitements et leurs tests locaux sont décrits dans le bilan d'implémentation ; leur ordonnancement, leur surveillance et la vérification des copies externes restent requis avant mise en service. Ces preuves locales n'attestent pas leur activation sur une cible hébergée.

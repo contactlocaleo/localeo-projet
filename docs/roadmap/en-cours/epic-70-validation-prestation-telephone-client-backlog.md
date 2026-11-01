@@ -4,6 +4,11 @@
 
 - Identifiant : **EPIC-70** ; cadrage et recadrage du **1er octobre 2026**, extension du **5 octobre 2026**.
 - État : **En cours** ; implémentation et vérification locales le 7 octobre 2026, sans déploiement.
+- Revue de clôture du **1er novembre 2026** : statut conservé, écarts fonctionnels et preuves manquantes consignés dans le [bilan E70](../../specifications/epic-70-validation-pin/verification-livraison.md). Aucun critère retiré ; aucun déplacement vers les epics terminées.
+- Correctif ultérieur du même jour : borne de début **CA-03/18** corrigée dans le domaine et vérifiée localement ; les autres réserves de clôture restent ouvertes.
+- Correctif client du même jour **CA-04/13/14** : délai ancré sur l'heure serveur, reçu conservé jusqu'à fermeture et heure de reprise après blocage ; les preuves et limites figurent dans le bilan, sans clôture de l'epic.
+- Vérification complémentaire du même jour **CA-19/21/26** : générations et changements concurrents sous vrais verrous PostgreSQL, notifications Pro/outbox et reprise du transport simulé ; les résultats et limites de remise fournisseur sont consignés dans le bilan. Aucun changement métier supplémentaire ni clôture.
+- Nouvelle revue après correctifs, le même jour : réserves email **CA-23** et réauthentification salariée **CA-34** levées localement ; **CA-04**, **CA-33**, preuves intégrées partielles et recette cible **CA-16** restent ouvertes. Le bilan détaille les nouveaux contrôles et la préparation de livraison ; statut **En cours** conservé.
 - Besoin : un commerçant sans téléphone disponible doit pouvoir valider une
   prestation de coffret ou une action terrain d'animation depuis le téléphone connecté
   du client, sans matériel supplémentaire, y compris en cas de panne de son mobile.

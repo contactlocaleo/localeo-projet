@@ -67,6 +67,14 @@ flowchart LR
 - Durée : `expires_at = generated_at + days × 24 h`, `1 <= days <= 30`, défaut 7.
   UTC serveur injecté ; pas d'activation différée, pas de modification de durée
   d'une version active : changer la durée passe par remplacement.
+- L'autorisation du domaine exige `generated_at <= now < expires_at`. Avant
+  génération, ou en l'absence de date de début, refuser `PIN_INDISPONIBLE` sans
+  comparer le code ni comptabiliser un essai incorrect. Le contrôle est repris
+  à l'ouverture et à la confirmation ; une demande déjà ouverte n'y déroge pas.
+  Les métadonnées conservent leurs quatre états contractuels : un état `ACTIF`
+  ne constitue pas à lui seul une autorisation temporelle. Le choix conservateur
+  de l'ancien vérificateur lors d'un remplacement reste inchangé. Un reçu
+  terminal déjà acquis reste consultable selon les droits courants, sans nouvel effet.
 - Demande : `EN_ATTENTE`, `VALIDEE`, `ANOMALIE`, `EXPIREE`, `ANNULEE`. Les refus
   d'un essai sont audités mais ne consomment pas la demande encore valable.
   `ANOMALIE` conserve le résultat métier Animation sans prétendre à une progression.
@@ -176,7 +184,8 @@ pour un objet étranger ; 409 `VERSION_OBSOLETE`, `CIBLE_NON_ELIGIBLE`,
 `IDEMPOTENCE_CONFLIT` ou `DEMANDE_TERMINEE` ; 410 `DEMANDE_EXPIREE` ;
 422 `FORMAT_INVALIDE` pour durées/structure, `PIN_INCORRECT` pour comparaison
 incorrecte ; 429 `PIN_BLOQUE` avec `Retry-After` et `blocked_until` ;
-409 `PIN_INDISPONIBLE` pour secret absent/révoqué/expiré ou mode désactivé.
+409 `PIN_INDISPONIBLE` pour secret absent/non encore valable/révoqué/expiré,
+début non renseigné ou mode désactivé.
 Le client n'obtient pas le nombre d'essais restant ni la cause détaillée d'un
 secret indisponible. Les motifs précis restent dans l'audit habilité.
 Les schémas rejettent les champs supplémentaires : notamment commerce/acteur
@@ -246,7 +255,7 @@ outbox ou empreinte d'idempotence. Le code n'est présent en clair que dans la
 réponse de génération et la saisie transitoire. Inclure `pin`, `pin_hash`,
 `pin_verifier`, `mot_de_passe` et headers sensibles aux tests de non-divulgation.
 
-Le [rattachement commun de conservation](../identite-acces/conservation-validations-acces.md), vérifié le 7 octobre sur l'Annexe A, définit les catégories et leurs points de départ : journaux de sécurité ordinaires au maximum 12 mois, preuves nécessaires de consommation Coffret 5 ans selon l'événement qualifié, habilitations selon la fin de relation, secrets supprimés dès inutiles. Notifications et reçus Animation restent distincts. Les copies SQL/JSONL, gels, liens comptables et marqueurs anti-rejeu doivent être traités ensemble. L'expiration des droits s'applique indépendamment de la conservation. Les traitements et leurs tests restent à implémenter avant mise en service.
+Le [rattachement commun de conservation](../identite-acces/conservation-validations-acces.md), vérifié le 7 octobre sur l'Annexe A, définit les catégories et leurs points de départ : journaux de sécurité ordinaires au maximum 12 mois, preuves nécessaires de consommation Coffret 5 ans selon l'événement qualifié, habilitations selon la fin de relation, secrets supprimés dès inutiles. Notifications et reçus Animation restent distincts. Les copies SQL/JSONL, gels, liens comptables et marqueurs anti-rejeu doivent être traités ensemble. L'expiration des droits s'applique indépendamment de la conservation. Les traitements de conservation et leurs tests locaux sont implémentés, selon le [bilan de vérification](verification-livraison.md). Leur ordonnancement, la surveillance et la vérification des copies externes sur la cible restent à réaliser avant mise en service ; les tests locaux ne prouvent pas cette activation.
 
 ## 7. Migration et compatibilité
 

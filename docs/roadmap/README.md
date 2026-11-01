@@ -2,6 +2,16 @@
 
 Implémentations locales E70 et E72 vérifiées les 7–8 octobre 2026 : [E70 — PIN](../specifications/epic-70-validation-pin/README.md) et [E72 — salariés](../specifications/epic-72-acces-salaries/README.md). E70 est publiée avant le lot E72 ; les deux epics restent en cours jusqu’à leur recette de mise en service. Aucun déploiement effectué.
 
+Revue de clôture E70 du **1er novembre 2026** : **En cours** conservé, sans
+déplacement ni modification des compteurs. La borne avant génération du PIN
+**CA-03/18** et la présentation client **CA-04/13/14** sont ensuite corrigées
+localement ; les preuves de concurrence/notification **CA-19/21/26** sont
+complétées ensuite. La recette cible et les autres réserves restent ouvertes.
+La reprise après correctifs lève les réserves précises CA-23/34, mais conserve
+les écarts CA-04/33 et les scénarios intégrés manquants ; aucune clôture prononcée.
+Les preuves manquantes et les contrôles rejoués figurent dans le
+[bilan E70](../specifications/epic-70-validation-pin/verification-livraison.md).
+
 Classement consolidé le 18 septembre 2026, complété le 22 octobre par les EPIC 74 et 75. Les backlogs des applications sont
 réunis dans les dossiers d'état, avec un seul fichier par EPIC. Le suivi inclut
 les 75 identifiants du tronc commun et trois identifiants applicatifs distincts.
