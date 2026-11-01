@@ -2,6 +2,69 @@
 
 Branche commune : `feat-moteur-animation`, dans les cinq dépôts indépendants. Source de vérité : [spécification](localeo_animation_engine_spec.md), [conception technique](conception-technique.md) et [documents d’entrée](contrats/README.md). Ce suivi distingue code local vérifié, fonctionnalités raccordées et recette avant ouverture.
 
+## 31 octobre 2026 — traitement ERP des demandes plus explicite
+
+Attendu : guider l'opérateur dans le traitement d'une demande d'animation.
+La console présentait déjà trois étapes mais conservait les textes techniques
+au premier plan et un accès secondaire au prérequis de qualification. Le banc
+de reproduction échoue avant correction sur l'absence d'action prioritaire
+vers le suivi du service pour une demande `A_COMPLETER`.
+
+Le correctif affiche **Votre prochaine action**, avec qualification ou complément
+en priorité lorsqu'ils sont requis. Il propose ensuite **Générer → Importer et
+contrôler → Relire et transmettre**, une étape à la fois. Le prompt complet reste
+copiable sans déplier son texte ; le fichier JSON devient l'entrée principale,
+le collage une alternative. Les étapes acquises viennent du serveur, une
+pré-vérification conforme restant **À enregistrer**. La confirmation finale
+indique **Proposition transmise**, rappelle la publication séparée et permet
+de poursuivre la préparation ou de traiter une autre demande.
+
+Le guidage est contextualisé par les droits, y compris pour une révision du
+prompt interdite. Les détails techniques et actions secondaires restent
+repliés. Les marges s'adaptent aux petits écrans et au zoom, sans nouveau
+fichier CSS ni empilement de corrections concurrentes.
+
+Preuves sur backend de base `41bb279` et projet `607e27c`, avec modifications
+locales préservées :
+
+- `node tests/browser/generation-erp.cjs` réussi à 1280 et 390 px : copie
+  intégrale, import/collage, vérification sans écriture, versions et réponses
+  tardives, dépôt, reçu sans rejeu, relecture, traitement et purge.
+- `node tests/browser/generation-erp-guidance.cjs` : **261 contrôles réussis**
+  à 1280/390 px et 320 px avec zoom CSS 200 %, qualification/complément,
+  droits, attente, étapes acquises, confirmation finale et focus clavier.
+  Captures bureau, mobile et zoom relues ; absence de défilement horizontal
+  et largeur du titre suffisante pour conserver le mot « Traitement » entier.
+- **54 tests Python ciblés réussis**, aucun ignoré :
+  `tests/api/test_animation_console_navigation.py`,
+  `tests/api/test_verification_reponse_generation_api.py`,
+  `tests/application/services/test_verification_reponse_generation.py` et
+  `tests/api/test_generation_animation_integration_review_t2.py`, via
+  `scripts/validation/test_isolated.py`.
+- **623 contrôles d'architecture et de recensement réussis** via le lanceur
+  isolé. La revue indépendante ne relève aucun affaiblissement des gardes,
+  commandes, versions ou reçus.
+
+Les parcours navigateur utilisent le template et les assets ERP réels avec
+API synthétique. Les doubles Python de vérification/génération étaient
+identiques à HEAD mais n'exposaient plus le port de réversibilité existant ;
+ils ont été adaptés aux contrats courants, sans changer les règles de production.
+Le double du dépôt rend désormais la page de réponses et les résumés attendus ;
+la fixture de reçu historique omet les champs optionnels récents. Les assertions
+de comportement et de compatibilité sont conservées.
+
+Documentation : `check_guidance.py` (**94 guides**, aucune erreur),
+`sync_documentation.py --check-sources` (**130 documents**) et `git diff --check`
+réussis dans les deux dépôts concernés.
+
+Impacts : backend ERP et documentation canonique ; [conception T6-UX02](conception-technique.md#t6-ux02--traitement-guidé-des-demandes-dans-lerp)
+et [procédure opérateur](exploitation-moteur.md#2-surveiller-la-génération)
+actualisées. Aucun changement de contrat API, règle métier, persistance,
+migration, variable d'exploitation ou générateur de démonstration : seuls la
+présentation et ses tests changent. Animation, Live, Pro et Marketplace ne
+nécessitent pas de changement pour ce correctif. Aucune opération sur une
+demande réelle, recette hébergée, commit, push ou déploiement effectué.
+
 ## 1er octobre 2026 — correctif du flyer dans le kit commerçant
 
 Le kit régénérait un flyer de mission à la place du flyer officiel téléchargé

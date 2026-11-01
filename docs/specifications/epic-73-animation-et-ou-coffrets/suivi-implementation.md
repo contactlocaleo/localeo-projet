@@ -2,6 +2,274 @@
 
 Début : **18 octobre 2026**. [Spécification](README.md), [backlog](../../roadmap/en-cours/epic-73-animation-et-ou-coffrets-backlog.md), [matrice des 63 critères et preuves](verification-livraison.md). Objectif : les 38 US, dans les dix lots demandés. Les lignes ci-dessous ne valent pas acceptation tant que les preuves correspondantes ne sont pas enregistrées.
 
+## 31 octobre 2026 — configuration Chasse guidée par les validations
+
+Demande : réduire l'accumulation de blocs et rendre explicites l'ordre, les
+actions de validation et les étapes acquises. Bases Animation **f21e4fe** et
+Projet **607e27c**, travaux locaux précédents conservés. Deux reproductions
+échouent avant correctif : aucune coche **Validée** malgré les contrôles serveur
+validés, et cinq groupes de paramètres visibles simultanément.
+
+Configuration devient un parcours de cinq étapes : Parcours, Organisation et
+lots, Commerces, Terrain, Publication. Une seule étape est visible, avec son
+état, sa consigne et les contrôles utiles ; les détails sont dépliables. Le
+bouton de relecture confirmée poursuit vers Organisation, avant les commerces.
+Les paramètres se saisissent en quatre sous-étapes, sans enregistrement lors
+de la navigation. Les lots attendent la confirmation des paramètres modifiés.
+Le bandeau générique d'action suivante laisse place à la continuation du guide
+pendant cette configuration, avec les actions générales accessibles ailleurs
+dans la fiche. Les étapes visitées restent montées : saisies, confirmations et
+vérification des reçus sont conservées.
+
+`useHuntPreparationProgress` partage une seule lecture d'avancement entre le
+guide et ses contrôles. Les coches exigent les contrôles serveur tous `VALIDE` ;
+un total nul, une lecture indisponible, une visite ou une saisie ne les produit
+pas. Les réponses tardives sont ignorées. Les blocages généraux restent
+accessibles même lorsque tous les contrôles de rubrique sont valides. La
+confirmation terrain de l'édition est déplacée de Parcours vers Terrain,
+actualise les validations après succès et partage le verrou de navigation avec
+la préparation QR. Une commande incertaine empêche d'engager l'action sœur.
+
+Preuves locales, API synthétiques et réseaux externes bloqués :
+
+| Vérification | Résultat |
+| --- | --- |
+| Suite Node, dont présentation des états et liens entrants | **269 tests réussis** |
+| `hunt-parameters-guidance.mjs` : quatre largeurs/zooms, commande complète, saisies, reçus et champs cachés | **224 contrôles réussis** |
+| `hunt-guided-workflow.mjs` : validations serveur, navigation, brouillons, erreur/chargement et blocages à 100 % | **3 parcours, 78 contrôles réussis** |
+| `hunt-preparation.mjs` : parcours complet, paramètres, invitations, QR, terrain, publication et réponses perdues | **288 contrôles réussis** |
+| `hunt-progress.mjs` : lecture unique, contexte, réponses tardives et absence de fausse progression | **114 contrôles réussis** |
+| `assisted-preparation.mjs` : service et confirmation terrain, révision et droits révoqués | **18 scénarios, 234 contrôles réussis** |
+| `animation-status-alerts.mjs` : maintien du contexte après préparation, deux modèles et sept statuts | **70 écrans réussis** |
+
+Types, lint et build isolé réussis. Captures bureau/mobile et 320 px avec texte
+à 200 % inspectées. Les tests historiques sont adaptés à l'oracle demandé
+(étapes numérotées avec `aria-current=step`, contrôles dans le guide et nouveau
+point de continuation), en conservant leurs assertions de versions, corps,
+quantités, droits, absence d'écriture à la navigation et reprise sans doublon.
+La revue indépendante a identifié le verrou croisé QR/terrain, corrigé puis
+couvert dans les deux sens, y compris réponse perdue et reçu confirmé.
+
+Impacts : interface Animation et spécification canonique E55-UX-09/10 et E73.
+Aucune règle métier, route, DTO, migration, donnée de démonstration ou
+configuration d'exploitation ne change ; backend, ERP, Live, Pro et marketplace
+ne nécessitent aucun changement pour ce guidage. Les tests backend ne sont
+pas rejoués pour cette présentation des contrôles existants. Aucune action
+sur TEST, aucun commit, push ou déploiement.
+
+## 31 octobre 2026 — alertes contextualisées selon le statut de l'animation
+
+Défaut : une animation clôturée affichait encore **Statut non publiable** et
+**Date fin passée** comme points à corriger. Bases Backend **41bb279**,
+Animation **f21e4fe**, Projet **607e27c**, travaux locaux précédents conservés.
+La reproduction avant correction produit **21 échecs backend** et **6 échecs
+Node** : le diagnostic de publication était projeté sans tenir compte des
+étapes déjà marquées sans objet, avec une jauge de préparation encore active.
+
+Les projections Assistant et Avancement ne présentent les contrôles avant
+publication qu'en `BROUILLON`/`CONFIGUREE`. Les cinq autres statuts donnent un
+suivi informatif, des étapes de préparation sans anciens messages et aucune
+jauge. Le portail s'appuie sur `PUBLICATION.NON_APPLICABLE` et
+`NON_MODIFIABLE`, y compris face à une ancienne réponse contenant encore des
+erreurs. L'accès au suivi est conservé. Les contrôles bruts, les transitions,
+les droits et les alertes de tirage/gains/incidents restent inchangés.
+Les écrans Configuration Passeport et Chasse cessent aussi d'afficher le
+bilan avant publication après cette phase.
+
+Preuves locales : **79 tests backend ciblés réussis**, dont **62** sur
+Assistant/Avancement (sept statuts, API protected/internal, lecture sans
+mutation), et **623 contrôles d'architecture réussis**. **264 tests Node
+réussis**, types, lint et build isolé réussis. Le banc
+`assistant-guidance-ux.mjs` passe **44 scénarios** à 1600/390/320 px, dont
+texte à 200 %, absence des anciens diagnostics dans les détails, clavier et
+navigation sans écriture ; `hunt-progress.mjs` passe **114 contrôles**.
+Captures mobile et texte agrandi inspectées.
+Le banc intégré `animation-status-alerts.mjs` valide **70 écrans**, soit les
+configurations et workflows des deux modèles sur les sept statuts à
+1280/390 px, ainsi que la rubrique Publication des chasses. Il vérifie par
+le réseau l'absence de contrôle avant publication hors préparation et la
+conservation des alertes de tirage/remise. `hunt-preparation.mjs` passe
+**276 contrôles** : le parcours de publication, sa réponse perdue et son reçu
+restent fonctionnels. Les composants de publication restent montés lors du
+changement de statut pour conserver leur accusé ou la vérification d'un reçu ;
+leurs anciens contrôles sont remplacés par le suivi informatif. Une réponse
+de lecture tardive ne peut rétablir les diagnostics devenus sans objet.
+
+Contrôle PostgreSQL complémentaire sur une base locale jetable : **7 succès,
+1 échec préexistant** dans
+`test_publication_validation_readonly_postgres.py::test_refus_tardif_apres_debit_ne_commit_aucun_quota`.
+Sa fixture UoW ne fournit pas `reversibilite`, désormais demandé par la commande ;
+elle échoue avant d'atteindre le scénario de débit. Ce test et le service de
+publication ne sont pas modifiés par ce correctif. Les trois variantes du
+diagnostic brut conservent bien `STATUT_NON_PUBLIABLE` sans commit ; les tests
+de financement conservent aussi le refus `DATE_FIN_PASSEE`. Le premier appel
+PostgreSQL, sans l'option dédiée du runner, a ignoré les huit tests ; seul le
+rejeu avec `--postgres-test-url` est compté ci-dessus.
+
+Impacts : backend, portail Animation et présente spécification ; aucun
+changement des schémas, règles métier, migrations, données de démonstration,
+secrets ou configuration d'exploitation. ERP partage les projections de
+lecture ; Live, Pro et marketplace ne consomment pas ces diagnostics de
+préparation. Aucune mise en production ni modification de TEST.
+
+## 31 octobre 2026 — pagination et navigation des listes moins textuelles
+
+Demande : alléger les commandes de navigation des listes du portail Animation.
+Bases Animation **f21e4fe**, Projet **607e27c**, avec correctifs locaux précédents
+conservés. La reproduction sur `JourneyPagination` échoue avant correction :
+le bouton affiche encore « Suivante — validations » au lieu d'un pictogramme.
+Les implémentations de pagination et leurs libellés étaient répétés dans les
+listes, imports, préparations, campagnes, lots et historiques.
+
+`ListPagination` et `ListPageButton` portent désormais la présentation commune.
+Les flèches remplacent les longs textes ; la position devient **1 / 3** quand
+le total est connu et **1** pour une page à curseur sans total. Retour au début,
+page précédente/suivante et ajout de résultats ont des pictogrammes distincts.
+Les noms accessibles historiques et les infobulles gardent le sens des actions,
+avec cibles d'au moins 44 px, focus visible et boutons natifs désactivés.
+Les callbacks, promesses retournées, conditions de chargement, filtres et
+curseurs restent inchangés ; aucun faux bouton de dernière page n'est ajouté.
+
+Le raccordement couvre les listes globales et leurs sélecteurs, préparations,
+imports, bilans/comparaisons, positions des gains, campagnes, actualités,
+lots/bons numériques, lots/gains libres, équipe/organisations, modules et audit.
+Les parcours de création et les actions métier conservent leurs libellés et
+leurs confirmations. Les feuilles CSS restent inchangées : la présentation
+est définie une seule fois dans les composants communs.
+
+Preuves ciblées : **20 parcours navigateur** des cinq variantes de pagination,
+à 1280/390/320 px dont texte à 200 %, avec clavier, bornes, attente, clics
+répétés et absence de soumission de formulaire. **258 tests Node réussis**,
+aucun ignoré ; types, lint et build isolé de l'application réussis. Captures
+bureau et texte agrandi inspectées. Deux revues indépendantes ont contrôlé
+callbacks, bornes, retours de promesse et distinction des curseurs ; les deux
+retours textuels de l'équipe repérés en revue ont été harmonisés.
+
+Vérifications des consommateurs, API synthétiques et réseau externe bloqué :
+
+| Banc navigateur | Scénarios réussis | Contrôles comptés par le banc |
+| --- | ---: | ---: |
+| `list-pagination-ux.mjs` | 20 | bornes, clavier, attente, cibles et clics répétés |
+| `global-read.mjs` | 4 | 60 |
+| `animation-read-filter-ux.mjs` | 16 | recherche, pagination et contexte de sélection |
+| `campaigns.mjs` | 36 | 684 |
+| `assisted-preparation.mjs` | 18 | 234 |
+| `dotation.mjs` | 40 | 448 |
+| `digital-prizes.mjs` | 12 | 116 |
+| `organisation-access.mjs` | 56 | 388 |
+| `modules.mjs` | 70 | 994 |
+| `saas-journey.mjs`, ciblages `global`, `comparison`, `support` | 12 | 138 |
+
+Soit **284 scénarios navigateur réussis** sur ces parcours. Le contrôle de
+comparaison a aussi révélé un débordement à 320 px/texte à 200 % du bouton
+**Nouvelle édition** ; sa largeur et son retour à la ligne sont corrigés à la
+source, sans modifier sa garde de navigation. Le même scénario passe ensuite.
+Le premier lancement Organisation a échoué techniquement lors d'une capture ;
+la relance identique réussit. Le banc des lots numériques signale des sélecteurs
+commerçants non simulés, sans requête externe ; il ne prouve pas ces lectures.
+
+Limite distincte : la suite SaaS complète s'arrête sur le premier scénario
+Assistant, qui attend neuf éléments `ol > li` et en trouve huit. Le même échec
+est reproduit dans un banc ignoré injectant `JourneyUi.tsx` depuis `HEAD`, sans
+la nouvelle pagination. Cette dette de test préexistante n'est ni masquée ni
+affaiblie ; les douze scénarios SaaS ciblés ci-dessus ont été exécutés
+séparément. Le débordement de Nouvelle édition a également été reproduit avec
+les sources `HEAD` avant correction. Documentation : liens sans erreur ni
+avertissement et 130 sources exportées vérifiées.
+
+Impacts : portail Animation et documentation E73. Aucun changement de contrat
+API, règle métier, permission, migration, donnée, générateur ou configuration
+d'exploitation ; Pro, Marketplace et backend ne sont pas modifiés pour cette
+demande. Statuts de roadmap conservés. Pas de recette hébergée, commit, push
+ou déploiement effectué.
+
+## 31 octobre 2026 — Validations : recherche et choix de l'animation
+
+Demande : rendre la recherche et la sélection d'une animation intuitives sur
+la page **Validations** du portail Animation. Bases Animation **f21e4fe** et
+Projet **607e27c**, avec changements locaux ; travaux précédents conservés.
+La reproduction navigateur constate le choix masqué dans un `details`, une
+recherche à soumettre puis une longue liste de boutons. Le nouveau contrôle
+visible attendu est absent avant correction. Ce parcours est partagé avec
+**Participants**, qui bénéficie du même correctif.
+
+Le choix **Animation** est désormais visible et ouvre un sélecteur recherchable.
+La recherche serveur par nom est temporisée de 250 ms ; elle charge au plus
+une page de 25 éléments et commence à l'ouverture seulement. Référence et
+période distinguent les résultats homonymes. Une sélection applique le filtre
+et ferme le sélecteur ; le nom et la référence restent affichés. L'action
+**Toutes les animations** retire directement ce filtre. Recherche, sélection
+et pagination des validations restent distinctes. Réinitialisation, clavier,
+Échap, retour du focus, attente, absence de résultat et nouvelle tentative
+après erreur sont conservés ou explicités. Les réponses obsolètes sont écartées.
+
+La vérification à 320 px et texte agrandi révèle aussi une mauvaise utilisation
+du tableau mobile : la date était prise pour une case de sélection et les
+colonnes précédant le nom du participant disparaissaient. Une option explicite
+`mobileSelectable=false` conserve ces colonnes et retire les faux contrôles
+de sélection des lectures globales, sans modifier les valeurs par défaut des
+autres tableaux. Leurs contrôles réels de sélection restent testés.
+
+Preuves locales : **16 scénarios navigateur du sélecteur** à 1280/390/320 px,
+dont texte à 200 %, et **4 scénarios Participants/Validations** avec leurs
+60 contrôles. Composants et transport HTTP réels, API synthétique locale et
+réseau externe bloqué ; aucune écriture. **254 tests Node réussis**, aucun
+ignoré, types, lint et build isolé de l'application réussis. Captures inspectées
+sur bureau, mobile et texte agrandi ; revue indépendante sans défaut bloquant.
+
+Périmètre : portail Animation et documentation E73. Réutilisation des composants
+et styles existants, sans surcharge CSS globale. Contrats API, permissions,
+contexte de commune, calculs métier et données inchangés : le filtre utilise
+les lectures existantes. Aucun impact sur migrations, générateur, configuration
+d'exploitation, Pro, Marketplace ou statuts de roadmap. Aucune recette hébergée,
+opération de commit, push ou déploiement réalisée pour ce correctif.
+
+## 31 octobre 2026 — suppression d'un participant : dépendances moteur
+
+Anomalie signalée : `RestrictViolation` sur
+`animation_executions_participant_id_fkey` lors de la suppression d'un
+**participant**. Bases Backend **41bb279**, Projet **607e27c**, avec correctif
+local ; la version hébergée concernée n'est pas identifiée. Cause reproduite
+sur PostgreSQL 18 jetable : le repository supprimait les messages puis le
+participant, sans retirer son exécution. Les cas inscription et chasse
+échouent sur la FK restrictive du moteur ; le cas sans exécution réussit.
+
+Le repository retire désormais tentatives et effets, étapes, puis exécution
+avant le participant, dans la même transaction et sous le verrou existant.
+Les cascades conservent leur responsabilité sur tokens, validations et mesures.
+Les contraintes restrictives, reçus, preuves de tirage, populations figées et
+gains restent conservés. La règle ARB-60, les contrôles de tenant et de droit,
+le verrou animation et l'audit sans données de contact restent inchangés.
+
+Preuves ciblées : suppression sans exécution, inscription et chasse avec
+preuve, tentative et effet ; conservation d'un autre participant, des reçus,
+de l'animation et de sa configuration ; rejeu introuvable. Les migrations
+v241/v242/v283 sont appliquées dans les fixtures PostgreSQL : les compteurs
+participants, validations et progression passent de deux à un. Les messages
+et les diffusions en attente/incertaines sont nettoyés sans perte des totaux
+historiques. Une FK de population figée provoque un refus qui restaure
+messages, compteurs, exécution, étapes, tentatives et effets. Les refus
+applicatifs population figée et gain disposent de cas distincts.
+
+Validation finale : **99 tests ciblés réussis**, aucun ignoré, via
+`scripts/validation/test_isolated.py --postgres-test-url` sur une nouvelle
+base locale jetable. Groupes : messages organisateur, exécution chasse,
+moteur, conservation PIN et SaaS Live, compteurs v283, performance messages,
+service participants, repositories Animation et accès API. La fixture de
+conservation PIN inclut désormais la table des gels SaaS requise par le
+nettoyage des reçus ; ses huit tests passent. Les imports des fixtures
+consommatrices ont été adaptés. **623 contrôles d'architecture réussis**
+avec le groupe prescrit par la matrice transverse. Documentation : liens
+sans erreur ni avertissement et **130 sources exportées vérifiées**.
+
+Impacts : backend et spécifications canoniques EPIC 41/E73. Aucun changement
+du contrat HTTP ni des consommateurs Animation, Live, Pro ou Marketplace ;
+aucune migration nouvelle, reprise de données ou configuration d'exploitation
+nécessaire, car le schéma existant suffit. Le générateur de démonstration
+reste inchangé : le défaut est dans la suppression, pas la génération des
+participants. Roadmap inchangée. Aucune suppression sur TEST, recette hébergée,
+opération de commit, push ou déploiement réalisée pour ce correctif.
+
 ## 31 octobre 2026 — assistant : alertes identifiables par couleur et pictogramme
 
 Demande : rendre les alertes et avertissements immédiatement reconnaissables.
@@ -2930,3 +3198,77 @@ régénération. Le corps JSON est lu par le framework avant validation de sa
 longueur ; la borne HTTP du proxy reste applicable, distincte des contrôles
 base64/image. La recette hébergée RM-FLYER-01 à 05 reste à exécuter. Aucun commit,
 push ni déploiement effectué ; l'état global de l'epic reste inchangé.
+
+## Correctif du 31 octobre 2026 — Live mobile, priorité aux interactions
+
+Demande : optimiser Live sur téléphone comme espace de participation et de jeu.
+Le test de reproduction démontre que l'action d'inscription sort du viewport
+pendant la consultation des lots. La sélection de dix communes ajoute aussi
+une longue liste avant le catalogue ; les bons sont présentés comme une liste
+administrative répétitive.
+
+La fiche publique conserve désormais son unique action principale au-dessus de
+la navigation basse, avec mesure dynamique et espace réservé, puis revient dans
+le flux sur écran bas. Les raccourcis lots/adresses/conditions remontent avant
+les détails ; la récupération est nommée **Retrouver mon inscription**. La
+provenance du lien et la distinction inscription/récupération sont conservées.
+L'accueil présente une priorité dominante et deux suivantes compactes avec
+anneaux réels ; **Les défis locaux** rejoint directement le programme. Le choix
+des communes se déplie à la demande. Les cartes de découverte sont plus compactes.
+
+**Mes lots** présente les bons personnels avec pictogrammes de récompense,
+titre, dernier état connu explicitement local et action de consultation large.
+L'état du bon exact est toujours vérifié à son ouverture. Les QR, accès sensibles,
+consentements, inscriptions et reçus ne sont pas modifiés. Les lots non numériques
+conservent leurs parcours existants ; aucun score ou gain supposé n'est ajouté.
+
+Vérifications sur Marketplace/Live de base `0455fcc` et projet `607e27c`,
+avec les modifications locales conservées :
+
+- `npm run test:security` : **131 tests Node réussis**, aucun ignoré.
+- ESLint réussi sur tous les fichiers JavaScript suivis et les deux nouveaux
+  scénarios navigateur. Le lanceur global `npm run lint` rencontre un `EPERM`
+  dans le dossier de travail `output/bum-politique/pytest-approval-1` ; le
+  contrôle par liste Git couvre les sources sans modifier ses permissions.
+- Build Vite/PWA isolé réussi via `scripts/serve-visual-tests.cjs`, sans
+  charger les fichiers opérateur ni réécrire la configuration publique.
+- **113 scénarios navigateur vérifiés** à 320/390/1280 px et autres formats
+  de l'en-tête, avec texte agrandi à 200 % et écran bas. La campagne initiale
+  donne 111 réussites et deux attentes de fixture erronées sur le bootstrap ;
+  après correction de ce scénario, le fichier complet d'enrichissement est
+  rejoué : **14 réussites**, aucun ignoré. Les autres sources restent identiques.
+  Couverture : fiche publique, refus et dégradation, inscription complète,
+  sauvegarde après erreur, récupération et inscriptions multiples, lots,
+  communes, pagination et réponses tardives, navigation et conservation du
+  parcours Coffrets. Les deux nouveaux bancs sont
+  `tests/visual/live-mobile-actions.spec.cjs` et
+  `tests/visual/live-lots-mobile.spec.cjs` ; ils incluent des contrôles de
+  visibilité, cibles tactiles, séparation action/navigation et absence de
+  mutation métier avant l'action explicite.
+  Captures mobile et texte agrandi relues, conservées dans
+  `localeo-marketplace/tmp/live-mobile-ux-2026-10-31/` hors versionnement.
+- Revue indépendante : gardes et accès conservés ; aucune mutation introduite
+  par les raccourcis, l'ouverture des communes ou la consultation des lots.
+- `check_guidance.py` : **94 guides**, aucune erreur ;
+  `sync_documentation.py --check-sources` : **130 documents** vérifiés.
+
+La recette d'enrichissement personnel de la fiche a été remise en accord avec
+le chargement déjà présent sur HEAD : GET public puis enrichissement facultatif
+par une installation existante, sans renouvellement imposé par la fiche.
+L'ancienne fixture omettait le GET public et attendait ce renouvellement.
+Les nouveaux cas exigent le maintien de la fiche sur erreur privée 401/503,
+l'absence de secret dans la lecture publique, la conservation du carnet et
+de l'installation et les vrais refus publics 404/503 avec possibilité de réessayer.
+Le scénario sans installation simule un refus 503 du bootstrap technique
+anonyme de la coque Live : cette unique tentative ne bloque pas la fiche
+publique et n'enregistre aucune installation, inscription ou autre mutation
+métier. Ce bootstrap, déjà présent sur HEAD et distinct d'un compte, reste
+inchangé ; son absence n'est pas une condition de consultation publique.
+
+Impacts limités à Marketplace/Live et à la documentation canonique
+[entrée unique](localeo-live-entree-unique.md#parcours-et-priorité-mobile).
+Pas de changement backend, API, persistance, migration, variable de configuration
+ni générateur : les données et commandes existantes sont réutilisées. Les
+parcours Marketplace Coffrets et les applications Animation/Pro ne nécessitent
+pas d'adaptation. Aucune opération sur un environnement hébergé, commit, push
+ou déploiement réalisé ; la vérification sur TEST reste à faire après livraison.

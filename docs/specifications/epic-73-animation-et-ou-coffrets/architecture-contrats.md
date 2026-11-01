@@ -367,6 +367,21 @@ injecte la disponibilité commerciale ; le service applicatif n'importe pas la
 configuration d'un adaptateur. Le refus de publication annule aussi le débit du
 quota. Ces propriétés font l'objet de tests PostgreSQL indépendants du diagnostic UI.
 
+L'assistant et l'avancement de préparation contextualisent ces diagnostics :
+les blocages et avertissements avant publication sont présentés uniquement en
+`BROUILLON` et `CONFIGUREE`. En `PUBLIEE`, `EN_COURS`, `CLOTUREE`, `ARCHIVEE` et
+`ANNULEE`, les étapes de préparation sont `NON_APPLICABLE` ; leur ancien détail
+ne constitue plus une alerte courante. L'assistant conserve l'accès
+`NAV_PUBLICATION` au suivi, avec `publication.valide=false` et des listes
+`erreurs`/`avertissements` vides. L'avancement expose `NON_MODIFIABLE`, des
+compteurs à zéro et aucune rubrique ni blocage ; l'interface présente un état
+informatif plutôt qu'une jauge à 0 %. Les écrans Configuration ne relancent pas
+le contrôle avant publication hors préparation. Les alertes opérationnelles
+(tirage, gains, incidents) restent dans leurs projections de suivi.
+Le diagnostic brut de publication conserve ses refus de statut/date et la
+commande revérifie toutes ses conditions. Aucun champ ni droit supplémentaire
+n'est introduit ; cette contextualisation est une projection de lecture.
+
 Les nouvelles éditions, objectifs, sources et satisfactions appartiennent à
 `animation_locale.valorisation`. Une édition conserve sa provenance et les
 révalidations nécessaires, sans copier les participations ou les engagements.
@@ -442,6 +457,28 @@ restent inconnues, sans être présentées comme négatives. Les requêtes de pa
 appliquent la portée autorisée avant la limite et bornent l'enrichissement.
 Le curseur est lié aux filtres. Les totaux ne sont pas calculés à partir de la
 seule page affichée.
+
+Dans le portail Animation, les pages globales **Validations** et **Participants**
+présentent un filtre Animation toujours visible, initialement sur **Toutes les
+animations**. Son ouverture propose une recherche serveur par nom, limitée à
+25 résultats par page, avec référence et période pour distinguer les homonymes.
+Saisir une recherche ne modifie pas le périmètre actif ; choisir un résultat
+filtre immédiatement les indicateurs et la liste. La sélection reste lisible
+après fermeture et peut être retirée directement. Les lectures sont annulées
+à la fermeture ou au changement de recherche ; aucun ancien résultat ne reste
+sélectionnable pendant le chargement. Les erreurs permettent une nouvelle
+tentative sans effacer le filtre déjà appliqué. Sur mobile, les validations
+conservent toutes leurs informations sans faux contrôles de sélection.
+
+La pagination des listes du portail Animation privilégie des pictogrammes
+communs : page précédente, suivante, retour au début et chargement
+supplémentaire. La position s'affiche sous forme compacte, avec le nombre de
+pages uniquement lorsque le serveur permet de le connaître. Les parcours à
+curseur ne proposent ni total ni saut arbitraire inventés. Les noms accessibles,
+infobulles, cibles de 44 px et états indisponibles complètent les pictogrammes.
+Ces contrôles présentent la navigation existante ; ils ne modifient pas les
+filtres, curseurs, chargements par ajout ou remplacement, ni les commandes
+métier et confirmations.
 
 Les API internes `/internal/erp/api/suivi-animations` et
 `/internal/support/api/animations` présentent distinctement moteur, catégorie

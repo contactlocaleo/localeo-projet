@@ -640,13 +640,29 @@ En `PREPARATION_PROMPT`, l'ERP explique que le prompt est en attente du traiteme
 
 ### T6-UX02 — Traitement guidé des demandes dans l’ERP
 
-À la demande utilisateur, la console présente une liste de demandes nommées et un détail en trois étapes : **Prompt**, **Vérification de la réponse**, **Traitement**. Le titre vient du brouillon courant (`animationName` dans la projection). Ce champ accepte `null` dans les anciens reçus persistés pour préserver leur relecture/rejeu ; les listes et détails courants le renseignent systématiquement. Les états et prochaines actions sont en français ; identifiants, affectation, révision, annulation, quota et filtres avancés restent accessibles dans des sections secondaires repliées. Le contexte renseigné par le gestionnaire est lisible dans le détail.
+À la demande utilisateur, la console présente une liste de demandes nommées et un détail en trois étapes : **Générer**, **Importer et contrôler**, **Relire et transmettre**. Le titre vient du brouillon courant (`animationName` dans la projection). Ce champ accepte `null` dans les anciens reçus persistés pour préserver leur relecture/rejeu ; les listes et détails courants le renseignent systématiquement. Les états et prochaines actions sont en français ; identifiants, affectation, révision, annulation, quota et filtres avancés restent accessibles dans des sections secondaires repliées. Le contexte renseigné par le gestionnaire est lisible dans le détail.
 
 1. Sélectionner une demande affiche automatiquement son prompt complet depuis l'export texte serveur : messages et schéma JSON attendu inclus. Le bouton **Copier le prompt complet** copie exactement ce texte ; les téléchargements restent disponibles. Aucun prompt n'est reconstruit ni inventé dans le navigateur si sa préparation est encore en attente ou son contenu purgé.
 2. Coller le JSON de réponse, ou importer un fichier, puis **Vérifier la réponse**. Le nouvel endpoint ERP `POST /internal/animation-locale/operations/{id}/reponses/verifier` reçoit la même enveloppe que le dépôt et rend le rapport du validateur existant. Il exige session, CSRF, droit de dépôt, périmètre, phase, versions et prompt courant. Il contrôle schéma, cohérence métier et médias, sans créer de tentative, fichier, consommation de quota ni transition. Le transport garde le texte JSON original et les contrôles de doublons, taille, profondeur et encodage ; aucune valeur d'entrée sensible n'est recopiée dans les erreurs serveur.
 3. Un rapport conforme affiche un aperçu et permet **Enregistrer la réponse**. Le dépôt durable conserve ses contrôles et son traitement serveur. Après contrôle conforme, l'opérateur relit la tentative enregistrée, confirme sa relecture et choisit **Traiter la demande** ; cette commande accepte la réponse et complète le même brouillon. Elle ne publie pas l'animation au public. Aucune acceptation automatique ni nouvelle permission n'est introduite.
 
 Une modification du texte, du prompt, de la version source ou de la demande invalide la pré-vérification. Les réponses tardives d'une autre sélection ou d'un ancien contrôle sont ignorées ; l'actualisation d'une même demande conserve la saisie. Un changement de sélection avertit avant d'abandonner une réponse non enregistrée. Les saisies restent en mémoire, jamais dans le stockage navigateur. Les lectures des phases techniques peuvent être actualisées automatiquement de façon bornée ; aucune écriture n'est rejouée automatiquement. Une réponse de mutation perdue exige toujours la consultation du reçu avant toute suite, avec la même clé et le même corps en cas de renvoi explicite. L'interface se réorganise sur mobile, conserve navigation clavier, focus visible, libellés et annonces accessibles.
+
+Précision du 31 octobre 2026 : un encart **Votre prochaine action** guide
+l'opérateur selon la phase, les droits et le service de préparation. Si la
+demande reste à qualifier ou attend un complément, son accès au suivi du
+service est prioritaire ; l'affectation seule ne vaut pas qualification et
+aucune progression automatique n'est promise avant ce prérequis. Les états
+de service existants et leurs commandes restent portés par leur page dédiée.
+
+Le prompt reste chargé intégralement, avec copie immédiatement disponible ;
+son texte et ses téléchargements se déplient à la demande. L'import de fichier
+est prioritaire, le collage JSON reste accessible dans un volet secondaire.
+Chaque étape distingue l'action courante, l'attente et l'acquis serveur ; une
+pré-vérification locale conforme indique **À enregistrer**, jamais une étape
+enregistrée. La fin de traitement confirme la transmission du parcours dans
+le brouillon et rappelle que sa publication reste séparée. Le gestionnaire
+peut poursuivre la préparation de la Chasse ou traiter une autre demande.
 
 
 ### T6-UX03 — Passeport manuel dans Localeo Animation
@@ -717,7 +733,8 @@ La publication exige toujours le contrôle serveur courant et sa confirmation
 explicite. Les lectures partagées de T6-UX05, les versions attendues, les droits
 et la réconciliation des reçus restent applicables.
 
-Dans l'ERP, les trois étapes **Générer**, **Importer**, **Valider** remplacent
+Dans l'ERP, les trois étapes **Générer**, **Importer et contrôler**,
+**Relire et transmettre** remplacent
 l'affichage simultané des trois formulaires. La phase serveur indique l'étape
 utile et l'action suivante ; la navigation permet la relecture sans mutation.
 Le dépôt par fichier et le collage de JSON sont accessibles au même endroit.
@@ -928,9 +945,13 @@ la hiérarchie initiale T6-UX07 ; elle conserve leurs règles métier.
   largeur réelle le permet, avec retour au parcours sur petit écran. La
   fermeture rend le focus au déclencheur. Déplacement clavier, cinq activités,
   alternatives historiques et séparation des contenus privés sont conservés.
-- **E55-UX-09-C** — Le parcours reste le support principal. Les rubriques
-  Organisation et lots, Commerces, Terrain, Publication s'ouvrent à la demande
-  et remplacent temporairement le parcours, sur grand comme sur petit écran.
+- **E55-UX-09-C** — Le parcours reste le support principal. Depuis le correctif
+  du 31 octobre 2026, Configuration guide l'organisateur dans cinq étapes
+  numérotées : Parcours, Organisation et lots, Commerces, Terrain, Publication.
+  Une seule étape est visible ; retour et continuation explicites respectent
+  cet ordre conseillé. Les autres étapes restent consultables sans validation
+  implicite. La progression distingue les validations enregistrées du serveur,
+  les contrôles restants, les prérequis à vérifier et les saisies non enregistrées.
   Le correctif E73 du 31 octobre 2026 remplace le panneau adjacent initial par
   une rubrique en pleine largeur, afin de préserver la lisibilité des formulaires
   ([présentation canonique](../epic-73-animation-et-ou-coffrets/perimetres-parcours-saas.md#51-deux-expériences-adaptées-à-leurs-usages)).
@@ -941,7 +962,8 @@ la hiérarchie initiale T6-UX07 ; elle conserve leurs règles métier.
   Un retour du prestataire ouvre cette rubrique et son financement, sans
   attribuer de valeur probante à l'URL.
 - **E55-UX-09-D** — Valider le parcours et continuer enregistre la relecture
-  via la commande existante puis ouvre Commerces après résultat confirmé.
+  via la commande existante puis ouvre Organisation et lots après résultat
+  confirmé, avant Commerces, depuis le correctif du 31 octobre 2026.
   Cela n'envoie aucune invitation. La sélection groupée ne concerne que les
   demandes à envoyer ; le gestionnaire peut retirer un destinataire et envoie
   explicitement le groupe avec son décompte. Un refus permet de revenir adapter
@@ -982,16 +1004,22 @@ Les résultats réels et limites figurent dans le suivi d'implémentation.
 ## E55-UX-10 — avancement de la préparation (26 septembre 2026)
 
 Demande : montrer au gestionnaire ce qui reste à faire dans Parcours,
-Organisation et lots, Commerces et Terrain, depuis une jauge en haut à droite.
+Organisation et lots, Commerces et Terrain. Le correctif du 31 octobre 2026
+remplace la jauge adjacente par les états du parcours guidé, à partir de la
+même projection serveur.
 L'indicateur mesure les contrôles de préparation enregistrés, jamais les visites
 de rubriques, le temps passé ni la publication effective.
 
 ### Critères d'acceptation
 
-- **E55-UX-10-A** — Sur bureau, une jauge compacte occupe la droite de l'en-tête,
-  sans limiter la largeur du parcours. Sur mobile elle se place sous le titre,
-  sans débordement horizontal. Pourcentage global et compteurs des quatre
-  rubriques restent visibles ; le détail se déplie au clavier.
+- **E55-UX-10-A** — Les cinq étapes sont numérotées, avec un état accessible.
+  La coche verte **Validée** exige les contrôles applicables tous `VALIDE` ;
+  une visite ou une sauvegarde partielle ne la produit pas. Un contrôle absent
+  ou inconnu reste à actualiser/vérifier ; un total nul est **Sans objet**.
+  Le contrôle final de publication demeure **À confirmer**, jamais publié sur
+  la seule base de la progression. Sur mobile, numéros et pictogrammes gardent
+  les cinq accès ; le titre et l'état de l'étape active sont lisibles en clair,
+  avec états accessibles des autres étapes et sans défilement horizontal.
 - **E55-UX-10-B** — Le détail présente les contrôles restant à effectuer et les
   messages serveur, avec accès à chaque rubrique et au bilan de publication.
   Un contrôle en attente d'un prérequis reste « à vérifier » et n'est jamais

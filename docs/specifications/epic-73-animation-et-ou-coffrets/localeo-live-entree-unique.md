@@ -69,6 +69,33 @@ du pouce et marge de sécurité PWA. Pas d'accueil marketing avant les tâches.
 Le clavier, le focus, le texte agrandi à 200 % et la réduction des animations
 restent utilisables. Les libellés de navigation peuvent revenir à la ligne.
 
+Précision UX mobile du **31 octobre 2026** : Live privilégie les interactions
+et la progression réelle. Sur la fiche publique, l'action principale unique
+(inscription ouverte ou accès aux participations existantes) reste accessible
+pendant le défilement sur téléphone, au-dessus de la navigation basse. Sa
+position suit la hauteur réelle de cette navigation, y compris avec du texte
+agrandi ; un espace est réservé pour accéder au bas de la page. Sur un écran
+de faible hauteur, l'action reste dans le flux pour préserver la lecture.
+Les raccourcis vers lots, adresses et conditions précèdent les informations
+détaillées. La récupération est nommée **Retrouver mon inscription**, distincte
+de l'inscription ; les accès personnels et le contexte de provenance sont conservés.
+
+L'accueil conserve une priorité dominante et deux suivantes compactes, avec
+anneaux, étapes restantes et actions de reprise. Un raccourci **Les défis locaux**
+permet de rejoindre le programme sans parcourir ces priorités. Le résumé
+**Mes communes** affiche son compteur puis **Choisir une commune** : les liens
+individuels et la modification se déplient à la demande, sans repousser le
+catalogue derrière dix communes. La sélection initiale, lorsqu'elle est vide,
+conserve la recherche et la géolocalisation volontaire.
+
+**Mes lots** présente les bons numériques enregistrés sur l'appareil avec
+pictogrammes de récompense, titre et action large **Consulter mon bon**.
+Le **dernier état connu** reste explicitement local, vérifié par le serveur
+à l'ouverture du bon exact. Aucun score, gain, statut disponible ni nouveau
+total n'est déduit de cette présentation. Le vide propose la découverte et
+l'aide pour ajouter un bon reçu par e-mail. Les autres natures de gains
+conservent leurs parcours existants dans la participation.
+
 La recherche ajoute ou retire des communes sans changer les inscriptions. Une
 commune partagée par URL constitue un contexte de consultation : son ouverture
 ne modifie pas silencieusement les communes suivies. Le suivi exige une action.

@@ -395,7 +395,7 @@ Regles specifiques :
 - une validation est refusee si le commercant n'est pas eligible ;
 - une validation est refusee si l'etape a deja ete validee par le participant ;
 - la suppression manuelle d'un participant exige `animation:supprimer_participant` et le tenant commune actif ;
-- la suppression efface aussi les tokens et validations du participant, mais jamais une preuve de tirage ou un gain ;
+- la suppression efface aussi les tokens, validations et donnees de jeu du participant (tentatives, effets, etapes et execution), dans la meme transaction, mais jamais une preuve de tirage ou un gain ; les recus suivent leur politique de conservation ;
 - un participant appartenant a une population eligible figee ou reference par un gain ne peut plus etre supprime ;
 - une validation peut etre refusee si elle est trop rapprochee d'une validation precedente ;
 - la progression est calculee a partir du nombre de validations distinctes ;

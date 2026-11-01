@@ -223,6 +223,12 @@ des parcours existants sont conservés. La communication rend explicites les
 trois étapes brouillon, vérification des destinataires et confirmation de
 diffusion ; module, autorisation ou fenêtre indisponibles restent expliqués.
 
+Pour la **Configuration d'une chasse en préparation**, le parcours guidé
+remplace le bandeau générique « Action suivante » : il présente les cinq étapes
+numérotées et leur continuation, sans proposer simultanément un saut vers la
+publication. Les actions générales restent disponibles dans les autres
+rubriques de la fiche.
+
 Précision du **31 octobre 2026**, création et préparation des chasses : le brief
 et son pied d’actions exploitent toute la largeur disponible. Le récapitulatif
 met en avant commune, dates, commerces et nombre d’étapes avec pictogrammes ;
@@ -255,13 +261,35 @@ pictogramme d’information. Fond et liseré distinguent chaque point ; le texte
 de sévérité reste explicite sans perception de la couleur. Les erreurs de
 lecture de l’assistant gardent leur annonce accessible et un repère rouge.
 Pour une chasse, **Ouvrir — Informations et dates** rejoint directement
-**Configuration → Organisation et lots**, sans ouvrir le financement. La
+**Configuration → Organisation et lots → Calendrier**, sans ouvrir le financement. La
 navigation ne vaut ni enregistrement ni validation de l’échéance.
 Configuration affiche une seule rubrique à la fois, en pleine largeur, avec
 consigne et repère de progression. Les panneaux visités gardent leurs saisies
 et les blocages liés aux commandes incertaines. Paramètres, dates, règlement et
 dotation ont des groupes explicitement nommés ; leur enregistrement reste
 distinct, sans validation ni publication par simple navigation.
+
+Précision du **31 octobre 2026**, guidage des validations Chasse : l'ordre
+conseillé devient **Parcours → Organisation et lots → Commerces → Terrain →
+Publication**. Enregistrer la relecture du parcours conduit à Organisation et
+lots après confirmation, sans sauter directement aux invitations. Les étapes
+affichent **Validée**, **À compléter**, **À vérifier**, **À enregistrer** ou
+**Sans objet** depuis la projection de préparation ; les visites ne valent
+aucune validation. Un contrôle absent ou indisponible ne conserve aucune coche.
+Les contrôles restants de l'étape courante précèdent les détails, avec accès
+au détail des validations. Les blocages généraux restent visibles même à 100 %.
+
+Organisation et lots présente successivement **Présentation, Calendrier,
+Règlement, Lots et remise**, une section visible. La navigation de saisie
+n'enregistre rien ; la commande complète des paramètres garde son bouton et
+son accusé. Les lots ne s'ouvrent qu'après enregistrement confirmé des
+paramètres ; la dotation garde son enregistrement distinct. La confirmation
+terrain de l'édition rejoint Terrain, avec ses QR publics et le suivi des
+commerçants. QR et confirmation terrain ne peuvent être engagés en parallèle
+pendant une commande non résolue. Les reçus et saisies restent montés dans les
+étapes visitées ; publication et paiement conservent leurs confirmations.
+Le pied du guide reste dans le flux sur mobile et texte agrandi pour laisser
+le contenu consultable ; sur grand écran il reste accessible au défilement.
 
 Précision du **31 octobre 2026**, navigation de la fiche Animation : remplacer
 la rangée défilante des quinze onglets par quatre espaces. Seules les

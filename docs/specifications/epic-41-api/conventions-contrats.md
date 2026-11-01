@@ -193,7 +193,7 @@ La projection partenaire masque les evenements de securite, corrections internes
 - Par decision `ARB-46`, les PII participant ne sont pas chiffrees au niveau applicatif au MVP. Elles restent protegees par controle d'acces, masquage, audit, securite de l'infrastructure et politique de conservation ; ce choix doit etre reevalue avant production.
 - Aucun token ni QR brut n'apparait dans les logs.
 - Les endpoints de renvoi de QR appliquent rate limiting et reponse non enumerante.
-- La suppression manuelle efface le participant, ses tokens et ses validations. Elle est refusee en `409` si le participant appartient a une population eligible figee ou si un gain le reference ; les preuves de tirage ne sont jamais reecrites.
+- La suppression manuelle efface le participant, ses tokens, ses validations et son execution moteur, y compris les tentatives, effets et etapes de chasse. Le nettoyage reste atomique avec les messages personnels et leurs compteurs ; les recus conservent leur cycle de conservation distinct. Elle est refusee en `409` si le participant appartient a une population eligible figee ou si un gain le reference ; les preuves de tirage ne sont jamais reecrites.
 
 ## 9. Versionnement
 
