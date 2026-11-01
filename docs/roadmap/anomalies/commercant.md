@@ -1,5 +1,84 @@
 # Registre des anomalies
 
+## Correction du 1er novembre 2026 — invitation salarié et aide au mot de passe
+
+Signalement : revoir `/salaries/invitation` et reprendre la politique commune
+d'initialisation du mot de passe. Version distante non précisée ; reproduction
+locale sur la base Commerçant `a946ee2`. La page ne présentait aucune règle et
+envoyait une saisie de moins de 12 caractères au serveur. La jauge commune
+présentait à tort des classes de caractères obligatoires et validait l'absence
+du login même lorsqu'il était inconnu. La politique serveur était déjà partagée.
+
+Correction locale : cadre Localeo Pro, étapes Invitation / Mot de passe /
+Connexion, commerce et destinataire masqué, expiration explicite, affichage ou
+masquage de la saisie, aide commune à la longueur et messages de refus utiles.
+La jauge ne certifie plus une robustesse globale. La longueur minimale affichée
+reste la valeur commune de 12 caractères ; les exigences configurées et les
+refus de mots courants ou de fragments du login restent vérifiés par le serveur.
+Les erreurs 409 de politique reconnues permettent une correction. La résolution
+temporairement indisponible se réessaie ; une mutation incertaine ne se rejoue
+pas. Lien invalide sans formulaire, succès distinct et connexion explicite.
+Le jeton reste dans le corps JSON, l'URL et la session sont nettoyées.
+
+Preuves : reproduction Vitest rouge avant correction pour la saisie trop courte,
+puis **27 tests Vitest réussis** (`PublicEmployeeAccess`, `EmployeeAccess`) et
+**13 scénarios Playwright réussis** (`employee-invitation-ux`, `employees`).
+Rendus inspectés à 320, 390 et 1280 px, texte à 200 %, sans débordement horizontal.
+Audit axe sans violation sur l'invitation, son succès, le lien expiré et l'aide
+commune de l'initialisation principale. Le contrôle a révélé un contraste
+insuffisant dans cette aide ; il passe après correction. Build isolé réussi,
+API simulées, aucun email réel. Captures dans
+`localeo-commercant/tmp/employee-invitation-ux/`.
+
+Revue backend indépendante : **29 tests existants réussis** via
+`scripts/validation/test_isolated.py` : service de politique, gestion du mot de
+passe Animation, initialisation/réinitialisation commerçant et API salariés E72.
+Les orchestrations emploient des doubles ; aucune recette PostgreSQL ni rejeu
+sur TEST n'a été réalisé. La revue frontend indépendante n'a relevé aucun défaut
+de nettoyage, de session ou de rejeu des mutations dans les fichiers concernés.
+
+Impacts : interface Commerçant et documentation canonique d'authentification.
+Aucune modification de règle serveur, contrat API, permission, schéma, migration,
+générateur de démonstration ou configuration d'exploitation. La limite technique
+bcrypt de 72 octets, explicitement traitée par Animation mais pas par les services
+commerçant/salarié, n'est pas modifiée par cette harmonisation de l'aide.
+Aucun commit, push ou déploiement dans cette intervention.
+
+## Correction du 1er novembre 2026 — ergonomie des accès salariés
+
+Signalement : la page **Accès salariés** de Localeo Pro manque de repères
+visuels et de hiérarchie. Version distante non précisée ; reproduction locale
+sur la base Commerçant `a946ee2`, route `/salaries`, compte principal autorisé.
+L'ancien écran réutilisait les styles étroits du PIN, affichait les codes API
+bruts et juxtaposait invitations et révocation.
+
+Correction locale : en-tête de gestion commun, formulaire d'invitation distinct,
+liste structurée sur toute la largeur, pictogrammes et badges avec libellés,
+états d'invitation et d'envoi séparés, expiration lisible, actions regroupées
+et pagination par flèches nommées. L'état du compte reste distinct de
+`acces_effectif` fourni par le serveur. Les valeurs inconnues restent neutres.
+L'option inactive désactive aussi la saisie ; les révocations restent possibles.
+Les confirmations contextuelles, le retour du focus, les versions et le blocage
+après réponse incertaine sont conservés.
+
+Preuves locales : reproduction navigateur échouant avant correction sur le
+libellé « Invitation expirée », puis **21 tests Vitest** réussis
+(`EmployeeManagement` et `EmployeeAccess`) et **10 scénarios Playwright** réussis
+(`employee-management-ux` et `employee-confirmation`). Couverture : liste longue,
+email long, option inactive, état vide, compte activé mais accès indisponible,
+invitation expirée, échec d'envoi, révocation, renvoi et annulation avec focus
+clavier et une seule commande. Rendu inspecté à 320, 390 et 1280 px, texte
+agrandi à 200 % sur 320 px, absence de débordement horizontal et audit axe sans
+violation sur la page. Build navigateur isolé réussi, API simulées, aucun envoi
+réel. Captures locales dans `localeo-commercant/tmp/employee-management-ux/`.
+
+Impacts : présentation Commerçant et ce suivi uniquement ; aucun changement
+de contrat API, droit, règle métier, schéma, migration, générateur de
+démonstration ou configuration d'exploitation. Les styles sont isolés dans
+`EmployeeManagement.module.css`, avec réutilisation de `BusinessWorkspace`
+et `StatusBadge`. Aucun commit, push ou déploiement dans cette intervention ;
+rejeu sur TEST après livraison non effectué.
+
 ## ANO-COM-E73-INVITATION-DECISION — Accès à la réponse commerçant
 
 Signalement du **30 octobre 2026** sur TEST : absence du bouton de validation

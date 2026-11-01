@@ -38,6 +38,24 @@ La session commerçant existante reste le mécanisme d'autorisation des appels m
 - Les endpoints backend Epic 10 sont disponibles dans l'environnement utilisé par la PWA, meme si `api/localeo-openapi.json` peut ne pas encore tous les lister.
 - Le front affiche une jauge de politique mot de passe, tout en laissant le backend appliquer la validation définitive.
 
+### Aide commune à la création du mot de passe
+
+L'initialisation, la réinitialisation et l'invitation salarié dans Localeo Pro
+partagent la même aide : 12 caractères minimum par défaut, éviter les mots de
+passe courants et les éléments de l'identifiant. Aucune classe de caractères
+(majuscule, chiffre ou symbole) n'est obligatoire. La jauge indique uniquement
+la longueur ; elle ne certifie ni la robustesse globale, ni l'absence de fragments
+de l'identifiant lorsque celui-ci est inconnu ou masqué. Le service backend
+`service_mot_de_passe` reste responsable des refus et de la longueur configurée
+par `LOCALEO_PASSWORD_MIN_LENGTH`.
+
+Sur `/salaries/invitation`, le parcours présente le commerce, l'adresse masquée
+et l'expiration après résolution du lien, puis la saisie et la confirmation.
+Les refus de politique permettent une correction ; un résultat de mutation
+incertain ne déclenche pas de renvoi automatique. La réussite mène à une
+connexion explicite, sans session créée implicitement. Le lien est nettoyé
+de l'URL et aucun formulaire n'est proposé pour une invitation indisponible.
+
 ## État actuel constate
 
 Le projet front est une PWA React/Vite compacte :
