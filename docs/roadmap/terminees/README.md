@@ -2,11 +2,13 @@
 
 [Retour à la roadmap](../README.md)
 
-61 EPIC terminées : 59 du tronc commun et deux identifiants applicatifs
+62 EPIC terminées : 60 du tronc commun et deux identifiants applicatifs
 (EPIC-MARKETPLACE-18 et EPIC-PRES-CONTENU-001). Les EPIC 3 et 4 restent décrites
-dans la roadmap produit ; les 59 autres disposent chacune d'un fichier ci-dessous.
+dans la roadmap produit ; les 60 autres disposent chacune d'un fichier ci-dessous.
 Les compléments de conception, de tests et d'interface sont réunis dans leur backlog.
 Les recettes d'environnement restantes ne modifient pas ce classement.
+
+- [EPIC 73 — Localeo Animation et/ou Coffrets](epic-73-animation-et-ou-coffrets-backlog.md) : clôture technique le 1er novembre 2026 selon E73-DEC-CLOTURE-TESTS ; 63 critères et extensions raccordés aux preuves dans le [bilan](../../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md). Activation et pilote suivis séparément.
 
 - [EPIC 66 — Localeo Atelier : coffrets assistés par IA](epic-66-localeo-atelier-coffrets-assistes-ia-backlog.md) : clôture produit le 1er octobre 2026 après confirmation utilisateur ; réserves de préparation de livraison dans le bilan canonique.
 

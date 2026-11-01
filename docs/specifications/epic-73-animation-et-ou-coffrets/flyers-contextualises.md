@@ -3,7 +3,7 @@
 Évolution **E73-EVO-FLYER**, demandée le **22 octobre 2026**, rattachée aux
 US02/04/05/06/23/29 et aux supports de communication de l'epic 41. Elle complète
 les 63 critères initiaux sans les renuméroter ni modifier l'état de l'epic.
-[Dossier E73](README.md), [backlog](../../roadmap/en-cours/epic-73-animation-et-ou-coffrets-backlog.md),
+[Dossier E73](README.md), [backlog](../../roadmap/terminees/epic-73-animation-et-ou-coffrets-backlog.md),
 [direction artistique existante](../epic-41-api/flyer-direction-artistique.md).
 
 ## Écart fonctionnel

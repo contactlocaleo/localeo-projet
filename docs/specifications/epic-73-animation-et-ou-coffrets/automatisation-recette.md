@@ -1,5 +1,11 @@
 # E73 — Automatiser la recette métier sur TEST
 
+Clôture technique du **1er novembre 2026**, selon **E73-DEC-CLOTURE-TESTS** :
+les preuves sont dans le [bilan unique](verification-livraison.md). Cette clôture
+ne requalifie aucun scénario RM ci-dessous : la recette historique conserve
+40/130 scénarios entièrement validés et 90 partiels. Les actions pilotes et
+d’activation restent distinctes des conditions de clôture.
+
 Mise à jour du **30 octobre 2026**. Cible retenue : **environnement de test avec un nouveau jeu dédié**. Le lanceur et la préparation additive existent dans `localeo-backend/scripts/recette_e73`. La couverture des 130 scénarios du [plan métier](recette-metier.md) reste partielle : un scénario référencé au catalogue n’est pas nécessairement automatisé, et un parcours codé n’est pas encore une preuve de réussite distante.
 
 ## État concret et commandes

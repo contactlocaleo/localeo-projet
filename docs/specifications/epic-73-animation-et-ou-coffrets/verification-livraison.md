@@ -1,8 +1,216 @@
 # E73 — Vérification, migration et livraison
 
-Version de conception du **17 octobre 2026**, réalisation locale commencée le **18 octobre 2026**. [Dossier](README.md), [architecture](architecture-contrats.md), [critères canoniques](../../roadmap/en-cours/epic-73-animation-et-ou-coffrets-backlog.md). La matrice décrit les preuves attendues ; leur exécution effective et leurs limites sont enregistrées par lot dans le [suivi de réalisation](suivi-implementation.md). Un scénario sans preuve enregistrée reste non exécuté. Un lien vérifié ou une revue documentaire ne valide pas un comportement applicatif.
+Version de conception du **17 octobre 2026**, réalisation locale commencée le **18 octobre 2026**. [Dossier](README.md), [architecture](architecture-contrats.md), [critères canoniques](../../roadmap/terminees/epic-73-animation-et-ou-coffrets-backlog.md). La matrice décrit les preuves attendues ; leur exécution effective et leurs limites sont enregistrées par lot dans le [suivi de réalisation](suivi-implementation.md). Un scénario sans preuve enregistrée reste non exécuté. Un lien vérifié ou une revue documentaire ne valide pas un comportement applicatif.
 
 ## 1. Traçabilité des 63 critères
+
+### Règle de clôture actualisée le 1er novembre 2026
+
+La décision utilisateur **E73-DEC-CLOTURE-TESTS**, tracée dans le backlog,
+sépare l’acceptation du développement de l’activation opérationnelle.
+Les tests fonctionnels, PostgreSQL, contrats, interfaces, migrations et reprise
+isolée conditionnent la clôture. Le pilote, les avis humains, la bascule des
+domaines et l’exercice sur l’hébergement restent des actions de mise en service,
+sans être des conditions de clôture de l’epic. Leur absence n’est pas convertie
+en preuve de réussite. Les résultats historiques de recette restent inchangés.
+
+Cette règle s’applique à CA-28/63 et aux extensions ; les contrôles locaux
+doivent toujours vérifier les gardes, refus, intégrité et reprises. Les objectifs
+hébergés RPO/RTO et le fonctionnement des fournisseurs ne sont pas attestés par
+ces tests. Les sections d’exploitation ci-dessous conservent leur portée avant
+activation, distincte du verdict de développement.
+
+### Revue technique du 1er novembre 2026
+
+**Clôture technique prononcée le 1er novembre 2026**, selon
+E73-DEC-CLOTURE-TESTS : les 63 critères et les extensions sont raccordés aux
+preuves exécutées ou explicitement réutilisées ci-dessous. Références examinées :
+Projet `79f687b`, Backend `590e38b`, Animation `df71e72`, Marketplace `6c1aaac`,
+Pro `6c7489e`. Les modifications de cette revue sont identifiées séparément ;
+aucun SHA à venir n’est présenté comme exécuté.
+
+Trois revues ciblées ont suivi les critères jusqu’aux producteurs et consommateurs :
+dotations/périmètres, SaaS/équipes/imports/campagnes, Live/Pro et extensions.
+Aucun développement métier manquant n’est établi dans ces périmètres. Deux
+défauts des tests ont été reproduits puis corrigés :
+
+- `test_catalogue_versionne_erp.py` appelait une vue SQLAdmin avec `None` au
+  lieu d’une requête authentifiée. Le montage de l’API par une suite précédente
+  rendait ce test dépendant de l’ordre. La correction conserve le vrai garde,
+  une session ADMIN synthétique, le refus de l’édition ORM et ajoute trois
+  refus avant lecture SQL pour Backoffice, Support et Finance. Le fichier seul
+  passait avant correction ; la suite assemblée révélait le défaut.
+- `tests/browser/saas-journey.mjs` cherchait les anciens blocs de l’Assistant.
+  Il ouvre désormais les contrôles secondaires et vérifiés, conserve le contrôle
+  exhaustif des neuf points, ajoute un seul point développé et garde navigation
+  clavier, destination, aide et absence de mutation.
+
+La revue indépendante a aussi identifié une lacune de preuve **CA-63** : les
+tests existants couvraient séparément le cycle de dump/restauration et la reprise
+des suppressions/révocations. Un nouveau test PostgreSQL les enchaîne sur un
+état E73 réellement sauvegardé et restauré ; aucune garde métier n’est retirée.
+
+#### Preuves renouvelées
+
+| Dépôt / commande ou rapport | Résultat exécuté | Portée et limites |
+| --- | --- | --- |
+| Backend, `test_isolated.py`, `tmp/e73-closure-core-final-20261101.xml` | 128 réussites, aucun skip | Domaine dotations/bons/produits, API, ERP catalogue et projection Pro ; première exécution 124 réussites/1 échec de harnais/3 skips PG conservée |
+| Backend, `tmp/e73-closure-catalogue-fixed.xml` | 9 réussites | Montage API avant SQLAdmin ; reproduit l’ordre qui échouait |
+| Backend, `tmp/e73-closure-saas-20261101.xml` | 213 réussites et 3 skips PostgreSQL | Domaine/API SaaS ; les trois cas modules sont repris dans la passe PostgreSQL ci-dessous, pas déclarés réussis ici |
+| Backend, `tmp/e73-closure-saas-support-20261101.xml` | 104 réussites, aucun skip | Support et coûts, domaine/API/transport |
+| Backend, `tmp/e73-closure-76609eddaab0/architecture.xml` | 623 réussites, aucun skip | Architecture, classes de domaine et use cases dédiés |
+| Backend, `tmp/e73-closure-76609eddaab0/recovery-tools.xml` | 35 réussites, aucun skip | Copie cohérente, remappage de fichiers et anciennes sessions à compteur nul |
+| Backend, trois bancs `recette-e73-{public-operations,isolated,registry}.test.mjs` | 106 réussites, aucun skip | Prérequis, preuves, refus de fausse réussite et matrice de recette ; ne valent pas 106 recettes hébergées |
+| Backend, `tmp/e73-closure-76609eddaab0/core-pg.xml` | 123 réussites, aucun skip, 517,07 s | Bases et schémas jetables, transactions, concurrence, modules et conservation ; les trois cas modules précédemment ignorés sont exécutés |
+| Backend, `tmp/e73-closure-76609eddaab0/import-pg.xml` | 2 réussites, aucun skip, 12,18 s | Compteurs d’import réellement persistés après les changements de leurs producteurs |
+| Backend, `run_demo_compatibility_tests.py`, `tmp/e73-closure-76609eddaab0/demo/results.xml` | 10 réussites, aucun skip, 735,13 s | Migrations courantes jusqu’à v285, génération, export/restauration, reset et refus des skips ; sept avertissements de réflexion SQLAlchemy |
+| Backend, `test_restauration_saas_dump_postgres.py`, `tmp/e73-ca63-ef52d8c49ceb/result-04.xml` | 1 réussite, aucun skip, 16,30 s | Dump/restauration E73 effectifs, journal externe, refus/reprise/idempotence, ancien lien refusé et nouveau parcours opérationnel ; PostgreSQL local avec SCRAM |
+| Animation, `pnpm test` | 295 réussites, aucun skip | Inclut les contrats et destinations du nouvel Assistant |
+| Animation, `account-app.mjs` | 126 assertions réussies | Compte et équipe, 1280/320 px |
+| Animation, `modules.mjs` | 70 scénarios / 994 assertions réussis | Droits, paiements, reprises, 1280/390/320 px et texte 200 % |
+| Animation, `merchant-imports.mjs` | 22 scénarios / 292 assertions réussis | Import, refus, reprise et mobile |
+| Animation, `reversibilite-catalogue.mjs` | 12 scénarios / 100 assertions réussis | Export/fermeture et catalogue |
+| Animation, `assisted-preparation.mjs` | 18 scénarios / 234 assertions réussis | Préparation accompagnée, attentes, reprise et mobile |
+| Animation, `saas-journey.mjs` | 26 scénarios / 295 assertions réussis | Assistant, support, nouvelle édition et mesures, bureau/mobile/texte 200 % |
+| Marketplace, cinq fichiers Playwright, `tmp/e73-closure-local-consumers-20261101.log` | 32 scénarios réussis | `live-entry-redirects`, `live-discovery-unique`, `live-public-detail`, `live-flyer-image`, `digital-lot` ; build isolé, API simulées |
+| Pro, cinq fichiers Vitest, `tmp/e73-closure-contracts-20261101.log` | 73 réussites | Contrats généraux, préparation, animations, bons et origines publiques |
+| Pro, trois contrats de transport contre le canonique E41, `tmp/e73-closure-canonical-contracts-20261101.log` | 44 réussites | Ces tests recouvrent les 73 précédents ; pas d’addition des effectifs |
+
+Backend : Python 3.14.3, lanceurs isolés sans dotenv, bootstrap, ordonnanceur ni
+transport externe. PostgreSQL 18 est lancé exclusivement sur trois clusters
+locaux neufs sous `tmp/e73-closure-76609eddaab0/`, avec noms de bases jetables
+autorisés par les runners. Le premier démarrage de l’outillage temporaire a été
+arrêté proprement après attente sur un pipe Windows hérité ; ce n’est pas une
+anomalie produit ni une preuve de test. Aucune base TEST partagée n’est utilisée.
+Les scripts front emploient des configurations de build/test isolées ; aucun
+fournisseur réel n’est contacté. Les captures restent hors Git.
+
+CA-63 utilise un quatrième cluster dédié, arrêté proprement comme les trois
+précédents. Le premier passage du nouveau test avait omis la simulation exigée
+avant purge réelle : le harnais ajoute cette simulation, sans modifier le garde.
+Une tentative pendant un redémarrage incomplet est interrompue, non comptée ;
+le rapport `result-04.xml` porte sur la version finale portable avec SCRAM.
+La sauvegarde SQL restaure le schéma E73 synthétique et son ancien état, puis
+la reprise traite le journal indépendant et les familles de conservation
+courantes. Dossier et produits restent cohérents ; l’ancien lien restauré est
+refusé, un nouveau lien fonctionne et son rejeu est refusé. Le stockage hébergé,
+RPO/RTO et un nouveau parcours QR/PIN après ce dump ne sont pas attestés par
+ce test ; les tests QR/PIN restent des preuves séparées de la passe PostgreSQL.
+
+Le job PostgreSQL de `.github/workflows/tests.yml` inclut ce nouveau scénario,
+avec clients PostgreSQL 18 et `LOCALEO_TEST_PG_BIN`. Le YAML et la sélection
+du test sont vérifiés ; aucune exécution GitHub Actions distante n’est annoncée.
+
+#### Réutilisation des preuves et contrats
+
+Les résultats antérieurs cités dans les raccordements ci-dessous et dans le
+[suivi](suivi-implementation.md) sont **réutilisés**, sans annoncer un nouveau
+rejeu. La comparaison des producteurs SaaS depuis `7f74166` montre des changements
+sur la projection des modules actifs et les compteurs d’import, couverts par
+les passes ciblées ; les règles équipes/password, campagnes, préparation
+accompagnée, support, valorisation, coûts et réversibilité restent inchangées.
+Les suites transactionnelles des lots 01/03/06/07/08/09/10 conservent donc leur
+valeur pour ces règles, avec leurs limites initiales. Le cycle de démonstration
+est renouvelé car sa dernière preuve consolidée précédait les migrations récentes.
+
+Les rappels Live gardent les preuves domaine/PostgreSQL du 30 octobre : leurs
+producteurs restent inchangés depuis `586a51f`. Les 38 scénarios de participations
+et les menus Pro vérifiés le 1er novembre sont réutilisés sur leurs sources
+inchangées. Les 60 scénarios Assistant, 40 parcours workspace et tests du guide
+Chasse consignés juste avant `df71e72` restent applicables ; le nouveau banc
+SaaS complète leur intégration.
+
+Le contrat embarqué Pro a été confronté au canonique E41, avec déréférencement
+et exécution des transports contre ce canonique. Quatorze différences sont
+compatibles avec les opérations consommées : annotation de fichier multipart,
+champs Flyer optionnels ignorés par le normaliseur, propriétés/état de gains
+ou bilans d’opérations non consommées par Pro. Aucun champ obligatoire de
+commande Pro ne change ; aucune édition manuelle de snapshot n’est nécessaire.
+Empreintes SHA256 : Pro `dc2ef8ce8417d5da366001eb4b6a997e5b9d53e07212f9b409a7fb3707f5989f`,
+canonique `ff15ee2576b51515a83fbf0cff3581c5aebe0b8d71ef54477c67ad3da91a58e2`.
+
+#### Extensions incluses dans la revue
+
+| Critères complémentaires | Code et preuves techniques | Actions d’activation séparées |
+| --- | --- | --- |
+| LIVE-01 à 12, DOMAINES-01 à 04 | Routage Live, catalogue public, communes, ancien carnet, redirections et contrats d’origines ; 32 navigateurs actuels et preuves de découverte/participations réutilisées | DNS/TLS, même API réelle, routes rechargées sur hébergement, anciens liens et PWA installée |
+| UX-PUBLIC-01 à 03 | Géolocalisation, navigation et contexte public repris dans LIVE-UNIQUE ; l’ancienne interface marketplace Animation est remplacée par Live, les parcours Coffrets sont conservés | Autorisation GPS et liens sur les appareils cibles |
+| LIVE-UX-01 à 04, HOME-01 à 06, ALERTE-01 à 05 | Priorités bornées, données serveur, refus sans consentement, déduplication/horaires/concurrence PostgreSQL et interface mobile ; preuves des 30 octobre/1er novembre reliées aux sources inchangées | Réception Push sur appareil avec accord volontaire, tâches et fournisseurs configurés |
+| OA-01 à 04, CA-16/17/18/19 précisés | Référencement/onboarding par produit, absence de contrat/RDV/Stripe pour Animation seule, menus Pro ; preuves du 1er novembre et contrats Pro renouvelés | Vérifier après livraison les permissions et le commerce de recette explicitement qualifié |
+| FLYER-01 à 05 | Backend droits/conflits/PDF/QR et UI du lot Flyer, image publique contrôlée ; nouveaux parcours `live-flyer-image` sans illustration inventée | Vérification du rendu et téléchargement réels après livraison |
+| UX-ERP-01 à 03 et guide de publication | Navigation, headers/retours, états et actions, contrôles clavier/mobile/zoom ; preuves ERP et nouvelle recette SaaS | Validation d’usage et accompagnement, sans les annoncer effectués |
+
+Les matrices détaillées restent dans leurs spécifications canoniques. Cette
+synthèse les raccorde au bilan de clôture, sans créer un second backlog.
+
+#### Verdicts des critères de base
+
+Les raccordements par lot ci-dessous donnent les fichiers et comportements
+détaillés. Cette table distingue les preuves renouvelées des résultats antérieurs
+réutilisés ; elle couvre les 63 IDs sans additionner des suites qui se recouvrent.
+
+| Critères | Propriétaire, preuve et résultat observable | Verdict technique au 1er novembre |
+| --- | --- | --- |
+| CA-01 à 11, 29 | Dotation/attribution dans le domaine Animation ; domaine et API renouvelés, PostgreSQL `test_dotation_animation_postgres.py` et `test_tirages_libres_postgres.py` : choix, gel, candidats, ordre, confirmation/remise/reprise et refus. Parcours Coffrets et navigateurs dotation/gain des lots 02/04/05 réutilisés | Vérifiés |
+| CA-12 à 14, 37 à 41, 54 à 55 | Droits/modules et commandes commerciales ; domaine/API actuels, catalogue ERP authentifié, PostgreSQL modules/droits et navigateur modules renouvelés. Paiements/remboursements concurrents et factures du lot 03 réutilisés | Vérifiés |
+| CA-15 à 22, 26 | Référencement/identités et engagements ; périmètres, onboarding, RDV Animation, droits courants et PIN historiques rejoués en PostgreSQL. Pro, OnBoard et extension OA du 1er novembre réutilisés ; refus de nouveaux usages après retrait et suspension prioritaire | Vérifiés |
+| CA-23 à 24 | Catalogue public et Live ; redirections, découverte, fiche, anciens accès et bons dans les 32 parcours navigateur renouvelés ; reprise du carnet, consentement et stockage des lots 04/05/09 et LIVE réutilisés | Vérifiés dans les tests ; domaines/appareils réels à contrôler à l’activation |
+| CA-25 | Projections ERP/Support/Atelier, jamais propriétaires des règles ; tests produits du lot 10 (75 réussites avec réversibilité) réutilisés, architecture et projection Pro renouvelées ; droits territoriaux, distinction des produits, refus fournisseur et CSV de page | Vérifié |
+| CA-27 | Générateur, inventaire des tables, migrations et cycle réel de démonstration : 10 tests renouvelés, dont sauvegarde/restauration et reprise après interruption | Vérifié |
+| CA-28 | Accès/tenants, contrats producteurs-consommateurs, readiness modules, harnais isolés et documentation de livraison ; suites backend/Animation/Pro renouvelées et contrôles du lot 10 réutilisés | Vérifié selon E73-DEC-CLOTURE-TESTS ; publication et pilote séparés |
+| CA-30 à 36 | Inventaire, attribution numérique et consommation ; PostgreSQL inventaire/PIN/tirages/ordre renouvelé : exclusivité, concurrence, refus, remplacement et intégrité. Contrats Pro et parcours bon Live renouvelés ; incidents et email du lot 05 réutilisés | Vérifiés |
+| CA-42 à 45 | Import commerçants ; domaine/API, 22 scénarios navigateur et deux tests PostgreSQL des compteurs renouvelés, reprise/concurrence du lot 06 réutilisée | Vérifiés |
+| CA-46, 57 | Quota chasse, publication et préparation accompagnée ; concurrence du dernier crédit/readiness du lot 07 réutilisée, 18 scénarios navigateur et domaine/API renouvelés | Vérifiés |
+| CA-47 à 49 | Campagnes, audience, consentement, quotas et diffusion ; transactions/concurrence/rollback/transport des lots 08/10 réutilisés, tests SaaS et navigateur communication renouvelés | Vérifiés ; aucune réception fournisseur réelle revendiquée |
+| CA-50 à 53 | Identité et organisation ; tests sessions, invitations, transfert et concurrence du lot 01 réutilisés, domaine/API et compte/équipe navigateur renouvelés | Vérifiés |
+| CA-56, 58 à 60 | Assistant, support et valorisation ; tests métier/API support renouvelés, PostgreSQL lot 09 réutilisé, guide/Assistant et 26 scénarios SaaS actuels. Une lecture ne publie ni ne consomme de quota | Vérifiés |
+| CA-61 à 62 | Coûts, réversibilité et fermeture ; domaine/API coûts renouvelés, 43 tests coûts/lectures et 75 export/fermeture du lot 10 réutilisés, 12 scénarios navigateur renouvelés | Vérifiés |
+| CA-63 | Conservation et reprise ; 123 tests PostgreSQL actuels incluent purges/révocations/gardes. Le nouveau `test_restauration_saas_dump_postgres.py` sauvegarde un état E73, détruit/restaure réellement son schéma jetable, rejoue le journal externe et les purges, puis vérifie réouverture et accès | Vérifié selon E73-DEC-CLOTURE-TESTS ; preuve intégrée locale réussie et raccordée à la CI |
+
+Les mesures locales PERF-01/02/04/08 du lot 10 restent des résultats historiques
+avec leurs volumes, distributions et budgets consignés dans le suivi. Elles
+ne sont ni un nouveau benchmark du HEAD, ni un SLA hébergé. Les limites à vingt
+acteurs et des lecteurs historiques restent visibles.
+
+#### Actions de livraison distinctes de la clôture
+
+Cette revue ne change ni contrat HTTP, ni migration, ni variable applicative.
+Les prérequis existants restent ceux du [guide de configuration](../../exploitation/technique/configurer-epic-73.md).
+Les versions distantes n’ont pas été contrôlées pendant cette revue.
+
+| Composant | Action de mise en service | Valeur attendue / contrôle |
+| --- | --- | --- |
+| Backend et PostgreSQL | Livrer les producteurs avant Animation, Pro et Live ; appliquer les migrations manquantes dans leur ordre | Schéma courant jusqu’à `v285_catalogue_animation_premium.sql`, incluant v284 Live ; readiness et lecture du catalogue Premium |
+| API et workers | Partager base, stockage privé et trousseaux ; programmer les traitements réellement ouverts | Flags commerciaux, tirages, génération, imports, préparation, campagnes, coûts et exports fermés par défaut ; leur activation seule ne démarre pas les jobs |
+| Bons, PIN et communication | Provisionner ou conserver les clés serveur, sans rotation destructrice lors de la livraison | `LOCALEO_BON_LOT_QR_KEYS_JSON` / `LOCALEO_BON_LOT_QR_ACTIVE_KID`, trousseau PIN existant, `LOCALEO_COMMUNICATION_IDENTITY_KEYS_JSON` / `LOCALEO_COMMUNICATION_IDENTITY_ACTIVE_KID` ; aucune valeur secrète dans un frontend |
+| Reprise et conservation | Configurer journal indépendant, stockage/sauvegardes et garde ; isoler les écrivains durant une restauration | `LOCALEO_SAAS_RESTAURATION_GUARD_ENABLED=true` ; réouverture uniquement après preuve conforme. Mesurer RPO 4 h / RTO 8 h sur l’hébergement avant activation ; ne pas promettre de rollback des données |
+| Live / Coffrets / gestion | Configurer domaines, TLS, origines API et routes directes | `animations.localeo.city` sert Live, `gestion-animations.localeo.city` la gestion ; en TEST, préfixe `test-`. Coffrets garde `LOCALEO_PUBLIC_SURFACE=COFFRETS`, Live `ANIMATION` ; conserver les anciennes origines des carnets et leur reprise volontaire |
+| Documents et OnBoard | Générer le bundle depuis le prochain commit documentaire et vérifier manifeste/empreintes côté lecteur | La révision locale non commitée n’est pas publiée ; réapprouver le support Animation modifié avant toute communication facultative, sans réémettre les anciennes intentions |
+| Recette de mise en service | Vérifier les parcours sur la version livrée, avec comptes et appareils dédiés | Accès public, inscription, reprise, historique, ancien lien, refus de droits et notifications consenties ; avis pilote suivis séparément, sans résultat inventé |
+
+Les rapports privés et captures restent dans les dépôts applicatifs hors Git.
+La campagne de recette historique conserve ses **40 scénarios entièrement validés
+sur 130** et ses 90 partiels ; les tests techniques ci-dessus ne la réécrivent pas.
+
+#### Lots de commit préparés et contrôles documentaires
+
+| Dépôt | Contenu relu | Message proposé |
+| --- | --- | --- |
+| `localeo-backend` | Test catalogue ERP authentifié et refus, nouveau test de restauration réelle, raccordement au job PostgreSQL | `test(e73): verify authenticated catalogue and real restore recovery` |
+| `localeo-animation` | Banc SaaS adapté au guide Assistant, contrôles exhaustifs et action courante unique | `test(e73): align SaaS journey with guided assistant` |
+| `localeo-projet` | Décision utilisateur, matrice et bilan, statut Terminée, déplacement du backlog, index/compteurs/liens et distinction recette/activation | `docs(e73): close epic on verified technical tests` |
+
+Marketplace et Pro sont vérifiés sans modification versionnée. Aucun code
+applicatif, contrat API, migration ou générateur n’est modifié par cette revue ;
+les contrôles correspondants prouvent la compatibilité avec les sources actuelles.
+Les artefacts de recette, secrets et fichier `debug.log` préexistant restent
+hors de ces lots. Aucun index Git, commit, push ou déploiement n’est effectué.
+Contrôles documentaires finaux : `check_guidance.py` — **94 guides, 1 057 liens,
+aucune erreur ni alerte** ; `--changed --all-markdown` — **18 documents,
+647 liens, aucune erreur ni alerte** ; `sync_documentation.py --check-sources` —
+**132 documents vérifiés**. `git diff --check` passe dans les trois dépôts
+modifiés. Le déplacement ne change aucun alias d’export ni contrat de lecteur :
+seuls les liens documentaires vers le backlog changent, contrôlés après déplacement.
 
 L'évolution du 22 octobre ajoute une [matrice de cinq critères flyer](flyers-contextualises.md#critères-ajoutés)
 E73-CA-FLYER-01 à 05, distincte de la base historique ci-dessous. Ses scénarios
@@ -44,7 +252,7 @@ Chaque ligne associe le CA à une preuve observable ; les identifiants `E73-T-*`
 | E73-CA-25 | ERP/Support/CRM/Atelier | E73-T-25 : projections typées, sommes sans lots libres, sélection fournisseur filtrée et refus serveur | D3/D4 | F1/F3/F4 | L1/L4 |
 | E73-CA-26 | Migration manuelle périmètres | E73-T-26 : non vérifié bloque sa bascule, contrôle concurrent, pas de suggestion/activation automatique | D4 | F12 | L1 |
 | E73-CA-27 | Générateur/restauration | E73-T-27 : génération par services normaux, export/restore et refus identiques aux données créées par UI | D4 | Toutes | L5 |
-| E73-CA-28 | Pilote et livraison | E73-T-28 : manifeste versions/configuration/preuves, pilote contrôlé avant extension | D4 | F12 | L1–L6 |
+| E73-CA-28 | Tests de préparation de livraison | E73-T-28 : contrats/consommateurs, accès, isolation et gardes de readiness vérifiés ; versions/configuration/preuves documentées. Pilote séparé à l’activation selon E73-DEC-CLOTURE-TESTS | D4 | F12 | L1–L6 |
 | E73-CA-29 | Gestion externe | E73-T-29 : aucun QR ni compte Pro imposé ; non renseigné différent de non remis | D1 | F1 | L2 |
 | E73-CA-30 | Modèles/exemplaires | E73-T-30 : quantité exacte, commerçant unique/modèle, snapshots et secrets distincts, création hors commune refusée | D1 | F2 | L2 |
 | E73-CA-31 | Affectation exclusive | E73-T-31 : deux animations concurrentes, libération confirmée jamais attribué seulement | D1 | F2 | L2 |
@@ -79,7 +287,7 @@ Chaque ligne associe le CA à une preuve observable ; les identifiants `E73-T-*`
 | E73-CA-60 | Mesure de valeur | E73-T-60 : définitions et inconnues, source QR, objectifs gelés, satisfaction 1..5 sans identité affichée | D3 | F10 | L4 |
 | E73-CA-61 | Coûts/budgets | E73-T-61 : constaté/estimé/absent, séparation client/interne, seuils 80/100 sans effet commercial | D2 | F11 | L5 |
 | E73-CA-62 | Export/fermeture | E73-T-62 : responsable seul, CSV/médias/guide sous 5 jours ouvrés, accès 30 jours, fermeture distincte et continuité | D3 | F11 | L5 |
-| E73-CA-63 | Restauration hébergée | E73-T-63 : chronométrage et cohérence, RPO 4 h/RTO 8 h, preuve manquante/échec interdit mise en service | D4 | F12 | L6 |
+| E73-CA-63 | Tests de restauration et garde de reprise | E73-T-63 : restauration isolée, intégrité, tâches, suppressions/révocations et refus sans preuve conforme. RPO 4 h/RTO 8 h hébergés à vérifier avant activation selon E73-DEC-CLOTURE-TESTS | D4 | F12 | L6 |
 
 ### Lecture de la couverture par user story
 
@@ -105,10 +313,11 @@ Les règles et parcours applicatifs sont distingués des opérations de bascule.
 | 37 | 01–10 | 27 | Générateur et restauration locale ; résultat terminal du runner consigné dans le journal |
 | 38 | 10 | 28, 63 | Procédures, contrats et contrôles locaux ; pilote, restauration hébergée RPO/RTO et mise en service **non exécutés** |
 
-Les **CA-28 et CA-63 ne sont pas acquis** par cette implémentation. Les branches
-hébergées des CA-23/24 et les recettes humaines transverses restent également
-à réaliser. L'état produit de l'epic reste **En cours**, même lorsque tous les
-commits d'implémentation sont présents localement.
+**Constat historique avant E73-DEC-CLOTURE-TESTS :** CA-28/63 et les branches
+hébergées CA-23/24 empêchaient alors la clôture, même avec les commits locaux.
+Le verdict courant figure dans la revue technique du 1er novembre ci-dessus.
+Les recettes humaines et opérations hébergées restent à réaliser séparément ;
+leur absence ne constitue plus une condition de clôture du développement.
 
 ### Raccordement des preuves locales du lot 04
 

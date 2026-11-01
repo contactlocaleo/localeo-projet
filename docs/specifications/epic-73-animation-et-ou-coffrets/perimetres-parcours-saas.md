@@ -58,7 +58,7 @@ public des sections ci-dessous sont remplacées par
 avec compatibilité des anciens accès et reprise volontaire du carnet.
 La gestion organisateur et les règles métier restent inchangées.
 
-Spécification cible du 17 octobre 2026. Source des choix : [backlog E73](../../roadmap/en-cours/epic-73-animation-et-ou-coffrets-backlog.md), notamment DEC-42, 51 à 59, 109 à 119, 125 à 134 et 138 à 144. Ce document couvre US11 à 13, US23 à 26, US29 à 33 et US35 ; il ne déclare ni leur implémentation ni leur déploiement. Les conventions communes, lots et modules sont décrits dans [architecture et contrats](architecture-contrats.md), [dotation et lots](dotation-lots.md) et [modules et souscriptions](modules-souscriptions-import-communication.md).
+Spécification cible du 17 octobre 2026. Source des choix : [backlog E73](../../roadmap/terminees/epic-73-animation-et-ou-coffrets-backlog.md), notamment DEC-42, 51 à 59, 109 à 119, 125 à 134 et 138 à 144. Ce document couvre US11 à 13, US23 à 26, US29 à 33 et US35 ; il ne déclare ni leur implémentation ni leur déploiement. Les conventions communes, lots et modules sont décrits dans [architecture et contrats](architecture-contrats.md), [dotation et lots](dotation-lots.md) et [modules et souscriptions](modules-souscriptions-import-communication.md).
 
 ## 1. Existant vérifié et changements nécessaires
 
@@ -435,6 +435,34 @@ affichées ; aucune écriture ni transition n’est exécutée par le menu.
 - Cibles de conception : contraste texte courant d’au moins 4,5:1, grands textes et éléments graphiques utiles d’au moins 3:1 ; contrôles tactiles principaux visant 44 × 44 pixels CSS. Vérifier les états désactivés, survolés et focalisés séparément, sans considérer une couleur de marque comme preuve de lisibilité.
 - À 320 pixels CSS et avec texte agrandi à 200 %, conserver contenu et actions sans défilement horizontal de toute la page. Une table réellement bidimensionnelle peut avoir son défilement local signalé ; fournir un accès lisible aux informations essentielles. Sur mobile, menu repliable nommé, header compact, aucune action essentielle masquée. La préférence d’un header sur une ligne ne justifie jamais une troncature empêchant l’usage au zoom.
 - Respecter la réduction des animations ; aucun carrousel automatique ou effet visuel indispensable à la compréhension. Chargements, états vides et indisponibilités indiquent la prochaine action ; absence de Push ou refus de permission ne bloque pas la lecture/participation déjà autorisée.
+
+#### Référence UX commune Pro / Animation — 1er novembre 2026
+
+À la demande de l’utilisateur, **l’espace connecté Localeo Pro** devient la
+référence de présentation pour Localeo Animation. La référence porte sur les
+composants opérationnels de Pro (`ApplicationFrame`, `BusinessWorkspace`,
+`MerchantNavigation`), et non sur ses écrans publics ou les styles historiques
+de sa page d’accueil. Les menus et gestes restent ceux du rôle organisateur.
+
+| Élément | Convention commune |
+| --- | --- |
+| Identité | Police DM Sans distribuée localement, corps 16 px, titres de la même famille ; fond gris bleuté, surfaces blanches, texte bleu foncé. |
+| Cadre | Bandeau bleu foncé et navigation latérale de 224 px sur bureau ; contenu aligné à gauche et largeur de travail disponible. Le sélecteur de commune reste explicite. |
+| Menu | Pictogrammes avec libellés, regroupements Organiser / Suivre l’activité / Mon organisation, sélection signalée par texte, fond et repère orange. Toutes les anciennes destinations restent accessibles. |
+| Mobile | Accueil, Animations, Validations et Plus en bas de l’écran, sans recouvrir le contenu. Plus ouvre les autres rubriques avec focus contenu, Échap, retour au déclencheur et fermeture au changement de page ou au passage bureau. Le panneau défile intégralement au zoom et sur petit écran. |
+| Pages et actions | Retour contextuel, titre et contexte avant les actions ; action principale bleue, commandes secondaires bordées, contrôles de 44 px minimum et rayon de 6 px. La suppression groupée des brouillons est secondaire et conserve sa confirmation. |
+| Rubriques | Onglets avec sélection bleue soulignée ; les groupes de la fiche animation et le sélecteur mobile conservent leur organisation sans défilement horizontal. |
+| Listes et formulaires | Tableaux sur bureau, fiches et filtres repliables sur mobile ; pagination compacte avec libellés accessibles, bornes et chargement conservés. Champs utilisables au toucher et focus visible orange. |
+| Retours | Palette Pro commune pour information, succès, avertissement et erreur, avec pictogramme, texte et annonces accessibles. Un résultat incertain ne devient jamais un succès de présentation. |
+
+La barre mobile utilise le même registre de destinations que le menu complet.
+Les gardes de saisie, autorisations, confirmations, clés d’idempotence et états
+serveur restent portés par leurs composants et services existants. Animation
+conserve son sélecteur de commune, ses rubriques de publication et son menu
+mobile avec gestion explicite du focus ; aucun parcours propre au commerçant
+n’est importé. La police et sa licence sont embarquées sans appel Google Fonts.
+Le [suivi de réalisation](suivi-implementation.md) porte la comparaison,
+les vérifications et les limites du correctif.
 
 #### Navigation Animation dans Localeo ERP — 30 octobre 2026
 

@@ -1,5 +1,11 @@
 # E73 — Plan de recette métier par fonctionnalité
 
+Clôture technique du **1er novembre 2026**, selon **E73-DEC-CLOTURE-TESTS** :
+les preuves sont dans le [bilan unique](verification-livraison.md). Cette clôture
+ne requalifie aucun scénario RM ci-dessous : la recette historique conserve
+40/130 scénarios entièrement validés et 90 partiels. Les actions pilotes et
+d’activation restent distinctes des conditions de clôture.
+
 Complément du 22 octobre : les [cinq scénarios de recette des flyers](flyers-contextualises.md#accès-et-recette-métier)
 RM-FLYER-01 à 05 couvrent l'évolution E73-EVO-FLYER et restent à exécuter.
 Ils s'ajoutent aux scénarios initiaux sans changer leurs résultats enregistrés.
@@ -10,7 +16,7 @@ Le résultat recherché est de vendre et exploiter **Animation et/ou Coffrets**,
 
 La [préparation de l’automatisation sur TEST](automatisation-recette.md) classe les 130 scénarios par mode d’exécution et décrit le nouveau jeu dédié. Ce plan ne vaut pas exécution automatique et conserve les résultats de recette humaine séparés.
 
-Références : [spécification](README.md), [backlog et arbitrages](../../roadmap/en-cours/epic-73-animation-et-ou-coffrets-backlog.md), [matrice technique des 63 CA](verification-livraison.md), [accès par lot](prise-en-main-par-lot.md), [preuves d’implémentation et limites](suivi-implementation.md). Les CA mentionnés dans les fiches sont les identifiants `E73-CA-*` existants ; les identifiants `RM-*` servent au suivi de cette recette.
+Références : [spécification](README.md), [backlog et arbitrages](../../roadmap/terminees/epic-73-animation-et-ou-coffrets-backlog.md), [matrice technique des 63 CA](verification-livraison.md), [accès par lot](prise-en-main-par-lot.md), [preuves d’implémentation et limites](suivi-implementation.md). Les CA mentionnés dans les fiches sont les identifiants `E73-CA-*` existants ; les identifiants `RM-*` servent au suivi de cette recette.
 
 ## Préparer la campagne de recette
 

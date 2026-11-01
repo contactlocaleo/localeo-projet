@@ -1,8 +1,10 @@
 # E73 — Localeo Live, entrée unique des animations
 
 Évolution **E73-EVO-LIVE-UNIQUE**, demandée le **30 octobre 2026**.
-L'epic 73 reste **En cours**. Les 63 critères initiaux et leurs résultats de
-recette restent conservés ; les critères ci-dessous sont complémentaires.
+L’epic 73 est **Terminée techniquement le 1er novembre 2026**, selon
+E73-DEC-CLOTURE-TESTS et le [bilan de clôture](verification-livraison.md).
+Les 63 critères initiaux et leurs résultats de recette restent conservés ;
+les critères ci-dessous sont complémentaires et inclus dans cette revue.
 
 ## Décision et comportement attendu
 
@@ -209,7 +211,7 @@ Demande acceptée : un accueil personnel mobile et deux rappels personnels
 facultatifs, pour terminer un parcours et agir avant sa fermeture. Cette
 évolution remplace le premier onglet Découvrir par **Accueil**, conserve ses URL
 et le catalogue public et étend le périmètre antérieurement exclu des nouveaux
-rappels personnalisés. Aucun compte habitant n'est créé. L'EPIC 73 reste
+rappels personnalisés. Aucun compte habitant n'est créé. L’EPIC 73 restait alors
 **En cours** ; les critères et preuves historiques ne sont pas réécrits.
 
 ### Parcours et décisions retenues

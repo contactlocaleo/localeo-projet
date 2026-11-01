@@ -24,9 +24,9 @@ les 75 identifiants du tronc commun et trois identifiants applicatifs distincts.
 
 | Etat | Epics | Dossier |
 | --- | ---: | --- |
-| Terminees | 61 | [terminees/](terminees/README.md) |
+| Terminees | 62 | [terminees/](terminees/README.md) |
 | A faire | 9 | [a-faire/](a-faire/README.md) |
-| En cours | 5 | [en-cours/](en-cours/README.md) |
+| En cours | 4 | [en-cours/](en-cours/README.md) |
 | Abandonnees | 2 | [abandonnees/](abandonnees/README.md) |
 | Fusionnee | 1 | Epic 61 reprise dans l'[Epic 60](terminees/epic-60-vision-360-commercialisation-backlog.md) |
 
@@ -90,11 +90,11 @@ la révocation et l'audit : 22 critères, historique complet du commerce en lect
 étendue aux passages Animation et aux pannes du mobile commerçant : 34 critères,
 PIN automatique valable 7 jours par défaut, configurable jusqu’à 30 jours, notification Localeo Pro à chaque succès. E70 est en cours depuis le 7 octobre ; E72 est également en cours.
 
-L’[EPIC 73 — Animation et/ou Coffrets](en-cours/epic-73-animation-et-ou-coffrets-backlog.md)
+L’[EPIC 73 — Animation et/ou Coffrets](terminees/epic-73-animation-et-ou-coffrets-backlog.md)
 cadre la vente séparée ou combinée : dotation Coffrets ou Libre, animations standard/à la carte,
 périmètres commerçants, onboarding et accès Pro adaptés, présence web Animation.
 Ses 38 user stories et 63 critères couvrent les cinq dépôts, la migration et la continuité des parcours.
-La [spécification détaillée V1 du 17 octobre](../specifications/epic-73-animation-et-ou-coffrets/README.md) précise les contrats, migrations et preuves attendues ; l’état est En cours depuis le 18 octobre, avec réalisation locale sans déploiement.
+La [spécification détaillée V1 du 17 octobre](../specifications/epic-73-animation-et-ou-coffrets/README.md) précise les contrats, migrations et preuves attendues ; l’état est **Terminée le 1er novembre 2026**, après vérification des tests selon E73-DEC-CLOTURE-TESTS. Le [bilan de clôture](../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md) distingue les preuves techniques et les actions de mise en service.
 Le 15 octobre, trois décisions sont validées : suivi des lots libres jusqu’à la remise
 déclarée, périmètres gérés par Localeo depuis l’ERP uniquement et site
 `animations.localeo.city` sur socle partagé. Le cadrage est ensuite étendu au choix
@@ -110,7 +110,7 @@ Le 16 octobre, US02 est arbitrée : choix explicites sans présélection, mode u
 pour les lots libres, modification en brouillon sans lot engagé puis gel à la publication.
 Les modules achetés/offerts/en essai sont limités à la commune de la souscription.
 Les dix-huit groupes d’arbitrages recensés sont résolus ; priorités proposées : 32 US P1 et 6 US P2.
-État **à faire**, sans implémentation.
+Les dix lots et les extensions sont vérifiés techniquement ; pilote et opérations de mise en service restent suivis séparément. Aucun déploiement effectué par la clôture.
 
 Les Epics 3 et 4 n'ont pas de fichier dedie :
 leurs descriptions dans la roadmap produit sont referencees depuis le dossier
@@ -169,7 +169,7 @@ précise la provenance et les divergences historiques conservées.
 | 70 | En cours | [Validation sur téléphone client](en-cours/epic-70-validation-prestation-telephone-client-backlog.md) : PIN dédié retenu, 34 critères ; contexte transactionnel, gestion commerçant du PIN et parcours client sans matériel ; risque résiduel borné par les droits, validité et révocation. |
 | 71 | A faire | [CRM de prospection](a-faire/epic-71-crm-prospection-animation-coffrets-pro-backlog.md) : trois axes commerciaux, fichier Gironde V2 examiné, import contrôlé, carte communale, historique, tâches et rappels internes ; 24 critères, [spécification V0.1](../specifications/epic-71-crm-prospection/README.md), arbitrages restants explicites, sans implémentation. |
 | 72 | En cours | [Accès salariés Localeo Pro](en-cours/epic-72-acces-salaries-validation-localeo-pro-backlog.md) : implémentation locale vérifiée, 22 critères ; option ERP, invitations, scanner et historique limités, conservation. |
-| 73 | En cours | [Animation et/ou Coffrets](en-cours/epic-73-animation-et-ou-coffrets-backlog.md) : 38 US, 63 critères ; lots libres externes ou bons numériques, modules achetés/offerts/en essai (import, chasse, Web Push participants), catalogue, périmètres/onboarding/Pro, présence web et compléments SaaS (autonomie, accompagnement, valeur/coûts, réversibilité/reprise) ; aucun arbitrage ouvert recensé. |
+| 73 | Terminée | [Animation et/ou Coffrets](terminees/epic-73-animation-et-ou-coffrets-backlog.md) : 38 US, 63 critères et extensions vérifiés techniquement le 1er novembre 2026 selon E73-DEC-CLOTURE-TESTS ; preuves et activation séparées dans le bilan. |
 | 74 | A faire | [Tombola publique](a-faire/epic-74-tombola-publique-backlog.md) : modèle standard sans commerçant, participation par QR, supports de stand et audience future ; 8 US, 16 critères cibles, arbitrages ouverts |
 | 75 | A faire | [Mots croisés assistés par l’IA](a-faire/epic-75-mots-croises-assistes-ia-backlog.md) : indices chez les commerçants, préparation Localeo validée par l’organisateur, grille correcte obligatoire pour le tirage ; 8 US, 18 critères cibles, huit groupes d’arbitrages ouverts ou partiels |
 | Autres identifiants du tronc commun | Terminees | Statut produit consolide conserve ; les anciennes mentions de stories a faire ne rouvrent pas ces epics. |

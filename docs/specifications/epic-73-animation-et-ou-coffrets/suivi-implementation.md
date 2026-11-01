@@ -1,6 +1,171 @@
 # E73 — Suivi de réalisation locale
 
-Début : **18 octobre 2026**. [Spécification](README.md), [backlog](../../roadmap/en-cours/epic-73-animation-et-ou-coffrets-backlog.md), [matrice des 63 critères et preuves](verification-livraison.md). Objectif : les 38 US, dans les dix lots demandés. Les lignes ci-dessous ne valent pas acceptation tant que les preuves correspondantes ne sont pas enregistrées.
+Début : **18 octobre 2026**. [Spécification](README.md), [backlog](../../roadmap/terminees/epic-73-animation-et-ou-coffrets-backlog.md), [matrice des 63 critères et preuves](verification-livraison.md). Objectif : les 38 US, dans les dix lots demandés. Les lignes ci-dessous ne valent pas acceptation tant que les preuves correspondantes ne sont pas enregistrées.
+
+## 1er novembre 2026 — homogénéité de Localeo Animation avec Localeo Pro
+
+**Attendu :** reprendre les principes visuels et de navigation de l’espace
+connecté Pro dans Animation. Référence inspectée : Pro **6c7489e** ; application
+corrigée : Animation **df71e72 + modifications locales**. Les changements de
+clôture et le correctif backend de publication présents dans le workspace sont
+préservés. Cette tâche ne modifie pas Localeo Pro ni le backend.
+
+**Écarts établis par comparaison des sources et corrigés :**
+
+| Sujet | Animation avant correction | Alignement livré dans les sources |
+| --- | --- | --- |
+| Typographie | Plus Jakarta Sans / chiffres Geist et chargement Google Fonts | DM Sans locale avec licence ; titres et corps opérationnels de la même famille. |
+| Structure | Barre supérieure blanche, identité dans la colonne de menu | Bandeau bleu commun, identité et commune visibles ; navigation bureau de 224 px. |
+| Navigation | Quatorze entrées non regroupées ; menu mobile via bouton dans le header | Trois groupes métier ; trois accès mobiles directs + Plus ; sélection commune liste/détail. |
+| Actions | Tailles variables, actions bleues et orange concurrentes, suppression groupée avant création | Socle 44 px, rayon commun, création principale ; suppression groupée dans Autres actions, confirmation conservée. |
+| Titres et rubriques | Hiérarchie et sélection propres à Animation | En-têtes, retours, titres, onglets et rubriques de fiche alignés sur les composants opérationnels Pro. |
+| Feedback et listes | Palette différente et plusieurs traitements de pagination | Palette sémantique Pro, pagination compacte, focus et annonces conservés. Les tableaux/fiches et filtres responsive existants restent utilisés. |
+| Accès compte | Icône Paramètres ouvrant Abonnement | Raccourci explicitement nommé Compte et équipe ouvrant ce parcours. |
+
+Les règles CSS communes sont modifiées à leur source ; le cadre d’application
+possède une feuille dédiée et les anciennes règles contradictoires de header
+dans les styles mobile/PWA sont retirées. Les polices historiques de la page
+publique Pro et ses parcours de prestations/paiements ne sont pas copiés.
+
+**Vérification :** comparaison indépendante de Pro, revue du cadre corrigé,
+tests navigateur avec API synthétiques et inspection des captures. Deux écarts
+détectés pendant la recette sont corrigés : le bandeau au zoom 200 % et le
+menu dont le pied de compte comprimait les rubriques. Le panneau mobile défile
+désormais entièrement, avec titre de navigation compact et fermeture accessible.
+Le contraste Installer sur le bandeau bleu est corrigé avec le mode sombre
+existant du composant PWA. Installation et mise à jour sont testées ensemble.
+Le banc Abonnement a aussi détecté une confirmation partiellement masquée
+au zoom 200 % : la marge de défilement supplémentaire du cadre est retirée,
+en conservant le focus et le défilement du composant de confirmation. Le
+parcours d’achat rejoué passe ses **128 assertions sur quatre formats**.
+
+Les rapports et captures restent sous `localeo-animation/tmp/pro-alignment/`
+et dans les répertoires temporaires des bancs existants. Contrôles exécutés :
+
+- Types TypeScript et ESLint : succès ; **295 tests Node réussis**, aucun échec
+  ni skip (`tmp/pro-alignment-unit.log`).
+- Builds isolés de l’application et de la PWA : succès, sans configuration
+  opérateur ; police locale incluse dans le bundle.
+- `animation-workspace-ux.mjs` : **40 parcours** d’espaces métier, puis
+  **8 parcours** de rubriques (`WORKSPACE_CASE=navigation`) réussis.
+- `WORKSPACE_CASE=shell` : **8 parcours** du cadre de 320 à 1600 px, dont
+  texte 200 %, réussis : destinations conservées, garde annulant la navigation,
+  historique, focus, menu défilant, sélection du détail et PWA simultanées.
+- `workspace-primitives.mjs` : **188 contrôles** ;
+  `feedback-consistency.mjs` : **220 contrôles** ;
+  `list-pagination-ux.mjs` : **20 parcours** ;
+  `finance-workspace-ux.mjs` : **187 contrôles**, tous réussis.
+- `account-app.mjs` : **126 assertions** réussies, notamment récupération,
+  invitations et changement de compte avec reprise de déconnexion.
+- `modules.mjs` : **994 assertions sur 70 scénarios** réussies (achat,
+  renouvellement, modules actifs, facturation, consentements, conflits et
+  réponses perdues), dont le parcours d’achat ciblé cité plus haut.
+- Vérification documentaire : **96 guides, 1 130 liens**, zéro erreur ni
+  avertissement ; **132 sources exportées** vérifiées. `git diff --check` propre.
+
+Les effectifs des bancs ne sont pas des critères d’acceptation supplémentaires.
+Le smoke historique `mobile-smoke.mjs` reçoit le nouveau libellé de menu,
+mais n’a pas été exécuté dans cette tâche ; les nouveaux parcours intégrés
+couvrent cette navigation. Les contrôles utilisent Chromium local et des API
+simulées, sans prétendre couvrir tous les navigateurs ou les données de TEST.
+
+**Impacts :** présentation Animation et documentation canonique seulement.
+Aucun contrat API, invariant métier, schéma, migration, variable d’exploitation
+ou jeu de démonstration à modifier. Les données de recette sont synthétiques ;
+la navigation ne déclenche aucune commande métier. Les adaptations au contexte
+organisateur sont explicites dans la [spécification](perimetres-parcours-saas.md#référence-ux-commune-pro--animation--1er-novembre-2026).
+Aucun commit, push ou déploiement effectué ; les preuves locales ne constituent
+pas une validation de la version actuellement servie sur TEST.
+
+## 1er novembre 2026 — refus de publication masqué par une erreur 500/CORS
+
+Signalement sur `test-gestion-animations.localeo.city`, POST vers
+`test-backoffice.localeo.city/protected/animation-locale/animations/{id}/publier`.
+La trace fournie porte `LOC-f1a4c67b-cdf9-4194-a5f5-420e7bbb735b`,
+`ErreurModules`, le 1er novembre à 16:43:41 UTC. La santé distante et le HEAD
+local indiquent le backend **590e38b** ; le correctif ci-dessous reste local.
+Les travaux non commités de clôture sont préservés.
+
+**Cause démontrée.** `ErreurModules` porte un code et un statut métier, mais
+la publication du portail n’avait pas de gestionnaire pour cette exception.
+Elle arrivait au gestionnaire générique 500 ; cette réponse, produite en dehors
+du middleware CORS, n’avait plus les en-têtes autorisant le portail à la lire.
+L’origine est déjà autorisée sur TEST : prévol avec `X-Animation-CSRF` réussi
+(200), lecture de session sans connexion refusée (401) avec CORS correct.
+Aucune publication réelle n’a été rejouée pour diagnostiquer l’incident.
+
+**Correction.** Le gestionnaire HTTP conserve désormais `ErreurModules.status`
+et son `code`, avec corrélation et absence de cache. La frontière du moteur
+ERP intercepte également cette classe avant `ValueError`, qui la transformait
+en 422 générique. Pour une autre exception inattendue après admission du
+transport navigateur Animation, le gestionnaire 500 réutilise uniquement la
+politique CORS déjà validée ; réponse générique, `no-store`, origines refusées
+et absence d’accès au cookie administrateur conservées.
+
+La souscription, l’acquisition du module, sa disponibilité et le quota restent
+contrôlés par leurs propriétaires au moment de la publication, sous transaction.
+La trace tronquée ne donne pas le code précis du refus TEST : aucun quota épuisé,
+module absent ou défaut de configuration n’est déduit du seul nom d’exception.
+Le correctif rend ce motif accessible ; il ne transforme pas un refus légitime
+en publication ni ne modifie les droits du client.
+
+**Preuves.** La reproduction avec la pile réelle de middlewares et la route
+de publication échoue avant correction : sept refus typés deviennent 500,
+et un 500 technique perd CORS (**8 échecs, 5 réussites**, rapport
+`tmp/e73-publication-modules-before.xml`). Après correction, **122 tests
+réussissent**, sans skip (`tmp/e73-publication-cors-after.xml`) : refus modules,
+500 générique sans fuite, origine publique/inconnue/nulle refusée, transport
+historique sans nouveaux credentials, sessions/CSRF et publication.
+Les **14 tests API**, dont trois nouveaux refus ERP 403/409/422, passent
+(`tmp/publication-erp-erreurs-modules.xml`) ; ces effectifs se recouvrent.
+
+La suite publication existante a révélé un test dépendant du calendrier : sa
+date de fin au 31 octobre est passée au jour de l’exécution. Son horloge est
+figée au 15 octobre, sans retirer le contrôle réel ; les **43 tests** concernés
+passent (`tmp/publication-metier-horloge-stable.xml`). Une revue indépendante
+confirme le maintien des origines, des droits et des contrôles métier.
+
+Les **643 contrôles complémentaires** d’architecture, de couverture des cas
+d’usage, d’observabilité et de contrats des modules passent sans skip
+(`tmp/e73-publication-architecture.xml`).
+
+**Impacts.** Backend et ce suivi documentaire uniquement pour ce correctif.
+Le format d’erreur existant `detail/code/correlationId/request_id` est conservé ;
+les consommateurs peuvent lire le refus sans modifier leur transport.
+Aucune migration, donnée à réparer, variable, modification du générateur ou
+nouvelle origine CORS. Déployer le backend corrigé avant de rejouer depuis
+le portail ; vérifier le reçu existant avant une nouvelle commande si son
+résultat est incertain. Le succès d’une publication de cette animation TEST
+n’est pas attesté. Aucun commit, push ni déploiement effectué dans cette tâche.
+
+## 1er novembre 2026 — clôture fondée sur les tests
+
+**E73-DEC-CLOTURE-TESTS**, décision explicite de l’utilisateur : les conditions
+de clôture sont les tests ; pilote, validation humaine et opérations d’activation
+sont suivis séparément. L’epic est **Terminée** après la revue des 63 critères et
+extensions, avec preuves exécutées/réutilisées, versions et limites détaillées
+dans le [bilan unique](verification-livraison.md#revue-technique-du-1er-novembre-2026).
+Les constats historiques « En cours » ci-dessous décrivent leurs dates propres.
+
+Deux défauts de harnais corrigés : requête authentifiée réelle du catalogue ERP
+(et refus sans lecture pour trois autres rôles), puis banc SaaS aligné sur le
+guide Assistant sans perdre ses neuf contrôles. La revue CA-63 ajoute une
+preuve intégrée de véritable dump/restauration E73, journal externe,
+effacements/révocations, refus de réouverture avant purge, reprise idempotente
+et accès après restauration. Elle passe avec SCRAM et rejoint le job PostgreSQL.
+Aucun code applicatif n’a dû être modifié pour obtenir ces résultats.
+
+Les preuves renouvelées incluent 123 tests PostgreSQL, deux tests de compteurs
+d’import, dix scénarios du générateur/restauration au schéma v285, le nouveau
+test intégré CA-63, 623 contrôles d’architecture, les suites domaine/API et les
+parcours Animation, Live et contrats Pro. Les effectifs se recouvrent : le bilan
+les présente par suite, sans total artificiel. Tous les clusters créés pour
+cette revue sont arrêtés ; rapports conservés hors Git dans les applications.
+
+La recette historique conserve **40/130 scénarios entièrement validés et 90
+partiels**. Aucune nouvelle recette hébergée, réception fournisseur, validation
+pilote ou mesure RPO/RTO n’est inventée. Aucun commit, push ni déploiement par
+cette clôture ; les lots proposés et prérequis d’activation sont dans le bilan.
 
 ## 31 octobre 2026 — configuration Chasse guidée par les validations
 

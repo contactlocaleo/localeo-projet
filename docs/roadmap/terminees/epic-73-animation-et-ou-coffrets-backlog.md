@@ -1,5 +1,30 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+## Décision de clôture par les tests — 1er novembre 2026
+
+**E73-DEC-CLOTURE-TESTS**, décision explicite de l’utilisateur : « les conditions
+de clôture doivent être des tests et non pas des actions pilotes ou autres ».
+La clôture de développement est désormais fondée sur les preuves fonctionnelles,
+transactionnelles, de contrat, de non-régression et de parcours exécutées sur
+des environnements isolés. Les IDs des 63 critères et des extensions sont
+conservés ; aucun échec ou test ignoré ne devient un succès.
+
+Cette décision remplace leur ancienne dépendance de clôture aux actions de
+mise en service : pilote Localeo puis Martignas-sur-Jalle, bascule DNS/TLS,
+installation réelle des PWA, réception fournisseur et exercice hébergé.
+Ces opérations restent des prérequis d’activation documentés séparément et
+ne sont ni réputées exécutées ni exigées pour clôturer le développement.
+
+Pour **CA-28**, vérifier par tests les accès, l’isolation des communes, les
+contrats/consommateurs et les gardes de readiness ; documenter versions et
+ordre de livraison. Pour **CA-63**, exécuter les tests de sauvegarde/restauration,
+d’intégrité, de reprise des tâches, de suppression/révocation et de refus de
+réouverture sans preuve conforme. Les objectifs hébergés **RPO 4 h / RTO 8 h**
+restent à mesurer avant mise en service ; une durée locale ne les atteste pas.
+La même séparation s’applique aux critères DNS/PWA/Push des extensions Live,
+Domaines et Flyer. Le [bilan unique](../../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md)
+porte les verdicts de tests et les actions d’activation restantes.
+
 Évolution **E73-EVO-ONBOARDING-ANIMATION-SIMPLE du 1er novembre 2026** : le
 référencement choisit explicitement Animation, Coffrets ou les deux. Animation
 seule conserve identité/coordonnées et accès Pro vérifié, sans contrat/convention,
@@ -8,7 +33,7 @@ Coffrets sans seconde convention Animation. Cette décision précise DEC-53 et
 CA-16/17/18 ; elle remplace l’ancienne obligation de convention Animation.
 Les critères OA-01 à OA-04 et les comportements à préserver figurent dans la
 [spécification canonique](../../specifications/epic-73-animation-et-ou-coffrets/perimetres-parcours-saas.md).
-L’epic demeure **En cours** ; une création n’active aucun produit automatiquement.
+À la date de cette évolution, l’epic demeurait **En cours** ; une création n’active aucun produit automatiquement.
 
 Évolution **E73-EVO-LIVE-UNIQUE**, demandée le **30 octobre 2026** : Live devient
 l'entrée publique des animations sur `animations.localeo.city`. Remplacement de
@@ -18,7 +43,7 @@ Mes communes. L'utilisateur confirme l'absence de nouveau compte habitant.
 Les critères `E73-EVO-LIVE-01` à `12`, contrats et preuves sont dans la
 [spécification canonique](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md).
 Cette évolution remplace la cible d'interface E73-EVO-DOMAINES/UX-PUBLIC,
-conserve le portail de gestion et ne change pas le statut **En cours**.
+conservait le portail de gestion et le statut alors **En cours**.
 La recette DNS/TLS reste distincte de l'implémentation locale.
 
 Complément **E73-EVO-LIVE-UX du 30 octobre 2026** : découverte immersive avec
@@ -40,7 +65,7 @@ nouveau compte, campagne organisateur ou état produit n'est créé. Implémenta
 et preuves propres à cette évolution sont suivies séparément des recettes historiques.
 
 - Identifiant : **EPIC-73**, vérifié dans la roadmap commune et les identifiants applicatifs ; aucun cadrage concurrent identifié.
-- État produit : **En cours** depuis le 18 octobre 2026, selon la [roadmap commune](../README.md). Les dix lots d’implémentation locale sont terminés, sans push ni déploiement ; recette humaine et preuves hébergées restent non exécutées. Voir les [preuves et limites](../../specifications/epic-73-animation-et-ou-coffrets/suivi-implementation.md) et la [prise en main par lot](../../specifications/epic-73-animation-et-ou-coffrets/prise-en-main-par-lot.md).
+- État produit : **Terminée le 1er novembre 2026**, selon E73-DEC-CLOTURE-TESTS et la [roadmap commune](../README.md). Les dix lots, 63 critères et extensions sont vérifiés par les tests et preuves réutilisées du [bilan de clôture](../../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md). Pilote et activation restent séparés ; aucun commit, push ou déploiement effectué par cette revue. Voir les [preuves et limites](../../specifications/epic-73-animation-et-ou-coffrets/suivi-implementation.md) et la [prise en main par lot](../../specifications/epic-73-animation-et-ou-coffrets/prise-en-main-par-lot.md).
 - Cadrage initial : **14 octobre 2026**, à la demande du porteur produit.
 - Revue des impacts : **15 octobre 2026**, à partir des sources locales ; aucune recette d’environnement réalisée.
 - Arbitrages interactifs du **16 octobre 2026** : choix de dotation et de gestion des lots libres confirmés pour US02 (ARB-04 résolu).
@@ -60,7 +85,7 @@ marketplace `test-marketplace.localeo.city`. Cette décision remplace le profil
 du 22 octobre qui réutilisait la marketplace TEST comme surface Animation ; les
 preuves historiques gardent leurs URL. Les anciens portails `animation` /
 `test-animation` peuvent coexister comme alias de gestion pendant une transition
-explicite, sans redirection globale des liens personnels. L’état de l’epic reste
+explicite, sans redirection globale des liens personnels. L’état de l’epic restait alors
 **En cours**. Critères complémentaires `E73-EVO-DOMAINES-01` à `04`, impacts et
 compatibilité : [origines et continuité](../../specifications/epic-73-animation-et-ou-coffrets/perimetres-parcours-saas.md#54-origines-et-continuité-des-parcours).
 Ils précisent CA23–24 et les liens du portail, sans renuméroter les 63 critères
@@ -493,11 +518,11 @@ Ces neuf lots appartiennent à la même epic. Leur numérotation regroupe les re
 
 ## Inventaire des user stories
 
-**État commun : À faire — spécification détaillée V1 rédigée le 17 octobre, implémentation à réaliser.** Les 38 US ci-dessous décomposent les comportements à livrer ; aucune n’est comptée terminée au motif qu’un socle existe. La colonne « couverture actuelle » résume la revue locale, sans preuve de recette d’environnement. **P1** propose les fondations et parcours nécessaires au produit ; **P2** propose un lot suivant d’enrichissement, toujours dans E73. Ce classement de travail (32 P1, 6 P2) n’est ni une date ni un retrait du périmètre. Les références CA désignent les critères E73-CA correspondants, détaillés après l’inventaire.
+**État courant : Terminées techniquement le 1er novembre 2026**, selon le bilan des 63 CA et extensions. La colonne de couverture conserve le constat historique du cadrage du 17 octobre, avant implémentation. Les 38 US ci-dessous décomposent les comportements à livrer ; aucune n’est comptée terminée au motif qu’un socle existe. La colonne « couverture actuelle » résume la revue locale, sans preuve de recette d’environnement. **P1** propose les fondations et parcours nécessaires au produit ; **P2** propose un lot suivant d’enrichissement, toujours dans E73. Ce classement de travail (32 P1, 6 P2) n’est ni une date ni un retrait du périmètre. Les références CA désignent les critères E73-CA correspondants, détaillés après l’inventaire.
 
 ### Pivot produit, lots, commerçants et modules — 24 US
 
-| US | Besoin utilisateur et résultat recherché | Priorité proposée | CA | Couverture actuelle à étendre |
+| US | Besoin utilisateur et résultat recherché | Priorité proposée | CA | Constat historique au cadrage |
 | --- | --- | --- | --- | --- |
 | E73-US-01 | En tant qu’organisateur ou client Coffrets, utiliser chaque produit seul ou ensemble pour acheter uniquement le périmètre utile | P1 | 01, 02, 04, 05 | Parcours E41/E46/E47 existants ; découplage fonctionnel à réaliser |
 | E73-US-02 | En tant qu’organisateur, choisir la dotation et sa gestion pour connaître le circuit de remise avant publication | P1 | 03, 11 | Parcours Coffrets existant ; évolution à réaliser. Arbitrage produit résolu le 16 octobre : DEC-19/ARB-04 |
@@ -526,7 +551,7 @@ Ces neuf lots appartiennent à la même epic. Leur numérotation regroupe les re
 
 ### Compléments SaaS — 11 US
 
-| US | Besoin utilisateur et résultat recherché | Priorité proposée | CA | Couverture actuelle à étendre |
+| US | Besoin utilisateur et résultat recherché | Priorité proposée | CA | Constat historique au cadrage |
 | --- | --- | --- | --- | --- |
 | E73-US-25 | En tant que gestionnaire, récupérer ou changer mon mot de passe pour retrouver mon accès et invalider les anciennes sessions | P1 | 50, 51 | Authentification et gestion interne présentes ; autonomie portail à ajouter |
 | E73-US-26 | En tant que responsable d’organisation, inviter et gérer mon équipe pour déléguer dans mon périmètre sans dépendre de Localeo | P1 | 52, 53 | Gestionnaires/invitations ERP existants ; équipe en libre-service à ajouter |
@@ -542,7 +567,7 @@ Ces neuf lots appartiennent à la même epic. Leur numérotation regroupe les re
 
 ### Migration et preuves de livraison — 3 US
 
-| US | Besoin utilisateur et résultat recherché | Priorité proposée | CA | Couverture actuelle à étendre |
+| US | Besoin utilisateur et résultat recherché | Priorité proposée | CA | Constat historique au cadrage |
 | --- | --- | --- | --- | --- |
 | E73-US-36 | En tant qu’opérateur de migration, reprendre les comptes, droits, animations et gains pour préserver les engagements et traiter les ambiguïtés | P1 | 26 | Données/socles existants ; règles de reprise E73 à définir et prouver |
 | E73-US-37 | En tant qu’équipe de recette, disposer de jeux des trois offres et de leurs refus pour vérifier les parcours complets | P1 | 27 | Générateur existant à étendre aux scénarios E73, modules et autonomie SaaS |
@@ -583,7 +608,7 @@ Exigence UX transverse ajoutée le **18 octobre 2026** : plateforme organisateur
 | E73-CA-25 | ERP, Support, CRM et gestionnaire Animation | Consulter fiches, filtres, exports, bilans et assistance | Périmètres, catégories et dotations exacts ; lots libres exclus des montants/instances Coffrets ; preuves CRM cohérentes |
 | E73-CA-26 | Données existantes, dont engagements ouverts | Migrer vers le modèle découplé | Périmètres de chaque commerce revus et saisis manuellement par Localeo avant bascule, sans proposition automatique (DEC-109) ; cas non vérifié signalé et non basculé implicitement, accès/engagements en cours préservés. Reprise des autres données contrôlée et justifiée, ambiguïtés signalées ; aucune activation générale ou conversion en libre par défaut |
 | E73-CA-27 | Démonstration et recette transverse | Générer, installer/restaurer puis jouer les scénarios | Animation seule avec lots externes et bons numériques, Coffrets seuls et combiné/coffrets couverts ; exemplaires disponibles/attribués/consommés, validations par scan et PIN avec concurrence entre canaux, commerçants des trois périmètres, droits et refus vérifiés. Scénarios modules inclus/achetés/offerts/essai/expirés, import/reprise, Push, équipes/renouvellement et sortie également prévus, avec services externes simulés |
-| E73-CA-28 | Exploitant et équipes métier | Préparer la mise en service | Pilote **Martignas-sur-Jalle**, validation UX Localeo puis commune pilote, vérification de ses commerçants/parcours avant extension progressive (DEC-110), aucune bascule globale implicite. Contrats/consommateurs, communications, configuration, ordre de livraison et reprise documentés ; contrôles réalisés distincts des contrôles prévus |
+| E73-CA-28 | Équipe technique et équipes métier | Tester la préparation de livraison | Selon E73-DEC-CLOTURE-TESTS : tests des accès et refus, isolation des communes, contrats/consommateurs et gardes de disponibilité ; communications, configuration, versions, ordre de livraison et reprise documentés, avec résultats exécutés distincts des contrôles prévus. Le pilote **Martignas-sur-Jalle**, la validation UX Localeo puis commune et la bascule progressive de DEC-110 restent des actions d’activation séparées, sans conditionner la clôture du développement |
 | E73-CA-29 | Gestionnaire choisissant la gestion externe des lots libres | Préparer, tirer et contacter les gagnants | Aucun bon, QR, compte Pro du responsable de remise ou consommation Localeo obligatoire ; remise non renseignée distincte d’une absence de remise |
 | E73-CA-30 | Gestionnaire de l’animation ou acteur Localeo habilité selon DEC-51 | Créer plusieurs modèles et plusieurs exemplaires de chacun | Création limitée aux animations/communes autorisées, refus hors périmètre et pour le seul rôle Pro commerçant/salarié ; un commerçant de remise par modèle ; identités/QR distincts par exemplaire, quantités exactes et bons émis préservés d’une modification silencieuse du modèle |
 | E73-CA-31 | Exemplaire disponible, deux animations ou demandes concurrentes | Mettre l’exemplaire à disposition d’une animation | Affectation réservée aux gestionnaires de l’animation et acteurs Localeo habilités dans leur périmètre selon DEC-51 ; affectation exclusive et disponibilités cohérentes ; après fin des attributions, remise à disposition uniquement sur confirmation du gestionnaire pour les exemplaires jamais attribués selon DEC-40, à l’exclusion des bons attribués même révoqués ; exemplaire déjà affecté/attribué/consommé indisponible pour une seconde affectation concurrente |
@@ -618,7 +643,7 @@ Exigence UX transverse ajoutée le **18 octobre 2026** : plateforme organisateur
 | E73-CA-60 | Organisateur avec objectifs et mesures disponibles ou absentes | Consulter le bilan et comparer deux éditions | Indicateurs inscrits, parcours commencés/terminés, passages validés, gagnants et lots remis ; objectifs facultatifs fixés avant publication et comparaison aux résultats/éditions comparables (DEC-132). Sources d’inscription via liens/QR identifiés, source inconnue explicite, sans suivi publicitaire intersites (DEC-133). Questionnaire Live facultatif après clôture avec note 1 à 5 et commentaire optionnel ; moyenne/nombre de réponses/commentaires visibles au bilan sans identité des répondants pour l’organisateur ni notification automatique supplémentaire (DEC-134), refus des notes hors intervalle et aucune obligation de commenter. Objectifs/résultats, populations, unités, fenêtres et limites explicités ; acquisition, progression/abandons et satisfaction seulement si collectées selon les règles retenues. Pas de double comptage, revenu/ROI causal inventé, donnée absente présentée comme zéro ni exposition d’un autre client |
 | E73-CA-61 | Opérateur habilité avec données de coûts complètes ou partielles, organisation avec ou sans budget mensuel | Consulter la ventilation mensuelle, atteindre 80 % puis 100 % du budget et consulter la vue client | Coûts des emails, SMS, préparation des chasses, stockage, Web Push et support ventilés par organisation puis commune/souscription/module selon la couverture disponible ; constaté, estimé et indisponible distingués, sources et unités explicites, reprise sans double comptage. Coûts internes et marges réservés à Localeo habilité ; client limité aux usages, quotas restants et montants facturés. Alertes internes aux deux seuils, aucune alerte de budget sans budget configuré ; aucune facturation, suspension ou modification automatique de quota |
 | E73-CA-62 | Responsable d’organisation ou collaborateur, avec engagements ouverts | Demander l’export complet, le préparer/télécharger puis traiter une éventuelle fermeture distincte | Demande réservée au responsable ; refus pour un collaborateur. Archive privée mise à disposition sans frais sous 5 jours ouvrés après demande valide : CSV, médias transmissibles et guide explicatif des contenus et liens, avec périmètre, omissions et état des animations/lots/obligations ouverts visibles. Téléchargement réservé au responsable connecté pendant 30 jours après mise à disposition, puis suppression de l’archive seule. Autorisation revérifiée, sans secrets, données internes Localeo ou données étrangères. Aucun compte fermé du seul fait de l’export ; fermeture demandée uniquement par le responsable et confirmée par Localeo après vérification des engagements. Nouveaux usages bloqués, seuls accès nécessaires maintenus jusqu’à résolution ou transfert explicite des engagements à un responsable habilité, puis fermés. Date effective et données conservées communiquées, accès aux autres organisations préservés ; aucune suppression générale ni abandon silencieux d’un gain |
-| E73-CA-63 | Équipe technique Localeo préparant la mise en service, une échéance trimestrielle ou un changement majeur du dispositif | Vérifier sauvegarde puis restauration sur une cible isolée représentative de l’hébergement | Preuve datée du périmètre base/objets/configuration, contrôles de cohérence et reprise des tâches, suppressions dues réappliquées et accès révoqués non réactivés ; perte mesurée de données de 4 heures maximum et reprise des parcours essentiels sous 8 heures, restauration et contrôles avant réouverture compris. Exercice avant mise en service, chaque trimestre et après changement majeur du dispositif ; preuve manquante ou objectif non atteint bloque la mise en service concernée jusqu’à correction, écarts et actions tracés. Une preuve locale/éphémère seule n’est pas présentée comme une validation de restauration hébergée |
+| E73-CA-63 | Équipe technique Localeo | Tester sauvegarde, restauration et reprise sur une cible isolée | Selon E73-DEC-CLOTURE-TESTS : preuve datée d’une restauration effective de données E73, intégrité, reprise des tâches, réapplication des suppressions/révocations et refus de réouverture tant que les contrôles ne sont pas achevés ; distinguer les périmètres base/objets/configuration couverts. Pour l’activation, conserver l’exercice représentatif de l’hébergement avant mise en service, chaque trimestre et après changement majeur : perte maximale de 4 h et reprise en 8 h, contrôles avant réouverture compris. Une preuve hébergée absente ou insuffisante bloque l’activation concernée, pas la clôture de développement fondée sur les tests ; les mesures locales ne certifient pas ces objectifs hébergés |
 
 ## Impacts à instruire
 

@@ -1,5 +1,12 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+Décision du **1er novembre 2026 — E73-DEC-CLOTURE-TESTS** : la clôture de
+développement repose sur les tests exécutés. Pilote, validation humaine,
+bascule des domaines et exercice hébergé restent suivis comme prérequis
+d’activation, sans bloquer cette clôture. Le [bilan](verification-livraison.md)
+distingue les preuves techniques de ces actions non exécutées ; les anciens
+résultats de recette ne sont pas requalifiés.
+
 Évolution du **1er novembre 2026 — E73-EVO-ONBOARDING-ANIMATION-SIMPLE** :
 choix Animation/Coffrets dès le référencement et parcours Animation court,
 sans contrat, Stripe ni rendez-vous imposés. Les
@@ -26,7 +33,7 @@ compatibilité et déploiements sont précisés dans
 [les origines des parcours](perimetres-parcours-saas.md#54-origines-et-continuité-des-parcours)
 et le [guide de configuration](../../exploitation/technique/configurer-epic-73.md).
 
-Spécification détaillée **V1 du 17 octobre 2026**, fondée sur les **147 décisions**, **38 user stories** et **63 critères** du [backlog canonique](../../roadmap/en-cours/epic-73-animation-et-ou-coffrets-backlog.md). Les 18 groupes d’arbitrages produit recensés sont résolus. L’état produit est **En cours** depuis le 18 octobre 2026 selon la [roadmap](../../roadmap/README.md) : ce dossier décrit la cible et le suivi local en précise les preuves, sans annoncer de déploiement.
+Spécification détaillée **V1 du 17 octobre 2026**, fondée sur les **147 décisions**, **38 user stories** et **63 critères** du [backlog canonique](../../roadmap/terminees/epic-73-animation-et-ou-coffrets-backlog.md). Les 18 groupes d’arbitrages produit recensés sont résolus. L’état produit est **Terminée le 1er novembre 2026** selon la [roadmap](../../roadmap/README.md), après vérification technique des critères et extensions conformément à E73-DEC-CLOTURE-TESTS. Le [bilan](verification-livraison.md) distingue tests exécutés, preuves réutilisées et actions d’activation ; aucun déploiement n’est attesté par cette clôture.
 
 ## Résultat attendu
 
