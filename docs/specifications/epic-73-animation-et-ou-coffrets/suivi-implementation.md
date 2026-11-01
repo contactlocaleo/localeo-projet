@@ -4082,3 +4082,103 @@ permissions, des données, des migrations, du générateur ou de la configuratio
 d’exploitation. Les règles serveur et confirmations restent propriétaires.
 Tests utilisateurs avec gestionnaires réels, recette distante et lecteur
 d’écran manuel non exécutés. Aucun commit, push ni déploiement dans ce correctif.
+
+## E73-PRO-SCAN-ANIMATION — ouverture du périmètre sur TEST, 1er novembre 2026
+
+Signalement : « Commercant Thibaut Animation Seul » ne voit pas le scanner QR
+dans Localeo Pro. Diagnostic ciblé sur TEST : commerce globalement `ACTIF`,
+revue `VALIDEE`, mais produit `ANIMATION=A_PREPARER` (version 2),
+`COFFRETS=NON_DEMANDE`. Le seul prérequis Animation manquant est
+`PORTAL_ACCESS_READY` : test d’accès Pro non confirmé dans OnBoard. La
+projection Pro retire intentionnellement le scanner lorsque le produit revu
+n’est pas actif ; le menu et l’accueil savent déjà présenter le scanner pour
+Animation seule. L’activation globale et l’ouverture du produit sont distinctes.
+
+Après confirmation explicite de la connexion réussie par le demandeur :
+
+- Confirmation via `POST /internal/onboard/api/dossiers/{id}/acces/test-confirme`
+  (HTTP 200), avec l’audit métier existant.
+- Relecture des prérequis Animation : valides, aucun manquant.
+- Activation via `POST /internal/referencement/commercants/{id}/perimetres/ANIMATION/activer`
+  (HTTP 200), version attendue, motif et clé d’idempotence.
+- Relecture HTTP et PostgreSQL en lecture seule : `ANIMATION=ACTIF`, version 3,
+  preuve de validation et activation au **2026-11-01 17:24:34 UTC** ; Coffrets
+  reste non demandé et la bascule communale reste inchangée.
+
+Preuves locales : **41 tests backend réussis** sur le domaine des périmètres,
+la projection Pro et l’accès de préparation. Les **4 scénarios Playwright** de
+`tests/e2e/perimetres.spec.js` « Animation seule » passent, à 320 et 1280 pixels,
+avec et sans bascule communale. Assertions renforcées : scanner dans l’accueil,
+la navigation et la barre mobile, ouverture effective de `/validation`, absence
+de commande métier à l’ouverture, refus des liens Coffrets conservés. Les API de
+ces scénarios navigateur sont simulées ; ils ne prouvent pas un scan caméra réel
+avec la session du commerçant sur TEST. Une reconnexion Pro renouvelle les
+capacités et les droits d’une ancienne session de préparation.
+
+Impacts : tests **Commerçant**, suivi **Projet** et configuration métier de ce
+seul commerce **TEST**. Aucun changement de code applicatif, de règle métier,
+de contrat, de migration, de générateur ou d’offre ; aucun déploiement nécessaire.
+Les scripts et le résultat opérateur restent dans `localeo-backend/tmp/`, ignoré
+par Git, sans identifiants de connexion dans le rapport. Aucun commit ni push
+effectué dans cette intervention.
+
+## E73-UX-DEFILEMENT — un seul défilement du contenu Animation, 1er novembre 2026
+
+Demande clarifiée : supprimer le défilement extérieur ou imbriqué, en conservant
+l’accès à tout le contenu. Sur la base Animation `9b0eb7a`, le scénario navigateur
+échoue avant correction sur la zone défilante propre à la liste. La fiche et la
+création possèdent également des conteneurs défilants internes. Sur mobile, les
+libellés invisibles des fiches peuvent en outre agrandir le document faute de
+contenant positionné dans la zone de contenu.
+
+Correction à la source : `#app-main` porte le défilement vertical et contient
+les éléments positionnés ; liste, fiche, création et détails de préparation
+suivent le flux. Les anciennes exceptions CSS mobiles sont retirées. Le chargement
+progressif écoute le défilement principal et conserve son bouton manuel. Les
+boutons de création restent accessibles en bas et le changement d’étape revient
+au début. La barre Action suivante reste fixe sur écran d’au moins 800 px de
+hauteur ; en dessous, elle suit le contenu afin de ne pas le recouvrir au zoom.
+Les fenêtres et menus superposés restent défilants lorsque nécessaire.
+
+Preuves : scénario avant/après avec 35 animations, accès clavier au dernier
+élément, navigation vers l’action suivante et création sur huit formats de
+320 à 1600 px, dont texte à 200 %. Recettes complémentaires du cadre partagé,
+des rubriques, de la création Léo et des détails de préparation. Les captures
+restent dans les répertoires temporaires du dépôt Animation ; les API sont
+simulées, sans configuration opérateur ni appel métier distant.
+
+Résultats : **8 parcours défilement**, **8 parcours cadre partagé**, **40 parcours
+rubriques**, recette Léo à **390/1280 px** et **114 contrôles de préparation**
+réussis. Les **295 tests unitaires**, TypeScript, ESLint et le build isolé
+`scripts/build-generation-tests.mjs` passent. Captures bureau et mobile à 200 %
+inspectées. Contrôles documentaires : 2 guides/77 liens et 132 sources exportées
+vérifiés ; `git diff --check` réussit dans les deux dépôts.
+
+Impacts : **Animation et documentation Projet**, présentation uniquement.
+Aucun changement de contrat API, permission, règle métier, données, migration
+ou générateur. Les contrôles ne prouvent pas le rendu sur TEST ou sur une PWA
+installée. Aucun commit, push ou déploiement demandé dans cette intervention.
+
+## E73-UX-GESTION — ergonomie commune Pro et Animation, 1er novembre 2026
+
+Audit demandé des deux applications de gestion, sur PC et mobile. Les constats,
+corrections et preuves sont centralisés dans le
+[rapport d’ergonomie Pro et Animation](../../audits/ergonomie-gestion-pro-animation-2026-11-01.md).
+Les bases testées sont Pro `6c7489e` et Animation `9b0eb7a`, avec les changements
+locaux conservés. La roadmap et les critères de clôture restent inchangés.
+
+Corrections : navigation clavier et mobile au zoom, accès au menu Compte en
+paysage, reprise explicite des lectures en erreur, confirmations salariés
+contextualisées, fenêtres Animation avec confinement et restitution du focus,
+commandes nommées, filtres accessibles et alertes lisibles. L’abandon du motif
+de refus d’un retrait commerçant n’envoie désormais aucune décision.
+
+Les tests utilisent des API synthétiques ; ils vérifient également l’absence
+d’écriture après abandon, les traitements en cours et les droits conservés.
+Les captures PC, mobile et texte agrandi ont été inspectées. Les résultats
+détaillés et les contrôles non exécutés figurent dans le rapport commun.
+
+Impacts : **Commerçant, Animation et documentation Projet**. Les règles métier
+et les contrats restent au backend ; aucune migration, configuration opérateur
+ou modification du générateur n’est nécessaire. Aucun déploiement ni essai sur
+appareil physique n’est inclus ; les travaux restent locaux.

@@ -2,6 +2,8 @@
 
 Constats datés conservés par application. Un audit ancien ne décrit pas automatiquement l’état actuel.
 
+- [Ergonomie des applications de gestion Pro et Animation — 1er novembre 2026](ergonomie-gestion-pro-animation-2026-11-01.md)
+
 - [animation/CR_MVP_GAP_ANALYSIS.md](animation/CR_MVP_GAP_ANALYSIS.md)
 - [animation/audit-localeo-2026-09-05.md](animation/audit-localeo-2026-09-05.md)
 - [animation/audit-mvp-preproduction.md](animation/audit-mvp-preproduction.md)
