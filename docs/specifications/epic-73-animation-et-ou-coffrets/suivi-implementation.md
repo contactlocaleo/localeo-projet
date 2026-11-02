@@ -2,6 +2,90 @@
 
 Début : **18 octobre 2026**. [Spécification](README.md), [backlog](../../roadmap/terminees/epic-73-animation-et-ou-coffrets-backlog.md), [matrice des 63 critères et preuves](verification-livraison.md). Objectif : les 38 US, dans les dix lots demandés. Les lignes ci-dessous ne valent pas acceptation tant que les preuves correspondantes ne sont pas enregistrées.
 
+## 3 novembre 2026 — harmonisation du parcours personnel Live
+
+Complément demandé : **Actualiser** devient une icône seule dans la ligne du
+titre. `LiveRefreshButton` conserve nom accessible, infobulle, indicateur
+occupé, verrouillage pendant la requête et respect de la réduction des
+animations. `LiveCarnetHeader` reçoit l'action de la liste des participations ;
+le parcours personnel et le bon la placent aussi à côté du titre. Les autres
+en-têtes qui utilisent déjà ce composant bénéficient du format compact. Les
+boutons de réessai explicitement textuels restent explicites. La mise en page
+commune réserve une colonne de 44 px et laisse le titre revenir à la ligne.
+Sans impact métier, API, configuration, migration ou démonstration : seule
+la présentation et la position des commandes existantes changent.
+
+Vérification du complément : **21/21 scénarios navigateur réussis**, code 0,
+1,7 min (`live-game-harmony`, `live-participations-unified`, `live-lots-mobile`,
+suffixe `.spec.cjs`), sortie `tmp/live-refresh-heading/`. Captures du parcours
+à 320 px et des participations avec texte à 200 % examinées. Build isolé,
+ESLint ciblé et contrôles documentaires réussis (94 guides, 1 068 liens,
+134 sources exportées). Aucun déploiement effectué.
+
+Anomalie signalée : la page ouverte par **Commencer mon parcours** utilisait
+encore des contrôles carrés, une progression peu visible et plaçait l'e-mail
+avant le jeu. Base Marketplace `85ccb11`, documentation `4eeabd9` ; travaux
+locaux préservés. Reproduction navigateur à 390 px : ouverture effective du
+parcours, puis échec attendu sur l'absence du volet **Mon inscription**.
+Trace et capture locales : `tmp/live-game-harmony-before/`.
+
+Correction dans `LiveAnimationGame`, `live-game.css` et l'option de présentation
+de `OrganizerMessagesPreference` : aperçu graphique, étape active identifiable,
+actions principales distinctes, retour et actualisation partagés avec Live,
+informations facultatives après le jeu. La feuille du jeu est réorganisée à
+sa source ; ses styles de contrôles ne ciblent plus tous les boutons enfants.
+Les thèmes partiels sombres disposent d'un repli de surface validé dans
+`playerThemeStyle`. L'e-mail absent reste explicite ; le consentement incertain
+reste monté et visible après rechargement. Deux revues indépendantes couvrent
+la hiérarchie UX puis les thèmes, la cascade et les consentements.
+
+Impacts : présentation Marketplace et documentation E73 uniquement. Aucun
+changement de contrat API, règle métier, migration, configuration, droits ou
+générateur de démonstration ; les commandes, versions, QR/PIN et reçus ne sont
+pas modifiés. Les données de recette sont synthétiques et les API simulées.
+Les trois observations du précédent audit restent hors de ce correctif ciblé.
+
+Preuves locales sur compilation Vite isolée, API simulées et réseau externe
+refusé :
+
+- `live-game-harmony.spec.cjs` : **8/8**, code 0, 58,7 s. Démarrage et reprise,
+  retour avec focus, progression 0 → 40 %, consentement facultatif et reçu
+  incertain, erreur de lecture puis actualisation, thèmes sombres global/étape.
+  Contrastes mesurés ≥ 4,5 sur titres, CTA focalisé, contact et consentement.
+  Captures 320/390/1280 px et stress de zoom CSS à 200 % examinées ; sortie
+  `tmp/live-game-harmony-final/`.
+- `live-contact-email.spec.cjs` : **3/3**, code 0, 37,9 s, sortie
+  `tmp/live-game-harmony-contact/`. Ouverture du volet, absence d'e-mail explicite,
+  contact non persisté et isolation des participations conservés.
+- `pin-validation.spec.cjs` : **4/4**, code 0, 20,4 s, sortie
+  `tmp/live-game-harmony-pin/`. Réponse perdue/reçu, PIN incorrect, création
+  incertaine et droit expiré sans rejeu implicite.
+- `live-game.spec.cjs` et `organizer-messages.spec.cjs` : **14/14**, code 0,
+  1,8 min, sortie `tmp/live-game-harmony-final-regression/`. Cinq activités,
+  aide et preuve distincte, passeport/tombola, reprise après réponse perdue,
+  continuité, accord/retrait organisateur et texte à 200 % vérifiés.
+  Le premier rejeu avait trois échecs de visibilité : l'ancien scénario
+  consultait les préférences sans ouvrir leur nouveau volet. L'ouverture
+  explicite a été ajoutée ; les assertions de consentement sont conservées.
+- `live-mobile-actions.spec.cjs` : **6/6** dans
+  `tmp/live-game-harmony-regression/` (passage global code 1), avec les trois échecs ci-dessus dans
+  l'autre suite du premier passage. Actions mobiles et refus d'inscription
+  sur animation close/annulée vérifiés.
+- `node --test tests/security/live-game.test.cjs` : **6/6**, code 0 ; filtrage
+  du thème, replis et préférence de la surface explicite vérifiés.
+
+Résultat consolidé sans compter les rejeux : **35 scénarios navigateur et
+6 tests Node réussis**, aucun skip. Commande navigateur :
+`node node_modules/@playwright/test/cli.js test <fichiers> --config=playwright.live-game.config.cjs --output=tmp/<passage> --workers=1`.
+
+Build isolé, ESLint ciblé et `git diff --check` réussis. Contrôles documentaires :
+94 guides, 1 068 liens, zéro erreur/avertissement ; 134 sources exportées vérifiées.
+Limites : pas de déploiement ni recette TEST, téléphone physique ou lecteur
+d'écran. Le stress `zoom:2` CSS n'est pas un zoom navigateur : il révèle un
+chevauchement de l'identité et d'Installer dans le header global, hors de la
+page du jeu ; le contenu du parcours reste sans débordement. Cette observation
+n'est pas présentée comme une validation exhaustive de l'accessibilité.
+
 ## 2 novembre 2026 — nouvel audit Live après les huit corrections
 
 Demande : valider à nouveau le parcours et identifier les points restant à

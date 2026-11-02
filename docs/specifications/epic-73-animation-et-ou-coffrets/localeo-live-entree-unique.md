@@ -64,6 +64,26 @@ les illustrations de ses étapes ne servent pas de repli. Voir le
 L'inscription réutilise le formulaire existant sous `/live/animations/:id/inscription`.
 Les participations et lots personnels conservent leurs accès dans le carnet.
 
+Harmonisation du **3 novembre 2026** : la page personnelle ouverte par
+**Commencer mon parcours** ou **Reprendre mon parcours** reprend les surfaces
+arrondies, pictogrammes et commandes de retour/actualisation de Live. Le titre,
+le nombre réel d'étapes terminées et la qualification fournie par le serveur
+forment un aperçu commun ; l'étape active et son action précèdent les options.
+**Mon inscription** et **Messages de l'organisateur** sont des volets secondaires
+accessibles au clavier. Une décision de consentement non confirmée ouvre
+automatiquement son volet, y compris après rechargement, sans renvoi implicite.
+L'adresse absente reste explicitement indiquée dans le volet d'inscription.
+Les thèmes configurés du jeu et des étapes restent prioritaires ; sans couleur
+de surface explicite, leur fond sert de repli pour préserver le contraste.
+Le scan du lieu, le QR personnel, le PIN, les gains et la satisfaction gardent
+leurs composants et autorisations. Aucun score ni illustration fictifs ajoutés.
+
+Complément du même jour : l'actualisation utilise une icône seule, placée sur
+la même ligne que le titre (participations, parcours, bon et en-têtes existants).
+Sa cible tactile reste de 44 px, avec nom accessible, infobulle, focus visible
+et état de chargement. Le titre peut revenir à la ligne sans repousser l'icône
+en dessous. Les actions explicites de réessai après erreur gardent leur texte.
+
 Conception mobile d'abord : écran de référence 320–390 px, pas de débordement
 horizontal, champs à 16 px, actions tactiles d'au moins 44 px, navigation à portée
 du pouce et marge de sécurité PWA. Pas d'accueil marketing avant les tâches.
