@@ -1,18 +1,20 @@
 # Roadmap produit
 
-Implémentations locales E70 et E72 vérifiées les 7–8 octobre 2026 : [E70 — PIN](../specifications/epic-70-validation-pin/README.md) et [E72 — salariés](../specifications/epic-72-acces-salaries/README.md). E70 est publiée avant le lot E72 ; les deux epics restent en cours jusqu’à leur recette de mise en service. Aucun déploiement effectué.
+Clôture E70 du **2 novembre 2026** : **Terminée**, 34 critères vérifiés sur tests unitaires, d’intégration et fonctionnels selon **E70-DEC-CLOTURE-TESTS**. Les preuves externes sont hors des conditions de clôture, conformément à la décision utilisateur. [Bilan et livraison](../specifications/epic-70-validation-pin/verification-livraison.md). Aucun commit, push ni déploiement effectué par cette clôture.
 
-## État global consolidé au 1er novembre 2026
+E72 — accès salariés est terminée le 1er novembre 2026 selon E72-DEC-CLOTURE-TESTS : tests unitaires, d'intégration et fonctionnels des 22 critères vérifiés. Le [bilan E72](../specifications/epic-72-acces-salaries/verification-livraison.md) distingue la clôture technique des actions de mise en service. Aucun déploiement effectué.
 
-Le tronc commun comprend 75 identifiants : 60 epics terminees, 8 a faire,
-4 en cours, 2 abandonnees et 1 fusionnee. L'Epic 61 est absorbee par l'Epic 60.
+## État global consolidé au 2 novembre 2026
+
+Le tronc commun comprend 76 identifiants : 62 epics terminees, 9 a faire,
+2 en cours, 2 abandonnees et 1 fusionnee. L'Epic 61 est absorbee par l'Epic 60.
 Les documents sont ranges par etat dans l'[index de la roadmap](README.md).
 
 | Etat | Epics |
 | --- | --- |
-| A faire | `EPIC-54`, `EPIC-58`, `EPIC-62`, `EPIC-64`, `EPIC-67`, `EPIC-71`, `EPIC-74`, `EPIC-75` |
-| En cours | `EPIC-55`, `EPIC-68`, `EPIC-70`, `EPIC-72` |
-| Termine | 60 epics : toutes les autres epics de `EPIC-01` a `EPIC-60`, et `EPIC-63`/`EPIC-65`/`EPIC-66`/`EPIC-69`/`EPIC-73`, hors `EPIC-05` et `EPIC-12` |
+| A faire | `EPIC-54`, `EPIC-58`, `EPIC-62`, `EPIC-64`, `EPIC-67`, `EPIC-71`, `EPIC-74`, `EPIC-75`, `EPIC-76` |
+| En cours | `EPIC-55`, `EPIC-68` |
+| Termine | 62 epics : toutes les autres epics de `EPIC-01` a `EPIC-60`, et `EPIC-63`/`EPIC-65`/`EPIC-66`/`EPIC-69`/`EPIC-70`/`EPIC-72`/`EPIC-73`, hors `EPIC-05` et `EPIC-12` |
 | Abandonne | `EPIC-05` : QR commercant remplace par l'Epic 10 ; `EPIC-12` : flux manuel decommissionne par l'Epic 39 |
 | Fusionnee | `EPIC-61` dans `EPIC-60` ; non comptee comme terminee |
 
@@ -25,7 +27,7 @@ un seul fichier par sujet. Trois identifiants applicatifs complètent ce tronc :
 | [EPIC-MARKETPLACE-54](a-faire/epic-marketplace-54-harmonisation-identite-visuelle-marketplace-backlog.md) | Identité visuelle ; distinct du calendrier de l'Avent 54 | À faire (classement courant ; implémentation locale documentée, revue et recette attendues) |
 | [EPIC-PRES-CONTENU-001](terminees/epic-animation-edition-prestations.md) | Édition directe des prestations ; le futur sas reste dans l'EPIC 62 | Terminée (parcours existant) |
 
-Le total consolidé est de **78 identifiants : 62 terminés, 9 à faire, 4 en cours,
+Le total consolidé est de **79 identifiants : 64 terminés, 10 à faire, 2 en cours,
 2 abandonnés et 1 fusionné**. L'ancien numéro local Marketplace 53 (pagination)
 est rattaché à l'EPIC 57, sans ajouter d'identifiant ni le confondre avec la tombola.
 
@@ -37,6 +39,13 @@ Le classement du 15 septembre corrige les anciens libelles globaux des Epics
 la confirmation produit de l'utilisateur le 15 septembre 2026.
 
 Derniere evolution suivie :
+
+- [EPIC 76 — Impersonification support Pro et Animation](a-faire/epic-76-impersonification-support-pro-animation-backlog.md) :
+  cadrage du 1er novembre, 18 critères cibles ; accès temporaire depuis ERP dans
+  le contexte du compte sélectionné, droits bornés, bandeau, fin/révocation et
+  audit opérateur/cible. Consultation par défaut et intervention explicite/tracée
+  validées le 1er novembre ; habilitations, actions et modalités à arbitrer.
+  État À faire, sans implémentation.
 
 - [EPIC 75 — Mots croisés assistés par l’IA](a-faire/epic-75-mots-croises-assistes-ia-backlog.md) :
   cadrage du 22 octobre, 8 US et 18 critères cibles ; nouveau jeu payant sur le modèle
@@ -71,8 +80,8 @@ Derniere evolution suivie :
   [Spécification détaillée V1 du 17 octobre](../specifications/epic-73-animation-et-ou-coffrets/README.md) : parcours, contrats, migrations et matrice des 63 critères.
   État **Terminée le 1er novembre 2026**, tests vérifiés selon E73-DEC-CLOTURE-TESTS, extensions incluses. [Bilan](../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md) : preuves exécutées/réutilisées et actions d’activation séparées ; aucun déploiement par cette clôture.
 
-- [EPIC 72 — Accès salariés Localeo Pro](en-cours/epic-72-acces-salaries-validation-localeo-pro-backlog.md) :
-  cadrage du 5 octobre, 22 critères ; invitation email, compte individuel limité au
+- [EPIC 72 — Accès salariés Localeo Pro](terminees/epic-72-acces-salaries-validation-localeo-pro-backlog.md) :
+  terminée le 1er novembre sur tests (E72-DEC-CLOTURE-TESTS), 22 critères ; invitation email, compte individuel limité au
   scanner Coffret/Animation, révocation et audit. Historique complet du commerce en lecture seule ; option ERP désactivée par défaut, sans plafond.
 
 - [EPIC 71 — CRM de prospection](a-faire/epic-71-crm-prospection-animation-coffrets-pro-backlog.md) :
@@ -82,7 +91,7 @@ Derniere evolution suivie :
   des doublons, fiche organisation/contact/opportunités, historique, carte de France
   communale et passage explicite aux parcours métier. Aucun import ni code livré.
 
-- [EPIC 70 — Validation sur le téléphone du client](en-cours/epic-70-validation-prestation-telephone-client-backlog.md) :
+- [EPIC 70 — Validation sur le téléphone du client](terminees/epic-70-validation-prestation-telephone-client-backlog.md) :
   cadrage du 1er octobre étendu le 5 octobre aux passages Animation et aux pannes du mobile commerçant, 34 critères. PIN dédié retenu : contexte transactionnel,
   gestion de validité/remplacement/révocation depuis l'accès commerçant et parcours
   sur le téléphone client sans matériel. Compromis de droits limités accepté,

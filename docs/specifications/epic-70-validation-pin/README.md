@@ -1,9 +1,13 @@
 # EPIC 70 — Validation par PIN sur le téléphone du client
 
-Version **V1 du 5 octobre 2026**. État produit **En cours**, suivi dans la
+Version **V1 du 5 octobre 2026**. État produit **Terminée**, suivi dans la
 [roadmap](../../roadmap/README.md). Cette spécification traduit les 34 critères du
-[backlog canonique](../../roadmap/en-cours/epic-70-validation-prestation-telephone-client-backlog.md).
+[backlog canonique](../../roadmap/terminees/epic-70-validation-prestation-telephone-client-backlog.md).
 Implémentation et vérifications locales le 7 octobre 2026 ; consulter le bilan pour les preuves. Aucun déploiement ni recette sur une cible réelle.
+
+**Clôture sur tests le 2 novembre 2026**, selon **E70-DEC-CLOTURE-TESTS** : 34 critères vérifiés ; preuves externes hors gate sur demande utilisateur. Le [bilan courant](verification-livraison.md) détaille les corrections, tests et actions de livraison.
+
+## Historique des revues précédentes
 
 Revue de clôture du **1er novembre 2026**, demandée pour l'epic 70 : **clôture
 non prononcée**. La borne avant génération du PIN est corrigée localement après

@@ -1,6 +1,6 @@
 # E70 — Architecture et contrats V1
 
-Source : [spécification](README.md), [backlog et 34 critères](../../roadmap/en-cours/epic-70-validation-prestation-telephone-client-backlog.md).
+Source : [spécification](README.md), [backlog et 34 critères](../../roadmap/terminees/epic-70-validation-prestation-telephone-client-backlog.md).
 Conception du 5 octobre 2026, implémentée et vérifiée localement le 7 octobre.
 Les preuves et limites figurent dans [le bilan](verification-livraison.md) ;
 aucune disponibilité sur une cible déployée n’est annoncée.
@@ -148,6 +148,22 @@ n'exige pas de nouvelle saisie et n'accorde aucun accès professionnel.
 
 ## 5. Contrats cibles et droits
 
+Les refus de confirmation E70 sont audités dans une UoW distincte après
+annulation de la transaction métier. Leur contexte contient les références
+non secrètes de demande, cible, parent et animation, le mode, la version PIN
+observée sous garde commerce, le motif et la corrélation. Il reste lisible après
+purge de la demande technique.
+
+Les segments externes `pin_validation.*` sont publiés **après le commit SQL
+extérieur**. Un rollback, y compris d'un savepoint, supprime ses publications
+en attente. SQL est la preuve canonique ; il n'existe pas de transaction atomique
+entre PostgreSQL et le fichier. Une panne de segment après commit est journalisée
+par `audit.pin.segment.failed`, sans transformer une validation acquise en refus.
+Après réparation du stockage, `ServiceAudit.reconcilier_segment_pin(id)` reprend
+un événement SQL committé par son UUID, de manière idempotente et sans rejouer
+la consommation. Cette reprise est explicite ; aucun nouvel ordonnanceur n'est
+ajouté. Le traitement des autres familles d'audit reste inchangé.
+
 Producteur : backend. Source de conception : ce document. Les nouvelles routes
 suivent les [conventions](../../architecture/transverse/conventions-api-openapi.md).
 Les noms actuels sont conservés : cette epic ne renomme pas les routes existantes.
@@ -173,7 +189,10 @@ Les noms actuels sont conservés : cette epic ne renomme pas les routes existant
 
 `DemandePin` : `id: UUID`, `type: COFFRET|ANIMATION`, `etat`, `created_at`,
 `expires_at`, `server_time`, `commerce: {id,nom}`, `cible: {id,libelle}`,
-`effet_libelle`, `versions` pour Animation. Pas d'email client, financier,
+`effet_libelle`, `coffret_instance_id` (UUID non secret pour Coffret, facultatif
+et nullable dans le schéma partagé), `versions` pour Animation. La référence
+du coffret est affichée avant confirmation et dans le reçu, distincte de
+`validation_id`. Pas d'email client, financier,
 QR, hash ou état interne du compte. `ResultatPin` ajoute `validation_id`,
 `mode_effectif`, `validated_at`, `resultat: VALIDEE|ANOMALIE`, `rejoue: bool`,
 progression uniquement si déjà permise dans la projection participante.

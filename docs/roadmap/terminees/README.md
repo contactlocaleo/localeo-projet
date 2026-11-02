@@ -2,9 +2,9 @@
 
 [Retour à la roadmap](../README.md)
 
-62 EPIC terminées : 60 du tronc commun et deux identifiants applicatifs
+64 EPIC terminées : 62 du tronc commun et deux identifiants applicatifs
 (EPIC-MARKETPLACE-18 et EPIC-PRES-CONTENU-001). Les EPIC 3 et 4 restent décrites
-dans la roadmap produit ; les 60 autres disposent chacune d'un fichier ci-dessous.
+dans la roadmap produit ; les 62 autres disposent chacune d'un fichier ci-dessous.
 Les compléments de conception, de tests et d'interface sont réunis dans leur backlog.
 Les recettes d'environnement restantes ne modifient pas ce classement.
 
@@ -18,6 +18,8 @@ Les recettes d'environnement restantes ne modifient pas ce classement.
 - [EPIC 4 — Notifications commerçant sur achat](../product-roadmap.md#epic-4-notifications-commercant-sur-achat-de-coffret).
 
 ## Backlogs uniques
+
+- [EPIC 72 — Accès salariés Localeo Pro](epic-72-acces-salaries-validation-localeo-pro-backlog.md) : terminée le 1er novembre 2026 selon E72-DEC-CLOTURE-TESTS, 22 critères vérifiés ; [bilan et livraison](../../specifications/epic-72-acces-salaries/verification-livraison.md).
 
 - [EPIC 65 — Vues ERP audit, paiements et reversements](epic-65-vues-erp-audit-paiements-reversements-backlog.md) : clôture le 2 octobre 2026 ; dix critères vérifiés, profils E69 intégrés, [preuves et livraison](../../specifications/epic-65-vues-erp/verification-livraison.md).
 
@@ -83,3 +85,5 @@ Les recettes d'environnement restantes ne modifient pas ce classement.
 ## Conception complémentaire
 
 - [EPIC 41 — Expression de besoin UX de la plateforme partenaire](../../produit/animation/epic-41-expression-besoin-plateforme-partenaire-figma.md).
+
+- [EPIC 70 — Validation par PIN sur le téléphone client](epic-70-validation-prestation-telephone-client-backlog.md) : terminée le 2 novembre 2026 selon E70-DEC-CLOTURE-TESTS, 34 critères vérifiés ; [preuves et livraison](../../specifications/epic-70-validation-pin/verification-livraison.md).

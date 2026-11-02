@@ -1,6 +1,6 @@
 # E72 — Architecture et contrats
 
-Version du 5 octobre 2026 ; [périmètre et parcours](README.md), [22 critères canoniques](../../roadmap/en-cours/epic-72-acces-salaries-validation-localeo-pro-backlog.md). Les structures et routes sont implémentées localement les 7–8 octobre ; voir le [bilan de vérification](verification-livraison.md). Aucun déploiement annoncé. Les chemins applicatifs sont relatifs aux dépôts indiqués.
+Version du 5 octobre 2026 ; [périmètre et parcours](README.md), [22 critères canoniques](../../roadmap/terminees/epic-72-acces-salaries-validation-localeo-pro-backlog.md). Les structures et routes sont implémentées localement les 7–8 octobre ; voir le [bilan de vérification](verification-livraison.md). Aucun déploiement annoncé. Les chemins applicatifs sont relatifs aux dépôts indiqués.
 
 ## Existant vérifié et réutilisations
 
@@ -150,6 +150,19 @@ Déployer backend et migration, Pro/contrat embarqué régénéré, puis seuleme
 Le producteur est FastAPI ; conception canonique ici, OpenAPI documentaire dans le dépôt projet selon le générateur backend existant. À l'implémentation, régénérer l'OpenAPI embarqué `localeo-commercant/api/localeo-openapi.json` par son script, pas une fixture manuelle. Aucun contrat Marketplace ou partenaire Animation à changer pour gérer les salariés ; les extensions d'audit doivent rester additives pour leurs lecteurs.
 
 ## Audit et conservation
+
+### Refus contextualisés — correction du 1er novembre 2026
+
+L'application capture uniquement les identifiants vérifiés de la session, du
+commerce et de la cible chargée. Un contexte d'audit typé accompagne le refus
+jusqu'au handler HTTP ; son écriture utilise une transaction distincte, après
+le rollback métier. Le transport conserve aussi le contexte de l'authentification
+réussie pour les refus intervenant ensuite, notamment l'ouverture globale
+inactive. Une cible interdite ou inconnue n'est pas reprise depuis l'URL.
+Une requête non identifiée reste anonyme ; le lien public connu donne un contexte
+de cible, sans prétendre authentifier son porteur. Aucun secret n'est ajouté aux
+réponses ni à ce contexte. Les routes moteur propagent le refus salarié à ce
+handler avant leur traitement des erreurs de saisie génériques.
 
 ### E72-EVOL-20261009-ACCUEIL — invitation et caméra
 

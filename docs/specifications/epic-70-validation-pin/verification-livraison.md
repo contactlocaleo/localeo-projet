@@ -1,12 +1,173 @@
 # E70 — Preuves attendues et préparation de livraison
 
 Références : [architecture](architecture-contrats.md), [périmètre V1](README.md),
-[34 critères canoniques](../../roadmap/en-cours/epic-70-validation-prestation-telephone-client-backlog.md).
+[34 critères canoniques](../../roadmap/terminees/epic-70-validation-prestation-telephone-client-backlog.md).
 Ce document conserve le plan de vérification initial et le bilan d'implémentation
 locale du 7 octobre ci-dessous. Aucune recette sur un environnement réel ni
 activation du canal n'a été effectuée.
 
-## 1. Matrice de couverture
+## Clôture sur tests — 2 novembre 2026
+
+**Décision E70-DEC-CLOTURE-TESTS** : à la demande explicite de l'utilisateur,
+la clôture repose sur les tests unitaires, d'intégration et fonctionnels. Les
+preuves de pilote, d'appareil réel, de fournisseur et d'hébergement ne constituent
+plus un préalable à cette clôture. Les **34 critères métier sont conservés** ;
+CA-16 est vérifié par les parcours navigateur et la démonstration synthétique,
+avec les guides et leur lecteur. Les comptes rendus historiques plus bas restent
+datés et ne portent pas le verdict courant.
+
+**Verdict : Terminée**, les 34 critères sont vérifiés sur les preuves ci-dessous.
+Aucun commit, push, activation ou déploiement n'est réalisé par cette clôture.
+Bases : backend `7f131d3`, Marketplace
+`bb8b585`, Pro `78c3237`, Animation `d607cb9`, projet `9204f8a`, complétées
+par les différences locales. Les travaux
+E72 et E76 préexistants sont préservés et ne constituent pas un lot E70.
+
+### Correctifs et compléments
+
+- **CA-04** : le backend fournit `coffret_instance_id`, référence UUID non
+  secrète ; le client l'affiche avant saisie et dans le reçu, distinctement de
+  l'identifiant de validation. Le champ optionnel est synchronisé dans les
+  contrats E41/E42 et les instantanés Pro/Animation. Aucun nouveau droit.
+- **CA-33** : l'audit des refus conserve commerce, cible, parent, animation,
+  mode, version, motif et corrélation après rollback et après purge de la
+  demande. Les effets métier refusés restent annulés. Le compteur des mauvais
+  PIN et son blocage restent persistés, sans doubler la trace de refus.
+- La revue indépendante identifie aussi un succès externe écrit avant le commit.
+  Le correctif diffère les seuls segments `pin_validation.*` jusqu'au commit
+  extérieur, écarte les savepoints annulés et fournit une reprise idempotente
+  depuis SQL en cas de panne du fichier après commit. Un test reproduit le faux
+  succès avant correction. Il n'est pas annoncé d'atomicité SQL/fichier.
+- Les tests PostgreSQL complètent les substitutions, droits courants, incidents,
+  blocage global, scan principal/salarié, et réconciliation du moteur réel.
+  Pour une chasse, le PIN atteste la présence commerçante ; la réponse au défi
+  reste une action distincte du joueur.
+- Les migrations réelles **v256/v257** sont appliquées deux fois sur schéma
+  pré-E70 puis sur schéma initialisé par ORM : aucun PIN ni activation implicite,
+  sessions/droits conservés et validation QR effective après migration.
+- Compatibilité du jeu de démonstration, distincte du correctif métier E70 :
+  les signataires fictifs de convention utilisent le format structuré du
+  représentant légal. Le scénario de finalisation teste aussi le refus sans
+  bilan de préparation, puis renseigne RDV/bilan par les commandes normales
+  avant `VALIDE`. Aucune règle OnBoard n'est neutralisée, aucun dossier n'est
+  finalisé d'office dans le jeu ; l'essai est annulé après vérification.
+
+### Périmètre des preuves
+
+Les fichiers ci-dessous sont relatifs à `localeo-backend`, sauf mention du
+frontend. Les suites PostgreSQL utilisent uniquement `127.0.0.1:16472`, rôle
+synthétique `audit_test`, base `localeo_audit_test`, avec schémas éphémères.
+Le générateur utilise deux clusters jetables distincts, ports 16473/16474.
+Les lanceurs interdisent le chargement des `.env` et les transports externes.
+Les API des tests navigateur sont simulées ; les assertions d'effets métier
+proviennent des tests PostgreSQL. Ces preuves complémentaires ne sont pas
+présentées comme un parcours traversant des applications hébergées.
+
+| Lot | Commande / fichiers | Résultat |
+| --- | --- | --- |
+| I — isolé | `scripts/validation/test_isolated.py`, domaine PIN/session/commerce/conservation, API PIN/ERP/Bon, réauthentification/actions Animation, segments, générateur PIN, architecture/classes/couverture use cases et exploitation/email | **779 réussis**, aucun ignoré, 49,38 s ; 1 avertissement `datetime.utcnow()` de fixture |
+| I2 — après correction des segments | Même lanceur, architecture/classes/couverture et audit/API/réauthentification ciblés ; rapports `tmp/e70-final-audit-20261102/isolated-retry.*` | **665 réussis**, aucun ignoré, 34,33 s ; ce lot recoupe I et n'est pas additionné à ses 779 contrôles. Premier lancement : erreur de handle stdin Windows dans un sous-processus Git ; rejeu identique avec stdin `DEVNULL`, aucune assertion modifiée |
+| P — PostgreSQL existant | Coffret, Animation, Bon, concurrence, notifications, conservation, salariés/périmètres, moteur et transport interne | **104 réussis**, aucun ignoré : 22 dans le lot audit final et 82 dans le lot intégré final |
+| C — compléments intégrés | `tests/security/test_cloture_pin_e70.py` | **31 cas distincts validés**, dont ouverture sans session/transaction, support audité et historique ; un prérequis de fixture v257 manquant a été corrigé puis les 4 cas affectés/renforcés rejoués avec succès |
+| A — audit et référence | `tests/security/test_cloture_audit_pin_e70.py`, puis suites Coffret/Animation ; rapports `tmp/e70-final-audit-20261102/postgres.*` | **35 réussis** : 13 nouveaux audit/référence et 22 existants Coffret/Animation, aucun ignoré, 229,01 s. Les 22 existants appartiennent au lot P, sans double comptage |
+| M — migrations | `tests/security/test_cloture_migrations_pin_e70.py` | **2 réussis**, aucun ignoré, 40,46 s |
+| D — démonstration/restauration | Lanceur temporaire `tmp/e70-final-demo-20261102/run_full.py`, isolation et `RequiredScenarios` du runner canonique, trois modules dataset/lifecycle/reset sur ports 16473/16474 déjà migrés | **10 cas distincts vérifiés** : 9 réussis dans la suite globale (902,47 s), puis le cas de relations corrigé et rejoué avec succès (209,93 s, `relations.xml`). Premier échec : signataire fictif dans l'ancien format ; fixture ensuite rendue déterministe sur le dossier avec préparation active. Les 10 tests unitaires préparation/PIN passent (5,88 s, `unit.xml`). Le cas PIN génération/restauration ciblé a aussi réussi en 120,21 s. La suite globale n'a pas été entièrement rejouée après correction |
+| F — client navigateur | Marketplace : `pin-validation-coffret-closure.spec.cjs`, `pin-validation.spec.cjs`, `pin-validation-feedback.spec.cjs`, `pin-validation-bon-feedback.spec.cjs`, configuration `playwright.desktop.config.cjs`, 1 worker | **26 réussis** : 9 nouveaux Coffret (Live/QR/détail, 390/1280 px) et 17 Animation/Bon ; aucun ignoré |
+| N — client stockage/transport | Marketplace : `node --test` sur `pin-recovery.test.cjs`, `service-worker.test.cjs`, `analytics-transport.test.cjs`, `request-deadline.test.cjs` | **27 réussis**, aucun ignoré |
+| U — Pro unités/contrats | `node node_modules/vitest/vitest.mjs run --config scripts/audits/vitest-e70.config.mjs --maxWorkers=2` | **71 réussis**, 6 fichiers, 44,77 s, aucun ignoré |
+| B — Pro navigateur | `node node_modules/@playwright/test/cli.js test tests/e2e/pin-validation.spec.js --workers=1 --output=tmp/e70-closure-pro` | **3 réussis**, 23,3 s : gestion à 390/1280 px et réponse de génération perdue, reload, relecture et remplacement explicite |
+| E — ERP navigateur | `node tests/browser/pin-validation-erp.cjs` | Réussi à 390/1280 px : état sans secret, motif, révocation, timeout/relecture et refus Lecteur |
+| L — documentation et lecteur | `test_ops_markdown_viewer.py`, `test_documentation_snapshot.py` ; liens, sources et bundle | **34 réussis, 2 ignorés** (création de symlinks non autorisée sur Windows), 69,70 s. Bundle `tmp/e70-cloture-20261102-docs` : 134 exports, 135 entrées distribuées et leurs empreintes vérifiées ; alias ERP `formation/validation-par-pin.md` résolu avec le guide et la reprise d'audit |
+
+Les builds isolés Pro et Marketplace intégrés aux runners navigateur réussissent.
+L'avertissement Pro sur l'import statique/dynamique de `ValidationHistory`
+reste visible. Les avertissements PostgreSQL sur le cycle FK profils et les
+horloges de fixture ne sont pas des scénarios ignorés. Les reproductions avant
+correctif CA-04/33 donnent trois échecs attendus ; elles ne sont pas additionnées
+aux succès, pas plus que les reprises de fixtures et relances ciblées.
+
+Les lots PostgreSQL finaux représentent **150 cas distincts validés** : P104,
+C31, A13 nouveaux et M2. Le rapport `tmp/e70-final-integration-20261102/results.xml`
+contient 114 succès et un échec de fixture en 794,38 s ; la vraie migration v257
+crée la table SQL-only `preuves_consommation_pin` nécessaire au test d'historique.
+Le rapport `ca01-ca12-recheck-v257.xml` prouve ensuite les quatre cas rejoués en
+57,99 s (27 autres non sélectionnés, pas ignorés). Les assertions CA-01/12 sont
+renforcées ; aucune assertion métier n'est supprimée. Les relances interrompues
+avant production d'un rapport final ne servent pas de preuve de succès.
+
+Après reclassement : `check_guidance.py` réussit sur 94 guides et 1 068 liens ;
+le contrôle des documents modifiés réussit sur 24 guides et 564 liens, sans
+erreur ni avertissement. Les 134 sources exportées, le bundle régénéré et ses
+135 entrées distribuées sont vérifiés. Les trois clusters PostgreSQL locaux
+utilisés pour les preuves sont arrêtés ; aucune base TEST hébergée n'est touchée.
+
+### Rapprochement des 34 critères
+
+Le propriétaire reste le domaine `identite_acces` pour le PIN et les sessions,
+`exploitation` pour la consommation, `animation_locale` pour l'attestation et
+la progression. `ServiceValidationPin` orchestre les mêmes règles que les
+parcours QR ; les interfaces affichent les décisions serveur. Les documents
+de référence sont le [contrat](architecture-contrats.md) et la
+[notice Pro/client/ERP](guide-utilisation-exploitation.md).
+
+| Critère | Comportement observable et preuves | Documentation / exploitation |
+| --- | --- | --- |
+| E70-CA-01 | C : ouverture/relecture sans consommation, mouvement ou notification ; P : aucun accès Pro créé | Demande bornée par droit client |
+| E70-CA-02 | I API stricte et Bearer ; C substitutions parent/cible/droit/demande refusées sans essai PIN | Référence publique insuffisante |
+| E70-CA-03 | I domaine ; P états absent, futur, expiré, révoqué, bloqué ; C suspension/fermeture canal/clé absente | Contrôle courant à confirmation |
+| E70-CA-04 | A référence serveur ; F récapitulatif et confirmation explicite, trois accès Coffret et reçu | Référence distincte du secret et du reçu |
+| E70-CA-05 | I extra champs/finalité refusés ; C substitutions ; P commerce/étape/versions | Cible immuable, nouvelle demande |
+| E70-CA-06 | I durée cinq minutes ; C annulation ; P expiration/rejeu ; F abandon/reprise | Reçu protégé par droit courant |
+| E70-CA-07 | P barrières et connexions PostgreSQL, QR/PIN et plusieurs PIN : un effet/validation/mouvement | Verrou commun par commerce |
+| E70-CA-08 | C droit consommé, instance annulée/expirée, commerce suspendu ; P cœur commun QR/PIN | Aucune dérogation métier |
+| E70-CA-09 | I secrets filtrés ; N stockage/cache/analytics/transport ; F abandon et champ effacé ; B reload | Risque de capture sur appareil tiers déclaré |
+| E70-CA-10 | F réponse perdue/reload/GET sans POST rejoué ; P reçu après expiration et concurrence | Vérifier le résultat avant nouvelle demande |
+| E70-CA-11 | I séparation gestion/client ; C PIN connu sans droit, instance/participant étrangers ; P commerce étranger | PIN borné, pas authentifiant Pro |
+| E70-CA-12 | I API Admin/Backoffice/CSRF versus Lecteur/Finance ; C révocation globale E69 ; E assistance sans secret | Motif, audit et portée E69 globale |
+| E70-CA-13 | A contexte SQL/segments et refus ; P acteur/version/corrélation ; F reçu PIN/QR/ANOMALIE | Pas d'identité salariée inventée |
+| E70-CA-14 | F erreurs, expiration, blocage, temps serveur, réponse perdue ; N transport borné | Internet requis, alternatives selon droits |
+| E70-CA-15 | C scan principal malgré incident PIN, scan salarié malgré blocage/révocation ; P périmètres | Suspension métier reste opposable |
+| E70-CA-16 | F/B/E nominal-refus-reprise mobile/PC, D jeu/restauration, L notice et lecteur | E70-DEC-CLOTURE-TESTS : pilote externe hors gate |
+| E70-CA-17 | I durée/format/reauth et rôles ; P génération unique et session principale ; U/B gestion | Secret affiché une fois, reauth ≤15 min |
+| E70-CA-18 | I bornes 1/7/30 jours et refus ; P avant début/fin serveur ; F délai/heure | Aucun calcul de validité métier dans l'UI |
+| E70-CA-19 | P générations concurrentes, remplacement et version monotone ; B remplacement explicite | Ancien code inutilisable |
+| E70-CA-20 | P demande antérieure/révocation, reçu conservé ; C historique acquis conservé | Révocation sans annulation rétroactive |
+| E70-CA-21 | P verrous réels rotation/révocation/suspension contre validation | Effet acquis avant changement seulement |
+| E70-CA-22 | I support non générateur ; P aucun rejeu du secret ; B réponse perdue et remplacement | Aucun code récupérable |
+| E70-CA-23 | I/P DTO/logs/emails sans secret ; U/B GET et reload ; N stockage | Notification sans code, no-store |
+| E70-CA-24 | C cinq erreurs multi-demandes, rotation, borne quinze minutes sans prolongement et fin fenêtre ; P concurrence | Blocage global, QR conservé |
+| E70-CA-25 | M migrations réelles répétées, données/droits/sessions conservés, QR consommable ; D restauration | Aucun PIN ni activation par migration |
+| E70-CA-26 | P notification Pro unique, outbox/email transactionnel, panne/reprise même intention ; C anomalie sans faux succès | Remise fournisseur réelle non attestée |
+| E70-CA-27 | C rotation token Coffret avant/après succès et droit participant étranger ; P révocation ; F droit retiré | Pas de consultation du reçu par ancien droit |
+| E70-CA-28 | C clé absente/canal fermé, support, historique après révocation sans nouveau mouvement ; P conservation | Notice incident et références sans secret |
+| E70-CA-29 | C moteur Passeport réel : qualification/progression ; Chasse : preuve puis réponse distincte ; P équivalence QR/PIN | PIN atteste, ne résout pas le défi |
+| E70-CA-30 | C début/fin/clôture/anonymisation/token retiré/commerçant retiré/Chasse inaccessible ; P versions | Éligibilité actuelle du moteur |
+| E70-CA-31 | C participant étranger ; P cible/étape/commerce/versions substitués | Versions et droit participant obligatoires |
+| E70-CA-32 | P concurrence Animation QR/PIN ; C rejeu normal/ANOMALIE, une progression/notification au plus | Pas de double qualification/remise |
+| E70-CA-33 | A audit complet, refus après rollback, purge réelle demande sans perte de contexte ; P conservation | Audit habilité, SQL et segments contrôlés |
+| E70-CA-34 | I/P refus gestion salarié ; U URL directe refusée sans chargement ; C scan salarié toujours possible | PIN partagé distinct de l'accès nominatif |
+
+### Livraison à préparer
+
+| Composant | Action | Configuration / contrôle |
+| --- | --- | --- |
+| Backend et workers | Livrer les correctifs ; migrations v256/v257 déjà requises, aucune nouvelle migration E70 | Vérifier schéma et audit succès/refus/reprise |
+| Backend | Ouvrir explicitement le canal si souhaité | `LOCALEO_PRO_PIN_VALIDATION_ENABLED=false` par défaut ; configurer `LOCALEO_PIN_VALIDATION_KEYS_JSON` et `LOCALEO_PIN_VALIDATION_ACTIVE_KEY` dans le coffre de l'environnement ; clé active présente, valeur UTF-8 ≥32 octets, aucune valeur secrète dans Git |
+| Pro | Livrer gestion PIN et tests complémentaires après backend | Principal seulement ; salarié ne gère jamais le PIN ; reprise après réponse perdue |
+| Marketplace/Live | Livrer l'affichage de référence après backend | Trois accès Coffret, détail Animation, confirmation puis reçu, mobile et PC |
+| Contrats Animation | Publier l'instantané partagé avec le nouveau champ optionnel | Aucun écran de gestion Animation modifié, aucun nouveau paramètre |
+| Documentation ERP | Regénérer le bundle au commit retenu et sélectionner cette révision dans le déploiement | Alias `formation/validation-par-pin.md`, empreintes et lecteur ; le bundle local n'est pas une publication hébergée |
+| Exploitation | Conserver les jobs d'envoi et de conservation existants ; surveiller l'audit et les reprises | Santé puis création/refus/reçu avec données de recette ; fermer le canal en incident sans annuler les droits déjà consommés ni supprimer les clés encore nécessaires |
+
+Lots à examiner séparément : backend `fix(pin): préserver le contexte des refus et compléter les preuves E70` ;
+Marketplace `fix(pin): afficher la référence du coffret avant confirmation` ;
+Pro `test(pin): couvrir la reprise après génération incertaine` ;
+Animation `chore(contracts): aligner DemandePin sur la référence coffret` ;
+projet `docs(epic70): consigner la clôture sur tests et la livraison`.
+L'index Git n'est pas modifié ; isoler les hunks E70 des travaux E72/E76 et
+des documents d'onboarding déjà présents.
+
+## 1. Matrice de couverture initiale
 
 Chaque ligne désigne un scénario de référence ; le bilan ci-dessous distingue les preuves locales des contrôles de mise en service. Dans la colonne
 documents, « contrat » renvoie à l'architecture de ce dossier ; les notices Pro,

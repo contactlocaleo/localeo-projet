@@ -3,7 +3,8 @@
 ## Références et décisions
 
 - Identifiant : **EPIC-70** ; cadrage et recadrage du **1er octobre 2026**, extension du **5 octobre 2026**.
-- État : **En cours** ; implémentation et vérification locales le 7 octobre 2026, sans déploiement.
+- État : **Terminée le 2 novembre 2026**, sur tests unitaires, d’intégration et fonctionnels, sans déploiement.
+- **E70-DEC-CLOTURE-TESTS** : décision utilisateur de clôturer sur les tests, sans condition de preuve externe/pilote. Les 34 critères sont conservés ; CA-16 est vérifié par les guides, le lecteur, les parcours navigateur et la démonstration synthétique. Voir le bilan courant du 2 novembre ; les revues du 1er novembre ci-dessous restent historiques.
 - Revue de clôture du **1er novembre 2026** : statut conservé, écarts fonctionnels et preuves manquantes consignés dans le [bilan E70](../../specifications/epic-70-validation-pin/verification-livraison.md). Aucun critère retiré ; aucun déplacement vers les epics terminées.
 - Correctif ultérieur du même jour : borne de début **CA-03/18** corrigée dans le domaine et vérifiée localement ; les autres réserves de clôture restent ouvertes.
 - Correctif client du même jour **CA-04/13/14** : délai ancré sur l'heure serveur, reçu conservé jusqu'à fermeture et heure de reprise après blocage ; les preuves et limites figurent dans le bilan, sans clôture de l'epic.
@@ -15,7 +16,7 @@
 - **Solution retenue par l'utilisateur : PIN de validation dédié**, géré par le
   commerçant depuis son accès professionnel, avec validité, renouvellement et
   révocation ; contexte transactionnel et parcours client à implémenter.
-- Phase : spécification V1 puis implémentation du 7 octobre ; résultats et limites dans le bilan de livraison.
+- Phase : clôture technique sur tests du 2 novembre ; mise en service distincte, résultats et configuration dans le bilan de livraison.
 - [Spécification canonique](../../specifications/epic-70-validation-pin/README.md), [architecture et contrats](../../specifications/epic-70-validation-pin/architecture-contrats.md), [matrice des preuves](../../specifications/epic-70-validation-pin/verification-livraison.md).
 - [Roadmap](../README.md), [validation actuelle](../../specifications/validation-prestations/README.md),
   [contrats de validation](../../specifications/validation-prestations/contrats-api.md).
@@ -33,7 +34,7 @@ Le QR commerçant historique reste abandonné ; aucune réactivation de ses cont
 **Extension demandée le 5 octobre 2026 :** la validation terrain d'animation entre
 dans le périmètre. Cette décision remplace explicitement l'exclusion Animation du
 1er octobre ; elle n'autorise pas l'administration des animations. Les accès
-salariés nominatifs sont cadrés séparément dans l'[EPIC 72](../en-cours/epic-72-acces-salaries-validation-localeo-pro-backlog.md).
+salariés nominatifs sont cadrés séparément dans l'[EPIC 72](../terminees/epic-72-acces-salaries-validation-localeo-pro-backlog.md).
 
 ## Problème et résultat attendu
 
@@ -328,7 +329,7 @@ Ces preuves sont attendues, **pas exécutées à ce stade**.
 | Démonstration | Concernée : PIN fictifs, coffret et animation, droits participant et commerce autorisé/refusé, dates actives/expirées, révocation en cours de demande, blocage, concurrence QR/PIN, doublon et timeout ; aucun secret réel ou envoi externe |
 | Documentation / exploitation | Concernées : guide ERP publié via le circuit documentaire, notice commerçant, oubli/compromission, suivi des anomalies et procédure de contestation |
 | Onboarding | Dépendance [EPIC 68](../en-cours/epic-68-parcours-commercant-preparation-onboarding-backlog.md) : préparation facultative du PIN et explication des risques, exercice sans consommation réelle |
-| Accès salariés | Coordination [EPIC 72](../en-cours/epic-72-acces-salaries-validation-localeo-pro-backlog.md) : même règle de validation métier, identité nominative seulement via l'accès salarié ; ce rôle ne gère pas le PIN partagé |
+| Accès salariés | Coordination [EPIC 72](../terminees/epic-72-acces-salaries-validation-localeo-pro-backlog.md) : même règle de validation métier, identité nominative seulement via l'accès salarié ; ce rôle ne gère pas le PIN partagé |
 | Déploiement | À spécifier : ordre backend/interfaces, activation maîtrisée, retour au parcours normal et compatibilité des versions ; aucun déploiement réalisé |
 
 ## Arbitrages et paramètres restant à spécifier

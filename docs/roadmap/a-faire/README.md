@@ -1,10 +1,12 @@
 # EPIC à faire
 
-Spécifications V1 du 5 octobre : [E70 — PIN](../../specifications/epic-70-validation-pin/README.md) et [E72 — salariés](../../specifications/epic-72-acces-salaries/README.md), avec contrats, migrations et matrices des 34/22 critères. E70 est passée en cours le 7 octobre avec implémentation et vérifications locales ; E72 est également en cours. Aucun déploiement effectué.
+Spécifications V1 du 5 octobre : [E70 — PIN](../../specifications/epic-70-validation-pin/README.md) et [E72 — salariés](../../specifications/epic-72-acces-salaries/README.md), avec contrats, migrations et matrices des 34/22 critères. E70 est terminée sur tests le 2 novembre 2026 ; E72 est terminée sur tests le 1er novembre 2026. Aucun déploiement effectué.
 
 [Retour à la roadmap](../README.md)
 
-Neuf EPIC sont classées à faire. Les bilans techniques et réserves de chaque backlog restent conservés.
+Dix EPIC sont classées à faire. Les bilans techniques et réserves de chaque backlog restent conservés.
+
+- [EPIC 76 — Impersonification support Pro et Animation](epic-76-impersonification-support-pro-animation-backlog.md) : session temporaire depuis ERP, droits bornés, double attribution et sortie ; 18 critères cibles, consultation par défaut et intervention explicite/tracée retenues ; droits, actions et modalités à arbitrer.
 
 - [EPIC 54 — Calendrier de l'Avent local](epic-54-calendrier-avent-local-backlog.md)
 - [EPIC 75 — Mots croisés assistés par l’IA](epic-75-mots-croises-assistes-ia-backlog.md) : nouveau jeu payant sur le modèle de la chasse, préparation et contrôle de grille, parcours mobile et lots ; 8 US, 18 critères cibles, arbitrages ouverts.

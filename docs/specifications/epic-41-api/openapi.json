@@ -121064,6 +121064,18 @@
             "type": "string",
             "title": "Effet Libelle"
           },
+          "coffret_instance_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Coffret Instance Id"
+          },
           "versions": {
             "anyOf": [
               {

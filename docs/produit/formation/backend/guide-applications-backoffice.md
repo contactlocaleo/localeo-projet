@@ -1,8 +1,8 @@
 # Tes premiers pas dans les outils de l’équipe Localeo
 
-Bienvenue dans l’équipe ! Ce guide t’aide à choisir le bon outil et à faire tes premiers essais. Tu n’as pas besoin de tout connaître dès le premier jour : commence par un dossier simple, puis découvre les autres applications à ton rythme.
+Bienvenue dans l’équipe ! Ce guide t’aide à choisir le bon outil au moment où une tâche se présente. **Consulte seulement la section utile à ton exercice.** Tu peux le découvrir seule, à ton rythme ; tu n’as pas à essayer toutes les applications pour commencer.
 
-Pour apprendre, tu utiliseras **TEST**, notre environnement d’essai. Ton **référent** est la personne de l’équipe qui t’accompagne : elle te transmettra tes accès et les dossiers à utiliser. Les menus peuvent varier selon ton rôle ; si une rubrique manque, demande-lui de t’aider.
+Pour apprendre, utilise **TEST**, tes comptes personnels et les dossiers de formation indiqués dans tes TP. Ton **référent** est ton contact dans l’équipe pour les questions par message. Les menus varient selon tes droits ; un accès absent n’empêche pas de poursuivre les autres exercices.
 
 ## 1. Quel outil ouvrir ?
 
@@ -18,11 +18,11 @@ L’ERP est ton point de départ pour retrouver un commerce, une organisation ou
 
 **Connexion TEST :** [se connecter au backoffice](https://test-backoffice.localeo.city/internal/connexion), puis ouvre le menu **Applications**. [Ouvrir l’ERP](https://test-backoffice.localeo.city/internal/erp).
 
-Connecte-toi avec ton compte personnel. Tu peux commencer par lire les dossiers, même si tu ne disposes pas encore des droits pour les modifier. Tu découvriras Ops avec ton référent, car cet outil nécessite actuellement un accès administrateur.
+Connecte-toi avec ton compte personnel pour lire les dossiers autorisés. Ops reste réservé à l’administrateur historique : sans accès, lis sa présentation en section 2, sans chercher un compte partagé. Des droits Backoffice et Finance étendus ne donnent pas automatiquement accès à tous les outils.
 
 **Exemple de passage entre outils :** Ops signale un accès commerçant bloqué ; OnBoard permet de comprendre le prérequis manquant ; l’ERP permet à une personne habilitée de gérer le produit concerné. Une difficulté d’utilisation ultérieure se traite depuis Support.
 
-**À lire avant la séance :** le [guide de prise en main ERP](guide-prise-en-main-erp.md). Les pages suivantes présentent chaque outil avec un premier exercice.
+**Si tu ne sais pas retrouver un dossier :** consulte la section correspondante du [guide de prise en main ERP](guide-prise-en-main-erp.md). Il n’est pas nécessaire de lire ce guide en entier. Les références « Pour approfondir » appartiennent à la documentation de l’équipe : si tu n’y as pas accès, demande le document par message lorsque tu en as besoin.
 
 ## 2. Localeo Ops — prioriser le travail
 
@@ -38,13 +38,13 @@ Ops est le tableau de bord de l’activité : il regroupe des indicateurs et des
 
 Les compteurs de priorité comptent des **types d’alertes**, pas des personnes ni des dossiers uniques. Un même dossier peut contribuer à plusieurs alertes. Vérifie la période et le territoire sélectionnés avant d’interpréter les résultats.
 
-### Ton premier essai · 10 minutes avec ton référent
+### Ton premier repérage · 5 minutes de lecture
 
-1. Ouvre le tableau de bord et repère la période et le territoire.
-2. Choisis une alerte de formation avec ton référent ; lis son intitulé et son volume.
-3. Suis le lien vers le dossier et explique l’action à envisager.
+1. Relis les trois niveaux de priorité ci-dessus : une activation bloquée relève de P1, une préparation en retard de P2, une invitation expirée de P3.
+2. Pour l’activation bloquée, identifie le prochain outil : OnBoard aide à comprendre le prérequis, l’ERP permet l’activation autorisée.
+3. Note la différence entre repérer une alerte et résoudre sa cause. Aucune connexion Ops n’est requise pour cet exercice.
 
-**À la fin, tu sauras** identifier une priorité et retrouver sa source. Consulter une alerte ne résout pas automatiquement le problème ; son traitement se fait dans le parcours métier autorisé.
+**À la fin, tu sauras** reconnaître une priorité et choisir le bon outil pour la suite. Consulter une alerte ne résout pas automatiquement le problème ; son traitement se fait dans le parcours métier autorisé.
 
 L’installation comme application est facultative. Une connexion réseau reste nécessaire ; les dossiers ne sont pas disponibles hors ligne.
 
@@ -68,8 +68,8 @@ Le compte du commerçant, l’activation d’un produit et la finalisation du do
 
 1. Recherche le commerce de formation et ouvre son dossier.
 2. Repère les produits demandés, les points à traiter et la prochaine action.
-3. Compare un dossier Animation seule avec un dossier Coffrets.
-4. Montre à ton référent où vérifier le résultat d’une action et où retrouver le suivi des communications.
+3. Sur le dossier Animation seule, repère l’adresse postale et la preuve de connexion Pro à compléter. Le test d’accès se confirme après une connexion réellement réussie sur l’appareil du commerçant.
+4. Suis **04_Guide_OnBoard.pdf**, section 2, pour compléter les prérequis puis activer Animation si ton compte le permet. Note le résultat. La comparaison avec Coffrets peut attendre.
 
 **À la fin, tu sauras** expliquer au commerçant sa prochaine étape, sans lui imposer les démarches d’un autre produit. Les envois se préparent avec aperçu, contrôle du destinataire et confirmation ; une consultation n’envoie rien.
 
@@ -89,17 +89,17 @@ Support rassemble les éléments utiles pour comprendre une difficulté, retrouv
 
 Les rubriques et actions accessibles dépendent du compte et de son périmètre. Les interventions sensibles conservent leurs autorisations spécifiques.
 
-**Pour commencer :** fais ton premier essai dans **Coffrets et bénéficiaires**. Découvre ensuite les deux rubriques Animation avec ton référent : elles peuvent nécessiter un accès dont tu ne disposes pas encore.
+**Pour commencer :** sans référence de dossier Support de formation, lis seulement cette présentation. Les rubriques Animation peuvent nécessiter un accès dont tu ne disposes pas ; il n’est pas nécessaire de les ouvrir pour terminer tes premiers TP.
 
-### Ton premier essai · 15 minutes
+### Si un dossier de formation t’est attribué · 10 minutes
 
-1. Sur une instance de coffret de formation, recherche le dossier et vérifie l’identité de l’acheteur et du bénéficiaire.
+1. Avec ton compte, recherche uniquement l’instance de coffret désignée pour la formation et vérifie l’identité de l’acheteur et du bénéficiaire.
 2. Lis l’état, les prestations et la chronologie avant de proposer une réponse.
-3. Si tu peux modifier le dossier, consigne une demande fictive avec motif, description et responsable, puis passe-la **En cours** et **Résolu**.
+3. Note pour toi le contexte et la prochaine action possible, sans changer le statut ni envoyer de message. L’enregistrement d’une note ou le traitement d’une demande font l’objet d’un exercice distinct.
 
-**À la fin, tu sauras** retrouver le contexte et laisser une trace compréhensible. Sur ce parcours Coffrets, les notes et demandes sont internes : les enregistrer n’envoie pas de réponse au client ; le libellé du responsable ne déclenche pas de notification.
+**À la fin, tu sauras** distinguer le contexte d’une demande et les actions possibles. Sur ce parcours Coffrets, les notes et demandes sont internes : les enregistrer n’envoie pas de réponse au client ; le libellé du responsable ne déclenche pas de notification.
 
-Un renvoi d’email, une régénération d’accès ou un remboursement sont des interventions distinctes. Réalise-les avec ton référent sur le jeu prévu, après lecture de la confirmation.
+Un renvoi d’email, une régénération d’accès ou un remboursement sont des interventions distinctes. Ils ne font pas partie de cette première découverte ; un exercice spécifique sera nécessaire.
 
 Dans **Organisations Animation**, distingue **Envoyer la réponse**, qui rend la réponse visible dans le portail de l’organisation, et **Enregistrer la note interne**, qui reste privée Localeo. Le suivi de l’email est distinct de la publication de la réponse.
 
@@ -111,7 +111,12 @@ Dans **Organisations Animation**, distingue **Envoyer la réponse**, qui rend la
 
 Atelier aide à composer un coffret à partir des prestations des commerces d’une commune. Il prépare une proposition éditoriale assistée par IA, puis un brouillon à relire dans l’ERP. Il t’aide à répondre à la question : **« Comment transformer ces prestations en une expérience locale cohérente ? »**
 
-### Le parcours en cinq gestes
+### À découvrir ensuite : le parcours en cinq gestes
+
+Pour débuter, lis cette présentation ; aucune création n’est demandée.
+Ces cinq gestes décrivent un futur exercice doté de ses propres données de
+formation. Une **prestation** est ce qu’un commerce
+propose dans un coffret ; le prix **TTC** inclut les taxes.
 
 1. Choisis la commune, le type de coffret, sa validité et les prestations ; vérifie le prix TTC proposé.
 2. Enregistre la préparation et copie le prompt, c’est-à-dire les consignes préparées pour l’outil d’IA.
@@ -121,12 +126,12 @@ Atelier aide à composer un coffret à partir des prestations des commerces d’
 
 **Créer le coffret produit un BROUILLON, pas une publication.** L’IA ne valide ni la proposition commerciale ni sa conformité. Atelier ne contacte pas automatiquement un fournisseur IA à la place de l’opérateur.
 
-### Ton premier essai · 20 minutes accompagné
+### Ton premier repérage · 5 minutes de lecture
 
-Ouvre une préparation de formation avec ton référent. Retrouve les prestations choisies et les consignes destinées à l’IA, puis relis une proposition ensemble. Repère le passage vers l’ERP et le statut brouillon. Tu pourras essayer l’import et la création lors d’une seconde séance.
+Sans préparation de formation désignée, reste sur cette présentation. Repère les trois moments du parcours : choisir les prestations, relire la proposition, puis créer un brouillon ERP. Si une référence t’est fournie plus tard et que ton compte y a accès, tu pourras consulter cette préparation avant un exercice de création distinct.
 
-**À la fin, tu sauras** passer des prestations à une proposition, puis à un brouillon ERP, en repérant les moments où tu dois relire et valider.
+**À la fin, tu sauras** expliquer à quoi sert Atelier et pourquoi un brouillon doit être relu avant sa publication.
 
-Si Atelier n’apparaît pas dans ton menu ou si le lien ne s’ouvre pas, demande à ton référent s’il est disponible pour toi. Pense à reprendre tes préparations : elles se conservent 30 jours après leur dernière modification.
+Si Atelier n’apparaît pas dans ton menu ou si le lien ne s’ouvre pas, cette lecture suffit pour le premier parcours. Tu peux signaler l’accès absent par message. Les préparations se conservent 30 jours après leur dernière modification.
 
-**Pour approfondir :** [guide Atelier et format d’import](../../../exploitation/technique/localeo-atelier.md). Tu pourras consulter ce document avec ton référent au moment de ton premier import.
+**Pour approfondir :** [guide Atelier et format d’import](../../../exploitation/technique/localeo-atelier.md), à consulter au moment d’un exercice d’import.

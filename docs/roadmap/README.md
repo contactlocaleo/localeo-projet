@@ -1,6 +1,8 @@
 # Roadmap par etat
 
-Implémentations locales E70 et E72 vérifiées les 7–8 octobre 2026 : [E70 — PIN](../specifications/epic-70-validation-pin/README.md) et [E72 — salariés](../specifications/epic-72-acces-salaries/README.md). E70 est publiée avant le lot E72 ; les deux epics restent en cours jusqu’à leur recette de mise en service. Aucun déploiement effectué.
+Clôture E70 du **2 novembre 2026** : **Terminée**, 34 critères vérifiés sur tests unitaires, d’intégration et fonctionnels selon **E70-DEC-CLOTURE-TESTS**. Les preuves externes sont hors des conditions de clôture, conformément à la décision utilisateur. [Bilan et livraison](../specifications/epic-70-validation-pin/verification-livraison.md). Aucun commit, push ni déploiement effectué par cette clôture.
+
+E72 — accès salariés est terminée le 1er novembre 2026 selon E72-DEC-CLOTURE-TESTS : tests unitaires, d'intégration et fonctionnels des 22 critères vérifiés. Le [bilan E72](../specifications/epic-72-acces-salaries/verification-livraison.md) distingue la clôture technique des actions de mise en service. Aucun déploiement effectué.
 
 Revue de clôture E70 du **1er novembre 2026** : **En cours** conservé, sans
 déplacement ni modification des compteurs. La borne avant génération du PIN
@@ -12,21 +14,21 @@ les écarts CA-04/33 et les scénarios intégrés manquants ; aucune clôture pr
 Les preuves manquantes et les contrôles rejoués figurent dans le
 [bilan E70](../specifications/epic-70-validation-pin/verification-livraison.md).
 
-Revue de clôture E72 du **1er novembre 2026** : **En cours** conservé, avec les
-22 critères. Le [bilan E72](../specifications/epic-72-acces-salaries/verification-livraison.md)
-distingue les preuves locales, le correctif de nettoyage de session et les
-réserves d’acceptation (audit, preuves et recette pilote), ainsi que la dette de
-lecture bornée ; aucun compteur modifié.
+Clôture E72 du **1er novembre 2026** : **Terminée**, 22 critères vérifiés par tests.
+Les refus sont audités après rollback, les variantes intégrées sont complétées et
+les contrôles externes sont séparés selon la décision explicite du porteur produit.
+Le bilan conserve la dette préexistante de lecture bornée et les actions de livraison.
 
 Classement consolidé le 18 septembre 2026, complété le 22 octobre par les EPIC 74 et 75. Les backlogs des applications sont
 réunis dans les dossiers d'état, avec un seul fichier par EPIC. Le suivi inclut
-les 75 identifiants du tronc commun et trois identifiants applicatifs distincts.
+les 76 identifiants du tronc commun et trois identifiants applicatifs distincts,
+après ajout de l'EPIC 76 le 1er novembre 2026.
 
 | Etat | Epics | Dossier |
 | --- | ---: | --- |
-| Terminees | 62 | [terminees/](terminees/README.md) |
-| A faire | 9 | [a-faire/](a-faire/README.md) |
-| En cours | 4 | [en-cours/](en-cours/README.md) |
+| Terminees | 64 | [terminees/](terminees/README.md) |
+| A faire | 10 | [a-faire/](a-faire/README.md) |
+| En cours | 2 | [en-cours/](en-cours/README.md) |
 | Abandonnees | 2 | [abandonnees/](abandonnees/README.md) |
 | Fusionnee | 1 | Epic 61 reprise dans l'[Epic 60](terminees/epic-60-vision-360-commercialisation-backlog.md) |
 
@@ -71,7 +73,7 @@ La revue finale du 2 octobre clôture E69 après correction de **CA-18** :
 37 scénarios de traçabilité réussis, preuves inchangées réutilisées, guide et
 bundle ERP vérifiés. Lots de commit et prérequis de livraison consignés dans le
 bilan ; la clôture n'atteste ni publication du correctif ni déploiement.
-La nouvelle [EPIC 70](en-cours/epic-70-validation-prestation-telephone-client-backlog.md)
+La nouvelle [EPIC 70](terminees/epic-70-validation-prestation-telephone-client-backlog.md)
 cadre une validation entièrement sur téléphone client, sans matériel dédié imposé.
 Le PIN dédié est retenu avec un compromis de droits limités : contexte transactionnel,
 gestion du PIN depuis l'accès commerçant et parcours client. Ses 34 critères couvrent
@@ -84,11 +86,11 @@ organisations/contacts/opportunités, étapes, historique, tâches et rappels in
 carte de France par commune et conversion explicite vers les parcours métier.
 Le fichier Gironde V2 a été examiné en lecture seule ; 24 critères, sans import réel.
 
-Le 5 octobre, l'[EPIC 72 — Accès salariés Localeo Pro](en-cours/epic-72-acces-salaries-validation-localeo-pro-backlog.md)
+Le 5 octobre, l'[EPIC 72 — Accès salariés Localeo Pro](terminees/epic-72-acces-salaries-validation-localeo-pro-backlog.md)
 ajoute l'invitation email, le compte individuel limité au scanner Coffret/Animation,
 la révocation et l'audit : 22 critères, historique complet du commerce en lecture seule, option ERP désactivée par défaut et sans plafond. L'EPIC 70 est
 étendue aux passages Animation et aux pannes du mobile commerçant : 34 critères,
-PIN automatique valable 7 jours par défaut, configurable jusqu’à 30 jours, notification Localeo Pro à chaque succès. E70 est en cours depuis le 7 octobre ; E72 est également en cours.
+PIN automatique valable 7 jours par défaut, configurable jusqu’à 30 jours, notification Localeo Pro à chaque succès. E70 est terminée sur tests le 2 novembre 2026 ; E72 est terminée sur tests le 1er novembre 2026.
 
 L’[EPIC 73 — Animation et/ou Coffrets](terminees/epic-73-animation-et-ou-coffrets-backlog.md)
 cadre la vente séparée ou combinée : dotation Coffrets ou Libre, animations standard/à la carte,
@@ -117,6 +119,13 @@ leurs descriptions dans la roadmap produit sont referencees depuis le dossier
 des epics terminees. Aucun fichier autonome de l'Epic 61 n'est recree.
 
 ## Contributions applicatives et collisions de numéros
+
+Le 1er novembre, l'[EPIC 76 — Impersonification support Pro et Animation](a-faire/epic-76-impersonification-support-pro-animation-backlog.md)
+cadre l'ouverture depuis l'ERP d'une session temporaire dans le contexte d'un
+compte client : cible explicite, droits bornés, bandeau support, révocation et
+double attribution opérateur/cible. Dix-huit critères cibles ; consultation par
+défaut et intervention explicite/tracée validées le 1er novembre. Habilitations,
+actions et modalités restent à arbitrer. État **À faire**, sans implémentation.
 
 Le 22 octobre, l'[EPIC 75 — Mots croisés assistés par l’IA](a-faire/epic-75-mots-croises-assistes-ia-backlog.md)
 cadre un nouveau jeu payant sur le modèle de la chasse : préparation assistée,
@@ -166,12 +175,13 @@ précise la provenance et les divergences historiques conservées.
 | 61 | Fusionnee | Contenu repris dans l'Epic 60 ; une fusion n'est pas un abandon. |
 | 35 | Terminee (historique) | Clôture conservée ; le cadrage non livré des nouveaux rôles est transféré à l'EPIC 69 sur demande explicite du 1er octobre. |
 | 69 | Terminee | [Profils et accès ERP/satellites](terminees/epic-69-profils-acces-erp-satellites-backlog.md) : clôture le 2 octobre après validation CA-18, 27 critères conservés ; recette cible et configuration dans le bilan. |
-| 70 | En cours | [Validation sur téléphone client](en-cours/epic-70-validation-prestation-telephone-client-backlog.md) : PIN dédié retenu, 34 critères ; contexte transactionnel, gestion commerçant du PIN et parcours client sans matériel ; risque résiduel borné par les droits, validité et révocation. |
+| 70 | Terminée | [Validation sur téléphone client](terminees/epic-70-validation-prestation-telephone-client-backlog.md) : PIN dédié retenu, 34 critères ; contexte transactionnel, gestion commerçant du PIN et parcours client sans matériel ; risque résiduel borné par les droits, validité et révocation. |
 | 71 | A faire | [CRM de prospection](a-faire/epic-71-crm-prospection-animation-coffrets-pro-backlog.md) : trois axes commerciaux, fichier Gironde V2 examiné, import contrôlé, carte communale, historique, tâches et rappels internes ; 24 critères, [spécification V0.1](../specifications/epic-71-crm-prospection/README.md), arbitrages restants explicites, sans implémentation. |
-| 72 | En cours | [Accès salariés Localeo Pro](en-cours/epic-72-acces-salaries-validation-localeo-pro-backlog.md) : implémentation locale vérifiée, 22 critères ; option ERP, invitations, scanner et historique limités, conservation. |
+| 72 | Terminée | [Accès salariés Localeo Pro](terminees/epic-72-acces-salaries-validation-localeo-pro-backlog.md) : implémentation locale vérifiée, 22 critères ; option ERP, invitations, scanner et historique limités, conservation. |
 | 73 | Terminée | [Animation et/ou Coffrets](terminees/epic-73-animation-et-ou-coffrets-backlog.md) : 38 US, 63 critères et extensions vérifiés techniquement le 1er novembre 2026 selon E73-DEC-CLOTURE-TESTS ; preuves et activation séparées dans le bilan. |
 | 74 | A faire | [Tombola publique](a-faire/epic-74-tombola-publique-backlog.md) : modèle standard sans commerçant, participation par QR, supports de stand et audience future ; 8 US, 16 critères cibles, arbitrages ouverts |
 | 75 | A faire | [Mots croisés assistés par l’IA](a-faire/epic-75-mots-croises-assistes-ia-backlog.md) : indices chez les commerçants, préparation Localeo validée par l’organisateur, grille correcte obligatoire pour le tirage ; 8 US, 18 critères cibles, huit groupes d’arbitrages ouverts ou partiels |
+| 76 | A faire | [Impersonification support Pro et Animation](a-faire/epic-76-impersonification-support-pro-animation-backlog.md) : accès temporaire depuis ERP, 18 critères cibles ; consultation par défaut et intervention explicite/tracée retenues, droits, actions et modalités à arbitrer, sans implémentation |
 | Autres identifiants du tronc commun | Terminees | Statut produit consolide conserve ; les anciennes mentions de stories a faire ne rouvrent pas ces epics. |
 
 Les changements des Epics 5, 12 et 47 corrigent des incoherences entre les

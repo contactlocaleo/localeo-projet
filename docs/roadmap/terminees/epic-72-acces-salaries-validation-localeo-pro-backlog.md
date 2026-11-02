@@ -2,11 +2,11 @@
 
 ## Références
 
-- **EPIC-72**, créée le **5 octobre 2026**, état **En cours** ; priorité et livraison à planifier.
-- Revue de clôture du **1er novembre 2026** : état conservé, sans déplacement du backlog. Audit des refus, preuves intégrées et recette pilote restant à traiter ; dette préexistante de lecture bornée distinguée dans le [bilan](../../specifications/epic-72-acces-salaries/verification-livraison.md), avec les résultats et le correctif technique de nettoyage local.
+- **EPIC-72**, créée le **5 octobre 2026**, état **Terminée** le 1er novembre 2026 selon E72-DEC-CLOTURE-TESTS ; mise en service suivie séparément.
+- Première revue de clôture du **1er novembre 2026**, historique : état alors conservé, sans déplacement du backlog. Audit des refus, preuves intégrées et recette pilote restant à traiter ; dette préexistante de lecture bornée distinguée dans le [bilan](../../specifications/epic-72-acces-salaries/verification-livraison.md), avec les résultats et le correctif technique de nettoyage local.
 - Besoin exprimé : permettre aux salariés d'un commerce de valider des prestations de coffrets et des passages Animation sur leur mobile personnel, sans partager le compte principal ni disposer des autres droits de Localeo Pro.
 - Identifiant recherché dans la documentation et les namespaces de la roadmap : aucune EPIC 72 préexistante relevée.
-- [EPIC 70 — PIN sur le téléphone client](epic-70-validation-prestation-telephone-client-backlog.md) : parcours complémentaire, distinct de l'identité individuelle du salarié. Son extension Animation est demandée le même jour.
+- [EPIC 70 — PIN sur le téléphone client](../terminees/epic-70-validation-prestation-telephone-client-backlog.md) : parcours complémentaire, distinct de l'identité individuelle du salarié. Son extension Animation est demandée le même jour.
 - [Scanner Coffret/Animation](../../specifications/epic-41-api/application-commercant.md), [validation des prestations](../../specifications/validation-prestations/README.md), [espace commerçant](../../specifications/espace-commercant/README.md).
 - [EPIC 69](../terminees/epic-69-profils-acces-erp-satellites-backlog.md) : référence pour les invitations, sans réutiliser implicitement les rôles internes ERP ni rouvrir cette epic terminée.
 - [EPIC 68](../en-cours/epic-68-parcours-commercant-preparation-onboarding-backlog.md) : expliquer ces possibilités pendant l'onboarding, sans en faire une obligation d'activation.
@@ -118,6 +118,16 @@ Les critères E72-CA-01 à E72-CA-18 sont conservés et précisés ; E72-CA-19 �
 
 ## Invariants et preuves attendues
 
+### E72-DEC-CLOTURE-TESTS — 1er novembre 2026
+
+Décision explicite du porteur produit : la clôture repose sur les tests unitaires,
+d'intégration et fonctionnels des 22 critères. Les preuves externes (pilote,
+téléphone physique, messagerie réelle et recette d'hébergement) ne bloquent pas
+la clôture et restent des vérifications de mise en service distinctes. Cette
+décision ne supprime aucun comportement attendu et ne transforme ni un échec
+ni un test non exécuté en réussite. Les réserves techniques de la revue précédente
+doivent être traitées et rapprochées des preuves dans le bilan existant.
+
 Le domaine backend `identite_acces` porte l'identité, le rattachement, les habilitations, l’option par commerce et leur révocation. Le domaine d'exploitation conserve les règles de consommation ; le domaine Animation conserve celles des passages et de la progression. L'application orchestre invitation/email, session, contrôles et audit ; les interfaces présentent les capacités autorisées. Le placement précis sera vérifié lors de la spécification.
 
 Entrées à couvrir : API de gestion responsable, acceptation/récupération, authentification, validation Coffret/Animation, lecture d'historique, gestion de l’option dans l’ERP, outils support et traitements de notifications. Aucun batch ni outil interne ne doit contourner le rattachement actif ou l’option activée.
@@ -171,4 +181,4 @@ Le [bilan du 8 octobre](../../specifications/epic-72-acces-salaries/verification
 relie les critères aux tests métier, PostgreSQL, API, navigateur, contrats et
 conservation. Le [guide opérateur](../../specifications/epic-72-acces-salaries/guide-utilisation-exploitation.md)
 détaille configuration, remise des liens, activation ERP et reprise. Statut
-**En cours** conservé : la recette pilote et la mise en service ne sont pas exécutées.
+**Terminée** sur tests selon E72-DEC-CLOTURE-TESTS. La reprise du 1er novembre corrige les refus audités et complète les preuves unitaires, PostgreSQL et navigateur des 22 critères. Le pilote et la mise en service restent distincts et non exécutés par cette clôture.
