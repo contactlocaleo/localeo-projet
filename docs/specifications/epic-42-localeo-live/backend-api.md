@@ -1,5 +1,57 @@
 # Specification backend et API - Localeo Live
 
+## Récompenses personnelles et tirages qualifiés — 3 novembre 2026
+
+Deux lectures complètent le carnet, avec `X-Localeo-Live-Secret`, une
+installation active et les mêmes suivis de participation valides que le tableau
+de bord : token participant non expiré, non révoqué, participant non anonymisé.
+Une installation ne donne aucun droit sur les participations d'une autre.
+
+- `GET /public/localeo-live/installations/{installation_id}/recompenses`
+  rassemble les gains coffrets, bons numériques et lots libres issus des
+  tirages réalisés ou confirmés, y compris l'historique des remises et
+  consommations. Les suppléants non promus restent exclus.
+- `GET /public/localeo-live/installations/{installation_id}/tirages-a-venir`
+  retourne les participations qualifiées par le moteur dans les animations
+  publiées, en cours ou clôturées, avec dotation et sans tirage déjà réalisé,
+  confirmé ou annulé. La progression visuelle seule ne prouve pas cette
+  qualification.
+
+Les réponses sont privées (`Cache-Control: private, no-store`) et ne contiennent
+ni token personnel, ni QR, ni identité civile. Leur enveloppe contient
+`generated_at`, `items`, `next_cursor` et `incomplet`. `page_size` vaut 25 par
+défaut, de 1 à 50. Les curseurs sont liés à la liste et à l'installation ; les
+curseurs malformés sont refusés avec `CURSEUR_INVALIDE`.
+
+Les récompenses sont triées globalement en SQL : groupe `DISPONIBLE` avant
+`HISTORIQUE`, puis attribution récente et identifiant stable. `etat` distingue
+`A_UTILISER`, `A_ACTIVER`, `A_RETIRER`, `EN_PREPARATION`, `A_VERIFIER`, `UTILISE`,
+`REMIS`, `EXPIRE`, `ANNULE`, `REMPLACE` et `NON_REMIS`. Le groupe est une priorité
+d'affichage, pas une autorisation de consommation : un coffret en préparation
+ou un état à vérifier n'est pas présenté comme utilisable. Un coffret partiellement
+consommé reste `ACTIVE`/`A_UTILISER` ; `UTILISE` n'apparaît qu'après consommation
+complète. Une remise libre déclarée et un refus explicite rejoignent l'historique.
+Les bons utilisent la consommation effective, sa correction et leur expiration.
+
+Chaque récompense porte `id`, `nature`, `libelle`, `animation_id`,
+`animation_nom`, `participation_id`, `etat`, `groupe`, `attributed_at`,
+`expires_at`, `coffret_instance_id`, `bon_id`, `consignes`,
+`responsable_remise` et un `deeplink` vers sa participation. Ouvrir/utiliser le
+lot conserve les contrôles et capacités personnelles existants.
+
+Chaque tirage à venir porte `participation_id`, `animation_id`, `animation_nom`,
+`commune`, `qualifie: true`, `date_fin_animation`, `date_tirage: null` et
+`deeplink`. Aucune date planifiée de tirage n'existe actuellement : afficher
+« Date à confirmer » ; la fin d'animation n'est pas une date de tirage. La page
+borne les candidats avant qualification : elle peut être vide avec un curseur
+suivant. Le client conserve alors l'action de chargement de la suite. Les
+compteurs des cartes chargées ne sont pas des totaux globaux.
+
+Producteur : `ServiceRecompensesLive` et `RecompensesLiveRepository` ; schémas
+fermés `RecompensesLivePayload` et `TiragesAVenirLivePayload` exposés dans
+[OpenAPI Live](openapi.json). Consommateur : page « Mes lots » de Localeo Live.
+Pas de migration, de compte habitant ou de nouvelle base de participations.
+
 L'évolution du 30 octobre 2026
 [E73-EVO-LIVE-ACCUEIL-RAPPELS](../epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-30-octobre-2026--e73-evo-live-accueil-rappels)
 ajoute une lecture privée de tableau de bord, des préférences opt-in et des

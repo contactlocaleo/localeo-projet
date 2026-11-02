@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Live - API backend Epic 42",
     "description": "Vue OpenAPI 3.1 des contrats publics, editoriaux et techniques de Localeo Live.",
-    "version": "1.0.0+c1c57b0"
+    "version": "1.0.0+35fe2cb"
   },
   "paths": {
     "/public/exploitation/activites-locales/metriques": {
@@ -939,6 +939,182 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/TableauDeBordLivePayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/localeo-live/installations/{installation_id}/recompenses": {
+      "get": {
+        "tags": [
+          "Localeo Live"
+        ],
+        "summary": "Consulter Recompenses Live",
+        "operationId": "consulter_recompenses_live_public_localeo_live_installations__installation_id__recompenses_get",
+        "parameters": [
+          {
+            "name": "installation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Installation Id"
+            }
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 50,
+              "minimum": 1,
+              "default": 25,
+              "title": "Page Size"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 300
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "x-localeo-live-secret",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Localeo-Live-Secret"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecompensesLivePayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/localeo-live/installations/{installation_id}/tirages-a-venir": {
+      "get": {
+        "tags": [
+          "Localeo Live"
+        ],
+        "summary": "Consulter Tirages A Venir Live",
+        "operationId": "consulter_tirages_a_venir_live_public_localeo_live_installations__installation_id__tirages_a_venir_get",
+        "parameters": [
+          {
+            "name": "installation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Installation Id"
+            }
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 50,
+              "minimum": 1,
+              "default": 25,
+              "title": "Page Size"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 300
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "x-localeo-live-secret",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Localeo-Live-Secret"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TiragesAVenirLivePayload"
                 }
               }
             }
@@ -48224,6 +48400,140 @@
         ],
         "title": "RechercheVision360AnimationPayload"
       },
+      "RecompenseLive": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "nature": {
+            "type": "string",
+            "enum": [
+              "COFFRET",
+              "BON_NUMERIQUE",
+              "LOT_EXTERNE"
+            ],
+            "title": "Nature"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "animation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animation Id"
+          },
+          "animation_nom": {
+            "type": "string",
+            "title": "Animation Nom"
+          },
+          "participation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Participation Id"
+          },
+          "etat": {
+            "type": "string",
+            "enum": [
+              "A_UTILISER",
+              "A_ACTIVER",
+              "A_RETIRER",
+              "EN_PREPARATION",
+              "A_VERIFIER",
+              "UTILISE",
+              "REMIS",
+              "EXPIRE",
+              "ANNULE",
+              "REMPLACE",
+              "NON_REMIS"
+            ],
+            "title": "Etat"
+          },
+          "groupe": {
+            "type": "string",
+            "enum": [
+              "DISPONIBLE",
+              "HISTORIQUE"
+            ],
+            "title": "Groupe"
+          },
+          "attributed_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Attributed At"
+          },
+          "expires_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Expires At"
+          },
+          "coffret_instance_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Coffret Instance Id"
+          },
+          "bon_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bon Id"
+          },
+          "consignes": {
+            "type": "string",
+            "title": "Consignes"
+          },
+          "responsable_remise": {
+            "type": "string",
+            "title": "Responsable Remise"
+          },
+          "deeplink": {
+            "type": "string",
+            "title": "Deeplink"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "nature",
+          "libelle",
+          "animation_id",
+          "animation_nom",
+          "participation_id",
+          "etat",
+          "groupe",
+          "attributed_at",
+          "expires_at",
+          "coffret_instance_id",
+          "bon_id",
+          "consignes",
+          "responsable_remise",
+          "deeplink"
+        ],
+        "title": "RecompenseLive"
+      },
       "RecompensesAnimation": {
         "properties": {
           "mode": {
@@ -48236,6 +48546,46 @@
         "additionalProperties": false,
         "type": "object",
         "title": "RecompensesAnimation"
+      },
+      "RecompensesLivePayload": {
+        "properties": {
+          "generated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Generated At"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/RecompenseLive"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          },
+          "incomplet": {
+            "type": "boolean",
+            "title": "Incomplet"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "generated_at",
+          "items",
+          "next_cursor",
+          "incomplet"
+        ],
+        "title": "RecompensesLivePayload"
       },
       "ReconciliationBon": {
         "properties": {
@@ -55063,6 +55413,64 @@
         "type": "object",
         "title": "ThemeVisuel"
       },
+      "TirageAVenirLive": {
+        "properties": {
+          "participation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Participation Id"
+          },
+          "animation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animation Id"
+          },
+          "animation_nom": {
+            "type": "string",
+            "title": "Animation Nom"
+          },
+          "commune": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VilleParticipationLive"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "qualifie": {
+            "type": "boolean",
+            "const": true,
+            "title": "Qualifie"
+          },
+          "date_tirage": {
+            "type": "null",
+            "title": "Date Tirage"
+          },
+          "date_fin_animation": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Date Fin Animation"
+          },
+          "deeplink": {
+            "type": "string",
+            "title": "Deeplink"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "participation_id",
+          "animation_id",
+          "animation_nom",
+          "commune",
+          "qualifie",
+          "date_fin_animation",
+          "deeplink"
+        ],
+        "title": "TirageAVenirLive"
+      },
       "TirageAnimationPayload": {
         "properties": {
           "id": {
@@ -55144,6 +55552,46 @@
           "confirmation"
         ],
         "title": "TirageCommande"
+      },
+      "TiragesAVenirLivePayload": {
+        "properties": {
+          "generated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Generated At"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/TirageAVenirLive"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          },
+          "incomplet": {
+            "type": "boolean",
+            "title": "Incomplet"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "generated_at",
+          "items",
+          "next_cursor",
+          "incomplet"
+        ],
+        "title": "TiragesAVenirLivePayload"
       },
       "TokenInput": {
         "properties": {

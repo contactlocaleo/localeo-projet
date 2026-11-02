@@ -2,6 +2,69 @@
 
 Début : **18 octobre 2026**. [Spécification](README.md), [backlog](../../roadmap/terminees/epic-73-animation-et-ou-coffrets-backlog.md), [matrice des 63 critères et preuves](verification-livraison.md). Objectif : les 38 US, dans les dix lots demandés. Les lignes ci-dessous ne valent pas acceptation tant que les preuves correspondantes ne sont pas enregistrées.
 
+## 3 novembre 2026 — Mes lots unifié et prochains tirages qualifiés
+
+Demande : retrouver tous les gains (coffret, bon numérique, lot libre), donner
+la priorité aux gains restant à utiliser/retirer, signaler les nouveaux lots
+et consulter les prochains tirages qualifiés. L'ancienne page filtrait seulement
+les entrées locales `bon_lot` ; la projection personnelle ne retournait qu'un
+gain. L'ancien périmètre « bons locaux » est donc remplacé explicitement par
+la demande, sans modifier les règles d'attribution ou de qualification.
+
+Producteur : deux lectures paginées privées sous l'installation Live,
+`recompenses` et `tirages-a-venir`. Le dépôt SQL applique les accès personnels
+valides avant pagination ; la projection utilise les états actuels des coffrets,
+bons et remises libres. La qualification appelle le moteur existant. Les
+contrats E42 sont actualisés : aucune capacité de consultation, QR ou token
+de participant n'est transmis dans ces listes. Les dates de tirage ne sont
+pas planifiées par le modèle actuel ; l'interface affiche **Date à annoncer**.
+
+Consommateur : `LiveLots`, `useLiveRewards` et `liveRewards` fusionnent les
+attributions serveur avec les bons locaux, sans duplication par identifiant
+de bon. Les accès locaux sont indexés indépendamment de la pagination visuelle.
+Les nouveautés sont des identifiants consultés dans les métadonnées du carnet,
+jamais des acquittements serveur. Les gains historiques restent repliés ; les
+tirages sont distincts et une qualification exige le booléen serveur explicite.
+Les listes ont chacune leur curseur ; les compteurs portent sur les éléments
+affichés. Les liens personnels locaux peuvent être rattachés par lots de 50,
+avec deux requêtes concurrentes maximum, sans être bloqués par les premiers
+accès refusés. Un renouvellement confirmé de l'installation relie de nouveau
+les accès, avec une seule reprise automatique bornée.
+
+Impacts : backend, Marketplace et documentation E42/E73 ; aucun changement
+des autres applications, des règles de consommation, de remise ou de tirage.
+Aucune migration ni modification du générateur de démonstration : lectures
+sur les tables existantes, données de tests synthétiques. Backend et Live sont
+à livrer ensemble pour disposer des deux nouvelles lectures. Aucun déploiement
+ni modification des données TEST pendant cette correction.
+
+Preuves locales : **26/26 tests navigateur réussis** (1,4 min), suites
+`live-lots-unified`, `live-lots-mobile`, `live-habitant-audit-fixes` et
+`live-lots-navigation`, sortie `localeo-marketplace/tmp/live-lots-complete/`.
+Elles couvrent les trois natures de gains, la priorité et les nouveautés,
+la conservation des accès locaux, les deux paginations, les qualifications,
+le réessai après indisponibilité et le renouvellement d'installation.
+Contrôles à 320, 390 et 1 280 px, clavier et texte agrandi ; captures finales
+320 et 1 280 px examinées. **6/6 tests Node** de fusion et navigation,
+ESLint ciblé et build isolé réussis.
+
+Côté backend : **633 tests d'architecture/services réussis**, puis
+**16 tests ciblés réussis** (8 services, 4 PostgreSQL réel, 2 HTTP,
+2 OpenAPI) et **11 tests PostgreSQL existants de rappels réussis**.
+Ces suites se recouvrent : leurs effectifs ne constituent pas un total
+de tests distincts. Les deux tests HTTP ont aussi été rejoués après
+renforcement du contrôle de curseur invalide (réponse métier 409).
+La base PostgreSQL jetable locale a été arrêtée après vérification.
+La revue indépendante a conduit à couvrir les accès valides après
+50 liens refusés, le bon local au-delà de la première page, la fin de
+pagination et la réassociation après renouvellement d'installation.
+
+Limites : validation locale avec données synthétiques et navigateur
+automatisé ; aucun test sur téléphone physique ni sur le TEST partagé.
+La date de tirage reste à annoncer tant que le domaine ne la planifie pas.
+Les contrôles de guides et sources exportées sont réussis ; aucune preuve
+locale ne vaut déploiement des nouvelles routes.
+
 ## 3 novembre 2026 — harmonisation du parcours personnel Live
 
 Complément demandé : **Actualiser** devient une icône seule dans la ligne du

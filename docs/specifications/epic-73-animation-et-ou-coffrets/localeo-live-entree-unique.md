@@ -110,17 +110,44 @@ individuels et la modification se déplient à la demande, sans repousser le
 catalogue derrière dix communes. La sélection initiale, lorsqu'elle est vide,
 conserve la recherche et la géolocalisation volontaire.
 
-**Mes lots** présente les bons numériques enregistrés sur l'appareil avec
-pictogrammes de récompense, titre et action large **Consulter mon bon**.
-Le **dernier état connu** reste explicitement local, vérifié par le serveur
-à l'ouverture du bon exact. Aucun score, gain, statut disponible ni nouveau
-total n'est déduit de cette présentation. Le vide précise qu’aucun bon n’est
-enregistré sur cet appareil et propose la découverte et l’aide pour ajouter un
-bon reçu par e-mail. Un lien visible vers **Mes participations** oriente vers
-les coffrets et autres récompenses. Une panne de lecture locale propose
-**Réessayer le chargement**, avec état occupé et sans effacement du carnet.
-Les autres natures de gains
-conservent leurs parcours existants dans la participation.
+**Mes lots**, complété à la demande du **3 novembre 2026**, réunit désormais
+les **coffrets, bons numériques et lots libres** gagnés via les participations
+auxquelles l'installation possède un accès personnel valide. Cette demande
+remplace la restriction antérieure aux seuls bons enregistrés sur l'appareil.
+Les gains à utiliser, activer ou retirer et les gains en préparation précèdent
+l'historique replié **Déjà utilisés ou retirés**, qui contient aussi les lots
+expirés, annulés, refusés ou remplacés. L'état provient du serveur : un coffret
+envoyé ne vaut pas coffret consommé, une remise libre doit être explicitement
+déclarée, une qualification ne vaut pas attribution.
+
+Pictogrammes par nature, compteurs des éléments affichés, cartes de récompense
+et actions larges permettent une lecture rapide. **Nouveau** signifie que le
+gain n'a pas encore été consulté sur cet appareil ; le clic sur sa consultation
+ou l'ouverture de ses consignes mémorise seulement son identifiant localement.
+Ce repère ne vaut ni retrait, ni consommation, ni écriture métier. Il reste
+indépendant de l'état serveur et n'est pas affiché sur les gains historiques.
+
+Les bons ajoutés localement restent visibles même sans suivi de participation.
+Ils portent **Dernier état connu**, vérifié à l'ouverture du bon exact. Une
+attribution serveur et un bon local de même identifiant ne sont affichés qu'une
+fois, avec l'état serveur prioritaire. La liste ne délivre aucune capacité
+personnelle : sans accès au bon enregistré, **Voir mon lot** reprend la
+participation personnelle et son parcours existant. Le stockage du carnet
+et la récupération par e-mail restent explicites.
+
+**Mes prochains tirages** présente uniquement les participations explicitement
+qualifiées par le moteur, dans le périmètre autorisé et encore en attente de
+tirage selon la projection serveur. Aucun classement ni chance de gain n'est
+inventé. Le modèle actuel ne prévoit pas de date de tirage planifiée :
+**Date à annoncer** est affiché, sans utiliser la date de fin de l'animation
+comme date de tirage. Les résultats gagnés ne sont jamais déduits d'un parcours
+terminé à 100 %.
+
+Gains et tirages possèdent des paginations indépendantes. Les compteurs restent
+ceux des éléments affichés, sans promettre un total global. Une page de
+tirages filtrée peut être vide tout en offrant une suite. Une panne laisse
+les bons enregistrés accessibles et propose un réessai explicite, sans effacer
+le carnet. L'actualisation garde son icône dans la ligne du titre.
 
 La recherche ajoute ou retire des communes sans changer les inscriptions. Une
 commune partagée par URL constitue un contexte de consultation : son ouverture
