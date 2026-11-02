@@ -94,8 +94,12 @@ conserve la recherche et la géolocalisation volontaire.
 pictogrammes de récompense, titre et action large **Consulter mon bon**.
 Le **dernier état connu** reste explicitement local, vérifié par le serveur
 à l'ouverture du bon exact. Aucun score, gain, statut disponible ni nouveau
-total n'est déduit de cette présentation. Le vide propose la découverte et
-l'aide pour ajouter un bon reçu par e-mail. Les autres natures de gains
+total n'est déduit de cette présentation. Le vide précise qu’aucun bon n’est
+enregistré sur cet appareil et propose la découverte et l’aide pour ajouter un
+bon reçu par e-mail. Un lien visible vers **Mes participations** oriente vers
+les coffrets et autres récompenses. Une panne de lecture locale propose
+**Réessayer le chargement**, avec état occupé et sans effacement du carnet.
+Les autres natures de gains
 conservent leurs parcours existants dans la participation.
 
 La recherche ajoute ou retire des communes sans changer les inscriptions. Une
@@ -143,6 +147,156 @@ L’interface possède ces corrections de présentation. Règles d’inscription
 participations, consentements, tokens et contrats restent dans leurs producteurs
 existants ; aucune donnée ni migration n’est créée. Les preuves locales et les
 limites de l’audit figurent dans le [suivi d’implémentation](suivi-implementation.md).
+
+## Audit d’usage du 2 novembre 2026 — continuité et actions
+
+Cette passe suit le parcours d’un habitant : choisir une commune, découvrir
+une animation, s’inscrire, reprendre son parcours et consulter un lot. Elle
+complète l’audit précédent, sans remplacer les règles de participation. La
+lecture des sources est complétée par des parcours navigateur isolés sur mobile
+et PC ; il ne s’agit pas d’un essai auprès d’habitants réels.
+
+| Priorité | Obstacle observé | Correction |
+| --- | --- | --- |
+| Haute | Retour de fiche perdant le filtre communal et la position de lecture | Provenance transmise par les cartes et la vedette ; retour à la commune consultée, restauration de la position et du focus lorsque le résultat est chargé. Le passage par l’inscription conserve cette provenance. |
+| Haute | « Voir le détail » cache la reprise du jeu, derrière le QR | Action personnelle principale **Commencer mon parcours**, **Reprendre mon parcours** ou **Voir ma participation**, selon les données disponibles ; présentation du QR conservée séparément. |
+| Haute | Détail personnel sans adresse, retour navigateur quittant la liste | Ouverture avec `?participation=` pour l’accès exact ; actualisation et historique du navigateur conservent la destination. Retour à la liste avec position et focus mémorisés temporairement. |
+| Moyenne | Actualisation par icône seule ou boutons différents, sans retour visible dans le jeu | Composant commun avec icône et **Actualiser**, libellé accessible contextualisé, état **Actualisation…** et bouton désactivé pendant la lecture. Saisie de jeu conservée ; aucune commande métier rejouée. |
+| Moyenne | « Mes animations », « carnet » et « Mes participations » désignent la même destination | **Mes participations** pour la destination ; composant de retour commun aux fiches, parcours et bons. « Carnet » reste utilisé pour expliquer la conservation locale. |
+| Moyenne | « Ajouter une autre inscription » ouvre une récupération | **Retrouver une autre inscription**, distinct de l’action de nouvelle inscription. |
+| Moyenne | À 200 % de texte, l’actualisation comprime le titre et les actions coupent leurs mots | En-tête et boutons passent sur des lignes distinctes lorsque la largeur manque ; le nombre dans l’anneau reste sur une ligne. |
+
+L’esprit jeu repose sur les défis, les anneaux de progression, les lots et les
+indicateurs réellement disponibles. Les appels publics emploient **Découvrir
+l’animation** ; les actions personnelles disent ce qui va se passer. Une courte
+apparition d’écran, sans déplacement des commandes, accompagne la navigation ;
+elle est désactivée lorsque les mouvements sont réduits. Les contrôles conservent
+une cible tactile de 44 px et un focus visible.
+
+Les deux compléments de cet audit sont traités :
+
+- La vedette conserve son visuel Flyer, son défi et les compteurs disponibles
+  (participants, gagnants, lots). Sa carte dans la période devient compacte :
+  titre, type, commune, statut, dates et action restent accessibles, sans répéter
+  l’image, le défi et les compteurs. Les autres cartes gardent leur présentation
+  complète ; aucun résultat ni total n’est retiré.
+- Au retour d’une fiche, les pages supplémentaires déjà consultées sont relues
+  depuis l’API, avec ses curseurs courants, avant de restaurer position et focus.
+  Le retour explicite, le retour navigateur et le rechargement dans la fiche
+  conservent ce parcours. Seuls les repères de navigation (communes/périodes,
+  nombre de pages, position et lien) sont mémorisés, pour dix entrées d’historique
+  au maximum dans la session du navigateur ; aucune réponse du catalogue ni
+  donnée personnelle n’est mise en cache par ce mécanisme.
+
+Une erreur de pagination conserve les pages fraîchement obtenues et propose une
+reprise des pages manquantes. Si l’animation a disparu du catalogue courant, le
+focus revient au titre du programme. **Actualiser** et le changement de sélection
+communale repartent de la première page. Le stockage indisponible conserve le
+retour dans la session ouverte ; après rechargement, la provenance transmise
+par le lien reste utilisable pour le retour explicite.
+
+Impacts : présentation et navigation Marketplace/Live, documentation E73 ;
+aucun contrat API, règle métier, droit, migration, paramètre d’exploitation ou
+générateur modifié par ce correctif UX. Les images restent celles configurées,
+les données personnelles et les consentements gardent leur traitement existant.
+Les résultats et les limites de vérification figurent dans le
+[suivi d’implémentation](suivi-implementation.md).
+
+## Contre-audit du 2 novembre 2026 — validation du nouveau parcours
+
+Cette revue expert contrôle l’arbre local Marketplace `bb8b585` complété des
+correctifs UX précédents. Elle combine des scénarios navigateur isolés, des
+captures et une lecture indépendante des parcours. Les API sont simulées :
+elle ne valide ni le site TEST déployé ni l’usage avec de vrais habitants.
+
+**Bilan :** le parcours courant est plus cohérent : quatre destinations stables,
+actions de découverte/reprise distinctes, récupération d’inscription explicite,
+carte vedette allégée et retour aux pages déjà parcourues. La nouvelle passe ne
+remet pas en cause ces acquis. Elle a identifié les huit points ci-dessous.
+L’audit initial ne modifiait pas le code ; leur prise en compte a ensuite été
+demandée et implémentée dans le correctif décrit après ce tableau.
+
+| Priorité | Constat et nature | Traitement recommandé et preuve attendue |
+| --- | --- | --- |
+| Haute | **Action masquée au clavier.** Dans Découvrir, Tab peut placer le focus sur un bouton derrière la navigation basse. Reproduit à 390×844 et 568×320 ; la capture montre l’action entièrement recouverte. | Réserver la zone visible lors du défilement vers le focus, en tenant compte des barres haute/basse et des actions fixes. Rejouer la tabulation complète, texte agrandi et écran bas ; le contrôle focalisé doit rester visible. Sources : `live.css`, `live-play-shell.css`, navigation commune. |
+| Moyenne | **Animation disparue au retour.** Si l’animation de page 3 n’existe plus dans les réponses fraîches, le titre du programme reçoit le focus mais l’ancien scroll est conservé, loin du titre. Défaut reproduit. | Restaurer l’ancienne position seulement si le lien d’origine existe ; sinon montrer réellement le programme et expliquer son actualisation. Source : `LiveDiscovery.jsx`, effet de restauration. |
+| Moyenne | **QR réaffiché par l’historique.** Détail → retour liste → Présenter mon QR → Avancer navigateur → Retour : la fenêtre QR réapparaît sans nouvelle action ni lecture. Défaut reproduit, sans preuve d’accès non autorisé. | Fermer la fenêtre et invalider sa lecture lors du changement de destination personnelle, tout en conservant les pages de la liste. Vérifier Back/Forward et absence de réouverture automatique. Source : état `qr` de `LiveAnimations.jsx`. |
+| Moyenne | **Consigne contradictoire sur une fiche déjà enregistrée.** Lorsque l’enrichissement personnel manque, « Dans mon carnet ✓ » et « Ouvrir mes participations » peuvent coexister avec « Ajoutez-la au carnet ». Défaut rédactionnel reproduit. | Donner priorité à la présence locale pour la consigne ; garder une récupération distincte pour une autre inscription. Vérifier les combinaisons inscription connue, accès local et lecture d’enrichissement indisponible. Source : pied de fiche de `LiveAnimationDetail.jsx`. |
+| Moyenne | **Panne de Mes lots sans réessai.** L’échec de lecture du carnet affiche une aide e-mail, mais aucune commande pour réessayer sur place. Lacune de récupération observée. | Ajouter une action de réessai à la lecture locale, sans effacer le carnet ; tester refus transitoire puis réussite et refus persistant. Source : `LiveLots.jsx`, lecture initiale. |
+| Moyenne | **Portée de Mes lots ambiguë.** La liste contient les bons numériques enregistrés, alors que le vide dit « Retrouvez ici vos lots gagnés ». Les autres gains restent dans la participation ; le renvoi est caché sous l’aide e-mail. Optimisation de compréhension, pas un défaut du contrat de gains. | Préciser simplement « Vos bons enregistrés sur cet appareil » et rendre visible l’accès aux autres récompenses dans Mes participations. Ne pas déplacer ni dupliquer les gains sans évolution fonctionnelle distincte. Source : états vide/liste de `LiveLots.jsx`. |
+| Basse | **Deux chemins au premier choix de commune.** Sans commune suivie, un bouton ouvre Mes communes alors que la recherche est déjà présente dans l’accueil. Optimisation de fluidité ; aucun blocage. | Faire du bouton un raccourci vers la recherche intégrée, avec focus dans le champ, puis garder Mes communes comme destination de gestion. Sources : `LiveCommunityScene.jsx` et `LiveDiscovery.jsx`. |
+| Basse | **Repères de navigation invalides.** Une entrée de session volontairement corrompue avec `pages:{}` provoque un écran d’erreur ; Actualiser reproduit l’échec. Robustesse démontrée sur donnée injectée, pas défaut constaté en usage nominal. | Valider et ignorer les repères invalides, puis repartir de la première page. Tester structure erronée et stockage indisponible sans perdre les accès personnels. Sources : `liveDiscoveryNavigation.js`, `LiveDiscovery.jsx`. |
+
+**Prise en compte des huit points :**
+
+- Un traitement commun de la tabulation ajuste uniquement le défilement
+  nécessaire pour révéler le contrôle devant les barres réellement visibles.
+  Il mesure le conteneur extérieur même dans le formulaire d’inscription,
+  respecte les actions fixes et celles dans le flux sur écran bas, et laisse
+  les dialogues natifs ou ARIA gérer leur propre navigation. Les focus de
+  retour programmatiques restent indépendants de ce traitement.
+  Le piège de focus commun inclut les dialogues natifs ouverts et les éléments
+  dépliables. L’inscription Live n’exécute plus la restauration différée de la
+  marketplace, qui pouvait ramener en haut un formulaire déjà parcouru au clavier.
+- Lorsque le lien d’origine n’est plus présent, focus et défilement reviennent
+  ensemble au titre du programme ; une explication signale l’actualisation.
+  Les repères de navigation sont validés depuis la session comme depuis l’état
+  de l’historique, limités aux champs utiles et ignorés si leur structure est
+  invalide. Ils ne remplacent jamais la lecture des données courantes.
+- Tout changement de destination personnelle ferme le QR et invalide sa lecture
+  en cours. Une nouvelle présentation explicite reste possible ; les pages de
+  la liste et les accès personnels sont conservés.
+- La présence locale prime dans la consigne de fiche : **Cette animation est
+  enregistrée sur cet appareil. Retrouvez-la dans Mes participations.** Ce texte
+  reste juste pour un ancien signet, sans promettre un accès personnel absent.
+- Mes lots précise les bons numériques locaux, expose le lien vers les autres
+  récompenses et permet de réessayer sa lecture. La réponse d’un écran quitté
+  est ignorée ; le bouton est désactivé pendant la nouvelle lecture.
+- Sans commune suivie, **Choisir mes communes** place le focus dans la recherche
+  déjà affichée et la rend visible, sans changer de page. Si cette recherche
+  n’est pas présente, notamment dans un contexte de lien communal invalide,
+  le choix ouvre la page Mes communes.
+
+Les tests et captures du correctif complètent les preuves initiales dans le
+suivi. Le contrôle du focus s’appuie sur le principe de
+[focus non entièrement masqué du W3C](https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-minimum.html).
+Les largeurs réduites sont examinées selon le principe de
+[redistribution du contenu](https://www.w3.org/WAI/WCAG22/Understanding/reflow.html),
+sans prétendre à un audit exhaustif de conformité WCAG.
+
+Les preuves, commandes et résultats distincts sont consignés dans le
+[suivi d’implémentation](suivi-implementation.md). Aucun arbitrage métier,
+contrat API, droit, migration ou générateur ne change dans cet audit.
+
+## Nouvel audit du 2 novembre 2026 — après les huit corrections
+
+Relecture depuis le point de vue d’un habitant, sur l’arbre local intégrant les
+huit corrections précédentes. Le périmètre comprend la découverte, les communes,
+les inscriptions et leur récupération, les participations, les lots et les
+interactions de jeu. Les résultats exécutés sont consignés dans le
+[suivi de réalisation](suivi-implementation.md#2-novembre-2026--nouvel-audit-live-après-les-huit-corrections).
+Cet audit ne modifie pas le code de production et ne vaut pas recette du site déployé.
+
+Le parcours courant conserve ses améliorations : une entrée directe dans les
+animations, des actions de participation distinctes de la récupération, un carnet
+unique et une navigation utilisable au clavier avec les barres fixes. Les huit
+points précédents restent corrigés dans les scénarios rejoués. Aucune nouvelle
+refonte visuelle générale n’est justifiée par les observations de ce passage.
+
+Trois points restent à traiter, dans l’ordre recommandé :
+
+| Priorité | Observation reproduite | Conséquence pour l’habitant | Optimisation proposée |
+| --- | --- | --- | --- |
+| P2 — lien personnel | Un lien personnel est validé (200), puis la lecture du contact échoue (503). L’écran « Garder ma participation » n’affiche que l’erreur, sans réessai. Une recharge après rétablissement du service fonctionne. | Une personne arrivant depuis son e-mail peut croire que son inscription ou son lien est invalide. | Ajouter **Réessayer la vérification**, un état occupé et une explication rassurante ; garder les contrôles d’accès et ignorer les réponses tardives. |
+| P2 — commune partagée | Après un 503 sur la lecture de la commune passée en URL, **Actualiser** ne refait pas cette lecture. Le message invite pourtant à réessayer. Une recharge du navigateur conserve le filtre et réussit. | L’action proposée ne permet pas de reprendre ; changer de commune paraît être la seule solution. | Relancer aussi la commune lors de l’actualisation ou proposer **Réessayer cette commune**, sans modifier les communes suivies. |
+| P3 — visibilité de l’incident personnel | Avec six animations publiques, l’avis d’échec des priorités personnelles commence à environ 3 126 px du haut sur un écran 390 × 844. Le bouton d’actualisation est en haut, sans réessai à proximité de l’avis. | L’accueil paraît normalement chargé alors que les défis personnels ont disparu temporairement ; il faut parcourir le catalogue pour comprendre. | Afficher un avis compact près de l’emplacement des défis personnels, avec réessai et accès au carnet, tout en laissant la découverte disponible. |
+
+Ces défauts de reprise ne démontrent ni perte de données ni inscription dupliquée.
+Les deux premiers ont un contournement par recharge de page ; le troisième
+conserve l’accès à **Mes participations** dans la navigation. Les captures et
+comptages de requêtes distinguent les observations des recommandations. Les
+tests exploratoires constatant un défaut ne sont pas comptés comme une preuve
+de conformité de ce comportement.
 
 ## Critères ajoutés et preuves
 

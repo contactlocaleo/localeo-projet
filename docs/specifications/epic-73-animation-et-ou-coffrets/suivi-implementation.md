@@ -2,6 +2,308 @@
 
 Début : **18 octobre 2026**. [Spécification](README.md), [backlog](../../roadmap/terminees/epic-73-animation-et-ou-coffrets-backlog.md), [matrice des 63 critères et preuves](verification-livraison.md). Objectif : les 38 US, dans les dix lots demandés. Les lignes ci-dessous ne valent pas acceptation tant que les preuves correspondantes ne sont pas enregistrées.
 
+## 2 novembre 2026 — nouvel audit Live après les huit corrections
+
+Demande : valider à nouveau le parcours et identifier les points restant à
+optimiser. Version examinée : Marketplace `bb8b585` avec les travaux locaux,
+dont les huit corrections précédentes ; documentation de base `9204f8a` avec
+travaux locaux préservés. Aucune modification de production pour cet audit.
+Le [bilan fonctionnel](localeo-live-entree-unique.md#nouvel-audit-du-2-novembre-2026--après-les-huit-corrections)
+priorise trois observations ; aucune nouvelle régression des huit corrections
+n’a été observée dans leurs scénarios rejoués.
+
+**Validation courante : 52/52 scénarios navigateur réussis**, sans skip :
+
+- `live-focus-visibility`, `live-navigation-audit-fixes`,
+  `live-habitant-audit-fixes`, `live-registration-clarity`,
+  `live-participations-unified` (suffixe `.spec.cjs`) : **36/36**, code 0,
+  3,1 min, sortie `test-results/live-ux-reaudit-validation`.
+- `live-game.spec.cjs` et `live-mobile-actions.spec.cjs` : **16/16**, code 0,
+  1,7 min, sortie `test-results/live-ux-reaudit-jeu`. Cinq activités de chasse,
+  aide, preuve commerçant distincte, passeport, tombola, reprise après réponse
+  perdue et absence d’inscription sur animation close/annulée restent vérifiés.
+
+Commande : `node node_modules/@playwright/test/cli.js test <fichiers> --config=playwright.live-game.config.cjs --output=test-results/<passage> --workers=1`.
+Les dimensions couvrent 320/390 px, 568 × 320, 1280 px, ainsi que le texte
+agrandi à 200 % et le clavier. Captures du jeu mobile/PC et du focus agrandi
+examinées en complément des assertions. Ces 52 cas sont des rejeux, à ne pas
+additionner aux 65 cas du correctif précédent comme de nouveaux scénarios.
+Build Vite isolé réussi ; `git diff --check` réussi. Contrôles documentaires :
+94 guides, 1 068 liens, zéro erreur/avertissement ; 134 sources exportées vérifiées.
+
+Exploration complémentaire : **trois observations reproduites**, avec API
+simulées et contrôles explicites du comportement actuel :
+
+- `tmp/live-audit-habitant-second/`, sortie
+  `test-results/live-audit-habitant-second` : reçu personnel 200 puis contact
+  503, aucun bouton de réessai ; retour à « Ajouter à mon carnet » après
+  rétablissement et recharge. **1/1 observation confirmée**, code 0, 9,9 s.
+- `tmp/live-audit-navigation-round2/retry.spec.cjs`, sortie
+  `test-results/live-audit-navigation-round2` : une lecture de commune après
+  ouverture puis toujours une après **Actualiser** ; deux lectures après
+  recharge réussie. **1/1 observation confirmée**, code 0.
+- `tmp/live-ux-new-audit/home-feedback.spec.cjs`, sortie
+  `test-results/live-ux-new-audit-exploration` : panne du tableau de bord et
+  six animations publiques ; avis personnel à **3 126 px**, actualisation à
+  **87 px**, aucun réessai à côté de l’avis. **1/1 observation confirmée**,
+  code 0, 6,8 s. Captures du premier écran et du bas de catalogue conservées.
+
+Les trois captures d’incident ont été examinées. Deux revues indépendantes
+couvrent découverte/communes/retours et inscription/récupération/lots. Elles
+n’ont pas retenu d’autres défauts démontrés dans ces périmètres. Les priorités
+P2/P3 sont des appréciations de l’impact utilisateur, pas une mesure de fréquence
+sur l’environnement réel.
+
+Limites : navigateur local `127.0.0.1:8173`, compilation isolée sans `.env`,
+réseau externe refusé. Pas de recette TEST, de téléphone physique, de lecteur
+d’écran ni de validation exhaustive de PWA installée. Le jeu de scénarios
+est ciblé et ne constitue pas une certification d’accessibilité. Aucun commit,
+push ou déploiement. Aucun impact sur contrats, règles métier, migrations,
+données de démonstration ou configuration : seuls les constats documentaires
+et les sondes locales d’audit sont ajoutés.
+
+## 2 novembre 2026 — prise en compte des huit points du contre-audit Live
+
+Demande : corriger les huit points de l’audit précédent. Base Marketplace
+`bb8b585` avec travaux locaux conservés ; sources canoniques dans ce dépôt.
+Le [comportement corrigé](localeo-live-entree-unique.md#contre-audit-du-2-novembre-2026--validation-du-nouveau-parcours)
+complète les constats initiaux, sans supprimer leurs preuves d’échec.
+
+Les corrections couvrent la visibilité du focus clavier, le retour lorsque
+le lien d’origine a disparu, la fermeture des QR au changement de destination,
+les consignes d’enregistrement, le réessai et le périmètre de Mes lots, le choix
+initial de commune et la validation des repères de session/historique.
+Le traitement de tabulation utilise les positions réelles des barres ; il ne
+superpose pas de surcharges CSS ni de second système de retour. Une revue
+indépendante a fait préciser l’exclusion des dialogues natifs et la prise en
+compte du conteneur extérieur pendant l’inscription. Ces deux frontières sont
+vérifiées dans les scénarios pérennes de focus.
+
+Les reproductions de l’audit précédent servent de référence avant correction.
+Les tests sont désormais conservés dans `localeo-marketplace/tests/visual` :
+`live-focus-visibility.spec.cjs`, `live-navigation-audit-fixes.spec.cjs` et
+`live-habitant-audit-fixes.spec.cjs`. Les anciens tests de communes et lots
+conservent leurs assertions métier et visuelles, avec les nouveaux libellés
+et la destination locale du bouton de première visite.
+
+Passages intermédiaires conservés : première sonde de focus trop stricte sur
+les coins transparents des boutons arrondis, puis un faux signal à 200 % sur
+l’espace vide entre les deux lignes d’un lien inline. La vérification finale
+contrôle neuf points intérieurs sur **chaque fragment réel** du contrôle ;
+tous doivent rester visibles. Le comportement de l’application n’a pas été
+assoupli pour ces deux ajustements de mesure. La suite de non-régression a
+obtenu **42/43 réussites** avant ce dernier ajustement, avec le signal inline
+identifié ci-dessus ; les sorties restent sous `test-results/live-audit-fixes-final`.
+
+Le complément clavier a ensuite reproduit deux défauts réels : sortie du focus
+de la fenêtre native de récupération et retour en haut du formulaire après
+tabulation, provoqué par les rappels de restauration Marketplace à 120/420 ms.
+Le piège de focus traite désormais les dialogues natifs et les éléments
+dépliables visibles ; la restauration Marketplace est désactivée uniquement
+pour l’inscription Live. Les deux cas passent après correction, sans délai
+artificiel ajouté au scénario. Une revue indépendante des sources confirme
+la séparation des responsabilités de navigation.
+
+**Bilan final : 65 scénarios navigateur distincts réussis**, en comptant les
+rejeux une seule fois :
+
+- **35** contrôles de non-régression réussis dans `live-audit-fixes-final` :
+  découverte/continuité, communes, lots mobile/navigation, actions mobile,
+  participations/navigation ; les huit cas de focus de ce passage sont remplacés
+  dans ce bilan par leur rejeu final ci-dessous.
+- **9/9** cas de navigation, QR et repères invalides réussis dans
+  `live-audit-fixes-replay` (ce passage avait aussi deux échecs de focus,
+  corrigés et rejoués ensuite).
+- **6/6** cas de consigne d’enregistrement, lots et réessai réussis dans
+  `live-habitant-audit-fixes-final`, code 0.
+- **15/15** cas finaux de focus et récupération réussis dans
+  `live-focus-recovery-final`, code 0, 59,7 s : huit cas de
+  `live-focus-visibility.spec.cjs` et sept de `live-habitant-access.spec.cjs`.
+
+Commande navigateur : `node node_modules/@playwright/test/cli.js test <fichiers> --config=playwright.live-game.config.cjs --output=test-results/<passage> --workers=1`.
+Captures examinées : mobile 320/390 px, écran bas 568 × 320, PC 1280 px,
+focus à 200 % de taille de texte, retour au programme et états des lots.
+Build Vite isolé, ESLint ciblé et `git diff --check` réussis.
+Contrôles documentaires finaux : `check_guidance.py`, **94 guides, 1 068 liens,
+0 erreur, 0 avertissement** ; `sync_documentation.py --check-sources`,
+**134 documents vérifiés**.
+
+Impacts : présentation/navigation Marketplace/Live et documentation E73.
+Pas de modification de règle métier, contrat API, droits ou consentements.
+Aucune migration ou donnée de démonstration nécessaire ; aucun paramètre
+d’exploitation ajouté. Les bons et participations gardent leurs accès existants,
+et les pages du catalogue sont toujours relues depuis l’API. Validation locale
+sur `127.0.0.1:8173`, API simulées et réseau externe refusé, sans `.env`.
+Pas de recette sur TEST ni sur téléphone physique ; aucun commit, push ou
+déploiement demandé ou effectué pour ce correctif.
+
+## 2 novembre 2026 — contre-audit du nouveau parcours Live
+
+Demande : valider le nouveau parcours et identifier les optimisations restantes.
+Périmètre : découverte/communes, fiche/inscription/récupération, participations,
+lots, retours et navigation clavier, sur l’arbre Marketplace `bb8b585` avec les
+travaux locaux E70/E73 préservés. Aucun code de production modifié pour cet audit.
+Le [bilan détaillé](localeo-live-entree-unique.md#contre-audit-du-2-novembre-2026--validation-du-nouveau-parcours)
+distingue huit points ouverts, leur priorité, leur nature et le traitement attendu.
+
+**Validation courante : 40/40 tests navigateur réussis**, code 0, 4,3 minutes.
+Suites `live-discovery-continuity`, `live-habitant-access`,
+`live-habitant-communes`, `live-lots-mobile`, `live-participations-navigation`,
+`live-registration-clarity` sous `tests/visual` (suffixe `.spec.cjs`).
+Commande : `node node_modules/@playwright/test/cli.js test <fichiers> --config=playwright.live-game.config.cjs --output=test-results/live-audit-new-journey --workers=1`.
+Ces cas rejouent des preuves existantes : ne pas les additionner aux 47 cas du
+complément précédent comme s’il s’agissait de scénarios nouveaux.
+
+**Exploration complémentaire :**
+
+- Clavier : **deux échecs** de visibilité à 390×844 et 568×320 ; **un succès**
+  du contrôle de visibilité partielle à 1280×900. Le focus peut arriver sur
+  une action entièrement cachée par la navigation basse. À 390 px, l’action
+  occupe y=770–818 et la barre commence à y=746. Source de reproduction
+  `tmp/live-audit-visual/probe.spec.cjs`, configuration
+  `tmp/live-audit-visual.config.cjs`, sorties `tmp/live-audit-visual-grid`.
+  La sonde initiale examinait uniquement le centre horizontal et signalait
+  aussi le PC ; la seconde examine neuf points et distingue le recouvrement
+  partiel du recouvrement complet. Le problème mobile reste reproduit ;
+  aucune assertion de la suite produit n’a été changée.
+- Navigation : **trois défauts observés** par des assertions de reproduction
+  (runners code 0, qui confirment le défaut et non sa correction) : animation
+  disparue avec titre focalisé hors écran, QR réouvert après Forward/Back,
+  repère de session corrompu bloquant l’accueil. Scripts
+  `tmp/live-audit-navigation-edge.spec.cjs` et
+  `tmp/live-audit-navigation-disappeared.spec.cjs`, configuration
+  `tmp/live-audit-navigation-config.cjs`, capture
+  `tmp/live-audit-navigation-disappeared.png`.
+- Compréhension : **quatre observations reproduites**, dernier rejeu 4/4,
+  code 0 : consigne d’ajout au carnet contradictoire, absence de réessai sur
+  panne de Mes lots, portée des lots insuffisamment expliquée, double chemin
+  au choix initial de commune. Scripts `tmp/live-audit-habitant-*`, captures
+  `tmp/tmp/live-audit-habitant-results`. Les trois derniers points sont des
+  optimisations UX ; le filtre des bons numériques respecte le contrat actuel.
+
+Toutes les sorties ci-dessus sont locales dans `localeo-marketplace`. Serveur
+isolé `127.0.0.1:8173`, build Vite réussi, API simulées et trafic externe refusé,
+sans lecture de `.env`. Les captures du focus masqué ont été inspectées ; les
+revues indépendantes complètent la vérification des retours et des consignes.
+Un incident de découverte des fichiers Playwright dans un autre sous-dossier
+`tmp` a été résolu en bornant le répertoire de la sonde ; il n’est pas compté
+comme défaut de l’application.
+
+Limites : pas de recette sur TEST, de test sur appareil iOS/Android réel, de
+mesure d’utilisabilité auprès d’habitants ni d’audit exhaustif WCAG. Les échecs
+exploratoires restent ouverts ; le parcours n’est pas déclaré exempt de défauts.
+Contrôles documentaires et des sources exportées réussis. Documentation E73
+seule modifiée dans les fichiers suivis de ce lot ; scripts et preuves sous
+`tmp` dans Marketplace. Aucun impact métier/API, droit, migration, générateur
+ou configuration d’exploitation. Aucun commit, push ni déploiement effectué.
+
+## 2 novembre 2026 — compléments Live : vedette et retour après pagination
+
+**Attendu/observé :** alléger la répétition de l’animation vedette et retrouver
+une animation consultée dans une page supplémentaire du catalogue. La carte
+répétait image, défi et compteurs ; le retour ne rechargeait que la première
+page. Deux scénarios de reproduction échouent sur la version locale précédente
+pour ces raisons (`tmp/live-discovery-continuity-before`). Base Marketplace
+`bb8b585` avec travaux locaux de l’audit précédent conservés.
+
+**Correction :** carte de la vedette compacte, conservée dans sa période ;
+indicateurs disponibles regroupés sur la vedette, dont les gagnants. Les autres
+cartes restent complètes. Les repères de navigation mémorisent la profondeur
+par commune/période, puis relisent des pages fraîches depuis l’API. Retour
+explicite, Back, rechargement de fiche, position et focus sont couverts.
+La reprise après erreur conserve les pages obtenues et complète les manquantes.
+Un repère récent de l’entrée d’historique prime sur un ancien état de retour,
+ce qui préserve une pagination poursuivie entre deux consultations.
+
+**Preuves locales :** serveur isolé `127.0.0.1:8173`, API simulées, sans `.env`
+ni appels à TEST. Nouvelle suite `tests/visual/live-discovery-continuity.spec.cjs` :
+**8/8 réussites**, code 0 ; captures 320/1280 px inspectées dans
+`tmp/live-discovery-continuity-final`. Le premier rejeu mesurait la position avant
+stabilisation du défilement ; le test mesure désormais la position au clic,
+sans lire l’état interne, puis vérifie le retour à ±8 px. Ce changement de test
+ne modifie pas la restauration en production.
+
+Non-régression : **39/39 réussites**, code 0, dans
+`test-results/live-discovery-followup`, pour `live-context-return`,
+`live-discovery-dynamics`, `live-discovery-unique`, `live-flyer-image`,
+`live-home-community` et `live-play-experience` (fichiers `.spec.cjs`). Commande :
+`node node_modules/@playwright/test/cli.js test <fichiers> --config=playwright.live-game.config.cjs --output=test-results/live-discovery-followup --workers=1`.
+Les huit nouveaux cas utilisent la même commande avec leur fichier et une sortie
+séparée. **47 scénarios distincts** sont ainsi vérifiés sur ce complément.
+
+Les assertions de l’ancien rendu ont été adaptées à leur emplacement attendu :
+image et métriques sur la vedette, détails repliables sur les autres cartes ;
+l’absence de compteurs inventés et d’image de remplacement reste vérifiée.
+Captures inspectées à 320/1280 px et texte agrandi à 200 % à 390 px. ESLint ciblé,
+build Vite isolé, `git diff --check`, contrôles documentaires et sources exportées
+réussis. Les validations navigateur ne constituent pas une recette sur TEST.
+
+Impacts : Marketplace/Live et documentation E73 uniquement. Aucun contrat API,
+invariant métier, droit, migration, générateur ou paramètre d’exploitation ne
+change : le correctif porte sur la présentation et les lectures déjà disponibles.
+Aucun commit, push ni déploiement demandé ou effectué pour ce complément.
+
+## 2 novembre 2026 — audit Live, navigation et actions habitant
+
+**Attendu :** des retours prévisibles, une actualisation reconnaissable et des
+actions de découverte/reprise explicites, dans l’univers graphique Live existant.
+Base Marketplace `bb8b585`, complétée des changements locaux E70 préservés.
+Le [complément d’audit](localeo-live-entree-unique.md#audit-dusage-du-2-novembre-2026--continuité-et-actions)
+décrit les obstacles, corrections et limites retenus.
+
+**Cause :** plusieurs présentations locales des retours et actualisations,
+absence de provenance sur les liens du catalogue, détail personnel ouvert en
+état React sans changement d’adresse et intitulé générique masquant le parcours.
+Les corrections réutilisent `ContextBackLink`, `LiveRefreshButton` et les helpers
+de navigation existants ; les styles communs sont modifiés à leur source.
+
+**Preuves locales :** serveur de production isolé à `127.0.0.1:8173`, construit
+avec `LOCALEO_ISOLATED_TESTS=1`, sans chargement de `.env` ni appel à TEST.
+Les API sont simulées et le trafic externe est refusé par les fixtures.
+
+- Navigation : **30 tests navigateur réussis**, dont **7 nouveaux** pour retour
+  communal, position/focus à 320/1280 px, vedette et retour après inscription.
+  Rapports sous `localeo-marketplace/test-results/navigation-review`.
+- ESLint des composants modifiés et build isolé : réussis.
+- Jeu, accueil immersif/communal, lots, actions mobiles et PIN : **52 cas
+  distincts vérifiés**. Premier passage : 49 réussis, 3 attentes de l’ancien
+  libellé « Mes animations » corrigées puis rejouées avec succès. Sorties
+  `test-results/live-ux-parent` et `test-results/live-ux-final`.
+- Actualisation Coffret/Animation, erreurs et liaison d’anciens accès :
+  **7 cas distincts vérifiés**. Premier passage : 4/6 réussis ; deux tests
+  supposaient les cartes visibles avant défilement malgré le résumé et l’avis
+  réseau. Ils défilent désormais vers l’action puis conservent toutes leurs
+  assertions de visibilité, lecture unique et reprise. Le dernier lot de
+  **14 tests réussis** rejoue ces cas, les lots vides et cinq cas de jeu, avec
+  la liaison bornée à 50 et son bouton de poursuite visible. Ces rejeux ne
+  s’ajoutent pas aux 52 cas du lot précédent.
+- Participations, récupération, contacts, progression, satisfaction et messages :
+  **39 cas distincts vérifiés**. Passages intermédiaires : 29/30 puis 13/14 ;
+  un délai de chargement du coffret à 1280 px passe au rejeu sans changer son
+  assertion. L’ancien test attendait un pourcentage dans `aria-valuenow` ;
+  il vérifie désormais les 2 étapes sur 3, le texte accessible et les 67 %
+  visibles, conformément au composant déjà présent. Le dernier ciblé donne
+  **11/11 réussis** : navigation, progression actualisée au retour et contacts
+  non persistés. Les passages intermédiaires restent conservés.
+
+Au total, ces lots représentent **128 scénarios navigateur distincts vérifiés**,
+sans additionner les rejeux. Les captures couvrent 320/390/1280 px, le texte à
+200 %, les états vide/erreur et les mouvements réduits. La dernière retouche
+CSS de lisibilité à 200 % est vérifiée par **12 rejeux réussis**, avec inspection
+des captures : titres non comprimés, actions lisibles et nombre complet dans
+l’anneau. Sorties `test-results/live-ux-visual-final` et
+`test-results/live-ux-graphics-final`. Ces 12 cas sont déjà comptés ci-dessus.
+
+Deux risques trouvés en revue sont corrigés : la liste conserve ses pages
+distantes lors de l’ouverture d’une participation ; au retour, seule la
+participation quittée est relue pour présenter sa progression courante.
+L’e-mail demandé pour afficher le détail n’est pas recopié dans le résumé.
+
+La revue visuelle compare des captures synthétiques avant/après ; elle ne
+prétend pas mesurer l’adoption ou l’utilisabilité auprès de vrais habitants.
+Aucun contrat, règle métier, migration, droit ou paramètre opérateur modifié.
+Aucun commit, push ni déploiement effectué pour cette passe UX.
+
 ## 1er novembre 2026 — homogénéité de Localeo Animation avec Localeo Pro
 
 **Attendu :** reprendre les principes visuels et de navigation de l’espace
