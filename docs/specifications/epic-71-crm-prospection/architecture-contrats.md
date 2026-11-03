@@ -1,153 +1,217 @@
-# E71 — Architecture et contrats
+# E71 — Architecture de Localeo CRM
 
-Références : [périmètre et arbitrages](README.md), [parcours](parcours-regles.md), [import/carte](import-carte.md), [ADR domaine d'abord](../../architecture/decisions/ADR-2026-08-28-domaine-avant-services-applicatifs.md). Conception du 9 octobre 2026, non implémentée.
+Conception **V1.1 du 3 novembre 2026**, non implémentée. [Périmètre](README.md), [parcours](parcours-regles.md), [import](import-carte.md), [preuves](verification-livraison.md). Application de l'[ADR domaine d'abord](../../architecture/decisions/ADR-2026-08-28-domaine-avant-services-applicatifs.md) et des [bornes de performance](../../architecture/transverse/performance-volumetrie.md).
 
-## Existant vérifié
+## Existant vérifié et implantation proposée
 
-Lecture ciblée du backend au commit `1bdac0f`, sans chargement de configuration opérateur ni appel réseau/métier. Aucun domaine CRM ni pipeline générique d'import XLSX n'a été identifié dans les sources examinées. Les sources ci-dessous sont les producteurs actuels, pas les futurs endpoints CRM.
+Lecture du backend local `2e896ae`, sans base, configuration privée ou appel métier. Aucun domaine/API/table CRM implémenté trouvé dans `app/` et `sql/`. Les mentions d'import commerçants ne sont pas un CRM.
 
-| Producteur / source | Faits réutilisables et limites |
+| Source actuelle | Réutilisation et limite |
 | --- | --- |
-| [Accès internes](../../../../localeo-backend/app/domaine/identite_acces/acces_interne.py), [adaptateur ERP](../../../../localeo-backend/app/security/erp.py) | Scopes globaux E69, CSRF, session et habilitations ; aucun scope CRM actuel ; ajouter explicitement les routes au [registre](../../../../localeo-backend/app/security/capacites_routes.py) et au [filtrage frontend](../../../../localeo-backend/app/infrastructure/erp/permissions.js) |
-| [Création ERP](../../../../localeo-backend/app/api/erp_api.py), [ServiceAtelierErp](../../../../localeo-backend/app/application/commercialisation/services/atelier_erp.py) | `POST /internal/erp/api/commercants` crée commerçant BROUILLON et dossier OnBoard, audit, retourne `id/version/dossier` ; `nom`, `ville_id`, `type_commercant_id` requis ; pas d'email ni d'accès dans ce producteur |
-| [ReferencerCommercant](../../../../localeo-backend/app/application/referencement/use_cases/referencer_commercant.py) | Producteur distinct : profil, ouverture du dossier et accès/email possibles, `initialiser_acces=True` par défaut ; ne pas le substituer à la création ERP sans analyser ces effets |
-| [Référencer partenaire Animation](../../../../localeo-backend/app/application/animation_locale/use_cases/referencer_partenaire_animation.py) | Parcours `/admin/referencement-partenaire-animation` : partenaire, gestionnaire, habilitations, commande de souscriptions puis gratuité confirmée ou checkout ; ne pas appeler depuis l'import |
-| [API souscriptions ERP](../../../../localeo-backend/app/api/souscriptions_animation_erp_api.py) | `/internal/erp/api/animation-commercial/{commandes,souscriptions}` ; actions checkout/email/activation gratuite/annulation explicites avec version et confirmation ; partenaire seul ≠ souscription active |
-| [Crédit B2B](../../../../localeo-backend/app/application/conformite_fiscale_bum/service_credit_achat_b2b.py), [API](../../../../localeo-backend/app/api/credit_achat_b2b_api.py) | Enregistrer une organisation peut remplacer/révoquer son code actif et notifier ; ne jamais utiliser cet appel comme simple upsert CRM |
-| [Initialisation paiement](../../../../localeo-backend/app/api/paiements_api.py), [Vision 360 achats](../../../../localeo-backend/app/api/vision_360_achats_api.py) | Initialiser un achat a des effets réels ; référence de lecture typée `COMMANDE:{UUID}` ou `ACHAT:{UUID}`, pas UUID seul ; certains écrans historiques sont réservés admin |
-| [Géographie](../../../../localeo-backend/app/infrastructure/integrations/geo_api_gouv.py), [Ville](../../../../localeo-backend/app/domaine/referencement/entities/ville.py) | Recherche nom/code postal, résolution INSEE et centroïde réutilisables ; publication Marketplace requise pour la proximité actuelle ; création Ville publiée par défaut, donc interdite pour la seule localisation CRM |
-| [Audit](../../../../localeo-backend/app/application/exploitation/services/service_audit.py), [uploads](../../../../localeo-backend/app/security/uploads.py) | Sanitisation de secrets et limite brute d'upload disponibles ; ni filtrage exhaustif de contacts/notes ni protection complète de l'expansion OOXML |
+| [Identité interne](../../../../localeo-backend/app/domaine/identite_acces/acces_interne.py) | Profils LECTEUR/BACKOFFICE/FINANCE et combinaisons, portée globale, catalogue fermé d'autorisations et version d'habilitation ; pas de droits CRM actuels |
+| [Comptes internes API](../../../../localeo-backend/app/api/comptes_internes_api.py) | DTO à autorisations fermées et limite actuelle de liste ; ajouter CRM exige modifier domaine, contrat et écran ERP ensemble |
+| [Sécurité ERP](../../../../localeo-backend/app/security/erp.py), [commande interne](../../../../localeo-backend/app/security/commande_interne.py) | Session, CSRF et relecture transactionnelle des droits ; aucune identité CRM parallèle |
+| [Registre routes](../../../../localeo-backend/app/security/capacites_routes.py), [menus](../../../../localeo-backend/app/infrastructure/erp/permissions.js) | Déclaration fermée des capacités et destinations ; une route inconnue n'est pas autorisée par défaut |
+| [Coquille Atelier](../../../../localeo-backend/app/api/atelier_ui.py), [sécurité Atelier](../../../../localeo-backend/app/security/atelier.py) | Patron satellite avec session interne, ressources d'installation neutres et pages privées no-store ; à adapter pour CRM |
+| [Cycle PWA](../../../../localeo-backend/app/infrastructure/pwa/lifecycle.py) | Versions et mises à jour communes ; ajouter identité/périmètre CRM, pas un mécanisme concurrent |
+| [Email sortant](../../../../localeo-backend/app/domaine/exploitation/entities/email_sortant.py), [batch](../../../../localeo-backend/app/application/exploitation/use_cases/emails_batch.py), [rendu](../../../../localeo-backend/app/infrastructure/email/branding.py) | Outbox/planification/envoi et charte réutilisables ; garde de validité CRM nécessaire jusqu'à l'envoi |
+| [Transport WebPush](../../../../localeo-backend/app/security/webpush.py), [adaptateur organisateur](../../../../localeo-backend/app/infrastructure/communication/webpush_organisateur.py) | Validation et résultats transport ; abonnements Live/commerçants non transférables à un utilisateur interne CRM |
+| [Géographie](../../../../localeo-backend/app/infrastructure/integrations/geo_api_gouv.py) | Résolution nom/code postal/INSEE/position et centre communal ; pas de fond de carte ni géocodage établissement. API publique des villes insuffisante pour un référentiel CRM national ; aucun moteur cartographique existant trouvé |
+| [Deltas import commerçant](../../../../localeo-backend/app/domaine/referencement/imports_commercants/deltas.py) | Principes de provenance, vide sans effacement et protection locale utiles ; ce producteur crée des commerçants, il ne doit pas importer les prospects |
+| [OnBoard](../../../../localeo-backend/app/api/onboarding_commercant_api.py), [partenaire Animation](../../../../localeo-backend/app/application/animation_locale/use_cases/referencer_partenaire_animation.py) | Parcours métier avec leurs propres droits et effets : création d'accès/commande/checkout possibles pour partenaire ; jamais appelés automatiquement par le CRM |
 
-## Propriétaire et architecture cible
-
-Introduire **`prospection`** comme domaine autonome : l'acquisition commerciale précède référencement, catalogue, support après-vente et achats. Ce choix évite de transformer le support en carnet commercial ou le catalogue en fichier de prospects. À l'implémentation, ajouter ce domaine aux index/tags et contrôles de [domaines fonctionnels](../../architecture/transverse/domaines-fonctionnels.md) ; il n'existe pas encore dans le code.
-
-Organisation cible : `app/domaine/prospection` (règles pures et ports), `app/application/prospection` (use cases/UoW), adaptateurs SQL/stockage/géographie et API internes. Aucun import ORM, client HTTP ou configuration runtime dans le domaine. Aucune écriture SQLAdmin ou batch contournant les mêmes commandes.
+**Implantation proposée :** satellite PWA servi par `localeo-backend` sous `/internal/crm/`, sur le même domaine backoffice en TEST et production. Navigation et identité Localeo CRM distinctes, même session et gestion des profils ERP. Aucun sixième dépôt ou cookie inter-domaines nécessaire. Un sous-domaine dédié serait une évolution d'authentification à spécifier séparément. Aucun DNS n'est modifié ici.
 
 ```mermaid
 flowchart LR
-  ERP[ERP Prospection] --> API[API interne prospection]
-  API --> UC[Use cases et unité de travail]
+  ERP[ERP : profils et droits] --> IAM[Identité interne E69]
+  PWA[Localeo CRM PWA] --> API[API interne prospection]
+  API --> UC[Application : commandes et transactions]
   UC --> DOM[Domaine prospection]
-  UC --> SQL[Repositories SQL et stockage privé]
-  UC --> READ[Ports de lecture métier autorisés]
-  READ --> REF[Référencement / OnBoard]
-  READ --> ANI[Animation / souscriptions]
-  READ --> ACH[Achats]
-  ERP --> FLOW[Parcours existants avec leurs confirmations]
+  UC --> DB[Repositories et stockage privé]
+  JOB[Worker borné] --> UC
+  UC --> OUT[Intentions de rappel durables]
+  OUT --> EMAIL[Outbox email existante]
+  OUT --> PUSH[Transport WebPush existant]
+  UC --> MET[Lectures métier et rattachements autorisés]
+  IAM --> API
 ```
 
-### Agrégats et invariants
+## Domaine et invariants
 
-| Propriétaire cible | Règle et commandes | Entrées / preuve attendue |
+Nouveau domaine cible **prospection**, à enregistrer dans les index/tags et contrôles à l'implémentation. `app/domaine/prospection` décide ; `app/application/prospection` orchestre ; API, UI et workers présentent/adaptent. Pas d'ORM, fournisseur, session HTTP ou lecture d'environnement dans les règles pures.
+
+| Propriétaire cible | Invariant et déclencheur | Entrées / preuve |
 | --- | --- | --- |
-| `OrganisationProspect` + contacts | Identité CRM distincte des identités opérationnelles ; créer, modifier, rendre contact obsolète, archiver ; version optimiste | API manuelle/import ; même refus et absence d'effet métier implicite |
-| `OppositionProspection` et politique pure | Évaluer portée organisation/contact + axe/canal, enregistrer/lever avec preuve, protéger réimport/réouverture | Planification, report et import reconsultent la politique ; test course opposition/tâche |
-| `OpportuniteProspection` | Étape, pause/perte/réouverture, preuve de gain, rattachements typés ; pas de paiement ni activation | API et import appliquent mêmes transitions ; test sans ORM |
-| `TacheProspection` | Réaliser/reporter/annuler/réaffecter ; responsable et échéance ; sollicitation compatible avec opposition | API/import ; événements uniques au rejeu |
-| `LotImportProspection` | Mapping validé, lignes retenues, identité d'origine, reprise, conflit et bilan ; jamais conversion cachée | Assistant + worker, même règles métier que saisie |
-| Valeurs `ReferenceMetier`, `LocalisationCommunale`, `MontantEstime` | Type/id vérifiés, géographie indépendante publication, devise et inconnus distincts de zéro | Adaptateurs traduisent, le domaine refuse états incohérents |
+| `OrganisationProspect` et contacts | Identités CRM indépendantes des comptes clients ; notes, opposition et protections locales jamais remplacées par import ; contact obsolète non réactivé implicitement | Saisie, import, archivage ; même résultat/refus quelle que soit l'entrée |
+| `OpportuniteProspection` et `AttributionPreuveGain` | Périmètre/objectif, transitions et preuve canonique ; une preuve attribuée à un seul dossier, aucun paiement/activation créé par statut | Commande API, gain concurrent refusé atomiquement ; réouverture sans double gain |
+| `EvenementProspection` | Auteur/date/provenance, correction reliée et contenu distinct de l'audit technique | Notes/appels et note initiale importée ; ajout idempotent, pas de réécriture silencieuse |
+| `TacheProspection` | Responsable habilité, échéance, cycle et révision du rappel ; tâche terminale ne produit plus d'envoi | API, report et worker ; course terminer/envoyer, ancienne révision invalidée |
+| `PolitiqueSollicitation` | Opposition/archivage bloquent les sollicitations sans empêcher note factuelle ; levée autorisée explicite | Saisie, import, rappel ; relecture atomique avec mutation |
+| `LotImportProspection` et politique de complément | Clés stables, mode INIT/UPSERT, complément uniquement autorisé, résultat atomique par groupe et plan immuable | API/worker/reprise ; même lot ou clés ne doublent pas les objets |
+| `IntentionRappelCRM` | Destinataire interne courant, préférence et droit actuels ; unicité par tâche/révision/canal/appareil | Ordonnanceur, expédition et retries ; aucun rappel vers prospect |
 
-La prochaine action, les cartes, le tableau et les métriques sont des **projections de lecture** ; pas de second moteur de transitions dans l'ERP. Les use cases chargent les faits, contrôlent les droits et versions, appellent le domaine puis persistent mutation et événement dans la même transaction. L'horloge et les preuves métier sont injectées, jamais déduites d'un état frontend.
+La liste, les compteurs et la prochaine action sont des projections. Une fiche n'hydrate pas toute sa chronologie. Le service applicatif charge faits et versions, vérifie autorité, appelle le domaine et persiste objet/événement/outbox dans la même transaction. L'UI ne décide ni du gain ni du remplacement d'un champ importé.
 
-### Gain validé par l'utilisateur le 9 octobre
+### Attribution d’une preuve de gain — ARB-04b confirmé
 
-- **Commerçant** : référencement accepté et dossier OnBoard lié. Le serveur vérifie commerçant/dossier et leur relation ; l'acceptation commerciale est une décision explicite tracée, pas un nouveau statut fictif du commerçant. L'activation n'est pas exigée. Un simple BROUILLON sans acceptation ni dossier ne vaut pas gain.
-- **Animation** : souscription activée, payée ou gratuite ; lire la preuve canonique d'activation et sa référence, jamais une note CRM ou un checkout. Un projet publié n'est pas requis par cette règle.
-- **Pro** : commande payée ; lire la preuve de paiement du propriétaire Achats via référence typée, sans confondre estimation, compte de crédit disponible et règlement. Une commande en attente n'est pas gagnée.
+`AttributionPreuveGain` est une règle de Prospection, alimentée par les ports de
+lecture des domaines canoniques. Clé typée unique : `(type_preuve, reference_id)`
+où `type_preuve` distingue commande Coffrets, souscription Animation et acceptation
+commerçant (référence du dossier OnBoard accepté, dont le commerce lié est vérifié).
+La cible doit correspondre à l’organisation/rattachement et à l’objectif du dossier.
+Une référence déclarée par le navigateur ne vaut jamais preuve de son état.
 
-Le port `LirePreuveGain` expose type, référence, faits pertinents, version/instant constaté et éligibilité, sans montant financier détaillé si le rôle ne peut pas le lire. L'adaptateur interprète les états des objets propriétaires ; le domaine CRM décide à partir des faits. Si deux systèmes ne partagent pas la transaction, l'instant constaté est conservé et les divergences ultérieures sont signalées ; ne pas promettre une cohérence distribuée forte inexistante.
+La validation de la preuve, l’attribution, la transition et l’événement sont une
+même unité transactionnelle, avec contraintes SQL sur la clé typée et versions du
+dossier. Verrouiller les faits canoniques nécessaires via leurs ports/UoW selon un
+ordre commun documenté, sans écriture dans le domaine producteur : une annulation
+concurrente doit soit précéder le refus du gain, soit suivre un gain déjà constaté.
+Deux dossiers gagnant avec la même preuve : un seul commit, l’autre reçoit 409
+`PREUVE_GAIN_DEJA_ATTRIBUEE`, sans transition ni effet partiel. Un rejeu sur le
+même dossier retourne l’effet déjà confirmé ; une réouverture conserve l’attribution.
+Les liens de consultation sont une relation distincte, sans cette exclusivité.
 
-## Matrice de droits cible — décision utilisateur du 9 octobre
+Aucune suppression d’attribution à l’archivage ni transfert automatique en V1.
+Le compteur de gains utilise les clés de preuve distinctes, avec date de première
+attribution dans la période, et ne double pas un gain après réouverture. Les états
+financiers actuels restent consultés chez leur producteur, jamais recalculés en CRM.
 
-Nouveaux scopes **proposés techniquement** : `prospection.consulter`, `prospection.gerer`, `prospection.importer`, `prospection.administrer`. La répartition fonctionnelle ci-dessous est validée. Les droits restent globaux, sans restriction par ville ni nouveau rôle Commercial.
+## Droits distincts gérés dans l'ERP — CA-19/29
 
-| Action | Lecteur | Backoffice | Finance seul | Admin |
-| --- | --- | --- | --- | --- |
-| Lire organisations, contacts, notes, tâches et carte | Oui | Oui | Non | Oui |
-| Modifier fiches/opportunités, consigner événements, gérer tâches | Non | Oui | Non | Oui |
-| Aperçu, confirmation et rapport d'import | Non | Oui | Non | Oui |
-| Corriger une note par ajout d'événement | Non | Oui | Non | Oui |
-| Correction sensible de rapprochement, levée d'opposition, politique de conservation | Non | Non | Non | Oui |
-| Rattacher / constater gain | Non | Gestion CRM + droits de la cible | Non sans autre rôle | Oui selon accès de la cible |
+Codes cibles **`crm.consulter`**, **`crm.gerer`**, **`crm.importer`**, **`crm.administrer`**, à ajouter au catalogue E69 et ses projections. Attribution/révocation uniquement par l'administration des comptes internes existante. Posséder `crm.administrer` ne donne jamais le droit de s'attribuer des habilitations.
 
-Backoffice + Finance = union des scopes explicites. Aucun scope CRM ne donne accès à SQLAdmin, aux factures ou aux exports financiers. Les corps, pièces et rapports d'import ne sont pas exposés à Lecteur par simple droit de lecture du portefeuille. La portée et l'enregistrement d'opposition sont détaillés dans les arbitrages ; ne pas réduire la restriction admin sur leur gestion par un endpoint générique d'édition.
-
-Si un utilisateur CRM ne peut ouvrir l'écran métier historique, afficher une référence autorisée et l'action « Demander le rattachement à un administrateur » comme tâche interne ; ne pas générer un lien interdit. L'absence de droits métier produit un refus serveur même si la cible est connue.
-
-## Contrat HTTP interne cible
-
-Préfixe **`/internal/prospection`**, tags `internal` et `prospection`, selon les [conventions API](../../architecture/transverse/conventions-api-openapi.md). Il s'agit d'un nouveau contrat à implémenter, aucun de ces endpoints n'est annoncé disponible. Source de conception : ce document ; schémas et génération OpenAPI seront livrés avec le producteur backend, export canonique ici si un fichier est consommé. Pas de contrat embarqué à modifier dans les trois frontends publics.
-
-Session interne E69, contrôle serveur à chaque lecture/commande et validation CSRF sur mutation. Tous les POST de commande portent `Idempotency-Key` ; toutes les modifications d'objets portent `expected_version`. Refuser les champs sensibles supplémentaires et les changements d'organisation d'un contact via un simple PATCH.
-
-| Routes relatives proposées | Entrées / sortie principale | Scope |
+| Autorisation | Attribution proposée | Capacités |
 | --- | --- | --- |
-| `GET /organisations`, `GET /organisations/{id}` | Filtres bornés ; fiche, contacts, anomalies, version | consulter |
-| `POST /organisations`, `PATCH /organisations/{id}` | Nom/type/provenance et champs explicitement présents ; UUID/version | gérer |
-| `POST /organisations/{id}/contacts`, `PATCH /contacts/{id}` | Identité professionnelle/coordonnées, provenance, version | gérer |
-| `POST /organisations/{id}/archivage` | `archive`, motif, version ; projection mise à jour | gérer |
-| `GET /opportunites`, `GET /opportunites/{id}`, `POST /opportunites`, `PATCH /opportunites/{id}` | Champs non statutaires ; organisation/axe/objet requis à création | consulter / gérer |
-| `POST /opportunites/{id}/transitions` | Étape cible, motif, date de réexamen ou référence de preuve, version | gérer + preuve autorisée |
-| `GET /opportunites/{id}/evenements`, `POST /opportunites/{id}/evenements` | Type, `occurred_at`, texte, `corrige_evenement_id` et motif éventuels | consulter / gérer |
-| `GET /taches`, `POST /opportunites/{id}/taches`, `POST /taches/{id}/actions` | Type/contact/canal/échéance/responsable ; terminer/reporter/annuler/réaffecter + version | consulter / gérer |
-| `POST /organisations/{id}/oppositions`, `POST /oppositions/{id}/levee` | Portée, motif, origine/preuve, version | administrer selon matrice validée |
-| `GET /cibles-metier`, `POST /opportunites/{id}/rattachements` | Type + ID canonique, motif/version, pas URL libre ; résumé autorisé | gérer + droits métier |
-| `GET /indicateurs`, `GET /carte` | Même filtre normalisé ; compteurs distincts, points/groupes bornés | consulter |
-| `GET /communes` | Recherche bornée nom/INSEE/code postal, candidats et provenance | consulter |
-| `POST /imports`, `GET /imports/{id}`, `PUT /imports/{id}/mapping` | Upload privé, métadonnées, mapping versionné | importer |
-| `POST /imports/{id}/apercus`, `POST /imports/{id}/confirmation`, `POST /imports/{id}/reprise` | Plan signé côté serveur/empreinte, choix des lignes, versions ; opération consultable | importer |
-| `GET /imports/{id}/rapport`, `POST /imports/{id}/annulation` | Bilan paginé ; annulation avant écriture / arrêt des lignes non traitées | importer |
-| `POST /imports/{id}/corrections` | Corrections administrées de rattachements, motif et versions ; jamais suppression globale | administrer |
+| Consulter CRM | Attribution explicite sur LECTEUR, BACKOFFICE ou FINANCE | Ouvrir PWA, listes et fiches ; lecture seule |
+| Gérer CRM | Attribution explicite sur BACKOFFICE | Saisie, notes, tâches, opposition protectrice, dossiers et archivage ; inclut consulter |
+| Importer CRM | Attribution explicite sur BACKOFFICE avec gérer | Fichier, aperçu, confirmation, reprise et rapports privés |
+| Administrer CRM | Attribution explicite sur BACKOFFICE avec gérer | Levée d'opposition motivée et correction sensible de lien source ; pas de gestion des comptes ERP |
+| Administrateur plateforme | Comportement administratif existant conservé | Toutes les capacités selon les contrôles administrateur actuels, audit inchangé |
 
-Noms JSON en `snake_case` pour ce nouveau contrat, identifiants UUID hors références typées ; adaptateurs vers contrats existants camelCase explicites. `null` efface uniquement un champ facultatif autorisé ; champ absent = conserver. Limites techniques proposées : listes 50 par défaut / 200 maximum ; texte de note 4 000 caractères ; recherches maximum 200 caractères ; compteurs séparés des résultats paginés. L'API refuse limites excessives plutôt que charger tout le portefeuille.
+Aucune attribution automatique aux comptes non administrateurs existants, même Backoffice ou Finance. L'ERP affiche une section « Localeo CRM » et ses cases de droits dépendantes ; refus serveur si combinaison incohérente. Le catalogue actuel `ROLES_AUTORISATIONS_DEDIEES` associe une autorisation à un seul rôle : la consultation CRM autorisée pour trois rôles requiert une relation vers un ensemble de rôles éligibles (ou une politique équivalente explicite). Conserver strictement les rôles éligibles des autorisations existantes ; tester cette cardinalité et la non-régression. Les listes fermées, limites DTO, catalogue, registre des routes, projection de session, menus et tests de profils évoluent ensemble. Ne pas utiliser `metier.consulter` comme substitut.
 
-Réponse de liste : `{items, page, page_size, total, filters, generated_at}`. `filters` est la représentation normalisée utilisée aussi par la carte ; les mutations concurrentes peuvent changer les totaux entre deux lectures, l'UI recharge alors les vues ensemble. Pas de promesse de snapshot persistant implicite.
+Les droits ERP déjà possédés par un profil restent les siens. Un utilisateur **exclusivement CRM sans aucun autre droit ERP** demanderait une évolution du modèle de rôles, hors demande actuelle. Les données CRM sont un portefeuille interne global ; « Mes dossiers » filtre par responsable, ce n'est pas une isolation par ville/tenant. Aucune donnée CRM n'est accessible aux comptes commerçants/partenaires/habitants.
 
-Exemple de commande de tâche (UUID d'exemple synthétique) :
+Lectures vérifiées à chaque requête ; mutations et imports différés relisent l'autorité courante avec `authorization_version`. Révocation pendant traitement : suspendre les unités suivantes, ne pas annuler les groupes déjà validés. Une ancienne clé d'idempotence ne contourne pas la révocation. Rattachement et gain exigent aussi les droits de lecture/commande du domaine cible ; masquer un lien interdit ne remplace pas ce contrôle.
 
-```json
-{
-  "action": "REPORTER",
-  "expected_version": 3,
-  "echeance": "2026-11-12T09:00:00+01:00",
-  "fuseau": "Europe/Paris",
-  "motif": "Créneau convenu avec l’interlocuteur"
-}
-```
+## PWA, session et confidentialité
 
-Succès synchrone `200/201` avec objet et version ; import en file `202` avec ID d'opération et URL de suivi, pas succès métier prématuré. Erreur structurée `{code, message, correlation_id, field_errors?}` : `401` session, `403` habilitation, `404` absent/inaccessible selon contrat d'accès, `409` version/rejeu incompatible/opposition/transition, `413` volume fichier, `422` données ou mapping invalides, `429` quota technique, `503` dépendance indisponible. Ne pas exposer les coordonnées d'un doublon inaccessible dans une erreur.
+Manifest propre, `id`, `start_url` et scope `/internal/crm/`, icônes et nom CRM ; service worker limité à ce chemin. Les fichiers d'installation sont neutres. Shell statique versionné seulement en cache ; toutes pages privées, API, notes, contacts, fichiers/rapports et réponses d'erreur privées sont `Cache-Control: no-store` et exclus du SW. Pas de persistance de fiche ou brouillon dans LocalStorage/IndexedDB. Purge des caches privés historiques éventuels à l'installation de la nouvelle version.
 
-## Concurrence et idempotence
+Reprendre le cycle de mise à jour PWA existant : proposer une mise à jour uniquement si une version nouvelle est disponible, préserver les saisies en cours avant rechargement. Déconnexion purge les données en mémoire et détache les abonnements CRM de cette session/appareil ; changement de compte ne réutilise aucun abonnement lié à l'ancien utilisateur. En compte révoqué, bloquer l'accès sans afficher une ancienne fiche.
 
-Clé HTTP indexée par acteur, commande et ressource, avec empreinte du corps : même clé/même corps = résultat conservé ; même clé/autre corps = `409`. Réautoriser avant de rejouer une réponse ; une révocation ne doit pas permettre de récupérer contacts/rapports par ancienne clé. Transaction unique pour objet, événement et résultat de commande. Les champs de note ne sont pas placés en logs.
+Authentification interne et CSRF sur mutation ; destination de retour autorisée dans CRM uniquement, aucun redirect libre. Le clic sur un rappel passe par session puis contrôle d'accès courant. Pas de token de session, contact ou note dans un URL/payload push. Permissions navigateur WebPush demandées seulement après action explicite. Tester installation, routes profondes, rechargement, offline, refus de permission et retrait d'accès sur mobile/PC.
 
-Version optimiste de chaque agrégat ; un conflit propose relecture/comparaison et ne remplace jamais la version serveur. Une note est un ajout indépendant avec son propre UUID, pas un écrasement de toute chronologie. Opposition et création/report de tâche sollicitante verrouillent la même racine organisation (ordre organisation → opportunité → tâche), puis relisent les oppositions dans la transaction ; un contrôle préalable dans l'UI ne suffit pas.
+## Contrat API cible
 
-Une contrainte de lien porte `(opportunite_id, type_cible, cible_id)` et une contrainte protège le lien principal actif par type. Deux requêtes gagnantes sur la même opportunité ne créent pas deux événements. L'utilisation d'une même preuve de vente par plusieurs opportunités fait l'objet du complément ARB-04b : proposition d'une seule affaire gagnée par preuve, non acquise par la seule validation des trois règles de gain. Ne pas implémenter une contrainte globale ou un partage implicite avant cette décision. Le détail de reprise inter-domaines est celui des [parcours](parcours-regles.md), sans transaction distribuée inventée.
+Préfixe **`/internal/prospection`**, tags `internal` et `prospection`. Source canonique de conception : ce dossier ; générateur OpenAPI à maintenir dans le backend à l'implémentation, export documentaire contrôlé ici si consommé. Aucun endpoint ci-dessous annoncé existant. Consommateurs : PWA CRM, ERP pour habilitations/liens, worker de rappels/import. Les contrats publics Pro/Animation/Live ne changent pas.
 
-## Données et compatibilité
+| Famille | Commandes et lectures principales | Accès |
+| --- | --- | --- |
+| Prospects | GET/POST `/organisations`, GET/PATCH `/organisations/{id}` ; contacts paginés et PATCH ciblé ; archivage explicite | Consulter / gérer |
+| Dossiers | GET/POST `/opportunites`, GET/PATCH cible, POST `/{id}/transitions` et `/{id}/rattachements` | Consulter pour GET / gérer pour mutation + droits métier si nécessaire |
+| Chronologie | GET/POST `/organisations/{id}/evenements`, dossier optionnel vérifié ; correction référant événement/version | Consulter / gérer |
+| Tâches | GET/POST `/taches`, POST `/taches/{id}/actions` (terminer/reporter/annuler/réaffecter), GET `/rappels` | Consulter / gérer ; cible et responsable autorisés |
+| Oppositions | POST `/organisations/{id}/oppositions` (cible structure ou `contact_id` de cette structure), POST `/oppositions/{id}/levee` | Gérer pour protéger / administrer pour lever |
+| Carte / communes | GET `/carte` (filtres, bbox/zoom, groupes bornés), GET `/communes` (recherche bornée), POST `/organisations/{id}/localisation` (INSEE confirmé/version) | Consulter / gérer |
+| Tableau | GET `/tableau-de-bord`, `/indicateurs`, `/responsables` | Consulter ; responsables éligibles seulement |
+| Import | GET/POST `/sources-import` ; POST `/imports` multipart fichier + source/mode/format/responsable ; GET lot/aperçu/rapport ; POST décisions/confirmation/reprise/arrêt | Importer ; administration en plus pour changer un lien source existant |
+| Notifications | GET/PATCH `/preferences-rappels/me`, POST `/abonnements-push`, DELETE `/abonnements-push/{id}` | Gérer ; propriétaire imposé par session, pas par corps |
 
-Tables additives proposées : organisations, contacts, opportunités, tâches, oppositions, événements, liens typés, lots/lignes d'import et résultats de commande ; cache communal séparé. Contraintes FK, versions non nulles, index sur axe/étape/responsable/échéance et identités de provenance. L'import peut créer plusieurs entités liées dans une transaction de ligne ; aucune ligne « réussie » avec un contact créé et une opportunité perdue.
+Collections d’objets CRM (hors projection cartographique agrégée, plafonnée explicitement à 500 groupes) : `limit=25`, maximum 100, curseur keyset opaque lié à filtres/tri/version/autorité, `items`, `next_cursor`, `has_more`. Fiche = résumé et sous-listes paginées ; pas de tableau illimité de contacts/tâches/notes. Recherche nom/commune/email/téléphone normalisés ; index adaptés, champs libres exclus des logs. Prévoir tri `(updated_at DESC,id DESC)` avec navigation vivante annoncée ; rappels `(due_at,id)`. Un changement de filtre invalide le curseur ; aucun total exhaustif obligatoire à chaque page. Carte : projection agrégée `groups/truncated/bbox/zoom/generated_at` et totaux distincts, sans curseur ; son clic ouvre une liste de prospects keyset 25/100. Au-delà de 500 groupes, agréger ou signaler la troncature et demander zoom/filtre.
 
-Aucune migration automatique des commerçants, partenaires ou comptes de crédit existants en prospects. Numéro SQL attribué seulement à l'implémentation après inspection des migrations courantes. Déploiement additif et option désactivée ; retour arrière applicatif par désactivation, sans promettre de rollback destructif des données. Les API existantes et leurs consommateurs gardent leurs contrats ; seuls backend/ERP et générateur de démonstration ont des adaptations directes prévues.
+Commandes POST/PATCH/DELETE métier : `Idempotency-Key` ; modification : `expected_version`. Clé liée à acteur/action/cible/empreinte, conflit si corps différent. `DELETE` abonnement contient version et conserve l'idempotence de révocation. Réponses de mutation : identifiant/version/effet confirmé. API stricte : champs inconnus refusés, IDs cross-prospect refusés, serveur décide auteur et destinataire. Tâche sollicitante : cible STRUCTURE ou contact_id du même prospect, canal explicite ; contrôler opposition globale, du contact et de la coordonnée normalisée réutilisée. Les lectures de rattachements ne révèlent que les résumés métier autorisés.
 
-## Complément E71-EVOL-01 — import mensuel différentiel
+Erreurs structurées avec code, message exploitable, champs si applicable et corrélation sans données personnelles : 401 session ; 403 droit ; 404 cible inexistante/inaccessible sans fuite ; 409 `VERSION_CONFLICT`, `IMPORT_PLAN_OBSOLETE`, `SOURCE_IDENTITY_CONFLICT`, `IDEMPOTENCY_CONFLICT` ; 413 fichier trop grand ; 422 format/transition/`PREUVE_GAIN_INSUFFISANTE`/opposition ; 429 saturation avec reprise ; 503 dépendance indisponible. L'UI conserve la saisie et propose une action de résolution adaptée.
 
-Le domaine `LotImportProspection`, avec une politique pure `ComparerDeltaSource`, porte la comparaison B/C/N et les protections décrites dans [Import mensuel](import-carte.md). L’ERP affiche les décisions ; il ne calcule pas seul les champs remplaçables.
+### Contrats de travail de l’import — CA-08 à 12/28
 
-Étendre le contrat cible avec `GET/POST /profils-import` et `PATCH /profils-import/{id}` (scope importer, version obligatoire à modification). Le dépôt d’un lot référence `profil_id`, `profil_version`, `periode_source` et la révision de source précédente. L’aperçu renvoie par champ `baseline_source`, `valeur_crm`, `nouvelle_source`, `protection_locale`, `classification`, `decision_proposee`, `expected_version` et un identifiant de delta. Ces valeurs personnelles restent dans les réponses autorisées, pas dans les logs.
+Toutes les routes suivantes sont sous `/internal/prospection`. UUID, versions et
+clés d’idempotence sont contrôlés côté serveur ; le navigateur ne choisit ni
+l’auteur du lot ni les résultats d’application.
 
-La confirmation contient les IDs de deltas retenus et les décisions explicites ; les trois valeurs ne sont jamais acceptées comme preuve fournie par le navigateur. Le serveur les relit depuis son aperçu et la base. Les conflits exclus restent dans le rapport. Les endpoints existants mapping/aperçu/confirmation/reprise sont conservés, avec plan versionné et immuable après début.
+| Route cible | Entrée / sortie minimale et comportement |
+| --- | --- |
+| GET/POST `/sources-import` | Liste paginée ; création `{namespace, libelle}` normalisée. Même namespace = conflit explicite permettant de choisir la source existante ; aucune nouvelle source silencieuse. |
+| POST `/imports` | Fichier + `source_id`, `mode=INIT\|UPSERT`, `format_version=1`, `responsable_id`. Réponse 202 avec `id`, `version`, `etat`, `status_url` ; staging privé, aucun prospect créé. |
+| GET `/imports/{id}` | État/version, empreinte du fichier, révision du plan, groupes totaux/traités et compteurs de résultat. Aucun chargement du contenu entier. |
+| GET `/imports/{id}/groupes` | Page 25/100 de références, lignes, effets proposés, champs conservés et anomalies. Les sous-listes de candidats/contacts restent bornées. |
+| POST `/imports/{id}/decisions` | `expected_version`, groupe, objet source visé (type ORGANISATION/CONTACT/DOSSIER et référence) et choix `EXCLURE` le groupe, `RAPPROCHER` (UUID existant du bon type/parent) ou `CONFIRMER_DISTINCT` (candidats examinés). Aucun transfert d’une clé existante par ce parcours. Recalcule un nouveau plan d’aperçu, sans mutation CRM. |
+| POST `/imports/{id}/confirmation` | `expected_version` + `plan_revision` ; sélection d’exclusions stockée dans le plan. Réponse 202 avec le même lot ; fichier/source/mode/destinataires/groupes/versions sont ensuite immuables. Rejeu du même plan retourne l’opération initiale. |
+| POST `/imports/{id}/arret` et `/reprise` | Version attendue ; arrêt entre groupes puis `INTERROMPU`. Reprise du même plan avec les droits courants du confirmateur d’origine ; groupe déjà validé inchangé. Un administrateur ne remplace pas implicitement cet acteur : nouveau lot/aperçu s’il reprend le travail sous son identité. |
+| GET `/imports/{id}/rapport` | Rapport privé borné/streamé, droits import actuels ; cellules neutralisées pour Excel sans modifier la donnée métier. |
 
-Persistance cible additionnelle : profil de mapping versionné, période/ordre de source, état par champ (observé/reconnu/appliqué, protection locale, décision), liens stables de provenance et versions. Les mutations manuelles/imports partagent les marqueurs de provenance ; une modification d’un champ puis son retour à la valeur précédente ne retire pas automatiquement sa protection. Aucune migration SQL exécutée pendant cette spécification. La conservation doit couvrir ces références de comparaison ; si elles ont été purgées, imposer une nouvelle qualification plutôt qu’une mise à jour aveugle.
+Une décision d’aperçu ne crée pas encore de lien source. Le lien de rapprochement
+est validé avec son groupe lors de l’application ; deux sources peuvent pointer
+vers la même fiche explicitement, jamais par un rapprochement implicite.
+Une erreur de lecture/modification conserve le fichier en staging et les décisions
+valides ; un nouveau fichier crée un nouveau lot. Les états et bilans sont définis
+par le contrat d’import, sans interprétation propre à la PWA.
 
-## Complément E71-EVOL-02 — enrichissement de fiche commune
+## Rappels différés et concurrence
 
-Ajouter une entité métier `FicheCommuneProspection` référencée par INSEE et une section annuelle identifiée par `(fiche_commune_id, code_section=COFFRETS_ELUS, annee=2026)`. Cette fiche et ses données éditoriales sont distinctes du cache géographique technique : actualiser le cache ne remplace jamais la section. `SectionCommuneProspection` porte version, valeurs par clé de colonne stable, provenance, protections locales et décisions de delta. Ne pas ajouter ces contenus aux objets Ville publiés.
+Tables dédiées aux abonnements **utilisateur interne/appareil CRM** ; ne pas réutiliser les FK participant/installation des rappels Live. Réutiliser validation de transport, gestion VAPID et charte email, avec adaptateur CRM. Endpoint WebPush validé contre SSRF selon le mécanisme existant ; URL d'abonnement et clés restent privées et absentes des logs.
 
-Étendre les routes cibles : `GET /communes/{code_insee}/fiche` (consulter), `PATCH /communes/{code_insee}/sections/coffrets-elus-2026` (gérer, version/CSRF/idempotence, uniquement contenu éditorial autorisé). L’import utilise les mêmes règles de section avec le scope importer ; la résolution/changement de rattachement relève de la correction sensible admin quand elle modifie une association déjà validée. Le modèle d’aperçu porte `destination=PROSPECT_PIPELINE|SECTION_COMMUNE`, l’INSEE confirmé, l’année, les deltas par champ et ses totaux séparés. Les en-têtes du classeur ne deviennent pas des noms de colonnes SQL arbitraires.
+**Adresse de rappel : fait d’Identité interne.** Ajouter une preuve
+`email_verified_version` / `email_verified_at` portée par le compte interne,
+indépendante de `ACTIF` et du mot de passe. La consommation valide d’une invitation
+INITIALISATION ou REINITIALISATION établit ce fait pour l’`email_version` courante,
+dans la transaction existante. Changer l’adresse l’invalide ; ni un administrateur
+qui la saisit ni une connexion avec l’ancien mot de passe ne la vérifie.
 
-La fiche est accessible depuis la localisation d’une organisation, la carte ou une recherche de communes CRM ; navigation ERP et retour au contexte conservés. Lecteur et Backoffice consultent selon les droits CRM ; Finance seul n’accède pas aux contacts de cette section. Les 33 champs peuvent inclure données professionnelles de personnes : mêmes restrictions d’accès, stockage privé et exclusion des logs que les fiches CRM. Leur conservation/provenance/deltas entrent explicitement dans ARB-07, sans durée déduite de l’année du titre.
+Le port de lecture d’identité fournit au CRM l’adresse interne courante, sa
+version et ce fait de vérification. L’opt-in e-mail CRM est associé à cette version ;
+après changement d’adresse, réactiver volontairement l’option une fois la nouvelle
+adresse vérifiée par le parcours interne existant. Le CRM ne déclenche pas de
+réinitialisation de mot de passe et ne porte pas sa propre identité. La migration
+initialise la preuve uniquement depuis une invitation consommée (`used_at`) de
+même `email_version` et du même utilisateur ; sinon les champs restent absents.
+Une preuve établie reste sur le compte après purge de l’invitation selon sa politique.
+Tester la non-régression E69 d’initialisation/réinitialisation/modification d’adresse.
 
-Persistance additive à prévoir pour fiches/sections communales et correspondances d’import, contraintes uniques et versions ; aucun changement d’API publique. Aucun chargement réel de ce contenu effectué pendant la spécification.
+L’intention et l’email sortant référencent la version d’adresse, jamais une copie
+considérée comme autorité. Avant revendication transport, identité active, droits,
+version vérifiée et opt-in doivent encore correspondre ; sinon annuler l’intention.
+La modification d’adresse après enqueue ne redirige donc pas un ancien rappel vers
+la nouvelle adresse. La file interne reste disponible sans preuve d’adresse.
+
+L'ordonnanceur capture au plus 100 tâches dues éligibles par lot ; insère une intention unique et la notification interne. Pour WebPush : unicité `(task_id,reminder_revision,user_id,subscription_id)` ; e-mail et interne : `(task_id,reminder_revision,user_id,channel)`. Report/réaffectation incrémentent la révision et annulent les anciennes intentions non remises. Paramètres et préférences sont relus avant création et avant expédition. Un responsable sans accès de gestion courant ne reçoit plus de relance ; la tâche devient « à réaffecter » visible à l'équipe autorisée.
+
+Pour l'e-mail, ne pas se limiter à remplir aujourd'hui un e-mail sortant prévu dans un mois : enregistrer d'abord l'intention CRM, matérialiser l'outbox à échéance, puis appliquer une garde CRM au moment où le batch revendique l'envoi. Documenter/tester cette extension du port d'éligibilité pour ne pas envoyer un rappel annulé entre enqueue et livraison. Annulation avant revendication empêche l'envoi ; après début de remise au transport, un message peut encore arriver. Même frontière pour push. Aucun verrou DB pendant le réseau, baux courts et jetons de clôture empêchant un ancien worker de finaliser une nouvelle révision.
+
+Transport : retries limités (proposition 3 avec attente croissante), timeout, expiration de rappel proposée 24 h après échéance ; les plus anciens restent visibles mais ne créent pas de rafale externe après panne. Statuts distincts en attente/remis au transport/échec certain/expiré/issue incertaine. Réponses push 404/410 désactivent l'abonnement. Une issue incertaine n'est pas rejouée aveuglément. Un nouvel appareil ne réexpédie pas les rappels déjà traités ; prochain rappel seulement. Activation d'un canal exclut les échéances antérieures à son activation.
+
+Verrous métier dans un ordre commun : prospect → dossier éventuel → tâche ; contrôle d'opposition dans la même transaction que programmation/report. L'import applique ses groupes atomiques et marqueurs de protection selon le [contrat](import-carte.md). Aucun effet fournisseur pendant un import.
+
+## Données, migrations et compatibilité
+
+Schéma additif proposé : prospects, contacts, dossiers, événements/corrections, tâches/révisions, oppositions, liens métier et sources stables, protections par champ, lots/groupes/lignes de staging et résultats, préférences, abonnements, intentions/délivrances CRM et cache communal (INSEE, centre, source/date). FK et versions obligatoires ; unicités de source, idempotence et rappels. Index FK des sous-listes. Extension additive de la preuve de vérification d’adresse E69 et index de reprise des invitations `(utilisateur_id, email_version, used_at)` si nécessaire, avec reprise bornée et conservative. Séparer données privées de fichier en stockage privé, audit technique par IDs/codes seulement.
+
+Numéro de migration à choisir à l'implémentation ; **aucune migration E71 exécutée ici**. Ne pas transformer toutes les organisations existantes en prospects ni migrer les abonnements push de Pro/Live. La migration ne donne aucun nouveau droit CRM aux profils existants. Mettre à jour simultanément le catalogue fermé des droits et le DTO avant toute attribution. Les fonctionnalités restent désactivées jusqu'à schéma/API/UI/worker cohérents.
+
+Backend seul directement modifié à l'implémentation (domaine, ERP/profils, CRM, batchs/générateur). Les trois autres dépôts applicatifs gardent leurs API et données ; tests de non-régression des liens si les destinations changent. L'email sortant partagé nécessite des tests empêchant une garde CRM de bloquer les emails d'autres domaines.
+
+## Performance : budgets de conception, non mesures
+
+Jeu N : 10 000 prospects, 30 000 dossiers, 60 000 tâches, 100 000 événements ; 10N fait croître séparément fiches et historique. 10 utilisateurs concurrents, puis paliers 1/5/10/20, charge mixte lecture/notes/import/rappels sur cible jetable. Seuils à confirmer par E59 avant activation, pas garanties acquises.
+
+| Chemin | Bornes / accès attendus | Budget initial et preuve prévue |
+| --- | --- | --- |
+| Liste/recherche/sous-listes | 25–100 racines en SQL, au plus 6 requêtes par page, enrichissements groupés ; index état/responsable/périmètre/étape + tri/ID, FK enfants, index de recherche adapté aux sous-chaînes | API p95 ≤ 1 s, p99 ≤ 2 s ; plans et lignes lues à N/10N, 25/100 résultats, page profonde, absence de N+1 |
+| Fiche / ajout note / transition | Résumé et IDs ciblés, historique paginé ; transaction courte, autorité/version | p95 ≤ 1 s, p99 ≤ 2 s ; notes concurrentes, droits révoqués et attente verrous |
+| Tableau / compteurs | Requête dédiée ou projection incrémentale datée ; aucun scan de journal à chaque visite | p95 ≤ 1 s ; cohérence après mutation et reconstruction bornée |
+| Carte | Groupes communaux/cluster côté SQL, 500 éléments max ; filtre d’accès avant agrégation, index INSEE et coordonnées/emprise, aucune jointure des notes/contacts | p95 ≤ 2 s, p99 ≤ 3 s ; N/10N, zone dense, non-localisés, 500 puis dépassement, mémoire navigateur bornée |
+| Import | 10 Mio/10 000 lignes, flux vers staging, groupe ≤ 100 lignes, un groupe/transaction, un import actif/source, 2 workers maximum | Accusé HTTP ≤ 1 s hors upload ; cible 10 000 lignes ≤ 120 s, mémoire additionnelle ≤ 128 Mio/worker ; panne/reprise, N/10N en lots |
+| Rappels | Index partiel `(remind_at,id)` tâches ouvertes et `(status,next_attempt_at,id)` outbox ; 100 prises/lot, 2 workers, 4 transports concurrents maximum | Planification 1 min, 99 % intentions dues préparées ≤ 2 min hors panne ; backlog 10 000 traité ≤ 10 min hors fournisseur, mémoire ≤ 64 Mio/worker |
+| PWA | 3 pages maximum retenues par liste, requêtes annulées si obsolètes, 1 rafraîchissement en vol ; aucun polling en arrière-plan | 360/390/1280 px ; interactions sans débordement, même requête bornée avec historique 10N |
+
+À saturation : imports en file persistée (10 lots actifs/attente maximum, puis 429), affichage d'état, pas un worker par ligne. Timeouts SQL/verrous/réseau, âge de file et erreurs mesurés. Consigner p50/p95/p99, débit, RSS, pool, verrous, plans PostgreSQL et temps de retour à la normale. Ne pas assouplir les règles de droits/atomicité pour satisfaire les budgets.
+
+## Exploitation, conservation et limites
+
+Configuration cible à ajouter, pas variables actuelles annoncées : activation CRM, stockage privé, limites/worker, politique de conservation, activation canaux et identité expéditeur. Réutiliser les secrets de transport existants selon procédure ; aucun secret dans les documents. Politique CRM par catégorie reste à arbitrer (ARB-07) avant données réelles ; ce point ne bloque pas les tests synthétiques.
+
+Le fournisseur cartographique, sa licence/attribution, couverture et quotas restent à choisir avant activation (ARB-06). Le port de géographie réutilise l'adaptateur `geo_api_gouv` derrière une façade de recherche CRM bornée ; aucun filtre de publication Marketplace. Le cache communal est indépendant des fiches Ville opérationnelles. Un échec du fond ou du référentiel n'empêche ni listes ni mutations CRM. La carte retourne groupes/prospects distincts et un état de couverture, sans transmettre les coordonnées professionnelles aux tiers.
+
+ARB-04b est confirmé : appliquer l’unicité typée ci-dessus, y compris en concurrence et après réouverture. Livrer et tester le guide utilisateur, les runbooks et le jeu synthétique selon la [matrice](verification-livraison.md). Aucun simple build, plan ou contrôle de liens ne valide ces comportements.

@@ -12,7 +12,7 @@ Commencer par le README du sujet, puis consulter ses règles, contrats et arbitr
 
 - **Terminée : EPIC 73**, [Animation et/ou Coffrets](epic-73-animation-et-ou-coffrets/README.md), spécification détaillée V1 du 17 octobre : 38 US, 63 critères, 147 décisions ; lots libres/QR/PIN, périmètres commerçants, modules/import/communication, parcours SaaS, migrations et reprise. Clôture technique le 1er novembre 2026 selon E73-DEC-CLOTURE-TESTS ; tests et extensions vérifiés, activation suivie séparément dans le bilan.
 
-- **À faire : EPIC 71**, [CRM de prospection](epic-71-crm-prospection/README.md), conception V0.1 du 9 octobre : parcours, droits, gain, import XLSX, carte et rattachements ; 24 critères reliés aux preuves prévues, arbitrages restants explicites.
+- **À faire : EPIC 71**, [Localeo CRM PWA](epic-71-crm-prospection/README.md), V1 du 3 novembre : Animation/Coffrets, droits ERP distincts, contacts/notes/suivi, rappels WebPush/e-mail facultatif, carte interactive maintenue et CSV INIT/UPSERT protégeant le contexte ; 28 critères actifs, 1 reporté, tests à produire.
 
 - **Terminée : EPIC 70**, [validation par PIN sur téléphone client](epic-70-validation-pin/README.md), spécification V1 du 5 octobre : droits, contrats, concurrence QR/PIN, notifications et 34 critères reliés aux preuves ; clôture sur tests le 2 novembre 2026 selon E70-DEC-CLOTURE-TESTS, sans déploiement.
 - **Terminée : EPIC 72**, [accès salariés Localeo Pro](epic-72-acces-salaries/README.md), spécification V1 du 5 octobre : invitations, option ERP, isolation des droits, sessions et 22 critères ; implémentation et vérification locales après publication E70.
@@ -63,10 +63,10 @@ Commencer par le README du sujet, puis consulter ses règles, contrats et arbitr
 | 68 | [Préparation et finalisation de l'onboarding](epic-68-preparation-onboarding/README.md) | En cours | Backend ERP/OnBoard, communications, documents, Commerçant |
 | 69 | [Profils et accès ERP/satellites](epic-69-acces-internes/README.md) | Terminée | Backend ERP, Support, Atelier, OnBoard, documents et sessions |
 | 70 | [Validation par PIN sur téléphone client](epic-70-validation-pin/README.md) | Terminée sur tests le 2 novembre 2026 | Backend/ERP, Commerçant, Marketplace/Live ; contrats Animation partagés |
-| 71 | [CRM de prospection](epic-71-crm-prospection/README.md) | À faire | Backend ERP ; liens OnBoard, Animation et Achats |
+| 71 | [Localeo CRM PWA](epic-71-crm-prospection/README.md) | À faire | Backend / PWA CRM / profils ERP ; carte, import et rappels ; liens OnBoard, Animation et Achats |
 | 72 | [Accès salariés Localeo Pro](epic-72-acces-salaries/README.md) | Terminée sur tests le 1er novembre 2026 | Backend/ERP, Commerçant ; attribution des validations partagées |
 | 73 | [Animation et/ou Coffrets](epic-73-animation-et-ou-coffrets/README.md) | Terminée | Backend/ERP et satellites, Animation, Commerçant, Marketplace/Live |
-| 74 | [Tombola publique sans commerçant](epic-74-tombola-publique/README.md) | À faire | Backend/ERP, Animation, Marketplace/Live ; Pro pour remise et non-régression |
+| 74 | [Tombola publique sans commerçant](epic-74-tombola-publique/README.md) | En cours | Backend/ERP, Animation, Marketplace/Live ; Pro pour remise et non-régression |
 
 ## Contrats et historique
 

@@ -1,50 +1,77 @@
-# EPIC 71 — CRM de prospection
+# EPIC 71 — Localeo CRM, prospection Animation et Coffrets
 
-Version de conception : **V0.3 — 9 octobre 2026**. Source : [backlog E71](../../roadmap/a-faire/epic-71-crm-prospection-animation-coffrets-pro-backlog.md), critères **E71-CA-01 à 24** conservés. L'état produit reste **À faire** dans la [roadmap](../../roadmap/README.md).
+Spécification **V1.1 — 3 novembre 2026**, évolution **E71-EVOL-03**. [Backlog et critères](../../roadmap/a-faire/epic-71-crm-prospection-animation-coffrets-pro-backlog.md). État produit inchangé : **À faire** dans la [roadmap](../../roadmap/README.md). Aucun CRM implémenté ou déployé par cette phase.
 
-Cette spécification détaille une cible ; elle ne constate ni implémentation, ni import réel, ni validation des propositions de cadrage. Les décisions utilisateur du 9 octobre sur gain, droits et conversion sont intégrées ci-dessous ; les autres propositions restent identifiées. Le fichier privé Gironde a été relu le 9 octobre pour E71-EVOL-02 ; il n’a été ni modifié ni copié dans Git.
+## Objectif
 
-## Évolution E71-EVOL-01 — import mensuel
+Une PWA **Localeo CRM** simple pour savoir qui contacter, retrouver les échanges et préparer la prochaine action. Elle couvre **Animation** et **Coffrets**, avec une même fiche prospect et plusieurs contacts/dossiers commerciaux si nécessaire. Les comptes sont ceux de l'ERP ; les droits CRM sont attribués distinctement dans l'ERP.
 
-Demande utilisateur du 9 octobre : réception mensuelle du classeur Gironde, chargement simple et gestion des deltas préservant les modifications CRM. [Parcours détaillé](import-carte.md) : profil mémorisé, comparaison à trois versions par champ, conflits explicites, aucune suppression des absents, reprise idempotente. Cette décision précise ARB-01 et CA-08 à 12/24 ; elle ne tranche pas les autres arbitrages.
+L'utilisateur voit des **Prospects**, des **Dossiers commerciaux** et des **Rappels**. Le terme technique « opportunité » désigne un dossier commercial, pas une deuxième fiche prospect à remplir. Coffrets distingue le recrutement d'un commerçant partenaire de l'achat de coffrets par une entreprise/CSE ; « Pro » ne désigne ici ni l'application commerçant ni un accès salarié.
 
-## Évolution E71-EVOL-02 — deux destinations distinctes
+## Périmètre V1 retenu
 
-Décision du 9 octobre : import structuré exclusivement depuis **Pipeline qualifié** ; les 33 colonnes de **Coffrets & élus 2026** alimentent une section dédiée de chaque fiche commune CRM, avec rattachement confirmé et deltas mensuels par champ. Autres onglets exclus. [Analyse et mapping complets](import-carte.md). Classeur relu sans modification le 9 octobre.
+- **Aujourd'hui** : mes rappels en retard, du jour et à venir ; dossiers actifs sans prochaine action ; raccourcis « Nouveau prospect » et « Ajouter une note ».
+- **Prospects** : recherche, filtres, fiche contacts, chronologie, notes et dossiers Animation/Coffrets ; suivi conservé après rattachement à un client existant.
+- **Carte interactive** : prospects regroupés par commune, filtres partagés avec la liste et accès aux fiches ; localisation communale indicative, y compris hors catalogue Localeo.
+- **Suivi commercial** : liste et vue par étapes, responsable, priorité simple, prochaine action et résultat gagné/perdu ; aucun devis ou paiement recréé dans le CRM.
+- **Rappels** : tâches datées, report/annulation/réalisation, notification interne persistante, WebPush volontaire et e-mail facultatif au responsable interne.
+- **Imports** : CSV standard produit depuis Excel, aperçu puis confirmation, modes INIT et UPSERT sans écrasement du suivi commercial.
+- **Application installable** : identité visuelle des applications de gestion Localeo, navigation PC/mobile, mêmes comptes internes, accès CRM distinct.
 
-## Lecture
+Compléments recommandés inclus dans la conception : responsable et prochaine action visibles, détection des doublons avant création, « Ne plus contacter », archivage réversible, filtres mémorisés dans l'URL et indicateurs simples. Ils répondent à la continuité du suivi ; pas de scoring automatique ou de paramétrage de pipeline complexe.
 
-| Document canonique | Contenu |
+## Lire et préparer le fichier
+
+| Document | Utilité |
 | --- | --- |
-| [Parcours et règles](parcours-regles.md) | Acteurs, étapes, tâches, opposition, UX et indicateurs |
-| [Architecture et contrats](architecture-contrats.md) | Existant vérifié, agrégats, API cible, droits, concurrence et intégrations |
-| [Import et carte](import-carte.md) | Mapping Gironde, rapprochement, reprise, localisation et limites techniques |
-| [Vérification et livraison](verification-livraison.md) | Traçabilité des 24 critères, tests à produire, données, conservation et activation |
+| [Parcours et règles](parcours-regles.md) | Écrans, saisie rapide, étapes, notes, rappels, passage aux parcours métier |
+| [Import INIT / UPSERT](import-carte.md) | Colonnes, clés stables, exemples et protection des données existantes |
+| [Modèle CSV vide](modele-import.csv) | En-têtes exacts à remplir depuis Excel ; aucune donnée réelle |
+| [Architecture et contrats](architecture-contrats.md) | PWA, profils ERP, domaine, API, notifications, concurrence et capacité |
+| [Vérification et livraison](verification-livraison.md) | Tests prévus, traçabilité, migrations et activation |
 
-## Acquis et périmètre
+## Ce qui change par rapport à octobre
 
-Acquis du cadrage : prospection Animation, commerçants partenaires et **coffrets achetés par entreprises/CSE** ; tâches et rappels internes ; import XLSX contrôlé ; carte de France et historique. Aucun message externe, compte, commande ou abonnement ne découle d'un import. « Pro » ne désigne pas les accès salariés E72.
+| Décision antérieure | Cible E71-EVOL-03 |
+| --- | --- |
+| Module Prospection dans l'ERP, sans nouvelle PWA | **Remplacé par la demande** : PWA Localeo CRM autonome en navigation ; identité et attribution des droits restent dans l'ERP |
+| Droits CRM automatiquement portés par Lecteur/Backoffice | **Remplacé par la demande** : autorisations CRM explicites ; aucun droit CRM automatique pour les comptes non administrateurs existants |
+| Rappels uniquement dans l'ERP | **Étendu par la demande** : file CRM + WebPush opt-in + e-mail facultatif, destinés à l'équipe interne |
+| Import propre au classeur Gironde, profils mensuels et comparaison à trois versions | **Choix utilisateur confirmé le 3 novembre** : CSV normalisé, identifiants stables et enrichissement des champs vides uniquement ; les divergences restent à traiter dans la fiche |
+| Carte interactive | **Maintien confirmé par l’utilisateur le 3 novembre** : carte communale, filtres, groupes et accès aux fiches ; CA-13 actif |
+| Sections communales « Coffrets & élus 2026 » | Report confirmé avec l’ancien import Gironde ; CA-24 conservé comme reporté, jamais présenté comme validé |
+| Preuves de gain et rattachement explicite aux parcours métier | **Conservés** : règles décidées le 9 octobre ; l'import ou un statut ne crée ni accès, ni abonnement, ni commande |
 
-Le backend et son ERP constituent le périmètre applicatif direct. Les parcours OnBoard, Animation et Achats sont des destinations métier, pas des bases CRM. Les interfaces publiques Animation, Commerçant et Marketplace n'exposent pas les prospects et ne nécessitent pas de nouveau contrat en V1 proposée. Une création métier intégrée supplémentaire doit être conçue avant son développement.
+E71-EVOL-01 (import mensuel) et E71-EVOL-02 (deux destinations du classeur) restent des décisions historiques ; leur réalisation spécifique est reportée sur choix utilisateur confirmé le 3 novembre. Un réimport régulier reste possible avec le CSV standard. L'analyse historique du classeur reste dans l'historique Git ; elle n'est plus le contrat d'import courant. Aucun ancien fichier n'a été relu, modifié ou importé ici.
 
-## Décisions restant à prendre
+La carte est explicitement maintenue en V1. Le CSV standard seul et le report du traitement spécifique Gironde sont confirmés par l’utilisateur. Les choix techniques de simplicité ci-dessous sont des décisions de conception ; ils ne constituent pas des fonctionnalités déjà implémentées.
 
-Chaque ligne distingue **décision validée** et **proposition restante**. Les choix techniques bornés de la conception peuvent être affinés avec des mesures ; les règles métier ne peuvent pas être choisies silencieusement pendant l'implémentation.
+## Arbitrages et préparation
 
-| ID du backlog | Proposition de cette version | Partie bloquée / décision attendue |
+| Identifiant conservé | Décision ou proposition actuelle | Conséquence |
 | --- | --- | --- |
-| E71-ARB-01 | XLSX seul en V1 ; mapping explicite par onglet et exceptions de ligne ; 10 Mio compressés et 10 000 lignes métier par lot comme cible technique initiale | Valider colonnes/enrichissements et volume réel ; CSV reste hors contrat proposé ; import réel interdit tant que le mapping pilote n'est pas approuvé |
-| E71-ARB-02 | **Acquis** : achats de coffrets entreprises/CSE | Aucun arbitrage sur le sens de Pro |
-| E71-ARB-03 | **Acquis** : rappels internes ; proposer une file ERP calculée, sans résumé email V1 | Confirmer l'absence de résumé email ; la file et les échéances peuvent être conçues indépendamment |
-| E71-ARB-04 | **Gain validé le 9 octobre** : référencement accepté + dossier OnBoard lié ; souscription Animation activée payée/gratuite ; commande Pro payée. Trois axes retenus | Parcours d’étapes détaillé proposé ; adaptation des preuves canoniques et décision d’acceptation explicite décrites dans l’architecture |
-| E71-ARB-04b | Complément proposé : une seule opportunité gagnée par preuve de vente | Décider l’unicité inter-affaires, distincte de l’idempotence sur une même opportunité |
-| E71-ARB-05 | **Validé le 9 octobre** : Backoffice consulte/gère/importe ; Lecteur consulte fiches/contacts ; Finance sans accès implicite ; admin corrections sensibles/oppositions ; droits métier additionnels pour conversion | Ajouter les scopes et contrôles E69 ; aucun accès SQLAdmin implicite |
-| E71-ARB-06 | Carte communale ; une commune principale facultative par organisation ; liste utilisable partout, vues Outre-mer distinctes si couverture retenue | Confirmer Outre-mer, multi-sites et volume/utilisateurs ; choisir fournisseur, licence et contrat de couverture avant carte exploitable |
-| E71-ARB-07 | Opposition organisation/contact, par canal et axe ou globale ; levée admin motivée avec preuve ; conservation configurable par catégories | Valider la portée d'opposition et les durées/déclencheurs de purge CRM avec le responsable de politique Localeo ; pas de durée inventée par analogie avec les achats |
-| E71-ARB-08 | **Validé le 9 octobre** : rattacher un objet existant ou ouvrir son parcours actuel puis rattacher le résultat ; aucune création automatique CRM | Reprise de lien et droits métier à implémenter ; aucune transaction inter-domaines atomique promise |
+| E71-ARB-01 | CSV standard seul en V1 confirmé ; format technique retenu : UTF-8 point-virgule, version 1, INIT/UPSERT, 10 Mio / 10 000 lignes | Modèle fourni ; aucun import XLSX direct ni parseur Gironde en V1 |
+| E71-ARB-02 | Acquis : Coffrets comprend partenaires commerçants et achats entreprises/CSE | Deux objectifs sous un périmètre Coffrets |
+| E71-ARB-03 | WebPush demandé ; e-mail facultatif proposé, désactivé initialement | Un rappel à l'échéance choisie, pas de campagne vers les prospects |
+| E71-ARB-04 | Preuves de gain du 9 octobre conservées ; six étapes recommandées | « Gagnée » ne signifie pas accord verbal sans preuve métier |
+| E71-ARB-04b | Confirmé : une même preuve canonique ne fait gagner qu’un seul dossier ; liens de consultation multiples possibles | Attribution unique transactionnelle et refus concurrent ; réouverture sans libération implicite de la preuve |
+| E71-ARB-05 | Droits distincts demandés ; consultation, gestion, import et administration proposés | Comptes ERP conservés ; les anciens droits ERP ne sont pas retirés par cette évolution |
+| E71-ARB-06 | Carte interactive maintenue sur décision utilisateur ; centres communaux et liste de secours | Couverture métropole/Outre-mer proposée ; fournisseur/licence/quotas à fixer avant activation, aucune ville commerciale créée |
+| E71-ARB-07 | Blocage de sollicitation et protection d'opposition conservés ; durées de conservation CRM non établies | Politique par catégorie à valider avant données réelles ; développement et tests synthétiques possibles |
+| E71-ARB-08 | Acquis : ouvrir le parcours métier autorisé, puis rattacher son résultat | Aucune conversion automatique à l'import |
+| E71-ARB-09 | Proposition technique : PWA sous `/internal/crm/` sur le domaine backoffice | Même origine/session ; un domaine `crm.localeo.city` n'est ni configuré ni requis dans cette V1 |
 
-## Préparation de l'implémentation
+Le périmètre V1 est spécifié pour être développé et testé sur données synthétiques. ARB-01 et ARB-04b sont confirmés ; la conservation ARB-07 conditionne l’activation avec données réelles. Le composant/fournisseur cartographique et sa configuration de couverture restent à sélectionner avant activation de la carte ; les cibles de performance sont à mesurer. La clôture repose sur les tests unitaires, d’intégration et fonctionnels des 28 critères actifs ; aucun pilote commercial ou compte rendu externe n’est requis pour cette clôture.
 
-La conception indépendante couvre séparation des objets, absence d'effets externes implicites, provenance, concurrence, contrôle d'import, navigation ERP et matrice de tests. **L'epic complète n'est pas encore prête à implémenter** : ARB-07 conditionne opposition/conservation, ARB-01/06 le pilote import/carte ; les étapes détaillées et limites techniques restent proposées. Gain, droits et profondeur de conversion sont décidés. Un socle technique peut être préparé derrière une option désactivée, sans importer de contacts réels ni figer les règles en attente.
+## Décisions confirmées et revue de finalisation
 
-Ordre proposé : domaine et droits → portefeuille/historique/tâches → import → carte et rattachements → démonstration et recette. Livrer le portefeuille seul ne clôture pas les 24 critères.
+Le 3 novembre, l’utilisateur confirme explicitement : **une preuve de gain pour
+un seul dossier** et **CSV standard uniquement en V1**. La carte interactive,
+confirmée auparavant, reste active (CA-13). CA-24 est reporté sur ce périmètre
+confirmé, sans être coché comme testé.
+
+La revue V1.1 complète les contrats d’import (sources, décisions, plan immuable,
+états/bilan), la détection de doublons concurrente entre sources et la preuve de
+vérification d’adresse interne nécessaire aux rappels e-mail. Les responsabilités
+restent respectivement Prospection et Identité interne. Les tests sont prévus dans
+la matrice ; aucun parcours CRM n’a été exécuté sur un produit encore inexistant.

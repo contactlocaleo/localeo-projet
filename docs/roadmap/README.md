@@ -79,12 +79,11 @@ Le PIN dédié est retenu avec un compromis de droits limités : contexte transa
 gestion du PIN depuis l'accès commerçant et parcours client. Ses 34 critères couvrent
 validité, révocation, concurrence, incidents et absence d'accès professionnel.
 
-La nouvelle [EPIC 71](a-faire/epic-71-crm-prospection-animation-coffrets-pro-backlog.md)
-cadre le CRM de prospection : Animation, commerçants partenaires et commandes de
-coffrets pour entreprises/CSE. Import XLSX avec rapprochement et validation du mapping,
-organisations/contacts/opportunités, étapes, historique, tâches et rappels internes,
-carte de France par commune et conversion explicite vers les parcours métier.
-Le fichier Gironde V2 a été examiné en lecture seule ; 24 critères, sans import réel.
+L'[EPIC 71](a-faire/epic-71-crm-prospection-animation-coffrets-pro-backlog.md) est recadrée
+le 3 novembre en **Localeo CRM PWA**, Animation/Coffrets : profils ERP et droits CRM
+distincts, fiches/contacts/notes, suivi et rappels WebPush/e-mail facultatif. Carte
+interactive maintenue sur confirmation utilisateur ; import CSV INIT/UPSERT sans
+écraser le contexte. 28 critères actifs, 1 reporté ; aucune implémentation ni import réel.
 
 Le 5 octobre, l'[EPIC 72 — Accès salariés Localeo Pro](terminees/epic-72-acces-salaries-validation-localeo-pro-backlog.md)
 ajoute l'invitation email, le compte individuel limité au scanner Coffret/Animation,
@@ -138,10 +137,12 @@ Tarif, quota et modalités restantes à décider. État **À faire**, sans impl�
 Le 22 octobre, l'[EPIC 74 — Tombola publique](en-cours/epic-74-tombola-publique-backlog.md)
 ajoute un cadrage distinct de la tombola commerçante E53 : modèle standard sans
 commerce ni achat requis, participation depuis un QR public et support de stand.
-La [spécification V1 du 3 novembre](../specifications/epic-74-tombola-publique/README.md)
-résout les six arbitrages : e-mail vérifié avant qualification, trois modes de
-lots, quota standard existant et suivi facultatif de commune dans Live sans
-nouveau canal d'envoi. Huit US et seize critères avec preuves prévues.
+La [spécification du 3 novembre](../specifications/epic-74-tombola-publique/README.md)
+intègre l’inscription directe : e-mail et règlement, qualification immédiate, puis
+un mail de confirmation avec accès au carnet Live. Trois modes de lots, quota
+standard existant et suivi facultatif de commune ; huit US et seize critères.
+Tests locaux réussis et migration v289 appliquée à TEST ; déploiement applicatif
+à vérifier séparément.
 État **En cours** depuis le 3 novembre : implémentation et tests locaux ; aucune activation.
 
 - L'ancien numéro **Marketplace 53**, consacré à la pagination, est fusionné
@@ -179,10 +180,10 @@ précise la provenance et les divergences historiques conservées.
 | 35 | Terminee (historique) | Clôture conservée ; le cadrage non livré des nouveaux rôles est transféré à l'EPIC 69 sur demande explicite du 1er octobre. |
 | 69 | Terminee | [Profils et accès ERP/satellites](terminees/epic-69-profils-acces-erp-satellites-backlog.md) : clôture le 2 octobre après validation CA-18, 27 critères conservés ; recette cible et configuration dans le bilan. |
 | 70 | Terminée | [Validation sur téléphone client](terminees/epic-70-validation-prestation-telephone-client-backlog.md) : PIN dédié retenu, 34 critères ; contexte transactionnel, gestion commerçant du PIN et parcours client sans matériel ; risque résiduel borné par les droits, validité et révocation. |
-| 71 | A faire | [CRM de prospection](a-faire/epic-71-crm-prospection-animation-coffrets-pro-backlog.md) : trois axes commerciaux, fichier Gironde V2 examiné, import contrôlé, carte communale, historique, tâches et rappels internes ; 24 critères, [spécification V0.1](../specifications/epic-71-crm-prospection/README.md), arbitrages restants explicites, sans implémentation. |
+| 71 | A faire | [Localeo CRM PWA](a-faire/epic-71-crm-prospection-animation-coffrets-pro-backlog.md) : [spécification V1.1](../specifications/epic-71-crm-prospection/README.md) du 3 novembre, Animation/Coffrets, droits ERP distincts, notes/suivi/rappels, carte interactive, CSV INIT/UPSERT ; 28 critères actifs et 1 reporté, sans code livré. |
 | 72 | Terminée | [Accès salariés Localeo Pro](terminees/epic-72-acces-salaries-validation-localeo-pro-backlog.md) : implémentation locale vérifiée, 22 critères ; option ERP, invitations, scanner et historique limités, conservation. |
 | 73 | Terminée | [Animation et/ou Coffrets](terminees/epic-73-animation-et-ou-coffrets-backlog.md) : 38 US, 63 critères et extensions vérifiés techniquement le 1er novembre 2026 selon E73-DEC-CLOTURE-TESTS ; preuves et activation séparées dans le bilan. |
-| 74 | En cours | [Tombola publique](en-cours/epic-74-tombola-publique-backlog.md) : spécification V1 du 3 novembre ; QR partageable, e-mail vérifié, trois modes de lots, quota standard et suivi commune Live ; 8 US, 16 critères, six arbitrages résolus ; implémentation et tests locaux en cours |
+| 74 | En cours | [Tombola publique](en-cours/epic-74-tombola-publique-backlog.md) : spécification du 3 novembre ; QR partageable, inscription directe par e-mail et règlement, trois modes de lots, quota standard et suivi commune Live ; 8 US, 16 critères ; tests locaux réussis et v289 appliquée à TEST |
 | 75 | A faire | [Mots croisés assistés par l’IA](a-faire/epic-75-mots-croises-assistes-ia-backlog.md) : indices chez les commerçants, préparation Localeo validée par l’organisateur, grille correcte obligatoire pour le tirage ; 8 US, 18 critères cibles, huit groupes d’arbitrages ouverts ou partiels |
 | 76 | A faire | [Impersonification support Pro et Animation](a-faire/epic-76-impersonification-support-pro-animation-backlog.md) : accès temporaire depuis ERP, 18 critères cibles ; consultation par défaut et intervention explicite/tracée retenues, droits, actions et modalités à arbitrer, sans implémentation |
 | Autres identifiants du tronc commun | Terminees | Statut produit consolide conserve ; les anciennes mentions de stories a faire ne rouvrent pas ces epics. |

@@ -81,11 +81,11 @@ créée le 5 octobre, terminée le 1er novembre selon E72-DEC-CLOTURE-TESTS, 22 
 Coffret/Animation, révocation et audit, historique complet du commerce en lecture seule, option ERP désactivée par défaut et sans plafond. E70 est étendue
 aux passages Animation et aux pannes du mobile commerçant : 34 critères ; PIN automatique valable 7 jours par défaut, configurable jusqu’à 30 jours, notification Localeo Pro à chaque succès.
 
-Nouvelle entrée à faire : [EPIC-71 — CRM de prospection](a-faire/epic-71-crm-prospection-animation-coffrets-pro-backlog.md),
-24 critères ; Animation, commerçants partenaires et entreprises/CSE acheteuses de
-coffrets. Organisations, contacts, opportunités, import XLSX Gironde V2 examiné,
-carte communale, historique et rappels internes. Mapping du fichier à sécuriser,
-étapes/droits/conversions à spécifier ; aucune prospection ni import déclenché.
+À faire : [EPIC-71 — Localeo CRM PWA](a-faire/epic-71-crm-prospection-animation-coffrets-pro-backlog.md),
+spécification V1.1 du 3 novembre : Animation/Coffrets, droits ERP distincts, contacts,
+notes, suivi et rappels WebPush/e-mail facultatif. Carte interactive maintenue,
+CSV INIT/UPSERT sans écrasement du contexte ; 28 critères actifs, 1 reporté.
+Aucun développement, envoi ou import réel déclenché.
 
 Nouvelle [EPIC 69 — Profils et accès ERP/satellites](terminees/epic-69-profils-acces-erp-satellites-backlog.md),
 créée sur demande explicite, reprenant le cadrage complémentaire de l'EPIC 35 :

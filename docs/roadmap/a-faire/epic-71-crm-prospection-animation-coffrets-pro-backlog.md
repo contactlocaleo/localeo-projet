@@ -1,387 +1,95 @@
-# EPIC 71 — CRM de prospection Animation, commerçants partenaires et offre Pro
+# EPIC 71 — Localeo CRM, prospection Animation et Coffrets
 
-## Références
+## Références et recadrage E71-EVOL-03
 
-- Date de cadrage : **2 octobre 2026**.
-- Identifiant : **EPIC-71**, disponible après recherche dans la roadmap commune,
-  ses namespaces et les documents applicatifs présents. Les numéros de migration
-  SQL ne constituent pas des identifiants d'epic.
 - État produit : **À faire**, selon la [roadmap commune](../README.md).
-- Demande : centraliser la prospection Animation (collectivités, associations),
-  Coffrets (commerçants partenaires et clients de l'offre Pro), initialiser le CRM
-  depuis un fichier, visualiser les prospects par ville sur une carte interactive
-  de France et suivre états, historique, prochaines actions et rappels.
-- Phase réalisée : cadrage puis [spécification V0.1 du 9 octobre](../../specifications/epic-71-crm-prospection/README.md), avec contrats cibles et matrice des 24 critères ; sans import réel, implémentation, contact de prospects ou déploiement.
-- Décisions utilisateur du 2 octobre : **offre Pro = coffrets pour entreprises/CSE**,
-  destinés à leurs salariés ou clients ; **tâches et rappels internes d'abord**.
-- Fichier source fourni et examiné en lecture seule :
-  `Localeo_Prospection_Gironde-V2.xlsx`, dans le dossier privé de prospection indiqué
-  par l'utilisateur. Structure et anomalies utiles décrites ci-dessous ; aucun
-  contact ni fichier copié dans Git, aucune correction du classeur effectuée.
+- Cadrage initial : 2 octobre 2026 ; décisions/imports E71-EVOL-01 et E71-EVOL-02 du 9 octobre ; **recadrage du 3 novembre 2026** à la demande utilisateur.
+- [Spécification canonique V1](../../specifications/epic-71-crm-prospection/README.md), [format d'import et gabarit](../../specifications/epic-71-crm-prospection/import-carte.md).
+- Phase présente : spécification uniquement. Aucun développement, import réel, message envoyé, compte créé ou déploiement.
 
-### Dépendances et périmètre autonome
+**Besoin actuel :** créer une application **Localeo CRM (PWA)** simple pour gérer la prospection commerciale et le suivi de la relation client sur les périmètres Animation et Coffrets. Saisir un prospect et ses contacts, suivre les échanges et étapes, prendre des notes et programmer des rappels WebPush/e-mail facultatif. Réutiliser les profils ERP avec des droits CRM distincts. Initialiser puis enrichir depuis un fichier produit par l'utilisateur depuis Excel, sans écraser le contexte existant.
 
-L'[EPIC 60](../terminees/epic-60-vision-360-commercialisation-backlog.md) exclut
-explicitement un CRM complet ; son suivi léger de référencement ne couvre pas
-la prospection. L'[EPIC 68](../en-cours/epic-68-parcours-commercant-preparation-onboarding-backlog.md)
-commence au référencement d'un commerçant et prépare son inscription, pas son
-acquisition commerciale. E71 est donc une nouvelle epic en amont, sans rouvrir E60
-ni transformer le dossier OnBoard en fichier de prospects.
+La cible n'est plus un module de prospection seulement inclus dans l'ERP. La **carte interactive est maintenue en V1 sur confirmation utilisateur**. La V1 reporte les fiches communales enrichies et le parseur spécifique Gironde sur confirmation utilisateur du 3 novembre ; le besoin de réimport est couvert par un CSV standard. Ce report est **confirmé**, sans valider ni implémenter les anciens critères. Le détail historique demeure dans Git ; aucun classeur privé repris dans ce dépôt.
 
-Réutiliser les [accès ERP E69](../terminees/epic-69-profils-acces-erp-satellites-backlog.md),
-les référentiels d'organisations/villes et les parcours métier existants :
-[Animation E41](../terminees/epic-41-plateforme-animation-locale-mvp-backlog.md),
-[abonnement Animation E47](../terminees/epic-47-souscription-abonnement-partenaire-animation-backlog.md),
-[commandes et achats E51](../terminees/epic-51-vision-360-achats-backoffice-backlog.md).
-Les producteurs et liens exacts sont décrits dans l’[architecture E71](../../specifications/epic-71-crm-prospection/architecture-contrats.md).
+## Résultat attendu
 
-### Existant vérifié en lecture
+Le commercial ouvre « Aujourd'hui », sait qui rappeler, ouvre une fiche pour retrouver ses contacts et le dernier échange, consigne sa note puis programme la suite. Une association intéressée par une animation et par des coffrets garde une fiche commune, avec deux dossiers commerciaux distincts. Après gain, les échanges restent consultables et les liens vers les applications métier permettent le suivi de la relation.
 
-Exploration ciblée du backend, sans appel externe ni test métier : aucun module
-CRM/prospect trouvé dans `app/` ; les notes et relances repérées concernent des
-objets opérationnels existants, pas un portefeuille générique de prospection.
+Acteurs : utilisateurs internes explicitement habilités au CRM ; responsable d'un dossier ou rappel ; administrateur des comptes ERP pour attribution/retrait des droits. Aucun accès prospect ni compte CRM autonome.
 
-- [Référencement commerçant](../../../../localeo-backend/app/application/referencement/use_cases/referencer_commercant.py) :
-  crée un commerçant BROUILLON et son profil, avec accès/email optionnels. Ne pas
-  l'appeler automatiquement à l'import ; ses contrôles de doublons métier subsistent.
-- [Référencement partenaire Animation](../../../../localeo-backend/app/application/animation_locale/use_cases/referencer_partenaire_animation.py) :
-  peut orchestrer gestionnaire, habilitations, souscription et checkout/activation
-  gratuite. Une « conversion » doit annoncer ces effets et utiliser une action
-  explicite ; ce n'est pas une simple insertion d'organisation CRM.
-- [Service crédit B2B](../../../../localeo-backend/app/application/conformite_fiscale_bum/service_credit_achat_b2b.py) :
-  enregistrer une organisation Pro peut créer un compte crédit et un code.
-  Cette identité de facturation/crédit n'est pas un référentiel de prospects à détourner.
-- [Ville](../../../../localeo-backend/app/domaine/referencement/entities/ville.py) et
-  [intégration géographique](../../../../localeo-backend/app/infrastructure/integrations/geo_api_gouv.py) :
-  code INSEE, coordonnées et recherche de communes réutilisables en partie.
-  La recherche de proximité actuelle filtre les villes publiées ; le CRM ne doit
-  pas reprendre cette restriction pour ses prospects hors catalogue.
+## Périmètre V1 retenu
 
-## Problème et résultat attendu
+1. **PWA CRM** PC/mobile, installation, identité visuelle Localeo et session interne partagée ; proposition d'implantation `/internal/crm/` sur le domaine backoffice.
+2. **Fiches prospects et contacts** : coordonnées connues, commune, source, plusieurs contacts, notes et chronologie ; recherche, filtres, opposition et archivage.
+3. **Dossiers commerciaux** : Animation ou Coffrets ; pour Coffrets, recrutement de partenaire commerçant ou achat entreprises/CSE. Responsable, six étapes simples, priorité normale/haute et prochaine action calculée.
+4. **Carte et pilotage quotidien** : carte interactive par commune avec filtres partagés, groupes et accès aux fiches ; Aujourd'hui, suivi par étapes, mes rappels, dossiers sans action ; indicateurs simples, sans prévision de chiffre d'affaires.
+5. **Rappels internes** persistants, WebPush volontaire par appareil, e-mail facultatif désactivé initialement ; destinataire = responsable interne, jamais prospect.
+6. **Import CSV** : source et références stables, aperçu et bilan, INIT crée les absents ; UPSERT ajoute et complète les champs jamais renseignés, sans remplacer notes, statut, affectation ou rappels.
+7. **Rattachements métier** explicites vers ERP/OnBoard, souscriptions Animation et commandes Coffrets, avec les droits de chaque domaine ; aucune conversion implicite.
 
-Le besoin exprimé est de disposer d'un outil quotidien de prospection dans
-Localeo : retrouver qui contacter, pour quelle offre, où se trouve le prospect,
-ce qui a déjà été échangé et la prochaine action attendue. Un fichier de départ
-doit pouvoir alimenter cette base, sans ressaisie manuelle systématique.
+Compléments recommandés : détection de doublons, responsable et prochaine action visibles, « Ne plus contacter », archivage réversible, filtres conservés et rappel accessible depuis la fiche. Ils évitent les oublis sans ajouter une administration complexe.
 
-La lecture du fichier identifie des données multi-onglets et une anomalie de
-correspondance entre en-têtes et valeurs, détaillées ci-dessous. Aucun taux de
-doublons métier ni temps perdu n'est présenté comme mesuré. La réussite sera évaluée
-sur un jeu représentatif puis un pilote : prospects retrouvables, historique
-fiable, tâches visibles et absence de doublons lors d'un réimport.
+### Hors V1 retenue
 
-**Exemple cible :** une association est contactée pour une animation et souhaite
-aussi acheter des coffrets. Une seule organisation et ses contacts sont conservés,
-avec deux opportunités aux étapes et échéances indépendantes. La fiche permet
-de reprendre le dernier échange, planifier un appel et ouvrir les dossiers métier
-issus d'une conversion explicite.
+Import XLSX Gironde et sections communales (CA-24), campagnes automatiques vers les prospects, synchronisation de boîtes mail, scraping/enrichissement, scoring IA, pipeline personnalisable, devis/facturation/paiement, fusion destructive, export massif et modification hors ligne. Le dossier continue de relier les applications métier qui possèdent ces fonctions.
 
-Acteurs : équipe commerciale/Backoffice Localeo, référent d'une opportunité,
-administrateur pour configuration/imports sensibles et habilitations. Aucun accès
-public au CRM n'est créé pour les prospects dans cette epic.
+## Décisions conservées et remplacées
 
-## Périmètre proposé
-
-Les éléments demandés sont acquis comme besoin. Les choix détaillés ci-dessous
-sont des **propositions de cadrage**, à distinguer des arbitrages validés.
-
-### 1. Organisations, contacts et opportunités séparés
-
-Une fiche organisation représente la structure prospectée : collectivité,
-association, commerce, entreprise/CSE ou autre type à préciser. Elle contient
-nom, identifiants connus, commune/localisation, coordonnées professionnelles,
-provenance, responsable et références métier éventuelles. Les champs inconnus
-restent inconnus ; un prospect incomplet peut être conservé comme « à qualifier ».
-
-Les contacts portent nom/fonction, coordonnées professionnelles, organisation
-et rôle dans l'échange (interlocuteur, décideur, relais, etc.). Plusieurs contacts
-sont possibles ; le départ d'un contact ne supprime pas l'historique de la structure.
-Une adresse email générique ne constitue pas à elle seule l'identité de l'organisation.
-
-Une opportunité représente un besoin commercial daté. Trois axes proposés :
-
-| Axe | Cibles | Résultat métier poursuivi |
-| --- | --- | --- |
-| Animation | Collectivités, associations et autres organisateurs autorisés | Préparer une relation partenaire et un projet d'animation, puis orienter vers le parcours existant |
-| Partenariat commerçant | Commerces proposant des prestations dans les coffrets | Décision de référencement, puis dossier OnBoard et préparation E68 |
-| Offre Pro / achat de coffrets | Entreprises, CSE et autres structures acheteuses | Suivre un besoin d'achat professionnel puis le relier à une commande existante ou préparée par son parcours autorisé |
-
-« Offre Pro » désigne les **commandes de coffrets pour entreprises/CSE**, confirmé
-par l'utilisateur. La nature de l'organisation et l'axe commercial
-sont indépendants : une entreprise peut acheter des coffrets et proposer des prestations.
-Plusieurs opportunités successives du même axe sont possibles (campagnes/événements
-distincts), avec historique séparé ; ne pas écraser une affaire gagnée l'année précédente.
-
-Champs d'opportunité utiles proposés : axe, objet/besoin, étape, responsable,
-priorité, date cible, prochaine action, échéance, raison de perte ou de pause,
-montant/volume estimé facultatif, devise si montant, liens métier et origine.
-Une estimation inconnue ne devient pas zéro ; elle n'est pas un chiffre d'affaires réalisé.
-
-### 2. Étapes et historique exploitables
-
-Proposition de parcours commercial commun, avec vocabulaire adapté par axe :
-
-**À qualifier → À contacter → Contact engagé → Besoin qualifié → Proposition
-présentée → Décision attendue → Gagnée / Perdue**.
-
-Une opportunité peut être mise en pause avec motif et date de réexamen, ou
-réouverte avec justification. Tous les prospects ne passent pas artificiellement
-par chaque étape : un saut motivé conserve l'acteur, la date et le motif. Les
-conditions de passage « gagnée » ont été validées le 9 octobre : référencement accepté avec dossier OnBoard lié, souscription Animation activée payée/gratuite, commande Pro payée.
-La création d'un compte partenaire ou d'une commande impayée ne prouve pas un gain.
-
-L'état de joignabilité, une opposition à la prospection, l'archivage de la fiche,
-l'étape de l'opportunité et les statuts opérationnels restent distincts.
-« Ne plus contacter » n'est pas simplement une affaire perdue : il empêche les
-nouvelles sollicitations dans le périmètre enregistré, même après import ou réouverture.
-
-Historique : appels, rendez-vous, notes, emails enregistrés manuellement, changements
-d'étape, affectations, imports, décisions et liens métier. Distinguer date de
-l'événement et date de saisie ; une note disant « mail envoyé » n'est pas une preuve
-de délivrance fournisseur. Corrections tracées sans réécriture silencieuse des échanges.
-Pas de synchronisation automatique des boîtes mail ni d'enregistrement d'appels en V1 proposée.
-
-### 3. Prochaines actions, rappels et pilotage
-
-Chaque opportunité active doit avoir un responsable et une prochaine action datée,
-ou une anomalie de complétude visible. Une tâche porte type (appel, mail, rendez-vous,
-préparation, suivi), échéance avec fuseau, responsable, état et résultat.
-Réaliser, reporter, annuler ou réaffecter une tâche conserve l'historique.
-
-Vues proposées : portefeuille filtrable, fiche détaillée, tableau par étapes,
-« mes actions », actions en retard, sans responsable, sans prochaine action et
-en pause à reprendre. Décision V1 : **tâches et rappels internes**, avec proposition
-de badge/file d'échéances persistante dans l'ERP. Un éventuel résumé email envoyé
-à l'équipe reste à arbitrer ; les relances automatiques aux prospects sont hors V1.
-
-Indicateurs : organisations distinctes, opportunités par axe/étape, tâches échues,
-dernière interaction, délais et conversions selon une définition explicite.
-Une organisation présente sur deux axes compte une fois comme organisation et deux
-fois comme opportunité. Les montants estimés et commandes réellement payées ne se confondent pas.
-
-### 4. Import initial et réimport contrôlé
-
-Prévoir un assistant : sélection du fichier, correspondance des colonnes,
-normalisation, aperçu, qualification des anomalies/doublons, validation et compte rendu.
-Format **XLSX requis** pour le fichier réel ; CSV proposé comme complément à confirmer. Aucun code,
-macro ou formule du classeur n'est exécuté. Séparer clairement lignes d'organisation,
-contacts et opportunités si le fichier mélange ces niveaux ; préciser l'axe au
-niveau du lot ou de la ligne, sans l'inférer uniquement du type d'organisation.
-
-Champs minimaux proposés : nom de structure ou identité exploitable du prospect,
-axe commercial choisi et référence de ligne source. Email/téléphone/ville non
-renseignés ne provoquent pas de données inventées : fiche à qualifier, actions de
-complétude, absence de point sur la carte si non localisable. Mapping des statuts
-historiques explicite ; une valeur inconnue est à qualifier, pas « gagnée » par défaut.
-
-L'aperçu distingue créations, rattachements possibles, mises à jour proposées,
-doublons possibles et lignes rejetées avec cause. Ni même nom, ni même commune,
-ni même domaine email ne suffisent à fusionner automatiquement deux structures.
-Les identifiants officiels éventuels et références métier aident au rapprochement,
-sans confondre organisation et établissements. Les contacts et oppositions connus
-doivent être pris en compte avant la validation.
-
-L'opérateur confirme le périmètre des lignes retenues ; les lignes exclues restent
-dans un rapport identifiable. Un réessai après interruption ou le réimport du
-même fichier ne doit pas dupliquer fiches, contacts, opportunités, événements ou
-rappels déjà créés. Les changements détectés sont proposés avec comparaison avant/après,
-sans écraser notes, propriétaire, opposition ou statut récents par des valeurs anciennes.
-
-Tracer auteur, date, origine, empreinte/version du fichier, mapping, références
-de lignes et bilan créé/mis à jour/ignoré/rejeté. Conserver le fichier et les
-rapports dans un stockage privé selon la durée à définir, pas dans Git ou les logs.
-Une annulation avant validation ne crée rien ; après import, la reprise/correction
-du lot doit préserver les données ensuite enrichies et signaler ses limites.
-Importer ne crée aucun compte, invitation, inscription, abonnement, commande ou envoi.
-
-#### Lecture du fichier fourni — éléments à prendre en compte
-
-Examen structurel du 2 octobre 2026, fichier de **88 081 octets**, empreinte SHA-256
-`3b6e76522ea8ffd7296e7f1fd8f4d65e826f9ec262da98a4e9903e8b0411f17d`.
-Lecture OOXML des cellules/en-têtes et valeurs enregistrées, sans recalcul de
-formules, modification du fichier, validation des contacts ou consultation de leurs sources web.
-
-| Onglet / plage examinée | Constat vérifié | Conséquence pour le cadrage |
-| --- | --- | --- |
-| Pipeline qualifié, `A4:AH42` | 34 en-têtes, 38 lignes classées ; territoire/type/EPCI, contact/fonction/téléphone/email, vérification, signaux, angle, offre, prochaine action/statut, sources et composantes de score | Base candidate Animation à qualifier ; dissocier organisation, contact, opportunité, provenance et tâche. Le rang n'est pas une clé métier stable |
-| Coffrets & élus 2026, `A7:AG28` | 33 en-têtes, 21 lignes classées par commune ; contacts, centralité, usages, recommandations et contexte institutionnel | Liste de cibles territoriales, pas 21 commerçants ou entreprises/CSE identifiés. Axe et organisation à confirmer par ligne ; ne pas créer de faux établissements |
-| Budgets potentiels, `A5:AJ58` | 53 communes, 53 codes INSEE de cinq caractères, 742 cellules de formule ; budgets estimés, sources, type de montant et confiance | Enrichissement potentiel des territoires, pas création de 53 nouveaux prospects ni import de budgets comme commandes/prix contractuels |
-| Budgets territoriaux | 28 cellules de formule ; portes d'entrée territoriales et prescripteurs | Distinguer organisme prescripteur, zone couverte et client potentiel ; géographie étendue non réduite à une commune fictive |
-| Tableau de bord, Playbook commercial, Sources & méthode, Hypothèses budget, Synthèse budgets | Cinq autres onglets de synthèse, conseils, sources et paramètres ; Synthèse budgets comporte 26 cellules de formule | Ne pas importer ces lignes comme prospects. Conserver la provenance utile, pas recréer un moteur de budget ou scoring automatique en V1 |
-
-**Anomalie de mapping vérifiée :** sur 37 des 38 lignes du pipeline, `Y`
-(en-tête « Statut » en Y4) contient une URL et `X` (en-tête « Prochaine action »)
-contient « À contacter ». Une ligne contient « À contacter » dans Y. L'assistant
-doit détecter cette hétérogénéité, bloquer le mapping aveugle et proposer une
-correction/mise à l'écart explicite des lignes concernées. Ne pas décaler toutes
-les lignes ni toutes les colonnes automatiquement à partir d'un seul exemple.
-
-Les libellés territoriaux du pipeline recoupent exactement **33** des communes
-de Budgets potentiels après suppression des espaces de bord et passage en
-minuscules ; ceux de Coffrets & élus recoupent **une** ligne du pipeline selon
-cette même méthode. Ce sont des candidats au rapprochement, **pas des doublons
-d'organisation certifiés**. L'INSEE disponible doit être vérifié puis utilisé
-pour la localisation lorsqu'un rattachement est établi.
-
-Les dates « Vérifié le », sources, score et priorité importés restent des faits
-de provenance déclarés par le fichier, pas des validations réalisées par le CRM.
-Les valeurs calculées mises en cache ne sont pas recalculées ni certifiées ici.
-Le mapping devra choisir explicitement les enrichissements à reprendre ; par
-défaut, seules les informations professionnelles utiles sont retenues, sans
-profilage personnel d'opinion politique depuis les colonnes de contexte électoral.
-Les cases mixtes « coordonnée publique » doivent être séparées en type de contact
-validé ou note à qualifier, pas traitées systématiquement comme une adresse email.
-
-### 5. Carte interactive de France
-
-Afficher une carte avec les villes des prospects, un regroupement des points
-superposés et une sélection ouvrant les fiches/opportunités associées. Les mêmes
-filtres doivent agir sur la carte et la liste : axe, étape, responsable, priorité,
-commune/département/région et échéance, selon les données disponibles.
-
-Proposition V1 : **position à la commune**, fondée sur un identifiant de commune
-fiable et un centre communal ; ne pas présenter ce point comme une adresse précise.
-Les homonymes, codes postaux couvrant plusieurs communes et correspondances ambiguës
-sont soumis à confirmation. Les prospects non localisés restent comptés et accessibles
-dans une liste dédiée. Plusieurs opportunités d'une structure au même lieu sont
-consultables sans ajouter artificiellement des prospects au compteur.
-
-Ne pas limiter le CRM aux villes déjà présentes dans le catalogue marchand.
-Une localisation prospective nationale doit pouvoir être qualifiée sans activer
-une nouvelle ville commerciale. La couverture métropole/Outre-mer et les structures
-multi-établissements/multi-villes restent à préciser. Les rattachements géographiques
-sont des filtres, **pas des restrictions d'habilitation par commune**.
-
-La carte ne remplace pas la liste : accès clavier et usage mobile, état de chargement,
-erreur de fond de carte et navigation des résultats sans carte. Regroupement et
-chargement borné au volume pilote à fixer. Ne transmettre au fournisseur cartographique
-aucun nom de contact, email, téléphone, note ou fichier importé ; documenter les
-données de localisation strictement nécessaires si un service externe est retenu.
-
-### 6. Passage au métier et droits
-
-Conversion explicite d'une opportunité avec recherche d'un objet existant avant
-création, aperçu des données reprises et action autorisée :
-
-- **Commerçant** : rattacher ou référencer par le parcours canonique ; dossier
-  OnBoard unique et préparation E68 lorsque disponible. Un simple prospect CRM
-  ne possède pas de dossier OnBoard ni de droits de validation de prestations.
-- **Animation** : rattacher ou créer le partenaire par son parcours autorisé,
-  puis relier le projet. Ne pas fabriquer un abonnement accepté/payé, une animation
-  publiée ou une invitation non demandée à partir d'une étape commerciale.
-- **Pro** : relier le besoin à l'organisation/commande réellement gérée par
-  le domaine achats. Une note « intéressé » ou « gagné » ne crée pas de paiement,
-  facture ou commande fictive. La préparation d'une commande utilise ses contrôles existants.
-
-Le CRM conserve ses échanges après conversion et affiche les références métier
-sans devenir propriétaire des statuts d'activation, paiement ou onboarding.
-Une conversion répétée ou concurrente ne crée pas deux objets métier. Toute
-modification ultérieure de données opérationnelles suit leur parcours propriétaire.
-
-Intégration souhaitée dans l'ERP, avec scopes E69 globaux. Matrice validée le 9 octobre : Backoffice gère la prospection ; Lecteur consulte un périmètre
-fonctionnel explicite ; Finance n'obtient pas automatiquement accès à toutes les
-notes/contact prospects ; admin historique conserve configuration et administration.
-Les droits d'import (Backoffice/admin), de correction sensible et d'opposition (admin), et de conversion (droits CRM et métier cumulés) sont détaillés dans la spécification et contrôlés côté serveur. Export massif et fusion destructive restent proposés hors V1, à confirmer. Aucun nouveau
-rôle « Commercial » ou découpage territorial n'est imposé sans arbitrage.
-
-### Hors périmètre proposé pour la première version
-
-- Campagnes email/SMS automatiques, séquences marketing, collecte de contacts par
-  scraping, enrichissement acheté, synchronisation Outlook/Gmail/Teams et appels enregistrés.
-- Scoring IA, prévision financière probabiliste, devis/signature électronique nouveaux.
-- Remplacement d'OnBoard, des achats Pro, du contrat Animation ou des référentiels métier.
-- ERP comptable, paiement depuis la carte, publication ou activation automatique.
-- Application publique pour prospects et application mobile commerciale séparée.
-
-Ces exclusions bornent la proposition V1 ; le suivi et les rappels internes
-confirmés par l'utilisateur sont inclus.
+- Coffrets comprend les achats entreprises/CSE, sens de « Pro » acquis le 2 octobre ; ne pas confondre avec Localeo Pro ou E72.
+- Rattachements et preuves de gain du 9 octobre conservés : commerçant accepté et OnBoard lié, souscription Animation activée payée/gratuite, commande Coffrets payée. Accord verbal et paiement sont distincts.
+- La demande du 3 novembre remplace « pas de nouvelle PWA » et ajoute WebPush/e-mail facultatif. Elle remplace l'attribution CRM implicite par des autorisations distinctes gérées dans ERP.
+- Pour simplifier, recommandation de six étapes, CSV standard et upsert « compléter sans remplacer », plutôt que mapping mensuel multi-onglets et résolution à trois versions. Les IDs de critères restent stables.
+- ARB-04b (une preuve canonique pour un seul dossier gagnant) et le CSV standard seul/report Gironde sont confirmés par l’utilisateur ; ARB-07 (conservation par catégorie) reste à définir avant données réelles. Les autres arbitrages et leur statut figurent dans le [README canonique](../../specifications/epic-71-crm-prospection/README.md).
 
 ## Critères d'acceptation
 
-Ces critères décrivent la cible de cadrage, **pas des tests exécutés**. Les paramètres
-non arbitrés sont identifiés dans les questions ouvertes ; leurs choix ne sont pas
-présentés comme déjà acceptés.
+**Tests à produire, non exécutés.** 29 identifiants conservés/ajoutés, dont **28 actifs dans la V1 retenue** et **1 reporté**. CA-13 reste actif ; CA-24 n’est ni réutilisé pour un autre besoin ni coché comme réussi.
 
-| Critère | Acteur et préconditions | Action | Résultat observable et effets interdits |
-| --- | --- | --- | --- |
-| E71-CA-01 | Backoffice, prospect à saisir | Créer une organisation et ses contacts | Fiche avec origine, type et coordonnées connues ; données manquantes visibles, aucun objet opérationnel/envoi créé implicitement |
-| E71-CA-02 | Organisation intéressée par plusieurs offres | Créer deux opportunités d'axes différents ou successives | Une organisation partagée, responsables/étapes/historique propres ; aucune duplication forcée ni écrasement d'affaire passée |
-| E71-CA-03 | Opportunité active | Changer d'étape, mettre en pause, perdre ou rouvrir | Acteur/date/motif historisés, motif de perte/pause et réexamen ; « gagnée » conforme aux preuves définies par axe, sans faux paiement/activation |
-| E71-CA-04 | Utilisateur autorisé, échange intervenu | Ajouter/corriger un appel, note, rendez-vous ou mail consigné | Date d'événement distincte de saisie, auteur et corrections traçables ; aucun état de délivrance déduit d'une note |
-| E71-CA-05 | Opportunité à suivre | Affecter, planifier, terminer, reporter ou annuler une tâche | Responsable/échéance/résultat, retard et absence de prochaine action visibles ; pas de tâche terminée automatiquement par simple consultation |
-| E71-CA-06 | Responsable, échéance atteinte | Consulter les rappels et traiter une action | File interne fiable à aujourd'hui/en retard, fuseau explicite, report/réaffectation tracés ; réexécution ne multiplie pas les rappels |
-| E71-CA-07 | Portefeuille alimenté | Filtrer/rechercher et passer liste/tableau/carte | Même périmètre et comptages cohérents, pagination/chargement borné ; absence de résultat distincte d'une erreur |
-| E71-CA-08 | Opérateur et fichier au format retenu | Mapper les colonnes puis prévisualiser | Aucun écrit métier avant confirmation ; aperçu des créations/mises à jour/doublons/rejets et choix de l'axe ; fichier invalide refusé sans exécution de contenu |
-| E71-CA-09 | Fichier comportant manques et erreurs | Corriger ou exclure des lignes puis confirmer | Rapport par ligne, minimum défini, valeurs historiques inconnues à qualifier ; aucun email/ville/statut inventé, lignes exclues identifiables |
-| E71-CA-10 | Données déjà connues ou homonymes | Rapprocher avant import ou création | Candidats et différences présentés ; pas de fusion au seul nom/ville/email générique, ni confusion établissement/organisation |
-| E71-CA-11 | Lot déjà importé, interrompu ou enrichi depuis | Réessayer/réimporter | Pas de doublons d'objets ou tâches ; mise à jour proposée et protégée contre écrasement d'historique/opposition ; résultat de reprise explicite |
-| E71-CA-12 | Opérateur consultant un import réalisé | Ouvrir bilan et provenance, demander correction | Auteur/date/empreinte/mapping/lignes retrouvables, fichier privé, correction bornée sans suppression des enrichissements ultérieurs |
-| E71-CA-13 | Plusieurs prospects dans une commune | Ouvrir la carte et un groupe de points | Position communale identifiée comme approximative, liste des structures/opportunités du groupe et accès à leurs fiches |
-| E71-CA-14 | Prospect sans localisation ou commune ambiguë | Importer, filtrer et qualifier sa ville | Aucune localisation arbitraire ; file « non localisés », correction explicite ; commune hors catalogue qualifiable sans activation commerciale |
-| E71-CA-15 | Mobile/clavier ou fournisseur cartographique indisponible | Naviguer dans le portefeuille | Liste utilisable, erreur carte visible, filtres conservés ; aucun contact/note/fichier transmis au fournisseur de carte |
-| E71-CA-16 | Prospect commerçant qualifié, utilisateur habilité | Convertir ou rattacher à un commerçant existant, puis réessayer | Référence canonique et dossier OnBoard unique par parcours autorisé ; aucune activation ou inscription automatique par import/statut CRM |
-| E71-CA-17 | Opportunité Animation, utilisateur habilité | Relier/créer le partenaire via son parcours | Historique CRM conservé et lien métier exact ; pas d'abonnement payé, publication, invitation ou projet en double implicitement |
-| E71-CA-18 | Opportunité Pro et besoin qualifié | Relier une commande ou ouvrir son parcours de préparation | CRM relie un objet achats réel, distingue estimation/commande/paiement ; aucun paiement ou facture issu du seul statut CRM |
-| E71-CA-19 | Profils internes et accès directs API | Lire, importer, modifier ou convertir | Contrôles serveur par scopes/actions, mêmes droits sur toutes communes ; refus sans fuite de contacts/notes, pas de nouvel accès SQLAdmin |
-| E71-CA-20 | Opposition ou contact obsolète connu | Planifier une sollicitation, réimporter ou rouvrir une opportunité | Alerte/blocage des nouvelles sollicitations dans le périmètre défini, opposition conservée ; aucun accord de prospection déduit de l'import |
-| E71-CA-21 | Deux utilisateurs modifiant la même fiche ou conversion | Enregistrer concurremment | Conflit explicite ou fusion contrôlée de données indépendantes ; aucune perte silencieuse de note/tâche ni double objet opérationnel |
-| E71-CA-22 | Responsable du pilotage, données incomplètes | Consulter volumes, étapes, retards et conversions | Organisations/opportunités distinctes, règles de calcul visibles, inconnus séparés, estimation distincte de chiffre d'affaires et devises non additionnées arbitrairement |
-| E71-CA-23 | Opérateur novice sur environnement de recette | Suivre le guide puis importer et traiter un prospect | Guide ERP disponible selon droits, exemple anonymisé couvrant import/doublon/carte/relance/conversion, preuves de recette documentées avant clôture |
-| E71-CA-24 | Fichier Gironde V2 ou fixture anonymisée conservant sa structure | Prévisualiser les onglets, le mapping et les enrichissements | Synthèses exclues des prospects ; anomalie X/Y du pipeline détectée par ligne ; recoupements et INSEE proposés sans fusion arbitraire ; budgets/scoring restent des estimations sourcées, pas des commandes ni vérifications CRM |
-
-## Impacts à instruire
-
-| Sujet | Impact initial et source à examiner |
-| --- | --- |
-| Backend / domaine | **Concerné** : propriétaire métier prospection à définir, organisation/contact/opportunité/tâche/import ; domaine décide étapes et conversion, application orchestre les domaines existants, ERP présente |
-| ERP et droits E69 | **Concernés** : navigation CRM, vues/filtres, scopes globaux et droits par action ; import et carte restent privés ; aucun contexte d'autorisation commune |
-| Animation / Commerçant / Marketplace | **À examiner** pour liens et rattachement aux parcours existants ; aucune nouvelle interface publique demandée, contrats existants à préserver |
-| API / consommateurs | **Concernés** : contrats CRM internes, import asynchrone si volume l'exige, liste/carte cohérentes, reprise/conflits ; consommateurs ERP et domaines convertis à inventorier avant schéma |
-| Référentiels géographiques | **Concernés** : villes prospects au-delà du catalogue, identifiants/homonymes, géolocalisation communale et cache ; fournisseur/licence/coût/coverage à choisir en spécification |
-| Persistance / migrations | **Concernées** : entités CRM, liens métier, journal/tâches/imports, concurrence et reprise ; aucune migration de toutes les organisations opérationnelles en prospects sans décision |
-| Fichier de départ | **Concerné, structure examinée** : XLSX Gironde V2, neuf onglets, sources multi-axes et incohérence X/Y ; mapping métier exact et fixture anonymisée à produire, aucune validation automatique des contacts ou budgets |
-| Communications / batchs | **Concernés** pour rappels internes/recalculs si nécessaires ; intégration emails/SMS externes seulement si ajout explicite au périmètre, pas par réutilisation implicite d'E68 |
-| Données et conservation | **Concernées** : origine, contacts professionnels, opposition, collecte minimale, correction/archivage/purge et durée par catégorie à définir ; aucun fichier personnel dans Git/démo/logs |
-| Générateur / fixtures E63 | **Concernés** : organisations multi-axes, multi-contacts, doublons/homonymes, imports interrompus, points superposés, non localisés, tâches échues, conversions réessayées ; données synthétiques sans prospection réelle |
-| Documentation fonctionnelle | **Concernée** : guide commercial/backoffice canonique, import et erreurs, sens des étapes et indicateurs, carte et conversion ; export ERP et accès à tester |
-| Exploitation / livraison | **Concernées** : fichiers privés, quotas/limites, traitement d'import et géolocalisation en erreur, sauvegarde/reprise, configuration carte/rappels, migrations puis activation contrôlée |
-
-## Questions ouvertes et propositions
-
-| Arbitrage | Proposition / information attendue | Partie dépendante |
+| Critère | Acteur / action | Résultat observable et refus attendu |
 | --- | --- | --- |
-| E71-ARB-01 | **Fichier fourni et structure examinée** : XLSX requis. Reste à valider mapping par onglet/ligne, traitement de l'anomalie X/Y, colonnes d'enrichissement, CSV complémentaire et volume futur | Assistant d'import et fixture anonymisée ; aucun import réel pendant le cadrage |
-| E71-ARB-02 | **Résolu : coffrets pour entreprises/CSE**, confirmé le 2 octobre | Axe Pro et rattachement au domaine achats, sans nouvelle offre inventée |
-| E71-ARB-03 | **Résolu sur le périmètre : tâches et rappels internes d'abord**. File ERP proposée ; résumé email interne éventuel et cadence à préciser | Aucune relance externe automatique V1 ; échéances et suivi interne inclus |
-| E71-ARB-04 | **Gain validé le 9 octobre** : référencement accepté + dossier OnBoard lié ; souscription Animation activée payée/gratuite ; commande Pro payée. Trois axes retenus | Parcours d’étapes détaillé proposé ; adaptation des preuves canoniques et décision d’acceptation explicite décrites dans l’architecture |
-| E71-ARB-04b | Complément proposé : une seule opportunité gagnée par preuve de vente | Décider l’unicité inter-affaires ; ne pas confondre avec l’idempotence sur une même opportunité |
-| E71-ARB-05 | **Validé le 9 octobre** : Backoffice consulte/gère/importe ; Lecteur consulte fiches/contacts ; Finance sans accès implicite ; admin corrections sensibles/oppositions ; droits métier additionnels pour conversion | Ajouter les scopes et contrôles E69 ; aucun accès SQLAdmin implicite |
-| E71-ARB-06 | Carte communale France proposée ; préciser métropole/Outre-mer, sites multiples/zone de prospection, volume cible et nombre d'utilisateurs | Données géographiques, fournisseur à sélectionner, recette performance et couverture |
-| E71-ARB-07 | Définir les règles d'origine des contacts, opposition, conservation et purge des fichiers/notes selon la politique Localeo | Publication des procédures et import exploitable ; pas d'accord commercial fabriqué à partir d'un fichier |
-| E71-ARB-08 | **Validé le 9 octobre** : rattacher un objet existant ou ouvrir son parcours actuel puis rattacher le résultat ; aucune création automatique CRM | Reprise de lien et droits métier à implémenter ; aucune transaction inter-domaines atomique promise |
+| E71-CA-01 | Gestionnaire CRM crée un prospect et ses contacts | Saisie minimale possible, données inconnues visibles, plusieurs contacts ; aucun compte ou objet opérationnel/envoi implicite |
+| E71-CA-02 | Ajouter un dossier Animation et un dossier Coffrets ou une nouvelle campagne | Une seule fiche prospect ; étapes, responsables et historique propres, pas d'écrasement d'un dossier passé |
+| E71-CA-03 | Changer d'étape, pause/perte/gain/réouverture | Six étapes, motifs sensibles et réexamen, historique ; gain refusé sans preuve canonique ou si elle est attribuée à un autre dossier, aucune activation/paiement par changement d'étape |
+| E71-CA-04 | Ajouter/corriger note, appel, rendez-vous ou e-mail consigné | Auteur, dates d'événement/saisie et correction retrouvables ; aucun envoi ou état de délivrance déduit d'une note |
+| E71-CA-05 | Planifier, terminer, reporter, annuler ou réaffecter | Responsable habilité, échéance, résultat, retard et prochaine action cohérents ; aucune tâche terminée par consultation |
+| E71-CA-06 | Ouvrir Aujourd'hui/Rappels et traiter l'échéance | File interne persistante, retard/jour/à venir et fuseau explicites, aucune duplication au rejeu ; tâche fermée/ancienne échéance ne renotifie pas |
+| E71-CA-07 | Rechercher et filtrer les listes et le suivi par étapes | Même périmètre filtré en liste/suivi/carte, compteurs cohérents, pagination serveur, filtres conservés et vide distinct d'une erreur |
+| E71-CA-08 | Déposer le CSV, choisir source/mode et prévisualiser | Aperçu sans mutation CRM, compléments/protections/doublons/rejets explicites ; fichier invalide refusé sans exécution |
+| E71-CA-09 | Corriger/exclure des groupes incomplets ou incohérents | Rapport par ligne et groupe, valeurs non inventées ; aucune application partielle d'un groupe prospect |
+| E71-CA-10 | Importer ou saisir un prospect ressemblant à un existant | Clés source stables, comparaison et rapprochement explicites ; jamais de fusion automatique au nom/commune/e-mail générique |
+| E71-CA-11 | Réimporter, reprendre après panne ou traiter un lot concurrent | Aucun doublon, aucun écrasement des enrichissements/protections ; révision/candidat de rapprochement changé après aperçu = conflit explicite, y compris entre deux sources ou avec la saisie manuelle |
+| E71-CA-12 | Consulter le bilan, arrêter/reprendre un lot | Source/mode/auteur/empreinte/résultats privés traçables ; arrêt conserve les groupes déjà appliqués et leurs enrichissements ultérieurs |
+| E71-CA-13 | Ouvrir la carte interactive et un groupe communal | Centres identifiés comme approximatifs, regroupements bornés, mêmes filtres que la liste, accès aux prospects/dossiers sans doublons ; non-localisés toujours accessibles |
+| E71-CA-14 | Prospect sans commune/INSEE ou hors catalogue | Saisie possible, anomalie non bloquante de localisation, correction explicite ; aucune ville marchande créée/publiée |
+| E71-CA-15 | Utilisateur PC/mobile/clavier | Liste/fiche/notes/rappels exploitables, actions compréhensibles, retours cohérents, pas de scroll horizontal imposé ; liste utilisable si carte/référentiel indisponible, aucune donnée de contact/note transmise au fond de carte |
+| E71-CA-16 | Rattacher un commerçant / ouvrir OnBoard puis reprendre | Droits métier propres, référence et dossier canoniques, historique CRM conservé, pas d'activation ou duplication automatique |
+| E71-CA-17 | Rattacher partenaire/souscription Animation | Lien exact, droit vérifié, gain seulement sur activation canonique ; aucune invitation/commande/publication implicite |
+| E71-CA-18 | Relier achat/commande Coffrets | Référence typée réelle, distinction estimé/commandé/payé, pas de paiement ni facture déclenchés par CRM |
+| E71-CA-19 | Profils internes, session expirée/révoquée ou accès API direct | Contrôles serveur courants, CSRF, mêmes droits globaux, aucune fuite de contact/note et aucun accès SQLAdmin additionnel |
+| E71-CA-20 | Marquer Ne plus contacter, réimporter ou rouvrir | Sollicitations bloquées, opposition conservée, levée réservée ; archivage/obsolescence jamais effacés par import |
+| E71-CA-21 | Enregistrer ou envoyer des commandes concurrentes | Versions/idempotence/transaction, conflit explicite, notes indépendantes conservées ; révocation prime sur rejeu |
+| E71-CA-22 | Consulter indicateurs et dossiers sans action | Prospects/dossiers distincts, gains comptés par preuves canoniques distinctes sans doubler une réouverture, filtres/période affichés, inconnus visibles ; pas de fausse conversion ou de chiffre d'affaires déduit |
+| E71-CA-23 | Suivre le guide et le parcours synthétique | Installation/connexion → import → note → rappel → suivi → rattachement vérifiés par tests fonctionnels, documentation disponible selon droits ; pas de pilote externe exigé pour clôturer |
+| E71-CA-24 | **Reporté : import spécifique Gironde et sections communales** | Ancien critère conservé ; contrat CSV CA-08 à 12/28 le remplace dans V1 retenue, sans prétendre traiter l'ancien XLSX |
+| E71-CA-25 | Installer/ouvrir/actualiser Localeo CRM en PWA | Application nommée et scope propres, routes profondes et retour après connexion, mise à jour réelle, écran offline clair sans cache de données privées |
+| E71-CA-26 | Activer/refuser WebPush puis recevoir/ouvrir un rappel | Opt-in par appareil, compte interne courant, aucune fuite sur écran verrouillé ; refus/expiration conserve le rappel interne ; retries/report/révocation sans doublons applicatifs |
+| E71-CA-27 | Activer/désactiver les rappels par e-mail | Désactivés initialement, destinataire interne seulement, envoi à l'échéance sans rattrapage massif ni fallback implicite ; tâche annulée/droit retiré/adresse modifiée empêche l'envoi encore en attente ; vérification et opt-in liés à la version courante de l'adresse |
+| E71-CA-28 | Utiliser le même modèle en INIT puis UPSERT | INIT ignore le prospect déjà connu ; UPSERT complète les vides non protégés et ajoute contacts/dossiers ; notes/statuts/responsables/rappels/oppositions conservés, absents non supprimés |
+| E71-CA-29 | Administrateur ERP attribue/retire les droits CRM | Cases consulter/gérer/importer/administrer distinctes et dépendances contrôlées ; aucun droit automatique sur compte non admin existant, menu et API immédiatement cohérents |
 
-## Découpage et passage à la spécification
+## Impacts et limites
 
-1. **Portefeuille et données initiales** : fiches/contacts/opportunités, droits,
-   import avec rapprochement, provenance et historique.
-2. **Pilotage quotidien** : étapes, tâches, rappels internes, filtres et indicateurs.
-3. **Couverture géographique et passage au métier** : carte/listes synchronisées,
-   rattachements/conversions, guide, démonstration et reprise opérationnelle.
+| Périmètre | Impact |
+| --- | --- |
+| Backend | Domaine prospection, API privées, persistance additive, import durable, worker/rappels et preuves de gain |
+| ERP / E69 | Catalogue fermé des autorisations, API des comptes, écran de profils, menu et liens CRM ; identités actuelles conservées |
+| Nouvelle surface CRM | PWA satellite dans le backend proposée ; manifest/scope, navigation, formulaires, listes et notifications |
+| Email / WebPush | Transports existants, nouveaux abonnements CRM internes et outbox/déduplication ; pas de campagne prospect |
+| OnBoard / Animation / Achats | Liens et lecture de preuves autorisés ; pas de création parallèle d'objets métier |
+| Pro / Animation / Marketplace | Pas de nouvelle API publique ni modification directe de ces frontends ; destinataires métier existants préservés |
+| Carte / géographie | Centres communaux, communes hors catalogue, regroupement et fallback liste ; composant/fournisseur à sélectionner, configuration et couverture à tester |
+| Import / données | CSV documentaire vide fourni ; fichiers réels privés, pas de migration automatique des clients existants ; conservation à arrêter |
+| Générateur / tests | Fixtures synthétiques dans le backend : deux périmètres, import/rejeu/conflit, opposition, rappels et profils ; aucun envoi réel |
+| Documentation / exploitation | Guides CRM/import/profils, runbooks reprise/notifications, schéma/readiness/capacité et bundle à adapter à l'implémentation |
 
-La carte fait partie de l'epic proposée, même si elle est livrée après le socle.
-Une première livraison de fiches ne vaut pas réalisation de tous les critères.
-Le [cycle d'epic](../../organisation/cycle-epic.md) s'applique : arbitrages ayant un
-effet métier explicites, producteurs/consommateurs examinés, conception canonique
-et matrice de preuves avant implémentation. Le [dossier de spécification](../../specifications/epic-71-crm-prospection/README.md) détaille désormais parcours, contrats, import/carte et preuves. Les arbitrages encore ouverts y sont distingués des décisions du 9 octobre ; priorité et date de livraison restent à décider.
-
-## Évolution E71-EVOL-01 — import mensuel avec deltas (9 octobre 2026)
-
-**Demande confirmée :** le classeur Gironde est reçu tous les mois ; permettre un chargement simple sans écraser les modifications faites ensuite dans le CRM. La [spécification V0.2](../../specifications/epic-71-crm-prospection/import-carte.md) ajoute un profil d’import réutilisable et une comparaison par champ entre dernière source reconnue, CRM actuel et nouveau fichier.
-
-Critères précisés, IDs conservés : CA-08 mapping mémorisé et écarts de structure ciblés ; CA-09 vue des nouveautés/modifications/conflits/absents ; CA-10 rapprochement stable malgré tri des lignes ; CA-11 protection persistante des corrections locales, conflits après aperçu et mois hors ordre ; CA-12 historique des décisions et reprise ; CA-24 plages V2 indicatives et traitement conditionnel X/Y sur les fichiers suivants. Une absence ne supprime ni n’archive une fiche. Un champ vide n’efface rien implicitement. Aucun import réel ni développement réalisé à cette phase.
-
-## Évolution E71-EVOL-02 — Pipeline structuré et fiches communes (9 octobre 2026)
-
-**Décision utilisateur :** seul « Pipeline qualifié » crée/complète les objets CRM structurés. Pour chaque commune de « Coffrets & élus 2026 », reprendre toutes les colonnes dans la section homonyme de sa fiche commune CRM. Les autres onglets sont exclus. Cette décision remplace les propositions précédentes d’enrichissement Budgets et de création de prospects depuis Coffrets & élus ; l’analyse historique du classeur reste conservée comme constat.
-
-[Spécification V0.3 et mapping des 33 colonnes](../../specifications/epic-71-crm-prospection/import-carte.md). CA-08/09/10/11/12/24 précisés : deux destinations dans le même assistant, rattachement communal confirmé, aucun prospect/contact supplémentaire depuis l’onglet communal, comparaison mensuelle par champ et protection des corrections locales. CA-07/13/14/19/22 : fiche territoriale hors catalogue public, accès CRM, totaux distincts des prospects. Aucun import réel ni code applicatif modifié.
+Ordre de réalisation : domaine/droits et PWA → fiches/notes/suivi/carte → tâches/rappels → import → rattachements/recette. Le [plan de vérification](../../specifications/epic-71-crm-prospection/verification-livraison.md) relie chaque critère aux tests, documents, fixtures et conditions d'activation. Le statut reste **À faire** ; la spécification ne vaut ni développement ni clôture.

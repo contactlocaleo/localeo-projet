@@ -11,3 +11,7 @@ tmp/
 # Sources de conception canoniques, référencées par les spécifications.
 !livrables/design/animation/localeo-animation-maquette-v1.zip
 !livrables/design/animation/localeo-animation-maquette-v2.zip
+
+# Journaux locaux et sortie temporaire du generateur de contrats E74.
+/debug.log
+/livrables/e74/contrats-moteur/

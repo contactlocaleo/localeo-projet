@@ -1,155 +1,167 @@
-# E71 — Import contrôlé et carte
+# E71 — Import CSV : INIT et UPSERT
 
-Références : [arbitrages](README.md), [contrats](architecture-contrats.md). Les paramètres proposés sont des bornes initiales à mesurer, non des volumes déjà testés. Aucun fichier privé n'est présent dans ce dossier.
+Contrat **format 1**, spécification V1.1 du 3 novembre 2026. [Périmètre V1](README.md), [modèle vide](modele-import.csv). Le chemin historique `import-carte.md` est conservé pour les liens ; la carte interactive est maintenue en V1 ; seuls le mapping Gironde et les sections communales sont reportés en V1 sur confirmation utilisateur. Ce document remplace leur contrat courant, sans prétendre avoir migré un import existant.
 
-## Assistant d'import — CA-08 à 12 et 24
+## Préparer depuis Excel
 
-1. **Déposer** : contrôler droit d'import, taille réelle, format et stockage privé. Afficher nom expurgé, empreinte SHA-256, onglets détectés et limites. Le dépôt peut créer un lot technique temporaire, jamais une organisation/contact/opportunité.
-2. **Mapper** : choisir une famille de source, la zone de données de chaque onglet, les champs cibles, un axe explicite par lot/ligne, les correspondances de statuts et exceptions. Ne pas prendre une ligne de synthèse pour un prospect.
-3. **Prévisualiser** : normalisation non destructive, valeur brute conservée en provenance selon conservation, champs cibles, erreurs par cellule, rapprochements candidats, comparatif avant/après. Chaque ligne est à créer, rattacher, mettre à jour, ignorer, corriger ou rejeter.
-4. **Décider** : confirmer chaque ambiguïté ou exclure les lignes correspondantes avec motif. L'interface affiche le nombre de structures, contacts, opportunités et tâches, pas seulement les lignes.
-5. **Confirmer** : l'opérateur confirme le plan et sa version ; le serveur relit droits, versions, oppositions et validité du plan. Un fichier ou mapping modifié invalide l'aperçu ; aucun traitement d'un plan périmé.
-6. **Suivre et reprendre** : progression durable, bilan paginé et téléchargement privé autorisé. Un délai réseau n'invite pas à redéposer le fichier ; l'écran retrouve le lot par son ID.
+1. Copier les en-têtes du modèle dans une feuille dédiée. **Une ligne = un prospect + un dossier commercial + éventuellement un contact.** Répéter les mêmes références pour ajouter un contact ou un dossier à une même structure.
+2. Attribuer des références stables : `P0001` pour le prospect, `C0001` pour le contact, `O0001` pour le dossier. Garder ces références lors des prochains exports, même si les noms ou l'ordre des lignes changent. Ne pas utiliser le numéro de ligne Excel ou le nom de la structure comme identifiant.
+3. Formater les références, codes postaux, INSEE et téléphones en **Texte** dans Excel pour conserver zéros initiaux et signes `+`. Exporter des valeurs, pas des formules.
+4. Enregistrer en **CSV UTF-8**, séparateur **point-virgule**. Vérifier la première ligne : certains réglages Excel produisent des virgules ; le CRM refuse ce format avec une explication, sans réinterprétation silencieuse. Les champs contenant point-virgule, guillemet ou saut de ligne sont entre guillemets CSV, un guillemet interne est doublé.
+5. Dans le CRM, choisir la source stable, par exemple `prospection-excel`, et le mode. La source est choisie dans une liste de sources existantes ; « Nouvelle source » est une action explicite. Le serveur retire les espaces de bord et passe le nom en minuscules avant validation/unicité : 1–64 caractères `[a-z0-9._-]`. Une création normalisée vers un nom existant propose cette source, sans en créer une autre. Le nom canonique stable est affiché explicitement avant confirmation. Réutiliser exactement cette source aux imports suivants. La source de rapprochement est distincte de la colonne descriptive `source`.
+6. Lire l'aperçu, corriger le fichier ou exclure explicitement les groupes en erreur, puis confirmer. Un bilan indique ce qui a réellement changé.
 
-Le rapport inclut feuille/ligne/champ/code d'erreur et IDs créés/rattachés, sans secrets. Il est visible uniquement aux rôles d'import autorisés. Les contenus dangereux sont échappés à l'affichage ; un futur export tableur neutraliserait les formules, mais n'est pas ajouté implicitement au périmètre.
+Quatre colonnes sont toujours renseignées : **prospect_ref, nom_prospect, opportunite_ref, perimetre**. `objectif_coffrets` est obligatoire uniquement pour COFFRETS ; `contact_ref` uniquement si des données de contact sont fournies. Les autres colonnes peuvent rester vides. Le modèle complet fournit tous les en-têtes ; le parseur accepte leur réordre et l'absence des colonnes facultatives, mais refuse les noms inconnus ou dupliqués. Le rapport distingue ligne CSV logique et groupe prospect.
 
-## Import mensuel et deltas — E71-EVOL-01, décision du 9 octobre
+## Dictionnaire des colonnes
 
-Le fichier Gironde est reçu **chaque mois**. Le parcours cible est « Imports → Importer le fichier du mois → Examiner les changements → Confirmer ». Le premier import configure un profil **Prospection Gironde** ; les suivants réutilisent ses onglets, colonnes, règles de normalisation, correspondances de provenance et exceptions validées. Aucun remapping complet mensuel requis si la structure reste compatible.
+Toutes les cellules sont des chaînes ; pas de valeur magique `NULL`, de booléen implicite ou de commande d'effacement. Limites applicables après décodage UTF-8.
 
-Le profil est versionné. Détecter les colonnes par en-têtes et signature de structure, pas uniquement par lettre Excel. Nouvelle colonne, colonne manquante ou règle X/Y non applicable : afficher l’écart et demander seulement les décisions nécessaires. Les plages du fichier V2 décrites plus bas sont des constats du premier fichier, **pas des limites fixes de lignes** pour les mois suivants. Détecter les nouvelles lignes jusqu’à la fin des données dans les limites techniques ; exclure les synthèses. La règle X/Y sauvegardée ne s’applique qu’aux lignes satisfaisant ses conditions, jamais aveuglément au fichier entier.
+| Colonne | Règle / exemple | Usage à la création et lors de l'upsert |
+| --- | --- | --- |
+| `prospect_ref` | Requis, 1–64 caractères `[A-Za-z0-9._-]`, sensible à la casse ; `P0001` | Identifie le prospect dans la source ; ne change jamais |
+| `nom_prospect` | Requis, 200 caractères max ; `Association Exemple` | Création ; différent sur une clé existante = divergence d'identité à examiner, pas renommage |
+| `type_prospect` | Vide ou `COLLECTIVITE`, `ASSOCIATION`, `COMMERCE`, `ENTREPRISE_CSE`, `AUTRE` | Coordonnée descriptive, complément si jamais renseignée |
+| `commune` | Nom déclaré, 150 caractères max | Texte sans création de ville ; ne certifie pas une localisation |
+| `code_insee` | Chaîne de 5 caractères, référence communale à valider si utilisée ; zéro initial conservé | Groupe localisation cohérent ; ambiguïté/incohérence signalée |
+| `code_postal` | Chaîne de 5 chiffres ou vide | Aucun calcul de commune depuis ce seul champ |
+| `adresse` | 300 caractères max | Groupe localisation ; aucune adresse inventée |
+| `site_web` | URL HTTP(S), 2 048 caractères max | Jamais visitée pendant l'import |
+| `email_structure` | Adresse professionnelle valide, 254 caractères max | Pas de consentement ni clé unique d'organisation |
+| `telephone_structure` | Chaîne, 32 caractères max, espaces/ponctuation usuels admis | Pas de numéro fabriqué, pas de déduction de pays silencieuse |
+| `contact_ref` | Référence stable 1–64, requise si un champ `contact_*` est fourni | Clé du contact sous ce prospect ; pas d'identification par e-mail seul |
+| `contact_nom` | 200 caractères max | Nom connu ; au moins un nom ou une coordonnée valide pour créer un contact |
+| `contact_fonction` | 150 caractères max | Fonction professionnelle facultative |
+| `contact_email` | Adresse valide, 254 caractères max | Complément seulement ; aucun e-mail envoyé |
+| `contact_telephone` | Chaîne, 32 caractères max | Complément seulement |
+| `opportunite_ref` | Requis, référence stable 1–64 | Identifie le dossier sous ce prospect, pas la ligne CSV |
+| `perimetre` | Requis : `ANIMATION` ou `COFFRETS` | Immutable par import sur un dossier existant |
+| `objectif_coffrets` | COFFRETS : `PARTENARIAT_COMMERCANT` ou `ACHAT_ENTREPRISE_CSE` ; vide pour ANIMATION | Immutable par import sur un dossier existant |
+| `titre_opportunite` | 200 caractères max ; vide = libellé du périmètre/objectif | Initialisation d'un nouveau dossier seulement |
+| `source` | Provenance descriptive, 300 caractères max | Valeur initiale puis provenance du lot ; ne remplace pas la source déjà renseignée |
+| `contexte_initial` | Texte 10 000 caractères max, facultatif | Une note « Contexte initial importé » uniquement pour un prospect nouvellement créé ; ignorée pour tout prospect existant |
 
-### Écran de comparaison
+Les valeurs répétées pour une même référence doivent être identiques après normalisation documentaire (espaces de bord, fins de ligne) ou vides. Deux valeurs non vides contradictoires bloquent le **groupe prospect entier**. Il ne faut pas répéter des contextes différents selon le contact : le contexte est propre au prospect. Les contacts et dossiers partagent le prospect ; une ligne ne signifie pas « ce contact est l'unique contact de ce dossier ».
 
-Présenter des compteurs et filtres : **Nouveaux**, **Mises à jour proposées**, **Modifications CRM conservées**, **Conflits à résoudre**, **Inchangés**, **Absents du fichier**, **Erreurs**. Masquer les inchangés par défaut, sans les soustraire du bilan. Pour chaque champ modifié, montrer « Dernier fichier pris en compte », « Valeur actuelle du CRM », « Nouveau fichier » et l’action proposée. Une décision peut être appliquée à une sélection de champs sans conflit ; aucun bouton global ne force le remplacement des valeurs protégées.
+### Exemple réduit (données fictives)
 
-L’opérateur traite uniquement les ambiguïtés, puis confirme le lot des créations et mises à jour sûres. Les conflits peuvent rester exclus du lot avec une raison visible. Après confirmation : résumé créé/mis à jour/conservé/non traité et lien vers le rapport. Conserver les choix « Garder la valeur CRM » pour ne pas représenter le même conflit à chaque dépôt identique ; un changement ultérieur de la source doit être signalé à nouveau.
+Ces colonnes suffisent pour deux périmètres et deux contacts, sans dupliquer la structure :
 
-### Comparaison à trois versions, champ par champ
+```csv
+prospect_ref;nom_prospect;contact_ref;contact_nom;contact_email;opportunite_ref;perimetre;objectif_coffrets;titre_opportunite;contexte_initial
+P0001;Association Exemple;C0001;Camille Exemple;camille@example.invalid;O0001;ANIMATION;;Animation de printemps;Premier contact à préparer
+P0001;Association Exemple;C0002;Alex Exemple;alex@example.invalid;O0001;ANIMATION;;Animation de printemps;
+P0001;Association Exemple;C0001;Camille Exemple;camille@example.invalid;O0002;COFFRETS;ACHAT_ENTREPRISE_CSE;Coffrets pour les bénévoles;
+P0002;Commerce Exemple;;;;O0001;COFFRETS;PARTENARIAT_COMMERCANT;Recrutement partenaire;
+```
 
-Noter **B** la dernière valeur source reconnue pour ce champ, **C** la valeur CRM courante et **N** la nouvelle valeur source. Conserver aussi la provenance de la dernière écriture et un marqueur de modification locale depuis l’application de la source : les dates seules, ou l’égalité de valeurs après un aller-retour manuel, ne prouvent pas l’absence de modification.
+Résultat initial attendu : **2 prospects, 2 contacts et 3 dossiers**, une seule note initiale sur P0001. Exemple de format, pas preuve d'import exécuté. Les identifiants de dossier sont propres au prospect ; `O0001` de P0002 n'est pas celui de P0001.
 
-| Situation | Proposition de l’assistant |
+## INIT : créer les absents, sans réinitialiser la base
+
+INIT **ne vide jamais la base**. Pour chaque groupe dont `(source_namespace, prospect_ref)` est absent, l'aperçu propose la création du prospect, de ses contacts et dossiers. Si ce prospect est déjà connu par sa clé, tout le groupe est **ignoré**, même si de nouveaux contacts/dossiers figurent dans ce fichier. Une correspondance possible avec une fiche manuelle ou une autre source bloque le groupe jusqu'à rapprochement explicite ou confirmation de structure distincte.
+
+Les nouveaux dossiers démarrent **À contacter**, priorité normale, responsable du lot choisi explicitement (opérateur par défaut). La source de ces valeurs est le choix du lot, jamais une colonne cachée. Aucune tâche, date de contact ou preuve de gain n'est inventée. Le contexte initial devient une note de provenance une seule fois. Le fichier ne crée aucun rappel ni notification.
+
+INIT peut être rejoué sans créer de doublons. Pour compléter les fiches déjà présentes, utiliser UPSERT ; aucun bouton « écraser tout » n'est prévu.
+
+## UPSERT : enrichir sans remplacer le contexte
+
+| Situation | Traitement |
 | --- | --- |
-| N = B | Aucun delta source ; conserver C, même différent de B |
-| N différent de B, C = B et aucun changement local/protection | Proposer N, à appliquer seulement lors de la confirmation du lot |
-| N différent de B et modification locale depuis l’import | Conserver C par défaut ; conflit si N diffère de C ; choix explicite « Garder CRM » / « Prendre le fichier » selon droits |
-| N = C | Aucun changement métier ; rapprocher la provenance sans effacer un marqueur de protection locale |
-| Aucune référence B fiable | Initialisation/rapprochement explicite ; ne pas assimiler un champ existant à une valeur importée remplaçable |
-| N vide ou colonne absente | Aucun effacement automatique ; distinguer cellule vide, champ absent et demande explicite d’effacement |
+| Clé prospect absente, aucune ambiguïté | Création comme INIT |
+| Clé existante, champ descriptif réellement vide et jamais corrigé/effacé manuellement | Complément possible après aperçu, uniquement dans la liste autorisée ci-dessous |
+| Valeur CRM identique | Inchangée ; pas de nouvel événement métier |
+| Valeur CRM déjà renseignée et différente | Conservée ; différence visible dans le bilan, correction éventuelle depuis la fiche |
+| Cellule vide ou colonne facultative absente | Aucun effacement et aucune remise à zéro |
+| Champ vidé manuellement ou protégé | Conservé vide ; l'import ne réintroduit pas une donnée volontairement retirée |
+| Nouvelle `contact_ref` ou `opportunite_ref` sur un prospect existant | Ajout explicite dans l'aperçu, sans modifier les objets existants ; doublon possible à résoudre |
+| Contact obsolète, prospect archivé ou opposé | Aucun enrichissement réactivant la relation ; groupe protégé, ignoré et signalé |
+| Ligne/prospect absent du nouveau fichier | Aucune suppression, clôture, annulation ou désaffectation |
+| Périmètre/objectif différents pour une opportunité connue, identité incohérente | Conflit bloquant pour le groupe ; pas de déplacement/requalification automatique |
+| Nouvelle source ou nouvelles références pour des données ressemblantes | Candidat au rapprochement ; aucun nouveau lien ou fusion implicite |
 
-Une correction locale reste protégée lors des mois suivants, même si l’opérateur a reconnu la nouvelle valeur source sans la retenir. La référence source reconnue peut avancer vers N lors d’un choix explicite, mais la protection locale subsiste ; un conflit non traité n’avance pas sa référence B. Conserver séparément dernière source observée, dernière source reconnue, dernière valeur effectivement appliquée et décision opérateur. Un changement de mapping invalide les comparaisons des champs concernés jusqu’à revalidation.
+Liste des compléments autorisés : type, site web, coordonnées de structure, coordonnées/fonction d'un contact actif et localisation. **Localisation = groupe adresse/commune/INSEE/code postal** : compléter seulement si les champs déjà présents sont compatibles ; aucune insertion d'INSEE différent sous une ancienne commune. Les champs protégés à la saisie restent protégés même s'ils redeviennent vides.
 
-Les notes, tâches réalisées, affectations, étapes commerciales, oppositions, décisions de gain et liens métier ne deviennent pas des champs remplaçables depuis Excel. Le fichier peut proposer un enrichissement ou une action métier distincte autorisée ; il ne remplace pas le suivi commercial. Les identifiants de rapprochement ne se réécrivent pas par la résolution d’un simple conflit de coordonnées.
+**Toujours préservés** sur l'existant : notes/contexte, historique d'échanges, étapes, priorité, responsable, tâches/rappels, oppositions, archivage, contacts obsolètes, preuves/liens métier, choix de notifications, titres/identités et source initiale déjà renseignés. `contexte_initial` d'un prospect existant est signalé comme ignoré ; il n'ajoute pas une nouvelle note à chaque réimport. Un import ne fait pas « avancer » le pipeline.
 
-Exemple : janvier contient le téléphone A ; l’équipe le corrige en B. Février contient encore A : conserver B sans action. Mars contient C : afficher B/C avec B conservé par défaut ; ne jamais restaurer A ni imposer C. En parallèle, une adresse non modifiée dans le CRM peut être mise à jour depuis mars après confirmation.
+Exemple : téléphone A importé puis corrigé en B dans le CRM ; fichier suivant C → **B reste conservé**, différence B/C signalée. Un site web jamais renseigné peut être ajouté. Une cellule vide n'efface ni B ni le site. Un nouveau contact avec une nouvelle référence est ajouté après vérification de doublon. Cette V1 ne propose pas de résolution automatique à trois versions ni d'option de remplacement forcé ; mise à jour d'une coordonnée existante dans sa fiche, avec droits/version/audit.
 
-### Identification entre mois et absences
+## Identité, aperçu, atomicité et reprise
 
-Le nom du fichier, sa date de dépôt et le numéro de ligne ne sont pas des identifiants de prospect. Réutiliser les liens de provenance validés, les clés source stables disponibles et les identifiants fiables. Un déplacement de ligne ne crée ni nouvelle organisation ni nouvelle opportunité. Sans clé stable ou correspondance certaine, proposer un rapprochement ciblé ; ne jamais fusionner au seul nom/commune/email générique. Une même ligne déjà rattachée garde son opportunité, sauf choix explicite de créer une nouvelle affaire.
+Clés uniques : prospect `(source_namespace, prospect_ref)` ; contact `(source_namespace, prospect_ref, contact_ref)` ; dossier `(source_namespace, prospect_ref, opportunite_ref)`. Les liens pointent vers des UUID CRM immuables. Une fiche manuelle peut recevoir une clé source après rapprochement explicite ; ce lien ne modifie pas sa fiche. Déplacer une référence vers un autre prospect n'est pas une correction ordinaire d'import.
 
-Une ligne absente du nouveau fichier est signalée, **sans suppression, archivage, clôture ni annulation automatique**. Si elle revient, retrouver le lien antérieur. Le lot porte une période source mensuelle confirmée par l’opérateur et un ordre de traitement serveur ; un mois plus ancien est signalé et ne fait pas reculer silencieusement la référence. Son import éventuel est un rattrapage explicite, avec le même contrôle de deltas. Un rejeu exact reste sans effet supplémentaire.
+La confirmation fige fichier, empreinte, source, mode, format, sélection des groupes et versions observées. L'empreinte n'est pas une identité métier. Même plan confirmé + autre clé HTTP = même opération ; un nouveau lot du même contenu reste sans doublon grâce aux clés métier. Un réordre de lignes ne change pas les identités. Les compléments connus sont recalculés lors de la transaction ; une modification des champs, protections ou candidats comparés après aperçu produit un conflit à réexaminer ; une note ajoutée indépendamment est conservée sans invalider ces comparaisons.
 
-À la confirmation et à chaque transaction de ligne, revérifier version CRM, protection locale et révision source : une modification effectuée après l’aperçu devient un conflit à recalculer. Deux imports mensuels ne mettent pas à jour la même référence de source concurremment. Une reprise conserve le plan confirmé et ne réapplique pas les lignes réussies.
+Un **groupe prospect** est l'unité atomique : prospect, contacts, dossiers, éventuelle note initiale, provenances et résultat de groupe sont validés ensemble ou pas du tout. Maximum **100 lignes, 50 contacts et 50 dossiers par groupe** ; au-delà, rejeter et proposer de fractionner les enrichissements en plusieurs imports UPSERT. Pas d'état « réussi » avec un contact créé mais un dossier manquant. Les groupes indépendants peuvent réussir malgré un conflit tardif ailleurs : bilan `TERMINE_AVEC_REJETS`, pas de succès global trompeur.
 
-## Sélection des onglets — E71-EVOL-02, décision du 9 octobre
+États de lot : DEPOSE → A_CORRIGER/PRET → EN_COURS → TERMINE/TERMINE_AVEC_REJETS ; INTERROMPU, ANNULE et EXPIRE explicites. Avant confirmation, annuler ne crée aucun objet CRM. Après début, arrêter suspend les groupes non appliqués ; pas de rollback global effaçant un enrichissement ultérieur. Reprise du même plan, bail et jeton de clôture, groupe validé jamais réappliqué. Une correction du fichier ouvre un nouveau lot lié.
 
-Cette décision remplace les propositions d’import multi-onglets précédentes. **Seul « Pipeline qualifié » alimente les organisations, contacts, opportunités et tâches structurés.** « Coffrets & élus 2026 » est un enrichissement communal séparé. Tous les autres onglets sont exclus de l’import, y compris Budgets potentiels et Budgets territoriaux : ils ne produisent ni prospects ni enrichissements automatiques.
+Recontrôler les droits de l'opérateur avant chaque groupe ; retrait de droit suspend le reste. Deux imports concurrents d'une même source sont sérialisés par bail de source avec jeton de clôture, sans transaction longue ; contraintes uniques et contrôle de version protègent les clés/objets existants. Les ressemblances concurrentes entre sources différentes ou avec une saisie manuelle suivent en plus le protocole ci-dessous. Bilan privé : auteur/date/source/mode/empreinte, créés/complétés/inchangés/protégés/conflits/rejetés, références et numéros de lignes. Les téléchargements exigent le droit d'import courant ; aucun lien public.
 
-Lecture effective du classeur privé le 9 octobre, sans modification, recalcul ni consultation des URLs : Pipeline qualifié possède 34 en-têtes en A4:AH4 ; Coffrets & élus 2026 possède 33 en-têtes en A7:AG7 et 21 lignes complètes en A8:AG28, sans formule. Ces positions décrivent ce fichier ; le profil mensuel recherche les en-têtes et toutes les lignes de données, pas une plage figée. Les valeurs de personnes et coordonnées ne sont pas copiées dans la documentation Git.
+### Concurrence entre sources et saisies manuelles
 
-### Fiche commune et section « Coffrets & élus 2026 »
+Les clés `(source, référence)` ne suffisent pas à détecter deux créations
+simultanées de sources différentes. Toutes les entrées créant une organisation,
+un contact ou un dossier candidat au rapprochement, ou modifiant leur identité,
+utilisent la même politique de ressemblance. La recherche SQL de candidats et
+l’insertion/modification se déroulent dans **une même transaction PostgreSQL
+SERIALIZABLE courte**, y compris l’application d’un groupe importé. Aucun appel
+réseau ni géocodage n’a lieu dans cette transaction.
 
-Chaque ligne du second onglet est rattachée à la fiche **commune du CRM**, identifiée par code INSEE confirmé. D contient le nom, mais cet onglet ne fournit pas de code INSEE : nom et contexte Gironde servent à rechercher des candidats, pas à certifier une identité. Réutiliser une correspondance de source déjà validée ; sinon afficher commune/département/INSEE et faire confirmer les cas incertains. Homonyme, absence de résultat ou doublon de lignes : mise en attente, sans rattachement arbitraire.
+La décision « structure distincte » mémorise l’ensemble/version des candidats
+examinés. Un candidat apparu depuis l’aperçu invalide cette décision. Une erreur de
+sérialisation ou de version produit un groupe en `CONFLIT` et impose un nouvel
+aperçu/décision ; aucun réessai aveugle ne transforme une création concurrente en
+confirmation de distinction. La saisie manuelle garde ses champs et affiche le
+candidat ; l’import conserve les groupes déjà appliqués et signale le groupe refusé.
+Tester deux connexions/barrières concurrentes, sources A/B et manuel/import.
 
-Si la commune n’a pas encore de fiche CRM, créer sa fiche territoriale après résolution confirmée, **sans créer d’organisation prospectée ni de Ville commerciale**. Ne pas la publier sur la Marketplace. Une ligne sans rattachement confirmé reste dans le rapport « Communes à identifier ». Deux lignes visant le même INSEE et la même section ne s’écrasent pas : résolution explicite des doublons.
+Nom, commune ou e-mail générique ne deviennent pas des contraintes d’unicité
+métier : deux structures réellement distinctes peuvent être confirmées après
+examen. La garantie porte sur les clés et sur le passage obligatoire par le contrôle
+de ressemblance défini, pas sur la reconnaissance parfaite de toute identité réelle.
+La politique compare les valeurs normalisées exactes nom+commune et coordonnées
+connues ; les absences ne constituent pas une égalité, les homonymes restent des
+candidats, jamais une preuve de fusion. Pas de rapprochement flou/IA en V1.
 
-Créer ou compléter une section intitulée exactement **Coffrets & élus 2026**, avec les libellés de colonnes et leur contenu. Présentation en groupes lisibles, en conservant chaque champ séparément pour les deltas ; pas de collage opaque en note unique. Le nom de commune reste aussi visible comme valeur source, distinct du nom canonique de la fiche.
+### États et bilan sans ambiguïté
 
-| Groupe de présentation | Colonnes reprises intégralement |
-| --- | --- |
-| Classement et territoire | A Rang ; B Score ; C Priorité ; D Commune ; E Population 2023 ; F Bassin / EPCI |
-| Contexte commercial | G Centre-bourg / centralité ; H Profil de consommation ; I Mix commerçant / usage coffrets ; J Flux / événements |
-| Équipe et contexte 2026 | K Équipe élue 2026 ; L Tête de liste / maire ; M Signal politique 2026 ; N Engagement / signal documenté |
-| Interlocuteur indiqué | O Contact prioritaire ; P Fonction ; Q Coordonnée publique ; R Statut contact |
-| Approche proposée | S Angle d’attaque Localéo ; T Question d’ouverture ; U Pilote recommandé ; V Risque / validation préalable |
-| Sources et date déclarée | W Source population ; X Source résultat 2026 ; Y Source programme / politique ; Z Source contact / contexte ; AA Vérifié le |
-| Détail du score source | AB Population /15 ; AC Pouvoir d’achat /15 ; AD Mix /20 ; AE Centre /20 ; AF Flux /15 ; AG Politique /15 |
+- `DEPOSE` : analyse de staging en cours ; `A_CORRIGER` : au moins un groupe retenu
+  exige une correction/décision ; `PRET` : les groupes retenus sont applicables
+  ou explicitement sans effet. Exclure tous les groupes est refusé ; un INIT ne
+  contenant que des clés déjà connues est autorisé avec bilan « aucun changement ».
+- La confirmation passe de `PRET` à `EN_COURS` ; nouvel envoi du même plan = même
+  lot. Un conflit tardif ne modifie jamais ce plan et produit `TERMINE_AVEC_REJETS`.
+  Les autres groupes indépendants peuvent aboutir.
+- Arrêt/panne/retrait de droit : `INTERROMPU`, puis reprise avec même plan et droits
+  du confirmateur. Les conflits demandent un nouveau plan lié ; pas de réapplication
+  des groupes réussis. `ANNULE` exprime l’abandon explicite du reste et est terminal ;
+  `EXPIRE` concerne un aperçu non confirmé selon la politique de conservation.
+- Un groupe a exactement un résultat terminal : `CREE`, `COMPLETE`, `INCHANGE`,
+  `IGNORE_INIT`, `PROTEGE`, `EXCLU`, `CONFLIT` ou `REJETE`. Les nombres de contacts
+  et dossiers créés sont des effets séparés, jamais additionnés au nombre de prospects.
+  Un champ conservé pour protection n’empêche pas `COMPLETE` pour un autre champ
+  admissible du groupe ; le détail liste les deux effets. Un groupe globalement
+  opposé/archivé est `PROTEGE`, sans création d’enfant.
 
-Conserver les valeurs textuelles sources et leur provenance, avec typage d’affichage prudent pour nombres/dates ; une cellule vide affiche « Non renseigné ». Ne pas recalculer les scores, certifier les résultats électoraux, déduire une opinion personnelle ni utiliser ces données pour un profilage politique automatique. Les champs K:N et AG restent des contenus fournis par l’utilisateur, étiquetés comme tels. Cette reprise explicite de toutes les colonnes remplace leur exclusion générale proposée auparavant, sans ajouter d’enrichissement externe.
+Une note n’est créée qu’une fois pour une nouvelle organisation. Une correction
+concurrente d’un champ ou de sa protection depuis l’aperçu invalide les versions
+observées ; elle ne peut pas être écrasée par le plan. L’ajout indépendant d’une
+note est conservé : le plan ne réécrit jamais la chronologie.
 
-O:R ne créent aucun contact structuré, aucune tâche de sollicitation ni consentement. Q peut contenir téléphone, email, URL ou texte mixte : conserver le contenu sans conversion forcée. « Vérifié 2026 » / « Vérifié le » restent déclarés par le fichier, distincts de la date d’import. Les sources sont affichées échappées ; liens HTTP(S) seulement, pas d’exécution ni de visite automatique.
+## Fichiers et limites
 
-### Import mensuel des sections communales
+Format CSV UTF-8 avec ou sans BOM, CRLF ou LF, séparateur `;`, guillemets `"`. **10 Mio**, **10 000 lignes logiques**, **21 colonnes maximum**, en-têtes fermés. Pas de ZIP, XLSX, macro, formule évaluée, HTML rendu ou URL visitée. Dépassement, UTF-8 invalide, en-tête requis absent, guillemet non fermé ou colonne supplémentaire : refus avant mutation. Lecture en flux vers staging privé borné ; ne pas conserver tout le fichier dans la session ORM.
 
-Le même dépôt produit deux bilans séparés : **Prospects du Pipeline** et **Sections communales Coffrets & élus 2026**. Afficher leurs créations, modifications, conflits, inchangés et lignes non rattachées, avec confirmation unique du plan mais résultats distincts. Une commune présente dans les deux onglets partage la fiche territoriale ; elle ne fusionne pas toutes les organisations installées sur son territoire.
+Toute cellule est du texte : un contenu commençant par `=`, `+`, `-`, `@`, tabulation ou retour chariot n'est jamais exécuté. Appliquer les validateurs de champ (le `+` d'un téléphone valide reste permis). À la génération d'un rapport CSV destiné à Excel, neutraliser séparément l'injection de formule et documenter l'échappement ; ne pas modifier la valeur métier stockée pour cela. Les erreurs ne recopient pas les cellules sensibles dans les logs.
 
-Appliquer la comparaison à trois versions à chacun des 33 champs de la section : dernière valeur source reconnue / valeur locale / nouvelle valeur source. Une correction locale de la section est protégée ; une commune absente le mois suivant ne perd pas sa section. Un changement du champ D ou de rattachement INSEE exige résolution d’identité, pas une mise à jour de texte qui déplacerait toute la section. La période mensuelle de source est distincte de l’année 2026 du titre : ne pas renommer cette section en fonction de la date d’import. Un futur onglet d’une autre année demande un profil/version explicite.
+Conservation des fichiers/aperçus/rapports et références de rapprochement : politique CRM à fixer avant données réelles, voir [livraison](verification-livraison.md). Le modèle vide est un **gabarit documentaire**, pas un jeu importé ; fichiers réels, parseurs et fixtures exécutables restent hors de ce dépôt documentaire.
 
-Une ligne communale est atomique avec sa provenance et ses décisions de champ ; les lignes Pipeline et communales restent reprenables indépendamment. Les totaux de prospects et les indicateurs de gain excluent les fiches communales seules. La carte peut afficher leur contexte depuis une commune sélectionnée, sans les compter comme organisations prospects.
+## Localisation et carte maintenue en V1
 
-### Modèle de mapping Gironde V2
+L'import conserve la commune déclarée et un éventuel code INSEE. Après validation de la fiche, la résolution géographique est une opération distincte, bornée et reprenable, sans modifier l'identité de source. Un code INSEE reconnu permet le centre communal ; un libellé/homonyme exige confirmation. Une indisponibilité géographique n'annule pas un import métier réussi et ne crée pas de fausse position.
 
-La lecture décrite dans le backlog date du 2 octobre ; ce document ne certifie ni les coordonnées ni les valeurs du fichier. L'identité du fichier est son empreinte dans le backlog. Le modèle ci-dessous doit être testé sur une **fixture synthétique**, puis approuvé sur aperçu par l'opérateur avant import réel.
+Le cache de communes CRM conserve INSEE, nom, département/zone, latitude/longitude, source et date de référence. Il est indépendant de la publication des villes marchandes. Une fusion/changement de commune est signalé pour résolution explicite, sans déplacer arbitrairement le prospect. Les coordonnées d'un centre ne sont jamais présentées comme celles de l'établissement.
 
-| Onglet | Traitement cible |
-| --- | --- |
-| Pipeline qualifié (`A4:AH42`) | En-têtes ligne 4, lignes 5–42 candidates ; organisation/territoire, contact/fonction, coordonnées, provenance et opportunité séparés ; axe Animation proposé puis confirmé ; aucune tâche sans type/échéance/référent exploitables |
-| Coffrets & élus 2026 (`A7:AG28`) | Section de fiche commune exclusivement, selon E71-EVOL-02 ; aucune création de prospect/contact/opportunité |
-| Budgets potentiels (`A5:AJ58`) | Exclu de l’import par décision E71-EVOL-02 |
-| Budgets territoriaux | Exclu de l’import par décision E71-EVOL-02 |
-| Tableau de bord, Playbook commercial, Sources & méthode, Hypothèses budget, Synthèse budgets | Exclus des lignes de prospects ; la provenance documentaire utile peut être attachée au lot, sans recalcul de budget/scoring |
-
-**Exception X/Y** : les 37 lignes où Y est une URL et X vaut « À contacter » sont marquées `MAPPING_STATUT_AMBIGU`. L'aperçu propose X → statut, Y → provenance seulement pour les lignes identifiées et après choix explicite ; la ligne où Y contient déjà le statut garde son mapping propre. Aucun décalage général de colonnes. Une URL n'est jamais acceptée comme étape ou prochaine action.
-
-Les 33 rapprochements de libellés avec Budgets potentiels et le recoupement entre les deux listes ne prouvent pas l'identité de structures. Ils servent à proposer une commune ou une comparaison. Les dates « vérifié le » et scores sont étiquetés « déclarés dans la source », distincts d'une vérification opérateur CRM.
-
-Colonnes retenues par défaut proposées : identité structure, identifiants officiels valides, coordonnées professionnelles, fonction, besoin/axe, origine/source, action et statut interprétables. Budgets/signaux/scoring : option d'enrichissement sourcée, avec unité, date et confiance déclarée ; aucune dérivation de prix, de prévision comptable ou de décision automatique. Écarter le profilage personnel d'opinion politique et les données sans utilité commerciale définie.
-
-### Normalisation et rapprochement
-
-Trim et normalisation de comparaison séparés de la valeur affichée ; ne pas retirer accents/ponctuation d'un nom stocké pour forcer une identité. Email/téléphone invalides produisent une anomalie, pas une réparation inventée. Conserver code INSEE/SIRET comme chaînes ; valider leur forme avant de proposer un rapprochement. Un email public n'est ni consentement ni preuve d'identité de structure.
-
-Identité durable de provenance : `(source_namespace, source_record_key, type_entite, sous_cle)` liée aux UUID CRM. Le rang Excel n'est pas une clé métier. Si la source ne contient pas de clé stable, le premier import reçoit des clés internes et mémorise les positions/empreintes ; tout fichier modifié/retrié exige rapprochement explicite des lignes anciennes, nouvelles et supprimées. Le système ne prétend pas reconnaître une identité sans information suffisante.
-
-Exactement le même fichier, mapping et sélection confirmés réutilisent le lot/résultat connu. Une autre clé HTTP ne contourne pas cette identité. Pour une version modifiée, l'aperçu propose des correspondances ; les cas ambigus restent bloqués ou exclus. Deux lots concurrents d'une même famille de source sérialisent leurs validations et vérifient les clés uniques avant toute création. L'opérateur peut déclarer une nouvelle affaire pour une structure connue, mais jamais par simple changement de ligne Excel.
-
-Priorité aux données CRM enrichies : un champ renseigné/importé peut être mis à jour seulement selon un choix de champ explicite et une version courante. Notes, responsable, étape, oppositions et contacts obsolètes ne sont pas écrasés automatiquement. Rechercher les oppositions sur les identités fiables et contacts normalisés avant confirmation ; une correspondance possible impose résolution, elle ne justifie ni fusion ni création contournant un blocage.
-
-### États, transactions et reprise
-
-États du lot proposés : `DEPOSE`, `A_CORRIGER`, `PRET`, `EN_COURS`, `TERMINE`, `TERMINE_AVEC_REJETS`, `INTERROMPU`, `ANNULE`, `EXPIRE`. États de ligne : `A_TRAITER`, `APPLIQUEE`, `IGNOREE`, `REJETEE`, `CONFLIT`.
-
-- Avant confirmation uniquement, modifier mapping/sélection/version de source remet le lot en aperçu à recalculer. Dès `EN_COURS`, le plan confirmé est immuable : reprise avec le même plan et ses clés de ligne ; toute correction de mapping ou de source crée un nouveau lot lié, avec rapprochement sur les résultats déjà appliqués.
-- `PRET → EN_COURS` exige version du plan, empreinte, consentement de l'opérateur et absence d'erreur bloquante sur les lignes retenues.
-- Chaque ligne est atomique : toutes ses mutations CRM, correspondances de provenance et événements sont validés ensemble, ou aucun ne l'est. Contraintes uniques sur origine et événement de ligne ; version courante contrôlée dans la transaction.
-- Un worker prend un bail avec jeton de clôture ; un worker dont le bail a expiré ne peut valider après reprise par un autre. La ligne marquée appliquée n'est jamais réappliquée.
-- Un conflit tardif est rapporté, pas écrasé. Les lignes indépendantes peuvent réussir ; le bilan distingue succès partiel et import terminé intégralement.
-- Avant confirmation, annuler passe le lot à `ANNULE` sans objet CRM. Après début, « arrêter » passe le lot à `INTERROMPU`, suspend les lignes non appliquées et conserve les mutations réussies. **Pas de rollback global** effaçant les enrichissements ultérieurs.
-- La correction admin compare versions et références avant de délier/corriger. Une suppression métier éventuelle suit sa propre politique ; elle ne résulte pas d'un bouton « annuler le fichier ».
-
-Rejouer une confirmation après timeout renvoie le même lot ; une reprise ne multiplie ni contacts, ni tâches, ni notes. Les tâches importées satisfont la même politique d'opposition que les tâches manuelles.
-
-### Traitement technique du fichier
-
-Proposition : XLSX sans macro, 10 Mio de fichier, 100 Mio décompressés au total, 10 000 lignes métier, 100 colonnes par feuille sélectionnée et 1 000 000 cellules examinées au total ; délai de traitement borné et traitement par flux. Rejeter fichiers chiffrés, XLSM, ZIP incohérents, liens externes actifs et dépassements. Une formule n'est **jamais exécutée**, ni son URL visitée ; seule une valeur en cache explicitement retenue peut devenir estimation de provenance, jamais un champ d'identité/preuve de gain. Cache absent = valeur inconnue/anomalie.
-
-Utiliser un adaptateur de parsing isolé avec limites ZIP/XML, y compris fichiers non sélectionnés et shared strings ; la borne `read_upload_limited` seule ne suffit pas. Aucun calcul Excel, macro, appel réseau ni résolution de lien externe. Rapport et fichier dans stockage privé, accès authentifié et `Cache-Control: no-store`. Les limites sont des propositions techniques à confronter au volume pilote ARB-01, pas une bibliothèque choisie sans évaluation.
-
-## Carte et localisation — CA-07/13/14/15
-
-Le cache `CommuneProspection` contient code INSEE, nom, département/région, centroïde, source et date de référence. Il ne crée pas de `Ville` commerciale. La recherche utilise le port géographique ; l'adaptateur actuel peut résoudre nom/code postal/INSEE, mais les autorisations CRM ne dépendent pas de la publication Marketplace.
-
-Un code postal partagé ou un homonyme produit plusieurs candidats ; l'utilisateur choisit ou laisse non localisé. Une commune hors catalogue est autorisée. Une commune supprimée/fusionnée ne change pas arbitrairement une fiche : signalement puis choix explicite du rattachement actuel, provenance historique conservée. Une mise à jour de centroïde n'est pas un déplacement d'établissement.
-
-Le point est intitulé **« Centre de la commune — localisation indicative »**. Un clic ouvre la liste paginée des organisations et opportunités de la commune ; plusieurs opportunités n'ajoutent pas de faux prospects. Compteurs `organisations`, `opportunites`, `localisees`, `non_localisees` distincts ; filtres identiques à ceux de la liste. Le cadrage visible de la carte n'efface pas les non-localisés du total du portefeuille.
-
-Proposition de contrat carte : bbox/zoom bornés, réponse avec groupes communaux/clusters, compteurs, `truncated` et `generated_at`. Au-delà de 500 éléments rendus, agréger côté serveur ; si une réponse reste tronquée, l'annoncer et demander zoom/filtre. Ne pas charger tous les contacts pour dessiner la carte. La liste demeure la voie exhaustive paginée. Une vue d'étapes chargée partiellement indique les totaux et propose « Charger la suite ».
-
-Couverture exacte et fournisseur restent à confirmer par ARB-06. Si Outre-mer retenu, sélecteur de zones avec recentrage plutôt qu'une étendue France illisible ; toute commune non couverte reste accessible et signalée dans la liste. Un fournisseur indisponible n'empêche ni l'enregistrement ni la consultation des fiches. Afficher erreur carte et réessai sans perdre les filtres.
-
-Le fournisseur de fond de carte reçoit seulement les requêtes nécessaires au fond (emprise/tuiles), **pas les données de prospects**. Les points CRM sont rendus localement dans le navigateur à partir de l'API interne. La résolution de communes transmet des critères géographiques, pas nom de contact, email, téléphone, note ou fichier. Documenter fournisseur, licence/attribution, couverture, quotas, journalisation et configuration avant activation ; aucune clé navigateur privilégiée ou géolocalisation personnelle demandée.
-
-## Cibles de performance à valider
-
-Jeu proposé pour mesures : 10 000 organisations, 30 000 opportunités, 60 000 tâches et 10 utilisateurs internes simultanés ; aucun chiffre mesuré à ce stade. Cibles initiales : p95 liste ≤ 1 s côté API hors réseau, carte agrégée ≤ 2 s, interface utilisable sur mobile 390 px et clavier sans carte. Fixer le budget d'import après benchmark ; afficher progression durable et permettre reprise plutôt qu'un timeout synchrone long. Si le volume attendu diffère, actualiser les index/limites et la recette avant livraison.
+La carte applique le même filtre que la liste ; emprise et zoom bornés, **500 groupes maximum** par réponse, agrégation serveur au-delà. Réponse propre à la carte : `groups`, `truncated`, `bbox`, `zoom`, `generated_at`, totaux distincts de prospects/dossiers/non-localisés. Il n’y a pas de `next_cursor` sur cette projection ; ouvrir un groupe utilise la liste ordinaire, 25 par page et 100 maximum. `truncated` et total daté signalent si zoom/filtre est requis ; la liste paginée reste exhaustive. Les non-localisés restent visibles dans les compteurs et leur liste. Les points CRM sont dessinés dans le navigateur sans envoyer les attributs prospect au fournisseur de fond. Licence, attribution, couverture, quotas et configuration du fournisseur sont à documenter avant activation ; aucune dépendance cartographique existante n'a été identifiée dans les applications examinées.

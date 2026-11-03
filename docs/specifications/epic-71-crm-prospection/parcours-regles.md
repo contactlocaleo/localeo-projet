@@ -1,73 +1,95 @@
-# E71 — Parcours et règles
+# E71 — Parcours simples de Localeo CRM
 
-Référence : [README et arbitrages](README.md). Les règles marquées « proposé » dépendent des arbitrages correspondants. Toutes les preuves ci-dessous sont à construire, pas exécutées.
+[Version V1 et arbitrages](README.md). Comportements cibles V1.1 du 3 novembre 2026, **non implémentés**.
 
-## Parcours et présentation ERP
+## Navigation PC et mobile
 
-Entrée proposée **Prospection** dans l'ERP, URL `/internal/erp/prospection`. Réutiliser l'en-tête partagé, le retour ERP toujours accessible, les menus autorisés et les composants de messages/formulaires. Ne pas créer une nouvelle PWA ni une nouvelle authentification.
+PWA distincte **Localeo CRM**, avec entrée autorisée depuis l'ERP et lancement direct après installation. Vues principales : **Aujourd'hui**, **Prospects**, **Suivi**, **Rappels**. Imports et préférences dans le menu secondaire ; aucune entrée d'administration sans droit. L'en-tête reprend l'identité partagée, le nom de l'application et l'environnement hors production. Retour ERP seulement si destination autorisée.
 
-Les vues sont Portefeuille (liste / étapes / carte), Mes actions, À qualifier et Imports. Une fiche organisation regroupe contacts, opportunités et chronologie ; chaque opportunité conserve ses propres tâches, décisions et liens métier. Retour à la liste avec recherche, filtres, tri et pagination conservés dans l'URL ; navigation clavier et historique navigateur utilisables. Une mutation non enregistrée demande confirmation avant sortie. Les dates horaires sont affichées en **Europe/Paris**, les instants stockés en UTC ; les dates civiles ne sont pas décalées.
+Sur PC, menu latéral et listes compactes exploitant la largeur disponible. Sur mobile, navigation principale accessible au pouce, listes en cartes et filtre dans un panneau ; aucune table débordante imposée. Une action principale par écran, actions secondaires regroupées. Icônes accompagnées de libellés pour les actions métier ; actualisation compacte avec nom accessible. Zones tactiles de 44 px au minimum, focus visible, statuts exprimés par texte et icône en plus de la couleur.
 
-Un seul bouton principal par opération : « Enregistrer », « Planifier », « Confirmer l'import » ou « Rattacher ». Les boutons d'activation, d'invitation ou de paiement appartiennent aux parcours métier correspondants. Désactiver un bouton pendant la requête ne remplace pas l'idempotence serveur. Après délai réseau, afficher « Résultat à vérifier » et relire l'opération avant de permettre un nouvel essai. Succès seulement après résultat serveur ; erreur, chargement et liste vide distincts.
+Un seul défilement du contenu, titres/retours cohérents, formulaires courts et aide près du champ. Revenir à la liste conserve recherche, filtres, tri, position et mode liste/carte. Le bouton retour du navigateur reste utilisable. Recherche côté serveur, pagination à la demande, pas de téléchargement complet du portefeuille. Une note non enregistrée déclenche une confirmation avant sortie ; un échec conserve le texte dans la page, sans persistance privée hors ligne.
 
-## Objets et complétude — CA-01/02
+Le mode hors connexion affiche un écran explicite de reconnexion : ni prospect en cache ni commande différée envoyée à la reconnexion. La PWA reste utile sans notifications autorisées. Chargement, vide, erreur et succès sont distincts ; succès seulement après confirmation serveur. Le délai réseau d'une mutation impose la relecture du résultat avant répétition.
 
-- **Organisation prospectée** : UUID, nom obligatoire, type (`COLLECTIVITE`, `ASSOCIATION`, `COMMERCE`, `ENTREPRISE_CSE`, `AUTRE` proposés), identifiants officiels facultatifs et typés, commune principale facultative, origine, responsable facultatif, archivage et version. Le type n'impose pas un axe commercial. Nom et email générique ne sont pas des clés uniques.
-- **Contact professionnel** : UUID, organisation, nom/fonction et coordonnées connues, qualité de provenance, état actif/obsolète. Au moins un nom ou une coordonnée exploitable ; ne pas inventer un interlocuteur à partir du seul nom d'une ville. Un départ rend le contact obsolète sans effacer les événements historiques.
-- **Opportunité** : UUID, organisation, axe (`ANIMATION`, `PARTENARIAT_COMMERCANT`, `COFFRETS_PRO` proposés), objet, étape, responsable, priorité, dates, estimation facultative avec devise, version et liens métier. Deux opportunités du même axe peuvent coexister ; le titre n'est pas une clé d'unicité.
-- **Tâche** : UUID, opportunité, type, responsable, échéance UTC et fuseau saisi, contact/canal éventuels, état, résultat, version. Une tâche de préparation interne n'est pas une sollicitation.
+## 1. Commencer sa journée — CA-05/06/22
 
-Une organisation minimale peut être enregistrée avec nom et provenance. Une opportunité minimale exige organisation, axe et objet. L'absence de responsable, de contact, de commune ou d'action suivante apparaît comme une anomalie de complétude ; elle ne fabrique pas de données. Les montants inconnus restent `null` ; les montants connus sont des entiers en unité monétaire mineure avec devise.
+« Aujourd'hui » montre d'abord mes actions en retard, puis celles du jour, puis les prochaines. Un filtre explicite permet de voir l'équipe, avec le même portefeuille global autorisé. Une section secondaire signale les dossiers actifs sans responsable/contact/prochaine action ; l'incomplétude n'empêche pas d'enregistrer un prospect.
 
-## Cycle commercial — CA-03
+Compteurs : prospects actifs distincts, dossiers ouverts par périmètre/étape, rappels en retard, dossiers sans prochaine action, gains vérifiés sur la période. Une structure Animation et Coffrets compte une fois comme prospect et deux fois comme dossiers. Les estimations facultatives ne deviennent jamais un chiffre d'affaires ; pas de prévision financière ou score de probabilité en V1.
 
-Étapes proposées : `A_QUALIFIER`, `A_CONTACTER`, `CONTACT_ENGAGE`, `BESOIN_QUALIFIE`, `PROPOSITION_PRESENTEE`, `DECISION_ATTENDUE`, `GAGNEE`, `PERDUE`, `EN_PAUSE`.
+## 2. Ajouter un prospect — CA-01/02/10
 
-| Commande | Préconditions et résultat | Refus / trace |
-| --- | --- | --- |
-| Avancer ou revenir à une étape active | Opportunité non archivée, droit de gestion, version courante ; saut ou retour avec motif | Refuser changement direct d'une affaire terminale ; conserver ancienne/nouvelle étape, acteur et motif |
-| Mettre en pause | Motif et date future de réexamen, ancienne étape mémorisée | Sans motif/date : refus ; arrivée de la date = rappel, jamais réouverture automatique |
-| Reprendre | Action explicite vers étape active, motif | Opposition conservée et tâches non recréées implicitement |
-| Déclarer perdue | Motif obligatoire ; historique conservé | Les tâches ouvertes sont proposées à annulation, pas supprimées ; leur traitement doit être confirmé |
-| Déclarer gagnée | Preuve canonique lue par le serveur, conforme à ARB-04, droit de gestion et de consultation de la preuve | Un lien partenaire, un commerçant BROUILLON ou un checkout créé ne suffit pas ; refus `PREUVE_GAIN_INSUFFISANTE` |
-| Rouvrir gagnée/perdue | Justification obligatoire ; conserver décision précédente et preuve datée | Ne modifie ni paiement, ni abonnement, ni dossier métier ; ne ressuscite aucune tâche annulée |
+Formulaire rapide : **nom de la structure, périmètre et objet commercial**. Le titre du dossier peut être prérempli par le libellé du périmètre/objectif, sans inventer de besoin. Les coordonnées et le contact peuvent être ajoutés ensuite. Le responsable du dossier est l'utilisateur créateur par défaut pour la saisie manuelle, modifiable vers un utilisateur actif autorisé à gérer le CRM.
 
-Un statut historique importé « gagné » reste une valeur de provenance et une anomalie à qualifier tant que la preuve métier requise n’est pas présente. Un remboursement ou une résiliation ultérieurs produisent une divergence visible entre preuve du gain historique et état courant ; ils ne réécrivent pas silencieusement l'histoire CRM. Le traitement de cette divergence appartient à un opérateur.
+Une fiche prospect porte nom, type facultatif (collectivité, association, commerce, entreprise/CSE, autre), adresse/commune/INSEE facultatifs, coordonnées de structure, source, état actif/archivé et version. Une commune hors catalogue est admissible ; résolution explicite au centre communal, sans géocodage d’adresse ni création/publication d'une ville marchande.
 
-## Historique — CA-04
+Chaque contact porte nom, fonction, e-mail/téléphone professionnels connus et état actif/obsolète. Au moins un nom ou une coordonnée valide est nécessaire. Plusieurs contacts sont possibles ; un départ rend le contact obsolète sans supprimer son histoire. Les coordonnées de structure ne remplacent pas automatiquement celles d'une personne.
 
-Enregistrer appel, rendez-vous, note et email consigné avec `occurred_at`, `recorded_at`, auteur et provenance. `recorded_at` est fixé par le serveur. Un email consigné n'invoque pas le fournisseur et n'affiche pas « délivré ». Une correction crée un événement référant l'événement corrigé avec motif ; pas d'édition silencieuse des traces. Les dates futures relèvent des tâches ; les corrections de date d'événement restent tracées.
+Chaque dossier appartient à un prospect, avec périmètre **ANIMATION** ou **COFFRETS**. Coffrets exige un objectif **PARTENARIAT_COMMERCANT** ou **ACHAT_ENTREPRISE_CSE**. Plusieurs dossiers du même périmètre sont possibles pour des campagnes successives. Le responsable, l'étape, la priorité normale/haute et les tâches sont propres au dossier.
 
-La chronologie métier contient les informations nécessaires à la reprise commerciale. L'audit technique conserve IDs, codes d'action, versions et corrélation, jamais une copie intégrale du texte libre ou du fichier. La purge peut supprimer/anonymiser un contenu selon la politique retenue ; « historique » ne signifie pas conservation illimitée.
+Avant création, montrer les ressemblances (nom/commune, coordonnées), sans fusion automatique. Une correspondance certaine exige un identifiant CRM ou de source déjà établi ; nom ou e-mail générique commun ne suffisent jamais. Créer un prospect ne crée ni client, commerce, accès, souscription, commande ou e-mail.
 
-## Actions et rappels — CA-05/06
+## Carte interactive — CA-07/13/14/15
 
-États proposés : `A_FAIRE`, `TERMINEE`, `ANNULEE`. Reporter modifie l'échéance avec motif et événement ; réaffecter vérifie un compte interne actif habilité au CRM. Terminer exige un résultat, annuler un motif. Répéter la même commande ne crée pas un deuxième événement. Les tâches d'une opportunité close restent visibles jusqu'à traitement explicite.
+Dans **Prospects**, bascule « Liste / Carte » sans changer de filtre : périmètre/objectif, étape du dossier, responsable, priorité, commune/département et état actif/archivé. Un prospect ayant plusieurs dossiers correspondants apparaît une seule fois comme structure ; le groupe indique séparément prospects et dossiers.
 
-« Prochaine action » est la projection de la première tâche ouverte par échéance, puis UUID ; pas un champ libre divergent. « Mes actions » utilise l'identité du serveur. Aujourd'hui = journée civile Paris ; retard = échéance antérieure à l'instant serveur. À échéance précise, la tâche devient due, puis en retard. Une date sans heure importée reste à compléter, sans choix arbitraire d'horaire.
+La carte présente des centres communaux intitulés **« Localisation à la commune — approximative »**, jamais l'adresse exacte d'un contact. Les points superposés sont regroupés ; cliquer sur un groupe ouvre une liste paginée de prospects et leurs dossiers correspondant aux filtres, puis la fiche. Sur mobile, le panneau s'ouvre sous la carte ; retour conserve filtres, zone et zoom. Les contrôles sont nommés et accessibles au clavier ; la liste offre toutes les actions sans manipuler la carte.
 
-La file de rappels est une lecture des tâches, sans création périodique d'un rappel par affichage. Rechargement, double consultation ou reprise d'un worker ne multiplient rien. Proposition V1 : badge persistant et file ERP ; aucun email de rappel interne ni relance automatique externe tant qu'ARB-03 n'est pas étendu.
+Compteur « Sans commune identifiée » ouvrant une liste dédiée, toujours inclus dans le total du portefeuille. L'INSEE résolu et son centre sont séparés de la commune textuelle source. Nom ambigu ou code postal partagé : choix explicite parmi les candidats, ou laisser à qualifier. Une panne du référentiel n'empêche pas la saisie/import ; une panne du fond de carte affiche un réessai et le retour à la liste.
+
+Couverture proposée : France métropolitaine et Outre-mer couverts par le référentiel, sélecteur de zones pour ne pas rendre les points illisibles. Une commune non couverte reste dans la liste avec son état, jamais placée sur un point arbitraire. Aucun GPS personnel nécessaire pour consulter les prospects. Le fournisseur de fond reçoit seulement les requêtes nécessaires aux tuiles, aucune fiche, note ou coordonnée de contact.
+
+## 3. Suivre et consigner un échange — CA-03/04
+
+Six étapes : **À contacter**, **En discussion**, **Proposition envoyée**, **Gagnée**, **Perdue**, **En pause**. Sauts et retours sont autorisés entre étapes actives, avec trace ; pas de formulaire de qualification imposé avant chaque étape. Perte : motif obligatoire. Pause : motif et date de réexamen ; échéance = signal à reprendre, pas réouverture automatique. Réouverture d'un dossier terminal : action explicite et motif.
+
+Conserver les preuves de gain décidées en octobre : partenariat commerçant accepté avec commerce et dossier OnBoard liés ; Animation avec souscription activée payée ou gratuite ; achat Coffrets avec commande payée. Le serveur lit les preuves canoniques. Un accord oral peut être noté en discussion ; il ne certifie pas le gain. Le changement d'étape n'active aucun objet métier. Les tâches ouvertes sont présentées lors de la clôture pour annulation/réalisation explicite, jamais supprimées en silence.
+
+**Unicité du gain confirmée (ARB-04b).** Une même commande payée, souscription
+activée ou acceptation commerçant ne peut faire gagner qu’un seul dossier CRM.
+Plusieurs dossiers peuvent conserver un lien de consultation, clairement distinct
+de l’attribution du gain. Un conflit indique que la preuve est déjà attribuée et
+propose le dossier détenteur si l’utilisateur est autorisé à le consulter.
+
+Réouvrir, perdre ou archiver le dossier ne libère pas automatiquement sa preuve.
+Le même dossier peut retrouver son état gagné avec cette preuve si elle est encore
+éligible ; cela ne compte pas une seconde vente. La V1 ne propose pas de transfert
+silencieux d’attribution entre dossiers. Les indicateurs de gains comptent les
+preuves canoniques distinctes et affichent leur période ; la chronologie conserve
+chaque transition. Un gain est un constat commercial à sa date, pas une nouvelle
+attestation de paiement : consulter l’état financier courant dans le domaine métier.
+
+Dans la fiche, **Ajouter une note** est immédiatement visible. Types courts : note, appel, rendez-vous, e-mail consigné. Texte libre limité à 10 000 caractères, date réelle de l'échange, auteur et date de saisie serveur. Les corrections sont versionnées/tracées ; elles ne remplacent pas l'audit. Une note disant « e-mail envoyé » n'envoie rien et ne prouve aucune délivrance. Après enregistrement, proposer « Programmer la prochaine action » sans l'imposer.
+
+Les échanges globaux sont rattachés au prospect, ceux d'une affaire à son dossier ; la chronologie de la fiche indique ce contexte. Ni import ni réouverture ne réécrivent les notes, décisions ou preuves historiques.
+
+## 4. Programmer et recevoir un rappel — CA-05/06/26/27
+
+Action depuis la fiche ou un dossier : libellé, type (appel, e-mail, rendez-vous, préparation, suivi), responsable, échéance et rappel. Une sollicitation désigne explicitement sa cible : un contact actif du prospect (`contact_id`) ou la structure (`cible=STRUCTURE`, coordonnées de structure). Canal explicite pour appel/e-mail/rendez-vous/suivi sollicitant ; une préparation interne est marquée non sollicitante. L’opposition de la structure bloque toutes ses cibles ; une opposition de contact bloque les tâches qui le ciblent. Si sa coordonnée est réutilisée comme coordonnée de structure, le blocage reste applicable à cette coordonnée normalisée : pas de contournement par changement de libellé. Une tâche peut appartenir au prospect sans dossier ; si un dossier est indiqué, il doit appartenir au même prospect. Proposition simple : rappel à l'échéance par défaut ; l'utilisateur peut fixer une date/heure antérieure. Pas de récurrence automatique en V1.
+
+Dates affichées en **Europe/Paris**, instants stockés UTC avec fuseau ; les heures inexistantes ou ambiguës au changement d'heure demandent correction/choix explicite. Une date seule nécessite une heure confirmée. Terminer exige un résultat court, annuler un motif ; reporter conserve l'ancienne échéance et invalide l'ancien rappel. La « prochaine action » est calculée depuis la première tâche ouverte, pas un deuxième champ éditable.
+
+Le rappel interne est toujours disponible. **WebPush** est activé volontairement par appareil depuis les préférences ; aucun prompt navigateur avant un clic explicite. Refus, navigateur non compatible ou abonnement expiré : message clair, file interne intacte. À l'ouverture, la notification mène à la tâche après authentification, puis contrôle les droits courants.
+
+**E-mail facultatif** : préférence personnelle désactivée initialement. Un message à la même échéance, adressé à l’adresse vérifiée du compte interne du responsable, jamais au contact du prospect. La vérification est liée à la version d’adresse courante par Identité interne (consommation d’un lien valide d’initialisation/réinitialisation), pas au seul état actif du compte. Changer l’adresse suspend l’option jusqu’à vérification puis nouvel opt-in pour cette adresse. Sans adresse interne vérifiée disponible, l’option e-mail est indisponible avec explication ; la file interne et le push restent utilisables. Activer l'e-mail en plus du push peut produire un message sur chaque canal choisi ; aucun basculement e-mail implicite après refus du push. Aucun rattrapage massif lors de la première activation d'un canal : tâches déjà échues restent dans la file interne.
+
+Un rappel n'est produit qu'une fois par tâche/révision d'échéance/destinataire/canal (et abonnement pour le push). Réaffectation, annulation, réalisation, archivage, perte de droits ou changement de préférence annulent les envois encore en attente ; recontrôle avant remise au transport. Un message déjà remis au fournisseur ne peut pas être rappelé et ne prouve pas la lecture. En cas d'issue incertaine, distinguer cet état d'un échec certain ; pas de promesse de livraison « exactement une fois » par un fournisseur externe.
+
+Notifications discrètes : « Une action commerciale vous attend », sans nom, note, téléphone ou e-mail de prospect sur écran verrouillé. Notification interne et état de tâche restent la référence même si l'envoi échoue. Les erreurs sont observables et les retries bornés ; jamais de boucle de renvoi à chaque visite.
+
+## 5. Importer — CA-08 à 12/28
+
+Parcours **Fichier → Aperçu → Confirmation → Bilan**. Choisir source stable, mode INIT/UPSERT et responsable des nouveaux dossiers (opérateur par défaut). Télécharger le [modèle](modele-import.csv), puis préparer le CSV selon le [contrat d'import](import-carte.md). L'aperçu montre créations, compléments, valeurs conservées, conflits et rejets. Aucune conversion, tâche ou notification n'est déclenchée par l'import.
+
+## 6. Passer au métier — CA-16/17/18
+
+Depuis un dossier, rechercher puis rattacher une référence canonique existante, ou ouvrir le parcours ERP/OnBoard autorisé et revenir rattacher son résultat. Les droits CRM et métier se cumulent ; un accès CRM ne donne pas un accès Animation, Pro, Finance ou SQLAdmin. Aucun contact/note dans l'URL de retour. En cas d'interruption après création métier, chercher le résultat existant ; ne pas recréer automatiquement.
+
+Conserver la fiche, ses contacts, notes et rappels après gain/rattachement : c'est la continuité de la relation client. Support, facturation, contrats, livraison et gestion opérationnelle restent dans leurs applications ; aucun ticket ou paiement dupliqué dans le CRM.
 
 ## Opposition et archivage — CA-20
 
-Proposition ARB-07 : opposition portée par l'organisation ou le contact, applicable à un ou plusieurs axes/canaux, avec motif, origine, date et auteur. Une portée omise est refusée ; l'écran propose explicitement « toutes les sollicitations ».
+Proposition simple : **Ne plus contacter** au niveau prospect (tous ses contacts) ou contact, pour toutes les sollicitations commerciales. Enregistrement immédiat par gestionnaire CRM, motif/source/date/acteur ; une levée requiert l'administration CRM et une justification/provenance explicites. Cette simplification remplace la proposition antérieure d'opposition configurable par axe/canal ; la levée demeure sensible.
 
-Une organisation opposée bloque les sollicitations de ses contacts dans la portée choisie ; une opposition contact ne se propage pas silencieusement aux autres contacts. Ne pas contourner une opposition en changeant de contact après opposition globale. Planifier/reporter/réactiver une tâche de sollicitation vérifie à nouveau les oppositions actives ; une tâche de préparation ou une note factuelle reste possible. Les tâches existantes incompatibles apparaissent bloquées, sans être effacées.
-
-Le système ne peut empêcher un appel passé hors Localeo : il refuse sa planification dans le CRM et avertit l'opérateur. Consigner après coup un échange réellement intervenu reste possible et traçable ; cela ne prouve pas un consentement. L'import, la fusion proposée, le rattachement et la réouverture conservent les oppositions. Une levée admin exige preuve et motif ; aucune case implicite d'accord commercial.
-
-Archiver masque la fiche des vues actives, conserve les liens et interdit les nouvelles sollicitations ; réactiver ne lève pas l'opposition. Fusion destructive et export massif ne sont pas définis par cette V1 : proposition de les différer, à confirmer avec ARB-05. Le rapprochement reste un rattachement explicitement choisi, avec historique.
-
-## Passage au métier — CA-16/17/18
-
-Décision ARB-08 validée le 9 octobre : rechercher un objet existant, afficher son type et sa référence, vérifier les droits métier, puis rattacher explicitement à l'opportunité. Un objet apparenté ne doit pas être rattaché à la mauvaise organisation ; le serveur vérifie les identifiants comparables, et une divergence impose correction/justification autorisée.
-
-Si aucun objet n'existe, ouvrir le parcours canonique avec un retour CRM local contrôlé. Ne pas placer contacts, notes ou fichier dans l'URL. L'opérateur accomplit la création avec ses confirmations propres, revient et rattache l'identifiant produit. Une fermeture entre création et rattachement peut laisser un objet métier sans lien CRM : la reprise recherche cet objet, elle ne recrée pas automatiquement. Le CRM garantit l'unicité de son lien ; les producteurs existants gardent leurs garanties de création.
-
-Les commandes « rattacher » et « déclarer gagnée » sont différentes. Une affaire peut être rattachée mais pas gagnée. Chaque opportunité a un lien principal par type de cible ; remplacement explicite avec motif, ancienne référence dans la chronologie. Plusieurs opportunités peuvent concerner la même organisation métier, mais une même preuve de vente ne doit pas gonfler les gains : définir avec ARB-04 l'unicité de la preuve par opportunité/affaire.
-
-## Indicateurs — CA-07/22
-
-Compter séparément organisations distinctes, opportunités, tâches dues et gains vérifiés. Les volumes liste/tableau/carte proviennent d'une même requête filtrée ; le nombre de points n'est pas le nombre de prospects. Afficher les non-localisés séparément. Le tableau ne déplace pas une carte par glisser-déposer sans la commande de transition, ses motifs et ses refus.
-
-Afficher période, filtre d'axe et définition : taux de gain proposé = affaires gagnées / affaires gagnées ou perdues sur décisions de la période ; dénominateur zéro = « non calculable ». Une réouverture exclut l'affaire des décisions terminales courantes ; le journal conserve ses anciennes décisions. L'indicateur et sa définition restent soumis à ARB-04. Ne pas appeler une somme d'estimations « chiffre d'affaires », additionner des devises différentes ou attribuer à chaque axe l'intégralité d'une même commande.
+La saisie manuelle, l'import et les tâches utilisent la même règle. Les tâches de sollicitation ouvertes deviennent bloquées et leurs rappels externes sont annulés ; notes factuelles et préparation interne restent possibles. Une tâche « préparation » ne permet pas d'y cacher une demande d'appel ; le canal/type sollicitation est explicite. Archiver interdit de nouvelles sollicitations et retire la fiche des vues actives ; réactiver ne lève pas l'opposition. Aucune cellule CSV ne réactive un contact obsolète, une fiche archivée ou une opposition.
