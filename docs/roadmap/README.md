@@ -137,9 +137,12 @@ Tarif, quota et modalités restantes à décider. État **À faire**, sans impl�
 
 Le 22 octobre, l'[EPIC 74 — Tombola publique](a-faire/epic-74-tombola-publique-backlog.md)
 ajoute un cadrage distinct de la tombola commerçante E53 : modèle standard sans
-commerce ni achat requis, participation depuis un QR public, support de stand
-et préparation d'une audience future. Huit US et seize critères cibles ; six
-groupes d'arbitrages explicites. État **À faire**, sans implémentation.
+commerce ni achat requis, participation depuis un QR public et support de stand.
+La [spécification V1 du 3 novembre](../specifications/epic-74-tombola-publique/README.md)
+résout les six arbitrages : e-mail vérifié avant qualification, trois modes de
+lots, quota standard existant et suivi facultatif de commune dans Live sans
+nouveau canal d'envoi. Huit US et seize critères avec preuves prévues.
+État **À faire**, sans implémentation ni activation.
 
 - L'ancien numéro **Marketplace 53**, consacré à la pagination, est fusionné
   dans l'[EPIC 57](terminees/epic-57-bornage-pagination-api-marketplace-backlog.md).
@@ -179,7 +182,7 @@ précise la provenance et les divergences historiques conservées.
 | 71 | A faire | [CRM de prospection](a-faire/epic-71-crm-prospection-animation-coffrets-pro-backlog.md) : trois axes commerciaux, fichier Gironde V2 examiné, import contrôlé, carte communale, historique, tâches et rappels internes ; 24 critères, [spécification V0.1](../specifications/epic-71-crm-prospection/README.md), arbitrages restants explicites, sans implémentation. |
 | 72 | Terminée | [Accès salariés Localeo Pro](terminees/epic-72-acces-salaries-validation-localeo-pro-backlog.md) : implémentation locale vérifiée, 22 critères ; option ERP, invitations, scanner et historique limités, conservation. |
 | 73 | Terminée | [Animation et/ou Coffrets](terminees/epic-73-animation-et-ou-coffrets-backlog.md) : 38 US, 63 critères et extensions vérifiés techniquement le 1er novembre 2026 selon E73-DEC-CLOTURE-TESTS ; preuves et activation séparées dans le bilan. |
-| 74 | A faire | [Tombola publique](a-faire/epic-74-tombola-publique-backlog.md) : modèle standard sans commerçant, participation par QR, supports de stand et audience future ; 8 US, 16 critères cibles, arbitrages ouverts |
+| 74 | A faire | [Tombola publique](a-faire/epic-74-tombola-publique-backlog.md) : spécification V1 du 3 novembre ; QR partageable, e-mail vérifié, trois modes de lots, quota standard et suivi commune Live ; 8 US, 16 critères, six arbitrages résolus ; tests prévus |
 | 75 | A faire | [Mots croisés assistés par l’IA](a-faire/epic-75-mots-croises-assistes-ia-backlog.md) : indices chez les commerçants, préparation Localeo validée par l’organisateur, grille correcte obligatoire pour le tirage ; 8 US, 18 critères cibles, huit groupes d’arbitrages ouverts ou partiels |
 | 76 | A faire | [Impersonification support Pro et Animation](a-faire/epic-76-impersonification-support-pro-animation-backlog.md) : accès temporaire depuis ERP, 18 critères cibles ; consultation par défaut et intervention explicite/tracée retenues, droits, actions et modalités à arbitrer, sans implémentation |
 | Autres identifiants du tronc commun | Terminees | Statut produit consolide conserve ; les anciennes mentions de stories a faire ne rouvrent pas ces epics. |

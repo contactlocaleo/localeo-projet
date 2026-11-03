@@ -1,5 +1,29 @@
 # Registre des anomalies
 
+## ANO-ANI-HEADER-COMPTE-20261103 — Espace réservé aux rubriques du menu
+
+- **Observé** : dans le shell connecté de Localeo Animation, les documents,
+  l’identité, l’organisation, la version et les actions de compte/déconnexion
+  occupaient un pied de menu non rétractable, réduisant la hauteur des rubriques.
+  Cause confirmée dans `Sidebar` et `.app-navigation__account`, sur la base
+  applicative `4116e0e` ; aucune observation de version distante revendiquée.
+- **Correction** : déplacement dans le menu « Mon compte et documents » de
+  l’en-tête. Identité compacte sur PC, initiales sur petit écran, identité
+  complète à l’ouverture. Les documents s’ouvrent dans un autre onglet pour
+  préserver la saisie ; l’accès Compte et équipe garde la protection de navigation,
+  et la déconnexion appelle le parcours serveur existant. Le menu latéral ne
+  conserve que les rubriques. Styles corrigés à la source, règles du pied retirées.
+- **Preuves locales** : TypeScript et ESLint réussis ; 297 tests Node réussis,
+  aucun ignoré ; build isolé réussi avec avertissement de taille de bundle.
+  Le scénario navigateur `WORKSPACE_CASE=shell` vérifie dix formats PC/mobile,
+  paysage et texte à 200 %, les bornes de largeur, le clavier et le focus,
+  les liens, la garde de saisie et la déconnexion avec API simulée. Captures dans
+  `localeo-animation/tmp/pro-alignment/`, non versionnées.
+- **Impacts** : présentation seule dans `localeo-animation` et documentation
+  dans `localeo-projet`. Réutilisation du contexte déjà chargé par l’en-tête ;
+  pas de contrat API, permission, règle métier, migration ou donnée de démonstration
+  modifiés. Aucun nouveau paramètre d’exploitation. Déploiement non effectué.
+
 ## ALL
 | Identifiant | Périmètre | Description | Suivi |
 | --- | --- | --- | --- |

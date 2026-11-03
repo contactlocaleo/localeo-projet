@@ -8,7 +8,7 @@ Commencer par le README du sujet, puis consulter ses règles, contrats et arbitr
 
 - **À faire : EPIC 75**, [Mots croisés assistés par l’IA](../roadmap/a-faire/epic-75-mots-croises-assistes-ia-backlog.md) : nouveau jeu payant ; indices chez les commerçants, préparation Localeo validée par l’organisateur et grille correcte obligatoire pour le tirage confirmés le 23 octobre. 8 US et 18 critères cibles ; offre et modalités restantes à arbitrer, aucun dossier de spécification détaillée à ce stade.
 
-- **À faire : EPIC 74**, [Tombola publique sans commerçant](../roadmap/a-faire/epic-74-tombola-publique-backlog.md) : cadrage du 22 octobre, 8 US et 16 critères cibles ; QR public et modèle standard sans achat ni validation commerçante, supports de stand et audience future. Arbitrages explicites ; aucun dossier de spécification détaillée créé à ce stade.
+- **À faire : EPIC 74**, [Tombola publique sans commerçant](epic-74-tombola-publique/README.md) : spécification V1 du 3 novembre, 8 US et 16 critères ; six arbitrages résolus. QR partageable, prénom/e-mail vérifié avant qualification, trois modes de lots, quota standard existant et suivi facultatif de commune dans Live. Contrats et tests prévus ; aucune implémentation ni activation.
 
 - **Terminée : EPIC 73**, [Animation et/ou Coffrets](epic-73-animation-et-ou-coffrets/README.md), spécification détaillée V1 du 17 octobre : 38 US, 63 critères, 147 décisions ; lots libres/QR/PIN, périmètres commerçants, modules/import/communication, parcours SaaS, migrations et reprise. Clôture technique le 1er novembre 2026 selon E73-DEC-CLOTURE-TESTS ; tests et extensions vérifiés, activation suivie séparément dans le bilan.
 
@@ -66,6 +66,7 @@ Commencer par le README du sujet, puis consulter ses règles, contrats et arbitr
 | 71 | [CRM de prospection](epic-71-crm-prospection/README.md) | À faire | Backend ERP ; liens OnBoard, Animation et Achats |
 | 72 | [Accès salariés Localeo Pro](epic-72-acces-salaries/README.md) | Terminée sur tests le 1er novembre 2026 | Backend/ERP, Commerçant ; attribution des validations partagées |
 | 73 | [Animation et/ou Coffrets](epic-73-animation-et-ou-coffrets/README.md) | Terminée | Backend/ERP et satellites, Animation, Commerçant, Marketplace/Live |
+| 74 | [Tombola publique sans commerçant](epic-74-tombola-publique/README.md) | À faire | Backend/ERP, Animation, Marketplace/Live ; Pro pour remise et non-régression |
 
 ## Contrats et historique
 

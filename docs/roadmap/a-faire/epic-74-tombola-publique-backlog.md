@@ -17,7 +17,9 @@
   [E42 — Live](../../specifications/epic-42-localeo-live/README.md),
   [E73 — Produits, dotations et SaaS](../../specifications/epic-73-animation-et-ou-coffrets/README.md).
   Pas de deuxième moteur de tirage ni de référentiel de participants parallèle.
-- Aucun dossier de spécification détaillée ni code nouveau à ce stade.
+- [Spécification détaillée V1](../../specifications/epic-74-tombola-publique/README.md)
+  du **3 novembre 2026** : six arbitrages résolus, architecture et preuves prévues.
+  Aucun code, migration ou activation E74 réalisé par cette spécification.
 
 ## Problème et résultat attendu
 
@@ -38,30 +40,29 @@ gagnant, opérateur Localeo pour la supervision. La constitution d'une audience
 pour des événements futurs est distincte de l'inscription à ce jeu : une
 participation ne vaut pas, à elle seule, autorisation de communication future.
 
-## Décisions acquises et propositions
+## Décisions acquises
 
 | Référence | Nature | Contenu |
 | --- | --- | --- |
 | E74-DEC-01 | Demande acquise | Ajouter une « Tombola publique » au forfait standard, sans achat d'un module supplémentaire pour accéder à ce type d'animation |
 | E74-DEC-02 | Demande acquise | Aucun commerçant requis pour créer, publier et participer ; qualification depuis le parcours ouvert par le QR public |
 | E74-DEC-03 | Demande acquise | QR utilisable sur un support physique, notamment un stand sur un marché |
-| E74-DEC-04 | Objectif acquis, modalités ouvertes | Développer le public des prochaines animations ; modalités de recueil et de réutilisation des préférences à arbitrer |
-| E74-PROP-01 | Proposition | Une participation et une chance par identité retenue et par tombola ; rescans sans chance supplémentaire |
-| E74-PROP-02 | Proposition | Consommer le quota standard d'animations du forfait à la publication, avec les mêmes règles que les autres types standard ; pas de quota illimité implicite |
-| E74-PROP-03 | Proposition | Après scan : formulaire court ou réutilisation du compte existant, puis confirmation explicite ; aucun mot de passe supplémentaire pour un compte déjà reconnu |
-| E74-PROP-04 | Proposition | Communications futures facultatives, choix non précoché et révocable ; refus sans perte de chance ni exclusion du jeu |
+| E74-DEC-04 | Décision du 3 novembre | Développer le public par le suivi facultatif de la commune dans Live, sans nouveau canal d'envoi ni campagne inter-animations |
+| E74-PROP-01 | Retenue et précisée le 3 novembre | Une participation et une chance par e-mail normalisé vérifié et par tombola ; rescans sans chance supplémentaire |
+| E74-PROP-02 | Retenue le 3 novembre | Quota standard consommé à la publication, y compris pour les souscriptions déjà actives ; aucune hausse ni quota illimité implicite |
+| E74-PROP-03 | Précisée le 3 novembre | Prénom + e-mail, règlement accepté et confirmation explicite depuis l'e-mail ; aucun nouveau compte et aucune qualification avant vérification |
+| E74-PROP-04 | Remplacée par ARB-06 le 3 novembre | Suivi local facultatif de la commune ; refus/retrait sans perte de chance. Aucun consentement marketing déduit de l'inscription |
 
-Les propositions ne sont pas des arbitrages validés. Les trois premières
-questions interactives portent sur le parcours après scan, la présence sur place
-et le recueil facultatif des préférences de communication.
+Les références de propositions initiales sont conservées pour la traçabilité.
+Les réponses explicites du porteur produit du 3 novembre résolvent les six
+groupes d'arbitrages consignés plus bas.
 
 ## Périmètre
 
 ### Inclus
 
 - Nouveau type d'animation clairement distinct de « Tombola locale des
-  commerçants » dans le catalogue standard. Code technique candidat
-  `TOMBOLA_PUBLIQUE`, à confirmer lors de la spécification.
+  commerçants » dans le catalogue standard. Code `TOMBOLA_PUBLIQUE`, version `1.0`.
 - Assistant de création adapté : nom, commune, organisateur, dates, présentation,
   dotation et règlement ; aucune étape obligatoire de sélection, mission,
   invitation, acceptation ou onboarding de commerçants.
@@ -72,9 +73,8 @@ et le recueil facultatif des préférences de communication.
   d'une requête incertaine et fermeture des inscriptions aux dates prévues.
 - Clôture, population éligible figée, tirage, suppléants, information des gagnants
   et suivi des lots via les mécanismes existants, adaptés au nouveau modèle.
-- Préparation de l'audience future avec préférences distinctes et traçables,
-  selon l'arbitrage de communication ; visibilité des résultats par organisation
-  et commune, sans réinscription automatique aux futurs jeux.
+- Suivi facultatif de la commune dans Live, mémorisé sur l'appareil et modifiable
+  dans « Mes communes » ; aucun envoi ni inscription automatique aux futurs jeux.
 - Statistiques pertinentes : inscriptions confirmées, participations éligibles,
   source de diffusion si connue, gagnants et lots remis ; ne pas inventer des
   passages ou achats chez des commerçants.
@@ -83,12 +83,12 @@ et le recueil facultatif des préférences de communication.
 
 Une tombola à **lots libres gérés en externe** doit pouvoir fonctionner de bout
 en bout sans aucun commerce : l'organisateur assure la remise. La compatibilité
-avec Coffrets et bons numériques E73 est à préciser (ARB-04). Un commerce chargé
+avec Coffrets et bons numériques E73 est retenue (ARB-04). Un commerce chargé
 de remettre un bon, s'il est utilisé, ne devient pas une étape de qualification
 du participant. Les exigences existantes de remise d'un bon numérique ne sont
 pas supprimées silencieusement pour rendre cette variante autonome.
 
-### Hors périmètre proposé
+### Hors périmètre
 
 - Billets payants, achat obligatoire, chances proportionnelles à une dépense,
   gains instantanés ou second moteur de tirage.
@@ -99,11 +99,11 @@ pas supprimées silencieusement pour rendre cette variante autonome.
 - Nouvelle plateforme d'envoi marketing. Le recueil de préférences ne donne
   pas de droits gratuits au module Communication E73 et n'étend pas implicitement
   ses campagnes, limitées aux participants d'une animation et à leur fenêtre
-  d'envoi. Le canal des futures invitations reste un arbitrage explicite.
+  d'envoi. Aucun nouveau canal ni campagne inter-animations retenu en ARB-06.
 - Scan hors connexion, géolocalisation obligatoire, application native ou
-  contrôle physique de présence, sauf décision spécifique ARB-02.
+  contrôle physique de présence : le lien est partageable selon ARB-02.
 
-## User stories proposées
+## User stories
 
 | ID | Acteur et besoin | Critères |
 | --- | --- | --- |
@@ -111,71 +111,78 @@ pas supprimées silencieusement pour rendre cette variante autonome.
 | E74-US-02 | Organisateur : configurer et publier sans commerçant, avec un parcours adapté | 03, 04 |
 | E74-US-03 | Organisateur : télécharger le QR et un support compréhensible pour un stand | 05, 06 |
 | E74-US-04 | Visiteur : participer depuis son téléphone et savoir que sa participation est enregistrée | 07, 08, 09 |
-| E74-US-05 | Participant : choisir séparément s'il souhaite être informé des prochaines animations | 10, 11 |
+| E74-US-05 | Participant : choisir séparément de suivre la commune dans Live pour retrouver ses animations | 10, 11 |
 | E74-US-06 | Gestionnaire : suivre et clôturer la tombola puis tirer les gagnants | 12, 13 |
 | E74-US-07 | Gagnant et organisateur : recevoir le résultat et suivre la remise du lot | 14 |
 | E74-US-08 | Localeo : superviser, mesurer et exploiter le nouveau modèle sans régression | 15, 16 |
 
 ## Critères d'acceptation cibles
 
-Les critères dépendant d'un arbitrage sont explicitement conditionnés ; ils ne
-constituent pas une preuve d'implémentation ou d'approbation des propositions.
+Les identifiants restent stables. Les formulations ont été précisées selon les
+arbitrages du 3 novembre ; les critères ne constituent pas une preuve d'implémentation.
 
 | Critère | Acteur et préconditions | Action | Résultat observable et effets interdits |
 | --- | --- | --- | --- |
 | E74-CA-01 | Organisateur habilité, forfait standard actif | Consulter le catalogue et choisir une tombola | « Tombola publique » est identifiable et incluse ; aucune souscription de module spécifique exigée |
-| E74-CA-02 | Quota et droits du forfait connus | Publier/rejouer la publication | Règle commerciale choisie en ARB-05 appliquée une seule fois ; aucune double consommation ni accès sans droit |
+| E74-CA-02 | Quota et droits du forfait connus, souscription nouvelle ou déjà active | Publier/rejouer la publication | Quota standard existant consommé une seule fois, conditions acquises inchangées ; aucune double consommation ni accès sans droit |
 | E74-CA-03 | Organisation sans aucun commerce rattaché, dotation externe prête | Créer puis publier la tombola | Aucun commerce, mission, invitation, minimum de commerces ou paiement Coffrets imposé à cette configuration ; dates/règlement/dotation requis restent contrôlés |
 | E74-CA-04 | Gestionnaire autorisé dans sa commune | Parcourir l'assistant et le suivi | Étapes commerçants absentes ou explicitement non applicables ; une action directe ne contourne pas les droits d'organisation/commune |
 | E74-CA-05 | Tombola publiée | Télécharger le support puis scanner le QR ou ouvrir le lien | Ouverture de la bonne animation ; QR sans identité personnelle ni secret d'administration ; lien lisible proposé en alternative |
 | E74-CA-06 | Flyer d'une tombola publique avec dotation connue | Lire le document | Promesse et nombre d'exemplaires cohérents ; aucune instruction d'achat/scan chez un commerçant ni compteur commerçants inadapté ; image personnalisée compatible avec le socle flyer |
-| E74-CA-07 | Visiteur pendant la période autorisée | Suivre le parcours ARB-01 et confirmer selon sa règle | Participation enregistrée et éligibilité explicite sans validation Pro/PIN ; état « à confirmer » distinct si une vérification d'identité reste nécessaire |
-| E74-CA-08 | Même identité selon ARB-03, double clic/rescan/réponse perdue | Répéter ou reprendre la participation | Même participation retrouvée, pas de chances ajoutées au rejeu selon la règle retenue ; une erreur réseau n'est pas annoncée comme succès |
-| E74-CA-09 | Avant ouverture, après clôture, animation annulée ou règle de présence non satisfaite | Tenter de participer | Refus compréhensible sans inscription qualifiée ; contrôle serveur des dates et de la présence si cette option est retenue |
-| E74-CA-10 | Visiteur qui refuse les communications futures | Participer | Accès au jeu et chances inchangés ; aucune préférence positive implicite tirée du scan ou de l'acceptation du règlement |
-| E74-CA-11 | Option de communications futures retenue en ARB-06 | Accepter puis retirer cette préférence | Portée, canal, information présentée et date tracés ; retrait effectif pour les sollicitations futures, sans suppression arbitraire des faits de participation ; si l'option est différée, aucun envoi futur lancé par cette epic |
+| E74-CA-07 | Visiteur pendant la période autorisée | Saisir prénom/e-mail, accepter le règlement puis confirmer explicitement depuis l'e-mail | Attente sans chance avant vérification ; une chance et confirmation claire ensuite, sans Pro/PIN ni compte. Ouvrir le lien seul ne qualifie pas |
+| E74-CA-08 | Même e-mail normalisé, double clic/rescan/réponse perdue | Répéter ou reprendre la participation | Une participation et une chance par tombola ; reprise autorisée sans fuite d'accès à un tiers ; une erreur réseau n'est pas annoncée comme succès |
+| E74-CA-09 | Avant ouverture, à/après la fin, animation clôturée ou annulée | Tenter une première inscription/confirmation | Refus compréhensible sans qualification ; contrôle serveur des dates et statuts, y compris lien reçu avant fermeture. Aucune preuve de présence exigée |
+| E74-CA-10 | Visiteur qui refuse suivi commune ou notifications facultatives | Participer | Accès au jeu et chances inchangés ; aucune préférence positive implicite tirée du scan ou de l'acceptation du règlement |
+| E74-CA-11 | Participant souhaitant suivre la commune dans Live | Ajouter puis retirer le suivi | Choix explicite, portée navigateur annoncée, limite et stockage indisponible gérés ; retrait sans suppression de participation. Aucun nouveau canal d'envoi, opt-in marketing ou campagne inter-animations |
 | E74-CA-12 | Gestionnaire, liste de participants et bilan | Consulter, filtrer et clôturer | Listes paginées côté serveur, totaux exacts, pas de faux passages commerçants ; population éligible figée selon le socle de clôture |
 | E74-CA-13 | Tombola clôturée, tirage autorisé | Tirer, rejouer ou tirer avec zéro/peu de candidats | Résultat cohérent avec la population figée ; aucun double tirage/gain involontaire ; règles de suppléants et cas sans candidat explicites |
 | E74-CA-14 | Tirage confirmé et dotation compatible | Notifier puis remettre un lot | Parcours de remise E73 conservé, état d'envoi distinct de remise ; la gestion externe reste réalisable sans commerce |
 | E74-CA-15 | Utilisateur non habilité ou trafic automatisé | Appeler les routes publiques/protégées | Pas d'accès aux participants d'autrui ; protections contre abus, erreurs sans données privées, audit exploitable et performances bornées |
 | E74-CA-16 | Autres modèles et données existantes | Rejouer leurs parcours et les fixtures de démonstration | Qualification commerçante inchangée ; modèle public testé isolément, aucune activation ni conversion automatique d'animations existantes |
 
-## Impacts à instruire
+## Impacts instruits par la spécification
 
-| Sujet | Impact initial et sources |
+L'[architecture canonique](../../specifications/epic-74-tombola-publique/architecture-contrats.md)
+décrit les producteurs/consommateurs vérifiés, données, concurrence, bornes et
+livraison ; la [matrice des preuves](../../specifications/epic-74-tombola-publique/verification.md)
+relie les 16 critères aux tests, documents, fixtures et opérations.
+
+| Sujet | Impact retenu |
 | --- | --- |
-| Domaine backend | **Concerné** : stratégie de qualification du nouveau modèle, validation de publication sans commerce, règles de quota, population figée et audit. Le domaine décide ; API/portail ne simulent pas une validation commerçante |
-| Localeo Animation | **Concerné** : catalogue, assistant, QR/supports, page participants, clôture/tirage, bilan et préférences futures selon arbitrage |
-| Site Animation / Marketplace / Live | **Concerné** : présentation publique, inscription mobile, identité et reprise, confirmation et suivi. Une simple ouverture par prévisualisation de lien ou robot ne doit pas créer une participation |
-| Localeo Pro | **Non requis pour qualifier** ce modèle ; **à examiner** pour la remise optionnelle des bons numériques et la non-régression des autres modèles |
-| ERP / Support / Ops | **Concerné** : modèle identifiable, supervision des refus/doublons/abus et assistance sans visibilité indue des données personnelles. CRM E71 sans transfert automatique |
-| API et consommateurs | **À spécifier** : exposition du modèle et de ses capacités, commande publique de participation/reprise, statut, statistiques et préférences. Aucun faux contrat OpenAPI ajouté au cadrage |
-| Persistance / migration | **À examiner** : catalogue, preuve de qualification autonome, unicité concurrente, provenance du QR, préférences et conservation ; aucune reprise automatique des anciennes tombolas |
-| Performance | **Concerné** : QR commun susceptible de rafales, inscription concurrente et limites anti-abus ; pagination/index/comptages bornés selon la convention transverse ; volumétrie propre à cette mécanique à confirmer |
-| Générateur / fixtures | **Concerné** : organisation sans commerce, lots externes, nouveau et ancien participant, répétition, clôture, refus communication, perte réseau et droits ; génération via parcours métier normal, sans campagne distante à ce stade |
-| Documentation fonctionnelle / règlement | **Concerné** : guide stand, distinction tombolas, conditions de participation, information sur les données et préférences. Faire relire le règlement spécifique avant commercialisation ; aucune validation juridique présumée |
-| Exploitation / livraison | **À examiner** : activation du modèle après livraison de tous les consommateurs, notifications, conservation, observabilité et retour arrière ; hébergement et clés existants à réutiliser si suffisants |
+| Domaine/backend | Nouveau moteur et preuve d'adresse, identité minimale, qualification/publication sans commerce, gel depuis les faits, quota standard et liste réellement bornée |
+| Animation | Catalogue, assistant, création/configuration, QR/flyer, participants, bilan et tirage contextualisés |
+| Marketplace/Live | Fiche publique, attente et confirmation d'e-mail, reprise, renderer, découvertes/filtres et suivi local facultatif ; pas de nouveau compte |
+| Pro | Aucune qualification par scan/PIN E74 ; non-régression des autres modèles et remise optionnelle de bons numériques |
+| ERP/Support/Ops | Capacités du modèle, refus compréhensibles, supervision et périmètres organisation/commune ; aucun transfert CRM automatique |
+| Contrats | Producteur backend, exporteurs existants et deux registres frontend fermés à étendre avant activation ; aucun faux OpenAPI généré durant la spécification |
+| Données | Migration additive identité/challenge/preuve/projection/index ; pas de conversion historique ; suppression/anonymisation/restauration à vérifier |
+| Performance | QR commun et IP partagée, anti-abus par adresse, pages 25/100 et traitements par lots ; budgets N/10N et charge mixte définis, à mesurer |
+| Générateur | Organisation sans commerce, trois modes de lots, attentes/confirmations/expirations ; commandes métier et transport e-mail isolé |
+| Documents | Guides organisateur/habitant/stand, contrats, notice/règlement et procédures ; revue de mise en service séparée des tests de clôture |
+| Exploitation | Outbox et reprise, purge, observabilité, activation après consommateurs compatibles ; pas de nouveau DNS, tarif ou clé d'envoi prévu |
 
-## Questions ouvertes
+## Arbitrages résolus le 3 novembre 2026
 
-| ID | Décision attendue et proposition | Partie dépendante |
+| ID | Décision explicite | Partie concernée |
 | --- | --- | --- |
-| E74-ARB-01 | Formulaire puis confirmation explicite, ou participation immédiate pour un compte reconnu ? Recommandation : action explicite, confirmation claire, sans effet de bord lors d'une simple consultation | US04, CA07/08 |
-| E74-ARB-02 | Participation via lien partagé autorisée ou présence au stand requise ? Un QR fixe seul ne démontre pas une présence physique. Recommandation V1 : lien partageable ; si présence exigée, cadrer la preuve et le rôle de l'animateur | US03/04, CA05/09 |
-| E74-ARB-03 | Données obligatoires et preuve d'identité : proposition prénom + email, réutilisation de Live et vérification email selon les capacités existantes ; confirmer une chance par identité et la règle pour les participants sans compte | US04, anti-doublons, éligibilité et contact gagnant |
-| E74-ARB-04 | Modes de dotation disponibles : externe seul en V1, ou les trois modes E73 ? Recommandation : réutiliser les modes compatibles, avec remise numérique par commerce uniquement si volontairement choisie | US02/07 et parcours sans commerce de bout en bout |
-| E74-ARB-05 | Confirmer l'utilisation du quota d'animations standard existant, ainsi que l'ouverture aux souscriptions standard déjà actives ; aucune hausse tarifaire ni quota illimité déduit de la demande | US01, catalogue et conditions acquises E73 |
-| E74-ARB-06 | Recueil facultatif pour les futures animations ou simple conservation du jeu ? Si retenu, préciser destinataire de l'autorisation (organisateur/commune/Localeo), canaux et parcours d'envoi autorisé. Le module E73 actuel ne couvre pas implicitement des campagnes inter-animations après sa fenêtre | US05, préférences et réutilisation d'audience |
+| E74-ARB-01 | Formulaire et confirmation explicite via l'e-mail ; aucun effet lors d'une simple ouverture de page | US04, CA07/08 |
+| E74-ARB-02 | QR/lien partageables, sans contrôle de présence au stand | US03/04, CA05/09 |
+| E74-ARB-03 | Prénom + e-mail vérifié avant qualification ; une chance par adresse normalisée et par tombola, sans nouveau compte | US04, CA07/08/15 |
+| E74-ARB-04 | Trois modes E73 : Coffrets, bons numériques, lots libres externes ; les lots externes restent autonomes sans commerce | US02/07, CA03/13/14 |
+| E74-ARB-05 | Quota standard existant, applicable également aux souscriptions actives, sans modification des conditions acquises | US01, CA01/02 |
+| E74-ARB-06 | Suivi facultatif de la commune dans Live, sans nouveau canal d'envoi ni campagne inter-animations | US05, CA10/11 |
 
-Les trois questions interactives initiales correspondent à ARB-01, ARB-02 et
-au premier choix d'ARB-06. Leurs réponses ne sont pas encore consignées dans ce
-cadrage. Les autres propositions restent à traiter avant leur spécification.
+Les réponses produit sont regroupées dans trois questions : parcours et preuve
+(ARB-01/02/03), dotation et quota (ARB-04/05), suivi de commune (ARB-06).
+Aucun arbitrage produit bloquant ne reste ouvert pour cette V1.
 
-## Passage à la spécification
+## Passage à l'implémentation
 
-Ce backlog comprend **8 US et 16 critères cibles**, avec **6 groupes d'arbitrages**.
-Le besoin sans commerçant et l'inclusion standard sont acquis. La spécification
-devra résoudre les décisions dépendantes, rapprocher le nouveau modèle du registre
-existant, définir identité/participation/communication et détailler contrats,
-transactions, index et preuves. Les scénarios ci-dessus sont prévus, **non exécutés**.
-Ce cadrage ne réalise ni implémentation, ni migration, ni envoi, ni déploiement.
+Ce backlog conserve **8 US et 16 critères**, avec **6 groupes d'arbitrages résolus**.
+La spécification V1 détaille comportements, contrats cibles, responsabilités,
+transactions, index, migration, compatibilité et preuves. Les limites existantes
+sont explicites, notamment le refus Coffrets si les candidats sont moins nombreux
+que les lots et l'absence actuelle de vérification d'e-mail.
+
+L'état produit demeure **À faire**. Les tests métier sont prévus, **non exécutés**.
+Cette phase ne réalise ni implémentation, ni migration, ni envoi, ni déploiement.
