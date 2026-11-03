@@ -12,6 +12,18 @@ prime également sur la thèse éditoriale historique : Live accompagne l'habita
 dans un jeu local, avec action suivante, progression réelle, résultat personnel
 et messages utiles. Les célébrations ne créent pas de score ni de gain.
 
+La typographie Live est harmonisée le **3 novembre 2026** : titres en DM Sans
+semi-gras (600), avec une échelle commune en unités relatives : 24–28 px pour
+les titres de page, 20–22 px pour les sections et 18–20 px pour les cartes, à
+la taille de texte standard du navigateur. Le texte courant et les actions
+principales gardent une base de 16 px. Les indications secondaires restent
+plus compactes. Les compteurs de progression et de gains conservent leur
+emphase visuelle ; les zones tactiles restent d'au moins 44 px. Cette échelle
+s'applique aussi aux fiches et parcours de participation, aux lots, aux
+communes et aux notifications. Le zoom et l'agrandissement du texte restent
+possibles. L'identité du logo et la typographie de la marketplace Coffrets
+hors Live ne changent pas.
+
 Repères pour l'habitant :
 
 - **Accueil** : reprendre un défi prioritaire, retrouver un nouveau lot ou un

@@ -2,6 +2,43 @@
 
 Début : **18 octobre 2026**. [Spécification](README.md), [backlog](../../roadmap/terminees/epic-73-animation-et-ou-coffrets-backlog.md), [matrice des 63 critères et preuves](verification-livraison.md). Objectif : les 38 US, dans les dix lots demandés. Les lignes ci-dessous ne valent pas acceptation tant que les preuves correspondantes ne sont pas enregistrées.
 
+## 3 novembre 2026 — typographie Live plus légère
+
+Constat sur la base Marketplace `d45c0e3` : les titres Live héritaient de la
+police condensée Oswald de la marketplace, avec des tailles locales jusqu'à
+56 px et de nombreuses graisses 750–900. L'ensemble donnait trop de poids au
+texte par rapport aux actions et aux progressions.
+
+Les styles sources utilisent maintenant DM Sans et une échelle commune
+24–28 / 20–22 / 18–20 px, en unités relatives, avec des titres semi-gras (600).
+Les actions principales gardent un texte de 16 px. Les surcharges locales de
+titres devenues inutiles sont retirées ; les compteurs, pictogrammes, zones
+tactiles et espaces ne sont pas réduits. La fiche publique partagée utilise
+les tokens Live lorsqu'elle s'affiche dans Live et conserve son style ailleurs.
+La [spécification frontend Live](../epic-42-localeo-live/frontend-pwa.md)
+porte ces repères.
+
+Preuves sur le build production local isolé : **70 scénarios Playwright
+réussis** (accueil, parcours personnel, en-tête, lots unifiés, communes,
+notifications, actions mobiles et inscription), de 320 à 1280 px, avec
+scénarios clavier et agrandissement du texte. Captures représentatives
+inspectées et mesures navigateur : titres principaux en DM Sans, graisse
+600, 24,7 px à 390 px. Le premier passage avait relevé des rectangles à zéro
+pendant le chargement de Réglages ; le test attend maintenant la visibilité
+de cette page avant de mesurer l'en-tête, sans retirer ses assertions.
+Build, ESLint ciblé, contrôle des différences et documentation réussis
+(94 guides, 1 069 liens, 134 sources exportées). Les API des tests navigateur
+sont synthétiques et les appels externes bloqués ; aucune recette distante
+ni mise en production n'est effectuée dans ce correctif.
+
+Commit Marketplace/Live : `4dbc897`.
+
+Impacts : Marketplace/Live et documentation Projet uniquement. Aucun changement
+de règle métier, critère d'acceptation fonctionnel, contrat API, données,
+migration, générateur de démonstration ou configuration d'exploitation : le
+correctif porte sur la présentation. Les parcours Coffrets hors Live et le
+logo gardent leur typographie. La clôture historique E73 reste inchangée.
+
 ## 3 novembre 2026 — audit produit et continuité habitant Live
 
 La demande couvre les douze points de l'audit produit. Le complément
