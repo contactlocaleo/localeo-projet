@@ -35,6 +35,39 @@ Les vues specialisees doivent rester rattachees a leur domaine :
 - Les duplications de vues doivent etre limitees a des raccourcis de pilotage.
 - Les libelles de menu doivent rester proches des noms de domaines fonctionnels.
 
+### Typographie des applications de gestion
+
+Repères du **3 novembre 2026**, communs à Pro, Animation, ERP, Support, Atelier,
+Ops et OnBoard. La typographie sert à parcourir rapidement des tâches, listes
+et formulaires ; elle doit laisser les données et l'action principale visibles.
+
+- Titres de page : 24 à 28 px, semi-gras (600), à la taille de texte standard
+  du navigateur. Vérifier leur lisibilité au zoom et à l'agrandissement du texte.
+  Les pages de gestion n'utilisent pas les grands titres promotionnels de la marketplace.
+- Titres de section : environ 20 à 22 px ; sous-sections et cartes : 16 à 20 px
+  selon la densité. Les groupes de formulaires compacts peuvent garder des
+  titres de 16–18 px. Le niveau sémantique reste indépendant de la taille.
+- Texte courant : base de 16 px. Les commandes, listes, tableaux et libellés
+  peuvent rester à 14–16 px selon leur densité, avec une action principale
+  identifiable par sa présentation et son placement. Conserver 16 px pour les
+  champs sur mobile ; ne pas réduire les cibles tactiles avec la taille du texte.
+- Préférer une famille sans empattement déjà disponible dans l'application :
+  DM Sans pour Pro et Animation ; police système pour ERP, Support, Atelier,
+  Ops et OnBoard, qui l'utilisent déjà. L'homogénéité ne nécessite pas de
+  charger une police supplémentaire dans chaque outil.
+- Réserver l'emphase aux états importants, montants et indicateurs ; éviter
+  de mettre tous les titres, onglets et libellés en gras fort. Les compteurs
+  et codes nécessaires à une opération gardent leur taille utile.
+- Alléger le texte ne réduit pas les cibles tactiles, les pictogrammes, le
+  contraste, le focus ni les confirmations. Vérifier le petit écran, les
+  libellés longs et l'agrandissement du texte sur les parcours concernés.
+
+La [signature des en-têtes](identite-entetes-applications.md) garde ses propres
+règles : la marque n'est pas un titre de page. Les styles sont corrigés dans
+leurs tokens et composants sources, sans multiplier les surcharges par écran.
+Les formulaires techniques SQLAdmin conservent leur gabarit propre.
+Constats et preuves : [audit typographique des applications de gestion](../../audits/typographie-applications-gestion-2026-11-03.md).
+
 ### Gabarit des pages Localeo ERP
 
 Harmonisation du **31 octobre 2026** : les pages métier ERP utilisent la même

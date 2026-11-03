@@ -91,10 +91,10 @@ construire avec `node scripts/build-browser-tests.mjs`, lancer
 `node scripts/serve-browser-tests.mjs` dans un terminal séparé, puis exécuter les
 tests avec `LOCALEO_E2E_EXTERNAL_SERVER=1`. Arrêter ce serveur après les tests.
 
-Deux attentes antérieures ont été remises en cohérence avec l'application : le
-test de chargement des polices vérifie DM Sans et Oswald ; le build synthétique
-autorise explicitement l'origine des QR de test. La configuration de production
-n'est pas modifiée.
+Le test de chargement des polices vérifie DM Sans réellement utilisée et
+l'absence de téléchargement Oswald depuis l'allègement typographique du
+3 novembre 2026. Le build synthétique autorise explicitement l'origine des QR
+de test ; la configuration de production n'est pas modifiée.
 
 Cette validation automatisée utilise Chromium. Le comportement de la caméra et
 du clavier sur de vrais appareils iOS et Android reste à vérifier avant une diffusion large.

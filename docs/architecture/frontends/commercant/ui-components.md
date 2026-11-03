@@ -11,9 +11,16 @@ La source des tokens et des styles est [src/styles.css](../../../../../localeo-c
 | `--surface` | `#ffffff` | Surface |
 | `--accent`, `--focus` | `#f28a2e` | Accent et focus |
 | `--font-body` | DM Sans | Texte courant, puis polices de repli |
-| `--font-display` | Oswald | Typographie de titre, puis polices de repli |
+| `--font-display` | `var(--font-body)` | Même famille DM Sans pour les titres de gestion |
 
 Les fontes sont déclarées dans [src/fonts.css](../../../../../localeo-commercant/src/fonts.css) et importées par [src/main.jsx](../../../../../localeo-commercant/src/main.jsx). Le token `--market-radius` vaut `4px` ; les rayons et ombres varient selon les composants. Il n'existe pas de règle générale imposant `14px` à toutes les bordures.
+
+Depuis le **3 novembre 2026**, les titres de page utilisent une échelle commune
+de 24–28 px et une graisse de 600. Les sections de formulaire déjà compactes
+gardent leur densité ; les anciens grands titres de connexion, scan et validation
+adoptent cette hiérarchie. Les compteurs et codes opérationnels gardent leurs
+dimensions utiles. Voir les [repères typographiques de gestion](../../transverse/conventions-backoffice.md#typographie-des-applications-de-gestion)
+et les [constats et preuves](../../../audits/typographie-applications-gestion-2026-11-03.md).
 
 Le [manifeste PWA](pwa.md#installation-et-manifeste) conserve encore ses anciennes couleurs de thème et de fond. Ne pas les prendre comme définition de la palette CSS actuelle.
 

@@ -22,6 +22,13 @@ s'affiche. Les graphiques chronologiques conservent un défilement horizontal
 local pour garder leurs axes lisibles. Les animations du menu respectent la
 préférence de réduction des mouvements.
 
+La typographie suit les [repères des applications de gestion](../../transverse/conventions-backoffice.md#typographie-des-applications-de-gestion) :
+DM Sans, titres de page 24–28 px semi-gras, sections plus discrètes et listes
+compactes. Les unités relatives accompagnent l'agrandissement du texte ;
+l'allègement des titres ne réduit pas les champs ou cibles tactiles.
+Les [preuves du 3 novembre 2026](../../../audits/typographie-applications-gestion-2026-11-03.md)
+distinguent les essais locaux de la recette sur appareils physiques.
+
 ## Vérification automatisée
 
 Les tests de composants font partie de `npm test` : conservation des coordonnées
