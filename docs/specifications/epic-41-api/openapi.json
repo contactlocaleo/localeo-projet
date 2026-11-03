@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Backend - contrat implemente EPIC 41",
     "description": "OpenAPI complet du backend, dont les parcours Animation locale. Genere hors ligne depuis le code local pour les integrations et les mocks ; cet instantane ne prouve pas son deploiement.",
-    "version": "1.0.0+c1c57b0"
+    "version": "1.0.0+d312386"
   },
   "paths": {
     "/public/identite-acces/interne/connexion": {
@@ -19810,6 +19810,216 @@
         }
       }
     },
+    "/public/localeo-live/installations/{installation_id}/recompenses": {
+      "get": {
+        "tags": [
+          "Localeo Live"
+        ],
+        "summary": "Consulter Recompenses Live",
+        "operationId": "consulter_recompenses_live_public_localeo_live_installations__installation_id__recompenses_get",
+        "parameters": [
+          {
+            "name": "installation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Installation Id"
+            }
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 50,
+              "minimum": 1,
+              "default": 25,
+              "title": "Page Size"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 300
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "participation_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Participation Id"
+            }
+          },
+          {
+            "name": "x-localeo-live-secret",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Localeo-Live-Secret"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecompensesLivePayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/localeo-live/installations/{installation_id}/tirages-a-venir": {
+      "get": {
+        "tags": [
+          "Localeo Live"
+        ],
+        "summary": "Consulter Tirages A Venir Live",
+        "operationId": "consulter_tirages_a_venir_live_public_localeo_live_installations__installation_id__tirages_a_venir_get",
+        "parameters": [
+          {
+            "name": "installation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Installation Id"
+            }
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 50,
+              "minimum": 1,
+              "default": 25,
+              "title": "Page Size"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 300
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "participation_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Participation Id"
+            }
+          },
+          {
+            "name": "x-localeo-live-secret",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Localeo-Live-Secret"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TiragesAVenirLivePayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/public/localeo-live/installations/{installation_id}/animations": {
       "get": {
         "tags": [
@@ -23747,6 +23957,121 @@
         "security": [
           {
             "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/internal/animation-locale/animations/{animation_id}/tirage-annonce": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Consulter Annonce Tirage Erp",
+        "operationId": "consulter_annonce_tirage_erp_internal_animation_locale_animations__animation_id__tirage_annonce_get",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnnonceTiragePayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Modifier Annonce Tirage Erp",
+        "operationId": "modifier_annonce_tirage_erp_internal_animation_locale_animations__animation_id__tirage_annonce_put",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AnnonceTirageInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnnonceTiragePayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
           }
         ]
       }
@@ -71128,6 +71453,33 @@
             }
           },
           {
+            "name": "unread_only",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Unread Only"
+            }
+          },
+          {
+            "name": "animation_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Animation Id"
+            }
+          },
+          {
             "name": "x-localeo-live-secret",
             "in": "header",
             "required": false,
@@ -91459,6 +91811,157 @@
         ]
       }
     },
+    "/protected/animation-locale/animations/{animation_id}/tirage-annonce": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Consulter Annonce Tirage",
+        "operationId": "consulter_annonce_tirage_protected_animation_locale_animations__animation_id__tirage_annonce_get",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnnonceTiragePayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Modifier Annonce Tirage",
+        "operationId": "modifier_annonce_tirage_protected_animation_locale_animations__animation_id__tirage_annonce_put",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AnnonceTirageInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnnonceTiragePayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
     "/protected/animation-locale/animations/{animation_id}/dotation/recus/{cle}": {
       "get": {
         "tags": [
@@ -109020,6 +109523,85 @@
         ],
         "title": "AnimationSummaryPayload"
       },
+      "AnnonceTirageInput": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Expected Version"
+          },
+          "date_prevue": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date Prevue"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "date_prevue"
+        ],
+        "title": "AnnonceTirageInput"
+      },
+      "AnnonceTiragePayload": {
+        "properties": {
+          "animation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animation Id"
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Version"
+          },
+          "date_prevue": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date Prevue"
+          },
+          "modifiable": {
+            "type": "boolean",
+            "title": "Modifiable"
+          },
+          "motif_indisponibilite": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motif Indisponibilite"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "animation_id",
+          "version",
+          "date_prevue",
+          "modifiable",
+          "motif_indisponibilite"
+        ],
+        "title": "AnnonceTiragePayload"
+      },
       "AnnulationInvitation": {
         "properties": {
           "version": {
@@ -111690,6 +112272,16 @@
               }
             ],
             "title": "Deeplink"
+          },
+          "importance": {
+            "type": "string",
+            "enum": [
+              "NORMAL",
+              "IMPORTANT",
+              "URGENT"
+            ],
+            "title": "Importance",
+            "default": "NORMAL"
           },
           "id": {
             "type": "string",
@@ -117224,6 +117816,16 @@
               }
             ],
             "title": "Deeplink"
+          },
+          "importance": {
+            "type": "string",
+            "enum": [
+              "NORMAL",
+              "IMPORTANT",
+              "URGENT"
+            ],
+            "title": "Importance",
+            "default": "NORMAL"
           }
         },
         "additionalProperties": false,
@@ -118582,6 +119184,26 @@
       },
       "CreerCommercantEtDossierRequest": {
         "properties": {
+          "produitsDemandes": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "ANIMATION",
+                    "COFFRETS"
+                  ]
+                },
+                "type": "array",
+                "maxItems": 2,
+                "minItems": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Produitsdemandes"
+          },
           "adressePostale": {
             "anyOf": [
               {
@@ -118698,26 +119320,6 @@
             },
             "type": "array",
             "title": "Fonctionsvisees"
-          },
-          "produitsDemandes": {
-            "anyOf": [
-              {
-                "items": {
-                  "type": "string",
-                  "enum": [
-                    "ANIMATION",
-                    "COFFRETS"
-                  ]
-                },
-                "type": "array",
-                "maxItems": 2,
-                "minItems": 1
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Produitsdemandes"
           }
         },
         "type": "object",
@@ -123157,6 +123759,16 @@
               }
             ],
             "title": "Deeplink"
+          },
+          "importance": {
+            "type": "string",
+            "enum": [
+              "NORMAL",
+              "IMPORTANT",
+              "URGENT"
+            ],
+            "title": "Importance",
+            "default": "NORMAL"
           },
           "expected_version": {
             "type": "integer",
@@ -133453,6 +134065,40 @@
               }
             ],
             "title": "Animation Nom"
+          },
+          "animation_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Animation Id"
+          },
+          "participation_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Participation Id"
+          },
+          "importance": {
+            "type": "string",
+            "enum": [
+              "NORMAL",
+              "IMPORTANT",
+              "URGENT"
+            ],
+            "title": "Importance",
+            "default": "NORMAL"
           }
         },
         "additionalProperties": false,
@@ -139417,6 +140063,11 @@
           "has_more": {
             "type": "boolean",
             "title": "Has More"
+          },
+          "unread_count": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Unread Count"
           }
         },
         "additionalProperties": false,
@@ -139424,7 +140075,8 @@
         "required": [
           "items",
           "next_cursor",
-          "has_more"
+          "has_more",
+          "unread_count"
         ],
         "title": "PageMessagesPayload"
       },
@@ -142128,6 +142780,16 @@
             "title": "A Gagne Un Lot",
             "default": false
           },
+          "resultat_tirage": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ResultatTiragePersonnel"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "gain": {
             "anyOf": [
               {
@@ -142253,6 +142915,16 @@
           "deeplink": {
             "type": "string",
             "title": "Deeplink"
+          },
+          "resultat_tirage": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ResultatTiragePersonnel"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "type": "object",
@@ -147505,6 +148177,140 @@
         ],
         "title": "RechercheVision360AnimationPayload"
       },
+      "RecompenseLive": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "nature": {
+            "type": "string",
+            "enum": [
+              "COFFRET",
+              "BON_NUMERIQUE",
+              "LOT_EXTERNE"
+            ],
+            "title": "Nature"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "animation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animation Id"
+          },
+          "animation_nom": {
+            "type": "string",
+            "title": "Animation Nom"
+          },
+          "participation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Participation Id"
+          },
+          "etat": {
+            "type": "string",
+            "enum": [
+              "A_UTILISER",
+              "A_ACTIVER",
+              "A_RETIRER",
+              "EN_PREPARATION",
+              "A_VERIFIER",
+              "UTILISE",
+              "REMIS",
+              "EXPIRE",
+              "ANNULE",
+              "REMPLACE",
+              "NON_REMIS"
+            ],
+            "title": "Etat"
+          },
+          "groupe": {
+            "type": "string",
+            "enum": [
+              "DISPONIBLE",
+              "HISTORIQUE"
+            ],
+            "title": "Groupe"
+          },
+          "attributed_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Attributed At"
+          },
+          "expires_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Expires At"
+          },
+          "coffret_instance_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Coffret Instance Id"
+          },
+          "bon_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bon Id"
+          },
+          "consignes": {
+            "type": "string",
+            "title": "Consignes"
+          },
+          "responsable_remise": {
+            "type": "string",
+            "title": "Responsable Remise"
+          },
+          "deeplink": {
+            "type": "string",
+            "title": "Deeplink"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "nature",
+          "libelle",
+          "animation_id",
+          "animation_nom",
+          "participation_id",
+          "etat",
+          "groupe",
+          "attributed_at",
+          "expires_at",
+          "coffret_instance_id",
+          "bon_id",
+          "consignes",
+          "responsable_remise",
+          "deeplink"
+        ],
+        "title": "RecompenseLive"
+      },
       "RecompensesAnimation": {
         "properties": {
           "mode": {
@@ -147517,6 +148323,46 @@
         "additionalProperties": false,
         "type": "object",
         "title": "RecompensesAnimation"
+      },
+      "RecompensesLivePayload": {
+        "properties": {
+          "generated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Generated At"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/RecompenseLive"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          },
+          "incomplet": {
+            "type": "boolean",
+            "title": "Incomplet"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "generated_at",
+          "items",
+          "next_cursor",
+          "incomplet"
+        ],
+        "title": "RecompensesLivePayload"
       },
       "ReconciliationBon": {
         "properties": {
@@ -150029,6 +150875,53 @@
           "runs"
         ],
         "title": "ResultatPurgeQuotidiennePayload"
+      },
+      "ResultatTiragePersonnel": {
+        "properties": {
+          "statut": {
+            "type": "string",
+            "enum": [
+              "SANS_TIRAGE",
+              "EN_ATTENTE",
+              "NON_QUALIFIE",
+              "GAGNANT",
+              "NON_GAGNANT",
+              "REMPLACE",
+              "ANNULE"
+            ],
+            "title": "Statut"
+          },
+          "realise_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Realise At"
+          },
+          "date_prevue": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date Prevue"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "statut"
+        ],
+        "title": "ResultatTiragePersonnel"
       },
       "ResultatTransaction": {
         "properties": {
@@ -154344,6 +155237,72 @@
         "type": "object",
         "title": "ThemeVisuel"
       },
+      "TirageAVenirLive": {
+        "properties": {
+          "participation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Participation Id"
+          },
+          "animation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animation Id"
+          },
+          "animation_nom": {
+            "type": "string",
+            "title": "Animation Nom"
+          },
+          "commune": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VilleParticipationLive"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "qualifie": {
+            "type": "boolean",
+            "const": true,
+            "title": "Qualifie"
+          },
+          "date_tirage": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date Tirage"
+          },
+          "date_fin_animation": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Date Fin Animation"
+          },
+          "deeplink": {
+            "type": "string",
+            "title": "Deeplink"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "participation_id",
+          "animation_id",
+          "animation_nom",
+          "commune",
+          "qualifie",
+          "date_fin_animation",
+          "deeplink"
+        ],
+        "title": "TirageAVenirLive"
+      },
       "TirageAnimationPayload": {
         "properties": {
           "id": {
@@ -154425,6 +155384,46 @@
           "confirmation"
         ],
         "title": "TirageCommande"
+      },
+      "TiragesAVenirLivePayload": {
+        "properties": {
+          "generated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Generated At"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/TirageAVenirLive"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          },
+          "incomplet": {
+            "type": "boolean",
+            "title": "Incomplet"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "generated_at",
+          "items",
+          "next_cursor",
+          "incomplet"
+        ],
+        "title": "TiragesAVenirLivePayload"
       },
       "TokenInput": {
         "properties": {

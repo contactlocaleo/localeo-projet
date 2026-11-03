@@ -1,11 +1,45 @@
 # Specification frontend PWA - Localeo Live
 
 Évolution du 30 octobre 2026 : la surface Animation affiche désormais Accueil,
-Mes participations et Mes communes. L'accueil personnel et les rappels
+Mes participations, Mes lots et Mes communes. L'accueil personnel et les rappels
 facultatifs sont spécifiés dans
 [E73-EVO-LIVE-ACCUEIL-RAPPELS](../epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-30-octobre-2026--e73-evo-live-accueil-rappels).
 Cette évolution remplace les attentes de navigation ci-dessous pour cette
 surface ; elle conserve le carnet Coffrets et ses accès historiques.
+
+Le complément du **3 novembre 2026**, [E73-EVO-LIVE-CONTINUITE](../epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-3-novembre-2026--continuité-habitant-e73-evo-live-continuite),
+prime également sur la thèse éditoriale historique : Live accompagne l'habitant
+dans un jeu local, avec action suivante, progression réelle, résultat personnel
+et messages utiles. Les célébrations ne créent pas de score ni de gain.
+
+Repères pour l'habitant :
+
+- **Accueil** : reprendre un défi prioritaire, retrouver un nouveau lot ou un
+  résultat confirmé, lire les messages, puis découvrir le programme. La recherche
+  et les filtres concernent les animations chargées ; **Afficher la suite** étend
+  cet aperçu. **Pour plus tard** mémorise un choix public sur l'appareil sans
+  inscription. **Partager** transmet uniquement la fiche publique.
+- **Mes participations** : ouvrir un accès existant. **Déjà inscrit ?** explique
+  comment reprendre le lien personnel reçu par e-mail, retrouver une animation
+  pour demander ce lien, ou restaurer une sauvegarde depuis Réglages. Changer
+  d'appareil ne crée pas un nouveau compte ni une nouvelle inscription.
+- **Sur place** : utiliser le scan ou une photo du QR ; la lecture se fait sur
+  l'appareil. L'itinéraire concerne un lieu déjà accessible dans le parcours.
+  Le QR du lieu ne remplace jamais la validation du commerçant. Une validation
+  non confirmée conserve son parcours de vérification existant.
+- **Mes lots** : coffrets, bons numériques et lots libres gagnés, avec priorité
+  aux lots restant à utiliser ou retirer. Le badge Nouveau est propre à cet
+  appareil. Les prochains tirages concernent les qualifications confirmées.
+- **Notifications** : ouvrir la cloche ne marque pas les messages comme lus.
+  Filtrer les non-lus ou une animation, réessayer en cas d'erreur et retrouver
+  son accord organisateur depuis le message. Les nouvelles dans Live, les
+  notifications du téléphone et l'accord organisateur restent trois choix
+  distincts. Refuser le Push n'empêche pas de régler les nouvelles dans Live.
+
+Les coordonnées d'un organisateur ne sont jamais inventées ; à défaut d'un
+contact disponible dans les consignes, l'aide renvoie au support de l'animation
+ou à l'e-mail d'inscription. Les dates annoncées sont indicatives : annoncer
+un rendez-vous ne lance pas automatiquement un tirage.
 
 > Document consolidé depuis les spécifications `localeo-marketplace` et
 > `localeo-backend`. La refonte du carnet de septembre remplace la navigation initiale

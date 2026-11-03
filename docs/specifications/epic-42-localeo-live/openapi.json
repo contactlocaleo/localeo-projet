@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Live - API backend Epic 42",
     "description": "Vue OpenAPI 3.1 des contrats publics, editoriaux et techniques de Localeo Live.",
-    "version": "1.0.0+35fe2cb"
+    "version": "1.0.0+d312386"
   },
   "paths": {
     "/public/exploitation/activites-locales/metriques": {
@@ -1004,6 +1004,23 @@
             }
           },
           {
+            "name": "participation_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Participation Id"
+            }
+          },
+          {
             "name": "x-localeo-live-secret",
             "in": "header",
             "required": false,
@@ -1089,6 +1106,23 @@
                 }
               ],
               "title": "Cursor"
+            }
+          },
+          {
+            "name": "participation_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Participation Id"
             }
           },
           {
@@ -5261,6 +5295,33 @@
                 }
               ],
               "title": "Cursor"
+            }
+          },
+          {
+            "name": "unread_only",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Unread Only"
+            }
+          },
+          {
+            "name": "animation_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Animation Id"
             }
           },
           {
@@ -9915,6 +9976,85 @@
         ],
         "title": "AnimationSummaryPayload"
       },
+      "AnnonceTirageInput": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Expected Version"
+          },
+          "date_prevue": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date Prevue"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "date_prevue"
+        ],
+        "title": "AnnonceTirageInput"
+      },
+      "AnnonceTiragePayload": {
+        "properties": {
+          "animation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animation Id"
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Version"
+          },
+          "date_prevue": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date Prevue"
+          },
+          "modifiable": {
+            "type": "boolean",
+            "title": "Modifiable"
+          },
+          "motif_indisponibilite": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motif Indisponibilite"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "animation_id",
+          "version",
+          "date_prevue",
+          "modifiable",
+          "motif_indisponibilite"
+        ],
+        "title": "AnnonceTiragePayload"
+      },
       "AnnulationInvitation": {
         "properties": {
           "version": {
@@ -12585,6 +12725,16 @@
               }
             ],
             "title": "Deeplink"
+          },
+          "importance": {
+            "type": "string",
+            "enum": [
+              "NORMAL",
+              "IMPORTANT",
+              "URGENT"
+            ],
+            "title": "Importance",
+            "default": "NORMAL"
           },
           "id": {
             "type": "string",
@@ -18119,6 +18269,16 @@
               }
             ],
             "title": "Deeplink"
+          },
+          "importance": {
+            "type": "string",
+            "enum": [
+              "NORMAL",
+              "IMPORTANT",
+              "URGENT"
+            ],
+            "title": "Importance",
+            "default": "NORMAL"
           }
         },
         "additionalProperties": false,
@@ -19477,6 +19637,26 @@
       },
       "CreerCommercantEtDossierRequest": {
         "properties": {
+          "produitsDemandes": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "ANIMATION",
+                    "COFFRETS"
+                  ]
+                },
+                "type": "array",
+                "maxItems": 2,
+                "minItems": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Produitsdemandes"
+          },
           "adressePostale": {
             "anyOf": [
               {
@@ -19593,26 +19773,6 @@
             },
             "type": "array",
             "title": "Fonctionsvisees"
-          },
-          "produitsDemandes": {
-            "anyOf": [
-              {
-                "items": {
-                  "type": "string",
-                  "enum": [
-                    "ANIMATION",
-                    "COFFRETS"
-                  ]
-                },
-                "type": "array",
-                "maxItems": 2,
-                "minItems": 1
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Produitsdemandes"
           }
         },
         "type": "object",
@@ -24052,6 +24212,16 @@
               }
             ],
             "title": "Deeplink"
+          },
+          "importance": {
+            "type": "string",
+            "enum": [
+              "NORMAL",
+              "IMPORTANT",
+              "URGENT"
+            ],
+            "title": "Importance",
+            "default": "NORMAL"
           },
           "expected_version": {
             "type": "integer",
@@ -34348,6 +34518,40 @@
               }
             ],
             "title": "Animation Nom"
+          },
+          "animation_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Animation Id"
+          },
+          "participation_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Participation Id"
+          },
+          "importance": {
+            "type": "string",
+            "enum": [
+              "NORMAL",
+              "IMPORTANT",
+              "URGENT"
+            ],
+            "title": "Importance",
+            "default": "NORMAL"
           }
         },
         "additionalProperties": false,
@@ -40312,6 +40516,11 @@
           "has_more": {
             "type": "boolean",
             "title": "Has More"
+          },
+          "unread_count": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Unread Count"
           }
         },
         "additionalProperties": false,
@@ -40319,7 +40528,8 @@
         "required": [
           "items",
           "next_cursor",
-          "has_more"
+          "has_more",
+          "unread_count"
         ],
         "title": "PageMessagesPayload"
       },
@@ -43023,6 +43233,16 @@
             "title": "A Gagne Un Lot",
             "default": false
           },
+          "resultat_tirage": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ResultatTiragePersonnel"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "gain": {
             "anyOf": [
               {
@@ -43148,6 +43368,16 @@
           "deeplink": {
             "type": "string",
             "title": "Deeplink"
+          },
+          "resultat_tirage": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ResultatTiragePersonnel"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "type": "object",
@@ -51099,6 +51329,53 @@
         ],
         "title": "ResultatPurgeQuotidiennePayload"
       },
+      "ResultatTiragePersonnel": {
+        "properties": {
+          "statut": {
+            "type": "string",
+            "enum": [
+              "SANS_TIRAGE",
+              "EN_ATTENTE",
+              "NON_QUALIFIE",
+              "GAGNANT",
+              "NON_GAGNANT",
+              "REMPLACE",
+              "ANNULE"
+            ],
+            "title": "Statut"
+          },
+          "realise_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Realise At"
+          },
+          "date_prevue": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date Prevue"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "statut"
+        ],
+        "title": "ResultatTiragePersonnel"
+      },
       "ResultatTransaction": {
         "properties": {
           "etat": {
@@ -55445,7 +55722,15 @@
             "title": "Qualifie"
           },
           "date_tirage": {
-            "type": "null",
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Date Tirage"
           },
           "date_fin_animation": {

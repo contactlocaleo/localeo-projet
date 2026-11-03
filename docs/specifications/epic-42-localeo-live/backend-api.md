@@ -40,9 +40,9 @@ Chaque récompense porte `id`, `nature`, `libelle`, `animation_id`,
 lot conserve les contrôles et capacités personnelles existants.
 
 Chaque tirage à venir porte `participation_id`, `animation_id`, `animation_nom`,
-`commune`, `qualifie: true`, `date_fin_animation`, `date_tirage: null` et
-`deeplink`. Aucune date planifiée de tirage n'existe actuellement : afficher
-« Date à confirmer » ; la fin d'animation n'est pas une date de tirage. La page
+`commune`, `qualifie: true`, `date_fin_animation`, `date_tirage` (instant UTC ou null) et
+`deeplink`. La date provient uniquement de l'annonce enregistrée par l'organisateur.
+Sans annonce, afficher « Date à annoncer » ; la fin d'animation n'est pas une date de tirage. La page
 borne les candidats avant qualification : elle peut être vide avec un curseur
 suivant. Le client conserve alors l'action de chargement de la suite. Les
 compteurs des cartes chargées ne sont pas des totaux globaux.
@@ -50,7 +50,54 @@ compteurs des cartes chargées ne sont pas des totaux globaux.
 Producteur : `ServiceRecompensesLive` et `RecompensesLiveRepository` ; schémas
 fermés `RecompensesLivePayload` et `TiragesAVenirLivePayload` exposés dans
 [OpenAPI Live](openapi.json). Consommateur : page « Mes lots » de Localeo Live.
-Pas de migration, de compte habitant ou de nouvelle base de participations.
+
+## Audit habitant — continuité et messages, 3 novembre 2026
+
+Les deux listes de lots acceptent `participation_id` optionnel. Le filtre est
+appliqué en stockage après vérification des suivis et avant pagination ; il ne
+donne aucun accès supplémentaire. Le curseur appartient aussi à ce filtre.
+
+`GET /public/localeo-live/installations/{installation_id}/messages` ajoute
+`unread_count`, total global exact des messages accessibles non lus, indépendant
+de `limit`, `cursor`, `unread_only` et `animation_id`. Ces deux derniers filtres
+sont optionnels ; ils s'appliquent avant les limites de chaque branche SQL. Les
+compteurs sont calculés par agrégats SQL, jamais en chargeant l'historique côté
+application. Chaque item expose `animation_id`, `animation_nom`,
+`participation_id` lorsqu'ils sont connus et `importance` (`NORMAL`, `IMPORTANT`,
+`URGENT`). Ouvrir la messagerie ne marque rien comme lu : seule la commande de
+lecture existante modifie cet état.
+
+Une campagne organisateur peut choisir les destinations `PARTICIPATION` ou
+`MES_LOTS`, en plus des destinations existantes. Le domaine accepte uniquement
+ces valeurs fermées. Après contrôle de l'audience, des accords et des capacités,
+le worker construit le lien personnel vers `/live/animations?participation=…`
+ou `/live/lots?participation=…`. Aucun token n'est inséré dans le message.
+L'importance est explicitement choisie par l'organisateur et figée avec le
+contenu au départ de campagne ; elle ne contourne ni accord ni fréquence.
+
+Le détail personnel et les items du tableau de bord portent `resultat_tirage` :
+`statut`, `realise_at`, `date_prevue`. Les statuts possibles sont `SANS_TIRAGE`,
+`NON_QUALIFIE`, `EN_ATTENTE`, `GAGNANT`, `NON_GAGNANT`, `REMPLACE`, `ANNULE`.
+`NON_GAGNANT` exige un tirage confirmé/réalisé et l'appartenance à sa population
+figée. L'absence de gain, une date passée ou un compteur visuel ne suffisent pas.
+La lecture groupée utilise deux requêtes de faits pour au plus 50 participations,
+puis une lecture des dates annoncées ; aucune requête par carte.
+
+L'annonce est gérée par `GET/PUT …/animation-locale/animations/{id}/tirage-annonce`
+sur les surfaces `/protected` (Animation) et `/internal` (ERP). La commande
+demande `expected_version`, `date_prevue` avec offset ou null pour retirer
+l'annonce, et `Idempotency-Key`. Elle vérifie les droits courants, le tenant,
+le verrou d'animation et la version avant écriture/audit. La date doit être future
+et au moins égale à la fin effective de l'animation ; un résultat déjà confirmé
+ou une annulation interdit la modification. La version initiale est 0. Cette
+annonce informative ne déclenche ni tirage automatique ni notification.
+
+La migration backend `v287_e73_live_audit.sql` précède les lecteurs : importance
+des campagnes et table `animation_tirages_annonces`. Les annonces sont incluses
+dans l'export d'organisation et dans le registre de sauvegarde/restauration de
+démonstration. La conservation suit la famille des métadonnées d'animation.
+Aucune migration des participations existantes, aucun compte habitant ni
+nouvelle base de participations ; seule la migration additive v287 est requise.
 
 L'évolution du 30 octobre 2026
 [E73-EVO-LIVE-ACCUEIL-RAPPELS](../epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-30-octobre-2026--e73-evo-live-accueil-rappels)

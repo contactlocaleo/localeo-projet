@@ -2,6 +2,88 @@
 
 Début : **18 octobre 2026**. [Spécification](README.md), [backlog](../../roadmap/terminees/epic-73-animation-et-ou-coffrets-backlog.md), [matrice des 63 critères et preuves](verification-livraison.md). Objectif : les 38 US, dans les dix lots demandés. Les lignes ci-dessous ne valent pas acceptation tant que les preuves correspondantes ne sont pas enregistrées.
 
+## 3 novembre 2026 — audit produit et continuité habitant Live
+
+La demande couvre les douze points de l'audit produit. Le complément
+[E73-EVO-LIVE-CONTINUITE](localeo-live-entree-unique.md) explicite les comportements
+nouveaux ; il ne modifie pas la clôture historique E73. Les bases avant ce
+complément sont Backend `d312386`, Marketplace `b73f60f` et Projet `dcc28a0`
+(travaux Mes lots préalablement commités et poussés à la demande).
+
+| Critères | Réalisation | Preuves ciblées |
+| --- | --- | --- |
+| LC01–02 | Guide de récupération depuis un autre appareil ; décodage QR local de secours, caméra et photo avec validation explicite. | `live-game.spec.cjs`, `live-qr-decoder.test.cjs` : vraie image QR synthétique normale/inversée, aucune commande avant confirmation. |
+| LC03 | Résultat personnel explicite, y compris non-gagnant et hors population du tirage ; qualification et progression confirmées mises en valeur. | `test_resultats_annonces_tirage.py`, `test_live_audit_postgres.py`, `live-game.spec.cjs`. |
+| LC04–05 | Compteur global partagé, lecture explicite, actualisation au retour, préférences dans Live indépendantes du Push et lien vers l'accord organisateur exact. | `live-messages.test.cjs`, `live-messages-product.spec.cjs`, `live-inbox-ux.spec.cjs`, `organizer-messages.spec.cjs`. |
+| LC06 | Résumé compact des gains, résultats et messages avant les défis à reprendre ; rafraîchissement de l'accueil relisant aussi les gains. | `live-home.spec.cjs`, `live-product-discovery.spec.cjs`, projections du tableau de bord backend. |
+| LC07–08 | Campagnes avec importance explicite et destinations participation/lots ; filtrage avant pagination, compteur global et réessai. | Tests PostgreSQL campagnes/messages, contrats HTTP Animation et tests navigateur de messages/gestion. |
+| LC09–10 | Aide contextualisée pour animation et remise de lot ; itinéraire du lieu autorisé seulement. Aucun contact privé ni étape cachée exposés. | `live-game.spec.cjs`, inspection des composants d'aide et des liens d'itinéraire. |
+| LC11 | Recherche et type de défi sur les pages chargées, favoris locaux distincts de l'inscription, partage de l'URL publique seule et restauration des filtres au retour. | `live-discovery-tools.test.cjs`, `live-product-discovery.spec.cjs`, `live-discovery-continuity.spec.cjs`. |
+| LC12 | Date annoncée depuis Animation/ERP, retrait, verrou/version/idempotence ; date visible dans Live et téléchargement volontaire d'un rendez-vous. | `test_live_audit_postgres.py`, `test_live_audit_contracts.py`, `live-product-organizer.mjs`, `tirage-annonce-erp.cjs`, `draw-calendar.test.cjs`. |
+
+Les fichiers de tests sont dans le dépôt de leur application, sous `tests/`.
+Les captures et bases de recette isolées restent dans les sorties temporaires
+non versionnées. La nouvelle table et l'importance sont intégrées au registre
+de démonstration, à la conservation et à l'export de réversibilité ; aucune
+génération n'est effectuée sur un environnement partagé.
+
+Vérifications exécutées sur les changements locaux :
+
+- **Backend** : 679 tests architecture/domaine/services réussis ; un test de
+  lancement Git sous Windows corrigé avec entrée standard explicite puis
+  rejoué avec succès, sans changer ses assertions. Les suites PostgreSQL/HTTP/
+  OpenAPI (62 tests) et impacts/performance/démonstration (67 tests) passent.
+  Un test d'export non vide supplémentaire vérifie l'annonce de l'organisation
+  propriétaire et l'exclusion de l'annonce étrangère et de l'acteur. Ces
+  suites peuvent se recouper : leurs nombres ne sont pas additionnés.
+  La migration v287 a été appliquée deux fois sur la base jetable. Une fixture
+  de purge a été complétée avec ses tables enfants réelles, sans retirer les
+  contraintes de suppression.
+- **Marketplace/Live** : 13 tests Node ciblés (découverte, messages, QR et
+  agenda), ESLint et build production isolé réussis. Les 39 tests navigateur
+  découverte/continuité/accueil/lots passent, de 320 à 1280 px, avec clavier et
+  texte agrandi. Les 37 tests parcours/messages/préférences passent également
+  sur le build final, avec un seul worker et les appels externes interdits.
+  Soit **76 scénarios navigateur distincts réussis**. Les captures mobiles,
+  dont 320 px avec texte à 200 %, ont été inspectées.
+- **Animation** : 18 tests Node ciblés, 8 cas navigateur, types, lint et build
+  réussis. L'origine du build de vérification est synthétique ; cet artefact
+  n'est pas destiné au déploiement.
+- **ERP** : nouveau parcours d'annonce réussi sur 4 formats. Les 12 scénarios
+  voisins ont terminé leurs assertions, mais leur ancien runner Windows a
+  nécessité une interruption après son message final : ce lancement n'est
+  pas présenté comme une fermeture autonome réussie.
+- **Documentation/contrats** : 94 guides, 1069 liens et 134 sources exportées
+  vérifiés ; copie OpenAPI E41/Animation identique par SHA-256. La régénération
+  officielle E41 comprend aussi le rattrapage des schémas commerçant déjà
+  présents dans le runtime ; aucune route supprimée.
+
+Commits applicatifs du complément : Backend `cde1d3e`, Marketplace/Live
+`d45c0e3`, Animation `324d024`. Les cinq dépôts restent indépendants.
+
+Mesure locale des messages : 100 puis 1 000 messages donnent 4 requêtes et
+25 lignes par page (111 puis 67 ms observées, cache possible). Le compteur
+exact utilise des agrégats SQL sur les messages accessibles de l'installation :
+son coût dépend du volume, même si le nombre de requêtes reste constant.
+Les contrôles d'indexation des pages et des faits restent actifs ; cette mesure
+ne prouve pas la capacité de l'hébergement en charge mixte.
+
+Impacts : **Backend/ERP, Marketplace/Live, Animation et documentation Projet**.
+Les contrats canoniques E41/E42 et le consommateur OpenAPI Animation sont
+actualisés. Les droits, résultats et qualifications restent décidés par le
+domaine backend. Le portail Pro n'est pas modifié. La migration additive
+**v287** précède le backend puis les deux frontends ; aucun tirage ni Push n'est
+déclenché par l'annonce d'une date. Voir le
+[guide de livraison](../../exploitation/animation/deploiement-render.md).
+
+Limites : tests navigateur avec API synthétiques, tests d'intégration sur
+PostgreSQL local jetable. Pas de déploiement, de caméra physique, de livraison
+Push réelle ni de test auprès d'habitants. Les contrats publics actuels ne
+fournissent pas de contact organisateur exploitable : l'aide indique les
+supports et l'e-mail d'inscription, sans inventer de coordonnées. Les filtres
+de découverte et la liste d'animations de la messagerie indiquent
+explicitement leur portée sur les éléments chargés.
+
 ## 3 novembre 2026 — Mes lots unifié et prochains tirages qualifiés
 
 Demande : retrouver tous les gains (coffret, bon numérique, lot libre), donner

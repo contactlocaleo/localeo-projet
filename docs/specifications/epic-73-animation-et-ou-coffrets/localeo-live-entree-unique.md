@@ -34,6 +34,47 @@ nouvelles notifications pour ces deux seuls usages.
 
 ## Parcours et priorité mobile
 
+### Évolution du 3 novembre 2026 — continuité habitant (E73-EVO-LIVE-CONTINUITE)
+
+L'audit produit et sa mise en œuvre sont demandés le 3 novembre 2026. Cette
+évolution conserve la clôture historique E73 et le choix sans nouveau compte.
+Elle couvre les critères complémentaires suivants ; les preuves exécutées
+sont consignées dans le suivi de réalisation, distinctes des tests prévus ici.
+
+| Critère | Comportement attendu | Preuves prévues |
+| --- | --- | --- |
+| LC01 | Une liste de participations vide propose de retrouver une inscription existante, avec lien personnel ou restauration du carnet ; aucune recherche publique par adresse e-mail ne révèle les inscriptions. | Navigateur : nouvel appareil, lien absent/invalide, récupération et sauvegarde. |
+| LC02 | Le scan du lieu possède un décodage de secours indépendant de BarcodeDetector et une alternative utilisable sans caméra ; le QR personnel et le PIN commerçant gardent leurs rôles distincts. | Décodeur, caméra indisponible, photo et QR invalide. |
+| LC03 | Le domaine distingue tirage en attente, effectué avec gain, effectué sans gain et annulation ; l'interface ne déduit jamais un résultat de l'absence de lot. | Domaine, API personnelle, affichage de chaque état. |
+| LC04 | Le badge reflète les non-lus autorisés, sans acquittement à l'ouverture ; le retour dans Live actualise le compteur. | Pagination, lecture, fermeture sans lecture et retour au premier plan. |
+| LC05 | Les choix des nouvelles dans Live restent accessibles sans Push ; autorisation de l'appareil et accord organisateur restent distincts, facultatifs et révocables. | Push refusé/non compatible, réglages et retrait d'accord. |
+| LC06 | L'accueil présente une action prioritaire et un résumé compact des nouveaux gains, messages et résultats disponibles, fondés sur les données personnelles autorisées. | États vide/erreur/partiel, absence de compteurs inventés et mobile. |
+| LC07 | Les campagnes peuvent guider vers la participation ou les lots du destinataire sans conférer un accès nouveau ; l'absence d'accès utilise la récupération existante. | Destinataires distincts, accès révoqué, liens personnels et refus. |
+| LC08 | Le centre propose réessai, filtre des non-lus et sélection d'une animation ; une importance n'est présentée que si elle est explicitement fournie. | Échec initial, filtres/pagination et lectures conservées. |
+| LC09 | Les états bloquants proposent une aide contextualisée, avec coordonnées publiques autorisées lorsqu'elles existent et une procédure explicite sinon. | Aucun contact inventé, contexte du lot/animation et mobile. |
+| LC10 | Le lieu actuellement accessible propose un itinéraire si son adresse est connue ; aucune étape future cachée n'est révélée. | Parcours chasse/passeport, adresse absente et lien encodé. |
+| LC11 | La découverte propose recherche, filtres et sélection « Pour plus tard » sur l'appareil, distincte d'une inscription ; le partage ne contient que l'URL publique. | Recherche bornée, pagination, stockage refusé, partage sans token. |
+| LC12 | Une date de tirage planifiée reste informative, ne déclenche pas de tirage et ne confirme pas de gain ; Live la présente seulement si elle existe et permet son ajout volontaire à l'agenda. | Configuration autorisée, date invalide, concurrence, API, affichage/repli et agenda sans donnée personnelle. |
+
+Les célébrations reposent uniquement sur une étape réellement validée ou une
+qualification confirmée. Elles respectent la réduction des animations et ne
+bloquent pas l'action suivante. Les filtres locaux portent explicitement sur
+les animations chargées ; une suite disponible reste accessible même si aucun
+élément chargé ne correspond. Les favoris enregistrent des références publiques,
+sans token ni duplication de participation. Les messages et états personnels
+restent hors cache public. La livraison coordonne producteurs backend et Live ;
+la saisie de date et les actions organisateur impliquent aussi leur consommateur
+de gestion. La revue de contrats et les tests isolés ne valent pas recette de
+Push réel, de caméra physique ou étude auprès d'habitants.
+
+L'annonce de tirage est modifiable depuis Animation et le suivi ERP par un
+gestionnaire autorisé, avec version attendue et clé d'idempotence. La date doit
+être future et ne pas précéder la fin de l'animation ; elle peut être retirée.
+Le domaine interdit la modification après réalisation/confirmation ou annulation
+du tirage, ou lorsque l'animation est annulée ou archivée. Le fichier d'agenda contient uniquement
+le titre et la date annoncée, sans accès personnel ni alarme imposée. Il ne se
+met pas à jour automatiquement : cette limite est indiquée lors du téléchargement.
+
 Navigation basse initiale : **Découvrir**, **Mes participations**, **Mes communes**.
 Le complément Accueil/Rappels remplace le premier libellé par **Accueil**, sans
 changer son URL `/live/decouvrir` ni supprimer la découverte publique.
