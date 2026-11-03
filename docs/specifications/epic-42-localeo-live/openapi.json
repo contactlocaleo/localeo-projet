@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Live - API backend Epic 42",
     "description": "Vue OpenAPI 3.1 des contrats publics, editoriaux et techniques de Localeo Live.",
-    "version": "1.0.0+d312386"
+    "version": "1.0.0+3437cfc"
   },
   "paths": {
     "/public/exploitation/activites-locales/metriques": {
@@ -916,6 +916,23 @@
             }
           },
           {
+            "name": "moteurs_supportes",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 512
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Moteurs Supportes"
+            }
+          },
+          {
             "name": "x-localeo-live-secret",
             "in": "header",
             "required": false,
@@ -1281,6 +1298,23 @@
             }
           },
           {
+            "name": "moteurs_supportes",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 512
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Moteurs Supportes"
+            }
+          },
+          {
             "name": "x-localeo-live-secret",
             "in": "header",
             "required": false,
@@ -1345,6 +1379,23 @@
               "type": "string",
               "format": "uuid",
               "title": "Animation Id"
+            }
+          },
+          {
+            "name": "moteurs_supportes",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 512
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Moteurs Supportes"
             }
           },
           {
@@ -1747,6 +1798,23 @@
               "type": "boolean",
               "default": false,
               "title": "Inclure Contact"
+            }
+          },
+          {
+            "name": "moteurs_supportes",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 512
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Moteurs Supportes"
             }
           },
           {
@@ -2897,6 +2965,23 @@
               "title": "Limit"
             },
             "deprecated": true
+          },
+          {
+            "name": "moteurs_supportes",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 512
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Moteurs Supportes"
+            }
           }
         ],
         "responses": {
@@ -2981,6 +3066,22 @@
               ],
               "title": "Coffret Id"
             }
+          },
+          {
+            "name": "moteurs_supportes",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Moteurs Supportes"
+            }
           }
         ],
         "responses": {
@@ -3023,6 +3124,22 @@
               "type": "string",
               "format": "uuid",
               "title": "Animation Id"
+            }
+          },
+          {
+            "name": "moteurs_supportes",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Moteurs Supportes"
             }
           }
         ],
@@ -3095,6 +3212,22 @@
                 }
               ],
               "title": "Cursor"
+            }
+          },
+          {
+            "name": "moteurs_supportes",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Moteurs Supportes"
             }
           }
         ],
@@ -3269,6 +3402,22 @@
               "type": "string",
               "title": "Token"
             }
+          },
+          {
+            "name": "moteurs_supportes",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Moteurs Supportes"
+            }
           }
         ],
         "responses": {
@@ -3278,6 +3427,198 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ResolutionInscriptionAnimationPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/animation-locale/animations/{animation_id}/inscriptions/demander-verification": {
+      "post": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Demander Verification Email Animation",
+        "operationId": "demander_verification_email_animation",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DemanderVerificationEmailRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DemandeVerificationEmailPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/animation-locale/animations/{animation_id}/inscriptions/renvoyer-verification": {
+      "post": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Renvoyer Verification Email Animation",
+        "operationId": "renvoyer_verification_email_animation",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RenvoyerLienInscriptionAnimationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DemandeVerificationEmailPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/animation-locale/animations/{animation_id}/inscriptions/confirmer-email": {
+      "post": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Confirmer Email Animation",
+        "operationId": "confirmer_email_animation",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfirmerEmailRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConfirmationEmailPayload"
                 }
               }
             }
@@ -3437,6 +3778,22 @@
             "schema": {
               "type": "string",
               "title": "Token"
+            }
+          },
+          {
+            "name": "moteurs_supportes",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Moteurs Supportes"
             }
           }
         ],
@@ -9541,6 +9898,73 @@
       },
       "AnimationPubliquePayload": {
         "properties": {
+          "capacites": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Capacites"
+          },
+          "reglement_version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reglement Version"
+          },
+          "inscriptions_ouvertes": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Inscriptions Ouvertes"
+          },
+          "motif_indisponibilite": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motif Indisponibilite"
+          },
+          "politique_identite": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Politique Identite"
+          },
+          "engine_contract_version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Engine Contract Version"
+          },
           "id": {
             "type": "string",
             "format": "uuid",
@@ -17433,6 +17857,34 @@
         ],
         "title": "CompteursDTO"
       },
+      "CompteursParticipantsEmailPayload": {
+        "properties": {
+          "en_attente": {
+            "type": "integer",
+            "title": "En Attente"
+          },
+          "qualifies_total": {
+            "type": "integer",
+            "title": "Qualifies Total"
+          },
+          "gagnants": {
+            "type": "integer",
+            "title": "Gagnants"
+          },
+          "observe_le": {
+            "type": "string",
+            "title": "Observe Le"
+          }
+        },
+        "type": "object",
+        "required": [
+          "en_attente",
+          "qualifies_total",
+          "gagnants",
+          "observe_le"
+        ],
+        "title": "CompteursParticipantsEmailPayload"
+      },
       "CompteursSectionsReversement": {
         "properties": {
           "mouvements": {
@@ -17905,6 +18357,48 @@
         ],
         "title": "ConfirmationCommunicationRequest"
       },
+      "ConfirmationEmailPayload": {
+        "properties": {
+          "statut": {
+            "type": "string",
+            "const": "CONFIRMEE",
+            "title": "Statut"
+          },
+          "qualification": {
+            "type": "string",
+            "const": "ELIGIBLE",
+            "title": "Qualification"
+          },
+          "inscription_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Inscription Id"
+          },
+          "participant_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Participant Id"
+          },
+          "token": {
+            "type": "string",
+            "title": "Token"
+          },
+          "url_acces": {
+            "type": "string",
+            "title": "Url Acces"
+          }
+        },
+        "type": "object",
+        "required": [
+          "statut",
+          "qualification",
+          "inscription_id",
+          "participant_id",
+          "token",
+          "url_acces"
+        ],
+        "title": "ConfirmationEmailPayload"
+      },
       "ConfirmationInvitationOnboardRequest": {
         "properties": {
           "action": {
@@ -18036,6 +18530,48 @@
           "couvertureConfirmee"
         ],
         "title": "ConfirmerConventionProduitRequest"
+      },
+      "ConfirmerEmailRequest": {
+        "properties": {
+          "secret": {
+            "type": "string",
+            "maxLength": 128,
+            "minLength": 20,
+            "title": "Secret"
+          },
+          "prenom": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 120,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Prenom"
+          },
+          "reglement_version": {
+            "type": "string",
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Reglement Version"
+          },
+          "reglement_accepte": {
+            "type": "boolean",
+            "const": true,
+            "title": "Reglement Accepte"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "secret",
+          "reglement_version",
+          "reglement_accepte"
+        ],
+        "title": "ConfirmerEmailRequest"
       },
       "ConfirmerFermeture": {
         "properties": {
@@ -22394,6 +22930,25 @@
         ],
         "title": "DemandeSupportPayload"
       },
+      "DemandeVerificationEmailPayload": {
+        "properties": {
+          "statut": {
+            "type": "string",
+            "const": "DEMANDE_PRISE_EN_COMPTE",
+            "title": "Statut"
+          },
+          "renvoi_apres_secondes": {
+            "type": "integer",
+            "title": "Renvoi Apres Secondes"
+          }
+        },
+        "type": "object",
+        "required": [
+          "statut",
+          "renvoi_apres_secondes"
+        ],
+        "title": "DemandeVerificationEmailPayload"
+      },
       "DemanderExport": {
         "properties": {
           "format": {
@@ -22430,6 +22985,54 @@
           "motif"
         ],
         "title": "DemanderFermeture"
+      },
+      "DemanderVerificationEmailRequest": {
+        "properties": {
+          "prenom": {
+            "type": "string",
+            "maxLength": 120,
+            "minLength": 1,
+            "title": "Prenom"
+          },
+          "email": {
+            "type": "string",
+            "maxLength": 320,
+            "minLength": 3,
+            "title": "Email"
+          },
+          "reglement_accepte": {
+            "type": "boolean",
+            "const": true,
+            "title": "Reglement Accepte"
+          },
+          "reglement_version": {
+            "type": "string",
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Reglement Version"
+          },
+          "source_diffusion_code": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 128
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Diffusion Code"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "prenom",
+          "email",
+          "reglement_accepte",
+          "reglement_version"
+        ],
+        "title": "DemanderVerificationEmailRequest"
       },
       "DependanceObjetContinuite": {
         "properties": {
@@ -28342,6 +28945,17 @@
       },
       "FlyerAnimationPayload": {
         "properties": {
+          "modele_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modele Code"
+          },
           "id": {
             "type": "string",
             "format": "uuid",
@@ -35542,6 +36156,11 @@
       },
       "ModeleAnimationPayload": {
         "properties": {
+          "capacites": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Capacites"
+          },
           "code": {
             "type": "string",
             "title": "Code"
@@ -42005,6 +42624,47 @@
         ],
         "title": "PaginationCurseurPayload"
       },
+      "PaginationParticipantsEmailPayload": {
+        "properties": {
+          "limit": {
+            "type": "integer",
+            "title": "Limit"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More"
+          },
+          "total": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total"
+          }
+        },
+        "type": "object",
+        "required": [
+          "limit",
+          "next_cursor",
+          "has_more"
+        ],
+        "title": "PaginationParticipantsEmailPayload"
+      },
       "PaiementInitialisationRequest": {
         "properties": {
           "coffret_id": {
@@ -43060,6 +43720,60 @@
         ],
         "title": "ParticipantAnimationPayload"
       },
+      "ParticipantEmailPayload": {
+        "properties": {
+          "participant_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Participant Id"
+          },
+          "inscription_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Inscription Id"
+          },
+          "prenom": {
+            "type": "string",
+            "title": "Prenom"
+          },
+          "email": {
+            "type": "string",
+            "title": "Email"
+          },
+          "verification_email": {
+            "type": "string",
+            "enum": [
+              "EN_ATTENTE",
+              "CONFIRMEE"
+            ],
+            "title": "Verification Email"
+          },
+          "qualifie": {
+            "type": "boolean",
+            "title": "Qualifie"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          },
+          "date_inscription": {
+            "type": "string",
+            "title": "Date Inscription"
+          }
+        },
+        "type": "object",
+        "required": [
+          "participant_id",
+          "inscription_id",
+          "prenom",
+          "email",
+          "verification_email",
+          "qualifie",
+          "statut",
+          "date_inscription"
+        ],
+        "title": "ParticipantEmailPayload"
+      },
       "ParticipantLecture": {
         "properties": {
           "id": {
@@ -43164,6 +43878,31 @@
           "reference"
         ],
         "title": "ParticipantScanPayload"
+      },
+      "ParticipantsEmailPagePayload": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ParticipantEmailPayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/PaginationParticipantsEmailPayload"
+          },
+          "observe_le": {
+            "type": "string",
+            "title": "Observe Le"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "pagination",
+          "observe_le"
+        ],
+        "title": "ParticipantsEmailPagePayload"
       },
       "ParticipationLivePayload": {
         "properties": {
@@ -46549,6 +47288,9 @@
           },
           {
             "$ref": "#/components/schemas/ProjectionParticipantTombola"
+          },
+          {
+            "$ref": "#/components/schemas/ProjectionParticipantTombolaPublique"
           }
         ],
         "title": "ProjectionParticipant",
@@ -46557,7 +47299,8 @@
           "mapping": {
             "CHASSE_TRESOR_COMMERCANTE": "#/components/schemas/ProjectionParticipantChasse",
             "PASSEPORT_COMMERCANT": "#/components/schemas/ProjectionParticipantPasseport",
-            "TOMBOLA_LOCALE": "#/components/schemas/ProjectionParticipantTombola"
+            "TOMBOLA_LOCALE": "#/components/schemas/ProjectionParticipantTombola",
+            "TOMBOLA_PUBLIQUE": "#/components/schemas/ProjectionParticipantTombolaPublique"
           }
         }
       },
@@ -46949,6 +47692,117 @@
           "attestationAchatEffective"
         ],
         "title": "ProjectionParticipantTombola"
+      },
+      "ProjectionParticipantTombolaPublique": {
+        "properties": {
+          "participantId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Participantid"
+          },
+          "animationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animationid"
+          },
+          "engineContractVersion": {
+            "type": "string",
+            "const": "1.0",
+            "title": "Enginecontractversion"
+          },
+          "definitionVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Definitionversion"
+          },
+          "progressionVersion": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Progressionversion"
+          },
+          "exploitationRevision": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Exploitationrevision"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "INSCRIT",
+              "EN_ATTENTE_DEBUT",
+              "EN_COURS",
+              "TERMINE",
+              "A_REGULARISER",
+              "CLOTURE"
+            ],
+            "title": "Statut"
+          },
+          "actionsAutorisees": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "START_GAME",
+                "SCAN_QR",
+                "SUBMIT_ANSWER",
+                "CONTINUE",
+                "REQUEST_HINT",
+                "REQUEST_HELP"
+              ]
+            },
+            "type": "array",
+            "title": "Actionsautorisees"
+          },
+          "progression": {
+            "$ref": "#/components/schemas/ProgressionParticipant"
+          },
+          "medias": {
+            "items": {
+              "$ref": "#/components/schemas/MediaEmbarque"
+            },
+            "type": "array",
+            "title": "Medias"
+          },
+          "themeVisuel": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ThemePublic"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "type": {
+            "type": "string",
+            "const": "TOMBOLA_PUBLIQUE",
+            "title": "Type"
+          },
+          "verificationEmail": {
+            "type": "string",
+            "enum": [
+              "EN_ATTENTE",
+              "CONFIRMEE"
+            ],
+            "title": "Verificationemail"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "participantId",
+          "animationId",
+          "engineContractVersion",
+          "definitionVersion",
+          "progressionVersion",
+          "exploitationRevision",
+          "statut",
+          "actionsAutorisees",
+          "progression",
+          "medias",
+          "type",
+          "verificationEmail"
+        ],
+        "title": "ProjectionParticipantTombolaPublique"
       },
       "ProlongerBon": {
         "properties": {
@@ -51314,6 +52168,27 @@
       },
       "ResultatPurgeQuotidiennePayload": {
         "properties": {
+          "maintenance_email": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "anyOf": [
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "boolean"
+                    }
+                  ]
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Maintenance Email"
+          },
           "runs": {
             "items": {
               "$ref": "#/components/schemas/RapportPurgePayload"

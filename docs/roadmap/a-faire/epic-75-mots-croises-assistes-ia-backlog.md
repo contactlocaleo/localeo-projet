@@ -17,7 +17,7 @@
 - Périmètre distinct : une nouvelle mécanique de jeu et une nouvelle offre
   commerciale, avec création de grilles, réponses croisées et expérience joueur
   spécifiques. E75 ne remplace ni la chasse ni la
-  [tombola publique E74](epic-74-tombola-publique-backlog.md).
+  [tombola publique E74](../en-cours/epic-74-tombola-publique-backlog.md).
 - Aucun dossier de spécification détaillée ni implémentation dans ce cadrage.
 
 ## Problème et résultat attendu

@@ -53,7 +53,7 @@ Derniere evolution suivie :
   décisions du 23 octobre : indices chez les commerçants, préparation Localeo
   validée par l’organisateur, grille correcte obligatoire pour le tirage.
   Offre et modalités restantes à arbitrer. État À faire, sans implémentation.
-- [EPIC 74 — Tombola publique sans commerçant](a-faire/epic-74-tombola-publique-backlog.md) :
+- [EPIC 74 — Tombola publique sans commerçant](en-cours/epic-74-tombola-publique-backlog.md) :
   cadrage du 22 octobre, 8 US et 16 critères cibles ; animation standard accessible
   par QR public, notamment sur un stand, sans achat ni validation commerçante.
   Tirage et dotation réutilisent les socles existants ; inscription aux prochaines

@@ -1,10 +1,10 @@
 # E74 — Architecture et contrats cibles
 
-Version du 3 novembre 2026. [Périmètre et décisions](README.md), [preuves prévues](verification.md), [état produit](../../roadmap/README.md). **Les routes et champs marqués cibles ci-dessous ne sont pas encore implémentés.**
+Version du 3 novembre 2026. [Périmètre et décisions](README.md), [preuves prévues](verification.md), [état produit](../../roadmap/README.md). Les contrats sont implémentés localement ; la couverture exécutée et les limites figurent dans le [bilan de vérification](verification.md).
 
-## Existant vérifié et responsabilités
+## État initial examiné avant implémentation
 
-Les chemins de code suivants sont relatifs au dépôt indiqué. Ils décrivent l'existant examiné, pas une preuve de fonctionnement d'E74.
+Les chemins de code suivants sont relatifs au dépôt indiqué. Cette table conserve les écarts identifiés au démarrage ; elle ne décrit pas l'état final du code. Les sections suivantes décrivent le contrat retenu.
 
 | Producteur ou lecteur | Existant et écart à traiter |
 | --- | --- |
@@ -28,7 +28,7 @@ Références communes : [domaine d'abord](../../architecture/decisions/ADR-2026-
 | I01 — Un seul participant et une chance par `(animation, e-mail normalisé)` | `ParticipantAnimation`, stratégie pure `TOMBOLA_PUBLIQUE`, contrainte SQL existante. Toutes commandes publiques, ERP, imports et reprises. |
 | I02 — Qualification = inscription explicite + règlement accepté + preuve d'adresse confirmée dans la fenêtre autorisée | Nouveau objet de preuve et stratégie de domaine ; intégration dans `FaitsExecutionMoteur`, provenance et politique d'exploitation. Ni token d'accès ni statut seul ne constitue la preuve. |
 | I03 — Aucun commerce requis pour qualifier ou publier avec lots externes | Politiques de publication et compilation du nouveau moteur. Missions, consentement commerce, minimum et délais de réponse non applicables. Les contrôles de dotation restent dans E73. |
-| I04 — Date/état vérifiés au moment de confirmer ; population figée stable | Agrégat `Animation`, politique de confirmation et gel existant. API, ERP, batch utilisent la même barrière exclusive. |
+| I04 — Date/état vérifiés au moment de confirmer ; population figée stable | Agrégat `Animation`, politique de confirmation et gel existant. Les écritures de participation prennent la barrière partagée ; la clôture prend la même barrière en exclusif. |
 | I05 — Une consommation standard, droits acquis inchangés | Domaine abonnements, commande de publication existante. Nouveau modèle classé STANDARD ; ni réécriture des instantanés commerciaux ni augmentation de quota. |
 | I06 — Aucun accès personnel avant preuve ; aucun accès à un tiers par connaissance d'un e-mail | Politique de vérification et de récupération. Ancienne inscription, récupération et routes administratives ne fournissent pas de contournement. |
 | I07 — Gains uniques et population/provenance cohérentes | Moteurs de tirage E73, sans moteur parallèle ; replay, remplacement et remise conservent leurs contrats. |
@@ -60,7 +60,7 @@ flowchart LR
 
 ### Atomicité et concurrence
 
-Toutes les mutations E74 d'une animation acquièrent d'abord la barrière exclusive de l'animation utilisée par le gel, puis le participant et son challenge. La publication garde l'ordre de verrouillage commercial existant ; elle ne prend pas de verrou challenge. Les reçus de commande suivent le mécanisme d'idempotence existant, avec un ordre identique entre commandes concurrentes de même famille. Vérifier cet ordre en intégration PostgreSQL, notamment confirmation/renvoi/clôture/anonymisation.
+Les demandes/confirmations E74 acquièrent d'abord la barrière partagée de l'animation, conservée jusqu'au commit. Le gel et la clôture prennent la même barrière en exclusif. Un verrou consultatif sérialise une même clé de commande ; les demandes sérialisent ensuite une même adresse empreintée et, si nécessaire, la capacité maximale. L'ordre participant puis challenge est commun aux renvois et confirmations. Relire l'horloge après toute attente de verrou avant de vérifier expiration et fenêtre. La publication garde l'ordre de verrouillage commercial existant ; elle ne prend pas de verrou challenge. Les reçus de commande suivent le mécanisme d'idempotence existant, avec un ordre identique entre commandes concurrentes de même famille. Vérifier cet ordre en intégration PostgreSQL, notamment confirmation/renvoi/clôture/anonymisation.
 
 Dans une même unité de travail : participant en attente + challenge + reçu + message outbox + audit. Une panne annule l'ensemble ; l'envoi externe n'a jamais lieu dans la transaction. Le worker peut relivrer un e-mail, sans produire une deuxième qualification.
 
@@ -125,6 +125,12 @@ Le reçu de confirmation doit permettre de reprendre une réponse perdue sans cr
 
 Ne pas confondre rotation du challenge et récupération d'accès : le renvoi de vérification remplace son challenge actif ; la récupération personnelle existante crée un nouvel accès sans révoquer automatiquement les précédents. E74 conserve ce dernier comportement.
 
+#### Fermeture et reprise : ordre des contrôles
+
+`renvoyer-verification` et l'ancienne récupération `renvoyer-lien` conservent une réponse 202 neutre après fermeture. Pour une attente, aucune émission ni rotation de challenge n'est effectuée hors de la période autorisée. Pour une participation déjà confirmée, la récupération reste possible selon la politique personnelle existante : expiration à `date_fin + 90 jours`, délai entre envois et absence d'anonymisation. Une adresse absente ou un accès devenu irrécupérable ne produit aucun envoi, avec la même réponse publique. La fermeture ne prolonge aucune durée d'accès et cette commande ne peut jamais qualifier. Le refus 409 de la demande initiale fermée ne s'applique donc pas à cette récupération.
+
+Pour `confirmer-email`, rechercher d'abord un reçu de succès correspondant à la même commande. Vérifier l'empreinte du corps, le secret consommé et sa portée, la durée du reçu ainsi que la validité et la non-révocation de l'accès avant restitution. L'expiration de 30 minutes du challenge ou la fermeture survenue **après** le succès n'invalide pas ce rejeu pendant les 24 heures du reçu. Sans reçu de succès valide, les contrôles de première confirmation s'appliquent intégralement ; conserver une empreinte pour reprise n'autorise pas à utiliser un challenge expiré pour la première fois. Ne jamais retourner un ancien succès sans ses contrôles d'autorisation courants.
+
 ### Consommation Live
 
 Route SPA cible : `/live/animations/:animationId/confirmation-email#secret=…`. Le lien ne contient pas d'adresse. Lire le secret en mémoire puis nettoyer le fragment avant instrumentation ; aucun POST automatique au montage, préchargement ou scan d'e-mail. Réponse et page sensibles `no-store`, `Referrer-Policy: no-referrer`, hors cache service worker ; aucune persistance du secret ni file de synchronisation différée. Si la page est actualisée après nettoyage, inviter à rouvrir le lien reçu.
@@ -145,7 +151,7 @@ Purger par lots les secrets/challenges et reçus après leur durée utile, sans 
 
 ## Performance : bornes et mesures à produire
 
-Appliquer la [convention transverse](../../architecture/transverse/performance-volumetrie.md). Chiffres ci-dessous = **budgets de conception à vérifier**, aucune mesure actuelle d'E74.
+Appliquer la [convention transverse](../../architecture/transverse/performance-volumetrie.md). Chiffres ci-dessous = **budgets de conception**. Les mesures locales exécutées et leurs limites sont consignées dans [la vérification](verification.md#capacité-mesurée) ; elles ne valent pas une mesure de l'hébergement cible.
 
 | Parcours / propriétaire | Population et trafic de recette | Borne, projection et accès | Transaction/mémoire et preuve |
 | --- | --- | --- | --- |
@@ -176,3 +182,12 @@ Démonstration : étendre dans le backend `scripts/demonstration/animations.py`,
 Avant activation : vérifier base migrée, transport e-mail, URL Live et fallback, purges, observabilité, version de tous les consommateurs/PWA et budgets mesurés. Les anciens clients aux registres fermés ne sont **pas** compatibles avec E74 : conserver le modèle invisible pour eux, avec négociation de capacité de lecture sur le catalogue et refus explicite/mise à jour requise à l'ouverture directe. Une purge du cache seule ne prouve pas leur disparition.
 
 Pas de modification DNS, tarif, clé fournisseur ou nouveau module commercial requis par cette conception. La source exportable des contrats sera mise à jour depuis le code durant l'implémentation ; cette spécification n'ajoute pas de bundle documentaire d'exécution puisqu'aucun lecteur applicatif ne la consomme aujourd'hui.
+
+
+## Précisions de l'implémentation locale
+
+- Migration `v288_tombola_publique.sql` : quatre tables (challenges, preuves, débits, compteurs), identité minimale discriminée, index de pagination et modèle initialement inactif. Aucune conversion des participations historiques.
+- Les compteurs E74 sont entretenus par un trigger de contrainte différé au commit. Ils sont exacts pour les transactions suivantes ; aucun écran ne lit un compteur en supposant qu'il a déjà été actualisé avant le commit de sa propre mutation.
+- L'export utilise un instantané `REPEATABLE READ`, une pagination interne par identifiant (500) et un fichier temporaire avec seuil mémoire de 1 Mio. Les refus de périmètre se produisent avant le début de la réponse HTTP.
+- La lecture d'exploitation utilise les compteurs ; le gel revalide la preuve native de chaque participant par lots de 500. Les membres et provenances sont insérés par groupes de 500, sans accumulation d’objets ORM. Les tableaux de provenance minimale utilisés pour leur empreinte restent proportionnels à la population.
+- Les capacités HTTP mal formées sont refusées en 422 ; un lecteur valide mais incompatible reçoit le refus explicite 409 prévu. Un filtre SQL vide reste typé texte pour les lecteurs historiques.

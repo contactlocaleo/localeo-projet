@@ -176,3 +176,7 @@ Voir la [procédure opératoire](../../../exploitation/exploitation/gerer-bons-n
 Consigner l'environnement, les versions, le compte de recette, les résultats et
 les références de corrélation sans enregistrer de credentials. Les preuves locales
 sont dans le [suivi de remédiation](../../../audits/animation/remediation-2026-09-06.md).
+
+## Tombola publique : préparer, publier et suivre
+
+Le [guide E74](../../../specifications/epic-74-tombola-publique/guide-utilisation.md) décrit le parcours sans commerçant, la vérification d’e-mail, les listes paginées et la remise des lots. Son ouverture dépend de l’activation du modèle sur l’environnement.

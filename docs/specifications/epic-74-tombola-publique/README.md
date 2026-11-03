@@ -1,10 +1,10 @@
 # E74 — Tombola publique sans commerçant
 
-Spécification V1 du **3 novembre 2026**, fondée sur les choix explicites du porteur produit et l'examen des producteurs et consommateurs. L'état produit reste **À faire** dans la [roadmap](../../roadmap/README.md). Cette spécification ne constitue ni une implémentation ni une activation.
+Spécification V1 du **3 novembre 2026**, fondée sur les choix explicites du porteur produit et l'examen des producteurs et consommateurs. L'état produit est **En cours** dans la [roadmap](../../roadmap/README.md). L’implémentation locale et les preuves sont suivies dans le bilan ; le modèle reste désactivé avant mise en service.
 
-- [Backlog canonique : 8 US et 16 critères](../../roadmap/a-faire/epic-74-tombola-publique-backlog.md).
+- [Backlog canonique : 8 US et 16 critères](../../roadmap/en-cours/epic-74-tombola-publique-backlog.md).
 - [Architecture, contrats et livraison](architecture-contrats.md).
-- [Matrice des preuves et recette prévue](verification.md).
+- [Matrice des preuves et recette](verification.md).
 
 ## Décisions et périmètre
 
@@ -50,6 +50,8 @@ Le prénom est modifiable lors de la confirmation par le détenteur du lien ; un
 
 Un participant déjà confirmé retrouve son accès par e-mail. Une nouvelle saisie de son adresse ne retourne jamais son accès personnel au demandeur public et n'ajoute aucune chance. Aucun compte, mot de passe, appareil reconnu ou accès Live existant ne dispense de la preuve d'adresse propre à cette tombola.
 
+Après fermeture des inscriptions, conserver une action « Retrouver ma participation » vers la récupération d'accès, distincte de « Participer ». Elle reste disponible selon la durée d'accès existante (jusqu'à 90 jours après la fin) pour les participants confirmés. Une demande encore en attente ne peut plus être confirmée ni recevoir un nouveau lien de vérification. La réponse publique de récupération reste neutre dans les deux cas.
+
 ### États et refus lisibles
 
 - **À confirmer** : demande enregistrée, e-mail non vérifié, zéro chance ; ne pas afficher « Inscription confirmée ».
@@ -86,3 +88,6 @@ L'e-mail de vérification, la récupération d'accès et les notifications trans
 Les six arbitrages sont résolus. La conception technique et les preuves sont détaillées dans les deux documents liés en tête. Les limites observées du code actuel (identité obligatoire complète, absence de preuve d'adresse, registres fermés et pagination en mémoire) font partie du travail E74, pas d'hypothèses de compatibilité.
 
 La clôture technique reposera sur les tests unitaires, d'intégration et fonctionnels de la [matrice](verification.md), y compris migrations, concurrence et volumétrie. Les démarches de mise en service et la revue du règlement ne sont pas des preuves techniques ni un pilote requis pour clôturer ; elles restent suivies séparément avant utilisation réelle.
+
+- [Guide organisateur, habitant et support](guide-utilisation.md).
+- [Migration, activation et exploitation](exploitation.md).

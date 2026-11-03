@@ -266,3 +266,7 @@ Si tu as une question, tu peux l’envoyer sans attendre une séance. Retrouve a
 [tes premiers pas dans les applications de l’équipe](guide-applications-backoffice.md).
 Les écrans évoluent : si un intitulé diffère, appuie-toi sur le dossier recherché
 et transmets une question avec le message affiché si nécessaire.
+
+## Tombola publique : assister les organisateurs et habitants
+
+Le [guide E74](../../../specifications/epic-74-tombola-publique/guide-utilisation.md) décrit le parcours sans commerçant, la vérification d’e-mail, les listes paginées et la remise des lots. Son ouverture dépend de l’activation du modèle sur l’environnement.

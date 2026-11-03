@@ -2,7 +2,7 @@
 
 ## Références et état
 
-- **État produit : À faire**, cadrage initial du **22 octobre 2026**.
+- **État produit : En cours**, cadrage initial du **22 octobre 2026**.
 - Besoin : proposer dans le forfait standard une tombola accessible par QR public,
   utilisable notamment sur un stand de marché, sans commerçant nécessaire ;
   constituer un public susceptible de participer à de futures animations.
@@ -19,7 +19,7 @@
   Pas de deuxième moteur de tirage ni de référentiel de participants parallèle.
 - [Spécification détaillée V1](../../specifications/epic-74-tombola-publique/README.md)
   du **3 novembre 2026** : six arbitrages résolus, architecture et preuves prévues.
-  Aucun code, migration ou activation E74 réalisé par cette spécification.
+  Implémentation locale engagée le 3 novembre : backend, Animation et Live ; migration v288 désactivée par défaut. Le [bilan des tests](../../specifications/epic-74-tombola-publique/verification.md) distingue les preuves exécutées et les contrôles restants.
 
 ## Problème et résultat attendu
 
