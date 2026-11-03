@@ -4750,3 +4750,66 @@ Impacts : **Commerçant, Animation et documentation Projet**. Les règles métie
 et les contrats restent au backend ; aucune migration, configuration opérateur
 ou modification du générateur n’est nécessaire. Aucun déploiement ni essai sur
 appareil physique n’est inclus ; les travaux restent locaux.
+
+## E73-UX-ACCUEIL-ALLEGE — audit et correction du 3 novembre 2026
+
+Demande : réduire la concurrence entre actions sur Mon Live, déplacer la recherche
+vers une loupe du header et rendre le programme visible avant le grand bloc
+« Ça se passe à Latresne ». Base Marketplace `4d24d2ba27921e9922e41de80fe8a40773b12c5d`
+avec changements locaux ; aucune version distante certifiée par cet audit.
+La décision fonctionnelle est dans [le parcours Live](localeo-live-entree-unique.md#audit-du-3-novembre-2026--accueil-recentré-sur-les-animations).
+
+Cause reproduite : cumul d'une vedette communale, d'une seconde carte de la même
+animation, du bloc communes et des filtres dépliés. À 390 × 844 px, sur la fixture
+sans participation prioritaire, le bandeau occupait environ 587 px ; la première
+carte du programme commençait vers 1 299 px. Le test de densité échouait avant
+correction sur la hauteur de ce bandeau.
+
+Corrections : bandeau de contexte compact, une carte par animation, sélecteur
+communal sur une ligne, recherche à la demande et résumé des filtres actifs.
+L'accès principal précède les détails ; conservation et partage deviennent des
+pictogrammes nommés. Le Flyer configuré et les indicateurs réels restent présents.
+La revue indépendante a fait corriger le focus après effacement et le titre des
+favoris masqué par le header. La recette à 200 % a révélé puis fait corriger la
+coupure des très grands compteurs en réduisant leur taille de base à 1,25 rem.
+
+Mesures de recette sans priorité personnelle, fenêtre de hauteur 844 px :
+
+| Largeur | Bandeau communal | Début de première carte | Bas de son bouton | Haut du dock |
+| --- | --- | --- | --- | --- |
+| 320 px | 123 px | 433 px | 735 px | 746 px |
+| 390 px | 123 px | 384 px | 707 px | 746 px |
+| 1 280 px | 125 px | 404 px | 749 px | 761 px |
+
+Ces mesures démontrent une amélioration de la hiérarchie visuelle sur ce scénario,
+pas une mesure de latence ni une garantie de premier écran pour tous les contenus.
+Les priorités personnelles restent avant la découverte. Les états vide, panne,
+pagination et texte agrandi sont couverts séparément.
+
+Vérifications locales :
+
+- ESLint ciblé sur les six composants modifiés : réussi, code 0.
+- `node --test tests/security/live-discovery-tools.test.cjs` : **3 tests réussis**,
+  filtres, stockage et partage de références publiques sans capacité personnelle.
+- Build Vite de production isolé exécuté par `playwright.desktop.config.cjs`,
+  sans `.env` ni API distante ; aucune configuration publique générée modifiée.
+- Suites navigateur : `live-home-density`, `live-home-community`,
+  `live-discovery-continuity`, `live-play-experience`, `live-product-discovery`,
+  `live-home-communes`, `live-mobile-actions`, `live-header-mobile`,
+  `live-focus-visibility`, `live-home`, `live-discovery-dynamics`.
+  Premier run élargi : 67 succès / 10 échecs (attentes de l'ancienne vedette et
+  fixtures de détail ne prenant pas en compte `moteurs_supportes`). Assertions
+  reportées sur la carte unique, fixtures corrigées ; aucun contrôle métier retiré.
+  Rejeu de 22 cas : 21 succès / 1 échec réel de coupure des grands nombres à 200 %.
+- Après correction de la typographie : **16/16 réussis**, code 0, sur densité,
+  dynamique et focus. Bilan des scénarios distincts des onze suites, après rejeux :
+  **77/77 validés**. Les échecs intermédiaires ci-dessus sont conservés pour la trace.
+- Contrôles documentaires : liens et sources exportées vérifiés ; diff sans erreur.
+- Captures inspectées : mobile, bureau et texte à 200 %. Sorties locales dans
+  `localeo-marketplace/output/live-home-audit/`, exclues de Git.
+
+Impacts : `localeo-marketplace` et `localeo-projet` seulement. API, backend, droits,
+SQL, générateur et configuration ops sans impact, car les données et règles ne
+changent pas. Les travaux E71 préexistants sont conservés. Tests sur appareil
+physique et environnement TEST, mesure de performance hébergée, commit, push et
+déploiement : non exécutés pour cette tâche.

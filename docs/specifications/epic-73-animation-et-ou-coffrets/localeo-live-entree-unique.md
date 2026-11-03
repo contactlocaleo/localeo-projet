@@ -263,11 +263,10 @@ une cible tactile de 44 px et un focus visible.
 
 Les deux compléments de cet audit sont traités :
 
-- La vedette conserve son visuel Flyer, son défi et les compteurs disponibles
-  (participants, gagnants, lots). Sa carte dans la période devient compacte :
-  titre, type, commune, statut, dates et action restent accessibles, sans répéter
-  l’image, le défi et les compteurs. Les autres cartes gardent leur présentation
-  complète ; aucun résultat ni total n’est retiré.
+- La présentation vedette + carte compacte a été remplacée le 3 novembre par
+  une seule carte complète par animation, pour libérer le premier écran.
+  Le visuel Flyer, le défi et les compteurs restent dans cette carte ; le
+  bandeau communal présente uniquement le contexte et l'aperçu des périodes.
 - Au retour d’une fiche, les pages supplémentaires déjà consultées sont relues
   depuis l’API, avec ses curseurs courants, avant de restaurer position et focus.
   Le retour explicite, le retour navigateur et le rechargement dans la fiche
@@ -520,23 +519,20 @@ Sans image configurée, conserver la présentation structurée sans illustration
 de remplacement. Les pictogrammes d'interface restent décoratifs pour les aides
 techniques ; les valeurs, libellés et noms accessibles portent l'information.
 
-Sur l’**Accueil**, le résumé des communes suivies prend la forme d’un bandeau
-graphique **Mes communes** : compteur de communes, repères de localisation et
-noms complets sur des accès individuels à leurs animations. Le bouton
-**Modifier mes communes** rejoint la gestion existante. Consulter une commune
-ouvre son contexte partagé sans changer les communes suivies ; le compteur
-porte sur cette sélection locale, jamais sur une activité supposée. Les dix
-choix restent accessibles sans défilement horizontal, y compris avec des noms
-longs et du texte agrandi. Sans commune suivie, conserver la recherche et la
-géolocalisation volontaire existantes. Aucun fond de carte, photo ou statistique
-supplémentaire n’est nécessaire pour ce résumé.
+Sur l’**Accueil**, les communes suivies prennent la forme d’une seule ligne
+**Choisir une commune**, avec pictogramme et nombre de communes suivies. Elle
+se déplie pour afficher les noms complets et les accès individuels, puis
+**Modifier mes communes**. Consulter une commune ouvre son contexte partagé
+sans changer la sélection. Les dix choix restent accessibles sans défilement
+horizontal, y compris avec des noms longs et du texte agrandi. Sans commune
+suivie, conserver la recherche et la géolocalisation volontaire existantes.
 
 La direction visuelle de Live est un **espace de jeu local** : navigation basse
 en dock avec destination active contrastée, défi personnel sur surface sombre,
 anneau et étapes restantes au premier plan, action de reprise ou de récupération
-explicite. Le rendez-vous communal associe Flyer, type de jeu, participants et
-dotation connus à une action **Découvrir et participer** si les inscriptions sont
-ouvertes, sinon une consultation. Les cartes mettent l'objectif et l'action avant
+explicite. Chaque carte du programme associe le Flyer configuré, le type de jeu et les
+compteurs disponibles à une action **Découvrir l’animation**. La fiche expose
+ensuite l’action autorisée selon le statut et les règles du serveur. Les cartes mettent l'objectif et l'action avant
 les textes détaillés. Passeport, tombola et chasse utilisent les mêmes libellés
 de type dans l'accueil, le catalogue et la fiche ; seul un passeport explicite
 présente un objectif public de validations. Les participations disposent de
@@ -753,3 +749,28 @@ Les résultats réels et limites sont consignés dans le
 [suivi d'implémentation](suivi-implementation.md). Les 130 scénarios historiques
 de [recette métier](recette-metier.md) conservent leurs statuts ; cette évolution
 ajoute ses propres parcours de bascule et n'est pas validée par leurs anciens succès.
+
+## Audit du 3 novembre 2026 — accueil recentré sur les animations
+
+Référence **E73-UX-ACCUEIL-ALLEGE**, complément de E73-HOME-01 et de la
+continuité habitant. L'audit expert porte sur l'arbre local et des parcours
+navigateur synthétiques ; il ne constitue pas un test auprès d'habitants réels.
+
+| Priorité | Obstacle | Présentation retenue |
+| --- | --- | --- |
+| Haute | Le grand bloc « Ça se passe à… » repousse le programme et répète la première animation | Bandeau communal compact, compteurs des périodes chargées ; une seule carte par animation, avec son Flyer réel. |
+| Haute | Recherche et filtres occupent l'accueil avant toute intention de recherche | Loupe nommée dans le header, panneau ouvert volontairement, saisie focalisée ; fermeture clavier et bouton explicite vers les résultats. |
+| Haute | La sélection des communes ajoute un bloc avant les animations | Une ligne dépliable avec compteur et mêmes liens, sans changer les communes suivies. |
+| Moyenne | Actions secondaires aussi présentes que l'accès à l'animation | Un bouton principal par carte ; « Pour plus tard » et « Partager » en pictogrammes nommés, cibles de 44 px et état de conservation explicite. |
+| Moyenne | Des filtres fermés pourraient masquer des résultats sans explication | Résumé visible des filtres actifs, accès à leur modification et effacement avec restitution du focus. |
+
+Les participations prioritaires, gains et messages conservent leur place.
+La recherche reste limitée au programme chargé : ouvrir les filtres ne relit
+pas le catalogue. Les pages supplémentaires, erreurs partielles, liens directs,
+retours avec filtre/position/focus et types de jeu restent couverts. Les grands
+textes ne sont pas tronqués et aucune image ou activité n'est inventée.
+
+Impacts : frontend Marketplace/Live et documentation uniquement. Aucun contrat
+API, invariant métier, droit, donnée de démonstration, migration ou paramètre
+d'exploitation ne change. Une mise en service nécessitera la livraison du
+frontend ; les résultats locaux sont consignés dans le suivi d'implémentation.
