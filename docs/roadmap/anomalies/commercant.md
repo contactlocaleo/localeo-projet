@@ -1,5 +1,27 @@
 # Registre des anomalies
 
+## Diagnostic du 3 novembre 2026 — récupération sans accès Pro initialisé sur TEST
+
+- **Signalement** : une demande de mot de passe oublié ne produit aucun e-mail
+  visible dans l’ERP. Lecture seule sur TEST : le commerce est actif et possède
+  une adresse de contact, mais aucune ligne d’identifiant commerçant. Les demandes
+  de récupération sont bien enregistrées, sans blocage de débit ni e-mail de reset.
+- **Cause** : une adresse de contact n’est pas automatiquement un login Pro.
+  Le parcours public répond volontairement de façon générique pour un login
+  inconnu, sans créer de compte, token ou e-mail. Le `+` de l’adresse est conservé
+  par le formulaire JSON déployé ; l’origine API TEST est correcte.
+- **Traitement** : ERP → fiche du commerce → Accès → Envoyer le lien
+  d’initialisation. Cette commande crée le premier identifiant et place l’e-mail
+  d’initialisation dans la file. L’utilisateur a choisi de l’effectuer lui-même :
+  aucune initialisation, modification de mot de passe ou émission d’e-mail exécutée.
+- **Preuves** : 27 tests backend isolés réussis dans
+  `test_identite_acces_use_cases.py` et `test_acces_preparation_password_api.py` ;
+  7 tests Pro réussis dans `api.test.js` et `passwordResetReturn.test.js`.
+  Ces tests ne prouvent pas une livraison d’e-mail réel après initialisation.
+- **Impacts** : diagnostic de configuration d’accès ; aucun correctif applicatif,
+  contrat, migration, générateur ou déploiement nécessaire pour ce cas. Conserver
+  la réponse publique neutre afin de ne pas révéler l’existence d’un compte.
+
 ## Correction du 1er novembre 2026 — invitation salarié et aide au mot de passe
 
 Signalement : revoir `/salaries/invitation` et reprendre la politique commune

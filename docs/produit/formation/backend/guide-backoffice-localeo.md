@@ -10,7 +10,12 @@ ne décrivent pas le menu quotidien d'un compte interne.
 
 Correctif local du **1er novembre 2026**, soumis à livraison sur l’environnement.
 Dans **Catalogue et commerçants → Commerçants et prestations**, rechercher un
-commerce par son nom, sa commune et le produit concerné. Le filtre d’état porte
+commerce par son nom ou son login Localeo Pro, sa commune et le produit concerné.
+La recherche accepte un login complet ou partiel, sans distinction de majuscules,
+et conserve les caractères comme `+`. Elle porte sur un accès Pro déjà créé :
+une adresse de contact seule n’est pas un login tant que l’accès n’a pas été initialisé.
+Cette extension du 3 novembre 2026 reste soumise à livraison.
+Le filtre d’état porte
 sur le produit ; il ne remplace pas le statut du compte commerçant. Les badges
 distinguent Animation et Coffrets. Les flèches permettent de parcourir les pages
 en conservant les filtres ; **Effacer les filtres** permet de repartir de la liste.

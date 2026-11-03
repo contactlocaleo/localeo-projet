@@ -8,6 +8,38 @@ des trois anomalies du 1er novembre ; elle ne prouve pas leur déploiement
 applicatif. La correction SQL v286 a été appliquée sur TEST comme indiqué
 ci-dessous ; la migration catalogue v285 y reste en attente.
 
+## ANO-BE-RECHERCHE-LOGIN-20261103 — Retrouver un commerce par son accès Pro
+
+- **Attendu / observé** : la liste ERP doit retrouver un commerce depuis son
+  login Pro ; la requête ne cherchait que dans `commercants.nom`. Reproduction
+  locale sur backend `aadb55f` : cinq cas échouent sur les résultats attendus
+  pour un login complet, partiel, en majuscules ou comportant `+`.
+- **Correction** : le champ devient « Rechercher par nom ou login ». Le serveur
+  combine le nom et l’existence d’un identifiant Pro correspondant, sans distinction
+  de casse, avec suppression des espaces périphériques. `%`, `_` et `\` restent
+  du texte littéral ; `+` est préservé. Le login n’est pas ajouté aux données de
+  liste, et une simple adresse de contact sans accès initialisé n’est pas assimilée
+  à un identifiant. La recherche n’inclut pas les logins salariés.
+- **Frontières et coût** : projection de lecture dans `ServiceAtelierErp`, sans
+  nouvelle règle métier. Le filtre de communes autorisées reste appliqué avant
+  comptage/pagination, ainsi que les filtres commune et produit. Sous-requête
+  `EXISTS` corrélée sur l’identifiant unique du commerce : pas de doublon, collecte
+  complète en mémoire ou requête supplémentaire par ligne. Le contrat `query`
+  et la réponse existante sont conservés ; aucune migration d’index requise pour
+  cette extension de la recherche textuelle existante.
+- **Preuves** : 11 tests SQL/API réussis dans `test_erp_recherche_commercants.py`,
+  dont filtres, droits de commune, pagination, absence de doublon et caractères
+  littéraux. La fixture SQLite a été complétée pour la lecture réelle des
+  périmètres déjà utilisée par le service, sans neutraliser ses contrôles.
+  16 scénarios navigateur réussis à 320/1280 px et texte agrandi, avec API simulée,
+  contrôle du login transmis, clavier et axe. Capture mobile inspectée.
+  627 tests d’architecture/recensement réussis ; le premier lancement avait
+  rencontré `WinError 50` lors de `git init` dans un test, résolu par exécution
+  sans capture pytest et redirection des sorties vers un fichier local.
+- **Impacts** : backend/ERP et [guide de formation](../../produit/formation/backend/guide-backoffice-localeo.md).
+  Aucun changement de mot de passe, accès, permission, données, générateur ou
+  configuration d’exploitation. Correctif local, non déployé sur TEST.
+
 ## ANO-BE-CONNEXION-ERP-20261101 — Connexion interne hors charte ERP
 
 Signalement du 1er novembre 2026 : la connexion interne conserve une ancienne
