@@ -2,13 +2,42 @@
 
 Version du 3 novembre 2026. [Périmètre](README.md), [contrats et invariants](architecture-contrats.md), [critères canoniques](../../roadmap/en-cours/epic-74-tombola-publique-backlog.md).
 
-## Bilan d'implémentation locale
+## Évolution E74-EVOL-INSCRIPTION-DIRECTE — 3 novembre 2026
+
+Attendu : depuis QR ou Live, e-mail et règlement puis inscription qualifiée immédiatement, un seul mail transactionnel de confirmation, accès personnel/carnet via ce mail. Observé avant correction : prénom obligatoire et mail intermédiaire de vérification. La reproduction navigateur à 320 px échoue bien sur la présence du prénom avant correction. Les preuves de cette évolution sont distinguées ci-dessous des résultats historiques. Bases Git : projet `11b0016`, backend `3473635`, Live `9e4f1a1`, Animation `9fc4e8b`, plus les changements locaux. La reproduction API du nouveau parcours échouait en 404 avant correction puis répond en 202.
+
+Périmètre : domaine/application/API/SQL/e-mail et lecteurs backend, Live, portail Animation, contrats générés et documentation canonique. La migration additive v289 distingue adresse déclarée et vérifiée, sans qualifier d’anciennes attentes. Aucun changement des règles de gain, quota, droits ou validation Pro/PIN des autres modèles. Pas de nouveau fournisseur, secret ou DNS ; le générateur doit passer par les commandes métier.
+
+### Preuves de l’inscription directe
+
+| Contrôle | Résultat | Portée |
+| --- | --- | --- |
+| Backend domaine/application/API | **65 succès** | Inscription sans prénom, preuve discriminée, réponse publique sans accès, refus, contrat et ancien parcours maintenu. Runner isolé `scripts/validation/test_isolated.py`. |
+| Architecture et couverture use cases | **637 succès** | `tests/architecture`, `tests/domain/test_domain_dedicated_classes.py`, `tests/application/use_cases/test_use_case_business_test_coverage.py`. |
+| Intégration PostgreSQL | **66 succès distincts** | Inscription directe/ancienne, concurrence et dernière place, rejeu, rollback e-mail, conversion d’attente, compteurs, gel, tirage, trois modes de gains et remise, Vision 360 sans prénom, export et anonymisation. Restauration rejouée avec attente, preuve vérifiée, inscription directe et outbox ; aucun transport e-mail réel. |
+| Migration et restauration | **1 test réussi sur base locale jetable** | Chaîne complète jusqu’à v289 et pg_dump/pg_restore ; aucune application sur TEST partagé. |
+| Générateur complet | **1 succès PostgreSQL** | Création, modification, publication, quota et participations directes/historiques par commandes ordinaires, outbox neutralisée. |
+| Live navigateur | **20 scénarios E74 distincts et 6 régressions réussis** | 320/390/1280 px, QR/fiche/formulaire, absence de demande de vérification intermédiaire, réponse perdue, double clic, refus 409/410/429, anciens liens, accès personnel → carnet → jeu `NON_REQUISE`. API simulées ; backend vérifié séparément. |
+| Localeo Animation | **3 scénarios navigateur réussis**, **11 tests Node réussis**, types/lint/build réussis | 320/390/1280 px, création, flyer et participants ; avertissement de taille du bundle conservé. |
+| Live contrats/API | **7 tests Node réussis**, lint ciblé réussi | Lint global empêché par `EPERM` dans un ancien répertoire `output`, sans lien avec les sources modifiées ; ce contrôle global n’est pas annoncé réussi. |
+| Exports | **Conformes** | OpenAPI E41/E42 régénérés, copie Animation identique à E41 ; 98 fichiers de contrats moteur identiques dans chacun des deux consommateurs. `sync_documentation.py --check-sources` : 134 documents vérifiés. |
+| Documentation | **Réussie** | `check_guidance.py` global et vérifications des guides touchés ; `git diff --check` sans erreur. |
+
+Les tests PostgreSQL ciblés sont dans `tests/security/test_tombola_publique_postgres.py`, `test_tombola_publique_gains.py`, `test_tombola_publique_parcours_postgres.py`, `test_tombola_publique_migration_complete.py` et `test_demo_tombola_publique_locale_postgres.py`, exécutés via le runner isolé avec une instance temporaire sur le port 55439.
+
+Les totaux de suites peuvent se recouvrir : ne pas les additionner en tests uniques. Le premier test de restauration a rencontré `WinError 50` dans le lancement Windows de `pg_dump` ; la fixture utilise désormais une entrée standard isolée, puis le test a été rejoué avec succès. La vérification n’a pas été supprimée.
+
+Revue indépendante des invariants et consommateurs sans écart bloquant restant. Les captures du formulaire et du succès ont été relues ; les cibles tactiles secondaires utilisent les styles existants, avec un dernier rejeu de trois scénarios réussi à 320/390 px et sur le renvoi. La revue a également corrigé le lecteur Vision 360 qui supposait un prénom toujours présent. L’annulation des anciens mails intermédiaires en attente réutilise le garde d’outbox, y compris après réservation abandonnée.
+
+**Livraison :** v289 a ensuite été appliquée à TEST le 3 novembre 2026, après sauvegarde et contrôles ; voir le compte rendu d’exploitation. Les commits backend `05ff776`, Live `6817447` et Animation `4f4b5e6` portent le nouveau parcours. Les tests locaux ci-dessus précèdent cette opération ; les contrôles de santé après migration ne prouvent pas l’achèvement du déploiement de ces commits. Aucun envoi réel n’a été effectué. Les anciens règlements publiés sont conservés et peuvent encore mentionner l’ancienne étape ; les anciennes PWA E74 peuvent afficher un libellé d’adresse vérifiée devenu inexact. Voir la [procédure](exploitation.md). Aucune capacité de production ni nouvelle mesure de charge n’est déduite de ces tests.
+
+## Bilan historique d’implémentation avec vérification intermédiaire
 
 Les tests ci-dessous ont été exécutés sur les changements locaux, sans activation du TEST partagé et sans envoi d'e-mail réel. Bases Git : projet `e6bddec`, backend `3437cfc`, Animation `e275bd5`, marketplace/Live `4dbc897`, Pro `054feab`. L'epic reste **En cours** : les scénarios complémentaires indiqués ci-dessous ne sont pas réputés validés par un build ou par une recette navigateur à API simulée.
 
 Les preuves PostgreSQL utilisent une instance locale jetable, port 55474, une base de recette et des schémas uniques par fixture. Les e-mails sont capturés dans l'outbox. Le backend est toujours exécuté par `scripts/validation/test_isolated.py`.
 
-## Matrice des 16 critères
+## Matrice historique des 16 critères
 
 U = unitaire ; I = intégration application/API/PostgreSQL ; F = navigateur. Les parcours F actuels simulent les réponses API ; ils ne constituent pas à eux seuls le scénario intégral avec backend et transport e-mail réels.
 
@@ -95,16 +124,16 @@ Dans le backend, suivre le runner isolé décrit par son `AGENTS.md`. La recette
 | Commerçant/Pro | Remise de bon numérique E74, refus d'une qualification par scan/PIN et non-régression des validations commerçantes des autres modèles. Pas de nouveau flux d'inscription Pro à tester. |
 | Projet / contrats | Liens de documentation, exports depuis producteurs, empreintes schémas et contrats embarqués ; ces contrôles accompagnent les tests consommateurs et ne les remplacent pas. |
 
-## Parcours fonctionnels complets
+## Parcours fonctionnels courants à vérifier
 
-1. **Sans commerce, bout en bout** : organisation de test sans commerce → standard → lots externes → assistant → publication → flyer/QR → prénom/e-mail/règlement → attente sans chance → e-mail capturé localement → ouverture sans mutation → confirmation explicite → une chance → clôture → tirage confirmé → lot visible dans Live → remise par organisateur. Vérifier toutes les identités et versions entre écrans et base.
-2. **Reprise et autre appareil** : demander sur A, ouvrir sur B sans installation connue, confirmer, perdre la réponse puis rejouer même commande ; un participant/une preuve/une chance et un accès valable. Reprendre ensuite sur A par e-mail. Aucun état local n'accorde l'éligibilité.
-3. **Secret et prévisualisation** : GET, robot de messagerie et préchargement n'écrivent rien ; secret étranger, expiré, révoqué ou remplacé refusés ; nouvelle clé sur secret consommé sans nouvelle mutation. L'ancien endpoint et la récupération ne donnent pas d'accès en attente. Révocation bloque le reçu de succès.
-4. **Clôture en course** : deux transactions réelles PostgreSQL, barrière synchronisée ; inclure une confirmation commise avant gel ou refuser celle passée après. Aucun qualifié absent de la population par course ; aucun lien tardif ne l'étend. Rejouer après arrêt worker.
+1. **Sans commerce, bout en bout** : organisation de test sans commerce → standard → lots externes → assistant → publication → flyer/QR → e-mail/règlement → inscription immédiatement qualifiée (une chance) → un mail capturé localement → lien personnel et ajout au carnet, sans nouvelle qualification → clôture → tirage confirmé → lot visible dans Live → remise par organisateur. Vérifier toutes les identités et versions entre écrans et base.
+2. **Reprise et autre appareil** : s’inscrire sur A, perdre la réponse puis rejouer la même commande ; un participant/une preuve/une chance/un mail. Ouvrir l’accès personnel sur B sans installation connue, puis l’ajouter au carnet sans nouvelle qualification. Reprendre ensuite sur A par e-mail. Aucun état local n'accorde l'éligibilité.
+3. **Secret et prévisualisation** : la réponse publique d’inscription ne contient ni token ni identifiant personnel ; GET, robot de messagerie et préchargement n’écrivent rien ; pour les anciens liens, secret étranger, expiré, révoqué ou remplacé refusés ; nouvelle clé sur secret consommé sans nouvelle mutation. L'ancien endpoint et la récupération ne donnent pas d'accès en attente. Révocation bloque le reçu de succès.
+4. **Clôture en course** : deux transactions réelles PostgreSQL, barrière synchronisée ; inclure une inscription commise avant gel ou refuser celle passée après ; rejouer aussi la confirmation historique. Aucun qualifié absent de la population par course ; aucun lien tardif ne l'étend. Rejouer après arrêt worker.
 5. **Trois modes, population insuffisante** : lots externes et numériques avec zéro/un/plusieurs candidats ; Coffrets refuse si exemplaires supérieurs aux candidats, sans émission partielle ni modification de dotation. Nombre exact et cas suffisant vérifiés également.
 6. **Mobile et préférences** : 320/390 px et PC, clavier/zoom, commandes accessibles, liens retour et rafraîchissement cohérents ; suivi commune refusé puis ajouté/retiré, notifications refusées, stockage indisponible, limite dix. Participation et lots restent utilisables dans chaque cas.
 7. **Compatibilité** : anciennes tombolas/passeports/chasses avant et après migration, ancienne PWA face au catalogue/direct E74, cache et mise à jour ; aucun type inconnu envoyé à un lecteur qui ne le comprend pas sans réponse explicite de mise à jour.
-8. **Volumétrie et exploitation** : N/10N selon budgets d'architecture, charge mixte lectures/confirmations/gel, plusieurs habitants sur même IP ; total exact, plans/index, bornes mémoire, délais, saturation explicite. Restaurer une sauvegarde isolée contenant attentes, preuves, outbox et gains, puis reprendre sans doublon.
+8. **Volumétrie et exploitation** : N/10N selon budgets d'architecture, charge mixte lectures/inscriptions/confirmations historiques/gel, plusieurs habitants sur même IP ; total exact, plans/index, bornes mémoire, délais, saturation explicite. Restaurer une sauvegarde isolée contenant attentes, preuves, outbox et gains, puis reprendre sans doublon.
 
 ### Cas limites de récupération et de rejeu (CA08/09/15)
 
@@ -114,7 +143,7 @@ Dans le backend, suivre le runner isolé décrit par son `AGENTS.md`. La recette
 
 ## Documentation et données à livrer avec le code
 
-- Compléter les guides Animation/ERP avec le parcours sans commerce et l'avertissement Coffrets ; le guide Live avec vérification, récupération et suivi local ; le support stand avec QR/lien et confirmation d'adresse.
+- Compléter les guides Animation/ERP avec le parcours sans commerce et l'avertissement Coffrets ; le guide Live avec inscription directe, accès personnel par mail, récupération et suivi local ; le support stand avec QR/lien et saisie de l’adresse.
 - Actualiser les sources de règlement/notice selon les finalités et durées réellement appliquées, sans affirmer une validation juridique obtenue. Leur revue de mise en service reste distincte des tests de clôture.
 - Régénérer les contrats depuis le backend, puis mettre à jour les manifestes/schémas embarqués et vérifier empreintes et tests de chaque lecteur.
 - Adapter le générateur backend et ses assertions aux états de preuve ; aucun accès réel ou donnée privée dans les fixtures. Vérifier suppression/anonymisation/restauration, pas seulement création des tables.
@@ -122,7 +151,7 @@ Dans le backend, suivre le runner isolé décrit par son `AGENTS.md`. La recette
 
 ## Bilan de préparation
 
-Les choix produit sont fixés et les responsabilités, contrats cibles, limites existantes et preuves sont identifiés. Les travaux peuvent être implémentés par lots : domaine/données et contrats → consommateurs et UX → intégration/recette/capacité → activation. Le nouveau parcours d'e-mail et la pagination réellement bornée sont du développement requis.
+Les choix produit sont fixés et les responsabilités, contrats cibles, limites existantes et preuves sont identifiés. Les travaux peuvent être implémentés par lots : domaine/données et contrats → consommateurs et UX → intégration/recette/capacité → activation. L’inscription directe réutilise la pagination et le gel existants ; ses preuves doivent vérifier les deux provenances de qualification.
 
 La clôture technique nécessite les preuves pertinentes réussies pour les 16 critères. Une vérification locale ne vaut pas déploiement ; une action pilote ou une preuve externe n'est pas une condition ajoutée à la clôture. Les preuves locales acquises figurent en tête de ce document. Aucune activation distante n'a été effectuée ; les compléments de tests restent visibles dans la matrice.
 

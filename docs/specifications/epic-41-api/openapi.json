@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Backend - contrat implemente EPIC 41",
     "description": "OpenAPI complet du backend, dont les parcours Animation locale. Genere hors ligne depuis le code local pour les integrations et les mocks ; cet instantane ne prouve pas son deploiement.",
-    "version": "1.0.0+3437cfc"
+    "version": "1.0.0+3473635"
   },
   "paths": {
     "/public/identite-acces/interne/connexion": {
@@ -23646,6 +23646,70 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ResolutionInscriptionAnimationPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/animation-locale/animations/{animation_id}/inscriptions/inscrire": {
+      "post": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Inscrire Tombola Publique",
+        "operationId": "inscrire_tombola_publique",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InscrireTombolaPubliqueRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InscriptionTombolaPubliquePayload"
                 }
               }
             }
@@ -132816,6 +132880,66 @@
         ],
         "title": "InscriptionAnimationPayload"
       },
+      "InscriptionTombolaPubliquePayload": {
+        "properties": {
+          "statut": {
+            "type": "string",
+            "const": "INSCRIPTION_ENREGISTREE",
+            "title": "Statut"
+          },
+          "renvoi_apres_secondes": {
+            "type": "integer",
+            "title": "Renvoi Apres Secondes"
+          }
+        },
+        "type": "object",
+        "required": [
+          "statut",
+          "renvoi_apres_secondes"
+        ],
+        "title": "InscriptionTombolaPubliquePayload"
+      },
+      "InscrireTombolaPubliqueRequest": {
+        "properties": {
+          "email": {
+            "type": "string",
+            "maxLength": 320,
+            "minLength": 3,
+            "title": "Email"
+          },
+          "reglement_accepte": {
+            "type": "boolean",
+            "const": true,
+            "title": "Reglement Accepte"
+          },
+          "reglement_version": {
+            "type": "string",
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Reglement Version"
+          },
+          "source_diffusion_code": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 128
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Diffusion Code"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "email",
+          "reglement_accepte",
+          "reglement_version"
+        ],
+        "title": "InscrireTombolaPubliqueRequest"
+      },
       "InstructionKit": {
         "properties": {
           "titre": {
@@ -143967,7 +144091,14 @@
             "title": "Inscription Id"
           },
           "prenom": {
-            "type": "string",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Prenom"
           },
           "email": {
@@ -143978,7 +144109,8 @@
             "type": "string",
             "enum": [
               "EN_ATTENTE",
-              "CONFIRMEE"
+              "CONFIRMEE",
+              "NON_REQUISE"
             ],
             "title": "Verification Email"
           },
@@ -148015,9 +148147,15 @@
             "type": "string",
             "enum": [
               "EN_ATTENTE",
-              "CONFIRMEE"
+              "CONFIRMEE",
+              "NON_REQUISE"
             ],
             "title": "Verificationemail"
+          },
+          "inscriptionConfirmee": {
+            "type": "boolean",
+            "title": "Inscriptionconfirmee",
+            "default": false
           }
         },
         "additionalProperties": false,

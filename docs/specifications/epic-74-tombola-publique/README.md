@@ -6,15 +6,21 @@ Spécification V1 du **3 novembre 2026**, fondée sur les choix explicites du po
 - [Architecture, contrats et livraison](architecture-contrats.md).
 - [Matrice des preuves et recette](verification.md).
 
+## Évolution E74-EVOL-INSCRIPTION-DIRECTE — 3 novembre 2026
+
+La demande produit supprime l’e-mail intermédiaire : depuis le QR ou **S’inscrire** dans Live, l’habitant saisit uniquement son adresse, accepte le règlement et valide. La commande enregistre immédiatement une participation qualifiée et prépare un seul e-mail de confirmation. Ce mail explique le tirage, donne l’accès personnel au carnet et invite à installer Live ; le consulter n’est plus nécessaire pour obtenir une chance.
+
+Cette décision remplace les anciens arbitrages ARB-01/03 qui imposaient prénom et adresse vérifiée. Une adresse déclarée n’est pas marquée vérifiée. Les participations déjà qualifiées, anciens liens et historiques sont conservés ; les anciennes demandes abandonnées ne sont pas qualifiées automatiquement. Les critères CA07/08/09/12/15/16 gardent leurs identifiants. L’état de l’epic reste **En cours**.
+
 ## Décisions et périmètre
 
 La tombola publique est une nouvelle mécanique `TOMBOLA_PUBLIQUE`, version initiale `1.0`. Elle rejoint la catégorie standard et utilise le quota standard existant, également pour les souscriptions déjà actives. Elle n'accorde ni quota supplémentaire ni module payant gratuit. La tombola commerçante E53 conserve sa qualification par achat validé.
 
 | Arbitrage du backlog | Décision confirmée le 3 novembre 2026 |
 | --- | --- |
-| E74-ARB-01 | Formulaire court, acceptation explicite du règlement, puis confirmation explicite depuis l'e-mail reçu. Une consultation ne crée aucune participation. |
+| E74-ARB-01 | Adresse e-mail, acceptation explicite du règlement et validation immédiate. Un seul e-mail de confirmation après inscription ; une consultation ne crée aucune participation. |
 | E74-ARB-02 | QR et lien partageables, sans preuve de présence au stand ni géolocalisation obligatoire. |
-| E74-ARB-03 | Prénom et e-mail obligatoires, sans nom, téléphone ou nouveau compte. Adresse vérifiée avant qualification. Une seule chance par e-mail normalisé et par tombola. |
+| E74-ARB-03 | E-mail seul, sans prénom, nom, téléphone ou nouveau compte. Une seule chance par e-mail normalisé et par tombola dès l’inscription ; adresse déclarée, sans prétendre l’avoir vérifiée. |
 | E74-ARB-04 | Trois modes existants : Coffrets, bons numériques Localeo et lots libres gérés en externe. Les lots externes fonctionnent sans commerce. |
 | E74-ARB-05 | Quota standard et conditions acquises conservés, y compris pour les souscriptions déjà actives. Consommation idempotente à la publication. |
 | E74-ARB-06 | Suivi facultatif de la commune dans Live, sans nouveau canal d'envoi ni campagne inter-animations. |
@@ -29,37 +35,38 @@ Sont exclus : achat ou billet payant, preuve Pro/PIN pour qualifier, chances mul
 2. **Préparer** en étapes : Commune → Présentation et dates → Lots → Règlement et support → Vérifier et publier. Le modèle est choisi auparavant. Aucune sélection, invitation, mission, réponse ou activation de commerçant n'est exigée pour qualifier les habitants.
 3. **Vérifier** dans l'assistant : montrer d'abord le prochain blocage réel et son action. Distinguer acquis, manquant et non applicable à partir du serveur. Les actions secondaires restent accessibles sans encombrer le guide. Dates, règlement, droits et disponibilité de la dotation restent contrôlés ; l'absence de commerce n'est pas une alerte.
 4. **Publier** avec les contrôles et la consommation de quota E73. Une organisation sans commerce peut publier une dotation externe. Coffrets conserve ses prérequis de dotation/paiement ; un bon numérique conserve ses prérequis de remise par un commerce. Ce commerce de remise ne devient pas une condition de qualification.
-5. **Diffuser** le QR public et le lien équivalent. Le flyer présente commune, dates, lots, conditions et consigne « Inscrivez-vous puis confirmez votre e-mail ». Il ne promet aucune chance avant cette confirmation et ne demande aucun achat. Utiliser l'image personnalisée si présente ; ne pas inventer d'image ni afficher « 0 commerçant » comme anomalie.
-6. **Suivre** les demandes en attente, participants qualifiés, gagnants et remises. Listes paginées réellement côté serveur ; compteurs exacts de catégories explicites. Les compteurs publics ne comprennent que les participations confirmées, sans révéler les adresses ou les demandes en attente.
-7. **Clôturer, tirer et remettre** avec les workflows E73. La confirmation d'e-mail est fermée à la fin des inscriptions ; la population du tirage est figée à la clôture. La confirmation des résultats et les actions irréversibles restent explicites.
+5. **Diffuser** le QR public et le lien équivalent. Le flyer présente commune, dates, lots, conditions et consigne « Saisissez votre e-mail pour vous inscrire ». Il annonce une seule chance après validation et ne demande aucun achat. Utiliser l'image personnalisée si présente ; ne pas inventer d'image ni afficher « 0 commerçant » comme anomalie.
+6. **Suivre** les demandes en attente, participants qualifiés, gagnants et remises. Listes paginées réellement côté serveur ; compteurs exacts de catégories explicites. Les compteurs publics comprennent les inscriptions directes qualifiées et les anciennes participations confirmées, sans révéler les adresses ou les demandes en attente.
+7. **Clôturer, tirer et remettre** avec les workflows E73. Les nouvelles inscriptions et les confirmations des anciens liens sont fermées à la fin des inscriptions ; la population du tirage est figée à la clôture. La confirmation des résultats et les actions irréversibles restent explicites.
 
-Les opérations ERP, API et batch passent par les mêmes politiques métier. L'ERP ne doit pas rendre un habitant éligible en contournant la preuve d'adresse.
+Les opérations ERP, API et batch passent par les mêmes politiques métier. L’ERP ne doit pas rendre un habitant éligible en contournant la preuve d’inscription et le règlement. Une inscription directe ne prouve pas la possession de la boîte e-mail.
 
 ## Parcours habitant dans Live
 
 | Étape | Présentation et action principale | Résultat et issue alternative |
 | --- | --- | --- |
-| Découvrir | Fiche publique mobile : commune, dates, vrais lots, règle « une chance par e-mail confirmé », bouton « Participer » | Aucune connexion requise. Avant ouverture ou après fermeture : dates et état lisibles, action indisponible. |
-| S'inscrire | Prénom, e-mail, règlement consultable et acceptation non précochée ; bouton « Recevoir mon lien de confirmation » | Le serveur accepte la demande. Pas encore de chance ni de participation confirmée dans la bibliothèque Live. |
-| Attendre | « Vérifiez votre boîte e-mail » ; rappeler les indésirables, permettre correction d'adresse et renvoi après délai | Une réponse 202 indique la prise en compte, pas la livraison du message. Une erreur réseau reste incertaine et se reprend avec la même clé. |
-| Confirmer | Le lien ouvre la bonne tombola, y compris sur un autre appareil. Bouton « Confirmer ma participation » | L'ouverture seule ne qualifie pas. Le POST explicite vérifie secret, dates et état courant. |
-| Retrouver | « Vous participez : 1 chance au tirage », état de qualification serveur et date annoncée si connue | Accès personnel vérifié ajouté au parcours Live existant ; « Mes participations », « Mes lots » et tirages à venir réutilisés. |
+| Découvrir | Fiche publique mobile : commune, dates, vrais lots, « une chance par e-mail », bouton « S’inscrire » | Aucune connexion requise. Le QR ouvre le même formulaire ; aucune inscription par simple ouverture. |
+| S’inscrire | E-mail, règlement consultable et acceptation non précochée ; bouton de validation unique | Une inscription qualifiée et une chance immédiatement, puis un e-mail de confirmation préparé. Une réponse 202 ne prouve pas la livraison du mail. |
+| Retrouver | Ouvrir l’accès personnel reçu par e-mail et ajouter l’animation au carnet Live | « Mes participations », « Mes lots » et tirages à venir réutilisés. Ce lien donne accès au suivi ; il ne crée pas une nouvelle chance. Aucun carnet personnel n’est inventé dans le navigateur qui n’a saisi qu’une adresse. |
+| Installer Live | Proposition facultative dans le mail et les parcours Live existants | Installer facilite le retour au carnet ; aucune obligation pour participer ni synchronisation automatique entre appareils promise. |
 | Suivre la commune | Action secondaire « Suivre cette commune » avec portée « dans ce navigateur » | Facultatif ; aucun changement de chance, abonnement marketing ou autorisation de notifications implicite. |
 
-Le prénom est modifiable lors de la confirmation par le détenteur du lien ; une demande publique non vérifiée ne modifie jamais le profil d'une participation déjà confirmée. Une erreur d'adresse se corrige en demandant un nouveau lien à la bonne adresse : elle ne transfère pas un accès existant. Les demandes abandonnées ne sont pas qualifiées.
+Une nouvelle saisie de la même adresse ne modifie pas l’identité existante et ne retourne jamais son accès personnel au demandeur public. Elle n’ajoute aucune chance ; un accès de récupération peut être envoyé selon les limites existantes. Le rejeu avec la même clé et le même corps ne renvoie pas un deuxième mail. Une faute d’adresse se corrige avant validation ; après validation, saisir la bonne adresse ne transfère ni ne supprime une participation déjà enregistrée sous une autre adresse.
 
-Un participant déjà confirmé retrouve son accès par e-mail. Une nouvelle saisie de son adresse ne retourne jamais son accès personnel au demandeur public et n'ajoute aucune chance. Aucun compte, mot de passe, appareil reconnu ou accès Live existant ne dispense de la preuve d'adresse propre à cette tombola.
+L’e-mail de confirmation précise que l’inscription est déjà enregistrée, annonce la suite (tirage et résultats, sans promesse de gain), propose le lien personnel vers Live et l’ajout au carnet, puis l’installation facultative. Une inscription ne constitue ni un compte ni un consentement marketing. Le prénom absent reste absent, y compris dans les messages, listes et résultats.
 
-Après fermeture des inscriptions, conserver une action « Retrouver ma participation » vers la récupération d'accès, distincte de « Participer ». Elle reste disponible selon la durée d'accès existante (jusqu'à 90 jours après la fin) pour les participants confirmés. Une demande encore en attente ne peut plus être confirmée ni recevoir un nouveau lien de vérification. La réponse publique de récupération reste neutre dans les deux cas.
+Les anciens liens de vérification restent utilisables dans leur durée de validité et nécessitent leur confirmation explicite. Une ancienne demande en attente peut être qualifiée par une nouvelle inscription explicite pendant l’ouverture ; cette transition invalide son challenge et empêche l’envoi d’un mail intermédiaire encore en attente. Aucune migration ne qualifie les attentes abandonnées.
+
+Après fermeture, **Retrouver ma participation** reste disponible pour les participations qualifiées jusqu’à la limite existante de 90 jours après la fin. Une récupération ne qualifie jamais une ancienne attente et sa réponse reste neutre.
 
 ### États et refus lisibles
 
-- **À confirmer** : demande enregistrée, e-mail non vérifié, zéro chance ; ne pas afficher « Inscription confirmée ».
-- **Qualifié** : preuve confirmée dans la période autorisée, une chance ; aucun badge de visite ou étape commerciale inventée.
-- **Lien expiré ou remplacé** : proposer un renvoi si la tombola accepte encore les inscriptions ; aucun token personnel livré.
+- **Ancienne demande à confirmer** : attente créée avant la simplification, zéro chance tant qu’aucune commande valide ne l’a qualifiée. Cet état n’apparaît plus après une nouvelle inscription directe réussie.
+- **Inscription enregistrée** : preuve d’inscription dans la période autorisée, une chance ; aucun badge d’adresse vérifiée, de visite ou étape commerciale inventé.
+- **Ancien lien expiré ou remplacé** : proposer une inscription directe si elle reste ouverte ; aucun token personnel livré par une adresse seule.
 - **Fermée ou annulée** : aucune nouvelle qualification, même avec un lien émis avant fermeture. Une confirmation déjà réussie reste une réussite au rejeu de son reçu valide, sans nouvelle mutation.
 - **Résultat incertain** : ne pas annoncer un succès ; reprendre la commande ou récupérer l'accès par e-mail.
-- **Connexion indisponible** : expliquer que la confirmation nécessite le réseau. Ne pas mettre la commande en file hors ligne.
+- **Connexion indisponible** : expliquer que l’inscription nécessite le réseau. Ne pas mettre la commande en file hors ligne.
 
 Les interfaces privilégient une action principale, des libellés courts, pictogrammes avec nom accessible, cibles tactiles d'au moins 44 px, focus visible, erreurs près du champ et annonces accessibles des transitions. Le parcours doit rester utilisable à 320 px, au clavier et avec réduction des animations. L'état n'est jamais communiqué uniquement par une couleur ou une animation de célébration.
 
@@ -81,11 +88,11 @@ Réutiliser « Mes communes » et la préférence locale existante (maximum dix 
 
 Le retrait dans « Mes communes » enlève le suivi de cet appareil et synchronise les préférences d'installation lorsqu'elles existent. Il conserve la participation et les lots. Il ne désabonne pas silencieusement des messages propres à une animation : ce choix dispose déjà de sa gestion distincte. Aucune synchronisation entre appareils ni association à un compte inexistant n'est promise.
 
-L'e-mail de vérification, la récupération d'accès et les notifications transactionnelles du jeu restent dans leurs finalités. Le suivi commune n'active ni push, ni préférence organisateur, ni module Communication. Les communications facultatives existantes restent limitées à leur animation, à leurs droits et à leur fenêtre d'envoi.
+L’e-mail de confirmation d’inscription, les anciennes vérifications, la récupération d’accès et les notifications transactionnelles du jeu restent dans leurs finalités. Le suivi commune n'active ni push, ni préférence organisateur, ni module Communication. Les communications facultatives existantes restent limitées à leur animation, à leurs droits et à leur fenêtre d'envoi.
 
 ## Préparation de l'implémentation
 
-Les six arbitrages sont résolus. La conception technique et les preuves sont détaillées dans les deux documents liés en tête. Les limites observées du code actuel (identité obligatoire complète, absence de preuve d'adresse, registres fermés et pagination en mémoire) font partie du travail E74, pas d'hypothèses de compatibilité.
+Les six arbitrages sont résolus. La conception technique et les preuves sont détaillées dans les deux documents liés en tête. L’évolution d’inscription directe porte sur l’identité déclarée, la preuve de qualification, l’e-mail, les lecteurs et la compatibilité des anciens liens. Ses résultats de tests sont distingués des preuves historiques du parcours avec vérification.
 
 La clôture technique reposera sur les tests unitaires, d'intégration et fonctionnels de la [matrice](verification.md), y compris migrations, concurrence et volumétrie. Les démarches de mise en service et la revue du règlement ne sont pas des preuves techniques ni un pilote requis pour clôturer ; elles restent suivies séparément avant utilisation réelle.
 

@@ -21,6 +21,10 @@
   du **3 novembre 2026** : six arbitrages résolus, architecture et preuves prévues.
   Implémentation locale engagée le 3 novembre : backend, Animation et Live ; migration v288 désactivée par défaut. Le [bilan des tests](../../specifications/epic-74-tombola-publique/verification.md) distingue les preuves exécutées et les contrôles restants.
 
+## Évolution E74-EVOL-INSCRIPTION-DIRECTE — 3 novembre 2026
+
+Demande explicite : QR ou bouton Live → e-mail et règlement → inscription immédiate → un seul mail de confirmation, avec suite du jeu et accès personnel au carnet/install Live. Elle remplace l’exigence initiale de prénom et vérification intermédiaire (ARB-01/03). Les critères conservent leurs identifiants ; historique, anciens liens et une chance par adresse sont préservés. Aucun ancien inscrit en attente n’est qualifié automatiquement. L’adresse déclarée n’est pas réputée vérifiée. Voir la [spécification actualisée](../../specifications/epic-74-tombola-publique/README.md).
+
 ## Problème et résultat attendu
 
 La tombola locale existante ne répond pas au besoin d'un organisateur qui tient
@@ -48,9 +52,9 @@ participation ne vaut pas, à elle seule, autorisation de communication future.
 | E74-DEC-02 | Demande acquise | Aucun commerçant requis pour créer, publier et participer ; qualification depuis le parcours ouvert par le QR public |
 | E74-DEC-03 | Demande acquise | QR utilisable sur un support physique, notamment un stand sur un marché |
 | E74-DEC-04 | Décision du 3 novembre | Développer le public par le suivi facultatif de la commune dans Live, sans nouveau canal d'envoi ni campagne inter-animations |
-| E74-PROP-01 | Retenue et précisée le 3 novembre | Une participation et une chance par e-mail normalisé vérifié et par tombola ; rescans sans chance supplémentaire |
+| E74-PROP-01 | Retenue et précisée le 3 novembre | Une participation et une chance par e-mail normalisé et par tombola dès l’inscription explicite ; rescans sans chance supplémentaire (évolution INSCRIPTION-DIRECTE) |
 | E74-PROP-02 | Retenue le 3 novembre | Quota standard consommé à la publication, y compris pour les souscriptions déjà actives ; aucune hausse ni quota illimité implicite |
-| E74-PROP-03 | Précisée le 3 novembre | Prénom + e-mail, règlement accepté et confirmation explicite depuis l'e-mail ; aucun nouveau compte et aucune qualification avant vérification |
+| E74-PROP-03 | Précisée le 3 novembre | E-mail seul, règlement accepté, qualification immédiate et un mail de confirmation ; ancien choix prénom + vérification remplacé par INSCRIPTION-DIRECTE |
 | E74-PROP-04 | Remplacée par ARB-06 le 3 novembre | Suivi local facultatif de la commune ; refus/retrait sans perte de chance. Aucun consentement marketing déduit de l'inscription |
 
 Les références de propositions initiales sont conservées pour la traçabilité.
@@ -129,12 +133,12 @@ arbitrages du 3 novembre ; les critères ne constituent pas une preuve d'implém
 | E74-CA-04 | Gestionnaire autorisé dans sa commune | Parcourir l'assistant et le suivi | Étapes commerçants absentes ou explicitement non applicables ; une action directe ne contourne pas les droits d'organisation/commune |
 | E74-CA-05 | Tombola publiée | Télécharger le support puis scanner le QR ou ouvrir le lien | Ouverture de la bonne animation ; QR sans identité personnelle ni secret d'administration ; lien lisible proposé en alternative |
 | E74-CA-06 | Flyer d'une tombola publique avec dotation connue | Lire le document | Promesse et nombre d'exemplaires cohérents ; aucune instruction d'achat/scan chez un commerçant ni compteur commerçants inadapté ; image personnalisée compatible avec le socle flyer |
-| E74-CA-07 | Visiteur pendant la période autorisée | Saisir prénom/e-mail, accepter le règlement puis confirmer explicitement depuis l'e-mail | Attente sans chance avant vérification ; une chance et confirmation claire ensuite, sans Pro/PIN ni compte. Ouvrir le lien seul ne qualifie pas |
-| E74-CA-08 | Même e-mail normalisé, double clic/rescan/réponse perdue | Répéter ou reprendre la participation | Une participation et une chance par tombola ; reprise autorisée sans fuite d'accès à un tiers ; une erreur réseau n'est pas annoncée comme succès |
-| E74-CA-09 | Avant ouverture, à/après la fin, animation clôturée ou annulée | Tenter une première inscription/confirmation | Refus compréhensible sans qualification ; contrôle serveur des dates et statuts, y compris lien reçu avant fermeture. Aucune preuve de présence exigée |
+| E74-CA-07 | Visiteur pendant la période autorisée | Saisir l’e-mail et accepter le règlement depuis le QR ou S’inscrire dans Live | Inscription immédiatement qualifiée, une chance, confirmation claire et un seul mail expliquant la suite et invitant au carnet/install Live. Pas de prénom ni vérification intermédiaire ; aucune mutation sur simple ouverture |
+| E74-CA-08 | Même e-mail normalisé, double clic/rescan/réponse perdue | Répéter ou reprendre la participation | Une participation et une chance par tombola ; même clé et corps rejoués sans second mail. Aucune restitution publique d’accès personnel ; récupération par mail bornée. Une erreur réseau n’est pas annoncée comme succès |
+| E74-CA-09 | Avant ouverture, à/après la fin, animation clôturée ou annulée | Tenter une première inscription directe ou confirmer un ancien lien | Refus compréhensible sans qualification ; contrôle serveur des dates et statuts, y compris lien reçu avant fermeture. Aucune preuve de présence exigée |
 | E74-CA-10 | Visiteur qui refuse suivi commune ou notifications facultatives | Participer | Accès au jeu et chances inchangés ; aucune préférence positive implicite tirée du scan ou de l'acceptation du règlement |
 | E74-CA-11 | Participant souhaitant suivre la commune dans Live | Ajouter puis retirer le suivi | Choix explicite, portée navigateur annoncée, limite et stockage indisponible gérés ; retrait sans suppression de participation. Aucun nouveau canal d'envoi, opt-in marketing ou campagne inter-animations |
-| E74-CA-12 | Gestionnaire, liste de participants et bilan | Consulter, filtrer et clôturer | Listes paginées côté serveur, totaux exacts, pas de faux passages commerçants ; population éligible figée selon le socle de clôture |
+| E74-CA-12 | Gestionnaire, liste de participants et bilan | Consulter, filtrer et clôturer | Listes paginées côté serveur, totaux exacts, pas de faux passages commerçants ; inscriptions directes comptées et figées avec les anciennes qualifications, sans assimiler adresse déclarée et vérifiée ; population figée selon le socle de clôture |
 | E74-CA-13 | Tombola clôturée, tirage autorisé | Tirer, rejouer ou tirer avec zéro/peu de candidats | Résultat cohérent avec la population figée ; aucun double tirage/gain involontaire ; règles de suppléants et cas sans candidat explicites |
 | E74-CA-14 | Tirage confirmé et dotation compatible | Notifier puis remettre un lot | Parcours de remise E73 conservé, état d'envoi distinct de remise ; la gestion externe reste réalisable sans commerce |
 | E74-CA-15 | Utilisateur non habilité ou trafic automatisé | Appeler les routes publiques/protégées | Pas d'accès aux participants d'autrui ; protections contre abus, erreurs sans données privées, audit exploitable et performances bornées |
@@ -149,15 +153,15 @@ relie les 16 critères aux tests, documents, fixtures et opérations.
 
 | Sujet | Impact retenu |
 | --- | --- |
-| Domaine/backend | Nouveau moteur et preuve d'adresse, identité minimale, qualification/publication sans commerce, gel depuis les faits, quota standard et liste réellement bornée |
+| Domaine/backend | Moteur public et preuve de qualification (inscription directe ou vérification historique), identité minimale, qualification/publication sans commerce, gel depuis les faits, quota standard et liste réellement bornée |
 | Animation | Catalogue, assistant, création/configuration, QR/flyer, participants, bilan et tirage contextualisés |
-| Marketplace/Live | Fiche publique, attente et confirmation d'e-mail, reprise, renderer, découvertes/filtres et suivi local facultatif ; pas de nouveau compte |
+| Marketplace/Live | Fiche publique, inscription directe et mail de confirmation, anciens liens maintenus, reprise, renderer, découvertes/filtres et suivi local facultatif ; pas de nouveau compte |
 | Pro | Aucune qualification par scan/PIN E74 ; non-régression des autres modèles et remise optionnelle de bons numériques |
 | ERP/Support/Ops | Capacités du modèle, refus compréhensibles, supervision et périmètres organisation/commune ; aucun transfert CRM automatique |
 | Contrats | Producteur backend, exporteurs existants et deux registres frontend fermés à étendre avant activation ; aucun faux OpenAPI généré durant la spécification |
 | Données | Migration additive identité/challenge/preuve/projection/index ; pas de conversion historique ; suppression/anonymisation/restauration à vérifier |
 | Performance | QR commun et IP partagée, anti-abus par adresse, pages 25/100 et traitements par lots ; budgets N/10N et charge mixte définis, à mesurer |
-| Générateur | Organisation sans commerce, trois modes de lots, attentes/confirmations/expirations ; commandes métier et transport e-mail isolé |
+| Générateur | Organisation sans commerce, trois modes de lots, inscription directe et anciennes attentes/confirmations/expirations ; commandes métier et transport e-mail isolé |
 | Documents | Guides organisateur/habitant/stand, contrats, notice/règlement et procédures ; revue de mise en service séparée des tests de clôture |
 | Exploitation | Outbox et reprise, purge, observabilité, activation après consommateurs compatibles ; pas de nouveau DNS, tarif ou clé d'envoi prévu |
 
@@ -165,9 +169,9 @@ relie les 16 critères aux tests, documents, fixtures et opérations.
 
 | ID | Décision explicite | Partie concernée |
 | --- | --- | --- |
-| E74-ARB-01 | Formulaire et confirmation explicite via l'e-mail ; aucun effet lors d'une simple ouverture de page | US04, CA07/08 |
+| E74-ARB-01 | Remplacé par INSCRIPTION-DIRECTE : formulaire e-mail/règlement et qualification immédiate ; un seul mail après inscription, aucun effet lors d’une simple ouverture | US04, CA07/08 |
 | E74-ARB-02 | QR/lien partageables, sans contrôle de présence au stand | US03/04, CA05/09 |
-| E74-ARB-03 | Prénom + e-mail vérifié avant qualification ; une chance par adresse normalisée et par tombola, sans nouveau compte | US04, CA07/08/15 |
+| E74-ARB-03 | Remplacé par INSCRIPTION-DIRECTE : e-mail déclaré seul, une chance par adresse normalisée et par tombola, sans nouveau compte ni marquage fictif « vérifié » | US04, CA07/08/15 |
 | E74-ARB-04 | Trois modes E73 : Coffrets, bons numériques, lots libres externes ; les lots externes restent autonomes sans commerce | US02/07, CA03/13/14 |
 | E74-ARB-05 | Quota standard existant, applicable également aux souscriptions actives, sans modification des conditions acquises | US01, CA01/02 |
 | E74-ARB-06 | Suivi facultatif de la commune dans Live, sans nouveau canal d'envoi ni campagne inter-animations | US05, CA10/11 |
@@ -184,5 +188,4 @@ transactions, index, migration, compatibilité et preuves. Les limites existante
 sont explicites, notamment le refus Coffrets si les candidats sont moins nombreux
 que les lots et l'absence actuelle de vérification d'e-mail.
 
-L'état produit demeure **À faire**. Les tests métier sont prévus, **non exécutés**.
-Cette phase ne réalise ni implémentation, ni migration, ni envoi, ni déploiement.
+L’état produit demeure **En cours**, conformément à la roadmap. Le bilan distingue les preuves historiques et les tests de l’évolution INSCRIPTION-DIRECTE ; un succès local ne constitue ni une migration distante ni un déploiement.
