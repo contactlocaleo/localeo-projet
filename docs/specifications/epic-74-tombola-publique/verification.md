@@ -147,3 +147,54 @@ La clôture technique nécessite les preuves pertinentes réussies pour les 16 c
 - Export moteur avec `--check` : **98 fichiers conformes** dans Animation et dans Live ; les OpenAPI E41/E42 proviennent du producteur local, et le contrat embarqué Animation correspond à E41.
 - `git diff --check` : réussi dans les cinq dépôts. Pro reste inchangé.
 - Aucun commit, push, activation de modèle, migration distante ni envoi réel effectué. Les quatre dépôts modifiés restent indépendants.
+
+
+## Correctif du 3 novembre 2026 — lecture publique refusée à Live
+
+Signalement : fiche Live sur TEST, animation `87246fa7-237f-42f9-983e-92d6daf4f9ed`,
+réponse `CLIENT_ANIMATION_INCOMPATIBLE`, corrélation
+`LOC-93d2915e-19f2-45a7-9e71-7e062b17d52d`, moteur requis
+`TOMBOLA_PUBLIQUE:1.0`. Rattachement : accès public E74-CA-05 et compatibilité des
+clients. Les logs distants n’ont pas été consultés.
+
+Cause reproduite sur backend `2e896ae` : la route de détail accepte le paramètre
+`moteurs_supportes` mais ne le transmet pas au catalogue. Le client compatible est
+alors traité comme historique et reçoit le même HTTP 409 que dans le signalement.
+Le correctif transmet le paramètre jusqu’au contrôle existant. Les anciens clients
+incompatibles restent refusés ; une déclaration malformée reçoit 422 avant toute
+lecture, une fiche absente reste 404 sans révéler son moteur.
+
+Défaut adjacent reproduit dans Live, base `901c660` : la lecture d’une page de lots
+supplémentaires omet aussi `moteurs_supportes`. La couche HTTP déclare désormais les
+mêmes capacités pour le détail et ses pages de lots, en conservant curseur et limite.
+La revue ciblée des autres consommateurs n’identifie pas d’oubli correspondant dans
+Localeo Animation ou l’ERP.
+
+Preuves locales :
+
+- Avant correction, `tests/api/test_tombola_publique_lecture.py` : 2 échecs attendus
+  (compatible refusé en 409, déclaration invalide non contrôlée), 5 succès.
+  Le catalogue et le gestionnaire HTTP réels sont utilisés avec stockage et
+  projection simulés, sans connexion à une base distante.
+- Après correction, lanceur `scripts/validation/test_isolated.py` sur ce test,
+  `tests/api/test_capacites_lecture_live_e74.py`, `tests/api/test_tombola_publique_email.py`,
+  `tests/application/services/test_capacites_lecture_tombola_publique.py` et
+  `tests/application/services/test_catalogue_animations_publiques.py` : **43 succès**.
+- Contrôles d’architecture, classes de domaine et couverture des use cases via
+  le même lanceur isolé : **637 succès**.
+- Live : régression de négociation des pages de lots d’abord en échec ; après
+  correction, `node --test` sur `catalogue-pagination.test.cjs`,
+  `animation-engine-registry.test.cjs` et `live-dashboard-api.test.cjs` : **11 succès**.
+  ESLint sur les deux fichiers modifiés : réussi.
+- Parcours navigateur `e74-tombola-email.spec.cjs` via le serveur isolé Playwright
+  (build sans `.env`, API simulées), formats 320/390/1280 px, confirmation,
+  récupération et refus : **12 succès**, sortie 0.
+- Revue indépendante du correctif : aucun écart bloquant identifié ; les tests
+  API ci-dessus ne constituent pas une validation de stockage PostgreSQL réel.
+
+Impacts : backend, consommateur Live et ce suivi documentaire. Le contrat HTTP
+existant est respecté, sans nouveau schéma ni export à régénérer. Aucune règle de
+qualification, droit, donnée, migration, configuration ou génération de démonstration
+ne change ; aucune réparation de participation n’est nécessaire pour ce défaut.
+La livraison nécessite le backend corrigé et le bundle Live pour la pagination des
+lots. Aucun commit, push, déploiement ou rejeu sur TEST effectué à ce stade.
