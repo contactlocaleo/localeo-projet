@@ -774,3 +774,73 @@ Impacts : frontend Marketplace/Live et documentation uniquement. Aucun contrat
 API, invariant métier, droit, donnée de démonstration, migration ou paramètre
 d'exploitation ne change. Une mise en service nécessitera la livraison du
 frontend ; les résultats locaux sont consignés dans le suivi d'implémentation.
+
+
+## Correctif du 3 novembre 2026 — entrées publiques et origine Live
+
+Les liens publics d’inscription, flyers, QR, catalogue et confirmation tombola
+utilisent l’origine dédiée configurée et les chemins `/live/animations/{id}`,
+`/inscription` ou `/confirmation-email` selon leur fonction. L’inscription reste
+absente lorsque le backend la ferme. Aucun changement des règles d’admission,
+des participations ou de leurs accès déjà émis.
+
+Sur l’ancien service Marketplace, `/live`, `/live/decouvrir` et les fiches ou
+inscriptions publiques ouvrent le domaine Live configuré. Seuls les contextes
+publics autorisés (animation, commune, source) sont repris. Les confirmations avec
+secret, ajouts au carnet, participations personnelles, lots et reprise de carnet
+restent sur leur origine. Un carnet non vide ou inaccessible propose sa sauvegarde
+avant sortie ; aucun accès n’est transmis automatiquement entre domaines.
+Les pages personnelles historiques partagent désormais l’habillage et l’en-tête
+Live, tout en conservant les fonctions Coffrets nécessaires sur leur origine.
+
+Constat sur TEST, en lecture publique : le 3 novembre, le service Marketplace
+configurait encore son propre domaine comme destination des animations et l’API
+renvoyait des chemins relatifs `/animations/{id}`. La
+[procédure de configuration](../../exploitation/technique/configurer-epic-73.md#contrôle-des-liens-live-après-bascule)
+détaille la valeur à corriger sur les services concernés. Cette observation ne
+constitue ni une modification de configuration distante ni un déploiement.
+
+Rattachement aux critères E73-EVO-LIVE-06/08/09/10/12. Contrats : mêmes champs et
+paramètres, destinations publiques absolues ; aucune migration SQL ni réparation
+de carnet. Les exemples de déploiement et le guide d’exploitation sont mis à jour.
+Les tests utilisent des données synthétiques, sans email réel ; la production des
+supports de démonstration reprend le même producteur de liens.
+
+
+Preuves de ce correctif, bases backend `931cef4`, Marketplace `9be43e9` et
+documentation `87b6da6`, avec modifications locales :
+
+- Backend : 4 reproductions en échec avant correction (mail de confirmation,
+  publication et projections résumé/détail), puis **225 tests ciblés réussis**
+  via `scripts/validation/test_isolated.py` : 110 tests des services/API et
+  115 tests de transport, CORS et profils. Le détail des nouveaux cas figure dans
+  `tests/application/services/test_liens_publics_animation.py`,
+  `test_flyer_animation.py` et `test_catalogue_animations_publiques.py` du backend.
+  Contrôles d’architecture, classes de domaine et couverture des use cases :
+  **637 succès**.
+- Frontend : trois reproductions navigateur échouaient avant correction
+  (/live sur ancien domaine, inscription sans changement d’origine, habillage
+  historique différent). Les tests de routage et conservation des accès
+  (`live-entry-routing.test.cjs`, `animation-surface-satisfaction.test.cjs`) :
+  **7 succès** ; ESLint des fichiers modifiés : réussi.
+- Playwright avec build isolé sans `.env`, API simulées :
+  `live-entry-redirects.spec.cjs` et `live-animation-surface.spec.cjs`, **18 succès** ;
+  `e74-tombola-email.spec.cjs`, **12 succès**. Les parcours vérifient ouverture
+  directe/actualisation, contexte public, carnet conservé/exporté/repris,
+  anciens accès Coffrets et confirmation tombola. Capture mobile de l’habillage
+  historique inspectée, sans débordement horizontal.
+- Deux assertions historiques cherchaient encore « Mes lots » parmi les onglets
+  du carnet et des onglets Animation retirés : comparaison avec
+  `HEAD:src/live/LiveCarnetHeader.jsx` confirmant cette divergence déjà présente.
+  Elles vérifient maintenant l’entrée dédiée dans la navigation principale,
+  l’absence de doublon et les liens Coffrets conservés. Une fixture HTML de
+  redirection a aussi reçu son charset UTF-8 ; assertions de destination conservées.
+- Revue indépendante ciblée des producteurs et consommateurs : aucun écart
+  bloquant identifié, aucune migration implicite de capacité ou d’origine.
+- Vérification documentaire : 98 guides, 1 124 liens locaux, zéro erreur ou
+  avertissement ; 134 sources exportées vérifiées ; `git diff --check` réussi
+  dans les trois dépôts modifiés.
+
+Aucun commit, push, déploiement, email réel ou changement distant de configuration
+réalisé dans cette phase. Les variables Animation de suivi/actualités restent à
+aligner selon les exemples de déploiement ; l’origine Coffrets reste indépendante.
