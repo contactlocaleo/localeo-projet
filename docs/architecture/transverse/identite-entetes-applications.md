@@ -2,7 +2,7 @@
 
 ## Périmètre
 
-Localeo Pro, Animation, ERP, OnBoard, Live, Ops, Support et Atelier utilisent
+Localeo Pro, Animation, ERP, OnBoard, Live, Ops, Support, Atelier et CRM utilisent
 la même signature dans leur en-tête principal. Le nom de l’application permet
 de se repérer ; ses actions et sa navigation restent adaptées à son public.
 Les favicons et icônes d’installation ne sont pas remplacés par cette correction.
@@ -16,7 +16,7 @@ Les favicons et icônes d’installation ne sont pas remplacés par cette correc
 | Dimensions du symbole | 40 × 40 px ; 36 × 36 px jusqu’à 600 px ; proportions conservées |
 | Espacement symbole / texte | 10 px |
 | Marque | `Localeo`, blanc, suivie du nom de l’application |
-| Nom de l’application | Pro, Animation, ERP, OnBoard, Live, Ops, Support ou Atelier ; orange `#f5ad6e`, sans italique ni séparateur |
+| Nom de l’application | Pro, Animation, ERP, OnBoard, Live, Ops, Support, Atelier ou CRM ; orange `#f5ad6e`, sans italique ni séparateur |
 | Police de la signature | `system-ui, -apple-system, "Segoe UI", sans-serif` ; graisse 800, interligne 1,15, approche −0,02 em |
 | Taille du texte | 1,25 rem ; 1,125 rem jusqu’à 600 px (20 et 18 px à taille de texte standard) |
 | Environnement | Conserver le repère TEST ou autre environnement lorsqu’il existe, en capsule discrète blanche ; placé sous le nom sur mobile dans Pro et Live |
@@ -40,7 +40,7 @@ destinations existantes et les protections contre l’abandon d’une saisie.
 
 ## Mise en œuvre et maintenance
 
-Les cinq outils internes du backend partagent `app-header.js` et
+Les six outils internes du backend partagent `app-header.js` et
 `app-header.css`. Pro utilise son `ApplicationFrame`, Animation son shell et
 Live un composant `LiveBrand`, réutilisé à son entrée publique. Les copies du
 SVG restent locales à chaque application pour préserver leurs déploiements
@@ -61,3 +61,40 @@ Cette convention concerne la présentation. Elle n’introduit aucun changement
 de contrat API, de règle métier, de migration ou de données de démonstration.
 Le suivi de correction et les preuves figurent dans le
 [registre des anomalies backend](../../roadmap/anomalies/backend.md#ano-transverse-header-20261101--identités-divergentes-dans-les-huit-applications).
+
+## Charte des espaces de gestion internes — référence CRM
+
+Depuis le 4 novembre 2026, Localeo CRM sert de référence visuelle à ERP, Ops,
+OnBoard, Support et Atelier. Le bandeau de marque bleu nuit reste commun ;
+les actions de travail utilisent le vert pétrole. Les tokens `--localeo-*`
+de `app-header.css` sont la source partagée, consommée également par CRM.
+
+Dans l’ERP, l’identité de session et le nombre de communes accessibles sont
+affichés dans le bandeau principal, sans bande intermédiaire au-dessus du
+contenu. Sur mobile, cette information passe sur une ligne compacte du même
+en-tête ; elle s’efface lorsque la session expire.
+
+| Élément | Règle commune |
+| --- | --- |
+| Fond / texte / texte secondaire | `#f5f7f9` / `#183243` / `#526575` |
+| Action principale | Vert `#09685e`, texte blanc, libellé explicite |
+| Action secondaire / destructive | Blanc bordé / rouge distinct ; confirmations conservées |
+| Navigation active | Fond `#e1f0ec`, texte `#07594f`, repère actif accessible |
+| Typographie de travail | Police système, corps 14 px, titres 25 / 18 / 15 px ; titre principal 23 px sur mobile |
+| Contours | Bordures `#d8e1e7`, panneaux 12 px, boutons 9 px, champs 7 px |
+| Interaction | Cibles d’au moins 44 px, focus ocre `#b96913`, clavier et réduction des animations conservés |
+| Hiérarchie | Titre et action de page repérables ; filtres regroupés, actions secondaires distinctes, erreurs proches du contexte |
+
+Conserver la composition utile à chaque métier : navigation hiérarchisée ERP,
+priorités d’alertes Ops, liste/dossier OnBoard, recherche Support, préparation
+Atelier et suivi CRM. La cohérence ne consiste pas à imposer la barre mobile du
+CRM à toutes les applications. Les alertes restent distinguées par leur libellé
+et leur gravité, indépendamment de la couleur des actions.
+
+Modifier les règles existantes plutôt qu’ajouter des surcharges successives.
+Ops utilise sa feuille unique `ops.css`, sans ancien bloc de styles en ligne.
+Les connexions internes consomment les mêmes tokens ; les applications publiques
+Pro, Animation et Live ne sont pas recolorées par cette harmonisation.
+
+Les preuves locales et limites sont dans le
+[suivi d’harmonisation](../../roadmap/anomalies/backend.md#ano-interne-charte-crm-20261104--harmonisation-des-espaces-de-gestion).

@@ -8,6 +8,48 @@ des trois anomalies du 1er novembre ; elle ne prouve pas leur déploiement
 applicatif. La correction SQL v286 a été appliquée sur TEST comme indiqué
 ci-dessous ; la migration catalogue v285 y reste en attente.
 
+## ANO-INTERNE-CHARTE-CRM-20261104 — Harmonisation des espaces de gestion
+
+- **Demande / constat** : prendre Localeo CRM comme référence pour ERP, Ops,
+  OnBoard, Support et Atelier. Les écrans mélangeaient actions orange/bleues,
+  navigation sombre, rayons et titres divergents, avec un bloc de styles Ops
+  en ligne doublonné par sa feuille CSS.
+- **Correction locale**, sur backend `b9304c9` : palette CRM partagée dans
+  `app-header.css`, également consommée par CRM ; actions principales vertes
+  avec texte blanc, secondaires blanches, navigation ERP claire et état actif
+  vert doux. Champs, listes, panneaux, onglets, focus et typographie harmonisés
+  dans les feuilles propriétaires. Styles Ops consolidés dans `ops.css`.
+  Les connexions internes et consoles historiques ERP reprennent les mêmes
+  tokens. La largeur de travail de Support et Atelier n'est plus plafonnée.
+- **Parcours préservés** : menu hiérarchique ERP, priorités P1/P2/P3 Ops,
+  dossiers OnBoard, recherche/support et préparation Atelier. Aucun changement
+  de liens, permissions, confirmations, commandes métier ou contrats API.
+  Sans impact migration, données de démonstration ou configuration serveur :
+  ce correctif ne modifie que la présentation et ses preuves.
+- **Preuves locales** : recettes navigateur `erp-page-template` (24 scénarios),
+  `erp-menu-ux` (35), `crm` (sept vues sur six largeurs), `header-mobile`
+  (six applications, huit largeurs et texte/zoom 200 %), `admin-shell` (8),
+  `connexion-interne`, `shell-navigation`, `epic65-finance-erp`, `ops-alert-priorities` (12),
+  `onboard-dossier-ux` (24), `onboard-administration` (7),
+  `epic73-support-organisations-ux`, `support-loading`, `atelier-assiste-erp`,
+  `atelier-pwa` et `preparation-erp` réussies. Captures PC/mobile inspectées.
+  L'assertion de titre Atelier du test d'en-tête passe volontairement de
+  16,8 à 18 px pour vérifier la nouvelle charte, sans retirer ses contrôles
+  de débordement, focus ou cibles tactiles.
+  Les fixtures navigateur Support et Atelier servent maintenant le vrai SVG
+  avec son type MIME et vérifient son chargement avant capture.
+- **Contrôles Python** : 668 tests architecture/recensement/API Ops/PWA CRM
+  réussis au premier passage ; le test Git isolé restant a rencontré
+  `WinError 6` dans la capture Windows, puis réussi avec sortie fichier et
+  `-s`, sans modification de l'assertion. Sept tests de rendu Ops réussis.
+  Quatre avertissements de dépréciation de l'adaptateur datetime SQLite.
+- **Limites** : vérifications sur sources locales et API simulées, pas de
+  validation authentifiée de TEST. Les empreintes PWA incluent déjà les
+  ressources modifiées. Correctif backend enregistré dans le commit `32106fd` ;
+  sa publication Git ne constitue pas une vérification du déploiement sur TEST.
+  La [charte canonique](../../architecture/transverse/identite-entetes-applications.md#charte-des-espaces-de-gestion-internes--référence-crm)
+  définit les valeurs communes.
+
 ## ANO-BE-RECHERCHE-LOGIN-20261103 — Retrouver un commerce par son accès Pro
 
 - **Attendu / observé** : la liste ERP doit retrouver un commerce depuis son
