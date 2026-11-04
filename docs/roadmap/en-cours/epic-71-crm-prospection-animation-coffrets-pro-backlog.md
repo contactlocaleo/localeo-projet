@@ -19,7 +19,7 @@ Acteurs : utilisateurs internes explicitement habilités au CRM ; responsable d'
 
 ## Périmètre V1 retenu
 
-1. **PWA CRM** PC/mobile, installation, identité visuelle Localeo et session interne partagée ; proposition d'implantation `/internal/crm/` sur le domaine backoffice.
+1. **PWA CRM** PC/mobile, installation et identité visuelle Localeo. Depuis la demande du 4 novembre 2026 : domaine dédié `crm.localeo.city` / `test-crm.localeo.city`, même backend et chemin `/internal/crm/`, mêmes comptes ERP avec connexion distincte par domaine ; accès historiques conservés. Voir [activation](../../specifications/epic-71-crm-prospection/exploitation.md#domaine-dédié).
 2. **Fiches prospects et contacts** : coordonnées connues, commune, source, plusieurs contacts, notes et chronologie ; recherche, filtres, opposition et archivage.
 3. **Dossiers commerciaux** : Animation ou Coffrets ; pour Coffrets, recrutement de partenaire commerçant ou achat entreprises/CSE. Responsable, six étapes simples, priorité normale/haute et prochaine action calculée.
 4. **Carte et pilotage quotidien** : carte interactive par commune avec filtres partagés, groupes et accès aux fiches ; Aujourd'hui, suivi par étapes, mes rappels, dossiers sans action ; indicateurs simples, sans prévision de chiffre d'affaires.
@@ -71,7 +71,7 @@ Import XLSX Gironde et sections communales (CA-24), campagnes automatiques vers 
 | E71-CA-22 | Consulter indicateurs et dossiers sans action | Prospects/dossiers distincts, gains comptés par preuves canoniques distinctes sans doubler une réouverture, filtres/période affichés, inconnus visibles ; pas de fausse conversion ou de chiffre d'affaires déduit |
 | E71-CA-23 | Suivre le guide et le parcours synthétique | Installation/connexion → import → note → rappel → suivi → rattachement vérifiés par tests fonctionnels, documentation disponible selon droits ; pas de pilote externe exigé pour clôturer |
 | E71-CA-24 | **Reporté : import spécifique Gironde et sections communales** | Ancien critère conservé ; contrat CSV CA-08 à 12/28 le remplace dans V1 retenue, sans prétendre traiter l'ancien XLSX |
-| E71-CA-25 | Installer/ouvrir/actualiser Localeo CRM en PWA | Application nommée et scope propres, routes profondes et retour après connexion, mise à jour réelle, écran offline clair sans cache de données privées |
+| E71-CA-25 | Installer/ouvrir/actualiser Localeo CRM en PWA | Application nommée et scope propres, domaine dédié configurable, accès historique conservé, routes profondes et retour après connexion sur l'origine courante, mise à jour réelle, écran offline clair sans cache de données privées ; installations et push restent liés à leur origine |
 | E71-CA-26 | Activer/refuser WebPush puis recevoir/ouvrir un rappel | Opt-in par appareil, compte interne courant, aucune fuite sur écran verrouillé ; refus/expiration conserve le rappel interne ; retries/report/révocation sans doublons applicatifs |
 | E71-CA-27 | Activer/désactiver les rappels par e-mail | Désactivés initialement, destinataire interne seulement, envoi à l'échéance sans rattrapage massif ni fallback implicite ; tâche annulée/droit retiré/adresse modifiée empêche l'envoi encore en attente ; vérification et opt-in liés à la version courante de l'adresse |
 | E71-CA-28 | Utiliser le même modèle en INIT puis UPSERT | INIT ignore le prospect déjà connu ; UPSERT complète les vides non protégés et ajoute contacts/dossiers ; notes/statuts/responsables/rappels/oppositions conservés, absents non supprimés |

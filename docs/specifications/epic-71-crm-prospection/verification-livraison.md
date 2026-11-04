@@ -482,3 +482,42 @@ OpenAPI canonique régénéré, exemples CSV et fixtures du générateur de dém
 adaptés. Aucune migration requise : colonnes et cache communal existent déjà.
 Aucun import réel, envoi, réparation de données, commit, push ou déploiement TEST.
 Les autres travaux locaux des dépôts sont conservés.
+
+## Correctif du 4 novembre 2026 — Domaine dédié CRM
+
+Demande : accéder directement à Localeo CRM via `crm.localeo.city` et
+`test-crm.localeo.city`. Configuration `CRM_PUBLIC_ORIGIN` optionnelle et validée,
+racine de l'hôte dédié vers `/internal/crm/`, navigation ERP basée sur l'URL du
+contexte, identité CRM à la connexion et conservation de la destination après
+authentification nominative ou administrateur historique. Les autres racines et
+les accès historiques restent utilisables.
+
+Contrôles locaux :
+
+- **745 tests Python réussis** : 92 ciblés (domaine dédié, PWA CRM/Atelier,
+  comptes internes et formulaire CRM), 653 architecture et recensements. Origine
+  HTTPS stricte, hôte non autorisé/forgé, GET/HEAD, désactivation, permissions,
+  session host-only, refus CSRF inter-origines, retour fermé et consommé une
+  seule fois, ressources PWA vérifiés. Lanceur isolé, sans configuration privée.
+- `node tests/browser/erp-home-applications.cjs` : **30 scénarios réussis**,
+  URL dédiée dans tuile et menu, droits, repli historique et mobile.
+- `node tests/browser/connexion-interne.cjs` : parcours nominatif, attente,
+  erreurs, clavier et initialisation conservés à 320/390/1280 px ; huit cas
+  supplémentaires de connexion CRM (accueil, fiche profonde, deux retours
+  externes refusés, à 320 et 1280 px). Capture mobile CRM inspectée.
+- `node tests/browser/crm.cjs` : parcours CRM et sept vues, 320 à 1440 px,
+  réussis après modification de l'en-tête partagé.
+- Revue indépendante des origines, retours, permissions et sessions sans
+  anomalie bloquante. Contrôles documentaires et différences vérifiés.
+
+Pas de migration SQL, de modification des permissions métier, du contrat
+OpenAPI ou du générateur. Les trois autres frontends ne consomment pas ces API.
+Les comptes et données restent communs ; les sessions, PWA installées et
+abonnements WebPush restent liés à leur origine. Une connexion et une activation
+volontaire des notifications sont nécessaires sur le nouveau domaine.
+
+**Non exécuté** : ajout du domaine Render, DNS, certificat, variables opérateur,
+recette distante et déploiement. Cible TEST documentée depuis le CNAME public du
+backoffice observé le 4 novembre 2026 : `test-localeo-backend.onrender.com`.
+La [procédure d'activation](exploitation.md#domaine-dédié) et le modèle sans
+secrets permettent cette mise en service. Aucun commit ni push dans ce correctif.

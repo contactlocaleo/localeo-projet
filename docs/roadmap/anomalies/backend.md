@@ -8,6 +8,27 @@ des trois anomalies du 1er novembre ; elle ne prouve pas leur déploiement
 applicatif. La correction SQL v286 a été appliquée sur TEST comme indiqué
 ci-dessous ; la migration catalogue v285 y reste en attente.
 
+## ANO-CRM-DOMAINE-20261104 — Accès CRM par un domaine dédié
+
+- **Demande** : ouvrir Localeo CRM depuis sa propre adresse, tout en conservant
+  les comptes et habilitations internes ERP.
+- **Correction locale** : `CRM_PUBLIC_ORIGIN`, origine HTTPS validée ; racine de
+  l'hôte dédié vers `/internal/crm/`, liens CRM de l'accueil et du menu ERP vers
+  cette URL, connexion identifiée CRM et retours profonds fermés. Ancien accès
+  backoffice conservé. Cookies host-only, contrôle d'hôte et CSRF inchangés.
+- **Preuves** : **745 tests Python réussis** (92 ciblés et 653 contrôles
+  architecture/recensements), **30 scénarios navigateur accueil/menu ERP**,
+  parcours connexion à 320/390/1280 px dont huit cas de retour sur l'origine
+  dédiée, et banc CRM complet réussi. Revue indépendante sans écart bloquant.
+- **Activation restante** : domaine personnalisé Render, CNAME, certificat et
+  variables opérateur selon le [guide E71](../../specifications/epic-71-crm-prospection/exploitation.md#domaine-dédié).
+  Domaine TEST non activé pendant ce correctif. Aucune migration, donnée
+  métier, autorisation, clé VAPID ou configuration privée modifiée. Les PWA et
+  abonnements push restent attachés à leur origine ; pas de transfert implicite.
+- **Impacts** : backend et documentation E71 (ARB-09, CA-19/23/25/29), pas
+  d'API métier ou contrat OpenAPI modifié. Générateur inchangé : mêmes chemins
+  et mêmes règles métier. Aucun commit, push ou déploiement effectué.
+
 ## ANO-CRM-SAISIE-REGION-20261104 — Prospects limités à la Nouvelle-Aquitaine
 
 - **Constat** : la carte était limitée à la région, mais la saisie et les imports

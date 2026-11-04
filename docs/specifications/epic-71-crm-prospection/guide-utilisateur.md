@@ -8,6 +8,17 @@ Localeo CRM suit vos relations commerciales Animation et Coffrets. Il utilise vo
 
 Depuis le menu **Applications** de l’ERP, choisissez **Localeo CRM**. L’adresse est `/internal/crm/` sur le même domaine backoffice. Si l’entrée manque, demandez à l’administrateur le droit **Consulter le CRM**. La gestion, les imports et la levée d’opposition disposent de droits distincts ; un accès ERP existant ne les ajoute pas automatiquement.
 
+Après activation du domaine dédié, vous pouvez ouvrir directement
+**https://test-crm.localeo.city** sur TEST, ou **https://crm.localeo.city** en
+production. Les liens ERP y conduisent automatiquement une fois la configuration
+activée. Utilisez le même compte personnel que dans l'ERP ; une première connexion
+sur ce domaine est nécessaire. Vous retrouvez les mêmes prospects et droits.
+L'URL conserve le chemin `/internal/crm/` après ouverture.
+
+Si vous utilisiez déjà la PWA depuis le backoffice, installez-la à partir du
+nouveau domaine et activez volontairement ses notifications sur cet appareil.
+L'ancienne installation et ses abonnements ne sont pas transférés automatiquement.
+
 **Aujourd’hui** présente les actions en retard, les dossiers sans prochaine action, le portefeuille et les gains du mois. Sur mobile, les entrées principales sont en bas de l’écran. **Installer Localeo CRM** propose l’installation de la PWA ; elle conserve la même session et les mêmes droits. Une connexion réseau est nécessaire : les fiches et notes ne sont pas conservées hors ligne sur l’appareil.
 
 ## 2. Créer un prospect et préparer la suite
