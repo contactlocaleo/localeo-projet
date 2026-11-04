@@ -11,6 +11,7 @@
           "Prospection"
         ],
         "summary": "Organisations",
+        "description": "Liste nationale par défaut. Région 75 et département filtrent les codes INSEE\navant pagination et se combinent avec les autres critères. Sans commune signifie\nINSEE absent ; aucun rattachement n'est déduit du code postal.",
         "operationId": "organisations_internal_prospection_organisations_get",
         "parameters": [
           {
@@ -152,6 +153,53 @@
               "type": "boolean",
               "default": false,
               "title": "Sans Commune"
+            }
+          },
+          {
+            "name": "departement",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "16",
+                    "17",
+                    "19",
+                    "23",
+                    "24",
+                    "33",
+                    "40",
+                    "47",
+                    "64",
+                    "79",
+                    "86",
+                    "87"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Departement"
+            }
+          },
+          {
+            "name": "region",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "const": "75",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Region"
             }
           },
           {
@@ -2158,6 +2206,7 @@
           "Prospection"
         ],
         "summary": "Carte",
+        "description": "Carte limitée aux codes INSEE de Nouvelle-Aquitaine, avec département optionnel.\nprospects_total compte les prospects du territoire filtré avant bbox ; groups\ncontient au plus 500 communes de l'emprise. sans_commune compte nationalement\nles prospects sans INSEE, selon les critères non géographiques uniquement.",
         "operationId": "carte_internal_prospection_carte_get",
         "parameters": [
           {
@@ -2289,6 +2338,36 @@
                 }
               ],
               "title": "Responsable Id"
+            }
+          },
+          {
+            "name": "departement",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "16",
+                    "17",
+                    "19",
+                    "23",
+                    "24",
+                    "33",
+                    "40",
+                    "47",
+                    "64",
+                    "79",
+                    "86",
+                    "87"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Departement"
             }
           },
           {
@@ -4704,6 +4783,19 @@
             "type": "string",
             "pattern": "^(?:[0-9]{5}|2[AB][0-9]{3})$",
             "title": "Insee"
+          },
+          "confirmer_distinct": {
+            "type": "boolean",
+            "title": "Confirmer Distinct",
+            "default": false
+          },
+          "candidats_examines": {
+            "items": {
+              "$ref": "#/components/schemas/Candidat"
+            },
+            "type": "array",
+            "maxItems": 25,
+            "title": "Candidats Examines"
           }
         },
         "additionalProperties": false,
@@ -4762,6 +4854,19 @@
             "maxLength": 300,
             "minLength": 1,
             "title": "Nom"
+          },
+          "insee": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 5
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Insee",
+            "description": "Commune de Nouvelle-Aquitaine obligatoire à la création, vérifiée dans le référentiel serveur."
           },
           "type": {
             "anyOf": [
@@ -4895,6 +5000,19 @@
             "type": "integer",
             "exclusiveMinimum": 0.0,
             "title": "Expected Version"
+          },
+          "insee": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 5
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Insee",
+            "description": "Commune de Nouvelle-Aquitaine exigée si la localisation change ; les autres modifications des anciennes fiches restent possibles."
           },
           "confirmer_distinct": {
             "type": "boolean",

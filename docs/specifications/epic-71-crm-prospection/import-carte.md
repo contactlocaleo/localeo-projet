@@ -11,7 +11,28 @@ Contrat **format 1**, spécification V1.1 du 3 novembre 2026. [Périmètre V1](R
 5. Dans le CRM, choisir la source stable, par exemple `prospection-excel`, et le mode. La source est choisie dans une liste de sources existantes ; « Nouvelle source » est une action explicite. Le serveur retire les espaces de bord et passe le nom en minuscules avant validation/unicité : 1–64 caractères `[a-z0-9._-]`. Une création normalisée vers un nom existant propose cette source, sans en créer une autre. Le nom canonique stable est affiché explicitement avant confirmation. Réutiliser exactement cette source aux imports suivants. La source de rapprochement est distincte de la colonne descriptive `source`.
 6. Lire l'aperçu, corriger le fichier ou exclure explicitement les groupes en erreur, puis confirmer. Un bilan indique ce qui a réellement changé.
 
-Quatre colonnes sont toujours renseignées : **prospect_ref, nom_prospect, opportunite_ref, perimetre**. `objectif_coffrets` est obligatoire uniquement pour COFFRETS ; `contact_ref` uniquement si des données de contact sont fournies. Les autres colonnes peuvent rester vides. Le modèle complet fournit tous les en-têtes ; le parseur accepte leur réordre et l'absence des colonnes facultatives, mais refuse les noms inconnus ou dupliqués. Le rapport distingue ligne CSV logique et groupe prospect.
+Quatre colonnes sont toujours renseignées : **prospect_ref, nom_prospect, opportunite_ref, perimetre**. `objectif_coffrets` est obligatoire uniquement pour COFFRETS ; `contact_ref` uniquement si des données de contact sont fournies. **`code_insee` est obligatoire pour créer un prospect ou enrichir effectivement sa localisation**, en INIT comme en UPSERT. Il peut rester absent pour enrichir seulement les contacts ou le suivi d'une fiche existante. Les autres colonnes peuvent rester vides. Le modèle complet fournit tous les en-têtes ; le parseur accepte leur réordre et l'absence des colonnes facultatives, mais refuse les noms inconnus ou dupliqués. Le rapport distingue ligne CSV logique et groupe prospect.
+
+### Territoire ouvert à la prospection
+
+Depuis le correctif du 4 novembre 2026, les créations et changements effectifs
+de localisation sont limités à la **Nouvelle-Aquitaine**. Le code INSEE doit
+comporter cinq chiffres et commencer par **16, 17, 19, 23, 24, 33, 40, 47, 64,
+79, 86 ou 87**. Une absence produit `COMMUNE_REQUISE`, un format incorrect
+`INSEE_INVALIDE`, un autre département `PROSPECT_HORS_NOUVELLE_AQUITAINE`.
+
+L'import contrôle le territoire déclaré par le code, sans appel réseau au
+référentiel communal : il ne certifie pas l'existence du code ni sa concordance
+avec le nom fourni. La saisie manuelle et **Localiser la commune** vérifient en
+complément le référentiel serveur. Les données historiques sont conservées.
+Un UPSERT peut ajouter un contact à une ancienne fiche hors région lorsque sa
+localisation reste inchangée. Le contrôle intervient après les protections et
+la décision d'enrichissement, pas sur les seules cellules brutes du fichier.
+INIT déjà connu, groupe protégé ou exclu restent ignorés selon les règles existantes.
+
+Les plans préparés avant cette restriction sont recalculés au traitement : un
+groupe devenu incompatible passe en conflit `IMPORT_PLAN_OBSOLETE`, sans aucune
+écriture CRM pour ce groupe. Préparer un nouvel aperçu après correction du fichier.
 
 ## Dictionnaire des colonnes
 
@@ -23,7 +44,7 @@ Toutes les cellules sont des chaînes ; pas de valeur magique `NULL`, de boolée
 | `nom_prospect` | Requis, 200 caractères max ; `Association Exemple` | Création ; différent sur une clé existante = divergence d'identité à examiner, pas renommage |
 | `type_prospect` | Vide ou `COLLECTIVITE`, `ASSOCIATION`, `COMMERCE`, `ENTREPRISE_CSE`, `AUTRE` | Coordonnée descriptive, complément si jamais renseignée |
 | `commune` | Nom déclaré, 150 caractères max | Texte sans création de ville ; ne certifie pas une localisation |
-| `code_insee` | Chaîne de 5 caractères, référence communale à valider si utilisée ; zéro initial conservé | Groupe localisation cohérent ; ambiguïté/incohérence signalée |
+| `code_insee` | Cinq chiffres, département de Nouvelle-Aquitaine ; requis pour une création ou un enrichissement effectif de localisation | Contrôle territorial hors réseau ; existence de la commune non certifiée par l'import |
 | `code_postal` | Chaîne de 5 chiffres ou vide | Aucun calcul de commune depuis ce seul champ |
 | `adresse` | 300 caractères max | Groupe localisation ; aucune adresse inventée |
 | `site_web` | URL HTTP(S), 2 048 caractères max | Jamais visitée pendant l'import |
@@ -48,10 +69,10 @@ Les valeurs répétées pour une même référence doivent être identiques apr�
 Ces colonnes suffisent pour deux périmètres et deux contacts, sans dupliquer la structure :
 
 ```csv
-prospect_ref;nom_prospect;contact_ref;contact_nom;contact_email;opportunite_ref;perimetre;objectif_coffrets;titre_opportunite;contexte_initial
-P0001;Association Exemple;C0001;Camille Exemple;camille@example.invalid;O0001;ANIMATION;;Animation de printemps;Premier contact à préparer
-P0001;Association Exemple;C0002;Alex Exemple;alex@example.invalid;O0001;ANIMATION;;Animation de printemps;
-P0001;Association Exemple;C0001;Camille Exemple;camille@example.invalid;O0002;COFFRETS;ACHAT_ENTREPRISE_CSE;Coffrets pour les bénévoles;
+prospect_ref;nom_prospect;commune;code_insee;contact_ref;contact_nom;contact_email;opportunite_ref;perimetre;objectif_coffrets;titre_opportunite;contexte_initial
+P0001;Association Exemple;Latresne;33234;C0001;Camille Exemple;camille@example.invalid;O0001;ANIMATION;;Animation de printemps;Premier contact à préparer
+P0001;Association Exemple;Latresne;33234;C0002;Alex Exemple;alex@example.invalid;O0001;ANIMATION;;Animation de printemps;
+P0001;Association Exemple;Latresne;33234;C0001;Camille Exemple;camille@example.invalid;O0002;COFFRETS;ACHAT_ENTREPRISE_CSE;Coffrets pour les bénévoles;
 P0002;Commerce Exemple;;;;O0001;COFFRETS;PARTENARIAT_COMMERCANT;Recrutement partenaire;
 ```
 
@@ -159,6 +180,33 @@ Toute cellule est du texte : un contenu commençant par `=`, `+`, `-`, `@`, tabu
 Conservation des fichiers/aperçus/rapports et références de rapprochement : politique CRM à fixer avant données réelles, voir [livraison](verification-livraison.md). Le modèle vide est un **gabarit documentaire**, pas un jeu importé ; fichiers réels, parseurs et fixtures exécutables restent hors de ce dépôt documentaire.
 
 ## Localisation et carte maintenue en V1
+
+### Périmètre régional — ajustement du 4 novembre 2026
+
+La carte est limitée à la **Nouvelle-Aquitaine (région INSEE 75)**. Le filtre
+« Département » propose les douze départements : Charente (16),
+Charente-Maritime (17), Corrèze (19), Creuse (23), Dordogne (24), Gironde (33),
+Landes (40), Lot-et-Garonne (47), Pyrénées-Atlantiques (64), Deux-Sèvres (79),
+Vienne (86) et Haute-Vienne (87).
+Référence : [Code officiel géographique INSEE](https://www.insee.fr/fr/metadonnees/geographie/region/75-nouvelle-aquitaine).
+
+- L’API carte impose cette région et combine département, commune, filtres
+  commerciaux et emprise avant agrégation. Un rectangle géographique ne suffit
+  pas à déterminer l’appartenance régionale : le code INSEE fait foi.
+- La vue initiale couvre la région ; le choix d’un département recadre sa zone,
+  même sans résultat. Déplacement et dézoom sont bornés sur l’enveloppe régionale.
+  « Recentrer » revient à la région ou au département sélectionné. Les raccourcis
+  métropole/outre-mer sont retirés. Les enveloppes de navigation sont calculées
+  autour des centres communaux du référentiel `geo.api.gouv.fr` avec une marge ;
+  elles ne représentent pas les contours administratifs exacts.
+- « Voir la liste avec ces filtres » conserve `region=75`, le département et les
+  autres filtres ; ouvrir une commune ajoute son code INSEE. La liste générale
+  des prospects reste nationale en l’absence de filtre géographique.
+- Le compteur et le lien « sans commune · tous territoires » concernent les
+  fiches sans code INSEE, selon les autres filtres commerciaux. Ils ne leur
+  attribuent aucune région ou département supposé et ignorent l’emprise.
+- Le filtre reste utilisable avec la liste des communes si le fond de carte
+  n’est pas configuré. Aucun déplacement de fiche ni nouvelle migration.
 
 L'import conserve la commune déclarée et un éventuel code INSEE. Après validation de la fiche, la résolution géographique est une opération distincte, bornée et reprenable, sans modifier l'identité de source. Un code INSEE reconnu permet le centre communal ; un libellé/homonyme exige confirmation. Une indisponibilité géographique n'annule pas un import métier réussi et ne crée pas de fausse position.
 

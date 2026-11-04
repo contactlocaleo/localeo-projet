@@ -16,7 +16,7 @@ D = domaine pur ; A = application/UoW ; SQL = PostgreSQL jetable ; API = droits/
 | CA-08/09 | Lot : parser/A CSV UTF-8 BOM/sans BOM, guillemets/retours ligne, colonnes manquantes/dupliquées/inconnues, rejet XLSX, limites, groupe contradictoire atomique | Dictionnaire CSV et aperçu | Fixtures synthétiques ; formule non évaluée, exports neutralisés, zéro écrit avant confirmation |
 | CA-10/11 | Identité/import : SQL mêmes clés, réordre, nom changé, homonymes, contact répété, lot concurrent et source différente, namespace avec espaces/casse normalisé et création de source explicite ; panne après commit/reprise ; deux créations sources A/B ou manuel/import avec barrières SQL, candidat apparu après décision de distinction, erreur de sérialisation sans création automatique | Clés stables et plan immuable | Aucune duplication, bail expiré et jeton ancien refusé, marqueur d'effacement manuel protégé |
 | CA-12 | Lot : API sources/décisions/confirmation versionnée/arrêt/reprise, rapport interdit après révocation ; acteur de reprise, exclusions, INIT sans effet, états terminaux et bilan par groupe fidèle | Imports et runbook | Stockage privé, fichier abandonné/purge, enrichissement post-import préservé |
-| CA-13/14/15 | Localisation/carte : résolution INSEE/homonyme, absence de commune, hors catalogue, points agrégés, dépassement de 500 sans curseur, clic groupe et pagination 25/100 ; mobile/clavier/panne fournisseur | Carte interactive et fallback liste | France métropole/Outre-mer ; aucun contact/note transmis au fournisseur, aucune ville commerciale créée |
+| CA-13/14/15 | Localisation/carte : INSEE obligatoire de Nouvelle-Aquitaine pour création/changement de localisation, refus hors région, conservation des anciennes fiches, homonymes et hors catalogue ; points agrégés, dépassement de 500 sans curseur, clic groupe et pagination 25/100 ; mobile/clavier/panne fournisseur | Carte interactive, saisie régionale et fallback liste | Douze départements, ancien hors région/sans commune ; aucun contact/note transmis au fournisseur, aucune ville commerciale créée |
 | CA-16/17/18 | Rattachement : A/API droits métier, cible de mauvais prospect, répétition, reprise après création externe ; gain conforme | Liens OnBoard/Animation/Achats | Aucun accès/checkout/paiement provoqué par import ou statut |
 | CA-19/29 | Identité : D/API/UI toutes combinaisons de rôles/droits, absence de grant implicite, lecture liste/fiche/dossier autorisée et mutations refusées au lecteur, cardinalité des rôles éligibles sans élargissement historique, DTO/menus/registre fermés, CSRF, accès direct, session expirée ; révocation pendant commande/lot/rejeu | ERP profils, contrat droits et PWA | Comptes synthétiques sans droit/lecture/gestion/import/admin, pas d'élargissement SQLAdmin |
 | CA-20/21 | Opposition/version : D/SQL course planification-opposition, fermeture pendant batch, réimport/réactivation, contact ciblé vs autre contact, coordonnée opposée réutilisée comme structure, tâche structure sans contact ciblé, correction concurrente et idempotence corps divergent | Politique commune et 409/422 | Aucun rappel sollicitant après opposition avant remise transport, versions et histoire conservées |
@@ -387,3 +387,98 @@ n’est réalisé dans cette tâche.
   agrégats incluses. `git diff --check` réussi dans les deux dépôts modifiés.
 - Captures supplémentaires 360 et 1280 px examinées après le dernier parcours
   navigateur ; aucune correction d’interface supplémentaire nécessaire.
+
+## Carte Nouvelle-Aquitaine — correctif du 4 novembre 2026
+
+Demande : limiter la carte régionale et permettre de filtrer ses douze
+départements. La carte nationale et ses raccourcis outre-mer ne correspondaient
+plus au périmètre souhaité. Correction sur les changements locaux issus du
+backend `32106fd` et du dépôt documentaire `17218a0`.
+
+La projection SQL impose les départements de Nouvelle-Aquitaine avant agrégation,
+indépendamment de l’emprise rectangulaire et du code postal. Le filtre département
+et la région sont conservés en ouvrant la liste et sa pagination. La liste générale
+reste nationale ; les fiches sans INSEE disposent d’un accès distinct tous territoires.
+Le cadrage initial, le dézoom et le recentrage utilisent l’enveloppe régionale ou
+départementale, y compris lorsqu’aucun prospect ne correspond aux filtres.
+
+Preuves locales :
+
+- **43 tests Python réussis** : API HTTP, PostgreSQL jetable, combinaisons de
+  filtres, exclusion d’une commune hors région pourtant dans l’emprise, douze
+  départements, compteurs, pagination, liaison des curseurs aux filtres,
+  plafond de 500 groupes et portefeuille synthétique de 10 000 prospects.
+- **652 contrôles d’architecture et de recensement validés** : 651 lors de la
+  suite initiale ; le dernier test, affecté par la capture Windows de `git init`
+  (`WinError 6`), réussit inchangé avec `-s`.
+- `node tests/browser/crm.cjs` : parcours CRM réussi avec Leaflet réel et tuiles
+  synthétiques locales. Sélection Gironde, transmission des filtres lors du zoom,
+  dézoom borné, liens vers la liste et une commune, accès sans commune, état vide
+  Charente, réinitialisation et repli sans fond cartographique vérifiés. Sept vues
+  contrôlées de 320 à 1440 px ; captures régionales à 320 et 1280 px.
+- Documentation : `python scripts/check_guidance.py` et
+  `python scripts/sync_documentation.py --check-sources` réussissent.
+
+Contrat OpenAPI canonique et guide utilisateur mis à jour. Générateur inchangé :
+les nouveaux filtres sont des paramètres de lecture facultatifs, sans modification
+du format des fiches ou de leur création. Aucune migration, réparation de données,
+clé supplémentaire ni changement de fournisseur de tuiles. Les règles métier et
+permissions restent inchangées. La campagne complète de charge à 100 000 prospects
+et la vérification sur TEST ne sont pas rejouées ; les réserves antérieures de
+performance des rappels restent ouvertes. Aucun commit, push ou déploiement dans
+ce correctif.
+
+## Correctif du 4 novembre 2026 — Saisie des prospects en Nouvelle-Aquitaine
+
+La restriction de carte ne limitait pas les écritures. Le domaine Prospection
+porte désormais la règle des douze départements : INSEE obligatoire pour toute
+création et tout changement effectif de localisation. Les entrées manuelles et
+imports INIT/UPSERT l'appliquent ; les fiches historiques hors région ou sans
+commune conservent leur suivi et leurs contacts modifiables.
+
+Le formulaire recherche puis sélectionne la commune. Les mutations manuelles
+utilisent le référentiel local `crm_communes`, alimenté uniquement par les
+réponses de la recherche serveur ; le réseau précède la transaction courte de
+cache et reste absent des transactions métier. Les imports contrôlent hors
+réseau le territoire déclaré par INSEE, sans certifier l'existence du code ni
+la concordance de son libellé. Un ancien plan incompatible est recalculé puis
+refusé avant toute mutation du groupe.
+
+Preuves locales :
+
+- Deux tests d'import ont reproduit les refus manquants avant correction.
+  **72 scénarios distincts d'import réussis**, domaine/CSV/HTTP/PostgreSQL et
+  charge mixte, dont 10 000 lignes. Création absente/hors région, conservation
+  des localisations historiques, protections et plans devenus obsolètes couverts.
+- **74 tests ciblés serveur réussis** (73 dans la suite finale, puis un test
+  PostgreSQL supplémentaire) : domaine, application, HTTP, persistance réelle,
+  carte, démonstration et charge mixte. Vérification spécifique de l'ordre
+  recherche réseau avant SQL, du cache réel, du nom canonique, du code inconnu,
+  de l'idempotence et des refus sans effet.
+- **653 contrôles d'architecture et de recensement réussis** avec `-s` et sortie
+  fichier pour éviter le problème Windows de capture subprocess ; assertions
+  inchangées. PostgreSQL jetable arrêté après les contrôles.
+- `node tests/browser/crm.cjs` réussi : commune requise, sélection régionale,
+  absence de résultat, erreur de recherche sans perte de sélection, réponse
+  périmée ignorée, modifications non géographiques de fiches historiques,
+  INSEE sans nom conservé, localisation avec confirmation d'homonymes. Sept vues
+  de 320 à 1440 px ; formulaires à 320/1280 px inspectés visuellement.
+- Revue indépendante des règles/imports/cache et du formulaire ; les deux
+  écarts détectés (sélection historique sans nom, confirmation d'homonymes)
+  sont corrigés et couverts par les tests navigateur.
+- Documentation : guides, liens des Markdown modifiés et sources exportées
+  validés ; `git diff --check` réussi dans backend et projet.
+
+**Réserve de charge distincte** : le banc PostgreSQL à 100 000 prospects dépasse
+le budget carte de 2 s p95 (2,884 s base fraîche ; 3,819 s après vacuum). Les cas
+à 10 000 passent ; listes et tableaux de bord passent à dix lecteurs. Le
+correctif de saisie ne change pas la requête de lecture cartographique (seule la
+constante des départements est partagée avec le domaine). Ces échecs restent
+consignés, sans affaiblissement du seuil ni conclusion de validation complète
+des performances. Ils ne constituent pas un refus fonctionnel de saisie.
+
+CA-01/08/09/10/14 et documentation fonctionnelle/technique actualisés ; contrat
+OpenAPI canonique régénéré, exemples CSV et fixtures du générateur de démonstration
+adaptés. Aucune migration requise : colonnes et cache communal existent déjà.
+Aucun import réel, envoi, réparation de données, commit, push ou déploiement TEST.
+Les autres travaux locaux des dépôts sont conservés.

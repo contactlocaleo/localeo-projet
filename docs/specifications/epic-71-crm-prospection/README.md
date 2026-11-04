@@ -12,7 +12,8 @@ L'utilisateur voit des **Prospects**, des **Dossiers commerciaux** et des **Rapp
 
 - **Aujourd'hui** : mes rappels en retard, du jour et à venir ; dossiers actifs sans prochaine action ; raccourcis « Nouveau prospect » et « Ajouter une note ».
 - **Prospects** : recherche, filtres, fiche contacts, chronologie, notes et dossiers Animation/Coffrets ; suivi conservé après rattachement à un client existant.
-- **Carte interactive** : prospects regroupés par commune, filtres partagés avec la liste et accès aux fiches ; localisation communale indicative, y compris hors catalogue Localeo.
+- **Carte interactive** : prospects de Nouvelle-Aquitaine regroupés par commune, filtre par département partagé avec la liste et accès aux fiches ; localisation communale indicative, y compris hors catalogue Localeo.
+- **Territoire de saisie temporaire** (4 novembre 2026) : création et modification effective de localisation limitées à une commune de Nouvelle-Aquitaine, identifiée par son code INSEE. Même règle métier pour la saisie manuelle, la localisation et les imports INIT/UPSERT. Les fiches historiques hors région ou sans commune restent consultables et modifiables pour leur suivi et contacts ; aucune suppression ni migration. Les conditions et limites du contrôle des imports sont détaillées dans [Import CSV](import-carte.md#territoire-ouvert-à-la-prospection).
 - **Suivi commercial** : liste et vue par étapes, responsable, priorité simple, prochaine action et résultat gagné/perdu ; aucun devis ou paiement recréé dans le CRM.
 - **Rappels** : tâches datées, report/annulation/réalisation, notification interne persistante, WebPush volontaire et e-mail facultatif au responsable interne.
 - **Imports** : CSV standard produit depuis Excel, aperçu puis confirmation, modes INIT et UPSERT sans écrasement du suivi commercial.

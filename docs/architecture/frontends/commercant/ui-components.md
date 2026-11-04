@@ -6,21 +6,30 @@ La source des tokens et des styles est [src/styles.css](../../../../../localeo-c
 
 | Token | Valeur | Usage |
 | --- | --- | --- |
-| `--blue-900` | `#0b3d63` | Bleu principal |
-| `--bg`, `--paper` | `#f6f5f1` | Fond clair |
+| `--text`, `--muted` | `#183243`, `#526575` | Texte principal et secondaire |
+| `--bg`, `--paper` | `#f5f7f9` | Fond de travail |
 | `--surface` | `#ffffff` | Surface |
-| `--accent`, `--focus` | `#f28a2e` | Accent et focus |
-| `--font-body` | DM Sans | Texte courant, puis polices de repli |
-| `--font-display` | `var(--font-body)` | Même famille DM Sans pour les titres de gestion |
+| `--accent`, `--accent-action` | `#09685e` | Action principale, texte blanc |
+| `--accent-soft`, `--accent-text` | `#e1f0ec`, `#07594f` | Navigation et sélection actives |
+| `--line`, `--input-line` | `#d8e1e7`, `#a5b8c4` | Contours des surfaces et des champs |
+| `--focus` | `#b96913` | Focus clavier |
+| `--font-body` | Police système sans empattement | Texte et titres de gestion |
+| `--font-display` | `var(--font-body)` | Même famille pour les titres |
+| `--radius-panel`, `--radius-button`, `--radius-field` | 12, 9, 7 px | Panneaux, actions et champs |
 
-Les fontes sont déclarées dans [src/fonts.css](../../../../../localeo-commercant/src/fonts.css) et importées par [src/main.jsx](../../../../../localeo-commercant/src/main.jsx). Le token `--market-radius` vaut `4px` ; les rayons et ombres varient selon les composants. Il n'existe pas de règle générale imposant `14px` à toutes les bordures.
+La [charte CRM commune](../../transverse/identite-entetes-applications.md#charte-des-espaces-de-gestion-internes--référence-crm)
+est déclinée localement pour conserver l’indépendance des déploiements.
+La signature du bandeau conserve son fond bleu nuit et son accent orange.
+Les badges de statut et contenus personnalisables conservent leurs couleurs
+propres ; leurs couleurs ne doivent pas être remplacées par celle des boutons.
 
-Depuis le **3 novembre 2026**, les titres de page utilisent une échelle commune
-de 24–28 px et une graisse de 600. Les sections de formulaire déjà compactes
+Depuis le **4 novembre 2026**, les titres de page utilisent 25 px (23 px sur mobile)
+et une graisse de 600, les sections 18 px et sous-sections 15 px. Le corps de travail
+est à 14 px, avec des champs mobiles à 16 px. Les sections de formulaire déjà compactes
 gardent leur densité ; les anciens grands titres de connexion, scan et validation
 adoptent cette hiérarchie. Les compteurs et codes opérationnels gardent leurs
 dimensions utiles. Voir les [repères typographiques de gestion](../../transverse/conventions-backoffice.md#typographie-des-applications-de-gestion)
-et les [constats et preuves](../../../audits/typographie-applications-gestion-2026-11-03.md).
+et le [suivi d’ergonomie commun](../../../audits/ergonomie-gestion-pro-animation-2026-11-01.md).
 
 Le [manifeste PWA](pwa.md#installation-et-manifeste) conserve encore ses anciennes couleurs de thème et de fond. Ne pas les prendre comme définition de la palette CSS actuelle.
 

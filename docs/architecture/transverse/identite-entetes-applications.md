@@ -65,9 +65,12 @@ Le suivi de correction et les preuves figurent dans le
 ## Charte des espaces de gestion internes — référence CRM
 
 Depuis le 4 novembre 2026, Localeo CRM sert de référence visuelle à ERP, Ops,
-OnBoard, Support et Atelier. Le bandeau de marque bleu nuit reste commun ;
+OnBoard, Support et Atelier, ainsi qu’à Localeo Pro et Localeo Animation.
+Le bandeau de marque bleu nuit reste commun ;
 les actions de travail utilisent le vert pétrole. Les tokens `--localeo-*`
-de `app-header.css` sont la source partagée, consommée également par CRM.
+de `app-header.css` sont la source partagée des applications internes, consommée
+également par CRM. Pro et Animation déclinent ces mêmes valeurs dans leurs
+tokens locaux, sans dépendance d’exécution entre dépôts.
 
 Dans l’ERP, l’identité de session et le nombre de communes accessibles sont
 affichés dans le bandeau principal, sans bande intermédiaire au-dessus du
@@ -93,8 +96,18 @@ et leur gravité, indépendamment de la couleur des actions.
 
 Modifier les règles existantes plutôt qu’ajouter des surcharges successives.
 Ops utilise sa feuille unique `ops.css`, sans ancien bloc de styles en ligne.
-Les connexions internes consomment les mêmes tokens ; les applications publiques
-Pro, Animation et Live ne sont pas recolorées par cette harmonisation.
+Les connexions internes consomment les mêmes tokens. Pro et Animation harmonisent
+leur cadre, leurs composants de gestion et leurs formulaires d’accès. La surface
+habitante Live conserve sa présentation immersive propre.
+
+Dans Pro et Animation, conserver les rubriques et raccourcis adaptés au métier,
+le retour au contexte précédent, les confirmations et les états de chargement.
+La navigation claire distingue la rubrique active avec un fond vert doux et
+son repère accessible. Les états succès, attention et erreur restent sémantiques :
+un avertissement ne prend pas la couleur de l’action principale. Les contenus
+personnalisables d’une animation, dont le flyer, gardent leurs propres couleurs.
+Les champs mobiles conservent une taille lisible de 16 px ; le corps de travail
+à 14 px ne doit pas réduire les cibles tactiles, la signature ni le zoom du texte.
 
 Les preuves locales et limites sont dans le
 [suivi d’harmonisation](../../roadmap/anomalies/backend.md#ano-interne-charte-crm-20261104--harmonisation-des-espaces-de-gestion).

@@ -8,6 +8,50 @@ des trois anomalies du 1er novembre ; elle ne prouve pas leur déploiement
 applicatif. La correction SQL v286 a été appliquée sur TEST comme indiqué
 ci-dessous ; la migration catalogue v285 y reste en attente.
 
+## ANO-CRM-SAISIE-REGION-20261104 — Prospects limités à la Nouvelle-Aquitaine
+
+- **Constat** : la carte était limitée à la région, mais la saisie et les imports
+  pouvaient encore créer des prospects hors région ou sans commune.
+- **Correction locale** : règle unique dans le domaine Prospection, appliquée
+  aux créations, changements effectifs de localisation et imports INIT/UPSERT.
+  Le formulaire recherche une commune régionale et exige sa sélection. Les
+  mutations manuelles utilisent le référentiel communal local alimenté par la
+  recherche serveur ; aucune requête réseau dans la transaction métier.
+- **Conservation** : anciennes fiches hors région/sans commune toujours lisibles
+  et modifiables pour le suivi et les contacts. L'import valide le territoire
+  déclaré par INSEE, sans géocodage ni certification d'existence. Un ancien plan
+  incompatible est refusé avant toute écriture du groupe.
+- **Preuves** : reproduction de deux refus manquants avant correction, tests
+  de domaine, application, API, PostgreSQL jetable et navigateur ; détails et
+  limites dans le [bilan E71](../../specifications/epic-71-crm-prospection/verification-livraison.md).
+  Revue indépendante et tests des anciennes fiches, recherches périmées et
+  confirmations de structures homonymes. Formulaires vérifiés à 320 et 1280 px.
+- **Impacts** : CA-01/08/09/10/14, contrat API canonique, formulaire CRM, guides
+  et fixtures du générateur de démonstration. Aucune migration ni donnée réelle
+  modifiée. Dépôts backend et projet ; aucun commit, push ou déploiement TEST.
+
+## ANO-ERP-ACCUEIL-APPLICATIONS-20261104 — Vignettes des applications
+
+- **Constat** : CRM absent de l’accueil ERP ; la règle de marge/bordure des
+  vignettes s’appliquait à tous les éléments après le premier, décalant Support
+  au début de la seconde ligne. Les applications n’avaient pas de pictogramme.
+- **Correction locale** : grille régulière à trois colonnes sur grand écran,
+  deux sur format intermédiaire et une sur mobile. CRM suit Control et pointe
+  vers `/internal/crm/`, seulement si disponible et autorisé par le profil.
+  Chaque application possède une icône SVG locale distincte, décorative et
+  accompagnée de son libellé ; réutilisation du système d’icônes du menu ERP.
+- **Preuves** : le test navigateur échoue avant correction sur l’absence de
+  CRM, puis `node tests/browser/erp-home-applications.cjs` réussit ses
+  **20 scénarios** (quatre profils, cinq formats/agrandissements). Alignement
+  Support/Atelier, position CRM/Control, destinations, disponibilité, droits,
+  focus, cibles tactiles et absence de débordement vérifiés. Captures 1440 et
+  320 px inspectées. Les bancs `erp-menu-ux.cjs` (**35 scénarios**) et
+  `erp-page-template.cjs` (**24 scénarios**) passent également.
+- **Impacts** : présentation ERP et documentation uniquement, règles d’accès
+  existantes conservées. Aucun contrat API, migration, configuration ou
+  générateur de démonstration modifié. Travaux antérieurs préservés. Aucun
+  commit, push ou déploiement TEST effectué pour cette correction.
+
 ## ANO-INTERNE-CHARTE-CRM-20261104 — Harmonisation des espaces de gestion
 
 - **Demande / constat** : prendre Localeo CRM comme référence pour ERP, Ops,

@@ -12,7 +12,7 @@ Depuis le menu **Applications** de l’ERP, choisissez **Localeo CRM**. L’adre
 
 ## 2. Créer un prospect et préparer la suite
 
-1. Choisissez **Nouveau prospect**. Saisissez son nom, son type et les coordonnées connues ; vous pouvez compléter celles-ci plus tard.
+1. Choisissez **Nouveau prospect**. Saisissez son nom et son type. Recherchez puis sélectionnez sa **commune en Nouvelle-Aquitaine** : elle est obligatoire. Les autres coordonnées peuvent être complétées plus tard.
 2. Choisissez le périmètre et l’objectif du premier dossier : souscription Animation, partenariat commerçant Coffrets ou achat entreprise/CSE. Affectez un responsable.
 3. Enregistrez. Le prospect et son premier dossier sont créés ensemble. Une fiche ressemblante demande un examen explicite ; ouvrez la fiche existante si elle représente la même structure.
 4. Ajoutez les personnes à contacter dans **Contacts**. Un contact devenu obsolète garde son historique.
@@ -20,6 +20,13 @@ Depuis le menu **Applications** de l’ERP, choisissez **Localeo CRM**. L’adre
 6. **Planifier une action** précise le responsable, l’échéance et le rappel, en heure de Paris. Une préparation interne ne sollicite personne ; les autres actions précisent le canal et la structure ou le contact destinataire.
 
 Une erreur d’enregistrement conserve la saisie. Après un conflit de version, consultez les dernières informations avant de réessayer. Après une réponse réseau incertaine, réessayez la même demande : sa clé empêche la création d’un doublon.
+
+La saisie est actuellement limitée aux douze départements de Nouvelle-Aquitaine :
+16, 17, 19, 23, 24, 33, 40, 47, 64, 79, 86 et 87. Les anciennes fiches hors région
+ou sans commune restent consultables ; leurs contacts, coordonnées de contact et
+suivi restent modifiables. Pour modifier leur adresse, code postal ou commune,
+sélectionnez une commune de Nouvelle-Aquitaine. Le serveur vérifie la commune
+sélectionnée dans le référentiel ; un code postal seul ne suffit pas.
 
 ## 3. Suivre les dossiers
 
@@ -35,9 +42,23 @@ Dans **Rappels**, le filtre **Rappel disponible** retrouve les actions dont l’
 
 ## 4. Utiliser la carte
 
-**Carte** reprend les filtres de prospection et groupe les prospects par commune. Un point représente le centre approximatif de la commune, pas l’adresse d’une personne. Cliquez sur un groupe pour ouvrir la liste correspondante. Les compteurs distinguent structures et dossiers.
+**Carte** présente les prospects de **Nouvelle-Aquitaine**, regroupés par commune.
+Choisissez un **Département**, puis **Filtrer** : la carte se recadre et conserve
+vos autres filtres de prospection. **Réinitialiser** revient à toute la région,
+et **Recentrer** retrouve la zone choisie après un déplacement ou un zoom.
 
-Les prospects sans commune restent accessibles dans une liste dédiée. Depuis une fiche, **Localiser la commune** permet de chercher puis choisir explicitement la commune et son code INSEE. Si le fond de carte est indisponible, utilisez la liste des communes. Aucun contact ni contenu de note n’est transmis au fournisseur cartographique.
+Un point représente le centre approximatif de la commune, pas l’adresse d’une
+personne. Cliquez sur un groupe pour ouvrir les prospects correspondants.
+**Voir la liste avec ces filtres** conserve la région, le département et vos
+filtres commerciaux. La rubrique générale **Prospects** reste utilisable pour
+tous les territoires. Les compteurs distinguent structures et dossiers.
+
+Les prospects sans commune restent accessibles dans une liste dédiée **tous
+territoires** : leur département ne peut pas encore être déterminé. Depuis une
+fiche, **Localiser la commune** permet de chercher puis choisir explicitement la
+commune de Nouvelle-Aquitaine et son code INSEE. Si le fond de carte est indisponible, le filtre par
+département et la liste des communes restent disponibles. Aucun contact ni
+contenu de note n’est transmis au fournisseur cartographique.
 
 ## 5. Importer votre fichier Excel
 
@@ -45,7 +66,7 @@ Depuis **Aujourd’hui → Importer mes prospects**, téléchargez le modèle CS
 
 1. Créez une **source** stable, par exemple `prospection-gironde`, puis réutilisez-la pour chaque mise à jour du même fichier. Les boutons **Sources suivantes/précédentes** donnent accès aux autres sources en conservant votre sélection.
 2. Choisissez **INIT** pour créer uniquement les groupes inconnus ou **UPSERT** pour compléter les informations vides non protégées et ajouter des contacts/dossiers.
-3. Choisissez le responsable des nouveaux dossiers et déposez le fichier. Aucun prospect n’est encore créé.
+3. Renseignez `code_insee` pour chaque nouveau prospect (commune de Nouvelle-Aquitaine). Choisissez le responsable des nouveaux dossiers et déposez le fichier. Aucun prospect n’est encore créé.
 4. Examinez l’aperçu et les ressemblances : rapprochez une fiche existante, confirmez une fiche distincte ou excluez le groupe. Les anomalies indiquent leur motif et les numéros des lignes CSV. Corrigez le fichier puis déposez un nouveau lot avec la même source si nécessaire. Si les données changent entre-temps, un nouvel examen est nécessaire.
 5. Confirmez le plan. Actualisez l’écran pour suivre le traitement en arrière-plan. Gardez l’URL directe `/internal/crm/imports/<identifiant>` et téléchargez son rapport. Cette destination est conservée après reconnexion.
 6. Un traitement interrompu peut être repris par son confirmateur ; les groupes déjà validés ne sont pas rejoués. Les autres personnes habilitées peuvent consulter le lot, mais les actions réservées au confirmateur ne leur sont pas proposées.

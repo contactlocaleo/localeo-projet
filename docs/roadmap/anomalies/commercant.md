@@ -1,5 +1,13 @@
 # Registre des anomalies
 
+## ANO-PRO-CHARTE-CRM-20261104 — Alignement sur la charte de gestion CRM
+
+La palette, la navigation, les composants de formulaire et la hiérarchie
+typographique de Localeo Pro sont harmonisés avec Localeo Animation sur la
+référence CRM. Le [suivi commun](../../audits/ergonomie-gestion-pro-animation-2026-11-01.md#harmonisation-sur-localeo-crm--4-novembre-2026)
+conserve les constats, corrections, impacts et preuves locales. Le scan, les
+permissions et confirmations métier restent inchangés ; aucun déploiement réalisé.
+
 ## Diagnostic du 3 novembre 2026 — récupération sans accès Pro initialisé sur TEST
 
 - **Signalement** : une demande de mot de passe oublié ne produit aucun e-mail

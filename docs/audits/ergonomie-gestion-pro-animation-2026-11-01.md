@@ -1,5 +1,79 @@
 # Audit ergonomique — Localeo Pro et Localeo Animation
 
+## Harmonisation sur Localeo CRM — 4 novembre 2026
+
+À la demande de l’utilisateur, la référence visuelle devient Localeo CRM.
+Cette évolution complète l’audit initial ci-dessous, sans modifier les parcours
+métier ni rouvrir ses décisions. Bases applicatives : Pro `054feab` et
+Animation `4f4b5e6`, dépôts propres avant intervention. Les travaux locaux de
+carte CRM dans Backend/Projet et le classeur de prospection sont préservés.
+
+| Divergence constatée | Correction dans les sources |
+| --- | --- |
+| Fonds beige/bleutés, couleurs de texte différentes | Fond de travail `#f5f7f9`, texte `#183243`, secondaire `#526575`. |
+| Navigation latérale sombre et sélection orange/bleue | Menu clair, sélection vert doux et repère actif accessible, mêmes rubriques et accès autorisés. |
+| Actions orange dans Pro, bleues dans Animation et certains workspaces Pro | Primaire vert `#09685e` avec texte blanc ; secondaire bordé ; survol cohérent et commande destructive distincte. |
+| DM Sans, titres et dimensions variables | Police système, corps 14 px, titres 25/18/15 px (23 px pour le titre mobile), signature conservée. |
+| Rayons, champs et contours hétérogènes | Tokens locaux communs aux composants : panneaux 12 px, boutons 9 px, champs 7 px, contour `#d8e1e7`, focus ocre. |
+
+Les cibles de 44 px, champs mobiles de 16 px, navigation au clavier, confirmations,
+messages d’erreur et préférences de réduction des mouvements sont conservés.
+La cohérence concerne les repères et composants : le scanner commerçant et le
+guide de préparation organisateur gardent leur rôle et leur place.
+
+Les règles sont corrigées dans les feuilles et composants propriétaires, sans
+nouvelle feuille de surcharges. Les couleurs de gravité, séries des graphiques,
+aperçus Live et visuels personnalisés des flyers restent distinctes des couleurs
+de commande. La revue indépendante a notamment identifié et fait corriger une
+discordance de légende graphique, des survols bleus résiduels, un fond de
+progression CSS invalide et un focus de liste rogné. L’inspection visuelle du
+scanner a conduit à conserver des repères de visée orange clair sur la caméra sombre,
+indépendants du vert des commandes.
+
+Les contrastes calculés de la palette commune sont de **6,66:1** pour blanc sur
+primaire, **7,01:1** pour la navigation active et **5,62:1** pour le texte secondaire
+sur fond de travail. Le focus ocre sur blanc est à **4,12:1**. Ces mesures ne
+remplacent pas les recettes navigateur des composants.
+
+### Vérifications de l’harmonisation
+
+Les recettes utilisent des réponses synthétiques, sans environnement opérateur
+ni API réelle. Les captures PC/mobile ont été examinées, y compris le menu à
+320 px, l’accueil Pro, la liste/édition des prestations, la fiche Animation et
+son assistant. Les scénarios comprennent le texte agrandi et l’accès au clavier.
+
+| Application / contrôle | Preuve locale |
+| --- | --- |
+| Pro — unités isolées | `node node_modules/vitest/vitest.mjs run --config scripts/audits/vitest-ergonomie.config.mjs --maxWorkers=2` : **53 tests réussis**, sans `.env` opérateur. |
+| Pro — build et navigateur | Build Playwright isolé réussi ; **54 scénarios distincts**, **84 exécutions réussies** en comptant les replays après corrections. Bancs `management-ergonomics`, `business-ux`, `mobile-header`, `operational-ux`, `employee-management-ux`, `employee-confirmation`, `validation-merchant-ux`, `security-headers` et `employees` via `node node_modules/@playwright/test/cli.js test … --workers=2`. |
+| Pro — vérification visuelle finale | Captures 390/1280 px de l’accueil, du focus des prestations et du scanner réellement prêt avec média Chromium synthétique. Badge blanc et repères de visée lisibles, sans caméra utilisateur. |
+| Animation — TypeScript, ESLint | `node node_modules/typescript/bin/tsc --noEmit` et `node node_modules/eslint/bin/eslint.js src vite.config.ts` réussis. |
+| Animation — tests Node | `node --test tests/*.test.mjs` : **299 tests réussis**. |
+| Animation — builds | `node scripts/build-generation-tests.mjs` et build de la configuration Vite de production en isolation réussis, service worker généré. Avertissement de taille du chunk principal supérieur à 500 ko. |
+| Animation — cadre et pages | `WORKSPACE_CASE=shell node tests/browser/animation-workspace-ux.mjs` : **10 formats** ; même banc sans sélection : **40 parcours** réussis. |
+| Animation — composants et abonnement | `node tests/browser/workspace-primitives.mjs` : **188 contrôles** ; `node tests/browser/modules.mjs` : **70 scénarios, 994 assertions** réussis. |
+
+Les assertions historiques de police et de couleur du renouvellement Animation
+sont adaptées au changement demandé (DM Sans → système, primaire bleu → vert).
+La distinction entre action principale et secondaire, ainsi que les contrôles de
+clavier, de largeur et de droits, sont maintenus. La revue indépendante finale
+ne relève plus de défaut bloquant sur les écarts qu’elle avait signalés.
+Dans Pro, le test de sécurité vérifie désormais la police système et l’absence
+de requête de police après retrait de l’import et du préchargement DM Sans devenus
+inutiles ; les assertions CSP, blocage du script en ligne, cache et compression
+restent présentes. Les contrôles documentaires et `git diff --check` réussissent.
+Le build Pro signale l’import dynamique également statique de `ValidationHistory`,
+sans échec ; aucune modification de découpage de bundle n’est introduite ici.
+
+Impacts : présentation dans Pro/Animation et documentation transverse uniquement.
+Aucun contrat API, règle métier, droit, format de données, migration, générateur
+de démonstration ou paramètre serveur modifié. Les styles restent locaux aux
+dépôts pour préserver leurs déploiements indépendants. Aucun commit, push ou
+déploiement n’est réalisé au titre de cette demande ; les preuves locales ne
+valent pas une recette authentifiée sur TEST ou sur appareil physique.
+
+## Audit initial du 1er novembre 2026
+
 Date : **1er novembre 2026**. Périmètre : applications de gestion sur PC et
 mobile, avec Localeo Pro comme référence de présentation et corrections dans
 les deux applications. Bases : Pro `6c7489e`, Animation `9b0eb7a`, complétées

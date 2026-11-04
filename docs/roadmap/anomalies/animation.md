@@ -1,5 +1,13 @@
 # Registre des anomalies
 
+## ANO-ANI-CHARTE-CRM-20261104 — Alignement sur la charte de gestion CRM
+
+La palette, la navigation, les composants de formulaire et la hiérarchie
+typographique de Localeo Animation sont harmonisés avec Localeo Pro sur la
+référence CRM. Le [suivi commun](../../audits/ergonomie-gestion-pro-animation-2026-11-01.md#harmonisation-sur-localeo-crm--4-novembre-2026)
+conserve les constats, corrections, impacts et preuves locales. Les transitions,
+droits et confirmations d’animation restent inchangés ; aucun déploiement réalisé.
+
 ## ANO-ANI-HEADER-COMPTE-20261103 — Espace réservé aux rubriques du menu
 
 - **Observé** : dans le shell connecté de Localeo Animation, les documents,

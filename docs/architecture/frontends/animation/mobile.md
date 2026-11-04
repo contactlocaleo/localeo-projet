@@ -23,8 +23,9 @@ local pour garder leurs axes lisibles. Les animations du menu respectent la
 préférence de réduction des mouvements.
 
 La typographie suit les [repères des applications de gestion](../../transverse/conventions-backoffice.md#typographie-des-applications-de-gestion) :
-DM Sans, titres de page 24–28 px semi-gras, sections plus discrètes et listes
-compactes. Les unités relatives accompagnent l'agrandissement du texte ;
+police système, titres de page 25 px (23 px sur mobile), sections 18 px et
+sous-sections 15 px, corps de travail 14 px selon la charte CRM du 4 novembre 2026.
+Les unités relatives accompagnent l'agrandissement du texte ;
 l'allègement des titres ne réduit pas les champs ou cibles tactiles.
 Les [preuves du 3 novembre 2026](../../../audits/typographie-applications-gestion-2026-11-03.md)
 distinguent les essais locaux de la recette sur appareils physiques.
