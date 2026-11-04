@@ -131,6 +131,12 @@ fournit les valeurs et exemples ; le choix INIT/UPSERT est indépendant du forma
 5. Confirmez le plan. Actualisez l’écran pour suivre le traitement en arrière-plan. Gardez l’URL directe `/internal/crm/imports/<identifiant>` et téléchargez son rapport. Cette destination est conservée après reconnexion.
 6. Un traitement interrompu peut être repris par son confirmateur ; les groupes déjà validés ne sont pas rejoués. Les autres personnes habilitées peuvent consulter le lot, mais les actions réservées au confirmateur ne leur sont pas proposées.
 
+Le traitement des imports est planifié chaque minute dans l’ordonnanceur partagé.
+Il prépare l’aperçu avant votre confirmation, puis applique les groupes confirmés.
+Si le lot reste durablement en **Analyse du fichier** ou **Import en cours**, faites
+vérifier **Traitement des imports CSV du CRM** dans la supervision des batchs.
+Actualiser l’écran consulte l’avancement ; cela ne déclenche pas le traitement.
+
 UPSERT n’écrase pas les notes, étapes, responsables, rappels, oppositions ni les champs corrigés ou volontairement vidés à la main. Les statuts et leurs preuves sont conservés ensemble ; une cellule différente ne remplace pas un budget confirmé, un porteur ou une vérification de contact. L’absence d’une ligne dans le nouveau fichier ne supprime rien. En INIT, un prospect déjà connu par sa référence source est ignoré avec tout son groupe, y compris ses nouveaux compléments de qualification.
 
 ## 6. Régler les rappels et respecter les oppositions

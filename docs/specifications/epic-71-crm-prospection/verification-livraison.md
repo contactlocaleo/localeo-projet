@@ -782,3 +782,47 @@ Sauvegarde, plan et reçus privés dans le backend, sous
 Aucun prospect du fichier Excel n’est importé par cette opération. La migration
 ne constitue pas une preuve de publication du code ni une recette authentifiée
 du CRM après déploiement ; les réserves précédentes restent inchangées.
+
+### Correctif de planification des imports — 4 novembre 2026
+
+Un dépôt TEST restait en DEPOSE avec tous ses groupes NON_APPLIQUE : le worker
+existait mais n’était inscrit ni au catalogue des batchs ni à sa planification.
+L’extension locale ajoute `prospection.imports.traiter`, chaque minute, maximum
+100 unités par passage, au catalogue partagé. La route appelle `BatchRunner` :
+exécution attribuée à la clé technique, verrou, historique, durée, corrélation et
+compteurs dans la console existante. Le CRM désactivé produit un passage inerte
+tracé ; les erreurs techniques enregistrées omettent les cellules du fichier.
+
+La confirmation appartient toujours à l’utilisateur : le worker prépare seulement
+l’aperçu d’un dépôt, puis ne peut écrire les prospects qu’après confirmation et
+revalidation de l’autorité du confirmateur. Aucun lot TEST n’est confirmé ou
+appliqué par les tests de ce correctif.
+
+Preuves ciblées : quatre échecs de reproduction (planification absente, aucune
+exécution en supervision, état désactivé non inerte et erreur non historisée),
+puis **22 tests réussis** HTTP/supervision/ordonnanceur. Le rendu serveur de la
+console est vérifié en succès/échec, avec cron, compteurs et absence du contenu
+privé. Sur PostgreSQL local jetable, **4 tests réussis** : worker périodique
+attendant la confirmation, application unique, retrait de droit avant aperçu et
+pendant l’import, parcours HTTP dépôt/aperçu/confirmation/bilan.
+
+Le recensement de l’ordonnanceur attendait encore 25 planifications alors que
+le HEAD avant correctif en déclarait 28 (comparaison AST du catalogue versionné).
+L’assertion exacte est actualisée à **29**, avec présence explicite du nouveau
+batch et rattrapages autorisés, sans réduire les contrôles de concurrence.
+
+Le rejeu architecture/recensements/domaine imports et sécurité des batchs donne
+**712 tests réussis**. Un premier passage relevait une fixture préexistante
+incomplète dans `test_animation_batch_http.py` : le service de maintenance des
+preuves e-mail de conservation n’était pas doublé et tentait une connexion
+externe, refusée par le runner isolé. La route et le test étaient inchangés au
+HEAD avant correctif. La fixture ajoute seulement ce double, et vérifie aussi
+le compteur de maintenance retourné ; aucune assertion n’est retirée. Les
+contrôles documentaires passent : **96 guides / 1 099 liens**, **145 sources**,
+zéro erreur ; `git diff --check` passe dans les deux dépôts.
+
+Sans migration, modification des droits, nouvelle table, nouveau secret ni impact
+sur les frontends Pro/Animation/Live ou le générateur. Le contrat OpenAPI CRM
+régénéré hors ligne reste identique au contrat canonique. Ce bilan distingue le
+code local de son déploiement : aucun commit, push ou changement de configuration
+TEST n’est réalisé dans cette demande.
