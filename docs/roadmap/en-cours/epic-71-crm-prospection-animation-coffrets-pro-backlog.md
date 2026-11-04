@@ -1,11 +1,11 @@
 # EPIC 71 — Localeo CRM, prospection Animation et Coffrets
 
-## Références et recadrage E71-EVOL-03
+## Références : socle E71-EVOL-03 et extension E71-EVOL-04
 
 - État produit : **En cours**, selon la [roadmap commune](../README.md).
 - Cadrage initial : 2 octobre 2026 ; décisions/imports E71-EVOL-01 et E71-EVOL-02 du 9 octobre ; **recadrage du 3 novembre 2026** à la demande utilisateur.
 - [Spécification canonique V1](../../specifications/epic-71-crm-prospection/README.md), [format d'import et gabarit](../../specifications/epic-71-crm-prospection/import-carte.md).
-- Phase présente : implémentation locale du CRM, migrations v290–v292 et vérification sur données synthétiques. Aucun déploiement, compte réel ou envoi fournisseur.
+- Socle : implémentation locale du CRM, migrations v290–v293 et vérification sur données synthétiques. Extension E71-EVOL-04 du 4 novembre : qualification structurée et import 2 implémentés localement, tests et limites dans le bilan. Aucun déploiement ou import réel dans cette phase.
 
 **Besoin actuel :** créer une application **Localeo CRM (PWA)** simple pour gérer la prospection commerciale et le suivi de la relation client sur les périmètres Animation et Coffrets. Saisir un prospect et ses contacts, suivre les échanges et étapes, prendre des notes et programmer des rappels WebPush/e-mail facultatif. Réutiliser les profils ERP avec des droits CRM distincts. Initialiser puis enrichir depuis un fichier produit par l'utilisateur depuis Excel, sans écraser le contexte existant.
 
@@ -43,7 +43,7 @@ Import XLSX Gironde et sections communales (CA-24), campagnes automatiques vers 
 
 ## Critères d'acceptation
 
-**Implémentation locale réalisée ; preuves et réserves dans le [bilan de vérification](../../specifications/epic-71-crm-prospection/verification-livraison.md).** 29 identifiants conservés/ajoutés, dont **28 actifs dans la V1 retenue** et **1 reporté**. CA-13 reste actif ; CA-24 n’est ni réutilisé pour un autre besoin ni coché comme réussi.
+**Socle : implémentation locale réalisée ; preuves et réserves dans le [bilan de vérification](../../specifications/epic-71-crm-prospection/verification-livraison.md).** Les 29 identifiants ci-dessous sont conservés (28 actifs, CA-24 reporté). E71-EVOL-04 ajoute ensuite CA-30 à 40 : au total **39 critères actifs et 1 reporté**, sans assimiler les nouveaux critères à des tests réussis.
 
 | Critère | Acteur / action | Résultat observable et refus attendu |
 | --- | --- | --- |
@@ -76,6 +76,44 @@ Import XLSX Gironde et sections communales (CA-24), campagnes automatiques vers 
 | E71-CA-27 | Activer/désactiver les rappels par e-mail | Désactivés initialement, destinataire interne seulement, envoi à l'échéance sans rattrapage massif ni fallback implicite ; tâche annulée/droit retiré/adresse modifiée empêche l'envoi encore en attente ; vérification et opt-in liés à la version courante de l'adresse |
 | E71-CA-28 | Utiliser le même modèle en INIT puis UPSERT | INIT ignore le prospect déjà connu ; UPSERT complète les vides non protégés et ajoute contacts/dossiers ; notes/statuts/responsables/rappels/oppositions conservés, absents non supprimés |
 | E71-CA-29 | Administrateur ERP attribue/retire les droits CRM | Cases consulter/gérer/importer/administrer distinctes et dépendances contrôlées ; aucun droit automatique sur compte non admin existant, menu et API immédiatement cohérents |
+
+## E71-EVOL-04 — qualification structurée, 4 novembre 2026
+
+Demande : intégrer les concepts du classeur de qualification comme attributs
+filtrables du CRM. [Spécification V1.2](../../specifications/epic-71-crm-prospection/qualification-structuree.md).
+Extension implémentée localement : domaine, API, SQL v293, PWA et CSV 2 ; tests synthétiques et limites dans le bilan. Aucun import réel ni déploiement.
+Le statut En cours et les preuves historiques E71-EVOL-03 sont conservés.
+
+- Attributs facultatifs sur prospect/contact/dossier ; évaluations datées et
+  relations explicites pour les faits qui ne sont pas une simple valeur courante.
+- Classification du potentiel calculée et sourcée, sans remplacer étape,
+  priorité, tâches, preuve de gain ou budget réel par une estimation de marché.
+- CSV standard format 2, avec protection des données et coexistence du
+  format 1. Pas de parseur spécifique XLSX/Gironde ; CA-24 reste reporté.
+- La restriction Nouvelle-Aquitaine demeure ; une appartenance territoriale ne
+  permet pas de créer un prospect EPCI à siège hors région sous une fausse commune.
+
+Les IDs 01–29 restent inchangés ; les impacts sur 07–14/15/19–23/28 concernent
+filtres, import, UX, droits et concurrence. Les critères suivants s’ajoutent sans
+déclarer la capacité intégralement acquise : **40 IDs, 39 actifs, 1 reporté** au total.
+
+| Critère ajouté | Acteur / action | Résultat observable et refus attendu |
+| --- | --- | --- |
+| E71-CA-30 | Gestionnaire renseigne nature/activité d’un prospect | Champs conditionnels, types et nomenclature explicites ; absence conservée, accueil public confirmé seulement avec date/preuve, aucune activation métier |
+| E71-CA-31 | Saisir/rechercher SIREN, SIRET ou identité communale | Unité personne morale/établissement distincte ; formats et préfixe cohérents, deux établissements d’un SIREN conservés, aucun rapprochement ou gain implicite |
+| E71-CA-32 | Ajouter et choisir une évaluation documentaire | Observation datée/sourcée, comptages cohérents, inconnus distincts de zéro ; référence explicite et classement serveur reproductible, aucune addition des cas incertains ou des canaux commune/EPCI |
+| E71-CA-33 | Enregistrer un contrôle terrain, corriger une observation ou ajouter une nouvelle source | Triplet nombre/date/preuve requis pour retenir le terrain ; brouillon visible mais non utilisé ; confirmé immuable, correction liée/historique, aucun remplacement automatique de la référence par un import |
+| E71-CA-34 | Qualifier personne/service/accueil et ses coordonnées | Rôle et fiabilité structurés ; vérification liée à la version courante avec preuve/date ; changement rend à revalider, aucun consentement ni portage de tous les dossiers déduit |
+| E71-CA-35 | Qualifier un dossier Animation | Besoin, porteur du même prospect, opération/calendrier et budget avec base HT/TTC et preuve ; inconnus non inventés, aucun passage Gagnée ou rappel automatique, champs refusés sur un dossier Coffrets |
+| E71-CA-36 | Associer commune/EPCI, couverture de projet et compétences | Relations typées sourcées et datées, membres distincts du siège et de la couverture ; un rattachement courant communal, compétences nuancées, aucune fiche hors région créée implicitement |
+| E71-CA-37 | Importer format 1 puis format 2, en INIT et UPSERT | Modèle/format explicites ; version 1 conservée ; blocs cohérents protégés, observations idempotentes et référence non écrasée ; groupe atomique et bilan, aucun historique/étape/tâche/opposition effacé |
+| E71-CA-38 | Filtrer et consulter liste/suivi/carte/fiches sur PC/mobile | Attributs filtrables côté serveur, une organisation unique, critères enfant sur le même enfant ; mêmes résultats entre surfaces, historique paginé, inconnus visibles, aucun score transmis aux tuiles |
+| E71-CA-39 | Modifier/confirmer/importer simultanément ou avec un droit retiré | Domaine commun, versions/idempotence, référence unique, plan obsolète refusé sans effet partiel ; droits et confidentialité conservés, notes indépendantes préservées |
+| E71-CA-40 | Migrer/restaurer/générer un jeu et livrer l’extension | Anciennes fiches et plans format 1 inchangés, aucune confirmation extraite de notes ; fixtures synthétiques, contrats/guides synchronisés et performances mesurées, reprise sans suppression des nouvelles données |
+
+La [matrice de vérification](../../specifications/epic-71-crm-prospection/verification-livraison.md#e71-evol-04--preuves-et-résultats)
+relie ces critères aux tests, documents, données synthétiques et opérations.
+Tests domaine, HTTP/PostgreSQL, navigateur, migration/restauration et charge exécutés localement ; résultats et réserves dans le bilan. L’epic reste En cours.
 
 ## Impacts et limites
 

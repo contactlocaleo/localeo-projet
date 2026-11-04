@@ -1,10 +1,10 @@
 # E71 — Architecture de Localeo CRM
 
-Conception **V1.1 du 3 novembre 2026**, non implémentée. [Périmètre](README.md), [parcours](parcours-regles.md), [import](import-carte.md), [preuves](verification-livraison.md). Application de l'[ADR domaine d'abord](../../architecture/decisions/ADR-2026-08-28-domaine-avant-services-applicatifs.md) et des [bornes de performance](../../architecture/transverse/performance-volumetrie.md).
+Conception V1.1 du 3 novembre 2026, étendue par **V1.2 du 4 novembre**. Implémentation locale et limites dans le bilan de vérification. [Périmètre](README.md), [parcours](parcours-regles.md), [import](import-carte.md), [preuves](verification-livraison.md). Application de l'[ADR domaine d'abord](../../architecture/decisions/ADR-2026-08-28-domaine-avant-services-applicatifs.md) et des [bornes de performance](../../architecture/transverse/performance-volumetrie.md).
 
-## Existant vérifié et implantation proposée
+## Existant au cadrage et implantation retenue
 
-Lecture du backend local `2e896ae`, sans base, configuration privée ou appel métier. Aucun domaine/API/table CRM implémenté trouvé dans `app/` et `sql/`. Les mentions d'import commerçants ne sont pas un CRM.
+Constat historique de cadrage sur `2e896ae` : aucun domaine/API/table CRM à cette date. Le CRM et l’extension sont désormais implémentés dans le backend ; le tableau suivant décrit les briques réutilisées au cadrage.
 
 | Source actuelle | Réutilisation et limite |
 | --- | --- |
@@ -39,9 +39,18 @@ flowchart LR
   IAM --> API
 ```
 
+## E71-EVOL-04 — extension de qualification implémentée
+
+La [spécification V1.2](qualification-structuree.md) complète ce socle avec les
+propriétaires des attributs d’identité/activité, observations de potentiel,
+preuves terrain, relations EPCI/couverture, fiabilité des contacts et projets
+Animation. Elle décrit les projections, versions/protections, index, migration
+additive et CSV format 2 en coexistence avec le format 1. Cette évolution dispose de ses API, domaine, persistance v293, PWA et import 2 ; les résultats historiques ci-dessous
+représentent le socle livré, pas la nouvelle extension.
+
 ## Domaine et invariants
 
-Nouveau domaine cible **prospection**, à enregistrer dans les index/tags et contrôles à l'implémentation. `app/domaine/prospection` décide ; `app/application/prospection` orchestre ; API, UI et workers présentent/adaptent. Pas d'ORM, fournisseur, session HTTP ou lecture d'environnement dans les règles pures.
+Domaine **prospection**, enregistré dans les index/tags et contrôles. `app/domaine/prospection` décide ; `app/application/prospection` orchestre ; API, UI et workers présentent/adaptent. Pas d'ORM, fournisseur, session HTTP ou lecture d'environnement dans les règles pures.
 
 | Propriétaire cible | Invariant et déclencheur | Entrées / preuve |
 | --- | --- | --- |

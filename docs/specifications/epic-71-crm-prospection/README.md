@@ -1,6 +1,6 @@
 # EPIC 71 — Localeo CRM, prospection Animation et Coffrets
 
-Spécification **V1.1 — 3 novembre 2026**, évolution **E71-EVOL-03**. [Backlog et critères](../../roadmap/en-cours/epic-71-crm-prospection-animation-coffrets-pro-backlog.md). État produit : **En cours** dans la [roadmap](../../roadmap/README.md). Implémentation locale en cours de vérification ; aucun déploiement. [Prise en main](guide-utilisateur.md), [exploitation](exploitation.md) et [preuves](verification-livraison.md).
+Spécification **V1.2 — 4 novembre 2026**, évolution **E71-EVOL-04** sur le socle V1.1/E71-EVOL-03. [Backlog et critères](../../roadmap/en-cours/epic-71-crm-prospection-animation-coffrets-pro-backlog.md). État produit : **En cours** dans la [roadmap](../../roadmap/README.md). Le socle et la qualification structurée disposent d’une implémentation locale ; les tests exécutés et les réserves de capacité sont détaillés dans le bilan. [Prise en main actuelle](guide-utilisateur.md), [exploitation](exploitation.md) et [preuves](verification-livraison.md).
 
 ## Objectif
 
@@ -28,6 +28,8 @@ Compléments recommandés inclus dans la conception : responsable et prochaine a
 | [Parcours et règles](parcours-regles.md) | Écrans, saisie rapide, étapes, notes, rappels, passage aux parcours métier |
 | [Import INIT / UPSERT](import-carte.md) | Colonnes, clés stables, exemples et protection des données existantes |
 | [Modèle CSV vide](modele-import.csv) | En-têtes exacts à remplir depuis Excel ; aucune donnée réelle |
+| [Qualification structurée — E71-EVOL-04](qualification-structuree.md) | Attributs de potentiel/terrain, identité légale, territoire, fiabilité des contacts et qualification des projets ; règles et contrats cibles |
+| [Modèle CSV format 2](modele-import-qualification-v2.csv) | 21 colonnes conservées et 64 facultatives/conditionnelles ; format 1 conservé par défaut, format 2 choisi explicitement |
 | [Architecture et contrats](architecture-contrats.md) | PWA, profils ERP, domaine, API, notifications, concurrence et capacité |
 | [Vérification et livraison](verification-livraison.md) | Tests exécutés et réserves, traçabilité, migrations et activation |
 
@@ -49,6 +51,27 @@ La carte est explicitement maintenue en V1. Le CSV standard seul et le report du
 
 ## Arbitrages et préparation
 
+### E71-EVOL-04 — qualification structurée, 4 novembre 2026
+
+La demande porte sur la spécification des concepts utiles du classeur comme
+attributs et relations : potentiel et évaluations datées, contrôle terrain,
+identité/nature des structures, appartenance EPCI, profil d’activité, fiabilité
+des contacts et projet Animation (porteur, besoin, calendrier et budget).
+Les attributs sont facultatifs, avec preuves conditionnelles pour déclarer un
+fait vérifié. Les inconnus ne deviennent pas zéro ou « non ». Le classement est
+calculé depuis l’évaluation de référence ; priorité et étape restent des décisions
+commerciales distinctes. Les évaluations successives ne remplacent pas les
+corrections humaines et le format 1 continue de fonctionner.
+
+Le [dictionnaire et les contrats](qualification-structuree.md) définissent la
+cible. **CA-30 à CA-40 sont ajoutés**, soit 40 identifiants dont 39 actifs et
+CA-24 toujours reporté. Les 28 critères actifs précédents et leurs preuves sont
+conservés ; les onze nouveaux critères sont implémentés localement et leurs preuves fonctionnelles/capacité sont consignées dans le bilan. La demande
+ne réalise ni migration ni import réel. La politique de conservation ARB-07
+reste une condition d’activation avec données réelles.
+
+### Arbitrages du socle conservés
+
 | Identifiant conservé | Décision ou proposition actuelle | Conséquence |
 | --- | --- | --- |
 | E71-ARB-01 | CSV standard seul en V1 confirmé ; format technique retenu : UTF-8 point-virgule, version 1, INIT/UPSERT, 10 Mio / 10 000 lignes | Modèle fourni ; aucun import XLSX direct ni parseur Gironde en V1 |
@@ -62,7 +85,7 @@ La carte est explicitement maintenue en V1. Le CSV standard seul et le report du
 | E71-ARB-08 | Acquis : ouvrir le parcours métier autorisé, puis rattacher son résultat | Aucune conversion automatique à l'import |
 | E71-ARB-09 | Actualisé le 4 novembre 2026 : adresse CRM dédiée demandée | `crm.localeo.city` / `test-crm.localeo.city`, même backend et chemins `/internal/crm/`. Même compte et mêmes droits ERP, connexion distincte par domaine ; anciens accès conservés. Activation DNS/HTTPS et `CRM_PUBLIC_ORIGIN` selon le [guide d'exploitation](exploitation.md#domaine-dédié) |
 
-Le périmètre V1 est spécifié pour être développé et testé sur données synthétiques. ARB-01 et ARB-04b sont confirmés ; la conservation ARB-07 conditionne l’activation avec données réelles. Le composant/fournisseur cartographique et sa configuration de couverture restent à sélectionner avant activation de la carte ; les cibles de performance sont à mesurer. La clôture repose sur les tests unitaires, d’intégration et fonctionnels des 28 critères actifs ; aucun pilote commercial ou compte rendu externe n’est requis pour cette clôture.
+Le périmètre V1 est spécifié pour être développé et testé sur données synthétiques. ARB-01 et ARB-04b sont confirmés ; la conservation ARB-07 conditionne l’activation avec données réelles. Le composant/fournisseur cartographique et sa configuration de couverture restent à sélectionner avant activation de la carte ; les cibles de performance sont à mesurer. La clôture porte sur les 39 critères actifs : 28 du socle et 11 de l’extension implémentée localement ; CA-24 reste reporté. Tests unitaires, intégration et fonctionnels requis, sans pilote commercial ni compte rendu externe obligatoire.
 
 ## Décisions confirmées et revue de finalisation
 

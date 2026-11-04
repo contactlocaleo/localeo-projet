@@ -1,6 +1,6 @@
 # Prendre en main Localeo CRM
 
-[Spécification](README.md) · [Format CSV](import-carte.md) · [Exploitation](exploitation.md).
+[Spécification](README.md) · [Qualification structurée](qualification-structuree.md) · [Format CSV](import-carte.md) · [Exploitation](exploitation.md).
 
 Localeo CRM suit vos relations commerciales Animation et Coffrets. Il utilise votre compte interne Localeo. Une fiche représente une structure ; ses contacts, échanges et dossiers restent réunis même lorsqu’elle s’intéresse aux deux offres.
 
@@ -39,6 +39,47 @@ suivi restent modifiables. Pour modifier leur adresse, code postal ou commune,
 sélectionnez une commune de Nouvelle-Aquitaine. Le serveur vérifie la commune
 sélectionnée dans le référentiel ; un code postal seul ne suffit pas.
 
+### Compléter la qualification progressivement
+
+La fiche propose **Compléter la qualification**, puis des sections repliables
+**Identité**, **Territoire**, **Évaluations du potentiel** et **Activité**. Renseignez
+seulement ce que vous connaissez : ces compléments restent facultatifs pour créer
+une fiche, noter un échange ou planifier un rappel. Un nombre inconnu reste vide ;
+**0** signifie un comptage effectivement nul.
+
+- **Identité et activité** : distinguez commune/EPCI, personne morale/établissement,
+  puis renseignez les identifiants et l’activité utiles. Un SIREN/SIRET saisi ne
+  certifie pas son existence ; une ressemblance demande un examen explicite.
+- **Contacts** : précisez personne, service ou accueil générique, rôle commercial
+  et fiabilité. **Vérifié** exige une date et une source. Modifier les coordonnées
+  peut imposer une nouvelle vérification ; ce statut ne lève aucune opposition.
+- **Projet Animation** : depuis son dossier, **Qualifier le projet** permet de
+  préciser besoin, contact porteur, prochaine opération, calendrier et budget.
+  Portage et budget confirmés demandent date et preuve ; un porteur **À revalider**
+  doit être revérifié. Sans dates, le calendrier reste « À qualifier ». Ces valeurs
+  concernent ce dossier ; elles ne changent ni son étape ni les autres dossiers.
+- **Potentiel** : créez une évaluation datée avec sa source, enregistrez un
+  brouillon partiel puis confirmez les blocs documentés. L’historique est paginé ;
+  sélectionnez deux observations pour les comparer. **Utiliser comme référence**
+  choisit séparément les **Comptages**, la **Population** ou les **Compétences**.
+  Une correction d’observation confirmée crée une révision et conserve l’original.
+  Le résumé affiche le comptage retenu, sa base documentaire/terrain, sa date et
+  son classement ; les nouvelles observations restent à examiner. Choisir la
+  référence d’un bloc marque ses observations actuelles comme examinées ;
+  leur historique reste conservé. Une nouvelle observation ou confirmation
+  postérieure réaffiche l’indicateur pour ce bloc.
+- **Territoire** : renseignez l’appartenance d’une commune à un EPCI avec sa date
+  d’effet et sa source ; un remplacement conserve l’historique. La fiche EPCI
+  présente ses membres actuels. Dans un dossier Animation, ajoutez ou retirez
+  les communes couvertes par lots de 100, ou remplacez explicitement la couverture.
+  Une ancienne référence devenue obsolète demande une observation correspondant
+  à la couverture actuelle. Cette couverture ne déplace pas le point sur la carte.
+
+Les **Autres filtres** de Prospects, Suivi et Carte permettent de cibler potentiel,
+territoire, activité, besoin, porteur, budget, fiabilité et données à examiner.
+Ils sont conservés dans l’URL. Les règles et preuves attendues sont détaillées
+dans la [qualification structurée](qualification-structuree.md).
+
 ## 3. Suivre les dossiers
 
 **Suivi** filtre les dossiers par périmètre et étape. Depuis un dossier, **Changer d’étape** accompagne sa progression : À contacter, En discussion, Proposition, Gagné, Perdu ou En pause.
@@ -73,16 +114,24 @@ contenu de note n’est transmis au fournisseur cartographique.
 
 ## 5. Importer votre fichier Excel
 
-Depuis **Aujourd’hui → Importer mes prospects**, téléchargez le modèle CSV. Exportez votre fichier Excel en UTF-8, séparateur `;`, avec les 21 colonnes du modèle et des références stables. La limite est de 10 Mio et 10 000 lignes. Le [dictionnaire complet](import-carte.md) fournit les valeurs et exemples.
+Depuis **Aujourd’hui → Importer mes prospects**, choisissez le **Format du fichier**
+puis téléchargez son modèle CSV. Le **format 1 reste sélectionné par défaut** et
+conserve ses 21 colonnes. Choisissez explicitement le **format 2** pour les
+compléments structurés : son [modèle](modele-import-qualification-v2.csv) comporte
+85 colonnes, dont 64 nouvelles facultatives. Vous pouvez omettre les colonnes
+facultatives ; il n’est pas nécessaire de remplir 85 cellules par prospect.
+Exportez depuis Excel en UTF-8, séparateur `;`, avec des références stables.
+La limite reste de 10 Mio et 10 000 lignes. Le [dictionnaire complet](import-carte.md)
+fournit les valeurs et exemples ; le choix INIT/UPSERT est indépendant du format.
 
 1. Créez une **source** stable, par exemple `prospection-gironde`, puis réutilisez-la pour chaque mise à jour du même fichier. Les boutons **Sources suivantes/précédentes** donnent accès aux autres sources en conservant votre sélection.
 2. Choisissez **INIT** pour créer uniquement les groupes inconnus ou **UPSERT** pour compléter les informations vides non protégées et ajouter des contacts/dossiers.
 3. Renseignez `code_insee` pour chaque nouveau prospect (commune de Nouvelle-Aquitaine). Choisissez le responsable des nouveaux dossiers et déposez le fichier. Aucun prospect n’est encore créé.
-4. Examinez l’aperçu et les ressemblances : rapprochez une fiche existante, confirmez une fiche distincte ou excluez le groupe. Les anomalies indiquent leur motif et les numéros des lignes CSV. Corrigez le fichier puis déposez un nouveau lot avec la même source si nécessaire. Si les données changent entre-temps, un nouvel examen est nécessaire.
+4. Examinez l’aperçu et les ressemblances : rapprochez une fiche existante, confirmez une fiche distincte ou excluez le groupe. Le format 2 distingue aussi compléments, valeurs conservées, observations et références proposées. Si plusieurs observations peuvent devenir la première référence d’un bloc, utilisez **Choisir la référence** pour ce bloc. Une référence déjà retenue reste conservée ; les nouvelles données seront à examiner dans la fiche. Les anomalies indiquent leur motif et les numéros des lignes CSV. Corrigez le fichier puis déposez un nouveau lot avec la même source si nécessaire. Si les données changent entre-temps, un nouvel examen est nécessaire.
 5. Confirmez le plan. Actualisez l’écran pour suivre le traitement en arrière-plan. Gardez l’URL directe `/internal/crm/imports/<identifiant>` et téléchargez son rapport. Cette destination est conservée après reconnexion.
 6. Un traitement interrompu peut être repris par son confirmateur ; les groupes déjà validés ne sont pas rejoués. Les autres personnes habilitées peuvent consulter le lot, mais les actions réservées au confirmateur ne leur sont pas proposées.
 
-UPSERT n’écrase pas les notes, étapes, responsables, rappels, oppositions ni les champs corrigés ou volontairement vidés à la main. L’absence d’une ligne dans le nouveau fichier ne supprime rien.
+UPSERT n’écrase pas les notes, étapes, responsables, rappels, oppositions ni les champs corrigés ou volontairement vidés à la main. Les statuts et leurs preuves sont conservés ensemble ; une cellule différente ne remplace pas un budget confirmé, un porteur ou une vérification de contact. L’absence d’une ligne dans le nouveau fichier ne supprime rien. En INIT, un prospect déjà connu par sa référence source est ignoré avec tout son groupe, y compris ses nouveaux compléments de qualification.
 
 ## 6. Régler les rappels et respecter les oppositions
 

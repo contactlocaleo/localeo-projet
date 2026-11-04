@@ -1,6 +1,6 @@
 # E71 — Parcours simples de Localeo CRM
 
-[Version V1 et arbitrages](README.md). Comportements cibles V1.1 du 3 novembre 2026, **non implémentés**.
+[Version V1 et arbitrages](README.md). Comportements V1.1 du 3 novembre 2026, implémentés localement ; la [qualification V1.2](qualification-structuree.md) les complète. Les tests et réserves sont dans le [bilan](verification-livraison.md).
 
 ## Navigation PC et mobile
 

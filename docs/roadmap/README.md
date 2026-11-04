@@ -129,10 +129,11 @@ actions et modalités restent à arbitrer. État **À faire**, sans implémentat
 Le 22 octobre, l'[EPIC 75 — Mots croisés assistés par l’IA](a-faire/epic-75-mots-croises-assistes-ia-backlog.md)
 cadre un nouveau jeu payant sur le modèle de la chasse : préparation assistée,
 grille contrôlée, parcours mobile, qualification et lots sur le socle commun.
-Huit US, dix-huit critères cibles et neuf groupes d'arbitrages, dont un résolu.
-Le 23 octobre sont confirmés les indices chez les commerçants, la préparation
-Localeo validée par l’organisateur et la grille correcte obligatoire pour le tirage.
-Tarif, quota et modalités restantes à décider. État **À faire**, sans implémentation.
+La [spécification V1 du 4 novembre](../specifications/epic-75-mots-croises-assistes-ia/README.md)
+conserve huit US et dix-huit critères, avec neuf arbitrages résolus : module
+190 € HT/12 mois/5 publications, préparation sous cinq jours ouvrés avec IA externe,
+grille correcte et tous les passages commerçants requis pour le tirage.
+Architecture, contrats et preuves attendues documentés. État **À faire**, sans implémentation.
 
 Le 22 octobre, l'[EPIC 74 — Tombola publique](en-cours/epic-74-tombola-publique-backlog.md)
 ajoute un cadrage distinct de la tombola commerçante E53 : modèle standard sans
@@ -180,11 +181,11 @@ précise la provenance et les divergences historiques conservées.
 | 35 | Terminee (historique) | Clôture conservée ; le cadrage non livré des nouveaux rôles est transféré à l'EPIC 69 sur demande explicite du 1er octobre. |
 | 69 | Terminee | [Profils et accès ERP/satellites](terminees/epic-69-profils-acces-erp-satellites-backlog.md) : clôture le 2 octobre après validation CA-18, 27 critères conservés ; recette cible et configuration dans le bilan. |
 | 70 | Terminée | [Validation sur téléphone client](terminees/epic-70-validation-prestation-telephone-client-backlog.md) : PIN dédié retenu, 34 critères ; contexte transactionnel, gestion commerçant du PIN et parcours client sans matériel ; risque résiduel borné par les droits, validité et révocation. |
-| 71 | En cours | [Localeo CRM PWA](en-cours/epic-71-crm-prospection-animation-coffrets-pro-backlog.md) : [spécification V1.1](../specifications/epic-71-crm-prospection/README.md) du 3 novembre, Animation/Coffrets, droits ERP distincts, notes/suivi/rappels, carte interactive, CSV INIT/UPSERT ; 28 critères actifs et 1 reporté ; implémentation locale, migrations v290–v292 et vérification, sans déploiement. |
+| 71 | En cours | [Localeo CRM PWA](en-cours/epic-71-crm-prospection-animation-coffrets-pro-backlog.md) : [spécification V1.2](../specifications/epic-71-crm-prospection/README.md) du 4 novembre ; socle et extension E71-EVOL-04 de qualification structurée/CSV 2 implémentés ; v293 appliquée sur TEST le 4 novembre, contrôles schéma réussis ; tests et mesures synthétiques documentés, réserves de capacité conservées ; 39 critères actifs et 1 reporté. |
 | 72 | Terminée | [Accès salariés Localeo Pro](terminees/epic-72-acces-salaries-validation-localeo-pro-backlog.md) : implémentation locale vérifiée, 22 critères ; option ERP, invitations, scanner et historique limités, conservation. |
 | 73 | Terminée | [Animation et/ou Coffrets](terminees/epic-73-animation-et-ou-coffrets-backlog.md) : 38 US, 63 critères et extensions vérifiés techniquement le 1er novembre 2026 selon E73-DEC-CLOTURE-TESTS ; preuves et activation séparées dans le bilan. |
 | 74 | En cours | [Tombola publique](en-cours/epic-74-tombola-publique-backlog.md) : spécification du 3 novembre ; QR partageable, inscription directe par e-mail et règlement, trois modes de lots, quota standard et suivi commune Live ; 8 US, 16 critères ; tests locaux réussis et v289 appliquée à TEST |
-| 75 | A faire | [Mots croisés assistés par l’IA](a-faire/epic-75-mots-croises-assistes-ia-backlog.md) : indices chez les commerçants, préparation Localeo validée par l’organisateur, grille correcte obligatoire pour le tirage ; 8 US, 18 critères cibles, huit groupes d’arbitrages ouverts ou partiels |
+| 75 | A faire | [Mots croisés assistés par l’IA](a-faire/epic-75-mots-croises-assistes-ia-backlog.md) : [spécification V1](../specifications/epic-75-mots-croises-assistes-ia/README.md) du 4 novembre ; 8 US, 18 critères, neuf arbitrages résolus ; module indépendant, IA externe/import, grille validée et passages commerçants obligatoires ; tests prévus, sans implémentation |
 | 76 | A faire | [Impersonification support Pro et Animation](a-faire/epic-76-impersonification-support-pro-animation-backlog.md) : accès temporaire depuis ERP, 18 critères cibles ; consultation par défaut et intervention explicite/tracée retenues, droits, actions et modalités à arbitrer, sans implémentation |
 | Autres identifiants du tronc commun | Terminees | Statut produit consolide conserve ; les anciennes mentions de stories a faire ne rouvrent pas ces epics. |
 

@@ -6,13 +6,13 @@ Commencer par le README du sujet, puis consulter ses règles, contrats et arbitr
 
 ## Priorités en cours et à cadrer
 
-- **À faire : EPIC 75**, [Mots croisés assistés par l’IA](../roadmap/a-faire/epic-75-mots-croises-assistes-ia-backlog.md) : nouveau jeu payant ; indices chez les commerçants, préparation Localeo validée par l’organisateur et grille correcte obligatoire pour le tirage confirmés le 23 octobre. 8 US et 18 critères cibles ; offre et modalités restantes à arbitrer, aucun dossier de spécification détaillée à ce stade.
+- **À faire : EPIC 75**, [Mots croisés assistés par l’IA](epic-75-mots-croises-assistes-ia/README.md) : spécification V1 du 4 novembre, 8 US, 18 critères et neuf arbitrages résolus ; module 190 € HT/12 mois/5 publications, IA externe puis import contrôlé, fiches chez les commerçants, grille correcte et tous les passages requis ; architecture et tests prévus, sans implémentation.
 
 - **À faire : EPIC 74**, [Tombola publique sans commerçant](epic-74-tombola-publique/README.md) : spécification V1 du 3 novembre, 8 US et 16 critères ; six arbitrages résolus. QR partageable, prénom/e-mail vérifié avant qualification, trois modes de lots, quota standard existant et suivi facultatif de commune dans Live. Contrats et tests prévus ; aucune implémentation ni activation.
 
 - **Terminée : EPIC 73**, [Animation et/ou Coffrets](epic-73-animation-et-ou-coffrets/README.md), spécification détaillée V1 du 17 octobre : 38 US, 63 critères, 147 décisions ; lots libres/QR/PIN, périmètres commerçants, modules/import/communication, parcours SaaS, migrations et reprise. Clôture technique le 1er novembre 2026 selon E73-DEC-CLOTURE-TESTS ; tests et extensions vérifiés, activation suivie séparément dans le bilan.
 
-- **En cours : EPIC 71**, [Localeo CRM PWA](epic-71-crm-prospection/README.md), V1 du 3 novembre : Animation/Coffrets, droits ERP distincts, contacts/notes/suivi, rappels WebPush/e-mail facultatif, carte interactive maintenue et CSV INIT/UPSERT protégeant le contexte ; 28 critères actifs, 1 reporté ; implémentation et vérification locales.
+- **En cours : EPIC 71**, [Localeo CRM PWA](epic-71-crm-prospection/README.md), spécification V1.2 du 4 novembre : socle Animation/Coffrets et extension E71-EVOL-04 de qualification structurée (potentiel, preuves terrain, identité/territoire, contacts, projet et CSV 2 compatible avec le format 1). 39 critères actifs et 1 reporté ; socle et onze critères de qualification implémentés localement ; preuves et réserves de capacité dans le bilan.
 
 - **Terminée : EPIC 70**, [validation par PIN sur téléphone client](epic-70-validation-pin/README.md), spécification V1 du 5 octobre : droits, contrats, concurrence QR/PIN, notifications et 34 critères reliés aux preuves ; clôture sur tests le 2 novembre 2026 selon E70-DEC-CLOTURE-TESTS, sans déploiement.
 - **Terminée : EPIC 72**, [accès salariés Localeo Pro](epic-72-acces-salaries/README.md), spécification V1 du 5 octobre : invitations, option ERP, isolation des droits, sessions et 22 critères ; implémentation et vérification locales après publication E70.
@@ -67,6 +67,7 @@ Commencer par le README du sujet, puis consulter ses règles, contrats et arbitr
 | 72 | [Accès salariés Localeo Pro](epic-72-acces-salaries/README.md) | Terminée sur tests le 1er novembre 2026 | Backend/ERP, Commerçant ; attribution des validations partagées |
 | 73 | [Animation et/ou Coffrets](epic-73-animation-et-ou-coffrets/README.md) | Terminée | Backend/ERP et satellites, Animation, Commerçant, Marketplace/Live |
 | 74 | [Tombola publique sans commerçant](epic-74-tombola-publique/README.md) | En cours | Backend/ERP, Animation, Marketplace/Live ; Pro pour remise et non-régression |
+| 75 | [Mots croisés assistés par l’IA](epic-75-mots-croises-assistes-ia/README.md) | À faire | Backend/ERP, Animation, Marketplace/Live, Pro ; préparation OnBoard et exploitation partagées |
 
 ## Contrats et historique
 

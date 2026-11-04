@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Localeo CRM — E71",
-    "version": "1.1"
+    "version": "1.2"
   },
   "paths": {
     "/internal/prospection/organisations": {
@@ -230,6 +230,321 @@
               ],
               "title": "Cursor"
             }
+          },
+          {
+            "name": "sous_type_collectivite",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "COMMUNE",
+                    "EPCI",
+                    "AUTRE_COLLECTIVITE"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Sous Type Collectivite"
+            }
+          },
+          {
+            "name": "nature_epci",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "CC",
+                    "CA",
+                    "CU",
+                    "METROPOLE",
+                    "AUTRE"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Nature Epci"
+            }
+          },
+          {
+            "name": "famille_animation",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "ALIMENTAIRE",
+                    "BOUTIQUES",
+                    "RESTAURATION",
+                    "BEAUTE_COIFFURE",
+                    "SERVICES_PROXIMITE",
+                    "GRANDE_SURFACE",
+                    "AUTRE"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Famille Animation"
+            }
+          },
+          {
+            "name": "classement",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "NON_EVALUE",
+                    "SOUS_SEUIL",
+                    "MUTUALISATION_A_ETUDIER",
+                    "PROSPECTION_COMMUNALE",
+                    "PROSPECTION_EPCI"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Classement"
+            }
+          },
+          {
+            "name": "base_comptage",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "DOCUMENTAIRE",
+                    "TERRAIN"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Base Comptage"
+            }
+          },
+          {
+            "name": "nb_commerces_min",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "maximum": 2147483647,
+                  "minimum": 0
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Nb Commerces Min"
+            }
+          },
+          {
+            "name": "nb_commerces_max",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "maximum": 2147483647,
+                  "minimum": 0
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Nb Commerces Max"
+            }
+          },
+          {
+            "name": "non_evalue",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Non Evalue"
+            }
+          },
+          {
+            "name": "epci_siren",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^[0-9]{9}$"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Epci Siren"
+            }
+          },
+          {
+            "name": "besoin_statut",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "A_QUALIFIER",
+                    "IDENTIFIE",
+                    "ABSENT"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Besoin Statut"
+            }
+          },
+          {
+            "name": "porteur_statut",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "A_RECHERCHER",
+                    "IDENTIFIE",
+                    "CONFIRME",
+                    "ABSENT",
+                    "A_REVALIDER"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Porteur Statut"
+            }
+          },
+          {
+            "name": "budget_statut",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "A_QUALIFIER",
+                    "CONFIRME",
+                    "ABSENT"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Budget Statut"
+            }
+          },
+          {
+            "name": "fiabilite_contact",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "A_QUALIFIER",
+                    "A_REVALIDER",
+                    "VERIFIE"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Fiabilite Contact"
+            }
+          },
+          {
+            "name": "nature_contact",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "PERSONNE",
+                    "SERVICE",
+                    "ACCUEIL_GENERIQUE",
+                    "A_QUALIFIER"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Nature Contact"
+            }
+          },
+          {
+            "name": "role_commercial",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "DECIDEUR",
+                    "PORTEUR_OPERATIONNEL",
+                    "RELAIS",
+                    "A_QUALIFIER"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Role Commercial"
+            }
+          },
+          {
+            "name": "a_examiner",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "A Examiner"
+            }
           }
         ],
         "responses": {
@@ -237,7 +552,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/PageOrganisationsPayload"
+                }
               }
             }
           },
@@ -290,7 +607,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/app__api__prospection_projection_schemas__OrganisationPayload"
+                }
               }
             }
           },
@@ -363,6 +682,105 @@
               "default": "",
               "title": "Telephone"
             }
+          },
+          {
+            "name": "siren",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^[0-9]{9}$"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Siren"
+            }
+          },
+          {
+            "name": "siret",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^[0-9]{14}$"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Siret"
+            }
+          },
+          {
+            "name": "niveau_identite",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Niveau Identite"
+            }
+          },
+          {
+            "name": "sous_type_collectivite",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Sous Type Collectivite"
+            }
+          },
+          {
+            "name": "insee",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Insee"
+            }
+          },
+          {
+            "name": "exclude_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Exclude Id"
+            }
           }
         ],
         "responses": {
@@ -370,7 +788,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/PageCandidatsPayload"
+                }
               }
             }
           },
@@ -416,7 +836,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/app__api__prospection_projection_schemas__OrganisationPayload"
+                }
               }
             }
           },
@@ -479,7 +901,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/app__api__prospection_projection_schemas__OrganisationPayload"
+                }
               }
             }
           },
@@ -553,7 +977,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/PageContactsPayload"
+                }
               }
             }
           },
@@ -616,7 +1042,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/ContactPayload"
+                }
               }
             }
           },
@@ -691,7 +1119,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/ContactPayload"
+                }
               }
             }
           },
@@ -830,6 +1260,103 @@
             }
           },
           {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 200
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Q"
+            }
+          },
+          {
+            "name": "etat",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": "ACTIF",
+              "title": "Etat"
+            }
+          },
+          {
+            "name": "insee",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Insee"
+            }
+          },
+          {
+            "name": "departement",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "16",
+                    "17",
+                    "19",
+                    "23",
+                    "24",
+                    "33",
+                    "40",
+                    "47",
+                    "64",
+                    "79",
+                    "86",
+                    "87"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Departement"
+            }
+          },
+          {
+            "name": "region",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "const": "75",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Region"
+            }
+          },
+          {
             "name": "limit",
             "in": "query",
             "required": false,
@@ -856,6 +1383,321 @@
               ],
               "title": "Cursor"
             }
+          },
+          {
+            "name": "sous_type_collectivite",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "COMMUNE",
+                    "EPCI",
+                    "AUTRE_COLLECTIVITE"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Sous Type Collectivite"
+            }
+          },
+          {
+            "name": "nature_epci",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "CC",
+                    "CA",
+                    "CU",
+                    "METROPOLE",
+                    "AUTRE"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Nature Epci"
+            }
+          },
+          {
+            "name": "famille_animation",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "ALIMENTAIRE",
+                    "BOUTIQUES",
+                    "RESTAURATION",
+                    "BEAUTE_COIFFURE",
+                    "SERVICES_PROXIMITE",
+                    "GRANDE_SURFACE",
+                    "AUTRE"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Famille Animation"
+            }
+          },
+          {
+            "name": "classement",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "NON_EVALUE",
+                    "SOUS_SEUIL",
+                    "MUTUALISATION_A_ETUDIER",
+                    "PROSPECTION_COMMUNALE",
+                    "PROSPECTION_EPCI"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Classement"
+            }
+          },
+          {
+            "name": "base_comptage",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "DOCUMENTAIRE",
+                    "TERRAIN"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Base Comptage"
+            }
+          },
+          {
+            "name": "nb_commerces_min",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "maximum": 2147483647,
+                  "minimum": 0
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Nb Commerces Min"
+            }
+          },
+          {
+            "name": "nb_commerces_max",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "maximum": 2147483647,
+                  "minimum": 0
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Nb Commerces Max"
+            }
+          },
+          {
+            "name": "non_evalue",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Non Evalue"
+            }
+          },
+          {
+            "name": "epci_siren",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^[0-9]{9}$"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Epci Siren"
+            }
+          },
+          {
+            "name": "besoin_statut",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "A_QUALIFIER",
+                    "IDENTIFIE",
+                    "ABSENT"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Besoin Statut"
+            }
+          },
+          {
+            "name": "porteur_statut",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "A_RECHERCHER",
+                    "IDENTIFIE",
+                    "CONFIRME",
+                    "ABSENT",
+                    "A_REVALIDER"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Porteur Statut"
+            }
+          },
+          {
+            "name": "budget_statut",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "A_QUALIFIER",
+                    "CONFIRME",
+                    "ABSENT"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Budget Statut"
+            }
+          },
+          {
+            "name": "fiabilite_contact",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "A_QUALIFIER",
+                    "A_REVALIDER",
+                    "VERIFIE"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Fiabilite Contact"
+            }
+          },
+          {
+            "name": "nature_contact",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "PERSONNE",
+                    "SERVICE",
+                    "ACCUEIL_GENERIQUE",
+                    "A_QUALIFIER"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Nature Contact"
+            }
+          },
+          {
+            "name": "role_commercial",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "DECIDEUR",
+                    "PORTEUR_OPERATIONNEL",
+                    "RELAIS",
+                    "A_QUALIFIER"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Role Commercial"
+            }
+          },
+          {
+            "name": "a_examiner",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "A Examiner"
+            }
           }
         ],
         "responses": {
@@ -863,7 +1705,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/PageOpportunitesPayload"
+                }
               }
             }
           },
@@ -916,7 +1760,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/OpportunitePayload"
+                }
               }
             }
           },
@@ -962,7 +1808,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/OpportunitePayload"
+                }
               }
             }
           },
@@ -1025,7 +1873,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/OpportunitePayload"
+                }
               }
             }
           },
@@ -1090,7 +1940,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/OpportunitePayload"
+                }
               }
             }
           },
@@ -1155,7 +2007,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/OpportunitePayload"
+                }
               }
             }
           },
@@ -1898,7 +2752,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/app__api__prospection_projection_schemas__OrganisationPayload"
+                }
               }
             }
           },
@@ -2398,6 +3254,321 @@
               "default": 5,
               "title": "Zoom"
             }
+          },
+          {
+            "name": "sous_type_collectivite",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "COMMUNE",
+                    "EPCI",
+                    "AUTRE_COLLECTIVITE"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Sous Type Collectivite"
+            }
+          },
+          {
+            "name": "nature_epci",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "CC",
+                    "CA",
+                    "CU",
+                    "METROPOLE",
+                    "AUTRE"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Nature Epci"
+            }
+          },
+          {
+            "name": "famille_animation",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "ALIMENTAIRE",
+                    "BOUTIQUES",
+                    "RESTAURATION",
+                    "BEAUTE_COIFFURE",
+                    "SERVICES_PROXIMITE",
+                    "GRANDE_SURFACE",
+                    "AUTRE"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Famille Animation"
+            }
+          },
+          {
+            "name": "classement",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "NON_EVALUE",
+                    "SOUS_SEUIL",
+                    "MUTUALISATION_A_ETUDIER",
+                    "PROSPECTION_COMMUNALE",
+                    "PROSPECTION_EPCI"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Classement"
+            }
+          },
+          {
+            "name": "base_comptage",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "DOCUMENTAIRE",
+                    "TERRAIN"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Base Comptage"
+            }
+          },
+          {
+            "name": "nb_commerces_min",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "maximum": 2147483647,
+                  "minimum": 0
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Nb Commerces Min"
+            }
+          },
+          {
+            "name": "nb_commerces_max",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "maximum": 2147483647,
+                  "minimum": 0
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Nb Commerces Max"
+            }
+          },
+          {
+            "name": "non_evalue",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Non Evalue"
+            }
+          },
+          {
+            "name": "epci_siren",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^[0-9]{9}$"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Epci Siren"
+            }
+          },
+          {
+            "name": "besoin_statut",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "A_QUALIFIER",
+                    "IDENTIFIE",
+                    "ABSENT"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Besoin Statut"
+            }
+          },
+          {
+            "name": "porteur_statut",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "A_RECHERCHER",
+                    "IDENTIFIE",
+                    "CONFIRME",
+                    "ABSENT",
+                    "A_REVALIDER"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Porteur Statut"
+            }
+          },
+          {
+            "name": "budget_statut",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "A_QUALIFIER",
+                    "CONFIRME",
+                    "ABSENT"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Budget Statut"
+            }
+          },
+          {
+            "name": "fiabilite_contact",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "A_QUALIFIER",
+                    "A_REVALIDER",
+                    "VERIFIE"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Fiabilite Contact"
+            }
+          },
+          {
+            "name": "nature_contact",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "PERSONNE",
+                    "SERVICE",
+                    "ACCUEIL_GENERIQUE",
+                    "A_QUALIFIER"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Nature Contact"
+            }
+          },
+          {
+            "name": "role_commercial",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "DECIDEUR",
+                    "PORTEUR_OPERATIONNEL",
+                    "RELAIS",
+                    "A_QUALIFIER"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Role Commercial"
+            }
+          },
+          {
+            "name": "a_examiner",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "A Examiner"
+            }
           }
         ],
         "responses": {
@@ -2543,7 +3714,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/app__api__prospection_projection_schemas__OrganisationPayload"
+                }
               }
             }
           },
@@ -2755,7 +3928,1054 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/PageCandidatsPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/prospection/organisations/{id}/evaluations": {
+      "get": {
+        "tags": [
+          "Prospection"
+        ],
+        "summary": "Evaluations",
+        "operationId": "evaluations_internal_prospection_organisations__id__evaluations_get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2000
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "perimetre_territorial",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Perimetre Territorial"
+            }
+          },
+          {
+            "name": "projet_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Projet Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageEvaluationsPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Prospection"
+        ],
+        "summary": "Creer Evaluation",
+        "operationId": "creer_evaluation_internal_prospection_organisations__id__evaluations_post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EvaluationInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluationPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/prospection/organisations/{id}/evaluations/{evaluation_id}": {
+      "get": {
+        "tags": [
+          "Prospection"
+        ],
+        "summary": "Evaluation",
+        "operationId": "evaluation_internal_prospection_organisations__id__evaluations__evaluation_id__get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "evaluation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Evaluation Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluationPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Prospection"
+        ],
+        "summary": "Modifier Evaluation",
+        "operationId": "modifier_evaluation_internal_prospection_organisations__id__evaluations__evaluation_id__patch",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "evaluation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Evaluation Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EvaluationModificationInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluationPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/prospection/organisations/{id}/evaluations/{evaluation_id}/confirmation": {
+      "post": {
+        "tags": [
+          "Prospection"
+        ],
+        "summary": "Confirmer Evaluation",
+        "operationId": "confirmer_evaluation_internal_prospection_organisations__id__evaluations__evaluation_id__confirmation_post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "evaluation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Evaluation Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VersionQualificationInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluationPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/prospection/organisations/{id}/evaluations/{evaluation_id}/correction": {
+      "post": {
+        "tags": [
+          "Prospection"
+        ],
+        "summary": "Corriger Evaluation",
+        "operationId": "corriger_evaluation_internal_prospection_organisations__id__evaluations__evaluation_id__correction_post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "evaluation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Evaluation Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EvaluationModificationInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluationPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/prospection/organisations/{id}/evaluation-reference": {
+      "get": {
+        "tags": [
+          "Prospection"
+        ],
+        "summary": "References",
+        "operationId": "references_internal_prospection_organisations__id__evaluation_reference_get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "projet_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Projet Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReferencesPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Prospection"
+        ],
+        "summary": "Choisir Reference",
+        "operationId": "choisir_reference_internal_prospection_organisations__id__evaluation_reference_put",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReferenceEvaluationInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChoixReferencePayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/prospection/organisations/{id}/appartenance": {
+      "get": {
+        "tags": [
+          "Prospection"
+        ],
+        "summary": "Appartenance",
+        "operationId": "appartenance_internal_prospection_organisations__id__appartenance_get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/AppartenancePayload"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "title": "Response Appartenance Internal Prospection Organisations  Id  Appartenance Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Prospection"
+        ],
+        "summary": "Modifier Appartenance",
+        "operationId": "modifier_appartenance_internal_prospection_organisations__id__appartenance_put",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AppartenanceInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppartenanceModifieePayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/prospection/organisations/{id}/membres": {
+      "get": {
+        "tags": [
+          "Prospection"
+        ],
+        "summary": "Membres",
+        "operationId": "membres_internal_prospection_organisations__id__membres_get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2000
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageMembresPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/prospection/opportunites/{id}/qualification": {
+      "get": {
+        "tags": [
+          "Prospection"
+        ],
+        "summary": "Qualification Projet",
+        "operationId": "qualification_projet_internal_prospection_opportunites__id__qualification_get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QualificationProjetPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Prospection"
+        ],
+        "summary": "Modifier Qualification Projet",
+        "operationId": "modifier_qualification_projet_internal_prospection_opportunites__id__qualification_put",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QualificationProjetMutation"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjetQualifiePayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/prospection/opportunites/{id}/couverture": {
+      "get": {
+        "tags": [
+          "Prospection"
+        ],
+        "summary": "Couverture Projet",
+        "operationId": "couverture_projet_internal_prospection_opportunites__id__couverture_get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2000
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CouverturePayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Prospection"
+        ],
+        "summary": "Modifier Couverture Projet",
+        "operationId": "modifier_couverture_projet_internal_prospection_opportunites__id__couverture_put",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CouvertureInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CouvertureModifieePayload"
+                }
               }
             }
           },
@@ -3247,6 +5467,20 @@
         ],
         "summary": "Modele",
         "operationId": "modele_internal_prospection_imports_modele_csv_get",
+        "parameters": [
+          {
+            "name": "format_version",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 2,
+              "minimum": 1,
+              "default": 1,
+              "title": "Format Version"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -3257,7 +5491,7 @@
             }
           },
           "422": {
-            "description": "Erreur de validation",
+            "description": "Validation Error",
             "content": {
               "application/json": {
                 "schema": {
@@ -4105,6 +6339,156 @@
         ],
         "title": "ApiErrorResponse"
       },
+      "AppartenanceInput": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Expected Version"
+          },
+          "epci_siren": {
+            "type": "string",
+            "pattern": "^[0-9]{9}$",
+            "title": "Epci Siren"
+          },
+          "debut": {
+            "type": "string",
+            "format": "date",
+            "title": "Debut"
+          },
+          "source_reference": {
+            "type": "string",
+            "maxLength": 500,
+            "minLength": 1,
+            "title": "Source Reference"
+          },
+          "source_date": {
+            "type": "string",
+            "format": "date",
+            "title": "Source Date"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "epci_siren",
+          "debut",
+          "source_reference",
+          "source_date"
+        ],
+        "title": "AppartenanceInput"
+      },
+      "AppartenanceModifieePayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "appartenance": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AppartenancePayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "resume_potentiel": {
+            "$ref": "#/components/schemas/PotentielPayload"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "version",
+          "appartenance",
+          "resume_potentiel"
+        ],
+        "title": "AppartenanceModifieePayload"
+      },
+      "AppartenancePayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "commune_insee": {
+            "type": "string",
+            "title": "Commune Insee"
+          },
+          "epci_siren": {
+            "type": "string",
+            "title": "Epci Siren"
+          },
+          "debut": {
+            "type": "string",
+            "format": "date",
+            "title": "Debut"
+          },
+          "fin": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fin"
+          },
+          "date_debut": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date Debut"
+          },
+          "source_reference": {
+            "type": "string",
+            "title": "Source Reference"
+          },
+          "source_date": {
+            "type": "string",
+            "format": "date",
+            "title": "Source Date"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "commune_insee",
+          "epci_siren",
+          "debut",
+          "source_reference",
+          "source_date",
+          "version",
+          "created_at"
+        ],
+        "title": "AppartenancePayload"
+      },
       "Archivage": {
         "properties": {
           "expected_version": {
@@ -4147,7 +6531,7 @@
           },
           "format_version": {
             "type": "integer",
-            "maximum": 1.0,
+            "maximum": 2.0,
             "minimum": 1.0,
             "title": "Format Version",
             "default": 1
@@ -4221,6 +6605,226 @@
         ],
         "title": "CandidatImportPayload"
       },
+      "CandidatPayload": {
+        "properties": {
+          "id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Id"
+          },
+          "organisation_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Organisation Id"
+          },
+          "nom": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nom"
+          },
+          "titre": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Titre"
+          },
+          "commune": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Commune"
+          },
+          "email": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Email"
+          },
+          "telephone": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Telephone"
+          },
+          "perimetre": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Perimetre"
+          },
+          "objectif": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Objectif"
+          },
+          "version": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Version"
+          }
+        },
+        "type": "object",
+        "title": "CandidatPayload"
+      },
+      "ChoixReferencePayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "organisation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Organisation Id"
+          },
+          "perimetre_territorial": {
+            "type": "string",
+            "enum": [
+              "COMMUNE",
+              "MEMBRES_NOUVELLE_AQUITAINE",
+              "COUVERTURE_PROJET"
+            ],
+            "title": "Perimetre Territorial"
+          },
+          "projet_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Projet Id"
+          },
+          "bloc": {
+            "type": "string",
+            "enum": [
+              "COMPTAGES",
+              "POPULATION",
+              "COMPETENCES"
+            ],
+            "title": "Bloc"
+          },
+          "evaluation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Evaluation Id"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "projection": {
+            "$ref": "#/components/schemas/PotentielPayload"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At"
+          },
+          "etat": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "COURANTE",
+                  "OBSOLETE"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Etat"
+          },
+          "resume_potentiel": {
+            "$ref": "#/components/schemas/PotentielPayload"
+          },
+          "appartenance": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AppartenancePayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "organisation_id",
+          "perimetre_territorial",
+          "bloc",
+          "evaluation_id",
+          "version",
+          "projection",
+          "updated_at",
+          "resume_potentiel"
+        ],
+        "title": "ChoixReferencePayload"
+      },
       "ClesPush": {
         "properties": {
           "p256dh": {
@@ -4245,6 +6849,30 @@
           "auth"
         ],
         "title": "ClesPush"
+      },
+      "CommuneCouvertePayload": {
+        "properties": {
+          "projet_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Projet Id"
+          },
+          "commune_insee": {
+            "type": "string",
+            "title": "Commune Insee"
+          },
+          "insee": {
+            "type": "string",
+            "title": "Insee"
+          }
+        },
+        "type": "object",
+        "required": [
+          "projet_id",
+          "commune_insee",
+          "insee"
+        ],
+        "title": "CommuneCouvertePayload"
       },
       "ConfirmationImportPayload": {
         "properties": {
@@ -4329,6 +6957,16 @@
               }
             ],
             "title": "Telephone"
+          },
+          "qualification": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/QualificationContactInput"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "additionalProperties": false,
@@ -4403,6 +7041,16 @@
             ],
             "title": "Telephone"
           },
+          "qualification": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/QualificationContactInput"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "etat": {
             "anyOf": [
               {
@@ -4421,6 +7069,281 @@
           "expected_version"
         ],
         "title": "ContactPatch"
+      },
+      "ContactPayload": {
+        "properties": {
+          "id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Id"
+          },
+          "organisation_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Organisation Id"
+          },
+          "nom": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nom"
+          },
+          "fonction": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fonction"
+          },
+          "email": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Email"
+          },
+          "telephone": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Telephone"
+          },
+          "etat": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Etat"
+          },
+          "version": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Version"
+          },
+          "created_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created At"
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated At"
+          },
+          "champs_proteges": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Champs Proteges"
+          },
+          "qualification": {
+            "$ref": "#/components/schemas/QualificationContactPayload"
+          }
+        },
+        "type": "object",
+        "title": "ContactPayload"
+      },
+      "CouvertureInput": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Expected Version"
+          },
+          "communes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 100,
+            "title": "Communes"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "REMPLACER",
+              "AJOUTER",
+              "RETIRER"
+            ],
+            "title": "Mode",
+            "default": "REMPLACER"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "communes"
+        ],
+        "title": "CouvertureInput"
+      },
+      "CouvertureModifieePayload": {
+        "properties": {
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "couverture_version": {
+            "type": "integer",
+            "title": "Couverture Version"
+          },
+          "empreinte": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Empreinte"
+          }
+        },
+        "type": "object",
+        "required": [
+          "version",
+          "couverture_version"
+        ],
+        "title": "CouvertureModifieePayload"
+      },
+      "CouverturePayload": {
+        "properties": {
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "couverture_version": {
+            "type": "integer",
+            "title": "Couverture Version"
+          },
+          "empreinte": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Empreinte"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "organisation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Organisation Id"
+          },
+          "perimetre": {
+            "type": "string",
+            "title": "Perimetre"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/CommuneCouvertePayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More",
+            "default": false
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          },
+          "references": {
+            "items": {
+              "$ref": "#/components/schemas/ReferencePayload"
+            },
+            "type": "array",
+            "title": "References"
+          },
+          "resume_potentiel": {
+            "$ref": "#/components/schemas/PotentielPayload"
+          }
+        },
+        "type": "object",
+        "required": [
+          "version",
+          "couverture_version",
+          "id",
+          "organisation_id",
+          "perimetre",
+          "items",
+          "references",
+          "resume_potentiel"
+        ],
+        "title": "CouverturePayload"
       },
       "CreationDossier": {
         "properties": {
@@ -4506,7 +7429,8 @@
             "enum": [
               "ORGANISATION",
               "CONTACT",
-              "DOSSIER"
+              "DOSSIER",
+              "REFERENCE"
             ],
             "title": "Type Objet",
             "default": "ORGANISATION"
@@ -4522,9 +7446,22 @@
             "enum": [
               "EXCLURE",
               "RAPPROCHER",
-              "CONFIRMER_DISTINCT"
+              "CONFIRMER_DISTINCT",
+              "UTILISER_REFERENCE"
             ],
             "title": "Choix"
+          },
+          "evaluation_ref": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 64
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Evaluation Ref"
           },
           "cible_id": {
             "anyOf": [
@@ -4680,6 +7617,1170 @@
         ],
         "title": "DossierPatch"
       },
+      "EvaluationInput": {
+        "properties": {
+          "date_observation": {
+            "type": "string",
+            "format": "date",
+            "title": "Date Observation"
+          },
+          "source_libelle": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Source Libelle"
+          },
+          "source_reference": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 500
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Reference"
+          },
+          "source_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Date"
+          },
+          "perimetre_territorial": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "COMMUNE",
+                  "MEMBRES_NOUVELLE_AQUITAINE",
+                  "COUVERTURE_PROJET"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Perimetre Territorial"
+          },
+          "projet_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Projet Id"
+          },
+          "etat": {
+            "type": "string",
+            "enum": [
+              "BROUILLON",
+              "CONFIRMEE"
+            ],
+            "title": "Etat",
+            "default": "BROUILLON"
+          },
+          "nb_commerces_documentaires": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 2147483647.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nb Commerces Documentaires"
+          },
+          "nb_cas_a_verifier": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 2147483647.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nb Cas A Verifier"
+          },
+          "nb_actifs_tous_secteurs": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 2147483647.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nb Actifs Tous Secteurs"
+          },
+          "nb_alimentaire": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 2147483647.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nb Alimentaire"
+          },
+          "nb_boutiques": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 2147483647.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nb Boutiques"
+          },
+          "nb_restauration": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 2147483647.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nb Restauration"
+          },
+          "nb_beaute_coiffure": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 2147483647.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nb Beaute Coiffure"
+          },
+          "nb_services_proximite": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 2147483647.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nb Services Proximite"
+          },
+          "nb_grandes_surfaces": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 2147483647.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nb Grandes Surfaces"
+          },
+          "population": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 2147483647.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Population"
+          },
+          "population_annee": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1900.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Population Annee"
+          },
+          "population_source_ref": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 500
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Population Source Ref"
+          },
+          "population_source_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Population Source Date"
+          },
+          "nb_commerces_terrain": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 2147483647.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nb Commerces Terrain"
+          },
+          "controle_terrain_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Controle Terrain Date"
+          },
+          "controle_terrain_preuve_ref": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 500
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Controle Terrain Preuve Ref"
+          },
+          "competence_commerce": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "OUI",
+                  "NON",
+                  "INTERET_COMMUNAUTAIRE",
+                  "INCONNUE"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Competence Commerce"
+          },
+          "competence_tourisme": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "OUI",
+                  "NON",
+                  "INTERET_COMMUNAUTAIRE",
+                  "INCONNUE"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Competence Tourisme"
+          },
+          "competence_marches": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "OUI",
+                  "NON",
+                  "INTERET_COMMUNAUTAIRE",
+                  "INCONNUE"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Competence Marches"
+          },
+          "competences_source_ref": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 500
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Competences Source Ref"
+          },
+          "competences_source_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Competences Source Date"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "date_observation",
+          "source_libelle"
+        ],
+        "title": "EvaluationInput"
+      },
+      "EvaluationModificationInput": {
+        "properties": {
+          "date_observation": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date Observation"
+          },
+          "source_libelle": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 200,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Libelle"
+          },
+          "source_reference": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 500
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Reference"
+          },
+          "source_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Date"
+          },
+          "perimetre_territorial": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "COMMUNE",
+                  "MEMBRES_NOUVELLE_AQUITAINE",
+                  "COUVERTURE_PROJET"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Perimetre Territorial"
+          },
+          "projet_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Projet Id"
+          },
+          "etat": {
+            "type": "string",
+            "enum": [
+              "BROUILLON",
+              "CONFIRMEE"
+            ],
+            "title": "Etat",
+            "default": "BROUILLON"
+          },
+          "nb_commerces_documentaires": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 2147483647.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nb Commerces Documentaires"
+          },
+          "nb_cas_a_verifier": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 2147483647.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nb Cas A Verifier"
+          },
+          "nb_actifs_tous_secteurs": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 2147483647.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nb Actifs Tous Secteurs"
+          },
+          "nb_alimentaire": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 2147483647.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nb Alimentaire"
+          },
+          "nb_boutiques": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 2147483647.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nb Boutiques"
+          },
+          "nb_restauration": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 2147483647.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nb Restauration"
+          },
+          "nb_beaute_coiffure": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 2147483647.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nb Beaute Coiffure"
+          },
+          "nb_services_proximite": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 2147483647.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nb Services Proximite"
+          },
+          "nb_grandes_surfaces": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 2147483647.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nb Grandes Surfaces"
+          },
+          "population": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 2147483647.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Population"
+          },
+          "population_annee": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1900.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Population Annee"
+          },
+          "population_source_ref": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 500
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Population Source Ref"
+          },
+          "population_source_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Population Source Date"
+          },
+          "nb_commerces_terrain": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 2147483647.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nb Commerces Terrain"
+          },
+          "controle_terrain_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Controle Terrain Date"
+          },
+          "controle_terrain_preuve_ref": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 500
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Controle Terrain Preuve Ref"
+          },
+          "competence_commerce": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "OUI",
+                  "NON",
+                  "INTERET_COMMUNAUTAIRE",
+                  "INCONNUE"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Competence Commerce"
+          },
+          "competence_tourisme": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "OUI",
+                  "NON",
+                  "INTERET_COMMUNAUTAIRE",
+                  "INCONNUE"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Competence Tourisme"
+          },
+          "competence_marches": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "OUI",
+                  "NON",
+                  "INTERET_COMMUNAUTAIRE",
+                  "INCONNUE"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Competence Marches"
+          },
+          "competences_source_ref": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 500
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Competences Source Ref"
+          },
+          "competences_source_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Competences Source Date"
+          },
+          "expected_version": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Expected Version"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version"
+        ],
+        "title": "EvaluationModificationInput"
+      },
+      "EvaluationPayload": {
+        "properties": {
+          "date_observation": {
+            "type": "string",
+            "format": "date",
+            "title": "Date Observation"
+          },
+          "source_libelle": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Source Libelle"
+          },
+          "source_reference": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 500
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Reference"
+          },
+          "source_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Date"
+          },
+          "perimetre_territorial": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "COMMUNE",
+                  "MEMBRES_NOUVELLE_AQUITAINE",
+                  "COUVERTURE_PROJET"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Perimetre Territorial"
+          },
+          "projet_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Projet Id"
+          },
+          "etat": {
+            "type": "string",
+            "enum": [
+              "BROUILLON",
+              "CONFIRMEE"
+            ],
+            "title": "Etat",
+            "default": "BROUILLON"
+          },
+          "nb_commerces_documentaires": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 2147483647.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nb Commerces Documentaires"
+          },
+          "nb_cas_a_verifier": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 2147483647.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nb Cas A Verifier"
+          },
+          "nb_actifs_tous_secteurs": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 2147483647.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nb Actifs Tous Secteurs"
+          },
+          "nb_alimentaire": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 2147483647.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nb Alimentaire"
+          },
+          "nb_boutiques": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 2147483647.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nb Boutiques"
+          },
+          "nb_restauration": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 2147483647.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nb Restauration"
+          },
+          "nb_beaute_coiffure": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 2147483647.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nb Beaute Coiffure"
+          },
+          "nb_services_proximite": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 2147483647.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nb Services Proximite"
+          },
+          "nb_grandes_surfaces": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 2147483647.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nb Grandes Surfaces"
+          },
+          "population": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 2147483647.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Population"
+          },
+          "population_annee": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1900.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Population Annee"
+          },
+          "population_source_ref": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 500
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Population Source Ref"
+          },
+          "population_source_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Population Source Date"
+          },
+          "nb_commerces_terrain": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 2147483647.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nb Commerces Terrain"
+          },
+          "controle_terrain_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Controle Terrain Date"
+          },
+          "controle_terrain_preuve_ref": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 500
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Controle Terrain Preuve Ref"
+          },
+          "competence_commerce": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "OUI",
+                  "NON",
+                  "INTERET_COMMUNAUTAIRE",
+                  "INCONNUE"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Competence Commerce"
+          },
+          "competence_tourisme": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "OUI",
+                  "NON",
+                  "INTERET_COMMUNAUTAIRE",
+                  "INCONNUE"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Competence Tourisme"
+          },
+          "competence_marches": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "OUI",
+                  "NON",
+                  "INTERET_COMMUNAUTAIRE",
+                  "INCONNUE"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Competence Marches"
+          },
+          "competences_source_ref": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 500
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Competences Source Ref"
+          },
+          "competences_source_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Competences Source Date"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "organisation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Organisation Id"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "correction_de": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Correction De"
+          },
+          "couverture_empreinte": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Couverture Empreinte"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At"
+          },
+          "blocs_disponibles": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "COMPTAGES",
+                "POPULATION",
+                "COMPETENCES"
+              ]
+            },
+            "type": "array",
+            "title": "Blocs Disponibles"
+          }
+        },
+        "type": "object",
+        "required": [
+          "date_observation",
+          "source_libelle",
+          "id",
+          "organisation_id",
+          "version",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "EvaluationPayload"
+      },
       "Evenement": {
         "properties": {
           "type": {
@@ -4805,6 +8906,193 @@
           "insee"
         ],
         "title": "Localisation"
+      },
+      "OpportunitePayload": {
+        "properties": {
+          "id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Id"
+          },
+          "organisation_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Organisation Id"
+          },
+          "titre": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Titre"
+          },
+          "perimetre": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Perimetre"
+          },
+          "objectif": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Objectif"
+          },
+          "responsable_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Responsable Id"
+          },
+          "etape": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Etape"
+          },
+          "priorite": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Priorite"
+          },
+          "motif": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motif"
+          },
+          "reexamen_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reexamen At"
+          },
+          "version": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Version"
+          },
+          "created_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created At"
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated At"
+          },
+          "qualification": {
+            "$ref": "#/components/schemas/QualificationProjetPayload"
+          },
+          "champs_proteges": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Champs Proteges"
+          },
+          "couverture_version": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Couverture Version"
+          },
+          "couverture_empreinte": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Couverture Empreinte"
+          }
+        },
+        "type": "object",
+        "title": "OpportunitePayload"
       },
       "Opposition": {
         "properties": {
@@ -4973,6 +9261,16 @@
               }
             ]
           },
+          "qualification": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/QualificationOrganisationInput"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "confirmer_distinct": {
             "type": "boolean",
             "title": "Confirmer Distinct",
@@ -5133,6 +9431,16 @@
               }
             ],
             "title": "Source"
+          },
+          "qualification": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/QualificationOrganisationInput"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "additionalProperties": false,
@@ -5141,6 +9449,432 @@
           "expected_version"
         ],
         "title": "OrganisationPatch"
+      },
+      "PageCandidatsPayload": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/CandidatPayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More",
+            "default": false
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          }
+        },
+        "type": "object",
+        "title": "PageCandidatsPayload"
+      },
+      "PageContactsPayload": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ContactPayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More",
+            "default": false
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          }
+        },
+        "type": "object",
+        "title": "PageContactsPayload"
+      },
+      "PageEvaluationsPayload": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/EvaluationPayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More",
+            "default": false
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items"
+        ],
+        "title": "PageEvaluationsPayload"
+      },
+      "PageMembresPayload": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/AppartenancePayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More",
+            "default": false
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items"
+        ],
+        "title": "PageMembresPayload"
+      },
+      "PageOpportunitesPayload": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/OpportunitePayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More",
+            "default": false
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          }
+        },
+        "type": "object",
+        "title": "PageOpportunitesPayload"
+      },
+      "PageOrganisationsPayload": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/app__api__prospection_projection_schemas__OrganisationPayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More",
+            "default": false
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          }
+        },
+        "type": "object",
+        "title": "PageOrganisationsPayload"
+      },
+      "PotentielPayload": {
+        "properties": {
+          "classement": {
+            "type": "string",
+            "enum": [
+              "NON_EVALUE",
+              "SOUS_SEUIL",
+              "MUTUALISATION_A_ETUDIER",
+              "PROSPECTION_COMMUNALE",
+              "PROSPECTION_EPCI"
+            ],
+            "title": "Classement",
+            "default": "NON_EVALUE"
+          },
+          "base": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "DOCUMENTAIRE",
+                  "TERRAIN"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Base"
+          },
+          "valeur": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Valeur"
+          },
+          "date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date"
+          },
+          "source": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source"
+          },
+          "regle_version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Regle Version"
+          },
+          "obsolete": {
+            "type": "boolean",
+            "title": "Obsolete",
+            "default": false
+          },
+          "date_observation": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date Observation"
+          },
+          "source_libelle": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Libelle"
+          },
+          "couverture_empreinte": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Couverture Empreinte"
+          },
+          "population": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Population"
+          },
+          "population_annee": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Population Annee"
+          },
+          "population_source_ref": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Population Source Ref"
+          },
+          "population_source_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Population Source Date"
+          },
+          "competence_commerce": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Competence Commerce"
+          },
+          "competence_tourisme": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Competence Tourisme"
+          },
+          "competence_marches": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Competence Marches"
+          },
+          "competences_source_ref": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Competences Source Ref"
+          },
+          "competences_source_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Competences Source Date"
+          },
+          "reference_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reference Id"
+          },
+          "reference_version": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reference Version"
+          },
+          "a_examiner": {
+            "type": "boolean",
+            "title": "A Examiner",
+            "default": false
+          }
+        },
+        "type": "object",
+        "title": "PotentielPayload"
       },
       "PreferencesRappels": {
         "properties": {
@@ -5167,6 +9901,1109 @@
         ],
         "title": "PreferencesRappels"
       },
+      "ProjetQualifiePayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "organisation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Organisation Id"
+          },
+          "titre": {
+            "type": "string",
+            "title": "Titre"
+          },
+          "perimetre": {
+            "type": "string",
+            "title": "Perimetre"
+          },
+          "objectif": {
+            "type": "string",
+            "title": "Objectif"
+          },
+          "responsable_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Responsable Id"
+          },
+          "etape": {
+            "type": "string",
+            "title": "Etape"
+          },
+          "priorite": {
+            "type": "string",
+            "title": "Priorite"
+          },
+          "motif": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motif"
+          },
+          "reexamen_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reexamen At"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At"
+          },
+          "qualification": {
+            "$ref": "#/components/schemas/QualificationProjetPayload"
+          },
+          "champs_proteges": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Champs Proteges"
+          },
+          "couverture_version": {
+            "type": "integer",
+            "title": "Couverture Version"
+          },
+          "couverture_empreinte": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Couverture Empreinte"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "organisation_id",
+          "titre",
+          "perimetre",
+          "objectif",
+          "etape",
+          "priorite",
+          "version",
+          "created_at",
+          "updated_at",
+          "qualification",
+          "champs_proteges",
+          "couverture_version"
+        ],
+        "title": "ProjetQualifiePayload"
+      },
+      "QualificationContactInput": {
+        "properties": {
+          "nature_contact": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "PERSONNE",
+                  "SERVICE",
+                  "ACCUEIL_GENERIQUE",
+                  "A_QUALIFIER"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nature Contact"
+          },
+          "role_commercial": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "DECIDEUR",
+                  "PORTEUR_OPERATIONNEL",
+                  "RELAIS",
+                  "A_QUALIFIER"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Role Commercial"
+          },
+          "fiabilite_contact": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "A_QUALIFIER",
+                  "A_REVALIDER",
+                  "VERIFIE"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fiabilite Contact"
+          },
+          "contact_verifie_le": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Contact Verifie Le"
+          },
+          "contact_source_ref": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 500
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Contact Source Ref"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "QualificationContactInput"
+      },
+      "QualificationContactPayload": {
+        "properties": {
+          "nature_contact": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "PERSONNE",
+                  "SERVICE",
+                  "ACCUEIL_GENERIQUE",
+                  "A_QUALIFIER"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nature Contact"
+          },
+          "role_commercial": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "DECIDEUR",
+                  "PORTEUR_OPERATIONNEL",
+                  "RELAIS",
+                  "A_QUALIFIER"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Role Commercial"
+          },
+          "fiabilite_contact": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "A_QUALIFIER",
+                  "A_REVALIDER",
+                  "VERIFIE"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fiabilite Contact"
+          },
+          "contact_verifie_le": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Contact Verifie Le"
+          },
+          "contact_source_ref": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 500
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Contact Source Ref"
+          },
+          "contact_verifie_version": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Contact Verifie Version"
+          }
+        },
+        "type": "object",
+        "title": "QualificationContactPayload"
+      },
+      "QualificationOrganisationInput": {
+        "properties": {
+          "sous_type_collectivite": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "COMMUNE",
+                  "EPCI",
+                  "AUTRE_COLLECTIVITE"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sous Type Collectivite"
+          },
+          "nature_epci": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "CC",
+                  "CA",
+                  "CU",
+                  "METROPOLE",
+                  "AUTRE"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nature Epci"
+          },
+          "niveau_identite": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "PERSONNE_MORALE",
+                  "ETABLISSEMENT"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Niveau Identite"
+          },
+          "siren": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[0-9]{9}$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Siren"
+          },
+          "siret": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[0-9]{14}$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Siret"
+          },
+          "code_naf": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 10
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Code Naf"
+          },
+          "version_naf": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 30
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Version Naf"
+          },
+          "famille_animation": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "ALIMENTAIRE",
+                  "BOUTIQUES",
+                  "RESTAURATION",
+                  "BEAUTE_COIFFURE",
+                  "SERVICES_PROXIMITE",
+                  "GRANDE_SURFACE",
+                  "AUTRE"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Famille Animation"
+          },
+          "accueil_public": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "A_QUALIFIER",
+                  "CONFIRME",
+                  "NON_CONFIRME"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Accueil Public"
+          },
+          "accueil_verifie_le": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Accueil Verifie Le"
+          },
+          "accueil_preuve_ref": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 500
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Accueil Preuve Ref"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "QualificationOrganisationInput"
+      },
+      "QualificationOrganisationPayload": {
+        "properties": {
+          "sous_type_collectivite": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "COMMUNE",
+                  "EPCI",
+                  "AUTRE_COLLECTIVITE"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sous Type Collectivite"
+          },
+          "nature_epci": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "CC",
+                  "CA",
+                  "CU",
+                  "METROPOLE",
+                  "AUTRE"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nature Epci"
+          },
+          "niveau_identite": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "PERSONNE_MORALE",
+                  "ETABLISSEMENT"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Niveau Identite"
+          },
+          "siren": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[0-9]{9}$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Siren"
+          },
+          "siret": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[0-9]{14}$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Siret"
+          },
+          "code_naf": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 10
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Code Naf"
+          },
+          "version_naf": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 30
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Version Naf"
+          },
+          "famille_animation": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "ALIMENTAIRE",
+                  "BOUTIQUES",
+                  "RESTAURATION",
+                  "BEAUTE_COIFFURE",
+                  "SERVICES_PROXIMITE",
+                  "GRANDE_SURFACE",
+                  "AUTRE"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Famille Animation"
+          },
+          "accueil_public": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "A_QUALIFIER",
+                  "CONFIRME",
+                  "NON_CONFIRME"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Accueil Public"
+          },
+          "accueil_verifie_le": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Accueil Verifie Le"
+          },
+          "accueil_preuve_ref": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 500
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Accueil Preuve Ref"
+          }
+        },
+        "type": "object",
+        "title": "QualificationOrganisationPayload"
+      },
+      "QualificationProjetInput": {
+        "properties": {
+          "besoin_statut": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "A_QUALIFIER",
+                  "IDENTIFIE",
+                  "ABSENT"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Besoin Statut"
+          },
+          "besoin_resume": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 1000
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Besoin Resume"
+          },
+          "porteur_statut": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "A_RECHERCHER",
+                  "IDENTIFIE",
+                  "CONFIRME",
+                  "ABSENT"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Porteur Statut"
+          },
+          "porteur_contact_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Porteur Contact Id"
+          },
+          "portage_confirme_le": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Portage Confirme Le"
+          },
+          "portage_preuve_ref": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 500
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Portage Preuve Ref"
+          },
+          "operation_intitule": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 200
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Operation Intitule"
+          },
+          "operation_debut": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Operation Debut"
+          },
+          "operation_fin": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Operation Fin"
+          },
+          "budget_statut": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "A_QUALIFIER",
+                  "CONFIRME",
+                  "ABSENT"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Budget Statut"
+          },
+          "budget_montant_centimes": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 9.223372036854776e+18,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Budget Montant Centimes"
+          },
+          "budget_devise": {
+            "anyOf": [
+              {
+                "type": "string",
+                "const": "EUR"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Budget Devise"
+          },
+          "budget_base": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "HT",
+                  "TTC"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Budget Base"
+          },
+          "budget_confirme_le": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Budget Confirme Le"
+          },
+          "budget_preuve_ref": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 500
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Budget Preuve Ref"
+          },
+          "outils_existants": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 500
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Outils Existants"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "QualificationProjetInput"
+      },
+      "QualificationProjetMutation": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Expected Version"
+          },
+          "qualification": {
+            "$ref": "#/components/schemas/QualificationProjetInput"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "qualification"
+        ],
+        "title": "QualificationProjetMutation"
+      },
+      "QualificationProjetPayload": {
+        "properties": {
+          "besoin_statut": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "A_QUALIFIER",
+                  "IDENTIFIE",
+                  "ABSENT"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Besoin Statut"
+          },
+          "besoin_resume": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 1000
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Besoin Resume"
+          },
+          "porteur_statut": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "A_RECHERCHER",
+                  "IDENTIFIE",
+                  "CONFIRME",
+                  "ABSENT"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Porteur Statut"
+          },
+          "porteur_contact_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Porteur Contact Id"
+          },
+          "portage_confirme_le": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Portage Confirme Le"
+          },
+          "portage_preuve_ref": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 500
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Portage Preuve Ref"
+          },
+          "operation_intitule": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 200
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Operation Intitule"
+          },
+          "operation_debut": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Operation Debut"
+          },
+          "operation_fin": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Operation Fin"
+          },
+          "budget_statut": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "A_QUALIFIER",
+                  "CONFIRME",
+                  "ABSENT"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Budget Statut"
+          },
+          "budget_montant_centimes": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 9.223372036854776e+18,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Budget Montant Centimes"
+          },
+          "budget_devise": {
+            "anyOf": [
+              {
+                "type": "string",
+                "const": "EUR"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Budget Devise"
+          },
+          "budget_base": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "HT",
+                  "TTC"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Budget Base"
+          },
+          "budget_confirme_le": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Budget Confirme Le"
+          },
+          "budget_preuve_ref": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 500
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Budget Preuve Ref"
+          },
+          "outils_existants": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 500
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Outils Existants"
+          },
+          "porteur_contact_version": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Porteur Contact Version"
+          },
+          "porteur_statut_effectif": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "A_RECHERCHER",
+                  "IDENTIFIE",
+                  "CONFIRME",
+                  "ABSENT",
+                  "A_REVALIDER"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Porteur Statut Effectif"
+          }
+        },
+        "type": "object",
+        "title": "QualificationProjetPayload"
+      },
       "Rattachement": {
         "properties": {
           "expected_version": {
@@ -5192,6 +11029,189 @@
           "reference_id"
         ],
         "title": "Rattachement"
+      },
+      "ReferenceEvaluationInput": {
+        "properties": {
+          "evaluation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Evaluation Id"
+          },
+          "bloc": {
+            "type": "string",
+            "enum": [
+              "COMPTAGES",
+              "POPULATION",
+              "COMPETENCES"
+            ],
+            "title": "Bloc"
+          },
+          "expected_version": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Expected Version"
+          },
+          "perimetre_territorial": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "COMMUNE",
+                  "MEMBRES_NOUVELLE_AQUITAINE",
+                  "COUVERTURE_PROJET"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Perimetre Territorial"
+          },
+          "projet_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Projet Id"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "evaluation_id",
+          "bloc",
+          "expected_version"
+        ],
+        "title": "ReferenceEvaluationInput"
+      },
+      "ReferencePayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "organisation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Organisation Id"
+          },
+          "perimetre_territorial": {
+            "type": "string",
+            "enum": [
+              "COMMUNE",
+              "MEMBRES_NOUVELLE_AQUITAINE",
+              "COUVERTURE_PROJET"
+            ],
+            "title": "Perimetre Territorial"
+          },
+          "projet_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Projet Id"
+          },
+          "bloc": {
+            "type": "string",
+            "enum": [
+              "COMPTAGES",
+              "POPULATION",
+              "COMPETENCES"
+            ],
+            "title": "Bloc"
+          },
+          "evaluation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Evaluation Id"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "projection": {
+            "$ref": "#/components/schemas/PotentielPayload"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At"
+          },
+          "etat": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "COURANTE",
+                  "OBSOLETE"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Etat"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "organisation_id",
+          "perimetre_territorial",
+          "bloc",
+          "evaluation_id",
+          "version",
+          "projection",
+          "updated_at"
+        ],
+        "title": "ReferencePayload"
+      },
+      "ReferencesPayload": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ReferencePayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More",
+            "default": false
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          },
+          "resume_potentiel": {
+            "$ref": "#/components/schemas/PotentielPayload"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "resume_potentiel"
+        ],
+        "title": "ReferencesPayload"
       },
       "RevocationPush": {
         "properties": {
@@ -5419,6 +11439,235 @@
           "expected_version"
         ],
         "title": "VersionImportPayload"
+      },
+      "VersionQualificationInput": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Expected Version"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version"
+        ],
+        "title": "VersionQualificationInput"
+      },
+      "app__api__prospection_projection_schemas__OrganisationPayload": {
+        "properties": {
+          "id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Id"
+          },
+          "nom": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nom"
+          },
+          "type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Type"
+          },
+          "adresse": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Adresse"
+          },
+          "commune": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Commune"
+          },
+          "code_postal": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Code Postal"
+          },
+          "insee": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Insee"
+          },
+          "email": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Email"
+          },
+          "telephone": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Telephone"
+          },
+          "site_web": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Site Web"
+          },
+          "source": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source"
+          },
+          "etat": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Etat"
+          },
+          "version": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Version"
+          },
+          "created_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created At"
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated At"
+          },
+          "champs_proteges": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Champs Proteges"
+          },
+          "qualification": {
+            "$ref": "#/components/schemas/QualificationOrganisationPayload"
+          },
+          "resume_potentiel": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PotentielPayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "appartenance": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AppartenancePayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "dossier": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/OpportunitePayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "title": "OrganisationPayload"
       }
     },
     "securitySchemes": {

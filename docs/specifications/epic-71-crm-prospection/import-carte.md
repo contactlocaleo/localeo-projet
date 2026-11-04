@@ -1,14 +1,21 @@
 # E71 — Import CSV : INIT et UPSERT
 
-Contrat **format 1**, spécification V1.1 du 3 novembre 2026. [Périmètre V1](README.md), [modèle vide](modele-import.csv). Le chemin historique `import-carte.md` est conservé pour les liens ; la carte interactive est maintenue en V1 ; seuls le mapping Gironde et les sections communales sont reportés en V1 sur confirmation utilisateur. Ce document remplace leur contrat courant, sans prétendre avoir migré un import existant.
+Contrat **formats 1 et 2**, actualisé le 4 novembre 2026 pour E71-EVOL-04.
+[Périmètre](README.md), [modèle format 1](modele-import.csv),
+[modèle format 2](modele-import-qualification-v2.csv),
+[dictionnaire de qualification](qualification-structuree.md).
+Le format 1 reste le choix par défaut, avec ses 21 colonnes inchangées. Le format 2
+est sélectionné explicitement à l’envoi ; le serveur ne le déduit pas des en-têtes.
+Le chemin historique `import-carte.md` est conservé pour les liens. L’import reste
+un CSV standard ; le parseur du classeur XLSX Gironde n’est pas réactivé.
 
 ## Préparer depuis Excel
 
-1. Copier les en-têtes du modèle dans une feuille dédiée. **Une ligne = un prospect + un dossier commercial + éventuellement un contact.** Répéter les mêmes références pour ajouter un contact ou un dossier à une même structure.
+1. Choisir le format et copier les en-têtes de son modèle dans une feuille dédiée. **Une ligne = un prospect + un dossier commercial + éventuellement un contact.** Répéter les mêmes références pour ajouter un contact, un dossier ou une observation à une même structure. Les blocs de qualification du format 2 restent facultatifs.
 2. Attribuer des références stables : `P0001` pour le prospect, `C0001` pour le contact, `O0001` pour le dossier. Garder ces références lors des prochains exports, même si les noms ou l'ordre des lignes changent. Ne pas utiliser le numéro de ligne Excel ou le nom de la structure comme identifiant.
 3. Formater les références, codes postaux, INSEE et téléphones en **Texte** dans Excel pour conserver zéros initiaux et signes `+`. Exporter des valeurs, pas des formules.
 4. Enregistrer en **CSV UTF-8**, séparateur **point-virgule**. Vérifier la première ligne : certains réglages Excel produisent des virgules ; le CRM refuse ce format avec une explication, sans réinterprétation silencieuse. Les champs contenant point-virgule, guillemet ou saut de ligne sont entre guillemets CSV, un guillemet interne est doublé.
-5. Dans le CRM, choisir la source stable, par exemple `prospection-excel`, et le mode. La source est choisie dans une liste de sources existantes ; « Nouvelle source » est une action explicite. Le serveur retire les espaces de bord et passe le nom en minuscules avant validation/unicité : 1–64 caractères `[a-z0-9._-]`. Une création normalisée vers un nom existant propose cette source, sans en créer une autre. Le nom canonique stable est affiché explicitement avant confirmation. Réutiliser exactement cette source aux imports suivants. La source de rapprochement est distincte de la colonne descriptive `source`.
+5. Dans le CRM, choisir le **Format du fichier**, la source stable, par exemple `prospection-excel`, et le mode **INIT/UPSERT**. Télécharger le modèle correspondant au format sélectionné. Format et mode sont indépendants ; fichier et plan conservent le format choisi. La source est choisie dans une liste de sources existantes ; « Nouvelle source » est une action explicite. Le serveur retire les espaces de bord et passe le nom en minuscules avant validation/unicité : 1–64 caractères `[a-z0-9._-]`. Une création normalisée vers un nom existant propose cette source, sans en créer une autre. Le nom canonique stable est affiché explicitement avant confirmation. Réutiliser exactement cette source aux imports suivants. La source de rapprochement est distincte de la colonne descriptive `source`.
 6. Lire l'aperçu, corriger le fichier ou exclure explicitement les groupes en erreur, puis confirmer. Un bilan indique ce qui a réellement changé.
 
 Quatre colonnes sont toujours renseignées : **prospect_ref, nom_prospect, opportunite_ref, perimetre**. `objectif_coffrets` est obligatoire uniquement pour COFFRETS ; `contact_ref` uniquement si des données de contact sont fournies. **`code_insee` est obligatoire pour créer un prospect ou enrichir effectivement sa localisation**, en INIT comme en UPSERT. Il peut rester absent pour enrichir seulement les contacts ou le suivi d'une fiche existante. Les autres colonnes peuvent rester vides. Le modèle complet fournit tous les en-têtes ; le parseur accepte leur réordre et l'absence des colonnes facultatives, mais refuse les noms inconnus ou dupliqués. Le rapport distingue ligne CSV logique et groupe prospect.
@@ -34,7 +41,7 @@ Les plans préparés avant cette restriction sont recalculés au traitement : un
 groupe devenu incompatible passe en conflit `IMPORT_PLAN_OBSOLETE`, sans aucune
 écriture CRM pour ce groupe. Préparer un nouvel aperçu après correction du fichier.
 
-## Dictionnaire des colonnes
+## Dictionnaire des 21 colonnes communes aux deux formats
 
 Toutes les cellules sont des chaînes ; pas de valeur magique `NULL`, de booléen implicite ou de commande d'effacement. Limites applicables après décodage UTF-8.
 
@@ -73,16 +80,66 @@ prospect_ref;nom_prospect;commune;code_insee;contact_ref;contact_nom;contact_ema
 P0001;Association Exemple;Latresne;33234;C0001;Camille Exemple;camille@example.invalid;O0001;ANIMATION;;Animation de printemps;Premier contact à préparer
 P0001;Association Exemple;Latresne;33234;C0002;Alex Exemple;alex@example.invalid;O0001;ANIMATION;;Animation de printemps;
 P0001;Association Exemple;Latresne;33234;C0001;Camille Exemple;camille@example.invalid;O0002;COFFRETS;ACHAT_ENTREPRISE_CSE;Coffrets pour les bénévoles;
-P0002;Commerce Exemple;;;;O0001;COFFRETS;PARTENARIAT_COMMERCANT;Recrutement partenaire;
+P0002;Commerce Exemple;Latresne;33234;;;;O0001;COFFRETS;PARTENARIAT_COMMERCANT;Recrutement partenaire;
 ```
 
 Résultat initial attendu : **2 prospects, 2 contacts et 3 dossiers**, une seule note initiale sur P0001. Exemple de format, pas preuve d'import exécuté. Les identifiants de dossier sont propres au prospect ; `O0001` de P0002 n'est pas celui de P0001.
+
+## Format 2 : compléter la qualification sans tout renseigner
+
+Le [modèle format 2](modele-import-qualification-v2.csv) comporte **85 colonnes :
+les 21 précédentes et 64 nouvelles**. Les colonnes facultatives peuvent être omises.
+Les quatre colonnes générales et l’INSEE à la création restent les seuls prérequis
+communs ; utiliser un bloc impose ses dépendances et ses preuves. Le format 1
+continue de refuser ces nouvelles colonnes : sélectionner le format 2 avant l’envoi.
+
+| Bloc facultatif | Préparation et effets à examiner |
+| --- | --- |
+| Identité et activité | Sous-type commune/EPCI, niveau d’identité, SIREN/SIRET, NAF et sa version, famille Animation, accueil du public. Les identifiants restent du texte ; un identifiant légal exige son niveau d’identité. Une ressemblance demande un examen, jamais une fusion automatique. |
+| Contact | Nature, rôle commercial et fiabilité, sous une `contact_ref` stable. `VERIFIE` exige date et source propres à la vérification ; un libellé Excel ou la date d’un annuaire ne les remplace pas. |
+| Projet Animation | Besoin, porteur, opération, calendrier et budget du dossier. `porteur_contact_ref` désigne un contact de ce même prospect ; portage et budget confirmés exigent leurs preuves et dates. Un budget est exprimé en centimes, devise EUR et base HT/TTC explicite. |
+| Observation du potentiel | `evaluation_ref` stable requise dès qu’une donnée d’évaluation est fournie ; observation datée, source et périmètre `COMMUNE` ou `MEMBRES_NOUVELLE_AQUITAINE`. `BROUILLON` permet une observation partielle ; `CONFIRMEE` exige des blocs valides et documentés. La couverture personnalisée d’un projet se renseigne dans le CRM, pas dans ce CSV. |
+| Comptages, population, compétences | Laisser vide ce qui est inconnu ; zéro reste une mesure explicite. Comptages terrain, population/millésime et compétences EPCI conservent leurs sources, dates et preuves propres. Les cas à vérifier ne s’ajoutent pas au nombre retenu. Aucun classement n’est importé : il est calculé à partir de la référence retenue. |
+| Appartenance EPCI | Commune avec INSEE connu : `epci_siren`, `appartenance_debut`, `appartenance_source_ref`, `appartenance_source_date`. Une appartenance différente déjà présente reste conservée. Un SIREN de territoire ne crée pas une fiche commerciale EPCI. |
+
+Les noms, énumérations et dépendances exacts sont dans le
+[dictionnaire canonique](qualification-structuree.md#8-import--format-2-et-compatibilité-du-format-1).
+Dates ISO `YYYY-MM-DD`, entiers sans séparateur ni symbole monétaire, aucune valeur
+magique `NULL`. Nettoyer les cellules contenant plusieurs e-mails ou téléphones
+avant l’export. Les preuves sont des références ; elles ne sont pas téléchargées.
+
+### Observations, références et décisions dans l’aperçu
+
+Une `evaluation_ref` inchangée avec le même contenu ne crée pas de doublon ;
+un contenu différent sous cette référence produit un conflit. Utiliser une nouvelle
+référence pour une nouvelle observation, sans réécrire l’historique confirmé.
+
+L’aperçu distingue les créations, compléments, valeurs conservées, nouvelles
+observations et propositions d’appartenance/référence. Si aucun choix de référence
+n’existe pour un bloc territorial, la première observation confirmée admissible
+peut être proposée. S’il y a plusieurs candidates, **Choisir la référence** permet
+de retenir une observation séparément pour **Comptages**, **Population** et
+**Compétences**. Le groupe reste à corriger jusqu’à cette décision. Une référence
+existante n’est jamais remplacée par un import ultérieur : comparer les nouvelles
+observations dans la fiche, puis choisir explicitement la référence à utiliser.
+
+INIT ignore tout le groupe d’un prospect déjà connu par sa clé source, qualifications
+incluses. En UPSERT, les champs vides non protégés peuvent être complétés ; un statut
+et sa preuve, une identité légale, un budget ou un lien de porteur forment des blocs
+cohérents. Une différence ou une protection conserve le bloc courant et signale la
+divergence. Une cellule vide n’efface rien. Les nouvelles observations restent à
+examiner et ne remplacent ni une correction manuelle ni une référence retenue.
+
+La limite est de **20 évaluations et une nouvelle appartenance proposée par groupe**,
+en plus des limites communes ci-dessous. Tous les effets du groupe sont atomiques.
+Une modification des versions, protections, candidats ou relations examinés depuis
+l’aperçu impose un nouveau plan (`IMPORT_PLAN_OBSOLETE`), sans écriture partielle.
 
 ## INIT : créer les absents, sans réinitialiser la base
 
 INIT **ne vide jamais la base**. Pour chaque groupe dont `(source_namespace, prospect_ref)` est absent, l'aperçu propose la création du prospect, de ses contacts et dossiers. Si ce prospect est déjà connu par sa clé, tout le groupe est **ignoré**, même si de nouveaux contacts/dossiers figurent dans ce fichier. Une correspondance possible avec une fiche manuelle ou une autre source bloque le groupe jusqu'à rapprochement explicite ou confirmation de structure distincte.
 
-Les nouveaux dossiers démarrent **À contacter**, priorité normale, responsable du lot choisi explicitement (opérateur par défaut). La source de ces valeurs est le choix du lot, jamais une colonne cachée. Aucune tâche, date de contact ou preuve de gain n'est inventée. Le contexte initial devient une note de provenance une seule fois. Le fichier ne crée aucun rappel ni notification.
+Les nouveaux dossiers démarrent **À contacter**, priorité normale, responsable du lot choisi explicitement. La source de ces valeurs est le choix du lot, jamais une colonne cachée. Aucune tâche, date de contact ou preuve de gain n'est inventée. Le contexte initial devient une note de provenance une seule fois. Le fichier ne crée aucun rappel ni notification.
 
 INIT peut être rejoué sans créer de doublons. Pour compléter les fiches déjà présentes, utiliser UPSERT ; aucun bouton « écraser tout » n'est prévu.
 
@@ -102,7 +159,7 @@ INIT peut être rejoué sans créer de doublons. Pour compléter les fiches déj
 | Périmètre/objectif différents pour une opportunité connue, identité incohérente | Conflit bloquant pour le groupe ; pas de déplacement/requalification automatique |
 | Nouvelle source ou nouvelles références pour des données ressemblantes | Candidat au rapprochement ; aucun nouveau lien ou fusion implicite |
 
-Liste des compléments autorisés : type, site web, coordonnées de structure, coordonnées/fonction d'un contact actif et localisation. **Localisation = groupe adresse/commune/INSEE/code postal** : compléter seulement si les champs déjà présents sont compatibles ; aucune insertion d'INSEE différent sous une ancienne commune. Les champs protégés à la saisie restent protégés même s'ils redeviennent vides.
+Liste des compléments du format 1 : type, site web, coordonnées de structure, coordonnées/fonction d'un contact actif et localisation ; le format 2 ajoute les blocs facultatifs décrits ci-dessus. **Localisation = groupe adresse/commune/INSEE/code postal** : compléter seulement si les champs déjà présents sont compatibles ; aucune insertion d'INSEE différent sous une ancienne commune. Les champs protégés à la saisie restent protégés même s'ils redeviennent vides.
 
 **Toujours préservés** sur l'existant : notes/contexte, historique d'échanges, étapes, priorité, responsable, tâches/rappels, oppositions, archivage, contacts obsolètes, preuves/liens métier, choix de notifications, titres/identités et source initiale déjà renseignés. `contexte_initial` d'un prospect existant est signalé comme ignoré ; il n'ajoute pas une nouvelle note à chaque réimport. Un import ne fait pas « avancer » le pipeline.
 
@@ -114,7 +171,7 @@ Clés uniques : prospect `(source_namespace, prospect_ref)` ; contact `(source_n
 
 La confirmation fige fichier, empreinte, source, mode, format, sélection des groupes et versions observées. L'empreinte n'est pas une identité métier. Même plan confirmé + autre clé HTTP = même opération ; un nouveau lot du même contenu reste sans doublon grâce aux clés métier. Un réordre de lignes ne change pas les identités. Les compléments connus sont recalculés lors de la transaction ; une modification des champs, protections ou candidats comparés après aperçu produit un conflit à réexaminer ; une note ajoutée indépendamment est conservée sans invalider ces comparaisons.
 
-Un **groupe prospect** est l'unité atomique : prospect, contacts, dossiers, éventuelle note initiale, provenances et résultat de groupe sont validés ensemble ou pas du tout. Maximum **100 lignes, 50 contacts et 50 dossiers par groupe** ; au-delà, rejeter et proposer de fractionner les enrichissements en plusieurs imports UPSERT. Pas d'état « réussi » avec un contact créé mais un dossier manquant. Les groupes indépendants peuvent réussir malgré un conflit tardif ailleurs : bilan `TERMINE_AVEC_REJETS`, pas de succès global trompeur.
+Un **groupe prospect** est l'unité atomique : prospect, contacts, dossiers, éventuelle note initiale, qualifications, observations, références, appartenance, provenances et résultat de groupe sont validés ensemble ou pas du tout. Maximum **100 lignes, 50 contacts et 50 dossiers par groupe** ; au-delà, rejeter et proposer de fractionner les enrichissements en plusieurs imports UPSERT. Pas d'état « réussi » avec un contact créé mais un dossier manquant. Les groupes indépendants peuvent réussir malgré un conflit tardif ailleurs : bilan `TERMINE_AVEC_REJETS`, pas de succès global trompeur.
 
 États de lot : DEPOSE → A_CORRIGER/PRET → EN_COURS → TERMINE/TERMINE_AVEC_REJETS ; INTERROMPU, ANNULE et EXPIRE explicites. Avant confirmation, annuler ne crée aucun objet CRM. Après début, arrêter suspend les groupes non appliqués ; pas de rollback global effaçant un enrichissement ultérieur. Reprise du même plan, bail et jeton de clôture, groupe validé jamais réappliqué. Une correction du fichier ouvre un nouveau lot lié.
 
@@ -173,7 +230,7 @@ note est conservé : le plan ne réécrit jamais la chronologie.
 
 ## Fichiers et limites
 
-Format CSV UTF-8 avec ou sans BOM, CRLF ou LF, séparateur `;`, guillemets `"`. **10 Mio**, **10 000 lignes logiques**, **21 colonnes maximum**, en-têtes fermés. Pas de ZIP, XLSX, macro, formule évaluée, HTML rendu ou URL visitée. Dépassement, UTF-8 invalide, en-tête requis absent, guillemet non fermé ou colonne supplémentaire : refus avant mutation. Lecture en flux vers staging privé borné ; ne pas conserver tout le fichier dans la session ORM.
+Format CSV UTF-8 avec ou sans BOM, CRLF ou LF, séparateur `;`, guillemets `"`. **10 Mio**, **10 000 lignes logiques**, **21 colonnes maximum pour le format 1, 85 pour le format 2**, en-têtes fermés propres au format sélectionné. Pas de ZIP, XLSX, macro, formule évaluée, HTML rendu ou URL visitée. Dépassement, UTF-8 invalide, en-tête requis absent, guillemet non fermé ou colonne supplémentaire : refus avant mutation. Lecture en flux vers staging privé borné ; ne pas conserver tout le fichier dans la session ORM.
 
 Toute cellule est du texte : un contenu commençant par `=`, `+`, `-`, `@`, tabulation ou retour chariot n'est jamais exécuté. Appliquer les validateurs de champ (le `+` d'un téléphone valide reste permis). À la génération d'un rapport CSV destiné à Excel, neutraliser séparément l'injection de formule et documenter l'échappement ; ne pas modifier la valeur métier stockée pour cela. Les erreurs ne recopient pas les cellules sensibles dans les logs.
 

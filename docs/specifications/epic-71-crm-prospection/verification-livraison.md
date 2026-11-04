@@ -31,6 +31,62 @@ Compléter les cas performance de l'[architecture](architecture-contrats.md) : p
 
 ## Tests et clôture
 
+### E71-EVOL-04 — preuves et résultats
+
+Extension de spécification du **4 novembre 2026**,
+[règles et contrats](qualification-structuree.md). Les résultats historiques
+ci-dessous ne couvrent pas ces champs nouveaux. Les onze critères ajoutés sont
+implémentés localement ; les scénarios fonctionnels, intégration et capacité exécutés sont détaillés dans le bilan E71-EVOL-04 ci-dessous. Les réserves du socle restent conservées.
+
+| Critère | Comportement / propriétaire | Preuves prévues | Documentation / contrat | Fixtures / démonstration | Exploitation / migration |
+| --- | --- | --- | --- | --- | --- |
+| CA-30 | Organisation : nature/activité/accueil | Domaine et API : sous-type incompatible, champ inconnu, absence, preuve manquante ; navigateur sections conditionnelles | Dictionnaire et projections organisation | Commune, EPCI, commerce, historique sans qualification | Colonnes facultatives ; pas de faux CONFIRME au backfill |
+| CA-31 | Valeurs d’identité et ressemblance | Domaine/SQL : formats, préfixe SIREN/SIRET, identifiant contradictoire ; deux établissements d’un SIREN, concurrence multi-source, recherche exacte | Identité et rapprochement, API candidats | Même SIREN/deux SIRET, communes homonymes | Index non unique SIREN établissements, aucun objet ERP créé |
+| CA-32 | Évaluation/classification | Domaine : seuils 0/4/5/9/10, absent, population/millésime, somme familles, cas incertains exclus ; SQL sélection de référence | Évaluation privée, filtres et règle SEUILS_ANIMATION_1 | DOCUMENTAIRE et NON_EVALUE, commune/EPCI | Projection courante cohérente avec la référence |
+| CA-33 | Contrôle terrain et histoire | Domaine/API/SQL : triplet incomplet, zéro vérifié, dates futures, correction sans écrasement, deux sources, choix manuel ; navigateur comparaison et confirmation | États brouillon/confirmé, historique paginé | Révision corrigée, import source plus récent sans remplacement | Rétention/purge/restauration versions et preuves |
+| CA-34 | Contact et fiabilité | Domaine/application : personne/service/accueil, date/preuve absentes, coordonnées modifiées, rôle général sans portage implicite ; API accès tiers | ContactPatch et résumé, règles de vérification | Accueil générique et porteur confirmé | Aucune preuve d’identité interne ou opt-in fabriqué |
+| CA-35 | Projet Animation | Domaine/API : contact d’un tiers/obsolète, besoin sans résumé, budget inconnu/zéro/confirmé/ABSENT, HT/TTC et dates inversées ; F plusieurs projets | Sous-ressource dossier, protection UPSERT | Deux dossiers du même prospect, un Coffrets | Aucun paiement/gain/rappel ; versions/audit |
+| CA-36 | Relations territoriales/compétences | Domaine/SQL/API : rattachement courant unique, remplacement daté, siège différent de membres, EPCI hors région référencé sans prospect, couverture par lots, nuance compétence | Appartenance, couverture, sources de compétences | EPCI multi-départements, membre historique, sources Sirene/BANATIC datées différemment | FK/index/purge ; aucun déplacement du point carte |
+| CA-37 | Import format 2 | Parseur/plan/PostgreSQL : 85 colonnes connues et sous-ensembles, format 1 à 21 colonnes, dépendances, même evaluation_ref changé, reprises et protections ; F aperçu/choix de référence/bilan | Nouveau modèle 2 + contrat1 conservé | INIT/UPSERT nouveau/existant/opposé/archivé, contacts multiples | Un groupe atomique, ancien plan immuable et format explicite |
+| CA-38 | Lectures et UX | SQL N/10N, filtres EXISTS même dossier/contact, pas de doublons/N+1 ; F 320/390/1280 px, clavier, erreurs/vide, filtres URL et carte cohérents | Projections et listes paginées | Plusieurs enfants concordants/non concordants | Budgets SQL/p95/p99/mémoire et confidentialité des tuiles |
+| CA-39 | Orchestration/version/droits | Deux connexions : confirmation/référence/import concurrents ; protection modifiée après aperçu ; même clé corps différent ; droits révoqués ; aucun effet partiel | Erreurs 409/422, commandes et reçus privés | Lecture/gestion/import/admin séparés, notes ajoutées en parallèle | Verrous bornés, aucune requête externe dans transaction |
+| CA-40 | Compatibilité et migration | Migration avant/après sur base jetable, contraintes/index, restauration et génération/rejeu, anciens payloads/pages ; OpenAPI/guides | Contrat généré et lecteurs CRM, limites de format | Scénario entièrement synthétique | Readiness, activation progressive et reprise documentée ; aucun rollback destructeur |
+
+Suites à prolonger : `tests/domain/prospection/`,
+`tests/integration/prospection/test_import_csv.py`, `test_imports_postgres.py`,
+tests HTTP imports, `tests/security/test_crm_core_postgres.py` et recette
+navigateur CRM. Ajouter des tests dédiés des nouvelles valeurs/agrégats sans
+ORM, puis orchestration et PostgreSQL isolé ; appliquer les contrôles d’architecture
+du backend. Aucun test ne réutilise les coordonnées réelles du classeur.
+
+Revue indépendante `localeo-contract-reviewer` du 4 novembre : réalisée puis
+corrections relues ; références séparées par clé territoriale/projet/bloc,
+invalidation effective du portage lié au contact, confirmation sans comptage
+pour population/compétences et matrice de portées intégrées. Aucun blocage résiduel
+relevé dans la relecture ciblée. Gabarit 2 vérifié à 85 colonnes, préfixe des 21
+colonnes du format 1 conservé.
+
+Cas supplémentaires obligatoires CA-32/33/35/36/37/38/39 : deux couvertures de
+projet d’un même prospect avec références distinctes ; couverture modifiée et
+ancienne observation signalée obsolète ; population et compétences confirmables
+sans comptage avec sources distinctes ; nouveau relevé BANATIC sans remplacement
+du comptage retenu ; porteur confirmé devenu A_REVALIDER après changement ou
+obsolescence du contact et exclu immédiatement du filtre CONFIRME.
+
+Contrôles du 4 novembre exécutés sur l’arbre documentaire courant :
+
+- `python scripts/check_guidance.py` : 96 guides, 1 099 liens, zéro erreur/avertissement.
+- `python scripts/check_guidance.py --all-markdown --changed` : 12 documents, 213 liens, zéro erreur/avertissement (inclut les travaux E75 préservés).
+- `python scripts/sync_documentation.py --check-sources` : 137 sources vérifiées.
+- `git diff --check` : réussi.
+- Lecture CSV standard : 85 en-têtes uniques, préfixe des 21 colonnes du format 1 identique, aucune ligne réelle ; chaque colonne nouvelle décrite dans le dictionnaire. CA-01 à 40 sans trou/doublon, CA-24 toujours reporté, 39 actifs.
+
+Ces contrôles statiques ne prouvent pas un import applicatif ou une règle métier.
+Implémentation, migration, import de données réelles, commit, push et déploiement
+ne sont pas effectués par la présente demande de spécification.
+
+### Conditions de clôture conservées et étendues
+
 Suites cibles : `tests/domain/prospection/`, `tests/application/prospection/`, API, PostgreSQL jetable, parcours navigateur CRM et tests transport simulé. Utiliser le [runner isolé backend](../../../../localeo-backend/scripts/validation/test_isolated.py) et les contrôles d'architecture locaux. Aucun accès à TEST partagé, aucune notification réelle implicitement incluse dans les tests.
 
 Pour la clôture : **tests unitaires, intégration et fonctionnels de tous les critères actifs**, avec migrations/restauration synthétique, droits, fournisseurs simulés, PWA, import/reprise et capacité. Aucun pilote commercial, contact de prospect, validation municipale ou compte rendu UX externe ne constitue un critère de clôture. Des tests prévus ou ignorés ne valent jamais réussite. Le critère reporté reste visible comme hors V1 ; l’E71 reste En cours tant que tous les critères actifs ne sont pas vérifiés.
@@ -521,3 +577,208 @@ recette distante et déploiement. Cible TEST documentée depuis le CNAME public 
 backoffice observé le 4 novembre 2026 : `test-localeo-backend.onrender.com`.
 La [procédure d'activation](exploitation.md#domaine-dédié) et le modèle sans
 secrets permettent cette mise en service. Aucun commit ni push dans ce correctif.
+
+
+## Bilan d’implémentation E71-EVOL-04 — 4 novembre 2026
+
+La qualification structurée est implémentée dans **localeo-backend** ;
+**localeo-projet** porte les spécifications, guides, modèles CSV et OpenAPI V1.2.
+Les trois frontends Pro/Animation/Marketplace ne consomment pas ces données ;
+aucune modification, migration ou permission nouvelle dans leurs dépôts.
+
+| Critères | Preuves exécutables ajoutées ou prolongées |
+| --- | --- |
+| CA-30/31 | `tests/domain/prospection/test_qualification.py`, `tests/security/test_crm_qualification_postgres.py` : champs fermés, preuves, identité territoriale, SIREN/SIRET et établissements distincts |
+| CA-32/33 | Mêmes suites + `tests/integration/prospection/test_qualification_http.py` : seuils/inconnus/zéro, terrain, confirmation immuable, révision, références distinctes et comparaison paginée |
+| CA-34/35 | `tests/application/test_crm_qualification.py` et HTTP : chargement du contact courant, tiers refusé, porteur obsolète, preuve explicitement renouvelée, budget zéro, protections ciblées |
+| CA-36 | PostgreSQL/HTTP : appartenance unique, membres, couverture par lots et obsolescence des références de projet, provenance population/compétences conservée |
+| CA-37 | `tests/domain/prospection/test_import_qualification.py`, `tests/integration/prospection/test_import_qualification_postgres.py`, suites CSV/imports HTTP/PostgreSQL existantes : formats 1/2, groupe atomique, INIT/UPSERT, protection/reprise et choix de référence |
+| CA-38/39 | HTTP réel + PostgreSQL : mêmes filtres liste/suivi/carte, critères sur un même enfant, aucun doublon, droits/CSRF/révocation/rejeu ; tests concurrence SQL et navigateurs |
+| CA-40 | `tests/integration/prospection/test_qualification_restauration.py`, `tests/unit/test_demonstration_crm.py`, migration v293 et test générateur CRM core ; export OpenAPI et contrôles documentaires |
+
+La recette navigateur `tests/browser/crm-qualification.cjs` teste les formulaires
+progressifs et décisions d’import à 320 et 1280 px, saisie conservée en erreur,
+clavier, filtres URL et références obsolètes. `crm.cjs` et `crm-rappels.cjs`
+préservent les parcours du socle. Ces tests navigateur utilisent des API simulées ;
+la suite HTTP qualification utilise les routes, domaine et PostgreSQL réels dans
+un schéma jetable, avec session et CSRF, sans importer `app.main`.
+
+La revue indépendante a identifié quatre écarts : action de localisation
+contournant l’identité communale, effacement de sous-type/identifiant permettant
+un contournement en deux commandes, projections de sortie ouvertes et fiabilité
+dégradée sur coordonnées normalisées inchangées. Ils sont corrigés et couverts
+par des tests domaine/HTTP ; les refus ne modifient ni version ni référence.
+Le siège d’un EPCI reste modifiable. Aucun compte ou renseignement du classeur
+réel n’a été copié dans les fixtures.
+
+Les commandes et résultats finaux sont consignés après la vérification complète
+ci-dessous. Les réserves antérieures de rappel, mémoire et carte à 100 000 ne
+sont pas effacées par ces preuves fonctionnelles. **L’epic reste En cours** :
+aucune clôture intégrale ni activation distante n’est annoncée.
+
+
+### Exécutions finales de l’extension
+
+Tests exécutés par le lanceur isolé du backend, sans chargement des fichiers
+privés et sur PostgreSQL local jetable. `-s` et sortie fichier évitent le problème
+Windows de capture subprocess ; aucune assertion désactivée.
+
+- Groupe domaine/application/contrats/identité/readiness/PWA/démonstration :
+  **292 réussis**, 4 tests API de rappels ignorés dans ce lancement sans URL
+  PostgreSQL (à distinguer du résultat des tests exécutés).
+- API qualification réelle, cœur CRM, carte régionale, contraintes et restauration
+  de qualification : **41 réussis**. Ce lancement inclut le cycle de brouillon de
+  couverture, confirmation et correction, et les non-régressions d’identité/sortie.
+- Architecture et recensements : **658 réussis** ; contrôle supplémentaire du
+  registre fermé des nouvelles routes réussi, soit **659** dans ce lancement.
+- Lecteur documentaire privé : **14 réussis** après ajout du guide de qualification
+  et du téléchargement de modèle 2, avec conservation de la liste fermée des liens.
+- Imports CSV, domaine, HTTP et PostgreSQL : **104 réussis, 1 dépassement du budget**
+  lors d’un lancement concurrent au chargement des 2 millions d’observations.
+  Le format 1 préparé avant migration est réellement testé sur v291, puis rejoué
+  après v293 en gardant son plan. Le cas chronométré de 10 000 groupes est à
+  distinguer de l’import de charge format 2 à 100 groupes/10 000 lignes.
+- Trois recettes navigateur réussies : `crm-qualification.cjs`, `crm.cjs` et
+  `crm-rappels.cjs`. API simulées, contrôles 320–1440 px selon la suite ; captures
+  locales examinées, saisie, clavier, défilement et états d’erreur vérifiés.
+
+Les revues finales ont ajouté deux cas corrigés : empreinte de couverture capturée
+au brouillon, et acquittement des nouvelles observations par bloc sans alerte
+permanente sur les anciennes références. L’ordre de création/confirmation/choix
+utilise `clock_timestamp()` sous le verrou d’organisation, et non la date métier.
+Un test concurrent démarre avant le choix et insère après, sans masquer la nouvelle
+observation. Les permissions de la purge SQL sont vérifiées après restauration :
+les ACL sont conservées, pas d’EXECUTE PUBLIC restauré implicitement.
+
+Le protocole de capacité est reproductible dans
+`tests/security/test_crm_qualification_performance_postgres.py` : 10 000 puis
+100 000 prospects, 20 observations par prospect, 20 clients maximum, demande de
+20 lectures/s et 5 mutations/s pendant cinq secondes, avec import concurrent.
+Ce test mesure la persistance/application locales, pas la latence HTTP complète
+sur TEST. Les prochains résultats ci-dessous distinguent les essais et corrections.
+
+
+### Capacité de la qualification — mesures et correction SQL
+
+Premier essai N=10 000, 200 000 observations : lectures mixtes p95 **411,28 ms**,
+p99 **511,89 ms** ; mutations p95 **412,94 ms**, p99 **479,08 ms** ; import 2 de
+10 000 lignes regroupées en 100 prospects : **5,89 s**. Objectifs respectés.
+
+À 100 000 prospects / 2 millions d’observations, l’essai initial échoue : filtre
+combiné p95 **869,83 ms**, p99 **1 179,26 ms** ; charge mixte lecture p95 **7 715,09 ms**,
+p99 **12 114,99 ms** et mutation p95 **2 101,77 ms**, p99 **11 002,10 ms**.
+Ces échecs ne sont ni supprimés ni requalifiés en succès.
+
+EXPLAIN révèle un parcours séquentiel avec tri sans filtre d’état et de nombreuses
+sondes contacts avant LIMIT. v293 ajoute les index de pagination globale
+`(updated_at DESC,id DESC)` et d’activité
+`((qualification->>'famille_animation'),updated_at DESC,id DESC)`.
+**ANALYZE** est nécessaire pour les statistiques d’expression ; la migration et
+le chargement du banc l’exécutent. Aucun filtre ou seuil n’a été assoupli.
+
+Mesure finale avec les modules courants, ces index et statistiques :
+
+| Mesure | p95 | p99 | Objectif |
+| --- | --- | --- | --- |
+| Lectures sous charge mixte | 160,64 ms | 229,64 ms | 500 ms / 1 000 ms : réussi |
+| Mutations sous charge mixte | 314,51 ms | 403,09 ms | 800 ms / 2 000 ms : réussi |
+| Lecture filtrée séquentielle la plus lente | 22,22 ms | 53,10 ms | 500 ms / 1 000 ms : réussi |
+
+Import 2 concurrent : **5,177 s**, toujours 10 000 lignes / 100 groupes. Le jeu
+principal comporte 100 000 prospects et 2 millions d’observations ; 200 prospects
+supplémentaires issus d’essais d’import précédents sont conservés dans la mesure
+finale et signalés. Le chargement initial monolithique a été remplacé par des
+transactions de fixture de 20 000 observations ; aucun trigger n’est désactivé.
+Le processus du premier essai a été arrêté après chargement commité pour préserver
+ce jeu ; la mesure finale utilise un processus neuf et les assertions de budget
+courantes, puis le schéma jetable est supprimé. Cela n’est pas annoncé comme un
+pytest intégral vert depuis le début du premier essai interrompu.
+
+Limites : cinq secondes de trafic mixte, persistance/application locales,
+statistiques à jour et cache PostgreSQL sollicité pendant les lectures répétées.
+Pas de mesure HTTP de bout en bout, de transport réel ou de stabilité longue durée
+sur la cible TEST. La mémoire RSS de l’extension n’est pas mesurée par ce banc.
+Les réserves historiques carte/rappels/mémoire restent ouvertes ; elles ne sont
+pas couvertes par les budgets de ces nouvelles listes de qualification.
+
+
+### Derniers rejeux, restauration et limites restantes
+
+- Le dépassement de l’import standard est rejoué **sans autre charge PostgreSQL** :
+  **10 000 prospects distincts créés en 68,208 s** (budget 120 s), dépôt **0,823 s**
+  (budget 1 s), aperçu **3,591 s**, pic mémoire additionnelle **18,6 Mio**.
+  Les assertions de comptage, d’absence de doublons et de budget sont inchangées.
+  Les **105 scénarios d’import** sont donc validés sur les exécutions décrites :
+  104 dans la suite, puis ce cas chronométré isolé ; pas de suite initiale
+  présentée comme entièrement verte sous contention.
+- Les quatre cas API de rappels ignorés sans URL PostgreSQL sont rejoués avec la
+  cible jetable : **4 réussis**. Le lancement avec l’import isolé donne
+  **5 réussis en 73,41 s** (`tests/api/test_crm_rappels_api.py` et
+  `test_import_10000_lignes_budget_postgres`). Aucun skip restant dans ce lancement.
+- Dernier groupe qualification/restauration/générateur : **15 réussis sur PostgreSQL**,
+  incluant acquittement de référence, ancien brouillon confirmé après sélection,
+  course de transactions et préservation d’une appartenance partagée entre fiches.
+  Le groupe complémentaire domaine/readiness/outillage de démonstration donne
+  **199 réussites**. Ces groupes recouvrent d’autres tests déjà cités : ne pas
+  additionner les chiffres pour annoncer un total de cas distincts.
+- Chaîne complète des migrations **v147 → v293**, rejeu sans modification des
+  empreintes, `pg_dump`/`pg_restore` PostgreSQL 18 et vérification des ACL privées :
+  **1 réussi en 22,86 s**, dans `tests/integration/test_crm_migration_restauration.py`.
+  L’exercice JSON et cet exercice dump sont complémentaires ; aucun ne restaure
+  en place la base TEST partagée.
+
+Rapport de charge final conservé hors Git dans le backend :
+`tmp/e71-qualification-mesures-100k-final.json`. L’artefact temporaire original du
+premier essai 10k n’est plus disponible ; les chiffres de cet essai proviennent
+uniquement de sa sortie console, pas d’un fichier reconstruit. Le jeu de mesure
+100k comprend 200 ajouts d’essais précédents puis 100 nouveaux prospects d’import.
+La limite de 20 clients est un pool de 20 threads, avec le pool SQLAlchemy usuel
+5 connexions + 10 débordements ; les attentes de connexion sont comprises dans
+les durées. Il ne s’agit pas de 20 connexions permanentes ni d’une charge HTTP.
+
+**État livré :** qualification, import 2, UX progressive, contrats, migration,
+restauration, générateur et contrôles fonctionnels locaux disponibles.
+**Réserves maintenues :** capacités historiques carte/rappels/mémoire du socle,
+charge HTTP prolongée et mémoire complète de l’extension non vérifiées sur TEST.
+ARB-07 demeure un préalable aux données réelles, sans empêcher les tests
+synthétiques. L’epic reste **En cours** ; aucun commit, push, déploiement ou
+application de v293 sur TEST dans cette demande.
+
+
+Contrôles documentaires finaux : `check_guidance.py` **96 guides / 1 099 liens**,
+`--all-markdown --changed` **16 documents / 238 liens**, zéro erreur/avertissement ;
+`sync_documentation.py --check-sources` **145 sources** vérifiées. OpenAPI V1.2 :
+**50 chemins, 62 schémas**. `git diff --check` réussi dans les deux dépôts modifiés.
+Les travaux E75 préexistants sont préservés ; les trois autres dépôts restent
+propres. La base PostgreSQL locale de cette tâche est arrêtée après les contrôles.
+
+### Application de v293 sur TEST — 4 novembre 2026
+
+Opération distincte de la vérification locale précédente, demandée explicitement
+par l’utilisateur. La base TEST Render est identifiée avec le profil privé TEST,
+distinct de la production. Le plan du runner ne contient que
+`v293_crm_qualification.sql`, depuis une base en v292.
+
+- Sauvegarde PostgreSQL 18 créée avant migration : **60 226 725 octets**,
+  empreinte privée enregistrée et lecture complète par `pg_restore` réussie.
+  Les ACL sont conservées. Aucune restauration en place n’est effectuée.
+- Migration appliquée par `scripts/database/apply_migrations.py` avec verrouillage
+  borné, transaction et suivi d’empreinte ; version **293**, aucune migration
+  restante. Empreinte normalisée :
+  `8f76052682967d147ff5d5e061b264a7edd28221562f2603f918cc89aed77c2c`.
+- Objets, index valides, triggers actifs et colonne générée vérifiés ; le droit
+  d’exécution PUBLIC de la purge reste retiré. Les compteurs des 20 tables CRM
+  préexistantes et des quatre tables Live/participants contrôlées sont inchangés.
+- Readiness du **code local courant contre TEST en lecture seule** : **175
+  contrôles**, résultat READY. Avant publication du nouveau backend, le service
+  distant répond aussi READY sur ses **165 contrôles** ; santé et configuration
+  Live répondent HTTP 200, le CRM non authentifié redirige en HTTP 303.
+- Rejeu ciblé avant publication : **91 tests réussis**, domaine qualification,
+  import 2, orchestration, projections API et readiness. Guides : **96 guides /
+  1 099 liens**, zéro erreur ; **145 sources documentaires** vérifiées.
+
+Sauvegarde, plan et reçus privés dans le backend, sous
+`demonstrations/prive/operations/migration-v293-test-20261104T212152Z-b4f3e70e/`.
+Aucun prospect du fichier Excel n’est importé par cette opération. La migration
+ne constitue pas une preuve de publication du code ni une recette authentifiée
+du CRM après déploiement ; les réserves précédentes restent inchangées.

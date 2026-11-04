@@ -548,6 +548,38 @@
     {
       "path": "docs/ops/crm/exploitation.md",
       "source_path": "docs/specifications/epic-71-crm-prospection/exploitation.md"
+    },
+    {
+      "path": "docs/ops/crm/architecture-contrats.md",
+      "source_path": "docs/specifications/epic-71-crm-prospection/architecture-contrats.md"
+    },
+    {
+      "path": "docs/ops/crm/modele-import-qualification-v2.csv",
+      "source_path": "docs/specifications/epic-71-crm-prospection/modele-import-qualification-v2.csv"
+    },
+    {
+      "path": "docs/ops/crm/modele-import.csv",
+      "source_path": "docs/specifications/epic-71-crm-prospection/modele-import.csv"
+    },
+    {
+      "path": "docs/ops/crm/openapi.json",
+      "source_path": "docs/specifications/epic-71-crm-prospection/openapi.json"
+    },
+    {
+      "path": "docs/ops/crm/parcours-regles.md",
+      "source_path": "docs/specifications/epic-71-crm-prospection/parcours-regles.md"
+    },
+    {
+      "path": "docs/ops/crm/qualification-structuree.md",
+      "source_path": "docs/specifications/epic-71-crm-prospection/qualification-structuree.md"
+    },
+    {
+      "path": "docs/ops/crm/README.md",
+      "source_path": "docs/specifications/epic-71-crm-prospection/README.md"
+    },
+    {
+      "path": "docs/ops/crm/verification-livraison.md",
+      "source_path": "docs/specifications/epic-71-crm-prospection/verification-livraison.md"
     }
   ]
 }
