@@ -84,11 +84,11 @@ Derniere evolution suivie :
   terminée le 1er novembre sur tests (E72-DEC-CLOTURE-TESTS), 22 critères ; invitation email, compte individuel limité au
   scanner Coffret/Animation, révocation et audit. Historique complet du commerce en lecture seule ; option ERP désactivée par défaut, sans plafond.
 
-- [EPIC 71 — Localeo CRM PWA](a-faire/epic-71-crm-prospection-animation-coffrets-pro-backlog.md) :
+- [EPIC 71 — Localeo CRM PWA](en-cours/epic-71-crm-prospection-animation-coffrets-pro-backlog.md) :
   recadrage et spécification V1.1 du 3 novembre ; Animation et Coffrets, profils ERP
   avec droits distincts, contacts/notes/suivi, rappels WebPush et e-mail facultatif.
   Carte interactive maintenue ; CSV standard INIT/UPSERT protégeant le contexte.
-  28 critères actifs et 1 reporté (import spécifique Gironde), sans code ou import livré.
+  28 critères actifs et 1 reporté (import spécifique Gironde) ; implémentation locale et tests en cours, sans import réel.
 
 - [EPIC 70 — Validation sur le téléphone du client](terminees/epic-70-validation-prestation-telephone-client-backlog.md) :
   cadrage du 1er octobre étendu le 5 octobre aux passages Animation et aux pannes du mobile commerçant, 34 critères. PIN dédié retenu : contexte transactionnel,

@@ -2,7 +2,7 @@
 
 [Retour à la roadmap](../README.md)
 
-Trois EPIC sont classées en cours. Ce classement ne vaut ni clôture ni déploiement.
+Quatre EPIC sont classées en cours. Ce classement ne vaut ni clôture ni déploiement.
 
 - [EPIC 55 — Moteur commun et chasse au trésor](epic-55-chasse-tresor-commercante-backlog.md) :
   conception, arbitrages et suivi de livraison. La [spécification unique](../../specifications/moteur-animation/localeo_animation_engine_spec.md)
@@ -18,3 +18,5 @@ L’[EPIC 70 — Validation PIN sur téléphone client](../terminees/epic-70-val
 L’[EPIC 72 — Accès salariés Localeo Pro](../terminees/epic-72-acces-salaries-validation-localeo-pro-backlog.md) est terminée sur tests le 1er novembre 2026 ; les actions de mise en service restent dans son bilan.
 
 - [EPIC 74 — Tombola publique](epic-74-tombola-publique-backlog.md) : implémentation locale et vérification en cours ; activation séparée.
+
+- [EPIC 71 — Localeo CRM PWA](epic-71-crm-prospection-animation-coffrets-pro-backlog.md) : implémentation et tests locaux ; [bilan](../../specifications/epic-71-crm-prospection/verification-livraison.md), activation distincte.

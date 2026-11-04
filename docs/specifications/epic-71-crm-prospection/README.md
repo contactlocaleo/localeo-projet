@@ -1,6 +1,6 @@
 # EPIC 71 — Localeo CRM, prospection Animation et Coffrets
 
-Spécification **V1.1 — 3 novembre 2026**, évolution **E71-EVOL-03**. [Backlog et critères](../../roadmap/a-faire/epic-71-crm-prospection-animation-coffrets-pro-backlog.md). État produit inchangé : **À faire** dans la [roadmap](../../roadmap/README.md). Aucun CRM implémenté ou déployé par cette phase.
+Spécification **V1.1 — 3 novembre 2026**, évolution **E71-EVOL-03**. [Backlog et critères](../../roadmap/en-cours/epic-71-crm-prospection-animation-coffrets-pro-backlog.md). État produit : **En cours** dans la [roadmap](../../roadmap/README.md). Implémentation locale en cours de vérification ; aucun déploiement. [Prise en main](guide-utilisateur.md), [exploitation](exploitation.md) et [preuves](verification-livraison.md).
 
 ## Objectif
 
@@ -28,7 +28,7 @@ Compléments recommandés inclus dans la conception : responsable et prochaine a
 | [Import INIT / UPSERT](import-carte.md) | Colonnes, clés stables, exemples et protection des données existantes |
 | [Modèle CSV vide](modele-import.csv) | En-têtes exacts à remplir depuis Excel ; aucune donnée réelle |
 | [Architecture et contrats](architecture-contrats.md) | PWA, profils ERP, domaine, API, notifications, concurrence et capacité |
-| [Vérification et livraison](verification-livraison.md) | Tests prévus, traçabilité, migrations et activation |
+| [Vérification et livraison](verification-livraison.md) | Tests exécutés et réserves, traçabilité, migrations et activation |
 
 ## Ce qui change par rapport à octobre
 
@@ -44,7 +44,7 @@ Compléments recommandés inclus dans la conception : responsable et prochaine a
 
 E71-EVOL-01 (import mensuel) et E71-EVOL-02 (deux destinations du classeur) restent des décisions historiques ; leur réalisation spécifique est reportée sur choix utilisateur confirmé le 3 novembre. Un réimport régulier reste possible avec le CSV standard. L'analyse historique du classeur reste dans l'historique Git ; elle n'est plus le contrat d'import courant. Aucun ancien fichier n'a été relu, modifié ou importé ici.
 
-La carte est explicitement maintenue en V1. Le CSV standard seul et le report du traitement spécifique Gironde sont confirmés par l’utilisateur. Les choix techniques de simplicité ci-dessous sont des décisions de conception ; ils ne constituent pas des fonctionnalités déjà implémentées.
+La carte est explicitement maintenue en V1. Le CSV standard seul et le report du traitement spécifique Gironde sont confirmés par l’utilisateur. Les choix techniques ci-dessous décrivent la conception ; le bilan de vérification distingue l’implémentation locale, les preuves acquises et les limites.
 
 ## Arbitrages et préparation
 
@@ -73,5 +73,6 @@ confirmé, sans être coché comme testé.
 La revue V1.1 complète les contrats d’import (sources, décisions, plan immuable,
 états/bilan), la détection de doublons concurrente entre sources et la preuve de
 vérification d’adresse interne nécessaire aux rappels e-mail. Les responsabilités
-restent respectivement Prospection et Identité interne. Les tests sont prévus dans
-la matrice ; aucun parcours CRM n’a été exécuté sur un produit encore inexistant.
+restent respectivement Prospection et Identité interne. La matrice a été définie lors de cette spécification. Les parcours désormais
+implémentés, leurs tests exécutés et les réserves figurent dans le
+[bilan de vérification](verification-livraison.md).

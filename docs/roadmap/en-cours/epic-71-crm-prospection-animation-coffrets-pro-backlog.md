@@ -2,10 +2,10 @@
 
 ## Références et recadrage E71-EVOL-03
 
-- État produit : **À faire**, selon la [roadmap commune](../README.md).
+- État produit : **En cours**, selon la [roadmap commune](../README.md).
 - Cadrage initial : 2 octobre 2026 ; décisions/imports E71-EVOL-01 et E71-EVOL-02 du 9 octobre ; **recadrage du 3 novembre 2026** à la demande utilisateur.
 - [Spécification canonique V1](../../specifications/epic-71-crm-prospection/README.md), [format d'import et gabarit](../../specifications/epic-71-crm-prospection/import-carte.md).
-- Phase présente : spécification uniquement. Aucun développement, import réel, message envoyé, compte créé ou déploiement.
+- Phase présente : implémentation locale du CRM, migrations v290–v292 et vérification sur données synthétiques. Aucun déploiement, compte réel ou envoi fournisseur.
 
 **Besoin actuel :** créer une application **Localeo CRM (PWA)** simple pour gérer la prospection commerciale et le suivi de la relation client sur les périmètres Animation et Coffrets. Saisir un prospect et ses contacts, suivre les échanges et étapes, prendre des notes et programmer des rappels WebPush/e-mail facultatif. Réutiliser les profils ERP avec des droits CRM distincts. Initialiser puis enrichir depuis un fichier produit par l'utilisateur depuis Excel, sans écraser le contexte existant.
 
@@ -43,7 +43,7 @@ Import XLSX Gironde et sections communales (CA-24), campagnes automatiques vers 
 
 ## Critères d'acceptation
 
-**Tests à produire, non exécutés.** 29 identifiants conservés/ajoutés, dont **28 actifs dans la V1 retenue** et **1 reporté**. CA-13 reste actif ; CA-24 n’est ni réutilisé pour un autre besoin ni coché comme réussi.
+**Implémentation locale réalisée ; preuves et réserves dans le [bilan de vérification](../../specifications/epic-71-crm-prospection/verification-livraison.md).** 29 identifiants conservés/ajoutés, dont **28 actifs dans la V1 retenue** et **1 reporté**. CA-13 reste actif ; CA-24 n’est ni réutilisé pour un autre besoin ni coché comme réussi.
 
 | Critère | Acteur / action | Résultat observable et refus attendu |
 | --- | --- | --- |
@@ -92,4 +92,4 @@ Import XLSX Gironde et sections communales (CA-24), campagnes automatiques vers 
 | Générateur / tests | Fixtures synthétiques dans le backend : deux périmètres, import/rejeu/conflit, opposition, rappels et profils ; aucun envoi réel |
 | Documentation / exploitation | Guides CRM/import/profils, runbooks reprise/notifications, schéma/readiness/capacité et bundle à adapter à l'implémentation |
 
-Ordre de réalisation : domaine/droits et PWA → fiches/notes/suivi/carte → tâches/rappels → import → rattachements/recette. Le [plan de vérification](../../specifications/epic-71-crm-prospection/verification-livraison.md) relie chaque critère aux tests, documents, fixtures et conditions d'activation. Le statut reste **À faire** ; la spécification ne vaut ni développement ni clôture.
+Ordre de réalisation : domaine/droits et PWA → fiches/notes/suivi/carte → tâches/rappels → import → rattachements/recette. Le [plan de vérification](../../specifications/epic-71-crm-prospection/verification-livraison.md) relie chaque critère aux tests, documents, fixtures et conditions d'activation. Le statut est **En cours** ; le bilan de vérification distingue les tests exécutés et les réserves de livraison.

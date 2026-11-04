@@ -27,8 +27,8 @@ après ajout de l'EPIC 76 le 1er novembre 2026.
 | Etat | Epics | Dossier |
 | --- | ---: | --- |
 | Terminees | 64 | [terminees/](terminees/README.md) |
-| A faire | 9 | [a-faire/](a-faire/README.md) |
-| En cours | 3 | [en-cours/](en-cours/README.md) |
+| A faire | 8 | [a-faire/](a-faire/README.md) |
+| En cours | 4 | [en-cours/](en-cours/README.md) |
 | Abandonnees | 2 | [abandonnees/](abandonnees/README.md) |
 | Fusionnee | 1 | Epic 61 reprise dans l'[Epic 60](terminees/epic-60-vision-360-commercialisation-backlog.md) |
 
@@ -79,11 +79,11 @@ Le PIN dédié est retenu avec un compromis de droits limités : contexte transa
 gestion du PIN depuis l'accès commerçant et parcours client. Ses 34 critères couvrent
 validité, révocation, concurrence, incidents et absence d'accès professionnel.
 
-L'[EPIC 71](a-faire/epic-71-crm-prospection-animation-coffrets-pro-backlog.md) est recadrée
+L'[EPIC 71](en-cours/epic-71-crm-prospection-animation-coffrets-pro-backlog.md) est recadrée
 le 3 novembre en **Localeo CRM PWA**, Animation/Coffrets : profils ERP et droits CRM
 distincts, fiches/contacts/notes, suivi et rappels WebPush/e-mail facultatif. Carte
 interactive maintenue sur confirmation utilisateur ; import CSV INIT/UPSERT sans
-écraser le contexte. 28 critères actifs, 1 reporté ; aucune implémentation ni import réel.
+écraser le contexte. 28 critères actifs, 1 reporté ; implémentation locale et tests en cours, sans import réel.
 
 Le 5 octobre, l'[EPIC 72 — Accès salariés Localeo Pro](terminees/epic-72-acces-salaries-validation-localeo-pro-backlog.md)
 ajoute l'invitation email, le compte individuel limité au scanner Coffret/Animation,
@@ -180,7 +180,7 @@ précise la provenance et les divergences historiques conservées.
 | 35 | Terminee (historique) | Clôture conservée ; le cadrage non livré des nouveaux rôles est transféré à l'EPIC 69 sur demande explicite du 1er octobre. |
 | 69 | Terminee | [Profils et accès ERP/satellites](terminees/epic-69-profils-acces-erp-satellites-backlog.md) : clôture le 2 octobre après validation CA-18, 27 critères conservés ; recette cible et configuration dans le bilan. |
 | 70 | Terminée | [Validation sur téléphone client](terminees/epic-70-validation-prestation-telephone-client-backlog.md) : PIN dédié retenu, 34 critères ; contexte transactionnel, gestion commerçant du PIN et parcours client sans matériel ; risque résiduel borné par les droits, validité et révocation. |
-| 71 | A faire | [Localeo CRM PWA](a-faire/epic-71-crm-prospection-animation-coffrets-pro-backlog.md) : [spécification V1.1](../specifications/epic-71-crm-prospection/README.md) du 3 novembre, Animation/Coffrets, droits ERP distincts, notes/suivi/rappels, carte interactive, CSV INIT/UPSERT ; 28 critères actifs et 1 reporté, sans code livré. |
+| 71 | En cours | [Localeo CRM PWA](en-cours/epic-71-crm-prospection-animation-coffrets-pro-backlog.md) : [spécification V1.1](../specifications/epic-71-crm-prospection/README.md) du 3 novembre, Animation/Coffrets, droits ERP distincts, notes/suivi/rappels, carte interactive, CSV INIT/UPSERT ; 28 critères actifs et 1 reporté ; implémentation locale, migrations v290–v292 et vérification, sans déploiement. |
 | 72 | Terminée | [Accès salariés Localeo Pro](terminees/epic-72-acces-salaries-validation-localeo-pro-backlog.md) : implémentation locale vérifiée, 22 critères ; option ERP, invitations, scanner et historique limités, conservation. |
 | 73 | Terminée | [Animation et/ou Coffrets](terminees/epic-73-animation-et-ou-coffrets-backlog.md) : 38 US, 63 critères et extensions vérifiés techniquement le 1er novembre 2026 selon E73-DEC-CLOTURE-TESTS ; preuves et activation séparées dans le bilan. |
 | 74 | En cours | [Tombola publique](en-cours/epic-74-tombola-publique-backlog.md) : spécification du 3 novembre ; QR partageable, inscription directe par e-mail et règlement, trois modes de lots, quota standard et suivi commune Live ; 8 US, 16 critères ; tests locaux réussis et v289 appliquée à TEST |

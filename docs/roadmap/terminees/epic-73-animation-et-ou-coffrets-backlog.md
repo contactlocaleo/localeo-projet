@@ -101,7 +101,7 @@ initiaux. Preuves locales : [suivi](../../specifications/epic-73-animation-et-ou
 | [E56 — Participation des commerçants](../terminees/epic-56-validation-participation-commercants-animation-backlog.md), [E68 — Onboarding](../en-cours/epic-68-parcours-commercant-preparation-onboarding-backlog.md) | Distinguer périmètre produit, préparation du compte et accord pour chaque animation ; adapter étapes, pièces, contrats et communications |
 | [E70 — PIN](../terminees/epic-70-validation-prestation-telephone-client-backlog.md), [E72 — Salariés](../terminees/epic-72-acces-salaries-validation-localeo-pro-backlog.md) | Étendre le parcours PIN E70 aux bons de lots libres selon DEC-41 ; scan/PIN/historique et salariés respectent les droits du commerce, sans élargissement implicite des rôles |
 | [E42 — Localeo Live](../terminees/epic-42-localeo-live-grand-public-backlog.md) | Inscription, carnet, QR, progression et gains restent utilisables sans achat de coffret ; préserver les accès déjà distribués |
-| [E71 — CRM](../a-faire/epic-71-crm-prospection-animation-coffrets-pro-backlog.md) | Qualifier les ventes Animation seule / Coffrets seuls / ensemble et le périmètre du commerçant ; aligner conversions et preuves de gain sans créer de vente ou droit depuis une simple étiquette CRM |
+| [E71 — CRM](../en-cours/epic-71-crm-prospection-animation-coffrets-pro-backlog.md) | Qualifier les ventes Animation seule / Coffrets seuls / ensemble et le périmètre du commerçant ; aligner conversions et preuves de gain sans créer de vente ou droit depuis une simple étiquette CRM |
 
 ### Évolution du 30 octobre 2026 — découverte publique Animation
 

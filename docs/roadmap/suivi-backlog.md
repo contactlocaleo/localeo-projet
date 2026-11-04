@@ -81,11 +81,11 @@ créée le 5 octobre, terminée le 1er novembre selon E72-DEC-CLOTURE-TESTS, 22 
 Coffret/Animation, révocation et audit, historique complet du commerce en lecture seule, option ERP désactivée par défaut et sans plafond. E70 est étendue
 aux passages Animation et aux pannes du mobile commerçant : 34 critères ; PIN automatique valable 7 jours par défaut, configurable jusqu’à 30 jours, notification Localeo Pro à chaque succès.
 
-À faire : [EPIC-71 — Localeo CRM PWA](a-faire/epic-71-crm-prospection-animation-coffrets-pro-backlog.md),
+En cours : [EPIC-71 — Localeo CRM PWA](en-cours/epic-71-crm-prospection-animation-coffrets-pro-backlog.md),
 spécification V1.1 du 3 novembre : Animation/Coffrets, droits ERP distincts, contacts,
 notes, suivi et rappels WebPush/e-mail facultatif. Carte interactive maintenue,
 CSV INIT/UPSERT sans écrasement du contexte ; 28 critères actifs, 1 reporté.
-Aucun développement, envoi ou import réel déclenché.
+Implémentation locale et vérification sur données synthétiques ; aucun envoi ni import réel.
 
 Nouvelle [EPIC 69 — Profils et accès ERP/satellites](terminees/epic-69-profils-acces-erp-satellites-backlog.md),
 créée sur demande explicite, reprenant le cadrage complémentaire de l'EPIC 35 :
@@ -645,7 +645,7 @@ anciennes US restent historiques.
 | EPIC-68 | En cours | [backlog](en-cours/epic-68-parcours-commercant-preparation-onboarding-backlog.md) — V1.2 : mise en place du seul processus d'onboarding, du référencement à la finalisation ; envois confirmés, signature jour J et dépôt interne, socles réutilisés |
 | EPIC-69 | Termine | [backlog](terminees/epic-69-profils-acces-erp-satellites-backlog.md) ; clôture du 2 octobre 2026 après validation CA-18 |
 | EPIC-70 | Terminée | [backlog](terminees/epic-70-validation-prestation-telephone-client-backlog.md) |
-| EPIC-71 | A faire | [backlog](a-faire/epic-71-crm-prospection-animation-coffrets-pro-backlog.md) |
+| EPIC-71 | En cours | [backlog](en-cours/epic-71-crm-prospection-animation-coffrets-pro-backlog.md) |
 | EPIC-72 | Terminée | [backlog](terminees/epic-72-acces-salaries-validation-localeo-pro-backlog.md) |
 | EPIC-73 | Terminée | [backlog](terminees/epic-73-animation-et-ou-coffrets-backlog.md) ; 38 US, 63 critères, dix-huit arbitrages résolus, aucun ouvert recensé ; lots libres externes/numériques, modules (import, chasse, Web Push) et compléments SaaS (autonomie, accompagnement, valeur/coûts, réversibilité/reprise), cadrage des 14–15 octobre 2026 |
 | EPIC-74 | A faire | [backlog](en-cours/epic-74-tombola-publique-backlog.md) ; tombola publique standard sans commerçant, QR de participation, supports de stand et audience future ; 8 US, 16 critères cibles, six groupes d'arbitrages, cadrage du 22 octobre 2026 |

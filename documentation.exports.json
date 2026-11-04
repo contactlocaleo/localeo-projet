@@ -536,6 +536,18 @@
     {
       "path": "docs/ops/exploitation/exploiter-saas-animation.md",
       "source_path": "docs/exploitation/exploitation/exploiter-saas-animation.md"
+    },
+    {
+      "path": "docs/ops/crm/guide-utilisateur.md",
+      "source_path": "docs/specifications/epic-71-crm-prospection/guide-utilisateur.md"
+    },
+    {
+      "path": "docs/ops/crm/import-carte.md",
+      "source_path": "docs/specifications/epic-71-crm-prospection/import-carte.md"
+    },
+    {
+      "path": "docs/ops/crm/exploitation.md",
+      "source_path": "docs/specifications/epic-71-crm-prospection/exploitation.md"
     }
   ]
 }

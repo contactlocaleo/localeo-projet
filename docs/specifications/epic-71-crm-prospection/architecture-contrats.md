@@ -215,3 +215,69 @@ Configuration cible à ajouter, pas variables actuelles annoncées : activation 
 Le fournisseur cartographique, sa licence/attribution, couverture et quotas restent à choisir avant activation (ARB-06). Le port de géographie réutilise l'adaptateur `geo_api_gouv` derrière une façade de recherche CRM bornée ; aucun filtre de publication Marketplace. Le cache communal est indépendant des fiches Ville opérationnelles. Un échec du fond ou du référentiel n'empêche ni listes ni mutations CRM. La carte retourne groupes/prospects distincts et un état de couverture, sans transmettre les coordonnées professionnelles aux tiers.
 
 ARB-04b est confirmé : appliquer l’unicité typée ci-dessus, y compris en concurrence et après réouverture. Livrer et tester le guide utilisateur, les runbooks et le jeu synthétique selon la [matrice](verification-livraison.md). Aucun simple build, plan ou contrôle de liens ne valide ces comportements.
+
+
+## Contrat implémenté — novembre 2026
+
+Le [contrat OpenAPI CRM](openapi.json) est extrait des routes effectivement
+assemblées, avec leurs DTO stricts et dépendances de sécurité. Le générateur
+[generate_epic71_openapi.py](../../../../localeo-backend/scripts/documentation/generate_epic71_openapi.py)
+réutilise l’export hors ligne : aucun secret opérateur ni démarrage de service.
+La PWA backend consomme directement ces routes privées ; aucun contrat embarqué
+Pro/Animation/Marketplace n’est modifié.
+
+Précisions issues de la lecture des producteurs existants :
+
+- `COMMANDE_COFFRETS.reference_id` désigne **achats_coffret.id** d’un achat
+  professionnel payé, rattaché à son organisation professionnelle. Les commandes
+  de dotations Animation ne constituent pas un achat entreprise/CSE.
+- `ACCEPTATION_COMMERCANT` exige le dossier OnBoard accepté, le commerce actif et
+  une activation **Coffrets** attestée (date, preuve et version de politique).
+  Un dossier Animation seule clôturé ne fait pas gagner un partenariat Coffrets.
+- Toute confirmation d’une fiche distincte transmet `confirmer_distinct` et
+  `candidats_examines: [{id, version}]`. Le serveur compare l’ensemble courant
+  sous la transaction SERIALIZABLE ; un candidat nouveau ou modifié exige un
+  nouvel examen. Cela concerne également les contacts et dossiers.
+- Les responsables sont cherchés par `GET /internal/prospection/responsables?q=…`
+  avec pagination 25/100 et curseur lié à la recherche et à l’autorité. Seuls les
+  comptes internes actifs habilités à gérer le CRM peuvent recevoir une action.
+- L’administrateur historique conserve les commandes CRM ; ses imports gardent
+  une référence privée à la session vérifiée, jamais un faux compte interne.
+  Les préférences et abonnements personnels nécessitent un compte nominatif.
+
+Les migrations additives sont v290 (portefeuille), v291 (staging/imports) et
+v292 (droits, preuve d’adresse et rappels). Le guide de configuration et les
+endpoints des workers sont dans l’[exploitation](exploitation.md). Tous les
+transports et l’exposition CRM restent désactivés par défaut.
+
+### Navigation et commandes d’import livrées
+
+Le lot dispose d’une route profonde privée `/internal/crm/imports/{UUID}` conservée
+après authentification. `GET /internal/prospection/imports` pagine l’historique et
+`GET /internal/prospection/imports/{UUID}` expose `actions_autorisees` : liste fermée
+parmi `confirmer`, `arret`, `reprise`, `annulation`. Le domaine calcule ces actions
+avec les mêmes transitions et contrôles d’auteur/confirmateur que les commandes.
+Le client ne déduit aucune permission de l’affichage ; les refus métier
+`CONFIRMATEUR_DIFFERENT` / `AUTEUR_DIFFERENT` restent distincts d’une session révoquée.
+
+Les choix d’une organisation dans un aperçu portent sa référence de groupe CSV,
+les candidats observés et leurs versions. Les anomalies affichent code et lignes
+concernées. Sources et responsables restent accessibles par pages bornées.
+
+### Régulation des lectures agrégées
+
+La carte autorise **deux calculs simultanés** et le tableau de bord **un calcul**,
+dans des files distinctes par processus applicatif : le compteur court n’attend
+pas derrière les cartes. Leur attente, comprise dans les mesures de latence,
+est bornée à cinq secondes ; au-delà, la réponse est **503** avec le code
+`CRM_LECTURE_SATUREE`. Le client conserve sa session et peut réessayer. Cette
+limite ne remplace pas le dimensionnement du nombre de processus ou du pool SQL :
+avec W processus, jusqu’à 3 × W agrégats peuvent s’exécuter. La connexion déjà
+acquise pour le contrôle d’autorité reste occupée pendant l’attente ; aucune
+connexion supplémentaire n’est ouverte pour cette file.
+Les listes ordinaires ne passent pas dans cette file. Aucun résultat privé n’est
+mis en cache par ce mécanisme et les droits restent contrôlés normalement.
+
+La carte agrège d’abord par commune côté SQL, après les filtres communs. Pour les
+deux agrégats, le parallélisme PostgreSQL est désactivé uniquement dans la
+transaction en cours ; commit et rollback rétablissent le réglage de connexion.
