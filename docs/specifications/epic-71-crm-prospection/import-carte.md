@@ -11,14 +11,18 @@ un CSV standard ; le parseur du classeur XLSX Gironde n’est pas réactivé.
 
 ## Préparer depuis Excel
 
-1. Choisir le format et copier les en-têtes de son modèle dans une feuille dédiée. **Une ligne = un prospect + un dossier commercial + éventuellement un contact.** Répéter les mêmes références pour ajouter un contact, un dossier ou une observation à une même structure. Les blocs de qualification du format 2 restent facultatifs.
+1. Choisir le format et copier les en-têtes de son modèle dans une feuille dédiée. **Une ligne = un prospect, avec éventuellement un contact, un dossier commercial ou une observation.** Un import de prospection ne crée aucun dossier par défaut. Répéter les mêmes références pour compléter une même structure. Les blocs de qualification du format 2 restent facultatifs.
 2. Attribuer des références stables : `P0001` pour le prospect, `C0001` pour le contact, `O0001` pour le dossier. Garder ces références lors des prochains exports, même si les noms ou l'ordre des lignes changent. Ne pas utiliser le numéro de ligne Excel ou le nom de la structure comme identifiant.
 3. Formater les références, codes postaux, INSEE et téléphones en **Texte** dans Excel pour conserver zéros initiaux et signes `+`. Exporter des valeurs, pas des formules.
 4. Enregistrer en **CSV UTF-8**, séparateur **point-virgule**. Vérifier la première ligne : certains réglages Excel produisent des virgules ; le CRM refuse ce format avec une explication, sans réinterprétation silencieuse. Les champs contenant point-virgule, guillemet ou saut de ligne sont entre guillemets CSV, un guillemet interne est doublé.
 5. Dans le CRM, choisir le **Format du fichier**, la source stable, par exemple `prospection-excel`, et le mode **INIT/UPSERT**. Télécharger le modèle correspondant au format sélectionné. Format et mode sont indépendants ; fichier et plan conservent le format choisi. La source est choisie dans une liste de sources existantes ; « Nouvelle source » est une action explicite. Le serveur retire les espaces de bord et passe le nom en minuscules avant validation/unicité : 1–64 caractères `[a-z0-9._-]`. Une création normalisée vers un nom existant propose cette source, sans en créer une autre. Le nom canonique stable est affiché explicitement avant confirmation. Réutiliser exactement cette source aux imports suivants. La source de rapprochement est distincte de la colonne descriptive `source`.
 6. Lire l'aperçu, corriger le fichier ou exclure explicitement les groupes en erreur, puis confirmer. Un bilan indique ce qui a réellement changé.
 
-Quatre colonnes sont toujours renseignées : **prospect_ref, nom_prospect, opportunite_ref, perimetre**. `objectif_coffrets` est obligatoire uniquement pour COFFRETS ; `contact_ref` uniquement si des données de contact sont fournies. **`code_insee` est obligatoire pour créer un prospect ou enrichir effectivement sa localisation**, en INIT comme en UPSERT. Il peut rester absent pour enrichir seulement les contacts ou le suivi d'une fiche existante. Les autres colonnes peuvent rester vides. Le modèle complet fournit tous les en-têtes ; le parseur accepte leur réordre et l'absence des colonnes facultatives, mais refuse les noms inconnus ou dupliqués. Le rapport distingue ligne CSV logique et groupe prospect.
+Deux colonnes sont toujours renseignées : **prospect_ref, nom_prospect**. **`code_insee` est obligatoire pour créer un prospect ou enrichir effectivement sa localisation**, en INIT comme en UPSERT. Il peut rester absent pour enrichir seulement les contacts ou le suivi d'une fiche existante. `contact_ref` est requis si des données de contact sont fournies.
+
+**Dossier commercial facultatif, dans les deux formats :** laisser `opportunite_ref`, `perimetre`, `objectif_coffrets`, `titre_opportunite` et les attributs de projet du format 2 vides, ou omettre ces colonnes. Aucune référence ni aucun dossier « Qualification » n’est généré automatiquement. Pour demander un dossier, renseigner explicitement `opportunite_ref` et `perimetre` ; `objectif_coffrets` est alors obligatoire uniquement pour COFFRETS. Des champs de dossier/projet renseignés sans sa référence produisent `DOSSIER_REFERENCE_REQUISE`, sans ignorer silencieusement les données. Les contacts, notes, comptages, observations et appartenances EPCI restent importables seuls.
+
+Un groupe peut mélanger des lignes sans dossier et des lignes demandant un dossier identifié. Les modèles gardent leurs 21/85 en-têtes ; le parseur accepte leur réordre et l'absence des colonnes facultatives, mais refuse les noms inconnus ou dupliqués. Les anciens fichiers avec références de dossier conservent leur comportement. Le rapport distingue ligne CSV logique et groupe prospect.
 
 ### Territoire ouvert à la prospection
 
@@ -62,8 +66,8 @@ Toutes les cellules sont des chaînes ; pas de valeur magique `NULL`, de boolée
 | `contact_fonction` | 150 caractères max | Fonction professionnelle facultative |
 | `contact_email` | Adresse valide, 254 caractères max | Complément seulement ; aucun e-mail envoyé |
 | `contact_telephone` | Chaîne, 32 caractères max | Complément seulement |
-| `opportunite_ref` | Requis, référence stable 1–64 | Identifie le dossier sous ce prospect, pas la ligne CSV |
-| `perimetre` | Requis : `ANIMATION` ou `COFFRETS` | Immutable par import sur un dossier existant |
+| `opportunite_ref` | Facultatif ; si un dossier est demandé, référence stable 1–64 | Vide/absent = aucun dossier ; sinon identifie le dossier sous ce prospect, pas la ligne CSV |
+| `perimetre` | Requis avec `opportunite_ref` : `ANIMATION` ou `COFFRETS` ; sinon vide | Qualifie le dossier, pas l’intérêt général du prospect ; immutable sur un dossier existant |
 | `objectif_coffrets` | COFFRETS : `PARTENARIAT_COMMERCANT` ou `ACHAT_ENTREPRISE_CSE` ; vide pour ANIMATION | Immutable par import sur un dossier existant |
 | `titre_opportunite` | 200 caractères max ; vide = libellé du périmètre/objectif | Initialisation d'un nouveau dossier seulement |
 | `source` | Provenance descriptive, 300 caractères max | Valeur initiale puis provenance du lot ; ne remplace pas la source déjà renseignée |
@@ -72,6 +76,18 @@ Toutes les cellules sont des chaînes ; pas de valeur magique `NULL`, de boolée
 Les valeurs répétées pour une même référence doivent être identiques après normalisation documentaire (espaces de bord, fins de ligne) ou vides. Deux valeurs non vides contradictoires bloquent le **groupe prospect entier**. Il ne faut pas répéter des contextes différents selon le contact : le contexte est propre au prospect. Les contacts et dossiers partagent le prospect ; une ligne ne signifie pas « ce contact est l'unique contact de ce dossier ».
 
 ### Exemple réduit (données fictives)
+
+Prospect avec un contact, **sans dossier commercial**, dans les deux formats :
+
+```csv
+prospect_ref;nom_prospect;code_insee;contact_ref;contact_nom;contexte_initial
+P0001;Association fictive;33234;C0001;Camille Exemple;Repères de qualification documentaire
+```
+
+Résultat : une fiche, un contact, une note initiale et **zéro dossier**. Un vrai projet
+peut ensuite être ajouté depuis la fiche avec **Ajouter un dossier**, ou dans un
+import UPSERT avec une référence de dossier explicite. Un réimport sans dossier
+ne supprime ni ne modifie les dossiers déjà présents.
 
 Ces colonnes suffisent pour deux périmètres et deux contacts, sans dupliquer la structure :
 
@@ -89,7 +105,7 @@ Résultat initial attendu : **2 prospects, 2 contacts et 3 dossiers**, une seule
 
 Le [modèle format 2](modele-import-qualification-v2.csv) comporte **85 colonnes :
 les 21 précédentes et 64 nouvelles**. Les colonnes facultatives peuvent être omises.
-Les quatre colonnes générales et l’INSEE à la création restent les seuls prérequis
+Les deux colonnes générales et l’INSEE à la création restent les seuls prérequis
 communs ; utiliser un bloc impose ses dépendances et ses preuves. Le format 1
 continue de refuser ces nouvelles colonnes : sélectionner le format 2 avant l’envoi.
 
@@ -266,6 +282,23 @@ Référence : [Code officiel géographique INSEE](https://www.insee.fr/fr/metado
   n’est pas configuré. Aucun déplacement de fiche ni nouvelle migration.
 
 L'import conserve la commune déclarée et un éventuel code INSEE. Après validation de la fiche, la résolution géographique est une opération distincte, bornée et reprenable, sans modifier l'identité de source. Un code INSEE reconnu permet le centre communal ; un libellé/homonyme exige confirmation. Une indisponibilité géographique n'annule pas un import métier réussi et ne crée pas de fausse position.
+
+Le batch `prospection.imports.traiter` alimente automatiquement le cache des codes
+INSEE de Nouvelle-Aquitaine encore absents, même sans lot restant à traiter.
+Il couvre aussi les imports déjà terminés et les fiches archivées. Par passage :
+au plus 12 départements, 1 000 codes distincts par département et 2 000 communes
+dans chaque réponse publique. Le référentiel fournit les centres par
+[département](https://geo.api.gouv.fr/decoupage-administratif/communes) ; seul ce
+code public est transmis. Aucun réseau dans la transaction d’import ni pendant
+une transaction SQL ; les écritures additives conservent tout centre déjà connu.
+Un département indisponible ne bloque pas les autres et sera réessayé.
+
+La projection carte expose `geolocalisation_en_attente` : nombre de prospects
+sélectionnés ayant un INSEE sans centre connu, après filtres de prospection et
+de territoire, avant la fenêtre géographique et le plafond de 500 communes.
+Ce compteur est distinct de `sans_commune` (INSEE absent). L’interface explique
+l’attente et conserve l’accès à la liste. Un code ancien/inconnu ne produit
+aucune position supposée : **Localiser la commune** permet sa résolution explicite.
 
 Le cache de communes CRM conserve INSEE, nom, département/zone, latitude/longitude, source et date de référence. Il est indépendant de la publication des villes marchandes. Une fusion/changement de commune est signalé pour résolution explicite, sans déplacer arbitrairement le prospect. Les coordonnées d'un centre ne sont jamais présentées comme celles de l'établissement.
 

@@ -826,3 +826,180 @@ sur les frontends Pro/Animation/Live ou le générateur. Le contrat OpenAPI CRM
 régénéré hors ligne reste identique au contrat canonique. Ce bilan distingue le
 code local de son déploiement : aucun commit, push ou changement de configuration
 TEST n’est réalisé dans cette demande.
+
+### Correctif CSV — dossier commercial facultatif, 4 novembre 2026
+
+Sur demande utilisateur, l’import ne doit pas ouvrir un dossier commercial
+« Qualification… » pour chaque prospect. Le domaine des formats 1 et 2 exige
+désormais seulement `prospect_ref` et `nom_prospect`, plus l’INSEE pour créer ou
+modifier la localisation. Un dossier requiert sa référence et son périmètre
+explicites ; les champs de dossier/projet sans référence sont refusés avec
+`DOSSIER_REFERENCE_REQUISE`. Contacts, notes, observations et appartenance EPCI
+restent indépendants. Les anciens CSV demandant un dossier gardent leur
+comportement ; les plans, empreintes et écritures restent inchangés.
+
+- Reproduction domaine : **27 échecs avant correction**, 62 cas existants réussis ;
+  après correction, **193 tests du domaine Prospection réussis**.
+- Groupe final architecture/recensements/domaine et sécurité du batch : **861
+  réussis**. Ces tests recouvrent les 193 précédents : ne pas les additionner.
+- PostgreSQL local jetable et vraie pile HTTP d’import : **38 réussis**, deux
+  tests de volume explicitement non sélectionnés. Vérifiés en formats 1 et 2 :
+  création fiche/contact/note sans dossier ni lien DOSSIER, INIT répété sans
+  doublon, ajout ultérieur explicite en UPSERT. Le cas structuré conserve
+  **44 commerces** et sa référence à 44 après une nouvelle observation à 45,
+  l’appartenance, le contact et la note, sans dossier.
+- Recette navigateur CRM réussie ; notice d’import et rendu contrôlés à
+  **320/1280 px**, sans débordement horizontal. Les autres parcours existants
+  du scénario navigateur restent couverts.
+- Revue indépendante : aucun dossier implicite ni perte de qualification,
+  autorité et protection des réimports conservées. Prospects et tableau de bord
+  incluent les fiches sans dossier ; la carte compte zéro dossier et Suivi
+  affiche seulement les dossiers ouverts explicitement. Les filtres de dossier
+  excluent normalement les fiches sans dossier correspondant.
+
+Le CSV prioritaire privé est réémis avec **800 prospects, 646 contacts, 800 notes,
+1 754 observations et zéro dossier attendu** sur une base vide. Toutes les cellules
+hors champs de dossier/projet sont comparées à l’export précédent et identiques,
+notamment notes intégrales et compteurs de commerces. Source et références de
+prospect/évaluation sont conservées. L’ancien export et le classeur restent
+intacts ; les fichiers et leur notice demeurent hors Git.
+
+Aucune migration, suppression de dossiers existants, modification des droits ni
+impact sur les trois frontends publics/commerçants/organisateurs ou le générateur.
+Le contrat HTTP ne change pas de forme ; les modèles gardent leurs 21/85 en-têtes
+et le contrat CSV canonique décrit les nouvelles conditions. Aucun import TEST,
+commit, push ni déploiement de ce correctif n’est réalisé dans cette demande.
+
+## Correctif du 4 novembre 2026 — communes importées absentes de la carte
+
+**Cause reproduite sur TEST :** 670 prospects conservaient leur code INSEE,
+mais 666 n’avaient aucun centre dans `crm_communes`. La carte joignait ce cache,
+alimenté seulement par une recherche manuelle de commune, sans rattrapage des
+imports CSV. Aucun filtre ou dossier manquant n’expliquait cette absence.
+
+Le batch d’import complète désormais ce cache public, y compris sans lot en
+attente et pour les imports terminés. Traitement borné par département, réseau
+hors transaction, code exact, cache existant préservé et échec d’un département
+indépendant des suivants. Aucun prospect, note, contact, comptage, dossier ou
+version n’est changé. La carte distingue attente géographique et INSEE absent.
+
+Preuves locales sur l’arbre de travail basé sur backend `16fd210` :
+
+- Reproduction du rattrapage avant implémentation : trois tests en échec pour
+  résolveur absent. Après correction, l’import sans dossier passe de zéro point
+  à un point ; rejeu sans appel réseau, aucune mutation métier.
+- **79 tests réussis** : résolution/adapter, PostgreSQL jetable, cœur CRM,
+  formats d’import, vraie pile HTTP et sécurité/supervision du batch. Puis
+  **30 tests réussis** pour la résolution et les filtres carte API/PostgreSQL,
+  dont le compteur avant bbox et les filtres de dossier. Ces groupes se recouvrent.
+- **852 tests réussis** d’architecture, recensements et domaine Prospection.
+- Navigateur CRM réussi, y compris localisation en attente à **320/1280 px**,
+  sans débordement ; parcours et droits existants conservés. Captures locales
+  privées. Revue indépendante : aucune réserve bloquante après correction de
+  la stratégie de reprise ; aucune requête géographique pendant un verrou SQL.
+- Guides et sources exportées vérifiés ; la réponse carte reste une projection
+  objet libre dans l’OpenAPI. Ajout documenté de `geolocalisation_en_attente` et
+  des compteurs batch `geographie`, consommés uniquement par CRM/supervision.
+
+**Rattrapage TEST réalisé :** 666 centres ajoutés, zéro erreur ou code introuvable,
+670 prospects localisables sur 668 codes INSEE distincts. Sauvegarde privée du
+cache et empreintes des huit tables métier suivies avant/après identiques.
+Lecture réelle de la projection SQL : zéro localisation en attente dans les
+douze départements, aucun département tronqué, somme des prospects départementaux
+égale à 670. Région : 500 communes affichées et `truncated=true`, plafond existant.
+Les preuves privées sont dans le backend, sous
+`demonstrations/prive/operations/crm-centres-communes-test-20261104T222331Z/`.
+Ce contrôle SQL ne constitue pas une recette de session navigateur authentifiée
+sur TEST ; la recette navigateur utilise des données fictives locales.
+
+Aucune migration, droit nouveau, modification du CSV ou du générateur requise :
+les données synthétiques disposent déjà de leurs centres et le schéma ne change
+pas. Les trois autres frontends ne consomment pas cette projection CRM. Les
+réserves de capacité historiques restent ouvertes ; aucun nouveau test de charge
+à grande échelle n’a été exécuté pour ce correctif. Code backend/PWA et guides
+modifiés localement, sans commit, push ni déploiement automatique.
+
+## Correctif du 4 novembre 2026 — totaux et pagination des recherches CRM
+
+Les listes ne donnaient que les flèches précédente/suivante : les API ne
+fournissaient aucun total et les projections fermées ne déclaraient pas ces
+informations. Trois reproductions PostgreSQL échouent avant correction faute
+de prise en charge de l’option de comptage.
+
+Les listes partagent désormais un résumé **26–50 sur 670 résultats** et un pied
+**Page 2 sur 27 · 25 par page**, avec flèches à pictogrammes, intitulés accessibles
+et cibles de 44 px. Zéro résultat, début/fin, ouverture directe d’un curseur,
+erreur de chargement et total devenu ancien sont distingués. L’historique reste
+inchangé après une erreur et les boutons sont neutralisés pendant la requête.
+
+Le contrat additif `avec_total=true` retourne `total`, `position` et
+`total_calcule_le` selon les mêmes filtres SQL que les lignes. Le curseur est
+validé avant comptage ; aucune modification des droits ou des signatures. La
+PWA demande le total une fois par recherche, puis conserve son repère daté
+pendant la navigation keyset. Aucun `OFFSET`, parcours complet côté navigateur
+ou comptage supplémentaire imposé aux consommateurs existants. Saturation et
+timeout du comptage : 503 `CRM_LECTURE_SATUREE` ; délai SQL précédent rétabli
+après succès. Les enfants de fiche, qualifications et imports sont couverts.
+
+Preuves sur backend `16fd210` et changements locaux, avec les correctifs
+précédents conservés :
+
+- **57 tests réussis** dans le groupe final PostgreSQL/API/projections et mesures
+  ciblées : total avant curseur, rang direct, tâches en ordre ascendant, filtres
+  de territoire/dossier, absence de doublons de prospects, zéro et absence
+  d’option, rejet du curseur avant comptage, timeout réel, restauration du délai
+  SQL, imports/qualifications et compatibilité des filtres carte.
+- **38 tests de compatibilité réussis** pour les API/transactions existantes
+  d’import et de qualification ; trois anciens tests de budget/profilage non
+  sélectionnés. Les nouvelles mesures dédiées ci-dessous sont exécutées.
+- **853 tests réussis** d’architecture, recensements et domaine Prospection.
+- Navigateur CRM final réussi : 51 résultats répartis sur trois pages,
+  précédent/suivant, une seule demande de comptage malgré navigation et reprise
+  après 503, absence de double clic pendant la latence, filtres zéro/un résultat,
+  remise à zéro et curseur ouvert directement. Erreur initiale récupérable par
+  actualisation ; passage de 51 à 76 résultats signalant le repère devenu ancien.
+  Captures de résumé/pied à **320/1280 px** contrôlées, sans débordement ni double
+  défilement ; notices d’import et état géographique antérieurs conservés.
+- Mesures finales locales, cinq passages par recherche, PostgreSQL jetable :
+
+| Prospects synthétiques | Tous avec total, max | Recherche avec total, max | Département avec total, max | Page suivante sans comptage |
+| --- | --- | --- | --- | --- |
+| 10 000 | 39,50 ms | 34,15 ms | 21,12 ms | 5,15 ms |
+| 100 000 | 47,70 ms | 63,38 ms | 35,30 ms | 3,93 ms |
+
+Les mesures incluent comptage et chargement de 25 résultats, sous le budget
+local déclaré de 1 s. Plan `EXPLAIN ANALYZE/BUFFERS` conservé dans les rapports
+de test privés. Il ne s’agit pas d’une charge concurrente en hébergement ni de
+la levée des réserves de capacité historiques du CRM.
+
+Revue indépendante : filtres/droits, option hors signature, défaut sans coût,
+projections fermées et libération du sémaphore vérifiés ; remarque sur le timeout
+résolue par restauration du délai précédent et test dédié. OpenAPI canonique
+régénéré : 50 chemins, 62 schémas, ajouts optionnels seulement. Guides utilisateur,
+contrat et diagnostic d’exploitation actualisés. Aucune migration, modification
+du CSV ou du générateur, ni effet sur les trois autres frontends : projection de
+lecture propre à CRM et données synthétiques existantes compatibles.
+
+Aucun accès à TEST pour ce correctif, commit, push ou déploiement effectué.
+
+## Correctif du 4 novembre 2026 — historique des imports réduit à la source
+
+Les événements `IMPORT` présentaient tout le contexte documentaire du CSV dans
+**Historique des échanges**, avec type, date et identifiant de l’importateur.
+Ils affichent désormais uniquement **Source : …**, valeur du champ **Origine du
+prospect**, ou **Non renseignée** si absent. Les notes, appels, e-mails et leurs
+corrections gardent leur présentation. Le texte importé est conservé en base ;
+aucune suppression, modification d’import ou extraction heuristique du texte.
+
+Reproduction navigateur avant correction : absence du libellé de source attendu.
+Après correction, scénario complet CRM réussi avec entrée importée volumineuse
+et note manuelle : source seule, détail et auteur technique absents du DOM,
+note manuelle et correction conservées. Source vide explicite et source contenant
+du balisage affichée comme texte, sans élément HTML injecté. Captures vérifiées
+à **320/1280 px**, sans débordement. Syntaxe JavaScript, `git diff --check`, guides
+et 145 sources documentaires vérifiés.
+
+Correctif de présentation dans le backend/PWA CRM et son guide canonique ; aucun
+changement d’API, de règle métier, de schéma, de générateur ou des autres frontends.
+Pas de rejeu Python/PostgreSQL nécessaire pour ce rendu JavaScript. Aucun accès
+à TEST, commit, push ou déploiement réalisé ; travaux antérieurs conservés.

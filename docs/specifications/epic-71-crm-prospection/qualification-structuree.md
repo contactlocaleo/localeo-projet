@@ -279,17 +279,20 @@ Aucun nom, score détaillé ou preuve n’est transmis au fournisseur de tuiles.
 
 ## 8. Import : format 2 et compatibilité du format 1
 
-Le format 1 et son [modèle actuel](modele-import.csv) restent inchangés et pris en
-charge. Le serveur actuel refuse les nouvelles colonnes : **ne pas les ajouter
-au fichier de production avant livraison du format 2**. Le modèle cible
-[format 2](modele-import-qualification-v2.csv) est un gabarit de spécification,
-pas une fonctionnalité déjà disponible. Le mode INIT/UPSERT reste indépendant
+Le format 1 et ses 21 en-têtes restent pris en charge, ainsi que le
+[format 2](modele-import-qualification-v2.csv) et ses 85 en-têtes. Leur
+implémentation et leur livraison sont suivies dans le bilan. Le mode INIT/UPSERT reste indépendant
 du numéro de format, choisi explicitement à l’upload ; pas de détection implicite
 par noms de colonnes. Fichier et plan conservent le numéro de format.
 
 Le gabarit complet comporte **85 colonnes : 21 existantes et 64 nouvelles**.
-Les quatre colonnes de base requises et l’INSEE à la création restent les seuls
-prérequis généraux ; les autres colonnes peuvent être omises. Dès qu’un bloc est
+Les deux colonnes de base `prospect_ref`, `nom_prospect` et l’INSEE à la création restent les seuls
+prérequis généraux ; les autres colonnes peuvent être omises. Le dossier est
+facultatif : sans `opportunite_ref`, aucun dossier n’est créé. Son périmètre,
+titre, objectif Coffrets et tout le bloc de qualification Projet doivent alors
+rester vides ; sinon `DOSSIER_REFERENCE_REQUISE`. Les observations de potentiel,
+contacts et appartenances s’importent indépendamment d’un projet.
+Dès qu’un bloc est
 utilisé, ses dépendances conditionnelles deviennent obligatoires. En CSV : dates
 ISO, entiers sans séparateur ni symbole monétaire, budget en centimes, énumérations
 exactes et aucune valeur magique NULL. Le modèle vide n’est pas une obligation

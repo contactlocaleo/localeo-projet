@@ -116,6 +116,37 @@ Authentification interne et CSRF sur mutation ; destination de retour autorisée
 
 ## Contrat API cible
 
+### Totaux et repères de pagination — correctif du 4 novembre 2026
+
+Les pages du portefeuille, enfants de fiche, qualifications, lots et groupes
+d’import acceptent **`avec_total=true`**, facultatif et désactivé par défaut.
+La réponse ajoute `total` (nombre exact selon les filtres avant curseur),
+`position` (nombre de résultats précédant la page, base zéro) et
+`total_calcule_le` (date UTC). Un total nul reste zéro. Sans cette option, les
+métadonnées sont absentes et aucun comptage supplémentaire n’est effectué.
+Les sélecteurs de candidats/preuves et les référentiels ne sont pas concernés.
+
+Le comptage réutilise les prédicats SQL de la page et ses droits/périmètres ; les
+relations enfants restent exprimées par `EXISTS` pour ne pas multiplier les
+prospects. Un curseur invalide est refusé avant tout comptage. Le rang d’un
+curseur ouvert directement est obtenu par agrégat sur la même sélection, sans
+`OFFSET`. Les lignes restent sélectionnées par clé avec `limit+1`, limite 25
+par défaut et maximum 100 ; aucun chargement intégral en mémoire.
+
+La PWA demande le total uniquement au premier chargement d’une recherche, puis
+conserve ce repère daté en mémoire pour les flèches. Une actualisation ou un
+changement de filtres relance le calcul. La navigation reste vivante : une
+modification concurrente peut rendre le total initial ancien ; aucun instantané
+exhaustif du portefeuille n’est annoncé. L’historique de navigation ne progresse
+qu’après une réponse réussie.
+
+Le calcul dédié est limité à deux comptages concurrents par processus, attente
+maximale cinq secondes et timeout SQL cinq secondes. Saturation : HTTP 503
+`CRM_LECTURE_SATUREE`, sans données CRM dans l’erreur ni cache de réponse privé.
+Le budget local de première recherche avec total est 1 s sur les jeux synthétiques
+10 000/100 000 ; il ne remplace pas les réserves de capacité du socle ou une
+mesure de trafic en hébergement. Aucune migration ni changement de droits.
+
 Préfixe **`/internal/prospection`**, tags `internal` et `prospection`. Source canonique de conception : ce dossier ; générateur OpenAPI à maintenir dans le backend à l'implémentation, export documentaire contrôlé ici si consommé. Aucun endpoint ci-dessous annoncé existant. Consommateurs : PWA CRM, ERP pour habilitations/liens, worker de rappels/import. Les contrats publics Pro/Animation/Live ne changent pas.
 
 | Famille | Commandes et lectures principales | Accès |

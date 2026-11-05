@@ -232,6 +232,16 @@
             }
           },
           {
+            "name": "avec_total",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Avec Total"
+            }
+          },
+          {
             "name": "sous_type_collectivite",
             "in": "query",
             "required": false,
@@ -970,6 +980,16 @@
               ],
               "title": "Cursor"
             }
+          },
+          {
+            "name": "avec_total",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Avec Total"
+            }
           }
         ],
         "responses": {
@@ -1382,6 +1402,16 @@
                 }
               ],
               "title": "Cursor"
+            }
+          },
+          {
+            "name": "avec_total",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Avec Total"
             }
           },
           {
@@ -2075,6 +2105,16 @@
               ],
               "title": "Cursor"
             }
+          },
+          {
+            "name": "avec_total",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Avec Total"
+            }
           }
         ],
         "responses": {
@@ -2148,6 +2188,16 @@
                 }
               ],
               "title": "Cursor"
+            }
+          },
+          {
+            "name": "avec_total",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Avec Total"
             }
           }
         ],
@@ -2364,6 +2414,16 @@
               ],
               "title": "Cursor"
             }
+          },
+          {
+            "name": "avec_total",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Avec Total"
+            }
           }
         ],
         "responses": {
@@ -2515,6 +2575,16 @@
                 }
               ],
               "title": "Cursor"
+            }
+          },
+          {
+            "name": "avec_total",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Avec Total"
             }
           }
         ],
@@ -2883,6 +2953,16 @@
                 }
               ],
               "title": "Cursor"
+            }
+          },
+          {
+            "name": "avec_total",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Avec Total"
             }
           }
         ],
@@ -4031,6 +4111,16 @@
               ],
               "title": "Projet Id"
             }
+          },
+          {
+            "name": "avec_total",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Avec Total"
+            }
           }
         ],
         "responses": {
@@ -4711,6 +4801,16 @@
               ],
               "title": "Cursor"
             }
+          },
+          {
+            "name": "avec_total",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Avec Total"
+            }
           }
         ],
         "responses": {
@@ -4900,6 +5000,16 @@
                 }
               ],
               "title": "Cursor"
+            }
+          },
+          {
+            "name": "avec_total",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Avec Total"
             }
           }
         ],
@@ -5544,6 +5654,16 @@
               ],
               "title": "Cursor"
             }
+          },
+          {
+            "name": "avec_total",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Avec Total"
+            }
           }
         ],
         "responses": {
@@ -5719,6 +5839,16 @@
                 }
               ],
               "title": "Cursor"
+            }
+          },
+          {
+            "name": "avec_total",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Avec Total"
             }
           }
         ],
@@ -7320,6 +7450,42 @@
               }
             ],
             "title": "Next Cursor"
+          },
+          "total": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total"
+          },
+          "position": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Position"
+          },
+          "total_calcule_le": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total Calcule Le"
           },
           "references": {
             "items": {
@@ -9481,6 +9647,44 @@
       },
       "PageContactsPayload": {
         "properties": {
+          "total": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total",
+            "description": "Total filtré à la date de calcul, demandé avec avec_total=true ; indépendant du curseur."
+          },
+          "position": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Position",
+            "description": "Nombre de résultats précédant la page au moment du calcul, sans OFFSET SQL."
+          },
+          "total_calcule_le": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total Calcule Le"
+          },
           "items": {
             "items": {
               "$ref": "#/components/schemas/ContactPayload"
@@ -9532,6 +9736,42 @@
               }
             ],
             "title": "Next Cursor"
+          },
+          "total": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total"
+          },
+          "position": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Position"
+          },
+          "total_calcule_le": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total Calcule Le"
           }
         },
         "type": "object",
@@ -9564,6 +9804,42 @@
               }
             ],
             "title": "Next Cursor"
+          },
+          "total": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total"
+          },
+          "position": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Position"
+          },
+          "total_calcule_le": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total Calcule Le"
           }
         },
         "type": "object",
@@ -9574,6 +9850,44 @@
       },
       "PageOpportunitesPayload": {
         "properties": {
+          "total": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total",
+            "description": "Total filtré à la date de calcul, demandé avec avec_total=true ; indépendant du curseur."
+          },
+          "position": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Position",
+            "description": "Nombre de résultats précédant la page au moment du calcul, sans OFFSET SQL."
+          },
+          "total_calcule_le": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total Calcule Le"
+          },
           "items": {
             "items": {
               "$ref": "#/components/schemas/OpportunitePayload"
@@ -9603,6 +9917,44 @@
       },
       "PageOrganisationsPayload": {
         "properties": {
+          "total": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total",
+            "description": "Total filtré à la date de calcul, demandé avec avec_total=true ; indépendant du curseur."
+          },
+          "position": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Position",
+            "description": "Nombre de résultats précédant la page au moment du calcul, sans OFFSET SQL."
+          },
+          "total_calcule_le": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total Calcule Le"
+          },
           "items": {
             "items": {
               "$ref": "#/components/schemas/app__api__prospection_projection_schemas__OrganisationPayload"

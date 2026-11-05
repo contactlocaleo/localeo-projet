@@ -23,6 +23,23 @@ L'ancienne installation et ses abonnements ne sont pas transférés automatiquem
 
 ## 2. Créer un prospect et préparer la suite
 
+### Se repérer dans les résultats
+
+Les listes affichent le **nombre total de résultats correspondant aux filtres**,
+la tranche consultée et la page : par exemple **26–50 sur 670 résultats**, puis
+**Page 2 sur 27 · 25 par page**. Les flèches précédente/suivante sont désactivées
+aux bornes ; leur nom reste accessible au clavier et aux lecteurs d’écran.
+Une recherche sans résultat indique **0 résultat**.
+
+Le total est calculé au chargement de la recherche. Survolez le compteur pour
+voir sa date ; utilisez **Actualiser** pour le recalculer après les modifications
+d’un autre gestionnaire. Les filtres relancent une recherche en première page.
+La même présentation s’applique aux listes de suivi, rappels, contacts, échanges,
+évaluations et imports. Une erreur en changeant de page conserve les résultats
+déjà affichés ; vous pouvez réessayer la flèche.
+
+### Ajouter une fiche
+
 1. Choisissez **Nouveau prospect**. Saisissez son nom et son type. Recherchez puis sélectionnez sa **commune en Nouvelle-Aquitaine** : elle est obligatoire. Les autres coordonnées peuvent être complétées plus tard.
 2. Choisissez le périmètre et l’objectif du premier dossier : souscription Animation, partenariat commerçant Coffrets ou achat entreprise/CSE. Affectez un responsable.
 3. Enregistrez. Le prospect et son premier dossier sont créés ensemble. Une fiche ressemblante demande un examen explicite ; ouvrez la fiche existante si elle représente la même structure.
@@ -31,6 +48,12 @@ L'ancienne installation et ses abonnements ne sont pas transférés automatiquem
 6. **Planifier une action** précise le responsable, l’échéance et le rappel, en heure de Paris. Une préparation interne ne sollicite personne ; les autres actions précisent le canal et la structure ou le contact destinataire.
 
 Une erreur d’enregistrement conserve la saisie. Après un conflit de version, consultez les dernières informations avant de réessayer. Après une réponse réseau incertaine, réessayez la même demande : sa clé empêche la création d’un doublon.
+
+Dans **Historique des échanges**, les entrées issues de l’import CSV affichent
+uniquement **Source : …**, à partir de l’**Origine du prospect**. Si elle n’est pas
+renseignée, la mention est explicite. Le contexte documentaire détaillé reste
+enregistré, sans être développé dans cette liste. Les échanges saisis manuellement
+conservent leur texte, leur date, leur auteur et leur action de correction.
 
 La saisie est actuellement limitée aux douze départements de Nouvelle-Aquitaine :
 16, 17, 19, 23, 24, 33, 40, 47, 64, 79, 86 et 87. Les anciennes fiches hors région
@@ -112,6 +135,14 @@ commune de Nouvelle-Aquitaine et son code INSEE. Si le fond de carte est indispo
 département et la liste des communes restent disponibles. Aucun contact ni
 contenu de note n’est transmis au fournisseur cartographique.
 
+Après un import CSV, les points sont alimentés automatiquement à partir des codes
+INSEE. La carte indique les prospects **en attente de localisation automatique**
+sans les confondre avec ceux sans commune. Laissez passer un traitement puis
+rechargez la carte ; les fiches sont déjà consultables dans la liste. Si un code
+ancien ou inconnu reste introuvable, utilisez **Localiser la commune** sur la fiche.
+La vue régionale affiche au maximum **500 communes** : zoomez ou choisissez un
+département pour retrouver les autres points.
+
 ## 5. Importer votre fichier Excel
 
 Depuis **Aujourd’hui → Importer mes prospects**, choisissez le **Format du fichier**
@@ -123,6 +154,15 @@ facultatives ; il n’est pas nécessaire de remplir 85 cellules par prospect.
 Exportez depuis Excel en UTF-8, séparateur `;`, avec des références stables.
 La limite reste de 10 Mio et 10 000 lignes. Le [dictionnaire complet](import-carte.md)
 fournit les valeurs et exemples ; le choix INIT/UPSERT est indépendant du format.
+
+**Importer des prospects seuls :** renseignez leur référence, nom, commune et les
+contacts/notes utiles. Laissez vides les colonnes du dossier (`opportunite_ref`,
+`perimetre`, titre, objectif et qualification de projet), ou omettez-les. Les
+comptages et observations du format 2 restent conservés. Aucun dossier
+« Qualification… » n’est créé automatiquement. Retrouvez ces fiches dans
+**Prospects**, puis utilisez **Ajouter un dossier** lorsqu’un projet se précise.
+**Suivi** affiche les dossiers existants ; un filtre de périmètre de dossier
+écarte les prospects qui n’en ont pas encore.
 
 1. Créez une **source** stable, par exemple `prospection-gironde`, puis réutilisez-la pour chaque mise à jour du même fichier. Les boutons **Sources suivantes/précédentes** donnent accès aux autres sources en conservant votre sélection.
 2. Choisissez **INIT** pour créer uniquement les groupes inconnus ou **UPSERT** pour compléter les informations vides non protégées et ajouter des contacts/dossiers.
