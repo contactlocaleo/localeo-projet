@@ -28,6 +28,36 @@ Chaque contact porte nom, fonction, e-mail/téléphone professionnels connus et 
 
 Chaque dossier appartient à un prospect, avec périmètre **ANIMATION** ou **COFFRETS**. Coffrets exige un objectif **PARTENARIAT_COMMERCANT** ou **ACHAT_ENTREPRISE_CSE**. Plusieurs dossiers du même périmètre sont possibles pour des campagnes successives. Le responsable, l'étape, la priorité normale/haute et les tâches sont propres au dossier.
 
+### Responsable du prospect — correctif du 6 novembre 2026
+
+La fiche possède aussi son **responsable de prospect**, visible dans son en-tête et
+modifiable directement avec le droit `crm.gerer`. Il peut être non attribué : les
+anciennes fiches et les prospects importés ne sont jamais affectés implicitement
+au responsable d'un dossier ni à celui du lot d'import. Une sélection explicite
+doit désigner un utilisateur interne actif autorisé à gérer le CRM ; retirer
+l'affectation laisse la fiche « Non attribué ».
+
+Cette affectation est indépendante des responsables des dossiers et des actions :
+la changer ne réaffecte aucun dossier, rappel ou notification. La commande conserve
+le contrôle de version et l'idempotence existants, et ajoute un événement système
+`RESPONSABLE` à l'historique avec l'auteur et les anciennes/nouvelles références.
+Le responsable non habilité est refusé avant toute écriture. Une opposition ou un
+archivage ne sont pas levés par cette opération.
+
+Le filtre **Responsable du prospect** dans Prospects et Carte porte sur cette
+affectation, y compris pour un prospect sans dossier. Les filtres Responsable dans
+Suivi et Rappels restent ceux des dossiers et des actions respectivement. La
+pagination, ses totaux et les agrégats de la carte appliquent la même sélection
+avant de compter. L'API ajoute `responsable_id` nullable à la création, à la
+modification et à la projection Organisation ; la migration
+`v294_crm_responsable_prospect.sql` ajoute cette référence sans reprise automatique.
+L'import CSV reste inchangé et préserve les affectations existantes.
+Le détail expose aussi `responsable_nom` (prénom et nom, sans e-mail) et
+`responsable_a_reaffecter`. Cette lecture directe reste complète si la personne
+n'apparaît pas dans la première page du sélecteur. Une personne inactive ou ayant
+perdu le droit de gérer le CRM ou le rôle BACKOFFICE conserve son nom affiché avec une invitation à
+réaffecter ; aucune mutation automatique n'est effectuée.
+
 Avant création, montrer les ressemblances (nom/commune, coordonnées), sans fusion automatique. Une correspondance certaine exige un identifiant CRM ou de source déjà établi ; nom ou e-mail générique commun ne suffisent jamais. Créer un prospect ne crée ni client, commerce, accès, souscription, commande ou e-mail.
 
 ## Carte interactive — CA-07/13/14/15

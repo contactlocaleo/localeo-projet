@@ -9303,6 +9303,18 @@
       },
       "Organisation-Input": {
         "properties": {
+          "responsable_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Responsable Id"
+          },
           "nom": {
             "type": "string",
             "maxLength": 300,
@@ -9464,6 +9476,18 @@
             "type": "integer",
             "exclusiveMinimum": 0.0,
             "title": "Expected Version"
+          },
+          "responsable_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Responsable Id"
           },
           "insee": {
             "anyOf": [
@@ -11809,6 +11833,34 @@
       },
       "app__api__prospection_projection_schemas__OrganisationPayload": {
         "properties": {
+          "responsable_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Responsable Id"
+          },
+          "responsable_nom": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Responsable Nom"
+          },
+          "responsable_a_reaffecter": {
+            "type": "boolean",
+            "title": "Responsable A Reaffecter",
+            "default": false
+          },
           "id": {
             "anyOf": [
               {
