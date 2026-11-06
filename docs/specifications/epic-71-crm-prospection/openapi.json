@@ -2388,6 +2388,35 @@
             }
           },
           {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "APPEL",
+                    "BARRAGE_SECRETARIAT",
+                    "EMAIL",
+                    "FIDELISATION",
+                    "HORS_CIBLE",
+                    "PAS_INTERESSE",
+                    "PREPARATION",
+                    "PROSPECTION_APPEL",
+                    "RELANCE",
+                    "RENDEZ_VOUS",
+                    "SUIVI"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Type"
+            }
+          },
+          {
             "name": "limit",
             "in": "query",
             "required": false,
@@ -2547,6 +2576,35 @@
               ],
               "default": "OUVERTE",
               "title": "Statut"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "APPEL",
+                    "BARRAGE_SECRETARIAT",
+                    "EMAIL",
+                    "FIDELISATION",
+                    "HORS_CIBLE",
+                    "PAS_INTERESSE",
+                    "PREPARATION",
+                    "PROSPECTION_APPEL",
+                    "RELANCE",
+                    "RENDEZ_VOUS",
+                    "SUIVI"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Type"
             }
           },
           {

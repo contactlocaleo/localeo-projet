@@ -102,6 +102,13 @@ Le type commercial décrit l’action planifiée et ne remplace pas son canal. U
 
 L’opposition de la structure bloque toutes ses cibles ; une opposition de contact bloque les tâches qui le ciblent. Si sa coordonnée est réutilisée comme coordonnée de structure, le blocage reste applicable à cette coordonnée normalisée : pas de contournement par changement de libellé. Une tâche peut appartenir au prospect sans dossier ; si un dossier est indiqué, il doit appartenir au même prospect. Proposition simple : rappel à l'échéance par défaut ; l'utilisateur peut fixer une date/heure antérieure. Pas de récurrence automatique en V1. Cette évolution des libellés et codes de type ne nécessite pas de migration : le stockage existant et la contrainte « préparation seule non sollicitante » restent compatibles.
 
+La liste **Rappels** propose un filtre **Type d’action**, combinable avec l’état,
+le responsable et les rappels disponibles/en retard. « Tous les types » supprime
+ce filtre ; les types historiques restent sélectionnables. Le paramètre `type`
+de `GET /internal/prospection/taches` et de son alias `/rappels` est validé avant
+lecture, puis appliqué avant le calcul des totaux et la pagination. Changer le
+type réinitialise les pages ; un curseur d’une autre recherche est refusé.
+
 Dates affichées en **Europe/Paris**, instants stockés UTC avec fuseau ; les heures inexistantes ou ambiguës au changement d'heure demandent correction/choix explicite. Une date seule nécessite une heure confirmée. Terminer exige un résultat court, annuler un motif ; reporter conserve l'ancienne échéance et invalide l'ancien rappel. La « prochaine action » est calculée depuis la première tâche ouverte, pas un deuxième champ éditable.
 
 Le rappel interne est toujours disponible. **WebPush** est activé volontairement par appareil depuis les préférences ; aucun prompt navigateur avant un clic explicite. Refus, navigateur non compatible ou abonnement expiré : message clair, file interne intacte. À l'ouverture, la notification mène à la tâche après authentification, puis contrôle les droits courants.
