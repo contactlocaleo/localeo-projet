@@ -94,6 +94,56 @@ Dans la fiche, **Ajouter une note** est immédiatement visible. Types courts : n
 
 Les échanges globaux sont rattachés au prospect, ceux d'une affaire à son dossier ; la chronologie de la fiche indique ce contexte. Ni import ni réouverture ne réécrivent les notes, décisions ou preuves historiques.
 
+## Recherche partagée — CA-07/13/35/50/54
+
+État relu le **6 novembre 2026**, backend `d928b9a`. Les filtres suivants
+existent dans les producteurs HTTP et SQL ; ils constituent le socle à réutiliser
+pour Qualification. Les critères d’une recherche se combinent par **ET**. Plusieurs
+conditions de contact doivent être satisfaites par **le même contact actif** ;
+plusieurs conditions de dossier par **le même dossier**. Aucune multiplication
+des prospects dans les résultats, les totaux ou les groupes de la carte.
+
+| Besoin utilisateur | Paramètres existants | Présentation |
+| --- | --- | --- |
+| Trouver une structure ou une coordonnée | `q` | Recherche principale ; téléphone/e-mail, nom/commune et identifiants légaux pris en charge par le serveur, sans recherche dans les longues notes |
+| Cibler le territoire | `departement`, `insee`, `region`, `epci_siren`, `sans_commune` | Département toujours visible dans Prospects ; douze départements de Nouvelle-Aquitaine. Commune/EPCI et non-localisés dans les filtres détaillés ; `sans_commune` concerne la liste, pas des points inventés sur la carte |
+| Sélectionner communes et intercommunalités | `sous_type_collectivite`, `nature_epci` | Sous-type et nature d’EPCI ; ne pas présenter un filtre générique `type` comme déjà disponible |
+| Retrouver son portefeuille | `responsable_id`, `etat` | Responsable **du prospect** dans Prospects/Carte, responsable **du dossier** dans Suivi. Actif/archivé conservés ; pas de réaffectation implicite |
+| Cibler un dossier | `perimetre`, `objectif`, `etape`, `priorite`, `besoin_statut`, `budget_statut`, `porteur_statut` | Groupe « Projet commercial » ; priorité manuelle distincte du futur niveau calculé. La sélection porte sur un même dossier admissible |
+| Évaluer le potentiel documenté | `classement`, `base_comptage`, `nb_commerces_min`, `nb_commerces_max`, `non_evalue`, `a_examiner` | Groupe « Potentiel » ; zéro différent d’inconnu, référence de comptage cohérente avec commune/EPCI ; minimum supérieur au maximum refusé |
+| Trouver un interlocuteur | `nature_contact`, `role_commercial`, `fiabilite_contact` | Groupe « Contacts » ; un contact vérifié ne prouve ni consentement ni autorisation de solliciter |
+| Cibler l’activité | `famille_animation` | Groupe « Activité » ; ne pas déduire la famille d’une simple recherche de texte |
+
+Les filtres inconnus de l’évolution ne doivent jamais être ignorés en silence :
+la future lecture Qualification possède un schéma fermé, affiche les filtres
+actifs et refuse les valeurs incompatibles avec le profil. Les paramètres
+existants des anciennes routes restent compatibles ; la nouvelle validation
+ne modifie pas tacitement leurs clients.
+
+Les ajouts **objectif/profil de calcul, niveau, état du résultat et tri de priorité calculée**
+sont spécifiés dans [E71-EVOL-06](niveau-qualification.md) et restent à développer.
+Le niveau commercial ne remplace pas `classement`, qui décrit le potentiel de
+référence, ni `priorite`, choisie manuellement dans un dossier. Les filtres
+portant sur les dossiers d’une liste de prospects ne changent pas le sens du
+responsable propre au prospect.
+
+Sur mobile : département et recherche restent accessibles sans ouvrir toutes
+les sections ; les filtres détaillés sont regroupés avec le nombre de filtres
+actifs. « Appliquer » relance à la première page ; « Réinitialiser » retire les
+choix utilisateur et conserve seulement le périmètre explicite de la vue.
+Le retour depuis une fiche retrouve les filtres de l’URL ; aucune note ou
+coordonnée de contact n’est ajoutée à une URL par le composant. Une recherche
+textuelle saisie par l’opérateur peut déjà contenir une coordonnée : elle ne doit
+pas être copiée dans les journaux techniques ou les liens envoyés à un tiers.
+
+Le total est daté, demandé une fois par recherche ; pagination 25/100 et curseurs
+signés liés aux filtres/droits conservés. Les interfaces ne filtrent pas les seuls
+éléments téléchargés. Preuves de non-régression à rejouer lors d’E71-EVOL-06 :
+département + responsable + potentiel, contact/dossier commun aux prédicats,
+zéro/non-évalué, même audience liste/carte/calcul, retour de fiche et petit écran.
+Les tests déjà exécutés des filtres existants ne valident pas les nouveaux filtres
+de niveau ni la capture d’une audience de calcul.
+
 ## 4. Programmer et recevoir un rappel — CA-05/06/26/27
 
 Action depuis la fiche ou un dossier : libellé, type commercial, responsable, date de l’action et rappel. Les types proposés sont **Prospection d’appel**, **Relance**, **Suivi**, **Fidélisation**, **Hors cible**, **Barrage secrétariat** et **Pas intéressé** (`PROSPECTION_APPEL`, `RELANCE`, `SUIVI`, `FIDELISATION`, `HORS_CIBLE`, `BARRAGE_SECRETARIAT`, `PAS_INTERESSE`). Une **Préparation interne** séparée reste possible sans sollicitation. Les anciennes actions `APPEL`, `EMAIL`, `RENDEZ_VOUS` et `PREPARATION` restent lisibles, filtrables et gérables ; aucune donnée n’est renommée automatiquement.
@@ -121,8 +171,10 @@ Notifications discrètes : « Une action commerciale vous attend », sans nom, n
 
 ### E71-EVOL-07 — dates des actions plus explicites
 
-Évolution demandée le **5 novembre 2026**, **spécifiée, non implémentée**.
-Le formulaire actuel utilise « Échéance » et « Rappel », difficiles à distinguer.
+Évolution demandée le **5 novembre 2026**, spécification précisée le **6 novembre**,
+**implémentée localement le 6 novembre**, sans déploiement. Le calendrier
+explicite présent dans `d928b9a` est conservé avec les nouveaux libellés et aides.
+Le formulaire utilisait « Échéance » et « Rappel », difficiles à distinguer.
 La cible concerne la planification, le détail et le report d’une action, ainsi
 que les libellés de dates affichés dans les listes. Le menu **Rappels** est conservé.
 
@@ -136,6 +188,12 @@ vendredi à 9 h pour le préparer. » Dans le détail et le report, reprendre le
 mêmes libellés, sans réintroduire « Nouvelle échéance » ou « Nouveau rappel ».
 Dans une liste, une date unique doit être identifiée comme date de l’action,
 pas comme date de notification. « En retard » reste déterminé par `due_at`.
+
+Au report, « Me rappeler le » est obligatoire et prérempli. Remplacer l’aide
+de création sur le champ vide par « Choisissez la date du nouveau rappel, au
+plus tard à la date de l’action. » Le même libellé n’implique pas la même
+facultativité : l’aide ne doit pas promettre un défaut que la commande de report
+n’applique pas.
 
 Les deux dates restent distinctes et éditables ; conserver les valeurs en cas
 d’erreur. Une aide ne dépend pas d’un survol : texte lisible PC/mobile et associé
@@ -162,7 +220,32 @@ trois autres frontends ou les droits ERP. Le générateur conserve ses dates et
 fixtures ; seuls ses éventuels sélecteurs de formulaire sont à vérifier à la livraison.
 Ni configuration ni opération TEST nécessaire à cette spécification.
 
-| Critères | Preuves prévues, non exécutées | Livraison |
+#### Contrat de saisie et scénarios à vérifier
+
+Les noms JSON restent `due_at` et `remind_at`, instants ISO 8601 avec fuseau.
+Le champ natif avec calendrier et saisie clavier utilise l’heure de Paris ; la
+conversion reste celle du module ERP partagé `instants-paris.js`. Les boutons
+calendrier reprennent le nouveau nom accessible du champ, sans « échéance »
+résiduelle, et ne soumettent pas le formulaire. L’aide est reliée par
+`aria-describedby` ; le champ invalide reçoit `aria-invalid` et le focus.
+
+| Situation | Résultat exigé, sans changement de règle |
+| --- | --- |
+| Création : action le 10 décembre à 14 h Paris, rappel omis | `due_at=2026-12-10T13:00:00Z` ; serveur initialise `remind_at` au même instant |
+| Rappel le même jour à 9 h Paris | Accepté, `remind_at=2026-12-10T08:00:00Z` ; l’action n’est en retard qu’après 14 h |
+| Rappel égal à l’action | Accepté ; ne pas imposer un délai minimal nouveau |
+| Rappel après l’action | Refus `DATE_RAPPEL_INVALIDE`, message près de « Me rappeler le » ; conserver les autres valeurs |
+| Report | Préremplir les deux valeurs courantes ; transmettre les deux dates explicitement avec `expected_version` et la clé d’idempotence. Un rappel effacé au report est refusé par la règle existante : aucun défaut silencieux copié de la création |
+| Heure de Paris inexistante ou ambiguë au changement d’heure | Refus de conversion et correction demandée ; ni décalage automatique ni choix arbitraire d’un instant |
+| Responsable du rappel différent du responsable du prospect | Le rappel reste destiné au responsable **de l’action**, avec ses préférences ; aucun changement d’affectation |
+| Conflit de version ou réponse incertaine | Valeurs conservées ; refus concurrent explicite ou rejeu de la même commande, sans nouveau rappel dupliqué |
+
+Le report exige un motif comme auparavant. La modification des textes ne change
+pas les capacités `crm.consulter`/`crm.gerer`, le contrôle de sollicitation, les
+révisions de rappel ni les transports. Son implémentation est indépendante de
+l’actualisation externe et du barème de qualification commerciale.
+
+| Critères | Preuves prévues, résultats dans le bilan de livraison | Livraison |
 | --- | --- | --- |
 | E71-CA-60 | Navigateur PC/mobile/clavier : création, détail, liste et report, libellés cohérents, aides associées, valeurs préservées après erreur et responsable distinct | PWA CRM et guide, aucune modification des routes ou données |
 | E71-CA-61 | Non-régression domaine/HTTP : rappel omis à la création, avant/égal/après l’action, changement d’heure et report ; filtres retard/rappel disponible toujours distincts | Réutiliser les tests de tâches/rappels ; aucune notification externe réelle ni migration |

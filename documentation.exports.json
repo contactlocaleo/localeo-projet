@@ -574,6 +574,10 @@
       "source_path": "docs/specifications/epic-71-crm-prospection/actualisation-qualification.md"
     },
     {
+      "path": "docs/ops/crm/referentiels-qualification.md",
+      "source_path": "docs/specifications/epic-71-crm-prospection/referentiels-qualification.md"
+    },
+    {
       "path": "docs/ops/crm/qualification-structuree.md",
       "source_path": "docs/specifications/epic-71-crm-prospection/qualification-structuree.md"
     },

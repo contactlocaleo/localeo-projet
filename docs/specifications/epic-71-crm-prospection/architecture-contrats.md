@@ -259,6 +259,54 @@ Le fournisseur cartographique, sa licence/attribution, couverture et quotas rest
 ARB-04b est confirmé : appliquer l’unicité typée ci-dessus, y compris en concurrence et après réouverture. Livrer et tester le guide utilisateur, les runbooks et le jeu synthétique selon la [matrice](verification-livraison.md). Aucun simple build, plan ou contrôle de liens ne valide ces comportements.
 
 
+## Articulation V1.3 — implémentation locale du 6 novembre
+
+Les contrats d’[actualisation](actualisation-qualification.md) et de
+[qualification commerciale](niveau-qualification.md) complètent les routes
+existantes. `openapi.json` est l’export de l’implémentation actuelle : DTO,
+export et PWA CRM, seul consommateur concerné, sont mis à jour ensemble.
+Le raccordement local ne signifie pas que les fonctions sont activées sur TEST.
+
+| Règle | Propriétaire et frontière |
+| --- | --- |
+| Identité certaine, comparaison et adoption des seuls changements choisis | Domaine CRM ; l’application vérifie droits, versions et transaction. Un connecteur ne modifie jamais directement un prospect |
+| Lecture d’une source publique | Port applicatif et adaptateur borné ; aucun réseau dans une transaction d’adoption, aucune donnée commerciale privée transmise au fournisseur |
+| Classement déterministe, axes distincts, niveau et explication | Domaine CRM pur, profil versionné et entrées datées ; ni SQL ni UI ne redéfinissent les seuils ou les départages |
+| Capture de toute la recherche, file et reprise | Application et stockage durable ; appartenance figée et contrôle des versions avant résultat effectif |
+| Résultat devenu obsolète | Validité par axe dans le domaine et les projections ; potentiel périmé retire la priorité courante, mais un contact/projet seul périmé neutralise le départage concerné sans retirer une priorité fondée sur un potentiel courant. Même restitution en fiche, liste et carte |
+| Accès et opposition | Autorité courante contrôlée avant lecture, adoption et exécution ; le niveau commercial n’autorise aucune sollicitation |
+
+Les deux évolutions sont découplées : adopter une information peut rendre un
+calcul obsolète, sans lancer automatiquement un recalcul du portefeuille. Un
+calcul ne lance ni fournisseur externe, ni rappel, ni campagne. Les commandes
+de jobs, leurs compteurs et leur supervision restent distincts des imports et
+de la livraison des rappels, même si elles utilisent l’ordonnanceur commun.
+
+La capacité mixte doit être testée avec imports, rappels, actualisation et calcul
+simultanés : les plafonds individuels ne prouvent pas la capacité globale.
+La cible impose **deux unités lourdes au total**, via des leases partagés entre
+processus : imports (plafond propre 2), actualisation et préparation des
+référentiels (plafond propre 1), capture et calcul de qualification (plafond
+propre 1). Une capture compte donc comme travail de qualification, pas comme
+une troisième tâche hors quota. Le plafond historique de deux workers d’import
+reste un maximum, et non deux places supplémentaires. Ce mécanisme commun est
+à implémenter avec les extensions ; ne pas le présenter comme livré.
+
+Les rappels conservent leur file et capacité réservées hors travaux lourds,
+avec pool SQL global borné. Répartir les leases entre familles et acteurs en
+attente à chaque paquet, sans famine ; aucune place lourde conservée pendant
+une attente fournisseur. Attendre en file persistée à saturation. Les budgets
+propres aux deux extensions sont détaillés dans leurs spécifications ; mesurer
+pool SQL, RSS, âge de file et reprise avant activation.
+
+Ordre de livraison : migrations additives désactivées → API et workers →
+supervision → UI → tests complets → activation des seuls profils et sources
+validés. Aucun numéro de migration futur n’est réservé ici. La restauration doit
+conserver captures, révisions, résultats et idempotence, puis reprendre
+explicitement les jobs éligibles ; elle ne doit pas recalculer silencieusement
+une ancienne campagne avec le profil courant. La v294 du responsable prospect
+ne met en œuvre aucune de ces deux extensions.
+
 ## Contrat implémenté — novembre 2026
 
 Le [contrat OpenAPI CRM](openapi.json) est extrait des routes effectivement
@@ -323,3 +371,22 @@ mis en cache par ce mécanisme et les droits restent contrôlés normalement.
 La carte agrège d’abord par commune côté SQL, après les filtres communs. Pour les
 deux agrégats, le parallélisme PostgreSQL est désactivé uniquement dans la
 transaction en cours ; commit et rollback rétablissent le réglage de connexion.
+
+## E71-EVOL-05/06/07 — raccordement local du 6 novembre
+
+`actualisation.py` et `priorite.py` dans le domaine portent les décisions et les
+axes. Les services homonymes orchestrent les transactions ; les repositories
+persistent aperçus, baux, captures et projections. Les API privées ajoutent des
+DTO fermés au routeur CRM et utilisent ses contrôles de droits avant le rejeu
+idempotent. Les mots de passe/tokens de session ne sont jamais exposés par les DTO.
+
+La PWA partage la coquille CRM, avec modules `crm-actualisations.js` et
+`crm-priorite.js` inclus dans l’empreinte PWA. Les routes profondes restent
+protégées et sans cache privé. Les imports CSV 1/2, les comptes ERP et les trois
+applications publiques gardent leurs contrats ; aucun nouveau consommateur Pro,
+Animation ou Marketplace. L’export OpenAPI canonique est régénéré depuis le code.
+
+Les migrations v295–v298 sont additives. Le générateur de démonstration existant
+continue à produire les faits structurés qui alimentent les calculs ; aucune
+collecte, souscription ou priorité n’est activée automatiquement par génération.
+Les fixtures synthétiques spécifiques couvrent les nouveaux aperçus et lots.

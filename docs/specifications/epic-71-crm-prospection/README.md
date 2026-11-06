@@ -1,22 +1,66 @@
 # EPIC 71 — Localeo CRM, prospection Animation et Coffrets
 
-Spécification **V1.2 — 4 novembre 2026**, évolution **E71-EVOL-04** sur le socle V1.1/E71-EVOL-03. [Backlog et critères](../../roadmap/en-cours/epic-71-crm-prospection-animation-coffrets-pro-backlog.md). État produit : **En cours** dans la [roadmap](../../roadmap/README.md). Le socle et la qualification structurée disposent d’une implémentation locale ; les tests exécutés et les réserves de capacité sont détaillés dans le bilan. [Prise en main actuelle](guide-utilisateur.md), [exploitation](exploitation.md) et [preuves](verification-livraison.md).
+Spécification **V1.3 — 6 novembre 2026**, détaillant **E71-EVOL-05/06/07** sur le
+socle V1.2/E71-EVOL-04. [Backlog et critères](../../roadmap/en-cours/epic-71-crm-prospection-animation-coffrets-pro-backlog.md).
+État produit : **En cours** dans la [roadmap](../../roadmap/README.md). V1.3 désigne
+la version de conception, pas une release applicative : les fonctions d’actualisation et de calcul sont maintenant implémentées localement,
+avec migrations v295–v298, API privées, workers et PWA. Leur activation sur un
+environnement et les preuves de capacité restantes sont décrites dans le bilan. [Prise en main actuelle](guide-utilisateur.md),
+[exploitation](exploitation.md) et [preuves](verification-livraison.md).
 
 **Évolution demandée le 5 novembre 2026 — E71-EVOL-05 :**
 [vérifier et actualiser la qualification à la demande](actualisation-qualification.md).
-Parcours et sources proposés, neuf critères ajoutés, sans implémentation de cette
-extension. La V1.2 et ses preuves restent distinctes de cette nouvelle cible.
+Parcours, adoption, sources, jobs et contrats cibles détaillés ; neuf critères,
+implémentation locale des six blocs, comparaison et adoption explicite ; sources réelles à préparer avant activation. **Choix confirmé le 6 novembre : les six
+blocs dès la première livraison**, y compris potentiel/comptages et compétences.
+Les méthodes et adaptateurs correspondants doivent être prêts pour cette livraison.
 
 **E71-EVOL-06, 5 novembre 2026 :** [niveau de qualification commerciale](niveau-qualification.md).
 Entrée Qualification, calcul sur tous les résultats d’une recherche et carte
 colorée/filtrable. Choix utilisateur confirmé : combinaison **potentiel, maturité
-du projet et fiabilité**. Barème proposé à arbitrer ; dix critères ajoutés,
-extension non implémentée.
+du projet et fiabilité**, avec **priorité au fort potentiel, même sans projet
+engagé**, confirmée le 6 novembre. Révision du barème et contrats de
+capture/calcul/carte implémentés et testés localement ; dix critères dont la couverture complète reste à lire dans le bilan.
 
 **E71-EVOL-07, 5 novembre 2026 :** [dates des actions plus explicites](parcours-regles.md#e71-evol-07--dates-des-actions-plus-explicites).
 Libellés « Action prévue le » et « Me rappeler le », aides et cohérence des écrans,
-sans changement des règles. Deux critères ajoutés, spécification non implémentée.
+sans changement des règles. **Implémentation locale du 6 novembre vérifiée**,
+CA-60/61 ; aucun déploiement effectué.
 L’ensemble compte désormais **61 IDs, 60 actifs et CA-24 reporté**.
+
+## Préparation des nouvelles évolutions — 6 novembre 2026
+
+| Périmètre | Existant vérifié | Cible et préparation |
+| --- | --- | --- |
+| Actualisation E71-EVOL-05, CA-41–49 | API et worker de vérification, six blocs normalisés, aperçu paginé et adoption atomique | Implémentation locale ; [sources régionales](referentiels-qualification.md), conservation et capacité à préparer avant activation réelle |
+| Niveau E71-EVOL-06, CA-50–59 | Menu Qualification, recherche et capture, calcul durable, axes invalidables et carte colorée | Seuils confirmés commune 5/10, EPCI 20/50 ; activation indépendante et capacité à vérifier |
+| Dates E71-EVOL-07, CA-60–61 | Champs et calendrier fonctionnels ; anciens libellés encore présents dans `d928b9a` | « Action prévue le » / « Me rappeler le », aides et erreurs cohérentes ; implémentation locale et tests réussis le 6 novembre, déploiement restant |
+| Recherche, CA-07/13/35 | Département, qualification, contacts, projets et responsable déjà filtrables | [Catalogue partagé](parcours-regles.md#recherche-partagée--ca-0713355054), puis ajouts niveau/état/profil dans E71-EVOL-06 ; pas de seconde sémantique de recherche |
+| Correctifs du 6 novembre | Sept corrections backend jusqu’à `d928b9a`, dont responsable propre au prospect et filtre des rappels par type | Conservés dans les parcours cibles ; migration v294 appliquée sur TEST après sauvegarde le 6 novembre. Ce constat ne valide pas E71-EVOL-05/06/07 |
+
+Réponses utilisateur du 6 novembre :
+
+- **Actualisation complète dès la première livraison** : identité, territoire,
+  potentiel, activité, structure et contacts. Le découpage progressif proposé
+  n’est pas retenu ; un bloc sans adaptateur ne vaut pas livraison complète.
+- **Barème 40/35/25 à revoir, non retenu en l’état**. Priorité confirmée aux
+  prospects à fort potentiel, même sans projet engagé. L’absence de dossier,
+  de budget ou d’interlocuteur ne doit donc pas empêcher ce classement ; elle
+  reste visible pour préparer la prise de contact. Le potentiel inconnu n’est
+  pas assimilé à un potentiel nul.
+
+Les seuils commune 5/10 et EPCI 20/50 et la base de comptage sont confirmés le
+6 novembre : établissements actifs de proximité des six familles CRM, dédupliqués
+par SIRET ; cas incertains et contrôle terrain distincts. Le mapping technique
+versionné et la conservation ARB-07 restent à documenter. Le choix ne valide ni l’ancien seuil de 70/100 ni la
+couverture globale de 80 %. Aucun nouveau coefficient n’est présenté comme validé.
+
+Les textes de rappel sont implémentés localement. La suite peut avancer sur les composants
+indépendants (droits, jobs, capture, comparaison et mocks fournisseurs). Aucun
+profil de scoring non validé ni source non qualifiée ne doit être activé sur le
+portefeuille réel. Les preuves prévues sont des tests unitaires, d’intégration,
+fonctionnels et de capacité ; aucun pilote commercial ou compte rendu externe
+n’est ajouté comme condition de clôture.
 
 ## Objectif
 
@@ -45,8 +89,8 @@ Compléments recommandés inclus dans la conception : responsable et prochaine a
 | [Import INIT / UPSERT](import-carte.md) | Colonnes, clés stables, exemples et protection des données existantes |
 | [Modèle CSV vide](modele-import.csv) | En-têtes exacts à remplir depuis Excel ; aucune donnée réelle |
 | [Qualification structurée — E71-EVOL-04](qualification-structuree.md) | Attributs de potentiel/terrain, identité légale, territoire, fiabilité des contacts et qualification des projets ; règles et contrats cibles |
-| [Actualisation à la demande — E71-EVOL-05](actualisation-qualification.md) | Proposition du 5 novembre : sources, comparaison, adoption, fraîcheur et limites ; non implémentée |
-| [Niveau de qualification — E71-EVOL-06](niveau-qualification.md) | Priorité combinant potentiel, maturité et fiabilité, calcul sur recherche et carte colorée ; cadrage, non implémenté |
+| [Actualisation à la demande — E71-EVOL-05](actualisation-qualification.md) | Sources, comparaison et adoption, contrats, reprise et tests locaux ; préparation des référentiels requise avant activation |
+| [Niveau de qualification — E71-EVOL-06](niveau-qualification.md) | Seuils validés, capture, calcul, invalidation par axe, carte et tests locaux ; réserves de capacité dans le bilan |
 | [Modèle CSV format 2](modele-import-qualification-v2.csv) | 21 colonnes conservées et 64 facultatives/conditionnelles ; format 1 conservé par défaut, format 2 choisi explicitement |
 | [Architecture et contrats](architecture-contrats.md) | PWA, profils ERP, domaine, API, notifications, concurrence et capacité |
 | [Vérification et livraison](verification-livraison.md) | Tests exécutés et réserves, traçabilité, migrations et activation |
@@ -103,7 +147,7 @@ reste une condition d’activation avec données réelles.
 | E71-ARB-08 | Acquis : ouvrir le parcours métier autorisé, puis rattacher son résultat | Aucune conversion automatique à l'import |
 | E71-ARB-09 | Actualisé le 4 novembre 2026 : adresse CRM dédiée demandée | `crm.localeo.city` / `test-crm.localeo.city`, même backend et chemins `/internal/crm/`. Même compte et mêmes droits ERP, connexion distincte par domaine ; anciens accès conservés. Activation DNS/HTTPS et `CRM_PUBLIC_ORIGIN` selon le [guide d'exploitation](exploitation.md#domaine-dédié) |
 
-Le périmètre V1 est spécifié pour être développé et testé sur données synthétiques. ARB-01 et ARB-04b sont confirmés ; la conservation ARB-07 conditionne l’activation avec données réelles. Le composant/fournisseur cartographique et sa configuration de couverture restent à sélectionner avant activation de la carte ; les cibles de performance sont à mesurer. Les preuves historiques portent sur 39 critères actifs : 28 du socle et 11 de l’extension implémentée localement. Les nouvelles cibles E71-EVOL-05/06/07 ajoutent 21 critères non implémentés : 60 actifs au total, CA-24 reste reporté. Tests unitaires, intégration et fonctionnels requis, sans pilote commercial ni compte rendu externe obligatoire.
+Le périmètre V1 est implémenté et testé localement sur données synthétiques, avec les réserves détaillées dans le bilan. ARB-01 et ARB-04b sont confirmés ; la conservation ARB-07 conditionne l’activation avec données réelles. La configuration du fournisseur cartographique et des référentiels reste nécessaire avant activation ; toutes les cibles de performance ne sont pas validées. Les preuves historiques portent sur 39 critères actifs : 28 du socle et 11 de l’extension. E71-EVOL-05/06/07 ajoutent 21 critères : 60 actifs au total, CA-24 reste reporté. Tests unitaires, intégration et fonctionnels requis, sans pilote commercial ni compte rendu externe obligatoire.
 
 ## Décisions confirmées et revue de finalisation
 

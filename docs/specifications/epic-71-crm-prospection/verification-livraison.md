@@ -2,6 +2,193 @@
 
 [Spécification V1](README.md), [backlog canonique](../../roadmap/en-cours/epic-71-crm-prospection-animation-coffrets-pro-backlog.md). **Implémentation locale et vérification en cours**. Le bilan ci-dessous distingue les tests réalisés des réserves. Aucun import réel ni envoi fournisseur. Les sections historiques de spécification restent datées. La carte reste en V1 sur confirmation utilisateur ; CSV standard seul et report de CA-24 (import spécifique Gironde) sont également confirmés.
 
+## Bilan actuel — implémentation locale, 6 novembre 2026
+
+**Les évolutions 05/06/07 sont raccordées du domaine jusqu'à la PWA. L'epic
+reste en cours : les contrôles de capacité ne sont pas tous validés.** Ce bilan
+remplace l'état du premier incrément conservé plus bas à titre historique.
+Seuls `localeo-backend` et `localeo-projet` sont modifiés. Aucun commit, push,
+déploiement ou accès aux données du TEST partagé n'est réalisé dans cette phase.
+
+| Périmètre | Comportement implémenté et preuves | Limites d'activation / validation |
+| --- | --- | --- |
+| EVOL-05, CA-41–49 | Demande des six blocs, travail asynchrone avec baux/checkpoints/quotas, instantané de comparaison, sélection explicite et adoption atomique ; protections et versions revérifiées, valeurs absentes non destructrices, évaluations en BROUILLON. API authentifiée et PWA PC/mobile ; sources simulées et PostgreSQL réel jetable | Préparer les référentiels serveur selon le [guide dédié](referentiels-qualification.md). Les fichiers normalisés de population/compétences nécessitent une préparation opérateur. Aucun fournisseur réel ni donnée CRM réelle utilisé pour les tests |
+| EVOL-06, CA-50–59 | Menu Qualification, capture exacte de la recherche sur toutes ses pages, lots arrêtables/reprenables, priorité au potentiel et validité par axe, liste/carte filtrables et explication du résultat, attestations explicites. Seuils acceptés : commune 5/10, EPCI 20/50 ; projet/contact facultatifs | Déploiement et activation non réalisés. Mesures ciblées N/10N réussies ; charge mixte complète et volumes maximaux non validés |
+| EVOL-07, CA-60/61 | Action prévue le / Me rappeler le, calendrier et aides, erreur explicite et focus, report obligatoire prérempli, règles Paris/UTC et DST conservées | Vérifié localement ; pas de migration métier supplémentaire |
+| Exploitation partagée | Batchs de préparation des référentiels, actualisation et qualification ; concurrence globale 2 traitements lourds, quotas réseau, renouvellement et fencing des baux, réautorisation avant acquisition/publication | Flags désactivés par défaut. Appliquer v295 à v298 avant activation ; v297 est aussi nécessaire au wrapper d'import existant |
+
+Preuves exécutées (groupes pouvant se recouvrir, **ne pas additionner** leurs
+effectifs comme un total de tests distincts) :
+
+- Rejeu final des contrôles d'architecture, inventaire des classes domaine et
+  couverture des use cases : **671 réussites** sans exclusion.
+
+- **849 réussites** : architecture, classes domaine, couverture des use cases,
+  domaines/services/worker et intégration PostgreSQL des fournisseurs/adoptions.
+  Puis **22 réussites ciblées** après durcissement final des références figées
+  et de la publication idempotente des fichiers.
+- **40 réussites** : domaine/application/API/PostgreSQL de priorité, dont les
+  attestations et l'invalidation ciblée lors d'une évolution territoriale.
+  Après le dernier correctif d'attribution, **37 réussites ciblées** prouvent
+  notamment qu'un recalcul ne réhabilite pas un ancien comptage, puis qu'une
+  nouvelle adoption explicite permet de rétablir la priorité.
+- **17 réussites** : worker et autorité interne ; sessions réelles valides,
+  révoquées et versions d'habilitation changées, avant et après collecte.
+- **17 réussites** : frontière PWA, routes privées et retour exact après
+  connexion. Un test a détecté que le middleware perdait les paramètres de
+  suivi du traitement ; corrigé puis rejoué avec succès. Les deux tests HTTP
+  d'actualisation et les tests batchs sont également réussis.
+- **19 réussites** : stockage, quotas de création et ordonnanceur PostgreSQL ;
+  **64 réussites** : readiness, endpoints batchs et ordonnanceur applicatif.
+- **2 mesures PostgreSQL réussies** pour les lectures de priorité à 1 000 puis
+  10 000 organisations (3 000 puis 30 000 dossiers), captures exactes et au plus
+  deux requêtes SQL par page. Ces mesures ne prouvent pas la charge mixte.
+- **24 réussites** pour le générateur et la restauration, dont un véritable
+  `pg_dump` / `pg_restore` du graphe synthétique v295–v298 et son transfert
+  neutralisé. Snapshots, décisions, résultats, attributions et identités
+  d'attestations sont conservés ; anciens baux refusés. La comparaison des
+  instants est réalisée dans des sessions explicitement UTC.
+- Navigateurs : `crm-actualisations.cjs`, `crm-priorite.cjs`, `crm.cjs`,
+  `crm-qualification.cjs`, `crm-rappels.cjs` et `crm-correctifs.cjs` réussis.
+  API simulées ; PC 1280 et mobile 320, captures inspectées, protection d'un
+  champ volontairement vide, même clé après réponse incertaine, lecture seule,
+  désactivation/archive, reprise du polling après coupure et attestations.
+
+La revue indépendante a notamment corrigé la réautorisation des sessions
+internes, le maintien des versions de référentiels lors d'une reprise, la
+distinction entre résultat disponible et complet, les attestations d'absence
+connue et les retours de connexion vers les nouveaux écrans. Les règles restent
+dans le domaine ; les API et la PWA n'introduisent pas de barème concurrent.
+
+Réserves explicites :
+
+- Le test d'import de 10 000 lignes a dépassé deux fois son budget de 120 s,
+  à 7 346 puis 4 375 groupes. Il reste un **échec**, sans assertion affaiblie ni
+  skip ajouté. Ce test n'active ni les nouveaux triggers de priorité ni les
+  nouveaux verrous d'ordonnancement ; l'origine du dépassement est examinée
+  séparément et n'est pas qualifiée de dette préexistante sans preuve.
+  Le profil court localise le coût dans les cinq requêtes par groupe du chemin
+  d'import : lecture/verrouillage des faits et création/finalisation dominent,
+  sans défaut d'index démontré. La suppression d'une double lecture peut être
+  étudiée, mais ne prouve pas le respect du budget complet.
+- Pas de validation de la charge mixte 20 lecteurs / 2 écritures, ni de la
+  capacité maximale des référentiels régionaux et de l'actualisation en masse.
+- Pas de collecte externe réelle ni d'application des migrations sur TEST.
+  La politique de conservation des données réelles reste un prérequis
+  d'activation explicité dans l'exploitation ; elle ne remplace aucun test.
+
+Les contrats OpenAPI documentaires, guides fonctionnels et exploitation,
+exports et readiness sont adaptés. Les trois autres dépôts applicatifs ne
+consomment pas ces nouvelles routes CRM privées : sans impact de contrat sur
+Pro, Animation et Marketplace.
+
+Le registre du générateur classe les 21 nouvelles tables CRM. Un nouveau jeu
+synthétique ne déclenche ni collecte ni envoi : il crée quatre slots libres.
+Lors d'un rechargement, les autorités et traitements actifs sont neutralisés,
+les slots libérés avec nouveaux jetons et les générations/attributions rétablies
+après les triggers. Les identités d'attestations et leur séquence sont conservées.
+Ces tests locaux ne constituent pas une restauration d'exploitation sur TEST.
+
+Contrôles documentaires : **72 chemins / 100 schémas OpenAPI** exportés,
+**148 sources** vérifiées ; **96 guides / 1 112 liens** et contrôle des documents
+modifiés sans erreur. Les vérifications de whitespace Git sont réussies.
+
+## Historique — premier incrément local, 6 novembre 2026
+
+**Epic toujours en cours. La livraison complète des évolutions 05/06 n’est pas
+réalisée.** Dépôts modifiés : backend (PWA et domaine/test) et projet (sources
+canoniques). Aucun contrat consommé par Pro/Animation/Marketplace modifié.
+
+| Périmètre | Résultat réel | Limite |
+| --- | --- | --- |
+| EVOL-07, CA-60/61 | Libellés Action prévue le / Me rappeler le sur formulaires, détail et listes ; aides accessibles, calendrier conservé, report prérempli obligatoire, erreur/focus et saisie conservée | Local uniquement, aucun déploiement ; mêmes routes, champs et règles, aucune migration |
+| EVOL-05, fondations de CA-41/43/45/48 | Nouveau domaine pur `actualisation.py` : demandes, instantanés immuables, décisions de sélection, versions/protections et données absentes non destructrices | Aucun consommateur API/worker ; ADOPTEE autorise une sélection, ne prouve aucune écriture CRM. Les neuf critères ne sont pas validés dans leur ensemble |
+| EVOL-06, CA-50–59 | Spécification révisée conservée | Aucun calcul ni menu livré ; seuils et méthode attendent les réponses produit |
+
+Preuves exécutées sur cet incrément :
+
+- `scripts/validation/test_isolated.py tests/architecture tests/domain/test_domain_dedicated_classes.py tests/application/use_cases/test_use_case_business_test_coverage.py tests/domain/prospection/test_actualisation_dedicated.py -q -s` : **754 réussites**, dont **93 scénarios d’actualisation**. Le premier passage a révélé un inventaire de classes à corriger et une erreur Windows de lancement Git sous capture pytest ; inventaire corrigé et rejeu sans capture réussi, sans exclusion ni assertion affaiblie.
+- `tests/application/test_crm_dates_actions.py` : **8 réussites**, vraie orchestration sur doubles de stockage ; création omise/avant/égale/après, report omis refusé, révision invalidée et responsable conservé.
+- `tests/domain/prospection/test_rappels_dedicated.py` et `tests/api/test_crm_filtre_type_action.py` : **59 réussites** dans le premier groupe. Les quatre tests de `test_crm_rappels_api.py` initialement ignorés faute de PostgreSQL ont ensuite été exécutés sur base locale jetable : groupe avec `test_core_dedicated.py`, **32 réussites, aucun skip**.
+- `tests/browser/crm-rappels.cjs` et `crm-correctifs.cjs` : réussis. API simulée ; calendrier clavier/mobile 320/1280, aides, erreurs, fuseau Paris depuis navigateur New York, heures DST invalides/ambiguës, conflit et rejeu de même clé. Capture mobile inspectée.
+- Revue indépendante : hydratation terminale et contacts absents durcis puis retestés ; aucun constat résiduel confirmé dans cet incrément. Cette revue ne valide pas les contrats d’une API d’actualisation qui n’existe pas encore.
+
+La base locale jetable a été arrêtée après les tests, comme à l’état initial.
+Aucun accès à TEST partagé, fournisseur ou messagerie réelle. Le générateur de
+démonstration, l’OpenAPI et les migrations ne changent pas : aucune route/donnée
+persistée nouvelle exposée par cet incrément. Leur adaptation reste requise pour
+la suite des évolutions 05/06.
+
+Restant explicitement à développer : persistance, commandes atomiques d’adoption,
+API/DTO, orchestration/réautorisation, baux et quotas partagés, adaptateurs et
+référentiels des six blocs, menu de calcul et classement/carte, invalidations
+par axe, interface de comparaison, migrations et tests de capacité/restauration.
+Les seuils commune 5/10 et EPCI 20/50 et la base « établissements actifs de
+proximité, six familles, SIRET unique » ont été confirmés pendant l’implémentation. Le
+périmètre complet de première livraison reste les six blocs, sans report implicite.
+
+## Conception V1.3 — preuves à produire, 6 novembre 2026
+
+État à la fin de la phase de spécification : E71-EVOL-05/06/07 étaient spécifiées,
+sans implémentation ni tests fonctionnels nouveaux. L’incrément local ci-dessous
+actualise ce constat pour EVOL-07 et le domaine préparatoire EVOL-05. Les preuves historiques ci-dessous portent sur le socle et
+E71-EVOL-04. Les critères restent au nombre de 61, dont CA-24 reporté.
+
+| Critères | Preuves nouvelles prévues | Dépendances et effets à vérifier |
+| --- | --- | --- |
+| CA-41–49 | Matrice détaillée dans [Actualisation](actualisation-qualification.md) : D/A comparaison et adoption explicites, SQL concurrence/idempotence, API droits et échecs fournisseurs, UI aperçu partiel et erreurs | Sources simulées, identité exacte, aucune mutation avant adoption, conservation des corrections humaines ; six blocs requis dès la première livraison, qualification des méthodes/adaptateurs et conservation avant données réelles |
+| CA-50–59 | Matrice détaillée dans [Qualification commerciale](niveau-qualification.md) : D priorité au potentiel/inconnus/absence de projet, SQL capture/reprise/invalidation, API carte/liste, UI compréhension des axes et niveaux | Profils versionnés, aucune action commerciale automatique ; ancien barème à revoir, seuils et profils à arbitrer, métriques N/10N et tests mixtes |
+| CA-60–61 | UI création/édition/report/détail/Aujourd’hui/Rappels en PC et mobile, clavier et lecteur d’écran ; API/D UTC/Paris, DST, rappel absent à la création, effacement au report refusé, rappel après action refusé | [Contrat de saisie](parcours-regles.md#e71-evol-07--dates-des-actions-plus-explicites) ; conserver le calendrier et les règles actuelles, aucune migration ni nouveau canal |
+| CA-07/13/35, régression | Même filtre en liste/carte/capture, plusieurs contacts/dossiers sans produit cartésien, total et pages, recherche par département, responsable prospect distinct du responsable de tâche | [Catalogue de filtres](parcours-regles.md#recherche-partagée--ca-0713355054) ; les nouveaux niveaux ne remplacent ni le classement du potentiel ni la priorité manuelle |
+
+Jeu synthétique à étendre dans le générateur backend : commune et EPCI,
+organisation non éligible au profil, contact devenu périmé, plusieurs dossiers,
+source indisponible, résultat partiel, conflit après aperçu, opposition et
+compte révoqué pendant un job. Tester reprise après crash et restauration sur
+base jetable, sans fournisseur réel ni campagne commerciale. Mettre à jour le
+guide utilisateur et l’exploitation lors de l’implémentation ; la documentation
+actuelle ne doit pas annoncer ces boutons comme disponibles.
+
+Les conditions de clôture restent des **tests unitaires, d’intégration,
+fonctionnels et de capacité**. Un pilote commercial ou une validation externe
+ne sont pas exigés. Une décision de barème/source/conservation non prise reste
+une limite de conception ou d’activation, pas un test prétendument réussi.
+
+### Arbitrages utilisateur reçus après la première revue, 6 novembre
+
+- Actualisation : tous les blocs dès la première livraison. Ajouter au scénario
+  CA-41/49 un succès applicable pour chacun des six blocs et une demande globale,
+  plus une indisponibilité ponctuelle ; distinguer panne de source et fonction
+  non développée. Les comptages et compétences ne sont plus un lot ultérieur.
+- Classement : fort potentiel même sans projet engagé. L’ancien 40/35/25 et
+  les barrières de couverture globale/contact ne sont pas des valeurs acceptées.
+  CA-52/53 doit prouver qu’absence de dossier/budget/contact ne suffit pas à
+  déclasser un potentiel démontré, tout en affichant les informations manquantes.
+  Tester aussi fermeture du dernier dossier et expiration du contact : priorité
+  conservée si le potentiel reste courant, seuls les axes secondaires devenus
+  obsolètes perdent leur rôle de départage. Les seuils par profil restent à finaliser.
+
+La revue ciblée après ces réponses a fait corriger la condition d’activation
+des six blocs et la validité distincte des trois axes. Après relecture, aucun
+défaut de contrat bloquant restant constaté. Les 10 documents / 221 liens et
+147 sources ont été revérifiés sans erreur ; aucun test métier nouveau exécuté.
+
+### Contrôles exécutés sur la spécification V1.3
+
+Le 6 novembre 2026 : revue indépendante des contrats et comparaison aux
+producteurs backend. Trois ambiguïtés corrigées : cible dossier des attestations,
+empreinte de couverture réservée aux projets et enveloppe de concurrence commune
+incluant les imports et la capture. Aucun défaut de contrat bloquant restant
+constaté par cette revue statique ; les arbitrages produit explicités restent
+ouverts.
+
+Contrôles documentaires : `check_guidance.py --all-markdown --changed` a vérifié
+**10 documents et 221 liens locaux, sans erreur ni avertissement** ;
+`sync_documentation.py --check-sources` a vérifié **147 sources** ;
+`git diff --check` est réussi. Seul `localeo-projet` est modifié. Aucun nouveau
+test métier, appel fournisseur, générateur OpenAPI, migration ou déploiement
+n’a été exécuté pour cette phase de spécification.
+
 ## Matrice de traçabilité
 
 D = domaine pur ; A = application/UoW ; SQL = PostgreSQL jetable ; API = droits/contrats ; UI = navigateur. La matrice décrit les preuves attendues ; les résultats exécutés et leurs limites figurent dans le bilan d’implémentation en fin de document.

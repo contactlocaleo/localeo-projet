@@ -115,12 +115,15 @@ Les références proviennent des espaces métier existants : souscription Animat
 
 Dans **Rappels**, le filtre **Rappel disponible** retrouve les actions dont l’heure de rappel est atteinte, même si leur échéance est future. Ce suivi interne fonctionne sans activer e-mail ou WebPush. Ouvrez une action pour la terminer avec son résultat, la reporter, la réaffecter ou l’annuler. Les anciennes révisions de rappel deviennent inéligibles. Une notification déjà remise au transport peut néanmoins arriver.
 
-**Évolution prévue, pas encore disponible — E71-EVOL-07 :** les champs seront
-nommés **Action prévue le** (quand réaliser l’action) et **Me rappeler le** (quand
+**E71-EVOL-07 — implémenté localement le 6 novembre, déploiement à effectuer :**
+les champs sont nommés **Action prévue le** (quand réaliser l’action) et **Me rappeler le** (quand
 recevoir le rappel). À la création, sans date de rappel, celui-ci est fixé à la
 date de l’action ; il peut être avancé, jamais placé après l’action. Exemple :
 appel vendredi à 14 h, rappel vendredi à 9 h. Ces libellés ne changent pas les
-préférences WebPush/e-mail ni le responsable qui reçoit le rappel.
+préférences WebPush/e-mail ni le responsable qui reçoit le rappel. Lors d’un
+report, les deux dates sont préremplies et obligatoires : choisissez explicitement
+la date du nouveau rappel. Une erreur conserve la saisie et indique le champ à
+corriger.
 
 ## 4. Utiliser la carte
 
@@ -191,6 +194,62 @@ UPSERT n’écrase pas les notes, étapes, responsables, rappels, oppositions ni
 **Aujourd’hui → Préférences de rappel** permet d’activer les canaux disponibles. Le WebPush demande aussi l’autorisation du navigateur et l’activation de cet appareil. L’e-mail utilise exclusivement l’adresse vérifiée de votre compte interne ; il ne contacte jamais le prospect. L’activation ne provoque pas de rattrapage des anciens rappels. Les notifications restent génériques pour protéger les informations sur l’écran verrouillé.
 
 Dans la fiche prospect, **Gestion et oppositions → Ne plus solliciter** enregistre une demande concernant la structure ou un contact. Les sollicitations concernées sont bloquées, y compris lorsqu’une coordonnée opposée est réutilisée. La préparation interne reste possible. Seul un utilisateur habilité à administrer le CRM peut lever l’opposition, avec motif et source. Archiver puis réactiver une fiche ne lève pas l’opposition.
+
+## 7. Vérifier les informations d’un prospect
+
+Depuis la fiche, choisissez **Vérifier les données**. Sélectionnez les blocs
+souhaités puis lancez la vérification. Vous pouvez quitter la page : le traitement
+continue et son historique reste accessible sur le prospect.
+
+Pour évaluer le territoire d'un projet précis, ouvrez **Évaluer la couverture
+d’un dossier** et choisissez son dossier Animation. Pour un commerce ou une
+association, cette couverture est nécessaire au comptage territorial ; elle
+doit déjà avoir été renseignée sur le dossier.
+
+Le bilan distingue les sources disponibles, absentes ou momentanément
+indisponibles. Pour chaque proposition, comparez **Valeur actuelle** et **Valeur
+trouvée**, avec sa source et ses dates. Choisissez **Conserver ma valeur** ou
+**Utiliser la valeur trouvée**, puis **Appliquer mes choix**. Une correction
+protégée demande une confirmation supplémentaire, y compris si vous l’aviez vidée.
+Changer de page n’applique pas les choix en cours.
+
+Les nouvelles observations de potentiel sont des **brouillons**. Dans la fiche,
+ouvrez **Évaluations du potentiel**, vérifiez puis confirmez l’observation et
+choisissez explicitement la référence souhaitée. Une vérification documentaire
+ne prouve ni un passage sur le terrain ni l’identité du décideur.
+
+Si la fiche change pendant la comparaison, relancez la vérification ; les
+modifications concurrentes ne sont pas écrasées. En cas d’erreur de réseau,
+réessayez la même demande : elle conserve sa clé et son résultat déjà enregistré.
+L’environnement doit avoir activé la fonction et préparé ses sources.
+
+## 8. Repérer les prospects prioritaires
+
+Le menu **Qualification** permet de chercher les communes ou intercommunalités,
+de filtrer par département et de préparer un calcul sur **tous les résultats**,
+même au-delà de la page affichée. Vérifiez le nombre exact de prospects avant
+de confirmer. Le lot possède une URL de suivi ; les succès sont conservés lors
+d’une interruption et les conflits demandent une nouvelle préparation.
+
+Le potentiel prime : une commune avec au moins 10 commerces ou un EPCI avec au
+moins 50 peut être prioritaire même sans projet ni contact identifié. Les niveaux
+intermédiaires commencent à 5 et 20. Le projet et la fiabilité servent à préciser
+les prochaines actions, sans transformer une donnée inconnue en zéro.
+
+La **Carte des priorités commerciales**, accessible aussi depuis Carte, reprend
+ces niveaux avec couleurs et libellés. Un groupe peut contenir plusieurs niveaux ;
+sa répartition reste visible. Les prospects non localisés sont comptés séparément.
+Une preuve expirée ou modifiée est signalée **À recalculer** sur l’axe concerné :
+un contact à revalider ne supprime pas un potentiel encore courant.
+
+Depuis **Pourquoi ce niveau ?**, un gestionnaire peut **Attester un fait actuel** :
+choisir l'information, indiquer la date de vérification et sa référence, puis
+confirmer. Une absence connue est distincte d'une information non recherchée.
+Cette attestation ne recalcule pas automatiquement le classement.
+
+Si le territoire d'un prospect ou la composition d'un EPCI change, vérifiez
+à nouveau le comptage puis choisissez sa référence. Recalculer seul ne rend
+pas valide un comptage établi sur l'ancien territoire.
 
 ## En cas de difficulté
 
