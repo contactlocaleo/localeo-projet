@@ -6444,6 +6444,7 @@
           "Prospection"
         ],
         "summary": "Recherche",
+        "description": "Navigation vivante par rangs. Un curseur de la précédente version de tri doit être remplacé en relançant la recherche.",
         "operationId": "recherche_internal_prospection_qualification_commerciale_recherche_get",
         "parameters": [
           {
@@ -7036,6 +7037,34 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PageProspectsPrioritePayload"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "CLASSEMENT_EN_ACTUALISATION : des échéances restent à entretenir ; réessayer après passage du batch.",
+            "headers": {
+              "Retry-After": {
+                "description": "Délai avant nouvelle tentative, en secondes.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "REGLE_REMPLACEE : la référence de règles et la projection doivent être livrées avec une version cohérente.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
                 }
               }
             }

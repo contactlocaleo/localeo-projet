@@ -399,3 +399,38 @@ Les migrations v295–v298 sont additives. Le générateur de démonstration exi
 continue à produire les faits structurés qui alimentent les calculs ; aucune
 collecte, souscription ou priorité n’est activée automatiquement par génération.
 Les fixtures synthétiques spécifiques couvrent les nouveaux aperçus et lots.
+
+## Correctifs performance et sécurité du 6 novembre
+
+Les lectures des rattachements enrichissent uniquement la page autorisée, par
+lots des trois types de preuves ; leurs permissions courantes sont contrôlées
+avant chargement. Les révisions de qualification (v299) remplacent les agrégats
+sur tout l’historique lors de la signature des pages.
+
+L’archivage et l’opposition utilisent la même politique déclarative de
+sollicitation du domaine, interprétée en mémoire et traduite par l’adaptateur
+en mise à jour SQL atomique. Les tâches concernées restent proportionnelles
+aux effets nécessaires, sans hydratation ni lecture par contact. La projection
+transactionnelle `crm_compteurs_dossiers` (v301) remplace l’agrégation globale
+des dossiers sur les axes courants de la carte ; les autres axes sont filtrés
+avant agrégation. Le coût d’écriture et les verrous restent à mesurer avec le
+trafic cible, même si les lectures sont plus rapides.
+
+V300 prépare l’ordre de lecture, contrôlé par générations et échéances, sans
+modifier les résultats de domaine. V302 journalise une invalidation par cible :
+une adoption ne parcourt plus toutes les anciennes propositions. Le premier
+événement postérieur à leur création fournit l’état périmé, sa date et son
+auteur ; une décision explicite antérieure conserve sa priorité. Les captures
+et preuves sont immuables et les transactions restent tout ou rien.
+
+L’autorité des travaux différés tient compte du journal de révocation de
+session en plus du compte, des capacités et des versions. Les formes des DTO et
+du CSV restent identiques, les empreintes privées restent côté serveur. La
+recherche de priorités ajoute les refus documentés 429
+`CLASSEMENT_EN_ACTUALISATION` et 503 `REGLE_REMPLACEE` ; l’ancienne signature de
+curseur demande de relancer la recherche. Ce sont des impacts de contrat, repris
+dans l’OpenAPI canonique. Le traitement générique des erreurs de la PWA reste
+compatible. L’ERP héberge ces
+adaptateurs et la PWA CRM ; Pro, Animation et Marketplace ne consomment pas ces
+API. Migrations, reprise et dimensionnement du pool sont décrits dans
+l’[exploitation](exploitation.md).

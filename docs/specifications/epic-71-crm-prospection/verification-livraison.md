@@ -2,6 +2,105 @@
 
 [Spécification V1](README.md), [backlog canonique](../../roadmap/en-cours/epic-71-crm-prospection-animation-coffrets-pro-backlog.md). **Implémentation locale et vérification en cours**. Le bilan ci-dessous distingue les tests réalisés des réserves. Aucun import réel ni envoi fournisseur. Les sections historiques de spécification restent datées. La carte reste en V1 sur confirmation utilisateur ; CSV standard seul et report de CA-24 (import spécifique Gironde) sont également confirmés.
 
+## Correctifs de l’audit performance et sécurité — 6 novembre 2026
+
+Corrections locales sur le backend `ccf71de` et son arbre de travail, avec les
+modifications PWA préexistantes conservées. L’audit privé
+`tmp/audits/crm-performance-securite-2026-11-06.md` identifie les écarts
+CRM-AUD-01 à 08. Aucun accès à TEST/production, acquisition fournisseur, commit,
+push ou déploiement réalisé pour ces correctifs. Les migrations additives
+v299 à v302 restent à appliquer sur une cible réelle selon
+l’[exploitation](exploitation.md).
+
+| Écart | Correction et preuve locale |
+| --- | --- |
+| 01 — Révocation différée | Empreinte de référence capturée, journal de révocation relu sous verrou avant les effets ; ancienne référence nominative absente refusée. Tests du vrai adaptateur, bascule, concurrence et capture `REPEATABLE READ`. |
+| 02 — Rattachements N+1 | Enrichissement groupé des seuls IDs de la page, droits courants conservés : **5 SELECT pour 25 comme pour 100 rattachements mixtes**, sous le budget de 6. |
+| 03 — Tri de priorité global | Ordre transactionnel par générations/règles/échéances, meilleur candidat marqué et indexé. Les filtres de dossier partent aussi du flux ordonné, puis vérifient prospect/candidat par lookup avant la limite de page. Première page et continuation contrôlées au plan. |
+| 04 — Agrégats des historiques | Révisions transactionnelles par organisation et EPCI : **4 SELECT pour deux pages**, sans agrégat obligatoire, à 1 000/10 000 évaluations et membres. Plans de page à 26 lignes ; les curseurs sont refusés après mutation pertinente. |
+| 05 — Péremption exhaustive à l’adoption | Journal d’invalidation par cible ; décisions explicites, premier auteur/date de péremption et provenance conservés. À 100/10 000 anciens jobs : **25 requêtes dans les deux cas**, environ 49/38 ms pour l’adoption lors du passage dédié. Visibilité au commit, rollback et adoption concurrente testés. |
+| 06 — Archivage/opposition exhaustifs en mémoire | Politique de sollicitation du domaine traduite en SQL groupé. À 100/10 000 tâches : **6 requêtes pour archiver, 8 pour opposer**, mémoire Python mesurée sans croissance proportionnelle aux tâches ; timeout de verrou sans effet partiel puis reprise vérifiés. Le travail SQL reste proportionnel aux effets nécessaires. |
+| 07 — Carte et charge | Compteurs transactionnels des dossiers, dont `ouverts`, et agrégation cartographique adaptée. Le banc de lectures concurrentes à 100 000 prospects passe jusqu’à 20 lecteurs et au retour à 10 ; les limites ci-dessous restent ouvertes. |
+| 08 — Capture avant refus | Au plus 10 001 IDs temporaires, comptages sentinelles avant JSON et attestations ciblées par cible/bloc courant. Refus avant le premier INSERT de faits pour 10 001 prospects, 101 contacts ou 51 dossiers. **100 contacts et 50 dossiers sont acceptés**, capturés puis publiés atomiquement en 50 résultats. |
+
+Les deux anomalies de lecture relevées pendant la revue sont corrigées : un
+dossier filtré sans projection conserve son état `NON_CALCULE`, et une échéance
+franchie entre l’entretien et la page provoque un refus explicite plutôt qu’un
+tri ancien. Le batch entretient les résultats même lorsque les nouveaux calculs
+sont désactivés. Un test du meilleur candidat filtré, différent du meilleur
+global, vérifie aussi que le repère `NON_CALCULE` ne masque pas un résultat
+admissible existant.
+
+Mesures PostgreSQL 18 local jetable, Python 3.14 sous Windows, statistiques
+actualisées, fournisseurs remplacés par des doubles :
+
+| Parcours | Mesure et portée |
+| --- | --- |
+| Priorité, 10 000 prospects / 30 000 projections | Page de 25 : **25,85 ms** ; page de 100 : **62,32 ms**. Trois lectures SQL avec résultats, deux si vide. Plans première page/continuation suivant l’index partiel du meilleur candidat. |
+| Priorité avec filtre fréquent `etape=A_CONTACTER`, 1 000 prospects | Page de 25 : environ **24 ms** ; plan première page et continuation : **76 candidats parcourus**, lookup de prospect par clé, aucun scan séquentiel de toutes les organisations. Le plan initial parcourait 1 000 organisations et triait globalement ; la nouvelle assertion de borne a échoué avant correction, puis réussi sans assouplissement. |
+| Carte, jeu complet et 20 lecteurs | **100 000 prospects, 300 000 dossiers, 600 000 tâches et 1 000 000 événements** ; carte p95/p99 **856/858 ms**, tableau **506/775 ms**. Budgets existants inchangés : carte 2/3 s, autres lectures 1/2 s. |
+| Retour à 10 lecteurs sur le même jeu | Carte p95/p99 **869/883 ms**, tableau **285/305 ms**. Les paliers préalables 1/5/10 passent également. |
+
+Le banc carte concerne les lectures, sans v300 ni projections de qualification
+dans sa fixture ; le banc priorité vérifie séparément son propre chemin. Les
+caches ne sont pas contrôlés froids/chauds. Ces passages ne démontrent pas une
+charge mêlant écritures, imports, rappels, calculs et lectures, ni la mémoire et
+la contention de tous ces traitements sur l’hébergement cible. La réserve de
+capacité globale et ARB-07 restent ouvertes ; l’epic demeure en cours. Le dernier
+correctif du plan avec filtre fréquent de dossier est vérifié à 1 000 prospects ;
+son rejeu à 10 000 après correction n’a pas été exécuté.
+
+Vérifications complémentaires exécutées : **671 contrôles d’architecture et de
+recensement réussis**, puis **538 tests isolés** domaine,
+application, API, readiness, démonstration et scheduler réussis ; **153 tests
+PostgreSQL réussis** dans le lot transverse, puis correction d’une fixture
+d’attestation qui omettait `dossier_id` et **29 tests de priorité réussis** au
+rejeu final. Les **16 tests dédiés** aux révisions/invalidations passent, ainsi
+que **7 restaurations** avec triggers actifs et séquence partagée. La chaîne
+réelle **v147 à v302**, son rejeu idempotent, son dump et sa restauration passent
+sur une seconde base locale initialement vide. Le backfill v300 est également
+testé sur deux résultats calculés avant migration : JSON immuable conservé et
+ordre fort potentiel avant faible potentiel. Le contrat OpenAPI des nouveaux
+refus dispose d’un test dédié réussi.
+
+Les rapports privés sont conservés dans `localeo-backend/tmp/` :
+`crm-correctifs-postgres-final.xml`, `crm-priorite-fonctionnels-finaux.xml`,
+`crm-priorite-bornes-backfill-final.xml`, `crm-correctifs-isoles-final.xml`,
+`crm-correctifs-restauration-final.xml`, `crm-correctifs-migrations-completes-final.xml`
+ainsi que `crm-correctifs-architecture-tty-final.xml` et
+`priorite-qualification/lectures-*.json`. Les échecs initiaux de fixtures,
+d’assertion de plan et de capture de descripteur Windows restent tracés dans
+leurs rapports ; les assertions métier et de budget sont conservées.
+
+Impacts : backend et documentation canonique modifiés ; contrats de refus
+**429 `CLASSEMENT_EN_ACTUALISATION`**, **503 `REGLE_REMPLACEE`** et remise à zéro
+des anciens curseurs explicités dans l’OpenAPI régénéré. Les formes des DTO et
+du CSV restent identiques. La PWA conserve son traitement générique des erreurs ;
+Pro, Animation et Marketplace ne consomment pas ces routes privées. Le transfert
+de démonstration et la readiness suivent les nouveaux objets, index, triggers,
+champs et la séquence partagée ; les guides précisent les privilèges DB, le pool
+et la reprise. Aucun droit métier nouveau ni activation automatique.
+
+## Correctif Qualification — liste des départements, 6 novembre 2026
+
+Correction locale sur la base backend `ccf71de` : remplacement de la saisie
+libre du département par une liste facultative avec numéro et nom. Les douze
+départements de Nouvelle-Aquitaine sont fournis au module Qualification depuis
+le même référentiel PWA que Prospects et Carte ; aucune liste concurrente.
+« Tous les départements » retire le filtre.
+
+Le test navigateur reproduit d'abord le champ libre (`INPUT` au lieu de
+`SELECT`), puis `crm-priorite.cjs` et `crm.cjs` passent après correction : les
+treize choix réels (tous + douze départements), préselection depuis l'URL,
+changement/retrait du département, filtre envoyé au serveur, conservation des
+autres critères et après actualisation, capture du calcul sur la recherche,
+lecture seule et affichage PC/mobile 1280/320 sans débordement. Captures inspectées.
+
+Pas de modification d'API, de barème ou de périmètre d'accès : le paramètre
+`departement` reste inchangé. Sans migration, nouveau paramètre d'exploitation
+ou impact sur les données de démonstration et les autres applications. Guide
+utilisateur adapté ; correction locale, déploiement non exécuté.
+
 ## Correctif CRM — noms des auteurs dans l'historique, 6 novembre 2026
 
 Sur le backend `834aa85`, l'historique affichait directement `auteur_id`, par

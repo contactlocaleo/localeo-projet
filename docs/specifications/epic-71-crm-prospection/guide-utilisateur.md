@@ -248,6 +248,11 @@ même au-delà de la page affichée. Vérifiez le nombre exact de prospects avan
 de confirmer. Le lot possède une URL de suivi ; les succès sont conservés lors
 d’une interruption et les conflits demandent une nouvelle préparation.
 
+Le filtre **Département** propose une liste des douze départements de
+Nouvelle-Aquitaine, avec numéro et nom (par exemple **33 · Gironde**).
+**Tous les départements** retire ce filtre. La sélection est conservée dans
+l'URL, après actualisation et lors du passage entre liste et carte.
+
 Le potentiel prime : une commune avec au moins 10 commerces ou un EPCI avec au
 moins 50 peut être prioritaire même sans projet ni contact identifié. Les niveaux
 intermédiaires commencent à 5 et 20. Le projet et la fiabilité servent à préciser

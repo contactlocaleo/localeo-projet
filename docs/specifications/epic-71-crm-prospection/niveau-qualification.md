@@ -449,7 +449,7 @@ Préparation : EN_ATTENTE → CAPTURE_EN_COURS → PRETE / ECHEC / ANNULEE. Une
 transaction PostgreSQL REPEATABLE READ matérialise par INSERT … SELECT audience,
 candidats, contacts/provenances, faits et versions dans les tables de capture.
 Compte exact et faits viennent du **même instantané**. Aucun curseur vivant, borne
-d'UUID ou total compté avant les faits ne convient. Capture asynchrone avec
+d'UUID ou total compté hors de cet instantané ne convient. Capture asynchrone avec
 snapshot_at ; transaction bornée à 10 secondes. Au dépassement de volume/durée :
 rollback, ECHEC, invitation à affiner ; jamais PRETE sur une capture tronquée.
 Le lancement revalide les droits et l'empreinte ; l'autorité de capture est auditée.
@@ -524,6 +524,41 @@ Le filtre « Prioritaire » conserve donc un prospect dont seul le contact a exp
 Un référentiel territorial changé invalide les axes dépendants via sa génération
 jointe ; ne pas attendre une édition manuelle. Le domaine produit états/rangs/
 échéances par axe ; SQL contrôle accès/versions/temps sans recopier les règles.
+
+### 7.3.1 Ordre de lecture projeté — correctif du 6 novembre
+
+La migration v300 projette les rangs déjà produits par le domaine dans
+`crm_priorite_ordre`. Aucun nouveau barème : les générations, versions de règles
+et échéances déterminent uniquement si ces rangs peuvent encore être utilisés.
+Les écritures de résultats et mutations entretiennent cette projection dans la
+même transaction. Le meilleur candidat est marqué dans cette projection ; un
+index partiel `(profil,rp,rm,rf,organisation_id)` sur `est_meilleur` permet de
+suivre la page courante sans recalculer et trier le meilleur candidat de tout le
+portefeuille. Les filtres de dossier sélectionnent leur meilleur candidat parmi
+les seules projections du prospect, selon le même ordre. Un repère
+`NON_CALCULE` permanent par prospect/profil conserve la
+sémantique d’un dossier filtré qui n’a pas encore de résultat propre.
+
+Le lecteur effectue un entretien borné de 100 lignes candidates échues, puis
+vérifie l’absence de reliquat dans le même instantané SQL que la page. Si la
+fraîcheur ne peut pas être garantie, il refuse par 429
+`CLASSEMENT_EN_ACTUALISATION` ; aucun résultat périmé n’est présenté comme courant.
+Le batch continue cet entretien par passages bornés même lorsque les nouveaux
+calculs sont désactivés. Avec 50 candidats par prospect, 100 lignes ne signifient
+pas 100 prospects. La cadence et le nombre de passages conditionnent la
+disponibilité après une expiration massive.
+
+Le chemin compte trois lectures SQL hors authentification : entretien, page
+avec contrôle de fraîcheur, puis résultats immuables des seuls IDs affichés
+(deux si la page est vide). Curseurs signés, filtres et droits restent vérifiés ;
+un curseur de l’ancienne version de tri demande de relancer la recherche.
+
+La capture fige d’abord au plus 10 001 IDs dans la transaction `REPEATABLE READ`.
+La sentinelle refuse plus de 10 000 prospects avant de matérialiser les faits.
+Les comptages d’enfants s’arrêtent à 101 contacts et 51 dossiers, avec plafond
+global de 50 000 candidats. Les attestations sont lues par cible/bloc courant,
+dernière version seulement, sans parcourir leur historique entier. Tous les
+plafonds refusent la préparation entière, sans troncature ni publication partielle.
 
 ### 7.4 Budgets proposés et mesures requises
 
