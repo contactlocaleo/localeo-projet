@@ -2,6 +2,9 @@
 
 Guides PDF, prompts, visuels et prototypes produits. Les versions historiques restent identifiables.
 
+- [Plaquette commerciale Localeo Animation](communication/plaquette-commerciale-localeo-animation.pdf) : une page A4 pour les communes et associations de commerçants ; [aperçu, contenu éditorial et sources](communication/README.md).
+- [Présentation commerciale Localeo Animation](communication/presentation-localeo-animation.pptx) : 12 diapositives modifiables avec notes orateur, pour les rendez-vous avec les collectivités et associations de commerçants.
+
 Guide actuel pour l’onboarding commerçant : [Votre guide au quotidien (8 pages illustrées)](formation/commercant/guide-quotidien-localeo-commercant.pdf), édition détaillée de septembre 2026, avec des captures de l’application de test. Il couvre accès, compte, page publique, prestations, validation, activité, reversements, animations, facturation, alertes et aide. [Source éditable](../docs/produit/formation/commercant/guide-quotidien-commercant.md). Les guides de prise en main v7 à v11 ci-dessous sont conservés comme versions historiques.
 
 - [design/marketplace/hero-compositions/README.md](design/marketplace/hero-compositions/README.md)
