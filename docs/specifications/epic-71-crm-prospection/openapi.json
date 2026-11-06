@@ -2605,6 +2605,25 @@
             }
           },
           {
+            "name": "date_action",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Journée de la date prévue de l’action en Europe/Paris (AAAA-MM-JJ).",
+              "title": "Date Action"
+            },
+            "description": "Journée de la date prévue de l’action en Europe/Paris (AAAA-MM-JJ)."
+          },
+          {
             "name": "limit",
             "in": "query",
             "required": false,
@@ -2794,6 +2813,25 @@
               ],
               "title": "Type"
             }
+          },
+          {
+            "name": "date_action",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Journée de la date prévue de l’action en Europe/Paris (AAAA-MM-JJ).",
+              "title": "Date Action"
+            },
+            "description": "Journée de la date prévue de l’action en Europe/Paris (AAAA-MM-JJ)."
           },
           {
             "name": "limit",

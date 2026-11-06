@@ -2,6 +2,49 @@
 
 [Spécification V1](README.md), [backlog canonique](../../roadmap/en-cours/epic-71-crm-prospection-animation-coffrets-pro-backlog.md). **Implémentation locale et vérification en cours**. Le bilan ci-dessous distingue les tests réalisés des réserves. Aucun import réel ni envoi fournisseur. Les sections historiques de spécification restent datées. La carte reste en V1 sur confirmation utilisateur ; CSV standard seul et report de CA-24 (import spécifique Gironde) sont également confirmés.
 
+## Correctif Rappels — filtre par journée avec calendrier, 6 novembre 2026
+
+Ajout local d'un filtre facultatif **Date de l’action**. La saisie `date_action`
+est validée par l'API (routes `/taches` et `/rappels`) et transmise au stockage ;
+la journée Paris est filtrée avant les totaux et la pagination. La borne basse
+est incluse, celle du lendemain exclue : aucun décalage lié au fuseau du navigateur
+ou à une durée fixe de 24 heures. La colonne `due_at` n'est pas enveloppée dans
+une fonction SQL ; le filtre peut réutiliser l'index des échéances ouvertes.
+Ce filtre de lecture ne change aucune règle de programmation ou notification.
+
+Preuves : les huit cas de contrat nouveaux échouent avant correction (paramètre
+ignoré et dates invalides acceptées), puis la suite API complète passe :
+**33 réussites**. Les **3 tests PostgreSQL** vérifient un jour d'hiver, les
+journées de 23/25 heures, les deux bornes, la distinction action/rappel, le total
+et deux pages, les filtres combinés et le refus d'un curseur d'une autre date.
+`crm-correctifs.cjs` réussit : calendrier, date facultative, combinaison,
+conservation après actualisation, retrait du filtre, PC/mobile 320/1280 et
+captures inspectées. OpenAPI et guide utilisateur sont adaptés.
+Les contrôles d'architecture, inventaire domaine et couverture des use cases
+passent également : **671 réussites**, sans exclusion.
+
+Pas de migration : les instants et index existants sont conservés. Aucun effet
+sur les batchs, autorisations, données générées ou les autres applications ;
+seule la PWA CRM consomme ce filtre optionnel, les anciens clients restent
+compatibles. Vérification locale, aucun déploiement ou accès à TEST partagé.
+
+## Correctif Rappels — liste facultative des responsables, 6 novembre 2026
+
+Sur la base backend `acd386e` et documentation `4ba60dd`, correction locale du
+filtre Responsable : le composant ajoutait une saisie et un bouton de recherche
+en plus de la liste. Rappels conserve désormais la seule liste facultative,
+avec **Tous les responsables** pour ne pas filtrer. Les pages suivantes restent
+accessibles et complètent la liste sans retirer ses choix ni perdre la sélection.
+Les formulaires d'affectation conservent leur recherche habituelle.
+
+Preuve : `tests/browser/crm-correctifs.cjs` échoue avant correction sur la présence
+du champ de recherche, puis réussit après correction. Vérifications : choix et
+retrait du filtre, conservation après actualisation, chargement d'une page
+suivante sans doublon, sélection conservée, clavier natif et absence de
+débordement à 320 et 1280 px ; captures inspectées. Aucun changement d'API, règle
+métier, droit, migration, générateur de démonstration ou configuration requis :
+la correction concerne uniquement la présentation des filtres PWA.
+
 ## Bilan actuel — implémentation locale, 6 novembre 2026
 
 **Les évolutions 05/06/07 sont raccordées du domaine jusqu'à la PWA. L'epic

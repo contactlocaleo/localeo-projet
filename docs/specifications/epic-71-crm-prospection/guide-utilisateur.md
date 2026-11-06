@@ -115,6 +115,17 @@ Les références proviennent des espaces métier existants : souscription Animat
 
 Dans **Rappels**, le filtre **Rappel disponible** retrouve les actions dont l’heure de rappel est atteinte, même si leur échéance est future. Ce suivi interne fonctionne sans activer e-mail ou WebPush. Ouvrez une action pour la terminer avec son résultat, la reporter, la réaffecter ou l’annuler. Les anciennes révisions de rappel deviennent inéligibles. Une notification déjà remise au transport peut néanmoins arriver.
 
+Le filtre **Responsable** utilise une liste facultative, sans champ de recherche
+supplémentaire. **Tous les responsables** retire ce filtre. Si la liste comporte
+plusieurs pages, **Charger d’autres responsables** complète les choix sans perdre
+la sélection ; cliquez sur **Afficher** pour appliquer vos filtres.
+
+Pour retrouver les actions d'une journée, choisissez **Date de l’action** avec
+le bouton calendrier puis cliquez sur **Afficher**. Le filtre utilise la date
+prévue de l'action, en heure de Paris, et se combine avec le type et le
+responsable. Effacez la date puis cliquez sur **Afficher** pour revenir à toutes
+les dates. Votre sélection est conservée lorsque vous actualisez la page.
+
 **E71-EVOL-07 — implémenté localement le 6 novembre, déploiement à effectuer :**
 les champs sont nommés **Action prévue le** (quand réaliser l’action) et **Me rappeler le** (quand
 recevoir le rappel). À la création, sans date de rappel, celui-ci est fixé à la

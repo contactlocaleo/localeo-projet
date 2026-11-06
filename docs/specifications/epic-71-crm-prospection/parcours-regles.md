@@ -159,7 +159,15 @@ de `GET /internal/prospection/taches` et de son alias `/rappels` est validé ava
 lecture, puis appliqué avant le calcul des totaux et la pagination. Changer le
 type réinitialise les pages ; un curseur d’une autre recherche est refusé.
 
-Dates affichées en **Europe/Paris**, instants stockés UTC avec fuseau ; les heures inexistantes ou ambiguës au changement d'heure demandent correction/choix explicite. Une date seule nécessite une heure confirmée. Terminer exige un résultat court, annuler un motif ; reporter conserve l'ancienne échéance et invalide l'ancien rappel. La « prochaine action » est calculée depuis la première tâche ouverte, pas un deuxième champ éditable.
+Le filtre facultatif **Date de l’action**, avec calendrier, sélectionne les
+actions prévues ce jour-là en **Europe/Paris**, indépendamment de leur date de
+rappel. Une date vide ne restreint pas la recherche. `date_action=AAAA-MM-JJ`
+est validé sur les mêmes routes, puis appliqué en stockage avant pagination
+et total : minuit Paris inclus, minuit du lendemain exclu, même lors des
+changements d'heure. La date se combine avec les autres filtres, reste dans
+l'URL après actualisation et son changement invalide les anciens curseurs.
+
+Dates affichées en **Europe/Paris**, instants stockés UTC avec fuseau ; les heures inexistantes ou ambiguës au changement d'heure demandent correction/choix explicite. Lors de la programmation d'une action, une date seule nécessite une heure confirmée. Terminer exige un résultat court, annuler un motif ; reporter conserve l'ancienne échéance et invalide l'ancien rappel. La « prochaine action » est calculée depuis la première tâche ouverte, pas un deuxième champ éditable.
 
 Le rappel interne est toujours disponible. **WebPush** est activé volontairement par appareil depuis les préférences ; aucun prompt navigateur avant un clic explicite. Refus, navigateur non compatible ou abonnement expiré : message clair, file interne intacte. À l'ouverture, la notification mène à la tâche après authentification, puis contrôle les droits courants.
 
