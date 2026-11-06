@@ -78,6 +78,54 @@ Un rappel n'est produit qu'une fois par tâche/révision d'échéance/destinatai
 
 Notifications discrètes : « Une action commerciale vous attend », sans nom, note, téléphone ou e-mail de prospect sur écran verrouillé. Notification interne et état de tâche restent la référence même si l'envoi échoue. Les erreurs sont observables et les retries bornés ; jamais de boucle de renvoi à chaque visite.
 
+### E71-EVOL-07 — dates des actions plus explicites
+
+Évolution demandée le **5 novembre 2026**, **spécifiée, non implémentée**.
+Le formulaire actuel utilise « Échéance » et « Rappel », difficiles à distinguer.
+La cible concerne la planification, le détail et le report d’une action, ainsi
+que les libellés de dates affichés dans les listes. Le menu **Rappels** est conservé.
+
+| Champ existant | Libellé cible | Aide visible associée au champ |
+| --- | --- | --- |
+| `due_at`, obligatoire | **Action prévue le · heure de Paris** | Date et heure auxquelles vous prévoyez de réaliser l’action. Si elle reste ouverte après cette date, elle apparaît en retard. |
+| `remind_at`, facultatif à la création | **Me rappeler le · heure de Paris** | Date et heure du rappel, au plus tard à la date de l’action. Si vous laissez ce champ vide, le rappel est fixé à la date de l’action. |
+
+Exemple présenté à proximité des champs : « Appel prévu vendredi à 14 h ; rappel
+vendredi à 9 h pour le préparer. » Dans le détail et le report, reprendre les
+mêmes libellés, sans réintroduire « Nouvelle échéance » ou « Nouveau rappel ».
+Dans une liste, une date unique doit être identifiée comme date de l’action,
+pas comme date de notification. « En retard » reste déterminé par `due_at`.
+
+Les deux dates restent distinctes et éditables ; conserver les valeurs en cas
+d’erreur. Une aide ne dépend pas d’un survol : texte lisible PC/mobile et associé
+au champ pour les lecteurs d’écran. Erreur près du rappel si celui-ci dépasse
+l’action : « Le rappel doit précéder ou coïncider avec la date de l’action. »
+Les contrôles de fuseau et d’heure ambiguë/inexistante restent appliqués.
+
+Le rappel interne reste disponible ; l’aide précise que WebPush/e-mail dépendent
+des préférences et autorisations du responsable. Le champ ne promet pas un envoi
+ni une notification à l’utilisateur opérateur si le responsable choisi est une
+autre personne. Aucun message ne part au prospect grâce à ces seuls champs.
+
+Règles conservées : à la création, rappel omis = date de l’action ; rappel
+antérieur ou égal accepté, postérieur refusé. Le report réutilise les commandes
+existantes et invalide l’ancien rappel. Ne pas modifier par cette retouche le
+traitement d’un rappel omis au report, les états, versions, droits ou déduplication.
+Le domaine `TacheProspection` reste propriétaire de `remind_at <= due_at` ; aucune
+nouvelle règle ni différence de calcul entre formulaire, filtre et worker.
+
+Impacts : libellés et aides PWA CRM dans le backend, guide utilisateur et tests
+navigateur à adapter. **Sans migration ni nouveau contrat API** : noms JSON,
+valeurs stockées, notifications et CSV inchangés ; aucun impact direct sur les
+trois autres frontends ou les droits ERP. Le générateur conserve ses dates et
+fixtures ; seuls ses éventuels sélecteurs de formulaire sont à vérifier à la livraison.
+Ni configuration ni opération TEST nécessaire à cette spécification.
+
+| Critères | Preuves prévues, non exécutées | Livraison |
+| --- | --- | --- |
+| E71-CA-60 | Navigateur PC/mobile/clavier : création, détail, liste et report, libellés cohérents, aides associées, valeurs préservées après erreur et responsable distinct | PWA CRM et guide, aucune modification des routes ou données |
+| E71-CA-61 | Non-régression domaine/HTTP : rappel omis à la création, avant/égal/après l’action, changement d’heure et report ; filtres retard/rappel disponible toujours distincts | Réutiliser les tests de tâches/rappels ; aucune notification externe réelle ni migration |
+
 ## 5. Importer — CA-08 à 12/28
 
 Parcours **Fichier → Aperçu → Confirmation → Bilan**. Choisir source stable, mode INIT/UPSERT et responsable des nouveaux dossiers (opérateur par défaut). Télécharger le [modèle](modele-import.csv), puis préparer le CSV selon le [contrat d'import](import-carte.md). L'aperçu montre créations, compléments, valeurs conservées, conflits et rejets. Aucune conversion, tâche ou notification n'est déclenchée par l'import.

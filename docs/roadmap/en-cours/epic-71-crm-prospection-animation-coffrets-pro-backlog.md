@@ -1,11 +1,14 @@
 # EPIC 71 — Localeo CRM, prospection Animation et Coffrets
 
-## Références : socle E71-EVOL-03 et extension E71-EVOL-04
+## Références : socle E71-EVOL-03 et extensions E71-EVOL-04/05/06/07
 
 - État produit : **En cours**, selon la [roadmap commune](../README.md).
 - Cadrage initial : 2 octobre 2026 ; décisions/imports E71-EVOL-01 et E71-EVOL-02 du 9 octobre ; **recadrage du 3 novembre 2026** à la demande utilisateur.
 - [Spécification canonique V1](../../specifications/epic-71-crm-prospection/README.md), [format d'import et gabarit](../../specifications/epic-71-crm-prospection/import-carte.md).
 - Socle : implémentation locale du CRM, migrations v290–v293 et vérification sur données synthétiques. Extension E71-EVOL-04 du 4 novembre : qualification structurée et import 2 implémentés localement, tests et limites dans le bilan. Aucun déploiement ou import réel dans cette phase.
+- **E71-EVOL-05, 5 novembre 2026 :** demande d’actualisation de qualification à la demande ; [cadrage et proposition de parcours](../../specifications/epic-71-crm-prospection/actualisation-qualification.md). Neuf critères ajoutés, choix recommandés à valider, aucun développement de cette extension réalisé.
+- **E71-EVOL-06, 5 novembre 2026 :** [niveau de qualification commerciale](../../specifications/epic-71-crm-prospection/niveau-qualification.md), entrée de menu, calcul sur recherche et carte colorée/filtrable. Choix utilisateur : combiner potentiel, maturité du projet et fiabilité. Dix critères ajoutés ; barème recommandé à valider, non implémenté.
+- **E71-EVOL-07, 5 novembre 2026 :** [dates des actions plus explicites](../../specifications/epic-71-crm-prospection/parcours-regles.md#e71-evol-07--dates-des-actions-plus-explicites) : « Action prévue le » et « Me rappeler le », aides courtes et vocabulaire cohérent ; règles conservées, deux critères ajoutés, non implémenté.
 
 **Besoin actuel :** créer une application **Localeo CRM (PWA)** simple pour gérer la prospection commerciale et le suivi de la relation client sur les périmètres Animation et Coffrets. Saisir un prospect et ses contacts, suivre les échanges et étapes, prendre des notes et programmer des rappels WebPush/e-mail facultatif. Réutiliser les profils ERP avec des droits CRM distincts. Initialiser puis enrichir depuis un fichier produit par l'utilisateur depuis Excel, sans écraser le contexte existant.
 
@@ -43,7 +46,7 @@ Import XLSX Gironde et sections communales (CA-24), campagnes automatiques vers 
 
 ## Critères d'acceptation
 
-**Socle : implémentation locale réalisée ; preuves et réserves dans le [bilan de vérification](../../specifications/epic-71-crm-prospection/verification-livraison.md).** Les 29 identifiants ci-dessous sont conservés (28 actifs, CA-24 reporté). E71-EVOL-04 ajoute ensuite CA-30 à 40 : au total **39 critères actifs et 1 reporté**, sans assimiler les nouveaux critères à des tests réussis.
+**Socle : implémentation locale réalisée ; preuves et réserves dans le [bilan de vérification](../../specifications/epic-71-crm-prospection/verification-livraison.md).** Les 29 identifiants ci-dessous sont conservés (28 actifs, CA-24 reporté). E71-EVOL-04 ajoute ensuite CA-30 à 40. Les évolutions E71-EVOL-05 à 07 ajoutent CA-41 à 61 : **60 critères actifs et 1 reporté**, dont vingt et un nouveaux à concevoir/implémenter ; ils ne constituent pas des tests réussis.
 
 | Critère | Acteur / action | Résultat observable et refus attendu |
 | --- | --- | --- |
@@ -114,6 +117,98 @@ déclarer la capacité intégralement acquise : **40 IDs, 39 actifs, 1 reporté*
 La [matrice de vérification](../../specifications/epic-71-crm-prospection/verification-livraison.md#e71-evol-04--preuves-et-résultats)
 relie ces critères aux tests, documents, données synthétiques et opérations.
 Tests domaine, HTTP/PostgreSQL, navigateur, migration/restauration et charge exécutés localement ; résultats et réserves dans le bilan. L’epic reste En cours.
+
+## E71-EVOL-05 — actualisation de qualification à la demande, 5 novembre 2026
+
+Demande : pouvoir rechercher des données récentes pour **Identité, Territoire,
+Évaluation du potentiel, Activité, Informations de la structure et Contacts**.
+Le bouton d’actualisation de page existant ne consulte pas les référentiels.
+[Proposition fonctionnelle et sources officielles](../../specifications/epic-71-crm-prospection/actualisation-qualification.md).
+
+Recommandation : une action **Vérifier les données**, une comparaison par blocs,
+puis une adoption explicite des propositions choisies. Préserver les données
+manuelles, liens d’import, observations confirmées et références. Distinguer
+date de consultation, date des données et preuve terrain. Les données publiques
+ne certifient pas le rôle commercial d’un contact ni le nombre de commerces
+effectivement disponibles pour une animation.
+
+Cette extension fait évoluer l’exclusion historique de synchronisation
+Sirene/BANATIC **pour ce seul parcours à la demande**. Pas de collecte automatique
+du portefeuille, fusion ou campagne vers les prospects. Les modalités d’adoption,
+la méthode du comptage et les adaptateurs de données restent proposés, non
+arbitrés implicitement. L’epic reste **En cours** ; CA-01 à 40 et le report de
+CA-24 sont conservés. **49 IDs, 48 actifs, 1 reporté** au total.
+
+| Critère ajouté | Acteur / action | Résultat observable et refus attendu |
+| --- | --- | --- |
+| E71-CA-41 | Gestionnaire demande la vérification d’un prospect | Sélection des six blocs, progression durable et bilan court PC/mobile ; une seconde demande identique retrouve le travail actif, aucune application implicite |
+| E71-CA-42 | Rechercher identité, activité et structure par identifiants stables | Correspondance exacte et source adaptée ; absence/ambiguïté/contradiction signalée, aucune fusion ou substitution d’INSEE/SIREN/SIRET ; pas de création ERP |
+| E71-CA-43 | Examiner et adopter des propositions | Différences et provenance par groupe cohérent, protection des corrections et du vide explicite ; adoption tracée, refus d’un aperçu périmé ; valeurs absentes non effacées |
+| E71-CA-44 | Recalculer potentiel et vérifier le territoire | Nouvelle observation sourcée et méthode/version/couverture connues ; historique confirmé préservé, références choisies explicitement, terrain prioritaire dans la référence retenue ; non applicable sans périmètre, incomplet ou non comparable signalé, aucune population sans millésime ni date d’effet juridique inventée |
+| E71-CA-45 | Vérifier les coordonnées publiques et contacts | Contact/service proposé sans doublon implicite ; aucun rôle, consentement ou fiabilité humaine déduit ; adoption d’une coordonnée différente invalide les anciennes vérifications selon les règles existantes |
+| E71-CA-46 | Consulter la fraîcheur des informations | Consultation/source/millésime/preuve humaine distincts ; bilan par bloc et données restant à examiner ; une tentative ou une source ancienne ne rend pas la fiche « à jour » |
+| E71-CA-47 | Une source échoue, limite le débit ou ne couvre pas le bloc | Échec partiel et reprise explicites, valeurs préservées, aucune fausse donnée ; quotas et mémoire bornés, calcul lourd hors requête interactive et réseau hors transaction |
+| E71-CA-48 | Appliquer avec modifications concurrentes ou droits retirés | Droits CRM relus, versions/idempotence contrôlées et audit ; rejet sans écrasement, aucun contact ou dossier hors prospect affecté |
+| E71-CA-49 | Livrer l’actualisation et la vérifier | Migrations additives et restauration, fournisseurs fictifs, contrats/consommateurs/guides/générateur cohérents et mesures de capacité ; CSV existants compatibles, aucun test externe ou ancien bilan assimilé à une preuve de cette extension |
+
+Les règles d’adoption recommandées, sources, points à trancher, limites techniques
+à chiffrer et la matrice des preuves **prévues** sont dans la proposition canonique.
+Il s’agit d’un cadrage ; aucun de ces neuf critères n’est annoncé implémenté.
+
+## E71-EVOL-06 — niveau de qualification commerciale, 5 novembre 2026
+
+Demande : entrée **Qualification**, recherche de prospects, calcul sur l’ensemble
+du résultat et pastilles de niveau sur la carte avec filtre multi-niveaux.
+[Cadrage canonique](../../specifications/epic-71-crm-prospection/niveau-qualification.md).
+L’utilisateur retient explicitement une **priorité commerciale combinant
+fiabilité, potentiel et maturité du projet**, plutôt qu’un simple indicateur de
+complétude. Les poids/seuils et conditions de fraîcheur restent recommandés.
+
+Le résultat est calculé par objectif et profil ; il ne remplace ni priorité
+manuelle, ni étape du dossier, ni classement territorial existant. Aucun dossier
+créé pour calculer la maturité d’un prospect importé. Les données absentes ne
+deviennent pas un potentiel nul. La carte ne prête pas à une commune le score
+d’un commerce ou d’un EPCI localisé au même endroit.
+
+Cette évolution ouvre le scoring déterministe pour cet usage ; scoring IA,
+probabilités de vente, campagnes et pipeline configurable restent exclus.
+L’epic reste **En cours**. Les IDs et preuves historiques sont conservés :
+**59 IDs, 58 actifs, 1 reporté** ; ces dix nouveaux critères ne sont pas implémentés.
+
+| Critère ajouté | Acteur / action | Résultat observable et refus attendu |
+| --- | --- | --- |
+| E71-CA-50 | Ouvrir Qualification et rechercher des prospects | Entrée de menu dédiée, filtres serveur partagés, total et objectif explicites, navigation PC/mobile ; consultation distincte du calcul |
+| E71-CA-51 | Préparer puis lancer le calcul sur la recherche | Toute l’audience autorisée figée, pas seulement la page visible ; règle et base de faits identifiées, confirmation du compte, zéro résultat refusé et double clic dédupliqué |
+| E71-CA-52 | Calculer et expliquer le niveau commercial | Potentiel, maturité et fiabilité selon barème de domaine versionné ; contributions, faits/provenance, inconnus/couverture et motifs accessibles, aucun score IA ou probabilité de conversion |
+| E71-CA-53 | Évaluer sans dossier ou avec plusieurs projets/types | Sans création de dossier, maturité inconnue explicite ; objectif/profil adaptés, mêmes faits du même dossier admissible, aucun potentiel communal attribué au commerce ou mélange de projets |
+| E71-CA-54 | Filtrer et trier Qualification/Prospects/Carte | Objectif, modèle actif, niveaux et états cohérents côté serveur ; inconnus, non calculés et obsolètes filtrables, compteurs par prospects uniques et pagination conservée ; tri par score limité au même profil/modèle sauf calibration commune validée |
+| E71-CA-55 | Lire les couleurs d’une commune ou d’un groupe mixte | Niveau du prospect commune uniquement en vue communes ; répartition si plusieurs prospects/niveaux co-localisés, aucune propagation depuis siège EPCI, légende et pictogrammes accessibles, non-localisés accessibles en liste |
+| E71-CA-56 | Modifier un fait, une référence, un contact ou une règle après calcul | Résultat daté/historisé et dépendances de tous les dossiers/contacts candidats contrôlées, y compris ajout/réouverture ; ancien niveau à recalculer visible, expiration distinguée de tentative d’actualisation, aucun ancien vert présenté comme actuel |
+| E71-CA-57 | Interrompre, reprendre ou lancer des travaux concurrents | Progression durable, unité atomique et idempotente, conflits de versions explicites, droits relus à chaque unité et révocation arrêtant la suite, bilan partiel conservé |
+| E71-CA-58 | Consulter un niveau élevé et poursuivre la gestion CRM | Aucune modification de priorité/étape/opposition/archivage/tâche, aucun gain/dossier/envoi/compte implicite ; sollicitation interdite toujours bloquée |
+| E71-CA-59 | Migrer, superviser et vérifier le nouveau calcul | Données existantes Non calculé, migration additive/restauration, CSV 1/2 compatibles, supervision du batch, contrats/guides/fixtures cohérents et capacité N/10N mesurée ; tests prévus non assimilés à des réussites |
+
+La spécification conserve le barème 40/35/25 et les seuils comme propositions,
+avec profils, preuves et fraîcheur à préciser avant développement dépendant.
+La matrice des tests prévus et les impacts sont dans le cadrage canonique.
+
+## E71-EVOL-07 — dates des actions plus explicites, 5 novembre 2026
+
+Demande : remplacer les libellés « Échéance » et « Rappel » par **« Action prévue
+le »** et **« Me rappeler le »** avec une aide courte, dans la création, le détail
+et le report. [Spécification et matrice](../../specifications/epic-71-crm-prospection/parcours-regles.md#e71-evol-07--dates-des-actions-plus-explicites).
+Les règles de date, rappels, notifications et droits restent inchangées.
+Cette retouche ne demande ni migration, ni nouveau contrat, ni nouveau batch.
+État de cette évolution : **spécifiée, non implémentée** ; epic **En cours**.
+CA-01 à 59 restent stables ; total courant **61 IDs, 60 actifs, 1 reporté**.
+
+| Critère ajouté | Acteur / action | Résultat observable et refus attendu |
+| --- | --- | --- |
+| E71-CA-60 | Planifier, consulter ou reporter une action sur PC/mobile | Libellés « Action prévue le » et « Me rappeler le » cohérents, dates en heure de Paris, aides visibles/accessibles et erreur près du champ ; date affichée en liste identifiée, responsable destinataire non ambigu |
+| E71-CA-61 | Saisir un rappel avant/à/après la date de l’action, ou l’omettre à la création | Avant/égal acceptés, après refusé, omission initiale = date de l’action ; retard selon due_at, rappel disponible selon remind_at, report et notifications/préférences inchangés |
+
+Les preuves sont prévues dans la spécification ; aucun test de ce nouveau rendu
+n’est annoncé exécuté. Les preuves historiques ne valident pas ces nouveaux libellés.
 
 ## Impacts et limites
 

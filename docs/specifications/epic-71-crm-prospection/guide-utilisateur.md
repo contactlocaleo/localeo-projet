@@ -115,6 +115,13 @@ Les références proviennent des espaces métier existants : souscription Animat
 
 Dans **Rappels**, le filtre **Rappel disponible** retrouve les actions dont l’heure de rappel est atteinte, même si leur échéance est future. Ce suivi interne fonctionne sans activer e-mail ou WebPush. Ouvrez une action pour la terminer avec son résultat, la reporter, la réaffecter ou l’annuler. Les anciennes révisions de rappel deviennent inéligibles. Une notification déjà remise au transport peut néanmoins arriver.
 
+**Évolution prévue, pas encore disponible — E71-EVOL-07 :** les champs seront
+nommés **Action prévue le** (quand réaliser l’action) et **Me rappeler le** (quand
+recevoir le rappel). À la création, sans date de rappel, celui-ci est fixé à la
+date de l’action ; il peut être avancé, jamais placé après l’action. Exemple :
+appel vendredi à 14 h, rappel vendredi à 9 h. Ces libellés ne changent pas les
+préférences WebPush/e-mail ni le responsable qui reçoit le rappel.
+
 ## 4. Utiliser la carte
 
 **Carte** présente les prospects de **Nouvelle-Aquitaine**, regroupés par commune.

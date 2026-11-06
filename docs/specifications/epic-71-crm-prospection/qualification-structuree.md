@@ -22,6 +22,17 @@ Le changement étend E71-EVOL-03 ; il ne réactive pas le parseur XLSX Gironde n
 le critère reporté CA-24. Aucun score IA, synchronisation Sirene/BANATIC, fond de
 carte de couverture, catalogue d’offres ou prévision de ventes n’est ajouté.
 
+Cette exclusion décrit le périmètre livré par E71-EVOL-04. Le 5 novembre 2026,
+la demande d’[actualisation à la demande E71-EVOL-05](actualisation-qualification.md)
+ouvre un cadrage distinct de consultation des référentiels. Elle ne signifie pas
+qu’une synchronisation est déjà implémentée ni que les corrections ou références
+peuvent être écrasées.
+
+L’[évolution E71-EVOL-06](niveau-qualification.md), également cadrée le 5 novembre,
+ajoute une cible distincte de niveau commercial combinant potentiel, maturité
+du projet et fiabilité. Elle conserve le classement territorial ci-dessous et la
+priorité manuelle des dossiers ; son score composite n’est pas encore implémenté.
+
 ## 2. Organisation des informations
 
 | Emplacement | Informations et propriétaire |

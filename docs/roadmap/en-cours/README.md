@@ -19,4 +19,4 @@ L’[EPIC 72 — Accès salariés Localeo Pro](../terminees/epic-72-acces-salari
 
 - [EPIC 74 — Tombola publique](epic-74-tombola-publique-backlog.md) : implémentation locale et vérification en cours ; activation séparée.
 
-- [EPIC 71 — Localeo CRM PWA](epic-71-crm-prospection-animation-coffrets-pro-backlog.md) : implémentation et tests locaux ; [bilan](../../specifications/epic-71-crm-prospection/verification-livraison.md), activation distincte.
+- [EPIC 71 — Localeo CRM PWA](epic-71-crm-prospection-animation-coffrets-pro-backlog.md) : socle et qualification implémentés, [bilan](../../specifications/epic-71-crm-prospection/verification-livraison.md) ; [E71-EVOL-05](../../specifications/epic-71-crm-prospection/actualisation-qualification.md), actualisation à la demande ; [E71-EVOL-06](../../specifications/epic-71-crm-prospection/niveau-qualification.md), niveau commercial calculé sur recherche et carte colorée/filtrable ; [E71-EVOL-07](../../specifications/epic-71-crm-prospection/parcours-regles.md#e71-evol-07--dates-des-actions-plus-explicites), dates des actions plus explicites. Évolutions du 5 novembre non implémentées ; activation distincte.
