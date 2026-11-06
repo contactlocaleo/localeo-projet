@@ -165,6 +165,15 @@ Collections d’objets CRM (hors projection cartographique agrégée, plafonnée
 
 Commandes POST/PATCH/DELETE métier : `Idempotency-Key` ; modification : `expected_version`. Clé liée à acteur/action/cible/empreinte, conflit si corps différent. `DELETE` abonnement contient version et conserve l'idempotence de révocation. Réponses de mutation : identifiant/version/effet confirmé. API stricte : champs inconnus refusés, IDs cross-prospect refusés, serveur décide auteur et destinataire. Tâche sollicitante : cible STRUCTURE ou contact_id du même prospect, canal explicite ; contrôler opposition globale, du contact et de la coordonnée normalisée réutilisée. Les lectures de rattachements ne révèlent que les résumés métier autorisés.
 
+La lecture paginée des échanges expose `auteur_nom` (prénom et nom actuels,
+nullable) en complément de `auteur_id`, conservé pour l'audit. Les identités
+internes `interne:<UUID>` et les UUID historiques sont résolus côté serveur,
+en une requête groupée sur les seuls auteurs de la page (100 échanges maximum),
+après filtrage et pagination. Aucun parcours de l'annuaire complet, aucune
+requête par échange, aucune coordonnée ou donnée de session exposée. Un auteur
+introuvable ne retire pas l'échange. La PWA affiche le nom en texte échappé,
+ou « Utilisateur indisponible », et conserve la présentation « Source » des imports.
+
 Erreurs structurées avec code, message exploitable, champs si applicable et corrélation sans données personnelles : 401 session ; 403 droit ; 404 cible inexistante/inaccessible sans fuite ; 409 `VERSION_CONFLICT`, `IMPORT_PLAN_OBSOLETE`, `SOURCE_IDENTITY_CONFLICT`, `IDEMPOTENCY_CONFLICT` ; 413 fichier trop grand ; 422 format/transition/`PREUVE_GAIN_INSUFFISANTE`/opposition ; 429 saturation avec reprise ; 503 dépendance indisponible. L'UI conserve la saisie et propose une action de résolution adaptée.
 
 ### Contrats de travail de l’import — CA-08 à 12/28

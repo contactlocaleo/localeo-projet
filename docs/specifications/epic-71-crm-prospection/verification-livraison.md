@@ -2,6 +2,65 @@
 
 [Spécification V1](README.md), [backlog canonique](../../roadmap/en-cours/epic-71-crm-prospection-animation-coffrets-pro-backlog.md). **Implémentation locale et vérification en cours**. Le bilan ci-dessous distingue les tests réalisés des réserves. Aucun import réel ni envoi fournisseur. Les sections historiques de spécification restent datées. La carte reste en V1 sur confirmation utilisateur ; CSV standard seul et report de CA-24 (import spécifique Gironde) sont également confirmés.
 
+## Correctif CRM — noms des auteurs dans l'historique, 6 novembre 2026
+
+Sur le backend `834aa85`, l'historique affichait directement `auteur_id`, par
+exemple `interne:<UUID>`. La fiche prospect et le détail d'un rappel partagent
+ce rendu. La correction locale ajoute `auteur_nom` à la projection des échanges
+et affiche le prénom/nom actuel ; `auteur_id` et les écritures d'audit restent
+inchangés. Compte désactivé : nom conservé en lecture ; compte absent, identifiant
+ancien invalide ou nom vide : « Utilisateur indisponible ». Les imports gardent
+leur seule source visible, sans réintroduire leurs détails documentaires.
+
+Preuves : `crm-correctifs.cjs` reproduit d'abord l'affichage fautif malgré un
+nom disponible, puis réussit sur les deux historiques, le cas indisponible et
+l'échappement HTML. Captures PC/mobile **1280/320** inspectées. `crm.cjs` réussit
+également. **4 tests API/PostgreSQL** vérifient le champ additif, l'absence de
+coordonnées supplémentaires, les UUID préfixés/historiques, comptes désactivés
+ou absents, renommage sans modification des auteurs enregistrés, totaux et
+pagination. Deux requêtes pour 25 comme pour 100 échanges, une seule pour une
+page vide : pas de N+1 ni de chargement complet de l'annuaire.
+**671 contrôles d'architecture/inventaire/couverture** réussissent.
+
+Contrat OpenAPI et guides mis à jour. Sans migration ni impact sur les règles
+métier, habilitations, batchs ou données de démonstration : seul l'enrichissement
+de lecture change, sans colonne persistée nouvelle. Les autres applications
+ne consomment pas ces routes CRM. Vérification locale ; déploiement non exécuté.
+
+## Incident TEST — schéma de qualification absent, 6 novembre 2026
+
+Trace signalée : `UndefinedTable: relation "crm_priorite_generations" does not
+exist` depuis `priorite_api.recherche` / `RepositoryPriorite.page_resultats`.
+Inspection en lecture seule de la cible TEST identifiée par `.env.test` : schéma
+`public`, dernière migration v294, table absente ; seules v295–v298 en attente.
+Le code livré attendait un schéma plus récent. Aucune modification du calcul
+métier ni création manuelle isolée de la table n'est nécessaire.
+
+Réparation effectuée sur TEST après sauvegarde complète PostgreSQL : archive
+personnalisée de **64 127 415 octets**, empreinte SHA-256 enregistrée dans le
+rapport privé, ACL conservées, inventaire et lecture/décompression complète
+`pg_restore` réussis. Cette vérification ne constitue pas une restauration
+effective de cette sauvegarde.
+
+Le runner canonique `scripts/database/apply_migrations.py` a appliqué, dans
+l'ordre, **v295_crm_actualisations.sql**, **v296_crm_priorite_commerciale.sql**,
+**v297_crm_ordonnancement.sql** et **v298_crm_referentiels_qualification.sql**.
+Les empreintes existantes ont été contrôlées ; aucune ancienne migration réécrite.
+
+Vérification après correction, en lecture seule : **v298**, aucune migration
+en attente, les **21 nouvelles tables** présentes, une génération par prospect
+et la requête de recherche signalée réussie (**25 résultats**, page suivante
+disponible). Les nombres de lignes de toutes les tables CRM préexistantes sont
+inchangés. Aucun calcul, actualisation de source, envoi ou changement de droits
+n'a été lancé. Le parcours navigateur authentifié n'a pas été rejoué.
+
+Sauvegarde et rapports : répertoire privé backend
+`demonstrations/prive/operations/correctif-crm-qualification-v298-20261106/`,
+hors Git. Le runbook précise désormais que le refus de démarrage d'une base
+incomplète dépend de `LOCALEO_SCHEMA_READINESS_ENFORCE` : activé par défaut en
+production, mais à configurer explicitement sur TEST. Aucun paramètre Render
+n'a été modifié lors de cette réparation.
+
 ## Correctif Rappels — filtre par journée avec calendrier, 6 novembre 2026
 
 Ajout local d'un filtre facultatif **Date de l’action**. La saisie `date_action`

@@ -55,6 +55,12 @@ renseignée, la mention est explicite. Le contexte documentaire détaillé reste
 enregistré, sans être développé dans cette liste. Les échanges saisis manuellement
 conservent leur texte, leur date, leur auteur et leur action de correction.
 
+L'auteur d'un échange est affiché par son **prénom et son nom**, sur la fiche
+prospect comme dans le détail d'un rappel. Le nom actuel reste visible si le
+compte est désactivé ; si le compte est introuvable ou sans nom, la mention
+**Utilisateur indisponible** remplace l'identifiant technique. L'identité
+enregistrée dans l'audit est conservée.
+
 La saisie est actuellement limitée aux douze départements de Nouvelle-Aquitaine :
 16, 17, 19, 23, 24, 33, 40, 47, 64, 79, 86 et 87. Les anciennes fiches hors région
 ou sans commune restent consultables ; leurs contacts, coordonnées de contact et
