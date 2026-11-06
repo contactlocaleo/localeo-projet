@@ -107005,6 +107005,196 @@
           }
         ]
       }
+    },
+    "/public/animation-locale/commercants": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Lister Commercants Partenaire Live",
+        "operationId": "lister_commercants_partenaire_live",
+        "parameters": [
+          {
+            "name": "commune_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Commune Id"
+            }
+          },
+          {
+            "name": "animation_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 100
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Q"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2048
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Page Size"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageCommercesLivePayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/animation-locale/commercants/{commercant_id}": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Consulter Commercant Partenaire Live",
+        "operationId": "consulter_commercant_partenaire_live",
+        "parameters": [
+          {
+            "name": "commercant_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Commercant Id"
+            }
+          },
+          {
+            "name": "commune_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Commune Id"
+            }
+          },
+          {
+            "name": "animation_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Animation Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfilCommerceLivePayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -117397,6 +117587,62 @@
         ],
         "title": "CommerceGainNumerique"
       },
+      "CommerceLivePayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "nom": {
+            "type": "string",
+            "title": "Nom"
+          },
+          "adresse": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Adresse"
+          },
+          "commune": {
+            "$ref": "#/components/schemas/CommuneCommerceLivePayload"
+          },
+          "image_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Image Url"
+          },
+          "horaires_texte": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Horaires Texte"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "nom",
+          "commune"
+        ],
+        "title": "CommerceLivePayload"
+      },
       "CommerceNom": {
         "properties": {
           "nom": {
@@ -117844,6 +118090,25 @@
           "active"
         ],
         "title": "CommuneAnimationPayload"
+      },
+      "CommuneCommerceLivePayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "nom": {
+            "type": "string",
+            "title": "Nom"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "nom"
+        ],
+        "title": "CommuneCommerceLivePayload"
       },
       "CommuneEquipePayload": {
         "properties": {
@@ -140704,6 +140969,36 @@
         ],
         "title": "PageCommercantsPublicsPayload"
       },
+      "PageCommercesLivePayload": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/CommerceLivePayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "count": {
+            "type": "integer",
+            "title": "Count"
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/PaginationCommercesLivePayload"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "count",
+          "pagination",
+          "has_more"
+        ],
+        "title": "PageCommercesLivePayload"
+      },
       "PageCurseurVision360AnimationPayload": {
         "properties": {
           "items": {
@@ -142950,6 +143245,30 @@
         ],
         "title": "PaginationAnimationsPubliquesPayload"
       },
+      "PaginationCommercesLivePayload": {
+        "properties": {
+          "page_size": {
+            "type": "integer",
+            "title": "Page Size"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          }
+        },
+        "type": "object",
+        "required": [
+          "page_size"
+        ],
+        "title": "PaginationCommercesLivePayload"
+      },
       "PaginationCurseurPayload": {
         "properties": {
           "pageSize": {
@@ -144312,6 +144631,9 @@
             "pattern": "\\S",
             "title": "Qr Url"
           },
+          "presentation_qr": {
+            "$ref": "#/components/schemas/PresentationQrParticipantLive"
+          },
           "email_inscription": {
             "anyOf": [
               {
@@ -144388,7 +144710,8 @@
           "animation",
           "progression",
           "jeu",
-          "qr_url"
+          "qr_url",
+          "presentation_qr"
         ],
         "title": "ParticipationLivePayload"
       },
@@ -146375,6 +146698,48 @@
         "type": "object",
         "title": "PresentationEtape"
       },
+      "PresentationQrParticipantLive": {
+        "properties": {
+          "disponible": {
+            "type": "boolean",
+            "title": "Disponible"
+          },
+          "motif": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "ANIMATION_NON_DEMARREE",
+                  "ANIMATION_TERMINEE",
+                  "ANIMATION_INDISPONIBLE"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motif"
+          },
+          "ouvre_le": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ouvre Le"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "disponible"
+        ],
+        "title": "PresentationQrParticipantLive"
+      },
       "PrestationCommande": {
         "properties": {
           "libelle": {
@@ -147110,6 +147475,111 @@
         "additionalProperties": false,
         "type": "object",
         "title": "ProfilCommercantVersionFieldsRequest"
+      },
+      "ProfilCommerceLivePayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "nom": {
+            "type": "string",
+            "title": "Nom"
+          },
+          "adresse": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Adresse"
+          },
+          "commune": {
+            "$ref": "#/components/schemas/CommuneCommerceLivePayload"
+          },
+          "image_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Image Url"
+          },
+          "horaires_texte": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Horaires Texte"
+          },
+          "profil_publie": {
+            "type": "boolean",
+            "title": "Profil Publie"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "site_web_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Site Web Url"
+          },
+          "acces_transport": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Acces Transport"
+          },
+          "accessibilite": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Accessibilite"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "nom",
+          "commune",
+          "profil_publie"
+        ],
+        "title": "ProfilCommerceLivePayload"
       },
       "ProfilFacturationRequest": {
         "properties": {

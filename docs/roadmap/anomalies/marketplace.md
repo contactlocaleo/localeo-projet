@@ -7,6 +7,57 @@ Les accents et formulations des anciennes notes sont normalisés sans changer le
 
 ## Signalement identifié
 
+### ANO-MPL-E73-LIVE-05 — Commerçants difficiles à retrouver depuis une animation
+
+Signalé le **6 novembre 2026**. Les partenaires se trouvaient après les lots dans
+la fiche publique ; leurs liens ouvraient la fiche Marketplace centrée sur les
+coffrets. Les parcours personnels ne proposaient pas d'accès direct aux horaires.
+
+Correction locale : entrée **Commerçants** dans l'en-tête de l'accueil Live,
+raccourci contextualisé depuis les animations classiques et leurs parcours,
+annuaire recherché/paginé et fiche pratique dans Live. Adresse, horaires publiés
+et itinéraire précèdent les animations associées. Retours et filtres conservés,
+informations manquantes explicites, aucun téléphone interne exposé. Les lieux
+cachés des chasses restent exclus ; leur étape autorisée conserve son itinéraire.
+
+Le backend fournit deux lectures publiques bornées et reprend la visibilité du
+catalogue existant. Les retraits acceptés et les profils non publiés sont respectés.
+Voir les critères, contrats, preuves et limites dans le
+[complément E73](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#commerçants-partenaires--accès-pratique-depuis-live).
+Statut : **corrigé et vérifié localement**. Tests backend et PostgreSQL isolé,
+contrats, architecture et 22 scénarios navigateur distincts réussis après les
+ajustements de densité mobile et de retour au parcours. Aucun déploiement TEST,
+migration ou notification réelle au titre de cette correction.
+
+### ANO-MPL-E73-LIVE-04 — QR participant accessible avant le début
+
+Signalé le **5 novembre 2026**. Le carnet et les vues de jeu activaient
+« Présenter mon QR » sur la seule présence d’un token personnel. Le service
+`ServiceParticipantsAnimation.qr_png` résolvait l’accès mais ne contrôlait pas la
+période ; les contrôles existaient uniquement lors du scan/validation commerçant.
+L’inscription anticipée était donc confondue avec le droit de présenter le QR.
+
+Correction locale : capacité serveur `presentation_qr` dans le détail personnel,
+réutilisation de `Animation.autoriser_scan` et de la politique de préparation pour
+la génération sur les deux URL QR. Live affiche une action grisée **Bientôt
+ouvert**, avec la date effective en heure de Paris, et conserve l’accès à la
+participation. Une préparation bloquée après le début indique une indisponibilité,
+sans inventer une ouverture future. Aucun QR ni identifiant de remplacement lors
+d’un refus métier ; les anciennes entrées e-mail `#qr` ne contournent pas ce contrôle.
+
+Les actualisations et changements de route invalident les lectures QR en attente.
+Un rafraîchissement global ne peut pas rouvrir une ancienne réponse après réception
+d’une indisponibilité. Les QR des lots, bons numériques, Coffrets et lieux gardent
+leurs règles ; aucun token d’inscription révoqué ou participant supprimé.
+
+Reproduction backend avant correction : cinq refus attendus manquants, deux cas
+ouverts réussis. Tests de domaine/applicatifs/HTTP et projections, refus de
+préparation et bornes début inclus/fin exclue vérifiés localement. Les preuves
+et impacts sont détaillés dans le [correctif E73](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#correctif-du-5-novembre-2026--qr-participant-à-louverture).
+Schémas et empreintes des trois consommateurs synchronisés pour ce payload ;
+aucune migration, configuration distante ou publication réelle.
+Statut : **corrigé localement**, déploiement non réalisé.
+
 ### ANO-MPL-E73-LIVE-03 — Entrée locale dans Live avec rechargement complet
 
 Reproduit le **30 octobre 2026** par le test existant F12 de

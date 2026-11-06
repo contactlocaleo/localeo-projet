@@ -844,3 +844,161 @@ documentation `87b6da6`, avec modifications locales :
 Aucun commit, push, déploiement, email réel ou changement distant de configuration
 réalisé dans cette phase. Les variables Animation de suivi/actualités restent à
 aligner selon les exemples de déploiement ; l’origine Coffrets reste indépendante.
+
+## Correctif du 5 novembre 2026 — QR participant à l’ouverture
+
+Suivi : [ANO-MPL-E73-LIVE-04](../../roadmap/anomalies/marketplace.md#ano-mpl-e73-live-04--qr-participant-accessible-avant-le-début).
+Cette correction précise l’action personnelle des critères E73-EVO-LIVE-04/05/08/11 ;
+elle ne rouvre pas l’epic et ne modifie ni inscription ni éligibilité au tirage.
+
+**Invariant :** l’accès personnel et l’inscription peuvent être consultés avant
+l’animation, mais le QR de validation commerçant ne peut être présenté hors de
+sa période autorisée. Début inclus, fin exclue et état compatible sont décidés
+par `Animation.autoriser_scan` ; la préparation reste contrôlée par sa politique
+existante. Les routes et la PWA ne recalculent pas les dates indépendamment.
+
+Le détail personnel expose une capacité supplémentaire :
+
+```json
+{
+  "presentation_qr": {
+    "disponible": false,
+    "motif": "ANIMATION_NON_DEMARREE",
+    "ouvre_le": "2026-11-06T08:00:00Z"
+  }
+}
+```
+
+`motif` vaut `ANIMATION_NON_DEMARREE`, `ANIMATION_TERMINEE`,
+`ANIMATION_INDISPONIBLE` ou null ; `ouvre_le` n’est fourni que pour le début futur
+effectif. Une préparation non prête ne signifie pas automatiquement « à venir ».
+L’ancienne `qr_url` reste présente et ne contient pas de token, mais les routes
+`/public/localeo-live/participations/{id}/qrcode` et
+`/public/animation-locale/participants/{token}/qrcode` refusent désormais la
+génération non autorisée. Token, inscription et historique sont conservés.
+
+Parcours :
+
+- Carnet, passeport, tombola locale et chasse : action désactivée **Bientôt ouvert**
+  avant le début, explication et date en heure de Paris lorsqu’elle est connue.
+  L’utilisateur peut consulter sa participation ; aucun appel QR anticipé.
+- À l’ouverture, une actualisation relit le serveur et permet l’action habituelle.
+  L’horloge du téléphone ne décide pas du droit. Sans capacité (ancien serveur),
+  repli prudent sur les états publics/jeu ; `PUBLIEE` et token seuls ne suffisent pas.
+- Le chargement ne montre pas l’identifiant personnel. Un refus métier/accès du
+  service QR ne déclenche pas le secours par code manuel ; actualiser la fiche.
+  Les erreurs techniques restent distinctes des refus de période.
+- Le lien e-mail `#qr` attend une lecture personnelle courante et ne contourne pas
+  le refus. Une ouverture refusée n’est pas rejouée automatiquement à l’heure de début.
+- Actualisation individuelle/globale, fermeture et navigation invalident les
+  réponses QR retardées. La fenêtre dépend de la capacité courante, pas de la
+  copie de participation au moment du clic.
+
+Les QR de remise des lots (Coffrets/bons numériques), QR de lieu et d’inscription
+restent distincts et inchangés. La tombola publique ne propose toujours pas de
+QR commerçant. Les contrôles PIN déjà présents restent conservés.
+
+Impacts : backend, PWA Live et schéma `ParticipationLivePayload` partagé. Le champ
+est ajouté aux réponses ; le serveur actuel le produit toujours et la nouvelle
+PWA accepte les anciens payloads. Les schémas fermés embarqués et empreintes
+Marketplace, Animation et Pro sont alignés sur ce payload ; les deux modèles QR
+des vues OpenAPI documentaires 41/42 et des consommateurs sont repris des exports
+hors ligne. Les divergences historiques voisines (notamment CRM) ne sont pas
+absorbées par cette correction. Aucun changement de version moteur de jeu,
+migration SQL, donnée de démonstration, permission ou variable d’environnement.
+Les fixtures synthétiques couvrent le nouveau DTO ; pas de génération sur TEST.
+
+| Axe | Vérification locale et limite |
+| --- | --- |
+| Règle et API | `test_presentation_qr_participant.py`, `test_qr_participant_periode.py`, suites participants/préparation/PIN : 71 succès ; ancien comportement reproduit avec cinq refus manquants. Deux doubles historiques complétés, assertions conservées. |
+| Contrats et projections | `test_contrats_moteur_t1.py`, `test_localeo_live_backend_api.py`, `test_projections_jeu_t4.py` : 34 succès ; modèles générés, empreintes et contrôles des consommateurs ciblés. |
+| Architecture | Contrôles backend architecture, classes de domaine et couverture des use cases : 660 succès. |
+| Présentation | Helpers QR, transport jeu et registre Marketplace : 13 succès ; ESLint ciblé réussi. Première campagne développement : 32 scénarios réussis (parcours, navigation et lots). Après revue : 17 scénarios réussis sur build de production isolé, dont dix QR (320/1280 px, ouverture, refus période/préparation, réponse tardive, actualisation globale et anciens liens e-mail) et sept de navigation. Aucun trafic métier réel ; les campagnes se recouvrent et ne s’additionnent pas. |
+| Consommateurs | Animation : quatre tests registre/contrat publication réussis ; Pro : 34 tests contrats/registre réussis. Seuls les exports fermés et OpenAPI de ce payload changent dans ces deux dépôts, pas leur UI. |
+| Données et exploitation | Aucun appel réel de QR/publication sur TEST et aucun envoi externe pour ce correctif ; pas de SQL ni migration. Livrer backend et PWA, avec contrats embarqués ; les anciens accès restent valides. Aucun déploiement attesté. |
+
+## Commerçants partenaires — accès pratique depuis Live
+
+Complément **E73-EVO-LIVE-COMMERCANTS**, demandé le **6 novembre 2026**, lié à
+ANO-MPL-E73-LIVE-05. La clôture historique de l'epic reste conservée.
+
+L'habitant doit pouvoir choisir où se rendre sans quitter Live pour le catalogue
+Coffrets. L'entrée **Commerçants** apparaît à côté du titre de l'accueil, dans la
+place déjà réservée à ses commandes ; la navigation basse à quatre entrées reste
+lisible sur petit écran. L'annuaire dispose des entrées **Animations / Commerçants**.
+Depuis une animation classique et son parcours personnel, **Les commerçants de
+l'animation** ouvre directement sa liste filtrée. Les visites d'un passeport
+proposent aussi **Adresse et horaires**.
+
+| Critère | Comportement observable |
+| --- | --- |
+| LM01 | L'annuaire `/live/commercants` présente les commerçants actifs d'animations publiques en cours ou à venir, avec recherche par nom et filtre de commune. Une sélection explicite d'animation peut aussi consulter ses partenaires après clôture, si elle reste publiquement visible. |
+| LM02 | `/live/commercants/:id` présente d'abord l'adresse, l'itinéraire et les horaires publiés, puis les animations publiques associées ; chaque animation rejoint sa fiche Live. Les contenus éditoriaux et informations d'accessibilité restent secondaires. |
+| LM03 | Une adresse ou des horaires absents sont explicitement signalés. Aucune ouverture actuelle, distance, photo de remplacement, adresse ou donnée de contact n'est inventée. Les coordonnées opérationnelles ne deviennent pas publiques. |
+| LM04 | Les filtres restent dans l'URL et le retour conserve le contexte animation, parcours ou liste. Après une erreur de page suivante, les résultats déjà chargés restent visibles et le réessai reprend cette page. Une réponse obsolète ne remplace pas un filtre plus récent. |
+| LM05 | Aucun lieu futur d'une chasse n'est révélé par l'annuaire ni par le filtre commerçant du catalogue. La chasse conserve le lieu courant autorisé et son itinéraire ; aucune nouvelle fiche publique d'un lieu secret n'est créée. |
+| LM06 | Sur mobile 320 px et bureau, les commandes restent accessibles et sans débordement horizontal. L'accès aux commerçants ne repousse pas la première action d'animation sous la navigation basse de l'accueil. |
+
+### Contrat et responsabilité
+
+Deux lectures sous `/public/animation-locale` :
+
+- `GET /commercants` : filtres `commune_id`, `animation_id`, `q` (100 caractères
+  maximum), `cursor` et `page_size` (25 par défaut, 100 maximum ; Live demande 12).
+  Réponse `items`, `count` de la page, `pagination.page_size`,
+  `pagination.next_cursor` et `has_more`. Aucun total global déduit du nombre chargé.
+- `GET /commercants/{commercant_id}` : fiche d'un commerçant actif associé à une
+  animation classique publiquement visible, y compris clôturée. Refus 404 hors
+  de ce périmètre ; filtres facultatifs `commune_id` et `animation_id` conservés.
+
+Chaque ligne expose `id`, `nom`, `adresse`, `commune`, `image_url` et
+`horaires_texte`. La fiche ajoute `profil_publie`, `description`, `site_web_url`,
+`acces_transport` et `accessibilite`. Ces contenus sont lus uniquement dans la
+version publiée du profil. Aucun numéro de téléphone public n'existe actuellement
+sur ce contrat : `contact_telephone`, destiné aux opérations, n'est pas utilisé.
+Les liens de site acceptent HTTP(S) uniquement, sans identifiant intégré.
+
+`ServiceCommercantsLive` compose une projection de lecture avec les prédicats
+existants de `ServiceCatalogueAnimationsPubliques` : publication, commune,
+abonnement, modèle, période et associations effectives, dont retraits acceptés.
+Cette lecture SQL reprend la frontière du catalogue public existant ; elle ne
+porte aucune nouvelle transition ni règle de validation. La règle de passage
+reste dans le domaine et les accès QR conservent leur contrôle d'ouverture.
+Le partage du prédicat commerçant évite une seconde règle d'appartenance.
+
+La recherche et les associations sont filtrées en stockage. La pagination ordonnée
+nom/identifiant charge au plus `page_size + 1` lignes, avec un curseur lié aux
+filtres ; un curseur invalide est refusé en 422. Les profils sont joints dans la
+même requête, sans requête par commerçant ni collecte exhaustive d'animations.
+Les animations de la fiche utilisent le catalogue public existant filtré par
+`commercant_id`, avec sa propre pagination.
+
+### Impacts et vérification
+
+- Backend et Marketplace/Live : nouvelle lecture et parcours. Sources OpenAPI
+  documentaires E41/E42 et copies embarquées Animation/Pro synchronisées depuis
+  l'export hors ligne, uniquement pour les deux routes et cinq modèles concernés.
+  Aucun changement d'interface Pro ou Animation, ni du contrat moteur de jeu.
+- Sans migration : les adresses et versions publiées existent déjà. Le générateur
+  de démonstration n'a pas de nouveau champ obligatoire ; les preuves utilisent
+  des fixtures synthétiques. Aucun jeu ni compte TEST modifié.
+- Exploitation : livrer backend et PWA ensemble ; une API ancienne produit une
+  indisponibilité explicite et un réessai, jamais une liste fictive. Aucune nouvelle
+  variable, permission, tâche planifiée ou notification.
+- Backend : 34 tests ciblés réussis, dont six scénarios PostgreSQL/HTTP réels sur
+  une base locale jetable ; 660 contrôles d'architecture réussis. Rejeu final de
+  deux scénarios de curseur mal typé et parité des filtres réussi, avec recouvrement
+  de la campagne précédente. Un scénario supplémentaire vérifie une seule requête
+  et au plus 26 lignes pour une page de 25 sur 102 commerces ; cette mesure locale
+  ne constitue pas une recette de charge. Base jetable arrêtée après vérification.
+- Présentation : `live-merchants.spec.cjs`, `live-home-density.spec.cjs` et
+  `live-qr-opening.spec.cjs` couvrent 22 scénarios distincts. La première intégration
+  repoussait l'action de l'accueil sous la navigation ; correction vérifiée sans
+  affaiblir l'assertion. Dernières exécutions : 12 scénarios parcours/QR réussis,
+  puis dix scénarios annuaire/accueil réussis après compaction. Build de production
+  isolé, écrans 320/390/1280 px, captures mobiles et bureau, aucun trafic métier
+  réel. ESLint ciblé réussi ; les cinq modèles et deux routes exportés concordent
+  avec le générateur et leurs références se résolvent. Contrats consommateurs :
+  quatre tests Animation et 34 tests Pro réussis. Les campagnes antérieures se
+  recouvrent et ne s'additionnent pas.
+- Limite : aucun succès distant ou déploiement TEST n'est déduit des preuves locales.
