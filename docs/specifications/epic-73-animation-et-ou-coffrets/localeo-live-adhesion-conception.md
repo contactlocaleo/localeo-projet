@@ -544,6 +544,11 @@ sans dupliquer les règles métier dans les cartes ou routes.
 - Header compact conservant identité, recherche et messages. Installer reste
   contextuel ; Réglages reste accessible. Actualiser reste iconographique, nommé,
   sur la ligne de titre et ne crée pas une ligne textuelle supplémentaire.
+  Sur l’accueil, **Mon Live et Actualiser sont dans l’en-tête de l’application,
+  sur une seule ligne** ; le titre n’est pas répété dans le contenu. Jusqu’à
+  720 px, logo compact, titre, actualisation, recherche et menu restent visibles.
+  Le menu regroupe notifications (avec indicateur non-lu), réglages,
+  installation et retour aux coffrets lorsqu’il est applicable.
 - Contexte communal sur une ligne adaptable : un nom, ou les deux premiers noms
   puis le nombre supplémentaire ; la commande ouvre le sélecteur existant avec
   la liste complète. À zéro commune, une invitation courte et une action Choisir
@@ -750,5 +755,752 @@ de démonstration partagées. Backend, Animation et Pro restent compatibles avec
 leurs contrats actuels. Le [bilan E73](verification-livraison.md) consigne les
 résultats de réalisation, distincts des contrôles de spécification. Aucun essai habitant, mail réel ou accord
 pilote n’est ajouté aux conditions de clôture technique.
+
+## 8. Performance des lectures — E73-EVO-LIVE-PERFORMANCE
+
+**Conception du 8 novembre 2026, non implémentée à cette phase.** Source :
+[audit performance API](../../audits/backend/audit-performance-api-localeo-live-2026-11-08.md).
+Les [18 critères LP](localeo-live-entree-unique.md#évolution-du-8-novembre-2026--performance-des-lectures-live-e73-evo-live-performance)
+sont canoniques dans la spécification fonctionnelle. Ce chapitre précise leur
+réalisation et remplace, pour ces chemins, les choix antérieurs incompatibles :
+chargement intégral du carnet, liaison préalable exhaustive des lots et compteur
+global obligatoire. Les comportements LA/LH et la réserve LA-16 sont conservés.
+
+### 8.1 Responsabilités et décisions
+
+| Propriétaire | Responsabilité conservée et changement technique |
+| --- | --- |
+| Domaine Animation et registre de moteurs | Publication, dates effectives, capacité, inscription, qualification, règlement, passage et lieux révélés restent les règles existantes. Les faits sont chargés autrement ; le moteur ne reçoit ni statut ni preuve déduits par le frontend. |
+| Domaine des accès et communication participants | Secret d’installation, token de participation, révocation et accord organisateur restent contrôlés pour chaque demande. Une liaison technique n’est ni inscription ni consentement ; un indicateur n’est pas un acquittement. |
+| Application backend | UoW de lecture authentifiée, faits groupés par page, DTO de carte, contrôle de visibilité minimal pour les lots, orchestration du visuel et instrumentation. Pas de règle métier réimplémentée en route ou dans une projection SQL. |
+| Adaptateurs PostgreSQL/stockage | Pagination, projections bornées, index démontrés utiles, lecture groupée des preuves ; éventuelles données dérivées synchronisées par leurs producteurs. Pas de charge globale ou historique avant découpage de page. |
+| Marketplace/Live | Fenêtres et états d’affichage, file priorisée, déduplication par contexte, annulation, cache public en mémoire et synchronisation explicite des accès. Les résumés locaux sont des repères, jamais une autorisation. |
+
+Décisions : pas de compte habitant, moteur, événement de notification, campagne,
+score ou API de récupération par email nouveaux. Pas de cache persistant des
+réponses API, pas d’augmentation automatique du pool ou du délai client.
+Les scripts de tests restent dans leur dépôt applicatif ; ce chapitre ne crée
+pas un nouveau registre de résultats.
+
+### 8.2 Contrats HTTP et coexistence — LP-01/05/10/18
+
+Les ajouts ci-dessous sont des **contrats cibles**, à développer et générer
+ensemble avec leurs lecteurs. Les OpenAPI actuels ne sont pas modifiés pour
+annoncer une fonction absente. Préfixes : catalogue
+`/public/animation-locale`, personnel `/public/localeo-live`.
+
+| Contrat cible | Compatibilité et sémantique |
+| --- | --- |
+| `GET /configuration` personnel : `capacites.catalogue_cartes=1` | Promet les deux options de catalogue ci-dessous sur les routes ancienne et moderne. Absence/0 : requêtes actuelles uniquement. Les capacités de moteurs et de recherche existantes restent indépendantes. |
+| Catalogue `/animations` : `inclure_total: bool=true` | Défaut : contrat inchangé, `count=len(items)`, `pagination.total` entier exact et curseur existant. Opt-in `false` : même enveloppe et ordre, `pagination.total=null`, aucun COUNT global ; les clients continuent avec `next_cursor`, jamais avec le total. Nouveau schéma de variante, sans rendre le total absent pour les anciens clients. Aucun total approximatif ou inventé. |
+| `/animations` et `/animations/recherche` : `projection=COMPLETE` par défaut, ou `CARTE_V1` | Sans option : DTO public actuel. Avec `CARTE_V1` : variante homogène `items: CarteAnimationLiveV1[]`, même enveloppe de pagination propre à chaque route. Aucune page mélangeant les deux DTO. Le nom versionné entre dans l’URL et la clé de cache ; il n’accorde aucun droit. Le détail `GET /animations/{id}` conserve sa réponse complète. |
+| `CarteAnimationLiveV1` | `id`, `nom`, `commune:{id,nom}`, `date_debut`, `date_fin`, `statut_public`, `modele_code`, `visuel_url` nullable, `regles_participation:{nombre_validations_requises}` nullable selon moteur, `dynamique:{nombre_lots_a_gagner,nombre_participants}` avec valeurs réelles ou null si inconnues. Types et sens reprennent le DTO actuel. Pas de description complète, règlement, liste commerçants/lots/coffrets ni données privées. Zéro est une valeur connue ; absence n’est pas zéro. La promesse tombola/chasse reste déterminée par son moteur. |
+| `GET /configuration` : `capacites.messagerie_legere=1` | Promet les deux options de messagerie suivantes. Ancien frontend : comportement identique ; nouveau frontend sans capacité : API actuelle, sans présumer un total nullable. |
+| `GET /installations/{id}/messages?inclure_total=true` | Défaut actuel : `unread_count` entier exact. Opt-in `false` : `unread_count=null`, page et curseur inchangés, aucun comptage global. Ne pas remplacer le total par le nombre non lu de la page. Les branches NOTIFICATION/ORGANISATEUR et leurs droits restent celles du service courant. |
+| `GET /installations/{id}/messages/indicateur` : `animation_id` devient facultatif | Avec UUID : même réponse qu’actuellement, même périmètre animation. Sans UUID : indicateur global autorisé de l’installation, réponse `{animation_id:null,has_unread:boolean,generated_at:UTC}`. Au plus deux EXISTS pour les deux branches de messages, aucune liste ni total. Secret toujours requis, `no-store`. Un autre UUID ne donne aucun accès supplémentaire. |
+
+La liste historique conserve sa politique actuelle : les messages ORGANISATEUR
+exigent une preuve personnelle valide ; les notifications NOTIFICATION restent
+lisibles par leur installation sans réintroduire une preuve personnelle absente.
+Le badge global emploie exactement ce périmètre de liste. L’indicateur contextualisé
+par animation reste plus restrictif selon §3.2 : preuve personnelle courante
+obligatoire pour ses deux branches. Aucun badge ni notification historique ne
+permet d’ouvrir une destination privée avec un accès révoqué.
+Les notifications historiques sans `animation_id` restent incluses dans le badge
+global et leur liste selon l’installation, sans leur inventer de preuve d’animation.
+Le global n’est donc pas l’union des indicateurs contextualisés de participation.
+
+Le mapper commun `src/services/publicAnimations.js` doit conserver `total:null`
+au lieu de le remplacer par `items.length`. Les compteurs de `CityPage`,
+`AccueilPage`, `CommercantPage` et `AnimationsCatalogPage` gardent la lecture
+avec total. Les lecteurs sans compteur exhaustif, dont LiveDiscovery et les
+animations d’une fiche commerce Live, peuvent seuls négocier l’opt-out.
+La portée du total de messages existant reste celle du contrat actuel ; ne
+pas le renommer total filtré par animation sans évolution distincte.
+
+Le passage de total exact à inconnu invalide l’ancien compteur mémorisé dans
+`useLiveMessages` : pas de conservation d’un entier périmé avec `??`. Le header
+utilise le point de présence global, la page affiche « non lus dans cet aperçu »
+si nécessaire. Zéro non-lu parmi des pages chargées ne signifie pas « vous êtes
+à jour » tant que l’indicateur global ou contextualisé approprié n’a pas confirmé
+l’absence dans son propre périmètre. Les reçus de lecture locaux ne remplacent
+pas cette vérification serveur.
+
+Les valeurs de projection inconnues et options invalides donnent 422 ; aucune
+substitution silencieuse par une autre projection. Les erreurs d’accès, capacité
+moteur incompatible et projection non prête gardent leurs codes existants.
+Les clients anciens n’utilisant aucune option reçoivent la même forme et la même
+sémantique qu’avant. Un nouveau lecteur n’envoie ces options qu’après la capacité
+correspondante ; repli déterministe, sans essai-erreur répété.
+
+Un changement de projection ou d’option de total réinitialise la fenêtre côté
+client. Les anciennes requêtes sans options conservent leurs curseurs ; les
+nouveaux curseurs lient aussi la variante de représentation. Pas d’invalidation
+globale des liens déjà distribués. La modernisation du catalogue historique
+réutilise le chargement groupé mais conserve ses filtres commerçant/coffret,
+ses statuts dont clôturé et son ordre ; elle ne le remplace pas aveuglément par
+une recherche moderne dont le périmètre est différent.
+
+Concrètement, absence d’option ou valeurs historiques explicites : dictionnaire
+de signature et décodeur historiques inchangés, sans ajouter une clé par défaut
+à l’empreinte signée moderne. Variantes négociées : version/empreinte distinctes
+liant projection et option de total, y compris pour le format legacy différent.
+Un curseur historique n’est accepté que dans sa représentation historique ;
+mismatch : erreur de curseur déjà prévue pour la route, sans repli silencieux.
+
+Producteurs : `animation_locale_api.py`, `recherche_animations_live_api.py`,
+`messages_organisateur_api.py`, `localeo_live_api.py`, schémas et services backend.
+Source documentaire de contrat : [OpenAPI Live E42](../epic-42-localeo-live/openapi.json),
+généré hors ligne par `scripts/documentation/generate_epic42_openapi.py` du
+backend. Les contrats moteur embarqués ne changent pas : ces DTO sont des vues
+de catalogue et de messagerie, pas une nouvelle version du jeu.
+Lecteurs : transport `src/services/api.js`, capacités, discovery, cartes,
+fiche commerce et messages Live. Les cartes Marketplace Coffrets restent en
+projection complète tant qu’elles n’ont pas été adaptées ; leurs usages du
+descriptif et de l’inscription ne doivent pas disparaître.
+
+### 8.3 Lectures backend bornées — LP-01 à 09
+
+**Catalogue.** Paginer les racines autorisées, puis charger en groupe les
+configurations effectives, modèles, retraits, paramètres, dotations et compteurs
+nécessaires à cette seule page. La clé du dernier élément réutilise ses dates
+effectives déjà lues. Aucun SELECT par carte, paramètre ou retrait. Le total
+reste calculé uniquement pour le contrat historique qui le demande ; il ne
+conditionne plus les lectures Live négociées. `CARTE_V1` ne charge pas une fiche
+complète pour ensuite jeter ses champs ; les nombres de partenaires/coffrets
+sont agrégés pour la page sans hydratation de toutes leurs fiches.
+
+**Fiche publique et lots.** Avant optimisation de la fiche, relever SQL, pool,
+projection, sérialisation et éventuel stockage pour les mêmes données. Grouper
+les enrichissements réellement redondants ; ne supprimer aucun champ du détail
+existant. La sous-liste de lots commence par le contrôle de visibilité minimal
+commun au catalogue, puis une seule lecture `limit+1`. Ne pas appeler `obtenir`
+pour cette autorisation. Visibilité négative : même réponse de refus, aucune
+lecture publique de contenu. La mesure de la fiche inclut partenaires et lots
+réels du jeu synthétique, pas uniquement un détail vide.
+
+**Personnel.** Chaque GET dashboard/récompenses/tirages utilise une seule UoW
+et le contrôle courant secret/installation avant sa projection. L’activité
+technique n’est mise à jour que si son timestamp est plus ancien que 60 s :
+UPDATE conditionnel atomique, monotone, sans `FOR UPDATE` gardé pendant le rendu.
+Des requêtes simultanées ne doivent pas toutes réécrire une valeur récente.
+L’intervalle ne modifie ni validité ni révocation ; il rend la date d’activité
+approximative à une minute pour la rétention. Ajouter cette minute de grâce au
+cutoff de purge (date enregistrée strictement antérieure à cutoff moins 60 s),
+en conservant ses autres conditions, pour ne jamais supprimer plus tôt qu’avec
+une date exacte ; tester la frontière temporelle et la concurrence avec une lecture.
+Le commit technique éventuel reste court ; aucune transaction SQL n’encadre
+l’accès au stockage distant ou la réponse HTTP complète.
+Authentifier puis matérialiser la projection avant l’UPDATE d’activité ; cet
+UPDATE conditionnel intervient en toute fin de transaction, suivi immédiatement
+du commit. Aucun accès au stockage ni sérialisation HTTP sous son verrou.
+
+Charger toutes les preuves email de la page dans une lecture dédiée de port,
+puis les transmettre aux faits du moteur, avec absence explicite. Ne pas laisser
+un `session.get` par participant ni substituer un booléen calculé par la route
+au résultat du moteur. Conserver les préchargements existants du dashboard.
+Le périmètre `participation_id` reste appliqué en stockage avant pagination.
+
+**Plafond d’inscriptions.** Qualifier le sous-plan corrélé avec/sans plafond,
+y compris les valeurs NULL et 0, inscriptions annulées et suppressions selon
+la sémantique actuelle. V1 privilégie une requête/index adaptés sans nouveau
+compteur métier. Si les budgets échouent, une projection de comptage ne peut
+être adoptée qu’avec invariant documenté d’égalité au décompte courant, reprise
+historique et maintenance dans la même transaction de chaque insertion,
+suppression et modification pertinente. Tous les producteurs API/ERP/import/batch
+doivent alors être recensés et testés avant activation. Pas de compteur différé
+utilisé pour ouvrir une inscription ; un échec de budget maintient LP-07 ouvert.
+
+**Annuaire.** Mesurer les prédicats et tris réels `q`, commune, animation et
+`lower(nom) COLLATE C,id` ; première et page profonde, terme courant/rare/vide.
+La migration d’un index éventuel utilise exactement l’expression normalisée et
+les filtres servis, après comparaison `EXPLAIN (ANALYZE,BUFFERS)` N/10N.
+Ne pas ajouter un trigram redondant par principe, forcer un index sur une petite
+table, ni transformer le rattachement organisateur en filtre d’adresse postale.
+
+**Readiness.** Mesurer le contrôle de catalogue système séparément ; la capture
+de l’audit indique environ 0,5 ms d’exécution locale, sans preuve qu’il est le
+goulot. **Décision V1 : conserver un contrôle DB courant par recherche** et le
+réutiliser dans cette seule demande, sans second contrôle identique en aval.
+Le cache positif inter-requêtes envisagé dans l’audit n’est pas retenu : un TTL
+de 30 s pourrait masquer un trigger désactivé alors que la requête reste valide.
+Un futur remplacement exige un mécanisme prouvé de détection/invalidation à
+chaque lecture, y compris hors migration coordonnée, et les mêmes fault injections.
+Ne pas affaiblir ces assertions pour retirer un aller-retour peu coûteux.
+
+Le contrôle peut aussi alimenter la readiness au démarrage ; en cas d’échec,
+l’application reste vivante mais la recherche répond 503
+`CATALOGUE_ANIMATION_EN_PREPARATION`, jamais un résultat incomplet présenté
+comme complet. Une réparation permet la reprise sans cache négatif durable.
+Schéma, index, contraintes et triggers v304, ainsi que la garde BUM, restent
+vérifiés. Aucun cache de readiness n’emporte une décision de visibilité métier.
+
+### 8.4 Chargement Live et ordonnancement — LP-12 à 15
+
+**Carnet.** Afficher d’abord les résumés locaux avec « à vérifier » tant que
+le serveur n’a pas confirmé l’état. Page locale de **12 entrées**, navigation
+explicite ; aucune pagination automatique pour reconstruire tout le carnet.
+Producteur de revalidation limité à **2 entrées en cours**, sans soumettre N
+promesses à la file globale. Chaque carte réussie est publiée indépendamment ;
+un accès refusé est purgé de la vue autorisée, une panne reste une panne.
+L’ordre de la page reste stable pendant les réponses. Lorsqu’un tri s’appuie
+sur des données serveur encore partielles, il est annoncé comme tel ; le
+résumé local ne qualifie ni urgence ni gain disponible.
+
+Une cible `participation=<UUID>` est recherchée dans le stockage local par clé
+et lue directement, sans attendre la page ou scanner le serveur. Sans accès
+local exact, reprise neutre existante ; aucune autre participation à la même
+animation n’est utilisée. Une ouverture fait **un seul GET de participation**
+partagé en vol avec le moteur et au plus un GET de fiche contextualisée, sans
+troisième relecture au montage. Un instantané d’affichage récent peut être
+présenté en attendant ce contrôle ; il ne permet pas de présenter le QR ni
+d’exécuter une commande. Les clés privées incluent installation, participation
+et version locale d’accès ; la mutualisation par animation est limitée à la
+fiche publique ou à sa contextualisation pour la même installation.
+
+**Lots et liaisons.** Les GET récompenses et tirages des suivis existants partent
+immédiatement ; leurs réponses ne s’attendent pas mutuellement. Chaque résultat
+valide vérifie encore identité/contexte avant application. La liaison normale
+est faite une fois lors de l’ajout confirmé d’un accès au carnet, avec les
+credentials existants, puis reçue et rattachée à l’installation concernée.
+Un reçu local évite un POST systématique au remontage mais n’accorde aucun droit.
+
+Pour un ancien carnet non lié ou une nouvelle installation, conserver les bons
+locaux en état à vérifier et afficher la couverture partielle. Proposer
+« Synchroniser mes accès » : **au plus 5 accès par action, concurrence 2**,
+progression explicite et suite demandée par l’utilisateur ; pas de boucle
+automatique des 50 accès avant consultation. Une fois des liaisons confirmées,
+revalider les pages concernées une fois. Échec isolé : conserver la liste des
+accès restants, sans doublonner inscription, accord ou participation. La
+révocation serveur prévaut toujours ; perte de réponse traitée selon les
+garanties de répétition du contrat de liaison existant, sans créer de nouvelle
+commande de participation.
+
+**Priorités.** Garder le plafond **3 GET Live actifs, 40 en attente maximum**.
+Priorité 1 : configuration initiale nécessaire, navigation demandée, détail et
+page visible ; priorité 2 : revalidation des éléments visibles ; priorité 3 :
+badge et lectures secondaires. Au plus deux lectures de priorité 2/3 actives,
+laissant un créneau au parcours demandé ; deux recherches de période maximum.
+FIFO à priorité égale ; après quatre départs prioritaires consécutifs, servir
+une attente plus basse encore utile. Pas de préemption d’une commande métier.
+Ces bornes sont un plafond technique, pas une invitation à remplir la file.
+
+Dédupliquer en vol les GET réellement identiques, par route/filtres/capacités
+et contexte autorisé. Aucun secret en clé de métrique ou URL publique. Un appel
+partagé est annulé lorsque plus aucun lecteur ne l’attend, pas au démontage du
+premier composant encore utilisé par un second. Propager `AbortSignal` jusqu’au
+transport du carnet, de la fiche contextualisée et du moteur ; ignorer aussi
+toute réponse d’une ancienne génération. L’annulation navigateur ne garantit
+pas l’interruption d’un SQL déjà envoyé ; délais serveur restent nécessaires.
+Le budget global **15 s, attente comprise**, ne redémarre pas à la sortie de file.
+
+**Accueil et configuration.** Sans installation ni accès local, aucune création
+d’installation ni requête privée pour simplement découvrir. Avec installation
+existante, ne pas déduire l’absence de suivis de l’absence de carnet local :
+continuer les lectures autorisées. Une création nécessaire au suivi, à l’ajout
+d’accès ou à l’activation volontaire des notifications garde son parcours.
+Configuration partagée en vol et **60 s en mémoire**, y compris Réglages/WebPush ;
+clé origine API et version de contrat. Erreur sans dernier résultat valide :
+état/repli ancien explicite, aucune capacité positive inventée. Ne pas prolonger
+une capacité expirée par un cache service worker.
+
+Le shell utilise l’indicateur global, la page messages seule charge les corps.
+`has_unread=true` produit une pastille nommée « Des nouvelles à lire », jamais
+un faux nombre 1 ; `false` n’annonce l’absence que dans le périmètre lu.
+Polling visible existant au plus toutes les 60 s, focus/visibility mutualisés
+selon LH ; pas de polling des messages complets à chaque vue. Les indicateurs
+ne demandent pas de permission push et ne marquent rien lu.
+
+Fenêtres publiques et annuaire restent bornées et remplacées atomiquement selon
+§7.3 : la priorité ne permet pas d’afficher une combinaison de pages anciennes
+et nouvelles. Leur contenu reste visible pendant la revalidation, même si
+plusieurs pages doivent être relues. Pas de parallélisation aveugle de curseurs.
+
+### 8.5 Cartes, images et mémoire — LP-10/11/18
+
+La vue de carte légère est opt-in ; elle n’appelle pas le détail pour calculer
+sa promesse. Son cache public en mémoire reprend les bornes existantes de
+**5 contextes, 120 cartes par contexte** avec clés incluant projection,
+capacités, filtres et origine. La fiche publique et l’inscription peuvent
+partager cette seule lecture publique, TTL **60 s**, avec revalidation ; elles
+n’en déduisent jamais un droit d’inscription, de passage ou de QR. Aucun cache
+durable de fiche ou de capacité, et aucun cache privé nouveau. À l’erreur
+d’accès, retirer la donnée concernée selon LH. La projection de carte ne doit
+pas servir de substitut incomplet à une fiche attendue par un ancien lecteur.
+
+Flyer : conserver le fichier source et ses contrôles de 5 Mo/intégrité.
+Créer à la validation de l’image une dérivée de carte de **largeur maximale
+960 px**, sans agrandissement, orientation corrigée, métadonnées retirées,
+**150 Kio maximum**, format WebP ou format sûr déjà supporté par l’outillage.
+Si cette borne ne peut être tenue, la carte utilise la variante sans image ;
+le flyer source reste disponible par son parcours. La génération se fait une
+fois par hash source, hors transaction SQL longue ; son échec ne publie aucune
+dérivée partielle. Aucun service IA ni illustration par défaut n’est requis.
+
+`visuel_url` de la carte négociée peut viser la sous-ressource additive
+`GET /animations/{id}/illustration-flyer/miniature`, avec le même contrôle de
+visibilité que la source et `Cache-Control: no-store`. Chaque demande revalide
+la référence autorisée actuelle avant de lire les bytes. Un cache interne
+facultatif par hash vérifié, **32 Mio maximum par processus, TTL 5 min**, peut
+éviter un accès stockage répété ; il ne met jamais en cache une autorisation.
+Retrait/changement de référence : ancienne URL refusée ou référence actuelle
+seulement, aucun accès direct public à une clé de stockage privée. Les requêtes
+déjà autorisées en vol gardent la même frontière de concurrence que la source.
+
+Anciennes images : pas de retraitement exhaustif au premier GET ni de
+téléchargement du source 5 Mo dans chaque carte. Une reprise optionnelle est un
+job à lots de **25 références**, concurrence 1, checkpoint/reprise par hash,
+validation de visibilité et quota d’espace avant écriture ; aucun traitement
+sur TEST partagé pendant le développement. Tant que la dérivée n’est pas prête,
+le nouveau DTO indique `visuel_url:null`, l’ancien DTO reste inchangé. Sauvegarde,
+restauration, suppression et conservation englobent les dérivées ou leur
+reconstruction déterministe depuis la source. La miniature ne crée pas un
+nouveau droit de publication.
+
+### 8.6 Coût, budgets et preuve de capacité — LP-16
+
+Budgets d’acceptation cibles sur le banc de référence §5 : API et PostgreSQL
+chacun 2 vCPU/4 Gio, même réseau, pool de lecture de test 10 sans débordement.
+La latence HTTP inclut autorisation, acquisition de connexion, projection et
+sérialisation ; les métriques SQL sont détaillées séparément. Les objectifs
+nouveaux de fiche, personnel, annuaire et lots ne sont pas des mesures acquises.
+
+| Famille | Borne et accès | Budget cible, premier résultat et page profonde |
+| --- | --- | --- |
+| Recherche moderne | Page 12/50, 1 à 10 communes, keyset, racines ≤page+1, enrichissement de la seule page | Budgets §5 conservés : p95 ≤500 ms, p99 ≤1 s, ≤10 SQL, surcoût Python ≤10 Mio. |
+| Ancien catalogue négocié sans total | Page ≤50 ; mêmes filtres/ordre/visibilité, configurations/retraits groupés | p95 ≤500 ms, p99 ≤1 s ; ≤10 SQL, nombre indépendant de 1/12/50 et N/10N. Ancien total demandé : un COUNT supplémentaire admis, coût global déclaré et mesuré ; ce chemin ne qualifie pas la lecture rapide Live. |
+| Fiche publique et annuaire | Une racine ; annuaire défaut Live 12, serveur max 100 existant ; index après plans | p95 ≤500 ms, p99 ≤1 s ; fiche ≤12 SQL, annuaire ≤10, pas de requête par enfant. Données de détail réellement représentatives et bornes de sous-listes existantes mesurées. |
+| Dashboard, récompenses, tirages | Pages serveur ≤50 ; défauts frontend 50/25/25, faits et preuves groupés | Chaque route p95 ≤500 ms, p99 ≤1 s ; ≤20 SQL incluant contrôle et éventuelle activité, nombre indépendant de 1/10/50 participations. Pas de requête par participant. |
+| Messages négociés sans total | Page défaut 25/max 100, branches bornées avant union ; total séparé | p95 ≤500 ms, p99 ≤1 s ; ≤6 SQL incluant authentification. Indicateur global/par animation : §5, ≤4 SQL, p95 ≤200 ms/p99 ≤500 ms. |
+| Page de lots publics | Contrôle ciblé puis `limit+1`, défaut 25/max 100 | ≤6 SQL, p95 ≤250 ms, p99 ≤600 ms ; pas de projection détail préalable. |
+| Contact / lieu courant | Une animation ou une participation autorisée | Budgets §5 inchangés, y compris exclusion des futurs lieux cachés. |
+| Cartes et miniature | DTO léger, aucune collection ; miniature ≤150 Kio | Page de 12 cartes ≤24 Kio JSON brut et page 50 ≤100 Kio avec fixture nominale de noms/communes longs déclarée. Mesurer aussi compression ; ne pas tronquer des titres pour passer. Miniature chaude p95 ≤250 ms/p99 ≤600 ms hors génération ; aucune génération synchrone au GET. |
+| Frontend | 3 GET actifs, 2 entrées revalidées, page carnet 12 ; caches §8.5 | Résumé local rendu sans attendre le réseau ; une réponse utile reçue n’attend pas une autre source pour apparaître. Pas de promesse de temps réseau depuis une simulation navigateur. |
+
+Le budget SQL compte les statements réellement exécutés, y compris contrôles,
+SET et activité ; distinguer SELECT et écritures dans la mesure. Les tableaux de
+l’audit comptant seulement SELECT ne prouvent pas cette cible complète. Les
+coûts autoritaires d’ouverture et de qualification ne sont pas exclus pour
+faire passer un plafond. Les relations/faits sur les IDs de page sont bornés ;
+les index de recherche et projection v276/v304 restent vérifiés et non supposés.
+
+Campagne isolée : **N=1 000 animations/10 000 participations/50 000 messages**,
+puis 10N ; faire croître séparément le périmètre lu, les données étrangères et
+l’historique. Inclure 0/1 000/10 000 inscrits par animation plafonnée, 1/10/50
+participations d’installation dont tombolas publiques, 1/10/50 partenaires et
+lots, 1 000/10 000 commerces avec noms et rattachements variés. Premières et
+pages profondes, q courant/rare/vide, accents, 2/3 caractères, zéro résultat,
+images source/dérivée absentes, index/readiness indisponibles.
+
+Après stabilisation, **cinq minutes à 1 puis 10 lecteurs**, charge mixte §5
+(2 écritures/s, notifications simulées), puis saturation 20/40. Conserver les
+budgets des écritures et régression p95 ≤20 % ; zéro 500, doublon, fuite ou
+perte de validité. Refus de surcharge borné selon le contrat 429/503 existant,
+pas une file sans limite ; retour au nominal sous 60 s. Les délais pool/SQL/
+verrous sont instrumentés puis bornés pour que la réponse ou le refus arrive
+dans le délai client global de 15 s ; ne pas conserver aveuglément une attente
+de pool de 30 s pour ces lectures. Leur réglage respecte le budget total de
+connexions de tous les workers, sans pool supplémentaire non compté.
+Enveloppe de refus cible : **au plus 5 s côté serveur**, acquisition de connexion
+**500 ms maximum**, SQL de lecture **2 s maximum par statement**, attente de
+verrou **250 ms maximum**. Ces plafonds techniques ne remplacent pas les budgets
+p95/p99 plus stricts. Les adapter par les mécanismes de lecture bornée existants,
+sans modifier les délais des commandes métier ni masquer leurs résultats
+incertains ; documenter les clés réellement utilisées à la livraison.
+
+Enregistrer HTTP p50/p95/p99, erreurs/débit, SQL et plans, lignes/objets, CPU,
+mémoire, pool et verrous ; captures premier accès et lectures chauffées séparées.
+Un résultat matériel non équivalent est une preuve locale limitée ; un test
+simulé, un test vert de bornage, une moyenne ou trois GET TEST ne valent pas
+acceptation des percentiles. Le job de qualification doit échouer ou produire
+un verdict non accepté si un budget échoue, sans modifier les seuils après coup.
+
+### 8.7 Diagnostic et sécurité — LP-17
+
+Réutiliser corrélation HTTP et instrumentation existantes. Décomposer par nom
+de route normalisé : attente de file navigateur, HTTP, application, acquisition
+pool, SQL total/nombre, projection/sérialisation, stockage/octets, statut et
+fraîcheur. Histogrammes agrégés ; aucune étiquette par habitant, commune, token,
+UUID de participation, email, recherche libre ou URL personnelle. Pas de texte
+SQL avec paramètres ni secrets dans les journaux. En navigateur, mesures
+locales/fixtures et outils de diagnostic existants ; aucune nouvelle collecte
+Analytics sans le consentement existant, ni beacon ajouté pour cet audit.
+
+La corrélation peut être restituée à l’erreur selon le contrat actuel ; ne pas
+révéler des détails DB dans le public pour faciliter le diagnostic. L’observation
+ne conserve ni corps privé ni cache d’autorisation ; son coût est inclus dans
+les budgets. Le lien avant/après associe SHA, index, hardware et fixture à la
+même campagne, sans comparer une mesure de service local à un HTTP distant.
+
+### 8.8 Données, livraison et reprise — LP-18
+
+Livrer backend avant le nouveau consommateur. N’annoncer une capacité qu’après
+présence des handlers/schémas, tests de compatibilité et readiness de ses données.
+Un backend nouveau sert encore l’ancien frontend ; un frontend nouveau sans
+capacité utilise les formes historiques, avec leurs limites de performance
+signalées. La coexistence ne permet pas de déclarer le chemin moderne qualifié
+à partir de la seule compatibilité de l’ancien chemin.
+
+Aucun changement d’inscription, token, lot, consentement, suivi ou compte n’est
+nécessaire pour ces optimisations. Activité throttled : précision de rétention
+et tests de purge à adapter, pas de suppression anticipée. Index/miniatures et
+éventuelle projection de comptage sont des migrations **additives**, à numéroter
+lors de la réalisation après inventaire des migrations réellement présentes ;
+ne pas modifier v276/v304 ni réserver ici un numéro pouvant être pris ailleurs.
+Pour chaque index, documenter taille/coût d’écriture et stratégie de création
+compatible avec le runner de migration, sans présumer `CONCURRENTLY` disponible.
+
+La référence de miniature, son hash et son état de préparation doivent être
+persistés dans l’adaptateur d’illustration, pas dans l’agrégat pour créer une
+nouvelle règle métier. Reprise historique bornée hors requête, journal d’échec
+technique, réexécution idempotente par hash. Restauration : readiness des
+projections, références valides et régénération possible des dérivées avant
+annonce de capacité. Source manquante : image absente, aucun substitut inventé.
+
+Rollback : retirer les capacités nouvelles et revenir au lecteur précédent,
+sans DROP, migration descendante destructive ni effacement du carnet. Les
+liaisons confirmées restent valides ; les reprises en cours peuvent être
+suspendues à leur checkpoint. Pas d’annulation de commande métier pour annuler
+un cache ou une optimisation. Aucun réglage TEST/production n’est appliqué par
+cette spécification.
+
+Sources à actualiser lors de la réalisation :
+[campagne performance E59](../../exploitation/technique/executer-campagne-tests-performance-api.md),
+[configuration E73](../../exploitation/technique/configurer-epic-73.md),
+[communication participants](../../exploitation/exploitation/communiquer-participants-animation.md),
+[flyers](flyers-contextualises.md) et guides Live du dossier E42.
+Leur mise à jour décrira les fonctions effectivement livrées ; aucun guide
+d’exploitation ne doit présenter les capacités cibles comme déjà disponibles.
+
+### 8.9 Traçabilité, preuves à produire et préparation
+
+Toutes les lignes suivantes sont **prévues, non exécutées pour cette évolution**.
+Les tests/GET de l’audit sont des baselines, conservées au bilan, pas des tests
+de correction. Réutiliser d’abord les suites existantes ; les noms de nouveaux
+fichiers seront inscrits au bilan seulement après création et exécution.
+
+| Critères | Propriétaire / contrat | Preuve prévue | Documentation / fixtures / démonstration | Exploitation / livraison |
+| --- | --- | --- | --- | --- |
+| LP-01/06/10 | Catalogue application + adaptateurs ; DTO/option de total opt-in, autorisation lots existante | PostgreSQL requêtes pages 1/12/50, classique avec retraits, BUM actif/inactif, anciennes/nouvelles réponses, curseurs et visibilité retirée ; contrats HTTP et cartes Live/Coffrets | OpenAPI E42 généré et API frontend alignés à l’implémentation ; fixtures N/10N, anciens moteurs ; pas de modification des règles/générateur métier | Backend avant frontend ; pas de migration métier pour regroupement, readiness des index existants |
+| LP-02/07/08/09 | Service catalogue/annuaire, faits d’inscription et readiness technique | Plans et budgets avec enfants/inscrits, filtres historiques, SQLcount global croissant mais hydratation page bornée ; schéma/index manquant, trigger désactivé après un succès, réparation et bases distinctes ; comparaison avant/après | Conception §8, guide E59 et exploitation à enrichir lors de réalisation ; fixtures synthétiques, aucune donnée TEST | Index/projection seulement si preuve ; configuration de capacité et readiness au déploiement ; pas de garantie sans hardware équivalent |
+| LP-03/04 | Accès courant, application des lectures, moteur de qualification inchangé | Deux UoW anciennes vs une cible, activité concurrente, preuve absente/révoquée, mélange moteurs, 1/10/50 ; domaine sans ORM pour sémantique et SQL réel pour groupement | Règles d’accès et E74 réutilisées, purge d’installation testée ; fixtures sans vrais emails ; générateur inchangé pour ce lot | Pas de migration pour groupement ; activité technique et minute de grâce de purge à livrer ensemble, rollback sans suppression anticipée |
+| LP-05 | Communication participants ; messagerie/indicateur négociés | Ancien client avec total exact ; opt-in null ; filtre animation/global, 5 000/50 000 messages, preuve/token révoqué, anciennes notifications, lecture explicite et cardinalité SQL | OpenAPI E42 et guide messages ; simulations des deux capacités, pas de campagne réelle | Déploiement backend d’abord ; pas de nouveau canal, quota ou consentement |
+| LP-11 | Adaptateur média, visibilité de domaine existante | Source ≤5 Mo, dérivée ≤150 Kio, orientation, hash erroné, panne, retrait, concurrence, quota cache, reprise interrompue, sauvegarde/restauration | Fixtures images réelles de test sans personnages générés ; guide flyer et sauvegardes ; générateur seulement pour nouvelle référence dérivée si nécessaire | Migration additive de métadonnées et job borné si reprise demandée ; aucun traitement partagé implicite |
+| LP-12/13/14/15 | Hooks/carnet/transport Live, ressources et accès existants | Node file/cache/liaisons, puis Playwright carnets 0/1/10/50+, réponse bloquée/inversée, changement installation, deux tokens même animation, navigation ciblée, 40 attentes, annulation partagée, lots partiels, config Réglages/WebPush | Guides carnet/lots et cette conception ; fixtures backend ancien/nouveau, bibliothèque corrompue et stockage refusé ; aucun peuplement TEST | Lint/build et serveur navigateur isolé ; pas de secret nouveau, pas de migration du carnet pour pagination ; préservation des reçus éventuels par installation |
+| LP-16/17 | Adaptateurs de mesure + campagne E59 | Cinq minutes, charge mixte/saturation, budgets SQL/mémoire/latence et reprise ; logs sans données sensibles ; métriques bornées ; test vert structurel distingué du verdict capacité | Procédure performance à actualiser avec vrais chemins de tests et sorties ; rapports au bilan E73, pas de registre concurrent | Environnement isolé représentatif requis pour acceptation technique ; aucune preuve pilote/mail réel demandée |
+| LP-18 | Producteur backend + consommateurs Live/Coffrets | Matrice quatre combinaisons de versions, variantes contrat, accès directs/retours, curseurs, repli et retrait, non-régression QR/PIN/liaisons | Contrats générés actuels seulement après implémentation ; architecture et guides touchés exportés selon manifeste | Sources puis exports vérifiés, migrations puis backend puis client ; repli sans perte ; cinq dépôts indépendants |
+
+Commandes cibles : backend `scripts/validation/test_isolated.py` avec une base
+jetable explicite pour adaptateurs/contrats et tests d’architecture requis ;
+Marketplace suites Node puis Playwright isolé, lint/build. Aucun test réseau ne
+dépend de TEST partagé ou d’une livraison email/push réelle.
+
+**Préparation :** périmètre spécifié, pas d’arbitrage métier bloquant identifié.
+LP-01/03/04/05/06/10/12/13/14/15/17/18 ont leurs choix de réalisation ;
+LP-02/07/08/09/11/16 comprennent une étape de profilage/qualification sur cible
+isolée avant de choisir l’optimisation physique ou d’activer sa capacité.
+Le profil matériel de référence et les plans ne sont pas inventés : leur absence
+empêche de déclarer la capacité vérifiée, sans bloquer les corrections indépendantes.
+La fin exige **18 critères vérifiés**, consommateurs et migrations cohérents,
+et aucun budget échoué présenté comme réussi. Les résultats et limites restent
+au [bilan E73](verification-livraison.md), distincts de la clôture historique.
+
+## 9. Fiche animation immersive — E73-EVO-LIVE-FICHE
+
+**9 novembre 2026 — réalisation locale Marketplace/Live.** Complément des
+[12 critères E73-FD](localeo-live-entree-unique.md#évolution-du-9-novembre-2026--fiche-animation-immersive-e73-evo-live-fiche),
+issus du [rapport visuel](../../audits/marketplace/localeo-live-fiche-animation-ux-ui-2026-11-08.md).
+Ce chapitre remplace les choix de composition de fiche publique incompatibles
+avec cette cible, sans modifier les règles de jeu ni les décisions LA/LH/LP
+sur les droits, la fraîcheur, les lots, les contrats et les bornes.
+
+### 9.1 Périmètre, responsabilités et contrat consommé
+
+Périmètre : `/live/animations/{animation_id}`, lien public et retours associés.
+L’inscription et la participation personnelle restent des parcours distincts.
+L’interface présente les faits ; domaine Animation et moteur conservent dates,
+visibilité, ouverture des inscriptions, capacité, conditions, qualification,
+tirage, gains et lieux révélés. Accès existants : un état inscrit de
+l’installation ne constitue jamais un token de participation.
+
+Réalisation dans `localeo-marketplace` : `LiveAnimationDetail`, nouvelle variante
+`LivePublicAnimationView` et helpers `livePublicDetailPresentation.mjs`,
+`AnimationRulesAndRegulation` réutilisé pour le règlement, `LiveJourneyHelp`,
+navigation et feuille existante `live-public-detail.css`.
+Le badge de notifications lit seulement une installation déjà présente sur une
+fiche publique : aucun POST d’initialisation ni renouvellement implicite sur
+refus. Les autres parcours de notifications conservent leur initialisation.
+Réutiliser les composants/tokens de l’accueil. Le composant partagé doit
+isoler explicitement la variante **publique Live**, par prop/classe de variante ;
+ne pas changer implicitement le jeu personnel, le détail historique ni les
+consommateurs Coffrets en corrigeant des sélecteurs globaux.
+
+Pas d’endpoint ni de champ API nouveau requis. Source de contrat :
+[OpenAPI Live E42](../epic-42-localeo-live/openapi.json), producteur backend
+actuel. Consommation : détail public complet, enrichissement facultatif de
+l’installation existante, carnet local, lots paginés et annuaire public autorisé.
+Ne pas remplacer ce détail par `CARTE_V1` de LP-10, trop limité pour ses règles.
+Cette conception est implémentable avec le backend actuel ; les optimisations
+LP sont une livraison distincte, compatibles par leurs capacités négociées.
+Une donnée publique absente reste inconnue, jamais fabriquée à partir du titre
+ou d’un statut local. Aucun email ni accès personnel dans une URL publique.
+
+### 9.2 Composition, hiérarchie et styles — FD-01/02/09/10
+
+**Barre locale** : retour nommé à gauche, repère « L’animation », actualiser
+iconographique à droite avec nom accessible « Actualiser l’animation ».
+Le titre de l’animation reste le seul h1 dans la carte d’introduction ; le repère
+de barre n’est pas un deuxième titre principal. Le retour conserve son libellé
+contextuel, la fenêtre, les filtres, l’ancre et le focus LA/LH existants.
+
+**Mobile, ordre de lecture :**
+
+1. Carte Votre défi : pictogramme du moteur, commune, statut et période compacte,
+   titre ; promesse en phrase et éventuel flyer sous le titre ; conditions
+   essentielles lisibles ; action primaire et récupération secondaire.
+2. Comment jouer ? : guide court illustré adapté au moteur.
+3. À gagner : aperçu réel ; Où jouer ? : partenaires publics autorisés.
+4. Description, conditions complètes/règlement et aide dépliables ; favori/partage
+   dans une seule zone secondaire près de l’identité, sans dupliquer la récupération.
+
+Une action primaire logique, un seul élément interactif pour celle-ci : sur
+mobile, son conteneur peut être fixé au-dessus de la navigation basse comme
+actuellement, sans dupliquer deux liens focusables. Réserver dans le contenu la
+hauteur réellement mesurée de cette action, de la navigation et des safe areas.
+Les cibles d’ancres et les champs ouverts ne doivent pas être masqués. À 393 × 852,
+fixture nominale (titre ≤80 caractères, conditions ≤240), titre, promesse,
+conditions et CTA atteignables dans le premier écran ; CTA visible au-dessus de
+la navigation. À 320 × 568, texte long et zoom 200 %, contenu intégral accessible
+par défilement sans chevauchement ni défilement horizontal, sans tronquer une
+condition pour satisfaire la hauteur.
+
+Largeur bureau : même enveloppe maximale **1 080 px** que l’accueil ; dès 960 px
+utiles, composition en deux zones possible dans cette enveloppe : défi/guide
+principaux, récompenses/partenaires complémentaires. L’ordre DOM reste celui du
+mobile et le clavier le suit. Aucune seconde barre d’actions fixe latérale.
+
+Même palette, arrondis, bordures et pictogrammes que les cartes de découverte.
+Action primaire bleu nuit et état/focus contrastés ; orange réservé aux accents
+et repères existants, pas à un second bouton concurrent. Titres aux tokens
+actuels, corps lisible **16 px**, métadonnées **14 px** minimum dans les blocs
+repris, cibles **44 × 44 px**. Couleur toujours accompagnée d’un signe/texte.
+Modifier les styles sources des composants, supprimer les règles devenues
+inutiles dans le périmètre ; pas de nouvelle feuille de surcharges, dépendance
+UI ou CSS global affectant les autres surfaces.
+
+Flyer présent : bandeau après le titre, les conditions essentielles et les
+actions, **128 px maximum sur mobile**, visuel
+complémentaire **240 px maximum sur bureau**, ratio et recadrage stables.
+Cette priorité maintient les conditions visibles avant le CTA fixe à 393 × 852,
+y compris pour un titre de 80 caractères et des conditions de 240 caractères ;
+le visuel complémentaire ne consomme pas leur budget de premier écran.
+Conserver l’image configurée et son contrôle de publication ; ne pas faire
+dépendre le titre/CTA du décodage de l’image. Absence connue : pictogramme et
+accent de moteur, sans emplacement photographique vide. Image attendue en
+erreur : même géométrie avec pictogramme de repli, sans nouvelle photographie.
+Les éventuelles miniatures LP-11 restent optionnelles ; aucun nouveau média IA.
+
+### 9.3 Promesse, conditions et guide — FD-01/07
+
+Le nombre du défi est intégré à une phrase, sans grand chiffre isolé. Pour un
+passeport, nombre positif fourni par `regles_participation` ou repli historique
+autorisé : « Faites valider votre passage chez N commerçants » selon le sens
+existant du moteur ; à défaut, « Découvrez le parcours chez les commerçants ».
+Ne pas déduire un nombre de la taille d’une liste de partenaires ou d’un titre.
+
+Source des conditions : `regles_participation` puis champ historique `regles`,
+conformément au mapper existant. Les quatre clés publiques connues sont
+`conditions_participation`, `nombre_validations_requises`, `inscription_requise`,
+`age_minimum`. Présenter des valeurs valides avec libellés métier ; null reste
+absent, zéro n’est pas supprimé automatiquement. Une valeur de structure
+inconnue n’est pas convertie avec `String(objet)` ni présentée en clé technique.
+Une ancienne chaîne simple publique reste visible intégralement ; un ancien
+tableau de chaînes publiques peut être montré comme conditions textuelles.
+Aucun objet inconnu n’est parcouru pour fabriquer des règles.
+
+**Avant le CTA**, rendre le texte public `conditions_participation` intégral
+lorsqu’il existe, ainsi que l’âge et l’inscription requise déclarés, sans
+accordéon obligatoire ni ellipsis. La mise en page peut donc grandir pour un
+texte long. Pas d’extraction automatique de la notion d’achat/gratuité par regex,
+troncature, résumé IA ou lecture du titre. Dans la fixture Delphine, le texte
+« Effectuer un achat, sans montant minimum… » doit ainsi être visible dès
+l’introduction. Donnée absente : indiquer « Conditions non renseignées » et
+laisser le règlement accessible, sans inventer une gratuité ni un nouvel
+interdit ; les contrôles d’inscription restent ceux du serveur.
+
+Le guide est une liste ordonnée de **trois repères au maximum**, avec pictogramme
+et libellé court ; il décrit le parcours, pas une progression personnelle :
+
+| Moteur pris en charge | Repères de parcours, adaptés aux conditions réellement publiées |
+| --- | --- |
+| Passeport commerçant | S’inscrire si requis → faire valider les passages annoncés → retrouver le suivi et la suite autorisée dans Live. L’achat n’est affiché comme condition que via le texte public fourni, jamais comme règle reconstruite localement. |
+| Tombola locale | S’inscrire si requis → réaliser le passage selon les conditions publiées → consulter son suivi et les informations de tirage disponibles. Aucun gain garanti. |
+| Tombola publique | Saisir son email → attendre la confirmation serveur d’inscription → conserver son accès personnel reçu par email pour retrouver la participation. Aucun email intermédiaire imposé, aucun achat ni passage ajouté. |
+| Chasse au trésor | Ouvrir son parcours autorisé → suivre les énigmes révélées → consulter la progression confirmée. Aucune adresse future ni solution dans le guide public. |
+
+Si le contrat ne permet pas de choisir un repère sans supposer une action,
+employer un libellé neutre ou réduire le nombre de repères. Moteur inconnu :
+présentation générique et refus de capacité existants, pas de guide d’un autre jeu.
+
+Conditions complètes et règlement gardent leur version et accès au document
+officiel. Le raccourci Conditions **ouvre** la section avant scroll/focus ;
+l’arrivée directe avec `#animation-conditions` fait de même après chargement.
+Focus sur le summary/titre nommé, marge au header fixe ; pas de fermeture par
+une revalidation. Le lecteur peut ensuite fermer volontairement l’accordéon.
+Le règlement complet peut rester replié, sans seconde ouverture nécessaire pour
+atteindre les conditions de participation. Tout markup public reste échappé.
+
+### 9.4 Actions, accès et états — FD-03/08/11/12
+
+L’action prend en compte séparément : réponse publique courante, ouverture
+annoncée par le serveur, accès locaux précis et enrichissement d’installation.
+La découverte est disponible sans créer d’installation. Ordre de décision :
+
+| Situation | Action et message |
+| --- | --- |
+| Première lecture ou identité A/B incohérente | Aucun CTA métier actif, cadre d’attente stable ; retour disponible. |
+| Accès local unique à cette animation | « Reprendre ma participation » → `/live/animations?participation=<UUID>` pour cette ressource exacte ; le parcours personnel revalide token et état. Pas d’accès emprunté ni de QR dans la fiche publique. |
+| Plusieurs participations locales à cette animation | « Choisir ma participation » ouvre une liste locale accessible, labels permettant de distinguer les accès sans exposer leur token ; aucun choix arbitraire. Sélection explicite → même route ciblée. |
+| Installation déclarant inscrit, sans accès personnel local | « Retrouver mon inscription » ouvre la récupération existante. Ne pas promettre d’ouvrir le parcours avec le seul état `est_inscrit`. |
+| Aucun accès et inscriptions annoncées ouvertes | « M’inscrire » vers la route existante, contexte/source conservés. Une animation à venir peut autoriser cette action. « Déjà inscrit ? Retrouver mon accès » en secondaire. |
+| Aucun accès, inscriptions fermées | Message d’indisponibilité/motif public fourni ; pas de CTA d’inscription. Récupération d’un accès déjà existant reste disponible. |
+| Animation annulée/inaccessible au catalogue public | Le contrat public actuel ne renvoie pas `ANNULEE` : refus générique « Animation indisponible », sans tenter d’en déduire la cause depuis le carnet. Retour et entrée Mes participations pour les accès locaux ; aucune relance d’inscription ou invitation au tirage. L’historique personnel autorisé peut ensuite expliquer l’annulation s’il reçoit ce statut. |
+| Clôturée | Message « Animation terminée » et seuls faits publics disponibles ; aucune date de tirage ni résultat détaillé inventé. Accès personnel consultable, libellé « Consulter ma participation ». |
+| Résultat/gain personnel | Pas de section de résultat public en V1 : le DTO public actuel ne fournit ni résultat ni preuve de publication. Les détails autorisés restent dans la participation personnelle. Un nombre de gagnants connu ne permet pas d’annoncer le gain d’un habitant. |
+
+Le refus public et la clôture ne suppriment pas l’accès autorisé à l’historique
+personnel. Aucune ancienne copie publique n’est utilisée pour contourner ce refus.
+Un favori ou une fiche enregistrée
+n’entre pas dans la liste des participations confirmées. Stockage illisible :
+état explicite et récupération, pas une affirmation « vous n’êtes pas inscrit ».
+Accès en erreur réseau : état à vérifier ; refus confirmé : aucun droit conservé
+comme valide. Le parcours existant décide de la suite possible.
+
+La récupération est secondaire près du CTA lorsqu’il y en a un, ou primaire
+dans le cas sans accès personnel mais inscription connue. Ouvrir le formulaire
+ne l’envoie pas ; réponse de récupération neutre, retour et focus conservés.
+Un seul favori et un seul partage ; partager reconstruit uniquement l’URL
+publique. Aide intitulée pour la découverte/inscription, sans phrase annonçant
+« votre étape » ou « votre chance dans le suivi ci-dessus » si ce suivi n’est
+pas présent. Le contact public reste chargé seulement sur ouverture volontaire.
+
+### 9.5 Indicateurs, lots et partenaires — FD-04/05/06
+
+Une métrique dominante, selon les faits publics disponibles : statut `CLOTUREE`
+et `dynamique.nombre_gagnants` positif → nombre de gagnants, sans nom, détail de
+résultat ou affirmation de publication ; sinon animation non clôturée et dotation
+connue positive → lots à gagner ; sinon participants connus positifs → participants ;
+sinon pas de métrique dominante. Sur animation clôturée, une dotation reste une
+dotation prévue, pas une nouvelle occasion de gagner. Le DTO public actuel ne
+fournit pas de résultat détaillé ; aucun champ fictif n’est ajouté aux mocks pour
+simuler sa publication. Les autres chiffres connus, dont zéro, restent
+consultables dans un groupe secondaire « En chiffres » ; pas trois grands
+nombres concurrents. La dotation est toujours libellée « Dotation prévue »,
+jamais « lots encore disponibles ». Aucune animation de chiffre ni compteur
+personnel public ; dates exactes en Europe/Paris, pas de nouveau compte à rebours.
+
+À gagner (ou « Dotation » après clôture) : **trois premiers lots maximum**, dans l’ordre serveur, libellé,
+nature et quantité connues ; état de couverture partielle si nécessaire.
+Conserver les mentions « fictif/de formation ». Bouton « Voir les lots » ouvrant
+le détail de section, **pages de 25**, navigation explicite. Pour lots externes
+et bons numériques, utiliser le curseur et la sous-ressource serveur existants.
+Pour coffrets, le contrat actuel embarque une liste sans curseur : pagination
+de présentation sur la liste déjà reçue, aucun appel `/lots` de lots libres pour
+la compléter. Son coût de transfert/hydratation demeure la réserve LP-02, pas
+une pagination serveur prétendument acquise. Pas de collecte automatique ni de nombre total déduit
+d’un aperçu. Le bloc ne marque aucun lot personnel consulté et ne promet ni
+qualification ni attribution. Absence, panne et dotation inconnue restent
+trois états distincts ; les autres sections demeurent utilisables.
+
+Où jouer ? : **deux partenaires publics maximum** provenant des données
+autorisées déjà disponibles ; « Tous les commerçants » mène à l’annuaire avec
+`animation_id` et contexte de retour. Afficher le profil public, puis horaires/
+itinéraire lorsqu’ils existent ; pas de statut « ouvert maintenant » déduit
+de texte libre. Aperçu incomplet nommé comme tel ; aucun compteur extrapolé.
+Pour une chasse, aucune liste publique de lieux : expliquer qu’ils se dévoilent
+dans le parcours, et proposer la reprise uniquement avec l’accès personnel.
+Pas d’appel par partenaire ni par carte, pas de second téléchargement de tout
+l’annuaire pour remplir deux emplacements. L’ancre publique `#animation-lots`
+et l’entrée d’annuaire existantes restent fonctionnelles.
+
+L’adaptation de présentation reconnaît les coffrets classiques par leurs champs
+actuels, notamment `LOT_A_GAGNER` avec `coffret_id` ; un libellé « Coffret » dans
+l’interface ne crée pas un nouvel enum API. Ne pas envoyer une variante de
+dotation inventée pour obtenir une liste ou prétendre qu’elle est paginée côté SQL.
+
+### 9.6 Lecture, fraîcheur et continuité — FD-09/10/12
+
+Clé de rendu : origine API, `animation_id`, moteurs/capacités, puis identité
+personnelle distincte si disponible. Changement A→B : invalider immédiatement
+l’ancien contenu et ses CTA, anciens états de carnet/récupération/aide compris ;
+annuler A et ignorer toute réponse tardive. Seul un payload dont l’ID correspond
+à B peut activer un lien vers B. Ne pas se contenter de changer le paramètre
+d’URL en gardant la projection A. Le focus initial du titre se réinitialise par
+animation et n’interrompt jamais une saisie de récupération après enrichissement.
+
+Première lecture : ossature de la fiche cible, une annonce de statut ; pas de
+grand panneau de spinner autonome. Succès public : afficher sans attendre le
+personnel ; un échec d’enrichissement privé ne masque pas la fiche publique.
+Un changement d’installation purge l’enrichissement concerné et ne mélange pas
+deux identités. Une réponse privée tardive ne rétablit pas un accès retiré.
+
+Séparer les trois refus : fiche publique → retirer la copie publique et ses
+actions ; installation → retirer seulement son enrichissement ; accès personnel
+→ invalider la projection de cette participation. Un refus public ne révoque
+pas un token local et ne prouve pas que son historique est inaccessible. Une
+erreur d’installation ne supprime pas les autres accès personnels du carnet.
+
+Actualiser le même contexte : contenu conservé avec indicateur discret et
+commande mutualisée ; erreur conserve la dernière lecture datée, refus confirmé
+retire les données inaccessibles. L’affichage conservé n’autorise aucune action
+métier depuis une copie périmée. Retour au focus après **60 s** : revalidation
+mutualisée avec visibilitychange, pas de timer de polling supplémentaire.
+Propager l’annulation et respecter le plafond de **3 GET Live simultanés** et
+le délai de **15 s attente incluse**, sans multiplier les appels par section.
+Si LP-14 n’est pas encore livré, utiliser le transport existant borné ; ne pas
+créer un ordonnanceur concurrent propre à la fiche.
+
+Chargement de lots/partenaires étendu uniquement sur action. Respecter les
+bornes §8 lorsqu’elles seront livrées ; conserver en V1 les méthodes d’accès
+existantes. Les anciens volumes embarqués dans le détail restent à qualifier
+par LP-02 : l’aperçu visuel borné ne prouve pas une hydratation SQL bornée.
+Pas de cache API service worker, de cache personnel supplémentaire ou de
+stockage de réponse dans le carnet pour contourner une relecture autorisée.
+
+### 9.7 Recette, impacts et condition de fin
+
+| Critères | Propriétaire / comportement | Recette de référence, résultats au bilan | Documentation / fixtures | Exploitation / livraison |
+| --- | --- | --- | --- | --- |
+| FD-01/02/04/09 | Présentation Live ; faits publics du backend inchangés | Tests unitaires des sélecteurs/promesses ; Playwright accueil→fiche avec/sans flyer, 0/null/valeurs positives, titre et conditions longs, image lente/erreur ; captures 320 × 568, 393 × 852, 768 × 1024 et 1280 × 800 | Cette conception et guide Live du dossier E42 à actualiser lors de réalisation ; fixtures synthétiques reprenant achat obligatoire et mention formation, sans modifier TEST | Marketplace uniquement ; pas de SQL, permission, secret ou média supplémentaire ; lint/build requis |
+| FD-03/08/11 | Navigation et accès locaux ; autorité du parcours personnel et des statuts conservée | Unique/multiple/absent, installation seule, favori seul, stockage refusé, accès expiré/révoqué, future ouverte/fermée, refus public d’annulation et clôture avec/sans nombre de gagnants ; absence de résultat public inventé ; récupération sans envoi automatique | Contrat E42 et règles E73/E74 réutilisés, pas de nouvel OpenAPI ; anonymes et deux participations même animation dans les fixtures | Pas de migration carnet ni création d’accès ; repli bundle sans perte, retour depuis les origines historiques conservé |
+| FD-05/06/07 | Lots publics, annuaire autorisé, accordéons accessibles | Trois modes de dotation, quantité absente, plus de 25 lots, panne d’une source ; deux partenaires puis annuaire paginé et retour ; chasse sans lieu divulgué ; ancre Conditions en lien direct, tactile et clavier, focus/marge et règlement versionné | Fixtures de données manquantes, titres longs et structures de règles inconnues ; aucune modification du générateur métier requise pour ce seul rendu | Services actuels réutilisés ; pas de compteur nouveau, collecte exhaustive, pagination automatique ou email réel |
+| FD-10/12 | État de lecture et navigation ; droits backend inchangés | A→B avec latence et réponses inversées, double refresh, focus+visibility, erreur publique/personnelle et retrait ; aucun CTA croisé ; retour programme/commerce, ancres et positions ; non-régression du jeu/inscription/Coffrets partageant les composants | Articulation LA/LH/LP conservée ; mocks isolés, pas de recette sur tokens réels | Pas de hausse de pool/délais ni migration ; charge/performance LP séparées, LA-16 non fermée par les tests de rendu |
+
+Accessibilité : clavier complet et focus visible, noms des boutons iconographiques,
+cibles 44 px, zoom 200 %, pas de dépendance à la couleur ; contrastes mesurés sur
+rendu ≥4,5:1 pour texte courant et ≥3:1 pour grands textes/composants/focus.
+Mouvement réduit respecté ; transitions courtes non bloquantes, aucune célébration
+de réussite sur GET. Tester CTA fixe, navigation basse, champs et ancres en
+hauteur réduite ; ne pas remplacer les assertions de géométrie par un simple
+comptage d’éléments. Mesurer déplacement à l’échec du flyer ; l’audit n’a pas
+fourni de valeur CLS de référence.
+
+Réutiliser suites Node et Playwright de la Marketplace avec serveur/API isolés,
+lint et build selon son guide. Les noms de nouveaux tests seront consignés au
+bilan après création/exécution ; aucun test prévu n’est un résultat vert.
+Pas de base, inscription, email ou notification réelle nécessaires à la recette.
+Pas de nouvelle migration, configuration, contrat API, table ou adaptation
+métier du générateur : les données et permissions existantes suffisent ; seules
+les fixtures de présentation et guides sont concernés. Backend, ERP, Pro et
+Animation conservent leurs contrats. Préserver les travaux locaux du header.
+
+**Réalisation locale :** les douze axes sont implémentés dans la variante
+publique Live. Les scénarios A→B, états personnels, refus publics et image en
+erreur utilisent des fixtures isolées ; ils ne constituent pas une recette
+déployée sur des accès réels. La fin demande les 12 critères vérifiés, les
+non-régressions des composants partagés, la recette visuelle/accessibilité et
+les contrôles requis réussis. Résultats et limites au
+[bilan E73](verification-livraison.md), distincts de la clôture historique,
+sans pilote externe, commit, push ou déploiement implicites.
 
 [Retour à la spécification Live](localeo-live-entree-unique.md)

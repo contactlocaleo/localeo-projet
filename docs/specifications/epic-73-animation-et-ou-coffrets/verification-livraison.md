@@ -4,6 +4,160 @@ Version de conception du **17 octobre 2026**, réalisation locale commencée le 
 
 ## 1. Traçabilité des 63 critères
 
+### Évolution — E73-EVO-LIVE-FICHE, 9 novembre 2026
+
+**Spécification initiale** des [12 axes FD du rapport visuel](../../audits/marketplace/localeo-live-fiche-animation-ux-ui-2026-11-08.md), suivie de la réalisation locale ci-dessous.
+Les [12 critères canoniques](localeo-live-entree-unique.md#évolution-du-9-novembre-2026--fiche-animation-immersive-e73-evo-live-fiche)
+et la [conception §9](localeo-live-adhesion-conception.md#9-fiche-animation-immersive--e73-evo-live-fiche)
+fixent composition, guide et conditions publiques, action contextuelle,
+indicateurs/aperçus bornés, flyer, ancres et gestion des lectures.
+
+| État de preuve lors de la spécification | Résultat / reste à produire à cette étape |
+| --- | --- |
+| Baseline visuelle du 8 novembre | Fiche Delphine sans flyer, fiche TCA avec flyer et accueil observés dans Chrome, bureau et preset iPhone 16 393 × 852. Raccourci Conditions restant fermé et condition d’achat cachée constatés ; CTA fixe mobile accessible. Pas de nouvelle recette de correction déduite de ces observations. |
+| Risques issus du code | Choix de participation unique/multiple/manquante, copie annulée/résultat et mélange A→B restent à reproduire avec fixtures et réponses pilotées. Ils ne sont pas présentés comme défauts privés recettés sur TEST. |
+| Cible E73-FD-01 à 12 | Suites unitaires et navigateur, états/moteurs, conditions longues, clavier/zoom/contraste, image en erreur, annulation/revalidation et non-régression des composants partagés : **prévus, non exécutés**. Recette et impacts au §9.7. |
+| Livraison | Marketplace/Live, contrats actuels ; pas de migration, configuration ni règle backend nouvelle identifiée. Aucun script SQL, test applicatif, commit, push ou déploiement effectué par cette phase. |
+
+La clôture historique E73 et les preuves LA/LH/LP sont préservées. La réserve
+de capacité LA-16 n’est pas fermée par une spécification ni par une recette
+visuelle future. Les travaux locaux antérieurs du header et de performance
+restent distincts. Les contrôles documentaires et la revue ciblée de cette
+phase sont consignés après leur exécution, sans valoir réussite applicative.
+
+**Contrôles de spécification du 9 novembre 2026** — base projet `e04248e` et
+travaux locaux conservés : **12 critères uniques, 12/12 axes FD reliés**,
+matrice des impacts vérifiée ; guidance ciblée **103 guides, 1 384 liens locaux,
+zéro erreur et avertissement**, **148 sources exportées vérifiées**,
+`git diff --check` réussi. Revue indépendante des producteurs/consommateurs en
+lecture seule, puis relecture des corrections : absence de résultat public dans
+le DTO actuel, refus d’annulation public distinct de l’historique, coffrets
+embarqués distincts des lots paginés serveur, conditions historiques et portées
+de refus intégrés. Aucun écart bloquant documentaire restant identifié ;
+les tests applicatifs et le rendu corrigé restaient à produire à cette étape.
+
+#### Réalisation locale de la fiche publique
+
+Arbres de travail du **9 novembre 2026**, bases Projet `e04248e` et Marketplace
+`c40ee5a`, avec les travaux locaux antérieurs du header et des spécifications
+de performance préservés. La variante publique Live est isolée dans
+`LivePublicAnimationView` ; l’inscription, le jeu et les détails historiques
+conservent leurs composants partagés et leurs règles.
+
+| Critères | Réalisation / preuves de comportement |
+| --- | --- |
+| FD-01/02/07 | Promesse par moteur, conditions publiques intégrales avant inscription, guide de trois repères maximum, ouverture et focus des conditions par lien, clavier et hash direct. Helpers testés sur chaînes/tableaux historiques, objets malformés, null et zéro ; aucune clé technique ou solution divulguée. |
+| FD-03/08/11 | Accès unique par UUID précis, choix explicite entre plusieurs accès, installation seule orientée récupération, favori et fiche sauvegardée distincts d’une inscription ; stockage refusé explicite. Futur ouvert/fermé, motif public, clôture et refus du catalogue testés. Aucun résultat public ni QR personnel ajouté. Récupération ouverte sans envoi implicite. |
+| FD-04/05/06 | Une métrique dominante réelle, autres comptes y compris zéro dans En chiffres. Trois lots et deux partenaires en aperçu ; trois modes de dotation, quantités absentes, formation, pages de 25, panne/réessai et refus des lots distincts. Coffrets déjà embarqués paginés en présentation ; curseur serveur pour lots libres et bons. Chasse sans liste de lieux futurs. |
+| FD-09/10 | Flyer configuré après le titre, aucun média de remplacement inventé ; image lente/en erreur sans déplacement des commandes. Cibles tactiles, texte à 200 %, largeur 320/393/768/1280, barre retour/actualisation, contraste et focus vérifiés. La revalidation silencieuse ne décale pas le titre. Le contexte d’origine, le focus et la position sont transportés à l’activation du lien vers l’annuaire ou le profil. |
+| FD-12 | Identité de route isolée, requêtes annulables et réponse d’ID incorrect refusée ; A→B et réponses inversées, mutation de carnet/installation, focus+visibility après 60 secondes, double refresh, panne datée et refus confirmé distincts. L’échec privé ne détruit pas le public. Refus des lots propagé sans révocation du carnet ; pages remplacées atomiquement par révision publique. |
+| Badge de notifications en découverte | Aucun POST d’installation lors de l’ouverture publique ; lecture de l’installation existante seulement. Réponse ancienne ignorée après changement d’identité et badge purgé sur refus, sans recréation silencieuse. Les autres parcours de notifications conservent leur fonctionnement. |
+
+Les premiers essais ont fait corriger le contraste du CTA écrasé par un style
+global, le POST d’installation déclenché par le badge, le déplacement du titre
+pendant une revalidation et les portées de refus/identité. Le contrôle nominal
+mobile avec titre et conditions longs a placé le flyer après les conditions
+et les actions pour préserver le premier écran. Les fixtures
+historiques de récupération acceptent maintenant les paramètres de capacité
+du vrai transport ; l’assertion d’identité publique n’a pas été affaiblie.
+Les anciens tests de fiche suivent la décision FD : une métrique dominante
+et les comptes secondaires repliés remplacent les trois grands compteurs ;
+les lots publics utilisent des pictogrammes, le flyer restant le seul visuel
+configuré de la fiche. Les assertions de conditions, droits, sources, statuts,
+dimensions, absence de faux chiffres et comportement mobile sont conservées.
+Le test historique des dix communes vérifie maintenant le nom accessible et
+le résumé « deux communes +8 », déjà présent dans `LiveDiscovery` au HEAD
+`c40ee5a` : dix choix dépliables au clavier, hauteur compacte et absence de
+débordement restent contrôlés. Aucun changement de cet accueil n’est imputé
+à la réalisation FD.
+
+**Impacts.** Marketplace et documentation canonique seulement. Les options
+`signal` ajoutées aux deux méthodes HTTP sont compatibles avec leurs lecteurs
+existants ; aucune route, payload ni génération OpenAPI ne change. Backend,
+ERP, Pro, Animation, schéma de données et générateur métier sans adaptation :
+la présentation et ses fixtures synthétiques utilisent les contrats existants.
+Aucune migration ni configuration à appliquer. Le volume des coffrets
+embarqués demeure une réserve LP-02 ; la capacité LA-16 et les 18 critères LP
+restent distincts. Pas d’appel à une base d’exploitation, d’inscription,
+d’email ou de notification réelle pour ces vérifications.
+
+**Revue indépendante.** Les constats de refus de sous-page, changement
+d’identité des notifications et restitution du contexte ont été intégrés ;
+la dernière relecture statique ne relève plus de blocage sur ce périmètre.
+Les résultats exécutés finaux et la recette graphique sont consignés à la fin
+de cette section, sans valoir déploiement.
+
+**Résultats exécutés.** Chromium/Playwright sur bundle Vite de production isolé,
+API entièrement simulée, service worker bloqué, Node 24.14.0 ; aucune lecture
+de configuration opérateur ou connexion à TEST. Commandes depuis Marketplace :
+
+| Contrôle | Résultat réel |
+| --- | --- |
+| `node --test tests/security/live-adhesion-api.test.cjs tests/security/live-dashboard-api.test.cjs tests/security/live-personal-refresh.test.cjs tests/security/live-public-detail-presentation.test.cjs` | **25 réussis, zéro échec/skip**, exit 0. Comprend limites de trois GET, délai attente comprise, signaux d’annulation, secrets uniquement en en-têtes et sélecteurs publics. |
+| `live-public-detail-fd.spec.cjs` | **44 cas distincts vérifiés** : 41 réussis en série complète, puis trois ajouts (retour complet, budget nominal et UUID majuscule) réussis ; 13 scénarios affectés par les dernières corrections rejoués sur le bundle final, exit 0. |
+| `live-animation-challenge.spec.cjs` | **12 réussis**, exit 0, sur les attentes FD révisées et les quatre moteurs/états historiques. |
+| `live-animation-surface`, `live-habitant-access`, `live-registration-clarity`, `live-messages-product`, `live-merchants`, `live-mobile-actions` | **57 cas distincts vérifiés**. Série initiale : 56 réussis et un ancien libellé de communes en échec (exit 1) ; assertion adaptée au composant déjà présent, puis **six cas mobiles rejoués réussis**, exit 0. |
+| Dernier rejeu navigateur | **19/19 réussis**, exit 0 : 13 FD affectés et six cas mobiles, captures finales dans `test-results/fd-delta/`. Journaux locaux `tmp/fd-visual-delta.log`, `tmp/fd-visual-complete.log`, `tmp/fd-regression-final.log`. Aucun contrôle ignoré présenté comme réussi. |
+| Lint / build | ESLint sur tous les JS/JSX/MJS/CJS versionnés et les quatre nouveaux fichiers : exit 0 ; derniers fichiers modifiés contrôlés à nouveau : exit 0. Build Vite production isolé du serveur `scripts/serve-visual-tests.cjs` réussi, sans réécriture de la configuration publique opérateur. |
+
+Les preuves navigateur combinent les séries et leurs rejeux ciblés : il ne
+s’agit pas d’un unique passage global de 113 cas. Les essais intermédiaires
+en échec restent consignés ; chaque écart a été corrigé puis rejoué. Le lint
+global `eslint .` rencontrait des `EPERM` de parcours des anciens répertoires
+temporaires `output/` et `tmp/` ; le lint final sur la liste Git explicite et
+les nouveaux fichiers vérifie les sources sans dépendre de ces sorties.
+
+**Recette visuelle/accessibilité.** Captures finales inspectées en mobile
+393 × 852 avec/sans flyer, texte long à 200 % en 320 × 568, tablette 768 × 1024
+et bureau 1280 × 800. Conditions intégrales avant CTA, navigation basse sans
+chevauchement des actions, image en erreur à géométrie stable, absence de
+débordement horizontal et focus/retour contrôlés. Contrastes mesurés sur le
+rendu : texte et actions ≥4,5:1, focus ≥3:1 ; CTA bleu nuit/blanc 15,13:1.
+Pas de résultat public inventé, célébration sur lecture, inscription ou email
+réel déclenché par la recette.
+
+**Bilan du périmètre FD : 12/12 critères couverts par les preuves locales.**
+Contrôles documentaires finaux : **103 guides, 1 388 liens locaux, zéro erreur
+et avertissement**, **148 sources exportées vérifiées** et `git diff --check`
+réussi dans les deux dépôts. Les trois dépôts applicatifs voisins restent
+inchangés. La clôture
+historique reste inchangée ; performance LP/LA-16, recette déployée, commit,
+push et déploiement ne sont pas déclarés réalisés par cette livraison locale.
+
+### Évolution — E73-EVO-LIVE-PERFORMANCE, 8 novembre 2026
+
+**Phase de spécification uniquement.** Les onze constats identifiés API-01 à
+API-08 et LIVE-01 à LIVE-03 de l’[audit performance](../../audits/backend/audit-performance-api-localeo-live-2026-11-08.md)
+sont détaillés en [18 critères LP](localeo-live-entree-unique.md#évolution-du-8-novembre-2026--performance-des-lectures-live-e73-evo-live-performance),
+avec [contrats, architecture et recette §8](localeo-live-adhesion-conception.md#8-performance-des-lectures--e73-evo-live-performance).
+Les critères LP complètent LA-16 ; aucune preuve historique ni le statut terminé
+d’E73 ne les valide. Les sources applicatives ne sont pas modifiées par cette phase.
+
+| État de preuve | Résultat / reste à faire |
+| --- | --- |
+| Baseline publique de l’audit | 27 GET TEST mesurés, 27 réponses 200, trois essais par route ; fiche autour de 952 ms et ancien catalogue jusqu’à 1 251 ms. Pas un p95 ni une preuve de capacité. |
+| Baselines isolées de l’audit | Benchmark : 1 test réussi en 73,91 s mais 3/8 objectifs p95 dépassés ; comptage SQL : 1 test réussi en 20,37 s, ancien catalogue 20/58 SELECT pour 12/50 cartes contre 7 constants sans filtre texte. Détails, matériel et limites au rapport, pas de charge sur TEST partagé. |
+| Cible LP-01 à LP-18 | Tests d’implémentation et de compatibilité, nouvelles mesures HTTP/SQL, miniatures et charge mixte/saturation **non exécutés**. Chaque scénario de §8.9 reste à produire et à consigner ici. |
+| Migrations / déploiement | Regroupements sans migration métier ; index/miniatures/projection éventuelle additifs à préciser à l’implémentation. Aucun numéro réservé, script exécuté, activation, commit ou push dans cette phase. |
+
+La conception prévoit le diagnostic avant choix d’index ou compteur, les
+variantes opt-in pour les anciens clients et la protection de chaque accès
+privé. Aucun arbitrage métier bloquant identifié ; qualification matérielle
+et plans restent nécessaires pour vérifier les critères concernés. Les
+contrôles documentaires et la revue de contrats sont consignés à la fin de la
+phase ; ils ne valent pas tests applicatifs réussis.
+
+**Contrôles de spécification du 8 novembre 2026** — base projet `e04248e` et
+travaux locaux préservés : **18 critères LP uniques, 11/11 références de constats
+couvertes**, matrice des impacts cohérente ; guidance ciblée **103 guides,
+1 380 liens locaux, zéro erreur et avertissement**, **148 sources exportées
+vérifiées**, `git diff --check` réussi. Revue indépendante de contrats en lecture
+seule et exploration ciblée des lecteurs : distinctions historique/badge,
+valeurs nulles, identité privée, curseurs et ordre de l’UPDATE intégrés.
+Le cache inter-requêtes de readiness est écarté en V1 pour préserver la détection
+d’une projection invalide ; son coût reste mesuré. Aucun test applicatif nouveau
+n’est exécuté ou déclaré réussi pendant cette spécification.
+
 ### Évolution — E73-EVO-LIVE-HIERARCHIE, 8 novembre 2026
 
 Les huit recommandations du nouvel audit sont spécifiées en
@@ -119,6 +273,39 @@ rétention. Aucun déploiement n’est annoncé et **la réserve de capacité LA
 reste ouverte** : son benchmark backend, ses paliers de saturation et sa charge
 mixte ne sont pas remplacés par ce travail de présentation. La clôture historique
 E73 n’est pas modifiée ; aucun commit ou push n’est déduit de ce bilan.
+
+#### Ajustement — titre et actualisation dans le header, 8 novembre 2026
+
+Base Marketplace `c40ee5a` et Projet `e04248e`, avec modifications locales :
+**Mon Live et son actualisation sont déplacés dans l’en-tête applicatif,
+sur une seule ligne**, sans second titre dans le contenu. Le bouton utilise
+toujours l’unique séquence de lecture de `LiveHome` via un portail React ; aucune
+seconde instance des hooks ni nouvelle requête ajoutée. Jusqu’à 720 px, le menu
+regroupe les actions secondaires, garde le non-lu visible et conserve réglages,
+installation et notifications. Recherche et actualisation restent directes.
+Le logo et le repère TEST restent présents ; Échap ferme le menu et restitue le
+focus. Les styles sont déplacés vers leur source dans `live-play-shell.css`,
+les anciennes règles du titre dans `live-home.css` sont retirées.
+
+**37 cas navigateur distincts vérifiés sur passes successives** : 15 hiérarchie,
+9 continuité, 5 densité/menu, 5 accessibilité et 3 lectures personnelles.
+La passe finale en série des trois dernières suites est **13/13, code 0**
+(`tmp/live-header-final.log`) ; les 24 cas hiérarchie/continuité sont verts dans
+`tmp/live-header-home.log`. La première passe parallèle avait aussi un échec
+de mise en place de la fixture personnelle, non reproduit dans le rejeu inchangé
+en série ; sa cause temporelle exacte n’est pas établie. Le sélecteur de cibles
+accessibles inclut maintenant le nouveau bouton de menu, sans baisser la borne
+de nombre ou de taille des commandes. Le contrôle a révélé un contour de focus
+insuffisamment contrasté sur ce bouton : corrigé à la source, seuil 3:1 conservé.
+
+Alignement titre/bouton et absence de débordement vérifiés à **320/390/1280 px**
+avec repère TEST ; clavier, contraste et texte 200 % sur la matrice existante.
+Le haut de la première carte passe de **384 à 336 px** sur mobile, soit **48 px
+libérés**. Captures mobile/bureau examinées ; lint ciblé et build production
+isolé réussis. API entièrement simulées ; aucun essai distant annoncé.
+Sans impact métier, API, droit, stockage, migration SQL, configuration ou
+générateur : seule la présentation de commandes existantes change. La réserve
+LA-16 et les résultats historiques restent distincts de cet ajustement.
 
 ### Évolution — E73-EVO-LIVE-ADHESION, 7 novembre 2026
 

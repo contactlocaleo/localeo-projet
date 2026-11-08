@@ -1,5 +1,15 @@
 # Specifications Epic 42 - Localeo Live
 
+La fiche publique d’animation évolue le **9 novembre 2026** dans
+[E73-EVO-LIVE-FICHE](../epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-9-novembre-2026--fiche-animation-immersive-e73-evo-live-fiche) :
+défi et conditions avant inscription, reprise de la participation exacte ou
+choix explicite entre plusieurs accès, lots et partenaires en aperçu puis
+consultation volontaire. Conditions ouvre directement la section ; actualiser
+conserve la lecture du même contexte sans réutiliser une ancienne autorisation.
+Un favori reste distinct d’une inscription. Le
+[bilan E73](../epic-73-animation-et-ou-coffrets/verification-livraison.md)
+porte les résultats locaux, distincts de la clôture historique d’E42.
+
 Complément porté par E73 le **30 octobre 2026 — E73-EVO-LIVE-ACCUEIL-RAPPELS** :
 accueil personnel mobile, parcours presque terminés, échéances à 72 heures et
 deux rappels facultatifs indépendants. Le détail, les contrats et les critères

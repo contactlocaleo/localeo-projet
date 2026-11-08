@@ -1,5 +1,15 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+Évolution du **9 novembre 2026 — E73-EVO-LIVE-FICHE** : les douze axes de
+l’audit visuel sont spécifiés en **12 critères E73-FD-01 à 12** dans la
+[spécification Live](localeo-live-entree-unique.md#évolution-du-9-novembre-2026--fiche-animation-immersive-e73-evo-live-fiche).
+La [conception §9](localeo-live-adhesion-conception.md#9-fiche-animation-immersive--e73-evo-live-fiche)
+décrit la fiche de défi, les conditions visibles avant inscription, les accès
+ciblés, les états et la recette mobile/bureau. **Réalisation locale Marketplace/Live**, sans
+nouvelle règle, API ou migration ; résultats et limites consignés au
+[bilan](verification-livraison.md). La réserve LA-16 et les évolutions précédentes
+restent distinctes.
+
 Évolution du **8 novembre 2026 — E73-EVO-LIVE-HIERARCHIE** : les huit points
 de l’audit après déploiement sont spécifiés en **12 critères LH-01 à LH-12**.
 La [spécification fonctionnelle](localeo-live-entree-unique.md#évolution-du-8-novembre-2026--hiérarchie-et-fluidité-e73-evo-live-hierarchie)
@@ -65,6 +75,13 @@ La conception garde les cinq dépôts indépendants. Les règles sont dans le do
 
 ## Lire et réaliser le périmètre
 
+L’[évolution performance des lectures Live](localeo-live-entree-unique.md#évolution-du-8-novembre-2026--performance-des-lectures-live-e73-evo-live-performance)
+du 8 novembre spécifie les constats de l’audit API en **18 critères LP**.
+La [conception §8](localeo-live-adhesion-conception.md#8-performance-des-lectures--e73-evo-live-performance)
+fixe les contrats de lecture allégée compatibles, l’orchestration du carnet,
+les bornes SQL/HTTP et la campagne isolée. Cette phase ne les implémente pas et
+ne ferme pas la réserve LA-16 ; les mesures et preuves restent au bilan.
+
 L'[évolution des flyers du 22 octobre 2026](flyers-contextualises.md) ajoute la
 contextualisation selon la dotation, les nombres de lots et de commerçants
 confirmés, ainsi qu'une illustration personnalisable propre au flyer
@@ -115,6 +132,7 @@ décrit l'assistant, le site public, les nouvelles éditions, les mesures et les
 | [Modules, souscriptions, import et communication](modules-souscriptions-import-communication.md) | Catalogue et droits, prix/quotas/prorata, paiement/renouvellement, import avec deltas, campagnes Live/Web Push, coûts/budgets |
 | [Périmètres et parcours SaaS](perimetres-parcours-saas.md) | OnBoard/Pro, équipe multi-organisations, site dédié, préparation/support, nouvelle édition, résultats et réversibilité |
 | [Adhésion habitant Live — conception](localeo-live-adhesion-conception.md) | 13 recommandations, contrats cibles, permissions, migration contact public, performance et tests des 17 critères LA |
+| [Performance des lectures Live — conception §8](localeo-live-adhesion-conception.md#8-performance-des-lectures--e73-evo-live-performance) | Audit API-01 à 08 et LIVE-01 à 03, 18 critères LP, variantes de contrat, SQL/chargement bornés, médias, diagnostics et preuves de capacité à produire |
 | [Vérification et livraison](verification-livraison.md) | Matrice de 63 critères, 12 familles de fixtures, dépendances, migration/pilote, restauration et preuves à produire |
 
 Chaque chapitre distingue l’existant lu dans le code et les nouveaux contrats à implémenter. Les OpenAPI générés existants ne sont pas modifiés pour leur faire annoncer des routes encore absentes. À l’implémentation, mettre à jour producteur, schémas générés et lecteurs ensemble.

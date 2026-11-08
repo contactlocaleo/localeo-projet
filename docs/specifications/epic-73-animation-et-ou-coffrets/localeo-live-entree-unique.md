@@ -1312,3 +1312,84 @@ sans promesse chiffrée d’adhésion. Tests techniques requis pour déclarer ce
 évolution terminée ; essais habitants et appareils physiques suivis séparément
 selon E73-DEC-CLOTURE-TESTS. Les résultats applicatifs de la réalisation suivante
 du 8 novembre sont consignés au bilan et ne valent pas déploiement.
+
+## Évolution du 8 novembre 2026 — performance des lectures Live (E73-EVO-LIVE-PERFORMANCE)
+
+**Spécification demandée, implémentation non engagée dans cette phase.** Cette
+évolution traite tous les constats API-01 à API-08 et LIVE-01 à LIVE-03 du
+[rapport de performance](../../audits/backend/audit-performance-api-localeo-live-2026-11-08.md).
+Elle complète LA-16 et LH-03/04/05 sans modifier la clôture historique E73,
+les règles de jeu, les droits, les gains ni l’historique des habitants.
+
+Objectif : afficher les éléments utiles sans attendre le reste du carnet,
+éviter les allers-retours répétitifs et qualifier les lectures sur des volumes
+et un trafic représentatifs. Les mesures TEST et locales de l’audit décrivent
+l’existant ; elles ne valident pas les critères cibles ci-dessous.
+La [conception §8](localeo-live-adhesion-conception.md#8-performance-des-lectures--e73-evo-live-performance)
+fixe les contrats, limites, budgets, migrations éventuelles et preuves.
+
+### Critères complémentaires
+
+| Critère stable | Source du rapport | Précondition, action et résultat observable attendu |
+| --- | --- | --- |
+| **E73-LP-01** | API-01 | Consulter l’ancien catalogue aux tailles 1/12/50 avec curseur : configurations, retraits et clé de continuation sont groupés. Le nouveau lecteur peut demander une page sans total exhaustif ; un ancien lecteur conserve son total et son format. Le nombre SQL n’augmente pas par carte et la visibilité reste identique. |
+| **E73-LP-02** | API-02 | Ouvrir une fiche publique avec partenaires et lots : les temps sont attribués par étape, les enrichissements prouvés coûteux sont regroupés et le budget §8.6 est respecté. Fiche inaccessible ou capacité moteur incompatible : refus existant, aucun détail privé ni lieu secret exposé pour accélérer l’affichage. |
+| **E73-LP-03** | API-03 | Lancer ensemble dashboard, récompenses et tirages : chaque requête authentifie l’installation courante dans sa UoW ; l’activité est rafraîchie au plus une fois par minute, sans trois écritures systématiques. Secret erroné ou installation révoquée : refus courant, aucun résultat conservé comme autorisation. |
+| **E73-LP-04** | API-04 | Consulter des pages de 1/10/50 tombolas publiques : preuves email et faits sont chargés par page ; aucun SELECT par preuve. Qualification, absence de preuve, retrait et règlement restent décidés par le moteur existant. |
+| **E73-LP-05** | API-05 | Hors messagerie, lire seulement un indicateur global ou par animation. Dans la liste, le nouveau lecteur peut paginer sans recompter les non-lus ; il ne présente jamais le nombre chargé comme un total global. L’ancien lecteur garde son entier exact. Lire une liste n’acquitte aucun message. Messages personnels : preuves courantes ; notifications historiques : périmètre installation conservé. L’indicateur par animation garde sa preuve personnelle sur les deux branches et ne révèle rien après révocation ; le badge global reflète les éléments encore lisibles dans la liste, sans accorder de droit sur leur destination. |
+| **E73-LP-06** | API-06 | Demander une page initiale ou profonde de lots : contrôle minimal de visibilité avant une unique lecture de cette page, sans projeter toute la fiche ni relire la première page. Le retrait public entraîne le même refus qu’avant. |
+| **E73-LP-07** | API-07, plafond | Rechercher des animations avec/sans plafond et 0/1 000/10 000 inscrits : l’ouverture garde la sémantique du décompte autoritaire actuel ; les plans et budgets sont vérifiés. Une optimisation n’utilise jamais le nombre de qualifiés à la place des inscrits ni un compteur désynchronisé. |
+| **E73-LP-08** | API-07, annuaire | Rechercher les commerces par nom et commune/animation, premières et pages profondes : coût et plans qualifiés, index alignés sur le prédicat réel si nécessaire. Un commerce hors commune mais partenaire reste trouvable ; les lieux de chasse cachés restent exclus. |
+| **E73-LP-09** | API-08, readiness | Mesurer et éviter les contrôles readiness redondants dans une même demande, sans affaiblir la détection de schéma/index/trigger invalide. V1 conserve un contrôle DB courant par recherche ; le cache positif inter-requêtes proposé dans l’audit n’est pas retenu sans mécanisme d’invalidation prouvé. Projection indisponible : refus `CATALOGUE_ANIMATION_EN_PREPARATION`, puis récupération après réparation. |
+| **E73-LP-10** | API-08, cartes | Le nouveau lecteur négocie une projection de carte versionnée, sans règlement, description complète ni collections embarquées. Affichage de la même promesse et du même indicateur réel, sans inventer de valeur ; ancien client inchangé, détail complet accessible à son ouverture. |
+| **E73-LP-11** | API-08, flyer | Afficher un flyer configuré : miniature bornée issue du vrai fichier, géométrie stable et retrait public vérifié à chaque lecture. Sans image ou en cas de refus/erreur, variante graphique existante ; aucun visuel inventé, aucune ancienne image publique servie par un cache durable. |
+| **E73-LP-12** | LIVE-01 | Ouvrir un carnet 1/10/50 puis plus de 50 entrées : les résumés locaux sont immédiats et explicitement à vérifier, seules les 12 entrées de la page courante sont revalidées progressivement. Une entrée lente ne bloque pas les autres ; le lien personnel ciblé est prioritaire. Le clic n’entraîne pas une triple lecture. Deux participations à la même animation gardent des tokens, droits et états distincts. |
+| **E73-LP-13** | LIVE-02 | Ouvrir Mes lots : consulter immédiatement les suivis déjà liés sans attendre une boucle de liaisons. Chaque source réussie est publiée indépendamment ; les accès non liés sont signalés et traités selon §8.4. Revenir dans la page ne rejoue pas systématiquement les liaisons. Aucun lot inconnu n’est présenté comme disponible. |
+| **E73-LP-14** | LIVE-03, file ; LIVE-01, annulation | Lecture active, rafraîchissement et navigation rapides : au plus trois GET Live simultanés et deux tâches secondaires, priorité à la vue demandée. Producteurs bornés, annulation propagée, aucune saturation artificielle par 50 promesses soumises ensemble. Délai global de 15 s incluant attente conservé ; attente et HTTP mesurés séparément. |
+| **E73-LP-15** | LIVE-03, accueil/configuration | Nouveau visiteur sans installation ni accès : programme public sans création d’installation ni lectures personnelles. Installation existante avec suivis mais carnet local vide : données personnelles conservées. Tous les lecteurs de configuration, dont Réglages et WebPush, partagent une seule lecture de capacités par contexte ; négociation de sécurité préservée. |
+| **E73-LP-16** | Réserve de capacité, §4 du rapport | Sur le banc isolé §8.6, vérifier N/10N, 1/10 lecteurs, charge mixte et saturation. Budgets chiffrés respectés, ressources et erreurs consignées ; un test qui constate un dépassement ne valide pas le critère. Aucune charge sur TEST partagé ni dépendance à un pilote externe pour cette preuve technique. |
+| **E73-LP-17** | Diagnostic API-02 et capacité | Pour une lecture lente, distinguer attente frontend, réseau/HTTP, SQL, pool, stockage et projection. Corrélation disponible sans tokens, emails ni requêtes SQL contenant des données personnelles. Les métriques restent bornées et ne créent ni suivi habitant supplémentaire ni consentement implicite. |
+| **E73-LP-18** | Compatibilité de l’ensemble | Backend ancien/nouveau et frontend ancien/nouveau : formes par défaut conservées, nouveautés seulement après capacités ; migrations additives et readiness avant activation. Retours, fenêtres atomiques LH, révocations, QR et restauration restent vérifiés. Un repli de version n’efface pas le carnet ni les liaisons. |
+
+Les points de la fiche, des plafonds, de l’annuaire et de la capacité demandent
+des mesures avant de choisir l’optimisation physique ; cette étape de diagnostic
+est partie intégrante des critères, pas un arbitrage métier laissé implicite.
+Le détail des tests et la matrice des impacts sont dans la conception §8.7–8.9 ;
+leurs résultats futurs sont consignés uniquement au [bilan E73](verification-livraison.md).
+
+## Évolution du 9 novembre 2026 — fiche animation immersive (E73-EVO-LIVE-FICHE)
+
+**Réalisation locale dans Marketplace/Live.** Les douze axes FD-01 à FD-12 du
+[rapport visuel du 8 novembre](../../audits/marketplace/localeo-live-fiche-animation-ux-ui-2026-11-08.md)
+sont repris dans les critères ci-dessous. La cible est une fiche publique de
+défi, cohérente avec l’accueil : **Votre défi → Comment jouer ? → À gagner →
+Où jouer ?**, puis informations complètes et aide. Les conditions essentielles
+restent visibles avant l’inscription. La [conception §9](localeo-live-adhesion-conception.md#9-fiche-animation-immersive--e73-evo-live-fiche)
+fixe les décisions de présentation et de réalisation.
+
+Cette évolution complète LA/LH et utilise les contrats actuels. Elle n’ajoute
+ni compte, jeu, inscription, condition de participation ou droit. LP reste le
+périmètre de performance distinct ; une présentation plus fluide ne ferme pas
+LA-16. La clôture historique d’E73 et les critères précédents sont conservés.
+
+| Critère stable | Source | Précondition, action et résultat observable |
+| --- | --- | --- |
+| **E73-FD-01** | FD-01 | Ouvrir une fiche publique : promesse en phrase adaptée au moteur, nombre requis lorsqu’il est fourni et conditions publiques essentielles lisibles près de l’action avant inscription. L’obligation d’achat de l’exemple apparaît sans ouvrir l’accordéon ; aucune condition n’est inventée ou extraite par interprétation d’un texte. Guide illustré adapté au moteur, sans étape de visite imposée à la tombola publique. |
+| **E73-FD-02** | FD-02 | Sur mobile et bureau : même famille visuelle que l’accueil, titre/commune/statut/période proches de la promesse, une action principale, sections avec pictogrammes et accents. Typographie mesurée, pas de blocs de métadonnées dispersés ni de surcharges CSS successives ; adaptation de largeur décrite au §9.2. |
+| **E73-FD-03** | FD-03 | Depuis une animation avec accès local unique : ouvrir la participation exacte ; avec plusieurs accès : choisir explicitement ; inscription connue seulement par l’installation : retrouver le lien personnel. Un favori, une fiche enregistrée ou une présence au carnet sans preuve d’inscription ne suffit pas. Une autre participation à la même animation ne fournit jamais son token par défaut. |
+| **E73-FD-04** | FD-04 | Lire les indicateurs pendant et après l’animation : une seule métrique dominante pertinente, autres données en second niveau, valeurs réelles y compris zéro et portée exacte. « Lots à gagner » ne signifie pas « lots restants » ; un compte de gagnants ne prouve pas une publication de résultats. Aucune activité, qualification ou progression fabriquée. |
+| **E73-FD-05** | FD-05 | Voir les récompenses : aperçu compact, nature et libellé réels ; mentions de formation conservées, distinction dotation/gain personnel explicite. Liste complète consultable volontairement et paginée ; aucun téléchargement automatique de toutes les pages ni promesse de lot ou de tirage si elle n’est pas autorisée. |
+| **E73-FD-06** | FD-06 | Accéder à Où jouer ? : aperçu borné de partenaires publics et lien vers l’annuaire filtré avec profil, horaires et itinéraire ; retour à cette fiche préservé. Pour une chasse, aucun partenaire ou lieu futur secret révélé ; accès au seul parcours personnel autorisé. |
+| **E73-FD-07** | FD-07 | Activer Les conditions, au clavier, au toucher ou par URL directe avec ancre : ouvrir la section en un geste et positionner le focus sans masquage. Les conditions essentielles restent déjà visibles ; règlement complet toujours accessible avec sa version. Aucun dump de clés inconnues ou de valeur `[object Object]`. |
+| **E73-FD-08** | FD-08 | Près de l’action principale, retrouver le lien secondaire Déjà inscrit ? selon le contexte ; favori/partage restent secondaires. Ouvrir l’aide ou la récupération n’inscrit pas, n’envoie aucun email et ne modifie aucun accord sans action explicite ; textes non énumérants et URL de partage sans token. |
+| **E73-FD-09** | FD-09 | Fiche avec flyer, sans flyer, image lente ou en erreur : titre et défi restent prioritaires ; flyer configuré uniquement, variante graphique au pictogramme sans illustration inventée. Image attendue en erreur : emplacement stable, pas de déplacement des commandes. Aucun grand emplacement vide pour une absence d’image connue. |
+| **E73-FD-10** | FD-10 | Retour et actualisation : barre locale cohérente, actualiser sous forme de pictogramme nommé, retour de catalogue/commerce et position/focus conservés. Revalidation du même contexte discrète, sans grand panneau de remplacement ni polling permanent ; aucune célébration sur GET ou refresh. |
+| **E73-FD-11** | FD-11 | Tester découverte, accès personnel connu/manquant, futur, fermé, clôturé et refus public d’une animation annulée : libellé/action/aide correspondent aux seuls faits disponibles. Pas de section de résultat public en V1, faute de contrat qui l’expose ; un refus public reste générique. L’historique personnel peut afficher une annulation lorsqu’il en reçoit le fait autorisé. Une inscription future annoncée ouverte reste possible, sans QR personnel avant ouverture autorisée. |
+| **E73-FD-12** | FD-12 | Changement direct A→B, lectures lentes/inversées et retrait d’accès : contenu, liens, données locales et action appartiennent à la même identité validée ; aucune inscription B depuis un titre A. Première lecture avec ossature stable, focus du nouveau titre une fois, annulation et génération cohérentes. Une erreur personnelle ne détruit pas une fiche publique lisible et ne conserve pas de droit privé. |
+
+Les critères portent sur les quatre moteurs déjà pris en charge. Les nouveaux
+jeux futurs ne reçoivent pas un guide supposé : état générique et capacité
+serveur conservés. Le rendu cible, la matrice des impacts et les scénarios
+de recette sont au §9 ; les résultats applicatifs et leurs limites figurent au
+[bilan de livraison](verification-livraison.md#évolution--e73-evo-live-fiche-9-novembre-2026).
+La réalisation locale ne constitue pas un déploiement sur TEST.

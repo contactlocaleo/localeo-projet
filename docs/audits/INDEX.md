@@ -2,6 +2,8 @@
 
 Constats datés conservés par application. Un audit ancien ne décrit pas automatiquement l’état actuel.
 
+- [Localeo Live — fiche animation, audit visuel bureau/mobile — 8 novembre 2026](marketplace/localeo-live-fiche-animation-ux-ui-2026-11-08.md)
+- [Localeo Live — performance des API de recherche et de consultation — 8 novembre 2026](backend/audit-performance-api-localeo-live-2026-11-08.md)
 - [Localeo Live — hiérarchie, fluidité et commerçants après déploiement — 8 novembre 2026](marketplace/localeo-live-hierarchie-fluidite-2026-11-08.md)
 - [Localeo Live — parcours, UX/UI et adhésion habitant — 7 novembre 2026](marketplace/localeo-live-adhesion-ux-ui-2026-11-07.md)
 

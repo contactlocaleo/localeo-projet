@@ -1,5 +1,37 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+## Évolution du 9 novembre 2026 — fiche animation immersive
+
+**E73-EVO-LIVE-FICHE** reprend les douze axes FD-01 à FD-12 de l’
+[audit visuel de la fiche publique](../../audits/marketplace/localeo-live-fiche-animation-ux-ui-2026-11-08.md) :
+défi et conditions avant inscription, composition commune à l’accueil, accès
+personnel ciblé, indicateurs, lots, partenaires, ancres, récupération, flyer,
+retours/actualisation, statuts et identité des lectures.
+Les **12 critères E73-FD-01 à E73-FD-12** sont canoniques dans la
+[spécification Live](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-9-novembre-2026--fiche-animation-immersive-e73-evo-live-fiche) ;
+la [conception §9](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-adhesion-conception.md#9-fiche-animation-immersive--e73-evo-live-fiche)
+fixe les variantes et la recette. **Réalisation locale Marketplace/Live** : contrats actuels
+réutilisés, pas de nouvelle règle ni migration requise ; preuves propres au
+[bilan E73](../../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md).
+LA/LH/LP, leurs réserves et la clôture historique restent inchangés.
+
+## Évolution du 8 novembre 2026 — performance des lectures Live
+
+**E73-EVO-LIVE-PERFORMANCE**, spécification demandée à la suite de l’
+[audit des API Live](../../audits/backend/audit-performance-api-localeo-live-2026-11-08.md) :
+coût du catalogue historique, fiche, lectures personnelles, messages, lots,
+plafonds, annuaire, readiness, cartes/visuels et orchestration du carnet.
+Les **18 critères E73-LP-01 à E73-LP-18** sont définis une seule fois dans la
+[spécification Live](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-8-novembre-2026--performance-des-lectures-live-e73-evo-live-performance).
+La [conception §8](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-adhesion-conception.md#8-performance-des-lectures--e73-evo-live-performance)
+fixe variantes de contrat opt-in, chargement progressif, budgets, preuves,
+migrations conditionnelles et ordre backend/frontend. **Spécifié, non implémenté** ;
+tests de correction et qualification restent à produire au
+[bilan E73](../../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md).
+Les mesures de l’audit sont des baselines ; elles ne ferment pas LA-16.
+Clôture historique et identifiants précédents conservés ; aucun pilote externe
+n’est ajouté aux conditions de vérification technique.
+
 ## Évolution du 8 novembre 2026 — hiérarchie et fluidité Live
 
 **E73-EVO-LIVE-HIERARCHIE** : les huit recommandations R01–R08 du
