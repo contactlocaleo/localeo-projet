@@ -6,6 +6,8 @@ Commencer par le README du sujet, puis consulter ses règles, contrats et arbitr
 
 ## Priorités en cours et à cadrer
 
+- **Extension E73 — 8 novembre 2026 : hiérarchie et fluidité Live**, [E73-EVO-LIVE-HIERARCHIE](epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-8-novembre-2026--hiérarchie-et-fluidité-e73-evo-live-hierarchie) : huit recommandations, 12 critères LH-01 à LH-12 ; [conception §7](epic-73-animation-et-ou-coffrets/localeo-live-adhesion-conception.md#7-hiérarchie-et-fluidité--e73-evo-live-hierarchie), états, bornes et recette. Implémentation locale Marketplace/Live, preuves et limites au bilan ; clôture historique et réserve LA-16 inchangées.
+
 - **Extension E73 — 7 novembre 2026 : adhésion habitant Live**, [E73-EVO-LIVE-ADHESION](epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-7-novembre-2026--adhésion-habitant-e73-evo-live-adhesion) : 13 recommandations de l’audit, trois lots et 17 critères ajoutés ; parcours, UI, continuité et retour utile. [Conception détaillée](epic-73-animation-et-ou-coffrets/localeo-live-adhesion-conception.md) avec contrats, permissions, migration, budgets et recette ; trois lots implémentés localement, qualification de charge LA-16 encore partielle ; preuves au bilan. E73 conserve sa clôture historique.
 
 - **À faire : EPIC 79**, [Escape Game assisté par l’IA — cadrage](../roadmap/a-faire/epic-79-escape-game-assiste-ia-backlog.md) du 6 novembre : 7 US, 18 critères cibles ; préparation IA et validation avant publication selon le processus de la chasse E55, parcours terrain commune/commerces guidé par Live, un téléphone seul/en famille confirmés. Quatre arbitrages résolus, quatre ouverts ; spécification détaillée à rédiger.

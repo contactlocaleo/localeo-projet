@@ -4,6 +4,122 @@ Version de conception du **17 octobre 2026**, réalisation locale commencée le 
 
 ## 1. Traçabilité des 63 critères
 
+### Évolution — E73-EVO-LIVE-HIERARCHIE, 8 novembre 2026
+
+Les huit recommandations du nouvel audit sont spécifiées en
+[12 critères LH-01 à LH-12](localeo-live-entree-unique.md#évolution-du-8-novembre-2026--hiérarchie-et-fluidité-e73-evo-live-hierarchie).
+Les matrices fonctionnelles et la [recette §7.6](localeo-live-adhesion-conception.md#76-recette-et-livraison)
+décrivent les preuves à produire. **Réalisation locale dans Marketplace/Live**,
+avec preuves applicatives propres à ce complément ci-dessous ; aucune migration
+ou configuration nouvelle nécessaire.
+La réserve LA-16 et les preuves des livraisons précédentes restent distinctes.
+Les contrôles documentaires de cette phase ne valident pas les critères UX.
+
+**Phase de spécification.** Contrôles du 8 novembre, base projet `598ae97` et modifications documentaires :
+**12 critères uniques, R01–R08 tous référencés** ; contrôle de guidance sur les
+documents touchés et guides : **103 guides, 1 334 liens locaux, zéro erreur et
+avertissement** ; **148 sources exportées vérifiées** ; `git diff --check`
+réussi. La revue indépendante a fait préciser le remplacement atomique des
+fenêtres paginées, son budget et le repli du focus après disparition d’un élément.
+Ces contrôles portent sur la préparation et restent distincts des résultats
+applicatifs de la réalisation suivante.
+
+#### Réalisation locale de la hiérarchie Live
+
+Arbres de travail du **8 novembre 2026**, bases Projet `598ae97` et Marketplace
+`498b939`, avec modifications locales. L’accueil affiche le contexte communal,
+une prochaine action personnelle au plus, puis la navigation commune
+Animations / Commerçants et les deux périodes. Les styles sont repris dans leurs
+sources, sans nouvelle feuille globale de surcharges ni illustration inventée.
+
+| Critères | Réalisation et preuves ciblées |
+| --- | --- |
+| LH-01/02 | Contexte compact nommé, action personnelle unique, raccourcis et titres de périodes distincts, vide réel séparé de l’attente. Suites `live-hierarchy-fluidity`, `live-home-community`, `live-home-communes` et `live-home-density`. Le premier CTA reste au-dessus de la navigation basse à 390 × 844, avec ou sans flyer. |
+| LH-03/04/05 | Conservation des dernières lectures dans le seul contexte courant, fraîcheur datée en cas de panne, refus privés purgés, générations annulées/ignorées et refresh mutualisé. Fenêtres publiques reconstruites hors écran puis remplacées ensemble, y compris au réessai après une panne partielle multi-communes. Suites Node personnelles/navigation/fenêtres, `live-personal-refresh`, `live-discovery-continuity`, `live-hierarchy-fluidity` et annuaire. |
+| LH-06 | Même navigation à deux liens, paramètres publics autorisés conservés séparément par vue, quatre entrées basses inchangées. Aucun appel annuaire pour afficher ce lien ; filtres d’animation explicites et retirables. Cas dédiés de hiérarchie et annuaire. |
+| LH-07/08 | Promesse adaptée au moteur, dates courtes, une métrique réelle et un CTA principal ; favoris/partage secondaires. Variante graphique sans photo et ratio réservé pour le flyer connu, maintenu en cas d’échec. Suites `live-discovery-dynamics`, `live-discovery-unique` et hiérarchie. |
+| LH-09/10 | Annuaire dans le cadre Live, fenêtre de cinq pages/60 commerces, revalidation atomique, ancre/focus au retour, photo autorisée ou icône et horaires absents explicites. Helper d’adresse : seules les lignes consécutives équivalentes sont masquées ; valeur source et itinéraire restent identiques. Suite annuaire et `live-merchant-window.test.cjs`. |
+| LH-11/12 | Aides et fraîcheur secondaires, panne distincte du vide, indicateurs locaux et navigation sans animation bloquante. Mouvement réduit, clavier, focus, cibles tactiles et contrastes sur rendu vérifiés par les suites hiérarchie/accessibilité ; aucune nouvelle célébration sur lecture. Les règles de reçu confirmé du jeu sont inchangées. |
+
+**Impacts.** Seuls Marketplace (code, styles, fixtures/tests, README) et ce dépôt
+documentaire sont modifiés. Le backend conserve statuts, éligibilité, droits,
+gains et révocation ; la conservation d’une lecture ne crée aucune autorisation
+pour QR, PIN ou retrait. Aucun changement de domaine, API, contrat OpenAPI ou
+embarqué, permission, schéma SQL, configuration ou générateur de démonstration.
+Les anciennes origines et accès personnels utilisent les mêmes routes.
+Les fixtures sont synthétiques, les API simulées et le build navigateur isolé
+ignore les fichiers d’environnement opérateur ; aucune écriture TEST ni envoi.
+
+**Vérification.** La revue indépendante a notamment corrigé le réessai d’une
+période multi-communes et le bornage des pages brutes conservées hors DOM.
+La correction du focus au réessai conserve l’assertion existante. La fixture des
+participations accepte désormais le paramètre de capacités moteur déjà envoyé
+par le producteur existant ; les assertions d’éligibilité QR sont inchangées.
+Les premières passes en échec restent dans les rapports locaux, sans skip.
+Le défilement progressif hérité du document marketplace est désactivé sur Live
+pour restituer immédiatement l’ancre ; la trace initiale montrait le déplacement
+avant tout remplacement de données. Le contrôle clavier final n’ajoute aucun
+défilement depuis le test pour rendre artificiellement une commande visible.
+Les rappels de restauration à 120/420 ms sont remplacés par une restauration
+unique : l’annuaire respecte une interaction commencée pendant la première
+lecture ; le catalogue attend aussi la stabilisation de la zone personnelle.
+La revalidation des récompenses ne redevient pas une première attente et
+n’insère plus une mention de couverture déplaçant le CTA. Accueil et Mes lots
+gardent leurs contrôles occupés jusqu’à la fin de cette séquence.
+
+| Commande / périmètre Marketplace | Résultat |
+| --- | --- |
+| `node scripts/run-security-tests.cjs` | **203 réussites, zéro skip**, rapport `tmp/lh-security-final.log` ; fenêtres brutes/visibles pour 1/2/3/4/10 communes, rollback, accès personnels, navigation publique et suites de sécurité existantes. |
+| `npm run test:server` | **13 réussites, zéro skip**, rapport `tmp/lh-server-final.log`. |
+| ESLint sur `src` et tous les tests nouveaux/modifiés | Réussi ; ce périmètre évite le répertoire temporaire Windows interdit déjà documenté, sans présenter `eslint .` comme exécuté avec succès. |
+| Playwright, hiérarchie/continuité/accessibilité/bornes/lots/lectures privées | **45/45 réussis**, zéro skip, flaky ou erreur globale dans `tmp/lh-acceptance-results.json` ; build production isolé, deux workers. Le dernier rejeu de continuité inclut aussi le repli vers un titre visible quand l’animation a été retirée. |
+| Playwright, annuaire | **20/20 réussis** dans la passe `tmp/lh-settled-results.json` : quatre largeurs, pagination, panne, curseur périmé, retour, défilement volontaire et saisie pendant la première attente. Les quatre échecs de retour catalogue de cette passe sont corrigés puis rejoués séparément ; ils ne sont pas assimilés à des succès dans ce rapport. |
+| Playwright, dernier rejeu de `live-discovery-continuity.spec.cjs` | **9/9 réussis, zéro skip**, `tmp/lh-focus-final-results.json` ; code Playwright **0** conservé explicitement. Trois pages, retour navigateur/rechargement, panne/réessai, retrait du programme, refresh, changement de communes et nouvelle pagination. |
+
+Les **105 cas distincts de 14 fichiers** de cette recette sont vérifiés sur les
+passes successives ; les effectifs de rejeu ne s’additionnent pas. Les 39 autres
+cas couvrent carnet, participations, métriques publiques, communes, communauté,
+densité et découverte multicommunes (`tmp/lh-browser-final.log`,
+`tmp/lh-postfix-results.json` et rejeux ciblés). Les échecs intermédiaires sont
+conservés avec leur cause et leur correction ci-dessus ; aucun skip ajouté.
+La redirection PowerShell des avertissements stderr peut renvoyer un code
+d’enveloppe 1 malgré un processus Node réussi : une sonde Node de code 0 qui
+écrit seulement sur stderr reproduit ce cas. Le JSON de la passe 45 contient
+45 succès, zéro erreur globale ; le dernier rejeu conserve explicitement
+`$LASTEXITCODE` pour distinguer le code Playwright de cette enveloppe.
+
+Les suites navigateur passent par `playwright.desktop.config.cjs` ou une copie
+temporaire ajoutant le rapport JSON, avec le même serveur de production isolé.
+Les captures et mesures restent hors Git. La matrice couvre 320 × 568,
+390 × 844, 768 × 1024, 1280 × 800 et le texte à 200 %. Les contrastes de texte,
+pictogramme utile et contour de focus sont vérifiés sur leurs couleurs rendues,
+y compris les fonds transparents composités ; ce contrôle ciblé ne certifie
+pas toutes les pages ou tous les états de l’application.
+
+**Mesures ciblées.** Sur la fixture reproductible à 390 × 844, le CLS initial
+mesuré est **0,07544**, tous les déplacements observés inclus (seuil ≤ 0,1) ;
+la stabilité pendant revalidation est vérifiée séparément par les rectangles
+et le focus. Le scénario de 30 recherches et cinq changements de type effectue
+**72 GET catalogue**, garde **24 cartes maximum** (borne 120) et n’appelle pas
+l’annuaire. La réponse retenue du contexte 15 ne remplace jamais le contexte 16.
+Après GC forcée Chromium : heap utilisé environ **5,95 à 6,67 Mo**, nœuds
+**5 037 à 5 066**, écouteurs **360 au début et à la fin**. Ce sont des observations
+locales sans seuil mémoire inventé ni garantie de capacité générale. Les JSON
+de CLS, contrastes et compteurs sont attachés à `tmp/lh-acceptance-results.json`.
+
+**Contrôles documentaires.** Guidance sur les guides et documents touchés :
+**104 guides, 1 379 liens locaux, zéro erreur et avertissement** ;
+`sync_documentation.py --check-sources` : **148 sources vérifiées**.
+`git diff --check` réussi dans les deux dépôts modifiés. Ces contrôles ne
+remplacent aucun test applicatif.
+
+Ces preuves de navigateur ne constituent ni une certification d’accessibilité,
+ni un essai sur appareil physique/lecteur d’écran humain, ni une mesure de
+rétention. Aucun déploiement n’est annoncé et **la réserve de capacité LA-16
+reste ouverte** : son benchmark backend, ses paliers de saturation et sa charge
+mixte ne sont pas remplacés par ce travail de présentation. La clôture historique
+E73 n’est pas modifiée ; aucun commit ou push n’est déduit de ce bilan.
+
 ### Évolution — E73-EVO-LIVE-ADHESION, 7 novembre 2026
 
 Les **17 critères E73-LA-01 à 17** issus de l’audit habitant sont définis dans

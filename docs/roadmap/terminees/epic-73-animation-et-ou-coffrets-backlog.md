@@ -1,5 +1,19 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+## Évolution du 8 novembre 2026 — hiérarchie et fluidité Live
+
+**E73-EVO-LIVE-HIERARCHIE** : les huit recommandations R01–R08 du
+[rapport après déploiement](../../audits/marketplace/localeo-live-hierarchie-fluidite-2026-11-08.md)
+sont spécifiées en **12 critères E73-LH-01 à E73-LH-12** dans la
+[spécification canonique Live](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-8-novembre-2026--hiérarchie-et-fluidité-e73-evo-live-hierarchie).
+La [conception §7](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-adhesion-conception.md#7-hiérarchie-et-fluidité--e73-evo-live-hierarchie)
+fixe composition, états de lecture, navigation, cartes, annuaire, adresses,
+bornes et recette. **Implémenté localement dans Marketplace/Live** ; les
+[preuves et limites](../../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md)
+conservent les résultats des tests par périmètre. Aucune migration nouvelle.
+Clôture historique E73 et réserve LA-16 conservées ; aucun déploiement attesté.
+Les essais habitants ne deviennent pas une condition de clôture technique.
+
 ## Évolution du 7 novembre 2026 — adhésion à Localeo Live
 
 **E73-EVO-LIVE-ADHESION** intègre les 13 recommandations A01–A13 du

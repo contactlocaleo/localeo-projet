@@ -1232,3 +1232,83 @@ La revue de conception détaillée a également précisé l’indicateur de non-
 après révocation, les permissions ERP de contact public, les codes de conflit
 existants et les trois révisions nécessaires au lieu courant. Ces constats sont
 intégrés dans les contrats et les scénarios de recette du complément technique.
+
+## Évolution du 8 novembre 2026 — hiérarchie et fluidité (E73-EVO-LIVE-HIERARCHIE)
+
+**Spécification puis implémentation locale demandées le 8 novembre.** Les huit recommandations
+R01–R08 de l’[audit après déploiement](../../audits/marketplace/localeo-live-hierarchie-fluidite-2026-11-08.md)
+sont couvertes ci-dessous et dans le §7 de la
+[conception existante](localeo-live-adhesion-conception.md#7-hiérarchie-et-fluidité--e73-evo-live-hierarchie).
+La clôture historique E73 reste inchangée ; LA-16 conserve ses réserves de
+performance. Les preuves de l’évolution précédente ne valident pas celle-ci.
+
+### Objectif et décisions
+
+Habitant sans compte nouveau : comprendre immédiatement le territoire proposé,
+repérer les animations ouvertes et futures, trouver les commerces, puis agir
+sans perdre son repère pendant une actualisation. L’agrément repose sur la
+composition, les vrais visuels et les réponses de l’interface ; aucun indicateur
+d’activité, gain ou disponibilité n’est fabriqué.
+
+- **LH-D01 :** contexte communal compact → une action personnelle si disponible
+  → navigation Animations / Commerçants → programme En ce moment / Prochainement
+  → aides secondaires. Le résumé autonome « Ça se passe… » est absorbé dans
+  cette composition ; aucun bandeau supplémentaire n’est ajouté.
+- **LH-D02 :** périodes distinctes par composition, pictogramme et accent ; mêmes
+  libellés dans les raccourcis et les sections, sans grossissement général des
+  textes. Couleurs et composants réutilisent la charte Live.
+- **LH-D03 :** première lecture, revalidation et changement de contexte sont
+  trois états différents ; une donnée conservée ne constitue aucun droit.
+- **LH-D04 :** navigation basse à quatre destinations conservée. La navigation
+  Animations / Commerçants remplace l’entrée compacte de l’accueil et reprend
+  le même composant dans l’annuaire. L’aperçu optionnel de deux/trois commerces
+  évoqué dans l’audit n’est pas ajouté à l’accueil : visibilité assurée par cette
+  navigation, sans appel réseau ni bloc supplémentaire. Cette option est
+  explicitement traitée, pas un préalable manquant aux huit recommandations.
+- **LH-D05 :** seuls les flyers configurés illustrent les animations. Sans
+  flyer, variante graphique compacte avec pictogramme, jamais photographie de
+  remplacement. Photos réelles des commerces conservées dans leur propre vue.
+- **LH-D06 :** correction de présentation des doublons d’adresse exacts, sans
+  réécriture automatique des données TEST. Commune de participation et adresse
+  postale ne sont pas assimilées. Noms de démonstration « TEST… » conservés.
+
+Ces décisions précisent LA-01/04/10/14/15/16 et remplacent les attentes de
+composition incompatibles, notamment le résumé autonome et les messages
+d’attente multiples. Elles ne retirent aucun contrôle de droits, de fraîcheur,
+de couverture partielle, de dates Europe/Paris ou de performance.
+
+### Critères complémentaires et preuves prévues
+
+La réalisation locale des critères **E73-LH-01 à E73-LH-12** est suivie dans le
+[bilan](verification-livraison.md), avec les preuves et contrôles non exécutés.
+Les références R désignent le rapport, les références LA l’évolution précédente.
+
+| Critère | Source | Précondition, action et résultat observable |
+| --- | --- | --- |
+| **E73-LH-01** | Composition, R01/04/07 ; LA-01/10 | Ouvrir l’accueil avec/sans suivi personnel : ordre LH-D01, contexte communal lisible avant l’action, une seule action personnelle et aucune zone vide réservée durablement à une action inexistante. À 390 × 844, jeu nominal de titres courts et sans action personnelle : première proposition et CTA entièrement visibles au-dessus de la navigation basse ; avec action personnelle, son CTA est prioritaire. À 320 × 568, titres longs et zoom 200 %, tout reste atteignable sans troncature utile ni défilement horizontal. |
+| **E73-LH-02** | R01 | Explorer les périodes : En ce moment et Prochainement possèdent un en-tête, un pictogramme et une séparation reconnaissables sans la couleur seule. Les raccourcis emploient ces noms, déplacent lecture et focus vers le bon titre sans masquage. Comptage des seuls résultats chargés, libellé de portée accessible, indication explicite de couverture partielle ; zéro n’est annoncé qu’après une lecture réussie. |
+| **E73-LH-03** | R02 | Première ouverture sans données, réponse lente puis succès/vide/erreur : titre et cadre stables, ossature non interactive de la liste et une annonce accessible par zone indépendante. Aucun message de chargement répété dans un titre, une explication et une ligne supplémentaire. Le vrai vide et le zéro ne précèdent jamais la réponse. Erreur avec Réessayer, sans boucle de relance. |
+| **E73-LH-04** | R02 ; LA-15 | Actualiser le même contexte ou revenir après 60 s : conserver la dernière lecture de cette zone, sa position et le focus ; indiquer une seule revalidation discrète. Au succès, remplacer atomiquement la fenêtre affichée selon la procédure bornée du §7.3 de la conception ; un élément effectivement retiré restitue l’ancre au prochain élément conservé, sinon au titre avec annonce. En panne, indiquer que les résultats conservés datent de la dernière réussite avec Réessayer. Les zones saines restent utilisables. Les contenus privés révoqués/refusés sont retirés immédiatement ; aucun QR ou acte métier n’est autorisé depuis une copie périmée. |
+| **E73-LH-05** | R02 ; LA-05/15/16 | Changer rapidement commune, filtre, capacité, installation ou participation : résultats uniquement du contexte courant ; annuler les demandes dépassées et ignorer leurs réponses tardives. Une invalidation d’accès purge la zone privée. Focus/visibilitychange/clics concurrents ne dupliquent pas une revalidation. Curseurs restent attachés à leur contexte ; pagination invalide propose une reprise sans mélange ni boucle. |
+| **E73-LH-06** | R03 | Depuis l’accueil ou l’annuaire, ouvrir Animations / Commerçants : même navigation à deux liens, état actif explicite, accès au clavier et zone tactile de 44 px. Conserver l’URL et le retour de la vue précédente ; la sélection des communes suivies n’est pas modifiée. Un filtre d’animation issu d’une fiche reste visible et retirable dans l’annuaire, sans exposer les lieux secrets. Aucun cinquième onglet de navigation basse. |
+| **E73-LH-07** | R04 ; LA-04 | Lire une carte passeport, tombola ou chasse : titre/commune, promesse adaptée au moteur, période, un indicateur réel maximum, CTA Découvrir l’animation. L’effort est compréhensible avant le CTA ; aucun passage imposé à la tombola publique, aucun lieu secret révélé. Favori/partage sont secondaires, nommés et accessibles. Favori ne vaut pas inscription ; ouverture de fiche ne prétend pas lancer le jeu. |
+| **E73-LH-08** | R05 | Lire des cartes avec flyer, sans flyer, image lente ou en erreur : visuel configuré uniquement ; variante sans photo avec pictogramme et accent cohérents. Le chargement/échec d’une image ne déplace pas les commandes de la carte déjà affichée. Aucun grand rectangle vide pour une animation sans flyer connu. Informations complètes accessibles même sans image. |
+| **E73-LH-09** | R06 | Consulter et filtrer l’annuaire, ouvrir un commerce puis revenir : cadre, retours, recherche, rafraîchissement et navigation cohérents avec Live. Résultat compact nom/repère territorial, Horaires et animations et Y aller si adresse exploitable. Adresse complète dans le détail ; absence explicite d’horaires/adresse, pas de statut « ouvert maintenant » déduit de texte libre. Photos réelles ou pictogramme, résultats paginés et couverture affichée. |
+| **E73-LH-10** | R06, qualité des données | Une adresse comportant des lignes logiques consécutives strictement identiques n’est présentée qu’une fois par ligne dans le détail ; casse et espaces normalisés pour comparer, ponctuation/signification conservées. Valeur source et destination d’itinéraire inchangées. Des segments différents ou une répétition à l’intérieur d’une même ligne ne sont pas supprimés. Ne jamais remplacer l’adresse par la commune de participation ; libeller ce rattachement distinctement. Si le doublon vient de la source, le diagnostic le consigne ; aucun correctif de données distant implicite. |
+| **E73-LH-11** | R07 | Après une réponse vide réussie, Prochainement affiche un état compact et un seul lien Modifier mes communes ; aides de récupération secondaires, fraîcheur discrète. Une panne affiche un état d’erreur, pas une absence d’animation. Aucun horodatage de participation ni lien personnel redondant n’occupe l’accueil sans suivi connu ; une couverture incomplète reste signalée. |
+| **E73-LH-12** | R08 ; LA-07/14 | Navigation, clic, retour de fiche et succès confirmé : retour visuel immédiat, transitions courtes, focus et position cohérents. Mouvement réduit supprime les effets non essentiels. Aucun carrousel automatique, clignotement ou célébration sur GET/refresh ; réussite uniquement selon reçu confirmé existant. Les contrôles et la navigation fixe ne masquent aucun CTA ciblé au clavier. |
+
+### Matrice des responsabilités et impacts
+
+| Critères | Propriétaire / contrat | Recette cible ; résultats de réalisation au bilan E73 | Documentation / fixtures / exploitation |
+| --- | --- | --- | --- |
+| LH-01/02/06/07/08/11/12 | Marketplace/Live : présentation et navigation ; domaine Animation conserve statuts/dates/éligibilité. API publiques et contrat E42 inchangés. | Étendre Playwright home-density, home-community, discovery-dynamics, discovery-continuity et merchants ; clavier, zoom, mouvement réduit, image lente/absente, variantes moteur. | Cette section et conception §7 ; fixtures nominales et denses. Aucun SQL, permission, secret ou nouveau média requis. |
+| LH-03/04/05 | Hooks Live/transport : état de lecture et concurrence ; backend reste autorité d’accès, gains, révocation et lieux. | Tests Node état/contexte puis navigateur : réponse différée/inversée, panne partielle, répétition refresh, installation retirée, ancien backend, curseur périmé ; comptage HTTP et limites mémoire/DOM. | Recette §7 ; données synthétiques et API simulée. Pas d’API privée en cache persistant, aucun nouvel appel par carte. Budgets LA-16 conservés. |
+| LH-09/10 | Consommateur annuaire public ; producteurs d’adresse inchangés, aucun rapprochement métier local. | Fixtures adresse multilignes répétée, adresse monoligne, rattachement distinct, adresse manquante, pagination et retour contextuel ; diagnostic producteur si reproduction du défaut. | Démonstration par fixtures isolées, pas de réparation TEST ; itinéraire et stockage inchangés. Pas de migration ni de changement du générateur tant que le diagnostic ne démontre pas une cause générateur. |
+
+**Préparation :** huit recommandations spécifiées ; pas d’arbitrage métier
+bloquant identifié. Le rendu final sera validé par les critères ci-dessus,
+sans promesse chiffrée d’adhésion. Tests techniques requis pour déclarer cette
+évolution terminée ; essais habitants et appareils physiques suivis séparément
+selon E73-DEC-CLOTURE-TESTS. Les résultats applicatifs de la réalisation suivante
+du 8 novembre sont consignés au bilan et ne valent pas déploiement.

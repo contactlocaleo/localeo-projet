@@ -1,5 +1,10 @@
 # Roadmap par etat
 
+**8 novembre 2026 — E73-EVO-LIVE-HIERARCHIE** : huit recommandations de l’audit
+après déploiement spécifiées en 12 critères complémentaires, implémentation
+locale dans Marketplace/Live. [Périmètre, preuves et limites](terminees/epic-73-animation-et-ou-coffrets-backlog.md#évolution-du-8-novembre-2026--hiérarchie-et-fluidité-live).
+Clôture historique E73 et réserve LA-16 inchangées.
+
 **7 novembre 2026 — extension E73-EVO-LIVE-ADHESION** : 13 recommandations de
 l’audit Live reprises en trois lots et 17 critères complémentaires, spécifiés
 fonctionnellement et techniquement, implémentés localement ; qualification de

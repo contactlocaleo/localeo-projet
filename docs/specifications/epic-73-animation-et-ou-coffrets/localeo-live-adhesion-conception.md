@@ -512,4 +512,243 @@ produit ; ils ne bloquent pas la clôture technique demandée par E73-DEC-CLOTUR
 La disponibilité TEST, les capacités d’installation iOS/Android et les livraisons
 mail/push réelles ne sont pas déduites des tests simulés.
 
+## 7. Hiérarchie et fluidité — E73-EVO-LIVE-HIERARCHIE
+
+**8 novembre 2026 : conception puis réalisation locale** ; preuves et limites
+au [bilan E73](verification-livraison.md). Les critères canoniques sont
+[LH-01 à LH-12](localeo-live-entree-unique.md#évolution-du-8-novembre-2026--hiérarchie-et-fluidité-e73-evo-live-hierarchie).
+Ce complément applique les huit recommandations de l’audit après déploiement.
+Il précise la composition du §2.1 et la stabilité visuelle du §5 sans modifier
+les budgets API, droits ou preuves historiques. Le tableau de fin du §6 concerne
+LA-01 à LA-17 ; la présente évolution exige ses propres preuves.
+
+### 7.1 Architecture et responsabilité
+
+Réutiliser `LiveHome`, `LiveDiscovery`, `LiveCommunityScene`, `LiveExploreNav`,
+`LiveMerchants`, `LiveRefreshButton`, les hooks dashboard/rewards et les helpers
+de navigation. Le contexte communal de découverte doit pouvoir être affiché
+avant l’action personnelle ; son déplacement ne monte pas une seconde instance
+du catalogue. Un propriétaire unique des filtres et des lectures alimente la
+composition. La scène communautaire est simplifiée ou absorbée ; ses compteurs
+et états de couverture restent disponibles sans reproduire le même en-tête.
+
+Pas de nouvelle entité, table, commande ou projection backend. Les domaines
+Animation, participations et gains gardent leurs règles ; Live ne déduit aucun
+droit du maintien visuel d’une lecture. Le §3 conserve les producteurs, contrats
+et capacités existants. Ni OpenAPI documentaire ni contrat embarqué ne change.
+Les adaptations de la gestion de chargement restent dans les hooks/services,
+sans dupliquer les règles métier dans les cartes ou routes.
+
+### 7.2 Composition et langage graphique
+
+- Header compact conservant identité, recherche et messages. Installer reste
+  contextuel ; Réglages reste accessible. Actualiser reste iconographique, nommé,
+  sur la ligne de titre et ne crée pas une ligne textuelle supplémentaire.
+- Contexte communal sur une ligne adaptable : un nom, ou les deux premiers noms
+  puis le nombre supplémentaire ; la commande ouvre le sélecteur existant avec
+  la liste complète. À zéro commune, une invitation courte et une action Choisir
+  mes communes ; ni sections vides artificielles ni compteur zéro prématuré.
+- Une action personnelle au plus, issue de `nextLiveAction` sans nouvel ordre
+  métier. Lorsqu’elle manque réellement, pas de réservation permanente. Pendant
+  sa première lecture, une zone compacte bornée ; après la réponse, son insertion
+  est évaluée dans la mesure de stabilité et ne vole pas le focus.
+- `LiveExploreNav` devient une navigation de liens Animations / Commerçants,
+  `aria-current="page"`, mêmes dimensions et emplacement relatif sur les deux
+  vues ; aucun faux widget d’onglets ARIA sans gestion correspondante du clavier.
+- Titres de périodes accompagnés d’icônes distinctes (activité/calendrier), d’un
+  accent chaud pour le présent et d’un traitement bleu/encre pour le futur.
+  Conserver le vert pour les succès confirmés. Aucun état dépend de la couleur
+  seule. Les raccourcis de période s’intègrent à la découverte sans gros résumé.
+- Cartes : ordre LH-07, un CTA principal, une métrique maximum ; favoris/partage
+  en actions secondaires de 44 × 44 px avec nom accessible. Texte principal
+  16 px, métadonnées 14 px minimum sur les composants repris, titres aux tailles
+  Live existantes. Une à trois colonnes suivant largeur, jamais de texte utile
+  réduit pour forcer l’objectif du premier écran. Les cartes sans photo restent
+  compactes ; aucune réservation de hauteur d’image si aucune URL n’est connue.
+- Flyer connu : ratio réservé avant décodage ; en erreur, pictogramme sobre
+  dans cette zone pour éviter un saut pendant la lecture. Au prochain montage,
+  un état d’absence établi peut adopter la variante compacte. Les exemples de
+  typographie, accents, séparateurs et icônes utilisent les tokens existants ;
+  retirer les règles contradictoires à leur source, pas de seconde feuille de
+  surcharges globale.
+- Annuaire et accueil partagent gouttières et largeur de cadre ; la fiche
+  commerçant peut limiter les paragraphes à une largeur lisible à l’intérieur.
+  La navigation fixe réserve son espace bas, y compris safe-area mobile et zoom.
+
+### 7.3 Modèle d’état des lectures
+
+État de présentation proposé : clé de contexte, données de la dernière réussite,
+date de réussite, requête en cours/génération et erreur. Ce modèle n’est ni un
+nouveau contrat réseau ni un objet métier. Le simple compteur de rafraîchissement
+ne fait pas partie de l’identité du contexte.
+
+| Situation | Affichage | Transition/refus |
+| --- | --- | --- |
+| Aucun contexte communal | Choix des communes | Pas d’appel catalogue sans sélection. |
+| Première lecture du contexte, sans résultat connu | Titre stable, ossature de deux cartes au plus et une annonce par zone | Les placeholders sont ignorés par l’arbre d’accessibilité et non cliquables ; `aria-busy` sur la zone. |
+| Réussite | Données, date de réussite, portée exacte | Seule une réponse réussie et vide produit un état vide. |
+| Revalidation du même contexte | Données précédentes, indicateur local réservé dans l’en-tête, annonce unique | Ne pas vider les listes ; remplacer la page en un seul commit d’état. Aucun déplacement de focus. |
+| Échec réseau avec données précédentes | Dernière lecture explicitement datée et Réessayer | Ne pas modifier sa date ; zone déclarée périmée, pas de statut métier confirmé depuis cette copie. |
+| Échec sans données | Erreur locale et Réessayer | Les autres sources restent affichées ; pas de boucle automatique. |
+| Changement de contexte | Structure conservée ; anciennes données non présentées comme nouvelles | Annuler/ignorer l’ancienne génération, réinitialiser les curseurs du contexte remplacé. |
+| 401/403/404/410 ou révocation explicite d’une ressource privée | Retirer immédiatement la copie privée et proposer la reprise autorisée | Pas de stale privé sur refus d’accès ; ne pas effacer le carnet historique par une simple panne réseau. |
+
+Clé de contexte publique : ensemble trié de communes, période, recherche
+normalisée, type, filtre de dates et version/capacité serveur. Clé de contexte
+annuaire : commune éventuelle, animation éventuelle et recherche. La clé de page
+ajoute à ce contexte le curseur de départ ; le curseur ne change pas à lui seul
+le contexte de filtres. Clé personnelle :
+installation, ressource/participation et génération locale d’accès, sans inclure
+de secret dans les logs ou URL. Changement/suppression des accès invalide toutes
+les lectures privées concernées ; données privées conservées uniquement en
+mémoire de la vue autorisée, pas en cache module partagé ni stockage supplémentaire.
+
+Pendant une revalidation personnelle, un lien vers une fiche reste possible
+avec vérification courante à l’arrivée. Les QR, PIN, retraits, qualification et
+actions de gain ne sont jamais réactivés depuis la copie ; chaque action conserve
+les contrôles autoritaires existants. Une erreur privée ne masque pas le programme
+public. Une erreur du programme ne devient pas « aucune animation ».
+
+Mutualiser une séquence en cours entre focus, visibilitychange et clic refresh.
+Avant 60 s depuis la dernière tentative automatique, aucun refresh automatique
+supplémentaire ; après 60 s, une séquence au maximum. Le clic explicite peut
+relancer après terminaison même avant 60 s. Pas de polling ni de file de clics
+à rejouer. Annuler au démontage ; une réponse terminant malgré l’annulation est
+ignorée par le contrôle de génération et de clé. Pas de retry de commande métier.
+
+Un retour de fiche retrouve filtre, position et élément d’origine via les helpers
+existants. Les copies publiques en mémoire peuvent accélérer ce retour, mais ne
+suppriment pas la revalidation prévue par le parcours ; si la carte a disparu,
+placer le focus sur le titre de période et expliquer sobrement son indisponibilité.
+La restauration se fait une seule fois après les premières lectures qui peuvent
+modifier la géométrie, y compris la zone personnelle de l’accueil. Un geste ou
+une saisie commencé pendant cette attente garde la main ; aucun rappel différé
+ne reprend ensuite le scroll ou le focus. `loading` décrit la première lecture
+des récompenses, `revalidating` la relecture avec copie ; les contrôles d’accueil
+et de Mes lots restent occupés dans les deux états.
+Une pagination ne cumule pas une page provenant d’une ancienne génération avec
+une page fraîche. Pour lever toute ambiguïté lorsque plusieurs pages sont
+affichées, la revalidation reconstruit **la fenêtre actuellement visible en
+entier**, avant remplacement atomique :
+
+1. Capturer le curseur de début de fenêtre, le nombre `k` de pages effectivement
+   conservées (1 à 5) et l’identifiant du premier élément visible avec son décalage
+   dans la fenêtre de lecture. Ne pas reconstruire les anciennes fenêtres évincées.
+2. Relire depuis ce début puis suivre uniquement les nouveaux curseurs, en série
+   pour cette fenêtre, au plus `k` requêtes et moins si la fin est atteinte. Un
+   catalogue serveur affichant une seule page ne relit que cette page. Ce mécanisme
+   remplace les pages déjà demandées ; il n’anticipe aucune nouvelle page.
+3. Conserver la fenêtre précédente identifiée en revalidation pendant cette
+   préparation. Ne pas publier une page isolée ni mélanger les générations. En
+   cas d’échec d’une page, garder toute l’ancienne fenêtre datée et proposer
+   Réessayer. Annuler la préparation si les filtres ou droits changent. Pendant
+   cette séquence, ne pas lancer une pagination concurrente ; la navigation vers
+   les fiches reste disponible avec ses contrôles existants.
+4. Au succès, remplacer la fenêtre, ses curseurs et ses compteurs ensemble.
+   Restaurer l’ancre et le focus sans déplacement lorsque l’élément existe encore.
+   S’il a disparu, utiliser le prochain élément de l’ancien ordre encore présent ;
+   à défaut, le titre de section, avec annonce « Le programme a changé ». Le
+   maintien de position exigé par LH-04 s’applique aux éléments conservés ; cette
+   disparition réelle est l’exception explicite, pas une permission de remonter
+   systématiquement en haut de page.
+
+En cas de curseur de début périmé, interrompre et proposer une reprise explicite
+depuis la première page avec les mêmes filtres, sans boucle. Les deux périodes
+sont deux fenêtres indépendantes ; un échec de l’une n’efface pas l’autre. Les
+fenêtres en préparation restent bornées à une copie supplémentaire par fenêtre
+active (60 éléments par fenêtre au maximum), hors DOM, libérée au commit, à
+l’échec ou à l’annulation. Les limites de concurrence globales restent appliquées.
+En multi-communes legacy, répartir ce budget en pages entières : les tableaux
+bruts de pages respectent aussi le plafond, même si quelques places restent
+inutilisées. Tronquer uniquement la liste rendue ne suffit pas.
+
+### 7.4 Annuaire, filtres et adresse
+
+Les routes restent `/live/decouvrir`, `/live/commercants` et
+`/live/commercants/:id`. Le retour issu d’une animation conserve son filtre et
+sa provenance ; un accès direct possède un retour de secours explicite.
+La navigation générale retrouve les filtres propres à chaque vue, sans copier
+une recherche d’animation dans la recherche d’un commerce.
+
+Le contrat annuaire ne prend qu’une commune : ne pas lui passer la sélection
+multiple du catalogue et ne pas agréger toutes ses pages par commune. Un filtre
+communal explicite reste affiché ; sans filtre, indiquer Toutes les communes et
+« Commerçants des animations publiques ». Les communes suivies alimentent le
+sélecteur existant sans prétendre filtrer automatiquement les résultats. Un
+filtre d’animation garde un libellé visible et une action Retirer le filtre.
+
+Une ligne résultat comporte le nom complet, le rattachement libellé sans
+confusion avec l’adresse, une photo autorisée ou l’icône commerce, Horaires et
+animations et Y aller si disponible. Les libellés longs reviennent à la ligne.
+La fiche expose l’adresse complète, les horaires publiés, les animations publiques
+associées et le descriptif en second plan. Les coordonnées absentes ne sont pas
+inventées ; un itinéraire reste un lien externe identifié.
+
+Pour LH-10, isoler un helper pur d’affichage : découper les vrais retours à la
+ligne, ignorer les lignes vides, comparer les lignes consécutives après trim,
+réduction des espaces et casse ; garder la première représentation. Aucune
+suppression de mots répétés au sein d’une ligne, aucune correction d’adresse
+postale par heuristique. L’itinéraire utilise toujours la valeur canonique
+existante. Tests avec la ligne répétée trois fois, deux bâtiments différents,
+ponctuations différentes et adresse monoligne. Vérifier séparément, en lecture,
+la provenance du cas TEST si nécessaire ; le diagnostic ne déclenche ni SQL ni
+édition de commerce. Si la source est effectivement incorrecte, consigner une
+anomalie de données indépendante avec la cause établie et la réparation proposée.
+
+### 7.5 Bornes et objectifs de fluidité
+
+Les bornes et budgets du §5, dont p95 API ≤ 500 ms, restent inchangés ; la
+présentation ne résout ni ne ferme LA-16. Les nouveaux contrôles ci-dessous sont
+des cibles à tester, pas des mesures acquises.
+
+| Chemin | Borne / politique | Preuve attendue |
+| --- | --- | --- |
+| Accueil | Sources personnelles 50/25/25 ; catalogue serveur 12 par période ; pas de requête commerçant pour le nouveau lien. Maximum 3 lectures en vol, dont 2 catalogue, comme §2.1. | Comparaison du nombre d’appels avant/après, premier accès et refresh ; aucune lecture par carte ni collecte exhaustive. |
+| Catalogue | Cache public 5 contextes maximum, limites §3.1 et plafond 120 cartes DOM conservés ; snapshots de revalidation remplacés, jamais ajoutés indéfiniment. | 30 changements de filtres et retours ; taille des collections plafonnée ; réponses inversées et retrait de visibilité. |
+| Annuaire | Requêtes 12 commerces par page, au plus 5 pages/60 commerces conservés dans la fenêtre affichée ; au-delà, fenêtre suivante explicite, pas de scroll infini. Conserver 5 curseurs de retour maximum ; retour plus ancien vers le début avec information explicite. | Fixtures 12, 60, 61 et 600 commerces ; aucune requête supplémentaire avant action, mêmes filtres et aucun doublon ; retour sur fiche dans la fenêtre courante. |
+| Première attente | Ossature immédiate ; pas de délai artificiel minimum. Un indicateur de revalidation visuel peut être différé de 150 ms pour éviter un flash, sans retarder les données ou l’annonce accessible. | Réponses simulées 50 ms, 300 ms, 2 s, timeout ; une annonce par zone, aucune succession de titres d’attente. |
+| Mouvement | Feedback press/focus dès l’événement ; transitions 120–180 ms ; aucune attente de fin d’effet avant navigation. Mouvement réduit : effets non essentiels désactivés. | Horloge contrôlée, clavier, double clic et reduced-motion ; aucun effet lié au scroll automatique. |
+| Géométrie | Sur le scénario de revalidation, position des CTA/focus conservée tant que les données n’ont pas changé. CLS ≤ 0,1 sur parcours reproductible à 390 × 844, images/font chargées puis chargement initial séparé. | Enregistrer les layout-shifts et les rectangles des commandes avant/pendant/après ; n’exclure aucun déplacement de façon opportuniste. Le CLS seul ne prouve pas la stabilité des clics. |
+
+Aucun nouveau type de requête SQL n’est prévu. La revalidation d’une fenêtre
+annuaire déjà étendue peut désormais relire jusqu’à cinq pages au lieu de revenir
+à la première : ce coût est explicite, en série et borné, sans nouvel appel tant
+que la séquence précédente n’est pas terminée. Vérifier les lectures existantes
+à froid et à chaud avec fixtures N/10N ; compléter LA-16 selon son protocole isolé pour
+déclarer cette dernière satisfaite. Aucun test de charge sur TEST partagé.
+Observer mémoire navigateur et collections après les 30 cycles ; libérer les
+générations annulées et les références d’images, pas seulement limiter le DOM.
+
+### 7.6 Recette et livraison
+
+| Critères | Tests ciblés dans Marketplace | Résultat / traçabilité |
+| --- | --- | --- |
+| LH-01/02 | `tests/visual/live-home-density.spec.cjs`, `live-home-community.spec.cjs`, `live-home-communes.spec.cjs`, `live-hierarchy-fluidity.spec.cjs` : 0/1/plusieurs communes, action personnelle, présent/futur, zéro/partiel, titres longs. | Réalisation locale ; résultats au bilan E73. |
+| LH-03/04/05 | `live-personal-refresh.spec.cjs`, `live-hierarchy-fluidity.spec.cjs`, `live-discovery-continuity.spec.cjs` et tests Node des hooks/helpers : première lecture, même contexte, refus privé, réponse tardive, focus+visibility simultanés, refresh répété, curseur périmé, capacités ancienne/nouvelle. Trois pages chargées puis retrait d’un élément et réponses inversées : au plus trois lectures de pages pour la fenêtre revalidée, commit atomique, ancienne génération ignorée et ancre/focus restitués selon §7.3. | Réalisation locale ; résultats au bilan E73. |
+| LH-06/09/10 | `live-merchants.spec.cjs` : arrivée générale vs animation, filtre unique/multiple non implicite, adresse, absence de photo/horaires, fenêtre 60+, retour et accès direct ; helper adresse en test unitaire. | Réalisation locale ; résultats au bilan E73. |
+| LH-07/08 | `live-discovery-dynamics.spec.cjs`, `live-discovery-unique.spec.cjs`, `live-hierarchy-fluidity.spec.cjs` : trois moteurs, une métrique, images absentes/lentes/erreur, date/CTA, favoris/partage. | Réalisation locale ; résultats au bilan E73. |
+| LH-11/12 | Suites home, discovery-continuity et `live-hierarchy-accessibility.spec.cjs` : vide vs erreur, couverture, aide, reduced-motion, clavier, absence de célébration au refresh ; règles du jeu de reçu confirmé inchangées. | Réalisation locale ; résultats et limites au bilan E73. |
+
+Les noms abrégés du tableau sont sous `tests/visual/` ; les tests Node sont
+`live-personal-refresh.test.cjs`, `live-discovery-navigation.test.cjs`,
+`live-discovery-window.test.cjs` et `live-merchant-window.test.cjs` sous
+`tests/security/`. Matrice de rendu : 320 × 568, 390 × 844,
+768 × 1024, 1280 × 800 ; zoom 200 %, clavier et mouvement réduit. Contrôler les
+contrastes sur rendu : texte courant ≥ 4,5:1, grands textes ≥ 3:1, composants
+utiles et focus ≥ 3:1. Consigner les captures et états réellement vérifiés ;
+un build seul n’atteste pas LH-01 ni LH-12. Ne pas assouplir les assertions de
+droits/retour/fraîcheur au motif que le markup change.
+
+Livraison applicative limitée à Marketplace/Live après tests Node, suites
+navigateur touchées, lint et build selon le guide local. Aucun changement de
+configuration, domaine, permission, contrat exporté ou SQL identifié. Maintenir
+les deux origines historiques et leurs accès personnels. Repli possible sur le
+bundle précédent sans migration descendante ni effacement du carnet.
+
+Les fixtures isolées couvrent les nouveaux états ; pas de modification de données
+de démonstration partagées. Backend, Animation et Pro restent compatibles avec
+leurs contrats actuels. Le [bilan E73](verification-livraison.md) consigne les
+résultats de réalisation, distincts des contrôles de spécification. Aucun essai habitant, mail réel ou accord
+pilote n’est ajouté aux conditions de clôture technique.
+
 [Retour à la spécification Live](localeo-live-entree-unique.md)

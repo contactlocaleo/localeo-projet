@@ -1,5 +1,15 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+Évolution du **8 novembre 2026 — E73-EVO-LIVE-HIERARCHIE** : les huit points
+de l’audit après déploiement sont spécifiés en **12 critères LH-01 à LH-12**.
+La [spécification fonctionnelle](localeo-live-entree-unique.md#évolution-du-8-novembre-2026--hiérarchie-et-fluidité-e73-evo-live-hierarchie)
+et la [conception §7](localeo-live-adhesion-conception.md#7-hiérarchie-et-fluidité--e73-evo-live-hierarchie)
+couvrent sections, chargement, commerçants, cartes, identité graphique, états
+vides et transitions. **Implémentation locale dans Marketplace/Live**, sans
+migration identifiée ; les [preuves et limites](verification-livraison.md)
+distinguent les nouveaux résultats des preuves historiques. La réserve de
+charge LA-16 reste ouverte et aucun déploiement de ce complément n’est attesté.
+
 Évolution du **7 novembre 2026 — E73-EVO-LIVE-ADHESION** : les 13 recommandations
 de l’audit habitant sont intégrées en trois lots et **17 critères E73-LA-01 à 17**.
 La [spécification Live](localeo-live-entree-unique.md#évolution-du-7-novembre-2026--adhésion-habitant-e73-evo-live-adhesion)
