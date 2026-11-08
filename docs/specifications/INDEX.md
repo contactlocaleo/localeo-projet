@@ -6,6 +6,14 @@ Commencer par le README du sujet, puis consulter ses règles, contrats et arbitr
 
 ## Priorités en cours et à cadrer
 
+- **Extension E73 — 7 novembre 2026 : adhésion habitant Live**, [E73-EVO-LIVE-ADHESION](epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-7-novembre-2026--adhésion-habitant-e73-evo-live-adhesion) : 13 recommandations de l’audit, trois lots et 17 critères ajoutés ; parcours, UI, continuité et retour utile. [Conception détaillée](epic-73-animation-et-ou-coffrets/localeo-live-adhesion-conception.md) avec contrats, permissions, migration, budgets et recette ; trois lots implémentés localement, qualification de charge LA-16 encore partielle ; preuves au bilan. E73 conserve sa clôture historique.
+
+- **À faire : EPIC 79**, [Escape Game assisté par l’IA — cadrage](../roadmap/a-faire/epic-79-escape-game-assiste-ia-backlog.md) du 6 novembre : 7 US, 18 critères cibles ; préparation IA et validation avant publication selon le processus de la chasse E55, parcours terrain commune/commerces guidé par Live, un téléphone seul/en famille confirmés. Quatre arbitrages résolus, quatre ouverts ; spécification détaillée à rédiger.
+
+- **À faire : EPIC 78**, [Le jeu des vitrines — cadrage](../roadmap/a-faire/epic-78-jeu-des-vitrines-backlog.md) du 6 novembre : 6 US, 16 critères cibles ; repérer un intrus dans les vitrines participantes, notamment à Noël/Pâques, avec préparation et parcours Live mobile. Modalités et offre à arbitrer ; spécification détaillée à rédiger.
+
+- **À faire : EPIC 77**, [Le Juste Prix Local — cadrage](../roadmap/a-faire/epic-77-juste-prix-local-backlog.md) du 6 novembre : 8 US, 20 critères cibles ; produit/prix proposé dans Pro puis approuvé, réponse définitive, tolérance en euros, seuil pour le tirage et passages paramétrables. Quatre arbitrages ouverts ; spécification détaillée à rédiger.
+
 - **À faire : EPIC 75**, [Mots croisés assistés par l’IA](epic-75-mots-croises-assistes-ia/README.md) : spécification V1 du 4 novembre, 8 US, 18 critères et neuf arbitrages résolus ; module 190 € HT/12 mois/5 publications, IA externe puis import contrôlé, fiches chez les commerçants, grille correcte et tous les passages requis ; architecture et tests prévus, sans implémentation.
 
 - **À faire : EPIC 74**, [Tombola publique sans commerçant](epic-74-tombola-publique/README.md) : spécification V1 du 3 novembre, 8 US et 16 critères ; six arbitrages résolus. QR partageable, prénom/e-mail vérifié avant qualification, trois modes de lots, quota standard existant et suivi facultatif de commune dans Live. Contrats et tests prévus ; aucune implémentation ni activation.

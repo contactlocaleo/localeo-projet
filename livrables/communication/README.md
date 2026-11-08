@@ -91,13 +91,13 @@ de commerçants. Elle présente les usages avant les fonctions techniques.
 | Diapositive | Sujet |
 | --- | --- |
 | 1 | Faites vivre votre commerce local |
-| 2 | Objectifs d’un rendez-vous autour des commerces |
+| 2 | Un temps fort autour des commerces |
 | 3 | Rôles de Localeo Animation, Pro et Live |
-| 4 | Passeport commerçant, tombola et chasse au trésor optionnelle |
+| 4 | Trois façons de faire participer : passeport, tombola et chasse au trésor optionnelle |
 | 5 | Préparer, publier et suivre une animation |
 | 6 | Parcours d’un habitant dans Live |
 | 7 | Participation et rôle du commerçant |
-| 8 | Usages pour une collectivité et une association |
+| 8 | Un projet à l’échelle de la collectivité ou de l’association |
 | 9 | Pilotage, participation et résultats |
 | 10 | Offre complémentaire Localeo Coffrets |
 | 11 | Offre Découverte à partir de 390 € HT et conditions |
@@ -117,7 +117,22 @@ inventé. Les objectifs de mobilisation ne sont pas présentés comme des
 garanties de fréquentation. Les lots, la chasse au trésor et la communication
 organisateur ne sont pas implicitement inclus dans l’offre d’entrée.
 
-Fichier au format **16:9**, environ **1,72 Mio**, ouvert et rendu dans Microsoft
+La révision graphique du 6 novembre ajoute une iconographie de commerces,
+territoire, parcours, inscription, scan et lots. Les titres sont raccourcis,
+les alignements et espacements revus, avec des compositions distinctes pour
+les formats, les étapes et l’offre. Les pictogrammes sont des images séparées,
+déplaçables et redimensionnables ; les textes restent éditables. Les notes
+orateur et le périmètre commercial sont conservés.
+
+Pictogrammes issus de [Lucide](https://lucide.dev/), révision
+`53fab88ff9d1b48f4704b5b5b560d6b4d560bf4c` du dépôt officiel, recolorés dans
+l’orange Localeo. Les traits des grands pictogrammes sont affinés. Sources
+indiquées dans les notes de chaque diapositive ; texte complet de la
+[licence ISC et des clauses MIT pour les éléments Feather](https://lucide.dev/license)
+dans les notes de la dernière diapositive. Aucun personnage ou visuel fictif
+n’a été ajouté.
+
+Fichier au format **16:9**, environ **2,34 Mio**, ouvert et rendu dans Microsoft
 PowerPoint sur les douze diapositives. Structure, géométrie, polices déclarées,
 notes et liens sont contrôlés ; chaque page a fait l’objet d’une revue visuelle.
 Les sources de prix et périmètre sont celles de la plaquette ci-dessus.

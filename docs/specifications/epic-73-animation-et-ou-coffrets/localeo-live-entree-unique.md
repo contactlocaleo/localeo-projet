@@ -4,7 +4,10 @@
 L’epic 73 est **Terminée techniquement le 1er novembre 2026**, selon
 E73-DEC-CLOTURE-TESTS et le [bilan de clôture](verification-livraison.md).
 Les 63 critères initiaux et leurs résultats de recette restent conservés ;
-les critères ci-dessous sont complémentaires et inclus dans cette revue.
+les critères initiaux de cette évolution sont complémentaires et inclus dans cette revue.
+Les évolutions datées après la clôture ont leurs propres preuves : notamment
+**E73-EVO-LIVE-ADHESION du 7 novembre 2026**, implémentation et vérification locales
+suivies dans le [bilan](verification-livraison.md).
 
 ## Décision et comportement attendu
 
@@ -1002,3 +1005,230 @@ Les animations de la fiche utilisent le catalogue public existant filtré par
   quatre tests Animation et 34 tests Pro réussis. Les campagnes antérieures se
   recouvrent et ne s'additionnent pas.
 - Limite : aucun succès distant ou déploiement TEST n'est déduit des preuves locales.
+
+## Évolution du 7 novembre 2026 — adhésion habitant (E73-EVO-LIVE-ADHESION)
+
+### Besoin, décision et portée
+
+En tant qu’habitant, je veux comprendre immédiatement ce que je peux faire,
+retrouver facilement mon parcours et ressentir mes progrès, afin de prendre
+plaisir aux animations locales et de revenir lorsqu’un événement me concerne.
+
+La demande du 7 novembre intègre les **13 recommandations A01 à A13** du
+[rapport d’audit](../../audits/marketplace/localeo-live-adhesion-ux-ui-2026-11-07.md)
+dans E73. Cette section est leur source de spécification, distincte du constat
+daté d’audit. Le backlog canonique référence les critères **E73-LA-01 à 17**.
+**État de l’évolution : trois lots implémentés localement, qualification de
+charge LA-16 encore partielle ; preuves et limites au
+[bilan](verification-livraison.md#réalisation-locale-de-lévolution).** La
+[conception détaillée](localeo-live-adhesion-conception.md) fixe désormais les
+contrats, les choix bornés de V1, les budgets et les tests des 13 recommandations.
+La clôture historique d’E73 reste inchangée ; aucune preuve ancienne ne valide
+ces nouveaux critères. Le périmètre ne modifie pas les règles des jeux.
+
+Référence examinée : Marketplace/Live `e94201b`. L’audit du code et des scénarios
+existants constitue le point de départ ; aucune recette visuelle connectée sur
+TEST ni mesure d’adhésion n’est disponible. Le bénéfice attendu reste à mesurer.
+
+Décisions de conception de cette évolution :
+
+- **LA-D01 — Prochaine action** : étendre l’accueil personnel au parcours non
+  urgent. Cela complète E73-EVO-LIVE-ACCUEIL-RAPPELS ; les deux indicateurs
+  d’urgence existants restent décidés par le backend. Aucun nouveau rappel
+  automatique n’est créé par ce changement d’ordre de présentation.
+- **LA-D02 — Recherche complète** : remplacer, pour le programme public, la
+  recherche limitée aux pages déjà chargées de LC11 par une recherche serveur
+  paginée sur le périmètre sélectionné. Le filtre local reste adapté aux
+  références « Pour plus tard » stockées sur cet appareil, sans les faire passer
+  pour un catalogue exhaustif. LC11 conserve son identifiant et ses preuves historiques.
+- **LA-D03 — Continuité sans compte** : guider e-mail, carnet et installation
+  en réutilisant les mécanismes E42/E74 ; ne pas promettre une synchronisation.
+  L’inscription directe E74 est conservée : le mail donne accès au suivi, il ne
+  constitue pas une nouvelle étape de qualification.
+- **LA-D04 — Ludique et utile** : valoriser les acquis confirmés, sans points
+  fictifs, séries quotidiennes, classement social, urgence artificielle ni
+  incitation à ouvrir l’application sans événement utile.
+- **LA-D05 — Réemploi** : conserver les quatre entrées basses, la recherche en
+  loupe, l’annuaire, les lots unifiés, l’agenda de tirage, les notifications,
+  les retours et rafraîchissements partagés ; harmoniser leur orchestration.
+- **LA-D06 — Options du rapport** : les 13 recommandations sont couvertes
+  ci-dessous. La carte interactive, une récupération groupée par e-mail,
+  la synchronisation multi-appareils, un score permanent et le partage d’un
+  bilan personnel restent des pistes hors première réalisation. Le filtre
+  « en famille » reste conditionné à une qualification explicite des données ;
+  il ne sera pas déduit du modèle de jeu ou d’un texte libre.
+
+### Critères complémentaires et parcours attendus
+
+| Critère | Audit / priorité | Déclencheur et résultat attendu, y compris refus ou absence de donnée |
+| --- | --- | --- |
+| **E73-LA-01** | A01 / P1 | À l’ouverture de Mon Live, une participation disponible non terminée peut être proposée même sans indicateur d’urgence. Une seule action principale personnelle est mise en avant ; les autres restent accessibles sans répéter une grille complète. Un blocage opérationnel explicite concernant cette action est présenté avant elle. Sans accès personnel, proposer la récupération ; sans participation, présenter la découverte ; en erreur, conserver l’accès au carnet et ne pas annoncer un faux état vide. |
+| **E73-LA-02** | A02 / P1 | Après succès confirmé d’une inscription tombola directe, montrer « Inscription enregistrée » et deux étapes visuelles pour retrouver le lien personnel puis ajouter au carnet. Le tirage n’est daté que si sa date publique est connue. Une réponse incertaine ou en cours ne devient pas un succès. Aucun token, donnée d’un inscrit préexistant, seconde chance ou nouvel e-mail n’est créé par le simple affichage de cet écran. |
+| **E73-LA-03** | A03 / P1 | Depuis un carnet vide ou l’aide d’installation, « Retrouver mes participations sur ce téléphone » propose : lien disponible, lien perdu, changement de téléphone. Chaque choix utilise la récupération autorisée ou la sauvegarde existante. Import impossible, stockage refusé et accès expiré donnent une issue utile sans effacer le carnet existant ni réinscrire. L’installation est facultative ; aucune conservation inter-navigateurs automatique n’est promise. |
+| **E73-LA-04** | A04 / P1 | Chaque carte de découverte présente nom, commune, période, promesse du défi et action principale ; au plus un indicateur de dynamique est mis en avant, les autres restent consultables dans la fiche. Favori et partage restent secondaires. La formulation concrète reflète la mécanique réelle : une validation n’est pas automatiquement une visite. Image du flyer seulement si configurée ; sinon pictogramme et composition graphique. Règlement, conditions et données complètes restent accessibles avant inscription. |
+| **E73-LA-05** | A05 / P1 | Une recherche du programme trouve une animation publique autorisée même située au-delà de la première page, sans télécharger toutes les pages. Commune(s), texte, type et période sont filtrés côté serveur. « Aujourd’hui » et « Ce week-end » sont expliqués en dates de Paris. Les favoris ont un accès nommé visible lorsqu’ils existent, distinct des participations. Une animation devenue inaccessible est signalée à l’ouverture sans perdre silencieusement le favori. |
+| **E73-LA-06** | A06 / P1 | Dans une participation, un indicateur de nouvelles ouvre la messagerie filtrée sur cette animation. Le non-lu ne disparaît pas par simple affichage d’un badge. Le parcours distingue accord organisateur, permission navigateur et préférences de rappels, avec des états compréhensibles et une modification volontaire. Le refus de push ne bloque ni participation ni messages autorisés dans Live ; aucune activation groupée implicite. |
+| **E73-LA-07** | A07 / P2 | Une étape nouvellement confirmée déclenche un retour visuel bref, une progression exacte et la prochaine action autorisée. Un réaffichage, une réponse obsolète ou un reçu déjà traité ne rejoue pas une victoire comme un nouvel acquis. Mouvement réduit : équivalent statique. Sans résultat confirmé, aucune célébration ni progression supposée ; 100 % n’équivaut pas à une qualification. |
+| **E73-LA-08** | A08 / P2 | Mes lots distingue utilisable/à retirer, nouveauté et historique pour Coffrets, bons numériques et lots libres externes. Chaque carte fournit l’action réelle : présenter le bon, ouvrir le coffret ou consulter les consignes de retrait. Lieu/échéance connus sont visibles avant les détails ; absence explicitée, date non inventée. Lots consommés, retirés, expirés ou révoqués ne sont pas promus comme utilisables ; un état ancien est revalidé à l’ouverture. |
+| **E73-LA-09** | A09 / P2 | Une participation qualifiée montre le prochain tirage connu, l’agenda existant, le résultat lorsqu’il est publié et les nouvelles associées. Sans date, afficher « Date à annoncer ». Après résultat, proposer un prochain défi public dans les communes sélectionnées s’il existe, sinon un retour au programme. Réutiliser les notifications existantes et expliciter leur disponibilité, sans promettre ni envoyer un nouveau type d’alerte non pris en charge. |
+| **E73-LA-10** | A10 / P2 | Accueil, découverte, fiche, parcours, lots, communes et messages partagent les mêmes styles de titre, actions, retour, rafraîchissement et états. Une couleur ou un pictogramme ne porte jamais seul une information métier. La personnalité locale vient des contenus publiés et de motifs/pictogrammes sobres ; aucun flux, nombre de présents ou visuel de lieu n’est simulé. Les styles partagés sont consolidés, sans empilement de surcharges par écran. |
+| **E73-LA-11** | A11 / P2 | Depuis une étape ou un commerce connu et autorisé, l’habitant trouve adresse, horaires publiés, itinéraire et retour au même contexte de participation. Un lieu futur de chasse reste caché. Sans adresse/horaires, expliquer l’absence ; ne pas inférer « ouvert maintenant », distance ou temps de trajet. L’annuaire existant est réutilisé. |
+| **E73-LA-12** | A12 / P2 | L’aide distingue inscription, jeu et retrait ; elle propose un contact d’organisation uniquement s’il est explicitement publiable et disponible. Sans contact public, conserver l’orientation vers les supports connus. Aucun téléphone privé de commerçant, membre d’équipe ou support interne n’est exposé ; aucun message n’est envoyé automatiquement. |
+| **E73-LA-13** | A13 / P3 | Après fin d’animation, un bilan personnel compact présente les seuls acquis attestés, le résultat autorisé et l’avis facultatif existant, puis une suite locale pertinente. Ne pas assimiler non-gagnant à non-participant, ni absence de lot à résultat perdu. Si les faits nécessaires manquent, omettre la statistique ; aucune reconstitution narrative de lieux secrets. |
+| **E73-LA-14** | Transverse / P1 | Aux formats 320 × 568, 390 × 844 et 1280 × 800, aucun défilement horizontal ; commande principale identifiable, cibles principales de 44 px minimum, focus visible et retour cohérent. Tester aussi zoom/texte à 200 %, clavier ouvert, lecteur d’écran et mouvement réduit. La navigation fixe ne masque ni champ focalisé ni action. |
+| **E73-LA-15** | Transverse / P1 | Sur réseau lent, indisponible ou rétabli, distinguer chargement, données déjà connues, indisponibilité et vide réel. Annuler/ignorer une réponse devenue obsolète, préserver filtres et accès lors des retours, permettre un réessai explicite. Aucun POST métier rejoué automatiquement pour améliorer la fluidité ; aucun QR ou droit nouveau tiré d’un cache ancien. |
+| **E73-LA-16** | Transverse / P1 | Les lectures ajoutées ou étendues respectent filtrage/pagination en stockage, bornes de page et de concurrence, absence de N+1 et isolation des accès. Les preuves de performance déclarent données, budgets, cache, trafic et saturation ; une mesure absente n’est pas un succès. Les scénarios avec plusieurs communes, participations, messages et lots simultanés complètent la fixture d’accueil simple. |
+| **E73-LA-17** | Transverse / P2 | Le plan de mesure distingue découverte, inscription confirmée, ajout au carnet, reprise, étape, message et usage du lot. Les événements respectent la politique d’analytics et son consentement ; aucun e-mail, token, QR, identifiant personnel ou position précise ajouté. Une mesure de retour indique population et période réellement observables ; aucune fusion implicite d’appareils ni promesse de gain chiffré sans référence initiale. |
+
+### Ordre de l’accueil et règles de présentation
+
+Le bloc personnel est une aide à la décision, pas un nouveau moteur métier.
+Ordre cible : information opérationnelle explicitement bloquante pour le parcours
+concerné ; participation réunissant fin proche et presque terminée, puis fin proche
+seule, puis presque terminée seule (ordre existant conservé) ; nouveau lot
+encore utilisable ; participation ordinaire disponible à reprendre ; rendez-vous
+de tirage qualifié. Au sein d’une catégorie, départager par échéance connue
+croissante, puis identifiant stable ; une date absente vient après les dates connues.
+Un lot déjà connu mais utilisable reste accessible par Mes lots et un signal
+secondaire. Les indicateurs non prioritaires restent compacts ; l’habitant conserve
+l’accès à toutes ses participations. Une information manquante ne crée pas d’urgence.
+L’importance `URGENT` d’un message ne prouve pas un blocage et ne peut désactiver
+une action de jeu. Le motif bloquant et la capacité refusée doivent provenir de
+l’état ou de l’action autoritaire du moteur. La V1 exploite seulement les motifs
+effectivement présents dans les lectures autorisées. Sinon, le message reste une
+information mise en avant, sans changement de droits.
+
+Cette hiérarchie précise la proposition ouverte de l’audit ; elle est une décision
+de présentation de cette spécification, pas un constat du produit existant.
+Les projections personnelles sont bornées : ne pas parcourir toutes les pages
+du carnet distant pour choisir un gagnant de classement. **Décision LA-T01** :
+50 suivis, 25 récompenses et 25 tirages au maximum dans les fenêtres initiales ;
+classement uniquement sur ces candidats, « Parmi vos suivis chargés » si une
+source est partielle/indisponible ou un accès local non lié. Pas de nouvelle
+projection de classement global. Ne pas appeler cette sélection « dernière
+activité ». Aucun nouvel historique de comportement personnel n’est requis.
+
+Pour le catalogue, « Aujourd’hui » couvre la date civile courante à Paris.
+« Ce week-end » couvre samedi 00:00 à lundi 00:00 ; samedi/dimanche, il s’agit
+du week-end en cours, sinon du prochain. L’animation doit chevaucher cette fenêtre
+et satisfaire les prédicats publics existants ; début inclus, fin exclue selon
+les conventions des dates du catalogue. Le libellé présente les dates résolues.
+Une période ne promet ni inscription ouverte ni commerce ouvert à cet instant.
+
+### Propriétaires, contrats et compatibilité
+
+Les règles de publication, scan et parcours restent dans le domaine Animation
+et les politiques de moteur existantes. Les états de gain/remise restent dans
+leurs propriétaires E73 ; les règles d’accès personnel et d’inscription restent
+E42/E74. La présentation ne calcule ni qualification, ni validité de QR, ni
+éligibilité à partir du pourcentage, des dates du téléphone ou d’un e-mail déclaré.
+Les préférences et droits de communication existants gardent leur propriétaire ;
+un nouveau point d’entrée UI n’autorise aucune campagne supplémentaire.
+
+| Surface / producteur et consommateur | Réemploi et contrat cible détaillé dans la conception |
+| --- | --- |
+| Catalogue public : `ServiceCatalogueAnimationsPubliques` → client Live / LiveDiscovery | Le service sait filtrer en SQL mais la route/client ne l’exposent pas. LA-T02 retient une nouvelle route `/animations/recherche` sans total exhaustif, et un adaptateur Live dédié ; réemploi des prédicats publics, ancienne route inchangée. Paramètres, ordre, curseur et erreurs au §3.1 de la conception. |
+| Tableau de bord : `ServiceTableauDeBordLive` → useLiveDashboard / LiveHome | Réutiliser progression, disponibilité, fin/résultat/date de tirage. Ordre actuel `ACTIVES_PUIS_HISTORIQUE_UUID` conservé ; classement local à la fenêtre déclaré selon LA-T01. Ni prochaine étape ni dernière activité ajoutées à ce DTO. |
+| Participation / moteur / QR / PIN → jeu et commerçants | Réutiliser la prochaine action et les lieux déjà autorisés. Un DTO de prochaine action éventuel contient un identifiant et un contexte autorisés, jamais un lieu futur ni une règle réimplémentée. Les contrats moteurs fermés exigent alignement des copies embarquées si leur schéma change. |
+| Messages / préférences → participation et messagerie | Filtre serveur par animation disponible ; nouvel indicateur booléen dédié par animation, basé sur EXISTS et mêmes accès, défini au §3.2. Pas de compteur global réinterprété. Publication, adaptation, clôture et résultat ont déjà des producteurs ; les réutiliser, ainsi que les rappels dédiés, sans doubler les envois. |
+| Lots / tirages → Mes lots / accueil / bilan | `RecompenseLive` fournit nature, état, échéance, consignes, responsable et lien ; le détail du bon, sous accès personnel, fournit lieu de remise et actions disponibles. Ne pas produire un QR à partir du résumé. Le lot externe n’a pas d’adresse/échéance structurée : présenter les consignes existantes sans convertir le lot en bon ni extraire des droits du texte. |
+| Contact de support public → aide Live | Nouveau contact facultatif dédié, publication explicite, sous-ressource de gestion versionnée et lectures publique/personnelle filtrées ; stockage et droits fixés aux §3.3/3.4. Aucun réemploi d’une coordonnée privée. Le repli sans contact ne remplace pas le développement du contact publiable. |
+| Analytics → événements de parcours | Événements et enums fermés définis au §4.1 ; identité éphémère et collecte désactivée conservées. Pas de mesure de rétention inter-appareils ; tests transport désactivé/refus sans fournisseur réel. |
+
+L’annuaire public exclut actuellement toutes les chasses. Pour LA-11, conserver
+l’itinéraire du lieu déjà autorisé par le parcours ; une fiche plus complète de
+ce lieu utilise la lecture personnelle dédiée du §3.4, pas le retrait de l’exclusion
+de l’annuaire public. Le propriétaire moteur décide ce qui est révélé.
+
+Les OpenAPI documentaires restent dans `localeo-projet` (E41/E42 et schémas
+concernés), leurs générateurs dans le backend, les copies embarquées chez leurs
+consommateurs. Aucun OpenAPI runtime n’est modifié par cette spécification ;
+les contrats cibles précis sont dans la conception et devront être générés avec
+leurs producteurs lors de l’implémentation. Live ancien et backend nouveau doivent conserver
+leurs contrats existants ; un Live nouveau sur backend ancien désactive les
+nouveaux filtres avec une explication, sans les ignorer silencieusement.
+
+### Données, bornes et livraison
+
+Le volet purement UI ne demande pas de migration : les inscriptions, gains,
+consentements et carnets ne sont pas transformés. La table additive
+`animation_contacts_publics` est requise. La recherche réutilise les index v276 ;
+les mesures pourront imposer un index additionnel. Pas de migration des moteurs.
+Le numéro de migration sera attribué au développement, sans modifier les SQL appliquées.
+Les dates et doublons d’une navigation vivante doivent être traités explicitement.
+
+Bornes de conception pour la recherche étendue : 10 communes sélectionnées au
+maximum, texte 120 caractères au maximum, 12 résultats demandés par Live,
+plafond serveur 50 conservé, lecture `limit + 1` racines et enrichissement groupé.
+Curseur par clé lié aux filtres, à l’accès et à l’ordre total ; pas d’offset
+profond, de chargement exhaustif ni de total global fictif. Deux requêtes de
+catalogue au plus en vol dans Live ; recherche temporisée et requête précédente
+annulée lors d’un changement de saisie. Cache LRU de 5 contextes, 5 pages de 12
+par période et 120 cartes au maximum par contexte ; puis navigation par fenêtres
+avec retour utilisable, selon la conception §3.1.
+
+Pour les nouveaux chemins, les budgets p95/p99,
+requêtes, mémoire/DOM et saturation sont fixés au §5 de la conception, selon
+la [convention de performance](../../architecture/transverse/performance-volumetrie.md).
+Ce sont des objectifs à mesurer, pas des résultats de conformité. Prévoir N/10N,
+filtres rares/vides, première/page profonde,
+caches froid/chaud et charge mêlant lecture, inscription et validation sur une
+cible isolée. La revue documentaire ne remplace ni ces mesures ni les plans SQL.
+
+Livrer le backend compatible et ses éventuelles migrations/readiness avant les
+capacités Live qui en dépendent. Aucun nouveau flag, job, permission caméra,
+permission push ou envoi n’est activé par ce document. Les composants UI
+indépendants peuvent être livrés séparément après leurs tests. Le retour à un
+ancien frontend doit conserver carnets et droits ; un stockage local additionnel
+ne contient ni nouveau secret ni projection narrative. Les garde-fous du service
+worker restent en place. Configuration, ordre exact et diagnostic de version
+sont décrits au §4.3 de la conception et seront vérifiés dans le bilan à l’implémentation.
+
+### Lots et matrice de traçabilité
+
+Les critères transverses 14–17 s’appliquent à chaque lot concerné. La matrice
+ci-dessous sert au suivi de cette évolution ; aucun registre concurrent n’est créé.
+Cette matrice décrit les tests prévus ; leurs résultats réels et leurs limites
+sont consignés au [bilan de réalisation](verification-livraison.md).
+
+| Lot / critères | Propriétaire et comportement | Preuves prévues | Documentation / contrats | Fixtures / démonstration | Exploitation / état |
+| --- | --- | --- | --- | --- | --- |
+| **1 — Accompagner** : LA-01/02/03/04, accès favoris de 05, contextualisation existante de 06 | Live présente l’action ; domaine existant conserve inscription et droits. | Accueil non urgent/urgent/vide, trois participations + gain + message ; tombola succès/incertain/rejeu ; carnet absent/restauration refusée ; favoris ; retour et navigation mobile. Étendre les suites home, density, registration, recovery et messages existantes. | Cette section ; E74 inscription directe et E42 carnet par référence ; conception détaillée LA-T01. | Fixtures synthétiques sans compte réel, dont backend ancien, plus de 50 suivis et stockage refusé. Pas de génération TEST. | Fenêtres 50/25/25 et couverture partielle explicite ; aucune promesse de classement global. **Implémenté localement ; preuves et limites au bilan.** |
+| **2 — Participer avec plaisir** : LA-07/08/10/11/12 | État confirmé par moteur/gains ; Live présente ; coordonnées uniquement publiées. | Succès vs reçu en cours, réponse tardive, mouvement réduit ; trois types de lots + révocation ; commerce connu/inconnu/secret ; aide sans contact public ; styles, clavier et zoom. | E73 dotation, LM01–06, E70 PIN préservés. Contact public versionné et lieu courant personnel définis au §3 de la conception. | États variés de lot, données absentes, chasse à lieux cachés, grand texte et image absente. Fixtures de contact et sauvegarde/restauration de la nouvelle table. | Migration additive contact public, droits ERP/Animation et readiness ; aucun nouvel envoi. **Implémenté localement ; preuves et limites au bilan.** |
+| **3 — Revenir utilement** : recherche serveur LA-05, approfondissement 06, LA-09/13/17 | Catalogue et droits côté backend ; bilan personnel à partir des faits autorisés ; analytics soumis au choix existant. | Résultat au-delà de page 1, filtres/cursor invalides, intercommunes, bornes et plans SQL ; non-lu et refus push ; tirage sans date/perdant/gagnant ; bilan sans donnée ; absence d’analytics sans consentement. | Contrats cibles §3, budgets §5 et recette §6 de la conception. Générer OpenAPI et aligner les lecteurs lors de l’implémentation ; guides message/aide et configuration à actualiser. | N/10N et données étrangères, lettres accentuées, week-end/changement d’heure, résultats partiels ; fournisseurs simulés. | Contrats et attributs implémentés ; mesures courtes N/10N exécutées. **Qualification de charge LA-16 encore partielle.** |
+| **Tous — LA-14/15/16** | Présentation, transport et adaptateurs ; domaine inchangé. | Navigateurs isolés aux trois dimensions, 200 %, réseau lent/refus, annulation des requêtes, confidentialité, droits révoqués ; tests API/DB réels pour lectures modifiées. | Sources canoniques, contrats embarqués et reader tests selon changements effectifs. | Aucun mail, push ou base partagé requis pour les tests automatisés. | Vérification de livraison distincte du pilote et des appareils physiques ; **non exécutée**. |
+
+Les scénarios et mesures d’adhésion avec habitants du rapport sont un suivi
+produit recommandé. Conformément à **E73-DEC-CLOTURE-TESTS**, ils ne remplacent
+pas les tests automatisés et ne constituent pas une condition de clôture du
+développement. Les limites de vérification d’une PWA sur appareil réel restent
+déclarées avant activation ; aucun résultat externe n’est présumé.
+
+### Préparation détaillée et preuve documentaire
+
+La couverture fonctionnelle A01–A13 est intégrée. La demande de spécification
+détaillée du 7 novembre fixe les choix LA-T01–07 dans la
+[conception](localeo-live-adhesion-conception.md) : fenêtres d’accueil assumées,
+recherche complète paginée, présence de messages, contact public dédié,
+lieu courant autorisé, bornes, budgets et recette. Les options exclues ne
+constituent pas des arbitrages cachés bloquant ce périmètre. La réalisation,
+la migration et les contrats ont ensuite été développés dans les dépôts concernés.
+Les résultats applicatifs figurent au [bilan](verification-livraison.md).
+
+La phase de spécification seule ne lançait pas le développement. La demande
+d’implémentation suivante du 7 novembre est suivie dans le
+[bilan E73](verification-livraison.md) avec la référence E73-EVO-LIVE-ADHESION.
+Elle n’autorise pas de migration TEST, campagne, commit, push ou déploiement.
+
+Contrôles documentaires du 7 novembre 2026, base projet `7245005` et modifications
+locales : couverture des **13 recommandations et 17 critères uniques** contrôlée
+par extraction, liens locaux sans erreur ni avertissement, **148 sources exportées
+vérifiées**, contrôle des espaces du diff réussi. Revue indépendante de contrats
+en lecture seule : inventaire des écarts intégré ; ordre des indicateurs combinés
+préservé et importance d’un message distinguée d’une capacité bloquante du moteur.
+Ces résultats prouvent la cohérence documentaire, pas l’exécution des critères.
+
+La revue de conception détaillée a également précisé l’indicateur de non-lu
+après révocation, les permissions ERP de contact public, les codes de conflit
+existants et les trois révisions nécessaires au lieu courant. Ces constats sont
+intégrés dans les contrats et les scénarios de recette du complément technique.

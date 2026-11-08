@@ -4,6 +4,222 @@ Version de conception du **17 octobre 2026**, réalisation locale commencée le 
 
 ## 1. Traçabilité des 63 critères
 
+### Évolution — E73-EVO-LIVE-ADHESION, 7 novembre 2026
+
+Les **17 critères E73-LA-01 à 17** issus de l’audit habitant sont définis dans
+la [spécification Live](localeo-live-entree-unique.md#évolution-du-7-novembre-2026--adhésion-habitant-e73-evo-live-adhesion).
+La matrice de cette section porte leur préparation par lot et leurs tests prévus.
+**Les preuves historiques ne valident pas automatiquement ces nouveaux critères.**
+Leur réalisation et leurs tests locaux sont distingués ci-dessous des contrôles
+documentaires et de l’activation. La [conception détaillée](localeo-live-adhesion-conception.md)
+fixe désormais les contrats cibles, permissions, migration et budgets ; son §6
+relie les 17 critères aux suites à produire. Les revues de contrats ont précisé
+la révocation du suivi, les droits ERP et les trois révisions du lieu courant.
+Les résultats portent sur l’arbre de travail local, en séparant les lots,
+les contrôles non exécutés et les actions d’activation.
+
+#### Phase de spécification
+
+Contrôles de spécification détaillée du 7 novembre 2026, sur la base projet
+`7245005` avec travaux locaux : 13 recommandations reliées à 17 critères uniques,
+17 critères raccordés à la recette cible ; `check_guidance.py` sur les documents
+touchés et guides : **104 guides, 1 453 liens locaux, zéro erreur et avertissement** ;
+`sync_documentation.py --check-sources` : **148 documents vérifiés** ;
+`git diff --check` réussi. Deux revues indépendantes en lecture seule des
+contrats ont été intégrées. Seul le dépôt documentaire est modifié par cette
+spécification ; ni test applicatif, ni benchmark, ni migration exécutés.
+
+#### Réalisation locale de l’évolution
+
+Arbres de travail du 7 novembre 2026, bases Projet `7245005`, Backend `868ce6f`,
+Animation `d0b2afa`, Marketplace `e94201b`, avec modifications locales.
+Les trois lots sont implémentés ; **la qualification de capacité LA-16 reste
+partielle, avec trois dépassements du budget de latence mesurés**.
+L’extension n’est donc pas déclarée terminée. La clôture historique
+E73 n’est pas modifiée. Aucun commit, push, déploiement ou changement de TEST
+n’est déduit de ces preuves locales.
+
+| Critère | Réalisation et preuve de comportement |
+| --- | --- |
+| LA-01 | Une seule prochaine action, y compris une participation ordinaire ; priorité aux urgences confirmées, puis lots utilisables et tirages qualifiés. Helpers `live-adhesion-home.test.cjs` et Playwright `live-adhesion-home.spec.cjs`, régressions `live-home.spec.cjs`. Une couverture tronquée est annoncée, jamais présentée comme un classement exhaustif. |
+| LA-02 | Écran tombola confirmé en deux étapes, sans nouvelle inscription ni e-mail. `tombola-email.test.cjs` et `e74-tombola-email.spec.cjs` vérifient succès, incertitude, reprise et absence de confirmation automatique. |
+| LA-03 | Guide lien disponible/perdu/changement d’appareil, récupération et sauvegarde existantes ; installation facultative. Régressions de carnet, stockage et premier scénario `live-game.spec.cjs`. Aucun nouveau compte ni transfert automatique entre navigateurs. |
+| LA-04 | Une promesse de défi et un indicateur de dynamique maximum ; image officielle uniquement. `live-discovery-dynamics.spec.cjs`, `live-discovery-continuity.spec.cjs` et accueil mobile. Les anciennes assertions de trois compteurs sont remplacées conformément à ce critère ; les contrôles de fraîcheur, retour, focus et pagination sont conservés. |
+| LA-05 | Recherche en stockage, filtres publics, curseur lié au contexte et dates de Paris. `test_adhesion_live_reads.py`, `test_adhesion_live_reads_postgres.py`, tests de projection v304 et parcours LA05. Ancien backend : recherche locale explicitement limitée, nouveaux filtres désactivés ; une URL portant un filtre indisponible ne présente pas de résultats trompeurs. |
+| LA-06 | Indicateur non-lu soumis à l’installation et au suivi courant ; filtres animation/non-lu conservés dans l’URL. Tests API/PG, `live-messages-product.spec.cjs` et cas messages/préférences du jeu. Afficher l’indicateur ne produit aucun acquittement ni accord implicite. |
+| LA-07 | Réussite uniquement sur reçu confirmé corrélé aux versions ; répétition, ancien reçu et simple rafraîchissement restent neutres. Helpers et cas « seule une commande positive », « ancien reçu » de `live-game.spec.cjs` ; équivalent sans mouvement et statut ARIA unique. |
+| LA-08 | Lots disponibles/nouveaux/échéances distincts de l’historique, trois modes existants conservés ; consignes ou dates manquantes explicitées. `live-lots-unified.spec.cjs`, helpers et cas de révocation, dont un accès valide après 50 refus. L’accueil ne synchronise pas automatiquement les accès par POST. |
+| LA-09 | Qualification explicite, date connue ou « à annoncer », agenda existant sans synchronisation promise, résultat autorisé et suggestions publiques bornées. Cas tirages/suggestions de `live-game.spec.cjs` et helpers d’accueil. Aucun nouveau canal de notification. |
+| LA-10 | Actions, titres et retours partagés ; styles consolidés dans leurs sources. Captures accueil, découverte, jeu, lots et messages ; aucune illustration, fréquentation ou progression inventée. |
+| LA-11 | Lecture personnelle du seul lieu courant, protégée par token, étape et trois versions ; port dédié, aucune projection de lieu futur. Tests API/PG de la lecture pratique et cas de réponse tardive du jeu. Adresse/horaires absents ne deviennent pas des estimations. |
+| LA-12 | Contact facultatif versionné, publication volontaire, permissions communales, révocation et audit. Domaine, orchestration, HTTP, PostgreSQL, Animation et ERP ; lecture publique/personnelle sans cache persistant. Une publication de contact n’envoie aucun message. |
+| LA-13 | Bilan compact des faits attestés et résultat explicite ; absence de lot distincte de non-gagnant. Cas bilan personnel et résultats du jeu ; pas de récit reconstruit de lieux secrets. |
+| LA-14 | Parcours automatisés bureau/mobile 320/390/1280 px, texte 200 %, focus, commandes accessibles, mouvement réduit et absence de débordement. Le guide mobile amène au défi sans déclencher sa validation. Lecteur d’écran humain, clavier virtuel et appareils physiques non essayés : actions d’activation séparées, pas des succès annoncés. |
+| LA-15 | Annulation/ignorance des réponses obsolètes, reprise explicite, conservation filtres/carnet/focus, états partiels et erreurs distincts du vide. Tests transport, catalogue, messages, jeu et tombola ; aucun rejeu automatique d’une commande métier ajouté. |
+| LA-16 | Pagination/filtrage SQL, enrichissement groupé, cache cinq contextes et plafond 120 cartes, trois lectures HTTP simultanées et délai de file inclus au timeout. Tests Node/PG et banc N/10N ci-dessous. **Charge mixte cinq minutes, paliers de saturation et environnement de référence non qualifiés : critère partiel.** |
+| LA-17 | Six nouveaux événements à schéma fermé complètent le plan existant ; consentement et suspension de collecte inchangés. Suite de sécurité analytics/transport : aucun identifiant personnel, e-mail, token, position ou texte libre ajouté. Aucune rétention réelle ni amélioration chiffrée n’est annoncée. |
+
+**Intégration et migrations.** Le domaine conserve inscription, qualification,
+gains, étapes et autorisations. Les interfaces présentent leurs faits ; les
+nouveaux ports couvrent contact et coordonnées publiées du lieu courant. Les
+contrats E41/E42 sont générés depuis le producteur ; la copie E41 du portail
+Animation est alignée. Les commandes moteur et contrats embarqués Pro restent
+inchangés ; aucun changement applicatif dans Localeo Pro.
+
+- `v303_contact_public_animation.sql` crée le contact public versionné.
+  Publication/retrait sont transactionnels et idempotents ; les migrations et
+  schémas incomplets sont testés. Aucun contact privé repris automatiquement.
+- `v304_projection_planning_catalogue_live.sql` crée une projection technique
+  séparée, indexée et synchronisée dans la transaction de ses sources. La parité
+  inclut révisions publiées/non publiées, dates absentes/invalides, offsets,
+  suppressions, rollback et concurrence. Les dates naïves suivent l’UTC du
+  domaine ; les offsets explicites sont conservés. Les prédicats historiques
+  d’autorisation restent appliqués avant la limite ; un index ne donne aucun
+  droit d’accès.
+- Sans schéma prêt, la capacité correspondante n’est pas annoncée active et la nouvelle route
+  renvoie un 503 typé. Les anciennes lectures restent compatibles sans v304.
+  Une erreur de schéma n’est pas maquillée en résultat vide ni en succès.
+- Le générateur, le registre de tables, le chargeur et les contrôles de
+  cohérence sont adaptés. Les tables dérivées sont restaurées après leurs
+  producteurs. Sauvegarde/restauration locale PostgreSQL et rejeu des migrations
+  sont vérifiés ; ces preuves n’attestent aucun objectif RPO/RTO hébergé.
+
+**Suites exécutées.** Python 3.14, PostgreSQL 18 local dédié, API et données
+synthétiques ; Node/Playwright sur build isolé avec API simulées. Aucun secret
+opérateur, service d’envoi, analytics réel ni base TEST partagée utilisés.
+Les effectifs ci-dessous ne s’additionnent pas : certaines passes se recouvrent.
+
+| Dépôt / commande | Résultat et limites |
+| --- | --- |
+| Marketplace, `node scripts/run-security-tests.cjs` | **175 réussites, zéro skip**, rapport local `tmp/e73-adhesion-security-final.log` ; files de lectures, annulation, délai restant, analytics, contrats, suggestions et reprise. Après renommage du helper de suggestions pour éviter la résolution ambiguë Windows `.mjs`/`.jsx`, ses quatre cas sont rejoués : **4/4**. |
+| Marketplace, `node --test tests/server.test.cjs` | **13 réussites**, `tmp/e73-adhesion-server.log`. |
+| Marketplace, ESLint sur `src`, `scripts`, `tests` et fichiers JS racine | Réussi. Le parcours global `eslint .` rencontre un répertoire temporaire préexistant interdit par Windows ; il n’est pas présenté comme réussi. |
+| Marketplace, Playwright sur accueil/inscription | Première passe **25/25** ; scénarios d’inscription complétés ensuite par l’assertion des deux étapes visuelles. |
+| Marketplace, Playwright accueil/jeu/lots/messages/tombola | **40/43**, puis les **trois cas de densité passent** après déplacement des messages secondaires sous le programme. Rapports locaux `test-results/e73-adhesion-final` puis `e73-adhesion-recheck`. Les échecs initiaux sont conservés. |
+| Marketplace, Playwright découverte/densité/guide | **18/23** ; cinq échecs : deux attentes de compteurs remplacées par LA-04, trois retours montrant un cache legacy ancien. Une seule métrique désormais attendue et revalidation des pages legacy au retour ; assertions de fraîcheur, focus, position et reprise maintenues. Les 18 réussites incluent densité 320/390/1280, métriques à 200 % et guide 390×844/320×568. |
+| Marketplace, Playwright `live-discovery-continuity`, `live-discovery-unique`, `live-result-suggestions` | **19/19**, sur build final isolé ; les huit cas de continuité sont verts, ainsi que neuf cas communes/mobile et deux cas de périmètre des suggestions. Rapport `test-results/e73-adhesion-continuity-final`. Deux tentatives précédentes n’avaient pas démarré les tests à cause du nom de helper ambigu Windows ; renommage effectué, build normal réussi. |
+| Animation, contrat HTTP contact confronté au canonique E41 | **1/1**, inclus dans les vérifications de consommateur ; ne remplace pas les parcours UI. |
+| Animation, suites Node, navigateur contact et vérifications statiques | **302/302** Node avant ajout du contrat HTTP ci-dessus ; **15/15** cas composant, **12/12** cas ERP ; typecheck, lint et build réussis. Éditeur chargé à la demande, bundle principal 498,35 ko et chunk 6,04 ko. |
+| Backend, runner isolé, contrôles d’architecture | **683 réussites** sur le groupe final, avec `-s`, après introduction du port du lieu courant. Le passage avec capture avait **682 réussites et un échec `WinError 6`** du sous-processus Git ; désactiver la capture rétablit les descripteurs Windows, sans modifier l’assertion. Une revue ne remplace pas ce contrôle. |
+| Backend, tests API/PG/catalogue de lecture | **25 réussites**, puis **11 réussites** ciblées sur les dernières gardes/erreurs ; authentification, configuration absente/étrangère, révocation et cinq requêtes SQL sur la lecture personnelle du contact. |
+| Backend, contact public, runner isolé | **63 cas distincts validés** : domaine 18, HTTP 6, repository 4, PostgreSQL 14, générateur 1, registre 20 ; dernier rejeu HTTP/repository **10/10**. Suites `test_contact_public_animation_dedicated.py`, `test_contact_public_animation.py`, `test_contact_public_repository.py`, `test_contact_public_animation_postgres.py`, `test_demonstration_contact_public.py` et tests de registre. |
+| Backend, projection v304 et restauration | **44 cas distincts validés**, dont registre commun à la ligne précédente ; **41/42** initialement puis **4/4** en 69,54 s après correction du harnais de restauration. `test_projection_dates_catalogue_live_postgres.py`, `test_demonstration_projection_planning.py` et registre. Conserver les tables réfléchies du vrai chargeur évite le `onupdate` ORM Python ; égalité intégrale des tables conservée. Dump/restauration physiques PostgreSQL inclus. |
+
+Le premier lancement du dump contact avait rencontré le pipe `stdin`
+Windows : l’outil utilise ensuite un fichier physique, dont le rejeu réussit.
+Les tests de restauration v304 vérifient ensuite une modification des sources :
+les triggers restaurés restent opérationnels. Les tests PostgreSQL passent par
+`scripts/validation/test_isolated.py ... --postgres-test-url <base locale jetable> -q` ;
+le cluster est isolé sur localhost, sans fichier d’environnement opérateur.
+
+Commande du groupe d’architecture final :
+`python scripts/validation/test_isolated.py tests/architecture tests/domain/test_domain_dedicated_classes.py tests/application/use_cases/test_use_case_business_test_coverage.py tests/domain/animation_locale/test_lieu_courant_pratique_repository_dedicated.py -q -s --tb=short`.
+Le job PostgreSQL du workflow backend intègre les trois nouveaux fichiers
+fonctionnels `test_adhesion_live_reads_postgres.py`,
+`test_contact_public_animation_postgres.py` et
+`test_projection_dates_catalogue_live_postgres.py`. YAML et chemins vérifiés ;
+aucune exécution CI distante annoncée. Le banc de performance reste une commande
+explicite séparée, dont un succès SQL/mémoire n’atteste pas les budgets temporels.
+
+**Relectures indépendantes.** Contrats, gardes de visibilité et accès personnels,
+contact public, restitution des reçus et parcours habitant ont été relus par des
+agents distincts. Les constats intégrés portent notamment sur l’appartenance de
+la configuration publiée, les trois versions du lieu courant, la qualification
+du tirage, les participations à 100 % non qualifiées, les bornes du fallback et
+les filtres indisponibles. Les captures et traces restent hors Git.
+
+**Mesure de capacité — LA-16 non accepté.** Le banc
+`tests/security/test_adhesion_live_read_performance.py` est exécuté avec le runner
+isolé et une base locale jetable. Il mesure les lectures de catalogue et conserve
+les plans `EXPLAIN ANALYZE BUFFERS` dans
+`tmp/e73-adhesion-catalogue-performance.json`. Le dernier passage : **1 test
+réussi en 114,67 s** pour les assertions SQL/mémoire et l’intégrité des pages ;
+ce résultat ne vaut **pas** validation des seuils de latence. Les booléens de
+conformité de chaque mesure restent dans le rapport.
+
+| Animations | Page | Lecteurs | p95 / p99, ms | Budget p95 500 ms |
+| --- | --- | --- | --- | --- |
+| 1 000 | 12 | 1 | 95 / 110 | Atteint dans cet essai |
+| 1 000 | 50 | 1 | 117 / 297 | Atteint dans cet essai |
+| 1 000 | 12 | 10 | 1 047 / 1 411 | **Dépassé** |
+| 1 000 | 50 | 10 | 1 661 / 2 199 | **Dépassé** |
+| 10 000 | 12 | 1 | 114 / 252 | Atteint dans cet essai |
+| 10 000 | 50 | 1 | 86 / 109 | Atteint dans cet essai |
+| 10 000 | 12 | 10 | 381 / 401 | Atteint dans cet essai |
+| 10 000 | 50 | 10 | 509 / 560 | **Dépassé** |
+
+Cent mesures après trente lectures de chauffe par cas ; pool 10 sans overflow,
+index v276/v304 et statistiques à jour, garde BUM active. **Huit requêtes SQL**
+par page, readiness incluse, indépendamment de 12/50 ; pic des allocations
+Python 0,36–0,57 Mio. Ce pic n’est pas une mesure de RSS. La requête principale
+sur 10 000 animations est ramenée d’environ 1,73 s au premier essai à environ
+4,1 ms après projection et correction du plan ; cela ne suffit pas à expliquer
+ni à valider la latence complète. Les premiers bancs rouges sont conservés.
+
+Limites : machine Windows partagée avec les recettes navigateur, matériel non
+qualifié 2 vCPU/4 Gio, dotations et médias vides dans la fixture ; seulement
+catalogue mesuré, pas encore de banc de latence complet pour indicateur,
+contact et lieu courant. Les grands volumes participations/messages, cinq
+minutes de trafic, charge mixte avec écritures/notifications, paliers 20/40 et
+reprise après saturation ne sont **pas exécutés**. Pour accepter LA-16,
+reprendre le protocole §5 de la conception sur une cible isolée qualifiée,
+profiler les dépassements, corriger puis rejouer sans relever les seuils.
+Le cluster PostgreSQL local dédié est arrêté proprement à la fin des essais.
+
+**Contrôles documentaires finaux.**
+`check_guidance.py --changed --all-markdown` : **20 guides, 647 liens locaux,
+zéro erreur et avertissement** ; `sync_documentation.py --check-sources` :
+**148 documents vérifiés** ; `git diff --check` réussi dans les quatre dépôts
+modifiés. Localeo Pro est propre et inchangé. La copie E41 du portail est
+identique octet pour octet au canonique, SHA256
+`de5b6537b6663319ac5111fe8eb15bba6e04ba69006d494e83f891615842346a` ;
+E42 : `fd58f8ddf27edee80abb01e1ddf83ebab67119db734e440e6fe3d3c8a2a9dcaa`.
+
+**Mise en service distincte.** Appliquer v303 puis v304, livrer les producteurs
+avant leurs lecteurs et vérifier les capacités ; suivre le
+[guide de configuration](../../exploitation/technique/configurer-epic-73.md).
+Les comptes, DNS, préférences de push et collecte analytics ne sont pas activés
+par cette implémentation. Les migrations TEST ne sont pas exécutées.
+
+#### Mise à jour SQL TEST — 8 novembre 2026
+
+À la demande de commit/push de toutes les modifications et de mise à jour SQL,
+la cible TEST est contrôlée par le profil privé `.env.test`, avec garde explicite
+du serveur et du nom de base déjà utilisés pour v302. Le contrôle initial confirme
+**v302**, deux migrations en attente et des empreintes historiques conformes.
+Aucune connexion à la production.
+
+Sauvegarde complète avant écriture au format PostgreSQL personnalisé :
+**66 743 063 octets**, SHA256
+`507bbdc88261e23914570678fe4ee9ba4db59678030b84c5f4d54661929e9702`.
+Inventaire et lecture/décompression complète avec `pg_restore` réussis ; cela ne
+constitue pas une restauration effective de cette sauvegarde. Archive et rapports
+restent dans le stockage privé backend
+`demonstrations/prive/operations/migration-v304-test-20261107/`, hors Git ; le
+nom de ce répertoire conserve la date de préparation, les reçus datent l’exécution.
+
+Le runner canonique `scripts/database/apply_migrations.py` applique ensuite
+**v303_contact_public_animation.sql**, puis
+**v304_projection_planning_catalogue_live.sql**, avec transaction par migration,
+suivi des empreintes et délais SQL/verrou bornés. Contrôles réels après exécution :
+
+- **v304**, aucune migration en attente, **182 contrôles de schéma réussis**.
+- Les capacités `recherche_catalogue`, `indicateur_messages`, `contact_public`
+  et `lieu_courant_pratique` valent toutes **1** selon le code local en lecture
+  seule sur TEST.
+- Nombres de lignes et empreintes des quatre tables métier sources contrôlées
+  sont inchangés : animations, configurations, paramètres d’exploitation et
+  participants. Le backfill ajoute uniquement la projection technique attendue.
+- Aucun contact publié, inscription, notification ou droit ajouté ; aucun
+  parcours HTTP authentifié ni test de charge exécuté sur TEST partagé.
+
+Le profil `documentation-workspace` passe ses dix contrôles lors de cette
+préparation de publication ; le PPTX modifié est une archive valide de douze
+diapositives. Les preuves fonctionnelles datées ci-dessus sont réutilisées sur
+leurs sources inchangées. La mise à jour SQL ne lève pas la réserve **LA-16**.
+Les commits/push applicatifs et leur éventuel déploiement Render restent
+distincts de cette preuve de migration.
+
 ### Règle de clôture actualisée le 1er novembre 2026
 
 La décision utilisateur **E73-DEC-CLOTURE-TESTS**, tracée dans le backlog,

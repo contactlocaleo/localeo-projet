@@ -1,19 +1,27 @@
 # Roadmap produit
 
+**Évolution du 7 novembre 2026 — E73-EVO-LIVE-ADHESION** : prochaine action
+personnelle, continuité inscription/carnet, UI ludique et retour utile dans Live.
+Les 13 recommandations de l’audit sont tracées en trois lots et 17 critères dans
+le [backlog canonique E73](terminees/epic-73-animation-et-ou-coffrets-backlog.md#évolution-du-7-novembre-2026--adhésion-à-localeo-live).
+Spécification fonctionnelle et conception technique préparées (contrats, permissions,
+migrations, budgets et recette), trois lots implémentés localement ; qualification
+de charge LA-16 encore partielle. E73 reste historiquement terminée.
+
 Clôture E70 du **2 novembre 2026** : **Terminée**, 34 critères vérifiés sur tests unitaires, d’intégration et fonctionnels selon **E70-DEC-CLOTURE-TESTS**. Les preuves externes sont hors des conditions de clôture, conformément à la décision utilisateur. [Bilan et livraison](../specifications/epic-70-validation-pin/verification-livraison.md). Aucun commit, push ni déploiement effectué par cette clôture.
 
 E72 — accès salariés est terminée le 1er novembre 2026 selon E72-DEC-CLOTURE-TESTS : tests unitaires, d'intégration et fonctionnels des 22 critères vérifiés. Le [bilan E72](../specifications/epic-72-acces-salaries/verification-livraison.md) distingue la clôture technique des actions de mise en service. Aucun déploiement effectué.
 
-## État global consolidé au 2 novembre 2026
+## État global consolidé au 6 novembre 2026
 
-Le tronc commun comprend 76 identifiants : 62 epics terminees, 9 a faire,
-2 en cours, 2 abandonnees et 1 fusionnee. L'Epic 61 est absorbee par l'Epic 60.
+Le tronc commun comprend 79 identifiants : 62 epics terminees, 10 a faire,
+4 en cours, 2 abandonnees et 1 fusionnee. L'Epic 61 est absorbee par l'Epic 60.
 Les documents sont ranges par etat dans l'[index de la roadmap](README.md).
 
 | Etat | Epics |
 | --- | --- |
-| A faire | `EPIC-54`, `EPIC-58`, `EPIC-62`, `EPIC-64`, `EPIC-67`, `EPIC-71`, `EPIC-74`, `EPIC-75`, `EPIC-76` |
-| En cours | `EPIC-55`, `EPIC-68` |
+| A faire | `EPIC-54`, `EPIC-58`, `EPIC-62`, `EPIC-64`, `EPIC-67`, `EPIC-75`, `EPIC-76`, `EPIC-77`, `EPIC-78`, `EPIC-79` |
+| En cours | `EPIC-55`, `EPIC-68`, `EPIC-71`, `EPIC-74` |
 | Termine | 62 epics : toutes les autres epics de `EPIC-01` a `EPIC-60`, et `EPIC-63`/`EPIC-65`/`EPIC-66`/`EPIC-69`/`EPIC-70`/`EPIC-72`/`EPIC-73`, hors `EPIC-05` et `EPIC-12` |
 | Abandonne | `EPIC-05` : QR commercant remplace par l'Epic 10 ; `EPIC-12` : flux manuel decommissionne par l'Epic 39 |
 | Fusionnee | `EPIC-61` dans `EPIC-60` ; non comptee comme terminee |
@@ -27,7 +35,7 @@ un seul fichier par sujet. Trois identifiants applicatifs complètent ce tronc :
 | [EPIC-MARKETPLACE-54](a-faire/epic-marketplace-54-harmonisation-identite-visuelle-marketplace-backlog.md) | Identité visuelle ; distinct du calendrier de l'Avent 54 | À faire (classement courant ; implémentation locale documentée, revue et recette attendues) |
 | [EPIC-PRES-CONTENU-001](terminees/epic-animation-edition-prestations.md) | Édition directe des prestations ; le futur sas reste dans l'EPIC 62 | Terminée (parcours existant) |
 
-Le total consolidé est de **79 identifiants : 64 terminés, 10 à faire, 2 en cours,
+Le total consolidé est de **82 identifiants : 64 terminés, 11 à faire, 4 en cours,
 2 abandonnés et 1 fusionné**. L'ancien numéro local Marketplace 53 (pagination)
 est rattaché à l'EPIC 57, sans ajouter d'identifiant ni le confondre avec la tombola.
 
@@ -39,6 +47,25 @@ Le classement du 15 septembre corrige les anciens libelles globaux des Epics
 la confirmation produit de l'utilisateur le 15 septembre 2026.
 
 Derniere evolution suivie :
+
+- [EPIC 79 — Escape Game assisté par l’IA](a-faire/epic-79-escape-game-assiste-ia-backlog.md) :
+  cadrage du 6 novembre, 7 US et 18 critères cibles ; préparation IA selon le processus E55,
+  contrôle et validation avant publication, parcours dans la commune et les
+  commerces guidé par Live, une progression sur un téléphone, seul ou en famille.
+  Quatre arbitrages résolus, quatre ouverts ; état À faire, sans implémentation.
+
+- [EPIC 78 — Le jeu des vitrines](a-faire/epic-78-jeu-des-vitrines-backlog.md) :
+  cadrage du 6 novembre, 6 US et 16 critères cibles ; trouver un intrus dans
+  une vitrine réelle, notamment à Noël et à Pâques, avec préparation et carnet
+  Live mobile. Réponses, gains, responsabilités, passages et offre à arbitrer ;
+  état À faire, sans spécification détaillée ni implémentation.
+
+- [EPIC 77 — Le Juste Prix Local](a-faire/epic-77-juste-prix-local-backlog.md) :
+  cadrage du 6 novembre, 8 US et 20 critères cibles ; produit/prix proposé par
+  le commerçant dans Pro et validé par l'organisateur, réponse définitive,
+  tolérance en euros et seuil de commerces réussis pour le tirage existant.
+  Passages validés paramétrables par le gestionnaire ; quatre arbitrages
+  ouverts. État À faire, spécification détaillée et implémentation à venir.
 
 - [EPIC 76 — Impersonification support Pro et Animation](a-faire/epic-76-impersonification-support-pro-animation-backlog.md) :
   cadrage du 1er novembre, 18 critères cibles ; accès temporaire depuis ERP dans

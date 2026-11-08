@@ -1,5 +1,39 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+## Évolution du 7 novembre 2026 — adhésion à Localeo Live
+
+**E73-EVO-LIVE-ADHESION** intègre les 13 recommandations A01–A13 du
+[rapport d’audit habitant](../../audits/marketplace/localeo-live-adhesion-ux-ui-2026-11-07.md).
+Objectif : un compagnon de sortie locale qui accompagne la prochaine action,
+valorise les progrès et donne une raison utile de revenir.
+
+Les **17 critères ajoutés E73-LA-01 à E73-LA-17**, les refus, la matrice de
+traçabilité et les impacts sont dans la
+[spécification canonique Live](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-7-novembre-2026--adhésion-habitant-e73-evo-live-adhesion).
+Les 63 critères initiaux et les identifiants des extensions précédentes restent
+inchangés. LC11 évolue vers la recherche serveur complète ; l’accueil personnel
+est étendu aux participations non urgentes. Les preuves anciennes restent datées.
+La [conception détaillée](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-adhesion-conception.md)
+fixe les contrats, permissions, budgets, migration et tests des trois lots.
+
+| Lot | Résultat attendu | Critères ajoutés | État propre à l’évolution |
+| --- | --- | --- | --- |
+| 1 — Accompagner | Prochaine action, inscription/e-mail/carnet guidés, cartes courtes, favoris et messages contextualisés | LA-01/02/03/04, parties autonomes 05/06 | Implémenté localement ; fenêtres bornées et couverture partielle explicite, tests Node et navigateur au bilan. |
+| 2 — Participer avec plaisir | Réussites perceptibles, lots actionnables, cohérence UI, visite et aide | LA-07/08/10/11/12 | Implémenté localement ; contact public versionné et lieu courant personnel, migrations/restauration et parcours vérifiés. |
+| 3 — Revenir utilement | Recherche serveur, nouvelles/rendez-vous, bilan personnel et mesure | LA-05/06/09/13/17 | Implémenté localement ; contrats alignés et recherche indexée ; qualification de charge complète encore ouverte. |
+| Transverse | Mobile, accessibilité, reprise réseau, droits et lectures bornées | LA-14/15/16 | Vérifications locales consignées ; LA-16 partiel, charge mixte/saturation et environnement de référence non qualifiés. |
+
+Après cadrage et spécification, la demande suivante du 7 novembre engage son
+implémentation locale. Les trois lots sont réalisés ; les résultats et les
+limites qui empêchent de déclarer la fin sont consignés au
+[bilan E73](../../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md).
+**Clôture historique E73 conservée ; cette extension n’est pas déployée.**
+Conformément à E73-DEC-CLOTURE-TESTS, les tests unitaires, d’intégration et de
+parcours conditionneront sa fin ; les essais habitants et mesures d’adhésion
+restent un suivi produit distinct. Pas de compte habitant nouveau, ni de règle
+de gain, consentement ou notification modifiée implicitement. Les pistes
+optionnelles hors première réalisation sont explicitées dans la spécification.
+
 ## Décision de clôture par les tests — 1er novembre 2026
 
 **E73-DEC-CLOTURE-TESTS**, décision explicite de l’utilisateur : « les conditions

@@ -1,5 +1,12 @@
 # Roadmap par etat
 
+**7 novembre 2026 — extension E73-EVO-LIVE-ADHESION** : 13 recommandations de
+l’audit Live reprises en trois lots et 17 critères complémentaires, spécifiés
+fonctionnellement et techniquement, implémentés localement ; qualification de
+charge LA-16 encore partielle, résultats au bilan.
+[Backlog E73](terminees/epic-73-animation-et-ou-coffrets-backlog.md#évolution-du-7-novembre-2026--adhésion-à-localeo-live).
+Clôture historique E73 et compteurs d’epics inchangés ; cette extension conserve ses propres preuves et limites.
+
 Clôture E70 du **2 novembre 2026** : **Terminée**, 34 critères vérifiés sur tests unitaires, d’intégration et fonctionnels selon **E70-DEC-CLOTURE-TESTS**. Les preuves externes sont hors des conditions de clôture, conformément à la décision utilisateur. [Bilan et livraison](../specifications/epic-70-validation-pin/verification-livraison.md). Aucun commit, push ni déploiement effectué par cette clôture.
 
 E72 — accès salariés est terminée le 1er novembre 2026 selon E72-DEC-CLOTURE-TESTS : tests unitaires, d'intégration et fonctionnels des 22 critères vérifiés. Le [bilan E72](../specifications/epic-72-acces-salaries/verification-livraison.md) distingue la clôture technique des actions de mise en service. Aucun déploiement effectué.
@@ -21,13 +28,13 @@ Le bilan conserve la dette préexistante de lecture bornée et les actions de li
 
 Classement consolidé le 18 septembre 2026, complété le 22 octobre par les EPIC 74 et 75. Les backlogs des applications sont
 réunis dans les dossiers d'état, avec un seul fichier par EPIC. Le suivi inclut
-les 76 identifiants du tronc commun et trois identifiants applicatifs distincts,
-après ajout de l'EPIC 76 le 1er novembre 2026.
+les 79 identifiants du tronc commun et trois identifiants applicatifs distincts,
+après ajout des EPIC 77 à 79 le 6 novembre 2026.
 
 | Etat | Epics | Dossier |
 | --- | ---: | --- |
 | Terminees | 64 | [terminees/](terminees/README.md) |
-| A faire | 8 | [a-faire/](a-faire/README.md) |
+| A faire | 11 | [a-faire/](a-faire/README.md) |
 | En cours | 4 | [en-cours/](en-cours/README.md) |
 | Abandonnees | 2 | [abandonnees/](abandonnees/README.md) |
 | Fusionnee | 1 | Epic 61 reprise dans l'[Epic 60](terminees/epic-60-vision-360-commercialisation-backlog.md) |
@@ -122,6 +129,28 @@ des epics terminees. Aucun fichier autonome de l'Epic 61 n'est recree.
 
 ## Contributions applicatives et collisions de numéros
 
+Le 6 novembre, l'[EPIC 79 — Escape Game assisté par l’IA](a-faire/epic-79-escape-game-assiste-ia-backlog.md)
+cadre une mission narrative, des énigmes et une résolution finale sur le socle
+E55, dont le processus de préparation IA et validation avant publication est repris.
+Autres choix confirmés :
+terrain commune/commerces guidé par Live et une progression sur un téléphone,
+seul ou en famille. Sept US, dix-huit critères cibles, quatre arbitrages ouverts.
+État **À faire**, sans spécification détaillée ni implémentation.
+
+Le 6 novembre, l'[EPIC 78 — Le jeu des vitrines](a-faire/epic-78-jeu-des-vitrines-backlog.md)
+cadre la recherche d'un intrus dans les vitrines participantes, notamment à Noël
+et à Pâques : préparation matérielle, parcours Live mobile, réponses et progression.
+Six US, seize critères cibles ; modalités de réponse, gains, préparation,
+passages et offre restent à arbitrer. État **À faire**, cadrage sans implémentation.
+
+Le 6 novembre, l'[EPIC 77 — Le Juste Prix Local](a-faire/epic-77-juste-prix-local-backlog.md)
+cadre un produit/prix proposé par commerce dans Pro puis approuvé par l'organisateur,
+une estimation définitive par habitant/commerce, une tolérance en euros et un
+seuil de commerces réussis pour accéder au tirage existant. Le gestionnaire
+choisit si les passages validés sont requis. Huit US, vingt critères cibles ;
+portée de la tolérance, restitution, incidents et offre commerciale restent
+à spécifier. État **À faire**, sans implémentation.
+
 Le 1er novembre, l'[EPIC 76 — Impersonification support Pro et Animation](a-faire/epic-76-impersonification-support-pro-animation-backlog.md)
 cadre l'ouverture depuis l'ERP d'une session temporaire dans le contexte d'un
 compte client : cible explicite, droits bornés, bandeau support, révocation et
@@ -190,6 +219,9 @@ précise la provenance et les divergences historiques conservées.
 | 74 | En cours | [Tombola publique](en-cours/epic-74-tombola-publique-backlog.md) : spécification du 3 novembre ; QR partageable, inscription directe par e-mail et règlement, trois modes de lots, quota standard et suivi commune Live ; 8 US, 16 critères ; tests locaux réussis et v289 appliquée à TEST |
 | 75 | A faire | [Mots croisés assistés par l’IA](a-faire/epic-75-mots-croises-assistes-ia-backlog.md) : [spécification V1](../specifications/epic-75-mots-croises-assistes-ia/README.md) du 4 novembre ; 8 US, 18 critères, neuf arbitrages résolus ; module indépendant, IA externe/import, grille validée et passages commerçants obligatoires ; tests prévus, sans implémentation |
 | 76 | A faire | [Impersonification support Pro et Animation](a-faire/epic-76-impersonification-support-pro-animation-backlog.md) : accès temporaire depuis ERP, 18 critères cibles ; consultation par défaut et intervention explicite/tracée retenues, droits, actions et modalités à arbitrer, sans implémentation |
+| 77 | A faire | [Le Juste Prix Local](a-faire/epic-77-juste-prix-local-backlog.md) : cadrage du 6 novembre, 8 US et 20 critères cibles ; produit/prix proposé dans Pro et approuvé par l'organisateur, estimation unique, tolérance en euros, seuil donnant accès au tirage, passages paramétrables ; quatre arbitrages ouverts, sans implémentation |
+| 78 | A faire | [Le jeu des vitrines](a-faire/epic-78-jeu-des-vitrines-backlog.md) : cadrage du 6 novembre, 6 US et 16 critères cibles ; intrus dans une vitrine réelle, Noël/Pâques et autres thèmes, préparation et Live mobile ; sept arbitrages ouverts, sans implémentation |
+| 79 | A faire | [Escape Game assisté par l’IA](a-faire/epic-79-escape-game-assiste-ia-backlog.md) : 7 US et 18 critères cibles ; préparation IA selon le processus de la chasse E55, validation avant publication, terrain commune/commerces et progression sur un téléphone confirmés ; quatre arbitrages résolus, quatre ouverts, sans implémentation |
 | Autres identifiants du tronc commun | Terminees | Statut produit consolide conserve ; les anciennes mentions de stories a faire ne rouvrent pas ces epics. |
 
 Les changements des Epics 5, 12 et 47 corrigent des incoherences entre les

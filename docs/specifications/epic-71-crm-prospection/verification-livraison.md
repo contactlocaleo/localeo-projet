@@ -2,14 +2,56 @@
 
 [Spécification V1](README.md), [backlog canonique](../../roadmap/en-cours/epic-71-crm-prospection-animation-coffrets-pro-backlog.md). **Implémentation locale et vérification en cours**. Le bilan ci-dessous distingue les tests réalisés des réserves. Aucun import réel ni envoi fournisseur. Les sections historiques de spécification restent datées. La carte reste en V1 sur confirmation utilisateur ; CSV standard seul et report de CA-24 (import spécifique Gironde) sont également confirmés.
 
+## Incident TEST — projection de classement absente, 6 novembre 2026
+
+Trace : `UndefinedTable: relation "crm_priorite_configuration_projection"
+does not exist` depuis `priorite_api.recherche` / `actualiser_ordre`, profil
+`ANIMATION_EPCI_1`. Le backend `868ce6f` attend v299–v302, tandis que la cible
+TEST contrôlée via `.env.test` était restée en **v298**, schéma `public`.
+Le rejeu de la recherche avec le repository livré reproduit l'erreur PostgreSQL
+**42P01** avant réparation ; le plan ne contient que les quatre migrations
+attendues. Aucun changement du barème ni patch applicatif nécessaire.
+
+Réparation sur TEST avec le runner canonique `scripts/database/apply_migrations.py` :
+**v299_crm_revisions_qualification.sql**, **v300_crm_projection_ordre_priorite.sql**,
+**v301_crm_compteurs_dossiers.sql**, **v302_crm_invalidations_actualisation.sql**,
+appliquées dans cet ordre, avec vérification des empreintes historiques et
+délais SQL/verrous bornés. Sauvegarde complète préalable au format PostgreSQL
+personnalisé : **64 535 089 octets**, ACL conservées, empreinte SHA-256 enregistrée,
+inventaire et lecture/décompression complète `pg_restore` réussis. Cette lecture
+ne constitue pas une restauration effective de l'archive.
+
+Vérifications réelles après migration :
+
+- **v302**, zéro migration en attente ; **83 contrôles de schéma CRM** réussis,
+  comprenant colonnes, index, vue, séquence, fonctions et triggers actifs.
+- Recherche signalée réussie : **23 EPCI**. Recherche communes : **25 résultats**
+  puis **25** sur la page suivante, sans identifiant commun entre les deux pages.
+- Nombre de lignes et empreintes du contenu de toutes les tables CRM
+  préexistantes inchangés. La colonne technique additive `ordre_creation` de
+  v302 est exclue de la comparaison du contenu existant ; sa présence relève
+  du contrôle de schéma. Aucun résultat de priorité historique réécrit.
+- Les sondes de recherche utilisent le repository applicatif dans des
+  transactions annulées, sans publication de calcul, commande métier, envoi
+  d'e-mail ni modification de droits. Le parcours HTTP/navigateur authentifié
+  n'a pas été rejoué. Production non accédée.
+
+Sauvegarde et rapports privés backend :
+`demonstrations/prive/operations/correctif-crm-projection-v302-20261106/`, hors
+Git. Le [diagnostic d'exploitation](exploitation.md#configuration) précise le
+cas v300 absent et le rattrapage complet v299–v302. Configurer sur Render TEST
+`LOCALEO_SCHEMA_READINESS_ENFORCE=true` évite d'ouvrir les écrans sur une base
+incomplète ; ce paramètre distant n'a pas été changé par cette opération.
+
 ## Correctifs de l’audit performance et sécurité — 6 novembre 2026
 
 Corrections locales sur le backend `ccf71de` et son arbre de travail, avec les
 modifications PWA préexistantes conservées. L’audit privé
 `tmp/audits/crm-performance-securite-2026-11-06.md` identifie les écarts
-CRM-AUD-01 à 08. Aucun accès à TEST/production, acquisition fournisseur, commit,
-push ou déploiement réalisé pour ces correctifs. Les migrations additives
-v299 à v302 restent à appliquer sur une cible réelle selon
+CRM-AUD-01 à 08. Ces vérifications locales précèdent le commit et le push du
+backend `868ce6f` ; elles n'ont accédé ni à TEST/production ni aux fournisseurs.
+L'application ultérieure de v299 à v302 sur TEST et ses preuves sont consignées
+dans la section d'incident ci-dessus. Les autres cibles suivent
 l’[exploitation](exploitation.md).
 
 | Écart | Correction et preuve locale |

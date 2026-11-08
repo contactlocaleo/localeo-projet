@@ -1,36 +1,44 @@
 # Suivi backlog
 
+**E73-EVO-LIVE-ADHESION — 7 novembre 2026** : 13 recommandations d’audit,
+17 critères complémentaires, trois lots implémentés localement ; qualification
+de charge LA-16 encore partielle. Les contrats,
+permissions, migrations et budgets de performance sont fixés dans la conception
+détaillée reliée à la
+[spécification Live](../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-7-novembre-2026--adhésion-habitant-e73-evo-live-adhesion).
+Les résultats applicatifs sont consignés au bilan E73 ; clôture historique et compteurs inchangés.
+
 Clôture E70 du **2 novembre 2026** : **Terminée**, 34 critères vérifiés sur tests unitaires, d’intégration et fonctionnels selon **E70-DEC-CLOTURE-TESTS**. Les preuves externes sont hors des conditions de clôture, conformément à la décision utilisateur. [Bilan et livraison](../specifications/epic-70-validation-pin/verification-livraison.md). Aucun commit, push ni déploiement effectué par cette clôture.
 
 E72 — accès salariés est terminée le 1er novembre 2026 selon E72-DEC-CLOTURE-TESTS : tests unitaires, d'intégration et fonctionnels des 22 critères vérifiés. Le [bilan E72](../specifications/epic-72-acces-salaries/verification-livraison.md) distingue la clôture technique des actions de mise en service. Aucun déploiement effectué.
 
-Mise à jour du classement : 2026-11-02 (EPIC-71, EPIC-74, EPIC-75 et EPIC-76 à faire ; EPIC-65, EPIC-69, EPIC-70, EPIC-72 et EPIC-73 terminées ; EPIC-55 et EPIC-68 en cours)
+Mise à jour du classement : 2026-11-06 (ajout des EPIC-77 à EPIC-79 à faire ; EPIC-55, EPIC-68, EPIC-71 et EPIC-74 en cours selon la roadmap commune ; clôtures historiques conservées)
 
 ## Synthese
 
 Évolution transverse du 29 septembre 2026 : [PWA-20260929 — installation et mise à jour](../specifications/installation-mise-a-jour-pwa.md), appliquée aux sept PWA existantes. Les états et clôtures historiques des EPIC restent inchangés ; preuves locales et recette appareil sont distinguées dans la spécification.
 
-- Identifiants EPIC suivis : 79 ; 76 du tronc commun et 3 identifiants applicatifs distincts.
-- EPICs a faire : 10 ; EPICs en cours : 2 (EPIC-55 et EPIC-68).
+- Identifiants EPIC suivis : 82 ; 79 du tronc commun et 3 identifiants applicatifs distincts.
+- EPICs a faire : 11 ; EPICs en cours : 4 (EPIC-55, EPIC-68, EPIC-71 et EPIC-74).
 - EPICs fusionnees : 1 (EPIC-61 vers EPIC-60).
 - EPICs terminees : 64 (62 du tronc commun et 2 applicatives) ; EPICs abandonnees : 2.
 - US / PRD detaillees dans le tableau historique : 415, jusqu'a `EPIC-45`.
 - Source prioritaire : fichier backlog dedie quand disponible, sinon `product-roadmap.md`.
-- Référence de pilotage : EPIC-55 et EPIC-68 sont en cours. EPIC-70 et EPIC-72 sont terminées sur tests. EPIC-65 est terminée après revue des dix critères ; EPIC-69 après validation CA-18 ; EPIC-66 après confirmation utilisateur. EPIC-54, EPIC-58, EPIC-62,
-  EPIC-64, EPIC-67, EPIC-71, EPIC-74, EPIC-75, EPIC-76 et EPIC-MARKETPLACE-54 sont à faire. EPIC-47 est terminée,
+- Référence de pilotage : EPIC-55, EPIC-68, EPIC-71 et EPIC-74 sont en cours. EPIC-70 et EPIC-72 sont terminées sur tests. EPIC-65 est terminée après revue des dix critères ; EPIC-69 après validation CA-18 ; EPIC-66 après confirmation utilisateur. EPIC-54, EPIC-58, EPIC-62,
+  EPIC-64, EPIC-67, EPIC-75, EPIC-76, EPIC-77, EPIC-78, EPIC-79 et EPIC-MARKETPLACE-54 sont à faire. EPIC-47 est terminée,
   clôture produit confirmée. EPIC-05 et EPIC-12 sont abandonnées ;
   EPIC-61 est fusionnée dans EPIC-60. Les autres EPIC du tronc commun sont terminées.
 - Classement et motifs : [index de la roadmap](README.md).
 - Le tableau detaille des US ci-dessous reste un historique consolide. Pour les
-  epics 46 a 76, les backlogs dedies portent le detail et le tableau `Sources
+  epics 46 a 79, les backlogs dedies portent le detail et le tableau `Sources
   consolidees` porte l'etat global courant.
 
 ### Repartition des EPICs par etat retenu
 
 | Etat | Nombre |
 | --- | ---: |
-| A faire | 10 |
-| En cours | 2 |
+| A faire | 11 |
+| En cours | 4 |
 | Abandonne | 2 |
 | Fusionnee | 1 |
 | Termine | 64 |
@@ -49,6 +57,22 @@ applicatifs ne contiennent plus de copies de backlogs d'EPIC. Les états des
 ci-dessous conservent ce périmètre initial.
 
 ### Epics restant a livrer
+
+Nouvelle entrée à faire : [EPIC-79 — Escape Game assisté par l’IA](a-faire/epic-79-escape-game-assiste-ia-backlog.md),
+7 US et 18 critères cibles ; préparation IA et validation selon le processus de la chasse E55,
+terrain commune/commerces guidé par Live et partie sur un téléphone confirmés.
+Quatre arbitrages résolus, quatre ouverts ; aucun développement engagé par ce cadrage.
+
+Nouvelle entrée à faire : [EPIC-78 — Le jeu des vitrines](a-faire/epic-78-jeu-des-vitrines-backlog.md),
+cadrage du 6 novembre, 6 US et 16 critères cibles ; intrus dans une vitrine réelle,
+préparation et découverte mobile dans Live. Sept arbitrages ouverts ; aucun
+développement ou test métier exécuté par le cadrage.
+
+Nouvelle entrée à faire : [EPIC-77 — Le Juste Prix Local](a-faire/epic-77-juste-prix-local-backlog.md),
+cadrage du 6 novembre, 8 US et 20 critères cibles ; produit/prix proposé dans Pro
+puis validé par l'organisateur, estimation définitive, tolérance en euros et
+seuil de commerces réussis donnant accès au tirage. Passages paramétrables ;
+quatre arbitrages ouverts, spécification détaillée et développement à venir.
 
 Nouvelle entrée à faire : [EPIC-76 — Impersonification support Pro et Animation](a-faire/epic-76-impersonification-support-pro-animation-backlog.md),
 18 critères cibles ; accès temporaire depuis ERP, compte et contexte explicites,
@@ -648,6 +672,9 @@ anciennes US restent historiques.
 | EPIC-71 | En cours | [backlog](en-cours/epic-71-crm-prospection-animation-coffrets-pro-backlog.md) |
 | EPIC-72 | Terminée | [backlog](terminees/epic-72-acces-salaries-validation-localeo-pro-backlog.md) |
 | EPIC-73 | Terminée | [backlog](terminees/epic-73-animation-et-ou-coffrets-backlog.md) ; 38 US, 63 critères, dix-huit arbitrages résolus, aucun ouvert recensé ; lots libres externes/numériques, modules (import, chasse, Web Push) et compléments SaaS (autonomie, accompagnement, valeur/coûts, réversibilité/reprise), cadrage des 14–15 octobre 2026 |
-| EPIC-74 | A faire | [backlog](en-cours/epic-74-tombola-publique-backlog.md) ; tombola publique standard sans commerçant, QR de participation, supports de stand et audience future ; 8 US, 16 critères cibles, six groupes d'arbitrages, cadrage du 22 octobre 2026 |
+| EPIC-74 | En cours | [backlog](en-cours/epic-74-tombola-publique-backlog.md) ; tombola publique standard sans commerçant, QR de participation, supports de stand et audience future ; 8 US, 16 critères cibles, cadrage du 22 octobre et implémentation locale suivie depuis le 3 novembre 2026 |
 | EPIC-75 | A faire | [backlog](a-faire/epic-75-mots-croises-assistes-ia-backlog.md) ; mots croisés assistés par l’IA, jeu payant sur le modèle de la chasse ; 8 US, 18 critères cibles, neuf groupes d’arbitrages dont un résolu ; décisions du 23 octobre : indices chez les commerçants, préparation Localeo validée par l’organisateur, grille correcte obligatoire pour le tirage |
 | EPIC-76 | A faire | [backlog](a-faire/epic-76-impersonification-support-pro-animation-backlog.md) ; session support temporaire depuis ERP vers Pro et Animation, 18 critères cibles ; consultation par défaut et intervention explicite/tracée retenues ; droits, actions et modalités à arbitrer |
+| EPIC-77 | A faire | [backlog](a-faire/epic-77-juste-prix-local-backlog.md) ; Le Juste Prix Local, 8 US et 20 critères cibles ; proposition Pro et validation organisatrice, estimation unique, tolérance en euros, seuil pour le tirage et passages paramétrables ; quatre arbitrages ouverts |
+| EPIC-78 | A faire | [backlog](a-faire/epic-78-jeu-des-vitrines-backlog.md) ; Le jeu des vitrines, 6 US et 16 critères cibles ; intrus dans les vitrines, Noël/Pâques et autres thèmes, préparation et Live mobile ; sept arbitrages ouverts |
+| EPIC-79 | A faire | [backlog](a-faire/epic-79-escape-game-assiste-ia-backlog.md) ; Escape Game assisté par l’IA, 7 US et 18 critères cibles ; préparation IA et validation selon la chasse E55, terrain avec Live et un téléphone confirmés ; quatre arbitrages résolus et quatre ouverts |

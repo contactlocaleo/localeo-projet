@@ -2,6 +2,8 @@
 
 Constats datés conservés par application. Un audit ancien ne décrit pas automatiquement l’état actuel.
 
+- [Localeo Live — parcours, UX/UI et adhésion habitant — 7 novembre 2026](marketplace/localeo-live-adhesion-ux-ui-2026-11-07.md)
+
 - [Typographie des sept applications de gestion — 3 novembre 2026](typographie-applications-gestion-2026-11-03.md)
 - [Ergonomie des applications de gestion Pro et Animation — 1er novembre 2026](ergonomie-gestion-pro-animation-2026-11-01.md)
 

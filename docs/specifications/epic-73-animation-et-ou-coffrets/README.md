@@ -1,5 +1,17 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+Évolution du **7 novembre 2026 — E73-EVO-LIVE-ADHESION** : les 13 recommandations
+de l’audit habitant sont intégrées en trois lots et **17 critères E73-LA-01 à 17**.
+La [spécification Live](localeo-live-entree-unique.md#évolution-du-7-novembre-2026--adhésion-habitant-e73-evo-live-adhesion)
+décrit parcours, invariants conservés, impacts et tests à produire. La
+[conception détaillée](localeo-live-adhesion-conception.md) fixe les contrats,
+permissions, migrations, budgets et scénarios de recette des 13 recommandations.
+Les trois lots sont implémentés localement ; résultats et qualification de
+performance LA-16 encore partielle sont consignés dans le
+[bilan](verification-livraison.md#réalisation-locale-de-lévolution).
+Cette évolution n’est pas déclarée terminée ni déployée. La clôture
+historique ci-dessous est conservée.
+
 Décision du **1er novembre 2026 — E73-DEC-CLOTURE-TESTS** : la clôture de
 développement repose sur les tests exécutés. Pilote, validation humaine,
 bascule des domaines et exercice hébergé restent suivis comme prérequis
@@ -92,6 +104,7 @@ décrit l'assistant, le site public, les nouvelles éditions, les mesures et les
 | [Dotation et lots](dotation-lots.md) | Trois parcours, modèles/exemplaires, tirages/suppléants, bons, QR/PIN, corrections, emails et refus |
 | [Modules, souscriptions, import et communication](modules-souscriptions-import-communication.md) | Catalogue et droits, prix/quotas/prorata, paiement/renouvellement, import avec deltas, campagnes Live/Web Push, coûts/budgets |
 | [Périmètres et parcours SaaS](perimetres-parcours-saas.md) | OnBoard/Pro, équipe multi-organisations, site dédié, préparation/support, nouvelle édition, résultats et réversibilité |
+| [Adhésion habitant Live — conception](localeo-live-adhesion-conception.md) | 13 recommandations, contrats cibles, permissions, migration contact public, performance et tests des 17 critères LA |
 | [Vérification et livraison](verification-livraison.md) | Matrice de 63 critères, 12 familles de fixtures, dépendances, migration/pilote, restauration et preuves à produire |
 
 Chaque chapitre distingue l’existant lu dans le code et les nouveaux contrats à implémenter. Les OpenAPI générés existants ne sont pas modifiés pour leur faire annoncer des routes encore absentes. À l’implémentation, mettre à jour producteur, schémas générés et lecteurs ensemble.
