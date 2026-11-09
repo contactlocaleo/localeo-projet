@@ -9095,6 +9095,11 @@
         "security": [
           {
             "XApiKey": []
+          },
+          {
+            "AdminSessionCookie": [],
+            "ManualBatchMode": [],
+            "ErpCsrfToken": []
           }
         ]
       }
@@ -9154,6 +9159,11 @@
         "security": [
           {
             "XApiKey": []
+          },
+          {
+            "AdminSessionCookie": [],
+            "ManualBatchMode": [],
+            "ErpCsrfToken": []
           }
         ]
       }
@@ -9213,6 +9223,11 @@
         "security": [
           {
             "XApiKey": []
+          },
+          {
+            "AdminSessionCookie": [],
+            "ManualBatchMode": [],
+            "ErpCsrfToken": []
           }
         ]
       }
@@ -9260,6 +9275,11 @@
         "security": [
           {
             "XApiKey": []
+          },
+          {
+            "AdminSessionCookie": [],
+            "ManualBatchMode": [],
+            "ErpCsrfToken": []
           }
         ]
       }
@@ -17656,6 +17676,18 @@
         "in": "cookie",
         "name": "session",
         "description": "Cookie signé de session interne : admin historique ou référence opaque de session nominative E69. Les capacités et périmètres sont relus côté serveur. Le nom historique du schéma ne confère aucun privilège admin."
+      },
+      "ManualBatchMode": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-Batch-Manual",
+        "description": "Valeur 1 pour un lancement manuel POST du catalogue, réservé à la session ADMIN historique."
+      },
+      "ErpCsrfToken": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-CSRF-Token",
+        "description": "Jeton CSRF de la session ERP obtenu depuis /internal/erp/api/contexte."
       },
       "BearerAuth": {
         "type": "http",

@@ -2,6 +2,48 @@
 
 [Spécification V1](README.md), [backlog canonique](../../roadmap/en-cours/epic-71-crm-prospection-animation-coffrets-pro-backlog.md). **Implémentation locale et vérification en cours**. Le bilan ci-dessous distingue les tests réalisés des réserves. Aucun import réel ni envoi fournisseur. Les sections historiques de spécification restent datées. La carte reste en V1 sur confirmation utilisateur ; CSV standard seul et report de CA-24 (import spécifique Gironde) sont également confirmés.
 
+## Correctif local — lancement manuel des batchs, 9 novembre 2026
+
+Demande : pouvoir déclencher tous les batchs depuis **Batchs exploitation**.
+Le catalogue contient 31 traitements, mais la page ne proposait que 12 actions
+et les quatre batchs CRM étaient déclarés non manuels. Reproduction avant
+correction : un POST manuel authentifié par session ADMIN et CSRF était refusé
+avec `API key missing` sur la route technique.
+
+Sur la base backend `39d03d8` avec changements locaux : les 31 batchs sont
+autorisés manuellement ; les 19 nouveaux formulaires reprennent paramètres,
+bornes et valeurs par défaut depuis le contrat HTTP réel. Les 12 parcours
+historiques restent compatibles. La vue SQLAdmin utilise le contrat de son
+application FastAPI parente, et non celui de l'application Starlette montée.
+
+Les nouvelles actions appellent les mêmes endpoints, compositions et
+`BatchRunner`, avec session ADMIN historique, CSRF et en-tête explicite
+`X-Batch-Manual: 1`. Aucun secret de scheduler dans le navigateur ; clés et
+scopes automatiques inchangés. L'acteur ERP est historisé, y compris dans les
+traitements métier coffrets. Les flags désactivés, bornes de passage, simulations,
+confirmation des lots CSV et verrous communs ne sont pas contournés. Les
+routes voisines, autres scopes et comptes sans autorité restent refusés.
+
+Preuves locales sous le runner isolé Python 3.14 :
+
+- **116 tests réussis** sur batchs/ordonnanceur/HTTP et premières preuves
+  manuelles, puis **18 tests manuels finaux réussis** couvrant notamment session
+  expirée, profil refusé, CSRF/origine, en-tête seul insuffisant, autre scope,
+  refus futur du catalogue, route interne et route protected, acteur persisté
+  et verrou d'un passage automatique conservé.
+- **30 tests réussis** de compatibilité des clés API et publication juridique.
+- **683 contrôles réussis** d'architecture et recensement domaine/use cases.
+- **7 tests UI finaux réussis**, dont catalogue complet, bornes Query/JSON,
+  simulation, vraie route SQLAdmin montée et navigateur 320/1280 ; les 8 tests
+  historiques payouts passent également. Les captures sont relues et les
+  appels navigateur simulés, sans envoi fournisseur ni traitement réel.
+
+Les groupes de tests peuvent se recouvrir et ne forment pas un total distinct.
+Contrat E71 régénéré hors ligne ; guide d'exploitation commun et guides CRM/SaaS
+actualisés. Aucune migration ni adaptation des données de démonstration ou
+des trois frontends nécessaire. **Non déployé** ; aucun lancement sur TEST ou
+production effectué par cette correction.
+
 ## Correctif local — diagnostic du format CSV, 9 novembre 2026
 
 Incident signalé : `LOC-17f1b0aa-9721-48e8-ae53-18981fe0bfda`, message
