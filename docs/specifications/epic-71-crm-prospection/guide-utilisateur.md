@@ -193,7 +193,13 @@ comptages et observations du format 2 restent conservés. Aucun dossier
 
 1. Créez une **source** stable, par exemple `prospection-gironde`, puis réutilisez-la pour chaque mise à jour du même fichier. Les boutons **Sources suivantes/précédentes** donnent accès aux autres sources en conservant votre sélection.
 2. Choisissez **INIT** pour créer uniquement les groupes inconnus ou **UPSERT** pour compléter les informations vides non protégées et ajouter des contacts/dossiers.
-3. Renseignez `code_insee` pour chaque nouveau prospect (commune de Nouvelle-Aquitaine). Choisissez le responsable des nouveaux dossiers et déposez le fichier. Aucun prospect n’est encore créé.
+3. Renseignez `code_insee` pour chaque nouveau prospect (commune de Nouvelle-Aquitaine). Le responsable des nouveaux dossiers est facultatif : conservez **Non attribué** pour les affecter plus tard, ou choisissez un responsable habilité. Aucune affectation automatique à la personne qui importe ; les responsables des dossiers déjà présents sont conservés. Déposez le fichier. Aucun prospect n’est encore créé.
+
+   Si le message demande le modèle CSV alors que votre fichier comporte les
+   colonnes de qualification du modèle à 85 colonnes, vérifiez d'abord le choix
+   **Format 2** dans **Format du fichier**. Le diagnostic `FORMAT_2_REQUIS` indique
+   ce cas explicitement ; réenvoyez le même fichier avec le bon format.
+
 4. Examinez l’aperçu et les ressemblances : rapprochez une fiche existante, confirmez une fiche distincte ou excluez le groupe. Le format 2 distingue aussi compléments, valeurs conservées, observations et références proposées. Si plusieurs observations peuvent devenir la première référence d’un bloc, utilisez **Choisir la référence** pour ce bloc. Une référence déjà retenue reste conservée ; les nouvelles données seront à examiner dans la fiche. Les anomalies indiquent leur motif et les numéros des lignes CSV. Corrigez le fichier puis déposez un nouveau lot avec la même source si nécessaire. Si les données changent entre-temps, un nouvel examen est nécessaire.
 5. Confirmez le plan. Actualisez l’écran pour suivre le traitement en arrière-plan. Gardez l’URL directe `/internal/crm/imports/<identifiant>` et téléchargez son rapport. Cette destination est conservée après reconnexion.
 6. Un traitement interrompu peut être repris par son confirmateur ; les groupes déjà validés ne sont pas rejoués. Les autres personnes habilitées peuvent consulter le lot, mais les actions réservées au confirmateur ne leur sont pas proposées.

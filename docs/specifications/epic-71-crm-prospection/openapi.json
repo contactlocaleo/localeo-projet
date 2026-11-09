@@ -9153,7 +9153,7 @@
         },
         "security": [
           {
-            "AdminSessionCookie": []
+            "XApiKey": []
           }
         ]
       }
@@ -9212,7 +9212,7 @@
         },
         "security": [
           {
-            "AdminSessionCookie": []
+            "XApiKey": []
           }
         ]
       }
@@ -9259,7 +9259,7 @@
         },
         "security": [
           {
-            "AdminSessionCookie": []
+            "XApiKey": []
           }
         ]
       }
@@ -9942,8 +9942,15 @@
             "default": 1
           },
           "responsable_id": {
-            "type": "string",
-            "format": "uuid",
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Responsable Id"
           },
           "precedent_id": {
@@ -9963,8 +9970,7 @@
         "required": [
           "fichier",
           "source_id",
-          "mode",
-          "responsable_id"
+          "mode"
         ],
         "title": "Body_deposer_internal_prospection_imports_post"
       },

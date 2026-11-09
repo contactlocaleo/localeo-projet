@@ -2,6 +2,73 @@
 
 [Spécification V1](README.md), [backlog canonique](../../roadmap/en-cours/epic-71-crm-prospection-animation-coffrets-pro-backlog.md). **Implémentation locale et vérification en cours**. Le bilan ci-dessous distingue les tests réalisés des réserves. Aucun import réel ni envoi fournisseur. Les sections historiques de spécification restent datées. La carte reste en V1 sur confirmation utilisateur ; CSV standard seul et report de CA-24 (import spécifique Gironde) sont également confirmés.
 
+## Correctif local — diagnostic du format CSV, 9 novembre 2026
+
+Incident signalé : `LOC-17f1b0aa-9721-48e8-ae53-18981fe0bfda`, message
+« Utilisez le modèle CSV UTF-8 séparé par des points-virgules ». La référence
+ne donne pas accès aux journaux distants ; le format sélectionné lors de cet
+incident n'est pas établi. Reproduction locale avec les deux CSV préparés :
+format 1 refusé avec ce message, format 2 accepté intégralement
+(2 648 et 1 000 lignes). Aucun défaut UTF-8 ou de séparateur sur ces fichiers.
+
+Le parseur signale désormais `FORMAT_2_REQUIS` si l'en-tête est valide en
+format 2 mais incompatible avec le format 1 choisi. Le message HTTP 422 demande
+de sélectionner **Format 2** puis de relancer l'analyse. Aucun basculement
+automatique de format, aucune tolérance pour des colonnes inconnues, dupliquées
+ou obligatoires absentes. Les erreurs de séparateur restent refusées.
+
+Reproduction avant correction : le nouveau test de diagnostic échoue sur
+`COLONNES_INVALIDES`. Après correction : **744 tests réussis** via le runner
+isolé (architecture, recensements, qualification, parseur et API). Relecture
+des deux fichiers réels : format 2 accepté, format 1 refusé avec le nouveau
+diagnostic. Aucun import réel exécuté et aucune donnée prospect journalisée.
+
+Impacts : backend, tests et documentation E71 ; forme de réponse HTTP et
+en-têtes CSV inchangés. Aucun changement de schéma SQL ni du générateur de
+démonstration pour ce diagnostic. Le correctif précédent du responsable
+facultatif reste distinct et conserve sa migration v305. **Non déployé**.
+
+## Correctif local — responsable d'import facultatif, 9 novembre 2026
+
+Demande : importer les prospects et leurs éventuels dossiers sans devoir choisir
+un responsable. Avant correction, le formulaire et l'API imposaient ce choix,
+le traitement contrôlait aussi une valeur absente et le lot SQL était non nullable.
+Reproduction HTTP avant correction : champ absent ou vide refusé avec 422
+(`responsable_id` requis), champ renseigné accepté.
+
+Correctif testé sur la base backend `1b3e27c` avec modifications locales :
+choix **Non attribué** par défaut, API nullable, contrôle d'habilitation conservé
+pour tout identifiant renseigné, migration additive **v305**. Les dossiers créés
+sans responsable conservent `null`, sans affectation à l'importateur ; les
+affectations existantes restent inchangées en UPSERT. Sources canoniques et
+contrat OpenAPI régénéré dans `localeo-projet` ; aucun changement des colonnes CSV.
+
+Preuves locales sous Python 3.14 et PostgreSQL 18 jetable :
+
+- Runner isolé, architecture, recensements domaine/use cases, règles d'import et
+  contrat HTTP du responsable facultatif : **774 tests réussis**.
+- Sécurité PWA et pagination API des imports : **19 tests réussis** ; quatre
+  avertissements de dépréciation de l'adaptateur datetime SQLite.
+- Imports HTTP, persistance et qualification, hors test de volume : **46 tests
+  réussis**. Formats 1/2, avec/sans dossier, confirmation, interruption/reprise,
+  absence d'affectation automatique, refus d'un responsable non habilité et
+  préservation des affectations au réimport couverts.
+- `node --test tests/frontend/crm-import-responsable.test.mjs` : **1 test réussi**,
+  formulaire réel envoyé avec choix vide puis explicite ; capture locale relue.
+- Import de **10 000 lignes**, relancé seul : **1 test réussi**, dépôt
+  **0,576 s**, aperçu **3,990 s**, total **84,043 s**, pic mémoire additionnel
+  **11,0 Mio**. Le premier passage avec contrôles concurrents avait dépassé
+  le budget du dépôt (**1,043 s** pour un seuil de 1 s) ; aucune assertion
+  ni aucun seuil n'a été modifié.
+- Revue indépendante du diff : aucun problème bloquant identifié. Contrôles de
+  guides et des sources exportées réussis ; aucune ancienne migration modifiée.
+
+Impacts : backend et documentation seulement ; les trois autres applications
+ne consomment pas ce formulaire privé. Le générateur de démonstration conserve
+ses affectations explicites et ne nécessite pas d'adaptation. Aucun rappel,
+envoi, réparation de données ni import réel exécuté. **Non déployé** : appliquer
+v305 avec le code avant d'utiliser le choix facultatif sur un environnement.
+
 ## Incident TEST — projection de classement absente, 6 novembre 2026
 
 Trace : `UndefinedTable: relation "crm_priorite_configuration_projection"

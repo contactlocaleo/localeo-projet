@@ -2,6 +2,37 @@
 
 Version de conception du **17 octobre 2026**, réalisation locale commencée le **18 octobre 2026**. [Dossier](README.md), [architecture](architecture-contrats.md), [critères canoniques](../../roadmap/terminees/epic-73-animation-et-ou-coffrets-backlog.md). La matrice décrit les preuves attendues ; leur exécution effective et leurs limites sont enregistrées par lot dans le [suivi de réalisation](suivi-implementation.md). Un scénario sans preuve enregistrée reste non exécuté. Un lien vérifié ou une revue documentaire ne valide pas un comportement applicatif.
 
+## Correctif local — authentification des batchs techniques, 9 novembre 2026
+
+Incident TEST fourni à **12:18:08 UTC** : `saas.exports.traiter` reçoit
+**HTTP 401 — Admin session required**. Le middleware global excluait à tort
+de ses routes authentifiées par clé les deux tâches SaaS (`exports/traiter`,
+`couts/traiter`) et les trois tâches CRM (`actualisations`, `referentiels`,
+`qualification`). Le refus intervenait avant `require_scope('internal:batch')`.
+Les tests précédents de route SaaS montaient un routeur isolé, sans ce middleware.
+
+Reproduction avant correction sur l'application complète, clé synthétique
+valide et aucune session ERP : même 401 et même message. Correctif sur la base
+backend `1b3e27c` avec changements locaux : ajout des cinq couples **POST et
+chemin exact**, sans exception par préfixe ni modification des dépendances de
+clé. Le batch d'import CSV figurait déjà dans cette liste ; cette trace ne
+démontre pas la cause d'un compteur CRM resté à zéro.
+
+Preuves sous le runner isolé Python 3.14 : **102 tests réussis** sur batchs,
+ordonnanceur, client HTTP et middleware réel ; **682 tests réussis** sur
+architecture et recensements domaine/use cases. Clé valide sans cookie acceptée,
+clés absentes/inconnues/inactives/mauvais scope refusées, GET et chemins voisins
+toujours protégés, alias historique soumis à la clé. Couverture de toutes les
+routes internes du catalogue planifié, client réel de l'ordonnanceur et sécurité
+OpenAPI vérifiés. Aucun worker métier réel, envoi fournisseur ni donnée
+d'exploitation utilisés dans cette reproduction.
+
+Impacts : backend et documentation canonique (guide d'exploitation SaaS et
+contrat E71 pour les trois routes CRM). Ni migration, changement d'activation,
+générateur de démonstration ni modification des trois frontends nécessaires.
+La vérification sur TEST reste à effectuer après déploiement ; **aucun
+déploiement ni modification de clé ou de configuration distante exécuté**.
+
 ## 1. Traçabilité des 63 critères
 
 ### Évolution — E73-EVO-LIVE-FICHE, 9 novembre 2026

@@ -9,6 +9,12 @@ est sélectionné explicitement à l’envoi ; le serveur ne le déduit pas des 
 Le chemin historique `import-carte.md` est conservé pour les liens. L’import reste
 un CSV standard ; le parseur du classeur XLSX Gironde n’est pas réactivé.
 
+Si un CSV contenant des colonnes de qualification est envoyé avec le format 1,
+le refus `FORMAT_2_REQUIS` demande de sélectionner **Format 2** dans
+**Format du fichier**, puis de relancer l'analyse. Le serveur ne change pas
+automatiquement la version choisie. Les colonnes inconnues ou dupliquées et les
+en-têtes incomplets restent refusés avec `COLONNES_INVALIDES`.
+
 ## Préparer depuis Excel
 
 1. Choisir le format et copier les en-têtes de son modèle dans une feuille dédiée. **Une ligne = un prospect, avec éventuellement un contact, un dossier commercial ou une observation.** Un import de prospection ne crée aucun dossier par défaut. Répéter les mêmes références pour compléter une même structure. Les blocs de qualification du format 2 restent facultatifs.
@@ -155,7 +161,7 @@ l’aperçu impose un nouveau plan (`IMPORT_PLAN_OBSOLETE`), sans écriture part
 
 INIT **ne vide jamais la base**. Pour chaque groupe dont `(source_namespace, prospect_ref)` est absent, l'aperçu propose la création du prospect, de ses contacts et dossiers. Si ce prospect est déjà connu par sa clé, tout le groupe est **ignoré**, même si de nouveaux contacts/dossiers figurent dans ce fichier. Une correspondance possible avec une fiche manuelle ou une autre source bloque le groupe jusqu'à rapprochement explicite ou confirmation de structure distincte.
 
-Les nouveaux dossiers démarrent **À contacter**, priorité normale, responsable du lot choisi explicitement. La source de ces valeurs est le choix du lot, jamais une colonne cachée. Aucune tâche, date de contact ou preuve de gain n'est inventée. Le contexte initial devient une note de provenance une seule fois. Le fichier ne crée aucun rappel ni notification.
+Les nouveaux dossiers démarrent **À contacter**, priorité normale. Le responsable du lot est **facultatif** : laisser **Non attribué** crée les dossiers sans responsable, sans affectation automatique à la personne qui importe. Un responsable choisi explicitement doit rester habilité lors du dépôt, de la confirmation, de la reprise et du traitement. L'API accepte `responsable_id` absent ou vide et conserve cette absence comme `null`. Ce choix concerne uniquement les nouveaux dossiers ; les responsables des dossiers existants sont préservés en INIT/UPSERT. La source de ces valeurs est le choix du lot, jamais une colonne cachée. Aucune tâche, date de contact ou preuve de gain n'est inventée. Le contexte initial devient une note de provenance une seule fois. Le fichier ne crée aucun rappel ni notification.
 
 INIT peut être rejoué sans créer de doublons. Pour compléter les fiches déjà présentes, utiliser UPSERT ; aucun bouton « écraser tout » n'est prévu.
 
