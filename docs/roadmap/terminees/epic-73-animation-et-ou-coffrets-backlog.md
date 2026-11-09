@@ -1,5 +1,22 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+## Évolution du 9 novembre 2026 — carnet personnel unifié
+
+**E73-EVO-LIVE-CARNET** intègre les cinq sections du
+[PDF du 9 novembre](../../audits/marketplace/20261109-Audit%20Localeo%20Live.pdf) :
+Mon carnet unifié animations/coffrets/lots, découverte distincte, états et actions,
+allègement mobile, iconographie, inscription et récupération sur autre appareil.
+Les **17 critères E73-CN-01 à E73-CN-17** sont définis dans la
+[spécification Live](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-9-novembre-2026--carnet-personnel-unifié-e73-evo-live-carnet)
+et la [conception §10](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-adhesion-conception.md#10-carnet-personnel-unifié--e73-evo-live-carnet).
+**Spécification puis implémentation demandées.** Trois priorités : carnet,
+inscription/continuité, harmonisation. CN-ARB-01 (récupération groupée) et
+CN-ARB-02 (téléphone classique) sont résolus : participations/lots associés
+uniquement, téléphone obligatoire conservé. Navigation à trois destinations remplaçant explicitement
+la cible LA/LH ; aucun nouveau compte ni fusion de droits. Clôture historique,
+IDs précédents et réserves LA-16/LP conservés ; preuves propres au
+[bilan E73](../../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md).
+
 ## Évolution du 9 novembre 2026 — fiche animation immersive
 
 **E73-EVO-LIVE-FICHE** reprend les douze axes FD-01 à FD-12 de l’

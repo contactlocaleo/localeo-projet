@@ -1,5 +1,15 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+Évolution du **9 novembre 2026 — E73-EVO-LIVE-CARNET** : les cinq sections du
+PDF sur le carnet unifié sont traduites en **17 critères CN-01 à 17**, avec
+trois priorités et deux décisions produit résolues : téléphone obligatoire
+classique conservé, récupération vérifiée des participations et lots associés. La
+[spécification Live](localeo-live-entree-unique.md#évolution-du-9-novembre-2026--carnet-personnel-unifié-e73-evo-live-carnet)
+et la [conception §10](localeo-live-adhesion-conception.md#10-carnet-personnel-unifié--e73-evo-live-carnet)
+décrivent navigation, droits, état des objets, téléphone et récupération.
+Spécification puis implémentation demandées ; résultats propres au
+[bilan](verification-livraison.md). Clôture historique et réserves conservées.
+
 Évolution du **9 novembre 2026 — E73-EVO-LIVE-FICHE** : les douze axes de
 l’audit visuel sont spécifiés en **12 critères E73-FD-01 à 12** dans la
 [spécification Live](localeo-live-entree-unique.md#évolution-du-9-novembre-2026--fiche-animation-immersive-e73-evo-live-fiche).

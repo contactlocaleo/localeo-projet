@@ -1,5 +1,11 @@
 # Roadmap par etat
 
+**9 novembre 2026 — E73-EVO-LIVE-CARNET** : audit PDF intégré en 17 critères
+pour un carnet animations/coffrets/lots, inscription/continuité et harmonisation.
+Spécification puis implémentation demandées ; décisions produit résolues,
+sans modification de la clôture historique ni des compteurs d’epics.
+[Périmètre et suivi](terminees/epic-73-animation-et-ou-coffrets-backlog.md#évolution-du-9-novembre-2026--carnet-personnel-unifié).
+
 **8 novembre 2026 — E73-EVO-LIVE-HIERARCHIE** : huit recommandations de l’audit
 après déploiement spécifiées en 12 critères complémentaires, implémentation
 locale dans Marketplace/Live. [Périmètre, preuves et limites](terminees/epic-73-animation-et-ou-coffrets-backlog.md#évolution-du-8-novembre-2026--hiérarchie-et-fluidité-live).

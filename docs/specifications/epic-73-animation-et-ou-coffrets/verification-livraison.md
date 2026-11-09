@@ -1,5 +1,138 @@
 # E73 — Vérification, migration et livraison
 
+## Évolution — E73-EVO-LIVE-CARNET, 9 novembre 2026
+
+**Livraison demandée ensuite le 9 novembre : migration TEST, commit et push.**
+Le runner officiel `scripts/database/apply_migrations.py`, avec la configuration
+TEST explicitement sélectionnée et sans affichage des secrets, a d’abord vérifié
+qu’une seule migration restait en attente : `v306_live_recuperations_carnet.sql`.
+La migration a ensuite réussi : version **306** enregistrée, empreinte conforme,
+table `live_recuperations_carnet` présente et **quatre index `indisvalid=true`**.
+Limites d’attente SQL/verrou appliquées ; aucun import ni e-mail déclenché.
+Les commits applicatifs **backend `59b300b`** et **Marketplace `4cdf8bf`** ont
+été créés et poussés sur leurs `origin/main` respectifs. Les cinq dépôts restent
+indépendants. Aucune recette applicative déployée n’est déduite de ces pushes
+ni de la migration seule ; le déploiement hébergé n’a pas été vérifié ici.
+
+[Spécification CN-01 à 17](localeo-live-entree-unique.md#évolution-du-9-novembre-2026--carnet-personnel-unifié-e73-evo-live-carnet),
+[conception §10](localeo-live-adhesion-conception.md#10-carnet-personnel-unifié--e73-evo-live-carnet)
+et [audit PDF](../../audits/marketplace/20261109-Audit%20Localeo%20Live.pdf).
+Spécification puis implémentation demandées ; **réalisation locale** dans
+Marketplace/Live et backend, avec modifications documentaires communes. Bases lues :
+projet `13565af`, Marketplace `6d9e783`, backend `8851cbd`. Le PDF utilisateur,
+initialement non suivi, est conservé intact. Les preuves FD/LA/LH historiques
+ne valident pas les nouveaux critères CN.
+
+Les cinq sections et la recette finale du rapport sont reliées aux 17 critères.
+Lecture des quatre pages et contrôle visuel du PDF réalisés ; aucune recette
+applicative ou essai physique n’en est déduit. Décisions utilisateur résolues :
+**téléphone classique obligatoire**, tombola publique sans téléphone ;
+**récupération des participations et lots associés uniquement**, coffrets par
+leur récupération existante. Aucun nouveau compte habitant.
+
+| Périmètre | Réalisation et preuves propres à CN |
+| --- | --- |
+| CN-01/02/03/06/09 | `LiveUnifiedCarnet`, `LiveRoot`, navigation à trois entrées, filtres/position conservés, retour générique vers carnet connu et liens précis préservés ; vraies références favorites distinctes des anciens suivis Animation. 51 objets : page initiale 12 puis 24 sur action ; stockage refusé, vide, erreur et couverture partielle testés. |
+| CN-04/05/15/16 | Résumés autorisés via deux lectures agrégées bornées à 12, pas d’appel par carte ; snapshot coffret explicitement ancien et droit vérifié dans le détail. Coffret 2/2 utilisé reconnu historique. Deux participations d’une animation, refus installation, anonymisation, token distinct et annulation des GET sur sortie vérifiés ; mutations de carnet signalées entre onglets sans credential. |
+| CN-07/08/11/12 | Raccourcis seulement si deux périodes et plus de trois cartes, territoire conservé si ambigu/multiple ; condition essentielle et règlement accessibles, formulaire compact/autocomplete. Téléphone classique toujours requis et e-mail seul tombola. Confirmation fondée sur l’objet réel ; ouverture personnelle après ajout effectif, pas de faux accès après simple demande e-mail. |
+| CN-10 | Routes publiques de demande et confirmation, challenge 15 minutes usage unique, quotas et renvoi cinq minutes ; confirmation volontaire puis ajout de chaque participation. Coffrets exclus, accès révoqués/expirés/anonymisés non réactivés. 503 sans migration/capacité, 410 invalidité/rejeu, ancien backend conserve guides, sauvegarde et récupération par animation. |
+| CN-13/14/17 | Cloche visible et au même emplacement, engrenage, verbes et noms accessibles. Carnet mixte passeport commencé/coffret partiel/lot à retirer, première action entière et suite perceptible à 390 × 844 ; 320 × 568 et 1280 × 800 sans débordement. Clavier et texte 200 % couverts par les parcours ; essais tactiles/physiques et étude habitant non exécutés. |
+
+### Contrôles exécutés sur les arbres locaux du 9 novembre
+
+- **Backend : 686 réussis**, commande isolée architecture + classes du domaine
+  + couverture des use cases selon AGENT.md. Aucun skip utilisé comme réussite.
+- **47 tests ciblés réussis**, via `scripts/validation/test_isolated.py` avec
+  `tests/domain/animation_locale/test_recuperation_carnet.py`,
+  `test_recuperation_carnet_dedicated.py`, `tests/api/test_recuperation_carnet.py`,
+  `tests/unit/test_demo_comptes_internes.py` et
+  `tests/security/test_conservation_saas_structure.py` : nominal/refus, réponse
+  neutre, quotas, pas de renvoi automatique, anonymisation/expiration/révocation,
+  limite 50, readiness table/colonne/index et restauration du générateur.
+- **86 tests supplémentaires réussis** :
+  `tests/application/exploitation/test_schema_readiness.py`,
+  `tests/unit/test_demonstration_registry.py`,
+  `tests/security/test_conservation_saas_structure.py`, via le même runner.
+  Cette série recoupe une partie des 47 ; les nombres ne sont pas additionnés
+  comme un nombre de critères distincts.
+- **Persistance réelle : 5 tests réussis** dans
+  `tests/integration/test_recuperation_carnet_persistence.py`, dont deux SQLite
+  et trois PostgreSQL 18 sur base locale jetable explicitement autorisée par
+  `--postgres-test-url`. Concurrence de deux confirmations : un succès/un refus ;
+  rollback de consommation et jeton ; projection ORM réelle avec 31 anciens
+  tokens mais un seul chargé ; v306 exécutée deux fois ; fermeture des preuves
+  après restauration. Le passage combiné avec les dix tests API d’alors comptait
+  **15 réussites** ; les six probes de readiness ont été vérifiées ensuite dans
+  les 47. Aucun PostgreSQL TEST/exploitation utilisé pour ces tests.
+- **Frontend : 24 tests Node** modèle/ordre/navigation/invalidations et
+  **2 tests Node récupération** réussis ; `npx eslint src tests` réussi.
+  `npm run lint` global reste **non achevé**, refus Windows EPERM sur
+  `output/bum-politique/pytest-approval-1` ; aucun dossier ni configuration lint
+  modifié pour contourner ce contrôle.
+- **Navigateur : première série 73/74**, un véritable chevauchement du refresh
+  et de la recherche à 390 px avec texte 200 % ; CSS corrigé sans affaiblir
+  l’assertion. **Reprise de 31 parcours réussie**, comprenant cette régression,
+  carnet mixte, inscription historique unifiée, requêtes annulées, anonymisé,
+  récupération volontaire/410/503 et repli ancien backend.
+  **Six contrôles finaux de navigation réussis** après le retour du logo vers
+  l’entrée générique : racine du service Animation, objet exact et paramètres
+  publics conservés sans token. Suites `live-carnet-shell`, `live-unified-carnet`,
+  `live-carnet-recovery`, `live-home-community`, `live-participations-unified`.
+  La série initiale incluait aussi `live-carnet-compact`,
+  `live-registration-clarity`, `e74-tombola-email`, `live-discovery-continuity`
+  et `live-hierarchy-fluidity`. Builds de production isolés, `.env` neutralisés,
+  API simulées et aucun trafic fournisseur. Les deux premiers échecs d’un
+  essai parallèle de formulaires provenaient de reconstructions concurrentes
+  de `dist` ; exécutions suivantes coordonnées sur un bundle unique.
+- **Passe visuelle finale** : 12 parcours carnet/récupération relancés avec
+  succès après harmonisation des boutons et tailles de texte (utile 16 px,
+  métadonnées 14 px). Captures du carnet mixte et de la réponse neutre e-mail
+  inspectées à 390 × 844. Tampons visuels bornés à huit emplacements à partir
+  de la progression autorisée ; le cas mixte relancé vérifie un tampon acquis
+  sur deux et l’action entière dans le premier écran. Couleurs des nouveaux
+  composants contrôlées : six couples texte/fond, ratios **5,29 à 13,35:1** ;
+  cette mesure ciblée ne vaut pas audit d’accessibilité exhaustif.
+- **Contrat** : export E42 régénéré hors ligne (**80 chemins**), y compris
+  réponses 429/503/410 et tags public/animation_locale ; champs des lecteurs
+  alignés. Revue indépendante : annulation des lectures, coffret entièrement
+  utilisé, borne d’un token par participant, index global e-mail, disponibilité
+  et réponses documentaires corrigés ; aucun constat de code ouvert à la fin.
+- **Documentation et diff** : `py -3.14 scripts/check_guidance.py` réussi,
+  **97 guides / 1 156 liens, zéro erreur et avertissement** ;
+  `py -3.14 scripts/sync_documentation.py --check-sources` : **148 documents
+  vérifiés**. Les 17 IDs CN sont uniques et couvrent les pages 1 à 4/sections
+  1 à 5 du PDF. Contrôles d’espaces du diff réussis dans les trois dépôts.
+
+### Impacts et limites de livraison
+
+Migration **v306**, table SECRET et index, capacité annoncée après readiness,
+outbox email et fermeture des preuves après restauration intégrés. Registre et
+adaptateurs de démonstration ajustés et testés ; aucune génération sur une cible
+réelle. Pro, Animation et Commerçant n’ont pas de consommateur à modifier :
+inscriptions classiques, téléphone, jeu, gain et validation QR/PIN conservent
+leurs contrats. Pas de migration de bibliothèque v1 ni de transfert silencieux
+inter-origines. Guide Live E42, README Marketplace et
+[procédure de configuration E73](../../exploitation/technique/configurer-epic-73.md#complément-du-9-novembre--carnet-unifié-et-récupération)
+actualisés. Livrer backend + migration/readiness avant frontend ; URL Live
+et worker d’outbox existants, aucun nouveau flag ou secret spécifique.
+
+Les bornes sont testées ; **ni charge mixte représentative ni EXPLAIN de
+qualification N/10N ne sont attestés pour ce complément**. Les réserves LP/LA-16
+restent ouvertes ; ne pas en déduire une capacité d’hébergement ou une clôture
+de ces réserves. Pas de mail réel, recette sur appareil physique ou activation
+TEST démontrés. Les seuls contrôles documentaires ne prouvent pas la recette.
+
+PostgreSQL jetable arrêté. La suppression du dossier temporaire
+`C:/Users/casta/AppData/Local/Temp/localeo-live-recovery-575510c0a1ac4aa099410919e9019000`
+a été refusée par le contrôle automatique (« blocked by policy ») ; pas de
+contournement, le dossier arrêté reste sur disque. Le serveur navigateur
+manuel 8191 est également arrêté.
+
+Clôture historique E73 et réserves LA-16/LP conservées. La réalisation locale
+initiale ne déclenchait pas de commit, push ou migration TEST ; les opérations
+ultérieures explicitement demandées sont consignées en tête de cette section.
+Aucun envoi réel ni recette applicative hébergée exécutés pour cette évolution.
+
 Version de conception du **17 octobre 2026**, réalisation locale commencée le **18 octobre 2026**. [Dossier](README.md), [architecture](architecture-contrats.md), [critères canoniques](../../roadmap/terminees/epic-73-animation-et-ou-coffrets-backlog.md). La matrice décrit les preuves attendues ; leur exécution effective et leurs limites sont enregistrées par lot dans le [suivi de réalisation](suivi-implementation.md). Un scénario sans preuve enregistrée reste non exécuté. Un lien vérifié ou une revue documentaire ne valide pas un comportement applicatif.
 
 ## Correctif local — authentification des batchs techniques, 9 novembre 2026

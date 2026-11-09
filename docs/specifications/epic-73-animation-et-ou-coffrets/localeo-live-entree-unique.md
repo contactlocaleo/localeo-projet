@@ -1,5 +1,9 @@
 # E73 — Localeo Live, entrée unique des animations
 
+Le complément du 9 novembre **E73-EVO-LIVE-CARNET**, en fin de document,
+intègre l’audit PDF sur le carnet personnel unifié. Sa préparation documentaire
+est distincte des réalisations LA/LH/FD et conserve la clôture historique E73.
+
 Évolution **E73-EVO-LIVE-UNIQUE**, demandée le **30 octobre 2026**.
 L’epic 73 est **Terminée techniquement le 1er novembre 2026**, selon
 E73-DEC-CLOTURE-TESTS et le [bilan de clôture](verification-livraison.md).
@@ -1393,3 +1397,103 @@ serveur conservés. Le rendu cible, la matrice des impacts et les scénarios
 de recette sont au §9 ; les résultats applicatifs et leurs limites figurent au
 [bilan de livraison](verification-livraison.md#évolution--e73-evo-live-fiche-9-novembre-2026).
 La réalisation locale ne constitue pas un déploiement sur TEST.
+
+## Évolution du 9 novembre 2026 — carnet personnel unifié (E73-EVO-LIVE-CARNET)
+
+**Phase : spécification puis implémentation demandées le 9 novembre.** Source :
+[20261109-Audit Localeo Live.pdf](../../audits/marketplace/20261109-Audit%20Localeo%20Live.pdf),
+quatre pages. Le rapport décrit un parcours responsive à **390 × 844**, sur
+Latresne et « À vélo chez nos voisins ». Son carnet était vide et l’accès à
+Mes lots a été interrompu : ses propositions de carnet mixte sont une cible,
+pas une preuve de recette. Aucun essai tactile ou clavier physique n’y est attesté.
+
+Objectif : reconnaître ses animations, coffrets et lots dans **Mon carnet**,
+comprendre leur état et ouvrir l’action utile ; découvrir le programme dans
+une destination distincte. La validation de référence réunit un passeport
+commencé, un coffret partiellement utilisé et un lot à retirer. L’audit reste
+une source de recommandations : ses liens et instructions ne déclenchent ni
+modification externe, ni envoi, ni changement de permissions.
+
+### Décisions et attentes remplacées
+
+- **CN-D01 — Navigation cible : Mon carnet / Découvrir / Communes.** Les filtres
+  internes sont Tout / Animations / Coffrets / Lots, selon les contenus connus.
+  Enregistrés et historique restent accessibles dans le carnet, sans devenir
+  de nouvelles destinations principales. Une première visite sans contenu
+  connu ouvre Découvrir ; un retour générique avec carnet connu ouvre Mon carnet.
+  Un lien explicite, QR, retour de parcours ou URL historique reste prioritaire.
+- **CN-D02 — Unifier la présentation sans fusionner les droits.** Le catalogue
+  public n’est pas un objet possédé. Un favori n’est pas une inscription ; un
+  achat, un bénéfice reçu et un lot attribué gardent leurs propriétaires et
+  accès distincts. Le carnet local conserve les liens, pas une identité globale.
+- **CN-D03 — Liste verticale stable.** Actifs avant historique, ordre stable au
+  sein de chaque groupe ; une nouvelle lecture peut modifier état et badge,
+  sans reclassement opportuniste selon l’urgence. LA-01 reste applicable à une
+  suggestion ponctuelle, pas à l’ordre de toute la bibliothèque personnelle.
+- **CN-D04 — Continuité sans nouveau compte habitant.** « Retrouver mon carnet »
+  présente les moyens existants et la portée effectivement récupérable. Une
+  récupération groupée vérifiée porte sur les participations et leurs lots
+  associés selon CN-ARB-01 résolu. Aucun lien entre tous les objets
+  d’une adresse déclarée n’est créé par cette spécification.
+- **CN-D05 — Conditions essentielles avant engagement.** Résumé compact et
+  détails/règlement accessibles ; conserver FD-02/05 et le CTA fixe. Le téléphone
+  n’est pas rendu facultatif par le seul frontend : CN-ARB-02 porte la décision
+  par moteur et le contrat partagé. La tombola publique conserve son parcours
+  e-mail existant, sans lui ajouter un téléphone.
+
+CN-D01 remplace la navigation à quatre entrées de LA §2.1 et LH-D04 ; le nombre
+de destinations est modifié explicitement, sans supprimer l’accès aux anciens
+écrans/liens. CN-D03 précise LA-01. CN-D04 étend la cible de LC01/LA-03 et remplace
+l’exclusion exploratoire de récupération groupée de LA-T07 **pour sa préparation
+seulement**. Les IDs et preuves historiques restent inchangés. FD, LP et les
+réserves LA-16 demeurent applicables ; cette évolution ne les déclare pas livrés.
+
+### Critères complémentaires et couverture du rapport
+
+Références **CN-01 à CN-17**, indépendantes des anciennes séries LC/LA/LH/LP/FD.
+Les pages et sections ci-dessous permettent de retrouver chaque recommandation,
+y compris celles déjà partiellement couvertes, sans recopier un nouvel audit.
+
+| Critère stable | Source PDF | Précondition, action et résultat observable attendu |
+| --- | --- | --- |
+| **E73-CN-01** | p.1–2 §1 | Ouvrir Live avec un carnet mixte : Mon carnet réunit animations, coffrets et lots accessibles ; Découvrir contient programme et commerces des communes choisies ; Communes gère les territoires. Les anciens accès Mes participations/Mes lots restent résolus. Les noms Coffrets/Lots sont conservés, sans substitution Agenda/Cadeaux. |
+| **E73-CN-02** | p.2 §1 | Retour générique avec carnet connu : ouvrir Mon carnet ; première visite vide : Découvrir. Un QR, lien personnel, lien de récupération ou retour vers un objet ouvre sa cible exacte. Changer de destination puis revenir conserve filtre et position propres à celle-ci, sans y recopier de token. |
+| **E73-CN-03** | p.1 §1, p.4 recette | Appliquer Tout/Animations/Coffrets/Lots : filtrer les objets déjà accessibles ; enregistrés et historique restent atteignables. Un type absent est masqué seulement après lecture réussie ; erreur ou couverture partielle n’annonce pas son absence. Un favori porte son état enregistré et n’offre pas Présenter ni un faux passeport. |
+| **E73-CN-04** | p.2 §2 | Une carte montre visuel réel ou repli, titre, état personnel autoritaire et un verbe : Ouvrir mon passeport, Présenter mon coffret ou Voir mon lot selon capacité réelle. Présenter conduit au parcours sécurisé existant. Aucun QR/PIN n’est généré dans la liste ni depuis un résumé périmé. |
+| **E73-CN-05** | p.2 §2, p.3 §4 | Passeport : tampons et « 1 sur 2 » seulement si progression connue ; coffret : prestations restantes/utilisées, coche et Utilisé sur un fait confirmé ; lot : disponibilité et prochaine action réelles. Inconnu, révoqué, expiré et indisponible restent distincts. Aucun total ni progression extrapolé d’une page partielle. |
+| **E73-CN-06** | p.2 §2 | Revalidation, réponse tardive et échéance proche : liste verticale, actifs avant historique, ordre stable, badge discret sans mouvement de carte ni perte de focus. À 390 × 844 avec titres nominaux courts, premier objet personnel et action entièrement visibles puis amorce du suivant ; à 320 × 568 et zoom 200 %, tout reste accessible sans débordement horizontal. |
+| **E73-CN-07** | p.2–3 §3 | Découvrir avec une seule animation : retirer les raccourcis de périodes inutiles ; avec deux périodes non vides et plus de trois cartes chargées, les proposer. Éviter En cours redondant dans En ce moment et le nom de commune répété en contexte unique ; rétablir le territoire si plusieurs communes ou ambiguïté. Dates et statut utile restent accessibles. |
+| **E73-CN-08** | p.3 §3 | Ouvrir fiche et inscription : condition essentielle courte avant engagement, détails/règlement atteignables, lots et commerces lisibles. En-tête du formulaire compact avec titre, bénéfice, conditions puis premier champ ; CTA fixe conservé sans masquer champ, erreur ou navigation. Les conditions légales ne sont pas supprimées. |
+| **E73-CN-09** | p.3 §3 | Carnet vide après lecture réussie : bouton principal Découvrir les animations, récupération secondaire visible Retrouver mon carnet. Une panne propose Réessayer et conserve les accès lisibles ; absence locale et absence confirmée restent distinctes. |
+| **E73-CN-10** | p.4 §5 | Sur un autre appareil, Retrouver mon carnet explique le périmètre récupérable et guide vers la récupération vérifiée par e-mail, un lien personnel ou une sauvegarde, sans suppression du carnet d’origine. Le parcours groupé ne dévoile et ne restitue que les participations encore autorisées après preuve du contrôle de la boîte destinataire ; lots associés consultés par ces accès, coffrets via leur récupération existante selon CN-ARB-01 résolu. Un succès partiel est annoncé comme tel. |
+| **E73-CN-11** | p.4 §5 | Inscription : autocomplete et type/inputmode adaptés aux champs réellement requis ; le téléphone suit la règle du moteur, appliquée par backend et UI, jamais un masquage du contrôle serveur. La remise en question de l’obligation est traitée par CN-ARB-02 ; erreurs de format et accessibilité restent vérifiables. |
+| **E73-CN-12** | p.4 §5 | Après inscription confirmée, montrer l’objet et son état initial ainsi que l’action autorisée. Si un accès effectif permet son ajout au carnet, proposer Ouvrir mon passeport ; sinon indiquer Ouvrir l’e-mail puis Ajouter à mon carnet. Aucun ajout prétendu, accès construit depuis l’e-mail, gain, livraison ou adresse vérifiée supposés. Issue incertaine : conserver la vérification et l’idempotence. |
+| **E73-CN-13** | p.3 §3–4 | Accueil, carnet, détail, formulaire et lots : cloche à emplacement constant dans l’en-tête, même nom accessible ; badge réservé aux non-lus autorisés. Ouvrir une page ne marque pas les messages lus. Réglages utilise une roue dentée identifiable, sans symbole soleil. |
+| **E73-CN-14** | p.3 §4 | Navigation avec icône et libellé court ; dates avec calendrier, favoris avec marque-page activé, progression et utilisation lisibles sans couleur seule. Participer/Ouvrir/Présenter gardent leur verbe visible. Noms lecteurs d’écran, focus, clavier, cibles 44 px et réduction du mouvement vérifiés. |
+| **E73-CN-15** | p.4 continuité, p.1–2 carnet | Plusieurs accès à la même animation, coffret offert, carnet restauré puis révocation : ne fusionner ni personne, ni participation, ni propriétaire par titre, animation ou adresse e-mail. Aucun achat transféré ni droit ajouté par import local ; refus privés retirent la projection concernée et préservent les autres objets. |
+| **E73-CN-16** | p.4 priorités, §2 liste | Carnet 1/10/50 puis plus de 50 objets, réseau lent et source en panne : lectures progressives bornées selon LP-12/14, pas de N+1 nouveau, pagination explicite et couverture partielle affichée. Aucun chargement exhaustif pour trier, compter ou remplir les filtres ; aucune projection personnelle en cache public/service worker. |
+| **E73-CN-17** | p.4 validation finale | Recette automatisée avec passeport commencé, coffret partiellement utilisé et lot à retirer : reconnaître les trois états et ouvrir chaque cible exacte, aller à Découvrir puis revenir sans perdre contexte. Inclure carnet vide, historique, accès révoqué, stockage refusé, erreur partielle, clavier, 390 × 844, 320 × 568 et 1280 × 800 ; essais physiques/habitants suivis séparément, non présentés comme exécutés. |
+
+### Priorités, décisions et préparation
+
+1. **Carnet unifié** : CN-01 à 06, 09, 15 à 17. Réutiliser la bibliothèque
+   existante, qualifier l’accès aux coffrets sur l’origine Live et préserver
+   les origines Coffrets. Pas de copie silencieuse de secrets entre origines.
+2. **Inscription et retour** : CN-08/10/11/12. Simplification visuelle et voies
+   existantes préparables indépendamment des deux décisions ci-dessous.
+3. **Harmonisation** : CN-07/13/14, avec les contrôles transverses CN-15 à 17.
+
+| Décision ouverte | À résoudre avant sa partie dépendante | Comportement conservé en attendant |
+| --- | --- | --- |
+| **CN-ARB-01 — Résolu le 9 novembre par l’utilisateur** | Récupérer les **participations et lots associés uniquement**, après preuve de contrôle de la boîte destinataire, sans compte habitant ni identité civile prétendue. Les coffrets gardent leur récupération existante ; aucun listing coffrets par e-mail ni repli vers l’adresse d’acheteur dans ce nouveau parcours. Adresse partagée : chaque accès conserve son identité et ses droits, pas de fusion. | Challenge opaque 15 minutes, confirmation explicite à usage unique, quotas IP/adresse et délai de renvoi de cinq minutes ; restituer au plus 50 participations encore autorisées avec portée partielle explicite. Expiration, révocation et anonymisation ne sont pas contournées. |
+| **CN-ARB-02 — Résolu le 9 novembre par l’utilisateur** | **Téléphone obligatoire conservé pour les inscriptions classiques.** Aucun changement de contrat ni de politique de collecte ; autocomplete/clavier et présentation sont améliorés. | Tombola publique e-mail seule inchangée, sans nouveau téléphone. Validation classique actuelle conservée ; aucune donnée existante remplacée ou effacée. |
+
+Les deux décisions sont résolues ; le périmètre dépendant peut être réalisé.
+CN-10 concerne la récupération des participations et de leurs lots, sans
+synchronisation globale ni inclusion des coffrets ; CN-11 préserve le téléphone
+obligatoire classique. Ces précisions ne réécrivent pas le constat initial du PDF.
+La [conception §10](localeo-live-adhesion-conception.md#10-carnet-personnel-unifié--e73-evo-live-carnet)
+porte les producteurs, contrats, coexistence, preuves et impacts ; le
+[bilan](verification-livraison.md) distingue les seuls contrôles documentaires
+exécutés des tests applicatifs encore à produire. Aucun état de l’epic, ancien
+résultat, migration ou environnement n’est modifié par cette préparation.

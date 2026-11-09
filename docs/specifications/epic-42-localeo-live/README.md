@@ -1,5 +1,22 @@
 # Specifications Epic 42 - Localeo Live
 
+Évolution du **9 novembre 2026 — carnet personnel unifié** portée par
+[E73-EVO-LIVE-CARNET](../epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-9-novembre-2026--carnet-personnel-unifié-e73-evo-live-carnet).
+**Mon carnet** réunit les animations, coffrets et lots dont l’appareil possède
+les accès ; **Découvrir** ouvre le programme et les commerces, **Communes**
+gère les territoires. Les filtres du carnet distinguent les types, les favoris
+restent de simples enregistrements publics et chaque objet ouvre son accès précis.
+
+Sur un nouvel appareil, **Retrouver mon carnet** propose une vérification par
+e-mail pour retrouver les participations encore autorisées et leurs lots
+associés, sans nouveau compte. Les coffrets utilisent leur récupération propre ;
+la sauvegarde reste restaurable depuis Réglages. Un état ancien de carte ne
+confirme ni progression ni disponibilité : les parcours personnels revalident
+les droits. Téléphone classique obligatoire conservé, tombola sans téléphone.
+La réalisation et les tests propres à cette évolution figurent au
+[bilan E73](../epic-73-animation-et-ou-coffrets/verification-livraison.md) ; les
+anciens bilans d’E42 ne constituent pas une preuve de ce nouveau parcours.
+
 La fiche publique d’animation évolue le **9 novembre 2026** dans
 [E73-EVO-LIVE-FICHE](../epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-9-novembre-2026--fiche-animation-immersive-e73-evo-live-fiche) :
 défi et conditions avant inscription, reprise de la participation exacte ou

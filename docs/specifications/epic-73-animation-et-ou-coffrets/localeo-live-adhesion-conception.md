@@ -1503,4 +1503,158 @@ les contrôles requis réussis. Résultats et limites au
 [bilan E73](verification-livraison.md), distincts de la clôture historique,
 sans pilote externe, commit, push ou déploiement implicites.
 
+## 10. Carnet personnel unifié — E73-EVO-LIVE-CARNET
+
+### 10.1 Existant vérifié et écart
+
+Préparation du 9 novembre 2026 : projet `13565af`, Marketplace `6d9e783`, backend
+`8851cbd`, avec modifications documentaires en cours. Les
+[critères CN-01 à 17](localeo-live-entree-unique.md#évolution-du-9-novembre-2026--carnet-personnel-unifié-e73-evo-live-carnet)
+reprennent les cinq sections du PDF ; ils ne sont pas validés par les tests FD.
+
+| Source réelle | Comportement actuel | Écart cible |
+| --- | --- | --- |
+| Marketplace `src/live/liveLibrary.js` | IndexedDB commun aux types coffret, animation, participation et bon_lot ; export/import v1, 5 Mo et 1 000 entrées maximum | Composer une liste commune sans réécriture ni migration destructive des accès ; ne pas dépasser les limites de restauration existantes |
+| `LiveApp.jsx`, `LiveCarnetHeader.jsx`, `liveStore.js` | Quatre destinations, listes séparées ; coffrets masqués sur la surface Animation ; dernière rubrique mémorisée | Trois destinations et carnet commun ; préserver URLs ciblées et contexte de retour ; ne pas rediriger une inscription ou un lien personnel vers la racine |
+| `LiveParticipationRecovery.jsx`, API `animation_locale_api.py` | Renvoi par animation/e-mail, réponse neutre, token livré à l’adresse enregistrée ; tombola distincte | Entrée Retrouver mon carnet explicite ; récupération groupée après choix CN-ARB-01 et preuve vérifiée, sans recherche publique révélant l’existence des objets |
+| Backend `consultation_access_api.py`, use case `RenvoyerLienConsultationPublic` | Renvoi propre à une instance : bénéficiaire puis acheteur en repli, lien borné à 24 h et usage unique | Conserver le destinataire et la preuve propres au coffret ; pas d’accès global déduit de l’e-mail d’un achat |
+| `AnimationRegistrationForm.jsx`, `CreerInscriptionAnimationRequest`, service participants | Téléphone obligatoire dans UI et schéma classique, normalisation inconditionnelle ; entité participant nullable | CN-ARB-02 doit aligner UI, API, application et domaine ; ne pas traiter la nullabilité SQL comme une autorisation suffisante |
+| `PublicTombolaRegistration.jsx` et schéma tombola | E-mail et règlement, sans téléphone | Préserver ce contrat et l’issue incertaine/idempotence, compacter seulement la présentation indépendante |
+
+La bibliothèque contient des capacités d’accès, non une identité partageable.
+L’installation anonyme et ses suivis serveur exigent les preuves de chaque
+ressource ; suivre une commune ne prouve aucun droit personnel. Vérifier les
+contrats embarqués à l’implémentation ; les chemins ci-dessus décrivent les
+producteurs examinés, sans certifier l’environnement déployé.
+
+### 10.2 Présentation, navigation et continuité
+
+Un composant de carnet compose les ressources déjà accessibles. Garder les clés
+composites type/identifiant d’accès ; plusieurs participations à une même
+animation restent plusieurs objets. Afficher des liens vers les parcours
+existants ; le détail revalide le droit avant présentation, consommation ou
+validation. Un refus retire uniquement la projection visée. Le résumé local
+est « à vérifier » jusqu’au succès courant ; il n’autorise jamais une action.
+
+La liste conserve son ordre initial stable au sein des groupes actifs/historique,
+même si une carte obtient un nouveau badge d’échéance. Les pages de **12**
+limitent rendu et revalidation ; pas de boucle sur toute la bibliothèque pour
+produire un total. Au plus **3 GET Live simultanés**, délai **15 s attente incluse**,
+annulation au changement de contexte et réponses tardives ignorées selon LP.
+Un état partiel s’affiche par source ; un filtre ne transforme pas une source
+en panne en type absent. L’enregistrement pour plus tard reste une référence
+publique et ne devient ni accès personnel ni preuve de progression.
+
+Entrées publiques et personnelles existantes restent résolues. Mémoriser les
+positions/filtres par destination avec les mécanismes existants, sans token
+dans une préférence, analytics ou journal. Racine générique : vérifier les
+entrées locales avant de choisir carnet connu ou découverte ; stockage refusé
+→ découverte avec aide, sans écran bloqué. Pas d’import inter-origines silencieux.
+Le transfert volontaire et les services Coffrets existants restent disponibles.
+
+Cloche dans le même emplacement d’en-tête, réglages par engrenage ; les icônes
+complètent les mots. Carte personnelle complète au premier écran nominal à
+390 × 844, suite perceptible, pas de grand bloc explicatif avant le contenu.
+CSS et composants Live existants, vrais visuels ou repli graphique ; aucun
+nouveau média généré ni nouvelle pile. Au zoom ou titre long, lisibilité et
+accès aux actions priment sur le nombre de cartes visibles.
+
+### 10.3 Règles, contrats et décisions dépendantes
+
+**Invariant propriétaire :** les domaines Animation et Identité/Accès/Coffrets
+conservent la décision sur participation, attribution, bénéficiaire, validité,
+consommation et révocation. L’application orchestre la récupération ; API,
+ERP, batch et Live ne réimplémentent pas ces règles. La liste est une projection
+de lecture et non un agrégat « habitant » créé pour l’occasion.
+
+La composition et l’harmonisation réutilisent les API et le format carnet v1.
+La récupération groupée est un nouveau contrat conditionnel, **pas un endpoint
+disponible** : demande neutre → preuve envoyée au destinataire autorisé →
+vérification bornée → restitution des seules ressources autorisées, paginée et
+explicitement partielle si nécessaire. Un GET public ne crée pas d’inscription
+ni ne lie de participation. CN-ARB-01 résolu au §10.5 fixe la portée et les
+bornes ; réutiliser identité/accès et email/outbox existants, pas un
+second système de comptes. Tester adresse absente/partagée, preuve expirée,
+rejouée, révoquée, multi-ressources et panne avant/après livraison simulée.
+
+CN-ARB-02 conserve le téléphone obligatoire classique : validation actuelle,
+formats invalides toujours refusés et anciens champs conservés. Ne modifier
+que la présentation et les claviers/autocomplete. Ne pas ajouter le
+champ à la tombola publique. Mettre à jour OpenAPI canonique E41/E42 concerné,
+contrat embarqué et lecteurs lorsque ces contrats changent effectivement.
+
+Les nouvelles structures éventuelles sont additives ; ne pas modifier une
+migration appliquée. Ordre : backend compatible et migration/readiness, puis
+consommateurs utilisant la capacité annoncée ; ancien backend conserve les
+moyens de récupération actuels. Un repli frontend garde carnets et liens, et
+ne prétend pas annuler un email déjà émis. Aucun secret, envoi réel, changement
+de flag, migration TEST, commit ou déploiement ne découle de cette conception.
+
+### 10.4 Matrice de preuves et impacts
+
+| Critères / lot | Propriétaire, contrat et tests à produire | Documentation, données et exploitation |
+| --- | --- | --- |
+| CN-01/02/03/06/09 — carnet et navigation | Marketplace : bibliothèque v1 et routes existantes ; Node stockage/ordre/clé de ressource, navigateur liens ciblés, retour/filtre/position, origine historique, vide/erreur/partiel et accès multiples | Guide Live E42, README Marketplace et guide E73 à actualiser ; fixtures mixtes et restauration existante. Sans migration pour la seule UI, pas de générateur backend modifié artificiellement |
+| CN-04/05/15/16 — objets et droits | Autorité backend existante ; UI à 1/10/50/>50 objets, accès coffret bénéficiaire, refus privés, latence inversée et pagination ; compter requêtes et cartes pour prouver les bornes, aucune consommation sur GET | Fixtures de droits et états exacts, pas de compteurs synthétiques exposés comme vrais. LP/LA-16 restent séparés ; aucune nouvelle projection publique ou cache API |
+| CN-08/11/12 — inscription | UI partagée, schémas et domaine selon CN-ARB-02 résolu ; classique avec téléphone/tombola sans téléphone, format invalide, clé rejouée, mail non reçu, accès effectivement ajouté vs simple confirmation | Contrats d’inscription conservés ; conserver anciennes coordonnées et consentements, pas de reprise à vide. Générateur métier sans changement pour la présentation, emails simulés uniquement |
+| CN-10 — récupération | Identité/Accès et participations ; preuve vérifiée avant restitution, anti-énumération, expiré/rejeu/révocation, exclusion coffrets, concurrence et reprise partielle ; revue indépendante du contrat | CN-ARB-01 résolu, bornes §10.5 ; migration/readiness et sauvegarde/restauration à vérifier. Aucun nouvel envoi ni service activé par la préparation |
+| CN-07/13/14/17 — découverte et cohérence | Composants Live ; 390 × 844, 320 × 568, 1280 × 800, zoom 200 %, clavier, contraste, mouvement réduit ; cloche/non-lu, engrenage, une animation et plusieurs territoires | Fixtures synthétiques, réutilisation de vrais médias configurés ; pas de contrat métier/migration pour la présentation. Captures et assertions géométriques au bilan, appareils physiques explicitement non exécutés |
+
+### 10.5 Arbitrages du 9 novembre et contrat de récupération retenu
+
+Décision explicite : téléphone **obligatoire** classique conservé ; tombola
+publique sans téléphone. Aucune migration ni modification d’OpenAPI pour ce
+champ. Le questionnement du rapport est traité par le choix produit, sans
+prétendre que l’audit justifie la collecte pour tout nouveau moteur futur.
+
+Récupération groupée limitée aux **participations et lots associés**. Pas de
+coffrets récupérés ni de droits acheteur/bénéficiaire changés. La preuve établit
+le contrôle de la boîte ayant reçu les accès, pas une identité civile ni une
+fusion des personnes d’une famille. Les tokens révoqués/expirés et participants
+anonymisés ne sont pas recréés pour contourner un refus.
+
+Contrat cible : demande par e-mail avec réponse neutre, challenge opaque haché
+valide **15 minutes**, limitation IP/adresse et **un renvoi au plus par cinq
+minutes**, puis confirmation explicite POST à usage unique. L’URL de réception
+emploie un fragment nettoyé immédiatement ; pas de preuve dans analytics/logs.
+Restitution de **50 participations maximum**, couverture partielle explicite,
+ajout volontaire dans le carnet par ressource. Les lots sont relus par l’accès
+participant existant ; aucun listing global de gains par e-mail.
+
+| Route publique réalisée | Entrée / sortie | Refus et compatibilité |
+| --- | --- | --- |
+| `POST /public/localeo-live/carnet/recuperations` | Corps `{email}` ; 202 neutre avec `message`, `renvoi_apres_secondes:300`, sans existence ni nombre de ressources | 422 saisie invalide, 429 quota, 503 capacité/schéma indisponible ; aucun ajout local ni confirmation d’envoi réel |
+| `POST /public/localeo-live/carnet/recuperations/confirmer` | Corps `{secret}` ; 200 avec `items` (participation_id, animation_id, animation_nom, token, expires_at), `incomplet`, `perimetre:PARTICIPATIONS_ET_LOTS_ASSOCIES` | 410 expiré/révoqué/consommé/invalide, 429 quota, 503 indisponible ; réponse privée no-store ; une issue incertaine ne rejoue pas automatiquement la preuve |
+| `GET /public/localeo-live/configuration` existant | Capacité additive `capacites.recuperation_carnet:1` si table/colonnes et index requis présents, sinon 0 | Ancien client ignore la nouvelle capacité ; ancien backend ou erreur → UI conserve les voies historiques |
+
+Contrat canonique [E42 OpenAPI](../epic-42-localeo-live/openapi.json), générateur
+`localeo-backend/scripts/documentation/generate_epic42_openapi.py` ; appels
+effectifs dans `localeo-marketplace/src/services/api.js`. Les schémas
+d’inscription, moteurs, QR/PIN et contrats embarqués Animation restent inchangés.
+L’application charge les candidats bornés puis quatre ensembles de faits ;
+participants et au plus un token valide par participant sont verrouillés en
+ordre stable. La consommation du challenge, les nouveaux accès bornés à leur
+échéance existante et l’audit sont dans la même transaction. Le renvoi email
+utilise l’outbox existante, sans transport fournisseur dans la transaction.
+
+Migration additive **v306** : table `live_recuperations_carnet`, index de recherche
+email/expiration des challenges, index de recherche globale participants par
+email/date/ID et index de sélection d’un token valide par participant. Schéma
+ORM, readiness et annonce de capacité alignés. La preuve est classée SECRET ;
+les copies email sont minimisées selon leur durée/utilisation, les challenges
+expirés sont purgés par lots bornés et les restaurations ferment ces preuves.
+Le registre et la restauration démonstration ne recréent pas de challenge actif.
+Les tests isolés et PostgreSQL locaux sont au bilan ; **v306 appliquée à TEST
+le 9 novembre sur demande explicite**, table et quatre index valides contrôlés.
+Cette migration ne prouve pas le déploiement des applications. Livrer
+backend/migration avant UI. Sur ancien backend, conserver liens personnels,
+récupération par animation et sauvegarde, sans promettre la capacité groupée.
+
+Conditions de fin : critères du périmètre réalisé et refus significatifs testés,
+non-régressions inscription/QR/PIN/Coffrets, contrats cohérents et guides mis à
+jour, contrôles locaux réussis et limites de charge explicites. Les deux
+décisions sont désormais résolues. La demande
+engage spécification puis implémentation ; preuves réelles au bilan, sans
+assimiler revue documentaire à recette ni rouvrir l’epic terminée.
+
 [Retour à la spécification Live](localeo-live-entree-unique.md)
