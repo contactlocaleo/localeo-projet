@@ -1,4 +1,24 @@
-# Supports commerciaux Localeo Animation
+# Supports commerciaux Localeo
+
+## Plaquette unique du 10 novembre 2026
+
+- [Plaquette commerciale Localeo : deux pages A4, recto verso](plaquette-commerciale-localeo.pdf).
+- Aperçus : [page 1, l'écosystème](plaquette-commerciale-localeo-page-1.png)
+  et [page 2, les bénéfices par acteur](plaquette-commerciale-localeo-page-2.png).
+- [Source éditoriale, références et vérifications](plaquette-commerciale-localeo.md).
+
+Cette plaquette devient le support de référence pour présenter Localeo dans
+son ensemble : les animations au premier plan, puis les coffrets et leur
+marketplace en complément. Elle présente les bénéfices pour les collectivités,
+associations de commerçants, commerçants et habitants. La charte, le carnet de
+bord de Localeo Live et une iconographie courte structurent la lecture.
+
+Elle ne reprend pas le tarif d'entrée Animation, qui ne désigne pas l'ensemble
+de l'écosystème. Aucun prix ou périmètre commercial n'est modifié. La version
+Animation ci-dessous reste conservée comme historique ; le PowerPoint reste
+un support de rendez-vous centré sur les animations.
+
+## Version Animation historique du 6 novembre 2026
 
 Édition du **6 novembre 2026**, destinée aux communes et associations de
 commerçants, pour les prises de contact et relances commerciales par e-mail.
@@ -7,7 +27,7 @@ commerçants, pour les prises de contact et relances commerciales par e-mail.
 - [Aperçu de la page](plaquette-commerciale-localeo-animation-apercu.png).
 - [Présentation PowerPoint pour collectivités et associations](presentation-localeo-animation.pptx) : 12 diapositives modifiables, avec notes orateur.
 
-## Intention et composition
+### Intention et composition
 
 Mettre Localeo Animation au premier plan, présenter les rôles complémentaires
 de Pro et Live, puis rappeler l'offre Coffrets. Un seul appel à l'action :
@@ -21,7 +41,7 @@ secondaire `#586873`. Polices DM Sans et Oswald intégrées au PDF ; pictogramme
 officiels Animation, Pro, Live et Coffrets, sans altération de leur identité.
 Le diagramme représente les rôles des espaces, pas une capture d'application.
 
-## Contenu éditorial de référence
+### Contenu éditorial de la version historique
 
 **Localeo - Le lien local**
 
@@ -63,7 +83,7 @@ crédit valable douze mois. Lots et modules optionnels en supplément.
 Conditions selon l'offre souscrite. Le tarif n'est pas présenté comme un forfait
 illimité, un prix mensuel ou une offre incluant tous les modules.
 
-## Sources et vérification
+### Sources et vérification de la version historique
 
 - [Charte Localeo](../../docs/architecture/transverse/charte-emails-localeo.md) ;
   palette et polices des sources Marketplace, pictogrammes des applications.
