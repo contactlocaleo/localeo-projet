@@ -7,6 +7,21 @@ Les accents et formulations des anciennes notes sont normalisés sans changer le
 
 ## Signalement identifié
 
+### Correction du 10 novembre 2026 — Retours Live et stabilité du carnet
+
+Le parcours Mon carnet → participation revenait à l’ancienne liste ; les autres
+objets et détours perdaient aussi leur origine. Le bouton Messages était contraint
+à 44 px et le changement de filtre reconstruisait tout Live. Les phases locales
+puis distantes du chargement déplaçaient plusieurs zones du carnet.
+
+Correction dans Marketplace/Live : contexte de retour borné, filtre et reprise
+conservés, largeur des outils adaptée au texte, shell persistant et chargement
+initial composé. Les actualisations conservent les cartes jusqu’au résultat ;
+les refus et changements d’accès invalident les lectures privées concernées.
+Voir l’[audit, les preuves et limites](../../audits/marketplace/localeo-live-parcours-stabilite-2026-11-10.md).
+Sans modification de contrat API, migration ou changement de configuration. Correctif local ;
+aucun déploiement TEST au titre de cette intervention.
+
 ### ANO-MPL-E73-LIVE-05 — Commerçants difficiles à retrouver depuis une animation
 
 Signalé le **6 novembre 2026**. Les partenaires se trouvaient après les lots dans

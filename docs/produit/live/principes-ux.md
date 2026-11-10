@@ -91,6 +91,24 @@ le carnet reste utilisable sans débordement horizontal ; le zoom et le texte
 agrandi restent possibles. L’illustration accompagne la progression sans repousser
 le premier geste utile sous une longue introduction.
 
+## LIVE-UX-08 — Préserver le chemin et les repères pendant l’attente
+
+Un objet ouvert depuis Mon carnet revient à Mon carnet, avec son filtre et un
+repère de reprise. Le libellé du retour annonce sa destination réelle. Un détour
+par les messages, les commerces ou une fiche conserve l’étape précédente ; un
+lien direct propose un retour explicite. Les métadonnées de navigation ne
+contiennent ni accès personnel ni projection métier.
+
+Conserver l’en-tête, la navigation et les données déjà affichées lors d’un filtre
+local ou d’une actualisation. Au premier chargement, présenter une ossature
+non interactive et une annonce courte, sans faux vide ni succession d’actions
+provisoires. Éviter l’insertion tardive d’un bloc au-dessus d’une action disponible
+et les translations d’entrée sur une simple consultation. Tester avec réponses
+retardées, erreur, retour clavier et texte agrandi, pas seulement une page chargée.
+Un refus confirmé reste prioritaire sur la conservation visuelle des données.
+La conservation du bandeau ne doit pas conserver le QR, la saisie ou le panneau
+d’un autre objet lors d’un changement de page.
+
 ## Application aux évolutions futures
 
 Lors du cadrage ou de la conception d’une évolution Live, référencer les principes
