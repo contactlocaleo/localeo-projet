@@ -38,6 +38,13 @@ Les réponses d'une ancienne route/un composant démonté sont ignorées ; le bo
 reste désactivé pendant l'essai. Aucun retry automatique d'inscription. Un
 échec contact après lecture ne réinscrit pas et ne mélange pas deux personnes.
 
+Précision après lecture du producteur : un code coffret `cl1.*` s'échange une
+seule fois. Un échange sans réponse confirmée affiche une incertitude et propose
+un nouveau lien ; aucun bouton ne rejoue cette commande comme un GET. Une fois
+la session reçue, un GET passeport échoué peut être retenté avec cette session
+sans rééchanger le code. La projection d'un refus est retirée et une réponse
+tardive après navigation ne déclenche ni sauvegarde automatique ni redirection.
+
 L'entrée coffret sans identifiant devient un guide, distinct d'un lien personnel
 refusé. L'utilisateur retrouve le **lien personnel du coffret** dans son dernier
 e-mail, importe sa sauvegarde via `/live/reglages#live-backup` ou contacte
@@ -48,8 +55,8 @@ nouvelle récupération globale par e-mail, pas de migration/configuration.
 ### Lot 4 — découverte et aperçu public
 
 Le catalogue actuel ne renvoie pas le nom des lots : `lots` n'est rempli que
-dans le détail. Ajouter une projection additive `apercu_lots`, au plus trois
-éléments publics par animation (nom et image publique facultative), sans changer
+dans le détail. Ajouter une projection additive `apercu_dotation`, au plus trois
+éléments publics par animation (nature, nom et quantité publique prévue), sans changer
 `lots`, les curseurs, les filtres ou les compteurs. La projection contient
 uniquement des informations déjà autorisées sur le détail public. Aucun gagnant,
 prestataire privé, accès, stock interne ou prochaine étape de chasse.
@@ -60,13 +67,16 @@ en base et requêtes groupées ; aucun chargement de tous les lots puis tranche
 Python, ni appel détail par carte. Les anciens clients ignorent l'ajout ; les
 nouveaux acceptent un backend sans ce champ et affichent le nombre/nature connus.
 Le générateur de contrat reste dans le backend, les OpenAPI canoniques dans le
-projet. Le nom exact des champs sera vérifié avec le producteur avant codage.
+projet. Après lecture du producteur, les champs retenus sont `nature`
+(`COFFRET`, `LOT_EXTERNE`, `BON_NUMERIQUE`), `nom` (160 caractères au plus)
+et `quantite` (quantité prévue publique, pas stock restant). Aucune image de lot
+n'est actuellement publique dans ce contrat : elle n'est pas ajoutée ici.
 
 | Coût | Borne / preuve prévue |
 | --- | --- |
-| Catalogue/recherche | Pagination existante conservée ; enrichissement sur les seuls IDs de page, trois aperçus maximum par animation |
-| Requêtes | Nombre constant par page, sans requête par animation ; comparer pages 25/100 et populations N/10N |
-| Mémoire/payload | Au plus 3 × taille page objets d'aperçu, noms et URL publics bornés ; mesurer octets et nombre de lignes hydratées |
+| Catalogue/recherche | Pagination existante conservée, 50 animations maximum ; enrichissement sur les seuls IDs de page, trois aperçus maximum par animation |
+| Requêtes | Extension groupée constante par page, sans requête de dotation par animation ; comparer pages 1/10/50 et populations N/10N. Le N+1 historique de configuration de l'ancien catalogue n'est pas présenté comme résolu |
+| Mémoire/payload | Au plus 150 objets d'aperçu, noms bornés ; mesurer octets et nombre de lignes hydratées. Coffrets : limiter les références avant lecture des noms |
 | Accès SQL | Index existants animation/ordre à vérifier ; fenêtre/lecture latérale bornée selon adaptateur réel ; plans PostgreSQL sur cible jetable si disponible |
 | Capacité | Objectif Live p95 600 ms, p99 1 200 ms, erreurs < 0,5 % à dix lecteurs concurrents ; mesures isolées et charge mixte requises avant activation, pas de garantie issue d'un test unitaire |
 
@@ -89,6 +99,11 @@ d'aperçu fondé sur un nombre seul reste décoratif, non cliquable. La progress
 inconnue, le gain et la qualification restent distincts. Les lots conservent
 leurs contrôles de revalidation, le QR personnel et leur retour exact.
 
+Le travail sur le détail traite aussi le constat PM-R06 connexe : masquer le
+PIN pendant revalidation, retirer projection/QR/contact/PIN après 401/403/404/410,
+garder une lecture ancienne explicitement non actionnable après panne temporaire,
+et ignorer un résultat d'étape tardif après changement de génération de lecture.
+
 ### Lot 6 — mesure sans réactivation
 
 Instrumentation dans les composants/projections de parcours et la politique
@@ -97,6 +112,12 @@ Analytics existante. Valeurs fermées `source_page`, `animation_type`, `outcome`
 Aucune URL libre, donnée de formulaire, identifiant métier, token ni QR.
 L'état initial est capturé une seule fois par visite en mémoire ; illisible ne
 signifie pas nouveau. Les acquisitions ultérieures ne changent pas le dénominateur.
+La présence d'un accès personnel de participation stocké est un proxy prudent
+de participation existante : aucun balayage des API privées n'est ajouté pour
+certifier tous les droits. Un ancien accès expiré conservé exclut donc cette
+visite du groupe vide. Le taux ne mesure pas la première participation de la
+personne dans l'absolu. Un retrait du consentement réinitialise la frontière de
+mesure avec l'identité du transport ; les actions antérieures ne sont pas rejouées.
 Une inscription est mesurée après succès serveur ; un favori, un ajout d'accès
 existant ou un affichage de QR n'en est pas une. Les reçus/événements déjà vus
 sont dédupliqués en mémoire et ne sont jamais transmis comme identifiants.
