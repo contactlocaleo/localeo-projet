@@ -14,7 +14,7 @@ antérieures ne valent pas validation des changements ci-dessous.
 | 2 — confirmation/retour | PA-03/04/05 | Définie | Confirmation de l'objet exact, action selon moteur, retour contextualisé et tombola e-mail sans étape fictive. Node `live-saved-access` : 3/3, lint ciblé : 0. Playwright : 20 E74 + 5 readd + 7 confirmation réussis ; dernière reprise des 7 confirmations réussie après stabilisation du reçu. Captures 320/390/1280, CTA 320 et rayon du formulaire inspectés. Le passage global initial a été interrompu pour des fixtures de reprise du lot 3 devenues obsolètes ; il n'est pas annoncé entièrement vert |
 | 3 — reprise/récupération | PA-06/07 | Définie, échange coffret à usage unique précisé | Marketplace `4fc1008` : huit scénarios navigateur réussis (7 dans la reprise générale, dernier coffret rejoué 1/1 après correction du préfixe de session de la fixture), lint ciblé : 0. Panne participant/contact, refus, stockage échoué, guide sans ID, GET coffret après échange, échange incertain sans rejeu, réponse tardive. Rapport `tmp/pa-lot3-coffret-final-results.json` et reprise PA06/07 ; aucune commande métier automatique |
 | 4 — découverte/dotation | PA-08/09/10 | Définie, contrat réel confronté | Aperçu public borné et contrats synchronisés (backend `4b668e0`, Animation `5308a92`, Pro `186c73e`). Frontend : 38/38 navigateur (découverte 9, iconographie 16, dynamique 4, audit 9), puis 4/4 première arrivée après correction du wrapper. Node présentation 4/4, groupe normalisation/prévisualisation 10/10, lint 0. Capture CTA 320 et conditions longues inspectée ; dernière correction de chevauchement du texte 200 % à rejouer au lot 7. Bornes/consommateurs détaillés ci-dessous |
-| 5 — carnet/lots | PA-11/12/13 | Définie | À réaliser |
+| 5 — carnet/lots | PA-11/12/13 | Définie | Prochaine action par moteur, carnet vide incitatif, tampons dépliables 54 px et retrait des données/capacités après refus. Première recette 74/79 ; cinq libellés anciens corrigés puis reprise 6/7. Dernier échec réel (tampon réduit à 22 px par une règle SVG trop large) corrigé puis scénario passeport 1/1. Tous les 79 scénarios sont ainsi couverts, sans skip. QR 403/409, résultat/reçu 403, reçu 404, revalidation 503/200, PIN/gains, lots et retours vérifiés. Lint et diff : 0 ; revue indépendante intégrée |
 | 6 — mesure | PA-14/15/16 | Définie | À réaliser, suspension Analytics conservée |
 | 7 — recette/livraison | PA-17/18 | Définie | À réaliser ; humain/hébergement séparés |
 
@@ -22,8 +22,10 @@ Les nouvelles preuves sont ajoutées par lot avant son commit. Invariants : aucu
 réinscription lors d'une reprise, aucun accès personnel dans les projections
 publiques/Analytics, identité exacte de chaque entrée, refus prioritaires sur la
 conservation visuelle. Aucun nouveau compte ou mécanisme de récupération coffret.
-Les réserves antérieures (PM-R06, LA-16, LP) gardent leur statut propre ; aucune
-clôture d'epic globale n'est demandée.
+PM-R06 est corrigé et vérifié localement par le lot 5, y compris les refus des
+lectures secondaires. Les preuves historiques ci-dessous gardent leur date ;
+elles ne décrivent pas l'état de ce correctif. Recette hébergée et réserves
+LA-16/LP restent distinctes ; aucune clôture d'epic globale n'est demandée.
 
 ### Preuves du producteur et des contrats — lot 4
 
