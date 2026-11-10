@@ -1,5 +1,18 @@
 # Localeo Live — participation, lots et découverte sur mobile
 
+**Rattachement au suivi E73 le 10 novembre 2026 :**
+[E73-EVO-LIVE-PARCOURS-MOBILE, critères PM-01 à 09](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-10-novembre-2026--parcours-mobiles-e73-evo-live-parcours-mobile).
+Les corrections ci-dessous ont été commitées et poussées dans Marketplace
+`b9fb30d` ; cet audit et les principes dans projet `89db142`. Le
+[bilan PM](../../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md#évolution--e73-evo-live-parcours-mobile-10-novembre-2026)
+conserve les preuves et les quatre axes complémentaires. Sa revue indépendante
+précise deux limites : la borne de cinq pages n'est prouvée qu'au niveau helper
+(deux pages de lots distants en navigateur), et la suspension PIN/purge sur refus
+du détail participation reste à corriger (PM-R06). Les protections bon/coffret
+et QR participation ci-dessous ne prouvent pas ces deux comportements du jeu.
+Le compte rendu initial qui suit conserve son contexte ; aucun déploiement ni
+nouveau test applicatif n'est attesté par ce rattachement documentaire.
+
 Audit et corrections du **10 novembre 2026**, en complément de
 [la première passe sur les retours et chargements](localeo-live-parcours-stabilite-2026-11-10.md).
 Demande : prolonger l’expérience du carnet dans la participation, harmoniser les

@@ -1,5 +1,37 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+## Évolution du 10 novembre 2026 — iconographie et respiration
+
+**E73-EVO-LIVE-ICONOGRAPHIE** : évolution, spécification et implémentation des
+dix recommandations de l'[audit IA](../../audits/marketplace/localeo-live-iconographie-aeration-mobile-2026-11-10.md)
+explicitement demandées. [Critères E73-IA-01 à 10](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-10-novembre-2026--iconographie-et-respiration-e73-evo-live-iconographie)
+et [conception §14](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-adhesion-conception.md#14-iconographie-et-respiration--e73-evo-live-iconographie) :
+icônes sémantiques, cartes pleine largeur, QR, progression sans répétition,
+fiche/découverte aérées, précisions de retrait et vides confirmés simplifiés.
+Implémentation locale réalisée dans Marketplace/Live ; résultats de recette et
+limites au [bilan IA](../../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md#évolution--e73-evo-live-iconographie-10-novembre-2026).
+Statut historique E73 et réserves PM-R06/LA-16/LP conservés ; aucun déploiement
+ni clôture de ces réserves déduit de l'évolution graphique.
+
+## Évolution du 10 novembre 2026 — parcours mobiles
+
+**E73-EVO-LIVE-PARCOURS-MOBILE** rattache les résultats du
+[rapport participation, lots et découverte](../../audits/marketplace/localeo-live-mobile-participation-lots-decouverte-2026-11-10.md)
+à **neuf critères PM-01 à PM-09** : continuité de participation, chargements,
+fraîcheur et accès aux lots, retours bornés, découverte, actions et référence
+visuelle Pro. [Critères et décisions](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-10-novembre-2026--parcours-mobiles-e73-evo-live-parcours-mobile),
+[conception §13](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-adhesion-conception.md#13-parcours-mobiles--e73-evo-live-parcours-mobile)
+et [matrice, preuves et reste à traiter PM-R01 à 06](../../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md#évolution--e73-evo-live-parcours-mobile-10-novembre-2026).
+
+Corrections poussées dans Marketplace `b9fb30d`, audit/principes dans projet
+`89db142` ; dernière recette ciblée 16/16 et Node 239/239 selon le rapport.
+La présente évolution consolide la spécification, sans nouveau code applicatif.
+Restent recette TEST/physique, grands carnets, qualité des consignes et cadrage
+éventuel des pistes produit. La revue ajoute un correctif P1 ouvert : PIN et
+projection du détail participation lors de revalidation/refus (PM-R06).
+**Évolution non déclarée terminée ; clôture historique E73 et réserves LA-16/LP
+conservées.** Aucun déploiement attesté, aucun nouveau statut de roadmap.
+
 ## Évolution du 9 novembre 2026 — retours de l’audit du carnet de bord
 
 **E73-EVO-LIVE-CARNET-BORD** : implémentation des neuf retours CB01 à CB09

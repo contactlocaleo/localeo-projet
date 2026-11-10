@@ -1,5 +1,18 @@
 # Roadmap par etat
 
+**10 novembre 2026 — E73-EVO-LIVE-ICONOGRAPHIE** : dix recommandations de
+l'audit iconographie/espacement spécifiées et implémentées localement dans Live.
+[Critères, conception et suivi](terminees/epic-73-animation-et-ou-coffrets-backlog.md#évolution-du-10-novembre-2026--iconographie-et-respiration).
+Clôture historique E73 et compteurs inchangés ; les résultats de cette évolution
+sont distincts des réserves de parcours et de capacité précédentes.
+
+**10 novembre 2026 — E73-EVO-LIVE-PARCOURS-MOBILE** : résultats de l'audit
+participation/lots/découverte et référence UX Pro intégrés en neuf critères PM.
+Corrections déjà poussées, preuves locales et réserves séparées ; reste à traiter
+incluant recette mobile réelle et correctif P1 de revalidation participation.
+[Périmètre et suivi](terminees/epic-73-animation-et-ou-coffrets-backlog.md#évolution-du-10-novembre-2026--parcours-mobiles).
+Clôture historique E73, réserves LA-16/LP et compteurs d'epics inchangés.
+
 **9 novembre 2026 — E73-EVO-LIVE-CARNET** : audit PDF intégré en 17 critères
 pour un carnet animations/coffrets/lots, inscription/continuité et harmonisation.
 Spécification puis implémentation demandées ; décisions produit résolues,

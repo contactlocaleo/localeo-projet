@@ -2,6 +2,8 @@
 
 Constats datés conservés par application. Un audit ancien ne décrit pas automatiquement l’état actuel.
 
+- [Localeo Live — iconographie et respiration sur mobile — 10 novembre 2026](marketplace/localeo-live-iconographie-aeration-mobile-2026-11-10.md) : dix recommandations sur le sens des icônes, la largeur utile des cartes, les textes redondants et l'espacement ; inspection TEST et vues synthétiques distinguées, sans implémentation.
+
 - [Localeo Live — participation, lots et découverte sur mobile — 10 novembre 2026](marketplace/localeo-live-mobile-participation-lots-decouverte-2026-11-10.md) : actions prioritaires, chargements partagés, retours aux lots et codes visuels de Localeo Pro.
 
 - [Localeo Live — retours de parcours et stabilité visuelle — 10 novembre 2026](marketplace/localeo-live-parcours-stabilite-2026-11-10.md) : carnet, participations, lots, messages et commerces ; corrections du contexte de retour, du bouton Messages et des chargements mobiles, avec preuves locales isolées.

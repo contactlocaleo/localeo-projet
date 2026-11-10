@@ -137,6 +137,35 @@ et son retrait plutôt que de grands compteurs. Dans Découvrir, rendre visibles
 la recherche et « Pour plus tard », même sans favori ; « Garder » et « Partager »
 associent une icône à un verbe. La sauvegarde d’une idée ne vaut pas inscription.
 
+## LIVE-UX-10 — Des pictogrammes utiles et de l'espace pour agir
+
+**Orientation précisée le 10 novembre 2026.** Une carte s'organise autour de
+l'objet, d'un état utile, d'une progression éventuelle et d'une action principale.
+L'icône de couverture accompagne l'identité ; elle ne réserve pas une colonne
+vide à côté de toute la progression et du bouton. Utiliser la largeur disponible
+avant d'augmenter la hauteur. Conserver les marqueurs du carnet et un seul cadre
+expressif de tampons ou ticket.
+
+Les pictogrammes utilitaires partagent un dessin et un sens : carnet, parcours,
+boîte pour coffret, cadeau pour lot, ticket pour bon, QR pour présenter son code.
+La coche indique un fait accompli confirmé ; expiration, annulation et refus ont
+un repère distinct et leur libellé. Les icônes de navigation et gestes essentiels
+restent accompagnées de mots courts. Une illustration ou un état local n'accorde
+jamais de droit. Les règles, conditions et incertitudes nécessaires ne se retirent
+pas pour raccourcir un écran.
+
+Retirer les répétitions de l'objectif, du compteur et des précautions avant de
+compresser la police ou les espaces. Viser 8 px dans un groupe, 12–16 px entre
+groupes, 16 px entre cartes et 24 px entre sections, adaptés au premier viewport.
+Les cartes visent 16 px de marge intérieure à 390 px, 12 px à 320 px. Les cibles
+restent au moins 44 px, le corps/actions 14 px. Le premier geste utile reste
+visible dans les cas nominaux ; titre long et texte agrandi gardent leur accès.
+
+Un état vide confirmé dispose d'une invitation illustrée et d'une action ; des
+compteurs zéro et phrases équivalentes ne remplacent pas cette orientation.
+Lecture incomplète, refus et panne restent distincts. Les comportements et
+preuves sont définis par [E73-EVO-LIVE-ICONOGRAPHIE](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-10-novembre-2026--iconographie-et-respiration-e73-evo-live-iconographie).
+
 ## Application aux évolutions futures
 
 Lors du cadrage ou de la conception d’une évolution Live, référencer les principes

@@ -1,5 +1,16 @@
 # E73 — Localeo Live, entrée unique des animations
 
+**E73-EVO-LIVE-ICONOGRAPHIE — 10 novembre 2026** : spécification puis réalisation
+des dix recommandations IA du [rapport iconographie et respiration](../../audits/marketplace/localeo-live-iconographie-aeration-mobile-2026-11-10.md).
+Critères E73-IA-01 à 10 en fin de document ; preuves propres au bilan, clôture
+historique et réserves PM/LA-16/LP conservées.
+
+Le complément **E73-EVO-LIVE-PARCOURS-MOBILE** du 10 novembre 2026 intègre
+le rapport participation/lots/découverte et la référence visuelle Localeo Pro.
+Les **neuf critères PM-01 à PM-09** en fin de document précisent les parcours
+déjà corrigés dans Marketplace `b9fb30d`. Recette déployée, téléphone physique
+et axes complémentaires restent suivis séparément dans le bilan.
+
 Le complément **E73-EVO-LIVE-CARNET-BORD** du 9 novembre 2026 applique les neuf
 retours de l’audit mobile sur demande d’implémentation complète. Il remplace
 CN-D01 par **Mon carnet / Mes lots / Découvrir**. Critères CB01 à CB09 en fin de
@@ -1569,3 +1580,92 @@ réduit. Tests isolés et captures ; téléphone physique et compréhension avec
 habitants restent des preuves distinctes. Conception et impacts au
 [§12](localeo-live-adhesion-conception.md#12-carnet-de-bord--e73-evo-live-carnet-bord),
 résultats exécutés au [bilan](verification-livraison.md).
+
+## Évolution du 10 novembre 2026 — parcours mobiles (E73-EVO-LIVE-PARCOURS-MOBILE)
+
+Source : [audit participation, lots et découverte](../../audits/marketplace/localeo-live-mobile-participation-lots-decouverte-2026-11-10.md),
+complété par la demande d'appliquer les tailles de police et sections de Localeo
+Pro. L'habitant doit retrouver son objet, comprendre son état et agir depuis
+son téléphone, dans la continuité du carnet de bord digital.
+
+**Phase du présent complément : consolidation des spécifications et du suivi.**
+Les corrections du rapport sont déjà implémentées et poussées dans Marketplace
+`b9fb30d` ; l'audit et les principes sont dans le projet `89db142`. Leur recette
+locale est référencée au bilan, sans prétendre une nouvelle exécution ni un
+déploiement vérifié. Aucun nouveau comportement métier n'est décidé ici.
+La clôture historique E73 du 1er novembre et les réserves LA-16/LP sont conservées.
+
+### Décisions, écarts et critères
+
+**PM-D01 — continuité mobile.** Les défauts de retour, faux états vides et
+perte de contexte sont des corrections des attentes CN-02/04/05/06/14/15/16/17,
+CB01/05/06/07, LH et FD ; ces IDs et leurs preuves historiques sont conservés.
+Les critères PM ajoutés ci-dessous détaillent leurs observations de recette,
+sans les remplacer ni attester rétroactivement toutes les autres évolutions.
+
+**PM-D02 — référence Pro.** Sur les pages Live, la liberté antérieure de taille
+et d'habillage des sections est précisée par LIVE-UX-09 : typographie système,
+sections blanches bordées et actions compactes. Le carnet conserve ses tampons,
+ses tickets et ses trois destinations. Les descriptions antérieures de papier
+et d'immersion restent valables pour ces repères, sans imposer de grands blocs
+ni d'animations à chaque lecture. Cette décision applique la demande utilisateur
+du 10 novembre ; elle ne modifie pas l'interface de Localeo Pro.
+
+| Critère ajouté | Constat du rapport et attentes observables |
+| --- | --- |
+| **E73-PM-01** | Participation : depuis Mon carnet, Voir ma participation conserve la cible exacte et propose un retour vers Mon carnet. Progression confirmée et prochaine action précèdent historique/commerces ; gain et résultat utiles restent prioritaires. Un détour par Mes lots ou Messages revient à la participation d'origine. Un accès direct offre un retour explicite ; le libellé annonce la destination réelle. Aucun effet d'acquisition au simple chargement. |
+| **E73-PM-02** | Toutes les pages Live utilisent le même langage d'attente : ossature statique non interactive au premier chargement, titre/retour disponibles dès que connus, données lisibles conservées à la relecture. Attente, vide confirmé, erreur et dernier état connu sont distincts ; facture ou QR ne sont pas annoncés absents avant la lecture. Formulaire et issue d'une commande restent visibles, sans renvoi automatique. Une erreur reste lisible même si sa hauteur dépasse l'espace réservé. |
+| **E73-PM-03** | Mes lots attend la première lecture nécessaire avant de présenter sa composition, puis conserve les cartes lors des actualisations. En cas d'échec, le dernier état connu est explicite et la reprise accessible ; un compteur inconnu ou partiel n'annonce pas zéro ni un total exhaustif. Une panne ne transforme pas une copie en droit confirmé. |
+| **E73-PM-04** | Dans le bon et le détail coffret, les informations descriptives compatibles peuvent rester lisibles pendant revalidation ; QR, code de secours, PIN et action sensible attendent une confirmation de l'accès. Refus confirmé ou changement d'objet : retirer le contenu protégé concerné, conserver les autres objets autorisés. Aucun accès ne vient des métadonnées de retour ou d'un résumé ancien. |
+| **E73-PM-05** | Mes lots → détail → retour retrouve historique ouvert, carte et position lorsque la cible est toujours accessible et dans la fenêtre relue. Reconstruire au plus cinq pages par source, en relisant les sources ; au-delà, continuer manuellement. Un bon local reste un état mémorisé, revérifié à l'ouverture. Arrêter sur échec, annoncer une cible disparue et laisser la main à une interaction commencée pendant l'attente. L'état de navigation ne contient ni réponse métier, ni token, ni curseur privé. Les liens de tirage gardent leur contexte existant, sans promesse de reconstruction de carte. |
+| **E73-PM-06** | Découvrir publie ensemble les premières lectures communes/périodes nécessaires : une réponse tardive n'insère pas un raccourci au-dessus d'une carte déjà utilisable. À l'actualisation, garder le programme lisible avec son état de fraîcheur ; une réponse d'un ancien territoire ne remplace pas le territoire courant. La stabilité ne signifie pas une promesse de délai réseau. |
+| **E73-PM-07** | Recherche et Pour plus tard sont visibles, y compris sans favori. Garder/Gardée et Partager ont un pictogramme, un verbe et un nom accessible. Garder ne vaut pas inscription. La fermeture de recherche rend le focus à son déclencheur réel, menu ou raccourci. Les erreurs et états vides conservent une action de reprise pertinente. |
+| **E73-PM-08** | Mes lots privilégie gain, état, consigne disponible et action autorisée ; les compteurs restent compacts. Vide confirmé : Découvrir les animations en premier, récupération en second. Avec les contenus nominaux de recette, première action du lot et première action publique visibles au-dessus de la navigation à 320 × 568 et 390 × 844. Un contenu long reste accessible sans troncature des conditions ni recouvrement. Aucune adresse, échéance ou personne de remise n'est inventée. |
+| **E73-PM-09** | Appliquer LIVE-UX-09 : corps/actions 14 px, H1 25 px (23 px mobile), H2 18 px, H3 15 px à taille standard, unités permettant l'agrandissement ; champs mobiles 16 px et cibles tactiles ≥ 44 px. Sections blanches bordées, rayon 12 px, actions 9 px ; palette de la référence commune. Vérifier carnet, participation, lots, découverte et pages annexes, clavier, texte agrandi et mouvement réduit. Les tampons et tickets restent informatifs, sans droit ni récompense supplémentaire. |
+
+La [conception §13](localeo-live-adhesion-conception.md#13-parcours-mobiles--e73-evo-live-parcours-mobile)
+précise états, bornes et impacts. La matrice et le reste à vérifier sont au
+[bilan PM](verification-livraison.md#évolution--e73-evo-live-parcours-mobile-10-novembre-2026).
+Les quatre axes complémentaires du rapport y sont repris avec leur portée :
+recette habitant, grand carnet, qualité des consignes et pistes produit à cadrer.
+
+## Évolution du 10 novembre 2026 — iconographie et respiration (E73-EVO-LIVE-ICONOGRAPHIE)
+
+Demande explicite : faire évoluer E73, spécifier et implémenter les résultats
+du [rapport IA](../../audits/marketplace/localeo-live-iconographie-aeration-mobile-2026-11-10.md).
+Base Marketplace `b9fb30d` ; projet `89db142` avec consolidation PM et audit déjà
+présents, conservés. Périmètre : présentation Live, aucune nouvelle règle métier,
+permission ni acquisition d'accès. Les critères CN/CB/TP/FD/LH/PM gardent leurs IDs.
+
+**IA-D01 — sens et respiration.** Une icône d'objet, un état utile, une
+progression visuelle et une action principale structurent la carte. Référence
+Pro conservée : corps/actions 14 px, champs mobiles 16 px, cibles 44 px minimum.
+Réduire les textes redondants avant d'augmenter les espaces ; les conditions,
+refus, vérifications et retours contextuels restent explicites. Les dessins
+utilitaires sont cohérents ; tampons et tickets restent la famille expressive.
+
+**IA-D02 — libellés remplacés.** « Présenter mon QR personnel » devient
+« Présenter mon QR » avec pictogramme QR ; « Retrouver mes consignes » devient
+« Voir les consignes » pour un lot externe à retirer seulement. L'appel de
+récupération peut devenir « Retrouver mon carnet », accompagné du périmètre
+participations/lots par e-mail. Aucun changement des destinations ou commandes.
+Les assertions portant ces anciens textes sont actualisées pour cette décision ;
+les assertions de droits, accès exacts, géométrie et clavier sont conservées.
+
+| Critère ajouté | Comportement observable attendu |
+| --- | --- |
+| **E73-IA-01** | Mes lots : cadeau commun au titre/navigation ; coffret représenté par boîte distincte, bon numérique par ticket. État rendu selon le fait : coche seulement pour utilisé/remis ; expiration, annulation, remplacement et refus distincts avec libellé. Un état inconnu reste à vérifier. Aucune règle d'attribution/retrait n'est recalculée. |
+| **E73-IA-02** | Carte du carnet : couverture et titre sur une ligne d'identité ; progression, informations utiles et action disposent de la largeur complète. Tranche de carnet conservée. Plusieurs accès à une même animation restent distincts ; à 320/390, pas de débordement et prochaine action du carnet visible avant la navigation. |
+| **E73-IA-03** | QR participation : pictogramme QR et libellé court IA-D02. Un seul geste principal, nom accessible et cible ≥44 px ; attente, désactivation, refus, vérification et protocole d'ouverture inchangés. Aucune capacité créée par la présentation. |
+| **E73-IA-04** | Participation : une surface de progression avec compteur exact, sans titre ni encouragement reformulant le même nombre. Qualification/gain distincts du progrès. Tombola : ticket cohérent avec état et prochaine action, pas de faux parcours de visites ; chasse sans dévoilement de lieux futurs. Gratification seulement sur acquis confirmé, mouvement réduit conservé. |
+| **E73-IA-05** | Fiche publique : objectif visuel unique, suppression des sous-titres redondants ; mécanique détaillée dans Comment jouer. Gain, conditions essentielles, règlement et action autorisée restent accessibles avant inscription. Objectif inconnu, type générique ou date/visuel absents n'inventent aucune promesse. |
+| **E73-IA-06** | Découvrir : groupes aérés et corps/actions 14 px ; espace récupéré par composition, pas en masquant recherche/favoris. Première action publique nominale entièrement au-dessus de la navigation à 320 × 568 et 390 × 844 ; texte long/200 % accessible sans débordement. Programme, erreurs, périodes et actions Garder/Partager conservent leur sens et leur état. |
+| **E73-IA-07** | Lot : une icône de nature, état et contrainte utile visibles ; précisions regroupées dans Informations de retrait. Dernier état connu, échéance inconnue et accès à vérifier explicites. Consignes nécessaires consultables volontairement ; CTA IA-D02 limité aux lots externes, bons/coffrets gardant leur destination propre. Aucun état ni droit déduit du panneau replié. |
+| **E73-IA-08** | Même famille utilitaire dans navigation, titres, filtres et objets : carnet, parcours, coffret, lot, QR, date, lieu, garder, partager. Icônes décoratives cachées aux lecteurs d'écran ; boutons nommés et focus visible. Libellés des trois destinations et gestes essentiels conservés ; pas d'animation d'entrée nouvelle. |
+| **E73-IA-09** | Sans commune : invitation illustrée, recherche et localisation volontaire ; limite de dix et explication du stockage accessibles dans l'aide. Aucun nouveau consentement implicite. Deux périodes vides après lectures réussies : une invitation commune. Attente, résultat partiel, panne ou filtres actifs restent distingués, sans faux vide ni perte de reprise. |
+| **E73-IA-10** | Mes lots entièrement vide après lecture réussie : un état illustré, découverte puis récupération ; pas de compteurs zéro redondants. Présence de tirage, lot historique/local ou erreur préserve ses repères. Carnet vide : trio Parcours/Coffrets/Lots conservé. Récupération raccourcie avec périmètre participations/lots explicite, coffrets par voie existante. |
+
+Conception et matrice d'impacts au [§14](localeo-live-adhesion-conception.md#14-iconographie-et-respiration--e73-evo-live-iconographie).
+Les dix critères sont à vérifier sur la réalisation ; leur spécification ne
+constitue pas une preuve. Les réserves PM-R06, capacité LA-16/LP et essai physique
+restent indépendantes et ne sont pas closes par cette évolution.

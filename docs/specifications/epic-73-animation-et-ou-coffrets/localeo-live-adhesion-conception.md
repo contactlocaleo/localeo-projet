@@ -1740,3 +1740,118 @@ résultat exploitable, ne pas déduire la fin d’une animation du nombre de tam
 
 Résultats et limites au bilan après exécution ; cette conception ne remplace
 pas les preuves de rendu ni la recette du service déployé.
+
+## 13. Parcours mobiles — E73-EVO-LIVE-PARCOURS-MOBILE
+
+Consolidation du 10 novembre 2026, après le commit Marketplace `b9fb30d`.
+[Critères PM-01 à PM-09](localeo-live-entree-unique.md#évolution-du-10-novembre-2026--parcours-mobiles-e73-evo-live-parcours-mobile),
+[audit source](../../audits/marketplace/localeo-live-mobile-participation-lots-decouverte-2026-11-10.md)
+et [matrice de preuves](verification-livraison.md#évolution--e73-evo-live-parcours-mobile-10-novembre-2026).
+Ce complément précise les §7/9/10/11/12 sans changer leurs contrats métier.
+
+### 13.1 Présentation et états
+
+Le frontend présente les états confirmés par les domaines backend existants
+Animation, Lots et Coffrets ; il ne décide ni qualification, ni gain, ni remise.
+La prochaine action précède les informations secondaires. La référence visuelle
+est [LIVE-UX-09](../../produit/live/principes-ux.md#live-ux-09--partager-la-lisibilité-de-localeo-pro),
+avec les marqueurs du carnet et les gratifications sur reçu confirmé conservés.
+
+| État | Présentation et comportement |
+| --- | --- |
+| Première lecture | `LiveLoadingState`, ossature statique réutilisée par `LiveLoadingShell` et les pages ; aucune commande provisoire, aucun faux vide. En-tête, navigation et retour restent présents lorsque connus. |
+| Relecture | Conserver l'objet descriptif et sa position ; signaler la vérification. Les capacités du bon et du coffret sont suspendues jusqu'à confirmation de leur accès. Une identité différente ne réutilise pas le panneau de l'objet précédent. |
+| Succès vide | Afficher l'état vide avec découverte ou récupération selon la page. Ne pas confondre absence locale, page partielle et absence confirmée. |
+| Échec de transport | Dernier état connu explicite, reprise disponible ; aucune copie ne confirme un droit. Dans Découvrir, conserver le programme de la requête courante sans laisser une ancienne commune écraser la nouvelle. |
+| Refus confirmé | Retirer la projection protégée concernée ; la conservation visuelle ne prime pas sur le refus. La portée vérifiée bon/coffret est distincte des limites du jeu consignées au bilan. |
+| Commande en cours ou issue incertaine | Conserver formulaire, saisie et issue ; vérifier via le protocole existant, sans réexécution automatique. |
+
+Le langage de chargement concerne module Live/carnet, participation et QR,
+fiche/inscription, lots/bon/coffret/facture, découverte, messages, communes,
+commerces, récupération/confirmation, réglages, fil local et juridique.
+Import de sauvegarde et restauration locale gardent leur formulaire immédiat :
+aucune attente distante fictive. Une erreur longue peut agrandir son emplacement.
+
+### 13.2 Retours, bornes et compatibilité
+
+`liveReturnNavigation` conserve le chemin explicite et le contexte de retour ;
+`liveLotsNavigation` filtre les métadonnées propres à Mes lots. Elles indiquent
+historique ouvert, identifiant de carte, position et nombre de pages par source.
+Elles ne transportent ni projection métier, ni token, ni curseur privé. Une
+destination ou un identifiant n'accorde aucun accès. Deux participations à la
+même animation restent distinctes ; aucun regroupement par nom ou e-mail.
+
+La reconstruction est limitée à **cinq pages par source** (lots distants,
+tirages, bons locaux), à partir des lectures existantes. Les bons locaux sont
+relus depuis IndexedDB, puis leur droit vérifié lors de l'ouverture ; leur
+présence n'est pas une validation distante. La pagination suivante reste
+volontaire. Échec ou fin de source arrête la progression ; un geste pendant
+l'attente prend priorité sur le repositionnement. Le détail disparu est
+annoncé, sans substitution d'un autre gain. Les tirages ne bénéficient pas de
+la promesse de retour à une carte de lot.
+
+Cette borne frontend ne vaut pas qualification de charge : le test navigateur
+de continuité couvre deux pages de lots distants, la borne cinq est testée dans
+le helper. Recette de cinq pages, dépassement et sources combinées restent au
+bilan. Les budgets, mesures N/10N et charge mixte LA-16/LP conservent leur suivi ;
+aucune nouvelle mesure de capacité SQL ou de latence hébergée n'est annoncée.
+Les tailles des pages et les contrats des producteurs restent inchangés.
+
+### 13.3 Impacts et livraison
+
+| Impact examiné | Conclusion pour ce complément |
+| --- | --- |
+| Applications | Réalisation déjà poussée dans Marketplace/Live ; Pro fournit la référence visuelle et son code ne change pas. Animation et backend ne changent pas dans cette consolidation. |
+| Contrats, permissions, concurrence | Aucun endpoint ni schéma partagé modifié ; accès exacts et contrôles serveur conservés. Annulation/réponses tardives et refus sont des comportements de non-régression, avec limites explicites au bilan. |
+| Données, migration, coexistence | Aucun schéma ou format métier ajouté ; métadonnées de navigation filtrées et anciennes entrées sans métadonnées utilisables via le repli existant. Pas de migration ni opération sur les données d'exploitation. |
+| Documentation fonctionnelle | Critères PM et décisions dans la spécification Live, LIVE-UX-08/09 conservés, entrée E42 reliée à ce complément. Audit historique maintenu et rattaché au suivi canonique. |
+| Fixtures et générateur | Fixtures frontend synthétiques déjà enrichies pour lenteur, refus, retour, pagination et mobile ; aucun état de domaine ajouté, donc générateur backend inchangé. |
+| Exploitation | Livraison frontend seule, aucun flag, batch, secret ou ordre de migration nouveau. Vérifier le SHA servi et les parcours sur TEST ; un push ne prouve pas cette recette. Revenir à l'artefact frontend précédent si nécessaire, sans modifier le carnet ni les droits. Aucune opération distante effectuée par ce complément. |
+
+Les preuves et actions ouvertes sont centralisées dans le bilan ; ni les
+corrections historiques ni leur qualification technique ne sont recréées ici.
+
+## 14. Iconographie et respiration — E73-EVO-LIVE-ICONOGRAPHIE
+
+[Critères IA](localeo-live-entree-unique.md#évolution-du-10-novembre-2026--iconographie-et-respiration-e73-evo-live-iconographie),
+issus du rapport du 10 novembre. Thèse visuelle : carnet calme et lisible,
+objets reconnaissables et tampons encrés, avec une prochaine action immédiatement
+identifiable. Composition : identité/état, progression ou information décisive,
+action, puis détails volontaires. Interactions : focus et dépliage existants,
+gratification confirmée préservée ; aucune entrée animée ni nouveau geste caché.
+
+La correspondance des icônes est une projection de présentation, pas une règle
+métier. Le backend conserve l'autorité sur état, qualification, gain, droits et
+consommation. Les accès, mutations, refus et métadonnées de retour existants ne
+sont pas modifiés pour réduire le texte.
+
+La famille `LiveActivityIcon` fournit les dessins utilitaires partagés : cadeau
+pour lot, boîte pour coffret, carnet, parcours, QR et états explicites. Les
+tampons ne sont pas remplacés par ces pictogrammes. Taille utile 20–24 px pour
+commande, 28–32 px pour objet ; nom accessible porté par la commande, SVG
+décoratif masqué. Les libellés importants demeurent visibles.
+
+Espacements cibles : 8 px à l'intérieur d'une information, 12–16 px entre groupes,
+16 px entre cartes, 24 px entre sections. Intérieur de carte 16 px à 390,
+12 px à 320. Ces valeurs sont ajustées à la composition et testées avec les
+actions visibles ; aucune marge globale n'est imposée au détriment du premier
+viewport. Un seul cadre de progression et pas de sous-cadres redondants.
+
+La compaction ne doit pas faire disparaître l'aide « Aller au défi » lorsque
+le formulaire n'est que partiellement visible : le bouton principal de réponse
+doit être entièrement hors des bandes fixes avant de retirer cette aide. Le
+focus reste dirigé vers le défi, sans validation ni commande supplémentaire.
+
+| Critères | Propriétaire / composants | Preuves prévues | Documentation / contrat | Fixtures / générateur | Exploitation |
+| --- | --- | --- | --- | --- | --- |
+| IA-01/07/10 | LiveLots, projection d'icônes, récupération ; états fournis par backend inchangés. | Lots de chaque nature/état, vide complet vs partiel, refus, retour exact, lecture/commandes inchangées ; capture et clavier mobile. | Spécification IA et principes UX ; pas de contrat API nouveau. | Fixtures frontend synthétiques enrichies ; pas de nouvel état backend. | Frontend seul ; aucune migration/activation. |
+| IA-02/03/04/08 | Carnet, participation, QR, famille utilitaire et navigation. | Carnet mixte, grands objectifs, moteurs, QR indisponible/frais/refusé, focus, nom accessible ; 320/390 et texte agrandi. | IA-D01/02, CN/TP/PM conservés. | Tests existants adaptés seulement aux attentes remplacées ; générateur inchangé. | Réserve PM-R06 distincte ; aucun accès personnel de TEST requis. |
+| IA-05/06/09 | Fiche, découverte et communes. | Avec/sans image, objectif inconnu, conditions, CTA nominal, périodes vides/partielles/en erreur, recherche, favoris, localisation et stockage refusés. | FD/LH/CN conservés ; limite dix communes et consentement inchangés. | Réponses simulées ; aucun appel distant des tests. | Aucun flag ni batch ; recette déployée distincte de la preuve locale. |
+
+Données, permissions et coexistence : aucun schéma API, persistance métier,
+contrat de stockage ou route modifié. Les lectures restent bornées comme avant,
+pas de lecture supplémentaire pour produire une icône ou un espace vide. Les
+autres applications et leurs générateurs n'ont aucun changement à consommer.
+Le rollback du frontend ne requiert pas de reprise de données. Livrer les
+sources Live et la documentation ; contrôler les parcours après déploiement
+sans confondre build local et version servie. Résultats réels à consigner au bilan.

@@ -1,5 +1,17 @@
 # Specifications Epic 42 - Localeo Live
 
+[E73-EVO-LIVE-ICONOGRAPHIE](../epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-10-novembre-2026--iconographie-et-respiration-e73-evo-live-iconographie)
+précise les icônes d'objets/états, la largeur utile des cartes, l'objectif visuel
+et les états vides. Les mots essentiels, droits et conditions sont conservés ;
+LIVE-UX-10 pérennise cette orientation. Implémentation locale effectuée ; preuves
+et limites au bilan E73.
+
+Le complément [E73-EVO-LIVE-PARCOURS-MOBILE du 10 novembre](../epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-10-novembre-2026--parcours-mobiles-e73-evo-live-parcours-mobile)
+précise participation, chargements communs, retours de Mes lots, recherche et
+favoris visibles, ainsi que la typographie et les sections inspirées de Pro.
+Les [preuves et réserves PM](../epic-73-animation-et-ou-coffrets/verification-livraison.md#évolution--e73-evo-live-parcours-mobile-10-novembre-2026)
+distinguent les corrections poussées des recettes et correctifs encore ouverts.
+
 L’évolution [E73-EVO-LIVE-CARNET-BORD](../epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-9-novembre-2026--carnet-de-bord-e73-evo-live-carnet-bord)
 remplace la navigation CN décrite plus bas par **Mon carnet / Mes lots /
 Découvrir**. Le carnet porte la prochaine action, Mes lots reste accessible à

@@ -1,5 +1,196 @@
 # E73 — Vérification, migration et livraison
 
+## Évolution — E73-EVO-LIVE-ICONOGRAPHIE, 10 novembre 2026
+
+Demande : faire évoluer, spécifier puis implémenter les dix recommandations
+du [rapport iconographie/respiration](../../audits/marketplace/localeo-live-iconographie-aeration-mobile-2026-11-10.md).
+[Critères IA et décisions](localeo-live-entree-unique.md#évolution-du-10-novembre-2026--iconographie-et-respiration-e73-evo-live-iconographie),
+[conception §14](localeo-live-adhesion-conception.md#14-iconographie-et-respiration--e73-evo-live-iconographie)
+et [LIVE-UX-10](../../produit/live/principes-ux.md#live-ux-10--des-pictogrammes-utiles-et-de-lespace-pour-agir).
+Base Marketplace `b9fb30d`, projet `89db142` avec les travaux PM et l'audit non
+commités déjà présents. Ils sont conservés ; preuves des évolutions précédentes
+et clôture historique ne sont pas requalifiées.
+
+**Livraison Git du 10 novembre 2026, demandée après la recette :** Marketplace
+`0a327a2fbf08ece33d9424679cc3457fe388be75` est commité et poussé sur `origin/main`.
+La documentation IA, l'audit et la consolidation PM conservée sont réunis dans
+un commit séparé du présent dépôt. Les preuves ci-dessous portent sur les
+sources applicatives ainsi livrées ; aucun test applicatif n'a été relancé pour
+le seul commit. Le déploiement effectif et la recette de TEST ne sont pas attestés.
+
+### Matrice de réalisation et de preuve IA
+
+Les chemins courts désignent les tests Marketplace dans `tests/visual/` ; les
+tests Node sont dans `tests/security/`. Les résultats doivent être rattachés à
+l'arbre final ; la liste de scénarios seule ne vaut pas réussite.
+
+| Critère | Réalisation / propriétaire | Scénarios de preuve (résultats ci-dessous) |
+| --- | --- | --- |
+| IA-01 | `liveRewards` et `LiveActivityIcon` : icônes de nature/état, backend toujours autoritaire. | `live-iconography-lots` : lots disponibles, retirés/utilisés, expirés/annulés/remplacés/refusés et inconnus ; libellé exact et symbole sans coche indue. |
+| IA-02 | `LiveUnifiedCarnet` : identité sur une ligne, progression et action pleine largeur. | `live-audit-carnet` et `live-unified-carnet` : carnet mixte et collections à 320/390, prochaine action visible, titre long et texte agrandi ; helper Node `live-unified-carnet`. |
+| IA-03 | `ParticipantQrAction` : bouton illustré, libellé court ; protocole existant. | `live-participation-mobile-flow`, `live-qr-opening` : ouverture, indisponibilité/refus, absence de commande implicite. |
+| IA-04 | `LiveAnimationGame` : progression sans compteur/texte redondant et ticket tombola regroupé. | `animation-progress`, `live-game`, `e74-tombola-email`, `live-unified-carnet` : passeport/chasse/tombola, objectif inconnu/grand parcours, qualification et conditions. |
+| IA-05 | `LivePublicAnimationView` : objectif visuel unique, conditions et gain préservés. | `live-iconography-discovery`, `live-audit-discovery`, `live-public-detail-fd` : fiche avec/sans visuel, promesse générique/inconnue, conditions avant inscription et première action. |
+| IA-06 | `LiveDiscovery` et styles : espacements des groupes et typographie commune. | `live-iconography-discovery`, `live-audit-discovery`, `live-mobile-ux`, `live-hierarchy-fluidity` : programme nominal 320/390, recherche/favoris, texte agrandi et navigation. |
+| IA-07 | `LiveLots` : informations de retrait regroupées, état ancien et contraintes explicites. | `live-iconography-lots`, `live-lots-mobile`, `live-lots-unified`, `live-lots-continuity`, `live-mobile-ux` : natures, échéance inconnue, consignes, liens exacts/retours, revalidation et refus. |
+| IA-08 | `LiveActivityIcon` réutilisé par navigation, titres, filtres et cartes ; tampons expressifs conservés. | `live-unified-carnet`, `live-iconography-lots`, `live-iconography-discovery`, `live-audit-navigation` : correspondance, nom accessible, cible tactile, clavier et zoom ; revue indépendante du diff. |
+| IA-09 | `LiveCommunes` et `LiveDiscovery` : invitation sans commune et vide programme confirmé unique. | `live-iconography-discovery`, `live-communes-graphics`, `live-habitant-communes`, `live-hierarchy-fluidity` : stockage/localisation, deux périodes vides, partiel, filtre, panne, recherche différée et reprise du focus. |
+| IA-10 | `LiveLots`, `LiveCarnetRecovery`, `LiveAccessRecoveryGuide` et carnet vide : récupération courte et périmètre explicite. | `live-iconography-lots`, `live-loading-pages`, `live-home`, `live-game`, `live-habitant-access` : vrai vide vs tirages/historique/erreur/local, récupération sans envoi automatique, contraste du bouton et coffret par voie existante. |
+
+### Résultats et limites de cette réalisation
+
+Recettes locales Chromium sur build de production isolé, données synthétiques,
+API simulées et services workers bloqués. Tests exécutés avant commit sur les
+arbres au-dessus des deux SHA de base indiqués ; aucune consultation d'accès
+personnel réel. La version applicative livrée est identifiée en tête de section.
+
+| Passage du 10 novembre | Résultat observé et traitement |
+| --- | --- |
+| Intégration initiale, port 8288, `tmp/live-ia-integration` | **50/57 réussis, 7 échecs** : deux preuves du CTA 320 partiellement sous la navigation et cinq fixtures de fiche publique ne reconnaissant pas la query de négociation. Composition corrigée sans réduire les cibles ni la police ; matcher de fixture corrigé par pathname exact. |
+| Recette élargie, port 8289, `tmp/live-ia-validation` | **255/279 réussis, 24 échecs**, en 16,3 minutes, sur 23 fichiers. Les dix critères IA passent leurs scénarios dédiés ; les échecs annexes déclenchent la reprise ci-dessous. Ce passage n'est pas une suite entièrement verte. |
+| Reprise finale, port 8290, `tmp/live-ia-final` | **81/81 réussis**, sortie 0, aucun skip, en 4,4 minutes. Tous les 24 échecs du passage élargi sont couverts et réussissent ; scénarios IA et surfaces des derniers ajustements également rejoués. |
+| `npm run test:security` sur les sources finales | **239/239 réussis**, zéro échec/skip, 22,25 secondes. |
+| ESLint sur `src` et tous les tests modifiés/ajoutés | **Sortie 0** ; le lint global des autres chemins n'est pas assimilé à ce contrôle ciblé. |
+
+Les reprises conservent les preuves de droits, commandes, cibles tactiles et
+contrastes. Les attentes remplacées par IA-D02/IA-04/IA-05 sont actualisées :
+objectif unique, ticket unique, libellés courts et consignes volontairement
+dépliées. Les anciens sélecteurs de navigation/aide sont raccordés aux vues
+actuelles ; les attentes de style suivent PM-D02/LIVE-UX-09 (14 px et rayon 9 px).
+Le test des pictogrammes vérifie chaque objet, au lieu de compter indistinctement
+le teaser et la liste. La couleur au repos est testée hors survol accidentel.
+
+Corrections de réalisation issues de cette recette : action des lots à 52 px
+minimum ; aide « Aller au défi » conservée tant que le bouton de réponse est
+masqué ; contraste du bouton actif de récupération rétabli et contrôlé ≥4,5.
+La revue indépendante a aussi fait corriger le faux vide pendant les 300 ms
+de recherche différée et les deux reprises de focus vers un titre invisible.
+Ses dernières relectures n'ont relevé aucun écart restant sur IA ; elles ne
+remplacent pas la recette navigateur.
+
+Commande de reprise (depuis Marketplace, `LOCALEO_VISUAL_TEST_PORT=8290`) :
+
+```text
+node node_modules/@playwright/test/cli.js test --config=playwright.desktop.config.cjs
+  tests/visual/live-iconography-discovery.spec.cjs
+  tests/visual/live-iconography-lots.spec.cjs
+  tests/visual/live-mobile-ux.spec.cjs
+  tests/visual/live-game.spec.cjs
+  tests/visual/live-habitant-access.spec.cjs
+  tests/visual/live-lots-mobile.spec.cjs
+  tests/visual/live-lots-unified.spec.cjs:142
+  tests/visual/live-audit-navigation.spec.cjs
+  tests/visual/live-animation-challenge.spec.cjs:18
+  tests/visual/live-public-detail-fd.spec.cjs:128
+  tests/visual/live-public-detail-fd.spec.cjs:550
+  tests/visual/e74-tombola-email.spec.cjs:244
+  --workers=2 --timeout=30000 --output=tmp/live-ia-final
+```
+
+Les 279 scénarios du passage élargi réunissent les tests visuels modifiés à son
+départ et les suites `live-iconography-discovery`, `live-iconography-lots`,
+`live-lots-continuity`, `live-audit-discovery`, `live-public-detail-fd` et
+`live-hierarchy-fluidity`. Les reprises ciblent les échecs et les surfaces
+touchées par les derniers ajustements ; elles ne prétendent pas répéter toute
+la suite sur le dernier arbre. Les six tests du rapport initial restent des
+preuves de l'interface précédant IA.
+
+Captures inspectées : carnet mixte/collections, participation, lots et récupération
+à 320/390 ; programme nominal 320/390 et fiche publique avec objectif unique.
+Les sorties restent dans `tmp/live-ia-*` de Marketplace, hors du dépôt documentaire.
+Captures finales également inspectées : programme vide 390, lots vides 320 et
+récupération 320 avec bouton contrasté. Ces contrôles visuels ne constituent
+pas un essai de compréhension par un habitant ni une recette sur téléphone réel.
+
+**Bilan IA : dix recommandations spécifiées et implémentées, vérification locale
+réussie dans le périmètre de la matrice.** Les limites de recette hébergée,
+accessibilité avec technologie d'assistance et essai habitant restent explicites.
+Contrôles documentaires : `py -3.14 -X utf8 scripts/check_guidance.py` avec les
+documents modifiés/ajoutés via `--document` : **106 guides, 1 558 liens locaux,
+zéro erreur ni avertissement** ; `py -3.14 -X utf8 scripts/sync_documentation.py
+--check-sources` : **148 documents vérifiés**. `git diff --check` réussit dans
+les deux dépôts. Builds isolés et ESLint ciblé réussis.
+
+Impacts : Marketplace/Live et documentation commune. Aucune API, migration,
+permission, activation ou donnée métier nouvelle. Les icônes et états vides
+utilisent les réponses existantes, sans ajouter de lecture. Fixtures synthétiques
+adaptées ; générateur backend inchangé car aucune entité ni transition ajoutée.
+Le guide Live, README Marketplace, principes et suivi canonique sont actualisés.
+Livraison frontend seule, rollback sans reprise de données ; commit et push
+applicatifs tracés en tête de section. Aucun déploiement ni essai habitant
+physique attesté par cette réalisation.
+Les réserves PM-R06 et LA-16/LP restent suivies séparément.
+
+## Évolution — E73-EVO-LIVE-PARCOURS-MOBILE, 10 novembre 2026
+
+Intégration du [rapport participation/lots/découverte](../../audits/marketplace/localeo-live-mobile-participation-lots-decouverte-2026-11-10.md)
+aux [neuf critères PM](localeo-live-entree-unique.md#évolution-du-10-novembre-2026--parcours-mobiles-e73-evo-live-parcours-mobile)
+et à la [conception §13](localeo-live-adhesion-conception.md#13-parcours-mobiles--e73-evo-live-parcours-mobile).
+Ce suivi est distinct de la clôture historique et des preuves CB/CN/LH/FD/TP.
+
+**Versions attestées :** Marketplace `b9fb30deb0a07e17b350b55f027cfe3a038695ad`
+et projet `89db142d3872a0882d5685c942c8d55f159a921c`, commits et push sur `main`
+effectués le 10 novembre. Les tests du rapport ont été exécutés sur l'arbre
+ensuite commité ; cette consolidation documentaire ne les relance pas.
+Le SHA servi sur TEST et la recette hébergée ne sont pas attestés.
+
+### Matrice de traçabilité PM
+
+Les noms de tests ci-dessous désignent `tests/visual/*.spec.cjs` dans
+`localeo-marketplace`, sauf indication Node. Résultats historiques réutilisés
+avec leur portée exacte ; la présence d'un test seule n'en prouve pas la réussite.
+
+| Critère | Comportement et propriétaire | Preuve prévue puis résultat | Documentation fonctionnelle / contrat | Démonstration / fixtures | Exploitation / livraison |
+| --- | --- | --- | --- | --- | --- |
+| PM-01 | Présentation/retour de participation : frontend Live ; progression et droits : backend existant. | `live-participation-mobile-flow` : 9 scénarios réussis dans le passage principal du rapport. Retours, ordre, moteurs, clavier et QR ; ne prouve pas le refus HTTP du détail, voir PM-R06. | Spécification PM-D01, CN/TP conservés ; aucune API ajoutée. | Participations synthétiques distinctes, passeport/chasse/tombola. | Rejouer carnet → participation → lots/messages → retour sur TEST, PM-R01. |
+| PM-02 | Langage de chargement commun, frontend. | `live-loading-pages` (10), `live-loading-stability` (14) et `live-qr-opening` (12) réussis dans le passage principal ; FD-12 rejoué dans les 16 derniers succès. Couverture ciblée, pas toutes les combinaisons page/erreur. | §13.1 et LIVE-UX-08 ; commandes existantes conservées. | Lectures lentes, erreurs, stockage indisponible ; aucun service réel. | Contrôler première lecture et relecture hébergées ; performances réseau non mesurées. |
+| PM-03 | Composition et fraîcheur des lots, frontend sur projections existantes. | `live-lots-continuity` : 9 scénarios réussis, rejoués après réorganisation ; refus/503 et retour multipage. | CN-05/06/16 conservés, pas de nouveau total serveur. | 26 lots distants, deux pages et historique. | Mesure grand carnet ouverte PM-R03. |
+| PM-04 | Suspension des capacités bon/coffret : frontend ; décision d'accès : backend. | `live-mobile-ux` bon lent/503/403, QR/PIN retirés ; `live-loading-pages` coffret revalidé. Suites réussies selon le rapport, dernier lot de 16 pour le bon. | Aucune extension de droits ; portée limitée au bon/coffret et non à toutes les actions du jeu. | Accès synthétiques ; pas de validation réelle. | Rejouer ces refus sur environnement de recette ; écart participation séparé PM-R06. |
+| PM-05 | Retour borné et métadonnées, frontend. | Node `tests/security/live-lots-navigation.test.cjs` : borne cinq, filtrage et éviction ; inclus dans 239/239. `live-lots-continuity` prouve deux pages rewards, interaction et disparition. Cinq pages et sources combinées non vérifiées en navigateur. | §13.2, CN-02/15/16 conservés ; état local distinct du droit confirmé. | Bons IndexedDB et lots/tirages API ; pas de nouvelle fixture backend. | PM-R03 ouvert ; aucun chargement exhaustif prétendu. |
+| PM-06 | Composition Découvrir et annulation du contexte périmé, frontend. | `live-mobile-ux`, `live-audit-discovery` : réponses asymétriques ; `live-hierarchy-fluidity` : relecture, ancien territoire et pagination réussis dans les passages du rapport. | LH/FD conservés ; pas de changement de filtre serveur. | API publique simulée avec réponses décalées. | TEST avec réseau ralenti à vérifier ; ne ferme pas LA-16/LP. |
+| PM-07 | Recherche, favoris, partage et focus, frontend. | Dernier passage 16/16 : découverte mobile et LH-12 clavier, après correction du retour au déclencheur menu. | LIVE-UX-05/09 ; garder n'inscrit pas. | Favoris vides/remplis, menu et raccourci. | Observer compréhension habitant PM-R02. |
+| PM-08 | Gain et première action visibles, frontend ; consignes fournies par l'organisateur. | `live-mobile-ux` : lot/public à 320 × 568 et 390 × 844, captures inspectées ; derniers tests réussis. Garantie limitée aux contenus nominaux des fixtures. | CB05/06 précisés, aucune consigne inventée. | Cartes nominales et texte agrandi. | Qualité des consignes PM-R04 et essai physique PM-R02 ouverts. |
+| PM-09 | Référence visuelle Pro, frontend Live. | `live-mobile-ux` : styles calculés/cibles ; participation mobile et suites annexes. Captures de participation/lots/découverte/fiche inspectées. Pas de validation visuelle exhaustive de chaque état de chaque page. | PM-D02 et LIVE-UX-09 ; Pro inchangé. | Tailles mobiles, clavier et texte agrandi ; générateur métier sans impact. | Contrôler rendu réel et confort PM-R01/02. |
+
+Le [rapport source](../../audits/marketplace/localeo-live-mobile-participation-lots-decouverte-2026-11-10.md#preuves-et-limites)
+détaille commandes, reprises et captures. **Dernière recette ciblée : 16/16 ;
+Node sécurité : 239/239 sans skip ; ESLint ciblé et builds isolés réussis.**
+Les passages précédents et leurs reprises ne constituent pas une unique suite
+globale verte. Le succès de tests API simulés ne qualifie ni SQL ni charge hébergée.
+
+### Reste à traiter et limites de fin
+
+| Référence | Priorité et action | Preuve de fin attendue / état actuel |
+| --- | --- | --- |
+| **PM-R01** | Vérifier la version livrée sur TEST et les parcours PM. | SHA/artefact servi identifié, carnet mixte/vide, retours, chargements, lots et découverte testés ; aucune confirmation de déploiement disponible. |
+| **PM-R02** | Axe 1 du rapport : recette habitant sur téléphone physique. | Observer sans explication retrouver une participation, ouvrir un lot, chercher/garder une animation ; noter appareil, hésitations, erreurs et actions correctives. Aucun essai habitant/physique effectué. |
+| **PM-R03** | Axe 2 : carnet rempli et frontière des cinq pages. | Tester cinq puis plus de cinq pages par source, sources combinées, suite manuelle, cible hors fenêtre, refus/échec et geste utilisateur ; vérifier la compréhension de la limite. Helper borné et deux pages navigateur prouvés, extension de recette encore à faire. Qualification N/10N et charge mixte reste suivie par LA-16/LP. |
+| **PM-R04** | Axe 3 : qualité des consignes de remise. | Examiner un échantillon de lots et faire compléter par l'organisateur adresse, échéance et contact lorsque nécessaires. Conserver les données absentes comme telles. Aucune modification de contenus réels ni nouvelle obligation de saisie décidée. |
+| **PM-R05** | Axe 4 : cadrer les pistes produit seulement si retenues. | Filtres métier des lots, recommandations personnalisées, rappels automatiques et nouvelles récompenses : bénéfice, données/droits, règles, critères et preuves à spécifier avant réalisation. Ces options ne sont ni engagées ni des critères déjà satisfaits de PM. |
+| **PM-R06** | P1 — corriger et tester la revalidation du détail participation, écart au comportement existant attendu. | `LiveAnimationGame.jsx` à `b9fb30d` : les `PinValidation` utilisent encore les anciennes métadonnées pendant revalidation (ligne 303) ; le catch de refresh (ligne 178) conserve `game/metadata` même lors d'un refus HTTP. Suspendre le PIN et distinguer panne/refus, puis tester 403 du détail, erreur réseau, accès changé et réponse tardive. Le 409 du QR déjà testé ne prouve pas le retrait sur 403 du détail. **Ouvert, aucun correctif réalisé dans ce complément documentaire.** |
+
+PM-R06 est issu de la revue indépendante du code au SHA indiqué, sans tests
+relancés. Il relève des attentes de fraîcheur/refus déjà présentes, notamment
+CN-15 et LIVE-UX-08 ; il ne nécessite ni nouvelle règle métier ni réouverture
+de l'epic. La suspension vérifiée du QR participation et des capacités bon/coffret
+ne suffit pas à le fermer. **L'évolution PM n'est pas déclarée terminée.**
+
+### Impacts et contrôle de cette consolidation
+
+Seul `localeo-projet` est modifié dans ce complément : spécification, conception,
+bilan, backlog et points d'entrée. Marketplace reste à `b9fb30d`. Aucun changement
+de contrat, permission, migration, flag, batch ou générateur ; les raisons sont
+détaillées au §13.3. Aucun nouveau déploiement ni opération de données.
+Contrôles documentaires exécutés le 10 novembre sur projet `89db142` avec ce
+complément local : `py -3.14 -X utf8 scripts/check_guidance.py` avec les six
+documents non guides ajoutés via `--document` : **103 guides, 1 464 liens, zéro
+erreur ni avertissement** ; `py -3.14 -X utf8 scripts/sync_documentation.py
+--check-sources` : **148 documents vérifiés** ; `git diff --check` : **sortie 0**.
+Revue indépendante finale : aucun écart documentaire restant sur PM, §13 et ce
+bilan ; PM-R06 demeure ouvert. Les résultats fonctionnels ci-dessus restent
+ceux du rapport, non une nouvelle recette. Ce complément rejoint la livraison
+documentaire IA du 10 novembre, sans modifier les réserves PM.
+
 ## Évolution — E73-EVO-LIVE-CARNET-BORD, 9 novembre 2026
 
 **Livraison demandée le 10 novembre 2026 : commit et push.** Le commit

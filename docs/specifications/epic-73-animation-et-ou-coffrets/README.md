@@ -1,5 +1,22 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+Évolution du **10 novembre 2026 — E73-EVO-LIVE-ICONOGRAPHIE** : dix
+[critères IA](localeo-live-entree-unique.md#évolution-du-10-novembre-2026--iconographie-et-respiration-e73-evo-live-iconographie)
+et [conception §14](localeo-live-adhesion-conception.md#14-iconographie-et-respiration--e73-evo-live-iconographie)
+pour appliquer l'audit d'iconographie et d'espacement. Spécification et réalisation
+locale effectuées ; principes UX complétés, résultats et limites propres au
+[bilan IA](verification-livraison.md#évolution--e73-evo-live-iconographie-10-novembre-2026).
+L'epic garde sa clôture historique et ses autres réserves.
+
+Évolution du **10 novembre 2026 — E73-EVO-LIVE-PARCOURS-MOBILE** : les neuf
+constats du dernier audit sont reliés aux [critères PM-01 à PM-09](localeo-live-entree-unique.md#évolution-du-10-novembre-2026--parcours-mobiles-e73-evo-live-parcours-mobile),
+à la [conception §13](localeo-live-adhesion-conception.md#13-parcours-mobiles--e73-evo-live-parcours-mobile)
+et au [bilan PM](verification-livraison.md#évolution--e73-evo-live-parcours-mobile-10-novembre-2026).
+Corrections déjà poussées dans Marketplace `b9fb30d` ; présente phase documentaire.
+Le bilan distingue preuves locales, recettes restantes et correctif P1 encore
+ouvert sur la revalidation des participations. Clôture historique conservée,
+évolution non déclarée terminée et déploiement non attesté.
+
 Évolution du **9 novembre 2026 — E73-EVO-LIVE-CARNET** : les cinq sections du
 PDF sur le carnet unifié sont traduites en **17 critères CN-01 à 17**, avec
 trois priorités et deux décisions produit résolues : téléphone obligatoire
