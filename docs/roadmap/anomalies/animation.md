@@ -8,6 +8,77 @@ référence CRM. Le [suivi commun](../../audits/ergonomie-gestion-pro-animation-
 conserve les constats, corrections, impacts et preuves locales. Les transitions,
 droits et confirmations d’animation restent inchangés ; aucun déploiement réalisé.
 
+### Correction du 10 novembre 2026 - Focus du sélecteur de commune
+
+- **Observé et cause** : un clic sur « Commune active » affichait un contour
+  orange à l'intérieur du champ du bandeau bleu. Reproduction locale sur la
+  base Animation `89c7f6e` : Chromium applique `:focus-visible` au sélecteur
+  natif même au clic ; la règle commune de `actions.css` ajoutait alors un
+  contour ocre de 3 px autour du seul `select`.
+- **Correction** : dans `application-frame.css`, le repère de focus est porté
+  par le champ complet `.commune-picker`, en blanc sur bleu, sur 2 px. Le
+  contour intérieur est retiré dans ce seul contexte. Le clavier conserve un
+  repère visible, qui disparaît en quittant le champ ; la sélection native et
+  la commande de changement de commune sont inchangées.
+- **Preuves locales** : `pnpm typecheck`, `pnpm lint` et
+  `node scripts/build-generation-tests.mjs` réussis. Le scénario existant
+  `WORKSPACE_CASE=shell` de `animation-workspace-ux.mjs`, complété pour cette
+  recette par le clic, Tab, l'ouverture au clavier, Échap et la sortie du
+  champ, passe sur dix formats de 320 à 1600 px, paysage et texte à 200 %.
+  Styles calculés et absence de mutation vérifiés ; captures PC/mobile
+  examinées dans `localeo-animation/tmp/commune-picker-focus/`, non versionnées.
+- **Impacts** : CSS de présentation dans Animation et suivi documentaire ici.
+  Aucun contrat API, règle métier, droit, migration, générateur de démonstration
+  ou paramètre d'exploitation modifié. Version distante non vérifiée et
+  déploiement non effectué.
+
+### Correction du 10 novembre 2026 - Alignement des actions des modèles
+
+- **Observé et cause** : dans le catalogue **Modèles**, le bouton « Créer une
+  animation » suivait directement le contenu variable de chaque vignette. Une
+  description, un badge ou des prérequis supplémentaires décalait donc l'action
+  par rapport à la vignette voisine. La reproduction locale sur la base
+  Animation `89c7f6e` mesure un écart de 57 px entre deux boutons d'une même
+  rangée.
+- **Correction** : chaque vignette devient une colonne occupant toute la hauteur
+  de sa cellule de grille et son action, disponible ou désactivée, est repoussée
+  en bas. Les contenus restent libres de grandir ; les boutons d'une même rangée
+  conservent le même niveau. Sur mobile, les vignettes restent empilées.
+- **Preuves locales** : le scénario navigateur `leo-assistant.mjs` utilise deux
+  contenus de hauteurs différentes et contrôle l'alignement exact à 1280 px,
+  ainsi que le parcours et le rendu à 390 px. Le scénario échoue avant correction
+  avec les positions `338,44` et `281,39` px, puis réussit après correction. Les
+  captures PC et mobile ont été examinées dans
+  `localeo-animation/tmp/leo-browser-captures/`, non versionnées.
+- **Impacts** : mise en page et test ciblé dans Animation, sans changement de
+  comportement, contrat API, règle métier, droit, migration, démonstration ou
+  exploitation. Version distante non vérifiée et déploiement non effectué.
+
+### Correction du 10 novembre 2026 - En-tête et navigation du détail
+
+- **Observé et cause** : le détail d'une animation séparait le retour, le nom,
+  la commune, les dates et le statut sur plusieurs niveaux verticaux. Sur
+  ordinateur, quatre onglets d'espaces étaient suivis d'une seconde rangée de
+  sous-onglets de même apparence. Cette hiérarchie consommait de la hauteur et
+  rendait les deux niveaux de navigation difficiles à distinguer.
+- **Correction** : le contexte de l'animation est réuni dans un en-tête compact,
+  sur la même ligne que le retour à la liste lorsque la largeur le permet. Une
+  seule barre de navigation présente les quatre espaces **Préparer**, **Piloter**,
+  **Communiquer** et **Résultats**, puis un sélecteur libellé pour la rubrique de
+  l'espace actif. Sur mobile, le sélecteur groupé unique est conservé. Les droits,
+  liens directs, alias, gardes de sortie et chargements différés restent inchangés.
+- **Preuves locales** : le scénario navigateur
+  `WORKSPACE_CASE=navigation` échoue avant correction sur l'absence du nouvel
+  en-tête compact. Après correction, huit formats de 320 à 1600 px, dont le
+  texte à 200 %, valident la géométrie de l'en-tête, la barre unique, les cibles
+  tactiles, le clavier, les habilitations et l'absence de débordement ou de
+  mutation API. Les captures PC, tablette, mobile et zoom ont été examinées dans
+  `localeo-animation/tmp/animation-workspace-ux/`, non versionnées.
+- **Impacts** : présentation, navigation locale et tests dans Animation ; aucun
+  contrat API, règle métier, droit, migration, donnée de démonstration ou
+  paramètre d'exploitation modifié. Version distante non vérifiée et déploiement
+  non effectué.
+
 ## ANO-ANI-HEADER-COMPTE-20261103 — Espace réservé aux rubriques du menu
 
 - **Observé** : dans le shell connecté de Localeo Animation, les documents,
