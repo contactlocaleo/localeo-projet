@@ -15,7 +15,7 @@ antérieures ne valent pas validation des changements ci-dessous.
 | 3 — reprise/récupération | PA-06/07 | Définie, échange coffret à usage unique précisé | Marketplace `4fc1008` : huit scénarios navigateur réussis (7 dans la reprise générale, dernier coffret rejoué 1/1 après correction du préfixe de session de la fixture), lint ciblé : 0. Panne participant/contact, refus, stockage échoué, guide sans ID, GET coffret après échange, échange incertain sans rejeu, réponse tardive. Rapport `tmp/pa-lot3-coffret-final-results.json` et reprise PA06/07 ; aucune commande métier automatique |
 | 4 — découverte/dotation | PA-08/09/10 | Définie, contrat réel confronté | Aperçu public borné et contrats synchronisés (backend `4b668e0`, Animation `5308a92`, Pro `186c73e`). Frontend : 38/38 navigateur (découverte 9, iconographie 16, dynamique 4, audit 9), puis 4/4 première arrivée après correction du wrapper. Node présentation 4/4, groupe normalisation/prévisualisation 10/10, lint 0. Capture CTA 320 et conditions longues inspectée ; dernière correction de chevauchement du texte 200 % à rejouer au lot 7. Bornes/consommateurs détaillés ci-dessous |
 | 5 — carnet/lots | PA-11/12/13 | Définie | Prochaine action par moteur, carnet vide incitatif, tampons dépliables 54 px et retrait des données/capacités après refus. Première recette 74/79 ; cinq libellés anciens corrigés puis reprise 6/7. Dernier échec réel (tampon réduit à 22 px par une règle SVG trop large) corrigé puis scénario passeport 1/1. Tous les 79 scénarios sont ainsi couverts, sans skip. QR 403/409, résultat/reçu 403, reçu 404, revalidation 503/200, PIN/gains, lots et retours vérifiés. Lint et diff : 0 ; revue indépendante intégrée |
-| 6 — mesure | PA-14/15/16 | Définie | À réaliser, suspension Analytics conservée |
+| 6 — mesure | PA-14/15/16 | Définie, population initiale et consentement précisés | Deux événements et sept étapes fermées ; succès serveur, acquisition et ouverture distingués, déduplication en mémoire, aucune donnée personnelle ni activation. Node ciblé 8/8, suite sécurité finale 254/254, navigateur mesure 9/9 sur le dernier build. Cas consentement/refus/suspension, formulaire invalide, panne/reprise, accès déjà présent, reçu puis progression, lots, commune partagée lente/échouée. Revue indépendante de la politique commune navigateur/collecteur et des annulations intégrée |
 | 7 — recette/livraison | PA-17/18 | Définie | À réaliser ; humain/hébergement séparés |
 
 Les nouvelles preuves sont ajoutées par lot avant son commit. Invariants : aucune
@@ -65,6 +65,55 @@ neutralisé p95 **847 ms**, p99 **1 137 ms**, zéro erreur. Delta négatif = var
 locale, aucun gain revendiqué. Premiers essais p95 1 559 puis 1 060 ms conservés.
 Artefact ignoré `.artifacts/e73-pa10-apercus-performance.json` dans le backend.
 Mesure de service local : **HTTP, charge mixte et capacité hébergée non qualifiés**.
+
+### Procédure de livraison et de retour — lots 6 et 7
+
+Cette réalisation autorise les commits locaux. Push, déploiement, activation
+Analytics et génération sur un environnement réel sont des opérations séparées.
+Les cinq dépôts restent indépendants. Aucun secret ou jeu importé n'est ajouté
+à la documentation ; les rapports temporaires de tests restent ignorés.
+
+Ordre de livraison préparé : backend et contrats publics additifs du lot 4,
+puis Marketplace/Live avec son collecteur issu du même arbre. Animation et Pro
+embarquent les contrats synchronisés ; aucune modification de leur interface
+de gestion. Le nouvel aperçu s'appuie sur les index v269/v272 existants ; **aucune
+migration supplémentaire, variable requise ou modification du générateur** pour
+ces huit lots. Les anciens backends restent lisibles par le nouveau frontend,
+qui conserve le repli nombre/nature quand l'aperçu est absent.
+
+Après un déploiement distinct, vérifier sur TEST avec données de démonstration :
+commune choisie → catalogue → inscription → confirmation de l'objet exact →
+carnet ; QR et étape confirmée ; lot et retour ; lien personnel et récupération ;
+503 retentable puis refus sans projection privée. Refaire clavier/texte 200 %
+et au moins un navigateur mobile physique. Vérifier que la collecte suspendue
+reste silencieuse. Ces opérations ne sont pas déclarées exécutées ici.
+
+Retour préparé : remettre la version Marketplace précédente avec son collecteur,
+conserver la projection backend additive et les données personnelles existantes.
+Une ancienne version ignore `apercu_dotation` ; aucun rollback SQL ni purge de
+carnet n'est nécessaire. Restaurer l'ancien frontend retire aussi les correctifs
+de revalidation PM-R06 : garder cet effet explicite dans le choix de reprise.
+Cette procédure n'a pas fait l'objet d'un exercice de restauration hébergé.
+
+### Recette humaine préparée — six habitants
+
+Quatre personnes découvrent le produit, deux reviennent avec un carnet de
+démonstration. Sur leur téléphone, sans guidage initial : choisir une commune,
+expliquer le bénéfice et la condition d'une animation, s'inscrire, retrouver
+leur participation et annoncer la prochaine action. Les deux personnes qui
+reviennent ouvrent un lot, trouvent où/comment le retirer, puis reviennent au
+carnet. Introduire ensuite une interruption réseau et un lien expiré ; sur un
+autre appareil, retrouver les participations par e-mail et identifier la voie
+distincte des coffrets. N'utiliser que des accès et adresses de démonstration.
+
+Relever réussite autonome de chaque tâche, première action choisie, temps avant
+action, retours inutiles, demandes d'aide et compréhension de la confirmation.
+Seuils de recette proposés : au moins cinq sur six retrouvent l'action demandée
+sans aide ; tous comprennent ce qui a été confirmé et aucun ne croit un lot
+acquis avant confirmation serveur. Tout échec est observé et qualifié, sans
+guidage ajouté rétroactivement au résultat. Aucun résultat humain n'est disponible.
+Le protocole de baseline et le dénominateur sont définis dans la
+[conception du lot 6](localeo-live-adhesion-conception.md#lot-6--mesure-sans-réactivation).
 
 
 ## Évolution — E73-EVO-LIVE-ICONOGRAPHIE, 10 novembre 2026

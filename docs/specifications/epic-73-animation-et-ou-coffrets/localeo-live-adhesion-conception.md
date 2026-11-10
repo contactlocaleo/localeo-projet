@@ -107,7 +107,7 @@ et ignorer un résultat d'étape tardif après changement de génération de lec
 ### Lot 6 — mesure sans réactivation
 
 Instrumentation dans les composants/projections de parcours et la politique
-Analytics existante. Valeurs fermées `source_page`, `animation_type`, `outcome`,
+Analytics existante. Valeurs fermées `source_page`, `animation_type`, `stage`,
 `initial_participation` (empty/present/unknown), `programme_state` (none/available/empty/unknown).
 Aucune URL libre, donnée de formulaire, identifiant métier, token ni QR.
 L'état initial est capturé une seule fois par visite en mémoire ; illisible ne
@@ -128,6 +128,38 @@ principal et limites par appareil/visite sont ceux de PA-15. Le consentement et
 la suspension existants contrôlent toujours le transport. Aucune configuration
 d'exploitation n'est activée par ce lot ; collecte réelle et baseline absentes
 sont explicites. Les tests utilisent un transport capturé et aucun service réel.
+
+Deux événements autorisés sont ajoutés : `live_participation_entry` puis
+`live_participation_stage`. Ce dernier distingue `catalogue`, `detail`,
+`form_started`, `registration_confirmed`, `access_added`, `step_confirmed` et
+`reward_opened`. Les anciens événements gardent leur contrat. L'entrée ne se
+répète pas pendant la même visite ; le retrait du consentement ou la sortie
+de page annule les lectures métriques encore en attente. Un retour depuis
+l'historique conservé du navigateur démarre une nouvelle frontière de mesure.
+Une action antérieure au consentement n'est pas émise si l'acceptation arrive
+pendant la lecture asynchrone de la bibliothèque.
+
+Une commune reçue par lien partagé attend sa résolution avant la mesure du
+catalogue : chargement et erreur ne signifient jamais « sans commune ». Une
+lecture explicitement inconnue remplace le contexte précédent ; seules les
+étapes qui ne fournissent pas d'état conservent le dernier contexte connu.
+Le collecteur local importe la même politique que le navigateur, sans seconde
+liste d'événements à synchroniser ni nouvel endpoint backend.
+
+Calcul : D = nombre de visites distinctes (`client_id`, `session_id` éphémères)
+avec entrée et `initial_participation=empty` ; N = sous-ensemble de D ayant
+au moins un `registration_confirmed` serveur ; taux = N/D. Présent et inconnu
+sont publiés séparément, jamais ajoutés à D. Les segments utilisent le premier
+état de programme connu dans la visite, ou `unknown` si aucun catalogue n'a
+été lu. Formulaire commencé/confirmé fournit une seconde conversion. Le clic
+sur un QR, le favori et l'ajout d'un ancien accès ne comptent pas dans N.
+
+Mesure de départ : après activation explicite distincte de cette livraison,
+observer sept jours complets, publier D, N, part inconnue, couverture du
+consentement et erreurs de lecture ; prolonger si le volume ne permet pas de
+comparer les parcours. Aucune baseline réelle n'est disponible ici. Comparer
+à période et communes comparables, sans attribuer une variation au seul design.
+La mesure n'utilise aucun rattachement entre appareils ou aux participants.
 
 ### Lot 7 — recette et livraison
 
