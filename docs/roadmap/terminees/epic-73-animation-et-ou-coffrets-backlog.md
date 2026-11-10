@@ -1,5 +1,16 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+## Évolution du 10 novembre 2026 — envie de participer
+
+**E73-EVO-LIVE-PARTICIPATION** : huit lots acceptés, à spécifier, implémenter
+et committer séparément. Les [critères PA-00 à PA-18](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-10-novembre-2026--participation-e73-evo-live-participation)
+couvrent langage visuel, confirmation/retour, reprise, découverte, carnet/lots,
+mesure et recette. La [conception §15](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-adhesion-conception.md#15-participation--e73-evo-live-participation)
+et le [bilan](../../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md#évolution--e73-evo-live-participation-10-novembre-2026)
+portent réalisation et limites. L'état « Terminée » historique du 1er novembre
+et les identifiants antérieurs sont conservés ; cette évolution ne les requalifie pas.
+
+
 ## Évolution du 10 novembre 2026 — iconographie et respiration
 
 **E73-EVO-LIVE-ICONOGRAPHIE** : évolution, spécification et implémentation des

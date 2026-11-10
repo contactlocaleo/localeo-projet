@@ -1,5 +1,60 @@
 # E73 — Localeo Live, entrée unique des animations
 
+## Évolution du 10 novembre 2026 — participation, E73-EVO-LIVE-PARTICIPATION
+
+Demande : mettre en œuvre les huit lots du plan accepté après l'audit UX en
+conversation (source Marketplace `0a327a2`, parcours locaux avec API simulée).
+Cette extension conserve la clôture historique E73, les critères antérieurs et
+les réserves PM-R06/LA-16/LP. Les résultats propres à chaque lot sont dans le
+[bilan](verification-livraison.md#évolution--e73-evo-live-participation-10-novembre-2026),
+les choix techniques dans la [conception](localeo-live-adhesion-conception.md#15-participation--e73-evo-live-participation).
+
+Les publics sont l'habitant nouveau, l'habitant revenant avec ses accès et
+l'habitant ayant perdu son carnet local. Aucun compte habitant n'est créé.
+Téléphone obligatoire pour l'inscription classique, tombola publique par e-mail
+seul ; récupération des participations et lots associés par vérification e-mail,
+coffrets par les accès et la récupération déjà disponibles.
+
+| Lot / critères | Comportement observable et refus significatifs | Preuves prévues |
+| --- | --- | --- |
+| 0 — PA-00 | Chaque constat du rapport est relié ci-dessous à une cible, un propriétaire, une preuve et ses impacts ; aucun ancien bilan n'est requalifié | Contrôles documentaires et revue de traçabilité |
+| 1 — PA-01 | Carnet, Découvrir, lots, inscription et récupération partagent typographie Pro, sections blanches bordées, action verte, navigation active cohérente ; états d'alerte gardent texte et repère | Captures 320/390/1280, contraste/focus et texte 200 % |
+| 1 — PA-02 | Magasin = passeport, parcours = chasse, boussole = Découvrir, épingle = localisation ; noms accessibles incluent « Messages » et « Garder » ; tampons compacts lisibles sans détails parasites | Vérification des moteurs, clavier et noms accessibles |
+| 2 — PA-03 | Après ajout confirmé, présenter l'objet exact et l'action « Ouvrir mon passeport », « Commencer mon parcours », « Voir mon ticket » ou « Ouvrir mon coffret », puis « Voir mon carnet » ; installation facultative secondaire | Inscription classique jusqu'au détail personnel et retour carnet ; deux participants d'une même animation |
+| 2 — PA-04 | Le retour annonce la destination réelle et conserve le contexte ; anciens liens ciblés et anciennes listes restent servis ; aucune capacité dans les métadonnées de navigation | Liens directs, retour navigateur, détours messages/lots |
+| 2 — PA-05 | Tombola : « Inscription enregistrée » confirme la participation ; le prochain geste explique l'accès par le lien e-mail sans présenter un ticket local inexistant | Succès et réouverture, e-mail différé, préférence facultative |
+| 3 — PA-06 | Lecture d'accès échouée temporairement : « Réessayer la vérification » réutilise l'accès en mémoire, sans inscription ; refus/expiration n'offrent pas d'action protégée ; erreur de stockage conserve une reprise locale distincte | 503 puis succès, 403, double clic, navigation pendant attente, stockage refusé |
+| 3 — PA-07 | `/live/coffrets/ajouter` sans identifiant présente un guide utilisable : lien personnel récent, sauvegarde du carnet, émetteur ; renvoi disponible seulement avec identifiant connu | Entrée générique depuis récupération/lot, lien valide/incomplet, retour ; aucun renvoi inventé par e-mail seul |
+| 4 — PA-08 | Première arrivée : invitation brève « Des animations près de chez vous. Un carnet pour suivre vos aventures. », commune/GPS volontaire, recherche et favoris visibles | Arrivée sans commune à 320/390 et bureau, état vide/erreur |
+| 4 — PA-09 | Carte : identité, aperçu adapté au moteur, bénéfice réel, date/condition essentielle avant action ; « Voir le parcours », « Découvrir la chasse », « Voir la tombola » ; garder/partager restent secondaires | Trois moteurs, avec/sans flyer, conditions d'achat, inscription fermée ; une carte sur bureau |
+| 4 — PA-10 | Catalogue/recherche exposent un aperçu public borné de dotations, compatible avec anciens clients ; aucune identité de gagnant/accès ni requête détail par carte ; absence de nom = repli honnête vers nombre/nature connus | Producteur, contrat, consommateur, refus d'exposition privée et budgets N/10N |
+| 5 — PA-11 | Carnet : prochaine action confirmée dominante, objets actifs puis historique ; vide confirmé propose d'abord « Découvrir les animations », puis « Déjà participé ? Retrouver mon carnet » | Vide/rempli/partiel/indisponible, filtres, reprise exacte, mobile |
+| 5 — PA-12 | Détail personnel : consulter les étapes déjà autorisées/validées et les informations utiles ; un compteur agrégé ne permet pas d'inventer un commerce ou de dévoiler une étape future | Passeport/chasse, zéro/partiel/terminé/inconnu, clavier et refus |
+| 5 — PA-13 | Lots : gain/état/retrait avant détails ; chaque ouverture revient au contexte ; célébration seulement après reçu de validation, jamais au rechargement, compatible mouvement réduit | Bon/coffret/lot libre, détails volontaires et revalidation, confirmation puis rechargement |
+| 6 — PA-14 | Mesurer entrée/catalogue/détail/formulaire/inscription confirmée/ajout/étape confirmée/lot ouvert avec taxonomie fermée ; aucun token, e-mail, identifiant métier ou URL personnelle | Tests de politique Analytics et événements de parcours |
+| 6 — PA-15 | Première participation = visites connues sans participation accessible initiale avec inscription serveur confirmée / visites connues sans participation accessible initiale ayant affiché une entrée Live ; état illisible exclu et suivi séparément | Déduplication des succès/reprises, statut initial vide/présent/inconnu, segments programme/vide/sans commune |
+| 6 — PA-16 | Identité éphémère par visite ; consentement, retrait et suspension Analytics inchangés ; aucune collecte activée par cette livraison | Tests de transport bloqué et absence de persistance de suivi |
+| 7 — PA-17 | Recette intégrée 320×568, 390×844, 1280, clavier/texte 200 %/mouvement réduit : succès, incomplet, lent, erreur, refus, stockage, liens directs et retour | Suites ciblées, revue visuelle et preuves par lot ; corrections des deux sélecteurs obsolètes de choix de commune |
+| 7 — PA-18 | Livraison reproductible par dépôt, contrats et migrations identifiés, procédure de retour et scénario humain six personnes préparés ; recette humaine/hébergée non confondue avec tests locaux | Bilan, versions, commandes/résultats et limites d'activation |
+
+### Impacts et invariants de cette extension
+
+Le domaine backend reste propriétaire de la participation, de la validation et
+des droits de lots. Ces lots modifient leurs projections et leur présentation,
+sans nouvelle transition, attribution ou validation. Les reprises ne relancent
+pas les commandes ; les accès sont conservés uniquement dans leur stockage
+personnel existant et nettoyés des URL conformément au contrat actuel.
+
+| Périmètre | Responsabilité / impacts |
+| --- | --- |
+| Marketplace/Live, lots 1–7 | Présentation, contexte de retour, reprise, instrumentation fermée et tests simulés ; aucun nouveau droit ni compte |
+| Backend, lot 4 | Projection publique bornée catalogue/recherche, dépôt de lecture groupé et tests isolés ; pas de modification d'inscription ni de schéma métier anticipée |
+| Projet, lots 0–7 | Sources présentes, principes UX, contrats générés réellement modifiés, exploitation et bilan |
+| Animation / Pro | Vérification de compatibilité des consommateurs ; aucun parcours de gestion modifié par cette extension |
+| Démonstration | Fixtures de parcours et de dotation publique ; pas de nouveau champ métier requis par le générateur, ni génération sur environnement réel |
+| Exploitation | Commits locaux autorisés par lot ; aucune activation Analytics, migration de données ou publication implicite. Capacité hébergée et test humain à réaliser séparément |
+
+
 **E73-EVO-LIVE-ICONOGRAPHIE — 10 novembre 2026** : spécification puis réalisation
 des dix recommandations IA du [rapport iconographie et respiration](../../audits/marketplace/localeo-live-iconographie-aeration-mobile-2026-11-10.md).
 Critères E73-IA-01 à 10 en fin de document ; preuves propres au bilan, clôture

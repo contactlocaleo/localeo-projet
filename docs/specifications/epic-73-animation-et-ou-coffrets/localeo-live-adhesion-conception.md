@@ -1,5 +1,130 @@
 # E73 — Conception de l’adhésion habitant dans Localeo Live
 
+## 15. Participation — E73-EVO-LIVE-PARTICIPATION
+
+Conception du 10 novembre 2026, avant réalisation des huit lots. Les critères
+PA et leurs impacts sont définis dans la [spécification fonctionnelle](localeo-live-entree-unique.md#évolution-du-10-novembre-2026--participation-e73-evo-live-participation).
+Le [bilan](verification-livraison.md#évolution--e73-evo-live-participation-10-novembre-2026)
+sépare preuves prévues, exécutées et limites. Application des principes
+LIVE-UX-01 à 10, sans modifier les règles de participation ou de remise.
+
+### Lots 0 et 1 — fondation commune
+
+Le lot 0 livre cette matrice et sa traçabilité. Le lot 1 réutilise
+`LiveActivityIcon`, `LiveJourneyStamps`, le shell et les tokens existants : pas
+de nouvelle bibliothèque ni d'images raster pour les pictogrammes. Corps/actions
+14 px en unités relatives, champs 16 px, cibles 44 px, sections 12 px et actions
+9 px. Vert `#09685e` pour agir/onglet actif, papier chaud pour le carnet, alerte
+explicite pour les incidents. Les tampons compacts gardent contour/symbole/coche,
+avec moins de crénelage et sans double détail décoratif à petite taille.
+
+### Lot 2 — confirmation et continuité
+
+`LiveApp` conserve l'identité exacte renvoyée par la sauvegarde de bibliothèque.
+La confirmation reste sur une route compatible et ouvre cet objet via son
+identifiant local, jamais le premier objet de la même animation. Le contexte
+de retour utilise `liveReturnNavigation` (chemins autorisés, sans credential).
+La confirmation mentionne que l'accès est gardé sur cet appareil, sans promettre
+une synchronisation. Les anciennes listes restent accessibles. La tombola
+publique confirme l'inscription indépendamment de la réception de l'e-mail ;
+elle n'invente pas de token local. L'installation PWA reste secondaire.
+
+### Lot 3 — états de reprise
+
+`AddAnimation` et `AddCoffret` distinguent : vérification, panne transitoire,
+refus/expiration, stockage local échoué, succès. Un nouvel essai est une lecture
+avec les credentials déjà consommés et gardés dans une référence en mémoire.
+Les réponses d'une ancienne route/un composant démonté sont ignorées ; le bouton
+reste désactivé pendant l'essai. Aucun retry automatique d'inscription. Un
+échec contact après lecture ne réinscrit pas et ne mélange pas deux personnes.
+
+L'entrée coffret sans identifiant devient un guide, distinct d'un lien personnel
+refusé. L'utilisateur retrouve le **lien personnel du coffret** dans son dernier
+e-mail, importe sa sauvegarde via `/live/reglages#live-backup` ou contacte
+l'émetteur. `RenvoiLienCoffret` reste limité à un UUID connu ; la réponse générique,
+les limites et la non-réactivation d'un accès révoqué sont conservées. Pas de
+nouvelle récupération globale par e-mail, pas de migration/configuration.
+
+### Lot 4 — découverte et aperçu public
+
+Le catalogue actuel ne renvoie pas le nom des lots : `lots` n'est rempli que
+dans le détail. Ajouter une projection additive `apercu_lots`, au plus trois
+éléments publics par animation (nom et image publique facultative), sans changer
+`lots`, les curseurs, les filtres ou les compteurs. La projection contient
+uniquement des informations déjà autorisées sur le détail public. Aucun gagnant,
+prestataire privé, accès, stock interne ou prochaine étape de chasse.
+
+Le producteur `catalogue_animations_publiques` est réutilisé par la recherche.
+Les adaptateurs enrichissent seulement les IDs de la page, avec sélection bornée
+en base et requêtes groupées ; aucun chargement de tous les lots puis tranche
+Python, ni appel détail par carte. Les anciens clients ignorent l'ajout ; les
+nouveaux acceptent un backend sans ce champ et affichent le nombre/nature connus.
+Le générateur de contrat reste dans le backend, les OpenAPI canoniques dans le
+projet. Le nom exact des champs sera vérifié avec le producteur avant codage.
+
+| Coût | Borne / preuve prévue |
+| --- | --- |
+| Catalogue/recherche | Pagination existante conservée ; enrichissement sur les seuls IDs de page, trois aperçus maximum par animation |
+| Requêtes | Nombre constant par page, sans requête par animation ; comparer pages 25/100 et populations N/10N |
+| Mémoire/payload | Au plus 3 × taille page objets d'aperçu, noms et URL publics bornés ; mesurer octets et nombre de lignes hydratées |
+| Accès SQL | Index existants animation/ordre à vérifier ; fenêtre/lecture latérale bornée selon adaptateur réel ; plans PostgreSQL sur cible jetable si disponible |
+| Capacité | Objectif Live p95 600 ms, p99 1 200 ms, erreurs < 0,5 % à dix lecteurs concurrents ; mesures isolées et charge mixte requises avant activation, pas de garantie issue d'un test unitaire |
+
+La carte affiche le bénéfice avant son action et conserve condition d'achat et
+objectif connus. Une donnée absente n'est pas complétée par une promesse. Les
+aperçus de passeport/chasse annoncent le type de parcours, sans progrès personnel
+fictif. La grille s'adapte au petit nombre de résultats et les périodes vides
+restent compactes. Recherche/favoris et choix volontaire de commune sont maintenus.
+
+### Lot 5 — carnet, étapes et lots
+
+Réutiliser la priorité calculée par le carnet ; améliorer sa hiérarchie visuelle
+sans ajouter de classement ou d'urgence. La prochaine action porte l'objet et
+un verbe, les autres cartes gardent leur accès. Les filtres locaux n'effectuent
+pas de nouvelles lectures. L'historique et les détails restent volontaires.
+
+L'interactivité d'une étape utilise seulement les faits autorisés retournés
+par le parcours personnel : visites confirmées ou étape courante. Un tampon
+d'aperçu fondé sur un nombre seul reste décoratif, non cliquable. La progression
+inconnue, le gain et la qualification restent distincts. Les lots conservent
+leurs contrôles de revalidation, le QR personnel et leur retour exact.
+
+### Lot 6 — mesure sans réactivation
+
+Instrumentation dans les composants/projections de parcours et la politique
+Analytics existante. Valeurs fermées `source_page`, `animation_type`, `outcome`,
+`initial_participation` (empty/present/unknown), `programme_state` (none/available/empty/unknown).
+Aucune URL libre, donnée de formulaire, identifiant métier, token ni QR.
+L'état initial est capturé une seule fois par visite en mémoire ; illisible ne
+signifie pas nouveau. Les acquisitions ultérieures ne changent pas le dénominateur.
+Une inscription est mesurée après succès serveur ; un favori, un ajout d'accès
+existant ou un affichage de QR n'en est pas une. Les reçus/événements déjà vus
+sont dédupliqués en mémoire et ne sont jamais transmis comme identifiants.
+Le début du formulaire correspond à la première interaction, pas au montage.
+
+Les étapes du funnel sont mesurables à l'aide d'événements autorisés ; taux
+principal et limites par appareil/visite sont ceux de PA-15. Le consentement et
+la suspension existants contrôlent toujours le transport. Aucune configuration
+d'exploitation n'est activée par ce lot ; collecte réelle et baseline absentes
+sont explicites. Les tests utilisent un transport capturé et aucun service réel.
+
+### Lot 7 — recette et livraison
+
+Réutiliser les suites de parcours et ajouter les refus pertinents ; corriger
+les deux anciens sélecteurs « Choisir mes communes » sans retirer les assertions
+de focus/viewport. Exécuter lint, tests Node ciblés, Playwright, build isolé,
+tests backend isolés et contrôles documentaires selon les fichiers modifiés.
+Les preuves restent liées à leur arbre/commit. Revue indépendante du contrat
+public et des refus d'accès. Les dettes PM-R06/LA-16/LP ne sont pas closes par
+une capture nominale ou un changement de palette.
+
+Scénario humain préparé : quatre nouveaux habitants choisissent une animation,
+expliquent bénéfice/effort et participent sans guidage ; deux revenants retrouvent
+leur progression puis un lot. Observer réussite autonome, temps, erreurs,
+compréhension de la confirmation et du retour. Cette recette n'est pas simulée
+par un agent. Déploiement TEST et capacité hébergée restent distincts des commits.
+
+
 **7 novembre 2026 — E73-EVO-LIVE-ADHESION.** Complément technique et recette des
 [17 critères canoniques](localeo-live-entree-unique.md#évolution-du-7-novembre-2026--adhésion-habitant-e73-evo-live-adhesion),
 issus des 13 recommandations du [rapport](../../audits/marketplace/localeo-live-adhesion-ux-ui-2026-11-07.md).

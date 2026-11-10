@@ -1,5 +1,14 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+Évolution du **10 novembre 2026 — E73-EVO-LIVE-PARTICIPATION** : les huit lots
+acceptés après l'audit des parcours sont spécifiés dans les
+[critères PA](localeo-live-entree-unique.md#évolution-du-10-novembre-2026--participation-e73-evo-live-participation)
+et la [conception §15](localeo-live-adhesion-conception.md#15-participation--e73-evo-live-participation).
+Spécification, implémentation puis commit demandés par lot ; avancement et preuves
+dans le [bilan](verification-livraison.md#évolution--e73-evo-live-participation-10-novembre-2026).
+Clôture historique et réserves antérieures conservées ; aucun push/déploiement.
+
+
 Évolution du **10 novembre 2026 — E73-EVO-LIVE-ICONOGRAPHIE** : dix
 [critères IA](localeo-live-entree-unique.md#évolution-du-10-novembre-2026--iconographie-et-respiration-e73-evo-live-iconographie)
 et [conception §14](localeo-live-adhesion-conception.md#14-iconographie-et-respiration--e73-evo-live-iconographie)

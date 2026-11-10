@@ -1,5 +1,31 @@
 # E73 — Vérification, migration et livraison
 
+## Évolution — E73-EVO-LIVE-PARTICIPATION, 10 novembre 2026
+
+Autorisation : spécifier puis implémenter et committer chacun des huit lots du
+plan accepté en conversation. Pas de push ni de déploiement demandé.
+Base propre : Marketplace `0a327a2`, Projet `293a711` ; les preuves d'audit
+antérieures ne valent pas validation des changements ci-dessous.
+
+| Lot | Critères | Spécification | Réalisation / preuves propres |
+| --- | --- | --- | --- |
+| 0 — cadrage et traçabilité | PA-00 | Présente dans les sources Live canoniques, conception §15 | `py -3.14 scripts/check_guidance.py` : 97 guides, 1 186 liens, zéro erreur/avertissement ; `py -3.14 scripts/sync_documentation.py --check-sources` : 148 documents vérifiés (sorties 0). L'alias `python` absent a été remplacé par le lanceur installé |
+| 1 — langage visuel | PA-01/02 | Définie | À réaliser |
+| 2 — confirmation/retour | PA-03/04/05 | Définie | À réaliser |
+| 3 — reprise/récupération | PA-06/07 | Définie | À réaliser |
+| 4 — découverte/dotation | PA-08/09/10 | Définie, détails du producteur à confronter | À réaliser |
+| 5 — carnet/lots | PA-11/12/13 | Définie | À réaliser |
+| 6 — mesure | PA-14/15/16 | Définie | À réaliser, suspension Analytics conservée |
+| 7 — recette/livraison | PA-17/18 | Définie | À réaliser ; humain/hébergement séparés |
+
+Les nouvelles preuves sont ajoutées par lot avant son commit. Invariants : aucune
+réinscription lors d'une reprise, aucun accès personnel dans les projections
+publiques/Analytics, identité exacte de chaque entrée, refus prioritaires sur la
+conservation visuelle. Aucun nouveau compte ou mécanisme de récupération coffret.
+Les réserves antérieures (PM-R06, LA-16, LP) gardent leur statut propre ; aucune
+clôture d'epic globale n'est demandée.
+
+
 ## Évolution — E73-EVO-LIVE-ICONOGRAPHIE, 10 novembre 2026
 
 Demande : faire évoluer, spécifier puis implémenter les dix recommandations

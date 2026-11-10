@@ -168,6 +168,24 @@ preuves sont définis par [E73-EVO-LIVE-ICONOGRAPHIE](../../specifications/epic-
 
 ## Application aux évolutions futures
 
+### Première participation et continuité
+
+L'entrée explique en une phrase ce que l'habitant peut vivre. La découverte
+présente le parcours, son bénéfice réel et l'effort avant l'engagement. Une
+première visite sans carnet propose d'abord de découvrir ; la récupération
+s'adresse explicitement à qui a déjà participé. La confirmation nomme l'objet
+acquis et ouvre son prochain geste, puis Mon carnet. Une panne propose une
+reprise compréhensible sans répéter l'inscription.
+
+Le même vert d'action et les mêmes sections accompagnent ces étapes. Magasin
+désigne le passeport, parcours la chasse, boussole Découvrir et épingle la
+localisation. Les tampons gardent une silhouette lisible à petite taille ; leur
+interactivité repose sur des informations effectivement disponibles et utiles.
+La mesure de l'adhésion distingue inscription confirmée, ajout d'accès et
+progression ; elle conserve consentement, suspension et minimisation existants.
+Voir [E73-EVO-LIVE-PARTICIPATION](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-10-novembre-2026--participation-e73-evo-live-participation).
+
+
 Lors du cadrage ou de la conception d’une évolution Live, référencer les principes
 `LIVE-UX` concernés dans les critères ou la note de conception. Lors de la revue,
 vérifier leur traduction dans les écrans touchés. Une dérogation se documente
