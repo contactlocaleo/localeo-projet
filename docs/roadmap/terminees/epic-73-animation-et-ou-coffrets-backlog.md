@@ -2,12 +2,14 @@
 
 ## Évolution du 10 novembre 2026 — envie de participer
 
-**E73-EVO-LIVE-PARTICIPATION** : huit lots acceptés, à spécifier, implémenter
-et committer séparément. Les [critères PA-00 à PA-18](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-10-novembre-2026--participation-e73-evo-live-participation)
+**E73-EVO-LIVE-PARTICIPATION** : huit lots spécifiés, implémentés, vérifiés
+localement et commités séparément les 10–11 novembre. Les [critères PA-00 à PA-18](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-10-novembre-2026--participation-e73-evo-live-participation)
 couvrent langage visuel, confirmation/retour, reprise, découverte, carnet/lots,
 mesure et recette. La [conception §15](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-adhesion-conception.md#15-participation--e73-evo-live-participation)
 et le [bilan](../../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md#évolution--e73-evo-live-participation-10-novembre-2026)
-portent réalisation et limites. L'état « Terminée » historique du 1er novembre
+portent réalisation, versions et limites. PM-R06 est corrigé localement au lot 5 ;
+recette humaine/hébergée préparées, réserves LA-16/LP suivies séparément. Aucun
+push ni déploiement effectué. L'état « Terminée » historique du 1er novembre
 et les identifiants antérieurs sont conservés ; cette évolution ne les requalifie pas.
 
 
@@ -38,8 +40,9 @@ Corrections poussées dans Marketplace `b9fb30d`, audit/principes dans projet
 `89db142` ; dernière recette ciblée 16/16 et Node 239/239 selon le rapport.
 La présente évolution consolide la spécification, sans nouveau code applicatif.
 Restent recette TEST/physique, grands carnets, qualité des consignes et cadrage
-éventuel des pistes produit. La revue ajoute un correctif P1 ouvert : PIN et
-projection du détail participation lors de revalidation/refus (PM-R06).
+éventuel des pistes produit. La revue avait ajouté un correctif P1 : PIN et
+projection du détail participation lors de revalidation/refus (PM-R06), corrigé
+et vérifié localement depuis par le lot 5 PA ci-dessus.
 **Évolution non déclarée terminée ; clôture historique E73 et réserves LA-16/LP
 conservées.** Aucun déploiement attesté, aucun nouveau statut de roadmap.
 

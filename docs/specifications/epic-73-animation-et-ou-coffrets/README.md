@@ -4,9 +4,11 @@
 acceptés après l'audit des parcours sont spécifiés dans les
 [critères PA](localeo-live-entree-unique.md#évolution-du-10-novembre-2026--participation-e73-evo-live-participation)
 et la [conception §15](localeo-live-adhesion-conception.md#15-participation--e73-evo-live-participation).
-Spécification, implémentation puis commit demandés par lot ; avancement et preuves
-dans le [bilan](verification-livraison.md#évolution--e73-evo-live-participation-10-novembre-2026).
-Clôture historique et réserves antérieures conservées ; aucun push/déploiement.
+Les huit lots sont spécifiés, implémentés, vérifiés localement et commités les
+10–11 novembre ; versions, preuves et procédure de livraison dans le
+[bilan](verification-livraison.md#évolution--e73-evo-live-participation-10-novembre-2026).
+PM-R06 est corrigé localement au lot 5. Clôture historique conservée ; recette
+humaine et hébergée préparées, réserves LA-16/LP suivies, aucun push/déploiement.
 
 
 Évolution du **10 novembre 2026 — E73-EVO-LIVE-ICONOGRAPHIE** : dix
@@ -22,8 +24,9 @@ constats du dernier audit sont reliés aux [critères PM-01 à PM-09](localeo-li
 à la [conception §13](localeo-live-adhesion-conception.md#13-parcours-mobiles--e73-evo-live-parcours-mobile)
 et au [bilan PM](verification-livraison.md#évolution--e73-evo-live-parcours-mobile-10-novembre-2026).
 Corrections déjà poussées dans Marketplace `b9fb30d` ; présente phase documentaire.
-Le bilan distingue preuves locales, recettes restantes et correctif P1 encore
-ouvert sur la revalidation des participations. Clôture historique conservée,
+Le bilan historique relevait un correctif P1 sur la revalidation des
+participations, corrigé et vérifié depuis par le lot 5 PA ci-dessus. Il distingue
+toujours preuves locales et recettes restantes. Clôture historique conservée,
 évolution non déclarée terminée et déploiement non attesté.
 
 Évolution du **9 novembre 2026 — E73-EVO-LIVE-CARNET** : les cinq sections du

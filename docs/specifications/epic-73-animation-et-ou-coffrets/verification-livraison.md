@@ -13,10 +13,10 @@ antérieures ne valent pas validation des changements ci-dessous.
 | 1 — langage visuel | PA-01/02 | Définie | Palette/navigation verte, sections/champs communs, glyphes et tampons simplifiés. Node : 7/7 ; ESLint ciblé : sortie 0 ; Playwright `live-iconography-discovery.spec.cjs --grep PA-02` : 3/3 en 40 s, build isolé. Cloche intégrée avec le lot 2 ; revue multi-écrans au lot 7 |
 | 2 — confirmation/retour | PA-03/04/05 | Définie | Confirmation de l'objet exact, action selon moteur, retour contextualisé et tombola e-mail sans étape fictive. Node `live-saved-access` : 3/3, lint ciblé : 0. Playwright : 20 E74 + 5 readd + 7 confirmation réussis ; dernière reprise des 7 confirmations réussie après stabilisation du reçu. Captures 320/390/1280, CTA 320 et rayon du formulaire inspectés. Le passage global initial a été interrompu pour des fixtures de reprise du lot 3 devenues obsolètes ; il n'est pas annoncé entièrement vert |
 | 3 — reprise/récupération | PA-06/07 | Définie, échange coffret à usage unique précisé | Marketplace `4fc1008` : huit scénarios navigateur réussis (7 dans la reprise générale, dernier coffret rejoué 1/1 après correction du préfixe de session de la fixture), lint ciblé : 0. Panne participant/contact, refus, stockage échoué, guide sans ID, GET coffret après échange, échange incertain sans rejeu, réponse tardive. Rapport `tmp/pa-lot3-coffret-final-results.json` et reprise PA06/07 ; aucune commande métier automatique |
-| 4 — découverte/dotation | PA-08/09/10 | Définie, contrat réel confronté | Aperçu public borné et contrats synchronisés (backend `4b668e0`, Animation `5308a92`, Pro `186c73e`). Frontend : 38/38 navigateur (découverte 9, iconographie 16, dynamique 4, audit 9), puis 4/4 première arrivée après correction du wrapper. Node présentation 4/4, groupe normalisation/prévisualisation 10/10, lint 0. Capture CTA 320 et conditions longues inspectée ; dernière correction de chevauchement du texte 200 % à rejouer au lot 7. Bornes/consommateurs détaillés ci-dessous |
+| 4 — découverte/dotation | PA-08/09/10 | Définie, contrat réel confronté | Aperçu public borné et contrats synchronisés (backend `4b668e0`, Animation `5308a92`, Pro `186c73e`). Frontend : 38/38 navigateur (découverte 9, iconographie 16, dynamique 4, audit 9), puis 4/4 première arrivée après correction du wrapper. Node présentation 4/4, groupe normalisation/prévisualisation 10/10, lint 0. Capture CTA 320 et conditions longues inspectée ; dernière correction du texte 200 % vérifiée dans les 9 scénarios découverte du lot 7. Bornes/consommateurs détaillés ci-dessous |
 | 5 — carnet/lots | PA-11/12/13 | Définie | Prochaine action par moteur, carnet vide incitatif, tampons dépliables 54 px et retrait des données/capacités après refus. Première recette 74/79 ; cinq libellés anciens corrigés puis reprise 6/7. Dernier échec réel (tampon réduit à 22 px par une règle SVG trop large) corrigé puis scénario passeport 1/1. Tous les 79 scénarios sont ainsi couverts, sans skip. QR 403/409, résultat/reçu 403, reçu 404, revalidation 503/200, PIN/gains, lots et retours vérifiés. Lint et diff : 0 ; revue indépendante intégrée |
 | 6 — mesure | PA-14/15/16 | Définie, population initiale et consentement précisés | Deux événements et sept étapes fermées ; succès serveur, acquisition et ouverture distingués, déduplication en mémoire, aucune donnée personnelle ni activation. Node ciblé 8/8, suite sécurité finale 254/254, navigateur mesure 9/9 sur le dernier build. Cas consentement/refus/suspension, formulaire invalide, panne/reprise, accès déjà présent, reçu puis progression, lots, commune partagée lente/échouée. Revue indépendante de la politique commune navigateur/collecteur et des annulations intégrée |
-| 7 — recette/livraison | PA-17/18 | Définie | À réaliser ; humain/hébergement séparés |
+| 7 — recette/livraison | PA-17/18 | Définie | Recette intégrée : 106/109 au premier passage, trois sélecteurs obsolètes corrigés ; reprise finale 15/15 incluant ces trois cas et trois cas supplémentaires. Soit 112 scénarios distincts couverts avec succès, sans skip. Lint source/tests modifiés : 0 ; build isolé réussi ; contrôles documentaires réussis. Versions, commande de reproduction, retour et recette humaine ci-dessous ; hébergement et humain non exécutés |
 
 Les nouvelles preuves sont ajoutées par lot avant son commit. Invariants : aucune
 réinscription lors d'une reprise, aucun accès personnel dans les projections
@@ -26,6 +26,88 @@ PM-R06 est corrigé et vérifié localement par le lot 5, y compris les refus de
 lectures secondaires. Les preuves historiques ci-dessous gardent leur date ;
 elles ne décrivent pas l'état de ce correctif. Recette hébergée et réserves
 LA-16/LP restent distinctes ; aucune clôture d'epic globale n'est demandée.
+
+**Réalisation locale des huit lots achevée les 10–11 novembre 2026**, avec
+spécification puis implémentation et commits par lot. Les revues indépendantes
+de couverture PA-00 à PA-18, des projections/contrats et de la mesure ont été
+intégrées. Aucun critère de code n'est reporté ; les validations humaine et
+hébergée sont les actions externes préparées par PA-18, pas des succès annoncés.
+
+### Recette intégrée finale — lot 7
+
+Marketplace sur Chromium, données synthétiques, services workers bloqués et
+appels externes interdits par les fixtures. Build de production isolé avec
+`LOCALEO_ISOLATED_TESTS=1`, proxy backend `http://127.0.0.1:1`, port local 8190 ;
+aucun `.env` opérateur ni accès réel. Le dernier build inclut les corrections
+de mesure et valide les 15 reprises ; les autres scénarios ne dépendent pas de
+ces deux corrections de classement Analytics.
+
+| Suite dans `tests/visual/` | Premier passage | Reprise finale |
+| --- | --- | --- |
+| `live-focus-visibility.spec.cjs` | 8/8 | — |
+| `live-loading-pages.spec.cjs` | 10/10 | — |
+| `live-loading-stability.spec.cjs` | 13/14 | 4/4, dont invalidation et trois refus |
+| `live-participation-discovery.spec.cjs` | 9/9 | — |
+| `live-participation-measure.spec.cjs` | 6/7 | 9/9, dont deux communes partagées ajoutées |
+| `live-participation-mobile-flow.spec.cjs` | 9/9 | — |
+| `live-public-detail-fd.spec.cjs` | 43/44 | 1/1 notifications |
+| `live-return-continuity.spec.cjs` | 8/8 | — |
+| `live-messages-product.spec.cjs` | Hors passage | 1/1 ouverture/lecture/fermeture |
+
+Premier passage : 9,8 minutes, sortie 1 ; reprise : 1,2 minute, sortie 0.
+Les échecs venaient du libellé de cloche « non lues » remplacé par « non lus »
+dans deux suites et du nom accessible du champ de réponse incluant son aide.
+Sélecteurs actualisés, assertions de purge/réception/progression conservées ;
+une vérification explicite du compteur retiré a été ajoutée. La recherche de
+ces libellés a aussi corrigé le cas messagerie rejoué. Aucun skip ni relâchement
+du comportement attendu. Rapports locaux ignorés :
+`tmp/tmp/pa-final-results.json`, `tmp/tmp/pa-final-recheck-results.json` ; captures
+dans `tmp/pa-final-results/`. Les erreurs de configuration initiales du runner
+ne sont pas comptées comme tests exécutés.
+
+Captures inspectées : découverte 320/1280 et 390 à texte 200 %, cloche 320 à
+texte 200 %, carnet vide et chasse 390, passeport avec tampon déplié 54 px.
+Les assertions complètent cette inspection : cibles tactiles, ordre et focus
+clavier, contraste, aucun chevauchement de texte, mouvement réduit, conservation
+du contexte, refus et réponse tardive. Cela ne vaut pas essai avec lecteur
+d'écran humain ni clavier virtuel physique.
+
+Reproduction depuis Marketplace : `npx playwright test --config=playwright.desktop.config.cjs`
+suivi des huit noms de fichiers du premier passage. Ajouter
+`live-messages-product.spec.cjs` pour la messagerie. Les configs locales utilisées
+ne changent que le répertoire de résultats et le reporter JSON. Reprise exacte :
+les quatre suites mesure/chargement/fiche/messagerie avec
+`--grep 'PA-|retained shell invalidates|messages refusal during|notifications publiques, ancienne|ouvrir et fermer conserve'`.
+
+Sur l'arbre applicatif final : `npm run test:security` **254/254**, zéro skip,
+sortie 0 (17 s), dont huit tests de mesure ; ESLint sur `src` et les six fichiers
+de test modifiés des lots 6/7, `--max-warnings 0`, sortie 0. Les contrôles
+documentaires finaux ajoutent les cinq sources PA aux guides : **101 documents,
+1 411 liens, zéro erreur/avertissement** ; exports **148 documents**, sortie 0.
+La validation documentaire ne remplace aucun des tests applicatifs ci-dessus.
+
+### Versions et commits locaux
+
+| Dépôt | Version applicative validée / rôle |
+| --- | --- |
+| Marketplace | `e3d1f9e0ff43142b6460a210fa40ff27a105f40c` ; Live, collecte et recette |
+| Backend | `4b668e0974a0002faceb8a4399837db56f39b6e5` ; projection publique bornée |
+| Animation | `5308a92ccb01b9094244448470fe29529311c46d` ; contrat embarqué |
+| Pro | `186c73e1d4fdf4f3a6a32b50a89d7313bb80de71` ; contrat embarqué |
+| Projet | Historique par lot ci-dessous ; le présent commit porte le bilan final |
+
+| Lot | Commit Marketplace | Commit documentaire |
+| --- | --- | --- |
+| 0 | Sans code applicatif | `74dae66` |
+| 1 | `2b6d78d` | `6e1a93c` |
+| 2 | `32d235d` | `3cf0710` |
+| 3 | `4fc1008` | `5cbf86f` |
+| 4 | `a7c1f9a` et versions backend/consommateurs ci-dessus | `67f2d02`, `5abb550` |
+| 5 | `99f65f2` | `1193d0c` |
+| 6 | `fbb7b28` | `3353f53` |
+| 7 | `e3d1f9e` | Présent commit de bilan |
+
+Aucun push ni déploiement effectué pour cette réalisation.
 
 ### Preuves du producteur et des contrats — lot 4
 

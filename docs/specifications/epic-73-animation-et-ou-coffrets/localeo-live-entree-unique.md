@@ -5,7 +5,8 @@
 Demande : mettre en œuvre les huit lots du plan accepté après l'audit UX en
 conversation (source Marketplace `0a327a2`, parcours locaux avec API simulée).
 Cette extension conserve la clôture historique E73, les critères antérieurs et
-les réserves PM-R06/LA-16/LP. Les résultats propres à chaque lot sont dans le
+le suivi des réserves PM-R06/LA-16/LP (PM-R06 corrigé localement au lot 5).
+Les résultats propres à chaque lot sont dans le
 [bilan](verification-livraison.md#évolution--e73-evo-live-participation-10-novembre-2026),
 les choix techniques dans la [conception](localeo-live-adhesion-conception.md#15-participation--e73-evo-live-participation).
 
