@@ -10,7 +10,7 @@ antérieures ne valent pas validation des changements ci-dessous.
 | Lot | Critères | Spécification | Réalisation / preuves propres |
 | --- | --- | --- | --- |
 | 0 — cadrage et traçabilité | PA-00 | Présente dans les sources Live canoniques, conception §15 | `py -3.14 scripts/check_guidance.py` : 97 guides, 1 186 liens, zéro erreur/avertissement ; `py -3.14 scripts/sync_documentation.py --check-sources` : 148 documents vérifiés (sorties 0). L'alias `python` absent a été remplacé par le lanceur installé |
-| 1 — langage visuel | PA-01/02 | Définie | À réaliser |
+| 1 — langage visuel | PA-01/02 | Définie | Palette/navigation verte, sections/champs communs, glyphes et tampons simplifiés. Node : 7/7 ; ESLint ciblé : sortie 0 ; Playwright `live-iconography-discovery.spec.cjs --grep PA-02` : 3/3 en 40 s, build isolé. Cloche intégrée avec le lot 2 ; revue multi-écrans au lot 7 |
 | 2 — confirmation/retour | PA-03/04/05 | Définie | À réaliser |
 | 3 — reprise/récupération | PA-06/07 | Définie | À réaliser |
 | 4 — découverte/dotation | PA-08/09/10 | Définie, détails du producteur à confronter | À réaliser |
