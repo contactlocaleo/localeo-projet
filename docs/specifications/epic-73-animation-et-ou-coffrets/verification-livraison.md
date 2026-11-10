@@ -1,5 +1,172 @@
 # E73 — Vérification, migration et livraison
 
+## Évolution — E73-EVO-LIVE-CARNET-BORD, 9 novembre 2026
+
+**Livraison demandée le 10 novembre 2026 : commit et push.** Le commit
+Marketplace `2a90fb0` réunit le carnet de bord, les tampons et les parcours associés ;
+il est poussé sur `origin/main`. La documentation, l’audit et les principes UX
+sont livrés séparément dans le présent dépôt. Aucune migration ni activation
+de flag requise. Les preuves locales ci-dessous sont conservées ; le push ne
+constitue pas une vérification du déploiement ni une recette de TEST.
+
+Demande : implémenter les **neuf retours CB01 à CB09** de l’
+[audit mobile du carnet de bord](../../audits/marketplace/localeo-live-carnet-bord-audit-mobile-2026-11-09.md).
+[Critères et décision CB-D01](localeo-live-entree-unique.md#évolution-du-9-novembre-2026--carnet-de-bord-e73-evo-live-carnet-bord),
+[conception §12](localeo-live-adhesion-conception.md#12-carnet-de-bord--e73-evo-live-carnet-bord)
+et [principes UX durables](../../produit/live/principes-ux.md).
+Bases locales : projet `56c5eaa`, Marketplace `4cdf8bf`. Les travaux précédents
+sur les tampons et les principes UX sont conservés. La nouvelle décision remplace
+explicitement la navigation CN-D01 ; les bilans historiques ci-dessous ne sont
+pas réécrits ni utilisés comme preuve des nouveaux comportements.
+
+| Retour | Réalisation locale et preuve ciblée |
+| --- | --- |
+| CB01 — retrouver les lots | Navigation permanente Mon carnet / Mes lots / Découvrir, icônes et libellés ; Mes lots reste présent pendant une erreur ou sans gain. Compteurs inconnus distincts de zéro. `live-audit-navigation`, `live-lots-unified`. |
+| CB02 — carnet vide | Aperçu Parcours / Coffrets / Lots, récupération explicite et découverte, aide appareil dépliable ; retrait du filtre Tout solitaire après lecture complète. `live-audit-carnet`, `live-unified-carnet`. |
+| CB03 — continuité | Lecture d’une installation existante même sans accès local ; reprise des rattachements manquants avant les deux lectures agrégées. Maximum 50 accès par action, deux en vol, suite volontaire ; renouvellement borné et refus privés immédiatement purgés. Tests Node N10/N100, 51e accès après 50 révoqués, renouvellement réussi/refusé, erreurs et retrait entre onglets. |
+| CB04 — prochaine action | Une action en tête, priorisant un lot confirmé puis une participation disponible parmi les objets chargés. Coffret seulement mémorisé : « Vérifier mon coffret », sans promesse de présentation. Historique dépliable et favoris secondaires ; action stable pendant revalidation. `live-audit-carnet`, `live-personal-refresh`, suites accueil migrées vers le carnet. |
+| CB05 — objets et gain précis | Passeports à tampons, coffrets avec prestations connues, lots avec cadeau, origine et échéance. Destination par nature/identifiant/participation ; gain hors première page ou historique sélectionné sans substitution. Capacité coffret chargée seulement pour le gain choisi et après correspondance exacte ; état périmé/annulé masque cette capacité. `live-audit-carnet`, `live-lots-unified`, tests Node récompenses/tampons. |
+| CB06 — découverte et fiche | Découverte compacte et publique, premier CTA visible à 320 × 568 ; aucun faux vide avant fin de lecture. Fiche défi / objectif attendu / récompense, conditions standard fidèlement abrégées et règlement avant engagement. CTA dans le flux pour éviter deux barres fixes ; conditions particulières conservées. `live-audit-discovery`, suites fiche publique et découverte. |
+| CB07 — cohérence | Marque stable, Messages et Menu nommés, outils secondaires regroupés, actualisation près du titre, boutons principaux cohérents. « Valider mon inscription » décrit l’action ; téléphone classique obligatoire et consentements conservés. `live-audit-navigation`, `live-registration-clarity`, suites en-tête et accessibilité. |
+| CB08 — récupération | « Retrouver mes participations et lots » par e-mail en premier, puis trois alternatives dépliables : lien, coffret, sauvegarde. Aucune demande/confirmation automatique ; restitution et ajout volontaire inchangés. `live-audit-navigation`, `live-carnet-recovery`. |
+| CB09 — proximité | Commune courante reprise dans les commerces, recherche compacte, filtres avancés dépliables et élargissement explicite. Plusieurs communes annoncées sans choix silencieux. `live-audit-discovery`, `live-merchants`. |
+
+Revue indépendante de la continuité et des droits : correction des projections
+conservées après disparition ou changement d’état d’un gain, purge immédiate sur
+refus, invalidation de capacité coffret, reprise après pagination échouée puis
+réussie et mise à jour d’un gain répété sans déplacement dans la liste.
+Aucun constat ouvert dans ce périmètre focalisé après reprise de la revue.
+
+### Preuves locales propres à CB
+
+- **55 tests Node réussis**, sans skip : `live-audit-carnet`,
+  `live-unified-carnet`, `live-rewards`, `live-journey-stamps`,
+  `live-public-detail-presentation`, `live-challenge-presentation`,
+  `live-personal-refresh` et `live-installation` dans `tests/security/`.
+  Le dernier couvre aussi l’identité partagée et le renouvellement entre deux
+  onglets Chromium. La progression complétée, le tirage en attente et le résultat
+  terminal sont distingués pour le classement dans l’historique.
+- **ESLint `src tests` : sortie 0.** Builds de production isolés par le runner
+  navigateur ; aucune configuration publique versionnée modifiée.
+- **210 scénarios navigateur distincts dans 23 fichiers réussis au moins une
+  fois**, après corrections et reprises ciblées sur les sources concernées.
+  Ce n’est pas une exécution unique verte de 210 scénarios. Les principales
+  exécutions sont détaillées ci-dessous ; aucun skip utilisé comme réussite.
+- Contrôles documentaires : **105 guides, 1 383 liens locaux, zéro erreur ni
+  avertissement** avec les huit documents fonctionnels/ops ajoutés au contrôle ;
+  **148 sources exportées vérifiées**. `git diff --check` sans erreur dans les
+  deux dépôts modifiés.
+
+Traçabilité des reprises navigateur :
+
+- Lot carnet/lots/navigation/récupération/inscription : **68/69**. Une assertion
+  gardait l’ancien libellé du carnet vide ; actualisée selon CB02 et réussie
+  dans le lot suivant. Les premières vérifications de découverte avaient aussi
+  révélé deux sélecteurs ambigus de commune, ensuite bornés à leur région.
+- Élargissement arrêté après **38 cas exécutés (37 réussis)** pour reconstruire
+  avec les derniers changements. Un chargement initial du carnet 390 px a dépassé
+  cinq secondes avant le scénario ; reprise inchangée réussie. Les suites
+  adhésion, accessibilité, bornes et les treize premiers cas de fluidité ont
+  réussi ; les deux derniers cas de contexte ont été exécutés séparément, **2/2**.
+- Lot suivant : **134/145**, puis **22/22** à la reprise. Deux défauts applicatifs
+  corrigés : actualisation refusée pendant la pagination de Mes participations
+  (deux scénarios de réponse tardive), et action focalisée sous la navigation
+  pour une fiche longue (un scénario). Les autres écarts concernaient les filtres
+  désormais repliés (cinq), l’attente de confirmation asynchrone d’un abonnement
+  (un), une ancienne attente d’habillage Live depuis l’origine Coffrets (un)
+  et un mock de fiche qui ignorait les paramètres de négociation existants (un).
+  Les assertions de droits, données exactes, absence d’écriture implicite,
+  géométrie et réponses tardives ont été conservées ou renforcées.
+- Les **14 tests Node de revalidation** ont été rejoués avec succès après le
+  correctif de pagination ; ils font partie des 55 annoncés, sans double compte.
+
+Captures synthétiques inspectées : carnet vide 320 px, carnet mixte 390 px,
+récupération 320 px, découverte 320/390 px et fiche 390 px. Les captures et traces
+sont conservées hors des sources versionnées. Les jeux navigateur simulent les
+réponses API : aucun e-mail, inscription ou consommation réelle n’est déclenché.
+Cette recette ne prouve pas le déploiement sur TEST, la capacité SQL en charge,
+une mesure de compréhension avec des habitants ou un essai sur téléphone physique.
+La réserve LA-16 et les autres évolutions restent séparées.
+
+**Les neuf retours CB sont implémentés et vérifiés localement.** Les contrôles
+incluent 320 × 568, 360 × 800, 390 × 844, tablette/desktop, texte agrandi à 200 %,
+clavier, contrastes ciblés et absence de chevauchement. La recette avec des
+habitants et la vérification de la version déployée restent distinctes.
+
+Impacts : **Marketplace et documentation commune uniquement**. Les contrats
+existants, règles backend, droits, QR/PIN, téléphone et consentements sont
+conservés. Aucun changement des autres frontends, de schéma, de migration,
+de flag ou de batch. Les fixtures couvrent les nouveaux parcours ; le générateur
+backend ne change pas car aucun état métier n’est ajouté. Guides Live, exploitation,
+README et principes UX actualisés. Livraison frontend seule, retour à la version
+précédente sans reprise de données. À l’issue de l’implémentation du 9 novembre,
+aucun commit, push ou déploiement n’avait été demandé ; la demande de commit et
+push du 10 novembre est tracée en tête de cette section.
+
+## Évolution — E73-EVO-LIVE-TAMPONS, 9 novembre 2026
+
+Demande : ajouter une dimension de collection au suivi des animations, avec des
+icônes de tampons et une expérience de carnet qui donne envie de continuer.
+[Spécification TP-01 à TP-07](localeo-live-entree-unique.md#évolution-du-9-novembre-2026--carnet-de-tampons-e73-evo-live-tampons)
+et [conception §11](localeo-live-adhesion-conception.md#11-carnet-de-tampons--e73-evo-live-tampons).
+Bases : Marketplace `4cdf8bf`, projet `56c5eaa`. L’audit mobile déjà présent dans
+l’arbre est conservé ; sa navigation cible reste une proposition distincte.
+
+Réalisation locale Marketplace : `LiveJourneyStamps`, projection par moteur du
+carnet et détail `LiveAnimationGame`. Tampons SVG avec compteur exact et aperçu
+borné, boutiques validées avec dates, chasse sans lieux futurs dévoilés et ticket
+pour tombolas. QR personnel placé avant les visites, sans modifier sa capacité.
+Le statut serveur reste distinct du nombre de tampons et la gratification garde
+la causalité du reçu confirmé existant.
+
+| Critères | Preuves ciblées sur l’arbre courant |
+| --- | --- |
+| TP-01/02 | Tests Node `live-journey-stamps` et `live-unified-carnet` : zéro/partiel/plein, dépassement, compte invalide, limite huit, moteur tombola/générique et ressources distinctes. |
+| TP-03/04/05 | Suites navigateur `animation-progress`, `live-game` et `e74-tombola-email` : visites/dates, accès personnel, régularisation à 100 %, qualification, commande incertaine, ancien reçu et actualisation neutre. |
+| TP-06/07 | `live-unified-carnet`, `live-game-harmony`, `live-qr-opening` : carnet mixte, refus/anonymisation, pagination, dimensions mobiles, agrandissement, clavier, mouvement réduit et thèmes sombres. |
+
+Revue indépendante du diff : absence de nouvelle règle ou fuite de lieux ;
+deux constats corrigés avant la recette finale : statuts reprenant les couleurs
+du thème pour conserver leur contraste et suppression de la rotation animée sur
+simple actualisation des empreintes. La revue des captures a aussi conduit à
+compacter les longues chasses pour dégager leur CTA et à aligner l’aide du QR
+sur le contraste du thème.
+
+**Périmètre local TP-01 à TP-07 vérifié.** Contrôles exécutés :
+
+- **15 tests Node réussis**, sans skip : `live-journey-stamps`,
+  `live-unified-carnet`, `live-adhesion-journey`.
+- **77 scénarios navigateur distincts validés**, en plusieurs passages :
+  20 scénarios `e74-tombola-email` puis 57 des cinq autres suites citées.
+  La série de 57 a terminé à **52 réussites et cinq échecs** ; les échecs ont
+  fait l’objet de reprises ciblées. Attente de la lecture privée après reload
+  explicitée, sans changer les assertions métier ; en cas de refus, le lien
+  exact est désormais vérifié sous « Voir ma participation », puisque le moteur
+  n’est pas conservé dans la projection locale minimale. La reprise a terminé
+  à **7/8** : un prérequis de chargement initial a encore dépassé cinq secondes,
+  avant le scénario. Son exécution isolée a ensuite réussi, **1/1**. Aucun skip ;
+  il ne s’agit pas d’une exécution unique verte des 77 scénarios.
+- Anciennes fixtures corrigées pour les paramètres existants de négociation des
+  moteurs et l’entrée explicite `/live/carnet`. L’accès générique `/live` continue
+  d’ouvrir Découvrir sur un appareil vide, conformément à CN-02.
+- **ESLint `src tests` : sortie 0** ; build de production isolé par le runner
+  navigateur réussi, sans modification de configuration publique.
+- Captures synthétiques inspectées : carnet mixte 390 × 844, passeport partiel
+  et complet, thème sombre, chasse 320 px. Assertions 320/390/1280 px, texte
+  agrandi, zoom 200 %, clavier et mouvement réduit ; CTA de démarrage au-dessus
+  de la navigation à 320/390 × 844, première action du carnet entière à 390 × 844.
+- Contrôles documentaires : **97 guides, 1 158 liens, zéro erreur/avertissement**
+  via `check_guidance.py` ; **148 sources exportées vérifiées** via
+  `sync_documentation.py --check-sources`. `git diff --check` sans erreur.
+
+Impacts examinés : contrats/API, backend, ERP, droits et autres frontends inchangés
+car les projections existantes suffisent. Aucune migration, configuration, batch,
+nouvelle donnée persistée ou dépendance. Fixtures frontend enrichies ; générateur
+backend inchangé, sans nouvel état à produire. Guide Live, README Marketplace et
+guide d’exploitation actualisés. Livraison frontend seule et retour à la version
+précédente sans reprise de données. Aucun commit, push, déploiement ou essai sur
+téléphone physique n’est déduit des vérifications locales.
+
 ## Évolution — E73-EVO-LIVE-CARNET, 9 novembre 2026
 
 **Livraison demandée ensuite le 9 novembre : migration TEST, commit et push.**

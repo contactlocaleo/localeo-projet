@@ -2,6 +2,8 @@
 
 Constats datés conservés par application. Un audit ancien ne décrit pas automatiquement l’état actuel.
 
+- [Localeo Live — audit mobile du carnet de bord et des lots — 9 novembre 2026](marketplace/localeo-live-carnet-bord-audit-mobile-2026-11-09.md) : inspection après refonte à 360, 390 et 320 pixels ; accès aux lots, continuité, prochaine action et repères visuels. Carnet personnel vide lors de l'observation ; risque de rattachement identifié dans le code, à reproduire.
+
 - [Localeo Live — carnet personnel, inscription et continuité — 9 novembre 2026 (PDF)](marketplace/20261109-Audit%20Localeo%20Live.pdf) ; repris par [E73-EVO-LIVE-CARNET](../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-9-novembre-2026--carnet-personnel-unifié-e73-evo-live-carnet). Test responsive avec carnet vide et accès Mes lots interrompu ; recommandations, sans recette d’un carnet mixte.
 
 - [Localeo Live — fiche animation, audit visuel bureau/mobile — 8 novembre 2026](marketplace/localeo-live-fiche-animation-ux-ui-2026-11-08.md)

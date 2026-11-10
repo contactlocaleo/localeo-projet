@@ -1,5 +1,27 @@
 # Specifications Epic 42 - Localeo Live
 
+L’évolution [E73-EVO-LIVE-CARNET-BORD](../epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-9-novembre-2026--carnet-de-bord-e73-evo-live-carnet-bord)
+remplace la navigation CN décrite plus bas par **Mon carnet / Mes lots /
+Découvrir**. Le carnet porte la prochaine action, Mes lots reste accessible à
+vide, Découvrir conserve communes et programme. Les accès locaux sont rattachés
+par lots bornés avant lecture ; un lot ouvre sa cible précise. La récupération
+reste limitée aux participations et lots associés, avec coffrets par voie existante.
+
+Toute évolution de l’expérience habitant applique les
+[principes directeurs UX de Localeo Live](../../produit/live/principes-ux.md) :
+carnet de bord digital, progression immersive, objets personnels faciles à
+retrouver et simplicité mobile. Cette référence durable complète les critères
+datés des évolutions ci-dessous.
+
+Le suivi [E73-EVO-LIVE-TAMPONS](../epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-9-novembre-2026--carnet-de-tampons-e73-evo-live-tampons)
+donne au carnet une collection visuelle : tampons encrés pour les validations
+confirmées, empreintes vides pour la progression restante. Le compteur reste
+lisible et exact ; un aperçu borné est signalé pour les grands parcours.
+Dans le passeport, chaque commerce validé conserve sa date ; le bouton pour
+présenter son QR précède les visites. Une chasse ne dévoile que son étape
+autorisée. Les tombolas utilisent un ticket, sans visites à collectionner.
+Un carnet rempli ne promet ni qualification ni lot : leur état confirmé reste affiché.
+
 Évolution du **9 novembre 2026 — carnet personnel unifié** portée par
 [E73-EVO-LIVE-CARNET](../epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-9-novembre-2026--carnet-personnel-unifié-e73-evo-live-carnet).
 **Mon carnet** réunit les animations, coffrets et lots dont l’appareil possède

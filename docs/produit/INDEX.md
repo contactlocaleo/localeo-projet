@@ -2,6 +2,8 @@
 
 Vision fonctionnelle, parcours, identité visuelle et formations.
 
+- [Principes directeurs UX de Localeo Live](live/principes-ux.md) : carnet de bord digital, collection de tampons, accès aux lots et conception mobile ; référence pour les évolutions futures.
+
 - [animation/epic-41-expression-besoin-plateforme-partenaire-figma.md](animation/epic-41-expression-besoin-plateforme-partenaire-figma.md)
 - [animation/etat-application-animation.md](animation/etat-application-animation.md)
 - [animation/etat-application-backend.md](animation/etat-application-backend.md)

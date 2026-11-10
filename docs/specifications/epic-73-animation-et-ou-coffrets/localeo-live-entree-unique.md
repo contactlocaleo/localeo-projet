@@ -1,5 +1,19 @@
 # E73 — Localeo Live, entrée unique des animations
 
+Le complément **E73-EVO-LIVE-CARNET-BORD** du 9 novembre 2026 applique les neuf
+retours de l’audit mobile sur demande d’implémentation complète. Il remplace
+CN-D01 par **Mon carnet / Mes lots / Découvrir**. Critères CB01 à CB09 en fin de
+document ; preuves propres au bilan, sans rouvrir la clôture historique.
+
+Les [principes directeurs UX de Localeo Live](../../produit/live/principes-ux.md)
+s’appliquent au cadrage, à la conception et à la revue des évolutions de cette
+expérience. Ils pérennisent le carnet de bord digital et la collection visuelle
+des acquis ; les critères datés ci-dessous portent leurs comportements précis.
+
+Le complément **E73-EVO-LIVE-TAMPONS** du 9 novembre 2026, en fin de document,
+ajoute le suivi immersif demandé : carnet de tampons, progression réelle et
+prochaine action. Il étend CN-04/05/14 sans changer les règles de validation.
+
 Le complément du 9 novembre **E73-EVO-LIVE-CARNET**, en fin de document,
 intègre l’audit PDF sur le carnet personnel unifié. Sa préparation documentaire
 est distincte des réalisations LA/LH/FD et conserve la clôture historique E73.
@@ -1497,3 +1511,61 @@ porte les producteurs, contrats, coexistence, preuves et impacts ; le
 [bilan](verification-livraison.md) distingue les seuls contrôles documentaires
 exécutés des tests applicatifs encore à produire. Aucun état de l’epic, ancien
 résultat, migration ou environnement n’est modifié par cette préparation.
+
+## Évolution du 9 novembre 2026 — carnet de tampons (E73-EVO-LIVE-TAMPONS)
+
+Demande habitant : un suivi immersif qui donne envie de poursuivre ses animations,
+autour du carnet de bord digital et d’icônes de tampons. **Spécification puis
+réalisation frontend** ; extension de CN-04/05/14, sans réouverture de l’epic.
+Avant : petits ronds cochés dans le carnet, barre et compteur dans le détail.
+Après : empreintes de tampons, collection personnelle et prochaine action courte.
+La navigation et la récupération conservent les décisions CN ; les autres
+recommandations de l’audit mobile restent distinctes de cette demande.
+
+| Critère stable | Comportement et preuve attendus |
+| --- | --- |
+| **E73-TP-01** | Un passeport présente les validations confirmées sous forme de tampons encrés, les places restantes en empreintes vides, avec compteur exact. Zéro, partiel, plein et dépassement de l’objectif sont distingués ; huit empreintes au maximum avec résumé explicite du surplus. Un objectif inconnu/invalide n’est pas inventé. |
+| **E73-TP-02** | Le carnet conserve le moteur fourni par le dashboard : passeport, chasse et tombola ont un repère adapté. Une tombola présente un ticket et son état réel, aucun faux parcours de visites. Un ancien résumé sans moteur conserve un vocabulaire générique. |
+| **E73-TP-03** | Le détail passeport montre un tampon par commerce validé avec sa date réelle et « À découvrir » sinon. Le nombre de commerces proposés ne remplace pas l’objectif ; aucune visite suivante imposée. L’action de présentation du QR reste régie par sa capacité existante et accessible avant la liste des visites. |
+| **E73-TP-04** | Le détail chasse représente un compteur de progression ; seules l’étape courante et les informations autorisées sont nommées. Aucun lieu, ordre de visite futur, indice ou récompense n’est déduit des empreintes. La progression à 100 % avec régularisation ne devient pas une qualification. |
+| **E73-TP-05** | La gratification liée à une nouvelle étape utilise uniquement le reçu confirmé existant et ses versions. GET initial, rechargement, ancien reçu et commande incertaine ne célèbrent rien ; pas de points, série quotidienne, classement ni lot fictif. |
+| **E73-TP-06** | Carnet mixte, plusieurs participations d’une animation, refus et anonymisation : état, accès et compteurs restent propres à chaque ressource. Aucun appel supplémentaire par tampon, QR dans la liste, stockage de progression privée nouveau ou changement de cache. |
+| **E73-TP-07** | 320/390/1280 px, texte agrandi et mouvement réduit : compteur textuel, icône et état lisibles sans couleur seule ; pas de débordement ni cible interactive inférieure à 44 px. À 390 × 844, préserver le premier CTA entier et l’amorce de l’objet suivant sur le carnet de référence. Les tampons décoratifs ne deviennent pas des commandes trompeuses. |
+
+La [conception §11](localeo-live-adhesion-conception.md#11-carnet-de-tampons--e73-evo-live-tampons)
+porte la projection visuelle et les impacts. Les preuves et limites propres à
+cette évolution sont consignées au [bilan](verification-livraison.md).
+
+## Évolution du 9 novembre 2026 — carnet de bord (E73-EVO-LIVE-CARNET-BORD)
+
+L’utilisateur demande l’implémentation de tous les retours de
+[l’audit mobile](../../audits/marketplace/localeo-live-carnet-bord-audit-mobile-2026-11-09.md).
+Les références CB01 à CB09 sont reprises telles quelles, avec les principes
+[LIVE-UX-01 à 07](../../produit/live/principes-ux.md).
+
+**CB-D01 — Navigation : Mon carnet / Mes lots / Découvrir.** Mes lots est une
+destination permanente avec cadeau et libellé, même sans objet chargé. Communes
+reste accessible depuis Découvrir et son contexte territorial. Cette décision
+remplace CN-D01 ; CN-03 conserve ses filtres de types, mais le filtre Tout seul
+est masqué dans le carnet vide après lecture réussie. Les liens existants restent
+servis. Ce remplacement est autorisé par la demande d’implémentation de l’audit.
+
+| Critère | Résultat attendu et preuve discriminante |
+| --- | --- |
+| **CB01** | Mes lots accessible en un geste depuis la navigation, carnet vide/rempli. Aucun compteur zéro pendant un état inconnu, incomplet ou en erreur. |
+| **CB02** | Carnet vide : repères Parcours/Coffrets/Lots et intentions découvrir/récupérer. Pas de filtre Tout isolé ni de faux vide pendant les lectures. Stockage indisponible conserve son erreur et sa reprise. |
+| **CB03** | Lire les lots d’une installation même sans bibliothèque locale ; reprendre les rattachements des participations locales avec leur accès exact, par lot borné, avant les résumés. Tester restauration, renouvellement, échec partiel, révocation et modification d’accès en vol. Aucune réinscription ni droit inventé. |
+| **CB04** | Une prochaine action en tête du carnet sur un objet confirmé parmi les données chargées. Identité/ordre conservés pendant l’interaction ; ancien état distingué. Objets en cours avant favoris et historique ; aucune urgence inventée. |
+| **CB05** | Tampons/parcours, prestations/coffrets, cadeau/lot et état de remise. Visuel réel si disponible, sinon pictogramme du type. Origine/échéance conservées. Voir mon lot ouvre le bon exact ou le lot identifié dans Mes lots, avec consignes propres ; plusieurs gains/accès restent distincts. |
+| **CB06** | Fiche : défi, progression attendue et récompense avec condition essentielle concise et règlement avant engagement. Découvrir réduit son chrome : CTA de la première animation accessible à 320 × 568 dans la fixture chargée. Aucun faux vide avec les squelettes. |
+| **CB07** | Marque, outils, icônes et actions cohérents entre carnet, découverte, fiche, inscription et récupération. Actualiser reste identifiable. Libellé d’inscription fidèle à l’action, confirmation/e-mail/ajout distincts si nécessaire. Téléphone classique et consentements conservés. |
+| **CB08** | Récupération principale par e-mail des participations/lots associés, confirmation puis objets retrouvés ; alternatives lien/coffret/sauvegarde dépliables. Coffrets par voie existante ; aucun compte ni réactivation d’un accès refusé. |
+| **CB09** | Découvrir → Commerçants reprend le territoire choisi, l’affiche et permet son élargissement explicite. Entrée compacte et filtres avancés dépliables. Tester commune unique, multiple, élargissement, retour et première adresse mobile. |
+
+Recette : carnet mixte avec passeport commencé, coffret partiellement utilisé et
+lot à retirer ; zéro/partiel/terminé/inconnu, vide, panne, accès expiré/révoqué.
+Contrôles 320 × 568, 360 × 800, 390 × 844, texte/zoom 200 %, clavier et mouvement
+réduit. Tests isolés et captures ; téléphone physique et compréhension avec
+habitants restent des preuves distinctes. Conception et impacts au
+[§12](localeo-live-adhesion-conception.md#12-carnet-de-bord--e73-evo-live-carnet-bord),
+résultats exécutés au [bilan](verification-livraison.md).

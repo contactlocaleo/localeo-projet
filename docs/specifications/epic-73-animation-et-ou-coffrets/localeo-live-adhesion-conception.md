@@ -1657,4 +1657,86 @@ décisions sont désormais résolues. La demande
 engage spécification puis implémentation ; preuves réelles au bilan, sans
 assimiler revue documentaire à recette ni rouvrir l’epic terminée.
 
+## 11. Carnet de tampons — E73-EVO-LIVE-TAMPONS
+
+**Thèse visuelle :** une page de carnet claire, papier chaud et empreintes encrées,
+où les découvertes faites donnent envie de compléter les places encore libres.
+Ordre de lecture : identité de l’animation, collection et compteur, état confirmé,
+prochaine action. Les icônes SVG/CSS reprennent la boutique pour le passeport,
+la boussole pour la chasse et le ticket pour les tombolas. Pas de nouveau média
+à télécharger. Les cartes restent des objets personnels à ouvrir.
+
+**Interaction :** les tampons sont informatifs, les actions gardent leurs verbes.
+La validation confirmée garde le retour bref de `confirmedMilestone` ; aucune
+animation d’acquisition au montage. Les transitions des actions restent discrètes
+et désactivées avec mouvement réduit. Le détail des commerces conserve adresses,
+horaires et dates, avec la présentation personnelle avant les visites.
+
+**Sources :** `summary.type` et `dashboardProgress` pour la liste ;
+`jeu.progression.terminees/requises`, `commerces[].valide/dateValidation` et
+`etapeCourante` pour le détail. Compteur exact, rendu borné à huit empreintes.
+Une empreinte résume une unité confirmée ; elle ne définit pas un lieu ou l’ordre
+du parcours. Dans un grand objectif encore incomplet, l’aperçu conserve au moins
+une empreinte vide pour ne pas suggérer visuellement une collection complète.
+Le statut et `eligible` restent autoritaires : objectif rempli
+n’implique ni qualification ni gain. Une tombola n’utilise pas le compteur comme
+un parcours de visites. Les refus retirent toujours les projections concernées.
+
+| Impact | Traitement et preuves |
+| --- | --- |
+| Critères TP-01/02/06 | Composant partagé et projection `unifiedCarnet` ; tests Node des comptes/moteurs, tests navigateur carnet mixte, refus, anonymisation, liens et pagination conservés. |
+| Critères TP-03/04/05 | `LiveAnimationGame` et protocole existant ; tests parcours passeport/chasse/tombola, régularisation à 100 %, reçus rejoués/incertains et refresh neutre. |
+| Critère TP-07 | Captures et assertions 320/390/1280, zoom 200 %, clavier et mouvement réduit ; essais sur téléphone physique et étude habitant suivis séparément. |
+| Contrats, domaine, permissions | Sans modification : données déjà fournies par backend ; aucune règle calculée ou commande ajoutée par l’interface. Aucun changement ERP, Animation ou Commerçant. |
+| Données, migration, configuration | Sans modification : aucun champ persisté, flag, batch ni migration requis ; ancien backend sans type utilise le rendu générique. |
+| Documentation et exploitation | Guide Live, README Marketplace et bilan E73 mis à jour. Livraison du frontend seule après vérifications ; retour à la version précédente sans reprise de données. |
+| Générateur et fixtures | Générateur backend inchangé car aucun état métier nouveau. Fixtures frontend synthétiques enrichies : zéro/partiel/plein, grands objectifs, moteurs distincts et carnet mixte. Aucun appel/envoi réel nécessaire à la recette. |
+
 [Retour à la spécification Live](localeo-live-entree-unique.md)
+
+## 12. Carnet de bord — E73-EVO-LIVE-CARNET-BORD
+
+Thèse visuelle : carnet papier calme, tampons encrés et objets reconnaissables,
+avec une action utile immédiatement repérable. Composition : prochaine action,
+objets en cours, puis historique/enregistrés ; vide avec trois pictogrammes et
+deux intentions. Fiche publique : défi, progression et récompense, conditions
+courtes puis détails volontaires. Interactions : aides/filtres dépliables,
+retour au contexte et gratification sur reçu confirmé ; mouvement réduit.
+
+Invariants : le backend Animation et Identité/Accès vérifie chaque rattachement
+et lecture avec installation et token participant. Le frontend orchestre la
+reprise ; aucune fusion par animation/e-mail, inscription ni gain créé. Les
+projections privées sont invalidées au refus ou changement d’accès/installation.
+GET et ouverture d’un résumé ne valident ni commerce, ni remise, ni consentement.
+
+Reprise par le POST existant `participations-personnelles` : **50 accès par
+action**, **2 en vol**, puis **2 lectures agrégées de 12 objets** par page.
+Aucun appel par tampon/carte ni pagination automatique. Suite/reprise explicite,
+échec partiel signalé, accès locaux séparés conservés. Seul le refus
+d’installation reconnu permet un renouvellement borné ; timeout/refus de token
+ne le déclenche pas. Budget conservé lors des notifications de changement
+d’installation pour éviter une boucle de créations. Tester 10/100 accès et
+concurrence avec transport simulé ; capacité SQL existante suivie par LA-16,
+aucune nouvelle requête backend ni charge TEST.
+
+La prochaine action utilise les seuls objets confirmés chargés et indique une
+couverture partielle. Aucun calcul d’éligibilité ; un coffret seulement mémorisé
+reste à vérifier à l’ouverture : à défaut d’action confirmée sur une animation
+ou un lot, proposer « Vérifier mon coffret » avec cet état explicite, jamais
+« Présenter » depuis sa copie locale. Le gain conserve nature/identifiant/participation
+dans sa destination, sans faire d’un paramètre de navigation une preuve d’accès.
+Un parcours complété reste en cours de suivi tant que son tirage est en attente.
+Les résultats terminaux confirmés rendent sa participation secondaire dans
+l’historique ; un lot encore disponible reste un objet actif distinct. Sans
+résultat exploitable, ne pas déduire la fin d’une animation du nombre de tampons.
+
+| Périmètre | Impacts et preuves |
+| --- | --- |
+| CB01/02/04/05 | Navigation, carnet et lots Marketplace ; tests Node et navigateur mixte/vide/partiel, destinations exactes, clavier et captures. Guides E42/UX actualisés. |
+| CB03 | Orchestration frontend des contrats existants ; restauration, renouvellement/refus, changement en vol, bornes et revue indépendante. Domaine, schéma API et persistance inchangés. |
+| CB06/07/08/09 | Découverte, fiche, inscription, récupération et commerces ; tests des contextes/obligations et captures mobiles. Téléphone, consentements et preuves de récupération conservés. |
+| Migration / configuration / applications voisines | Sans objet : endpoints existants, aucun flag, batch, migration ou changement ERP/Animation/Commerçant. Livraison frontend et documentation après recette. |
+| Générateur / fixtures | Fixtures frontend mixtes et refus enrichies ; aucun état métier nouveau, générateur backend inchangé. Aucun envoi ou donnée d’exploitation dans les tests. |
+
+Résultats et limites au bilan après exécution ; cette conception ne remplace
+pas les preuves de rendu ni la recette du service déployé.

@@ -1,5 +1,25 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+## Évolution du 9 novembre 2026 — retours de l’audit du carnet de bord
+
+**E73-EVO-LIVE-CARNET-BORD** : implémentation des neuf retours CB01 à CB09
+demandée. Navigation Mon carnet / Mes lots / Découvrir, continuité des gains,
+prochaine action, cartes et parcours mobiles. [Critères](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-9-novembre-2026--carnet-de-bord-e73-evo-live-carnet-bord)
+et [bilan propre](../../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md).
+Réalisation locale Marketplace et documentation commune vérifiées : les neuf
+retours sont couverts, avec 55 tests Node et 210 scénarios navigateur distincts
+réussis par lots et reprises détaillés au bilan. Aucun déploiement attesté ;
+clôture historique et autres réserves conservées.
+
+## Évolution du 9 novembre 2026 — carnet de tampons immersif
+
+**E73-EVO-LIVE-TAMPONS**, demandé après l’audit mobile : collection de tampons,
+étapes confirmées et action utile dans le carnet et le détail personnel.
+Les [sept critères TP-01 à TP-07](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-9-novembre-2026--carnet-de-tampons-e73-evo-live-tampons)
+étendent CN-04/05/14. Réalisation locale Marketplace vérifiée ; aucun nouveau point,
+gain ni droit métier. Statut historique conservé, preuves propres au
+[bilan E73](../../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md).
+
 ## Évolution du 9 novembre 2026 — carnet personnel unifié
 
 **E73-EVO-LIVE-CARNET** intègre les cinq sections du

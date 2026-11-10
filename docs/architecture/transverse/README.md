@@ -5,6 +5,7 @@ Ce dossier documente les choix communs a plusieurs EPIC.
 ## Documents
 
 - [Identité des en-têtes des applications](identite-entetes-applications.md) : symbole, couleurs, typographie et adaptation mobile communs aux huit applications.
+- [Principes directeurs UX de Localeo Live](../../produit/live/principes-ux.md) : à appliquer aux évolutions de l’expérience habitant, du cadrage à la revue visuelle.
 
 - [Architecture solution](architecture-solution.md) : vue d'ensemble du backend, couches et integrations.
 - [Domaines fonctionnels](domaines-fonctionnels.md) : decoupage cible issu de l'EPIC 40.

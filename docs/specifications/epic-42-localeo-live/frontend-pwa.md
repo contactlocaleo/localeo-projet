@@ -1,5 +1,10 @@
 # Specification frontend PWA - Localeo Live
 
+Les [principes directeurs UX de Localeo Live](../../produit/live/principes-ux.md)
+guident les évolutions frontend. Pour la navigation et le carnet actuels, lire
+[E73-EVO-LIVE-CARNET-BORD et E73-EVO-LIVE-TAMPONS](../epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md) :
+ils remplacent les compositions historiques décrites ci-dessous.
+
 Évolution du 30 octobre 2026 : la surface Animation affiche désormais Accueil,
 Mes participations, Mes lots et Mes communes. L'accueil personnel et les rappels
 facultatifs sont spécifiés dans
