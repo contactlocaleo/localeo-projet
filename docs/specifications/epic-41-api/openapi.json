@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Backend - contrat implemente EPIC 41",
     "description": "OpenAPI complet du backend, dont les parcours Animation locale. Genere hors ligne depuis le code local pour les integrations et les mocks ; cet instantane ne prouve pas son deploiement.",
-    "version": "1.0.0+868ce6f"
+    "version": "1.0.0+59b300b"
   },
   "paths": {
     "/public/identite-acces/interne/connexion": {
@@ -19409,6 +19409,11 @@
         "security": [
           {
             "XApiKey": []
+          },
+          {
+            "AdminSessionCookie": [],
+            "ManualBatchMode": [],
+            "ErpCsrfToken": []
           }
         ]
       }
@@ -19467,7 +19472,12 @@
         },
         "security": [
           {
-            "AdminSessionCookie": []
+            "XApiKey": []
+          },
+          {
+            "AdminSessionCookie": [],
+            "ManualBatchMode": [],
+            "ErpCsrfToken": []
           }
         ]
       }
@@ -19526,7 +19536,12 @@
         },
         "security": [
           {
-            "AdminSessionCookie": []
+            "XApiKey": []
+          },
+          {
+            "AdminSessionCookie": [],
+            "ManualBatchMode": [],
+            "ErpCsrfToken": []
           }
         ]
       }
@@ -19573,7 +19588,12 @@
         },
         "security": [
           {
-            "AdminSessionCookie": []
+            "XApiKey": []
+          },
+          {
+            "AdminSessionCookie": [],
+            "ManualBatchMode": [],
+            "ErpCsrfToken": []
           }
         ]
       }
@@ -22939,7 +22959,8 @@
     "/public/localeo-live/participations/{participation_id}/contact-public": {
       "get": {
         "tags": [
-          "animation_locale"
+          "animation_locale",
+          "public"
         ],
         "summary": "Lire Contact Personnel",
         "operationId": "lire_contact_personnel_public_localeo_live_participations__participation_id__contact_public_get",
@@ -23156,7 +23177,17 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "XApiKey": []
+          },
+          {
+            "AdminSessionCookie": [],
+            "ManualBatchMode": [],
+            "ErpCsrfToken": []
+          }
+        ]
       }
     },
     "/protected/commercialisation/batch/reevaluer": {
@@ -23216,7 +23247,17 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "XApiKey": []
+          },
+          {
+            "AdminSessionCookie": [],
+            "ManualBatchMode": [],
+            "ErpCsrfToken": []
+          }
+        ]
       }
     },
     "/admin/api/profils/profils-commercants": {
@@ -31600,6 +31641,187 @@
             "CommercantSessionBearer": []
           }
         ]
+      }
+    },
+    "/public/localeo-live/carnet/recuperations": {
+      "post": {
+        "tags": [
+          "Localeo Live",
+          "public",
+          "animation_locale"
+        ],
+        "summary": "Demander",
+        "operationId": "demander_recuperation_carnet_live",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DemandeRecuperationCarnetRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DemandeRecuperationCarnetPayload"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Quota IP/adresse dépassé ; attendre avant une nouvelle demande.",
+            "headers": {
+              "Retry-After": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Cache-Control": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Schéma/capacité de récupération indisponible ; utiliser les liens personnels existants.",
+            "headers": {
+              "Cache-Control": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/localeo-live/carnet/recuperations/confirmer": {
+      "post": {
+        "tags": [
+          "Localeo Live",
+          "public",
+          "animation_locale"
+        ],
+        "summary": "Confirmer",
+        "operationId": "confirmer_recuperation_carnet_live",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfirmationRecuperationCarnetRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConfirmationRecuperationCarnetPayload"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Quota IP/adresse dépassé ; attendre avant une nouvelle demande.",
+            "headers": {
+              "Retry-After": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Cache-Control": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Schéma/capacité de récupération indisponible ; utiliser les liens personnels existants.",
+            "headers": {
+              "Cache-Control": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Preuve absente, expirée, révoquée ou déjà consommée.",
+            "headers": {
+              "Cache-Control": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/public/localeo-live/participations/{participation_id}/lieu-courant/pratique": {
@@ -42479,7 +42701,17 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "XApiKey": []
+          },
+          {
+            "AdminSessionCookie": [],
+            "ManualBatchMode": [],
+            "ErpCsrfToken": []
+          }
+        ]
       }
     },
     "/protected/exploitation/emails/batch/envoyer": {
@@ -42567,6 +42799,11 @@
         "security": [
           {
             "XApiKey": []
+          },
+          {
+            "AdminSessionCookie": [],
+            "ManualBatchMode": [],
+            "ErpCsrfToken": []
           }
         ]
       }
@@ -42656,6 +42893,11 @@
         "security": [
           {
             "XApiKey": []
+          },
+          {
+            "AdminSessionCookie": [],
+            "ManualBatchMode": [],
+            "ErpCsrfToken": []
           }
         ]
       }
@@ -42833,6 +43075,11 @@
         "security": [
           {
             "XApiKey": []
+          },
+          {
+            "AdminSessionCookie": [],
+            "ManualBatchMode": [],
+            "ErpCsrfToken": []
           }
         ]
       }
@@ -42922,6 +43169,11 @@
         "security": [
           {
             "XApiKey": []
+          },
+          {
+            "AdminSessionCookie": [],
+            "ManualBatchMode": [],
+            "ErpCsrfToken": []
           }
         ]
       }
@@ -43087,6 +43339,11 @@
         "security": [
           {
             "XApiKey": []
+          },
+          {
+            "AdminSessionCookie": [],
+            "ManualBatchMode": [],
+            "ErpCsrfToken": []
           }
         ]
       }
@@ -43164,6 +43421,11 @@
         "security": [
           {
             "XApiKey": []
+          },
+          {
+            "AdminSessionCookie": [],
+            "ManualBatchMode": [],
+            "ErpCsrfToken": []
           }
         ]
       }
@@ -43219,7 +43481,17 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "XApiKey": []
+          },
+          {
+            "AdminSessionCookie": [],
+            "ManualBatchMode": [],
+            "ErpCsrfToken": []
+          }
+        ]
       }
     },
     "/protected/exploitation/localeo-live/rappels/preparer": {
@@ -43285,7 +43557,17 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "XApiKey": []
+          },
+          {
+            "AdminSessionCookie": [],
+            "ManualBatchMode": [],
+            "ErpCsrfToken": []
+          }
+        ]
       }
     },
     "/protected/exploitation/localeo-live/editorial/diffuser": {
@@ -43337,7 +43619,17 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "XApiKey": []
+          },
+          {
+            "AdminSessionCookie": [],
+            "ManualBatchMode": [],
+            "ErpCsrfToken": []
+          }
+        ]
       }
     },
     "/protected/exploitation/localeo-live/maintenance/purger": {
@@ -43389,7 +43681,17 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "XApiKey": []
+          },
+          {
+            "AdminSessionCookie": [],
+            "ManualBatchMode": [],
+            "ErpCsrfToken": []
+          }
+        ]
       }
     },
     "/protected/gestion-reversement/reversements/campagnes-stripe/lancer": {
@@ -43950,7 +44252,17 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "XApiKey": []
+          },
+          {
+            "AdminSessionCookie": [],
+            "ManualBatchMode": [],
+            "ErpCsrfToken": []
+          }
+        ]
       }
     },
     "/public/referencement/commercants": {
@@ -50797,6 +51109,11 @@
         "security": [
           {
             "XApiKey": []
+          },
+          {
+            "AdminSessionCookie": [],
+            "ManualBatchMode": [],
+            "ErpCsrfToken": []
           }
         ]
       }
@@ -50922,6 +51239,11 @@
         "security": [
           {
             "XApiKey": []
+          },
+          {
+            "AdminSessionCookie": [],
+            "ManualBatchMode": [],
+            "ErpCsrfToken": []
           }
         ]
       }
@@ -52765,6 +53087,11 @@
         "security": [
           {
             "XApiKey": []
+          },
+          {
+            "AdminSessionCookie": [],
+            "ManualBatchMode": [],
+            "ErpCsrfToken": []
           }
         ]
       }
@@ -52844,6 +53171,11 @@
         "security": [
           {
             "XApiKey": []
+          },
+          {
+            "AdminSessionCookie": [],
+            "ManualBatchMode": [],
+            "ErpCsrfToken": []
           }
         ]
       }
@@ -52931,6 +53263,11 @@
         "security": [
           {
             "XApiKey": []
+          },
+          {
+            "AdminSessionCookie": [],
+            "ManualBatchMode": [],
+            "ErpCsrfToken": []
           }
         ]
       }
@@ -53038,6 +53375,11 @@
         "security": [
           {
             "XApiKey": []
+          },
+          {
+            "AdminSessionCookie": [],
+            "ManualBatchMode": [],
+            "ErpCsrfToken": []
           }
         ]
       }
@@ -53105,6 +53447,11 @@
         "security": [
           {
             "XApiKey": []
+          },
+          {
+            "AdminSessionCookie": [],
+            "ManualBatchMode": [],
+            "ErpCsrfToken": []
           }
         ]
       }
@@ -57835,6 +58182,11 @@
         "security": [
           {
             "XApiKey": []
+          },
+          {
+            "AdminSessionCookie": [],
+            "ManualBatchMode": [],
+            "ErpCsrfToken": []
           }
         ]
       }
@@ -78801,7 +79153,12 @@
         },
         "security": [
           {
-            "AdminSessionCookie": []
+            "XApiKey": []
+          },
+          {
+            "AdminSessionCookie": [],
+            "ManualBatchMode": [],
+            "ErpCsrfToken": []
           }
         ]
       }
@@ -78848,7 +79205,12 @@
         },
         "security": [
           {
-            "AdminSessionCookie": []
+            "XApiKey": []
+          },
+          {
+            "AdminSessionCookie": [],
+            "ManualBatchMode": [],
+            "ErpCsrfToken": []
           }
         ]
       }
@@ -93103,6 +93465,11 @@
         "security": [
           {
             "XApiKey": []
+          },
+          {
+            "AdminSessionCookie": [],
+            "ManualBatchMode": [],
+            "ErpCsrfToken": []
           }
         ]
       }
@@ -102188,6 +102555,11 @@
         "security": [
           {
             "XApiKey": []
+          },
+          {
+            "AdminSessionCookie": [],
+            "ManualBatchMode": [],
+            "ErpCsrfToken": []
           }
         ]
       }
@@ -112420,7 +112792,17 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "XApiKey": []
+          },
+          {
+            "AdminSessionCookie": [],
+            "ManualBatchMode": [],
+            "ErpCsrfToken": []
+          }
+        ]
       }
     },
     "/protected/animation-locale/animations/{animation_id}/suivi-preparation": {
@@ -121829,6 +122211,15 @@
             "type": "array",
             "title": "Lots"
           },
+          "apercu_dotation": {
+            "items": {
+              "$ref": "#/components/schemas/ApercuDotationPubliquePayload"
+            },
+            "type": "array",
+            "maxItems": 3,
+            "title": "Apercu Dotation",
+            "description": "Aperçu public borné ; sans identité, accès ou consigne privée. Le détail conserve la liste des lots."
+          },
           "dotation": {
             "anyOf": [
               {
@@ -122637,6 +123028,38 @@
           "impact"
         ],
         "title": "ApercuCorrectionPreuvePayload"
+      },
+      "ApercuDotationPubliquePayload": {
+        "properties": {
+          "nature": {
+            "type": "string",
+            "enum": [
+              "COFFRET",
+              "LOT_EXTERNE",
+              "BON_NUMERIQUE"
+            ],
+            "title": "Nature"
+          },
+          "nom": {
+            "type": "string",
+            "maxLength": 160,
+            "minLength": 1,
+            "title": "Nom"
+          },
+          "quantite": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Quantite",
+            "description": "Quantité prévue publique, pas un stock restant."
+          }
+        },
+        "type": "object",
+        "required": [
+          "nature",
+          "nom",
+          "quantite"
+        ],
+        "title": "ApercuDotationPubliquePayload"
       },
       "ApercuNeutralisationPayload": {
         "properties": {
@@ -124818,8 +125241,15 @@
             "default": 1
           },
           "responsable_id": {
-            "type": "string",
-            "format": "uuid",
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Responsable Id"
           },
           "precedent_id": {
@@ -124839,8 +125269,7 @@
         "required": [
           "fichier",
           "source_id",
-          "mode",
-          "responsable_id"
+          "mode"
         ],
         "title": "Body_deposer_internal_prospection_imports_post"
       },
@@ -131357,6 +131786,49 @@
         ],
         "title": "ConfirmationInvitationOnboardRequest"
       },
+      "ConfirmationRecuperationCarnetPayload": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ParticipationRecupereePayload"
+            },
+            "type": "array",
+            "maxItems": 50,
+            "title": "Items"
+          },
+          "incomplet": {
+            "type": "boolean",
+            "title": "Incomplet"
+          },
+          "perimetre": {
+            "type": "string",
+            "title": "Perimetre"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "incomplet",
+          "perimetre"
+        ],
+        "title": "ConfirmationRecuperationCarnetPayload"
+      },
+      "ConfirmationRecuperationCarnetRequest": {
+        "properties": {
+          "secret": {
+            "type": "string",
+            "maxLength": 128,
+            "minLength": 32,
+            "title": "Secret"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "secret"
+        ],
+        "title": "ConfirmationRecuperationCarnetRequest"
+      },
       "ConfirmationReprise": {
         "properties": {
           "expected_version": {
@@ -136635,6 +137107,40 @@
           "effet_libelle"
         ],
         "title": "DemandePin"
+      },
+      "DemandeRecuperationCarnetPayload": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Message"
+          },
+          "renvoi_apres_secondes": {
+            "type": "integer",
+            "title": "Renvoi Apres Secondes"
+          }
+        },
+        "type": "object",
+        "required": [
+          "message",
+          "renvoi_apres_secondes"
+        ],
+        "title": "DemandeRecuperationCarnetPayload"
+      },
+      "DemandeRecuperationCarnetRequest": {
+        "properties": {
+          "email": {
+            "type": "string",
+            "maxLength": 254,
+            "minLength": 3,
+            "title": "Email"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "email"
+        ],
+        "title": "DemandeRecuperationCarnetRequest"
       },
       "DemandeSupportPayload": {
         "properties": {
@@ -161694,6 +162200,39 @@
         ],
         "title": "ParticipationLivePayload"
       },
+      "ParticipationRecupereePayload": {
+        "properties": {
+          "participation_id": {
+            "type": "string",
+            "title": "Participation Id"
+          },
+          "animation_id": {
+            "type": "string",
+            "title": "Animation Id"
+          },
+          "animation_nom": {
+            "type": "string",
+            "title": "Animation Nom"
+          },
+          "token": {
+            "type": "string",
+            "title": "Token"
+          },
+          "expires_at": {
+            "type": "string",
+            "title": "Expires At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "participation_id",
+          "animation_id",
+          "animation_nom",
+          "token",
+          "expires_at"
+        ],
+        "title": "ParticipationRecupereePayload"
+      },
       "ParticipationTableauLivePayload": {
         "properties": {
           "participation_id": {
@@ -180227,6 +180766,18 @@
         "in": "cookie",
         "name": "session",
         "description": "Cookie signé de session interne : admin historique ou référence opaque de session nominative E69. Les capacités et périmètres sont relus côté serveur. Le nom historique du schéma ne confère aucun privilège admin."
+      },
+      "ManualBatchMode": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-Batch-Manual",
+        "description": "Valeur 1 pour un lancement manuel POST du catalogue, réservé à la session ADMIN historique."
+      },
+      "ErpCsrfToken": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-CSRF-Token",
+        "description": "Jeton CSRF de la session ERP obtenu depuis /internal/erp/api/contexte."
       },
       "BearerAuth": {
         "type": "http",

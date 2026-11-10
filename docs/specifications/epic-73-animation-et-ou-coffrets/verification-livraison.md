@@ -13,7 +13,7 @@ antérieures ne valent pas validation des changements ci-dessous.
 | 1 — langage visuel | PA-01/02 | Définie | Palette/navigation verte, sections/champs communs, glyphes et tampons simplifiés. Node : 7/7 ; ESLint ciblé : sortie 0 ; Playwright `live-iconography-discovery.spec.cjs --grep PA-02` : 3/3 en 40 s, build isolé. Cloche intégrée avec le lot 2 ; revue multi-écrans au lot 7 |
 | 2 — confirmation/retour | PA-03/04/05 | Définie | Confirmation de l'objet exact, action selon moteur, retour contextualisé et tombola e-mail sans étape fictive. Node `live-saved-access` : 3/3, lint ciblé : 0. Playwright : 20 E74 + 5 readd + 7 confirmation réussis ; dernière reprise des 7 confirmations réussie après stabilisation du reçu. Captures 320/390/1280, CTA 320 et rayon du formulaire inspectés. Le passage global initial a été interrompu pour des fixtures de reprise du lot 3 devenues obsolètes ; il n'est pas annoncé entièrement vert |
 | 3 — reprise/récupération | PA-06/07 | Définie, échange coffret à usage unique précisé | Marketplace `4fc1008` : huit scénarios navigateur réussis (7 dans la reprise générale, dernier coffret rejoué 1/1 après correction du préfixe de session de la fixture), lint ciblé : 0. Panne participant/contact, refus, stockage échoué, guide sans ID, GET coffret après échange, échange incertain sans rejeu, réponse tardive. Rapport `tmp/pa-lot3-coffret-final-results.json` et reprise PA06/07 ; aucune commande métier automatique |
-| 4 — découverte/dotation | PA-08/09/10 | Définie, détails du producteur à confronter | À réaliser |
+| 4 — découverte/dotation | PA-08/09/10 | Définie, contrat réel confronté | Backend `4b668e0`, Animation `5308a92`, Pro `186c73e` : aperçu public borné et contrats synchronisés. Vérifications backend et consommateurs ci-dessous ; recette visuelle de la découverte en cours |
 | 5 — carnet/lots | PA-11/12/13 | Définie | À réaliser |
 | 6 — mesure | PA-14/15/16 | Définie | À réaliser, suspension Analytics conservée |
 | 7 — recette/livraison | PA-17/18 | Définie | À réaliser ; humain/hébergement séparés |
@@ -24,6 +24,45 @@ publiques/Analytics, identité exacte de chaque entrée, refus prioritaires sur 
 conservation visuelle. Aucun nouveau compte ou mécanisme de récupération coffret.
 Les réserves antérieures (PM-R06, LA-16, LP) gardent leur statut propre ; aucune
 clôture d'epic globale n'est demandée.
+
+### Preuves du producteur et des contrats — lot 4
+
+Projection additive `apercu_dotation` : trois objets maximum, nature publique,
+nom de 160 caractères maximum, quantité prévue ; ni gagnant, accès, consigne
+privée ou stock restant. Index déjà présents en migrations v269/v272 ; aucun
+SQL de migration ni changement du générateur de démonstration. Revue indépendante
+du contrat intégrée : bornes, confidentialité, compatibilité ancienne API et
+consommateurs vérifiés ; les instantanés embarqués signalés anciens ont été régénérés.
+
+- Runner isolé backend : architecture/domaine/recensement des cas d'usage **687/687**.
+  Suite élargie initiale **40 réussis, 2 échecs**, reproduits sur HEAD : doubles de
+  publication anciens sans port de réversibilité. Fixtures actualisées, horloge
+  Halloween rendue déterministe, assertions conservées ; publication classique/moteur
+  **11/11** finale, contrat E42 **2/2**, PostgreSQL jetable dédié **3/3** sans skip.
+- Animation : **31/31** tests HTTP. Pro : **42/42** tests contrats et déploiement,
+  configuration isolée, sans `.env` opérateur. Exports identiques après normalisation
+  LF : SHA-256 `7054b45902cdac78e01560aa43aa9669ff0ac2fdc10ee27e6bb0c668bfff0d49`,
+  1 089 chemins et 1 181 schémas. E42 ajoute seulement le champ/schéma public ;
+  E41 rattrape également les routes de récupération du carnet et la sécurité batch.
+- Le snapshot Pro était ancien (830 chemins/829 schémas) : la régénération complète
+  inclut 259 chemins ajoutés, 363 schémas ajoutés et 11 anciens schémas renommés
+  retirés. Ce volume historique n'est pas attribué au seul aperçu de dotation.
+  Animation récupère deux routes de récupération et six schémas. Aucun générateur
+  ni interface de gestion n'a été modifié.
+
+PostgreSQL local jetable, 100 puis 1 000 animations avec 20 lots externes chacune :
+pages 1/10/50, extension **une requête**, **3/30/150 lignes** et
+**1 094/10 940/54 700 octets** aux deux populations. Plan indexé avec trois lignes
+par boucle. Cas mixte : trois noms Coffrets et six lots libres, deux requêtes.
+Recherche complète : six requêtes constantes ; ancien catalogue : 9/18/58, son
+N+1 de configuration préexistant n'est pas déclaré corrigé.
+
+Dix lecteurs, dix lectures d'échauffement puis trente mesurées sans tests UI
+concurrents : avec aperçu p95 **591 ms**, p99 **600 ms**, zéro erreur ; aperçu
+neutralisé p95 **847 ms**, p99 **1 137 ms**, zéro erreur. Delta négatif = variabilité
+locale, aucun gain revendiqué. Premiers essais p95 1 559 puis 1 060 ms conservés.
+Artefact ignoré `.artifacts/e73-pa10-apercus-performance.json` dans le backend.
+Mesure de service local : **HTTP, charge mixte et capacité hébergée non qualifiés**.
 
 
 ## Évolution — E73-EVO-LIVE-ICONOGRAPHIE, 10 novembre 2026

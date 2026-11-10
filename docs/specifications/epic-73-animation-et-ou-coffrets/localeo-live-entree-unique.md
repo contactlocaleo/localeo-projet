@@ -50,7 +50,7 @@ personnel existant et nettoyés des URL conformément au contrat actuel.
 | Marketplace/Live, lots 1–7 | Présentation, contexte de retour, reprise, instrumentation fermée et tests simulés ; aucun nouveau droit ni compte |
 | Backend, lot 4 | Projection publique bornée catalogue/recherche, dépôt de lecture groupé et tests isolés ; pas de modification d'inscription ni de schéma métier anticipée |
 | Projet, lots 0–7 | Sources présentes, principes UX, contrats générés réellement modifiés, exploitation et bilan |
-| Animation / Pro | Vérification de compatibilité des consommateurs ; aucun parcours de gestion modifié par cette extension |
+| Animation / Pro | Contrats embarqués régénérés et tests de consommateurs ; aucun parcours de gestion modifié. La régénération Pro rattrape un instantané ancien ; l'écart historique est décrit au bilan |
 | Démonstration | Fixtures de parcours et de dotation publique ; pas de nouveau champ métier requis par le générateur, ni génération sur environnement réel |
 | Exploitation | Commits locaux autorisés par lot ; aucune activation Analytics, migration de données ou publication implicite. Capacité hébergée et test humain à réaliser séparément |
 

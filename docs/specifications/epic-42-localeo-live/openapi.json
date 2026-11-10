@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Live - API backend Epic 42",
     "description": "Vue OpenAPI 3.1 des contrats publics, editoriaux et techniques de Localeo Live.",
-    "version": "1.0.0+8851cbd"
+    "version": "1.0.0+59b300b"
   },
   "paths": {
     "/public/animation-locale/animations/{animation_id}/contact-public": {
@@ -11540,6 +11540,15 @@
             "type": "array",
             "title": "Lots"
           },
+          "apercu_dotation": {
+            "items": {
+              "$ref": "#/components/schemas/ApercuDotationPubliquePayload"
+            },
+            "type": "array",
+            "maxItems": 3,
+            "title": "Apercu Dotation",
+            "description": "Aperçu public borné ; sans identité, accès ou consigne privée. Le détail conserve la liste des lots."
+          },
           "dotation": {
             "anyOf": [
               {
@@ -12348,6 +12357,38 @@
           "impact"
         ],
         "title": "ApercuCorrectionPreuvePayload"
+      },
+      "ApercuDotationPubliquePayload": {
+        "properties": {
+          "nature": {
+            "type": "string",
+            "enum": [
+              "COFFRET",
+              "LOT_EXTERNE",
+              "BON_NUMERIQUE"
+            ],
+            "title": "Nature"
+          },
+          "nom": {
+            "type": "string",
+            "maxLength": 160,
+            "minLength": 1,
+            "title": "Nom"
+          },
+          "quantite": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Quantite",
+            "description": "Quantité prévue publique, pas un stock restant."
+          }
+        },
+        "type": "object",
+        "required": [
+          "nature",
+          "nom",
+          "quantite"
+        ],
+        "title": "ApercuDotationPubliquePayload"
       },
       "ApercuNeutralisationPayload": {
         "properties": {
