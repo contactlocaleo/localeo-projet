@@ -2,6 +2,8 @@
 
 Constats datés conservés par application. Un audit ancien ne décrit pas automatiquement l’état actuel.
 
+- [Localeo Live — participation, lots et découverte sur mobile — 10 novembre 2026](marketplace/localeo-live-mobile-participation-lots-decouverte-2026-11-10.md) : actions prioritaires, chargements partagés, retours aux lots et codes visuels de Localeo Pro.
+
 - [Localeo Live — retours de parcours et stabilité visuelle — 10 novembre 2026](marketplace/localeo-live-parcours-stabilite-2026-11-10.md) : carnet, participations, lots, messages et commerces ; corrections du contexte de retour, du bouton Messages et des chargements mobiles, avec preuves locales isolées.
 
 - [Localeo Live — audit mobile du carnet de bord et des lots — 9 novembre 2026](marketplace/localeo-live-carnet-bord-audit-mobile-2026-11-09.md) : inspection après refonte à 360, 390 et 320 pixels ; accès aux lots, continuité, prochaine action et repères visuels. Carnet personnel vide lors de l'observation ; risque de rattachement identifié dans le code, à reproduire.

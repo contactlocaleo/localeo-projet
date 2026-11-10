@@ -98,7 +98,9 @@ Modifier les règles existantes plutôt qu’ajouter des surcharges successives.
 Ops utilise sa feuille unique `ops.css`, sans ancien bloc de styles en ligne.
 Les connexions internes consomment les mêmes tokens. Pro et Animation harmonisent
 leur cadre, leurs composants de gestion et leurs formulaires d’accès. La surface
-habitante Live conserve sa présentation immersive propre.
+habitante Live reprend depuis le 10 novembre 2026 la typographie et les sections
+de Pro, tout en conservant son carnet, ses tampons, ses tickets et sa navigation
+habitante. Voir [LIVE-UX-09](../../produit/live/principes-ux.md#live-ux-09--partager-la-lisibilité-de-localeo-pro).
 
 Dans Pro et Animation, conserver les rubriques et raccourcis adaptés au métier,
 le retour au contexte précédent, les confirmations et les états de chargement.

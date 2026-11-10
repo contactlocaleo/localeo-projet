@@ -7,6 +7,19 @@ Les accents et formulations des anciennes notes sont normalisés sans changer le
 
 ## Signalement identifié
 
+### Correction du 10 novembre 2026 — Participation, lots et découverte mobile
+
+Prolongement du carnet dans la participation : action QR remontée et vérification
+neutre, gains avant les détails. Chargements partagés dans Live, faux vide de
+facture supprimé, états anciens distingués des droits confirmés. Mes lots retrouve
+la carte et l’historique après relecture bornée ; Découvrir rend recherche,
+favoris et partage visibles et compose son programme initial sans insertion
+tardive. Typographie et sections alignées sur Pro à la demande de l’utilisateur.
+
+Voir [l’audit et ses preuves](../../audits/marketplace/localeo-live-mobile-participation-lots-decouverte-2026-11-10.md).
+Correction locale du frontend ; aucun contrat, migration, flag ou déploiement
+TEST au titre de cette intervention.
+
 ### Correction du 10 novembre 2026 — Retours Live et stabilité du carnet
 
 Le parcours Mon carnet → participation revenait à l’ancienne liste ; les autres

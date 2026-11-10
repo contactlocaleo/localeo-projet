@@ -109,6 +109,34 @@ Un refus confirmé reste prioritaire sur la conservation visuelle des données.
 La conservation du bandeau ne doit pas conserver le QR, la saisie ou le panneau
 d’un autre objet lors d’un changement de page.
 
+Le même langage de chargement couvre les listes, détails, messages, commerces,
+coffrets, inscriptions, récupération et documents Live. Une vérification en
+cours ne signifie pas « indisponible ». Une actualisation échouée distingue le
+dernier état connu du droit actuellement confirmé. Les QR, codes et actions
+sensibles attendent cette confirmation. Une commande conserve son formulaire
+et son résultat explicite ; elle n’est jamais relancée pour masquer une attente.
+
+## LIVE-UX-09 — Partager la lisibilité de Localeo Pro
+
+**Orientation précisée le 10 novembre 2026.** Reprendre la typographie et les
+sections de [Localeo Pro](../../architecture/transverse/identite-entetes-applications.md#charte-des-espaces-de-gestion-internes--référence-crm) :
+police système, corps et actions 14 px, titres 25 / 18 / 15 px, titre principal
+23 px sur mobile à taille de texte standard. Employer des unités relatives
+pour conserver l’agrandissement du texte ; les champs mobiles restent à 16 px
+et les cibles tactiles à 44 px minimum.
+
+Sections blanches bordées, angles de 12 px, actions de 9 px, fond clair
+`#f5f7f9`, texte `#183243`, secondaire `#526575`, action `#09685e` et bordure
+`#d8e1e7` forment la base commune. Le carnet conserve sa tranche, ses tampons,
+ses tickets et les couleurs sémantiques utiles. Les menus métier de Pro ne
+remplacent pas les trois rubriques habitantes.
+
+Dans une participation, placer progression confirmée et prochaine action avant
+historique et détails secondaires. Dans Mes lots, privilégier le gain, son état
+et son retrait plutôt que de grands compteurs. Dans Découvrir, rendre visibles
+la recherche et « Pour plus tard », même sans favori ; « Garder » et « Partager »
+associent une icône à un verbe. La sauvegarde d’une idée ne vaut pas inscription.
+
 ## Application aux évolutions futures
 
 Lors du cadrage ou de la conception d’une évolution Live, référencer les principes
