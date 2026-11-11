@@ -1,5 +1,22 @@
 # Specification frontend PWA - Localeo Live
 
+Correction du **11 novembre 2026 — messages organisateur et catégorie Animations** :
+le réglage Animations couvre les nouvelles et les messages des organisateurs
+des participations personnellement liées. Le détail d’une animation ne demande
+plus d’accord particulier ; la messagerie et les liens anciens orientent vers
+Réglages. Le réglage commun n’active pas les alertes navigateur : un abonnement
+sur cet appareil est nécessaire en plus pour recevoir un Web Push.
+La liaison d’une participation conserve la preuve personnelle et le secret
+d’installation ; le retrait du bloc d’accord ne doit pas supprimer cette liaison.
+Les catégories refusées restent refusées, la consultation ne modifie aucun
+réglage ni ne demande la permission du navigateur. Les messages historiques
+restent lisibles sans réactiver une catégorie. Si la liaison personnelle reçoit
+un refus d'installation 401 confirmé, une seule rotation automatique est
+permise pour la consultation en cours. Cette nouvelle identité conserve ses
+catégories désactivées jusqu'au choix dans Réglages, puisque les anciennes
+préférences ne sont plus lisibles ; la création initiale conserve ses défauts
+existants. Voir les [critères MA-01 à MA-06](../epic-73-animation-et-ou-coffrets/modules-souscriptions-import-communication.md#7-messages-organisateur-live-et-web-push).
+
 Correctif du **11 novembre 2026 — abonnement Push sur mobile** : le clic
 d’activation demande la permission navigateur, puis attend un service worker
 actif avant de créer l’abonnement. Le premier enregistrement d’un worker ne

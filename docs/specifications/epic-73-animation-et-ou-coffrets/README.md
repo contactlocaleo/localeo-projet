@@ -1,5 +1,12 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+Correctif du **11 novembre 2026 — E73-COR-MESSAGES-ANIMATION** : le choix
+**Animations** des réglages Live autorise les messages des organisateurs pour
+les participations personnellement liées. Aucun accord par animation ; le Push
+requiert en plus les alertes de cet appareil. Les critères MA-01 à MA-06 sont
+décrits dans la [spécification des modules et de la communication](modules-souscriptions-import-communication.md).
+Migration et preuves dans le [bilan de livraison](verification-livraison.md).
+
 Évolution du **11 novembre 2026 — E73-EVO-HABILITATIONS-ERP** : consultation
 et modification motivée des habilitations Animation, par utilisateur et
 organisation, depuis l’ERP. Les [critères HA-01 à HA-07](perimetres-parcours-saas.md#évolution-du-11-novembre-2026--e73-evo-habilitations-erp)

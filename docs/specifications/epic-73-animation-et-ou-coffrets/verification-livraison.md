@@ -1,5 +1,114 @@
 # E73 — Vérification, migration et livraison
 
+## Correctif du 11 novembre 2026 — messages organisateur par catégorie Animations
+
+**E73-COR-MESSAGES-ANIMATION**, critères MA-01 à MA-06 dans la
+[spécification](modules-souscriptions-import-communication.md). Base locale :
+Backend `14d31aa`, Marketplace `ab77213`, Projet `d9c7c12`, plus ce correctif.
+Aucun commit, push, déploiement ou envoi réel demandé pour cette correction.
+
+La projection d'audience, le dépôt et chaque transport utilisent désormais
+la catégorie ANIMATION d'une installation active personnellement liée par un
+accès valide. L'ancien accord individuel ne peut ni autoriser un message quand
+tous les appareils refusent cette catégorie, ni bloquer un utilisateur qui l'a
+activée. Le dépôt Live n'exige aucun abonnement Push. Chaque appareil doit en
+plus disposer de son abonnement actif pour recevoir un Push. Le retrait est
+revérifié sous verrou avant transport. Une campagne passée n'est pas rejouée et
+une nouvelle liaison postérieure au message n'ouvre pas son ancien Push. Une
+intention encore en attente sur une liaison préexistante utilise en revanche le
+choix courant de l'appareil ; aucune date d'activation de catégorie n'est créée.
+
+Le domaine conserve la décision de dépôt ; les adaptateurs SQL projettent les
+faits, et l'interface renvoie vers **Réglages → Animations**. Le raccord personnel
+de la participation subsiste sans accord ni demande de permission navigateur.
+Les reçus et messages historiques restent consultables ; l'ancienne commande
+de préférence répond 409 après vérification de l'accès, avec le lien des réglages.
+Les anciens suivis dont le pointeur token est NULL gardent la preuve personnelle
+explicite ; un pointeur non NULL incohérent est refusé. Les lectures verrouillées
+sélectionnent au plus un témoin autorisant par participant plutôt que tout son
+historique d'appareils ; l'agrégat Push reste indépendant de ce témoin.
+
+Migration additive **`v308_messages_organisateur_categorie_animation.sql`** :
+origine d'autorisation distinguée entre ancien accord et politique catégorie,
+sans modifier les préférences existantes. Appliquer la migration avant le
+Backend, puis publier Marketplace. Contrats OpenAPI E41/E42 régénérés hors ligne.
+Aucun contrat embarqué Marketplace de ce périmètre, nouveau flag, rotation de
+clé ou reprise des campagnes passées. Animation et Pro sans impact applicatif.
+Les quotas, fréquences, audiences, unicités et politique de conservation restent
+ceux des services existants.
+
+Reproduction initiale : quatre tests ciblés échouaient, dont l'ancien accord
+autorisant un message avec ANIMATION désactivée et l'ancienne commande permettant
+encore une préférence par participation. Les tests de contrat OpenAPI et de
+réponses Animation sont réussis : **15 tests**. Les preuves mobiles, SQL et de
+démonstration sont détaillées ci-dessous à la fin de la recette locale.
+
+Limite identifiée dans la suite complète de démonstration PostgreSQL jetable :
+**3 réussites, 7 échecs**, sans skip. Les sept échecs surviennent dans le scénario
+CRM ordinaire, avant l'étape Communication : les anciennes fixtures Annecy
+(`74010`) enfreignent la restriction Nouvelle-Aquitaine du domaine CRM.
+Les fichiers CRM concernés ne sont pas modifiés par ce correctif. Rapport :
+Backend `tmp/organisateur-categorie-demo-20261111-final/results.xml`.
+La recette Communication utilise désormais une commune synthétique de Bordeaux
+pour traverser le générateur complet avec la règle CRM effective, sans la
+contourner. La suite globale n'est pas déclarée verte.
+
+Recette Communication corrigée : **1 test PostgreSQL réussi, zéro skip**,
+rapport `tmp/organisateur-categorie-demo-20261111-final/communication-final.xml`.
+Le générateur complet dépose un message sans ancienne préférence, avec une
+installation synthétique liée, catégorie ANIMATION active et zéro abonnement
+Push. Instantané et restauration gardent installations, preuves, messages et
+reçus ; une nouvelle installation relit et marque le message sans Push. Les
+contraintes différées sont vérifiées explicitement avant le TRUNCATE dans la
+transaction de la fixture. Un avertissement SQLAlchemy de réflexion reste
+présent. Les deux PostgreSQL jetables de cette recette ont été arrêtés.
+
+Contrôles Backend : **701 tests réussis** pour architecture, classes dédiées,
+couverture des cas d'utilisation et unités du scénario Communication.
+**107 tests réussis** pour SQL messages/campagnes, catégorie, services, domaine,
+contrats API/Live et performance ; après la dernière garde de transport,
+**rejeu de 4 tests réussi** sur les liaisons postérieures au message et le
+bornage, recouvrant partiellement ce lot. La revue indépendante a levé les deux réserves
+initiales sur le bornage et les anciens suivis ; aucun défaut concret restant
+identifié dans son périmètre. Les mesures locales N/10N conservent une page de
+100, une requête de lecture et trois avec verrous ; budget p95 500 ms respecté.
+Rapports Backend `.artifacts/messages-organisateur-categorie-performance-100.json`
+et `-1000.json`. Cela ne constitue pas une qualification du trafic réel.
+
+Limite de charge complémentaire : la recette mixte à 10 000 participants
+(campagne, import commerçants, export et tirage) échoue sur le worker Import,
+statut `ECHEC_TECHNIQUE_REPRENABLE` au lieu de `TERMINE`. La préparation de la
+première page de messages et le tirage réussissent. La cause du refus d'import
+n'est pas déterminée ; les tentatives de diagnostic réduites rencontrent les
+prérequis de la fixture avant d'atteindre cet import. Les services et le dépôt
+d'import restent identiques à HEAD. Cette recette élargie n'est pas verte et
+aucune dette antérieure n'est affirmée sans preuve de reproduction de référence.
+
+Documentation : **97 guides, 1 198 liens, zéro erreur ; 148 sources exportées
+vérifiées**. Recette limitée aux données synthétiques et API locales ; aucune
+réception Android réelle ou configuration hébergée n'est attestée.
+
+Marketplace final : **7 scénarios navigateur réussis**, build isolé
+`test-results/visual-runs/2026-11-11T09-00-27-540Z-0KQdE8/`, à 320/390/1280 px
+et texte à 200 %. Réglage unique Animations, liaison personnelle, absence de
+requête d'accord historique ou de permission Push, refus 503 avec réessai
+explicite, renouvellement 401 borné et catégories désactivées sur la nouvelle
+identité, pagination/échappement des messages et lecture explicite vérifiés.
+Captures détail/réglages 390 inspectées par l'intégrateur ; captures desktop et
+texte agrandi inspectées par l'agent frontend. **18 tests Node réussis** ; ESLint
+sur `src` et les tests modifiés réussi. Le lint global échoue sur un accès
+`EPERM` à `output/bum-politique/pytest-approval-1` ; il n'est pas déclaré réussi.
+
+Le complément navigateur antérieur au durcissement du renouvellement 401 donne
+**69 réussites et 2 échecs sur 71** : l'un attendait les nouvelles catégories sur
+l'ancien build, l'autre concerne l'ordre clavier d'une chasse à 390 px. Ce
+dernier passe inchangé au réessai ciblé du build final
+`2026-11-11T08-57-18-983Z-WtY65k` ; son origine intermittente reste à qualifier,
+sans preuve de baseline antérieure. Deux compteurs de liaison échouaient aussi
+dans ce premier run ciblé : la fixture semait le carnet avant la fin de création
+du shell ; l'attente de la première lecture stabilise les 7 scénarios finaux en
+gardant leurs assertions exactes. Les serveurs locaux 8176/8177 sont arrêtés.
+
 ## Correctif du 11 novembre 2026 — responsable identifié sur la liste des souscriptions
 
 Commit applicatif : Backend `14d31aa`. Commit et push demandés le 11 novembre

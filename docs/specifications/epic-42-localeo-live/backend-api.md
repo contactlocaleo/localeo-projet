@@ -1,5 +1,21 @@
 # Specification backend et API - Localeo Live
 
+## Messages organisateur — catégorie Animations, correction du 11 novembre 2026
+
+`categories_activees.ANIMATION` dans les préférences d’installation devient le
+réglage commun pour les messages organisateur des participations prouvées.
+Au dépôt, au moins une installation active liée et autorisée est nécessaire ;
+aucun abonnement Push n’est exigé pour conserver le message dans Live. Avant
+chaque transport, vérifier la propre catégorie de l’installation destinataire,
+sa liaison, son accès personnel et un abonnement actif avec endpoint.
+Les anciennes préférences par animation sont historiques : lecture dépréciée
+avec `mode_gestion=CATEGORIE_ANIMATION` et `reglages_url`, ancienne commande
+refusée avec 409 et orientation vers Réglages. Les reçus d’anciennes décisions
+restent lisibles, sans modifier le choix global. Les messages déjà déposés
+restent consultables ; absence de liaison ou retrait avant dépôt ne déclenche
+pas de campagne rétroactive. La [spécification E73 et ses critères MA](../epic-73-animation-et-ou-coffrets/modules-souscriptions-import-communication.md#7-messages-organisateur-live-et-web-push)
+définit les preuves, la compatibilité et les limites inchangées.
+
 ## Livraison Push sur mobile — correctif du 11 novembre 2026
 
 Le transport des alertes Live classiques transmet un TTL explicite de

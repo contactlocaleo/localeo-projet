@@ -318,6 +318,21 @@ Fichiers et rapports privés, téléchargements authentifiés avec droits revér
 
 ## 7. Messages organisateur, Live et Web Push
 
+**Correction du 11 novembre 2026 — E73-COR-MESSAGES-ANIMATION.** Sur demande
+explicite, le réglage **Animations** devient le choix commun pour les nouvelles
+et messages organisateur des participations de l’habitant. Cette décision
+remplace l’accord par animation décrit dans les versions précédentes de cette
+section et précise CA-47/48, sans modifier la clôture historique de l’epic.
+
+| Critère | Résultat observable |
+| --- | --- |
+| MA-01 | Animations activé et participation personnellement liée : message organisateur disponible dans Live sans accord supplémentaire ni abonnement Push. |
+| MA-02 | Animations désactivé sur tous les appareils liés : aucun nouveau message organisateur déposé, même avec un ancien accord par animation. |
+| MA-03 | Chaque Push exige sur son appareil la catégorie Animations, une liaison personnelle valide et un abonnement actif ; un autre appareil autorisé ne contourne aucun retrait. |
+| MA-04 | Détail, messagerie et réglages n’affichent plus d’acceptation par animation ; ils renvoient au réglage commun sans demander implicitement une permission navigateur. |
+| MA-05 | Les anciens choix individuels restent historiques ; leurs anciennes commandes orientent vers Réglages sans modifier le choix global. Les messages déjà disponibles restent consultables avec une preuve personnelle valide. |
+| MA-06 | Audience, quota, fréquence, preuve d’accès, retrait avant transport, reprise et unicités sont conservés ; une installation de démonstration liée sans abonnement illustre Live sans Push. |
+
 ### Parcours et états de campagne
 
 Écran : animation → Communication → nouveau message → titre/texte/lien interne autorisé → groupe → aperçu du nombre ciblé/autorisé/exclu → envoi immédiat ou date/heure Paris → confirmation → progression et rapport. Afficher distinctement messages disponibles dans Live, Push remis au service, erreurs et exclus ; jamais « lus » à partir d'un accusé transport. Pas de champs email/SMS de secours.
@@ -330,13 +345,34 @@ Les groupes se calculent depuis les états du moteur et les attributions confirm
 
 ### Autorisation du participant et identité de fréquence
 
-Conditions cumulatives pour créer un message : participation réelle dans l'animation et groupe, autorisation messages organisateur applicable à cette participation, droit de lecture personnel encore valable, limites de sollicitation. La permission navigateur ne donne pas le consentement aux messages organisateur ; suivre une commune n'en donne aucun non plus. Les notifications automatiques et préférences correspondantes conservent leurs règles indépendantes.
+Conditions cumulatives pour créer un message : participation réelle dans l’animation
+et le groupe, droit de lecture personnel valable, au moins une installation Live
+active liée à cette participation avec la catégorie `ANIMATION` active, et limites
+de sollicitation. La liaison exige le secret d’installation et la preuve personnelle
+de participation. Un suivi de commune ou un email commun ne suffit pas.
+La permission navigateur conditionne uniquement le transport Push. Les valeurs
+par défaut de la catégorie Live existante restent compatibles : une clé absente
+est traitée comme active ; aucun nouvel abonnement ni réglage n’est créé par
+la simple consultation. Les rappels facultatifs conservent leurs choix séparés.
 
-Le champ actuel `consentement_notifications` et la catégorie Live `ANIMATION` ne doivent pas être réinterprétés silencieusement comme un nouveau consentement organisateur plus large. Ajouter une préférence explicite organisateur avec version de texte/date/source/retrait ; reprendre seulement les consentements anciens dont le périmètre couvre réellement cet usage, sur preuve de version. Sinon proposer un choix facultatif dans le parcours personnel, sans bloquer participation ni messages automatiques. Le défaut d'autorisation exclut du nouveau module.
+La catégorie `ANIMATION` de Réglages est désormais la source de l’autorisation,
+indépendamment de `consentement_notifications` d’inscription et de l’ancien choix
+organisateur par participation. Ce dernier reste conservé comme historique,
+sans veto ni accord supplémentaire. Les nouveaux dépôts enregistrent la source
+`CATEGORIE_ANIMATION` et la version 1 de cette politique ; les anciennes sources
+d’accord restent distinguées. La migration additive ne coche ni ne décoche les
+réglages des installations existantes.
 
 La fréquence commune utilise un identifiant technique de destinataire stable dérivé de l'identité de participation normalisée déjà utilisée par le moteur (email normalisé), cloisonné par commune. Enregistrement pseudonymisé côté serveur, non exposé au client ni utilisé comme droit de consultation. Plusieurs participations du même email dans une commune partagent la borne ; deux personnes ayant des emails distincts sur une même installation gardent leurs propres bornes. Les installations servent au transport/lecture, pas à contourner la limite. Un email modifié avec autorisation conserve le lien d'identité pour ne pas réinitialiser le délai ; aucune fusion de comptes n'en découle.
 
-À défaut d'installation Live actuellement liée, conserver le message personnel autorisé lié à la participation pour le rendre disponible dans son parcours Live lors d'une liaison ultérieure autorisée. Ne pas chercher un appareil au seul email et ne pas transmettre un token de participation dans un Push public. Une personne sans permission navigateur reçoit le message dans Live ; aucun fallback email/SMS. Si plusieurs installations autorisées voient le même message, il reste **un message métier** et un débit de fréquence, avec références de diffusion distinctes par installation.
+Sans installation personnellement liée, aucun nouveau dépôt organisateur n’est
+autorisé. Une installation liée avec Animations actif reçoit le message dans
+Live même sans permission ou abonnement Push ; aucun fallback email/SMS.
+Les messages déjà déposés restent consultables avec une preuve personnelle,
+y compris après retrait de la catégorie, sans effacement ni rattrapage des campagnes
+exclues. Les nouvelles liaisons ne déclenchent pas de Push rétrospectif.
+Plusieurs appareils autorisés partagent **un message métier** et un débit de
+fréquence, avec une revalidation propre à chaque appareil avant tout transport.
 
 ### Démarrage atomique, traitement borné et transports
 
@@ -475,7 +511,14 @@ Préfixe `A = /protected/animation-locale/animations/{animation_id}/campagnes-or
 
 Refus/états : `MODULE_NON_ACTIF`, `QUOTA_EPUISE`, `CAMPAGNE_HORS_FENETRE`, `CAMPAGNE_DEJA_COMMENCEE`, `HABILITATION_RETIREE`, `VERSION_AUDIENCE_OBSOLETE`. La fréquence est un motif d'exclusion de destinataire, pas un échec global de toutes les personnes. L'expiration après programmation est un état suspendu durable, pas une erreur perdue dans les logs.
 
-Préférences/messages personnels : étendre le contrat Live/participation existant avec `messages_organisateur_autorises`, version/horodatage et messages liés à une participation prouvée. **Une installation seule ne peut modifier le consentement d'une participation qu'elle ne contrôle pas** : employer la preuve d'accès participant existante en plus de son secret d'installation lors du rattachement. Les schémas OpenAPI documentaires E41/E42, générateurs backend et imports consommateurs sont à actualiser ensemble lors de l'implémentation ; pas de copie documentaire présentée comme runtime.
+Préférences/messages personnels : les préférences d’installation Live existantes
+portent `ANIMATION`. L’ancienne lecture de préférence par participation indique
+`mode_gestion=CATEGORIE_ANIMATION` et `reglages_url=/live/reglages` ; son ancienne
+commande renvoie un conflit explicite vers Réglages après contrôle de l’accès
+participant, sans écriture de préférence globale. Les reçus historiques restent
+consultables. **Une installation seule ne peut lier une participation qu’elle ne
+contrôle pas** : preuve personnelle et secret d’installation restent nécessaires.
+Actualiser ensemble OpenAPI documentaire, générateurs et contrats embarqués utiles.
 
 Configuration interne : `PUT /internal/animation-locale/communes/{id}/politique-sollicitation` avec `expected_version`, `limite_24h`, `multiplicateur_alerte`, `motif` ; retour version effective et périmètre. Les pages Ops consomment les alertes internes existantes enrichies, sans route publique de destinataires.
 
@@ -511,7 +554,7 @@ Conservation : fichiers/rapports import 30 jours après terminal/abandon ; autre
 | US18 — CA-46 | Une chasse consomme uniquement son compteur à publication ; deux publications sur dernier crédit ; annulation/reprise ; préparation/relance pas de débit de publication ; anciennes chasses finissent après expiration |
 | US19 — CA-42 | CSV/XLSX, 100/101 lignes, 2 Mo et dépassement, archive décompressée excessive, formules non exécutées ; mapping/category facultative/5 champs obligatoires ; aperçu sans écriture ; commune non autorisée refusée |
 | US20 — CA-43/44/45 | Email primaire et ambiguïtés, source/Localeo/fichier trois versions, vide sans effacement, ligne partielle et reprise après crash commit ; modification concurrente depuis Pro/ERP ; SIRET/commune soumis Localeo ; aucune invitation/login/scope/participation ; expiration après vrai lancement seulement ; purge 30 jours sans fiche supprimée |
-| US21 — CA-47/48 | Achat sans permission Communication refusé ; audience hors animation exclue ; consentement ancien non élargi ; quatre groupes ; message Live sans Push ; multiappareil et multi-animation même personne limités ; programmation Paris, quota au départ, fenêtre clôture+30j |
+| US21 — CA-47/48 | Achat sans permission Communication refusé ; audience hors animation exclue ; catégorie ANIMATION commune aux messages organisateur selon MA-01 à MA-06 ; quatre groupes ; message Live sans Push ; multiappareil et multi-animation même personne limités ; programmation Paris, quota au départ, fenêtre clôture+30j |
 | US22 — CA-49 | Reprise campagne/midnight sans double débit ; retrait destinataire avant diffusion ; même campagne pas trois tentatives ; alerte seuil ×3, bloqués inclus, regroupement Ops/email ; quota épuisé suspend/reconfirmation ; rapport distingue Live/Push/lecture/inconnu |
 | US27 — CA-54 | Renouvellement avant/après, futur droit pas actif trop tôt, upgrade prorata sans reset, baisse au terme, arrêt payé sans remboursement automatique ; double remboursement réservé concurrent et rapprochement fournisseur |
 | US28 — CA-55 | Coordonnées futures seulement, fichiers existants inchangés, délégation Achat et tenant, téléchargement financier autorisé, avoir et remboursement réconciliés |

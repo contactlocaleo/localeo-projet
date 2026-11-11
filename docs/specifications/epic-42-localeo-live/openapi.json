@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Live - API backend Epic 42",
     "description": "Vue OpenAPI 3.1 des contrats publics, editoriaux et techniques de Localeo Live.",
-    "version": "1.0.0+4b668e0"
+    "version": "1.0.0+14d31aa"
   },
   "paths": {
     "/public/animation-locale/animations/{animation_id}/contact-public": {
@@ -8138,6 +8138,130 @@
           "motif"
         ],
         "title": "Abandon"
+      },
+      "Abonnement": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "canal": {
+            "type": "string",
+            "enum": [
+              "LIVE",
+              "PRO",
+              "CONTROL",
+              "CRM",
+              "ORGANISATEUR"
+            ],
+            "title": "Canal"
+          },
+          "destinataire": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Destinataire"
+          },
+          "destinataireLabel": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Destinatairelabel"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Createdat"
+          },
+          "actif": {
+            "type": "boolean",
+            "title": "Actif"
+          },
+          "deviceLabel": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Devicelabel"
+          },
+          "lastUsedAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lastusedat"
+          },
+          "revokedAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Revokedat"
+          },
+          "version": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Version"
+          },
+          "motifRevocation": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motifrevocation"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "canal",
+          "destinataire",
+          "destinataireLabel",
+          "createdAt",
+          "actif",
+          "deviceLabel",
+          "lastUsedAt",
+          "revokedAt",
+          "version",
+          "motifRevocation"
+        ],
+        "title": "Abonnement"
       },
       "AbonnementAnimationPayload": {
         "properties": {
@@ -27031,6 +27155,172 @@
         ],
         "title": "DetailAudit"
       },
+      "DetailNotification": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "canal": {
+            "type": "string",
+            "enum": [
+              "LIVE",
+              "PRO",
+              "CONTROL",
+              "CRM",
+              "ORGANISATEUR"
+            ],
+            "title": "Canal"
+          },
+          "destinataire": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Destinataire"
+          },
+          "destinataireLabel": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Destinatairelabel"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Createdat"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          },
+          "type": {
+            "type": "string",
+            "title": "Type"
+          },
+          "titre": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Titre"
+          },
+          "tentatives": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tentatives"
+          },
+          "sentAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sentat"
+          },
+          "nextAttemptAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextattemptat"
+          },
+          "lastAttemptAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lastattemptat"
+          },
+          "diagnostic": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Diagnostic"
+          },
+          "messageId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Messageid"
+          },
+          "campagneId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Campagneid"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "canal",
+          "destinataire",
+          "destinataireLabel",
+          "createdAt",
+          "statut",
+          "type",
+          "titre",
+          "tentatives",
+          "sentAt",
+          "nextAttemptAt",
+          "lastAttemptAt",
+          "diagnostic"
+        ],
+        "title": "DetailNotification"
+      },
       "DetailPaiement": {
         "properties": {
           "id": {
@@ -42743,6 +43033,72 @@
         ],
         "title": "ModificationMembreCommande"
       },
+      "ModificationMembreInterneCommande": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "RESPONSABLE",
+              "GESTIONNAIRE",
+              "LECTEUR"
+            ],
+            "title": "Role"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "SUSPENDUE",
+              "REVOQUEE"
+            ],
+            "title": "Statut"
+          },
+          "communeIds": {
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "type": "array",
+            "maxItems": 100,
+            "minItems": 1,
+            "title": "Communeids"
+          },
+          "autorisations": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "ACHAT",
+                "IMPORT",
+                "COMMUNICATION"
+              ]
+            },
+            "type": "array",
+            "maxItems": 3,
+            "title": "Autorisations"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 5,
+            "title": "Motif"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "role",
+          "statut",
+          "communeIds",
+          "motif"
+        ],
+        "title": "ModificationMembreInterneCommande"
+      },
       "ModificationObjectifsInput": {
         "properties": {
           "expected_version": {
@@ -44827,6 +45183,148 @@
         ],
         "title": "NoteInterneSupportPayload"
       },
+      "Notification": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "canal": {
+            "type": "string",
+            "enum": [
+              "LIVE",
+              "PRO",
+              "CONTROL",
+              "CRM",
+              "ORGANISATEUR"
+            ],
+            "title": "Canal"
+          },
+          "destinataire": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Destinataire"
+          },
+          "destinataireLabel": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Destinatairelabel"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Createdat"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          },
+          "type": {
+            "type": "string",
+            "title": "Type"
+          },
+          "titre": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Titre"
+          },
+          "tentatives": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tentatives"
+          },
+          "sentAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sentat"
+          },
+          "nextAttemptAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextattemptat"
+          },
+          "lastAttemptAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lastattemptat"
+          },
+          "diagnostic": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Diagnostic"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "canal",
+          "destinataire",
+          "destinataireLabel",
+          "createdAt",
+          "statut",
+          "type",
+          "titre",
+          "tentatives",
+          "sentAt",
+          "nextAttemptAt",
+          "lastAttemptAt",
+          "diagnostic"
+        ],
+        "title": "Notification"
+      },
       "NotificationAnimationPayload": {
         "properties": {
           "id": {
@@ -46562,6 +47060,46 @@
         ],
         "title": "OuvrirTransactionRequest"
       },
+      "PageAbonnements": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/Abonnement"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          },
+          "hasMore": {
+            "type": "boolean",
+            "title": "Hasmore"
+          },
+          "generatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Generatedat"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "nextCursor",
+          "hasMore",
+          "generatedAt"
+        ],
+        "title": "PageAbonnements"
+      },
       "PageAchatsPaiement": {
         "properties": {
           "items": {
@@ -47880,6 +48418,46 @@
           "nextCursor"
         ],
         "title": "PageGenerationPayload"
+      },
+      "PageHistorique": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/Notification"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          },
+          "hasMore": {
+            "type": "boolean",
+            "title": "Hasmore"
+          },
+          "generatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Generatedat"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "nextCursor",
+          "hasMore",
+          "generatedAt"
+        ],
+        "title": "PageHistorique"
       },
       "PageHistoriquePrioritePayload": {
         "properties": {
@@ -52997,6 +53575,26 @@
               }
             ],
             "title": "Updated At"
+          },
+          "mode_gestion": {
+            "type": "string",
+            "enum": [
+              "ACCORD_PARTICIPATION",
+              "CATEGORIE_ANIMATION"
+            ],
+            "title": "Mode Gestion",
+            "default": "ACCORD_PARTICIPATION"
+          },
+          "reglages_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reglages Url"
           }
         },
         "additionalProperties": false,
@@ -62084,6 +62682,24 @@
         ],
         "title": "ResultatPurgeQuotidiennePayload"
       },
+      "ResultatRevocation": {
+        "properties": {
+          "changed": {
+            "type": "boolean",
+            "title": "Changed"
+          },
+          "item": {
+            "$ref": "#/components/schemas/Abonnement"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "changed",
+          "item"
+        ],
+        "title": "ResultatRevocation"
+      },
       "ResultatTiragePersonnel": {
         "properties": {
           "statut": {
@@ -62748,6 +63364,46 @@
           "brief"
         ],
         "title": "RevisionPromptGenerationInput"
+      },
+      "Revocation": {
+        "properties": {
+          "canal": {
+            "type": "string",
+            "enum": [
+              "LIVE",
+              "PRO",
+              "CONTROL",
+              "CRM",
+              "ORGANISATEUR"
+            ],
+            "title": "Canal"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 500,
+            "minLength": 3,
+            "title": "Motif"
+          },
+          "expectedVersion": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Expectedversion"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "canal",
+          "motif"
+        ],
+        "title": "Revocation"
       },
       "RevocationPush": {
         "properties": {

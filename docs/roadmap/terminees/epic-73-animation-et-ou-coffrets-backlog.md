@@ -1,5 +1,14 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+## Correction du 11 novembre 2026 — messages organisateur depuis le réglage Animations
+
+**E73-COR-MESSAGES-ANIMATION** : le choix **Animations** dans Réglages autorise
+les messages organisateur des participations personnellement liées. L’alerte
+sur téléphone exige en plus un abonnement Push actif sur cet appareil. Aucun
+accord par animation n’est demandé. Les [critères MA-01 à MA-06](../../specifications/epic-73-animation-et-ou-coffrets/modules-souscriptions-import-communication.md#7-messages-organisateur-live-et-web-push)
+remplacent l’accord individuel antérieur pour CA-47/48 ; la clôture historique
+est conservée. Contrôles d’audience, accès, fréquence et quotas inchangés.
+
 ## Évolution du 11 novembre 2026 — habilitations Animation dans l’ERP
 
 **E73-EVO-HABILITATIONS-ERP** : gérer lisiblement les droits des utilisateurs
