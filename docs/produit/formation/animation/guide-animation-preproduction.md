@@ -180,6 +180,25 @@ susceptibles d'être interprétées comme formules, y compris un téléphone ave
 Les données sources restent intactes. Les journaux techniques n'incluent pas
 les coordonnées, les corps d'erreur, les tokens ou les QR.
 
+## Lire l'activité dans votre commune
+
+Dans **Bilans**, ou dans le Bilan d'une animation, le bloc **Votre activité
+dans la commune** présente les douze derniers mois et les douze précédents :
+animations publiées, participations, commerces visités et passages validés.
+Il porte sur votre organisation uniquement, indépendamment des filtres de la
+liste et de l'édition ouverte. Les autres organisations ne sont pas comptées.
+
+Les flèches et pourcentages indiquent une évolution, sans score ni classement.
+Une référence à zéro n'affiche pas de pourcentage. Des publications historiques
+sans date fiable rendent leur comparaison indisponible ; les volumes datés
+restent visibles. Ouvrez **Comprendre ce profil d'activité** pour les périodes
+exactes et les définitions. **Actualiser l'activité** relit les données.
+
+Les participations ne représentent pas des habitants uniques. Un commerce
+visité a reçu un passage validé ; une tombola publique peut ne pas prévoir de
+visite. Archives et éditions publiées puis annulées restent dans l'historique,
+et les corrections de passages peuvent réviser les chiffres précédents.
+
 ## Scénarios de recette avant activation
 
 ### Lots libres numériques

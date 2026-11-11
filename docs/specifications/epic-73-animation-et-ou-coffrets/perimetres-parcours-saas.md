@@ -927,6 +927,109 @@ Chaque liste détaillée est bornée à 10 000 lignes. Au-delà, refus 422 expli
 n’est créé par ce correctif. Texte échappé, tableaux multipages et polices
 embarquées préservent commentaires, accents et lignes longues.
 
+### Évolution du 11 novembre 2026 — dynamisme de la commune
+
+**E73-EVO-DYNAMISME-COMMUNE** — choix utilisateur confirmés : **profil visuel
+avec indicateurs et tendances, sans note globale**, limité à **son organisation
+dans la commune active**. Les propositions d'indice base 100 et de score par
+objectifs ne sont pas retenues. La clôture historique E73 est conservée.
+
+#### Parcours et sens des mesures
+
+Un bloc **Votre activité dans la commune** est disponible dans **Bilans** et
+le **Bilan d'une animation**. Il annonce commune, organisation, périodes et
+périmètre. Il reste indépendant des filtres de type/date de la liste et des
+chiffres de l'édition ouverte : ce sont les données de l'organisation dans
+cette commune. Les autres organisations ne sont ni lues ni comparées.
+
+La fenêtre courante couvre les **douze derniers mois calendaires glissants**
+finissant à l'instant d'observation UTC, bornes incluses au début et exclues
+à la fin. La référence est la fenêtre de douze mois précédente, adjacente.
+Les deux décalages sont calculés depuis la même borne d'observation ; le
+29 février est ramené au dernier jour valide lorsque nécessaire. Les dates sont
+affichées en heure de Paris selon la convention commune.
+
+| Axe | Fait et source | Limite explicite |
+| --- | --- | --- |
+| Animations publiées | Publications effectivement réalisées dans la fenêtre, `publication_effective_at` | Planification et brouillons exclus ; date historique manquante jamais reconstruite |
+| Participations enregistrées | Lignes de participation par `inscrit_at`, y compris anonymisées | Une personne inscrite à plusieurs éditions compte plusieurs fois ; aucun taux d'habitants ni déduplication d'e-mails |
+| Commerces visités | Commerçants distincts avec au moins un passage effectif dans la fenêtre | Ce ne sont ni les invités ni tous les commerçants engagés ; une tombola publique n'exige pas de visite |
+| Passages validés | Preuves par `validated_at`, statut courant `VALIDEE` | QR/PIN sont des canaux ; corrections et annulations peuvent réviser les volumes historiques |
+
+Cible commune aux quatre axes : éditions de l'organisation et de la commune
+avec preuve de publication réelle. Archives et éditions publiées puis annulées
+restent dans l'historique ; une édition jamais publiée n'y entre pas. Les
+événements sont filtrés par leur propre instant, et non par recouvrement de
+programmation. Les compteurs cumulés d'édition et cumuls de clics/QR ne servent
+pas à reconstruire ces fenêtres. Publication est en `timestamptz` ; inscriptions
+et validations historiques sont en UTC sans fuseau : bornes converties
+explicitement en UTC naïf pour ces deux colonnes.
+
+Chaque axe affiche volume courant, volume de référence et comparaison :
+`variation = courant - précédent`, pourcentage arrondi à une décimale si la
+référence est positive. Tendance `HAUSSE`, `BAISSE` ou `STABLE` déduite de
+l'écart entier, jamais du seul arrondi du pourcentage. Référence zéro et
+courant positif : `NOUVELLE_ACTIVITE`, sans pourcentage, présenté comme absence
+de référence positive. Zéro sur les deux fenêtres : stable, sans pourcentage.
+Il s'agit d'événements enregistrés dans Localeo, pas d'une preuve d'absence
+d'activité réelle avant l'utilisation de l'outil.
+
+Si une hausse ou baisse non nulle est arrondie à zéro au dixième, l'interface
+conserve son sens et affiche « moins de 0,1 % », plutôt qu'une baisse « -0 % ».
+
+Les publications historiques sans date fiable sont signalées par un compteur.
+L'axe publications expose alors ses seuls volumes datés avec qualité `PARTIELLE`
+et tendance indisponible ; aucun écart ou pourcentage exact n'est revendiqué.
+Les autres axes gardent leurs instants disponibles. Ce profil ne mesure ni la
+santé économique ni une performance relative à d'autres communes : pas de
+population municipale millésimée disponible et aucun score pondéré implicite.
+
+#### Contrat, architecture et exploitation
+
+`GET /protected/animation-locale/bilans/activite-commune`, sans filtre fourni
+par le client. Commune active unique, contexte et droit `animation:lire`
+revérifiés avant agrégation, `Cache-Control: private, no-store`. Réponse fermée
+version `E73-ACTIVITE-1` : `organisationId`, `communeId`, `communeNom`,
+`observedAt`, `periode` et `reference` (`debutAt`, `finAt`),
+`publicationsNonDatees`, et quatre `indicateurs` bornés, codes
+`ANIMATIONS`, `PARTICIPATIONS`, `COMMERCES_VISITES`, `PASSAGES` ; chaque
+indicateur contient `libelle`, `valeur`, `precedente`, `variation`,
+`tauxEvolution`, `tendance`, `qualite`. Aucune identité, URL personnelle,
+coordonnée, commentaire ou identifiant participant/commerçant n'est rendu.
+
+Le domaine `animation_locale` porte fenêtres et comparaison pure. Le service
+applicatif contrôle l'accès puis charge une seule photographie SQL, renvoyant
+quatre agrégats. L'adaptateur filtre le tenant avant ses jointures ; aucune
+population ORM, N+1, lecture de toutes les pages ou journal global. La route
+compose les adaptateurs et présente le DTO ; le frontend ne recalcule pas les
+tendances. Les réponses obsolètes sont ignorées et une panne reste distincte
+d'un profil à zéro. Pas de polling ou de cache persistant.
+
+Budget initial avant recette : SQL p95 900 ms / p99 1 500 ms, N=10 000 puis
+10N=100 000 participations synthétiques avec autres tenants. Nombre de requêtes
+et mémoire applicative bornés, plans/buffers et latences consignés sur
+PostgreSQL jetable. Un index de publication `(partenaire_id, commune_id,
+publication_effective_at, id)` est à confronter aux index existants ; les
+index d'événements par animation/date existent déjà. Aucun seuil ne vaut
+capacité hébergée garantie sans campagne de charge représentative.
+
+#### Critères et traçabilité
+
+| Critère ajouté | Attendu et preuve prévue | Impacts |
+| --- | --- | --- |
+| DY-01 | Commune/organisation explicites ; refus hors commune, session ou droit révoqué avant SQL ; tests application et HTTP | Contrat privé nouveau, aucun droit interorganisations |
+| DY-02 | Fenêtres adjacentes, bornes, 29 février, UTC naïf et archives ; publication non datée signalée ; tests domaine et PostgreSQL | Historiques non réécrits, anonymisation inchangée |
+| DY-03 | Quatre axes sans note ; hausse/baisse/stable/référence zéro et qualité partielle ; règle pure testée | Version de définition dans le DTO et méthode consultable |
+| DY-04 | Pictogrammes et libellés, valeurs/tendances, comparaison visible et méthode au clavier ; mobile/zoom 200 %, erreur/réessai ; données anciennes ignorées | Deux entrées Animation, pas d'écran public ni de modification PDF |
+| DY-05 | Sortie et coût applicatif bornés ; requête SQL unique et tests de croissance N/10N, plans et index | Migration additive si nécessaire, aucune conservation nominative ajoutée |
+| DY-06 | Contrats générés synchronisés, documentation fonctionnelle/ops et démonstration examinées ; revue indépendante et preuves au bilan | Source canonique ici ; fixtures synthétiques, pas de génération sur TEST |
+
+Spécification et implémentation vérifiées localement pour ce périmètre ;
+les résultats des preuves prévues ci-dessus, la revue indépendante et les
+limites de capacité sont dans le [bilan de livraison](verification-livraison.md#évolution--e73-evo-dynamisme-commune-11-novembre-2026).
+Aucune migration nouvelle : les index existants suffisent pour la recette
+locale, sans préjuger de la tenue en charge hébergée.
+
 ## 8. Réversibilité et fermeture
 
 ### 8.1 Export complet

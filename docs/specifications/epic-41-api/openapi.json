@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Backend - contrat implemente EPIC 41",
     "description": "OpenAPI complet du backend, dont les parcours Animation locale. Genere hors ligne depuis le code local pour les integrations et les mocks ; cet instantane ne prouve pas son deploiement.",
-    "version": "1.0.0+ba16e91"
+    "version": "1.0.0+c68995b"
   },
   "paths": {
     "/public/identite-acces/interne/connexion": {
@@ -82202,6 +82202,137 @@
         }
       }
     },
+    "/protected/animation-locale/bilans/activite-commune": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Profil Activite Commune",
+        "operationId": "profil_activite_commune_protected_animation_locale_bilans_activite_commune_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfilActiviteCommuneDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Demande invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentification requise",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Action non autorisée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ressource ou reçu introuvable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Version, aperçu ou état en conflit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Accès expiré",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Document trop volumineux",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Encodage non supporté",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Contenu invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Fréquence dépassée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Transaction indisponible, consulter le reçu",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/public/animation-locale/participants/{participant_id}/satisfaction": {
       "get": {
         "tags": [
@@ -150628,6 +150759,88 @@
         ],
         "title": "IncidentCommandeLotsPayload"
       },
+      "IndicateurActiviteDTO": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "enum": [
+              "ANIMATIONS",
+              "PARTICIPATIONS",
+              "COMMERCES_VISITES",
+              "PASSAGES"
+            ],
+            "title": "Code"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "valeur": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Valeur"
+          },
+          "precedente": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Precedente"
+          },
+          "variation": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Variation"
+          },
+          "tauxEvolution": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tauxevolution"
+          },
+          "tendance": {
+            "type": "string",
+            "enum": [
+              "HAUSSE",
+              "BAISSE",
+              "STABLE",
+              "NOUVELLE_ACTIVITE",
+              "INDISPONIBLE"
+            ],
+            "title": "Tendance"
+          },
+          "qualite": {
+            "type": "string",
+            "enum": [
+              "COMPLETE",
+              "PARTIELLE"
+            ],
+            "title": "Qualite"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "code",
+          "libelle",
+          "valeur",
+          "precedente",
+          "variation",
+          "tauxEvolution",
+          "tendance",
+          "qualite"
+        ],
+        "title": "IndicateurActiviteDTO"
+      },
       "IndicateurAnimationDTO": {
         "properties": {
           "code": {
@@ -165127,6 +165340,27 @@
         ],
         "title": "PerimetresCommercantPayload"
       },
+      "PeriodeActiviteDTO": {
+        "properties": {
+          "debutAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Debutat"
+          },
+          "finAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Finat"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "debutAt",
+          "finAt"
+        ],
+        "title": "PeriodeActiviteDTO"
+      },
       "PeriodeAnimation": {
         "properties": {
           "startsAt": {
@@ -167654,6 +167888,68 @@
           "etat"
         ],
         "title": "ProduitCommercantPayload"
+      },
+      "ProfilActiviteCommuneDTO": {
+        "properties": {
+          "definitionVersion": {
+            "type": "string",
+            "const": "E73-ACTIVITE-1",
+            "title": "Definitionversion"
+          },
+          "organisationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Organisationid"
+          },
+          "communeId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Communeid"
+          },
+          "communeNom": {
+            "type": "string",
+            "title": "Communenom"
+          },
+          "observedAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Observedat"
+          },
+          "periode": {
+            "$ref": "#/components/schemas/PeriodeActiviteDTO"
+          },
+          "reference": {
+            "$ref": "#/components/schemas/PeriodeActiviteDTO"
+          },
+          "indicateurs": {
+            "items": {
+              "$ref": "#/components/schemas/IndicateurActiviteDTO"
+            },
+            "type": "array",
+            "maxItems": 4,
+            "minItems": 4,
+            "title": "Indicateurs"
+          },
+          "publicationsNonDatees": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Publicationsnondatees"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "definitionVersion",
+          "organisationId",
+          "communeId",
+          "communeNom",
+          "observedAt",
+          "periode",
+          "reference",
+          "indicateurs",
+          "publicationsNonDatees"
+        ],
+        "title": "ProfilActiviteCommuneDTO"
       },
       "ProfilCommercantPayload": {
         "properties": {

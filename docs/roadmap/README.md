@@ -1,5 +1,10 @@
 # Roadmap par etat
 
+**11 novembre 2026 — E73-EVO-DYNAMISME-COMMUNE** : profil visuel de l'activité
+de l'organisation dans sa commune active, quatre axes et tendances sans note
+globale. [Périmètre et suivi](terminees/epic-73-animation-et-ou-coffrets-backlog.md#évolution-du-11-novembre-2026--dynamisme-de-la-commune).
+Clôture historique E73 et compteurs inchangés.
+
 **10 novembre 2026 — E73-EVO-LIVE-ICONOGRAPHIE** : dix recommandations de
 l'audit iconographie/espacement spécifiées et implémentées localement dans Live.
 [Critères, conception et suivi](terminees/epic-73-animation-et-ou-coffrets-backlog.md#évolution-du-10-novembre-2026--iconographie-et-respiration).

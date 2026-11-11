@@ -1,5 +1,16 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+## Évolution du 11 novembre 2026 — dynamisme de la commune
+
+**E73-EVO-DYNAMISME-COMMUNE** : présenter l’activité Localeo par des repères
+visuels : **profil avec indicateurs et tendances, sans note globale**,
+limité à **l’organisation courante dans la commune active**, choix utilisateur
+confirmés. Fenêtres de douze mois glissants et comparaison avec la période
+précédente, quatre axes expliqués. Spécification, implémentation et
+vérifications locales réalisées ; preuves propres au bilan de livraison. Les
+[critères DY-01 à DY-06 et faits vérifiés](../../specifications/epic-73-animation-et-ou-coffrets/perimetres-parcours-saas.md#évolution-du-11-novembre-2026--dynamisme-de-la-commune)
+portent la spécification. Clôture historique et compteurs d’epics inchangés.
+
 ## Évolution du 11 novembre 2026 — fin explicite et archives
 
 **E73-EVO-FIN-ARCHIVES** : `CLOTUREE → TERMINEE → ARCHIVEE`. La fin exige des

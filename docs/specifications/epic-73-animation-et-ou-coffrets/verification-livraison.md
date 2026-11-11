@@ -1,5 +1,83 @@
 # E73 — Vérification, migration et livraison
 
+## Évolution — E73-EVO-DYNAMISME-COMMUNE (11 novembre 2026)
+
+Choix utilisateur confirmés : **profil visuel avec indicateurs et tendances,
+sans note globale**, limité à **son organisation dans la commune active**.
+Bases : Backend `c68995b`, Animation `57a2e66`, Projet `971aabc`, Pro `c709fd8`,
+puis modifications locales. La clôture historique E73 n'est pas modifiée.
+
+| Critère / contrôle exécuté | Résultat et preuve |
+| --- | --- |
+| DY-01 — service et HTTP, autorisation avant SQL | **7 tests application et 5 HTTP réussis**, rapports `localeo-backend/tmp/profil-activite-backend-unit-final.xml` ; refus de contexte/session/habilitation, commune active unique, DTO fermé, aucune identité et cache privé sans stockage |
+| DY-02/03 — fenêtres et tendances pures | **16 tests domaine réussis**, `tmp/profil-activite-backend-domain-review.xml` ; UTC, 29 février, périodes adjacentes, hausse/baisse/stable, référence zéro, historique partiel, variation entière malgré taux arrondi à zéro et demi-dixième positif/négatif |
+| DY-02/05 — SQL réel et croissance | **5 tests PostgreSQL réussis**, `tmp/profil-activite-backend-pg-optimise.xml` ; bornes incluses/exclues, autres organisation/commune, archives/annulations, anonymisation, corrections, heure de session Auckland, même commerce dans les deux fenêtres et perf N/10N |
+| DY-04 — parcours profil, deux entrées | **4 parcours navigateur réussis**, 1280/390/320 px et texte à 200 % ; `tests/browser/activity-profile.mjs`, journal `localeo-animation/tmp/profil-activite-browser-tests-7.txt` ; tendances, historique partiel, zéro, très petite variation, méthode clavier, panne/réessai/403, réponse étrangère refusée, réponse tardive après changement d'organisation, filtres d'édition indépendants et aucun POST |
+| DY-04 — bilan existant | **8 parcours réussis**, `WORKSPACE_CASE=bilan-visual` ; `tmp/profil-activite-bilan-regression.txt` ; indicateurs, données absentes, objectifs, avis, Coffrets, erreurs et formats mobile/ordinateur préservés |
+| DY-04 — liste des bilans | **2 parcours / 19 contrôles réussis**, `JOURNEY_CASE=global` ; pagination et synthèse du filtre conservées, mobile/texte à 200 % |
+| DY-06 — contrats Animation | **16 tests Node réussis**, `activity-profile.test.mjs`, `saas-journey-contracts.test.mjs`, `saas-journey-http-contracts.test.mjs` ; projection réellement produite, quatre axes bornés, dates, annulation, refus scope/version/valeur incohérents et absence d'identité |
+| DY-06 — contrats Pro | **31 tests Vitest réussis**, `src/lib/api/contracts.test.js` ; OpenAPI embarqué régénéré depuis le backend isolé, 1105 chemins |
+| Architecture backend et recensements | **697 réussites**, `tmp/profil-activite-backend-architecture.xml`, groupe obligatoire du guide backend |
+| Animation TypeScript, ESLint et build final isolé | **Réussis**, `tmp/profil-activite-build-final.txt` ; avertissement Vite de taille du bundle principal déjà présent |
+
+Backend : **28 tests distincts domaine/application/HTTP**, puis **5 PostgreSQL**,
+sans additionner les recouvrements du premier passage de 24 tests et de la
+reprise domaine. Les scripts utilisent les lanceurs isolés, aucune configuration
+opérateur ni base partagée. Cluster PostgreSQL 18 **31612 arrêté** à la fin.
+
+La première mesure avec `COUNT(DISTINCT commerce)` dépassait le budget annoncé
+à 100 000 événements : p95 **2724 ms**, maximum **2750 ms**, tri débordant sur
+disque. Le regroupement SQL préalable par commerce conserve les sommes de
+passages et compte les commerces présents séparément dans chaque fenêtre.
+La revue indépendante a relu cette optimisation, sans constat bloquant.
+
+Mesure finale, un lecteur, **30 observations par niveau**, avec autant de
+participations et validations d'un autre tenant :
+
+La distribution comprend une édition ciblée et une édition d'une autre
+organisation, cent commerces distincts, événements de volume dans la fenêtre
+courante. Les fenêtres précédentes et états corrigés sont couverts séparément
+par les tests fonctionnels. La croissance du nombre d'éditions ou de commerces
+distincts n'est pas une dimension mesurée par ce banc.
+
+| Volume ciblé | p95 lecture | Maximum observé | EXPLAIN exécution | Sortie / mémoire applicative |
+| --- | --- | --- | --- | --- |
+| 10 000 participations et 10 000 passages | 30,21 ms | 30,83 ms | 19,02 ms | Une requête, dix colonnes, aucune population ORM ; pic Python 53 439 octets |
+| 100 000 participations et 100 000 passages | 271,07 ms | 279,71 ms | 192,98 ms | Même borne de sortie ; pic Python 25 341 octets |
+
+Plans et buffers : `localeo-backend/tmp/profil-activite-backend-performance-optimisee.json`,
+aucun bloc temporaire écrit. Le maximum sur trente lectures est le proxy
+empirique de p99 de ce petit échantillon, pas une validation de capacité à
+trafic soutenu. Mesures de repository local, non de HTTP complet ; objectifs
+initiaux p95 900 ms / p99 1500 ms. Charge mixte, cache froid et p99 représentatif
+en environnement hébergé restent à qualifier. Le chargement volumétrique est
+isolé avec triggers USER suspendus puis réactivés avant les lectures ; les
+scénarios fonctionnels utilisent les triggers actifs. Le coût d'insertion
+massive n'est pas attesté par ce banc de lecture. Les index d'événements et
+de tenant existants suffisent pour cette recette : **aucune migration v311**.
+
+La revue indépendante confirme les frontières domaine/application/SQL, les
+contrôles de périmètre et le traitement des anciennes publications. Les quatre
+cas d'arrondi demandés ont été ajoutés et vérifiés. Côté navigateur, les essais
+intermédiaires ont relevé un nom accessible de filtre imprécis et le débordement
+à 200 % des boutons à icône : nom explicite du filtre, conteneurs contraints
+et texte repliable corrigés à la source, assertions de largeur conservées.
+Les captures finales du profil et du détail sont examinées dans
+`localeo-animation/tmp/profil-activite-browser/`, sans données personnelles.
+
+Contrats OpenAPI E41/E42 et imports Animation/Pro synchronisés ; aucun schéma
+moteur JSON modifié, Marketplace/Live sans consommateur de ce GET privé.
+Guide utilisateur et consignes de livraison actualisés. Le générateur et les
+captures de démonstration conservent leur schéma : mêmes événements et dates
+utilisés, aucun nouvel objet persisté ni besoin de fabriquer de l'ancienneté ;
+un historique sans référence positive reste explicitement affiché comme tel.
+Génération complète sur environnement partagé non exécutée.
+
+Les critères DY-01 à DY-06 sont couverts localement pour le périmètre retenu.
+Déployer le backend avant l'interface ; aucun nouveau flag, droit, secret,
+batch, migration ou prolongation de conservation. Aucune recette TEST ni
+opération de déploiement manuel effectuée par cette intervention.
+
 ## Correctif du 11 novembre 2026 — Bilan plus visuel
 
 Bases : Animation `0114244`, Projet `f9293aa`, puis modifications locales.
