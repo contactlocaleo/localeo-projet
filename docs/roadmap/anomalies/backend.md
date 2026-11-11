@@ -8,6 +8,47 @@ des trois anomalies du 1er novembre ; elle ne prouve pas leur déploiement
 applicatif. La correction SQL v286 a été appliquée sur TEST comme indiqué
 ci-dessous ; la migration catalogue v285 y reste en attente.
 
+## ANO-LIVE-PUSH-MOBILE-20261111 — Notifications absentes dans la PWA mobile
+
+- **Signalement** : notifications non reçues dans Localeo Live installé sur
+  mobile. Modèle du téléphone, environnement et type de notification attendue
+  non confirmés à ce stade ; aucune attribution certaine au cas individuel.
+- **Défauts établis** : le premier abonnement pouvait appeler `subscribe`
+  avant activation du service worker (reproduit dans un navigateur local avec
+  adaptateur mobile simulé). Le transport Live classique omettait `ttl` ; la
+  dépendance installée `pywebpush` applique alors zéro, sans conservation
+  fournisseur quand le destinataire est injoignable.
+- **Correction locale** : attente d’un worker actif, limitée à 15 secondes,
+  nouvelle inscription du worker après échec, permission toujours demandée
+  sur le clic et mise à jour PWA toujours volontaire. Alertes classiques
+  conservables 24 heures ; rappels bornés par 20 h Paris et la première fin
+  d’animation, avec revalidation fraîche par abonnement.
+- **Preuves** : reproduction navigateur rouge avant correction ; tests de
+  domaine, application et transport rouges sur les TTL absents, puis
+  **76 tests ciblés réussis**. Ajout de deux cas de franchissement d’échéance
+  pendant les lectures : **32 tests applicatifs réussis**, soit 78 cas ciblés
+  distincts vérifiés au total. **687 contrôles d’architecture réussis** et
+  **20 tests Node** sur activation, reprise, cache public et mise à jour.
+  **9 scénarios navigateur réussis** sur un build isolé, ESLint ciblé et
+  contrôles documentaires réussis. Les adaptateurs de test représentent un
+  vrai worker actif ; le scénario adjacent de communes utilise désormais
+  son entrée courante depuis Découvrir.
+  Revue indépendante frontend/backend ; la reprise après worker `redundant`
+  a été renforcée à l’issue de cette revue.
+- **Vérifications distantes et limites** : GET public TEST seulement,
+  configuration Push active avec clé publique présente. Aucune notification
+  réelle envoyée, aucun abonnement, flag ou traitement distant modifié.
+  La réception sur un véritable iPhone/Android, PWA fermée puis après coupure
+  réseau, reste à vérifier après livraison et identification du cas utilisateur.
+  Le transport organisateur est distinct du batch Live classique.
+- **Impacts** : backend, Marketplace/Live et documentation E42/exploitation.
+  Aucun contrat public, migration ou générateur modifié : les jeux synthétiques
+  existants réutilisent les mêmes abonnements et consentements. Commits locaux
+  backend `63f8ce8` et Marketplace/Live `a7b3320`, préparés avec la livraison
+  de supervision Web Push ; aucun déploiement effectué.
+  [Spécification du transport](../../specifications/epic-42-localeo-live/backend-api.md#livraison-push-sur-mobile--correctif-du-11-novembre-2026),
+  [diagnostic mobile](../../exploitation/technique/reprendre-notifications-sortantes.md#localeo-live-installé-sur-un-téléphone).
+
 ## ANO-IMPORT-AUTORISATION-20261111 — Import refusé après modification de Communication
 
 - **Signalement** : après « Gérer les modules → Modifier cet octroi » sur

@@ -1,5 +1,25 @@
 # Specification backend et API - Localeo Live
 
+## Livraison Push sur mobile — correctif du 11 novembre 2026
+
+Le transport des alertes Live classiques transmet un TTL explicite de
+86 400 secondes au fournisseur, afin de permettre une livraison différée si
+le téléphone est temporairement injoignable. Le statut `ENVOYE` constate
+l’acceptation fournisseur, sans garantir l’affichage sur l’appareil.
+
+Pour les rappels personnels, la politique du domaine `animation_locale`
+calcule les secondes entières restantes avant 20 h Paris et la première fin
+d’animation des candidats retenus. L’application relit l’horloge après
+revalidation ; un budget nul annule l’envoi. Le transport utilise la durée de
+la dernière revalidation de chaque abonnement. Les consentements, créneaux,
+quotas et contrôles d’accès existants restent applicables.
+
+Il s’agit d’un contrat interne application/transport : aucun champ public ni
+schéma de données nouveau. La durée limite la conservation fournisseur, pas
+l’heure absolue d’affichage. Le circuit distinct des campagnes organisateur
+conserve son TTL de 24 heures et sa programmation propre ; voir la
+[procédure de diagnostic](../../exploitation/technique/reprendre-notifications-sortantes.md#localeo-live-installé-sur-un-téléphone).
+
 ## Récompenses personnelles et tirages qualifiés — 3 novembre 2026
 
 Deux lectures complètent le carnet, avec `X-Localeo-Live-Secret`, une

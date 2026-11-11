@@ -1,5 +1,15 @@
 # Specification frontend PWA - Localeo Live
 
+Correctif du **11 novembre 2026 — abonnement Push sur mobile** : le clic
+d’activation demande la permission navigateur, puis attend un service worker
+actif avant de créer l’abonnement. Le premier enregistrement d’un worker ne
+prouve pas son activation. L’attente est bornée à 15 secondes ; en cas d’échec,
+une nouvelle tentative réenregistre le worker. Une mise à jour en attente
+reste soumise au consentement existant, sans rechargement automatique.
+L’état « Notifications actives » attend la confirmation de l’API. Les limites
+du transport et la recette mobile sont dans la
+[procédure d’exploitation](../../exploitation/technique/reprendre-notifications-sortantes.md#localeo-live-installé-sur-un-téléphone).
+
 Les [principes directeurs UX de Localeo Live](../../produit/live/principes-ux.md)
 guident les évolutions frontend. Pour la navigation et le carnet actuels, lire
 [E73-EVO-LIVE-CARNET-BORD et E73-EVO-LIVE-TAMPONS](../epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md) :
