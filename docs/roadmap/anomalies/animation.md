@@ -1,5 +1,16 @@
 # Registre des anomalies
 
+## Correction du 11 novembre 2026 — libellé de traitement d’un gain
+
+Dans la liste des gains de `ExternalPrizesWorkspace`, le bouton « Suivre ce
+gain » devient **Traiter ce gain**, selon la demande utilisateur. Son ouverture
+du dossier et ses protections sont conservées. Le scénario navigateur existant
+est adapté au nouveau nom accessible : `dotation.mjs reader follow`, quatre
+parcours à 320/1280 px, **40 contrôles réussis**, API simulée. Build isolé
+réussi, avertissement de taille du bundle existant. Changement rédactionnel
+Animation uniquement, sans impact métier, contrat, permission, migration,
+configuration ni donnée de démonstration. Pas de vérification distante.
+
 ## Correction du 11 novembre 2026 — prochaine action et navigation alignées
 
 Sur la base Animation `6c96310`, la prochaine action occupait une rangée
