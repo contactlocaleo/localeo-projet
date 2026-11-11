@@ -1,5 +1,64 @@
 # E73 — Vérification, migration et livraison
 
+## Évolution — E73-EVO-LIVE-DOMAINE (11 novembre 2026)
+
+Bases : Marketplace `6c64ff1`, Backend `03ab603`, Pro `186c73e`, Projet
+`cdee5db`. La demande remplace la topologie à deux services publics par un
+service/build Marketplace commun et une entrée racine Live configurable.
+La précision utilisateur exclut la rétrocompatibilité et les migrations de
+domaines, rien n'étant en production. La clôture historique E73 est conservée.
+
+Commits applicatifs : Marketplace **`7172ac9`**, Backend **`9aee34a`**,
+Pro **`ce9e187`**. Commit et push demandés séparément après les vérifications locales.
+
+Le serveur construit une liste DNS bornée depuis `LOCALEO_LIVE_ENTRY_HOSTS`
+à son démarrage. Une requête GET/HEAD sur `/` du domaine déclaré reçoit 302,
+`Cache-Control: no-store` et `Location: /live/carnet`. Query et hôte ne sont
+pas reflétés dans la destination. Les autres routes et l'accueil Marketplace
+restent servis par le même processus. Aucun accès backend, SQL ou carnet pour
+décider de la redirection ; aucune modification du manifeste ou du stockage.
+La configuration invalide est refusée et la clé serveur n'est pas publiée dans
+`app-config.js`. Les modèles communs prod/TEST sont livrés auprès du serveur.
+
+Les quatre templates Animation et les CORS des exemples backend sont alignés
+sur `live.localeo.city` / `test-live.localeo.city`. Le droit de transport cookie
+reste limité au portail organisateur. Pro autorise la nouvelle origine exacte
+au build ; ses profils runtime ciblent uniquement l'origine de leur environnement.
+Aucun contrat API, schéma, jeton, commande, droit métier, migration ou format du
+générateur modifié. Les modèles ne changent aucune configuration réellement
+déployée. Le [guide E73](../../exploitation/technique/configurer-epic-73.md#entrée-par-domaine-sur-le-service-commun--11-novembre-2026)
+décrit activation et désactivation sur le service existant.
+
+| Critères | Preuve locale |
+| --- | --- |
+| LD-01/02 | 7 nouveaux tests HTTP + 13 existants réussis, serveur réel : configuration, limites DNS, Host exact/voisin, ports, GET/HEAD, query, méthode, sécurité et clé non publique. Nouvelle attente rouge avant implémentation (200 au lieu de 302, configuration invalide non rejetée). |
+| LD-03 | **2 scénarios navigateur réussis**, mobile 390 px et ordinateur 1 280 px : même processus/build, deux domaines simulés, entrée Live, Découvrir et rechargement, inscription ciblée, récupération et véritable accueil Marketplace. Les chemins complets de lots et les assets sont couverts par HTTP. Captures inspectées ; rapport final Marketplace `test-results/visual-runs/2026-11-11T11-29-41-135Z-wO2NpE/`, build `9a8b90cd22c3b845db1a5bff1ed7f08eb69e69445703527e650d77f7cce5f2f6`. |
+| LD-04 | **126 tests backend réussis** : liens publics, profils CORS et isolation de session navigateur ; **28 tests Pro réussis**, dont refus TEST/HTTP/port/suffixe/portail et origine runtime explicite. Nouveau domaine refusé au validateur Pro avant correction. |
+| LD-04 — build | Build production Pro isolé réussi, 156 modules, vrais plugins/validateur/PWA. Profil synthétique Live seul, quatre flags Finance false et aucun dotenv opérateur ; bundle Live présent et TEST absent, manifeste/worker générés. Artefacts `tmp/live-domaine-pro-build-9f1c3e0e-ac81-4a52-b0fd-b818d81a10fe/`. Avertissement d'import statique/dynamique `ValidationHistory`, sans échec. |
+| LD-05 | Périmètre de stockage, permissions et PWA inchangé, confirmé en revue. Aucun transfert ou migration historique implémenté. |
+
+Commandes exécutées dans leurs dépôts respectifs :
+
+```console
+node --test tests/server.test.cjs tests/live-entry-server.test.cjs
+node scripts/run-visual-tests.cjs --port 8196 tests/visual/live-entry-hosts.spec.cjs --timeout 60000
+py -3.14 scripts/validation/test_isolated.py tests/application/services/test_liens_publics_animation.py tests/api/test_marketplace_cors.py tests/security/test_animation_browser_session.py -q --tb=short
+node node_modules/vitest/vitest.mjs run --config tmp/live-domaine-pro.vitest.config.mjs --maxWorkers=2
+```
+
+Les tentatives navigateur antérieures restent conservées : sélecteurs de fixture
+corrigés, puis allocation Windows d'un port refusé par Chromium. L'allocation
+de recette utilise désormais un port libre entre 20 000 et 59 999. Ces échecs
+du banc ne sont pas comptés comme réussites. Les serveurs de recette sont arrêtés.
+
+La revue indépendante des producteurs, profils, consommateur QR et adaptateur
+serveur ne relève aucun défaut concret : origine exacte, refus ciblés, chemin
+relatif fixe, bornes, absence de réflexion de paramètres et séparation CORS/cookie.
+Cette revue n'a exécuté aucun test et ne remplace pas les résultats ci-dessus.
+DNS/TLS, Host effectivement transmis par Render et recette déployée restent
+non vérifiés. Aucun rattachement de domaine, configuration d'exploitation,
+génération réelle, notification ou déploiement effectué par cette évolution.
+
 ## Correctif du 11 novembre 2026 — prochaine action après lancement du tirage
 
 Bases : Backend `ade4b09`, Animation `6555b05`, Projet `93b5430`.

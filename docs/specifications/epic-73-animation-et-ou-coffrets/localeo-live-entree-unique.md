@@ -1,5 +1,52 @@
 # E73 — Localeo Live, entrée unique des animations
 
+## Évolution du 11 novembre 2026 — entrée Live par domaine, E73-EVO-LIVE-DOMAINE
+
+Décision utilisateur : conserver **un seul service et un seul build Marketplace**
+pour Coffrets et Live. Le domaine `live.localeo.city` ouvre directement
+`/live/carnet` ; le domaine Marketplace conserve son accueil. Cette décision
+remplace l'obligation de deux services de E73-EVO-DOMAINES pour cette topologie,
+sans modifier la clôture historique E73. Précision utilisateur : rien n'étant
+en production, aucune migration ni rétrocompatibilité avec les anciens domaines
+ou services n'est exigée pour ce périmètre. La valeur globale de surface reste `COFFRETS` dans
+le service commun ; les routes `/live/*` continuent de présenter Live.
+
+### Critères et conception
+
+| Critère | Comportement et propriétaire | Preuve attendue |
+| --- | --- | --- |
+| LD-01 | Le serveur HTTP Marketplace lit `LOCALEO_LIVE_ENTRY_HOSTS`, liste facultative de noms DNS exacts séparés par virgules. Vide : accueil Marketplace normal. Une configuration invalide est refusée au démarrage. La clé reste serveur, absente de la configuration publique. | Configuration vide/valide/invalide, domaines multiples, comparaison exacte et normalisation DNS. |
+| LD-02 | Pour GET/HEAD sur le chemin `/` d'un domaine déclaré, réponse 302 sans cache vers le chemin relatif fixe `/live/carnet`. Aucun hôte ou chemin de destination n'est repris de la requête. Les paramètres de la racine ne sont pas recopiés ; les liens ciblés utilisent leurs chemins existants. | HTTP réel : Host reconnu, autre Host et ressemblant, port, GET/HEAD, query, méthode non concernée, absence de boucle et d'open redirect. |
+| LD-03 | Tous les chemins complets restent servis : `/live/carnet`, animations/inscriptions, lots, récupération, assets, manifeste, worker et routes API. Le domaine Marketplace conserve `/` et son accueil. | Tests serveur et parcours navigateur à deux domaines simulés sur le même processus/build, arrivée au carnet, découverte, lot/inscription et origine conservée. |
+| LD-04 | Les templates publics frontend/backend ciblent l'origine Live du service commun ; ses domaines sont autorisés en CORS, en conservant les origines des applications utilisées et l'isolation cookie du portail. Pro reconnaît les QR URL Live de production uniquement avec son autorisation runtime exacte ; TEST refusé en production. | Tests de configuration et reconnaissance QR de Pro ; profils et procédure d'exploitation cohérents avec les producteurs existants. |
+| LD-05 | Carnet et permissions Push restent propres à chaque origine, sans copie silencieuse ni nouvelle inscription. Identité, scope et entrée de la PWA existante `/live/` restent conservés ; cette évolution concerne l'entrée HTTP `/`. Aucun chantier de reprise ou compatibilité historique n'est ajouté. | Absence de modification du stockage/worker/manifeste et périmètre explicite dans le guide de configuration. |
+
+La configuration est bornée à 100 noms DNS de 253 caractères maximum ; la
+politique est construite une seule fois au démarrage. L'entrée Live ajoute une
+seule réponse de redirection avant le HTML ; les autres chemins n'ajoutent
+aucun saut. Les tests contrôlent ces bornes et la chaîne de redirection.
+
+Le routage appartient à l'adaptateur HTTP : aucun nouvel état métier, commande,
+droit, contrat API ou calcul de participation. La liste est normalisée une fois
+à la création du serveur ; vérification constante par requête, aucune requête
+SQL, lecture de carnet ou appel réseau pour décider de la redirection. Les
+en-têtes de sécurité habituels restent appliqués. Les liens personnels ciblés
+de la nouvelle origine continuent d'utiliser leurs routes et capacités actuelles.
+
+### Impacts et réalisation
+
+Spécification et implémentation vérifiées localement. Le [bilan de livraison](verification-livraison.md#évolution--e73-evo-live-domaine-11-novembre-2026)
+relie les critères aux preuves et précise les contrôles hébergés restant à effectuer.
+
+| Périmètre | Impact / preuve |
+| --- | --- |
+| Marketplace | Serveur, tests HTTP/navigateur, profils serveur commun et README ; aucun nouveau flag UI. |
+| Backend | Configuration des templates et CORS documentée ; les producteurs acceptent déjà une origine HTTPS configurable, aucun schéma ni code métier à modifier. |
+| Pro | Autorisation de l'origine Live de production au build et tests ; liste runtime exacte. |
+| Documentation | Cette spécification, backlog E73, bilan et guide d'exploitation mis à jour ; aucune réorganisation. |
+| Données / démonstration | Sans migration ni changement du générateur : aucune donnée, forme de jeton ou permission modifiée. Fixtures synthétiques uniquement. |
+| Exploitation | Rattachement DNS/TLS du domaine au service existant, configuration puis déploiement opérateur. Désactivation par retrait de la liste de domaines, sans suppression de carnet. Recette hébergée et DNS restent distincts des preuves locales ; aucune migration d'ancien domaine exigée. |
+
 ## Correctif du 11 novembre 2026 — date dans Mon inscription
 
 Le détail personnel d'une animation affiche **Date d’inscription** dans la

@@ -726,6 +726,14 @@ restent à concevoir et vérifier ; l’immersion complète n’est pas déclar�
 
 ### 5.4 Origines et continuité des parcours
 
+**Décision du 11 novembre 2026 — E73-EVO-LIVE-DOMAINE.** La cible est désormais
+un seul service/build Marketplace en `COFFRETS`, avec domaine Live ouvrant
+`/live/carnet` par règle serveur. Le portail reste distinct. Les
+[critères LD-01 à LD-05](localeo-live-entree-unique.md#évolution-du-11-novembre-2026--entrée-live-par-domaine-e73-evo-live-domaine)
+remplacent ci-dessous la topologie à deux services publics de E73-EVO-DOMAINES-01
+et son exigence de compatibilité historique. Les décisions datées suivantes
+restent l'historique ; aucune migration n'est requise, rien n'étant en production.
+
 Le dépôt Marketplace demeure le socle partagé : configuration de surface `ANIMATION` pour `animations.localeo.city`, composants et contrats communs, aucune copie indépendante du moteur. Accueil spécialisé : découvrir les animations, commune, fiches des commerces participants, rejoindre son parcours et ouvrir Live ; aucun achat Coffret requis. Le site Coffrets conserve ses propres parcours et liens existants. Une fiche Animation ne présente pas un commerce comme fournisseur de prestations Coffrets sans ce produit.
 
 **Décision du 30 octobre 2026 — E73-EVO-DOMAINES.** Les sites suivants doivent

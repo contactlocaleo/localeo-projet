@@ -1,5 +1,17 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+## Évolution du 11 novembre 2026 — entrée Live par domaine sur un service commun
+
+**E73-EVO-LIVE-DOMAINE** : le domaine dédié ouvre Mon carnet via une règle
+HTTP configurable dans le même service/build que la Marketplace Coffrets.
+Les [critères LD-01 à LD-05](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-11-novembre-2026--entrée-live-par-domaine-e73-evo-live-domaine)
+remplacent l'obligation de deux services pour cette topologie, en conservant
+les liens personnels ciblés et la séparation des origines. Rien n'étant en
+production, la rétrocompatibilité et la migration d'anciens domaines sont hors périmètre.
+Spécification, implémentation et vérifications locales réalisées ; les preuves
+et limites figurent dans le [bilan](../../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md#évolution--e73-evo-live-domaine-11-novembre-2026).
+Le statut et la clôture historique E73 restent conservés ; activation hébergée non effectuée.
+
 ## Correction du 11 novembre 2026 — messages organisateur depuis le réglage Animations
 
 **E73-COR-MESSAGES-ANIMATION** : le choix **Animations** dans Réglages autorise

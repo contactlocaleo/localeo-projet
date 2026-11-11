@@ -1,5 +1,13 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+Évolution du **11 novembre 2026 — E73-EVO-LIVE-DOMAINE** : un service et un
+build Marketplace communs aux domaines Coffrets et Live. Une liste serveur
+configure l'entrée `/` du domaine Live vers `/live/carnet`. Les
+[critères LD-01 à LD-05](localeo-live-entree-unique.md#évolution-du-11-novembre-2026--entrée-live-par-domaine-e73-evo-live-domaine)
+remplacent l'obligation antérieure de deux services publics ; aucune migration
+ou rétrocompatibilité historique exigée, conformément à la précision utilisateur.
+Clôture historique E73 inchangée ; preuves propres au bilan.
+
 Correctif du **11 novembre 2026 — création, envoi et suivi des messages** :
 Localeo Animation distingue le brouillon, la confirmation de mise en file et
 la publication dans Live. Les deux traitements existants sont raccordés à
