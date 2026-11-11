@@ -2,6 +2,11 @@
 
 ## Statut et périmètre
 
+Évolution demandée le **11 novembre 2026** :
+[E65-EVO-WEBPUSH — abonnements et historique dans Supervision technique](supervision-webpush.md).
+Spécification puis implémentation et publication Git ; clôture historique
+conservée, preuves propres à cette extension.
+
 Spécification V1 du **26 septembre 2026**, implémentation **V1.4 le 1er octobre 2026**, issue du
 [backlog EPIC 65](../../roadmap/terminees/epic-65-vues-erp-audit-paiements-reversements-backlog.md).
 État produit : **Terminée le 2 octobre 2026**, selon la [roadmap](../../roadmap/README.md).

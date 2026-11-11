@@ -84,6 +84,13 @@ Vérifie la pagination avant de conclure qu’un dossier n’existe pas. Une err
 de chargement ne signifie pas qu’il n’y a aucun résultat. Les raccourcis et les
 actions proposés dépendent toujours du dossier et de ton habilitation.
 
+Pour l’administrateur historique, **Supervision technique → Web Push** réunit
+les abonnements et l’historique des notifications. Choisis le canal puis ouvre
+une ligne pour consulter ses détails. L’historique indique le suivi de l’envoi,
+pas la lecture sur le téléphone. La révocation d’un abonnement exige un motif
+et une confirmation ; suis le [guide de diagnostic des notifications](../../../exploitation/technique/reprendre-notifications-sortantes.md#console-web-push-dans-lerp)
+pour les opérations techniques.
+
 ## 3. Référencer et accompagner un commerçant
 
 Point d’entrée : **Catalogue et commerçants → Commerçants et prestations**,

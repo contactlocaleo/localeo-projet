@@ -2,6 +2,21 @@
 
 ## Références
 
+### Évolution du 11 novembre 2026 — supervision Web Push
+
+**E65-EVO-WEBPUSH** ajoute la gestion des abonnements et l’historique des
+canaux Live, Pro, Exploitation, CRM et messages organisateur depuis Supervision
+technique. Les huit critères WP-01 à WP-08 et leurs preuves sont suivis dans la
+[spécification canonique](../../specifications/epic-65-vues-erp/supervision-webpush.md).
+Spécification, implémentation, commit et push demandés ; aucun changement du
+statut historique de l’EPIC 65 ni de ses critères financiers.
+Implémentation locale et vérification terminées le 11 novembre : 35 tests
+domaine/application/API, 3 PostgreSQL, 28 sécurité et 689 architecture réussis,
+parcours navigateur mobile/ordinateur et non-régression du shell ERP réussis.
+La migration d’index v307 accompagne la livraison ; aucun déploiement distant
+n’est déduit de ces preuves. Le bilan et ses limites figurent dans la source
+canonique ci-dessus.
+
 - Date de cadrage : **26 septembre 2026**.
 - Identifiant : **EPIC-65**, disponible après recherche dans la roadmap commune,
   ses identifiants applicatifs et les documents des dépôts voisins.

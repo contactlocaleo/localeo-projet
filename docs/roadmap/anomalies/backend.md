@@ -43,9 +43,9 @@ ci-dessous ; la migration catalogue v285 y reste en attente.
   Le transport organisateur est distinct du batch Live classique.
 - **Impacts** : backend, Marketplace/Live et documentation E42/exploitation.
   Aucun contrat public, migration ou générateur modifié : les jeux synthétiques
-  existants réutilisent les mêmes abonnements et consentements. Commits locaux
-  backend `63f8ce8` et Marketplace/Live `a7b3320`, préparés avec la livraison
-  de supervision Web Push ; aucun déploiement effectué.
+  existants réutilisent les mêmes abonnements et consentements. Commits
+  backend `63f8ce8` et Marketplace/Live `a7b3320`, poussés sur `main` avec la
+  livraison de supervision Web Push ; aucun déploiement effectué par cette tâche.
   [Spécification du transport](../../specifications/epic-42-localeo-live/backend-api.md#livraison-push-sur-mobile--correctif-du-11-novembre-2026),
   [diagnostic mobile](../../exploitation/technique/reprendre-notifications-sortantes.md#localeo-live-installé-sur-un-téléphone).
 
