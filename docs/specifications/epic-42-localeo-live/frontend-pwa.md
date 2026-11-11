@@ -3,8 +3,10 @@
 Correction du **11 novembre 2026 — messages organisateur et catégorie Animations** :
 le réglage Animations couvre les nouvelles et les messages des organisateurs
 des participations personnellement liées. Le détail d’une animation ne demande
-plus d’accord particulier ; la messagerie et les liens anciens orientent vers
-Réglages. Le réglage commun n’active pas les alertes navigateur : un abonnement
+plus d’accord particulier. L’entrée **Messages de l’organisation** ouvre la liste
+des messages filtrée sur l’animation, avec retour à la participation ; elle ne
+propose pas d’activation des notifications. Le choix commun se fait dans
+Réglages et n’active pas les alertes navigateur : un abonnement
 sur cet appareil est nécessaire en plus pour recevoir un Web Push.
 La liaison d’une participation conserve la preuve personnelle et le secret
 d’installation ; le retrait du bloc d’accord ne doit pas supprimer cette liaison.

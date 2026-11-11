@@ -1,5 +1,27 @@
 # E73 — Localeo Live, entrée unique des animations
 
+## Correctif du 11 novembre 2026 — messages de l'organisation dans le détail
+
+Une entrée unique **Messages de l’organisation** ouvre directement la liste
+filtrée sur l’animation consultée. Elle remplace le lien de réglage des alertes
+et l’entrée de nouvelles dupliquée. La liaison personnelle de la participation
+est vérifiée avant de permettre l’ouverture ; son échec propose un réessai,
+sans changer les choix de messages ni demander de permission navigateur.
+
+LS-04 s’applique dès le premier rendu, en pagination, après erreur et au réessai :
+aucun message d’une autre animation ne s’affiche automatiquement. Le vide
+indique **Aucun message pour cette animation** ; la consultation ne marque rien
+comme lu. Les commandes de lecture existantes et le retour à la participation
+exacte restent disponibles. La vue filtrée n’affiche aucune gestion d’activation
+des notifications ; la catégorie Animations et les alertes de l’appareil se
+gèrent depuis Réglages. La messagerie globale conserve son accès aux réglages.
+
+Principes LIVE-UX-02, 05, 07 et 08 : contenu attendu, une seule entrée, clavier,
+mobile et retour prévisible. Correction Marketplace uniquement ; API, règles
+de lecture, consentements, migration, flags et générateur sans impact : les
+contrats et données existants fournissent déjà la liste filtrée. Les preuves
+figurent dans le [bilan](verification-livraison.md).
+
 ## Correctif du 11 novembre 2026 — avancement homogène des animations
 
 La frise visuelle de la tombola devient le suivi commun des participations :
@@ -46,7 +68,7 @@ La clôture historique E73 et les réserves de recette hébergée sont conservé
 | LS-01 | Ticket ajouré pour la tombola, livret pour le passeport, personne pour la participation, coche cerclée pour une confirmation. Magasin réservé au commerce/visite ; trophée réservé au gain. Icônes accompagnées d'un libellé, mêmes traits et alignements. | Rendu des cartes, découverte et confirmations à 320/390 px ; noms accessibles et cas sans confirmation. |
 | LS-02 | Le détail tombola montre un seul workflow Inscrit → Qualifié → Tirage → Résultat. Étape courante et étapes acquises sont distinguées par forme, icône et libellé, pas uniquement par couleur. Le dernier état devient Gagnant ou Non gagnant uniquement sur résultat confirmé. | Projections non qualifiée, qualifiée/en attente, gagnante, non gagnante, hors tirage, annulée et inconnue ; revalidation/refus. |
 | LS-03 | Le PIN devient un accès compact et volontaire ; ses explications se déplient. Les préférences de messages deviennent un contrôle secondaire court, avec consentement et retrait explicites. Le détail participation n'affiche plus les alertes de l'appareil, qui restent dans Réglages. | Ouverture/fermeture du PIN, contrôle de fraîcheur, autorisation/retrait/échec de préférence et absence de modification implicite. |
-| LS-04 | « Nouvelles de cette animation » ouvre uniquement les messages de cette animation, dès le premier rendu et lors de la pagination ; retour vers la participation d'origine. Un vide ou un échec ne bascule pas sur les nouvelles globales. | Deux animations ayant des messages, entrée ciblée/retour/pagination et absence de fuite d'un ancien contexte. |
+| LS-04 | « Messages de l’organisation » ouvre uniquement les messages de cette animation, dès le premier rendu et lors de la pagination ; retour vers la participation d'origine. Un vide ou un échec ne bascule pas sur les nouvelles globales ni vers la gestion des notifications. | Deux animations ayant des messages, entrée ciblée/retour/pagination et absence de fuite d'un ancien contexte. |
 | LS-05 | Découvrir conserve son en-tête, sa sélection communale et ses onglets quand l'habitant passe à Commerçants. Seul le contenu sous les onglets change. Le périmètre réellement recherché reste explicite, y compris en entrée directe et avec plusieurs communes suivies. | Changement d'onglet et retour mobile, commune/périmètre stable, filtres et liens directs, attente/erreur sans disparition du shell. |
 | LS-06 | Suppression du bloc autonome « À vous de jouer » / « Ma prochaine action » dans Mon carnet. Chaque objet garde son action à sa place. Dans Mes lots, le titre devient « Lots à utiliser » et les gains restent accessibles. | Carnet rempli et vide, actions des objets/retours/filtre, lots disponibles et aucune action dupliquée en bandeau. |
 | LS-07 | Le passeport fusionne progression et visites dans un seul bloc : un compteur confirmé et une seule collection de tampons liés aux commerçants, avec leurs noms, états et dates disponibles. Le QR reste prioritaire et le lien vers les commerçants est intégré au bloc principal, sans section isolée. | Passeport partiel/terminé/inconnu, tampons non dupliqués, ouverture d'une visite, QR et annuaire puis retour. |

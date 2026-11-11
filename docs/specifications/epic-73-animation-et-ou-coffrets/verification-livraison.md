@@ -1,5 +1,46 @@
 # E73 — Vérification, migration et livraison
 
+## Correctif du 11 novembre 2026 — messages de l'organisation depuis le détail
+
+Base Marketplace `0dd0f70`, Projet `aa10c50`. Commit applicatif `3d6d063`.
+La rubrique secondaire pointait
+encore vers Réglages, tandis qu’une autre entrée ouvrait les nouvelles de
+l’animation. L’utilisateur attend la liste de messages depuis cette rubrique.
+Reproduction rouge à 390 px : l’entrée attendue vers les messages est absente,
+build Marketplace `test-results/visual-runs/2026-11-11T09-19-48-781Z-mVzaDo`.
+
+L’entrée unique **Messages de l’organisation** réutilise la messagerie filtrée
+existante et son indicateur de non-lu. La preuve personnelle est conservée,
+avec renouvellement borné et choix silencieux sur une identité de remplacement.
+L’ouverture attend cette liaison pour éviter un faux vide. Un échec ne modifie
+aucune catégorie et propose un réessai. La messagerie filtrée retire les liens
+d’activation, conserve pagination de 25, échappement HTML, lectures explicites
+et retour exact ; vide et panne restent dans le périmètre de l’animation.
+
+Portée : Marketplace et documentation. Aucune modification backend, contrat
+API, migration, flag ou exploitation batch ; aucune génération/restauration
+affectée, les ressources et droits restent identiques. Recettes avec données
+synthétiques et API simulées ; réception Push et déploiement hébergé non testés.
+Commit et push demandés, sans déclenchement manuel de déploiement.
+
+Recette finale : **8 scénarios navigateur réussis** dans
+`test-results/visual-runs/2026-11-11T09-22-28-036Z-I3CYA2/` : parcours complet
+à 320/390/1280 px, pagination de 25, messages étrangers exclus, lectures sur
+action explicite seulement, retour exact, échec de liaison et renouvellement
+401 borné, XSS échappé, texte doublé et vide après panne sans repli global.
+Deux compléments donnent **3 réussites chacun** :
+`2026-11-11T09-22-37-958Z-cwP3Af` (tombola/chasse, fraîcheur et portée initiale)
+et `2026-11-11T09-24-09-738Z-rWqZ7R` (passeport gagnant puis nouvelles/retour,
+clavier et thème sombre). Le premier réessai à 390 px réussissait déjà dans
+`2026-11-11T09-20-53-618Z-KVfyiQ`, recouvert par la recette finale.
+
+**14 tests Node réussis** (messages et installation), ESLint ciblé et
+`git diff --check` réussis. **97 guides, 1 200 liens, zéro défaut ; 148 sources
+exportées vérifiées**. Captures finales détail et liste de messages à 390 px
+inspectées : contenu attendu, une entrée unique, aucune commande de réglage
+dans la vue de cette animation. Aucun test métier backend n’est nécessaire,
+puisque ses règles et contrats restent inchangés.
+
 ## Correctif du 11 novembre 2026 — avancement homogène des animations
 
 Base Marketplace `006f3e8` et Projet `22b6bfe`, après enregistrement distinct du
