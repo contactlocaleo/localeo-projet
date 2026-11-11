@@ -1,5 +1,38 @@
 # E73 — Vérification, migration et livraison
 
+## Correctif du 11 novembre 2026 — Bilan plus visuel
+
+Bases : Animation `0114244`, Projet `f9293aa`, puis modifications locales.
+La présentation fait ressortir chiffres, pictogrammes, objectifs et notes ;
+définitions et populations passent dans un volet commun. Les projections,
+les règles de calcul, les exports et les commandes restent inchangés.
+
+| Preuve exécutée | Résultat |
+| --- | --- |
+| `WORKSPACE_CASE=bilan-visual node tests/browser/animation-workspace-ux.mjs` | **8 parcours réussis** : 320/390/768/1024/1280/1600 px, dont texte à 200 %, pictogrammes, objectif mesuré, zéro/null/sans objet, volet au clavier, étoiles fractionnaires, commentaires échappés, origines, Coffrets et montant, classement, panne/réessai ; aucune écriture API |
+| Même scénario sur le build précédent | **Rouge attendu** : absence du groupe visuel « Chiffres clés » ; cause et présentation initiale examinées dans les sources |
+| `WORKSPACE_CASE=bilan-diffusion node tests/browser/animation-workspace-ux.mjs` | **8 parcours réussis**, navigation après Flyer, performances, copie, QR, pagination, panne/réessai et lecture seule conservés |
+| `JOURNEY_CASE=objectives node tests/browser/saas-journey.mjs` | **2 parcours / 23 contrôles réussis** : saisie, version, conservation des valeurs vides et garde de sortie |
+| `JOURNEY_CASE=comments node tests/browser/saas-journey.mjs` | **2 parcours / 13 contrôles réussis** : texte non interprété et mobile |
+| `JOURNEY_CASE=comparison node tests/browser/saas-journey.mjs` | **2 parcours / 15 contrôles réussis** : éditions non comparables, absence d’écart inventé |
+| `node --test tests/saas-journey-contracts.test.mjs tests/saas-journey-http-contracts.test.mjs tests/management-ergonomics.test.mjs` | **11 tests réussis**, contrats et commandes existants préservés |
+| `npx tsc --noEmit`, `npx eslint src vite.config.ts` | **Réussis** |
+| Build isolé `ANIMATION_TEST_DIST=tmp/bilan-visual-dist node scripts/build-generation-tests.mjs` | **Réussi**, 1905 modules ; avertissement de taille Vite préexistant, bundle principal 504,58 kB |
+
+Les deux bancs navigateur utilisent API et données synthétiques, sans
+configuration opérateur. Captures desktop, mobile et zoom examinées dans
+`localeo-animation/tmp/bilan-visual-ux/` et captures des parcours adjacents
+dans `tmp/saas-journey-browser/`, non versionnées. La définition masquée
+réutilise désormais le libellé de l’indicateur : le contrôle adjacent a été
+précisé au groupe « Chiffres clés » pour distinguer les deux occurrences,
+sans supprimer son assertion de visibilité.
+
+Périmètre limité à l’interface et à sa documentation canonique. Aucun contrat,
+backend, PDF, droit, migration, flag, batch ou jeu de démonstration modifié ;
+pas de régénération nécessaire. La barre d’objectif n’invente aucune valeur
+absente ; les étoiles restent accompagnées de la note et du nombre de réponses.
+Les vérifications ne constituent pas une recette de la version TEST déployée.
+
 ## Correctif du 11 novembre 2026 — Bilan PDF et supports de diffusion
 
 Bases : Backend `ba16e91`, Animation `1cd4015`, Pro `00b8b9d`, Projet

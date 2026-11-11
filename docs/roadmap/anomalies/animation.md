@@ -1,5 +1,27 @@
 # Registre des anomalies
 
+## Correction du 11 novembre 2026 — lecture visuelle du Bilan
+
+- **Cause** : dans Animation `0114244`, chaque mesure répliquait son propre
+  contrôle de définition ; observation, période, couverture et satisfaction
+  occupaient plusieurs paragraphes. Les chiffres et les actions d’export
+  disposaient de peu de repères iconographiques.
+- **Correction** : grille sans accumulation de cartes, pictogrammes Lucide
+  cohérents, valeurs mises en avant, objectifs avec progression mesurée,
+  notes avec étoiles et valeur exacte. Définitions/populations regroupées
+  dans un volet dépliable ; couverture partielle toujours visible. Avis,
+  sources, objectifs, Coffrets et exports utilisent les mêmes composants.
+- **Preuves** : scénario navigateur rouge sur le build précédent, puis
+  contrôles mobile/ordinateur et texte à 200 % ; valeurs zéro, non collectées
+  et sans objet préservées, aucune progression fictive ni commande ajoutée.
+  Résultats et limites dans la
+  [vérification de livraison](../../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md).
+- **Impacts** : présentation dans `localeo-animation` et documentation
+  canonique ; aucune règle métier, permission, API, migration, batch ou
+  configuration modifiée. PDF inchangé. Le générateur et les données de
+  démonstration n’ont pas besoin d’adaptation : mêmes projections consommées.
+  Recette locale avec API synthétique ; version TEST et déploiement non vérifiés.
+
 ## Correction du 11 novembre 2026 — Bilan et diffusion par support
 
 - **Cause démontrée dans les sources** : l’interface présentait l’unité brute

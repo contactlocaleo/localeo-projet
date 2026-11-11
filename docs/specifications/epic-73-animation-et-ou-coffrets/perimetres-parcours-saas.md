@@ -868,6 +868,22 @@ Chaque réponse fournit date d’observation, fenêtre, unité, population, déf
 Dans les vignettes du Bilan, l’unité technique `NOMBRE` n’est pas affichée ;
 la valeur et son libellé restent visibles. Les autres unités sont conservées.
 
+Le Bilan privilégie une lecture visuelle : pictogramme Lucide stable et libellé
+visible par indicateur, chiffres mis en avant, grille aérée et séparateurs
+simples. L’objectif reste chiffré ; une barre représente le réalisé uniquement
+si la mesure est disponible et l’objectif positif. Un dépassement remplit la
+barre sans plafonner la valeur affichée. Aucun pourcentage de conversion n’est
+déduit entre des indicateurs de populations différentes.
+
+La fraîcheur et l’état de l’édition sont résumés ; une couverture incomplète
+reste visible. Période, définitions et populations sont regroupées dans
+« Comprendre les indicateurs », dépliable au clavier. Les notes sont présentées
+avec étoiles fractionnaires et valeur sur cinq, accompagnées du nombre de
+réponses facultatives ; aucune étoile remplie n’est affichée sans note.
+Les Coffrets, objectifs figés, origines d’inscription, avis et exports reprennent
+ces repères. Icônes décoratives masquées aux lecteurs d’écran, libellés et
+états textuels conservés, mobile et agrandissement à 200 % pris en compte.
+
 Les bilans utilisent des agrégations SQL ou projections incrémentales datées, sans hydrater tous les participants, passages ou gains pour calculer leurs totaux. Les commentaires, sources détaillées et historiques sont des listes paginées en base ; la moyenne et le total ne sont pas recalculés à chaque page de commentaires. Regrouper les enrichissements nécessaires, sans requête par gain/prestation. Les mesures de requêtes/mémoire font croître les participants à nombre d’animations affichées constant ; les méthodes historiques de bilan en mémoire ne prouvent pas cette capacité.
 
 Les sources de diffusion sont des codes publics opaques d’animation, accompagnés d’un libellé défini par le gestionnaire (« affiche mairie », etc.). Lien/QR transmet le code jusqu’à l’inscription de cette animation ; enregistrer le code valide présenté lors de cette inscription, sans réattribution ultérieure lors d’une visite. Code inconnu/absent ou autre animation → `INCONNUE`, pas rejet d’inscription ni accès supplémentaire. Pas de cookie publicitaire intersites ou association à des habitudes de navigation. Le QR de diffusion est distinct du QR personnel de validation.
