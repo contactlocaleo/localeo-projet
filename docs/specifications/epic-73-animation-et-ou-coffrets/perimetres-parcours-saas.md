@@ -426,8 +426,8 @@ dimensions utiles ; retirer les plafonds des conteneurs à leur source, sans
 empiler de surcharges CSS.
 
 Les points d’attention de l’assistant précèdent les étapes à faire ; les étapes
-déjà vérifiées restent consultables à la demande. Une barre d’action reste
-accessible depuis chaque rubrique et ouvre le parcours de l’action suivante,
+déjà vérifiées restent consultables à la demande. La prochaine action figure dans l’en-tête, à côté du statut,
+et ouvre son parcours depuis les rubriques de gestion,
 avec retour au début utile du contenu, y compris sur mobile. Elle ne confirme
 aucune transition. Les confirmations, droits, versions et clés d’idempotence
 des parcours existants sont conservés. La communication rend explicites les
@@ -554,7 +554,13 @@ sous-rubriques de l’espace courant sont présentées sur ordinateur.
 | Préparer | Assistant, Configuration, Invitations, Préparation terrain |
 | Piloter | Live, Participants, Validations, Publication et clôture |
 | Communiquer | Communication, Actualités selon habilitation, Flyer |
-| Résultats | Tirage, Gains et remise, Bilan, Audit |
+| Résultats | Fin et archivage, Tirage, Gains et remise, Bilan, Audit |
+
+Précision du **11 novembre 2026** : l’action suivante rejoint le statut
+dans l’en-tête. La barre des quatre espaces garde la même position dans
+Préparer, Piloter, Communiquer et Résultats, y compris sur mobile et avec
+le texte agrandi. Le guide conserve son action propre sans doublon ; les
+actions secondaires sont regroupées dans « Autres actions sur l’animation ».
 
 Les groupes et sous-rubriques utilisent la largeur disponible et reviennent
 à la ligne si nécessaire ; aucun défilement horizontal ni libellé coupé.

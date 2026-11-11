@@ -1,5 +1,17 @@
 # E73 — Vérification, migration et livraison
 
+## Correctif du 11 novembre 2026 — en-tête et navigation Animation
+
+Prochaine action à côté du statut, navigation alignée dans les quatre
+espaces. Base Animation `6c96310` et modifications locales ; reproduction
+rouge sur le build antérieur, puis huit recettes `WORKSPACE_CASE=header`
+et huit recettes `WORKSPACE_CASE=scroll` réussies, de 320 à 1600 px et texte
+200 %. Huit recettes `WORKSPACE_CASE=navigation` réussies (droits, liens,
+chargement différé, garde de saisie). TypeScript, ESLint et build isolé
+réussis ; avertissement Vite de
+taille (500,15 kB). Preuves, cause et impacts sans changement métier dans
+le [registre Animation](../../roadmap/anomalies/animation.md).
+
 ## Correctifs du 11 novembre 2026 — retours d'action visibles et notifications
 
 Base Animation `e197d86`, arbre local incluant Fin/Archives. Le clic d'envoi

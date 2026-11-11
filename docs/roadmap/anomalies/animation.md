@@ -1,5 +1,35 @@
 # Registre des anomalies
 
+## Correction du 11 novembre 2026 — prochaine action et navigation alignées
+
+Sur la base Animation `6c96310`, la prochaine action occupait une rangée
+séparée sous l’en-tête dans Piloter, Communiquer et Résultats ; le guide
+Préparer la supprimait, ce qui décalait la navigation entre espaces.
+Le scénario `WORKSPACE_CASE=header` reproduit avant correction l’action
+hors de l’en-tête (`tmp/animation-header-before/`).
+
+`AnimationDetailView` présente désormais la prochaine action à côté du
+statut dans `WorkspaceHeader`, avec une largeur adaptative. Le guide garde
+son action propre ; une réserve non interactive et masquée aux technologies
+d’assistance stabilise l’en-tête. Les actions secondaires utilisent partout
+le même panneau repliable. La navigation ne change plus de hauteur entre
+les quatre espaces. Les parcours, confirmations et protections restent actifs.
+
+Preuves locales : huit formats 320–1600 px, dont texte à 200 %, valident
+la position des quatre espaces, statut et action côte à côte, cible de
+44 px, navigation clavier vers le contenu et absence de mutation API.
+Huit recettes de défilement valident le contenu unique, le chargement de
+liste et la destination de la prochaine action. Captures PC/mobile/zoom
+inspectées dans `localeo-animation/tmp/animation-header-ux/`.
+Huit recettes de navigation supplémentaires vérifient les droits, liens
+directs, chargement différé et gardes de sortie avec saisie en cours.
+TypeScript, ESLint et build isolé réussis (avertissement de taille Vite).
+
+Impacts : présentation Animation et documentation seulement ; aucune règle
+métier, contrat, permission, migration, configuration d’exploitation ou donnée
+de démonstration modifiée, car les commandes existantes sont réutilisées.
+Vérification locale avec API simulée ; version TEST non inspectée.
+
 ## Correction du 11 novembre 2026 — notifications au-dessus des fenêtres
 
 La demande vise les messages temporaires de succès/erreur, selon la précision
