@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Live - API backend Epic 42",
     "description": "Vue OpenAPI 3.1 des contrats publics, editoriaux et techniques de Localeo Live.",
-    "version": "1.0.0+ade4b09"
+    "version": "1.0.0+d34f33b"
   },
   "paths": {
     "/public/animation-locale/animations/{animation_id}/contact-public": {
@@ -35422,6 +35422,18 @@
             ],
             "title": "Participant Prenom"
           },
+          "participant_reference": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Participant Reference",
+            "description": "Référence d'inscription visible uniquement dans la gestion authentifiée des gains ; nulle dans la lecture personnelle."
+          },
           "operation_remplacement_id": {
             "anyOf": [
               {
@@ -36084,6 +36096,18 @@
             ],
             "title": "Participant Prenom"
           },
+          "participant_reference": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Participant Reference",
+            "description": "Référence d'inscription visible uniquement dans la gestion authentifiée des gains ; nulle dans la lecture personnelle."
+          },
           "operation_remplacement_id": {
             "anyOf": [
               {
@@ -36288,6 +36312,18 @@
               }
             ],
             "title": "Participant Prenom"
+          },
+          "participant_reference": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Participant Reference",
+            "description": "Référence d'inscription visible uniquement dans la gestion authentifiée des gains ; nulle dans la lecture personnelle."
           },
           "operation_remplacement_id": {
             "anyOf": [

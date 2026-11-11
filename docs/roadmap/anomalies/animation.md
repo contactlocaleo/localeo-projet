@@ -1,5 +1,51 @@
 # Registre des anomalies
 
+## Correction du 11 novembre 2026 — consulter les gagnants
+
+- **Signalement** : impossibilité de consulter les gagnants depuis
+  **Résultats → Gains & remise**. Version distante et animation non précisées ;
+  aucun accès aux données de TEST réalisé.
+- **Causes locales reproduites**, sur les bases Animation `3716485` et backend
+  `d34f33b` : une erreur de lecture du tirage empêche même l’appel des gains ;
+  les tombolas publiques ne collectent pas de nom/prénom et les gains libres
+  affichent seulement « Participant — rang N ». Le mapping Coffrets produit
+  aussi une identité vide ou « None None ».
+- **Correctif** : la liste des gagnants libres est relue malgré une
+  indisponibilité technique du suivi du tirage, avec avertissement explicite.
+  Le nom et la référence d’inscription identifient le gagnant dans la liste
+  et dans son détail ; la référence remplace le nom absent. Le mapping Coffrets
+  conserve le même principe. Les refus d’accès et changements de contexte
+  purgent les données, y compris dans le détail. Les reçus absents conservent
+  le parcours de vérification et de rejeu explicite de la même commande.
+- **Preuves** : deux scénarios navigateur échouent avant correction, sur
+  l’identification publique et la liste masquée par un 503 du tirage ; cinq
+  assertions backend échouent sur les identités. Après correction : 40 scénarios
+  navigateur à 320/1280 px, 406 assertions, 11 tests Node, types, lint et build
+  isolé de l’application réussis. La dernière recette des sept cas gagnants
+  confirme 14 scénarios et 96 assertions. Captures inspectées sur PC et mobile,
+  dans `localeo-animation/tmp/tirage-existing-F7uzIu/` et
+  `localeo-animation/tmp/tirage-existing-hJptiX/` (non versionnées).
+  Backend : 732 contrôles architecture/recensement/mapping réussis ; cinq
+  exécutions PostgreSQL finales réussies sur une base locale jetable : deux cas
+  HTTP, deux lectures personnelles Live et le mapping Coffrets SQL. Ils vérifient
+  les références, les refus 403/404, la lecture seule, la pagination et l’absence
+  de référence de gestion dans Live personnel. Une régression élargie
+  intermédiaire avait détecté deux incompatibilités avec ce contrat personnel
+  fermé ; elles ont été corrigées et chacun des deux cas a réussi au rejeu,
+  sans changer le DTO personnel.
+- **Impacts** : projection de lecture, pas de nouvelle règle de tirage.
+  `animation:lire` reste nécessaire ; les permissions de commande sont inchangées.
+  Pas d’adresse brute supplémentaire ni de référence de gestion dans les lectures
+  publiques/personnelles. Contrats OpenAPI E41/E42 actualisés ; les trois schémas
+  de gains du contrat embarqué Animation sont synchronisés avec l’export runtime.
+  Les écarts préexistants du reste de ce snapshot ne sont pas intégrés au correctif.
+  La [spécification des lots](../../specifications/epic-73-animation-et-ou-coffrets/dotation-lots.md#consulter-les-gagnants-dans-localeo-animation)
+  décrit la lecture. Aucune migration ni donnée de démonstration à modifier :
+  la référence existe déjà. Aucun nouveau réglage d’exploitation, envoi de
+  message, tirage réel ou déploiement effectué. Livrer backend et Animation
+  pour disposer de la référence dans l’interface ; vérification TEST à effectuer
+  après déploiement.
+
 ## ANO-ANI-CHARTE-CRM-20261104 — Alignement sur la charte de gestion CRM
 
 La palette, la navigation, les composants de formulaire et la hiérarchie

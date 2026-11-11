@@ -206,6 +206,28 @@ Exemple de dotation numérique (identifiants illustratifs, pas des valeurs de pr
 
 La réservation de ces exemplaires est faite par la commande d’affectation ; enregistrer cette configuration vérifie qu’elle référence exactement les affectations autorisées. Une API ne peut injecter un exemplaire d’une autre commune dans le tableau. Une dotation externe utilise des lignes décrites et leur quantité, pas `exemplaire_id` ; une dotation Coffrets conserve `coffret_id`. Les combinaisons incohérentes sont refusées.
 
+### Consulter les gagnants dans Localeo Animation
+
+Dans **Résultats → Gains & remise**, le gestionnaire disposant de
+`animation:lire` consulte les gagnants et les lots attribués. La permission
+d’envoyer ou de remplacer un gain conditionne les commandes, pas cette lecture.
+Les lots libres utilisent la page de `GET /protected/animation-locale/animations/{id}/gains-libres`
+(25 éléments dans l’interface) ; les Coffrets conservent leur lecture dédiée.
+Seules les attributions confirmées sont visibles.
+
+Le nom et le prénom restent affichés lorsqu’ils existent. La projection de gestion
+libre ajoute `participant_reference`, également visible dans le détail du gain.
+Sans nom, notamment pour une tombola publique, l’interface affiche
+« Gagnant : Participation {référence} ». La projection Coffrets utilise elle aussi
+la référence lorsque le nom est absent. Aucune adresse e-mail brute supplémentaire
+n’est exposée. Les projections personnelles et publiques n’exposent pas cette
+référence de gestion.
+
+Une indisponibilité technique de la lecture du tirage ne masque pas les gains
+libres si leur propre lecture réussit : l’interface indique cette limite et permet
+d’actualiser. Un refus d’accès ou un changement de contexte purge la liste et le
+détail sélectionné. La consultation ne lance ni tirage, ni envoi, ni remise.
+
 ### Gagnant, scan Pro et PIN
 
 | Route cible | Authentification et entrée | Résultat |

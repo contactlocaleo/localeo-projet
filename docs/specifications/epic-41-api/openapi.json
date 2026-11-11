@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Backend - contrat implemente EPIC 41",
     "description": "OpenAPI complet du backend, dont les parcours Animation locale. Genere hors ligne depuis le code local pour les integrations et les mocks ; cet instantane ne prouve pas son deploiement.",
-    "version": "1.0.0+ade4b09"
+    "version": "1.0.0+d34f33b"
   },
   "paths": {
     "/public/identite-acces/interne/connexion": {
@@ -146862,6 +146862,18 @@
             ],
             "title": "Participant Prenom"
           },
+          "participant_reference": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Participant Reference",
+            "description": "Référence d'inscription visible uniquement dans la gestion authentifiée des gains ; nulle dans la lecture personnelle."
+          },
           "operation_remplacement_id": {
             "anyOf": [
               {
@@ -147524,6 +147536,18 @@
             ],
             "title": "Participant Prenom"
           },
+          "participant_reference": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Participant Reference",
+            "description": "Référence d'inscription visible uniquement dans la gestion authentifiée des gains ; nulle dans la lecture personnelle."
+          },
           "operation_remplacement_id": {
             "anyOf": [
               {
@@ -147728,6 +147752,18 @@
               }
             ],
             "title": "Participant Prenom"
+          },
+          "participant_reference": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Participant Reference",
+            "description": "Référence d'inscription visible uniquement dans la gestion authentifiée des gains ; nulle dans la lecture personnelle."
           },
           "operation_remplacement_id": {
             "anyOf": [
