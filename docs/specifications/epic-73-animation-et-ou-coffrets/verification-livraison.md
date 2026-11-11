@@ -1,5 +1,17 @@
 # E73 — Vérification, migration et livraison
 
+## Exécution sur TEST du 11 novembre 2026 — migrations jusqu’à v309
+
+Sur demande explicite, les migrations **v307, v308 et v309** ont été
+appliquées sur TEST avec le lanceur officiel, après contrôle de cible,
+dry-run et sauvegarde. Les empreintes concordent et aucune migration ne
+reste en attente. Readiness Python sur la base distante : **185 contrôles,
+READY**, avec le code backend `3a55fae` et les flags par défaut ; ce résultat
+n’est pas celui de l’endpoint HTTP déployé. Les nouveaux objets ont aussi
+été contrôlés directement. Sauvegarde, empreintes et limites dans le
+[compte rendu d’exploitation](../../exploitation/animation/deploiement-render.md#application-sur-test-confirmée-le-11-novembre-2026).
+Aucune transition d’animation ni recette fonctionnelle distante réalisée.
+
 ## Correctif du 11 novembre 2026 — en-tête et navigation Animation
 
 Prochaine action à côté du statut, navigation alignée dans les quatre

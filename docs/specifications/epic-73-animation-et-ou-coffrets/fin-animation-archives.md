@@ -172,6 +172,13 @@ Aucun déploiement ni réparation de données n’est autorisé par cette spéci
 
 ## Suivi de réalisation
 
+Mise à jour du **11 novembre 2026** : les commits ont été poussés dans
+les cinq dépôts. Sur autorisation explicite ultérieure, la base TEST a
+été migrée de v306 à **v309** avec sauvegarde et contrôles de schéma.
+Voir le [compte rendu d’exploitation](../../exploitation/animation/deploiement-render.md#application-sur-test-confirmée-le-11-novembre-2026)
+pour les preuves et limites. Les constats ci-dessous décrivent la phase de
+réalisation initiale ; aucun parcours métier distant n’est attesté.
+
 Spécification et implémentation locales établies à partir des deux arbitrages
 utilisateur. Les cinq dépôts sont concernés ; aucun déploiement, commit ou push
 au titre de cette évolution. Les suites backend, PostgreSQL et interfaces sont vérifiées localement.
