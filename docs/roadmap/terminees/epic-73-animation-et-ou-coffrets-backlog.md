@@ -1,5 +1,16 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+## Évolution du 11 novembre 2026 — fin explicite et archives
+
+**E73-EVO-FIN-ARCHIVES** : `CLOTUREE → TERMINEE → ARCHIVEE`. La fin exige des
+lots remis ou des dossiers explicitement clôturés et une justification des lots
+sans gagnant ; elle fige la gestion et donne accès au bilan. L’archivage retire
+l’animation de Live et la conserve dans **Animations → Mes archives**.
+[Critères FA-01 à FA-09 et conception](../../specifications/epic-73-animation-et-ou-coffrets/fin-animation-archives.md).
+Spécification, implémentation et vérifications locales réalisées ; preuves
+et limites dans la matrice FA. Déploiement et recette TEST non effectués. La clôture
+historique E73 reste conservée.
+
 ## Correctif du 11 novembre 2026 — envoi instantané et différé des messages
 
 CA-47/48 : deux modes explicites, amorce ciblée au clic immédiat et suivi à

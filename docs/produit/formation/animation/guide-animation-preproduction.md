@@ -3,6 +3,35 @@
 Ce guide accompagne les correctifs ANIM-001 à ANIM-014. Les états affichés
 proviennent du backend; le navigateur ne confirme pas un paiement ou un tirage.
 
+## Terminer une animation et consulter ses archives
+
+Après **Clôturer**, traitez le tirage et les remises, puis ouvrez
+**Résultats → Fin et archivage**. Les compteurs couvrent toute
+l’animation, même si les dossiers occupent plusieurs pages.
+
+- Un lot externe est traité après remise déclarée, ou clôture explicite du
+  dossier avec un motif (refus, abandon…). Un simple contact ne suffit pas.
+- Un bon numérique est traité après utilisation ; clôturer son dossier révoque
+  le bon et exige une confirmation explicite. Une expiration seule ne suffit pas.
+- Un Coffret mis à disposition peut être attesté remis ; l’envoi de l’email
+  ne prouve pas sa réception. Son utilisation ultérieure reste possible.
+- Les lots sans gagnant demandent une justification pour le nombre exact
+  d’unités indiqué. Aucun gagnant fictif n’est créé.
+
+La clôture d’un dossier arrête aussi la préparation des e-mails de ce gain
+qui ne sont pas encore déposés. Les messages déjà déposés restent historiques.
+Réglez les opérations encore en cours ou programmées avant de terminer.
+**Terminer l’animation** exige une confirmation : la gestion devient en
+lecture seule, le bilan est consultable et l’animation reste dans Mon carnet.
+
+**Archiver l’animation** est une seconde action, accessible après la fin.
+Elle retire l’animation de Découvrir et Mon carnet ; les gains acquis restent
+dans Mes lots. Dans **Animations → Mes archives**, recherchez l’animation et
+ouvrez sa fiche ou son bilan en lecture seule. Après une réponse réseau
+incertaine, consultez le reçu avant une reprise ; un clic ne prouve pas le succès.
+
+Voir la [spécification et les critères de vérification](../../../specifications/epic-73-animation-et-ou-coffrets/fin-animation-archives.md).
+
 ## Commune et session
 
 Choisir la commune dans le sélecteur en haut de l'application, puis attendre le

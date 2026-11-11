@@ -1,5 +1,33 @@
 # E73 — Localeo Live, entrée unique des animations
 
+## Correctif du 11 novembre 2026 — lots annoncés dans le carnet
+
+Le bloc personnel **Mon bilan de parcours**, redondant avec l'avancement,
+est remplacé par **Les lots à gagner** pour tous les types d'animation. Le
+résumé de la dotation reste visible sans ouvrir ce bloc : dans chaque vignette
+d'inscription de **Mon carnet**, dans la carte principale de la participation
+et dans la fiche publique. **Mes lots** conserve les gains personnels acquis.
+
+| Critère | Comportement observable |
+| --- | --- |
+| LDOT-01 | La carte montre le total exact des unités prévues et au plus trois lignes publiques de noms/quantités. Un total absent reste inconnu, distinct de zéro ; aucune déduction depuis une page ou les gains personnels. |
+| LDOT-02 | Le bloc Les lots à gagner ouvre volontairement les descriptions publiques, leurs quantités et la pagination existante ; aucun appel public par carte du carnet ni lecture du détail avant ouverture. |
+| LDOT-03 | Le détail personnel et le tableau groupé portent `apercu_dotation` et `nombre_lots_a_gagner`, bornés et limités aux informations publiques. Aucun nom de gagnant, secret, QR ou consigne privée. |
+| LDOT-04 | Pendant l'attente ou une erreur, le résumé principal et la participation restent lisibles. Un détail public retiré n'est jamais présenté comme une dotation vide. Réessai explicite, annulation des lectures obsolètes, clavier et mobile conservés. |
+
+Le backend enrichit le tableau groupé par lecture bornée des animations déjà
+autorisées ; il ne multiplie pas les requêtes pour chaque participation.
+Le contrat optionnel permet d'afficher « Dotation à préciser » pendant la
+livraison producteur/consommateur. Livrer le backend et ses contrats avant le
+frontend pour disposer des résumés complets. Aucun nouveau droit, migration,
+flag, compteur de stock ni notification ; générateur inchangé car les données
+publiques de dotation existent déjà. Les fixtures de recette couvrent la nouvelle
+projection. Preuves locales et limites dans le [bilan](verification-livraison.md).
+
+La fin explicite et l'archivage font l'objet d'une
+[évolution distincte](fin-animation-archives.md) : une inscription `TERMINEE`
+reste dans le carnet jusqu'à `ARCHIVEE`, sans retirer les gains de Mes lots.
+
 ## Correctif du 11 novembre 2026 — détection de mise à jour de la PWA ouverte
 
 L'utilisateur signale l'absence de proposition dans la PWA installée depuis

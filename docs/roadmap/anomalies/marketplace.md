@@ -7,6 +7,16 @@ Les accents et formulations des anciennes notes sont normalisés sans changer le
 
 ## Signalement identifié
 
+### ANO-MPL-E73-LIVE-DOTATION — Bilan redondant et lots annoncés peu visibles
+
+Signalé le **11 novembre 2026**. Mon bilan de parcours répétait les informations
+de progression et ne permettait pas de comprendre les lots prévus depuis la carte.
+Le carnet, la participation et la fiche publique présentent désormais un résumé
+statique ; **Les lots à gagner** ouvre les descriptions et pages publiques.
+Les gains acquis restent dans Mes lots. Contrats et acceptation dans les
+[critères LDOT](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#correctif-du-11-novembre-2026--lots-annoncés-dans-le-carnet).
+Corrigé et vérifié localement ; preuves et limites dans le bilan associé. Aucun déploiement.
+
 ### Correction du 10 novembre 2026 — Participation, lots et découverte mobile
 
 Prolongement du carnet dans la participation : action QR remontée et vérification

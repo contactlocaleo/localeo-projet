@@ -1,5 +1,17 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+Évolution du **11 novembre 2026 — E73-EVO-FIN-ARCHIVES** : fin explicite après
+traitement des lots, gel de la gestion puis archivage consultable dans
+**Animations → Mes archives**. La [spécification](fin-animation-archives.md)
+porte les arbitrages utilisateur et les critères FA-01 à FA-09 ; implémentation
+et vérifications locales réalisées, avec preuves et limites dans son suivi. La clôture historique de l'epic reste inchangée.
+
+Correctif du **11 novembre 2026 — lots annoncés dans Live** : résumé visible
+dans le carnet et la participation, détail volontaire **Les lots à gagner**,
+en remplacement du bilan de parcours redondant. Les
+[critères LDOT](localeo-live-entree-unique.md#correctif-du-11-novembre-2026--lots-annoncés-dans-le-carnet)
+distinguent dotation prévue, gains personnels et données indisponibles.
+
 Évolution du **11 novembre 2026 — E73-EVO-LIVE-DOMAINE** : un service et un
 build Marketplace communs aux domaines Coffrets et Live. Le Static Site est
 conservé : le navigateur reconnaît l'origine du template public et ouvre

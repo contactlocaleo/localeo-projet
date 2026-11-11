@@ -335,6 +335,18 @@ section et précise CA-47/48, sans modifier la clôture historique de l’epic.
 
 ### Parcours et états de campagne
 
+
+Complément du **11 novembre 2026 — retour visible après action** :
+le clic confirmé sur **Envoyer le message** conserve son POST unique et sa
+clé d'idempotence. La confirmation, le refus et le résultat incertain sont
+amenés dans la zone visible de `#app-main` avec un focus accessible. Une
+confirmation ne doit pas rester hors écran au-dessus du formulaire. Le bouton
+reste protégé pendant l'attente ; un résultat incertain exige la lecture du
+reçu et ne provoque aucun renvoi automatique. Le calcul d'aperçu conserve le
+focus de travail, sans retour forcé en tête de fiche. Les libellés continuent
+de distinguer lancement, programmation et publication réellement confirmée.
+
+
 Correction du **11 novembre 2026 — envoi instantané et différé (CA-47/48)** :
 deux modes explicites remplacent « Dès confirmation ». **Envoi instantané**
 se termine par **Envoyer le message** ; après confirmation durable de la

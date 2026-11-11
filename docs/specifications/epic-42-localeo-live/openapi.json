@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Live - API backend Epic 42",
     "description": "Vue OpenAPI 3.1 des contrats publics, editoriaux et techniques de Localeo Live.",
-    "version": "1.0.0+d34f33b"
+    "version": "1.0.0+aae9202"
   },
   "paths": {
     "/public/animation-locale/animations/{animation_id}/contact-public": {
@@ -3992,7 +3992,8 @@
                   "enum": [
                     "A_VENIR",
                     "EN_COURS",
-                    "CLOTUREE"
+                    "CLOTUREE",
+                    "TERMINEE"
                   ],
                   "type": "string"
                 },
@@ -4015,7 +4016,8 @@
                     "enum": [
                       "A_VENIR",
                       "EN_COURS",
-                      "CLOTUREE"
+                      "CLOTUREE",
+                      "TERMINEE"
                     ],
                     "type": "string"
                   }
@@ -11540,6 +11542,34 @@
                 "type": "null"
               }
             ]
+          },
+          "apercu_dotation": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/ApercuDotationPubliquePayload"
+                },
+                "type": "array",
+                "maxItems": 3
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Apercu Dotation"
+          },
+          "nombre_lots_a_gagner": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nombre Lots A Gagner",
+            "description": "Total des unités prévues à la dotation publiée, pas un stock restant."
           }
         },
         "additionalProperties": false,
@@ -11731,7 +11761,8 @@
             "enum": [
               "A_VENIR",
               "EN_COURS",
-              "CLOTUREE"
+              "CLOTUREE",
+              "TERMINEE"
             ],
             "title": "Statut Public"
           },
@@ -12506,6 +12537,7 @@
             "description": "Quantité prévue publique, pas un stock restant."
           }
         },
+        "additionalProperties": false,
         "type": "object",
         "required": [
           "nature",
@@ -14369,6 +14401,31 @@
           "allowedActions"
         ],
         "title": "BilanEconomique"
+      },
+      "BlocageFinAnimationPayload": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "title": "Code"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "nombre": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Nombre"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "code",
+          "libelle",
+          "nombre"
+        ],
+        "title": "BlocageFinAnimationPayload"
       },
       "Body_admin_creer_document_admin_api_documentaire_documents_admin_post": {
         "properties": {
@@ -18626,6 +18683,40 @@
         ],
         "title": "CommandeEtape"
       },
+      "CommandeFinConfirmeePayload": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "CONFIRMEE",
+            "title": "Status"
+          },
+          "result": {
+            "$ref": "#/components/schemas/RecuFinAnimationPayload"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "result"
+        ],
+        "title": "CommandeFinConfirmeePayload"
+      },
+      "CommandeFinEnCoursPayload": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "EN_COURS",
+            "title": "Status"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "title": "CommandeFinEnCoursPayload"
+      },
       "CommandeJoueurInput": {
         "oneOf": [
           {
@@ -20619,6 +20710,33 @@
           "restantes"
         ],
         "title": "CompteursDTO"
+      },
+      "CompteursFinAnimationPayload": {
+        "properties": {
+          "dossiers_non_resolus": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Dossiers Non Resolus"
+          },
+          "nombre_unites_sans_gagnant": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Nombre Unites Sans Gagnant"
+          },
+          "operations_en_cours": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Operations En Cours"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "dossiers_non_resolus",
+          "nombre_unites_sans_gagnant",
+          "operations_en_cours"
+        ],
+        "title": "CompteursFinAnimationPayload"
       },
       "CompteursParticipantsEmailPayload": {
         "properties": {
@@ -24998,6 +25116,93 @@
         ],
         "title": "DecisionAppliqueeActualisation"
       },
+      "DecisionFinDossierInput": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "confirmation": {
+            "type": "boolean",
+            "title": "Confirmation"
+          },
+          "version_dossier": {
+            "type": "string",
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Version Dossier"
+          },
+          "decision": {
+            "type": "string",
+            "enum": [
+              "ATTESTER_REMISE",
+              "CLOTURER_DOSSIER",
+              "JUSTIFIER_NON_ATTRIBUES"
+            ],
+            "title": "Decision"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 5,
+            "title": "Motif"
+          },
+          "nombre_unites": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nombre Unites"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "confirmation",
+          "version_dossier",
+          "decision",
+          "motif"
+        ],
+        "title": "DecisionFinDossierInput"
+      },
+      "DecisionFinDossierPayload": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "title": "Type"
+          },
+          "motif": {
+            "type": "string",
+            "title": "Motif"
+          },
+          "acteur_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Acteur Id"
+          },
+          "decided_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Decided At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "type",
+          "motif",
+          "acteur_id",
+          "decided_at"
+        ],
+        "title": "DecisionFinDossierPayload"
+      },
       "DecisionImportPayload": {
         "properties": {
           "expected_version": {
@@ -28430,6 +28635,89 @@
         ],
         "title": "DossierCommande"
       },
+      "DossierFinAnimationPayload": {
+        "properties": {
+          "ref": {
+            "type": "string",
+            "title": "Ref"
+          },
+          "nature": {
+            "type": "string",
+            "enum": [
+              "COFFRET",
+              "LOT_EXTERNE",
+              "BON_NUMERIQUE",
+              "SANS_GAGNANT"
+            ],
+            "title": "Nature"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "beneficiaire": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Beneficiaire"
+          },
+          "quantite": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Quantite"
+          },
+          "statut_resolution": {
+            "type": "string",
+            "enum": [
+              "A_TRAITER",
+              "REMIS",
+              "CLOTURE",
+              "JUSTIFIE"
+            ],
+            "title": "Statut Resolution"
+          },
+          "version_dossier": {
+            "type": "string",
+            "title": "Version Dossier"
+          },
+          "actions_disponibles": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Actions Disponibles"
+          },
+          "decision": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DecisionFinDossierPayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "ref",
+          "nature",
+          "libelle",
+          "beneficiaire",
+          "quantite",
+          "statut_resolution",
+          "version_dossier",
+          "actions_disponibles",
+          "decision"
+        ],
+        "title": "DossierFinAnimationPayload"
+      },
       "DossierPatch": {
         "properties": {
           "expected_version": {
@@ -30744,6 +31032,78 @@
           "expires_at"
         ],
         "title": "EtatCourantBonPin"
+      },
+      "EtatFinAnimationPayload": {
+        "properties": {
+          "animation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animation Id"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Version"
+          },
+          "compteurs": {
+            "$ref": "#/components/schemas/CompteursFinAnimationPayload"
+          },
+          "blocages": {
+            "items": {
+              "$ref": "#/components/schemas/BlocageFinAnimationPayload"
+            },
+            "type": "array",
+            "title": "Blocages"
+          },
+          "actions_disponibles": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Actions Disponibles"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/DossierFinAnimationPayload"
+            },
+            "type": "array",
+            "maxItems": 100,
+            "title": "Items"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "animation_id",
+          "statut",
+          "version",
+          "compteurs",
+          "blocages",
+          "actions_disponibles",
+          "items",
+          "next_cursor",
+          "has_more"
+        ],
+        "title": "EtatFinAnimationPayload"
       },
       "EtatPin": {
         "properties": {
@@ -52291,6 +52651,34 @@
                 "type": "null"
               }
             ]
+          },
+          "apercu_dotation": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/ApercuDotationPubliquePayload"
+                },
+                "type": "array",
+                "maxItems": 3
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Apercu Dotation"
+          },
+          "nombre_lots_a_gagner": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nombre Lots A Gagner",
+            "description": "Total des unités prévues à la dotation publiée, pas un stock restant."
           }
         },
         "type": "object",
@@ -60413,6 +60801,52 @@
         ],
         "title": "RecuDecisionMissionPayload"
       },
+      "RecuFinAnimationPayload": {
+        "properties": {
+          "animation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animation Id"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "operation": {
+            "type": "string",
+            "enum": [
+              "DECISION_DOSSIER",
+              "TERMINER_ANIMATION",
+              "ARCHIVER_ANIMATION"
+            ],
+            "title": "Operation"
+          },
+          "dossier_ref": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Dossier Ref"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "animation_id",
+          "statut",
+          "version",
+          "operation"
+        ],
+        "title": "RecuFinAnimationPayload"
+      },
       "RecuGestionParticipationPayload": {
         "properties": {
           "id": {
@@ -68024,6 +68458,26 @@
           "expectedVersion"
         ],
         "title": "TransitionDemandeGroupeeRequest"
+      },
+      "TransitionFinAnimationInput": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "confirmation": {
+            "type": "boolean",
+            "title": "Confirmation"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "confirmation"
+        ],
+        "title": "TransitionFinAnimationInput"
       },
       "TransitionRequest": {
         "properties": {

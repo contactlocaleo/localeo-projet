@@ -1,5 +1,60 @@
 # Registre des anomalies
 
+## Correction du 11 novembre 2026 — notifications au-dessus des fenêtres
+
+La demande vise les messages temporaires de succès/erreur, selon la précision
+utilisateur. Le Toaster global avait un niveau de superposition 100, tandis
+que `ManagementDialog` utilisait 101. La reproduction PC/mobile montre que le
+bouton de fermeture du message était recouvert par la fenêtre : contrôle par
+`elementFromPoint`, rapport rouge `localeo-animation/tmp/notification-overlay-AYTuag/`.
+
+Le Toaster est extrait dans `components/Toaster.tsx` et rendu par portail dans
+le body ; la couche commune `--app-layer-notifications: 110` est au-dessus des
+fenêtres existantes (50–101). Seuls les messages interceptent les pointeurs.
+Le composant conserve les annonces `status`/`alert`, les détails d'erreur,
+la fermeture et l'expiration. La fenêtre conserve sa navigation clavier et
+son focus ; fermer la notification ne ferme pas la fenêtre.
+
+Recette réussie à 320/1280 px : messages succès/erreur, détail, hit-test
+de fermeture, clavier, Échap, réouverture avec message déjà présent,
+expiration et absence de débordement. Rapport
+`localeo-animation/tmp/notification-overlay-4PphqG/report.json` ; captures avant
+et après conservées. Reproduction : `node tests/browser/notification-overlay.mjs`.
+Présentation seule : aucune règle métier, API, permission, migration, batch,
+configuration d'exploitation ni donnée de démonstration modifiée pour ce
+correctif. Aucun déploiement attesté sur TEST.
+
+
+## Correction du 11 novembre 2026 — retour visible de l'envoi d'un message
+
+Le clic sur **Envoyer le message** semble sans effet, sans confirmation ni
+erreur. Sur la base Animation `e197d86` avec modifications locales, le cas
+minimal reproduit bien un POST `/envoyer`, mais sa confirmation est à
+`y=-1180 px` hors de la zone visible après le clic à 320 px. Le banc utilise
+le vrai formulaire et `#app-main` défilant ; l'API est simulée et aucun
+message n'est diffusé réellement. Capture d'échec conservée dans
+`localeo-animation/tmp/communication-send-feedback-fOR6jD/`.
+
+Les retours de commande utilisent le composant partagé `FeedbackMessage` :
+confirmation, refus et résultat incertain reçoivent le focus et deviennent
+visibles après l'action. Le calcul d'aperçu conserve le focus de travail.
+Confirmation explicite, droits, versions, bouton bloqué pendant la requête,
+clé unique et rapprochement par reçu sont conservés.
+
+Preuves : **6 scénarios navigateur réussis** à 320/1280 px (succès,
+refus 409 et réponse perdue), rapport `tmp/communication-send-feedback-H50t6G/report.json` ;
+**11 scénarios de workflow** dans `tmp/communication-workflow-9NiHJY/` ;
+**15 tests Node** campagnes, HTTP et suivi réussis. La preuve vérifie le POST,
+la position dans le viewport et l'absence de double envoi ; la seule présence
+d'un texte dans le DOM ne suffit pas. TypeScript, lint complet et build isolé de production réussis ; avertissement de taille du bundle consigné au bilan.
+
+Impact limité à la présentation Animation et ses fixtures. Aucun changement
+du contrat, des règles de diffusion, des permissions, de migration, de batch,
+de configuration ni du générateur ; leurs comportements ne sont pas modifiés.
+Le cas distant signalé n'a pas été consulté ; le correctif local ne constitue
+pas une preuve d'envoi ni de déploiement sur TEST.
+
+
 ## Correction du 11 novembre 2026 — timeline du cycle de vie
 
 - **Signalement** : « Test animation Thibaut » clôturée, mais des étapes de

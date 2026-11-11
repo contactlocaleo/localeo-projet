@@ -1,5 +1,145 @@
 # E73 — Vérification, migration et livraison
 
+## Correctifs du 11 novembre 2026 — retours d'action visibles et notifications
+
+Base Animation `e197d86`, arbre local incluant Fin/Archives. Le clic d'envoi
+émet son POST, mais la confirmation du cas minimal reste hors viewport
+(`y=-1180 px` à 320 px, rapport rouge `tmp/communication-send-feedback-fOR6jD/`).
+Confirmation, refus et résultat incertain reçoivent désormais le focus et sont
+amenés dans la zone visible de `#app-main`. L'aperçu conserve le focus de
+travail ; aucun renvoi automatique, retrait de confirmation ni changement des
+règles serveur. Les retours restent fondés sur l'état réel de la campagne.
+
+Le message temporaire global était masqué par `ManagementDialog` (100 contre
+101). Le portail body et la couche commune 110 le placent au-dessus des
+fenêtres, sans voler leur focus. Le clic de fermeture, les annonces
+accessibles et l'expiration restent fonctionnels. Rouge
+`tmp/notification-overlay-AYTuag/`, vert `tmp/notification-overlay-4PphqG/`.
+
+Preuves locales : **6 recettes d'envoi à 320/1280 px**, succès/refus/réponse
+perdue et reçu sans renvoi (`tmp/communication-send-feedback-H50t6G/report.json`) ;
+**11 recettes du workflow** (`tmp/communication-workflow-9NiHJY/`) ;
+**15 tests Node campagnes/contrats/suivi** et **26 tests accessibilité,
+confidentialité et feedback**. Recette notifications PC/mobile avec hit-test
+réel, fermeture, erreur détaillée, clavier, réouverture et expiration.
+Captures succès 320 px inspectées. ESLint et build isolé de production
+réussis ; le bundle principal 500,83 kB produit un avertissement Vite de taille,
+sans échec. TypeScript final réussi.
+
+Impacts : interface Animation et documentation uniquement pour ces deux
+correctifs. Contrats, permissions, données, migrations, batchs, configuration
+et générateur sans changement car les commandes et règles restent identiques.
+L'environnement et la campagne distants du dernier signalement ne sont pas
+confirmés ; aucun envoi réel ni déploiement TEST effectué.
+
+
+## Évolution du 11 novembre 2026 — fin explicite et archives
+
+**E73-EVO-FIN-ARCHIVES** est implémentée localement dans les cinq dépôts.
+Bases : Projet `cedc243`, Backend `aae9202`, Animation `e197d86`,
+Marketplace `c8ef0e9`, Pro `ce9e187`. Arbres locaux modifiés ; aucun commit,
+push, déploiement ni changement des données TEST dans cette intervention.
+
+Le parcours devient **Clôturée → Terminée → Archivée**. Dans Animation,
+**Résultats → Fin et archivage** présente les dossiers et blocages avant une
+confirmation explicite. La fin exige les lots remis ou les dossiers clôturés
+avec motif, et la justification exacte des unités sans gagnant. Elle fige la
+gestion tout en conservant le bilan. L'archivage retire l'animation de Live,
+la conserve dans **Animations → Mes archives**, et préserve les gains et
+les droits autonomes Coffrets déjà acquis.
+
+La [matrice FA-01 à FA-09](fin-animation-archives.md#suivi-de-réalisation)
+consigne les preuves : **839 tests backend réussis**, **13 cas PostgreSQL
+réussis**, 94 tests ciblés des lecteurs et 2 tests PostgreSQL supplémentaires,
+5 projections privées, 22 recettes navigateur Fin/Archives et 26 recettes
+timeline, types/lint/build Animation et 18 tests Node. Pro : **50 tests Vitest**
+du modèle et des contrats API. Les suites se recouvrent ; ces nombres ne sont
+pas un total de tests distincts. Les recettes navigateur utilisent une API
+simulée ; les courses réelles entre fin et correction de remise externe sont
+vérifiées en PostgreSQL dans les deux ordres. Pas de course worker PostgreSQL
+séparée revendiquée : ses refus après verrou ont des preuves unitaires.
+
+Démonstration : **85 tests unitaires réussis**, puis cinq nouveaux cas
+PostgreSQL de recette et un cas historique rejoué, tous réussis. La suite
+complète avec migrations, génération, installation, échec injecté et
+restauration donne **8 réussites / 2 échecs d'écriture d'archive** sous un
+chemin Windows de 264 caractères. Les deux variantes finales passent en reprise
+ciblée dans un chemin court, sans changer d'assertion. Rapports
+`backend/tmp/fin-demo-detached-a44862b6e6434003af97d25bf3b5e825-proof/results.xml`
+et `backend/tmp/dq4d2007ed/results.xml` ; aucun skip. Ce sont huit succès du
+passage principal et deux reprises, pas un nouveau passage global vert.
+Les fixtures corrigent le périmètre géographique CRM et la vérification des
+contraintes différées ; la comparaison complète de restauration tient compte
+de la neutralisation explicite des quatre jetons de baux CRM. Les premières
+sorties en échec sont conservées. Les clusters jetables sont arrêtés.
+
+La migration additive **`v309_fin_animation_archives.sql`** précède le backend,
+puis les interfaces Animation/Live/Pro. Elle n'a été appliquée qu'aux bases
+jetables de vérification. Aucun flag ni reclassement automatique d'animations
+historiques. E41/E42 sont régénérés ; Animation embarque le même E41.
+Pro exporte les mêmes chemins/schémas (huit différences éditoriales de
+titres/descriptions). Les empreintes du schéma Live sont synchronisées.
+Voir l'[ordre de livraison et repli](../../exploitation/animation/deploiement-render.md)
+et la [recette de démonstration](../../exploitation/demonstration/realisation-recette.md).
+La recette humaine mobile, la migration TEST et le déploiement restent à réaliser.
+
+## Correctif du 11 novembre 2026 — résumé des lots annoncés
+
+Bases : Projet `cedc243`, Backend `aae9202`, Marketplace `c8ef0e9` ; arbres
+locaux modifiés, sans commit, push ou déploiement pour cette intervention.
+Le bloc personnel Mon bilan de parcours est remplacé par **Les lots à gagner**.
+Le résumé statique apparaît dans la vignette du carnet, la carte principale de
+la participation et le détail public. Les descriptions/pages sont ouvertes
+volontairement ; Mes lots reste réservé aux gains acquis. Critères
+[LDOT-01 à LDOT-04](localeo-live-entree-unique.md#correctif-du-11-novembre-2026--lots-annoncés-dans-le-carnet).
+
+Le backend produit `apercu_dotation` (trois lignes publiques maximum) et
+`nombre_lots_a_gagner` (unités prévues, jamais stock restant). Un résumé absent
+reste inconnu, distinct d'une dotation nulle. La lecture groupée enrichit les
+seules animations déjà autorisées, sans appel détail par carte. Les sources
+canoniques OpenAPI E41/E42 et le contrat moteur embarqué Live sont régénérés.
+
+Preuves backend du lot dotations : **74 tests ciblés**, **689 contrôles
+d'architecture** puis **4 tests PostgreSQL et 1 test sans base réussis / 12 désélectionnés**,
+sur PostgreSQL 18 jetable local. Les suites se recouvrent et ne s'additionnent
+pas. Journal de la dernière passe PG : `backend/tmp/live-dotation-pg-preuves.txt`.
+Les lectures 1/10/50 participations gardent le même nombre de requêtes (15,
+puis 17 avec dotations privées sur cinquante animations). Seuls 3/30/150 noms
+au maximum sont hydratés. Totaux Coffrets/Libre/Numérique, refus, confidentialité
+et détail public/pagination d'une `CLOTUREE` sont vérifiés. Ce budget constant
+n'est pas une campagne de charge ni une mesure de capacité hébergée.
+
+Preuves Marketplace : **23 tests Node réussis** dans
+`tests/security/live-planned-prizes.test.cjs`, `live-unified-carnet.test.cjs` et
+`live-public-detail-presentation.test.cjs` ; lint ciblé des sources touchées.
+Les parcours synthétiques couvrent résumé avant clic, aucune lecture publique
+par carte, ouverture clavier, chargement, descriptions, pagination en panne,
+reprise, confidentialité et conservation de l'accès personnel. Le détail
+public retiré (403/404/410) reste indisponible : aucune dotation vide inventée.
+
+Recette navigateur avec build de production isolé :
+`node scripts/run-visual-tests.cjs --port 8197 tests/visual/live-game.spec.cjs tests/visual/live-unified-carnet.spec.cjs tests/visual/live-animation-challenge.spec.cjs tests/visual/external-animation-gain.spec.cjs --workers=3`.
+Rapport `test-results/visual-runs/2026-11-11T15-25-29-555Z-g8L0AL` :
+**63 réussites et deux échecs** sur des assertions historiques du parcours
+gagnant. Les fixtures antérieures omettaient les paramètres moteurs ; le test
+exigeait aussi l'ancien ordre visuel et le libellé d'actualisation d'une chasse
+sur une tombola. Après adaptation explicite au parcours existant, les deux cas
+320/1280 passent dans `2026-11-11T15-33-40-819Z-OIeyuX` ; aucune assertion de
+confidentialité, d'état de remise ou de pagination supprimée. Ces deux reprises
+ne constituent pas un second passage complet des 65 scénarios. Le premier
+passage `15-20-21` a révélé le repli manquant d'un aperçu normalisé vide :
+correction vérifiée dans le passage suivant, rapports d'échec conservés.
+Après retouche CSS de l'alignement du lien de détail, les trois fiches publiques
+320/390/1280 passent dans `2026-11-11T15-36-18-221Z-RsUujN`.
+
+Le catalogue public utilise des informations publiées ; si l'animation sort de
+ce périmètre (publication/abonnement/commune), le détail des lots peut être
+indisponible tandis que le résumé de la participation demeure consultable.
+Pas de nouvelle permission, notification, configuration ou migration propre à
+LDOT. Les fixtures publiques existantes alimentent déjà la dotation du
+générateur. L'évolution de fin/archives ci-dessous possède sa propre migration.
+La PWA installée, la recette humaine et TEST n'ont pas été vérifiés ici.
+
 ## Correctif du 11 novembre 2026 — envoi instantané et différé des messages
 
 Bases : Backend **`9aee34a`**, Animation **`2fbeea4`**, Projet **`db6feaa`**.
