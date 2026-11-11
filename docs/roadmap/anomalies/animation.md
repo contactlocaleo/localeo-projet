@@ -1,5 +1,34 @@
 # Registre des anomalies
 
+## Correction du 11 novembre 2026 — archives hors du tableau de bord
+
+- **Attendu** : une animation archivée se consulte depuis **Animations → Mes
+  archives**, sans apparaître dans le tableau de bord. Une animation simplement
+  terminée reste présente jusqu’à l’archivage.
+- **Cause démontrée** : dans Backend `b1890ce`, `ServicePilotageAnimation.dashboard`
+  charge toutes les animations de l’organisation/commune sans exclure `ARCHIVEE`.
+  Les alertes ne suivent pas le périmètre des animations retenues. Animation
+  `758a1d0` propose en outre le filtre « Archivée ».
+- **Correction locale** : exclusion avant les agrégats et la liste d’actions,
+  alertes d’animation limitées au même périmètre, alertes générales conservées ;
+  retrait de l’option dans l’interface. Le profil d’activité et les bilans
+  historiques conservent les archives. Rattachement à
+  [E73-EVO-FIN-ARCHIVES / FA-06](../../specifications/epic-73-animation-et-ou-coffrets/fin-animation-archives.md).
+- **Preuves** : quatre cas de reproduction en échec avant correction, puis
+  huit tests applicatifs réussis avec les actions adjacentes ; huit parcours
+  navigateur réussis à 1600/390/320 px et texte à 200 %, sans écriture API.
+  Rapports locaux `localeo-backend/tmp/dashboard-archives-red.xml`,
+  `dashboard-archives-green.xml`, et journal
+  `localeo-animation/tmp/dashboard-archives-browser.txt`.
+  Les 697 contrôles d’architecture/recensement backend, les deux tests de période,
+  TypeScript, ESLint, build isolé et contrôles documentaires réussissent aussi.
+  Captures mobile/ordinateur relues ; avertissement de taille du bundle déjà
+  présent au build précédent. Bases indiquées ci-dessus plus modifications locales.
+- **Impacts** : projection de lecture backend et présentation Animation ; aucun
+  changement de transition, habilitation, schéma API, migration, batch ou réglage.
+  Générateur et autres consommateurs inchangés : aucun nouveau statut/champ ni
+  jeu à réparer. Aucun accès à TEST ni déploiement effectué.
+
 ## Correction du 11 novembre 2026 — lecture visuelle du Bilan
 
 - **Cause** : dans Animation `0114244`, chaque mesure répliquait son propre

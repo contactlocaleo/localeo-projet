@@ -19,6 +19,15 @@ La demande remplace les étapes terminales de présentation « Tirage terminé �
   depuis **Animations → Mes archives** dans Localeo Animation. Aucun accès,
   gain acquis, justificatif ni historique n’est supprimé par cet archivage.
 
+Le **Tableau de bord** exclut systématiquement les animations `ARCHIVEE` :
+liste d’actions, alertes liées à une animation, indicateurs, séries et classement
+des commerces. Aucun filtre n’y propose les archives ; une requête directe
+filtrée sur une archive ne les réintroduit pas. Les alertes générales restent
+visibles et les alertes d’animation suivent le périmètre des filtres du tableau.
+Les animations `TERMINEE` restent présentes jusqu’à leur archivage explicite.
+Cette projection opérationnelle ne modifie pas les bilans ni le profil historique
+« Votre activité dans la commune », qui conservent l’activité des archives.
+
 L’animation ne se termine ni sur une date, ni sur l’envoi des e-mails, ni sur la
 seule confirmation du tirage. Les actions disponibles viennent du backend.
 Les opérations de tirage et de remise restent visibles dans leur suivi dédié ;
@@ -160,7 +169,7 @@ identités restent distinctes ; l’archivage ne purge aucun de ces registres.
 | FA-03 | Attestation et clôture sont explicites, motivées, auditées et refusées hors droits/tenant/version | Tests HTTP/PG, rollback clôture/révocation et rejeu |
 | FA-04 | Fin confirmée : statut TERMINEE, bilan lisible et mutations refusées sur API, ERP et workers | Matrice des entrées, concurrence PostgreSQL et garde de domaine |
 | FA-05 | Archiver exige TERMINEE, retire l’animation de Live et conserve les lots/droits acquis | Contrats catalogue/tableau privé, Mes lots et régressions Coffrets/Pro |
-| FA-06 | Mes archives ouvre une liste paginée et les fiches/bilans en lecture seule | Recette Animation PC/mobile, erreurs, liens directs et clavier |
+| FA-06 | Mes archives ouvre une liste paginée et les fiches/bilans en lecture seule ; les archives sont exclues du Tableau de bord et de tous ses agrégats/alertes, même avec un filtre direct | Recette Animation PC/mobile, erreurs, liens directs et clavier ; tests de projection dashboard |
 | FA-07 | Timeline à six étapes, prochaine action concrète et compteurs de blocage visibles | Contrat workflow et recette de chaque état, sans progression inventée |
 | FA-08 | Fin/reprise/archivage sont idempotents, sans double effet et sûrs en concurrence | PG jetable : remise, correction, remplacement et workers face à la fin |
 | FA-09 | Démonstration, conservation/export/restauration et documentation utilisent le nouveau modèle | Tests générateur et lecteurs ; aucune génération sur environnement réel |
