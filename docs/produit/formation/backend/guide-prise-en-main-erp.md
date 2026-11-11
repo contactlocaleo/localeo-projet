@@ -161,6 +161,35 @@ pour un exercice distinct qui prévoit explicitement une nouvelle demande.
    invitation ne suffit pas à ouvrir les droits. Depuis une souscription
    activée, **Gérer les modules** permet de retrouver ses droits complémentaires.
 
+### Gérer les habilitations d’un utilisateur Animation
+
+Dans **Équipes et contrats → Accès partenaires**, recherche la personne par son
+nom ou son email, puis ouvre sa fiche. Choisis l’organisation concernée avant
+de modifier ses accès : un même compte peut appartenir à plusieurs organisations.
+
+La synthèse distingue le rôle, l’état de l’appartenance, les communes et les
+autorisations complémentaires **Effectuer des achats**, **Importer des commerçants** et
+**Envoyer des communications**. Les permissions d’animation dépendent du rôle ; leur exercice
+reste soumis aux habilitations actives et aux droits commerciaux. Une
+autorisation d’import n’achète ni n’active le module Import.
+
+Pour ajouter ou retirer des droits, ouvre la modification des habilitations,
+ajuste le rôle, les communes ou les autorisations, renseigne le motif et confirme
+le récapitulatif. Le résultat concerne uniquement l’appartenance sélectionnée.
+Ajouter une autorisation complémentaire conserve les autres permissions et les
+dates de validité existantes. Suspendre ou révoquer l’appartenance retire ses
+accès sans effacer l’utilisateur ni ses droits dans une autre organisation.
+
+Un responsable possède automatiquement les trois autorisations complémentaires.
+Le dernier responsable ne peut pas être retiré par cette modification ; utilise
+le transfert accepté ou la récupération assistée prévue pour ce cas. Les
+organisations encore gérées par les habilitations historiques conservent leur
+formulaire de permissions par commune.
+
+Après un conflit, conserve les informations utiles puis recharge les droits
+avant une nouvelle décision. Si la réponse réseau est perdue, reprends la même
+demande pour vérifier son résultat sans appliquer une seconde modification.
+
 ### Gérer les modules d’une souscription
 
 L’administrateur peut aussi partir de **Supervision technique → Modules des

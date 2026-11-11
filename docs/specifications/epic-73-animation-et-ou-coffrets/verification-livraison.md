@@ -1,5 +1,87 @@
 # E73 — Vérification, migration et livraison
 
+## Évolution — E73-EVO-HABILITATIONS-ERP, 11 novembre 2026
+
+Périmètre : [HA-01 à HA-07](perimetres-parcours-saas.md#évolution-du-11-novembre-2026--e73-evo-habilitations-erp).
+Bases : Backend `c6a4c2b`, Projet `d2a70ba`. Spécification, implémentation,
+commit et push demandés. Les changements locaux préexistants de l’outillage
+Codex ne font pas partie de cette livraison.
+Commit applicatif correspondant aux preuves : Backend `f449594`.
+
+La fiche ERP Accès partenaires présente les habilitations avant les informations
+de connexion. Le choix d’organisation inclut les appartenances inactives ; la
+lecture distingue rôle, permissions effectives par commune, dates et trois
+autorisations complémentaires. Les modifications sont motivées et confirmées,
+avec reprise de la même commande après réponse réseau perdue.
+
+La nouvelle commande interne appelle une transition explicite de
+`EquipeOrganisation`, sans emprunter l’identité d’un responsable du portail.
+Les protections du dernier responsable, des communes validées, des versions et
+du périmètre ERP sont conservées. La revue indépendante a fait préciser la
+conservation des permissions et échéances historiques lors d’une modification
+des seules autorisations, ainsi que l’affichage des organisations inactives.
+
+Le contrat OpenAPI a été régénéré hors ligne par
+`py -3.14 scripts/documentation/generate_epic41_openapi.py` : **1 096 routes**.
+L’export intègre aussi les routes de supervision Web Push déjà présentes dans
+le backend depuis la livraison précédente, qui manquaient dans l’instantané
+documentaire ; aucune fonction Web Push n’est modifiée par cette évolution.
+`py -3.14 scripts/validation/test_isolated.py tests/scripts/test_generate_openapi_documentation.py tests/security/test_internal_openapi_protection.py -q --tb=short`
+: **10 tests réussis**.
+
+Contrôles d’architecture :
+`py -3.14 scripts/validation/test_isolated.py tests/architecture tests/domain/test_domain_dedicated_classes.py tests/application/use_cases/test_use_case_business_test_coverage.py -q --tb=short`
+: **689 tests réussis**. Le domaine conserve les règles de modification ; la
+nouvelle projection et la coordination transactionnelle restent dans l’application.
+Non-régression du shell : `node tests/browser/erp-menu-ux.cjs`, **35 scénarios**,
+et `node tests/browser/erp-page-template.cjs`, **24 scénarios**, réussis.
+
+| Critères | Preuves de comportement |
+| --- | --- |
+| HA-02/03/04/05 | Runner isolé Python 3.14 : `tests/domain/identite_acces/test_equipe_organisation_dedicated.py`, `tests/application/services/test_equipes_animation.py`, `tests/api/test_equipes_animation_api.py`, `tests/security/test_habilitations_animation_erp_access.py`, `tests/security/test_habilitations_animation_erp_postgres.py`, `tests/security/test_equipes_animation_postgres.py` avec `--postgres-test-url postgresql+psycopg://audit_test@127.0.0.1:55488/localeo_audit_test -q --tb=short` : **75 réussis**, aucun skip. Gardes réelles ERP/CSRF, dernier responsable, cible étrangère, audit et rollback, rejeu, version, dates/permissions conservées, autre organisation et ses sessions préservées. |
+| HA-01/04/07, dernière révision | Même runner, fichiers domaine équipe et PostgreSQL habilitations ERP : **36 réussis** après compactage de l’empreinte du périmètre dans le curseur. Cible au-delà de 25 membres incluse au succès et au rejeu ; absence d’habilitation non convertie en nouvel accès ; curseur lié au périmètre même avec plus de 100 communes. Ce passage recouvre une partie des 75 tests, il ne s’y additionne pas. |
+| HA-06, accès historiques | Runner isolé : `tests/api/test_acces_animation_erp.py`, `tests/domaine/test_gestion_acces_animation.py`, `tests/application/identite_acces/test_gestion_acces_animation_reset.py` : **5 réussis**. |
+| Générateur | Runner isolé : `tests/security/test_demo_equipes_animation_postgres.py` avec `--postgres-test-url postgresql+psycopg://audit_test@127.0.0.1:55488/localeo_audit_migrations_test -q --tb=short` : **1 réussi** sur base dédiée créée pour le contrôle, migrations et restauration incluses. Le premier passage sur la base de tests ordinaire ignorait ce scénario faute de base de migrations vide ; ce prérequis a ensuite été satisfait. Avertissement SQLAlchemy de réflexion de `dialect_options` dans `scripts/demonstration/database.py:79`, sans échec. |
+
+Recette navigateur finale :
+
+| Critères | Preuves de parcours |
+| --- | --- |
+| HA-01 à HA-07 | `node tests/browser/habilitations-animation-erp.cjs` : réussi à **320, 390 et 1280 px**. Synthèse, dates Paris, périmètre, pagination bornée et erreur préservant la saisie, rôle/autorisations, confirmation et rejeu exact, conflit et erreur 422 sans perte de saisie, dernier responsable, suspension, expiration de session. Aucun repli vers une édition historique après échec de lecture ; filtrage historique, abandon explicite des saisies et relecture de version fraîche. |
+| Non-régression équipes | `node tests/browser/equipes-animation-erp.cjs` : réussi à **2 largeurs**, validation et reprise des responsabilités conservées. |
+| Navigation et dossier | `node tests/browser/animation-navigation-erp.cjs` : **26 scénarios réussis** ; `node tests/browser/gestionnaire-souscription-ux.cjs` : **63 scénarios réussis**. |
+
+Rapport final et captures hors Git :
+`.artifacts/habilitations-erp/ui/2026-11-11T02-56-29-075Z/report.json`.
+Les captures mobile et ordinateur ont été inspectées : cases alignées, actions
+tactiles, formulaire lisible et focus visible sous l’en-tête fixe. La recette
+vérifie aussi le texte agrandi à 200 % par script et le clavier. Les API sont
+simulées avec les vrais composants ERP ; le shell est vérifié séparément.
+Ce contrôle ne remplace pas une recette sur téléphone physique, avec lecteur
+d’écran humain ou sur l’environnement TEST déployé.
+
+Contrôles documentaires : `py -3.14 scripts/check_guidance.py` et
+`py -3.14 scripts/sync_documentation.py --check-sources` réussis : **97 guides,
+1 196 liens, aucun défaut ; 148 sources vérifiées**.
+
+La mesure finale se trouve hors Git dans
+`.artifacts/habilitations-erp/backend/7ad7f4e2d0e4467383b2ce8268cfb7c1/performance.json`.
+Avec 100 puis 1 000 appartenances, une page exige **1 requête**, le scénario
+mixte lecture/écriture **42 requêtes constantes**. p95 lecture **26,67 / 41,59 ms**,
+p95 mixte **310,55 / 240,40 ms**, sous le budget local de 500 ms. Ces mesures
+sur poste Windows/PostgreSQL 18, pendant des recettes locales concurrentes,
+ne constituent pas un SLA de production.
+
+Impacts : backend, ERP, contrat documentaire, guide utilisateur et procédure
+d’exploitation. Aucun contrat du portail Animation/Pro/Live n’est modifié.
+Aucune migration, nouvelle table, variable, tâche ou attribution de capacité :
+les appartenances, reçus et audits existants sont réutilisés. Les données du
+générateur utilisent les mêmes circuits ; les nouvelles situations sont
+couvertes par les fixtures synthétiques. Recette navigateur avec API simulées,
+tests de persistance sur PostgreSQL jetable ; aucune modification d’un compte
+réel ni envoi externe. Déploiement et recette TEST restent distincts de ces
+preuves locales ; la clôture historique E73 est conservée.
+
 ## Évolution — E73-EVO-MODULES-ERP-UX, 11 novembre 2026
 
 Périmètre : [MU-01 à MU-06](modules-souscriptions-import-communication.md#évolution-du-11-novembre-2026--e73-evo-modules-erp-ux).

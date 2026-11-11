@@ -1,5 +1,14 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+## Évolution du 11 novembre 2026 — habilitations Animation dans l’ERP
+
+**E73-EVO-HABILITATIONS-ERP** : gérer lisiblement les droits des utilisateurs
+par organisation, avec rôles, communes, autorisations complémentaires et décisions
+motivées. Les [critères HA-01 à HA-07](../../specifications/epic-73-animation-et-ou-coffrets/perimetres-parcours-saas.md#évolution-du-11-novembre-2026--e73-evo-habilitations-erp)
+couvrent les équipes et la conservation du circuit historique. Spécification,
+implémentation et vérifications locales réalisées ; clôture historique conservée.
+Les preuves et limites figurent dans le [bilan de livraison](../../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md).
+
 ## Évolution du 11 novembre 2026 — gestion des modules dans l’ERP
 
 **E73-EVO-MODULES-ERP-UX** rend le parcours de gestion plus lisible : synthèse,

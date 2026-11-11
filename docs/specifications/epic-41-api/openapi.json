@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Backend - contrat implemente EPIC 41",
     "description": "OpenAPI complet du backend, dont les parcours Animation locale. Genere hors ligne depuis le code local pour les integrations et les mocks ; cet instantane ne prouve pas son deploiement.",
-    "version": "1.0.0+59b300b"
+    "version": "1.0.0+c6a4c2b"
   },
   "paths": {
     "/public/identite-acces/interne/connexion": {
@@ -3842,6 +3842,430 @@
               }
             },
             "description": "Service Unavailable"
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/exploitation/supervision-webpush/abonnements": {
+      "get": {
+        "tags": [
+          "Exploitation"
+        ],
+        "summary": "Abonnements",
+        "operationId": "abonnements_internal_exploitation_supervision_webpush_abonnements_get",
+        "parameters": [
+          {
+            "name": "canal",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "enum": [
+                "LIVE",
+                "PRO",
+                "CONTROL",
+                "CRM",
+                "ORGANISATEUR"
+              ],
+              "type": "string",
+              "default": "LIVE",
+              "title": "Canal"
+            }
+          },
+          {
+            "name": "statut",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 50
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Statut"
+            }
+          },
+          {
+            "name": "destinataire",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 200
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Destinataire"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 1024
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageAbonnements"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/exploitation/supervision-webpush/historique": {
+      "get": {
+        "tags": [
+          "Exploitation"
+        ],
+        "summary": "Historique",
+        "operationId": "historique_internal_exploitation_supervision_webpush_historique_get",
+        "parameters": [
+          {
+            "name": "canal",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "enum": [
+                "LIVE",
+                "PRO",
+                "CONTROL",
+                "CRM",
+                "ORGANISATEUR"
+              ],
+              "type": "string",
+              "default": "LIVE",
+              "title": "Canal"
+            }
+          },
+          {
+            "name": "statut",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 50
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Statut"
+            }
+          },
+          {
+            "name": "destinataire",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 200
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Destinataire"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 1024
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageHistorique"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/exploitation/supervision-webpush/abonnements/{identifiant}": {
+      "get": {
+        "tags": [
+          "Exploitation"
+        ],
+        "summary": "Abonnement",
+        "operationId": "abonnement_internal_exploitation_supervision_webpush_abonnements__identifiant__get",
+        "parameters": [
+          {
+            "name": "identifiant",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Identifiant"
+            }
+          },
+          {
+            "name": "canal",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "enum": [
+                "LIVE",
+                "PRO",
+                "CONTROL",
+                "CRM",
+                "ORGANISATEUR"
+              ],
+              "type": "string",
+              "default": "LIVE",
+              "title": "Canal"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Abonnement"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/exploitation/supervision-webpush/historique/{identifiant}": {
+      "get": {
+        "tags": [
+          "Exploitation"
+        ],
+        "summary": "Notification",
+        "operationId": "notification_internal_exploitation_supervision_webpush_historique__identifiant__get",
+        "parameters": [
+          {
+            "name": "identifiant",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Identifiant"
+            }
+          },
+          {
+            "name": "canal",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "enum": [
+                "LIVE",
+                "PRO",
+                "CONTROL",
+                "CRM",
+                "ORGANISATEUR"
+              ],
+              "type": "string",
+              "default": "LIVE",
+              "title": "Canal"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DetailNotification"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/exploitation/supervision-webpush/abonnements/{identifiant}/revoquer": {
+      "post": {
+        "tags": [
+          "Exploitation"
+        ],
+        "summary": "Revoquer",
+        "operationId": "revoquer_internal_exploitation_supervision_webpush_abonnements__identifiant__revoquer_post",
+        "parameters": [
+          {
+            "name": "identifiant",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Identifiant"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Revocation"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultatRevocation"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -55108,6 +55532,158 @@
             }
           }
         ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/identite-acces/animation/gestionnaires/{gestionnaire_id}/organisations": {
+      "get": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Organisations Gestionnaire Erp",
+        "operationId": "organisations_gestionnaire_erp_internal_identite_acces_animation_gestionnaires__gestionnaire_id__organisations_get",
+        "parameters": [
+          {
+            "name": "gestionnaire_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Gestionnaire Id"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 1024
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/identite-acces/animation/organisations/{organisation_id}/equipe/{membre_id}": {
+      "patch": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Modifier Membre Erp",
+        "operationId": "modifier_membre_erp_internal_identite_acces_animation_organisations__organisation_id__equipe__membre_id__patch",
+        "parameters": [
+          {
+            "name": "organisation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Organisation Id"
+            }
+          },
+          {
+            "name": "membre_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Membre Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModificationMembreInterneCommande"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -118810,6 +119386,130 @@
         ],
         "title": "Abandon"
       },
+      "Abonnement": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "canal": {
+            "type": "string",
+            "enum": [
+              "LIVE",
+              "PRO",
+              "CONTROL",
+              "CRM",
+              "ORGANISATEUR"
+            ],
+            "title": "Canal"
+          },
+          "destinataire": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Destinataire"
+          },
+          "destinataireLabel": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Destinatairelabel"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Createdat"
+          },
+          "actif": {
+            "type": "boolean",
+            "title": "Actif"
+          },
+          "deviceLabel": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Devicelabel"
+          },
+          "lastUsedAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lastusedat"
+          },
+          "revokedAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Revokedat"
+          },
+          "version": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Version"
+          },
+          "motifRevocation": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motifrevocation"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "canal",
+          "destinataire",
+          "destinataireLabel",
+          "createdAt",
+          "actif",
+          "deviceLabel",
+          "lastUsedAt",
+          "revokedAt",
+          "version",
+          "motifRevocation"
+        ],
+        "title": "Abonnement"
+      },
       "AbonnementAnimationPayload": {
         "properties": {
           "id": {
@@ -137702,6 +138402,172 @@
         ],
         "title": "DetailAudit"
       },
+      "DetailNotification": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "canal": {
+            "type": "string",
+            "enum": [
+              "LIVE",
+              "PRO",
+              "CONTROL",
+              "CRM",
+              "ORGANISATEUR"
+            ],
+            "title": "Canal"
+          },
+          "destinataire": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Destinataire"
+          },
+          "destinataireLabel": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Destinatairelabel"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Createdat"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          },
+          "type": {
+            "type": "string",
+            "title": "Type"
+          },
+          "titre": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Titre"
+          },
+          "tentatives": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tentatives"
+          },
+          "sentAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sentat"
+          },
+          "nextAttemptAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextattemptat"
+          },
+          "lastAttemptAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lastattemptat"
+          },
+          "diagnostic": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Diagnostic"
+          },
+          "messageId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Messageid"
+          },
+          "campagneId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Campagneid"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "canal",
+          "destinataire",
+          "destinataireLabel",
+          "createdAt",
+          "statut",
+          "type",
+          "titre",
+          "tentatives",
+          "sentAt",
+          "nextAttemptAt",
+          "lastAttemptAt",
+          "diagnostic"
+        ],
+        "title": "DetailNotification"
+      },
       "DetailPaiement": {
         "properties": {
           "id": {
@@ -153414,6 +154280,72 @@
         ],
         "title": "ModificationMembreCommande"
       },
+      "ModificationMembreInterneCommande": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "RESPONSABLE",
+              "GESTIONNAIRE",
+              "LECTEUR"
+            ],
+            "title": "Role"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "SUSPENDUE",
+              "REVOQUEE"
+            ],
+            "title": "Statut"
+          },
+          "communeIds": {
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "type": "array",
+            "maxItems": 100,
+            "minItems": 1,
+            "title": "Communeids"
+          },
+          "autorisations": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "ACHAT",
+                "IMPORT",
+                "COMMUNICATION"
+              ]
+            },
+            "type": "array",
+            "maxItems": 3,
+            "title": "Autorisations"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 5,
+            "title": "Motif"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "role",
+          "statut",
+          "communeIds",
+          "motif"
+        ],
+        "title": "ModificationMembreInterneCommande"
+      },
       "ModificationObjectifsInput": {
         "properties": {
           "expected_version": {
@@ -155498,6 +156430,148 @@
         ],
         "title": "NoteInterneSupportPayload"
       },
+      "Notification": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "canal": {
+            "type": "string",
+            "enum": [
+              "LIVE",
+              "PRO",
+              "CONTROL",
+              "CRM",
+              "ORGANISATEUR"
+            ],
+            "title": "Canal"
+          },
+          "destinataire": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Destinataire"
+          },
+          "destinataireLabel": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Destinatairelabel"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Createdat"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          },
+          "type": {
+            "type": "string",
+            "title": "Type"
+          },
+          "titre": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Titre"
+          },
+          "tentatives": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tentatives"
+          },
+          "sentAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sentat"
+          },
+          "nextAttemptAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextattemptat"
+          },
+          "lastAttemptAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lastattemptat"
+          },
+          "diagnostic": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Diagnostic"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "canal",
+          "destinataire",
+          "destinataireLabel",
+          "createdAt",
+          "statut",
+          "type",
+          "titre",
+          "tentatives",
+          "sentAt",
+          "nextAttemptAt",
+          "lastAttemptAt",
+          "diagnostic"
+        ],
+        "title": "Notification"
+      },
       "NotificationAnimationPayload": {
         "properties": {
           "id": {
@@ -157233,6 +158307,46 @@
         ],
         "title": "OuvrirTransactionRequest"
       },
+      "PageAbonnements": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/Abonnement"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          },
+          "hasMore": {
+            "type": "boolean",
+            "title": "Hasmore"
+          },
+          "generatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Generatedat"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "nextCursor",
+          "hasMore",
+          "generatedAt"
+        ],
+        "title": "PageAbonnements"
+      },
       "PageAchatsPaiement": {
         "properties": {
           "items": {
@@ -158551,6 +159665,46 @@
           "nextCursor"
         ],
         "title": "PageGenerationPayload"
+      },
+      "PageHistorique": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/Notification"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          },
+          "hasMore": {
+            "type": "boolean",
+            "title": "Hasmore"
+          },
+          "generatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Generatedat"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "nextCursor",
+          "hasMore",
+          "generatedAt"
+        ],
+        "title": "PageHistorique"
       },
       "PageHistoriquePrioritePayload": {
         "properties": {
@@ -162273,6 +163427,30 @@
           "statut_participation": {
             "type": "string",
             "title": "Statut Participation"
+          },
+          "statut_animation": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Statut Animation"
+          },
+          "nouvelles_non_lues": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nouvelles Non Lues",
+            "description": "Nombre exact de nouvelles non lues de cette animation pour cette installation, après vérification des accès personnels. Null si la capacité ou la lecture est indisponible."
           },
           "date_fin": {
             "anyOf": [
@@ -172731,6 +173909,24 @@
         ],
         "title": "ResultatPurgeQuotidiennePayload"
       },
+      "ResultatRevocation": {
+        "properties": {
+          "changed": {
+            "type": "boolean",
+            "title": "Changed"
+          },
+          "item": {
+            "$ref": "#/components/schemas/Abonnement"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "changed",
+          "item"
+        ],
+        "title": "ResultatRevocation"
+      },
       "ResultatTiragePersonnel": {
         "properties": {
           "statut": {
@@ -173395,6 +174591,46 @@
           "brief"
         ],
         "title": "RevisionPromptGenerationInput"
+      },
+      "Revocation": {
+        "properties": {
+          "canal": {
+            "type": "string",
+            "enum": [
+              "LIVE",
+              "PRO",
+              "CONTROL",
+              "CRM",
+              "ORGANISATEUR"
+            ],
+            "title": "Canal"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 500,
+            "minLength": 3,
+            "title": "Motif"
+          },
+          "expectedVersion": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Expectedversion"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "canal",
+          "motif"
+        ],
+        "title": "Revocation"
       },
       "RevocationPush": {
         "properties": {

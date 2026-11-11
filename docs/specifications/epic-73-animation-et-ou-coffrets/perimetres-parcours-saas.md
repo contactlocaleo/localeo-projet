@@ -1,5 +1,116 @@
 # E73 — Périmètres commerçants et parcours SaaS
 
+## Évolution du 11 novembre 2026 — E73-EVO-HABILITATIONS-ERP
+
+Demande : permettre à Localeo de comprendre, ajouter et retirer les habilitations
+d’un utilisateur Animation depuis l’ERP. Cette évolution complète la gestion
+d’équipe existante sans changer la clôture historique de l’epic.
+
+**Existant vérifié.** La fiche Accès Animation propose des cases de permissions
+historiques par commune. Le serveur refuse ce circuit dès qu’un responsable
+d’équipe est actif. La console interne expose seulement validation initiale et
+récupération de responsabilité, alors que le portail sait modifier les membres.
+La fiche est centrée sur l’organisation principale et ne rend pas les autres
+appartenances compréhensibles.
+
+**Cible.** Depuis Animations → Équipes et contrats → Accès Animation, rechercher
+un utilisateur, ouvrir ses habilitations et sélectionner son organisation.
+Présenter rôle, statut de l’appartenance, communes, permissions du rôle et
+autorisations complémentaires Acheter, Importer des commerçants, Communiquer.
+Les permissions `animation:*` des équipes sont définies par le rôle ; elles ne
+deviennent pas une seconde liste libre concurrente. Les autorisations du
+responsable sont automatiques et expliquées. Ajouter/retirer une capacité
+consiste à modifier le rôle ou les trois autorisations ; les communes et la
+suspension/révocation se gèrent sur cette même appartenance.
+
+Les modules souscrits, leurs quotas et l’état du compte demeurent des conditions
+distinctes. Un droit personnel n’active aucun module payant. La création d’une
+identité ou d’une nouvelle relation d’équipe conserve son circuit d’invitation ;
+cette évolution gère les appartenances déjà existantes, y compris inactives.
+Les accès historiques restent consultables et modifiables par leur commande
+existante uniquement lorsque l’organisation n’est pas gérée par une équipe.
+
+**Invariants et propriétaires.** `EquipeOrganisation` porte la modification
+Localeo explicite et motivée, avec les mêmes règles de délégation que le portail :
+communes validées, rôles et autorisations connus, aucun retrait du dernier
+responsable, aucune promotion directe au rôle responsable. Le transfert accepté
+et la récupération assistée conservent leur circuit propre. Le service interne
+contrôle périmètre ERP, version et reçu, puis synchronise seulement le membre
+ciblé ; audit T1 avant/après et motif dans la même transaction. Les autres membres,
+organisations, droits commerciaux et consommations restent inchangés. Les
+restrictions deviennent effectives par les contrôles de session existants.
+Une modification des seules autorisations complémentaires ne normalise pas les
+permissions historiques du membre et ne supprime aucune échéance. Les bornes
+existantes sont conservées ; un changement explicite de rôle adapte les
+permissions à ce rôle, un ajout explicite de commune crée son habilitation.
+La lecture distingue permissions du rôle et permissions effectives issues de
+l’intersection avec les habilitations actives ; elle ne promet pas l’usage
+d’un module du seul fait d’une autorisation personnelle.
+
+**Contrats.** Lecture paginée interne des organisations du gestionnaire, incluant
+les appartenances suspendues/révoquées :
+`GET /internal/identite-acces/animation/gestionnaires/{id}/organisations`.
+Pagination à curseur, `limit=25`, maximum 100 ; filtre de périmètre avant limite.
+La sélection charge l’équipe interne existante avec `gestionnaireId`, qui peut
+inclure la cible située hors de sa première page. La projection annonce le mode
+de gestion, les permissions et les actions autorisées ; le navigateur ne déduit
+pas un état global d’une page partielle.
+La liste rend `items` (identifiant d’organisation `id`, `nom`,
+`statutOrganisation`, rôle/statut/communes/autorisations de l’appartenance et
+version) et `nextCursor`. L’équipe interne expose `modeGestion` (`EQUIPE` ou
+`HISTORIQUE`), `nomOrganisation`, `statutOrganisation` et, pour le membre ciblé,
+`statutCompte`, `permissionsRole`, `autorisationsEffectives`, `allowedActions`
+et `habilitations` par commune (état, dates, permissions enregistrées et
+`permissionsEffectives`). Les trois autorisations ne sont pas annoncées
+effectives si aucune habilitation n’est active. Une organisation inactive reste
+consultable, sans action de modification indisponible côté serveur.
+Le détail historique identifie l’organisation de chaque habilitation afin que
+le formulaire de l’organisation principale ne puisse pas modifier une autre
+relation. Une organisation secondaire sans équipe validée renvoie vers la
+vérification de responsabilité ; aucun repli vers la commande historique de
+l’organisation principale. En cas de lecture du mode impossible, aucune
+commande historique n’est proposée par défaut.
+
+`PATCH /internal/identite-acces/animation/organisations/{id}/equipe/{membre_id}`
+reçoit `expected_version`, `role`, `statut`, `communeIds` (1 à 100),
+`autorisations` (ACHAT/IMPORT/COMMUNICATION) et `motif` obligatoire. Capacité
+`acces_externes.gerer`, CSRF, clé d’idempotence et `Cache-Control: no-store`.
+Cette capacité autorise les profils ERP déjà habilités, notamment Backoffice,
+dans leur périmètre ; aucune élévation globale ni attribution automatique.
+Le périmètre est revérifié avant tout rejeu ; aucune usurpation d’un responsable
+portail. Refus 401/403/404, validation 422, conflit 409 conservent leurs sens.
+Les réponses sont additives pour les consommateurs existants ; aucun changement
+de contrat du portail Animation ni de ses commandes.
+
+| Critère | Comportement observable | Preuves prévues |
+| --- | --- | --- |
+| HA-01 | Rechercher un utilisateur, voir ses organisations et choisir la cible, y compris inactive ; contexte utilisateur/organisation/communes toujours visible. | Navigation ERP, multi-organisations, état vide/erreur, pagination bornée. |
+| HA-02 | Comprendre permissions de rôle, autorisations complémentaires et conditions commerciales séparées ; ne pas présenter une permission suspendue comme utilisable. | Projections domaine/API et affichage lecteur/gestionnaire/responsable. |
+| HA-03 | Ajouter/retirer autorisations, changer rôle/communes/statut avec résumé, motif et confirmation ; succès visible sur la cible. | Domaine, service, HTTP, PostgreSQL et navigateur ; autres membres/organisations préservés. |
+| HA-04 | Refuser promotion directe, perte du dernier responsable, commune non validée ou hors périmètre ; préserver les restrictions de délégation ERP. | Tests de refus directs, périmètre revérifié au rejeu, revue indépendante. |
+| HA-05 | Conflit conservant la saisie ; réponse perdue reprise avec corps/clé identiques ; session expirée sans réaffichage privé ; audit atomique. | Tests de concurrence, répétition, échec et lecture/mutation tardives. |
+| HA-06 | Accès historiques et validation/récupération de responsabilité restent disponibles dans leur contexte ; aucun formulaire historique envoyé pour une équipe gérée. | Non-régression ERP et refus serveur conservés. |
+| HA-07 | Lisibilité 320/390/1280 px, clavier, actions explicites, cibles tactiles et états chargement/erreur ; aucun chargement exhaustif. | Recette navigateur et captures inspectées ; mesures requêtes/volume PostgreSQL. |
+
+**Impacts et livraison.** Backend domaine/application/adaptateurs, ERP,
+OpenAPI documentaire et guide ERP. Pas de nouvelle table, migration ou flag :
+les appartenances, reçus et audits existants portent ces décisions. Le générateur
+utilise les mêmes modèles et circuits ordinaires ; nouvelles fixtures synthétiques
+pour multi-organisations et délégations. Animation, Pro et Live conservent leurs
+contrats et contrôles courants ; aucune modification frontend attendue hors ERP.
+Livrer le backend et sa documentation, puis recette sur TEST ; aucun changement
+de permission réelle, envoi d’invitation ou déploiement implicite.
+
+**Performance.** Réutiliser les lectures ciblées et verrous d’équipe, charger
+seulement la cible de commande, paginer les appartenances en stockage sans N+1.
+La nouvelle lecture vise au plus 100 appartenances et un nombre constant de
+requêtes pour 25/100 résultats ; aucune recherche exhaustive côté navigateur.
+Mesurer sur PostgreSQL jetable N/10N et accès concurrents avant activation :
+budget local initial p95 inférieur à 500 ms, absence d’erreur hors conflits
+attendus, attente bornée et aucune mutation d’un autre tenant. Les résultats et
+limites seront consignés dans le bilan existant, sans prétendre qualifier une
+capacité de production à partir d’une base locale.
+
 ## Évolution du 1er novembre 2026 — E73-EVO-ONBOARDING-ANIMATION-SIMPLE
 
 Demande : simplifier le référencement et l’onboarding du commerçant destiné aux
