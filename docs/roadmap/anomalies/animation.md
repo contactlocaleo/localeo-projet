@@ -1,5 +1,37 @@
 # Registre des anomalies
 
+## Correction du 11 novembre 2026 — e-mail et détail de participation
+
+- **Cause** : les gains libres/numériques ne projetaient pas l’e-mail ; sans
+  nom, `gainWinnerName` utilisait la référence technique. Les Coffrets avaient
+  le même repli. Aucune lecture individuelle organisateur n’alimentait une
+  fenêtre de participation. Base Animation `f1dad12`, Backend `3a55fae`.
+- **Correction** : e-mail autorisé comme identité cliquable dans gagnants,
+  suivi et listes de participants. `ParticipationIdentity` ouvre une fenêtre
+  `ManagementDialog` avec inscription, état, progression, validations et
+  coordonnées autorisées. GET individuel protégé, sans collecte globale ni
+  écriture ; calcul par moteur existant ou provenance gelée. Email complet
+  tombola publique seulement, masquage conservé ailleurs. Projections
+  personnelles Live et secrets d’accès non enrichis. Lectures groupées des
+  gains conservées, sans requête par ligne.
+- **Preuves** : le nouveau scénario sur le build précédent échoue sur
+  l’absence du bouton e-mail. Après correction, `dotation.mjs` valide
+  **22 parcours PC/mobile**, dont panne/réessai, 403, identité inattendue,
+  réponse tardive, email masqué/absent, lecture simple et traitement de gain.
+  `global-read.mjs` valide **4 parcours** et l’ouverture depuis la liste,
+  sans perdre recherche ni pagination. Captures examinées à 320/1280 px.
+  Deux parcours supplémentaires valident le texte à 200 %, dont 320×568 px,
+  et deux autres le détail depuis les gains Coffrets.
+  **78 tests backend ciblés, 693 contrôles d’architecture, 27 tests PostgreSQL,
+  13 tests Node Animation et 31 tests de contrats Pro réussis**. TypeScript, ESLint et
+  build isolé contrôlés ; voir la vérification de livraison pour les
+  preuves finales et limites.
+- **Impacts** : backend et Animation ; OpenAPI canoniques E41/E42 et contrats
+  embarqués Animation/Pro synchronisés. Aucun changement de cycle de vie,
+  droit accordé, migration, batch ou configuration ; aucune génération de
+  démonstration nécessaire (lecture additive, données existantes inchangées).
+  Déployer le backend avant l’interface. Aucun déploiement TEST attesté.
+
 ## Correction du 11 novembre 2026 — libellé de traitement d’un gain
 
 Dans la liste des gains de `ExternalPrizesWorkspace`, le bouton « Suivre ce

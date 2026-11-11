@@ -1,5 +1,41 @@
 # E73 — Vérification, migration et livraison
 
+## Correctif du 11 novembre 2026 — identité et détail de participation
+
+Bases : Backend `3a55fae`, Animation `f1dad12`, Pro `c0dc46a`, Projet `8ee74a6`
+et modifications locales. L’e-mail autorisé devient cliquable dans les
+participants/gagnants et ouvre un détail en lecture seule. Le nouveau GET est
+borné au tenant, à la commune et à l’animation ; aucune donnée personnelle
+supplémentaire dans Live. Les adresses hors tombola publique restent masquées.
+
+| Preuve exécutée | Résultat |
+| --- | --- |
+| Backend : détail HTTP/service, participants en brouillon, repositories, projections complètes/masquées et personnelles | **78 réussites** ; absence d’écriture, refus hors tenant/commune/animation et anonymisé, export CSV conservé, provenance gelée ciblée |
+| Architecture, recensements domaine/use cases | **693 réussites** |
+| PostgreSQL jetable : `test_tombola_publique_gains.py` | **27 réussites, zéro skip**, rapport `localeo-backend/tmp/participant-detail-pg-b964c36699a24a1caef198d44ad899fa/results.xml` ; cluster port 31609 arrêté |
+| Animation : `participant-detail`, `gains`, `dotation`, `dotation-http-contracts` | **13 tests Node réussis** |
+| Animation navigateur : gains, permissions, erreurs et détail | **22 parcours / 189 contrôles réussis**, 320/1280 px ; rapport/captures `tmp/tirage-existing-kI9xpD/` |
+| Animation navigateur : même détail, texte à 200 % | **2 parcours / 17 contrôles réussis**, dont mobile 320×568, `tmp/tirage-existing-CBRD6k/` |
+| Lectures globales participants/validations | **4 parcours / 62 contrôles réussis**, filtre, pagination et ouverture du détail |
+| Gains Coffrets : `fin-animation.mjs coffret-fin` | **2 parcours PC/mobile réussis**, e-mail cliquable, détail, fermeture/focus et prochaine action de fin conservée ; `tmp/fin-animation-captures-duTiRe/` |
+| Contrats Pro : `contracts.test.js` | **31 réussites** ; schémas identiques au canonique et chemin GET/DELETE synchronisé |
+| Animation TypeScript, ESLint et build isolé final | **Réussis** ; 1902 modules, avertissement Vite de taille existant (bundle principal 503,74 kB) |
+
+Le scénario de détail échoue sur l’ancien build, car le bouton d’e-mail
+n’existe pas. Captures normales et zoom inspectées. La première passe backend
+avait 17 échecs sur l’ancienne fixture brouillon sans ID de session : son
+ajout permet de tester les contrôles actuels, sans affaiblir les assertions.
+Le manque d’ID est vérifié dans la fixture HEAD et son usage dans le service
+HEAD. Les attentes de date navigateur incluent le suffixe heure de Paris ;
+le scénario de réponse tardive est isolé des fixtures de suivi de tirage.
+
+OpenAPI E41/E42 régénérés hors ligne, contrats embarqués Animation/Pro
+synchronisés par leurs générateurs. Interface Marketplace et contrats moteur
+sans changement : ni parcours habitant ni schéma moteur modifié. Aucune
+migration, configuration, activation ou réparation de données nécessaire.
+Déployer le backend avant Animation ; aucune recette distante, envoi réel
+ou déploiement TEST effectué pour ce correctif.
+
 ## Exécution sur TEST du 11 novembre 2026 — migrations jusqu’à v309
 
 Sur demande explicite, les migrations **v307, v308 et v309** ont été

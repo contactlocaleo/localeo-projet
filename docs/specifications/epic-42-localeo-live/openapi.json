@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Live - API backend Epic 42",
     "description": "Vue OpenAPI 3.1 des contrats publics, editoriaux et techniques de Localeo Live.",
-    "version": "1.0.0+aae9202"
+    "version": "1.0.0+3a55fae"
   },
   "paths": {
     "/public/animation-locale/animations/{animation_id}/contact-public": {
@@ -35639,6 +35639,17 @@
             "type": "string",
             "title": "Participant Affiche"
           },
+          "participant_email": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Participant Email"
+          },
           "coffret_nom": {
             "type": "string",
             "title": "Coffret Nom"
@@ -35781,6 +35792,18 @@
               }
             ],
             "title": "Participant Prenom"
+          },
+          "participant_email": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Participant Email",
+            "description": "Adresse visible en gestion uniquement : complète pour la tombola publique, masquée pour les autres modèles."
           },
           "participant_reference": {
             "anyOf": [
@@ -36456,6 +36479,18 @@
             ],
             "title": "Participant Prenom"
           },
+          "participant_email": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Participant Email",
+            "description": "Adresse visible en gestion uniquement : complète pour la tombola publique, masquée pour les autres modèles."
+          },
           "participant_reference": {
             "anyOf": [
               {
@@ -36672,6 +36707,18 @@
               }
             ],
             "title": "Participant Prenom"
+          },
+          "participant_email": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Participant Email",
+            "description": "Adresse visible en gestion uniquement : complète pour la tombola publique, masquée pour les autres modèles."
           },
           "participant_reference": {
             "anyOf": [
@@ -52184,6 +52231,106 @@
           "reference"
         ],
         "title": "ParticipantAnimationPayload"
+      },
+      "ParticipantDetailAnimationPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "animation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animation Id"
+          },
+          "nom_affiche": {
+            "type": "string",
+            "title": "Nom Affiche"
+          },
+          "email_masque": {
+            "type": "string",
+            "title": "Email Masque"
+          },
+          "telephone_masque": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Telephone Masque"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          },
+          "progression": {
+            "type": "number",
+            "title": "Progression"
+          },
+          "validations": {
+            "type": "integer",
+            "title": "Validations",
+            "default": 0
+          },
+          "inscrit_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Inscrit At"
+          },
+          "reference": {
+            "type": "string",
+            "title": "Reference"
+          },
+          "email": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Email"
+          },
+          "verification_email": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "NON_REQUISE",
+                  "CONFIRMEE",
+                  "EN_ATTENTE"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Verification Email"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "animation_id",
+          "nom_affiche",
+          "email_masque",
+          "statut",
+          "progression",
+          "reference"
+        ],
+        "title": "ParticipantDetailAnimationPayload"
       },
       "ParticipantEmailPayload": {
         "properties": {

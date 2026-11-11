@@ -576,6 +576,31 @@ Actualités reste contrôlée et l’accès direct interdit reste expliqué.
 Le chargement différé d’une rubrique garde la navigation et les actions
 affichées ; aucune écriture ni transition n’est exécutée par le menu.
 
+### Identification et détail d’une participation — 11 novembre 2026
+
+Dans les gagnants, le suivi des gains (Coffrets, lots externes, bons numériques)
+et les listes de participants, l’e-mail autorisé remplace l’identifiant comme
+libellé principal cliquable. Les noms disponibles restent secondaires ; une
+adresse absente utilise un libellé neutre. L’identifiant technique est consultable
+dans le détail, sans servir de nom de personne. La tombola publique garde son
+adresse complète déjà autorisée par sa liste dédiée ; les autres moteurs
+conservent le masquage des coordonnées existant.
+
+Le clic ouvre une fenêtre **Détail de la participation**, en lecture seule :
+coordonnées autorisées, date d’inscription en heure de Paris, état effectif,
+progression, validations, confirmation e-mail si pertinente et référence.
+Lecture ciblée au clic, sans collecter toutes les participations : habilitation
+`animation:lire`, organisation, commune et animation vérifiées côté serveur.
+Les faits du moteur ou la provenance gelée restent la source de l’état ;
+aucun recalcul ni enregistrement métier dans l’interface. Aucune exposition
+de PIN, QR, token ou secret d’accès habitant.
+
+Chargement, refus et panne sont distincts. Après fermeture, le focus revient
+à l’e-mail, sans quitter la page ou perdre filtres et pagination. Une réponse
+tardive après fermeture ne rouvre pas la fenêtre. Une réponse d’une autre
+animation/participation est refusée ; aucune donnée précédente n’est
+conservée dans le détail après un échec.
+
 ### 5.2 Lisibilité, actions et accessibilité communes
 
 - Les espaces de gestion partagent la même composition d’en-tête : retour explicite lorsqu’un parent existe, pictogramme et titre, description courte, contexte de commune/organisation, actions principales et secondaires identifiables. Le contenu utilise la largeur disponible et reste aligné à gauche ; les formulaires et dialogues conservent une largeur de lecture adaptée. Les gardes de sortie et les blocages d’une commande en cours restent dans le parcours appelant.
@@ -895,6 +920,7 @@ Les routes suivantes sont **à implémenter**, sauf extensions explicitement sig
 | `GET/POST /protected/support/organisations/{id}/demandes` ; `GET/POST .../{demandeId}/messages` | `{communeId,animationId?,motif,message}` → thread public client, état, délai | Contrôle appartenance/commune ; liste paginée ; notes internes jamais dans schéma client |
 | `POST /protected/animation-locale/animations/{id}/editions` | `{expected_version,communeId,dateDebut,dateFin,sections}` → 201 nouveau brouillon, provenance et revalidations | 422 `COMMUNE_EDITION_DIFFERENTE`, 409 source modifiée, 403 contenu non réutilisable |
 | Extension bilan existant ; `PUT .../animations/{id}/objectifs` ; `POST .../{id}/sources-diffusion` | Objectifs versionnés ; `{libelle}` → code/lien de diffusion public | Objectifs figés à publication ; sources rattachées à une seule animation ; permissions métier |
+| `GET /protected/animation-locale/animations/{animation_id}/participants/{participant_id}` | `ParticipantDetailAnimationPayload` : identité autorisée, inscription, état/progression et validations ; `Cache-Control: private, no-store` | `animation:lire`, tenant/commune/animation contrôlés ; absent, anonymisé ou hors animation : 404 ; export CSV existant préservé |
 | `PUT /public/animation-locale/participants/{id}/satisfaction` | Accès personnel dans mécanisme protégé existant ; `{note,commentaire?,expected_version}` → réponse sans identité publique | 409 animation non clôturée ; 422 note invalide ; aucune notification auto |
 | `POST /protected/animation-locale/organisations/{id}/exports` ; `GET .../exports/{exportId}` ; `/archive` | `{format: CSV_MEDIAS}` → 202 dossier/échéance ; état/manifest puis téléchargement privé | 403 `RESPONSABLE_REQUIS` ; 410 `EXPORT_EXPIRE` ; aucune fermeture implicite |
 | `POST /protected/animation-locale/organisations/{id}/fermeture` ; confirmation `/internal/animation-locale/organisations/{id}/fermeture/confirmer` | `{motif,expected_version}` → dossier et engagements ; confirmation versionnée | Responsable pour demande, Localeo habilité pour confirmation ; 409 `ENGAGEMENTS_NON_RESOLUS` ; accès autres organisations inchangés |
