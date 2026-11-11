@@ -1,5 +1,50 @@
 # E73 — Vérification, migration et livraison
 
+## Correctif — chargement Communication, 11 novembre 2026
+
+Signalement sur TEST : l'ouverture de Communication pour « TEST2-Tombola
+Delphine-05/11/2026 » affiche « Chargement impossible », puis demande de vérifier
+le message et sa programmation. Bases locales : Animation `5308a92`, Backend
+`4631596`, Projet `93a1ce0`. Le compte et les données distantes n'ont pas été
+consultés ; la version réellement déployée reste à vérifier.
+
+Cause reproduite : `httpClient.get` ajoutait `moteurs_supportes` à toutes les
+sous-ressources d'animation, dont `campagnes-organisateur`. Le producteur
+`campagnes_organisateur_api.lister` refuse les paramètres hors de sa liste
+fermée, avec une réponse 422. Le test traversant le client HTTP réel échouait
+avec cette réponse avant correction et réussit après correction.
+
+La négociation des moteurs est limitée aux routes qui la prévoient. Les
+catalogues, fiches, recherche/synthèse, participants paginés/compteurs et
+lots/contact publics la conservent. Les erreurs de lecture Communication
+proposent désormais d'actualiser les campagnes ; les erreurs de saisie lors
+d'une écriture gardent leur message. Les refus métier et de permission restent
+prioritaires. Une revue indépendante en lecture seule n'a relevé aucun défaut
+bloquant.
+
+Preuves locales dans Animation, sur données fictives :
+
+- `node --test tests/campaigns.test.mjs tests/campaigns-http-contracts.test.mjs tests/public-tombola.test.mjs tests/http-client-credentials.test.mjs tests/http-context.test.mjs tests/http-cancellation.test.mjs` : **26/26 réussis**.
+- `pnpm test` : **306/306 réussis**, aucun test ignoré.
+- `pnpm typecheck` et `pnpm lint` : réussis.
+- `node tests/browser/communication-ux.mjs` : **15/15 scénarios réussis** à
+  320, 390 et 1920 px : historique, droits, module désactivé, période fermée,
+  échec 422 puis reprise explicite. Aucune écriture ni sollicitation de
+  prestataire ; capture mobile 390 px inspectée.
+- `node scripts/build-generation-tests.mjs` : build applicatif isolé réussi,
+  sans configuration opérateur ; ce contrôle ne remplace pas un build de
+  déploiement avec sa configuration cible.
+
+Impacts : correction du consommateur Animation uniquement ; contrat API,
+règles de domaine, autorisations, schéma, migrations, configuration des modules
+et générateur de démonstration inchangés. Les données fictives de la recette
+vérifient désormais le filtrage strict des paramètres. Aucun changement requis
+dans les autres applications. La documentation fonctionnelle reste valable :
+le comportement attendu est rétabli. Pour l'exploitation, publier le frontend
+corrigé puis rouvrir Communication sur TEST ; aucune réparation de données
+n'est nécessaire à ce correctif. Commit et push demandés explicitement ; le
+déploiement et la vérification du compte signalé ne sont pas attestés ici.
+
 ## Évolution — E73-EVO-LIVE-SIMPLICITE, 11 novembre 2026
 
 Périmètre : [LS-01 à LS-13](localeo-live-entree-unique.md#évolution-du-11-novembre-2026--simplicité-e73-evo-live-simplicite),
