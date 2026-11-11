@@ -1,11 +1,76 @@
 # E73 — Vérification, migration et livraison
 
+## Correctif du 11 novembre 2026 — avancement homogène des animations
+
+Base Marketplace `006f3e8` et Projet `22b6bfe`, après enregistrement distinct du
+correctif des messages organisateur. Commit applicatif **`0dd0f70`**.
+Extension de LS-02 selon la demande
+utilisateur : même frise pour les quatre moteurs Live, à la place du bloc
+« Qualification à compléter ». Le test initial passeport NON_QUALIFIE échoue
+avant correction pour absence de la frise attendue ; build et preuves dans
+Marketplace `test-results/visual-runs/2026-11-11T09-05-24-439Z-Thewet/`.
+
+Cause : `LiveDrawResult` choisissait un rendu différent selon le type, et le
+parent ne transmettait ni projection de jeu ni fraîcheur aux résultats hors
+tombola. Le composant, le helper de présentation et les styles sont communs.
+Le suivi apparaît une seule fois dans le bloc principal, avant les visites et
+activités. Le passeport gagnant garde son accès aux lots visible tôt. Les
+suggestions publiques et les liens aux nouvelles/résultats sont conservés.
+Les pictogrammes de qualification restent distincts des tampons de visites.
+
+La frise lit les faits existants : 100 % ne qualifie pas, clôture ne signifie
+pas tirage réalisé, absence de lot ne signifie pas perte. Hors tirage,
+annulation, attribution remplacée, absence de tirage et état inconnu restent
+distincts. L'inscription publique en attente de vérification n'est pas
+présentée comme confirmée. Aucune frise n'est affichée sans projection ni
+résultat personnel. Le contrôle de fraîcheur protège le calendrier et les
+liens de gain lors des revalidations/pannes ; le refus retire les données.
+
+Impacts : Marketplace et documentation canonique uniquement. Aucun invariant
+métier, contrat/API backend ou consommateur Animation/Pro modifié. Aucun flag,
+migration ou nouveau traitement. Générateur sans impact : format, états,
+export/restauration et preuves restent les mêmes ; les recettes UI utilisent
+des projections synthétiques des contrats existants, sans émission distante.
+Principes LIVE-UX-02 à 07 appliqués et référence durable homogénéisée.
+
+Preuves locales : **14 scénarios navigateur réussis** sur les quatre moteurs,
+les résultats, les visites et les liens/actions, build
+`test-results/visual-runs/2026-11-11T09-08-20-886Z-lyr6vB/`. Le contrôle
+adjacent tombola/chasse donne **13 réussites**, build
+`2026-11-11T09-08-37-792Z-s9ddyL`. Une première recette du garde de projection
+donne **1 réussite** (`2026-11-11T09-10-26-628Z-WG1VI4`). Après la revue, **5 cas
+ciblés réussis** (`2026-11-11T09-13-04-907Z-GN4AxL`) vérifient la projection
+absente, les thèmes sombres passeport/chasse avec contraste des textes ≥ 4,5,
+la clôture sans qualification et le texte à 200 %. Ces rejeux recouvrent les
+cas initiaux ; ne pas les additionner comme des scénarios distincts.
+
+L'inspection visuelle du texte doublé a motivé le retour à la ligne intrinsèque
+des étapes, puis le bornage des connecteurs à leur cellule. La frise conserve
+quatre étapes et se replie quand la largeur des mots l'exige. Le dernier microfix
+est vérifié par **1 scénario réussi**, build
+`2026-11-11T09-15-22-334Z-nhM2Jx` : mots non coupés, connecteurs bornés et QR
+au clavier. Les captures finales passeport 390 px et 320 px/texte 200 % ont été
+inspectées par l'intégrateur et l'agent de recette ; rendu conforme.
+Les 5 tests Node
+de traduction des faits et ESLint ciblé sont réussis ; `git diff --check` aussi.
+Revue indépendante : deux réserves sur le contraste et la qualification après
+clôture identifiées, corrigées et levées. Aucun test du backend n'est requis
+par ce changement de présentation ; sa logique et ses contrats sont inchangés.
+Documentation : **97 guides, 1 200 liens, zéro erreur ; 148 sources exportées
+vérifiées**. Recettes avec API simulées et données synthétiques ; aucun contrôle
+sur téléphone physique ni déploiement hébergé attesté. Les serveurs de recette
+8176/8178 sont arrêtés. Commit et push demandés, sans déclenchement manuel de
+déploiement. La publication inclut le correctif précédent des messages, dont
+la migration v308 doit précéder la livraison Backend/Marketplace.
+
 ## Correctif du 11 novembre 2026 — messages organisateur par catégorie Animations
 
 **E73-COR-MESSAGES-ANIMATION**, critères MA-01 à MA-06 dans la
 [spécification](modules-souscriptions-import-communication.md). Base locale :
 Backend `14d31aa`, Marketplace `ab77213`, Projet `d9c7c12`, plus ce correctif.
-Aucun commit, push, déploiement ou envoi réel demandé pour cette correction.
+Commits enregistrés à la demande de publication du correctif suivant : Backend
+`77bfa40`, Marketplace `006f3e8`, Projet `22b6bfe`. Le déploiement et l'envoi
+réel restent distincts de cette publication Git.
 
 La projection d'audience, le dépôt et chaque transport utilisent désormais
 la catégorie ANIMATION d'une installation active personnellement liée par un

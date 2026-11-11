@@ -1,5 +1,35 @@
 # E73 — Localeo Live, entrée unique des animations
 
+## Correctif du 11 novembre 2026 — avancement homogène des animations
+
+La frise visuelle de la tombola devient le suivi commun des participations :
+**Inscrit → Qualifié → Tirage → Résultat**, pour les tombolas locale/publique,
+le passeport et la chasse, y compris ses activités de défi. Elle apparaît une
+seule fois dans le bloc principal et remplace le bloc « Qualification à
+compléter ». Cette précision étend LS-02 sans changer les règles de qualification.
+
+- Les quatre étapes gardent les mêmes pictogrammes, dimensions et repères
+  d'étape courante/acquise. Le détail explicite « À compléter », « À vérifier »,
+  « Hors tirage », « Annulé » ou « Sans tirage » selon les faits serveur.
+- L'aide de qualification cite les visites du passeport ou l'étape de chasse
+  autorisée ; un parcours clôturé ne propose pas une validation impossible.
+  Régularisation et absence de tirage restent explicites.
+- Les visites tamponnées, le QR, les défis et leurs protections restent en
+  place. Aucun second jeu de tampons ni progression déduite de la frise.
+- La date annoncée, l'agenda, le résultat confirmé et l'accès aux lots restent
+  accessibles au même endroit. Pendant la revalidation ou après une panne,
+  l'ancien état est signalé et les actions sensibles attendent confirmation.
+  Un refus d'accès retire les données personnelles.
+
+Critères de recette : un seul suivi à quatre étapes pour chaque moteur ; aucun
+bloc « Qualification à compléter » ; qualification et gain uniquement confirmés
+par le serveur, y compris à 100 % ; statuts terminaux/inconnus distincts ; rendus
+320/390/1280 px et texte à 200 %, clavier, retours et fraîcheur des actions.
+Principes LIVE-UX-02 à 07 appliqués. Marketplace seul change sa présentation ;
+aucun contrat API, migration, flag, règle backend ou format de démonstration
+modifié. Les données générées gardent leurs états et leurs accès. Preuves dans
+le [bilan de livraison](verification-livraison.md).
+
 ## Évolution du 11 novembre 2026 — simplicité, E73-EVO-LIVE-SIMPLICITE
 
 Retours directs après les lots PA : symboles d'animation et de confirmation peu

@@ -1,5 +1,11 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+Correctif du **11 novembre 2026 — avancement homogène** : les détails de
+passeport, chasse et tombola utilisent le même suivi visuel de l'inscription
+au résultat. La [précision de LS-02](localeo-live-entree-unique.md#correctif-du-11-novembre-2026--avancement-homogène-des-animations)
+remplace le bloc textuel de qualification ; visites tamponnées, défis et
+états backend conservés. Preuves dans le [bilan de livraison](verification-livraison.md).
+
 Correctif du **11 novembre 2026 — E73-COR-MESSAGES-ANIMATION** : le choix
 **Animations** des réglages Live autorise les messages des organisateurs pour
 les participations personnellement liées. Aucun accord par animation ; le Push

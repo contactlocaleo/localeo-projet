@@ -188,11 +188,14 @@ progression ; elle conserve consentement, suspension et minimisation existants.
 Voir [E73-EVO-LIVE-PARTICIPATION](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-10-novembre-2026--participation-e73-evo-live-participation).
 
 Précision du 11 novembre : le carnet privilégie l'action de chaque objet et
-évite un bandeau « À vous de jouer » qui la duplique. Le suivi d'une tombola
+évite un bandeau « À vous de jouer » qui la duplique. Le suivi de chaque animation
 présente inscription, qualification, tirage et résultat dans un workflow visuel
-unique. Les onglets de Découvrir partagent un en-tête et une sélection de
-communes stables. Les réglages de l'appareil restent dans Réglages ; les
-préférences propres à l'animation sont secondaires dans sa participation.
+unique, avec les mêmes repères pour passeport, chasse et tombola. Ce suivi
+remplace le bloc textuel de qualification ; les tampons et activités restent
+propres à chaque expérience, sans qualification ou résultat inventé.
+Les onglets de Découvrir partagent un en-tête et une sélection de
+communes stables. Les réglages de l'appareil restent dans Réglages ; la catégorie
+Animations y pilote aussi les messages des organisateurs, sans accord individuel.
 Dans le passeport, les visites tamponnées portent la progression : une seconde
 rangée de tampons synthétiques ne la répète pas. Le lien vers les commerces
 reste dans ce bloc principal, avec le QR et les informations de visite.
