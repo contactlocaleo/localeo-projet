@@ -1,5 +1,90 @@
 # E73 — Vérification, migration et livraison
 
+## Correctif du 11 novembre 2026 — création, envoi et suivi des messages
+
+Bases : Backend `77bfa40`, Animation `fa89df2`, Projet `e8c79d0`.
+Commits applicatifs : Backend **`3117e50`**, Animation **`1df45ca`**.
+Le signalement concerne un message restant « En attente de démarrage ».
+Le diagnostic de code montre que la confirmation place la campagne en état
+`PRETE`, mais que les deux services de dépôt Live et de transport Push
+n'étaient appelés que par les scripts CLI : aucune route de batch ni
+planification centrale ne les raccordait. Un éventuel cron externe et le
+message signalé sur l'environnement hébergé n'ont pas été vérifiés.
+
+Les deux services existants sont désormais raccordés à `BatchRunner`, à
+l'ordonnanceur et à la console technique. Les routes exigent `internal:batch`
+ou le parcours manuel Admin avec CSRF et confirmation. Les flags techniques
+restent bloquants avant toute composition du service ; simulation, limites
+et historique d'exécution sont conservés. Le domaine reste propriétaire de
+l'audience figée, de l'idempotence, des droits, de la fréquence et du débit
+unique du quota au premier message Live. Aucun démarrage forcé ni nouvel
+envoi automatique depuis l'IHM organisateur.
+
+Le parcours Animation distingue rédaction, aperçu des destinataires,
+confirmation et suivi. `PRETE` confirme la mise en file ; `EN_COURS` indique
+le dépôt dans Live. La fin du traitement Live ne signifie ni réception Push
+ni lecture. Le suivi automatique est borné et ne fait que lire les faits
+serveur ; l'action principale et le prochain geste restent explicites.
+
+Reproductions rouges : absence des deux batchs dans le catalogue avant
+correction (2 échecs attendus), puis absence de confirmation claire pour
+`PRETE/CAPTURE` dans le navigateur à 390 px, preuves Animation
+`tmp/communication-workflow-rkpPDR/`. Contrôle d'architecture backend :
+**689 tests réussis**, dont frontières, classes domaine et couverture des
+cas d'usage. Les **30 tests domaine** de
+`tests/domain/animation_locale/test_campagnes_organisateur_dedicated.py`
+réussissent également. La recette backend ciblée donne **121 réussites** :
+routes et authentification réelles, ordonnanceur HTTP vers ASGI, console
+mobile/ordinateur, flags, limites, simulation, verrou commun automatique/manuel,
+historisation sans données personnelles, répétition et services de dépôt/transport.
+Commande :
+
+```console
+py -3.14 scripts/validation/test_isolated.py tests/security/test_communication_animation_batch_http.py tests/infrastructure/scheduler tests/infrastructure/admin/test_batchs_manuels.py tests/security/test_manual_batches.py tests/security/test_animation_batch_http.py tests/application/services/test_execution_campagnes_organisateur.py tests/application/services/test_diffusion_messages_organisateur.py --junitxml=.artifacts/communication-workflow-backend-20261111-batches/junit.xml -q --tb=short
+```
+
+La supervision expose désormais 33 actions, dont 21 techniques, et 34
+planifications. Les deux vues OpenAPI sont générées hors ligne : 1 098 chemins
+backend et 80 chemins Live ; les ajouts sont les deux routes internes et leurs
+bilans techniques, sans modification du contrat organisateur.
+
+Recette Animation : **36 scénarios / 684 vérifications** du banc
+`tests/browser/campaigns.mjs` réussis (`tmp/campaigns-browser-BZaqYD/`),
+**15 scénarios** de `tests/browser/communication-ux.mjs` réussis
+(`tmp/communication-ux-kv0AM7/`) et **8 scénarios** du nouveau banc
+`tests/browser/communication-workflow.mjs` réussis
+(`tmp/communication-workflow-jWn6yF/report.json`). Ces derniers couvrent
+création → aperçu → confirmation → `PRETE` → `CAPTURE` → fin Live avec
+Push en attente, à 320/390/1 280 px ; programmation en heure de Paris et
+invalidation de l'aperçu, zéro destinataire autorisé, résultat incertain sans
+réémission automatique, pauses et arrêt sur échec. Le scénario de borne
+constate une lecture initiale plus **8 GET automatiques du détail**, aucun
+POST ; un rapport est relu uniquement si sa projection change ou sur demande.
+Le suivi conserve la hauteur du contenu pendant les lectures. Captures
+programmation à 390 px, fin Live à 1 280 px et à 320 px avec texte doublé
+inspectées ; aucun débordement horizontal constaté. Typecheck et lint réussis,
+ainsi que les **12 tests Node ciblés** campagnes/contrats.
+La suite complète `pnpm test` donne ensuite **308 réussites, aucun échec ni
+skip**. `pnpm typecheck` et `pnpm lint` réussissent. Le build de production
+complet, PWA comprise, est réalisé avec configuration isolée
+`configFile:false`, `envDir:false`, sans `loadEnv`, contre l'origine synthétique
+`api.test.invalid` ; sortie `tmp/communication-workflow-production-final/dist`.
+Les serveurs de recette sont arrêtés. `git diff --check`, les **97 guides /
+1 203 liens** (zéro défaut) et les **148 sources exportées** sont vérifiés.
+
+Portée : Backend, Animation et documentation canonique, y compris OpenAPI
+technique. Le contrat organisateur et les autres consommateurs restent
+identiques. Aucune migration ni nouveau flag ; générateur sans impact :
+ni modèle, ni format d'export/restauration, ni données de démonstration ne
+changent. Les données de recette et fournisseurs sont synthétiques.
+Aucun batch réel, changement de configuration TEST, envoi distant ou
+déploiement déclenché. Après livraison, vérifier les flags existants, les deux
+planifications et leurs dernières exécutions selon le
+[guide d'exploitation](../../exploitation/exploitation/communiquer-participants-animation.md).
+Les campagnes déjà confirmées et dues peuvent alors être traitées sans
+recréation ni seconde confirmation ; les anciennes suspensions conservent
+leur propre règle de reprise.
+
 ## Correctif du 11 novembre 2026 — messages de l'organisation depuis le détail
 
 Base Marketplace `0dd0f70`, Projet `aa10c50`. Commit applicatif `3d6d063`.

@@ -335,6 +335,43 @@ section et précise CA-47/48, sans modifier la clôture historique de l’epic.
 
 ### Parcours et états de campagne
 
+Correction du **11 novembre 2026 — création, envoi et suivi explicites** :
+les repères de l’interface distinguent rédaction, vérification des destinataires,
+confirmation de l’envoi et suivi. Enregistrer un brouillon ne publie rien.
+Confirmer l’envoi immédiat signifie que la demande est enregistrée en file
+d’attente (`PRETE`), pas que les messages sont déjà disponibles dans Live.
+Il n’y a pas de second bouton « démarrer » pour cette demande confirmée.
+
+| État ou phase serveur | Information et action présentées à l’organisateur |
+| --- | --- |
+| `BROUILLON` | Message enregistré, aucun envoi ; vérifier les destinataires et l’horaire puis calculer l’aperçu. |
+| Aperçu calculé | Estimation et exclusions, sans réservation de quota ; confirmation explicite encore requise. Un changement de contenu ou d’horaire invalide l’aperçu affiché. |
+| `PROGRAMMEE` | Envoi programmé avec date/heure de Paris ; la date ne vaut pas résultat d’envoi. |
+| `PRETE`, phase `AUCUNE` | Envoi confirmé, en attente du traitement automatique. Actualiser ou suivre, sans recréer ni confirmer une seconde fois. |
+| Phase `CAPTURE` / `PREPARATION_AUDIENCE` | Préparation des destinataires en cours, même si l’état reste temporairement `PRETE` ; aucun crédit consommé avant le premier dépôt autorisé. |
+| `EN_COURS` | Publication des messages Live en cours ; progression confirmée et compteurs bornés. |
+| `TERMINEE` / `TERMINEE_PARTIELLE` | Traitement Live terminé, bilan consultable ; les notifications Push peuvent encore attendre leur transport. |
+| `SANS_DESTINATAIRE` | Aucun destinataire autorisé, aucun débit de campagne ; consulter les exclusions. |
+| Suspension avant départ | Expliquer le motif ; nouvel aperçu et reconfirmation explicite après rétablissement des conditions. |
+| `ECHEC_REPRENABLE` ou suspension après début | Proposer uniquement la reprise autorisée par le serveur, sur la même audience, sans nouveau message ni débit pour les destinataires déjà traités. |
+
+Une attente prolongée ne devient pas un échec métier inventé par l’interface.
+Le suivi automatique ne fait que des lectures bornées de la campagne ouverte,
+suspendues pendant édition, confirmation incertaine ou onglet masqué. L’échec
+de lecture demande une action explicite ; un refus purge les données privées.
+À l’arrêt du suivi, l’actualisation manuelle et la référence du message permettent
+de vérifier l’avancement ou de contacter Localeo. Les flags d’ouverture ne
+constituent pas une preuve de santé du traitement.
+
+Le dépôt Live et le transport Push sont raccordés à deux batchs distincts de
+l’ordonnanceur central : `animations.campagnes_organisateur.traiter` et
+`animations.messages_organisateur.diffuser`. Ils réutilisent les services bornés,
+baux, quotas, preuves et unicités existants. Leurs déclenchements techniques
+ne remplacent jamais l’aperçu ni la confirmation de l’organisateur ; une lecture
+de l’IHM ne déclenche aucun traitement métier. Aucun nouveau flag ni état de
+campagne, et aucun nouveau champ de contexte organisateur pour supposer que
+l’ordonnanceur serait sain. Procédure dans le [guide de communication](../../exploitation/exploitation/communiquer-participants-animation.md).
+
 Écran : animation → Communication → nouveau message → titre/texte/lien interne autorisé → groupe → aperçu du nombre ciblé/autorisé/exclu → envoi immédiat ou date/heure Paris → confirmation → progression et rapport. Afficher distinctement messages disponibles dans Live, Push remis au service, erreurs et exclus ; jamais « lus » à partir d'un accusé transport. Pas de champs email/SMS de secours.
 
 `CampagneOrganisateur` appartient à une animation/commune/organisation : titre, corps texte, deep link validé, groupe (`TOUS`, `PARCOURS_NON_TERMINE`, `PARCOURS_TERMINE`, `GAGNANTS`), instant programmé UTC + zone d'affichage Paris, créateur, version, approbateur, états, audience figée, instant de démarrage et consommation associée. Texte échappé et longueur bornée par schéma ; liens limités à des parcours internes autorisés sans token transmis au suivi public.

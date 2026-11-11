@@ -1,5 +1,13 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+Correctif du **11 novembre 2026 — création, envoi et suivi des messages** :
+Localeo Animation distingue le brouillon, la confirmation de mise en file et
+la publication dans Live. Les deux traitements existants sont raccordés à
+l'ordonnanceur et à la supervision des batchs ; le transport Push reste suivi
+séparément. Parcours dans la [spécification de communication](modules-souscriptions-import-communication.md),
+configuration dans le [guide d'exploitation](../../exploitation/exploitation/communiquer-participants-animation.md)
+et preuves dans le [bilan de livraison](verification-livraison.md).
+
 Correctif du **11 novembre 2026 — avancement homogène** : les détails de
 passeport, chasse et tombola utilisent le même suivi visuel de l'inscription
 au résultat. La [précision de LS-02](localeo-live-entree-unique.md#correctif-du-11-novembre-2026--avancement-homogène-des-animations)

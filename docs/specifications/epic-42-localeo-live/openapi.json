@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Live - API backend Epic 42",
     "description": "Vue OpenAPI 3.1 des contrats publics, editoriaux et techniques de Localeo Live.",
-    "version": "1.0.0+14d31aa"
+    "version": "1.0.0+3117e50"
   },
   "paths": {
     "/public/animation-locale/animations/{animation_id}/contact-public": {
@@ -62028,6 +62028,199 @@
           "statut"
         ],
         "title": "ResultatBloc"
+      },
+      "ResultatCampagnesBatch": {
+        "properties": {
+          "active": {
+            "type": "boolean",
+            "title": "Active"
+          },
+          "simulation": {
+            "type": "boolean",
+            "title": "Simulation"
+          },
+          "motif": {
+            "anyOf": [
+              {
+                "type": "string",
+                "const": "WORKER_NON_ACTIVE"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motif"
+          },
+          "candidats": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Candidats",
+            "default": 0
+          },
+          "campagnes": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Campagnes",
+            "default": 0
+          },
+          "traites": {
+            "type": "integer",
+            "maximum": 10000.0,
+            "minimum": 0.0,
+            "title": "Traites",
+            "default": 0
+          },
+          "phases": {
+            "additionalProperties": {
+              "type": "integer",
+              "maximum": 100.0,
+              "minimum": 0.0
+            },
+            "propertyNames": {
+              "enum": [
+                "AUCUNE",
+                "SUSPENDUE",
+                "PREPARATION_AUDIENCE",
+                "DIFFUSION",
+                "TERMINEE",
+                "BAIL_PERDU"
+              ]
+            },
+            "type": "object",
+            "maxProperties": 6,
+            "title": "Phases"
+          },
+          "suite": {
+            "type": "boolean",
+            "title": "Suite",
+            "default": false
+          },
+          "budget_epuise": {
+            "type": "boolean",
+            "title": "Budget Epuise",
+            "default": false
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "active",
+          "simulation"
+        ],
+        "title": "ResultatCampagnesBatch"
+      },
+      "ResultatDiffusionOrganisateurBatch": {
+        "properties": {
+          "active": {
+            "type": "boolean",
+            "title": "Active"
+          },
+          "simulation": {
+            "type": "boolean",
+            "title": "Simulation"
+          },
+          "motif": {
+            "anyOf": [
+              {
+                "type": "string",
+                "const": "TRANSPORT_NON_ACTIVE"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motif"
+          },
+          "transport_disponible": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Transport Disponible"
+          },
+          "pages_preparees": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Pages Preparees",
+            "default": 0
+          },
+          "diffusions_traitees": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Diffusions Traitees",
+            "default": 0
+          },
+          "appels_transport": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Appels Transport",
+            "default": 0
+          },
+          "intentions_visibles": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 100.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Intentions Visibles"
+          },
+          "intentions_suivantes": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Intentions Suivantes"
+          },
+          "diffusions_visibles": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 100.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Diffusions Visibles"
+          },
+          "diffusions_suivantes": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Diffusions Suivantes"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "active",
+          "simulation"
+        ],
+        "title": "ResultatDiffusionOrganisateurBatch"
       },
       "ResultatEtapeParticipant": {
         "properties": {

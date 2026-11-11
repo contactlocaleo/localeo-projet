@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Backend - contrat implemente EPIC 41",
     "description": "OpenAPI complet du backend, dont les parcours Animation locale. Genere hors ligne depuis le code local pour les integrations et les mocks ; cet instantane ne prouve pas son deploiement.",
-    "version": "1.0.0+14d31aa"
+    "version": "1.0.0+3117e50"
   },
   "paths": {
     "/public/identite-acces/interne/connexion": {
@@ -103140,6 +103140,194 @@
         ]
       }
     },
+    "/internal/animation-locale/campagnes-organisateur/traiter": {
+      "post": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Traiter Campagnes Organisateur",
+        "operationId": "traiter_campagnes_organisateur_batch",
+        "parameters": [
+          {
+            "name": "simulation",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Simulation"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "taille_lot",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 100,
+              "title": "Taille Lot"
+            }
+          },
+          {
+            "name": "budget_secondes",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 60,
+              "minimum": 1,
+              "default": 20,
+              "title": "Budget Secondes"
+            }
+          },
+          {
+            "name": "X-API-KEY",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Cle API interne avec le scope `internal:batch`.",
+              "title": "X-Api-Key"
+            },
+            "description": "Cle API interne avec le scope `internal:batch`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultatCampagnesBatch"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "XApiKey": []
+          },
+          {
+            "AdminSessionCookie": [],
+            "ManualBatchMode": [],
+            "ErpCsrfToken": []
+          }
+        ]
+      }
+    },
+    "/internal/animation-locale/messages-organisateur/diffuser": {
+      "post": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Diffuser Messages Organisateur",
+        "operationId": "diffuser_messages_organisateur_batch",
+        "parameters": [
+          {
+            "name": "simulation",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Simulation"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "budget_secondes",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 60,
+              "minimum": 1,
+              "default": 20,
+              "title": "Budget Secondes"
+            }
+          },
+          {
+            "name": "X-API-KEY",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Cle API interne avec le scope `internal:batch`.",
+              "title": "X-Api-Key"
+            },
+            "description": "Cle API interne avec le scope `internal:batch`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultatDiffusionOrganisateurBatch"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "XApiKey": []
+          },
+          {
+            "AdminSessionCookie": [],
+            "ManualBatchMode": [],
+            "ErpCsrfToken": []
+          }
+        ]
+      }
+    },
     "/protected/animation-locale/contexte-portail": {
       "get": {
         "tags": [
@@ -173275,6 +173463,199 @@
           "statut"
         ],
         "title": "ResultatBloc"
+      },
+      "ResultatCampagnesBatch": {
+        "properties": {
+          "active": {
+            "type": "boolean",
+            "title": "Active"
+          },
+          "simulation": {
+            "type": "boolean",
+            "title": "Simulation"
+          },
+          "motif": {
+            "anyOf": [
+              {
+                "type": "string",
+                "const": "WORKER_NON_ACTIVE"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motif"
+          },
+          "candidats": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Candidats",
+            "default": 0
+          },
+          "campagnes": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Campagnes",
+            "default": 0
+          },
+          "traites": {
+            "type": "integer",
+            "maximum": 10000.0,
+            "minimum": 0.0,
+            "title": "Traites",
+            "default": 0
+          },
+          "phases": {
+            "additionalProperties": {
+              "type": "integer",
+              "maximum": 100.0,
+              "minimum": 0.0
+            },
+            "propertyNames": {
+              "enum": [
+                "AUCUNE",
+                "SUSPENDUE",
+                "PREPARATION_AUDIENCE",
+                "DIFFUSION",
+                "TERMINEE",
+                "BAIL_PERDU"
+              ]
+            },
+            "type": "object",
+            "maxProperties": 6,
+            "title": "Phases"
+          },
+          "suite": {
+            "type": "boolean",
+            "title": "Suite",
+            "default": false
+          },
+          "budget_epuise": {
+            "type": "boolean",
+            "title": "Budget Epuise",
+            "default": false
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "active",
+          "simulation"
+        ],
+        "title": "ResultatCampagnesBatch"
+      },
+      "ResultatDiffusionOrganisateurBatch": {
+        "properties": {
+          "active": {
+            "type": "boolean",
+            "title": "Active"
+          },
+          "simulation": {
+            "type": "boolean",
+            "title": "Simulation"
+          },
+          "motif": {
+            "anyOf": [
+              {
+                "type": "string",
+                "const": "TRANSPORT_NON_ACTIVE"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motif"
+          },
+          "transport_disponible": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Transport Disponible"
+          },
+          "pages_preparees": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Pages Preparees",
+            "default": 0
+          },
+          "diffusions_traitees": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Diffusions Traitees",
+            "default": 0
+          },
+          "appels_transport": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Appels Transport",
+            "default": 0
+          },
+          "intentions_visibles": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 100.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Intentions Visibles"
+          },
+          "intentions_suivantes": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Intentions Suivantes"
+          },
+          "diffusions_visibles": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 100.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Diffusions Visibles"
+          },
+          "diffusions_suivantes": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Diffusions Suivantes"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "active",
+          "simulation"
+        ],
+        "title": "ResultatDiffusionOrganisateurBatch"
       },
       "ResultatEtapeParticipant": {
         "properties": {
