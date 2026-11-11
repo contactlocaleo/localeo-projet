@@ -1,5 +1,37 @@
 # E73 — Localeo Live, entrée unique des animations
 
+## Correctif du 11 novembre 2026 — détection de mise à jour de la PWA ouverte
+
+L'utilisateur signale l'absence de proposition dans la PWA installée depuis
+`test-live.localeo.city`. Le HTML public et le service worker consultés portent
+la même révision ; la version installée et les journaux du mobile ne sont pas
+accessibles. Un angle mort reproductible du client est corrigé : après les
+contrôles initiaux ou de reprise, une application laissée ouverte ne recontrôlait
+pas périodiquement une publication ou un échec réseau temporaire.
+
+Le watcher d'interface relance une vérification toutes les 60 secondes lorsque
+la page est visible et connectée, ainsi qu'au retour du focus, avec le même
+plafond d'une vérification par minute entre événements. Il retire ses écouteurs
+et son intervalle à la sortie. Aucun polling réseau en arrière-plan caché ou
+hors ligne. La visibilité d'une publication reste soumise au CDN et au succès
+du téléchargement/installation du worker ; 60 secondes est une cadence de
+contrôle, pas une garantie d'activation distante.
+
+La nouvelle version reste proposée selon le cycle existant : consentement de
+l'utilisateur avant chargement, possibilité de différer, confirmation avant
+perte des saisies de l'onglet, réessai après échec. Une activation depuis un
+autre onglet ne recharge pas silencieusement les formulaires ouverts.
+Principes LIVE-UX-07/08 : conserver les repères et les saisies pendant l'attente.
+Le backend, les droits, le carnet IndexedDB, les abonnements Push, le manifeste,
+le scope et la politique de cache publique restent inchangés ; aucun contrat,
+schéma, migration, générateur ou nouvelle variable à modifier.
+
+Acceptation : une nouvelle publication est recherchée sans navigation depuis
+une fenêtre ouverte ; une erreur réseau transitoire est retentée ; les contrôles
+cachés/hors ligne sont suspendus ; l'arrêt du watcher supprime l'intervalle ;
+une version disponible demeure facultative jusqu'au geste de l'utilisateur.
+Preuves et limites dans le [bilan PWA](verification-livraison.md#correctif-du-11-novembre-2026--détection-des-mises-à-jour-pwa).
+
 ## Évolution du 11 novembre 2026 — entrée Live par domaine, E73-EVO-LIVE-DOMAINE
 
 Décision utilisateur : conserver **un seul service et un seul build Marketplace**

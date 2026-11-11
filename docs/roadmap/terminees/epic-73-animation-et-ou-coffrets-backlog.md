@@ -1,5 +1,11 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+## Correctif du 11 novembre 2026 — mise à jour de la PWA Live ouverte
+
+Détection régulière visible/connectée et au focus, sans rechargement imposé,
+conformément au [correctif PWA](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#correctif-du-11-novembre-2026--détection-de-mise-à-jour-de-la-pwa-ouverte).
+Preuves et limites dans le bilan associé ; statut et clôture historique conservés.
+
 ## Évolution du 11 novembre 2026 — entrée Live par domaine sur un service commun
 
 **E73-EVO-LIVE-DOMAINE** : le domaine dédié ouvre Mon carnet via une règle

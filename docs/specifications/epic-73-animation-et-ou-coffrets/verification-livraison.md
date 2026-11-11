@@ -1,5 +1,70 @@
 # E73 — Vérification, migration et livraison
 
+## Correctif du 11 novembre 2026 — détection des mises à jour PWA
+
+Commit Marketplace : **`c8ef0e9`**. Commit et push demandés séparément après
+les vérifications locales.
+
+Bases : Marketplace **`762b4c8`**, Projet **`e46a3bc`**. Signalement : PWA
+Android installée sur `test-live.localeo.city`, aucune proposition malgré une
+version plus récente. Lecture HTTP publique : HTML et worker de TEST portent
+tous deux la révision `2b2b8f7372416ce4be3a`, sans désynchronisation démontrée.
+Ni le stockage du mobile, ni sa version installée, ni son état de worker n'ont
+été consultés : la cause exacte de cet appareil reste à vérifier après livraison.
+
+Défaut local reproduit : le watcher ne relançait pas `registration.update()`
+pendant une fenêtre laissée ouverte après ses contrôles initiaux/de reprise.
+Les trois nouvelles attentes unitaires échouaient avant correction : absence de
+proposition après un intervalle, aucun nouveau contrôle et focus ignoré. Le
+watcher programme désormais un contrôle toutes les 60 secondes quand la page
+est visible et connectée, ainsi qu'au focus, avec limitation des doublons.
+L'intervalle et les écouteurs sont supprimés à la sortie. Une erreur transitoire
+de contrôle est retentée au cycle suivant ; ni chargement ni activation ne sont
+imposés à l'utilisateur.
+
+**24 tests Node réussis**, aucun ignoré : détection, nouvelle tentative après
+échec, états caché/hors ligne, nettoyage, contrôle initial, activation ailleurs,
+confirmation explicite, versions identiques, délai/réessai et activation Push.
+Politique de cache publique et conservation N-1 vérifiées sans modification.
+
+**7 scénarios navigateur réussis** dans Marketplace
+`test-results/visual-runs/2026-11-11T12-12-34-522Z-X1MV6B/` : cycle réel de
+deux workers sur plusieurs onglets, contrôle périodique observé, champs des
+autres onglets conservés et rechargement seulement après demande ; interface
+320/1 440 px, différer, nouvelle version, réponse tardive, réessai après échec
+et confirmation annulée. Les horloges de contrôle du scénario de cycle sont
+avancées explicitement ; l'installation, le réseau local, les messages de version
+et l'activation du service worker restent réels. Le scénario ne déclenche pas
+directement `registration.update()` après publication ; il observe l'appel
+natif produit par le watcher. Build isolé réussi, empreinte
+`44560e918ed373f8cdda8f6244ed5bf3835adba83eefadadb210ca96456cd78d`.
+
+La preuve rouge navigateur pertinente est
+`test-results/visual-runs/2026-11-11T12-11-08-265Z-3uMcHc/` : deux appels natifs
+au lieu des trois attendus après l'intervalle. Les premiers essais du cycle
+laissaient les vérifications natives de démarrage masquer ce défaut ; ils ne
+constituent pas une preuve rouge. La première recette élargie donne 5 succès et
+2 échecs dans `2026-11-11T12-11-28-056Z-kXIpC6/` : les deux cas de rendu ouvraient
+`/live/` (Découvrir) tout en exigeant Mon carnet. Leurs entrées sont désormais
+explicitement `/live/carnet`, assertions conservées. Captures finales inspectées
+sur mobile ; contrôles ESLint et `git diff --check` réussis.
+
+```console
+node --test tests/security/live-update.test.cjs tests/security/service-worker.test.cjs tests/security/live-push-activation.test.cjs
+node node_modules/eslint/bin/eslint.js src/live/liveServiceWorker.js tests/security/live-update.test.cjs tests/visual/live-update-lifecycle.spec.cjs tests/visual/live-update.spec.cjs
+node scripts/run-visual-tests.cjs --port 8198 tests/visual/live-update-lifecycle.spec.cjs tests/visual/live-update.spec.cjs --timeout 60000 --retry-of test-results/visual-runs/2026-11-11T12-11-28-056Z-kXIpC6
+```
+
+Portée : Marketplace et documentation canonique. Pas de changement backend,
+Pro, contrat API, droit, schéma, migration, générateur, carnet, abonnement Push,
+manifeste, scope ni politique de cache. La revue indépendante en lecture seule
+du générateur et du cache n'identifie aucun défaut démontré sur ce déploiement ;
+elle ne remplace pas les tests du watcher. Principes LIVE-UX-07/08 appliqués.
+Aucune donnée métier réelle ou configuration opérateur pendant les tests.
+Les délais CDN, réseau et installation restent distincts de la cadence du
+watcher. Aucun déploiement effectué ; recette sur le mobile
+concerné encore non exécutée.
+
 ## Correctif du 11 novembre 2026 — entrée Live sur Render Static Site
 
 Bases : Marketplace **`7172ac9`**, Projet **`c7ce17e`**. Après confirmation de
