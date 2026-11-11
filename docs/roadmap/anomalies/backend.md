@@ -8,6 +8,38 @@ des trois anomalies du 1er novembre ; elle ne prouve pas leur déploiement
 applicatif. La correction SQL v286 a été appliquée sur TEST comme indiqué
 ci-dessous ; la migration catalogue v285 y reste en attente.
 
+## ANO-IMPORT-AUTORISATION-20261111 — Import refusé après modification de Communication
+
+- **Signalement** : après « Gérer les modules → Modifier cet octroi » sur
+  Communication, le module Import reste affiché mais son ouverture retourne
+  `AUTORISATION_REQUISE` dans Localeo Animation sur TEST.
+- **Diagnostic établi** : lecture ciblée de TEST sans écriture ; le droit
+  commercial Import reste actif, les membres concernés sont gestionnaires
+  sans autorisation Import et aucun responsable actif n’est désigné. Ce
+  dernier état explique le refus. Cette lecture ne permet pas de dater ni
+  d’attribuer l’origine des autorisations absentes.
+- **Preuves locales** : sur PostgreSQL jetable, six cas croisant Communication
+  offerte/en essai avec responsable, gestionnaire autorisé Import et
+  gestionnaire sans autorisation. Le droit Import complet, les rôles et les
+  autorisations restent inchangés après édition du quota, rejeu idempotent
+  et relecture dans une nouvelle transaction. Les comptes autorisés conservent
+  l’accès ; le gestionnaire sans délégation reçoit le refus exact avant et
+  après l’édition. Fichier backend
+  `tests/security/test_modules_plateforme_postgres.py` : **16 tests réussis**.
+  **687 contrôles d’architecture et de recensement réussis**, contrôles des
+  liens et des sources documentaires exportées réussis.
+  Revue indépendante sans écart bloquant. Le test passe sur le code existant ;
+  aucune correction du calcul des droits commerciaux n’est justifiée.
+- **Traitement restant** : choix du rôle attendu du compte, puis décision
+  tracée via le parcours d’équipe existant et vérification de l’accès sur TEST.
+  Aucune appartenance ni donnée TEST modifiée lors du diagnostic. Parcours
+  navigateur non vérifié : connexion au navigateur indisponible.
+- **Impacts** : backend (tests) et
+  [procédure de diagnostic Import](../../exploitation/exploitation/importer-commercants-animation.md#diagnostiquer-un-refus-malgré-un-module-actif).
+  Aucun contrat API, règle métier, migration ou générateur modifié : il s’agit
+  d’une configuration d’accès à régulariser selon le rôle confirmé. Les autres
+  applications conservent leurs contrats et contrôles.
+
 ## ANO-CRM-DOMAINE-20261104 — Accès CRM par un domaine dédié
 
 - **Demande** : ouvrir Localeo CRM depuis sa propre adresse, tout en conservant
