@@ -335,11 +335,49 @@ section et précise CA-47/48, sans modifier la clôture historique de l’epic.
 
 ### Parcours et états de campagne
 
+Correction du **11 novembre 2026 — envoi instantané et différé (CA-47/48)** :
+deux modes explicites remplacent « Dès confirmation ». **Envoi instantané**
+se termine par **Envoyer le message** ; après confirmation durable de la
+commande, l'application amorce immédiatement le traitement de cette campagne
+avec le worker existant. **Envoi différé** se termine par **Programmer le
+message**, avec date et heure de Paris ; aucun dépôt avant cette échéance.
+Le brouillon et l'aperçu ne publient rien ; la validation explicite du contenu,
+des destinataires et de l'horaire reste nécessaire.
+
+L'amorce immédiate est ciblée et bornée : un lot d'au plus 100 préparations et
+100 candidats, budget de boucles de cinq secondes et limites SQL dédiées.
+Les transactions engagées et la relecture ont leurs propres délais ; ce budget
+n'est pas une garantie de temps HTTP total. Une audience importante continue
+par le traitement central, sur sa capture figée. La commande et son reçu sont
+enregistrés durablement avant l'amorce ; un échec ensuite conserve une campagne reprenable,
+sans seconde création ni nouveau crédit. La réponse conserve son opération et
+son indicateur de rejeu, avec projection actuelle lorsque disponible. Un replay
+ne crée ni nouveau message ni deuxième débit. Les permissions, souscription,
+quota, fréquence et fenêtre restent décidés par le domaine existant.
+
+Le clic peut donc retourner une campagne terminée ou un traitement encore en
+cours ; l'interface annonce **Message publié** uniquement sur résultat Live
+terminal, jamais à partir d'une acceptation seule. Le transport Push reste
+asynchrone et distinct. La programmation ne prouve pas la santé du planificateur.
+Pour le suivi d'une campagne future, les huit lectures sur deux minutes
+commencent après l'échéance, à la première lecture visible et non bloquée ;
+elles ne sont plus épuisées avant la date d'envoi. Aucune lecture ne lance le
+traitement. Reçu incertain, conflit et retrait d'accès gardent leurs protections.
+
+Acceptation : clic immédiat dépose avant réponse pour une petite audience ;
+une autre campagne n'est pas traitée ; un rejeu conserve opération/crédit/message ;
+une programmation ne part jamais avant l'instant confirmé ; une panne après
+confirmation permet de reprendre le même envoi ; l'écran futur se remet à lire
+à l'échéance et reste borné. Aucun contrat JSON, statut métier, migration,
+générateur, nouvelle configuration ou nouveau batch. Preuves dans le
+[bilan du correctif](verification-livraison.md#correctif-du-11-novembre-2026--envoi-instantané-et-différé-des-messages).
+
 Correction du **11 novembre 2026 — création, envoi et suivi explicites** :
 les repères de l’interface distinguent rédaction, vérification des destinataires,
 confirmation de l’envoi et suivi. Enregistrer un brouillon ne publie rien.
-Confirmer l’envoi immédiat signifie que la demande est enregistrée en file
-d’attente (`PRETE`), pas que les messages sont déjà disponibles dans Live.
+La confirmation durable de l'envoi passe par `PRETE` ; le correctif ci-dessus
+amorce son traitement au clic et peut retourner une projection déjà terminée.
+L'acceptation seule ne prouve pas que les messages sont disponibles dans Live.
 Il n’y a pas de second bouton « démarrer » pour cette demande confirmée.
 
 | État ou phase serveur | Information et action présentées à l’organisateur |
@@ -347,7 +385,7 @@ Il n’y a pas de second bouton « démarrer » pour cette demande confirmée.
 | `BROUILLON` | Message enregistré, aucun envoi ; vérifier les destinataires et l’horaire puis calculer l’aperçu. |
 | Aperçu calculé | Estimation et exclusions, sans réservation de quota ; confirmation explicite encore requise. Un changement de contenu ou d’horaire invalide l’aperçu affiché. |
 | `PROGRAMMEE` | Envoi programmé avec date/heure de Paris ; la date ne vaut pas résultat d’envoi. |
-| `PRETE`, phase `AUCUNE` | Envoi confirmé, en attente du traitement automatique. Actualiser ou suivre, sans recréer ni confirmer une seconde fois. |
+| `PRETE`, phase `AUCUNE` | Envoi en préparation. Actualiser ou suivre, sans recréer ni confirmer une seconde fois. |
 | Phase `CAPTURE` / `PREPARATION_AUDIENCE` | Préparation des destinataires en cours, même si l’état reste temporairement `PRETE` ; aucun crédit consommé avant le premier dépôt autorisé. |
 | `EN_COURS` | Publication des messages Live en cours ; progression confirmée et compteurs bornés. |
 | `TERMINEE` / `TERMINEE_PARTIELLE` | Traitement Live terminé, bilan consultable ; les notifications Push peuvent encore attendre leur transport. |

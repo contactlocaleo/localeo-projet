@@ -1,5 +1,12 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+## Correctif du 11 novembre 2026 — envoi instantané et différé des messages
+
+CA-47/48 : deux modes explicites, amorce ciblée au clic immédiat et suivi à
+l'échéance programmée, avec quota, aperçu, confirmation et idempotence conservés.
+Voir la [spécification courante](../../specifications/epic-73-animation-et-ou-coffrets/modules-souscriptions-import-communication.md#parcours-et-états-de-campagne)
+et le bilan associé. La clôture historique E73 reste conservée.
+
 ## Correctif du 11 novembre 2026 — mise à jour de la PWA Live ouverte
 
 Détection régulière visible/connectée et au focus, sans rechargement imposé,

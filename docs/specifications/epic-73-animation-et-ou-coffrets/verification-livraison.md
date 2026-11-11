@@ -1,5 +1,118 @@
 # E73 — Vérification, migration et livraison
 
+## Correctif du 11 novembre 2026 — envoi instantané et différé des messages
+
+Bases : Backend **`9aee34a`**, Animation **`2fbeea4`**, Projet **`db6feaa`**.
+Commits applicatifs : Backend **`d34f33b`**, Animation **`3716485`**.
+Demande : remplacer « Dès confirmation » par deux modes explicites et corriger
+l'envoi, avec « Tombola 2 » sur TEST comme exemple. L'hôte d'accès navigateur
+était indisponible : aucun accès authentifié, état de cette campagne, journal
+ou envoi réel sur TEST n'a été vérifié. La recette utilise des API synthétiques
+et une base PostgreSQL jetable, sans configuration opérateur.
+
+Deux défauts locaux sont démontrés : `ENVOYER` ne faisait que confirmer `PRETE`
+et attendait entièrement le batch ; le suivi d'une programmation future pouvait
+expirer deux minutes après l'ouverture, avant son échéance. La commande lance
+désormais, après commit durable, un lot du worker existant sur la seule campagne.
+Reconfirmation immédiate et reprise utilisent la même amorce. La programmation
+reste strictement différée ; les lots suivants passent par le traitement central.
+L'interface distingue **Envoi instantané → Envoyer le message** et **Envoi différé
+→ Programmer le message**, conserve aperçu et confirmation, et affiche les
+faits confirmés, sans déduire une publication d'une simple acceptation.
+
+Invariants : `CampagneOrganisateur` conserve version, confirmation, fenêtre,
+audience figée et transitions ; les services existants conservent habilitations,
+droits, fréquence, dépôt/message et débit unique. L'amorce est une orchestration
+applicative, jamais un second moteur dans la route. Elle ne transporte aucun
+Push. Limites : un lot de 100 préparations et 100 candidats, budget de boucles
+5 s, requête SQL 5 s, attente de verrou 3 s. Les transactions engagées et la
+relecture ont leurs propres limites ; aucun engagement de réponse HTTP en 5 s.
+Le suivi futur démarre son budget de huit lectures à 15 s d'intervalle sur
+deux minutes après l'échéance, à la première lecture visible et non bloquée.
+
+### Preuves backend
+
+- Rouge contre la classe du service de HEAD chargée en mémoire : **3 échecs
+  attendus / 3 succès** (état `PRETE`, aucun message au clic et aucune reprise
+  observable), sans écraser les sources. Harness ignoré :
+  `tmp/baseline_envoi_instantane.py` dans Backend.
+- Groupe architecture, recensements et régressions initiales : **735 succès**.
+  Exécuté avant l'ajustement de projection concurrente décrit ci-dessous ; cet
+  ajustement ne change ni imports, ni classes, ni frontières.
+- PostgreSQL complet initial : **23 succès**, avant cet ajustement.
+- Après revue : **51 tests ciblés réussis**, dont les **11 nouveaux cas** de
+  clic/rejeu, voisin intact, refus, reconfirmation des deux modes, reprise et
+  audience de 101 bornée. Ne pas additionner ces résultats aux groupes précédents.
+- PostgreSQL final : **6 succès / 18 désélectionnés**. Clic/rejeu/crédit unique,
+  double clic concurrent, date différée, panne après insertion avec rollback et
+  reprise, HTTP 202 contenant une projection terminée, restauration des limites
+  SQL. Aucun scénario ignoré.
+
+La revue indépendante a identifié puis fait corriger une relecture opportuniste
+du reçu pouvant retourner `EN_COURS` dans un DTO de mutation et produire HTTP 500
+après une commande déjà acquise. Rouge dédié : le DTO refuse cette enveloppe.
+La version finale relit seulement la campagne, sans reprendre le verrou du reçu,
+et conserve `operation_id` et `rejoue`. Les preuves finales unitaires et PostgreSQL
+couvrent ce cas. La revue finale ne relève plus de défaut concret ; elle n'a
+exécuté aucun test.
+
+```console
+py -3.14 scripts/validation/test_isolated.py tests/architecture tests/domain/test_domain_dedicated_classes.py tests/application/use_cases/test_use_case_business_test_coverage.py tests/application/services/test_envoi_instantane_campagnes_organisateur.py tests/application/services/test_execution_campagnes_organisateur.py tests/domain/animation_locale/test_campagnes_organisateur_dedicated.py tests/infrastructure/scheduler/test_communication_animation_schedules.py -q --tb=short
+py -3.14 scripts/validation/test_isolated.py tests/application/services/test_envoi_instantane_campagnes_organisateur.py tests/application/services/test_execution_campagnes_organisateur.py tests/domain/animation_locale/test_campagnes_organisateur_dedicated.py tests/infrastructure/scheduler/test_communication_animation_schedules.py -q --tb=short
+py -3.14 scripts/validation/test_isolated.py --postgres-test-url postgresql+psycopg://audit_test@127.0.0.1:31473/localeo_audit_test tests/security/test_campagnes_organisateur_postgres.py -k 'clic_instantane or double_clic_concurrent or programmation_avec_amorce or panne_amorce or http_202 or budget_restitue' -q -x --tb=short
+```
+
+PostgreSQL 11 local jetable dans Backend
+`tmp/communication-instantane-pg-a5ea8a4f6e804c46803679f2e0048b80/` ; premier
+essai arrêté par l'absence de `gen_random_uuid`, puis `pgcrypto` ajouté uniquement
+dans cette base de test. Le cluster est arrêté et le port 31473 libéré. Commandes
+et chronologie détaillées dans `tmp/communication-instantanee-preuves-20261111.txt`.
+
+### Preuves Animation et livraison
+
+**15 tests Node ciblés réussis**, types TypeScript et lint global réussis.
+Rouge du suivi : deux attentes échouaient avant correction (cycle futur déjà
+terminé, aucune lecture à l'échéance). Rouge UX : radio « Envoi instantané »
+absente dans `tmp/communication-workflow-mThRL3/`.
+**62 scénarios navigateur distincts réussis** : workflow 11, transport/contrats
+36 (684 assertions) et états UX 15. Un cas mobile complémentaire reprend un
+scénario pour vérifier exactement deux radios et inspecter la zone avant clic.
+Couverture 320/390/1 280/1 920 px et texte agrandi : aperçu obligatoire,
+double clic, résultat terminal instantané, attente honnête, programmation Paris,
+suivi après trois minutes d'attente, erreur/réconciliation sans nouvel envoi,
+droits/403/contexte périmé et absence de stockage personnel.
+
+Artefacts Animation : `tmp/communication-workflow-yPnria/report.json`,
+`tmp/campaigns-browser-1452Uk/`, `tmp/communication-ux-0mFAST/` et capture avant
+clic `tmp/communication-workflow-UFcLTL/ready-to-send-390.png`, inspectée.
+Les essais intermédiaires de banc (horloge figée trop tard, fermeture encore
+en cours sur 8186) sont conservés et ne sont pas comptés comme succès.
+Build application complet réussi, **1 893 modules**, vrais plugins et PWA,
+dans `tmp/communication-app-build-231b4261321b4e688bab540939c22232/dist/`.
+Copie temporaire de la configuration Vite avec chargement dotenv remplacé par
+un profil TEST synthétique, chemins adaptés et `envDir: false` ; aucun `.env`
+opérateur. Tous les serveurs/browser de recette sont arrêtés, port 8186 libre.
+
+```console
+node --test tests/campaign-follow-up.test.mjs tests/campaigns.test.mjs tests/campaigns-http-contracts.test.mjs
+node node_modules/typescript/bin/tsc --noEmit
+node node_modules/eslint/bin/eslint.js src vite.config.ts
+node tests/browser/communication-workflow.mjs
+node tests/browser/campaigns.mjs
+node tests/browser/communication-ux.mjs
+```
+
+Impacts : Backend, Animation et documentation canonique ; forme des contrats API
+et imports embarqués inchangée, aucune génération OpenAPI requise. Aucune
+migration, nouveau flag ou nouvelle planification. Le générateur de démonstration
+réutilise déjà le service puis le worker et vise le même résultat terminal à un
+message sans Push ; pas de changement de format ou de jeu, génération réelle
+non exécutée. Marketplace PWA est livré séparément. Déployer Backend avant
+Animation ; les campagnes programmées ou déjà en attente et les audiences
+restantes nécessitent toujours le batch existant opérationnel. Aucune réparation
+de « Tombola 2 », exécution de batch, notification réelle ou modification de
+configuration distante attestée par ces preuves locales.
+
 ## Correctif du 11 novembre 2026 — détection des mises à jour PWA
 
 Commit Marketplace : **`c8ef0e9`**. Commit et push demandés séparément après
