@@ -54,7 +54,24 @@ Le total des unités est stocké en `BIGINT`, comme les métadonnées de dotatio
 
 ## Exécution locale et activation future
 
-Le lanceur `python -m scripts.exploitation.traiter_tirages_libres --limit 25` simule par défaut depuis la racine du backend. L'application effective demande à la fois `--apply` et `LOCALEO_ANIMATION_TIRAGES_LIBRES_APPLY=true`. Le point d'entrée interne `POST /internal/animation-locale/tirages-libres/traiter` suit la même garde et exige une clé de portée `internal:batch` ; son corps contient `simulation` (vrai par défaut) et `limit` (1 à 100). Chaque phase peut reprendre la même opération après interruption. Ce lot n'active aucun ordonnanceur, ne modifie aucun environnement et n'exécute aucun fournisseur réel.
+**Correctif du 11 novembre 2026 — traitement supervisé et suivi.** Le POST de
+l'organisateur reste asynchrone : `EN_ATTENTE` indique une demande enregistrée,
+`PREPARATION` la phase constatée, `CONFIRMEE` le résultat scellé. L'interface
+distingue ces états et relit la même opération de façon bornée, en lecture seule,
+hors commande incertaine et onglet masqué. Une erreur arrête ce suivi ; une
+actualisation explicite permet de reprendre sa lecture. Aucun POST de tirage
+n'est rejoué automatiquement et aucun résultat n'est déduit du temps écoulé.
+
+Le service existant est raccordé à `animations.tirages_libres.traiter` :
+ordonnanceur chaque minute avec JSON `{"simulation":false,"limit":25}`,
+supervision `BatchRunner` et déclenchement manuel Admin protégé. Le défaut de
+simulation de l'API, le flag d'écriture, les verrous métier, les curseurs,
+le secret de préparation et la confirmation atomique restent autoritaires.
+La configuration hébergée et le traitement des opérations déjà engagées sont
+à contrôler après livraison selon le
+[guide d'exploitation](../../exploitation/exploitation/gerer-tirages-libres-animation.md).
+
+Le lanceur `python -m scripts.exploitation.traiter_tirages_libres --limit 25` simule par défaut depuis la racine du backend. L'application effective demande à la fois `--apply` et `LOCALEO_ANIMATION_TIRAGES_LIBRES_APPLY=true`. Le point d'entrée interne `POST /internal/animation-locale/tirages-libres/traiter` suit la même garde et exige une clé de portée `internal:batch` ; son corps contient `simulation` (vrai par défaut) et `limit` (1 à 100). Chaque phase peut reprendre la même opération après interruption. Le lot 04 initial ne raccordait pas l'ordonnanceur ; le correctif du 11 novembre ajoute cette planification sans modifier un environnement ni appeler de fournisseur réel lors de sa vérification locale.
 
 La préparation des emails alimente l'outbox existante ; le transport conserve son mécanisme d'exploitation habituel. La simulation ne modifie ni préparation, ni attribution, ni email.
 

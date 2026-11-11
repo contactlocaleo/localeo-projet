@@ -1,5 +1,92 @@
 # E73 — Vérification, migration et livraison
 
+## Correctif du 11 novembre 2026 — tirage confirmé en attente de traitement
+
+Bases : Backend `3117e50`, Animation `1df45ca`, Projet `93f9e88`.
+Commits applicatifs : Backend **`ade4b09`**, Animation **`6555b05`**.
+Signalement sur TEST : clôture et demande de tirage, puis « Tirage en cours »
+immobile. Le libellé exact provient d'`ExternalPrizesWorkspace` dans le portail
+Animation ; le code Live ne contient pas ce libellé. L'animation et les
+paramètres hébergés n'ont pas été inspectés ; cette limite empêche d'attribuer
+avec certitude le message TEST à un réglage particulier.
+
+Cause démontrée dans le dépôt : le POST organisateur retourne une préparation
+durable `EN_ATTENTE / INDEXATION`, mais le worker existant n'est raccordé ni
+au catalogue des batchs ni à l'ordonnanceur central. Seuls le CLI ou l'appel
+interne explicite pouvaient le faire progresser. Le flag seul ne programme
+aucune exécution ; la route interne simule par défaut. L'écran assimilait
+l'attente au traitement en cours et ne relisait pas automatiquement son état.
+
+Le raccordement `animations.tirages_libres.traiter` réutilise le service,
+les contrôles et les curseurs existants, via `BatchRunner`, chaque minute,
+avec JSON `simulation:false, limit:25`. L'API conserve simulation par défaut,
+portée `internal:batch`, refus d'une exécution effective avec flag désactivé,
+et lancement manuel Admin protégé par CSRF. Seule la confirmation atomique
+avec `confirmed_at` rend les résultats et gains visibles dans Live. Aucun
+nouveau tirage, changement de population, secret, classement, attribution,
+scellement ou droit ; les emails restent distincts du résultat.
+
+L'interface distingue demande confirmée en file, préparation et résultat
+confirmé. Son suivi borné (8 cycles maximum en deux minutes, espacés de
+15 secondes, jusqu'à 16 GET état/gains en plus de la lecture initiale)
+ne fait que lire la même opération et s'arrête sur
+échec ou état terminal, avec actualisation explicite ; aucune répétition
+automatique de commande, y compris après une réponse incertaine.
+L'état est lu avant les gains pour éviter un instantané de gains vide antérieur
+au scellement suivi d'un état confirmé : ce mélange pouvait rester affiché
+après l'arrêt du suivi. La course est reproduite en rouge dans
+`tmp/tirage-workflow-cgY8Lr/` puis vérifiée verte dans
+`tmp/tirage-workflow-4PUNdT/`, sans POST supplémentaire.
+
+Reproduction rouge navigateur avant correction : le POST 202 `EN_ATTENTE`
+ne donne pas le repère attendu de mise en file ; preuves Animation
+`tmp/tirage-workflow-iaaRd2/`. Les preuves finales sont consignées ci-dessous.
+Le groupe d'architecture backend obligatoire passe : **689 tests réussis**,
+frontières, classes domaine et couverture des cas d'usage comprises.
+La recette backend ciblée donne **101 réussites, aucun skip** : pile HTTP
+réelle avec SQLite, simulation et refus du flag, clé/scope, Admin manuel/CSRF,
+bilan et verrou, ordonnanceur HTTP vers ASGI, cycle borné, domaine du lot libre
+et console à 320/1 280 px. Commande :
+
+```console
+py -3.14 scripts/validation/test_isolated.py tests/security/test_tirages_libres_batch_http.py tests/infrastructure/scheduler tests/infrastructure/admin/test_batchs_manuels.py tests/security/test_manual_batches.py tests/security/test_animation_batch_http.py tests/application/services/test_traitement_tirages_libres.py tests/domain/animation_locale/test_attribution_lot_libre_dedicated.py --junitxml=.artifacts/tirages-libres-workflow-backend-20261111/junit.xml -q --tb=short
+```
+
+Deux échecs attendus avant correction prouvent l'absence du catalogue et de
+l'action manuelle. La supervision expose 34 actions, dont 22 techniques, et
+35 planifications. La fixture HTTP PostgreSQL existante est adaptée aux tables
+et sessions de supervision ; sa suite n'est pas exécutée dans cette recette,
+ni les mesures volumétriques PostgreSQL. Le protocole de persistance et de
+tirage est inchangé. Les exports OpenAPI sont générés hors ligne, 1 098/80
+chemins : seul changement fonctionnel de contrat, l'alternative manuelle
+Admin/mode manuel/CSRF sur le batch existant. Aucun DTO organisateur modifié.
+
+Recette Animation finale : **11 nouveaux scénarios réussis** dans
+`tmp/tirage-workflow-P9Yovv/report.json`, commande
+`node tests/browser/tirage-workflow.mjs`. Parcours demande → indexation →
+classement → scellement → confirmation, à 320/390/1 280 px et texte doublé,
+borne du suivi et reprise manuelle, onglet masqué, 503, reçu incertain sans
+POST automatique, refus/contexte tardif, code/référence de blocage, lecture
+des gains après scellement et confirmation désactivée pendant actualisation.
+Les **8 scénarios existants / 96 contrôles** tirage, perte de réponse, reçu
+absent et zéro candidat réussissent dans `tmp/tirage-existing-GMWfn7/`.
+Captures file à 390 px, résultat à 1 280 px et blocage à 390 px inspectées.
+Types, lint et build de production PWA isolé réussis
+(`tmp/tirage-workflow-production-final/dist`), sans `.env` opérateur.
+La suite `pnpm test` est rejouée après la dernière garde : **308 réussites,
+aucun skip**. Serveurs arrêtés, port 8186 libéré. Documentation : **97 guides /
+1 203 liens**, zéro défaut ; **148 sources exportées** vérifiées.
+
+Portée : Backend, Animation et documentation canonique/OpenAPI technique.
+Contrats organisateur et Live inchangés ; aucune modification Marketplace/Pro,
+migration ni nouveau flag. Générateur sans impact : aucun modèle, état,
+format d'export/restauration ou donnée de démonstration modifié. Tests isolés
+et API synthétiques ; aucune exécution hébergée de batch, modification de configuration,
+notification réelle ni réparation d'opération sur TEST. Les opérations déjà
+engagées peuvent avancer après déploiement si le flag et la planification sont
+actifs ; suivre le
+[guide de diagnostic](../../exploitation/exploitation/gerer-tirages-libres-animation.md).
+
 ## Correctif du 11 novembre 2026 — carnet conservé jusqu’à archivage
 
 Base Marketplace `3d6d063`, Projet `c68d9af`. Commit applicatif **`35414d5`**.
