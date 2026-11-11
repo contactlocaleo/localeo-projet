@@ -116,6 +116,37 @@ L'opérateur peut ajuster les quotas d'essai/cadeau à l'octroi et les modifier 
 
 ### Prorata, dates et montants
 
+#### Clarification du 11 novembre 2026 — E73-EVO-PRORATA-MODULES
+
+La demande confirme DEC-21 et CA-38 : le prix catalogue d'un module payant
+correspond à **12 mois**, et son achat en cours de souscription couvre seulement
+la période restante jusqu'à l'échéance de cette souscription. L'exploration des
+bases Backend `4631596` et Animation `683b5f2` constate que le domaine
+`devis_commercial.construire_devis` applique déjà ce prorata et que le paiement
+consomme ses montants figés. L'écart identifié est la présentation : tarif
+annuel prédominant au catalogue et fraction brute peu expliquée au devis.
+Cette clarification conserve la clôture historique et les règles ci-dessous.
+
+| Critère | Comportement et propriétaire | Preuve prévue | Impacts |
+| --- | --- | --- | --- |
+| PM-01 (précise CA-38) | Catalogue Animation : tarif explicitement « de référence » pour 12 mois ; annonce du calcul au prorata et échéance commune avant demande de devis. | Navigateur mobile/bureau et texte agrandi. | Présentation uniquement, champs catalogue/souscription existants. |
+| PM-02 (précise CA-38) | Devis et commande : référence annuelle acquise, montant HT facturé pour la période, TTC et dates serveur ; explication du prorata sur le devis. Pas de recalcul de prix dans le navigateur ni de référence remplacée par le catalogue courant. | Contrats et recette achat ; ancienne ligne sans instantané tarifaire reste consultable sans prix inventé. | Composant récapitulatif partagé, compatibilité des anciennes projections préservée. |
+| PM-03 (préserve CA-38/54) | Domaine : trois modules payants proratisés à trois/six mois et en mois incomplet ; échéance inchangée ; chasse arrondie au supérieur, quota Communication mensuel inchangé, import sans quota. Checkout reprend le TTC accepté ; renouvellement sur douze mois au plein tarif. | Tests purs du devis et frontières calendaires ; adaptateur de paiement sans fournisseur réel ; tests existants de commande/activation. | Aucun nouveau contrat, schéma, migration, flag ou traitement ; pas de recalcul des commandes historiques. |
+| PM-04 (précise CA-38) | `VersionCatalogue` refuse la publication d'un module payant dont la durée de référence n'est pas 12 mois. Le devis refuse une ancienne version explicitement non annuelle avec `PRODUIT_INDISPONIBLE`. | Refus purs puis publication transactionnelle sans nouvelle version ; renouvellement et achat refusés sur référence incohérente. | Validation dans le domaine commun ; schéma partagé forfait/module conservé, les durées des forfaits restent distinctes. |
+
+Les fixtures de recette doivent représenter une vraie demi-année pour un devis
+à 50 %. Le générateur de démonstration et les autres applications ne changent
+pas : ni modèle de données ni algorithme de calcul modifiés. Le contrôle des
+références annuelles est renforcé ; les conditions historiques sans durée
+explicite conservent le défaut annuel déjà appliqué. Aucun trafic ou accès
+SQL supplémentaire. Le guide utilisateur et le bilan de livraison portent
+respectivement l'explication et les résultats réels des contrôles. La livraison
+requiert le frontend et le backend ; aucune opération sur les paiements ou
+données existants. Si une ancienne version non annuelle existe, l'administrateur
+publie explicitement une nouvelle version à 12 mois avant tout nouveau devis.
+Les devis/commandes déjà acceptés gardent leurs conditions ; cette évolution
+ne recalcule ni ne rembourse les achats passés.
+
 La précision suivante est un choix de conception pour concrétiser le prorata accepté : calendrier civil Europe/Paris, périodes annuelles en mois calendaires, conversion en UTC pour stockage des instants. Les dates d'échéance historiques E47 sont inclusives ; leur conversion cible conserve leur dernier jour autorisé et produit `fin_exclusive` à minuit Paris le lendemain. Aucune migration ne retire une journée existante. Les nouvelles périodes sont `[debut, fin_exclusive)` et n'ont pas de jour de chevauchement au renouvellement.
 
 Pour une période annuelle, définir douze segments mensuels anniversaires avec bornes obtenues par le calcul calendaire existant (jour borné à la fin du mois). Chaque segment vaut 1/12. Le temps restant est la somme des mois entiers restants plus la fraction de jours civils du segment courant, divisée par 12. À une frontière mensuelle, 6 mois restants valent exactement 1/2 et 3 mois 1/4, conformément aux exemples retenus ; les années bissextiles et fins de mois sont testées. Le devis affiche date d'effet retenue, fin exclusive et fraction exacte rationnelle ; activation et expiration utilisent les mêmes bornes.

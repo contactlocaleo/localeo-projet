@@ -1,5 +1,15 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+## Évolution du 11 novembre 2026 — lisibilité du prorata des modules
+
+**E73-EVO-PRORATA-MODULES** confirme DEC-21 et CA-38 : tarif de référence pour
+12 mois, achat proratisé jusqu'à la fin de la souscription en cours. Le calcul
+existe dans le domaine ; l'évolution explicite la référence et le montant dû
+dans le catalogue, le devis et la commande, avec preuves pour les trois modules
+payants. La publication d'une référence non annuelle est refusée par le domaine.
+Voir les [critères PM-01 à PM-04](../../specifications/epic-73-animation-et-ou-coffrets/modules-souscriptions-import-communication.md#clarification-du-11-novembre-2026--e73-evo-prorata-modules)
+et les résultats propres au bilan de livraison. Clôture historique conservée.
+
 ## Évolution du 11 novembre 2026 — simplicité des parcours Live
 
 **E73-EVO-LIVE-SIMPLICITE** : correction de la continuité Découvrir/Commerçants,

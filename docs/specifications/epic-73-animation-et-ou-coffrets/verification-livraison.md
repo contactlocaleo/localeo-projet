@@ -1,5 +1,55 @@
 # E73 — Vérification, migration et livraison
 
+## Évolution — E73-EVO-PRORATA-MODULES, 11 novembre 2026
+
+Périmètre : [PM-01 à PM-04](modules-souscriptions-import-communication.md#clarification-du-11-novembre-2026--e73-evo-prorata-modules),
+précisant CA-38 et préservant CA-54. Bases : Backend `4631596`, Animation
+`683b5f2`, Projet `0044254`. Commit et push explicitement demandés. Les
+modifications locales préexistantes de l'outillage Codex restent séparées.
+Commits applicatifs correspondant aux preuves ci-dessous : Backend `b8871e8`,
+Animation `fa89df2`.
+
+Le calcul de prorata existait : douze segments mensuels civils, arrondi HT au
+centime et quota chasse au supérieur. Le catalogue annonce maintenant le tarif
+de référence annuel et la fin commune ; devis/commande distinguent référence
+annuelle acquise, HT de la période, TTC et dates. L'affichage ne recalcule aucun
+montant. Les anciennes lignes sans référence annuelle complète restent lisibles.
+Le renouvellement présente une nouvelle période complète.
+
+La revue indépendante a identifié une incohérence supplémentaire : publication
+possible d'un module pour une durée autre que 12 mois, alors que le calcul est
+annuel. PM-04 ferme ce cas dans le domaine à la publication et au nouveau devis.
+Les onze tests de refus échouaient avant correction (absence d'exception), puis
+réussissent. Une seconde revue a validé cette correction et la préservation des
+conditions déjà acceptées. Aucun prix, droit ou paiement historique modifié.
+
+| Critères | Preuves locales sur l'arbre livré |
+| --- | --- |
+| PM-01/02 | `node --test tests/commercial-summary.test.mjs tests/modules-http-contracts.test.mjs tests/animation-cancellation-contract.test.mjs` : **6/6** réussis ; montants serveur, instantané annuel, fallback historique et contrats stricts. |
+| PM-01/02 | `MODULES_CASE=purchase` puis `MODULES_CASE=renewal`, avec `node tests/browser/modules.mjs` : **8 scénarios** réussis (1280, 390, 320 px et texte 200 %), **212 assertions comptées**, plus attentes d'affichage ; achat/devis/commande/paiement simulé et renouvellement distincts. Capture commande mobile 390 px inspectée. |
+| PM-03/04 | Runner isolé Python 3.14 : `tests/domain/abonnements_plateforme/test_prorata_commercial.py`, `test_devis_commercial.py`, `test_modules_acquis_dedicated.py`, puis `tests/infrastructure/paiement/test_commerce_abonnements_gateway.py` : **58/58** réussis. Trois modules, demi/quart/année et mois incomplet, fins de mois/bissextile, arrondis, quotas, expiration, durée de référence, TTC Checkout. |
+| PM-03/04 et générateur | `py -3.14 scripts/validation/test_isolated.py tests/security/test_commerce_droits_integration_postgres.py tests/security/test_commerce_abonnements_postgres.py tests/integration/test_demo_modules_abonnements.py -q --tb=short --postgres-test-url postgresql+psycopg://audit_test@127.0.0.1:55488/localeo_audit_test` : **22/22** réussis, aucun skip ; cluster PostgreSQL 18 local jetable. Factures, droits/quotas et échéances, refus sans nouvelle version, répétition/concurrence/reprise financières et raccord du générateur. |
+| Architecture | Runner isolé : `tests/architecture tests/domain/test_domain_dedicated_classes.py tests/application/use_cases/test_use_case_business_test_coverage.py` : **687/687** réussis après la correction PM-04. |
+
+Animation : `pnpm typecheck`, `pnpm lint` et build applicatif isolé
+`node scripts/build-generation-tests.mjs` réussis. Aucune configuration opérateur
+chargée ; ces preuves ne sont pas un build de déploiement avec configuration cible.
+Le navigateur utilise des API fictives, les tests de paiement un fournisseur
+factice. Aucune commande réelle ni communication externe envoyée.
+La vérification du générateur est ciblée sur les modules ; le cycle complet de
+génération/dump/restauration n'est pas relancé pour ce contrôle sans changement
+de schéma ni du générateur.
+
+Impacts : Backend et Animation, documentation canonique/guide et fixtures.
+Formats des API et contrats embarqués inchangés : validation métier supplémentaire
+avec codes d'erreur existants. Pas de migration, flag, requête supplémentaire,
+nouveau batch ni recalcul des commandes. Les autres applications ne consomment
+pas ce parcours d'achat. Le générateur ne publie pas de tarif de module non annuel
+et conserve ses interfaces ordinaires. Livrer backend et frontend selon la
+[procédure](../../exploitation/technique/configurer-epic-73.md), puis vérifier le
+parcours sur TEST. Aucun déploiement ou contrôle sur un compte distant n'est
+attesté par ces tests locaux. Clôture historique E73 inchangée.
+
 ## Correctif — chargement Communication, 11 novembre 2026
 
 Signalement sur TEST : l'ouverture de Communication pour « TEST2-Tombola

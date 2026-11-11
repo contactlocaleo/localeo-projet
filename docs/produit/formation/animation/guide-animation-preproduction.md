@@ -29,6 +29,25 @@ Pour changer de responsable, proposez le transfert à un collaborateur actif. Vo
 
 Le choix d’organisation recharge le contexte ; vérifiez ensuite la commune avant de travailler. Un compte sans commune accessible peut accepter une invitation et gérer son mot de passe, mais n’ouvre aucun écran métier. Une erreur réseau sur une commande laisse son résultat incertain : actualisez les informations avant de confirmer une reprise. Le simple clic ne prouve pas l’enregistrement.
 
+## Acheter un module en cours d'abonnement
+
+Dans **Abonnement et modules**, le catalogue indique le tarif de référence pour
+**12 mois**. Choisissez les modules puis **Obtenir un devis** : le prix à payer
+est calculé au prorata de la période restante, avec la même échéance que votre
+abonnement. La date affichée comme « fin exclusive » est le premier jour sans
+couverture. Acheter un module ne prolonge pas l'abonnement.
+
+Le devis présente la référence annuelle, le montant HT pour votre période et
+les totaux HT, TVA et TTC. Par exemple, à six mois restants, un module à
+49 € HT/an coûte 24,50 € HT ; la chasse à 190 € HT/an coûte 95 € HT et apporte
+3 chasses. Le module Communication conserve ses 5 campagnes par mois, y compris
+le premier mois incomplet ; l'import n'a pas de quota commercial.
+
+Vérifiez les dates et montants avant de confirmer. Le paiement reprend le
+montant du devis accepté ; le module devient utilisable après confirmation de
+son activation. Si le devis a expiré, demandez-en un nouveau. Au renouvellement,
+les modules retenus couvrent la nouvelle période de 12 mois au tarif confirmé.
+
 ## Préparer et publier une animation
 
 Après une erreur réseau de création, réessayer avec le formulaire inchangé :
