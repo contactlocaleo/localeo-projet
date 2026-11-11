@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Live - API backend Epic 42",
     "description": "Vue OpenAPI 3.1 des contrats publics, editoriaux et techniques de Localeo Live.",
-    "version": "1.0.0+3a55fae"
+    "version": "1.0.0+ba16e91"
   },
   "paths": {
     "/public/animation-locale/animations/{animation_id}/contact-public": {
@@ -6152,6 +6152,156 @@
               }
             },
             "description": "Accepted"
+          }
+        }
+      }
+    },
+    "/public/animation-locale/diffusion/{code}": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Ouvrir Source",
+        "operationId": "ouvrir_source_public_animation_locale_diffusion__code__get",
+        "parameters": [
+          {
+            "name": "code",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]{16,64}$",
+              "title": "Code"
+            }
+          },
+          {
+            "name": "canal",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "enum": [
+                "LIEN",
+                "QR"
+              ],
+              "type": "string",
+              "default": "LIEN",
+              "title": "Canal"
+            }
+          }
+        ],
+        "responses": {
+          "303": {
+            "description": "Ouverture du lien public de cette animation"
+          },
+          "400": {
+            "description": "Demande invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentification requise",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Action non autorisée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ressource ou reçu introuvable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Version, aperçu ou état en conflit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Accès expiré",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Document trop volumineux",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Encodage non supporté",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Contenu invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Fréquence dépassée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Transaction indisponible, consulter le reçu",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -65582,6 +65732,40 @@
           "inscrits": {
             "type": "integer",
             "title": "Inscrits"
+          },
+          "clicsLien": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Clicslien"
+          },
+          "scansQr": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scansqr"
+          },
+          "collecteDepuis": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Collectedepuis"
           }
         },
         "additionalProperties": false,
@@ -65589,7 +65773,10 @@
         "required": [
           "sourceId",
           "libelle",
-          "inscrits"
+          "inscrits",
+          "clicsLien",
+          "scansQr",
+          "collecteDepuis"
         ],
         "title": "SourceBilanDTO"
       },
@@ -65620,6 +65807,44 @@
             "type": "string",
             "format": "date-time",
             "title": "Createdat"
+          },
+          "clicsLien": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Clicslien"
+          },
+          "scansQr": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scansqr"
+          },
+          "collecteDepuis": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Collectedepuis"
+          },
+          "inscrits": {
+            "type": "integer",
+            "title": "Inscrits"
           }
         },
         "additionalProperties": false,
@@ -65630,7 +65855,11 @@
           "code",
           "url",
           "qrUrl",
-          "createdAt"
+          "createdAt",
+          "clicsLien",
+          "scansQr",
+          "collecteDepuis",
+          "inscrits"
         ],
         "title": "SourceDiffusionDTO"
       },

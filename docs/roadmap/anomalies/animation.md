@@ -1,5 +1,34 @@
 # Registre des anomalies
 
+## Correction du 11 novembre 2026 — Bilan et diffusion par support
+
+- **Cause démontrée dans les sources** : l’interface présentait l’unité brute
+  `NOMBRE`, la création de supports se trouvait dans Bilan, et le PDF historique
+  n’exposait que quelques totaux. L’attribution d’inscription existait, mais
+  aucun compteur de clic ou d’ouverture QR n’était collecté.
+- **Correction** : Communiquer reçoit « Liens et QR de diffusion » après Flyer,
+  avec trois mesures par support et date de collecte. Les vignettes Bilan
+  masquent uniquement l’unité `NOMBRE`. Le PDF multipage assemble résultats,
+  objectifs conditionnels, diffusion, taux de satisfaction/commentaires et audit
+  dans un même instantané. La nouvelle redirection publique compte les ouvertures
+  sans identifier les visiteurs et conserve les contrôles du catalogue.
+- **Preuves** : huit scénarios navigateur, création/QR adjacents et contrôles
+  PostgreSQL jetables ; captures mobile/ordinateur et quatre pages PDF examinées.
+  La revue indépendante a identifié un refus de capacité des tombolas publiques :
+  reproduction rouge puis correction verte avec capacités serveur explicites.
+  Commandes et résultats dans la
+  [vérification de livraison](../../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md).
+- **Impacts** : backend, Animation et documentation ; OpenAPI embarqués
+  Animation et Pro synchronisés. Les contrats moteur JSON et Marketplace/Live
+  ne consomment pas ces DTO de diffusion et restent inchangés.
+  Migration v310 requise avant livraison ; pas
+  de nouveau droit, batch, secret ou flag. Schéma de démonstration additif et
+  colonnes nullables compatibles avec les captures existantes ; pas de donnée
+  de démonstration modifiée ni de génération sur environnement partagé.
+  Aucun déploiement ou migration TEST effectué. Les ouvertures historiques
+  restent non collectées ; les anciens QR doivent être remplacés pour compter
+  leurs nouvelles ouvertures.
+
 ## Correction du 11 novembre 2026 — e-mail et détail de participation
 
 - **Cause** : les gains libres/numériques ne projetaient pas l’e-mail ; sans

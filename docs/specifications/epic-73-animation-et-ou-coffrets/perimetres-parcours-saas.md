@@ -553,7 +553,7 @@ sous-rubriques de l’espace courant sont présentées sur ordinateur.
 | --- | --- |
 | Préparer | Assistant, Configuration, Invitations, Préparation terrain |
 | Piloter | Live, Participants, Validations, Publication et clôture |
-| Communiquer | Communication, Actualités selon habilitation, Flyer |
+| Communiquer | Communication, Actualités selon habilitation, Flyer, Liens et QR de diffusion |
 | Résultats | Fin et archivage, Tirage, Gains et remise, Bilan, Audit |
 
 Précision du **11 novembre 2026** : l’action suivante rejoint le statut
@@ -865,11 +865,51 @@ Les objectifs facultatifs sont enregistrés dans la version de configuration ava
 
 Chaque réponse fournit date d’observation, fenêtre, unité, population, définition/version et état de disponibilité (`MESURE`, `NON_COLLECTE`, `NON_APPLICABLE`). `null` signifie absence de mesure, jamais zéro. Une édition est comparable si commune, moteur/type, définition et fenêtre sont comparables ; sinon afficher les écarts et empêcher une variation trompeuse. L’historique ne reçoit pas de valeurs inventées pour les mesures nouvelles.
 
+Dans les vignettes du Bilan, l’unité technique `NOMBRE` n’est pas affichée ;
+la valeur et son libellé restent visibles. Les autres unités sont conservées.
+
 Les bilans utilisent des agrégations SQL ou projections incrémentales datées, sans hydrater tous les participants, passages ou gains pour calculer leurs totaux. Les commentaires, sources détaillées et historiques sont des listes paginées en base ; la moyenne et le total ne sont pas recalculés à chaque page de commentaires. Regrouper les enrichissements nécessaires, sans requête par gain/prestation. Les mesures de requêtes/mémoire font croître les participants à nombre d’animations affichées constant ; les méthodes historiques de bilan en mémoire ne prouvent pas cette capacité.
 
 Les sources de diffusion sont des codes publics opaques d’animation, accompagnés d’un libellé défini par le gestionnaire (« affiche mairie », etc.). Lien/QR transmet le code jusqu’à l’inscription de cette animation ; enregistrer le code valide présenté lors de cette inscription, sans réattribution ultérieure lors d’une visite. Code inconnu/absent ou autre animation → `INCONNUE`, pas rejet d’inscription ni accès supplémentaire. Pas de cookie publicitaire intersites ou association à des habitudes de navigation. Le QR de diffusion est distinct du QR personnel de validation.
 
+Leur gestion est dans **Communiquer → Liens et QR de diffusion**, immédiatement
+après **Flyer**, et demeure consultable en lecture seule après terminaison.
+Chaque support affiche clics sur le lien, ouvertures via le QR et inscriptions
+attribuées. Les deux premiers sont des ouvertures HTTP agrégées, non des
+personnes uniques ni une preuve de scan physique ; répétitions et robots peuvent
+être comptés. Aucun visiteur, IP ou agent utilisateur n’est enregistré dans ces
+compteurs. La date `collecteDepuis` annonce le début effectif de mesure ; une
+mesure absente reste « Non collecté », distincte de zéro.
+
+Les nouveaux liens et PNG de QR passent par
+`GET /public/animation-locale/diffusion/{code}?canal=LIEN|QR` : visibilité publique
+du catalogue revérifiée, incrément atomique, puis redirection 303 non mise en
+cache vers l’inscription Live configurée. La destination ne vient jamais du
+client. Une animation archivée ou non visible n’ouvre pas ce parcours. La
+vérification serveur déclare les capacités serveur, y compris tombola publique.
+Les anciens liens directs et QR continuent d’attribuer les inscriptions, mais
+leurs ouvertures ne sont pas mesurées ; remplacer les liens et retélécharger les
+QR par support pour cette mesure. Le QR générique du flyer ne fournit pas de
+ventilation par support. La migration v310 démarre les compteurs existants à
+zéro et date la collecte sans reconstituer l’historique.
+
 Questionnaire Live après clôture, facultatif : une réponse par participation, note entière 1 à 5 et commentaire texte facultatif (borne technique 2 000 caractères, rendu échappé). Une seconde écriture de la même réponse remplace son contenu sous version plutôt que d’ajouter une voix. Rejeter avant clôture, note hors intervalle ou accès à une autre participation. Aucun message automatique supplémentaire. Bilan organisateur : moyenne, nombre de réponses et commentaires, sans identité ni identifiant participant, email, token ou horodatage fin permettant de relier une réponse. Cela ne prétend pas rendre anonyme un commentaire où le répondant se nomme ; ne pas enrichir le texte avec son identité. Données sources soumises à la conservation des participations ; agrégats réellement non identifiants séparés.
+
+Le PDF du Bilan présente les résultats, les objectifs lorsqu’ils existent,
+la performance des liens et QR par support, la satisfaction avec commentaires,
+puis l’audit de l’animation. Le **taux de satisfaction** vaut le nombre de notes
+4 ou 5 divisé par le nombre de réponses, exprimé en pourcentage ; sans réponse,
+il est non collecté. Ce dénominateur volontaire est explicité, sans prétendre
+représenter tous les inscrits. L’audit fournit date, action, rôle et résultat,
+sans coordonnées d’auteur ni métadonnées libres.
+
+L’export garde le droit `animation:exporter` et le périmètre organisation/commune.
+Résultats, sources, avis et audit proviennent d’un même instantané PostgreSQL
+`REPEATABLE READ` ; lectures SQL par curseur puis rendu PDF hors transaction.
+Chaque liste détaillée est bornée à 10 000 lignes. Au-delà, refus 422 explicite
+`EXPORT_DIFFERE_REQUIS`, jamais un PDF tronqué ; aucun export différé automatique
+n’est créé par ce correctif. Texte échappé, tableaux multipages et polices
+embarquées préservent commentaires, accents et lignes longues.
 
 ## 8. Réversibilité et fermeture
 

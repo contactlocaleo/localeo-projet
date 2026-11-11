@@ -1,5 +1,65 @@
 # E73 — Vérification, migration et livraison
 
+## Correctif du 11 novembre 2026 — Bilan PDF et supports de diffusion
+
+Bases : Backend `ba16e91`, Animation `1cd4015`, Pro `00b8b9d`, Projet
+`a9c4b96`, puis modifications locales. Le Bilan masque l’unité technique
+`NOMBRE`. La gestion des supports passe dans Communiquer, après Flyer.
+Le PDF expose résultats, objectifs définis, liens/QR, satisfaction/commentaires
+et audit, avec instantané cohérent et refus explicite au-delà de la borne.
+
+| Preuve exécutée | Résultat |
+| --- | --- |
+| Backend isolé : `test_bilan_pdf_export.py`, `test_bilan_pdf_snapshot.py`, `test_bilan_animation_pdf.py`, `test_valorisation_animation.py`, `test_diffusion_publique.py`, `test_schema_readiness.py` | **93 réussites**, aucun skip ; rapport `localeo-backend/tmp/bilan-final-isolated.xml` |
+| Diffusion : règles pures, routes, anciens reçus et PostgreSQL jetable | **35 + 6 passages verts**, avec recouvrement ; rapports `tmp/diffusion-clics-final.xml` et `tmp/diffusion-clics-recus.xml` ; atomique, refus visibilité, canaux distincts, attribution et migration |
+| Tombola publique : composition réelle catalogue et capacités | **20 réussites**, `tmp/diffusion-capacites-green.xml` ; refus reproduit avant correction sur `ClientAnimationIncompatible`, puis capacités serveur déclarées sans modifier les exigences client |
+| PDF PostgreSQL jetable : audit SQL/pagination/dédoublonnage, satisfaction et instantané | **3 réussites**, `tmp/bilan-pdf-pg-tests.xml` ; aucun skip ni population ORM globale ; satisfaction 75 % vérifiée |
+| Architecture et recensements domaine/use cases | **695 réussites**, sortie outil, sans rapport XML ; répertoire isolé `tmp/diffusion-clics-arch-unique` |
+| Animation : suite Node puis reprise ciblée | Suite de **314 tests : 313 verts, un échec du nouveau test sur un import CSS dans son chargeur** ; double UI isolé dans le test, puis **11 tests ciblés verts**, couvrant cet échec et les contrats de diffusion ; registre moteur vérifié à nouveau, **3 verts** |
+| Animation navigateur : `WORKSPACE_CASE=bilan-diffusion` | **8 parcours réussis** sur 320, 390, 768, 1024, 1280 et 1600 px, dont texte à 200 % ; placement, compteurs zéro/null, copie, QR, pagination, panne/réessai, lecture seule après fin et absence d’écriture |
+| Animation navigateur adjacent : `JOURNEY_CASE=sources` | **2 parcours / 19 contrôles réussis**, création/réconciliation et téléchargement QR, PC/mobile et texte à 200 % |
+| Pro : contrats API, contrats animations et registre | **62 tests réussis**, trois fichiers Vitest ; OpenAPI régénéré hors ligne, 1104 chemins |
+| Animation TypeScript, ESLint et build isolé final | **Réussis**, 1902 modules ; avertissement Vite préexistant de bundle supérieur à 500 kB (principal 504,34 kB) |
+
+Les rapports backend ciblés représentent **127 tests distincts réussis**, sans
+additionner leurs recouvrements. Commande principale :
+
+```console
+py -3.14 scripts/validation/test_isolated.py tests/api/test_bilan_pdf_export.py tests/application/animation_locale/test_bilan_pdf_snapshot.py tests/infrastructure/test_bilan_animation_pdf.py tests/api/test_valorisation_animation.py tests/domain/animation_locale/test_diffusion_publique.py tests/application/exploitation/test_schema_readiness.py --basetemp=tmp/bilan-final-isolated --junitxml=tmp/bilan-final-isolated.xml -q
+py -3.14 scripts/validation/test_isolated.py tests/architecture tests/domain/test_domain_dedicated_classes.py tests/application/use_cases/test_use_case_business_test_coverage.py -q --basetemp tmp/diffusion-clics-arch-unique
+```
+
+Le rendu PDF a été extrait et examiné visuellement sur quatre pages ; un cas
+long produit 14 pages sans perte de texte. Objectifs absents, zéros, mesures
+non collectées, caractères de balisage, confidentialité, numérotation et
+libellés d’audit sont couverts. PDF/PNG synthétiques non versionnés dans
+`localeo-backend/tmp/bilan-pdf-unique/`. Captures de l’interface examinées
+dans `localeo-animation/tmp/bilan-diffusion-ux/`. Le test initial des schémas
+HTTP a également signalé les nouveaux champs manquants de la fixture de bilan
+de sources ; fixture alignée sur le producteur, assertion conservée.
+
+Les deux clusters PostgreSQL 18 dédiés, ports **31610 et 31611**, sont arrêtés.
+Tests sans `.env`, fournisseur réel ni données TEST. La revue indépendante
+confirme les gardes tenant, absence de redirection libre et compteurs atomiques.
+Les mesures de charge représentatives et la recette hébergée restent à faire.
+
+OpenAPI E41/E42 régénérés (1104/81 chemins), consommés par Animation et Pro :
+seuls `SourceDiffusionDTO`, `SourceBilanDTO` et la nouvelle route changent.
+Les schémas moteur JSON ne portent pas ces DTO : leur régénération globale,
+inutile au correctif, a été retirée. Elle avait révélé un écart historique entre
+le manifeste Pro à trois moteurs et le producteur actuel à quatre ; aucune
+extension implicite du support Pro n’est introduite. Les artefacts inchangés
+ont été rétablis aux octets Git afin de préserver leurs empreintes, puis le
+registre Pro contrôlé avec succès. Marketplace/Live ne reçoit pas de changement.
+
+**Migration v310 requise, non appliquée sur TEST ici**, backend avant interface.
+Pas de nouveau droit, batch, flag ou secret ; origine API publique existante
+requise pour les liens. Données de démonstration inchangées et colonnes
+nullables compatibles ; génération complète non exécutée. Les clics antérieurs
+ne sont pas reconstitués ; les anciens liens/QR directs doivent être remplacés
+pour mesurer les ouvertures. Voir les
+[consignes d’exploitation](../../exploitation/animation/deploiement-render.md#bilan-pdf-et-performance-de-diffusion--11-novembre-2026).
+
 ## Correctif du 11 novembre 2026 — identité et détail de participation
 
 Bases : Backend `3a55fae`, Animation `f1dad12`, Pro `c0dc46a`, Projet `8ee74a6`
