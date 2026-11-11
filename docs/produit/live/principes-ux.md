@@ -16,8 +16,11 @@ restent historiques.
 
 ## LIVE-UX-01 — Le carnet de bord est le centre de l’expérience
 
-L’habitant retrouve ses animations, ses coffrets, ses lots et ce qu’il peut faire
-ensuite. Le carnet raconte ce qu’il a commencé, accompli et peut poursuivre.
+L’habitant retrouve ses animations et ses coffrets dans Mon carnet, et ses gains
+dans Mes lots. La vignette de l'animation signale le résultat personnel confirmé
+avec une icône et un libellé : Gagnant ou « Vous n’avez pas gagné cette fois-ci ».
+Les cartes de lots restent dans Mes lots. Le carnet raconte ce qu’il a commencé,
+accompli et peut poursuivre.
 La découverte locale nourrit ce carnet et reste facilement accessible.
 Chaque écran répond rapidement à trois questions : « Où en suis-je ? »,
 « Qu’ai-je à retrouver ? », « Que puis-je faire maintenant ? ».
@@ -199,9 +202,10 @@ Animations y pilote aussi les messages des organisateurs, sans accord individuel
 Dans le passeport, les visites tamponnées portent la progression : une seconde
 rangée de tampons synthétiques ne la répète pas. Le lien vers les commerces
 reste dans ce bloc principal, avec le QR et les informations de visite.
-Les animations du carnet correspondent aux inscriptions personnelles encore
-ouvertes ; les favoris appartiennent à Découvrir et les gains restent dans
-Mes lots après clôture. Distinguer état de participation, progression et cycle
+Les animations du carnet correspondent aux inscriptions personnelles non
+archivées par l'organisateur ; les favoris appartiennent à Découvrir et les gains
+restent dans Mes lots, y compris après clôture ou archivage. Distinguer état de
+participation, progression et cycle
 de l'animation. Une vignette donne accès à ses nouvelles non lues, avec reçu
 de lecture confirmé. Le badge Mes lots représente les gains non encore vus,
 acquittés par « J’ai vu ce lot » ; il ne représente jamais des retraits restant

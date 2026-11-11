@@ -1,5 +1,91 @@
 # E73 — Localeo Live, entrée unique des animations
 
+## Correctif du 11 novembre 2026 — résultat sur la vignette du carnet
+
+**Mon carnet** présente les animations personnelles non archivées et les
+coffrets conservés ; les cartes de lots et le filtre Lots sont retirés de cette
+vue. **Mes lots** conserve tous les gains, leurs détails, l'acquittement
+« J’ai vu ce lot » et le compteur de nouveaux gains. Un lot n'est ni supprimé
+ni marqué comme vu lors de ce changement de rubrique. Un ancien lien de filtre
+Lots ne doit pas réintroduire les lots ni produire un carnet artificiellement vide.
+
+La vignette de chaque participation donne priorité au `resultat_tirage` personnel
+du tableau de bord, avant le statut de qualification :
+
+- `GAGNANT` : trophée accompagné de **Gagnant** ; l'accès au détail de la
+  participation reste à sa place. Le gain se consulte dans Mes lots.
+- `NON_GAGNANT` : pictogramme de résultat sans gain, accompagné de
+  **Vous n’avez pas gagné cette fois-ci**.
+- `NON_QUALIFIE` après réalisation : **Hors tirage** ; `REMPLACE`, `ANNULE`
+  et `SANS_TIRAGE` restent distincts. Une date annoncée, une clôture ou
+  l'absence de récompense dans une fenêtre paginée ne prouve aucun résultat.
+- Sans résultat confirmé, les états de participation et de qualification
+  existants restent utilisés. Une actualisation échouée signale le dernier état
+  connu ; un refus d'accès purge la projection personnelle.
+
+Cette précision complète LS-06/08 et remplace les anciennes compositions
+mixtes du carnet concernant les lots. Principes LIVE-UX-01/02/04/05/06/07/08 :
+un objet à sa place, résultat explicite par texte et icône, lecture mobile et
+accès personnels préservés. Le propriétaire du résultat reste
+`resultat_personnel_tirage` dans le domaine backend ; le tableau privé expose
+déjà les faits nécessaires, pour Coffrets et tirages libres confirmés.
+Marketplace seul change sa présentation. Aucun contrat, règle d'attribution,
+migration, flag ou format de démonstration modifié ; aucune reprise de données.
+
+### Preuves du correctif
+
+Base Marketplace `35414d5`, correctif **`8ad9b12`**. La reproduction
+Node échoue avant correction sur les lots visibles et la qualification qui
+masque le résultat, puis réussit. La revue indépendante du consommateur
+confirme priorité du résultat personnel, refus prioritaire, exclusion des lots
+avant pagination et maintien des accès et de Mes lots.
+
+La recette synthétique `test-results/visual-runs/2026-11-11T10-29-07-051Z-VYTwEe/`
+donne **30 scénarios réussis** (notifications et stabilité du chargement), avec
+build isolé, sans API réelle ni fichier d'environnement opérateur. Les captures
+`carnet-results-{320,390,1280}.png` montrent Gagnant/trophée et le résultat sans
+gain/ticket barré ; la première action reste accessible à 320 px. Le badge,
+l'acquittement explicite et l'archivage sont également couverts.
+
+La recette adjacente audit/retours/carnet
+`test-results/visual-runs/2026-11-11T10-31-09-405Z-iu7qdK/` conserve **34 réussites
+et deux échecs d'attentes historiques** : ancien libellé d'annuaire et favori
+encore recherché dans le carnet. Les cibles sont adaptées aux parcours actuels,
+puis seules ces deux épreuves sont rejouées avec succès dans
+`test-results/visual-runs/2026-11-11T10-37-16-430Z-oTZ152/`. Au total, **66
+scénarios distincts validés**, sans modification supplémentaire du bundle
+applicatif, identique entre les recettes. Les processus sont arrêtés et les
+ports 8192/8193/8194 libérés.
+
+Les **27 tests Node ciblés** du carnet, des dates et des accès réussissent,
+puis la suite élargie donne **276 réussites, aucun échec**. Cette suite a
+d'abord rencontré sept échecs de fixture VM : `live-personal-refresh.test.cjs`
+ne fournissait plus `subscribeSeenRewards` au hook `useLiveRewards`. La
+comparaison à HEAD confirme le défaut antérieur, sans dépendance aux sources
+du carnet modifiées. La fixture exécute désormais le vrai port `liveRewardSeen`
+sur stockage simulé durable et événements ; les assertions vérifient aussi
+l'acquittement, sa persistance et l'absence de collecte du lot. Aucun hook ni
+assertion métier neutralisé. Traces `security-suite-final.log` puis
+`security-suite-repaired.log` dans le run ci-dessus. L'ancienne attente
+d'historique après résultat est mise en accord avec le maintien jusqu'à
+archivage, en vérifiant aussi le résultat affiché.
+Commande de la suite Node élargie : `node scripts/run-security-tests.cjs`.
+
+Le lint ciblé `node node_modules/eslint/bin/eslint.js src tests scripts *.cjs
+*.mjs` et le contrôle de diff réussissent. `npm run lint` global reste bloqué
+par `EPERM` sur le répertoire local d'artefacts
+`output/bum-politique/pytest-approval-1`, sans modification de ses droits ni
+ajout d'exclusion au correctif.
+
+Le producteur inchangé est vérifié par **55 tests réussis**, sans base réelle :
+
+```console
+py -3.14 scripts/validation/test_isolated.py tests/domain/animation_locale/test_resultats_annonces_tirage.py tests/application/animation_locale/test_tableau_de_bord_live.py tests/api/test_localeo_live_tableau_rappels.py -q --tb=short
+```
+
+La vérification de l'environnement TEST après livraison reste à réaliser ;
+ces preuves locales ne constituent ni un déploiement ni un tirage réel.
+
 ## Correctif du 11 novembre 2026 — messages de l'organisation dans le détail
 
 Une entrée unique **Messages de l’organisation** ouvre directement la liste
