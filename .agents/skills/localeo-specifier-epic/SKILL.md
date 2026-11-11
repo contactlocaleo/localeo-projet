@@ -15,3 +15,9 @@ Lire le [guide transverse](../../../AGENTS.md), le backlog ciblé, son dossier d
 6. Contrôler les liens des documents modifiés et, si des sources exportées changent, `python scripts/sync_documentation.py --check-sources`. Présenter décisions, chemins canoniques, tests à produire et limites. La validation de liens ne valide pas la conception métier.
 
 Pour un contrat transverse complexe, confier une revue en lecture seule au profil `localeo-contract-reviewer`, avec fichiers précis et questions de compatibilité. Intégrer les constats avant de considérer la conception exploitable.
+
+Si la demande porte sur plusieurs lots, identifier leurs dépendances et les
+critères de chacun dans la source canonique. Appliquer la
+[reprise par lot](../../../docs/organisation/cycle-epic.md#reprendre-une-tâche-longue)
+et enchaîner la phase demandée suivante lorsque le lot est prêt, dans le périmètre
+déjà autorisé. Une spécification seule reste une spécification seule.

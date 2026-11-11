@@ -12,6 +12,7 @@ from pathlib import Path
 import shutil
 import subprocess
 import sys
+import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -22,6 +23,81 @@ def now():
 
 def digest(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+class AtomicReportWriter:
+    """Create a report without clobbering, then atomically update this attempt only."""
+
+    def __init__(self, output):
+        self.output = Path(output).absolute()
+        self.previous_sha256 = None
+        self._refuse_existing()
+        self.output.parent.mkdir(parents=True, exist_ok=True)
+
+    def _refuse_existing(self):
+        if os.path.lexists(self.output):
+            raise ValueError(f"Output already exists; choose a new --output: {self.output}")
+
+    def __call__(self, report):
+        content = (json.dumps(report, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+        descriptor, filename = tempfile.mkstemp(dir=self.output.parent,
+                                               prefix=f".{self.output.name}.", suffix=".tmp")
+        temporary = Path(filename)
+        identity = os.fstat(descriptor)
+        try:
+            with os.fdopen(descriptor, "wb") as stream:
+                stream.write(content)
+                stream.flush()
+                os.fsync(stream.fileno())
+            if self.previous_sha256 is None:
+                # A hard link publishes complete bytes and fails if another writer won.
+                try:
+                    os.link(temporary, self.output)
+                except FileExistsError:
+                    self._refuse_existing()
+                    raise
+            else:
+                if self.output.is_symlink() or digest(self.output) != self.previous_sha256:
+                    raise ValueError(f"Output changed outside this attempt: {self.output}")
+                os.replace(temporary, self.output)
+        finally:
+            # Ctrl+C can arrive immediately after link/replace published our file.
+            # Remember ownership even in that case so the interrupted state can follow.
+            try:
+                published = self.output.stat(follow_symlinks=False)
+            except FileNotFoundError:
+                pass
+            else:
+                if os.path.samestat(identity, published):
+                    self.previous_sha256 = hashlib.sha256(content).hexdigest()
+            temporary.unlink(missing_ok=True)
+
+
+def report_output(root, action, output=None):
+    if output is not None:
+        return Path(output)
+    parent = root / ".artifacts/quality"
+    parent.mkdir(parents=True, exist_ok=True)
+    timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S.%fZ")
+    directory = Path(tempfile.mkdtemp(prefix=f"{action}-{timestamp}-", dir=parent))
+    return directory / f"{action}.json"
+
+
+def retry_reference(path, profile):
+    """Link an earlier attempt; its successes never substitute for new checks."""
+    path = Path(path).resolve()
+    content = path.read_bytes()
+    report = json.loads(content.decode("utf-8-sig"))
+    if (not isinstance(report, dict) or report.get("schema_version") != 1
+            or report.get("kind") != "quality"
+            or not isinstance(report.get("status"), str)
+            or report.get("status") not in {"running", "passed", "incomplete_or_failed", "interrupted"}
+            or report.get("profile") != profile
+            or not isinstance(report.get("checks"), list) or not report["checks"]
+            or not all(isinstance(check, dict) and isinstance(check.get("id"), str)
+                       and check["id"] for check in report["checks"])):
+        raise ValueError("--retry-of must name a quality execution report for the same profile")
+    return {"path": str(path), "sha256": hashlib.sha256(content).hexdigest()}
 
 
 def check_environment(check):
@@ -106,58 +182,96 @@ def executable(argv):
     return argv
 
 
-def run_checks(root, registry, profile, *, execute=False, timeout=1800, pg_bin_dir=None):
-    started = now()
+def run_checks(root, registry, profile, *, execute=False, timeout=1800, pg_bin_dir=None,
+               persist=None, retry_of=None):
     registry_before = digest(root / "repositories.json")
-    before = snapshot(root, registry)
-    checks = []
-    for spec in selection(registry, profile):
-        check = {**spec, "status": "not_run", "started_at": None, "finished_at": None,
-                 "exit_code": None}
-        checks.append(check)
-        if not execute:
-            check["reason"] = "plan_only"
-            continue
-        required = spec.get("requires", [spec["repository"]])
-        missing = [name for name in required if before[name]["status"] != "available"]
-        if missing:
-            check["reason"] = "Repositories unavailable: " + ", ".join(missing)
-            continue
-        check["started_at"] = now()
-        try:
-            arguments = list(spec["argv"])
-            if "{pg_bin_dir}" in arguments:
-                if pg_bin_dir is None:
-                    raise ValueError("--pg-bin-dir is required for the explicitly selected disposable PostgreSQL checks")
-                arguments = [str(pg_bin_dir) if arg == "{pg_bin_dir}" else arg for arg in arguments]
-            argv = executable(arguments)
-            check["executed_argv"] = argv
-            # Record only registry-declared public overrides, never the inherited environment.
-            environment = {**os.environ, **check_environment(spec)}
-            # Inherit stdout/stderr so logs are visible without retaining environment or secrets.
-            result = subprocess.run(argv, cwd=before[spec["repository"]]["path"],
-                                    timeout=timeout, shell=False, env=environment)
-            check.update(status="passed" if result.returncode == 0 else "failed",
-                         exit_code=result.returncode)
-        except subprocess.TimeoutExpired:
-            check.update(status="failed", reason="timeout")
-        except (OSError, ValueError) as exc:
-            check.update(status="not_run", reason=str(exc))
-        check["finished_at"] = now()
-    after = snapshot(root, registry)
-    return {"schema_version": 1, "kind": "quality", "profile": profile,
-            "started_at": started, "finished_at": now(), "registry_sha256": digest(root / "repositories.json"),
+    checks = [{**spec, "status": "not_run", "started_at": None, "finished_at": None,
+               "exit_code": None, "reason": "not_started" if execute else "plan_only"}
+              for spec in selection(registry, profile)]
+    report = {"schema_version": 1, "kind": "quality", "profile": profile,
+            "started_at": now(), "finished_at": None, "registry_sha256": registry_before,
             "registry_sha256_before": registry_before,
-            "repositories_before": before, "repositories_after": after, "checks": checks,
-            "status": ("planned" if not execute else
-                       "passed" if all(c["status"] == "passed" for c in checks) else "incomplete_or_failed"),
+            "repositories_before": {}, "repositories_after": {}, "checks": checks,
+            "status": "running" if execute else "planned",
             "scope": "Only the named profile; no deployment approval or unlisted checks implied."}
+    if retry_of is not None:
+        report["retry_of"] = retry_of
+
+    def save():
+        if persist is not None:
+            persist(report)
+
+    active = None
+    try:
+        save()
+        before = snapshot(root, registry)
+        report["repositories_before"] = before
+        for check in checks:
+            if not execute:
+                save()
+                continue
+            required = check.get("requires", [check["repository"]])
+            missing = [name for name in required if before[name]["status"] != "available"]
+            if missing:
+                check["reason"] = "Repositories unavailable: " + ", ".join(missing)
+                save()
+                continue
+            active = check
+            check.update(status="running", started_at=now())
+            check.pop("reason", None)
+            save()
+            try:
+                arguments = list(check["argv"])
+                if "{pg_bin_dir}" in arguments:
+                    if pg_bin_dir is None:
+                        raise ValueError("--pg-bin-dir is required for the explicitly selected disposable PostgreSQL checks")
+                    arguments = [str(pg_bin_dir) if arg == "{pg_bin_dir}" else arg for arg in arguments]
+                argv = executable(arguments)
+                check["executed_argv"] = argv
+                # Record only registry-declared public overrides, never the inherited environment.
+                environment = {**os.environ, **check_environment(check)}
+                # Inherit stdout/stderr so logs are visible without retaining environment or secrets.
+                result = subprocess.run(argv, cwd=before[check["repository"]]["path"],
+                                        timeout=timeout, shell=False, env=environment)
+                check.update(status="passed" if result.returncode == 0 else "failed",
+                             exit_code=result.returncode)
+            except subprocess.TimeoutExpired:
+                check.update(status="failed", reason="timeout")
+            except (OSError, ValueError) as exc:
+                check.update(status="not_run", reason=str(exc))
+            check["finished_at"] = now()
+            active = None
+            save()
+        report["repositories_after"] = snapshot(root, registry)
+        report["registry_sha256"] = digest(root / "repositories.json")
+        report["status"] = ("planned" if not execute else
+                            "passed" if all(c["status"] == "passed" for c in checks) else "incomplete_or_failed")
+        report["finished_at"] = now()
+        save()
+    except KeyboardInterrupt:
+        if active is not None and active["status"] == "running":
+            active.update(status="interrupted", reason="KeyboardInterrupt", finished_at=now())
+        report["status"] = "interrupted"
+        report["reason"] = "KeyboardInterrupt"
+        # Persist the interruption before any final Git reads, which may themselves be interrupted.
+        report["finished_at"] = now()
+        save()
+        try:
+            report["repositories_after"] = snapshot(root, registry)
+            report["registry_sha256"] = digest(root / "repositories.json")
+        except KeyboardInterrupt:
+            pass
+        report["finished_at"] = now()
+        save()
+    return report
 
 
 def evidence_blockers(root, registry, report, current, *, max_age_hours=24, profile=None):
     blockers = []
     if not isinstance(report, dict) or report.get("kind") != "quality" or report.get("schema_version") != 1:
         return ["Unsupported quality evidence"]
+    if report.get("status") != "passed":
+        blockers.append("Quality execution did not complete successfully: " + str(report.get("status")))
     if report.get("registry_sha256") != digest(root / "repositories.json"):
         blockers.append("Quality registry changed since checks")
     if report.get("registry_sha256_before") != report.get("registry_sha256"):
@@ -253,6 +367,7 @@ def main(argv=None):
     parser.add_argument("--root", type=Path, default=ROOT)
     parser.add_argument("--profile", default="documentation-local")
     parser.add_argument("--output", type=Path)
+    parser.add_argument("--retry-of", type=Path, help="Earlier run of the same profile to link; all checks execute again")
     parser.add_argument("--report", type=Path, help="Existing quality report for release preparation")
     parser.add_argument("--bundle", type=Path)
     parser.add_argument("--dataset", type=Path, help="Artifact to hash; content is never embedded")
@@ -266,13 +381,22 @@ def main(argv=None):
         registry = load_registry(root)
         if args.timeout <= 0:
             raise ValueError("Timeout must be positive")
-        result = (prepare_release(root, registry, args.report, args.bundle, args.dataset, args.demo_report, args.demonstration_required)
-                  if args.action == "release" else
-                  run_checks(root, registry, args.profile, execute=args.action == "run", timeout=args.timeout, pg_bin_dir=args.pg_bin_dir))
-        output = args.output or root / ".artifacts/quality" / (args.action + ".json")
-        output.parent.mkdir(parents=True, exist_ok=True)
-        output.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        if args.retry_of is not None and args.action != "run":
+            raise ValueError("--retry-of is only available with run")
+        retry = retry_reference(args.retry_of, args.profile) if args.retry_of is not None else None
+        if args.action != "release":
+            selection(registry, args.profile)
+        output = report_output(root, args.action, args.output)
+        persist = AtomicReportWriter(output)
+        if args.action == "release":
+            result = prepare_release(root, registry, args.report, args.bundle, args.dataset, args.demo_report, args.demonstration_required)
+            persist(result)
+        else:
+            result = run_checks(root, registry, args.profile, execute=args.action == "run",
+                                timeout=args.timeout, pg_bin_dir=args.pg_bin_dir, persist=persist, retry_of=retry)
         print(f"{result['status']}: {output}")
+        if result["status"] == "interrupted":
+            return 130
         return 0 if args.action == "plan" or result["status"] in {"passed", "prepared_for_review"} else 1
     except (ValueError, OSError, KeyError) as exc:
         print(f"Quality preparation refused: {exc}", file=sys.stderr)

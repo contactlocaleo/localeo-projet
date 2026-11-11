@@ -79,6 +79,7 @@
         "marketplace-lint",
         "marketplace-security",
         "marketplace-tests",
+        "marketplace-runner-tests",
         "marketplace-build"
       ],
       "commercant": [
@@ -104,6 +105,7 @@
         "marketplace-lint",
         "marketplace-security",
         "marketplace-tests",
+        "marketplace-runner-tests",
         "marketplace-build",
         "commercant-tests",
         "commercant-build",
@@ -222,6 +224,14 @@
           "npm",
           "run",
           "test:server"
+        ]
+      },
+      "marketplace-runner-tests": {
+        "repository": "localeo-marketplace",
+        "argv": [
+          "node",
+          "--test",
+          "tests/visual-runner.test.cjs"
         ]
       },
       "marketplace-build": {

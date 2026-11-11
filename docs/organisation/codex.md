@@ -37,16 +37,17 @@ Lire d'abord `git status` et le diff du périmètre ; rechercher les symboles/ch
 
 Ils sont versionnables dans `.agents/skills` de **localeo-projet**. Leur nom et description permettent une sélection implicite ; le corps n'est chargé qu'à l'utilisation. Les dépôts applicatifs voisins ne les découvrent pas automatiquement. Pour une tâche transverse, démarrer dans `localeo-projet` avec accès aux dépôts concernés ; sinon lire explicitement la fiche par son chemin. Aucun skill global ni copie applicative n'est installé. [Découverte et portée des skills](https://learn.chatgpt.com/docs/build-skills).
 
-## Deux profils de revue
+## Profils de revue
 
 - [localeo-invariant-reviewer](../../.codex/agents/localeo-invariant-reviewer.toml) : placement des règles, contournements par les points d'entrée, preuves comportementales.
 - [localeo-contract-reviewer](../../.codex/agents/localeo-contract-reviewer.toml) : sources, générateurs, schémas, lecteurs et compatibilité entre dépôts.
+- [localeo-ux-reviewer](../../.codex/agents/localeo-ux-reviewer.toml) : parcours, actions, retours, états de chargement/refus et accessibilité des interfaces ; revue ciblée avec preuves de code ou captures.
 
-Les profils sont locaux à `localeo-projet`, demandent la lecture seule et héritent du modèle/effort du parent. L'hôte et les paramètres de session restent déterminants pour les permissions effectives. Confier un sous-problème indépendant, des fichiers précis et un résultat vérifiable ; le parent intègre les conclusions. Pour des agents qui éditent, attribuer des fichiers distincts. Une petite correction ne justifie pas de délégation. [Format officiel des profils](https://learn.chatgpt.com/docs/agent-configuration/subagents).
+Les profils sont locaux à `localeo-projet`, demandent la lecture seule et héritent du modèle/effort du parent. L'hôte et les paramètres de session restent déterminants pour les permissions effectives. Confier un sous-problème indépendant, des fichiers précis et un résultat vérifiable ; le parent intègre les conclusions. Pour des agents qui éditent, attribuer des fichiers distincts ainsi que les ressources de recette : build, serveur/port, base temporaire et rapports. Un relecteur ne démarre pas un second serveur sans coordination. Une petite correction ne justifie pas de délégation. Les nouveaux profils sont disponibles après rechargement de leur configuration, pas nécessairement dans une session déjà ouverte. [Format officiel des profils](https://learn.chatgpt.com/docs/agent-configuration/subagents).
 
 ## Hooks et contrôles
 
-Le [hook Codex SessionStart](../../.codex/hooks.json) appelle [codex_context.cjs](../../scripts/codex_context.cjs) au démarrage, à la reprise et après compaction. Il indique les dépôts absents, modifiés ou non vérifiables, puis rappelle les sources et la séparation commit/push/déploiement. Il lit le statut Git, sans contenu des fichiers, réseau ni écriture. Git et Node doivent être disponibles dans le PATH ; chaque commande Git a un délai limité.
+Le [hook Codex SessionStart](../../.codex/hooks.json) appelle [codex_context.cjs](../../scripts/codex_context.cjs) au démarrage, à la reprise, à l'effacement, au fork et après compaction. Il indique les dépôts absents, modifiés ou non vérifiables, puis rappelle les sources et la séparation commit/push/déploiement. Il lit le statut Git, sans contenu des fichiers, réseau ni écriture. Git et Node doivent être disponibles dans le PATH ; chaque commande Git a un délai limité.
 
 La définition est créée et son script testé. **L'activation native reste à effectuer dans une nouvelle session du projet : ouvrir `/hooks`, examiner puis approuver cette définition.** Codex exige la confiance du projet et du hook exact ; une modification de la définition peut nécessiter un nouvel examen. Cette opération n'est pas remplacée par l'autorisation de créer les fichiers. Aucun contournement de confiance ni réglage global n'a été ajouté. [Règles officielles des hooks](https://learn.chatgpt.com/docs/hooks).
 
@@ -74,21 +75,58 @@ python scripts/install_hooks.py
 
 L'installateur configure uniquement `core.hooksPath` et `localeo.python` dans ce dépôt. Il refuse de remplacer un gestionnaire contenant des hooks actifs ; aucun réglage global ni applicatif voisin n'est modifié. Node doit être disponible. Si le chemin de Python change, relancer l'installation. La [configuration pre-commit](../../.pre-commit-config.yaml) reste une alternative pour un environnement utilisant déjà ce gestionnaire ; ne pas installer les deux séparément. Le vérificateur ne stage aucun fichier et ne crée aucun commit.
 
-Le hook utilise `--staged --changed --all-markdown` : il vérifie aussi les spécifications et procédures modifiées, ainsi que les liens entrants vers une cible supprimée. Il ne transforme pas les anciens liens cassés de documents inchangés en blocage d'une correction indépendante. Cette vérification incrémentale complète le contrôle général des guides.
+Le hook utilise `--staged --changed --all-markdown` : il vérifie aussi les spécifications et procédures modifiées, ainsi que les liens entrants vers une cible supprimée. Si les guides automatiques, skills, profils ou hooks concernés changent, il ajoute le validateur de configuration sur **l'index Git**. Une version non indexée d'un skill ne peut ni masquer ni faire échouer la version réellement commitée. Il ne transforme pas les anciens liens cassés de documents inchangés en blocage d'une correction indépendante. Cette vérification incrémentale complète le contrôle général des guides.
 
 ## Contrôles et preuves reproductibles
 
-[repositories.json](../../repositories.json) conserve les profils et commandes du [runner qualité](../../scripts/quality.py). `plan` décrit les commandes ; `run` les exécute et rapporte leurs résultats, les versions Git et les contrôles non exécutés dans `.artifacts/quality/`. Le profil `documentation-local` fonctionne sans applications voisines ; `documentation-workspace` contrôle aussi leurs liens. Les profils applicatifs utilisent leurs outils locaux et le profil `demonstration` exige explicitement les bases PostgreSQL jetables. Un profil ne prouve pas des contrôles absents de sa sélection.
+[repositories.json](../../repositories.json) conserve les profils et commandes du [runner qualité](../../scripts/quality.py). `plan` décrit les commandes ; `run` les exécute et rapporte leurs résultats, les versions Git et les contrôles non exécutés dans un dossier unique de `.artifacts/quality/` par tentative. Le rapport est écrit atomiquement avant et après les contrôles ; une interruption conserve les résultats acquis et son état explicite. Un processus tué brutalement peut laisser un rapport `running`, jamais assimilé à un succès. Le profil `documentation-local` fonctionne sans applications voisines ; `documentation-workspace` contrôle aussi leurs liens. Les profils applicatifs utilisent leurs outils locaux et le profil `demonstration` exige explicitement les bases PostgreSQL jetables. Un profil ne prouve pas des contrôles absents de sa sélection.
 
 ```console
 python scripts/quality.py plan --profile workspace
-python scripts/quality.py run --profile documentation-workspace --output .artifacts/quality/documentation.json
+python scripts/quality.py run --profile documentation-workspace
 python scripts/check_codex_workflows.py
 ```
 
+Le chemin du rapport est affiché à l'exécution. `--output` choisit un chemin
+inexistant ; un fichier déjà présent est refusé sans écrasement. Pour relier une
+nouvelle tentative de même profil, ajouter `--retry-of <ancien-rapport.json>` :
+l'ancien rapport et son empreinte sont référencés, mais tous les contrôles de
+la nouvelle tentative sont exécutés à nouveau. Les preuves de livraison continuent
+de refuser versions périmées, arbres modifiés et contrôles incomplets.
+
+Les recettes UI Marketplace utilisent le lanceur versionné de l'application,
+avec build et rapports séparés par exécution ; voir son
+[guide de recette](../../../localeo-marketplace/README.md).
+Il évite les copies de configuration Playwright dans `tmp/`. Conserver les
+rapports de toutes les tentatives et indiquer exactement quels scénarios ont
+été rejoués après correction.
+
 Le [validateur de configuration](../../scripts/check_codex_workflows.py) vérifie les noms/descriptions des skills et les budgets locaux de contexte : 8000 octets pour le guide automatique racine, 14000 octets par skill, 1800 tokens au maximum pour le hook de début. Ce sont des garde-fous du projet, pas les limites universelles de Codex. Le contrôle des liens reste assuré par `check_guidance.py` ; une évaluation sur des cas représentatifs vérifie les décisions que prennent les workflows.
 
+Les profils de revue et la couverture des cinq sources de démarrage sont aussi
+vérifiés. `--staged` permet le même contrôle sur les fichiers indexés ;
+`--staged --changed` le déclenche uniquement si un chemin de configuration
+concerné est indexé, y compris une suppression. Le script ne modifie pas l'index
+et ne remplace pas la confiance native des hooks. Les deux installations de
+pré-commit appliquent ce contrôle conditionnel.
+
 La [CI documentaire](../../.github/workflows/documentation.yml) distingue les outils locaux et la validation des cinq dépôts à des références immuables. L'accès privé et les règles de branche doivent être configurés dans GitHub. Le [guide de livraison](preparer-livraison.md) décrit les preuves nécessaires ; ni une CI partielle ni l'existence d'un workflow ne prouvent la recette d'un environnement.
+
+## Entretenir les règles d'exécution personnelles
+
+Les fichiers `.rules` pilotent les autorisations de commandes ; les décisions
+de workflow restent dans les skills et guides. Avant une maintenance demandée,
+sauvegarder le fichier utilisateur, examiner chaque règle ponctuelle et préserver
+les préfixes utiles. Ne retirer une règle temporaire qu'après vérification de
+son obsolescence dans le périmètre concerné ; ne pas remplacer des commandes
+précises par une autorisation globale de leur shell.
+
+Pour les règles réutilisées, ajouter une justification et des exemples `match`
+et `not_match`, puis vérifier avec `codex execpolicy check --rules <fichier> -- <commande>`.
+Cette commande évalue la politique sans exécuter la commande testée. Garder les
+règles et leurs sauvegardes dans la configuration personnelle, hors des dépôts
+applicatifs ; une modification de règle ne donne aucune autorisation produit
+supplémentaire. [Référence officielle](https://learn.chatgpt.com/docs/agent-configuration/rules).
 
 ## Exécuter et interpréter les validations
 

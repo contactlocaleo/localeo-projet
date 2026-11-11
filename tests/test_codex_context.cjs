@@ -5,6 +5,16 @@ const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
 const { inspectWorkspace, hookOutput } = require('../scripts/codex_context.cjs');
+test('the native SessionStart definition covers every documented source including forks', () => {
+  const definition = JSON.parse(fs.readFileSync(path.join(__dirname, '../.codex/hooks.json'), 'utf8'));
+  for (const source of ['startup', 'resume', 'clear', 'compact', 'fork']) {
+    const handlers = definition.hooks.SessionStart
+      .filter(group => new RegExp(group.matcher || '').test(source))
+      .flatMap(group => group.hooks);
+    assert.ok(handlers.length > 0, `No SessionStart handler for ${source}`);
+    assert.ok(handlers.every(handler => handler.command && handler.additionalContextLimit <= 1800));
+  }
+});
 test('missing, modified, clean and unavailable Git remain distinct without leaking filenames', () => {
   const base = fs.mkdtempSync(path.join(os.tmpdir(), 'localeo-context-'));
   try {

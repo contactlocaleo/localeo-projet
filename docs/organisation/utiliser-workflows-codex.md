@@ -126,7 +126,7 @@ python scripts/quality.py plan --profile workspace
 python scripts/quality.py release --help
 ```
 
-`plan` annonce les commandes, il ne les exécute pas. `run` enregistre les résultats dans `.artifacts/quality/` ; utiliser `--output` pour conserver plusieurs rapports sans remplacer le précédent. Lire `--help` et le plan avant une exécution complète. Les profils applicatifs nécessitent leurs dépendances installées et ne remplacent pas les tests spécifiques d'une epic. PostgreSQL et les parcours connectés ont leurs prérequis propres.
+`plan` annonce les commandes, il ne les exécute pas. `run` conserve chaque tentative dans un dossier unique de `.artifacts/quality/` et actualise atomiquement son rapport pendant l'exécution. `--output` accepte uniquement un chemin inexistant ; `--retry-of <rapport>` relie une reprise de même profil sans recycler ses succès. Lire `--help` et le plan avant une exécution complète. Les profils applicatifs nécessitent leurs dépendances installées et ne remplacent pas les tests spécifiques d'une epic. PostgreSQL et les parcours connectés ont leurs prérequis propres.
 
 Les rapports distinguent échec et non-exécution. Un rapport préparatoire, partiel, ancien ou obtenu avant une modification ne devient pas automatiquement une preuve de livraison. Ne pas réduire la sélection pour masquer un test qui échoue.
 
@@ -138,7 +138,7 @@ Les rapports distinguent échec et non-exécution. Un rapport préparatoire, par
 | Skill | Procédure de cadrage, spécification, réalisation, correctif ou livraison | La réussite des tests |
 | Hook Codex de début | Repérage des dépôts et rappel du contexte utile | La lecture de toutes les spécifications |
 | Hook Codex de fin | Rappel des preuves à exposer si le workspace est modifié/incomplet | Une validation ou une interdiction de terminer |
-| Hook Git local | Liens des Markdown modifiés dans l'index et liens entrants après suppression | La conformité métier |
+| Hook Git local | Liens des Markdown modifiés dans l'index, liens entrants après suppression et configuration Codex indexée lorsqu'elle change | La conformité métier ou l'activation native des hooks |
 | CI | Exécution reproductible des contrôles configurés | Les usages d'une cible réelle non testée |
 | Revue indépendante | Recherche d'écarts de domaine, contrat ou preuve | Une garantie absolue d'absence de défaut |
 
@@ -148,7 +148,13 @@ Pour les hooks Codex, ouvrir `/hooks` dans une session du projet et examiner la 
 
 ## Reprendre sans recharger toute l'histoire
 
-Conserver une note brève dans la conversation ou dans un fichier de travail ignoré, avec : objectif et périmètre, chemins canoniques, versions de travail, décisions établies, critères réalisés/restants, tests et résultats, prochain point à traiter. Relire le statut Git et les sources à la reprise. La note n'est ni une deuxième roadmap ni une preuve plus récente que le code.
+Pour une tâche à plusieurs lots ou interrompue, tenir la
+[note de reprise du cycle d'epic](cycle-epic.md#reprendre-une-tâche-longue) aux
+changements de phase : lot courant, critères restants, rapports, agents et
+ressources attribuées, processus actifs et prochaine action. Relire le statut
+Git et les sources à la reprise avant de redémarrer un test. La note n'est ni
+une deuxième roadmap ni une preuve plus récente que le code. Poursuivre les
+lots et phases déjà autorisés sans demander une permission à chaque transition.
 
 ## Reconnaître une tâche terminée
 

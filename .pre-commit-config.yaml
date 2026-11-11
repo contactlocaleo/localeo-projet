@@ -7,3 +7,9 @@ repos:
         language: system
         pass_filenames: false
         always_run: true
+      - id: localeo-codex-workflows
+        name: Configuration Codex dans l'index Git
+        entry: python scripts/check_codex_workflows.py --repo . --staged --changed
+        language: system
+        pass_filenames: false
+        always_run: true

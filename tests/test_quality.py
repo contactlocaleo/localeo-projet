@@ -152,8 +152,296 @@ class QualityEvidenceTests(unittest.TestCase):
         self.save_registry()
         result = quality.main(["run", "--root", str(self.root), "--profile", "all"])
         self.assertEqual(result, 1)
-        report = json.loads((self.root / ".artifacts/quality/run.json").read_text())
+        reports = list((self.root / ".artifacts/quality").glob("*/run.json"))
+        self.assertEqual(len(reports), 1)
+        report = json.loads(reports[0].read_text())
         self.assertEqual(report["checks"][0]["exit_code"], 3)
+
+    def test_default_output_keeps_two_distinct_attempts(self):
+        arguments = ["run", "--root", str(self.root), "--profile", "all"]
+        self.assertEqual(quality.main(arguments), 0)
+        first_path, = (self.root / ".artifacts/quality").glob("*/run.json")
+        first_content = first_path.read_bytes()
+        self.assertEqual(quality.main(arguments), 0)
+        reports = list((self.root / ".artifacts/quality").glob("*/run.json"))
+        self.assertEqual(len(reports), 2)
+        self.assertNotEqual(reports[0].parent, reports[1].parent)
+        self.assertEqual(first_path.read_bytes(), first_content)
+        self.assertTrue(all(json.loads(path.read_text())["status"] == "passed" for path in reports))
+
+    def test_explicit_existing_output_is_refused_before_any_action(self):
+        output = self.root / ".artifacts/existing.json"
+        output.parent.mkdir()
+        content = b'{"existing": "evidence must survive"}\n'
+        output.write_bytes(content)
+        for action in ("run", "plan", "release"):
+            with self.subTest(action=action), patch.object(quality, "run_checks") as run, \
+                    patch.object(quality, "prepare_release") as release:
+                self.assertEqual(quality.main([action, "--root", str(self.root), "--profile", "all",
+                                               "--output", str(output)]), 2)
+                run.assert_not_called()
+                release.assert_not_called()
+                self.assertEqual(output.read_bytes(), content)
+
+    def test_atomic_creation_refuses_a_racing_writer(self):
+        output = self.root / ".artifacts/race.json"
+        writer = quality.AtomicReportWriter(output)
+        original = b'{"other": "attempt"}\n'
+        output.write_bytes(original)
+        with self.assertRaisesRegex(ValueError, "Output already exists"):
+            writer({"status": "running"})
+        self.assertEqual(output.read_bytes(), original)
+        self.assertEqual(list(output.parent.glob("*.tmp")), [])
+
+    def test_failed_atomic_update_preserves_last_complete_report(self):
+        output = self.root / ".artifacts/atomic.json"
+        writer = quality.AtomicReportWriter(output)
+        writer({"status": "running", "checks": [{"status": "passed"}]})
+        previous = output.read_bytes()
+        with patch.object(quality.os, "replace", side_effect=OSError("disk unavailable")):
+            with self.assertRaisesRegex(OSError, "disk unavailable"):
+                writer({"status": "passed"})
+        self.assertEqual(output.read_bytes(), previous)
+        self.assertEqual(list(output.parent.glob("*.tmp")), [])
+
+    def test_report_edited_outside_attempt_is_not_overwritten(self):
+        output = self.root / ".artifacts/edited.json"
+        writer = quality.AtomicReportWriter(output)
+        writer({"status": "running"})
+        external = b'{"external": true}\n'
+        output.write_bytes(external)
+        with self.assertRaisesRegex(ValueError, "Output changed outside"):
+            writer({"status": "passed"})
+        self.assertEqual(output.read_bytes(), external)
+
+    def test_interrupt_while_publishing_report_is_recorded_after_atomic_write(self):
+        for operation in ("link", "replace"):
+            with self.subTest(operation=operation):
+                output = self.root / f".artifacts/publish-{operation}.json"
+                publish = getattr(quality.os, operation)
+                interrupted = False
+
+                def publish_then_interrupt(*args, **kwargs):
+                    nonlocal interrupted
+                    publish(*args, **kwargs)
+                    if not interrupted:
+                        interrupted = True
+                        raise KeyboardInterrupt
+
+                with patch.object(quality.os, operation, side_effect=publish_then_interrupt):
+                    result = quality.main(["run", "--root", str(self.root), "--profile", "all",
+                                           "--output", str(output)])
+                self.assertEqual(result, 130)
+                report = json.loads(output.read_text())
+                self.assertEqual(report["status"], "interrupted")
+                self.assertNotEqual(report["checks"][0]["status"], "passed")
+                self.assertEqual(list(output.parent.glob("*.tmp")), [])
+
+    def test_interrupt_at_final_persistence_keeps_checks_but_marks_attempt_interrupted(self):
+        output = self.root / ".artifacts/final-interrupted.json"
+        write = quality.AtomicReportWriter.__call__
+
+        def interrupt_final(writer, report):
+            write(writer, report)
+            if report["status"] == "passed":
+                raise KeyboardInterrupt
+
+        with patch.object(quality.AtomicReportWriter, "__call__", interrupt_final):
+            result = quality.main(["run", "--root", str(self.root), "--profile", "all",
+                                   "--output", str(output)])
+        self.assertEqual(result, 130)
+        report = json.loads(output.read_text())
+        self.assertEqual(report["checks"][0]["status"], "passed")
+        self.assertEqual(report["status"], "interrupted")
+        self.assertIn("Quality execution did not complete successfully: interrupted", self.blockers(report))
+
+    def test_checks_read_initial_state_and_previous_success_from_disk(self):
+        output = self.root / ".artifacts/progress.json"
+        self.registry["quality"]["profiles"]["all"] = ["test", "second"]
+        first = ("import json, sys; from pathlib import Path; "
+                 "r = json.loads(Path(sys.argv[1]).read_text()); "
+                 "assert r['status'] == 'running'; "
+                 "assert [c['status'] for c in r['checks']] == ['running', 'not_run']")
+        second = ("import json, sys; from pathlib import Path; "
+                  "r = json.loads(Path(sys.argv[1]).read_text()); "
+                  "assert r['checks'][0]['exit_code'] == 0; "
+                  "assert [c['status'] for c in r['checks']] == ['passed', 'running']")
+        self.registry["quality"]["checks"]["test"]["argv"] = ["python", "-c", first, str(output)]
+        self.registry["quality"]["checks"]["second"] = {
+            "repository": "project", "argv": ["python", "-c", second, str(output)]}
+        self.save_registry()
+        self.commit()
+        self.assertEqual(quality.main(["run", "--root", str(self.root), "--profile", "all",
+                                       "--output", str(output)]), 0)
+        report = json.loads(output.read_text())
+        self.assertEqual(self.blockers(report), [])
+
+    def test_interrupt_between_checks_keeps_success_and_future_not_run(self):
+        self.registry["quality"]["profiles"]["all"] = ["test", "second"]
+        self.registry["quality"]["checks"]["second"] = {
+            "repository": "project", "argv": ["python", "-c", "raise AssertionError('must not start')"]}
+        self.save_registry()
+        self.commit()
+        output = self.root / ".artifacts/interrupted.json"
+        write = quality.AtomicReportWriter.__call__
+        interrupted = False
+
+        def interrupt_after_success(writer, report):
+            nonlocal interrupted
+            write(writer, report)
+            if not interrupted and report["checks"][0]["status"] == "passed":
+                interrupted = True
+                raise KeyboardInterrupt
+
+        with patch.object(quality.AtomicReportWriter, "__call__", interrupt_after_success):
+            result = quality.main(["run", "--root", str(self.root), "--profile", "all",
+                                   "--output", str(output)])
+        self.assertEqual(result, 130)
+        report = json.loads(output.read_text())
+        self.assertEqual(report["status"], "interrupted")
+        self.assertEqual([check["status"] for check in report["checks"]], ["passed", "not_run"])
+        self.assertEqual(report["checks"][0]["exit_code"], 0)
+        self.assertIsNotNone(report["checks"][0]["finished_at"])
+        self.assertIsNone(report["checks"][1]["started_at"])
+        self.assertIsNone(report["checks"][1]["finished_at"])
+
+    def test_interrupt_during_command_marks_active_check_and_preserves_prior_success(self):
+        self.registry["quality"]["profiles"]["all"] = ["test", "active", "future"]
+        for name in ("active", "future"):
+            self.registry["quality"]["checks"][name] = {
+                "repository": "project", "argv": ["python", "-c", f"print('{name}')"]}
+        self.save_registry()
+        self.commit()
+        output = self.root / ".artifacts/command-interrupted.json"
+        run = quality.subprocess.run
+
+        def interrupt_active(arguments, **kwargs):
+            if "print('active')" in arguments:
+                on_disk = json.loads(output.read_text())
+                self.assertEqual([c["status"] for c in on_disk["checks"]],
+                                 ["passed", "running", "not_run"])
+                raise KeyboardInterrupt
+            return run(arguments, **kwargs)
+
+        with patch.object(quality.subprocess, "run", side_effect=interrupt_active):
+            result = quality.main(["run", "--root", str(self.root), "--profile", "all",
+                                   "--output", str(output)])
+        self.assertEqual(result, 130)
+        report = json.loads(output.read_text())
+        self.assertEqual([check["status"] for check in report["checks"]],
+                         ["passed", "interrupted", "not_run"])
+        active = report["checks"][1]
+        self.assertIsNone(active["exit_code"])
+        self.assertIsNotNone(active["started_at"])
+        self.assertIsNotNone(active["finished_at"])
+        self.assertEqual(active["reason"], "KeyboardInterrupt")
+        self.assertEqual(report["status"], "interrupted")
+        self.assertTrue(self.blockers(report))
+
+    def test_interrupt_during_initial_snapshot_still_writes_report(self):
+        output = self.root / ".artifacts/snapshot-interrupted.json"
+        snapshot = quality.snapshot
+        interrupted = False
+
+        def interrupt_initial(root, registry):
+            nonlocal interrupted
+            if not interrupted:
+                interrupted = True
+                self.assertEqual(json.loads(output.read_text())["status"], "running")
+                raise KeyboardInterrupt
+            return snapshot(root, registry)
+
+        with patch.object(quality, "snapshot", side_effect=interrupt_initial):
+            result = quality.main(["run", "--root", str(self.root), "--profile", "all",
+                                   "--output", str(output)])
+        self.assertEqual(result, 130)
+        report = json.loads(output.read_text())
+        self.assertEqual(report["status"], "interrupted")
+        self.assertEqual(report["checks"][0]["status"], "not_run")
+
+    def test_persistence_callback_receives_initial_progress_and_final_states(self):
+        states = []
+        report = quality.run_checks(self.root, self.registry, "all", execute=True,
+                                    persist=lambda value: states.append(copy.deepcopy(value)))
+        self.assertEqual(states[0]["checks"][0]["status"], "not_run")
+        self.assertIsNone(states[0]["finished_at"])
+        self.assertEqual(states[-2]["checks"][0]["status"], "passed")
+        self.assertEqual(states[-2]["status"], "running")
+        self.assertEqual(states[-1], report)
+        self.assertEqual(report["status"], "passed")
+
+    def test_retry_links_previous_attempt_without_reusing_passed_checks(self):
+        previous = self.root / ".artifacts/previous.json"
+        previous.parent.mkdir()
+        previous.write_text(json.dumps(self.run_report()), encoding="utf-8")
+        prior_content = previous.read_bytes()
+        self.registry["quality"]["checks"]["test"]["argv"] = ["python", "-c", "raise SystemExit(8)"]
+        self.save_registry()
+        self.commit()
+        output = previous.with_name("retry.json")
+        result = quality.main(["run", "--root", str(self.root), "--profile", "all",
+                               "--retry-of", str(previous), "--output", str(output)])
+        self.assertEqual(result, 1)
+        report = json.loads(output.read_text())
+        self.assertEqual(report["checks"][0]["status"], "failed")
+        self.assertEqual(report["checks"][0]["exit_code"], 8)
+        self.assertEqual(report["retry_of"], {"path": str(previous.resolve()), "sha256": quality.digest(previous)})
+        self.assertEqual(previous.read_bytes(), prior_content)
+        self.assertTrue(self.blockers(report))
+
+    def test_retry_accepts_interrupted_attempt_and_runs_a_fresh_check(self):
+        previous = self.root / ".artifacts/previous-interrupted.json"
+        previous.parent.mkdir()
+        report = self.run_report()
+        report.update(status="interrupted", reason="KeyboardInterrupt")
+        report["checks"][0].update(status="interrupted", exit_code=None)
+        previous.write_text(json.dumps(report), encoding="utf-8")
+        output = previous.with_name("retry.json")
+        self.assertEqual(quality.main(["run", "--root", str(self.root), "--profile", "all",
+                                       "--retry-of", str(previous), "--output", str(output)]), 0)
+        retry = json.loads(output.read_text())
+        self.assertEqual(retry["status"], "passed")
+        self.assertGreater(retry["checks"][0]["started_at"], report["finished_at"])
+        self.assertEqual(self.blockers(retry), [])
+
+    def test_retry_rejects_invalid_previous_reports_without_creating_output(self):
+        previous = self.root / ".artifacts/invalid-previous.json"
+        previous.parent.mkdir()
+        output = previous.with_name("retry.json")
+        valid = self.run_report()
+        invalid_reports = ["{", "[]", "{}", json.dumps({**valid, "kind": "release_preparation"}),
+                           json.dumps({**valid, "profile": "different"}),
+                           json.dumps({**valid, "status": "planned"}),
+                           json.dumps({**valid, "status": []}),
+                           json.dumps({**valid, "checks": "passed"}),
+                           json.dumps({**valid, "checks": [None]})]
+        with patch.object(quality, "run_checks") as run:
+            self.assertEqual(quality.main(["run", "--root", str(self.root), "--profile", "all",
+                                           "--retry-of", str(previous), "--output", str(output)]), 2)
+            for content in invalid_reports:
+                with self.subTest(content=content):
+                    previous.write_text(content, encoding="utf-8")
+                    self.assertEqual(quality.main(["run", "--root", str(self.root), "--profile", "all",
+                                                   "--retry-of", str(previous), "--output", str(output)]), 2)
+                    self.assertFalse(output.exists())
+            run.assert_not_called()
+
+    def test_retry_option_is_only_valid_for_run(self):
+        for action in ("plan", "release"):
+            with self.subTest(action=action):
+                self.assertEqual(quality.main([action, "--root", str(self.root), "--profile", "all",
+                                               "--retry-of", str(self.root / "missing.json")]), 2)
+        self.assertFalse((self.root / ".artifacts").exists())
+
+    def test_release_rejects_interrupted_report_even_if_all_checks_passed(self):
+        report = self.run_report()
+        report["status"] = "interrupted"
+        evidence = self.root / ".artifacts/interrupted.json"
+        evidence.parent.mkdir()
+        evidence.write_text(json.dumps(report), encoding="utf-8")
+        result = quality.prepare_release(self.root, self.registry, evidence)
+        self.assertEqual(result["status"], "blocked")
+        self.assertIn("Quality execution did not complete successfully: interrupted", result["automatic_blockers"])
 
     def test_unknown_profile_is_refused(self):
         with self.assertRaises(ValueError):

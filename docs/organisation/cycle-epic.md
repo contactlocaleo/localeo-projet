@@ -47,7 +47,7 @@ Les tests doivent prouver les résultats observables : domaine pour les invarian
 
 Pour une correction, reproduire le défaut avec un test ciblé lorsque cela apporte une preuve utile. Ne pas ajouter de tests qui recopient l'implémentation ou d'assertions d'import factices. Exécuter les contrôles requis puis élargir si les changements ou résultats révèlent un risque supplémentaire. Un échec d'architecture ne justifie pas l'absence silencieuse des tests fonctionnels.
 
-Les travaux parallèles doivent avoir des fichiers ou worktrees distincts et des résultats attendus précis. Une revue indépendante est utile pour une règle sensible ou un contrat partagé : demander les scénarios manquants et les risques concrets aux profils décrits dans le guide Codex. L'agent principal intègre et vérifie les corrections.
+Les travaux parallèles doivent avoir des fichiers ou worktrees distincts et des résultats attendus précis. Attribuer aussi les ressources d'exécution : répertoire de build, serveur et port, base temporaire, rapports. Un agent libère les ressources à la fin ou signale les processus qui restent actifs. Utiliser les lanceurs applicatifs isolant leurs sorties ; un port distinct ne protège pas un `dist` partagé. Une revue indépendante est utile pour une règle sensible, un contrat partagé ou un parcours UI significatif : demander les scénarios manquants et les risques concrets aux profils décrits dans le guide Codex. L'agent principal intègre et vérifie les corrections.
 
 ### Critères de fin du périmètre livré
 
@@ -130,18 +130,33 @@ Le dossier de livraison rassemble les SHAs des dépôts affectés, les preuves, 
 
 ## Reprendre une tâche longue
 
-Conserver une note de reprise courte dans le support de travail déjà utilisé (conversation, description de PR ou note temporaire locale). Éviter une seconde spécification versionnée et toute donnée sensible. Format conseillé :
+Pour une demande à plusieurs lots ou une tâche dépassant une session, tenir une
+note de reprise courte dans le support de travail déjà utilisé (conversation,
+description de PR ou fichier ignoré, par exemple `.artifacts/codex/<tache>/reprise.md`).
+La mettre à jour aux passages de phase et avant une interruption. Éviter une
+seconde spécification versionnée et toute donnée sensible. Format conseillé :
 
 ```text
 Objectif et périmètre autorisé :
 Sources canoniques et critères concernés :
+Lots : lot courant, phase, critères couverts/restants, dépendances et blocages :
 Décisions prises / questions ouvertes :
 Dépôts, branches, SHAs de base et fichiers modifiés :
-Contrôles exécutés, résultats et limites :
+Agents : fichiers et ressources d'exécution attribués :
+Processus actifs : identifiant de session, port/base/build, propriétaire, état :
+Contrôles exécutés : commande, rapport de tentative, version, résultat et limites :
+Commits effectués et actions externes demandées/non effectuées :
 Prochaine action et dépendances :
 ```
 
-À la reprise, vérifier le statut Git et la fraîcheur des preuves avant d'utiliser cette note. La note facilite la navigation ; le code, la spécification et les résultats vérifiables restent les sources.
+À la reprise, vérifier le statut Git, les processus actifs et la fraîcheur des
+preuves avant de lancer un nouveau serveur ou test. Une note ne crée aucune
+autorisation supplémentaire. Si spécification, implémentation et commit de tous
+les lots sont demandés, poursuivre ce cycle par lot sans nouvelle confirmation ;
+conserver les blocages explicites et avancer sur les parties indépendantes.
+La note facilite la navigation ; le code, la spécification et les résultats
+vérifiables restent les sources. Le bilan distingue les tentatives et leurs
+reprises : aucun rapport écrasé, aucun succès attribué à une version non testée.
 
 ## Évaluer les skills sur des cas représentatifs
 
