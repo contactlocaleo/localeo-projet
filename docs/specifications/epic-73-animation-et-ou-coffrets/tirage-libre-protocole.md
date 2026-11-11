@@ -54,6 +54,29 @@ Le total des unités est stocké en `BIGINT`, comme les métadonnées de dotatio
 
 ## Exécution locale et activation future
 
+**Précision du 11 novembre 2026 — prochaine action après lancement.** Les
+projections du détail, du workflow et des listes tiennent compte de l'opération
+initiale de tirage libre, en complément du suivi historique Coffrets. Une
+opération existante n'est jamais présentée comme un tirage restant à lancer.
+Ces phases décrivent la lecture du suivi ; elles ne modifient aucun statut
+d'animation, droit de lancement ou marqueur de résultat.
+
+| Fait de l'opération initiale | Phase de lecture | Prochaine action |
+| --- | --- | --- |
+| Absente | `TIRAGE_A_LANCER`, selon les conditions existantes | Lancer le tirage, selon les droits existants |
+| `EN_ATTENTE` ou `PREPARATION` | `TIRAGE_EN_PREPARATION` — Tirage en préparation | Suivre le tirage, vers son suivi |
+| `BLOQUEE` | `TIRAGE_BLOQUE` — Tirage à vérifier | Consulter le tirage, où la reprise reste contrôlée |
+| `CONFIRMEE` avec `confirmed_at` | `TIRAGE_CONFIRME` — Tirage terminé | Consulter les gains, y compris si aucun gain n'est attribué |
+| Opération existante avec état inconnu ou confirmation sans marqueur | `TIRAGE_A_VERIFIER` | Consulter le tirage ; ne pas proposer un nouveau lancement |
+
+Le suivi d'un tirage libre ne propose pas l'envoi manuel des gains Coffrets :
+la préparation et le transport de ses emails restent automatiques et distincts.
+Les lectures groupées de listes ajoutent les faits nécessaires sur la fenêtre
+chargée, sans requête par animation ni chargement de tous les candidats/gains.
+Après une commande confirmée ou un changement réel de projection du tirage,
+l'interface relit le résumé backend pour actualiser son bandeau. Une relecture
+en cours ou échouée ne laisse pas une ancienne proposition de lancement active.
+
 **Correctif du 11 novembre 2026 — traitement supervisé et suivi.** Le POST de
 l'organisateur reste asynchrone : `EN_ATTENTE` indique une demande enregistrée,
 `PREPARATION` la phase constatée, `CONFIRMEE` le résultat scellé. L'interface

@@ -1,5 +1,76 @@
 # E73 — Vérification, migration et livraison
 
+## Correctif du 11 novembre 2026 — prochaine action après lancement du tirage
+
+Bases : Backend `ade4b09`, Animation `6555b05`, Projet `93b5430`.
+Commits applicatifs : Backend **`03ab603`**, Animation **`2fbeea4`**.
+L'animation déjà engagée continuait à proposer « Lancer le tirage » dans son
+bandeau. Les lecteurs de pilotage et de résumé utilisaient uniquement les
+tirages historiques Coffrets ; ils ne voyaient pas l'opération initiale des
+tirages libres. Le détail organisateur ne relisait pas non plus son résumé
+après une demande de tirage ou les transitions de son suivi.
+
+La projection backend distingue attente/préparation, blocage et confirmation
+du tirage libre, dans le détail, le workflow et les lecteurs de listes
+concernés. Une opération existante renvoie vers son suivi ou ses gains, jamais
+vers un nouveau lancement. Les phases sont des faits de lecture ; aucun
+nouveau statut d'animation ni résultat officiel avant le scellement. Le
+parcours Coffrets et ses gains à envoyer restent distincts. Le bandeau relit
+la décision backend sur changement réel du tirage et neutralise les actions
+périmées pendant une relecture ou son échec.
+
+Reproduction rouge avec la vraie App avant correction frontend : le POST 202
+est enregistré, mais l'action suivante « Suivre le tirage » reste absente ;
+preuve dans Animation `tmp/draw-next-action-lF8ONY/`. La relecture consécutive
+à l'engagement ne doit pas se rattacher à un GET antérieur au lancement ; les
+réponses obsolètes et les refus restent séparés d'une réponse fraîche.
+
+Portée : Backend, Animation et documentation canonique. Contrats conservés
+en forme, avec valeurs de phase/action explicitées dans le
+[protocole](tirage-libre-protocole.md). Aucune nouvelle commande, migration,
+configuration, opération batch ni donnée à reprendre. Les règles de tirage,
+idempotence et droits restent autoritaires dans leurs services et domaine.
+Générateur sans changement de données, formats ou modèles ; les projections
+sont recalculées à la lecture. Vérification isolée et API synthétiques, sans
+action sur TEST ni interaction avec la session Chrome utilisée en parallèle.
+
+Preuves finales backend : **84 tests réussis, aucun ignoré**, couvrant les
+phases/actions de tous les lecteurs concernés, le marqueur `confirmed_at`,
+le cas sans gagnant et le parcours Coffrets conservé. Les tests SQL isolés
+vérifient la lecture des seuls faits INITIAL, une requête pour 10/25/100
+animations et le découpage par tranches de 100 au-delà. Commande :
+
+```console
+py -3.14 scripts/validation/test_isolated.py tests/application/services/test_pilotage_tirage_libre_projection.py tests/application/services/test_pilotage_animation.py tests/application/animation_locale/test_workflow_animation.py tests/infrastructure/persistence/test_animation_locale_repositories.py tests/api/test_animation_publication_version.py tests/application/services/test_vision_360_animation.py tests/application/animation_locale/test_supervision_animation.py tests/api/test_epic45_vision_360_animation_api.py -q --tb=short
+```
+
+Le groupe d'architecture obligatoire donne **689 réussites** :
+
+```console
+py -3.14 scripts/validation/test_isolated.py tests/architecture tests/domain/test_domain_dedicated_classes.py tests/application/use_cases/test_use_case_business_test_coverage.py -q --tb=short
+```
+
+La revue indépendante confirme que `CONFIRMEE` sans `confirmed_at` reste
+« Tirage à vérifier / Consulter le tirage » ; seule une confirmation officielle
+permet « Consulter les gains ». Aucun candidat ni attribution privée n'est
+chargé pour établir ces résumés, et aucun changement de schéma OpenAPI public
+n'est nécessaire.
+
+Preuves Animation : **308 tests Node**, typage, lint et build complet PWA
+isolé réussis. La recette de la vraie App donne **14 scénarios / 194 contrôles
+réussis**, à 320 et 1 280 px, dans `tmp/draw-next-action-RhPb1f/` : transitions,
+reçu perdu, reprise, erreurs 503/403, réponse/refus tardif et absence de second
+POST. Le second rouge `tmp/draw-next-action-cJdVTL/` reproduit spécifiquement
+la relecture rattachée au GET antérieur au lancement. Les captures sans erreur
+de fixture, `tmp/draw-next-action-2JdI0D/` (**6 scénarios / 80 contrôles**),
+confirment le bandeau et le badge « Clôturée » sur mobile et ordinateur.
+La phrase d'annonce devient « L’annonce de la date ne déclenche pas le
+tirage. », pour rester exacte après lancement. Un dernier build PWA isolé
+et **2 scénarios / 28 contrôles** passent dans `tmp/draw-next-action-OATYHv/` ;
+les captures à 320 et 1 280 px montrent « Suivre le tirage » avec ce texte.
+La recette reste synthétique : le traitement de l'opération sur TEST et les
+mesures PostgreSQL en charge ne sont pas vérifiés par ces contrôles locaux.
+
 ## Correctif du 11 novembre 2026 — tirage confirmé en attente de traitement
 
 Bases : Backend `3117e50`, Animation `1df45ca`, Projet `93f9e88`.
