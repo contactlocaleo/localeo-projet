@@ -1,5 +1,61 @@
 # E73 — Localeo Live, entrée unique des animations
 
+## Évolution du 11 novembre 2026 — simplicité, E73-EVO-LIVE-SIMPLICITE
+
+Retours directs après les lots PA : symboles d'animation et de confirmation peu
+explicites, bloc « À vous de jouer » redondant, détail tombola trop textuel et
+rupture de composition entre les onglets Animations et Commerçants. La demande
+autorise leur correction et simplification. Les nouvelles restent strictement
+limitées à l'animation consultée, selon la précision utilisateur du même jour.
+La clôture historique E73 et les réserves de recette hébergée sont conservées.
+
+### Décisions et critères observables
+
+| Critère | Comportement attendu | Preuve prévue |
+| --- | --- | --- |
+| LS-01 | Ticket ajouré pour la tombola, livret pour le passeport, personne pour la participation, coche cerclée pour une confirmation. Magasin réservé au commerce/visite ; trophée réservé au gain. Icônes accompagnées d'un libellé, mêmes traits et alignements. | Rendu des cartes, découverte et confirmations à 320/390 px ; noms accessibles et cas sans confirmation. |
+| LS-02 | Le détail tombola montre un seul workflow Inscrit → Qualifié → Tirage → Résultat. Étape courante et étapes acquises sont distinguées par forme, icône et libellé, pas uniquement par couleur. Le dernier état devient Gagnant ou Non gagnant uniquement sur résultat confirmé. | Projections non qualifiée, qualifiée/en attente, gagnante, non gagnante, hors tirage, annulée et inconnue ; revalidation/refus. |
+| LS-03 | Le PIN devient un accès compact et volontaire ; ses explications se déplient. Les préférences de messages deviennent un contrôle secondaire court, avec consentement et retrait explicites. Le détail participation n'affiche plus les alertes de l'appareil, qui restent dans Réglages. | Ouverture/fermeture du PIN, contrôle de fraîcheur, autorisation/retrait/échec de préférence et absence de modification implicite. |
+| LS-04 | « Nouvelles de cette animation » ouvre uniquement les messages de cette animation, dès le premier rendu et lors de la pagination ; retour vers la participation d'origine. Un vide ou un échec ne bascule pas sur les nouvelles globales. | Deux animations ayant des messages, entrée ciblée/retour/pagination et absence de fuite d'un ancien contexte. |
+| LS-05 | Découvrir conserve son en-tête, sa sélection communale et ses onglets quand l'habitant passe à Commerçants. Seul le contenu sous les onglets change. Le périmètre réellement recherché reste explicite, y compris en entrée directe et avec plusieurs communes suivies. | Changement d'onglet et retour mobile, commune/périmètre stable, filtres et liens directs, attente/erreur sans disparition du shell. |
+| LS-06 | Suppression du bloc autonome « À vous de jouer » / « Ma prochaine action » dans Mon carnet. Chaque objet garde son action à sa place. Dans Mes lots, le titre devient « Lots à utiliser » et les gains restent accessibles. | Carnet rempli et vide, actions des objets/retours/filtre, lots disponibles et aucune action dupliquée en bandeau. |
+| LS-07 | Le passeport fusionne progression et visites dans un seul bloc : un compteur confirmé et une seule collection de tampons liés aux commerçants, avec leurs noms, états et dates disponibles. Le QR reste prioritaire et le lien vers les commerçants est intégré au bloc principal, sans section isolée. | Passeport partiel/terminé/inconnu, tampons non dupliqués, ouverture d'une visite, QR et annuaire puis retour. |
+| LS-08 | Les animations du carnet sont les inscriptions personnelles aux animations non clôturées. Favoris et simples suivis publics restent dans Découvrir ; les animations clôturées, archivées ou annulées quittent cette vue sans supprimer les accès ni leurs gains. L'état de participation, les tampons et le cycle de l'animation sont distincts. Un passeport complet ou un tirage terminé ne clôturent pas implicitement l'animation. | Statuts backend distincts, 100 % encore ouvert, ancien serveur/échec sans faux état, favoris exclus, gains d'une animation clôturée toujours accessibles. |
+| LS-09 | Chaque lot propose « Voir l’animation », vers la participation exacte lorsqu'elle est connue, avec retour au contexte Mes lots. Consignes et accès au bon restent disponibles. | Plusieurs participants de la même animation, lien public de repli, retours/focus/pagination et absence de capacité dans l'URL de navigation. |
+| LS-10 | Chaque vignette d'animation du carnet propose ses nouvelles et un compteur exact des nouvelles non lues lorsqu'il est disponible. L'ouverture ne montre que cette animation. Marquer un message ou les messages affichés comme lus met à jour le compteur après confirmation serveur ; un échec conserve le non-lu et permet de réessayer. Un compteur inconnu n'est pas présenté comme zéro. | Deux animations et deux installations, pagination au-delà de 25, droits révoqués, lecture répétée/échouée et retour au carnet ; budget de requêtes borné par page. |
+| LS-11 | Le menu bas Mes lots indique les gains disponibles encore non vus sur cet appareil. « J’ai vu ce lot » acquitte explicitement un gain, décrémente le badge et mémorise ce repère après stockage réussi. Ouvrir la liste, une animation ou les consignes ne vaut pas acquittement. Ce geste n'utilise ni ne remet le lot. | Deux gains puis décrément unitaire, rechargement, nouvel onglet, stockage refusé, nouveau gain ultérieur, pagination et accès refusé ; nombre partiel ou indisponible signalé honnêtement. |
+| LS-12 | Le menu secondaire propose le libellé exact « Retrouver mon carnet » et ouvre le parcours de récupération existant ; le retour conserve le point d'entrée. | Menu depuis Carnet, Lots et Découvrir, ouverture et retour mobile/clavier. |
+| LS-13 | Une date de tirage annoncée par l'organisateur apparaît directement dans la vignette du carnet, avec repère calendrier et date/heure de Paris. Elle reste visible avant qualification, sans promettre une participation au tirage. Un tirage réalisé ou annulé ne conserve pas une annonce à venir ; une date passée seule ne vaut jamais résultat. L'ajout ne masque pas l'action de la première vignette derrière le menu à 320×568. | Annonce qualifiée/non qualifiée, changement/retrait de date, résultat/annulation, date absente/invalide, état local périmé, rendu mobile et absence de lecture détail par carte. |
+
+Le workflow présente les états existants : `NON_QUALIFIE` après un tirage est
+« Hors tirage », jamais « Non gagnant » ; annulation, remplacement et absence de
+tirage restent distincts. Une collection complète, un chargement ou un accès
+local ne confirme ni qualification ni gain. Les anciennes attentes de bandeau
+prioritaire PA/CB et du magasin comme symbole de passeport sont remplacées par
+LS-06 et LS-01 ; leurs preuves historiques ne sont pas réécrites.
+
+### Impacts et responsabilité
+
+Marketplace présente les projections backend, conserve les accès,
+les refus, l'idempotence et le consentement. Backend ajoute au tableau de bord
+privé `statut_animation` (statut du domaine) et `nouvelles_non_lues` (compteur
+autorisé par animation). Les champs sont additifs et facultatifs : null ou absent
+signifie inconnu. Le compteur est groupé pour la page, jamais une requête par
+carte. Les lectures utilisent les reçus existants de la messagerie ; aucune
+nouvelle transition de participation ou de remise. Le repère « vu » d'un lot
+est un état d'interface local distinct, conservé dans IndexedDB et synchronisé
+entre vues/onglets après écriture réussie. Projet porte cette spécification,
+la [conception §16](localeo-live-adhesion-conception.md#16-simplicité--e73-evo-live-simplicite),
+les principes et le bilan. Pas de migration, flag ou nouvelle donnée de
+démonstration : les faits déjà générés alimentent les projections, et les
+fixtures de tests couvrent les nouveaux états de lecture. Le contrat OpenAPI
+canonique est régénéré depuis le backend. Animation et Pro ne consomment pas
+ces champs privés et ne sont pas modifiés. Livrer le backend puis Marketplace ;
+l'ancienne API reste lisible avec états et compteurs à vérifier.
+Aucun appel métier réel ni activation Analytics. Validation
+locale puis recette de l'environnement déployé distincte ; aucun commit,
+push ou déploiement implicite. Principes LIVE-UX-01/02/04/05/07/08/10 appliqués.
+
 ## Évolution du 10 novembre 2026 — participation, E73-EVO-LIVE-PARTICIPATION
 
 Demande : mettre en œuvre les huit lots du plan accepté après l'audit UX en

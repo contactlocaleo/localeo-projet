@@ -177,13 +177,37 @@ s'adresse explicitement à qui a déjà participé. La confirmation nomme l'obje
 acquis et ouvre son prochain geste, puis Mon carnet. Une panne propose une
 reprise compréhensible sans répéter l'inscription.
 
-Le même vert d'action et les mêmes sections accompagnent ces étapes. Magasin
-désigne le passeport, parcours la chasse, boussole Découvrir et épingle la
-localisation. Les tampons gardent une silhouette lisible à petite taille ; leur
+Le même vert d'action et les mêmes sections accompagnent ces étapes. Le livret
+désigne le passeport, le ticket la tombola, le magasin un commerce ou une visite,
+le parcours la chasse, la boussole Découvrir et l'épingle la localisation.
+Une participation confirmée utilise une coche cerclée et son libellé ; le
+trophée désigne un gain. Les tampons gardent une silhouette lisible à petite taille ; leur
 interactivité repose sur des informations effectivement disponibles et utiles.
 La mesure de l'adhésion distingue inscription confirmée, ajout d'accès et
 progression ; elle conserve consentement, suspension et minimisation existants.
 Voir [E73-EVO-LIVE-PARTICIPATION](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-10-novembre-2026--participation-e73-evo-live-participation).
+
+Précision du 11 novembre : le carnet privilégie l'action de chaque objet et
+évite un bandeau « À vous de jouer » qui la duplique. Le suivi d'une tombola
+présente inscription, qualification, tirage et résultat dans un workflow visuel
+unique. Les onglets de Découvrir partagent un en-tête et une sélection de
+communes stables. Les réglages de l'appareil restent dans Réglages ; les
+préférences propres à l'animation sont secondaires dans sa participation.
+Dans le passeport, les visites tamponnées portent la progression : une seconde
+rangée de tampons synthétiques ne la répète pas. Le lien vers les commerces
+reste dans ce bloc principal, avec le QR et les informations de visite.
+Les animations du carnet correspondent aux inscriptions personnelles encore
+ouvertes ; les favoris appartiennent à Découvrir et les gains restent dans
+Mes lots après clôture. Distinguer état de participation, progression et cycle
+de l'animation. Une vignette donne accès à ses nouvelles non lues, avec reçu
+de lecture confirmé. Le badge Mes lots représente les gains non encore vus,
+acquittés par « J’ai vu ce lot » ; il ne représente jamais des retraits restant
+à effectuer. Préciser la portée locale du repère et les compteurs incomplets.
+La récupération « Retrouver mon carnet » reste dans le menu secondaire.
+Une date de tirage annoncée est visible sur la vignette de l'animation, avec
+repère calendrier et heure de Paris. Elle ne signifie ni qualification ni
+résultat ; retrait de l'annonce, résultat et annulation actualisent ce repère.
+Voir [E73-EVO-LIVE-SIMPLICITE](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-11-novembre-2026--simplicité-e73-evo-live-simplicite).
 
 
 Lors du cadrage ou de la conception d’une évolution Live, référencer les principes

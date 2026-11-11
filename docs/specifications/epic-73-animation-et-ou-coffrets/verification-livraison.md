@@ -1,5 +1,193 @@
 # E73 — Vérification, migration et livraison
 
+## Évolution — E73-EVO-LIVE-SIMPLICITE, 11 novembre 2026
+
+Périmètre : [LS-01 à LS-13](localeo-live-entree-unique.md#évolution-du-11-novembre-2026--simplicité-e73-evo-live-simplicite),
+conception §16, retours directs de l'habitant en conversation. Base Git :
+Projet `758faee`, Marketplace `e3d1f9e`, Backend `4b668e0`, avec modifications
+locales. Les changements d'outillage Codex/runner préexistants sont conservés.
+Aucun commit, push, déploiement ou changement des données de TEST demandé pour
+cette intervention. La clôture historique E73 reste distincte de cette évolution.
+
+Après cette validation locale, demande explicite de commit et push reçue le
+11 novembre. Publication par dépôt de l'évolution Live, avec commit distinct
+de son lanceur de recette Marketplace ; modifications Codex préexistantes du
+projet conservées localement. Vérification complémentaire avant publication :
+`node --test tests/visual-runner.test.cjs tests/server.test.cjs` — **26/26 réussis**.
+Cette publication Git ne constitue pas une preuve de déploiement.
+
+| Critères | Réalisation et preuves propres |
+| --- | --- |
+| LS-01/06 | Icônes ticket/passeport/participation/confirmation distinctes, trophée réservé au gain ; suppression du bandeau autonome, action conservée dans chaque carte. Projections Node et recette navigateur carnet/lots réussies. |
+| LS-02/03/07 | Workflow tombola unique, PIN et préférence volontaire compacts, réglages d'appareil retirés du détail ; une collection de tampons commerçants pour le passeport et annuaire intégré. Recette participation/QR/PIN/préférences réussie ; captures 320/390/1280 inspectées. |
+| LS-04/10 | Messagerie limitée à l'animation dès le rendu, pagination et retour ; cloche par vignette, reçu serveur avant décrément. Agrégation backend autorisée et bornée. Recette ciblage/échec/lecture/retour et signal unique de lecture collective réussie, y compris changement de filtre paginé, ancien reçu après refus et succès partiel suivi d'un refus. |
+| LS-05 | Même shell, commune et onglets entre animations et commerces ; contexte direct/recherche/retour conservé, multi-communes explicite. Reprises mobiles et texte 200 % réussies ; détail des tentatives ci-dessous. |
+| LS-08/09 | Inscriptions personnelles non clôturées, statut d'animation distinct, gains conservés ; lot relié à sa participation exacte. Passeport ELIGIBLE avec `disponible:false` garde tampons et accès au détail, sans droit de nouvelle validation. Tests Node et recette navigateur réussis ; droits 503/403 et retour exact couverts. |
+| LS-11/12 | Badge des gains non vus, acquittement explicite durable, transaction IndexedDB atomique entre onglets, fusion des bons locaux, refus/erreurs/lectures partielles explicites ; récupération dans le menu secondaire. Neuf scénarios ciblés repris avec succès sur la source finale, dont concurrence entre onglets sans Web Locks et échec de stockage. |
+| LS-13 | Date annoncée directement dans la vignette en heure de Paris, avant ou après qualification ; changement/retrait/résultat recalculés depuis le tableau existant. Trois tests Node et deux scénarios navigateur 320/390 px réussis ; date et action visibles au-dessus du menu à 320×568. |
+
+### Contrats, invariants et backend
+
+Le domaine conserve participation, qualification, tirage, droits et remise.
+Le tableau de bord ajoute deux champs facultatifs : `statut_animation` et
+`nouvelles_non_lues`. `null`/absence signifie inconnu ; le compteur combine
+messages et notifications accessibles à l'installation pour les animations de
+la page. Aucun N+1 : deux agrégats et un contrôle groupé des capacités ; le
+préchargement existant est réduit de neuf à six lectures sans multiplier les
+lignes, pour conserver le budget de quinze requêtes. La date de tirage utilise
+le champ existant `resultat_tirage.date_prevue`, sans lecture détail par carte.
+
+Backend, Python 3.14 et PostgreSQL local jetable, sans `.env` opérateur :
+
+- **43/43** tests ciblés API/application/compteurs PostgreSQL réussis : droits
+  de deux installations et animations, révocation/expiration/anonymisation,
+  suivi retiré, dédoublonnage, capacité manquante, erreur SQL au second agrégat
+  avec connexion réutilisable, mesure N/10N de 100 à 1 000 objets.
+- **11/11** rappels/préchargement réussis, dont budget conservé pour pages
+  de 1/10/50, parité des résultats et contrôles d'accès.
+- **687/687** contrôles d'architecture requis réussis.
+- **10/10** tests OpenAPI et générateur réussis via
+  `scripts/validation/test_isolated.py`, contrat canonique E42 régénéré hors
+  ligne. Deux champs additifs ; aucun schéma de table modifié.
+
+Commandes exécutées depuis Backend avec `py -3.14
+scripts/validation/test_isolated.py <sélection> -q --tb=short` :
+
+| Groupe | Sélection exacte | Contexte et sortie |
+| --- | --- | --- |
+| Compteurs | `tests/application/animation_locale/test_tableau_de_bord_live.py tests/api/test_localeo_live_tableau_rappels.py tests/infrastructure/persistence/test_live_unread_animation_counts.py tests/security/test_live_unread_animation_counts_postgres.py` | Option `--postgres-test-url` vers la base locale jetable sur 55443 ; 43 réussis, 32,78 s. |
+| Rappels | `tests/security/test_rappels_live_postgres_e73.py` | Même base jetable ; 11 réussis, 221,43 s. |
+| Architecture | `tests/architecture tests/domain/test_domain_dedicated_classes.py tests/application/use_cases/test_use_case_business_test_coverage.py` | Environnement isolé ; 687 réussis, 32,76 s. |
+| OpenAPI | `tests/api/test_epic42_openapi.py tests/scripts/test_generate_openapi_documentation.py` | Environnement isolé, sans lancement métier ; 10 réussis, 193,47 s. |
+
+Sorties de commandes conservées dans la conversation, aucun rapport pytest
+fichier demandé. Ces résultats ne sont pas attribués à une CI ou à TEST.
+
+PostgreSQL temporaire sur 55443 arrêté après la recette ; aucun appel métier
+distant, envoi d'e-mail ou génération de démonstration réelle. Le générateur
+reste inchangé : aucun nouvel état de domaine et les projections réutilisent
+les faits existants. Tests de panne/droits fournis par des fixtures synthétiques.
+
+### Preuves frontend et tentatives
+
+Marketplace : Chromium local, API entièrement simulée, services workers bloqués
+et accès externes interdits par les fixtures. Runner
+`node scripts/run-visual-tests.cjs --port <port> <specs> --workers=1` ; chaque
+tentative a un build, des captures et un rapport distincts sous
+`test-results/visual-runs/`. Un seul navigateur de recette actif à la fois.
+Les premières tentatives concurrentes interrompues ne sont pas des succès.
+
+| Tentative | Résultat et portée |
+| --- | --- |
+| `2026-11-10T23-59-07-467Z-VG3OfT` | Découverte : 36/38 ; correctifs de petit viewport et assertion ancienne identifiés. |
+| `2026-11-11T00-07-41-804Z-XEWedf` | Découverte : 12/13 ; dernier échec = attente ancienne interdisant la lecture du badge de lots depuis une installation connue. Assertion ajustée au contrat LS-11, interdiction des lectures de tableau/tirages conservée. |
+| `2026-11-11T00-12-15-972Z-dJVRCT` | 10/12, dont trois reprises CB06 réussies qui ferment le reste découverte. Deux écarts carnet corrigés : premier CTA 16 px sous la navigation à 320 px ; assertion concurrente lancée avant fin du chargement. Aucune durée de test augmentée. |
+| `2026-11-11T00-18-25-195Z-OkzvL7` | Interruption du processus avant rapport final : 23 succès explicitement reçus, dont 20 E74, deux reprises carnet et le premier live-game. Un échec à l'ouverture du shell, attente de disponibilité corrigée sans augmenter le délai ; un autre résultat reste inconnu. Manifeste marqué interrompu, aucun rapport inventé. |
+| `2026-11-11T00-41-33-648Z-g63H7b` | 191/206 réussis, 15 échecs, aucun ignoré/instable, 28,7 min, sortie 1. Les onze cas LS-08 à LS-13 passent ; tous les live-game restants passent. Les échecs et reprises ci-dessous restent distincts. |
+| `2026-11-11T01-11-04-408Z-5lLKAH` | Reproduction déterministe en échec : un reçu de lecture de A reçu pendant le chargement de B laissait B en attente. Correction du rafraîchissement du contexte courant avant la reprise suivante. |
+| `2026-11-11T01-15-04-899Z-zkTlln` | **77/77 réussis**, aucun ignoré/instable, 9,2 min, sortie 0. Les quinze échecs de `g63H7b` sont repris et clos ; tests supplémentaires de refus 403 après lecture valide, filtre/retour/reçu tardif et visibilité date/action. Port 8343 arrêté après la campagne. |
+| `2026-11-11T01-26-08-832Z-Op2Wsu` | **28/28 réussis**, aucun échec/ignoré/instable, sortie 0. Source finale du provider : trois variantes de concurrence, maintien de pagination dans un même filtre, reçus anciens, Push, nouvelles ciblées et LS-10. Manifeste et `results.json` vérifiés ; session et port 8343 fermés. |
+
+Node : **29/29** tests réussis dans `tests/security/` :
+`live-unified-carnet`, `live-rewards`, `live-saved-access`,
+`live-challenge-presentation`, `tombola-workflow`, `live-carnet-draw-date`
+(fichiers `.test.cjs`). ESLint sur toutes les sources JS/JSX/MJS modifiées ou
+ajoutées : sortie 0. Ces preuves ne remplacent pas la recette navigateur.
+Après le dernier correctif de messagerie : ESLint ciblé, syntaxe des tests et
+`git diff --check` réussis. Contrôles documentaires :
+`py -3.14 scripts/check_guidance.py` — 97 guides, 1 191 liens, aucune erreur ou
+alerte ; `py -3.14 scripts/sync_documentation.py --check-sources` — 148 sources
+vérifiées. Les trois dépôts modifiés passent `git diff --check` ; Animation et
+Commerçant sont inchangés. Les avis Git sur les fins de ligne ne sont pas des
+échecs de validation.
+
+Revues indépendantes intégrées : atomicité des reçus entre onglets sans
+Web Locks, inclusion/dédoublonnage des bons locaux, droits et null/zéro du
+compteur backend, projection réelle ELIGIBLE non disponible, exception SQL au
+second agrégat et provenance de la date annoncée. Captures inspectées : shell
+Découvrir/Commerçants 390, carnet/date 320/390 après correction, lots vus/non vus
+390, passeport et gain avant les visites, tombola/PIN à 320/390/1280.
+La dernière revue a également confronté le drapeau `incomplet` au producteur :
+il indique la continuation paginée et peut redevenir faux après lecture de
+toutes les pages. Erreur, borne atteinte et page terminale incomplète gardent
+l'état à vérifier ; aucune somme d'avertissements intermédiaires n'est figée.
+
+Écarts du passage `g63H7b` et corrections ciblées :
+
+- `digital-lot` : deux attentes historiques exigeaient un écran vide en 503,
+  alors que le composant, identique à HEAD, maintient volontairement le dernier
+  état sans QR/PIN ni action. Attente précisée ; preuve supplémentaire d'un
+  vrai refus 403 après lecture valide, avec purge mémoire et session.
+- `live-lots-unified` : une espace manquait dans le nom accessible attendu ;
+  l'assertion du lien exact est conservée. `live-product-discovery` : deux
+  sélecteurs globaux ambigus sont ciblés sur le formulaire effectivement ouvert.
+- `organizer-messages` : trois préparations d'appareil vide attendaient Carnet
+  depuis `/live`, dont l'arrivée est Découvrir. Entrée de préparation explicite
+  dans le carnet, sans modification des attentes de consentement.
+- `pin-validation` : quatre fixtures ignoraient le paramètre de négociation
+  `moteurs_supportes`. Leur réponse vide était correctement refusée ; le mock
+  est corrigé, les contrôles d'accès et délais restent inchangés.
+- `live-messages-product` : défaut réel de contrôle de case lors de la
+  synchronisation URL/filtre. L'attente `.check()` est conservée. Une course
+  supplémentaire entre reçu de A et lecture de B est reproduite séparément.
+- `live-participation-mobile-flow` : défaut réel de hiérarchie du gain après
+  fusion du passeport ; résultat GAGNANT remonté avant les visites, assertion
+  de position conservée. `live-tombola-simplicity` : suspension du lien testée
+  par son comportement, React Router normalisant `#` vers la route courante.
+- Revue visuelle : contraste du bouton PIN compact insuffisant, et action de
+  la vignette du carnet recouverte à 320×568 après ajout de date. Correction
+  du style compact et ordre DOM état/date → action → tampons ; nouvelles
+  assertions de contraste et de géométrie réussies dans `zkTlln`.
+
+Les captures tombola initiales sont à 320/390×844 et 1280×844, en pleine page
+après interaction. Elles ne prouvent pas la visibilité du QR au premier écran
+à 320×568 ; sur cette hauteur, le QR nécessite un défilement. `zkTlln` ajoute
+une capture réelle de viewport à cette hauteur, au scroll initial. Le titre et
+les quatre étapes y sont visibles ; le QR commence plus bas, autour de y=580.
+Captures finales sous `captures/` du run :
+
+- `live-carnet-notifications--b297f-ification-implicite-à-320px/carnet-draw-date-320.png` : date et action de la vignette.
+- `live-participation-mobile--7ff02-participation-et-son-retour/passeport-gagnant-viewport-390.png` : accès au gain avant la collection de visites.
+- `live-tombola-simplicity-to-5e218-ompact-et-accord-volontaire/tombola-viewport-320.png` et `tombola-workflow-320.png` : premier écran réel et détail complet, PIN contrasté.
+
+Dernière revue de la messagerie : deux variantes supplémentaires identifiées
+après le build `zkTlln`, corrigées puis vérifiées séparément. Un reçu tardif après passage
+d'un historique A paginé vers B ne doit conserver aucun curseur A ; un refus
+GET 403 doit rester prioritaire sur un ancien reçu POST 200 et son signal de
+lecture collective. Les succès de `zkTlln` ne sont pas attribués à ces variantes.
+Correctifs revus indépendamment : conservation de l'historique seulement pour
+le même contexte, vérifiée avant réaffectation ; révision dédiée des droits
+gardant caducs les anciens reçus après refus ou changement d'accès, y compris
+le signal final du lot. Trois tests déterministes couvrent ces cas. Le dialogue
+expose son état occupé accessible pendant la lecture ; les tests attendent la
+fin réelle des opérations, sans délai arbitraire. La revue en lecture et la
+reprise navigateur `Op2Wsu` sont closes avec succès.
+
+Sélection de cette dernière reprise :
+
+```text
+node scripts/run-visual-tests.cjs --port 8343 --retry-of test-results/visual-runs/2026-11-11T01-15-04-899Z-zkTlln tests/visual/live-message-read-batching.spec.cjs tests/visual/live-messages-product.spec.cjs tests/visual/live-tombola-simplicity.spec.cjs:148 tests/visual/live-carnet-notifications.spec.cjs:119 --workers=1
+```
+
+Les résultats en échec restent conservés avec leur diagnostic et leur reprise ;
+ils ne sont pas réécrits en réussite. Les critères LS-01 à LS-13 sont couverts
+localement ; aucun défaut connu de cette intervention ne reste à corriger.
+
+### Livraison et limites
+
+Ordre : backend puis Marketplace. Pas de migration, nouveau flag ni secret.
+Les anciens clients ignorent les champs additifs ; l'ancien backend laisse
+états/compteurs à vérifier sans faux zéro. L'acquittement des lots est **local
+à cet appareil** : ce n'est ni un reçu serveur de remise ni une synchronisation
+de compte habitant. Le retour à un artefact précédent ne requiert pas de purge
+de données et conserve les accès personnels enregistrés.
+
+Après déploiement autorisé, vérifier le SHA servi et rejouer Carnet → nouvelles
+→ lecture/retour, gain → « J’ai vu ce lot », récupération depuis le menu,
+tirage annoncé/modifié, passeport et changement d'onglet Découvrir. Cette recette
+hébergée, les essais humains/lecteur d'écran et la latence de TEST restent
+distincts des preuves locales ; ils n'ont pas été exécutés ici.
+
 ## Évolution — E73-EVO-LIVE-PARTICIPATION, 10 novembre 2026
 
 Autorisation : spécifier puis implémenter et committer chacun des huit lots du

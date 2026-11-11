@@ -1,5 +1,89 @@
 # E73 — Conception de l’adhésion habitant dans Localeo Live
 
+## 16. Simplicité — E73-EVO-LIVE-SIMPLICITE
+
+Conception du 11 novembre 2026 : [critères LS-01 à LS-13](localeo-live-entree-unique.md#évolution-du-11-novembre-2026--simplicité-e73-evo-live-simplicite).
+Direction visuelle : un carnet personnel aéré, des objets reconnaissables et
+un chemin graphique dont la progression repose sur les confirmations réelles.
+
+Le détail tombola place nom, workflow et prochaine action autorisée avant les
+accès et préférences secondaires. Il évite l'empilement ticket/qualification/
+résultat décrivant plusieurs fois le même état. Les quatre étapes ont chacune
+une icône et un libellé court ; une explication nécessaire tient en une phrase.
+Le PIN et les préférences s'ouvrent volontairement, sans perdre les saisies ni
+les garde-fous. La navigation entre onglets conserve la zone communale ; les
+transitions se limitent au focus, aux états des commandes et aux dépliages,
+sans déplacement décoratif et avec mouvement réduit respecté.
+
+Le passeport réunit compteur, état et visites dans le même bloc. Les tampons
+des commerces constituent sa seule collection ; la rangée synthétique répétée
+est supprimée. Le QR et le lien vers l'annuaire appartiennent à ce bloc, avec
+les dates confirmées disponibles dans chaque visite. La simplification ne
+retire aucun commerce ni ne transforme une visite inconnue en validation.
+
+Les précisions utilisateur cadrent les trois entrées : Carnet pour suivre les
+inscriptions encore ouvertes, Lots pour retrouver les gains et leur animation,
+Découvrir pour les animations actuelles/futures, les favoris et les commerces.
+Le carnet exclut les simples suivis et les animations clôturées/archivées/
+annulées, sans effacer les accès enregistrés. Les coffrets déjà présents gardent
+leur récupération existante. Le statut animation vient du domaine backend,
+jamais du pourcentage personnel ou de l'horloge du navigateur.
+`disponible` décrit la possibilité d'une nouvelle action de jeu, pas le droit
+de lire le carnet. Les participations confirmées ELIGIBLE/TERMINE/GAGNANT
+gardent leurs tampons et leur détail avec `disponible:false` ; aucune action de
+validation n'est accordée par ce maintien. Les accès refusés/inconnus conservent
+leur contrôle à l'ouverture, sans fausse progression.
+
+La vignette expose `resultat_tirage.date_prevue`, déjà fourni par le tableau de
+bord, sans lecture du détail par carte. « Tirage prévu le » précède la date et
+l'heure de Paris, aussi avant qualification. Les états EN_ATTENTE et
+NON_QUALIFIE sans `realise_at` autorisent cette annonce ; résultat, annulation,
+date invalide ou retrait serveur la retirent. L'horloge ne transforme jamais
+une annonce passée en résultat. Une projection locale est marquée « à vérifier ».
+Ce complément LS-13 ne modifie ni contrat, ni règle métier, ni générateur.
+Dans la vignette d'une animation, l'ordre DOM est état/date, action principale,
+puis tampons : la date et l'action restent visibles sur le premier petit
+viewport, et la collection conserve son espace en défilant. Les tampons du
+détail et les autres catégories du carnet gardent leur composition propre.
+
+La cloche d'une vignette ouvre `/live/messages?animation_id=…` avec retour/focus
+sur cette vignette. Le compteur du tableau privé est groupé par animation et
+applique les mêmes preuves d'accès que l'indicateur de messagerie. Une valeur
+absente/null n'est pas un zéro. Le reçu de lecture existant précède tout
+décrément ; le retour ou un reçu dans la messagerie superposée actualise le
+carnet. Les droits révoqués ne laissent pas de projection privée active.
+
+Le badge de Mes lots lit les pages privées sans créer d'installation depuis un
+lien public. Il ne compte que les lots disponibles non acquittés ; une lecture
+bornée/incomplète est indiquée par « + » ou un état à vérifier. Le clic explicite
+« J’ai vu ce lot » écrit le repère local avant d'actualiser les autres vues et
+onglets. Ouverture de liste, navigation ou dépliage n'acquittent rien. Une erreur
+de stockage garde le repère Nouveau et propose de réessayer. Aucune remise,
+activation de coffret ou validation QR n'est déclenchée par cet acquittement.
+La fusion inclut les bons enregistrés localement, signalés comme état à
+vérifier jusqu'à confirmation serveur, et les déduplique par identifiant de bon.
+L'acquittement utilise une transaction IndexedDB readwrite unique, y compris
+entre onglets sans Web Locks. La lecture groupée de messages émet un seul
+signal d'actualisation après ses reçus confirmés, même en cas de succès partiel
+transitoire. Un refus d'accès invalide les reçus encore en vol et leur signal :
+un ancien succès ne peut ni effacer le refus ni rétablir un état « à jour ».
+Le contexte d'installation et cette invalidation restent distincts du filtre :
+un reçu confirmé pendant un changement d'animation actualise la vue courante,
+sans conserver les messages ou les curseurs de pagination de l'ancienne vue.
+Le menu secondaire garde « Retrouver mon carnet » vers le parcours existant.
+
+Réutiliser `LiveActivityIcon`, les projections de jeu et le filtrage existants.
+Ne pas déduire une transition métier de la position dans le workflow. Le
+composant n'accorde aucun droit et masque les accès sensibles pendant une
+revalidation. Les messages ciblés sont filtrés dès la lecture du contexte et
+ne reprennent pas une liste mémorisée d'une autre animation. La coquille de
+Découvrir demeure montée entre ses deux vues ; le contenu et ses filtres
+locaux se remplacent sous les onglets. Préserver les anciennes URLs publiques.
+
+Recette prévue : états tombola, PIN, consentement, messages ciblés, carnet sans
+bandeau et onglets à 320/390 px, desktop, clavier et texte agrandi. Le bilan
+sépare tests simulés, captures inspectées et recette hébergée non exécutée.
+
 ## 15. Participation — E73-EVO-LIVE-PARTICIPATION
 
 Conception du 10 novembre 2026, avant réalisation des huit lots. Les critères

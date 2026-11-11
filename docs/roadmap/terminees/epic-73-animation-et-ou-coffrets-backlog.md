@@ -1,5 +1,18 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+## Évolution du 11 novembre 2026 — simplicité des parcours Live
+
+**E73-EVO-LIVE-SIMPLICITE** : correction de la continuité Découvrir/Commerçants,
+nouveaux repères d'animation et de confirmation, suppression du bandeau d'action
+redondant du carnet et simplification du détail tombola. Les
+[critères LS-01 à LS-13](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-11-novembre-2026--simplicité-e73-evo-live-simplicite)
+et la conception §16 cadrent l'implémentation demandée ; les preuves seront
+consignées au bilan. Le complément LS-07 fusionne progression et visites du
+passeport dans un seul bloc de tampons. LS-08 à 12 précisent les inscriptions
+encore ouvertes du carnet, le lien lot/animation, les compteurs de nouvelles et
+de gains vus, ainsi que la récupération depuis le menu secondaire.
+Statut historique et réserves antérieures conservés.
+
 ## Évolution du 10 novembre 2026 — envie de participer
 
 **E73-EVO-LIVE-PARTICIPATION** : huit lots spécifiés, implémentés, vérifiés
