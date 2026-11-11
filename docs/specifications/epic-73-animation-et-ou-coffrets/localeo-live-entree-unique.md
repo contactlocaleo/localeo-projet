@@ -1,5 +1,38 @@
 # E73 — Localeo Live, entrée unique des animations
 
+## Correctif du 11 novembre 2026 — date dans Mon inscription
+
+Le détail personnel d'une animation affiche **Date d’inscription** dans la
+section dépliable **Mon inscription**, avec l'e-mail déjà présent. La valeur
+provient uniquement de `inscrit_at` du contrat privé existant ; la date d'ajout
+au carnet ne la remplace jamais. L'instant est affiché en date et heure de
+Paris, avec la mention du fuseau et une balise `time`. Une valeur absente ou
+invalide donne **Date non disponible**. Le rafraîchissement et les refus
+d'accès gardent leurs protections existantes.
+
+Principes LIVE-UX-02/05/07/08 : information personnelle regroupée, ouverture
+volontaire, clavier et lisibilité mobile. Marketplace seul change son rendu ;
+aucune règle métier, API, migration, flag, donnée ou générateur à modifier.
+Le producteur backend expose déjà la date d'inscription enregistrée.
+
+Preuves locales (base Marketplace `8ad9b12`, correctif **`6c64ff1`**) : absence reproduite avant
+correction dans `test-results/visual-runs/2026-11-11T10-44-13-931Z-jsY7Di/`,
+puis **4 scénarios réussis** dans `2026-11-11T10-44-51-420Z-2bOer4/` : tombola
+publique à 320 px, chasse à 390 px, passeport à 1 280 px, date absente/invalide.
+Navigateur réglé sur Los Angeles, heure de Paris vérifiée en hiver (changement
+de jour) et en été, ouverture au clavier et date conservée après actualisation.
+Les captures finales de la section complète sont inspectées dans
+`2026-11-11T10-45-56-758Z-6U1S1R/` (**3 reprises réussies** des mêmes cas de
+rendu). Aucun débordement ni commande de jeu implicite. Les **2 tests Node**
+du formateur Paris et le lint des fichiers JavaScript touchés réussissent ;
+builds isolés, sans API ni donnée réelle. Recette :
+
+```console
+node scripts/run-visual-tests.cjs --port 8195 tests/visual/live-participation-mobile-flow.spec.cjs --grep "Date de mon inscription"
+node --test tests/security/paris-dates.test.cjs
+node node_modules/eslint/bin/eslint.js src/live/LiveAnimationGame.jsx tests/visual/live-participation-mobile-flow.spec.cjs
+```
+
 ## Correctif du 11 novembre 2026 — résultat sur la vignette du carnet
 
 **Mon carnet** présente les animations personnelles non archivées et les
