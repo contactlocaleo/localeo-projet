@@ -1,5 +1,36 @@
 # Registre des anomalies
 
+## Correction du 11 novembre 2026 — timeline du cycle de vie
+
+- **Signalement** : « Test animation Thibaut » clôturée, mais des étapes de
+  configuration, de publication ou de tirage semblent encore non validées dans
+  **Publication et clôture**. Le cas distant n’a pas été consulté.
+- **Cause reproduite sur Animation `26cc7fd`** : l’interface reconstruisait dix
+  étapes à partir d’un cycle serveur à huit étapes. Elle ajoutait Configuration
+  et Prête à publier, puis traitait les phases de suivi du tirage libre comme
+  des codes absents du cycle local. La reproduction navigateur échoue sur les
+  deux étapes supplémentaires avant correctif, capture conservée dans
+  `localeo-animation/tmp/workflow-timeline-vMdWoJ/` (non versionnée).
+- **Correction** : présentation directe de l’ordre, des libellés et des états
+  renvoyés par `/workflow`. Les phases Tirage en préparation, Tirage à vérifier
+  et Tirage terminé sont conservées, indépendamment du statut persistant
+  `CLOTUREE`. Les étapes passées sont cochées ; l’étape actuelle est nommée et
+  marquée `aria-current="step"` dans une liste ordonnée. Chargement, erreur,
+  réponse invalide et cycle annulé sont explicites, sans progression inventée.
+- **Preuves locales** : 36 scénarios navigateur à 320/1280 px réussis dans
+  `localeo-animation/tmp/workflow-timeline-pKknv0/report.json` ; quatre recettes
+  ciblées finales dans `tmp/workflow-timeline-wzuCAc/`. Les deux scénarios de
+  clôture existants à 390/1280 px et sept tests Node de navigation/annulation
+  passent. TypeScript, ESLint et build isolé de l’application réussis ; captures
+  PC/mobile inspectées. Aucun appel API réel ni commande métier exécutés.
+- **Impacts** : interface et type TypeScript du consommateur alignés sur le
+  contrat existant. Backend, OpenAPI, règles métier, habilitations, migrations,
+  batchs, paramètres d’exploitation et générateur de démonstration inchangés :
+  seule la restitution de la lecture est corrigée. La
+  [spécification de suivi](../../specifications/epic-73-animation-et-ou-coffrets/tirage-libre-protocole.md#exécution-locale-et-activation-future)
+  décrit cette présentation. Aucun déploiement réalisé ; contrôle de l’animation
+  TEST à effectuer après livraison de Localeo Animation.
+
 ## Correction du 11 novembre 2026 — consulter les gagnants
 
 - **Signalement** : impossibilité de consulter les gagnants depuis

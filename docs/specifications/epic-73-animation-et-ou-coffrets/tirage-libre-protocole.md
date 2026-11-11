@@ -77,6 +77,17 @@ Après une commande confirmée ou un changement réel de projection du tirage,
 l'interface relit le résumé backend pour actualiser son bandeau. Une relecture
 en cours ou échouée ne laisse pas une ancienne proposition de lancement active.
 
+Dans **Publication et clôture**, la timeline reprend directement l’ordre,
+les libellés et les états `TERMINEE` / `EN_COURS` / `A_VENIR` des étapes de
+`GET /protected/animation-locale/animations/{id}/workflow`. Elle ne reconstitue
+pas les anciennes dix étapes de l’interface. Pour une animation clôturée,
+préparation, publication, déroulement et clôture sont ainsi terminés ; après
+confirmation du tirage libre, le tirage est terminé et la phase actuelle est
+« Tirage terminé ». Le statut persistant `CLOTUREE` ne fait pas reculer le cycle.
+Un chargement ou une erreur ne crée pas d’étape actuelle fictive ; une animation
+annulée indique un cycle interrompu. Les actions et permissions restent celles
+du serveur, indépendamment du dessin de la timeline.
+
 **Correctif du 11 novembre 2026 — traitement supervisé et suivi.** Le POST de
 l'organisateur reste asynchrone : `EN_ATTENTE` indique une demande enregistrée,
 `PREPARATION` la phase constatée, `CONFIRMEE` le résultat scellé. L'interface
