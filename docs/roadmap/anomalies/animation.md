@@ -33,6 +33,26 @@
 
 ## Correction du 11 novembre 2026 — consulter les gagnants
 
+**Complément après la précision utilisateur « le détail des gains ».** La vue
+initiale restait centrée sur des fiches de lots. Depuis la base Animation
+`4cdd4dd`, **Gains & remise** présente d’abord une liste synthétique, avec le
+gagnant en première colonne/titre mobile, son lot, le statut de remise et
+**Voir le détail du gain**. Le détail conserve consignes, suivi, date du premier
+email réussi et interventions. La gestion des bons numériques vient après la
+liste. Le retour conserve la page courante ; aucun nouveau chargement global de
+participants ni dédoublonnage côté navigateur n’est ajouté.
+
+La reproduction du défaut d’ergonomie échoue avant correctif sur l’absence de
+la liste (`tmp/tirage-existing-Ezww4I/`). Après correction : 22 scénarios navigateur,
+182 assertions à 320/1280 px, dont plusieurs gagnants, référence sans nom,
+pagination, refus et aller-retour au détail, réussissent dans
+`localeo-animation/tmp/tirage-existing-4JyXfc/`. Le banc numérique passe ses
+12 scénarios/116 assertions ; ses réponses 404 simulées préexistantes sur les
+sélecteurs de préparation/contact public ne constituent pas une vérification de
+ces routes. Onze tests Node, TypeScript, ESLint et build isolé réussissent.
+Captures PC/mobile inspectées. Présentation seule : aucun changement backend,
+contrat API, règle de remise, migration ou donnée de démonstration.
+
 - **Signalement** : impossibilité de consulter les gagnants depuis
   **Résultats → Gains & remise**. Version distante et animation non précisées ;
   aucun accès aux données de TEST réalisé.

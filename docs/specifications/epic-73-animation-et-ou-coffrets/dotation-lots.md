@@ -211,6 +211,11 @@ La réservation de ces exemplaires est faite par la commande d’affectation ; e
 Dans **Résultats → Gains & remise**, le gestionnaire disposant de
 `animation:lire` consulte les gagnants et les lots attribués. La permission
 d’envoyer ou de remplacer un gain conditionne les commandes, pas cette lecture.
+La vue présente d’abord une liste synthétique : gagnant, lot attribué, statut de
+remise et **Voir le détail du gain**. Le nom est la première colonne sur ordinateur
+et le titre de la fiche compacte sur mobile. Les consignes, le suivi des emails
+et les interventions restent dans le détail ; le retour rejoint la même page de
+liste. La gestion des bons numériques vient après cette liste.
 Les lots libres utilisent la page de `GET /protected/animation-locale/animations/{id}/gains-libres`
 (25 éléments dans l’interface) ; les Coffrets conservent leur lecture dédiée.
 Seules les attributions confirmées sont visibles.
