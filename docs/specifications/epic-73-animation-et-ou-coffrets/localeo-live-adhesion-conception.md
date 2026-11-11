@@ -1616,6 +1616,30 @@ atteindre les conditions de participation. Tout markup public reste échappé.
 
 ### 9.4 Actions, accès et états — FD-03/08/11/12
 
+Précision du **11 novembre 2026 — inscription déjà connue** : les vignettes de
+Découvrir et la fiche publique affichent un pictogramme de confirmation avec le
+libellé visible **Déjà inscrit** pour une participation du carnet correspondant
+à l’identifiant exact de l’animation. Un favori ou simple suivi public ne suffit
+pas. La découverte lit le carnet une fois par vue, sans appel privé par vignette.
+Une participation unique ouvre son accès précis ; plusieurs proposent
+**Choisir ma participation** sans en sélectionner une arbitrairement. Le retour
+conserve les filtres, le défilement et le focus de Découvrir.
+
+Le lien direct vers le formulaire vérifie aussi ce contexte : pas de nouvelle
+saisie proposée lorsqu’une inscription locale ou déclarée par l’installation
+est connue. Le cas sans accès personnel propose **Retrouver mon inscription**.
+Cette dernière vérification utilise un seul GET privé existant et ne crée pas
+d’installation. Chargement et échec restent explicites, avec réessai ; aucune
+inscription n’est envoyée pour effectuer ce contrôle. Une nouvelle vérification
+ne détruit pas un formulaire déjà commencé ; il reste désactivé pendant le
+contrôle. Un changement confirmé d’accès actualise les badges et actions.
+
+Le badge est un repère de navigation, pas une autorisation de jeu : expiration,
+révocation, qualification et résultat sont revérifiés dans le parcours personnel.
+Sur un autre appareil ou domaine, la récupération volontaire reste nécessaire.
+L’unicité animation/e-mail et les refus/reprises métier backend restent inchangés.
+Cette précision complète FD-03 et ne crée ni compte habitant, API ou migration.
+
 L’action prend en compte séparément : réponse publique courante, ouverture
 annoncée par le serveur, accès locaux précis et enrichissement d’installation.
 La découverte est disponible sans créer d’installation. Ordre de décision :
@@ -1841,10 +1865,10 @@ bornes ; réutiliser identité/accès et email/outbox existants, pas un
 second système de comptes. Tester adresse absente/partagée, preuve expirée,
 rejouée, révoquée, multi-ressources et panne avant/après livraison simulée.
 
-CN-ARB-02 conserve le téléphone obligatoire classique : validation actuelle,
-formats invalides toujours refusés et anciens champs conservés. Ne modifier
-que la présentation et les claviers/autocomplete. Ne pas ajouter le
-champ à la tombola publique. Mettre à jour OpenAPI canonique E41/E42 concerné,
+CN-ARB-02 est précisé par la demande du 11 novembre : nom, prénom, e-mail et
+téléphone obligatoires pour toute nouvelle inscription, tombola publique incluse.
+Les anciennes coordonnées absentes ne sont pas inventées ; présentation et
+claviers/autocomplete sont partagés. Mettre à jour OpenAPI canonique E41/E42 concerné,
 contrat embarqué et lecteurs lorsque ces contrats changent effectivement.
 
 Les nouvelles structures éventuelles sont additives ; ne pas modifier une
@@ -1866,10 +1890,12 @@ de flag, migration TEST, commit ou déploiement ne découle de cette conception.
 
 ### 10.5 Arbitrages du 9 novembre et contrat de récupération retenu
 
-Décision explicite : téléphone **obligatoire** classique conservé ; tombola
-publique sans téléphone. Aucune migration ni modification d’OpenAPI pour ce
-champ. Le questionnement du rapport est traité par le choix produit, sans
-prétendre que l’audit justifie la collecte pour tout nouveau moteur futur.
+Décision du 9 novembre, précisée le 11 novembre : téléphone **obligatoire**
+classique conservé et formulaire homogène à quatre champs obligatoires (nom,
+prénom, e-mail, téléphone) étendu à la tombola publique. Cette dernière précision
+remplace l’exception sans téléphone. Les contrats d’inscription sont mis à jour ;
+aucune migration ni reconstitution de coordonnées historiques. Voir le
+[périmètre E74 actualisé](../epic-74-tombola-publique/README.md#harmonisation-des-inscriptions--11-novembre-2026).
 
 Récupération groupée limitée aux **participations et lots associés**. Pas de
 coffrets récupérés ni de droits acheteur/bénéficiaire changés. La preuve établit

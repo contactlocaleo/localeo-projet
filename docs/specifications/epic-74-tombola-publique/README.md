@@ -6,6 +6,24 @@ Spécification V1 du **3 novembre 2026**, fondée sur les choix explicites du po
 - [Architecture, contrats et livraison](architecture-contrats.md).
 - [Matrice des preuves et recette](verification.md).
 
+## Harmonisation des inscriptions — 11 novembre 2026
+
+La demande produit harmonise toutes les animations sur la tombola commerçante :
+**nom, prénom, e-mail et téléphone obligatoires**, dans cet ordre et avec les mêmes
+libellés, claviers et règles de saisie. Elle remplace la collecte « e-mail seul »
+de l’évolution du 3 novembre et l’exception sans téléphone de CN-ARB-02.
+L’inscription publique reste immédiate, gratuite et limitée à une chance par
+adresse normalisée ; aucune vérification intermédiaire ni identité civile vérifiée
+n’est introduite. La politique `EMAIL_DECLARE` conserve ce sens.
+
+Les nouvelles coordonnées sont enregistrées à la création ou lors de la première
+confirmation explicite d’une ancienne attente non confirmée. Une nouvelle saisie
+publique pour une adresse déjà inscrite ne remplace pas l’identité existante.
+Les anciennes participations restent lisibles et récupérables sans inventer les
+coordonnées absentes. La collecte ne vaut ni accord marketing ni activation Push.
+Les règles propres à la chasse (majorité/équipe), au règlement et à la qualification
+restent conservées. Aucune migration de données n’est nécessaire.
+
 ## Évolution E74-EVOL-INSCRIPTION-DIRECTE — 3 novembre 2026
 
 La demande produit supprime l’e-mail intermédiaire : depuis le QR ou **S’inscrire** dans Live, l’habitant saisit uniquement son adresse, accepte le règlement et valide. La commande enregistre immédiatement une participation qualifiée et prépare un seul e-mail de confirmation. Ce mail explique le tirage, donne l’accès personnel au carnet et invite à installer Live ; le consulter n’est plus nécessaire pour obtenir une chance.
@@ -18,9 +36,9 @@ La tombola publique est une nouvelle mécanique `TOMBOLA_PUBLIQUE`, version init
 
 | Arbitrage du backlog | Décision confirmée le 3 novembre 2026 |
 | --- | --- |
-| E74-ARB-01 | Adresse e-mail, acceptation explicite du règlement et validation immédiate. Un seul e-mail de confirmation après inscription ; une consultation ne crée aucune participation. |
+| E74-ARB-01 | Nom, prénom, e-mail, téléphone, acceptation explicite du règlement et validation immédiate. Un seul e-mail de confirmation après inscription ; une consultation ne crée aucune participation. |
 | E74-ARB-02 | QR et lien partageables, sans preuve de présence au stand ni géolocalisation obligatoire. |
-| E74-ARB-03 | E-mail seul, sans prénom, nom, téléphone ou nouveau compte. Une seule chance par e-mail normalisé et par tombola dès l’inscription ; adresse déclarée, sans prétendre l’avoir vérifiée. |
+| E74-ARB-03 | Précision du 11 novembre : nom, prénom, e-mail et téléphone obligatoires, sans nouveau compte. Une seule chance par e-mail normalisé et par tombola dès l’inscription ; coordonnées déclarées, sans prétendre les avoir vérifiées. |
 | E74-ARB-04 | Trois modes existants : Coffrets, bons numériques Localeo et lots libres gérés en externe. Les lots externes fonctionnent sans commerce. |
 | E74-ARB-05 | Quota standard et conditions acquises conservés, y compris pour les souscriptions déjà actives. Consommation idempotente à la publication. |
 | E74-ARB-06 | Suivi facultatif de la commune dans Live, sans nouveau canal d'envoi ni campagne inter-animations. |
@@ -46,7 +64,7 @@ Les opérations ERP, API et batch passent par les mêmes politiques métier. L�
 | Étape | Présentation et action principale | Résultat et issue alternative |
 | --- | --- | --- |
 | Découvrir | Fiche publique mobile : commune, dates, vrais lots, « une chance par e-mail », bouton « S’inscrire » | Aucune connexion requise. Le QR ouvre le même formulaire ; aucune inscription par simple ouverture. |
-| S’inscrire | E-mail, règlement consultable et acceptation non précochée ; bouton de validation unique | Une inscription qualifiée et une chance immédiatement, puis un e-mail de confirmation préparé. Une réponse 202 ne prouve pas la livraison du mail. |
+| S’inscrire | Nom, prénom, e-mail, téléphone ; règlement consultable et acceptation non précochée ; bouton de validation unique | Une inscription qualifiée et une chance immédiatement, puis un e-mail de confirmation préparé. Une réponse 202 ne prouve pas la livraison du mail. |
 | Retrouver | Ouvrir l’accès personnel reçu par e-mail et ajouter l’animation au carnet Live | « Mes participations », « Mes lots » et tirages à venir réutilisés. Ce lien donne accès au suivi ; il ne crée pas une nouvelle chance. Aucun carnet personnel n’est inventé dans le navigateur qui n’a saisi qu’une adresse. |
 | Installer Live | Proposition facultative dans le mail et les parcours Live existants | Installer facilite le retour au carnet ; aucune obligation pour participer ni synchronisation automatique entre appareils promise. |
 | Suivre la commune | Action secondaire « Suivre cette commune » avec portée « dans ce navigateur » | Facultatif ; aucun changement de chance, abonnement marketing ou autorisation de notifications implicite. |

@@ -1,5 +1,90 @@
 # E73 — Vérification, migration et livraison
 
+## Évolution — E73-EVO-GAINS-SMS (11 novembre 2026)
+
+Les [critères GS-01 à GS-06](dotation-lots.md#évolution-du-11-novembre-2026--notifications-de-gains-par-sms)
+sont spécifiés et implémentés localement. Bases : Backend `d90a0af`, Projet
+`1c69016`, puis modifications locales ; les travaux antérieurs sur les
+inscriptions homogènes, le carnet et son diagnostic sont conservés.
+
+| Critère / contrôle | Résultat et preuve Backend |
+| --- | --- |
+| GS-01 — canal transactionnel | Politique pure `destinataire_sms_gain`, absence/blanc/présence ; tests domaine et appels sans outbox lorsque le téléphone manque |
+| GS-02 — trois natures et renvois | Préparateurs externe, bon numérique et distribution coffret exécutés ; même lien e-mail/SMS, sources identiques, numéro présent/absent et notification Live conservée ; tous types de bon, dont remplacement et rotation du QR |
+| GS-03 — reprises et atomicité | Identifiant SMS stable par e-mail ; rejet d’une collision de source ; relance coffret par l’adaptateur API et le vrai service, même clé → même opération et un couple de messages, nouvelle clé → nouveau couple ; PostgreSQL : échec injecté après `flush` SMS, zéro e-mail/zéro SMS acquis puis reprise unique |
+| GS-04 — conservation | Archives disponibles, absentes et sans téléphone testées ; aucun repli vers le téléphone technique ; lecture réelle de l’archive PostgreSQL pour lots externes et numériques, pseudonyme opérationnel conservé ; identité coffret testée via le préparateur réel |
+| GS-05 — transport | Batch SMS avec fournisseur simulé : échec temporaire puis reprise du même message ; e-mail non modifié ; adaptateur Brevo et régressions Exploitation vérifiés ; premier succès e-mail immuable après renvoi numérique sous PostgreSQL |
+| Suite isolée courante | **147 réussites**, aucun skip, `tmp/gains-sms-unit-final-02.xml` ; fichiers `test_notification_gain_sms.py` domaine/application, `test_notification_gain_coffret_sms.py`, `test_email_lot_externe.py`, `test_envoi_gain_non_gagnant.py`, `test_tirage_tous_lots_animation.py`, `test_service_envoi_sms.py`, `test_exploitation_use_cases.py`, `test_gel_gestion_animation.py` |
+| GS-03/04 — nouveaux cas PostgreSQL | **4 réussites**, aucun skip, `tmp/gains-sms-pg/sms-final.xml`, `tests/security/test_notification_gain_sms_postgres.py` ; deux natures × rollback après insertion, puis deux natures × identité archivée |
+| GS-03/05 — renvoi numérique | **1 réussite**, `tmp/gains-sms-pg/renvoi-final.xml` ; deux e-mails et deux SMS distincts du même bon, sans changer le premier succès initial |
+| Régressions PostgreSQL | Passage large `tmp/gains-sms-pg/second.xml` : **58 réussites et 2 échecs** dus à une fixture archive invalide (`nom/prénom=NULL` pour une identité COMPLETE) ; fixture alignée sur le pseudonyme réel de conservation, ses deux cas ensuite réussis dans le passage des 4 nouveaux tests. Deux tests de performance préexistants exclus de ce passage fonctionnel. Ces exécutions se recouvrent et ne constituent pas un passage unique entièrement vert |
+| Architecture et recensements | **698 réussites**, `tmp/gains-sms-architecture-final.xml`, groupe obligatoire du guide backend |
+| GS-06 — démonstration | **15 réussites**, `tmp/gains-sms-demo-unit.xml`, tests des animations, tombola publique locale et fin d’animation ; registre `sms_sortants=replace` et refus des historiques de livraison conservés, aucune adaptation du générateur nécessaire pour ce changement |
+
+Les premiers contrôles ont également révélé un double de tenant renvoyant
+`None` avant la garde de fin d’animation : corrigé pour représenter une animation
+clôturée, assertions de refus des non-gagnants conservées. Les doubles de
+distribution Coffrets ont été complétés avec la session UoW et le nom réel
+`operation_id` de la réponse. La revue indépendante a relevé la clé HTTP de
+relance inutilisée ; elle est maintenant consommée par une opération stable
+sous verrou. Relecture sans autre défaut produit, adaptation des tests de gel
+et vérification du rejeu acquis après fin, sans autoriser un nouveau renvoi.
+
+Commandes : lanceur `py -3.14 scripts/validation/test_isolated.py` avec les
+fichiers ci-dessus, sorties JUnit et répertoires temporaires distincts. Les
+tests PostgreSQL utilisent exclusivement le cluster local jetable 18 sur
+`127.0.0.1:31620`, maintenant **arrêté**. Tous les transports sont simulés ;
+aucun chargement de configuration privée, appel Brevo ou SMS réel. La fixture
+publique Coffrets simule son financement/distributeur : la preuve du nouveau
+SMS Coffrets est applicative, pas une recette PostgreSQL du financement complet.
+
+GS-06 : guides de prise en main, configuration et reprise actualisés. Contrat
+HTTP inchangé (clé déjà obligatoire), aucun export OpenAPI ni consommateur
+frontend à modifier pour ce changement. Les autres contrats et changements
+locaux préexistants restent distincts. Aucune migration, table, permission,
+quota de campagne, règle de remise, nouveau flag ou rattrapage d’anciens gains.
+Les références de coût SMS utilisent les sources déjà prises en charge.
+Contrôles documentaires et `git diff --check` réussis.
+
+Déployer le backend puis contrôler `sms.envoyer`, `sms.synchroniser_statuts`,
+les clés/expéditeur/crédit Brevo et `SMS_DEV_MODE` selon le guide. Aucune
+configuration TEST, livraison sur téléphone, mesure de capacité fournisseur,
+génération complète/dump/restauration de démonstration, commit, push ou
+déploiement exécuté. La livraison externe exactement une fois reste la limite
+du transport existant en cas de réponse perdue après acceptation fournisseur.
+La clôture historique de l’epic demeure inchangée.
+
+## Correctif — inscriptions reconnaissables dans Découvrir (11 novembre 2026)
+
+Arbre Marketplace issu de `3a38530`, avec les modifications locales préexistantes
+des formulaires homogènes et du diagnostic de récupération conservées. La recette
+utilise des bundles isolés et des données synthétiques ; aucune action sur TEST.
+
+La reproduction initiale échoue sur l’absence du badge et sur l’accès direct au
+formulaire d’une animation déjà inscrite. Un second scénario a révélé la perte
+d’une saisie lors d’une actualisation des accès : le formulaire reste maintenant
+monté et temporairement désactivé pendant cette vérification.
+
+| Contrôle | Résultat et preuve Marketplace |
+| --- | --- |
+| Badge, catalogue, fiche, formulaire en lien direct ; favori distinct ; plusieurs accès ; réessai et réponse étrangère ; saisie conservée | **9 scénarios réussis**, `tests/visual/live-registered-animations.spec.cjs`, rapport `test-results/visual-runs/2026-11-11T20-21-32-760Z-jLKN4S` ; mobile 390 px, ordinateur 1280 px et 320 px avec texte à 200 %, captures examinées |
+| Installation expirée et réponse tardive après changement d’installation | **2 scénarios réussis**, même fichier, rapport `2026-11-11T20-24-57-839Z-xyn25h` ; récupération explicite, aucun renouvellement ni inscription automatique |
+| Découvrir → participation indisponible → retour | **1 scénario réussi**, même fichier, rapport `2026-11-11T20-27-06-702Z-0miHcP` ; URL/recherche et focus du lien restaurés |
+| Régressions FD-03, mutation d’accès et UUID majuscule | **7 scénarios réussis**, `live-public-detail-fd.spec.cjs`, rapport `2026-11-11T20-25-16-608Z-CBHHxk` |
+| Favori → fiche publique → participation → doubles retours | **1 scénario réussi**, `live-return-continuity.spec.cjs`, rapport `2026-11-11T20-27-53-157Z-Jty1v8` ; le premier passage a révélé un détour supprimant la fiche, corrigé dans le lien du favori sans modifier l’assertion |
+| Formulaires homogènes et tombola publique | **36 scénarios réussis**, `animation-registration-identity.spec.cjs` et `e74-tombola-email.spec.cjs`, rapport `2026-11-11T20-24-57-874Z-7Ald0n` ; le mock commun déclare explicitement l’absence d’inscription, les scénarios spécialisés gardent leurs réponses propres |
+| Index d’inscription, récupération et accès enregistrés | **7 tests Node réussis**, `live-registration-status.test.cjs`, `live-carnet-recovery.test.cjs`, `live-saved-access.test.cjs` ; favoris/coffrets exclus, UUID normalisés, ressources distinctes conservées |
+| Analyse statique | ESLint ciblé `src` et fichiers de tests modifiés **réussi** ; lint global limité par l’EPERM préexistant du répertoire de sortie ignoré, détaillé dans la vérification E74 des formulaires |
+
+Le catalogue croise un index local, sans appel réseau par vignette. La fiche et
+le formulaire réutilisent le GET privé d’installation existant ; un indice
+d’inscription ne transmet ni token ni droit personnel et ne crée pas d’installation.
+La page personnelle revalide son accès. Sur un autre appareil sans accès connu,
+la récupération reste nécessaire ; l’unicité du participant par animation et
+e-mail reste portée par le backend. Aucun contrat, migration, permission, batch,
+générateur ou réglage opérateur modifié pour ce correctif. Aucun déploiement,
+test de PWA physique ni recette utilisateur distante effectué.
+
 ## Évolution — E73-EVO-DYNAMISME-COMMUNE (11 novembre 2026)
 
 Choix utilisateur confirmés : **profil visuel avec indicateurs et tendances,

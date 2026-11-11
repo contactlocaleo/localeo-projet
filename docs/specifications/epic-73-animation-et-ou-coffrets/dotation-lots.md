@@ -1,5 +1,67 @@
 # EPIC 73 — Dotation, tirages et remise des lots
 
+## Évolution du 11 novembre 2026 — notifications de gains par SMS
+
+**E73-EVO-GAINS-SMS** complète les notifications existantes : lorsqu’un
+participant a renseigné un téléphone, chaque notification de lot prépare aussi
+un SMS transactionnel. Périmètre : coffrets gagnés, lots externes et bons
+numériques, attribution initiale, remplacement et renvoi explicite (y compris
+le nouveau lien après remplacement du QR d’un bon). La clôture historique E73
+reste inchangée ; les preuves propres à cette évolution figurent dans le
+[bilan de vérification](verification-livraison.md).
+
+Avant : e-mail et disponibilité dans Live, sans SMS de gain. Après : ces canaux
+sont conservés et le SMS contient le nom du lot, l’animation et le **même lien
+personnel que l’e-mail**. Aucun PIN ni QR de remise n’est ajouté au SMS. Un
+téléphone absent ou blanc n’empêche ni attribution ni e-mail. Cette notification
+du droit acquis est indépendante des messages facultatifs de l’organisateur,
+du module Communication et de l’autorisation Web Push ; elle ne les active pas.
+
+| Critère ajouté | Comportement / propriétaire | Preuve prévue | Impacts |
+| --- | --- | --- | --- |
+| GS-01 | Politique pure `animation_locale` : SMS si et seulement si téléphone renseigné ; aucune recherche d’un autre destinataire | Tests domaine : présent, blanc, absent | Aucune obligation nouvelle de téléphone ni modification de formulaire |
+| GS-02 | Préparation applicative : un SMS par intention d’e-mail de gain, même source et même lien ; cas initial, remplacement et renvoi | Tests préparateurs des trois natures, identité et contenu ; tests d’orchestration | Outbox `sms_sortants` existante, aucun endpoint ou schéma nouveau |
+| GS-03 | Intention SMS et e-mail atomiques dans l’UoW ; reprise technique sans nouveau SMS, renvoi volontaire distinct | Rollback réel et rejeu sous PostgreSQL ; refus avant attribution | Identifiant SMS stable dérivé de l’e-mail, verrous métier existants et clé primaire ; pas de migration |
+| GS-04 | Identité anonymisée : téléphone issu uniquement de l’archive encore autorisée pour le gain ; aucun retour des coordonnées dans la participation | Test identité archivée, archive absente et téléphone technique ignoré | Conservation existante inchangée ; pas de rattrapage des gains déjà notifiés |
+| GS-05 | Envoi asynchrone indépendant de l’e-mail ; état transport visible, échec repris dans le SMS existant | Batch avec fournisseur simulé : succès, erreur/reprise, absence de numéro ; tests adaptateur | Brevo existant, pas de nouveau flag ni de fournisseur ; délai « sans réponse » toujours calculé depuis le premier succès e-mail |
+| GS-06 | Documentation, générateur et exploitation cohérents ; aucune émission réelle pendant les tests | Vérifications documentaires et revue indépendante du diff ; scénario de démonstration examiné | Sources coûts existantes réutilisées ; aucune nouvelle donnée de démonstration, aucune génération distante |
+
+Le domaine décide de l’éligibilité du téléphone ; l’application prépare et
+persiste via le port SMS, l’adaptateur Brevo reste seul responsable du réseau.
+Les entrées API, ERP et batch passent par les mêmes préparateurs de gain. Le
+SMS reçoit `type_sms=ANIMATION_GAIN` et reprend les références d’e-mail
+`GAIN_ANIMATION`, `ATTRIBUTION_LOT_EXTERNE` ou `BON_LOT` ; suivi et relance dans
+la supervision SMS existante, pas dans les campagnes organisateur.
+
+La préparation ne contacte pas Brevo. Elle ajoute au plus une lecture par clé
+primaire et une insertion SMS pour une intention de gain, sans nouveau balayage
+des participants. Les traitements de gains et SMS gardent leurs limites de lot,
+réservations et reprises existantes. Un rejeu sous verrou retrouve l’identifiant
+SMS stable ; un échec avant commit n’acquiert aucun message. L’acceptation
+fournisseur n’est pas une preuve de livraison ni de lecture. La limite existante
+d’une réponse fournisseur perdue après acceptation demeure : aucune promesse
+de livraison externe exactement une fois. Les liens peuvent nécessiter plusieurs
+segments SMS, facturés selon le fournisseur ; aucun raccourcisseur tiers ajouté.
+
+La relance des coffrets consomme la clé `Idempotency-Key` déjà obligatoire dans
+son contrat HTTP : reçu d’opération stable par acteur, commune, animation, gain
+et clé, acquis avec les deux messages sous verrou d’animation. Un rejeu rend la
+même opération, même après gel de la gestion ; les droits et le tenant sont
+toujours vérifiés avant cette lecture. Une nouvelle clé représente un renvoi
+volontaire. Cette précision corrige l’ancienne clé reçue mais inutilisée et
+empêche de propager au SMS le doublon d’e-mail correspondant.
+
+Livraison : backend seul, sans migration ni reconstruction des frontends ;
+configurer et contrôler le traitement SMS existant avant une recette réelle.
+Les anciens gains ne sont pas réémis automatiquement : un renvoi volontaire
+utilise le nouveau comportement. Contrats HTTP, permissions, quotas de campagnes,
+remise et remplacement des gagnants restent inchangés. Les gains historiques
+du générateur ne sont pas rejoués pour fabriquer des SMS. Son registre classe
+déjà `sms_sortants` en `replace` et sa vérification refuse les livraisons
+historiques : pas de nouvelle donnée ni adaptation du schéma de démonstration.
+Une nouvelle attribution en démonstration suit les services ordinaires avec les
+téléphones synthétiques ; le transport reste explicitement neutralisé en test.
+
 ## Portée et statut
 
 Spécification cible du 17 octobre 2026, **non implémentée par ce document**. Les choix produit restent ceux du [backlog E73](../../roadmap/terminees/epic-73-animation-et-ou-coffrets-backlog.md), notamment DEC-01 à 03, 07, 10 à 12, 19, 33 à 51. Ce chapitre couvre US01, US02 et US04 à US10 ; les périmètres et droits résiduels sont définis dans [les parcours SaaS](perimetres-parcours-saas.md), les conventions communes dans [l’architecture](architecture-contrats.md), les preuves dans [la vérification de livraison](verification-livraison.md).

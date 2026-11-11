@@ -8,12 +8,12 @@ Ce parcours est disponible après activation du modèle sur l’environnement. I
 2. Renseigner la présentation et les dates. Préparer la dotation : lots libres remis par l’organisateur, bons numériques ou Coffrets. Aucun commerce n’est nécessaire pour des lots libres. Un commerce de remise de bon ne devient pas une étape du jeu.
 3. Vérifier les modalités de remise, le règlement et le flyer. Utiliser une image fournie si souhaité ; aucune image illustrative n’est ajoutée automatiquement.
 4. Suivre les actions de l’assistant, puis **Publier**. La publication consomme une unité du quota standard existant. Les prérequis commerciaux des Coffrets restent applicables.
-5. Télécharger le flyer ou partager le lien public. Sur un stand, annoncer « Saisissez votre e-mail pour vous inscrire » ; scanner le QR seul ne donne aucune chance.
+5. Télécharger le flyer ou partager le lien public. Sur un stand, annoncer « Renseignez vos coordonnées pour vous inscrire » ; scanner le QR seul ne donne aucune chance.
 
 ## Participer dans Live
 
 1. **Ouvrir la tombola** : scanner son QR, ou choisir **S’inscrire** sur sa fiche dans Live. Aucun compte n’est nécessaire.
-2. **Saisir son e-mail**, le relire, consulter puis accepter le règlement. Valider une seule fois. Aucun prénom ni mail intermédiaire n’est demandé.
+2. **Saisir son nom, prénom, e-mail et téléphone**, relire les coordonnées, consulter puis accepter le règlement. Ces quatre champs sont obligatoires, comme pour les autres animations. Valider une seule fois. Aucun mail intermédiaire n’est demandé.
 3. **Voir la confirmation d’inscription** : une chance au tirage est enregistrée dès cette validation. La page indique qu’un mail de confirmation est préparé ; cela ne prouve pas encore sa livraison.
 4. **Retrouver la participation** : ouvrir le lien personnel du mail, puis ajouter l’animation au carnet Live. Le mail explique la suite, les résultats et l’accès aux lots. Il invite aussi à installer Live pour revenir plus facilement. Cette action n’est pas une nouvelle condition de qualification.
 

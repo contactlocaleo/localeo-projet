@@ -1,5 +1,10 @@
 # Roadmap par etat
 
+**11 novembre 2026 — E73-EVO-GAINS-SMS** : notification de lot par SMS en
+complément des canaux existants si le téléphone est renseigné.
+[Périmètre et critères](../specifications/epic-73-animation-et-ou-coffrets/dotation-lots.md#évolution-du-11-novembre-2026--notifications-de-gains-par-sms).
+Clôture historique E73 et compteurs inchangés.
+
 **11 novembre 2026 — E73-EVO-DYNAMISME-COMMUNE** : profil visuel de l'activité
 de l'organisation dans sa commune active, quatre axes et tendances sans note
 globale. [Périmètre et suivi](terminees/epic-73-animation-et-ou-coffrets-backlog.md#évolution-du-11-novembre-2026--dynamisme-de-la-commune).

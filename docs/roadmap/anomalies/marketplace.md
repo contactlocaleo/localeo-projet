@@ -7,6 +7,85 @@ Les accents et formulations des anciennes notes sont normalisés sans changer le
 
 ## Signalement identifié
 
+### Correctif du 11 novembre 2026 — reconnaître une inscription dans Découvrir
+
+**Cause locale** : `LiveDiscovery` présentait le catalogue public sans index des
+participations locales. La fiche savait reprendre un accès mais n’affichait pas
+de repère explicite. La route du formulaire ne vérifiait pas ces accès et pouvait
+proposer une nouvelle saisie malgré une participation dans Mon carnet.
+
+**Correction** : badge avec pictogramme **Déjà inscrit**, action vers la ressource
+précise et garde du formulaire, y compris en lien direct. Plusieurs accès restent
+distincts ; une installation seule donne un moyen de récupération, pas un accès
+personnel. Favoris publics exclus, lectures privées bornées sans création
+d’installation, contexte de retour conservé, brouillon maintenu pendant les
+relectures. L’unicité backend reste la protection métier contre les doublons.
+
+Rattachement : précision FD-03 dans la
+[conception Live](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-adhesion-conception.md).
+Résultats, version locale et limites dans la
+[vérification E73](../../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md).
+Périmètre : Marketplace/Live et documentation ; aucun contrat, droit, schéma,
+générateur ou paramètre d’exploitation changé, aucun déploiement distant.
+
+### Correctif du 11 novembre 2026 — formulaires d’inscription homogènes
+
+La demande harmonise les formulaires actuels de passeport, chasse, tombola
+commerçante et tombola publique : **nom, prénom, e-mail et téléphone obligatoires**.
+La tombola publique utilisait un formulaire e-mail seul et son API refusait les
+champs supplémentaires. Reproduction rouge navigateur et HTTP, puis correction
+du composant partagé et de la validation/persistance des commandes actuelles.
+Identité confirmée non remplaçable par une nouvelle saisie publique ; anciens
+liens de confirmation et API historiques conservés dans leur périmètre propre.
+
+Rattaché à [E74 / CA-07](../../specifications/epic-74-tombola-publique/README.md#harmonisation-des-inscriptions--11-novembre-2026)
+et à la précision de CN-ARB-02. Les
+[preuves et limites](../../specifications/epic-74-tombola-publique/verification.md#correctif-du-11-novembre-2026--formulaire-homogène)
+distinguent tests backend, recette mobile/ordinateur, contrats, lint ciblé et
+lint global indisponible. Démonstration adaptée aux coordonnées explicites ;
+aucune donnée historique inventée, migration, campagne ni livraison sur TEST.
+
+### Signalement du 11 novembre 2026 — récupération du carnet et choix des participations
+
+**À reproduire sur la version concernée.** L’habitant signale que toutes les
+animations retrouvées sont ajoutées, malgré un choix limité. Il confirme que
+son carnet était vide avant la récupération et que les éléments non choisis
+apparaissent dans **Mon carnet**. Adresse, version servie et mode de sélection
+restent à confirmer ; aucune cause distante ni correction produit démontrée.
+
+Sur Marketplace `3a38530` et Backend `d90a0af`, la confirmation du lien restitue
+les candidats bornés sans les rattacher à une installation. Le bouton par
+participation ne stocke et ne rattache que cette ressource. Deux nouveaux
+scénarios avec trois participations, dont deux à une même animation, vérifient
+le stockage vide avant choix, l’ajout d’une seule ressource, les appels de
+liaison limités à celle-ci, le retour dans Mon carnet et le rechargement.
+Ils réussissent à 390 et 1280 px sur un bundle isolé avec API simulée.
+La variante renvoyant les trois participations dans le tableau serveur, même
+pour les ressources non ajoutées, réussit aussi aux deux formats : les résumés
+supplémentaires ne créent aucune entrée locale ni vignette dans Mon carnet.
+Rapport `test-results/visual-runs/2026-11-11T19-40-29-882Z-it3svA`.
+
+Lecture publique seule de `test-live.localeo.city` : les assets
+`LiveApp-B8AN-YpT.js` et `liveParticipation-oBJ8rH6b.js` conservent un ajout et
+une liaison par ressource, sans sauvegarde de tous les candidats dans la
+confirmation. La fusion des résumés ne crée pas non plus de participation.
+Empreintes et copies temporaires dans
+`localeo-marketplace/tmp/carnet-recovery-deployed/` ; cette lecture ne prouve
+ni l’origine utilisée par l’habitant, ni la version mise en cache dans sa PWA.
+
+Preuves : `tests/visual/live-carnet-recovery.spec.cjs`, **7 scénarios réussis**,
+rapport Marketplace `test-results/visual-runs/2026-11-11T19-24-00-535Z-1GAXdZ` ;
+**2 tests Node réussis**, ESLint du fichier modifié réussi ; **28 tests backend
+réussis**, rapport `localeo-backend/tmp/carnet-selection-diagnostic.xml`.
+La revue indépendante de confirmation, liaison et lecture du tableau privé
+n’identifie aucun rapprochement implicite par adresse e-mail.
+
+Attendu canonique : ajout volontaire par ressource, [E73 / CN-10, §10.5](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-adhesion-conception.md#105-arbitrages-du-9-novembre-et-contrat-de-récupération-retenu).
+Code produit, contrats, permissions, générateur, migrations et configuration
+inchangés ; seuls les tests de régression et le présent suivi sont ajoutés.
+Aucune suppression d’accès existant, intervention sur des données utilisateur,
+réparation ni recette personnelle sur TEST effectuée. Le signalement reste ouvert.
+
 ### ANO-MPL-E73-LIVE-DOTATION — Bilan redondant et lots annoncés peu visibles
 
 Signalé le **11 novembre 2026**. Mon bilan de parcours répétait les informations

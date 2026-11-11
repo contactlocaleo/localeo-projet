@@ -11,6 +11,15 @@ qui sera déployé ultérieurement. Les autres accès indiquent les menus du por
 Animation. Les noms de domaine réels et leur configuration ne sont pas présumés
 disponibles. Les droits, la commune active et les modules conditionnent les menus.
 
+**Évolution du 11 novembre — notifications de lots par SMS.** Après livraison
+du backend, un participant ayant renseigné un téléphone reçoit aussi un SMS de
+gain, pour un coffret, un lot externe ou un bon numérique. Le lien est identique
+à celui de son e-mail ; les deux envois ont un suivi distinct. Sans téléphone,
+le parcours e-mail/Live est conservé. Le SMS n’exige ni module Communication,
+ni activation Web Push et ne vaut pas remise du lot. Les renvois explicites
+préparent les deux canaux ; les anciens gains ne sont pas renotifiés au déploiement.
+Voir les [critères GS](dotation-lots.md#évolution-du-11-novembre-2026--notifications-de-gains-par-sms).
+
 | Lot | Fonctionnalités à regarder | Accès et profil | Essai conseillé |
 | --- | --- | --- | --- |
 | 00 — Préparation | Dossier canonique, plan, conventions UX, preuves et restrictions de livraison | Ce dossier et le suivi d’implémentation ; aucun écran propre | Lire le périmètre des dix lots et les limites avant de préparer une livraison |

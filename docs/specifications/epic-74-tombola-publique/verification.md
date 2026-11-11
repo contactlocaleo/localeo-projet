@@ -2,6 +2,68 @@
 
 Version du 3 novembre 2026. [Périmètre](README.md), [contrats et invariants](architecture-contrats.md), [critères canoniques](../../roadmap/en-cours/epic-74-tombola-publique-backlog.md).
 
+## Correctif du 11 novembre 2026 — formulaire homogène
+
+Demande explicite : tous les formulaires actuels d’inscription utilisent **nom,
+prénom, e-mail et téléphone obligatoires**, à l’image de la tombola commerçante.
+Cette demande remplace la collecte publique limitée à l’e-mail ; les résultats
+historiques ci-dessous décrivent le contrat antérieur. Bases : Marketplace
+`3a38530`, Backend `d90a0af`, Projet `1c69016`, plus modifications locales.
+Les travaux de diagnostic du carnet, présents avant cette demande, restent séparés.
+
+La reproduction navigateur avant correction échoue sur l’absence du champ Nom
+en tombola publique à 390 px : rapport
+`localeo-marketplace/test-results/visual-runs/2026-11-11T20-04-26-075Z-x989Sg`.
+La reproduction API refuse également les quatre champs (422).
+
+Backend : **103 tests ciblés réussis**, rapport
+`localeo-backend/tmp/registration-homogeneous-final.xml` ; validation pure,
+API quatre champs, refus des blancs, persistance à la création et conversion
+d’une attente, rejeu identique, refus d’un corps modifié et identité déjà confirmée
+préservée. **697 contrôles d’architecture et recensements réussis**, rapport
+`tmp/registration-homogeneous-architecture.xml`. Les fixtures PostgreSQL ont été
+adaptées au nouveau corps mais ne sont pas exécutées : aucune base jetable
+n’était allouée à cette recette. Ces tests isolés ne prouvent pas la concurrence SQL.
+
+Contrats : exports E41 (**1105 chemins**) et E42 (**81 chemins**) régénérés ;
+copie Animation identique au canonique, contrat Pro régénéré hors ligne.
+**31 tests contrats Pro et 4 tests HTTP Animation réussissent**. Les contrats
+moteur de progression restent inchangés. Tous les processus de recette sont arrêtés.
+
+Preuves frontend : **16 parcours des quatre moteurs réussis**, à 320/390/1280 px
+et texte à 200 %, dans `tests/visual/animation-registration-identity.spec.cjs` ;
+rapports `2026-11-11T20-05-19-662Z-QOpdp0` et `2026-11-11T20-07-25-087Z-ytuFhL`.
+**20 régressions E74 réussies** dans `e74-tombola-email.spec.cjs`, dont double clic,
+reprise identique après perte de réponse, stockage refusé, renvoi volontaire,
+refus et ancien lien. **12 tests Node réussis** : contrat HTTP quatre champs,
+preuves et non-divulgation/absence de collecte Analytics réactivée.
+Les builds sont isolés, sans lecture de `.env`, sans API distante ni envoi réel.
+Captures des formulaires public/commerçant à 390 px relues.
+
+ESLint ciblé sur `src` et les tests modifiés réussit. Le lint global `npm run lint`
+ne s’exécute pas jusqu’au bout : refus Windows `EPERM` en parcourant le répertoire
+de sortie non modifié `output/bum-politique/pytest-approval-1`. Cette limite est
+distincte d’un résultat vert ; aucune règle ESLint n’a été neutralisée.
+
+Impacts : validation d’identité de domaine partagée, commandes classique et
+publique, formulaires partagés, contrats OpenAPI, entrées explicites de démonstration.
+Les colonnes existent : aucune nouvelle migration ni réparation de données.
+Coordonnées déclarées pour la gestion de la participation, mêmes catégories de
+conservation, anonymisation et accès ; aucune prospection ou autorisation Push
+ajoutée. La notice de formulaire annonce les quatre champs et leur finalité.
+Aucune recette mobile physique, mesure de charge, migration ou livraison sur TEST
+n’est réalisée par ces preuves locales. Les anciens clients e-mail seul doivent
+être actualisés avec le backend. L’epic conserve son statut en cours.
+
+La revue indépendante valide les quatre champs pour les formulaires actuels et
+leurs deux commandes de création. Elle relève une exception historique maintenue :
+`demander-verification` puis `confirmer-email` conserve son ancien contrat
+prénom/e-mail. Le formulaire actuel ne l’appelle pas. Ce correctif ne prétend donc
+pas imposer les quatre champs à toutes les anciennes entrées API ; il préserve
+les liens et clients historiques explicitement maintenus par E74. Un retrait de
+ces anciennes commandes doit être traité avec leurs consommateurs et non déduit
+d’une modification des champs affichés.
+
 ## Évolution E74-EVOL-INSCRIPTION-DIRECTE — 3 novembre 2026
 
 Attendu : depuis QR ou Live, e-mail et règlement puis inscription qualifiée immédiatement, un seul mail transactionnel de confirmation, accès personnel/carnet via ce mail. Observé avant correction : prénom obligatoire et mail intermédiaire de vérification. La reproduction navigateur à 320 px échoue bien sur la présence du prénom avant correction. Les preuves de cette évolution sont distinguées ci-dessous des résultats historiques. Bases Git : projet `11b0016`, backend `3473635`, Live `9e4f1a1`, Animation `9fc4e8b`, plus les changements locaux. La reproduction API du nouveau parcours échouait en 404 avant correction puis répond en 202.

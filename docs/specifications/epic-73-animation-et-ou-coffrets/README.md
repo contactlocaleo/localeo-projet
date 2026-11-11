@@ -1,5 +1,12 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+Évolution du **11 novembre 2026 — E73-EVO-GAINS-SMS** : notification de lot
+complétée par SMS si un téléphone est renseigné, avec le même lien personnel
+que l’e-mail et les traitements d’envoi existants. Les
+[critères GS-01 à GS-06](dotation-lots.md#évolution-du-11-novembre-2026--notifications-de-gains-par-sms)
+et le bilan distinguent spécification, réalisation et recette fournisseur.
+Clôture historique conservée.
+
 Évolution du **11 novembre 2026 — E73-EVO-DYNAMISME-COMMUNE** : profil visuel
 de l'activité de l'organisation dans la commune active, quatre indicateurs
 et tendances sur douze mois, **sans note globale**. Les
