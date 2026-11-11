@@ -728,7 +728,8 @@ restent à concevoir et vérifier ; l’immersion complète n’est pas déclar�
 
 **Décision du 11 novembre 2026 — E73-EVO-LIVE-DOMAINE.** La cible est désormais
 un seul service/build Marketplace en `COFFRETS`, avec domaine Live ouvrant
-`/live/carnet` par règle serveur. Le portail reste distinct. Les
+`/live/carnet` par entrée React compatible Static Site ; règle HTTP Node
+facultative. Le portail reste distinct. Les
 [critères LD-01 à LD-05](localeo-live-entree-unique.md#évolution-du-11-novembre-2026--entrée-live-par-domaine-e73-evo-live-domaine)
 remplacent ci-dessous la topologie à deux services publics de E73-EVO-DOMAINES-01
 et son exigence de compatibilité historique. Les décisions datées suivantes

@@ -11,6 +11,13 @@ en production, aucune migration ni rétrocompatibilité avec les anciens domaine
 ou services n'est exigée pour ce périmètre. La valeur globale de surface reste `COFFRETS` dans
 le service commun ; les routes `/live/*` continuent de présenter Live.
 
+**Précision Static Site du 11 novembre 2026** : l'hébergement TEST est statique
+et doit le rester. L'entrée est donc aussi résolue côté navigateur, sans imposer
+Node, un second service ni une nouvelle variable publique. Les critères LD-06/07
+complètent la variante HTTP Node facultative LD-01/02. Cette correction ne migre
+aucun domaine ni carnet et ne modifie aucune permission. La reproduction et les
+preuves finales figurent dans le [bilan Static Site](verification-livraison.md#correctif-du-11-novembre-2026--entrée-live-sur-render-static-site).
+
 ### Critères et conception
 
 | Critère | Comportement et propriétaire | Preuve attendue |
@@ -19,18 +26,25 @@ le service commun ; les routes `/live/*` continuent de présenter Live.
 | LD-02 | Pour GET/HEAD sur le chemin `/` d'un domaine déclaré, réponse 302 sans cache vers le chemin relatif fixe `/live/carnet`. Aucun hôte ou chemin de destination n'est repris de la requête. Les paramètres de la racine ne sont pas recopiés ; les liens ciblés utilisent leurs chemins existants. | HTTP réel : Host reconnu, autre Host et ressemblant, port, GET/HEAD, query, méthode non concernée, absence de boucle et d'open redirect. |
 | LD-03 | Tous les chemins complets restent servis : `/live/carnet`, animations/inscriptions, lots, récupération, assets, manifeste, worker et routes API. Le domaine Marketplace conserve `/` et son accueil. | Tests serveur et parcours navigateur à deux domaines simulés sur le même processus/build, arrivée au carnet, découverte, lot/inscription et origine conservée. |
 | LD-04 | Les templates publics frontend/backend ciblent l'origine Live du service commun ; ses domaines sont autorisés en CORS, en conservant les origines des applications utilisées et l'isolation cookie du portail. Pro reconnaît les QR URL Live de production uniquement avec son autorisation runtime exacte ; TEST refusé en production. | Tests de configuration et reconnaissance QR de Pro ; profils et procédure d'exploitation cohérents avec les producteurs existants. |
-| LD-05 | Carnet et permissions Push restent propres à chaque origine, sans copie silencieuse ni nouvelle inscription. Identité, scope et entrée de la PWA existante `/live/` restent conservés ; cette évolution concerne l'entrée HTTP `/`. Aucun chantier de reprise ou compatibilité historique n'est ajouté. | Absence de modification du stockage/worker/manifeste et périmètre explicite dans le guide de configuration. |
+| LD-05 | Carnet et permissions Push restent propres à chaque origine, sans copie silencieuse ni nouvelle inscription. Identité, scope et entrée de la PWA existante `/live/` restent conservés ; cette évolution concerne l'entrée `/`. Aucun chantier de reprise ou compatibilité historique n'est ajouté. | Absence de modification du stockage/worker/manifeste et périmètre explicite dans le guide de configuration. |
+| LD-06 | Sur Static Site, React reconnaît l'origine exacte du template public `LOCALEO_ANIMATION_PUBLIC_URL_TEMPLATE`, HTTPS ou boucle locale de test. Sur cette origine uniquement, le chemin `/` ouvre `/live/carnet` par remplacement dans l'historique, avant de monter la mise en page Marketplace ou ses trackers. Aucune query ni fragment de la racine n'est recopié. Template absent, invalide, avec credentials ou origine différente : entrée Marketplace normale. | Tests de l'origine exacte, des domaines ressemblants, ports, protocole et configuration absente/invalide ; navigateur sur un serveur statique sans redirection HTTP. |
+| LD-07 | Les deux domaines utilisent le même build et la même configuration publique `COFFRETS`. Les chemins complets d'inscription, lot, récupération et leurs capacités ne sont pas interceptés par la nouvelle règle. Un retour arrière après l'entrée Live revient à la page précédente sans rebond par `/`. | Recette mobile et ordinateur, absence de chrome Coffrets à l'arrivée Live, rechargement, retour arrière, liens ciblés et accueil Marketplace ; réponses HTTP 200 normales sur Static Site. |
+| LD-08 | Depuis la Marketplace, les commandes « Ouvrir Localeo Live » de l'accueil et « Ouvrir mon espace » du pied de page ciblent directement `/live/carnet` sur l'origine Live du template public. Les liens de découverte d'animations ciblent `/live/decouvrir` sur cette même origine. Aucun domaine n'est choisi par un paramètre utilisateur ; le repli local reste disponible sans configuration. | Vérifier les href et le clic vers le carnet du domaine Live depuis le domaine Marketplace, sur mobile et ordinateur. |
 
-La configuration est bornée à 100 noms DNS de 253 caractères maximum ; la
-politique est construite une seule fois au démarrage. L'entrée Live ajoute une
+En variante Node, la configuration est bornée à 100 noms DNS de 253 caractères maximum ; la
+politique est construite une seule fois au démarrage. L'entrée HTTP Live ajoute une
 seule réponse de redirection avant le HTML ; les autres chemins n'ajoutent
 aucun saut. Les tests contrôlent ces bornes et la chaîne de redirection.
 
-Le routage appartient à l'adaptateur HTTP : aucun nouvel état métier, commande,
+Le routage appartient à l'adaptateur HTTP pour Node et à l'entrée React pour
+le Static Site : aucun nouvel état métier, commande,
 droit, contrat API ou calcul de participation. La liste est normalisée une fois
 à la création du serveur ; vérification constante par requête, aucune requête
 SQL, lecture de carnet ou appel réseau pour décider de la redirection. Les
-en-têtes de sécurité habituels restent appliqués. Les liens personnels ciblés
+en-têtes de sécurité habituels restent appliqués en variante Node. L'entrée
+statique compare l'origine configurée sans accès réseau, SQL ou lecture de carnet,
+et dépend de JavaScript ; aucun 302 ni contrôle d'accès n'est déduit de cette navigation.
+Les liens personnels ciblés
 de la nouvelle origine continuent d'utiliser leurs routes et capacités actuelles.
 
 ### Impacts et réalisation
@@ -40,12 +54,12 @@ relie les critères aux preuves et précise les contrôles hébergés restant à
 
 | Périmètre | Impact / preuve |
 | --- | --- |
-| Marketplace | Serveur, tests HTTP/navigateur, profils serveur commun et README ; aucun nouveau flag UI. |
+| Marketplace | Entrée React et tests navigateur statique, serveur HTTP facultatif, profils communs et README ; aucun nouveau flag UI. |
 | Backend | Configuration des templates et CORS documentée ; les producteurs acceptent déjà une origine HTTPS configurable, aucun schéma ni code métier à modifier. |
 | Pro | Autorisation de l'origine Live de production au build et tests ; liste runtime exacte. |
 | Documentation | Cette spécification, backlog E73, bilan et guide d'exploitation mis à jour ; aucune réorganisation. |
 | Données / démonstration | Sans migration ni changement du générateur : aucune donnée, forme de jeton ou permission modifiée. Fixtures synthétiques uniquement. |
-| Exploitation | Rattachement DNS/TLS du domaine au service existant, configuration puis déploiement opérateur. Désactivation par retrait de la liste de domaines, sans suppression de carnet. Recette hébergée et DNS restent distincts des preuves locales ; aucune migration d'ancien domaine exigée. |
+| Exploitation | Conserver le Static Site, ses domaines et son fallback SPA ; variables publiques au build puis reconstruction. La clé serveur facultative n'agit qu'avec Node. Recette hébergée et DNS restent distincts des preuves locales ; aucune migration d'ancien domaine exigée. |
 
 ## Correctif du 11 novembre 2026 — date dans Mon inscription
 

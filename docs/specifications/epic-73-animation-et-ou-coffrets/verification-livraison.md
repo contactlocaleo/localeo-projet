@@ -1,5 +1,88 @@
 # E73 — Vérification, migration et livraison
 
+## Correctif du 11 novembre 2026 — entrée Live sur Render Static Site
+
+Bases : Marketplace **`7172ac9`**, Projet **`c7ce17e`**. Après confirmation de
+l'hébergement Static Site par l'utilisateur, l'entrée Live doit fonctionner
+sans migration vers Node. La lecture publique de TEST a montré HTTP 200 sur
+`/`, puis `/accueil` côté React, avec surface `COFFRETS` et origine Live dans
+le template. La clé serveur seule ne pouvait pas agir sur cet hébergement.
+
+Commit Marketplace regroupant l'entrée statique et les liens Live : **`762b4c8`**.
+Commit et push demandés après les vérifications locales.
+
+Les critères **LD-06/07** complètent E73-EVO-LIVE-DOMAINE : React compare
+l'origine exacte du template public à l'origine courante et remplace `/` par
+`/live/carnet` avant tout montage de mise en page ou tracker. La destination
+est locale et fixe, sans query/fragment repris de la racine. Une configuration
+absente, invalide, avec credentials ou une autre origine conserve l'entrée
+Marketplace. Les liens complets, dont les capacités personnelles, conservent
+leurs parcours. Le Static Site continue de servir HTTP 200 et requiert JavaScript.
+La redirection HTTP Node reste facultative et séparée ; aucune clé publique ajoutée.
+
+Reproduction avant correction sur la vraie App et un serveur de fixture
+statique, sans `server.cjs` : `/accueil` reçu au lieu de `/live/carnet`,
+**1 échec attendu** dans Marketplace
+`test-results/visual-runs/2026-11-11T11-50-44-964Z-Iz45Bn/`.
+Après correction, **2 scénarios navigateur réussis**, à 390 et 1 280 px, dans
+`test-results/visual-runs/2026-11-11T11-51-32-686Z-PA5j4E/`.
+Même build et même configuration publique sur les deux origines ; HTTP 200
+sans redirection serveur, absence de montage du chrome Coffrets à l'entrée
+Live, rechargement, Découvrir, inscription avec query/fragment, récupération,
+capacité de lot résolue via POST synthétique et retour arrière à la page
+précédente vérifiés. L'autre origine conserve l'accueil Marketplace. Captures
+mobile et ordinateur inspectées ; serveurs arrêtés et port 8197 libéré.
+Empreinte du build isolé :
+`2d0933f186c321651c4f59dd71f0a328d419e710cb39689d1cf2e2ec6a1e934f`.
+
+Les **11 tests Node ciblés réussissent**, couvrant nouvelle entrée, refus
+d'origines/protocoles/configurations et parcours préexistants concernés. ESLint
+des sources et tests touchés ainsi que `git diff --check` réussissent. Commandes :
+
+```console
+node --test tests/security/live-entry-routing.test.cjs tests/security/animation-surface-satisfaction.test.cjs tests/security/public-config.test.cjs
+node node_modules/eslint/bin/eslint.js src/App.jsx src/services/publicSurface.mjs tests/security/live-entry-routing.test.cjs tests/visual/live-static-entry-hosts.spec.cjs
+node scripts/run-visual-tests.cjs --port 8197 tests/visual/live-static-entry-hosts.spec.cjs --timeout 60000 --retry-of test-results/visual-runs/2026-11-11T11-50-44-964Z-Iz45Bn
+```
+
+Impacts : Marketplace et documentation canonique uniquement. Aucun changement
+backend/Pro, contrat API, permission, schéma, migration, donnée de démonstration,
+stockage ou PWA ; les validations précédentes backend/Pro ne sont pas réannoncées
+comme nouvellement exécutées. API simulées et aucun dotenv opérateur lu pendant
+la recette locale. Les profils communs et le guide décrivent le build Static
+Site, `dist`, le fallback Rewrite `/*` vers `/index.html` et le template public
+`https://test-live.localeo.city/live/animations/{animation_id}/inscription`.
+Le déploiement, la reconstruction distante avec ce template et la recette sur
+TEST restent à effectuer ; aucun réglage distant effectué dans ce correctif.
+La clôture historique E73 reste conservée.
+
+### Complément du 11 novembre — liens Marketplace vers le domaine Live
+
+**LD-08** : le bouton de l'accueil avait encore un href relatif `/live`. Le
+bouton « Ouvrir mon espace » du pied de page ouvrait Découvrir. Les deux commandes
+d'ouverture utilisent désormais le même helper de navigation publique et ciblent
+directement `/live/carnet` sur l'origine du template Live ; les liens « Les
+animations dans Localeo Live » conservent `/live/decouvrir` sur cette origine.
+Sans configuration, le repli local reste disponible. Aucun lien de capacité
+personnelle n'est déplacé par cette correction.
+
+Rouge navigateur : href `/live` reçu au lieu de l'URL Live absolue, **1 échec
+attendu** dans `test-results/visual-runs/2026-11-11T11-54-01-546Z-TR9UTu/`.
+Après correction : **2 scénarios réussis**, mobile 390 px et ordinateur 1 280 px,
+dans `test-results/visual-runs/2026-11-11T11-54-32-424Z-eKSH7Z/`. Ces scénarios
+reprennent toute la recette statique précédente et ajoutent les href des deux
+boutons, le lien Découvrir du pied de page et le clic réel du domaine Marketplace
+vers Mon carnet sur l'origine Live. Build isolé et API synthétiques ; lint de
+l'accueil, App, helpers et tests touchés réussi. Commande :
+
+```console
+node scripts/run-visual-tests.cjs --port 8197 tests/visual/live-static-entry-hosts.spec.cjs --timeout 60000 --retry-of test-results/visual-runs/2026-11-11T11-54-01-546Z-TR9UTu
+```
+
+Portée toujours limitée à Marketplace et documentation ; aucun nouveau réglage
+ni contrat API, migration, stockage ou PWA. Aucun déploiement effectué ; les
+versions distantes restent à livrer et vérifier.
+
 ## Évolution — E73-EVO-LIVE-DOMAINE (11 novembre 2026)
 
 Bases : Marketplace `6c64ff1`, Backend `03ab603`, Pro `186c73e`, Projet

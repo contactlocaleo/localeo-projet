@@ -3,8 +3,9 @@
 ## Évolution du 11 novembre 2026 — entrée Live par domaine sur un service commun
 
 **E73-EVO-LIVE-DOMAINE** : le domaine dédié ouvre Mon carnet via une règle
-HTTP configurable dans le même service/build que la Marketplace Coffrets.
-Les [critères LD-01 à LD-05](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-11-novembre-2026--entrée-live-par-domaine-e73-evo-live-domaine)
+d'entrée React depuis l'origine du template public, compatible Static Site,
+dans le même service/build que la Marketplace Coffrets ; HTTP Node facultatif.
+Les [critères LD-01 à LD-08](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-11-novembre-2026--entrée-live-par-domaine-e73-evo-live-domaine)
 remplacent l'obligation de deux services pour cette topologie, en conservant
 les liens personnels ciblés et la séparation des origines. Rien n'étant en
 production, la rétrocompatibilité et la migration d'anciens domaines sont hors périmètre.
