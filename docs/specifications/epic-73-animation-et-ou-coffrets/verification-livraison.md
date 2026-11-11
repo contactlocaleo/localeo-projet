@@ -1,5 +1,109 @@
 # E73 — Vérification, migration et livraison
 
+## Correctif du 11 novembre 2026 — responsable identifié sur la liste des souscriptions
+
+Commit applicatif : Backend `14d31aa`. Commit et push demandés le 11 novembre
+avec le raccord modules/utilisateurs et le correctif de préférences Push Live
+Marketplace `ab77213`. Déploiement et recette sur comptes TEST restent distincts.
+
+Base Backend `f449594` avec changements locaux antérieurs conservés. La liste
+ne signalait pas les organisations encore sans responsable ; la recherche du
+droit Communication obligeait à ouvrir les fiches une à une. Reproduction
+navigateur avant correction : colonne de responsabilité absente (zéro au lieu
+d’une). La nouvelle colonne distingue Oui, Non à identifier et information
+indisponible ; le lien ouvre la vérification existante avec organisation
+préselectionnée et section de responsabilité dépliée, sans écriture.
+
+`node tests/browser/souscriptions-responsable-erp.cjs` : **réussi à 320 et
+1280 px**. Absence mise en évidence, responsable présent, ancien contrat,
+recherche/statut conservés en pagination, organisation secondaire ciblée,
+section ouverte et absence d’action sans capacité Accès partenaires. Aucune
+commande de désignation émise. Captures inspectées dans le backend :
+`.artifacts/souscriptions-responsable/2026-11-11T08-24-00-973Z/`.
+Recette avec composants réels et API synthétiques, sans compte distant.
+
+Backend : runner isolé Python 3.14,
+`tests/application/test_souscriptions_regressions.py -k test_erp -q --tb=short` :
+**10 réussis**, dont 7 nouveaux cas. Responsable absent, gestionnaire seul,
+responsable suspendu/révoqué ou d’une autre organisation, rôle actif sur une
+autre commune, pagination, filtres, périmètre et commandes inchangées couverts.
+Reproduction initiale : six cas échouaient sur le champ `responsableIdentifie`
+absent. `tests/security/test_souscriptions_responsable_postgres.py` sur PostgreSQL
+18 jetable, option `--postgres-test-url` explicite : **1 réussi, aucun skip**.
+À 100 puis 1 000 souscriptions, **2 requêtes / 25 résultats**, p95 local
+**37,03 / 39,61 ms** sur 10 lectures ; plan borné à 25, aucun membre hydraté.
+Rapport : `.artifacts/souscriptions-responsable/backend/performance.json`.
+PostgreSQL arrêté après recette ; ces mesures ne qualifient pas le trafic réel.
+
+Non-régression : tests API commercial et délégation ERP, **3 réussis** ;
+architecture et recensements, **689 réussis** ; navigation ERP, **26 scénarios
+réussis**, et habilitations à 320/390/1280 px réussies. Revue indépendante sans
+blocage. Documentation : **97 guides, 1 196 liens, aucun défaut ; 148 sources
+exportées vérifiées**.
+
+Limite de suite élargie : le fichier complet de régressions souscriptions donne
+**34 réussites et 13 échecs**. Les mêmes 13 échecs sont reproduits avec le module
+`gestion_erp.py` de `HEAD` chargé en mémoire, sans réécrire l’arbre de travail :
+la fixture SQLite ne fournit pas `pg_advisory_xact_lock_shared`, puis les parcours
+d’activation et invitations échouent en cascade. Preuve locale conservée dans
+`.artifacts/souscriptions-responsable/backend/test_baseline_erp.py`, runner isolé
+avec `-k "not test_erp_liste_souscriptions"` : **27 réussites et 13 échecs**.
+Aucune assertion affaiblie, aucun skip ajouté ; la suite complète n’est pas verte.
+
+Impacts : projection de lecture ERP, interface, spécification et guide. Le sens
+de responsable identifié réutilise la désignation active de l’équipe, sans changer
+le domaine. API interne enrichie de deux champs, sans nouvelle route ni schéma
+OpenAPI déclaré ; aucun contrat Animation/Pro/Live modifié. Générateur et
+restauration inchangés : aucun modèle ou format de données nouveau. Aucune
+migration, attribution réelle, réparation de TEST ou publication effectuée.
+
+## Correctif du 11 novembre 2026 — gérer les utilisateurs après un ajout de module
+
+Commit applicatif : Backend `14d31aa`, publié avec le signalement des responsables
+manquants à la demande de commit et push du 11 novembre.
+
+Base testée : Backend `f449594`, Projet `97d48cb`, plus modifications locales.
+La fiche des modules présentait les droits commerciaux sans accès aux utilisateurs
+concernés. Reproduction navigateur sur l’asset `modules-commerce.js` de la base,
+après octroi d’un module : absence du point d’entrée « Utilisateurs et autorisations ».
+
+Chaque module propose désormais la lecture paginée de l’équipe de l’organisation
+issue de la souscription, puis la fiche individuelle préselectionnée dans cette
+organisation. La modification réutilise les commandes existantes ; rechargement
+de la fiche et retour aux modules conservent le contexte. La revue indépendante
+a aussi vérifié la publication de l’asset et la séparation des capacités Finance
+et Accès partenaires. Les autorisations personnelles restent distinctes des droits
+commerciaux ; aucun droit n’est distribué automatiquement par un octroi.
+
+Preuves locales : `tests/api/test_erp_animation_equipe_shell.py` et
+`tests/api/test_erp_perimetres_asset.py` via runner isolé Python 3.14 : **13 réussis**,
+dont parcours récursif des imports JavaScript par la route réelle d’assets.
+`node tests/browser/epic73-modules-ux.cjs` et
+`node tests/browser/habilitations-animation-erp.cjs` : **réussis** à 320/390/1280 px,
+avec API synthétiques et sans compte distant.
+
+`node tests/browser/modules-utilisateurs-erp.cjs` : **réussi à 320 et 1280 px**.
+Parcours octroi → utilisateurs → organisation secondaire hors première page →
+ajout Import → retour → retrait Communication conservant Import ; les écritures
+ciblent le seul membre choisi. Rechargement et retour conservent le contexte.
+Pagination remplaçant la page, état vide, erreur/reprise, refus de capacité sans
+lecture d’équipe, expiration avec réponse tardive et paramètres UUID sont vérifiés.
+Rapport et captures examinées :
+`.artifacts/modules-utilisateurs-erp/test-2026-11-11T03-04-53-778Z/` dans le backend.
+Recette avec API simulées ; ni téléphone physique ni compte TEST hébergé utilisés.
+
+Architecture : runner isolé, `tests/architecture`,
+`tests/domain/test_domain_dedicated_classes.py` et
+`tests/application/use_cases/test_use_case_business_test_coverage.py` :
+**689 réussis**. Documentation : `check_guidance.py`, **97 guides, 1 196 liens,
+aucun défaut** ; `sync_documentation.py --check-sources`, **148 sources vérifiées**.
+
+Impacts : ERP/backend, spécification, guide et recette d’exploitation. Aucun
+contrat API métier, règle de domaine, schéma ou consommateur Animation/Pro/Live
+modifié ; aucune migration, donnée générée ou procédure de restauration affectée.
+Les tests utilisent des fixtures synthétiques existantes et nouvelles. Aucun
+déploiement, attribution réelle ni réparation de données effectués.
+
 ## Évolution — E73-EVO-HABILITATIONS-ERP, 11 novembre 2026
 
 Périmètre : [HA-01 à HA-07](perimetres-parcours-saas.md#évolution-du-11-novembre-2026--e73-evo-habilitations-erp).

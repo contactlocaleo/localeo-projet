@@ -11,8 +11,19 @@ ci-dessous ; la migration catalogue v285 y reste en attente.
 ## ANO-LIVE-PUSH-MOBILE-20261111 — Notifications absentes dans la PWA mobile
 
 - **Signalement** : notifications non reçues dans Localeo Live installé sur
-  mobile. Modèle du téléphone, environnement et type de notification attendue
-  non confirmés à ce stade ; aucune attribution certaine au cas individuel.
+  mobile. Précision reçue le 11 novembre : **Android, environnement TEST,
+  annonce d’une nouvelle animation**, avec état affiché **notifications autorisées /
+  activées** confirmé par l’utilisateur. Commune suivie et publication concernée
+  non confirmées ; aucune attribution certaine au cas individuel.
+  Nom ensuite communiqué : « Test animation Thibaut ». La lecture publique
+  de TEST avec les trois statuts (à venir/en cours/clôturée) renvoie six
+  animations, sans correspondance exacte ; l’animation ouverte est
+  « TEST2-Tombola Delphine-05/11/2026 », à Bouliac. L’identité de l’animation
+  concernée reste à établir par son identifiant : l’utilisateur confirme qu’il
+  s’agit bien du nom de l’animation et que le message est absent de la cloche.
+  L’accès automatisé aux onglets navigateur est indisponible lors de la reprise ;
+  aucune lecture de sa fiche privée ni des préférences de son téléphone réalisée.
+  Lien de fiche, ou commune et statut, demandé pour poursuivre ce cas précis.
 - **Défauts établis** : le premier abonnement pouvait appeler `subscribe`
   avant activation du service worker (reproduit dans un navigateur local avec
   adaptateur mobile simulé). Le transport Live classique omettait `ttl` ; la
@@ -48,6 +59,55 @@ ci-dessous ; la migration catalogue v285 y reste en attente.
   livraison de supervision Web Push ; aucun déploiement effectué par cette tâche.
   [Spécification du transport](../../specifications/epic-42-localeo-live/backend-api.md#livraison-push-sur-mobile--correctif-du-11-novembre-2026),
   [diagnostic mobile](../../exploitation/technique/reprendre-notifications-sortantes.md#localeo-live-installé-sur-un-téléphone).
+
+### Complément — communes des annonces de nouvelles animations
+
+Le parcours frontend a été reproduit sur Marketplace `a7b3320` : installation
+déjà créée avec zéro commune serveur, commune choisie dans Découvrir, activation
+Push confirmée. Le navigateur envoyait uniquement le POST d’abonnement, dont
+le contrat conserve les préférences de l’installation existante. Il manquait
+le PUT explicite de préférences ; le serveur ne ciblait donc pas cette installation
+pour une nouvelle animation de la commune. Ce défaut est établi localement,
+sans prouver qu’il est la cause unique de l’incident Android signalé.
+
+Le correctif frontend synchronise les préférences confirmées au clic d’activation,
+avant le POST d’abonnement. Une lecture tardive ou indisponible bloque l’activation
+pour préserver les catégories refusées. La vérification automatique de l’abonnement
+ne modifie pas les préférences. Pour un appareil déjà abonné, un écart de communes
+propose une action explicite « Appliquer mes communes aux alertes », sans désactivation
+ni nouvelle inscription Push. La réussite actualise l’état confirmé ; une panne
+conserve une possibilité de reprise, sans fausse confirmation.
+
+Lecture publique de TEST le 11 novembre : Push activé et clé publique présente ;
+le bundle `LiveApp-C9LHri7m.js` contient le correctif antérieur d’attente du worker.
+Ni l’abonnement privé du téléphone, ni le suivi serveur de sa commune, ni
+l’exécution distante du batch n’ont été inspectés. Aucun envoi réel effectué.
+Les **11 tests backend** de ciblage des animations et de configuration/transport
+Live ont réussi via le runner isolé (`test_notifications_localeo_live_animation.py`
+et `test_localeo_live_webpush_configuration.py`).
+
+Preuves frontend finales : **22 scénarios navigateur réussis, code 0**, sur
+build isolé et port 8176, sélection Push/préférences/communes des fichiers
+`live-push-preferences.spec.cjs`, `live-push-activation.spec.cjs` et
+`desktop-layout.spec.cjs`. Rapport hors Git :
+`test-results/visual-runs/2026-11-11T08-02-05-186Z-DfiX67/` dans Marketplace.
+Le scénario initial rouge est conservé dans le run
+`2026-11-11T07-59-25-677Z-9ZVtPV` : attendu PUT puis POST, observé POST seul.
+Les refus, préférences tardives, identité renouvelée, panne/reprise, absence de
+choix local et choix explicitement vide sont couverts. **4 tests Node** d’activation
+du worker et ESLint ciblé réussis. Captures 390/1280 px relues, action visible et
+cibles tactiles vérifiées ; Push et API simulés, pas de preuve de réception sur
+un appareil Android réel. Revue indépendante sans blocage. Tous processus arrêtés,
+port libéré. Documentation : **97 guides, 1 196 liens, aucun défaut ; 148 sources
+exportées vérifiées**.
+
+Périmètre de ce complément : Marketplace/Live et documentation seulement.
+API métier, domaine, base, batchs, générateur et applications Animation/Pro
+inchangés ; aucune migration, réparation de données, activation de flag,
+ni déploiement effectué pour ce complément. Après la validation locale,
+commit et push demandés le 11 novembre : Marketplace/Live `ab77213`, avec
+documentation et livraison ERP Backend `14d31aa`. La réception sur le téléphone
+et la publication précise restent à confirmer après déploiement.
 
 ## ANO-IMPORT-AUTORISATION-20261111 — Import refusé après modification de Communication
 

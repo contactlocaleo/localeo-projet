@@ -10,6 +10,21 @@ L’état « Notifications actives » attend la confirmation de l’API. Les lim
 du transport et la recette mobile sont dans la
 [procédure d’exploitation](../../exploitation/technique/reprendre-notifications-sortantes.md#localeo-live-installé-sur-un-téléphone).
 
+Complément du même jour — annonces de nouvelles animations : l’activation
+explicite des notifications doit aussi enregistrer les communes sélectionnées
+et les catégories confirmées avec l’API de préférences de l’installation.
+Le POST d’abonnement ne modifie pas les préférences d’une installation existante.
+Attendre leur lecture avant de permettre l’activation évite de remplacer un
+refus de catégorie par les valeurs initiales de l’interface. La permission
+navigateur reste demandée à partir du clic. Une simple ouverture des réglages,
+un réenregistrement technique d’abonnement ou un suivi local de commune ne
+modifie pas implicitement ces préférences. Un échec d’enregistrement reste
+visible et ne confirme pas une activation réussie.
+Pour un appareil déjà abonné, un écart confirmé entre communes locales et
+préférences serveur propose « Appliquer mes communes aux alertes ». Cette action
+explicite réutilise la sauvegarde de préférences, conserve les catégories et
+n’exige pas de désactiver le Push ; aucune synchronisation à la seule lecture.
+
 Les [principes directeurs UX de Localeo Live](../../produit/live/principes-ux.md)
 guident les évolutions frontend. Pour la navigation et le carnet actuels, lire
 [E73-EVO-LIVE-CARNET-BORD et E73-EVO-LIVE-TAMPONS](../epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md) :

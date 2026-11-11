@@ -30,6 +30,45 @@ cette évolution gère les appartenances déjà existantes, y compris inactives.
 Les accès historiques restent consultables et modifiables par leur commande
 existante uniquement lorsque l’organisation n’est pas gérée par une équipe.
 
+**Correctif du 11 novembre 2026 — responsable dans la liste des souscriptions.**
+La liste ERP ajoute « Responsable identifié » : Oui si une appartenance active
+de rôle Responsable existe dans l’organisation, sinon « Non · à identifier »
+mis en évidence par un libellé, un badge et un repère visuel. Cette information
+porte sur la désignation dans l’organisation, selon la même définition que le
+mode de gestion d’équipe ; elle ne promet pas de droits effectifs sur une commune
+ni la disponibilité du compte. Une ancienne réponse sans ce champ indique
+« À vérifier », sans assimiler une information absente à un refus.
+Pour les opérateurs disposant de `acces_externes.gerer`, « Identifier le
+responsable » ouvre le parcours de vérification de la bonne organisation depuis
+le gestionnaire de la souscription. Ce dernier est une cible de vérification,
+sans nomination automatique. Les décisions et contrôles de responsabilité
+existants restent obligatoires. Un périmètre ERP insuffisant sur l’équipe
+reste refusé au serveur.
+Le contrat de liste ajoute `responsableIdentifie` (booléen) et `gestionnaireId`
+(identifiant du gestionnaire de souscription), sans nom ou email supplémentaire.
+La projection utilise un `EXISTS` corrélé dans la requête de la page, conserve
+25 lignes, recherche/statut/périmètre et deux requêtes SQL (total et page), sans
+chargement de tous les membres ni N+1. La liste des commandes est inchangée.
+Pas de migration ni modification des rôles ; budget local de lecture de 500 ms
+p95 à vérifier sur N/10N, sans qualification du trafic de production.
+
+**Correctif du 11 novembre 2026 — raccord depuis les modules.** Chaque module
+de la souscription propose « Utilisateurs et autorisations », chargé à la demande
+avec l’identifiant d’organisation fourni par la projection commerciale. La liste
+d’équipe existante est paginée par 25, sans charger toutes les appartenances.
+Elle distingue autorisation enregistrée, rôle, compte, appartenance et habilitation
+sur la commune de cette souscription ; elle ne promet pas l’usage du module.
+Le lien vers la fiche préselectionne cette organisation, même hors première page
+ou différente de l’organisation principale, et conserve le retour aux modules.
+Une lecture refusée ne bascule pas sur une autre organisation. L’opérateur doit
+disposer de `acces_externes.gerer` ; le droit d’octroi commercial ne l’implique pas.
+Les commandes de modification existantes, confirmations, motifs, versions et
+reçus sont réutilisés. Aucun droit utilisateur n’est accordé par l’octroi du
+module. Import/Communication gardent leur portée organisation et communes
+attribuées ; la Chasse utilise les permissions Animation, sans autorisation
+supplémentaire inventée. Les accès historiques sans appartenance ne sont pas
+présentés comme absents : l’écran renvoie vers leur circuit existant.
+
 **Invariants et propriétaires.** `EquipeOrganisation` porte la modification
 Localeo explicite et motivée, avec les mêmes règles de délégation que le portail :
 communes validées, rôles et autorisations connus, aucun retrait du dernier

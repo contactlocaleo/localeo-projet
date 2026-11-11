@@ -163,6 +163,15 @@ pour un exercice distinct qui prévoit explicitement une nouvelle demande.
 
 ### Gérer les habilitations d’un utilisateur Animation
 
+Dans la liste **Souscriptions**, la colonne **Responsable identifié** permet
+de repérer les organisations sans responsable désigné : **Non · à identifier**
+est mis en évidence. **Identifier le responsable** ouvre la vérification depuis
+la fiche du gestionnaire de la souscription, dans la bonne organisation. Vérifie
+qui doit réellement porter cette responsabilité avant de confirmer ; ouvrir
+ce lien n’attribue aucun rôle. **Oui** indique une désignation active dans
+l’organisation, et **À vérifier** une information indisponible sur une version
+ancienne du serveur. Le lien nécessite le droit ERP Accès partenaires.
+
 Dans **Équipes et contrats → Accès partenaires**, recherche la personne par son
 nom ou son email, puis ouvre sa fiche. Choisis l’organisation concernée avant
 de modifier ses accès : un même compte peut appartenir à plusieurs organisations.
@@ -207,6 +216,19 @@ renseigne le motif puis confirme. Les conditions personnalisées permettent
 d’ajuster les dates ou le quota ; laisse-les vides pour utiliser les valeurs
 par défaut. L’Import de commerçants ne comporte pas de quota. Les horaires sont
 ceux de Paris et le droit cesse à l’heure de fin indiquée, exclue de sa validité.
+
+Après l’ajout, ouvre **Utilisateurs et autorisations** dans le module concerné.
+La liste distingue le rôle, l’état du compte, la commune de la souscription et
+l’autorisation personnelle. **Gérer les habilitations** ouvre la fiche avec la
+bonne organisation sélectionnée ; ajoute ou retire l’autorisation, indique le
+motif et confirme. **Retour aux modules** retrouve la souscription de départ.
+Les autorisations Import et Communication s’appliquent aux communes attribuées
+dans l’organisation ; les droits commerciaux restent propres à chaque
+souscription. La Chasse utilise les permissions d’animation liées au rôle.
+L’ajout d’un module ne distribue pas automatiquement de nouvelles permissions.
+La gestion des utilisateurs nécessite le droit ERP **Accès partenaires**.
+La liste est paginée ; les comptes historiques sans appartenance d’équipe
+restent à rechercher dans **Accès partenaires**.
 
 Pour modifier un droit existant, utilise l’action du droit concerné. Les droits
 d’animations du forfait restent accessibles dans leur section dédiée. Un retrait
