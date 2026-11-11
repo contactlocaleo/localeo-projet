@@ -564,3 +564,62 @@ Le générateur utilise le service normal pour préparer les preuves synthétiqu
 à contrôler, avec leurs consommations historiques ; il n'offre pas de module
 et ne confirme aucun paiement. Les preuves exécutées et les écarts restants
 figurent dans le [suivi de réalisation](suivi-implementation.md).
+
+## Évolution du 11 novembre 2026 — E73-EVO-MODULES-ERP-UX
+
+L’écran ERP de gestion des modules juxtapose aujourd’hui compteurs, droits,
+formulaires et liens transverses. L’entrée sans identifiant donne seulement une
+consigne. Cette évolution simplifie la présentation et l’accès, sans modifier
+les conditions acquises ni les commandes commerciales de CA-39 à CA-41.
+
+**Parcours cible.** Supervision technique propose un raccourci vers le choix
+d’une souscription. Le parcours métier reste également accessible depuis
+Animations → Souscriptions → Gérer les modules. L’identifiant transmis à la
+gestion est celui de la période d’abonnement, comme dans le parcours existant.
+L’entrée Modules sans identifiant offre une action explicite vers les
+souscriptions, et un retour structurel est conservé sur le détail.
+Le lien issu d’un dossier transmet son UUID dans `souscription` ; le retour
+utilise ce seul identifiant validé pour reconstruire une URL interne fixe.
+Une arrivée directe sans ce contexte revient à la liste des souscriptions.
+La référence de dossier ne modifie ni l’API appelée ni son périmètre d’accès.
+
+La synthèse présente commune, forfait, état et échéance. Les versions et détails
+techniques sont secondaires. La vue distingue les modules Import de commerçants,
+Messages aux participants et Chasse au trésor : état acquis fourni par le
+serveur, droits et origines individuels, usages réellement projetés. Aucun quota
+n’est recalculé et aucun état global n’est déduit d’une page partielle de droits.
+Les compteurs de base restent séparés des capacités accordées par un octroi.
+Les droits d’animation inclus dans le forfait conservent leurs dates, origines
+et actions autorisées dans cette section distincte ; ils ne deviennent pas un
+quatrième module complémentaire.
+
+La modification s’ouvre auprès du droit concerné. L’octroi d’essai/cadeau garde
+les choix utiles visibles ; les dates et quotas personnalisés sont facultatifs,
+regroupés avec leurs explications. Les valeurs par défaut restent calculées par
+le serveur. La fin reste un instant exclu, affiché et saisi en heure de Paris.
+Les retraits sont présentés à part, avec conséquences, motif et confirmation.
+Leur explication porte sur le droit retiré : un autre droit peut encore autoriser
+l’usage. L’action d’octroi est accessible dès l’en-tête ; l’historique se charge
+au premier dépliage, avec reprise explicite si la lecture échoue.
+
+| Critère | Résultat attendu | Preuve prévue |
+| --- | --- | --- |
+| MU-01 | Depuis Supervision ou l’entrée Modules, rejoindre le choix de souscription ; détail avec un seul titre et retour vers le dossier. | Navigation navigateur, aucune nouvelle habilitation. |
+| MU-02 | Comprendre forfait, commune, échéance, état des modules, usages et droits sans ouvrir un formulaire. Compteur à reconstruire explicitement indisponible. | Trois modules, droits multiples, absent/expiré, données partielles et compteur inconnu. |
+| MU-03 | Accorder un essai/cadeau avec les valeurs par défaut ou personnaliser dates/quotas ; aucun quota pour Import. | Corps de commande, version, confirmation et heures Paris inchangés. |
+| MU-04 | Modifier un droit identifié et retrouver son résultat ; les autres droits et usages restent distincts. Retirer reste une décision explicite. | PATCH ciblé conservant toutes les limites ; scénario Communication + Import ; retrait motivé. |
+| MU-05 | Saisie conservée après erreur/conflit, reprise réseau avec la même clé et le même corps ; expiration sans réaffichage privé. | Recette conflits, réponse perdue, lecture/mutation tardive, profils sans octroi. |
+| MU-06 | Sections lisibles à 320/390/1280 px et texte agrandi, navigation clavier, cibles tactiles, libellés explicites ; historique paginé à la demande. | Captures inspectées, absence de débordement, non-régression catalogue/remboursements et shell ERP. |
+
+**Impacts.** Présentation ERP dans le backend et documentation E73/guide ERP.
+Le domaine Abonnements reste propriétaire des dates, droits, versions et quotas ;
+les API, schémas, consommateurs Animation/Pro/Live et règles métier ne changent
+pas. Les permissions, CSRF, motif, confirmation et idempotence sont conservés.
+Sans migration, nouveau flag ni adaptation du générateur : mêmes données et
+consentements, fixtures navigateur synthétiques enrichies. Les lectures restent
+bornées à 25 droits/décisions, une page à la demande, sans nouveau calcul SQL ni
+préchargement intégral. La preuve de performance porte donc sur le maintien des
+bornes et du nombre d’appels, sans nouvelle qualification de capacité serveur.
+
+Spécification établie avant implémentation. Résultats à consigner dans le bilan
+de vérification existant ; la clôture historique de l’EPIC 73 reste inchangée.

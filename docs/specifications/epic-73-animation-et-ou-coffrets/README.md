@@ -1,5 +1,12 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+Évolution du **11 novembre 2026 — E73-EVO-MODULES-ERP-UX** : simplification de
+la gestion des modules d’une souscription dans l’ERP, avec accès depuis
+Supervision technique. Les [critères MU-01 à MU-06](modules-souscriptions-import-communication.md#évolution-du-11-novembre-2026--e73-evo-modules-erp-ux)
+conservent les conditions acquises et commandes commerciales existantes.
+Spécification et implémentation vérifiées localement ; preuves et limites dans
+le [bilan](verification-livraison.md#évolution--e73-evo-modules-erp-ux-11-novembre-2026).
+
 Évolution du **10 novembre 2026 — E73-EVO-LIVE-PARTICIPATION** : les huit lots
 acceptés après l'audit des parcours sont spécifiés dans les
 [critères PA](localeo-live-entree-unique.md#évolution-du-10-novembre-2026--participation-e73-evo-live-participation)

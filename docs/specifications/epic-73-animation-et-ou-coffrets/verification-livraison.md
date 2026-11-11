@@ -1,5 +1,62 @@
 # E73 — Vérification, migration et livraison
 
+## Évolution — E73-EVO-MODULES-ERP-UX, 11 novembre 2026
+
+Périmètre : [MU-01 à MU-06](modules-souscriptions-import-communication.md#évolution-du-11-novembre-2026--e73-evo-modules-erp-ux).
+Bases : Backend `63abb86`, Projet `01bf8ab`. La demande autorise l’implémentation,
+le commit et le push. Les modifications préexistantes de l’outillage Codex dans
+le projet restent hors de cette livraison.
+Commit applicatif correspondant aux preuves : Backend `c6a4c2b`.
+
+La gestion ERP présente désormais une synthèse de souscription puis trois
+sections de modules. Chaque section distingue état global, compteur d’usage
+et droits individuels. Les dates et quotas personnalisés sont dépliables ;
+modifier et retirer un droit restent des décisions distinctes et motivées.
+Le raccourci Supervision rejoint le choix de souscription existant. Le retour
+vers le dossier conserve son identifiant commercial, distinct de l’identifiant
+de période utilisé pour gérer les modules.
+
+| Critères | Preuves locales |
+| --- | --- |
+| MU-03/04/05, contrats conservés | `py -3.14 scripts/validation/test_isolated.py tests/api/test_modules_plateforme_api.py tests/api/test_modules_dates_contract.py tests/domain/abonnements_plateforme/test_modules_acquis_dedicated.py -q --tb=short` : **26 réussis**, 3 tests API nécessitant PostgreSQL rejoués ensuite. |
+| MU-03/04/05, API | `py -3.14 scripts/validation/test_isolated.py tests/api/test_modules_plateforme_api.py --postgres-test-url postgresql+psycopg://audit_test@127.0.0.1:55488/localeo_audit_test -q --tb=short` : **3/3 réussis** sur PostgreSQL 18 local jetable, arrêté après exécution. Aucun des 29 tests distincts ne reste ignoré. |
+| MU-03/05/06, non-régression | `node tests/browser/epic73-modules-erp.cjs` : **réussi à 320 et 1280 px**, dates Paris depuis New York, horaires ambigus refusés, conflit conservant la saisie, réponse perdue et reprise avec même corps/clé, conditions historiques, compteur indisponible, catalogue et remboursement. |
+| MU-01 à MU-06, parcours | `node tests/browser/epic73-modules-ux.cjs` : **réussi à 320, 390 et 1280 px**. Lien commercial et retour avec identifiants distincts, octroi par défaut, modification conservant les deux limites d’essai Communication, Import inchangé, retrait ciblé et droits du forfait conservés. Pagination indépendante de l’état global, lecture seule, expiration avec lecture/mutation tardive, historique à la demande, clavier et cibles principales d’au moins 44 px. |
+| MU-01/06, shell ERP | `node tests/browser/erp-menu-ux.cjs` : **35 scénarios réussis** ; `node tests/browser/erp-page-template.cjs` : **24 scénarios réussis**. Navigation, droits, clavier, titre, retour, actions, largeurs et texte agrandi. |
+
+La revue indépendante du diff et des captures ne relève plus de blocage.
+Elle a fait préserver les droits `ANIMATION` dans la section du forfait et
+préciser le retrait lorsqu’un autre droit demeure actif. L’action d’octroi
+est accessible en tête, avec focus sur le choix de module ; l’historique se
+déplie en un clic. Les captures à 320/390/1280 px ont été inspectées, ainsi
+que le texte agrandi par JavaScript à 320 px et le zoom CSS à 1280 px. Ces
+simulations ne constituent pas une recette sur appareil physique ou avec un
+lecteur d’écran humain ; les pseudoéléments des tableaux mobiles ne sont pas
+agrandis par le script de taille de texte.
+Le rapport final et ses huit captures sont conservés hors Git dans le backend,
+`.artifacts/modules-erp-ux/2026-11-11T02-40-26-845Z/`. La recette finale vérifie
+aussi la reprise après une réponse 503 de l’historique et l’absence de nouvelle
+lecture lors de sa réouverture après succès.
+
+Contrôles documentaires : `py -3.14 scripts/check_guidance.py` et
+`py -3.14 scripts/sync_documentation.py --check-sources` réussis ; **97 guides,
+1 194 liens, aucun défaut ; 148 sources vérifiées**.
+
+Les recettes navigateur utilisent les vrais assets ERP et des API synthétiques,
+sans compte ni donnée distants. Les tests API et domaine vérifient les contrats
+et règles conservés ; le navigateur vérifie leur présentation et les commandes
+émises, sans prétendre remplacer une recette hébergée.
+
+Impacts : ERP servi par le backend, documentation E73 et guide de prise en main.
+Aucune règle métier, API ou structure de données modifiée ; aucun changement
+dans Animation, Pro ou Live. Sans migration, flag ni adaptation du générateur,
+qui utilise les mêmes données et interfaces. Les lectures de droits et de
+décisions restent paginées à 25, l’historique est chargé à la demande. Pas de
+nouvelle requête SQL ni de recalcul côté navigateur. Les contrôles architecture
+Python ne sont pas relancés pour cette évolution exclusivement JavaScript/CSS.
+Le backend reste à déployer selon la procédure habituelle ; aucune opération
+sur TEST ou production n’est attestée ici. La clôture historique E73 est conservée.
+
 ## Évolution — E73-EVO-PRORATA-MODULES, 11 novembre 2026
 
 Périmètre : [PM-01 à PM-04](modules-souscriptions-import-communication.md#clarification-du-11-novembre-2026--e73-evo-prorata-modules),

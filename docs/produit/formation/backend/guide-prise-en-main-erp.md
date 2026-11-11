@@ -161,6 +161,32 @@ pour un exercice distinct qui prévoit explicitement une nouvelle demande.
    invitation ne suffit pas à ouvrir les droits. Depuis une souscription
    activée, **Gérer les modules** permet de retrouver ses droits complémentaires.
 
+### Gérer les modules d’une souscription
+
+L’administrateur peut aussi partir de **Supervision technique → Modules des
+souscriptions**, choisir le dossier puis **Gérer les modules**. Vérifie d’abord
+la commune, le forfait et l’échéance dans la synthèse.
+
+Chaque module présente son état et ses usages disponibles. Ses droits accordés
+restent détaillés séparément : origine, dates et capacité. Le disponible est
+calculé par le serveur ; additionner plusieurs cadeaux ou essais ne remet pas
+les usages à zéro. Un compteur à vérifier est signalé comme indisponible.
+
+Pour accorder un essai ou un cadeau, utilise l’action en haut de page,
+choisis le module et le type d’octroi,
+renseigne le motif puis confirme. Les conditions personnalisées permettent
+d’ajuster les dates ou le quota ; laisse-les vides pour utiliser les valeurs
+par défaut. L’Import de commerçants ne comporte pas de quota. Les horaires sont
+ceux de Paris et le droit cesse à l’heure de fin indiquée, exclue de sa validité.
+
+Pour modifier un droit existant, utilise l’action du droit concerné. Les droits
+d’animations du forfait restent accessibles dans leur section dédiée. Un retrait
+est une décision distincte, avec motif et confirmation ; un autre droit peut
+encore permettre l’usage du module. Après un conflit,
+actualise le dossier ; après une réponse réseau perdue, utilise la reprise
+de la même demande pour éviter un doublon. L’historique permet de retrouver
+les décisions et leurs motifs.
+
 ### Une animation à préparer ou déjà en cours
 
 - **Demandes de création** : traiter une demande de scénario et ses réponses.

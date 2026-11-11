@@ -1,5 +1,14 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+## Évolution du 11 novembre 2026 — gestion des modules dans l’ERP
+
+**E73-EVO-MODULES-ERP-UX** rend le parcours de gestion plus lisible : synthèse,
+vue par module, usages et droits distincts, formulaires progressifs et accès
+depuis Supervision technique. Voir les [critères MU-01 à MU-06](../../specifications/epic-73-animation-et-ou-coffrets/modules-souscriptions-import-communication.md#évolution-du-11-novembre-2026--e73-evo-modules-erp-ux).
+Spécification, implémentation et vérifications locales réalisées ; statut
+historique de l’epic conservé. Les preuves et limites propres à cette évolution
+figurent dans le [bilan](../../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md#évolution--e73-evo-modules-erp-ux-11-novembre-2026).
+
 ## Évolution du 11 novembre 2026 — lisibilité du prorata des modules
 
 **E73-EVO-PRORATA-MODULES** confirme DEC-21 et CA-38 : tarif de référence pour
