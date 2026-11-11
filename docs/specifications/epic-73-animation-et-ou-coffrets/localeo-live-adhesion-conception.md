@@ -22,10 +22,12 @@ les dates confirmées disponibles dans chaque visite. La simplification ne
 retire aucun commerce ni ne transforme une visite inconnue en validation.
 
 Les précisions utilisateur cadrent les trois entrées : Carnet pour suivre les
-inscriptions encore ouvertes, Lots pour retrouver les gains et leur animation,
+inscriptions non archivées par l’organisateur, Lots pour retrouver les gains et leur animation,
 Découvrir pour les animations actuelles/futures, les favoris et les commerces.
-Le carnet exclut les simples suivis et les animations clôturées/archivées/
-annulées, sans effacer les accès enregistrés. Les coffrets déjà présents gardent
+Précision du 11 novembre 2026 : le carnet exclut les simples suivis et les
+animations archivées, sans effacer les accès enregistrés. Les animations
+clôturées, annulées et celles dont le tirage est terminé restent visibles avec
+leur état ; aucune date ni panne ne vaut archivage. Les coffrets déjà présents gardent
 leur récupération existante. Le statut animation vient du domaine backend,
 jamais du pourcentage personnel ou de l'horloge du navigateur.
 `disponible` décrit la possibilité d'une nouvelle action de jeu, pas le droit

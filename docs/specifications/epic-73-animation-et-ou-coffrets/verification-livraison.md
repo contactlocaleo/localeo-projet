@@ -1,5 +1,47 @@
 # E73 — Vérification, migration et livraison
 
+## Correctif du 11 novembre 2026 — carnet conservé jusqu’à archivage
+
+Base Marketplace `3d6d063`, Projet `c68d9af`. Commit applicatif **`35414d5`**.
+La demande précise LS-08 : une
+inscription reste dans Mon carnet jusqu’à l’archivage de l’animation par
+l’organisateur. Le filtre de présentation assimilait `CLOTUREE`, `ANNULEE`
+et `ARCHIVEE` et cachait donc trop tôt la vignette. Le producteur privé expose
+déjà ces statuts distincts ; sa pagination conserve les participations clôturées.
+
+Le filtre commun du carnet ne retire désormais que `ARCHIVEE`, dans les
+projections locales comme actualisées. Les états de clôture, annulation et
+résultat restent affichés ; aucun droit de rejouer, valider ou consulter une
+ressource refusée n’est accordé. L’archivage modifie seulement la visibilité :
+accès personnels stockés et gains restent conservés. Sans statut confirmé,
+aucun archivage n’est inventé. Principes LIVE-UX-01/02/04/07 conservés.
+
+Reproduction avant correction : **2 échecs attendus** dans
+`tests/security/live-unified-carnet.test.cjs`, pour une inscription clôturée
+masquée dans la projection serveur et dans le cache local. Après correction,
+les tests de projection et dates de tirage donnent **16 réussites**.
+La recette `live-carnet-notifications.spec.cjs` donne **13 réussites**, dont
+maintien des inscriptions clôturées/annulées, retrait au passage à `ARCHIVEE`
+par actualisation, conservation IndexedDB et gains, à 320/390/1 280 px.
+Preuves : Marketplace
+`test-results/visual-runs/2026-11-11T09-46-29-378Z-HvCCb8/` ; capture à 390 px
+inspectée, statut et lien personnel visibles, aucun débordement horizontal.
+Dates annoncées, lectures des nouvelles et acquittements des lots restent
+couverts par la même recette. ESLint ciblé et `git diff --check` réussis.
+La recette complémentaire `live-unified-carnet.spec.cjs` donne également
+**13 réussites** : pagination de 51 accès, identités distinctes, refus,
+anonymisation, panne partielle et départ pendant chargement. Preuves dans
+`test-results/visual-runs/2026-11-11T09-48-00-882Z-p9jrCK/` ; les builds de
+ces deux recettes sont isolés sans configuration opérateur. Bilan : **26
+scénarios navigateur réussis**, **97 guides / 1 203 liens** sans défaut et
+**148 sources exportées** vérifiées.
+
+Portée : Marketplace et documentation fonctionnelle ; aucun changement
+backend, contrat/API, migration, flag ou batch. Générateur sans impact : les
+statuts, données, formats et droits restent identiques. Recettes avec API et
+données synthétiques ; aucun déploiement ni état de l’environnement hébergé
+vérifié. Commit et push demandés, distincts du déploiement.
+
 ## Correctif du 11 novembre 2026 — création, envoi et suivi des messages
 
 Bases : Backend `77bfa40`, Animation `fa89df2`, Projet `e8c79d0`.
