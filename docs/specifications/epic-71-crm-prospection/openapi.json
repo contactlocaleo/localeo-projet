@@ -2389,6 +2389,18 @@
               "default": false,
               "title": "Avec Total"
             }
+          },
+          {
+            "name": "versions_courantes",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "description": "Une ligne par échange, avec sa dernière correction ; pagination par date de création de l’échange initial. Sans cette option, toutes les révisions sont conservées dans la lecture.",
+              "default": false,
+              "title": "Versions Courantes"
+            },
+            "description": "Une ligne par échange, avec sa dernière correction ; pagination par date de création de l’échange initial. Sans cette option, toutes les révisions sont conservées dans la lecture."
           }
         ],
         "responses": {
@@ -13967,6 +13979,18 @@
               }
             ],
             "title": "Type"
+          },
+          "type_affiche": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Type Affiche",
+            "description": "Type de l’échange initial en lecture versions_courantes ; id, version, texte, date et auteur restent ceux de la dernière révision."
           },
           "texte": {
             "anyOf": [

@@ -17,6 +17,22 @@ L’OpenAPI V1.6 est régénérée depuis les routes et DTO exécutables. Pas de
   `texte_affiche`, `auteur_nom`. Le texte d’audit original reste conservé.
   Téléphone utilisable : `sollicitation_telephone_autorisee` traduit la politique
   de domaine avec les oppositions, sans se limiter à la première page de contacts.
+- Correctif du 12 novembre : `GET /organisations/{id}/evenements` accepte
+  `versions_courantes=true`. Une page contient les échanges initiaux, triés par
+  `(created_at DESC, id DESC)`, remplacés en lecture par leur dernière révision.
+  `type_affiche` garde le type initial ; `id`, `version`, texte, date et auteur
+  viennent de la révision pour permettre la prochaine correction. Sans l'option,
+  le contrat de lecture de toutes les révisions reste inchangé. Le curseur est
+  lié au mode et calculé sur les racines ; total/position comptent ces racines.
+  Une requête récursive groupée résout seulement les chaînes des 25 racines de
+  la page (maximum 100), avec garde du même prospect à chaque jointure. Les
+  branches historiques sont départagées par date de création, puis profondeur
+  et identifiant. Aucun regroupement par texte, aucune mutation du journal.
+  Les index de v314 couvrent le tri des racines et les liens de correction.
+  Le nombre de révisions parcourues dépend de ces seules chaînes ; les totaux
+  optionnels conservent le délai de 5 s. Les mesures locales N/10N sont au bilan,
+  sans validation de capacité de l'hébergement. Trois consommateurs PWA utilisent
+  ce mode : historique prospect, dernière interaction, historique d'un rappel.
 - Références et rattachements : `libelle`, `reference`, `statut`, `cible_nom`,
   `eligible`. Le gain revalide la preuve dans sa transaction ; l’état affiché
   n’autorise aucune transition à lui seul. Recherche SQL filtrée et pages bornées.

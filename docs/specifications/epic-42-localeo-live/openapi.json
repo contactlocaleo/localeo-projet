@@ -32921,6 +32921,18 @@
             ],
             "title": "Type"
           },
+          "type_affiche": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Type Affiche",
+            "description": "Type de l’échange initial en lecture versions_courantes ; id, version, texte, date et auteur restent ceux de la dernière révision."
+          },
           "texte": {
             "anyOf": [
               {
@@ -32931,6 +32943,18 @@
               }
             ],
             "title": "Texte"
+          },
+          "texte_affiche": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Texte Affiche",
+            "description": "Texte de présentation avec noms résolus ; texte d’audit original conservé."
           },
           "auteur_id": {
             "anyOf": [

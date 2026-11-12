@@ -2,6 +2,69 @@
 
 [Spécification V1](README.md), [backlog canonique](../../roadmap/en-cours/epic-71-crm-prospection-animation-coffrets-pro-backlog.md). **Implémentation locale et vérification en cours**. Le bilan ci-dessous distingue les tests réalisés des réserves. Aucun import réel ni envoi fournisseur. Les sections historiques de spécification restent datées. La carte reste en V1 sur confirmation utilisateur ; CSV standard seul et report de CA-24 (import spécifique Gironde) sont également confirmés.
 
+## Correctif du 12 novembre 2026 — afficher seulement la note corrigée
+
+Demande : après modification d'une note, **Historique des échanges** doit afficher
+sa version courante, sans ajouter une ligne par correction. Cause reproduite
+sur la base backend `c87fb82` : la lecture paginée exposait directement les
+révisions `CORRECTION`. Les deux tests ajoutés avant le patch échouaient avec
+4 lignes au lieu d'une, puis 112 au lieu de 28 échanges.
+
+Le correctif local conserve le journal et les commandes : l'option de lecture
+`versions_courantes=true` page les échanges initiaux, puis résout leurs dernières
+révisions en une requête SQL groupée. La fiche prospect, sa dernière interaction
+et le détail d'un rappel utilisent cette projection. Le type initial reste
+lisible ; la prochaine correction vise l'identifiant/version courants. Les notes
+de texte identique restent distinctes, les branches historiques sont regroupées,
+et le curseur reste stable lorsqu'une correction survient entre deux pages.
+
+Preuves exécutées sur les changements locaux, sans accès à TEST :
+
+- Lanceur isolé sur PostgreSQL 18.3 jetable :
+  `test_evenements_corrections_postgres.py`, `test_evenements_auteurs_postgres.py`,
+  `test_crm_core_postgres.py` et `test_crm_auteurs.py` : **25 réussites** au passage
+  final (`.artifacts/crm-note-corrections/pytest-final-indexe`). Couverture des
+  versions successives, branches, audit intact, totaux/pages, texte identique,
+  correction entre pages, version périmée refusée, auteurs, contrats et contrôles
+  HTTP historiques. Les deux index v314 sont appliqués dans les fixtures.
+- Architecture, classes de domaine, couverture des use cases et contrat des
+  auteurs : **707 réussites**. La correction porte sur une projection de lecture ;
+  aucune règle de mutation déplacée dans l'interface.
+- `node tests/browser/crm-correctifs.cjs` : parcours complet réussi, dont deux
+  corrections consécutives, contenu prérempli, une seule ligne après rechargement
+  sur prospect/rappel, identifiant/version courants transmis et captures vérifiées
+  à **320/1280 px**. Il s'agit du navigateur avec API simulée, complété par les
+  preuves PostgreSQL et HTTP ci-dessus, pas d'une recette distante.
+
+Budget local déclaré : deux lectures sans auteur interne à résoudre, au plus
+26 racines et 25 révisions hydratées, moins de 1 s pour leurs plans exécutés.
+Sur 1 000 puis 10 000 échanges synthétiques avec trois corrections chacun,
+les plans finaux utilisent les index racines/corrections et la clé primaire,
+sans balayage séquentiel de `crm_evenements` : **1,299 ms / 0,957 ms** pour les
+deux requêtes. Les plans sont conservés sous `.artifacts/crm-note-corrections/`.
+Une première tentative avait révélé un balayage de table : les recherches
+paramétrées par parent et l'hydratation après sélection l'ont supprimé, sans
+affaiblir les assertions. Ces mesures locales ne prouvent ni charge concurrente
+en hébergement, ni borne sur une chaîne de corrections arbitrairement longue.
+
+Revue indépendante du contrat et du diff : garde du même prospect, curseur
+calculé avant substitution, identité/version de révision et index contrôlés.
+E71 et E41 OpenAPI régénérés hors ligne ; E42 actualisé uniquement pour le
+composant partagé `EvenementPayload`. L'export complet E42 révèle des écarts
+historiques hors correctif et reste en artefact, sans réécriture de ses autres
+contrats. Le contrat embarqué Animation n'a aucun consommateur CRM exécutable.
+Contrôles documentaires : **102 guides, 1 321 liens, aucune erreur ni
+avertissement** ; **150 sources exportées vérifiées**.
+
+Impacts : backend et documentation canonique ; migration additive **v314** à
+appliquer selon la procédure avant activation. Aucune suppression/réparation de
+notes, variable nouvelle, modification du générateur ou des trois frontends :
+les commandes, données et droits CRM restent compatibles. Guide et exploitation
+actualisés. Correctif backend enregistré dans `a91ecd8` ; commit et push des
+deux dépôts demandés après validation. Aucun déploiement ni migration distante
+réalisé ; les changements E73 préexistants restent conservés. La validation
+distante et les réserves générales d'E71 ne sont pas levées par cette recette locale.
+
 ## E71-EVOL-10 — implémentation des six lots, 12 novembre 2026
 
 Périmètre autorisé après l’audit : L1 à L6, commit/push et migration TEST seulement

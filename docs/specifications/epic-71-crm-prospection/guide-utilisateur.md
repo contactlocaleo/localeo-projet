@@ -114,7 +114,12 @@ Dans **Historique des échanges**, les entrées issues de l’import CSV affiche
 uniquement **Source : …**, à partir de l’**Origine du prospect**. Si elle n’est pas
 renseignée, la mention est explicite. Le contexte documentaire détaillé reste
 enregistré, sans être développé dans cette liste. Les échanges saisis manuellement
-conservent leur texte, leur date, leur auteur et leur action de correction.
+affichent uniquement leur version courante : corriger une note remplace son
+contenu dans cette liste, sans ajouter une ligne pour chaque retouche. Cela vaut
+sur la fiche prospect et dans le détail d'un rappel. **Corriger** reprend le
+dernier texte enregistré ; le type d'échange reste **Note**, **Appel**, etc.
+Les versions précédentes restent conservées pour la traçabilité. Les échanges
+gardent l'ordre de création des notes initiales, même après une correction.
 
 L'auteur d'un échange est affiché par son **prénom et son nom**, sur la fiche
 prospect comme dans le détail d'un rappel. Le nom actuel reste visible si le

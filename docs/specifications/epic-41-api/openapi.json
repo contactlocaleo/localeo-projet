@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Backend - contrat implemente EPIC 41",
     "description": "OpenAPI complet du backend, dont les parcours Animation locale. Genere hors ligne depuis le code local pour les integrations et les mocks ; cet instantane ne prouve pas son deploiement.",
-    "version": "1.0.0+fab8850"
+    "version": "1.0.0+c87fb82"
   },
   "paths": {
     "/public/identite-acces/interne/connexion": {
@@ -13127,6 +13127,18 @@
               "default": false,
               "title": "Avec Total"
             }
+          },
+          {
+            "name": "versions_courantes",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "description": "Une ligne par échange, avec sa dernière correction ; pagination par date de création de l’échange initial. Sans cette option, toutes les révisions sont conservées dans la lecture.",
+              "default": false,
+              "title": "Versions Courantes"
+            },
+            "description": "Une ligne par échange, avec sa dernière correction ; pagination par date de création de l’échange initial. Sans cette option, toutes les révisions sont conservées dans la lecture."
           }
         ],
         "responses": {
@@ -146882,6 +146894,18 @@
               }
             ],
             "title": "Type"
+          },
+          "type_affiche": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Type Affiche",
+            "description": "Type de l’échange initial en lecture versions_courantes ; id, version, texte, date et auteur restent ceux de la dernière révision."
           },
           "texte": {
             "anyOf": [

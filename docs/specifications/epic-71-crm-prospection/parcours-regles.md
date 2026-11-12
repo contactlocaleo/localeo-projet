@@ -92,6 +92,14 @@ attestation de paiement : consulter l’état financier courant dans le domaine 
 
 Dans la fiche, **Ajouter une note** est immédiatement visible. Types courts : note, appel, rendez-vous, e-mail consigné. Texte libre limité à 10 000 caractères, date réelle de l'échange, auteur et date de saisie serveur. Les corrections sont versionnées/tracées ; elles ne remplacent pas l'audit. Une note disant « e-mail envoyé » n'envoie rien et ne prouve aucune délivrance. Après enregistrement, proposer « Programmer la prochaine action » sans l'imposer.
 
+**Correctif du 12 novembre 2026 :** l'historique quotidien présente une seule
+ligne par échange initial, avec sa dernière correction (texte, date et auteur).
+Les versions antérieures restent enregistrées, mais ne sont pas des échanges
+supplémentaires dans cette liste. La nouvelle correction vise l'identifiant et
+la version de la révision affichée ; un écran périmé garde le refus de concurrence.
+Deux notes distinctes de même contenu restent deux échanges. Le type affiché
+vient de l'échange initial ; la pagination et les totaux comptent ces échanges.
+
 Les échanges globaux sont rattachés au prospect, ceux d'une affaire à son dossier ; la chronologie de la fiche indique ce contexte. Ni import ni réouverture ne réécrivent les notes, décisions ou preuves historiques.
 
 ## Recherche partagée — CA-07/13/35/50/54
