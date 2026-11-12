@@ -1,5 +1,38 @@
 # E71 — Architecture de Localeo CRM
 
+**E71-EVOL-10, 12 novembre 2026 — implémenté :** les
+[contrats de productivité](ux-productivite.md#propriétaires-contrats-cibles-et-compatibilité)
+ajoutent des projections lisibles bornées, une portée quotidienne explicite et la
+réutilisation des lectures contacts/preuves/agenda/jobs. Les règles de domaine
+ci-dessous restent propriétaires ; aucune mutation implicite depuis l’UI.
+L’OpenAPI V1.6 est régénérée depuis les routes et DTO exécutables. Pas de migration.
+
+- `GET /internal/prospection/aujourdhui` : `portee=MOI|EQUIPE`, trois pages de
+  tâches bornées à 25 par défaut, compteurs par groupe, `instant_reference` UTC et
+  `date_reference` Paris. `contexte_journee` signé conserve le même instant, même
+  lors du retour à la première page ; les curseurs incluent portée, identité,
+  groupe et limite. Les noms de prospects/responsables et prochaines actions
+  sont des projections SQL de page, sans lecture par résultat. Aucune mutation.
+- Tâches/dossiers : `prospect`, `responsable`, `prochaine_action` ; historique :
+  `texte_affiche`, `auteur_nom`. Le texte d’audit original reste conservé.
+  Téléphone utilisable : `sollicitation_telephone_autorisee` traduit la politique
+  de domaine avec les oppositions, sans se limiter à la première page de contacts.
+- Références et rattachements : `libelle`, `reference`, `statut`, `cible_nom`,
+  `eligible`. Le gain revalide la preuve dans sa transaction ; l’état affiché
+  n’autorise aucune transition à lui seul. Recherche SQL filtrée et pages bornées.
+- Lectures de disponibilités : `rendez_vous_id` facultatif exclut seulement
+  l’occupation autorisée à reporter. Le curseur est lié au rendez-vous et à sa
+  version ; la commande revalide collision, responsable, droits et version.
+- Les unités de calcul exposent `organisation_nom` par jointure de page. Le lot
+  d’import expose source lisible/namespace sans révéler `authority_reference`.
+
+Les modules de présentation ne conservent pas de résultats privés dans les
+stockages du navigateur. Retour/page/position sont limités à l’historique de
+l’onglet avec une portée mémoire, invalidée à la perte des droits. Un 403 limité
+reste un refus métier uniquement après confirmation du contexte CRM courant ;
+401 ou consultation retirée effacent la surface. Les assistances ne déclenchent
+aucune écriture sans confirmation, ni nouveau canal de notification.
+
 Conception V1.1 du 3 novembre 2026, étendue par **V1.2 du 4 novembre**. Implémentation locale et limites dans le bilan de vérification. [Périmètre](README.md), [parcours](parcours-regles.md), [import](import-carte.md), [preuves](verification-livraison.md). Application de l'[ADR domaine d'abord](../../architecture/decisions/ADR-2026-08-28-domaine-avant-services-applicatifs.md) et des [bornes de performance](../../architecture/transverse/performance-volumetrie.md).
 
 ## Existant au cadrage et implantation retenue

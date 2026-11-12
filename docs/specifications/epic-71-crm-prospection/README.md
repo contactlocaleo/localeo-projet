@@ -1,21 +1,30 @@
 # EPIC 71 — Localeo CRM, prospection Animation et Coffrets
 
+**E71-EVOL-10, 12 novembre 2026 :** [UX quotidienne et productivité](ux-productivite.md),
+issue de l’[audit TEST et code](../../audits/backend/localeo-crm-ux-productivite-2026-11-12.md).
+Six lots implémentés : continuité/navigation, fiche/journée, agenda, cibles/preuves,
+imports/qualification et carte/recette. Corrections des critères existants
+distinguées des sept ajouts **CA-78 à 84**. [Preuves locales et réserves](verification-livraison.md#e71-evol-10--implémentation-des-six-lots-12-novembre-2026) ;
+V1.6, **84 identifiants, 83 actifs et CA-24 reporté**.
+Le statut de l’epic reste En cours ; les preuves historiques restent datées.
+
 **E71-EVOL-09, 12 novembre 2026 :** [carte par priorité commerciale ou responsable](import-carte.md#e71-evol-09--deux-axes-de-lecture-12-novembre-2026),
 CA-74 à 77, répartition des communes mixtes et légende accessible. Spécification
 V1.5 ; implémentation locale vérifiée, [preuves et limites](verification-livraison.md#e71-evol-09--carte-par-priorité-ou-responsable-12-novembre-2026).
-Total courant : **77 identifiants, 76 actifs, CA-24 reporté** ; statut de l’epic inchangé.
+Total à cette évolution : **77 identifiants, 76 actifs, CA-24 reporté** ; statut de l’epic inchangé.
 
 **Évolution du 12 novembre 2026 — E71-EVOL-08 :**
 [agenda partagé et rendez-vous commerciaux](rendez-vous.md), critères CA-62 à 73.
 Agenda intégré et validation par le collaborateur concerné confirmés. Réalisation
 locale vérifiée ; [preuves et limites](verification-livraison.md#e71-evol-08--agenda-et-rendez-vous-12-novembre-2026).
-Aucune migration TEST ni activation effectuée pour cette évolution.
+Les migrations v311/v312 sont appliquées sur TEST le 12 novembre ; API `25224e0`
+et readiness vérifiées. [Trace d’exécution](verification-livraison.md#migrations-v311v312-sur-test--12-novembre-2026).
 Cette évolution portait l’ensemble à 73 identifiants, dont 72 actifs et CA-24 reporté.
 
-Spécification **V1.5 — 12 novembre 2026**, ajoutant **E71-EVOL-08/09** à la
+Spécification **V1.6 — 12 novembre 2026**, ajoutant **E71-EVOL-10** à V1.5/E71-EVOL-08/09 et à la
 V1.3/E71-EVOL-05/06/07 du 6 novembre et au socle V1.2/E71-EVOL-04.
 [Backlog et critères](../../roadmap/en-cours/epic-71-crm-prospection-animation-coffrets-pro-backlog.md).
-État produit : **En cours** dans la [roadmap](../../roadmap/README.md). V1.5 désigne
+État produit : **En cours** dans la [roadmap](../../roadmap/README.md). V1.6 désigne
 la version de conception, pas une release applicative : les fonctions d’actualisation et de calcul sont maintenant implémentées localement,
 avec migrations v295–v298, API privées, workers et PWA. Leur activation sur un
 environnement et les preuves de capacité restantes sont décrites dans le bilan. [Prise en main actuelle](guide-utilisateur.md),
@@ -98,6 +107,7 @@ Compléments recommandés inclus dans la conception : responsable et prochaine a
 
 | Document | Utilité |
 | --- | --- |
+| [UX quotidienne et productivité — E71-EVOL-10](ux-productivite.md) | Audit du 12 novembre, six lots implémentés, contrats et critères ; preuves et limites dans le bilan |
 | [Parcours et règles](parcours-regles.md) | Écrans, saisie rapide, étapes, notes, rappels, passage aux parcours métier |
 | [Import INIT / UPSERT](import-carte.md) | Colonnes, clés stables, exemples et protection des données existantes |
 | [Modèle CSV vide](modele-import.csv) | En-têtes exacts à remplir depuis Excel ; aucune donnée réelle |

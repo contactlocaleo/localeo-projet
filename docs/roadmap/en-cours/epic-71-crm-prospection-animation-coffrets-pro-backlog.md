@@ -1,10 +1,11 @@
 # EPIC 71 — Localeo CRM, prospection Animation et Coffrets
 
-## Références : socle E71-EVOL-03 et extensions E71-EVOL-04/05/06/07/08/09
+## Références : socle E71-EVOL-03 et extensions E71-EVOL-04/05/06/07/08/09/10
 
 - État produit : **En cours**, selon la [roadmap commune](../README.md).
 - Cadrage initial : 2 octobre 2026 ; décisions/imports E71-EVOL-01 et E71-EVOL-02 du 9 octobre ; **recadrage du 3 novembre 2026** à la demande utilisateur.
-- [Spécification canonique V1.5](../../specifications/epic-71-crm-prospection/README.md), [format d'import et gabarit](../../specifications/epic-71-crm-prospection/import-carte.md).
+- [Spécification canonique V1.6](../../specifications/epic-71-crm-prospection/README.md), [format d'import et gabarit](../../specifications/epic-71-crm-prospection/import-carte.md).
+- **E71-EVOL-10, 12 novembre 2026 :** [audit UX et productivité](../../audits/backend/localeo-crm-ux-productivite-2026-11-12.md), [six lots spécifiés et implémentés](../../specifications/epic-71-crm-prospection/ux-productivite.md), preuves locales et réserves dans le bilan. CA-78 à 84 ajoutés : **84 identifiants, 83 actifs, CA-24 reporté**. Les écarts aux critères existants restent des corrections, pas des règles remplacées.
 - Socle : implémentation locale du CRM, migrations v290–v293 et vérification sur données synthétiques. Extension E71-EVOL-04 du 4 novembre : qualification structurée et import 2 implémentés localement, tests et limites dans le bilan. Aucun déploiement ou import réel dans cette phase.
 - **E71-EVOL-05, 5 novembre 2026 :** demande d’actualisation de qualification à la demande ; [spécification détaillée du 6 novembre](../../specifications/epic-71-crm-prospection/actualisation-qualification.md). Neuf critères ajoutés ; six blocs dès la première livraison confirmés le 6 novembre, méthode de proximité/SIRET confirmée, implémentation et tests locaux réalisés ; activation réelle non effectuée.
 - **E71-EVOL-06, 5 novembre 2026 :** [niveau de qualification commerciale](../../specifications/epic-71-crm-prospection/niveau-qualification.md), entrée de menu, calcul sur recherche et carte colorée/filtrable. Choix utilisateur : combiner potentiel, maturité du projet et fiabilité. Dix critères ajoutés ; priorité au fort potentiel même sans projet confirmée le 6 novembre, barème pondéré remplacé, seuils 5/10 et 20/50 confirmés ; menu/calcul/carte implémentés localement, capacité restant à vérifier.
@@ -212,6 +213,38 @@ révisé doit favoriser le potentiel même sans dossier ni interlocuteur identif
 profils, seuils et preuves restent à préciser avant développement dépendant.
 La matrice des tests prévus et les impacts sont dans le cadrage canonique.
 
+## E71-EVOL-10 — UX quotidienne et productivité, 12 novembre 2026
+
+Demande : auditer l’utilisation quotidienne du CRM puis spécifier les axes
+d’optimisation. [Audit](../../audits/backend/localeo-crm-ux-productivite-2026-11-12.md)
+sur TEST en lecture seule et code backend `25224e0` ;
+[conception V1.6](../../specifications/epic-71-crm-prospection/ux-productivite.md).
+Les six lots ont ensuite été implémentés à la demande de l’utilisateur ;
+[preuves et limites de la recette](../../specifications/epic-71-crm-prospection/verification-livraison.md#e71-evol-10--implémentation-des-six-lots-12-novembre-2026).
+Aucune migration supplémentaire. L’epic reste **En cours**.
+
+Corrections traitées avec les IDs existants : retours/recherche/page conservés
+(CA-07/15), file personnelle et compteurs cohérents (CA-06/22), prochaine action
+après échange (CA-04/05), contacts paginés/opposition (CA-15/20/34), accès
+(CA-19), contexte et lecture complète de l’agenda (CA-62 à 73). Les règles et
+preuves historiques ne sont pas remplacées ; les reproductions révèlent un
+reste à faire courant. Les sept extensions suivantes complètent leur couverture.
+
+| Critère ajouté | Acteur / action | Résultat observable et refus attendu |
+| --- | --- | --- |
+| E71-CA-78 | Commercial ouvre une fiche pour contacter puis préparer la suite | Contact, dernière interaction et prochaine action avant qualification/historique ; sections indépendantes et réessai local ; échec dossiers ne masque pas contacts, retrait d’accès efface les données privées ; aucun contact principal inventé |
+| E71-CA-79 | Gestionnaire rattache une référence puis constate un gain | Recherche paginée par libellé, références rattachées visibles et preuve éligible sélectionnable sans copier d’UUID ; droits, appartenance, état et attribution unique revérifiés, refus concurrent sans transition partielle |
+| E71-CA-80 | Collaborateur reporte un rendez-vous | Disponibilités assistées comme à la création, ancien créneau/durée visibles, motif et rappel explicites ; conflit conserve le brouillon, validation personnelle et invalidation des anciens rappels conservées |
+| E71-CA-81 | Importateur suit un lot confirmé | Étapes, attente/progression/bilan et compteurs issus du serveur visibles sans recharger ; lecture bornée suspendue hors écran et arrêtée à l’état terminal ; échec de lecture ne relance aucune commande et conserve le dernier état daté |
+| E71-CA-82 | Gestionnaire examine plusieurs pages d’actualisation | Choix de la page dénombrés, application et navigation explicites sans perte silencieuse ; accès direct aux évaluations produites à confirmer ; adoption, référence et calcul ne se confondent pas |
+| E71-CA-83 | Gestionnaire recalcule après mise à jour d’un prospect | « Recalculer ce prospect » prépare et confirme uniquement son ID ; noms/motifs métier dans le bilan ; aucun calcul implicite de toute la recherche ni changement de priorité manuelle du dossier |
+| E71-CA-84 | Utilisateur passe de la carte à la qualification et revient | Interactions accessibles communes, filtres compatibles/profil/axe/position conservés ; filtres non transférables annoncés, groupes mixtes et non-localisés préservés ; aucune propagation du niveau EPCI à ses communes |
+
+Matrice lots → critères → contrats → preuves et impacts documentation, exploitation,
+données, générateur dans la [spécification](../../specifications/epic-71-crm-prospection/ux-productivite.md).
+Total courant : **84 identifiants, 83 actifs, CA-24 reporté**. Les totaux des
+sections suivantes décrivent leurs étapes historiques respectives.
+
 ## E71-EVOL-09 — carte par priorité ou responsable, 12 novembre 2026
 
 Ajouter sur la carte générale les axes **Priorité commerciale** et **Responsable
@@ -222,7 +255,7 @@ la navigation restent cohérents avec les listes.
 
 La [spécification canonique](../../specifications/epic-71-crm-prospection/import-carte.md#e71-evol-09--deux-axes-de-lecture-12-novembre-2026)
 complète CA-54/55 et ajoute **CA-74 à 77**, avec contrats, bornes et preuves.
-Total courant : **77 identifiants, 76 actifs et CA-24 reporté**. Réalisation et
+Total à cette évolution : **77 identifiants, 76 actifs et CA-24 reporté**. Réalisation et
 vérifications locales effectuées ; [preuves et limites](../../specifications/epic-71-crm-prospection/verification-livraison.md#e71-evol-09--carte-par-priorité-ou-responsable-12-novembre-2026).
 Livraison Git du 12 novembre : backend `25224e0`, avec l’agenda E71-EVOL-08.
 Aucun déploiement manuel ou migration TEST effectué dans cette livraison Git.
@@ -241,7 +274,8 @@ porte **CA-62 à CA-73**, les invariants, contrats, impacts et preuves.
 Cette évolution portait le total à **73 identifiants, 72 actifs et CA-24 reporté**. L’epic
 reste En cours ; implémentation et vérification locales du 12 novembre détaillées
 dans le [bilan](../../specifications/epic-71-crm-prospection/verification-livraison.md#e71-evol-08--agenda-et-rendez-vous-12-novembre-2026).
-Les migrations v311/v312 restent à appliquer sur la cible avant livraison.
+Les migrations v311/v312 sont appliquées sur TEST le 12 novembre ; API `25224e0`
+et readiness vérifiées. [Trace de l’opération](../../specifications/epic-71-crm-prospection/verification-livraison.md#migrations-v311v312-sur-test--12-novembre-2026).
 Les bilans et comptes historiques ci-dessous
 conservent leur portée datée.
 

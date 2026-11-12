@@ -2,6 +2,8 @@
 
 Constats datés conservés par application. Un audit ancien ne décrit pas automatiquement l’état actuel.
 
+- [Localeo CRM — UX quotidienne et productivité — 12 novembre 2026](backend/localeo-crm-ux-productivite-2026-11-12.md) : parcours TEST bureau/mobile et code en lecture seule, continuité de recherche, contacts/actions, agenda, imports, qualification et carte ; six lots spécifiés dans E71-EVOL-10, sans implémentation.
+
 - [Localeo Live — iconographie et respiration sur mobile — 10 novembre 2026](marketplace/localeo-live-iconographie-aeration-mobile-2026-11-10.md) : dix recommandations sur le sens des icônes, la largeur utile des cartes, les textes redondants et l'espacement ; inspection TEST et vues synthétiques distinguées, sans implémentation.
 
 - [Localeo Live — participation, lots et découverte sur mobile — 10 novembre 2026](marketplace/localeo-live-mobile-participation-lots-decouverte-2026-11-10.md) : actions prioritaires, chargements partagés, retours aux lots et codes visuels de Localeo Pro.

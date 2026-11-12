@@ -2,11 +2,155 @@
 
 [Spécification V1](README.md), [backlog canonique](../../roadmap/en-cours/epic-71-crm-prospection-animation-coffrets-pro-backlog.md). **Implémentation locale et vérification en cours**. Le bilan ci-dessous distingue les tests réalisés des réserves. Aucun import réel ni envoi fournisseur. Les sections historiques de spécification restent datées. La carte reste en V1 sur confirmation utilisateur ; CSV standard seul et report de CA-24 (import spécifique Gironde) sont également confirmés.
 
+## E71-EVOL-10 — implémentation des six lots, 12 novembre 2026
+
+Périmètre autorisé après l’audit : L1 à L6, commit/push et migration TEST seulement
+si nécessaire. Backend de départ `25224e0` ; dépôt documentaire `f8923a7` avec les
+spécifications E71 et E73 locales préservées. Les travaux E73 de clôture automatique
+restent distincts de cette livraison. Epic **En cours**, 83 critères actifs,
+CA-24 reporté ; aucune clôture globale déduite de cette recette ciblée.
+Code backend enregistré dans le commit `fab8850` ; documentation et contrat sont
+livrés dans le dépôt indépendant `localeo-projet`.
+
+| Lot / critères | Comportement livré | Preuves exécutables et limites |
+| --- | --- | --- |
+| L1 — continuité/navigation, CA-07/15/19/22 | Retour contextualisé, même recherche/page/position ; noms de prospects sur actions/dossiers ; Suivi recherchable ; cinq entrées mobiles et filtres repliés | `tests/browser/crm-productivite.cjs`, recettes historiques `crm.cjs`/`crm-correctifs.cjs` ; recherche page 3, retour explicite/navigateur, clavier, 320/390/1280 px |
+| L2 — fiche/journée, CA-78 et CA-04/05/06/21/22 | MOI/ÉQUIPE, groupes disjoints et référence serveur signée ; contact/action/interaction en tête ; lectures et réessais indépendants ; suite facultative après succès | `test_productivite_postgres.py`, `test_productivite_http.py`, `crm-productivite.cjs` : portée, dates Paris/DST, pagination, 409, réponse perdue/même clé, révocation et sélection contact conservée |
+| L3 — agenda, CA-80 et CA-62 à 73 | Contexte d’agenda, raccourci Aujourd’hui, semaine partielle explicite, report assisté avec responsable fixe et rappel relatif | Tests domaine/application/API/PostgreSQL rendez-vous et `crm-agenda.cjs` : 60 RDV, report chevauchant son ancien créneau, conflit/version, date/page après retour, texte 200 % |
+| L4 — cibles/preuves, CA-79 et CA-15/16/17/18/19/20/34 | Contacts au-delà de 25, références recherchables sans saisie UUID, rattachements lisibles et preuve de gain sélectionnée | `test_references_lisibles_postgres.py`, `crm-selecteurs.cjs` : contact n°26 conservé après retour page 1, refus d’une cible obsolète, opposition explicite, preuve inéligible et conflit ; cause du refus TEST historique encore non établie |
+| L5 — traitements, CA-81/82/83 et CA-08 à 12/41 à 59 | Suivi GET visible borné, source/counters réels ; revue page précédente et appliquer/continuer ; évaluation exacte ; recalcul explicite IDS=1 et bilan nommé | `crm-import-progress.cjs`, `crm-actualisations.cjs`, `crm-priorite.cjs`, `crm-qualification-productivite.cjs`, API bilan et tests PostgreSQL imports/priorité ; aucune commande réelle ni fournisseur interrogé |
+| L6 — carte/recette, CA-84 et CA-13/23/50/54/55/74 à 77 | Marqueurs accessibles partagés, filtres compatibles/viewport conservés, omissions explicites, profils Commune/EPCI distincts | `crm-carte-axes.cjs`, `crm-priorite.cjs` et recettes quotidiennes ; protocole avant/après conservé dans la spécification, aucune amélioration chiffrée d’usage réel revendiquée |
+
+Passages Python :
+
+- **743 réussites**, 48 avertissements de l’adaptateur datetime SQLite :
+  architecture, recensements domaine/use cases, protection des ressources PWA
+  et routes CRM. `scripts/validation/test_isolated.py` avec Python 3.14.
+- **78 réussites PostgreSQL** dans le groupe final des projections/prospection,
+  qualification et générateur ; rapport privé backend
+  `tmp/crm-ux-backend-pg/projections-verified.xml`. Puis **5 réussites** pour
+  l’import HTTP/source/verrou et les derniers contrôles de journée/API :
+  `projections-import-followup.xml`. Base PostgreSQL 18 jetable locale uniquement.
+- Rendez-vous : 36 tests domaine/application/navigation, 14 API/PostgreSQL
+  ciblés ; le test de performance historique RDV n’a pas été relancé. API bilan
+  de priorité : 3 tests isolés réussis. Ces passages sont distincts, leurs
+  nombres ne sont pas additionnés aux groupes pouvant couvrir les mêmes tests.
+- Retour après reconnexion : **64 tests réussis** sur la navigation agenda/carte
+  et la frontière PWA, dont les nouveaux cas de filtres, curseurs, `/plus` et
+  redirections anonymes ; 4 avertissements datetime SQLite.
+
+Mesure locale Aujourd’hui : 100 puis 1 000 tâches synthétiques, 17 puis 19
+requêtes, 87 puis 132 ms ; pages ≤25, totaux exacts. La cardinalité ne déclenche
+aucune lecture par tâche. Cette mesure ne constitue pas une charge concurrente
+Render et ne lève pas les réserves historiques de capacité.
+
+Les recettes navigateur servent les véritables modules du shell avec des
+réponses HTTP synthétiques. Elles ne prouvent pas le déploiement sur TEST ni
+une session sur téléphone physique. Les captures locales sont contrôlées pour
+la lisibilité, le reflow et les erreurs de dialogue ; les rapports privés ne
+sont pas exportés dans ce dépôt documentaire.
+
+Revue indépendante des règles et contrats : aucune élévation de droit ni
+contournement de preuve constaté. Les constats de revue UI ont été corrigés :
+instant des badges aligné sur la journée serveur, erreurs de dialogue visibles
+après reflow mobile, libellé Aujourd’hui non coupé, contexte conservé après refus
+du retour navigateur, boîte de saisie réutilisable après panne de contexte et
+message explicite lors d’un changement de droits. Les retours après connexion
+restent limités aux routes et paramètres CRM autorisés.
+
+Contrôles documentaires : 97 guides et 1 229 liens ; variante des documents
+modifiés, 19 documents et 672 liens ; zéro erreur/avertissement. Les 150 sources
+exportées sont valides. Les avertissements Git de conversion CRLF/LF ne sont pas
+des erreurs de contenu. Les mesures d’usage avant/après et la recette sur appareil
+physique restent à réaliser, sans instrumentation d’activité ajoutée.
+
+Contrats : OpenAPI V1.6 régénérée hors ligne (**81 chemins, 139 schémas**), routes
+et DTO lisibles, droits inchangés. Backend/PWA et sources canoniques seuls
+affectés ; Animation, Marketplace et Pro ne consomment pas ces API. Générateur
+inchangé et test de compatibilité exécuté ; sa fixture historique a été alignée
+sur les migrations d’agenda déjà requises, sans assertion supprimée.
+
+**Base TEST : aucune migration à appliquer pour E71-EVOL-10.** Les colonnes et
+contraintes nécessaires existent avec v311/v312, dont l’application précédente
+est documentée ci-dessous. Aucun SQL, import, envoi ou changement de droits TEST
+n’a été réalisé pour cette implémentation. Le refus UX-15 rencontré pendant
+l’audit demeure une réserve TEST : les mêmes lectures passent avec ADMIN et
+lecteur nominatif en recette HTTP, et les erreurs 401/403 sont désormais
+distinguées, sans prétendre avoir identifié la cause de l’incident historique.
+
+## E71-EVOL-10 — audit et spécification UX, 12 novembre 2026
+
+[Audit détaillé](../../audits/backend/localeo-crm-ux-productivite-2026-11-12.md) et
+[matrice des six lots](ux-productivite.md#lots-dépendances-et-traçabilité).
+V1.6 : CA-78 à 84 ajoutés, 83 actifs et CA-24 reporté ; epic En cours.
+**Spécification seule : aucun changement applicatif ni test métier exécuté.**
+
+- Lecture du backend `25224e0`, deux explorations indépendantes quotidiennes et
+  agenda/qualification ; revue de contrats distincte de la validation documentaire.
+- TEST en lecture seule : Aujourd’hui/rappel/fiche, recherche et retour, formulaire
+  d’échange non soumis, liste Suivi et agenda vide ; bureau et émulation 320/390 px.
+  Perte de recherche reproduite, coordonnées trop bas, lignes sans nom de prospect
+  et navigation mobile encombrée constatées. Captures de session dans la conversation.
+- Limite : détail du dossier interrompu par l’écran 401/403 « Accès à vérifier ».
+  Cause non établie ; pas de reconnexion avec changement de droits ni gain tenté.
+- Imports, actualisation, calcul, carte et agenda chargé : constats de code,
+  sans mutation de données, interrogation de fournisseur ni notification réelle.
+- Projections/DTO cibles, tests synthétiques nominaux/refus/concurrence et mesures
+  de capacité restent à réaliser avec les lots. Une recette commerciale nominative,
+  clavier/texte 200 % et appareil physique est prévue ; elle n’est pas acquise.
+
+Les contrôles documentaires de cette phase ne valident pas les comportements
+cibles. Les preuves des évolutions précédentes et des migrations restent ci-dessous.
+
+La revue indépendante a fait préciser le report assisté (exclusion autorisée de
+la seule occupation du RDV, curseur lié au contexte), le rappel par défaut à
+l’heure du RDV sans désactivation de date ajoutée, la portée MOI et les groupes
+disjoints, ainsi que la distinction refus d’accès/panne technique. Ces précisions
+restent des contrats et scénarios à implémenter/tester, pas des résultats exécutés.
+
+Contrôles documentaires exécutés depuis `localeo-projet`, base `f8923a7` avec les
+modifications locales conservées et E71-EVOL-10 : `py -3.14 scripts/check_guidance.py`
+(97 guides, 1 225 liens, zéro erreur/avertissement), variante
+`--changed --all-markdown` (19 documents, 669 liens, zéro erreur/avertissement),
+`py -3.14 scripts/sync_documentation.py --check-sources` (150 sources vérifiées)
+et `git diff --check` réussis. Backend inchangé et propre pendant cet audit.
+Ces résultats ne valent ni test de l’API cible, ni migration, ni livraison de l’UX.
+
+## Migrations v311/v312 sur TEST — 12 novembre 2026
+
+Exécution explicitement demandée après publication du backend `25224e0`.
+La cible du profil privé TEST a été vérifiée, distincte de production ; le plan
+du lanceur canonique ne contenait que `v311_crm_rendez_vous.sql`, puis
+`v312_crm_rendez_vous_notifications.sql`. Les empreintes précédentes sont valides.
+
+- Sauvegarde PostgreSQL complète au format custom avant migration :
+  **73 154 692 octets** ; catalogue de l’archive vérifié avec `pg_restore --list`.
+  Empreinte SHA-256 :
+  `0721fd886ec18427d95ed957c2a56b6b4cfd95196cd424d54cbaefce7aacc3da`.
+  Sauvegarde et rapports privés, ignorés par Git, dans le backend sous
+  `tmp/migration-v311-v312-test-20261112/`. Pas de restauration réelle effectuée.
+- Les deux migrations sont enregistrées ; contrôle des empreintes identiques
+  aux fichiers versionnés, et nouveau plan vide. SHA-256 v311 :
+  `e3865c4fa5c341144394360baedd24171be0532c8a444383e7a9fcf05efe3d40` ;
+  v312 : `ee831b392314deddac33bcc91118587f604a4b4e4973a006ae74e292bb20fc55`.
+- Colonnes, sept index et contraintes vérifiés, notamment la liaison différée
+  tâche/rendez-vous et les unicités des notifications par type d’événement.
+  Les compteurs CRM sont inchangés : **1 558 prospects, une tâche et aucune
+  intention de rappel**. Aucun agenda, rendez-vous ou message n’a été créé.
+- `/sante` répond **HTTP 200, OK**, version **`1.0.0+25224e0`**.
+  La readiness protégée répond **HTTP 200, READY**, sans contrôle en échec ;
+  elle contrôle effectivement les tables et index de l’agenda.
+
+Aucun redémarrage manuel, changement de flag, recalcul ou envoi de notification.
+Le parcours de réservation avec un compte CRM nominatif n’a pas été exécuté
+sur TEST dans cette opération ; les recettes locales précédentes restent
+distinctes des contrôles du schéma et de santé effectués ici.
+
 ## E71-EVOL-09 — carte par priorité ou responsable, 12 novembre 2026
 
 Référence de livraison Git du 12 novembre : backend **`25224e0`**, regroupant
-l’agenda E71-EVOL-08 et la carte E71-EVOL-09. Les migrations v311/v312 restent
-à appliquer sur TEST avant utilisation de l’agenda ; ce commit ne les exécute pas.
+l’agenda E71-EVOL-08 et la carte E71-EVOL-09. Les migrations v311/v312 sont
+appliquées sur TEST par l’opération distincte documentée ci-dessus.
 
 Périmètre : [deux axes de lecture](import-carte.md#e71-evol-09--deux-axes-de-lecture-12-novembre-2026),
 CA-74 à 77. Backend/PWA CRM et documentation seulement ; aucun changement des

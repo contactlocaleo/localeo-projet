@@ -4,6 +4,34 @@
 
 Localeo CRM suit vos relations commerciales Animation et Coffrets. Il utilise votre compte interne Localeo. Une fiche représente une structure ; ses contacts, échanges et dossiers restent réunis même lorsqu’elle s’intéresse aux deux offres.
 
+**UX quotidienne — 12 novembre 2026 :** [E71-EVOL-10](ux-productivite.md) conserve
+votre contexte et simplifie les actions. Ces changements nécessitent la livraison
+conjointe du backend et de ses ressources CRM.
+
+- **Aujourd’hui** ouvre **Mes actions** pour votre compte nominatif. **Équipe**
+  affiche le portefeuille partagé. En retard, Aujourd’hui et À venir sont trois
+  groupes distincts, selon la date de l’action en heure de Paris ; chaque compteur
+  correspond à sa portée. Les indicateurs collectifs sont repliés sous les actions.
+- Le retour depuis une fiche conserve votre recherche et sa page. Sur téléphone,
+  **Plus** donne accès à Suivi, Qualification, Carte, Imports et Préférences selon
+  vos droits ; **Filtres** ouvre les critères secondaires de la recherche.
+- La fiche présente contact, prochaine action et dernier échange avant la
+  qualification. Sélectionnez le contact utile ; **Tous les contacts** permet de
+  parcourir les pages. Après une note ou une action terminée, **Planifier la
+  prochaine action** est facultatif : **Plus tard** ne crée aucune tâche.
+- Le report d’un rendez-vous propose les disponibilités de son responsable.
+  Celui-ci reste fixe ; un transfert passe par **Réaffecter**. Choisissez le
+  rappel relatif ou personnalisé. Un conflit conserve votre saisie pour correction.
+- Les formulaires d’action et d’opposition donnent accès aux contacts suivants.
+  Pour rattacher une preuve, recherchez sa référence par nom. Pour constater un
+  gain, choisissez une référence déjà rattachée et éligible ; le serveur la
+  contrôle de nouveau lors de la confirmation.
+- Le suivi d’import s’actualise automatiquement tant que la page est visible.
+  Les commandes de confirmation/reprise restent explicites. En actualisation,
+  **Appliquer et continuer** traite vos choix de la page, puis ouvre la suivante.
+  Les liens d’évaluation ouvrent exactement le résultat produit. **Recalculer ce
+  prospect** prépare une sélection d’un seul prospect avant votre confirmation.
+
 ## 1. Ouvrir votre espace
 
 Depuis le menu **Applications** de l’ERP, choisissez **Localeo CRM**. L’adresse est `/internal/crm/` sur le même domaine backoffice. Si l’entrée manque, demandez à l’administrateur le droit **Consulter le CRM**. La gestion, les imports et la levée d’opposition disposent de droits distincts ; un accès ERP existant ne les ajoute pas automatiquement.

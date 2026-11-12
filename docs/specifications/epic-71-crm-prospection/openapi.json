@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Localeo CRM — E71",
-    "version": "1.5"
+    "version": "1.6"
   },
   "paths": {
     "/internal/prospection/organisations": {
@@ -2310,7 +2310,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/PageRattachementsPayload"
+                }
               }
             }
           },
@@ -2669,7 +2671,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/PageTachesPayload"
+                }
               }
             }
           },
@@ -2879,7 +2883,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/PageTachesPayload"
+                }
               }
             }
           },
@@ -2978,7 +2984,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/TachePayload"
+                }
               }
             }
           },
@@ -3406,6 +3414,139 @@
           },
           "422": {
             "description": "Erreur de validation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/prospection/aujourdhui": {
+      "get": {
+        "tags": [
+          "Prospection"
+        ],
+        "summary": "Aujourdhui",
+        "description": "Groupes disjoints en heure de Paris. Les curseurs signés figent l'instant\nde référence pour les trois groupes et sont liés à la portée et l'autorité.\nUne nouvelle lecture sans curseur ni contexte_journee actualise la journée.",
+        "operationId": "aujourdhui_internal_prospection_aujourdhui_get",
+        "parameters": [
+          {
+            "name": "portee",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "enum": [
+                "MOI",
+                "EQUIPE"
+              ],
+              "type": "string",
+              "default": "MOI",
+              "title": "Portee"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor_retard",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2000
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor Retard"
+            }
+          },
+          {
+            "name": "cursor_jour",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2000
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor Jour"
+            }
+          },
+          {
+            "name": "cursor_avenir",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2000
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor Avenir"
+            }
+          },
+          {
+            "name": "contexte_journee",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2000
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Contexte Journee"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JourneePayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
             "content": {
               "application/json": {
                 "schema": {
@@ -4291,7 +4432,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/PageReferencesMetierPayload"
+                }
               }
             }
           },
@@ -8076,6 +8219,23 @@
               ],
               "title": "Cursor"
             }
+          },
+          {
+            "name": "rendez_vous_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Rendez Vous Id"
+            }
           }
         ],
         "responses": {
@@ -8184,6 +8344,23 @@
                 }
               ],
               "title": "Cursor"
+            }
+          },
+          {
+            "name": "rendez_vous_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Rendez Vous Id"
             }
           }
         ],
@@ -11748,6 +11925,17 @@
       },
       "ContactPayload": {
         "properties": {
+          "sollicitation_telephone_autorisee": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sollicitation Telephone Autorisee"
+          },
           "id": {
             "anyOf": [
               {
@@ -13791,6 +13979,18 @@
             ],
             "title": "Texte"
           },
+          "texte_affiche": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Texte Affiche",
+            "description": "Texte de présentation avec noms résolus ; texte d’audit original conservé."
+          },
           "auteur_id": {
             "anyOf": [
               {
@@ -14509,6 +14709,26 @@
         ],
         "title": "GroupeCartePrioritePayload"
       },
+      "GroupesJourneePayload": {
+        "properties": {
+          "en_retard": {
+            "$ref": "#/components/schemas/PageTachesPayload"
+          },
+          "aujourdhui": {
+            "$ref": "#/components/schemas/PageTachesPayload"
+          },
+          "a_venir": {
+            "$ref": "#/components/schemas/PageTachesPayload"
+          }
+        },
+        "type": "object",
+        "required": [
+          "en_retard",
+          "aujourdhui",
+          "a_venir"
+        ],
+        "title": "GroupesJourneePayload"
+      },
       "IndisponibiliteAgenda": {
         "properties": {
           "debut_at": {
@@ -14673,6 +14893,45 @@
           "created_at"
         ],
         "title": "JobActualisation"
+      },
+      "JourneePayload": {
+        "properties": {
+          "portee": {
+            "type": "string",
+            "enum": [
+              "MOI",
+              "EQUIPE"
+            ],
+            "title": "Portee"
+          },
+          "instant_reference": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Instant Reference"
+          },
+          "date_reference": {
+            "type": "string",
+            "format": "date",
+            "title": "Date Reference"
+          },
+          "contexte_journee": {
+            "type": "string",
+            "title": "Contexte Journee",
+            "description": "Jeton signé liant instant de référence, portée, identité et taille de page ; à reprendre aussi pour revenir à la première page."
+          },
+          "groupes": {
+            "$ref": "#/components/schemas/GroupesJourneePayload"
+          }
+        },
+        "type": "object",
+        "required": [
+          "portee",
+          "instant_reference",
+          "date_reference",
+          "contexte_journee",
+          "groupes"
+        ],
+        "title": "JourneePayload"
       },
       "LancementPriorite": {
         "properties": {
@@ -15162,6 +15421,36 @@
       },
       "OpportunitePayload": {
         "properties": {
+          "prospect": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ProspectResumePayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "responsable": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ResponsableResumePayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "prochaine_action": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ProchaineActionPayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "id": {
             "anyOf": [
               {
@@ -16403,6 +16692,102 @@
         ],
         "title": "PageProspectsPrioritePayload"
       },
+      "PageRattachementsPayload": {
+        "properties": {
+          "total": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total",
+            "description": "Total filtré à la date de calcul, demandé avec avec_total=true ; indépendant du curseur."
+          },
+          "position": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Position",
+            "description": "Nombre de résultats précédant la page au moment du calcul, sans OFFSET SQL."
+          },
+          "total_calcule_le": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total Calcule Le"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/RattachementPayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More",
+            "default": false
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          }
+        },
+        "type": "object",
+        "title": "PageRattachementsPayload"
+      },
+      "PageReferencesMetierPayload": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ReferenceMetierPayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More",
+            "default": false
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          }
+        },
+        "type": "object",
+        "title": "PageReferencesMetierPayload"
+      },
       "PageRendezVousAgenda": {
         "properties": {
           "has_more": {
@@ -16435,6 +16820,73 @@
           "items"
         ],
         "title": "PageRendezVousAgenda"
+      },
+      "PageTachesPayload": {
+        "properties": {
+          "total": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total",
+            "description": "Total filtré à la date de calcul, demandé avec avec_total=true ; indépendant du curseur."
+          },
+          "position": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Position",
+            "description": "Nombre de résultats précédant la page au moment du calcul, sans OFFSET SQL."
+          },
+          "total_calcule_le": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total Calcule Le"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/TachePayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More",
+            "default": false
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          }
+        },
+        "type": "object",
+        "title": "PageTachesPayload"
       },
       "PageUnitesPrioritePayload": {
         "properties": {
@@ -16830,6 +17282,36 @@
           "reference"
         ],
         "title": "PreuvePrioritePayload"
+      },
+      "ProchaineActionPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "type": {
+            "type": "string",
+            "title": "Type"
+          },
+          "date_action": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Date Action"
+          },
+          "route_interne": {
+            "type": "string",
+            "title": "Route Interne"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "date_action",
+          "route_interne"
+        ],
+        "title": "ProchaineActionPayload"
       },
       "ProfilPrioritePayload": {
         "properties": {
@@ -17245,6 +17727,36 @@
           "etat_priorite"
         ],
         "title": "ProspectPrioritePayload"
+      },
+      "ProspectResumePayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "nom": {
+            "type": "string",
+            "title": "Nom"
+          },
+          "commune": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Commune"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "nom"
+        ],
+        "title": "ProspectResumePayload"
       },
       "QualificationContactInput": {
         "properties": {
@@ -18250,6 +18762,144 @@
         ],
         "title": "Rattachement"
       },
+      "RattachementPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "organisation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Organisation Id"
+          },
+          "opportunite_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Opportunite Id"
+          },
+          "type_preuve": {
+            "type": "string",
+            "title": "Type Preuve"
+          },
+          "reference_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Reference Id"
+          },
+          "cible_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Cible Id"
+          },
+          "auteur_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Auteur Id"
+          },
+          "version": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Version"
+          },
+          "created_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created At"
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated At"
+          },
+          "reference": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reference"
+          },
+          "statut": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Statut"
+          },
+          "cible_nom": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cible Nom"
+          },
+          "libelle": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Libelle"
+          },
+          "eligible": {
+            "type": "boolean",
+            "title": "Eligible"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "organisation_id",
+          "opportunite_id",
+          "type_preuve",
+          "reference_id",
+          "cible_id",
+          "eligible"
+        ],
+        "title": "RattachementPayload"
+      },
       "ReaffecterRendezVous": {
         "properties": {
           "expected_version": {
@@ -18370,6 +19020,74 @@
           "expected_version"
         ],
         "title": "ReferenceEvaluationInput"
+      },
+      "ReferenceMetierPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "type_preuve": {
+            "type": "string",
+            "title": "Type Preuve"
+          },
+          "reference": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reference"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          },
+          "cible_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cible Id"
+          },
+          "cible_nom": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cible Nom"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "eligible": {
+            "type": "boolean",
+            "title": "Eligible"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "type_preuve",
+          "statut",
+          "libelle",
+          "eligible"
+        ],
+        "title": "ReferenceMetierPayload"
       },
       "ReferencePayload": {
         "properties": {
@@ -18826,6 +19544,25 @@
         ],
         "title": "ReporterRendezVous"
       },
+      "ResponsableResumePayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "nom_affiche": {
+            "type": "string",
+            "title": "Nom Affiche"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "nom_affiche"
+        ],
+        "title": "ResponsableResumePayload"
+      },
       "ResultatBloc": {
         "properties": {
           "statut": {
@@ -19149,6 +19886,238 @@
         ],
         "title": "Tache"
       },
+      "TachePayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "organisation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Organisation Id"
+          },
+          "opportunite_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Opportunite Id"
+          },
+          "contact_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Contact Id"
+          },
+          "responsable_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Responsable Id"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "type": {
+            "type": "string",
+            "title": "Type"
+          },
+          "cible": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cible"
+          },
+          "canal": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Canal"
+          },
+          "sollicitante": {
+            "type": "boolean",
+            "title": "Sollicitante",
+            "default": false
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          },
+          "due_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Due At"
+          },
+          "remind_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Remind At"
+          },
+          "version": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Version"
+          },
+          "resultat": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Resultat"
+          },
+          "created_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created At"
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated At"
+          },
+          "reminder_revision": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reminder Revision"
+          },
+          "a_reaffecter": {
+            "type": "boolean",
+            "title": "A Reaffecter",
+            "default": false
+          },
+          "rendez_vous_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rendez Vous Id"
+          },
+          "rendez_vous_statut": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rendez Vous Statut"
+          },
+          "prospect": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ProspectResumePayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "responsable": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ResponsableResumePayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "route_interne": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Route Interne"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "organisation_id",
+          "libelle",
+          "type",
+          "statut",
+          "due_at"
+        ],
+        "title": "TachePayload"
+      },
       "Transition": {
         "properties": {
           "expected_version": {
@@ -19232,6 +20201,17 @@
             "type": "string",
             "format": "uuid",
             "title": "Organisation Id"
+          },
+          "organisation_nom": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Organisation Nom"
           },
           "etat": {
             "type": "string",
@@ -19473,6 +20453,18 @@
       },
       "app__api__prospection_projection_schemas__OrganisationPayload": {
         "properties": {
+          "sollicitation_telephone_autorisee": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sollicitation Telephone Autorisee",
+            "description": "Autorisation courante selon la politique de sollicitation ; la présence d’un numéro reste distincte."
+          },
           "responsable_id": {
             "anyOf": [
               {
