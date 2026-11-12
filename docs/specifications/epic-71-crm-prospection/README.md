@@ -1,8 +1,21 @@
 # EPIC 71 — Localeo CRM, prospection Animation et Coffrets
 
-Spécification **V1.3 — 6 novembre 2026**, détaillant **E71-EVOL-05/06/07** sur le
-socle V1.2/E71-EVOL-04. [Backlog et critères](../../roadmap/en-cours/epic-71-crm-prospection-animation-coffrets-pro-backlog.md).
-État produit : **En cours** dans la [roadmap](../../roadmap/README.md). V1.3 désigne
+**E71-EVOL-09, 12 novembre 2026 :** [carte par priorité commerciale ou responsable](import-carte.md#e71-evol-09--deux-axes-de-lecture-12-novembre-2026),
+CA-74 à 77, répartition des communes mixtes et légende accessible. Spécification
+V1.5 ; implémentation locale vérifiée, [preuves et limites](verification-livraison.md#e71-evol-09--carte-par-priorité-ou-responsable-12-novembre-2026).
+Total courant : **77 identifiants, 76 actifs, CA-24 reporté** ; statut de l’epic inchangé.
+
+**Évolution du 12 novembre 2026 — E71-EVOL-08 :**
+[agenda partagé et rendez-vous commerciaux](rendez-vous.md), critères CA-62 à 73.
+Agenda intégré et validation par le collaborateur concerné confirmés. Réalisation
+locale vérifiée ; [preuves et limites](verification-livraison.md#e71-evol-08--agenda-et-rendez-vous-12-novembre-2026).
+Aucune migration TEST ni activation effectuée pour cette évolution.
+Cette évolution portait l’ensemble à 73 identifiants, dont 72 actifs et CA-24 reporté.
+
+Spécification **V1.5 — 12 novembre 2026**, ajoutant **E71-EVOL-08/09** à la
+V1.3/E71-EVOL-05/06/07 du 6 novembre et au socle V1.2/E71-EVOL-04.
+[Backlog et critères](../../roadmap/en-cours/epic-71-crm-prospection-animation-coffrets-pro-backlog.md).
+État produit : **En cours** dans la [roadmap](../../roadmap/README.md). V1.5 désigne
 la version de conception, pas une release applicative : les fonctions d’actualisation et de calcul sont maintenant implémentées localement,
 avec migrations v295–v298, API privées, workers et PWA. Leur activation sur un
 environnement et les preuves de capacité restantes sont décrites dans le bilan. [Prise en main actuelle](guide-utilisateur.md),
@@ -26,7 +39,7 @@ capture/calcul/carte implémentés et testés localement ; dix critères dont la
 Libellés « Action prévue le » et « Me rappeler le », aides et cohérence des écrans,
 sans changement des règles. **Implémentation locale du 6 novembre vérifiée**,
 CA-60/61 ; aucun déploiement effectué.
-L’ensemble compte désormais **61 IDs, 60 actifs et CA-24 reporté**.
+Au 6 novembre, l’ensemble comptait **61 IDs, 60 actifs et CA-24 reporté**.
 
 ## Préparation des nouvelles évolutions — 6 novembre 2026
 

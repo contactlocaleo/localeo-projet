@@ -260,6 +260,105 @@ Conservation des fichiers/aperçus/rapports et références de rapprochement : p
 
 ## Localisation et carte maintenue en V1
 
+### E71-EVOL-09 — deux axes de lecture, 12 novembre 2026
+
+Demande : visualiser les prospects par **niveau de priorité** ou par
+**responsable**, avec une couleur par catégorie. L’évolution complète CA-54/55
+et ajoute CA-74 à 77 ; l’epic reste En cours. La carte générale était
+monochrome ; une autre carte de Qualification affichait les niveaux d’un seul
+profil. Le sélecteur **Colorer par** est disponible sur la carte générale, sans
+passage obligatoire par Qualification.
+
+- **Priorité commerciale**, sélection initiale : réutiliser le niveau calculé
+  actuel du prospect (Prioritaire, À qualifier, À explorer, Potentiel à vérifier,
+  Non calculé, À recalculer). La priorité manuelle Haute/Normale d’un dossier
+  reste un filtre distinct, nommé explicitement **Priorité du dossier**.
+- **Responsable du prospect** : une couleur stable par identifiant de
+  collaborateur, son nom dans la légende ; Non attribué reste une catégorie
+  distincte. Un collaborateur devenu inéligible garde son identité et la mention
+  À réaffecter. Le responsable d’un dossier ne remplace jamais celui du prospect.
+- Changer d’axe conserve recherche, filtres, centre et zoom. L’axe est dans
+  l’URL ; retour navigateur et rechargement retrouvent le choix. Le lien vers
+  les prospects conserve les filtres métier, sans transmettre l’axe visuel à
+  une API de liste qui ne le consomme pas.
+- Une commune avec plusieurs catégories présente un point à segments
+  proportionnels. La légende, la fenêtre du point et la liste des communes
+  exposent les intitulés et effectifs. Aucun niveau ou responsable majoritaire
+  n’est présenté comme celui de tous les prospects de la commune.
+- Le niveau Commune/EPCI est obtenu avec le profil propre de chaque prospect.
+  Les associations, commerces et autres profils non disponibles restent visibles
+  sous **Profil de priorité non disponible**. Les catégories comptent des
+  prospects ; elles ne produisent aucun rang commun entre profils, score moyen
+  ou note de commune. Un siège d’EPCI ne transmet aucun niveau à la commune.
+- Le niveau respecte le contexte des filtres de dossiers, comme la projection
+  Qualification existante. Par exemple, **Gagnée** ou **Coffrets** peut afficher
+  **Non calculé** quand aucun résultat ne correspond à un dossier Animation actif
+  compatible, même si une ancienne priorité est conservée dans l’historique.
+  L’interface explique ce contexte ; elle ne réutilise pas une priorité hors filtre.
+- La couleur ne porte pas seule l’information : noms, effectifs et mentions
+  restent visibles, y compris sans fond de carte. Les couleurs des responsables
+  sont déterministes par UUID, indépendantes du tri, des filtres et des pages ;
+  une grande équipe peut présenter des teintes proches, distinguées par leurs noms.
+
+**Contrat de lecture.** GET `/internal/prospection/carte` accepte le paramètre
+fermé facultatif `coloration=PRIORITE|RESPONSABLE`. La PWA envoie explicitement
+PRIORITE initialement. Sans ce paramètre, la projection historique reste
+disponible. Les champs, filtres, totaux régionaux/nationaux, bbox, zoom et plafond
+de 500 communes sont conservés. Les réponses colorées ajoutent :
+
+- `coloration`, `legende:[{cle,libelle,responsable_id,a_reaffecter}]` ;
+- dans chaque groupe, `repartition:[{cle,effectif}]`, dont la somme est
+  exactement `prospects` ;
+- `repartition_limitee` et `responsables_non_detailles`.
+
+Les clés de priorité sont les six niveaux actuels et `PROFIL_NON_DISPONIBLE`.
+Les clés responsables sont leur UUID, `NON_ATTRIBUE` et, si nécessaire,
+`AUTRES_RESPONSABLES`. La légende concerne les seuls groupes affichés. Pour
+borner le résultat, les 24 responsables les plus représentés sont détaillés
+(effectif décroissant, UUID pour départager) ; les autres sont regroupés avec
+leur effectif exact et le nombre de collaborateurs non détaillés. L’interface
+explique ce regroupement et invite à affiner par département ou responsable.
+Ce regroupement n’est jamais coloré comme un collaborateur particulier.
+Au plus 26 catégories par groupe et dans la légende en mode responsable ;
+sept en mode priorité. Aucune récupération exhaustive de l’annuaire navigateur.
+
+**Propriétaires et invariants.** Le domaine Prospection conserve les règles de
+priorité, validité des faits et affectation. Cette évolution est une projection
+de lecture : l’adaptateur réutilise `RepositoryPriorite.projection_sql`, le même
+filtre d’organisations et le responsable canonique de `crm_organisations`.
+Une seule ligne par prospect précède l’agrégation ; plusieurs dossiers ne
+multiplient pas les effectifs. Les droits `crm.consulter`, le cache privé interdit,
+les garde-fous de saturation et le comportement de révocation sont conservés.
+Aucune lecture de carte ne calcule une nouvelle priorité, ne réaffecte un
+prospect, ni ne contacte un collaborateur. Aucune donnée CRM dans les tuiles.
+
+**Capacité et preuves prévues.** Agrégation SQL, sélection de 500 communes avant
+constitution de la légende, noms chargés en jointure ou requête groupée ; au plus
+deux lectures SQL métier, hors réglages transactionnels existants. Mesurer
+1 000/10 000 prospects avec dossiers multiples, responsables nombreux, historique
+de qualification et filtres rares ; p95 service/SQL local < 1 s pour les deux
+axes. Conserver les plans `EXPLAIN ANALYZE BUFFERS`, compter les requêtes et
+tester lecture mêlée à une réaffectation. Ce budget est une cible avant mesure,
+pas une garantie de capacité hébergée. Affichage borné, réponses obsolètes ignorées
+et erreur distinguée d’un résultat vide.
+
+| Critère | Résultat observable | Preuves prévues / impacts |
+| --- | --- | --- |
+| CA-74 | Changer d’axe sur Carte, conserver filtres et emprise, retrouver le choix via URL | Parcours navigateur PC/mobile, clavier, rechargement et liens liste ; guide utilisateur et sécurité du retour de connexion |
+| CA-75 | Couleurs, légende et effectifs exacts, y compris commune mixte et propriétaire révoqué | SQL réel, filtres liste/carte, priorité périmée/absente, profil non disponible, sans attribution, propriétaire différent du dossier ; DTO et OpenAPI |
+| CA-76 | Lire les catégories sans dépendre uniquement de la couleur ; aucune teinte instable après filtre | Recette 320/390/1280 px, captures, noms accessibles, erreur/reprise et absence de fond de carte |
+| CA-77 | Coût borné, données privées et règles préservées | Mesures N/10N, requêtes/plans, lecture/écriture concurrentes, plus de 24 responsables et 500 communes ; contrôles d’architecture et revue indépendante |
+
+**Livraison et impacts.** Backend/PWA CRM et documentation canonique seulement.
+Pro, Animation et Marketplace ne consomment pas cette API privée. Pas de nouveau
+schéma ni paramètre d’environnement prévu : les index et faits existent déjà.
+Le générateur n’a aucun nouvel objet ou état à produire ; les fixtures de recette
+ajoutent les répartitions mixtes et les limites. Les données existantes sont lues
+sans migration ni reprise. Mettre à jour l’OpenAPI et les guides avec le code ;
+vérifier le rendu après livraison. Les migrations v311/v312 de l’agenda précédent
+restent indépendantes de cette évolution. Les résultats sont consignés au
+[bilan](verification-livraison.md).
+
 ### Périmètre régional — ajustement du 4 novembre 2026
 
 La carte est limitée à la **Nouvelle-Aquitaine (région INSEE 75)**. Le filtre

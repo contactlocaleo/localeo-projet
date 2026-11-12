@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Localeo CRM — E71",
-    "version": "1.2"
+    "version": "1.5"
   },
   "paths": {
     "/internal/prospection/organisations": {
@@ -3622,6 +3622,26 @@
             }
           },
           {
+            "name": "coloration",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "PRIORITE",
+                    "RESPONSABLE"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Coloration"
+            }
+          },
+          {
             "name": "sous_type_collectivite",
             "in": "query",
             "required": false,
@@ -4036,7 +4056,17 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/CarteColoreePayload"
+                    },
+                    {
+                      "$ref": "#/components/schemas/CarteHistoriquePayload"
+                    }
+                  ],
+                  "title": "Response Carte Internal Prospection Carte Get"
+                }
               }
             }
           },
@@ -7887,6 +7917,627 @@
         ]
       }
     },
+    "/internal/prospection/agenda/me": {
+      "get": {
+        "tags": [
+          "Prospection"
+        ],
+        "summary": "Mon Agenda",
+        "operationId": "mon_agenda_internal_prospection_agenda_me_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgendaPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Erreur de validation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Prospection"
+        ],
+        "summary": "Modifier Mon Agenda",
+        "operationId": "modifier_mon_agenda_internal_prospection_agenda_me_put",
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaModification"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgendaPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/prospection/agenda/equipe": {
+      "get": {
+        "tags": [
+          "Prospection"
+        ],
+        "summary": "Equipe Agenda",
+        "operationId": "equipe_agenda_internal_prospection_agenda_equipe_get",
+        "parameters": [
+          {
+            "name": "debut_at",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "title": "Debut At"
+            }
+          },
+          {
+            "name": "fin_at",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "title": "Fin At"
+            }
+          },
+          {
+            "name": "duree_minutes",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 240,
+              "minimum": 15,
+              "default": 30,
+              "title": "Duree Minutes"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2000
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageEquipeAgenda"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/prospection/agenda/creneaux": {
+      "get": {
+        "tags": [
+          "Prospection"
+        ],
+        "summary": "Creneaux Agenda",
+        "operationId": "creneaux_agenda_internal_prospection_agenda_creneaux_get",
+        "parameters": [
+          {
+            "name": "responsable_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Responsable Id"
+            }
+          },
+          {
+            "name": "debut_at",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "title": "Debut At"
+            }
+          },
+          {
+            "name": "fin_at",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "title": "Fin At"
+            }
+          },
+          {
+            "name": "duree_minutes",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 240,
+              "minimum": 15,
+              "default": 30,
+              "title": "Duree Minutes"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2000
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageCreneauxAgenda"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/prospection/rendez-vous": {
+      "get": {
+        "tags": [
+          "Prospection"
+        ],
+        "summary": "Liste Rendez Vous",
+        "operationId": "liste_rendez_vous_internal_prospection_rendez_vous_get",
+        "parameters": [
+          {
+            "name": "debut_at",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "title": "Debut At"
+            }
+          },
+          {
+            "name": "fin_at",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "title": "Fin At"
+            }
+          },
+          {
+            "name": "responsable_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Responsable Id"
+            }
+          },
+          {
+            "name": "organisation_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Organisation Id"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2000
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageRendezVousAgenda"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Prospection"
+        ],
+        "summary": "Creer Rendez Vous",
+        "operationId": "creer_rendez_vous_internal_prospection_rendez_vous_post",
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RendezVousCreation"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RendezVousPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/prospection/rendez-vous/{id}": {
+      "get": {
+        "tags": [
+          "Prospection"
+        ],
+        "summary": "Rendez Vous",
+        "operationId": "rendez_vous_internal_prospection_rendez_vous__id__get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RendezVousPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/prospection/rendez-vous/{id}/actions": {
+      "post": {
+        "tags": [
+          "Prospection"
+        ],
+        "summary": "Action Rendez Vous",
+        "operationId": "action_rendez_vous_internal_prospection_rendez_vous__id__actions_post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/ValiderRendezVous"
+                  },
+                  {
+                    "$ref": "#/components/schemas/RealiserRendezVous"
+                  },
+                  {
+                    "$ref": "#/components/schemas/AnnulerRendezVous"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ReporterRendezVous"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ReaffecterRendezVous"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ModifierRendezVous"
+                  }
+                ],
+                "discriminator": {
+                  "propertyName": "action",
+                  "mapping": {
+                    "VALIDER": "#/components/schemas/ValiderRendezVous",
+                    "REALISER": "#/components/schemas/RealiserRendezVous",
+                    "ANNULER": "#/components/schemas/AnnulerRendezVous",
+                    "REPORTER": "#/components/schemas/ReporterRendezVous",
+                    "REAFFECTER": "#/components/schemas/ReaffecterRendezVous",
+                    "MODIFIER": "#/components/schemas/ModifierRendezVous"
+                  }
+                },
+                "title": "Body"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RendezVousPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
     "/internal/prospection/preferences-rappels/me": {
       "get": {
         "tags": [
@@ -8079,6 +8730,132 @@
             "content": {
               "application/json": {
                 "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/prospection/notifications": {
+      "get": {
+        "tags": [
+          "Prospection"
+        ],
+        "summary": "Notifications Crm",
+        "operationId": "notifications_crm_internal_prospection_notifications_get",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2000
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageNotificationsCRM"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/prospection/notifications/{identifiant}/lire": {
+      "post": {
+        "tags": [
+          "Prospection"
+        ],
+        "summary": "Lire Notification Crm",
+        "operationId": "lire_notification_crm_internal_prospection_notifications__identifiant__lire_post",
+        "parameters": [
+          {
+            "name": "identifiant",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Identifiant"
+            }
+          },
+          {
+            "name": "idempotency-key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LectureNotificationCRM"
+                }
               }
             }
           },
@@ -9414,6 +10191,103 @@
         ],
         "title": "AdopterActualisation"
       },
+      "AgendaModification": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Expected Version"
+          },
+          "plages": {
+            "items": {
+              "$ref": "#/components/schemas/PlageAgenda"
+            },
+            "type": "array",
+            "maxItems": 56,
+            "title": "Plages"
+          },
+          "indisponibilites": {
+            "items": {
+              "$ref": "#/components/schemas/IndisponibiliteAgenda"
+            },
+            "type": "array",
+            "maxItems": 100,
+            "title": "Indisponibilites"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "plages",
+          "indisponibilites"
+        ],
+        "title": "AgendaModification"
+      },
+      "AgendaPayload": {
+        "properties": {
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "fuseau": {
+            "type": "string",
+            "const": "Europe/Paris",
+            "title": "Fuseau",
+            "default": "Europe/Paris"
+          },
+          "plages": {
+            "items": {
+              "$ref": "#/components/schemas/PlageAgenda"
+            },
+            "type": "array",
+            "title": "Plages"
+          },
+          "indisponibilites": {
+            "items": {
+              "$ref": "#/components/schemas/IndisponibiliteAgenda"
+            },
+            "type": "array",
+            "title": "Indisponibilites"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "version",
+          "plages",
+          "indisponibilites"
+        ],
+        "title": "AgendaPayload"
+      },
+      "AnnulerRendezVous": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Expected Version"
+          },
+          "action": {
+            "type": "string",
+            "const": "ANNULER",
+            "title": "Action"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 1,
+            "title": "Motif"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "action",
+          "motif"
+        ],
+        "title": "AnnulerRendezVous"
+      },
       "ApiErrorResponse": {
         "properties": {
           "detail": {
@@ -10153,6 +11027,209 @@
         },
         "type": "object",
         "title": "CandidatPayload"
+      },
+      "CarteColoreePayload": {
+        "properties": {
+          "groups": {
+            "items": {
+              "$ref": "#/components/schemas/GroupeCarteColoreePayload"
+            },
+            "type": "array",
+            "maxItems": 500,
+            "title": "Groups"
+          },
+          "sans_commune": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Sans Commune"
+          },
+          "prospects_total": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Prospects Total"
+          },
+          "truncated": {
+            "type": "boolean",
+            "title": "Truncated",
+            "default": false
+          },
+          "geolocalisation_en_attente": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Geolocalisation En Attente",
+            "default": 0
+          },
+          "bbox": {
+            "anyOf": [
+              {
+                "prefixItems": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "number"
+                  }
+                ],
+                "type": "array",
+                "maxItems": 4,
+                "minItems": 4
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bbox"
+          },
+          "zoom": {
+            "type": "integer",
+            "maximum": 20.0,
+            "minimum": 1.0,
+            "title": "Zoom",
+            "default": 5
+          },
+          "generated_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Generated At"
+          },
+          "coloration": {
+            "type": "string",
+            "enum": [
+              "PRIORITE",
+              "RESPONSABLE"
+            ],
+            "title": "Coloration"
+          },
+          "legende": {
+            "items": {
+              "$ref": "#/components/schemas/LegendeCartePayload"
+            },
+            "type": "array",
+            "maxItems": 26,
+            "title": "Legende"
+          },
+          "responsables_non_detailles": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Responsables Non Detailles"
+          },
+          "repartition_limitee": {
+            "type": "boolean",
+            "title": "Repartition Limitee"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "groups",
+          "sans_commune",
+          "prospects_total",
+          "coloration",
+          "legende",
+          "responsables_non_detailles",
+          "repartition_limitee"
+        ],
+        "title": "CarteColoreePayload"
+      },
+      "CarteHistoriquePayload": {
+        "properties": {
+          "groups": {
+            "items": {
+              "$ref": "#/components/schemas/GroupeCartePayload"
+            },
+            "type": "array",
+            "maxItems": 500,
+            "title": "Groups"
+          },
+          "sans_commune": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Sans Commune"
+          },
+          "prospects_total": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Prospects Total"
+          },
+          "truncated": {
+            "type": "boolean",
+            "title": "Truncated",
+            "default": false
+          },
+          "geolocalisation_en_attente": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Geolocalisation En Attente",
+            "default": 0
+          },
+          "bbox": {
+            "anyOf": [
+              {
+                "prefixItems": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "number"
+                  }
+                ],
+                "type": "array",
+                "maxItems": 4,
+                "minItems": 4
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bbox"
+          },
+          "zoom": {
+            "type": "integer",
+            "maximum": 20.0,
+            "minimum": 1.0,
+            "title": "Zoom",
+            "default": 5
+          },
+          "generated_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Generated At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "groups",
+          "sans_commune",
+          "prospects_total"
+        ],
+        "title": "CarteHistoriquePayload"
       },
       "CartePrioritePayload": {
         "properties": {
@@ -11046,6 +12123,27 @@
           "organisation_id"
         ],
         "title": "CreationDossier"
+      },
+      "CreneauPayload": {
+        "properties": {
+          "debut_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Debut At"
+          },
+          "fin_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Fin At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "debut_at",
+          "fin_at"
+        ],
+        "title": "CreneauPayload"
       },
       "DecisionActualisation": {
         "properties": {
@@ -13242,6 +14340,97 @@
         "type": "object",
         "title": "FiltresPriorite"
       },
+      "GroupeCarteColoreePayload": {
+        "properties": {
+          "insee": {
+            "type": "string",
+            "title": "Insee"
+          },
+          "nom": {
+            "type": "string",
+            "title": "Nom"
+          },
+          "latitude": {
+            "type": "number",
+            "title": "Latitude"
+          },
+          "longitude": {
+            "type": "number",
+            "title": "Longitude"
+          },
+          "prospects": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Prospects"
+          },
+          "dossiers": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Dossiers"
+          },
+          "repartition": {
+            "items": {
+              "$ref": "#/components/schemas/RepartitionCartePayload"
+            },
+            "type": "array",
+            "maxItems": 26,
+            "title": "Repartition"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "insee",
+          "nom",
+          "latitude",
+          "longitude",
+          "prospects",
+          "dossiers",
+          "repartition"
+        ],
+        "title": "GroupeCarteColoreePayload"
+      },
+      "GroupeCartePayload": {
+        "properties": {
+          "insee": {
+            "type": "string",
+            "title": "Insee"
+          },
+          "nom": {
+            "type": "string",
+            "title": "Nom"
+          },
+          "latitude": {
+            "type": "number",
+            "title": "Latitude"
+          },
+          "longitude": {
+            "type": "number",
+            "title": "Longitude"
+          },
+          "prospects": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Prospects"
+          },
+          "dossiers": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Dossiers"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "insee",
+          "nom",
+          "latitude",
+          "longitude",
+          "prospects",
+          "dossiers"
+        ],
+        "title": "GroupeCartePayload"
+      },
       "GroupeCartePrioritePayload": {
         "properties": {
           "insee": {
@@ -13319,6 +14508,39 @@
           "profil"
         ],
         "title": "GroupeCartePrioritePayload"
+      },
+      "IndisponibiliteAgenda": {
+        "properties": {
+          "debut_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Debut At"
+          },
+          "fin_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Fin At"
+          },
+          "motif": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 300
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motif"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "debut_at",
+          "fin_at"
+        ],
+        "title": "IndisponibiliteAgenda"
       },
       "JobActualisation": {
         "properties": {
@@ -13473,6 +14695,63 @@
           "empreinte_attendue"
         ],
         "title": "LancementPriorite"
+      },
+      "LectureNotificationCRM": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "lue_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Lue At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "lue_at"
+        ],
+        "title": "LectureNotificationCRM"
+      },
+      "LegendeCartePayload": {
+        "properties": {
+          "cle": {
+            "type": "string",
+            "title": "Cle"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "responsable_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Responsable Id"
+          },
+          "a_reaffecter": {
+            "type": "boolean",
+            "title": "A Reaffecter"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "cle",
+          "libelle",
+          "responsable_id",
+          "a_reaffecter"
+        ],
+        "title": "LegendeCartePayload"
       },
       "Levee": {
         "properties": {
@@ -13653,6 +14932,203 @@
           "created_at"
         ],
         "title": "LotPayload"
+      },
+      "MembreAgendaPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "prochaine_disponibilite": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CreneauPayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "libelle",
+          "prochaine_disponibilite"
+        ],
+        "title": "MembreAgendaPayload"
+      },
+      "ModifierRendezVous": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Expected Version"
+          },
+          "action": {
+            "type": "string",
+            "const": "MODIFIER",
+            "title": "Action"
+          },
+          "titre": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 300,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Titre"
+          },
+          "note": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 10000
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Note"
+          },
+          "remind_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Remind At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "action"
+        ],
+        "title": "ModifierRendezVous"
+      },
+      "NotificationCRMPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "tache_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Tache Id"
+          },
+          "type_evenement": {
+            "type": "string",
+            "enum": [
+              "RAPPEL",
+              "AFFECTATION"
+            ],
+            "title": "Type Evenement"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "evenement_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Evenement At"
+          },
+          "lue_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lue At"
+          },
+          "organisation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Organisation Id"
+          },
+          "opportunite_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Opportunite Id"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "due_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Due At"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          },
+          "motif": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motif"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "tache_id",
+          "type_evenement",
+          "created_at",
+          "evenement_at",
+          "lue_at",
+          "organisation_id",
+          "opportunite_id",
+          "libelle",
+          "due_at",
+          "statut",
+          "motif"
+        ],
+        "title": "NotificationCRMPayload"
       },
       "ObjetActualise": {
         "properties": {
@@ -14347,6 +15823,72 @@
         "type": "object",
         "title": "PageContactsPayload"
       },
+      "PageCreneauxAgenda": {
+        "properties": {
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/CreneauPayload"
+            },
+            "type": "array",
+            "title": "Items"
+          }
+        },
+        "type": "object",
+        "required": [
+          "has_more",
+          "next_cursor",
+          "items"
+        ],
+        "title": "PageCreneauxAgenda"
+      },
+      "PageEquipeAgenda": {
+        "properties": {
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/MembreAgendaPayload"
+            },
+            "type": "array",
+            "title": "Items"
+          }
+        },
+        "type": "object",
+        "required": [
+          "has_more",
+          "next_cursor",
+          "items"
+        ],
+        "title": "PageEquipeAgenda"
+      },
       "PageEvaluationsPayload": {
         "properties": {
           "items": {
@@ -14614,6 +16156,39 @@
         ],
         "title": "PageMembresPayload"
       },
+      "PageNotificationsCRM": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/NotificationCRMPayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "has_more",
+          "next_cursor"
+        ],
+        "title": "PageNotificationsCRM"
+      },
       "PageOpportunitesPayload": {
         "properties": {
           "total": {
@@ -14828,6 +16403,39 @@
         ],
         "title": "PageProspectsPrioritePayload"
       },
+      "PageRendezVousAgenda": {
+        "properties": {
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/RendezVousPayload"
+            },
+            "type": "array",
+            "title": "Items"
+          }
+        },
+        "type": "object",
+        "required": [
+          "has_more",
+          "next_cursor",
+          "items"
+        ],
+        "title": "PageRendezVousAgenda"
+      },
       "PageUnitesPrioritePayload": {
         "properties": {
           "has_more": {
@@ -14859,6 +16467,34 @@
           "items"
         ],
         "title": "PageUnitesPrioritePayload"
+      },
+      "PlageAgenda": {
+        "properties": {
+          "jour": {
+            "type": "integer",
+            "maximum": 6.0,
+            "minimum": 0.0,
+            "title": "Jour"
+          },
+          "debut": {
+            "type": "string",
+            "pattern": "^(?:[01][0-9]|2[0-3]):[0-5][0-9]$",
+            "title": "Debut"
+          },
+          "fin": {
+            "type": "string",
+            "pattern": "^(?:[01][0-9]|2[0-3]):[0-5][0-9]$",
+            "title": "Fin"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "jour",
+          "debut",
+          "fin"
+        ],
+        "title": "PlageAgenda"
       },
       "PotentielPayload": {
         "properties": {
@@ -16614,6 +18250,68 @@
         ],
         "title": "Rattachement"
       },
+      "ReaffecterRendezVous": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Expected Version"
+          },
+          "action": {
+            "type": "string",
+            "const": "REAFFECTER",
+            "title": "Action"
+          },
+          "responsable_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Responsable Id"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 1,
+            "title": "Motif"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "action",
+          "responsable_id",
+          "motif"
+        ],
+        "title": "ReaffecterRendezVous"
+      },
+      "RealiserRendezVous": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Expected Version"
+          },
+          "action": {
+            "type": "string",
+            "const": "REALISER",
+            "title": "Action"
+          },
+          "compte_rendu": {
+            "type": "string",
+            "maxLength": 10000,
+            "minLength": 1,
+            "title": "Compte Rendu"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "action",
+          "compte_rendu"
+        ],
+        "title": "RealiserRendezVous"
+      },
       "ReferenceEvaluationInput": {
         "properties": {
           "evaluation_id": {
@@ -16796,6 +18494,337 @@
           "resume_potentiel"
         ],
         "title": "ReferencesPayload"
+      },
+      "RendezVousCreation": {
+        "properties": {
+          "organisation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Organisation Id"
+          },
+          "contact_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Contact Id"
+          },
+          "opportunite_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Opportunite Id"
+          },
+          "responsable_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Responsable Id"
+          },
+          "titre": {
+            "type": "string",
+            "maxLength": 300,
+            "minLength": 1,
+            "title": "Titre"
+          },
+          "note": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 10000
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Note"
+          },
+          "debut_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Debut At"
+          },
+          "fin_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Fin At"
+          },
+          "remind_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Remind At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "organisation_id",
+          "responsable_id",
+          "titre",
+          "debut_at",
+          "fin_at"
+        ],
+        "title": "RendezVousCreation"
+      },
+      "RendezVousPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "organisation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Organisation Id"
+          },
+          "organisation_nom": {
+            "type": "string",
+            "title": "Organisation Nom"
+          },
+          "contact_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Contact Id"
+          },
+          "opportunite_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Opportunite Id"
+          },
+          "responsable_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Responsable Id"
+          },
+          "responsable_nom": {
+            "type": "string",
+            "title": "Responsable Nom"
+          },
+          "a_reaffecter": {
+            "type": "boolean",
+            "title": "A Reaffecter"
+          },
+          "titre": {
+            "type": "string",
+            "title": "Titre"
+          },
+          "note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Note"
+          },
+          "debut_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Debut At"
+          },
+          "fin_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Fin At"
+          },
+          "remind_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Remind At"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "PLANIFIE",
+              "VALIDE",
+              "REALISE",
+              "ANNULE"
+            ],
+            "title": "Statut"
+          },
+          "compte_rendu": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Compte Rendu"
+          },
+          "motif": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motif"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "tache_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Tache Id"
+          },
+          "tache_statut": {
+            "type": "string",
+            "enum": [
+              "OUVERTE",
+              "BLOQUEE",
+              "TERMINEE",
+              "ANNULEE"
+            ],
+            "title": "Tache Statut"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "organisation_id",
+          "organisation_nom",
+          "contact_id",
+          "opportunite_id",
+          "responsable_id",
+          "responsable_nom",
+          "a_reaffecter",
+          "titre",
+          "note",
+          "debut_at",
+          "fin_at",
+          "remind_at",
+          "statut",
+          "compte_rendu",
+          "motif",
+          "version",
+          "tache_id",
+          "tache_statut",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "RendezVousPayload"
+      },
+      "RepartitionCartePayload": {
+        "properties": {
+          "cle": {
+            "type": "string",
+            "title": "Cle"
+          },
+          "effectif": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Effectif"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "cle",
+          "effectif"
+        ],
+        "title": "RepartitionCartePayload"
+      },
+      "ReporterRendezVous": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Expected Version"
+          },
+          "action": {
+            "type": "string",
+            "const": "REPORTER",
+            "title": "Action"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 1,
+            "title": "Motif"
+          },
+          "debut_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Debut At"
+          },
+          "fin_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Fin At"
+          },
+          "remind_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Remind At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "action",
+          "motif",
+          "debut_at",
+          "fin_at"
+        ],
+        "title": "ReporterRendezVous"
       },
       "ResultatBloc": {
         "properties": {
@@ -17232,6 +19261,27 @@
           "tentatives"
         ],
         "title": "UnitePrioritePayload"
+      },
+      "ValiderRendezVous": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Expected Version"
+          },
+          "action": {
+            "type": "string",
+            "const": "VALIDER",
+            "title": "Action"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "action"
+        ],
+        "title": "ValiderRendezVous"
       },
       "VersionCibleActualisation": {
         "properties": {

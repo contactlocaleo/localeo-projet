@@ -23,6 +23,39 @@ L'ancienne installation et ses abonnements ne sont pas transférés automatiquem
 
 ## 2. Créer un prospect et préparer la suite
 
+### Planifier un rendez-vous commercial
+
+Dans **Agenda → Mes disponibilités**, indiquez vos plages hebdomadaires et vos
+absences, en heure de Paris. Plusieurs plages sont possibles dans une journée.
+Sans plage configurée, aucune disponibilité n’est proposée. Une absence qui
+recouvre un rendez-vous actif exige d’abord son report ou son annulation ;
+modifier vos horaires habituels ne déplace pas vos rendez-vous existants.
+
+Depuis une fiche prospect, choisissez **Nouveau rendez-vous**. Indiquez la durée
+recherchée et la date de départ : chaque membre affiche sa prochaine disponibilité.
+**Voir les créneaux** permet de choisir un autre horaire ; vous pouvez aussi saisir
+directement les dates et sélectionner le collaborateur. Ajoutez un titre, une
+note facultative et, si besoin, un rappel avant le rendez-vous. **Réserver le
+rendez-vous** vérifie une dernière fois la disponibilité. En cas de conflit,
+votre saisie reste disponible pour choisir un autre créneau.
+
+Le rendez-vous apparaît dans **Agenda**, dans les actions du prospect et dans
+les rappels avec une icône calendrier. **Planifié** réserve le créneau ; le
+collaborateur désigné utilise **Confirmer ma prise en charge** pour passer à
+**Validé**. Après l’entretien, **Enregistrer la réalisation** conserve son compte
+rendu et passe à **Réalisé**. **Planifier la prochaine action** ouvre le formulaire
+habituel avec le prospect déjà choisi.
+
+Un report ou une réaffectation demande un motif et une nouvelle confirmation du
+collaborateur. L’annulation libère le créneau et rend les anciens rappels caducs.
+Si la sollicitation du prospect est bloquée, l’alerte reste visible et le
+rendez-vous doit être traité explicitement.
+
+**Mes notifications** rassemble les nouvelles affectations et les rappels ;
+**Marquer comme lue** est distinct de la confirmation de prise en charge. Les
+notifications WebPush et e-mail suivent vos **Préférences** et les canaux activés
+sur la plateforme. La fiche du prospect n’est pas envoyée dans ces notifications.
+
 ### Se repérer dans les résultats
 
 Les listes affichent le **nombre total de résultats correspondant aux filtres**,
@@ -148,6 +181,29 @@ corriger.
 Choisissez un **Département**, puis **Filtrer** : la carte se recadre et conserve
 vos autres filtres de prospection. **Réinitialiser** revient à toute la région,
 et **Recentrer** retrouve la zone choisie après un déplacement ou un zoom.
+
+Le sélecteur **Colorer par** propose deux lectures :
+
+- **Priorité commerciale** : les niveaux calculés actuels, avec les mêmes
+  couleurs que Qualification. **Non calculé**, **À recalculer** et **Profil de
+  priorité non disponible** restent visibles. Le filtre **Priorité du dossier**
+  désigne séparément la priorité manuelle Haute/Normale. Les niveaux dépendent
+  des filtres de dossiers : Gagnée ou Coffrets peut donner Non calculé si aucun
+  résultat de qualification compatible n’est disponible.
+- **Responsable du prospect** : une couleur stable par collaborateur. Le
+  responsable retenu est celui de la fiche prospect. **Non attribué** est
+  distinct ; **À réaffecter** signale un responsable qui n’est plus éligible.
+
+Changer de lecture conserve les filtres et la position de la carte ; l’URL
+permet de retrouver ce choix après rechargement. Une commune mixte présente
+des segments proportionnels. La légende indique le nom et le nombre de
+prospects de chaque catégorie parmi les communes affichées ; les détails du
+point et la liste des communes permettent aussi de lire la répartition.
+
+Au-delà de 24 responsables, les autres sont réunis sous **Autres responsables**,
+avec leurs effectifs et le nombre de collaborateurs regroupés. Affinez par
+département ou responsable pour les détailler. Les couleurs restent stables
+après filtrage ; les noms distinguent les teintes proches dans une grande équipe.
 
 Un point représente le centre approximatif de la commune, pas l’adresse d’une
 personne. Cliquez sur un groupe pour ouvrir les prospects correspondants.

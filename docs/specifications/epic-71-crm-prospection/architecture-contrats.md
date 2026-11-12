@@ -156,12 +156,22 @@ Préfixe **`/internal/prospection`**, tags `internal` et `prospection`. Source c
 | Chronologie | GET/POST `/organisations/{id}/evenements`, dossier optionnel vérifié ; correction référant événement/version | Consulter / gérer |
 | Tâches | GET/POST `/taches`, POST `/taches/{id}/actions` (terminer/reporter/annuler/réaffecter), GET `/rappels` | Consulter / gérer ; cible et responsable autorisés |
 | Oppositions | POST `/organisations/{id}/oppositions` (cible structure ou `contact_id` de cette structure), POST `/oppositions/{id}/levee` | Gérer pour protéger / administrer pour lever |
-| Carte / communes | GET `/carte` (filtres, bbox/zoom, groupes bornés), GET `/communes` (recherche bornée), POST `/organisations/{id}/localisation` (INSEE confirmé/version) | Consulter / gérer |
+| Carte / communes | GET `/carte` (filtres, bbox/zoom, groupes bornés, coloration facultative PRIORITE ou RESPONSABLE), GET `/communes` (recherche bornée), POST `/organisations/{id}/localisation` (INSEE confirmé/version) | Consulter / gérer |
 | Tableau | GET `/tableau-de-bord`, `/indicateurs`, `/responsables` | Consulter ; responsables éligibles seulement |
 | Import | GET/POST `/sources-import` ; POST `/imports` multipart fichier + source/mode/format/responsable ; GET lot/aperçu/rapport ; POST décisions/confirmation/reprise/arrêt | Importer ; administration en plus pour changer un lien source existant |
 | Notifications | GET/PATCH `/preferences-rappels/me`, POST `/abonnements-push`, DELETE `/abonnements-push/{id}` | Gérer ; propriétaire imposé par session, pas par corps |
 
 Collections d’objets CRM (hors projection cartographique agrégée, plafonnée explicitement à 500 groupes) : `limit=25`, maximum 100, curseur keyset opaque lié à filtres/tri/version/autorité, `items`, `next_cursor`, `has_more`. Fiche = résumé et sous-listes paginées ; pas de tableau illimité de contacts/tâches/notes. Recherche nom/commune/email/téléphone normalisés ; index adaptés, champs libres exclus des logs. Prévoir tri `(updated_at DESC,id DESC)` avec navigation vivante annoncée ; rappels `(due_at,id)`. Un changement de filtre invalide le curseur ; aucun total exhaustif obligatoire à chaque page. Carte : projection agrégée `groups/truncated/bbox/zoom/generated_at` et totaux distincts, sans curseur ; son clic ouvre une liste de prospects keyset 25/100. Au-delà de 500 groupes, agréger ou signaler la troncature et demander zoom/filtre.
+
+La [coloration E71-EVOL-09](import-carte.md#e71-evol-09--deux-axes-de-lecture-12-novembre-2026)
+ajoute une répartition par groupe et une légende limitée aux communes affichées.
+La route utilise des DTO fermés `CarteHistoriquePayload`/`CarteColoreePayload` ;
+la PWA consomme directement ces projections, sans copie du contrat dans un autre
+frontend. Les priorités réutilisent la projection de validité existante ; les
+responsables viennent de la fiche prospect. Les 24 responsables détaillés et le
+reliquat sont agrégés dans le même snapshot que les effectifs, en une lecture SQL.
+Les palettes communes restent dans `crm-priorite.js`. Le serveur ne transmet
+aucun code couleur arbitraire ni attribut personnel au fournisseur de tuiles.
 
 Commandes POST/PATCH/DELETE métier : `Idempotency-Key` ; modification : `expected_version`. Clé liée à acteur/action/cible/empreinte, conflit si corps différent. `DELETE` abonnement contient version et conserve l'idempotence de révocation. Réponses de mutation : identifiant/version/effet confirmé. API stricte : champs inconnus refusés, IDs cross-prospect refusés, serveur décide auteur et destinataire. Tâche sollicitante : cible STRUCTURE ou contact_id du même prospect, canal explicite ; contrôler opposition globale, du contact et de la coordonnée normalisée réutilisée. Les lectures de rattachements ne révèlent que les résumés métier autorisés.
 

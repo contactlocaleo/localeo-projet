@@ -586,6 +586,10 @@
       "source_path": "docs/specifications/epic-71-crm-prospection/niveau-qualification.md"
     },
     {
+      "path": "docs/ops/crm/rendez-vous.md",
+      "source_path": "docs/specifications/epic-71-crm-prospection/rendez-vous.md"
+    },
+    {
       "path": "docs/ops/crm/README.md",
       "source_path": "docs/specifications/epic-71-crm-prospection/README.md"
     },

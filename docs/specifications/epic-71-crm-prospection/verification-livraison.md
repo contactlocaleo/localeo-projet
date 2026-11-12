@@ -2,6 +2,206 @@
 
 [Spécification V1](README.md), [backlog canonique](../../roadmap/en-cours/epic-71-crm-prospection-animation-coffrets-pro-backlog.md). **Implémentation locale et vérification en cours**. Le bilan ci-dessous distingue les tests réalisés des réserves. Aucun import réel ni envoi fournisseur. Les sections historiques de spécification restent datées. La carte reste en V1 sur confirmation utilisateur ; CSV standard seul et report de CA-24 (import spécifique Gironde) sont également confirmés.
 
+## E71-EVOL-09 — carte par priorité ou responsable, 12 novembre 2026
+
+Référence de livraison Git du 12 novembre : backend **`25224e0`**, regroupant
+l’agenda E71-EVOL-08 et la carte E71-EVOL-09. Les migrations v311/v312 restent
+à appliquer sur TEST avant utilisation de l’agenda ; ce commit ne les exécute pas.
+
+Périmètre : [deux axes de lecture](import-carte.md#e71-evol-09--deux-axes-de-lecture-12-novembre-2026),
+CA-74 à 77. Backend/PWA CRM et documentation seulement ; aucun changement des
+trois frontends voisins. Les travaux locaux agenda et ERP antérieurs sont
+conservés. Aucun déploiement, import réel ou recalcul de qualification.
+
+La PWA propose **Colorer par : Priorité commerciale / Responsable du prospect**.
+Les communes mixtes ont des segments proportionnels ; légende, fenêtre du point
+et liste montrent les catégories et leurs effectifs. Un responsable non éligible
+est nommé À réaffecter, un prospect sans responsable reste Non attribué. Les
+24 responsables détaillés, le reliquat et les 500 communes sont bornés côté SQL.
+
+| Critères | Preuves exécutées |
+| --- | --- |
+| CA-74 | Recette Leaflet réelle, données/tuiles synthétiques : sélection, URL, rechargement, passage à la liste puis retour navigateur ; axe, filtres, zoom et emprise conservés. Tests de retour de connexion sécurisé et multi-niveaux. |
+| CA-75 | Tests PostgreSQL : six niveaux, profil non disponible, Commune/EPCI distincts, validité/génération/règle périmée, changement de profil, contexte de dossier, responsable prospect distinct de celui du dossier, révoqué et non attribué ; plafonds 24/500, exclusion de la 501e commune de la légende. HTTP : enum, DTO, refus d’accès et projection historique conservés. |
+| CA-76 | Recette 320/390/1280 px, nom et effectif accessibles, ouverture clavier, couleurs UUID stables après tri/filtre, erreur/reprise, données obsolètes ignorées ; panne réelle de tuiles simulée HTTP503 puis configuration sans fond, deux axes encore lisibles dans la légende et les listes. Captures relues. |
+| CA-77 | Répartition et totaux issus d’un même snapshot, une lecture SQL métier ; tests N/10N et lecture/réaffectation concurrentes ci-dessous. Contrôles d’architecture, de confidentialité des ressources et revue indépendante. |
+
+Rapports locaux du backend, sans données réelles :
+
+- **6 tests HTTP/PostgreSQL réussis** : `tmp/crm-map-core-tests.xml` ;
+  **25 tests de compatibilité carte réussis** : `tmp/crm-map-core-legacy.xml`.
+  **21 tests finaux Qualification/HTTP/PostgreSQL réussis**, sans skip :
+  `tmp/crm-map-core-final.xml`. Ces groupes se recouvrent et ne s’additionnent pas.
+- **38 tests réussis** de navigation carte/agenda et protection PWA :
+  `tmp/crm-map/navigation-01.xml`. **25 tests réussis** de cycle PWA :
+  `tmp/crm-map/lifecycle-01.xml`, dont changement de version après modification
+  des modules carte, priorité et agenda. L’intégration ajoute le module agenda
+  à l’empreinte, manquant dans la précédente évolution. Les avertissements
+  SQLite concernent son adaptateur datetime déprécié.
+- **700 contrôles réussis** d’architecture et de couverture domaine/use cases :
+  `tmp/crm-map/architecture-01.xml`. Aucun changement de production après ce
+  passage, hormis le centre Mercator couvert par la recette et la régression CRM.
+- **Sept groupes de vérifications navigateur réussis** :
+  `tmp/crm-map-ui-retour-fond-final.log`, captures `tmp/crm-map-ui-c32e0e23`.
+  La première preuve de retour détectait un décalage d’emprise : le centre
+  utilise désormais les coordonnées projetées Mercator au lieu d’une moyenne
+  de latitudes. L’assertion d’égalité d’emprise n’a pas été relâchée.
+- Régressions CRM, Agenda et Qualification réussies :
+  `tmp/crm-map-ui-regression-crm.log`, `tmp/crm-map-ui-regression-agenda.log`,
+  `tmp/crm-map-ui-regression-priorite.log`. CRM rejoué après correction du centre :
+  `tmp/crm-map-ui-retour-regression-crm.log`.
+
+**Capacité locale : trois tests finaux réussis**, PostgreSQL 18 jetable,
+20 lectures par axe et filtre, trois dossiers par prospect, 40 responsables,
+trois publications historiques de qualification. Une lecture SQL métier par
+appel, hors réglages transactionnels existants. Mesures du repository et de SQL,
+hors transport HTTP et rendu navigateur :
+
+| Axe / filtre | p95 à 1 000 prospects | p95 à 10 000 prospects |
+| --- | --- | --- |
+| Priorité / général | 41,48 ms | 193,45 ms |
+| Priorité / recherche rare | 8,15 ms | 14,89 ms |
+| Priorité / étape Discussion | 64,67 ms | 378,05 ms |
+| Responsable / général | 13,08 ms | 36,17 ms |
+| Responsable / recherche rare | 7,74 ms | 14,07 ms |
+| Responsable / étape Discussion | 22,27 ms | 56,22 ms |
+
+Deux lecteurs de vingt appels chacun et vingt réaffectations simultanées passent
+sans incohérence : p95 priorité **59,81 ms**, responsable **20,92 ms**.
+Rapports `tmp/crm-map-core-performance.xml`,
+`tmp/crm-map-core-performance-1000.json`,
+`tmp/crm-map-core-performance-10000.json`, `tmp/crm-map-core-mixed.json`.
+Ils conservent les durées et les plans normaux/préparés avec buffers ; les
+lectures utilisent les projections, sans relire l’historique des résultats.
+
+**Limite observée :** le premier passage à 10 000 prospects dépassait le budget
+pour Priorité + Discussion (**4,48 s p95**). L’essai de diagnostic puis le passage
+final réussissent sans changement SQL ni relâchement de seuil. La cause de cet
+écart n’est pas établie ; d’autres contrôles locaux tournaient pendant une partie
+du premier essai. Rapports initiaux conservés sous
+`tmp/crm-map-core-performance-initial.xml` et
+`tmp/crm-map-core-performance-initial-{1000,10000}.json`.
+La mesure finale respecte la cible de 1 s ; elle ne garantit pas la capacité
+hébergée ni l’absence de variabilité sous contention.
+
+Le contrat OpenAPI canonique **1.5** est régénéré hors ligne (80 chemins,
+128 schémas). Revue indépendante producteur/DTO/consommateur et URL : aucun
+défaut bloquant ; les écarts de légende, d’aide et d’export ont été résolus.
+Les preuves retour navigateur et fond indisponible ont été ajoutées à sa suite.
+Contrôles documentaires : 97 guides et 1 218 liens sans erreur, puis 81 guides
+et documents ciblés, 1 131 liens sans erreur ; 149 sources exportées vérifiées.
+Les deux dépôts passent `git diff --check`.
+
+Pas de migration ni de configuration propre à cette carte. Les migrations
+v311/v312 de l’agenda restent nécessaires à la version backend globale. Aucun
+nouvel objet métier pour le générateur ; fixtures synthétiques enrichies pour
+les répartitions et les limites. Les capacités historiques à 100 000 prospects
+et la charge hébergée ne sont pas garanties par les mesures locales de ce lot.
+L’epic reste **En cours** ; seul le périmètre CA-74 à 77 est traité ici.
+
+## E71-EVOL-08 — agenda et rendez-vous, 12 novembre 2026
+
+**Implémentation locale vérifiée**, sans déploiement ni application des nouvelles
+migrations sur TEST. Choix utilisateur : agenda intégré au CRM, validation de
+prise en charge par le collaborateur désigné. Périmètre et critères dans la
+[spécification rendez-vous](rendez-vous.md). L’epic reste **En cours**.
+
+Contexte : backend `95b7db2` et projet `b43ffa9` avec changements locaux.
+Les modifications antérieures de dialogue de session ERP et les traces de la
+réparation v310 ont été conservées. Les trois frontends voisins ne consomment
+pas les nouvelles API privées : aucune modification de ces dépôts.
+
+Le domaine Prospection porte disponibilités, chevauchement, dates et transitions.
+L’application réserve, synchronise l’action du prospect, l’audit, le reçu et les
+intentions de notification dans une transaction. La PWA expose un agenda
+jour/semaine, les disponibilités personnelles, la réservation depuis une fiche,
+le suivi et les notifications personnelles. Un compte rendu rejoint l’historique
+et permet de préparer la prochaine action avec le prospect déjà choisi.
+
+| Critères | Comportement vérifié et preuves |
+| --- | --- |
+| CA-62/64 | Plages multiples, absences, absence de configuration, heure de Paris/DST, prochaines disponibilités calculées sur les réservations réelles. Tests domaine `test_rendez_vous_dedicated.py`, services et PostgreSQL ; parcours navigateur de configuration et recherche paginée. |
+| CA-63/65/68 | Agenda filtrable, pagination SQL, fiche prospect, création/rejeu, action avec icône calendrier et état propre, ancien type de tâche conservé. Tests HTTP `test_crm_rendez_vous_api.py` et scénario `crm-agenda.cjs` ; anciennes suites CRM rejouées. |
+| CA-66/67 | Confirmation réservée au responsable ; réalisation avec compte rendu ; report/transfert motivé, annulation, version périmée et reprise. Courses PostgreSQL sur même créneau, créneaux adjacents et absence ; conflit UI conserve la saisie. |
+| CA-69/70 | Affectation et rappel distincts ; intention atomique, pas de doublon au rejeu, préférences et droits courants, flux privé et marquage lu. Tests domaine/application/API/SQL des rappels et `test_notifications_rendez_vous.py`. Le transport est simulé, aucune réception sur un appareil réel n’est attestée. |
+| CA-71/72 | Compte rendu complet conservé, suivi prérempli, opposition/archivage, garde contre les commandes de tâche génériques, refus atomique du destinataire devenu inéligible. Tests services/HTTP/SQL, dont `test_crm_rendez_vous_destinataire.py` et restauration de la navigation après connexion. |
+| CA-73 | Parcours mobile/ordinateur, texte à 200 %, clavier, erreurs et reprises, résultats obsolètes ignorés ; mesures SQL et concurrence locales ci-dessous. Les mesures de saturation et de capacité hébergée restent à réaliser avant activation à grande échelle. |
+
+Résultats exécutés avec Python 3.14, PostgreSQL 18 jetable sur boucle locale et
+données synthétiques. Les groupes se recouvrent : ils ne constituent pas un
+total de tests distincts.
+
+- **71 tests réussis** dans le groupe cœur final, domaine/application/SQL/HTTP,
+  notifications et compatibilité des tâches ; rapport backend
+  `tmp/crm-rdv-core-final.xml`. Deux courses renforcées avec deux écrivains et
+  vingt lectures simultanées réussies ensuite : `tmp/crm-rdv-core-mixed.xml`.
+- **82 tests réussis** dans la régression rappels/notifications :
+  `tmp/crm-rdv-notifications-regression-2.xml`. **10 tests HTTP finaux réussis**
+  après typage des réponses et intégration des permissions :
+  `tmp/crm-rdv-root/api-final.xml`.
+- **797 contrôles réussis** d’architecture, recensement domaine/use cases,
+  readiness, démonstration et navigation de connexion :
+  `tmp/crm-rdv-root/architecture-final.xml`. **26 tests de sécurité UI réussis** :
+  `tmp/crm-rdv-ui-security-final.log`.
+- **12 parcours navigateur réussis**, à 320/390/1280 px, texte à 200 %, focus et
+  fermeture clavier ; erreur de réservation entièrement visible au-dessus du
+  pied du dialogue. Rapport `tmp/crm-rdv-ui-livraison.log`, captures relues dans
+  `tmp/crm-rdv-ui-73b842ad`. Les trois suites historiques `crm.cjs`,
+  `crm-correctifs.cjs` et `crm-rappels.cjs` réussissent sur les sources finales
+  (`tmp/crm-rdv-final-regression-*.log`). Ces parcours utilisent des réponses
+  synthétiques ; les preuves producteur HTTP/SQL sont séparées.
+- **35 tests réussis** de génération/transfert ciblé et non-régression de
+  l’outillage : `tmp/crm-rdv-root/restore-helper-final.xml`. La génération réserve deux
+  créneaux par les services ordinaires, dont un validé, sans transport externe.
+  La restauration SQL reproduisait d’abord un échec de contrainte en coupant
+  le lien circulaire tâche/rendez-vous (`restore-before.xml`). Le chargeur
+  conserve désormais les FK initialement différées ; la transaction valide
+  le lien complet et refuse une référence manquante avec rollback. Les
+  contraintes ne sont ni désactivées ni affaiblies. Le helper de restauration
+  de la recette complète contrôle les contraintes avant nettoyage, rétablit
+  leur mode différé pendant le chargement puis les recontrôle immédiatement ;
+  le test ciblé exerce ce même helper sur les tables CRM. Le transfert conserve
+  agendas, états et notes ; la neutralisation des notifications restaurées
+  et le registre des tables sont vérifiés. Un transfert complet de tous les
+  domaines avec sauvegarde externe n’a pas été exécuté pour cette évolution.
+
+Mesure locale finale : 100 membres, 100 puis 1 000 réservations sur le responsable
+actif et autant d’historique hors période, vingt répétitions par lecture.
+
+| Lecture service + SQL | p95 à 100 | p95 à 1 000 | Requêtes maximales |
+| --- | --- | --- | --- |
+| Prochaine disponibilité de l’équipe | 35,09 ms | 48,12 ms | 3 |
+| Créneaux d’un membre | 8,98 ms | 47,88 ms | 3 |
+| Page de rendez-vous | 8,73 ms | 10,06 ms | 1 |
+
+Vingt réservations supplémentaires non conflictuelles, transaction, reçu et
+commit compris : **p95 20,82 ms**, maximum 29,47 ms, 16 requêtes au plus.
+Ce dernier budget compte une écriture ; la cible de dix requêtes concerne les
+lectures de page. Mesures hors HTTP, session et transport ; le scénario de coût
+de réservation n’inclut pas les notifications, qui sont vérifiées séparément.
+Quatre plans `EXPLAIN (ANALYZE, BUFFERS)` réels sont conservés, sans forcer les
+index. Rapports `tmp/crm-rdv-core-performance-final.json`, `.plans.json` et `.xml`.
+Le test ciblé final réussit ; neuf autres tests sont désélectionnés sur ce passage,
+et non comptés comme réussis. Ces mesures ne prouvent pas le débit soutenu,
+la mémoire, la saturation du pool ni le p95 HTTP sur l’hébergement cible.
+
+La revue indépendante a contrôlé invariants, autorisations, projections et
+readiness. Les constats sont corrigés : une validation ou une simple note ne
+révise plus le rappel, un changement de durée le révise ; le destinataire
+inéligible produit un 409 sans invalider la session de l’appelant. L’horloge des
+tests HTTP est figée. Les curseurs de disponibilité conservent les mêmes filtres
+temporels entre deux pages, même lorsque le temps avance.
+
+Contrat E71 **V1.4 régénéré : 80 chemins, 122 schémas**. Guides utilisateur,
+exploitation, backlog et export documentaire actualisés. Contrôle des guides
+et documents touchés : **103 documents, 1 357 liens, zéro erreur ni avertissement** ;
+contrôle des **149 sources exportées** réussi, ainsi que `git diff --check`.
+Appliquer **v311 puis
+v312 avant le backend** selon le [guide d’exploitation](exploitation.md), puis
+contrôler readiness, agenda et worker de rappels. Aucun nouveau fournisseur ni
+secret : canaux externes sous flags CRM et préférences existants. Pas de commit,
+push, envoi réel ou migration distante effectué pour cette demande.
+
 ## Correctif local — lancement manuel des batchs, 9 novembre 2026
 
 Demande : pouvoir déclencher tous les batchs depuis **Batchs exploitation**.

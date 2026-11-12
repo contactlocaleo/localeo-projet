@@ -1,10 +1,10 @@
 # EPIC 71 — Localeo CRM, prospection Animation et Coffrets
 
-## Références : socle E71-EVOL-03 et extensions E71-EVOL-04/05/06/07
+## Références : socle E71-EVOL-03 et extensions E71-EVOL-04/05/06/07/08/09
 
 - État produit : **En cours**, selon la [roadmap commune](../README.md).
 - Cadrage initial : 2 octobre 2026 ; décisions/imports E71-EVOL-01 et E71-EVOL-02 du 9 octobre ; **recadrage du 3 novembre 2026** à la demande utilisateur.
-- [Spécification canonique V1.3](../../specifications/epic-71-crm-prospection/README.md), [format d'import et gabarit](../../specifications/epic-71-crm-prospection/import-carte.md).
+- [Spécification canonique V1.5](../../specifications/epic-71-crm-prospection/README.md), [format d'import et gabarit](../../specifications/epic-71-crm-prospection/import-carte.md).
 - Socle : implémentation locale du CRM, migrations v290–v293 et vérification sur données synthétiques. Extension E71-EVOL-04 du 4 novembre : qualification structurée et import 2 implémentés localement, tests et limites dans le bilan. Aucun déploiement ou import réel dans cette phase.
 - **E71-EVOL-05, 5 novembre 2026 :** demande d’actualisation de qualification à la demande ; [spécification détaillée du 6 novembre](../../specifications/epic-71-crm-prospection/actualisation-qualification.md). Neuf critères ajoutés ; six blocs dès la première livraison confirmés le 6 novembre, méthode de proximité/SIRET confirmée, implémentation et tests locaux réalisés ; activation réelle non effectuée.
 - **E71-EVOL-06, 5 novembre 2026 :** [niveau de qualification commerciale](../../specifications/epic-71-crm-prospection/niveau-qualification.md), entrée de menu, calcul sur recherche et carte colorée/filtrable. Choix utilisateur : combiner potentiel, maturité du projet et fiabilité. Dix critères ajoutés ; priorité au fort potentiel même sans projet confirmée le 6 novembre, barème pondéré remplacé, seuils 5/10 et 20/50 confirmés ; menu/calcul/carte implémentés localement, capacité restant à vérifier.
@@ -211,6 +211,39 @@ Le barème 40/35/25 et ses seuils ne sont pas retenus en l’état. Le classemen
 révisé doit favoriser le potentiel même sans dossier ni interlocuteur identifié ;
 profils, seuils et preuves restent à préciser avant développement dépendant.
 La matrice des tests prévus et les impacts sont dans le cadrage canonique.
+
+## E71-EVOL-09 — carte par priorité ou responsable, 12 novembre 2026
+
+Ajouter sur la carte générale les axes **Priorité commerciale** et **Responsable
+du prospect**, avec légende, couleurs stables et répartition des groupes mixtes.
+La priorité utilise le niveau calculé propre au prospect ; l’affectation utilise
+le responsable du prospect, sans déduction depuis ses dossiers. Les filtres et
+la navigation restent cohérents avec les listes.
+
+La [spécification canonique](../../specifications/epic-71-crm-prospection/import-carte.md#e71-evol-09--deux-axes-de-lecture-12-novembre-2026)
+complète CA-54/55 et ajoute **CA-74 à 77**, avec contrats, bornes et preuves.
+Total courant : **77 identifiants, 76 actifs et CA-24 reporté**. Réalisation et
+vérifications locales effectuées ; [preuves et limites](../../specifications/epic-71-crm-prospection/verification-livraison.md#e71-evol-09--carte-par-priorité-ou-responsable-12-novembre-2026).
+Livraison Git du 12 novembre : backend `25224e0`, avec l’agenda E71-EVOL-08.
+Aucun déploiement manuel ou migration TEST effectué dans cette livraison Git.
+
+## E71-EVOL-08 — agenda partagé et rendez-vous, 12 novembre 2026
+
+Chaque membre configure ses disponibilités commerciales ; depuis un prospect,
+un gestionnaire consulte les prochaines disponibilités de l’équipe et réserve
+un rendez-vous lié à la fiche. Agenda intégré et validation par le collaborateur
+responsable confirmés. États Planifié / Validé / Réalisé, annulation et report,
+note et compte rendu, prochaine action, notifications d’affectation et rappels
+selon les préférences CRM. Le rendez-vous reste identifiable parmi les actions.
+
+La [spécification canonique](../../specifications/epic-71-crm-prospection/rendez-vous.md)
+porte **CA-62 à CA-73**, les invariants, contrats, impacts et preuves.
+Cette évolution portait le total à **73 identifiants, 72 actifs et CA-24 reporté**. L’epic
+reste En cours ; implémentation et vérification locales du 12 novembre détaillées
+dans le [bilan](../../specifications/epic-71-crm-prospection/verification-livraison.md#e71-evol-08--agenda-et-rendez-vous-12-novembre-2026).
+Les migrations v311/v312 restent à appliquer sur la cible avant livraison.
+Les bilans et comptes historiques ci-dessous
+conservent leur portée datée.
 
 ## E71-EVOL-07 — dates des actions plus explicites, 5 novembre 2026
 
