@@ -163,6 +163,25 @@ visible avec « Données non actualisées » ; l’erreur ne devient pas une lis
 Une expiration de session efface les données sensibles et utilise la reconnexion
 ERP. Le changement de compte annule toute requête et réinitialise les résultats.
 
+**Correctif du 12 novembre 2026 — popin de session expirée.** Les pages ERP
+`/internal/erp` et les vues SQLAdmin `/admin` reprennent la présentation de
+Localeo Animation : fenêtre centrée, pictogramme d’alerte, titre **Session
+expirée**, message bref et action unique **Se reconnecter**. Elle passe devant
+une fenêtre métier déjà ouverte, reçoit le focus et bloque les interactions
+avec la session terminée. Échap et le clic extérieur ne la ferment pas.
+L’action rejoint dans le même onglet l’URL de connexion indiquée par le serveur
+(`/internal/connexion` ou `/admin/login`) ; avant identification du profil, la
+connexion interne est l’entrée commune. Aucun formulaire ni écriture n’est
+rejoué après reconnexion.
+
+L’avertissement des deux dernières minutes et **Continuer ma session** restent
+disponibles avant l’expiration, dans les limites déjà vérifiées par le serveur.
+Le moniteur conserve ses sondages, CSRF, événements de masquage et signalement
+entre onglets. Une réponse 503 n’est pas une déconnexion ni un renouvellement.
+Les autres applications internes conservent leur présentation actuelle.
+Preuves, versions et limites dans le
+[registre du correctif](../../roadmap/anomalies/backend.md#ano-erp-session-popin-20261112--reconnexion-homogène-avec-animation).
+
 ## Audit — E65-CA-02
 
 Colonnes initiales : date/heure, action, phase, acteur, ressource. Recherche sur

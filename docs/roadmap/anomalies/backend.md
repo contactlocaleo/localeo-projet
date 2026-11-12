@@ -1,5 +1,61 @@
 # Registre des anomalies
 
+## ANO-ERP-SESSION-POPIN-20261112 — Reconnexion homogène avec Animation
+
+**Attendu utilisateur** : reprendre dans l’ERP la popin de fin de session de
+Localeo Animation. **Cause locale** : `app/security/admin_session.js` utilisait
+un bandeau fixe en bas de page, avec une reconnexion dans un nouvel onglet.
+Le composant de référence Animation est `SessionExpiredOverlay`, dans
+`src/app/App.tsx` ; l’ERP effaçait déjà ses données privées lors de l’événement
+de session expirée. Aucune anomalie de durée de session ni de contrôle d’accès
+n’est supposée.
+
+Correction limitée aux pages ERP et SQLAdmin : dialogue natif au premier plan,
+style centré repris d’Animation, pictogramme, titre et message bref, bouton
+**Se reconnecter** dans le même onglet. Focus initial et navigation clavier
+contenus, fermeture par Échap/clic extérieur interdite, avertissement préalable
+et renouvellement explicite conservés. Le serveur reste l’autorité ; événements
+existants de masquage/restauration et propagation entre onglets conservés.
+Les pages des autres applications internes gardent leur bandeau.
+
+**Version** : backend `95b7db2` puis modifications locales ; Animation `89579eb`
+consulté en lecture seule. Premier test navigateur en échec attendu sur
+l’absence de `alertdialog`, puis **11 scénarios réussis** avec
+`node tests/browser/erp-session-dialog.cjs`. Recette sur fichiers applicatifs
+réels, réseau entièrement simulé, sans configuration privée ni base partagée :
+
+- Deux URL de connexion, ordinateur 1280 px, mobile 390 px et 320 px avec texte
+  à 200 % ; reconnexion dans le même onglet, zéro écriture métier.
+- Popin devant une autre fenêtre native déjà ouverte ; focus et Tab/Maj+Tab,
+  Échap, clic extérieur, cibles tactiles et absence de débordement.
+- Réponse 401, expiration du compteur sans 401, propagation à un autre onglet
+  et restauration uniquement après réponse serveur valide.
+- Renouvellement avec CSRF et marqueur d’activité, réponse 503 sans fausse
+  expiration, SQLAdmin et conservation du bandeau hors ERP.
+
+Captures examinées dans `localeo-backend/.artifacts/erp-session-dialog/`,
+dont mobile, ordinateur et texte agrandi. Les fixtures ont été corrigées pour
+renvoyer également 401 sur le contexte ERP expiré et déclarer leur encodage
+UTF-8 ; les sélecteurs de noms accessibles ont été conservés. Le comptage unique
+de l’événement est vérifié au niveau du moniteur : les lecteurs ERP peuvent
+eux-mêmes signaler leurs refus 401, sans créer plusieurs fenêtres.
+
+**28 tests de sécurité/session réussis**, rapport backend
+`tmp/erp-session-ux-security.xml`, commande `py -3.14 scripts/validation/test_isolated.py`
+sur `test_admin_session_lifecycle.py`, `test_admin_session_cookie.py` et
+`test_erp_session_access.py`. Les 69 avertissements SQLite concernent l’adaptateur
+datetime déprécié des fixtures ; aucun test ignoré. Contrôles documentaires et
+`git diff --check` réussis.
+
+Impacts : présentation du moniteur existant et documentation E65 ; aucune API,
+règle métier, donnée, migration, durée, permission, conservation, configuration
+ou dépendance nouvelle. Pas d’adaptation du générateur : mêmes sessions et
+événements, aucune donnée de démonstration ajoutée. Livrer le backend qui sert
+déjà `/internal/session/monitor.js` ; aucune reconstruction d’Animation ni
+configuration supplémentaire. Référence Git du 12 novembre : backend `a5e6276`.
+Recette authentifiée sur TEST et déploiement manuel non exécutés.
+La clôture historique d’E65 reste inchangée.
+
 Publication Git du **1er novembre 2026**, après les contrôles locaux décrits
 ci-dessous : backend `daff81c` (contrainte des droits) et `7f131d3` (en-têtes et
 connexion), Animation `d607cb9`, Pro `a946ee2`, Marketplace/Live `bb8b585`,
