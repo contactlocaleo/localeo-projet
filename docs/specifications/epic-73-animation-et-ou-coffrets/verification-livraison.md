@@ -1,5 +1,113 @@
 # E73 — Vérification, migration et livraison
 
+## Évolution — E73-EVO-ANIMATION-PRODUCTIVITE (12 novembre 2026)
+
+**Sept lots implémentés ; AP-22 partiellement vérifié.**
+[Spécification et matrice AP-01 à AP-22](ux-productivite-organisateur.md).
+Bases : Animation `89579eb`, Backend `fab8850`, Projet `1476885`.
+Les modifications documentaires E73-EVO-CLOTURE-AUTO préexistantes sont conservées
+hors des commits de cette évolution. La clôture historique E73 ne change pas.
+
+La prochaine action provient d’une politique déclarative du domaine, compilée
+en SQL avant pagination. L’accueil distingue tâches et suivi ; listes/archives
+sont bornées. Les retours restaurent filtres, page et focus ; les saisies et
+commandes incertaines sont protégées. Création, invitations, corrections,
+recherche publique, gains/dossiers de fin et comparaison sont adaptés.
+
+### Preuves locales
+
+Les rapports ci-dessous sont des sorties locales `tmp/`, non versionnées ; les
+scripts et tests reproductibles sont dans les dépôts applicatifs. Ces passes se
+recouvrent : leurs nombres ne constituent pas un total unique de tests distincts.
+
+| Contrôle | Résultat / rapport |
+| --- | --- |
+| Backend — domaine, orchestration, API, architecture et recensements obligatoires | **790 réussites**, aucun skip ; `productivite-backend-final-isole.xml` |
+| Backend — PostgreSQL réel jetable, pagination/recherche, décisions/fin, concurrence et droits | **18 réussites**, aucun skip ; `productivite-backend-final-sql.xml` |
+| Backend — transport HTTP, droits, période et corrections de revue | **24 réussites**, aucun skip ; `productivite-backend-revue-http.xml` |
+| Backend — dernières corrections et microbanc N/10N | **3 réussites**, aucun skip, 44,94 s ; `productivite-backend-revue-final-03.xml`. Nouvelle base locale jetable hors dossier synchronisé, PostgreSQL18.3, port55450 ; la tentative précédente a échoué car l’ancien cluster était arrêté. |
+| Animation — suite Node complète | **321 réussites**, aucun skip ; `productivity-node-final-02.xml`. Le passage précédent avait une erreur de processus de module, puis son ciblé et cette suite complète ont réussi. |
+| Animation — garde dynamique de commande, réconciliation, communication et pagination après revue | **18 réussites**, `productivity-node-review-final-02.log` ; protection avant rerendu et sortie immédiate après confirmation du reçu |
+| Animation — opérations quotidiennes, composants réels/API synthétique | **20 scénarios réussis**, dix à 320 et dix à 1280 px ; `productivity-operations-report-jvJA0r/results.json`. Recherche, invitations, correction focalisée, gain rang 63, reçu perdu, filtre fin, curseur invalide 409 distinct du conflit de mutation, comparaison |
+| Animation — application complète/API synthétique | **10 scénarios réussis**, cinq à 320 et cinq à 1280 px ; `productivity-workspace-report-hbp1GA/results.json`. Contexte/abonnement, file et suivi, liste/retour/curseur, suppression explicite, création/modèle/dates/saisie, reprise catalogue |
+| Animation — primitives et parcours Léo | **11 groupes réussis** dans `productivity-primitives.mjs`, plus Léo à 1280/390 dans `productivity-primitives-generation.mjs` avant le dernier bridge de commandes. Clavier, focus, historique natif, LRU 20 vues/20 pages, texte 200 %, contraste texte≥4,5 et focus≥3 ; bridge couvert ensuite par le vrai gain incertain et le test Node |
+| TypeScript / lint / build | `tsc --noEmit` et `eslint src vite.config.ts` réussis. Builds Vite des opérations et de l’application complète réussis ; avertissement de chunk principal supérieur à 500 kB conservé. PowerShell classe la sortie stderr de cet avertissement en NativeCommandError, sans échec des assertions navigateur. |
+
+La revue indépendante a fait corriger la négociation du moteur tombola publique,
+le filtre de statut invalide, les alertes de dashboard (50 non lues), le tirage
+initial bloqué à reprendre, la priorité des bornes explicites et les erreurs de
+curseur. Les commandes hors préparation Chasse utilisent désormais la garde
+globale ; un reçu perdu reste vérifiable avec la même clé, sans deuxième POST.
+Le getter de l’intention protège aussi l’intervalle avant rerendu React et
+autorise le callback de succès dès la confirmation effective.
+
+Dette préexistante étayée : `test_direct_vision360_masque_identite_absente`
+attend des nom/prénom absents alors que la projection produit une identité
+masquée. L’échec a été reproduit sur la base Backend `fab8850` dans un worktree
+séparé (`productivite-backend-baseline.xml`). L’assertion n’est ni affaiblie ni
+ignorée pour rendre cette livraison verte.
+
+### Contrats, migration et exploitation
+
+Export officiel hors ligne `generate_epic41_openapi.py` : **1116 chemins**.
+Le JSON canonique Projet et celui embarqué par Animation sont identiques,
+SHA-256 `babeb5968ef74d68ee50cac4c8f3ecb694832a66fb21dc61637c567c6698bb5f`.
+Nouvelles lectures animations/dossiers, recherche publique, références gain/fin
+et mode dashboard borné ; négociation `moteurs_supportes` documentée. Les mutations
+et lecteurs historiques sont conservés pour leurs consommateurs.
+
+**TEST : v313 appliquée**, version après migration 313, quatre index contrôlés
+le 12 novembre 2026 à 11:41 UTC. Sauvegarde complète préalable de 73 411 375 octets :
+`backend/tmp/productivite-test-avant-v313-20261112T114011Z.dump` ; rapport local
+`backend/tmp/productivite-migration-test-result.json`. Extension `pg_trgm` et
+index seulement, aucun changement de statut ni notification métier.
+Déployer le Backend compatible avant Animation. Un retour au frontend précédent
+peut conserver les index. Aucun nouveau flag, secret, batch ou réglage fournisseur.
+Les guides de parcours sont mis à jour ; démonstration sans nouveau schéma,
+jeux volumineux et rôles ajoutés aux fixtures isolées. Aucun envoi réel utilisé
+pour les tests, aucune génération de données sur TEST.
+
+### AP-22 et recette restante
+
+Référence avant changement : audit qualitatif et code aux SHA ci-dessus, sans
+chronométrage utilisateur initial. Application complète en Chromium local,
+API simulée, Windows/Node 24.14, Intel i7-10510U, environ 17 Go RAM : première page
+utilisable **729 ms à 320 px /571 ms à 1280 px**, retours restaurés **2/2**.
+Deux mesures ne constituent pas un p95 ; aucun gain de productivité humain
+chiffré n’est revendiqué.
+
+Le microbanc adaptateur PostgreSQL N=1 000/10 000 n’inclut pas HTTP/authentification.
+Le premier passage (`productivite-backend-performance-attempt1.json/.xml`) a
+dépassé le budget de 1 s sur la file 10N et de 2 s lors d’une lecture initiale.
+Il est conservé comme échec ; les seuils ne sont pas relevés. Le budget service
+SQL testé ne comprend pas toute la chaîne session HTTP. Les mesures complètes
+p95/p99 API, cache froid, charge mixte métier, mémoire navigateur à 10N et test
+utilisateur médiane/p90 restent **non validés**. AP-22 reste ouvert sur ces preuves.
+
+Recette après livraison : relever le SHA réellement servi sur TEST, vérifier
+les mêmes recommandations sur accueil/liste/fiche, les retours filtrés, une
+saisie protégée, la recherche publique et le dossier de fin. Utiliser des
+données synthétiques pour les commandes. Téléphone physique, lecteur d’écran
+et test de cinq organisateurs (retrouver puis traiter un dossier et reprendre
+la liste, sans aide) restent à conduire ; mesurer réussite, temps et reprises.
+Le push ne constitue pas à lui seul une vérification du déploiement Render.
+
+Dernière passe du microbanc après corrections, sur PostgreSQL18.3 local hors
+dossier synchronisé : maxima des cinq lectures de liste entre **43 et139 ms**,
+file à traiter entre **55 et334 ms**, deux requêtes de page, 26/101 racines
+maximum selon la taille25/100. Dix lectures avec mises à jour techniques
+synthétiques : maximum **301 ms**, zéro erreur. Quatre plans EXPLAIN conservés
+dans `productivite-backend-performance.json`. Les seuils du microbanc passent.
+La mémoire Python tracée culmine à2,96 Mo pour N puis5,19 Mo pour10N ; la
+profondeur effectivement parcourue diffère (10 puis20 pages), et cette mesure
+n’est pas celle du navigateur à page identique. Les réserves AP-22 ci-dessus
+restent donc ouvertes.
+
+Contrôles documentaires finaux : **97 guides /1234 liens**, **15 documents
+modifiés /591 liens**, zéro erreur ni avertissement ; **150 sources exportées**
+vérifiées. Diff sans erreur d’espacement. Commits applicatifs de cette livraison :
+Backend `9b2b41a`, Animation `24ff5fe`.
+
 ## Évolution — E73-EVO-GAINS-SMS (11 novembre 2026)
 
 Les [critères GS-01 à GS-06](dotation-lots.md#évolution-du-11-novembre-2026--notifications-de-gains-par-sms)

@@ -1,5 +1,14 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+Évolution du **12 novembre 2026 — E73-EVO-ANIMATION-PRODUCTIVITE** :
+[audit UX de l’organisateur](../../audits/animation/localeo-animation-ux-productivite-2026-11-12.md)
+et [spécification en sept lots, AP-01 à AP-22](ux-productivite-organisateur.md).
+Prochaine action cohérente, conservation des saisies/filtres, lectures bornées,
+clavier/mobile, préparation, reprise des gains et comparaison. **Sept lots
+implémentés**, migration TEST v313 appliquée ; preuves locales et limites AP-22 au
+[bilan](verification-livraison.md#évolution--e73-evo-animation-productivite-12-novembre-2026).
+Clôture historique et évolution de clôture automatique conservées séparément.
+
 Évolution du **11 novembre 2026 — E73-EVO-GAINS-SMS** : notification de lot
 complétée par SMS si un téléphone est renseigné, avec le même lien personnel
 que l’e-mail et les traitements d’envoi existants. Les

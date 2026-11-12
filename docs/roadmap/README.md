@@ -1,5 +1,12 @@
 # Roadmap par etat
 
+**12 novembre 2026 — E73-EVO-ANIMATION-PRODUCTIVITE** : audit UX de Localeo
+Animation et [sept lots spécifiés, AP-01 à AP-22](../specifications/epic-73-animation-et-ou-coffrets/ux-productivite-organisateur.md).
+Fiabilité de la prochaine action, continuité du travail et opérations quotidiennes.
+Sept lots implémentés ; preuves fonctionnelles locales et migration TEST v313 au
+[bilan](../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md#évolution--e73-evo-animation-productivite-12-novembre-2026).
+AP-22 reste partiellement vérifié (capacité complète et recette humaine). Statut historique E73 et compteurs inchangés.
+
 **11 novembre 2026 — E73-EVO-GAINS-SMS** : notification de lot par SMS en
 complément des canaux existants si le téléphone est renseigné.
 [Périmètre et critères](../specifications/epic-73-animation-et-ou-coffrets/dotation-lots.md#évolution-du-11-novembre-2026--notifications-de-gains-par-sms).

@@ -603,6 +603,15 @@ conservée dans le détail après un échec.
 
 ### 5.2 Lisibilité, actions et accessibilité communes
 
+Complément du **12 novembre 2026**,
+[E73-EVO-ANIMATION-PRODUCTIVITE](ux-productivite-organisateur.md) : les critères
+AP précisent la recommandation commune, la restauration de contexte, les gardes
+de sortie, les pages bornées, l’accès clavier/mobile et la reprise des dossiers.
+Ce complément est **implémenté**, avec les limites de preuve AP-22 décrites dans
+son bilan ; il conserve les quatre espaces,
+la référence visuelle Pro, les droits et les confirmations ci-dessous. L’audit
+associé distingue les écarts reproduits sur TEST et les constats de code.
+
 - Les espaces de gestion partagent la même composition d’en-tête : retour explicite lorsqu’un parent existe, pictogramme et titre, description courte, contexte de commune/organisation, actions principales et secondaires identifiables. Le contenu utilise la largeur disponible et reste aligné à gauche ; les formulaires et dialogues conservent une largeur de lecture adaptée. Les gardes de sortie et les blocages d’une commande en cours restent dans le parcours appelant.
 - Les rubriques courtes utilisent des onglets avec sélection visible et navigation clavier ; les flèches déplacent le focus et Entrée/Espace demandent l’ouverture. Les menus regroupés des animations et les sélecteurs des rubriques plus nombreuses conservent leurs fonctions et protections. Aucun menu n’impose un défilement horizontal. Les filtres ne sont pas présentés comme des onglets : leur sélection est annoncée, ils se replient sur mobile et la sélection principale de l’animation reste accessible.
 - Les listes réutilisent les contrôles de pagination, les tableaux sur bureau et les fiches sur mobile. Chargement, absence de résultat et échec ont des états distincts, accompagnés d’un pictogramme et d’un texte. Les erreurs, avertissements, informations et succès suivent la même palette dans les pages et notifications. Un résultat incertain regroupe le diagnostic et la vérification proposée dans un seul avertissement, sans répétition automatique de la commande ni annonce de succès. Le focus n’est déplacé qu’aux points de retour déjà prévus par le parcours.

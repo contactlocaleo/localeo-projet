@@ -6,6 +6,8 @@ Commencer par le README du sujet, puis consulter ses règles, contrats et arbitr
 
 ## Priorités en cours et à cadrer
 
+- **Extension E73 — 12 novembre 2026 : productivité quotidienne de l’organisateur**, [E73-EVO-ANIMATION-PRODUCTIVITE](epic-73-animation-et-ou-coffrets/ux-productivite-organisateur.md) : audit Animation bureau/mobile, sept lots et AP-01 à AP-22 ; recommandations fiables, continuité, listes bornées, accessibilité, préparation, gains/fin et comparaison. Sept lots implémentés, preuves locales et migration TEST v313 ; validation AP-22 partielle, clôture historique inchangée.
+
 - **Extension E73 — 11 novembre 2026 : profil d'activité communale**, [E73-EVO-DYNAMISME-COMMUNE](epic-73-animation-et-ou-coffrets/perimetres-parcours-saas.md#évolution-du-11-novembre-2026--dynamisme-de-la-commune) : quatre axes et tendances sans score, pour l'organisation dans sa commune active. Critères DY-01 à DY-06 ; clôture historique E73 inchangée.
 
 - **Extension E73 — 10 novembre 2026 : iconographie et respiration**, [E73-EVO-LIVE-ICONOGRAPHIE](epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-10-novembre-2026--iconographie-et-respiration-e73-evo-live-iconographie) : dix critères IA, [conception §14](epic-73-animation-et-ou-coffrets/localeo-live-adhesion-conception.md#14-iconographie-et-respiration--e73-evo-live-iconographie), spécification et implémentation locale réalisées ; résultats au [bilan IA](epic-73-animation-et-ou-coffrets/verification-livraison.md#évolution--e73-evo-live-iconographie-10-novembre-2026). Clôture historique et autres réserves conservées.

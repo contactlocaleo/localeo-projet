@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Backend - contrat implemente EPIC 41",
     "description": "OpenAPI complet du backend, dont les parcours Animation locale. Genere hors ligne depuis le code local pour les integrations et les mocks ; cet instantane ne prouve pas son deploiement.",
-    "version": "1.0.0+d90a0af"
+    "version": "1.0.0+fab8850"
   },
   "paths": {
     "/public/identite-acces/interne/connexion": {
@@ -13048,7 +13048,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/PageRattachementsPayload"
+                }
               }
             }
           },
@@ -13407,7 +13409,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/PageTachesPayload"
+                }
               }
             }
           },
@@ -13617,7 +13621,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/PageTachesPayload"
+                }
               }
             }
           },
@@ -13716,7 +13722,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/TachePayload"
+                }
               }
             }
           },
@@ -14160,6 +14168,139 @@
         ]
       }
     },
+    "/internal/prospection/aujourdhui": {
+      "get": {
+        "tags": [
+          "Prospection"
+        ],
+        "summary": "Aujourdhui",
+        "description": "Groupes disjoints en heure de Paris. Les curseurs signés figent l'instant\nde référence pour les trois groupes et sont liés à la portée et l'autorité.\nUne nouvelle lecture sans curseur ni contexte_journee actualise la journée.",
+        "operationId": "aujourdhui_internal_prospection_aujourdhui_get",
+        "parameters": [
+          {
+            "name": "portee",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "enum": [
+                "MOI",
+                "EQUIPE"
+              ],
+              "type": "string",
+              "default": "MOI",
+              "title": "Portee"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor_retard",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2000
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor Retard"
+            }
+          },
+          {
+            "name": "cursor_jour",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2000
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor Jour"
+            }
+          },
+          {
+            "name": "cursor_avenir",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2000
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor Avenir"
+            }
+          },
+          {
+            "name": "contexte_journee",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2000
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Contexte Journee"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JourneePayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
     "/internal/prospection/carte": {
       "get": {
         "tags": [
@@ -14357,6 +14498,26 @@
               "minimum": 1,
               "default": 5,
               "title": "Zoom"
+            }
+          },
+          {
+            "name": "coloration",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "PRIORITE",
+                    "RESPONSABLE"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Coloration"
             }
           },
           {
@@ -14774,7 +14935,17 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/CarteColoreePayload"
+                    },
+                    {
+                      "$ref": "#/components/schemas/CarteHistoriquePayload"
+                    }
+                  ],
+                  "title": "Response Carte Internal Prospection Carte Get"
+                }
               }
             }
           },
@@ -14999,7 +15170,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/PageReferencesMetierPayload"
+                }
               }
             }
           },
@@ -18625,6 +18798,661 @@
         ]
       }
     },
+    "/internal/prospection/agenda/me": {
+      "get": {
+        "tags": [
+          "Prospection"
+        ],
+        "summary": "Mon Agenda",
+        "operationId": "mon_agenda_internal_prospection_agenda_me_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgendaPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Erreur de validation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Prospection"
+        ],
+        "summary": "Modifier Mon Agenda",
+        "operationId": "modifier_mon_agenda_internal_prospection_agenda_me_put",
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaModification"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgendaPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/prospection/agenda/equipe": {
+      "get": {
+        "tags": [
+          "Prospection"
+        ],
+        "summary": "Equipe Agenda",
+        "operationId": "equipe_agenda_internal_prospection_agenda_equipe_get",
+        "parameters": [
+          {
+            "name": "debut_at",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "title": "Debut At"
+            }
+          },
+          {
+            "name": "fin_at",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "title": "Fin At"
+            }
+          },
+          {
+            "name": "duree_minutes",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 240,
+              "minimum": 15,
+              "default": 30,
+              "title": "Duree Minutes"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2000
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "rendez_vous_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Rendez Vous Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageEquipeAgenda"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/prospection/agenda/creneaux": {
+      "get": {
+        "tags": [
+          "Prospection"
+        ],
+        "summary": "Creneaux Agenda",
+        "operationId": "creneaux_agenda_internal_prospection_agenda_creneaux_get",
+        "parameters": [
+          {
+            "name": "responsable_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Responsable Id"
+            }
+          },
+          {
+            "name": "debut_at",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "title": "Debut At"
+            }
+          },
+          {
+            "name": "fin_at",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "title": "Fin At"
+            }
+          },
+          {
+            "name": "duree_minutes",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 240,
+              "minimum": 15,
+              "default": 30,
+              "title": "Duree Minutes"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2000
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "rendez_vous_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Rendez Vous Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageCreneauxAgenda"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/prospection/rendez-vous": {
+      "get": {
+        "tags": [
+          "Prospection"
+        ],
+        "summary": "Liste Rendez Vous",
+        "operationId": "liste_rendez_vous_internal_prospection_rendez_vous_get",
+        "parameters": [
+          {
+            "name": "debut_at",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "title": "Debut At"
+            }
+          },
+          {
+            "name": "fin_at",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "title": "Fin At"
+            }
+          },
+          {
+            "name": "responsable_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Responsable Id"
+            }
+          },
+          {
+            "name": "organisation_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Organisation Id"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2000
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageRendezVousAgenda"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Prospection"
+        ],
+        "summary": "Creer Rendez Vous",
+        "operationId": "creer_rendez_vous_internal_prospection_rendez_vous_post",
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RendezVousCreation"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RendezVousPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/prospection/rendez-vous/{id}": {
+      "get": {
+        "tags": [
+          "Prospection"
+        ],
+        "summary": "Rendez Vous",
+        "operationId": "rendez_vous_internal_prospection_rendez_vous__id__get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RendezVousPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/prospection/rendez-vous/{id}/actions": {
+      "post": {
+        "tags": [
+          "Prospection"
+        ],
+        "summary": "Action Rendez Vous",
+        "operationId": "action_rendez_vous_internal_prospection_rendez_vous__id__actions_post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/ValiderRendezVous"
+                  },
+                  {
+                    "$ref": "#/components/schemas/RealiserRendezVous"
+                  },
+                  {
+                    "$ref": "#/components/schemas/AnnulerRendezVous"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ReporterRendezVous"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ReaffecterRendezVous"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ModifierRendezVous"
+                  }
+                ],
+                "discriminator": {
+                  "propertyName": "action",
+                  "mapping": {
+                    "VALIDER": "#/components/schemas/ValiderRendezVous",
+                    "REALISER": "#/components/schemas/RealiserRendezVous",
+                    "ANNULER": "#/components/schemas/AnnulerRendezVous",
+                    "REPORTER": "#/components/schemas/ReporterRendezVous",
+                    "REAFFECTER": "#/components/schemas/ReaffecterRendezVous",
+                    "MODIFIER": "#/components/schemas/ModifierRendezVous"
+                  }
+                },
+                "title": "Body"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RendezVousPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
     "/internal/prospection/preferences-rappels/me": {
       "get": {
         "tags": [
@@ -18817,6 +19645,132 @@
             "content": {
               "application/json": {
                 "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/prospection/notifications": {
+      "get": {
+        "tags": [
+          "Prospection"
+        ],
+        "summary": "Notifications Crm",
+        "operationId": "notifications_crm_internal_prospection_notifications_get",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2000
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageNotificationsCRM"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/prospection/notifications/{identifiant}/lire": {
+      "post": {
+        "tags": [
+          "Prospection"
+        ],
+        "summary": "Lire Notification Crm",
+        "operationId": "lire_notification_crm_internal_prospection_notifications__identifiant__lire_post",
+        "parameters": [
+          {
+            "name": "identifiant",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Identifiant"
+            }
+          },
+          {
+            "name": "idempotency-key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LectureNotificationCRM"
+                }
               }
             }
           },
@@ -103611,6 +104565,271 @@
         ]
       }
     },
+    "/protected/animation-locale/lectures-globales/animations": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Lister Animations Productivite",
+        "operationId": "lister_animations_productivite",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 4096
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "recherche",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 120,
+              "default": "",
+              "title": "Recherche"
+            }
+          },
+          {
+            "name": "statut",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "BROUILLON",
+                    "CONFIGUREE",
+                    "PUBLIEE",
+                    "EN_COURS",
+                    "CLOTUREE",
+                    "TERMINEE",
+                    "ARCHIVEE",
+                    "ANNULEE"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Statut"
+            }
+          },
+          {
+            "name": "modele_code",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Modele Code"
+            }
+          },
+          {
+            "name": "moteurs_supportes",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Moteurs Supportes"
+            }
+          },
+          {
+            "name": "date_debut",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Date Debut"
+            }
+          },
+          {
+            "name": "date_fin",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Date Fin"
+            }
+          },
+          {
+            "name": "archives",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Archives"
+            }
+          },
+          {
+            "name": "avec_alertes",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Avec Alertes"
+            }
+          },
+          {
+            "name": "phase_workflow",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "BROUILLON",
+                    "PUBLIEE",
+                    "EN_COURS",
+                    "CLOTUREE",
+                    "TERMINEE",
+                    "ARCHIVEE",
+                    "ANNULEE"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Phase Workflow"
+            }
+          },
+          {
+            "name": "suivi_actif",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Suivi Actif"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageAnimationsProductivitePayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Filtres ou curseur invalide/expiré",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Accès refusé",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
     "/protected/animation-locale/contexte-portail": {
       "get": {
         "tags": [
@@ -104529,6 +105748,16 @@
             }
           },
           {
+            "name": "a_traiter",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "A Traiter"
+            }
+          },
+          {
             "name": "Authorization",
             "in": "header",
             "required": false,
@@ -104554,6 +105783,101 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/EtatFinAnimationPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/animation-locale/animations/{animation_id}/dossiers-fin/{dossier_ref}": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Consulter Dossier Fin Animation",
+        "operationId": "consulter_dossier_fin_animation",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "dossier_ref",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Dossier Ref"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LectureDossierFinAnimationPayload"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Capacité refusée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Dossier absent du périmètre",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
                 }
               }
             }
@@ -104912,6 +106236,16 @@
               }
             },
             "description": "Accepted"
+          },
+          "404": {
+            "description": "Commande non enregistrée ; aucun succès acquis",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
           },
           "422": {
             "description": "Validation Error",
@@ -112424,6 +113758,94 @@
             "description": "Raccourci de periode. Les dates explicites restent prioritaires."
           },
           {
+            "name": "mode_lecture",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "const": "borne",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Mode Lecture"
+            }
+          },
+          {
+            "name": "actions_limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Actions Limit"
+            }
+          },
+          {
+            "name": "actions_cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 4096
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Actions Cursor"
+            }
+          },
+          {
+            "name": "phase_workflow",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "BROUILLON",
+                    "PUBLIEE",
+                    "EN_COURS",
+                    "CLOTUREE",
+                    "TERMINEE",
+                    "ARCHIVEE",
+                    "ANNULEE"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Phase Workflow"
+            }
+          },
+          {
+            "name": "moteurs_supportes",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 512
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Moteurs Supportes"
+            }
+          },
+          {
             "name": "Authorization",
             "in": "header",
             "required": false,
@@ -112448,7 +113870,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DashboardPerformanceAnimationPayload"
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/DashboardBorneAnimationPayload"
+                    },
+                    {
+                      "$ref": "#/components/schemas/DashboardPerformanceAnimationPayload"
+                    }
+                  ],
+                  "title": "Response Consulter Dashboard Performance Animation"
                 }
               }
             }
@@ -112564,6 +113994,23 @@
                 }
               ],
               "title": "Moteurs Supportes"
+            }
+          },
+          {
+            "name": "recherche",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 120
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Recherche"
             }
           },
           {
@@ -122986,6 +124433,75 @@
         ],
         "title": "AffecterLots"
       },
+      "AgendaModification": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Expected Version"
+          },
+          "plages": {
+            "items": {
+              "$ref": "#/components/schemas/PlageAgenda"
+            },
+            "type": "array",
+            "maxItems": 56,
+            "title": "Plages"
+          },
+          "indisponibilites": {
+            "items": {
+              "$ref": "#/components/schemas/IndisponibiliteAgenda"
+            },
+            "type": "array",
+            "maxItems": 100,
+            "title": "Indisponibilites"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "plages",
+          "indisponibilites"
+        ],
+        "title": "AgendaModification"
+      },
+      "AgendaPayload": {
+        "properties": {
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "fuseau": {
+            "type": "string",
+            "const": "Europe/Paris",
+            "title": "Fuseau",
+            "default": "Europe/Paris"
+          },
+          "plages": {
+            "items": {
+              "$ref": "#/components/schemas/PlageAgenda"
+            },
+            "type": "array",
+            "title": "Plages"
+          },
+          "indisponibilites": {
+            "items": {
+              "$ref": "#/components/schemas/IndisponibiliteAgenda"
+            },
+            "type": "array",
+            "title": "Indisponibilites"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "version",
+          "plages",
+          "indisponibilites"
+        ],
+        "title": "AgendaPayload"
+      },
       "AgregatPaiement": {
         "properties": {
           "knownAmountCents": {
@@ -123740,6 +125256,16 @@
             ],
             "title": "Next Action"
           },
+          "recommandation": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RecommandationAnimationPayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "version": {
             "type": "integer",
             "minimum": 1.0,
@@ -124338,6 +125864,16 @@
               }
             ],
             "title": "Next Action"
+          },
+          "recommandation": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RecommandationAnimationPayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "additionalProperties": true,
@@ -124608,6 +126144,34 @@
           "motif"
         ],
         "title": "AnnulerGenerationInput"
+      },
+      "AnnulerRendezVous": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Expected Version"
+          },
+          "action": {
+            "type": "string",
+            "const": "ANNULER",
+            "title": "Action"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 1,
+            "title": "Motif"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "action",
+          "motif"
+        ],
+        "title": "AnnulerRendezVous"
       },
       "AnnulerValidationAnimationRequest": {
         "properties": {
@@ -128116,6 +129680,209 @@
           "mode"
         ],
         "title": "CapaciteProduitPayload"
+      },
+      "CarteColoreePayload": {
+        "properties": {
+          "groups": {
+            "items": {
+              "$ref": "#/components/schemas/GroupeCarteColoreePayload"
+            },
+            "type": "array",
+            "maxItems": 500,
+            "title": "Groups"
+          },
+          "sans_commune": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Sans Commune"
+          },
+          "prospects_total": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Prospects Total"
+          },
+          "truncated": {
+            "type": "boolean",
+            "title": "Truncated",
+            "default": false
+          },
+          "geolocalisation_en_attente": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Geolocalisation En Attente",
+            "default": 0
+          },
+          "bbox": {
+            "anyOf": [
+              {
+                "prefixItems": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "number"
+                  }
+                ],
+                "type": "array",
+                "maxItems": 4,
+                "minItems": 4
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bbox"
+          },
+          "zoom": {
+            "type": "integer",
+            "maximum": 20.0,
+            "minimum": 1.0,
+            "title": "Zoom",
+            "default": 5
+          },
+          "generated_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Generated At"
+          },
+          "coloration": {
+            "type": "string",
+            "enum": [
+              "PRIORITE",
+              "RESPONSABLE"
+            ],
+            "title": "Coloration"
+          },
+          "legende": {
+            "items": {
+              "$ref": "#/components/schemas/LegendeCartePayload"
+            },
+            "type": "array",
+            "maxItems": 26,
+            "title": "Legende"
+          },
+          "responsables_non_detailles": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Responsables Non Detailles"
+          },
+          "repartition_limitee": {
+            "type": "boolean",
+            "title": "Repartition Limitee"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "groups",
+          "sans_commune",
+          "prospects_total",
+          "coloration",
+          "legende",
+          "responsables_non_detailles",
+          "repartition_limitee"
+        ],
+        "title": "CarteColoreePayload"
+      },
+      "CarteHistoriquePayload": {
+        "properties": {
+          "groups": {
+            "items": {
+              "$ref": "#/components/schemas/GroupeCartePayload"
+            },
+            "type": "array",
+            "maxItems": 500,
+            "title": "Groups"
+          },
+          "sans_commune": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Sans Commune"
+          },
+          "prospects_total": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Prospects Total"
+          },
+          "truncated": {
+            "type": "boolean",
+            "title": "Truncated",
+            "default": false
+          },
+          "geolocalisation_en_attente": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Geolocalisation En Attente",
+            "default": 0
+          },
+          "bbox": {
+            "anyOf": [
+              {
+                "prefixItems": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "number"
+                  }
+                ],
+                "type": "array",
+                "maxItems": 4,
+                "minItems": 4
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bbox"
+          },
+          "zoom": {
+            "type": "integer",
+            "maximum": 20.0,
+            "minimum": 1.0,
+            "title": "Zoom",
+            "default": 5
+          },
+          "generated_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Generated At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "groups",
+          "sans_commune",
+          "prospects_total"
+        ],
+        "title": "CarteHistoriquePayload"
       },
       "CartePrioritePayload": {
         "properties": {
@@ -132978,6 +134745,11 @@
             "minimum": 0.0,
             "title": "Nombre Unites Sans Gagnant"
           },
+          "unites_non_justifiees": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Unites Non Justifiees"
+          },
           "operations_en_cours": {
             "type": "integer",
             "minimum": 0.0,
@@ -132989,6 +134761,7 @@
         "required": [
           "dossiers_non_resolus",
           "nombre_unites_sans_gagnant",
+          "unites_non_justifiees",
           "operations_en_cours"
         ],
         "title": "CompteursFinAnimationPayload"
@@ -134183,6 +135956,17 @@
       },
       "ContactPayload": {
         "properties": {
+          "sollicitation_telephone_autorisee": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sollicitation Telephone Autorisee"
+          },
           "id": {
             "anyOf": [
               {
@@ -136920,6 +138704,27 @@
         ],
         "title": "CreerQrLieuInput"
       },
+      "CreneauPayload": {
+        "properties": {
+          "debut_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Debut At"
+          },
+          "fin_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Fin At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "debut_at",
+          "fin_at"
+        ],
+        "title": "CreneauPayload"
+      },
       "CycleCommercePayload": {
         "properties": {
           "simulation": {
@@ -136973,6 +138778,58 @@
           "resultats"
         ],
         "title": "CycleGenerationPayload"
+      },
+      "DashboardBorneAnimationPayload": {
+        "properties": {
+          "mode_lecture": {
+            "type": "string",
+            "const": "borne",
+            "title": "Mode Lecture"
+          },
+          "kpis": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Kpis"
+          },
+          "series": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Series"
+          },
+          "top_commercants": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Top Commercants"
+          },
+          "alertes": {
+            "items": {
+              "$ref": "#/components/schemas/NotificationAnimationPayload"
+            },
+            "type": "array",
+            "title": "Alertes"
+          },
+          "actions_a_traiter": {
+            "$ref": "#/components/schemas/PageAnimationsProductivitePayload"
+          }
+        },
+        "type": "object",
+        "required": [
+          "mode_lecture",
+          "kpis",
+          "series",
+          "top_commercants",
+          "alertes",
+          "actions_a_traiter"
+        ],
+        "title": "DashboardBorneAnimationPayload"
       },
       "DashboardOperationnelCommercantPayload": {
         "properties": {
@@ -145037,6 +146894,18 @@
             ],
             "title": "Texte"
           },
+          "texte_affiche": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Texte Affiche",
+            "description": "Texte de présentation avec noms résolus ; texte d’audit original conservé."
+          },
           "auteur_id": {
             "anyOf": [
               {
@@ -147829,6 +149698,17 @@
       },
       "GainAnimationPayload": {
         "properties": {
+          "dossier_fin_ref": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Dossier Fin Ref"
+          },
           "nature": {
             "type": "string",
             "const": "COFFRET",
@@ -147932,6 +149812,17 @@
             "const": "1",
             "title": "Contract Version",
             "default": "1"
+          },
+          "dossier_fin_ref": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Dossier Fin Ref"
           },
           "id": {
             "type": "string",
@@ -148619,6 +150510,17 @@
             "title": "Contract Version",
             "default": "1"
           },
+          "dossier_fin_ref": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Dossier Fin Ref"
+          },
           "id": {
             "type": "string",
             "format": "uuid",
@@ -148847,6 +150749,17 @@
             "const": "1",
             "title": "Contract Version",
             "default": "1"
+          },
+          "dossier_fin_ref": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Dossier Fin Ref"
           },
           "id": {
             "type": "string",
@@ -150017,6 +151930,97 @@
         ],
         "title": "GestionnaireAnimationPayload"
       },
+      "GroupeCarteColoreePayload": {
+        "properties": {
+          "insee": {
+            "type": "string",
+            "title": "Insee"
+          },
+          "nom": {
+            "type": "string",
+            "title": "Nom"
+          },
+          "latitude": {
+            "type": "number",
+            "title": "Latitude"
+          },
+          "longitude": {
+            "type": "number",
+            "title": "Longitude"
+          },
+          "prospects": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Prospects"
+          },
+          "dossiers": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Dossiers"
+          },
+          "repartition": {
+            "items": {
+              "$ref": "#/components/schemas/RepartitionCartePayload"
+            },
+            "type": "array",
+            "maxItems": 26,
+            "title": "Repartition"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "insee",
+          "nom",
+          "latitude",
+          "longitude",
+          "prospects",
+          "dossiers",
+          "repartition"
+        ],
+        "title": "GroupeCarteColoreePayload"
+      },
+      "GroupeCartePayload": {
+        "properties": {
+          "insee": {
+            "type": "string",
+            "title": "Insee"
+          },
+          "nom": {
+            "type": "string",
+            "title": "Nom"
+          },
+          "latitude": {
+            "type": "number",
+            "title": "Latitude"
+          },
+          "longitude": {
+            "type": "number",
+            "title": "Longitude"
+          },
+          "prospects": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Prospects"
+          },
+          "dossiers": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Dossiers"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "insee",
+          "nom",
+          "latitude",
+          "longitude",
+          "prospects",
+          "dossiers"
+        ],
+        "title": "GroupeCartePayload"
+      },
       "GroupeCartePrioritePayload": {
         "properties": {
           "insee": {
@@ -150145,6 +152149,26 @@
           "localeoEstimatedNetCommissionCents"
         ],
         "title": "GroupePaiements"
+      },
+      "GroupesJourneePayload": {
+        "properties": {
+          "en_retard": {
+            "$ref": "#/components/schemas/PageTachesPayload"
+          },
+          "aujourdhui": {
+            "$ref": "#/components/schemas/PageTachesPayload"
+          },
+          "a_venir": {
+            "$ref": "#/components/schemas/PageTachesPayload"
+          }
+        },
+        "type": "object",
+        "required": [
+          "en_retard",
+          "aujourdhui",
+          "a_venir"
+        ],
+        "title": "GroupesJourneePayload"
       },
       "HTTPValidationError": {
         "properties": {
@@ -151019,6 +153043,39 @@
           "generated_at"
         ],
         "title": "IndicateursVision360AnimationPayload"
+      },
+      "IndisponibiliteAgenda": {
+        "properties": {
+          "debut_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Debut At"
+          },
+          "fin_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Fin At"
+          },
+          "motif": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 300
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motif"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "debut_at",
+          "fin_at"
+        ],
+        "title": "IndisponibiliteAgenda"
       },
       "InformationContinuite": {
         "properties": {
@@ -151945,6 +154002,45 @@
         ],
         "title": "JobActualisation"
       },
+      "JourneePayload": {
+        "properties": {
+          "portee": {
+            "type": "string",
+            "enum": [
+              "MOI",
+              "EQUIPE"
+            ],
+            "title": "Portee"
+          },
+          "instant_reference": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Instant Reference"
+          },
+          "date_reference": {
+            "type": "string",
+            "format": "date",
+            "title": "Date Reference"
+          },
+          "contexte_journee": {
+            "type": "string",
+            "title": "Contexte Journee",
+            "description": "Jeton signé liant instant de référence, portée, identité et taille de page ; à reprendre aussi pour revenir à la première page."
+          },
+          "groupes": {
+            "$ref": "#/components/schemas/GroupesJourneePayload"
+          }
+        },
+        "type": "object",
+        "required": [
+          "portee",
+          "instant_reference",
+          "date_reference",
+          "contexte_journee",
+          "groupes"
+        ],
+        "title": "JourneePayload"
+      },
       "KitAnimationPayload": {
         "properties": {
           "animationId": {
@@ -152058,6 +154154,56 @@
           "contexte"
         ],
         "title": "LectureCampagneDTO"
+      },
+      "LectureDossierFinAnimationPayload": {
+        "properties": {
+          "animation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animation Id"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Version"
+          },
+          "dossier": {
+            "$ref": "#/components/schemas/DossierFinAnimationPayload"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "animation_id",
+          "statut",
+          "version",
+          "dossier"
+        ],
+        "title": "LectureDossierFinAnimationPayload"
+      },
+      "LectureNotificationCRM": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "lue_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Lue At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "lue_at"
+        ],
+        "title": "LectureNotificationCRM"
       },
       "LecturePayload": {
         "properties": {
@@ -152242,6 +154388,43 @@
           "servicePreparation"
         ],
         "title": "LectureServicePayload"
+      },
+      "LegendeCartePayload": {
+        "properties": {
+          "cle": {
+            "type": "string",
+            "title": "Cle"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "responsable_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Responsable Id"
+          },
+          "a_reaffecter": {
+            "type": "boolean",
+            "title": "A Reaffecter"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "cle",
+          "libelle",
+          "responsable_id",
+          "a_reaffecter"
+        ],
+        "title": "LegendeCartePayload"
       },
       "Levee": {
         "properties": {
@@ -154130,6 +156313,37 @@
           "base64"
         ],
         "title": "MediaEmbarque"
+      },
+      "MembreAgendaPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "prochaine_disponibilite": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CreneauPayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "libelle",
+          "prochaine_disponibilite"
+        ],
+        "title": "MembreAgendaPayload"
       },
       "MembrePayload": {
         "properties": {
@@ -157057,6 +159271,64 @@
         ],
         "title": "ModifierReferentielCommercantRequest"
       },
+      "ModifierRendezVous": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Expected Version"
+          },
+          "action": {
+            "type": "string",
+            "const": "MODIFIER",
+            "title": "Action"
+          },
+          "titre": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 300,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Titre"
+          },
+          "note": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 10000
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Note"
+          },
+          "remind_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Remind At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "action"
+        ],
+        "title": "ModifierRendezVous"
+      },
       "ModuleDroit": {
         "properties": {
           "id": {
@@ -158200,6 +160472,114 @@
         ],
         "title": "NotificationAnimationPayload"
       },
+      "NotificationCRMPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "tache_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Tache Id"
+          },
+          "type_evenement": {
+            "type": "string",
+            "enum": [
+              "RAPPEL",
+              "AFFECTATION"
+            ],
+            "title": "Type Evenement"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "evenement_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Evenement At"
+          },
+          "lue_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lue At"
+          },
+          "organisation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Organisation Id"
+          },
+          "opportunite_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Opportunite Id"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "due_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Due At"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          },
+          "motif": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motif"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "tache_id",
+          "type_evenement",
+          "created_at",
+          "evenement_at",
+          "lue_at",
+          "organisation_id",
+          "opportunite_id",
+          "libelle",
+          "due_at",
+          "statut",
+          "motif"
+        ],
+        "title": "NotificationCRMPayload"
+      },
       "NotificationCommercantAnimationPayload": {
         "properties": {
           "id": {
@@ -158962,6 +161342,36 @@
       },
       "OpportunitePayload": {
         "properties": {
+          "prospect": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ProspectResumePayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "responsable": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ResponsableResumePayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "prochaine_action": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ProchaineActionPayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "id": {
             "anyOf": [
               {
@@ -160177,6 +162587,46 @@
         ],
         "title": "PageAnimationPayload[ValidationAnimationPayload]"
       },
+      "PageAnimationsProductivitePayload": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/AnimationSummaryPayload"
+            },
+            "type": "array",
+            "maxItems": 100,
+            "title": "Items"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          },
+          "hasMore": {
+            "type": "boolean",
+            "title": "Hasmore"
+          },
+          "observedAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Observedat"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "nextCursor",
+          "hasMore",
+          "observedAt"
+        ],
+        "title": "PageAnimationsProductivitePayload"
+      },
       "PageAnimationsSuivi": {
         "properties": {
           "items": {
@@ -160639,6 +163089,39 @@
         "type": "object",
         "title": "PageContactsPayload"
       },
+      "PageCreneauxAgenda": {
+        "properties": {
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/CreneauPayload"
+            },
+            "type": "array",
+            "title": "Items"
+          }
+        },
+        "type": "object",
+        "required": [
+          "has_more",
+          "next_cursor",
+          "items"
+        ],
+        "title": "PageCreneauxAgenda"
+      },
       "PageCurseurVision360AnimationPayload": {
         "properties": {
           "items": {
@@ -160895,6 +163378,39 @@
           "nonPrisEnCharge"
         ],
         "title": "PageEngagementsFermeture"
+      },
+      "PageEquipeAgenda": {
+        "properties": {
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/MembreAgendaPayload"
+            },
+            "type": "array",
+            "title": "Items"
+          }
+        },
+        "type": "object",
+        "required": [
+          "has_more",
+          "next_cursor",
+          "items"
+        ],
+        "title": "PageEquipeAgenda"
       },
       "PageEvaluationsPayload": {
         "properties": {
@@ -161820,6 +164336,39 @@
         ],
         "title": "PageNotesInternesSupport"
       },
+      "PageNotificationsCRM": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/NotificationCRMPayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "has_more",
+          "next_cursor"
+        ],
+        "title": "PageNotificationsCRM"
+      },
       "PageNotificationsPin": {
         "properties": {
           "items": {
@@ -162256,6 +164805,73 @@
         ],
         "title": "PageRapportsPurgePayload"
       },
+      "PageRattachementsPayload": {
+        "properties": {
+          "total": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total",
+            "description": "Total filtré à la date de calcul, demandé avec avec_total=true ; indépendant du curseur."
+          },
+          "position": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Position",
+            "description": "Nombre de résultats précédant la page au moment du calcul, sans OFFSET SQL."
+          },
+          "total_calcule_le": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total Calcule Le"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/RattachementPayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More",
+            "default": false
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          }
+        },
+        "type": "object",
+        "title": "PageRattachementsPayload"
+      },
       "PageRechercheVision360AnimationPayload": {
         "properties": {
           "items": {
@@ -162293,6 +164909,35 @@
         ],
         "title": "PageRechercheVision360AnimationPayload"
       },
+      "PageReferencesMetierPayload": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ReferenceMetierPayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More",
+            "default": false
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          }
+        },
+        "type": "object",
+        "title": "PageReferencesMetierPayload"
+      },
       "PageRemboursements": {
         "properties": {
           "items": {
@@ -162325,6 +164970,39 @@
           "has_more"
         ],
         "title": "PageRemboursements"
+      },
+      "PageRendezVousAgenda": {
+        "properties": {
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/RendezVousPayload"
+            },
+            "type": "array",
+            "title": "Items"
+          }
+        },
+        "type": "object",
+        "required": [
+          "has_more",
+          "next_cursor",
+          "items"
+        ],
+        "title": "PageRendezVousAgenda"
       },
       "PageResponse": {
         "properties": {
@@ -163002,6 +165680,73 @@
           "appliedFilters"
         ],
         "title": "PageSuivi[VirementReversementSuivi]"
+      },
+      "PageTachesPayload": {
+        "properties": {
+          "total": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total",
+            "description": "Total filtré à la date de calcul, demandé avec avec_total=true ; indépendant du curseur."
+          },
+          "position": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Position",
+            "description": "Nombre de résultats précédant la page au moment du calcul, sans OFFSET SQL."
+          },
+          "total_calcule_le": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total Calcule Le"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/TachePayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More",
+            "default": false
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          }
+        },
+        "type": "object",
+        "title": "PageTachesPayload"
       },
       "PageTemplatesGenerationPayload": {
         "properties": {
@@ -164702,6 +167447,17 @@
             "format": "uuid",
             "title": "Inscription Id"
           },
+          "reference_participation": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reference Participation"
+          },
           "prenom": {
             "anyOf": [
               {
@@ -165547,6 +168303,34 @@
           "pin_reaffichable"
         ],
         "title": "PinGenere"
+      },
+      "PlageAgenda": {
+        "properties": {
+          "jour": {
+            "type": "integer",
+            "maximum": 6.0,
+            "minimum": 0.0,
+            "title": "Jour"
+          },
+          "debut": {
+            "type": "string",
+            "pattern": "^(?:[01][0-9]|2[0-3]):[0-5][0-9]$",
+            "title": "Debut"
+          },
+          "fin": {
+            "type": "string",
+            "pattern": "^(?:[01][0-9]|2[0-3]):[0-5][0-9]$",
+            "title": "Fin"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "jour",
+          "debut",
+          "fin"
+        ],
+        "title": "PlageAgenda"
       },
       "PlanificationBatchPayload": {
         "properties": {
@@ -167813,6 +170597,36 @@
         ],
         "title": "PriseEnChargeEngagementPayload"
       },
+      "ProchaineActionPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "type": {
+            "type": "string",
+            "title": "Type"
+          },
+          "date_action": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Date Action"
+          },
+          "route_interne": {
+            "type": "string",
+            "title": "Route Interne"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "date_action",
+          "route_interne"
+        ],
+        "title": "ProchaineActionPayload"
+      },
       "ProduitCommercantPayload": {
         "properties": {
           "produit": {
@@ -168899,6 +171713,17 @@
       },
       "ProjectionBon": {
         "properties": {
+          "dossier_fin_ref": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Dossier Fin Ref"
+          },
           "contract_version": {
             "type": "string",
             "const": "1",
@@ -170026,6 +172851,36 @@
           "etat_priorite"
         ],
         "title": "ProspectPrioritePayload"
+      },
+      "ProspectResumePayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "nom": {
+            "type": "string",
+            "title": "Nom"
+          },
+          "commune": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Commune"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "nom"
+        ],
+        "title": "ProspectResumePayload"
       },
       "ProvenanceEditionDTO": {
         "properties": {
@@ -172326,6 +175181,144 @@
         ],
         "title": "RattachementCommande"
       },
+      "RattachementPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "organisation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Organisation Id"
+          },
+          "opportunite_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Opportunite Id"
+          },
+          "type_preuve": {
+            "type": "string",
+            "title": "Type Preuve"
+          },
+          "reference_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Reference Id"
+          },
+          "cible_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Cible Id"
+          },
+          "auteur_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Auteur Id"
+          },
+          "version": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Version"
+          },
+          "created_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created At"
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated At"
+          },
+          "reference": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reference"
+          },
+          "statut": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Statut"
+          },
+          "cible_nom": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cible Nom"
+          },
+          "libelle": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Libelle"
+          },
+          "eligible": {
+            "type": "boolean",
+            "title": "Eligible"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "organisation_id",
+          "opportunite_id",
+          "type_preuve",
+          "reference_id",
+          "cible_id",
+          "eligible"
+        ],
+        "title": "RattachementPayload"
+      },
       "RattrapagePayoutsStripeRequest": {
         "properties": {
           "stripe_payout_id": {
@@ -172363,6 +175356,68 @@
         },
         "type": "object",
         "title": "RattrapagePayoutsStripeRequest"
+      },
+      "ReaffecterRendezVous": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Expected Version"
+          },
+          "action": {
+            "type": "string",
+            "const": "REAFFECTER",
+            "title": "Action"
+          },
+          "responsable_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Responsable Id"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 1,
+            "title": "Motif"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "action",
+          "responsable_id",
+          "motif"
+        ],
+        "title": "ReaffecterRendezVous"
+      },
+      "RealiserRendezVous": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Expected Version"
+          },
+          "action": {
+            "type": "string",
+            "const": "REALISER",
+            "title": "Action"
+          },
+          "compte_rendu": {
+            "type": "string",
+            "maxLength": 10000,
+            "minLength": 1,
+            "title": "Compte Rendu"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "action",
+          "compte_rendu"
+        ],
+        "title": "RealiserRendezVous"
       },
       "ReauthentificationPin": {
         "properties": {
@@ -172644,6 +175699,57 @@
           "updated_at"
         ],
         "title": "RechercheVision360AnimationPayload"
+      },
+      "RecommandationAnimationPayload": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "title": "Code"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "destination": {
+            "type": "string",
+            "title": "Destination"
+          },
+          "disponible": {
+            "type": "boolean",
+            "title": "Disponible"
+          },
+          "motif": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motif"
+          },
+          "a_traiter": {
+            "type": "boolean",
+            "title": "A Traiter"
+          },
+          "observe_le": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Observe Le"
+          }
+        },
+        "type": "object",
+        "required": [
+          "code",
+          "libelle",
+          "destination",
+          "disponible",
+          "motif",
+          "a_traiter",
+          "observe_le"
+        ],
+        "title": "RecommandationAnimationPayload"
       },
       "RecompenseLive": {
         "properties": {
@@ -173872,6 +176978,74 @@
         ],
         "title": "ReferenceEvaluationInput"
       },
+      "ReferenceMetierPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "type_preuve": {
+            "type": "string",
+            "title": "Type Preuve"
+          },
+          "reference": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reference"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          },
+          "cible_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cible Id"
+          },
+          "cible_nom": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cible Nom"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "eligible": {
+            "type": "boolean",
+            "title": "Eligible"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "type_preuve",
+          "statut",
+          "libelle",
+          "eligible"
+        ],
+        "title": "ReferenceMetierPayload"
+      },
       "ReferencePayload": {
         "properties": {
           "id": {
@@ -174496,6 +177670,265 @@
         ],
         "title": "RemplacerGainAnimationRequest"
       },
+      "RendezVousCreation": {
+        "properties": {
+          "organisation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Organisation Id"
+          },
+          "contact_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Contact Id"
+          },
+          "opportunite_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Opportunite Id"
+          },
+          "responsable_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Responsable Id"
+          },
+          "titre": {
+            "type": "string",
+            "maxLength": 300,
+            "minLength": 1,
+            "title": "Titre"
+          },
+          "note": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 10000
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Note"
+          },
+          "debut_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Debut At"
+          },
+          "fin_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Fin At"
+          },
+          "remind_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Remind At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "organisation_id",
+          "responsable_id",
+          "titre",
+          "debut_at",
+          "fin_at"
+        ],
+        "title": "RendezVousCreation"
+      },
+      "RendezVousPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "organisation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Organisation Id"
+          },
+          "organisation_nom": {
+            "type": "string",
+            "title": "Organisation Nom"
+          },
+          "contact_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Contact Id"
+          },
+          "opportunite_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Opportunite Id"
+          },
+          "responsable_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Responsable Id"
+          },
+          "responsable_nom": {
+            "type": "string",
+            "title": "Responsable Nom"
+          },
+          "a_reaffecter": {
+            "type": "boolean",
+            "title": "A Reaffecter"
+          },
+          "titre": {
+            "type": "string",
+            "title": "Titre"
+          },
+          "note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Note"
+          },
+          "debut_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Debut At"
+          },
+          "fin_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Fin At"
+          },
+          "remind_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Remind At"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "PLANIFIE",
+              "VALIDE",
+              "REALISE",
+              "ANNULE"
+            ],
+            "title": "Statut"
+          },
+          "compte_rendu": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Compte Rendu"
+          },
+          "motif": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motif"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "tache_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Tache Id"
+          },
+          "tache_statut": {
+            "type": "string",
+            "enum": [
+              "OUVERTE",
+              "BLOQUEE",
+              "TERMINEE",
+              "ANNULEE"
+            ],
+            "title": "Tache Statut"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "organisation_id",
+          "organisation_nom",
+          "contact_id",
+          "opportunite_id",
+          "responsable_id",
+          "responsable_nom",
+          "a_reaffecter",
+          "titre",
+          "note",
+          "debut_at",
+          "fin_at",
+          "remind_at",
+          "statut",
+          "compte_rendu",
+          "motif",
+          "version",
+          "tache_id",
+          "tache_statut",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "RendezVousPayload"
+      },
       "RenvoyerLienInscriptionAnimationRequest": {
         "properties": {
           "email": {
@@ -174531,6 +177964,26 @@
           "expectedVersion"
         ],
         "title": "ReouvrirDossierRequest"
+      },
+      "RepartitionCartePayload": {
+        "properties": {
+          "cle": {
+            "type": "string",
+            "title": "Cle"
+          },
+          "effectif": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Effectif"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "cle",
+          "effectif"
+        ],
+        "title": "RepartitionCartePayload"
       },
       "RepondreMessageContactRequest": {
         "properties": {
@@ -174666,6 +178119,58 @@
           "text"
         ],
         "title": "ReponseTexte"
+      },
+      "ReporterRendezVous": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Expected Version"
+          },
+          "action": {
+            "type": "string",
+            "const": "REPORTER",
+            "title": "Action"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 1,
+            "title": "Motif"
+          },
+          "debut_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Debut At"
+          },
+          "fin_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Fin At"
+          },
+          "remind_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Remind At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "action",
+          "motif",
+          "debut_at",
+          "fin_at"
+        ],
+        "title": "ReporterRendezVous"
       },
       "ReprendreGeneration": {
         "properties": {},
@@ -175057,6 +178562,25 @@
           "nom"
         ],
         "title": "ResponsableDemande"
+      },
+      "ResponsableResumePayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "nom_affiche": {
+            "type": "string",
+            "title": "Nom Affiche"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "nom_affiche"
+        ],
+        "title": "ResponsableResumePayload"
       },
       "ResultatBloc": {
         "properties": {
@@ -177161,6 +180685,17 @@
       },
       "ScanBon": {
         "properties": {
+          "dossier_fin_ref": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Dossier Fin Ref"
+          },
           "contract_version": {
             "type": "string",
             "const": "1",
@@ -180063,6 +183598,238 @@
         ],
         "title": "Tache"
       },
+      "TachePayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "organisation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Organisation Id"
+          },
+          "opportunite_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Opportunite Id"
+          },
+          "contact_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Contact Id"
+          },
+          "responsable_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Responsable Id"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "type": {
+            "type": "string",
+            "title": "Type"
+          },
+          "cible": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cible"
+          },
+          "canal": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Canal"
+          },
+          "sollicitante": {
+            "type": "boolean",
+            "title": "Sollicitante",
+            "default": false
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          },
+          "due_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Due At"
+          },
+          "remind_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Remind At"
+          },
+          "version": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Version"
+          },
+          "resultat": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Resultat"
+          },
+          "created_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created At"
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated At"
+          },
+          "reminder_revision": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reminder Revision"
+          },
+          "a_reaffecter": {
+            "type": "boolean",
+            "title": "A Reaffecter",
+            "default": false
+          },
+          "rendez_vous_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rendez Vous Id"
+          },
+          "rendez_vous_statut": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rendez Vous Statut"
+          },
+          "prospect": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ProspectResumePayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "responsable": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ResponsableResumePayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "route_interne": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Route Interne"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "organisation_id",
+          "libelle",
+          "type",
+          "statut",
+          "due_at"
+        ],
+        "title": "TachePayload"
+      },
       "TarifInput": {
         "properties": {
           "poste": {
@@ -181245,6 +185012,17 @@
             "format": "uuid",
             "title": "Organisation Id"
           },
+          "organisation_nom": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Organisation Nom"
+          },
           "etat": {
             "type": "string",
             "title": "Etat"
@@ -181873,6 +185651,27 @@
           "validatedAt"
         ],
         "title": "ValidationTerrainPayload"
+      },
+      "ValiderRendezVous": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Expected Version"
+          },
+          "action": {
+            "type": "string",
+            "const": "VALIDER",
+            "title": "Action"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "action"
+        ],
+        "title": "ValiderRendezVous"
       },
       "VariationMesureDTO": {
         "properties": {
@@ -183410,6 +187209,16 @@
               }
             ],
             "title": "Next Action"
+          },
+          "recommandation": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RecommandationAnimationPayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "type": "object",
@@ -183823,6 +187632,18 @@
       },
       "app__api__prospection_projection_schemas__OrganisationPayload": {
         "properties": {
+          "sollicitation_telephone_autorisee": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sollicitation Telephone Autorisee",
+            "description": "Autorisation courante selon la politique de sollicitation ; la présence d’un numéro reste distincte."
+          },
           "responsable_id": {
             "anyOf": [
               {

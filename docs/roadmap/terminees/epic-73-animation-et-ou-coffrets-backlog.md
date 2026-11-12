@@ -1,5 +1,28 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+## Évolution du 12 novembre 2026 — productivité de l’organisateur
+
+**E73-EVO-ANIMATION-PRODUCTIVITE** reprend les 13 constats de l’
+[audit UX Animation](../../audits/animation/localeo-animation-ux-productivite-2026-11-12.md).
+La [spécification canonique](../../specifications/epic-73-animation-et-ou-coffrets/ux-productivite-organisateur.md)
+ajoute **AP-01 à AP-22**, sans modifier les IDs historiques : L1 accueil fiable,
+L2 saisies et contexte, L3 listes/recherche bornées, L4 clavier/mobile,
+L5 préparation/invitations/corrections, L6 gains/fin, L7 comparaison/mesures.
+
+Les défauts de cohérence, garde, états et accessibilité renforcent les attentes
+existantes de US-23/US-29 et des parcours SaaS §5. La restauration des listes,
+la file sélective et les lectures ciblées étendent explicitement le comportement.
+Règles de qualification, droits, envoi, tirage, fin et archivage conservées ;
+aucune clôture anticipée interdite implicitement. Contrats producteurs/consommateurs,
+performance, fixtures et exploitation sont examinés dans la conception.
+
+**État de cette évolution : sept lots implémentés ; AP-22 partiellement vérifié.**
+Tests de comportement, revue indépendante, contrôles documentaires et limites de
+capacité/recette humaine sont distingués au
+[bilan d’implémentation](../../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md#évolution--e73-evo-animation-productivite-12-novembre-2026).
+E73 reste Terminée pour sa clôture historique. Les changements documentaires
+E73-EVO-CLOTURE-AUTO préexistants restent un périmètre indépendant.
+
 ## Évolution du 11 novembre 2026 — notifications de gains par SMS
 
 **E73-EVO-GAINS-SMS** : compléter l’e-mail et Live par un SMS si le participant

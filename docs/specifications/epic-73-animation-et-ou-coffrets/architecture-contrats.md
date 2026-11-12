@@ -1,5 +1,16 @@
 # E73 — Architecture et contrats transverses
 
+Complément du **12 novembre 2026 — E73-EVO-ANIMATION-PRODUCTIVITE** :
+la [conception de productivité organisateur](ux-productivite-organisateur.md)
+spécifie une recommandation serveur commune, les listes bornées, la recherche
+de participants publics, le filtre et l’accès ciblé aux dossiers de fin.
+**Contrats implémentés et générés depuis le producteur**, recopiés dans Animation ;
+mutations, droits, reçus et invariants existants conservés. Le mode dashboard
+`borne` et la nouvelle liste négocient les moteurs supportés. La politique
+de domaine est compilée en prédicats SQL avant pagination, sans table de
+projection supplémentaire. Les quatre index v313 sont appliqués sur TEST.
+Les limites des mesures N/10N et de l’acceptation AP-22 figurent au bilan.
+
 Complément du **1er novembre 2026 — E73-EVO-ONBOARDING-ANIMATION-SIMPLE** :
 les critères OA-01 à OA-04 des [périmètres commerçants](perimetres-parcours-saas.md)
 remplacent le contrat et la préparation obligatoires pour Animation seule.
