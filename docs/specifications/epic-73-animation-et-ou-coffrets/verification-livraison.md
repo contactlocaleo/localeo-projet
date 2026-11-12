@@ -256,6 +256,12 @@ ne sont pas reconstitués ; les anciens liens/QR directs doivent être remplacé
 pour mesurer les ouvertures. Voir les
 [consignes d’exploitation](../../exploitation/animation/deploiement-render.md#bilan-pdf-et-performance-de-diffusion--11-novembre-2026).
 
+**Complément du 12 novembre 2026** : la migration v310 est désormais appliquée
+sur TEST après sauvegarde. La lecture précédemment en erreur réussit et la
+readiness HTTP est `READY` ; 24 tests isolés ciblés réussissent. Le constat du
+11 novembre ci-dessus reste historique. Preuves et limite de recette navigateur
+dans la [trace de réparation TEST](../../roadmap/anomalies/animation.md#correction-du-12-novembre-2026--erreur-interne-des-liens-et-qr-sur-test).
+
 ## Correctif du 11 novembre 2026 — identité et détail de participation
 
 Bases : Backend `3a55fae`, Animation `f1dad12`, Pro `c0dc46a`, Projet `8ee74a6`

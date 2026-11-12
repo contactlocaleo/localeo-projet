@@ -1,5 +1,45 @@
 # Registre des anomalies
 
+## Correction du 12 novembre 2026 — erreur interne des liens et QR sur TEST
+
+- **Attendu / observé** : un gestionnaire autorisé ouvre **Communiquer → Liens
+  et QR de diffusion** pour consulter ou créer ses supports ; sur TEST, l’écran
+  affiche « Erreur interne », référence utilisateur
+  `LOC-cc759754-b153-4332-b96e-fe32c8eec9a6`.
+- **Cause démontrée sur la base TEST** : le schéma est resté en v309. La lecture
+  du repository `sources` sélectionne le modèle complet, dont les colonnes
+  `clics_lien`, `scans_qr` et `collecte_depuis` ajoutées par v310. Leur absence
+  provoque une `ProgrammingError`, SQLSTATE `42703`, même sans support enregistré.
+  La référence LOC n’a pas été recherchée dans les journaux distants ; la cause
+  est reproduite directement par une lecture SQL sur TEST.
+- **Correction réalisée** : cible TEST contrôlée, sauvegarde PostgreSQL complète
+  de 73 050 776 octets et vérification de son catalogue, puis application de
+  `v310_performance_diffusion_animation.sql` par le lanceur standard. Le plan
+  préalable n’indiquait que cette migration ; les empreintes antérieures sont
+  validées. Empreinte v310 :
+  `306398726eb8b7c704eec894be15f4dd39ad17852d782f486268d5a5f035f190`.
+  Sauvegarde et preuves privées ignorées par Git dans
+  `localeo-backend/tmp/migration-v310-test-20261112/`.
+- **Preuves après réparation** : lecture des trois colonnes réussie,
+  migration et empreinte enregistrées, contrainte
+  `ck_source_diffusion_compteurs` validée. Zéro support enregistré, donc aucun
+  compteur à initialiser. Le GET protégé de readiness sur l’API TEST répond
+  **HTTP 200, `READY`, `ready=true`**, sans contrôle en échec. Les tests isolés
+  `tests/api/test_valorisation_animation.py` et
+  `tests/domain/animation_locale/test_valorisation_animation_dedicated.py`
+  donnent **24 réussites, zéro skip** ; rapport
+  `localeo-backend/tmp/diffusion-test-v310-regressions.xml`.
+- **Limites et impacts** : parcours navigateur authentifié TEST non exécuté ;
+  après rechargement, l’écran doit présenter « Aucun support de diffusion créé. »
+  et permettre la création selon les droits. La réparation applique la migration
+  existante sans changer le code, les permissions, contrats, batchs, flags ou
+  données de démonstration ; aucun déploiement applicatif nécessaire. Version
+  backend distante non relevée ; sources locales examinées sur `95b7db2`, avec
+  les modifications ERP préexistantes préservées. Aucun commit ou push réalisé
+  pendant cette intervention ; sa trace documentaire est incluse dans la
+  livraison Git du 12 novembre. Voir les
+  [consignes d’exploitation](../../exploitation/animation/deploiement-render.md#bilan-pdf-et-performance-de-diffusion--11-novembre-2026).
+
 ## Correction du 11 novembre 2026 — archives hors du tableau de bord
 
 - **Attendu** : une animation archivée se consulte depuis **Animations → Mes
