@@ -1,5 +1,47 @@
 # Backlog Epic 60 - BackOffice ERP, referencement et commercialisation 360
 
+## Évolution du 12 novembre 2026 — UX quotidienne et productivité
+
+Référence **E60-EVOL-UX-20261112** : [audit ERP](../../audits/backend/localeo-erp-ux-productivite-2026-11-12.md)
+et [spécification des six lots](../../specifications/epic-60-vision-360-commercialisation/ux-productivite.md).
+L'audit de code/documentation a été suivi d'une demande d'implémentation.
+Les six lots sont réalisés dans le backend et vérifiés localement sur fixtures
+navigateur, API et PostgreSQL jetable ; les preuves et réserves sont dans le
+[bilan d'acceptation](../../specifications/epic-60-vision-360-commercialisation/ux-productivite.md#bilan-dacceptation-local).
+**CA-20 reste ouvert**, ainsi que la recette TEST, l'observation humaine et les
+mesures de capacité. Aucun gain humain ni déploiement n'est annoncé. La clôture V1
+ci-dessous et les identifiants PRD/COM360/ERP-ARB restent inchangés.
+
+| Critère ajouté | Résultat observable attendu | Lot / constat d'audit |
+| --- | --- | --- |
+| E60-UX-CA-01 | Depuis une recherche Disponibilité/Coffrets/Commerçants, ouvrir une fiche puis revenir restitue l'origine, les filtres, le tri et la page ; une origine interdite utilise un parent autorisé. | L01 / 01 |
+| E60-UX-CA-02 | Le retour restaure le focus et la position de la ligne si elle existe ; sinon un repère utile des résultats. Arrivée directe, actualisation et nouvel onglet gardent un retour cohérent. | L01 / 01 |
+| E60-UX-CA-03 | Une fiche Utilisateur possède une destination UI stable ; son retour conserve la page et les filtres, sans exposer un compte interdit. | L01 / 13 |
+| E60-UX-CA-04 | Une panne temporaire de vérification au retour dans l'onglet propose une reprise, avec saisie masquée en mémoire ; seule la même identité avec droits revalidés peut la retrouver, dans les délais de session. | L02 / 02 |
+| E60-UX-CA-05 | 401, refus 403 et CSRF sont distingués ; aucun droit retiré ni aucune donnée interdite n'est restauré, aucune commande n'est rejouée automatiquement. | L02 / 03 |
+| E60-UX-CA-06 | Des réponses d'onglets reçues en ordre inverse ne peuvent afficher ni rendre actives les données/actions d'un ancien panneau. | L02 / 10 |
+| E60-UX-CA-07 | Un bloc d'accueil indisponible garde une erreur et une reprise locales ; les autres blocs et accès autorisés restent disponibles. | L02 / 04 |
+| E60-UX-CA-08 | Un refus de saisie conserve les valeurs et identifie les champs/causes ; un conflit de version propose une reprise explicite sans écrasement. | L03 / 09 |
+| E60-UX-CA-09 | Une réponse perdue après enregistrement se résout avec la même clé et le même payload ; une intention n'a pas deux effets, y compris sur les ressources préparées et notifications. | L03 / 08 |
+| E60-UX-CA-10 | Après succès, ressource/résultat et prochaine étape sont compréhensibles ; enregistrer n'entraîne ni publication, ni validation fiscale, ni envoi supplémentaire. | L03 / 06, 09 |
+| E60-UX-CA-11 | Dossiers à reprendre et alertes précèdent les compteurs à l'accueil ; les applications restent accessibles et le profil Finance ne reçoit pas de données catalogue supplémentaires. | L04 / 04 |
+| E60-UX-CA-12 | La file indique son périmètre d'équipe, prochaine action, responsable et échéance, avec absences explicites ; aucune attribution personnelle n'est déduite d'un nom libre. | L04 / 04 |
+| E60-UX-CA-13 | « Aller à une fonction » retrouve au clavier les seules destinations ERP autorisées, sans requête globale sur les données métier. | L06 / 14 |
+| E60-UX-CA-14 | La recherche catalogue distingue critères courants/avancés et résume les filtres actifs ; réinitialisation/effacement conserve une sémantique API identique et remet page 1. | L05 / 05 |
+| E60-UX-CA-15 | Un commerce se sélectionne par nom et commune dans une recherche paginée de 25 résultats ; les réponses périmées sont ignorées et l'UUID reste la valeur de contrat. | L05 / 05 |
+| E60-UX-CA-16 | Statuts, verdicts et familles ont des libellés français et tons adaptés, sans confondre brouillon, échec, fiscalité et disponibilité. | L05 / 07 |
+| E60-UX-CA-17 | La fiche coffret propose une progression compacte et une aide dépliable ; les contrôles serveur et conséquences BUM restent explicites près des actions concernées. | L05 / 06 |
+| E60-UX-CA-18 | Les onglets disposent de relations accessibles complètes, d'un focus clavier cohérent et d'états chargement/vide/erreur ; recette à 320/390/1280 px et texte 200 %. | L06 / 11 |
+| E60-UX-CA-19 | La reconnexion peut ramener à une route ERP validée après contrôle des droits ; aucun secret/saisie dans l'URL, aucun retour privé repris par une identité différente. | L01 / 12 |
+| E60-UX-CA-20 | Un bilan avant/après mesure réussite sans aide, durée, retours et ressaisies sur les mêmes tâches ; aucun gain n'est annoncé sans mesure ni nouvelle télémétrie sensible. | L04 / transversal |
+
+Les impacts, invariants, contrats, scénarios de refus et limites restent dans
+la spécification. Dépôts modifiés : backend ERP et projet documentaire ; les
+trois frontends n'ont pas de contrat modifié. Pas de migration ni changement du
+générateur : aucune donnée métier ou permission nouvelle. Les fixtures couvrent
+les nouveaux états ; la représentativité des données TEST et les gains restent
+à observer avec les utilisateurs.
+
 ## Livraison V1 — 6 septembre 2026
 
 - Statut : `Termine` pour le développement des 22 stories PRD-561 à PRD-582.

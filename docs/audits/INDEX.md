@@ -2,6 +2,8 @@
 
 Constats datés conservés par application. Un audit ancien ne décrit pas automatiquement l’état actuel.
 
+- [Localeo ERP — UX quotidienne et productivité — 12 novembre 2026](backend/localeo-erp-ux-productivite-2026-11-12.md) : audit du code et des spécifications, 14 constats, continuité des dossiers, reprises, enregistrement et lisibilité. Photographie avant changement ; les six lots implémentés, preuves locales et réserves sont suivis dans [E60-EVOL-UX-20261112](../specifications/epic-60-vision-360-commercialisation/ux-productivite.md). Aucun gain humain mesuré.
+
 - [Localeo Animation — UX quotidienne et productivité — 12 novembre 2026](animation/localeo-animation-ux-productivite-2026-11-12.md) : parcours TEST bureau/mobile, prochaine action contradictoire, continuité des listes/saisies, recherche, opérations et bilans ; 13 constats de référence, sept lots et 22 critères dans E73-EVO-ANIMATION-PRODUCTIVITE. L’audit reste la photographie avant changement ; réalisation et limites sont suivies dans le bilan E73.
 
 - [Localeo CRM — UX quotidienne et productivité — 12 novembre 2026](backend/localeo-crm-ux-productivite-2026-11-12.md) : parcours TEST bureau/mobile et code en lecture seule, continuité de recherche, contacts/actions, agenda, imports, qualification et carte ; six lots spécifiés dans E71-EVOL-10, sans implémentation.

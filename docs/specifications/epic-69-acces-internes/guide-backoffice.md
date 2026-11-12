@@ -111,6 +111,55 @@ coffret conserve sa véritable référence financière, sans créer de fausse in
 
 ## Refus et reprise
 
+### Travail quotidien dans l'ERP — évolution E60 du 12 novembre 2026
+
+Ces améliorations sont disponibles après livraison du backend correspondant à
+[E60-EVOL-UX-20261112](../epic-60-vision-360-commercialisation/ux-productivite.md).
+Elles ne modifient pas les droits de votre profil.
+
+- L'accueil présente **Dossiers de l’équipe à reprendre** et les alertes avant
+  les indicateurs. Le responsable est informatif ; cette liste n'est pas une
+  file personnelle. Un bloc indisponible possède son propre bouton de reprise.
+- **Aller à une fonction**, au-dessus des rubriques, recherche les destinations
+  auxquelles vous avez accès. Dans les onglets des fiches, les flèches déplacent
+  le focus ; Entrée ou Espace ouvre l'onglet choisi.
+- Sur **Coffrets** et **Disponibilité du catalogue**, utilisez les trois filtres
+  courants, puis **Filtres avancés** si nécessaire. Le commerce se recherche par
+  nom ou login, avec la commune pour distinguer les homonymes. Les filtres
+  appliqués s'effacent individuellement ; une nouvelle recherche repart page 1.
+- Le retour d'une fiche conserve la recherche et la page d'origine. Dans
+  **Utilisateurs internes**, la fiche possède aussi une URL propre ;
+  **Revenir à la liste** retrouve la page et les filtres.
+- La fiche coffret affiche son état de préparation et une aide dépliable.
+  Enregistrer ne met pas en vente et ne valide pas la qualification BUM.
+  Les avertissements de composition et de publication restent à lire.
+
+Si la vérification de votre accès échoue après une coupure réseau, la saisie
+reste masquée dans l'onglet, jusqu'à l'expiration de la session. Utiliser
+**Réessayer la vérification** : seule la même identité avec les mêmes droits
+peut retrouver cette saisie. Une expiration ou un retrait de droits l'efface.
+La reconnexion conserve une destination ERP autorisée, sans transmettre les
+recherches libres ou les valeurs du formulaire.
+
+Une erreur de champ apparaît près du formulaire et permet d'atteindre le champ
+à corriger. Si le dossier a changé, consulter sa version actuelle dans un autre
+onglet, comparer puis reprendre les modifications choisies. Aucun écrasement
+automatique n'est proposé.
+
+**Résultat à vérifier** signifie que la réponse d'enregistrement s'est perdue.
+Conserver l'onglet ouvert et utiliser **Vérifier le résultat** : la même intention
+est rejouée dans la fenêtre de 24 heures. Les champs restent figés pendant cette
+vérification. Après fermeture, actualisation ou expiration de cette fenêtre,
+faire vérifier le dossier et la référence disponible avant toute nouvelle
+commande : la reprise n'est plus garantie.
+
+Une photo dont l'envoi est confirmé est réutilisée lors de cette reprise. Si
+l'envoi de la photo lui-même est incertain, l'enregistrement reste bloqué :
+faire vérifier le média par l'administrateur avant de reprendre. Le formulaire
+ne dispose pas d'un rapprochement automatique des médias orphelins. Après
+confirmation du résultat, reprendre le dossier ou sélectionner à nouveau la
+photo seulement si l'absence d'enregistrement est établie.
+
 - « Accès non autorisé » : vérifier le profil et la fonction demandée avec l'admin ; l'accès à
   un menu ne permet pas nécessairement toutes les actions du dossier.
 - Finance ne peut pas rembourser : transmettre la demande à l'admin par le

@@ -2,6 +2,16 @@
 
 > Suivi produit au 18 septembre 2026 : **Terminée** — [backlog de référence](../../roadmap/terminees/epic-60-vision-360-commercialisation-backlog.md). Les bilans techniques datés ci-dessous conservent leur portée historique.
 
+## Évolution UX du 12 novembre 2026
+
+[E60-EVOL-UX-20261112 — UX quotidienne et productivité](ux-productivite.md)
+relie l'[audit ERP](../../audits/backend/localeo-erp-ux-productivite-2026-11-12.md)
+à six lots implémentés : continuité, reprise, enregistrement, accueil, catalogue
+et navigation accessible. Les preuves locales et limites sont suivies dans le
+bilan d'acceptation de cette spécification. L'audit reste la photographie avant
+changement ; les gains humains (CA-20), la recette TEST et la capacité restent à
+valider. La clôture historique reste distincte de cette évolution.
+
 ## Version implementee V1
 
 La reference fonctionnelle est [la specification detaillee](specifications-fonctionnelles.md).

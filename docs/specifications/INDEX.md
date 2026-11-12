@@ -80,7 +80,7 @@ Commencer par le README du sujet, puis consulter ses règles, contrats et arbitr
 | 57 | [Catalogues publics et pagination](epic-57-bornage-pagination-api-marketplace/README.md) | Terminée | Backend, Marketplace |
 | 58 | [Filtre annuel global](epic-58-filtre-annuel-global/README.md) | À faire | Backend, Animation |
 | 59 | [Tests de performance API](epic-59-tests-performance-api/README.md) | Terminée | Backend |
-| 60 | [Vision 360 Commercialisation](epic-60-vision-360-commercialisation/README.md) | Terminée | Backend |
+| 60 | [Vision 360 Commercialisation](epic-60-vision-360-commercialisation/README.md) ; [UX quotidienne ERP](epic-60-vision-360-commercialisation/ux-productivite.md), six lots implémentés localement le 12 novembre ; CA-20, recette TEST et capacité ouverts | Terminée (socle historique) | Backend |
 | 63 | [Démonstrations communes](epic-63-demonstrations-communes/README.md) | Terminée | Backend et trois interfaces |
 | 65 | [Vues ERP audit, paiements et reversements](epic-65-vues-erp/README.md) | Terminée | Backend ERP |
 | 66 | [Localeo Atelier — Coffrets assistés par IA](epic-66-localeo-atelier/README.md) | Terminée | Backend ERP/PWA/DAM, Marketplace et contrats partagés |
