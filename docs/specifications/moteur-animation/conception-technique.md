@@ -1943,3 +1943,119 @@ Conserver même scénario/volume et noter les erreurs ou abandons, avec résulta
 agrégés sans texte de réponse, accès personnel ni suivi Analytics. L'absence de
 mesure humaine avant/après reste explicite : aucun pourcentage de productivité
 ni réduction du temps de travail n'est revendiqué.
+
+<a id="e55-evol-traitement-20261113"></a>
+## E55-EVOL-TRAITEMENT-20261113 — Dossier ERP unique
+
+### Écart et décision
+
+Baseline du 13 novembre : backend `76d5dee9`, projet `14fdc14`, arbres propres.
+La console de génération possède déjà liste, prompt, import, aperçu et reprise,
+mais renvoie vers une autre fiche pour la qualification. L’import demande une
+vérification puis un enregistrement distincts. La sélection du dossier vit en
+mémoire, sans lien direct de reprise. Le parcours cible et ses dix critères sont
+dans la [spécification fonctionnelle](localeo_animation_engine_spec.md#e55-evol-traitement-20261113).
+
+Cette évolution unifie la présentation et l’enchaînement des commandes existantes.
+Elle ne crée pas de troisième machine d’état. Les règles
+[ERP-UX-01 à ERP-UX-12](../../architecture/transverse/conventions-backoffice.md#ux-des-pages-de-gestion-erp)
+s’appliquent, en particulier identité, portée, saisies, état confirmé et reprise.
+
+### Propriétaires, transitions et contrats préservés
+
+`DemandePreparationAccompagnee` possède la qualification, le calendrier et le
+suivi E73 ; `OperationAnimation` et les règles de génération possèdent prompt,
+réponse, acceptation et finalisation E55. L’application coordonne ces agrégats ;
+la console présente leurs `allowedActions` sans déduire une nouvelle permission.
+
+Toutes les routes ci-dessous utilisent la base
+`/internal/animation-locale/operations/{operation_id}` :
+
+| Geste ERP | Contrat existant | Fait confirmé attendu |
+| --- | --- | --- |
+| Valider la demande | `POST /service-preparation/completer`, version du service | `A_COMPLETER → EN_PREPARATION` ; worker autorisé à préparer le prompt |
+| Refuser avec motif | `POST /service-preparation/annuler`, version du service, motif de 3 à 2 000 caractères | Opération et service `ANNULEE`, réservation libérée, motif dans l’historique du service |
+| Recevoir un complément historique | `POST /service-preparation/recevoir-complement`, version du service | Reprise du suivi existant sur la même demande |
+| Récupérer le prompt | `GET /prompts/{prompt_id}/export?format=texte` | Lecture privée du prompt courant et de son contexte |
+| Importer le résultat | `POST /reponses/verifier`, puis `POST /reponses` seulement si conforme | Contrôle consultatif puis dépôt du même document, `RESULTAT_DEPOSE` ; le worker confirme ensuite `A_VALIDER` ou `RESULTAT_INVALIDE` |
+| Valider le traitement | `POST /reponses/{id}/accepter`, version opération/source, prompt et empreinte | `RESULTAT_PUBLIE` ; worker applique puis confirme `TERMINEE` et service `PRETE` dans la même transaction |
+| Reprendre un échec autorisé | `POST /reprendre`, version opération | Même demande, même quota, phase de reprise décidée par le serveur |
+
+Les reçus service (`/service-preparation/commandes/{cle}`) et génération
+(`/commandes/{cle}`) restent distincts. Le verrou de commande dans la fiche est
+commun : après un résultat incertain, les autres commandes attendent la
+réconciliation. Le serveur lie le reçu à l’acteur, au type et au contenu dans son
+espace de clés ; le navigateur vérifie l’enveloppe, la cible et l’intention encore
+courante avant d’annoncer une réussite. Le reçu service expose directement
+`operationId`, `operationCommandeId`, `servicePreparation` et `rejoue`, alors que
+le reçu de génération expose `status: CONFIRMEE` et `result.operation`.
+Un rejeu conserve la même clé et le même corps. La version du service ne
+remplace pas la version de génération.
+
+Le motif saisi reste lié à sa version initiale ; un rafraîchissement concurrent
+ne doit pas le réautoriser avec une nouvelle version silencieusement. Droits,
+communes, session, CSRF et conditions d’acceptation sont revérifiés au serveur.
+Un changement de dossier invalide lectures tardives, aperçus et confirmations.
+
+### Reprise, compatibilité et limites
+
+Le lien `/internal/erp/animations/generations?operation_id={uuid}` sélectionne
+directement le dossier autorisé, même absent de la page courante. Filtres et
+curseurs structurés restent ceux de la liste, dans les métadonnées de navigation
+liées à l’identité et aux droits. La recherche libre reste en mémoire de page ;
+elle n’est pas sérialisée dans l’URL, `history.state` ou un stockage durable.
+Un rechargement complet la réinitialise. Le retour à une entrée de navigation
+encore disponible retrouve son contexte ; une arrivée nouvelle utilise le lien
+canonique et les filtres disponibles. Aucun brief, fichier JSON ou motif privé
+n’est ajouté à l’URL ou au stockage durable. Après rechargement, l’étape est
+déduite de l’état confirmé. Une saisie non enregistrée reste protégée avant
+sortie, changement de demande ou actualisation et est purgée à expiration.
+
+La projection de liste ne comporte pas le suivi complet du service. Une phase
+`PREPARATION_PROMPT` seule ne prouve donc pas la qualification : la liste invite
+à ouvrir le dossier, dont la lecture détaillée fournit l’action exacte. Ne pas
+annoncer une génération déjà en cours sur cette seule phase, ni charger chaque
+détail pour enrichir toute la file.
+
+Les dossiers historiques sans service de préparation conservent leur progression
+autorisée ; aucune qualification passée n’est fabriquée. Les anciens liens de
+préparation restent disponibles pour calendrier et suivi avancé, avec accès
+explicite au dossier unique. Les outils terrain restent un parcours distinct.
+
+Les traitements automatiques attendent le batch existant `animations.generer`.
+La console affiche l’attente et relit le dossier ; elle ne lance pas le batch
+global et ne promet pas une génération instantanée. Une reprise après simple
+fermeture/rechargement est distincte d’un refus métier : après acceptation puis
+modification du brouillon, `ECHEC_FINALISATION/CONTEXTE_OBSOLETE` peut interdire
+la reprise simple. L’interface doit expliquer ce refus, sans créer de nouvelle
+demande, réviser silencieusement le résultat accepté ou annoncer une fin réussie.
+
+### Matrice d’impacts et preuves
+
+| Critères | Responsabilité et preuve prévue | Impacts |
+| --- | --- | --- |
+| DG-01/04/07/10 | Console ERP : étapes, sélection directe, filtres, clavier, rendu mobile et texte 200 %, chargement après qualification | HTML/JS, navigation, guides ; aucun changement de règles ou schéma persistant |
+| DG-02/03 | Commandes E73 existantes : droits, version, annulation atomique et motif ; recette UI inline et non-régressions domaine/API | Réutilisation des contrats existants, aucun nouvel email ; motif consultable après reprise |
+| DG-05/06 | Chaînage contrôlé du contrôle consultatif/dépôt puis acceptation distincte ; JSON invalide, rejet, reçu incertain, état final réel | Même format JSON/médias, mêmes contrats et contrôles serveur ; aucune publication automatique |
+| DG-08/09 | Complément, conflits, échecs, réponse perdue et purge privée ; tests des deux espaces de reçus | Aucune extension de droits ni reprise de contexte obsolète inventée |
+
+Les listes gardent leur pagination serveur de 25/max 100 ; une arrivée directe
+ajoute une lecture de dossier, sans parcourir les pages pour le retrouver.
+L’historique est borné et paginé, les détails chargés selon le besoin. Le budget
+d’import existant de 8 Mo et le polling borné sont conservés ; pas de nouvelle
+projection SQL ou collecte d’annuaire. Aucun gain de capacité ou de temps n’est
+déduit de cette simplification sans mesure dédiée.
+
+Applications affectées : `localeo-backend` pour l’ERP et ses tests,
+`localeo-projet` pour les sources canoniques. Live, Animation et Pro continuent
+de lire les mêmes états et contrats ; leurs clients embarqués restent inchangés.
+Aucune migration, configuration, nouvelle donnée de démonstration ni génération
+réelle n’est nécessaire. Les fixtures UI couvrent les états existants. Les
+contrats OpenAPI ne changent pas si l’implémentation reste dans ces bornes.
+
+Les recettes génération et guidance, la nouvelle recette du dossier unifié,
+la compatibilité préparation/navigation et les tests isolés des commandes E55/E73
+sont reliés à leurs résultats dans le
+[suivi de réalisation](suivi-implementation.md#e55-evol-traitement-20261113).
+La recette déployée, le pilote
+humain et les mesures de productivité restent distincts des tests locaux.

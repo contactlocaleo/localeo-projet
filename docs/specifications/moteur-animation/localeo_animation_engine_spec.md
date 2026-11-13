@@ -2376,6 +2376,73 @@ sur familles, durée, réseau, QR imprimés, Android/iPhone et charge commerçan
 Le mode IA V1, les cinq activités, l'absence d'achat obligatoire, les aides,
 les preuves et le gel ne sont pas redéfinis par ce complément.
 
+<a id="e55-evol-traitement-20261113"></a>
+## Évolution du 13 novembre 2026 — Dossier de traitement ERP unifié
+
+**E55-EVOL-TRAITEMENT-20261113.** Le gestionnaire Localeo traite une demande
+d’animation dans une seule fiche, depuis son examen jusqu’au résultat terminé.
+Cette décision remplace le passage obligatoire entre « Demandes de création »
+et « Préparations accompagnées ». Les états métier E55/E73, le calendrier,
+les droits et la publication restent distincts et conservés.
+
+Le parcours nominal comporte quatre étapes visibles :
+
+1. **Examiner la demande.** Lire son brief et ses lieux ; confirmer sa complétude
+   avec « Valider la demande », ou « Refuser la demande » avec un motif obligatoire.
+2. **Récupérer le prompt.** Après validation, suivre sa préparation automatique,
+   puis copier ou télécharger le prompt complet pour le traiter dans l’outil d’IA
+   externe. Aucun appel à cet outil n’est déclenché par l’ERP.
+3. **Importer le résultat.** Choisir le fichier JSON puis utiliser une seule action
+   « Importer le résultat ». L’ERP vérifie et enregistre le document conforme ; les
+   erreurs restent dans la fiche et permettent une correction. Le contrôle serveur
+   du résultat enregistré reste obligatoire, sans nouvelle confirmation de dépôt.
+4. **Valider le traitement.** Relire l’aperçu et confirmer explicitement le
+   traitement. Afficher la finalisation en cours, puis « Terminée » seulement
+   lorsque le serveur confirme que le résultat a effectivement été appliqué.
+
+La fiche conserve l’identité de l’animation, le contexte disponible, l’état et la
+prochaine action. Un lien direct permet de rouvrir le même dossier, y compris
+hors de la première page de résultats. La reprise lit l’état persistant : une
+demande déjà validée ne doit pas être validée à nouveau, ni un fichier enregistré
+réimporté pour poursuivre. Un fichier seulement sélectionné reste une saisie
+locale non enregistrée ; quitter doit protéger cette saisie.
+
+Le lien partageable contient la référence de la demande, sans recherche libre
+ni contenu privé. La recherche reste en mémoire et se réinitialise au
+rechargement complet ; les filtres structurés sont repris lorsque leur contexte
+de navigation et les droits sont encore valides. La reprise du traitement ne
+dépend pas de la conservation de cette recherche.
+
+Le refus initial réutilise la clôture motivée du service existant. L’API conserve
+`ANNULEE`, et l’historique son motif public ; les annulations historiques ne sont
+pas réinterprétées comme des refus. L’affichage terminal commun annonce
+« Refusée / annulée ». Il n’est ajouté ni crédit consommé, ni email de refus.
+Les demandes historiques en attente de complément et les reprises techniques
+autorisées restent traitables depuis le même dossier. Les outils de calendrier
+et de suivi avancé peuvent subsister, sans être requis dans le parcours nominal.
+
+La fin de traitement remet le parcours préparé à l’organisateur ; elle ne publie
+pas l’animation et ne remplace ni ses contrôles terrain ni les accords requis.
+Un échec technique, un contexte obsolète ou une réponse réseau incertaine ne doit
+jamais être présenté comme une fin réussie.
+
+| Critère | Résultat observable et preuve attendue |
+| --- | --- |
+| E55-DG-01 | Liste et fiche nommées, quatre étapes et action utile identifiables ; recette bureau/mobile/clavier. |
+| E55-DG-02 | Validation de complétude dans la fiche, version du service et droits revérifiés ; aucune génération avant qualification confirmée. |
+| E55-DG-03 | Refus motivé dans la même fiche ; motif absent refusé, aucune mutation à l’annulation, motif et clôture retrouvés après rechargement. |
+| E55-DG-04 | Attente du prompt puis copie/export complets ; aucun déclenchement manuel du batch global ou appel à une IA externe. |
+| E55-DG-05 | Une action d’import vérifie puis dépose le même JSON ; document invalide non déposé, erreurs explicites, correction et nouvelle tentative possibles. |
+| E55-DG-06 | Validation finale explicite après relecture ; aucune fin annoncée avant `TERMINEE`, préparation `PRETE` confirmée côté serveur et publication séparée. |
+| E55-DG-07 | Lien direct et rechargement retrouvent dossier, étape et résultat enregistrés, même hors première page ; liste/retour et focus préservés. |
+| E55-DG-08 | Compléments et échecs existants gardent leurs actions autorisées ; versions, refus et contexte obsolète expliqués, sans promesse de reprise impossible. |
+| E55-DG-09 | Saisies protégées ; une commande en attente à la fois, reçu lié au bon service/acteur/contenu, reprise de la même intention ; expiration purge les données privées. |
+| E55-DG-10 | Liens historiques, instructions utilisateur et composants ERP cohérents ; recettes à 320/390/1280 px et texte 200 %, sans débordement ni perte de légendes/actions. |
+
+Conception et matrice d’impacts : [dossier technique](conception-technique.md#e55-evol-traitement-20261113).
+Les preuves sont consignées dans le [suivi](suivi-implementation.md), séparément
+du bilan historique de l’epic et de toute recette déployée.
+
 <a id="references"></a>
 ## Annexe B. Références du socle
 

@@ -1688,3 +1688,105 @@ répertoires ignorés `tmp/e55-impl-*` du backend/Animation, Live
 `tmp/e55-impl-live/proof.json` et son run visuel
 `2026-11-13T15-03-39-455Z-q4ZtGY`. Ces fichiers ne sont pas des exports à déployer.
 Pas de commit, push, déploiement, génération réelle ni envoi externe.
+
+<a id="e55-evol-traitement-20261113"></a>
+## 13 novembre 2026 — Traitement ERP dans un dossier unique
+
+Évolution [E55-EVOL-TRAITEMENT-20261113](localeo_animation_engine_spec.md#e55-evol-traitement-20261113),
+sur les baselines backend `76d5dee9` et projet `14fdc14`, avec modifications
+locales. Le statut global de l’E55 et le bilan historique de l’E73 sont conservés.
+
+La console réutilise les commandes E55/E73 dans quatre étapes : examiner la
+demande, récupérer le prompt, importer le résultat et valider le traitement.
+Le refus initial conserve son motif et clôture les deux suivis existants. La
+vérification consultative et le dépôt du JSON conforme forment un seul geste ;
+l’acceptation après relecture reste explicite. L’état final attend la réelle
+application par le worker : l’interface n’annonce pas la fin au simple dépôt
+ou à l’acceptation. La publication et la vérification terrain restent séparées.
+
+Les anciennes préparations accompagnées gardent calendrier, compléments et
+historique, avec un lien visible **Traiter la demande**. Le dossier peut être
+rouvert par `operation_id`, sans parcourir toute la file. Le retour des consoles
+terrain vérifie origine, identité, droits, cible et entrée de navigation réelle.
+Les [guides opérateur](../../exploitation/exploitation/preparer-chasse-accompagnee.md)
+et [prise en main ERP](../../produit/formation/backend/guide-prise-en-main-erp.md)
+décrivent le même parcours.
+
+### Vérifications et revue
+
+Les tests Python s’exécutent avec `scripts/validation/test_isolated.py` dans le
+backend, sans configuration opérateur ni base distante. Les recettes Chromium
+interceptent les API et ne déclenchent aucun traitement réel.
+
+| Contrôle | Résultat vérifié |
+| --- | --- |
+| Domaine génération et préparation accompagnée ; services/API de vérification JSON et commandes E55/E73 ; accès aux préparations ERP | **88 succès**, `tmp/erp-workflow-contracts-final.xml` |
+| Architecture, classes de domaine, couverture des cas d’usage | **720 succès**, aucun skip |
+| Navigation réelle du menu partagé | **4 tests Node réussis**, administrateur et BACKOFFICE ; liens des deux entrées conservés |
+| Préparations historiques | Recette `epic73-preparations-service.cjs` réussie à 320/1280 ; liens liste/fiche, motif saisi, refus de sortie et résultat incertain conservés |
+| Retour depuis une console terrain | **4 parcours réussis**, 320/1280 × interne/admin : reprise après rechargement, parent hostile, identité/droits incompatibles, expiration et second retour après sortie annulée |
+| Dossier unifié | `generation-erp-workflow.cjs` : **115 contrôles réussis**, dont qualification/refus, motif obligatoire, complément, refus de sortie, conflit de version, reçus incertains, fichiers concurrents, arrivée directe, reprise et purge |
+| Guidance et rendu | `generation-erp-guidance.cjs` : **388 contrôles réussis** à 1280/390/320 et texte 200 % ; étapes, états, import, relecture, fin et disposition des champs |
+| Génération existante | `generation-erp.cjs` : **2 parcours réussis**, 1280/390, après adaptation au geste d’import unique |
+| Distribution HTTP intégrée | **40 succès**, dont imports transitifs réels, protection de session et refus des fichiers inconnus ; `tmp/erp-assets-integrated.xml` |
+| Documentation et intégration | `check_guidance.py` : **105 guides, 1 413 liens**, aucune erreur ni avertissement ; `sync_documentation.py --check-sources` : **150 documents** ; `git diff --check` réussi dans les deux dépôts |
+
+| Critères | Preuves de cette évolution |
+| --- | --- |
+| DG-01, DG-04, DG-10 | Guidance et génération : quatre étapes, prompt complet, actions lisibles, états d’attente et fin ; 18 captures relues indépendamment |
+| DG-02, DG-03 | Workflow et contrats E73 : version du service, qualification/refus dans la fiche, motif et clôture retrouvés après rechargement, annulation de saisie sans commande |
+| DG-05, DG-06 | Workflow et vérification JSON : contrôle puis dépôt du même corps, document non conforme non déposé, fichier tardif rejeté ; relecture obligatoire et aucune fin avant `TERMINEE` |
+| DG-07 | Workflow et navigation : arrivée directe hors page sans collecte des pages, reprise du résultat enregistré, filtres structurés liés aux droits, retour au dossier et focus |
+| DG-08, DG-09 | Contrats, génération et workflow : complément, reprise autorisée, refus/conflit conservant la saisie, une intention pendante, reçu du bon espace, expiration et réponse tardive sans résidu privé |
+
+Le premier passage des contrats obtient 87 succès et un échec d’assertion du
+menu historique dans le HTML statique. Les sources de ce shell, de son bootstrap
+et du test étaient inchangées depuis la baseline : la navigation est maintenant
+montée par JavaScript. Le contrôle HTTP vérifie désormais la chaîne des modules
+et le lien déclaré ; la recette navigateur vérifie le lien réellement rendu
+pour BACKOFFICE. Les autorisations 200/403 restent vérifiées sans changement.
+Le rejeu complet des 88 tests réussit avec cette adaptation.
+
+La revue indépendante examine les versions service/opération, les espaces de
+reçus et le maintien des invariants dans les services existants. Les constats
+portent sur le code d’idempotence effectivement renvoyé par le serveur, la
+lecture asynchrone des fichiers, l’expiration de session, le libellé de la liste
+sans projection du service et les conséquences exactes d’une annulation après
+consommation du quota. Ils sont corrigés et revérifiés, y compris la protection
+d’une sortie pendant la lecture du fichier. La revue UX a fait corriger le badge
+« À examiner » avant qualification et la disposition des filtres/fichiers à
+320 px avec texte agrandi. Les deux revues ne conservent aucun écart bloquant
+sur ce périmètre. Les enveloppes de reçu quota ont été rapprochées du contrat
+en lecture ; aucun nouveau scénario navigateur dédié à la modification du quota
+n’a été ajouté.
+
+Les preuves de navigation restent dans `.artifacts/erp-demande-navigation/` :
+service `2026-11-13T18-59-45-042Z`, consoles `2026-11-13T19-02-26-788Z`.
+Les preuves finales du dossier sont figées dans
+`.artifacts/erp-demande-workflow/final-20261113/`. Le journal guidance est une
+transcription explicitement identifiée du dernier résultat d’exécution, sans
+nouvelle exécution revendiquée. Les succès des tentatives précédentes ne sont
+pas additionnés aux 115 et 388 contrôles finaux. Empreinte SHA-256 du HTML vérifié :
+`62358b0c4795ab4817b8ee88f4ca0c4d07756e80e8ebe28888ea8fe4948b695d`.
+
+### Impacts et limites
+
+Deux dépôts sont concernés : backend pour l’ERP et ses tests, projet pour les
+sources canoniques. Les contrats métier, schémas persistants, clients Live,
+Animation et Pro sont inchangés. Aucune migration, configuration ou génération
+de démonstration n’est nécessaire ; les fixtures couvrent les états existants.
+Le correctif distinct des modules ERP non distribués est décrit dans le
+[suivi UX E60](../epic-60-vision-360-commercialisation/ux-productivite.md#correctif-du-13-novembre-2026--chargement-des-modules-erp).
+
+La recherche libre reste privée en mémoire et n’est pas restaurée après un
+rechargement complet. Sans Navigation API, le retour canonique rouvre le dossier,
+sans garantie de retrouver les filtres. Une fin de traitement dépend toujours
+du batch existant ; un contexte obsolète après acceptation peut exiger une
+intervention au-delà de la reprise simple. Les tests locaux ne prouvent ni la
+disponibilité de TEST ni un gain chiffré de productivité. Aucun commit, push,
+déploiement, migration, traitement réel ou envoi externe n’a été effectué.
+
+La recette visuelle utilise Chromium et des données synthétiques ; le texte
+agrandi ne constitue pas un essai sur appareil physique ou lecteur d’écran.
+Une coupure mineure du libellé « Rubriques ERP » subsiste dans le menu partagé
+à 200 %, hors des fichiers de présentation de cette évolution.

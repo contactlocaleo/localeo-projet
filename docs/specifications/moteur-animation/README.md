@@ -2,6 +2,13 @@
 
 > Suivi produit au 13 novembre 2026 : **En cours** — [backlog de référence](../../roadmap/en-cours/epic-55-chasse-tresor-commercante-backlog.md). Les bilans techniques datés ci-dessous conservent leur portée historique.
 
+L’évolution [E55-EVOL-TRAITEMENT-20261113](localeo_animation_engine_spec.md#e55-evol-traitement-20261113)
+réunit le traitement ERP d’une demande dans une fiche : examen et validation/refus
+motivé, récupération du prompt, import JSON et validation finale. La reprise lit
+le dossier enregistré. La [conception](conception-technique.md#e55-evol-traitement-20261113)
+réutilise les transitions E55/E73 ; le [bilan local](suivi-implementation.md#e55-evol-traitement-20261113)
+distingue les preuves de cette évolution et ses limites de déploiement.
+
 L'[évolution issue de l'audit du 13 novembre](../../roadmap/en-cours/epic-55-chasse-tresor-commercante-backlog.md#e55-audit-20261113)
 rattache 14 constats et six axes d'optimisation : continuité des parcours,
 protection des saisies, limitation publique, recherche ERP, informations

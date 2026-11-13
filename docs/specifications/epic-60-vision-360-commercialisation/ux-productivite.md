@@ -516,3 +516,40 @@ Les droits, décisions financières et transitions restent portés par leurs dom
 - Aucun déploiement, migration TEST, commit ou push n’est inclus. Le statut
   historique de l’epic n’est pas réécrit ; le rapport d’audit reste la photographie
   avant cette évolution.
+
+### Correctif du 13 novembre 2026 — Chargement des modules ERP
+
+Signalement sur TEST : `Failed to fetch dynamically imported module` pour
+`/internal/erp/assets/suivi-animations.js`. Sur la baseline locale backend
+`76d5dee9`, ce module importe `gestion-pagination.js`, présent sur disque mais
+absent de la liste explicite des fichiers servis par `app/api/erp_ui.py`.
+La requête HTTP de cette dépendance reçoit 404 et bloque le chargement du module
+parent. Le même oubli concerne `gestion-pages.js`,
+`gestion-preparation-console.js` et `gestion-preparation-brouillons.js`.
+
+Le correctif expose ces quatre fichiers par la route existante, en conservant
+la session obligatoire, `Cache-Control: no-store` et le refus des fichiers non
+autorisés. Il ne modifie ni les règles métier ni les habilitations. Les recettes
+navigateur précédentes lisaient les fichiers par interception : elles ne
+vérifiaient pas que le serveur les distribuait réellement.
+
+Le nouveau `tests/api/test_erp_assets_dependencies.py` parcourt les imports
+statiques et dynamiques littéraux de l’ERP, du suivi, du Support et des quatre
+consoles via la vraie route FastAPI. Avant correction, **10 échecs et 5 succès**
+confirment les ressources manquantes. Après correction, ce fichier et les
+recettes HTTP navigation/consoles/équipes/sélection obtiennent **40 succès**.
+Les **720 contrôles d’architecture, classes de domaine et couverture des cas
+d’usage** réussissent également sur la baseline avec ce correctif local.
+
+Commandes backend exécutées avec `python scripts/validation/test_isolated.py` :
+
+- `tests/api/test_erp_assets_dependencies.py tests/api/test_navigation_consoles_animation_erp.py tests/api/test_erp_animation_equipe_shell.py tests/api/test_gestion_preparation_erp.py -q` ;
+- `tests/architecture tests/domain/test_domain_dedicated_classes.py tests/application/use_cases/test_use_case_business_test_coverage.py -q`.
+
+Impacts : backend pour route/tests, projet pour ce suivi ; les trois frontends
+utilisent les mêmes contrats. Aucun changement d’API métier, de schéma, de
+migration, de configuration ou de générateur de démonstration n’est nécessaire.
+La cause est démontrée localement ; la révision déployée et la session TEST
+n’ont pas été inspectées. Le contrôle après livraison consiste à ouvrir
+**Animations et lots** avec une session autorisée et vérifier le chargement des
+dépendances, puis les consoles de préparation. Aucun déploiement n’a été effectué.

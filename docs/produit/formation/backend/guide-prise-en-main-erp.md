@@ -262,11 +262,17 @@ les décisions et leurs motifs.
 
 ### Une animation à préparer ou déjà en cours
 
-- **Demandes de création** : traiter une demande de scénario et ses réponses.
-  Ce n’est ni une demande d’organisation ni un ticket de support.
-- **Préparation des chasses** et **Préparations accompagnées** : suivre les
-  préparatifs, compléments attendus et travaux confiés à Localeo. Lis la prochaine
-  action du dossier avant d’intervenir ; un complément demandé reste à traiter.
+- **Demandes de création** : examiner le dossier puis valider sa complétude ou
+  le refuser avec un motif. Dans cette même fiche, récupère le prompt, importe
+  le résultat JSON et valide le traitement après revue. Les quatre étapes et
+  l’état permettent de reprendre le travail en cours. Attends **Terminée** :
+  l’import ou l’acceptation seuls ne prouvent pas l’application du résultat.
+- **Préparations accompagnées** : suivi avancé du calendrier, des compléments
+  et des travaux confiés à Localeo. **Traiter la demande** rejoint sa fiche
+  dans Demandes de création. Un complément attendu reste à traiter.
+- **Préparation des chasses** : consulter et vérifier les étapes et contenus
+  du parcours. Le [guide opérateur](../../../exploitation/exploitation/preparer-chasse-accompagnee.md)
+  distingue ce contrôle terrain du traitement de la demande.
 - **Animations et lots** : consulter l’animation, ses participations et le suivi
   des gains. L’attribution d’un lot, l’envoi du message et la remise sont distincts.
 - **Exploitation des jeux** : actions opérationnelles autorisées ; les corrections

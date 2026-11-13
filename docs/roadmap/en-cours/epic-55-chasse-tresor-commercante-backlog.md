@@ -323,6 +323,19 @@ détaillés au bilan. OPT-06 reste partiel faute de comparaison humaine de temps
 de traitement. L4, la comparaison des fournisseurs et l'ouverture restent
 ouverts ; le statut **En cours** est conservé.
 
+## E55-EVOL-TRAITEMENT-20261113 — Simplifier le traitement ERP
+
+Demande du 13 novembre : une fiche unique depuis l’examen de complétude et le
+refus motivé jusqu’au prompt, à l’import JSON et à la validation finale ; reprise
+du dossier en cours sans recommencer. Les [critères E55-DG-01 à E55-DG-10](../../specifications/moteur-animation/localeo_animation_engine_spec.md#e55-evol-traitement-20261113)
+et la [conception](../../specifications/moteur-animation/conception-technique.md#e55-evol-traitement-20261113)
+conservent les transitions et contrats existants. L’epic reste **En cours** ;
+le bilan de cette évolution ne remplace pas les conditions historiques d’ouverture.
+
+- [x] Décrire le dossier et ses étapes, les refus, la reprise et les impacts.
+- [x] Réunir le parcours dans la console ERP et raccorder les anciens points d’entrée.
+- [x] Vérifier les comportements et publier le [bilan local](../../specifications/moteur-animation/suivi-implementation.md#e55-evol-traitement-20261113), avec ses limites de recette déployée et de mesure humaine.
+
 ## Références
 
 - [Registre TRE-ARB-01 a TRE-ARB-89](../../specifications/moteur-animation/localeo_animation_engine_spec.md#arbitrages).
