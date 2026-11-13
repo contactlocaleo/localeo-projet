@@ -419,6 +419,17 @@ n'est introduit ; cette contextualisation est une projection de lecture.
 Les nouvelles éditions, objectifs, sources et satisfactions appartiennent à
 `animation_locale.valorisation`. Une édition conserve sa provenance et les
 révalidations nécessaires, sans copier les participations ou les engagements.
+
+L’évolution **E73-EVO-CLONAGE du 13 novembre 2026**, spécifiée dans le
+[parcours de clonage](clonage-animation.md#4-domaine-orchestration-et-contrats),
+réutilise `NouvelleEdition`, `ServiceEditionsAnimation` et les routes `/editions`.
+Elle expose la projection groupée facultative `reemploi` sur liste/détail,
+une entrée frontend commune et des transformations de scénario fidèles ou
+explicitement indisponibles. Aucun second service de duplication, transfert
+de quota ou copie d’engagement. Les contrats canoniques et embarqué Animation
+sont synchronisés ; aucun nouvel endpoint n’est ajouté. Les preuves locales et
+la réserve de capacité CL-11 figurent dans le bilan de vérification.
+
 Les lectures de bilans utilisent `lectures_bilans_animation` : agrégats SQL, pages
 de commentaires/sources et mesures de progression explicites. La réconciliation
 de mesures passe par une file et un worker borné ; un GET n'exécute pas ce travail.

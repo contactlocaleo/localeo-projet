@@ -854,6 +854,13 @@ Les réponses visibles client et notes internes sont des catégories distinctes.
 
 ### 6.3 Nouvelle édition
 
+L’évolution du **13 novembre 2026 — E73-EVO-CLONAGE** rend ce mécanisme
+accessible sous **Cloner l’animation**. La [spécification de clonage](clonage-animation.md)
+complète CA-59 avec les accès liste/archives/fiche, CL-01 à CL-12, la fidélité
+des sections et les contrats additifs. Elle conserve les règles ci-dessous.
+L’implémentation est vérifiée localement ; la réserve de capacité CL-11 et les
+conditions de mise en service figurent au [bilan](verification-livraison.md#évolution--e73-evo-clonage-13-novembre-2026).
+
 Commande depuis une animation lisible, vers **la même commune uniquement**, même si l’acteur est habilité ailleurs. Le gestionnaire sélectionne les sections réutilisées (textes, visuels autorisés, scénario/paramètres) et fournit les nouvelles dates. Créer un nouveau brouillon avec ID propre, source/version sélectionnée et liste des éléments à revalider. Recontrôler droits du type/module, droits de réemploi et médias ; aucun quota de génération consommé du seul fait de copier.
 
 Les références de commerçants peuvent être présentées comme candidats à reconfirmer, jamais comme accords acquis. Dotation, exemplaires, achats, réserve, règlement et conditions sont à revalider ; ne copier ni participant, consentement, gain, QR, paiement, consommation, population figée ni preuve d’accord. Une modification de la source après prévisualisation provoque un conflit, pas une copie silencieusement différente. Une réponse perdue se réconcilie par reçu d’idempotence, sans second brouillon.

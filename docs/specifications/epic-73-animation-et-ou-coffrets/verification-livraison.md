@@ -1,5 +1,166 @@
 # E73 — Vérification, migration et livraison
 
+## Évolution — E73-EVO-CLONAGE (13 novembre 2026)
+
+**Implémentation réalisée ; vérifications fonctionnelles locales réussies, CL-11 partiel.**
+[Parcours, CL-01 à CL-12, contrats et lots](clonage-animation.md).
+Lecture des sources backend `95babb7`, Animation `a00bb2a`, projet `492f164` :
+le mécanisme Nouvelle édition et son formulaire sont déjà implémentés, mais
+l’accès de cette révision initiale se trouvait uniquement dans le Bilan.
+Les nouveaux points d’entrée, la projection `reemploi`, les garanties de fidélité
+et les refus de provenance sont désormais implémentés sur ces bases avec leurs
+modifications locales. Les trois dépôts concernés sont backend, Animation et projet.
+
+Deux explorations indépendantes en lecture ont vérifié le producteur et le
+consommateur : droits/quotas, configuration effective, média/provenance,
+reçu, parcours, archives, changement de commune et tests existants. Les
+écarts de fidélité du scénario personnalisé et de suppression d’une source
+référencée sont intégrés dans CL-04/05/06 et le lot L1.
+
+La revue indépendante du contrat a fait préciser `items[].reemploi` et
+`animation.reemploi`, ainsi que le rapprochement par code d’erreur : seul
+`COMMANDE_NON_ENREGISTREE` autorise un rejeu explicite ; une source inaccessible
+ou un reçu minimisé ne prouve pas l’absence de clone. L’écart du hook partagé
+est corrigé dans CL-07. Les limites
+réelles d’import et de médias sont distinguées des contrôles supplémentaires
+à appliquer aux sources historiques au clonage.
+
+L’utilisateur a confirmé le 13 novembre 2026 l’accès direct au clonage existant
+avec textes, visuels et scénario ; le préremplissage commerçants/dotation est
+exclu de cette évolution. Les décisions acquises de CA-59 restent la base. La matrice
+de la spécification décrit les preuves attendues et les impacts de livraison.
+La revue indépendante du diff a identifié un cas P2 dans le hook commun : un
+callback rejetant un reçu confirmé supprimait l’intention avant de revenir à
+l’état incertain. La correction conserve la même intention vérifiable ; deux
+scénarios complémentaires et la reproduction indépendante confirment un seul
+POST, deux lectures possibles et l’ouverture de l’Assistant après réponse valide.
+Aucun autre constat bloquant n’est resté ouvert dans cette revue en lecture.
+
+| Critères | Preuves sur l’arbre modifié |
+| --- | --- |
+| CL-01/03/09/10 | `localeo-animation/tests/browser/animation-cloning.mjs` : 29 scénarios réussis, liste/archives/fiche/Bilan en panne, trois dotations, dates Paris été/hiver, garde, historique, ancien tenant et erreurs ; 320/390/1280 px et texte 200 %. Captures normales 320/1280 et agrandies inspectées. |
+| CL-02/11 | `test_reemploi_projection_postgres.py` : huit statuts, révocations, catalogue/module, réversibilité et même nombre de requêtes pour 25/100 lignes. Après optimisation des lectures, passe finale de **30 tests PostgreSQL** (14 projection et 16 modules) et **12 tests isolés** réussie ; les 27 tests isolés/API précédents constituent une passe distincte. |
+| CL-04/05/06 | `test_reemploi_preparation.py`, `test_bornes_reemploi.py`, `test_clonage_animation_postgres.py` et valorisation existante : fidélité, refus des variantes, rollback, médias 200/201, purge, provenance et métadonnées sans binaire. 38 tests domaine/application ; 3 bornes rejouées après ajustement ; 27 PostgreSQL puis 2 nouveaux scénarios de conservation réussis. |
+| CL-07 | `test_clonage_reconciliation.py` : 404 absent distinct du 404 source, 403, 409 expiré et 202 ; navigateur : codes du reçu, réponse perdue et cible inaccessible, puis 2 scénarios complémentaires du callback rejeté. Aucun rejeu automatique. |
+| CL-08/11/12 | Fonctionnement, contrats et générateur vérifiés localement ; performance **partiellement vérifiée** : deux budgets concurrents dépassés dans la passe finale détaillée ci-dessous. |
+
+La passe `scripts/validation/test_isolated.py tests/architecture
+tests/domain/test_domain_dedicated_classes.py
+tests/application/use_cases/test_use_case_business_test_coverage.py
+tests/api/test_valorisation_animation.py tests/api/test_clonage_reconciliation.py
+-q` a réussi sur la version finale : **720 tests**, rapport
+`localeo-backend/tmp/clonage-architecture-http-final.xml`.
+Les tests PostgreSQL utilisent PostgreSQL 18.3 et des bases locales jetables ;
+les navigateurs utilisent une API synthétique. Les suites et rapports séparés
+ne sont pas présentés comme un passage unique.
+
+Sur le frontend final, `pnpm check` réussit : types, lint, **326 tests**, build
+et service worker. Les parcours partagés Support (**8 scénarios, 104 assertions**)
+et Éditions (**4 scénarios, 62 assertions**) ont été rejoués après la correction
+du callback. Rapports : `tmp/clonage-pnpm-check-final-p2.log`,
+`tmp/clonage-support-final-p2.log`, `tmp/clonage-edition-final-p2.log`,
+`tmp/clonage-browser-report-Eso7uu/report.json` et
+`tmp/clonage-browser-report-wHUuCQ/report.json` dans Animation. Le build signale
+le bundle principal de 512 ko au-dessus du seuil indicatif de 500 ko ; aucun
+seuil ni assertion n’a été modifié pour obtenir ces résultats.
+
+La revue indépendante a également confirmé l’équivalence des optimisations :
+faits d’accès groupés sans consulter les consommations, abonnement courant du
+même appel, absence de cache entre requêtes, mêmes politiques de suspension,
+expiration et réversibilité. Le contrôle complet remplace le double contrôle du
+type. Le chemin SQL rapide accepte une taille brute déjà sous la borne et garde
+le calcul compact exact au-delà ; une configuration effective différente est
+toujours contrôlée de nouveau. **6 tests application et 4 tests PostgreSQL**
+ciblés réussissent sur ces derniers changements (espaces éditoriaux, refus avant
+hydratation, taille compacte, révocation et surcharge effective).
+
+### Mesures de capacité locales
+
+`test_clonage_animation_performance.py` mesure le service réel et PostgreSQL
+18.3 sous Windows/Python 3.14. Les volumes sont synthétiques, sur base jetable ;
+les appels HTTP, fournisseurs et transports réels sont exclus. Percentiles
+inclusifs sur 20 mesures isolées et 30 commandes ou lectures concurrentes dans
+10 threads, avec un même contexte autorisé et une même source pour la création.
+Ce profil ne représente pas dix identités ni une charge de publication mixte.
+
+| Mesure finale | Résultat | Conclusion locale |
+| --- | --- | --- |
+| Liste N=1 000 puis 10N=10 000, pages 25/100 | **18 requêtes** dans les quatre cas ; p95 **52 à 88 ms** | Coût SQL groupé et budget isolé de 700 ms respectés |
+| Liste, 10 lectures concurrentes | p95 **981 ms**, p99 **1 042 ms** | Budget p95 de 700 ms **dépassé** |
+| Préparation d’une source de 500 000 octets de texte | p95 **152 ms**, p99 **363 ms** ; pic Python **1 780 117 octets** | Budget p95 de 900 ms respecté |
+| Création, 10 commandes concurrentes sur la même source | p95 **1 742 ms**, p99 **1 893 ms** | Budget p95 de 1 500 ms **dépassé** |
+| Lecture du reçu | p95 **26 ms**, p99 **54 ms** | Budget p95 de 500 ms respecté |
+| Graphe dense, 160 positions et 12 720 références | p95 **24 ms**, pic Python **356 572 octets** | Fidélité et remappage vérifiés |
+| Mémoire de liste, page de 100 à N puis 10N | pics Python **522 231 / 512 049 octets** | Pas de croissance observée avec le volume global |
+
+La passe finale est donc **1 test réussi et 2 tests en échec sur les seuils de
+temps**, pas une validation globale de capacité. Les assertions fonctionnelles
+qui précèdent ces seuils réussissent : 30 cibles distinctes pour 30 intentions,
+une cible pour deux commandes concurrentes de même clé, conflit d’intention
+refusé, aucun compte ni débit de quota créé, texte conservé et commerçants vides.
+Rapports backend : `tmp/clonage-performance-final.xml`,
+`tmp/clonage-performance-listes-final.json`,
+`tmp/clonage-performance-commandes-final.json` et
+`tmp/clonage-performance-graphe-dense.json` ; plans SQL conservés avec les listes.
+
+Les tentatives antérieures sont conservées : 22 requêtes et 1 686 ms sur les
+listes avant optimisation ; 20 requêtes et 702 ms après la première optimisation.
+Une passe isolée de création après optimisation atteignait 1 426 ms, mais la
+mesure finale à 1 742 ms prime. Deux erreurs de montage du nouveau banc ont
+également été corrigées (format de référence et coordination source manquante).
+Aucun seuil, invariant ou garde n’a été assoupli.
+
+À 10N/page 100, le plan de la requête principale indique 5,46 ms de planification
+et 3,73 ms d’exécution. Ces mesures n’isolent pas le coût des 17 autres requêtes,
+du pool, de la construction SQL ni du mapping Python. La variation entre passes
+ne permet pas d’attribuer la cause à l’hôte ou au GIL ; aucune telle cause n’est
+considérée comme démontrée.
+
+**CL-11 reste partiel et la capacité à dix appels concurrents n’est pas acceptée
+pour activation.** Compléter la qualification sur un environnement représentatif
+avec mesures CPU/IO/pool/verrous, cache froid, identités distinctes et publication
+mixte, puis corriger les coûts observés et rejouer les mêmes budgets. Les tests
+de médias 200/201 et de refus hors enveloppe sont des preuves fonctionnelles,
+pas une mesure de toutes les combinaisons maximales de contenu.
+
+### Générateur et contrôles documentaires
+
+Le générateur utilise désormais le même contrôle complet de réemploi que l’API,
+sans envoi réel. La première recette complète a donné **9 réussites et 1 échec** :
+le garde d’empreinte a détecté l’édition de `animation_locale_api.py` par nos
+travaux parallèles pendant le test. Le garde n’a pas été modifié. Après gel du
+code, reprise ciblée du clonage/satisfaction/Support et des relations complètes :
+**2 tests réussis**, aucun ignoré, en 159,10 s. Le scénario des relations vérifie
+également la restauration et l’intégrité des sources applicatives.
+Rapports : `tmp/clonage-demo-attempt1.xml` et
+`tmp/clonage-demo-reprise-final.xml`. La reprise ciblée ne constitue pas une
+nouvelle passe complète des dix tests ; les deux avertissements de réflexion
+SQLAlchemy `dialect_options` restent visibles.
+
+Contrôles du projet : `check_guidance.py` vérifie **97 guides et 1 238 liens**, sans
+erreur ni avertissement ; `sync_documentation.py --check-sources` vérifie **150
+documents**. Les modifications préexistantes sont conservées.
+
+Contrats : E41/E42 régénérés hors ligne, contrat embarqué Animation synchronisé.
+Les quatre schémas de réemploi/résumé/détail sont identiques entre ces sources ;
+les **81 routes de la vue Live E42 restent identiques** à la base Git. La génération
+E42 actualise également des schémas déjà présents dans le backend de base.
+Marketplace/Live et Commerçant n’ont aucun changement de code ou de contrat public.
+
+Livraison : backend compatible avant portail Animation ; aucun nouveau paramètre
+ni migration, aucun backfill, achat ou notification à déclencher. Les tables,
+unicités, reçus et FK de provenance existants sont conservés. En cas de retour
+arrière, retirer d’abord les nouveaux points d’entrée du portail ; ne pas effacer
+les brouillons ni leurs provenances. Diagnostic par IDs source/cible/opération
+et codes `SOURCE_NON_REUTILISABLE`, `SCENARIO_NON_REUTILISABLE`,
+`MEDIA_INDISPONIBLE`, `ANIMATION_SOURCE_EDITION` ou du reçu, sans corps privé.
+
+Les travaux E73-EVO-CLOTURE-AUTO préexistants et la clôture historique E73 sont
+préservés hors de ces commits. Commit et push demandés par l’utilisateur le
+13 novembre 2026 ; commits applicatifs : Backend `d4ca278`, Animation `7104f9b`.
+Le versionnement ne lève pas la réserve CL-11. Aucun déploiement ni accès à une
+base partagée effectué pour cette évolution.
+
 ## Évolution — E73-EVO-ANIMATION-PRODUCTIVITE (12 novembre 2026)
 
 **Sept lots implémentés ; AP-22 partiellement vérifié.**

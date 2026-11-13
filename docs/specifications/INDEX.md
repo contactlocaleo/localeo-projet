@@ -6,6 +6,8 @@ Commencer par le README du sujet, puis consulter ses règles, contrats et arbitr
 
 ## Priorités en cours et à cadrer
 
+- **Extension E73 — 13 novembre 2026 : cloner une animation**, [E73-EVO-CLONAGE](epic-73-animation-et-ou-coffrets/clonage-animation.md) : accès liste/archives/fiche au mécanisme Nouvelle édition, fidélité des sections et brouillon indépendant dans la même commune ; trois lots implémentés, vérifications locales réalisées, CL-11 partiel (budgets concurrents dépassés) ; clôture historique inchangée.
+
 - **Extension E73 — 12 novembre 2026 : productivité quotidienne de l’organisateur**, [E73-EVO-ANIMATION-PRODUCTIVITE](epic-73-animation-et-ou-coffrets/ux-productivite-organisateur.md) : audit Animation bureau/mobile, sept lots et AP-01 à AP-22 ; recommandations fiables, continuité, listes bornées, accessibilité, préparation, gains/fin et comparaison. Sept lots implémentés, preuves locales et migration TEST v313 ; validation AP-22 partielle, clôture historique inchangée.
 
 - **Extension E73 — 11 novembre 2026 : profil d'activité communale**, [E73-EVO-DYNAMISME-COMMUNE](epic-73-animation-et-ou-coffrets/perimetres-parcours-saas.md#évolution-du-11-novembre-2026--dynamisme-de-la-commune) : quatre axes et tendances sans score, pour l'organisation dans sa commune active. Critères DY-01 à DY-06 ; clôture historique E73 inchangée.

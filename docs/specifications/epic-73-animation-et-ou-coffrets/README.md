@@ -1,5 +1,13 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+Évolution du **13 novembre 2026 — E73-EVO-CLONAGE** :
+[Cloner l’animation](clonage-animation.md) depuis liste, archives et fiche,
+en réutilisant le mécanisme Nouvelle édition de CA-59. Nouveau brouillon dans
+la même commune, contenus sélectionnés et engagements à revalider ; fidélité,
+droits, concurrence, contrats et preuves précisés en CL-01 à CL-12.
+Trois lots implémentés et vérifiés localement ; CL-11 partiel pour les budgets
+concurrents, clôture historique conservée.
+
 Évolution du **12 novembre 2026 — E73-EVO-ANIMATION-PRODUCTIVITE** :
 [audit UX de l’organisateur](../../audits/animation/localeo-animation-ux-productivite-2026-11-12.md)
 et [spécification en sept lots, AP-01 à AP-22](ux-productivite-organisateur.md).

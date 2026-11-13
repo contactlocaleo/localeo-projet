@@ -1,5 +1,12 @@
 # Roadmap par etat
 
+**13 novembre 2026 — E73-EVO-CLONAGE** : rendre le clonage d’une animation
+accessible depuis liste, archives et fiche en réutilisant « Nouvelle édition ».
+[Spécification, CL-01 à CL-12 et trois lots](../specifications/epic-73-animation-et-ou-coffrets/clonage-animation.md).
+Même commune, nouveau brouillon, sections contrôlées et engagements à revalider.
+Implémentée et vérifiée localement ; CL-11 partiel (budgets concurrents dépassés).
+Statut historique E73 et compteurs inchangés.
+
 **12 novembre 2026 — E73-EVO-ANIMATION-PRODUCTIVITE** : audit UX de Localeo
 Animation et [sept lots spécifiés, AP-01 à AP-22](../specifications/epic-73-animation-et-ou-coffrets/ux-productivite-organisateur.md).
 Fiabilité de la prochaine action, continuité du travail et opérations quotidiennes.

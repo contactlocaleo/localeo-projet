@@ -1,5 +1,27 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+## Évolution du 13 novembre 2026 — clonage d’une animation
+
+**E73-EVO-CLONAGE** : rendre le mécanisme existant « Nouvelle édition » accessible
+sous **Cloner l’animation** depuis la liste, les archives et la fiche, puis
+ouvrir le nouveau brouillon dans l’Assistant. Le parcours conserve même
+organisation/commune/moteur, nouvelles dates, sélection explicite des contenus,
+dotation à choisir et revalidation des accords ; aucun participant ni engagement
+repris. Les sections non réutilisables sont signalées avant confirmation.
+
+La [spécification canonique](../../specifications/epic-73-animation-et-ou-coffrets/clonage-animation.md)
+ajoute **CL-01 à CL-12** à **E73-CA-59**, sans modifier son identifiant ni les
+décisions historiques de périmètre. Trois lots : politique/contrats/fidélité,
+accès/formulaire, puis preuves/livraison. L’utilisateur a confirmé le 13 novembre
+2026 l’accès direct au clonage existant : textes, visuels et scénario. Le
+préremplissage des commerçants et des lignes de dotation est exclu de cette évolution.
+
+**Implémentée ; vérifications locales réalisées, CL-11 partiel.** Le
+[bilan de vérification](../../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md#évolution--e73-evo-clonage-13-novembre-2026)
+distingue les preuves fonctionnelles réussies et les deux budgets concurrents
+dépassés ; la capacité reste à qualifier avant activation.
+La clôture historique E73 et les travaux de clôture automatique sont conservés.
+
 ## Évolution du 12 novembre 2026 — productivité de l’organisateur
 
 **E73-EVO-ANIMATION-PRODUCTIVITE** reprend les 13 constats de l’

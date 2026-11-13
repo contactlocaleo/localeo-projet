@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Backend - contrat implemente EPIC 41",
     "description": "OpenAPI complet du backend, dont les parcours Animation locale. Genere hors ligne depuis le code local pour les integrations et les mocks ; cet instantane ne prouve pas son deploiement.",
-    "version": "1.0.0+c87fb82"
+    "version": "1.0.0+95babb7"
   },
   "paths": {
     "/public/identite-acces/interne/connexion": {
@@ -125278,6 +125278,16 @@
               }
             ]
           },
+          "reemploi": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ReemploiAnimationPayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "version": {
             "type": "integer",
             "minimum": 1.0,
@@ -125881,6 +125891,16 @@
             "anyOf": [
               {
                 "$ref": "#/components/schemas/RecommandationAnimationPayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "reemploi": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ReemploiAnimationPayload"
               },
               {
                 "type": "null"
@@ -176873,6 +176893,31 @@
           "preuve"
         ],
         "title": "RecuperationResponsable"
+      },
+      "ReemploiAnimationPayload": {
+        "properties": {
+          "allowedActions": {
+            "items": {
+              "type": "string",
+              "const": "CREER_EDITION"
+            },
+            "type": "array",
+            "title": "Allowedactions"
+          },
+          "motifsIndisponibilite": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Motifsindisponibilite"
+          }
+        },
+        "type": "object",
+        "required": [
+          "allowedActions",
+          "motifsIndisponibilite"
+        ],
+        "title": "ReemploiAnimationPayload"
       },
       "ReferenceActualiteAnimationPayload": {
         "properties": {
