@@ -184,6 +184,21 @@ Pour les périodes différentes, ne pas convertir « un essai total » en quota 
 
 Les libérations de quota d'annulation restent des corrections de journal liées à l'usage initial, aux conditions d'annulation de l'animation et au terme initial. Aucun crédit ne migre au nouveau terme. Une demande de préparation de chasse, un brouillon, une relance de préparation ou une duplication ne consomme pas un crédit commercial de publication ; les protections techniques de génération sont distinctes et restent visibles.
 
+Correctif du **13 novembre 2026 — accès à la création d'une chasse** :
+l'absence de débit à la préparation ne dispense pas du droit actif
+`CHASSE_TRESOR` dans l'organisation et la commune concernées. Premium seul
+n'ouvre pas cet accès. Le catalogue de modèles présente la décision du
+serveur et la raison d'indisponibilité ; la création directe, la génération
+et la réutilisation d'un parcours vérifient de nouveau le droit avant de créer
+un brouillon ou de réserver une génération. Changer le type d'un brouillon
+vers une chasse exige également ce droit ; modifier son contenu sans changer
+de type ne constitue pas une nouvelle acquisition. Le clonage applique déjà
+cette règle. Un droit acquis actif reste utilisable pour préparer un brouillon même
+si son quota de publication est épuisé ; la publication conserve son propre
+contrôle. Les droits historiques prouvés restent respectés. Les
+[preuves du correctif](verification-livraison.md#correctif--accès-au-module-chasse-au-trésor-13-novembre-2026)
+distinguent la vérification locale et l'environnement TEST.
+
 ### Expiration commerciale et retrait
 
 | Opération | Engagement qui ouvre la continuité | Après expiration/retrait commercial |

@@ -1,5 +1,81 @@
 # E73 — Vérification, migration et livraison
 
+## Correctif — accès au module Chasse au trésor (13 novembre 2026)
+
+**Diagnostic confirmé sur TEST ; correction et vérifications locales réalisées.**
+Pour l'organisation Association Test Thibaut, commune de Bouliac, le profil
+signalé accède au formulaire de préparation d'une chasse. La lecture seule
+des souscriptions confirme un forfait Premium actif du 1er novembre 2026 au
+31 octobre 2027, une période E73 validée et aucun droit `CHASSE_TRESOR`.
+Aucun droit, abonnement ou brouillon TEST n'a été modifié pour le diagnostic.
+Le point public `/sante` de l'API TEST retourne `1.0.0+4deb044`, correspondant
+à la base backend examinée.
+
+Cause locale : la création classique et la génération ne contrôlaient que
+`CREER_ANIMATION`, tandis que le clonage vérifiait déjà le droit du module.
+Le catalogue de modèles projetait la disponibilité technique sans les droits
+commerciaux de la commune. Le propriétaire de la décision demeure
+`DroitModule.verifier_ouverture`, orchestré par `ServiceDroitsModules` ; aucune
+règle commerciale n'est ajoutée au navigateur.
+
+Bases locales : backend `4deb0447`, Animation `9e1234ac`, projet `f1c83e46`,
+complétées par les commits du correctif backend `40d3cfd0` et de la recette
+Animation `266c1b3`. Le présent bilan accompagne leur publication ; le
+déploiement n'est pas vérifié dans cette opération de commit/push.
+
+La création directe, la génération/régénération et la réutilisation vérifient
+le droit avant leurs effets. La revue indépendante a aussi identifié puis
+vérifié la fermeture du contournement par conversion d'un brouillon standard
+en Chasse. L'édition conservant le même type et la lecture des reçus confirmés
+après retrait du seul module sont conservées. Aucun P1/P2 restant dans le diff
+examiné ; la revue n'a pas exécuté de tests ni consulté TEST.
+
+| Preuve backend | Résultat et portée |
+| --- | --- |
+| Reproduction avant correction | Un échec attendu : la création ne levait pas `MODULE_NON_ACQUIS`. |
+| Application et HTTP | 25 nouveaux cas distincts. Passe ciblée initiale : 43 réussites incluant 20 tests existants ; après stabilisation de l'horloge, 23 réussites puis quatre tests HTTP réussis, dont deux ajoutés pour génération/régénération refusées avec `403 / MODULE_NON_ACQUIS`. Les passes se recouvrent. Rapports : `tmp/correctif-chasse-worker/resultats.xml` et `http.xml`. |
+| Architecture obligatoire | 718 réussites, aucune erreur ni test ignoré ; `tmp/correctif-chasse-architecture.xml`. |
+| PostgreSQL génération et modules | 44 réussites : refus sans brouillon, opération ni réservation, reçus conservés, workflow et droits persistants. Le port de décision commerciale est explicite dans la fixture de workflow ; les règles réelles `DroitModule` sont couvertes séparément. `tmp/correctif-chasse-postgres.xml`. |
+| PostgreSQL projection de réemploi | Première passe : 14 erreurs de préparation, car `pg_trgm` préinstallé dans `public` n'était pas visible du schéma isolé. Extension locale sans index dépendant retirée pour laisser chaque fixture l'installer dans son schéma ; aucune assertion ni migration applicative modifiée. Reprise ciblée : **14 réussites**, aucune erreur ni test ignoré ; `tmp/correctif-chasse-projection-reprise.xml`. |
+| Générateur | Deux réussites : préparation accompagnée visible/reprenable et relations complètes avec restauration du jeu, sur base locale jetable migrée ; `tmp/correctif-chasse-demo.xml`. Deux avertissements SQLAlchemy de réflexion `dialect_options` conservés. La suite complète de transfert/dump n'a pas été rejouée. |
+
+Les 25 nouveaux cas couvrent les quatre origines avec quota de publication
+nul, les droits expirés/futurs/retirés/suspendus, l'exception historique
+prouvée, l'horloge UTC avec fuseau, les lectures groupées, les refus avant
+effets et le changement effectif de type. Les conditions anciennes non
+reconstituées restent signalées par `CONDITIONS_ACQUISES_A_CONTROLER` ; aucun
+droit n'est inféré ni accordé par la correction.
+
+La recette navigateur `tests/browser/leo-assistant.mjs` a réussi sur l'API
+synthétique, réseau externe bloqué, à 390 et 1280 px : dix cas supplémentaires
+vérifient le catalogue sans module, le choix désactivé, le lien direct, le
+retrait du droit entre catalogue et formulaire puis son rétablissement.
+Les parcours nominaux Chasse, Passeport et Tombola restent contrôlés. Le
+frontend applicatif respectait déjà `disponible` et `raison_indisponibilite` ;
+seul le test évolue. Les quatre captures catalogue/lien direct ont été
+inspectées. Build isolé et vérification syntaxique réussis ; avertissement de
+bundle supérieur à 500 ko conservé. Rapport Animation :
+`tmp/leo-module-access.log`. Deux premiers essais du banc ont échoué sur des
+attentes anciennes, actualisées : confirmation de sortie après saisie et
+titre « Informations publiques ». Ils restent conservés dans
+`tmp/leo-module-access-attempt1.log` et `attempt2.log`.
+
+Impacts : backend producteur corrigé ; contrat JSON existant conservé
+(`disponible`, `raison_indisponibilite`, erreurs de module), donc aucun nouvel
+export OpenAPI ni contrat embarqué. Animation ne change que sa recette ; ERP
+et autres frontends sans adaptation, car ils n'implémentent pas cette décision.
+Le générateur transmet l'ouverture et le calendrier du service qu'il compose,
+en conservant son octroi commercial explicite. Aucune migration SQL ou
+réparation de données requise ; aucun compte TEST modifié. Après livraison du
+backend, vérifier dans la commune signalée que Chasse est indisponible avec
+son motif, puis contrôler le nominal avec un droit actif sur une organisation
+de recette prévue à cet effet. Cette recette distante après déploiement reste
+non exécutée.
+
+Contrôles documentaires : `check_guidance.py` vérifie 99 guides et 1 366 liens,
+sans erreur ni avertissement ; `sync_documentation.py --check-sources` vérifie
+150 documents. `git diff --check` réussit dans les trois dépôts modifiés.
+
 ## Évolution — E73-EVO-CLONAGE (13 novembre 2026)
 
 **Implémentation réalisée ; vérifications fonctionnelles locales réussies, CL-11 partiel.**
