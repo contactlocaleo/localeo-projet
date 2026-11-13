@@ -2,6 +2,12 @@
 
 Toutes les pages HTML produites par `app.infrastructure.admin.admin` et toutes les interfaces SQLAdmin utilisent le même langage visuel Localeo. Cette règle couvre les dashboards, visions 360, consoles Animation, timeline support, procédures de correction, formulaires de secours, écrans documentaires et vues issues des modèles SQLAlchemy.
 
+Pour les pages métier ERP, les consoles Animation et les vues spécifiques ouvertes
+depuis l’ERP, appliquer le gabarit et les [règles UX des pages de gestion](../../transverse/conventions-backoffice.md#ux-des-pages-de-gestion-erp).
+Ces conventions priment sur les descriptions historiques de shell ci-dessous,
+notamment pour le placement du titre, des actions et de la navigation. Les vues
+techniques SQLAdmin conservent leur gabarit propre.
+
 ## Principes communs
 
 - barre de navigation persistante vers la console SQLAdmin, le dashboard, le territoire, le support et les procédures ;

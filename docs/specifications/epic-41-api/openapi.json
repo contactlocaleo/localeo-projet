@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Backend - contrat implemente EPIC 41",
     "description": "OpenAPI complet du backend, dont les parcours Animation locale. Genere hors ligne depuis le code local pour les integrations et les mocks ; cet instantane ne prouve pas son deploiement.",
-    "version": "1.0.0+d4ca278"
+    "version": "1.0.0+40d3cfd"
   },
   "paths": {
     "/public/identite-acces/interne/connexion": {
@@ -24504,6 +24504,166 @@
             }
           }
         }
+      }
+    },
+    "/internal/erp/animations/selection": {
+      "get": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Selection Animations",
+        "operationId": "selection_animations_internal_erp_animations_selection_get",
+        "parameters": [
+          {
+            "name": "recherche",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 100,
+              "default": "",
+              "title": "Recherche"
+            }
+          },
+          {
+            "name": "communeId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Communeid"
+            }
+          },
+          {
+            "name": "moteur",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 100
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Moteur"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2048
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageAnimationsConsolePayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/erp/animations/selection/{animation_id}": {
+      "get": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Selection Animation",
+        "operationId": "selection_animation_internal_erp_animations_selection__animation_id__get",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnimationConsolePayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
       }
     },
     "/protected/commercialisation/batch/atelier/conserver": {
@@ -57415,99 +57575,6 @@
         ]
       }
     },
-    "/internal/abonnements-plateforme/catalogue": {
-      "get": {
-        "tags": [
-          "Modules et conditions acquises"
-        ],
-        "summary": "Catalogue",
-        "operationId": "catalogue_internal_abonnements_plateforme_catalogue_get",
-        "parameters": [
-          {
-            "name": "commune_id",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid",
-              "title": "Commune Id"
-            }
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "maximum": 100,
-              "minimum": 1,
-              "default": 25,
-              "title": "Limit"
-            }
-          },
-          {
-            "name": "cursor",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "maxLength": 2048
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Cursor"
-            }
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Authorization"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CataloguePage"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "AdminSessionCookie": []
-          }
-        ]
-      }
-    },
     "/protected/abonnements-plateforme/catalogue": {
       "get": {
         "tags": [
@@ -57594,6 +57661,116 @@
             }
           }
         }
+      }
+    },
+    "/internal/abonnements-plateforme/catalogue": {
+      "get": {
+        "tags": [
+          "Modules et conditions acquises"
+        ],
+        "summary": "Catalogue Interne",
+        "operationId": "catalogue_interne_internal_abonnements_plateforme_catalogue_get",
+        "parameters": [
+          {
+            "name": "commune_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Commune Id"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2048
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "offre_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Offre Id"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CataloguePage"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
       }
     },
     "/internal/abonnements-plateforme/souscriptions": {
@@ -59647,7 +59824,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/RemboursementPayload"
+                  "$ref": "#/components/schemas/RemboursementGestionPayload"
                 }
               }
             }
@@ -98465,6 +98642,177 @@
         ]
       }
     },
+    "/internal/animation-locale/animations/{animation_id}/exploitation/preuves": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Preuves",
+        "operationId": "preuves_internal_animation_locale_animations__animation_id__exploitation_preuves_get",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1,
+              "title": "Page"
+            }
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Page Size"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagePreuvesConsolePayload"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Demande invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentification requise",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Action non autorisée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ressource ou reçu introuvable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Version, aperçu ou état en conflit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Accès expiré",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Document trop volumineux",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Encodage non supporté",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Contenu invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Fréquence dépassée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Transaction indisponible, consulter le reçu",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
     "/protected/animation-locale/animations/{animation_id}/validations/{validation_id}/correction/apercu": {
       "get": {
         "tags": [
@@ -125356,6 +125704,66 @@
           "detail_url"
         ],
         "title": "AnimationCommercantPayload"
+      },
+      "AnimationConsolePayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "nom": {
+            "type": "string",
+            "title": "Nom"
+          },
+          "organisationNom": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Organisationnom"
+          },
+          "communeNom": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Communenom"
+          },
+          "communeId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Communeid"
+          },
+          "moteur": {
+            "type": "string",
+            "title": "Moteur"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "nom",
+          "organisationNom",
+          "communeNom",
+          "communeId",
+          "moteur",
+          "statut"
+        ],
+        "title": "AnimationConsolePayload"
       },
       "AnimationDetailPayload": {
         "properties": {
@@ -162960,6 +163368,35 @@
         ],
         "title": "PageAnimationPayload[ValidationAnimationPayload]"
       },
+      "PageAnimationsConsolePayload": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/AnimationConsolePayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "nextCursor"
+        ],
+        "title": "PageAnimationsConsolePayload"
+      },
       "PageAnimationsProductivitePayload": {
         "properties": {
           "items": {
@@ -165075,6 +165512,38 @@
         ],
         "title": "PagePreneursEngagement"
       },
+      "PagePreuvesConsolePayload": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/PreuveConsolePayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "page": {
+            "type": "integer",
+            "title": "Page"
+          },
+          "pageSize": {
+            "type": "integer",
+            "title": "Pagesize"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "page",
+          "pageSize",
+          "total"
+        ],
+        "title": "PagePreuvesConsolePayload"
+      },
       "PagePropositionsActualisation": {
         "properties": {
           "items": {
@@ -165321,7 +165790,7 @@
         "properties": {
           "items": {
             "items": {
-              "$ref": "#/components/schemas/RemboursementPayload"
+              "$ref": "#/components/schemas/RemboursementGestionPayload"
             },
             "type": "array",
             "title": "Items"
@@ -170923,6 +171392,48 @@
           "nom"
         ],
         "title": "PreuveARegulariser"
+      },
+      "PreuveConsolePayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "participantNom": {
+            "type": "string",
+            "title": "Participantnom"
+          },
+          "commercantNom": {
+            "type": "string",
+            "title": "Commercantnom"
+          },
+          "etapeId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Etapeid"
+          },
+          "validatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Validatedat"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "participantNom",
+          "commercantNom",
+          "etapeId",
+          "validatedAt",
+          "statut"
+        ],
+        "title": "PreuveConsolePayload"
       },
       "PreuvePrioritePayload": {
         "properties": {
@@ -177900,6 +178411,192 @@
           "statut"
         ],
         "title": "RelanceSmsPayload"
+      },
+      "RemboursementGestionPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "commande_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Commande Id"
+          },
+          "partenaire_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Partenaire Id"
+          },
+          "commune_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Commune Id"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          },
+          "motif_demande": {
+            "type": "string",
+            "title": "Motif Demande"
+          },
+          "motif_decision": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motif Decision"
+          },
+          "montant_centimes": {
+            "type": "integer",
+            "title": "Montant Centimes"
+          },
+          "reserve_centimes": {
+            "type": "integer",
+            "title": "Reserve Centimes"
+          },
+          "disponible_centimes": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Disponible Centimes"
+          },
+          "devise": {
+            "type": "string",
+            "title": "Devise"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "decided_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Decided At"
+          },
+          "acteur_decision": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Acteur Decision"
+          },
+          "retrait_commercial_demande": {
+            "type": "boolean",
+            "title": "Retrait Commercial Demande"
+          },
+          "derniere_erreur": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Derniere Erreur"
+          },
+          "actions_disponibles": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Actions Disponibles"
+          },
+          "partenaire_nom": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Partenaire Nom"
+          },
+          "commune_nom": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Commune Nom"
+          },
+          "commande_created_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Commande Created At"
+          },
+          "commande_total_ttc_centimes": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Commande Total Ttc Centimes"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "commande_id",
+          "partenaire_id",
+          "commune_id",
+          "version",
+          "statut",
+          "motif_demande",
+          "motif_decision",
+          "montant_centimes",
+          "reserve_centimes",
+          "devise",
+          "created_at",
+          "decided_at",
+          "acteur_decision",
+          "retrait_commercial_demande",
+          "derniere_erreur",
+          "actions_disponibles"
+        ],
+        "title": "RemboursementGestionPayload"
       },
       "RemboursementPayload": {
         "properties": {

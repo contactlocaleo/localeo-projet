@@ -4,6 +4,7 @@ Lire le [README](README.md), puis la spécification du périmètre et les instru
 
 - Conserver les cinq dépôts Git indépendants. Documenter les applications affectées et les contrats partagés ; ne pas créer une documentation concurrente par application.
 - Le domaine backend porte les règles métier ; l’application orchestre et les interfaces présentent. Respecter les instructions techniques locales.
+- Pour une évolution ERP, appliquer les [règles UX des pages de gestion](docs/architecture/transverse/conventions-backoffice.md#ux-des-pages-de-gestion-erp) dès la conception et utiliser leur checklist pour la recette du parcours concerné.
 - Les statuts de la roadmap commune priment sur les anciens détails de story. Ne pas transformer une divergence historique en nouvel arbitrage implicite.
 - Modifier les sources canoniques ici, y compris les contrats OpenAPI documentaires du backend. Les lecteurs utilisent ce dépôt ou un bundle de déploiement généré depuis documentation.exports.json, contrôlé par empreintes et non versionné dans le backend.
 - Conserver les générateurs et outils exécutables dans leur dépôt applicatif. Les contrats embarqués par les frontends restent auprès de leurs consommateurs. Ne pas déplacer les données de démonstration, secrets, imports ou sorties de travail dans ce dépôt documentaire.

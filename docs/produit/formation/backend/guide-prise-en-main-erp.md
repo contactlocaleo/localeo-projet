@@ -84,6 +84,28 @@ Vérifie la pagination avant de conclure qu’un dossier n’existe pas. Une err
 de chargement ne signifie pas qu’il n’y a aucun résultat. Les raccourcis et les
 actions proposés dépendent toujours du dossier et de ton habilitation.
 
+L’accueil présente un aperçu de cinq dossiers d’équipe. **Voir tous les dossiers**
+ouvre la file complète. Les pages **Visions 360**, **Paiements et facturation**,
+**Exploitation courante** et **Supervision technique** regroupent leurs accès
+par tâche et expliquent ce que tu trouveras derrière chaque lien.
+
+Dans **Coffrets**, ouvre un dossier pour consulter son offre. **Disponibilité du
+catalogue** sert à examiner les blocages. **Couverture territoriale → Voir les
+coffrets** affiche toutes les offres de la commune. Les alertes donnent leur cause
+avant l’ouverture du diagnostic. Si une liste ne charge pas, conserve tes filtres
+et utilise son bouton de nouvelle tentative.
+
+Dans une fiche, commence par l’état et les actions de la section. Les retraits,
+annulations et interventions exceptionnelles sont séparés. Un profil Lecteur
+consulte les informations sans formulaire de modification. Pour modifier un modèle
+de prestation, ouvre son éditeur nommé ; ses changements ne modifient pas les
+prestations déjà rattachées à des coffrets.
+
+Un administrateur qui traite une difficulté de connexion voit d’abord l’état
+d’accès et les envois. **Modifier les informations et les habilitations** ouvre
+ensuite l’édition du profil. Pour les opérations financières, relis le dossier,
+le montant et la portée indiqués avant de confirmer.
+
 Pour l’administrateur historique, **Supervision technique → Web Push** réunit
 les abonnements et l’historique des notifications. Choisis le canal puis ouvre
 une ligne pour consulter ses détails. L’historique indique le suivi de l’envoi,

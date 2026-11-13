@@ -359,3 +359,160 @@ succès. Ces contrôles ne remplacent pas les scénarios applicatifs ci-dessus.
 - Commit et push demandés après la validation locale ; aucun déploiement
   demandé. La clôture historique d'E60 n'est ni rouverte ni réutilisée comme
   validation de cette évolution.
+
+## Évolution du 13 novembre — E60-EVOL-GESTION-20261113
+
+La demande d’implémentation reprend le [rapport des pages ERP](../../audits/backend/localeo-erp-ux-pages-gestion-2026-11-13.md). Les trente constats sont intégrés au périmètre ; le rapport reste une photographie avant changement. Les règles et confirmations métier existantes sont conservées. La clôture historique E60 et le bilan du 12 novembre restent distincts de cette réalisation.
+
+### Conception retenue
+
+Cinq modèles de présentation partagent la coque existante : accueil de travail, liste de gestion, fiche dossier, formulaire de décision, console de diagnostic. Identité, état et action utile précèdent historique et données techniques. Les champs restent en lecture quand le profil ne peut pas modifier. Une seule action est mise en avant lorsqu’une prochaine étape est déterminable à partir des faits serveur ; l’interface ne calcule pas une nouvelle éligibilité.
+
+Les retours conservent filtres, pagination, sélection et focus sans stocker de dossier ou de brouillon durablement. Les saisies privées restent en mémoire de l’onglet et sont purgées à expiration. Le filtre de consultation ne définit jamais implicitement la portée d’une commande globale. Les montants saisis en euros sont convertis exactement en centimes, sans changer les contrats financiers. Les commandes sensibles gardent contrôles serveur, CSRF, version, audit, confirmations et idempotence.
+
+### Critères et preuves prévues
+
+Les critères G01 à G30 correspondent respectivement aux constats UX-01 à UX-30 du rapport ; ils complètent CA-01 à CA-20 sans les renuméroter.
+
+| Critère | Comportement attendu | Preuve prévue |
+| --- | --- | --- |
+| G01 | Hubs groupés par tâche, description par destination, fonctions exceptionnelles séparées | Navigateur : destinations, droits, bureau/mobile |
+| G02 | Préparation accompagnée nommée, état/calendrier/parcours distincts, décision visible | Navigateur : états du service, historique et reprise |
+| G03 | Consoles avec cible nommée et recherche/sélection autorisée ; référence technique secondaire | Navigateur et lectures HTTP ciblées |
+| G04 | Coffret et note commerçant consultables sans formulaire d’écriture pour Lecteur | Navigateur Lecteur/gestionnaire, refus serveur conservé |
+| G05 | Publication et support instance organisés par intention et portée | Navigateur : brouillon, actif, accès client, cycle de vie |
+| G06 | Portée globale du catalogue annoncée quelle que soit l’entrée | Navigateur : commune filtrée et offre directe |
+| G07 | Remboursement identifié, euros saisis et décision/exécution distinctes | Navigateur : montant exact, refus, résultat incertain |
+| G08 | Revue métier des commandes financières/administratives avant engagement | Rendu et navigateur : cible, portée, annulation sans POST |
+| G09 | Actualiser/quitter ne détruit pas silencieusement une saisie de préparation | Navigateur : saisie, reprise, conflit, expiration |
+| G10 | Achats : recherche nommée, pagination et états lisibles | Rendu : plus de 25 résultats et retour filtré |
+| G11 | Territoires « Voir les coffrets » ouvre tous les coffrets de la commune | Navigateur : filtre d’arrivée explicite |
+| G12 | Continuité étendue aux listes Animation et parents des consoles | Navigateur : page suivante, détail, retour et focus |
+| G13 | Catalogue coffrets distinct de la file des blocages | Navigateur : identité, statut, intention et retour |
+| G14 | Causes/états des alertes et couverture territoriale compréhensibles | Navigateur : états, inconnus et diagnostic lié |
+| G15 | Modèles réutilisables et prestations liées séparés, éditeur identifié/focalisé | Navigateur : modifier et annuler un modèle |
+| G16 | Création/composition avec aide progressive et tâche visible | Navigateur : création, édition, avertissement BUM |
+| G17 | Demandes d’organisation comparables avant ouverture, pagination bidirectionnelle | Navigateur : demandes et invitations |
+| G18 | Partenaire 360 lié aux accès actuels, résultats navigables | Rendu : liste, détail, accès et retour |
+| G19 | Souscription/commande/fermeture : contexte et actions de section hiérarchisés | Navigateur : actions autorisées et blocages |
+| G20 | Catalogue/modules : navigation bidirectionnelle et offre ciblée accessible | Navigateur : plusieurs pages, accès direct |
+| G21 | Factures/demandes : destinataire et source lisibles dans les droits existants | Rendu : consultation sans commande implicite |
+| G22 | Pilotage mobile : valeurs associées à leurs légendes | Navigateur 320/390 px et texte agrandi |
+| G23 | Mesures économiques consultables avant édition ciblée | Navigateur : 25 mesures, ouverture d’un éditeur |
+| G24 | Préparation : lectures utiles bornées ; erreurs locales dans les autres listes | Navigateur : nombre d’appels, panne partielle et reprise |
+| G25 | Batchs : diagnostic avant configuration/exécution, historique accessible | Rendu/navigateur : recherche et sélection sans mutation |
+| G26 | Audit/Web Push : contexte et traitement ciblé sans assimilation de livraison/lecture | Navigateur : liens et filtres autorisés |
+| G27 | Utilisateur : état d’accès avant édition des habilitations | Navigateur : récupération et édition explicite |
+| G28 | Composants de contenu cohérents, actions lisibles et focus préservé | Captures bureau/mobile/texte agrandi, clavier |
+| G29 | Accueil compact, tâches connues et accès aux listes complètes | Navigateur : aperçu borné et absence de faux compteurs |
+| G30 | Aide et menus livrés alignés | Liens documentaires et comparaison des libellés |
+
+### Responsabilités, impacts et bornes
+
+- Le backend héberge les vues ERP, consoles et projections ; les domaines Catalogue, Animation, Identité et Finance restent propriétaires des décisions. Aucun changement de règle métier n’est nécessaire pour la présentation.
+- Les projections enrichies, si nécessaires, restent des lectures autorisées et bornées : 25 éléments par défaut, au plus 100 ; pas de boucle de collecte exhaustive au montage, pas de requête de nom par ligne. Tests à 25/100 éléments ou N/10N selon le chemin réellement modifié.
+- Les contrats internes modifiés doivent être testés avec leurs consommateurs ; aucune modification des interfaces publiques Live/Pro/Animation n’est présumée. Un besoin de contrat sera consigné avec producteur et consommateurs avant son édition.
+- Aucune migration ni configuration nouvelle n’est prévue. Une découverte nécessitant des données supplémentaires doit être explicitée ; ne pas inventer des noms, compteurs, affectations ou délais absents.
+- Les fixtures navigateur couvrent homonymes, droits restreints, plusieurs pages, erreurs et montants. Le générateur n’a pas à modifier ses données pour un changement de présentation ; réexaminer ce point si un schéma ou contrat évolue.
+- Actualiser le guide ERP et le menu Animation. La spécification et le bilan restent ici, sans documentation concurrente par application.
+- Les tests isolés prouvent les comportements locaux. Recette humaine, lecteur d’écran et capacité déployée restent distincts ; CA-20 n’est pas rendu vert par des captures. Aucun commit, push, migration TEST ou déploiement n’est demandé dans cette phase.
+
+### Réalisation et bilan
+
+Les trente constats ont un traitement dans cette évolution. Le tableau ci-dessous
+décrit le résultat local ; il ne constitue pas une validation de l’environnement
+TEST ni une mesure de gain de productivité auprès des gestionnaires.
+
+| Critères | Réalisation | Preuves locales |
+| --- | --- | --- |
+| G01, G28 | Hubs par tâches avec descriptions ; blocs identité/décision/édition partagés dans `page-layout.css`, également chargés par les consoles ; repères mobiles moins répétitifs | `erp-gestion.cjs`, `erp-page-template.cjs`, `erp-menu-ux.cjs` |
+| G02, G09 | Préparation nommée, attente et décision avant historique ; calendrier/parcours séparés ; brouillons en mémoire, actualisation et version contrôlées | `epic73-preparations-service.cjs` |
+| G03 | Sélection bornée par nom/commune/moteur, identité et organisation rappelées ; preuves nommées dans le périmètre de régularisation ; référence technique séparée | `erp-gestion-preparations.cjs`, `test_gestion_preparation_erp.py`, `test_gestion_preparation_lecture.py`, `test_gestion_preparation_surfaces.py` |
+| G04 | Informations du coffret et notes du commerce sans formulaire d’écriture pour Lecteur | `erp-gestion.cjs`, non-régressions `erp-productivite.cjs` |
+| G05 | Vérification/publication séparées du retrait/archivage ; accès client, assistance et annulation/remboursement regroupés dans l’instance | `erp-gestion.cjs`, `erp-template-modules.cjs` |
+| G06, G20 | Catalogue global explicite, revue ancienne/nouvelle version, filtre d’offre avant pagination ; curseurs bidirectionnels, résultat annoncé et pagination verrouillée pendant lecture | `erp-gestion-animation.cjs`, `epic73-modules-ux.cjs`, `test_erp_gestion_animation_projections.py` |
+| G07 | Organisation, commune, date/montant de commande, décision/exécution distinctes et saisie exacte en euros | `epic73-modules-erp.cjs`, projections PostgreSQL et contrats HTTP |
+| G08 | Revue des commandes historiques avec intitulé, conséquences et portée ; campagne Stripe globale annoncée indépendamment des filtres | `test_erp_gestion_admin.py`, `erp-gestion-admin.cjs`, `test_reversements_360_finance_runtime.py` |
+| G10 | Achats recherchables, états français, pagination et retour avec recherche/page/focus | `test_erp_gestion_admin.py`, `erp-gestion-admin.cjs` |
+| G11, G13, G14 | Tous les coffrets de la commune accessibles ; catalogue distinct des blocages ; cause/état visibles dans les alertes, couverture traduite | `erp-gestion.cjs` |
+| G12 | Contexte étendu aux listes Animation et parents des consoles ; historique utilisé quand l’entrée antérieure est connue ; repli par curseur opaque, sans faux numéro de page | `epic73-suivi-produits.cjs`, `erp-gestion-animation.cjs`, `erp-gestion-preparations.cjs`, `erp-productivite.cjs` |
+| G15, G16 | Modèles et prestations distincts ; éditeur nommé/focalisé et annulation avec retour du focus ; coffret organisé par identification, conditions, promesse et image, aide repliée | `erp-gestion.cjs`, `erp-productivite.cjs` |
+| G17 | Demandes comparables en tableau, examen ciblé, pagination dans les deux sens, saisies protégées avant filtre/rechargement/navigation | `equipes-animation-erp.cjs` |
+| G18 | Partenaires paginés, liens exacts vers gestionnaires actuels, recherche du partenaire annoncée comme recherche | `test_erp_gestion_admin.py` |
+| G19 | Actions des modules et décisions de commande remontées ; fermeture présentée avec ses engagements et blocages | `souscriptions-responsable-erp.cjs`, `epic73-modules-ux.cjs`, `epic73-reversibilite.cjs` |
+| G21 | Destinataires et sources de facture lisibles ; enrichissement groupé en une lecture à 25/100 lignes, sans génération de document | `test_erp_gestion_admin.py` |
+| G22, G23 | Cellules économiques légendées sur mobile ; mesures consultables avant ouverture d’un éditeur ciblé | `epic73-pilotage-economique.cjs` |
+| G24 | Seulement les POI utilisés chargés au montage, accords par pages de 25 ; erreurs locales et nouvelle tentative pour alertes, territoires et instances | `preparation-erp.cjs`, `erp-gestion.cjs`, `erp-template-modules.cjs` |
+| G25 | Filtres et diagnostic des batchs avant configuration/intervention ; historique par clé date/identifiant, sans modifier le contrat maintenance par défaut | `test_erp_gestion_admin.py`, `test_batchs_manuels.py`, `batchs-manuels.cjs` |
+| G26 | Entrées Audit/Web Push depuis commerce et instance ; codes connus expliqués, codes sources conservés ; traitement du canal ciblé, destinataire privé en mémoire | `erp-gestion.cjs`, `epic65-audit-erp.cjs`, `epic65-webpush-erp.cjs` |
+| G27 | État d’accès et envois avant édition explicite ; modification protégée contre actualisation/retour, purge à expiration | `erp-gestion.cjs`, `erp-productivite.cjs` |
+| G29 | Aperçu de cinq dossiers d’équipe, lien vers la file complète de 25 ; pas de nouveau compteur Animation non disponible | `erp-gestion.cjs`, `erp-home-applications.cjs` |
+| G30 | Guide de prise en main et menu Animation alignés sur les groupes, ancres et parcours livrés | Contrôles documentaires et comparaison au menu du code |
+
+Les tests navigateur sont dans `localeo-backend/tests/browser`, les tests Python
+dans leurs dossiers API/application/infrastructure/security. Les lectures et
+commandes navigateur sont simulées ; aucune commande utilisateur réelle n’est
+effectuée. Les rapports de chaque tentative restent sous `.artifacts` du backend,
+hors versionnement ; seules les dernières exécutions pertinentes fondent le bilan.
+
+#### Vérifications exécutées le 13 novembre 2026
+
+| Contrôle | Résultat et preuve |
+| --- | --- |
+| Architecture, classes de domaine, couverture des cas d’usage, navigation serveur et génération OpenAPI | **757 tests réussis**, aucun échec ni test ignoré ; `.artifacts/erp-gestion/integration-final.xml` |
+| Préparation et consoles : API, application et middleware réel | **16 tests réussis**, dont portée autorisée avec `animation.gerer`, refus sans capacité et absence de route de preuves sous `/protected` |
+| Administration, factures, batchs et revues financières | **32 tests réussis** ; `.artifacts/erp-gestion-admin/pytest.xml` |
+| Lectures Animation | **23 tests PostgreSQL/API** et **16 contrôles de sécurité** réussis ; **8 tests ciblés rejoués** après séparation du schéma de remboursement interne, sans les additionner aux premiers passages |
+| Nouveaux parcours de gestion communs | **16 scénarios réussis** ; `.artifacts/erp-gestion/2026-11-13T18-27-11-463Z/results.json` |
+| Productivité, droits, erreurs, reçus, saisies et continuité | **29 scénarios réussis** après le dernier correctif de retour ; `.artifacts/erp-productivite/2026-11-13T18-34-55-531Z` |
+| Navigation Animation | **28 contrôles réussis**, y compris annulation puis nouvelle tentative de sortie avec saisie en cours, en 320 et 1280 px |
+| Tests Node du menu et du chargement différé des instances | **6 tests réussis** sur les modules réellement rendus ; les deux anciennes fixtures obsolètes sont actualisées après reproduction de leurs échecs sur HEAD |
+| Gabarit, instances, menu et accueil | Respectivement **24, 78, 35 et 30 contrôles réussis** ; captures et vérifications clavier/mobile/texte agrandi selon chaque parcours |
+| Préparations et consoles dans le navigateur | **28 scénarios réussis** répartis dans six recettes ; le service est rejoué après l’ajustement final des cases de confirmation |
+| Autres parcours Animation | **Neuf recettes navigateur réussies** : catalogue, modules, remboursements, équipes, suivi, souscriptions, réversibilité, pilotage et sollicitations ; continuité/pagination rejouées après intégration |
+| Audit, Web Push, administration et batchs | Recettes navigateur réussies avec commandes interceptées, droits et confirmations vérifiés |
+| Documentation | `check_guidance.py` et `sync_documentation.py --check-sources` réussis ; contrat E41 généré hors ligne avec trois nouvelles lectures internes et aucune nouvelle route `/protected` |
+
+Les revues indépendantes des parcours et des projections ont été intégrées.
+Elles ont notamment conduit à protéger les saisies d’organisation, verrouiller la
+pagination pendant une lecture, rétablir le focus après annulation d’un modèle
+et invalider l’identité affichée lorsque la cible de conservation change.
+La conservation vérifie l’absence de POST avant nouvelle sélection d’une animation.
+Une recette de navigation a également reproduit puis vérifié la correction du
+retour après annulation du dialogue de sortie. Les premières tentatives en échec
+restent dans les artefacts ; les résultats ci-dessus correspondent aux reprises
+validées, sans cumul artificiel des répétitions.
+
+#### Contrats, données et autres dépôts
+
+Les [contrats de gestion E73](../epic-73-animation-et-ou-coffrets/architecture-contrats.md#lectures-de-gestion-erp--13-novembre-2026)
+décrivent les lectures sélection/preuves, le filtre d’offre et l’enrichissement des
+remboursements. Le contrat OpenAPI complet E41 est régénéré hors ligne. Les réponses
+publiques et les réponses de commande de remboursement gardent leur schéma
+historique ; l’enrichissement est limité aux GET internes.
+
+Deux dépôts sont modifiés : `localeo-backend` (ERP, consoles, lectures et tests),
+`localeo-projet` (spécification, contrats, guides et traçabilité). Les applications
+marketplace, commerçant et Animation ne changent pas. Aucun schéma persistant,
+migration, secret, configuration ou jeu de démonstration nouveau n’est nécessaire.
+Les droits, décisions financières et transitions restent portés par leurs domaines.
+
+#### Limites explicites
+
+- Le gain de temps quotidien n’est pas mesuré : CA-20 requiert toujours une recette
+  avec les opérateurs. Les tests clavier, Axe et captures ne remplacent pas un
+  essai avec lecteur d’écran ou appareil physique.
+- La campagne Stripe globale ne dispose pas d’un aperçu chiffré de simulation.
+  La revue explique sa portée ; le domaine recalcule les dossiers à l’exécution.
+  Aucun total présumé n’est affiché.
+- Les cibles de conservation qui ne sont pas des animations restent techniques.
+  Les identités absentes sont signalées, sans nom reconstitué.
+- Les codes d’audit inconnus gardent leur valeur source. Une installation Live
+  ne devient pas une identité d’habitant, et une acceptation Web Push ne prouve
+  ni affichage ni lecture.
+- Les preuves PostgreSQL portent sur les projections modifiées, pas sur la
+  capacité de l’environnement déployé. La pagination historique des batchs est
+  vérifiée sur une base SQLite isolée.
+- Aucun déploiement, migration TEST, commit ou push n’est inclus. Le statut
+  historique de l’epic n’est pas réécrit ; le rapport d’audit reste la photographie
+  avant cette évolution.

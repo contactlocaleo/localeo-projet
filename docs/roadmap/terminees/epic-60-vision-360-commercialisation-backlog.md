@@ -414,6 +414,11 @@ maintenir deux interfaces en production. Les anciennes Epics
 
 ## Pilotage et definition de termine unifies
 
+L’évolution **E60-EVOL-GESTION-20261113**, demandée après l’audit des pages ERP,
+est suivie dans la [spécification de productivité](../../specifications/epic-60-vision-360-commercialisation/ux-productivite.md#évolution-du-13-novembre--e60-evol-gestion-20261113).
+Ses critères G01 à G30 et ses preuves complètent ce dossier sans modifier le
+statut historique de la roadmap. Aucun déploiement n’est impliqué par sa recette locale.
+
 - [Analyse des parcours ERP](../../specifications/epic-60-vision-360-commercialisation/analyse-parcours-erp.md).
 - [Registre unique des arbitrages](../../specifications/epic-60-vision-360-commercialisation/registre-arbitrages.md).
 - [Plan de livraison unifie](../../specifications/epic-60-vision-360-commercialisation/plan-livraison-unifie.md).

@@ -287,5 +287,6 @@ registre, sans assimiler conception et implementation.
 ## Documents complémentaires du dossier
 
 - [Commission par prestation et saisie en euros](commission-par-prestation.md)
+- [Productivité et pages de gestion ERP](ux-productivite.md#évolution-du-13-novembre--e60-evol-gestion-20261113) : évolution issue des trente constats de l’audit du 13 novembre 2026. La clôture historique de l’epic reste distincte de cette évolution.
 
 [Retour à l’index des spécifications](../INDEX.md)

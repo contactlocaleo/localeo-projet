@@ -11,7 +11,7 @@ Ce dossier documente les choix communs a plusieurs EPIC.
 - [Domaines fonctionnels](domaines-fonctionnels.md) : decoupage cible issu de l'EPIC 40.
 - [Conventions API et OpenAPI](conventions-api-openapi.md) : organisation des routes, domaines et contrats.
 - [Performance et volumétrie](performance-volumetrie.md) : lectures paginées en base, index, mémoire, contention et preuves de capacité pour les évolutions.
-- [Conventions back-office](conventions-backoffice.md) : alignement du menu d'administration sur les domaines.
+- [Conventions back-office](conventions-backoffice.md) : domaines de navigation, gabarit et [règles UX des pages de gestion ERP](conventions-backoffice.md#ux-des-pages-de-gestion-erp), avec checklist de recette.
 - [Conventions securite](conventions-securite.md) : exposition publique/protegee/interne, audit et idempotence.
 - [Charte email](charte-emails-localeo.md) : rendu commun, liens, QR et recette des emails.
 - [Contrôle d'architecture](controle-architecture.md) : principes applicables, preuves de revue, contrôles CI et limites.

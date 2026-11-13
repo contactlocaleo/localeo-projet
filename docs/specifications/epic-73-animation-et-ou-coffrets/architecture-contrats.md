@@ -548,3 +548,35 @@ Le [guide d'exploitation](../../exploitation/exploitation/exploiter-saas-animati
 décrit conservation, journal indépendant et fermeture des capacités restaurées.
 Les contrats générés, preuves locales et limites de capacité sont enregistrés
 dans le suivi ; aucune migration ni activation distante n'est effectuée ici.
+
+## Lectures de gestion ERP — 13 novembre 2026
+
+L’[évolution des pages de gestion E60](../epic-60-vision-360-commercialisation/ux-productivite.md#évolution-du-13-novembre--e60-evol-gestion-20261113)
+enrichit les lectures internes suivantes. Le backend est producteur et héberge
+les consommateurs ERP ; aucun contrat public Live, Pro ou Animation n’est modifié.
+
+| Lecture | Contrat ajouté | Contrôle et consommateur |
+| --- | --- | --- |
+| `GET /internal/erp/animations/selection` | `recherche` préfixe (100 caractères), `communeId` UUID, `moteur` (100), `limit` 25 par défaut/max 100, `cursor` max 2048 ; réponse `items`, `nextCursor` | `animation.gerer`, portée communale existante ; consoles préparation/exploitation/conservation |
+| `GET /internal/erp/animations/selection/{animation_id}` | Résumé fermé `id`, `nom`, `organisationNom`, `communeNom`, `communeId`, `moteur`, `statut` ; les noms d’organisation/commune peuvent être nuls | Même autorisation ; 404 inconnu ou hors périmètre |
+| `GET /internal/animation-locale/animations/{animation_id}/exploitation/preuves` | `page` dès 1, `page_size` 25/max 100 ; `items`, `page`, `pageSize`, `total`. Une ligne contient `id`, `participantNom`, `commercantNom`, `etapeId`, `validatedAt` UTC et `statut` | Preuves validées uniquement ; permission domaine `animation:regulariser_preuve` et périmètre revérifiés ; console exploitation |
+| `GET /internal/abonnements-plateforme/catalogue` | Filtre facultatif `offre_id` UUID appliqué en SQL avant pagination et inclus dans la portée du curseur | Catalogue commercial ERP, lien depuis Offres et tarifs ; droits existants |
+| Liste et fiche de remboursement du commerce des souscriptions | `partenaire_nom`, `commune_nom`, `commande_created_at`, `commande_total_ttc_centimes` ajoutés à la projection | Jointure bornée en lecture ; remboursement ERP. La lecture de détail reste distincte de la lecture verrouillée utilisée pour décider |
+
+Les sélections et preuves sont servies sans cache. Authentification et droits
+produisent 401/403 ; les paramètres invalides produisent 422. Les schémas fermés
+de sélection/preuve excluent email, jeton et détail des participations. Aucun
+élargissement de permission de régularisation n’est introduit.
+La lecture des preuves est montée uniquement sous `/internal`, sans alias public
+ou `/protected`.
+
+Une commande d’abonnement E73 n’a pas de référence commerciale distincte dans
+le modèle courant : l’ERP présente date et montant, puis l’identifiant en détails
+techniques. Il ne redirige pas vers une commande historique E47 à partir de cet
+identifiant. La saisie du remboursement en euros est convertie exactement en
+centimes ; le domaine conserve décision, éligibilité et exécution.
+
+Les noms utilisent les projections ou jointures groupées existantes, sans requête
+par ligne. Aucun nouveau champ persistant ni migration n’est nécessaire. Le
+générateur de démonstration ne change pas : ses organisations, communes et
+commandes alimentent les nouvelles lectures sans exigence supplémentaire.

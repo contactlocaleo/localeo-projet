@@ -31,6 +31,12 @@ Pour toute évolution de lecture, écriture, traitement ou trafic, appliquer la 
 
 ### Matrice de traçabilité
 
+Pour un écran ou parcours ERP, appliquer les [règles UX des pages de gestion](../architecture/transverse/conventions-backoffice.md#ux-des-pages-de-gestion-erp).
+Identifier acteur, tâche, modèle de page, contexte et portée des actions ; relier
+les règles pertinentes `ERP-UX-01` à `ERP-UX-12` aux critères et preuves prévus.
+Lors de l’implémentation et de la revue, utiliser leur checklist sur le parcours
+modifié et consigner les limites dans le même bilan d’acceptation.
+
 Conserver cette matrice dans la spécification ou son bilan existant, pas dans un nouveau registre parallèle. Elle peut regrouper plusieurs critères partageant les mêmes impacts. « Sans objet » exige une raison ; « à examiner » n'équivaut pas à « aucun impact ».
 
 | Critère | Comportement et propriétaire | Preuve prévue puis résultat | Documentation fonctionnelle / contrat | Démonstration / fixtures | Exploitation / livraison |
