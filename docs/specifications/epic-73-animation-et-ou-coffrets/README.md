@@ -17,6 +17,14 @@ implémentés**, migration TEST v313 appliquée ; preuves locales et limites AP-
 [bilan](verification-livraison.md#évolution--e73-evo-animation-productivite-12-novembre-2026).
 Clôture historique et évolution de clôture automatique conservées séparément.
 
+Évolution du **12 novembre 2026 — E73-EVO-CLOTURE-AUTO** : clôture automatique
+à la date de fin, option active par défaut pour les nouvelles animations,
+rapport e-mail aux responsables actifs et report avant clôture avec notification
+Live/WebPush. Les choix utilisateur sont confirmés. La
+[spécification canonique et les 12 critères CAF](fin-animation-archives.md#évolution-du-12-novembre-2026--clôture-automatique-et-report-de-fin)
+décrivent règles, refus, contrats, concurrence, migration et trois lots.
+Spécification seule, sans implémentation ; clôture historique E73 conservée.
+
 Évolution du **11 novembre 2026 — E73-EVO-GAINS-SMS** : notification de lot
 complétée par SMS si un téléphone est renseigné, avec le même lien personnel
 que l’e-mail et les traitements d’envoi existants. Les

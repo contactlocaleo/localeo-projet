@@ -45,6 +45,23 @@ capacité/recette humaine sont distingués au
 E73 reste Terminée pour sa clôture historique. Les changements documentaires
 E73-EVO-CLOTURE-AUTO préexistants restent un périmètre indépendant.
 
+## Évolution du 12 novembre 2026 — clôture automatique et report de fin
+
+**E73-EVO-CLOTURE-AUTO** : option par animation, activée par défaut pour les
+nouvelles ; clôture à fin effective atteinte avec le workflow participant existant,
+rapport intermédiaire par e-mail aux responsables actifs de l’organisation.
+Report avant clôture, dans la fenêtre autorisée du moteur, sans réouverture,
+notifié dans Live et par WebPush selon les réglages. Ces trois choix ont été
+confirmés par l’utilisateur. Aucun tirage, fin ou archivage automatique ajouté.
+
+Les [critères CAF-01 à CAF-12, contrats et lots](../../specifications/epic-73-animation-et-ou-coffrets/fin-animation-archives.md#évolution-du-12-novembre-2026--clôture-automatique-et-report-de-fin)
+complètent FA sans les remplacer. Spécification seule : trois lots à implémenter
+(noyau/contrats, diffusion/rapport, interfaces/exploitation/démonstration).
+Les tests métier et recettes distantes sont à produire ; le
+[bilan de préparation](../../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md#évolution--e73-evo-cloture-auto-12-novembre-2026)
+sépare les contrôles documentaires des preuves futures. E73 reste **Terminée**
+pour son périmètre historique ; aucun changement de compteurs ou de clôture.
+
 ## Évolution du 11 novembre 2026 — notifications de gains par SMS
 
 **E73-EVO-GAINS-SMS** : compléter l’e-mail et Live par un SMS si le participant

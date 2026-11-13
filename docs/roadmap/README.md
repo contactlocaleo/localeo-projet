@@ -14,6 +14,12 @@ Sept lots implémentés ; preuves fonctionnelles locales et migration TEST v313 
 [bilan](../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md#évolution--e73-evo-animation-productivite-12-novembre-2026).
 AP-22 reste partiellement vérifié (capacité complète et recette humaine). Statut historique E73 et compteurs inchangés.
 
+**12 novembre 2026 — E73-EVO-CLOTURE-AUTO** : clôture à échéance, rapport
+e-mail aux responsables et report de fin notifié dans Live/WebPush.
+[Spécification et critères CAF-01 à CAF-12](../specifications/epic-73-animation-et-ou-coffrets/fin-animation-archives.md#évolution-du-12-novembre-2026--clôture-automatique-et-report-de-fin).
+Trois choix utilisateur confirmés ; spécification seule, réalisation à faire.
+Clôture historique E73 et compteurs inchangés.
+
 **11 novembre 2026 — E73-EVO-GAINS-SMS** : notification de lot par SMS en
 complément des canaux existants si le téléphone est renseigné.
 [Périmètre et critères](../specifications/epic-73-animation-et-ou-coffrets/dotation-lots.md#évolution-du-11-novembre-2026--notifications-de-gains-par-sms).
@@ -219,12 +225,13 @@ Le 22 octobre, l'[EPIC 74 — Tombola publique](en-cours/epic-74-tombola-publiqu
 ajoute un cadrage distinct de la tombola commerçante E53 : modèle standard sans
 commerce ni achat requis, participation depuis un QR public et support de stand.
 La [spécification du 3 novembre](../specifications/epic-74-tombola-publique/README.md)
-intègre l’inscription directe : e-mail et règlement, qualification immédiate, puis
+intègre l’inscription directe, harmonisée le 11 novembre : quatre coordonnées et règlement, qualification immédiate, puis
 un mail de confirmation avec accès au carnet Live. Trois modes de lots, quota
 standard existant et suivi facultatif de commune ; huit US et seize critères.
-Tests locaux réussis et migration v289 appliquée à TEST ; déploiement applicatif
-à vérifier séparément.
-État **En cours** depuis le 3 novembre : implémentation et tests locaux ; aucune activation.
+Migration v289 appliquée à TEST le 3 novembre ; déploiement applicatif à vérifier
+séparément. La revue de clôture du 13 novembre maintient l’état **En cours** :
+inscription bloquée lorsque le stockage navigateur est indisponible et preuves
+de capacité incomplètes. Aucune nouvelle activation pendant cette revue.
 
 - L'ancien numéro **Marketplace 53**, consacré à la pagination, est fusionné
   dans l'[EPIC 57](terminees/epic-57-bornage-pagination-api-marketplace-backlog.md).
@@ -264,7 +271,7 @@ précise la provenance et les divergences historiques conservées.
 | 71 | En cours | [Localeo CRM PWA](en-cours/epic-71-crm-prospection-animation-coffrets-pro-backlog.md) : [spécification V1.6](../specifications/epic-71-crm-prospection/README.md) du 12 novembre ; socle et E71-EVOL-04 de qualification structurée/CSV 2 implémentés ; v294 appliquée sur TEST le 6 novembre. [E71-EVOL-05](../specifications/epic-71-crm-prospection/actualisation-qualification.md) : actualisation à la demande ; [E71-EVOL-06](../specifications/epic-71-crm-prospection/niveau-qualification.md) : niveau commercial potentiel/maturité/fiabilité, calcul sur recherche et carte colorée/filtrable ; [E71-EVOL-07](../specifications/epic-71-crm-prospection/parcours-regles.md#e71-evol-07--dates-des-actions-plus-explicites) : dates des actions plus explicites. EVOL-05/06/07 implémentées et vérifiées localement sous les réserves du bilan ; six blocs et seuils commune 5/10, EPCI 20/50 confirmés ; sources réelles, conservation et budgets de capacité restant à préparer avant activation. [E71-EVOL-08](../specifications/epic-71-crm-prospection/rendez-vous.md) et [09](../specifications/epic-71-crm-prospection/import-carte.md#e71-evol-09--deux-axes-de-lecture-12-novembre-2026) : agenda et axes de carte implémentés, v311/v312 appliquées sur TEST. [E71-EVOL-10](../specifications/epic-71-crm-prospection/ux-productivite.md) : audit UX quotidien, six lots implémentés et vérifiés localement ; réserves TEST et capacité dans le bilan. 83 critères actifs et 1 reporté ; preuves et réserves historiques conservées. |
 | 72 | Terminée | [Accès salariés Localeo Pro](terminees/epic-72-acces-salaries-validation-localeo-pro-backlog.md) : implémentation locale vérifiée, 22 critères ; option ERP, invitations, scanner et historique limités, conservation. |
 | 73 | Terminée | [Animation et/ou Coffrets](terminees/epic-73-animation-et-ou-coffrets-backlog.md) : 38 US, 63 critères et extensions vérifiés techniquement le 1er novembre 2026 selon E73-DEC-CLOTURE-TESTS ; preuves et activation séparées dans le bilan. |
-| 74 | En cours | [Tombola publique](en-cours/epic-74-tombola-publique-backlog.md) : spécification du 3 novembre ; QR partageable, inscription directe par e-mail et règlement, trois modes de lots, quota standard et suivi commune Live ; 8 US, 16 critères ; tests locaux réussis et v289 appliquée à TEST |
+| 74 | En cours | [Tombola publique](en-cours/epic-74-tombola-publique-backlog.md) : inscription immédiate avec quatre coordonnées obligatoires, trois modes de lots, quota standard et suivi commune Live ; 8 US, 16 critères ; [revue de clôture du 13 novembre](../specifications/epic-74-tombola-publique/verification.md#revue-de-clôture--13-novembre-2026), stockage navigateur indisponible et capacité restant à traiter ; v289 appliquée à TEST le 3 novembre |
 | 75 | A faire | [Mots croisés assistés par l’IA](a-faire/epic-75-mots-croises-assistes-ia-backlog.md) : [spécification V1](../specifications/epic-75-mots-croises-assistes-ia/README.md) du 4 novembre ; 8 US, 18 critères, neuf arbitrages résolus ; module indépendant, IA externe/import, grille validée et passages commerçants obligatoires ; tests prévus, sans implémentation |
 | 76 | A faire | [Impersonification support Pro et Animation](a-faire/epic-76-impersonification-support-pro-animation-backlog.md) : accès temporaire depuis ERP, 18 critères cibles ; consultation par défaut et intervention explicite/tracée retenues, droits, actions et modalités à arbitrer, sans implémentation |
 | 77 | A faire | [Le Juste Prix Local](a-faire/epic-77-juste-prix-local-backlog.md) : cadrage du 6 novembre, 8 US et 20 critères cibles ; produit/prix proposé dans Pro et approuvé par l'organisateur, estimation unique, tolérance en euros, seuil donnant accès au tirage, passages paramétrables ; quatre arbitrages ouverts, sans implémentation |

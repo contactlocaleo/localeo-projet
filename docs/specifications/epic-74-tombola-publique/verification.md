@@ -1,6 +1,199 @@
 # E74 — Preuves attendues et recette
 
-Version du 3 novembre 2026. [Périmètre](README.md), [contrats et invariants](architecture-contrats.md), [critères canoniques](../../roadmap/en-cours/epic-74-tombola-publique-backlog.md).
+Revue actualisée le 13 novembre 2026. [Périmètre](README.md), [contrats et invariants](architecture-contrats.md), [critères canoniques](../../roadmap/en-cours/epic-74-tombola-publique-backlog.md).
+
+## Revue de clôture — 13 novembre 2026
+
+**Clôture bloquée ; état En cours et chemin du backlog conservés.** La demande
+de clôture ne retire aucun des 16 critères. Deux écarts principaux subsistent :
+le refus du stockage IndexedDB empêche l’inscription dans Live (CA07/11), et la
+preuve complète de capacité spécifiée reste incomplète (CA15). Le rendu final
+des flyers des trois dotations et la restauration d’une sauvegarde contenant
+des gains restent aussi à compléter dans cette campagne. Une activation ou un
+pilote déployé ne sont pas ajoutés comme nouvelles conditions de clôture.
+
+### Révisions, périmètre et preuves renouvelées
+
+Bases Git : projet `c28bbed351a0d55bb7425b14bb33d06ce4ad91a1`, backend
+`d4ca2788448e67c21b9ebf2c6459f81b570f39a4`, Animation
+`7104f9be04fa63cfb479fbd04aa746787c125b54`, Marketplace/Live
+`afe7139c8b12d9d7dbfaf9c6ac4790e75016c1b0`, Pro
+`4b40b4adf864beeb55e342b86379b2a61b075ef3`. Les preuves ci-dessous portent
+sur ces bases, plus les corrections de tests et de documentation de cette revue,
+sans changement du code produit. Les dix fichiers déjà modifiés pour la fin
+d’animation E73 sont préservés ; roadmap et index comportent des lots distincts.
+
+| Contrôle exécuté | Résultat et preuve locale | Portée |
+| --- | --- | --- |
+| Domaine, application, API et générateur unitaire E74 | **98 succès**, `localeo-backend/tmp/e74-cloture-isoles.xml` | Quatre champs, inscription immédiate, ancien contrat, capacité de lecture, refus et coordonnées explicites du générateur. |
+| Architecture et recensements obligatoires | **709 succès**, `tmp/e74-cloture-architecture.xml` | `tests/architecture`, `test_domain_dedicated_classes.py`, `test_use_case_business_test_coverage.py`. |
+| Inscription, publication, gains et parcours PostgreSQL | Première campagne **70 succès, 1 échec** d’attente périmée, `tmp/e74-cloture-postgres.xml` ; contrôle corrigé **2 succès**, `tmp/e74-cloture-vision-final.xml` | Quatre suites `test_tombola_publique_postgres.py`, `test_tombola_publique_publication_postgres.py`, `test_tombola_publique_gains.py`, `test_tombola_publique_parcours_postgres.py`. L’échec Vision360 attendait un prénom absent après avoir créé « Léa ». Deux cas prouvent désormais identité actuelle masquée et identité historique absente. |
+| Recherche participants ajoutée depuis la preuve historique | **1 succès** dans `tmp/e74-cloture-postgres-complement.xml` | `test_recherche_email_litterale_reference_exacte_curseur_et_dto` ; ce rapport contient aussi une première tentative Vision360 échouée, remplacée par le rapport final ci-dessus. |
+| Chaîne complète de migrations, sauvegarde/restauration et générateur complet | Première campagne **2 échecs d’assertions périmées**, puis **2 succès**, `tmp/e74-cloture-migrations-initial.xml` et `tmp/e74-cloture-migrations-final.xml` | Chaîne courante jusqu’à v314, présence/ordre v288/v289, modèle inactif, rejeu et `pg_dump/pg_restore`. Générateur sans commerce, droits/quota réels, quatre coordonnées, anciens états et PDF local. |
+| Contrats Node Live et Animation | **14 succès Live**, **7 succès Animation** | Live : `tombola-email`, `animation-engine-registry`, `catalogue-pagination` ; Animation : `public-tombola`, `animation-engine-registry`, `publication-http-contracts`. Commandes HTTP simulées et négociation. |
+| Live navigateur | **54 succès**, run `2026-11-13T12-49-15-123Z-ovwEVk` (7,3 min) | E74, identité des quatre moteurs, communes et carnet ; 320/390/1280 px et texte à 200 %, API synthétiques. Le défaut IndexedDB ci-dessous est une reproduction supplémentaire. |
+| Animation navigateur | **3 parcours réussis**, 1280/390/320 px ; `node tests/browser/public-tombola.mjs` | Build isolé réussi, captures `tmp/public-tombola-qa/*.png`. Présélection du modèle, dialogue accessible et endpoints négociant la capacité actualisés dans le banc ; création/assistant/participants/flyer testés. Avertissement de bundle >500 kB conservé. |
+
+PostgreSQL **18**, instance jetable sur `127.0.0.1:55834`, bases réservées
+`localeo_audit_test` et `localeo_audit_migrations_test`, fixtures à schémas isolés.
+Toutes les recettes backend utilisent `scripts/validation/test_isolated.py` ;
+aucun `.env` opérateur, fournisseur ou base d’exploitation. Les e-mails sont
+capturés en outbox. Les suites se recouvrent : ne pas additionner leurs comptes.
+Les rapports XML sont des sorties ignorées, les tests restent versionnés.
+
+Les corrections de tests conservent les assertions métier : v289 n’est plus
+supposée dernière migration du dépôt, les coordonnées actuelles remplacent
+l’ancienne attente de prénom nul, et un cas distinct conserve la lecture
+d’une identité historique absente. Aucune assertion de quota, qualification,
+preuve, outbox, restauration ou masquage n’a été supprimée pour obtenir du vert.
+
+### Écart navigateur reproduit
+
+Sur Live, remplacer `indexedDB.open` dès le chargement par une fonction lançant
+`DOMException('Storage unavailable', 'SecurityError')`, puis ouvrir le formulaire
+d’une tombola publique publiée : `useLiveRegistrations` passe en erreur et
+`LiveRegistrationGuard` affiche « Vérifier mon inscription ». À 390 px,
+**aucun formulaire, aucun champ d’identité et aucune commande d’inscription**.
+La préférence facultative devient ainsi un prérequis au jeu, contrairement au
+[comportement accepté](README.md#suivi-de-la-commune-et-notifications).
+
+Preuves Chromium :
+`localeo-marketplace/test-results/visual-runs/2026-11-13T12-49-15-123Z-ovwEVk/indexeddb-review/result-confirmed.json`
+et `indexeddb-denied-focus-390.png`. Empreinte des sources Live :
+`775f0562f525612a55cf39cb88639578eae651450e08b24563d9aaff3a730782`.
+Le scénario historique « stockage refusé » ne refusait que `localStorage.setItem`
+après affichage du formulaire ; son succès ne couvre pas ce cas.
+
+Action nécessaire : distinguer indisponibilité du stockage et incertitude sur
+une inscription existante, permettre la participation dans le premier cas,
+préserver déduplication/reprise serveur et récupération par e-mail. Ajouter une
+preuve navigateur avant/après correction, puis renouveler les quatre moteurs.
+La correction de ce garde partagé est un travail produit restant, pas une
+modification implicite de la présente clôture documentaire.
+
+Autres écarts de présentation établis par la revue, sans correction produit dans
+ce lot : la fiche Live (`livePublicDetailPresentation.mjs`), le flyer Animation
+(`FlyerWorkspace.tsx`) et sa configuration (`App.tsx`) annoncent encore surtout
+e-mail/règlement ; `PublicTombolaParticipants.tsx` indique « Prénom facultatif ».
+Aligner ces textes sur les quatre champs actuels en distinguant les anciennes
+valeurs manquantes. Le succès `PublicTombolaRegistration.jsx` annonce un lien
+« envoyé » dès le 202 ; il faut distinguer mail préparé et livraison effective.
+À 320 px/texte 200 %, l’introduction du formulaire conserve une taille fixe de
+13 px : pas de débordement observé, mais agrandissement incomplet de cette phrase.
+
+### Matrice actuelle des 16 critères
+
+Les chemins backend sont relatifs à `localeo-backend`. Les preuves historiques
+restent ci-dessous pour leur périmètre exact ; elles ne valent pas réexécution.
+
+| Critère | Spécification et code effectif | Preuve actuelle / documentation | Verdict |
+| --- | --- | --- | --- |
+| CA01 | Catalogue standard, `catalogue_modules.py`, stratégie Tombola publique | Tests domaine et générateur avec droits réels ; guide organisateur | **Vérifié** |
+| CA02 | `ServiceCommandesPublicationAnimation` → `ServiceDroitsModules` → compte d’usage | Publication/rejeu PostgreSQL et générateur : un débit, refus sans abonnement ; conditions acquises non modifiées | **Vérifié** |
+| CA03 | Politique de publication, compilation et dotation externe | Création/publication sans commerce, refus sans lots, règlement/dates, générateur complet | **Vérifié** |
+| CA04 | Assistant Animation, autorisations organisation/commune backend | Recette navigateur et tests de lecture hors périmètre ; aucun changement de permissions | **Vérifié dans les scénarios ciblés** |
+| CA05 | Flyer public et route Live vers l’animation | URL sans accès personnel, ancienne ouverture sans mutation, QR/PDF du générateur ; scan physique non requis | **Vérifié** |
+| CA06 | Présentation du flyer et socle PDF E73 | Prévisualisation, quantités et absence de parcours commerçant ; PDF externe généré ; texte des coordonnées incomplet et rendu final personnalisé des trois modes non relu | **Partiel** : aligner les textes et compléter les rendus |
+| CA07 | Identité domaine → `ServiceVerificationEmailAnimation.inscrire` ; formulaire partagé | SQL réel quatre champs, preuve/mail atomiques et identité protégée ; navigateur bloqué si IndexedDB refusée | **Partiel** : défaut Live reproduit |
+| CA08 | Reçus, verrous et unicité participant/e-mail | Concurrence, rollback, reprise après perte de réponse, aucun accès personnel dans réponse publique | **Vérifié** |
+| CA09 | Politique d’ouverture, contrôle après verrou et anciens liens | Refus avant/après période, clôture et courses d’horloge PostgreSQL | **Vérifié** |
+| CA10 | Préférence de commune séparée de qualification/consentement | Refus volontaire du suivi sans effet sur les chances ; aucune prospection/Push implicite | **Vérifié** pour stockage disponible ; panne traitée en CA11 |
+| CA11 | Mes communes, stockage local facultatif et garde d’inscription | Ajout/retrait/limite testés ; indisponibilité IndexedDB bloque le formulaire | **Non satisfait** |
+| CA12 | `ParticipantsEmailLecture`, gel et preuve native | Pagination/recherche/totaux, gel revalidant la preuve, distinction déclaré/vérifié ; profil mémoire traité en CA15 | **Vérifié fonctionnellement** |
+| CA13 | Population figée et services de tirage E73 | Gains PostgreSQL trois modes, zéro/insuffisance/suppléants/rejeu | **Vérifié** |
+| CA14 | Gains, notification et suivi de remise existants | Parcours réel externe et bon numérique ; distribution Coffrets simulée à sa frontière, invariant tirage/stockage réel | **Vérifié dans les frontières testées**, limite Coffrets conservée |
+| CA15 | Routes protégées, limiteurs, curseurs et traitements bornés | Refus/permissions/erreurs privés testés ; capacité complète et RSS manquants | **Partiel** |
+| CA16 | Registres, migrations additives, démonstration et anciens moteurs | Migration/rejeu/restauration, générateur quatre champs, recettes des moteurs ; sauvegarde de gains non couverte par cette restauration | **Partiel** pour la restauration complète spécifiée |
+
+### Contrats, documentation et impacts
+
+Comparaison hors ligne : E41/E42 correspondent aux routes et composants du
+producteur actuel ; seule la métadonnée `/info/version` diffère. La copie OpenAPI
+Animation est identique au canonique. Les **98 exports moteur Live sont conformes**.
+Le contrôle Animation échoue sur `participation-live.schema.json` et `manifest.json` :
+deux champs optionnels d’aperçu de dotation Live manquent dans cette copie.
+Le consommateur direct Live les possède ; aucun défaut E74 démontré sur Animation.
+Cette dérive doit être synchronisée avec son producteur, sans la confondre avec
+un refus du nouveau formulaire. OpenAPI omet aussi certains refus effectivement
+gérés (`409/410/429`, curseur invalide) : enrichissement documentaire du producteur
+restant, sans prétendre qu’une régénération seule le corrige.
+
+Les guides d’identité, générateur et README Animation sont corrigés ; l’index
+des spécifications qui annonçait encore E74 « À faire » et sans implémentation
+est aligné sur la roadmap. Aucun changement de règle, API, migration, donnée,
+permission, fournisseur ou configuration produit dans ce lot ; donc aucun
+nouveau secret, tarif, DNS ni job. Les chemins exportés ne changent pas.
+La publication ERP d’un bundle et l’état déployé ne sont pas vérifiés ici.
+
+### Lot de commit et livraison
+
+Lot projet : bilan E74, architecture, backlog, roadmap/index et guide générateur.
+Message proposé : `docs(e74): documenter la revue de clôture et les écarts restants`.
+Lot backend : quatre fichiers de tests E74 (migration, générateur, Vision360,
+capacité). Message : `test(e74): actualiser les preuves des inscriptions publiques`.
+Lot Animation : README et recette navigateur `public-tombola.mjs`, sélecteurs
+de présélection/dialogue et négociation actualisés sans retirer les contrôles.
+Message : `test(e74): actualiser la recette du portail Animation`.
+Live/Pro : aucune source modifiée. Isoler les hunks E74 de roadmap/index des
+ajouts E73 déjà présents. Aucun staging, commit, push ni déploiement dans ce lot.
+
+| Composant / environnement | Action de livraison | Valeur attendue ou défaut | Source / contrôle |
+| --- | --- | --- | --- |
+| Backend, cible à renseigner | Sauvegarder puis appliquer la chaîne prévue avec le runner canonique ; vérifier v288 puis v289 et leur empreinte | Pas de nouveau SQL E74 pour les quatre coordonnées ; recette locale actuelle jusqu’à v314, sans consigne d’application aveugle à une cible inconnue | `scripts/database/apply_migrations.py`, contrôle migrations en attente/rejeu ; historique TEST distinct ci-dessous |
+| Backend + Live + Animation | Livrer des versions compatibles et actualiser les PWA | Corps nom/prénom/e-mail/téléphone ; ancien corps e-mail seul refusé 422 ; anciens liens maintenus | Contrats et parcours inscription → un mail → carnet → récupération |
+| URL et signature | Vérifier `LOCALEO_FRONT_LIVE_URL`, fallback SPA, `LOCALEO_QR_COFFRET_KEY_ID` et `LOCALEO_QR_COFFRET_KEYRING` existants | URL par défaut `https://localeo.app/live`, à adapter à la cible ; matériel de signature requis hors dev, valeurs privées | `app/config.py`, ouverture du lien public et de l’accès personnel |
+| Transport / scheduler | Vérifier `EMAIL_DEV_MODE`, fournisseur existant et `emails.envoyer` | Mode dev par défaut en dev ; `BREVO_EMAIL_API_KEY` ou `BREVO_API_KEY` provisionné dans le gestionnaire de secrets existant si envoi réel ; job toutes les 2 minutes, limite 100, scope `internal:batch` | Outbox et corrélation ; 202 ne prouve pas la livraison |
+| Conservation | Vérifier `animations.conserver` et `LOCALEO_ANIMATION_CONSERVATION_APPLY` | 03:30 UTC, limite 100 ; application désactivée par défaut (`false`), sous-traitement `maintenance_email` limité à 500 | Rapport dry-run puis application selon procédure d’exploitation |
+| Catalogue | Activer explicitement après résolution des réserves et revue de mise en service | v288 initialise `actif=false` ; aucune conversion automatique ni activation pendant cette revue | Administration du catalogue ; santé et création/lecture/fin d’une tombola |
+| Documentation / ERP | Générer puis sélectionner le bundle de la révision documentaire retenue | Révision du futur commit à renseigner ; générateur actuellement épinglé sur `598ae97bcdcb992f40f0780db30b8e50f1873e56`, sans preuve de publication actuelle | `documentation.exports.json`, empreintes et lecteur cible ; aucun bundle versionné ajouté |
+
+Ordre : sauvegarde/migrations compatibles, backend puis consommateurs coordonnés,
+santé/readiness et recette synthétique, puis activation explicite. Vérifier les
+anciennes participations et les refus après fermeture. En reprise, arrêter les
+nouvelles créations par le catalogue et les inscriptions par les transitions
+autorisées ; garder les lecteurs et remises E74. Ne pas promettre un retour à un
+ancien schéma ou une suppression des données ; privilégier un correctif en avant.
+
+### Capacité renouvelée le 13 novembre
+
+**5 tests réussis**, `localeo-backend/tmp/e74-cloture-capacite.xml` et `.log` :
+quatre cas N/10N × ancien parcours/inscription directe, puis gel. Exécution seule,
+après arrêt des recettes navigateur et des autres suites, sur Windows 11,
+Python 3.14.3, PostgreSQL 18, 8 processeurs logiques. Cinquante clients,
+20 commandes/s ; 100 commandes historiques en environ 5 s ou 50 inscriptions
+directes en 2,52–2,68 s. L’inscription directe inclut rendu et insertion du mail
+réels en outbox, avec vérification des 50 participations, preuves et mails uniques.
+
+| Population | Parcours | Page p95 | Commande p95 / p99 | Seconde commande p95 / p99 |
+| --- | --- | --- | --- | --- |
+| 1 000 | Demande historique puis confirmation | 38,74 ms | 209,49 / 285,51 ms | 113,29 / 146,28 ms |
+| 10 000 | Demande historique puis confirmation | 27,93 ms | 174,78 / 293,38 ms | 82,53 / 163,50 ms |
+| 1 000 | Inscription directe quatre champs | 20,47 ms | 182,10 / 209,64 ms | Sans étape intermédiaire |
+| 10 000 | Inscription directe quatre champs | 30,01 ms | 386,94 / 451,71 ms | Sans étape intermédiaire |
+
+Les seuils existants sont conservés : page/commande p95 <500 ms et commande
+p99 <1 s. Total exact séparé à 10 000 : 23,58–32,35 ms. Plan `Index Only Scan`,
+26 lignes, deux requêtes par page. Gel de 10 000 preuves : **6,96 s**, 141 SQL,
+lots de 500, aucun objet ORM de provenance accumulé ; seuil <10 s respecté.
+
+Ces mesures ne couvrent pas RSS, endurance, contention détaillée, détail public
+sous charge ni mélange simultané lecture/inscription/gel/tirage/outbox. Le schéma
+ciblé des commandes applique v288/v289, pas tous les triggers de la chaîne complète.
+Le gel conserve des tableaux Python de provenance O(N). Produire le profil mémoire
+et la charge mixte prévus avant d’attester CA15 ; les résultats actuels ne prouvent
+ni une rafale instantanée ni la capacité de l’hébergement cible.
+
+### Contrôles documentaires et fin de recette
+
+`check_guidance.py` : **97 guides, 1 239 liens, aucune erreur ni avertissement**.
+`check_guidance.py --changed --all-markdown` : **15 guides, 563 liens**, sans
+erreur ni avertissement. `sync_documentation.py --check-sources` : **150 documents
+vérifiés**. `git diff --check` réussi dans projet, backend et Animation.
+Les trois revues indépendantes couvrent domaine, parcours et contrats ; la
+relecture finale contrats/exploitation ne relève pas d’erreur factuelle dans
+le bilan. Aucune ancienne preuve Pro ou opération TEST n’est présentée comme
+réexécutée. PostgreSQL jetable et serveurs de recette arrêtés, port Live libéré.
+La reprise porte sur les écarts ci-dessus, pas sur une nouvelle décision de périmètre.
 
 ## Correctif du 11 novembre 2026 — formulaire homogène
 

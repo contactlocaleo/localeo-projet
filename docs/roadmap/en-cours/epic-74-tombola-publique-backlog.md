@@ -21,6 +21,14 @@
   du **3 novembre 2026** : six arbitrages résolus, architecture et preuves prévues.
   Implémentation locale engagée le 3 novembre : backend, Animation et Live ; migration v288 désactivée par défaut. Le [bilan des tests](../../specifications/epic-74-tombola-publique/verification.md) distingue les preuves exécutées et les contrôles restants.
 
+## Revue de clôture du 13 novembre 2026
+
+Revue de clôture du **13 novembre 2026** : état **En cours** conservé. Le refus
+d’IndexedDB bloque le formulaire (CA07/11) et les preuves de capacité restent
+incomplètes (CA15). Voir le [bilan courant](../../specifications/epic-74-tombola-publique/verification.md#revue-de-clôture--13-novembre-2026)
+pour les recettes renouvelées, les écarts et les actions de reprise. Aucun critère
+ni arbitrage n’est retiré pour clôturer.
+
 ## Harmonisation du 11 novembre 2026
 
 Le formulaire des nouvelles inscriptions exige **nom, prénom, e-mail et téléphone**

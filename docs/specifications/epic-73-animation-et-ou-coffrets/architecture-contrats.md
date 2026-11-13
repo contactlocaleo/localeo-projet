@@ -11,6 +11,17 @@ de domaine est compilée en prédicats SQL avant pagination, sans table de
 projection supplémentaire. Les quatre index v313 sont appliqués sur TEST.
 Les limites des mesures N/10N et de l’acceptation AP-22 figurent au bilan.
 
+Complément du **12 novembre 2026 — E73-EVO-CLOTURE-AUTO**, **contrats cibles
+non implémentés** : la [conception canonique](fin-animation-archives.md#évolution-du-12-novembre-2026--clôture-automatique-et-report-de-fin)
+étend le noyau de clôture et la commande existante de paramètres publiés.
+Le domaine Animation reste propriétaire de la période et du gel ; API, ERP
+et batch partagent la coordination, l’événement unique et les intentions durables.
+Les nouveaux réglages/lectures de clôture, le rapport organisateur et le message
+Live de report devront être reflétés dans les OpenAPI canoniques et contrats
+embarqués lors de l’implémentation. Les contrats déployés ne sont pas modifiés
+par cette phase documentaire. Critères CAF-01 à CAF-12, versions attendues,
+idempotence et bornes sont définis dans la source liée.
+
 Complément du **1er novembre 2026 — E73-EVO-ONBOARDING-ANIMATION-SIMPLE** :
 les critères OA-01 à OA-04 des [périmètres commerçants](perimetres-parcours-saas.md)
 remplacent le contrat et la préparation obligatoires pour Animation seule.

@@ -269,6 +269,44 @@ modifiés /591 liens**, zéro erreur ni avertissement ; **150 sources exportées
 vérifiées. Diff sans erreur d’espacement. Commits applicatifs de cette livraison :
 Backend `9b2b41a`, Animation `24ff5fe`.
 
+## Évolution — E73-EVO-CLOTURE-AUTO (12 novembre 2026)
+
+**Spécification seule**, [CAF-01 à CAF-12](fin-animation-archives.md#évolution-du-12-novembre-2026--clôture-automatique-et-report-de-fin).
+Choix confirmés : option active pour les nouvelles animations, report avant
+clôture sans réouverture, rapport aux responsables actifs. Base de lecture :
+Backend `25224e0`, Animation `89579eb`, Marketplace `f77f4a2`, Projet `f8923a7`
+puis modifications documentaires locales. Les quatre fichiers E71 déjà modifiés
+pour l’application TEST de v311/v312 sont préservés et distincts de cette évolution.
+
+Deux explorations en lecture seule ont établi les chemins de clôture/report et
+les producteurs/consommateurs des notifications. Le batch de démarrage actuel
+ne clôture pas ; le helper de clôture échue n’a aucun appelant et ne protège pas
+une prolongation concurrente. Aucun rapport e-mail automatique n’existe.
+Les preuves futures couvrent gel atomique, courses, reprise, destinataires,
+préférences, contrats UI, volumes N/10N et démonstration isolée.
+
+Revue indépendante `localeo-contract-reviewer` : réserves intégrées puis levées.
+La capture d’audience et la photographie sont atomiques avec l’événement ; les
+budgets distinguent fraîcheur et rattrapage ; le CAS de l’option est celui de
+l’Animation, avec nullabilité de définition réservée au nouveau contrat ; la
+garde de transport e-mail et l’interdiction du renvoi générique sont explicites ;
+la lecture expose le rapport figé borné. **Aucune réserve contractuelle restante**
+dans le périmètre relu ; la conception est prête pour les trois lots décrits.
+
+Contrôles documentaires exécutés avec Python 3.14 :
+
+- `scripts/check_guidance.py` : 97 guides, 1 222 liens locaux, zéro erreur et avertissement.
+- `scripts/check_guidance.py --changed --all-markdown` : 14 documents modifiés (y compris les quatre E71 préexistants), 546 liens locaux, zéro erreur et avertissement.
+- `scripts/sync_documentation.py --check-sources` : 149 sources vérifiées.
+- `git diff --check` : aucune erreur de whitespace ; les avis Git CRLF/LF ne modifient pas les fichiers utilisateur.
+
+Ces vérifications contrôlent les documents, pas le fonctionnement futur.
+Les tests métier/API/PostgreSQL/UI ne sont pas exécutés, aucun parcours distant
+ni envoi réel n’est revendiqué. Aucune
+migration, modification applicative, génération de démonstration, commit, push
+ou activation de batch au titre de cette demande. Le statut historique de E73
+et les preuves FA restent inchangés.
+
 ## Évolution — E73-EVO-GAINS-SMS (11 novembre 2026)
 
 Les [critères GS-01 à GS-06](dotation-lots.md#évolution-du-11-novembre-2026--notifications-de-gains-par-sms)

@@ -587,6 +587,13 @@ Ces précisions conservent les invariants de la spécification ; T5 raccorde neu
 
 ### Précisions T6 — exploitation et vérification
 
+Complément spécifié le **12 novembre 2026**, non implémenté :
+[E73-EVO-CLOTURE-AUTO](../epic-73-animation-et-ou-coffrets/fin-animation-archives.md#évolution-du-12-novembre-2026--clôture-automatique-et-report-de-fin)
+ajoute la clôture à échéance, un rapport organisateur et une intention Live/WebPush
+aux changements effectifs de fin de T6-QA02. Les gardes de période, le DSL publié,
+les accords et les acquis décrits ici sont conservés. La même coordination
+sérialise report, jeu et clôture ; aucune réouverture après échéance n’est ajoutée.
+
 - **T6-E01 — Activation :** le batch `animations.conserver` passe par le lanceur supervisé existant. `LOCALEO_ANIMATION_CONSERVATION_APPLY=false` par défaut maintient la simulation ; l'activation reste une configuration d'exploitation distincte après simulation et validation des rapports. Le corps du batch peut imposer explicitement son mode sous l'authentification `internal:batch`. Aucun bouton ERP ne lance une purge réelle.
 - **T6-E02 — Planification :** une tâche quotidienne à `30 3 * * *`, explicitement en UTC, traite les catégories par lots initiaux de 100. L'horaire reste configurable via le mécanisme d'ordonnanceur existant. Une timezone propre à cette tâche empêche une configuration globale différente de déplacer son heure UTC ; les autres tâches gardent leur timezone actuelle.
 - **T6-E03 — Supervision :** les rapports sont persistés même en cas d'erreur. Si un rapport comporte une erreur, le batch est signalé en échec dans la supervision commune ; son rapport détaillé permet la reprise. Le contrôle de santé existant signale également l'absence d'exécution ou un retard de plus de 26 heures. Les rapports et gels sont consultables dans une console ERP réservée au rôle ADMIN existant, sans contenu brut ni clé de stockage.
