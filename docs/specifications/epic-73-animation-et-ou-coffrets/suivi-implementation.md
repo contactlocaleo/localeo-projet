@@ -4813,3 +4813,78 @@ SQL, générateur et configuration ops sans impact, car les données et règles 
 changent pas. Les travaux E71 préexistants sont conservés. Tests sur appareil
 physique et environnement TEST, mesure de performance hébergée, commit, push et
 déploiement : non exécutés pour cette tâche.
+
+## Correctif du 13 novembre 2026 — contexte des notifications participants
+
+Demande : identifier l’organisateur, la commune et l’animation dans les messages
+Live et WebPush. Le défaut a été reproduit localement : le dépôt conservait et
+restituait seulement le texte rédigé, l’aperçu n’affichait aucun contexte, les
+rappels omettaient l’organisateur et la commune, et Live réduisait les retours
+à la ligne. Les reproductions ciblées échouaient sur ces faits avant correction.
+
+Le backend compose maintenant le contexte depuis les références persistées à
+la lecture et au transport ; les rappels le recalculent après revalidation.
+La lecture groupe les noms de la page, sans requête par message. Le texte
+rédigé, les preuves d’accord et les clés de rejeu ne sont pas modifiés.
+Localeo Animation affiche le contexte serveur dans les aperçus création/détail,
+et la Marketplace conserve les paragraphes dans Live. Une revue indépendante
+a fait compléter le bornage WebPush pour conserver les trois repères malgré
+des noms démesurés et ne pas couper une ligne de contexte d’un digest.
+
+Arbres locaux vérifiés à partir de backend `a91ecd8`, Animation `24ff5fe`,
+Marketplace `f77f4a2`, projet `5fbaac3`, avec les modifications de ce correctif.
+Les spécifications préexistantes de clôture automatique/report de fin sont
+préservées et ne font pas partie de ce correctif.
+
+Preuves locales :
+
+- Backend : runner isolé, sans `.env`, sans service externe ni Push réel.
+  Contrôles `tests/architecture`, recensement des classes domaine et couverture
+  des use cases, plus tests présentation/transport manuel : **719 réussis**.
+  Après la dernière correction de parité, contrôles obligatoires seuls :
+  **707 réussis** ; adaptateur de transport manuel : **10 réussis**.
+  Tests automatiques/rappels/contexte : 62 cas distincts réussis, puis
+  **18 réussis** sur utilitaire et API après correction des noms longs
+  (ces résultats se recouvrent ; ne pas les additionner).
+- Suite ciblée avec PostgreSQL jetable local (`messages_organisateur_postgres`,
+  `messages_organisateur_categorie_animation`, `campagnes_organisateur_postgres`,
+  `rappels_live_postgres_e73`, services et API) : **129 réussis, 4 échecs** de
+  parité entre lecture individuelle et groupée. Correction du chargement du nom
+  par le port partenaire, puis **4/4 réussis** au rejeu, sans modifier leurs
+  assertions. Bilan : **133 cas distincts validés**. Tests unitaires du tableau
+  et du préchargement après correction : **38 réussis**.
+- Performance messagerie : test `test_plans_messages_et_faits_groupes_sont_indexes`
+  réussi sur 10 000 messages manuels et 10 000 notifications. Deux pages et
+  les faits groupés exécutent exactement **11 requêtes**, dont une résolution
+  des noms par page ; les exigences d’indexation et de pagination sont
+  conservées. Le nombre de requêtes des rappels reste constant à 1/10/50
+  animations. Aucune capacité ou latence hébergée n’est déduite de ces tests.
+- Animation : **21 scénarios navigateur** à 320/390/1 920 px, contexte présent,
+  absent ou nul, création et détail ; **7 tests Node campagnes**, puis
+  **6 tests de contrat HTTP** avec le JSON synchronisé. Types, lint et build
+  réussis ; avertissement de bundle supérieur à 500 ko.
+- Marketplace : **8 scénarios navigateur** à 320/390/1 280 px, texte 200 %, clavier,
+  anciens messages et états. Lint `src` et test modifié réussi. Le lint global
+  rencontre `EPERM` dans l’ancien dossier `output/bum-politique/pytest-approval-1` ;
+  aucun ignore ni droit modifié pour masquer cet échec.
+- Captures mobiles/bureau inspectées. Artefacts locaux non versionnés dans
+  backend `.artifacts/notifications-contexte/`, Animation
+  `tmp/communication-ux-NtDASC/` et Marketplace
+  `test-results/visual-runs/2026-11-12T20-53-31-277Z-gYyosG/`.
+- Documentation : **100 guides, 1 321 liens, aucune erreur ni alerte** ;
+  **150 sources exportées vérifiées**. Les trois copies du composant OpenAPI
+  sont identiques à la génération hors ligne. Diffs sans erreur de whitespace.
+
+Contrats : composant `ContexteCommunicationDTO` synchronisé depuis la génération
+hors ligne E41/E42 dans les deux sources canoniques et le contrat embarqué
+Animation ; ajout facultatif nullable `contexte_message`. Les autres écarts
+historiques des exports sont hors périmètre. Le corps public reste une chaîne.
+Commerçant sans impact, car il ne consomme ni cet aperçu ni la messagerie Live.
+Migration, nouvelle configuration et modification du générateur sans objet :
+les noms et relations existent déjà. Les fixtures synthétiques sont adaptées.
+
+Limites : les anciens rappels personnels déjà envoyés sans `animation_id`
+conservent leur texte historique ; les messages qui disposent de cette
+référence sont enrichis à la lecture. La remise et l’affichage Push sur appareil
+réel, la recette hébergée et le déploiement ne sont pas exécutés. La clôture
+historique de l’EPIC 73 reste inchangée.

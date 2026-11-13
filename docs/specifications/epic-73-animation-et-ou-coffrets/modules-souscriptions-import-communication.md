@@ -753,3 +753,38 @@ bornes et du nombre d’appels, sans nouvelle qualification de capacité serveur
 
 Spécification établie avant implémentation. Résultats à consigner dans le bilan
 de vérification existant ; la clôture historique de l’EPIC 73 reste inchangée.
+
+## Correctif du 13 novembre 2026 — contexte des notifications participants
+
+Les messages adressés aux participants par Communication et les notifications
+système liées à une animation présentent, avant leur texte, les noms de
+l’organisateur, de la commune et de l’animation. Le serveur les résout depuis
+le partenaire organisateur, la commune et l’animation concernés ; il n’utilise
+pas le nom du collaborateur qui clique sur Envoyer. Un nom absent est signalé
+comme non renseigné. Aucun nom d’animation n’est inventé pour une notification
+sans rattachement à une animation.
+
+Le même contexte est visible dans Live et transmis au WebPush. L’aperçu
+Communication reçoit le champ facultatif nullable `contexte_message` de
+`ContexteCommunicationDTO` ; les anciens contrats sans ce champ restent
+lisibles. Le titre et le texte rédigés restent inchangés dans la campagne et
+le journal de dépôt, y compris au rejeu. Les droits, catégories autorisées,
+consentements, quotas, clés d’idempotence et durées de livraison restent
+contrôlés par les règles existantes.
+
+Un rappel regroupé identifie les organisateurs, communes et animations encore
+éligibles après revalidation. Live conserve le texte complet. Le JSON WebPush
+est borné à 3 500 octets UTF-8 : si nécessaire, les noms sont abrégés en gardant
+les trois repères, les contextes multiples restent des lignes complètes et
+une invitation indique de consulter la suite dans Live. La destination et
+les identifiants de transport ne sont pas tronqués.
+
+Les messages et notifications historiques rattachés par `animation_id` sont
+enrichis à la lecture, sans migration ni réécriture du journal. Les anciens
+rappels personnels déjà envoyés, qui ne portent que des références de
+participations, conservent leur texte historique ; ceux encore à envoyer sont
+revalidés avec le nouveau contexte. Le générateur de démonstration est sans
+impact : les noms et relations existants sont réutilisés, sans nouveau champ
+persisté ni nouveau consentement. Les fixtures de recette sont enrichies.
+
+Les preuves sont consignées dans le [suivi de réalisation](suivi-implementation.md).

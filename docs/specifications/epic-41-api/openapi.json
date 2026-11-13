@@ -136488,6 +136488,17 @@
       },
       "ContexteCommunicationDTO": {
         "properties": {
+          "contexte_message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Contexte Message"
+          },
           "module_disponible": {
             "type": "boolean",
             "title": "Module Disponible"
