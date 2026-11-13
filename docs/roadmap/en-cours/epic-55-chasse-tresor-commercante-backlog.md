@@ -3,7 +3,7 @@
 ## Suivi
 
 - Criticite : `Moyenne`.
-- Statut : `En cours - lots T1–T6 implémentés et vérifiés localement ; conversion sur cible, pilote et ouverture à mener`.
+- Statut : `En cours - bilans T1–T6 conservés ; évolution issue de l'audit du 13 novembre 2026 à implémenter ; conversion sur cible, pilote et ouverture à mener`.
 - Catalogue V1 : `PASSEPORT_COMMERCANT`, `TOMBOLA_LOCALE`, `CHASSE_TRESOR_COMMERCANTE`.
 - Dependances : Epics 41, 42, 46, 47 et 49.
 
@@ -212,6 +212,116 @@ Voir la [conception E55-UX-12](../../specifications/moteur-animation/conception-
 et le [suivi](../../specifications/moteur-animation/suivi-implementation.md).
 Implémentation vérifiée localement ; la recette PostgreSQL et le scan physique
 restent à exécuter avant livraison. Le statut de l’epic reste **En cours**.
+
+<a id="e55-audit-20261113"></a>
+## Évolution du 13 novembre 2026 — fiabilité, parcours et capacité
+
+Demande utilisateur : intégrer le contenu de l'audit de Localeo Animation,
+Localeo ERP et Localeo Live dans l'EPIC 55. L'audit constate un socle livré,
+des défauts reproduits et des preuves d'ouverture manquantes. Les bilans
+historiques et le statut **En cours** sont conservés. Cette intégration prépare
+les travaux ; elle ne les déclare ni implémentés ni vérifiés.
+
+Les repères **E55-A01 à E55-A14** du rapport deviennent les critères stables
+de cette évolution. Les défauts du comportement attendu relèvent de correctifs
+rattachés à E55 ; les nouvelles capacités et études restent distinguées.
+Le [complément fonctionnel](../../specifications/moteur-animation/localeo_animation_engine_spec.md#e55-audit-20261113),
+la [conception et sa matrice](../../specifications/moteur-animation/conception-technique.md#e55-audit-20261113)
+et le [bilan de référence](../../specifications/moteur-animation/suivi-implementation.md#e55-audit-20261113)
+portent les scénarios, impacts et limites. Aucun nouveau backlog applicatif.
+
+### Critères issus des constats
+
+| Critère | Priorité / nature | Résultat attendu et reste à faire |
+| --- | --- | --- |
+| E55-A01 | P1 — évolution de résilience | [x] Une indisponibilité du carnet local ne bloque pas une nouvelle inscription autorisée par le serveur ; récupération, unicité et reprise après réponse perdue restent sûres. |
+| E55-A02 | P1 — correctif ERP | [x] Après confirmation du reçu d'une décision, le gestionnaire peut prendre la suivante ; reçu absent, refusé ou incohérent ne libère pas indûment une commande incertaine. |
+| E55-A03 | P1 — correctif de saisie | [x] Actualiser le suivi conserve le brief modifié ; quitter/changer de demande exige un abandon explicite lorsque la saisie serait perdue, dans Animation et l'ERP. |
+| E55-A04 | P1 — correctif de disponibilité | [ ] Varier un UUID avec un accès invalide ne crée pas un nombre arbitraire de compteurs persistés ; limitation anonyme bornée, autorisation personnelle et purge sont vérifiées. |
+| E55-A05 | P1 avant montée en charge — capacité | [ ] Participants, métriques, aperçu de retrait et gel disposent de lectures/mémoire bornées et d'une preuve N/10N sous charge mixte, sans altérer qualification ni population figée. |
+| E55-A06 | P2 — correctif de résilience | [x] Une erreur de quota n'empêche pas de consulter un parcours déjà préparé ; seule l'action dépendante reste indisponible avec réessai. |
+| E55-A07 | P2 — évolution ERP | [x] La recherche porte sur toute la file autorisée, avec filtres serveur et pagination ; un dossier hors de la page chargée reste trouvable. |
+| E55-A08 | P2 — correctif d'états UI | [x] Invitations inconnues, erreur, liste vide et succès restent distincts ; une lecture réussie efface l'alerte précédente sans faux compteurs zéro ni messages techniques redondants. |
+| E55-A09 | P2 — correctif Live | [x] Commencer/continuer est identifiable et réellement cliquable à 320/390/1280 px, sans recouvrement par la navigation, y compris quand le tirage est inconnu. |
+| E55-A10 | P2 — évolution du contrat public | [x] Durée estimée, difficulté, public visé et nombre d'étapes disponibles sont présentés avant inscription, sans lieux futurs ni valeurs inventées. |
+| E55-A11 | P2 — correctif d'interaction | [x] Une association en doublon donne une explication et une correction accessibles ; aucune tentative serveur ni aide métier n'est créée par cette erreur de formulaire. |
+| E55-A12 | P2, requis avant ouverture — preuves | [x] Fixtures/attentes mises à jour et chaîne complète rejouée jusqu'à conservation ; aucun retrait d'assertion métier ni skip pour masquer les échecs. |
+| E55-A13 | P2 — correctif d'accessibilité | [x] Après remise en ordre, le focus reste sur un contrôle utilisable de l'élément déplacé et sa nouvelle position est annoncée. |
+| E55-A14 | P2 — correctif d'accessibilité | [x] Réponses et statut suivent l'agrandissement du texte à 200 %, avec actions accessibles, sans perte de contenu ni débordement horizontal à 320/390 px. |
+
+### Axes complémentaires du rapport
+
+- [x] **E55-OPT-01 — Guidage quotidien :** rendre visibles l'acteur attendu,
+  la prochaine action, le relais humain Localeo et le délai de service applicable ;
+  conserver la file et les filtres ERP après traitement. Pas de nouvelle promesse
+  de délai ni de duplication des suivis existants.
+- [x] **E55-OPT-02 — Étude d'impact des modifications :** préciser un aperçu
+  des accords affectés avant édition importante, avec concordance serveur,
+  coût et limites. Livrable attendu : conception et décision motivée ; le rapport
+  ne suffit pas à spécifier ni autoriser une invalidation métier nouvelle.
+- [x] **E55-OPT-03 — Invitations paginées :** afficher la première page sans
+  collecter tout l'historique ; sélection et destinataires explicites conservés.
+- [x] **E55-OPT-04 — Médias de jeu :** mesurer relectures, décodage, octets et
+  latence à froid/chaud ; décider l'optimisation à partir du résultat, avec
+  confidentialité, invalidation et mémoire bornée comme critères.
+- [x] **E55-OPT-05 — Chargement Animation :** mesurer le premier accès à l'éditeur
+  sur mobile ; décider le découpage du bundle selon le coût constaté. Le seul
+  avertissement de taille du build ne prouve pas une lenteur.
+- [ ] **E55-OPT-06 — Productivité et pilote :** établir une référence de temps
+  de traitement, retours pour complément, première action utile, échecs de
+  scan/reprise et abandon ; comparer après correction sans données privées dans
+  les mesures. Vérifier la profondeur de navigation avec les trois acteurs.
+
+### Lots et dépendances
+
+| Lot | Critères | Condition de sortie |
+| --- | --- | --- |
+| L1 — Continuité et protection | A01–A04 | Cas nominaux, refus, perte de réponse, réconciliation et absence de double effet prouvés. |
+| L2 — Parcours quotidien | A06–A11, A13–A14, OPT-01/03 | Contrats et rendus alignés ; recettes bureau/mobile/clavier/texte agrandi. Dépendances propres à chaque critère, pas d'attente artificielle de tout L1. |
+| L3 — Capacité et preuves | A05/A12, OPT-02/04/05/06 | Mesures et décisions d'étude tracées ; chaîne transversale actuelle réussie. Les travaux indépendants peuvent commencer avec L1/L2. |
+| L4 — Pilote et ouverture | Critères T6 existants, TRE-ARB-80/82/83 et droits ERP | Cible/version/capacité renseignées, conversion/contrats/permissions/conservation vérifiés, pilote Android/iPhone et familles, bilan et retests. |
+
+Spécification complétée le 13 novembre : états d'accès temporaire et reçus ERP,
+limiteur PostgreSQL à cardinalité bornée, projection Chasse exacte et synchrone,
+reconstruction/bascule, gel par lots sans relecture exhaustive, pagination des
+consommateurs réels, recherche normalisée/index existants et métadonnées publiques.
+Les contrats et budgets initiaux de recette sont dans la conception canonique.
+La recherche ignore les accents, conformément au service existant ; ce choix
+remplace l'hypothèse initiale de l'intégration du rapport.
+
+L1/L2 peuvent être implémentés par critères indépendants. Dans L3, alimenter
+et reconstruire la projection avant d'activer les lecteurs ; prouver tous les
+chemins de correction/retrait/gel avant la campagne N/10N. Les études gardent
+leur livrable de décision motivée. Restent à produire : code, migrations,
+exports, tests et mesures ; les valeurs de production A04 et la capacité
+réelle nécessitent une cible renseignée. Le tirage des gagnants reste mesuré
+séparément du gel. Aucun critère ni statut de livraison ne change ici.
+
+La génération IA manuelle reste le choix V1 ; comparaison des fournisseurs et
+évaluation des illustrations restent à mener selon E55-ILL-01/TRE-ARB-84.
+L'intégration d'un fournisseur après pilote, le rallye libre et l'adaptation
+intercommunes ne deviennent pas des prérequis de ce lot. Aucun changement de
+droits ERP, migration, déploiement ou génération réelle n'est exécuté par la
+phase de spécification décrite ci-dessus.
+
+### Bilan de l'implémentation locale
+
+Les critères cochés disposent de preuves locales dans le
+[bilan d'implémentation](../../specifications/moteur-animation/suivi-implementation.md#e55-audit-20261113-implementation).
+Les cases distinguent résultat vérifié et limites restantes ; aucune ne vaut
+déploiement ni validation du pilote. Le code, les migrations, les contrats et
+les adaptations de démonstration remplacent désormais les travaux annoncés
+« à produire » dans la phase précédente.
+
+A04 est implémenté et ses protections sont testées ; les mesures isolées
+respectent le budget local. Sa qualification proxy/NAT et sa politique sur
+cible restent à produire. A05 dispose des projections, lecteurs et traitements
+par lots, mais sa capacité ne peut être acceptée sans toutes les mesures
+prévues ; les essais intermédiaires et leurs dépassements restent visibles.
+A12 est traité par réalignement et rejeu des suites concernées, avec résultats
+détaillés au bilan. OPT-06 reste partiel faute de comparaison humaine de temps
+de traitement. L4, la comparaison des fournisseurs et l'ouverture restent
+ouverts ; le statut **En cours** est conservé.
 
 ## Références
 

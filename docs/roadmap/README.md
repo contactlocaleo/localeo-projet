@@ -252,7 +252,7 @@ précise la provenance et les divergences historiques conservées.
 | 12 | Abandonnee | Le paiement manuel est decommissionne par l'Epic 39 ; le document reste une trace historique. |
 | 47 | Terminee | Cloture produit confirmee par l'utilisateur le 15 septembre 2026 ; l'ancienne reserve de recette reste une reference d'exploitation. |
 | 54, 58, 62, 64 et EPIC-MARKETPLACE-54 | A faire | Classement courant des dossiers ; voir les réserves de chaque backlog. |
-| 55 | En cours | Moteur commun et chasse au trésor ; conception, arbitrages et livraison suivis dans le backlog. |
+| 55 | En cours | Moteur commun et chasse au trésor ; [évolution issue de l'audit du 13 novembre 2026](en-cours/epic-55-chasse-tresor-commercante-backlog.md#e55-audit-20261113) : correctifs et contrats implémentés localement, études consignées ; limites de capacité au bilan, pilote et ouverture restent à vérifier. |
 | 65 | Terminee | Trois vues ERP et projections partagées, dix critères vérifiés le 2 octobre ; scopes E69 intégrés, 691 tests et parcours navigateur réussis. Configuration et recette cible dans le bilan, aucun déploiement implicite. |
 | 66 | Terminee | [Localeo Atelier](terminees/epic-66-localeo-atelier-coffrets-assistes-ia-backlog.md) : [V1.2](../specifications/epic-66-localeo-atelier/README.md) implémentée et testée ; clôture produit le 1er octobre après confirmation utilisateur du parcours et de la PWA, réserves de livraison conservées dans le bilan. |
 | 67 | A faire | [Communautés de communes](a-faire/epic-67-communautes-communes-coffrets-intercommunaux-backlog.md) : référentiel, coffrets intercommunaux, commercialisation et extension de Localeo Atelier ; droits et achats existants préservés. |

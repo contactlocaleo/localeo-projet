@@ -1208,3 +1208,731 @@ ne provoque aucune rotation silencieuse lors d’une lecture.
 | Guides et exploitation | Répartition des rôles et distinction des supports documentées ; backend puis Commerçant avant Animation pour ne pas masquer le parcours historique sans remplacement disponible. |
 
 Les preuves exécutées et limites figurent dans le suivi d’implémentation.
+
+<a id="e55-audit-20261113"></a>
+## Évolution du 13 novembre 2026 — fiabilité, parcours et capacité
+
+**Conception à implémenter**, issue de l'audit Animation/ERP/Live du même jour.
+Les [critères E55-A01 à A14 et OPT-01 à OPT-06](../../roadmap/en-cours/epic-55-chasse-tresor-commercante-backlog.md#e55-audit-20261113)
+conservent leurs repères ; le [complément fonctionnel](localeo_animation_engine_spec.md#e55-audit-20261113)
+décrit les résultats visibles. Les preuves antérieures sont un état de départ,
+pas une validation de cette cible. Les anomalies relèvent de correctifs ciblés,
+les extensions de contrat et études de leur propre lot.
+
+### Propriétaires et invariants conservés
+
+| Périmètre | Propriétaire / entrées | Invariant et refus à préserver |
+| --- | --- | --- |
+| A01 — inscription | Domaine `animation_locale`, protocole `reprise_inscription`, orchestration `ServiceParticipantsAnimation.inscrire` ; formulaire Live et route publique existants | Unicité animation/email normalisé, dates/capacité, déclaration adulte et règlement Chasse. Même intention incertaine : clé UUID v4 et empreinte identiques, reçu existant de 24 h ; pas de seconde place après panne du carnet. |
+| A02/A03 — commandes et saisies | Domaine du service de préparation pour décisions/versions ; client HTTP ERP et composants pour état éphémère | Pas de transition sur une simple lecture, de double effet, de sauvegarde silencieuse ni de reprise avec un autre payload. Changement d'identité/commune invalide les réponses et données privées de l'ancien contexte. |
+| A04 — limitation | Domaine/service `identite_acces` et adaptateurs HTTP/persistance | Limiter le coût avant accès personnel puis autoriser avant compteur personnel ; refus non révélateurs, compteur atomique, pas de clé persistante choisie par UUID arbitraire. |
+| A05 — qualification et gel | Moteur `execution` et services d'exploitation/clôture ; API organisateur/ERP, traitements existants | La qualification et la population figée proviennent du domaine. Une projection SQL ne réinvente ni neutralisation, ni preuve, ni chance ; gel cohérent même sous scan/correction concurrents. |
+| A07/A10/OPT-03 — lectures | Services de génération/catalogue, ports de lecture et adaptateurs ; ERP, Animation et Live | Droits avant filtre/limite, lecture sans mutation, liste bornée, métadonnées publiques issues de la définition publiée, aucune étape future privée. |
+| A06/A08/A09/A11/A13/A14 | Interfaces et clients HTTP, sans nouvelle règle métier | Chargement/erreur/vide distincts, refus serveur prioritaires, interaction accessible ; pas d'aide débloquée par une erreur de formulaire ou de progression fabriquée localement. |
+
+### A01 — inscription et accès temporaire sans carnet
+
+Chemin actuel à couvrir de bout en bout : `LiveRegistrationGuard` et
+`LiveAnimationDetail` → `AnimationRegistrationForm` →
+`POST /public/animation-locale/animations/{id}/inscriptions` →
+`/live/animations/ajouter/{token}` (`AddAnimation`) → jeu. Le dernier maillon
+lit/écrit également IndexedDB : débloquer seulement le formulaire est insuffisant.
+
+La cible réutilise le contrat d'inscription existant. L'absence de lecture du
+carnet est un état technique distinct d'une participation reconnue. Après succès
+serveur, l'ajout au carnet est tenté séparément ; son échec offre un accès
+personnel temporaire en mémoire, selon le modèle déjà présent dans
+`AnimationParticipantPage.jsx`, et une récupération par le lien personnel.
+Ne pas annoncer « ajouté au carnet » si l'écriture a échoué, ni introduire un
+second stockage persistant ou un nouveau token. Réutiliser les protections de
+nettoyage d'URL, logs, session, non-cache et revalidation des accès.
+
+Le point d'entrée temporaire reste dans `AddAnimation` : après résolution du
+token par le serveur, « Participer sans enregistrer » construit en mémoire
+l'entrée attendue par `LiveAnimationGame`, comme `AnimationParticipantPage`.
+Aucune nouvelle route HTTP ni URL contenant un accès supplémentaire. Fermer
+le jeu revient à l'aperçu vérifié ; quitter le composant ou changer de token/
+contexte efface cet état. L'interface indique que le lien personnel permettra
+de revenir, mais que le carnet ne retrouvera pas automatiquement cette entrée.
+Un refus ou une expiration de l'accès retire immédiatement aperçu et jeu.
+Les contrôles serveur habituels restent requis pour chaque action sensible.
+
+| État | Action disponible / résultat |
+| --- | --- |
+| Lecture du carnet impossible, inscription non confirmée | Formulaire autorisé et récupération restent disponibles ; aucune participation déduite de l'erreur locale. |
+| Inscription au résultat incertain | Réconciliation/reprise exacte ou récupération ; pas d'entrée de jeu construite depuis une hypothèse de succès. |
+| Inscription ou accès personnel confirmé, écriture locale impossible | Accès temporaire explicite au même jeu ; réessayer l'enregistrement est indépendant et ne répète jamais l'inscription. |
+| Enregistrement local confirmé | Accès habituel au carnet ; message de réussite uniquement après écriture. |
+| Accès serveur refusé/expiré | Récupération autorisée par le protocole actuel ; aucun mode local contournant le refus. |
+
+Le doublon serveur conserve le **409** ; le renvoi du lien conserve le **202
+générique**, sans révéler l'inscription à un tiers, et envoie seulement à
+l'adresse enregistrée. Une réponse perdue conserve la même intention dans la
+limite du mécanisme actuel ; après perte de cette intention ou expiration du
+reçu, proposer la récupération, sans recréer silencieusement une inscription.
+La correction d'un composant partagé doit préserver Passeport et Tombola ;
+elle n'étend pas la déclaration adulte Chasse ni le protocole spécifique de
+vérification email Tombola publique E74.
+
+### A02/A03/A06/A08 — états locaux et réconciliation
+
+Dans l'ERP, `preparations-service.js` et `travail.js` doivent partager la
+résolution de la commande exacte. Une confirmation de reçu vérifie contexte,
+clé, ressource et enveloppe avant de libérer le verrou HTTP correspondant.
+Un autre reçu, une réponse tardive ou un refus ne le libère pas. Les autres
+commandes peuvent ensuite démarrer avec une nouvelle clé ; pas de remise à
+zéro globale du verrou et pas de rejeu automatique. Le contrat serveur de
+reçu n'est pas modifié par ce correctif.
+
+Le client commun expose une résolution explicite de la commande en attente,
+par exemple `confirmerRecu(commande, contexteRevision, recu)`. Sa signature
+comprend chemin, méthode, payload canonique, clé d'idempotence et révision
+d'accès ; le reçu doit provenir de la lecture réussie de cette même clé et
+correspondre à l'opération et à sa préparation. L'appel consomme au plus le
+verrou correspondant ; un GET quelconque ne nettoie jamais tous les verrous.
+Une confirmation reçue suivie d'un échec de rafraîchissement libère la commande
+confirmée et présente une erreur de lecture, sans recréer une incertitude.
+
+Le module métier utilise le résultat `incertain` du client commun pour garder
+ou retirer son état local, et non une approximation `status < 500`. Les cas
+408, 429 et conflit d'idempotence doivent conserver une décision cohérente
+entre les deux couches. Une validation locale avant envoi ne crée aucun verrou ;
+une réponse de succès mal formée n'atteste pas le résultat et exige un reçu.
+
+Le brief modifié est distinct de l'état serveur et de la réponse IA saisie.
+Actualiser le suivi conserve les champs en cours ; changer de dossier,
+paginer ou quitter déclenche la protection si la saisie serait perdue. Un
+conflit de version conserve la saisie pour résolution explicite. Les gardes
+de session conservent la priorité et ne doivent pas laisser visible un ancien
+tenant. Pas de persistance privée supplémentaire dans Animation/ERP.
+
+Les lectures indépendantes quota, suivi, résultat et préparation ne forment
+pas une barrière unique. Une panne de quota interdit l'action dépendante sans
+masquer le résultat autorisé. Les invitations conservent un état inconnu ou le
+dernier état explicitement daté ; une réussite efface l'erreur. Un refus de
+droits efface la donnée privée, même si une version précédente était visible.
+
+### A07 — recherche serveur de la file ERP
+
+Chaîne réelle : `generation_animation.html` →
+`GET /{internal|protected}/animation-locale/generations` →
+`ServiceGenerationAnimation.lister` → `lister_operations` du repository.
+La pagination SQL existante est par `(created_at ASC, id ASC)`, défaut **50**,
+maximum **100** ; elle est conservée pour les appels historiques.
+
+Contrat cible additif : paramètre facultatif `q`, absent/vide = aucun filtre.
+Réutiliser `normaliser_recherche` du domaine commercialisation : Unicode NFKD,
+retrait des marques combinatoires, `casefold`, blancs internes regroupés et
+blancs de bord retirés. Une requête textuelle normalisée contient de **3 à 120 caractères**.
+Elle recherche une sous-chaîne du nom public de l'animation ou du code/libellé
+de son type ; un UUID complet recherche l'identifiant exact de la demande.
+Ne pas rechercher dans prompts, réponses, emails ou contenus privés. Une
+recherche non vide trop courte/longue est signalée dans l'ERP et refusée en
+**422** côté API ; aucune troncature silencieuse. Les accents ne sont donc pas
+significatifs (`été` trouve `Été`). Cette décision remplace le choix provisoire
+NFKC/accents significatifs de l'intégration du rapport et aligne la file sur
+la recherche existante. Échapper `%`, `_` et `\` comme caractères littéraux
+avant le prédicat SQL ; ils n'ouvrent pas une recherche par joker.
+
+Tous les filtres existants et droits sont appliqués avant recherche et limite.
+Lire au plus `limit + 1` racines, enrichir seulement la page ; la réponse reste
+`PageGenerationPayload {items, nextCursor}`. L'ERP demande explicitement 25
+résultats, déclenche la recherche à validation, réinitialise le curseur et
+ignore les réponses anciennes. Il conserve un historique borné de curseurs,
+sans concaténer toutes les pages de résultats en mémoire.
+
+Un curseur versionné lie ordre, recherche normalisée, filtres et empreinte du
+périmètre autorisé. Il n'accorde aucun droit ; les droits sont relus à chaque
+page. Un curseur incompatible est refusé et l'interface propose de reprendre
+la première page. Transition : anciens curseurs date/ID acceptés uniquement
+sans `q` selon leur contrat historique, avec recontrôle du périmètre, puis
+réémission au format courant ; une recherche avec ancien curseur est refusée.
+L'interface réinitialise toujours la pagination au changement de filtre.
+
+Réutiliser `AnimationOrm.nom_recherche`, son entretien sur écriture et sa
+réparation paginée existante (`projection_recherche_animation.py`). La migration
+existante `v276` fournit `pg_trgm`, l'index GIN des noms normalisés et l'index
+des valeurs absentes : aucune seconde colonne ni second index équivalent.
+Le code/libellé de type se résout dans le catalogue fini des types ; aucun
+chargement exhaustif des animations pour ce filtre. Si la projection requise
+manque dans le périmètre recherché, refuser explicitement la recherche en 503
+jusqu'à réparation ; ne pas masquer des dossiers ni reconstruire pendant GET.
+
+Conserver les index d'opérations par ressource, tenant/commune et `(created_at,
+id)` ; vérifier leurs combinaisons avec le GIN par `EXPLAIN (ANALYZE, BUFFERS)`
+à N/10N, recherche rare/sans résultat et plusieurs tenants. Un index additionnel
+ne se justifie que par un plan insuffisant mesuré, avec migration additive.
+Un `ILIKE` suivi de `LIMIT` sans preuve de plan ne clôt pas A07. La sous-chaîne
+reste le comportement demandé, même si une recherche par préfixe serait moins coûteuse.
+
+### A10 — informations publiques d'effort
+
+`ProjectionPublique` possède déjà les agrégats camelCase, mais le catalogue
+effectif retourne `AnimationPubliquePayload`, assemblé par
+`catalogue_animations_publiques.py`. C'est ce producteur et les normalisations
+Live qui doivent évoluer, pas seulement le schéma du moteur.
+
+| Champ HTTP ajouté à `AnimationPubliquePayload` | Source publiée / sens |
+| --- | --- |
+| `duree_estimee_minutes: integer > 0 \| null` | `ProjectionPublique.dureeEstimeeMinutes`, `engineConfig.settings.estimatedDurationMinutes` ; estimation indicative. |
+| `difficulte: string \| null` | `ProjectionPublique.difficulte`, `settings.difficulty` ; borne du type existant `Titre`, aucune nouvelle échelle inventée. |
+| `public_vise: string \| null` | `ProjectionPublique.publicVise`, `settings.audience` ; borne du type existant `Texte`, texte rendu sans HTML exécutable. |
+| `nombre_etapes: integer > 0 \| null` | `ProjectionPublique.nombreEtapes`, nombre d'étapes de la définition publiée, départ/finale inclus s'ils sont des étapes. |
+
+Les quatre propriétés sont facultatives et nullables pour données anciennes,
+ancien serveur et autres moteurs. Les champs camelCase du contrat moteur ne
+sont pas renommés ; le mapping vers le catalogue est explicite et testé.
+Le nombre annoncé décrit le parcours publié de référence, pas les étapes
+restant à un joueur ni un recalcul client après neutralisation ; l'avis existant
+de parcours adapté et la progression personnelle restent autoritaires dans le jeu.
+Le catalogue utilise la configuration désignée par `configuration_publiee_id`,
+déjà jointe dans sa requête. Projeter en SQL les scalaires JSON nécessaires
+et le nombre d'étapes de cette définition, puis contrôler les types avec les
+règles de `ProjectionPublique` : entier strict positif, `Titre` non vide de
+200 caractères maximum, `Texte` non vide de 20 000 caractères maximum.
+Une propriété absente/incompatible devient `null`, jamais une valeur devinée.
+Le DTO reste petit : pas de chargement du DSL ou des médias complets par
+résultat, ni de N+1. Pas de nouvelle table de métadonnées pour cet ajout.
+
+Producteurs concernés : liste/détail publics Animation et entrées de découverte
+Live réutilisant le catalogue. Consommateurs : `fetchPublicAnimations`,
+`fetchPublicAnimation`, `normalizePublicAnimation`, découverte/fiche/inscription.
+Les anciens payloads restent affichables sans valeurs fictives. Pas de
+modification du DSL, de sa version ni des participations jouées pour ce seul ajout.
+
+Les schémas Python restent la source exécutable. À l'implémentation, générer
+hors ligne avec `scripts/documentation/generate_epic41_openapi.py` et
+`generate_epic42_openapi.py` les contrats canoniques
+[E41](../epic-41-api/openapi.json) et [E42](../epic-42-localeo-live/openapi.json),
+puis synchroniser les contrats embarqués effectivement consommés et vérifier
+leurs lecteurs. `export_moteur_animation_contracts.py` seul ne corrige pas le
+catalogue. Cette phase ne modifie pas les JSON générés pour prétendre que
+les nouveaux champs sont déjà servis.
+
+### A04 — protection des lectures Live
+
+Routes : `GET /public/localeo-live/participations/{id}` et
+`/{id}/lieu-courant/pratique`. Le défaut observé est une création de fenêtre
+par UUID avant autorisation, pas une fuite de données prouvée.
+
+**Stockage retenu : PostgreSQL partagé**, avec transactions courtes ; aucune
+autorité en mémoire de processus ni dépendance Redis ajoutée. La politique
+pure appartient au domaine `identite_acces`, le service orchestre un nouveau
+port `LimitationLecturesLiveRepository`. Le repository d'authentification
+actuel ne porte pas atomiquement capacité/purge ; les limites LOGIN existantes
+ne changent pas. Deux tables additives, avec identifiants de migration attribués
+au moment de l'implémentation :
+
+- `limitation_lectures_live_controle` : une ligne, version de politique,
+  seuils/durées, capacités par catégorie, nombres alloués, fenêtre et consommation
+  globales ; compteurs positifs, capacités strictement positives.
+- `limitation_lectures_live_compteurs` : clé primaire `(categorie, cle_hash)`,
+  début/fin de fenêtre et consommation. Catégories fermées `ORIGINE`,
+  `PARTICIPATION_LECTURE`, `PARTICIPATION_PRATIQUE` ; index de purge sur
+  `(fin_fenetre, categorie, cle_hash)`. Une ligne réutilisée par clé, sans
+  historique des fenêtres ; les lignes expirées comptent dans la capacité
+  jusqu'à suppression transactionnelle.
+
+Protocole commun aux deux routes, sur tous les processus :
+
+1. Avant autorisation, ouvrir une transaction, verrouiller la ligne de contrôle
+   puis la clé d'origine, dans cet ordre. Lire l'horloge PostgreSQL après le
+   verrou ; vérifier/consommer le budget global puis celui de l'origine.
+   La clé d'origine ne dépend ni de la route, ni de l'UUID demandé, du Bearer
+   ou de l'email. Un refus d'origine consomme le budget global ; retourner
+   une décision, **committer avant de lever le refus HTTP**, sans rollback de
+   la consommation. Les compteurs saturent au seuil, sans prolonger la fenêtre.
+2. Autoriser le Bearer et la participation selon les règles actuelles. En cas
+   de refus, aucun compteur personnel n'est créé. Hors limitation, les mêmes
+   401/404/410 restent observables, sans oracle d'existence nouveau.
+3. Après autorisation seulement, une seconde transaction suit le même ordre
+   de verrous et consomme la clé `(participation autorisée, origine, route)`.
+   Conserver le plafond personnel de **60 lectures par 900 secondes et par
+   route**. Ne pas consommer deux fois le budget global dans cette phase.
+4. Exécuter la lecture métier après libération des verrous du limiteur.
+   Une indisponibilité du stockage, un verrou en timeout ou une politique
+   absente/incohérente refuse la lecture en **503** ; aucun passage sans limite.
+
+Une nouvelle clé exige une place libre dans sa catégorie. À saturation,
+purger au plus **64** lignes expirées dans la transaction avant de réessayer ;
+sinon **429**, sans éviction d'une fenêtre active. Les clés déjà allouées
+restent utilisables dans leurs budgets. Le scheduler existant reçoit le batch
+`live.lectures.purger` toutes les minutes, par transactions de **500** lignes
+maximum, même ordre de verrous et décrément des allocations atomique. Un
+redémarrage ne réinitialise pas les fenêtres. La mise à jour de politique
+ne vide pas les compteurs ; abaisser une capacité sous l'allocation existante
+est refusé. Un changement de durée s'applique aux prochaines fenêtres, sans
+prolonger ou réouvrir celles en cours.
+
+La réalisation expose une route interne POST authentifiée par `internal:batch`,
+sans session ERP, et un CLI opérateur explicite. Ce batch technique ne déclare
+pas de lancement manuel ERP ; son contrat de sécurité et son passage dans le
+middleware complet sont vérifiés. La migration `v317` écrit la conversion de
+catégorie en texte explicitement pour conserver une contrainte identique après
+dump/restauration PostgreSQL, sans changer les catégories admises.
+
+L'origine vient de `request.client.host` après traitement des seuls proxies
+explicitement approuvés par ASGI ; ne pas lire arbitrairement `X-Forwarded-For`.
+Normaliser IPv4 et IPv4 mappée IPv6, regrouper IPv6 par /64 ; origine absente/
+invalide = une clé `UNKNOWN`. Les empreintes sont des données pseudonymes,
+pas anonymes : conservation limitée aux fenêtres/purge, jamais de Bearer.
+Les refus comportent `Cache-Control: no-store` ; **429** fournit `Retry-After`
+jusqu'à la fenêtre bloquante, ou la prochaine expiration libérant une place
+si la capacité empêche l'allocation. Une panne interne 503 ne révèle aucun
+identifiant ni détail de participation.
+
+Politique **de recette synthétique, à ne pas activer telle quelle en production** :
+global 6 000/60 s, origine 600/60 s pour les deux routes ensemble, personnel
+60/900 s par route, 1 024 origines et 4 096 clés personnelles au total.
+Le registre de contrôle conserve une allocation personnelle commune aux deux
+catégories pour tenir ce dernier plafond. Tester huit processus et 50 requêtes/s,
+plusieurs origines, puis 50 familles derrière une IP effectuant chacune deux
+lectures/minute/route (200/minute) : pas de refus anonyme sous ces budgets.
+Le surcoût du garde vise p95 ≤ 30 ms, p99 ≤ 100 ms. La sérialisation courte
+du contrôle est volontaire ; sa contention et son retour à la normale font
+partie de la preuve, pas une capacité supposée.
+
+Avant activation, l'exploitant renseigne les proxies de la cible, distribution
+NAT, débit attendu, taille du pool, valeurs de politique et purge observée.
+Aucune protection WAF externe n'est présumée. Le correctif et les preuves
+locales ne dépendent pas de cette cible ; l'ouverture publique en dépend.
+
+### A05 et OPT-03/04/05 — contrat de coût et capacité
+
+Appliquer la [convention performance](../../architecture/transverse/performance-volumetrie.md).
+**Décision : projection exacte synchrone pour les lectures de qualification ;
+recalcul global borné sous la barrière exclusive existante.** Une projection
+différée après succès du retrait contredirait T5-D10 (effet immédiatement
+visible). Le travail global O(N) reste autorisé, avec mémoire bornée et budget
+transactionnel mesuré. Le SQL filtre les résultats du domaine ; il ne recopie
+pas ses règles de preuve, de neutralisation ou de qualification.
+
+#### Projection et chemins d'écriture
+
+Ajouter `animation_qualifications_lecture`, une ligne par participation Chasse,
+avec clés participant/animation et périmètre, configuration/version de définition,
+révision d'exploitation, version de progression et version du projecteur,
+statut effectif, éligibilité, progression, validations effectives, dates de
+début/fin, source courante ou population figée. Les clés restent contraintes
+au même périmètre ; indexer les filtres/tri effectifs des lecteurs, sans placer
+réponses, tokens ou DSL dans la projection. Une révision de progression stockée
+est incrémentée atomiquement dans la même transaction si aucun numéro existant
+ne couvre une transition. Les agrégats exacts par animation sont entretenus
+par deltas de cette projection dans la même transaction.
+
+L'orchestrateur appelle `provenance_qualification`, `qualifier_participation`
+et les moteurs existants de `politique_exploitation.py` ; les statuts GAGNANT
+et ANONYMISE conservent les règles de `ParticipantAnimation.appliquer_resultat_moteur`.
+La table E73 `animation_mesures_participations`, réconciliée différemment et
+incomplète pour progression/révision, ne remplace pas cette projection exacte.
+
+| Entrée réelle | Mise à jour requise, dans la transaction métier |
+| --- | --- |
+| `ServiceParticipantsAnimation.inscrire` | Créer la projection initiale et son agrégat, sans deuxième inscription. |
+| Jeu Live, `_persister` ; `validations_animation.valider_dans_uow` et réconciliation | Projeter après calcul du moteur : réponse, preuve, QR/PIN ou régularisation, pas après simple lecture. |
+| `correction_preuve_animation.corriger` | Mettre à jour version/projection/agrégats avec la correction ; préserver les refus après gel. |
+| Retrait accepté → `neutraliser_dans_uow` ; paramètres d'exploitation | Recalcul global sous barrière exclusive, sans résultat intermédiaire visible. Les chemins classiques de retrait gardent leur règle propre et sont couverts en non-régression. |
+| `ServiceTiragesAnimation` : gel, constat/remplacement de gain | Basculer vers provenance figée ; statut courant mis à jour, sans réécrire l'éligibilité historique. |
+| Suppression et `conservation_animation_repository.py` | Supprimer/anonymiser aussi les données dérivées dans la même transaction ; ni identité réintroduite par reconstruction, ni population historique recalculée. |
+
+La lecture d'une qualification figée utilise la provenance de ce gel. Une
+correction refusée ou une anomalie ultérieure n'altère pas cette provenance ;
+le statut courant anonymisé et la qualification historique sont distincts.
+
+#### Contrats de lecture et consommateurs effectifs
+
+Réutiliser `/{protected|internal}/animation-locale/lectures-globales/participants`
+et `ServiceLecturesGlobalesAnimation`. Animation utilise déjà ce lecteur dans
+`GlobalReadWorkspace`, pour la liste globale et l'onglet Participants d'une
+animation. Les anciens `/participants` ne sont pas leur producteur principal.
+L'ERP exploitation n'a pas de liste de participants classique à migrer ; sa
+liste Tombola publique dans `suivi-animations.js` conserve son lecteur dédié.
+Le contexte des lectures globales exige un partenaire et une seule commune
+active ; il n'est pas substitué aux lectures historiques d'un ERP multi-communes.
+
+Contrat hybride : pour **Chasse**, `qualifie`, `termine`, `validations` viennent
+de la projection exacte courante/gelée, `mesureCourante=true` seulement après
+contrôle de sa version. Les autres moteurs gardent les mesures E73, leurs
+`bool | null` et leur fraîcheur. Ajouts facultatifs aux items : `progression`
+(nombre de même unité que `ParticipantAnimationPayload.progression`)
+et `sourceQualification` (`COURANTE` ou `GELEE`) pour Chasse. Conserver le
+masquage nom/email/téléphone et `allowedActions`, qui n'autorise pas à elle
+seule une commande. Les données personnelles ne deviennent pas complètes
+par réutilisation du DTO des anciennes routes.
+
+Paramètres conservés : `limit=25` (1–100), `cursor` (2 048 caractères maximum),
+`recherche` (160), `animation_id`, `qualifie`, `termine`, `moteurs_supportes`.
+Pas d'ajout implicite de filtre `statut`. Recherche par **préfixe**, selon le
+contrat de ce lecteur, sur référence/nom/prénom/email/téléphone ; ne pas la
+confondre avec la sous-chaîne A07 des demandes. Tri `(inscrit_at DESC, id DESC)`.
+Une seule requête choisit les faits persistés selon le moteur, applique droits,
+filtres et curseur avant `limit + 1` ; enrichir uniquement la page.
+Le contrôle de couverture Chasse s'effectue après droits/périmètre/animation,
+mais **avant** les filtres `qualifie/termine` : un état non reconstruit ne doit
+pas être exclu puis présenté comme une page complète. Refus 503 explicite.
+
+Le `LATERAL limit + 1` actuel **par animation** doit disparaître : il ne borne
+pas le coût quand le nombre d'animations augmente. Prévoir un accès global
+indexé par périmètre et ordre, puis filtres de qualification ; si nécessaire,
+porter les clés de périmètre sur le support de lecture commun des participants
+des trois moteurs, entretenues transactionnellement avec contraintes de
+cohérence vers animation/participant. Cette dénormalisation de clés ne porte
+aucune nouvelle règle de qualification hors Chasse. Vérifier les index de
+préfixe des identités autorisées et le plan de la page mixte, y compris
+10N animations autorisées et étrangères ; pas de fusion de pages clientes.
+
+Ajouter **`avec_synthese: boolean = true`** à cette seule famille participants,
+dans la liste blanche API, son schéma, le service et le lecteur. Par défaut,
+conserver `items/nextCursor/hasMore/synthese/allowedActions`, les entiers de
+synthèse et leur sens ; les compteurs sélectionnent la même source par moteur
+que la page, avec agrégats/COUNT séparés et aucun chargement de preuves.
+`observedAt` reste la mesure courante la plus ancienne ; un éventuel `calculeeAt`
+additionnel date le calcul, sans changer ce sens historique.
+
+Avec `avec_synthese=false`, le serveur **omet `synthese`** et ne calcule aucun
+total ; c'est le mode de la liste interactive cible. Adapter explicitement
+`globalReadApi.ts` et les accès à la synthèse dans `GlobalReadWorkspace` pour
+ce mode : un total absent est indisponible, jamais zéro ni `items.length`.
+Les indicateurs séparés disponibles portent leur périmètre/date ; un filtre
+sans indicateur correspondant laisse seulement la page visible. Ne pas lancer
+automatiquement une deuxième lecture avec synthèse pour chaque changement
+de filtre. `validations`, ses compteurs et `ProofCorrections` gardent leurs
+contrats obligatoires ; un type commun rendu facultatif ne suffit pas.
+
+Les curseurs lient ordre, filtres, périmètre courant et version de la sélection
+hybride. À la bascule, refuser un curseur de l'ancienne sélection et proposer
+la première page ; pas de réinterprétation silencieuse. Les refus suivent le
+code de curseur invalide du lecteur existant. Recontrôler les droits à chaque
+page, annuler les réponses obsolètes et vider les données au changement de
+session/commune. La pagination n'est pas un instantané entre deux requêtes :
+une mutation peut déplacer une ligne filtrée ; Actualiser reprend la première
+page, tandis que retrait/gel gardent leurs propres garanties transactionnelles.
+
+Les listes mixtes continuent d'inclure Passeport, Tombola locale et Chasse.
+La Tombola publique conserve `/animations/{id}/participants-page` et ses
+compteurs/états email ; sélection explicite dans le composant dédié. Nommer
+le choix global « Parcours et tombolas locales » et indiquer où consulter les
+tombolas publiques ; ne pas promettre une page unique de toutes les inscriptions.
+La liste globale conserve la négociation `moteurs_supportes` : intersection
+des capacités déclarées et serveur, éventuellement vide. Les lectures ciblées
+qui appellent `verifier_capacite_lecture` conservent leur refus
+`CLIENT_ANIMATION_INCOMPATIBLE`. Ne pas introduire ce refus dans les listes
+par déduction ; aucun filtrage supplémentaire n'est réalisé dans le navigateur.
+
+Les deux routes historiques `/participants` et `/animations/{id}/participants`
+conservent `pagination.page/page_size/total`, recherche et qualification effective
+des autres moteurs. Pour Chasse, la source exacte permet filtre/page SQL,
+COUNT séparé et enrichissement borné ; pas de remplacement par une mesure E73
+inconnue. L'offset profond et le total historique restent une exception de coût
+à mesurer, sans certification de pagination constante pour ces anciens appels.
+Dans l'onglet **Tirage**, supprimer `api.animations.participants`/`collectPages`
+utilisé pour fabriquer `participantNames` : utiliser `participant_affiche`/
+`participant_email` déjà servis avec les gains, ou enrichir les seuls résultats
+affichés. `nombre_eligibles` provient du tirage, pas d'une liste collectée.
+
+#### OPT-03 — invitations réellement paginées
+
+Le producteur existant `/animations/{id}/demandes-participation` accepte déjà
+`page/page_size` et filtres ; son endpoint `/synthese` reste indépendant.
+L'écran remplace `demandesParticipationAll` par une seule page de 25 (100
+maximum), sans préchargement exhaustif ni total déduit de la page. Conserver
+les filtres et revenir à la première page quand ils changent. La sélection
+groupée porte sur des identifiants explicites affichés, au plus une page ;
+changer de filtre/page la réinitialise ou demande de l'abandonner. Ne pas
+envoyer `demande_ids=null` pour signifier une sélection vide, ce qui pourrait
+élargir les destinataires. La commande serveur garde ses contrôles de version
+et ses droits EPIC 56.
+
+Une réponse d'envoi perdue se résout par le reçu de commande existant
+`/demandes-participation/commandes/{cle}`, avec même clé/contexte ; remplacer
+la récupération actuelle qui parcourt toutes les invitations pour retrouver
+les destinataires. Une lecture indisponible laisse le résultat incertain,
+sans renvoi automatique. Les traitements de relance/annulation gardent leurs
+propres reçus. La pagination frontend ne prouve pas à elle seule le coût SQL
+du producteur : mesurer filtre/limite/total et supprimer toute hydratation
+complète avant découpe si elle subsiste. Le contrat historique à numéro de
+page reste conservé ; l'offset profond est mesuré et signalé séparément.
+
+#### Retrait, aperçu, métriques et gel
+
+La confirmation d'un retrait prend directement la barrière **exclusive**
+existante de coordination animation (pas de promotion partagé → exclusif),
+revalide version/aperçu et traite les faits par lots de **500 maximum**.
+Chaque lot est projeté par le domaine puis libéré de l'ORM avant le suivant.
+Neutralisation, projections, agrégats, audit et intentions de notification
+sont committés ensemble. Une interruption/timeout annule tout ; aucun reçu
+de succès ne décrit un retrait seulement partiellement propagé.
+
+L'aperçu et `_empreinte_participations` deviennent un parcours ordonné avec
+accumulateur de compteurs et empreinte incrémentale, sans collection complète.
+Le domaine reçoit des faits itérables ou des accumulateurs métier dédiés,
+pas une liste dont il déduit implicitement `len`. L'instantané de lecture est
+cohérent ; la confirmation recontrôle l'empreinte sous barrière exclusive.
+Conserver la sérialisation canonique actuelle, ou versionner explicitement
+le format et refuser un ancien aperçu par `APERCU_OBSOLETE`, sans mutation.
+Une participation, un scan ou une correction concurrente qui change le
+résultat invalide l'aperçu selon les mêmes règles qu'aujourd'hui.
+
+Le traitement complet comprend les notifications : remplacer les collectes
+globales d'installations de `notifications_localeo_live.py` par pages de
+destinataires distincts, au plus 500, et insertions groupées idempotentes des
+intentions. Préserver préférences, autorisations et clés de dédoublonnage.
+Aucun envoi réseau sous le verrou, aucune liste globale ou requête par
+destinataire cachée dans le service appelé. L'outbox conserve sa livraison.
+
+Les compteurs décisionnels lisent les agrégats exacts ; les statistiques
+descriptives coûteuses utilisent des agrégats datés reconstruits par le batch
+existant, à mémoire bornée. La date/source de mesure est exposée et une mesure
+ancienne ne devient jamais une autorisation, une qualification ou le gel.
+Le GET métriques ne réhydrate plus toutes les exécutions/preuves.
+
+Le gel reste **une seule transaction** sous coordination exclusive. Les ports
+de tirage séparent l'en-tête de population, déjà muni de `nombre_eligibles`
+en SQL, de ses membres : créer/lire l'en-tête, ajouter un lot de membres,
+preuves et provenances, finaliser compte/empreinte, lire une provenance ou
+tester une appartenance. `ajouter_population` et sa relecture `_population`
+ne doivent plus reconstituer tous les identifiants pour les clôtures directes
+ou batch. Remplacer leurs `len(population.participant_ids)` par le compte
+de l'en-tête, vérifié par le nombre inséré. Conserver unicité des membres,
+contraintes de périmètre, version du gel et intégrité des provenances. Le
+nouveau type d'en-tête ne passe pas par le `set` exhaustif de l'ancien DTO.
+
+La sélection des gagnants utilise encore une liste complète dans le code
+actuel. **Borner le gel ne prouve pas la capacité du tirage lui-même.** A05
+n'autorise pas un nouvel algorithme aléatoire : A12 rejoue le tirage existant ;
+L4 mesure séparément son coût au volume cible. Un dépassement bloque cette
+ouverture et demande une conception préservant uniformité/chances, sans
+substitution silencieuse d'un tirage par échantillonnage.
+
+#### Reconstruction et bascule
+
+Migration additive de projection, agrégats, révisions et état de reconstruction
+par animation/version de projecteur (`A_CONSTRUIRE`, `EN_COURS`, `PRET`). Ne
+pas dupliquer `nombre_eligibles`, déjà présent sur les populations. Les nouvelles
+écritures alimentent la projection **avant** activation des lecteurs.
+La reconstruction est un traitement explicite du backend, jamais un GET :
+pages stables, lots de 500 maximum, reprise après dernière clé, aucune
+notification, gain ou modification de preuve. Pour un gel existant, partir
+des provenances figées et non des règles actuelles.
+
+Pendant la reconstruction, chaque lot travaille sous la coordination existante
+et vérifie configuration/révision/version de progression avant mise à jour ;
+un résultat calculé sur une version ancienne ne remplace jamais un plus récent.
+Un changement global de révision relance la couverture de cette animation.
+La finalisation prend la barrière exclusive, traite les lignes manquantes/
+obsolètes par lots, vérifie couverture et agrégats, puis publie `PRET` avec
+la révision exacte dans le même commit. Les insertions/suppressions concurrentes
+doivent donc participer à la même coordination. En cas de timeout, conserver
+la reprise et aucun état `PRET` partiel ; ne pas valider sur le seul nombre de lignes.
+Une lecture qui requiert une projection indisponible refuse explicitement
+en 503 après contrôle des droits, plutôt que de servir un résultat faux ou
+de revenir au chargement exhaustif. L'ouverture des nouveaux lecteurs exige
+la couverture de toutes les animations de leur périmètre, y compris gelées.
+
+Déployer schéma, producteurs compatibles et traitement de reconstruction,
+contrôler la couverture, puis activer lecteurs/consommateurs. Le retour à un
+ancien producteur exige de désactiver ces lecteurs et d'invalider `PRET` avant
+réactivation ultérieure : un ancien binaire n'entretient pas la projection.
+Conserver schéma et historiques, puis reconstruire ; pas de migration destructive.
+
+| Opération | Borne structurelle cible | Preuve avant acceptation |
+| --- | --- | --- |
+| Participants en mode curseur sans synthèse | Page explicite 25, maximum 100 ; au plus `limit + 1` racines, enrichissements groupés sur cette page ; tri total et filtres d'accès en stockage | Pages initiales/profondes, 25/100 résultats, N = 1 000 puis 10N = 10 000, population et animations autorisées/étrangères croissant séparément ; SQL, lignes et objets hydratés bornés par page. |
+| Invitations et anciens contrats à numéro de page | Une page 25, maximum 100, sans collecte cliente complète ; pagination/total conservés | Mesurer aussi COUNT et offset profond ; mémoire d'hydratation liée à la page, exception de coût historique explicitée. |
+| Métriques et aperçu de retrait | Agrégats exacts ou datés explicitement ; aperçu par lots de 500 maximum, empreinte incrémentale ; ne pas retourner toutes les preuves | Mesure de fraîcheur/révision, exactitude des compteurs et comparaison après neutralisation ; p95/p99 et mémoire sous jeu concurrent. |
+| Gel et conservation | Travail global proportionnel à la population autorisé, lots de 500 maximum ; pas de liste complète conservée dans l'ORM ou le driver | RSS maximale, temps et verrous à N/10N ; interruption/rollback et courses scan/correction/clôture. Aucun résultat de gel partiel visible. |
+| Médias visibles du jeu | Références autorisées seulement ; éventuel cache borné par taille et version, aucun cache privé public ni préchargement futur | Lectures stockage, CPU de décodage, octets, mémoire à froid/chaud et invalidation ; l'étude OPT-04 précède le choix technique. |
+| Éditeur Animation | Rendu progressif sans collecte exhaustive ; bundle/chargement mesurés | Temps de première action utile sur profil mobile explicite ; décision OPT-05 documentée avant découpage. |
+
+Les lots ne changent pas l'atomicité : garder le gel dans la transaction et
+les verrous existants avec mémoire bornée. Si les mesures imposent une
+préparation persistée en plusieurs transactions, spécifier d'abord instantané,
+révision, reprise et publication finale atomique ; ne pas introduire des
+commits intermédiaires visibles pour gagner du temps.
+
+#### Budgets initiaux de recette et limites de preuve
+
+Les valeurs suivantes sont des **objectifs à vérifier**, ni mesures acquises,
+ni engagements de service de production. Elles complètent E59 avant la
+campagne ; on ne les augmente pas après observation pour obtenir du vert.
+
+| Opération | p95 / p99 visés | Mémoire supplémentaire du worker |
+| --- | --- | --- |
+| Page participants/invitations, limite 25 puis 100 | 700 / 1 400 ms | RSS ≤ 32 MiB |
+| Recherche ERP A07, 25 résultats | 1 000 / 2 000 ms | RSS ≤ 32 MiB |
+| Métriques Chasse | 900 / 1 800 ms | RSS ≤ 32 MiB |
+| Aperçu ou confirmation de retrait à 10 000 participants | 5 / 10 s chacune, notifications comprises pour confirmation | RSS ≤ 64 MiB |
+| Gel à 10 000 participants | 10 / 20 s | RSS ≤ 64 MiB |
+
+Pour toutes les opérations, mesurer séparément attente de pool, verrous et
+temps transactionnel ; timeout/rollback ne compte pas comme succès rapide.
+Le budget mémoire borne l'accumulation par nombre de participants, mais une
+racine peut elle-même être grosse : ne pas charger l'historique complet des
+tentatives, seulement les faits nécessaires au domaine, partager la définition
+immuable de l'animation et libérer les lots. Vérifier le maximum réellement
+accepté par les schémas/imports à l'implémentation ; aucune limite implicite
+de huit étapes n'est ajoutée au produit. Éprouver séparément huit étapes puis
+cent étapes, historique de tentatives élevé et configuration volumineuse ;
+documenter l'enveloppe réellement couverte. Si un lot dépasse le budget,
+réduire sa taille jusqu'à une participation ; une racine seule trop coûteuse
+reste un échec de capacité à traiter, pas une qualification tronquée.
+
+Jeu de charge : N = 1 000 puis 10N = 10 000 participants, 10 % qualifiés puis
+90 %, tenants/animations/historiques hors filtre croissants indépendamment ;
+pages initiales/profondes et recherches rares/absentes. Relever matériel,
+versions, taille du pool et données. Référence initiale : 50 requêtes/s,
+jusqu'à 100 utilisateurs concurrents, réparties en 60 % lectures joueur,
+20 % commandes de jeu, 15 % pages et 5 % métriques ; retrait/gel isolés puis
+en concurrence avec le jeu. Établir une phase stationnaire de cinq minutes
+après échauffement ; mesurer au moins 100 exécutions isolées de chaque action
+globale sur fixtures réinitialisées pour rendre p95/p99 interprétables.
+
+Séparer refus métier attendus, 429 de scénarios adverses et erreurs inattendues
+(objectif < 0,5 % hors attaque). Arrêter la campagne en cas d'erreurs inattendues
+≥ 2 % pendant 30 s, p95 > deux fois le budget pendant 60 s, épuisement du pool,
+charge non émise par le générateur ou effet externe inattendu. Mesurer
+saturation et retour à la normale. La cible, sa politique A04 et sa distribution
+NAT sont déclarées avant le test ; utiliser assez de participations/origines
+pour que la limitation personnelle ne fausse pas la charge légitime.
+Aucune valeur E74 ne valide la Chasse, aucun test partagé n'est implicite.
+Un dépassement bloque la capacité concernée et L4, pas les correctifs indépendants.
+
+### Matrice de traçabilité, impacts et livraison
+
+Toutes les preuves ci-dessous sont **à produire après implémentation**.
+Le [bilan d'audit](suivi-implementation.md#e55-audit-20261113) conserve séparément
+les exécutions du 13 novembre et leurs échecs.
+
+| Critères | Preuves prévues / comportements conservés | Fonctionnel, contrats et consommateurs | Fixtures / démonstration | Exploitation, données et livraison |
+| --- | --- | --- | --- | --- |
+| A01 | Stockage refusé avant inscription et après succès, accès temporaire réel au jeu, réponse perdue, deux onglets, doublon, lien expiré/récupération ; reprise exacte et pas de double place | Complément fonctionnel et guide Live ; contrat d'inscription inchangé ; frontend partagé testé sur autres moteurs sans modifier E74 | Fixtures navigateur panne IndexedDB/écriture ; aucune donnée de génération nouvelle | Aucune migration attendue ; consigne de récupération et limite de durée de l'accès temporaire ; pas de token dans les mesures |
+| A02/A03 | Reçu confirmé puis nouvelle décision, reçu absent/étranger/refusé, conflit, changement de session ; brief conservé/abandon explicite | ERP `travail.js`/préparation/génération et Animation ; contrats métier existants | Recette `epic73-preparations-service.cjs`, génération ERP/Animation ; générateur sans nouveau champ | Pas de migration ; documenter reprise, ne pas inviter à contourner le verrou ou désactiver les protections |
+| A04 | Variation UUID, IP, huit processus, fenêtres, caps/purge, panne/timeout ; aucun compteur personnel avant autorisation, seuil atomique, retour à la normale | Nouveau port identité, deux GET Live ; codes non révélateurs et 429 préservés | Doubles de ports puis PostgreSQL jetable ; aucun envoi réel | Deux tables PostgreSQL, politique et purge définies ci-dessus ; calibrage/proxies à vérifier avant activation |
+| A05/A12 | Projection égale au domaine sur tous les chemins, reconstruction/reprise, page mixte et synthèse facultative ; retrait/gel atomiques ; N/10N et chaîne complète | Lecteur global hybride et consommateurs, anciennes routes préservées, nouveaux ports d'en-tête ; E41/copies à générer avec le code | UoW alignés sur `reversibilite`/`apercus_dotation_publique` ; reconstruction figée/anonymisée sans effet, tests concurrents réels | Migration additive projection/révisions/agrégats/index et protocole de bascule définis ; coût global et tirage à mesurer avant ouverture |
+| A06/A08/OPT-01 | Panne quota isolée, invitations erreur/vide/succès, message unique, permissions retirées, acteur/délai connus ou inconnus | Animation et guidage ERP ; service accompagné existant, aucune nouvelle SLA | Fixtures de pannes et calendrier absent ; pas de mutation du générateur attendue | Guide de diagnostic et prochaine action ; pas de migration |
+| A07/OPT-03 | Résultat hors première page, accents/jokers littéraux, filtres/droits, curseurs, réponses tardives ; invitations par page et reçu sans collecte complète | API génération E41/contrats embarqués concernés ; ERP/Animation ; EPIC 56 conservée pour accords | Historiques multi-pages/tenants et plans SQL ; projection normalisée reconstruite par outil existant | Réutiliser nom normalisé/GIN v276 ; contrôler réparation et plans, migration d'index additionnel seulement si justifiée ; backend puis consommateurs |
+| A09/A11/A13/A14 | Clic réel sans occlusion, cinq activités, doublons expliqués, focus/annonce, texte à 200 % et clavier/toucher 320/390/1280 | Live et principes UX ; aucun changement du DSL, des aides, preuves ou chances | Recettes visuelles à API simulée puis cible ; aucune donnée de démo nouvelle requise | Pas de migration ; conserver accès sensibles revalidés et consigner limites des appareils |
+| A10 | Champs facultatifs, définition publiée, données anciennes, autres moteurs, absence de secrets/futurs, aucun N+1 | Producteur catalogue, E41/E42, normalisations/rendus Live ; schéma moteur déjà présent | Fixtures anciennes et riches ; vérifier les projections du générateur, sans inventer de durée absente | Scalaires JSON de configuration publiée, pas de nouvelle table/migration métier ; backend puis Live, ancien serveur toléré |
+| OPT-02/04/05/06 | Conception d'aperçu et décisions motivées de mesure ; temps/erreurs avant-après et pilote | Études dans ce dossier ; liens vers règles existantes, aucune collecte Analytics réactivée | Cas synthétiques et observations humaines ; pas de génération réelle implicite | Mesures agrégées/sans accès ou réponses ; aucun gain annoncé sans référence, configuration d'instrumentation examinée avant code |
+
+Les interfaces Commerçant ne changent pas de comportement dans ce lot ; leur
+contrat embarqué et la chaîne attestation/kit restent à vérifier si un export
+partagé évolue. Les scripts/données de démonstration restent dans le backend.
+Les migrations A04/A05 sont additives, conservent les historiques et
+font l'objet d'une recette jetable. Les OpenAPI et bundles documentaires ne
+seront générés/vérifiés qu'avec les producteurs correspondants.
+
+### Préparation par lot et conditions restantes
+
+La spécification de L1/L2 et de l'architecture A05 est exploitable pour
+implémentation : états et refus, stockage A04, sources exactes A05, compatibilité
+HTTP, reconstruction, recherche A07 et mapping A10 sont définis. A04 peut être
+codé/testé avec sa politique de recette ; son calibrage cible précède activation.
+Pour A05, commencer par les ports/projection et tous leurs producteurs, puis
+reconstruction/lectures, retrait/gel et mesures. Ne pas basculer un lecteur
+avant couverture, ni accepter la capacité avant les budgets mesurés.
+
+A12 remet à niveau les preuves parallèlement aux correctifs et rejoue la chaîne
+après intégration. OPT-02/04/05 sont des études bornées : leurs sorties sont
+conception/décision motivée, pas une optimisation ou invalidation présumée.
+OPT-06 fixe la référence de productivité avant modifications puis compare
+après recette. Aucun critère n'est coché par cette spécification ; exports,
+code, migrations, tests et mesures restent à produire.
+
+Le pilote L4 reste dépendant d'une cible, de versions et d'acteurs identifiés,
+de la conversion/permissions/conservation et des critères bloquants retestés.
+Les observations humaines ne sont pas remplacées par les captures Chromium.
+Les bilans et la [recette](recette-pilote.md#e55-audit-20261113) distinguent
+clairement preuves locales, dettes, non-exécutions et opérations sur cible.
+
+### Étude OPT-02 — aperçu des accords affectés
+
+La lecture du code le 13 novembre confirme une invalidation sélective déjà
+existante. `missions_commercantes.snapshot_commercant` construit les engagements
+propres à chaque commerce ; `empreinte_engagements` exclut les identifiants
+documentaires et conserve le contenu et les empreintes des images visibles.
+`DemandeParticipationCommercantAnimation.renouvellement_missions_requis` décide
+du renouvellement, puis `synchroniser_dans_uow` ferme l'ancien cycle et crée la
+demande à envoyer. Un refus reste dans l'historique. Une simple nouvelle révision
+de préparation ne suffit donc pas à renouveler tous les accords.
+
+| Modification proposée | Conséquence actuelle à présenter dans un futur aperçu |
+| --- | --- |
+| Mission, conditions ou image visible d'un seul commerce | Renouvellement de son cycle déjà envoyé si son empreinte change ; les autres commerces restent inchangés |
+| Nom, description, dates ou règlement repris dans chaque engagement | Plusieurs cycles peuvent changer ; calculer leurs empreintes au lieu de déduire le résultat du seul champ édité |
+| Même image réimportée avec une autre clé documentaire | Empreinte stable : aucune nouvelle demande motivée par ce seul changement |
+| Commerce retiré du parcours | Fermeture de son cycle ; aucun envoi automatique à un autre commerce |
+| Commerce ajouté ou demande encore à envoyer | Nouvelle demande ou mise à jour de la préparation ; aucun accord existant inventé |
+| Échéance de réponse | Règle propre `adapter_echeance_missions` : réduction refusée après envoi ; ne pas confondre avec les dates de l'animation |
+
+Décision de cette étude : un aperçu utile doit réutiliser ces fonctions de
+domaine dans un calcul sans écriture. Il présenterait les totaux et une liste
+paginée « accord conservé / nouvelle invitation nécessaire / commerce retiré »,
+avec la cause compréhensible et la prochaine action. Aucun message ne serait
+envoyé à l'ouverture ou à la confirmation de cet aperçu ; l'envoi des invitations
+resterait sa commande explicite.
+
+Avant une future implémentation, extraire le calcul de synchronisation sans
+dupliquer sa politique dans l'interface. L'aperçu doit être lié à la révision de
+configuration et aux versions des demandes consultées ; la sauvegarde recalcule
+les effets sous le verrou courant et refuse un aperçu devenu obsolète. Il faut
+notamment tester une acceptation commerçant entre aperçu et sauvegarde, une image
+identique réimportée, un changement concernant un seul commerce et un refus
+historique. Cette étude n'ajoute ni route ni nouvelle règle d'invalidation ;
+l'aperçu n'est pas annoncé disponible dans l'interface livrée.
+
+### Études OPT-04/05/06 — mesures locales et décisions
+
+Les mesures du 13 novembre portent sur l'arbre de travail de cette évolution,
+sur Windows, avec fixtures synthétiques et sans service externe. Elles ne
+constituent pas une référence de latence du stockage distant ni du terrain.
+
+**Médias (OPT-04).** Sur un WebP de 43 794 octets en 640 × 360, l'hydratation
+backend effectue 31 lectures et 31 décodages pour 31 appels, soit 1 357 614
+octets relus. Premier appel applicatif : 414 ms ; parmi les 30 répétitions,
+médiane 16,6 ms, p95 21,9 ms ; décodage seul médiane 13,7 ms, p95 18,1 ms.
+Le pic d'allocations Python mesuré est 6 056 677 octets, sans le pic natif PIL.
+Le premier appel inclut les initialisations ; le cache du système de fichiers
+n'a pas été purgé. Le banc vérifie aussi absence de lecture d'un média non
+sélectionné, refus du mauvais partenaire avant stockage et rejet d'une corruption.
+Script et résultat locaux : backend `tmp/e55-impl-medias/`.
+
+Dans Chromium, la même fixture produit deux décodages base64 initiaux puis un
+par actualisation, de 0 à 0,2 ms au passage final. Une seule BlobURL reste active ;
+les sept créations sont toutes révoquées à la sortie. La mémoire bitmap n'est
+pas mesurée. Le coût prioritaire est donc à instruire côté backend et stockage,
+sans attribuer la durée d'hydratation au seul navigateur.
+
+Décision : conserver les contrôles privés et l'absence de cache supplémentaire
+dans cette livraison. Une optimisation ultérieure devra mesurer le stockage
+cible, puis comparer un cache de validation borné par octets, partenaire,
+empreinte et version du décodeur. Elle devra encore relire l'autorisation de la
+projection et vérifier révocation, corruption et invalidation ; aucun média
+futur ne sera préchargé. Les résultats présents motivent cette piste, sans
+démontrer un gain de bout en bout ni autoriser un cache public.
+
+**Chargement Animation (OPT-05).** Trois parcours froids et trois chauds avant
+et après, viewport mobile, CPU ralenti ×4 et réseau simulé, API interceptée :
+médiane première action utile à froid 8 371 → 8 235 ms, à chaud 8 277 → 8 374 ms.
+Les fichiers `before.json`, `after.json` et le protocole sont conservés dans
+Animation `tmp/e55-impl-animation-performance/`. L'échantillon et l'écart ne
+démontrent aucun gain ; aucun découpage supplémentaire n'est retenu sur cette
+seule mesure. Le build production/PWA reste vérifié séparément. Un futur
+découpage devra viser le code chargé avant la première action sur ce même
+parcours et conserver les gardes de saisie/focus.
+
+**Productivité (OPT-06).** L'audit préalable constitue la référence observable :
+inscription bloquée sans carnet, décision ERP suivante bloquée après reçu,
+saisie réinitialisée, recherche limitée à la page et liste d'invitations
+collectée intégralement. Les recettes après correction observent respectivement
+un seul POST d'inscription et un jeu temporaire, la décision suivante envoyée,
+le texte conservé y compris après conflit, un résultat hors première page et
+une seule page de 25 invitations. Ce sont des changements de comportement,
+pas des minutes gagnées mesurées auprès d'utilisateurs.
+
+Le pilote doit encore comparer le temps jusqu'à une demande traitée, les
+ressaisies, retours entre applications et demandes d'aide pour chaque acteur.
+Conserver même scénario/volume et noter les erreurs ou abandons, avec résultats
+agrégés sans texte de réponse, accès personnel ni suivi Analytics. L'absence de
+mesure humaine avant/après reste explicite : aucun pourcentage de productivité
+ni réduction du temps de travail n'est revendiqué.

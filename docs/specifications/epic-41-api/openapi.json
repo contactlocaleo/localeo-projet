@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Backend - contrat implemente EPIC 41",
     "description": "OpenAPI complet du backend, dont les parcours Animation locale. Genere hors ligne depuis le code local pour les integrations et les mocks ; cet instantane ne prouve pas son deploiement.",
-    "version": "1.0.0+95babb7"
+    "version": "1.0.0+d4ca278"
   },
   "paths": {
     "/public/identite-acces/interne/connexion": {
@@ -33368,7 +33368,22 @@
             }
           },
           "429": {
-            "description": "Fréquence dépassée",
+            "description": "Fréquence de lecture dépassée ; attendre le délai indiqué avant de réessayer.",
+            "headers": {
+              "Retry-After": {
+                "description": "Délai minimal avant une nouvelle lecture, en secondes.",
+                "schema": {
+                  "type": "string",
+                  "pattern": "^[1-9][0-9]*$"
+                }
+              },
+              "Cache-Control": {
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -33554,7 +33569,22 @@
             }
           },
           "429": {
-            "description": "Fréquence dépassée",
+            "description": "Fréquence de lecture dépassée ; attendre le délai indiqué avant de réessayer.",
+            "headers": {
+              "Retry-After": {
+                "description": "Délai minimal avant une nouvelle lecture, en secondes.",
+                "schema": {
+                  "type": "string",
+                  "pattern": "^[1-9][0-9]*$"
+                }
+              },
+              "Cache-Control": {
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -39450,6 +39480,159 @@
         "security": [
           {
             "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/localeo-live/limitation-lectures/purger": {
+      "post": {
+        "tags": [
+          "internal"
+        ],
+        "summary": "Purger",
+        "operationId": "purger_limitation_lectures_live",
+        "parameters": [
+          {
+            "name": "X-API-KEY",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Cle API interne avec le scope `internal:batch`.",
+              "title": "X-Api-Key"
+            },
+            "description": "Cle API interne avec le scope `internal:batch`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "integer"
+                  },
+                  "title": "Response Purger Limitation Lectures Live"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Demande invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentification requise",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Action non autorisée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ressource ou reçu introuvable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Version, aperçu ou état en conflit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Accès expiré",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Document trop volumineux",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Encodage non supporté",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Contenu invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Fréquence dépassée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Transaction indisponible, consulter le reçu",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "XApiKey": []
           }
         ]
       }
@@ -61657,6 +61840,25 @@
               "default": 50,
               "title": "Limit"
             }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 1000
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Nom/type sans casse ni accents (3 à 120 caractères normalisés), ou UUID exact de la demande.",
+              "title": "Q"
+            },
+            "description": "Nom/type sans casse ni accents (3 à 120 caractères normalisés), ou UUID exact de la demande."
           }
         ],
         "responses": {
@@ -66571,6 +66773,25 @@
               "default": 50,
               "title": "Limit"
             }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 1000
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Nom/type sans casse ni accents (3 à 120 caractères normalisés), ou UUID exact de la demande.",
+              "title": "Q"
+            },
+            "description": "Nom/type sans casse ni accents (3 à 120 caractères normalisés), ou UUID exact de la demande."
           }
         ],
         "responses": {
@@ -84593,6 +84814,16 @@
                 }
               ],
               "title": "Termine"
+            }
+          },
+          {
+            "name": "avec_synthese",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true,
+              "title": "Avec Synthese"
             }
           },
           {
@@ -125388,6 +125619,58 @@
       },
       "AnimationPubliquePayload": {
         "properties": {
+          "duree_estimee_minutes": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "exclusiveMinimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Duree Estimee Minutes"
+          },
+          "difficulte": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 200,
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Difficulte"
+          },
+          "public_vise": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 20000,
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Public Vise"
+          },
+          "nombre_etapes": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "exclusiveMinimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nombre Etapes"
+          },
           "capacites": {
             "anyOf": [
               {
@@ -126558,6 +126841,18 @@
                 "message"
               ]
             }
+          },
+          "code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Code stable optionnel pour identifier une erreur metier."
           }
         },
         "type": "object",
@@ -157286,6 +157581,29 @@
       },
       "MetriquesExploitationPayload": {
         "properties": {
+          "statistiquesObserveesAt": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Statistiquesobserveesat"
+          },
+          "sourceStatistiques": {
+            "anyOf": [
+              {
+                "type": "string",
+                "const": "AGREGAT_DATE"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sourcestatistiques"
+          },
           "inscrits": {
             "type": "integer",
             "minimum": 0.0,
@@ -164666,7 +164984,14 @@
             "title": "Hasmore"
           },
           "synthese": {
-            "$ref": "#/components/schemas/SyntheseParticipants"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SyntheseParticipants"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "allowedActions": {
             "items": {
@@ -164683,7 +165008,6 @@
           "items",
           "nextCursor",
           "hasMore",
-          "synthese",
           "allowedActions"
         ],
         "title": "PageParticipants"
@@ -167628,6 +167952,32 @@
           "validations": {
             "type": "integer",
             "title": "Validations"
+          },
+          "progression": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Progression"
+          },
+          "sourceQualification": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "COURANTE",
+                  "GELEE"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sourcequalification"
           }
         },
         "additionalProperties": false,

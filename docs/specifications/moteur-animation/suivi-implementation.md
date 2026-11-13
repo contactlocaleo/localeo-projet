@@ -1308,3 +1308,383 @@ métier, schéma ou jeu de démonstration modifié ; Backend, Pro et Marketplace
 impact applicatif. Pas de migration, d’action sur l’animation réelle, de commit,
 de push ou de déploiement. Le comportement sur la cible reste à vérifier après
 livraison.
+
+<a id="e55-audit-20261113"></a>
+## 13 novembre 2026 — audit puis préparation de l'évolution des parcours
+
+Demande : analyser E55 pour organisateur, gestionnaire Localeo et habitant,
+puis intégrer le rapport à l'epic. Le [backlog](../../roadmap/en-cours/epic-55-chasse-tresor-commercante-backlog.md#e55-audit-20261113)
+conserve les repères **E55-A01 à A14**, six axes **E55-OPT-01 à OPT-06** et
+quatre lots. Le [complément fonctionnel](localeo_animation_engine_spec.md#e55-audit-20261113),
+la [conception](conception-technique.md#e55-audit-20261113) et la
+[recette prévue](recette-pilote.md#e55-audit-20261113) forment leur source
+canonique. Statut **En cours** conservé ; aucune correction applicative livrée
+par cette préparation documentaire.
+
+### Référence observée et portée
+
+Audit local sur les branches `main` : projet `c28bbed351a0`, backend/ERP
+`d4ca2788448e`, Animation `7104f9be04fa`, Live `afe7139c8b12`.
+Modifications E73/E74 présentes et préservées : 14 fichiers projet, quatre tests
+backend et deux fichiers Animation. Les sorties d'audit restent ignorées,
+notamment `.artifacts/codex/e55-audit/rapport.md`, `localeo-backend/tmp/e55-audit-*`,
+`localeo-animation/tmp/e55-audit-*` et les rapports visuels Live cités ci-dessous.
+Le présent bilan conserve les faits utiles indépendamment de ces sorties locales.
+
+| Constats | Preuve obtenue lors de l'audit | Limite / suite |
+| --- | --- | --- |
+| A01 | IndexedDB refusé à 390 px : formulaire de nouvelle inscription absent, garde de récupération affiché | API simulée ; corriger aussi l'accès après inscription (`AddAnimation`), puis vérifier serveur et autres moteurs |
+| A02 | À 320/1280 px, décision traitée avec réponse perdue puis reçu confirmé ; décision suivante bloquée avant POST | Défaut d'intégration des deux états `pending` ERP, pas de double écriture serveur démontrée |
+| A03 | Thème écrasé par Actualiser dans Animation ; brief perdu au changement de demande ERP sans dialogue, à 1280/390 px | Perte de saisie non enregistrée, pas de suppression des données déjà persistées |
+| A04 | Deux routes GET, chacune 61 UUID différents à IP constante/Bearer invalide : 61 refus 404 et 61 écritures du limiteur avant autorisation, aucun 429 | Vrai routeur/limiteur/service avec repository mémoire et refus simulé ; SQL confirmé par code, charge déployée/WAF inconnus, aucune fuite prouvée |
+| A05 | Chargement de toute la population, exécutions et preuves avant découpe de page ; métriques/retrait/gel partagent ce chemin | Risque de capacité établi par le code ; test existant 101 participants/3 requêtes, pas de saturation chiffrée mesurée |
+| A06/A08 | Quota 500 empêche la lecture du parcours ; invitations en panne présentées aussi comme vides, puis alerte conservée après succès | Reproduit à 1280/390 ; distinguer inconnu/erreur/vide/succès et lectures indépendantes |
+| A07 | Recherche ERP annonce absent un dossier d'une page suivante ; Charger plus le fait apparaître | Reproduit sans POST à 1280/390 ; pagination SQL existante correcte, filtre de recherche limité au tableau client |
+| A09 | Démarrage hors du premier écran à 320/390 ; à 1280×900 son centre touche Mes lots dans la barre basse | Scénario avec résultat du tirage indisponible ; ne prouve pas l'impossibilité de démarrer après défilement |
+| A10 | Agrégats présents dans compilation/ProjectionPublique, absents du catalogue public effectif et du rendu | Évolution requise du producteur `AnimationPubliquePayload` et de Live, pas uniquement du schéma moteur |
+| A11/A13/A14 | Association en doublon sans explication ; focus sur BODY après déplacement en première position ; racine 16→32 px mais réponses 15 px/statut 14 px inchangés | Reproductions Chromium ; aucune certification générale d'accessibilité ni recette lecteur d'écran humain |
+| A12 | Six tests PostgreSQL et plusieurs recettes historiques échouent sur leurs fixtures/attentes ; scénario ERP A02 révèle un vrai défaut | Réaligner les doublures et contrats sans affaiblir les assertions ; la chaîne complète actuelle reste non validée |
+
+### Exécutions de l'audit, non réexécutées pour la spécification
+
+| Ensemble | Résultat réel et références |
+| --- | --- |
+| API génération/vérification/préparation/navigation | **71 réussis**, `tmp/e55-audit-api.xml` ; suites API T2/T3, vérification de réponse et console Animation via `scripts/validation/test_isolated.py` |
+| Projections/jeu API/contenu/autorisations/compilation/génération | **103 réussis**, `tmp/e55-audit-invariants.xml`, même lanceur isolé |
+| PostgreSQL jetable | **59 réussis, 6 échoués**, `tmp/e55-audit-postgres.xml` ; `test_generation_animation_postgres.py`, `test_preparation_chasse_postgres.py`, `test_jeu_animation_postgres.py`, `test_exploitation_moteur_postgres.py`, `test_parcours_moteur_epic_postgres.py` |
+| Cause des six échecs SQL | Cinq `SimpleNamespace` sans port `reversibilite`, un sans `apercus_dotation_publique` ; ports présents dans le vrai UoW. Dette de fixtures, pas six bugs de production établis |
+| Limiteur GET | Deux tests de caractérisation réussis confirmant A04 ; ne pas les compter comme sécurité validée |
+| ERP guidage | `node tests/browser/generation-erp-guidance.cjs` : **261 contrôles réussis** à 1280/390/320 et texte agrandi |
+| ERP recettes historiques | `generation-erp.cjs` : whitelist sans `travail.js` ; `epic73-preparations-service.cjs` : échec A02 confirmé par diagnostic 320/1280 |
+| Animation | Build isolé réussi, **41 tests Node réussis** ; génération avec sélecteur adapté en mémoire : **82 contrôles** ; invitations **8**, quota/UI **16**. Ces diagnostics confirment les défauts, pas leur correction |
+| Animation chaîne complète | Fixture `contact-public` absente puis ancienne attente participants ; chaîne non validée. Une instabilité intermédiaire de focus reste à qualifier |
+| Live | **6 tests Node réussis** ; **53 succès / 2 échecs sur 55** dans le run `2026-11-13T13-22-01-515Z-8uXrlH`, échecs A09 à 320/390 |
+| Live compléments | Run `2026-11-13T13-29-05-665Z-BpMz0e` : 5 observations réussies et 2 défauts d'attente du banc ; rejeu ciblé `2026-11-13T13-30-33-431Z-IdKsKf` : 2 réussites, `exitCode:0` du runner |
+
+Total des trois groupes Python métier/API/SQL : **233 réussites et six échecs**,
+hors caractérisations du limiteur. Les contrôles navigateur ne s'additionnent
+pas à ce total. Les preuves positives couvrent notamment les cinq activités,
+les projections privées, la reprise avant/après commit, correction/gel et
+revalidation des accès sensibles. Les scénarios frontend utilisent Chromium
+et des API simulées ; pas de preuve de déploiement, caméra réelle, pilote de
+familles, charge importante ou audit de sécurité exhaustif. PostgreSQL jetable
+et serveurs de recette ont été arrêtés à la fin de l'audit.
+
+### Résultat de la préparation documentaire
+
+Les critères distinguent correctifs, extensions de contrat et études ; les
+lots gardent leurs dépendances. La revue indépendante des contrats a confirmé
+les maillons inscription → ajout → jeu et le producteur public réel. Elle a
+fait corriger la description de l'ordre SQL historique en **ASC/ASC** ; les
+nouveaux champs publics restent facultatifs et mappés explicitement.
+
+À l'issue de cette première intégration, les choix de stockage/calibrage du
+limiteur, index/projections et budgets de capacité restaient à fermer dans
+leurs lots avant activation/acceptation ; la phase de spécification ci-dessous
+précise désormais les décisions techniques.
+Ils n'empêchent pas les correctifs indépendants. OPT-02 est une étude d'aperçu
+des accords, OPT-04/05 des mesures préalables à optimisation ; aucune nouvelle
+règle d'invalidation ou architecture de cache n'est supposée décidée.
+
+Seul `localeo-projet` est modifié pour cette phase : backlog, spécifications,
+matrice d'impacts, recette, exploitation, README et index. Les contrats générés,
+code, migrations et générateur restent inchangés. Les tests applicatifs n'ont
+pas été relancés pour ces seuls ajouts ; leurs résultats d'audit conservent
+la portée ci-dessus. Aucun commit, push, déploiement ou envoi externe.
+
+Contrôles documentaires exécutés après intégration :
+`python scripts/check_guidance.py` — **97 guides, 1 245 liens locaux, aucune
+erreur ni avertissement** ; `python scripts/sync_documentation.py --check-sources`
+— **150 documents vérifiés** ; `git diff --check` sans erreur de whitespace.
+Le contrôle complété avec les neuf documents modifiés via `--document` vérifie
+**104 guides et 1 473 liens locaux**, sans erreur ni avertissement. Les empreintes
+des modifications antérieures hors fichiers partagés, leurs ajouts dans les
+fichiers partagés et les statuts des quatre applications ont été préservés.
+Ces contrôles ne valident ni les futurs contrats générés ni les correctifs.
+
+### Spécification détaillée — 13 novembre 2026
+
+À la demande `localeo-specifier-epic`, la conception existante a été complétée
+sans modifier les critères A01–A14 ni créer une documentation concurrente.
+Deux explorations en lecture seule ont couvert le limiteur et la capacité ;
+la revue indépendante des contrats contrôle producteurs et consommateurs réels.
+
+Décisions précisées : jeu temporaire en mémoire après confirmation serveur,
+résolution du reçu exact dans les deux états ERP, limiteur PostgreSQL à capacité
+bornée avec purge/ordre de verrous, projection Chasse synchrone et reconstruction
+versionnée, retrait/gel atomiques par lots et ports d'en-tête sans relecture
+exhaustive des membres. Les budgets de recette sont fixés avant mesure.
+
+Le lecteur principal est celui des lectures globales E73 ; les anciennes routes
+de participants ne sont pas les listes actuellement affichées. Le contrat
+hybride conserve les autres moteurs et ajoute un mode sans synthèse, avec
+adaptation explicite des consommateurs. La Tombola publique garde ses routes.
+La revue a fait distinguer la négociation des moteurs dans les listes (filtrage
+éventuellement vide) du refus de capacité des lectures ciblées ; la conception
+ne crée donc pas de nouveau refus implicite sur la liste globale.
+Le chargement complet des noms dans Tirage est à remplacer par les résultats
+affichés ; le coût du tirage reste distinct de celui du gel. La recherche ERP
+réutilise la normalisation sans accents et les index v276 existants. Le
+catalogue public projette les scalaires de la configuration publiée.
+
+Les migrations, la reconstruction, les contrats à générer et les cas de refus,
+concurrence, rollback et compatibilité sont reliés à la recette. Les seules
+validations encore dépendantes de l'environnement sont calibrage/mesures sur
+cible et pilote humain ; les études OPT-02/04/05 conservent leur livrable de
+décision préalable. Les lots indépendants sont spécifiés pour implémentation,
+aucun n'est déclaré implémenté par ce travail.
+
+Cette phase modifie six documents de `localeo-projet` : backlog, conception,
+complément fonctionnel, recette, exploitation et présent suivi. Les modifications
+antérieures E73/E74 et celles des quatre applications sont préservées : contrôle
+des HEAD, statuts, empreintes des fichiers hors périmètre et sections historiques
+des six documents partagés contre l'état initial de cette phase.
+Aucun test applicatif relancé, contrat généré, migration exécutée, serveur,
+base ou envoi externe ; aucun commit/push/déploiement.
+
+Contrôles documentaires après spécification : **104 guides, 1 473 liens locaux,
+zéro erreur/avertissement** avec les neuf documents du dossier/index explicités ;
+**150 sources exportées vérifiées** ; `git diff --check` réussi (avertissements
+CRLF préexistants des fichiers E74). La revue de contrats en lecture seule
+est intégrée ; ces contrôles ne prouvent ni la future implémentation ni les
+budgets de capacité. Prochain geste : implémenter les critères indépendants
+L1/L2, puis les producteurs et la reconstruction A05 avant ses lecteurs.
+
+<a id="e55-audit-20261113-implementation"></a>
+### Implémentation locale de l'évolution du 13 novembre 2026
+
+La demande `localeo-implementer-epic` a engagé les correctifs et extensions
+spécifiés. Le bilan ci-dessous complète les phases d'audit et de spécification,
+sans convertir leurs résultats en preuves de la nouvelle version. L'epic reste
+**En cours** : capacité sur cible, parcours humain et conditions d'ouverture L4
+ne sont pas validés par les essais locaux.
+
+**Périmètre livré.** Live permet le jeu temporaire après inscription confirmée
+si le carnet échoue, conserve une action de démarrage accessible et présente
+l'effort publié. Animation protège les brouillons, isole le quota indisponible,
+page les invitations et distingue leurs états. L'ERP rapproche le reçu exact de
+la commande incertaine et recherche dans toute la file autorisée ; un brouillon
+conserve aussi sa version d'origine, afin de détecter une modification concurrente.
+
+Le backend limite les lectures Live avant autorisation avec des compteurs
+PostgreSQL bornés, puis applique la limite personnelle à un accès autorisé.
+La Chasse dispose de projections de qualification synchrones, de lectures
+paginées et de traitements par lots. Les compteurs de participation restent
+exacts ; les statistiques descriptives différées affichent leur date dans
+Animation et l'ERP. Les études accords, médias et chargement sont consignées
+dans la conception ; aucun aperçu d'accords ni cache supplémentaire n'est
+annoncé implémenté.
+
+| Critères | Comportement et preuves locales | Portée et limites |
+| --- | --- | --- |
+| A01/A09/A10/A11/A13/A14 | Live : 17 tests Node ciblés et campagne finale de 16 scénarios navigateur réussis ; jeu temporaire sans second POST, refus/reprise, informations facultatives, action non recouverte, association sans tentative, focus et texte 200 % | Chromium et API simulées ; pas de caméra ni lecteur d'écran humain |
+| A02 | `erp-travail-recu.test.cjs` : 8 tests réussis ; recette `epic73-preparations-service.cjs` réussie à 320/1280 px. Reçu absent, étranger, ancienne session, réponse mal formée et échec de lecture après reçu ne libèrent ni ne rebloquent incorrectement une commande | Réconciliation explicite ; aucune deuxième décision automatique |
+| A03/A07 | Recette `generation-erp.cjs` réussie à 1280/390 px, avec conflit entre version du brouillon et version rafraîchie ; guidance 261 contrôles réussis. Deux suites API génération : 30 tests réussis. Recherche PostgreSQL : 3 tests réussis | Recherche normalisée et curseur lié aux filtres/droits ; N/10N local, sans charge cible |
+| A03/A06/A08, OPT-01/03 | Animation : 329 tests Node réussis ; génération finale 90 contrôles, T3 296, lecteur global 72. Complément invitations : 54 contrôles réussis à 1280/320 px et texte 200 %, cible tactile de 44 px, sélection de la seule page courante | Campagnes distinctes ; ne pas additionner ces résultats en un passage unique |
+| A05 — présentation | Recettes métriques Animation 1280/390 et ERP 1280/390 réussies : fuseau Europe/Paris, date/source des statistiques, séparation des compteurs exacts, compatibilité des anciens payloads | La recette visuelle ne prouve pas le coût SQL |
+| OPT-02 | Étude de l'empreinte d'engagements et de l'aperçu sélectif ; 19 tests de domaine missions réussis | Conception et décision livrées ; future interface d'aperçu non implémentée |
+| OPT-04/05 | Mesures backend et navigateur des médias, trois accès froids/chauds Animation avant/après ; protocoles et décisions dans la conception | Pas de gain démontré du chargement ; pas de cache ajouté ; stockage distant non mesuré |
+| OPT-06 | Référence des blocages observés et vérification des comportements après correction | Temps de travail et taux d'abandon humains non mesurés ; critère partiel |
+
+Les tests Live ajoutés ont d'abord reproduit les défauts. La campagne élargie
+intermédiaire (49 succès/50) a révélé une attente du banc qui focalisait un bouton
+encore désactivé ; l'attente de validation a été corrigée et la reprise ciblée
+est réussie. Côté ERP, la revue a fait ajouter un conflit réellement reproduit
+avant correction (version envoyée 4 au lieu de 3), puis rejouer tout le parcours.
+Les rapports intermédiaires restent conservés, sans atténuation d'assertion métier.
+
+**A04 — disponibilité.** Le limiteur utilise deux tables sans identité en clair,
+une politique versionnée explicite, une transaction courte et des capacités
+distinctes pour origines et accès personnels. Un refus d'origine conserve le
+décompte global ; un UUID non autorisé ne crée pas de compteur personnel.
+La purge opportuniste est bornée à 64 entrées, le batch minute à 500.
+L'absence de politique ou une panne retourne 503 ; la saturation retourne 429
+avec `Retry-After`. Les valeurs de recette ne sont pas des valeurs de production.
+
+Les onze cas PostgreSQL fonctionnels passent. Deux campagnes initiales ont
+dépassé les budgets p95/p99 (80/194 puis 104/249 ms), pendant d'autres activités
+locales. La reprise instrumentée isolée, huit processus et 400 lectures à
+50/s, obtient p95 **12,50 ms**, p99 **53,57 ms** pour 400 accès autorisés : les
+budgets de 30/100 ms sont respectés dans cette seule campagne. Le rapport
+`tmp/e55-impl-limiteur-charge/679a7aacf516461aa353ff26589cca64-recette.json`
+conserve le détail des connexions, verrous et commits. Cela ne certifie pas
+le proxy, le NAT réel ni la capacité de la cible de déploiement.
+
+La validation API/domaine/batch a obtenu 66 succès et un échec de registre
+scheduler : le test attendait encore 35 identifiants après ajout du 36e job.
+L'attente et la présence explicite du nouveau job sont alignées ; la reprise
+du module scheduler donne **5 succès**. Ces deux passages restent distincts.
+
+La revue des contrats a ensuite trouvé un défaut d'intégration : le middleware
+de l'application complète exigeait encore une session ERP pour le nouveau batch.
+Le test avec une clé interne réelle et un stockage simulé a reproduit le 401,
+puis l'ajout du seul couple POST/route dans la liste contrôlée a rétabli l'accès.
+Absence de clé, clé invalide/inactive, mauvais scope et méthode GET restent
+refusés. Le contrôle final regroupant architecture, classes de domaine, couverture
+des use cases et API du limiteur obtient **737 succès**, sans échec ni skip
+(`tmp/e55-impl-root-architecture-final.xml`). La première campagne architecture
+avait 713 succès et un défaut de référencement des trois nouvelles classes de
+domaine ; leurs tests dédiés significatifs sont désormais recensés.
+Après explicitation du batch technique sans lancement manuel ERP, la reprise
+API du limiteur et scheduler obtient **24 succès**
+(`tmp/e55-impl-root-batch-final.xml`), y compris refus du mode manuel et accès
+par clé sans cookie. La purge opérateur reste disponible par CLI.
+Après stabilisation du CHECK de la migration `v317` pour dump/restauration,
+les **10 tests PostgreSQL fonctionnels** du limiteur repassent ; les deux profils
+de charge sont exclus de ce passage et conservent leurs mesures séparées
+(`tmp/e55-impl-root-limiteur-sql-final.xml`).
+
+L'intégration HTTP A10 traverse maintenant le vrai catalogue et PostgreSQL :
+liste et détail d'une chasse enrichie, ancienne chasse et Passeport ; le
+brouillon à 120 minutes ne remplace pas les 45 minutes publiées et les lieux
+futurs restent absents. **Un test réussi** après ajout à la fixture des tables
+de compteurs déjà requises par le catalogue (`tmp/e55-impl-root-effort-http-reprise.xml`).
+Le premier échec de fixture est conservé dans le rapport sans suffixe.
+
+**A05 — projections et capacité.** La revue indépendante a fait corriger quatre
+cas : renvoi de lien réécrasant le statut calculé après retrait, chasse publiée
+vide sans ligne de statistiques, anomalie post-gel sans invalidation de ses
+statistiques, et suppression d'un non-éligible figé passant le garde métier.
+Les tests relisent statut/filtre, métriques/actions à zéro, compteur d'anomalies
+sans changement de provenance et refus de suppression sans effacement.
+La relecture finale confirme ces corrections. La reconstruction vérifie aussi
+les agrégats avant `PRET`, couvre une reprise entre lots avec inscription
+intercalaire et une population gelée puis anonymisée. Ces intercalages
+séquentiels ne prouvent pas une course réelle entre jeu et reconstruction.
+Une preuve concurrente complémentaire passe ensuite sur PostgreSQL :
+reconstruction déjà initialisée face à `START_GAME`, sans interblocage, progression
+récente conservée et couverture `PRET` (`e55-impl-capacite-reconstruction-concurrente-attempt1.xml`,
+un succès). Elle ne couvre pas toutes les courses avec correction/retrait ni
+une campagne de charge mixte.
+
+La campagne dédiée `tmp/e55-impl-capacite-pg-attempt6.xml` obtient **15 succès**
+en 67,60 s. Sur les fixtures exploratoires de 10 000 participants et huit étapes,
+elle mesure reconstruction **2,58 s**, aperçu **2,61 s**, confirmation du retrait
+**5,34 s**, gel **6,55 s**, pages **16–25 ms**. Le pic RSS du processus est
+240,9 Mo ; le maximum d'augmentation pendant une phase est 1,94 Mo, échantillonné
+toutes les 10 ms. À 1 000 participants et 100 étapes, le pic est 248,6 Mo et
+l'augmentation au gel 7 Mo. Avec 100 puis 1 000 animations autorisées et autant
+d'étrangères, pages et filtres prennent 17–69 ms ; les plans SQL sont conservés.
+
+Ces mesures sont des observations séquentielles, **pas des p95/p99 certifiés**.
+La confirmation à 5,34 s dépasse l'objectif p95 de 5 s ; les fixtures mesurées
+ne couvrent pas le poids de toutes les preuves ni le trafic mixte de référence.
+Les campagnes antérieures, notamment retrait 19,36 s/gel 13,37 s puis
+retrait 41,13 s/gel 51,41 s, restent conservées. Les écritures groupées par
+instruction et insertions typées par lots JSONB de 500 réduisent les coûts ;
+aucun seuil n'a été augmenté. A05 reste **partiellement vérifié**, et sa capacité
+ne peut pas être acceptée pour L4 sur ces seuls résultats.
+
+Le rattrapage des statistiques descriptives rend les lignes âgées de cinq
+minutes candidates au batch ; il ne garantit pas une fraîcheur maximale de cinq
+minutes si d'autres réconciliations restent prioritaires. La date affichée est
+donc nécessaire. Qualification, population gelée et compteurs exacts ne dépendent
+pas de ce délai.
+
+**A12 — chaîne et fixtures.** Le premier rejeu des cinq suites PostgreSQL de
+l'audit reproduit exactement **59 succès et six échecs**. Les doublures UoW
+manquaient de réversibilité, d'aperçu de dotation et de leurs tables ; la suite
+transversale nécessitait aussi les ports ordinaires de validation, récompenses
+et planning. Les repositories et données réels ont été raccordés, sans retirer
+d'assertion de qualification, d'idempotence ou de conservation.
+
+Le passage consolidé final donne **107 succès**, cinq profils de performance
+volontairement non sélectionnés et un avertissement du plugin JUnit sur
+`record_property`, en 144,67 s (`tmp/e55-impl-capacite-a12-final.xml`). Il inclut
+génération, préparation, jeu, exploitation, parcours complet jusqu'à conservation,
+publication sans inscrit, projections, correction, paramètres, réconciliation
+et détail API. Les cinq profils exclus ont leur campagne de mesure séparée ;
+ils ne sont pas comptés comme réussis ici. Les **14 tests unitaires finaux**
+passent dans `tmp/e55-impl-capacite-unit-final2.xml`.
+
+**Impacts de livraison.** Les cinq dépôts indépendants sont concernés : sources
+canoniques dans projet, domaine/application/persistance/API/ERP et générateur
+dans backend, parcours et contrats dans Animation/Live, contrats uniquement
+dans Pro. Les migrations additives `v315`, `v316`, `v317`, la reconstruction
+des populations historiques et la politique du limiteur doivent précéder
+l'activation des lecteurs correspondants. Les commandes et refus sont décrits
+dans [l'exploitation](exploitation-moteur.md#e55-audit-20261113) ; aucune migration
+sur TEST/production ni politique de production n'a été appliquée ici.
+
+Le générateur traite les cinq tables de projection/statistiques selon sa
+politique de remplacement ; les tables support, compteurs et statistiques
+alimentées par triggers sont restaurées sans double insertion. Les deux tables du limiteur
+restent techniques et locales à la cible : aucune copie de politique ni remise
+à zéro des compteurs lors du transfert. Les 30 tests unitaires finaux de registre et
+d'animations passent ; la compatibilité PostgreSQL complète est distinguée
+dans les résultats finaux ci-dessous.
+
+Le premier passage complet du générateur a obtenu **trois succès et sept échecs**
+en 405,19 s (`tmp/e55d-r1/results.xml`). Six échecs provenaient d'un consommateur
+oublié : la préparation des gains cherchait encore `participant_ids` dans
+l'en-tête de gel. Elle utilise désormais `nombre_eligibles`, sans recharger la
+population. Le septième provenait du CHECK de catégorie du limiteur : PostgreSQL
+réécrivait différemment ses conversions implicites lors du dump/restauration.
+La conversion explicite `categorie::text` conserve les mêmes valeurs admises
+et une empreinte stable. L'inventaire et ses assertions n'ont pas été assouplis.
+Le rejeu ciblé du jeu complet, restauration et lecture globale paginée comprises,
+obtient **un succès** en 82,99 s (`tmp/e55d-target1.xml`).
+
+La reprise complète obtient **10 succès**, sans skip, en 599,40 s
+(`tmp/e55d-r2/results.xml`) : génération, lectures produit, dump/installation,
+échec de reset, restauration de l'original et contrôle de dérive du schéma.
+Sept avertissements SQLAlchemy de réflexion sur `dialect_options` restent
+visibles ; ils n'ont pas empêché ces contrôles.
+
+Une vérification complémentaire a reproduit un doublon de statistiques pendant
+le transfert : l'insertion des qualifications déclenche déjà leur création.
+La restauration des statistiques passe désormais après les sources et conserve
+leurs valeurs, leur date et leur état de fraîcheur. La preuve initiale échoue
+sur l'unicité (`tmp/e55-impl-root-demo-stats-avant.xml`) ; les **30 tests unitaires**
+passent après correction (`tmp/e55-impl-root-demo-unit-final.xml`). Un test
+PostgreSQL supplémentaire réussit avec une Chasse, les triggers réels `v315`/`v316`
+et une lecture gestionnaire inchangée (`tmp/e55-impl-root-demo-stats-pg.xml` :
+**un succès**, 17 tests non sélectionnés, 6,43 s). Ce dernier ajustement est vérifié
+par ces preuves ciblées ; la campagne complète précédente n'est pas présentée
+comme un nouveau passage sur cette version finale du transfert.
+
+**Contrats et consommateurs.** E41, Animation et l'export brut Pro décrivent
+1 117 chemins ; E42 en décrit 82, dont la purge Live. Les réponses 429 exposent
+`Retry-After` et `Cache-Control: no-store` ; le code d'erreur stable facultatif
+est présent dans le schéma commun, et le batch décrit uniquement sa clé interne.
+Les quatre champs d'effort et les statistiques datées restent facultatifs.
+Le mode sans synthèse et la recherche `q` sont vérifiés dans les snapshots.
+
+La campagne finale obtient **27 tests backend, 14 Animation et 34 Pro réussis** ;
+Live obtient **5 succès** sur le DSL inchangé depuis son passage. Les manifestes
+et toutes leurs empreintes concordent : 239 entrées/quatre types dans Animation
+et Live, 199 entrées/trois types dans Pro. Le générateur accepte une sélection
+explicite `--types` pour conserver le périmètre Pro. Le rattrapage des exports
+Pro inclut des dérives antérieures (E74, conservation, dotation et détail de
+préparation) sans activer de nouveau moteur dans son registre. Le détail et
+les commandes sont dans `tmp/e55-impl-contracts/rapport.md` du backend.
+
+Un premier passage de la nouvelle assertion de sécurité avait obtenu 26 succès
+et un échec : la valeur par défaut autorisait le lancement manuel du batch dans
+l'ERP. Le nouveau batch technique est explicitement automatique, sa purge
+opérateur utilise le CLI. La reprise de 27 tests et les exports finaux ont été
+rejoués avec cette décision, sans assouplir les contrôles d'authentification.
+
+**Contrôles documentaires et préservation.** `check_guidance.py` avec les dix
+documents fonctionnels/ops explicités vérifie **106 guides et 1 484 liens locaux**,
+sans erreur ni avertissement ; `sync_documentation.py --check-sources` vérifie
+**150 documents**. `git diff --check` réussit dans les cinq dépôts. Les cinq HEAD
+sont inchangés ; les quatre tests backend et deux fichiers Animation modifiés
+avant cette phase restent identiques octet pour octet à la baseline. Les ajouts
+historiques des documents partagés sont conservés. Les rapports de préservation
+restent dans les artefacts locaux de cette phase.
+
+Le lint ciblé Live réussit. Son lint global est empêché par un ancien répertoire
+de travail inaccessible (`output/bum-politique/pytest-approval-1`, erreur EPERM) ;
+aucune suppression ni modification de ce répertoire n'a été effectuée. Les
+contrôles TypeScript/lint et builds production/PWA Animation passent ;
+l'avertissement de taille du module initial reste visible et ne vaut pas, à lui
+seul, preuve de lenteur.
+
+**Traçabilité.** Baseline des cinq HEAD, statuts et contenus modifiés avant ce
+travail dans `.artifacts/codex/e55-implementation/baseline.json`. Les modifications
+antérieures E73/E74 sont conservées. Les preuves de cette phase sont dans les
+répertoires ignorés `tmp/e55-impl-*` du backend/Animation, Live
+`tmp/e55-impl-live/proof.json` et son run visuel
+`2026-11-13T15-03-39-455Z-q4ZtGY`. Ces fichiers ne sont pas des exports à déployer.
+Pas de commit, push, déploiement, génération réelle ni envoi externe.

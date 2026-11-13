@@ -1,6 +1,17 @@
 # Moteur commun d'animation — EPIC 55
 
-> Suivi produit au 19 septembre 2026 : **En cours** — [backlog de référence](../../roadmap/en-cours/epic-55-chasse-tresor-commercante-backlog.md). Les bilans techniques datés ci-dessous conservent leur portée historique.
+> Suivi produit au 13 novembre 2026 : **En cours** — [backlog de référence](../../roadmap/en-cours/epic-55-chasse-tresor-commercante-backlog.md). Les bilans techniques datés ci-dessous conservent leur portée historique.
+
+L'[évolution issue de l'audit du 13 novembre](../../roadmap/en-cours/epic-55-chasse-tresor-commercante-backlog.md#e55-audit-20261113)
+rattache 14 constats et six axes d'optimisation : continuité des parcours,
+protection des saisies, limitation publique, recherche ERP, informations
+d'effort, accessibilité et capacité. Les [comportements](localeo_animation_engine_spec.md#e55-audit-20261113),
+[contrats et impacts](conception-technique.md#e55-audit-20261113),
+[preuves de départ puis d'implémentation](suivi-implementation.md#e55-audit-20261113-implementation) et
+[recette](recette-pilote.md#e55-audit-20261113) sont distingués.
+Les correctifs, contrats et protections sont implémentés localement. Le bilan
+conserve les limites de capacité, de validation sur cible et de pilote humain ;
+ces résultats ne clôturent pas l'epic et ne déclarent aucun déploiement.
 
 La [spécification unique du moteur](localeo_animation_engine_spec.md) décrit l'Animation générique, le DSL JSON, les moteurs spécialisés et le catalogue V1 : Passeport commerçant, Tombola locale et Chasse au trésor.
 

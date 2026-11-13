@@ -71,4 +71,81 @@ Pour chaque exécution, relever date, acteur, appareil/version, animation/partic
 
 Le passage au pilote repose sur les contrôles techniques et la fiche logistique complétée. L’ouverture publique reste une opération distincte de l’implémentation et des commits. Un défaut empêchant une participation, révélant une réponse privée, doublant un effet ou altérant une preuve/qualification doit être corrigé puis revérifié avant ouverture. Les écarts de durée, compréhension ou présentation sont consignés avec leur décision et leur nouvelle vérification.
 
+<a id="e55-audit-20261113"></a>
+## 6. Complément de recette après audit du 13 novembre 2026
+
+Les scénarios ci-dessous constituent le protocole après correction. Les
+résultats réellement obtenus sont dans le
+[bilan d'implémentation](suivi-implementation.md#e55-audit-20261113-implementation),
+séparés de l'audit initial. Une preuve locale ne coche pas les conditions
+d'ouverture sur cible de la [conception](conception-technique.md#e55-audit-20261113).
+
+| Critères | Scénario discriminant et résultat attendu |
+| --- | --- |
+| A01 | IndexedDB refusé avant inscription puis écriture refusée après succès : inscription serveur unique et accès temporaire au jeu possibles, état du carnet exact. Réponse perdue/deux onglets/doublon/lien expiré : même intention ou récupération, aucune deuxième place. Non-régression des autres moteurs et du protocole E74. |
+| A02 | Décision ERP traitée, réponse perdue, reçu confirmé, nouvelle estimation : deuxième décision envoyée et confirmée une seule fois. Reçu absent/étranger/refusé, session changée : aucune libération incorrecte ni renvoi automatique. |
+| A03 | Modifier thème dans Animation et brief de révision ERP ; actualiser, changer de demande, paginer, quitter : conservation ou abandon explicite. Conflit/version et réponse tardive d'un autre contexte ne remplacent pas la saisie. |
+| A04 | Même IP et UUID renouvelés, puis origines multiples et NAT partagé : cardinalité bornée, seuils atomiques, accès légitimes possibles, aucune fuite d'existence. Purge, saturation et retour à la normale vérifiés avec budgets préalables. |
+| A05 | N = 1 000 puis 10N = 10 000 participations : mêmes pages, filtres, métriques et retrait ; nombre de requêtes/hydratations, mémoire, p95/p99, débit, pool et verrous relevés. Gel exact sous scans/corrections concurrents ; pas de mémoire proportionnelle à une liste complète ni gel partiel visible. |
+| A06/A08/OPT-01 | Quota en erreur avec préparation disponible ; invitations en erreur puis succès/vide ; droits retirés : seules les actions dépendantes bloquent, pas de faux zéro ni erreur persistante. Acteur attendu, délai conditionnel et prochaine action compréhensibles. |
+| A07/OPT-03 | Demande recherchée hors première page et hors périmètre ; q absent, invalide, ancien/nouveau curseur, filtre modifié et réponses inversées. Seuls les résultats autorisés sont accessibles ; première page d'invitations sans collecte complète, sélection/destinataires exacts. |
+| A09 | À 320×844, 390×844 et 1280×900, état initial avec tirage indisponible puis lecture retardée : action principale visible, focusable et réellement touchable/cliquable. Hit-test ou clic réel prouve l'absence de recouvrement par la barre basse. |
+| A10 | Ancienne chasse sans métadonnées, chasse enrichie, brief modifié non publié, étapes neutralisées et autre moteur : informations publiques exactes, valeurs absentes non inventées, référence publiée distincte de la progression personnelle, aucun lieu futur divulgué. |
+| A11/A13/A14 | Association avec doublon expliquée sans tentative serveur ; déplacement au premier/dernier rang conservant focus et annonce ; réponses/statuts à texte 200 %, clavier/toucher et contraste. Ne pas confondre zoom global et agrandissement de texte. |
+| A12 | Réaligner UoW/ports, fixtures contact public et attentes UI puis rejouer préparer → accords → publier → inscrire → cinq activités → attester → neutraliser/corriger → geler/tirer → conserver. Garder les refus, idempotence et confidentialité ; pas d'assertion supprimée pour obtenir du vert. |
+| OPT-02/04/05/06 | Décision sur aperçu des accords ; mesures médias/bundle et première action à froid/chaud, temps ERP/allers-retours avant-après. Le résultat de l'étude, même sans optimisation de code retenue, doit être motivé et traçable. |
+
+La capacité vise la Chasse et ses lectures effectives ; le banc E74 Tombola
+ne la remplace pas. La conception fixe les budgets initiaux p95/p99/RSS et
+la charge de référence ; renseigner avant campagne matériel, versions, volumes,
+concurrence réelle, politique du limiteur et point de saturation selon E59 ;
+enregistrer résultats et échecs, sans augmenter les seuils après observation
+pour masquer une régression.
+
+Cas supplémentaires requis par la spécification détaillée ; leur couverture
+effective et les non-exécutions sont distinguées dans le bilan :
+
+- **A01/A02 :** jeu temporaire réellement ouvert après échec d'écriture, refus
+  serveur retirant l'accès ; confirmation de reçu suivie d'un GET métier en
+  erreur, réponse 2xx mal formée, 408/429/conflit d'idempotence et validation
+  locale avant envoi. Vérifier ensemble les deux états de commande ERP.
+- **A04 :** transactions concurrentes sur huit processus, comptage global
+  conservé lors d'un refus d'origine, aucun double décompte global après
+  autorisation ; capacités pleines, réutilisation après expiration, purge
+  concurrente et baisse de capacité refusée. Panne PostgreSQL/timeout → 503,
+  origine inconnue unique, IPv6 /64, proxy fiable et NAT de 50 familles.
+- **A05 — lecteurs :** page mixte Chasse exacte et mesures inconnues d'autres
+  moteurs ; filtres Oui/Non avant limite, refus 503 avant exclusion des Chasses
+  non reconstruites. Appels anciens avec synthèse, nouveaux sans synthèse ni
+  COUNT ; masquage des coordonnées, commune unique et refus de curseur périmé.
+  Aucune collecte complète dans Tirage ; Tombola publique et famille validations
+  inchangées. Faire croître aussi le nombre d'animations, pas seulement leurs
+  participants ; contrôler la disparition du LATERAL par animation.
+- **A05 — transitions :** inscription, jeu, attestation, régularisation,
+  correction, retrait, paramètres, gel, gain/remplacement et anonymisation.
+  Comparer domaine/projection/compteurs après commit, y compris refus et rejeu.
+  Reprendre une reconstruction interrompue pendant jeu/retrait, refuser une
+  ancienne version, préserver la provenance gelée et ne recréer aucune identité.
+  Arrêt pendant retrait/gel → rollback complet ; mesurer aussi notifications,
+  en-tête de population et appelants batch, sans liste complète cachée.
+- **A07/A10/OPT-03 :** accents et caractères `%`/`_`/`\`, projection de recherche
+  manquante, plans GIN existants ; scalaires publics de la configuration publiée,
+  types absents/invalides sans valeurs inventées. Page d'invitations isolée,
+  sélection limitée, reçu d'envoi sans parcours exhaustif de l'historique.
+
+Les parcours visuels utilisent une API simulée pour isoler les états, puis
+une recette avec backend réel sur cible explicitement choisie vérifie leurs
+contrats. Un pilote humain Android/iPhone, clavier et familles mesure durée,
+compréhension, QR imprimés/caméra, réseau interrompu, commerce fermé et charge
+d'accueil. La fiche de la section 3 reste obligatoire pour identifier cette
+cible ; aucun ancien constat « non déployé » n'atteste l'état actuel.
+
+- [ ] L1 : continuité vérifiée localement ; protection mesurée en isolation,
+  qualification proxy/NAT et calibrage cible restant à produire.
+- [ ] L2 : parcours vérifiés localement ; résultat des contrats au bilan,
+  vérification du backend et des interfaces déployés restant à produire.
+- [ ] L3 : études consignées, suites et mesures au bilan ; qualification de
+  capacité complète restant à produire.
+- [ ] L4 : critères T6 de cible, pilote, bilan et retests satisfaits.
+
 [Retour au dossier moteur](README.md).

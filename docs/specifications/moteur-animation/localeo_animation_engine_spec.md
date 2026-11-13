@@ -2,6 +2,10 @@
 
 Version documentaire : 1.18 — 19 septembre 2026. Epic 55, statut produit : **En cours** (classement de la roadmap au 18 septembre 2026).
 
+**Complément du 13 novembre 2026 — à implémenter :** l'[évolution issue de l'audit](#e55-audit-20261113)
+précise fiabilité, parcours, accessibilité et capacité. Elle conserve les bilans
+antérieurs et les règles V1 ; ses critères ne constituent pas des preuves de livraison.
+
 **Évolution du 26 septembre 2026 — E55-UX-12 :** les
 [supports suivent leur responsable](conception-technique.md#e55-ux-12--supports-par-responsable-26-septembre-2026).
 Le commerçant reçoit le QR de son étape dans son kit et installe ses supports.
@@ -43,6 +47,7 @@ Le [lot de conception technique V1](conception-technique.md), établi à partir 
 - [14. Conception technique et vérifications restantes](#questions-ouvertes)
 - [15. Recette](#recette)
 - [Annexe A. Exemples JSON](#exemples)
+- [Évolution du 13 novembre 2026 — audit des parcours](#e55-audit-20261113)
 - [Annexe B. Références](#references)
 
 <a id="perimetre"></a>
@@ -2227,6 +2232,149 @@ Les étapes étiquetées observation ou recherche utilisent des QCM, conforméme
 ```
 
 L'exemple pourra alimenter une fixture backend et les prévisualisations d'Animation/Live après adaptation. Les schémas de définition, les schémas de réponse générateur et les gabarits de prompts devront être versionnés séparément : partager un numéro ne les rend pas interchangeables.
+
+<a id="e55-audit-20261113"></a>
+## Évolution du 13 novembre 2026 — audit des parcours
+
+Cette section traduit la demande d'intégrer l'audit Animation/ERP/Live.
+Les critères et priorités restent dans l'[unique backlog E55](../../roadmap/en-cours/epic-55-chasse-tresor-commercante-backlog.md#e55-audit-20261113).
+La [conception](conception-technique.md#e55-audit-20261113) précise les contrats,
+propriétaires et preuves ; le [suivi](suivi-implementation.md#e55-audit-20261113)
+conserve la référence observée. Aucun de ces critères n'est livré par cette
+mise à jour documentaire.
+
+### Organisateur — demande, attente et préparation
+
+**A03/A06.** Une actualisation lit le suivi sans remplacer les champs modifiés
+du brief. L'organisateur distingue état enregistré et saisie en cours. Un
+changement de demande ou une sortie destructive propose conserver/rester ou
+abandonner explicitement ; aucune sauvegarde ou nouvelle demande automatique.
+Une réponse tardive d'un autre contexte ne remplace pas la saisie courante.
+Une erreur du quota n'empêche pas de lire une préparation existante dont les
+propres lectures sont autorisées. Une nouvelle demande exige toujours une
+décision serveur : un quota inconnu n'est pas un quota disponible.
+
+**A08/OPT-01/03.** Une invitation illisible reste « état inconnu », avec réessai,
+sans transformer les compteurs en zéro. Un succès efface l'erreur périmée.
+Le message explique l'effet sur la tâche ; le détail technique reste secondaire,
+sans toast concurrent masquant l'action. La première page est utilisable avant
+les suivantes ; le nombre chargé ne se présente pas comme total des accords.
+La sélection groupée et ses destinataires restent explicites ; « tout » ne
+signifie jamais implicitement tous les commerces hors écran.
+La sélection d'invitations porte sur une page et se réinitialise, avec abandon
+explicite si nécessaire, au changement de page/filtre. Une confirmation d'envoi
+incertaine est recherchée via son reçu ; consulter toutes les invitations
+n'est pas un préalable à l'affichage ou à cette reprise.
+
+Avant confirmation de la demande, rendre lisibles le travail humain Localeo,
+le point de départ du délai existant de cinq jours ouvrés après qualification,
+les suspensions pour complément et la vérification terrain par l'organisateur.
+Pendant l'attente, afficher l'acteur attendu et sa prochaine action depuis le
+suivi serveur existant. Aucune date garantie n'est inventée si le calendrier
+de service est indisponible. La préparation des commerces/POI conserve les
+simplifications E55-UX-11/12, sans réintroduire checklist obligatoire ni double accord.
+
+**OPT-02.** L'aperçu des accords affectés par une édition est une étude distincte.
+Elle doit préciser champs concernés, résultat et durée de validité de l'aperçu,
+coût et comportement si les accords changent entre aperçu et commande. Les
+règles d'invalidation existantes restent autoritaires ; aucun calcul client
+ne remplace leur décision. Son implémentation nécessite cette conception.
+
+### Gestionnaire Localeo — trouver, traiter et reprendre
+
+**A07.** Une recherche dans les demandes couvre le périmètre autorisé complet,
+indépendamment des pages déjà ouvertes. Elle combine les filtres de la file,
+réinitialise sa pagination et conserve les droits serveur. Aucun résultat
+étranger n'est affiché, compté ou révélé par une recherche. Après traitement,
+le retour restaure recherche/filtres et repère de navigation, sans prolonger
+une autorisation périmée ni afficher comme courant un état ancien.
+La recherche de demandes ignore la casse et les accents, regroupe les blancs
+et porte sur le nom/type de l'animation ou l'identifiant exact de la demande.
+Les caractères de recherche restent littéraux ; aucun prompt, email ou contenu
+privé n'entre dans cette recherche. Les bornes et curseurs sont précisés dans
+la conception.
+
+**A02/A03.** La révision du brief dispose de la même protection que la réponse
+IA saisie. Une décision au résultat incertain conserve commande, contexte,
+clé et contenu exacts. Seul un reçu cohérent et autorisé libère cette commande
+et permet une nouvelle décision. Un reçu absent permet uniquement la reprise
+explicite prévue du même acte ; un refus d'accès ou changement de session ne
+débloque pas les écritures par déduction. Une erreur locale avant envoi n'est
+pas présentée comme une décision potentiellement enregistrée. Aucun rejeu
+automatique ni second décompte.
+
+La génération manuelle, la vérification de conformité et la relecture humaine
+restent séparées de l'acceptation et de la publication. Le délai de traitement
+réel et les allers-retours sont mesurés avant de décider une automatisation.
+
+### Habitant — choisir, s'inscrire et jouer
+
+**A01.** Le carnet local est un moyen de continuité, pas l'autorité d'inscription.
+Si sa lecture ou son écriture échoue, un nouvel habitant peut encore suivre le
+parcours serveur autorisé et obtenir/retrouver son accès. L'interface distingue
+inscription confirmée, ajout au carnet réussi/indisponible et récupération.
+Une erreur locale après un succès serveur ne déclenche pas un second POST.
+En cas de résultat réseau incertain, conserver l'intention et utiliser la
+récupération/réconciliation existante ; ne pas créer une nouvelle participation
+pour contourner l'incertitude. Capacité, adulte/règlement, identité, unicité,
+limites et confidentialité restent vérifiés côté backend.
+Après confirmation d'un accès serveur et échec d'enregistrement local,
+« Participer sans enregistrer » ouvre le jeu en mémoire. Quitter ce parcours
+fait perdre cet accès temporaire local ; le lien personnel permet de revenir.
+L'interface ne promet pas de retrouver la participation dans le carnet et ne
+transforme jamais une inscription incertaine en accès de jeu présumé valide.
+
+**A10.** Avant inscription à une chasse, présenter durée estimée, difficulté,
+public visé et nombre d'étapes lorsque la définition publiée les fournit.
+Ces informations aident à apprécier l'effort ; elles ne promettent ni durée
+garantie ni accessibilité terrain non vérifiée. Une valeur absente reste non
+renseignée, jamais zéro, « facile » ou « tout public » par défaut. Le nombre
+décrit le parcours publié de référence ; dans le jeu, l'avis existant de
+parcours adapté et la progression personnelle restent la référence des
+étapes à accomplir. Ni liste/ordre des lieux futurs, ni défis, réponses ou
+consignes privées ne sont transmis. Une simple révision du brief ne modifie
+pas ces informations publiques avant les transitions autorisées.
+
+**A09/A11/A13/A14.** La prochaine action autorisée précède les panneaux
+secondaires, reste cliquable et n'est pas recouverte par la navigation basse,
+même si le tirage est inconnu. Une association un-à-un explique les doublons
+au niveau des champs et permet leur correction au clavier/toucher ; cette
+erreur de formulaire ne compte pas comme mauvaise réponse ouvrant une aide.
+Après remise en ordre, annoncer la position et maintenir le focus sur un
+contrôle utilisable du même élément. Les réponses, statuts et actions suivent
+le texte agrandi à 200 %, selon les [principes Live](../../produit/live/principes-ux.md).
+Revalider les accès sensibles ; aucune présentation locale ne crée preuve,
+qualification, chance ou gain.
+
+### Exploitation, disponibilité et preuves
+
+**A04/A05.** Les requêtes anonymes ne peuvent imposer des écritures persistées
+non bornées en renouvelant un identifiant. La protection de disponibilité
+conserve les refus d'accès sans révéler l'existence d'une participation.
+Les listes ont un coût lié à leur page ; métriques/retrait/gel peuvent traiter
+la population complète avec mémoire bornée et visibilité cohérente. Une
+optimisation ne rend pas un gel partiellement visible et ne change pas les
+conditions de qualification ou les chances.
+Après succès d'un retrait ou d'une correction autorisée, la qualification
+Chasse affichée reflète immédiatement la décision. Un état de reconstruction
+indisponible est annoncé sans masquer des participants. La liste mixte conserve
+les mesures parfois inconnues des autres moteurs et la consultation dédiée
+des tombolas publiques. Un total indisponible ne bloque pas une page prête
+et n'est jamais affiché comme zéro. Le gel et le tirage conservent leurs
+garanties distinctes ; la capacité de l'un ne prouve pas celle de l'autre.
+
+**A12/OPT-04/05/06.** Les preuves historiques sont conservées avec leur date,
+mais la chaîne actuelle est rejouée. Mesurer médias, bundle, première action,
+traitement ERP et usage terrain avant de conclure à un gain. Une absence de
+goulot mesuré peut conclure une étude avec justification ; elle ne dispense
+pas de corriger les défauts reproduits. Les mesures ne collectent ni réponses
+privées, ni accès personnels, ni données enfant.
+
+Conversion, contrats coordonnés, droits des acteurs, conservation et pilote
+restent les critères d'ouverture T6. La validation humaine porte notamment
+sur familles, durée, réseau, QR imprimés, Android/iPhone et charge commerçante.
+Le mode IA V1, les cinq activités, l'absence d'achat obligatoire, les aides,
+les preuves et le gel ne sont pas redéfinis par ce complément.
 
 <a id="references"></a>
 ## Annexe B. Références du socle
