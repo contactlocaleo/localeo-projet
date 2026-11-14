@@ -248,6 +248,22 @@ Cette protection vise l'utilisation normale de la PWA sur un appareil temporaire
 - option silencieuse pour les actualites editoriales, notifications transactionnelles non desactivables uniquement si leur base legale le permet ;
 - les actualites d'animation respectent la categorie configurable `ANIMATION`; une preference desactivee interdit la creation de notification et l'envoi WebPush pour ce type de publication.
 
+#### Annonce d'une nouvelle animation — formulation du 14 novembre 2026
+
+La notification de publication utilise une phrase naturelle et incitative :
+« Association des commerces de la commune de Saint-Aubin vient de publier une
+nouvelle animation “Noël en ville”. Inscrivez-vous pour y participer ! »
+Les noms réels de l'organisation, de la commune et de l'animation remplacent
+ceux de l'exemple, sans préfixe en liste « Organisateur / Commune / Animation ».
+Un nom absent est omis ; une organisation inconnue n'est pas inventée.
+
+Cette présentation est commune au centre de notifications, aux lectures
+historiques et aux nouveaux envois WebPush. Elle conserve la destination,
+l'état lu et les préférences existantes. Elle ne réécrit pas les messages
+archivés et ne renvoie aucune notification déjà remise au téléphone.
+Les messages rédigés par l'organisateur et les autres événements conservent
+leur texte propre.
+
 ### Bibliotheque locale et confiance
 
 - ajout d'un coffret avec son token de consultation depuis la vue detaillee ou le raccourci de l'email, et ajout automatique d'une participation apres inscription ;

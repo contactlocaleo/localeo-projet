@@ -7,6 +7,54 @@ Les accents et formulations des anciennes notes sont normalisés sans changer le
 
 ## Signalement identifié
 
+### Correctif du 14 novembre 2026 — annonce de publication plus humaine
+
+La notification de nouvelle animation présentait une succession de libellés
+« Organisateur », « Commune », « Animation », puis un message générique.
+Cause sur Backend `f67d3d16` : le contexte de lecture partagé était préfixé
+indistinctement à toutes les notifications d'animation, y compris les annonces
+automatiques de publication. La reproduction de la lecture affiche cet ancien
+format avant correction et échoue sur la phrase attendue.
+
+Les annonces `ANIMATION_PUBLICATION` deviennent une phrase avec l'organisation,
+la commune, l'animation et « Inscrivez-vous pour y participer ! ». Les noms
+publics sont chargés une seule fois par page, puis présentés selon l'événement.
+La même formulation couvre l'ancienne API de notifications, le centre unifié
+des messages et le transport WebPush après sa dernière revalidation. Elle
+s'applique aux annonces déjà présentes dans le centre sans réécrire le journal
+ni les renvoyer. Les autres événements et messages rédigés restent inchangés.
+Attendu fonctionnel dans la [spécification Live](../../specifications/epic-42-localeo-live/frontend-pwa.md#annonce-dune-nouvelle-animation--formulation-du-14-novembre-2026).
+
+Vérifications locales :
+
+- **40 tests backend réussis** : présentation, API, union SQL réelle compilée,
+  journal intact, clé source interne absente du DTO, refus d'une autre
+  installation, transport revalidé sur deux abonnements, absence de doublon,
+  budget UTF-8 et autres messages. Commande via le lanceur isolé avec
+  `tests/api/test_localeo_live_notifications_contexte.py`,
+  `tests/application/services/test_presentation_notifications.py`,
+  `tests/application/animation_locale/test_notifications_localeo_live_animation.py`,
+  `tests/application/services/test_diffusion_messages_organisateur.py` et
+  `tests/infrastructure/test_payload_webpush.py`.
+- **724 contrôles backend d'architecture et de couverture réussis**, via
+  `tests/architecture`, `tests/domain/test_domain_dedicated_classes.py` et
+  `tests/application/use_cases/test_use_case_business_test_coverage.py`.
+- **8 scénarios navigateur réussis** : `tests/visual/live-inbox-ux.spec.cjs`,
+  phrase rendue à 320/390/1280 px et texte 200 %, lecture, clavier, liens et
+  états d'erreur. Build isolé et API simulées ; captures mobile et bureau
+  inspectées. Rapport Marketplace
+  `test-results/visual-runs/2026-11-14T20-06-59-108Z-hEiyif`.
+- ESLint du scénario modifié : réussi.
+
+Dépôts affectés : Backend (présentation), Marketplace (recette uniquement) et
+documentation canonique. Contrats publics, permissions, ciblage, préférences,
+schéma, données de démonstration et exploitation : sans impact, puisque seul
+le corps présenté change. Aucune migration, modification de donnée historique,
+notification réelle, recette native sur téléphone ou déploiement manuel.
+
+Versions : Backend `2360920d0849aebcb0a9e1402103a027b7e57974`, recette
+Marketplace `6980e41c9bf4ff013f904e7785542ec709ce2ae8`.
+
 ### ANO-MPL-E77-INSCRIPTION — Échec de vérification après inscription confirmée
 
 Signalé le **14 novembre 2026** dans Localeo Live : l'e-mail de confirmation est
