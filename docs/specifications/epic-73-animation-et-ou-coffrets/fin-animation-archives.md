@@ -15,8 +15,9 @@ La demande remplace les étapes terminales de présentation « Tirage terminé �
   le traitement des tirages et des lots. Ce comportement reste conservé.
 - **Terminer l’animation** est une commande explicite : chaque lot attribué est
   remis ou son dossier est explicitement clôturé ; les unités sans gagnant sont
-  justifiées. Elle passe `CLOTUREE → TERMINEE`, fige la gestion en lecture seule
-  et donne accès au bilan. Une animation terminée reste visible dans Live pour
+  justifiées. Elle passe `CLOTUREE → TERMINEE`, fige la gestion, sous réserve
+  du retrait exceptionnel d'un lot externe décrit ci-dessous, et donne accès
+  au bilan. Une animation terminée reste visible dans Live pour
   les personnes inscrites jusqu’à son archivage.
 - **Archiver l’animation** passe `TERMINEE → ARCHIVEE`. L’animation disparaît des
   vues de découverte et de Mon carnet. Elle reste consultable, avec son bilan,
@@ -69,6 +70,36 @@ ses intentions d'e-mail de gain encore à préparer ou en échec de préparation
 Les e-mails déjà déposés ne sont ni effacés ni retirés. Le motif du dossier
 conserve la décision ; **Terminer** n'annule aucune intention silencieusement.
 
+### Correctif du 14 novembre 2026 — retrait d'un lot externe après clôture du dossier
+
+Précision utilisateur : un gagnant peut venir retirer son **lot externe** après
+la clôture explicite de son dossier, même si l'animation a ensuite été terminée
+ou archivée. Dans **Résultats → Fin et archivage**, y compris depuis
+**Animations → Mes archives**, **Forcer le retrait du lot** permet au
+gestionnaire habilité à modifier l'animation de constater cette remise réelle.
+L'action ne concerne que l'attribution courante, issue d'un tirage confirmé,
+dont le dossier est `CLOTURE`, à l'état `CLOTUREE`, `TERMINEE` ou `ARCHIVEE`.
+Elle n'est proposée ni sur un dossier non clôturé ou déjà remis, ni pour un
+ancien gagnant remplacé, un bon numérique, un coffret ou des lots sans gagnant.
+
+La confirmation identifie le lot et le bénéficiaire, exige un motif de cinq
+à 2 000 caractères et l'attestation de la remise effective. La décision
+`FORCER_RETRAIT` enregistre un événement réel `REMISE_DECLAREE`, daté du serveur
+et attribué à l'acteur courant, puis une preuve de décision à la nouvelle
+version du dossier. L'attribution, le suivi et la version Animation sont
+enregistrés dans la même transaction, sous les verrous existants. Un refus
+antérieur reste dans l'historique ; le constat de remise n'efface aucun fait.
+
+Le dossier et Mes lots deviennent **Remis**, et le bilan compte cette remise.
+L'animation garde son état terminal et ses dates ; aucun jeu, tirage, accès
+QR/PIN ou bon révoqué n'est rouvert. Aucun nouvel e-mail n'est préparé. La
+clôture précédente reste conservée, ainsi que son motif. Même clé : même reçu,
+sans second événement ; version périmée ou nouvelle demande après remise :
+refus sans écriture partielle. Les autres commandes de gestion restent gelées.
+Aucune migration ni réparation automatique des anciens dossiers n'est requise.
+Les versions, preuves et limites figurent dans le
+[registre d'anomalies Animation](../../roadmap/anomalies/animation.md#correctif-du-14-novembre-2026--retirer-un-lot-externe-après-clôture-du-dossier).
+
 ## Lecture seule, accès et concurrence
 
 Après `TERMINEE` ou `ARCHIVEE`, les commandes de gestion de cette animation
@@ -78,6 +109,10 @@ modifications d’exploitation. Les lectures, reçus idempotents et bilan resten
 accessibles avec leurs contrôles habituels. La commande distincte d’archivage
 reste permise depuis `TERMINEE`. Créer une nouvelle édition produit une nouvelle
 animation ; cela ne modifie pas celle qui est figée.
+
+Seule la décision versionnée `FORCER_RETRAIT` décrite ci-dessus fait exception
+pour un lot externe explicitement clôturé. Elle ne rend pas disponibles les
+commandes ordinaires de suivi ou de correction d'une remise après archivage.
 
 L'exception existante de retrait des coordonnées du contact public est
 conservée pour `TERMINEE` et `ARCHIVEE` : dépublication ou effacement seulement,
@@ -131,8 +166,8 @@ la dernière décision applicable à cette version. Les références et versions
 sont pas reconstruites par l’interface. Le bénéficiaire est une présentation
 nom/prénom privée ; aucun e-mail, QR, PIN ou lien personnel n’est ajouté.
 
-Les décisions sont `ATTESTER_REMISE`, `CLOTURER_DOSSIER` et
-`JUSTIFIER_NON_ATTRIBUES`. Les capacités sont produites après vérification des
+Les décisions sont `ATTESTER_REMISE`, `CLOTURER_DOSSIER`,
+`JUSTIFIER_NON_ATTRIBUES` et `FORCER_RETRAIT`. Les capacités sont produites après vérification des
 droits, dont `animation:tirer` pour une clôture de bon numérique. L’attestation
 Coffret exige une instance effectivement créée et un gain `ENVOYE` ; ce fait ne
 remplace pas l’attestation. Le total Coffrets vient des quantités de la
@@ -171,7 +206,7 @@ identités restent distinctes ; l’archivage ne purge aucun de ces registres.
 | FA-01 | Clôturer conserve la population figée et permet encore de traiter les lots | Régressions domaine/application de clôture et tirage |
 | FA-02 | Un seul dossier non résolu, un tirage en attente ou des unités non justifiées bloquent Terminer | Domaine pur, orchestration et API pour chaque nature, zéro lot et remplacements |
 | FA-03 | Attestation et clôture sont explicites, motivées, auditées et refusées hors droits/tenant/version | Tests HTTP/PG, rollback clôture/révocation et rejeu |
-| FA-04 | Fin confirmée : statut TERMINEE, bilan lisible et mutations refusées sur API, ERP et workers | Matrice des entrées, concurrence PostgreSQL et garde de domaine |
+| FA-04 | Fin confirmée : statut TERMINEE, bilan lisible et mutations refusées sur API, ERP et workers, sauf constat versionné du retrait réel d'un lot externe explicitement clôturé | Matrice des entrées, concurrence PostgreSQL et garde de domaine ; exception du 14 novembre, idempotence et refus des autres natures |
 | FA-05 | Archiver exige TERMINEE, retire l’animation de Live et conserve les lots/droits acquis | Contrats catalogue/tableau privé, Mes lots et régressions Coffrets/Pro |
 | FA-06 | Mes archives ouvre une liste paginée et les fiches/bilans en lecture seule ; les archives sont exclues du Tableau de bord et de tous ses agrégats/alertes, même avec un filtre direct | Recette Animation PC/mobile, erreurs, liens directs et clavier ; tests de projection dashboard |
 | FA-07 | Timeline à six étapes, prochaine action concrète et compteurs de blocage visibles | Contrat workflow et recette de chaque état, sans progression inventée |

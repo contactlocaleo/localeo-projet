@@ -1,5 +1,87 @@
 # Registre des anomalies
 
+## Correctif du 14 novembre 2026 — retirer un lot externe après clôture du dossier
+
+L'utilisateur a clôturé un dossier de lot pour terminer puis archiver son
+animation ; le gagnant ne pouvait plus retirer ce lot. Nature confirmée :
+**lot externe**, remis directement. Version distante non établie ; bases
+locales Backend `c0c4ea08`, Animation `e502b21`. Le domaine et l'application
+refusaient toute décision sur un dossier résolu ou une animation terminale ;
+l'interface masquait également toutes les actions du serveur après la fin.
+
+La [précision fonctionnelle](../../specifications/epic-73-animation-et-ou-coffrets/fin-animation-archives.md#correctif-du-14-novembre-2026--retrait-dun-lot-externe-après-clôture-du-dossier)
+autorise **Forcer le retrait du lot** pour une attribution externe courante
+dont le dossier est explicitement clôturé. Même commande de décision, avec
+version Animation, empreinte du dossier, motif, confirmation, habilitations et
+clé d'idempotence. La transaction inscrit la vraie remise, son acteur et sa
+date, puis la nouvelle preuve. La clôture et un éventuel refus antérieur
+restent historiques. Le dossier, Mes lots et le bilan reflètent la remise ;
+le statut de l'animation reste inchangé. Aucun nouveau message, attribution,
+réactivation de bon ou dégel des autres commandes.
+
+Périmètres : Backend (domaine, orchestration, contrat) ; Animation (commande,
+confirmation et retours) ; documentation canonique. Contrat E41 et copie
+consommée Animation régénérés ; vue E42 actualisée pour ses composants
+partagés. Le lecteur Live de Mes lots et le bilan utilisent déjà le fait de
+remise : aucun changement de code de leurs consommateurs. Bons numériques,
+Coffrets, unités sans gagnant et attributions remplacées exclus. Persistance
+existante réutilisée : aucune migration ni donnée de démonstration nouvelle.
+La nouvelle version du dossier permet de conserver les deux décisions sans
+modifier l'unicité des preuves. Aucune base distante ni lot réel modifié.
+
+**Preuves.** Reproduction navigateur rouge sur l'ancienne interface : l'action
+proposée par le serveur est masquée après archivage. Reproduction PostgreSQL
+avec le producteur de la version Backend de base, chargé dans un processus
+isolé : après clôture puis fin et archivage, l'action attendue est absente
+(`[]`). Rapport `localeo-backend/tmp/retrait-lot-pg-20261114T214323Z/baseline-rouge.log`.
+
+- **724 contrôles d'architecture et de couverture réussis**, rapport Backend
+  `tmp/retrait-lot-architecture.xml` ; **3 tests unitaires de démonstration de
+  fin réussis**, `tmp/retrait-lot-demo.xml`.
+- **73 tests ciblés domaine, application, API et génération de contrats
+  réussis**, rapport Backend `tmp/retrait-lot-regressions.xml` : trois états
+  autorisés, autres natures et décisions terminales refusées, ancien gagnant,
+  double remise, versions, motif/confirmation et transport inchangé du reçu.
+- **32 tests PostgreSQL réussis, sans skip**, via le lanceur isolé sur un
+  cluster local jetable : `tests/security/test_fin_animation_postgres.py` et
+  `tests/security/test_productivite_fin_public_postgres.py`. Clôture puis
+  retrait aux trois états, ancien refus conservé, vraie remise dans Mes lots
+  et le bilan, reçu idempotent, autres natures/droits/tenants refusés,
+  rollback après remise avant décision, deux commandes concurrentes de même
+  clé ou de clés distinctes, aucun second événement, et correction ordinaire
+  toujours gelée. Rapport Backend
+  `tmp/retrait-lot-pg-20261114T214323Z/suite-finale.log`. Tests sur les
+  métadonnées existantes ; aucune nouvelle migration ni preuve de reprise
+  après crash revendiquée.
+- **38 scénarios navigateur réussis** à 320/1280 px : retrait aux trois états,
+  motif et confirmation, abandon sans écriture, remise persistante après
+  actualisation, autres natures/actions absentes, refus et reçus après réponse
+  perdue. API synthétique ; rapport et captures Animation
+  `tmp/fin-animation-captures-ta1dNJ/`. Confirmations mobile et bureau inspectées.
+  Les anciennes fixtures Archives et prochaine action ont été alignées sur
+  les contrats déjà consommés avant le correctif, avec pagination et retour
+  vérifiés ; leurs premiers échecs ne sont pas présentés comme des succès.
+- **16 tests Node ciblés réussis**, types TypeScript, lint ciblé et build
+  complet isolé réussis. Aucun fichier de configuration opérateur chargé.
+- Revue indépendante du domaine, des droits, des verrous, de la transaction
+  et de l'idempotence : aucun défaut bloquant identifié.
+- Contrôles documentaires `check_guidance.py`,
+  `sync_documentation.py --check-sources` et `git diff --check` réussis.
+
+**Limite distincte prouvée.** Les deux contrôles généraux de
+`tests/api/test_animation_locale_openapi_responses.py` sur la présence d'un
+`response_model` échouent sur quatre routes de reçus Juste Prix inchangées.
+Même résultat sur le worktree de comparaison Backend `c0c4ea08`, sans le
+correctif : **2 échecs**, rapport `tmp/retrait-lot-openapi-baseline.xml`.
+La passe élargie sur l'arbre corrigé compte **75 succès et ces 2 échecs**,
+rapport `tmp/retrait-lot-cible.xml`. Aucun contrôle ignoré ni assertion
+affaiblie pour les masquer. Cette comparaison précède les derniers cas
+supplémentaires de refus de dégel des autres décisions.
+
+Versions du correctif : Backend `0c0c4028`, Animation `8afc492`. La publication
+Git ne prouve pas le déploiement ; le retrait du lot réel reste une décision
+explicite du gestionnaire après sa remise effective.
+
 ## Correction du 14 novembre 2026 — actualiser chaque bloc de gestion
 
 - **Attendu / observé** : l’utilisateur demande un bouton à droite du titre de
