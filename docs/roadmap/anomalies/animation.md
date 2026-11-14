@@ -1,5 +1,82 @@
 # Registre des anomalies
 
+## Correction du 14 novembre 2026 — actualiser chaque bloc de gestion
+
+- **Attendu / observé** : l’utilisateur demande un bouton à droite du titre de
+  chaque bloc visible, et confirme cette portée (informations, règles, produits,
+  etc.), plutôt qu’une actualisation globale de rubrique. Version distante non
+  précisée ; base locale Animation `818f2b0`. Les lecteurs existants présentent
+  des actions disparates, parfois en bas de page ou seulement après une erreur.
+- **Correction** : contrôle commun **Actualiser**, nom accessible du bloc,
+  emplacement auprès du titre et état de chargement. Les lecteurs de préparation,
+  configuration, invitations, terrain, participants, validations, Live,
+  publication, communication, actualités, flyer, diffusion, tirage, gains, fin,
+  bilan et audit réutilisent leurs lectures existantes. Les sous-blocs autonomes
+  disposent de leur action ; les champs et aperçus contrôlés suivent leur bloc.
+  Les informations/règles/missions partagent le GET du détail et les exports
+  sans état propre relisent le bilan, sans téléchargement automatique.
+- **Garde de saisie** : pas de rechargement de page ou remontage de formulaire.
+  Curseurs/filtres/pages conservés, notamment sur la tombola publique et les
+  listes de lots. Relecture destructive bloquée pendant brouillon, confirmation
+  ou opération protégée, avec aide et abandon explicite lorsqu’il est utile.
+  Les actions de reçu restent distinctes. L’actualisation manuelle du Juste Prix
+  ne relance pas sa continuation de clôture. Le bilan reste monté pendant la
+  lecture ; une mise à jour d’un autre bloc ne réinitialise pas la dotation.
+- **Revue et refus** : revue indépendante des lecteurs et du diff. Corrigés
+  avant livraison : quota restant en chargement après refus concurrent, erreur
+  silencieuse du Résumé, date annoncée restée dans le champ après changement
+  distant sans brouillon, anciennes données/droits conservés par la dotation et
+  la liste d’actualités après refus. Les générations de lecture et les purges de
+  contexte empêchent de réafficher un ancien périmètre.
+- **Preuves** : **331 tests Node réussis**, aucun skip (`pnpm test`),
+  `pnpm typecheck`, `pnpm lint` et build complet isolé réussis. Build via
+  `ANIMATION_TEST_DIST=tmp/generation-browser-dist node scripts/build-generation-tests.mjs`,
+  sans configuration opérateur ; avertissement de chunk supérieur à 500 ko.
+  La recette nouvelle `node tests/browser/section-refresh.mjs` passe aux quatre
+  formats 320/390/1280 px et 1280 px avec police effectivement agrandie à 200 % :
+  GET du bon bloc, absence de relecture voisine, saisies conservées, refus 403 de
+  dotation purgé et reprise après 503, aucune écriture. Captures inspectées dans
+  `localeo-animation/tmp/section-refresh-report-NfugTE/`.
+
+  Recettes de régression réussies : navigation de préparation (7 cas), cycle de
+  vie (26), propositions Juste Prix (6), génération (90 contrôles), chasse
+  (296 contrôles), préparation accompagnée (18 cas / 234 contrôles), suivi terrain
+  à 1280/390 px. La tombola publique passe à 1280/390/320 px ; paramètres,
+  exploitation complète et métriques passent à 1280/390 px ; suivi du tirage
+  (11 cas) vérifie notamment zéro GET/POST pendant une confirmation protégée.
+  Dotation : 18 cas ciblés / 183 contrôles, dont relecture de la ligne modifiée
+  sur la page courante, aucun appel externe.
+
+  Communication : 11 cas, contact public : 15, bilan : 8 formats et fin : 14 cas
+  ciblés (archives et lecture seule de fin non rejouées). Deux nouvelles recettes
+  complètent ces contrôles : `section-refresh-communication.mjs` (14 cas,
+  date distante, brouillon conservé, purges 401/403/404 et contexte invalidé) et
+  `section-refresh-juste-prix.mjs` (4 cas à 390/1280 px : deux actualisations et
+  35 secondes simulées sans POST, puis reprise uniquement par l’action distincte
+  prévue). API et fournisseurs simulés ; aucune opération réelle.
+
+  Les sélecteurs de tests suivent désormais le nom accessible du bloc.
+  Des fixtures antérieures au code déjà présent dans HEAD ont été réalignées
+  avec preuve des sources : recommandation serveur, validations globales,
+  navigation chasse et création, reçu absent au niveau racine. Les assertions
+  de motif, version, même clé/même corps et absence de renvoi restent vérifiées.
+  La fixture de lots reflète aussi la ligne mutée lors du GET suivant, puisque
+  l’interface conserve désormais son curseur après l’enregistrement.
+  Rapports complémentaires dans `localeo-animation/tmp/refresh-pilotage-validation/`,
+  `section-refresh-communication-3vNyly/`, `section-refresh-juste-prix-WDbhfE/`
+  et `fin-animation-captures-fFINlD/`.
+- **Impacts** : présentation Animation, tests et documentation canonique
+  [E73 / AP-03, AP-07 et AP-12](../../specifications/epic-73-animation-et-ou-coffrets/ux-productivite-organisateur.md).
+  Aucun changement de règle métier, permission serveur, contrat API,
+  consommateur voisin, schéma, migration, batch, configuration d’exploitation ou
+  générateur de démonstration : les actions relisent les contrats existants.
+  Aucune base TEST modifiée, aucune opération réelle ni déploiement effectué.
+  Recette distante TEST et téléphone physique restant à vérifier.
+  Correctif Animation versionné dans
+  `e502b21c22f2f38e8cf3a9b53b0d0e6a991f7e68`. Le push ne prouve pas la
+  réussite du déploiement automatique.
+
+
 ## Correction du 14 novembre 2026 — confirmation de saisie transparente
 
 - **Attendu / observé** : la confirmation « Des modifications ne sont pas

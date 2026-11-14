@@ -78,6 +78,25 @@ consigne les preuves et ressources ; le présent document reste canonique.
 | AP-02 | L’accueil distingue **À traiter** des **Animations en cours et à venir**. La première section ne contient que les animations ayant une intervention recommandée et autorisée : préparation/publication requise, clôture arrivée à échéance, tirage requis et disponible, dossier de fin à résoudre ou fin prête. Ni consultation seule, ni animation archivée, ni action interdite. Une animation terminée consultable n’est pas une urgence d’archivage. Motif visible, ordre et pagination définis au contrat. Si rien n’est à traiter, afficher **Aucune action en attente** et conserver l’accès au suivi. |
 | AP-07 | Sur contexte, abonnement, modèles, dashboard et fiches, distinguer chargement, données confirmées vides, refus et erreur. Réessayer ne relit que le bloc concerné, garde filtres/saisie et n’exécute aucune commande. Abonnement non lu reste **Statut indisponible**, jamais **Inactif** par défaut. Erreur de catalogue propose une reprise, pas **Aucun modèle actif**. Pendant chargement initial, emplacement stable et annonce accessible ; pendant relecture, données explicitement en cours d’actualisation, commandes dépendantes désactivées. |
 
+Actualisation des blocs — correctif du 14 novembre 2026 : chaque bloc de
+lecture de la fiche d’animation propose **Actualiser** à droite de son titre,
+avec un nom accessible précisant le bloc. Sur petit écran, l’action peut passer
+à la ligne et reste alignée à droite. Elle relit les données du bloc, sans
+recharger la page ni lancer une commande métier. Les filtres, curseurs, pages,
+sélections et brouillons sont conservés. Les informations, règles et missions
+partagent la lecture du détail serveur ; cette lecture commune reste bloquée
+si elle peut remplacer une saisie protégée ailleurs dans la configuration.
+
+Une relecture qui remplacerait une saisie ou une confirmation est désactivée
+avec une explication jusqu’à enregistrement ou abandon explicite. Les lecteurs
+qui savent conserver le brouillon peuvent rester disponibles. Les commandes en
+cours ou incertaines gardent leur propre parcours de vérification du reçu ;
+Actualiser ne vaut ni confirmation ni autorisation de renvoi. Le chargement,
+l’erreur et le refus d’accès restent visibles ; un refus purge les données et
+commandes devenues interdites. Les champs, aperçus et cartes purement dérivés
+s’actualisent avec le bloc dont ils dépendent. Les exports sans lecteur d’état
+propre relisent les données de leur bilan sans lancer un téléchargement.
+
 ### L2 — Continuité et saisies
 
 | ID | Déclencheur, résultat observable et refus |
