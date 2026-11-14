@@ -160,11 +160,48 @@ applicable. Correction enregistrée dans le commit Commerçant `7e6b008`, à la
 demande de l'utilisateur. **Déploiement et rejeu sur TEST restant à vérifier** ;
 aucune acceptation métier effectuée sur TEST.
 
+## Correction du 14 novembre 2026 — lecture durable des notifications Animation (ANO-COM-02)
+
+Le signalement « Marquer comme lue » concerne Localeo Pro, confirmé par
+l’utilisateur. Sur la base Commerçant `bc7f305`, l’action masquait localement
+le bouton mais, au rechargement, la notification revenait « À lire ».
+Le consommateur ne lisait que `lue`, alors que le contrat serveur et l’OpenAPI
+embarqué exposent `lue_at`. Le backend enregistre cette date et la renvoie à la
+lecture ; la projection Pro la transformait systématiquement en état non lu.
+Le même écart affectait la relecture après « Tout marquer comme lu ».
+
+Le normaliseur utilise désormais une date `lue_at` valide pour afficher « Lue »
+et conserve « À lire » pour `null` ou une date invalide. Le booléen historique
+`lue` reste accepté uniquement si `lue_at` est absent. Les filtres et compteurs
+utilisent cet état serveur ; aucune donnée de lecture n’est ajoutée au stockage
+du navigateur. Les commandes, autorisations, transactions et invalidations du
+cache restent identiques.
+
+Preuves : les tests ajoutés échouent avant correction sur les dates de lecture
+et les deux parcours navigateur reproduisent le retour à « À lire » après
+actualisation. Après correction, **92 tests Vitest ciblés** réussissent
+(`contracts`, `queries`, `queriesSubscribers`, `AnimationPages`, contrat API
+embarqué) et **2 parcours Playwright** réussissent à 390/1280 px, avec le vrai
+composant et une API simulée n’envoyant que `lue_at`. Ces parcours vérifient la
+lecture individuelle, la lecture en lot puis l’actualisation, les compteurs et
+l’absence de renvoi automatique de commande. Build navigateur isolé réussi ;
+capture mobile inspectée. Commande navigateur :
+`npm run test:e2e -- tests/e2e/notification-read-persistence.spec.js --workers=1`.
+
+Périmètre : `localeo-commercant` et documentation canonique. Producteur backend,
+contrat API, schéma, migration et générateur de démonstration : sans impact,
+car il s’agit de consommer correctement le champ existant. Les notifications
+de validation par PIN et la cloche de Localeo Animation ne sont pas modifiées.
+Aucune réparation de données ni opération métier sur TEST exécutée.
+Correctif Commerçant versionné dans `65600b8defad6482154baa9a9cb63ab33157c985`.
+Le push Git ne prouve pas la réussite du déploiement automatique ; recette
+sur l’environnement TEST restant à vérifier.
+
 ## ALL
 | Identifiant | Périmètre | Description | Suivi |
 | --- | --- | --- | --- |
 | ANO-COM-01 | Invitation |sur la vue liste des demandes d'invitation, la commune et la date sont marqués "Non renseignés" alors qu'ils le sont das la backoffice| A corriger |
-| ANO-COM-02 | Notification |la fonctionnalité "Marquer tout lu" ne fonctionne pas , l'état n'est pas persisté| A corriger |
+| ANO-COM-02 | Notification |la fonctionnalité "Marquer tout lu" ne fonctionne pas , l'état n'est pas persisté| Corrigé et vérifié localement le 14 novembre 2026 ; déploiement à vérifier |
 | ANO-COM-03 | Notification |Le descrptif de la notification comporte des erreurs d'accent notament sur la description de la misttion | A corriger |
 
 ## Correction du 29 septembre 2026 — icônes PWA

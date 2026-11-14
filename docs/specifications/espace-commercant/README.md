@@ -350,9 +350,18 @@ si le parcours ne comporte aucun lieu public.
 - `POST /protected/animation-locale/commercants/me/demandes-participation/{id}/retirer`
 - `GET /protected/animation-locale/commercants/me/animations/{id}/flyer`
 - `GET /protected/animation-locale/commercants/me/animations/{id}/flyer/download`
+- `GET /protected/animation-locale/commercants/me/notifications`
+- `POST /protected/animation-locale/commercants/me/notifications/{id}/lire`
+- `POST /protected/animation-locale/commercants/me/notifications/lire-tout`
 - `DELETE /protected/animation-locale/commercants/me/notifications/{id}`
 
 L'accueil expose en permanence un accès aux invitations Animation et met en avant les demandes en attente dans la zone « À traiter ». L'espace Animation possède une navigation commune entre invitations, animations acceptées et notifications. Une date limite fournie sans heure reste valide jusqu'à la fin de la journée locale concernée. Les notifications Animation peuvent être supprimées individuellement afin de maîtriser leur accumulation.
+
+L’état de lecture vient du champ serveur `lue_at` : une date renseignée signifie
+« Lue », `null` signifie « À lire ». Cet état est relu après actualisation et
+reste applicable aux filtres et compteurs, pour une lecture individuelle comme
+pour « Tout marquer comme lu ». Le booléen historique `lue` reste accepté par le
+client uniquement si `lue_at` est absent de la réponse.
 
 La liste `/animations/invitations` affiche la commune, l'organisateur, les dates de l'animation, la date de réception (« Reçue le », issue de `premier_envoi_at`) et la date limite de réponse, y compris dans l'historique. Une relance ne remplace pas la date de réception initiale. La réponse paginée fournit un résumé `animation` (`id`, `nom`, `commune`, `date_debut`, `date_fin`) et `organisateur`, sans charger le détail de chaque invitation. Le nom, les dates et l'organisateur proviennent du contenu présenté lors de l'envoi ; les communes sont chargées en lot côté serveur. Le contenu complet reste réservé au détail autorisé.
 
