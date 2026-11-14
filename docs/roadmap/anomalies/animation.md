@@ -1,5 +1,48 @@
 # Registre des anomalies
 
+## Correction du 14 novembre 2026 — confirmation de saisie transparente
+
+- **Attendu / observé** : la confirmation « Des modifications ne sont pas
+  enregistrées » doit rester lisible avant de quitter une saisie. Version
+  distante non précisée ; reproduction locale sur Animation `074e3c0`.
+  Le dialogue commun `ManagementDialog` ne définissait aucun fond et la garde
+  de navigation n’ajoutait pas de surface intérieure. Le navigateur calculait
+  `rgba(0, 0, 0, 0)` : texte et actions se superposaient au contenu et au voile.
+- **Correction** : fond opaque, couleur de texte issue des mêmes tokens de
+  thème et ombre dans le composant commun ; largeur de lecture et marges
+  adaptées dans la confirmation de navigation. Les dialogues existants qui
+  définissent déjà leur surface conservent leur contenu et leur disposition.
+  Les décisions Continuer / Quitter, le focus, Échap, les gardes de contexte et
+  les résultats incertains restent inchangés. Rattachement à
+  [E73 / AP-03 et AP-11](../../specifications/epic-73-animation-et-ou-coffrets/ux-productivite-organisateur.md).
+- **Preuves locales** : le banc existant
+  `node tests/browser/productivity-primitives.mjs`, complété par le contrôle
+  du rendu opaque et du contraste texte ≥ 4,5, échoue avant correction sur
+  l’alpha nul. Il passe après correction à 1440, 390 et 320 px, puis à 320 px
+  avec texte à 200 %. Captures avant/après inspectées ; clavier, retour du
+  focus, Échap, Retour/Avancer et blocage d’une commande incertaine vérifiés.
+  Les composants réels sont compilés avec un contenu synthétique, sans API
+  métier ni configuration opérateur. Captures sous
+  `localeo-animation/tmp/productivity-primitives-dist/` ; capture initiale
+  conservée dans `localeo-animation/tmp/journey-dialog-before.png`.
+  Le test `node --test tests/navigation-command-guard.test.mjs` réussit
+  (1 test, aucun skip), ainsi que `pnpm typecheck` et `pnpm lint`.
+  Le build complet isolé réussit via `scripts/build-generation-tests.mjs`
+  avec `ANIMATION_TEST_DIST=tmp/journey-dialog-app-dist` ; avertissement de
+  taille de chunk supérieur à 500 ko. Le banc adjacent
+  `node tests/browser/notification-overlay.mjs` passe sur ordinateur et mobile :
+  les messages restent au-dessus du dialogue et leur fermeture est cliquable.
+- **Impacts et limites** : présentation Animation et suivi canonique uniquement.
+  Aucun changement de règle métier, permission, contrat API, consommateur voisin,
+  schéma, migration, batch, configuration d’exploitation ou générateur de
+  démonstration : la correction porte sur la surface visuelle d’un composant
+  existant. Aucun accès ni changement de données TEST, aucune opération métier
+  réelle et aucun déploiement effectué. Recette sur TEST et sur téléphone
+  physique restant à vérifier. Correctif Animation versionné
+  dans `818f2b0a94e5c5fb9173b8e9b1a7a4a6388c327a`. Le push Git ne prouve pas
+  la réussite du déploiement automatique.
+
+
 ## Correction du 12 novembre 2026 — erreur interne des liens et QR sur TEST
 
 - **Attendu / observé** : un gestionnaire autorisé ouvre **Communiquer → Liens
