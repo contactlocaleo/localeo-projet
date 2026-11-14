@@ -232,25 +232,54 @@ Le bloc de détail prestation dans la vue reversements a été retiré de cette 
 ### État de la fonctionnalité
 Le parcours est implémenté : choix d'un motif fourni par l'API, saisie d'un message et envoi au support avec contexte commerçant authentifié. La confirmation n'est affichée qu'après succès serveur.
 
-## 3.8 Live tracking achats / WebPush
+## 3.8 Notifications du téléphone / WebPush et alertes d’achat
 
 ### Concept Localeo
-Le WebPush est le canal de notification temps réel de l'application commerçant.
-Il permet à Localeo de prévenir un appareil du commerçant lorsqu'un achat confirmé contient une prestation rattachée à son commerce, même si l'application n'est pas ouverte au premier plan.
+Le WebPush permet de recevoir les alertes du commerce sur un appareil, même si
+Localeo Pro n’est pas ouvert au premier plan. Il couvre notamment les demandes
+et relances de participation aux animations ainsi que les achats de coffrets,
+selon les droits et préférences du compte. Ce canal repose sur l’autorisation
+du navigateur et sur un abonnement propre à chaque appareil.
 
-Ce canal n'est ni un email, ni un SMS.
-Il repose sur l'autorisation de notification donnée par le navigateur et sur un abonnement technique propre à chaque appareil.
+### Accès et activation sur l’appareil
+La page **Réglages** (`/reglages`) est accessible dans le menu principal, dans
+**Plus** sur mobile et dans le menu du compte. La section Notifications du
+profil conserve un lien vers cette page. L’accès concerne les comptes
+principaux autorisés à gérer leur compte, y compris ceux disposant uniquement
+du produit Animation et les accès en préparation ; les salariés n’y accèdent pas.
 
-### Parcours d'activation
-L'activation est disponible dans `Mes informations personnelles`, section `Live tracking achats`.
+L’accueil propose d’activer les notifications lorsqu’elles ne sont pas actives
+sur l’appareil courant. Cette invitation ouvre les réglages : elle ne demande
+aucune autorisation et ne crée aucun abonnement automatiquement. Lorsque les
+notifications sont bloquées, indisponibles ou que leur état est inconnu,
+l’accueil propose plutôt d’ouvrir les réglages pour consulter l’aide.
 
-Le commerçant doit :
-1. activer la préférence de live tracking pour son compte
-2. autoriser les notifications dans le navigateur
-3. abonner l'appareil courant
+Le bouton **Activer les notifications** demande explicitement l’autorisation au
+navigateur puis enregistre l’abonnement auprès du serveur authentifié. L’état
+« Activées sur cet appareil » exige une autorisation accordée, un abonnement
+navigateur et l’abonnement serveur correspondant actif. Une erreur ne produit
+pas de confirmation et ne déclenche aucun renvoi automatique de commande ;
+**Actualiser l’état** permet de vérifier le résultat avant de réessayer.
 
-Si la préférence est active mais que l'appareil courant n'est pas encore abonné, l'interface affiche un message indiquant que le live tracking est actif pour le compte mais pas encore pour cet appareil.
-Un même commerçant peut donc recevoir les notifications sur plusieurs appareils, à condition que chaque appareil soit abonné.
+En cas de refus, la page indique de modifier les autorisations du navigateur
+ou du téléphone puis de revenir actualiser l’état. Sur iPhone ou iPad non
+installé, elle indique d’ajouter Localeo Pro à l’écran d’accueil depuis Safari
+et d’ouvrir l’application installée. Un navigateur incompatible affiche une
+aide sans bouton d’activation impossible. L’état est aussi revérifié au retour
+sur l’application.
+
+**Désactiver sur cet appareil** retire uniquement cet abonnement. Cette action
+ne désactive ni les autres appareils ni la préférence d’achat du compte.
+Plusieurs appareils peuvent être abonnés séparément. La réception effective
+dépend également du navigateur et des réglages du système.
+
+### Alertes d’achat de coffrets
+La préférence **Recevoir les alertes d’achat de coffrets** reste distincte de
+l’abonnement de l’appareil. Elle est proposée aux comptes disposant du produit
+Coffrets, y compris pendant leur préparation. Sa modification est enregistrée
+sur le compte et s’applique à ses appareils abonnés ; elle ne demande pas
+l’autorisation du téléphone et ne crée aucun abonnement. Son absence ne bloque
+pas l’activation des notifications d’animations.
 
 ### Sécurité et données envoyées
 La notification WebPush ne doit pas contenir de données personnelles client ni d'identifiants métier directs comme `achat_id` ou `coffret_id`.

@@ -197,6 +197,68 @@ Correctif Commerçant versionné dans `65600b8defad6482154baa9a9cb63ab33157c985`
 Le push Git ne prouve pas la réussite du déploiement automatique ; recette
 sur l’environnement TEST restant à vérifier.
 
+## Correction du 14 novembre 2026 — accès aux notifications du téléphone
+
+Signalement : les réglages des notifications sont difficiles à trouver dans
+Localeo Pro ; proposer une entrée **Réglages** et une invitation sur l’accueil.
+Version distante non précisée. Reproduction locale sur la base Commerçant
+`65600b8defad6482154baa9a9cb63ab33157c985` : aucun accès Réglages dans les menus,
+commandes enfouies dans le profil et affichées seulement aux comptes disposant
+des fonctions financières. Le backend autorise déjà ces opérations au compte
+principal avec le scope `commercant:profil`, y compris pour Animation seul.
+
+Correction : page `/reglages` accessible depuis la navigation principale,
+**Plus** sur mobile, le menu du compte et le profil. L’accueil propose d’y
+activer les notifications si l’appareil n’est pas abonné ; il oriente vers
+l’aide lorsque l’autorisation est refusée, le navigateur indisponible ou l’état
+inconnu. Aucun dialogue natif ni abonnement sans clic explicite. Les salariés
+restent exclus ; les accès principaux en préparation sont pris en charge.
+L’aide couvre notamment l’installation depuis Safari sur iPhone/iPad.
+
+L’état actif exige l’autorisation navigateur et la correspondance avec un
+abonnement serveur actif. La désactivation cible seulement cet appareil ; la
+préférence d’achat du compte, présentée séparément aux comptes Coffrets, et les
+autres appareils sont préservés. Après une réponse incertaine, le parcours
+propose une vérification, sans fausse confirmation ni renvoi automatique.
+Les réponses d’une ancienne session sont ignorées. La lecture ne reste pas
+en attente indéfinie d’un service worker absent ; l’attente nécessaire à une
+commande est bornée à 15 secondes.
+
+Preuves locales : reproduction Vitest rouge sur l’absence de Réglages avant
+correction, puis **59 tests Vitest réussis dans 8 fichiers** pour les réglages,
+le service WebPush, les droits, les menus, le cadre et les accès en préparation.
+Commande : `npx vitest run --config scripts/audits/vitest-notifications.config.mjs
+--maxWorkers=2 src/features/notifications/NotificationSettings.test.jsx
+src/lib/webPush.test.js src/app/merchantNavigation.test.js
+src/app/MerchantSessionHeader.test.jsx src/features/perimetres/access.test.jsx
+src/app/MobileNavigation.test.jsx src/app/ApplicationFrame.test.jsx
+src/features/onboarding/MerchantPreparation.test.jsx`.
+
+**9 scénarios Playwright réussis** : activation et désactivation à 320, 390 et
+1280 px, texte à 200 %, accès par les trois menus, refus navigateur, navigateur
+incompatible, aide iOS et échec serveur sans renvoi automatique. Le scénario
+existant de lisibilité/accessibilité des écrans métier à 390 px passe aussi,
+notamment sur l’accueil et le profil. Build navigateur isolé réussi ; captures
+mobile, bureau et iOS inspectées. Commande : `npm run test:e2e --
+tests/e2e/notification-settings.spec.js tests/e2e/business-ux.spec.js --grep
+"réglages|l’accueil et les réglages|une inscription|écrans métier accessibles et
+lisibles à 390px" --workers=1`. API et autorisations simulées, clé publique de
+test synthétique ; aucune configuration opérateur chargée par ces contrôles.
+
+Une revue indépendante du producteur a confirmé les droits existants et la
+séparation entre préférence d’achat et abonnement d’appareil. La revue de code
+UX n’a pas relevé de blocage dans le parcours. Périmètre : `localeo-commercant`
+et documentation canonique. Backend, contrats API et consommateurs voisins,
+règles métier, schéma, migrations et générateur de démonstration sans impact :
+le correctif expose les opérations existantes et ne modifie pas leur autorité.
+Aucune nouvelle configuration de déploiement ; les paramètres WebPush existants
+restent requis. Aucun appel réel d’abonnement, envoi de notification, changement
+de données TEST ou déploiement effectué. Réception native sur téléphone physique
+et recette de l’environnement TEST restant à vérifier.
+
+Correctif Commerçant versionné dans `bdc9a54d06182847307574da404753c8b0b79c2d`.
+Le push Git ne prouve pas la réussite du déploiement automatique.
+
 ## ALL
 | Identifiant | Périmètre | Description | Suivi |
 | --- | --- | --- | --- |
