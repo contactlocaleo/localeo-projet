@@ -71,10 +71,14 @@ produits, QR ou commandes. Les reçus historiques et la tombola en attente
 conservent leur parcours distinct.
 
 Preuves et limites dans le [bilan E77](../../specifications/epic-77-juste-prix-local/bilan-realisation.md#correctif-live--conserver-linscription-confirmée-14-novembre-2026).
-**Correctif du parcours vérifié localement** ; la cause technique de la lecture
-privée échouée sur l'environnement signalé n'est pas reproduite. Aucun accès
-personnel distant, nouvelle inscription réelle, réparation de données ou
-déploiement manuel effectué.
+**Correctif du parcours vérifié localement.** Le diagnostic ultérieur de la
+trace TEST établit une politique de limiteur absente : une lecture de contrôle
+était bloquée en 503 avant autorisation. Sa configuration explicite est
+maintenant installée et les purges automatiques réussissent ; détails dans
+l'[anomalie backend](backend.md#ano-live-limiteur-politique-20261114--politique-absente-sur-test).
+Aucun accès personnel distant, nouvelle inscription réelle ni déploiement
+manuel effectué. La réparation de configuration ne remplace pas la recette
+du jeu avec l'accès de l'utilisateur.
 
 ### Correctif du 11 novembre 2026 — reconnaître une inscription dans Découvrir
 

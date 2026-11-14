@@ -365,3 +365,15 @@ de commandes ; aucune garde applicative n'a été affaiblie. La tolérance a
 
 Version du correctif Marketplace/Live :
 `4fd3e7cde757836adc0dfe3b255568690a02838c`.
+
+### Complément TEST — politique de lecture rétablie le 14 novembre 2026
+
+La trace de purge ensuite fournie et la lecture de la base TEST identifient
+une politique de limiteur absente. Un GET de contrôle recevait 503 avant
+autorisation ; après installation explicite de la politique de recette, il
+atteint le refus normal 404 pour son accès synthétique invalide. La purge
+opérateur et trois purges automatiques réussissent. Cette intervention ne
+crée aucune inscription et n'emploie aucun token personnel. Elle établit
+l'indisponibilité de la protection des lectures sur cette cible ; la recette
+du jeu avec l'accès de l'utilisateur reste à effectuer. Cause, valeurs,
+preuves et correctif HTTP dans l'[anomalie backend](../../roadmap/anomalies/backend.md#ano-live-limiteur-politique-20261114--politique-absente-sur-test).

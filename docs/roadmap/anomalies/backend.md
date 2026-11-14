@@ -1,5 +1,66 @@
 # Registre des anomalies
 
+## ANO-LIVE-LIMITEUR-POLITIQUE-20261114 — Politique absente sur TEST
+
+**Signalement et cause démontrée.** La trace Render fournie pour TEST termine
+dans la purge `POST /internal/localeo-live/limitation-lectures/purger`, sur
+`LimitationLecturesLiveIndisponible: Politique de lecture absente`. La lecture
+de la base TEST confirme les tables v317 présentes, mais aucune politique et
+aucun compteur. La cible a été confirmée par l'utilisateur, le marqueur TEST
+de configuration et l'animation publique « Test juste prix local ».
+La migration ne doit volontairement installer aucune politique par défaut.
+Le même prérequis protège les lectures de participation : une requête avec
+identifiant synthétique et bearer invalide recevait `503` avant tout contrôle
+d'accès. Aucun accès personnel utilisateur n'a été employé.
+
+**Intervention TEST réalisée le 14 novembre 2026.** Installation explicite par
+`scripts/database/limitation_lectures_live.py --politique`, puis `--purger`,
+avec la connexion fournie au processus par son mécanisme de configuration.
+Politique de recette version 1 : global **6 000 / 60 s**, origine **600 / 60 s**,
+personnel **60 / 900 s**, capacités **1 024 origines / 4 096 personnels**.
+Ces valeurs viennent de la [recette A04](../../specifications/moteur-animation/conception-technique.md#e55-audit-20261113)
+et concernent cette cible TEST ; elles ne calibrent pas la production.
+La purge opérateur a réussi avec zéro compteur expiré. La requête de contrôle
+identique reçoit ensuite `404 RESSOURCE_INTROUVABLE` : le limiteur fonctionne
+et l'accès invalide reste refusé, sans allocation personnelle. La supervision
+confirme trois purges automatiques `SUCCES` à 21:31, 21:32 et 21:33 UTC, après
+l'`ECHEC` de 21:30 UTC. Rapports privés ignorés par Git dans le backend :
+`tmp/limiteur-live-test-20261114T213049Z-24e0cf8b/`.
+
+**Correctif applicatif.** La frontière HTTP traduit maintenant cette exception
+en `503 LIMITATION_LECTURES_LIVE_INDISPONIBLE`, message constant sans détail
+de stockage, corrélation et `no-store`. Le vrai `BatchRunner` historise toujours
+l'échec et libère le verrou ; une reprise réussie reste une autre exécution.
+Version du correctif testé : backend `c0c4ea08` (base `2360920d`). La nouvelle réponse
+HTTP nécessite la livraison du code ; la réparation de configuration TEST est
+déjà vérifiée indépendamment.
+
+**Preuves locales.** Reproduction rouge avant correction : le test attend 503
+et reçoit 500. Puis **30 tests ciblés réussis**, via le lanceur isolé, sur
+`tests/api/test_limitation_lectures_live_e55.py` et
+`tests/domain/identite_acces/test_limitation_lectures_live_dedicated.py` :
+HTTP 503 sans fuite avec vrai runner et stockage SQLite isolé, historique
+`ECHEC` puis `SUCCES`, verrou libéré, purge bornée, authentification, refus
+429/503 et absence d'allocation personnelle avant autorisation.
+Rapport `tmp/limiteur-live-correctif.xml`. Les **11 tests d'erreurs HTTP du
+moteur réussissent**, rapport `tmp/limiteur-live-erreurs-http.xml`, ainsi que
+les **724 contrôles d'architecture et de couverture**, rapport
+`tmp/limiteur-live-architecture.xml`.
+Revue indépendante en lecture : aucun contournement ni succès masqué identifié.
+Contrôles documentaires `check_guidance.py`, `sync_documentation.py --check-sources`
+et `git diff --check` : réussis.
+
+**Impacts.** Backend et documentation canonique ; correction de configuration
+TEST uniquement, aucun schéma ni migration supplémentaire. Les règles de
+quota restent dans leur politique de domaine, la purge dans son dépôt
+transactionnel, la traduction dans l'adaptateur HTTP. L'enveloppe d'erreur et
+le statut 503 déjà déclarés restent compatibles ; aucun DTO ni consommateur
+embarqué à régénérer. Générateur et fixtures sans impact : aucune donnée
+d'animation ni inscription n'est modifiée. Aucun token réel, e-mail, nouvelle
+inscription ou intervention en production. La consultation du jeu avec
+l'accès personnel de l'utilisateur et le déploiement du code ne sont pas
+vérifiés par ces contrôles. Procédure dans l'[exploitation du moteur](../../specifications/moteur-animation/exploitation-moteur.md#diagnostiquer-une-politique-de-limiteur-absente).
+
 ## ANO-ERP-SESSION-POPIN-20261112 — Reconnexion homogène avec Animation
 
 **Attendu utilisateur** : reprendre dans l’ERP la popin de fin de session de
