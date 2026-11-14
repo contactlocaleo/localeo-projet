@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Live - API backend Epic 42",
     "description": "Vue OpenAPI 3.1 des contrats publics, editoriaux et techniques de Localeo Live.",
-    "version": "1.0.0+d4ca278"
+    "version": "1.0.0+8246ba1"
   },
   "paths": {
     "/public/animation-locale/animations/{animation_id}/contact-public": {
@@ -3171,6 +3171,226 @@
           },
           "429": {
             "description": "Fréquence dépassée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Transaction indisponible, consulter le reçu",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/localeo-live/participations/{participation_id}/juste-prix/produits": {
+      "get": {
+        "tags": [
+          "Moteur de jeu Live"
+        ],
+        "summary": "Produits Juste Prix",
+        "operationId": "produits_juste_prix_public_localeo_live_participations__participation_id__juste_prix_produits_get",
+        "parameters": [
+          {
+            "name": "participation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Participation Id"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2048
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "moteurs_supportes",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 512
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Moteurs Supportes"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageProduitsJustePrixParticipant"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Demande invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentification requise",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Action non autorisée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ressource ou reçu introuvable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Version, aperçu ou état en conflit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Accès expiré",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Document trop volumineux",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Encodage non supporté",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Contenu invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Fréquence de lecture dépassée ; attendre le délai indiqué avant de réessayer.",
+            "headers": {
+              "Retry-After": {
+                "description": "Délai minimal avant une nouvelle lecture, en secondes.",
+                "schema": {
+                  "type": "string",
+                  "pattern": "^[1-9][0-9]*$"
+                }
+              },
+              "Cache-Control": {
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -11744,6 +11964,66 @@
           "detail_url"
         ],
         "title": "AnimationCommercantPayload"
+      },
+      "AnimationConsolePayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "nom": {
+            "type": "string",
+            "title": "Nom"
+          },
+          "organisationNom": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Organisationnom"
+          },
+          "communeNom": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Communenom"
+          },
+          "communeId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Communeid"
+          },
+          "moteur": {
+            "type": "string",
+            "title": "Moteur"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "nom",
+          "organisationNom",
+          "communeNom",
+          "communeId",
+          "moteur",
+          "statut"
+        ],
+        "title": "AnimationConsolePayload"
       },
       "AnimationDetailPayload": {
         "properties": {
@@ -21481,6 +21761,43 @@
         ],
         "title": "CompteursFinAnimationPayload"
       },
+      "CompteursJustePrixPayload": {
+        "properties": {
+          "reponses": {
+            "type": "integer",
+            "title": "Reponses"
+          },
+          "prix_trouves": {
+            "type": "integer",
+            "title": "Prix Trouves"
+          },
+          "commerces_reussis": {
+            "type": "integer",
+            "title": "Commerces Reussis"
+          },
+          "observed_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Observed At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "reponses",
+          "prix_trouves",
+          "commerces_reussis",
+          "observed_at"
+        ],
+        "title": "CompteursJustePrixPayload"
+      },
       "CompteursParticipantsEmailPayload": {
         "properties": {
           "en_attente": {
@@ -23580,6 +23897,28 @@
           "address"
         ],
         "title": "CoordonneesFacturation"
+      },
+      "CorrectionProduitInput": {
+        "properties": {
+          "expectedRevision": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Expectedrevision"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 1,
+            "title": "Motif"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expectedRevision",
+          "motif"
+        ],
+        "title": "CorrectionProduitInput"
       },
       "CorrigerAnimationRequest": {
         "properties": {
@@ -30830,6 +31169,25 @@
         ],
         "title": "EnregistrerDepotManuelRequest"
       },
+      "EnregistrerProduitInput": {
+        "properties": {
+          "expectedRevision": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Expectedrevision"
+          },
+          "produit": {
+            "$ref": "#/components/schemas/ProduitInput"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expectedRevision",
+          "produit"
+        ],
+        "title": "EnregistrerProduitInput"
+      },
       "EnregistrerTemplateGenerationInput": {
         "properties": {
           "nom": {
@@ -34091,6 +34449,49 @@
           "gel"
         ],
         "title": "ExploitationAnimationPayload"
+      },
+      "ExploitationJustePrixPayload": {
+        "properties": {
+          "phase": {
+            "type": "string",
+            "enum": [
+              "OUVERT",
+              "SUSPENDU",
+              "CLOTURE_EN_COURS",
+              "CLOTUREE",
+              "ANNULEE"
+            ],
+            "title": "Phase"
+          },
+          "traites": {
+            "type": "integer",
+            "title": "Traites"
+          },
+          "motif": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motif"
+          },
+          "revision": {
+            "type": "integer",
+            "title": "Revision"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "phase",
+          "traites",
+          "motif",
+          "revision"
+        ],
+        "title": "ExploitationJustePrixPayload"
       },
       "ExportOrganisationPayload": {
         "properties": {
@@ -49348,6 +49749,35 @@
         ],
         "title": "PageAnimationPayload[ValidationAnimationPayload]"
       },
+      "PageAnimationsConsolePayload": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/AnimationConsolePayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "nextCursor"
+        ],
+        "title": "PageAnimationsConsolePayload"
+      },
       "PageAnimationsProductivitePayload": {
         "properties": {
           "items": {
@@ -51400,6 +51830,39 @@
         ],
         "title": "PageParticipants"
       },
+      "PageParticipantsJustePrixPayload": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ParticipantJustePrixPayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "compteurs": {
+            "$ref": "#/components/schemas/CompteursJustePrixPayload"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "compteurs",
+          "next_cursor"
+        ],
+        "title": "PageParticipantsJustePrixPayload"
+      },
       "PagePoiAnimationPayload": {
         "properties": {
           "items": {
@@ -51462,6 +51925,113 @@
           "hasMore"
         ],
         "title": "PagePreneursEngagement"
+      },
+      "PagePreuvesConsolePayload": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/PreuveConsolePayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "page": {
+            "type": "integer",
+            "title": "Page"
+          },
+          "pageSize": {
+            "type": "integer",
+            "title": "Pagesize"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "page",
+          "pageSize",
+          "total"
+        ],
+        "title": "PagePreuvesConsolePayload"
+      },
+      "PageProduitsJustePrixParticipant": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ProduitJustePrixParticipant"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          },
+          "definitionVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Definitionversion"
+          },
+          "progressionVersion": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Progressionversion"
+          },
+          "exploitationRevision": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Exploitationrevision"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "definitionVersion",
+          "progressionVersion",
+          "exploitationRevision"
+        ],
+        "title": "PageProduitsJustePrixParticipant"
+      },
+      "PageProduitsPayload": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/PropositionProduitPayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "next_cursor"
+        ],
+        "title": "PageProduitsPayload"
       },
       "PagePropositionsActualisation": {
         "properties": {
@@ -51709,7 +52279,7 @@
         "properties": {
           "items": {
             "items": {
-              "$ref": "#/components/schemas/RemboursementPayload"
+              "$ref": "#/components/schemas/RemboursementGestionPayload"
             },
             "type": "array",
             "title": "Items"
@@ -54275,6 +54845,57 @@
         ],
         "title": "ParticipantEmailPayload"
       },
+      "ParticipantJustePrixPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "reference": {
+            "type": "string",
+            "title": "Reference"
+          },
+          "nom": {
+            "type": "string",
+            "title": "Nom"
+          },
+          "prenom": {
+            "type": "string",
+            "title": "Prenom"
+          },
+          "inscrit_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Inscrit At"
+          },
+          "eligible": {
+            "type": "boolean",
+            "title": "Eligible"
+          },
+          "progression": {
+            "type": "number",
+            "title": "Progression"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "reference",
+          "nom",
+          "prenom",
+          "inscrit_at",
+          "eligible",
+          "progression",
+          "statut"
+        ],
+        "title": "ParticipantJustePrixPayload"
+      },
       "ParticipantLecture": {
         "properties": {
           "id": {
@@ -54800,6 +55421,9 @@
           "answer": {
             "oneOf": [
               {
+                "$ref": "#/components/schemas/ReponsePrix"
+              },
+              {
                 "$ref": "#/components/schemas/ReponseQcm"
               },
               {
@@ -54817,6 +55441,7 @@
               "propertyName": "type",
               "mapping": {
                 "ASSOCIATION": "#/components/schemas/ReponseAssociation",
+                "MONEY_ESTIMATE": "#/components/schemas/ReponsePrix",
                 "ORDERING": "#/components/schemas/ReponseOrdre",
                 "SINGLE_CHOICE": "#/components/schemas/ReponseQcm",
                 "TEXT_INPUT": "#/components/schemas/ReponseTexte"
@@ -57312,6 +57937,48 @@
         ],
         "title": "PreuveARegulariser"
       },
+      "PreuveConsolePayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "participantNom": {
+            "type": "string",
+            "title": "Participantnom"
+          },
+          "commercantNom": {
+            "type": "string",
+            "title": "Commercantnom"
+          },
+          "etapeId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Etapeid"
+          },
+          "validatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Validatedat"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "participantNom",
+          "commercantNom",
+          "etapeId",
+          "validatedAt",
+          "statut"
+        ],
+        "title": "PreuveConsolePayload"
+      },
       "PreuvePrioritePayload": {
         "properties": {
           "date": {
@@ -57516,6 +58183,172 @@
           "etat"
         ],
         "title": "ProduitCommercantPayload"
+      },
+      "ProduitInput": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 160,
+            "title": "Name",
+            "default": ""
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 2000,
+            "title": "Description",
+            "default": ""
+          },
+          "unit": {
+            "type": "string",
+            "maxLength": 120,
+            "title": "Unit",
+            "default": ""
+          },
+          "referencePriceCents": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 99999999.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Referencepricecents"
+          },
+          "assetId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Assetid"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "ProduitInput"
+      },
+      "ProduitJustePrixParticipant": {
+        "properties": {
+          "stepId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Stepid"
+          },
+          "merchantId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Merchantid"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Name"
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 2000,
+            "title": "Description"
+          },
+          "unit": {
+            "type": "string",
+            "maxLength": 120,
+            "title": "Unit"
+          },
+          "assetId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Assetid"
+          },
+          "imageUrl": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Imageurl"
+          },
+          "amountCents": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 99999999.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Amountcents"
+          },
+          "trouve": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trouve"
+          },
+          "passageValide": {
+            "type": "boolean",
+            "title": "Passagevalide"
+          },
+          "compte": {
+            "type": "boolean",
+            "title": "Compte"
+          },
+          "reponseAutorisee": {
+            "type": "boolean",
+            "title": "Reponseautorisee"
+          },
+          "referencePriceCents": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 99999999.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Referencepricecents"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "stepId",
+          "merchantId",
+          "name",
+          "description",
+          "unit",
+          "passageValide",
+          "compte",
+          "reponseAutorisee"
+        ],
+        "title": "ProduitJustePrixParticipant"
       },
       "ProfilActiviteCommuneDTO": {
         "properties": {
@@ -58350,6 +59183,32 @@
         ],
         "title": "ProgressionCampagneDTO"
       },
+      "ProgressionClotureJustePrixPayload": {
+        "properties": {
+          "phase": {
+            "type": "string",
+            "enum": [
+              "OUVERT",
+              "SUSPENDU",
+              "CLOTURE_EN_COURS",
+              "CLOTUREE",
+              "ANNULEE"
+            ],
+            "title": "Phase"
+          },
+          "traites": {
+            "type": "integer",
+            "title": "Traites"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "phase",
+          "traites"
+        ],
+        "title": "ProgressionClotureJustePrixPayload"
+      },
       "ProgressionExport": {
         "properties": {
           "phase": {
@@ -58676,6 +59535,9 @@
           },
           {
             "$ref": "#/components/schemas/ProjectionParticipantTombolaPublique"
+          },
+          {
+            "$ref": "#/components/schemas/ProjectionParticipantJustePrix"
           }
         ],
         "title": "ProjectionParticipant",
@@ -58683,6 +59545,7 @@
           "propertyName": "type",
           "mapping": {
             "CHASSE_TRESOR_COMMERCANTE": "#/components/schemas/ProjectionParticipantChasse",
+            "JUSTE_PRIX_LOCAL": "#/components/schemas/ProjectionParticipantJustePrix",
             "PASSEPORT_COMMERCANT": "#/components/schemas/ProjectionParticipantPasseport",
             "TOMBOLA_LOCALE": "#/components/schemas/ProjectionParticipantTombola",
             "TOMBOLA_PUBLIQUE": "#/components/schemas/ProjectionParticipantTombolaPublique"
@@ -58854,6 +59717,144 @@
           "preuvesARegulariser"
         ],
         "title": "ProjectionParticipantChasse"
+      },
+      "ProjectionParticipantJustePrix": {
+        "properties": {
+          "participantId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Participantid"
+          },
+          "animationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animationid"
+          },
+          "engineContractVersion": {
+            "type": "string",
+            "const": "1.0",
+            "title": "Enginecontractversion"
+          },
+          "definitionVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Definitionversion"
+          },
+          "progressionVersion": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Progressionversion"
+          },
+          "exploitationRevision": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Exploitationrevision"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "INSCRIT",
+              "EN_ATTENTE_DEBUT",
+              "EN_COURS",
+              "TERMINE",
+              "A_REGULARISER",
+              "CLOTURE"
+            ],
+            "title": "Statut"
+          },
+          "actionsAutorisees": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "START_GAME",
+                "SCAN_QR",
+                "SUBMIT_ANSWER",
+                "CONTINUE",
+                "REQUEST_HINT",
+                "REQUEST_HELP"
+              ]
+            },
+            "type": "array",
+            "title": "Actionsautorisees"
+          },
+          "progression": {
+            "$ref": "#/components/schemas/ProgressionParticipant"
+          },
+          "medias": {
+            "items": {
+              "$ref": "#/components/schemas/MediaEmbarque"
+            },
+            "type": "array",
+            "title": "Medias"
+          },
+          "themeVisuel": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ThemePublic"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "type": {
+            "type": "string",
+            "const": "JUSTE_PRIX_LOCAL",
+            "title": "Type"
+          },
+          "toleranceCents": {
+            "type": "integer",
+            "maximum": 99999999.0,
+            "minimum": 0.0,
+            "title": "Tolerancecents"
+          },
+          "merchantProofRequired": {
+            "type": "boolean",
+            "title": "Merchantproofrequired"
+          },
+          "nombreProduits": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 1.0,
+            "title": "Nombreproduits"
+          },
+          "prixReveles": {
+            "type": "boolean",
+            "title": "Prixreveles",
+            "default": false
+          },
+          "phaseExploitation": {
+            "type": "string",
+            "enum": [
+              "OUVERT",
+              "SUSPENDU",
+              "CLOTURE_EN_COURS",
+              "CLOTUREE",
+              "ANNULEE"
+            ],
+            "title": "Phaseexploitation",
+            "default": "OUVERT"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "participantId",
+          "animationId",
+          "engineContractVersion",
+          "definitionVersion",
+          "progressionVersion",
+          "exploitationRevision",
+          "statut",
+          "actionsAutorisees",
+          "progression",
+          "medias",
+          "type",
+          "toleranceCents",
+          "merchantProofRequired",
+          "nombreProduits"
+        ],
+        "title": "ProjectionParticipantJustePrix"
       },
       "ProjectionParticipantPasseport": {
         "properties": {
@@ -59564,6 +60565,81 @@
           "preuve"
         ],
         "title": "PropositionPriseEnCharge"
+      },
+      "PropositionProduitPayload": {
+        "properties": {
+          "commercant_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Commercant Id"
+          },
+          "commerce_nom": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Commerce Nom"
+          },
+          "revision": {
+            "type": "integer",
+            "title": "Revision"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "A_COMPLETER",
+              "PROPOSE",
+              "VALIDE",
+              "A_CORRIGER"
+            ],
+            "title": "Statut"
+          },
+          "approvedRevision": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Approvedrevision"
+          },
+          "motif": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motif"
+          },
+          "produit": {
+            "$ref": "#/components/schemas/ProduitInput"
+          },
+          "modifiable": {
+            "type": "boolean",
+            "title": "Modifiable",
+            "default": true
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "commercant_id",
+          "revision",
+          "statut",
+          "approvedRevision",
+          "motif",
+          "produit"
+        ],
+        "title": "PropositionProduitPayload"
       },
       "ProspectPrioritePayload": {
         "properties": {
@@ -63043,6 +64119,8 @@
               "PLACE_VALIDATED",
               "ANSWER_CORRECT",
               "ANSWER_INCORRECT",
+              "PRICE_FOUND",
+              "PRICE_NOT_FOUND",
               "CONTENT_CONFIRMED",
               "HINT_OPENED",
               "HELP_APPLIED",
@@ -64289,6 +65367,192 @@
         ],
         "title": "RelanceSmsPayload"
       },
+      "RemboursementGestionPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "commande_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Commande Id"
+          },
+          "partenaire_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Partenaire Id"
+          },
+          "commune_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Commune Id"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          },
+          "motif_demande": {
+            "type": "string",
+            "title": "Motif Demande"
+          },
+          "motif_decision": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motif Decision"
+          },
+          "montant_centimes": {
+            "type": "integer",
+            "title": "Montant Centimes"
+          },
+          "reserve_centimes": {
+            "type": "integer",
+            "title": "Reserve Centimes"
+          },
+          "disponible_centimes": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Disponible Centimes"
+          },
+          "devise": {
+            "type": "string",
+            "title": "Devise"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "decided_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Decided At"
+          },
+          "acteur_decision": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Acteur Decision"
+          },
+          "retrait_commercial_demande": {
+            "type": "boolean",
+            "title": "Retrait Commercial Demande"
+          },
+          "derniere_erreur": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Derniere Erreur"
+          },
+          "actions_disponibles": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Actions Disponibles"
+          },
+          "partenaire_nom": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Partenaire Nom"
+          },
+          "commune_nom": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Commune Nom"
+          },
+          "commande_created_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Commande Created At"
+          },
+          "commande_total_ttc_centimes": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Commande Total Ttc Centimes"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "commande_id",
+          "partenaire_id",
+          "commune_id",
+          "version",
+          "statut",
+          "motif_demande",
+          "motif_decision",
+          "montant_centimes",
+          "reserve_centimes",
+          "devise",
+          "created_at",
+          "decided_at",
+          "acteur_decision",
+          "retrait_commercial_demande",
+          "derniere_erreur",
+          "actions_disponibles"
+        ],
+        "title": "RemboursementGestionPayload"
+      },
       "RemboursementPayload": {
         "properties": {
           "id": {
@@ -64892,6 +66156,28 @@
           "orderedIds"
         ],
         "title": "ReponseOrdre"
+      },
+      "ReponsePrix": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "MONEY_ESTIMATE",
+            "title": "Type"
+          },
+          "amountCents": {
+            "type": "integer",
+            "maximum": 99999999.0,
+            "minimum": 0.0,
+            "title": "Amountcents"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "type",
+          "amountCents"
+        ],
+        "title": "ReponsePrix"
       },
       "ReponseQcm": {
         "properties": {
@@ -66930,6 +68216,21 @@
           "fiche"
         ],
         "title": "RevisionPoiAnimationInput"
+      },
+      "RevisionProduitInput": {
+        "properties": {
+          "expectedRevision": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Expectedrevision"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expectedRevision"
+        ],
+        "title": "RevisionProduitInput"
       },
       "RevisionPromptGenerationInput": {
         "properties": {

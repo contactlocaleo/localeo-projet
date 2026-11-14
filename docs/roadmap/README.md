@@ -88,8 +88,8 @@ après ajout des EPIC 77 à 79 le 6 novembre 2026.
 | Etat | Epics | Dossier |
 | --- | ---: | --- |
 | Terminees | 64 | [terminees/](terminees/README.md) |
-| A faire | 11 | [a-faire/](a-faire/README.md) |
-| En cours | 4 | [en-cours/](en-cours/README.md) |
+| A faire | 10 | [a-faire/](a-faire/README.md) |
+| En cours | 5 | [en-cours/](en-cours/README.md) |
 | Abandonnees | 2 | [abandonnees/](abandonnees/README.md) |
 | Fusionnee | 1 | Epic 61 reprise dans l'[Epic 60](terminees/epic-60-vision-360-commercialisation-backlog.md) |
 
@@ -197,13 +197,16 @@ et à Pâques : préparation matérielle, parcours Live mobile, réponses et pro
 Six US, seize critères cibles ; modalités de réponse, gains, préparation,
 passages et offre restent à arbitrer. État **À faire**, cadrage sans implémentation.
 
-Le 6 novembre, l'[EPIC 77 — Le Juste Prix Local](a-faire/epic-77-juste-prix-local-backlog.md)
+Le 6 novembre, l'[EPIC 77 — Le Juste Prix Local](en-cours/epic-77-juste-prix-local-backlog.md)
 cadre un produit/prix proposé par commerce dans Pro puis approuvé par l'organisateur,
 une estimation définitive par habitant/commerce, une tolérance en euros et un
 seuil de commerces réussis pour accéder au tirage existant. Le gestionnaire
-choisit si les passages validés sont requis. Huit US, vingt critères cibles ;
-portée de la tolérance, restitution, incidents et offre commerciale restent
-à spécifier. État **À faire**, sans implémentation.
+choisit si les passages validés sont requis. La
+[spécification V1 du 13 novembre](../specifications/epic-77-juste-prix-local/README.md)
+conserve huit US et vingt critères : tolérance commune, résultat immédiat puis
+prix après clôture, passages dans les deux ordres, incident sans modification
+des règles publiées et inclusion au forfait standard. Quatre arbitrages résolus,
+preuves prévues ; état **À faire**, sans implémentation.
 
 Le 1er novembre, l'[EPIC 76 — Impersonification support Pro et Animation](a-faire/epic-76-impersonification-support-pro-animation-backlog.md)
 cadre l'ouverture depuis l'ERP d'une session temporaire dans le contexte d'un
@@ -274,7 +277,7 @@ précise la provenance et les divergences historiques conservées.
 | 74 | En cours | [Tombola publique](en-cours/epic-74-tombola-publique-backlog.md) : inscription immédiate avec quatre coordonnées obligatoires, trois modes de lots, quota standard et suivi commune Live ; 8 US, 16 critères ; [revue de clôture du 13 novembre](../specifications/epic-74-tombola-publique/verification.md#revue-de-clôture--13-novembre-2026), stockage navigateur indisponible et capacité restant à traiter ; v289 appliquée à TEST le 3 novembre |
 | 75 | A faire | [Mots croisés assistés par l’IA](a-faire/epic-75-mots-croises-assistes-ia-backlog.md) : [spécification V1](../specifications/epic-75-mots-croises-assistes-ia/README.md) du 4 novembre ; 8 US, 18 critères, neuf arbitrages résolus ; module indépendant, IA externe/import, grille validée et passages commerçants obligatoires ; tests prévus, sans implémentation |
 | 76 | A faire | [Impersonification support Pro et Animation](a-faire/epic-76-impersonification-support-pro-animation-backlog.md) : accès temporaire depuis ERP, 18 critères cibles ; consultation par défaut et intervention explicite/tracée retenues, droits, actions et modalités à arbitrer, sans implémentation |
-| 77 | A faire | [Le Juste Prix Local](a-faire/epic-77-juste-prix-local-backlog.md) : cadrage du 6 novembre, 8 US et 20 critères cibles ; produit/prix proposé dans Pro et approuvé par l'organisateur, estimation unique, tolérance en euros, seuil donnant accès au tirage, passages paramétrables ; quatre arbitrages ouverts, sans implémentation |
+| 77 | En cours | [Le Juste Prix Local](en-cours/epic-77-juste-prix-local-backlog.md) : [spécification V1 du 13 novembre](../specifications/epic-77-juste-prix-local/README.md), 8 US et 20 critères cibles ; proposition Pro et approbation, estimation unique, tolérance commune, seuil pour le tirage et passages paramétrables ; quatre arbitrages résolus, forfait standard ; implémentation locale et preuves au bilan, capacité complète et recette intégrée restant à qualifier |
 | 78 | A faire | [Le jeu des vitrines](a-faire/epic-78-jeu-des-vitrines-backlog.md) : cadrage du 6 novembre, 6 US et 16 critères cibles ; intrus dans une vitrine réelle, Noël/Pâques et autres thèmes, préparation et Live mobile ; sept arbitrages ouverts, sans implémentation |
 | 79 | A faire | [Escape Game assisté par l’IA](a-faire/epic-79-escape-game-assiste-ia-backlog.md) : 7 US et 18 critères cibles ; préparation IA selon le processus de la chasse E55, validation avant publication, terrain commune/commerces et progression sur un téléphone confirmés ; quatre arbitrages résolus, quatre ouverts, sans implémentation |
 | Autres identifiants du tronc commun | Terminees | Statut produit consolide conserve ; les anciennes mentions de stories a faire ne rouvrent pas ces epics. |

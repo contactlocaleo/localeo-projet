@@ -485,3 +485,9 @@ Dans **Aide et contact**, un encart **Guide commerçant** précède les demandes
 Le livrable est public, illustré uniquement avec des données d’exemple et sans identifiants d’accès. Il est embarqué à `/guides/guide-quotidien-localeo-commercant.pdf` dans l’artefact frontend. Il ne requiert aucun appel à une API métier, aucun jeton dans son URL, aucune migration ni configuration supplémentaire. Le navigateur permet sa consultation, son téléchargement et son impression. L’accès réseau au PDF ne crée aucune garantie de consultation hors ligne dans la PWA.
 
 La [source éditable](../../produit/formation/commercant/guide-quotidien-commercant.md) et le [PDF canonique](../../../livrables/formation/commercant/guide-quotidien-localeo-commercant.pdf) restent dans le dépôt Projet. La copie embarquée est synchronisée et comparée à cette source selon la [procédure de livraison](../../exploitation/commercant/mise-en-production.md). Les libellés d’installation/mise à jour, la reprise de validation et les options conditionnelles de facturation y reflètent les fonctionnalités présentes.
+
+## Produit proposé pour le Juste Prix Local
+
+Après acceptation de sa participation, le commerçant principal renseigne « Votre produit et son juste prix » : nom, description, unité/format, prix TTC en euros et visuel fourni facultatif sans prix visible. Enregistrer conserve le brouillon ; « Proposer à l’organisateur » soumet la version enregistrée. Une correction est motivée, une modification annule l’approbation ; après publication, produit et prix sont figés. Les salariés n’ont pas accès à cette préparation. Le jeu réutilise leur validation de passage selon les droits existants lorsqu’elle est requise.
+
+Le modèle reste inactif avant qualification de livraison. [Parcours et preuves E77](../epic-77-juste-prix-local/README.md).

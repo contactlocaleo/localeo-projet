@@ -32,7 +32,7 @@ Commencer par le README du sujet, puis consulter ses règles, contrats et arbitr
 
 - **À faire : EPIC 78**, [Le jeu des vitrines — cadrage](../roadmap/a-faire/epic-78-jeu-des-vitrines-backlog.md) du 6 novembre : 6 US, 16 critères cibles ; repérer un intrus dans les vitrines participantes, notamment à Noël/Pâques, avec préparation et parcours Live mobile. Modalités et offre à arbitrer ; spécification détaillée à rédiger.
 
-- **À faire : EPIC 77**, [Le Juste Prix Local — cadrage](../roadmap/a-faire/epic-77-juste-prix-local-backlog.md) du 6 novembre : 8 US, 20 critères cibles ; produit/prix proposé dans Pro puis approuvé, réponse définitive, tolérance en euros, seuil pour le tirage et passages paramétrables. Quatre arbitrages ouverts ; spécification détaillée à rédiger.
+- **En cours : EPIC 77**, [Le Juste Prix Local](epic-77-juste-prix-local/README.md), spécification V1 du 13 novembre : 8 US, 20 critères cibles ; produit/prix proposé dans Pro puis approuvé, estimation définitive, tolérance commune, seuil pour le tirage et passages paramétrables dans les deux ordres. Résultat immédiat, prix après clôture, forfait standard ; quatre arbitrages résolus ; implémentation locale, preuves et réserves au bilan.
 
 - **À faire : EPIC 75**, [Mots croisés assistés par l’IA](epic-75-mots-croises-assistes-ia/README.md) : spécification V1 du 4 novembre, 8 US, 18 critères et neuf arbitrages résolus ; module 190 € HT/12 mois/5 publications, IA externe puis import contrôlé, fiches chez les commerçants, grille correcte et tous les passages requis ; architecture et tests prévus, sans implémentation.
 
@@ -96,6 +96,7 @@ Commencer par le README du sujet, puis consulter ses règles, contrats et arbitr
 | 73 | [Animation et/ou Coffrets](epic-73-animation-et-ou-coffrets/README.md) | Terminée | Backend/ERP et satellites, Animation, Commerçant, Marketplace/Live |
 | 74 | [Tombola publique sans commerçant](epic-74-tombola-publique/README.md) | En cours | Backend/ERP, Animation, Marketplace/Live ; Pro pour remise et non-régression |
 | 75 | [Mots croisés assistés par l’IA](epic-75-mots-croises-assistes-ia/README.md) | À faire | Backend/ERP, Animation, Marketplace/Live, Pro ; préparation OnBoard et exploitation partagées |
+| 77 | [Le Juste Prix Local](epic-77-juste-prix-local/README.md) | En cours | Backend/ERP, Animation, Commerçant, Marketplace/Live ; démonstration et exploitation |
 
 ## Contrats et historique
 

@@ -13,7 +13,7 @@
   [Live E42](../../specifications/epic-42-localeo-live/README.md),
   [Animation E73](../../specifications/epic-73-animation-et-ou-coffrets/README.md).
 - Jeux proches : [mots croisés E75](epic-75-mots-croises-assistes-ia-backlog.md)
-  et [Juste Prix E77](epic-77-juste-prix-local-backlog.md). Ici, le support du
+  et [Juste Prix E77](../en-cours/epic-77-juste-prix-local-backlog.md). Ici, le support du
   défi est **la vitrine réelle**, et la réponse identifie un intrus ; les règles
   de ces autres jeux ne sont pas transférées implicitement.
 - Cadrage uniquement : pas de spécification détaillée, modèle enregistré,

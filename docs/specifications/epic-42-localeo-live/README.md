@@ -162,3 +162,7 @@ Les couples `B1/F4`, `B2/F5-F6`, `B3/F3` et `B4-B5/F7` portent les recettes inte
 - [openapi.json](openapi.json)
 
 [Retour à l’index des spécifications](../INDEX.md)
+
+## Jeu Juste Prix Local — E77
+
+Le renderer local E77 affiche le produit/format sans prix de référence avant clôture. Le participant saisit une estimation, la vérifie puis la confirme définitivement, une fois par commerce, même fausse. Le résultat trouvé/non trouvé est immédiat. Le seuil et la tolérance commune sont affichés ; si un passage est requis, réponse et visite peuvent arriver dans les deux ordres avant la fin. Une bonne réponse avec le passage requis compte un commerce ; atteindre le seuil donne une chance au tirage existant. Le prix exact n’est révélé qu’après clôture confirmée et sous accès personnel. [Spécification et réserves de mise en service](../epic-77-juste-prix-local/README.md).

@@ -2,7 +2,7 @@
 
 ## Références et état
 
-- **État produit : À faire**, cadrage du **6 novembre 2026**, selon la
+- **État produit : En cours**, cadrage du **6 novembre 2026**, selon la
   [roadmap commune](../README.md).
 - Identifiant `77` vérifié dans les documents communs et les noms de fichiers
   des quatre dépôts applicatifs ; aucun cadrage ou moteur de Juste Prix trouvé.
@@ -16,11 +16,13 @@
   [salariés Pro E72](../../specifications/epic-72-acces-salaries/README.md).
 - Périmètre distinct : une estimation monétaire par commerce, un prix de
   référence, une tolérance et une réponse définitive constituent une mécanique
-  différente de la chasse, des [mots croisés E75](epic-75-mots-croises-assistes-ia-backlog.md)
+  différente de la chasse, des [mots croisés E75](../a-faire/epic-75-mots-croises-assistes-ia-backlog.md)
   et de la [tombola publique E74](../en-cours/epic-74-tombola-publique-backlog.md).
   Leurs règles et états produit sont conservés.
-- Ce backlog est le cadrage canonique. Aucun dossier de spécification détaillée,
-  code de modèle enregistré, migration, test métier ou livraison E77 à ce stade.
+- Ce backlog reste le cadrage et la référence des critères. La
+  [spécification V1 du 13 novembre 2026](../../specifications/epic-77-juste-prix-local/README.md)
+  détaille les parcours, contrats et preuves attendues ; les quatre arbitrages
+  sont résolus. Implémentation locale dans les quatre applications et migration additive v318 ; preuves et réserves dans le bilan de réalisation. Aucun déploiement ni activation.
 
 ## Problème, acteurs et résultat attendu
 
@@ -50,13 +52,17 @@ ne deviennent pas obligatoires du seul fait de participer à l'animation.
 | --- | --- | --- |
 | E77-DEC-01 | Demande du 6 novembre | Nouveau jeu « Le Juste Prix Local » ; exactement un produit et un juste prix par commerçant retenu pour une édition |
 | E77-DEC-02 | Confirmation utilisateur | Le seuil est un nombre minimal de commerçants distincts dont le prix a été trouvé ; pas un score de proximité au prix ni un classement du plus proche |
-| E77-DEC-03 | Confirmation utilisateur | Tolérance en euros configurable ; 0 € impose le prix exact, au centime. La portée de la tolérance reste à préciser en ARB-01 |
+| E77-DEC-03 | Confirmation utilisateur | Tolérance en euros configurable ; 0 € impose le prix exact, au centime. Portée commune confirmée par DEC-08/ARB-01 |
 | E77-DEC-04 | Confirmation utilisateur | Atteindre le seuil donne accès au tirage au sort existant ; aucun gain automatique à cet instant |
 | E77-DEC-05 | Confirmation utilisateur | Une seule réponse après confirmation par participant et commerçant ; modification libre avant confirmation définitive |
 | E77-DEC-06 | Réponse explicite de l'utilisateur | Le gestionnaire choisit si un passage validé par le commerçant est requis pour comptabiliser une bonne réponse. Ce choix est propre à cette animation et annoncé avant participation |
 | E77-DEC-07 | Confirmation utilisateur | Le commerçant propose le produit et son prix de référence dans Pro ; l'organisateur valide avant publication |
+| E77-DEC-08 | Confirmation du 13 novembre | Une tolérance commune à toute l'animation |
+| E77-DEC-09 | Confirmation du 13 novembre | Trouvé/non trouvé immédiatement ; prix exact après clôture |
+| E77-DEC-10 | Confirmation du 13 novembre | Passage avant ou après réponse, les deux avant clôture ; incident publié : suspension puis reprise identique ou annulation/nouvelle édition corrigée sans transfert automatique des réponses/chances |
+| E77-DEC-11 | Confirmation du 13 novembre | Jeu inclus dans le forfait standard organisateur, sans module distinct |
 | E77-PROP-01 | Proposition à spécifier | Prix TTC en euros, unité/format précis et représentation monétaire exacte au centime ; pas de comparaison monétaire flottante |
-| E77-PROP-02 | Proposition à arbitrer, ARB-02 | Retour immédiat « trouvé / non trouvé », sans révéler le prix exact ni un indice plus/moins avant la clôture |
+| E77-PROP-02 | Retenue par DEC-09 | Retour immédiat « trouvé / non trouvé », sans révéler le prix exact ni un indice plus/moins avant la clôture |
 | E77-PROP-03 | Proposition de réutilisation | Inscription, règlement, accès personnel Live, tirage, trois modes de lots et remise sur le socle existant ; aucune billetterie payante habitant ajoutée |
 
 La configuration du seuil et celle de la tolérance sont **deux paramètres
@@ -74,7 +80,7 @@ les règles des chasses, mots croisés ou tombolas déjà définies.
   tolérance applicable, seuil, mode de passage, règlement et dotation.
 - Proposition commerçante : nom du produit, description et unité/format
   nécessaires pour éviter les ambiguïtés, prix de référence, visuel fourni
-  facultatif ; états « à compléter / proposé / validé / à corriger » à préciser.
+  facultatif ; états « à compléter / proposé / validé / à corriger » détaillés dans la spécification.
 - Révision de la proposition avant publication, puis validation de sa version
   par l'organisateur. Le prix actuel du magasin n'actualise pas automatiquement
   la référence de jeu déjà publiée.
@@ -101,7 +107,7 @@ les règles des chasses, mots croisés ou tombolas déjà définies.
   dépasse pas la tolérance applicable, bornes comprises. Le serveur décide.
 - Si le mode exige les passages, le commerce compte si **bonne réponse ET
   passage validé**. Les deux faits restent distincts ; un passage ne rend pas
-  correcte une mauvaise réponse. Leur ordre, avant clôture, sera précisé.
+  correcte une mauvaise réponse. Les deux ordres sont autorisés avant clôture (DEC-10).
 - Produit, prix, tolérance, seuil et mode de passage appartiennent à la version
   publiée. Les erreurs après publication relèvent d'une reprise explicite,
   sans réévaluation silencieuse des réponses passées (ARB-03).
@@ -153,7 +159,7 @@ les règles des chasses, mots croisés ou tombolas déjà définies.
 ## Critères d'acceptation cibles
 
 Les **20 critères E77-CA-01 à E77-CA-20** sont des cibles, pas des tests passés.
-Les propositions et arbitrages encore ouverts ne sont pas présentés comme acquis.
+Les décisions du 13 novembre résolvent les quatre arbitrages, sans modifier les identifiants des critères.
 
 | Critère | Acteur et préconditions | Action | Résultat observable et effets interdits |
 | --- | --- | --- | --- |
@@ -180,6 +186,12 @@ Les propositions et arbitrages encore ouverts ne sont pas présentés comme acqu
 
 ## Impacts à instruire
 
+Le tableau conserve l'analyse initiale du cadrage. Les impacts désormais
+instruits (stockage, migrations, droits, contrats, démonstration, exploitation et
+capacité) et leurs preuves attendues sont détaillés dans la
+[conception V1](../../specifications/epic-77-juste-prix-local/architecture-contrats.md)
+et la [matrice de vérification](../../specifications/epic-77-juste-prix-local/verification-livraison.md).
+
 | Sujet | Analyse initiale et sources |
 | --- | --- |
 | Domaine backend | **Concerné** : nouveau modèle ; validation de configuration, commande d'estimation, réponse unique et qualification. Le registre actuel et le passeport donnent des précédents ; ne pas placer le calcul dans Pro/Live |
@@ -193,28 +205,27 @@ Les propositions et arbitrages encore ouverts ne sont pas présentés comme acqu
 | Exploitation et déploiement | **À examiner** : activation du modèle et offre, livraison API/consommateurs, reprise d'incident, diagnostics sans solutions publiques, quotas et conservation des réponses |
 | Coût, volume et trafic | **Concerné** : estimation au plus une fois par participant/commerce, sauvegarde/rejeu, listes paginées et bilan agrégé ; limites et budgets à chiffrer avant développement/activation, mesures N/10N et charge mixte prévues |
 
-## Arbitrages à achever à la spécification
+## Arbitrages résolus à la spécification — 13 novembre 2026
 
-Les décisions DEC-01 à 07 sont acquises. Les sujets ci-dessous restent ouverts
-et ne bloquent pas l'existence du cadrage ; ils bloquent leurs comportements
-dépendants avant implémentation.
+Les décisions DEC-01 à 11 sont acquises. Les réponses utilisateur du 13 novembre
+résolvent les quatre sujets du cadrage ; la formulation initiale reste traçable
+dans l'historique Git.
 
 | Référence | Décision attendue et proposition | Périmètre dépendant |
 | --- | --- | --- |
-| E77-ARB-01 | Tolérance unique pour l'animation ou réglage par produit/commerce ? Recommandation initiale : une valeur commune explicite pour une V1 simple ; ne pas présenter cette portée comme validée | Formulaire et comparaison monétaire publiée |
-| E77-ARB-02 | Quand montrer réussite/échec et révéler le vrai prix ? Recommandation : réussite/échec immédiat, aucun indice plus/moins, révélation exacte après clôture selon le règlement | Retour joueur, projections et supports |
-| E77-ARB-03 | Produit/prix erroné, produit indisponible ou commerce retiré après publication : suspension/reprise identique, annulation et nouvelle édition ? Définir aussi l'ordre réponse/passage et le gel à clôture ; aucune seconde estimation implicite | Reprise, équité et support |
-| E77-ARB-04 | Type standard inclus ou module organisateur distinct ? Tarif HT, durée, quota, accompagnement et compatibilité des dotations à retenir. Ne pas recopier automatiquement les 190 € HT/12 mois/5 publications d'E75 | Offre, habilitations et publication commerciale |
+| E77-ARB-01, résolu | Tolérance unique commune, DEC-08 | Formulaire et comparaison monétaire publiée |
+| E77-ARB-02, résolu | Trouvé/non trouvé immédiat, aucun indice plus/moins ; prix exact après clôture, DEC-09 | Retour joueur, projections et supports |
+| E77-ARB-03, résolu | Deux ordres réponse/passage autorisés avant clôture ; suspension/reprise identique ou annulation puis nouvelle édition corrigée sans transfert automatique, DEC-10 | Reprise, équité et support |
+| E77-ARB-04, résolu | Inclus dans le forfait standard, droits/quota standard E73 ; trois dotations existantes selon leurs prérequis, DEC-11 | Offre, habilitations et publication commerciale |
 
 ## Passage à la spécification
 
-Le besoin, les acteurs et les sept décisions acquises permettent de spécifier
-les parcours indépendants. Instruire les quatre arbitrages avant les branches
-qui en dépendent, puis créer le dossier canonique dans l'index des spécifications
-selon le [cycle d'epic](../../organisation/cycle-epic.md), sans recopier ce backlog
-dans les applications.
+La [spécification V1](../../specifications/epic-77-juste-prix-local/README.md)
+est rédigée selon le [cycle d'epic](../../organisation/cycle-epic.md), avec
+architecture, contrats, lots et matrice des vingt critères. Aucun arbitrage
+métier bloquant ne reste ouvert ; l'état produit reste **À faire**.
 
-La future spécification reliera les 20 critères aux responsabilités, contrats,
+La spécification relie les 20 critères aux responsabilités, contrats,
 droits, migrations, fixtures et preuves attendues. La clôture reposera sur des
 tests unitaires, d'intégration, fonctionnels et de capacité, sans transformer
 un pilote ou une validation externe en condition implicite. Aucun de ces tests
