@@ -34,6 +34,12 @@ peut être enregistrée comme brouillon, mais ne peut être proposée ni validé
 | Tout état après publication | Tentative d'édition du produit joué | Refus ; procédure d'incident |
 
 L'organisateur approuve ou refuse, sans modifier le prix à la place du commerce.
+Dans « Produits et prix proposés », chaque proposition présente directement
+« Accepter la proposition » et « Demander une correction ». La seconde action
+ouvre une fenêtre avec choix du motif (nom/description, unité/format, prix TTC,
+visuel ou autre) et précisions facultatives ; « Autre motif » exige un texte.
+Annuler ou fermer la fenêtre n’envoie aucune décision. Le motif lisible est
+transmis au commerçant par le contrat existant, avec la révision affichée.
 Deux onglets concurrents produisent un conflit de révision, jamais l'approbation
 d'une version non consultée. La publication reverrouille et revérifie les révisions.
 Un commerce non prêt doit être complété ou exclu explicitement du brouillon ;

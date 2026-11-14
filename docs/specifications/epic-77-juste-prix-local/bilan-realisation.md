@@ -177,3 +177,121 @@ limites documentées ; leur état ne remplace pas les preuves ciblées E77.
 Le push de code ne prouve pas la réussite des déploiements automatiques ni la
 recette métier du service TEST. Le bundle backend est épinglé sur le commit
 documentaire de cette livraison.
+
+## Correctif Pro — accompagnement de la saisie et retour d’enregistrement (14 novembre 2026)
+
+Le signalement concerne le champ « Unité ou format » sans explication et le
+bouton grisé après enregistrement, sans confirmation visible à proximité.
+Dans le composant local, un succès remplaçait la saisie par la réponse serveur
+et désactivait normalement le bouton faute de modification restante ; son
+message apparaissait au-dessus du formulaire, potentiellement hors écran.
+Cette observation explique l’ambiguïté de l’interface, sans prouver le résultat
+de la requête effectuée sur TEST par le commerçant.
+
+Le champ explique désormais la quantité ou le conditionnement correspondant
+au prix à deviner, avec les exemples « sachet de 500 g », « bouteille de 75 cl »,
+« lot de 3 » et « à la pièce ». Près des boutons, Pro distingue l’enregistrement
+en cours, le succès confirmé par le serveur, les modifications non enregistrées
+et le résultat incertain. Les confirmations et erreurs utilisent le composant
+commun de retour avec focus et mise en visibilité. Modifier un champ efface
+l’ancienne confirmation et réactive l’enregistrement ; proposer à l’organisateur
+reste une action distincte. Aucun succès n’est annoncé sur un refus ou une
+erreur réseau, et une mutation incertaine exige toujours une relecture serveur.
+
+Périmètre : `localeo-commercant` et ce bilan canonique. Contrat API, règles de
+validation du domaine, migration, données et générateur de démonstration : sans
+impact, car seuls l’accompagnement et les retours du formulaire changent.
+Les preuves locales et le statut de livraison du correctif sont consignés
+ci-dessous ; ils ne constituent pas une vérification du déploiement TEST.
+
+Preuves sur la base Pro `0acaa1010190` avec ce correctif local :
+
+- Vitest ciblé sur `JustePrixProduct` et `ParticipationRequestDetailPage` :
+  12 tests réussis, dont attente de réponse, confirmation, nouvelle modification,
+  refus serveur, résultat incertain et verrouillage après publication.
+- Playwright `tests/e2e/juste-prix-product.spec.js --workers=1` : 3 parcours
+  réussis à 320, 390 et 1280 pixels, API simulée, réponse de sauvegarde retardée,
+  relecture après rechargement et absence de double mutation. Captures mobile
+  et bureau inspectées ; build navigateur isolé réussi.
+- Reproduction avant correction : le test d’aide accessible échouait faute
+  d’explication associée au champ. La première exécution navigateur utilisait
+  un champ de fixture incorrect (`modelCode` au lieu de `modele_code`) ; après
+  correction de la fixture, les trois parcours passent sans modification du
+  contrat applicatif.
+
+Aucune réparation de données ni modification du backend n’est nécessaire.
+Correctif vérifié localement ; aucun déploiement manuel réalisé dans le cadre
+de cette intervention.
+
+Le même retour est explicité pour « Proposer à l’organisateur » : pendant la
+requête, le bouton affiche « Proposition en cours… » et bloque un second envoi.
+Après confirmation serveur, une confirmation verte reçoit le focus près des
+actions et le bouton indique « Proposition envoyée ». Après rechargement, Pro
+rappelle que la proposition attend la validation de l’organisateur. Une erreur
+ne confirme aucun envoi ; un résultat incertain impose toujours une relecture.
+La reproduction ciblée échouait avant correction sur l’absence du libellé
+d’attente. Vérification du correctif complété : **15 tests Vitest ciblés** et
+**3 parcours Playwright** réussis à 320, 390 et 1280 pixels, avec proposition
+retardée, confirmation visible et relecture après rechargement. Contrats,
+données, migrations et statut de livraison restent inchangés.
+
+## Correctifs Animation — décisions sur les produits et navigation de préparation (14 novembre 2026)
+
+Sur la base Animation `87f4bc8c91de`, la proposition nécessitait « Examiner la
+proposition » puis une décision dans un bloc situé sous la liste. Les actions
+« Accepter la proposition » et « Demander une correction » sont désormais
+accessibles près du contenu, du prix et de la révision. La demande ouvre le
+dialogue de gestion commun, avec choix du motif et précisions ; « Autre motif »
+exige un texte. Le payload conserve `expectedRevision` et le motif lisible du
+contrat existant. Fermeture et annulation restent sans écriture, l’envoi bloque
+les doubles clics, une erreur ne confirme aucune décision et impose une
+relecture avant reprise. Les contrôles d’autorisation et de révision restent
+au backend. Les produits sont présentés en lignes adaptées au mobile, avec
+les actions à côté sur bureau et sous le contenu sur mobile.
+
+Dans « Préparer », la navigation des rubriques reste visible pendant le
+défilement. La configuration ajoute des accès directs aux informations,
+règles, mission, commerces, lots, produits et prix, contact public, selon les
+parties applicables au modèle. Sur mobile, écran peu haut ou largeur insuffisante
+(notamment avec le texte agrandi), les accès utilisent un sélecteur compact sans
+défilement horizontal du menu. L’en-tête de titre défile pour laisser la place au contenu.
+La hauteur réelle de la barre est prise en compte pour que la partie ciblée
+reste visible ; le focus suit le choix. Les formulaires restent montés et les
+saisies non enregistrées sont conservées. La navigation entre rubriques garde
+les protections de sortie existantes. La Chasse conserve son parcours guidé.
+
+Preuves sur les changements locaux, sans API réelle ni fichier d’environnement
+opérateur :
+
+- `node tests/browser/juste-prix-products.mjs` : 6 scénarios réussis, décisions
+  et dialogue à 320/390/1280 px, texte 200 %, motif obligatoire, annulation et
+  retour du focus, CSRF, révision, conflit, réponse perdue et consultation sans
+  droit de décision. Le mode `--baseline` échoue avant correction sur l’absence
+  des actions directes. Captures mobile et dialogue inspectées.
+- `node tests/browser/preparation-section-navigation.mjs` : 7 scénarios
+  réussis sur l’application complète, Juste Prix à 320/390/1280 px, texte 200 %,
+  écran de 520 px de hauteur, Passeport et Tombola publique. Cibles visibles
+  sous la barre, focus, présence continue de la navigation, saisie préservée et
+  absence d’écriture vérifiées, ainsi que l’absence de défilement horizontal
+  dans le menu. L’ancien build échoue sur l’absence de cette
+  navigation. Captures mobile et bureau inspectées.
+- `pnpm typecheck`, `pnpm lint` et les 2 tests de `tests/juste-prix.test.mjs` :
+  réussis. Build complet isolé via `scripts/build-generation-tests.mjs`, sortie
+  `tmp/preparation-navigation-dist` : réussi, avec avertissement de taille de
+  bundle. Rapports et captures restent dans les répertoires `tmp/` ignorés.
+
+Dépôts affectés : Animation et documentation canonique. Backend, contrats API,
+données, migrations et démonstration : sans impact, car les commandes et règles
+restent identiques ; les motifs proposés sont une aide de saisie du texte
+existant. Aucun déploiement manuel ni réparation de données réalisés ici. Les correctifs
+Pro précédents restent dans leur dépôt, avec leurs preuves propres.
+
+La revue UX indépendante a identifié un menu initialement défilant au texte
+agrandi ; le correctif utilise désormais la largeur réelle disponible pour
+choisir le sélecteur et autorise le retour à la ligne des liens. La relecture
+du correctif n’a identifié aucun autre blocage concret.
+
+Les correctifs sont versionnés séparément : Pro `bc7f305` (saisie et retours
+d’enregistrement/proposition), Animation `074e3c084297a6915c67aac38b38888c025ae9f0`
+(décisions produits et navigation de préparation). Leur publication Git ne
+confirme pas l’état des déploiements automatiques ni la recette sur TEST.
