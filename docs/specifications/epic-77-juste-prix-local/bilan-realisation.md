@@ -295,3 +295,73 @@ Les correctifs sont versionnés séparément : Pro `bc7f305` (saisie et retours
 d’enregistrement/proposition), Animation `074e3c084297a6915c67aac38b38888c025ae9f0`
 (décisions produits et navigation de préparation). Leur publication Git ne
 confirme pas l’état des déploiements automatiques ni la recette sur TEST.
+
+## Correctif Live — conserver l'inscription confirmée (14 novembre 2026)
+
+**ANO-MPL-E77-INSCRIPTION, CA-06/19.** Sur Marketplace `9e07097`, un POST
+d'inscription réussi était suivi d'une résolution du token puis d'une lecture
+personnelle avec contact. Leur échec empêchait l'ajout au carnet, malgré le
+reçu `CONFIRMEE` et l'e-mail déjà envoyé. La reproduction sur le code antérieur,
+avec POST 201 puis GET 503, affiche exactement « Votre participation n'a pas pu
+être vérifiée. Vous pouvez réessayer sans vous réinscrire. »
+
+Live mémorise désormais l'accès à partir du reçu confirmé : `participant_id`
+(jamais `id`, qui désigne l'inscription), token, animation correspondante,
+nom public et e-mail effectivement soumis. Il ne crée aucune projection de jeu,
+qualification, chance, disponibilité de QR ou résultat. L'ouverture du jeu
+effectue toujours sa lecture personnelle autorisée. Une panne de stockage
+conserve le reçu dans le formulaire, rappelle que l'inscription est confirmée
+et propose de réessayer uniquement l'ajout au carnet. Après rechargement, le
+lien reçu par e-mail permet de retrouver l'accès. Les POST incertains gardent
+leur contenu et leur clé d'idempotence ; les anciens reçus et la tombola
+publique en attente ne suivent pas ce nouveau raccourci.
+
+Périmètre : Marketplace/Live et documentation canonique. Le contrat backend
+actuel fournit déjà ce reçu transactionnel ; aucune règle métier, permission,
+API, migration, donnée, démonstration ou configuration opérateur n'est modifiée.
+Les autres frontends sont sans impact : ils ne consomment pas ce formulaire.
+
+Les lectures publiques de TEST ont identifié l'animation « Test juste prix
+Local », à venir le 14 novembre à 23:00 UTC, avec passages requis et dotation
+LIBRE/EXTERNE. Les fichiers publics servis contiennent le moteur Juste Prix.
+La reproduction backend isolée traverse les vrais POST, résolution HMAC,
+projections, consentements, préparation, DTO et sérialisation HTTP, avec ports
+en mémoire : **12 succès**, dont les cinq capacités Live, les dates TEST,
+la dotation et les deux modes de passages. Un rejeu conserve un participant,
+un token et un e-mail simulé. Diagnostic non versionné :
+`localeo-backend/tmp/diagnostic_live_inscription/test_response_readonly.py`.
+
+Cette preuve n'exécute pas les lectures SQL réelles et n'identifie pas la cause
+technique de la lecture privée échouée dans l'environnement signalé. Aucun
+token utilisateur, inscription distante, envoi réel ou réparation de données
+n'a été utilisé. La publication Git du correctif ne prouve pas son déploiement.
+
+Preuves du correctif consommateur :
+
+- Ancienne version : scénario POST 201/GET 503 en échec avec le message
+  signalé ; rapport Marketplace
+  `test-results/visual-runs/2026-11-14T19-54-36-523Z-8xsPkp`.
+- `node --test tests/security/animation-registration-receipt.test.cjs tests/security/juste-prix.test.cjs tests/security/animation-engine-registry.test.cjs tests/security/tombola-email.test.cjs` :
+  **12 succès**, reçus incomplets ou incohérents, attente/historique, identité
+  exacte sans état de jeu inventé, centimes et contrats.
+- `node scripts/run-visual-tests.cjs tests/visual/live-participation-confirmation.spec.cjs tests/visual/animation-registration-identity.spec.cjs --workers=1` :
+  **29 succès**, dont inscription Juste Prix à 320/390 px, carnet persistant
+  après rechargement, panne de lecture et reprise, refus 403, panne IndexedDB
+  et réessai local sans POST, POST incertain avec même clé et même contenu,
+  deux participations distinctes, autres moteurs et formulaires à 200 %.
+  Rapport final `test-results/visual-runs/2026-11-14T19-59-11-274Z-xuhG7p` ;
+  build de production isolé réussi, API simulées, aucun `.env` opérateur.
+  Confirmation et erreur de stockage mobiles inspectées visuellement.
+- ESLint des cinq fichiers modifiés, `git diff --check` et vérification des
+  trois documents par `check_guidance.py` : réussis. Revue indépendante du
+  reçu, du stockage, des refus et de l'idempotence : aucun défaut bloquant.
+
+La première recette du correctif comptait 26 succès sur 27 : le scénario de
+panne attendait la classe du jeu, alors que la garde du détail affiche déjà
+« Détail indisponible » avant de monter le jeu. Le test vérifie désormais
+cet état observable, la conservation de l'accès et l'absence de produits et
+de commandes ; aucune garde applicative n'a été affaiblie. La tolérance a
+également été complétée dans la fixture publique Juste Prix.
+
+Version du correctif Marketplace/Live :
+`4fd3e7cde757836adc0dfe3b255568690a02838c`.

@@ -65,6 +65,13 @@ socle Live/Passeport. L'inscription crée la participation, sans qualifier le jo
 Un lien personnel valide reste nécessaire pour lire ses réponses et commander.
 Ne pas confondre installation, favori, inscription, qualification et gain.
 
+Après un reçu d'inscription `CONFIRMEE`, Live conserve directement dans le
+carnet l'accès personnel renvoyé pour cette animation. Une panne de lecture
+ultérieure ne remet pas en cause l'inscription confirmée. Si le stockage local
+échoue, l'écran rappelle cette confirmation et propose de réessayer uniquement
+l'ajout au carnet ; le lien reçu par e-mail permet de retrouver l'accès.
+L'ouverture du jeu vérifie toujours les droits et l'état courant sur le serveur.
+
 Le carnet mène à la liste paginée des commerces. La fiche produit montre le
 contenu approuvé, son visuel réel s'il existe et « Votre estimation en euros ».
 Sans visuel, utiliser une composition typographique et un pictogramme générique.

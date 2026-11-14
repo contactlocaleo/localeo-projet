@@ -7,6 +7,27 @@ Les accents et formulations des anciennes notes sont normalisés sans changer le
 
 ## Signalement identifié
 
+### ANO-MPL-E77-INSCRIPTION — Échec de vérification après inscription confirmée
+
+Signalé le **14 novembre 2026** dans Localeo Live : l'e-mail de confirmation est
+reçu, mais l'écran indique que la participation n'a pas pu être vérifiée.
+Le formulaire ignorait le reçu d'accès déjà confirmé et imposait deux lectures
+personnelles avant tout ajout au carnet. Une panne de lecture après le POST
+reproduit exactement le message sur Marketplace `9e07097`.
+
+Correction : mémoriser l'accès du reçu `CONFIRMEE` pour l'animation demandée,
+puis afficher la confirmation du carnet. Une erreur de stockage conserve le
+reçu en mémoire et réessaie uniquement cet ajout. La consultation du jeu reste
+soumise à une lecture serveur fraîche ; un refus ne donne aucun accès aux
+produits, QR ou commandes. Les reçus historiques et la tombola en attente
+conservent leur parcours distinct.
+
+Preuves et limites dans le [bilan E77](../../specifications/epic-77-juste-prix-local/bilan-realisation.md#correctif-live--conserver-linscription-confirmée-14-novembre-2026).
+**Correctif du parcours vérifié localement** ; la cause technique de la lecture
+privée échouée sur l'environnement signalé n'est pas reproduite. Aucun accès
+personnel distant, nouvelle inscription réelle, réparation de données ou
+déploiement manuel effectué.
+
 ### Correctif du 11 novembre 2026 — reconnaître une inscription dans Découvrir
 
 **Cause locale** : `LiveDiscovery` présentait le catalogue public sans index des
