@@ -10,9 +10,11 @@ import json
 import os
 from pathlib import Path
 import shutil
+import signal
 import subprocess
 import sys
 import tempfile
+import time
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -50,16 +52,29 @@ class AtomicReportWriter:
                 stream.flush()
                 os.fsync(stream.fileno())
             if self.previous_sha256 is None:
-                # A hard link publishes complete bytes and fails if another writer won.
+                # Windows rename is atomic and refuses an existing target. POSIX
+                # rename would replace it, so publish there with an exclusive link.
                 try:
-                    os.link(temporary, self.output)
+                    publish = os.rename if os.name == "nt" else os.link
+                    publish(temporary, self.output)
                 except FileExistsError:
                     self._refuse_existing()
                     raise
             else:
                 if self.output.is_symlink() or digest(self.output) != self.previous_sha256:
                     raise ValueError(f"Output changed outside this attempt: {self.output}")
-                os.replace(temporary, self.output)
+                for attempt in range(50):
+                    try:
+                        os.replace(temporary, self.output)
+                        break
+                    except PermissionError:
+                        # Windows readers/antivirus may briefly retain a handle.
+                        # Retrying never permits replacing externally changed bytes.
+                        if os.name != "nt" or attempt == 49:
+                            raise
+                        time.sleep(0.1)
+                        if self.output.is_symlink() or digest(self.output) != self.previous_sha256:
+                            raise ValueError(f"Output changed outside this attempt: {self.output}")
         finally:
             # Ctrl+C can arrive immediately after link/replace published our file.
             # Remember ownership even in that case so the interrupted state can follow.
@@ -182,6 +197,97 @@ def executable(argv):
     return argv
 
 
+def run_owned(argv, *, cwd, timeout, env):
+    """Own a process group until its timeout/interruption cleanup has completed."""
+    if not shutil.which(argv[0]) and not (Path(cwd) / argv[0]).is_file():
+        raise FileNotFoundError(f"Executable unavailable: {argv[0]}")
+    if os.name == "nt":
+        return run_windows_job(argv, cwd=cwd, timeout=timeout, env=env)
+    process = subprocess.Popen(argv, cwd=cwd, env=env, shell=False, start_new_session=True)
+    try:
+        return subprocess.CompletedProcess(argv, process.wait(timeout=timeout))
+    finally:
+        # A successful parent may also leave a server running in its group.
+        try:
+            os.killpg(process.pid, signal.SIGKILL)
+        except ProcessLookupError:
+            pass
+        process.wait(timeout=30)
+
+
+def run_windows_job(argv, *, cwd, timeout, env):
+    """Gate execution until Windows has assigned the launcher to our Job Object.
+
+    Closing the job kills every descendant, including an orphan whose direct
+    parent already exited. No enumeration or killing of unrelated processes.
+    """
+    import ctypes
+    from ctypes import wintypes
+    kernel = ctypes.WinDLL("kernel32", use_last_error=True)
+    kernel.CreateJobObjectW.argtypes = [ctypes.c_void_p, wintypes.LPCWSTR]
+    kernel.CreateJobObjectW.restype = wintypes.HANDLE
+    kernel.SetInformationJobObject.argtypes = [wintypes.HANDLE, ctypes.c_int, ctypes.c_void_p, wintypes.DWORD]
+    kernel.AssignProcessToJobObject.argtypes = [wintypes.HANDLE, wintypes.HANDLE]
+    kernel.CloseHandle.argtypes = [wintypes.HANDLE]
+    kernel.TerminateJobObject.argtypes = [wintypes.HANDLE, wintypes.UINT]
+    kernel.QueryInformationJobObject.argtypes = [wintypes.HANDLE, ctypes.c_int, ctypes.c_void_p,
+                                                wintypes.DWORD, ctypes.c_void_p]
+    # JOBOBJECT_EXTENDED_LIMIT_INFORMATION: DWORD LimitFlags is at offset 16.
+    # Use pointer-sized fields to retain the native ABI on 32 and 64-bit hosts.
+    class Basic(ctypes.Structure):
+        _fields_ = [("process_time", ctypes.c_int64), ("job_time", ctypes.c_int64),
+                    ("flags", wintypes.DWORD), ("min_ws", ctypes.c_size_t),
+                    ("max_ws", ctypes.c_size_t), ("active", wintypes.DWORD),
+                    ("affinity", ctypes.c_size_t), ("priority", wintypes.DWORD),
+                    ("scheduling", wintypes.DWORD)]
+    class Limits(ctypes.Structure):
+        _fields_ = [("basic", Basic), ("io", ctypes.c_uint64 * 6),
+                    ("process_memory", ctypes.c_size_t), ("job_memory", ctypes.c_size_t),
+                    ("peak_process", ctypes.c_size_t), ("peak_job", ctypes.c_size_t)]
+    job = kernel.CreateJobObjectW(None, None)
+    if not job:
+        raise ctypes.WinError(ctypes.get_last_error())
+    process = None
+    try:
+        limits = Limits()
+        limits.basic.flags = 0x2000  # JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE
+        if not kernel.SetInformationJobObject(job, 9, ctypes.byref(limits), ctypes.sizeof(limits)):
+            raise ctypes.WinError(ctypes.get_last_error())
+        launcher = ("import json,subprocess,sys; "
+                    "argv=json.loads(sys.stdin.buffer.readline()); "
+                    "raise SystemExit(subprocess.call(argv,stdin=subprocess.DEVNULL))")
+        process = subprocess.Popen([sys.executable, "-c", launcher], cwd=cwd, env=env,
+                                   stdin=subprocess.PIPE, creationflags=subprocess.CREATE_NEW_PROCESS_GROUP)
+        if not kernel.AssignProcessToJobObject(job, wintypes.HANDLE(int(process._handle))):
+            raise ctypes.WinError(ctypes.get_last_error())
+        process.stdin.write((json.dumps(argv) + "\n").encode("utf-8"))
+        process.stdin.close()
+        return subprocess.CompletedProcess(argv, process.wait(timeout=timeout))
+    finally:
+        # TerminateJobObject also covers successful parents leaving a server behind.
+        try:
+            if not kernel.TerminateJobObject(job, 1):
+                raise ctypes.WinError(ctypes.get_last_error())
+            deadline = time.monotonic() + 5
+            while True:
+                accounting = ctypes.create_string_buffer(48)
+                if not kernel.QueryInformationJobObject(job, 1, accounting, 48, None):
+                    raise ctypes.WinError(ctypes.get_last_error())
+                if wintypes.DWORD.from_buffer(accounting, 40).value == 0:
+                    break
+                if time.monotonic() >= deadline:
+                    raise RuntimeError('Owned process tree did not terminate')
+                time.sleep(0.02)
+        finally:
+            kernel.CloseHandle(job)
+        if process is not None:
+            if process.poll() is None:
+                process.kill()  # also handles failure before assignment; gate stayed closed
+            process.wait(timeout=30)
+            if process.stdin is not None:
+                process.stdin.close()
+
+
 def run_checks(root, registry, profile, *, execute=False, timeout=1800, pg_bin_dir=None,
                persist=None, retry_of=None):
     registry_before = digest(root / "repositories.json")
@@ -231,8 +337,8 @@ def run_checks(root, registry, profile, *, execute=False, timeout=1800, pg_bin_d
                 # Record only registry-declared public overrides, never the inherited environment.
                 environment = {**os.environ, **check_environment(check)}
                 # Inherit stdout/stderr so logs are visible without retaining environment or secrets.
-                result = subprocess.run(argv, cwd=before[check["repository"]]["path"],
-                                        timeout=timeout, shell=False, env=environment)
+                result = run_owned(argv, cwd=before[check["repository"]]["path"],
+                                   timeout=timeout, env=environment)
                 check.update(status="passed" if result.returncode == 0 else "failed",
                              exit_code=result.returncode)
             except subprocess.TimeoutExpired:

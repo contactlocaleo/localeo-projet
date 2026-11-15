@@ -32,7 +32,10 @@ permissions:
 jobs:
   local-controls:
     name: Project tooling and export sources (not workspace links)
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -45,7 +48,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: documentation-local-evidence
+          name: documentation-local-evidence-${{ matrix.os }}
           path: .artifacts/quality/
 
   workspace-links:

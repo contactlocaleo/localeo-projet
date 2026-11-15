@@ -9,6 +9,7 @@ from pathlib import Path
 import subprocess
 import sys
 import tempfile
+import time
 import unittest
 from unittest.mock import patch
 
@@ -81,6 +82,55 @@ class QualityEvidenceTests(unittest.TestCase):
         report = quality.run_checks(self.root, self.registry, "all", execute=True, timeout=0.05)
         self.assertEqual(report["checks"][0]["reason"], "timeout")
         self.assertEqual(report["checks"][0]["status"], "failed")
+
+    def test_timeout_stops_owned_grandchild_before_next_check(self):
+        marker = self.root / "late-child.txt"
+        child = "import time; from pathlib import Path; time.sleep(2); Path('late-child.txt').write_text('survived')"
+        parent = "import subprocess,sys,time; subprocess.Popen([sys.executable,'-c',sys.argv[1]]); time.sleep(30)"
+        self.registry["quality"]["checks"]["test"]["argv"] = ["python", "-c", parent, child]
+        report = quality.run_checks(self.root, self.registry, "all", execute=True, timeout=1)
+        self.assertEqual(report["checks"][0]["reason"], "timeout")
+        time.sleep(1.5)
+        self.assertFalse(marker.exists(), "descendant survived the timeout")
+
+    def test_successful_parent_cannot_leave_an_owned_server(self):
+        child = "import time;from pathlib import Path;time.sleep(1);Path('survivor.txt').touch()"
+        parent = "import subprocess,sys;subprocess.Popen([sys.executable,'-c',sys.argv[1]])"
+        result = quality.run_owned([sys.executable, '-c', parent, child], cwd=self.root,
+                                   timeout=10, env=os.environ.copy())
+        self.assertEqual(result.returncode, 0)
+        time.sleep(1.2)
+        self.assertFalse((self.root / 'survivor.txt').exists())
+
+
+    def test_interruption_stops_descendants_and_preserves_unrelated_process(self):
+        child = "import time;from pathlib import Path;time.sleep(2);Path('orphan.txt').write_text('survived')"
+        parent = "import subprocess,sys,time;from pathlib import Path;subprocess.Popen([sys.executable,'-c',sys.argv[1]]);Path('ready.txt').touch();time.sleep(30)"
+        original_wait = subprocess.Popen.wait
+        interrupted = False
+        ready = self.root / 'ready.txt'
+        foreign = subprocess.Popen([sys.executable, '-c', 'import time;time.sleep(30)'], stdin=subprocess.DEVNULL)
+        def interrupt_wait(process, *args, **kwargs):
+            nonlocal interrupted
+            if not interrupted:
+                deadline = time.monotonic() + 10
+                while not ready.exists() and time.monotonic() < deadline:
+                    time.sleep(0.02)
+                self.assertTrue(ready.exists(), 'child did not reach the controlled interruption point')
+                interrupted = True
+                raise KeyboardInterrupt
+            return original_wait(process, *args, **kwargs)
+        try:
+            with patch.object(subprocess.Popen, 'wait', interrupt_wait), self.assertRaises(KeyboardInterrupt):
+                quality.run_owned([sys.executable, '-c', parent, child], cwd=self.root,
+                                  timeout=30, env=os.environ.copy())
+            time.sleep(2.2)
+            self.assertFalse((self.root / 'orphan.txt').exists())
+            self.assertIsNone(foreign.poll(), 'cleanup touched an unrelated process')
+        finally:
+            foreign.kill()
+            foreign.wait(timeout=10)
+
 
     def test_dirty_worktree_blocks_release_even_with_passed_checks(self):
         (self.root / "uncommitted.txt").write_text("work")
@@ -215,7 +265,7 @@ class QualityEvidenceTests(unittest.TestCase):
         self.assertEqual(output.read_bytes(), external)
 
     def test_interrupt_while_publishing_report_is_recorded_after_atomic_write(self):
-        for operation in ("link", "replace"):
+        for operation in ("rename" if os.name == "nt" else "link", "replace"):
             with self.subTest(operation=operation):
                 output = self.root / f".artifacts/publish-{operation}.json"
                 publish = getattr(quality.os, operation)
@@ -313,7 +363,7 @@ class QualityEvidenceTests(unittest.TestCase):
         self.save_registry()
         self.commit()
         output = self.root / ".artifacts/command-interrupted.json"
-        run = quality.subprocess.run
+        run = quality.run_owned
 
         def interrupt_active(arguments, **kwargs):
             if "print('active')" in arguments:
@@ -323,7 +373,7 @@ class QualityEvidenceTests(unittest.TestCase):
                 raise KeyboardInterrupt
             return run(arguments, **kwargs)
 
-        with patch.object(quality.subprocess, "run", side_effect=interrupt_active):
+        with patch.object(quality, "run_owned", side_effect=interrupt_active):
             result = quality.main(["run", "--root", str(self.root), "--profile", "all",
                                    "--output", str(output)])
         self.assertEqual(result, 130)

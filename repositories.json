@@ -118,6 +118,10 @@
       ],
       "demonstration": [
         "demonstration-postgres"
+      ],
+      "frontend-synthetic-builds": [
+        "commercant-build",
+        "animation-build"
       ]
     },
     "checks": {
@@ -260,9 +264,8 @@
       "commercant-build": {
         "repository": "localeo-commercant",
         "argv": [
-          "npm",
-          "run",
-          "build:demo"
+          "node",
+          "scripts/build-check.mjs"
         ]
       },
       "animation-tests": {
@@ -291,9 +294,8 @@
       "animation-build": {
         "repository": "localeo-animation",
         "argv": [
-          "pnpm",
-          "run",
-          "build:demo"
+          "node",
+          "scripts/build-check.mjs"
         ]
       },
       "finish-hook-tests": {
