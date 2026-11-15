@@ -167,7 +167,7 @@ Le checkout utilise le prix du catalogue backend. Le navigateur ne transmet pas 
 
 Les appels métier passent par [api.js](../../../../localeo-marketplace/src/services/api.js), puis [request.js](../../../../localeo-marketplace/src/services/request.js). Les réponses non réussies lèvent une erreur centralisée ; chaque page gère ensuite sa présentation, avec les limites de MARKET-003.
 
-Le snapshot [OpenAPI](../../../../localeo-marketplace/api/localeo-openapi.json) comporte 263 chemins. Il ne décrit pas les nouveaux headers requis pour la résolution depuis session : désynchronisation confirmée avec le backend local.
+Le snapshot OpenAPI historique `localeo-marketplace/api/localeo-openapi.json`, depuis retiré, comportait 263 chemins au moment de cet audit. Il ne décrit pas les nouveaux headers requis pour la résolution depuis session : désynchronisation confirmée avec le backend local.
 
 ### Inventaire regroupé des endpoints consommés
 

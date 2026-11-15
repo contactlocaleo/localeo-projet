@@ -11,7 +11,7 @@ Bienvenue dans la documentation de l'application mobile PWA pour commercants.
 - `pwa.md` : configuration PWA et service worker
 - `api.md` : contrats API, endpoints et exemples
 - `roadmap.md` : fonctionnalites prevues
-- [backlog/backlog-validation-prestation.md](../../roadmap/commercant/backlog-validation-prestation.md) : backlog fonctionnel pour la validation de prestation
+- `backlog/backlog-validation-prestation.md` (chemin historique retiré ; voir les [spécifications actuelles](../../specifications/validation-prestations/README.md)) : backlog fonctionnel pour la validation de prestation
 - [backlog/spec-validation-prestation-flow.md](../../specifications/archives/validation-prestation-deux-scans.md) : flux UX, API et modele de donnees pour la validation de prestation
 - [backlog/spec-validation-prestation-openapi-mapping.md](../../specifications/validation-prestations/contrats-api.md) : mapping entre le contrat OpenAPI et le parcours ecrans
 

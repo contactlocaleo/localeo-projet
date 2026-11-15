@@ -20,7 +20,8 @@ class LegalCorpusTests(unittest.TestCase):
                 self.assertEqual(hashlib.sha256(content).hexdigest(), entry["pdf_sha256"])
         self.assertEqual(
             {entry["id"] for entry in catalogue["documents"] if entry["version"] == "1.1"},
-            {"confidentialite", "cgv-marketplace", "conditions-animation"},
+            # Contrat commercant passe en 1.1 dans 9cde5ff4ff764c962320d5dbd16c2a6d0233c808.
+            {"confidentialite", "cgv-marketplace", "conditions-animation", "contrat-commercant"},
         )
         self.assertTrue(all(
             entry["source"].startswith("interne/") and entry["reason"] == "internal"

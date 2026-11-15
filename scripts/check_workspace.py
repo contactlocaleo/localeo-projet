@@ -5,10 +5,9 @@ import json
 import re
 import subprocess
 from pathlib import Path
-from urllib.parse import unquote
 
 
-def inspect(root):
+def inspect(root, *, historical=False):
     failures=[]
     registry=json.loads((root/'repositories.json').read_text(encoding='utf-8'))
     roots=[]
@@ -23,6 +22,13 @@ def inspect(root):
         roots.append(path)
     if len(set(roots))!=5:
         failures.append('Cinq racines distinctes attendues')
+    if historical:
+        failures.extend(inspect_migration(root))
+    return failures
+
+
+def inspect_migration(root):
+    failures=[]
     manifest=json.loads((root/'docs/organisation/migration-2026-09-18.json').read_text(encoding='utf-8'))
     for entry in manifest['files']:
         target=root.parent/entry['target_repo']/entry['target']
@@ -42,35 +48,22 @@ def inspect(root):
 
 
 def links(root):
-    """Inventaire des chemins manquants, sans confondre URLs/API et fichiers."""
-    broken=[]
-    for file in root.rglob('*.md'):
-        if '.git' in file.parts or 'tmp' in file.relative_to(root).parts:
-            continue
-        fenced=False
-        for number,line in enumerate(file.read_text(encoding='utf-8').splitlines(),1):
-            if line.lstrip().startswith(('```','~~~')):
-                fenced=not fenced
-            if fenced:
-                continue
-            for value in re.findall(r'\]\((<[^>]+>|[^\s)]+)',line):
-                value=value.strip('<>')
-                if not value or value.startswith(('#','/')) or re.match(r'^[\w+.-]+:',value):
-                    continue
-                name=re.split('[?#]',value,1)[0]
-                if not name or '${' in name or '<' in name:
-                    continue
-                if not (file.parent/unquote(name)).exists():
-                    broken.append({'file':file.relative_to(root).as_posix(),'line':number,'target':value})
-    return broken
+    """Use the same Git-visible corpus and Markdown parser as the guidance check."""
+    try:
+        from scripts.check_guidance import check_guidance
+    except ModuleNotFoundError:
+        from check_guidance import check_guidance
+    return check_guidance(root, [root], all_markdown=True)['errors']
+
 
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--historical-migration', action='store_true', help='Audit historique du 18 septembre ; les retraits ultérieurs peuvent être légitimes.')
     parser.add_argument('--links-report',type=Path,help='Rapport JSON des liens manquants (inclut la dette historique).')
     args=parser.parse_args()
     root=Path(__file__).resolve().parents[1]
-    failures=inspect(root)
+    failures=inspect(root, historical=args.historical_migration)
     if args.links_report:
         report=links(root)
         args.links_report.write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
@@ -79,7 +72,7 @@ def main():
         print(failure)
     if failures:
         return 1
-    print('5 depots Git distincts ; toutes les destinations presentes ; copies retirees et marqueurs controles.')
+    print('5 depots Git distincts controles.' if not args.historical_migration else 'Racines et destinations historiques controlees.')
     return 0
 
 

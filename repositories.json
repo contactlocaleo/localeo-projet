@@ -59,7 +59,10 @@
         "context-hook-tests",
         "finish-hook-tests",
         "git-hook-tests",
-        "contract-checker-tests"
+        "ops-knowledge-tests",
+        "legal-corpus-tests",
+        "contract-checker-tests",
+        "workspace-checker-tests"
       ],
       "documentation-workspace": [
         "documentation-sources",
@@ -72,7 +75,10 @@
         "context-hook-tests",
         "finish-hook-tests",
         "git-hook-tests",
+        "ops-knowledge-tests",
+        "legal-corpus-tests",
         "contract-checker-tests",
+        "workspace-checker-tests",
         "consumer-contracts"
       ],
       "backend": [
@@ -118,19 +124,22 @@
         "animation-build",
         "finish-hook-tests",
         "git-hook-tests",
+        "ops-knowledge-tests",
+        "legal-corpus-tests",
         "contract-checker-tests",
+        "workspace-checker-tests",
         "consumer-contracts"
       ],
       "demonstration": [
         "demonstration-postgres"
       ],
-      "frontend-synthetic-builds": [
-        "commercant-build",
-        "animation-build"
-      ],
       "browser-critical": [
         "animation-browser",
         "backend-erp-browser"
+      ],
+      "frontend-synthetic-builds": [
+        "commercant-build",
+        "animation-build"
       ]
     },
     "checks": {
@@ -355,6 +364,32 @@
           "test:security"
         ]
       },
+      "ops-knowledge-tests": {
+        "repository": "localeo-projet",
+        "argv": [
+          "python",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_ops_knowledge_base.py"
+        ]
+      },
+      "legal-corpus-tests": {
+        "repository": "localeo-projet",
+        "argv": [
+          "python",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_legal_corpus.py"
+        ]
+      },
       "consumer-contracts": {
         "repository": "localeo-projet",
         "requires": [
@@ -394,6 +429,19 @@
           "tests",
           "-p",
           "test_consumed_contracts.py"
+        ]
+      },
+      "workspace-checker-tests": {
+        "repository": "localeo-projet",
+        "argv": [
+          "python",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_workspace.py"
         ]
       }
     }
