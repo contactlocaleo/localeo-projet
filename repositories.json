@@ -58,7 +58,8 @@
         "codex-workflow-tests",
         "context-hook-tests",
         "finish-hook-tests",
-        "git-hook-tests"
+        "git-hook-tests",
+        "contract-checker-tests"
       ],
       "documentation-workspace": [
         "documentation-sources",
@@ -70,7 +71,9 @@
         "codex-workflow-tests",
         "context-hook-tests",
         "finish-hook-tests",
-        "git-hook-tests"
+        "git-hook-tests",
+        "contract-checker-tests",
+        "consumer-contracts"
       ],
       "backend": [
         "backend-tests"
@@ -114,7 +117,9 @@
         "animation-lint",
         "animation-build",
         "finish-hook-tests",
-        "git-hook-tests"
+        "git-hook-tests",
+        "contract-checker-tests",
+        "consumer-contracts"
       ],
       "demonstration": [
         "demonstration-postgres"
@@ -122,6 +127,10 @@
       "frontend-synthetic-builds": [
         "commercant-build",
         "animation-build"
+      ],
+      "browser-critical": [
+        "animation-browser",
+        "backend-erp-browser"
       ]
     },
     "checks": {
@@ -344,6 +353,47 @@
           "npm",
           "run",
           "test:security"
+        ]
+      },
+      "consumer-contracts": {
+        "repository": "localeo-projet",
+        "requires": [
+          "localeo-projet",
+          "localeo-animation",
+          "localeo-commercant"
+        ],
+        "argv": [
+          "python",
+          "scripts/check_consumed_contracts.py"
+        ]
+      },
+      "animation-browser": {
+        "repository": "localeo-animation",
+        "argv": [
+          "node",
+          "scripts/test-browser-critical.mjs"
+        ],
+        "artifacts_required": true
+      },
+      "backend-erp-browser": {
+        "repository": "localeo-backend",
+        "argv": [
+          "node",
+          "tests/browser/exploitation-erp.cjs"
+        ],
+        "artifacts_required": true
+      },
+      "contract-checker-tests": {
+        "repository": "localeo-projet",
+        "argv": [
+          "python",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_consumed_contracts.py"
         ]
       }
     }

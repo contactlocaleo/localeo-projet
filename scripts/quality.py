@@ -308,6 +308,7 @@ def run_checks(root, registry, profile, *, execute=False, timeout=1800, pg_bin_d
             persist(report)
 
     active = None
+    artifact_base = persist.output.parent if isinstance(persist, AtomicReportWriter) else root / ".artifacts/quality"
     try:
         save()
         before = snapshot(root, registry)
@@ -336,6 +337,10 @@ def run_checks(root, registry, profile, *, execute=False, timeout=1800, pg_bin_d
                 check["executed_argv"] = argv
                 # Record only registry-declared public overrides, never the inherited environment.
                 environment = {**os.environ, **check_environment(check)}
+                artifact_base.mkdir(parents=True, exist_ok=True)
+                artifact_dir = Path(tempfile.mkdtemp(prefix=f"{check['id']}-", dir=artifact_base))
+                environment["LOCALEO_QUALITY_ARTIFACT_DIR"] = str(artifact_dir.resolve())
+                check["artifact_directory"] = artifact_dir.relative_to(artifact_base).as_posix()
                 # Inherit stdout/stderr so logs are visible without retaining environment or secrets.
                 result = run_owned(argv, cwd=before[check["repository"]]["path"],
                                    timeout=timeout, env=environment)
@@ -346,6 +351,14 @@ def run_checks(root, registry, profile, *, execute=False, timeout=1800, pg_bin_d
             except (OSError, ValueError) as exc:
                 check.update(status="not_run", reason=str(exc))
             check["finished_at"] = now()
+            if check.get("artifact_directory"):
+                directory = artifact_base / check["artifact_directory"]
+                check["artifacts"] = [{"path": file.relative_to(artifact_base).as_posix(),
+                                       "sha256": digest(file), "bytes": file.stat().st_size}
+                                      for file in sorted(directory.rglob("*"))
+                                      if file.is_file() and not file.is_symlink()]
+                if check.get("artifacts_required") and not check["artifacts"]:
+                    check.update(status="failed", reason="Required application artifacts missing")
             active = None
             save()
         report["repositories_after"] = snapshot(root, registry)
@@ -394,6 +407,7 @@ def evidence_blockers(root, registry, report, current, *, max_age_hours=24, prof
         if (proof.get("status") != "passed" or proof.get("exit_code") != 0
                 or proof.get("argv") != check["argv"] or proof.get("repository") != check["repository"]
                 or proof.get("env", {}) != check.get("env", {})
+                or (check.get("artifacts_required") and not proof.get("artifacts"))
                 or not proof.get("started_at") or not proof.get("finished_at")):
             blockers.append("Missing or unsuccessful check: " + check["id"])
     try:
@@ -425,6 +439,12 @@ def prepare_release(root, registry, report_path=None, bundle=None, dataset=None,
         report = json.loads(report_path.read_text(encoding="utf-8-sig"))
         proofs["quality"] = {"path": str(report_path.resolve()), "sha256": digest(report_path)}
         blockers.extend(evidence_blockers(root, registry, report, current))
+        for check in report.get("checks", []):
+            for artifact in check.get("artifacts", []):
+                candidate = (report_path.parent / artifact["path"]).resolve()
+                if (not candidate.is_relative_to(report_path.parent.resolve()) or not candidate.is_file()
+                        or digest(candidate) != artifact["sha256"]):
+                    blockers.append("Application artifact missing or changed: " + artifact["path"])
     else:
         blockers.append("Quality report missing")
         for name, state in current.items():

@@ -5,6 +5,7 @@ from datetime import datetime, timedelta, timezone
 import importlib.util
 import json
 import os
+import shutil
 from pathlib import Path
 import subprocess
 import sys
@@ -102,6 +103,16 @@ class QualityEvidenceTests(unittest.TestCase):
         time.sleep(1.2)
         self.assertFalse((self.root / 'survivor.txt').exists())
 
+    def test_application_artifacts_are_relative_hashed_and_required(self):
+        self.registry['quality']['checks']['test'].update(artifacts_required=True,
+            argv=['python', '-c', "import os;from pathlib import Path;Path(os.environ['LOCALEO_QUALITY_ARTIFACT_DIR'],'result.xml').write_text('<testsuite/>')"])
+        report = self.run_report()
+        self.assertEqual(report['status'], 'passed')
+        artifact, = report['checks'][0]['artifacts']
+        self.assertFalse(Path(artifact['path']).is_absolute())
+        self.assertEqual(artifact['sha256'], quality.digest(self.root / '.artifacts/quality' / artifact['path']))
+        self.registry['quality']['checks']['test']['argv'] = ['python', '-c', 'pass']
+        self.assertEqual(self.run_report()['checks'][0]['status'], 'failed')
 
     def test_interruption_stops_descendants_and_preserves_unrelated_process(self):
         child = "import time;from pathlib import Path;time.sleep(2);Path('orphan.txt').write_text('survived')"
@@ -131,6 +142,22 @@ class QualityEvidenceTests(unittest.TestCase):
             foreign.kill()
             foreign.wait(timeout=10)
 
+    def test_transported_artifacts_are_verified_and_tampering_blocks_release(self):
+        self.registry['quality']['checks']['test'].update(artifacts_required=True,
+            argv=['python', '-c', "import os;from pathlib import Path;Path(os.environ['LOCALEO_QUALITY_ARTIFACT_DIR'],'result.xml').write_text('<testsuite/>')"])
+        self.save_registry()
+        self.commit()
+        output = self.root / '.artifacts/run.json'
+        report = quality.run_checks(self.root, self.registry, 'all', execute=True,
+                                    persist=quality.AtomicReportWriter(output))
+        transported = self.root.parent / 'transported evidence'
+        shutil.copytree(output.parent, transported)
+        result = quality.prepare_release(self.root, self.registry, transported / 'run.json')
+        self.assertFalse(any('Application artifact' in reason for reason in result['automatic_blockers']))
+        artifact, = report['checks'][0]['artifacts']
+        (transported / artifact['path']).write_text('tampered')
+        result = quality.prepare_release(self.root, self.registry, transported / 'run.json')
+        self.assertTrue(any('Application artifact missing or changed' in reason for reason in result['automatic_blockers']))
 
     def test_dirty_worktree_blocks_release_even_with_passed_checks(self):
         (self.root / "uncommitted.txt").write_text("work")
@@ -186,7 +213,7 @@ class QualityEvidenceTests(unittest.TestCase):
     def test_release_manifest_hashes_without_claiming_dataset_restored(self):
         report = self.run_report()
         evidence = self.root / ".artifacts/quality/run.json"
-        evidence.parent.mkdir(parents=True)
+        evidence.parent.mkdir(parents=True, exist_ok=True)
         evidence.write_text(json.dumps(report))
         dataset = evidence.parent / "dataset.json"
         dataset.write_text('{"example": true}')
@@ -487,7 +514,7 @@ class QualityEvidenceTests(unittest.TestCase):
         report = self.run_report()
         report["status"] = "interrupted"
         evidence = self.root / ".artifacts/interrupted.json"
-        evidence.parent.mkdir()
+        evidence.parent.mkdir(exist_ok=True)
         evidence.write_text(json.dumps(report), encoding="utf-8")
         result = quality.prepare_release(self.root, self.registry, evidence)
         self.assertEqual(result["status"], "blocked")
@@ -548,7 +575,7 @@ class QualityEvidenceTests(unittest.TestCase):
     def test_ready_to_review_does_not_claim_operator_checks_or_production_ready(self):
         report = self.run_report()
         evidence = self.root / ".artifacts/quality/run.json"
-        evidence.parent.mkdir(parents=True)
+        evidence.parent.mkdir(parents=True, exist_ok=True)
         evidence.write_text(json.dumps(report))
         # Bundle integrity has separate behavior coverage above; only emulate that result here.
         with patch.object(quality.importlib.util, "module_from_spec") as loaded:
