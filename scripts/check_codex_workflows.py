@@ -33,6 +33,7 @@ class ConfigurationSource:
         else:
             paths = [root / 'AGENTS.md', root / '.codex/hooks.json']
             paths.extend((root / '.agents/skills').glob('*/SKILL.md'))
+            paths.extend((root / '.agents/skills').glob('*/agents/openai.yaml'))
             paths.extend((root / '.codex/agents').glob('*.toml'))
             self.files = {path.relative_to(root).as_posix() for path in paths if path.is_file()}
 
@@ -104,6 +105,31 @@ def validate(root: Path, *, staged: bool = False) -> list[str]:
             errors.append(f'{label}: corps trop volumineux ; utiliser des references ciblees')
         if not parts[2].strip():
             errors.append(f'{label}: corps vide')
+    # Optional metadata currently maintained here uses a deliberately small YAML
+    # subset: one interface mapping, three JSON-quoted scalar strings. Reject
+    # unsupported syntax rather than silently misreading YAML anchors or blocks.
+    for file in source.matching(r'\.agents/skills/[^/]+/agents/openai\.yaml'):
+        label = PurePosixPath(file).parts[2]
+        try:
+            lines = [line for line in source.read(file).decode('utf-8-sig').splitlines()
+                     if line.strip() and not line.lstrip().startswith('#')]
+            if not lines or lines[0] != 'interface:':
+                raise ValueError('interface requise')
+            fields = {}
+            for line in lines[1:]:
+                match = re.fullmatch(r'  (display_name|short_description|default_prompt): (".*")', line)
+                if not match or match[1] in fields:
+                    raise ValueError('champ YAML invalide ou duplique')
+                fields[match[1]] = json.loads(match[2])
+            if set(fields) != {'display_name', 'short_description', 'default_prompt'} or not all(
+                    isinstance(value, str) and value.strip() for value in fields.values()):
+                raise ValueError('trois chaines interface non vides requises')
+            if not 25 <= len(fields['short_description']) <= 64:
+                raise ValueError('short_description doit compter 25 a 64 caracteres')
+            if f'${label}' not in fields['default_prompt'] or label not in names:
+                raise ValueError('default_prompt et skill doivent correspondre')
+        except (OSError, ValueError, UnicodeError) as error:
+            errors.append(f'{label}: metadonnees openai.yaml invalides : {error}')
     for file in source.matching(r'\.codex/agents/[^/]+\.toml'):
         label = PurePosixPath(file).stem
         try:

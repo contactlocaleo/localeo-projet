@@ -163,6 +163,29 @@ class WorkflowPreCommitTests(unittest.TestCase):
         self.git('add', 'docs/change.md')
         self.assert_refused_without_changes('absent.md')
 
+    def test_partial_controller_repair_cannot_mask_staged_broken_checker(self):
+        controller = self.root / 'scripts/check_codex_workflows.py'
+        original = controller.read_bytes()
+        controller.write_text('raise SystemExit(0)\n', encoding='utf-8')
+        self.git('add', 'scripts/check_codex_workflows.py')
+        controller.write_bytes(original)
+        self.assert_refused_without_changes('Controleur partiellement indexe')
+        self.assertEqual(controller.read_bytes(), original)
+
+    def test_two_worktrees_use_own_hooks_when_initial_checkout_scripts_unavailable(self):
+        worktree = self.root.parent / 'second worktree with spaces'
+        self.git('worktree', 'add', '-qb', 'second', str(worktree))
+        self.assertEqual(install(worktree, sys.executable), '.githooks')
+        self.assertEqual(git(self.root, 'config', '--get', 'core.hooksPath'), '.githooks')
+        (self.root / '.githooks').rename(self.root / 'unavailable-hooks')
+        (self.root / 'scripts').rename(self.root / 'unavailable-scripts')
+        (worktree / 'change.md').write_text('[broken](missing.md)\n', encoding='utf-8')
+        subprocess.run(['git', '-C', str(worktree), 'add', 'change.md'], check=True)
+        result = subprocess.run(['git', '-C', str(worktree), 'commit', '-qm', 'fixture'],
+                                capture_output=True, text=True)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('missing.md', result.stdout + result.stderr)
+
 
 if __name__ == '__main__':
     unittest.main()

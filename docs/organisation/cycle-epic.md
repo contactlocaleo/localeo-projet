@@ -177,3 +177,11 @@ Ces scénarios constituent un protocole d'évaluation, **pas un compte rendu de 
 | Clôture prête et changements mixtes | « Clôture cette epic et prépare le commit. » Fournir critères vérifiés, contrôles requis réussis, configuration cible à appliquer et changements étrangers à l'epic. | Clôture et corrige les liens si aucune recette cible n'est requise ; prépare un lot limité à l'epic, conserve l'index et les autres travaux, expose les configurations sans annoncer un déploiement. |
 
 Pour chaque essai, enregistrer la version du skill et des sources, les artefacts produits, les oublis ou erreurs observés, les reprises nécessaires et les vérifications réellement exécutées. Une validation syntaxique de skill ne vaut pas réussite de ces scénarios. Comparer avec le même besoin avant modification du skill lorsque possible ; faire évoluer les instructions à partir des écarts constatés, sans accumuler des règles générales pour chaque incident.
+
+
+Compléter ces exercices avec les variantes suivantes : autorisation de commit
+déjà donnée puis reprise, rapport lié à un ancien contenu, contrôleur
+partiellement indexé et changement étranger déjà indexé. La reprise conserve
+les autorisations de la conversation ; elle ne vaut pas autorisation de push
+ou de déploiement. Consigner les observations décisionnelles séparément des
+opérations et tests réellement exécutés.

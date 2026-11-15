@@ -73,9 +73,9 @@ python scripts/install_hooks.py --install
 python scripts/install_hooks.py
 ```
 
-L'installateur configure uniquement `core.hooksPath` et `localeo.python` dans ce dépôt. Il refuse de remplacer un gestionnaire contenant des hooks actifs ; aucun réglage global ni applicatif voisin n'est modifié. Node doit être disponible. Si le chemin de Python change, relancer l'installation. La [configuration pre-commit](../../.pre-commit-config.yaml) reste une alternative pour un environnement utilisant déjà ce gestionnaire ; ne pas installer les deux séparément. Le vérificateur ne stage aucun fichier et ne crée aucun commit.
+L'installateur configure uniquement `core.hooksPath=.githooks` et `localeo.python` dans ce dépôt. Le chemin relatif est résolu depuis chaque worktree : les hooks restent disponibles si les fichiers du checkout initial disparaissent. Le montage supporté place chaque worktree Projet auprès des quatre dépôts applicatifs, avec le même Python durable disponible pour tous ; un environnement Python situé dans un checkout supprimable ne convient pas à cette configuration partagée. Il refuse de remplacer un gestionnaire contenant des hooks actifs ; aucun réglage global ni applicatif voisin n'est modifié. Node doit être disponible. Si le chemin de Python change, relancer l'installation. La [configuration pre-commit](../../.pre-commit-config.yaml) reste une alternative pour un environnement utilisant déjà ce gestionnaire ; ne pas installer les deux séparément. Le vérificateur ne stage aucun fichier et ne crée aucun commit.
 
-Le hook utilise `--staged --changed --all-markdown` : il vérifie aussi les spécifications et procédures modifiées, ainsi que les liens entrants vers une cible supprimée. Si les guides automatiques, skills, profils ou hooks concernés changent, il ajoute le validateur de configuration sur **l'index Git**. Une version non indexée d'un skill ne peut ni masquer ni faire échouer la version réellement commitée. Il ne transforme pas les anciens liens cassés de documents inchangés en blocage d'une correction indépendante. Cette vérification incrémentale complète le contrôle général des guides.
+Le hook utilise `--staged --changed --all-markdown` : il vérifie aussi les spécifications et procédures modifiées, ainsi que les liens entrants vers une cible supprimée. Si les guides automatiques, skills, profils ou hooks concernés changent, il ajoute le validateur de configuration sur **l'index Git**. Une version non indexée d'un skill ne peut ni masquer ni faire échouer la version réellement commitée. Si l'un des contrôleurs exécutés est lui-même modifié dans l'index et diffère sur disque, les deux installations de pré-commit refusent le commit jusqu'à indexation cohérente ; elles ne modifient jamais l'index automatiquement. Il ne transforme pas les anciens liens cassés de documents inchangés en blocage d'une correction indépendante. Cette vérification incrémentale complète le contrôle général des guides.
 
 ## Contrôles et preuves reproductibles
 
@@ -102,6 +102,8 @@ rapports de toutes les tentatives et indiquer exactement quels scénarios ont
 été rejoués après correction.
 
 Le [validateur de configuration](../../scripts/check_codex_workflows.py) vérifie les noms/descriptions des skills et les budgets locaux de contexte : 8000 octets pour le guide automatique racine, 14000 octets par skill, 1800 tokens au maximum pour le hook de début. Ce sont des garde-fous du projet, pas les limites universelles de Codex. Le contrôle des liens reste assuré par `check_guidance.py` ; une évaluation sur des cas représentatifs vérifie les décisions que prennent les workflows.
+
+Les fichiers optionnels `.agents/skills/*/agents/openai.yaml` actuellement maintenus sont contrôlés : une section `interface`, trois chaînes non vides entre guillemets doubles (`display_name`, `short_description`, `default_prompt`), description courte de 25 à 64 caractères et référence au bon `$skill`. Les autres constructions YAML ne sont pas prises en charge et sont refusées ; aucun fichier optionnel n'est imposé aux autres skills.
 
 Les profils de revue et la couverture des cinq sources de démarrage sont aussi
 vérifiés. `--staged` permet le même contrôle sur les fichiers indexés ;
@@ -134,6 +136,29 @@ Depuis l'environnement Python activé, utiliser `python` ; depuis l'environnemen
 
 Les contrôles métier et de frontières existants sont décrits dans la [matrice d'architecture](../architecture/transverse/controle-architecture.md). Ils restent nécessaires lorsqu'une règle change. Les skills, profils et rappels du hook orientent le travail ; ils ne prouvent pas qu'un invariant est respecté.
 
-`check_workspace.py` compare aussi les destinations du manifeste historique de migration. Son échec peut correspondre à des suppressions ultérieures ; examiner chaque cas sans recréer automatiquement des documents retirés. La suite complète `unittest discover -s tests` inclut les exigences de couverture des procédures opératoires, qui présentent une dette connue. L'audit daté distingue ces limites des contrôles ajoutés ici.
+`python scripts/check_workspace.py` vérifie les cinq racines Git actuelles.
+Ajouter `--historical-migration` pour examiner les destinations du manifeste du
+18 septembre ; les retraits ultérieurs ne sont pas des défauts du workspace
+courant. `--links-report` utilise le même corpus Git et parseur que
+`check_guidance.py`. La suite complète `unittest discover -s tests` inclut les
+procédures opératoires et le catalogue juridique ; ces contrôles font désormais
+partie du profil CI documentaire local.
+
+Le profil `browser-critical` sélectionne le socle Chromium Animation et le
+pilote ERP autonome. Les commandes reçoivent un dossier d'artefacts unique par
+contrôle (`LOCALEO_QUALITY_ARTIFACT_DIR`) ; le rapport référence les fichiers par
+chemins relatifs, tailles et SHA-256. Copier le dossier complet de la tentative
+pour transporter les preuves ; la préparation de livraison refuse une pièce
+manquante ou modifiée. Les diagnostics Pro sont conservés dans sa CI avec les
+résultats JSON/HTML, traces et captures. Le contrôle `consumer-contracts` compare
+les opérations des périmètres déclarés et leurs schémas transitifs, en ignorant
+les annotations et les opérations extérieures. Son périmètre est explicite dans
+`check_consumed_contracts.py` ; il ne remplace pas les tests des appels réels.
+
+Le runner qualité termine ses descendants sur interruption et timeout : Job
+Object Windows attribué avant le lancement du contrôle, groupe de processus
+séparé sous POSIX. Un échec de nettoyage empêche de passer au contrôle suivant.
+Les preuves locales Windows et les jobs Linux restent distincts.
+
 
 Pour une session parallèle, éviter deux builds qui écrivent le même répertoire de sortie. Reporter les tests réussis, les échecs, les contrôles non exécutés et les limites d'environnement séparément. Ne pas présenter une suite interrompue au nettoyage comme un succès complet.

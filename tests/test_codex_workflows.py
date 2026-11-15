@@ -48,6 +48,20 @@ class WorkflowValidationTests(unittest.TestCase):
     def test_accepts_discoverable_bounded_configuration(self):
         self.assertEqual(validate(self.root), [])
 
+    def test_optional_interface_yaml_is_checked_and_matches_skill(self):
+        metadata = self.skill.parent / 'agents/openai.yaml'
+        metadata.parent.mkdir()
+        valid = ('interface:\n  display_name: "Example"\n'
+                 '  short_description: "Handle a focused example workflow"\n'
+                 '  default_prompt: "Use $example for this task."\n')
+        metadata.write_text(valid, encoding='utf-8')
+        self.assertEqual(validate(self.root), [])
+        for invalid in (valid.replace('$example', '$other'), valid + '  display_name: "Duplicate"\n',
+                        valid.replace('"Example"', '[]'), valid.replace('interface:', 'unexpected:')):
+            with self.subTest(invalid=invalid):
+                metadata.write_text(invalid, encoding='utf-8')
+                self.assertTrue(any('openai.yaml' in error for error in validate(self.root)))
+
     def test_rejects_empty_hooks_and_non_scalar_metadata(self):
         self.hooks.write_text('{"hooks": {}}')
         self.skill.write_text('---\nname: example\ndescription: [not, a, string]\n---\nWorkflow.')

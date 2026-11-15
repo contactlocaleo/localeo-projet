@@ -36,8 +36,10 @@ def install(root: Path, python: str) -> str:
         hook.chmod(hook.stat().st_mode | stat.S_IXUSR)
     # All preconditions are checked before either local setting is changed.
     subprocess.run(['git', '-C', str(root), 'config', '--local', 'localeo.python', python], check=True)
-    subprocess.run(['git', '-C', str(root), 'config', '--local', 'core.hooksPath', str(target)], check=True)
-    return str(target)
+    # Git resolves a relative hooksPath from the current worktree root. Sharing
+    # this value never binds another worktree to this checkout's lifetime.
+    subprocess.run(['git', '-C', str(root), 'config', '--local', 'core.hooksPath', '.githooks'], check=True)
+    return '.githooks'
 
 
 def main() -> int:

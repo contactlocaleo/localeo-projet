@@ -1,8 +1,23 @@
 'use strict';
 const { execFileSync, spawnSync } = require('node:child_process');
+// A working-tree repair must not hide a broken staged controller. Refuse only
+// controllers which themselves have staged changes and differ on disk.
+try {
+  const controllers = ['scripts/git_pre_commit.cjs', 'scripts/check_guidance.py', 'scripts/check_codex_workflows.py'];
+  const staged = execFileSync('git', ['diff', '--cached', '--name-only', '-z'], { encoding: 'utf8', windowsHide: true }).split('\0');
+  const unstaged = execFileSync('git', ['diff', '--name-only', '-z'], { encoding: 'utf8', windowsHide: true }).split('\0');
+  if (controllers.some(file => staged.includes(file) && unstaged.includes(file))) {
+    process.stderr.write('Controleur partiellement indexe : indexer sa version complete avant le commit.\n');
+    process.exit(1);
+  }
+} catch {
+  process.stderr.write('Index Git indisponible pour verifier les controleurs.\n');
+  process.exit(1);
+}
 let python;
 try {
-  python = execFileSync('git', ['config', '--local', '--get', 'localeo.python'], { encoding: 'utf8', windowsHide: true }).trim();
+  python = process.argv.includes('--system-python') ? 'python'
+    : execFileSync('git', ['config', '--local', '--get', 'localeo.python'], { encoding: 'utf8', windowsHide: true }).trim();
 } catch {
   process.stderr.write('Hook Localeo non configure : python scripts/install_hooks.py --install\n');
   process.exit(1);
