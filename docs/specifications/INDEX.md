@@ -6,6 +6,8 @@ Commencer par le README du sujet, puis consulter ses règles, contrats et arbitr
 
 ## Priorités en cours et à cadrer
 
+- **Extension E73 — 15 novembre 2026 : gestion centralisée des lots et remises**, [E73-EVO-GESTION-LOTS](epic-73-animation-et-ou-coffrets/gestion-lots-remises.md) : entrée Suivre l’activité, lots externes/bons/coffrets gagnés, compteurs et actions directes, rappels e-mail/WebPush ; GL-01 à GL-18 et trois lots. Coffrets gagnés uniquement, rappels manuels individuels/groupés, après fin/archivage avec 48 heures minimum : choix confirmés. Trois lots implémentés, vérifications locales réalisées ; GL-16 partiel (budget de synthèse dépassé avec croissance étrangère). Clôture historique inchangée.
+
 - **Extension E73 — 13 novembre 2026 : cloner une animation**, [E73-EVO-CLONAGE](epic-73-animation-et-ou-coffrets/clonage-animation.md) : accès liste/archives/fiche au mécanisme Nouvelle édition, fidélité des sections et brouillon indépendant dans la même commune ; trois lots implémentés, vérifications locales réalisées, CL-11 partiel (budgets concurrents dépassés) ; clôture historique inchangée.
 
 - **Extension E73 — 12 novembre 2026 : productivité quotidienne de l’organisateur**, [E73-EVO-ANIMATION-PRODUCTIVITE](epic-73-animation-et-ou-coffrets/ux-productivite-organisateur.md) : audit Animation bureau/mobile, sept lots et AP-01 à AP-22 ; recommandations fiables, continuité, listes bornées, accessibilité, préparation, gains/fin et comparaison. Sept lots implémentés, preuves locales et migration TEST v313 ; validation AP-22 partielle, clôture historique inchangée.

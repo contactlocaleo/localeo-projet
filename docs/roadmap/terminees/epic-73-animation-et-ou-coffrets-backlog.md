@@ -1,5 +1,28 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+## Évolution du 15 novembre 2026 — gestion centralisée des lots et remises
+
+**E73-EVO-GESTION-LOTS** : depuis **Suivre l’activité → Lots et remises**,
+consulter et traiter les lots externes, bons numériques et coffrets gagnés de
+la commune active, archives incluses, sans retrouver chaque animation.
+Compteurs distincts de distribution, retrait et consommation ; commandes de
+remise accessibles directement et rappels e-mail et/ou WebPush contextualisés.
+
+La [spécification canonique](../../specifications/epic-73-animation-et-ou-coffrets/gestion-lots-remises.md)
+ajoute **GL-01 à GL-18**, en trois lots : lecture/indicateurs, remises et
+distribution, rappels. Elle prolonge AP-18/20 et les parcours de dotation/fin,
+sans modifier les identifiants existants ni assimiler clôture du dossier et remise.
+Le retrait exceptionnel externe du 14 novembre reste préservé.
+
+**Trois lots implémentés ; vérifications locales réalisées, GL-16 partiel**
+(budget de synthèse dépassé avec croissance étrangère, voir le
+[bilan](../../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md)). Trois arbitrages
+confirmés le 15 novembre : coffrets gagnés uniquement ; rappels manuels
+individuels et groupés ; rappels possibles après fin/archivage pour les droits
+encore exerçables, avec au moins 48 heures par bénéficiaire et animation.
+Les contrats, permissions, migrations, démonstration, budgets et preuves prévues
+sont dans la matrice GL. La clôture historique E73 et ses compteurs restent inchangés.
+
 ## Évolution du 13 novembre 2026 — clonage d’une animation
 
 **E73-EVO-CLONAGE** : rendre le mécanisme existant « Nouvelle édition » accessible

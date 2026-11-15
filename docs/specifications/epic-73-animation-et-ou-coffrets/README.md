@@ -1,5 +1,17 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+Évolution du **15 novembre 2026 — E73-EVO-GESTION-LOTS** :
+[gestion centralisée des lots et remises](gestion-lots-remises.md) depuis
+**Suivre l’activité**, avec lots externes, bons et coffrets gagnés, compteurs
+distincts, actions directes et rappels e-mail/WebPush. **GL-01 à GL-18**, trois
+lots de réalisation ; coffrets gagnés uniquement, rappels manuels individuels
+et groupés, y compris après fin/archivage, avec 48 heures minimum : choix
+confirmés. Trois lots implémentés et vérifications locales réalisées ;
+**GL-16 partiel**, le budget de synthèse est dépassé avec la croissance des
+données étrangères. Le [bilan](verification-livraison.md) conserve les résultats
+et le reste à faire ; la qualification complète demeure ouverte.
+Clôture historique conservée.
+
 Évolution du **13 novembre 2026 — E73-EVO-CLONAGE** :
 [Cloner l’animation](clonage-animation.md) depuis liste, archives et fiche,
 en réutilisant le mécanisme Nouvelle édition de CA-59. Nouveau brouillon dans

@@ -1,5 +1,14 @@
 # Roadmap par etat
 
+**15 novembre 2026 — E73-EVO-GESTION-LOTS** : section **Suivre l’activité →
+Lots et remises**, suivi global des trois natures de gains, distribution,
+remise et rappels e-mail/WebPush.
+[Spécification GL-01 à GL-18](../specifications/epic-73-animation-et-ou-coffrets/gestion-lots-remises.md)
+implémentée sur trois lots ; vérifications locales réalisées, **GL-16 partiel**
+(budget de synthèse dépassé avec croissance étrangère). Coffrets gagnés uniquement, rappels manuels
+individuels/groupés et après fin/archivage avec 48 heures minimum confirmés.
+Clôture historique E73 et compteurs inchangés.
+
 **13 novembre 2026 — E73-EVO-CLONAGE** : rendre le clonage d’une animation
 accessible depuis liste, archives et fiche en réutilisant « Nouvelle édition ».
 [Spécification, CL-01 à CL-12 et trois lots](../specifications/epic-73-animation-et-ou-coffrets/clonage-animation.md).

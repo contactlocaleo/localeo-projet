@@ -1,5 +1,13 @@
 # EPIC 73 — Dotation, tirages et remise des lots
 
+Évolution du **15 novembre 2026 — E73-EVO-GESTION-LOTS** :
+[Lots et remises](gestion-lots-remises.md) consolide les gains depuis
+**Suivre l’activité**, avec distribution/remise directe, compteurs par nature
+et rappels e-mail/WebPush. Spécification seule ; les nouveaux rappels sont
+distincts des renvois avec SMS ci-dessous. Choix confirmés le 15 novembre :
+coffrets gagnés uniquement, rappels manuels individuels/groupés et possibles
+après fin/archivage, avec 48 heures minimum. Preuves à produire en GL.
+
 ## Évolution du 11 novembre 2026 — notifications de gains par SMS
 
 **E73-EVO-GAINS-SMS** complète les notifications existantes : lorsqu’un

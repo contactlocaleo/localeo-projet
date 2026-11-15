@@ -1,5 +1,228 @@
 # E73 — Vérification, migration et livraison
 
+## Réalisation — E73-EVO-GESTION-LOTS (15 novembre 2026)
+
+[Spécification GL-01 à GL-18](gestion-lots-remises.md), issue de la demande du
+14 novembre : gestion globale depuis Suivre l’activité, distribution/remise,
+compteurs et rappels e-mail/WebPush, avec Coffrets. Trois lots de réalisation,
+contrats producteurs/consommateurs et matrice de preuves prévus ; arbitrages
+GL-ARB-01/02/03 confirmés le 15 novembre : coffrets gagnés uniquement, rappels
+manuels individuels/groupés, après fin/archivage avec 48 heures minimum.
+Implémentation des trois lots en cours de vérification sur les bases backend
+`0c0c4028`, Animation `8afc492`, Live `6980e41` et projet `d96bda1`, avec leurs
+modifications locales. Pro `bdc9a54` conserve son interface de consommation.
+
+Le backend porte la classification des droits courants, les commandes et leurs
+reçus, les rappels manuels et leurs transports. Animation présente le nouveau
+guichet ; Live vérifie l’accès personnel avant d’ouvrir les lots, y compris
+après archivage. Les deux flags de rappels sont désactivés par défaut.
+
+La revue indépendante a relevé puis fait traiter la visibilité des rappels
+après révocation, l’équité entre organisations, les gels de conservation et les
+liens des gagnants dont l’inscription est anonymisée. La recette UX complète
+les états de date, de filtre et de focus. Les migrations et la capacité des
+rappels sont vérifiées ; la dernière qualification de la synthèse échoue au
+budget de latence GL-16. Ce critère reste ouvert, sans assouplissement du seuil.
+Aucun déploiement ni envoi réel effectué.
+La clôture historique de l’epic et les preuves des autres évolutions restent conservées.
+
+### Traçabilité de la réalisation Lots et remises
+
+Les chemins de tests ci-dessous sont relatifs à leur dépôt applicatif. Les
+passes se recouvrent : leurs nombres ne doivent pas être additionnés comme
+une suite unique. PostgreSQL 18 et Python 3.14 sont utilisés sous Windows,
+avec schémas et bases jetables sur boucle locale. Les tests fournisseur sont
+simulés ; le navigateur utilise une API synthétique.
+
+| Critères | Preuves et portée |
+| --- | --- |
+| GL-01 à 04 | Backend : `tests/domain/animation_locale/test_lots_remises.py`, `tests/application/services/test_lots_remises.py`, `tests/api/test_lots_remises_api.py`, `tests/security/test_lots_remises_postgres.py`. Trois natures, archives, états séparés, permissions, couverture inconnue, filtres et curseurs. Animation : `tests/browser/lots-remises.mjs`, entrée directe, filtre et pagination sans préchargement exhaustif. |
+| GL-05/06 | Animation : même recette navigateur, remise/attestation/retrait exceptionnel depuis le guichet ; ancien parcours fin : `tests/browser/fin-animation.mjs`. Les commandes de fin et leurs droits restent propriétaires des décisions. |
+| GL-07/12 | Backend : `tests/security/test_distribution_coffrets_postgres.py` et `tests/domain/animation_locale/test_tirage_gain_animation.py`, version courante, deux clés, même clé, rollback et course ancien client sans version/nouveau client. Les financements de la fixture de concurrence sont simulés ; le distributeur Coffret existant est vérifié séparément par `test_notification_gain_coffret_sms.py`. |
+| GL-08 à 13 | Backend : `tests/domain/animation_locale/test_rappels_lots.py`, `tests/application/services/test_rappels_lots.py`, `tests/api/test_rappels_lots_api.py`, `tests/security/test_rappels_lots_postgres.py`. Sélection bornée, cadence, canaux, capture exacte, reprise paginée, refus, reçu, double worker, résultat incertain sans réémission et équité entre 31 organisations. |
+| GL-14 | Backend : liens ciblés et anonymisation dans `test_rappels_lots_postgres.py`, exclusion après perte de preuve dans `tests/security/test_rappels_lots_live_postgres.py` ; Live : six scénarios `tests/visual/live-reward-reminder.spec.cjs` réussis, rapport `test-results/visual-runs/2026-11-15T09-41-45-504Z-4NUB8B`. Clic réel depuis notification, archive, refus étranger et récupération après 503. |
+| GL-15 | Animation : recettes 320/390/1280 px et texte 200 %, clavier, réponse perdue, résultats partiels et protection de sélection. La revue UX a demandé la date de prochain rappel, le nom du commerce sélectionné et le retour de focus ; leur reprise est suivie séparément de la première passe de 84 cas. |
+| GL-16 | `tests/performance/test_lots_remises_postgres_capacity.py`, `tests/security/test_rappels_lots_capacite_postgres.py`, `tests/security/test_rappels_lots_nominal_postgres.py` et `tests/security/test_rappels_lots_charge_mixte_postgres.py`. **Partiel : les compteurs dépassent le p95 de 500 ms après croissance étrangère**. Les autres lectures respectent leurs budgets dans la passe finale L1 ; capacité des rappels et saturation vérifiées séparément. Voir les mesures et rapports ci-dessous. |
+| GL-17 | Migrations additives `v319_lectures_globales_lots.sql`, `v320_rappels_lots.sql` et `v321_historique_rappels_lots.sql`, registre de démonstration avec sept tables `replace`. La suite `run_demo_compatibility_tests.py` a vérifié les migrations jusqu’à v320, la lecture métier et le reçu après restauration, le transfert/dump et la reprise ; v321 est vérifiée séparément après son ajout. Aucun ancien rappel n’est recréé. |
+| GL-18 | Tests d’accès L1/L3, lectures Live et `tests/security/test_rappels_lots_conservation_postgres.py` : copie e-mail, usage actif/incertain, gels hérités, concurrence du gel et de la purge. La non-régression QR/PIN et Coffrets demeure une preuve distincte du guichet organisateur. |
+
+Impacts : le backend possède les règles et les transports, Animation consomme
+les capacités et contrats E41, Live consomme le résolveur personnel E42. Pro ne
+reçoit aucun nouvel écran ni contrat embarqué ; ses règles de consommation et
+ses API restent utilisées. La supervision ERP réutilise e-mails, notifications
+et batchs existants ; le renvoi générique d’un `RAPPEL_GAIN` est refusé afin de
+conserver la cadence et les états de l’intention. Les sources documentaires et
+OpenAPI sont modifiées ici ; la copie embarquée reste dans Animation.
+
+Passes achevées sur cet arbre :
+
+- Lectures globales : **38 réussites en 50,96 secondes**, dont 30 tests
+  domaine/application/API et huit PostgreSQL,
+  `tmp/gl-lecture-fonctionnels-produit-v2.xml`. Les passes antérieures de 37
+  puis une réussite restent conservées dans `tmp/gl-lecture-final-fonctionnel.xml`
+  et `tmp/gl-lecture-historique-rappel.xml`. L’événement
+  « Rappel demandé » appartient au gain et au tenant autorisés, sans coordonnées
+  ni contenu du transport.
+- Backend obligatoire et ciblé : **782 réussites**, `tmp/gl-root-architecture-final.xml`
+  (architecture, recensement domaine, couverture des use cases, erreurs API,
+  présentation des notifications, versions de distribution et Coffrets).
+- Intégration e-mails, distribution Coffret avec transports simulés, renvoi
+  générique et registre : **44 réussites**, `tmp/gl-root-integration-2.xml`.
+- PostgreSQL confidentialité/conservation, messages historiques, compteurs
+  Live, adhésion et consommation QR/PIN : **61 réussites et un échec de fixture**
+  dans `tmp/gl-root-postgres-final.xml`. La nouvelle fixture de concurrence sur
+  deux animations omettait une coordination, puis utilisait une référence de
+  lecture non valide pour les commandes. Après correction de ces données,
+  **une réussite** dans `tmp/gl-root-conservation-ordre-reprise2.xml` ; les deux
+  tentatives précédentes sont conservées. Le test confirme une purge et une
+  confirmation groupée concurrentes, sans inversion des verrous, avec un gel
+  conservé sur l’autre animation. Aucune assertion métier n’a été assouplie.
+- Rappels : **32 réussites** domaine/application/API et accès externe dans
+  `tmp/gl-rappels-unit-reprise-final.xml`. Les 17 premiers scénarios PostgreSQL
+  ont réussi avant un défaut de fixture de gel ; la reprise ciblée donne
+  **quatre réussites** pour anonymisation et retrait des droits, puis **deux**
+  pour le service initial d’accès aux bons (`tmp/gl-rappels-anonymisation-droits-final.xml`
+  et `tmp/gl-rappels-bons-initiaux-final.xml`). Ces passes sont distinctes.
+- Capture d’audience sous verrou réel : **une réussite** dans
+  `tmp/gl-rappels-capture-delai-final.xml`. Le délai SQL de trois secondes
+  produit un 503 avec `Retry-After: 3`, annule toute capture partielle et permet
+  de reprendre avec la même clé après libération du verrou.
+- Démonstration : **10 réussites en 728,63 secondes**, `tmp/dq-gl1/results.xml`.
+  Migrations jusqu’à v320, génération, lecture du guichet, reçu restauré et
+  rejoué, dump/transfert, rollback de l’installation et deux reprises après
+  interruption. Sept avertissements SQLAlchemy de réflexion `dialect_options`
+  sont conservés dans le rapport ; ils n’ont pas empêché les vérifications.
+- Migration finale : `py -3.14 tmp/gl-verifier-v321.py`, **réussie**, rapport
+  `tmp/gl-v321-migration.json`. Depuis le builder migré en v320, seule v321 est
+  appliquée ; un second passage n’applique rien. Le rejeu direct de son DDL
+  conserve le même index GIN `jsonb_path_ops` et le journal de migration est
+  cohérent. Cette preuve complète la suite de démonstration antérieure.
+- Animation finale : **32/32** dans `tmp/gl-lots-ui-captures-jPRTST/report.json`,
+  **8/8** compléments de dates dans `tmp/gl-lots-ui-captures-iDBmke/report.json`,
+  **5/5** tests HTTP/OpenAPI. Types, lint ciblé et build PWA réussis.
+  L’historique avec les valeurs réelles du backend passe ensuite aux **quatre
+  formats**, `tmp/gl-lots-ui-captures-J4Uye1/report.json`, avec une capture
+  à 320 px inspectée et un nouveau contrôle types/lint/build réussi.
+  Les 84 cas initiaux et 38 cas de l’ancien parcours de fin sont conservés dans
+  leurs rapports antérieurs, sans être présentés comme cette dernière passe.
+- Contrats : E41 **1 154 chemins**, E42 **84 chemins**, produits hors ligne ;
+  empreinte SHA-256 E41 canonique et embarquée Animation identique :
+  `23b306ca8d1b43890f2122141d07f99783445cb4ee0c305fa0341bb9856828aa`.
+
+Les trois bancs de rappels passent ensemble en **191,60 secondes**,
+`tmp/gl-rappels-mesures-finales.xml` :
+
+| Profil | Résultats locaux |
+| --- | --- |
+| 100 gains, 10 puis 1 000 appareils | Aperçu p95/p99 **128/416 ms** selon le volume ; confirmation **245/549 ms**. 51 requêtes au maximum pour aperçu et confirmation cumulés. Préparation en 1/11 pages, maximum 100 appareils par page ; mémoire supplémentaire maximum **57,52 Mio**. `tmp/gl-rappels-capacite.json`. |
+| Nominal initial, 20 sessions sur la même organisation, deux workers, fournisseur à 50 ms | 160 lectures à **5/s**, p50/p95/p99 **36/46/57 ms**, six requêtes par lecture au maximum ; 12 commandes rejouées avec leur reçu. **Aucun refus ni doublon**, 500 transports acceptés en 32,79 s (**15,25/s**), quatre connexions occupées au maximum. File restante 600, âge 32,79 s ; mémoire supplémentaire 12,55 Mio. Rapport conservé dans `tmp/gl-rappels-nominal-avant-l1-final.json`. |
+| Rafales 1/4/8/20 lecteurs, deux workers, pool volontairement limité à quatre connexions et 250 ms | Fournisseur lent, panne ambiguë puis reprise : refus 503 explicites dès la contention, sans croissance du pool. Saturation forcée : **503 en 252 ms**, reçu confirmé relisible après libération. 533 appels fournisseur, **zéro doublon**, 177 résultats incertains sans rejeu ; deux acceptations dont la persistance a perdu sa connexion sont conservées comme incertaines après expiration du bail. Aucun bail encore en cours après reprise. `tmp/gl-rappels-charge-mixte.json`. |
+
+Le profil nominal mesure une concentration de 20 sessions sur une organisation,
+supérieure aux 10 sur 20 prévues ; la rotation entre 31 organisations est prouvée
+séparément par le test de l’ordonnanceur. La préparation des 1 000 appareils a
+pris 8,33 s en pages reprenables, distincte de la confirmation interactive.
+Le banc de rafales ne revendique pas une absence de 503 à saturation. Une
+première tentative avait laissé un bail en cours après perte de connexion ; la
+reprise vérifie son expiration et l’état incertain, sans transformer une
+acceptation possible en échec réémissible. Les rapports antérieurs sont conservés.
+
+Le nominal est rejoué après les dernières optimisations L1 : **une réussite
+en 80,94 secondes**, `tmp/gl-root-nominal-final.xml`, sans modification du code
+depuis les 38 contrôles fonctionnels L1. Sur 100 gains et 1 000 installations,
+160 lectures à **5/s**, p50/p95/p99 **43/66/125 ms**, six requêtes maximum,
+12 commandes rejouées et 12 reçus relus. **Aucun refus ni doublon** ; 450
+transports acceptés en 33,40 s (**13,47/s**), quatre connexions occupées au
+maximum, file restante 650 et mémoire supplémentaire **10,41 Mio**.
+`tmp/gl-rappels-nominal.json` contient cette reprise. Elle vérifie la compatibilité
+des lectures avec les workers ; elle ne remplace pas le profil L1 à 100 000 gains.
+
+Les revues indépendantes métier et UX ne relèvent plus de P1/P2 sur les
+corrections examinées. Cinq captures finales ont été relues, dont le texte à
+200 %. Le lecteur d’écran humain, l’appareil physique, les fournisseurs réels,
+la recette hébergée et la résistance à une perte électrique ne sont pas testés.
+
+Machine de mesure : Intel Core i7-10510U, huit processeurs logiques,
+15,84 Gio de RAM, Windows 11 Famille 10.0.26200, PostgreSQL 18 ; fiche
+`tmp/gl-rappels-environnement-final.json`.
+La mesure locale utilise un PostgreSQL jetable avec `fsync` et
+`synchronous_commit` désactivés. Elle ne mesure donc pas le coût de durabilité
+de l’hébergement cible. Le runner de démonstration utilise deux autres clusters
+avec leur durabilité activée. Les séries de lecture sont préchauffées ; les
+charges mixtes incluent leurs premières lectures sans purge des caches système.
+Les mesures d’aperçu/confirmation retiennent dix observations après deux
+premiers passages écartés ; leurs p95 et p99 coïncident avec le maximum observé.
+Ces petites séries qualifient le jeu local, sans garantir les latences de queue
+sur un hébergement réel.
+Les rapports de chaque tentative sont conservés, y compris les dépassements
+du budget de synthèse avant optimisation et les reprises de fixtures.
+
+La reprise de qualification des lectures conserve son premier échec dans
+`tmp/gl-lecture-capacite-reprise-20261115.json` : les pages de 25/100 lots
+atteignaient 1 024/943 ms à 100 000 gains, et la synthèse 653 ms après ajout
+de 100 000 gains externes d’une autre organisation. Le plan enrichissait les
+coffrets avant de limiter les racines affichées. Les racines candidates sont
+désormais matérialisées avant cet enrichissement ; la revue indépendante
+confirme la conservation du périmètre autorisé, des filtres et des curseurs.
+Le diagnostic de reprise donne 673/742 ms pour les pages bornées. Les essais
+suivants ont retenu une pré-agrégation des faits par animation autorisée ; les
+variantes sans amélioration mesurée ne sont pas intégrées, et aucun index
+supplémentaire inutilisé n’est livré.
+
+La dernière passe complète, sur le même produit que les 38 tests fonctionnels,
+se termine par **deux échecs de performance en 266 secondes**, sans erreur de
+fixture ni test ignoré : `tmp/gl-lecture-capacite-produit-final-v3.xml`.
+Les assertions de totaux, du périmètre et de consommation passent ; les échecs
+portent sur le p95 de la synthèse. Les rapports conservent tous les profils,
+y compris ceux exécutés après le premier dépassement.
+
+| Profil L1 final | p95 local observé |
+| --- | --- |
+| 10 000 gains | Pages 25/100 : **55/176 ms** ; filtre Coffrets **250 ms** ; synthèse **77 ms**. |
+| 100 000 gains | Pages 25/100 : **400/306 ms** ; page profonde **82 ms** ; filtre **652 ms** ; détail **7 ms** ; recherche préfixe **99 ms** ; synthèse **379 ms**. |
+| Ajout de 10 000 puis 100 000 gains externes étrangers | Page 100 : **277/386 ms** ; synthèse **568/614 ms**, au-delà de 500 ms. |
+| Historique porté à 10 000 puis 100 000 événements | Page de gains **442/407 ms**, page d’historique **18/193 ms**. |
+| Ajout de 10 001 puis 100 001 coffrets étrangers, avec 20 002 puis 200 002 prestations | Page 100 **389/398 ms** ; filtre **742/636 ms** ; synthèse **832/607 ms**, au-delà de 500 ms. Les 100 000 gains autorisés et leurs sous-compteurs restent exacts. |
+
+Valeurs arrondies à la milliseconde supérieure. Douze observations par profil,
+après chauffe : p95 et p99 correspondent ici au maximum de la série. Toutes
+les lectures restent à une ou deux requêtes, avec moins de 2 Mio de mémoire
+supplémentaire du processus et moins de 2 Mio de pic Python. Rapports :
+`tmp/gl-lecture-capacite-produit-final-v3.json` et
+`tmp/gl-lecture-capacite-coffrets-produit-final-v3.json` ; plans réels inclus.
+Le relevé `tmp/gl-lecture-capacite-produit-final-v3-cpu.json` conserve la charge
+concurrente de l’éditeur. Elle explique une partie de la variabilité, sans
+annuler les échecs ni constituer une preuve de respect du budget.
+
+**Reste à faire GL-16 :** obtenir une synthèse sous 500 ms p95 pour les deux
+croissances étrangères, puis rejouer ces deux scénarios complets et le nominal
+mixte sur le code retenu. La qualification de l’évolution demeure ouverte ;
+les flags de rappels restent désactivés par défaut.
+
+### Publication et migration TEST — 15 novembre 2026
+
+À la demande explicite de commit, push et mise à jour de TEST, la base distante
+identifiée par le profil `.env.test`, distincte de la production, est passée
+de **v318 à v321**. Le lanceur canonique a appliqué exactement `v319`, `v320`
+et `v321`, après sauvegarde complète au format PostgreSQL custom, ACL conservées.
+L’archive de **79 333 276 octets** a été relue intégralement par `pg_restore`
+sans restauration sur une base ; son empreinte et les reçus restent privés dans
+`localeo-backend/demonstrations/prive/operations/gl-v319-v321-test-20261115T133329Z-2d1b99b0/`.
+
+Vérification après migration : aucun script en attente, trois checksums conformes,
+**22 index valides**, sept tables nouvelles présentes et vides ; la readiness
+du code courant, évaluée en lecture seule sur TEST, est valide. Un premier
+contrôle opérateur cherchait un nom d’index de 64 caractères ; il a été corrigé
+pour le nom physique limité à 63 octets par PostgreSQL, avec vérification de la
+colonne `derniere_preparation_at`. Aucun SQL déjà appliqué n’a été réécrit.
+
+Les migrations n’activent aucun rappel. Les paramètres d’environnement n’ont
+pas été modifiés et aucune communication réelle n’a été demandée. La réserve
+GL-16 reste ouverte. La santé HTTP observée avant publication renvoie 200 et
+la version backend `1.0.0+0c0c402` ; elle ne prouve pas le déploiement du nouveau
+code. La publication Git et la disponibilité des interfaces restent distinctes
+de la migration de schéma vérifiée ici.
+
 ## Correctif — accès au module Chasse au trésor (13 novembre 2026)
 
 **Diagnostic confirmé sur TEST ; correction et vérifications locales réalisées.**

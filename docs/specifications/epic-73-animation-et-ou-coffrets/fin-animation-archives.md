@@ -1,5 +1,13 @@
 # Fin d’animation et archives — E73-EVO-FIN-ARCHIVES
 
+Évolution confirmée le **15 novembre 2026 — E73-EVO-GESTION-LOTS** :
+[gestion centralisée des lots et remises](gestion-lots-remises.md), y compris
+les archives, avec accès aux mêmes décisions. GL-ARB-03 complète la cible de
+FA-04 : rappels manuels e-mail/WebPush autorisés après fin/archivage pour les
+lots encore utilisables ou à retirer, avec au moins 48 heures par bénéficiaire
+et animation. Cette exception est **spécifiée, non implémentée**. Le retrait
+exceptionnel externe reste acquis ; les autres commandes de gestion restent gelées.
+
 Complément du **12 novembre 2026 — E73-EVO-CLOTURE-AUTO** : voir la
 [spécification de clôture automatique et report de fin](#évolution-du-12-novembre-2026--clôture-automatique-et-report-de-fin).
 Cette extension est spécifiée, avec trois choix utilisateur confirmés ; elle n’est pas implémentée.
@@ -110,9 +118,17 @@ accessibles avec leurs contrôles habituels. La commande distincte d’archivage
 reste permise depuis `TERMINEE`. Créer une nouvelle édition produit une nouvelle
 animation ; cela ne modifie pas celle qui est figée.
 
-Seule la décision versionnée `FORCER_RETRAIT` décrite ci-dessus fait exception
-pour un lot externe explicitement clôturé. Elle ne rend pas disponibles les
-commandes ordinaires de suivi ou de correction d'une remise après archivage.
+Dans le comportement implémenté au 14 novembre, seule la décision versionnée
+`FORCER_RETRAIT` décrite ci-dessus fait exception pour un lot externe
+explicitement clôturé. Elle ne rend pas disponibles les commandes ordinaires
+de suivi ou de correction d'une remise après archivage.
+
+Décision du 15 novembre : GL-ARB-03 ajoute à la cible une seconde exception,
+limitée aux rappels manuels de droits encore exerçables, selon
+[GL-08 à GL-14](gestion-lots-remises.md#critères-et-matrice-de-traçabilité).
+Elle n’autorise ni une campagne ordinaire, ni une nouvelle attribution ou
+distribution, ni une modification du lot. Les preuves de gel historiques ne
+valident pas cette extension ; ses tests sont à produire lors de sa réalisation.
 
 L'exception existante de retrait des coordonnées du contact public est
 conservée pour `TERMINEE` et `ARCHIVEE` : dépublication ou effacement seulement,
@@ -206,7 +222,7 @@ identités restent distinctes ; l’archivage ne purge aucun de ces registres.
 | FA-01 | Clôturer conserve la population figée et permet encore de traiter les lots | Régressions domaine/application de clôture et tirage |
 | FA-02 | Un seul dossier non résolu, un tirage en attente ou des unités non justifiées bloquent Terminer | Domaine pur, orchestration et API pour chaque nature, zéro lot et remplacements |
 | FA-03 | Attestation et clôture sont explicites, motivées, auditées et refusées hors droits/tenant/version | Tests HTTP/PG, rollback clôture/révocation et rejeu |
-| FA-04 | Fin confirmée : statut TERMINEE, bilan lisible et mutations refusées sur API, ERP et workers, sauf constat versionné du retrait réel d'un lot externe explicitement clôturé | Matrice des entrées, concurrence PostgreSQL et garde de domaine ; exception du 14 novembre, idempotence et refus des autres natures |
+| FA-04 | Fin confirmée : statut TERMINEE, bilan lisible et mutations refusées sur API, ERP et workers, sauf constat versionné du retrait réel d'un lot externe explicitement clôturé ; cible complétée le 15 novembre par les seuls rappels manuels de droits encore exerçables selon GL-ARB-03 | Matrice des entrées, concurrence PostgreSQL et garde de domaine ; exception du 14 novembre, idempotence et refus des autres natures ; extension rappels à implémenter et vérifier par GL-08 à GL-14, sans réattribuer les preuves historiques |
 | FA-05 | Archiver exige TERMINEE, retire l’animation de Live et conserve les lots/droits acquis | Contrats catalogue/tableau privé, Mes lots et régressions Coffrets/Pro |
 | FA-06 | Mes archives ouvre une liste paginée et les fiches/bilans en lecture seule ; les archives sont exclues du Tableau de bord et de tous ses agrégats/alertes, même avec un filtre direct | Recette Animation PC/mobile, erreurs, liens directs et clavier ; tests de projection dashboard |
 | FA-07 | Timeline à six étapes, prochaine action concrète et compteurs de blocage visibles | Contrat workflow et recette de chaque état, sans progression inventée |

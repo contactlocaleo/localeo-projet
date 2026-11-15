@@ -3,6 +3,42 @@
 Ce guide accompagne les correctifs ANIM-001 à ANIM-014. Les états affichés
 proviennent du backend; le navigateur ne confirme pas un paiement ou un tirage.
 
+## Gérer les lots de plusieurs animations
+
+Ouvrez **Suivre l’activité → Lots et remises**. La liste couvre les gains de
+l’organisation et de la commune actives, y compris ceux des animations archivées.
+Elle réunit les lots externes, bons numériques et coffrets gagnés. Les coffrets
+achetés hors animation restent dans leur parcours habituel.
+
+Les indicateurs distinguent les lots à retirer, les coffrets à distribuer et
+ceux dont il reste des prestations à utiliser. La clôture administrative d’un
+dossier ne signifie pas que son lot a été retiré. Filtrez la liste puis ouvrez
+le lot : les actions disponibles dépendent de vos droits et de son état actuel.
+Vous pouvez enregistrer une remise externe, une attestation, un retrait
+exceptionnel autorisé ou distribuer le coffret directement depuis ce détail.
+Les bons et prestations conservent leur validation habituelle chez le commerçant.
+
+Pour rappeler les gagnants, sélectionnez de 1 à 100 gains, choisissez **E-mail**,
+**Notification téléphone**, ou les deux, puis préparez l’aperçu. Celui-ci indique
+les bénéficiaires, les messages et les exclusions. Plusieurs gains d’une même
+personne dans une animation sont regroupés. Confirmez après cette lecture ;
+aucune sélection vide ne signifie « tous les gagnants ».
+
+Les rappels restent possibles après la fin ou l’archivage pour les droits encore
+utilisables ou les lots à retirer. Il faut attendre au moins 48 heures entre
+deux rappels à la même personne pour la même animation, tous canaux confondus.
+Une notification téléphone demande un appareil personnel lié et des alertes
+Animations actives. Un canal absent ne déclenche aucun autre canal de secours.
+
+Le suivi distingue l’enregistrement, la préparation, l’acceptation par le service
+d’envoi, les exclusions, les échecs et les résultats incertains. Une acceptation
+ne prouve pas la lecture du message. Après une réponse réseau perdue, vérifiez
+le reçu dans la fenêtre avant de reprendre l’action. L’actualisation relit chaque
+bloc ; changer de commune ou d’organisation efface la sélection.
+
+Voir la [réalisation E73 Gestion des lots](../../../specifications/epic-73-animation-et-ou-coffrets/gestion-lots-remises.md).
+L’activation sur un environnement suit la recette et les réglages du déploiement.
+
 ## Terminer une animation et consulter ses archives
 
 Après **Clôturer**, traitez le tirage et les remises, puis ouvrez
@@ -23,6 +59,8 @@ qui ne sont pas encore déposés. Les messages déjà déposés restent historiq
 Réglez les opérations encore en cours ou programmées avant de terminer.
 **Terminer l’animation** exige une confirmation : la gestion devient en
 lecture seule, le bilan est consultable et l’animation reste dans Mon carnet.
+Les actions encore autorisées sur les gains restent accessibles dans **Lots et
+remises**, notamment le retrait exceptionnel d’un lot externe et les rappels.
 
 **Archiver l’animation** est une seconde action, accessible après la fin.
 Elle retire l’animation de Découvrir et Mon carnet ; les gains acquis restent

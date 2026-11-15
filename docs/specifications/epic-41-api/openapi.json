@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Backend - contrat implemente EPIC 41",
     "description": "OpenAPI complet du backend, dont les parcours Animation locale. Genere hors ligne depuis le code local pour les integrations et les mocks ; cet instantane ne prouve pas son deploiement.",
-    "version": "1.0.0+c0c4ea0"
+    "version": "1.0.0+0c0c402"
   },
   "paths": {
     "/public/identite-acces/interne/connexion": {
@@ -87153,6 +87153,1402 @@
         }
       }
     },
+    "/protected/animation-locale/lectures-globales/lots": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Lots",
+        "operationId": "lots_protected_animation_locale_lectures_globales_lots_get",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2048
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "nature",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "LOT_EXTERNE",
+                    "BON_NUMERIQUE",
+                    "COFFRET"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Nature"
+            }
+          },
+          {
+            "name": "etat",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "LOT_A_RETIRER",
+                    "BON_A_UTILISER",
+                    "COFFRET_A_DISTRIBUER",
+                    "COFFRET_DISTRIBUTION_ECHEC",
+                    "COFFRET_A_UTILISER",
+                    "COFFRET_PARTIEL",
+                    "REMIS",
+                    "CONSOMME",
+                    "CLOTURE",
+                    "EXPIRE",
+                    "REVOQUE",
+                    "REMPLACE",
+                    "A_EXAMINER",
+                    "PARTIEL_SANS_DROIT",
+                    "SANS_DROIT",
+                    "INDETERMINE"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "enum": [
+                    "COFFRETS_A_UTILISER",
+                    "COFFRETS_A_DISTRIBUER",
+                    "REMIS_OU_CONSOMMES"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Etat"
+            }
+          },
+          {
+            "name": "animation_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "commerce_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Commerce Id"
+            }
+          },
+          {
+            "name": "echeance_avant",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Echeance Avant"
+            }
+          },
+          {
+            "name": "rappel_possible",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Rappel Possible"
+            }
+          },
+          {
+            "name": "recherche",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 160,
+              "default": "",
+              "title": "Recherche"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageLotsRemises"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Demande invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentification requise",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Action non autorisée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ressource ou reçu introuvable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Version, aperçu ou état en conflit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Accès expiré",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Document trop volumineux",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Encodage non supporté",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Contenu invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Fréquence dépassée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Transaction indisponible, consulter le reçu",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/protected/animation-locale/lectures-globales/lots/synthese": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Synthese",
+        "operationId": "synthese_protected_animation_locale_lectures_globales_lots_synthese_get",
+        "parameters": [
+          {
+            "name": "nature",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "LOT_EXTERNE",
+                    "BON_NUMERIQUE",
+                    "COFFRET"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Nature"
+            }
+          },
+          {
+            "name": "etat",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "LOT_A_RETIRER",
+                    "BON_A_UTILISER",
+                    "COFFRET_A_DISTRIBUER",
+                    "COFFRET_DISTRIBUTION_ECHEC",
+                    "COFFRET_A_UTILISER",
+                    "COFFRET_PARTIEL",
+                    "REMIS",
+                    "CONSOMME",
+                    "CLOTURE",
+                    "EXPIRE",
+                    "REVOQUE",
+                    "REMPLACE",
+                    "A_EXAMINER",
+                    "PARTIEL_SANS_DROIT",
+                    "SANS_DROIT",
+                    "INDETERMINE"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "enum": [
+                    "COFFRETS_A_UTILISER",
+                    "COFFRETS_A_DISTRIBUER",
+                    "REMIS_OU_CONSOMMES"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Etat"
+            }
+          },
+          {
+            "name": "animation_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "commerce_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Commerce Id"
+            }
+          },
+          {
+            "name": "echeance_avant",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Echeance Avant"
+            }
+          },
+          {
+            "name": "rappel_possible",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Rappel Possible"
+            }
+          },
+          {
+            "name": "recherche",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 160,
+              "default": "",
+              "title": "Recherche"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SyntheseLotsRemises"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Demande invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentification requise",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Action non autorisée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ressource ou reçu introuvable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Version, aperçu ou état en conflit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Accès expiré",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Document trop volumineux",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Encodage non supporté",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Contenu invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Fréquence dépassée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Transaction indisponible, consulter le reçu",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/protected/animation-locale/lectures-globales/lots/{reference}": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Detail",
+        "operationId": "detail_protected_animation_locale_lectures_globales_lots__reference__get",
+        "parameters": [
+          {
+            "name": "reference",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "maxLength": 44,
+              "pattern": "^(libre|coffret):[0-9a-fA-F-]{36}$",
+              "title": "Reference"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DetailLotRemise"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Demande invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentification requise",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Action non autorisée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ressource ou reçu introuvable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Version, aperçu ou état en conflit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Accès expiré",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Document trop volumineux",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Encodage non supporté",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Contenu invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Fréquence dépassée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Transaction indisponible, consulter le reçu",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/protected/animation-locale/lectures-globales/lots/{reference}/historique": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Historique",
+        "operationId": "historique_protected_animation_locale_lectures_globales_lots__reference__historique_get",
+        "parameters": [
+          {
+            "name": "reference",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "maxLength": 44,
+              "pattern": "^(libre|coffret):[0-9a-fA-F-]{36}$",
+              "title": "Reference"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2048
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HistoriqueLotRemise"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Demande invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentification requise",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Action non autorisée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ressource ou reçu introuvable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Version, aperçu ou état en conflit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Accès expiré",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Document trop volumineux",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Encodage non supporté",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Contenu invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Fréquence dépassée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Transaction indisponible, consulter le reçu",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/protected/animation-locale/rappels-lots/apercu": {
+      "post": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Apercu",
+        "operationId": "apercu_protected_animation_locale_rappels_lots_apercu_post",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApercuRappelLotsInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApercuRappelLots"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/animation-locale/rappels-lots": {
+      "post": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Confirmer",
+        "operationId": "confirmer_protected_animation_locale_rappels_lots_post",
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 200,
+              "title": "Idempotency-Key"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfirmerRappelLotsInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecuRappelLots"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/animation-locale/rappels-lots/commandes/{cle}": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Recu",
+        "operationId": "recu_protected_animation_locale_rappels_lots_commandes__cle__get",
+        "parameters": [
+          {
+            "name": "cle",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Cle"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EtatCommandeRappelLots"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/animation-locale/rappels-lots/{rappel_id}": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Consulter",
+        "operationId": "consulter_protected_animation_locale_rappels_lots__rappel_id__get",
+        "parameters": [
+          {
+            "name": "rappel_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Rappel Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuiviRappelLots"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/animation-locale/rappels-lots/{rappel_id}/resultats": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Resultats",
+        "operationId": "resultats_protected_animation_locale_rappels_lots__rappel_id__resultats_get",
+        "parameters": [
+          {
+            "name": "rappel_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Rappel Id"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 1024
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResultatsRappelLots"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/public/localeo-live/installations/{installation_id}/rappels-lots/{cible_id}": {
+      "get": {
+        "tags": [
+          "Rappels de gains"
+        ],
+        "summary": "Personnel",
+        "operationId": "personnel_public_localeo_live_installations__installation_id__rappels_lots__cible_id__get",
+        "parameters": [
+          {
+            "name": "installation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Installation Id"
+            }
+          },
+          {
+            "name": "cible_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Cible Id"
+            }
+          },
+          {
+            "name": "x-localeo-live-secret",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Localeo-Live-Secret"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccesPersonnelRappelLots"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/internal/animation-locale/rappels-lots/traiter": {
+      "post": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Traiter",
+        "operationId": "traiter_internal_animation_locale_rappels_lots_traiter_post",
+        "parameters": [
+          {
+            "name": "X-API-KEY",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Cle API interne avec le scope `internal:batch`.",
+              "title": "X-Api-Key"
+            },
+            "description": "Cle API interne avec le scope `internal:batch`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BatchRappelsLotsInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BatchRappelsLotsResultat"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "XApiKey": []
+          },
+          {
+            "AdminSessionCookie": [],
+            "ManualBatchMode": [],
+            "ErpCsrfToken": []
+          }
+        ]
+      }
+    },
     "/public/localeo-live/participations/{participant_id}/preferences-organisateur": {
       "get": {
         "tags": [
@@ -112849,6 +114245,23 @@
             "description": "Session Animation au format `Bearer <token>`."
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/DistribuerCoffretInput"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Payload"
+              }
+            }
+          }
+        },
         "responses": {
           "202": {
             "description": "Successful Response",
@@ -112859,6 +114272,101 @@
                 }
               }
             }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/animation-locale/animations/{animation_id}/gains/{gain_id}/distribution/commandes/{cle}": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Lire Recu Distribution Coffret",
+        "operationId": "lire_recu_distribution_coffret",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "gain_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Gain Id"
+            }
+          },
+          {
+            "name": "cle",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Cle"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeConfirmee_OperationAnimationPayload_"
+                }
+              }
+            }
+          },
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeEnCours"
+                }
+              }
+            },
+            "description": "Accepted"
           },
           "422": {
             "description": "Validation Error",
@@ -127231,6 +128739,56 @@
         ],
         "title": "AccesGainCommande"
       },
+      "AccesPersonnelRappelLots": {
+        "properties": {
+          "rappel_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Rappel Id"
+          },
+          "cible_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Cible Id"
+          },
+          "animation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animation Id"
+          },
+          "participant_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Participant Id"
+          },
+          "references": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "References"
+          },
+          "titre": {
+            "type": "string",
+            "title": "Titre"
+          },
+          "contenu": {
+            "type": "string",
+            "title": "Contenu"
+          }
+        },
+        "type": "object",
+        "required": [
+          "rappel_id",
+          "cible_id",
+          "animation_id",
+          "participant_id",
+          "references",
+          "titre",
+          "contenu"
+        ],
+        "title": "AccesPersonnelRappelLots"
+      },
       "AccueilMarketplaceContextualisePayload": {
         "properties": {
           "contexte": {
@@ -131261,6 +132819,93 @@
         ],
         "title": "ApercuPolitiqueRequest"
       },
+      "ApercuRappelLots": {
+        "properties": {
+          "apercu_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Apercu Id"
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Expires At"
+          },
+          "nombre_gains": {
+            "type": "integer",
+            "title": "Nombre Gains"
+          },
+          "nombre_beneficiaires": {
+            "type": "integer",
+            "title": "Nombre Beneficiaires"
+          },
+          "messages_par_canal": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Messages Par Canal"
+          },
+          "cibles": {
+            "items": {
+              "$ref": "#/components/schemas/CibleApercuRappel"
+            },
+            "type": "array",
+            "title": "Cibles"
+          },
+          "exclusions": {
+            "items": {
+              "$ref": "#/components/schemas/ExclusionRappel"
+            },
+            "type": "array",
+            "title": "Exclusions"
+          }
+        },
+        "type": "object",
+        "required": [
+          "apercu_id",
+          "expires_at",
+          "nombre_gains",
+          "nombre_beneficiaires",
+          "messages_par_canal",
+          "cibles",
+          "exclusions"
+        ],
+        "title": "ApercuRappelLots"
+      },
+      "ApercuRappelLotsInput": {
+        "properties": {
+          "selection": {
+            "items": {
+              "$ref": "#/components/schemas/GainSelectionRappel"
+            },
+            "type": "array",
+            "maxItems": 100,
+            "minItems": 1,
+            "title": "Selection"
+          },
+          "canaux": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "EMAIL",
+                "WEBPUSH"
+              ]
+            },
+            "type": "array",
+            "maxItems": 2,
+            "minItems": 1,
+            "title": "Canaux"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "selection",
+          "canaux"
+        ],
+        "title": "ApercuRappelLotsInput"
+      },
       "ApercuRetraitMissionPayload": {
         "properties": {
           "animationId": {
@@ -132777,6 +134422,73 @@
           "operations"
         ],
         "title": "BatchLibre"
+      },
+      "BatchRappelsLotsInput": {
+        "properties": {
+          "limit": {
+            "type": "integer",
+            "maximum": 25.0,
+            "minimum": 1.0,
+            "title": "Limit",
+            "default": 25
+          },
+          "simulation": {
+            "type": "boolean",
+            "title": "Simulation",
+            "default": true
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "BatchRappelsLotsInput"
+      },
+      "BatchRappelsLotsResultat": {
+        "properties": {
+          "prepares": {
+            "type": "integer",
+            "title": "Prepares",
+            "default": 0
+          },
+          "appareils_captures": {
+            "type": "integer",
+            "title": "Appareils Captures",
+            "default": 0
+          },
+          "traites": {
+            "type": "integer",
+            "title": "Traites",
+            "default": 0
+          },
+          "acceptes": {
+            "type": "integer",
+            "title": "Acceptes",
+            "default": 0
+          },
+          "exclus": {
+            "type": "integer",
+            "title": "Exclus",
+            "default": 0
+          },
+          "echecs": {
+            "type": "integer",
+            "title": "Echecs",
+            "default": 0
+          },
+          "incertains": {
+            "type": "integer",
+            "title": "Incertains",
+            "default": 0
+          },
+          "simulation": {
+            "type": "boolean",
+            "title": "Simulation"
+          }
+        },
+        "type": "object",
+        "required": [
+          "simulation"
+        ],
+        "title": "BatchRappelsLotsResultat"
       },
       "BatchSmsPayload": {
         "properties": {
@@ -135405,6 +137117,70 @@
           "nextCursor"
         ],
         "title": "ChronologieResponse"
+      },
+      "CibleApercuRappel": {
+        "properties": {
+          "animation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animation Id"
+          },
+          "participant_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Participant Id"
+          },
+          "beneficiaire": {
+            "type": "string",
+            "title": "Beneficiaire"
+          },
+          "references": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "References"
+          },
+          "libelles": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Libelles"
+          },
+          "canaux": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "EMAIL",
+                "WEBPUSH"
+              ]
+            },
+            "type": "array",
+            "title": "Canaux"
+          },
+          "contenu": {
+            "type": "string",
+            "title": "Contenu"
+          },
+          "prochain_rappel_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Prochain Rappel At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "animation_id",
+          "participant_id",
+          "beneficiaire",
+          "references",
+          "libelles",
+          "canaux",
+          "contenu",
+          "prochain_rappel_at"
+        ],
+        "title": "CibleApercuRappel"
       },
       "CibleAttestationPayload": {
         "properties": {
@@ -139654,6 +141430,112 @@
         ],
         "title": "CompteursJustePrixPayload"
       },
+      "CompteursLots": {
+        "properties": {
+          "gains_courants": {
+            "type": "integer",
+            "title": "Gains Courants"
+          },
+          "lots_externes_a_retirer": {
+            "type": "integer",
+            "title": "Lots Externes A Retirer"
+          },
+          "bons_a_utiliser": {
+            "type": "integer",
+            "title": "Bons A Utiliser"
+          },
+          "coffrets_a_distribuer": {
+            "type": "integer",
+            "title": "Coffrets A Distribuer"
+          },
+          "coffrets_distribution_echec": {
+            "type": "integer",
+            "title": "Coffrets Distribution Echec"
+          },
+          "coffrets_a_utiliser": {
+            "type": "integer",
+            "title": "Coffrets A Utiliser"
+          },
+          "coffrets_jamais_utilises": {
+            "type": "integer",
+            "title": "Coffrets Jamais Utilises"
+          },
+          "coffrets_utilisation_commencee": {
+            "type": "integer",
+            "title": "Coffrets Utilisation Commencee"
+          },
+          "remis_ou_consommes": {
+            "type": "integer",
+            "title": "Remis Ou Consommes"
+          },
+          "clotures": {
+            "type": "integer",
+            "title": "Clotures"
+          },
+          "expires": {
+            "type": "integer",
+            "title": "Expires"
+          },
+          "revoques": {
+            "type": "integer",
+            "title": "Revoques"
+          },
+          "remplaces": {
+            "type": "integer",
+            "title": "Remplaces"
+          },
+          "a_examiner": {
+            "type": "integer",
+            "title": "A Examiner"
+          },
+          "partiels_sans_droit": {
+            "type": "integer",
+            "title": "Partiels Sans Droit"
+          },
+          "sans_droit": {
+            "type": "integer",
+            "title": "Sans Droit"
+          },
+          "indetermines": {
+            "type": "integer",
+            "title": "Indetermines"
+          },
+          "unites_sans_gagnant": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Unites Sans Gagnant"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "gains_courants",
+          "lots_externes_a_retirer",
+          "bons_a_utiliser",
+          "coffrets_a_distribuer",
+          "coffrets_distribution_echec",
+          "coffrets_a_utiliser",
+          "coffrets_jamais_utilises",
+          "coffrets_utilisation_commencee",
+          "remis_ou_consommes",
+          "clotures",
+          "expires",
+          "revoques",
+          "remplaces",
+          "a_examiner",
+          "partiels_sans_droit",
+          "sans_droit",
+          "indetermines",
+          "unites_sans_gagnant"
+        ],
+        "title": "CompteursLots"
+      },
       "CompteursParticipantsEmailPayload": {
         "properties": {
           "en_attente": {
@@ -140533,6 +142415,27 @@
         "type": "object",
         "title": "ConfirmerPreparationInput"
       },
+      "ConfirmerRappelLotsInput": {
+        "properties": {
+          "apercu_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Apercu Id"
+          },
+          "confirmation": {
+            "type": "boolean",
+            "const": true,
+            "title": "Confirmation"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "apercu_id",
+          "confirmation"
+        ],
+        "title": "ConfirmerRappelLotsInput"
+      },
       "Connexion": {
         "properties": {
           "email": {
@@ -140620,6 +142523,67 @@
           "prestations_consommees"
         ],
         "title": "ConsommationGainAnimationPayload"
+      },
+      "ConsommationLot": {
+        "properties": {
+          "statut": {
+            "type": "string",
+            "enum": [
+              "SANS_OBJET",
+              "INDETERMINEE",
+              "AUCUNE",
+              "PARTIELLE",
+              "COMPLETE",
+              "PARTIELLE_SANS_DROIT"
+            ],
+            "title": "Statut"
+          },
+          "total": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total"
+          },
+          "consommees": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Consommees"
+          },
+          "restantes": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Restantes"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "statut",
+          "total",
+          "consommees",
+          "restantes"
+        ],
+        "title": "ConsommationLot"
       },
       "ConsommerBon": {
         "properties": {
@@ -142144,6 +144108,40 @@
           "communes"
         ],
         "title": "CouvertureInput"
+      },
+      "CouvertureLots": {
+        "properties": {
+          "statut": {
+            "type": "string",
+            "enum": [
+              "COMPLETE",
+              "PARTIELLE"
+            ],
+            "title": "Statut"
+          },
+          "gains_indetermines": {
+            "type": "integer",
+            "title": "Gains Indetermines"
+          },
+          "actualisation_en_retard": {
+            "type": "boolean",
+            "title": "Actualisation En Retard"
+          },
+          "methode": {
+            "type": "string",
+            "const": "LECTURE_COURANTE",
+            "title": "Methode"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "statut",
+          "gains_indetermines",
+          "actualisation_en_retard",
+          "methode"
+        ],
+        "title": "CouvertureLots"
       },
       "CouvertureMesuresDTO": {
         "properties": {
@@ -146394,6 +148392,33 @@
         ],
         "title": "DetailAudit"
       },
+      "DetailLotRemise": {
+        "properties": {
+          "lot": {
+            "$ref": "#/components/schemas/LotRemise"
+          },
+          "observed_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Observed At"
+          },
+          "scope": {
+            "$ref": "#/components/schemas/PerimetreLots"
+          },
+          "couverture": {
+            "$ref": "#/components/schemas/CouvertureLots"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "lot",
+          "observed_at",
+          "scope",
+          "couverture"
+        ],
+        "title": "DetailLotRemise"
+      },
       "DetailNotification": {
         "properties": {
           "id": {
@@ -147447,6 +149472,50 @@
         ],
         "title": "DisponibiliteAccueilMarketplacePayload"
       },
+      "DistribuerCoffretInput": {
+        "properties": {
+          "expected_version": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 64,
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Expected Version"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version"
+        ],
+        "title": "DistribuerCoffretInput"
+      },
+      "DistributionLot": {
+        "properties": {
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          },
+          "distribue_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Distribue At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "statut",
+          "distribue_at"
+        ],
+        "title": "DistributionLot"
+      },
       "DocumentCommandeLotsPayload": {
         "properties": {
           "document_id": {
@@ -147751,6 +149820,51 @@
           "decision"
         ],
         "title": "DossierFinAnimationPayload"
+      },
+      "DossierLot": {
+        "properties": {
+          "ref": {
+            "type": "string",
+            "title": "Ref"
+          },
+          "version_dossier": {
+            "type": "string",
+            "title": "Version Dossier"
+          },
+          "statut_resolution": {
+            "type": "string",
+            "enum": [
+              "A_TRAITER",
+              "REMIS",
+              "CLOTURE"
+            ],
+            "title": "Statut Resolution"
+          },
+          "actions_disponibles": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "ENREGISTRER_REMISE",
+                "DISTRIBUER_COFFRET",
+                "ENVOYER_RAPPEL",
+                "ATTESTER_REMISE",
+                "CLOTURER_DOSSIER",
+                "FORCER_RETRAIT"
+              ]
+            },
+            "type": "array",
+            "title": "Actions Disponibles"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "ref",
+          "version_dossier",
+          "statut_resolution",
+          "actions_disponibles"
+        ],
+        "title": "DossierLot"
       },
       "DossierPatch": {
         "properties": {
@@ -149997,6 +152111,34 @@
         ],
         "title": "EtapeScanPayload"
       },
+      "EtatCommandeRappelLots": {
+        "properties": {
+          "statut": {
+            "type": "string",
+            "enum": [
+              "EN_COURS",
+              "CONFIRMEE"
+            ],
+            "title": "Statut"
+          },
+          "resultat": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RecuRappelLots"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "statut",
+          "resultat"
+        ],
+        "title": "EtatCommandeRappelLots"
+      },
       "EtatCourantBon": {
         "properties": {
           "etat": {
@@ -151702,6 +153844,56 @@
         ],
         "title": "EvenementAnimationPayload"
       },
+      "EvenementLot": {
+        "properties": {
+          "reference": {
+            "type": "string",
+            "title": "Reference"
+          },
+          "type": {
+            "type": "string",
+            "title": "Type"
+          },
+          "occurred_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Occurred At"
+          },
+          "motif": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motif"
+          },
+          "acteur_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Acteur Id"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "reference",
+          "type",
+          "occurred_at",
+          "motif",
+          "acteur_id"
+        ],
+        "title": "EvenementLot"
+      },
       "EvenementLotSuivi": {
         "properties": {
           "id": {
@@ -151992,6 +154184,29 @@
           "acteurType"
         ],
         "title": "EvenementServicePayload"
+      },
+      "ExclusionRappel": {
+        "properties": {
+          "reference": {
+            "type": "string",
+            "title": "Reference"
+          },
+          "code": {
+            "type": "string",
+            "title": "Code"
+          },
+          "motif": {
+            "type": "string",
+            "title": "Motif"
+          }
+        },
+        "type": "object",
+        "required": [
+          "reference",
+          "code",
+          "motif"
+        ],
+        "title": "ExclusionRappel"
       },
       "ExecuterConservationBatchInput": {
         "properties": {
@@ -154694,6 +156909,17 @@
       },
       "GainAnimationPayload": {
         "properties": {
+          "version_distribution": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Version Distribution"
+          },
           "dossier_fin_ref": {
             "anyOf": [
               {
@@ -155973,6 +158199,29 @@
         ],
         "title": "GainLotExterne"
       },
+      "GainSelectionRappel": {
+        "properties": {
+          "reference": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Reference"
+          },
+          "version": {
+            "type": "string",
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Version"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "reference",
+          "version"
+        ],
+        "title": "GainSelectionRappel"
+      },
       "GelConservationPayload": {
         "properties": {
           "id": {
@@ -157178,6 +159427,41 @@
         },
         "type": "object",
         "title": "HTTPValidationError"
+      },
+      "HistoriqueLotRemise": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/EvenementLot"
+            },
+            "type": "array",
+            "maxItems": 100,
+            "title": "Items"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "next_cursor",
+          "has_more"
+        ],
+        "title": "HistoriqueLotRemise"
       },
       "HistoriqueModule": {
         "properties": {
@@ -160932,6 +163216,215 @@
           "ordre"
         ],
         "title": "LotPreparationChasse"
+      },
+      "LotRemise": {
+        "properties": {
+          "reference": {
+            "type": "string",
+            "title": "Reference"
+          },
+          "gain_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Gain Id"
+          },
+          "nature": {
+            "type": "string",
+            "enum": [
+              "LOT_EXTERNE",
+              "BON_NUMERIQUE",
+              "COFFRET"
+            ],
+            "title": "Nature"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "animation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animation Id"
+          },
+          "animation_nom": {
+            "type": "string",
+            "title": "Animation Nom"
+          },
+          "animation_statut": {
+            "type": "string",
+            "title": "Animation Statut"
+          },
+          "animation_version": {
+            "type": "integer",
+            "title": "Animation Version"
+          },
+          "beneficiaire_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Beneficiaire Id"
+          },
+          "beneficiaire": {
+            "type": "string",
+            "title": "Beneficiaire"
+          },
+          "attribue_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Attribue At"
+          },
+          "version": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "title": "Version"
+          },
+          "version_rappel": {
+            "type": "string",
+            "title": "Version Rappel"
+          },
+          "commerce_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Commerce Id"
+          },
+          "lieu_retrait": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lieu Retrait"
+          },
+          "echeance_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Echeance At"
+          },
+          "etat_operationnel": {
+            "type": "string",
+            "enum": [
+              "LOT_A_RETIRER",
+              "BON_A_UTILISER",
+              "COFFRET_A_DISTRIBUER",
+              "COFFRET_DISTRIBUTION_ECHEC",
+              "COFFRET_A_UTILISER",
+              "COFFRET_PARTIEL",
+              "REMIS",
+              "CONSOMME",
+              "CLOTURE",
+              "EXPIRE",
+              "REVOQUE",
+              "REMPLACE",
+              "A_EXAMINER",
+              "PARTIEL_SANS_DROIT",
+              "SANS_DROIT",
+              "INDETERMINE"
+            ],
+            "title": "Etat Operationnel"
+          },
+          "distribution": {
+            "$ref": "#/components/schemas/DistributionLot"
+          },
+          "consommation": {
+            "$ref": "#/components/schemas/ConsommationLot"
+          },
+          "dossier": {
+            "$ref": "#/components/schemas/DossierLot"
+          },
+          "actions_disponibles": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "ENREGISTRER_REMISE",
+                "DISTRIBUER_COFFRET",
+                "ENVOYER_RAPPEL",
+                "ATTESTER_REMISE",
+                "CLOTURER_DOSSIER",
+                "FORCER_RETRAIT"
+              ]
+            },
+            "type": "array",
+            "title": "Actions Disponibles"
+          },
+          "dernier_rappel_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Dernier Rappel At"
+          },
+          "rappel_possible": {
+            "type": "boolean",
+            "title": "Rappel Possible"
+          },
+          "motif_rappel_indisponible": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motif Rappel Indisponible"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "reference",
+          "gain_id",
+          "nature",
+          "libelle",
+          "animation_id",
+          "animation_nom",
+          "animation_statut",
+          "animation_version",
+          "beneficiaire_id",
+          "beneficiaire",
+          "attribue_at",
+          "version",
+          "version_rappel",
+          "commerce_id",
+          "lieu_retrait",
+          "echeance_at",
+          "etat_operationnel",
+          "distribution",
+          "consommation",
+          "dossier",
+          "actions_disponibles",
+          "dernier_rappel_at",
+          "rappel_possible",
+          "motif_rappel_indisponible"
+        ],
+        "title": "LotRemise"
       },
       "LotSuivi": {
         "properties": {
@@ -169019,6 +171512,55 @@
         ],
         "title": "PageLibre[SuppleantLibre]"
       },
+      "PageLotsRemises": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/LotRemise"
+            },
+            "type": "array",
+            "maxItems": 100,
+            "title": "Items"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More"
+          },
+          "observed_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Observed At"
+          },
+          "scope": {
+            "$ref": "#/components/schemas/PerimetreLots"
+          },
+          "couverture": {
+            "$ref": "#/components/schemas/CouvertureLots"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "next_cursor",
+          "has_more",
+          "observed_at",
+          "scope",
+          "couverture"
+        ],
+        "title": "PageLotsRemises"
+      },
       "PageLotsSuivi": {
         "properties": {
           "items": {
@@ -170230,6 +172772,39 @@
           "pageSize"
         ],
         "title": "PageResponse"
+      },
+      "PageResultatsRappelLots": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ResultatRappelLot"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "next_cursor",
+          "has_more"
+        ],
+        "title": "PageResultatsRappelLots"
       },
       "PageSalaries": {
         "properties": {
@@ -173319,6 +175894,27 @@
         "additionalProperties": false,
         "type": "object",
         "title": "PayloadVide"
+      },
+      "PerimetreLots": {
+        "properties": {
+          "partenaire_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Partenaire Id"
+          },
+          "commune_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Commune Id"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "partenaire_id",
+          "commune_id"
+        ],
+        "title": "PerimetreLots"
       },
       "PerimetresCommercantPayload": {
         "properties": {
@@ -182468,6 +185064,54 @@
         ],
         "title": "RecuQrLieuPayload"
       },
+      "RecuRappelLots": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "statut": {
+            "type": "string",
+            "const": "ENREGISTREE",
+            "title": "Statut",
+            "default": "ENREGISTREE"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "nombre_beneficiaires": {
+            "type": "integer",
+            "title": "Nombre Beneficiaires"
+          },
+          "canaux": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "EMAIL",
+                "WEBPUSH"
+              ]
+            },
+            "type": "array",
+            "title": "Canaux"
+          },
+          "receipt_url": {
+            "type": "string",
+            "title": "Receipt Url"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "created_at",
+          "nombre_beneficiaires",
+          "canaux",
+          "receipt_url"
+        ],
+        "title": "RecuRappelLots"
+      },
       "RecuRetraitMission": {
         "properties": {
           "animationId": {
@@ -185418,6 +188062,67 @@
         ],
         "title": "ResultatPurgeQuotidiennePayload"
       },
+      "ResultatRappelLot": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "animation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animation Id"
+          },
+          "participant_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Participant Id"
+          },
+          "beneficiaire": {
+            "type": "string",
+            "title": "Beneficiaire"
+          },
+          "canal": {
+            "type": "string",
+            "enum": [
+              "EMAIL",
+              "WEBPUSH"
+            ],
+            "title": "Canal"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          },
+          "motif": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motif"
+          },
+          "reference_source": {
+            "type": "string",
+            "title": "Reference Source"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "animation_id",
+          "participant_id",
+          "beneficiaire",
+          "canal",
+          "statut",
+          "reference_source"
+        ],
+        "title": "ResultatRappelLot"
+      },
       "ResultatRevocation": {
         "properties": {
           "changed": {
@@ -188363,6 +191068,56 @@
         ],
         "title": "SuiviPreparationPayload"
       },
+      "SuiviRappelLots": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "nombre_beneficiaires": {
+            "type": "integer",
+            "title": "Nombre Beneficiaires"
+          },
+          "canaux": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "EMAIL",
+                "WEBPUSH"
+              ]
+            },
+            "type": "array",
+            "title": "Canaux"
+          },
+          "compteurs": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Compteurs"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "statut",
+          "created_at",
+          "nombre_beneficiaires",
+          "canaux",
+          "compteurs"
+        ],
+        "title": "SuiviRappelLots"
+      },
       "SupervisionLiveAnimationPayload": {
         "properties": {
           "generated_at": {
@@ -189128,6 +191883,33 @@
           "diffusions_webpush_en_erreur"
         ],
         "title": "SyntheseDemandesParticipationPayload"
+      },
+      "SyntheseLotsRemises": {
+        "properties": {
+          "compteurs": {
+            "$ref": "#/components/schemas/CompteursLots"
+          },
+          "observed_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Observed At"
+          },
+          "scope": {
+            "$ref": "#/components/schemas/PerimetreLots"
+          },
+          "couverture": {
+            "$ref": "#/components/schemas/CouvertureLots"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "compteurs",
+          "observed_at",
+          "scope",
+          "couverture"
+        ],
+        "title": "SyntheseLotsRemises"
       },
       "SynthesePaiements": {
         "properties": {
