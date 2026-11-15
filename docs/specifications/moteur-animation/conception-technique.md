@@ -2059,3 +2059,104 @@ sont reliés à leurs résultats dans le
 [suivi de réalisation](suivi-implementation.md#e55-evol-traitement-20261113).
 La recette déployée, le pilote
 humain et les mesures de productivité restent distincts des tests locaux.
+
+<a id="e55-prompt-clarte-20261115"></a>
+## E55-PROMPT-CLARTE-20261115 — contexte communal et qualité éditoriale
+
+La [cible E55-PC-01 à PC-05](localeo_animation_engine_spec.md#e55-prompt-clarte-20261115)
+concerne le gabarit et la préparation des nouveaux prompts Chasse, sans
+changement de règle de jeu. `ServiceContenuGenerationAnimation` compose les
+instructions ; `WorkerGenerationAnimation` résout le nom communal au moment
+de `PREPARATION_PROMPT` par le port `uow.villes`, avec l’UUID de l’opération.
+Cette courte lecture précède la construction hors transaction. Une commune
+introuvable ou incohérente produit un échec de préparation ; aucun nom n’est
+deviné à partir d’une adresse. Le domaine conserve les transitions, les
+vérifications de dépendances, le bail et le rattachement versionné existants.
+
+Le nom est transmis avec le brief dans les messages, et `{id, nom}` dans le
+contexte privé du prompt. Ce contexte participe à `request_hash`, comme les
+messages, le schéma et les paramètres. La persistance et les exports conservent
+ces valeurs exactes ; une nouvelle version du code ne recalcule pas un prompt
+déjà enregistré. Au premier passage de cette évolution, une révision explicite
+construit une nouvelle version 1.3.
+Un changement ultérieur du libellé communal ne réécrit donc pas l’export ancien.
+
+| Critères | Vérification et impacts |
+| --- | --- |
+| PC-01 | Tests du message, du contexte, de l’empreinte et du refus de commune incohérente ; cycle PostgreSQL avec nom communal différent de celui de l’adresse commerçante, export et révision. Une lecture par clé primaire supplémentaire par nouveau prompt Chasse ; aucune liste, collecte d’annuaire, jointure par étape ou nouvelle tâche. |
+| PC-02/03/04 | Instructions structurées : ancrage factuel/fiction, problème et résolution, source/action/réponse de chaque défi, aides et auto-vérification. Revue éditoriale indépendante ; les validateurs structurels ne deviennent pas des juges automatiques de la compréhension ou du réalisme. |
+| PC-05 | Même brief et schéma de réponse 1.0, mêmes médias, import historique, quotas, acceptation et préparation. Passeport inchangé ; tests des formats, du contrôle consultatif, de la compilation et du worker. |
+
+Dépôts affectés : backend et documentation centrale. Les API, schémas exportés
+et contrats embarqués Animation/ERP/Live/Pro restent identiques ; aucun écran
+ni rendu n’est modifié. Aucune migration, nouvelle permission ou configuration
+fournisseur. Le générateur de démonstration ne construit pas ces instructions
+et ses contenus existants restent compatibles ; ses données ne sont pas
+réécrites. Les fixtures de test couvrent le contexte et les imports historiques.
+Livrer le backend pour les prochains prompts ; pour une demande existante,
+utiliser sa révision explicite, sans modifier le brut en base. La recette de
+compréhension sur des réponses réellement générées reste à effectuer avant
+de conclure à un gain qualitatif terrain ; voir le [bilan](suivi-implementation.md#e55-prompt-clarte-20261115).
+
+<a id="e55-prompt-ancrage-20261115"></a>
+## E55-PROMPT-ANCRAGE-20261115 — recherche et énigmes propres à chaque lieu
+
+Le complément [PC-06 à PC-10](localeo_animation_engine_spec.md#e55-prompt-ancrage-20261115)
+fait évoluer le seul gabarit Chasse en **1.4**. Le service applicatif compose les
+instructions ; l’opérateur les exécute dans un outil d’IA externe capable de
+consulter le web. Aucune recherche réseau, intégration fournisseur, tâche ou
+persistance documentaire supplémentaire n’est introduite dans le backend.
+L’identité des lieux vient du brief existant ; le nom communal reste celui
+résolu et figé par le mécanisme PC-01. Les recherches ne peuvent pas modifier
+les UUID, noms ou adresses du brief ni arbitrer silencieusement un homonyme.
+
+L’outil externe doit ouvrir les sources pertinentes, en établir la provenance
+et construire des énigmes dont le fait local intervient dans l’action et la
+réponse. Un lieu ne satisfait pas ce critère par sa simple mention dans la
+scène. Une observation concrète doit être confirmée sur le terrain ; un
+support proposé doit être adapté à une particularité vérifiée et accessible
+sur place dans les mécanismes QR existants. Cette instruction ne crée ni
+nouvelle preuve de présence ni nouvelle dépendance entre réponses.
+
+Le dossier `dossier-recherche.md` reste un livrable de l’outil externe pour
+la relecture opérateur. Il référence les UUID existants, les pages réellement
+ouvertes, les faits retenus et les préparatifs à confirmer. Il reprend aussi
+l’identifiant, l’empreinte et la version du prompt lorsqu’ils sont présents
+dans l’export, pour permettre le rapprochement lors de la relecture. Il ne devient ni
+un champ du brief, ni une pièce persistée par le moteur, ni une donnée publique.
+Seul `chasse.json`, sans ajout de champ ou URL de recherche, suit la vérification,
+le dépôt, la relecture et l’acceptation existants. Les fichiers ne sont pas
+concaténés ; le validateur JSON ne prouve ni la fiabilité des sources ni le
+caractère contextualisé des énigmes.
+
+Une impossibilité de recherche, une identité ambiguë ou un fait indispensable
+manquant impose à l’outil externe de signaler le manque et demander un complément
+ciblé avant de produire un jeu présenté comme achevé. Aucun échec métier backend
+supplémentaire n’est créé : l’opérateur conserve la demande existante et complète
+son travail externe. Une réponse étrangère aux contrats reste refusée par les
+contrôles existants. Les instructions ne présument aucun accord d’une personne
+réelle ; les échanges obligatoires, achats et sources privées restent exclus de
+la résolution.
+
+Le compilateur existant transforme un `interactionCommercant` non vide en
+action `ASK_MERCHANT` obligatoire. Les instructions 1.4 imposent donc `null`
+dans les nouvelles missions, y compris chez un commerce ; une rencontre
+facultative reste dans le récit ou la consigne sans condition de réponse.
+Le compilateur et les anciens contenus conservent leur comportement : le
+complément ne modifie pas le contrat ni les règles de preuve de passage.
+
+| Critères | Vérification et impacts |
+| --- | --- |
+| PC-06/08/09 | Revue du gabarit : recherche préalable réellement effectuée, désambiguïsation, sources ouvertes et datées dans le dossier séparé, arrêt explicite si le prérequis manque. Tests du constructeur, des identités conservées et des messages exportés ; aucun appel web backend à simuler. |
+| PC-07/10 | Revue éditoriale : lien fait/action/réponse, motif de venue et test de substitution, faits/fiction/préparatifs distingués, aucune personne réelle engagée sans accord. La solvabilité se vérifie avec le contenu accessible au joueur, sans recherche web joueur ni échange imposé. Une génération complète et une confirmation terrain restent nécessaires pour qualifier le résultat effectif. |
+| PC-01/04/05 conservés | Même nom communal canonique, contexte et empreinte figés, schéma 1.0, formats, médias, confidentialité, quotas, transitions, révisions et acceptation humaine. Les anciens prompts et réponses restent lisibles ; une révision explicite produit 1.4, sans réécrire 1.2/1.3. Passeport conserve 1.1. Tests de non-régression ciblés et de persistance/export. |
+
+Dépôts affectés : backend et documentation centrale. Aucun changement d’API,
+de contrat OpenAPI ou JSON Schema, de client embarqué, d’écran ERP/Animation/
+Live/Pro, de migration ou de permission : les livrables utilisent le parcours
+manuel existant. Aucune configuration fournisseur backend ; l’opérateur doit
+en revanche choisir un outil externe doté d’un accès web pour appliquer 1.4.
+Le générateur de démonstration ne compose pas ces instructions et ses contenus
+restent compatibles ; aucune régénération ou réécriture de données n’est
+nécessaire. Les contrôles automatiques et les limites de recette sont suivis
+dans le [bilan du complément](suivi-implementation.md#e55-prompt-ancrage-20261115).

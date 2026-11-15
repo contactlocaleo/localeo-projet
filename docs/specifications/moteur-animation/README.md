@@ -22,6 +22,22 @@ ces résultats ne clôturent pas l'epic et ne déclarent aucun déploiement.
 
 La [spécification unique du moteur](localeo_animation_engine_spec.md) décrit l'Animation générique, le DSL JSON, les moteurs spécialisés et le catalogue V1 : Passeport commerçant, Tombola locale et Chasse au trésor.
 
+Le premier passage [E55-PROMPT-CLARTE-20261115](localeo_animation_engine_spec.md#e55-prompt-clarte-20261115)
+améliore le gabarit Chasse en **1.3** : contexte communal explicite, intrigue
+concrète, étapes liées au récit et énigmes dont la résolution est expliquée par
+les éléments accessibles au joueur. Les anciens prompts restent conservés ;
+le [bilan](suivi-implementation.md#e55-prompt-clarte-20261115) distingue les
+contrôles du générateur de la qualité des réponses réellement obtenues.
+
+Le complément [E55-PROMPT-ANCRAGE-20261115](localeo_animation_engine_spec.md#e55-prompt-ancrage-20261115)
+porte le gabarit Chasse en **1.4** : recherche web préalable sur les lieux et
+commerces, énigmes fondées sur leurs particularités et déplacement utile à leur
+résolution. L’outil d’IA externe produit un dossier de recherche pour la relecture
+et un fichier JSON distinct pour l’import. Le backend ne consulte pas le web et
+ne conserve pas ce dossier. Les [preuves de ce complément](suivi-implementation.md#e55-prompt-ancrage-20261115)
+restent séparées de celles du premier passage ; les anciens prompts exigent une
+révision explicite pour bénéficier des nouvelles instructions.
+
 La Chasse V1 prévoit cinq activités : QCM, information, association, remise en ordre et saisie d’un mot/code (TRE-ARB-88, section 4.6.3). Les cinq validateurs métier et leurs contrats sont implémentés dans le socle T1 ; la persistance du jeu et les trois rendus Live sont implémentés et vérifiés localement en T4. Le [compte rendu d’implémentation](suivi-implementation.md) détaille les preuves et les limites par lot.
 
 Le catalogue doit pouvoir accueillir de nouveaux types via des modules enregistrés (schéma, règles, commandes, projections et renderer). Le profil linéaire est propre à la Chasse V1 ; il ne limite pas le socle commun. Voir la section 4.8 et TRE-ARB-56 de la spécification.

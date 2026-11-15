@@ -2444,6 +2444,85 @@ Les preuves sont consignées dans le [suivi](suivi-implementation.md), séparém
 du bilan historique de l’epic et de toute recette déployée.
 
 <a id="references"></a>
+<a id="e55-prompt-clarte-20261115"></a>
+## Évolution du 15 novembre 2026 — récit communal et énigmes compréhensibles
+
+**E55-PROMPT-CLARTE-20261115.** Les premiers essais utilisateur signalent des
+énigmes difficiles à comprendre et une histoire abstraite, avec des liens
+artificiels entre les étapes. Le générateur actuel demande un récit varié,
+mais n’explicite pas sa causalité ni la démarche permettant de résoudre chaque
+défi. Le message envoyé contient les lieux du brief, sans nom communal explicite.
+
+La version **1.3 du gabarit Chasse** complète TRE-ARB-87 et E55-KIT-01 sans
+modifier le brief court, le schéma de réponse 1.0 ou le moteur. Elle demande
+une aventure située dans la commune, compréhensible et cohérente avec les
+lieux et métiers réellement disponibles. Le thème reste libre, y compris
+fantastique ; ses règles doivent être expliquées. L’imagination porte sur la
+fiction, sans fabriquer de patrimoine, légende locale ou fait historique.
+
+| Critère ajouté | Attente du générateur et preuve prévue |
+| --- | --- |
+| E55-PC-01 | Transmettre le nom communal depuis la fiche serveur correspondant à l’UUID de l’opération, sans le déduire des adresses ou du texte libre. Figer ce contexte dans le prompt et son empreinte ; vérifier production, persistance et export. |
+| E55-PC-02 | Demander un problème initial concret, un rôle joueur clair, un fil conducteur et une conclusion répondant au problème. Chaque étape apporte une avancée compréhensible, liée aux faits disponibles sur son lieu ou son métier ; relecture indépendante des consignes. |
+| E55-PC-03 | Demander pour chaque énigme une source accessible au joueur, une action précise et la forme de réponse attendue. La solution doit être déductible des éléments fournis ou d’une observation explicitement préparée, sans connaissance locale implicite, consigne privée ou dialogue obligatoire. Indice progressif et aide explicative ; relecture des cinq formats. |
+| E55-PC-04 | Demander une vérification de solvabilité avant émission du JSON : QCM unique, association sans ambiguïté, ordre justifié, mot/code explicable. Écarter associations symboliques arbitraires et mécanismes supplémentaires ; la continuité narrative ne crée pas de dépendance technique entre énigmes. |
+| E55-PC-05 | Préserver les contrats et protections : une mission par commerce dans les nouveaux prompts, anciens imports à deux missions, cinq formats, confidentialité, absence d’achat, médias, quotas, versions et acceptation humaine. Tests de non-régression ; prompts persistés non réécrits et Passeport inchangé. |
+
+Ces critères portent sur les instructions effectivement produites et leur
+intégration. Ils ne prouvent pas la qualité d’une réponse future du fournisseur.
+La relecture humaine doit aussi vérifier l’immersion et la compréhension sur
+des histoires réellement générées, puis lors du pilote ; ces résultats restent
+distincts des tests automatiques et des conditions historiques d’ouverture E55.
+
+La [conception](conception-technique.md#e55-prompt-clarte-20261115) décrit le
+contexte communal et la compatibilité. Les preuves et limites sont consignées
+dans le [suivi](suivi-implementation.md#e55-prompt-clarte-20261115).
+L’epic conserve son statut **En cours**.
+
+<a id="e55-prompt-ancrage-20261115"></a>
+## Complément du 15 novembre 2026 — enquêter sur les lieux et justifier la visite
+
+**E55-PROMPT-ANCRAGE-20261115** complète la première évolution 1.3 et ses
+critères PC-01 à PC-05. La précision utilisateur demande que l’énigme dépende
+réellement du point d’intérêt ou du commerce : le nom du lieu ajouté à une
+énigme générique ne suffit pas. Le gabarit **Chasse 1.4** demande une recherche
+documentaire préalable, puis un récit dans lequel se rendre sur place permet
+de comprendre ou de résoudre l’étape.
+
+Le parcours reste manuel : l’opérateur exécute le prompt dans un outil d’IA
+disposant d’un accès web, relit le dossier de recherche et le jeu, puis importe
+le seul JSON du jeu dans l’ERP. Le backend prépare les instructions ; il
+n’effectue pas cette recherche et ne conserve pas le dossier documentaire.
+Cette extension renforce PC-02/PC-03 ; PC-01, PC-04 et PC-05 restent applicables.
+
+| Critère ajouté | Attente du générateur et preuve prévue |
+| --- | --- |
+| E55-PC-06 | Demander une recherche réelle sur chaque lieu candidat identifié par son nom, son adresse et la commune fournie. Ouvrir et recouper les pages pertinentes en privilégiant le site du commerce, la mairie, les organismes patrimoniaux ou culturels officiels. Ne pas fusionner des homonymes ni modifier les UUID, noms et adresses du brief. Distinguer faits vérifiés, fiction et préparation proposée. Revue des instructions et de la conservation des identités du brief. |
+| E55-PC-07 | Justifier chaque déplacement par une particularité vérifiée du lieu ou du commerce : une observation locale exploitable, ou un support joueur conçu pour cette particularité et accessible sur place par le QR autorisé. Expliquer le lien entre fait local, action du joueur, réponse et progression du récit. Si remplacer ce lieu par un autre ne change pas l’énigme, réécrire l’étape. Une spécialité générique du métier ou un simple changement de nom ne suffisent pas. Revue du test de substitution et du caractère résoluble sans connaissance préalable. |
+| E55-PC-08 | Produire deux fichiers distincts : `dossier-recherche.md` pour la relecture, et `chasse.json` seul destiné à l’import. Le dossier reprend l’identifiant du prompt, son empreinte et sa version lorsqu’ils figurent dans l’export. Pour chaque UUID de lieu, il indique les sources réellement ouvertes avec URL, titre et date de consultation, le fait utile, le motif de venue, le lien fait/action/réponse et les observations ou préparatifs à confirmer. Ne pas ajouter de champ, de source ou d’URL de recherche au JSON, ni coller le dossier avec celui-ci. Vérifier la séparation des livrables et le maintien du schéma 1.0. |
+| E55-PC-09 | Si l’outil ne peut pas consulter le web, si l’identité d’un lieu est ambiguë ou si un fait indispensable manque, déclarer précisément cette limite et demander les compléments ciblés : source officielle, identité du lieu, photo ou renseignement terrain nécessaire. Ne pas inventer de source, présenter un résultat de recherche non ouvert comme vérifié, ni livrer un JSON présenté comme achevé malgré ce manque. Le refus éditorial ne crée aucun nouveau statut ni commande backend. |
+| E55-PC-10 | La mise en scène peut évoquer les métiers, usages et personnes du lieu à partir de faits vérifiés, ou recourir à un personnage explicitement fictif. Ne pas inventer l’identité, l’accord, la disponibilité ou le rôle d’une personne réelle ; aucun dialogue avec le personnel, achat ou connaissance privée n’est requis pour répondre. Dans les nouvelles missions, `interactionCommercant` reste `null` ; une rencontre facultative peut être évoquée dans le récit ou la consigne, sans conditionner la réponse. Les informations trouvées en ligne ne prouvent pas l’accès actuel ni la présence d’un détail sur place : l’organisateur confirme l’observation, l’accès et les supports avant publication, selon le parcours existant. |
+
+Par exemple, un détail architectural documenté peut motiver une observation
+sur place, sous réserve de visibilité confirmée. Une activité propre au
+commerce peut devenir un document de jeu fictif explicitement présenté comme
+tel, consultable sur place et fondé sur cette particularité vérifiée. Le
+prompt ne doit ni déclarer qu’un panneau ou objet y est déjà installé, ni
+transformer un membre réel du personnel en animateur sans accord.
+
+La présence de sources ne garantit pas à elle seule l’immersion : l’opérateur
+vérifie que le déplacement apporte quelque chose à l’histoire et à l’énigme,
+puis résout celle-ci avec les seuls éléments accessibles au joueur. Les sources
+web servent à la préparation, jamais à imposer une recherche internet au joueur.
+Une observation non confirmée ou un support à installer reste un préparatif à
+valider ; un fait local inconnu ne devient pas un fait établi par cette réserve.
+
+La [conception](conception-technique.md#e55-prompt-ancrage-20261115) décrit les
+responsabilités et la compatibilité ; la [procédure opérateur](exploitation-moteur.md#e55-prompt-ancrage-20261115)
+décrit la recherche, la relecture et l’import. Le [suivi propre à ce complément](suivi-implementation.md#e55-prompt-ancrage-20261115)
+distingue ses preuves de celles du premier passage 1.3. Aucune clôture de l’epic
+ou modification des conditions d’ouverture n’est déduite de ce complément.
+
 ## Annexe B. Références du socle
 
 Les liens ci-dessous renvoient aux sources consultées pour le rapprochement avec l'existant ; leurs lignes peuvent évoluer. Les points d'intégration doivent être revérifiés avant implémentation.

@@ -336,6 +336,43 @@ le bilan de cette évolution ne remplace pas les conditions historiques d’ouve
 - [x] Réunir le parcours dans la console ERP et raccorder les anciens points d’entrée.
 - [x] Vérifier les comportements et publier le [bilan local](../../specifications/moteur-animation/suivi-implementation.md#e55-evol-traitement-20261113), avec ses limites de recette déployée et de mesure humaine.
 
+<a id="e55-prompt-clarte-20261115"></a>
+## Évolution du 15 novembre 2026 — prompt de chasse plus concret
+
+**E55-PROMPT-CLARTE-20261115** : améliorer l’immersion dans la commune,
+la cohérence de l’histoire et la compréhension des énigmes après les premiers
+essais utilisateur. Les [critères E55-PC-01 à PC-05](../../specifications/moteur-animation/localeo_animation_engine_spec.md#e55-prompt-clarte-20261115)
+complètent le gabarit Chasse en version 1.3, avec contexte communal serveur,
+fil narratif explicite et méthode de résolution. Le statut de l’epic et les
+conditions d’ouverture restent inchangés.
+
+- [x] Spécifier les instructions, leur provenance, la compatibilité et les preuves attendues.
+- [x] Implémenter et vérifier les nouveaux prompts et leurs révisions explicites : 131 tests ciblés, 41 PostgreSQL et 734 contrôles d’architecture réussis ; limites et revue au bilan.
+- [ ] Relire des histoires réellement générées puis observer leur compréhension lors du pilote.
+
+Le [bilan propre à l’évolution](../../specifications/moteur-animation/suivi-implementation.md#e55-prompt-clarte-20261115)
+distingue les preuves du générateur de la qualification éditoriale sur le terrain.
+
+<a id="e55-prompt-ancrage-20261115"></a>
+## Complément du 15 novembre 2026 — énigmes propres aux lieux et commerces
+
+**E55-PROMPT-ANCRAGE-20261115** précise la demande utilisateur après le premier
+passage 1.3 : rechercher des informations sur les lieux et les commerçants,
+mettre en scène leurs particularités et justifier la venue du joueur pour
+résoudre chaque énigme. Les [critères ajoutés E55-PC-06 à PC-10](../../specifications/moteur-animation/localeo_animation_engine_spec.md#e55-prompt-ancrage-20261115)
+renforcent PC-02/PC-03 et conservent les autres garanties. Ils définissent le
+gabarit Chasse **1.4**, la recherche dans l’outil d’IA externe et deux livrables
+distincts : dossier documentaire de relecture et JSON seul destiné à l’import.
+
+- [x] Spécifier la recherche, l’ancrage des énigmes, la séparation des livrables, les refus et la compatibilité.
+- [x] Implémenter, relire indépendamment et tester les instructions 1.4 : 131 tests ciblés, 42 tests PostgreSQL et 734 contrôles d’architecture réussis, sans skip ; guides, liens et sources exportées contrôlés, preuves au bilan.
+- [ ] Relire une génération complète avec sources effectivement consultées, puis confirmer les observations et supports sur le terrain avant le pilote.
+
+Les 131 tests ciblés, 41 tests PostgreSQL et 734 contrôles d’architecture du
+premier passage ci-dessus restent des preuves de **1.3**. Le [suivi du complément](../../specifications/moteur-animation/suivi-implementation.md#e55-prompt-ancrage-20261115)
+porte les résultats 1.4 et les limites restantes, sans changer le statut de
+l’epic ni ses conditions d’ouverture.
+
 ## Références
 
 - [Registre TRE-ARB-01 a TRE-ARB-89](../../specifications/moteur-animation/localeo_animation_engine_spec.md#arbitrages).

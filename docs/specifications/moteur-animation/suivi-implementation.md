@@ -2,6 +2,135 @@
 
 Branche commune : `feat-moteur-animation`, dans les cinq dépôts indépendants. Source de vérité : [spécification](localeo_animation_engine_spec.md), [conception technique](conception-technique.md) et [documents d’entrée](contrats/README.md). Ce suivi distingue code local vérifié, fonctionnalités raccordées et recette avant ouverture.
 
+<a id="e55-prompt-ancrage-20261115"></a>
+## 15 novembre 2026 — complément : rechercher les lieux et contextualiser les énigmes
+
+Évolution **E55-PROMPT-ANCRAGE-20261115**, après le premier passage 1.3 décrit
+ci-dessous. La [spécification PC-06 à PC-10](localeo_animation_engine_spec.md#e55-prompt-ancrage-20261115),
+la [conception](conception-technique.md#e55-prompt-ancrage-20261115) et la
+[procédure opérateur](exploitation-moteur.md#e55-prompt-ancrage-20261115) sont
+actualisées pour la précision utilisateur : recherche préalable sur les
+lieux et commerces, énigmes propres à leurs particularités, venue justifiée.
+Le statut de l’epic reste **En cours**.
+
+Le complément implémente le gabarit **Chasse 1.4**. L’outil d’IA externe doit
+consulter les sources, distinguer faits/fiction/préparatifs et fournir
+`dossier-recherche.md` séparément de `chasse.json`, seul importé. Le backend
+ne cherche pas sur le web et ne persiste pas ce dossier. Un prérequis absent
+doit être déclaré sans produire un jeu faussement achevé. Les identités du
+brief, le schéma 1.0 et les garanties PC-01/04/05 restent conservés. Les tests
+portent sur le backend de base `4da7d280` et le projet de base `358ce3f`, avec
+les changements locaux 1.3 puis 1.4 sur `main`.
+
+| Contrôle propre au complément 1.4 | État et preuve attendue |
+| --- | --- |
+| PC-06/08/09 — recherche, provenance, livrables et limites | **Implémenté et relu** : instructions 1.4 de recherche préalable, identité des lieux, sources vérifiables et livrables distincts. Revue indépendante finale sans défaut bloquant restant ; rapport projet `.artifacts/chasse-ancrage-revue.md`. |
+| PC-07/10 — lien au lieu, venue utile et personnes | **Relu indépendamment** : test de substitution, lien fait/action/réponse, faits/fiction/préparatifs et absence d’échange obligatoire. Le constat `interactionCommercant` non vide → `ASK_MERCHANT` obligatoire a été traité dans le gabarit : `null` dans les nouvelles missions, rencontre facultative seulement dans le récit ou la consigne. Rapprochement du dossier avec l’identifiant/empreinte/version du prompt lorsqu’ils sont fournis. Corrections relues dans le même rapport. |
+| PC-01/04/05 — constructeur, import et domaine | **131 tests ciblés réussis**, sans skip, sur l’arbre 1.4 corrigé, par `scripts/validation/test_isolated.py`, sur les six fichiers ciblés du premier passage. Rapport backend `.artifacts/chasse-ancrage-unit-final.xml`. |
+| PC-01/05 — persistance, exports et historique | **42 tests PostgreSQL réussis**, sans skip, sur l’arbre 1.4 : `tests/security/test_generation_animation_postgres.py` (34) et `tests/security/test_preparation_accompagnee_postgres.py` (8), par le lanceur isolé avec l’URL de la base jetable sur le port 55452. Historiques 1.2 et 1.3 conservés après révision explicite 1.4, contexte et empreinte persistés, exports et Passeport 1.1 inchangés. Rapport backend `.artifacts/chasse-ancrage-postgres-final.xml`, journal homonyme `.log` et manifeste `.artifacts/chasse-ancrage-postgres-manifest.json`. |
+| Architecture | **734 contrôles réussis**, sans skip, sur l’arbre corrigé : `tests/architecture`, `tests/domain/test_domain_dedicated_classes.py` et `tests/application/use_cases/test_use_case_business_test_coverage.py`, avec le lanceur isolé. Rapport backend `.artifacts/chasse-ancrage-architecture-final.xml`. |
+| Documentation | **Réussi** : `scripts/check_guidance.py` sur les six documents, 103 guides et 1 460 liens locaux, sans erreur ni avertissement ; rapport projet `.artifacts/chasse-ancrage-guidance-final.json`. `scripts/sync_documentation.py --check-sources` : 150 sources vérifiées. `git diff --check` réussi dans les deux dépôts. |
+| Génération complète et terrain | **Non exécutés** : génération avec recherche effective, relecture du dossier et du jeu, confirmation des observations et préparatifs, puis compréhension au pilote. |
+
+Les trois rapports XML finaux ont été relus : aucun échec, erreur ou skip.
+Le cluster PostgreSQL jetable sur le port 55452 est arrêté : `pg_ctl status`
+retourne 3, le fichier `postmaster.pid` est absent et la connexion est refusée
+après l’arrêt. Aucun service ou jeu de données opérateur n’est utilisé.
+
+Une recherche réelle sur quatre pages officielles à Latresne, ouvertes le
+15 novembre 2026, est consignée dans le rapport projet
+`.artifacts/chasse-ancrage-recherche.md`. Elle sert d’exercice éditorial,
+sans injecter ces faits en dur dans le produit. La [page historique de la mairie](https://www.mairie-latresne.fr/latresne-au-fil-du-temps/)
+mentionne un objet exposé à la médiathèque sans préciser les détails nécessaires
+à une énigme d’observation : il faut demander un complément avant de l’écrire.
+L’[annonce des Culturables publiée le 15 mai 2023](https://lisons-sous-la-pluie.fr/2023/05/15/les-culturables-patrimoine-en-scene-etang-des-sources/)
+documente un événement du 3 juin 2023 associant culture et nature à l’étang des
+Sources ; elle ne prouve aucune activité actuelle ni présence de personnel.
+Ces recherches ne constituent ni une génération fournisseur complète ni une
+confirmation terrain.
+
+Impacts : backend et documentation centrale. Aucun contrat, écran,
+client embarqué, statut métier, migration ou permission supplémentaire.
+L’opérateur doit disposer d’un accès web dans son outil d’IA externe ; aucune
+configuration fournisseur backend n’est ajoutée. Le générateur de démonstration
+ne compose pas ces prompts et les contenus existants restent compatibles ;
+aucune régénération de données n’est requise. Les anciens prompts sont conservés
+à l’identique ; une révision explicite permet d’utiliser 1.4.
+
+Les tests et la revue portent sur les instructions et leur intégration, pas
+sur la qualité d’une génération réelle encore à exécuter. Le backend est
+committé et poussé sur `origin/main` sous `b417e6319207f5f74268ec36196983980715cdf1`,
+avec égalité du HEAD local et de la référence distante vérifiée. La documentation
+est livrée dans son dépôt indépendant. Le déploiement et la recette terrain
+restent à vérifier ; aucune donnée opérateur n’a été modifiée par cette tâche.
+
+<a id="e55-prompt-clarte-20261115"></a>
+## 15 novembre 2026 — récit communal et énigmes compréhensibles
+
+Ce bilan correspond au **premier passage Chasse 1.3**, antérieur au complément
+1.4 décrit ci-dessus ; ses preuves et limites conservent cette portée.
+
+Évolution **E55-PROMPT-CLARTE-20261115**, rattachée à la
+[spécification PC-01 à PC-05](localeo_animation_engine_spec.md#e55-prompt-clarte-20261115)
+et à la [conception](conception-technique.md#e55-prompt-clarte-20261115).
+Versions testées : backend `4da7d280` et projet `358ce3f`, avec les changements
+locaux de cette évolution, sur `main`. Aucun changement d’état de l’epic.
+
+Le gabarit **Chasse 1.3** précise l’intrigue, le rôle du joueur, l’apport de
+chaque scène et la résolution finale. Il exige des consignes directes, une
+source accessible, des réponses déductibles et des aides explicatives. Une
+auto-vérification demande de résoudre chaque défi avant de produire le JSON.
+La commune vient de `uow.villes` par l’UUID de l’opération ; elle figure dans
+les messages et le contexte conservés, couverts par l’empreinte du prompt.
+
+| Critères | Preuves locales exécutées |
+| --- | --- |
+| PC-01 et PC-05 — constructeur et compatibilité | **131 tests réussis**, sans skip, par `scripts/validation/test_isolated.py` : `tests/application/services/test_contenu_generation_t2.py`, `test_generation_adresse_commercant.py`, `test_verification_reponse_generation.py`, `tests/application/test_contrats_preparation_t3.py`, `tests/domain/animation_locale/test_generation_animation_dedicated.py` et `test_compilation_chasse_t3.py`. Contexte canonique malgré des adresses d’une autre commune, identité territoriale, données filtrées, déterminisme/empreinte/export, ancien import à deux missions, formats, contrôle consultatif et compilation. Rapport backend `.artifacts/chasse-prompt-unit-final.xml`. |
+| PC-02 à PC-04 — consignes éditoriales | Revue indépendante en lecture seule du gabarit, des champs projetés et de la conception : aucun défaut bloquant identifié. Exercice de synopsis et d’énigme de librairie à Martignas-sur-Jalle, dans une fête fictive, avec source/action/réponse explicites et solution justifiée. Rapport projet `.artifacts/chasse-prompt-revue.md`. Cet exercice n’est pas une génération fournisseur complète. |
+| PC-01 et PC-05 — worker et stockage | **41 tests PostgreSQL réussis**, sans skip : `tests/security/test_generation_animation_postgres.py` (33) et `test_preparation_accompagnee_postgres.py` (8), par le même lanceur avec `--postgres-test-url postgresql+psycopg://audit_test@127.0.0.1:55452/localeo_audit_test`. Nom canonique Martignas-sur-Jalle malgré l’adresse Latresne, contexte/empreinte conservés en SQL, exports JSON/texte exacts, ancien export inchangé après renommage, révision explicite au nouveau nom et historique 1.2 préservé. Commune absente : échec de préparation Chasse sans faux prompt ni consommation supplémentaire ; Passeport 1.1 inchangé. Rapport backend `.artifacts/chasse-prompt-postgres-final.xml`. |
+| Frontières d’architecture | **734 contrôles réussis**, sans skip : `python scripts/validation/test_isolated.py tests/architecture tests/domain/test_domain_dedicated_classes.py tests/application/use_cases/test_use_case_business_test_coverage.py -q`. Rapport backend `.artifacts/chasse-prompt-architecture-final.xml`. |
+
+La première suite ciblée donne 130 succès et un échec : une ancienne requête
+de test des paramètres de préparation omettait `dotation`, déjà obligatoire.
+Le même échec est reproduit sur le seul `HEAD` backend `4da7d280` dans un
+worktree temporaire propre (`.artifacts/chasse-prompt-baseline.xml`), retiré
+après contrôle. La fixture fournit désormais explicitement une dotation
+Coffrets ; les assertions de refus et de normalisation restent identiques.
+La première tentative d’architecture donne 733 succès et une erreur Windows
+de duplication du handle de sortie d’un sous-processus Git. La relance avec
+sorties dans des fichiers natifs réussit, sans changement du garde testé.
+Les journaux des premières tentatives sont conservés, sans les assimiler à
+des passages verts.
+
+La première recette PostgreSQL donne 31 succès et deux échecs de fixture :
+la suppression ORM d’une commune chargeait une relation vers une table hors
+du schéma de test. La suppression SQL explicite dans les seuls cas de test
+« commune absente » corrige ce montage, sans modifier le producteur. Les
+rapports de cette tentative restent disponibles sous
+`.artifacts/chasse-prompt-postgres-results.xml` et
+`.artifacts/chasse-prompt-postgres-tests.log`.
+
+Contrôles documentaires : `python scripts/check_guidance.py` avec les six
+documents concernés, **103 guides et 1 447 liens**, aucune erreur ni
+avertissement ; `python scripts/sync_documentation.py --check-sources`,
+**150 sources vérifiées**. `git diff --check` réussi dans les deux dépôts.
+Le cluster PostgreSQL jetable sur le port 55452 est arrêté, sans listener ni
+`postmaster.pid` ; aucun service opérateur n’est touché.
+
+Impacts : backend et documentation centrale ; aucun contrat API/JSON Schema,
+écran ou client embarqué modifié. Aucune migration, permission ou configuration
+fournisseur supplémentaire. Le générateur de démonstration ne compose pas
+ces prompts ; ses contenus restent compatibles et ne sont pas réécrits.
+Les prompts antérieurs restent exportables à l’identique ; une révision
+explicite permet de bénéficier de 1.3. Le Passeport conserve son gabarit 1.1.
+
+Limites : aucun appel à un fournisseur IA, génération d’images ou essai avec
+des joueurs n’est exécuté. La qualité effective des histoires et leur
+compréhension restent à relire sur les prochaines réponses puis au pilote.
+Aucune mesure de capacité de production n’est déduite de ces tests ; les
+conditions d’ouverture E55 restent applicables. Aucun commit, push,
+déploiement ou changement de données opérateur n’est effectué pour cette évolution.
+
 ## 31 octobre 2026 — traitement ERP des demandes plus explicite
 
 Attendu : guider l'opérateur dans le traitement d'une demande d'animation.
