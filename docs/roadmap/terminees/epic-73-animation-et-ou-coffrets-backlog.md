@@ -1,5 +1,20 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+## Évolution du 15 novembre 2026 — messages habitants
+
+**E73-EVO-MESSAGES-HABITANTS** : depuis une participation Live, l'habitant
+adresse un motif et un message à l'organisateur. Celui-ci répond depuis une
+section de l'animation ou la boîte globale de la commune active. Choix utilisateur
+confirmés : fil multi-échanges et réponses dans Live avec indicateur non lu,
+sans email. Répondre traite la demande ; une relance la remet à traiter.
+
+La [spécification canonique](../../specifications/epic-73-animation-et-ou-coffrets/messages-habitants.md)
+ajoute **MH-01 à MH-15**, sans modifier CA-47..49 ni les règles des campagnes
+payantes. Trois lots : domaine/API/données, interfaces, puis preuves/générateur/
+contrats/documentation. Réalisée et vérifiée localement ; résultats consignés dans
+la spécification. Aucun changement du statut terminé ou de la clôture historique
+de l'epic n'est déduit de cette extension.
+
 ## Évolution du 15 novembre 2026 — gestion centralisée des lots et remises
 
 **E73-EVO-GESTION-LOTS** : depuis **Suivre l’activité → Lots et remises**,

@@ -3,6 +3,24 @@
 Ce guide accompagne les correctifs ANIM-001 à ANIM-014. Les états affichés
 proviennent du backend; le navigateur ne confirme pas un paiement ou un tirage.
 
+## Répondre aux habitants depuis une animation ou la boîte globale
+
+Ouvrez **Suivre l'activité → Messages habitants** pour retrouver les demandes
+des participants de la commune active. Dans une animation, **Communiquer →
+Messages habitants** présente la même boîte, limitée à cette animation.
+
+Choisissez une demande **À traiter**, lisez le motif et les échanges puis
+répondez. La confirmation classe le fil **Répondu** ; une nouvelle réponse de
+l'habitant le remet **À traiter**. L'ouverture seule ne traite pas la demande.
+Un compte lecteur peut consulter le fil sans y répondre.
+
+L'habitant retrouve la réponse et un indicateur non lu dans sa participation
+Live, sans email. Les échanges restent possibles après la fin de l'animation,
+tant que son accès personnel est valide. Aucun module Communication n'est
+nécessaire. En cas de résultat incertain, utilisez **Vérifier l'envoi** avant
+toute relance. La [procédure Messages habitants](../../../exploitation/exploitation/traiter-messages-habitants-animation.md)
+détaille les accès, les refus et le diagnostic.
+
 ## Gérer les lots de plusieurs animations
 
 Ouvrez **Suivre l’activité → Lots et remises**. La liste couvre les gains de

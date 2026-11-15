@@ -1,5 +1,12 @@
 # Roadmap par etat
 
+**15 novembre 2026 — E73-EVO-MESSAGES-HABITANTS** : conversations privées
+à plusieurs échanges, initiées dans Live par un participant, avec motif et
+réponse de l'organisateur depuis l'animation ou une boîte globale par commune.
+[Spécification MH-01 à MH-15](../specifications/epic-73-animation-et-ou-coffrets/messages-habitants.md).
+Réalisée et vérifiée localement ; indicateur non lu dans Live, sans email. Clôture
+historique E73 et compteurs inchangés.
+
 **15 novembre 2026 — E73-EVO-GESTION-LOTS** : section **Suivre l’activité →
 Lots et remises**, suivi global des trois natures de gains, distribution,
 remise et rappels e-mail/WebPush.

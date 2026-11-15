@@ -1,5 +1,12 @@
 # Specifications Epic 42 - Localeo Live
 
+L'évolution [E73-EVO-MESSAGES-HABITANTS](../epic-73-animation-et-ou-coffrets/messages-habitants.md)
+du 15 novembre ajoute des conversations privées depuis la participation :
+motif/message, réponses et relances, indicateur non lu serveur. Accès personnel
+distinct pour chaque participation, sans email ni dépendance au Push. Les
+nouvelles collectives conservent leur centre existant. Réalisation vérifiée localement ;
+contrats et preuves dans la source canonique E73.
+
 [E73-EVO-LIVE-ICONOGRAPHIE](../epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-10-novembre-2026--iconographie-et-respiration-e73-evo-live-iconographie)
 précise les icônes d'objets/états, la largeur utile des cartes, l'objectif visuel
 et les états vides. Les mots essentiels, droits et conditions sont conservés ;

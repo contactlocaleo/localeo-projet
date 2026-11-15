@@ -333,6 +333,13 @@ Fichiers et rapports privés, téléchargements authentifiés avec droits revér
 
 ## 7. Messages organisateur, Live et Web Push
 
+La [messagerie privée habitant–organisateur](messages-habitants.md), évolution
+E73-EVO-MESSAGES-HABITANTS du 15 novembre, est initiée par un participant et
+reste indépendante des campagnes décrites ici. Ses réponses dans Live ne
+consomment aucun quota Communication et ne créent aucun email ou Push.
+Les règles d'autorisation, de fréquence et de diffusion des campagnes restent
+inchangées ; aucune campagne n'est créée pour répondre à une demande privée.
+
 **Correction du 11 novembre 2026 — E73-COR-MESSAGES-ANIMATION.** Sur demande
 explicite, le réglage **Animations** devient le choix commun pour les nouvelles
 et messages organisateur des participations de l’habitant. Cette décision

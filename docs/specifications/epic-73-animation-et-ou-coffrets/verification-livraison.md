@@ -1,5 +1,16 @@
 # E73 — Vérification, migration et livraison
 
+## Évolution — E73-EVO-MESSAGES-HABITANTS (15 novembre 2026)
+
+Conversations privées sollicitées depuis la participation Live, avec motif,
+réponses multiples et indicateur non lu sans email. Localeo Animation propose
+une boîte globale par commune et une entrée filtrée depuis l'animation.
+La [spécification MH-01 à MH-15 et son bilan](messages-habitants.md#réalisation-livraison-et-preuves)
+centralisent les contrats, impacts, preuves et limites de cette évolution.
+Réalisation et vérifications locales terminées ; migration additive `v322` avant les
+clients, sans activation de module commercial ni transport externe.
+La clôture historique E73 demeure inchangée.
+
 ## Correctif — vue Tirages recentrée sur les tirages (15 novembre 2026)
 
 La vue globale Tirages et gains conservait une vision Coffrets et du suivi des
