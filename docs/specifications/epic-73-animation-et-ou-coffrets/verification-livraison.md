@@ -1,5 +1,60 @@
 # E73 — Vérification, migration et livraison
 
+## Correctif — vue Tirages recentrée sur les tirages (15 novembre 2026)
+
+La vue globale Tirages et gains conservait une vision Coffrets et du suivi des
+gains déjà traités par Lots et remises. La demande du 15 novembre recentre
+explicitement cette page sur les tirages, toutes natures de dotation
+confondues. Le menu et le titre deviennent **Tirages**, avec conservation de
+`/tirages`. Le correctif est rattaché à **E73-EVO-GESTION-LOTS** ; il ne crée
+pas d’epic et ne rouvre ni la clôture historique ni la qualification GL-16,
+qui reste partielle pour la synthèse Lots et remises.
+
+La [cible et ses critères](gestion-lots-remises.md#correctif-du-15-novembre-2026--tirages-séparés-des-gains)
+reposent sur une lecture backend additive paginée
+`GET /protected/animation-locale/lectures-globales/tirages` (`limit`,
+`cursor`, `recherche`, `groupe`, `animation_id`). La pagination par clé reste
+bornée, sans comptage exhaustif ni offset profond. Les groupes `PRET`, `A_VENIR`,
+`EFFECTUE` sont décidés par le serveur : action `TIRER` pour Prêts,
+confirmation datée pour Effectués. Les attentes, préparations et blocages
+restent dans À venir avec leur état réel et sans nouveau lancement.
+L’action ouvre l’onglet Tirage existant ; les confirmations, droits et
+protections d’idempotence restent applicables. La vue ne présente plus le suivi
+des gagnants, envois, remises ou consommations ; Lots et remises les conserve.
+
+### Preuves locales du correctif
+
+Versions testées : bases projet `70e7316`, backend `272a60a`, Animation
+`de083ec`, avec les changements locaux de ce correctif. La reproduction de
+l’ancienne page échoue sur le titre attendu **Tirages**, car elle présente
+encore **Tirages Coffrets** (`localeo-projet/.artifacts/tirages-reproduction.log`).
+Le producteur historique ne renvoie que les tirages Coffrets déjà créés ;
+il omet les tirages libres et ceux qui n’ont pas encore été lancés.
+
+| Contrôle | Résultat vérifié |
+| --- | --- |
+| Classification et droits : trois natures × trois groupes, action `TIRER`, confirmation datée, attente/préparation/blocage ou état incohérent | **40 tests pytest réussis**, sans skip : API, application, politique de recommandation et PostgreSQL réel. Régression fin/public incluse. Rapport backend `.artifacts/tirages-results-keyset.xml`. |
+| Pagination et recherche serveur, frontières organisation/commune, droits relus, budget de lecture et consultation terminale ciblée | **24 tests réussis après ajout du filtre `animation_id`**, sans skip ; ils recouvrent une partie des 40 précédents. UUID invalide refusé, animation absente ou étrangère non exposée, curseur lié à l’acteur, aux permissions et aux filtres. Trois pages sans doublon ; deux requêtes SQL par page non vide, sans `COUNT` ni `OFFSET`. Rapport backend `.artifacts/tirages-results-animation-id.xml`. |
+| Frontières d’architecture | **734 contrôles réussis**, sans skip ; rapport backend `.artifacts/tirages-architecture.xml`. |
+| Contrat E41 et copie Animation | Génération hors ligne réussie : un nouveau chemin et trois schémas, aucun chemin ou schéma existant modifié ou retiré. `check_consumed_contracts.py` : Animation **335 opérations**, Commerçant **58**, aucun écart sémantique. Les six tests HTTP Tirages vérifient aussi le contrat embarqué. |
+| Menu, accès direct, filtres, pagination, retour et consultation des éditions figées | **7 scénarios navigateur réussis** avec l’application réelle et une API synthétique. Parcours 320/390/1280 px, texte 200 %, clavier et focus, dates Paris dans un navigateur Los Angeles ; page suivante/précédente/suivante, filtres/recherche, archive confirmée et édition terminée à vérifier. Aucun appel historique de gains ni écriture dans la vue. Chargement, vide, réponse tardive, 503, réponse invalide et refus 403 couverts. Rapport Animation `tmp/tirages-global-BOp8w1/report.json` ; captures bureau et mobile inspectées. |
+| Vérifications Animation | `pnpm typecheck`, `pnpm lint`, `pnpm test` : **345 tests réussis**, aucun skip ; `node scripts/build-check.mjs` réussi dans `tmp/quality-build-wzIkA9`. Journaux projet `.artifacts/tirages-final-*.log`. Avertissement de taille de chunks conservé. |
+| Non-régression de Lots et remises | `ANIMATION_TEST_DIST=tmp/tirages-global-BOp8w1/dist node tests/browser/lots-remises.mjs` : **112 scénarios réussis** sur le même build, dont coffrets, remises, rappels, reçus, permissions, changements de commune, filtres et clavier, à 320/390/1280 px et texte 200 %. Rapport Animation `tmp/gl-lots-ui-captures-Gq1JmS/report.json`. |
+| Liens et sources documentaires | `check_guidance.py` avec les cinq `--document` : **102 guides, 1 424 liens**, aucune erreur ni avertissement ; `sync_documentation.py --check-sources` : **150 sources vérifiées**. `git diff --check` réussi dans les trois dépôts modifiés. |
+
+Impacts : backend (lecture), Animation (interface et contrat embarqué), projet
+(spécification, guides et OpenAPI documentaire). Les règles de tirage et les
+commandes ne changent pas. Aucune migration ni réparation de données n’est
+requise ; aucun batch ou générateur de démonstration n’est modifié, car les
+états et dotations existent déjà. Les fixtures ciblées couvrent les états
+requis. PostgreSQL et les serveurs de recette dédiés sont arrêtés après contrôle.
+L’activation nécessite la livraison conjointe du producteur et
+du consommateur de la nouvelle lecture. À la demande utilisateur, les commits
+backend `4da7d280` et Animation `9e81844` sont poussés sur `origin/main`.
+Aucun déploiement n’est attesté par cette entrée de suivi. Aucune animation ni donnée réelle
+n’est modifiée par les recettes. La volumétrie de production et la livraison
+distante ne sont pas qualifiées par ces preuves locales.
+
 ## Correctif — filtres Lots et remises compacts (15 novembre 2026)
 
 Le bloc occupait toute la largeur avec les critères affichés en permanence.

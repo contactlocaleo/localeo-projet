@@ -34,6 +34,77 @@ Les trois arbitrages sont levés par les réponses utilisateur du 15 novembre.
 Les sections ci-dessous décrivent la cible retenue, à implémenter et vérifier.
 La confirmation de ces choix ne constitue ni une implémentation ni une activation.
 
+## Correctif du 15 novembre 2026 — Tirages séparés des gains
+
+La demande explicite du 15 novembre recentre l’ancienne vue globale **Tirages
+et gains** sur les seuls tirages. Elle s’intitule **Tirages** et conserve son
+adresse `/tirages`. La vision Coffrets de cette page est décommissionnée. Dans
+les vues globales, le suivi des gains, leur distribution, leur remise et leur
+consommation relèvent de **Lots et remises**, quelle que soit la nature de la
+dotation.
+La préparation des coffrets dans une animation et les autres consommateurs des
+contrats historiques restent disponibles.
+
+Ce correctif est rattaché à **E73-EVO-GESTION-LOTS**, sans nouvelle epic ni
+réouverture de la clôture historique. Il remplace explicitement l’ancienne
+consigne de maintenir la vue globale Tirages et gains. Il ne change ni les
+règles d’éligibilité et de tirage, ni les confirmations, l’idempotence ou les
+droits des commandes existantes. **GL-16 reste partiel** pour la synthèse Lots
+et remises ; cette correction ne constitue pas sa qualification.
+
+### Lecture et parcours retenus
+
+La lecture additive `GET /protected/animation-locale/lectures-globales/tirages`
+renvoie une page de tirages dans l’organisation et la commune actives, toutes
+natures de dotation confondues. Les paramètres `limit` (25 par défaut),
+`cursor`, `recherche`, `groupe` et `animation_id` sont appliqués par le serveur.
+La réponse contient `items`, `nextCursor`, `hasMore` et `observedAt`. Le curseur
+est lié au contexte et aux filtres ; le tri suit la création et l’identifiant
+de l’animation. La sélection précède la limite. Aucun comptage global ni offset
+profond n’est ajouté. Le navigateur ne recharge pas toutes les animations ou
+toutes les pages pour les classer.
+
+| Filtre présenté | Groupe API | Fait observable et action |
+| --- | --- | --- |
+| Prêts à être effectués | `PRET` | Le serveur propose l’action `TIRER`. Un statut clôturé seul ne suffit pas à déclarer un tirage prêt. |
+| À venir | `A_VENIR` | Tirage non confirmé qui n’est pas prêt : état réel à venir, en attente, en préparation ou bloqué conservé, avec son motif lorsqu’il est disponible. Aucun nouveau lancement n’est proposé pendant une préparation ou un blocage. |
+| Effectués | `EFFECTUE` | Confirmation de tirage enregistrée et datée. Une demande en cours ou une opération simplement acceptée ne vaut pas tirage effectué. |
+
+La liste montre l’animation, son état de tirage et les dates utiles. L’action
+ouvre l’onglet **Tirage** de la fiche Animation existante ; elle n’exécute pas
+le tirage depuis la liste globale. Les animations terminées et archivées
+ouvrent un résumé de tirage en lecture seule, relu avec `animation_id` sur
+la même projection bornée, sans charger les gains ni les commandes interactives. Les commandes continuent à relire leurs
+conditions actuelles, même si la lecture globale est ancienne. Cette vue
+n’affiche pas le suivi des gagnants, les envois, les remises ou la consommation
+et ne lance aucune de ces opérations.
+
+### Critères et impacts du correctif
+
+- Les trois groupes sont accessibles, avec recherche et pagination serveur ;
+  un changement d’organisation ou de commune ne conserve aucune donnée du
+  contexte précédent.
+- Les lots externes, les bons numériques et les coffrets sont couverts, sans
+  réintroduire de filtre ou de panneau de suivi Coffrets dans Tirages.
+- Un tirage en attente, en préparation ou bloqué reste visible dans À venir,
+  avec son état réel ; seule une confirmation datée figure dans Effectués.
+- Le groupe Prêts repose sur l’action serveur `TIRER` et l’ouverture de la fiche
+  conserve les confirmations, les droits et l’idempotence existants.
+- Le menu, les accès directs `/tirages`, le mobile, le clavier, le zoom et les
+  états chargement/vide/erreur doivent être vérifiés. Lots et remises conserve le suivi
+  et les actions de gains, y compris pour les coffrets.
+
+Producteur concerné : backend, projection de lecture sur les faits du domaine.
+Consommateur concerné : Localeo Animation ; contrat documentaire E41 et copie
+embarquée à mettre à jour ensemble. Les contrats historiques sont conservés
+pour leurs autres lecteurs. Aucun changement de règle de tirage, migration,
+batch, donnée historique ou générateur de démonstration n’est nécessaire :
+le contrat est une lecture additive des états déjà existants. Les fixtures
+ciblées couvrent les états et dotations ci-dessus. Le
+[bilan du correctif](verification-livraison.md#correctif--vue-tirages-recentrée-sur-les-tirages-15-novembre-2026)
+distingue les preuves exécutées des contrôles encore à produire ; aucune
+activation d’environnement n’est attestée par cette spécification.
+
 ## Existant vérifié et écart
 
 Sources locales examinées : backend `0c0c4028`, Animation `8afc492`,
@@ -371,8 +442,12 @@ Producteur : backend, schémas applicatifs et routes fines. Source documentaire
 partagés de l’[OpenAPI E42](../epic-42-localeo-live/openapi.json), générés par
 `generate_epic42_openapi.py`, et le lecteur Live du nouveau type personnel.
 Les routes existantes et leurs clients restent compatibles ; ne pas modifier
-la pagination des anciennes lectures ni supprimer `Tirages et gains` implicitement.
-Le nouveau consommateur n’utilise pas `collectPages` pour la nouvelle liste.
+la pagination des anciennes lectures. Le maintien initial de `Tirages et gains`
+est remplacé par le [correctif explicite du 15 novembre](#correctif-du-15-novembre-2026--tirages-séparés-des-gains) :
+la page `/tirages` devient Tirages et décommissionne sa vision Coffrets, sans
+supprimer les contrats historiques des autres consommateurs. Le nouveau
+consommateur n’utilise pas `collectPages` pour les listes Lots et remises ou
+Tirages.
 
 La notification personnelle nouvelle requiert contrat de type/action ciblée
 et tests du clic dans Live. Elle ne dépend pas de la présence de l’animation

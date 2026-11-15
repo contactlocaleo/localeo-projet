@@ -113,7 +113,10 @@ actions principales immédiatement identifiables.
 - **Animations** : liste, recherche, filtres et création ;
 - **Participants** : consultation et export selon les droits ;
 - **Validations** : suivi, anomalies et corrections autorisées ;
-- **Tirages et gains** : population éligible, tirage et envoi ;
+- **Tirages** (`/tirages`) : tirages prêts à être effectués, à venir et effectués,
+  toutes natures de dotation confondues ;
+- **Lots et remises** : suivi des gains, distribution, remise et consommation,
+  y compris les coffrets gagnés ;
 - **Documents** : flyers, bilans et exports ;
 - **Actualités** : brouillons, programmation et publication ;
 - **Abonnement** : offre, droits, consommation et date d'échéance ;
@@ -341,9 +344,23 @@ Le tableau de bord actualise les projections par polling HTTP toutes les
 - lots disponibles, tirages et gains à envoyer ;
 - consommation de l'abonnement et date d'échéance.
 
-Les vues globales Participants, Validations, Tirages/Gains, Flyers et Bilans
-sont filtrables côté serveur. Les listes stables utilisent `page/page_size` ;
-les flux live et l'audit utilisent un curseur.
+Les vues globales Participants, Validations, Tirages, Flyers et Bilans
+sont filtrables côté serveur. Participants, Validations, Flyers et Bilans
+conservent `page/page_size` ; Tirages, les flux live et l’audit utilisent un curseur.
+
+Depuis le correctif du **15 novembre 2026**, Tirages utilise la lecture
+additive `/protected/animation-locale/lectures-globales/tirages`, paginée par
+`limit` et `cursor` (25 par défaut), avec recherche et groupes `PRET`, `A_VENIR`, `EFFECTUE`.
+Un tirage est prêt uniquement si le serveur propose `TIRER`, et effectué
+uniquement après confirmation datée. Les préparations, attentes et blocages
+restent visibles dans À venir avec leur état réel, sans nouveau lancement.
+L’action ouvre l’onglet Tirage de l’animation et conserve les protections des
+commandes. Les éditions terminées ou archivées présentent un résumé en lecture seule.
+La vision Coffrets et le suivi des gagnants, envois, remises et
+consommations sont retirés de cette vue globale et restent dans Lots et
+remises. Voir le [correctif E73](../../specifications/epic-73-animation-et-ou-coffrets/gestion-lots-remises.md#correctif-du-15-novembre-2026--tirages-séparés-des-gains).
+Le métier des gains dans la fiche Animation et les autres lecteurs historiques
+ne sont pas décommissionnés.
 
 ## 14. Clôture, tirage et gains
 

@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Backend - contrat implemente EPIC 41",
     "description": "OpenAPI complet du backend, dont les parcours Animation locale. Genere hors ligne depuis le code local pour les integrations et les mocks ; cet instantane ne prouve pas son deploiement.",
-    "version": "1.0.0+0c0c402"
+    "version": "1.0.0+272a60a"
   },
   "paths": {
     "/public/identite-acces/interne/connexion": {
@@ -108614,6 +108614,150 @@
         ]
       }
     },
+    "/protected/animation-locale/lectures-globales/tirages": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Lister Tirages Globaux",
+        "operationId": "lister_tirages_globaux",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 4096
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "groupe",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "PRET",
+                    "A_VENIR",
+                    "EFFECTUE"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Groupe"
+            }
+          },
+          {
+            "name": "recherche",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 160,
+              "default": "",
+              "title": "Recherche"
+            }
+          },
+          {
+            "name": "animation_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageTiragesGlobauxPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Filtres ou curseur invalide/expiré",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Accès refusé",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
     "/protected/animation-locale/contexte-portail": {
       "get": {
         "tags": [
@@ -129552,6 +129696,30 @@
           "expected_version"
         ],
         "title": "ActionDossierCommande"
+      },
+      "ActionLectureTiragePayload": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "enum": [
+              "TIRER",
+              "SUIVRE_TIRAGE",
+              "REPRENDRE_TIRAGE",
+              "VOIR_TIRAGE"
+            ],
+            "title": "Code"
+          },
+          "label": {
+            "type": "string",
+            "title": "Label"
+          }
+        },
+        "type": "object",
+        "required": [
+          "code",
+          "label"
+        ],
+        "title": "ActionLectureTiragePayload"
       },
       "ActionTache": {
         "properties": {
@@ -161669,6 +161837,119 @@
         ],
         "title": "LectureServicePayload"
       },
+      "LectureTirageGlobalPayload": {
+        "properties": {
+          "animation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animation Id"
+          },
+          "animation_nom": {
+            "type": "string",
+            "title": "Animation Nom"
+          },
+          "modele_code": {
+            "type": "string",
+            "title": "Modele Code"
+          },
+          "statut_animation": {
+            "type": "string",
+            "title": "Statut Animation"
+          },
+          "groupe": {
+            "type": "string",
+            "enum": [
+              "PRET",
+              "A_VENIR",
+              "EFFECTUE"
+            ],
+            "title": "Groupe"
+          },
+          "etat": {
+            "type": "string",
+            "enum": [
+              "NON_LANCE",
+              "EN_COURS",
+              "BLOQUE",
+              "EFFECTUE",
+              "A_VERIFIER"
+            ],
+            "title": "Etat"
+          },
+          "date_prevue": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date Prevue"
+          },
+          "realise_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Realise At"
+          },
+          "nombre_eligibles": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nombre Eligibles"
+          },
+          "action": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ActionLectureTiragePayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "motif": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motif"
+          }
+        },
+        "type": "object",
+        "required": [
+          "animation_id",
+          "animation_nom",
+          "modele_code",
+          "statut_animation",
+          "groupe",
+          "etat",
+          "date_prevue",
+          "realise_at",
+          "nombre_eligibles",
+          "action",
+          "motif"
+        ],
+        "title": "LectureTirageGlobalPayload"
+      },
       "LegendeCartePayload": {
         "properties": {
           "cle": {
@@ -173579,6 +173860,46 @@
           "hasMore"
         ],
         "title": "PageTentativesGenerationPayload"
+      },
+      "PageTiragesGlobauxPayload": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/LectureTirageGlobalPayload"
+            },
+            "type": "array",
+            "maxItems": 100,
+            "title": "Items"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          },
+          "hasMore": {
+            "type": "boolean",
+            "title": "Hasmore"
+          },
+          "observedAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Observedat"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "nextCursor",
+          "hasMore",
+          "observedAt"
+        ],
+        "title": "PageTiragesGlobauxPayload"
       },
       "PageUnitesPrioritePayload": {
         "properties": {

@@ -12,6 +12,15 @@ données étrangères. Le [bilan](verification-livraison.md) conserve les résul
 et le reste à faire ; la qualification complète demeure ouverte.
 Clôture historique conservée.
 
+Correctif du **15 novembre 2026**, rattaché à cette évolution :
+[Tirages séparés des gains](gestion-lots-remises.md#correctif-du-15-novembre-2026--tirages-séparés-des-gains).
+L’ancienne vue Tirages et gains devient **Tirages** (`/tirages`), avec tirages
+prêts, à venir et effectués. La vision Coffrets est décommissionnée dans cette
+vue ; le suivi des gains reste dans Lots et remises. Lecture globale additive,
+règles et commandes existantes conservées ; preuves du correctif consignées
+séparément au [bilan](verification-livraison.md#correctif--vue-tirages-recentrée-sur-les-tirages-15-novembre-2026).
+GL-16 et la clôture historique demeurent inchangés.
+
 Évolution du **13 novembre 2026 — E73-EVO-CLONAGE** :
 [Cloner l’animation](clonage-animation.md) depuis liste, archives et fiche,
 en réutilisant le mécanisme Nouvelle édition de CA-59. Nouveau brouillon dans

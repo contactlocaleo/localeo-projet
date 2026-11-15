@@ -13,7 +13,21 @@ L’ancienne rubrique **Coffrets à gagner** est retirée du menu. Son adresse
 ouvre désormais **Lots et remises** ; le choix des coffrets à mettre en jeu
 reste disponible dans la préparation de chaque animation.
 
-Les filtres présentent d’abord **Animation** et **Bénéficiaire ou référence**.
+La rubrique **Tirages** conserve l’adresse `/tirages` et traite seulement les
+tirages : **Prêts à être effectués**, **À venir** et **Effectués**. Elle couvre
+toutes les natures de dotation. Un tirage prêt est autorisé par le serveur ;
+un tirage effectué possède une confirmation datée. Les attentes, préparations
+et blocages restent dans À venir avec leur état réel : ouvrir une préparation
+n’en lance pas une seconde. Depuis la ligne, ouvrez l’onglet Tirage de
+l’animation, puis suivez ses confirmations habituelles. Une édition terminée
+ou archivée présente un résumé en lecture seule.
+
+L’ancienne vision Coffrets de Tirages et gains est retirée. Pour retrouver un
+gagnant, distribuer un coffret, suivre un envoi, une remise ou une consommation,
+restez dans **Lots et remises**. Le choix des coffrets à mettre en jeu reste
+dans la préparation de l’animation.
+
+Dans **Lots et remises**, les filtres présentent d’abord **Animation** et **Bénéficiaire ou référence**.
 Ouvrez **Filtres avancés** pour préciser nature, état, échéance, possibilité de
 rappel ou commerce de remise. Le nombre affiché indique les critères avancés
 actifs ; fermer le volet les conserve. **Réinitialiser les filtres** les efface.
@@ -182,9 +196,10 @@ Confirmer le remplacement pour utiliser le premier suppléant encore éligible.
 Si la réserve est épuisée, le retirage est une action distincte et explicite.
 Un lot dont la remise reste déclarée ne peut pas être réattribué.
 
-La rubrique générale **Tirages Coffrets** conserve son périmètre historique.
-Les tirages libres sont accessibles depuis la fiche de chaque animation ; leur
-intégration à une liste globale commune est prévue au lot 09.
+Depuis le correctif du 15 novembre 2026, la rubrique générale **Tirages**
+réunit toutes les natures de dotation, dont les lots libres, avec les trois
+groupes décrits plus haut. Le traitement du tirage reste dans la fiche de
+l’animation ; les gains et leur suivi restent dans **Lots et remises**.
 
 ## Préparer le terrain d’une chasse
 
