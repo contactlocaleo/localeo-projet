@@ -42,7 +42,7 @@ Ces versions décrivent le code disponible, pas son déploiement.
 
 | Source | Comportement actuel | Évolution nécessaire |
 | --- | --- | --- |
-| [Navigation Animation](../../../../localeo-animation/src/app/App.tsx), `NAV_GROUPS`, `MENU_PATHS` | Suivre l’activité contient Participants, Validations, Tirages et gains, Flyers, Bilans ; Coffrets à gagner est un catalogue de préparation | Ajouter Lots et remises ; conserver catalogue, tirages et liens existants |
+| [Navigation Animation](../../../../localeo-animation/src/app/App.tsx), `NAV_GROUPS`, `MENU_PATHS` | Suivre l’activité contient Participants, Validations, Tirages et gains, Flyers, Bilans ; l’ancien menu propose aussi Coffrets à gagner | Lots et remises est l’entrée globale. À la demande du 15 novembre, retirer le menu Coffrets à gagner et rediriger `/coffrets` vers `/lots-remises` ; conserver la sélection des coffrets dans la préparation des animations, les tirages et les autres liens |
 | Même source, `GainsAnimTab`, et [client API](../../../../localeo-animation/src/app/api.ts) | Gains, consommation et dossier de fin consultés par animation ; lecture globale `/gains/coffrets/consommation` disponible, client parcourant plusieurs pages | Lecture globale multi-natures, bornée, incluant les coffrets attribués sans instance ; aucun chargement de toutes les animations ou pages |
 | [Productivité AP-18 à AP-20](ux-productivite-organisateur.md#l6--gains-et-fin-danimation) | Retour contextualisé, référence de dossier fournie par le serveur, accès ciblé et commandes versionnées | Réutiliser ces parcours dans le détail global, sans navigation obligatoire vers l’animation |
 | [Dotation et remise](dotation-lots.md) | Attribution, remise externe, bons QR/PIN, distribution et consommation Coffrets ; un e-mail envoyé n’est pas une remise | Projeter séparément attribution, distribution, consommation et résolution du dossier |
@@ -95,6 +95,11 @@ de remise lorsqu’applicable, échéance avant une date, présence d’un rappe
 possible. Recherche par début de nom du bénéficiaire ou référence ; saisie
 privée conservée en mémoire, pas dans une URL ou un stockage persistant.
 Le filtre Animation réutilise un sélecteur paginé, archives comprises.
+Depuis la simplification du 15 novembre, le bloc est plus étroit et aligné à
+gauche : Animation et Recherche restent visibles, les autres critères sont
+repliables dans « Filtres avancés » avec un compteur de critères actifs.
+Fermer ce volet ne modifie pas les filtres ; un indicateur qui applique un état
+ouvre le volet pour rendre ce critère visible.
 
 **Intervenir.** L’action principale autorisée apparaît sur la ligne :
 « Enregistrer la remise », « Distribuer le coffret », « Envoyer un rappel »
@@ -163,6 +168,10 @@ commune ou identité la purge avec annonce. Aucune sélection vide ne signifie
 et exclusions. Plusieurs gains d’une même personne dans une même animation
 sont regroupés dans un seul rappel ; deux personnes partageant une adresse
 ne sont jamais fusionnées sur ce seul critère.
+
+Chaque ligne présente une case. Si le rappel n’est pas autorisé par le serveur,
+elle est désactivée et le motif figure avec le statut, visible aussi sur mobile.
+Après actualisation, un lot devenu inéligible est retiré de la sélection avec annonce.
 
 Choix explicite **E-mail**, **Notification sur le téléphone (WebPush)**, ou
 les deux, avec aperçu. Aucun SMS supplémentaire et aucun canal de remplacement

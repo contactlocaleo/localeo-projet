@@ -9,6 +9,14 @@ Ouvrez **Suivre l’activité → Lots et remises**. La liste couvre les gains d
 l’organisation et de la commune actives, y compris ceux des animations archivées.
 Elle réunit les lots externes, bons numériques et coffrets gagnés. Les coffrets
 achetés hors animation restent dans leur parcours habituel.
+L’ancienne rubrique **Coffrets à gagner** est retirée du menu. Son adresse
+ouvre désormais **Lots et remises** ; le choix des coffrets à mettre en jeu
+reste disponible dans la préparation de chaque animation.
+
+Les filtres présentent d’abord **Animation** et **Bénéficiaire ou référence**.
+Ouvrez **Filtres avancés** pour préciser nature, état, échéance, possibilité de
+rappel ou commerce de remise. Le nombre affiché indique les critères avancés
+actifs ; fermer le volet les conserve. **Réinitialiser les filtres** les efface.
 
 Les indicateurs distinguent les lots à retirer, les coffrets à distribuer et
 ceux dont il reste des prestations à utiliser. La clôture administrative d’un
@@ -23,6 +31,10 @@ Pour rappeler les gagnants, sélectionnez de 1 à 100 gains, choisissez **E-mail
 les bénéficiaires, les messages et les exclusions. Plusieurs gains d’une même
 personne dans une animation sont regroupés. Confirmez après cette lecture ;
 aucune sélection vide ne signifie « tous les gagnants ».
+
+La case de sélection est affichée pour chaque lot. Lorsqu’elle est grisée,
+consultez le motif dans le statut du lot : rappels désactivés, délai de 48 heures,
+droits insuffisants ou lot non éligible. Les lots autorisés restent sélectionnables.
 
 Les rappels restent possibles après la fin ou l’archivage pour les droits encore
 utilisables ou les lots à retirer. Il faut attendre au moins 48 heures entre

@@ -1,5 +1,88 @@
 # E73 — Vérification, migration et livraison
 
+## Correctif — filtres Lots et remises compacts (15 novembre 2026)
+
+Le bloc occupait toute la largeur avec les critères affichés en permanence.
+Il est désormais limité à 48 rem, aligné à gauche, avec Animation et Recherche
+sur une même ligne lorsque la place le permet. Les cinq critères secondaires
+se replient dans « Filtres avancés », avec compteur de critères actifs. La
+fermeture conserve les critères ; un indicateur applique son état et ouvre le
+volet. Le bouton de recherche conserve son nom accessible et fonctionne au clavier.
+
+Base Animation `b29b64b` et correctifs locaux précédents conservés. Une option
+de présentation compacte du sélecteur Animation retire sa largeur minimale
+uniquement dans ce bloc. Aucune règle métier, API, migration, donnée ou
+configuration d’exploitation modifiée ; le générateur n’est pas affecté.
+
+Recette synthétique Lots et remises : **12/12**, critères avancés, clavier,
+recherche, compteurs, remise à zéro et commerce sélectionné après retour à la
+liste, en 320/390/1280 px et texte 200 % ; rapport
+`localeo-animation/tmp/gl-lots-ui-captures-HFJxUR/report.json`.
+Captures du bloc replié/déplié inspectées sur ordinateur et mobile. La première
+tentative attendait une réponse après sa réception ; le banc attend désormais
+avant de soumettre au clavier (`tmp/gl-lots-ui-captures-FGFe8E/` conservé).
+Types, lint ciblé et build isolé réussis ; avertissement de taille de chunk
+conservé. Le sélecteur Animation dans Validations conserve son parcours de
+sélection : **4/4** avec `FILTER_CASE=selection`,
+`tests/browser/animation-read-filter-ux.mjs`, journal
+`tmp/gl-compact-filter-selector.log`. Les autres scénarios de ce banc ne sont
+pas rejoués. Aucun déploiement ni mutation TEST pour ce correctif.
+
+## Correctif — cases de sélection des lots (15 novembre 2026)
+
+Dans la liste Lots et remises, le composant rendait la case uniquement quand
+`actions_disponibles` contenait `ENVOYER_RAPPEL`. Si les rappels étaient
+désactivés, les droits insuffisants ou le gain inéligible, toute la colonne
+pouvait rester vide malgré le bouton de rappel groupé.
+
+Chaque ligne présente désormais sa case. Elle est active uniquement quand
+le serveur autorise le rappel ; sinon, elle est grisée et associée au motif
+par `aria-describedby`. Le motif est affiché dans le statut du lot, visible
+aussi sur mobile sans ouvrir les détails. Les lots qui deviennent inéligibles
+après actualisation sont retirés de la sélection avec une annonce.
+Le bouton groupé reste indisponible sans sélection autorisée.
+
+Base Animation `b29b64b` et modifications locales, avec le retrait du menu
+Coffrets à gagner déjà présent. La reproduction échoue avant correction
+sur l’absence des cases (`tmp/gl-lots-ui-captures-nQgM16/`). La recette finale
+donne **20/20** pour rappels désactivés, perte d’éligibilité après actualisation,
+lecture seule, filtres et rappel groupé, à 320/390/1280 px et texte 200 % :
+`tmp/gl-lots-ui-captures-iEqd8o/report.json`. Les captures 320/1280 px ont été
+inspectées. La première reprise mobile avait montré le motif caché dans les
+détails ; ce défaut est corrigé et son rapport conservé dans
+`tmp/gl-lots-ui-captures-NCuvkl/`.
+Types, lint ciblé et build isolé réussis ; l’avertissement de taille de chunk
+est conservé. Contrôles documentaires : quatre guides, 155 liens, aucune erreur
+ni avertissement ; 150 sources exportées vérifiées.
+
+Impact limité à l’interface et aux guides : les droits, la cadence, les
+contrats, le backend, la base et le générateur restent inchangés. Les tests
+utilisent une API synthétique ; aucun réglage TEST ni envoi réel n’est modifié.
+La disponibilité des rappels demeure décidée par le serveur, y compris lorsque
+la fonctionnalité est désactivée.
+
+## Correctif — entrée Coffrets à gagner retirée (15 novembre 2026)
+
+À la demande de simplification après l’ajout de Lots et remises, l’entrée
+globale **Organiser → Coffrets à gagner** est retirée de Localeo Animation.
+L’ancienne adresse `/coffrets`, avec ou sans barre finale, est remplacée par
+`/lots-remises` dans l’historique du navigateur. Les écrans de préparation
+d’une animation conservent la sélection des coffrets et les règles existantes.
+Cette demande remplace la décision initiale de conserver les deux entrées.
+
+Correction locale sur Animation `b29b64b` et projet `5fcf344` : navigation,
+routage, documentation et recette existante. Aucune modification du backend,
+des contrats, des données, du générateur ou de l’exploitation : aucun nouveau
+comportement métier ni migration. Aucun déploiement effectué pour ce correctif.
+
+Vérifications : `pnpm exec tsc --noEmit`, lint ciblé `src/app/App.tsx`, build
+isolé `scripts/build-generation-tests.mjs` réussis ; avertissement de taille
+de chunk conservé. `tests/browser/lots-remises.mjs navigation` donne **4/4**
+à 320/390/1280 px et texte 200 %, avec absence du menu, redirection de l’ancien
+lien, accès aux lots et retour de focus. Rapport et captures dans
+`localeo-animation/tmp/gl-lots-ui-captures-tJeBpE/` ; les menus à 320 et 1280 px
+ont aussi été inspectés visuellement. API synthétique, aucune mutation TEST.
+
 ## Réalisation — E73-EVO-GESTION-LOTS (15 novembre 2026)
 
 [Spécification GL-01 à GL-18](gestion-lots-remises.md), issue de la demande du
