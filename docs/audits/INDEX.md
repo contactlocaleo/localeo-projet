@@ -2,6 +2,10 @@
 
 Constats datés conservés par application. Un audit ancien ne décrit pas automatiquement l’état actuel.
 
+- [Structure, documentation et harnais Localeo — 15 novembre 2026](structure-documentation-harnais-2026-11-15.md) : audit consolidé après contre-revue, constats confirmés et nuancés, quatre lots détaillés avec dépendances, critères d'acceptation et preuves attendues. Les lots restent à implémenter ; aucune modification applicative ni commit de lot réalisé à la rédaction du rapport.
+
+- [Mise en œuvre structure, documentation et harnais — 15 novembre 2026](implementation-structure-harnais-2026-11-15.md) : quatre lots implémentés dans Projet, Backend, Animation et Commerçant ; preuves locales, exercices de décision et dette backend restante. Commits par lot référencés dans le bilan ; CI distante et activation native distinctes, aucun déploiement.
+
 - [Localeo ERP — pages et ergonomie de gestion — 13 novembre 2026](backend/localeo-erp-ux-pages-gestion-2026-11-13.md) : 30 points à traiter, inventaire des pages, cinq modèles de gestion et priorisation. Revue du code actuel, cinq écrans TEST observés et 24 scénarios locaux du gabarit ; constats visuels, code et recommandations distingués. Rapport sans implémentation.
 
 - [Localeo ERP — UX quotidienne et productivité — 12 novembre 2026](backend/localeo-erp-ux-productivite-2026-11-12.md) : audit du code et des spécifications, 14 constats, continuité des dossiers, reprises, enregistrement et lisibilité. Photographie avant changement ; les six lots implémentés, preuves locales et réserves sont suivis dans [E60-EVOL-UX-20261112](../specifications/epic-60-vision-360-commercialisation/ux-productivite.md). Aucun gain humain mesuré.
