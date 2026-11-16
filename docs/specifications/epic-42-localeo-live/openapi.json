@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Live - API backend Epic 42",
     "description": "Vue OpenAPI 3.1 des contrats publics, editoriaux et techniques de Localeo Live.",
-    "version": "1.0.0+b417e63"
+    "version": "1.0.0+b7bcad9"
   },
   "paths": {
     "/public/animation-locale/animations/{animation_id}/contact-public": {
@@ -46678,7 +46678,8 @@
             "type": "string",
             "enum": [
               "ORGANISATEUR",
-              "NOTIFICATION"
+              "NOTIFICATION",
+              "CONVERSATION"
             ],
             "title": "Nature"
           },
@@ -46721,6 +46722,17 @@
               }
             ],
             "title": "Lue At"
+          },
+          "lue": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lue"
           },
           "statut": {
             "type": "string",

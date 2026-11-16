@@ -42,7 +42,7 @@ pas un environnement déployé.
 | Backend `models_messages_organisateur.py` | Les messages descendants exigent une campagne et une préférence ; aucune conversation à détourner |
 | Animation `App.tsx`, `AnimationDetailNavigation.tsx`, `OrganizerSupportWorkspace.tsx` | Navigation et patron liste/fil disponibles ; nouveau composant partagé entre entrée globale et animation |
 | Marketplace `LiveAnimationGame.jsx`, `LiveParticipationMessages.jsx` | Point commun aux moteurs ; ajouter une section personnelle de conversations avec badge non lu |
-| Live `LiveMessages.jsx` et `useLiveMessages.jsx` | Nouvelles collectives conservées ; pas d'ajout de contenu privé à leur union de notifications |
+| Live `LiveMessages.jsx` et `useLiveMessages.jsx` | Nouvelles collectives conservées ; avis de réponse personnelle sans contenu privé dans la messagerie unifiée et les compteurs d'animation |
 
 ## Parcours et règles
 
@@ -68,6 +68,21 @@ réponse non lue fondé sur le serveur. Afficher la liste ne marque rien comme l
 Après affichage effectif du fil, acquitter explicitement le dernier numéro de
 message organisateur réellement affiché ; une réponse arrivée après ce numéro
 reste non lue. La lecture ne marque jamais la demande comme traitée.
+
+Chaque réponse organisateur apparaît aussi dans **Messages** de Localeo Live,
+avec un avis « L’organisateur vous a répondu », le nom de l'animation et une
+action **Lire la réponse**. Le compteur existant de la vignette d'animation dans
+**Mon carnet** inclut ces réponses non lues et ouvre les messages de l'animation.
+L'avis ouvre la participation exacte puis son fil ; deux participations à la
+même animation conservent leurs accès distincts. Ni le texte privé, ni le motif,
+ni le nom de l'habitant ne sont recopiés dans l'avis ou le stockage du carnet.
+La liaison personnelle valide de l'installation est requise pour l'avis ; une
+installation seule, une preuve révoquée/expirée ou un participant anonymisé
+n'accorde aucun accès. Les préférences de campagnes et le Push restent indépendants.
+Ouvrir la messagerie, filtrer ou consulter un avis ne l'acquitte pas. L'action
+globale de lecture conserve les réponses privées pour leur lecture dans le fil.
+L'acquittement personnel confirme les numéros affichés puis actualise le badge
+Messages et le compteur de vignette ; une réponse plus récente reste non lue.
 
 L'accès et l'écriture restent possibles après clôture, fin ou archivage, tant que
 la preuve personnelle et les données de participation sont valides. Le gel du
@@ -157,6 +172,17 @@ Corps borné à 16 Kio, DTO stricts et erreurs sans copie du message/token.
 Prévoir 401/410 accès invalide, 403 droit absent, 404 cible hors périmètre,
 409 version/intention en conflit, 422 saisie, 413 taille, 429 débit, 503 indisponibilité.
 
+La messagerie unifiée `/public/localeo-live/installations/{installation_id}/messages`
+ajoute la nature de sortie `CONVERSATION` : un avis par message organisateur,
+identifié par ce message immuable, avec les références animation/participation et
+un lien vers le fil exact. `lue` est le booléen issu du repère numérique personnel ;
+`lue_at` reste nul car aucune date d'acquittement n'est persistée pour le fil.
+Le texte de réponse et le motif restent dans l'API personnelle. La pagination,
+les filtres d'animation/non-lus, le total non lu et l'indicateur d'animation
+incluent les avis. Le compteur `nouvelles_non_lues` du tableau de bord utilise
+les mêmes preuves. La route de lecture générique continue de refuser cette
+nature : seul l'acquittement personnel par numéro confirme sa lecture.
+
 Sur écriture, conserver l'ordre de coordination commun : fermeture organisation
 et autorisations organisateur si concernées, animation partagée, participant,
 conversation. Revalider accès/session après attente des verrous. État, message,
@@ -220,7 +246,7 @@ consigne leurs résultats réels et limites sur les arbres modifiés.
 | MH-03 | Organisateur : boîte globale commune/organisation active | Autre commune/organisation, compte révoqué, filtre animation et pagination | Route globale, menu Messages habitants | Deux communes et profils gestionnaire/lecteur |
 | MH-04 | Même service et écran depuis une animation | Filtre imposé, retour/focus, terminée/archivée autorisée pour assistance | Navigation contextuelle et globale | Édition en cours et terminée |
 | MH-05 | Réponse confirmée → REPONDU ; nouveau message habitant → A_TRAITER | Domaine et HTTP ; ouvrir/lire ne traite pas ; lecteur ne répond pas | États et allowedActions | Pas de droit Communication requis |
-| MH-06 | Non-lu habitant serveur, acquittement du numéro affiché | Deux réponses entourant une lecture ; compteur reste non nul pour la seconde, rejet numéro étranger/futur | Badge de participation et lecture personnelle | Accès sans installation ni Push |
+| MH-06 | Non-lu habitant serveur, avis Messages Live et compteur de vignette ; acquittement du numéro affiché | Deux réponses entourant une lecture ; compteur reste non nul pour la seconde, rejet numéro étranger/futur ; avis → bon fil et refus d'accès sans lecture | Badge de participation, messagerie unifiée et lecture personnelle | Fil sans installation ni Push ; avis sur installation liée avec preuve valide |
 | MH-07 | Réponse et reçu atomiques, intentions stables | Même clé rejouée, autre corps, deux versions concurrentes, perte après commit, erreur rollback | Contrats reçus et conflits | Aucun doublon après reprise |
 | MH-08 | Confidentialité de bout en bout | Altération IDs, token révoqué, contexte tardif, XSS texte, cache, audit et export sans secret | DTO/no-store/CSRF/Bearer | Pas de notification générique exposant le corps |
 | MH-09 | Support après fin/clôture/archivage avec accès valide | Trois états et anonymisation ; aucune réouverture de jeu | Sections terminales et refus | Accès récupéré sur autre appareil |
@@ -368,3 +394,48 @@ comme échec, distinct de cette reprise ciblée.
 L'intervention vérifie la migration et la santé du schéma. Les parcours métier
 distants restent à vérifier sur la nouvelle version applicative effectivement
 déployée ; les commits et push ne constituent pas cette recette.
+
+### Correctif du 16 novembre 2026 — Avis de réponse dans Live et sur la vignette
+
+**Cause reproduite :** les réponses étaient persistées et signalées dans la
+participation, mais absentes de l'union de messagerie et de ses compteurs.
+Le test PostgreSQL minimal constatait **0 non-lu pour deux réponses** avant
+correction. Le domaine `ConversationHabitant` reste propriétaire du repère
+monotone ; la correction complète ses projections de lecture.
+
+Chaque réponse produit désormais un avis calculé depuis son message immuable,
+sans duplication de texte ni nouvel envoi externe. Messages, filtre d'animation,
+indicateur et compteur de vignette utilisent la même preuve personnelle courante.
+Le lien ouvre la participation et le fil exacts. L'avis reste non lu jusqu'à
+l'acquittement personnel des numéros affichés ; la lecture globale l'exclut.
+Le retour à la liste pendant un acquittement confirmé actualise les compteurs,
+et le passage entre deux avis conserve les brouillons de fil en mémoire.
+
+Arbres vérifiés : backend **b7bcad90**, Marketplace **585695d**, Animation
+**bc2cd40**, projet **bc32cf8**, avec ce correctif local. Les changements E78
+déjà présents dans le projet sont conservés.
+
+| Vérification réellement exécutée | Résultat et limite |
+| --- | --- |
+| Backend, lanceur isolé : `tests/architecture`, recensements domaine/use cases, domaine/application messages habitants, tableau Live, compteur indisponible, API organisateur et contexte de notifications | **813 réussis, un échec préexistant** dans `test_marquer_lue_retourne_contexte_sans_recrire_message`. Reproduit sur le worktree HEAD backend inchangé : le double configure `session.get` alors que la route utilise `session.scalar`. Les contrôles d'architecture passent. |
+| PostgreSQL 18 jetable, `test_messages_organisateur_postgres.py`, `test_messages_habitants_postgres.py`, contrats HTTP des deux messageries | **64 réussis** ; puis **38 réussis** sur messagerie, compteurs par animation, lectures d'adhésion et performance des campagnes après regroupement des agrégats SQL. Aucun skip. |
+| Contrat final de lecture booléenne | Reprise du cas PostgreSQL de réponse privée : **1 réussi** ; API organisateur : **10 réussis**. `lue` exprime le repère et aucune date de lecture n'est inventée. |
+| Capacité des réponses, `test_messages_organisateur_performance.py -k reponses_live` | **4 réussis** : historique propre et périmètre étranger à 1 000/10 000 réponses, deux pages de 25 sans doublon ni texte privé, **5 requêtes par page**, lectures **182,6–559,2 ms**, sous le budget de 600 ms. Plans et mesures dans `.artifacts/reponses-live-*.json`. Cette mesure locale ne constitue pas une charge HTTP ni une recette de trafic de production. |
+| Live : tests Node messagerie/conversations et ESLint explicite sur `src tests scripts *.cjs *.mjs` | **10 tests réussis**, lint réussi. `npm run lint` reste bloqué par l'EPERM préexistant du dossier `output/bum-politique/pytest-approval-1`. |
+| Live : Playwright `resident-conversations.spec.cjs`, build et serveur isolés | **19/19 réussis**, dont 320/390/1280 px, refus, lecture retardée, brouillon, concurrence et confidentialité ; reprise finale des **6 nouveaux scénarios : 6/6**, avec la projection booléenne. Captures mobile/bureau inspectées. Rapports `2026-11-16T07-05-10-129Z-ndyNxs` et `2026-11-16T07-09-54-281Z-vVGFNp` sous `test-results/visual-runs/`. |
+| Live : suite voisine `live-messages-product.spec.cjs` | **14 réussis, un échec préexistant** : le test attend le lien de préférences après filtrage d'animation alors que la vue le réserve à la boîte globale. Échec identique sur le worktree HEAD Marketplace, rapport `2026-11-16T07-00-08-096Z-rYwQAl`. La première recette cumulée conserve aussi ses trois attentes de libellé zéro incorrectes dans les nouveaux tests ; elles sont corrigées avant les reprises réussies, sans modifier le comportement du compteur. |
+| Contrats | E41/E42 et import Animation régénérés hors ligne depuis la même application ; **58 opérations Pro et 340 Animation sans divergence sémantique**, **8 tests de contrat messages habitants Animation réussis**. |
+
+Une revue indépendante des extraits ciblés a identifié les cas brouillon et
+acquittement retardé, corrigés et testés ci-dessus ; elle ne constitue pas une
+revue exhaustive des fichiers ou une exécution indépendante des suites.
+
+**Impacts :** backend et Live modifiés, contrat embarqué Animation synchronisé,
+documentation canonique actualisée pour MH-06/MH-08/MH-13. Pro et ERP sans impact
+fonctionnel : leurs parcours ne consomment pas ces avis. Aucune migration
+supplémentaire à `v322`, aucun nouveau champ persistant, backfill ou paramètre
+d'exploitation : les réponses déjà conservées sont projetées à la lecture.
+Le générateur conserve ses conversations/réponses existantes ; aucun changement
+de fixture de démonstration ou de canal externe n'est nécessaire. Aucun test
+distant ni déploiement n'a été réalisé. La base et les serveurs de recette sont
+jetables ; le serveur PostgreSQL de cette tentative est arrêté après les tests.
