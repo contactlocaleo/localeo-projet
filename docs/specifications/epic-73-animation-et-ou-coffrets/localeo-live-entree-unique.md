@@ -1,5 +1,160 @@
 # E73 — Localeo Live, entrée unique des animations
 
+## Évolution du 17 novembre 2026 — maquettes habitant
+
+**E73-EVO-LIVE-MAQUETTES** — évolution demandée après validation de
+l’[audit et de ses deux planches](../../audits/marketplace/localeo-live-ux-habitant-maquettes-2026-11-17.md).
+Les cinq parcours et les huit vues sont dans le périmètre. La clôture historique
+de l’EPIC 73 reste inchangée. Cette section précise et remplace les choix
+visuels antérieurs incompatibles (navigation sombre flottante, tranche de carnet,
+frise avant action, consignes de retrait repliées) ; les règles métier demeurent.
+
+### Comportements et critères LM
+
+| Critère | Avant → comportement attendu | Preuve attendue |
+| --- | --- | --- |
+| E73-LM-01 | Navigation sombre flottante → fond clair, surfaces blanches bordées, actions vert profond, texte sombre, navigation basse blanche Mon carnet / Mes lots / Découvrir, état actif vert pâle. Rayons modérés, tampons liés aux faits. | Captures des huit vues comparées aux deux planches ; 320/390 px et bureau. |
+| E73-LM-02 | Favori et suivi peu explicités → commune consultée identifiée, changement distinct de sa mémorisation ; « Voir l’animation », « Garder pour plus tard », mention permanente « Cela ne vous inscrit pas ». | Découverte sans GPS implicite, aucun POST d’inscription, retour avec commune/filtres/focus. |
+| E73-LM-03 | Fiche publique → principe, effort, dates, conditions déterminantes et gain éventuel avant inscription ; règlement et partenaires accessibles. | Passeport/chasse/tombola, inscriptions ouvertes/fermées, à venir/terminée ; aucune promesse de gain. |
+| E73-LM-04 | Accès ajouté → confirmation et accès conservé clairement séparés ; titre de l’objet, ouverture directe, carnet et conseil de retour. Une inscription métier n’est jamais déduite du stockage. | Conservation réussie/échouée ; tombola publique toujours retrouvée par lien personnel e-mail. |
+| E73-LM-05 | Cartes sans territoire/période → titre, commune et dates disponibles, état personnel, progression puis ouverture ; récupération « Il manque une inscription ? Retrouver mon carnet » dans un carnet rempli. | Deux communes et deux participations à la même animation, pages partielles, accès absent/refusé, aucune donnée fabriquée. |
+| E73-LM-06 | Frise avant jeu → pendant le jeu, progression concrète et action prioritaire ; après qualification confirmée/résultat, suite et gain prioritaires. Frise accessible en suivi secondaire. | Ordre DOM et visuel ; compte fiable formulé en visites/étapes ; aucun pourcentage visuel redondant ni qualification déduite du compteur. |
+| E73-LM-07 | Visite dispersée → même écran avec commerce consulté, adresse, consigne, QR personnel et vérification. La sélection d’un commerce prépare une visite, elle ne réserve ni ne valide rien. | QR personnel distinct du QR de lieu ; commerce sélectionné conservé lors d’une relecture ; chasse sans lieu futur dévoilé. |
+| E73-LM-08 | Relecture échouée après présentation → « Validation à vérifier », dernier état connu et action « Vérifier la validation ». Une preuve commerçante confirmée nomme la visite validée et montre la progression actualisée dans ce même écran. | GET en échec puis preuve positive/négative ; aucune commande commerçante envoyée ; refus retire QR et actions. Les commandes de chasse gardent reçu et clé d’idempotence. |
+| E73-LM-09 | Consignes repliées/action générique → état, origine, lieu/consignes/échéance disponibles puis action adaptée : consignes de retrait, bon personnel ou coffret exact. Informations manquantes explicites et aide organisateur. | Trois natures, disponibilité/expiration/remise/annulation/remplacement ; bon utilisable seulement après relecture personnelle. |
+| E73-LM-10 | « J’ai vu ce lot » → « Marquer comme vu », secondaire, expliqué comme repère de cet appareil sans remise ni consommation. | Acquittement local, badge, aucun appel métier de retrait. |
+| E73-LM-11 | Retours et accessibilité conservés pendant la refonte : clavier, focus, cibles ≥44 px, texte 200 %, mouvement réduit, contenus longs et aucune action masquée par la navigation. | Tests navigateur et captures ; recette physique et compréhension habitant distinctes. |
+
+### Contrats, variantes et impacts
+
+Le domaine Animation backend reste propriétaire de l’inscription, des preuves,
+de la qualification, du résultat et des droits des lots. Marketplace consomme
+la projection joueur, les reçus et les lectures privées existantes. Aucune route
+ni commande nouvelle : l’habitant ne rejoue jamais une attestation commerçante.
+Une relecture positive d’un commerce `valide` confirme cette visite ; une hausse
+du compteur seule ne permet pas de nommer une visite. L’incertitude ne devient
+ni échec métier ni succès. Une confirmation reste visible jusqu’à la prochaine
+action ou une nouvelle lecture contradictoire/refusée.
+
+Le tableau de bord fournit déjà `commune` et `date_fin` ; le détail conservé peut
+fournir la date de début. Afficher seulement les dates disponibles et lisibles,
+sans déduire une période depuis la commune actuellement consultée. Une date de
+fin seule est annoncée « Jusqu’au… ». Les bons personnels fournissent commerce,
+adresse, consignes et échéance ; les lots externes fournissent responsable et
+consignes. Ne pas enrichir chaque carte par une boucle de requêtes individuelles.
+
+Passeport : tampons et visites, choix explicite d’un commerce, présentation du
+QR puis relecture. Chasse : étape courante et conditions restantes avant la
+frise, progression par étapes, commande incertaine via son reçu existant.
+Tombola : ticket sans tampons fictifs, statut personnel et tirage. Bon : détails
+pratiques puis présentation du QR vérifié ; lot externe : consignes sans QR ;
+coffret : ouverture de l’instance autorisée et prestations existantes.
+
+Une relecture du tableau de bord ne reprend pas une ancienne date de début
+qu’elle ne peut pas confirmer : le carnet actualisé montre alors la date de fin
+seule. La progression et l’ouverture précèdent les informations de tirage
+secondaires dans le carnet ; à 320 px, celles-ci restent accessibles en défilant.
+L’ancienne contrainte LS-13 de date de tirage dans le premier écran est donc
+remplacée par la priorité LM-05, sans supprimer ni déduire cette date.
+
+| Impact | Traitement |
+| --- | --- |
+| Critères et documentation | LM-01 à LM-11 complètent les critères E73 ; rapport et principes UX restent les références de conception. Bilan d’exécution ci-dessous. |
+| Marketplace | Composants Live, styles communs, projections de présentation, fixtures et tests de parcours. |
+| Backend / contrats / consommateurs | Contrats existants suffisants ; aucun schéma, droit ou endpoint modifié. Animation et Commerçant produisent toujours les mêmes attestations/remises. |
+| Exploitation / migration | Aucun changement de configuration, cache, consentement ou schéma ; aucun déploiement impliqué. |
+| Générateur | Pas de nouvelle donnée métier ; fixtures synthétiques couvrant T1–T6. Génération réelle et essais habitants non exécutés par les tests automatisés. |
+
+### Réalisation et preuves LM
+
+Implémentation locale du **18 novembre 2026**, dans `localeo-marketplace` et
+documentation canonique dans `localeo-projet`. Bases : Marketplace `ad5c4d9`,
+Projet `8b20cf9`, avec modifications de travail non commitées. Les audits Pro,
+les maquettes et les autres changements documentaires déjà présents sont
+conservés. Backend, Animation et Commerçant ne sont pas modifiés par ce lot.
+
+| Critères | Réalisation et preuve de comportement |
+| --- | --- |
+| LM-01 à LM-03 | Navigation blanche et vert pâle, surfaces claires, favori distinct de l’inscription ; dates et conditions avant inscription, accès aux partenaires. `live-iconography-discovery` et `live-discovery-continuity` vérifient les variantes et les retours. |
+| LM-04 | « Inscription confirmée » seulement à partir du reçu de création confirmé ; ajout d’un accès conservé distinct. `live-participation-confirmation` couvre succès, stockage indisponible, refus ultérieur et POST incertain sans réinscription. |
+| LM-05 | Commune et date de fin de la lecture groupée, progression avant ouverture, récupération dans le carnet rempli. `live-unified-carnet` et `live-carnet-notifications` conservent identité des participations, filtrage, lots et archivage. Test unitaire : aucune ancienne date réutilisée comme donnée fraîche. |
+| LM-06 à LM-08 | Suivi du tirage secondaire pendant le jeu ; commerce choisi, QR puis relecture GET, état incertain ou confirmation dans le même écran. `live-maquettes-habitant` vérifie panne, compteur augmenté par une autre visite, preuve du commerce exact, réponse tardive après changement de commerce et refus. `live-game`, `live-animation-workflow` et `live-participation-mobile-flow` conservent les reçus, commandes, états de chasse et tombola. |
+| LM-09 et LM-10 | Consignes externes visibles ; détail du bon puis présentation volontaire, relecture à la fermeture du QR ; « Voir mon bon » pour un état ancien ou historique. Repère « Marquer comme vu » exclusivement local. `digital-lot`, `live-iconography-lots`, `live-lots-unified` et `live-maquettes-habitant` contrôlent droits, expiration, remise et absence d’appel métier induit. |
+| LM-11 | Parcours clavier, focus de la visite choisie, absence de débordement à 320/390 px et texte 200 %, retours carnet/découverte/lots. `live-return-continuity`, `live-lots-mobile` et les suites précédentes portent ces contrôles. |
+
+Comparaison aux huit vues : découverte et fiche publique dans les captures
+`decouvrir-respiration` et `fiche-objectif`, inscription dans `confirmation`,
+puis carnet, préparation, incertitude, confirmation et bon dans les captures
+numérotées `04` à `08` de `live-maquettes-habitant`. Les contenus de recette
+sont synthétiques. Les fonctions transverses existantes (messages, menu,
+recherche, filtres et aide) restent accessibles ; leurs blocs secondaires
+peuvent allonger la page par rapport à la planche de démonstration. Aucun champ
+fictif de la planche n’est ajouté au contrat pour reproduire son texte.
+
+Les détails d’une visite cèdent la priorité au résultat de sa vérification.
+La date de tirage secondaire reste accessible en défilant à 320 px (LM-05).
+Les noms, tailles de contenus et captures diffèrent des données fictives des
+planches ; la comparaison conserve leurs priorités d’information et d’action.
+
+**Écart de composition soumis à arbitrage** : l’en-tête Localeo avec Messages
+et Menu reste au-dessus du contenu alors qu’il n’est pas représenté dans les
+planches. Il occupe une hauteur supplémentaire. La demande d’arbitrage porte
+sur son maintien ou le déplacement de ces outils vers un accès secondaire.
+Conformément au §2 de l’audit, cet écart n’est pas déclaré accepté et la
+conformité visuelle stricte n’est pas prononcée avant cette réponse. Les
+preuves fonctionnelles ci-dessous restent distinctes de cet arbitrage.
+
+Le commerce choisi est conservé dans les métadonnées de navigation, y compris
+pour le retour navigateur depuis les conditions. Ce repère contient seulement
+l’identifiant public du commerce : aucun QR, jeton ni preuve de validation.
+La participation est relue au retour. Après une vérification, le contrôle qui
+existe encore retrouve le focus ; si le dialogue QR ou l’action confirmée a
+disparu, le message d’état reçoit le focus. Un changement de commerce ou un
+nouveau focus utilisateur empêche une réponse tardive de déplacer ce focus.
+
+Exécution : `npm run test:security` **303/303**, sans skip ;
+`npx eslint src tests scripts '*.cjs' '*.mjs'` réussi. Le raccourci
+`npm run lint` rencontre `EPERM scandir` dans les répertoires de travail locaux
+`output/bum-politique/pytest-approval-1` puis `tmp/address-architecture` ;
+ces dossiers sont conservés, le périmètre source/tests/scripts est contrôlé
+explicitement sans modifier la configuration ESLint.
+
+Recettes exécutées avec `node scripts/run-visual-tests.cjs`, build isolé,
+port 18176 et deux workers. Rapports, traces, captures, empreintes complètes
+et manifeste `run.json` conservés sous
+`localeo-marketplace/test-results/visual-runs/` :
+
+| Tentative | Résultat et traitement |
+| --- | --- |
+| `2026-11-17T23-16-20-734Z-SN5kBK` — source `0bf81a36da67` | 199 réussites / 206, 7 échecs, aucun skip. Attentes à aligner : sélecteur de l’aperçu, singulier du compteur, ancien titre des visites et trois fixtures de tombola ne remplissant pas les champs obligatoires. Les assertions d’ordre, de confidentialité et d’idempotence sont conservées. |
+| `2026-11-17T23-29-49-492Z-17xBi5` — source `fbed964e6e2b` | 72 réussites / 75, 3 échecs. Découverte, mesures, confirmation, carnet et retours revérifiés ; deux pertes de focus pendant la désactivation du bouton et l’ancien sélecteur de titre restent à reprendre. |
+| `2026-11-17T23-33-59-465Z-DdsCwb` — source `e230631be31f` | 36 réussites / 37, 1 échec. Reprise du jeu, des vues 4–8 et du mobile, y compris résultat avant visites ; défaut de focus encore intermittent à 390 px. Correction : restauration après le rendu React effectif, avec contrôle de la lecture et du commerce encore courants. |
+| `2026-11-17T23-35-45-166Z-kE3iVO` — source finale `ec5bb00358fe` | **12/12**, sans skip : les six scénarios `live-maquettes-habitant` répétés deux fois. Focus à 320/390 px, commande absente, état incertain/confirmé, réponse tardive, retour explicite/navigateur vers le commerce, refus et bon relu. `run.json` : `passed`, code de sortie Playwright 0. Empreinte complète égale aux sources de travail après exécution. |
+
+Les résultats de plusieurs révisions ne sont pas additionnés en une recette
+unique. Le dernier changement applicatif porte sur la restauration du focus
+après vérification d’une visite ; cette portée est rejouée deux fois sur la
+version finale. Aucun échec identifié ne reste sans correction et reprise
+ciblée. Les captures des vues 5–8 de cette dernière tentative ont été relues,
+en complément des vues 1–4 des recettes précédentes. La conformité stricte
+reste soumise à l’arbitrage de composition ci-dessus.
+
+Les essais antérieurs sont conservés, dont la tentative
+`2026-11-17T23-12-08-758Z-wfubNL`, interrompue pour contention de ressources
+entre navigateurs (note `interruption.json`). Elle n’est pas une preuve de
+succès. Aucun processus de recette ne reste actif en fin de lot.
+
+Vérifications documentaires : `check_guidance.py` **104 guides, 1 561 liens,
+0 erreur, 0 avertissement** ; `sync_documentation.py --check-sources`
+**151 documents** ; `git diff --check` réussi dans Projet et Marketplace.
+Sur ce poste, Python est exécuté via `py -3.14 -X utf8`.
+
+**Limites** : aucune recette sur téléphone physique, aucun essai habitant et
+aucun environnement distant validés par ces tests locaux. Les quatre essais
+de compréhension de l’audit restent à organiser. Aucun déploiement,
+migration ni génération réelle effectués par ce lot. Le commit et le push
+des changements Live ont été demandés après cette recette locale.
+
 ## Correctif du 11 novembre 2026 — lots annoncés dans le carnet
 
 Le bloc personnel **Mon bilan de parcours**, redondant avec l'avancement,

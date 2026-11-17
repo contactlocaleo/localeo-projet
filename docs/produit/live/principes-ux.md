@@ -14,6 +14,41 @@ Mes lots / Découvrir**, avec les communes accessibles depuis Découvrir. Les
 tampons sont définis par E73-EVO-LIVE-TAMPONS. Les compositions plus anciennes
 restent historiques.
 
+## Référence obligatoire du 17 novembre 2026 — maquettes validées
+
+**L’UX de Localeo Live doit être revue pour se conformer strictement aux
+maquettes validées dans l’[audit UX habitant du 17 novembre 2026](../../audits/marketplace/localeo-live-ux-habitant-maquettes-2026-11-17.md).**
+Les deux planches conservées dans ce rapport fixent la composition, la hiérarchie
+des informations, les actions, les confirmations, la navigation et la direction
+artistique de la prochaine mise en conformité. Elles constituent une référence
+de conception obligatoire, pas une simple source d’inspiration. La recette
+doit comparer le rendu aux maquettes et vérifier les parcours ; toute divergence
+doit être identifiée et faire l’objet d’un arbitrage explicite.
+
+La navigation reste **Mon carnet / Mes lots / Découvrir**. La consultation d’une
+commune et sa mémorisation sont distinctes. La reprise personnelle reste visible
+même dans un carnet rempli. Dans une participation en cours, progression et
+action utile précèdent le suivi du tirage ; après achèvement ou résultat, la
+priorité s’adapte aux faits confirmés. Les vues de validation incertaine et
+confirmée représentent des états d’un même écran. Pour un lot, disponibilité,
+consignes pratiques et action adaptée précèdent les éléments secondaires ;
+« Marquer comme vu » conserve un effet local distinct de la remise ou consommation.
+
+Les textes et valeurs de démonstration ne créent aucune règle métier. Chaque
+déclinaison utilise les données, conditions et droits réels, préserve les états
+inconnus/refusés et reste accessible sur petit écran et avec texte agrandi.
+Les dispositions datées ci-dessus précisent la prochaine cible UX ; les règles
+métier existantes restent portées par les spécifications et le domaine backend.
+La validation de conception ne vaut ni implémentation ni essai habitant réussi.
+
+La demande de mise en œuvre est suivie dans **E73-EVO-LIVE-MAQUETTES** :
+[critères LM-01 à LM-11, réalisation et preuves](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-17-novembre-2026--maquettes-habitant).
+Dans le passeport, choisir un commerce prépare la visite ; présenter son QR
+ne valide rien à lui seul. « Vérifier la validation » relit la preuve de ce
+commerce. Dans Mes lots, le bon est présenté après lecture de son état et sa
+fermeture relit le résultat ; « Marquer comme vu » garde uniquement un repère
+dans ce navigateur. Les essais habitants restent une preuve distincte.
+
 ## LIVE-UX-01 — Le carnet de bord est le centre de l’expérience
 
 L’habitant retrouve ses animations et ses coffrets dans Mon carnet, et ses gains

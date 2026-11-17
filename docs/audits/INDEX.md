@@ -2,6 +2,8 @@
 
 Constats datés conservés par application. Un audit ancien ne décrit pas automatiquement l’état actuel.
 
+- [Localeo Live — audit UX habitant et maquettes validées — 17 novembre 2026](marketplace/localeo-live-ux-habitant-maquettes-2026-11-17.md) : cinq parcours, décisions produit et direction artistique validées, deux planches conservées et exigence de mise en conformité stricte de l’application. Audit initial sans implémentation ni essai habitant ; mise en œuvre locale du 18 novembre et preuves reliées à E73-EVO-LIVE-MAQUETTES, avec arbitrage de l’en-tête encore ouvert.
+
 - [Environnement de travail des agents — 17 novembre 2026](../organisation/audit-contexte-codex-2026-11-17.md) : instructions, skills, mémoire, hooks, outils et délégation ; cartographie, preuves, organisation cible et priorités. Audit en lecture seule formalisé sur demande ; aucune recommandation appliquée, gains attendus distingués des mesures.
 
 - [Localeo Animation — contre-expertise UX — 17 novembre 2026](animation/localeo-animation-contre-expertise-ux-2026-11-17.md) : quatre inspections indépendantes puis confrontation des 30 références ; arbitrages, cinq priorités et backlog unique. Build TEST bureau et fenêtre étroite, complément téléphone simulé et zoom 400 %. Aucun code modifié ; essais physiques et promesse de 5 à 10 minutes non validés.
