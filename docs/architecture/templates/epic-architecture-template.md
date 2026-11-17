@@ -74,6 +74,8 @@ Appliquer la [convention transverse](../transverse/performance-volumetrie.md). P
 | --- | --- | --- | --- | --- | --- |
 | API, ERP, frontend ou worker | Total, tenant actif, historique, concurrence | Page/lot, enfants et total éventuel | Clés, égalités, plages, index et plan à vérifier | Lots, verrous, cache, saturation | Requêtes, lignes/objets lus, p95/p99, mémoire, débit ; N/10N et charge mixte |
 
+Sélectionner les axes de mesure selon les [déclencheurs de la convention](../transverse/performance-volumetrie.md#quand-renouveler-les-mesures) ; justifier ceux sans impact et la fraîcheur des preuves réutilisées.
+
 Identifier les opérations nécessairement proportionnelles au volume et leur exécution durable. Décrire compatibilité des curseurs, migrations d’index et coûts d’écriture. Définir les bornes de conception maintenant ; compléter les budgets de capacité et preuves E59 avant activation, sans présenter une cible comme mesurée.
 
 ## Sécurité, audit et idempotence

@@ -1,6 +1,6 @@
 # Guide transverse Localeo
 
-Lire le [README](README.md), puis la spécification du périmètre et les instructions locales des applications touchées. L'[index des conventions](docs/architecture/transverse/README.md) sert à sélectionner les règles utiles ; ne pas charger tous les backlogs et historiques à chaque tâche.
+Lire le [README](README.md), puis les instructions locales des applications touchées et les sections de spécification utiles au parcours ou contrat modifié. Dans les README applicatifs, sélectionner les prérequis, commandes et repères du périmètre ; les historiques liés ne sont pas une lecture préalable systématique. L'[index des conventions](docs/architecture/transverse/README.md) sert à sélectionner les règles utiles ; ne pas charger tous les backlogs et historiques à chaque tâche.
 
 - Conserver les cinq dépôts Git indépendants. Documenter les applications affectées et les contrats partagés ; ne pas créer une documentation concurrente par application.
 - Le domaine backend porte les règles métier ; l’application orchestre et les interfaces présentent. Respecter les instructions techniques locales.

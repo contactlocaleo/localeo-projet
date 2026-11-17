@@ -2,6 +2,14 @@
 
 Ce dossier documente les choix communs a plusieurs EPIC.
 
+## Choisir selon le changement
+
+| Sujet touché | Référence à lire |
+| --- | --- |
+| Affichage, saisie, tri ou échéance de dates/horaires | [Affichage des dates](affichage-dates.md) |
+| Logo, nom, actions ou adaptation mobile d’un en-tête | [Identité des en-têtes](identite-entetes-applications.md) |
+| Règle, contrat, lecture ou commande | [Matrice de contrôles](controle-architecture.md) pour sélectionner les conventions et preuves |
+
 ## Documents
 
 - [Identité des en-têtes des applications](identite-entetes-applications.md) : symbole, couleurs, typographie et adaptation mobile communs aux huit applications.

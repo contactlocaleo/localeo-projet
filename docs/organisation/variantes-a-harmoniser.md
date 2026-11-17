@@ -6,7 +6,7 @@ Mise à jour du 18 septembre 2026 : les 19 variantes des spécifications ont ét
 
 | Dossier | Version commune/backend | Contribution conservée |
 | --- | --- | --- |
-| Architecture EPIC 41 | [Architecture](../architecture/backend/epics/epic-41-animation-locale-architecture.md) | [Contribution Animation](../architecture/backend/epics/epic-41-animation-locale-architecture.animation.md) |
+| Architecture EPIC 41 | [Architecture canonique](../architecture/backend/epics/epic-41-animation-locale-architecture.md) | Copie Animation byte-identique retirée le 17 novembre 2026 après comparaison SHA-256 ; apports conservés dans la même source. Les manifestes datés gardent les destinations historiques. |
 
 ## Divergences explicites conservées dans les documents consolidés
 

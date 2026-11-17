@@ -2486,7 +2486,7 @@ Verrou synchrone dès confirmation et clé conservée en mémoire pour une même
 
 ## Références complémentaires des interfaces
 
-- Animation : [Architecture applicative EPIC 41 - Domaine animation locale](../../architecture/backend/epics/epic-41-animation-locale-architecture.animation.md)
+- Animation : [Architecture applicative EPIC 41 - Domaine animation locale](../../architecture/backend/epics/epic-41-animation-locale-architecture.md)
 - Animation : [Analyse API de la maquette V2](../../specifications/epic-41-api/analyse-api-maquette.md)
 - Animation : [Specifications techniques API EPIC 41](../../specifications/epic-41-api/README.md)
 - Animation : [registre des arbitrages API](../../specifications/epic-41-api/registre-arbitrages.md)

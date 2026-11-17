@@ -27,7 +27,7 @@ La conception rapproche le comportement existant vérifié et le comportement ci
 
 Un contrat partagé indique son producteur, sa source canonique, ses générateurs et consommateurs. La spécification précise la compatibilité avec les données et versions existantes, les migrations nécessaires et l'ordre de livraison lorsque les applications ne peuvent évoluer indépendamment. Ne pas inventer de compatibilité ascendante ni de migration réversible sans preuve.
 
-Pour toute évolution de lecture, écriture, traitement ou trafic, appliquer la [convention performance et volumétrie](../architecture/transverse/performance-volumetrie.md) : bornes de page/lot, requêtes et index, mémoire, concurrence et saturation, puis preuves N/10N et charge mixte. Intégrer ces points à la conception canonique avec le modèle d’architecture. Les contrôles de liens et la présence d’un index ne prouvent pas la tenue en charge ; les budgets chiffrés et mesures de capacité sont requis avant activation du périmètre concerné.
+Évaluer les risques de coût et de trafic avec les [seuils de vérification](#choisir-les-contrôles-et-la-revue-selon-le-risque). Appliquer la [convention performance et volumétrie](../architecture/transverse/performance-volumetrie.md) aux chemins dont les requêtes, bornes, index, hydratations, traitements ou cadences changent. Une projection enrichie depuis les mêmes faits déjà chargés peut justifier l’absence de nouvelle campagne ; une jointure, un chargement paresseux ou une requête supplémentaire doit être examiné. Les mesures de capacité requises restent à produire avant activation ; liens, index présents et tests fonctionnels ne les remplacent pas.
 
 ### Matrice de traçabilité
 
@@ -54,6 +54,21 @@ Les tests doivent prouver les résultats observables : domaine pour les invarian
 Pour une correction, reproduire le défaut avec un test ciblé lorsque cela apporte une preuve utile. Ne pas ajouter de tests qui recopient l'implémentation ou d'assertions d'import factices. Exécuter les contrôles requis puis élargir si les changements ou résultats révèlent un risque supplémentaire. Un échec d'architecture ne justifie pas l'absence silencieuse des tests fonctionnels.
 
 Les travaux parallèles doivent avoir des fichiers ou worktrees distincts et des résultats attendus précis. Attribuer aussi les ressources d'exécution : répertoire de build, serveur et port, base temporaire, rapports. Un agent libère les ressources à la fin ou signale les processus qui restent actifs. Utiliser les lanceurs applicatifs isolant leurs sorties ; un port distinct ne protège pas un `dist` partagé. Une revue indépendante est utile pour une règle sensible, un contrat partagé ou un parcours UI significatif : demander les scénarios manquants et les risques concrets aux profils décrits dans le guide Codex. L'agent principal intègre et vérifie les corrections.
+
+### Choisir les contrôles et la revue selon le risque
+
+Les exigences locales et critères acceptés restent requis. Choisir les preuves d’après le comportement et les ressources réellement modifiés ; consigner la raison d’un contrôle sans objet dans la matrice existante.
+
+| Déclencheur | Preuves et revue adaptées |
+| --- | --- |
+| Texte, lien, style ou focus local sans effet sur règle/contrat/coût d’accès | Liens ou interaction/rendu concernés ; pas de campagne de charge ni de revue transverse systématique. |
+| Règle métier, transition ou contrôle d’accès | Tests de l’invariant et de ses refus, puis entrées affectées. Une revue indépendante est utile si plusieurs points d’entrée peuvent contourner la règle, ou si elle engage droits, argent, effets irréversibles ou données privées. |
+| Contrat partagé, permissions, migration ou coexistence de versions | Producteur et consommateurs réels, compatibilité et refus. Faire relire la frontière lorsqu’un consommateur peut être rompu ou que plusieurs dépôts doivent être livrés dans un ordre contraint. |
+| Requête, jointure, filtre, tri, pagination, index, hydratation, cardinalité ou taille de lot modifiés | Bornes et nombre de requêtes, plans PostgreSQL pertinents et mesures à N/10N sur données représentatives ; inclure mémoire/rendu si le frontend est affecté. |
+| Transaction, verrou, worker, diffusion, polling, cadence ou concurrence/volume d’appels modifiés | Budgets et mesures de débit, contention et saturation ; charge mixte si le chemin partage ses ressources avec les parcours interactifs. |
+| Navigation, saisie ou action UI avec conséquences sur plusieurs états | Parcours clavier/mobile, confirmations, échecs et reprise. Revue UX indépendante utile si la hiérarchie d’actions, la navigation ou les gardes changent substantiellement ; pas pour une retouche isolée. |
+
+Une absence de campagne nouvelle se justifie par les accès et volumes préservés, ou par une preuve existante encore applicable, pas par la seule taille du diff. Une incertitude sur le chargement ou le coût se résout avant de conclure « sans impact ». Réutiliser les budgets et outils existants ; aucune charge implicite sur un environnement partagé.
 
 ### Critères de fin du périmètre livré
 
@@ -127,6 +142,12 @@ des preuves réussies. Les limites empêchant de vérifier un critère restent
 bloquantes pour sa déclaration de fin, sans empêcher le travail indépendant.
 
 ## Documenter les preuves et préparer la livraison
+
+Ce noyau est commun à l’implémentation, la vérification d’exigence et la clôture ; chaque phase conserve ses effets propres. Dans le bilan ou le compte rendu existant, relier chaque critère à la spécification applicable, au code effectif et à ses entrées/consommateurs, puis aux tests et résultats observables. Examiner succès, refus, permissions, répétition et concurrence selon le risque. La matrice de traçabilité porte aussi les impacts fonctionnels/ops, contrats, migrations, configuration, fixtures et générateur/restaurateur ; justifier les éléments sans objet et garder les dépôts non examinés explicites.
+
+Lire les assertions et vérifier la fraîcheur des rapports réutilisés ; exécuter les preuves manquantes, périmées ou affectées et les contrôles requis avec les lanceurs isolés locaux. Après une correction, renouveler les preuves affectées. Ne pas relancer sans changement ou incertitude nouvelle. Un plan, un fichier de test, un build ou un taux de couverture ne prouve pas à lui seul un comportement ; une instruction de prompt ou un schéma valide ne garantit pas la qualité métier/visuelle d’une sortie. Pour un rendu, distinguer revue du code et recette navigateur.
+
+Distinguer réussite, échec, non-exécution (dont skip et interruption) et dette préexistante étayée par comparaison ou référence vérifiable. Une dette sans impact reste visible ; si elle empêche de vérifier un critère, celui-ci reste ouvert. Ne pas affaiblir une assertion ni ajouter un skip pour obtenir du vert. Une confirmation utilisateur ne prouve que le scénario effectivement confirmé. Les effets externes et tests sur une base d’exploitation ne sont jamais implicites.
 
 Un résultat de contrôle indique le dépôt, le chemin du test ou de la commande, le contexte testé (SHA si l'arbre est propre, ou SHA de base et modifications locales), l'environnement pertinent et le résultat. Référencer les rapports CI ou artefacts existants sans recopier les journaux ni leurs secrets. Des résultats obtenus sur un autre arbre ne valident pas automatiquement le changement courant.
 

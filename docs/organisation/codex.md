@@ -2,6 +2,8 @@
 
 Ce guide décrit le fonctionnement local des cinq dépôts. Les [règles transverses](../../AGENTS.md) restent la référence ; les états produit viennent de la [roadmap](../roadmap/README.md). L'[audit du 18 septembre 2026](audit-contexte-codex-2026-09-18.md) conserve les constats et les validations de cette mise en place.
 
+L’[audit du 17 novembre 2026](audit-contexte-codex-2026-11-17.md) réévalue les instructions, skills, mémoire, hooks, outils et délégation. Il conserve les preuves et limites de l’examen ; sa [mise en œuvre](audit-contexte-codex-2026-11-17.md#11-mise-en-œuvre-des-recommandations) distingue les changements réalisés des vérifications natives et comparatives restantes.
+
 Commencer par le [guide d'usage développement et correctif](utiliser-workflows-codex.md) pour les demandes types, les résultats attendus et la reprise d'une tâche. Le [cycle d'epic](cycle-epic.md), le [cycle de correctif](cycle-correctif.md) et la [préparation de livraison](preparer-livraison.md) décrivent les critères de passage et les preuves.
 
 ## Charger le contexte utile
@@ -12,9 +14,11 @@ Codex découvre les `AGENTS.md` depuis la racine du dépôt jusqu'au répertoire
 | --- | --- | --- |
 | Règle métier ou transition | Spécification concernée, guide backend, [matrice d'architecture](../architecture/transverse/controle-architecture.md) | Invariant, propriétaire métier, cas nominal/refus et entrées affectées. |
 | API partagée | [Conventions API](../architecture/transverse/conventions-api-openapi.md), producteur et consommateurs réels | Contrat, accès et comportement des consommateurs ; génération distincte du déploiement. |
-| Interface/PWA | README et guide de l'application, spécification concernée | Test ciblé et, si le rendu change, contrôle visuel ; session/cache/permissions selon le périmètre. |
+| Interface/PWA | Sections utiles du README et guide local, parcours de la spécification | Test ciblé et, si le rendu change, contrôle visuel ; session/cache/permissions selon le périmètre. |
 | Déplacement/fusion de documents | [Index des spécifications](../specifications/INDEX.md), roadmap, [exports et lecteurs](../exploitation/technique/reference-documentation-centralisee.md) | Source canonique unique, liens entrants/sortants, contrat d'export et lecteurs préservés. |
 | Exploitation/démonstration | Procédure de l'environnement et guide local des scripts | Cible explicite, effets de la commande connus et vérification propre à l'opération. |
+| Dates/horaires | [Affichage des dates](../architecture/transverse/affichage-dates.md) | Instants et dates civiles distingués, heure de Paris et transitions saisonnières selon le parcours. |
+| Identité d’en-tête | [Identité des applications](../architecture/transverse/identite-entetes-applications.md) | Symbole, nom et actions lisibles sur mobile, clavier et texte agrandi. |
 | Retouche rédactionnelle | Document et voisins utiles | Liens et exactitude du texte ; pas de batterie métier sans rapport. |
 
 Lire d'abord `git status` et le diff du périmètre ; rechercher les symboles/chemins ciblés avec `rg`. Ne pas injecter tout le corpus, les contrats OpenAPI complets, les logs ni les secrets dans le contexte. Une affirmation de recette ou de déploiement exige une preuve distincte d'un build local.
@@ -49,7 +53,7 @@ Les profils sont locaux à `localeo-projet`, demandent la lecture seule et héri
 
 Le [hook Codex SessionStart](../../.codex/hooks.json) appelle [codex_context.cjs](../../scripts/codex_context.cjs) au démarrage, à la reprise, à l'effacement, au fork et après compaction. Il indique les dépôts absents, modifiés ou non vérifiables, puis rappelle les sources et la séparation commit/push/déploiement. Il lit le statut Git, sans contenu des fichiers, réseau ni écriture. Git et Node doivent être disponibles dans le PATH ; chaque commande Git a un délai limité.
 
-La définition est créée et son script testé. **L'activation native reste à effectuer dans une nouvelle session du projet : ouvrir `/hooks`, examiner puis approuver cette définition.** Codex exige la confiance du projet et du hook exact ; une modification de la définition peut nécessiter un nouvel examen. Cette opération n'est pas remplacée par l'autorisation de créer les fichiers. Aucun contournement de confiance ni réglage global n'a été ajouté. [Règles officielles des hooks](https://learn.chatgpt.com/docs/hooks).
+Vérifier l’état de la définition courante dans `/hooks` (CLI) ou **Réglages → Hooks** (application). Examiner la source, les événements et leur état de confiance ; approuver seulement une définition nouvelle ou modifiée qui nécessite cet examen. Une empreinte enregistrée dans la configuration personnelle ne prouve pas que l’événement s’est exécuté dans cette session. Distinguer confiance du projet, confiance du hook exact et observation de son exécution native ; un appel manuel du script ne prouve que son fonctionnement isolé. Aucun contournement de confiance n’est requis. [Règles officielles des hooks](https://learn.chatgpt.com/docs/hooks).
 
 Le hook `Stop` appelle [codex_finish.cjs](../../scripts/codex_finish.cjs). Si un dépôt est modifié, absent ou non vérifiable, il rappelle d'exposer les preuves et les impacts ; il ne bloque pas la fin du tour, ne relance pas automatiquement l'agent et ne déduit aucun succès des messages. Les deux hooks sont en lecture seule et leurs sorties restent courtes. La confiance doit porter sur la définition actuelle contenant ces deux événements.
 
@@ -72,6 +76,8 @@ Le [hook Git local](../../.githooks/pre-commit) utilise le contrôle de l'index 
 python scripts/install_hooks.py --install
 python scripts/install_hooks.py
 ```
+
+Commencer par la commande sans option pour lire l’état effectif. Lors d’une maintenance autorisée, `--install` réinstalle le chemin relatif si l’ancien chemin absolu désigne les mêmes hooks ; il conserve les autres gestionnaires actifs. L’état d’un poste n’est pas un prérequis universel.
 
 L'installateur configure uniquement `core.hooksPath=.githooks` et `localeo.python` dans ce dépôt. Le chemin relatif est résolu depuis chaque worktree : les hooks restent disponibles si les fichiers du checkout initial disparaissent. Le montage supporté place chaque worktree Projet auprès des quatre dépôts applicatifs, avec le même Python durable disponible pour tous ; un environnement Python situé dans un checkout supprimable ne convient pas à cette configuration partagée. Il refuse de remplacer un gestionnaire contenant des hooks actifs ; aucun réglage global ni applicatif voisin n'est modifié. Node doit être disponible. Si le chemin de Python change, relancer l'installation. La [configuration pre-commit](../../.pre-commit-config.yaml) reste une alternative pour un environnement utilisant déjà ce gestionnaire ; ne pas installer les deux séparément. Le vérificateur ne stage aucun fichier et ne crée aucun commit.
 

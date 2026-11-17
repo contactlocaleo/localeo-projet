@@ -2,6 +2,8 @@
 
 Constats datés conservés par application. Un audit ancien ne décrit pas automatiquement l’état actuel.
 
+- [Environnement de travail des agents — 17 novembre 2026](../organisation/audit-contexte-codex-2026-11-17.md) : instructions, skills, mémoire, hooks, outils et délégation ; cartographie, preuves, organisation cible et priorités. Audit en lecture seule formalisé sur demande ; aucune recommandation appliquée, gains attendus distingués des mesures.
+
 - [Localeo Animation — contre-expertise UX — 17 novembre 2026](animation/localeo-animation-contre-expertise-ux-2026-11-17.md) : quatre inspections indépendantes puis confrontation des 30 références ; arbitrages, cinq priorités et backlog unique. Build TEST bureau et fenêtre étroite, complément téléphone simulé et zoom 400 %. Aucun code modifié ; essais physiques et promesse de 5 à 10 minutes non validés.
 
 - [Localeo Animation — utilisabilité et pilotage — 17 novembre 2026](animation/localeo-animation-utilisabilite-pilotage-2026-11-17.md) : contre-audit du parcours complet, six axes R01–R06 et 12 constats locaux. Complément téléphone/tablette : tâches au toucher, clavier, portrait/paysage et reprise ; huit passages d’émulation réussis et hauteur de cible de confirmation à harmoniser. Provenance de la première recette paramètres corrigée ; deux échecs du banc général conservés avec désalignements identifiés. Code et rendus synthétiques, sans recette physique ni mesure utilisateur. Audit seul, sans implémentation.

@@ -8,6 +8,12 @@ Une consultation interactive doit dépendre de la page ou de la cible demandée,
 
 Aucune architecture ne garantit des temps constants avec un trafic illimité. Chaque évolution touchant données ou trafic décrit son enveloppe de capacité, ses budgets et son comportement à saturation. Un seuil non mesuré est un objectif, jamais une performance acquise. Une exception précise périmètre, justification, borne, preuve et condition de réexamen dans la spécification concernée.
 
+## Quand renouveler les mesures
+
+Appliquer les exigences ci-dessous aux chemins dont le coût ou la capacité changent : requêtes/jointures/filtres/tris, pagination et index, volume hydraté, taille de page/lot, durée de transaction/verrous, workers, diffusion ou cadence/concurrence des appels. Sélectionner les axes P08 affectés : N/10N pour les accès dépendant du volume ; débit/contention/saturation pour la cadence ou la concurrence ; charge mixte lorsque les ressources interactives et traitements se partagent. Fixer les budgets avant la recette et produire les mesures requises avant activation.
+
+Une retouche rédactionnelle ou un champ de projection utilisant les mêmes faits déjà chargés, sans accès, cardinalité ni cadence supplémentaires, n’impose pas une nouvelle campagne. Justifier cette absence d’impact ou l’applicabilité d’une preuve existante dans la conception. Vérifier notamment l’absence de chargement paresseux/N+1 avant cette conclusion. Les bornes structurelles et les tests d’invariants restent requis dès qu’ils sont affectés ; la taille du diff ne détermine pas le risque.
+
 ## P01 — Contrat de coût par opération
 
 Pour les parcours concernés, documenter : population totale et population autorisée, filtres et tris, taille de page/lot, colonnes rendues, nombre de requêtes, objets hydratés, stratégie d’accès/index, frontière transactionnelle, cadence/concurrence et preuve attendue. Inclure les routes ERP, sélecteurs, permissions, workers et exports, pas seulement les listes publiques.

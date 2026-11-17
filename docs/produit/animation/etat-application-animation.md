@@ -522,7 +522,7 @@ La procédure détaillée est disponible dans
 ## 24. Sources de vérité
 
 - [Backlog de la plateforme Animation](../../roadmap/terminees/epic-41-plateforme-animation-locale-mvp-backlog.md)
-- [Architecture du domaine Animation](../../architecture/backend/epics/epic-41-animation-locale-architecture.animation.md)
+- [Architecture du domaine Animation](../../architecture/backend/epics/epic-41-animation-locale-architecture.md)
 - [Catalogue des API Animation](../../specifications/epic-41-api/catalogue-api.md)
 - [Spécification de la souscription](../../specifications/epic-47-souscription-abonnement-partenaire-animation/README.md)
 - [Paiement des lots](../../specifications/epic-46-paiement-lots-animation/README.md)

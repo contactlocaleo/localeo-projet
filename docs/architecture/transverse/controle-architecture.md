@@ -13,6 +13,8 @@ leurs impacts identifiés sur les autres applications.
 | API ou contrat public | [API et OpenAPI](conventions-api-openapi.md), [sécurité](conventions-securite.md) | Exposition, domaine, schémas et contrôles d'accès cohérents ; route fine ; tests de contrat et de refus ; impacts sur les consommateurs identifiés. |
 | Action sensible, paiement, notification | [Sécurité](conventions-securite.md), [architecture](architecture-solution.md) | Périmètre d'accès, audit, transaction et idempotence vérifiés ; outbox et ports existants réutilisés ; scénario répété/échec testé selon le risque. |
 | Écran ou commande ERP | [Back-office et règles UX](conventions-backoffice.md#ux-des-pages-de-gestion-erp) | Modèle de page adapté, identité/état/action explicites et checklist UX du parcours ; navigation rattachée au domaine ; invariants identiques aux API/batchs ; ORM réservé aux responsabilités techniques des vues et adaptateurs. |
+| Dates/horaires | [Affichage des dates](affichage-dates.md) | Distinguer instant et date civile ; Europe/Paris pour affichage/saisie, changements été/hiver et fuseau navigateur selon le comportement touché. |
+| Identité d’en-tête | [Identité des applications](identite-entetes-applications.md) | Symbole, nom et actions conservés ; mobile, texte agrandi, clavier et garde de saisie du retour accueil vérifiés si affectés. |
 | Email système | [Charte email](charte-emails-localeo.md) | Rendu commun, échappement, QR/liens/texte conservés ; tests et aperçus adaptés, sans envoi réel implicite. |
 | Persistance ou intégration | [Architecture](architecture-solution.md), [guide opérateur](../../exploitation/technique/reference-guide-exploitation-plateforme.md) | Ports et mapping explicites, migrations additives/checksums préservés, documents binaires hors base selon leur contrat ; tests d'adaptateurs, pas d'accès à une base d'exploitation. |
 | Liste, recherche, agrégation, export ou hausse de trafic | [Performance et volumétrie](performance-volumetrie.md) | Filtrage/pagination en stockage, lectures et mémoire bornées, index reliés aux requêtes, absence de N+1, transactions/worker bornés ; plans PostgreSQL et mesures séparant volume et trafic, budgets déclarés avant recette. |
@@ -94,6 +96,8 @@ nécessaires pour vérifier le respect des principes.
 
 ## Validation du 18 septembre 2026
 
+**État de résolution :** les deux échecs de recensement décrits ci-dessous ont été corrigés le **23 septembre 2026**, avec tests dédiés pour les huit classes de domaine et trois use cases, sans assouplissement des assertions. Le [bilan daté](../../organisation/validation-workflows-codex-2026-09-23.md#preuves-locales) rapporte **453 tests ciblés réussis**. Ce résultat historique ne vaut pas une nouvelle exécution sur le code courant ; le constat du 18 septembre reste conservé pour sa provenance.
+
 La commande de contrôle ci-dessus a été exécutée localement sous Python 3.12 :
 **356 tests réussis, 2 contrôles de recensement en échec**. Les nouveaux tests
 sur les imports passent, ainsi que les contrats d'architecture existants.
@@ -112,9 +116,7 @@ Les deux contrôles en échec sont inchangés par cette livraison ; leur échec 
 
 Cela ne signifie pas que tout comportement de ces classes est dépourvu de
 couverture : certains tests fonctionnels existent hors de ce recensement.
-Raccorder les tests pertinents et compléter les comportements manquants avant
-la mise au vert ; ne pas créer des tests d'import factices ni des exclusions.
-Cette dette préexistante n'est pas masquée par le nouveau contrôle CI.
+L’action demandée à cette date était de raccorder les tests pertinents et de compléter les comportements manquants avant la mise au vert, sans tests d’import factices ni exclusions. Sa résolution est reliée en tête de section ; ne pas réouvrir cette dette à partir du seul bilan initial.
 
 La suite métier complète et la matrice GitHub Python 3.12/3.14 n'ont pas été
 réexécutées dans cet environnement pour cette modification. Aucune protection

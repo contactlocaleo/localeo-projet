@@ -5,46 +5,34 @@ description: Vérifier la prise en compte d'une exigence Localeo dans les spéci
 
 # Vérifier une exigence Localeo
 
-Lire le [guide transverse](../../../AGENTS.md), puis les seules sources utiles dans l'[index des spécifications](../../../docs/specifications/INDEX.md) et la [roadmap](../../../docs/roadmap/README.md). Lire les instructions locales de chaque application effectivement concernée. Conserver le périmètre demandé : une exigence n'impose pas l'audit complet des cinq dépôts.
+Lire le [guide transverse](../../../AGENTS.md), les sources utiles dans l’[index des spécifications](../../../docs/specifications/INDEX.md) et la [roadmap](../../../docs/roadmap/README.md), puis les instructions des seules applications concernées.
 
-## Établir ce qui doit être vérifié
+## Établir et suivre l’attente
 
-- Reprendre l'exigence donnée, sa source et son identifiant lorsqu'il existe. Retrouver sa version applicable, ses critères et les décisions qui la remplacent ou la précisent. Une epic terminée ne prouve pas la réalisation d'une évolution ultérieure ; les statuts courants priment sur les anciennes stories.
-- Décomposer les formulations générales en résultats observables : acteur, préconditions, déclencheur, résultat attendu, refus et effets interdits pertinents. Préserver les identifiants existants ; de simples repères locaux suffisent si aucun critère n'est identifié.
-- Distinguer la demande actuelle, le comportement spécifié et le comportement observé. Une divergence entre eux est un constat, pas une autorisation de redéfinir l'exigence. Si une ambiguïté change le verdict, demander la précision et poursuivre les parties indépendantes. Une source introuvable n'empêche pas d'examiner une attente clairement formulée par l'utilisateur.
-- Préciser la portée de la conclusion : documentation seule si demandée, sinon implémentation et preuves locales ; environnement déployé seulement s'il est identifié et accessible. Relever branche, SHA et modifications locales des dépôts examinés pour dater les preuves.
+Reprendre exigence, source, version applicable et ID lorsqu’ils existent. Décomposer en résultats observables (acteur, préconditions, déclencheur, succès, refus et effets interdits). Garder les IDs ; de simples repères locaux suffisent sans epic. La demande explicite peut être examinée même si sa source est introuvable. Une epic terminée ne prouve pas une évolution ultérieure.
 
-## Suivre le comportement jusqu'à ses consommateurs
+Distinguer demande, spécification et observation. Une divergence n’autorise pas à redéfinir l’exigence ; une ambiguïté qui change le verdict doit être clarifiée, en poursuivant les parties indépendantes. Délimiter la conclusion : documentaire si demandé, sinon code et preuves locales ; cible déployée seulement si identifiée et accessible.
 
-Pour chaque critère, retrouver les fichiers et appels effectifs qui le réalisent, ainsi que les tests qui pourraient le contredire. Une recherche de mots-clés sert à localiser, pas à conclure à la conformité ou à l'absence d'implémentation.
+Suivre chaque critère jusqu’aux fichiers et appels effectifs : propriétaire domaine et entrées pour une règle ; producteur, source canonique, générateur, copie et consommateurs pour un contrat ; données, projection et rendu pour un parcours. Une recherche de mots-clés localise mais ne prouve ni conformité ni absence. Utiliser [localeo-invariants](../localeo-invariants/SKILL.md) si la règle, transition ou frontière exige cette revue ciblée.
 
-- Pour une règle métier, identifier le propriétaire dans le domaine backend et les entrées concernées (API, ERP, batch, webhook). Appliquer [localeo-invariants](../localeo-invariants/SKILL.md) si la vérification porte sur une règle, une transition ou un contrat partagé.
-- Pour un contrat, suivre producteur, source canonique, générateur, contrat embarqué et consommateurs réels. Pour un parcours, suivre données, projection et interface jusqu'au résultat visible. Examiner permissions, états et chemins alternatifs lorsqu'ils changent le résultat attendu.
-- Vérifier les impacts pertinents sur documentation fonctionnelle et ops, données existantes, migrations, configuration, fixtures et générateur de démonstration. Justifier les éléments sans objet ; signaler un dépôt manquant ou non examiné sans le déclarer conforme.
-- Distinguer instruction et garantie : une exigence écrite dans un prompt ne prouve pas la conformité d'une sortie générée ; une validation de schéma ne prouve pas sa pertinence métier ou visuelle. Examiner les contrôles et résultats réels correspondant à l'attente, sans inventer un nouveau refus serveur si celui-ci n'est pas exigé.
+## Preuves et portée des actions
 
-## Rassembler les preuves
+Appliquer le [noyau des preuves](../../../docs/organisation/cycle-epic.md#documenter-les-preuves-et-préparer-la-livraison) et les [seuils proportionnés](../../../docs/organisation/cycle-epic.md#choisir-les-contrôles-et-la-revue-selon-le-risque) : assertions et résultats sur l’arbre courant, fraîcheur des rapports, impacts et absences justifiées. Un prompt ne garantit pas sa sortie ; examiner le résultat réel sans inventer de nouveau refus serveur. Si une preuve manque, donner le scénario discriminant et ses prérequis.
 
-Choisir les contrôles dans la [matrice d'architecture](../../../docs/architecture/transverse/controle-architecture.md). Lire les assertions des tests pertinents et exécuter les contrôles existants proportionnés sur l'arbre courant, dans les environnements isolés prescrits. Pour un comportement visuel, examiner le rendu quand il est accessible ; une revue du code ne vaut pas recette navigateur. Ne pas charger la configuration d'exploitation ni contacter un fournisseur ou une base réelle implicitement pour un audit.
+La vérification seule conserve code applicatif et statuts ; les sorties temporaires restent possibles. Écrire dans le suivi canonique seulement si demandé. Si correction ou évolution est déjà autorisée, poursuivre avec [corriger](../localeo-corriger/SKILL.md) ou [faire évoluer](../localeo-faire-evoluer-epic/SKILL.md), puis revérifier ; sinon recommander les suites sans les implémenter.
 
-Un test écrit, ignoré, interrompu ou non exécuté n'est pas une preuve réussie. Un build, un import ou un contrôle documentaire ne suffit pas à prouver une règle métier. Vérifier le cas nominal et les refus ou variantes déterminants pour le critère. Si une preuve manque, décrire le scénario discriminant et les prérequis nécessaires ; ne pas fabriquer de test miroir pour produire un résultat vert. Une dette préexistante exige une référence ou comparaison vérifiable.
+## Verdict traçable
 
-La vérification seule conserve les sources applicatives et les statuts de roadmap. Les rapports et sorties temporaires de contrôle restent possibles ; consigner les résultats dans le suivi canonique seulement si demandé, sans créer un registre concurrent. Si la correction ou l'évolution est déjà autorisée dans la demande en cours, poursuivre avec [localeo-corriger](../localeo-corriger/SKILL.md) ou [localeo-faire-evoluer-epic](../localeo-faire-evoluer-epic/SKILL.md), puis revérifier les critères concernés. Sinon présenter les actions recommandées sans les implémenter.
+Présenter d’abord les écarts bloquants, leur effet observable et leur preuve, puis une matrice courte dans le support demandé ou le compte rendu :
 
-## Rendre un verdict traçable
-
-Présenter d'abord les écarts qui empêchent de satisfaire l'exigence, leur conséquence observable et les preuves associées. Donner ensuite une matrice courte, dans le compte rendu ou le support canonique demandé, en réutilisant la [traçabilité du cycle d'epic](../../../docs/organisation/cycle-epic.md) lorsqu'elle existe :
-
-| Critère / attente | Spécification applicable | Implémentation et consommateurs | Preuves et limites | Verdict / suite |
+| Critère | Source applicable | Code et consommateurs | Preuve, version et limites | Verdict / suite |
 | --- | --- | --- | --- | --- |
-| Identifiant ou repère local | Chemin et décision | Chemins et comportement constaté | Test, commande, version, résultat réel ou scénario manquant | État justifié et action ciblée |
+| ID ou repère | Chemin et décision | Fichiers et comportement observé | Test/commande/rapport, contexte et résultat ou scénario manquant | État justifié et action ciblée |
 
-Employer des verdicts explicites par critère :
+- **Vérifié** : preuves adaptées au périmètre, sans écart ouvert sur ce critère.
+- **Partiel** : nommer les parties couvertes et celles qui restent absentes/non vérifiées.
+- **Non satisfait** : contradiction établie, avec scénario et preuve.
+- **Non vérifiable en l’état** : preuve, accès ou arbitrage insuffisant ; préciser la condition pour conclure.
+- **Sans objet** : hors périmètre applicable, avec raison.
 
-- **Vérifié** : preuves adaptées au comportement et au périmètre annoncé, sans écart ouvert sur ce critère.
-- **Partiel** : couverture de certaines parties seulement ; nommer celles qui manquent ou restent non vérifiées.
-- **Non satisfait** : contradiction établie avec l'attente ; indiquer le scénario et la preuve, plutôt qu'une simple absence de mot-clé.
-- **Non vérifiable en l'état** : preuves, accès ou arbitrage insuffisants ; donner la condition qui permettrait de conclure.
-- **Sans objet** : hors du périmètre applicable, avec justification.
-
-Le verdict global ne masque aucun critère partiel, non satisfait ou non vérifiable. Distinguer réussites, échecs, non-exécutions et limites ; relier chaque suite recommandée à un écart. Une preuve locale n'atteste pas un déploiement. Ne pas déclarer l'exigence entièrement satisfaite à partir du seul statut d'epic, d'une mention documentaire ou d'un nombre total de tests verts.
+Le verdict global garde tous les critères ouverts visibles. Distinguer réussites, échecs et non-exécutions, ainsi que dépôt absent ou non examiné. Ni statut d’epic, ni mention documentaire, ni total de tests verts ne prouve seul une exigence entière. Une preuve locale n’atteste pas un déploiement.

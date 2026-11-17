@@ -62,6 +62,14 @@ Le serveur doit écouter sur `127.0.0.1:5173`. Pour utiliser un Chromium déjà
 installé, définir `PLAYWRIGHT_CHROMIUM_EXECUTABLE` avec son chemin absolu.
 Le rapport et les captures sont écrits dans `tmp/mobile-qa/`.
 
+## Composition et actions partagées
+
+Repères techniques rapprochés du README le 17 novembre 2026 : `WorkspaceHeader` compose `SectionHeading` et `WorkspaceBackButton` ; `WorkspaceTabs` et `WorkspaceSelect` restent contrôlés par les parents et leurs gardes de navigation. Les tableaux/fiches et leur pagination réutilisent `ResponsiveTable` et `ListPagination`/`ListPageButton` : total seulement connu, cibles de 44 px, libellés accessibles et curseurs existants. `FeedbackMessage` et `ListState` ne gèrent ni transport ni renvoi de commande ; `autoFocus` reste réservé aux confirmations qui le prévoyaient déjà.
+
+Les callbacks de `ActionButton` et `ActionForm` retournent la promesse pour rendre l’attente et verrouiller les nouvelles activations ; `loading` raccorde un bouton externe. Les parcours appelants restent responsables des erreurs/résultats incertains. `ManagementDialog` retient le focus, revient au déclencheur et autorise Échap hors commande, sans envoi à la fermeture. Les messages temporaires utilisent un portail au-dessus des fenêtres, en préservant le focus clavier.
+
+Le cadre connecté défile dans `#app-main` ; les fenêtres et menus gardent leur propre défilement utile. Les rubriques montées conservent leurs brouillons. `application-frame.css` porte le cadre et `theme.css` les tokens, sans police externe. Les règles de composition et exceptions de hauteur de la barre d’action sont dans les [parcours SaaS E73](../../../specifications/epic-73-animation-et-ou-coffrets/perimetres-parcours-saas.md) ; les [recettes isolées](../../../exploitation/animation/recettes-locales.md) donnent les sélections `shell`, `navigation`, `scroll`, `ergonomics` et les bancs de composants. Les attentes de dates et d’identité restent dans leurs conventions transverses.
+
 ## Recette sur appareils physiques
 
 La simulation Chromium et une fenêtre de hauteur réduite ne remplacent pas un

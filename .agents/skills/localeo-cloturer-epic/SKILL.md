@@ -5,74 +5,39 @@ description: Clôturer une epic Localeo après vérification de la documentation
 
 # Clôturer une epic Localeo
 
-Lire le [guide transverse](../../../AGENTS.md), le [cycle d'epic](../../../docs/organisation/cycle-epic.md), puis le backlog canonique, sa spécification et son bilan de vérification existant. Charger les instructions locales des seuls dépôts affectés.
+Lire le [guide transverse](../../../AGENTS.md), le backlog canonique, sa spécification et son bilan existant, puis les seules instructions applicatives affectées. Le [cycle, section Clôturer](../../../docs/organisation/cycle-epic.md#clôturer) porte les conditions de passage.
 
-## 1. Fixer le périmètre à clôturer
+## Périmètre et preuves
 
-Retrouver l'identifiant et l'état dans la [roadmap](../../../docs/roadmap/README.md), même si l'IDE indique un ancien chemin. Examiner branches, HEAD, différences indexées et non indexées, fichiers nouveaux et modifications déjà présentes dans chaque dépôt concerné. Distinguer les travaux de l'epic des autres changements.
+Retrouver l’identifiant et l’état dans la [roadmap](../../../docs/roadmap/README.md). Examiner branches, HEAD, index, diff et fichiers nouveaux pour distinguer l’epic des travaux étrangers. Conserver les critères et arbitrages acceptés ; une livraison partielle ne termine pas l’ensemble. Une epic déjà terminée se vérifie sans nouveau déplacement ; une évolution ouverte garde ses propres preuves.
 
-Une demande de clôture autorise la mise à jour du statut et le déplacement si les contrôles réussissent, sans nouvelle confirmation. Une demande limitée à un audit ou à un bilan n'autorise pas ce changement d'état. Créer ce skill ne clôture aucune epic. Pour une epic déjà terminée, vérifier son bilan sans la déplacer de nouveau ; une évolution ouverte conserve ses propres critères et preuves.
+Compléter le bilan existant avec le [noyau des preuves](../../../docs/organisation/cycle-epic.md#documenter-les-preuves-et-préparer-la-livraison) et sa [matrice](../../../docs/organisation/cycle-epic.md#matrice-de-traçabilité) : spécification, code réel, consommateurs, résultats et écarts par critère. Corriger les incohérences documentaires établies sans convertir un défaut en cible produit. Pour les documents publiés concernés, vérifier aussi alias d’export, liens réécrits, lecteur, bundle et révision de livraison : une source Git n’est pas une publication ERP.
 
-Conserver les identifiants, arbitrages et critères acceptés. Ne pas réduire le périmètre, supprimer un critère ou réécrire une exigence pour obtenir une clôture. Une livraison partielle ne termine pas l'epic complète.
+Renouveler les preuves affectées/manquantes et exécuter les contrôles requis. Depuis Projet, ajouter `python scripts/check_guidance.py --changed --all-markdown` au contrôle des guides pour les Markdown modifiés et les liens entrants après déplacement. Les exports/lecteurs suivent le noyau commun.
 
-## 2. Rapprocher exigences, code et documentation
+## Décider et appliquer
 
-Compléter la matrice du bilan existant, sans créer un registre concurrent :
+Clôturer seulement si tous les critères sont vérifiés, les contrôles requis réussis et la documentation/les contrats cohérents, sans réserve invalidant l’acceptation. Une recette cible exigée ne se remplace pas par des tests locaux. Une dette prouvée sans impact reste explicite sans blocage artificiel. Si un critère est partiel, non satisfait ou non vérifiable, conserver statut et chemin, documenter les actions nécessaires et poursuivre les travaux indépendants ; ne pas introduire silencieusement un correctif substantiel pour forcer la clôture.
 
-| Critère | Spécification et code effectif | Preuve exécutée et contexte | Documentation et exploitation | Verdict / écart |
-| --- | --- | --- | --- | --- |
-| ID stable | Règle, propriétaire, entrées et consommateurs | Chemin, commande ou rapport, version, résultat | Guides, contrats, migration/configuration ou sans objet justifié | Vérifié, partiel, non satisfait ou non vérifiable |
+Une demande de clôture autorise ce changement d’état lorsque les conditions sont satisfaites ; un audit seul conserve l’état. Sans confirmation supplémentaire :
 
-Suivre chaque comportement jusqu'à son résultat observable : domaine, orchestration, API/ERP/batch et interfaces concernés. Examiner succès, refus, permissions, répétition et concurrence selon les risques. Un fichier existant, un pourcentage de couverture ou un build réussi ne prouve pas à lui seul un critère.
+1. Dater le bilan et le statut « Terminée » avec versions, preuves, limites et référence de la demande.
+2. Déplacer l’unique backlog vers `docs/roadmap/terminees/`, nom et IDs conservés. Vérifier source, destination et absence de collision avant déplacement.
+3. Actualiser index d’état, compteurs, `product-roadmap.md`, `suivi-backlog.md`, index des spécifications et liens entrants ; adapter les liens relatifs et préserver les bilans historiques.
+4. Vérifier les liens et `git diff --check` des dépôts modifiés avant d’annoncer la clôture.
 
-Vérifier les documents utilisateur/backoffice, ops, spécifications et contrats contre l'implémentation réelle : parcours, libellés, limites, diagnostic et reprise. Corriger les incohérences documentaires établies ; rendre les écarts fonctionnels visibles sans transformer la cible en description d'un défaut. Une nouvelle décision produit reste un arbitrage, pas une correction rédactionnelle.
+Des configurations futures restent des prérequis de livraison ; elles ne bloquent la clôture que si ses critères exigent leur recette cible.
 
-Contrôler les producteurs et consommateurs des contrats, les migrations, les fixtures et le générateur/restaurateur lorsqu'ils sont affectés. Pour les documents publiés, vérifier alias d'export, liens réécrits, lecteur, bundle et révision documentaire utilisée par la livraison. Une source présente dans Git n'est pas une publication ERP. Justifier les impacts sans objet.
+## Préparer le commit et la configuration
 
-## 3. Vérifier les tests réellement exécutés
+Préparer par dépôt les fichiers/hunks de l’epic, les contrôles et un message proposé, déplacement et liens compris. Isoler les fichiers mixtes, préserver les travaux étrangers et exclure secrets, sorties privées et bundles. Une clôture bloquée produit un lot de bilan/correctif. La préparation ne modifie pas l’index ni ne crée de commit ; réaliser les opérations déjà explicitement autorisées sans redemander. Ne pas inventer de SHA pour un arbre local.
 
-Appliquer la [matrice de contrôles](../../../docs/architecture/transverse/controle-architecture.md) et les exigences locales. Examiner les rapports disponibles : date, commande, dépôt, environnement, SHA testé ou SHA de base et différences locales, résultats et skips. Relier les preuves réutilisées au contenu actuel ; ne pas annoncer les avoir réexécutées.
+Compléter le bilan de livraison avec une synthèse dérivée des sources effectives :
 
-Exécuter les tests comportementaux manquants, périmés ou affectés et les contrôles obligatoires. Respecter les outils isolés des applications ; aucun envoi réel ou test sur une base d'exploitation n'est implicite. Un `plan` de tests n'est pas leur exécution. Ne pas affaiblir une assertion ni ignorer un échec pour obtenir du vert.
-
-Distinguer réussite, échec et non-exécution. Étayer une dette préexistante par une comparaison ou une référence vérifiable ; sa présence ne dispense pas d'un critère qu'elle empêche de vérifier. Une dette prouvée sans impact sur l'epic reste visible sans devenir un blocage artificiel. Après un correctif, renouveler les preuves affectées ; ne pas relancer les mêmes suites sans changement ou incertitude nouvelle.
-
-Exécuter depuis `localeo-projet` :
-
-- `python scripts/check_guidance.py` et le contrôle des Markdown modifiés avec `python scripts/check_guidance.py --changed --all-markdown` ; après déplacement, inclure les liens entrants concernés.
-- `python scripts/sync_documentation.py --check-sources` si des sources exportées changent ; vérifier également les lecteurs/bundles si leurs chemins ou contrats changent.
-
-## 4. Décider et appliquer la clôture
-
-**Clôturer seulement si** tous les critères du périmètre sont vérifiés, les contrôles requis ont réussi, la documentation et les contrats sont cohérents et aucune réserve ne remet en cause cette acceptation. Une recette en environnement déployé est requise lorsqu'elle fait partie des critères ; une preuve locale ne la remplace pas. Une confirmation utilisateur vaut pour le scénario effectivement confirmé, sans inventer environnement, appareil ou résultat supplémentaire.
-
-Si un critère reste partiel, non satisfait ou non vérifiable, conserver le statut et le chemin, documenter les écarts et les actions nécessaires dans le bilan, puis terminer les travaux indépendants possibles. Un correctif métier substantiel ou une décision nouvelle ne doit pas être introduit silencieusement pour forcer la clôture.
-
-Si la clôture est autorisée et les conditions satisfaites :
-
-1. Dater le bilan et le statut « Terminée », avec versions vérifiées, preuves, limites de livraison et référence de la décision de clôture.
-2. Déplacer l'unique backlog vers `docs/roadmap/terminees/`, en conservant son nom et ses IDs. Vérifier le chemin source exact, l'absence de collision et la destination dans le dépôt avant le déplacement ; ne pas écraser un autre fichier.
-3. Mettre à jour les index des dossiers d'état, les compteurs de roadmap, `product-roadmap.md`, `suivi-backlog.md`, l'index des spécifications et les autres liens entrants trouvés par recherche. Adapter les liens relatifs du fichier déplacé. Préserver les bilans historiques.
-4. Relancer les contrôles documentaires et `git diff --check` dans les dépôts modifiés. Si le déplacement crée une incohérence, la résoudre avant d'annoncer la clôture réussie.
-
-La clôture produit n'atteste pas un déploiement. Des actions de configuration futures ne bloquent pas à elles seules la clôture si les critères n'exigent pas une recette cible ; elles restent des prérequis explicites de livraison.
-
-## 5. Préparer le commit et la configuration de déploiement
-
-Préparer un lot par dépôt Git indépendant : fichiers/hunks de l'epic, différences relues, contrôles associés et message de commit proposé. Inclure le déplacement et ses liens. Signaler les fichiers mixtes à isoler ; ne pas embarquer les changements étrangers, secrets, artefacts privés ou bundles générés. En cas de clôture bloquée, présenter le lot comme un bilan/correctif, jamais comme une clôture.
-
-« Préparer le commit » signifie rendre ce lot examinable ; ne pas modifier l'index, créer un commit, pousser, fusionner ou déployer sans demande correspondante. Si ces opérations sont déjà explicitement autorisées dans la tâche en cours, les réaliser dans ce périmètre sans redemander. Ne pas inventer un SHA pour des modifications non committées.
-
-Compléter le bilan de livraison existant avec une synthèse opératoire dérivée des sources effectives :
-
-| Composant / environnement | Action avant ou après déploiement | Valeur attendue ou défaut sans secret | Source / contrôle de réussite |
+| Composant / environnement | Action et ordre | Valeur ou défaut sans secret | Source / contrôle |
 | --- | --- | --- | --- |
-| Application concernée | Variable, migration, permission, tâche, URL, révision documentaire… | Obligatoire ou optionnel ; valeur non sensible vérifiée, sinon à renseigner | Fichier de référence, commande ou recette |
+| Application touchée | Variable, migration, permission, tâche, URL ou révision documentaire | Obligatoire/optionnel ; valeur vérifiée ou à renseigner | Chemin, commande ou recette |
 
-Inclure seulement les impacts réels : variables nouvelles/modifiées et valeurs par défaut, secrets à provisionner (noms et emplacement, jamais leurs valeurs), migrations et ordre, configuration fournisseur, flags, jobs, permissions, redémarrages, contrats et bundle documentaire. Préciser la révision à publier/sélectionner si elle dépend du commit à venir, sans qualifier de livré un arbre local. Si l'environnement est inconnu, fournir les exigences communes et marquer ce qui reste à renseigner, sans inventer de valeur cible.
+Inclure les impacts réels : noms/emplacements des secrets à provisionner, flags, fournisseurs, jobs, migrations, redémarrages, contrats et bundle documentaire. Si la cible est inconnue, fournir les exigences communes et les valeurs restant à renseigner. Préciser la révision à publier après commit, l’ordre entre dépôts, les contrôles santé/métier et la reprise prouvée. Utiliser la [préparation de livraison](../../../docs/organisation/preparer-livraison.md) si un manifeste est demandé.
 
-Indiquer l'ordre de livraison entre dépôts, les contrôles santé/métier et la reprise applicable ; ne pas promettre un rollback de données non prouvé. Utiliser la [préparation de livraison](../../../docs/organisation/preparer-livraison.md) pour un manifeste de release demandé, sans lancer un déploiement implicite.
-
-## Restitution
-
-Donner le verdict (clôturée, clôture bloquée avec les critères concernés, ou clôturable mais non clôturée pour un audit seul), les chemins utiles et dépôts modifiés, les tests exécutés et preuves réutilisées, le lot/message de commit préparé, puis les actions de configuration à faire. Séparer explicitement statut produit, commit/push et déploiement effectif. Ne pas remplacer la synthèse opératoire demandée par un simple lien vers le bilan.
+Restituer le verdict (clôturée, bloquée avec critères, ou clôturable pour audit seul), dépôts/chemins, preuves exécutées ou réutilisées, lot/message et synthèse de configuration. Distinguer statut produit, commit/push et déploiement effectif ; un lien vers le bilan seul ne remplace pas les actions demandées.

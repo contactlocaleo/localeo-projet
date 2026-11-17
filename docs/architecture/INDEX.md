@@ -45,7 +45,6 @@ Conventions transverses, décisions et architecture de chaque application.
 - [backend/epics/epic-38-gestion-documentaire-architecture.md](backend/epics/epic-38-gestion-documentaire-architecture.md)
 - [backend/epics/epic-39-stripe-connect-architecture.md](backend/epics/epic-39-stripe-connect-architecture.md)
 - [backend/epics/epic-40-domaines-fonctionnels-architecture.md](backend/epics/epic-40-domaines-fonctionnels-architecture.md)
-- [backend/epics/epic-41-animation-locale-architecture.animation.md](backend/epics/epic-41-animation-locale-architecture.animation.md)
 - [backend/epics/epic-41-animation-locale-architecture.md](backend/epics/epic-41-animation-locale-architecture.md)
 - [backend/epics/epic-43-suivi-payouts-stripe-connect-architecture.md](backend/epics/epic-43-suivi-payouts-stripe-connect-architecture.md)
 - [backend/epics/epic-44-observabilite-logs-use-cases-architecture.md](backend/epics/epic-44-observabilite-logs-use-cases-architecture.md)
