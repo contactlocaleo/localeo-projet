@@ -1,5 +1,20 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+Évolution du **17 novembre 2026 — E73-EVO-PARCOURS-ORGANISATEUR** :
+[six améliorations du parcours organisateur](parcours-organisateur.md), issues
+de l'audit et de sa contre-expertise : publication compréhensible, protection et
+reprise, activité/bilan directs, création homogène, accessibilité, fin/réemploi.
+**PO-01 à PO-30**, avec les **CU-01 à CU-06** existants ; arbitrages retenus,
+contrats et dépendances, preuves à produire et essais séparés. **Spécification
+seule, réalisation et recette à effectuer**, clôture historique conservée.
+
+Évolution du **17 novembre 2026 — E73-EVO-CREATION-UX-COMMUNE** :
+[création homogène de tous les modèles](perimetres-parcours-saas.md#règle-du-17-novembre-2026--création-homogène-des-animations),
+avec les mêmes conventions de progression, actions, formulaires, états et reprise,
+sur ordinateur, tablette et téléphone. **CU-01 à CU-06**, règle validée et
+spécifiée ; réalisation et recette à effectuer. Les particularités métier et la
+clôture historique restent conservées.
+
 Évolution du **15 novembre 2026 — E73-EVO-MESSAGES-HABITANTS** :
 [conversations privées habitant–organisateur](messages-habitants.md) initiées
 depuis une participation Live par motif et message. Réponses et relances dans

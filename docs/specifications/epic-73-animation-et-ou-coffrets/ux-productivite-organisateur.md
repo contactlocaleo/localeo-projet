@@ -1,5 +1,12 @@
 # E73 — Productivité quotidienne de l’organisateur
 
+Complément du **17 novembre 2026** : [E73-EVO-PARCOURS-ORGANISATEUR](parcours-organisateur.md)
+précise les écarts après contre-expertise. **PO-13 remplace la destination de
+consultation ordinaire d'AP-01 par Bilan**, avec autorité serveur conservée ;
+PO-07 à PO-11 complètent la couverture et la recette des protections existantes.
+Cette évolution est spécifiée, non implémentée. Le bilan historique ci-dessous
+et les réserves AP-22 restent inchangés.
+
 ## Statut et périmètre
 
 **E73-EVO-ANIMATION-PRODUCTIVITE — 12 novembre 2026. Sept lots implémentés ; validation AP-22 partielle.**

@@ -570,6 +570,14 @@ L’espace actif découle de la rubrique ouverte, y compris par lien direct,
 ancien alias, rechargement ou Action suivante. Changer d’espace ouvre sa première
 rubrique ; cliquer l’espace déjà actif conserve la rubrique courante.
 
+Complément du **17 novembre 2026 — E73-EVO-PARCOURS-ORGANISATEUR** :
+[PO-12 à PO-14 et arbitrages D1/D2](parcours-organisateur.md#l3--activité-et-résultats-immédiatement-accessibles)
+précisent l'ouverture ordinaire selon la phase et remplacent, pendant une édition
+publiée/en cours, le défaut du groupe **Résultats** par **Bilan**. Les liens de
+tâche et reprises explicites restent prioritaires ; aucune bascule automatique
+pendant le travail. Les autres groupes conservent leur comportement actuel et
+la mémoire implicite du dernier groupe reste un essai. Spécifié, non implémenté.
+
 Chaque changement conserve le garde de sortie existant : si la navigation est
 refusée, groupe, rubrique, URL et saisies restent inchangés. L’habilitation
 Actualités reste contrôlée et l’accès direct interdit reste expliqué.
@@ -845,6 +853,111 @@ La chasse est accompagnée à distance en V1. Étendre la demande de préparatio
 Le calendrier de service est versionné côté serveur, en Europe/Paris, avec jours ouvrés et fermetures explicitement configurés ; échéance exacte affichée au client. Une configuration manquante bloque l’annonce d’une échéance calculée, pas l’accès à la demande. Les dates/heures sont stockées en UTC ; les dates civiles et changements d’heure ne sont pas traités comme un nombre aveugle d’heures UTC.
 
 Email au demandeur et notification portail pour complément requis ou préparation prête ; aucun crédit Communication consommé. Au dépassement, une alerte Ops par demande/version d’échéance, état visible et relance sur la même demande. Localeo renseigne une nouvelle estimation. Préparer scénario, étapes, énigmes et paramétrage à distance ; l’organisateur contrôle le parcours sur place et valide les contenus avant publication. Aucun déplacement terrain inclus. Échec/reprise ne débite pas une nouvelle génération ou une nouvelle chasse ; les contrôles de version, de bibliothèque et de publication E55 restent obligatoires.
+
+#### Règle du 17 novembre 2026 — création homogène des animations
+
+**E73-EVO-CREATION-UX-COMMUNE — décision utilisateur validée, spécification seule.**
+Cette règle complète les principes du §5 et les parcours du §6 :
+
+> Tous les parcours de création d’une animation utilisent les mêmes codes UX,
+> quel que soit le modèle : structure des écrans, progression, navigation,
+> présentation des champs, actions, validation, retours d’état et reprise.
+> Le modèle adapte les informations et étapes nécessaires dans ce cadre commun.
+
+**Périmètre :** plateforme organisateur Localeo Animation, modèles existants et
+futurs, sur ordinateur, tablette et téléphone. La règle couvre l’entrée depuis
+la liste ou le catalogue, la saisie, la revue, la confirmation de création ou
+de demande de préparation et le passage à la tâche suivante. Le clonage conserve
+ses choix de réemploi et ses revalidations, en utilisant les mêmes conventions
+pour les interactions de même nature. Les parcours publics Live et les règles
+de création internes ERP ne sont pas modifiés par cette décision.
+
+**Existant vérifié :** le wizard manuel de
+[App.tsx](../../../../localeo-animation/src/app/App.tsx) et le brief guidé de
+[GenerationPreparationView.tsx](../../../../localeo-animation/src/app/components/GenerationPreparationView.tsx)
+utilisent déjà [AnimationCreationLayout](../../../../localeo-animation/src/app/components/AnimationCreationLayout.tsx).
+Ce cadre fournit en-tête, commune, zone de contenu, pied d’actions et focus ;
+chaque parcours lui transmet sa navigation et ses actions. Ce partage constitue
+un acquis, mais ne prouve pas à lui seul l’homogénéité de toutes les interactions.
+La cible consiste à compléter les conventions communes et à réutiliser les
+composants existants, sans recréer un cadre indépendant pour chaque modèle.
+
+**Même interaction, même comportement :**
+
+- **Repères et progression :** contexte commune/modèle explicite, titre de tâche,
+  retour et hiérarchie d’actions aux mêmes emplacements. Une étape de travail
+  visible à la fois, une seule progression principale pour le parcours en cours.
+  Les étapes de même fonction gardent des libellés cohérents et un ordre relatif
+  stable ; une dépendance métier spécifique est expliquée.
+- **Navigation :** **Précédent** et **Continuer** ont le même rôle partout.
+  Continuer peut contrôler les champs requis de l’étape ; une navigation seule
+  ne crée, ne paie et ne publie rien. Un enregistrement nécessaire est nommé
+  explicitement, par exemple **Enregistrer et continuer**. À la première étape,
+  le retour sort vers l’origine sûre du parcours ; à la dernière, l’action décrit
+  la commande réelle, par exemple **Créer l’animation** ou **Demander la préparation**.
+  Même opération = même libellé, même hiérarchie et même comportement.
+- **Formulaires :** même présentation des champs requis/facultatifs, des aides,
+  des erreurs et des sélections. Les aides secondaires se déplient au besoin.
+  Une erreur indique la correction à effectuer près du champ, avec un accès
+  accessible au premier problème ; elle conserve les valeurs saisies.
+- **Revue et résultat :** un récapitulatif permet de vérifier les informations
+  et d’ouvrir directement leur correction, puis de revenir à la revue. La
+  confirmation expose les conséquences. Chargement, refus, erreur, résultat
+  incertain et succès suivent la même convention visuelle et verbale. Le résultat
+  confirmé propose une action explicite vers la préparation ou le suivi disponible.
+- **Continuité :** les retours internes conservent les saisies compatibles dans
+  la session ; les sorties non enregistrées et commandes incertaines utilisent
+  les protections communes. Le changement de modèle explique les données devenues
+  incompatibles et exige leur revalidation. Un changement de commune reste soumis
+  à AP-03/04 : garde, invalidation du contexte et absence de transfert automatique
+  du brouillon. Aucune récupération après fermeture ou crash n’est promise.
+
+**Variations admises :** champs et contrôles propres au modèle, contenu, nombre
+d’étapes utiles, prérequis et traitement synchrone ou asynchrone. Une étape sans
+objet est omise sans trou de numérotation ni obligation factice ; une entrée depuis
+le catalogue conserve le modèle déjà choisi et évite de le faire sélectionner à
+nouveau. L’organisateur ne doit pas réapprendre une navigation ou un langage
+d’actions lorsqu’il crée un autre modèle. Les conventions communes s’appliquent
+aussi aux adaptations tactiles ; leurs composants peuvent se redisposer selon
+l’espace utile, sans perdre une action ou son sens.
+
+**Règles conservées :** création distincte de publication ; une demande de
+préparation acceptée n’est pas une animation prête à publier. Les prérequis de
+commerces, contenus, terrain, dotation et paiement restent déterminés par le
+modèle et le serveur. L’Assistant et les cinq étapes de préparation Chasse gardent
+leur rôle après création ; ils ne sont pas imposés comme des étapes supplémentaires
+du formulaire de tous les modèles. Droits, versions, idempotence et réconciliation
+ne sont pas modifiés par l’homogénéisation. Un refus serveur reste expliqué et
+n’est jamais contourné par le choix d’un autre écran.
+
+| Critère ajouté | Comportement observable attendu | Preuve à produire lors de l’implémentation |
+| --- | --- | --- |
+| CU-01 — Cadre et repères | À tâche comparable, tous les modèles réutilisent le même cadre, la même progression et la même hiérarchie ; commune et modèle restent identifiables. | Comparaison des créations depuis liste et catalogue pour chaque modèle proposé ; mêmes conventions de cadre et de navigation, avec contenus spécifiques conservés. |
+| CU-02 — Actions cohérentes | Précédent/Continuer gardent saisies et sens ; aucun effet métier implicite. Enregistrement et commande finale sont explicitement nommés et distingués de la publication. | Aller/retour, contrôle de champs requis, première/dernière étape et observation des commandes ; distinguer création immédiate et demande asynchrone. |
+| CU-03 — Contenu adapté et revue | Seules les étapes utiles sont demandées ; données déjà connues réutilisées ; Modifier atteint le bon bloc et permet de revenir à la revue. Changement de modèle et incompatibilités expliqués. | Tombola sans commerces, Chasse accompagnée, autres modèles disponibles et trois dotations ; correction depuis récapitulatif sans ressaisie globale ; changement de modèle dans la même commune. |
+| CU-04 — États et refus | Même présentation des erreurs, attentes et confirmations ; aucune réussite sur réponse incertaine. Le résultat décrit le fait réellement confirmé et donne la suite disponible. | Erreur de champ/API, droit retiré, conflit, requête en cours, réponse perdue puis reçu, succès synchrone/asynchrone ; navigation suivante sans seconde création. |
+| CU-05 — Reprise et contexte | Retours, sorties sales et changement de commune suivent AP-03/04 ; refus de sortie conserve URL, étape, saisie et focus. | Précédent, correction/revue, retour navigateur, refus/acceptation de sortie, contexte invalidé et commande incertaine ; aucun brouillon transféré entre communes. |
+| CU-06 — Tous les supports | Mêmes conventions au toucher et au clavier ; commandes principales visant 44 × 44 px CSS, erreurs et action atteignables avec clavier ouvert ; orientation et texte agrandi n’effacent pas le travail. | Recette comparative téléphone/tablette portrait et paysage, bureau, 320 px et texte 200 % ; clavier système réel, focus/annonces et changement d’orientation ; compréhension du parcours sans aide après avoir utilisé un autre modèle. |
+
+**Traçabilité et impacts :** CU-01 à CU-06 sont ajoutés par cette décision ; les
+critères AP, CA et CL existants conservent leurs identifiants et leurs preuves.
+Le détail de leur réalisation reste à produire ; les tests d’exploitation de
+l’audit ne prouvent pas ces critères de création.
+
+| Domaine d’impact | Traitement de cette évolution |
+| --- | --- |
+| Application | Animation : cadre, composants et comportements de création ; réutiliser les mécanismes communs de navigation, confirmation et commande. Backend : propriétaire inchangé des règles ; aucune règle métier à réimplémenter dans la vue. |
+| Contrats et consommateurs | Aucun changement API requis par cette règle UX ; commandes et réponses existantes conservées. Vérifier leur usage lors de la réalisation. Aucun impact demandé sur Marketplace/Live, Commerçant ou ERP. |
+| Données et migrations | Sans objet : aucune donnée métier ni persistance nouvelle prescrite. Saisies existantes, provenance du clonage et isolation des contextes à préserver. |
+| Documentation | Source normative dans cette section ; audit, backlog et index y renvoient. Adapter les aides utilisateur lors de la réalisation, sans documenter les écrans cibles comme déjà disponibles. |
+| Démonstration et fixtures | Aucune exécution du générateur nécessaire pour ajouter la règle. Pour la recette, disposer d’au moins un cas par modèle disponible, des variantes de dotation et des états refus/attente/erreur ; vérifier les fixtures de création lors de l’implémentation. |
+| Exploitation et livraison | Pas de configuration ou migration opérateur ajoutée par la spécification ; aucun déploiement demandé. Contrôles documentaires seuls à cette phase ; CU-01 à CU-06 non exécutés et non déclarés livrés. |
+
+Cette règle renforce le cadre partagé et remplace toute latitude de présentation
+qui permettrait des conventions d’interaction différentes pour une même tâche
+selon le modèle. Elle conserve les spécialisations métier datées du §5.1 et la
+clôture historique E73. Elle est rattachée au
+[backlog E73](../../roadmap/terminees/epic-73-animation-et-ou-coffrets-backlog.md#évolution-du-17-novembre-2026--création-homogène-des-animations).
 
 ### 6.2 Support
 

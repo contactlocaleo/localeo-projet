@@ -1,5 +1,65 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+## Évolution du 17 novembre 2026 — six améliorations du parcours organisateur
+
+**E73-EVO-PARCOURS-ORGANISATEUR** : demande utilisateur de spécifier les six
+améliorations issues de l'audit et de sa contre-expertise, en intégrant les
+propositions d'arbitrage. La [source canonique](../../specifications/epic-73-animation-et-ou-coffrets/parcours-organisateur.md)
+porte **PO-01 à PO-30**, les six lots et leur traçabilité aux CU/AP/FA/CL
+existants, sans second backlog d'exécution. Entrée selon phase, accès Bilan
+actif, liens vers les interventions et capacités réelles de réemploi retenus ;
+mémoire de groupe, compactage mobile et filtre initial de fin restent des essais.
+
+**Spécification seule ; aucun lot implémenté ou recetté au titre de cette
+évolution.** Les dépendances contractuelles de correction et de rapprochement
+des commandes sont explicites ; les lots indépendants restent réalisables.
+Clôture historique E73 et réserves AP-22, CL-11 et GL-16 conservées.
+Cette adoption ciblée est distincte du statut initial de proposition des audits
+et ne vaut pas adoption de toutes leurs idées.
+
+## Évolution du 17 novembre 2026 — création homogène des animations
+
+**E73-EVO-CREATION-UX-COMMUNE** : décision utilisateur de partager les mêmes codes
+UX pour tous les modèles d’animation, sur ordinateur, tablette et téléphone.
+[Règle canonique et CU-01 à CU-06](../../specifications/epic-73-animation-et-ou-coffrets/perimetres-parcours-saas.md#règle-du-17-novembre-2026--création-homogène-des-animations) :
+cadre, progression, navigation, champs, erreurs, confirmations et reprise homogènes ;
+contenu et nombre d’étapes adaptés aux besoins de chaque modèle. Création,
+demande de préparation et publication restent explicitement distinctes.
+
+**Règle validée et spécifiée, non implémentée au titre de cette évolution.**
+Le cadre partagé existant est à compléter et vérifier ; aucune conformité de tous
+les parcours n’est présumée. Reste à faire : réalisation des écarts puis recette
+comparative de création, modèles/dotations et supports. Contrats métier conservés,
+impacts et preuves attendues dans la source canonique. Clôture historique E73,
+critères précédents et réserves existantes inchangés. Les autres axes de l’audit
+ci-dessous restent des propositions ; cette décision ne les adopte pas implicitement.
+
+## Audit du 17 novembre 2026 — utilisabilité et pilotage
+
+**E73-AUDIT-UX-PILOTAGE-20261117** : [audit de l’interface organisateur](../../audits/animation/localeo-animation-utilisabilite-pilotage-2026-11-17.md),
+avec 12 constats locaux, en complément des lots AP déjà implémentés.
+**Contre-audit du même jour, à la demande de l’utilisateur :** priorité renforcée
+au parcours complet de gestion d’une animation, décliné en R01 à R06 : entrée
+adaptée à la phase, préparation jusqu’à publication, succès et reprise contextualisés,
+suivi quotidien, fin d’édition, efficacité téléphone/tablette. Le rapport remplace l’ordre
+initial centré sur les retouches par une progression préparer → publier → suivre,
+puis exploitation → fin/bilan. Les correctifs de saisie, refus et disponibilité
+restent à qualifier ; les guides et retours ciblés déjà livrés sont préservés.
+
+**Audit seul, sans implémentation ni nouveaux critères adoptés.** Les constats
+U01 à U12 et R01 à R06 distinguent code actuel, rendus locaux synthétiques et
+hypothèses d’usage ; les recettes et leurs limites figurent dans le rapport.
+**Complément téléphone/tablette demandé ensuite :** R06 détaillé dès le premier
+lot, huit passages réussis en émulation portrait/paysage pour exploitation et
+paramètres, et mesure d’une cible de confirmation haute de 20 px sur tablette et
+téléphone paysage, contre 44 px en portrait téléphone. Clavier, rotation et
+interruptions sur appareils physiques restent à recetter ; aucune mesure avec
+organisateurs. La provenance de la première recette paramètres est corrigée dans
+le rapport. Aucun nouveau tableau de bord intermédiaire n’est prescrit.
+Les correctifs d’attentes existantes seront qualifiés séparément des évolutions
+à spécifier. Les IDs AP, leur bilan, les réserves de vérification et la clôture
+historique E73 restent inchangés.
+
 ## Évolution du 15 novembre 2026 — messages habitants
 
 **E73-EVO-MESSAGES-HABITANTS** : depuis une participation Live, l'habitant
