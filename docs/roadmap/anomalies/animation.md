@@ -1,5 +1,42 @@
 # Registre des anomalies
 
+## Correctif du 17 novembre 2026 — ouverture de la création depuis la liste
+
+**Signalement TEST.** Le bouton **Créer une animation** de la liste ouvre
+**Nouvelle animation** avec « Le modèle choisi n’est plus disponible » et
+`[object Object]` dans le contexte. La capture fournie établit ces deux symptômes ;
+le SHA déployé n’est pas confirmé. Base locale Animation `a4f45e9` ;
+correctif dans le commit `3ba177657306d2c64ace2a41e6666cb49bddd303`.
+
+**Cause démontrée et correction.** `AnimationsProductivityWorkspace` transmettait
+directement son callback `onCreate` au bouton. L’événement React de clic devenait
+le paramètre optionnel `modeleCode` de la navigation, produisant
+`/animations/nouvelle?modele=%5Bobject%20Object%5D`. Le formulaire cherchait alors
+ce faux modèle et affichait correctement son indisponibilité. Le bouton appelle
+désormais son callback sans argument. La création générique ouvre le choix sans
+présélection ; les entrées du catalogue continuent de transmettre leur vrai code.
+
+**Preuves.** Le scénario ajouté à `tests/browser/leo-assistant.mjs` échoue avant
+correction sur l’URL ci-dessus, au lieu de la recherche vide attendue. Après
+correction, le parcours complet réussit à 1280 et 390 px : ouverture depuis la
+liste, absence de fausse alerte et de `[object Object]`, choix explicite d’un
+modèle, puis accès aux informations. Les autres scénarios du même banc vérifient
+le catalogue, le clavier, le parcours Chasse, Passeport et Tombola, les liens
+directs, un modèle réellement indisponible et les droits retirés puis rétablis.
+Vraie application compilée, API synthétique interceptée, aucune création réelle.
+Captures ordinateur et mobile examinées. `pnpm test` : **354 réussites**, aucun
+échec ni skip ; `pnpm typecheck`, `pnpm lint` et compilation isolée réussis.
+Contrôles documentaires et `git diff --check` réussis. Rapports non versionnés
+dans `localeo-animation/tmp/creation-entry-before-20261117T082607/` et
+`tmp/creation-entry-after-20261117T082626/` (journal final `browser-final.log`).
+
+**Impacts.** Animation et suivi documentaire canonique uniquement. Aucun changement
+de contrat HTTP, disponibilité des modèles, autorisation, migration, donnée ou
+générateur : le défaut est le branchement du clic avant toute commande de
+création. Le guide fonctionnel reste conforme au choix de modèle prévu.
+Pour TEST, livrer le frontend corrigé ; aucun réglage de modèle ni réparation
+de base ne découle de cette cause. Déploiement et résultat distant non vérifiés.
+
 ## Correctif du 14 novembre 2026 — retirer un lot externe après clôture du dossier
 
 L'utilisateur a clôturé un dossier de lot pour terminer puis archiver son

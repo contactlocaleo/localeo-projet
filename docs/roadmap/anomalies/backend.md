@@ -1,5 +1,89 @@
 # Registre des anomalies
 
+## ANO-CRM-SESSION-20261117 — Avertissement et prolongation avant déconnexion
+
+**Signalement.** Déconnexion CRM ressentie après quelques secondes d’inactivité,
+sans message préalable permettant de continuer. L’environnement et le SHA
+déployé du signalement ne sont pas établis. Diagnostic sur le backend
+`146b578a`, correctif dans le commit `c44770f1bea8b804e0c72f0d3f20be0a04f3f311` ;
+base documentaire `ae689ab4`.
+
+**Cause locale démontrée.** Le shell CRM ne chargeait pas le moniteur commun
+`/internal/session/monitor.js` : aucun signal d’activité, avertissement ou bouton
+de prolongation. Une session déjà ancienne pouvait atteindre son échéance peu
+après l’ouverture de CRM ; les lectures et commandes métier ne prolongent pas
+elles-mêmes la session. Les limites du domaine identité/accès restent de quinze
+minutes d’inactivité et huit heures depuis la connexion. Aucun défaut de délai
+serveur ou fuseau horaire n’a été démontré.
+
+**Correction.** CRM charge le moniteur. Deux minutes avant expiration,
+**Votre session va expirer** apparaît dans un dialogue natif au-dessus d’un
+formulaire ouvert. **Prolonger ma session** utilise l’activité protégée par
+CSRF et origine identique ; seule une confirmation serveur ferme la fenêtre
+et rend le focus à la saisie conservée. Un échec affiche une nouvelle tentative
+sans déplacer l’échéance. Les activités automatiques sont espacées, y compris
+en cas d’échec ; les événements synthétiques et les sondages ne prolongent pas
+la session. À l’approche des huit heures, **Revenir à ma saisie** permet encore
+d’enregistrer avant la limite, sans prolongation ni blocage du formulaire.
+
+À expiration ou révocation, les données et brouillons CRM sont effacés.
+**Se reconnecter** utilise la connexion interne et sa destination CRM validée,
+dans le même onglet. Les réponses métier et contrôles de session partis avant
+une invalidation sont écartés ; une seconde invalidation écarte aussi une
+restauration en vol. Le temps de transport n’allonge pas le délai affiché.
+Une vérification initiée après l’invalidation peut restaurer la vue autorisée,
+sans récupérer de brouillon effacé. La propagation entre onglets reste active.
+Une révocation ou expiration entre middleware et prolongation nominative est
+traduite en 401 constant, `no-store`, avec suppression du cookie, au lieu de 500.
+
+**Preuves locales.** Reproduction navigateur rouge avant correction sur le
+vrai shell CRM : avertissement absent à 90 secondes, zéro appel du moniteur,
+aucune erreur JavaScript. Reproduction HTTP : neuf cas réussis et trois cas
+d’invalidation en échec attendu, 500 au lieu de 401. Après correction :
+
+- **66 tests serveur ciblés réussis**, dont les douze nouveaux cas du moniteur
+  nominatif : GET sans prolongation, POST autorisé à un profil CRM sans accès
+  technique, CSRF/origine/marqueur refusés, invalidation concurrente et cookie
+  effacé. Rejeu final des douze cas après renforcement de la vérification cookie.
+- **47 tests CRM/PWA réussis** : frontières d’accès, guide canonique, ressources
+  privées, version et cycle de mise à jour.
+- **743 contrôles obligatoires d’architecture et couverture réussis**.
+- **Dix-sept scénarios navigateur CRM réussis** avec
+  `node tests/browser/crm-session.cjs` : prolongation, erreur 503 et reprise,
+  activité réelle limitée et événements synthétiques ignorés, expiration et
+  reconnexion, limite absolue avec enregistrement avant expiration, écritures
+  tardives 200/409/503 écartées, contrôles de session obsolètes, transit sans
+  prolongation locale et deux onglets.
+  Recette sur vrais fichiers applicatifs, réseau entièrement simulé et horloge
+  virtuelle. Captures examinées à 1280/390/320 px et texte à 200 % ; dialogue
+  au-dessus de l’éditeur, focus, clavier, boutons de 44 px et absence de
+  débordement vérifiés (ERP-UX-08/09/10/12).
+- Régression navigateur CRM existante réussie : créations, conflits, rejouabilité,
+  navigation, révocation et lecture seule. **Onze scénarios ERP réussis**,
+  dont SQLAdmin et le bandeau conservé pour les autres applications internes.
+
+Le groupe élargi des surfaces internes compte 866 réussites et deux échecs
+adjacents d’audit ; quatre autres échecs adjacents concernent les anciennes
+attentes de redirection ERP sans destination de retour. Les six sont reproduits
+à l’identique avec le module de session de HEAD, sans modifier leurs assertions.
+Ils ne sont pas présentés comme des contrôles réussis.
+Rapports et captures ignorés dans le backend :
+`.artifacts/crm-session-server-20261117/` et
+`.artifacts/crm-session-browser-20261117/`. Revue indépendante des invariants
+du moniteur commun effectuée en lecture seule.
+`check_guidance.py` et `sync_documentation.py --check-sources` réussissent ;
+`git diff --check` est propre dans les deux dépôts.
+
+**Impacts et livraison.** Backend (CRM et moniteur partagé) et documentation
+canonique ; les trois autres dépôts applicatifs ne consomment pas ces ressources
+internes. Contrats HTTP et durées inchangés, aucun schéma ni migration, donnée
+à réparer, adaptation du générateur ou notification réelle. Livrer le backend
+et ses ressources ensemble, puis accepter la mise à jour de la PWA. Guide
+[utilisateur CRM](../../specifications/epic-71-crm-prospection/guide-utilisateur.md#prolonger-votre-session)
+et [procédure d’exploitation](../../exploitation/technique/sessions-administration.md)
+actualisés. Aucun accès à une base partagée pendant ces vérifications.
+Déploiement, résolution sur la cible et recette au lecteur d’écran non vérifiés.
+
 ## ANO-LIVE-LIMITEUR-POLITIQUE-20261114 — Politique absente sur TEST
 
 **Signalement et cause démontrée.** La trace Render fournie pour TEST termine

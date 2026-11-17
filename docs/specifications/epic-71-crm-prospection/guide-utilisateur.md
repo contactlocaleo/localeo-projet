@@ -49,6 +49,21 @@ L'ancienne installation et ses abonnements ne sont pas transférés automatiquem
 
 **Aujourd’hui** présente les actions en retard, les dossiers sans prochaine action, le portefeuille et les gains du mois. Sur mobile, les entrées principales sont en bas de l’écran. **Installer Localeo CRM** propose l’installation de la PWA ; elle conserve la même session et les mêmes droits. Une connexion réseau est nécessaire : les fiches et notes ne sont pas conservées hors ligne sur l’appareil.
 
+### Prolonger votre session
+
+La session expire après **15 minutes d’inactivité**. Vos clics et saisies
+signalent votre activité au serveur. Deux minutes avant l’échéance, une fenêtre
+**Votre session va expirer** apparaît, y compris au-dessus d’un formulaire ouvert.
+Choisissez **Prolonger ma session** pour continuer et conserver votre saisie.
+Si la prolongation échoue, le message vous permet de réessayer avant l’échéance.
+
+Après **8 heures depuis la connexion**, une nouvelle connexion est nécessaire.
+**Revenir à ma saisie** permet de terminer et d’enregistrer avant cette limite.
+Si la session expire ou est révoquée, les fiches et saisies en mémoire sont
+effacées. **Se reconnecter** revient à la page CRM courante, dans le même onglet,
+après vérification de vos droits. Les saisies non enregistrées ne sont pas
+récupérables après cette expiration.
+
 ## 2. Créer un prospect et préparer la suite
 
 ### Planifier un rendez-vous commercial
