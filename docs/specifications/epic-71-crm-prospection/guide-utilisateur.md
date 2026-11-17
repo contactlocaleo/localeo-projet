@@ -196,13 +196,19 @@ en première page. En cas d’erreur, **Réessayer la recherche** relit cette zo
 Les critères d’un ancien lien, par exemple une commune ou un budget, restent
 appliqués et apparaissent dans le récapitulatif. Chaque critère peut être retiré ;
 **Réinitialiser** revient aux prospects actifs sans autre critère. Le retour depuis
-une fiche conserve les filtres et la page. Les **Autres filtres** de Suivi et Carte
-conservent leurs critères de qualification détaillés. Les règles sont décrites
+une fiche conserve les filtres et la page. Les critères de qualification détaillés
+issus de liens restent aussi appliqués et retirables dans Suivi et Carte. Les règles sont décrites
 dans la [qualification structurée](qualification-structuree.md).
 
 ## 3. Suivre les dossiers
 
 **Suivi** filtre les dossiers par périmètre et étape. Depuis un dossier, **Changer d’étape** accompagne sa progression : À contacter, En discussion, Proposition, Gagné, Perdu ou En pause.
+
+La recherche reste visible ; **Filtres avancés** propose périmètre, étape,
+priorité du dossier, responsable du dossier et dossiers sans prochaine action.
+**Filtrer**, **Réinitialiser**, le réessai et l’actualisation relisent uniquement
+les résultats. Le formulaire et son ouverture restent en place ; les critères
+appliqués sont récapitulés et peuvent être retirés individuellement.
 
 - Une pause demande un motif et une date de réexamen.
 - Une perte demande un motif ; la réouverture est explicite et motivée.
@@ -211,6 +217,12 @@ dans la [qualification structurée](qualification-structuree.md).
 Les références proviennent des espaces métier existants : souscription Animation activée payée ou gratuite, achat coffrets professionnel payé, ou acceptation OnBoard avec activation Coffrets attestée. Les droits CRM ne donnent pas automatiquement accès à ces données métier.
 
 Dans **Rappels**, le filtre **Rappel disponible** retrouve les actions dont l’heure de rappel est atteinte, même si leur échéance est future. Ce suivi interne fonctionne sans activer e-mail ou WebPush. Ouvrez une action pour la terminer avec son résultat, la reporter, la réaffecter ou l’annuler. Les anciennes révisions de rappel deviennent inéligibles. Une notification déjà remise au transport peut néanmoins arriver.
+
+L’état et le type d’action sont directement visibles. **Filtres avancés** contient
+date, responsable, retard et rappels disponibles. Les critères appliqués restent
+visibles dans le récapitulatif, même lorsque ce panneau est fermé. **Afficher**,
+**Réinitialiser** et **Réessayer la recherche** actualisent seulement la liste,
+son compteur et sa pagination ; une nouvelle recherche repart en première page.
 
 Le filtre **Responsable** utilise une liste facultative, sans champ de recherche
 supplémentaire. **Tous les responsables** retire ce filtre. Si la liste comporte
@@ -236,9 +248,16 @@ corriger.
 ## 4. Utiliser la carte
 
 **Carte** présente les prospects de **Nouvelle-Aquitaine**, regroupés par commune.
-Choisissez un **Département**, puis **Filtrer** : la carte se recadre et conserve
+La recherche et le potentiel restent visibles. Ouvrez **Filtres avancés** pour
+choisir un **Département**, puis **Filtrer** : la carte se recadre et conserve
 vos autres filtres de prospection. **Réinitialiser** revient à toute la région,
 et **Recentrer** retrouve la zone choisie après un déplacement ou un zoom.
+
+La recherche actualise les points, la légende, les groupes et leurs liens sans
+recréer le fond de carte. Le cadrage et le zoom restent en place lorsque le
+département ne change pas. Le panneau avancé est limité à département, périmètre,
+étape, responsable du prospect et état ; les critères détaillés d’un lien restent
+visibles dans le récapitulatif. Une erreur permet de réessayer la carte sur place.
 
 Le sélecteur **Colorer par** propose deux lectures :
 
@@ -372,6 +391,16 @@ Le filtre **Département** propose une liste des douze départements de
 Nouvelle-Aquitaine, avec numéro et nom (par exemple **33 · Gironde**).
 **Tous les départements** retire ce filtre. La sélection est conservée dans
 l'URL, après actualisation et lors du passage entre liste et carte.
+
+La recherche et le territoire (communes/intercommunalités) restent visibles.
+**Filtres avancés** regroupe département, niveaux de priorité et états du calcul.
+Les critères d’un lien restent appliqués et retirables. La recherche, la pagination,
+**Réinitialiser**, **Actualiser les résultats** et les réessais relisent uniquement
+les résultats. En vue carte, le fond, le zoom et le cadrage sont conservés.
+Une sélection de calcul déjà préparée ou un lot en cours reste affiché : changer
+la recherche ne change pas cette sélection. Vérifiez le territoire et le nombre
+de prospects annoncés avant de confirmer ; préparez un nouveau calcul pour
+prendre en compte la nouvelle recherche.
 
 Le potentiel prime : une commune avec au moins 10 commerces ou un EPCI avec au
 moins 50 peut être prioritaire même sans projet ni contact identifié. Les niveaux

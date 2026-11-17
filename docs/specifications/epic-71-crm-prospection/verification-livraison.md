@@ -2019,3 +2019,103 @@ Les assets CRM sont servis avec `Cache-Control: no-store`. Preuves locales avec
 API synthétiques ; aucune vérification de la version déployée. Ces preuves
 précèdent les commits et push demandés ensuite le 17 novembre 2026 dans les
 dépôts concernés. Aucun déploiement ou accès TEST réalisé pour cette demande.
+
+## Correctif du 17 novembre 2026 — continuité des recherches du CRM
+
+Demande suivante : appliquer les nouveaux principes UX aux autres recherches
+du CRM. Bases propres : backend `a9ea1b6b`, Projet `be3ee4e5`. Le premier correctif
+Prospects était déjà committé et poussé. Ce lot renforce E71-EVOL-10/L1/L5/L6,
+sans nouveau critère métier ni changement des 83 critères actifs ou du statut
+**En cours**.
+
+### Défaut et correction
+
+La reproduction navigateur échoue avant correction : rechercher dans Suivi
+remplace le formulaire, le titre et la navigation
+(`tmp/crm-recherches-locales-d0kj51/failure.png`). Suivi et Rappels soumettaient
+par `go()` ; Carte utilisait le même formulaire ; Qualification naviguait aussi
+à chaque recherche et recréait sa carte après chaque lecture.
+
+- **Suivi, Rappels et Prospects** partagent un chargement de liste local : seules
+  les lignes, le compteur, l’état de lecture et la pagination changent. Les erreurs
+  de recherche et de page proposent un réessai local. Les curseurs et l’historique
+  ne sont mis à jour qu’après une lecture valide. Les boutons de pagination
+  gardent le focus, y compris à la dernière page ; leurs gardes empêchent les
+  actions indisponibles et les lectures concurrentes.
+- **Carte générale** conserve son instance Leaflet, ses tuiles, son zoom et son
+  cadrage. Les points, légendes, groupes et liens suivent les critères appliqués.
+  Changer de département recadre volontairement ; les autres recherches ne le
+  font pas. Les réponses obsolètes restent ignorées.
+- **Qualification** conserve formulaire et suivi de préparation/lot pendant les
+  lectures locales. Les résultats et leur état sont indépendants des commandes.
+  La carte et sa configuration sont réutilisées. Le profil de préparation est
+  figé avant les lectures asynchrones ; la confirmation conserve son identifiant
+  et son empreinte. Le territoire préparé reste annoncé même si la recherche
+  suivante porte sur un autre territoire.
+- **Filtres** : cinq critères secondaires dans Suivi et Carte, quatre dans
+  Rappels, trois dans Qualification. Les critères principaux restent visibles.
+  Les critères hérités et multivalués sont conservés et retirables ; retirer un
+  profil retire explicitement ses critères dépendants pour éviter une combinaison
+  invalide. Réinitialiser, actualiser et réessayer restent des lectures locales.
+
+Application de la [convention commune de recherche](../../architecture/transverse/conventions-backoffice.md#recherche-et-actualisation-ciblée-des-résultats)
+et d’ERP-UX-03/04/08/09/10/11/12. Aucun résultat n’est filtré seulement parmi les
+25 lignes visibles. L’annulation d’une recherche est indépendante du signal de
+route et du suivi des commandes. Expiration/révocation retire toujours toute la
+surface privée. Les parcours Agenda, recherche de créneaux, sélecteurs et pages
+de propositions étaient déjà locaux et restent couverts par leurs recettes.
+
+### Preuves locales
+
+| Contrôle exécuté depuis le backend | Résultat |
+| --- | --- |
+| `node tests/browser/crm-recherches-locales.cjs` | **18 parcours réussis** : cinq vues à 320/390/1280 px, identité formulaire/titre/navigation/carte, emprise, focus, filtres limités/panneau conservé, réponses inversées, erreurs/réessais, actualisation, pagination remise au début, critères hérités/multiples, snapshot et expiration. Texte réellement doublé à 320 px sur les cinq vues, sans débordement. |
+| `node tests/browser/crm-prospects-filtres.cjs` | **11 scénarios réussis** ; potentiel, cinq filtres, anciens liens, concurrence, clavier, texte 200 %, expiration. |
+| `node tests/browser/crm.cjs` | **Réussi** ; pagination/totaux/erreurs/curseurs, création, notes/conflits, lecture seule/révocation et sept vues à six largeurs. |
+| `node tests/browser/crm-productivite.cjs` | **Réussi** ; recherche page 3 → fiche → retours avec recherche/page/focus conservés, saisie et sections indépendantes. |
+| `node tests/browser/crm-carte-axes.cjs` | **Réussi** ; axes, filtres/liens/emprise, retour historique, lectures obsolètes, panne de fond et DOM borné. |
+| `node tests/browser/crm-priorite.cjs` | **Réussi** ; sélection exhaustive, confirmation, pagination, interruption/reprise, carte, attestations et lecture seule. |
+| `node tests/browser/crm-qualification-productivite.cjs` | **Réussi** ; résultat exact, recalcul explicite, suivi local et commandes préservées. |
+| `node tests/browser/crm-agenda.cjs` | **Réussi** ; recherches de créneaux et réponses obsolètes, 60 rendez-vous, pagination, retours, conflits, mobile/texte 200 %, notifications et lecture seule. |
+| `node tests/browser/crm-rappels.cjs` | **Réussi** ; dates/aides/calendrier Paris, refus/DST, conflit/rejeu, préférences, CSRF et révocation. |
+| `node tests/browser/crm-selecteurs.cjs` | **Réussi** ; contact n°26, critères/références, pagination et conflits avec choix conservés. |
+| `py scripts/validation/test_isolated.py tests/security/test_crm_pwa.py tests/security/test_crm_domaine.py tests/security/test_crm_agenda_navigation.py -q` | **86 réussis**, 38 avertissements de dépréciation datetime SQLite, sans base d’exploitation. |
+
+Les sélecteurs des tests existants ouvrent désormais les filtres repliés ou
+ciblent le détail de la ligne, avec leurs assertions conservées. Le harness
+Rappels échouait déjà sur la base `a9ea1b6b` : sa fixture ne fournissait pas la
+projection `/aujourdhui`, puis supposait qu’un refus CSRF supprimait la lecture
+malgré des droits de consultation confirmés. La fixture est actualisée ; le
+scénario conserve le refus d’écriture, ajoute la conservation de saisie et garde
+la vérification de purge après révocation confirmée. Il passe aussi contre les
+assets archivés de cette base, dans `tmp/crm-rappels-baseline-de3d04ed/`.
+
+Derniers rapports dédiés :
+`tmp/crm-recherches-locales-njqm7C/results.json` (18 parcours),
+`tmp/crm-prospects-filtres-Vtk1ZG/report.json` (11 scénarios),
+`tmp/crm-productivite-utYG5W/` et `tmp/crm-map-ui-0e7622f8/`.
+Les captures du premier rapport ont été inspectées en bureau/mobile et texte
+doublé. Contrôles documentaires : trois guides modifiés, 42 liens locaux et
+151 sources exportées vérifiés, sans erreur ni avertissement.
+
+La recette à texte 200 % a révélé le débordement du titre Suivi, de boutons
+Rappels et d’un libellé Qualification ; les contraintes de largeur/retour à la
+ligne ont été corrigées sans masquer le débordement. Les captures bureau/mobile
+et texte doublé ont été inspectées. Revue indépendante des extraits de concurrence :
+configuration cartographique liée au signal de route et exclusion/séquence des
+paginations vérifiées. Pas de recette avec lecteur d’écran ou appareil physique.
+
+### Impacts et livraison
+
+Deux dépôts modifiés : **Backend/PWA CRM** (JS, CSS et harness navigateur) et
+**Projet** (spécification UX, guide et bilan). Domaine/API/OpenAPI, droits,
+persistance et migrations sans impact : mêmes lectures, commandes, schémas et
+contrôles serveur. Générateur/données de démonstration sans impact : aucun champ,
+rôle ou format nouveau ; seules des données synthétiques locales servent aux
+tests. Autres frontends sans impact : le CRM est servi par le backend.
+
+Livrer les assets CRM et la documentation canonique selon le mode existant,
+sans configuration nouvelle ; les assets restent servis `no-store`. Syntaxe
+JavaScript, diff, guides/liens et sources exportées contrôlés. Ces preuves portent
+sur l’arbre local et des API synthétiques, sans vérification de la version déployée,
+charge PostgreSQL, génération réelle ou accès TEST. Aucun déploiement réalisé.

@@ -99,8 +99,9 @@ sans nouvelle epic, nouveau critère métier ni changement du statut En cours.
 Recherche et **Potentiel du prospect** sont directement visibles. Les filtres
 avancés sont limités à cinq : département, périmètre, étape, responsable et état.
 Les critères détaillés provenant d’anciens liens sont conservés, affichés dans
-le récapitulatif et retirables individuellement. Suivi/Carte conservent leurs
-filtres détaillés. Le filtre `classement` et ses valeurs restent ceux du serveur ;
+le récapitulatif et retirables individuellement. Suivi/Carte conservent les critères
+détaillés issus des liens ; leur présentation est simplifiée par le correctif suivant.
+Le filtre `classement` et ses valeurs restent ceux du serveur ;
 aucune nouvelle règle de potentiel ou de priorité n’est calculée dans le client.
 
 Rechercher, retirer un filtre, réinitialiser, actualiser les résultats ou réessayer
@@ -113,6 +114,34 @@ Une perte d’accès continue de retirer toute la surface privée.
 Application directe de la [convention commune d’actualisation ciblée](../../architecture/transverse/conventions-backoffice.md#recherche-et-actualisation-ciblée-des-résultats),
 désormais exigée pour les évolutions des interfaces de gestion. Preuves et
 impacts dans le [bilan du correctif](verification-livraison.md#correctif-du-17-novembre-2026--filtres-et-recherche-des-prospects).
+
+### Correctif du 17 novembre 2026 — continuité des recherches du CRM
+
+Application du même principe aux recherches **Suivi commercial, Rappels, Carte
+et Qualification** de L1/L5/L6 : les champs, le titre, la navigation et le panneau
+avancé restent montés pendant les recherches, réinitialisations, actualisations
+et réessais. Les lectures obsolètes sont annulées ou ignorées avant toute mise à
+jour des résultats ou des curseurs. La pagination repart au début lorsque les
+critères changent. Les états de chargement/erreur sont locaux et annoncés ; une
+expiration continue de purger la surface privée.
+
+Limiter les filtres secondaires : cinq pour Suivi et Carte, quatre pour Rappels,
+trois pour Qualification. Recherche/potentiel restent visibles sur Carte ;
+recherche/territoire sur Qualification ; état/type sur Rappels. Les critères des
+liens, y compris plusieurs niveaux ou états de qualification, restent appliqués,
+visibles et retirables. Les cartes conservent leur instance et leur cadrage ;
+seul un changement de département recadre volontairement la carte générale.
+
+La recherche de Qualification est indépendante du suivi de préparation/lot.
+Une sélection préparée garde son profil, son empreinte et sa confirmation malgré
+les recherches suivantes ; le profil de la commande est capturé avant ses lectures
+asynchrones. Aucun calcul n’est lancé par une recherche ou par son réessai.
+Les commandes, permissions, règles de potentiel et contrats serveur sont inchangés.
+Pas de nouvelle epic, critère métier, migration ou changement de statut.
+
+Le [bilan de recette](verification-livraison.md#correctif-du-17-novembre-2026--continuité-des-recherches-du-crm)
+porte les preuves navigateur, la couverture des parcours déjà locaux (agenda,
+sélecteurs et propositions) et les limites de vérification.
 
 ## L2 — Voir qui contacter et préparer la suite
 
