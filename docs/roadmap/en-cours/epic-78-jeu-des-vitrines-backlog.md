@@ -23,6 +23,17 @@
   additive `v323` avec modèle inactif. [Bilan et preuves](../../specifications/epic-78-jeu-des-vitrines/bilan-realisation.md).
   Les constats de la phase de spécification restent datés du 15 novembre.
 
+## Évolution du 17 novembre 2026 — préparation guidée
+
+**E78-EVO-PREPARATION-UX**, demandée pour clarifier la préparation dans Pro et
+les contrôles restants/en attente dans Animation. Extension UX de DEC-05,
+avec réemploi des kits E55/E56 et du produit E77 dans la section Pro.
+Les huit critères ajoutés **PU-01 à PU-08** et leurs impacts sont décrits dans
+les [parcours canoniques](../../specifications/epic-78-jeu-des-vitrines/parcours-regles.md#évolution-du-17-novembre-2026--préparation-guidée).
+Les CA-01 à CA-16, décisions métier, statut En cours et réserves d’activation
+restent inchangés. Implémentation et preuves propres à cette évolution dans le
+[bilan](../../specifications/epic-78-jeu-des-vitrines/bilan-realisation.md).
+
 ## Problème, acteurs et résultat attendu
 
 Les décorations saisonnières peuvent devenir un parcours ludique de découverte

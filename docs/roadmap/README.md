@@ -1,5 +1,10 @@
 # Roadmap par etat
 
+**17 novembre 2026 — E78-EVO-PREPARATION-UX** : section dédiée de préparation
+dans Pro, parcours guidé des vitrines et suivi organisateur par acteur/étape.
+[PU-01 à PU-08 et impacts](../specifications/epic-78-jeu-des-vitrines/parcours-regles.md#évolution-du-17-novembre-2026--préparation-guidée).
+Règles métier et état En cours conservés ; preuves propres au bilan E78.
+
 **15 novembre 2026 — E73-EVO-MESSAGES-HABITANTS** : conversations privées
 à plusieurs échanges, initiées dans Live par un participant, avec motif et
 réponse de l'organisateur depuis l'animation ou une boîte globale par commune.

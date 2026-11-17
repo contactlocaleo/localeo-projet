@@ -453,3 +453,57 @@ v323 conforme et **aucune migration restante** au dry-run. Empreinte de la SQL :
 Le catalogue contient `JEU_VITRINES`, version 1, **actif=false**. La qualification
 de charge reste ouverte ; cette mise à jour de schéma ne vaut ni activation du
 jeu ni recette applicative distante.
+
+## Évolution du 17 novembre 2026 — préparation guidée
+
+**E78-EVO-PREPARATION-UX**, critères [PU-01 à PU-08](parcours-regles.md#évolution-du-17-novembre-2026--préparation-guidée).
+Implémentation locale dans Pro et Animation, documentation dans Projet ; bases
+respectives `24b1deb`, `3ba1776`, `e45f001`, avec modifications de travail.
+Les critères historiques et l’état En cours restent inchangés.
+
+Pro ajoute une section dédiée, la liste paginée des participations acceptées et
+le parcours par invitation. Le jeu des vitrines affiche une étape à la fois,
+avec navigation libre, revue public/privé, sauvegarde et proposition explicites,
+puis installation et attente du contrôle. Les anciens liens restent valides
+avec une lecture continue des étapes. Chasse, Juste Prix et autres animations
+réemploient leurs missions, produits et kits avec des repères de préparation.
+
+Animation regroupe la page en tâches de l’organisation, attentes des commerçants
+et préparations prêtes. Chaque commerce présente les trois états de préparation
+et la prochaine tâche avec son acteur. Le contenu privé est dépliable et repris
+dans la confirmation. Les compteurs concernent uniquement la page ; aucune
+lecture supplémentaire par commerce ni collecte de toutes les pages.
+
+| Critères | Vérification exécutée le 17 novembre | Résultat |
+| --- | --- | --- |
+| PU-01/02/05/08 | Pro : `npm test -- src/features/animations src/app src/features/perimetres` | **253 tests réussis, 36 fichiers** : listes, pagination, invitations, droits, session, navigation et composants existants. Les erreurs synthétiques de `errorDiagnostics.test.jsx` sont attendues dans cette suite réussie. |
+| PU-01 à 04/08 | Pro : `npm run test:e2e -- tests/e2e/e78-vitrines.spec.js --workers=2 --output=tmp/preparation-ux-compact-results` | **14 scénarios réussis**, 320/390/1280 px : entrée dédiée, continuation/focus, sauvegarde explicite, approbation/installation existantes, refus salarié sur les deux accès, retour liste et restauration du brouillon, retour navigateur, commande incertaine et texte 200 % sur le parcours continu. |
+| PU-06/07/08 | Animation : `node tests/browser/e78-vitrines.mjs` | **16 scénarios réussis**, rapport `tmp/e78-vitrines-browser-GrJ93B/report.json` : répartition 2 tâches / 2 attentes / 1 prête, acteur et motif, contenu privé, approbation/contrôle, pagination, droits, contexte tardif, conflit, reçu et renvoi explicite. Rendus 320/390/1280 px, texte 200 % sur 320 px. |
+| PU-06/07/08 et préservation | Animation : `pnpm typecheck`, `pnpm lint`, `pnpm test`, `node scripts/build-check.mjs` | Types, lint et build réussis ; **354 tests réussis, aucun échec ou skip**. Build isolé `tmp/quality-build-ptwkwH`. Avertissement de taille de bundle conservé. |
+| Code livré Pro | `node scripts/build-check.mjs` après l’itération visuelle | **Build réussi**, sortie isolée `tmp/quality-build-T40RfL`. Avertissement d’import dynamique/statique de ValidationHistory conservé. |
+| Documentation | `py scripts/check_guidance.py`, `py scripts/check_guidance.py --changed --all-markdown`, `py scripts/sync_documentation.py --check-sources` | Contrôles réussis, aucun lien local en erreur ; **151 sources exportées vérifiées**. Le lanceur `py` est utilisé car l’alias `python` du shell renvoie au Microsoft Store. |
+
+Les captures Pro d’entrée et de revue ainsi que les captures Animation de la
+répartition ont été inspectées sur bureau/mobile. Une itération a réduit
+l’espace avant les étapes Pro. La recette précédente de 14 scénarios et son
+rapport sont conservés sous `tmp/preparation-guided-acceptance-results/` ; les
+captures des premières recettes de 12 scénarios sont aussi conservées dans les
+dossiers de test. Le dernier rapport Pro est copié auprès des captures finales.
+
+La revue indépendante à partir de la description a demandé trois vérifications :
+perte de saisie lors du démontage, première page sans participation acceptée et
+validation native de champs masqués. Le retour dédié avec annulation/confirmation
+et restauration est couvert par la recette ; le cas page vide/page suivante par
+le test `AnimationPreparationPage.test.jsx`. Aucun `required`/`pattern` ni formulaire
+HTML soumis n’est ajouté : le brouillon incomplet et les refus métier serveur
+restent couverts par les tests de préparation existants. Cette revue n’a pas pu
+inspecter les sources directement ; la revue de code et des captures a été faite
+par l’agent principal.
+
+Sans impact sur les contrats/API, le domaine, l’ERP, Live, les schémas, les
+migrations et le générateur : les producteurs existants sont réutilisés, aucun
+champ ni droit n’est ajouté. Aucun test backend/démo ou charge n’est relancé pour
+cette présentation. Les preuves sont locales et synthétiques ; recette sur
+appareil réel, déploiement, activation et qualification de capacité restent
+distincts. Ces preuves précèdent les commits et push demandés ensuite le
+17 novembre 2026 dans les dépôts concernés. Aucun déploiement n’est réalisé.

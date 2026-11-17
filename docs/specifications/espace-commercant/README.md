@@ -532,6 +532,17 @@ Le modèle reste inactif avant qualification de livraison. [Parcours et preuves 
 
 ## Préparation du jeu des vitrines — E78
 
+Depuis le 17 novembre 2026, **Préparation des animations** possède son entrée
+dans le menu Pro et l’onglet **Préparation** dans l’espace Animation. La liste
+paginée présente les participations acceptées de la page ; elle donne accès au
+parcours propre à chaque animation, à son kit et aux invitations. Les anciens
+liens restent valides. Le jeu des vitrines guide en quatre étapes : prévoir
+l’intrus et l’installation, préparer la question, relire/enregistrer/proposer,
+puis installer et faire contrôler. La revue distingue le futur contenu public
+de la solution et des consignes privées. Les autres animations conservent leurs
+kits, missions et produit Juste Prix avec des repères de préparation explicites.
+Voir [PU-01 à PU-08](../epic-78-jeu-des-vitrines/parcours-regles.md#évolution-du-17-novembre-2026--préparation-guidée).
+
 Après acceptation de la participation, le compte principal retrouve la préparation
 dans l’invitation et la fiche de l’animation. Il renseigne consigne, emplacement,
 intrus et installation, puis deux à six choix distincts dont une bonne réponse

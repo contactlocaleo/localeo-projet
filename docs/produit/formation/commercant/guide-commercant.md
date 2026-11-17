@@ -67,6 +67,22 @@ pas une échéance serveur.
 
 ## Préparer son commerce pour une animation
 
+Ouvrez **Préparation des animations** dans le menu Pro, puis la participation
+acceptée à préparer. Vous pouvez aussi choisir **Ouvrir mon parcours de
+préparation** depuis l’invitation ou la fiche de l’animation. La liste est
+paginée : les participations des autres pages restent accessibles avec
+**Page suivante**.
+
+Pour le **jeu des vitrines**, avancez dans les quatre étapes : décrire l’intrus
+et sa mise en place, préparer la question et les choix, relire puis proposer,
+installer et faire contrôler. Les boutons de continuation conservent votre
+saisie ; ils ne l’enregistrent pas. La revue sépare ce que verront les joueurs
+de la bonne réponse et des instructions privées. **Enregistrer mon brouillon**
+conserve votre travail ; **Proposer à l’organisateur** demande son approbation.
+Après approbation, installez puis attestez la mise en place. L’organisateur doit
+encore confirmer son contrôle sur place. Une demande de correction est affichée
+dans le parcours. Après publication, signalez tout incident à l’organisateur.
+
 Après avoir accepté l’invitation, ouvrez l’animation ou l’invitation et choisissez
 **Télécharger mon kit**. Le kit concerne uniquement votre commerce. Décompressez
 le fichier, ouvrez le mode opératoire et imprimez les supports destinés aux joueurs

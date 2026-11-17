@@ -1,5 +1,7 @@
 # Spécifications
 
+- **Extension E78 — 17 novembre 2026 : préparation guidée**, [E78-EVO-PREPARATION-UX](epic-78-jeu-des-vitrines/parcours-regles.md#évolution-du-17-novembre-2026--préparation-guidée) : section Pro et parcours en quatre étapes, attentes commerçant/organisateur explicites, contrôles Animation regroupés ; PU-01 à PU-08, contrats métier existants conservés. Résultats dans le bilan E78, état En cours conservé.
+
 Mise à jour : **18 septembre 2026**. Les documents sont regroupés par fonctionnalité et EPIC ; les contributions backend et interfaces partagent le même dossier.
 
 Commencer par le README du sujet, puis consulter ses règles, contrats et arbitrages. Les états ci-dessous reprennent le classement de la [roadmap commune](../roadmap/README.md). Les bilans datés et les anciennes tâches à réaliser restent des éléments historiques : ce rangement ne vaut pas nouvelle recette ni nouveau développement.

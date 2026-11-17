@@ -9,6 +9,11 @@ dans le [bilan de réalisation](bilan-realisation.md) : parcours et démonstrati
 vérifiés, qualification de charge soutenue ouverte ; modèle encore inactif.
 Les observations de spécification du 15 novembre sont conservées comme historique.
 
+L’[évolution du 17 novembre : préparation guidée](parcours-regles.md#évolution-du-17-novembre-2026--préparation-guidée)
+ajoute PU-01 à PU-08 : espace dédié Pro, étapes commerçantes et contrôles
+Animation par acteur. Son [bilan propre](bilan-realisation.md#évolution-du-17-novembre-2026--préparation-guidée)
+ne lève pas les réserves d’activation du moteur.
+
 ## Résultat recherché
 
 Les habitants découvrent les commerces participants, observent leurs vitrines

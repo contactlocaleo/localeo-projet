@@ -6,6 +6,45 @@ Spécification du 15 novembre 2026. Lire les
 Les sept arbitrages sont résolus par les réponses utilisateur du même jour,
 consignées dans le backlog. Les comportements ci-dessous sont les cibles à réaliser.
 
+## Évolution du 17 novembre 2026 — préparation guidée
+
+**E78-EVO-PREPARATION-UX** étend les parcours existants, sans remplacer les
+seize critères historiques ni les décisions E78-DEC-03 à 07. La préparation
+était présentée comme un formulaire dans la fiche/invitation Pro et une liste
+peu hiérarchisée dans Animation. La cible rend explicites la tâche, son acteur
+et les attentes entre proposition, approbation, installation et contrôle.
+
+Applications : **Pro**, **Animation** et **Projet**. Pro réutilise aussi les kits
+E55/E56 et le produit E77 dans sa nouvelle section ; leurs règles restent celles
+de leurs spécifications. Le domaine backend E78 reste propriétaire des révisions,
+droits, approbations, installations, contrôles et barrières de publication.
+
+| Critère ajouté | Résultat observable et comportements préservés |
+| --- | --- |
+| PU-01 | Le compte principal accède à « Préparation des animations » depuis la navigation Pro et à « Préparation » dans l’espace Animation. La liste paginée présente les participations acceptées de la page et conserve l’accès aux invitations ; elle ne prétend pas connaître leur avancement détaillé sans lecture. |
+| PU-02 | Le parcours dédié rappelle animation, commune, dates et mission. Une invitation non acceptée renvoie à la consultation et à la décision existantes, sans accès au contenu de préparation. Les salariés ne gagnent aucun droit de contenu. |
+| PU-03 | Pour une vitrine, quatre étapes numérotées guident le commerçant : prévoir l’intrus et sa mise en place ; préparer emplacement, consigne et QCM ; relire puis enregistrer/proposer ; installer puis faire contrôler. Dans l’espace dédié, une étape est affichée à la fois ; les liens permettent de revenir librement aux autres étapes. Les actions de continuation déplacent le focus sans enregistrer ni perdre la saisie. Les accès historiques conservent une lecture continue des quatre étapes. |
+| PU-04 | La revue distingue la future présentation publique des informations privées, notamment la bonne réponse. Brouillon incomplet autorisé, envoi explicite de la version enregistrée, commentaire de correction et invalidation après modification sont conservés. La prochaine étape précise quand l’organisateur doit approuver ou contrôler. |
+| PU-05 | Les autres animations disposent de repères mission → supports/produit → mise en place, avec les composants E55/E56/E77 existants. Téléchargement de kit, déclaration « Je suis prêt » et proposition de produit gardent leurs droits et commandes. Aucun nouveau moteur ou suivi obligatoire. |
+| PU-06 | Dans Animation, la page distingue « À traiter par l’organisation », « En attente des commerçants » et « Prêtes ». Chaque commerce affiche la prochaine tâche et son acteur, les trois états contenu/installation/contrôle et le commentaire de correction éventuel. « Prête » provient exclusivement du fait serveur `materiel.pret`. |
+| PU-07 | Le contenu privé est consultable à la demande et dans la confirmation d’approbation/contrôle. Les actions restent contraintes par les habilitations et `allowedActions`. Confirmation terrain, motif de correction, révisions, reçus, conflit et absence de rejeu automatique restent inchangés. Les compteurs sont explicitement limités aux 25 éléments au maximum de la page. |
+| PU-08 | Parcours clavier et rendus 320/390/1280 px vérifiés, dont texte agrandi côté Animation. Chargement, erreur/reprise, refus, lecture seule et contexte obsolète ne deviennent jamais un état prêt. Les anciens liens et la mémoire privée limitée à la session restent fonctionnels. |
+
+### Impacts et preuves de cette évolution
+
+| Critères | Propriétaire et preuve prévue | Documentation / contrat | Démonstration / exploitation |
+| --- | --- | --- | --- |
+| PU-01/02/05 | Navigation/session Pro et pages de préparation ; tests composants/navigation et recette navigateur synthétique | Présent document, espace commerçant, guide commerçant et README Pro ; URLs internes ajoutées, transport/API inchangés | Fixtures de recette UI adaptées ; générateur sans impact : aucun champ, modèle ou droit nouveau. Livraison du frontend Pro seul compatible avec le backend E78 existant. |
+| PU-03/04 | Présentation Pro ; tests VitrinePreparation, guards et recette E78 | Règles E78 conservées, revue privée/public explicitée | Aucune migration/configuration ; reprise des commandes par les reçus existants. |
+| PU-06/07/08 | Présentation Animation ; recette `tests/browser/e78-vitrines.mjs`, types, lint, tests et build isolé | README Animation et présent document ; contrat embarqué conservé, aucune projection ajoutée | Regroupement local des seuls éléments lus : pas de GET par commerce ni collecte de pages. Pas de nouveau coût serveur, pagination 25 préservée ; pas de nouvelle qualification de capacité. |
+
+Les bases Git avant travaux sont Projet `e45f001`, Pro `24b1deb`, Animation
+`3ba1776` et backend `c44770f1` ; arbres initialement propres. Backend, ERP,
+Marketplace/Live, migrations et exports OpenAPI ne sont pas modifiés : cette
+évolution présente des faits et commandes existants. Les résultats exécutés et
+limites sont consignés dans le [bilan de réalisation](bilan-realisation.md).
+La réserve de capacité/activation E78 demeure indépendante.
+
 ## 1. Créer une édition — CA-01/02
 
 Le gestionnaire habilité travaille dans son organisation et sa commune active.

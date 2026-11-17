@@ -35,6 +35,30 @@ Les vues specialisees doivent rester rattachees a leur domaine :
 - Les duplications de vues doivent etre limitees a des raccourcis de pilotage.
 - Les libelles de menu doivent rester proches des noms de domaines fonctionnels.
 
+### Recherche et actualisation ciblée des résultats
+
+Ce principe s’applique aux interfaces de gestion **CRM, ERP, Pro et Animation**
+pour leurs créations et évolutions. Une recherche, un changement de filtre,
+une pagination ou un réessai actualise uniquement la zone de résultats et ses
+éléments associés : compteur, état de chargement/erreur et pagination. Conserver
+montés le titre, la navigation, les champs, leurs valeurs, l’ouverture des
+filtres et le focus de l’action déclenchée. Éviter une reconstruction ou un
+indicateur de chargement de toute la page pour une lecture locale.
+
+Annoncer le chargement et les nouveaux résultats de manière accessible, sans
+déplacer le focus à chaque recherche. Une erreur propose un réessai de cette
+zone. Réinitialiser la pagination lorsque les critères changent ; annuler ou
+ignorer les lectures obsolètes pour qu’une réponse ancienne ne remplace jamais
+la dernière recherche. Les filtres principaux utiles à la tâche restent visibles ;
+limiter les critères secondaires et rendre les filtres actifs compréhensibles
+et retirables. Ne pas effacer silencieusement un critère provenant d’un lien.
+
+Ces règles conservent les contrôles d’accès serveur et les protections de saisie.
+Une expiration de session ou une perte d’autorisation invalide toute la surface
+privée concernée. Un changement réel de rubrique ou de contexte peut reconstruire
+la page. Les composants restent propres à chaque application ; la règle commune
+porte sur le comportement observable.
+
 ### UX des pages de gestion ERP
 
 Ces règles s’appliquent à toute création ou évolution d’un écran métier ERP,
@@ -101,6 +125,9 @@ identité, état, information discriminante et accès au dossier ; distinguer un
 liste de catalogue d’une file de blocages. Présenter filtres actifs, résumé fiable
 et pagination dans les deux sens. Une limite de recherche est annoncée et permet
 de préciser la recherche ou de poursuivre la consultation.
+
+Appliquer la [recherche et l’actualisation ciblée des résultats](#recherche-et-actualisation-ciblée-des-résultats) :
+la saisie et les filtres restent disponibles pendant le chargement local.
 
 Ne pas inventer un total ou un numéro de page à partir d’un curseur. Verrouiller
 la pagination pendant une lecture, ignorer les réponses obsolètes et annoncer
@@ -211,6 +238,7 @@ Adapter le guide utilisateur aux libellés, menus et destinations livrés. Pour 
 - [ ] Les profils autorisé et restreint, les états vide/erreur/conflit et l’expiration sont couverts selon le changement.
 - [ ] Le rendu est inspecté sur bureau, à 320/390 px et avec texte à 200 % ; clavier, focus, noms accessibles et libellés longs sont vérifiés sur le parcours modifié.
 - [ ] Les lectures restent bornées et les mutations conservent leurs protections ; les recettes isolent les services réels.
+- [ ] Recherche, filtres, pagination et réessai actualisent seulement les résultats ; formulaire, focus et ouverture des filtres sont préservés, les réponses obsolètes sont écartées.
 - [ ] Les composants partagés, liens, aide et documentation sont cohérents ; les contrôles non exécutés restent explicites.
 
 Réutiliser les recettes existantes et ajouter une preuve comportementale ciblée

@@ -89,6 +89,31 @@ labels visibles pour toutes les actions ambiguës. Les icônes existantes sont
 harmonisées par sens, taille/trait et alignement ; pas de secours « succès »
 pour une action non représentée. Le tableau de l’audit porte les remplacements.
 
+### Correctif du 17 novembre 2026 — filtres des prospects et recherche locale
+
+Le formulaire Prospects réutilisait tous les filtres de qualification et passait
+par `go()` puis `render()` à chaque recherche, ce qui démontait aussi son titre,
+ses champs et sa navigation. Correction du parcours de recherche de L1/CA-78,
+sans nouvelle epic, nouveau critère métier ni changement du statut En cours.
+
+Recherche et **Potentiel du prospect** sont directement visibles. Les filtres
+avancés sont limités à cinq : département, périmètre, étape, responsable et état.
+Les critères détaillés provenant d’anciens liens sont conservés, affichés dans
+le récapitulatif et retirables individuellement. Suivi/Carte conservent leurs
+filtres détaillés. Le filtre `classement` et ses valeurs restent ceux du serveur ;
+aucune nouvelle règle de potentiel ou de priorité n’est calculée dans le client.
+
+Rechercher, retirer un filtre, réinitialiser, actualiser les résultats ou réessayer
+ne reconstruit que les résultats/compteur/pagination. Les champs, le titre,
+l’ouverture des filtres, la navigation et le focus restent en place. Les lectures
+précédentes sont invalidées ; une nouvelle recherche repart en première page.
+Les retours par historique et depuis une fiche conservent leur contexte existant.
+Une perte d’accès continue de retirer toute la surface privée.
+
+Application directe de la [convention commune d’actualisation ciblée](../../architecture/transverse/conventions-backoffice.md#recherche-et-actualisation-ciblée-des-résultats),
+désormais exigée pour les évolutions des interfaces de gestion. Preuves et
+impacts dans le [bilan du correctif](verification-livraison.md#correctif-du-17-novembre-2026--filtres-et-recherche-des-prospects).
+
 ## L2 — Voir qui contacter et préparer la suite
 
 Aujourd’hui ouvre « Mes actions » pour un compte nominatif. Vue « Équipe »

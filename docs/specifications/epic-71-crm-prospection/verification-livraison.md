@@ -1949,3 +1949,73 @@ Correctif de présentation dans le backend/PWA CRM et son guide canonique ; aucu
 changement d’API, de règle métier, de schéma, de générateur ou des autres frontends.
 Pas de rejeu Python/PostgreSQL nécessaire pour ce rendu JavaScript. Aucun accès
 à TEST, commit, push ou déploiement réalisé ; travaux antérieurs conservés.
+
+## Correctif du 17 novembre 2026 — filtres et recherche des prospects
+
+Demande : réduire les filtres de Prospects, mettre le potentiel en évidence et
+ne recharger que les résultats d’une recherche. Base backend `c44770f1`, arbre
+initialement propre ; base Projet `e45f001`, avec les modifications E78 de la
+demande précédente conservées. Correction de L1/CA-78 d’E71-EVOL-10 ; pas de
+nouvelle epic ni changement des 83 critères actifs ou du statut En cours.
+
+**Cause reproduite :** `filters()` soumettait via `go()`, qui appelait `render()`
+et `main.replaceChildren()`. Le formulaire, le titre et la navigation étaient
+reconstruits. La recette dédiée avant correction échoue sur la conservation
+du formulaire/titre, rapport backend `tmp/crm-prospects-filtres-S4EwpD/report.json`.
+Le formulaire partagé présentait aussi les critères détaillés de qualification
+dans Prospects, sans hiérarchiser le potentiel par rapport à ces critères.
+
+**Résultat :** recherche et Potentiel du prospect visibles immédiatement ; cinq
+filtres avancés seulement : département, périmètre, étape, responsable et état.
+Les critères détaillés des anciens liens restent appliqués et retirables dans
+le récapitulatif. Suivi/Carte conservent leurs critères. Le filtre de potentiel
+utilise `classement` et ses valeurs existantes ; aucun score local ni nouveau
+seuil. Le client reconstruit seulement la zone de résultats/compteur/pagination,
+invalide les lectures précédentes et conserve formulaire, ouverture des filtres
+et focus. Retirer un critère restitue le focus au champ disponible ou à la
+recherche. Le réessai et l’actualisation du titre relisent aussi cette seule zone.
+
+### Preuves et checklist du parcours
+
+| Contrôle | Résultat sur l’arbre local |
+| --- | --- |
+| `node tests/browser/crm-prospects-filtres.cjs` | **11 scénarios réussis** : 320/390/1280 px, potentiel visible, cinq filtres, identité des nœuds formulaire/titre/navigation conservée, focus, panneau ouvert conservé, aucune relecture des responsables, recherches concurrentes, pagination remise à zéro, erreur/reprise locale, critères hérités/reset et expiration. Texte réellement doublé à 320 px, sans débordement. |
+| `node tests/browser/crm-productivite.cjs` | **Réussi**, dont retour explicite et historique à la même page/recherche, protection de saisie, sections indépendantes et accès. Captures `tmp/crm-productivite-1QOQYb/`. |
+| `node tests/browser/crm.cjs` | **Réussi** : recette du shell, pagination/totaux et reprise, création atomique, notes/conflits, lecture seule/révocation et sept vues à 1440/1280/768/390/360/320 px. Deux sélecteurs de test sont adaptés à la zone de résultats, avec les mêmes assertions de 25 puis 1 ligne. |
+| `py scripts/validation/test_isolated.py tests/security/test_crm_pwa.py tests/security/test_crm_domaine.py tests/security/test_crm_agenda_navigation.py -q` | **86 tests réussis**, 38 avertissements de dépréciation de l’adaptateur datetime SQLite, aucun échec. Aucun accès à une base d’exploitation. |
+| Syntaxe JavaScript, diff et documentation | `node --check` pour les scripts modifiés, `git diff --check`, guides/liens, configuration Codex et 151 sources exportées vérifiés. Lanceur `py` utilisé car l’alias `python` du shell n’est pas configuré. |
+
+La recette à texte 200 % a d’abord échoué sur le débordement des boutons
+(`tmp/crm-prospects-filtres-aMF3kg/report.json`) ; la grille et les boutons ont été
+corrigés à leur source, sans masquer le débordement. La reprise
+`tmp/crm-prospects-filtres-h84M1n/report.json` réussit les onze scénarios. Les
+captures bureau/mobile ont été inspectées ; la dernière tentative après contrôle
+du focus réussit les onze scénarios :
+`tmp/crm-prospects-filtres-JqC6vQ/report.json`.
+
+Règles appliquées : ERP-UX-03/04/08/09/10/11/12 et
+[actualisation ciblée des résultats](../../architecture/transverse/conventions-backoffice.md#recherche-et-actualisation-ciblée-des-résultats),
+principe désormais explicite pour CRM, ERP, Pro et Animation et référencé depuis
+le guide transverse `AGENTS.md`. Le guide CRM est actualisé. Les résultats sont
+annoncés localement ; expiration/perte de droits continue de purger la surface
+privée. Le rendu, le clavier, le focus, le zoom, les anciens liens et les lectures
+bornées sont couverts. Pas de recette avec lecteur d’écran ou appareil physique.
+
+### Impacts et livraison
+
+Seuls **Backend/PWA CRM** et **Projet** sont modifiés pour ce correctif. Aucun
+changement de règle domaine, d’API/OpenAPI, de droits, de schéma ou de migration :
+les lectures existantes restent autorisées par le serveur et limitées à 25
+résultats, avec un total calculé au début de chaque recherche. Aucun chargement
+supplémentaire par ligne ni traitement automatique. Les autres frontends ne
+changent pas de parcours ; seule la convention commune s’applique à leurs travaux
+futurs. Générateur/données de démonstration sans impact : aucun champ, rôle ou
+format modifié ; les fixtures de la recette UI sont adaptées. Aucune génération
+ni qualification PostgreSQL/charge nécessaire pour ce correctif de présentation.
+
+Livrer ensemble les ressources JS/CSS CRM du backend et la documentation canonique
+selon le mode existant ; aucune configuration nouvelle ni réparation de données.
+Les assets CRM sont servis avec `Cache-Control: no-store`. Preuves locales avec
+API synthétiques ; aucune vérification de la version déployée. Ces preuves
+précèdent les commits et push demandés ensuite le 17 novembre 2026 dans les
+dépôts concernés. Aucun déploiement ou accès TEST réalisé pour cette demande.

@@ -185,9 +185,19 @@ une fiche, noter un échange ou planifier un rappel. Un nombre inconnu reste vid
   Une ancienne référence devenue obsolète demande une observation correspondant
   à la couverture actuelle. Cette couverture ne déplace pas le point sur la carte.
 
-Les **Autres filtres** de Prospects, Suivi et Carte permettent de cibler potentiel,
-territoire, activité, besoin, porteur, budget, fiabilité et données à examiner.
-Ils sont conservés dans l’URL. Les règles et preuves attendues sont détaillées
+Dans **Prospects**, **Potentiel du prospect** reste visible à côté de la recherche.
+Il filtre le classement du potentiel évalué, indépendamment de l’étape du dossier.
+Les **Filtres avancés** sont limités à cinq critères : département, périmètre,
+étape, responsable du prospect et état. Cliquez sur **Filtrer** ou appuyez sur
+Entrée pour appliquer les critères. Seuls les résultats se rechargent ; la saisie,
+l’ouverture des filtres et le focus sont conservés. Une nouvelle recherche repart
+en première page. En cas d’erreur, **Réessayer la recherche** relit cette zone.
+
+Les critères d’un ancien lien, par exemple une commune ou un budget, restent
+appliqués et apparaissent dans le récapitulatif. Chaque critère peut être retiré ;
+**Réinitialiser** revient aux prospects actifs sans autre critère. Le retour depuis
+une fiche conserve les filtres et la page. Les **Autres filtres** de Suivi et Carte
+conservent leurs critères de qualification détaillés. Les règles sont décrites
 dans la [qualification structurée](qualification-structuree.md).
 
 ## 3. Suivre les dossiers
