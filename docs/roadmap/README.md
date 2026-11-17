@@ -1,17 +1,19 @@
 # Roadmap par etat
 
 **17 novembre 2026 — E73-EVO-PARCOURS-ORGANISATEUR** :
-[six améliorations spécifiées](../specifications/epic-73-animation-et-ou-coffrets/parcours-organisateur.md)
+[six améliorations réalisées localement](../specifications/epic-73-animation-et-ou-coffrets/parcours-organisateur.md)
 après audit et contre-expertise : publication, continuité, activité/résultats,
 création commune, accessibilité, fin/réemploi. PO-01 à PO-30 complètent les CU
-existants ; arbitrages et essais distingués, contrats et preuves prévus.
-Spécification seule, implémentation et recette à réaliser ; clôture historique
-E73 et réserves antérieures conservées.
+existants ; arbitrages et essais distingués, contrats synchronisés et preuves
+synthétiques consignées. Qualification d’usage, appareils physiques et mesure
+de durée restant ouvertes ; clôture historique E73 et réserves antérieures
+conservées. Aucun déploiement déduit des tests locaux.
 
 **17 novembre 2026 — E73-EVO-CREATION-UX-COMMUNE** : mêmes codes UX de création
 pour tous les modèles d’animation, sur ordinateur, tablette et téléphone.
 [Règle et CU-01 à CU-06](../specifications/epic-73-animation-et-ou-coffrets/perimetres-parcours-saas.md#règle-du-17-novembre-2026--création-homogène-des-animations),
-validés et spécifiés ; implémentation et recette comparative à réaliser.
+validés, spécifiés et réalisés avec les lots PO ; recette comparative exhaustive
+et humaine restant ouverte dans le bilan de cette évolution.
 Contenus adaptés au modèle, règles métier et clôture historique E73 conservés.
 
 **17 novembre 2026 — E78-EVO-PREPARATION-UX** : section dédiée de préparation

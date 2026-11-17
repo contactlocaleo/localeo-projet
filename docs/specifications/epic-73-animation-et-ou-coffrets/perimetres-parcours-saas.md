@@ -856,7 +856,11 @@ Email au demandeur et notification portail pour complément requis ou préparati
 
 #### Règle du 17 novembre 2026 — création homogène des animations
 
-**E73-EVO-CREATION-UX-COMMUNE — décision utilisateur validée, spécification seule.**
+**E73-EVO-CREATION-UX-COMMUNE — décision utilisateur validée, réalisation locale.**
+Le [bilan PO](parcours-organisateur.md#12-réalisation-du-17-novembre-2026--bilan-et-reprise)
+trace le cadre partagé, les corrections avec retour à la revue et les résultats
+confirmés. La recette exhaustive des variantes, les essais organisateurs et
+appareils physiques ne sont pas déclarés achevés par cette réalisation.
 Cette règle complète les principes du §5 et les parcours du §6 :
 
 > Tous les parcours de création d’une animation utilisent les mêmes codes UX,

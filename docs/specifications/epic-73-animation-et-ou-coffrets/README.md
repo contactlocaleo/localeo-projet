@@ -5,14 +5,18 @@
 de l'audit et de sa contre-expertise : publication compréhensible, protection et
 reprise, activité/bilan directs, création homogène, accessibilité, fin/réemploi.
 **PO-01 à PO-30**, avec les **CU-01 à CU-06** existants ; arbitrages retenus,
-contrats et dépendances, preuves à produire et essais séparés. **Spécification
-seule, réalisation et recette à effectuer**, clôture historique conservée.
+contrats et dépendances, preuves et essais séparés. **Implémentation locale
+réalisée ; qualification d’usage et physique restant ouverte.** Le
+[bilan des six lots](parcours-organisateur.md#12-réalisation-du-17-novembre-2026--bilan-et-reprise)
+précise les tests, leur portée et les limites ; clôture historique conservée.
 
 Évolution du **17 novembre 2026 — E73-EVO-CREATION-UX-COMMUNE** :
 [création homogène de tous les modèles](perimetres-parcours-saas.md#règle-du-17-novembre-2026--création-homogène-des-animations),
 avec les mêmes conventions de progression, actions, formulaires, états et reprise,
 sur ordinateur, tablette et téléphone. **CU-01 à CU-06**, règle validée et
-spécifiée ; réalisation et recette à effectuer. Les particularités métier et la
+spécifiée puis réalisée avec les lots PO ; recette synthétique et limites dans
+le même bilan. La comparaison exhaustive modèles/dotations et la recette humaine
+restent distinctes. Les particularités métier et la
 clôture historique restent conservées.
 
 Évolution du **15 novembre 2026 — E73-EVO-MESSAGES-HABITANTS** :

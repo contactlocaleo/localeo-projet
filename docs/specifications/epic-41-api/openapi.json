@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Backend - contrat implemente EPIC 41",
     "description": "OpenAPI complet du backend, dont les parcours Animation locale. Genere hors ligne depuis le code local pour les integrations et les mocks ; cet instantane ne prouve pas son deploiement.",
-    "version": "1.0.0+9805eec"
+    "version": "1.0.0+20ec49c"
   },
   "paths": {
     "/public/identite-acces/interne/connexion": {
@@ -108074,6 +108074,23 @@
               "format": "uuid",
               "title": "Animation Id"
             }
+          },
+          {
+            "name": "guidage",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "const": "structure_v1",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Guidage"
+            }
           }
         ],
         "responses": {
@@ -109971,6 +109988,23 @@
               "type": "string",
               "format": "uuid",
               "title": "Animation Id"
+            }
+          },
+          {
+            "name": "guidage",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "const": "structure_v1",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Guidage"
             }
           }
         ],
@@ -112658,6 +112692,23 @@
               "format": "uuid",
               "title": "Animation Id"
             }
+          },
+          {
+            "name": "guidage",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "const": "structure_v1",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Guidage"
+            }
           }
         ],
         "responses": {
@@ -114662,6 +114713,197 @@
         "security": [
           {
             "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/animation-locale/animations/commandes/{cle}": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Lire Recu Creation Animation",
+        "operationId": "lire_recu_creation_animation",
+        "parameters": [
+          {
+            "name": "cle",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Cle"
+            }
+          },
+          {
+            "name": "commune_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Commune Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeConfirmee_AnimationDetailPayload_"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Demande invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentification requise",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Action non autorisée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ressource ou reçu introuvable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Version, aperçu ou état en conflit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Accès expiré",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Document trop volumineux",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Encodage non supporté",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Contenu invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Fréquence dépassée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Transaction indisponible, consulter le reçu",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeEnCours"
+                }
+              }
+            },
+            "description": "Accepted"
+          }
+        },
+        "security": [
+          {
+            "AnimationSessionBearer": []
+          },
+          {
+            "AnimationSessionCookie": [],
+            "AnimationSessionTransport": []
           }
         ]
       }
@@ -118732,6 +118974,23 @@
               "type": "string",
               "format": "uuid",
               "title": "Animation Id"
+            }
+          },
+          {
+            "name": "guidage",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "const": "structure_v1",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Guidage"
             }
           }
         ],
@@ -137821,6 +138080,32 @@
           "chemin": {
             "type": "string",
             "title": "Chemin"
+          },
+          "acteur": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "ORGANISATEUR",
+                  "COMMERCANTS",
+                  "LOCALEO"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Acteur"
+          },
+          "correction": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CorrectionOrganisateurPayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "additionalProperties": false,
@@ -147038,6 +147323,25 @@
         ],
         "title": "CommandeBon"
       },
+      "CommandeConfirmee_AnimationDetailPayload_": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "CONFIRMEE",
+            "title": "Status"
+          },
+          "result": {
+            "$ref": "#/components/schemas/AnimationDetailPayload"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "result"
+        ],
+        "title": "CommandeConfirmee[AnimationDetailPayload]"
+      },
       "CommandeConfirmee_ContactPublicGestionPayload_": {
         "properties": {
           "status": {
@@ -152174,6 +152478,63 @@
         ],
         "title": "ControleAvancementPreparation"
       },
+      "ControlePublicationOrganisateurPayload": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "title": "Code"
+          },
+          "etat": {
+            "type": "string",
+            "enum": [
+              "VALIDE",
+              "A_FAIRE",
+              "A_VERIFIER"
+            ],
+            "title": "Etat"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          },
+          "acteur": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "ORGANISATEUR",
+                  "COMMERCANTS",
+                  "LOCALEO"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Acteur"
+          },
+          "correction": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CorrectionOrganisateurPayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "code",
+          "etat",
+          "message",
+          "acteur",
+          "correction"
+        ],
+        "title": "ControlePublicationOrganisateurPayload"
+      },
       "ControleResponse": {
         "properties": {
           "code": {
@@ -152460,6 +152821,81 @@
           "address"
         ],
         "title": "CoordonneesFacturation"
+      },
+      "CorrectionOrganisateurPayload": {
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "NAV_IDENTITE",
+              "NAV_DATES",
+              "NAV_DOTATION",
+              "NAV_REGLEMENT",
+              "NAV_PREPARATION",
+              "NAV_COMMERCANTS",
+              "NAV_PUBLICATION"
+            ],
+            "title": "Action"
+          },
+          "section": {
+            "type": "string",
+            "enum": [
+              "presentation",
+              "calendrier",
+              "lots",
+              "reglement",
+              "parcours",
+              "commerces",
+              "terrain",
+              "publication",
+              "vitrines",
+              "produits"
+            ],
+            "title": "Section"
+          },
+          "objet_ref": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 128,
+                "minLength": 1,
+                "pattern": "^[A-Za-z0-9_-]+$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Objet Ref"
+          },
+          "disponible": {
+            "type": "boolean",
+            "title": "Disponible"
+          },
+          "motif_indisponibilite": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 500,
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motif Indisponibilite"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "action",
+          "section",
+          "objet_ref",
+          "disponible",
+          "motif_indisponibilite"
+        ],
+        "title": "CorrectionOrganisateurPayload"
       },
       "CorrectionProduitInput": {
         "properties": {
@@ -204258,6 +204694,20 @@
             },
             "type": "array",
             "title": "Actions Requises"
+          },
+          "controles_publication": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/ControlePublicationOrganisateurPayload"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Controles Publication"
           }
         },
         "type": "object",
@@ -206889,6 +207339,23 @@
         "type": "http",
         "scheme": "bearer",
         "description": "Session commercant transmise via `Authorization: Bearer <session_token>`."
+      },
+      "AnimationSessionBearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Session organisateur Animation transmise via `Authorization: Bearer <session_token>` ; permissions et commune active contrôlées à chaque lecture."
+      },
+      "AnimationSessionCookie": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "__Host-localeo_animation",
+        "description": "Cookie HttpOnly de session Animation ; transport X-Animation-Session=cookie et origine du portail autorisée requis. Ce cookie ne donne aucun accès commerçant ou ERP."
+      },
+      "AnimationSessionTransport": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-Animation-Session",
+        "description": "Valeur `cookie` obligatoire avec le cookie Animation. La lecture GET ne demande pas le jeton CSRF d'une mutation."
       },
       "ManagementTokenBearer": {
         "type": "http",

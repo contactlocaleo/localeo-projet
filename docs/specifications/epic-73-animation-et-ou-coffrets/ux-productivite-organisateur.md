@@ -4,7 +4,8 @@ Complément du **17 novembre 2026** : [E73-EVO-PARCOURS-ORGANISATEUR](parcours-o
 précise les écarts après contre-expertise. **PO-13 remplace la destination de
 consultation ordinaire d'AP-01 par Bilan**, avec autorité serveur conservée ;
 PO-07 à PO-11 complètent la couverture et la recette des protections existantes.
-Cette évolution est spécifiée, non implémentée. Le bilan historique ci-dessous
+Cette évolution est réalisée localement ; ses preuves et limites figurent dans
+le [bilan PO](parcours-organisateur.md#12-réalisation-du-17-novembre-2026--bilan-et-reprise). Le bilan historique ci-dessous
 et les réserves AP-22 restent inchangés.
 
 ## Statut et périmètre

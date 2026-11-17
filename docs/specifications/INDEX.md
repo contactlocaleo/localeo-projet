@@ -8,9 +8,9 @@ Commencer par le README du sujet, puis consulter ses règles, contrats et arbitr
 
 ## Priorités en cours et à cadrer
 
-- **Extension E73 — 17 novembre 2026 : parcours organisateur**, [E73-EVO-PARCOURS-ORGANISATEUR](epic-73-animation-et-ou-coffrets/parcours-organisateur.md) : six améliorations spécifiées après audit et contre-expertise ; PO-01 à PO-30 et CU existants, arbitrages retenus, contrats et preuves prévus. Spécification seule ; implémentation et recette à effectuer, clôture historique conservée.
+- **Extension E73 — 17 novembre 2026 : parcours organisateur**, [E73-EVO-PARCOURS-ORGANISATEUR](epic-73-animation-et-ou-coffrets/parcours-organisateur.md) : six améliorations réalisées localement après audit et contre-expertise ; PO-01 à PO-30 et CU existants, contrats synchronisés et preuves synthétiques consignées. Qualification humaine/physique et mesures restant ouvertes, clôture historique conservée.
 
-- **Extension E73 — 17 novembre 2026 : création homogène des animations**, [E73-EVO-CREATION-UX-COMMUNE](epic-73-animation-et-ou-coffrets/perimetres-parcours-saas.md#règle-du-17-novembre-2026--création-homogène-des-animations) : mêmes conventions UX pour tous les modèles et supports, contenu adapté au modèle ; CU-01 à CU-06 validés et spécifiés, implémentation et recette à réaliser. Clôture historique conservée.
+- **Extension E73 — 17 novembre 2026 : création homogène des animations**, [E73-EVO-CREATION-UX-COMMUNE](epic-73-animation-et-ou-coffrets/perimetres-parcours-saas.md#règle-du-17-novembre-2026--création-homogène-des-animations) : mêmes conventions UX pour tous les modèles et supports, contenu adapté au modèle ; CU-01 à CU-06 réalisés avec les lots PO, recette exhaustive et humaine restant ouverte. Clôture historique conservée.
 
 - **Extension E73 — 15 novembre 2026 : gestion centralisée des lots et remises**, [E73-EVO-GESTION-LOTS](epic-73-animation-et-ou-coffrets/gestion-lots-remises.md) : entrée Suivre l’activité, lots externes/bons/coffrets gagnés, compteurs et actions directes, rappels e-mail/WebPush ; GL-01 à GL-18 et trois lots. Coffrets gagnés uniquement, rappels manuels individuels/groupés, après fin/archivage avec 48 heures minimum : choix confirmés. Trois lots implémentés, vérifications locales réalisées ; GL-16 partiel (budget de synthèse dépassé avec croissance étrangère). Clôture historique inchangée.
 

@@ -2,7 +2,11 @@
 
 Version du **17 novembre 2026** — **E73-EVO-PARCOURS-ORGANISATEUR**.
 
-Spécification des **six améliorations** demandées après l'[audit initial](../../audits/animation/localeo-animation-utilisabilite-pilotage-2026-11-17.md) et sa [contre-expertise indépendante](../../audits/animation/localeo-animation-contre-expertise-ux-2026-11-17.md). La demande utilisateur adopte les orientations et les propositions d'arbitrage décrites ici ; elle autorise leur spécification, sans implémentation. Les constats et limites de preuve des rapports restent distincts des comportements cibles.
+**Implémentation locale du 17 novembre 2026 réalisée.** Les six lots de cette
+extension sont réalisés ; le bilan de réalisation et les limites de recette
+figurent en fin de document. L'état historique de l'EPIC 73 reste conservé.
+
+Spécification des **six améliorations** demandées après l'[audit initial](../../audits/animation/localeo-animation-utilisabilite-pilotage-2026-11-17.md) et sa [contre-expertise indépendante](../../audits/animation/localeo-animation-contre-expertise-ux-2026-11-17.md). La demande de spécification adopte les orientations et les propositions d'arbitrage décrites ici ; la demande suivante autorise leur implémentation. Les constats et limites de preuve des rapports restent distincts des comportements cibles.
 
 Suivi : [backlog E73](../../roadmap/terminees/epic-73-animation-et-ou-coffrets-backlog.md) et [roadmap commune](../../roadmap/README.md). La clôture historique de l'EPIC 73 et les réserves des extensions antérieures sont conservées. **PO-01 à PO-30** complètent les critères existants ; les six **CU-01 à CU-06** restent la référence de création homogène, sans seconde définition ni nouvelle numérotation.
 
@@ -61,7 +65,7 @@ Acteur : organisateur autorisé à lire l'animation ; seules les actions permise
 
 | ID | Action, résultat observable et refus significatif |
 | --- | --- |
-| PO-01 | Chaque blocage de publication affiche un texte métier, ce qui manque, l'acteur attendu et l'action possible à proximité. Couvrir notamment `VITRINES_NON_PREPAREES` et `AUCUN_ASSET_PERSONNALISE`. Un code technique n'est jamais l'explication principale ; il peut rester dans un détail de diagnostic. Code inconnu ou acteur non attribuable : refus et **responsable à confirmer**, avec réessai/assistance adaptés, sans acteur ni correction inventés. |
+| PO-01 | Chaque blocage de publication affiche un texte métier, ce qui manque, l'acteur attendu et l'action possible à proximité. Couvrir notamment `VITRINES_NON_PREPAREES` et expliquer aussi l'avertissement `AUCUN_ASSET_PERSONNALISE`, sans le transformer en refus. Un code technique n'est jamais l'explication principale ; il peut rester dans un détail de diagnostic. Code inconnu ou acteur non attribuable : refus et **responsable à confirmer**, avec réessai/assistance adaptés, sans acteur ni correction inventés. |
 | PO-02 | Un organisateur autorisé à corriger ouvre le **champ, la section ou l'objet exact** signalé : présentation, calendrier, dotation, règlement, parcours, terrain, vitrines ou produits selon le modèle. Le retour rejoint le contrôle d'origine. Une tâche commerçant indique l'attente dans **Localeo Pro** ; une tâche Localeo indique l'attente de préparation. Aucun bouton organisateur ne donne accès à une interface d'un autre acteur ni ne valide à sa place. Un lecteur voit le motif et l'acteur, sans commande interdite. |
 | PO-03 | Enregistrer une correction confirmée relit le contrôle concerné et la disponibilité de publication sans reconstruire les autres éditeurs. L'échec de relecture affiche « vérification indisponible », conserve les données et n'affiche aucune coche de validation périmée comme actuelle. Une réponse antérieure à la correction est ignorée. Une publication ultérieure refait ses contrôles serveur. |
 | PO-04 | À l'entrée ordinaire de préparation, le guide propose le prochain contrôle utile selon sa progression serveur ; une étape explicitement demandée reste prioritaire. Le parcours manuel et la Chasse utilisent les mêmes conventions de correction/retour. Une étape déjà validée reste consultable. Aucun saut n'efface une saisie ni ne masque un blocage d'un autre acteur. |
@@ -289,7 +293,7 @@ Budgets de référence : reprendre les seuils chiffrés [E59](../epic-59-tests-p
 
 ## 9. Preuves prévues et traçabilité
 
-Toutes les preuves applicatives ci-dessous sont **à produire**. Les scripts cités existent mais n'ont pas été exécutés pour cette évolution. Un build ou un contrôle documentaire ne prouve ni PO-11 ni le délai commercial.
+Plan de preuve établi pendant la **spécification** : les mentions « non exécuté » ci-dessous décrivent cette phase historique. Les exécutions de l'implémentation et leurs limites figurent au §12. Un build ou un contrôle documentaire ne prouve ni PO-11 ni le délai commercial.
 
 | Critères / comportement et propriétaire | Preuve prévue et résultat actuel | Documentation / contrat | Démonstration / fixtures | Exploitation / livraison |
 | --- | --- | --- | --- | --- |
@@ -359,7 +363,7 @@ Estimations qualitatives, sans engagement de jours ; à affiner dans chaque dép
 | 4 — Chiffres directement trouvables (PO-12 à PO-15) | Répondre rapidement à « combien ont participé ? ». | Juste Prix : « Consulter le suivi » et entrée Résultats active ouvrent Bilan, sans détour par Fin ; données indisponibles jamais affichées comme zéro. |
 | 5 — Publication et reprise continues (PO-02 à PO-05/08) | Terminer la préparation sans rechercher les écrans. | Manuel + Chasse : contrôle → correction exacte → contrôle relu → publication confirmée → suite explicite, avec reprise de sous-étape et garde intacte. |
 
-## 11. Reprise et état des preuves
+## 11. Bilan de la spécification — historique
 
 **Phase réalisée ici : spécification uniquement.** Lot courant : conception des six améliorations, intégration des arbitrages et contrôles documentaires. Aucun changement de code, contrat généré, donnée métier, migration, générateur, configuration, commit, push ou déploiement.
 
@@ -373,3 +377,181 @@ Contrôles documentaires exécutés :
 - Les quatre dépôts applicatifs ne présentent aucune modification suivie ; le dépôt **Projet** seul est modifié par cette spécification et ses liens de suivi. Aucun test applicatif ni mesure de capacité ou d'usage n'a été exécuté.
 
 Prochain geste lors d'une demande d'implémentation : relever les versions/états Git des dépôts, choisir le premier lot prêt et son banc isolé, réaliser les éventuels prérequis producteur/conservation définis ici, puis relier chaque résultat réel aux critères de ce document. Conserver ici les lots restants et réserves ; aucun test prévu ne devient réussi par défaut.
+
+## 12. Réalisation du 17 novembre 2026 — bilan et reprise
+
+**Six lots réalisés localement ; qualification complète encore ouverte.**
+La clôture historique E73 ne change pas. Les essais du §9 ne sont pas adoptés
+implicitement. Les commits et push font l'objet d'une demande distincte, reçue
+après la réalisation locale. Aucun déploiement ou changement d'environnement
+réel n'a été effectué par cette réalisation.
+
+Arbres initialement propres, bases : Projet `bb320d0`, Backend `20ec49c`,
+Animation `74a45f2`. Les preuves portent sur leurs modifications locales.
+Marketplace et Commerçant sont inchangés. Node 24 sous Windows ; API navigateur
+entièrement synthétique. PostgreSQL 18 jetable local pour les preuves Backend,
+arrêté après recette. Aucune commande sur le compte ou le build TEST réel.
+
+### Comportements réalisés et traçabilité
+
+| Critères | Réalisation et preuve | Portée restant à qualifier |
+| --- | --- | --- |
+| PO-01/02/06 | Contrôles typés, message/acteur/correction autorisée, avertissement distinct ; droits propres à chaque éditeur ; refus de clôture visibles sans survol. Tests Backend guidage + navigateur `po-guidage` et `po-produits-permissions`. | Attribution collective non déterminable conservée comme « responsable à confirmer ». Pas de publication déduite d'un indicateur. |
+| PO-03/04/05 | Relecture ciblée après enregistrement, rejet des réponses anciennes, sous-étape utile et suite explicite ; reçu de publication confirmé rend immédiatement le guide consultatif même si la phase tarde. `po-guidage`. | La compréhension sans assistance exige des organisateurs réels. |
+| PO-07/10 | Gardes communes exploitation/configuration, refus/acceptation et historique ; abandon effectif du draft, sauvegarde libérant la garde avant navigation. `po-continuite`, génération et paramètres navigateur. | Reprise après crash non promise. Tests physiques de suspension et clavier virtuel à faire. |
+| PO-08 | URL validée des étapes/paramètres et objets autorisés ; navigation refusée ne modifie pas l'URL, retour garde la sous-étape ; objet absent expliqué. `po-guidage`, génération et tests `assistant-navigation`/`organizer-navigation`. | Aucun contenu privé persistant ni URL externe de correction. |
+| PO-09/26 | Dossier ciblé depuis le gain, page/curseur relus, détail et déclencheur restaurés ; retour parent autorisé conservé. `po-organisateur`, 1280/390 px, seconde page de gains. | Cible disparue expliquée ; la liste est relue, pas restaurée depuis une copie de données privées. |
+| PO-11, CU-04 | GET création sans effet, verrou/acteur/commune/accès et expiration ; tombstone conservé, formats de reçus compatibles. Client sans second POST après perte ; préparation ne traite que le 404 explicite comme absence ; clonage conservé. Tests PG/API, `po-continuite`, création navigateur et clonage. | Anciennes clés déjà purgées indéterminées ; limite de l'ancien POST direct en §6.3 conservée. |
+| PO-12/13/14 | Défaut selon phase, intention explicite prioritaire puis figée ; `CONSULTER_SUIVI` serveur vers Bilan ; Résultats actif ouvre Bilan, groupe déjà actif stable. Domaine + `organizer-navigation` + `po-organisateur`. | Cas navigateur détaillés Juste Prix ; politique commune aux six modèles testée au domaine. Pas de changement de phase au seul passage d'une date. |
+| PO-15/16 | Mesures et valeurs absentes conservées, indisponibilité distincte ; accès existants après les chiffres, sans total d'interventions fabriqué. `po-organisateur`, tests résultats et contrats embarqués. | Charge de la nouvelle arrivée Bilan à mesurer en environnement représentatif ; réserves AP-22 inchangées. |
+| PO-17 | « Suivi de l'animation », « Modèle », noms des lieux et actions réelles ; retrait des termes MVP et moteur des parcours touchés. Recettes guidage/réemploi et tests de navigation. | Ne constitue pas un inventaire lexical exhaustif de tous les écrans historiques. |
+| CU-01/02/03/05/06, PO-18/19 | Cadre commun existant complété : correction et retour au récapitulatif, contrôles cohérents avec la commande finale, champs compatibles conservés et changement de modèle expliqué ; « Créer le brouillon » / « Demander la préparation ». Création publique/locale, Chasse, tests formulaires/modèles. | Matrice comparative complète des six modèles × dotations réellement disponibles à achever. Délai jusqu'à publication et bénéfice réel non mesurés. |
+| PO-20/21/23 | Faible hauteur : les couches du shell deviennent défilantes ; guide à 320×256 CSS et texte 200 % avec champ, erreur, confirmation et commandes atteignables au clavier ; Bilan dans l'App entière sans débordement global. `po-guidage`, `po-organisateur`. | Reflow CSS équivalent, pas zoom natif du navigateur. Le guide isolé ne comprend pas le chrome App ; les deux portées de preuve sont distinctes. Lecteur d'écran et clavier virtuel physiques à faire. |
+| PO-22 | Labels réellement cliquables ≥44×44 CSS px : confirmation terrain, retrait terminal en 1280×1000, 320×1000, 768×1024 et 844×390. Banque `fin-animation`, mesure DOM. | Confirmation de clôture à compléter dans la recette physique ; aucune certification globale. |
+| PO-24 | Protocole et limites des émulations documentés ; aucun compactage de l'en-tête ajouté sans essai. | **Non exécuté sur appareils physiques iOS/Android/tablette et lecteur d'écran.** |
+| PO-25 | Accès explicite aux dossiers après clôture ; guide/capacités serveur existants, aucune séquence universelle ni tirage imposé. Régression du retrait `FORCER_RETRAIT` après fin/archivage : 8 cas. | Opérations de fin existantes conservées ; pas d'activation implicite CAF. |
+| PO-27/28/29/30 | Capacités avant commande, modèle lisible, sections indisponibles expliquées, nouvelles dates/dotation/accords et revalidations explicites. 31 cas navigateur clonage, 27 tests domaine/application/API et 10 de reprise des préparations. | Temps économisé jusqu'à nouvelle publication non mesuré ; réserve CL-11 conservée. |
+
+### Inventaire des accès depuis Bilan — PO-16
+
+Tous ces liens sont des lectures de l'animation courante, sous session et commune
+autorisées. Ils n'annoncent pas un nombre ni une urgence et ne relancent aucune
+commande. La destination relit ses données et applique ses droits actuels ; les
+informations privées ne sont pas copiées dans Bilan.
+
+| Accès | Source et portée | Fraîcheur et limite |
+| --- | --- | --- |
+| Participants | Liste existante, même animation ; `animation:lire`. | Lecture paginée à l'ouverture, aucune somme des pages. |
+| Validations | Liste existante, hors tombola publique ; `animation:lire`. | Validation n'est pas participant unique ; disponibilité selon phase. |
+| Messages habitants | Boîte existante de l'animation ; lecture autorisée, réponse selon ses capacités. | Aucun compteur non lu reconstruit ici. |
+| Gains et remises | Liste existante coffrets/lots, selon dotation et capacités. | Email envoyé, gain attribué et remise restent distincts. |
+| Dossiers de fin | Guide/liste serveur existants ; références de gains conservées. | Filtres À résoudre/Tous et compteurs existants inchangés. |
+| Suivi de l'animation | Ancien lien `live`, consultation/pilotage selon modèle ; retiré de ce bloc pour les éditions figées. | Aucun droit de clôture déduit de ce lien. |
+
+### Matrice de réemploi conservée — PO-28
+
+| Modèle | TEXTES | VISUELS | SCENARIO_PARAMETRES |
+| --- | --- | --- | --- |
+| Tombola locale | Disponible selon préparation autorisée | Conditionnel : médias contrôlés et réutilisables | Variante compatible uniquement |
+| Tombola publique | Idem | Idem | Variante compatible uniquement |
+| Passeport commerçant | Idem | Idem | Préparation/version reconnue uniquement |
+| Chasse commerçante | Idem | Idem | Positions/missions/continuité reconnues ; revalidation terrain nécessaire |
+| Juste Prix Local | Idem | Idem | Non supporté actuellement, motif affiché |
+| Jeu des vitrines | Idem | Idem | Non supporté actuellement, motif affiché |
+
+Cette table reflète les préparations et la liste blanche de
+`verifier_reemploi_scenario`, pas une nouvelle capacité du client. Une extension
+ou version inconnue est refusée. Les préparations absentes/partielles et médias
+révoqués restent soumis aux contrôles existants ; les fixtures du clonage
+couvrent les refus et réponses perdues. Aucun participant, consentement, accord,
+QR personnel, stock, paiement ou résultat exécuté n'est copié.
+
+### Preuves exécutées et tentatives conservées
+
+Les répertoires `tmp/` ci-dessous sont des artefacts locaux ignorés, dans leur
+dépôt applicatif ; les scripts et tests sont versionnés. Les passages ne sont
+pas additionnés comme s'ils provenaient d'une recette finale unique.
+
+- **Backend** : lanceur `py scripts/validation/test_isolated.py`, PostgreSQL local
+  jetable. `tmp/e73-po-backend-pg-159fcdfaf1314bacabe7be64e15f3de7/validated.xml` :
+  850 succès avant ajustements finaux ; puis `final-targeted.xml` : 103 succès et
+  `final-conservation.xml` : 6 succès après resserrement de la route de purge.
+  Après revue, `review-corrections.xml` : **146 succès**, puis
+  `review-minimum-metier.xml` : **1 succès** ; aucun échec/skip. Les empreintes du
+  code de ces derniers passages sont dans `review-source-proof.json`. Les deux
+  derniers correctifs concernent projection et OpenAPI, sans changement de
+  persistance par rapport aux preuves PG.
+- **Backend réemploi** : `tmp/e73-po-reemploi-regression.xml` : **27 succès**
+  (domaine, application, API), puis `tmp/e73-po-reemploi-preparation.xml` :
+  **10 succès** ; aucun échec/skip. Pas de nouvelle mesure N/10N.
+- **Animation, socle** : `pnpm check` **réussi**, typage, lint, **379 tests
+  réussis, aucun échec/skip**, puis build. Journal `tmp/po-final-check-2.log`.
+  Avertissement de taille du chunk principal conservé, seuil non relevé.
+  Empreintes des sources contrôlées : `tmp/po-final-source-proof.json`.
+  Premier passage :
+  typecheck/lint réussis, 373/374 tests ; attente d'URL de préparation corrigée
+  pour inclure exactement `?guidage=structure_v1`, sans relâcher l'assertion.
+- **Guidage** : 22 tests unitaires ciblés ; dernier
+  `node tests/browser/po-guidage.mjs` : **102 assertions réussies**, artefacts
+  `tmp/po-guidage-ze9mm4/`. Portée des composants réels et isolés décrite dans
+  `report.json` ; 76 assertions du passage précédent conservées séparément.
+- **Continuité** : 21 tests unitaires ciblés ; génération navigateur **96
+  contrôles**, paramètres sur **2 supports**. Journaux
+  `tmp/po-continuite-generation-8.log` et `tmp/po-continuite-parametres-5.log`.
+- **Création** : `po-creation-continuite.mjs`, dernier rapport
+  `tmp/po-creation-continuite-review-1/report.json` : **6 cas réussis**,
+  1280/390 px. Revue/correction des dates, réponse perdue, gardes, reçu en cours
+  puis confirmé/indéterminé, aucune seconde création. Rapport précédent à 4 cas
+  conservé. 21 tests HTTP/session après suppression des toasts doublons : succès.
+- **Droit spécialisé Juste Prix** : `po-produits-permissions.mjs`, **4 cas
+  réussis**, `tmp/po-produits-permissions-UPbKo3/` : correction, approbation et
+  demande de correction avec droit spécialisé ; lecteur sans commande.
+- **Navigation et retours** : `po-organisateur.mjs`, **19 cas réussis**,
+  `tmp/po-organisateur-UjcwVd/` ; premières tentatives conservées dans leurs
+  répertoires. Deux corrections de banc : nom réel du titre Fin et comparaison
+  du curseur indépendamment de l'ordre des paramètres ; comportement produit
+  inchangé pour ces corrections de preuve.
+- **Clonage** : `node tests/browser/animation-cloning.mjs`, **31 cas réussis**,
+  `tmp/clonage-browser-report-CGJ7IX/`, sans mutation réelle.
+- **Fin terminale et tailles** : `fin-animation.mjs retrait-terminee
+  retrait-archivee`, `PO_EXTENDED_VIEWPORTS=1`, **8 cas réussis**,
+  `tmp/fin-animation-captures-hfQZZo/confirmation-targets.json` ; build synthétique
+  `tmp/po-organisateur-UjcwVd/dist`. Première recette à 4 cas conservée.
+- **Banque historique workspace** : première tentative interrompue sur une
+  fixture dashboard utilisant `animations_a_action` alors que le client HEAD
+  attend déjà `actions_a_traiter.items` et `recommandation` ; journal
+  `tmp/po-workspace-ux-1.log`. Fixtures/labels exacts et garde réelle alignés,
+  sans modification du produit : reprise complète **40 parcours réussis**,
+  `tmp/po-workspace-ux-full-d90ddd4a0a8b4349a9a4df9320f24bf0/report.json` ;
+  passages distincts navigation **8 profils**, Bilan **4 profils**, dashboard
+  **8 profils**, répertoires `tmp/po-workspace-ux-{navigation,bilan,dashboard}-*/`.
+  Dernier passage navigation avec D1/D2 explicites :
+  `tmp/po-workspace-ux-navigation-final-af147633d16347f5b7c6548382a45de9/report.json`,
+  **8 profils réussis**, remplaçant le passage navigation précédent pour ces cas.
+  Build synthétique `UjcwVd` lu sans modification ; ces passages ne couvrent
+  pas les changements de transport HTTP testés séparément après ce build.
+
+### Revue indépendante et impacts
+
+Deux relectures distinctes, contrats et UX, ont suivi les implémentations.
+Corrections intégrées : droit Juste Prix spécifique, minimum Chasse invalide
+vers le champ du parcours, authentification OpenAPI du nouveau GET, doublon
+du retour au contrôle, récapitulatif cohérent avec les gardes, ordre des chiffres
+sur mobile, retour parent et focus au gain, erreurs locales sans toast doublon.
+Le `401` métier continue de révoquer la session. La seconde lecture des contrats
+ne retrouve aucun écart sur les trois points initiaux. Les revues ne remplacent
+pas les tests.
+
+| Impact | Résultat |
+| --- | --- |
+| Contrats/consommateurs | E41 régénéré depuis Backend, copie Animation identique ; SHA256 `f378f8823fd4d4e20b673865889968c61a47b19146eebab1b1df519a65b42bf9`. Anciens lecteurs sans opt-in conservés. E42 non concerné : aucune route habitant modifiée. |
+| Données/migration | Aucune migration DDL : reçu, verrou, colonnes et unicité existants. Minimisation/purge adaptées sans réécriture rétroactive des anciennes clés absentes. |
+| Exploitation | [Ordre de livraison et conservation](../../exploitation/technique/configurer-epic-73.md#parcours-organisateur--réalisation-locale-du-17-novembre-2026) ; aucun nouveau flag, secret, fournisseur ou job. Retour arrière conservant les tombstones. |
+| Démonstration | Pas de nouveau champ persistant ni de règle de génération : générateur inchangé. Fixtures navigateur enrichies pour permissions, corrections, reçus et capacités ; génération réelle non exécutée. |
+| ERP/Pro/Live/Coffrets | Aucun comportement consommateur modifié ; responsabilités et attentes Pro/Localeo expliquées, sans action à leur place. Pas de paiement ou de publication implicite. |
+| Performance | Pas de nouveau polling, agrégateur global ou balayage de listes. Nouvelle lecture de reçu bornée par clé ; arrivée Bilan réutilisant ses lectures. Mesures N/10N et hébergées nouvelles non exécutées ; AP-22/CL-11/GL-16 conservées. |
+
+### Reste à qualifier et prochain geste
+
+Les corrections fonctionnelles sont présentes et recettées sur les cas indiqués.
+Les critères humains/physiques et mesures ne sont pas déclarés terminés :
+
+1. Comparaison des six modèles et variantes/dotations exposées, puis tâches du
+   §9 avec organisateurs réels novices/habitués, mêmes données et référence avant
+   changement ; compréhension des acteurs, réussite et pertes de saisie.
+2. Guide complet dans le chrome App à zoom natif 400 %, texte 200 %, clavier
+   virtuel, rotation/suspension ; iOS, Android, tablette et lecteur d'écran ;
+   confirmation de clôture/retrait avec surfaces réelles et focus visible.
+3. Durée jusqu'à publication confirmée et réemploi, attente séparée ; aucune
+   promesse 5–10 minutes ni pourcentage de gain déduit des tests synthétiques.
+4. Charge représentative de Bilan et du rapprochement, sans lever les réserves
+   antérieures par les seuls passages locaux.
+
+Contrôles documentaires : `py scripts/check_guidance.py --changed --all-markdown`
+réussi (8 guides, 496 liens locaux, aucune erreur/alerte), puis
+`py scripts/sync_documentation.py --check-sources` réussi (151 documents).
+Ces contrôles ne valident pas les appareils physiques ni le délai commercial.
+
+Serveurs/browser propres aux bancs et PostgreSQL jetable arrêtés à leur fin ;
+aucun processus métier partagé interrompu. Prochaine action : préparer cette
+qualification, puis une livraison distincte lorsqu'elle est demandée.

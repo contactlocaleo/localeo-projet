@@ -10,9 +10,11 @@ existants, sans second backlog d'exécution. Entrée selon phase, accès Bilan
 actif, liens vers les interventions et capacités réelles de réemploi retenus ;
 mémoire de groupe, compactage mobile et filtre initial de fin restent des essais.
 
-**Spécification seule ; aucun lot implémenté ou recetté au titre de cette
-évolution.** Les dépendances contractuelles de correction et de rapprochement
-des commandes sont explicites ; les lots indépendants restent réalisables.
+**Six lots réalisés localement dans Backend et Animation**, avec contrat E41
+synchronisé. Le [bilan d’acceptation](../../specifications/epic-73-animation-et-ou-coffrets/parcours-organisateur.md#12-réalisation-du-17-novembre-2026--bilan-et-reprise)
+distingue tests automatisés, essais d’usage et vérifications non exécutées.
+La qualification humaine/physique, la matrice exhaustive de création et les
+mesures de durée/capacité restent ouvertes ; aucun déploiement effectué.
 Clôture historique E73 et réserves AP-22, CL-11 et GL-16 conservées.
 Cette adoption ciblée est distincte du statut initial de proposition des audits
 et ne vaut pas adoption de toutes leurs idées.
@@ -26,10 +28,10 @@ cadre, progression, navigation, champs, erreurs, confirmations et reprise homog�
 contenu et nombre d’étapes adaptés aux besoins de chaque modèle. Création,
 demande de préparation et publication restent explicitement distinctes.
 
-**Règle validée et spécifiée, non implémentée au titre de cette évolution.**
-Le cadre partagé existant est à compléter et vérifier ; aucune conformité de tous
-les parcours n’est présumée. Reste à faire : réalisation des écarts puis recette
-comparative de création, modèles/dotations et supports. Contrats métier conservés,
+**Règle validée, spécifiée et réalisée avec les lots PO.** Le cadre partagé est
+complété et testé sur les parcours documentés ; aucune conformité de tous les
+parcours n’est présumée. Reste à faire : recette comparative exhaustive de
+création, modèles/dotations et supports, puis qualification humaine. Contrats métier conservés,
 impacts et preuves attendues dans la source canonique. Clôture historique E73,
 critères précédents et réserves existantes inchangés. Les autres axes de l’audit
 ci-dessous restent des propositions ; cette décision ne les adopte pas implicitement.
