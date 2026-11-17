@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Live - API backend Epic 42",
     "description": "Vue OpenAPI 3.1 des contrats publics, editoriaux et techniques de Localeo Live.",
-    "version": "1.0.0+b7bcad9"
+    "version": "1.0.0+9805eec"
   },
   "paths": {
     "/public/animation-locale/animations/{animation_id}/contact-public": {
@@ -3171,6 +3171,243 @@
           },
           "429": {
             "description": "Fréquence dépassée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Transaction indisponible, consulter le reçu",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/localeo-live/participations/{participation_id}/vitrines": {
+      "get": {
+        "tags": [
+          "Moteur de jeu Live"
+        ],
+        "summary": "Vitrines Participant",
+        "operationId": "vitrines_participant_public_localeo_live_participations__participation_id__vitrines_get",
+        "parameters": [
+          {
+            "name": "participation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Participation Id"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2048
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "stepId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Stepid"
+            }
+          },
+          {
+            "name": "moteurs_supportes",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 512
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Moteurs Supportes"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageVitrinesParticipant"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Demande invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentification requise",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Action non autorisée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ressource ou reçu introuvable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Version, aperçu ou état en conflit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Accès expiré",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Document trop volumineux",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Encodage non supporté",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Contenu invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Fréquence de lecture dépassée ; attendre le délai indiqué avant de réessayer.",
+            "headers": {
+              "Retry-After": {
+                "description": "Délai minimal avant une nouvelle lecture, en secondes.",
+                "schema": {
+                  "type": "string",
+                  "pattern": "^[1-9][0-9]*$"
+                }
+              },
+              "Cache-Control": {
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -19298,6 +19535,28 @@
         ],
         "title": "ChoixReferencePayload"
       },
+      "ChoixVitrine": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "Id"
+          },
+          "text": {
+            "type": "string",
+            "maxLength": 120,
+            "title": "Text"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "text"
+        ],
+        "title": "ChoixVitrine"
+      },
       "ChronologieResponse": {
         "properties": {
           "items": {
@@ -20899,6 +21158,25 @@
         ],
         "title": "CommandeConfirmee[DotationPayload]"
       },
+      "CommandeConfirmee_ExploitationVitrinesPayload_": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "CONFIRMEE",
+            "title": "Status"
+          },
+          "result": {
+            "$ref": "#/components/schemas/ExploitationVitrinesPayload"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "result"
+        ],
+        "title": "CommandeConfirmee[ExploitationVitrinesPayload]"
+      },
       "CommandeConfirmee_ExportOrganisationPayload_": {
         "properties": {
           "status": {
@@ -21126,6 +21404,25 @@
           "result"
         ],
         "title": "CommandeConfirmee[PreparationMutationPayload]"
+      },
+      "CommandeConfirmee_PropositionVitrinePayload_": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "CONFIRMEE",
+            "title": "Status"
+          },
+          "result": {
+            "$ref": "#/components/schemas/PropositionVitrinePayload"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "result"
+        ],
+        "title": "CommandeConfirmee[PropositionVitrinePayload]"
       },
       "CommandeConfirmee_QuotaGenerationPayload_": {
         "properties": {
@@ -23151,6 +23448,33 @@
         ],
         "title": "CommerceSelection"
       },
+      "CommerceVitrinePayload": {
+        "properties": {
+          "merchantId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Merchantid"
+          },
+          "commerceNom": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Commercenom"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "merchantId",
+          "commerceNom"
+        ],
+        "title": "CommerceVitrinePayload"
+      },
       "CommuneActualiteAnimationPayload": {
         "properties": {
           "id": {
@@ -23801,6 +24125,43 @@
           "virements"
         ],
         "title": "CompteursSectionsReversement"
+      },
+      "CompteursVitrinesPayload": {
+        "properties": {
+          "reponses": {
+            "type": "integer",
+            "title": "Reponses"
+          },
+          "intrus_trouves": {
+            "type": "integer",
+            "title": "Intrus Trouves"
+          },
+          "commerces_reussis": {
+            "type": "integer",
+            "title": "Commerces Reussis"
+          },
+          "observed_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Observed At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "reponses",
+          "intrus_trouves",
+          "commerces_reussis",
+          "observed_at"
+        ],
+        "title": "CompteursVitrinesPayload"
       },
       "ConditionMission": {
         "properties": {
@@ -25443,6 +25804,86 @@
         ],
         "title": "ContenuCommercantPasseport"
       },
+      "ContenuVitrine-Input": {
+        "properties": {
+          "instruction": {
+            "type": "string",
+            "maxLength": 2000,
+            "title": "Instruction",
+            "default": ""
+          },
+          "intruderDescription": {
+            "type": "string",
+            "maxLength": 1000,
+            "title": "Intruderdescription",
+            "default": ""
+          },
+          "placementInstructions": {
+            "type": "string",
+            "maxLength": 1000,
+            "title": "Placementinstructions",
+            "default": ""
+          },
+          "windowLocation": {
+            "type": "string",
+            "maxLength": 2000,
+            "title": "Windowlocation",
+            "default": ""
+          },
+          "challenge": {
+            "$ref": "#/components/schemas/DefiVitrine"
+          },
+          "correctChoiceId": {
+            "type": "string",
+            "maxLength": 64,
+            "title": "Correctchoiceid",
+            "default": ""
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "ContenuVitrine"
+      },
+      "ContenuVitrine-Output": {
+        "properties": {
+          "instruction": {
+            "type": "string",
+            "maxLength": 2000,
+            "title": "Instruction",
+            "default": ""
+          },
+          "intruderDescription": {
+            "type": "string",
+            "maxLength": 1000,
+            "title": "Intruderdescription",
+            "default": ""
+          },
+          "placementInstructions": {
+            "type": "string",
+            "maxLength": 1000,
+            "title": "Placementinstructions",
+            "default": ""
+          },
+          "windowLocation": {
+            "type": "string",
+            "maxLength": 2000,
+            "title": "Windowlocation",
+            "default": ""
+          },
+          "challenge": {
+            "$ref": "#/components/schemas/DefiVitrine"
+          },
+          "correctChoiceId": {
+            "type": "string",
+            "maxLength": 64,
+            "title": "Correctchoiceid",
+            "default": ""
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "ContenuVitrine"
+      },
       "ContexteAccueilMarketplacePayload": {
         "properties": {
           "origineType": {
@@ -25841,6 +26282,39 @@
         ],
         "title": "ControleResponse"
       },
+      "ControleVitrineInput": {
+        "properties": {
+          "expectedRevision": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Expectedrevision"
+          },
+          "contentRevision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Contentrevision"
+          },
+          "installationRevision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Installationrevision"
+          },
+          "observations": {
+            "type": "string",
+            "maxLength": 1000,
+            "title": "Observations",
+            "default": ""
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expectedRevision",
+          "contentRevision",
+          "installationRevision"
+        ],
+        "title": "ControleVitrineInput"
+      },
       "ConversationHabitantPayload": {
         "properties": {
           "id": {
@@ -26052,6 +26526,28 @@
           "motif"
         ],
         "title": "CorrectionProduitInput"
+      },
+      "CorrectionVitrineInput": {
+        "properties": {
+          "expectedRevision": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Expectedrevision"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 1,
+            "title": "Motif"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expectedRevision",
+          "motif"
+        ],
+        "title": "CorrectionVitrineInput"
       },
       "CorrigerAnimationRequest": {
         "properties": {
@@ -27574,6 +28070,18 @@
       },
       "CreerInscriptionAnimationRequest": {
         "properties": {
+          "vitrine_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Vitrine Id"
+          },
           "source_diffusion_code": {
             "anyOf": [
               {
@@ -29269,6 +29777,27 @@
           "normalization"
         ],
         "title": "DefiTexteJouable"
+      },
+      "DefiVitrine": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "SINGLE_CHOICE",
+            "title": "Type",
+            "default": "SINGLE_CHOICE"
+          },
+          "choices": {
+            "items": {
+              "$ref": "#/components/schemas/ChoixVitrine"
+            },
+            "type": "array",
+            "maxItems": 6,
+            "title": "Choices"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "DefiVitrine"
       },
       "DemandeFacturationPaiement": {
         "properties": {
@@ -33516,6 +34045,25 @@
         ],
         "title": "EnregistrerTemplateGenerationInput"
       },
+      "EnregistrerVitrineInput": {
+        "properties": {
+          "expectedRevision": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Expectedrevision"
+          },
+          "vitrine": {
+            "$ref": "#/components/schemas/ContenuVitrine-Input"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expectedRevision",
+          "vitrine"
+        ],
+        "title": "EnregistrerVitrineInput"
+      },
       "EnveloppeCommande": {
         "properties": {
           "engineContractVersion": {
@@ -36904,6 +37452,100 @@
           "revision"
         ],
         "title": "ExploitationJustePrixPayload"
+      },
+      "ExploitationVitrinesPayload": {
+        "properties": {
+          "phase": {
+            "type": "string",
+            "enum": [
+              "OUVERT",
+              "SUSPENDU",
+              "CLOTURE_EN_COURS",
+              "CLOTUREE",
+              "ANNULEE"
+            ],
+            "title": "Phase"
+          },
+          "motif": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motif"
+          },
+          "revision": {
+            "type": "integer",
+            "title": "Revision"
+          },
+          "traites": {
+            "type": "integer",
+            "title": "Traites"
+          },
+          "suspensionId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Suspensionid"
+          },
+          "configurationId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Configurationid"
+          },
+          "incidents": {
+            "items": {
+              "$ref": "#/components/schemas/IncidentVitrinePayload"
+            },
+            "type": "array",
+            "title": "Incidents"
+          },
+          "allowedActions": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Allowedactions"
+          },
+          "vitrines": {
+            "items": {
+              "$ref": "#/components/schemas/CommerceVitrinePayload"
+            },
+            "type": "array",
+            "maxItems": 100,
+            "title": "Vitrines"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "phase",
+          "motif",
+          "revision",
+          "traites",
+          "suspensionId",
+          "configurationId",
+          "incidents",
+          "allowedActions",
+          "vitrines"
+        ],
+        "title": "ExploitationVitrinesPayload"
       },
       "ExportOrganisationPayload": {
         "properties": {
@@ -42403,6 +43045,92 @@
         ],
         "title": "IncidentCommandeLotsPayload"
       },
+      "IncidentVitrineInput": {
+        "properties": {
+          "expectedRevision": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Expectedrevision"
+          },
+          "motif": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 1,
+            "title": "Motif"
+          },
+          "merchantIds": {
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "type": "array",
+            "maxItems": 100,
+            "minItems": 1,
+            "title": "Merchantids"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expectedRevision",
+          "motif",
+          "merchantIds"
+        ],
+        "title": "IncidentVitrineInput"
+      },
+      "IncidentVitrinePayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "revision": {
+            "type": "integer",
+            "title": "Revision"
+          },
+          "merchantIds": {
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "type": "array",
+            "title": "Merchantids"
+          },
+          "motif": {
+            "type": "string",
+            "title": "Motif"
+          },
+          "suspensionId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Suspensionid"
+          },
+          "retabli": {
+            "type": "boolean",
+            "title": "Retabli"
+          },
+          "controlledMerchantIds": {
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "type": "array",
+            "title": "Controlledmerchantids"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "revision",
+          "merchantIds",
+          "motif",
+          "suspensionId",
+          "retabli"
+        ],
+        "title": "IncidentVitrinePayload"
+      },
       "IndicateurActiviteDTO": {
         "properties": {
           "code": {
@@ -43237,6 +43965,39 @@
           "reglement_version"
         ],
         "title": "InscrireTombolaPubliqueRequest"
+      },
+      "InstallationVitrineInput": {
+        "properties": {
+          "expectedRevision": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Expectedrevision"
+          },
+          "contentRevision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Contentrevision"
+          },
+          "expectedInstallationRevision": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Expectedinstallationrevision"
+          },
+          "observations": {
+            "type": "string",
+            "maxLength": 1000,
+            "title": "Observations",
+            "default": ""
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expectedRevision",
+          "contentRevision",
+          "expectedInstallationRevision"
+        ],
+        "title": "InstallationVitrineInput"
       },
       "InstructionKit": {
         "properties": {
@@ -46231,6 +46992,68 @@
         },
         "type": "object",
         "title": "MasquerProfilCommercantRequest"
+      },
+      "MaterielVitrinePayload": {
+        "properties": {
+          "contentRevision": {
+            "type": "integer",
+            "title": "Contentrevision"
+          },
+          "installationRevision": {
+            "type": "integer",
+            "title": "Installationrevision"
+          },
+          "installedAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Installedat"
+          },
+          "controlledAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Controlledat"
+          },
+          "controleRevision": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Controlerevision"
+          },
+          "pret": {
+            "type": "boolean",
+            "title": "Pret"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "contentRevision",
+          "installationRevision",
+          "installedAt",
+          "controlledAt",
+          "controleRevision",
+          "pret"
+        ],
+        "title": "MaterielVitrinePayload"
       },
       "MediaEmbarque": {
         "properties": {
@@ -54939,6 +55762,39 @@
         ],
         "title": "PageParticipantsJustePrixPayload"
       },
+      "PageParticipantsVitrinesPayload": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ParticipantVitrinesPayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "compteurs": {
+            "$ref": "#/components/schemas/CompteursVitrinesPayload"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "compteurs",
+          "next_cursor"
+        ],
+        "title": "PageParticipantsVitrinesPayload"
+      },
       "PagePoiAnimationPayload": {
         "properties": {
           "items": {
@@ -56367,6 +57223,95 @@
           "next_cursor"
         ],
         "title": "PageVerificationsImport"
+      },
+      "PageVitrinesParticipant": {
+        "properties": {
+          "participantId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Participantid"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/VitrineParticipant"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More"
+          },
+          "definitionVersion": {
+            "type": "integer",
+            "title": "Definitionversion"
+          },
+          "progressionVersion": {
+            "type": "integer",
+            "title": "Progressionversion"
+          },
+          "exploitationRevision": {
+            "type": "integer",
+            "title": "Exploitationrevision"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "participantId",
+          "items",
+          "next_cursor",
+          "has_more",
+          "definitionVersion",
+          "progressionVersion",
+          "exploitationRevision"
+        ],
+        "title": "PageVitrinesParticipant"
+      },
+      "PageVitrinesPreparationPayload": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/PropositionVitrinePayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "next_cursor",
+          "has_more"
+        ],
+        "title": "PageVitrinesPreparationPayload"
       },
       "Page_Alerte_": {
         "properties": {
@@ -58175,6 +59120,57 @@
           "reference"
         ],
         "title": "ParticipantScanPayload"
+      },
+      "ParticipantVitrinesPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "reference": {
+            "type": "string",
+            "title": "Reference"
+          },
+          "nom": {
+            "type": "string",
+            "title": "Nom"
+          },
+          "prenom": {
+            "type": "string",
+            "title": "Prenom"
+          },
+          "inscrit_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Inscrit At"
+          },
+          "eligible": {
+            "type": "boolean",
+            "title": "Eligible"
+          },
+          "progression": {
+            "type": "number",
+            "title": "Progression"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "reference",
+          "nom",
+          "prenom",
+          "inscrit_at",
+          "eligible",
+          "progression",
+          "statut"
+        ],
+        "title": "ParticipantVitrinesPayload"
       },
       "ParticipantsEmailPagePayload": {
         "properties": {
@@ -62379,6 +63375,32 @@
         ],
         "title": "ProgressionClotureJustePrixPayload"
       },
+      "ProgressionClotureVitrinesPayload": {
+        "properties": {
+          "phase": {
+            "type": "string",
+            "enum": [
+              "OUVERT",
+              "SUSPENDU",
+              "CLOTURE_EN_COURS",
+              "CLOTUREE",
+              "ANNULEE"
+            ],
+            "title": "Phase"
+          },
+          "traites": {
+            "type": "integer",
+            "title": "Traites"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "phase",
+          "traites"
+        ],
+        "title": "ProgressionClotureVitrinesPayload"
+      },
       "ProgressionExport": {
         "properties": {
           "phase": {
@@ -62708,6 +63730,9 @@
           },
           {
             "$ref": "#/components/schemas/ProjectionParticipantJustePrix"
+          },
+          {
+            "$ref": "#/components/schemas/ProjectionParticipantVitrines"
           }
         ],
         "title": "ProjectionParticipant",
@@ -62715,6 +63740,7 @@
           "propertyName": "type",
           "mapping": {
             "CHASSE_TRESOR_COMMERCANTE": "#/components/schemas/ProjectionParticipantChasse",
+            "JEU_VITRINES": "#/components/schemas/ProjectionParticipantVitrines",
             "JUSTE_PRIX_LOCAL": "#/components/schemas/ProjectionParticipantJustePrix",
             "PASSEPORT_COMMERCANT": "#/components/schemas/ProjectionParticipantPasseport",
             "TOMBOLA_LOCALE": "#/components/schemas/ProjectionParticipantTombola",
@@ -63366,6 +64392,144 @@
         ],
         "title": "ProjectionParticipantTombolaPublique"
       },
+      "ProjectionParticipantVitrines": {
+        "properties": {
+          "participantId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Participantid"
+          },
+          "animationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animationid"
+          },
+          "engineContractVersion": {
+            "type": "string",
+            "const": "1.0",
+            "title": "Enginecontractversion"
+          },
+          "definitionVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Definitionversion"
+          },
+          "progressionVersion": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Progressionversion"
+          },
+          "exploitationRevision": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Exploitationrevision"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "INSCRIT",
+              "EN_ATTENTE_DEBUT",
+              "EN_COURS",
+              "TERMINE",
+              "A_REGULARISER",
+              "CLOTURE"
+            ],
+            "title": "Statut"
+          },
+          "actionsAutorisees": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "START_GAME",
+                "SCAN_QR",
+                "SUBMIT_ANSWER",
+                "CONTINUE",
+                "REQUEST_HINT",
+                "REQUEST_HELP"
+              ]
+            },
+            "type": "array",
+            "title": "Actionsautorisees"
+          },
+          "progression": {
+            "$ref": "#/components/schemas/ProgressionParticipant"
+          },
+          "medias": {
+            "items": {
+              "$ref": "#/components/schemas/MediaEmbarque"
+            },
+            "type": "array",
+            "title": "Medias"
+          },
+          "themeVisuel": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ThemePublic"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "type": {
+            "type": "string",
+            "const": "JEU_VITRINES",
+            "title": "Type"
+          },
+          "merchantProofRequired": {
+            "type": "boolean",
+            "title": "Merchantproofrequired"
+          },
+          "nombreVitrines": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 1.0,
+            "title": "Nombrevitrines"
+          },
+          "requiredDistinctWindows": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 1.0,
+            "title": "Requireddistinctwindows"
+          },
+          "solutionsRevelees": {
+            "type": "boolean",
+            "title": "Solutionsrevelees",
+            "default": false
+          },
+          "phaseExploitation": {
+            "type": "string",
+            "enum": [
+              "OUVERT",
+              "SUSPENDU",
+              "CLOTURE_EN_COURS",
+              "CLOTUREE",
+              "ANNULEE"
+            ],
+            "title": "Phaseexploitation",
+            "default": "OUVERT"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "participantId",
+          "animationId",
+          "engineContractVersion",
+          "definitionVersion",
+          "progressionVersion",
+          "exploitationRevision",
+          "statut",
+          "actionsAutorisees",
+          "progression",
+          "medias",
+          "type",
+          "merchantProofRequired",
+          "nombreVitrines",
+          "requiredDistinctWindows"
+        ],
+        "title": "ProjectionParticipantVitrines"
+      },
       "ProjetQualifiePayload": {
         "properties": {
           "id": {
@@ -63810,6 +64974,93 @@
           "produit"
         ],
         "title": "PropositionProduitPayload"
+      },
+      "PropositionVitrinePayload": {
+        "properties": {
+          "commercant_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Commercant Id"
+          },
+          "commerce_nom": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Commerce Nom"
+          },
+          "revision": {
+            "type": "integer",
+            "title": "Revision"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "A_COMPLETER",
+              "PROPOSE",
+              "VALIDE",
+              "A_CORRIGER"
+            ],
+            "title": "Statut"
+          },
+          "approvedRevision": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Approvedrevision"
+          },
+          "motif": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motif"
+          },
+          "vitrine": {
+            "$ref": "#/components/schemas/ContenuVitrine-Output"
+          },
+          "materiel": {
+            "$ref": "#/components/schemas/MaterielVitrinePayload"
+          },
+          "modifiable": {
+            "type": "boolean",
+            "title": "Modifiable"
+          },
+          "allowedActions": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Allowedactions"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "commercant_id",
+          "revision",
+          "statut",
+          "approvedRevision",
+          "motif",
+          "vitrine",
+          "materiel",
+          "modifiable",
+          "allowedActions"
+        ],
+        "title": "PropositionVitrinePayload"
       },
       "ProspectPrioritePayload": {
         "properties": {
@@ -67291,6 +68542,8 @@
               "ANSWER_INCORRECT",
               "PRICE_FOUND",
               "PRICE_NOT_FOUND",
+              "INTRUDER_FOUND",
+              "INTRUDER_NOT_FOUND",
               "CONTENT_CONFIRMED",
               "HINT_OPENED",
               "HELP_APPLIED",
@@ -69255,6 +70508,18 @@
             "maxLength": 320,
             "minLength": 3,
             "title": "Email"
+          },
+          "vitrine_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Vitrine Id"
           }
         },
         "type": "object",
@@ -71061,6 +72326,57 @@
         ],
         "title": "ResultatWorkerGenerationPayload"
       },
+      "RetablissementVitrineInput": {
+        "properties": {
+          "expectedRevision": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Expectedrevision"
+          },
+          "incidentRevision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Incidentrevision"
+          },
+          "suspensionId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Suspensionid"
+          },
+          "configurationId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Configurationid"
+          },
+          "merchantIds": {
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "type": "array",
+            "maxItems": 100,
+            "minItems": 1,
+            "title": "Merchantids"
+          },
+          "observations": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 1,
+            "title": "Observations"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expectedRevision",
+          "incidentRevision",
+          "suspensionId",
+          "configurationId",
+          "merchantIds",
+          "observations"
+        ],
+        "title": "RetablissementVitrineInput"
+      },
       "RetirageCommande": {
         "properties": {
           "expected_version": {
@@ -71578,6 +72894,21 @@
           "brief"
         ],
         "title": "RevisionPromptGenerationInput"
+      },
+      "RevisionVitrineInput": {
+        "properties": {
+          "expectedRevision": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Expectedrevision"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expectedRevision"
+        ],
+        "title": "RevisionVitrineInput"
       },
       "Revocation": {
         "properties": {
@@ -78606,6 +79937,124 @@
           "links"
         ],
         "title": "VirementReversementSuivi"
+      },
+      "VitrineParticipant": {
+        "properties": {
+          "stepId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Stepid"
+          },
+          "merchantId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Merchantid"
+          },
+          "commerceNom": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Commercenom"
+          },
+          "instruction": {
+            "type": "string",
+            "title": "Instruction"
+          },
+          "windowLocation": {
+            "type": "string",
+            "title": "Windowlocation"
+          },
+          "choices": {
+            "items": {
+              "$ref": "#/components/schemas/ChoixVitrine"
+            },
+            "type": "array",
+            "maxItems": 6,
+            "minItems": 2,
+            "title": "Choices"
+          },
+          "choiceId": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Choiceid"
+          },
+          "trouve": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trouve"
+          },
+          "passageValide": {
+            "type": "boolean",
+            "title": "Passagevalide"
+          },
+          "compte": {
+            "type": "boolean",
+            "title": "Compte"
+          },
+          "reponseAutorisee": {
+            "type": "boolean",
+            "title": "Reponseautorisee"
+          },
+          "pinAutorise": {
+            "type": "boolean",
+            "title": "Pinautorise",
+            "default": false
+          },
+          "correctChoiceId": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Correctchoiceid"
+          },
+          "intruderDescription": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Intruderdescription"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "stepId",
+          "merchantId",
+          "instruction",
+          "windowLocation",
+          "choices",
+          "choiceId",
+          "trouve",
+          "passageValide",
+          "compte",
+          "reponseAutorisee"
+        ],
+        "title": "VitrineParticipant"
       },
       "WebPushKeysRequest": {
         "properties": {

@@ -32,7 +32,7 @@ Commencer par le README du sujet, puis consulter ses règles, contrats et arbitr
 
 - **À faire : EPIC 79**, [Escape Game assisté par l’IA — cadrage](../roadmap/a-faire/epic-79-escape-game-assiste-ia-backlog.md) du 6 novembre : 7 US, 18 critères cibles ; préparation IA et validation avant publication selon le processus de la chasse E55, parcours terrain commune/commerces guidé par Live, un téléphone seul/en famille confirmés. Quatre arbitrages résolus, quatre ouverts ; spécification détaillée à rédiger.
 
-- **À faire : EPIC 78**, [Le jeu des vitrines — cadrage](../roadmap/a-faire/epic-78-jeu-des-vitrines-backlog.md) du 6 novembre : 6 US, 16 critères cibles ; repérer un intrus dans les vitrines participantes, notamment à Noël/Pâques, avec préparation et parcours Live mobile. Modalités et offre à arbitrer ; spécification détaillée à rédiger.
+- **En cours : EPIC 78**, [Le jeu des vitrines — spécification](epic-78-jeu-des-vitrines/README.md) du 15 novembre : 6 US, 16 critères ; QCM à réponse unique, préparation Pro et contrôle organisateur, qualification comme le Juste Prix local, forfait standard. Sept arbitrages résolus ; implémentation locale, contrats et [preuves de réalisation](epic-78-jeu-des-vitrines/bilan-realisation.md), modèle inactif.
 
 - **En cours : EPIC 77**, [Le Juste Prix Local](epic-77-juste-prix-local/README.md), spécification V1 du 13 novembre : 8 US, 20 critères cibles ; produit/prix proposé dans Pro puis approuvé, estimation définitive, tolérance commune, seuil pour le tirage et passages paramétrables dans les deux ordres. Résultat immédiat, prix après clôture, forfait standard ; quatre arbitrages résolus ; implémentation locale, preuves et réserves au bilan.
 
@@ -99,6 +99,8 @@ Commencer par le README du sujet, puis consulter ses règles, contrats et arbitr
 | 74 | [Tombola publique sans commerçant](epic-74-tombola-publique/README.md) | En cours | Backend/ERP, Animation, Marketplace/Live ; Pro pour remise et non-régression |
 | 75 | [Mots croisés assistés par l’IA](epic-75-mots-croises-assistes-ia/README.md) | À faire | Backend/ERP, Animation, Marketplace/Live, Pro ; préparation OnBoard et exploitation partagées |
 | 77 | [Le Juste Prix Local](epic-77-juste-prix-local/README.md) | En cours | Backend/ERP, Animation, Commerçant, Marketplace/Live ; démonstration et exploitation |
+
+| 78 | [Le jeu des vitrines](epic-78-jeu-des-vitrines/README.md) | En cours | Backend/ERP, Animation, Commerçant, Marketplace/Live ; démonstration et exploitation |
 
 ## Contrats et historique
 

@@ -529,3 +529,18 @@ La [source éditable](../../produit/formation/commercant/guide-quotidien-commerc
 Après acceptation de sa participation, le commerçant principal renseigne « Votre produit et son juste prix » : nom, description, unité/format, prix TTC en euros et visuel fourni facultatif sans prix visible. Enregistrer conserve le brouillon ; « Proposer à l’organisateur » soumet la version enregistrée. Une correction est motivée, une modification annule l’approbation ; après publication, produit et prix sont figés. Les salariés n’ont pas accès à cette préparation. Le jeu réutilise leur validation de passage selon les droits existants lorsqu’elle est requise.
 
 Le modèle reste inactif avant qualification de livraison. [Parcours et preuves E77](../epic-77-juste-prix-local/README.md).
+
+## Préparation du jeu des vitrines — E78
+
+Après acceptation de la participation, le compte principal retrouve la préparation
+dans l’invitation et la fiche de l’animation. Il renseigne consigne, emplacement,
+intrus et installation, puis deux à six choix distincts dont une bonne réponse
+privée. Enregistrer conserve un brouillon incomplet ; proposer soumet la version
+enregistrée. Les salariés ne disposent pas de ces actions de contenu.
+
+Une fois le contenu approuvé, attester l’installation réelle de cette version.
+L’organisateur effectue ensuite son propre contrôle sur place. Le kit distingue
+guide privé et support public : le QR public cible la vitrine, sans solution ni
+accès personnel. Après publication la préparation est figée ; signaler une anomalie
+à l’organisateur. Un reçu de commande ancien est suivi d’une lecture courante avant
+de réactiver les actions. [Parcours et preuves E78](../epic-78-jeu-des-vitrines/README.md).

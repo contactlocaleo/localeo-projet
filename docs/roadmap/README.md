@@ -104,8 +104,8 @@ après ajout des EPIC 77 à 79 le 6 novembre 2026.
 | Etat | Epics | Dossier |
 | --- | ---: | --- |
 | Terminees | 64 | [terminees/](terminees/README.md) |
-| A faire | 10 | [a-faire/](a-faire/README.md) |
-| En cours | 5 | [en-cours/](en-cours/README.md) |
+| A faire | 9 | [a-faire/](a-faire/README.md) |
+| En cours | 6 | [en-cours/](en-cours/README.md) |
 | Abandonnees | 2 | [abandonnees/](abandonnees/README.md) |
 | Fusionnee | 1 | Epic 61 reprise dans l'[Epic 60](terminees/epic-60-vision-360-commercialisation-backlog.md) |
 
@@ -207,11 +207,16 @@ terrain commune/commerces guidé par Live et une progression sur un téléphone,
 seul ou en famille. Sept US, dix-huit critères cibles, quatre arbitrages ouverts.
 État **À faire**, sans spécification détaillée ni implémentation.
 
-Le 6 novembre, l'[EPIC 78 — Le jeu des vitrines](a-faire/epic-78-jeu-des-vitrines-backlog.md)
+Le 6 novembre, l'[EPIC 78 — Le jeu des vitrines](en-cours/epic-78-jeu-des-vitrines-backlog.md)
 cadre la recherche d'un intrus dans les vitrines participantes, notamment à Noël
 et à Pâques : préparation matérielle, parcours Live mobile, réponses et progression.
-Six US, seize critères cibles ; modalités de réponse, gains, préparation,
-passages et offre restent à arbitrer. État **À faire**, cadrage sans implémentation.
+La [spécification du 15 novembre](../specifications/epic-78-jeu-des-vitrines/README.md)
+conserve six US et seize critères : QCM à réponse unique, préparation Pro et
+contrôle organisateur, qualification comme le Juste Prix local avec/sans passages,
+suspension/reprise identique ou annulation, forfait standard. Les sept arbitrages
+sont résolus. Implémentation locale dans les cinq dépôts les 16 et 17 novembre :
+parcours et démonstration vérifiés, charge soutenue non qualifiée ; état
+**En cours**, modèle inactif. Voir le [bilan de réalisation](../specifications/epic-78-jeu-des-vitrines/bilan-realisation.md).
 
 Le 6 novembre, l'[EPIC 77 — Le Juste Prix Local](en-cours/epic-77-juste-prix-local-backlog.md)
 cadre un produit/prix proposé par commerce dans Pro puis approuvé par l'organisateur,
@@ -294,7 +299,7 @@ précise la provenance et les divergences historiques conservées.
 | 75 | A faire | [Mots croisés assistés par l’IA](a-faire/epic-75-mots-croises-assistes-ia-backlog.md) : [spécification V1](../specifications/epic-75-mots-croises-assistes-ia/README.md) du 4 novembre ; 8 US, 18 critères, neuf arbitrages résolus ; module indépendant, IA externe/import, grille validée et passages commerçants obligatoires ; tests prévus, sans implémentation |
 | 76 | A faire | [Impersonification support Pro et Animation](a-faire/epic-76-impersonification-support-pro-animation-backlog.md) : accès temporaire depuis ERP, 18 critères cibles ; consultation par défaut et intervention explicite/tracée retenues, droits, actions et modalités à arbitrer, sans implémentation |
 | 77 | En cours | [Le Juste Prix Local](en-cours/epic-77-juste-prix-local-backlog.md) : [spécification V1 du 13 novembre](../specifications/epic-77-juste-prix-local/README.md), 8 US et 20 critères cibles ; proposition Pro et approbation, estimation unique, tolérance commune, seuil pour le tirage et passages paramétrables ; quatre arbitrages résolus, forfait standard ; implémentation locale et preuves au bilan, capacité complète et recette intégrée restant à qualifier |
-| 78 | A faire | [Le jeu des vitrines](a-faire/epic-78-jeu-des-vitrines-backlog.md) : cadrage du 6 novembre, 6 US et 16 critères cibles ; intrus dans une vitrine réelle, Noël/Pâques et autres thèmes, préparation et Live mobile ; sept arbitrages ouverts, sans implémentation |
+| 78 | En cours | [Le jeu des vitrines](../specifications/epic-78-jeu-des-vitrines/README.md) : spécification du 15 novembre, 6 US et 16 critères ; QCM unique, préparation Pro/contrôle terrain, qualification E77 avec/sans passages, offre standard ; sept arbitrages résolus ; parcours et démo vérifiés, charge soutenue non qualifiée ([bilan](../specifications/epic-78-jeu-des-vitrines/bilan-realisation.md)), modèle inactif |
 | 79 | A faire | [Escape Game assisté par l’IA](a-faire/epic-79-escape-game-assiste-ia-backlog.md) : 7 US et 18 critères cibles ; préparation IA selon le processus de la chasse E55, validation avant publication, terrain commune/commerces et progression sur un téléphone confirmés ; quatre arbitrages résolus, quatre ouverts, sans implémentation |
 | Autres identifiants du tronc commun | Terminees | Statut produit consolide conserve ; les anciennes mentions de stories a faire ne rouvrent pas ces epics. |
 

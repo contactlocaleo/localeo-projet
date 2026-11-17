@@ -173,3 +173,21 @@ Les couples `B1/F4`, `B2/F5-F6`, `B3/F3` et `B4-B5/F7` portent les recettes inte
 ## Jeu Juste Prix Local — E77
 
 Le renderer local E77 affiche le produit/format sans prix de référence avant clôture. Le participant saisit une estimation, la vérifie puis la confirme définitivement, une fois par commerce, même fausse. Le résultat trouvé/non trouvé est immédiat. Le seuil et la tolérance commune sont affichés ; si un passage est requis, réponse et visite peuvent arriver dans les deux ordres avant la fin. Une bonne réponse avec le passage requis compte un commerce ; atteindre le seuil donne une chance au tirage existant. Le prix exact n’est révélé qu’après clôture confirmée et sous accès personnel. [Spécification et réserves de mise en service](../epic-77-juste-prix-local/README.md).
+
+## Jeu des vitrines — E78
+
+Live présente les vitrines par pages, dans l’ordre choisi par le participant.
+Le lien public `vitrine=<UUID>` conserve la cible à travers l’inscription et la
+récupération de l’accès. Chaque choix est revu avant confirmation définitive ;
+modifier ou annuler n’envoie aucune réponse. Une bonne ou une mauvaise réponse
+consomme cet unique essai et rend immédiatement « Intrus trouvé » ou « Intrus non
+trouvé ». Les solutions générales attendent la clôture effective confirmée.
+
+Si le règlement exige un passage, la bonne réponse et un passage valide dans le
+même commerce comptent une vitrine, dans les deux ordres pendant la période
+ouverte. Le QR personnel et le PIN commun restent disponibles selon la décision
+du serveur. Sans passage requis, seule la bonne réponse compte. Atteindre le seuil
+donne une seule chance au tirage existant ; aucun achat ni gain immédiat.
+Les brouillons sont séparés par participation, édition et vitrine. Une commande
+incertaine conserve sa clé et son corps ; vérifier le reçu avant un renvoi explicite.
+[Règles et bilan E78](../epic-78-jeu-des-vitrines/README.md).

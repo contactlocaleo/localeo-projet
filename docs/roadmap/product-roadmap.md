@@ -12,16 +12,16 @@ Clôture E70 du **2 novembre 2026** : **Terminée**, 34 critères vérifiés sur
 
 E72 — accès salariés est terminée le 1er novembre 2026 selon E72-DEC-CLOTURE-TESTS : tests unitaires, d'intégration et fonctionnels des 22 critères vérifiés. Le [bilan E72](../specifications/epic-72-acces-salaries/verification-livraison.md) distingue la clôture technique des actions de mise en service. Aucun déploiement effectué.
 
-## État global consolidé au 6 novembre 2026
+## État global consolidé au 16 novembre 2026
 
-Le tronc commun comprend 79 identifiants : 62 epics terminees, 9 a faire,
-5 en cours, 2 abandonnees et 1 fusionnee. L'Epic 61 est absorbee par l'Epic 60.
+Le tronc commun comprend 79 identifiants : 62 epics terminees, 8 a faire,
+6 en cours, 2 abandonnees et 1 fusionnee. L'Epic 61 est absorbee par l'Epic 60.
 Les documents sont ranges par etat dans l'[index de la roadmap](README.md).
 
 | Etat | Epics |
 | --- | --- |
-| A faire | `EPIC-54`, `EPIC-58`, `EPIC-62`, `EPIC-64`, `EPIC-67`, `EPIC-75`, `EPIC-76`, `EPIC-78`, `EPIC-79` |
-| En cours | `EPIC-55`, `EPIC-68`, `EPIC-71`, `EPIC-74`, `EPIC-77` |
+| A faire | `EPIC-54`, `EPIC-58`, `EPIC-62`, `EPIC-64`, `EPIC-67`, `EPIC-75`, `EPIC-76`, `EPIC-79` |
+| En cours | `EPIC-55`, `EPIC-68`, `EPIC-71`, `EPIC-74`, `EPIC-77`, `EPIC-78` |
 | Termine | 62 epics : toutes les autres epics de `EPIC-01` a `EPIC-60`, et `EPIC-63`/`EPIC-65`/`EPIC-66`/`EPIC-69`/`EPIC-70`/`EPIC-72`/`EPIC-73`, hors `EPIC-05` et `EPIC-12` |
 | Abandonne | `EPIC-05` : QR commercant remplace par l'Epic 10 ; `EPIC-12` : flux manuel decommissionne par l'Epic 39 |
 | Fusionnee | `EPIC-61` dans `EPIC-60` ; non comptee comme terminee |
@@ -54,11 +54,11 @@ Derniere evolution suivie :
   commerces guidé par Live, une progression sur un téléphone, seul ou en famille.
   Quatre arbitrages résolus, quatre ouverts ; état À faire, sans implémentation.
 
-- [EPIC 78 — Le jeu des vitrines](a-faire/epic-78-jeu-des-vitrines-backlog.md) :
+- [EPIC 78 — Le jeu des vitrines](en-cours/epic-78-jeu-des-vitrines-backlog.md) :
   cadrage du 6 novembre, 6 US et 16 critères cibles ; trouver un intrus dans
   une vitrine réelle, notamment à Noël et à Pâques, avec préparation et carnet
-  Live mobile. Réponses, gains, responsabilités, passages et offre à arbitrer ;
-  état À faire, sans spécification détaillée ni implémentation.
+  Live mobile. Sept arbitrages résolus ; spécification du 15 novembre et
+  implémentation locale du 16 novembre, état en cours. [Bilan et limites](../specifications/epic-78-jeu-des-vitrines/bilan-realisation.md).
 
 - [EPIC 77 — Le Juste Prix Local](en-cours/epic-77-juste-prix-local-backlog.md) :
   cadrage du 6 novembre, 8 US et 20 critères cibles ; produit/prix proposé par
