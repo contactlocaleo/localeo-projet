@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Localeo — comparatif UX avant / après</title>
+  <style>
+    :root{--navy:#082c45;--orange:#f58b24;--paper:#f8f6f1;--ink:#123149;--line:#d4dfe3}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,Helvetica,sans-serif}
+    a{color:#07576a;text-underline-offset:3px}
+    a:focus-visible,button:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+    header{background:var(--navy);color:#fff;padding:48px max(24px,calc((100vw - 1180px)/2)) 54px}
+    .kicker{font-weight:800;letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:#ffad62}
+    h1,h2{font-family:Impact,'Arial Narrow',Arial,sans-serif;text-transform:uppercase;line-height:1.03;letter-spacing:.01em}
+    h1{font-size:clamp(38px,6vw,76px);margin:12px 0 18px;max-width:900px}
+    header p{max-width:740px;font-size:17px;line-height:1.5;margin:0}
+    main{max-width:1230px;margin:auto;padding:20px 24px 100px}
+    .intro{padding:24px 0 40px;line-height:1.5;max-width:900px}
+    nav{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+    nav a{padding:9px 11px;border:1px solid #829ba7;color:#fff;text-decoration:none;font-weight:700;font-size:13px}
+    article{border-top:2px solid var(--navy);padding:42px 0 60px}
+    .meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:13px}
+    .meta span{font-size:12px;font-weight:800;letter-spacing:.03em;background:#e5ecee;padding:7px 9px}
+    .meta .priority{background:var(--orange);color:#102c41}
+    h2{font-size:clamp(30px,3.4vw,45px);margin:0 0 14px}
+    .summary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;max-width:1000px;font-size:15px;line-height:1.48;margin-bottom:20px}
+    .summary p{margin:0}
+    .label{font-weight:800;color:var(--navy)}
+    .evidence{font-size:13px;line-height:1.5;margin:0 0 20px;color:#445f6f}
+    .compare{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+    .side{min-width:0}
+    .sidehead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:9px}
+    .sidehead strong{font-size:13px;letter-spacing:.12em;text-transform:uppercase}
+    .screen{height:650px;max-width:440px;margin:auto;overflow:auto;background:white;border:1px solid #b8c8d0;box-shadow:0 14px 32px #082c451e}
+    .screen img{display:block;width:100%;height:auto}
+    iframe{display:block;width:100%;height:100%;border:0;background:white}
+    .footnote{font-size:12px;color:#526675;margin:10px auto 0;max-width:440px;line-height:1.4}
+    .switch{display:none}
+    @media(max-width:760px){
+      header{padding:35px 18px 40px}
+      main{padding:12px 15px 60px}
+      .summary{grid-template-columns:1fr;gap:8px}
+      .compare{display:block}
+      .switch{display:flex;gap:8px;margin:0 0 15px}
+      .switch button{flex:1;min-height:44px;border:1px solid var(--navy);background:transparent;color:var(--navy);font-weight:800}
+      .switch button[aria-pressed="true"]{background:var(--navy);color:white}
+      .compare[data-view="before"] .side.after,.compare[data-view="after"] .side.before{display:none}
+      .screen{height:590px}
+      article{padding:32px 0 48px}
+    }
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="kicker">Localeo · Workshop marketplace · 18 novembre 2026</div>
+    <h1>Avant / après, orientation par orientation.</h1>
+    <p>Les colonnes AVANT sont des captures réelles de l’environnement TEST. Les colonnes APRÈS sont des maquettes documentaires, non implémentées. Les votes et réactions du workshop sont simulés.</p>
+    <nav aria-label="Accès aux orientations">
+      <a href="#O-01">O‑01 Accueil</a><a href="#O-02">O‑02 Coffret</a><a href="#O-03">O‑03 Cadeau</a>
+      <a href="#O-05">O‑05 Commerce</a><a href="#O-06">O‑06 Animations</a><a href="#O-07">O‑07 Conditions</a><a href="#O-08">O‑08 Stripe</a>
+    </nav>
+  </header>
+  <main>
+    <p class="intro">Périmètre strict : orientations adoptées à au moins 7/12 et classées P0 ou P1 dans le <a href="../workshop/backlog-ux.md">backlog</a>. O‑04, adoptée mais P2, n’est pas maquettée. La sélection d’une commune et la liste des coffrets apparaissent dans les captures existantes ; aucune refonte autonome de ces écrans n’est proposée. Faites défiler chaque écran indépendamment. Sur mobile, utilisez la bascule AVANT / APRÈS.</p>
+    <div id="gallery"></div>
+  </main>
+  <script>
+    const items=[
+      {id:'O-01',name:'Le coffret expliqué dès l’accueil',priority:'P1',journey:'A / G · première impression',problem:'La première phrase mobile ne nomme ni les commerçants ni le parcours de prestations.',benefit:'Le visiteur identifie immédiatement une expérience locale à vivre et à offrir.',effort:'S',vote:'11/12 · ADOPTÉE',before:'accueil-standard.png',screen:'Accueil · 390 px',after:'O-01.html',evidence:'observations-factuelles.md#A — Première impression',evidenceHref:'../observations/observations-factuelles.md',annotation:'Le texte mobile « Des moments à vivre sur place » laisse le concept multi-commerçants en arrière-plan.'},
+      {id:'O-02',name:'La promesse du coffret à portée du prix',priority:'P1',journey:'D / F · détail du coffret',problem:'Garantie, exemples indicatifs et réservation sont séparés sur une fiche longue.',benefit:'Le contenu effectivement dû se distingue des expériences possibles.',effort:'M',vote:'12/12 · ADOPTÉE',before:'coffret-390.png',screen:'Fiche « À table, puis en balade » · 390 px',after:'O-02.html',evidence:'Observations B',evidenceHref:'../observations/observations-factuelles.md',annotation:'La mention du caractère indicatif apparaît plus bas que le prix et le premier résumé.'},
+      {id:'O-03',name:'Le parcours du cadeau avant les champs',priority:'P1',journey:'D / F · achat cadeau',problem:'E-mail, téléphone, carte cadeau et activation demandent une lecture dispersée.',benefit:'L’acheteur sait ce qu’il recevra et ce qu’il pourra transmettre.',effort:'S',vote:'10/12 · ADOPTÉE',before:'coffret-390.png',screen:'Formulaire de la fiche coffret · 390 px',after:'O-03.html',evidence:'Observations E/F',evidenceHref:'../observations/observations-factuelles.md',annotation:'L’envoi de la carte cadeau est évoqué après le paiement ; la séquence est peu visible au moment de saisir l’e-mail.'},
+      {id:'O-05',name:'Le partenaire décrit avec précision',priority:'P1 conditionnel',journey:'C / G · fiche commerçant',problem:'Des fiches TEST portent des contenus provisoires ; leur présence en production n’est pas établie.',benefit:'Une fiche publiée peut être relue et validée par le commerçant.',effort:'M',vote:'9/12 · ADOPTÉE',before:'commercant-390.png',screen:'Café des Promeneurs · 390 px',after:'O-05.html',evidence:'Observations C',evidenceHref:'../observations/observations-factuelles.md',annotation:'La capture montre une fiche réelle TEST ; elle ne prouve pas l’exactitude des prestations ni la qualité des autres fiches publiées.'},
+      {id:'O-06',name:'Le passage vers Localeo Live annoncé',priority:'P1',journey:'E / G · animations',problem:'Le lien d’animation ouvre un autre domaine et une autre marque d’en-tête.',benefit:'Le visiteur comprend où il consulte le détail et où il participe.',effort:'M',vote:'8/12 · ADOPTÉE',before:'animations-390.png',screen:'Liste des animations Marketplace · 390 px',after:'O-06.html',evidence:'Observations D',evidenceHref:'../observations/observations-factuelles.md',annotation:'« Voir le détail » et « S’inscrire et suivre » ne nomment pas clairement Localeo Live ; le filtre Bouliac est toutefois transmis.'},
+      {id:'O-07',name:'Les conditions avant le dernier geste',priority:'P1',journey:'F · récapitulatif et confiance',problem:'CGV et confidentialité sont sous le bouton d’achat ; les conditions sont réparties dans la fiche.',benefit:'Prix, validité, réservation et textes juridiques sont consultables avant de poursuivre.',effort:'S',vote:'10/12 · ADOPTÉE',before:'coffret-390.png',screen:'Bloc d’achat de la fiche · 390 px',after:'O-07.html',evidence:'Observations E/F',evidenceHref:'../observations/observations-factuelles.md',annotation:'Le bouton précède les liens juridiques. La maquette ne change aucun contrat ni étape de paiement.'},
+      {id:'O-08',name:'La frontière Stripe rendue vérifiable',priority:'P0 · porte de validation',journey:'F · initialisation et retour',problem:'La soumission crée un achat avant redirection ; ni Stripe ni le retour n’ont été observés.',benefit:'Une recette sûre peut fonder la décision d’ouverture sans prétendre qu’un écran Stripe a été vu.',effort:'M',vote:'12/12 · ADOPTÉE',before:'coffret-390.png',screen:'Bouton final de la fiche · 390 px',after:'O-08.html',evidence:'Parcours achat–Stripe',evidenceHref:'../observations/parcours-achat-stripe.md',annotation:'APRÈS est une carte de protocole, pas une nouvelle interface produit. Aucune soumission, session ni commande dans ce dossier.'}
+    ];
+    const escapeHtml=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+    document.getElementById('gallery').innerHTML=items.map(item=>{
+      const a=escapeHtml;
+      return '<article id="'+a(item.id)+'"><div class="meta"><span>'+a(item.id)+'</span><span class="priority">'+a(item.priority)+'</span><span>'+a(item.journey)+'</span><span>'+a(item.effort)+' · effort</span><span>'+a(item.vote)+'</span></div>'+
+        '<h2>'+a(item.name)+'</h2><div class="summary"><p><span class="label">Problème.</span> '+a(item.problem)+'</p><p><span class="label">Bénéfice attendu.</span> '+a(item.benefit)+'</p></div>'+
+        '<p class="evidence"><span class="label">AVANT :</span> '+a(item.screen)+' · '+a(item.annotation)+' <a href="'+a(item.evidenceHref)+'">Observation</a> · <a href="../workshop/votes-et-arbitrages.md">Vote</a>.</p>'+
+        '<div class="switch" role="group" aria-label="Comparer '+a(item.id)+'"><button type="button" data-mode="before" aria-pressed="true">AVANT</button><button type="button" data-mode="after" aria-pressed="false">APRÈS</button></div>'+
+        '<div class="compare" data-view="before"><div class="side before"><div class="sidehead"><strong>AVANT · capture réelle TEST</strong><a href="captures-avant/'+a(item.before)+'">Ouvrir</a></div><div class="screen"><img src="captures-avant/'+a(item.before)+'" alt="Capture réelle : '+a(item.screen)+'" loading="lazy"></div><p class="footnote">Capture existante de l’étape 1, conservée sans retouche.</p></div>'+
+        '<div class="side after"><div class="sidehead"><strong>APRÈS · proposition</strong><a href="maquettes-apres/'+a(item.after)+'">Ouvrir</a></div><div class="screen"><iframe src="maquettes-apres/'+a(item.after)+'" title="Maquette '+a(item.id)+'" loading="lazy"></iframe></div><p class="footnote">Document de conception uniquement ; aucun bouton n’exécute d’achat ou d’inscription.</p></div></div></article>';
+    }).join('');
+    document.querySelectorAll('.switch button').forEach(button=>button.addEventListener('click',()=>{
+      const group=button.closest('.switch'), compare=group.nextElementSibling;
+      compare.dataset.view=button.dataset.mode;
+      group.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
+    }));
+  </script>
+</body>
+</html>

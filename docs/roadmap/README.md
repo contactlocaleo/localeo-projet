@@ -1,5 +1,13 @@
 # Roadmap par etat
 
+**18 novembre 2026 — EPIC 81, En cours** :
+[clarté des parcours publics Marketplace](en-cours/epic-81-parcours-ux-marketplace-20261118-backlog.md),
+cadrée à partir des sept orientations P0/P1 [validées par le propriétaire](../ux-workshops/marketplace/2026-11-18/validation/decisions.md).
+Accueil mobile, promesse du coffret, cadeau, conditions avant achat et transition
+vers Live sont spécifiés et réalisés localement ; contenu de lancement et recette humaine restent à vérifier.
+La recette Stripe O-08 est une porte de preuve P0, sans panne démontrée et sans
+autorisation de paiement réel. O-04 P2 reste hors de cette epic.
+
 **18 novembre 2026 — E73-EVO-AUTONOMIE-COMMERCANTS** :
 [gestion autonome des commerces Animation seule](../specifications/epic-73-animation-et-ou-coffrets/gestion-commercants-animation.md),
 partagée entre gestionnaires habilités de la commune. Création, édition,
@@ -178,7 +186,7 @@ après ajout des EPIC 77 à 79 le 6 novembre 2026.
 | --- | ---: | --- |
 | Terminees | 64 | [terminees/](terminees/README.md) |
 | A faire | 9 | [a-faire/](a-faire/README.md) |
-| En cours | 6 | [en-cours/](en-cours/README.md) |
+| En cours | 8 | [en-cours/](en-cours/README.md) |
 | Abandonnees | 2 | [abandonnees/](abandonnees/README.md) |
 | Fusionnee | 1 | Epic 61 reprise dans l'[Epic 60](terminees/epic-60-vision-360-commercialisation-backlog.md) |
 
@@ -374,6 +382,7 @@ précise la provenance et les divergences historiques conservées.
 | 77 | En cours | [Le Juste Prix Local](en-cours/epic-77-juste-prix-local-backlog.md) : [spécification V1 du 13 novembre](../specifications/epic-77-juste-prix-local/README.md), 8 US et 20 critères cibles ; proposition Pro et approbation, estimation unique, tolérance commune, seuil pour le tirage et passages paramétrables ; quatre arbitrages résolus, forfait standard ; implémentation locale et preuves au bilan, capacité complète et recette intégrée restant à qualifier |
 | 78 | En cours | [Le jeu des vitrines](../specifications/epic-78-jeu-des-vitrines/README.md) : spécification du 15 novembre, 6 US et 16 critères ; QCM unique, préparation Pro/contrôle terrain, qualification E77 avec/sans passages, offre standard ; sept arbitrages résolus ; parcours et démo vérifiés, charge soutenue non qualifiée ([bilan](../specifications/epic-78-jeu-des-vitrines/bilan-realisation.md)), modèle inactif |
 | 79 | A faire | [Escape Game assisté par l’IA](a-faire/epic-79-escape-game-assiste-ia-backlog.md) : 7 US et 18 critères cibles ; préparation IA selon le processus de la chasse E55, validation avant publication, terrain commune/commerces et progression sur un téléphone confirmés ; quatre arbitrages résolus, quatre ouverts, sans implémentation |
+| 81 | En cours | [Clarté des parcours publics Marketplace](en-cours/epic-81-parcours-ux-marketplace-20261118-backlog.md) : sept orientations UX P0/P1 validées, cinq améliorations de présentation réalisées localement ; contrôle du catalogue d'ouverture, recette Stripe TEST et tests humains ouverts. |
 | Autres identifiants du tronc commun | Terminees | Statut produit consolide conserve ; les anciennes mentions de stories a faire ne rouvrent pas ces epics. |
 
 Les changements des Epics 5, 12 et 47 corrigent des incoherences entre les

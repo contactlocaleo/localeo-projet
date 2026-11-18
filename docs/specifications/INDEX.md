@@ -14,6 +14,8 @@ Commencer par le README du sujet, puis consulter ses règles, contrats et arbitr
 
 ## Priorités en cours et à cadrer
 
+- **EPIC 81 — Clarté des parcours publics Marketplace**, [spécification](epic-81-parcours-ux-marketplace/README.md) : cinq orientations de présentation P1 et deux portes conditionnelles de contenu/recette Stripe, issues du workshop du 18 novembre 2026 ; critères E81-CA-01 à E81-CA-10, preuves d'implémentation et recette encore à produire.
+
 - **Extension E73 — 17 novembre 2026 : parcours organisateur**, [E73-EVO-PARCOURS-ORGANISATEUR](epic-73-animation-et-ou-coffrets/parcours-organisateur.md) : six améliorations réalisées localement après audit et contre-expertise ; PO-01 à PO-30 et CU existants, contrats synchronisés et preuves synthétiques consignées. Qualification humaine/physique et mesures restant ouvertes, clôture historique conservée.
 
 - **Extension E73 — 17 novembre 2026 : création homogène des animations**, [E73-EVO-CREATION-UX-COMMUNE](epic-73-animation-et-ou-coffrets/perimetres-parcours-saas.md#règle-du-17-novembre-2026--création-homogène-des-animations) : mêmes conventions UX pour tous les modèles et supports, contenu adapté au modèle ; CU-01 à CU-06 réalisés avec les lots PO, recette exhaustive et humaine restant ouverte. Clôture historique conservée.
@@ -113,6 +115,7 @@ Commencer par le README du sujet, puis consulter ses règles, contrats et arbitr
 | 77 | [Le Juste Prix Local](epic-77-juste-prix-local/README.md) | En cours | Backend/ERP, Animation, Commerçant, Marketplace/Live ; démonstration et exploitation |
 
 | 78 | [Le jeu des vitrines](epic-78-jeu-des-vitrines/README.md) | En cours | Backend/ERP, Animation, Commerçant, Marketplace/Live ; démonstration et exploitation |
+| 81 | [Clarté des parcours publics Marketplace](epic-81-parcours-ux-marketplace/README.md) | À faire | Marketplace/Live ; backend pour contrats et recette achat, contenu éditorial conditionnel |
 
 ## Contrats et historique
 

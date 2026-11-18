@@ -2,7 +2,9 @@
 
 [Retour à la roadmap](../README.md)
 
-Sept EPIC sont classées en cours. Ce classement ne vaut ni clôture ni déploiement.
+Huit EPIC sont classées en cours. Ce classement ne vaut ni clôture ni déploiement.
+
+- [EPIC 81 — Clarté des parcours publics Marketplace](epic-81-parcours-ux-marketplace-20261118-backlog.md) : accueil, fiche et achat-cadeau, navigation vers Live réalisés localement ; catalogue d'ouverture, recette Stripe TEST et tests avec de vrais utilisateurs encore ouverts.
 
 - [EPIC 80 — Fiabilité des parcours Animation dans Localeo Pro](epic-80-fiabilite-parcours-localeo-pro-backlog.md) : spécification et corrections locales du scanner, de la boîte Notifications et des dates du kit ; diagnostics, maquettes et recettes encore ouverts.
 
