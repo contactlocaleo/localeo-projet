@@ -142,7 +142,8 @@ La route `POST /protected/gestion-reversement/reversements/campagnes-stripe/lanc
 
 `POST /protected/exploitation/commercants/me/webpush/deeplinks/resoudre`
 - resout un deeplink opaque issu d'une notification WebPush apres authentification.
-- corps attendu : `{ "deeplink": "localeo://commercant/live-tracking/{opaque_reference}" }`.
+- corps attendu : `{ "opaque_reference": "{opaque_reference}" }`, extrait du lien `localeo://commercant/live-tracking/{opaque_reference}`.
+- pour `ANIMATION_PUBLIEE_FLYER_DISPONIBLE`, la reponse fournit `resource_type: "ANIMATION_FLYER"` et `resource_id` egal a l'identifiant de l'animation ; Localeo Pro ouvre son flyer apres verification de la session. Les anciens liens directs `/animations/{animation_id}/flyer` restent lisibles et l'acces au document reste controle par l'API.
 
 ## Contraintes metier
 

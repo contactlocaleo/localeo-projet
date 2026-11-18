@@ -484,6 +484,7 @@ Un echec ulterieur du fournisseur email ou WebPush ne remet pas la demande en `A
 ### 10.3 Decommissionnement de l'inclusion actuelle
 
 `ServiceEspaceCommercantAnimation.notifier_inclusions_dans_uow` n'est plus appele pour annoncer une inclusion automatique. A la publication, une notification `ANIMATION_PUBLIEE_FLYER_DISPONIBLE` peut etre creee pour chaque commercant accepte, sans nouvel email obligatoire. Elle pointe vers l'animation publiee et son flyer.
+Le WebPush associe a cette notification transporte une reference opaque sans identifiant d'animation direct. Apres resolution authentifiee, `resource_id` identifie l'animation ; le flyer s'ouvre dans Localeo Pro et sa lecture reste reservee aux participants autorises par l'API.
 
 ## 11. Publication et snapshot des participants
 
