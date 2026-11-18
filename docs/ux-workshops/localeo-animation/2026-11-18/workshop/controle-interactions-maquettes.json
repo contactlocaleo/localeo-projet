@@ -1,0 +1,206 @@
+{
+  "version": 2,
+  "checks": [
+    {
+      "test": "galerie bureau 9 orientations 2 colonnes",
+      "result": {
+        "articles": 9,
+        "columns": "686px 686px",
+        "width": 1440,
+        "viewport": 1440,
+        "missingImages": 6
+      }
+    },
+    {
+      "test": "filtre P0",
+      "result": [
+        "D1"
+      ]
+    },
+    {
+      "test": "filtre P1 onboarding",
+      "result": [
+        "C1",
+        "C2"
+      ]
+    },
+    {
+      "test": "mobile après initial",
+      "result": {
+        "before": false,
+        "after": true
+      }
+    },
+    {
+      "test": "bascule avant mobile",
+      "result": {
+        "before": true,
+        "after": false
+      }
+    },
+    {
+      "test": "bascule après au clavier",
+      "result": {
+        "before": false,
+        "after": true
+      }
+    },
+    {
+      "test": "retour bureau affiche deux côtés",
+      "result": {
+        "before": true,
+        "after": true
+      }
+    },
+    {
+      "test": "images après chargement différé",
+      "result": {
+        "total": 18,
+        "invalides": []
+      }
+    },
+    {
+      "test": "clôture avant attestation",
+      "result": {
+        "disabled": true,
+        "background": "rgb(232, 237, 240)"
+      }
+    },
+    {
+      "test": "clôture après attestation",
+      "result": {
+        "enabled": true
+      }
+    },
+    {
+      "test": "clôture à nouveau décochée",
+      "result": {
+        "disabled": true
+      }
+    },
+    {
+      "test": "retour sans clôture",
+      "result": "periode"
+    },
+    {
+      "test": "sélection C2 mobile entièrement dans largeur",
+      "result": [
+        {
+          "left": 54,
+          "right": 72,
+          "width": 390
+        },
+        {
+          "left": 54,
+          "right": 72,
+          "width": 390
+        }
+      ]
+    },
+    {
+      "test": "comparaison C2 mobile sans défilement horizontal",
+      "result": {
+        "client": 318,
+        "scroll": 318
+      }
+    },
+    {
+      "test": "sauvegarde visible avant champs facultatifs mobile",
+      "result": {
+        "top": 643.078125,
+        "bottom": 687.578125,
+        "viewport": 844
+      }
+    },
+    {
+      "test": "transition locale B1 vers confirmation",
+      "result": "enregistre"
+    },
+    {
+      "test": "confirmation clôture ne simule pas un tirage ni une remise",
+      "result": {
+        "dialog": true,
+        "panel": "confirmation"
+      }
+    },
+    {
+      "test": "images finales après stabilisation responsive",
+      "result": [
+        {
+          "src": "captures-avant/02-tableau-bord-bureau.png",
+          "ok": true
+        },
+        {
+          "src": "maquettes-apres/A1-accueil-bureau.png",
+          "ok": true
+        },
+        {
+          "src": "captures-avant/05-tombola-informations.png",
+          "ok": true
+        },
+        {
+          "src": "maquettes-apres/B1-saisie-bureau.png",
+          "ok": true
+        },
+        {
+          "src": "captures-avant/14-brouillon-cree.png",
+          "ok": true
+        },
+        {
+          "src": "maquettes-apres/B2-publication-bureau.png",
+          "ok": true
+        },
+        {
+          "src": "captures-avant/18-passeport-seuil.png",
+          "ok": true
+        },
+        {
+          "src": "maquettes-apres/B3-compatible-bureau.png",
+          "ok": true
+        },
+        {
+          "src": "captures-avant/07-selection-commercants.png",
+          "ok": true
+        },
+        {
+          "src": "maquettes-apres/C1-selection-bureau.png",
+          "ok": true
+        },
+        {
+          "src": "captures-avant/23-import-apercu.png",
+          "ok": true
+        },
+        {
+          "src": "maquettes-apres/C2-apercu-bureau.png",
+          "ok": true
+        },
+        {
+          "src": "captures-avant/31-communication-echec-confirme.png",
+          "ok": true
+        },
+        {
+          "src": "maquettes-apres/D1-lecture-bureau.png",
+          "ok": true
+        },
+        {
+          "src": "captures-avant/25-suivi-animation-en-cours.png",
+          "ok": true
+        },
+        {
+          "src": "maquettes-apres/D2-suivi-bureau.png",
+          "ok": true
+        },
+        {
+          "src": "captures-avant/35-fin-archivage.png",
+          "ok": true
+        },
+        {
+          "src": "maquettes-apres/E1-periode-bureau.png",
+          "ok": true
+        }
+      ]
+    }
+  ],
+  "requestsExternes": [],
+  "erreursJS": []
+}

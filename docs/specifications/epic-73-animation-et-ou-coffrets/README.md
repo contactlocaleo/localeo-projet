@@ -1,5 +1,14 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+**Cadrage du 18 novembre 2026 — E73-EVO-WORKSHOP-UX-20261118** :
+[onze orientations de l’atelier et E73-WA-01 à 18](../../roadmap/terminees/epic-73-animation-et-ou-coffrets-backlog.md#workshop-ux-20261118).
+Spécification détaillée et réalisation locales dans les sources existantes ;
+[preuves, migrations et limites WA](verification-livraison.md#workshop-ux-20261118).
+Recette humaine et déploiement non réalisés. Décision utilisateur : l’atelier
+prime en cas de contradiction, donc nouvelle destination opérationnelle de
+PO-13 et retrait de la clôture automatique future ; CAF indépendant à recadrer.
+La clôture historique de l’epic n’est pas rouverte.
+
 Évolution du **18 novembre 2026 — E73-EVO-SUIVI-ANIMATION** :
 [suivi Animation et Pro, SA-01 à SA-07](parcours-organisateur.md#évolution-du-18-novembre-2026--suivi-animation-et-pro),
 cinq améliorations du rapport de brainstorming sélectionné. Message explicatif
@@ -78,6 +87,8 @@ clavier/mobile, préparation, reprise des gains et comparaison. **Sept lots
 implémentés**, migration TEST v313 appliquée ; preuves locales et limites AP-22 au
 [bilan](verification-livraison.md#évolution--e73-evo-animation-productivite-12-novembre-2026).
 Clôture historique et évolution de clôture automatique conservées séparément.
+
+**Mise à jour du 18 novembre :** volet de clôture automatique retiré des travaux futurs selon E73-WA-DEC-03 ; report/rapport indépendants à recadrer. Les mentions de réalisation à faire ci-dessous décrivent le plan antérieur, conservé pour traçabilité.
 
 Évolution du **12 novembre 2026 — E73-EVO-CLOTURE-AUTO** : clôture automatique
 à la date de fin, option active par défaut pour les nouvelles animations,

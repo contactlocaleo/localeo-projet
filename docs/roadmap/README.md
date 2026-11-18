@@ -1,5 +1,15 @@
 # Roadmap par etat
 
+**18 novembre 2026 — E73-EVO-WORKSHOP-UX-20261118** :
+[cadrage des suites de l’atelier Animation](terminees/epic-73-animation-et-ou-coffrets-backlog.md#workshop-ux-20261118), 11 orientations retenues
+(1 P0, 8 P1, 2 P2), 18 critères WA et six lots. Corrections D1/B3/import,
+compléments UX et évolutions brouillon/référencement/vues partagées distingués.
+Primauté de l’atelier confirmée : D2 remplace la destination Bilan de PO-13 ;
+clôture automatique E2 retirée des travaux futurs, solde CAF à recadrer.
+Spécification et implémentation locales réalisées sur demande explicite des deux
+phases ; [bilan WA](../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md#workshop-ux-20261118).
+Recette humaine et déploiement non réalisés ; clôture historique E73 et compteurs conservés.
+
 **18 novembre 2026 — E73-EVO-SUIVI-ANIMATION** :
 [cinq améliorations du suivi Animation et Pro](../specifications/epic-73-animation-et-ou-coffrets/parcours-organisateur.md#évolution-du-18-novembre-2026--suivi-animation-et-pro),
 issues du rapport de brainstorming explicitement choisi : publication nominative,
@@ -65,6 +75,8 @@ Fiabilité de la prochaine action, continuité du travail et opérations quotidi
 Sept lots implémentés ; preuves fonctionnelles locales et migration TEST v313 au
 [bilan](../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md#évolution--e73-evo-animation-productivite-12-novembre-2026).
 AP-22 reste partiellement vérifié (capacité complète et recette humaine). Statut historique E73 et compteurs inchangés.
+
+**Mise à jour du 18 novembre :** volet de clôture automatique retiré des travaux futurs selon E73-WA-DEC-03 ; report/rapport indépendants à recadrer. Les mentions de réalisation à faire ci-dessous décrivent le plan antérieur, conservé pour traçabilité.
 
 **12 novembre 2026 — E73-EVO-CLOTURE-AUTO** : clôture à échéance, rapport
 e-mail aux responsables et report de fin notifié dans Live/WebPush.

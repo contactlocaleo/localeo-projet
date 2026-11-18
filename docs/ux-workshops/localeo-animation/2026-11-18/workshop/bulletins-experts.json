@@ -1,0 +1,658 @@
+{
+  "simulation": true,
+  "validation_utilisateur": false,
+  "phase": "Votes après avis indépendants et débat sur les 17 propositions version 1 ; aucune autorisation de développement.",
+  "participants": [
+    {
+      "id": "E1",
+      "role": "UX Designer senior"
+    },
+    {
+      "id": "E2",
+      "role": "Product Manager SaaS B2B"
+    },
+    {
+      "id": "E3",
+      "role": "Expert opérations événementielles"
+    },
+    {
+      "id": "E4",
+      "role": "Expert onboarding et accessibilité"
+    },
+    {
+      "id": "E5",
+      "role": "UX Researcher et facilitateur"
+    }
+  ],
+  "votes": [
+    {
+      "orientation": "A1",
+      "participant": "E1",
+      "vote": "POUR",
+      "argument": "La première vue doit donner priorité aux actions et distinguer leur sens, tout en conservant les nouvelles consultables."
+    },
+    {
+      "orientation": "A1",
+      "participant": "E2",
+      "vote": "POUR",
+      "argument": "La valeur immédiate devient plus lisible sans ajouter une fonction ou un moteur de notifications."
+    },
+    {
+      "orientation": "A1",
+      "participant": "E3",
+      "vote": "POUR",
+      "argument": "Les tâches à traiter doivent passer avant les confirmations de succès pour éviter de manquer une échéance."
+    },
+    {
+      "orientation": "A1",
+      "participant": "E4",
+      "vote": "POUR",
+      "argument": "Des catégories explicites réduisent la confusion possible entre succès et avertissement ; la couleur seule ne doit pas porter le sens."
+    },
+    {
+      "orientation": "A1",
+      "participant": "E5",
+      "vote": "POUR",
+      "argument": "La hiérarchie proposée est cohérente avec la capture 02 ; le gain de compréhension devra être mesuré, pas annoncé comme acquis."
+    },
+    {
+      "orientation": "A2",
+      "participant": "E1",
+      "vote": "CONTRE",
+      "argument": "La personnalisation ajoute un mode de configuration avant de résoudre la hiérarchie commune de l'accueil."
+    },
+    {
+      "orientation": "A2",
+      "participant": "E2",
+      "vote": "CONTRE",
+      "argument": "Un accueil standard utile au plus grand nombre offre une meilleure priorité produit que la composition libre des blocs."
+    },
+    {
+      "orientation": "A2",
+      "participant": "E3",
+      "vote": "CONTRE",
+      "argument": "Des dispositions différentes compliqueraient le repérage des échéances et l'entraide entre organisateurs."
+    },
+    {
+      "orientation": "A2",
+      "participant": "E4",
+      "vote": "CONTRE",
+      "argument": "Déplacer des blocs crée une nouvelle tâche et des exigences d'accessibilité sans bénéfice novice démontré."
+    },
+    {
+      "orientation": "A2",
+      "participant": "E5",
+      "vote": "ABSTENTION",
+      "argument": "Aucune observation ne montre un besoin de disposition personnelle ; des usages récurrents doivent être étudiés."
+    },
+    {
+      "orientation": "B1",
+      "participant": "E1",
+      "vote": "POUR",
+      "argument": "La sauvegarde explicite répond directement à l'impasse continuer ou perdre la saisie, sans supprimer les étapes de repérage."
+    },
+    {
+      "orientation": "B1",
+      "participant": "E2",
+      "vote": "POUR",
+      "argument": "Conserver un projet incomplet est un levier d'adoption plus pertinent qu'un second parcours de création rapide."
+    },
+    {
+      "orientation": "B1",
+      "participant": "E3",
+      "vote": "POUR",
+      "argument": "Le brouillon partiel est acceptable puisque la proposition maintient les prérequis serveur et n'envoie rien automatiquement."
+    },
+    {
+      "orientation": "B1",
+      "participant": "E4",
+      "vote": "POUR",
+      "argument": "Une personne interrompue peut conserver son travail et connaître ce qui manque, sans comprendre tous les paramètres immédiatement."
+    },
+    {
+      "orientation": "B1",
+      "participant": "E5",
+      "vote": "POUR",
+      "argument": "L'absence de sauvegarde intermédiaire est observée ; tester la reprise des seuls champs enregistrés donnera une preuve utile."
+    },
+    {
+      "orientation": "B2",
+      "participant": "E1",
+      "vote": "POUR",
+      "argument": "Action, responsable et lien ciblé rendent les diagnostics cohérents avec la configuration et limitent les recherches."
+    },
+    {
+      "orientation": "B2",
+      "participant": "E2",
+      "vote": "POUR",
+      "argument": "La séparation brouillon, accords et publication clarifie honnêtement la promesse produit sans annoncer un temps non mesuré."
+    },
+    {
+      "orientation": "B2",
+      "participant": "E3",
+      "vote": "POUR",
+      "argument": "Les états de sélection, accord et préparation restent distincts, ce qui évite de considérer un commerce prêt trop tôt."
+    },
+    {
+      "orientation": "B2",
+      "participant": "E4",
+      "vote": "POUR",
+      "argument": "Des verbes concrets et la raison du blocage aident les personnes occasionnelles davantage que des codes de diagnostic."
+    },
+    {
+      "orientation": "B2",
+      "participant": "E5",
+      "vote": "POUR",
+      "argument": "La proposition conserve la frontière entre ce qui est connu et ce qui ne l'est pas, notamment l'activation."
+    },
+    {
+      "orientation": "B3",
+      "participant": "E1",
+      "vote": "POUR",
+      "argument": "Un défaut compatible prévient une correction mécanique sans modifier silencieusement un choix ultérieur."
+    },
+    {
+      "orientation": "B3",
+      "participant": "E2",
+      "vote": "POUR",
+      "argument": "C'est une optimisation locale de faible effort, cohérente avec le parcours simple et sans nouveau mode de création."
+    },
+    {
+      "orientation": "B3",
+      "participant": "E3",
+      "vote": "POUR",
+      "argument": "Le seuil reste une règle métier explicite et contrôlée ; une sélection modifiée doit conduire à une décision consciente."
+    },
+    {
+      "orientation": "B3",
+      "participant": "E4",
+      "vote": "POUR",
+      "argument": "Éviter une valeur initiale impossible réduit la contradiction que doit résoudre un novice."
+    },
+    {
+      "orientation": "B3",
+      "participant": "E5",
+      "vote": "POUR",
+      "argument": "L'incompatibilité initiale est observée ; la proposition est ciblée et vérifiable avec deux commerces puis une modification."
+    },
+    {
+      "orientation": "B4",
+      "participant": "E1",
+      "vote": "CONTRE",
+      "argument": "Deux parcours complets multiplient les repères et la maintenance alors que la sauvegarde et les défauts cohérents répondent aux obstacles observés."
+    },
+    {
+      "orientation": "B4",
+      "participant": "E2",
+      "vote": "CONTRE",
+      "argument": "Le gain pour les utilisateurs fréquents n'est pas établi ; le périmètre L est prématuré face aux frictions du parcours commun."
+    },
+    {
+      "orientation": "B4",
+      "participant": "E3",
+      "vote": "POUR",
+      "argument": "Un organisateur récurrent peut apprécier une saisie globale ; les mêmes contrôles et confirmations restent prévus."
+    },
+    {
+      "orientation": "B4",
+      "participant": "E4",
+      "vote": "CONTRE",
+      "argument": "Même facultatif, le choix initial entre deux modes peut devenir une difficulté supplémentaire ; privilégier d'abord le parcours guidé."
+    },
+    {
+      "orientation": "B4",
+      "participant": "E5",
+      "vote": "ABSTENTION",
+      "argument": "Aucune comparaison réelle ne démontre qu'un formulaire unique accélère les organisateurs fréquents sans augmenter les erreurs."
+    },
+    {
+      "orientation": "C1",
+      "participant": "E1",
+      "vote": "POUR",
+      "argument": "L'entrée répond à une impasse de recherche visible en contexte et annonce une demande, sans faire croire à un ajout immédiat."
+    },
+    {
+      "orientation": "C1",
+      "participant": "E2",
+      "vote": "ABSTENTION",
+      "argument": "La responsabilité canonique et le service disponible restent à vérifier ; je ne retiens pas encore l'effort d'un suivi de demande complet."
+    },
+    {
+      "orientation": "C1",
+      "participant": "E3",
+      "vote": "POUR",
+      "argument": "Le petit volume a besoin d'un chemin identifié et suivi, à condition de conserver la distinction référencement, accord et participation."
+    },
+    {
+      "orientation": "C1",
+      "participant": "E4",
+      "vote": "POUR",
+      "argument": "Un organisateur qui manque un seul commerce doit pouvoir exprimer le besoin depuis la liste sans construire un CSV."
+    },
+    {
+      "orientation": "C1",
+      "participant": "E5",
+      "vote": "ABSTENTION",
+      "argument": "L'absence d'entrée a été constatée dans des surfaces limitées ; il faut vérifier le parcours canonique et sa fréquence avant de retenir cette solution précise."
+    },
+    {
+      "orientation": "C2",
+      "participant": "E1",
+      "vote": "POUR",
+      "argument": "Le modèle fourni doit préparer l'association des colonnes ; garder correction et confirmation maintient le contrôle."
+    },
+    {
+      "orientation": "C2",
+      "participant": "E2",
+      "vote": "POUR",
+      "argument": "L'import facilite l'intégration en volume et clarifier ses limites prévient une confiance excessive dans zéro conflit."
+    },
+    {
+      "orientation": "C2",
+      "participant": "E3",
+      "vote": "POUR",
+      "argument": "Un doute nom/adresse à examiner est utile sans fusion automatique qui risquerait d'altérer deux commerces légitimes."
+    },
+    {
+      "orientation": "C2",
+      "participant": "E4",
+      "vote": "POUR",
+      "argument": "Colonne requise et cellule requise doivent être expliquées séparément ; les associations reconnues réduisent une tâche technique."
+    },
+    {
+      "orientation": "C2",
+      "participant": "E5",
+      "vote": "POUR",
+      "argument": "La proposition traite le risque d'interprétation sans prétendre que des doublons ont été effectivement créés dans l'exploration."
+    },
+    {
+      "orientation": "C3",
+      "participant": "E1",
+      "vote": "POUR",
+      "argument": "Une programmation facultative avec aperçu, confirmation et annulation peut rendre le suivi récurrent plus prévisible."
+    },
+    {
+      "orientation": "C3",
+      "participant": "E2",
+      "vote": "CONTRE",
+      "argument": "Le besoin de planification n'est pas démontré ; une nouvelle mécanique d'envoi doit attendre la fiabilité du parcours actuel."
+    },
+    {
+      "orientation": "C3",
+      "participant": "E3",
+      "vote": "POUR",
+      "argument": "Les échéances commerciales justifient une planification contrôlée ; les droits et plafonds sont revérifiés au moment réel de l'envoi."
+    },
+    {
+      "orientation": "C3",
+      "participant": "E4",
+      "vote": "CONTRE",
+      "argument": "Le décalage entre décision et envoi peut surprendre un organisateur occasionnel même après confirmation ; je privilégie l'action au moment voulu."
+    },
+    {
+      "orientation": "C3",
+      "participant": "E5",
+      "vote": "ABSTENTION",
+      "argument": "Il manque des observations sur le volume et la fréquence des relances ainsi que sur la compréhension de l'annulation."
+    },
+    {
+      "orientation": "D1",
+      "participant": "E1",
+      "vote": "POUR",
+      "argument": "Le parcours visible doit pouvoir se charger et distinguer les états d'erreur ; une reprise claire évite les clics répétés sans issue."
+    },
+    {
+      "orientation": "D1",
+      "participant": "E2",
+      "vote": "POUR",
+      "argument": "Si Communication est incluse dans le lancement, son indisponibilité connue doit être résolue et vérifiée avant la diffusion à grande échelle."
+    },
+    {
+      "orientation": "D1",
+      "participant": "E3",
+      "vote": "POUR",
+      "argument": "L'organisateur doit pouvoir gérer un message opérationnel sans répéter un envoi incertain ni perdre son contexte."
+    },
+    {
+      "orientation": "D1",
+      "participant": "E4",
+      "vote": "POUR",
+      "argument": "Après un échec répété, une prochaine possibilité compréhensible et un support sont nécessaires sans fausse confirmation d'envoi."
+    },
+    {
+      "orientation": "D1",
+      "participant": "E5",
+      "vote": "POUR",
+      "argument": "La panne de lecture est reproduite dans cette session ; le diagnostic et la recette isolée sont justifiés sans conclure à une indisponibilité générale."
+    },
+    {
+      "orientation": "D2",
+      "participant": "E1",
+      "vote": "POUR",
+      "argument": "Le résultat du clic doit correspondre au libellé suivi ; le bilan reste accessible distinctement."
+    },
+    {
+      "orientation": "D2",
+      "participant": "E2",
+      "vote": "POUR",
+      "argument": "Cette correction ciblée réduit une rupture sans étendre le produit ni changer ses règles."
+    },
+    {
+      "orientation": "D2",
+      "participant": "E3",
+      "vote": "POUR",
+      "argument": "Accéder immédiatement aux commandes opérationnelles est utile en situation d'incident, tout en gardant la date des indicateurs."
+    },
+    {
+      "orientation": "D2",
+      "participant": "E4",
+      "vote": "POUR",
+      "argument": "Deux destinations nommées différemment permettent de choisir sans mémoriser un détour."
+    },
+    {
+      "orientation": "D2",
+      "participant": "E5",
+      "vote": "POUR",
+      "argument": "L'incohérence est observée et le critère de réussite peut être testé directement sur la destination du lien."
+    },
+    {
+      "orientation": "E1",
+      "participant": "E1",
+      "vote": "POUR",
+      "argument": "Une progression et une prochaine tâche donnent du sens à des statuts aujourd'hui distribués dans plusieurs rubriques."
+    },
+    {
+      "orientation": "E1",
+      "participant": "E2",
+      "vote": "POUR",
+      "argument": "La proposition rend le cycle existant compréhensible sans réduire la valeur métier du suivi des lots."
+    },
+    {
+      "orientation": "E1",
+      "participant": "E3",
+      "vote": "POUR",
+      "argument": "Les responsabilités et confirmations restent protégées ; fin de période, clôture et remise ne sont pas confondues."
+    },
+    {
+      "orientation": "E1",
+      "participant": "E4",
+      "vote": "POUR",
+      "argument": "Expliquer l'effet de chaque étape près du bouton répond aux utilisateurs occasionnels et évite du jargon de gel."
+    },
+    {
+      "orientation": "E1",
+      "participant": "E5",
+      "vote": "POUR",
+      "argument": "La clarification est justifiée par les états observés ; la compréhension et les actions finales restent à vérifier avec des organisateurs réels."
+    },
+    {
+      "orientation": "E2",
+      "participant": "E1",
+      "vote": "CONTRE",
+      "argument": "Une exécution différée irréversible ajoute une logique temporelle alors que la progression manuelle reste à clarifier."
+    },
+    {
+      "orientation": "E2",
+      "participant": "E2",
+      "vote": "CONTRE",
+      "argument": "L'effort XL et une nouvelle règle serveur ne sont pas justifiés avant validation des usages de clôture réels."
+    },
+    {
+      "orientation": "E2",
+      "participant": "E3",
+      "vote": "ABSTENTION",
+      "argument": "La programmation pourrait servir, mais les incidents en cours et la responsabilité de report ne sont pas encore assez définis pour mon accord."
+    },
+    {
+      "orientation": "E2",
+      "participant": "E4",
+      "vote": "CONTRE",
+      "argument": "La confirmation ancienne d'une date peut être oubliée ; une décision proche de l'action est plus intelligible pour un usage occasionnel."
+    },
+    {
+      "orientation": "E2",
+      "participant": "E5",
+      "vote": "CONTRE",
+      "argument": "Aucune clôture réelle n'a été exécutée dans le corpus ; automatiser ce parcours avant son observation introduit trop d'inconnues."
+    },
+    {
+      "orientation": "F1",
+      "participant": "E1",
+      "vote": "POUR",
+      "argument": "Des vues enregistrées peuvent éviter la répétition sans masquer les filtres actifs ; la réinitialisation reste présente."
+    },
+    {
+      "orientation": "F1",
+      "participant": "E2",
+      "vote": "POUR",
+      "argument": "Une extension limitée de la liste existante est une réponse plausible aux équipes qui suivent plusieurs animations."
+    },
+    {
+      "orientation": "F1",
+      "participant": "E3",
+      "vote": "POUR",
+      "argument": "Partager une vue des dossiers ou échéances facilite la coordination à condition de respecter les droits de chacun."
+    },
+    {
+      "orientation": "F1",
+      "participant": "E4",
+      "vote": "CONTRE",
+      "argument": "Nommer, partager et retrouver des vues ajoute une couche de navigation ; les filtres conservés devraient être éprouvés d'abord."
+    },
+    {
+      "orientation": "F1",
+      "participant": "E5",
+      "vote": "ABSTENTION",
+      "argument": "Le besoin de vues partagées n'a pas été observé avec une équipe réelle ni un volume significatif."
+    },
+    {
+      "orientation": "F2",
+      "participant": "E1",
+      "vote": "CONTRE",
+      "argument": "Le calendrier ajoute une représentation à maintenir avant de rendre la priorité des actions suffisamment lisible dans les vues existantes."
+    },
+    {
+      "orientation": "F2",
+      "participant": "E2",
+      "vote": "CONTRE",
+      "argument": "La valeur supplémentaire par rapport à A1 et à la liste n'est pas établie au regard de l'effort L."
+    },
+    {
+      "orientation": "F2",
+      "participant": "E3",
+      "vote": "POUR",
+      "argument": "Une vue transversale des dates aide à repérer les collisions de préparation entre animations et conserve l'accès aux actions."
+    },
+    {
+      "orientation": "F2",
+      "participant": "E4",
+      "vote": "CONTRE",
+      "argument": "Un organisateur occasionnel peut confondre date de fin et clôture ; clarifier d'abord ces états dans les écrans actuels."
+    },
+    {
+      "orientation": "F2",
+      "participant": "E5",
+      "vote": "ABSTENTION",
+      "argument": "Les besoins de coordination temporelle sont plausibles mais non observés ; tester un scénario multi-animation avant d'engager cette forme."
+    },
+    {
+      "orientation": "G1",
+      "participant": "E1",
+      "vote": "POUR",
+      "argument": "Des accès courants complètent le sélecteur long sans supprimer la navigation exhaustive."
+    },
+    {
+      "orientation": "G1",
+      "participant": "E2",
+      "vote": "POUR",
+      "argument": "La portée est limitée et garde les fonctions existantes ; je la place après les parcours essentiels de bureau."
+    },
+    {
+      "orientation": "G1",
+      "participant": "E3",
+      "vote": "POUR",
+      "argument": "Des actions courantes visibles sur téléphone peuvent être utiles sur le terrain si elles respectent l'état et les droits."
+    },
+    {
+      "orientation": "G1",
+      "participant": "E4",
+      "vote": "POUR",
+      "argument": "La proposition prévoit justement téléphone, clavier et lecteur d'écran ; le repère de rubrique protège l'orientation."
+    },
+    {
+      "orientation": "G1",
+      "participant": "E5",
+      "vote": "ABSTENTION",
+      "argument": "La simulation à 390 px ne montre pas quels raccourcis sont réellement prioritaires ; je souhaite des tâches sur téléphone avant de choisir ces accès."
+    },
+    {
+      "orientation": "G2",
+      "participant": "E1",
+      "vote": "CONTRE",
+      "argument": "Une visite ajoute une couche explicative ; la priorité est que chaque écran se comprenne au moment de l'action."
+    },
+    {
+      "orientation": "G2",
+      "participant": "E2",
+      "vote": "CONTRE",
+      "argument": "Le bénéfice d'une visite même facultative n'est pas démontré ; les corrections locales ont une valeur plus directe."
+    },
+    {
+      "orientation": "G2",
+      "participant": "E3",
+      "vote": "CONTRE",
+      "argument": "Un tutoriel initial répond peu aux opérations rares de clôture ; je privilégie l'aide contextuelle au moment du besoin."
+    },
+    {
+      "orientation": "G2",
+      "participant": "E4",
+      "vote": "POUR",
+      "argument": "Une visite quittable et rejouable peut rassurer certaines personnes peu familières du numérique sans bloquer les autres."
+    },
+    {
+      "orientation": "G2",
+      "participant": "E5",
+      "vote": "ABSTENTION",
+      "argument": "Une préférence simulée ne prouve pas qu'une visite aide ; comparer avec les seules aides contextuelles serait nécessaire."
+    }
+  ],
+  "debat": [
+    {
+      "participant": "E1",
+      "orientation": "B1",
+      "objection": "Françoise et Michel tiennent aux étapes et aux confirmations.",
+      "reponse": "Je conserve ces repères ; enregistrer un brouillon incomplet rend possible une interruption sans les supprimer.",
+      "arbitrage": "Soutien à B1 ; refus de B4 comme réponse prioritaire à cette friction."
+    },
+    {
+      "participant": "E2",
+      "orientation": "B4",
+      "objection": "Une utilisatrice fréquente veut aller vite, mais Françoise et Michel préfèrent les étapes.",
+      "reponse": "Deux parcours coûteraient cher sans preuve du gain ; la reprise et les valeurs cohérentes améliorent le parcours commun.",
+      "arbitrage": "CONTRE B4 ; POUR B1 et B3. Le nombre d'écrans n'est pas une mesure de temps humain."
+    },
+    {
+      "participant": "E3",
+      "orientation": "B1",
+      "objection": "Karim veut interrompre et reprendre sans relance automatique.",
+      "reponse": "Le brouillon partiel doit enregistrer la préparation sans aucun effet d'invitation ou de publication ; c'est compatible avec le texte soumis.",
+      "arbitrage": "POUR B1 sous les garde-fous déjà inclus ; aucun accord implicite pour une relance."
+    },
+    {
+      "participant": "E1",
+      "orientation": "C3",
+      "objection": "Karim ne veut pas de relance automatique.",
+      "reponse": "Je soutiens seulement l'option activée délibérément avec destinataires, calendrier et annulation ; le refus de programmer reste possible.",
+      "arbitrage": "POUR C3 comme option P2 ; aucune programmation par défaut."
+    },
+    {
+      "participant": "E4",
+      "orientation": "C3",
+      "objection": "Karim refuse une relance déclenchée à sa place.",
+      "reponse": "Même confirmée à l'avance, l'action différée peut être oubliée ; la charge de compréhension me paraît sous-estimée.",
+      "arbitrage": "CONTRE C3 malgré ses garde-fous, en désaccord avec E1 et E3."
+    },
+    {
+      "participant": "E2",
+      "orientation": "D1",
+      "objection": "Élodie exige une communication fiable.",
+      "reponse": "Une erreur de lecture connue sur une fonction annoncée doit être diagnostiquée puis vérifiée sur destinataires isolés.",
+      "arbitrage": "POUR D1 ; P0 si Communication est incluse dans l'ouverture. Effort à réestimer après diagnostic."
+    },
+    {
+      "participant": "E5",
+      "orientation": "D1",
+      "objection": "Élodie craint que les communications soient globalement non fiables.",
+      "reponse": "Le corpus prouve deux erreurs 500 de lecture dans une session ; ni tous les envois ni la disponibilité générale n'ont été mesurés.",
+      "arbitrage": "POUR D1, sans étendre le fait observé. La recette d'envoi reste une preuve à produire."
+    },
+    {
+      "participant": "E4",
+      "orientation": "C2",
+      "objection": "Sophie veut un import efficace pour un grand nombre de commerces.",
+      "reponse": "Le modèle peut préassocier les colonnes ; les doutes doivent rester explicables, corrigeables et confirmés avant traitement.",
+      "arbitrage": "POUR C2 ; aucune fusion automatique sur simple nom/adresse."
+    },
+    {
+      "participant": "E3",
+      "orientation": "F2",
+      "objection": "Sophie demande une lecture des priorités entre plusieurs animations.",
+      "reponse": "A1 répond aux actions immédiates ; un calendrier complémentaire pourrait révéler les collisions d'échéances futures.",
+      "arbitrage": "POUR F2 en P2, après A1 ; ne pas remplacer la liste ni confondre échéance et statut."
+    },
+    {
+      "participant": "E2",
+      "orientation": "F2",
+      "objection": "Sophie demande des priorités transverses.",
+      "reponse": "La liste et A1 peuvent fournir cette hiérarchie sans créer tout de suite un calendrier.",
+      "arbitrage": "CONTRE F2 au périmètre proposé ; POUR A1 et F1."
+    },
+    {
+      "participant": "E3",
+      "orientation": "E1",
+      "objection": "Bernard veut comprendre la différence entre fin de période, clôture et bilan.",
+      "reponse": "Expliquer l'effet réel et la prochaine tâche est préférable à fusionner les états ; annoncer un gagnant ne signifie pas que le lot a été remis.",
+      "arbitrage": "POUR E1 ; garder les confirmations et responsabilités."
+    },
+    {
+      "participant": "E5",
+      "orientation": "E2",
+      "objection": "Bernard pourrait croire qu'une animation datée est automatiquement close.",
+      "reponse": "Une explication locale peut lever cette ambiguïté ; elle ne justifie pas à elle seule une nouvelle clôture programmée.",
+      "arbitrage": "POUR E1 et CONTRE E2 ; vérifier le parcours manuel complet avant d'automatiser."
+    }
+  ],
+  "desaccords_priorite": [
+    {
+      "participant": "E3",
+      "orientation": "B3",
+      "position": "POUR la solution, mais P2 plutôt que P1 : le seuil incompatible est explicitement bloqué et corrigeable ; B2 et E1 portent un risque opérationnel supérieur."
+    },
+    {
+      "participant": "E5",
+      "orientation": "C1",
+      "position": "ABSTENTION sur la solution précise et réserve sur P1 avant vérification du parcours canonique et de la fréquence du besoin."
+    },
+    {
+      "participant": "E2",
+      "orientation": "D1",
+      "position": "P0 conditionné à l'inclusion de Communication dans l'ouverture aux 500 organisations ; le vote favorable au rétablissement ne prouve pas l'étendue de la panne."
+    },
+    {
+      "participant": "E1",
+      "orientation": "G1",
+      "position": "POUR en P2 ; ne pas faire passer les raccourcis mobiles avant la sauvegarde ou le suivi cohérent."
+    },
+    {
+      "participant": "E4",
+      "orientation": "G2",
+      "position": "POUR en P3 seulement, après corrections locales ; une visite ne compense pas les obstacles."
+    },
+    {
+      "participant": "E3",
+      "orientation": "F2",
+      "position": "POUR en P2, après A1 et D1 ; la planification transverse ne remplace pas les actions immédiates."
+    }
+  ],
+  "preuves": "Corpus et dix captures examinés avant formulation, détaillés dans avis-independants-experts.md. Orientations-soumises.md version 1 lue ensuite. Objections métier transmises par le facilitateur ; aucun résultat empirique nouvellement produit."
+}

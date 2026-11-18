@@ -1,0 +1,394 @@
+{
+  "simulation": true,
+  "version_maquettes": "v1",
+  "captures_examinees": [
+    "../visuels/maquettes-apres/iterations/v1/A1-accueil-bureau.png",
+    "../visuels/maquettes-apres/iterations/v1/B1-saisie-bureau.png",
+    "../visuels/maquettes-apres/iterations/v1/B2-publication-bureau.png",
+    "../visuels/maquettes-apres/iterations/v1/B3-compatible-bureau.png",
+    "../visuels/maquettes-apres/iterations/v1/C1-selection-bureau.png",
+    "../visuels/maquettes-apres/iterations/v1/C2-apercu-bureau.png",
+    "../visuels/maquettes-apres/iterations/v1/D1-lecture-bureau.png",
+    "../visuels/maquettes-apres/iterations/v1/D2-suivi-bureau.png",
+    "../visuels/maquettes-apres/iterations/v1/E1-periode-bureau.png",
+    "../visuels/maquettes-apres/iterations/v1/D1-incertain-mobile.png",
+    "../visuels/maquettes-apres/iterations/v1/B2-invitations-mobile.png",
+    "../visuels/maquettes-apres/iterations/v1/E1-dossiers-mobile.png",
+    "../visuels/maquettes-apres/iterations/v1/C1-suivi-bureau.png"
+  ],
+  "documents_examines": [
+    "../visuels/maquettes-apres/README.md",
+    "../visuels/maquettes-apres/scenarios.json",
+    "backlog-ux.md",
+    "votes-et-arbitrages.md",
+    "resultats-votes.json"
+  ],
+  "limites": "Réactions fictives de Karim, Elodie et Bernard à des images et textes. Aucun test humain, aucun temps mesuré, aucun navigateur ni backend sollicité. Les états supplémentaires non listés ne sont pas considérés examinés. La préférence ne vaut ni nouveau vote d’adoption ni validation utilisateur. Backlog et votes consultés pour le périmètre, avec lecture ciblée des orientations concernées.",
+  "revues": [
+    {
+      "participant": "Karim",
+      "orientation": "A1",
+      "clarte": "Je repère les deux tâches avant les bonnes nouvelles.",
+      "simplicite": "Je peux commencer par l’action de mon association sans parcourir les alertes historiques.",
+      "actions": "Préparer la clôture et Voir les invitations sont immédiatement identifiables.",
+      "risques": "Le mot Action attendue limite la confusion avec une publication réussie ; le risque réel n’a pas été mesuré.",
+      "preference": "NOUVELLE",
+      "difficultes": "Le filtre Période voisin des tâches me fait hésiter : filtre-t-il aussi les échéances futures ?"
+    },
+    {
+      "participant": "Karim",
+      "orientation": "B1",
+      "clarte": "Je comprends que mon travail peut être gardé avec un nom, sans tous les renseignements.",
+      "simplicite": "Cela correspond à ma préparation entre deux rendez-vous ; je suppose moins de ressaisie sans avoir chronométré.",
+      "actions": "Enregistrer le brouillon est visible et distinct de Continuer.",
+      "risques": "La phrase sans publication ni invitation me rassure ; il faudra que l’état enregistré soit fiable.",
+      "preference": "NOUVELLE",
+      "difficultes": "Je veux retrouver simplement ce brouillon après une interruption ; l’image de saisie ne démontre pas cette reprise."
+    },
+    {
+      "participant": "Karim",
+      "orientation": "B2",
+      "clarte": "Je vois les trois moments et ce qui manque avant de publier.",
+      "simplicite": "Les liens ciblés évitent de rechercher moi-même où corriger.",
+      "actions": "Inviter la librairie est attribué à moi ; la dotation a sa propre action.",
+      "risques": "L’écran mobile distingue invitation et accord, et n’invente pas une activation du compte.",
+      "preference": "NOUVELLE",
+      "difficultes": "Le bouton Préparer l’invitation mobile ne répète pas le nom du destinataire ; je le revérifierais avant l’envoi."
+    },
+    {
+      "participant": "Karim",
+      "orientation": "B3",
+      "clarte": "Deux commerces à visiter sur deux sélectionnés a un sens immédiat.",
+      "simplicite": "Je ne dois plus corriger une proposition impossible au premier passage.",
+      "actions": "Continuer et Revoir la sélection sont faciles à choisir.",
+      "risques": "Le texte explique des commerces distincts ; il ne me promet pas que leurs accords sont obtenus.",
+      "preference": "NOUVELLE",
+      "difficultes": "Il restera à vérifier la réaction si je change les commerces après avoir choisi la règle ; cette première image ne la prouve pas."
+    },
+    {
+      "participant": "Karim",
+      "orientation": "C1",
+      "clarte": "Je comprends où aller quand un partenaire manque et qu’une demande précède sa sélection.",
+      "simplicite": "Le point d’entrée m’évite une recherche extérieure, mais le travail ne sera fini qu’au référencement.",
+      "actions": "Mon commerce n’est pas dans la liste répond exactement à mon problème.",
+      "risques": "Le suivi indique non associé et aucune invitation, ce qui évite une fausse impression de participation.",
+      "preference": "NOUVELLE",
+      "difficultes": "Demande transmise ne me dit pas qui la traite ni comment reprendre contact. Ne pas inventer un responsable ; expliciter ce qui reste inconnu."
+    },
+    {
+      "participant": "Karim",
+      "orientation": "C2",
+      "clarte": "Deux lignes se ressemblent me parle davantage que zéro conflit.",
+      "simplicite": "Comparer les deux lignes est une bonne prochaine étape, même si je dois décider moi-même.",
+      "actions": "Les sélections sont explicites et non précochées sur l’image.",
+      "risques": "Je comprends que zéro conflit ne garantit pas zéro doublon et qu’aucune fusion automatique n’est prévue.",
+      "preference": "NOUVELLE",
+      "difficultes": "Je ne sais pas décider si je manque d’information ; prévoir la possibilité claire de reprendre après vérification extérieure, sans inventer une identité."
+    },
+    {
+      "participant": "Karim",
+      "orientation": "D1",
+      "clarte": "Je distingue un problème de chargement d’un envoi dont le résultat est inconnu.",
+      "simplicite": "Deux issues utiles sont proposées : vérifier ou demander de l’aide.",
+      "actions": "Sur mobile, Vérifier l’état de cet envoi est bien plus sûr à comprendre que Réessayer.",
+      "risques": "La consigne de ne pas créer un second envoi est explicite ; la maquette ne garantit pas le comportement serveur.",
+      "preference": "NOUVELLE",
+      "difficultes": "Après plusieurs vérifications sans résultat, je voudrais savoir quand et comment reprendre contact avec le support, sans délai promis arbitrairement."
+    },
+    {
+      "participant": "Karim",
+      "orientation": "D2",
+      "clarte": "Le suivi opérationnel et le bilan ont maintenant des noms et destinations distincts.",
+      "simplicite": "Je suppose un détour évité ; aucun temps gagné n’a été mesuré.",
+      "actions": "Les actions sur le jeu sont visibles ; le bilan garde son lien.",
+      "risques": "La distinction réduit une confusion de navigation, pas les risques propres à suspendre ou annuler.",
+      "preference": "NOUVELLE",
+      "difficultes": "Suspendre, clôturer et annuler sont proches : je veux garder leurs explications et confirmations dans les écrans suivants."
+    },
+    {
+      "participant": "Karim",
+      "orientation": "E1",
+      "clarte": "La période finie n’est plus présentée comme un travail entièrement terminé.",
+      "simplicite": "La prochaine action et le dossier de lot restant forment un parcours compréhensible.",
+      "actions": "Ouvrir le dossier de remise est précis ; Terminer reste bloqué tant que le dossier attend.",
+      "risques": "Informer ne signifie pas remis est clair, et la clôture reste distincte du tirage et de la remise.",
+      "preference": "NOUVELLE",
+      "difficultes": "Le repère courant de la frise repose beaucoup sur sa barre verte ; ajouter un mot comme Étape actuelle aiderait ma lecture."
+    },
+    {
+      "participant": "Elodie",
+      "orientation": "A1",
+      "clarte": "La nouvelle hiérarchie sépare intervention, réussite et information sans changer l’identité.",
+      "simplicite": "Je peux balayer les tâches avant de lire les nouvelles ; c’est un gain attendu, pas une mesure.",
+      "actions": "Créer une animation reste très visible, les liens des nouvelles restent accessibles.",
+      "risques": "Les libellés complètent les couleurs et évitent de faire passer toutes les nouvelles pour des urgences.",
+      "preference": "NOUVELLE",
+      "difficultes": "La portée des filtres Période et Statut mérite d’être précisée ; je ne veux pas masquer une tâche à venir en regardant trente jours passés."
+    },
+    {
+      "participant": "Elodie",
+      "orientation": "B1",
+      "clarte": "L’enregistrement partiel et l’absence de diffusion sont bien expliqués.",
+      "simplicite": "Je peux garder des textes avant de connaître les dates, ce qui correspond à mon travail.",
+      "actions": "L’enregistrement a une action dédiée et les étapes restent disponibles.",
+      "risques": "La distinction entre sauvegarder et continuer limite une confusion ; la persistance reste une dépendance technique.",
+      "preference": "NOUVELLE",
+      "difficultes": "Après une modification ultérieure, il faudra indiquer précisément ce qui n’est pas encore enregistré ; ce premier état ne couvre pas tout."
+    },
+    {
+      "participant": "Elodie",
+      "orientation": "B2",
+      "clarte": "Les responsabilités et la dotation manquante se lisent facilement.",
+      "simplicite": "Les entrées ciblées devraient éviter des allers-retours entre rubriques.",
+      "actions": "Ouvrir les invitations et Configurer la dotation correspondent aux deux obstacles affichés.",
+      "risques": "L’accord n’est pas assimilé à une activation ; publier reste une décision distincte après les contrôles.",
+      "preference": "NOUVELLE",
+      "difficultes": "Je vérifierai dans les autres états la disponibilité effective du QR final ; les images examinées ne prouvent pas la production de supports."
+    },
+    {
+      "participant": "Elodie",
+      "orientation": "B3",
+      "clarte": "Le seuil choisi et sa conséquence sont proches du champ.",
+      "simplicite": "Une valeur initiale cohérente économise une correction purement mécanique attendue.",
+      "actions": "Le réglage et Revoir la sélection se trouvent sans ambiguïté.",
+      "risques": "La règle des commerces distincts est explicitée ; le contrôle serveur reste à réaliser.",
+      "preference": "NOUVELLE",
+      "difficultes": "Le cas initial à deux commerces est clair ; les cas de retrait et d’ajout devront garder ma décision sans changement silencieux."
+    },
+    {
+      "participant": "Elodie",
+      "orientation": "C1",
+      "clarte": "Le commerce absent mène à une demande, pas à un compte actif.",
+      "simplicite": "Je peux choisir entre demande individuelle et import sans chercher une autre section.",
+      "actions": "L’action individuelle est bien nommée, le suivi affiche une référence fictive.",
+      "risques": "Non associé, aucune invitation envoyée protège la distinction entre demande et participation.",
+      "preference": "NOUVELLE",
+      "difficultes": "La confirmation devrait indiquer comment suivre une attente prolongée ; le responsable et le circuit réels doivent être vérifiés avant d’afficher une promesse."
+    },
+    {
+      "participant": "Elodie",
+      "orientation": "C2",
+      "clarte": "La similitude est nommée comme doute et les identifiants absents expliquent la limite.",
+      "simplicite": "La comparaison est plus utile qu’un compteur zéro conflit isolé.",
+      "actions": "Comparer est l’action dominante ; Revoir les colonnes reste disponible.",
+      "risques": "L’absence de fusion ou exclusion automatique est claire et protège la décision humaine.",
+      "preference": "NOUVELLE",
+      "difficultes": "Je souhaite vérifier aussi les colonnes reconnues, les vraies erreurs email/SIRET et la confirmation finale ; l’aperçu seul ne couvre pas le flux complet."
+    },
+    {
+      "participant": "Elodie",
+      "orientation": "D1",
+      "clarte": "Lecture impossible et résultat d’envoi incertain sont enfin deux situations distinctes.",
+      "simplicite": "Les actions correspondent au problème, sans demander de recommencer aveuglément.",
+      "actions": "Vérifier l’état de cet envoi annonce explicitement qu’il ne renvoie rien.",
+      "risques": "La tentative existante et sa date limitent le risque de doublon dans la présentation ; l’idempotence et les statuts réels restent à prouver.",
+      "preference": "NOUVELLE",
+      "difficultes": "Un résultat confirmé doit distinguer demande acceptée, message envoyé et réception si ces données existent ; je ne déduis pas leur équivalence de cette maquette."
+    },
+    {
+      "participant": "Elodie",
+      "orientation": "D2",
+      "clarte": "Je sais où agir et où lire les chiffres.",
+      "simplicite": "La correction est locale et évite le détour constaté vers le bilan.",
+      "actions": "Le lien Ouvrir le bilan est conservé et clairement séparé.",
+      "risques": "On n’annonce pas de données en temps réel ; les définitions doivent rester exactes dans le bilan.",
+      "preference": "NOUVELLE",
+      "difficultes": "Les actions sensibles restent proches visuellement ; leur confirmation et leur droit d’accès doivent être conservés à l’implémentation."
+    },
+    {
+      "participant": "Elodie",
+      "orientation": "E1",
+      "clarte": "Les quatre états ont chacun une explication courte et les lots gardent leur propre tâche.",
+      "simplicite": "Le responsable affiché dans l’exemple facilite la coordination sans tout réunir en une seule clôture.",
+      "actions": "Le dossier de remise précède logiquement Terminer l’animation.",
+      "risques": "L’information du gagnant reste distincte de la remise, et aucun automatisme de tirage n’est ajouté.",
+      "preference": "NOUVELLE",
+      "difficultes": "Je veux que la situation actuelle soit identifiable sans la seule couleur de la frise et que les remises non renseignées ne soient jamais présentées comme non effectuées."
+    },
+    {
+      "participant": "Bernard",
+      "orientation": "A1",
+      "clarte": "Je reconnais mieux ce qui réclame mon intervention et ce qui est une nouvelle positive.",
+      "simplicite": "J’ai moins de messages de même apparence à interpréter.",
+      "actions": "Préparer la clôture dit clairement ce que je peux faire.",
+      "risques": "La couleur est accompagnée de mots, ce qui aide à éviter de tout lire comme une alerte.",
+      "preference": "NOUVELLE",
+      "difficultes": "Je ne sais pas encore ce que les trente derniers jours changent dans la liste des prochaines actions."
+    },
+    {
+      "participant": "Bernard",
+      "orientation": "B1",
+      "clarte": "Je peux commencer sans tout savoir, et le mot brouillon reste visible.",
+      "simplicite": "Je n’ai plus besoin de finir les sept étapes pour garder cette première partie.",
+      "actions": "Enregistrer le brouillon se distingue de Continuer grisé.",
+      "risques": "Le texte dit bien que rien n’est publié ni envoyé ; cela réduit mon hésitation attendue.",
+      "preference": "NOUVELLE",
+      "difficultes": "Informations publiques peut encore me faire hésiter avant la phrase rassurante en bas ; rappeler près du titre que le brouillon n’est pas public serait utile."
+    },
+    {
+      "participant": "Bernard",
+      "orientation": "B2",
+      "clarte": "Préparer, obtenir les accords, publier raconte une histoire que je peux suivre.",
+      "simplicite": "Les tâches sont exprimées avec des verbes, même si dotation reste un mot moins familier.",
+      "actions": "Le commerce à inviter est nommé et l’action m’est attribuée.",
+      "risques": "Inviter ne signifie pas obtenir un accord ; l’état inconnu du compte n’est pas présenté comme activé.",
+      "preference": "NOUVELLE",
+      "difficultes": "Le texte sur l’activation est assez long sur téléphone ; je veux une explication courte sans supprimer cette distinction."
+    },
+    {
+      "participant": "Bernard",
+      "orientation": "B3",
+      "clarte": "Je comprends qu’il faut visiter deux commerces différents.",
+      "simplicite": "Le choix proposé m’évite une erreur dont je ne saurais pas toujours trouver la cause.",
+      "actions": "Continuer est visible après l’explication du réglage.",
+      "risques": "La cohérence affichée rassure, mais je dois encore comprendre qu’un choix compatible ne vaut pas publication.",
+      "preference": "NOUVELLE",
+      "difficultes": "Seuil reste un mot technique ; le libellé Nombre de commerces à visiter est plus concret et pourrait être le titre principal."
+    },
+    {
+      "participant": "Bernard",
+      "orientation": "C1",
+      "clarte": "Je sais enfin quoi faire pour signaler le commerce manquant.",
+      "simplicite": "L’entrée individuelle me paraît plus simple que préparer un fichier pour une seule personne.",
+      "actions": "Le bouton décrit mon problème, puis le suivi dit que le commerce n’est pas encore disponible.",
+      "risques": "Aucune invitation envoyée évite de croire que la personne a déjà été contactée.",
+      "preference": "NOUVELLE",
+      "difficultes": "À qui la demande a-t-elle été transmise ? Si on ne sait pas encore, il faut le dire dans le dossier de conception et ne pas nommer un service imaginaire."
+    },
+    {
+      "participant": "Bernard",
+      "orientation": "C2",
+      "clarte": "Je comprends le doute entre deux lignes, mais je reste peu à l’aise avec l’import.",
+      "simplicite": "Je ne peux pas dire que cela me ferait gagner du temps puisque je n’utilise pas ce parcours.",
+      "actions": "Comparer les deux lignes est lisible, les cases me demandent une décision.",
+      "risques": "La phrase sur zéro conflit m’empêche de croire que tout est vérifié ; je demanderais encore de l’aide.",
+      "preference": "SANS_PREFERENCE",
+      "difficultes": "Je ne sais pas quelle ligne choisir quand les deux sont identiques. La maquette explique la limite mais ne peut pas remplacer la connaissance du commerce."
+    },
+    {
+      "participant": "Bernard",
+      "orientation": "D1",
+      "clarte": "Je comprends mieux ce qui a échoué ; sur téléphone il est dit que le message a peut-être été envoyé.",
+      "simplicite": "La vérification indiquée m’évite de choisir moi-même entre attendre et renvoyer.",
+      "actions": "Vérifier l’état de cet envoi est compréhensible et le support reste accessible.",
+      "risques": "Ne créez pas un second envoi est une consigne utile ; aucune réception réelle n’est démontrée.",
+      "preference": "NOUVELLE",
+      "difficultes": "Je ne sais pas combien de fois vérifier si l’état reste incertain. Une suite explicite vers le support serait rassurante sans promettre un délai."
+    },
+    {
+      "participant": "Bernard",
+      "orientation": "D2",
+      "clarte": "Les résultats sont séparés des commandes de pilotage.",
+      "simplicite": "Je trouve le bilan sans le confondre avec les actions sur l’animation.",
+      "actions": "Ouvrir le bilan est clair ; les commandes d’arrêt demandent davantage d’attention.",
+      "risques": "La séparation réduit mon erreur de rubrique, mais annuler doit toujours demander une confirmation compréhensible.",
+      "preference": "NOUVELLE",
+      "difficultes": "Opérationnel est moins familier que Suivi de l’animation ; je vérifierais la compréhension de ce libellé avec d’autres utilisateurs occasionnels."
+    },
+    {
+      "participant": "Bernard",
+      "orientation": "E1",
+      "clarte": "La fin de période, la clôture et la remise ne signifient plus la même chose.",
+      "simplicite": "Une prochaine tâche et un dossier restant me donnent un chemin pour terminer.",
+      "actions": "Ouvrir le dossier de remise est concret et Terminer indisponible est expliqué.",
+      "risques": "Le gagnant informé n’est pas marqué comme servi ; la clôture n’effectue ni tirage ni remise automatiquement.",
+      "preference": "NOUVELLE",
+      "difficultes": "Dans la frise, tous les titres ont un poids semblable. Dire explicitement Vous êtes à l’étape Clôturée m’aiderait à savoir où j’en suis."
+    }
+  ],
+  "alertes": [
+    {
+      "orientation": "A1",
+      "gravite": "mineure — ambiguïté à tester",
+      "constat": "Période / 30 derniers jours est placé près de Vos prochaines actions ; sa portée sur les échéances futures n’est pas précisée dans l’image.",
+      "correction": "Préciser le périmètre réellement filtré avec un libellé et une aide locale, sans créer de nouvelle règle de priorité ni modifier le contrat."
+    },
+    {
+      "orientation": "B1",
+      "gravite": "mineure — formulation",
+      "constat": "Informations publiques peut faire hésiter un profil occasionnel alors que les données saisies restent un brouillon non publié.",
+      "correction": "Rappeler près du titre que le brouillon n’est pas public, en conservant le rappel d’absence de publication et d’invitation."
+    },
+    {
+      "orientation": "C1",
+      "gravite": "dépendance de conception non résolue",
+      "constat": "Le suivi fictif affiche Demande transmise sans propriétaire ni délai connu. Aucun responsable n’est inventé, mais le prochain geste en cas d’attente prolongée demeure indéterminé.",
+      "correction": "Confirmer propriétaire, circuit et droits avant développement ; documenter cette limite et ne proposer un contact ou délai dans l’interface que s’il est réel. Ne pas simuler une garantie de traitement."
+    },
+    {
+      "orientation": "D1",
+      "gravite": "limite de couverture",
+      "constat": "L’envoi incertain est correctement distingué d’une erreur de lecture ; le scénario de résultat durablement inconnu reste peu détaillé visuellement.",
+      "correction": "Définir le passage au support après vérification sans résultat en conservant la tentative existante et sans second envoi automatique ; ne pas promettre de délai non maîtrisé."
+    },
+    {
+      "orientation": "E1",
+      "gravite": "mineure — repérage",
+      "constat": "La frise indique principalement l’étape courante par une barre verte, surtout dans E1-dossiers-mobile ; les quatre titres ont une apparence proche.",
+      "correction": "Ajouter un repère textuel Étape actuelle ou Vous êtes ici auprès de l’état courant, sans fusionner les états ni changer leurs transitions."
+    }
+  ],
+  "changement_substantiel": [
+    {
+      "orientation": "A1",
+      "avis": "NON identifié dans les états examinés",
+      "motif": "La hiérarchie actions/nouvelles reste l’orientation votée ; la portée du filtre appelle une clarification locale."
+    },
+    {
+      "orientation": "B1",
+      "avis": "NON identifié dans les états examinés",
+      "motif": "Le brouillon partiel était explicitement adopté avec contrat futur ; le dessin ne constitue pas une implémentation."
+    },
+    {
+      "orientation": "B2",
+      "avis": "NON identifié dans les états examinés",
+      "motif": "Les diagnostics, acteurs et accords restent distincts ; activation inconnue est conservée."
+    },
+    {
+      "orientation": "B3",
+      "avis": "NON identifié dans les états examinés",
+      "motif": "La valeur initiale compatible correspond au vote ; le cas de modification reste à vérifier indépendamment."
+    },
+    {
+      "orientation": "C1",
+      "avis": "NON identifié dans les états examinés",
+      "motif": "Demande et participation restent distinctes ; le propriétaire inconnu est une dépendance ouverte déjà prévue, pas une nouvelle attribution."
+    },
+    {
+      "orientation": "C2",
+      "avis": "NON identifié dans les états examinés",
+      "motif": "Le doute reste soumis à la décision humaine, sans fusion ni rejet automatiques."
+    },
+    {
+      "orientation": "D1",
+      "avis": "NON identifié dans les états examinés",
+      "motif": "Les états de lecture et d’envoi incertain suivent le périmètre adopté et n’autorisent pas de répétition automatique."
+    },
+    {
+      "orientation": "D2",
+      "avis": "NON identifié dans les états examinés",
+      "motif": "Le suivi opérationnel et le bilan sont séparés ; aucune nouvelle règle d’action n’est démontrée."
+    },
+    {
+      "orientation": "E1",
+      "avis": "NON identifié dans les états examinés",
+      "motif": "Les états, responsabilités et distinctions information/remise sont conservés ; le repère textuel proposé est une correction locale."
+    }
+  ],
+  "captures_examinees_originales": [
+    "../visuels/maquettes-apres/A1-accueil-bureau.png",
+    "../visuels/maquettes-apres/B1-saisie-bureau.png",
+    "../visuels/maquettes-apres/B2-publication-bureau.png",
+    "../visuels/maquettes-apres/B3-compatible-bureau.png",
+    "../visuels/maquettes-apres/C1-selection-bureau.png",
+    "../visuels/maquettes-apres/C2-apercu-bureau.png",
+    "../visuels/maquettes-apres/D1-lecture-bureau.png",
+    "../visuels/maquettes-apres/D2-suivi-bureau.png",
+    "../visuels/maquettes-apres/E1-periode-bureau.png",
+    "../visuels/maquettes-apres/D1-incertain-mobile.png",
+    "../visuels/maquettes-apres/B2-invitations-mobile.png",
+    "../visuels/maquettes-apres/E1-dossiers-mobile.png",
+    "../visuels/maquettes-apres/C1-suivi-bureau.png"
+  ],
+  "archivage": "Chemins des rendus v1 preserves avant corrections ; avis inchanges."
+}

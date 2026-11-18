@@ -1,0 +1,517 @@
+{
+  "simulation": true,
+  "participants": [
+    {
+      "id": "Francoise",
+      "role": "Présidente associative, 67 ans, très faible aisance numérique, 2–3 animations/an"
+    },
+    {
+      "id": "Michel",
+      "role": "Trésorier bénévole, 59 ans, utilisateur occasionnel, tombola et dotation simples"
+    },
+    {
+      "id": "Sophie",
+      "role": "Chargée de commerce en mairie, 43 ans, aisance intermédiaire, nombreuses animations et commerces"
+    },
+    {
+      "id": "Julie",
+      "role": "Animatrice de centre-ville, 36 ans, expérimentée, rapidité et suivi opérationnel"
+    }
+  ],
+  "votes": [
+    {
+      "orientation": "A1",
+      "participant": "Francoise",
+      "vote": "POUR",
+      "argument": "Je veux voir ce que je dois faire et ne plus prendre une bonne nouvelle pour un problème."
+    },
+    {
+      "orientation": "A2",
+      "participant": "Francoise",
+      "vote": "CONTRE",
+      "argument": "Déplacer des blocs serait une nouvelle chose à apprendre pour mes deux ou trois animations ; un accueil clair me suffit."
+    },
+    {
+      "orientation": "B1",
+      "participant": "Francoise",
+      "vote": "POUR",
+      "argument": "Je dois pouvoir m'arrêter quand il me manque un lot, sans avoir l'impression de perdre toute ma préparation."
+    },
+    {
+      "orientation": "B2",
+      "participant": "Francoise",
+      "vote": "POUR",
+      "argument": "Je comprends mieux une action précise et je veux savoir dès le début que publier dépend aussi de la réponse des commerçants."
+    },
+    {
+      "orientation": "B3",
+      "participant": "Francoise",
+      "vote": "POUR",
+      "argument": "Proposez un seuil réalisable et dites-moi ce qu'il signifie ; je ne saurais pas corriger seule un réglage impossible."
+    },
+    {
+      "orientation": "B4",
+      "participant": "Francoise",
+      "vote": "CONTRE",
+      "argument": "Un grand formulaire me semblerait plus difficile à reprendre et l'existence de deux chemins ajoute un choix dont je n'ai pas besoin."
+    },
+    {
+      "orientation": "C1",
+      "participant": "Francoise",
+      "vote": "POUR",
+      "argument": "Pour mon nouveau fleuriste, il me faut une entrée compréhensible et le suivi de ma demande, même si une autre équipe doit la traiter."
+    },
+    {
+      "orientation": "C2",
+      "participant": "Francoise",
+      "vote": "ABSTENTION",
+      "argument": "Je vois l'intérêt de mieux expliquer les erreurs, mais je n'utiliserais pas moi-même un import et ne peux pas juger son coût."
+    },
+    {
+      "orientation": "C3",
+      "participant": "Francoise",
+      "vote": "CONTRE",
+      "argument": "Je préfère choisir quand rappeler mes quelques commerçants ; programmer des envois me ferait craindre d'oublier ce qui part."
+    },
+    {
+      "orientation": "D1",
+      "participant": "Francoise",
+      "vote": "POUR",
+      "argument": "Si l'écran ne fonctionne pas, je dois pouvoir le comprendre et demander de l'aide ; une explication seule ne suffit pas à le réparer."
+    },
+    {
+      "orientation": "D2",
+      "participant": "Francoise",
+      "vote": "POUR",
+      "argument": "Le bouton doit m'emmener là où son nom l'annonce ; je ne veux pas chercher un deuxième suivi."
+    },
+    {
+      "orientation": "E1",
+      "participant": "Francoise",
+      "vote": "POUR",
+      "argument": "Les étapes de fin et les mots courants m'aideraient à savoir ce qu'il reste à faire sans clôturer par erreur."
+    },
+    {
+      "orientation": "E2",
+      "participant": "Francoise",
+      "vote": "CONTRE",
+      "argument": "Je souhaite vérifier la situation moi-même avant de fermer, même si j'avais choisi une date longtemps avant."
+    },
+    {
+      "orientation": "F1",
+      "participant": "Francoise",
+      "vote": "ABSTENTION",
+      "argument": "Je suis surtout seule à préparer nos événements ; je ne sais pas si des vues partagées aideraient les autres organisations."
+    },
+    {
+      "orientation": "F2",
+      "participant": "Francoise",
+      "vote": "CONTRE",
+      "argument": "Pour quelques animations, je préfère les prochaines actions sur l'accueil à un calendrier supplémentaire."
+    },
+    {
+      "orientation": "G1",
+      "participant": "Francoise",
+      "vote": "POUR",
+      "argument": "Sur mon téléphone, retrouver directement la tâche à faire m'aiderait, à condition que les mots restent les mêmes que sur ordinateur."
+    },
+    {
+      "orientation": "G2",
+      "participant": "Francoise",
+      "vote": "POUR",
+      "argument": "Une courte visite que je peux quitter puis revoir après plusieurs mois pourrait me rassurer, sans cacher les aides de l'écran."
+    },
+    {
+      "orientation": "A1",
+      "participant": "Michel",
+      "vote": "POUR",
+      "argument": "Je veux voir les engagements à traiter avant les nouvelles déjà acquises, tout en gardant l'historique accessible."
+    },
+    {
+      "orientation": "A2",
+      "participant": "Michel",
+      "vote": "CONTRE",
+      "argument": "Je préfère consacrer mon temps aux lots et à la tombola plutôt qu'à organiser mon tableau de bord."
+    },
+    {
+      "orientation": "B1",
+      "participant": "Michel",
+      "vote": "POUR",
+      "argument": "Nous décidons parfois des lots après la réunion ; enregistrer la première préparation sans rien envoyer serait utile."
+    },
+    {
+      "orientation": "B2",
+      "participant": "Michel",
+      "vote": "POUR",
+      "argument": "La distinction entre mes cadeaux, leur remise et les accords évite de croire qu'une simple sélection nous engage déjà."
+    },
+    {
+      "orientation": "B3",
+      "participant": "Michel",
+      "vote": "POUR",
+      "argument": "Un réglage initial réalisable évite une correction inutile, tant que l'on me demande avant de changer une règle choisie."
+    },
+    {
+      "orientation": "B4",
+      "participant": "Michel",
+      "vote": "CONTRE",
+      "argument": "Pour mon usage occasionnel, entretenir deux parcours me paraît moins utile que rendre le parcours guidé plus clair."
+    },
+    {
+      "orientation": "C1",
+      "participant": "Michel",
+      "vote": "POUR",
+      "argument": "Une demande pour un seul partenaire manque dans ma compréhension du parcours ; je veux suivre sa réponse sans lui créer un compte actif."
+    },
+    {
+      "orientation": "C2",
+      "participant": "Michel",
+      "vote": "ABSTENTION",
+      "argument": "Je n'ai pas de fichier de nombreux commerces ; je soutiens la prudence sur les doublons mais ne peux pas arbitrer toute cette amélioration."
+    },
+    {
+      "orientation": "C3",
+      "participant": "Michel",
+      "vote": "CONTRE",
+      "argument": "Je préfère garder la relance à la main, après avoir vérifié avec l'association que nous voulons toujours solliciter ces personnes."
+    },
+    {
+      "orientation": "D1",
+      "participant": "Michel",
+      "vote": "POUR",
+      "argument": "Une fonction de communication doit fonctionner et rendre l'incertitude visible pour éviter de prévenir deux fois un gagnant ou un partenaire."
+    },
+    {
+      "orientation": "D2",
+      "participant": "Michel",
+      "vote": "POUR",
+      "argument": "Je dois retrouver le suivi sans confondre les commandes actuelles avec le bilan de la tombola."
+    },
+    {
+      "orientation": "E1",
+      "participant": "Michel",
+      "vote": "POUR",
+      "argument": "La liste des dossiers à régler, leur responsable et la distinction informer/remettre correspondent à mon suivi des lots."
+    },
+    {
+      "orientation": "E2",
+      "participant": "Michel",
+      "vote": "CONTRE",
+      "argument": "Je veux vérifier les derniers incidents avant la fermeture ; une programmation ne remplace pas cette revue du trésorier."
+    },
+    {
+      "orientation": "F1",
+      "participant": "Michel",
+      "vote": "CONTRE",
+      "argument": "Pour une seule tombola préparée par quelques bénévoles, les filtres conservés me semblent suffisants."
+    },
+    {
+      "orientation": "F2",
+      "participant": "Michel",
+      "vote": "CONTRE",
+      "argument": "Un calendrier complet me paraît disproportionné pour notre volume ; les dates et prochaines actions existantes doivent d'abord être claires."
+    },
+    {
+      "orientation": "G1",
+      "participant": "Michel",
+      "vote": "ABSTENTION",
+      "argument": "Je travaille surtout depuis l'ordinateur ; je comprends la demande de terrain mais n'ai pas de préférence fondée sur mon usage."
+    },
+    {
+      "orientation": "G2",
+      "participant": "Michel",
+      "vote": "POUR",
+      "argument": "Une explication facultative que je peux retrouver l'année suivante m'aiderait, si elle ne se relance pas toute seule."
+    },
+    {
+      "orientation": "A1",
+      "participant": "Sophie",
+      "vote": "POUR",
+      "argument": "Je dois distinguer ce qui bloque une animation de ce qui a déjà réussi pour prioriser plusieurs dossiers."
+    },
+    {
+      "orientation": "A2",
+      "participant": "Sophie",
+      "vote": "CONTRE",
+      "argument": "Je préfère une disposition commune compréhensible par mes collègues ; la personnalisation ne résout pas nos tâches en retard."
+    },
+    {
+      "orientation": "B1",
+      "participant": "Sophie",
+      "vote": "POUR",
+      "argument": "La préparation municipale se fait en plusieurs séances et avec des informations encore incomplètes ; il faut conserver le travail sans assouplir la publication."
+    },
+    {
+      "orientation": "B2",
+      "participant": "Sophie",
+      "vote": "POUR",
+      "argument": "Une action attribuée à un responsable et des états distincts m'aideraient à coordonner l'équipe et les commerçants."
+    },
+    {
+      "orientation": "B3",
+      "participant": "Sophie",
+      "vote": "POUR",
+      "argument": "Le seuil proposé doit correspondre à notre sélection, avec une correction explicite si nous la modifions ensuite."
+    },
+    {
+      "orientation": "B4",
+      "participant": "Sophie",
+      "vote": "POUR",
+      "argument": "Pour plusieurs animations similaires, un formulaire facultatif pourrait accélérer la revue globale ; je garde le parcours guidé pour mes collègues moins fréquents."
+    },
+    {
+      "orientation": "C1",
+      "participant": "Sophie",
+      "vote": "POUR",
+      "argument": "J'ai besoin d'une entrée pour demander le référencement d'un nouveau commerce et suivre son traitement ; elle doit réutiliser le circuit responsable vérifié."
+    },
+    {
+      "orientation": "C2",
+      "participant": "Sophie",
+      "vote": "POUR",
+      "argument": "Reconnaître le modèle fourni et montrer les rapprochements incertains évite de reporter la vérification sur nos propres tableurs."
+    },
+    {
+      "orientation": "C3",
+      "participant": "Sophie",
+      "vote": "POUR",
+      "argument": "Avec beaucoup de commerces, une relance planifiée, vérifiable et annulable répond à un travail récurrent de coordination."
+    },
+    {
+      "orientation": "D1",
+      "participant": "Sophie",
+      "vote": "POUR",
+      "argument": "La communication fait partie du pilotage attendu ; nous devons retrouver une lecture fiable et vérifier les envois sur des destinataires isolés."
+    },
+    {
+      "orientation": "D2",
+      "participant": "Sophie",
+      "vote": "POUR",
+      "argument": "Séparer le bilan du suivi rend l'accès prévisible tout en conservant les dates et définitions nécessaires à mes comptes rendus."
+    },
+    {
+      "orientation": "E1",
+      "participant": "Sophie",
+      "vote": "POUR",
+      "argument": "La commune doit comprendre quelles actions restent ouvertes après la date de fin et qui en est responsable."
+    },
+    {
+      "orientation": "E2",
+      "participant": "Sophie",
+      "vote": "ABSTENTION",
+      "argument": "La programmation pourrait aider quand plusieurs animations finissent ensemble, mais je ne peux pas l'adopter sans savoir comment les incidents empêchent ou reportent la fermeture."
+    },
+    {
+      "orientation": "F1",
+      "participant": "Sophie",
+      "vote": "POUR",
+      "argument": "Des vues partagées aideraient mes collègues à travailler sur le même sous-ensemble, sous réserve des droits et de filtres toujours visibles."
+    },
+    {
+      "orientation": "F2",
+      "participant": "Sophie",
+      "vote": "POUR",
+      "argument": "Un calendrier transversal me permettrait de repérer des échéances simultanées et de revenir à chaque action concernée."
+    },
+    {
+      "orientation": "G1",
+      "participant": "Sophie",
+      "vote": "POUR",
+      "argument": "Je consulte aussi les animations en déplacement ; les tâches courantes doivent être atteignables sans relire toutes les rubriques."
+    },
+    {
+      "orientation": "G2",
+      "participant": "Sophie",
+      "vote": "ABSTENTION",
+      "argument": "Une visite peut aider de nouveaux collègues, mais je préférerais mesurer leur besoin après correction des libellés et du parcours."
+    },
+    {
+      "orientation": "A1",
+      "participant": "Julie",
+      "vote": "POUR",
+      "argument": "Sur le terrain je veux immédiatement les actions qui attendent mon intervention, avec les nouvelles consultables ensuite."
+    },
+    {
+      "orientation": "A2",
+      "participant": "Julie",
+      "vote": "CONTRE",
+      "argument": "Le déplacement des blocs apporte moins qu'une hiérarchie commune bien pensée et rajoute de l'entretien."
+    },
+    {
+      "orientation": "B1",
+      "participant": "Julie",
+      "vote": "POUR",
+      "argument": "Je prépare souvent par petites séquences ; un brouillon repris fidèlement me ferait éviter des ressaisies, sans publication implicite."
+    },
+    {
+      "orientation": "B2",
+      "participant": "Julie",
+      "vote": "POUR",
+      "argument": "Des blocages qui indiquent directement quoi corriger et où sont plus utiles qu'un tutoriel que je dois parcourir."
+    },
+    {
+      "orientation": "B3",
+      "participant": "Julie",
+      "vote": "POUR",
+      "argument": "Le seuil impossible juste après la sélection est une rupture évitable ; conserver ma règle si elle devient incompatible exige un avertissement explicite."
+    },
+    {
+      "orientation": "B4",
+      "participant": "Julie",
+      "vote": "POUR",
+      "argument": "Un formulaire unique facultatif m'intéresse pour des créations répétées, avec exactement les mêmes contrôles et confirmations."
+    },
+    {
+      "orientation": "C1",
+      "participant": "Julie",
+      "vote": "ABSTENTION",
+      "argument": "L'entrée est compréhensible, mais j'attends la vérification du circuit existant et de son délai avant de soutenir une nouvelle surface de suivi."
+    },
+    {
+      "orientation": "C2",
+      "participant": "Julie",
+      "vote": "POUR",
+      "argument": "L'import doit réduire les manipulations tout en me laissant vérifier les ressemblances ; aucune fusion sur le seul nom et l'adresse."
+    },
+    {
+      "orientation": "C3",
+      "participant": "Julie",
+      "vote": "POUR",
+      "argument": "Je pourrais préparer les relances de nombreux commerces et contrôler les destinataires, à condition de pouvoir annuler avant leur départ."
+    },
+    {
+      "orientation": "D1",
+      "participant": "Julie",
+      "vote": "POUR",
+      "argument": "Je ne peux pas piloter une campagne sur un écran en panne ; rétablir le service et éviter les répétitions d'envoi passe avant le confort."
+    },
+    {
+      "orientation": "D2",
+      "participant": "Julie",
+      "vote": "POUR",
+      "argument": "Le lien suivi doit ouvrir les opérations courantes du premier coup ; le bilan reste une autre destination."
+    },
+    {
+      "orientation": "E1",
+      "participant": "Julie",
+      "vote": "POUR",
+      "argument": "Une tâche suivante et des conséquences claires facilitent la fin d'animation sans enlever ma décision de clôturer."
+    },
+    {
+      "orientation": "E2",
+      "participant": "Julie",
+      "vote": "CONTRE",
+      "argument": "Je veux évaluer les incidents au moment de fermer ; la programmation ajoute une règle sensible pour un bénéfice que je ne considère pas prioritaire."
+    },
+    {
+      "orientation": "F1",
+      "participant": "Julie",
+      "vote": "POUR",
+      "argument": "Partager une vue filtrée est utile pour répartir la surveillance entre collègues, sans masquer les filtres ni étendre les droits."
+    },
+    {
+      "orientation": "F2",
+      "participant": "Julie",
+      "vote": "POUR",
+      "argument": "Avec plusieurs opérations en ville, les échéances rapprochées sont plus faciles à anticiper sur une vue transversale reliée aux actions."
+    },
+    {
+      "orientation": "G1",
+      "participant": "Julie",
+      "vote": "POUR",
+      "argument": "C'est une amélioration directe de mon usage de terrain ; les accès doivent suivre l'état de l'animation et être testés sur un vrai téléphone."
+    },
+    {
+      "orientation": "G2",
+      "participant": "Julie",
+      "vote": "CONTRE",
+      "argument": "Je mettrais l'effort dans les aides au moment de l'action ; une visite même facultative risque de devenir vite décalée par rapport aux écrans."
+    }
+  ],
+  "debat": [
+    {
+      "participant": "Francoise",
+      "orientation": "A1",
+      "objection": "E4 demande de distinguer les alertes des bonnes nouvelles plutôt que de tout signaler en jaune.",
+      "reponse": "Je confirme que des cadres semblables me font croire que tout est un problème ; les mots doivent aider autant que les couleurs.",
+      "arbitrage": "Soutien à la hiérarchie actions/nouvelles et à des libellés explicites ; ne pas se reposer sur la couleur seule."
+    },
+    {
+      "participant": "Francoise",
+      "orientation": "C1",
+      "objection": "E2 conteste une création individuelle avant vérification du circuit canonique.",
+      "reponse": "Je demande un endroit où signaler mon commerce manquant, pas de lui créer un compte ou de le rendre participant immédiatement.",
+      "arbitrage": "Soutien au parcours de demande uniquement après vérification du responsable canonique ; afficher clairement attente et résultat."
+    },
+    {
+      "participant": "Francoise",
+      "orientation": "B2",
+      "objection": "E5 rappelle que 5–10 minutes n'est pas une durée mesurée et que les accords sont externes à la saisie.",
+      "reponse": "Je veux savoir avant de commencer si je prépare un brouillon ou si je rends l'animation publique.",
+      "arbitrage": "Expliquer les étapes sans promettre un délai ni présenter l'attente comme une erreur."
+    },
+    {
+      "participant": "Michel",
+      "orientation": "B2",
+      "objection": "E3 veut conserver les responsabilités des lots et les règles de publication.",
+      "reponse": "Les mots peuvent être plus simples, mais il faut continuer à savoir qui remet le cadeau et qu'un commerce a donné son accord.",
+      "arbitrage": "Soutien à la clarification sans modifier les modes de dotation ni les contrôles."
+    },
+    {
+      "participant": "Michel",
+      "orientation": "E1",
+      "objection": "E3 insiste sur la différence entre information du gagnant et remise effective.",
+      "reponse": "C'est précisément ce qui me permet de rendre des comptes sur les cadeaux ; je refuse une simplification qui marquerait remis après un email.",
+      "arbitrage": "Conserver le dossier et son responsable, avec prochaine tâche en langage courant."
+    },
+    {
+      "participant": "Michel",
+      "orientation": "E2",
+      "objection": "La clôture programmée pourrait économiser une intervention, mais E3 protège la décision de fermeture.",
+      "reponse": "Même facultative, elle ne remplace pas ma vérification des derniers incidents et des conditions du tirage.",
+      "arbitrage": "Vote CONTRE ; conserver l'action manuelle claire et confirmée."
+    },
+    {
+      "participant": "Sophie",
+      "orientation": "C2",
+      "objection": "E5 rappelle que zéro conflit ne prouve ni absence de doublon ni création effective de fiches.",
+      "reponse": "J'ai besoin de connaître les limites de ce contrôle, pas d'une alerte affirmant à tort qu'un doublon a déjà été créé.",
+      "arbitrage": "Soutien aux doutes nom/adresse à examiner, sans fusion automatique ni formulation de certitude."
+    },
+    {
+      "participant": "Sophie",
+      "orientation": "C1",
+      "objection": "E2 demande d'identifier le circuit canonique avant d'introduire une saisie individuelle.",
+      "reponse": "Un point d'entrée vers le bon circuit suffit s'il donne une réponse suivie à la mairie ; une fiche active automatique serait prématurée.",
+      "arbitrage": "POUR avec la dépendance déjà écrite : vérifier portée, droits et responsabilité canonique."
+    },
+    {
+      "participant": "Sophie",
+      "orientation": "E2",
+      "objection": "E3 souligne les incidents en cours et le caractère sensible de la fermeture.",
+      "reponse": "Je vois le bénéfice sur plusieurs animations, mais les cas d'échec et les responsabilités restent à concevoir.",
+      "arbitrage": "ABSTENTION sur cette proposition ; aucun accord implicite à sa nouvelle règle serveur."
+    },
+    {
+      "participant": "Julie",
+      "orientation": "D1",
+      "objection": "La panne 500 n'est observée que dans une session TEST ; sa cause et sa fréquence générale ne sont pas établies.",
+      "reponse": "Je n'en déduis pas une indisponibilité générale ; le parcours observé doit néanmoins être rétabli et vérifié avant de le proposer pour piloter une campagne.",
+      "arbitrage": "POUR au diagnostic et à la recette isolée, sans répétition automatique d'un envoi incertain."
+    },
+    {
+      "participant": "Julie",
+      "orientation": "C1",
+      "objection": "E2 conteste d'ajouter un formulaire individuel sans vérifier l'existant.",
+      "reponse": "Le libellé proposé me convient, mais j'attends le circuit réel et son délai de traitement avant de choisir cet investissement.",
+      "arbitrage": "ABSTENTION ; la dépendance canonique ne suffit pas encore à établir le bénéfice opérationnel complet."
+    },
+    {
+      "participant": "Julie",
+      "orientation": "G2",
+      "objection": "E4 veut langage simple et aide compréhensible ; une visite pourrait accompagner la première prise en main.",
+      "reponse": "Je préfère d'abord que l'action elle-même soit compréhensible ; un tutoriel facultatif a aussi un coût de maintenance.",
+      "arbitrage": "CONTRE la visite proposée à ce stade ; soutien aux aides contextuelles de B2."
+    }
+  ]
+}

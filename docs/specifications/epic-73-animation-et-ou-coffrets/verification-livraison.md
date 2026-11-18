@@ -1,5 +1,146 @@
 # E73 — Vérification, migration et livraison
 
+<a id="workshop-ux-20261118"></a>
+## Workshop UX Animation — réalisation du 18 novembre 2026
+
+**E73-EVO-WORKSHOP-UX-20261118 : spécifié et implémenté localement.**
+Autorisation explicite : invocation des skills de spécification et
+d'implémentation après le cadrage. Onze orientations retenues (1 P0, 8 P1,
+2 P2), dix-huit critères conservés. Les votes restent simulés ; ni cette
+demande ni les tests automatisés ne constituent des essais utilisateurs.
+L'epic historique reste Terminée. La réalisation initiale n'avait effectué
+aucun commit, push ou déploiement ; l'opération ultérieure autorisée est
+consignée ci-dessous.
+
+### Opération autorisée du 18 novembre — commits, push et schéma TEST
+
+Demande utilisateur explicite après réalisation : committer, pousser les
+modifications et mettre à jour la base TEST. Commits applicatifs : backend
+`5342a77f`, Animation `fe23313`, Pro `93794e4`. Le commit documentaire conserve
+le workshop Animation et son archive v1 ; les workshops Pro/Live préexistants
+restent hors de cette livraison.
+
+Le **18 novembre 2026 à 13 h 44, Europe/Paris**, les migrations additives
+`v324_preparations_manuelles.sql`, `v325_demandes_referencement.sql` et
+`v326_vues_liste.sql` ont été appliquées avec le runner canonique à la base
+configurée TEST, vérifiée distincte de la production et de la démo.
+Aucune purge, réinitialisation de jeu ou notification exécutée.
+
+- Sauvegarde PostgreSQL complète préalable : **85 361 865 octets**, archive
+  contrôlée par `pg_restore --list` puis décodage complet sans exécution SQL.
+  Aucun essai de restauration dans une autre base pour cette opération.
+- Preuve et empreinte privées : backend
+  `demonstrations/prive/wa-release-20261118T124227Z/migration-result.json` ;
+  sauvegarde voisine `database.dump`, toutes deux ignorées par Git.
+- Après application : aucune migration restante, trois empreintes conformes,
+  présence des tables, colonnes, clés étrangères, index et contraintes vérifiée.
+  Service de contrôle du schéma local exécuté sur TEST : **READY**.
+  Endpoint TEST `/protected/exploitation/maintenance/schema/readiness` :
+  **HTTP 200, READY, 229 contrôles** ; reçu local
+  `.artifacts/wa-root/test-http-readiness.json`, sans clé ni donnée sensible.
+- Contrôle des fichiers préparés au commit : **49 documents, 1312 liens,
+  zéro erreur**, et **151 sources exportées vérifiées**. Les sept nouveaux
+  fichiers frontend concernés ont été normalisés en LF avant commit ;
+  aucun comportement applicatif modifié après la recette finale.
+
+La mise à jour du schéma ne prouve pas le déploiement des nouveaux binaires.
+Les essais métier distants et humains restent distincts des preuves locales.
+
+### Couverture et propriétaires
+
+| Critères | Réalisation et preuve pertinente | Limite |
+| --- | --- | --- |
+| WA-01 / A1 | Actions avant notifications ; gravité issue du type connu, repli information ; tests `dashboard-notifications` et banc organisateur | Aucune urgence métier recalculée |
+| WA-02/03 / B1 | Préparation distincte, minimale modèle/nom/commune, révision et reprise ; conversion atomique via GestionAnimations ; tests domaine/API/application, 3 PostgreSQL et 6 parcours navigateur | Sauvegarde sans animation ni demande ; conversion complète prépare les demandes A_ENVOYER, sans email/notification |
+| WA-04/05 / B2 | Brouillon → accords → publication, acteur/raison/action et aperçu existants conservés ; banc organisateur | QR présenté selon la disponibilité réelle ; aucun gain 5–10 min démontré |
+| WA-06 / B3 | Seuil automatique compatible ; choix manuel persisté, ajustement explicite après retrait ; tests qualification et parcours passeport 1280/390 px | Règle de qualification serveur inchangée |
+| WA-07/08 / C1 | Demande durable et historique, permission canonique, décision ERP via Référencement ; tests API/application et 3 PostgreSQL | Acceptation crée une fiche à préparer ; aucun accès, invitation ou participation implicitement validé |
+| WA-09/10 / C2 | Mapping proposé et corrigeable ; valeurs création obligatoires en aperçu/confirmation/exécution ; similitudes interlignes en avertissements ; tests domaine/service/API/transport | Mises à jour vides conservent les valeurs ; aucun rapprochement flou global de tout le référentiel |
+| WA-11/12 / D1 | Défaut local reproduit : objet ContexteNotificationAnimation fourni à un champ texte ; conversion au repository, test PostgreSQL du DTO et 37 tests lecture/envoi | Cause compatible avec le 500 observé, identité du défaut distant non prouvée sans version/log distant ; aucun envoi réel |
+| WA-13 / D2 | Politique domaine : Consulter le suivi → live ; Bilan distinct ; 14 tests domaine, PostgreSQL productivité, banc organisateur | Primauté de l'atelier appliquée, ancien attendu Bilan remplacé explicitement |
+| WA-14 / E1 | Fin de période, clôture manuelle, remise et archive expliquées depuis états serveur ; confirmation conservée | Aucune clôture automatique ajoutée ; rapport/report CAF indépendant à recadrer |
+| WA-15 / F1 | Vues privées/partagées bornées par organisation/commune ; auteur seul modifie, version/rejeu, pas de droit supplémentaire ; test PostgreSQL concurrence/fermeture/révocation et banc navigateur | Préférences seules ; aucune donnée de liste sauvegardée ni cache API local |
+| WA-16 / G1 | Raccourcis mobiles selon droits/état, sélecteur complet conservé ; bancs mobile et revue de captures | Essais appareil réel/lecteur d'écran restant ouverts |
+| WA-17 | Droits transactionnels, réconciliation, saisie et contexte ; revue indépendante contrats et UX, défauts détectés corrigés | Lecture refusée retire les données ; aucun succès déduit d'une réponse perdue |
+| WA-18 | Parcours synthétiques et PostgreSQL isolé ci-dessous | **Partie humaine non réalisée** : organisateurs réels, dont deux peu familiers du numérique, temps actif/attentes et autonomie à mesurer |
+
+Sources de conception : [préparations B1](perimetres-parcours-saas.md),
+[référencement/import C1/C2](modules-souscriptions-import-communication.md),
+[contrats D1/F1](architecture-contrats.md), [compléments UI](ux-productivite-organisateur.md).
+
+### Vérifications exécutées
+
+Les chiffres ci-dessous sont des passages distincts : ne pas les additionner
+comme une exécution unique ni reprendre les résultats antérieurs comme preuve
+de la version courante. Bases Git avant modifications : backend `23931f0d`,
+projet `7164846`, Animation `80c42809`, Pro `333b7607` ; changements locaux
+de cette évolution inclus dans les vérifications.
+
+| Passage | Résultat / preuve locale |
+| --- | --- |
+| Backend consolidé, architecture, tests dédiés domaine, couverture use cases et lots WA | **901 réussis**, zéro échec/skip ; backend `.artifacts/wa-root/final-isolated-02.xml` |
+| PostgreSQL : préparations, référencement, vues, contexte campagnes et productivité | **11 réussis**, zéro échec/skip ; `.artifacts/wa-root/final-postgres.xml`. Conversion concurrente unique, rollback/reprise, zéro email/notification vérifiés |
+| Migrations complètes jusqu'à 326 sur base jetable | Réussite ; `.artifacts/wa-root/migrations-vues.xml` et manifeste associé |
+| Animation tests unitaires et contrats | **391 réussis**, zéro échec/skip ; `pnpm test` |
+| Animation typecheck/lint/build synthétique | Réussite après les dernières corrections ; build `tmp/wa-20261118-build-final05`. Avertissement de taille de chunks maintenu |
+| Création manuelle et seuil passeport | **8 scénarios** ; `tests/browser/po-creation-continuite.mjs`, API synthétique |
+| Préparation durable, reprise, résultat incertain et conflit | **6 scénarios 1280/390** ; `tests/browser/wa-b1-preparations.mjs`, aucun POST de création/envoi durant sauvegarde |
+| Parcours organisateur, navigation et fin | **19 scénarios** ; `tmp/po-organisateur-kfqTrn`, API synthétique |
+| Référencement et vues partagées | **6 scénarios composites réussis** à 1280/390 sur final05 ; `tmp/wa-reference-vues-1795005035156/report.json` et 12 captures synthétiques. Saisie, partage, sélection et focus conservés après lecture réussie/503 ; purge sur GET/reçu 403 et réponse ancienne ignorée |
+| Contrats générés et copies embarquées | E41 : 1207 chemins ; Animation 367 opérations et Pro 63 opérations, **zéro différence sémantique** via `check_consumed_contracts.py` |
+| Pro, copie de contrat seulement | **31 tests contrats réussis** ; aucune interface Pro modifiée |
+| Démonstration | **35 tests réussis** : registre et snapshot/restauration relationnelle ; [recette](../../exploitation/demonstration/realisation-recette.md). Aucune génération distante |
+| Documentation ciblée et sources exportées | **20 guides, 874 liens, zéro erreur** ; `.artifacts/codex/wa-20261118/links-targeted.json`. Contrôle final des guides et du bilan : **108 guides, 1652 liens, zéro erreur**, `links-final.json` dans le même dossier. **151 sources exportées vérifiées**. `git diff --check` réussi dans les quatre dépôts modifiés |
+
+Revue contrats : permission C1 inexistante remplacée par
+`animation:gerer_participations_commercants` ; contrôle de fermeture et collision
+UUID F1 ajoutés. Revue UX : fermeture C1 incertaine protégée, actualisation F1
+conservant saisie/partage/sélection, données C1 retirées après refus de lecture.
+Le test PostgreSQL a aussi révélé un autoflush C1 entre lien commerçant et état :
+affectation cohérente avant flush final, contrainte SQL conservée, retest réussi.
+
+### Dettes prouvées et limites
+
+- Le contrôle documentaire élargi aux fichiers Markdown non suivis relève
+  **20 liens cassés dans le workshop Localeo Live** déjà présent, hors du
+  périmètre Animation modifié. Rapport projet
+  `.artifacts/codex/wa-20261118/links.json`. Ces fichiers sont préservés ;
+  le contrôle ciblé des sources modifiées et des guides réussit.
+- Deux contrôles antérieurs échouent aussi sur le commit backend `23931f0d`,
+  dans un worktree détaché : index de conservation absents sur deux relations
+  des rappels de lots ; fixture de purge campagnes ne créant pas la table
+  `animation_conversations_habitants`. Rapport témoin
+  `C:/Users/casta/AppData/Local/Temp/localeo-wa-baseline-backend/.artifacts/wa-baseline.xml`.
+  Ils restent **en échec**, sans skip ni affaiblissement d'assertion. Le passage
+  large initial campagnes/productivité comptait 27 réussites et cet échec.
+- Recette humaine, lecteur d'écran/appareil physique, capacité de charge et
+  vérification TEST après déploiement non exécutées. Aucun bénéfice chiffré acquis.
+- Le transfert de démonstration est vérifié en tests relationnels locaux ; un
+  dump/restauration PostgreSQL complet avec génération puis lectures API n'est
+  pas exécuté dans ce lot. Aucun prestataire externe contacté.
+
+### Impacts et ordre de livraison ultérieur
+
+Quatre dépôts modifiés : projet (sources canoniques/contrat), backend (domaine,
+application, adaptateurs/API/ERP), Animation (interface/contrat/tests), Pro
+(copie OpenAPI régénérée et testée seulement). Marketplace sans modification.
+La génération OpenAPI distingue certains schémas d'entrée/sortie partagés :
+les deux copies consommatrices ont été alignées sur le producteur réel.
+
+1. Sauvegarde opérateur et migrations additives `324`, `325`, `326` avant les
+   nouvelles routes. Pas de backfill, suppression ni conversion de données.
+2. Backend et ERP : préparations, demandes et vues ; API antérieures conservées,
+   champ d'avertissements import additif. Puis frontend Animation compatible.
+3. Conservation : nouvelles familles T1 PREPARATION/VERIFICATION/RELATION,
+   exports bornés par organisation sans clés de commande ; registre de
+   démonstration explicite `replace`. Aucun nouveau secret ou flag requis.
+4. Vérifier sur TEST la lecture Communication, droits et parcours de reprise,
+   puis organiser les essais humains. Publication, invitations, notifications,
+   clôture et déploiement restent des actions distinctes autorisées séparément.
+
+En cas de retour frontend, conserver les tables et préparations : aucun rollback
+SQL destructif automatique. Les cinq dépôts restent indépendants.
+
 ## Évolution — E73-EVO-MESSAGES-HABITANTS (15 novembre 2026)
 
 Conversations privées sollicitées depuis la participation Live, avec motif,
@@ -718,6 +859,10 @@ vérifiées. Diff sans erreur d’espacement. Commits applicatifs de cette livra
 Backend `9b2b41a`, Animation `24ff5fe`.
 
 ## Évolution — E73-EVO-CLOTURE-AUTO (12 novembre 2026)
+
+**Mise à jour du 18 novembre :** volet de clôture automatique retiré des travaux futurs selon E73-WA-DEC-03 ; report/rapport indépendants à recadrer. Les mentions de réalisation à faire ci-dessous décrivent le plan antérieur, conservé pour traçabilité.
+
+
 
 **Spécification seule**, [CAF-01 à CAF-12](fin-animation-archives.md#évolution-du-12-novembre-2026--clôture-automatique-et-report-de-fin).
 Choix confirmés : option active pour les nouvelles animations, report avant

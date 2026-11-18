@@ -1,0 +1,25 @@
+# Vérification ciblée des maquettes v2 — groupe métier 2
+
+**SIMULATION explicitement maintenue.** Inspection visuelle de cinq PNG v2 le 18 novembre 2026 ; aucun test humain, aucune mesure de temps, aucune interaction réelle avec le produit. Les réactions finales sont fictives. Cette revue ne constitue pas une validation utilisateur ni une autorisation de développement.
+
+## Corrections constatées et réserves
+
+| Orientation | Preuve examinée | Constat visuel v2 | Réserve restante |
+| --- | --- | --- | --- |
+| A1 | [Accueil bureau](../visuels/maquettes-apres/A1-accueil-bureau.png) | Les deux filtres sont regroupés avant les sections et portent les libellés « Période du tableau de bord » et « Statut des animations ». Les actions précèdent toujours les nouvelles. | Le regroupement est plus cohérent, mais la capture seule ne précise pas exactement quelles données sont couvertes par les trente derniers jours. Vérifier la compréhension et conserver le périmètre de filtrage réel ; ne pas conclure que des échéances futures sont exclues ou incluses par le contrat sur la seule image. |
+| B1 | [Saisie mobile](../visuels/maquettes-apres/B1-saisie-mobile.png) | Le titre est « Informations du brouillon ». « Modifications non enregistrées » et le bouton Enregistrer le brouillon apparaissent avant les champs. La phrase « Ce brouillon n’est pas public. Aucun envoi ni publication » est proche du bouton. Le formulaire indique l’étape 2 sur 7. | Le rendu ne prouve ni la persistance ni la reprise des valeurs ; celles-ci restent des vérifications futures du contrat de brouillon partiel. Le premier bouton haut ne dispense pas de vérifier le parcours après saisie longue avec clavier réel. |
+| D1 | [Envoi incertain mobile](../visuels/maquettes-apres/D1-incertain-mobile.png) | Une suite explicite a été ajoutée après le bloc : conserver la tentative et contacter le support avec son contexte si la vérification ne donne toujours aucun résultat. L’absence de nouvel envoi automatique est rappelée. Vérifier reste clairement une lecture de la tentative existante. | Le message est visuellement présent après le panneau principal, donc à retrouver en défilant. Aucun résultat serveur, délai de support ou réception n’est démontré ; ne pas assimiler cette clarification à une réparation du 500. |
+| E1 | [Dossiers mobile](../visuels/maquettes-apres/E1-dossiers-mobile.png) | « Étape actuelle » désigne désormais Clôturée dans la frise. La remise non renseignée demeure distincte de l’information du gagnant. Le dossier et son responsable fictif restent visibles ; Terminer est indisponible et l’archivage distinct. | Aucune transition métier ou remise n’a été exécutée. Le responsable de cet exemple ne doit pas être extrapolé aux situations où aucun responsable n’est connu. |
+| C1 | [Suivi mobile](../visuels/maquettes-apres/C1-suivi-mobile.png) | Le suivi conserve une référence fictive, une attente d’examen, l’indisponibilité dans la sélection, et « Non associé ; aucune invitation envoyée ». Aucun service responsable ou délai inventé n’a été ajouté. | **Dépendance toujours ouverte :** « Demande transmise » ne répond pas à qui traite la demande ni au geste en cas d’attente prolongée. Circuit canonique, propriétaire et droits doivent être établis avant développement. La présentation ne prouve pas l’existence d’une transmission réelle. |
+
+## Réactions finales fictives
+
+- **Karim — SIMULATION :** « Je retrouve plus vite ce que je dois faire. Le brouillon clairement non enregistré et le bouton placé tôt répondent à mes interruptions. Pour une demande de commerce en attente, il me manque encore une personne ou un circuit réel à contacter ; je ne voudrais pas qu’on en invente un pour finir l’écran. »
+- **Élodie — SIMULATION :** « Pour l’envoi incertain, j’ai maintenant une suite après la vérification : conserver la tentative et contacter le support, sans renvoyer. C’est plus exploitable pour mon travail, mais cela ne prouve ni la réparation de Communication ni la bonne réception d’un message. »
+- **Bernard — SIMULATION :** « Informations du brouillon et Ce brouillon n’est pas public me rassurent davantage. Étape actuelle me montre où j’en suis dans la fin de l’animation, et je comprends que prévenir le gagnant ne signifie pas que le cadeau a été remis. Je demanderais encore une explication sur ce que filtre exactement la période de l’accueil. »
+
+## Portée de l’arbitrage
+
+Aucun changement substantiel d’orientation détecté dans ces cinq états : ce sont des précisions de texte, de positionnement et de repérage compatibles avec A1, B1, D1 et E1 adoptées ; C1 conserve sa dépendance canonique non résolue. Aucun nouveau vote organisé par ce groupe.
+
+La revue initiale v1 reste conservée dans [revue-maquettes-metier-2.json](revue-maquettes-metier-2.json). La présente vérification ne couvre pas à nouveau tous les états des neuf orientations ; elle ne remplace ni les contrôles fonctionnels futurs ni des essais avec de vrais organisateurs. Aucun autre fichier n’a été modifié pour cette vérification.

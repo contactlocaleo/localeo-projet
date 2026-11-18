@@ -1,0 +1,546 @@
+{
+  "version": 2,
+  "mesures": [
+    {
+      "id": "A1",
+      "state": "accueil",
+      "format": "bureau",
+      "width": 1440,
+      "documentWidth": 1440,
+      "height": 1370,
+      "active": "accueil"
+    },
+    {
+      "id": "A1",
+      "state": "accueil",
+      "format": "mobile",
+      "width": 390,
+      "documentWidth": 390,
+      "height": 1771,
+      "active": "accueil"
+    },
+    {
+      "id": "B1",
+      "state": "saisie",
+      "format": "bureau",
+      "width": 1440,
+      "documentWidth": 1440,
+      "height": 1238,
+      "active": "saisie"
+    },
+    {
+      "id": "B1",
+      "state": "enregistre",
+      "format": "bureau",
+      "width": 1440,
+      "documentWidth": 1440,
+      "height": 1004,
+      "active": "enregistre"
+    },
+    {
+      "id": "B1",
+      "state": "echec",
+      "format": "bureau",
+      "width": 1440,
+      "documentWidth": 1440,
+      "height": 1072,
+      "active": "echec"
+    },
+    {
+      "id": "B1",
+      "state": "saisie",
+      "format": "mobile",
+      "width": 390,
+      "documentWidth": 390,
+      "height": 1599,
+      "active": "saisie"
+    },
+    {
+      "id": "B1",
+      "state": "enregistre",
+      "format": "mobile",
+      "width": 390,
+      "documentWidth": 390,
+      "height": 1218,
+      "active": "enregistre"
+    },
+    {
+      "id": "B1",
+      "state": "echec",
+      "format": "mobile",
+      "width": 390,
+      "documentWidth": 390,
+      "height": 1442,
+      "active": "echec"
+    },
+    {
+      "id": "B2",
+      "state": "publication",
+      "format": "bureau",
+      "width": 1440,
+      "documentWidth": 1440,
+      "height": 1043,
+      "active": "publication"
+    },
+    {
+      "id": "B2",
+      "state": "demarrage",
+      "format": "bureau",
+      "width": 1440,
+      "documentWidth": 1440,
+      "height": 1004,
+      "active": "demarrage"
+    },
+    {
+      "id": "B2",
+      "state": "invitations",
+      "format": "bureau",
+      "width": 1440,
+      "documentWidth": 1440,
+      "height": 1004,
+      "active": "invitations"
+    },
+    {
+      "id": "B2",
+      "state": "dotation",
+      "format": "bureau",
+      "width": 1440,
+      "documentWidth": 1440,
+      "height": 1125,
+      "active": "dotation"
+    },
+    {
+      "id": "B2",
+      "state": "apercu",
+      "format": "bureau",
+      "width": 1440,
+      "documentWidth": 1440,
+      "height": 1004,
+      "active": "apercu"
+    },
+    {
+      "id": "B2",
+      "state": "publication",
+      "format": "mobile",
+      "width": 390,
+      "documentWidth": 390,
+      "height": 1501,
+      "active": "publication"
+    },
+    {
+      "id": "B2",
+      "state": "demarrage",
+      "format": "mobile",
+      "width": 390,
+      "documentWidth": 390,
+      "height": 1426,
+      "active": "demarrage"
+    },
+    {
+      "id": "B2",
+      "state": "invitations",
+      "format": "mobile",
+      "width": 390,
+      "documentWidth": 390,
+      "height": 1650,
+      "active": "invitations"
+    },
+    {
+      "id": "B2",
+      "state": "dotation",
+      "format": "mobile",
+      "width": 390,
+      "documentWidth": 390,
+      "height": 1341,
+      "active": "dotation"
+    },
+    {
+      "id": "B2",
+      "state": "apercu",
+      "format": "mobile",
+      "width": 390,
+      "documentWidth": 390,
+      "height": 1413,
+      "active": "apercu"
+    },
+    {
+      "id": "B3",
+      "state": "compatible",
+      "format": "bureau",
+      "width": 1440,
+      "documentWidth": 1440,
+      "height": 1086,
+      "active": "compatible"
+    },
+    {
+      "id": "B3",
+      "state": "incompatible",
+      "format": "bureau",
+      "width": 1440,
+      "documentWidth": 1440,
+      "height": 1004,
+      "active": "incompatible"
+    },
+    {
+      "id": "B3",
+      "state": "compatible",
+      "format": "mobile",
+      "width": 390,
+      "documentWidth": 390,
+      "height": 1289,
+      "active": "compatible"
+    },
+    {
+      "id": "B3",
+      "state": "incompatible",
+      "format": "mobile",
+      "width": 390,
+      "documentWidth": 390,
+      "height": 1109,
+      "active": "incompatible"
+    },
+    {
+      "id": "C1",
+      "state": "selection",
+      "format": "bureau",
+      "width": 1440,
+      "documentWidth": 1440,
+      "height": 1005,
+      "active": "selection"
+    },
+    {
+      "id": "C1",
+      "state": "demande",
+      "format": "bureau",
+      "width": 1440,
+      "documentWidth": 1440,
+      "height": 1118,
+      "active": "demande"
+    },
+    {
+      "id": "C1",
+      "state": "suivi",
+      "format": "bureau",
+      "width": 1440,
+      "documentWidth": 1440,
+      "height": 1004,
+      "active": "suivi"
+    },
+    {
+      "id": "C1",
+      "state": "selection",
+      "format": "mobile",
+      "width": 390,
+      "documentWidth": 390,
+      "height": 1317,
+      "active": "selection"
+    },
+    {
+      "id": "C1",
+      "state": "demande",
+      "format": "mobile",
+      "width": 390,
+      "documentWidth": 390,
+      "height": 1410,
+      "active": "demande"
+    },
+    {
+      "id": "C1",
+      "state": "suivi",
+      "format": "mobile",
+      "width": 390,
+      "documentWidth": 390,
+      "height": 1155,
+      "active": "suivi"
+    },
+    {
+      "id": "C2",
+      "state": "apercu",
+      "format": "bureau",
+      "width": 1440,
+      "documentWidth": 1440,
+      "height": 1004,
+      "active": "apercu"
+    },
+    {
+      "id": "C2",
+      "state": "colonnes",
+      "format": "bureau",
+      "width": 1440,
+      "documentWidth": 1440,
+      "height": 1169,
+      "active": "colonnes"
+    },
+    {
+      "id": "C2",
+      "state": "comparaison",
+      "format": "bureau",
+      "width": 1440,
+      "documentWidth": 1440,
+      "height": 1004,
+      "active": "comparaison"
+    },
+    {
+      "id": "C2",
+      "state": "confirmation",
+      "format": "bureau",
+      "width": 1440,
+      "documentWidth": 1440,
+      "height": 1004,
+      "active": "confirmation"
+    },
+    {
+      "id": "C2",
+      "state": "apercu",
+      "format": "mobile",
+      "width": 390,
+      "documentWidth": 390,
+      "height": 1761,
+      "active": "apercu"
+    },
+    {
+      "id": "C2",
+      "state": "colonnes",
+      "format": "mobile",
+      "width": 390,
+      "documentWidth": 390,
+      "height": 2078,
+      "active": "colonnes"
+    },
+    {
+      "id": "C2",
+      "state": "comparaison",
+      "format": "mobile",
+      "width": 390,
+      "documentWidth": 390,
+      "height": 1618,
+      "active": "comparaison"
+    },
+    {
+      "id": "C2",
+      "state": "confirmation",
+      "format": "mobile",
+      "width": 390,
+      "documentWidth": 390,
+      "height": 1090,
+      "active": "confirmation"
+    },
+    {
+      "id": "D1",
+      "state": "lecture",
+      "format": "bureau",
+      "width": 1440,
+      "documentWidth": 1440,
+      "height": 1004,
+      "active": "lecture"
+    },
+    {
+      "id": "D1",
+      "state": "preparer",
+      "format": "bureau",
+      "width": 1440,
+      "documentWidth": 1440,
+      "height": 1040,
+      "active": "preparer"
+    },
+    {
+      "id": "D1",
+      "state": "apercu",
+      "format": "bureau",
+      "width": 1440,
+      "documentWidth": 1440,
+      "height": 1004,
+      "active": "apercu"
+    },
+    {
+      "id": "D1",
+      "state": "incertain",
+      "format": "bureau",
+      "width": 1440,
+      "documentWidth": 1440,
+      "height": 1004,
+      "active": "incertain"
+    },
+    {
+      "id": "D1",
+      "state": "confirme",
+      "format": "bureau",
+      "width": 1440,
+      "documentWidth": 1440,
+      "height": 1004,
+      "active": "confirme"
+    },
+    {
+      "id": "D1",
+      "state": "refuse",
+      "format": "bureau",
+      "width": 1440,
+      "documentWidth": 1440,
+      "height": 1004,
+      "active": "refuse"
+    },
+    {
+      "id": "D1",
+      "state": "lecture",
+      "format": "mobile",
+      "width": 390,
+      "documentWidth": 390,
+      "height": 1342,
+      "active": "lecture"
+    },
+    {
+      "id": "D1",
+      "state": "preparer",
+      "format": "mobile",
+      "width": 390,
+      "documentWidth": 390,
+      "height": 1304,
+      "active": "preparer"
+    },
+    {
+      "id": "D1",
+      "state": "apercu",
+      "format": "mobile",
+      "width": 390,
+      "documentWidth": 390,
+      "height": 1224,
+      "active": "apercu"
+    },
+    {
+      "id": "D1",
+      "state": "incertain",
+      "format": "mobile",
+      "width": 390,
+      "documentWidth": 390,
+      "height": 1351,
+      "active": "incertain"
+    },
+    {
+      "id": "D1",
+      "state": "confirme",
+      "format": "mobile",
+      "width": 390,
+      "documentWidth": 390,
+      "height": 1117,
+      "active": "confirme"
+    },
+    {
+      "id": "D1",
+      "state": "refuse",
+      "format": "mobile",
+      "width": 390,
+      "documentWidth": 390,
+      "height": 1082,
+      "active": "refuse"
+    },
+    {
+      "id": "D2",
+      "state": "suivi",
+      "format": "bureau",
+      "width": 1440,
+      "documentWidth": 1440,
+      "height": 1004,
+      "active": "suivi"
+    },
+    {
+      "id": "D2",
+      "state": "bilan",
+      "format": "bureau",
+      "width": 1440,
+      "documentWidth": 1440,
+      "height": 1044,
+      "active": "bilan"
+    },
+    {
+      "id": "D2",
+      "state": "suivi",
+      "format": "mobile",
+      "width": 390,
+      "documentWidth": 390,
+      "height": 1104,
+      "active": "suivi"
+    },
+    {
+      "id": "D2",
+      "state": "bilan",
+      "format": "mobile",
+      "width": 390,
+      "documentWidth": 390,
+      "height": 1196,
+      "active": "bilan"
+    },
+    {
+      "id": "E1",
+      "state": "periode",
+      "format": "bureau",
+      "width": 1440,
+      "documentWidth": 1440,
+      "height": 1036,
+      "active": "periode"
+    },
+    {
+      "id": "E1",
+      "state": "confirmation",
+      "format": "bureau",
+      "width": 1440,
+      "documentWidth": 1440,
+      "height": 1004,
+      "active": "confirmation"
+    },
+    {
+      "id": "E1",
+      "state": "dossiers",
+      "format": "bureau",
+      "width": 1440,
+      "documentWidth": 1440,
+      "height": 1026,
+      "active": "dossiers"
+    },
+    {
+      "id": "E1",
+      "state": "bilan",
+      "format": "bureau",
+      "width": 1440,
+      "documentWidth": 1440,
+      "height": 1004,
+      "active": "bilan"
+    },
+    {
+      "id": "E1",
+      "state": "periode",
+      "format": "mobile",
+      "width": 390,
+      "documentWidth": 390,
+      "height": 1528,
+      "active": "periode"
+    },
+    {
+      "id": "E1",
+      "state": "confirmation",
+      "format": "mobile",
+      "width": 390,
+      "documentWidth": 390,
+      "height": 1284,
+      "active": "confirmation"
+    },
+    {
+      "id": "E1",
+      "state": "dossiers",
+      "format": "mobile",
+      "width": 390,
+      "documentWidth": 390,
+      "height": 1618,
+      "active": "dossiers"
+    },
+    {
+      "id": "E1",
+      "state": "bilan",
+      "format": "mobile",
+      "width": 390,
+      "documentWidth": 390,
+      "height": 1251,
+      "active": "bilan"
+    }
+  ],
+  "erreurs": []
+}

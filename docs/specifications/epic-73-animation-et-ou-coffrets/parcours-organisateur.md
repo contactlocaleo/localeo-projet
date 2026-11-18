@@ -1,5 +1,13 @@
 # Parcours organisateur : préparer, publier, suivre et réutiliser
 
+**Arbitrage du 18 novembre 2026 — suites du workshop Animation :**
+[E73-WA-DEC-01/02 et WA-13](../../roadmap/terminees/epic-73-animation-et-ou-coffrets-backlog.md#workshop-ux-20261118)
+remplacent la destination de **PO-13** et de la décision **D2** ci-dessous.
+« Consulter le suivi » doit désormais ouvrir le suivi opérationnel ; Bilan
+conserve un accès distinct. Les anciennes preuves locales attestent l’ancienne
+cible Bilan, pas la conformité à cette nouvelle décision. Changement cadré,
+non implémenté à ce titre ; les autres décisions et critères restent applicables.
+
 ## Évolution du 18 novembre 2026 — suivi Animation et Pro
 
 **E73-EVO-SUIVI-ANIMATION** applique les cinq améliorations de l’[audit de
@@ -253,7 +261,7 @@ Hors périmètre : nouveau tableau de bord ou file globale exhaustive, nouvelle 
 | Décision | Comportement retenu et limite |
 | --- | --- |
 | D1 — Arrivée selon la phase | L'ouverture ordinaire dépend de la phase fournie par le serveur. Un lien de tâche explicite, un retour valide ou une reprise explicite prime. Aucun changement automatique d'écran après une mise à jour de phase. La mémorisation implicite du dernier groupe reste une idée à tester. |
-| D2 — Accès aux chiffres | Pendant une édition publiée ou en cours, **Résultats** ouvre **Bilan**. L'action **Consulter le suivi** donne immédiatement accès aux chiffres, y compris pour le Juste Prix. Fin et archivage reste accessible séparément, sans obliger à y passer pour lire les résultats. Décision de conception retenue, bénéfice à vérifier avec des organisateurs. |
+| D2 — Accès au suivi et aux chiffres (remplacée le 18 novembre) | Selon E73-WA-DEC-02, **Consulter le suivi** ouvre **Suivi de l’animation**, opérationnel ; **Bilan** dispose d’un accès séparé explicite pour les chiffres. La décision du 17 novembre visant Bilan depuis Consulter le suivi est remplacée. La destination indépendante de Résultats vers Bilan et l’accès séparé à Fin et archivage sont conservés. |
 | D3 — Interventions | Réutiliser d'abord alertes, messages, validations, lots/remises et dossiers de fin existants, avec liens contextuels et habilitations. Inventorier les manques avant toute file supplémentaire ; une page de statistiques ne devient pas une file complète. |
 | D4 — Promesse de durée | Mesurer **créer et publier**, selon modèle et prérequis, jusqu'à publication confirmée. Séparer temps actif, préparatifs et attente externe. La Chasse accompagnée conserve son objectif de préparation de cinq jours ouvrés et ses règles propres. Une demande acceptée ou un brouillon créé n'est pas une publication. Aucun délai universel validé à ce jour. |
 | D5 — Réemploi | Annoncer avant confirmation les sections réellement disponibles pour la source et ses variantes. Nouvelle dotation, nouvelles dates, nouveaux accords et validations obligatoires selon les règles existantes. Une section indisponible expliquée ne constitue pas un défaut de clonage. |
@@ -320,7 +328,7 @@ Une sous-phase serveur de tirage/gains peut préciser le lien de prochaine actio
 | ID | Action, résultat observable et refus significatif |
 | --- | --- |
 | PO-12 | Appliquer le tableau à l'ouverture ordinaire après lecture de la cible autorisée. Priorité : lien de tâche explicite ; retour/reprise explicites valides ; défaut de phase. Une mise à jour de statut ou de recommandation après ouverture ne déplace pas l'utilisateur ; elle peut actualiser une action visible. Les groupes déduisent leur état actif de la rubrique réellement ouverte. |
-| PO-13 | L'action serveur **Consulter le suivi**, lorsqu'elle signifie consultation ordinaire sans tâche particulière, cible **Bilan** pour les modèles couverts. Ajuster sa destination commune dans la politique de recommandation, sans réécrire une règle par écran. Le Juste Prix atteint directement ses compteurs sans recherche dans le sélecteur. Le lien historique `live` reste disponible vers son écran existant, nommé **Suivi de l'animation** dans la console ; **Localeo Live** désigne uniquement l'application habitant. |
+| PO-13 | **Cible révisée le 18 novembre selon E73-WA-DEC-02 / E73-WA-13 :** l’action serveur **Consulter le suivi**, lorsqu’elle signifie consultation ordinaire sans tâche particulière, cible **Suivi de l’animation**, opérationnel, pour les modèles couverts. La décision antérieure visant Bilan est remplacée ; **Bilan** conserve un accès distinct et explicite aux chiffres. Ajuster la politique commune sans règle concurrente par écran ; conserver droits, contexte/retour et définitions. **Localeo Live** désigne uniquement l’application habitant. Les preuves du 17 novembre restent historiques et doivent être renouvelées sur la nouvelle destination. |
 | PO-14 | Pendant une édition active, cliquer **Résultats** ouvre Bilan, sauf intention explicite contraire ou clic sur le groupe déjà actif, qui conserve la rubrique courante. Fin/archivage, tirage et gains restent des destinations visibles selon droits. Une action de lecture ne lance ni clôture, ni tirage, ni envoi de gain. La décision remplace uniquement le défaut concerné du 31 octobre. |
 | PO-15 | Les chiffres conservent leurs populations et définitions : inscrits, parcours terminés, éligibles, gagnants, lots remis/consommés ne sont pas fusionnés. Présenter période, périmètre et date disponibles là où ils sont nécessaires ; différencier date de lecture et date de calcul. Zéro est affiché seulement pour un résultat calculé disponible. Chargement, indisponibilité et absence d'activité sont distincts. Réutiliser le Bilan et les exports existants sans nouvelle fréquence de polling. |
 | PO-16 | Depuis le suivi/Bilan, une situation actionnable renvoie vers la validation, le message habitant, le lot/remise ou le dossier de fin **existant et autorisé**. Inventorier pour chaque lien source, signification, portée, fraîcheur et droit. Une statistique seule ne devient pas une alerte. Si une référence manque ou n'est pas autorisée, expliquer et proposer la liste filtrée existante sans fabriquer de référence. Aucune somme de pages partielles ne devient un compteur global. |
@@ -482,7 +490,7 @@ Producteur : Backend, schémas/sérialiseurs des services concernés. Générate
 
 Avant extension, inventorier les schémas et appels réellement affectés, puis générer/contrôler le contrat et ses types embarqués. **Live/Marketplace et Pro/Commerçant** ne consomment pas les nouvelles destinations de console : aucun changement de leur API prévu ; leurs contrôles et validations restent des dépendances métier à tester. La préparation guidée Vitrines déjà spécifiée dans [E78](../epic-78-jeu-des-vitrines/parcours-regles.md#évolution-du-17-novembre-2026--préparation-guidée) fournit ses étapes, sans second modèle de préparation.
 
-Ordre : producteur et tests de compatibilité → contrat généré canonique et provenance → contrat embarqué/types → consommateur Animation → recette. Pour les changements de présentation seuls, livraison Animation indépendante. Le remplacement de destination PO-13 doit être accepté par la version Animation précédente qui connaît déjà `bilan` ; vérifier cette compatibilité avant activation.
+Ordre : producteur et tests de compatibilité → contrat généré canonique et provenance → contrat embarqué/types → consommateur Animation → recette. Pour les changements de présentation seuls, livraison Animation indépendante. Pour PO-13 révisé le 18 novembre, vérifier que la destination opérationnelle et son alias effectif sont reconnus par le consommateur Animation actif et la version précédente supportée ; le seul support de `bilan` ne prouve plus cette compatibilité. Réutiliser l’accès existant au suivi après inventaire du contrat ; si nécessaire livrer le consommateur compatible avant d’activer la nouvelle destination serveur. Aucun contrat OpenAPI n’est modifié par ce cadrage.
 
 ## 7. Données, sécurité et exploitation
 

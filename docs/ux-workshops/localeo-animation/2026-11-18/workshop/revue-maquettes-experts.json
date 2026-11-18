@@ -1,0 +1,621 @@
+{
+  "simulation": true,
+  "version_maquettes": "v1",
+  "validation_utilisateur": false,
+  "methode": "Inspection visuelle de 22 PNG et lecture des sources isolées ; aucun navigateur ni nouveau test produit. Cinq perspectives fictives, aucun test humain. Les avis portent sur la version initiale avant corrections éventuelles du facilitateur.",
+  "captures_examinees": [
+    "../visuels/maquettes-apres/iterations/v1/A1-accueil-bureau.png",
+    "../visuels/maquettes-apres/iterations/v1/B1-saisie-bureau.png",
+    "../visuels/maquettes-apres/iterations/v1/B2-publication-bureau.png",
+    "../visuels/maquettes-apres/iterations/v1/B3-compatible-bureau.png",
+    "../visuels/maquettes-apres/iterations/v1/C1-selection-bureau.png",
+    "../visuels/maquettes-apres/iterations/v1/C2-apercu-bureau.png",
+    "../visuels/maquettes-apres/iterations/v1/D1-lecture-bureau.png",
+    "../visuels/maquettes-apres/iterations/v1/D2-suivi-bureau.png",
+    "../visuels/maquettes-apres/iterations/v1/E1-periode-bureau.png",
+    "../visuels/maquettes-apres/iterations/v1/B1-echec-bureau.png",
+    "../visuels/maquettes-apres/iterations/v1/B3-incompatible-bureau.png",
+    "../visuels/maquettes-apres/iterations/v1/C2-comparaison-bureau.png",
+    "../visuels/maquettes-apres/iterations/v1/D1-incertain-bureau.png",
+    "../visuels/maquettes-apres/iterations/v1/E1-confirmation-bureau.png",
+    "../visuels/maquettes-apres/iterations/v1/B1-echec-mobile.png",
+    "../visuels/maquettes-apres/iterations/v1/C2-comparaison-mobile.png",
+    "../visuels/maquettes-apres/iterations/v1/E1-confirmation-mobile.png",
+    "../visuels/maquettes-apres/iterations/v1/A1-accueil-mobile.png",
+    "../visuels/maquettes-apres/iterations/v1/B2-publication-mobile.png",
+    "../visuels/maquettes-apres/iterations/v1/D1-incertain-mobile.png",
+    "../visuels/maquettes-apres/iterations/v1/C1-suivi-bureau.png",
+    "../visuels/maquettes-apres/iterations/v1/D1-confirme-bureau.png"
+  ],
+  "documents_examines": [
+    "../visuels/maquettes-apres/README.md",
+    "../visuels/maquettes-apres/scenarios.json",
+    "backlog-ux.md",
+    "votes-et-arbitrages.md",
+    "../visuels/maquettes-apres/E1.html",
+    "../visuels/maquettes-apres/C1.html",
+    "../visuels/maquettes-apres/maquettes.js",
+    "../visuels/maquettes-apres/maquettes.css"
+  ],
+  "limites": [
+    "La lecture combinée du backlog et des votes a été partiellement tronquée ; le texte des orientations et les votes étaient déjà connus de l'étape 2, dont les bulletins experts ont été rédigés par cette revue.",
+    "Aucune interaction navigateur : le comportement est inféré du HTML/JS pour la case E1, pas exécuté.",
+    "Les six champs de chaque revue sont des réponses simulées ; aucune réduction de temps ou de risque n'a été mesurée.",
+    "Les préférences NOUVELLE restent assorties des difficultés et corrections de chaque revue ; elles ne constituent pas une validation utilisateur."
+  ],
+  "revues": [
+    {
+      "participant": "E1",
+      "orientation": "A1",
+      "clarte": "Oui : tâches et nouvelles sont séparées.",
+      "simplicite": "Oui, la création et les tâches précèdent les nouvelles.",
+      "actions": "Oui, boutons placés près de chaque tâche.",
+      "risques": "Amélioration plausible de la hiérarchie, non mesurée.",
+      "preference": "NOUVELLE",
+      "difficultes": "Les filtres Période et Statut sont dispersés ; leur portée sur les tâches ou les indicateurs reste ambiguë."
+    },
+    {
+      "participant": "E1",
+      "orientation": "B1",
+      "clarte": "Oui : le brouillon est distinct de la publication.",
+      "simplicite": "Oui, l'interruption devient possible avant sept étapes.",
+      "actions": "Oui, Enregistrer est identifié et séparé de Continuer.",
+      "risques": "Le message d'échec évite une fausse impression de sauvegarde.",
+      "preference": "NOUVELLE",
+      "difficultes": "Il manque encore une illustration de sortie avec des modifications postérieures à la dernière sauvegarde."
+    },
+    {
+      "participant": "E1",
+      "orientation": "B2",
+      "clarte": "Oui : préparer, accords et publication forment un chemin lisible.",
+      "simplicite": "Oui, chaque blocage possède un lien ciblé.",
+      "actions": "Oui, l'action et la raison sont rapprochées.",
+      "risques": "Le bouton indisponible et les explications limitent la confusion entre brouillon et publication.",
+      "preference": "NOUVELLE",
+      "difficultes": "Sur mobile le texte allonge fortement la page ; vérifier la lecture sans réduire les explications essentielles."
+    },
+    {
+      "participant": "E1",
+      "orientation": "B3",
+      "clarte": "Oui : seuil, sélection et conséquence se lisent ensemble.",
+      "simplicite": "Oui, le cas initial ne demande plus de réparer une incohérence.",
+      "actions": "Oui, ajuster et revoir les commerces sont distincts.",
+      "risques": "L'ancienne valeur est explicite et aucune modification silencieuse n'est proposée.",
+      "preference": "NOUVELLE",
+      "difficultes": "L'écran simplifié ne montre pas tous les champs Mission ; préciser qu'ils restent présents dans le produit."
+    },
+    {
+      "participant": "E1",
+      "orientation": "C1",
+      "clarte": "Oui : le commerce absent a une entrée contextuelle.",
+      "simplicite": "Oui pour demander ; le traitement externe reste inconnu.",
+      "actions": "Oui, bouton et retour sont repérables.",
+      "risques": "La demande ne prétend pas associer ni activer le commerce.",
+      "preference": "NOUVELLE",
+      "difficultes": "Le terme référencement et la personne qui examine la demande restent abstraits."
+    },
+    {
+      "participant": "E1",
+      "orientation": "C2",
+      "clarte": "Oui sur bureau : similitude et conflit sont distingués.",
+      "simplicite": "Oui pour examiner les deux lignes sur bureau ; non sur le rendu mobile initial.",
+      "actions": "Oui, comparer et revoir les colonnes sont séparés.",
+      "risques": "Le choix humain est préservé ; le mobile masque la deuxième colonne hors du cadre initial.",
+      "preference": "NOUVELLE",
+      "difficultes": "Corriger la comparaison mobile pour rendre les deux lignes visibles ou leur défilement explicite."
+    },
+    {
+      "participant": "E1",
+      "orientation": "D1",
+      "clarte": "Oui : lecture impossible et envoi incertain sont différenciés.",
+      "simplicite": "Oui, chaque état fournit une action de reprise appropriée.",
+      "actions": "Oui, vérifier l'envoi ne ressemble pas à renvoyer.",
+      "risques": "La non-répétition de l'envoi réduit un risque de compréhension ; aucun effet serveur n'est prouvé.",
+      "preference": "NOUVELLE",
+      "difficultes": "Envoi confirmé désigne en réalité une demande de diffusion confirmée : harmoniser titre et portée."
+    },
+    {
+      "participant": "E1",
+      "orientation": "D2",
+      "clarte": "Oui : suivi et bilan sont séparés.",
+      "simplicite": "Oui, le détour disparaît dans la proposition.",
+      "actions": "Oui, le bilan conserve un accès nommé distinct.",
+      "risques": "L'ambiguïté du point d'entrée diminue sans inventer de données temps réel.",
+      "preference": "NOUVELLE",
+      "difficultes": "Le bouton de titre reste visible sur le suivi lui-même ; tester son utilité plutôt que multiplier les accès redondants."
+    },
+    {
+      "participant": "E1",
+      "orientation": "E1",
+      "clarte": "Oui : période, clôture, fin et archive sont différenciées.",
+      "simplicite": "Oui, une tâche attendue est associée à chaque moment illustré.",
+      "actions": "Partiellement : le bouton définitif paraît actif avec case vide dans le PNG initial.",
+      "risques": "Les conséquences sont claires ; l'apparence désactivée doit correspondre à la garde HTML réelle.",
+      "preference": "NOUVELLE",
+      "difficultes": "Rendre visuellement inactif le bouton avant la coche et indiquer pourquoi."
+    },
+    {
+      "participant": "E2",
+      "orientation": "A1",
+      "clarte": "Oui, l'accueil explique sa valeur opérationnelle.",
+      "simplicite": "Oui, sans ajouter de moteur ni de personnalisation.",
+      "actions": "Oui, démarrer et reprendre sont prioritaires.",
+      "risques": "Le risque d'ignorer une action pourrait diminuer ; aucun taux mesuré.",
+      "preference": "NOUVELLE",
+      "difficultes": "Clarifier le périmètre des filtres ; garder le chantier limité à la hiérarchie."
+    },
+    {
+      "participant": "E2",
+      "orientation": "B1",
+      "clarte": "Oui, un projet incomplet devient un résultat assumé.",
+      "simplicite": "Oui, pour organiser le travail en plusieurs sessions.",
+      "actions": "Oui, sauvegarde explicite sans promesse de mise en ligne.",
+      "risques": "Le message d'échec évite de considérer une écriture fictive comme réussie.",
+      "preference": "NOUVELLE",
+      "difficultes": "Le contrat de brouillon partiel demeure un chantier L, la maquette ne le rend pas trivial."
+    },
+    {
+      "participant": "E2",
+      "orientation": "B2",
+      "clarte": "Oui, le résultat promis et les dépendances externes sont lisibles.",
+      "simplicite": "Oui, sans second parcours de création.",
+      "actions": "Oui, les actions attendues ont un responsable explicite.",
+      "risques": "La promesse cinq à dix minutes n'est pas présentée comme une durée acquise.",
+      "preference": "NOUVELLE",
+      "difficultes": "Vérifier les acteurs et diagnostics réellement disponibles dans le contrat avant de produire ces messages."
+    },
+    {
+      "participant": "E2",
+      "orientation": "B3",
+      "clarte": "Oui, une petite incohérence est traitée au bon endroit.",
+      "simplicite": "Oui, optimisation locale utile.",
+      "actions": "Oui, ajustement explicite conservé.",
+      "risques": "La règle choisie n'est pas modifiée à l'insu de l'organisateur.",
+      "preference": "NOUVELLE",
+      "difficultes": "La simplicité du cas deux commerces ne démontre pas tous les cas limites."
+    },
+    {
+      "participant": "E2",
+      "orientation": "C1",
+      "clarte": "Oui, le besoin est mieux nommé.",
+      "simplicite": "Partiellement, une demande n'assure pas sa résolution.",
+      "actions": "Oui, l'entrée est claire et le suivi illustré.",
+      "risques": "La dissociation compte, référencement et participation est préservée.",
+      "preference": "SANS_PREFERENCE",
+      "difficultes": "Je garde ma réserve tant que propriétaire, coût et circuit réel de demande ne sont pas vérifiés."
+    },
+    {
+      "participant": "E2",
+      "orientation": "C2",
+      "clarte": "Oui, les limites de contrôle sont enfin visibles.",
+      "simplicite": "Oui sur bureau ; le mobile demande correction.",
+      "actions": "Oui, la décision humaine est une action claire.",
+      "risques": "Le doute n'est ni une fusion ni un blocage automatique.",
+      "preference": "NOUVELLE",
+      "difficultes": "L'effort L reste à cadrer ; ne pas présenter le moteur de similitude comme déjà disponible."
+    },
+    {
+      "participant": "E2",
+      "orientation": "D1",
+      "clarte": "Oui pour les états opérationnels.",
+      "simplicite": "Oui pour comprendre la prochaine action ; aucune preuve de fiabilité réelle.",
+      "actions": "Oui, reprise et support existent dans la proposition.",
+      "risques": "Les états incertains évitent la suggestion d'un nouvel envoi immédiat.",
+      "preference": "NOUVELLE",
+      "difficultes": "La condition de lancement reste le rétablissement et la recette réelle du service, pas l'approbation de cet écran."
+    },
+    {
+      "participant": "E2",
+      "orientation": "D2",
+      "clarte": "Oui, un terme correspond à sa destination.",
+      "simplicite": "Oui, correction de périmètre réduit.",
+      "actions": "Oui, le bilan reste séparé.",
+      "risques": "Réduit une ambiguïté sans ajouter de fonctionnalité.",
+      "preference": "NOUVELLE",
+      "difficultes": "Vérifier tous les points d'entrée existants lors d'une éventuelle implémentation."
+    },
+    {
+      "participant": "E2",
+      "orientation": "E1",
+      "clarte": "Oui, les étapes métier gardent leur valeur.",
+      "simplicite": "Oui pour savoir quoi faire ; aucune automatisation ajoutée.",
+      "actions": "Partiellement, le style du bouton définitif est trompeur avant coche.",
+      "risques": "La distinction tirage, information et remise est conservée.",
+      "preference": "NOUVELLE",
+      "difficultes": "Corriger le style désactivé ; ne pas réintroduire la clôture programmée rejetée."
+    },
+    {
+      "participant": "E3",
+      "orientation": "A1",
+      "clarte": "Oui : une action urgente n'a plus la même présentation qu'une nouvelle.",
+      "simplicite": "Oui, les échéances à traiter sont en premier.",
+      "actions": "Oui, préparation de clôture et invitations sont nommées.",
+      "risques": "Le texte distingue période atteinte et action réelle de clôture.",
+      "preference": "NOUVELLE",
+      "difficultes": "Éviter que des filtres d'indicateurs masquent silencieusement une action opérationnelle."
+    },
+    {
+      "participant": "E3",
+      "orientation": "B1",
+      "clarte": "Oui, la préparation incomplète n'est pas publiable.",
+      "simplicite": "Oui, un organisateur interrompu peut reprendre.",
+      "actions": "Oui, enregistrer n'envoie rien selon les textes.",
+      "risques": "Les prérequis de publication sont maintenus dans la proposition.",
+      "preference": "NOUVELLE",
+      "difficultes": "Une reprise après perte de réseau doit être vérifiée dans le futur produit."
+    },
+    {
+      "participant": "E3",
+      "orientation": "B2",
+      "clarte": "Oui : qui agit et pourquoi sont explicités.",
+      "simplicite": "Oui, les blocages conduisent à une tâche concrète.",
+      "actions": "Oui, inviter et configurer sont distincts.",
+      "risques": "Accord commerçant et publication ne sont pas fusionnés.",
+      "preference": "NOUVELLE",
+      "difficultes": "Conserver la responsabilité de remise et tous les prérequis quand le cas contient plusieurs commerces."
+    },
+    {
+      "participant": "E3",
+      "orientation": "B3",
+      "clarte": "Oui : le nombre de commerces est relié à la règle.",
+      "simplicite": "Oui, choix initial atteignable.",
+      "actions": "Oui, modifier le seuil reste une décision.",
+      "risques": "La réduction de sélection ne réécrit pas la règle silencieusement.",
+      "preference": "NOUVELLE",
+      "difficultes": "Je maintiens ma préférence de priorité P2, sans rejeter cette maquette P1 retenue par le facilitateur."
+    },
+    {
+      "participant": "E3",
+      "orientation": "C1",
+      "clarte": "Oui, le commerce demandé ne devient pas participant.",
+      "simplicite": "Oui pour signaler une absence.",
+      "actions": "Oui, suivi et retour sont compréhensibles.",
+      "risques": "Aucune activation ou invitation implicite n'est représentée.",
+      "preference": "NOUVELLE",
+      "difficultes": "L'organisateur doit savoir qui traite la demande, sans inventer de délai de traitement."
+    },
+    {
+      "participant": "E3",
+      "orientation": "C2",
+      "clarte": "Oui, deux commerces semblables ne sont pas déclarés identiques.",
+      "simplicite": "Oui sur bureau ; contrôle difficile si une colonne manque sur mobile.",
+      "actions": "Oui, sélection humaine et retour sont explicités.",
+      "risques": "Pas de fusion automatique et possibilité de corriger le fichier.",
+      "preference": "NOUVELLE",
+      "difficultes": "Les cas de conflit fort doivent conserver leur traitement canonique au-delà de cet exemple sans identifiants."
+    },
+    {
+      "participant": "E3",
+      "orientation": "D1",
+      "clarte": "Oui, lecture et diffusion sont clairement des opérations différentes.",
+      "simplicite": "Oui, vérifier une tentative existante est le bon prochain geste.",
+      "actions": "Oui, reprise et support sont distingués.",
+      "risques": "Le texte décourage un renvoi pouvant solliciter deux fois les participants.",
+      "preference": "NOUVELLE",
+      "difficultes": "La consultation de l'état doit réellement identifier la tentative existante ; ce contrat n'est pas prouvé par le rendu."
+    },
+    {
+      "participant": "E3",
+      "orientation": "D2",
+      "clarte": "Oui, je retrouve les commandes d'exploitation.",
+      "simplicite": "Oui, le bilan ne se substitue plus au pilotage.",
+      "actions": "Oui, les actions sensibles restent distinctes.",
+      "risques": "La proposition ne confond pas indicateurs et commandes.",
+      "preference": "NOUVELLE",
+      "difficultes": "Vérifier les confirmations de suspension et annulation dans le parcours complet, hors scénario actuel."
+    },
+    {
+      "participant": "E3",
+      "orientation": "E1",
+      "clarte": "Oui, période finie ne signifie pas clôturée.",
+      "simplicite": "Oui, la prochaine responsabilité est lisible.",
+      "actions": "Partiellement, bouton de confirmation visuellement actif malgré absence de coche.",
+      "risques": "Les effets sont expliqués ; la garde HTML existe, mais son apparence doit être corrigée.",
+      "preference": "NOUVELLE",
+      "difficultes": "La clôture reste définitive ; aucun tirage ni remise ne doit être déduit de la transition illustrée."
+    },
+    {
+      "participant": "E4",
+      "orientation": "A1",
+      "clarte": "Oui, succès et action attendue portent des mots différents.",
+      "simplicite": "Oui, la création est visible même sur mobile.",
+      "actions": "Oui, les libellés annoncent la tâche.",
+      "risques": "Moins de dépendance à la seule couleur.",
+      "preference": "NOUVELLE",
+      "difficultes": "Les filtres éloignés doivent être regroupés ou leur portée explicitée ; remplacer les calendriers répétés par les pictogrammes existants."
+    },
+    {
+      "participant": "E4",
+      "orientation": "B1",
+      "clarte": "Oui, l'état non enregistré est explicite.",
+      "simplicite": "Oui, une interruption n'exige plus de finir le formulaire.",
+      "actions": "Oui, réessayer est séparé de continuer.",
+      "risques": "L'alerte n'affirme pas à tort que la saisie est conservée durablement.",
+      "preference": "NOUVELLE",
+      "difficultes": "Sur mobile, l'action de reprise se trouve après le formulaire ; tester sa découverte au clavier et en lecture vocale."
+    },
+    {
+      "participant": "E4",
+      "orientation": "B2",
+      "clarte": "Oui, les étapes générales sont en langage courant.",
+      "simplicite": "Oui, le besoin d'aide peut diminuer, à vérifier.",
+      "actions": "Oui, tâche et bouton sont côte à côte ou empilés.",
+      "risques": "Le bouton désactivé est expliqué, contrairement à un simple contrôle muet.",
+      "preference": "NOUVELLE",
+      "difficultes": "La longueur mobile peut fatiguer ; ne pas cacher la raison du blocage dans un repli inaccessible."
+    },
+    {
+      "participant": "E4",
+      "orientation": "B3",
+      "clarte": "Oui, le sens de deux commerces est expliqué.",
+      "simplicite": "Oui, la valeur impossible n'est plus proposée initialement.",
+      "actions": "Oui, appliquer et revoir sont explicites.",
+      "risques": "La correction est volontaire et son effet annoncé.",
+      "preference": "NOUVELLE",
+      "difficultes": "La description de mission absente de cette vue simplifiée doit rester dans le parcours réel ; tester les libellés du select au lecteur d'écran."
+    },
+    {
+      "participant": "E4",
+      "orientation": "C1",
+      "clarte": "Oui, une question simple remplace une impasse.",
+      "simplicite": "Oui, une personne peut demander un seul commerce sans fichier.",
+      "actions": "Oui, le bouton principal répond directement au problème.",
+      "risques": "La demande ne vaut pas invitation.",
+      "preference": "NOUVELLE",
+      "difficultes": "Référencement et référentiel restent du jargon ; préférer une explication comme rendre le commerce disponible dans la liste."
+    },
+    {
+      "participant": "E4",
+      "orientation": "C2",
+      "clarte": "Oui sur bureau, pas suffisamment sur mobile initial.",
+      "simplicite": "Partiellement, une colonne hors champ empêche une comparaison évidente.",
+      "actions": "Oui sur bureau ; l'accès au contenu mobile doit être rendu perceptible.",
+      "risques": "Le discours limite les faux doublons, mais l'information masquée gêne le contrôle.",
+      "preference": "NOUVELLE",
+      "difficultes": "Empiler Ligne 2 et Ligne 3 ou fournir un défilement nommé, visible et accessible au clavier."
+    },
+    {
+      "participant": "E4",
+      "orientation": "D1",
+      "clarte": "Oui, l'erreur dit ce qui a échoué.",
+      "simplicite": "Oui, une prochaine possibilité est proposée.",
+      "actions": "Oui, vérifier ne suggère pas de renvoyer.",
+      "risques": "Le texte évite une conclusion hâtive d'échec définitif de l'envoi.",
+      "preference": "NOUVELLE",
+      "difficultes": "Envoi confirmé paraît plus fort que demande confirmée ; garder un vocabulaire cohérent et annoncer les changements d'état aux aides techniques."
+    },
+    {
+      "participant": "E4",
+      "orientation": "D2",
+      "clarte": "Oui, les mots suivi opérationnel et bilan différencient les buts.",
+      "simplicite": "Oui, pas de détour conceptuel imposé.",
+      "actions": "Oui, bouton bilan identifiable.",
+      "risques": "Le risque de se perdre entre deux rubriques est plausiblement réduit.",
+      "preference": "NOUVELLE",
+      "difficultes": "Le vert n'est pas le seul repère ; conserver les textes et vérifier le focus après navigation."
+    },
+    {
+      "participant": "E4",
+      "orientation": "E1",
+      "clarte": "Oui, les conséquences sont compréhensibles et proches de la case.",
+      "simplicite": "Oui, retour sans clôturer disponible.",
+      "actions": "Non complètement : bouton vert avec case vide est un signal contradictoire.",
+      "risques": "La formulation protège, mais l'état visuel du contrôle doit être corrigé.",
+      "preference": "NOUVELLE",
+      "difficultes": "Rendre disabled perceptible et expliquer cochez pour activer ; tester lecture de la case et du bouton sur mobile réel."
+    },
+    {
+      "participant": "E5",
+      "orientation": "A1",
+      "clarte": "Amélioration heuristique plausible de la hiérarchie.",
+      "simplicite": "Simplicité supposée, pas de test humain.",
+      "actions": "Les actions sont visuellement plus hautes.",
+      "risques": "Réduction du risque d'oubli non démontrée.",
+      "preference": "NOUVELLE",
+      "difficultes": "Comparer à tâches et données équivalentes ; les deux exemples ne prouvent pas le comportement avec un grand volume."
+    },
+    {
+      "participant": "E5",
+      "orientation": "B1",
+      "clarte": "Oui, le résultat incomplet est explicite.",
+      "simplicite": "Gain de reprise plausible, aucune durée mesurée.",
+      "actions": "La commande de sauvegarde est clairement dessinée.",
+      "risques": "L'état d'échec est utile ; sa persistance réelle n'est pas vérifiée.",
+      "preference": "NOUVELLE",
+      "difficultes": "Tester une interruption réelle et la restitution des seuls champs sauvegardés ; le prototype n'enregistre rien."
+    },
+    {
+      "participant": "E5",
+      "orientation": "B2",
+      "clarte": "Oui, le chemin de publication est mieux décrit.",
+      "simplicite": "Moins de recherche attendue, sans mesure.",
+      "actions": "Actions et responsables sont visibles.",
+      "risques": "La proposition évite la confusion entre création et publication.",
+      "preference": "NOUVELLE",
+      "difficultes": "Ne pas déduire de l'écran une publication en cinq à dix minutes ou un délai de réponse commerçant."
+    },
+    {
+      "participant": "E5",
+      "orientation": "B3",
+      "clarte": "Oui, conséquence et correction sont explicitées.",
+      "simplicite": "Optimisation crédible du cas observé.",
+      "actions": "Le choix explicite est visible.",
+      "risques": "Le contrôle serveur reste une condition future.",
+      "preference": "NOUVELLE",
+      "difficultes": "L'AVANT ne montre pas le seuil dans la portion capturée ; conserver la limite de preuve AN-05 et DOM, sans reconstruction."
+    },
+    {
+      "participant": "E5",
+      "orientation": "C1",
+      "clarte": "Oui, la demande est intelligible comme proposition.",
+      "simplicite": "Simplicité de la résolution inconnue.",
+      "actions": "L'entrée est plus visible que l'absence de parcours trouvé.",
+      "risques": "Les effets automatiques sont exclus par les textes.",
+      "preference": "SANS_PREFERENCE",
+      "difficultes": "Le parcours canonique et son accessibilité initiale restent inconnus ; ma réserve du vote n'est pas levée par une maquette."
+    },
+    {
+      "participant": "E5",
+      "orientation": "C2",
+      "clarte": "Oui sur les limites du rapprochement.",
+      "simplicite": "Le bureau paraît plus explicite, le mobile initial est incomplet visuellement.",
+      "actions": "Comparaison et sélection sont matérialisées.",
+      "risques": "Aucune preuve que le moteur proposé détecte ces cas ; seule la présentation est évaluée.",
+      "preference": "NOUVELLE",
+      "difficultes": "Corriger la colonne mobile hors champ puis faire expliquer le sens de zéro conflit à une personne réelle."
+    },
+    {
+      "participant": "E5",
+      "orientation": "D1",
+      "clarte": "Oui sur la distinction des catégories d'erreur.",
+      "simplicite": "La suite est compréhensible ; service réellement non retesté.",
+      "actions": "Les boutons de vérification et de support sont distincts.",
+      "risques": "Aucun rétablissement du 500 démontré par cet APRÈS.",
+      "preference": "NOUVELLE",
+      "difficultes": "Titre Envoi confirmé à aligner sur la demande de diffusion ; séparer jugement d'interface et preuve de livraison."
+    },
+    {
+      "participant": "E5",
+      "orientation": "D2",
+      "clarte": "Oui, le changement est directement lié à AN-16.",
+      "simplicite": "Simplification plausible du trajet.",
+      "actions": "Les destinations sont distinctes.",
+      "risques": "Réduction d'ambiguïté, pas mesure de taux d'erreur.",
+      "preference": "NOUVELLE",
+      "difficultes": "La navigation est illustrée ; vérifier ultérieurement les routes du produit déployé."
+    },
+    {
+      "participant": "E5",
+      "orientation": "E1",
+      "clarte": "Oui, les états et conséquences sont mieux expliqués.",
+      "simplicite": "Simplicité à vérifier lors d'une clôture réelle isolée.",
+      "actions": "L'état désactivé n'est pas visuellement fidèle dans le PNG initial.",
+      "risques": "Les garde-fous sont présents dans le HTML ; la représentation doit les rendre perceptibles.",
+      "preference": "NOUVELLE",
+      "difficultes": "Aucune nouvelle clôture n'a été exécutée ; la préférence ne valide ni le contrat ni les actions irréversibles."
+    }
+  ],
+  "alertes": [
+    {
+      "orientation": "E1",
+      "gravite": "IMPORTANTE_VISUELLE",
+      "constat": "Dans les PNG initiaux bureau/mobile de confirmation, le bouton est vert malgré la case décochée. Le HTML porte bien disabled et le JS le lie à la case : la garde existe, sa représentation est trompeuse.",
+      "correction": "Donner à button.primary:disabled une apparence inactive distincte, puis régénérer les PNG ; ajouter une aide expliquant l'activation par la case. Correction locale dans le périmètre adopté."
+    },
+    {
+      "orientation": "C2",
+      "gravite": "IMPORTANTE_MOBILE",
+      "constat": "C2-comparaison-mobile montre seulement Ligne 2 dans le cadre, avec Ligne 3 au-delà d'un tableau de largeur minimale 560 px. Aucun indice visible n'explique ce contenu hors cadre.",
+      "correction": "Empiler les deux lignes comparées sur mobile ou fournir un indice et une commande de défilement accessibles ; régénérer la vue et vérifier les deux contenus. Ne pas modifier la logique de sélection humaine."
+    },
+    {
+      "orientation": "D1",
+      "gravite": "MODEREE_LIBELLE",
+      "constat": "Le titre Envoi confirmé paraît annoncer une diffusion accomplie alors que le texte dit demande de diffusion confirmée. La nuance sur lecture ne suffit pas à distinguer demande acceptée et distribution.",
+      "correction": "Nommer l'état Demande de diffusion confirmée ou prise en compte, puis conserver la distinction avec distribution et lecture. Aucun nouvel état métier ne doit être inventé."
+    },
+    {
+      "orientation": "A1",
+      "gravite": "MODEREE_COMPREHENSION",
+      "constat": "Période est près des prochaines actions, Statut est placé entre tâches et nouvelles. Leur périmètre n'est pas explicite dans la maquette.",
+      "correction": "Regrouper les filtres conservés ou préciser les informations qu'ils filtrent, sans créer une nouvelle règle d'urgence ni masquer implicitement les tâches."
+    },
+    {
+      "orientation": "TOUTES",
+      "gravite": "MINEURE_FIDELITE",
+      "constat": "Le même calendrier remplace les pictogrammes distincts de la navigation actuelle. Couleurs, typographie, surfaces, logo et structure restent proches de l'identité observée.",
+      "correction": "Réutiliser les pictogrammes existants ou documenter cette simplification graphique ; aucun redesign de navigation n'est proposé."
+    },
+    {
+      "orientation": "C1",
+      "gravite": "DEPENDANCE_MAINTENUE",
+      "constat": "Le suivi illustré ne désigne pas de responsable réel ni de circuit de traitement vérifié.",
+      "correction": "Conserver explicitement la dépendance canonique dans le dossier ; ne pas inventer un délai ou un responsable dans l'interface avant vérification."
+    },
+    {
+      "orientation": "B1",
+      "gravite": "DEPENDANCE_MAINTENUE",
+      "constat": "La sauvegarde partielle est une proposition de contrat, non une capacité disponible démontrée.",
+      "correction": "Garder la distinction maquette/produit et le chantier de contrat de brouillon partiel dans le backlog."
+    },
+    {
+      "orientation": "B3",
+      "gravite": "LIMITE_PREUVE",
+      "constat": "La capture AVANT ne montre pas le seuil initial incompatible dans sa portion visible.",
+      "correction": "Maintenir la référence au constat AN-05 et au relevé DOM ; ne pas fabriquer un AVANT montrant le contrôle."
+    }
+  ],
+  "changement_substantiel": [
+    {
+      "orientation": "A1",
+      "avis": "NON_IDENTIFIE",
+      "motif": "La hiérarchie tâches/nouvelles reste celle adoptée ; clarifier les filtres est un ajustement local."
+    },
+    {
+      "orientation": "B1",
+      "avis": "NON_IDENTIFIE",
+      "motif": "La sauvegarde partielle et ses échecs déclinent le texte voté, avec dépendance serveur maintenue."
+    },
+    {
+      "orientation": "B2",
+      "avis": "NON_IDENTIFIE",
+      "motif": "Les diagnostics actionnables et étapes de publication reprennent l'orientation sans automatiser les accords."
+    },
+    {
+      "orientation": "B3",
+      "avis": "NON_IDENTIFIE",
+      "motif": "Valeur initiale compatible et ajustement explicite sont conformes au vote."
+    },
+    {
+      "orientation": "C1",
+      "avis": "NON_IDENTIFIE",
+      "motif": "La demande et son suivi sont déjà dans le périmètre adopté ; aucun compte ou accord n'est créé implicitement."
+    },
+    {
+      "orientation": "C2",
+      "avis": "NON_IDENTIFIE",
+      "motif": "Similitudes à examiner et confirmation humaine sont conformes ; corriger le mobile ne change pas la règle."
+    },
+    {
+      "orientation": "D1",
+      "avis": "NON_IDENTIFIE",
+      "motif": "Lecture, reprise et incertitude sont prévues par l'orientation ; préciser le libellé n'ajoute pas de règle d'envoi."
+    },
+    {
+      "orientation": "D2",
+      "avis": "NON_IDENTIFIE",
+      "motif": "Le lien distinct vers le suivi et le bilan correspond au texte adopté."
+    },
+    {
+      "orientation": "E1",
+      "avis": "NON_IDENTIFIE",
+      "motif": "Les états, conséquences et confirmations restent manuels et distincts ; corriger le style disabled restaure la fidélité au garde-fou."
+    }
+  ],
+  "nouveau_vote": "Non demandé : aucun changement substantiel identifié. Corrections locales et dépendances ne constituent pas une autorisation de développement.",
+  "captures_examinees_originales": [
+    "../visuels/maquettes-apres/A1-accueil-bureau.png",
+    "../visuels/maquettes-apres/B1-saisie-bureau.png",
+    "../visuels/maquettes-apres/B2-publication-bureau.png",
+    "../visuels/maquettes-apres/B3-compatible-bureau.png",
+    "../visuels/maquettes-apres/C1-selection-bureau.png",
+    "../visuels/maquettes-apres/C2-apercu-bureau.png",
+    "../visuels/maquettes-apres/D1-lecture-bureau.png",
+    "../visuels/maquettes-apres/D2-suivi-bureau.png",
+    "../visuels/maquettes-apres/E1-periode-bureau.png",
+    "../visuels/maquettes-apres/B1-echec-bureau.png",
+    "../visuels/maquettes-apres/B3-incompatible-bureau.png",
+    "../visuels/maquettes-apres/C2-comparaison-bureau.png",
+    "../visuels/maquettes-apres/D1-incertain-bureau.png",
+    "../visuels/maquettes-apres/E1-confirmation-bureau.png",
+    "../visuels/maquettes-apres/B1-echec-mobile.png",
+    "../visuels/maquettes-apres/C2-comparaison-mobile.png",
+    "../visuels/maquettes-apres/E1-confirmation-mobile.png",
+    "../visuels/maquettes-apres/A1-accueil-mobile.png",
+    "../visuels/maquettes-apres/B2-publication-mobile.png",
+    "../visuels/maquettes-apres/D1-incertain-mobile.png",
+    "../visuels/maquettes-apres/C1-suivi-bureau.png",
+    "../visuels/maquettes-apres/D1-confirme-bureau.png"
+  ],
+  "archivage": "Chemins des rendus v1 preserves avant corrections ; avis inchanges."
+}

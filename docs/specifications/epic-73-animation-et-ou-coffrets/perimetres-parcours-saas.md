@@ -1246,3 +1246,63 @@ Les retraits dus sont réappliqués après restauration avant réouverture ; la 
 | Export/fermeture : responsable seul, transfert pendant préparation/téléchargement, échéance 30 jours, archive limitée/transmissible, CSV hostile, fermeture concurrente d’obligation, autres organisations préservées, purge archive sans sources | 62 |
 
 Adapter les fixtures du générateur : commerce Animation seul/mixte/retiré avec engagements, salarié limité, même gestionnaire sur deux organisations et communes distinctes, invitation expirée, préparation en attente/retard, trois dotations, enquête/bilan sans collecte, export expiré et fermeture avec gain ouvert. Les données de démonstration ne constituent pas une preuve déployée. Les contrats documentaires et embarqués Animation/Pro/Marketplace doivent être générés et testés ensemble lors de l’implémentation ; aucun JSON de production n’est réécrit manuellement à ce stade.
+
+## 11. WA B1 — préparation manuelle durable (WA-02 / WA-03)
+
+Spécification du 18 novembre 2026, avant réalisation. La préparation manuelle est
+un objet du domaine Animation distinct d'une animation : minimum commune active,
+modèle actif et nom non vide (160 caractères). Les dates, commerces, dotation et
+consignes peuvent manquer. Le JSON est versionné et fermé, limité à 64 Kio et aux
+champs du formulaire manuel. Il ne contient aucun token, invitation, accord ni
+statut d'animation. Sauvegarder ne publie, n'invite, ne réserve et ne débite rien.
+
+Le propriétaire `PreparationManuelle` contrôle version optimiste, contenu fermé,
+modèle stable après création et conversion unique. L'application orchestre les
+ports. Le stockage dédié conserve identifiant UUID choisi par le client, tenant,
+commune, modèle, nom, contenu, révision, auteur et dates. Aucun JSON incomplet
+n'entre dans `animation_configurations`. Une révision obsolète refuse la mutation
+(409) ; les données saisies restent dans le formulaire et une lecture explicite
+permet de comparer. Aucun écrasement ni réessai automatique.
+
+Contrat portail sous `/protected/animation-locale/preparations-manuelles` :
+
+| Action | Entrée | Résultat et refus |
+| --- | --- | --- |
+| GET collection | commune_id, limit 25 (max 100), cursor opaque lié au tenant/commune | items, next_cursor ; date/ID décroissants, aucune écriture |
+| GET /{id} | identifiant connu du client | état durable, révision, animation_id éventuel ; 404 hors tenant/commune |
+| PUT /{id} | commune_id, expected_revision (0 création), contenu fermé | préparation confirmée ; répétition exacte reconnue, 409 divergence/révision obsolète |
+| POST /{id}/convertir | expected_revision et Idempotency-Key 8–128 | préparation liée au brouillon complet ; lecture GET pour rapprochement après réponse perdue |
+
+Les habilitations et la session sont revérifiées dans la transaction et sous
+verrou partagé d'identité : lecture `animation:lire`, écriture `animation:creer`
+et `animation:modifier`. Tenant et commune sont issus du contexte authentifié.
+Écriture : contrôle du module/type et de réversibilité avant mutation ; conversion
+rejoue tous les contrôles de création actuels, abonnement, éligibilité et dotation.
+Modèle fermé aux formulaires manuels tombola/passeport, sans modifier les parcours
+Chasse ou génération. Les préparations restent lisibles lors d'un retrait de
+module pour retrouver les saisies, tant que l'accès à la commune reste autorisé.
+
+Conversion sous une même UoW et verrou de préparation :
+`GestionAnimations.creer(..., uow=uow, synchroniser_participations=True)` puis
+association de l'animation, empreinte de la clé et commit unique. Un rejeu de la
+même clé retrouve le même brouillon, une autre clé refuse une seconde conversion.
+La conversion prépare les demandes `A_ENVOYER` via le pipeline canonique ; aucun email, notification ni accord n'est créé implicitement. La sauvegarde partielle ne crée aucune demande. Un échec de validation ou
+transaction laisse la préparation disponible ; jamais de double animation.
+
+Migration additive `v324_preparations_manuelles.sql`, sans reprise artificielle
+de saisies navigateur. L'UI conserve uniquement la saisie et les IDs en mémoire,
+pas de stockage local ni cache API. La liste permet une reprise après reconnexion.
+Le changement commune/session invalide requêtes et saisie selon garde existant.
+L'identifiant choisi avant sauvegarde autorise la lecture de rapprochement même
+si la première réponse est perdue. La conversion n'est pas la publication.
+
+Preuves attendues : schéma fermé/borné, minimum incomplet conservé ; tenant et
+commune refusés ; droits retirés et module suspendu ; conflit sans écrasement ;
+conversion complète, sans effet d'invitation ; erreur conservant préparation ;
+réponse perdue/rejeu sans double création ; liste bornée/curseur contextualisé.
+La concurrence PostgreSQL et l'UI connectée sont des contrôles distincts des tests
+isolés. Les contrats documentaires et embarqués sont régénérés par l'intégrateur.
+Démonstration : aucun objet existant n'est converti et aucun scénario automatique
+nouveau requis ; une préparation synthétique peut être ajoutée ultérieurement.
+
+Précision WA B1 : `contenu.saisie.seuil_origine` conserve le choix automatique ou manuel du seuil pour la reprise ; ces métadonnées de saisie sont retirées avant conversion. La suppression autorisée du brouillon complet emporte la préparation convertie liée (FK cascade), sans incidence sur les préparations non converties.

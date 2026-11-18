@@ -1,0 +1,548 @@
+{
+  "version": 1,
+  "source_archive": "../v1-sources.zip",
+  "files_in_archive": [
+    {
+      "path": "A1-accueil-bureau.png",
+      "sha256": "7952387ece0dd573aa7ba0df9d7f62cd7f08e01f34a50a573780d1e879e3caec"
+    },
+    {
+      "path": "A1-accueil-mobile.png",
+      "sha256": "1fa381bdd21ce03ca07c4000f7875e69e7e7356d6f9f1a87e94050d191fd3c3e"
+    },
+    {
+      "path": "A1.html",
+      "sha256": "8644dfd1d8fdb36aa2c892bd7fb2775b5bbf5d7ccae9b6304dbdd8febf8151f7"
+    },
+    {
+      "path": "B1-echec-bureau.png",
+      "sha256": "21e4e1952c09c61f021a1917ed57be5265978ab7bcd799abe8a5a12984717266"
+    },
+    {
+      "path": "B1-echec-mobile.png",
+      "sha256": "9fd6b73f481e3d71442fb3f17bee9026a88b8c4a608b069fb0ba9284738add5b"
+    },
+    {
+      "path": "B1-enregistre-bureau.png",
+      "sha256": "c6a242d84ded7b46211b2819b36825a1820cd4963f35d9e87566dc4bc67e49b2"
+    },
+    {
+      "path": "B1-enregistre-mobile.png",
+      "sha256": "110cfc9f899c7cbcdf51c7c762c74957382fa98fd0008bc3563806becd4fafba"
+    },
+    {
+      "path": "B1-saisie-bureau.png",
+      "sha256": "74aef99cfc39fb6977cf2197dde49f2e048fe5471ba0aae0825074503b622a6f"
+    },
+    {
+      "path": "B1-saisie-mobile.png",
+      "sha256": "bfe57727020b16865e51ff13ed84f63440ef49991554a2d7f46acb5101f50cde"
+    },
+    {
+      "path": "B1.html",
+      "sha256": "a10df21e3001af0e992f9dc2d6f2d0dbdecac6cbf376ee7c1cce1d98ab633f0d"
+    },
+    {
+      "path": "B2-apercu-bureau.png",
+      "sha256": "45b7306b4cb5deae51b900bbfe4516dfd59284dc2ef18c1bdbddccdb4c055629"
+    },
+    {
+      "path": "B2-apercu-mobile.png",
+      "sha256": "5bbcf76577f15fe32cdd74f5c16ecb3663c247fa37b23d0155cebe3a7ea19d17"
+    },
+    {
+      "path": "B2-demarrage-bureau.png",
+      "sha256": "47021d8066033d5aa0675118d86f88703a8dd5932412d156c4f3a3d705fdebb5"
+    },
+    {
+      "path": "B2-demarrage-mobile.png",
+      "sha256": "6345e64620ac84b6ce61fa8c5e399d62a65b23bafa79c1b23cd8c09b28bd19d7"
+    },
+    {
+      "path": "B2-dotation-bureau.png",
+      "sha256": "e833d661e005daf29158393d3decb2eadd6544a4262a50ed6f0b9619681fa23b"
+    },
+    {
+      "path": "B2-dotation-mobile.png",
+      "sha256": "760e8396f395cad0607be2ddb1c949c21daff968acbbe27566e457290409861e"
+    },
+    {
+      "path": "B2-invitations-bureau.png",
+      "sha256": "19ffc880331390f24165d548221efb6fd7ee075ebef532e829cebf1abcb84d15"
+    },
+    {
+      "path": "B2-invitations-mobile.png",
+      "sha256": "5b58b5e47cb8cf0aee3692250c988d4f9c303a57f29ded6679b772ea1c1cf071"
+    },
+    {
+      "path": "B2-publication-bureau.png",
+      "sha256": "1725b32c02a8743f528d4c04b7d4289211a4ca4092590315a9e8c3a4e136e032"
+    },
+    {
+      "path": "B2-publication-mobile.png",
+      "sha256": "7c455a986885eeb5f723cb9ab4e8ca4d1b28eb022f4e74f6028b3ef0f4ad14b1"
+    },
+    {
+      "path": "B2.html",
+      "sha256": "194be08b1a4ea02395dc7e706e1a20f43835ddc822dc0910f76a7ebbe1667156"
+    },
+    {
+      "path": "B3-compatible-bureau.png",
+      "sha256": "2a21b56d90c159f26deaff660e620c3a346de515e30d64b74578fb30d1f4181d"
+    },
+    {
+      "path": "B3-compatible-mobile.png",
+      "sha256": "3959d897bc69a071c2f9ae6faf19e07a4ba1826263afc18d7b1671de519ab500"
+    },
+    {
+      "path": "B3-incompatible-bureau.png",
+      "sha256": "52a9042789d7a68695008d4d3321b20fe0d4417c7613cd57294b786fcbbd53ed"
+    },
+    {
+      "path": "B3-incompatible-mobile.png",
+      "sha256": "c53b8985342afd7fde483634db29e9699d1b165f0b81107ca4e3b26feaa019be"
+    },
+    {
+      "path": "B3.html",
+      "sha256": "54989045c65238e29b816ed2954e3b5fa85ff79cfdf5cde0e42360dbb6b00bf8"
+    },
+    {
+      "path": "C1-demande-bureau.png",
+      "sha256": "1adceba920902e62ef5708a29ec68d515f821823bd7b4c94b012851272274512"
+    },
+    {
+      "path": "C1-demande-mobile.png",
+      "sha256": "28d963dd4a331549cabd0d3ba0e0e82c4afb5753f61be209573f673c3a6b44d5"
+    },
+    {
+      "path": "C1-selection-bureau.png",
+      "sha256": "a9b8a1c407b188f5f7d64f8fb0252542975c8f69e732e060feb3638509ba310b"
+    },
+    {
+      "path": "C1-selection-mobile.png",
+      "sha256": "5679074ee873c57312bb0e2478759a40c56b2cf36d0abf98a0b651b6071e704b"
+    },
+    {
+      "path": "C1-suivi-bureau.png",
+      "sha256": "517a15687cc204743952d0f2137fe3a0b920566cfada2adf5ff22e96f4ce1e62"
+    },
+    {
+      "path": "C1-suivi-mobile.png",
+      "sha256": "79a44bd75296999951ca1025c6c78cc418ad6d0410b5764e8023f11e09019c83"
+    },
+    {
+      "path": "C1.html",
+      "sha256": "d792f963a70928d3665e710e6c7cbb5eef89f1cf458c3a402647a0d560ec0ea8"
+    },
+    {
+      "path": "C2-apercu-bureau.png",
+      "sha256": "47d066940790a6d3aacfc58189facac71e311fc4da217e8f3c9ef13512e610bc"
+    },
+    {
+      "path": "C2-apercu-mobile.png",
+      "sha256": "b6f3eef2b99c1d60942dc85e2805fa9f643594a29915cd93d09ffe1933f3ccfa"
+    },
+    {
+      "path": "C2-colonnes-bureau.png",
+      "sha256": "aa73edca98ff65e590b0980160d23cbe24fdf89bceb8c921198c63f99636ef4a"
+    },
+    {
+      "path": "C2-colonnes-mobile.png",
+      "sha256": "fb3c1fef0843c39b8ab8fb0b1cb4cf949d67073277c198ed09e914e7ef8ba3bf"
+    },
+    {
+      "path": "C2-comparaison-bureau.png",
+      "sha256": "763ed6f163069d9de8ff5e89c607323840b05f3f928f81c1151a71ef0bb150d2"
+    },
+    {
+      "path": "C2-comparaison-mobile.png",
+      "sha256": "ada77abd45184cd08c5383bcb15a693ccf56809e8d5ebc97cbde3bb6c29630e4"
+    },
+    {
+      "path": "C2-confirmation-bureau.png",
+      "sha256": "55a213fb45248206f60652934a0b2a620e3f1635b2a0dfea02cdd555cf19c368"
+    },
+    {
+      "path": "C2-confirmation-mobile.png",
+      "sha256": "441ff78d3261db5ebcdffec9236096badf48b241d9245be3ff14f9850b9317ba"
+    },
+    {
+      "path": "C2.html",
+      "sha256": "08f39c73bbfb225a7fde11c379bf1dbeeea80224062a30b8b73fffbb48d75231"
+    },
+    {
+      "path": "D1-apercu-bureau.png",
+      "sha256": "e4914a02ebcfbe027288b241233d5204937ef35e69e41c4755cee827c01b5749"
+    },
+    {
+      "path": "D1-apercu-mobile.png",
+      "sha256": "d2e68c23fa2ec6c22c11451be2a2ac659ef03933218b9f2d5bec593ba96e456d"
+    },
+    {
+      "path": "D1-confirme-bureau.png",
+      "sha256": "b43b1ff3a98230623e6eed8b9fef98cea62d32b64057d48eb21c033e643b19ec"
+    },
+    {
+      "path": "D1-confirme-mobile.png",
+      "sha256": "34221663da1f34d4df22505c5086801409758f57a34646c0d26934f908063283"
+    },
+    {
+      "path": "D1-incertain-bureau.png",
+      "sha256": "5b4be8f236d64219953e4ed5fa16ca08168c22212801cbac017dd3f8db9557ae"
+    },
+    {
+      "path": "D1-incertain-mobile.png",
+      "sha256": "95a30963a89922cae6deb603a3f0f86180061825d5898449cee22a044e5b35aa"
+    },
+    {
+      "path": "D1-lecture-bureau.png",
+      "sha256": "64a0d5df6a985739367308af33bd7852a1d62e8a6343d08c8abb109ff294b10c"
+    },
+    {
+      "path": "D1-lecture-mobile.png",
+      "sha256": "8cbfadbe91bb0954bb4a3a3cc0b1d62653aa8e39fe3cd368f20479c2752a8a07"
+    },
+    {
+      "path": "D1-preparer-bureau.png",
+      "sha256": "e507dde5a7500b6715bf59395730dad144029ed7172fe0dbf33fa74e09b57110"
+    },
+    {
+      "path": "D1-preparer-mobile.png",
+      "sha256": "b4e693bc4f41c23d7768736adcc76d914b7d3c80691fc7ed967636e4bbe8e841"
+    },
+    {
+      "path": "D1-refuse-bureau.png",
+      "sha256": "fe01b6ce741ea4df0c7d4315b6c0ae8c3a14a92ddc6126cbed075d30c5552b42"
+    },
+    {
+      "path": "D1-refuse-mobile.png",
+      "sha256": "7b87e827eee1f78e02b8b162be88eeb71162b419d572c07b17e90659dce87cce"
+    },
+    {
+      "path": "D1.html",
+      "sha256": "5c3f96030025842999dc3e47f3a843bea28961c0e186a3f6d9984da47230b39b"
+    },
+    {
+      "path": "D2-bilan-bureau.png",
+      "sha256": "16238995ff724dcf4e4913830a22ad57b78266d77fa94066aa513e5b27a3256c"
+    },
+    {
+      "path": "D2-bilan-mobile.png",
+      "sha256": "63abca3cceab43541597c8aacd4c43c11c43af81e69026d471327edcfa7b0df1"
+    },
+    {
+      "path": "D2-suivi-bureau.png",
+      "sha256": "761d8284a0d616cf96cc7f9593edffaef48e5bd7cd4596bcffbe02a61152dab4"
+    },
+    {
+      "path": "D2-suivi-mobile.png",
+      "sha256": "fa81d9e5ee19fab7bcacc37f939750936c65ec8176ec4c098667043caadcf59d"
+    },
+    {
+      "path": "D2.html",
+      "sha256": "48c9fbd758ed7e381dc1a3010b68a114cc4338eb1d3f20338eb7380008abc0fd"
+    },
+    {
+      "path": "E1-bilan-bureau.png",
+      "sha256": "4560dc02adc7dedf9ec74d9c98dd43bd678ef887f1f059f77e57a70a576237a5"
+    },
+    {
+      "path": "E1-bilan-mobile.png",
+      "sha256": "aa738f09a06fba0601a17c488176279930d67b3ddefc0c56b0283526e1bdd161"
+    },
+    {
+      "path": "E1-confirmation-bureau.png",
+      "sha256": "50c16b63ff160190fed642a81c7c1bacebf3f6569121866716ecba7341a66045"
+    },
+    {
+      "path": "E1-confirmation-mobile.png",
+      "sha256": "8d343c73362943d28cefa1b9ef4970a551faa44fa5a4dcc71bc282c62987de56"
+    },
+    {
+      "path": "E1-dossiers-bureau.png",
+      "sha256": "25b676d8ebda97bc01f03557fbc1cbc71d50d28705b54c3e623ae3e93162ad97"
+    },
+    {
+      "path": "E1-dossiers-mobile.png",
+      "sha256": "18e5781da2f3400ab199fd4833bcf096ec0da6b526ab39d8fdb9980502a2b3e0"
+    },
+    {
+      "path": "E1-periode-bureau.png",
+      "sha256": "faa994ee3cb276d67e3e59b1454c6c02ce1f28fe62c3a3bc2501526ea8bfce57"
+    },
+    {
+      "path": "E1-periode-mobile.png",
+      "sha256": "a9759690cc4d8b89a19074a3db947f84eadc98a0ddeff47c8d93f3edaa48b2f1"
+    },
+    {
+      "path": "E1.html",
+      "sha256": "b57219f38f4757116d705c1b8e1cd834f36b345a6e29869015e2940e4a869557"
+    },
+    {
+      "path": "header-mark.svg",
+      "sha256": "d2b6590f76636f074e66493407649dc78ed002e6bb2c54b909305c53275b9583"
+    },
+    {
+      "path": "maquettes.css",
+      "sha256": "310b922482bf001eaa7e47cfeaf70d7f68ae0bd5a3d559475a3412e362c4a4d9"
+    },
+    {
+      "path": "maquettes.js",
+      "sha256": "9979aa6d153cc305925c82e0650f1615d0efd4ebeb651f497f235c9150391d82"
+    },
+    {
+      "path": "mesures-rendus.json",
+      "sha256": "1e515861c8eeab167aab624c93ca8815996529040b51b2b01403cc2300f7a1f9"
+    },
+    {
+      "path": "README.md",
+      "sha256": "4d7ac9a92c3959a7e0080042fb81c79160066b7d1a9dafc7b4a5ccaa7f4e6a80"
+    },
+    {
+      "path": "scenarios.json",
+      "sha256": "86876ad0d7be6fa9a680fbe7ffca2a2ed0376dfadd29631bb702ee0d57d4a62e"
+    }
+  ],
+  "captures": [
+    {
+      "path": "A1-accueil-bureau.png",
+      "sha256": "7952387ece0dd573aa7ba0df9d7f62cd7f08e01f34a50a573780d1e879e3caec"
+    },
+    {
+      "path": "A1-accueil-mobile.png",
+      "sha256": "1fa381bdd21ce03ca07c4000f7875e69e7e7356d6f9f1a87e94050d191fd3c3e"
+    },
+    {
+      "path": "B1-echec-bureau.png",
+      "sha256": "21e4e1952c09c61f021a1917ed57be5265978ab7bcd799abe8a5a12984717266"
+    },
+    {
+      "path": "B1-echec-mobile.png",
+      "sha256": "9fd6b73f481e3d71442fb3f17bee9026a88b8c4a608b069fb0ba9284738add5b"
+    },
+    {
+      "path": "B1-enregistre-bureau.png",
+      "sha256": "c6a242d84ded7b46211b2819b36825a1820cd4963f35d9e87566dc4bc67e49b2"
+    },
+    {
+      "path": "B1-enregistre-mobile.png",
+      "sha256": "110cfc9f899c7cbcdf51c7c762c74957382fa98fd0008bc3563806becd4fafba"
+    },
+    {
+      "path": "B1-saisie-bureau.png",
+      "sha256": "74aef99cfc39fb6977cf2197dde49f2e048fe5471ba0aae0825074503b622a6f"
+    },
+    {
+      "path": "B1-saisie-mobile.png",
+      "sha256": "bfe57727020b16865e51ff13ed84f63440ef49991554a2d7f46acb5101f50cde"
+    },
+    {
+      "path": "B2-apercu-bureau.png",
+      "sha256": "45b7306b4cb5deae51b900bbfe4516dfd59284dc2ef18c1bdbddccdb4c055629"
+    },
+    {
+      "path": "B2-apercu-mobile.png",
+      "sha256": "5bbcf76577f15fe32cdd74f5c16ecb3663c247fa37b23d0155cebe3a7ea19d17"
+    },
+    {
+      "path": "B2-demarrage-bureau.png",
+      "sha256": "47021d8066033d5aa0675118d86f88703a8dd5932412d156c4f3a3d705fdebb5"
+    },
+    {
+      "path": "B2-demarrage-mobile.png",
+      "sha256": "6345e64620ac84b6ce61fa8c5e399d62a65b23bafa79c1b23cd8c09b28bd19d7"
+    },
+    {
+      "path": "B2-dotation-bureau.png",
+      "sha256": "e833d661e005daf29158393d3decb2eadd6544a4262a50ed6f0b9619681fa23b"
+    },
+    {
+      "path": "B2-dotation-mobile.png",
+      "sha256": "760e8396f395cad0607be2ddb1c949c21daff968acbbe27566e457290409861e"
+    },
+    {
+      "path": "B2-invitations-bureau.png",
+      "sha256": "19ffc880331390f24165d548221efb6fd7ee075ebef532e829cebf1abcb84d15"
+    },
+    {
+      "path": "B2-invitations-mobile.png",
+      "sha256": "5b58b5e47cb8cf0aee3692250c988d4f9c303a57f29ded6679b772ea1c1cf071"
+    },
+    {
+      "path": "B2-publication-bureau.png",
+      "sha256": "1725b32c02a8743f528d4c04b7d4289211a4ca4092590315a9e8c3a4e136e032"
+    },
+    {
+      "path": "B2-publication-mobile.png",
+      "sha256": "7c455a986885eeb5f723cb9ab4e8ca4d1b28eb022f4e74f6028b3ef0f4ad14b1"
+    },
+    {
+      "path": "B3-compatible-bureau.png",
+      "sha256": "2a21b56d90c159f26deaff660e620c3a346de515e30d64b74578fb30d1f4181d"
+    },
+    {
+      "path": "B3-compatible-mobile.png",
+      "sha256": "3959d897bc69a071c2f9ae6faf19e07a4ba1826263afc18d7b1671de519ab500"
+    },
+    {
+      "path": "B3-incompatible-bureau.png",
+      "sha256": "52a9042789d7a68695008d4d3321b20fe0d4417c7613cd57294b786fcbbd53ed"
+    },
+    {
+      "path": "B3-incompatible-mobile.png",
+      "sha256": "c53b8985342afd7fde483634db29e9699d1b165f0b81107ca4e3b26feaa019be"
+    },
+    {
+      "path": "C1-demande-bureau.png",
+      "sha256": "1adceba920902e62ef5708a29ec68d515f821823bd7b4c94b012851272274512"
+    },
+    {
+      "path": "C1-demande-mobile.png",
+      "sha256": "28d963dd4a331549cabd0d3ba0e0e82c4afb5753f61be209573f673c3a6b44d5"
+    },
+    {
+      "path": "C1-selection-bureau.png",
+      "sha256": "a9b8a1c407b188f5f7d64f8fb0252542975c8f69e732e060feb3638509ba310b"
+    },
+    {
+      "path": "C1-selection-mobile.png",
+      "sha256": "5679074ee873c57312bb0e2478759a40c56b2cf36d0abf98a0b651b6071e704b"
+    },
+    {
+      "path": "C1-suivi-bureau.png",
+      "sha256": "517a15687cc204743952d0f2137fe3a0b920566cfada2adf5ff22e96f4ce1e62"
+    },
+    {
+      "path": "C1-suivi-mobile.png",
+      "sha256": "79a44bd75296999951ca1025c6c78cc418ad6d0410b5764e8023f11e09019c83"
+    },
+    {
+      "path": "C2-apercu-bureau.png",
+      "sha256": "47d066940790a6d3aacfc58189facac71e311fc4da217e8f3c9ef13512e610bc"
+    },
+    {
+      "path": "C2-apercu-mobile.png",
+      "sha256": "b6f3eef2b99c1d60942dc85e2805fa9f643594a29915cd93d09ffe1933f3ccfa"
+    },
+    {
+      "path": "C2-colonnes-bureau.png",
+      "sha256": "aa73edca98ff65e590b0980160d23cbe24fdf89bceb8c921198c63f99636ef4a"
+    },
+    {
+      "path": "C2-colonnes-mobile.png",
+      "sha256": "fb3c1fef0843c39b8ab8fb0b1cb4cf949d67073277c198ed09e914e7ef8ba3bf"
+    },
+    {
+      "path": "C2-comparaison-bureau.png",
+      "sha256": "763ed6f163069d9de8ff5e89c607323840b05f3f928f81c1151a71ef0bb150d2"
+    },
+    {
+      "path": "C2-comparaison-mobile.png",
+      "sha256": "ada77abd45184cd08c5383bcb15a693ccf56809e8d5ebc97cbde3bb6c29630e4"
+    },
+    {
+      "path": "C2-confirmation-bureau.png",
+      "sha256": "55a213fb45248206f60652934a0b2a620e3f1635b2a0dfea02cdd555cf19c368"
+    },
+    {
+      "path": "C2-confirmation-mobile.png",
+      "sha256": "441ff78d3261db5ebcdffec9236096badf48b241d9245be3ff14f9850b9317ba"
+    },
+    {
+      "path": "D1-apercu-bureau.png",
+      "sha256": "e4914a02ebcfbe027288b241233d5204937ef35e69e41c4755cee827c01b5749"
+    },
+    {
+      "path": "D1-apercu-mobile.png",
+      "sha256": "d2e68c23fa2ec6c22c11451be2a2ac659ef03933218b9f2d5bec593ba96e456d"
+    },
+    {
+      "path": "D1-confirme-bureau.png",
+      "sha256": "b43b1ff3a98230623e6eed8b9fef98cea62d32b64057d48eb21c033e643b19ec"
+    },
+    {
+      "path": "D1-confirme-mobile.png",
+      "sha256": "34221663da1f34d4df22505c5086801409758f57a34646c0d26934f908063283"
+    },
+    {
+      "path": "D1-incertain-bureau.png",
+      "sha256": "5b4be8f236d64219953e4ed5fa16ca08168c22212801cbac017dd3f8db9557ae"
+    },
+    {
+      "path": "D1-incertain-mobile.png",
+      "sha256": "95a30963a89922cae6deb603a3f0f86180061825d5898449cee22a044e5b35aa"
+    },
+    {
+      "path": "D1-lecture-bureau.png",
+      "sha256": "64a0d5df6a985739367308af33bd7852a1d62e8a6343d08c8abb109ff294b10c"
+    },
+    {
+      "path": "D1-lecture-mobile.png",
+      "sha256": "8cbfadbe91bb0954bb4a3a3cc0b1d62653aa8e39fe3cd368f20479c2752a8a07"
+    },
+    {
+      "path": "D1-preparer-bureau.png",
+      "sha256": "e507dde5a7500b6715bf59395730dad144029ed7172fe0dbf33fa74e09b57110"
+    },
+    {
+      "path": "D1-preparer-mobile.png",
+      "sha256": "b4e693bc4f41c23d7768736adcc76d914b7d3c80691fc7ed967636e4bbe8e841"
+    },
+    {
+      "path": "D1-refuse-bureau.png",
+      "sha256": "fe01b6ce741ea4df0c7d4315b6c0ae8c3a14a92ddc6126cbed075d30c5552b42"
+    },
+    {
+      "path": "D1-refuse-mobile.png",
+      "sha256": "7b87e827eee1f78e02b8b162be88eeb71162b419d572c07b17e90659dce87cce"
+    },
+    {
+      "path": "D2-bilan-bureau.png",
+      "sha256": "16238995ff724dcf4e4913830a22ad57b78266d77fa94066aa513e5b27a3256c"
+    },
+    {
+      "path": "D2-bilan-mobile.png",
+      "sha256": "63abca3cceab43541597c8aacd4c43c11c43af81e69026d471327edcfa7b0df1"
+    },
+    {
+      "path": "D2-suivi-bureau.png",
+      "sha256": "761d8284a0d616cf96cc7f9593edffaef48e5bd7cd4596bcffbe02a61152dab4"
+    },
+    {
+      "path": "D2-suivi-mobile.png",
+      "sha256": "fa81d9e5ee19fab7bcacc37f939750936c65ec8176ec4c098667043caadcf59d"
+    },
+    {
+      "path": "E1-bilan-bureau.png",
+      "sha256": "4560dc02adc7dedf9ec74d9c98dd43bd678ef887f1f059f77e57a70a576237a5"
+    },
+    {
+      "path": "E1-bilan-mobile.png",
+      "sha256": "aa738f09a06fba0601a17c488176279930d67b3ddefc0c56b0283526e1bdd161"
+    },
+    {
+      "path": "E1-confirmation-bureau.png",
+      "sha256": "50c16b63ff160190fed642a81c7c1bacebf3f6569121866716ecba7341a66045"
+    },
+    {
+      "path": "E1-confirmation-mobile.png",
+      "sha256": "8d343c73362943d28cefa1b9ef4970a551faa44fa5a4dcc71bc282c62987de56"
+    },
+    {
+      "path": "E1-dossiers-bureau.png",
+      "sha256": "25b676d8ebda97bc01f03557fbc1cbc71d50d28705b54c3e623ae3e93162ad97"
+    },
+    {
+      "path": "E1-dossiers-mobile.png",
+      "sha256": "18e5781da2f3400ab199fd4833bcf096ec0da6b526ab39d8fdb9980502a2b3e0"
+    },
+    {
+      "path": "E1-periode-bureau.png",
+      "sha256": "faa994ee3cb276d67e3e59b1454c6c02ce1f28fe62c3a3bc2501526ea8bfce57"
+    },
+    {
+      "path": "E1-periode-mobile.png",
+      "sha256": "a9759690cc4d8b89a19074a3db947f84eadc98a0ddeff47c8d93f3edaa48b2f1"
+    }
+  ]
+}

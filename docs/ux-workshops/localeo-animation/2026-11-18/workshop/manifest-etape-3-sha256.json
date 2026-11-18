@@ -1,0 +1,1272 @@
+{
+  "stage": 3,
+  "generated_at": "2026-11-18T12:22:44.298036+01:00",
+  "status": "Etape 3 terminee ; validation utilisateur attendue",
+  "application_changes": false,
+  "excluded": [
+    "workshop/manifest-etape-3-sha256.json"
+  ],
+  "previous_manifest": "workshop/manifest-etape-2-sha256.json",
+  "files": [
+    {
+      "path": "observations/cartographie-parcours.md",
+      "size": 6069,
+      "sha256": "970f046c9579f681cb06a191427bc08bc2fd58323a06c0f35ef69392faea2504"
+    },
+    {
+      "path": "observations/controle-final.md",
+      "size": 3255,
+      "sha256": "d9587e64b69e899c93ed159d84c3ffdc909ff5469346f83ea002082d1bdd0fc1"
+    },
+    {
+      "path": "observations/inventaire-ecrans.md",
+      "size": 7380,
+      "sha256": "1cf8357109880c0b47d0a595da4b79a58b56d34b7585bfc535fedbfb78660f47"
+    },
+    {
+      "path": "observations/limitations.md",
+      "size": 5939,
+      "sha256": "bd7a932e45bd84673957a5e7173dd56b68574d48560b90378e41cd361cf81000"
+    },
+    {
+      "path": "observations/manifest-sha256.json",
+      "size": 14469,
+      "sha256": "5aae1a62e7db1309b9f39248248e83f6e4b6f931d84e0fa70bca78ff2d4c1764"
+    },
+    {
+      "path": "observations/mesures-parcours.md",
+      "size": 7648,
+      "sha256": "4807fb3fb6407a0c9dcdced62be1bf3b48c5d665bea4aa7320d0ecbe457989d6"
+    },
+    {
+      "path": "observations/observations-factuelles.md",
+      "size": 12332,
+      "sha256": "f21f8b849ac470933f9711af96dfd9a3d513020bb48b7483135ff7196cda91fa"
+    },
+    {
+      "path": "observations/releves-techniques.json",
+      "size": 1795,
+      "sha256": "d7895e8b669855719d3d4bbe87e98224d3ffe9abe1ad2cc8a578a5f541b6c5b6"
+    },
+    {
+      "path": "observations/sources-code.md",
+      "size": 7818,
+      "sha256": "4705d56068d490b41e8f49a414062891be0bcb868ca22cbbaf53eae50509516d"
+    },
+    {
+      "path": "prompts/00-protocole-global.md",
+      "size": 468,
+      "sha256": "ec5ca90912f85af810d3aec02a053bd48572f43f617c98b883325768f2bfe253"
+    },
+    {
+      "path": "prompts/01-exploration.md",
+      "size": 6690,
+      "sha256": "312c150005093b4cc5e0d7c61bc58fd31c5321bc230ad9872cae9cf6231cd5f8"
+    },
+    {
+      "path": "prompts/02-workshop.md",
+      "size": 9084,
+      "sha256": "f8396961ef50596f9970af372e61b6c77f87274546859024dd7d1cb73e8abe57"
+    },
+    {
+      "path": "prompts/03-maquettes.md",
+      "size": 3187,
+      "sha256": "0b44e670b5763c767e9326daa08c5191482459edd6fb8d117fda031e44211ffc"
+    },
+    {
+      "path": "prompts/04-validation.md",
+      "size": 299,
+      "sha256": "9b2b0c31961268e823b04cc78bcc5c4588193e0eaad3f8220bc2372abe2e3b47"
+    },
+    {
+      "path": "prompts/05-archivage.md",
+      "size": 298,
+      "sha256": "c642cf78524d0c9478e0893780819cbcd2672300a8f2610978679a0af348f9da"
+    },
+    {
+      "path": "README.md",
+      "size": 10342,
+      "sha256": "23737ba6f2fed9fcd5eb479554b1ebff79cc5432870370b0620659c3f740a2f1"
+    },
+    {
+      "path": "visuels/captures-avant/01-connexion-bureau.png",
+      "size": 33352,
+      "sha256": "0687b7cf5422d40a2437820af8dbcbb73fca15d79d0164c3895177a258b01400"
+    },
+    {
+      "path": "visuels/captures-avant/02-tableau-bord-bureau.png",
+      "size": 100797,
+      "sha256": "3a23b22a1f3bce7c27c2766558611e38e9b43376555de257a2b9128ad0953247"
+    },
+    {
+      "path": "visuels/captures-avant/03-animations-bureau.png",
+      "size": 140593,
+      "sha256": "a198db8c754005f04dbf95c2c585b331c7e56f414c7901bbddf5f68c3b96fb49"
+    },
+    {
+      "path": "visuels/captures-avant/04-creation-modeles.png",
+      "size": 118490,
+      "sha256": "f600ff33ad206a4b8296cdae47e8ee4c0ac58486b669b73c9a43c8157f97f053"
+    },
+    {
+      "path": "visuels/captures-avant/05-tombola-informations.png",
+      "size": 90745,
+      "sha256": "2c76e039c27f32e44789bb94c2562f66b58fd101a5709228b9a1232c7484e448"
+    },
+    {
+      "path": "visuels/captures-avant/06-erreur-dates.png",
+      "size": 92969,
+      "sha256": "1e948da43aa6bcef50e691b3583601f1776920a1d7cfbffeb9936270c3c75203"
+    },
+    {
+      "path": "visuels/captures-avant/07-selection-commercants.png",
+      "size": 103230,
+      "sha256": "6f7e30761118e2085fd3aacf2c1a2ee5b9182c1e01fb01cc8b35f3f5db3e2644"
+    },
+    {
+      "path": "visuels/captures-avant/08-mission-regles.png",
+      "size": 99929,
+      "sha256": "b07687e2384c4a589a4b7f2a0295cb8b9550953c00e0f1b9fda27a84172f5a66"
+    },
+    {
+      "path": "visuels/captures-avant/09-dotation.png",
+      "size": 87758,
+      "sha256": "1753a5367b2d7da1350771be6aeba0b54554a94c1a283c27df81727c8ebb6cab"
+    },
+    {
+      "path": "visuels/captures-avant/10-lot-libre.png",
+      "size": 118887,
+      "sha256": "4d0066b38191499cc12ed355335ac16e378dfb0cee01f953eeec88eca06d1365"
+    },
+    {
+      "path": "visuels/captures-avant/11-flyer-creation.png",
+      "size": 89620,
+      "sha256": "e3688e6d45a0248f2c42aae0edb31fa0b170943436bcdf6d3d847764ce41b6fb"
+    },
+    {
+      "path": "visuels/captures-avant/12-recapitulatif.png",
+      "size": 93983,
+      "sha256": "2212f0864b84cd28b3b66d768ff4b1e84dfeb7d0722e1837284ab9cfb2f10c32"
+    },
+    {
+      "path": "visuels/captures-avant/13-confirmation-creation.png",
+      "size": 122098,
+      "sha256": "b541fc09267fe8a6866487fa643acc1c0f77407a913f195a457cfd0a79a5f77b"
+    },
+    {
+      "path": "visuels/captures-avant/14-brouillon-cree.png",
+      "size": 119391,
+      "sha256": "723c57c044ff245fc63d0a3357a959b84e7e08264aa1139839bd38ea04181b89"
+    },
+    {
+      "path": "visuels/captures-avant/15-invitations-non-envoyees.png",
+      "size": 104657,
+      "sha256": "6791c020fb618bf8e721272bfcf29090b6ad520585efbf6fe05eb92c3c0b5f84"
+    },
+    {
+      "path": "visuels/captures-avant/16-reprise-configuration.png",
+      "size": 107361,
+      "sha256": "afe86dd3748cc43106a4aed92facdb3fac039148a915cb904fc633bec60048b0"
+    },
+    {
+      "path": "visuels/captures-avant/17-passeport-minimum-commerces.png",
+      "size": 93041,
+      "sha256": "a54eb4102aa60ea9e49be672301225d36bcc92f52d516deb00cd18a39ebebb7d"
+    },
+    {
+      "path": "visuels/captures-avant/18-passeport-seuil.png",
+      "size": 99241,
+      "sha256": "861273c4eb12ff4cf8a16847faa8806d611d4d48784f1fd130941afe1d42a2df"
+    },
+    {
+      "path": "visuels/captures-avant/19-passeport-recapitulatif.png",
+      "size": 95651,
+      "sha256": "4e78cdf4ed45d4e229e8cc69dc243c0b41e2dc5582f8631caa00b22be6d80c2a"
+    },
+    {
+      "path": "visuels/captures-avant/20-passeport-cree.png",
+      "size": 123375,
+      "sha256": "7c12ab95d19ce4c774b18e99b65c0201c2b8aa1cc9f8a9757c3d7a5db127d3b8"
+    },
+    {
+      "path": "visuels/captures-avant/21-import-commercants.png",
+      "size": 104815,
+      "sha256": "9dd621c97e6d5ec78b7ec18c822611695dac01ba646f1114291381751e1a3c4d"
+    },
+    {
+      "path": "visuels/captures-avant/22-import-mapping.png",
+      "size": 105520,
+      "sha256": "759e2c22e6056325f2bd78a2b504743991ec91b67074cccea4c5f3cd47f5f3da"
+    },
+    {
+      "path": "visuels/captures-avant/23-import-apercu.png",
+      "size": 96093,
+      "sha256": "fcc63808bdc17e3decc3f843580cbb7f8a012281daef88793a221d18768ef7fb"
+    },
+    {
+      "path": "visuels/captures-avant/24-import-comparaison.png",
+      "size": 105381,
+      "sha256": "ead49a27de1edb6294473f000a3d6583148fcfb412155517bb14624c6ceed3cf"
+    },
+    {
+      "path": "visuels/captures-avant/25-suivi-animation-en-cours.png",
+      "size": 125019,
+      "sha256": "8e66e0c6c3b8d345d16530e030ea2471609a49d79f8aac3560606096933d4217"
+    },
+    {
+      "path": "visuels/captures-avant/26-suivi-detail.png",
+      "size": 82719,
+      "sha256": "697d3df32fb8be9dd47fe1950338606ed848e5f2887a1e5ee3e889d505d526c9"
+    },
+    {
+      "path": "visuels/captures-avant/27-participants-animation.png",
+      "size": 91456,
+      "sha256": "247c3f589405c5610a3f94e97fae20d00c3ebdab7e3bc3d356509b255248754c"
+    },
+    {
+      "path": "visuels/captures-avant/28-validations-animation.png",
+      "size": 86990,
+      "sha256": "23517f838274e69beacef5bd18fa5271f3e59389aebec0005dab97ee35cd1793"
+    },
+    {
+      "path": "visuels/captures-avant/29-communication.png",
+      "size": 112592,
+      "sha256": "bad8be43f00cacb883251f3b895d54b2c4b2f9c4f8fe9659fe705fba5060e27f"
+    },
+    {
+      "path": "visuels/captures-avant/30-messages-habitants.png",
+      "size": 97972,
+      "sha256": "71e380901eb44c143fcbf234e256eb2654b9b57ceacf5633c52b8cd15d89a5d3"
+    },
+    {
+      "path": "visuels/captures-avant/31-communication-echec-confirme.png",
+      "size": 112654,
+      "sha256": "7553a6951835d3e4fd79e23fc10a9cb1a9f4931127f350cbf9b6bb144e6ff48e"
+    },
+    {
+      "path": "visuels/captures-avant/32-notifications.png",
+      "size": 146966,
+      "sha256": "8f5aadd47679c7e4e4a2ac45eb24c45924bde34965fa600d543b8d2adf617e8c"
+    },
+    {
+      "path": "visuels/captures-avant/33-publication-cloture.png",
+      "size": 125480,
+      "sha256": "a0b186178eb111c7e6799aa0ae8fad6331f229331f1c50c36af6e6e5f0bf5107"
+    },
+    {
+      "path": "visuels/captures-avant/34-cloture-avant-confirmation.png",
+      "size": 124659,
+      "sha256": "cfadd32144ba269b558493fcccafd8fd4e3aa1838452e45505c9c7047f5d9f97"
+    },
+    {
+      "path": "visuels/captures-avant/35-fin-archivage.png",
+      "size": 111502,
+      "sha256": "3f846bc0a3b52ff259edab27efca9e5332db23a5d97cf6cea8140de52341473b"
+    },
+    {
+      "path": "visuels/captures-avant/36-tirage.png",
+      "size": 115605,
+      "sha256": "981c80afa0f9344548231926d981e08c8008adf2fa3772a13583939921227354"
+    },
+    {
+      "path": "visuels/captures-avant/37-gains-remises.png",
+      "size": 108511,
+      "sha256": "3f013a79349b5f20421cbf73a36ee5212027347e85dd1855631ac0355b784e3a"
+    },
+    {
+      "path": "visuels/captures-avant/38-bilan-cloturee.png",
+      "size": 125441,
+      "sha256": "1785d32a1ff256c5d6447384e8efedd7217cf4314578454867831859ee033d22"
+    },
+    {
+      "path": "visuels/captures-avant/39-recherche-brouillons.png",
+      "size": 118699,
+      "sha256": "dd29f4c0b081830a9f1af8bf5dc7d68ccb40ef08f15d49776effef3b69525b6c"
+    },
+    {
+      "path": "visuels/captures-avant/40-clonage.png",
+      "size": 100038,
+      "sha256": "d986307f6c70b4102395a9650c5dd8640d4c7cdd0d6b7e1da578051a369398fe"
+    },
+    {
+      "path": "visuels/captures-avant/41-clonage-confirme-formulaire.png",
+      "size": 123906,
+      "sha256": "7b119ac048c517131a24351ec7a297f161a1d664447a736cfdc78b77be8ac073"
+    },
+    {
+      "path": "visuels/captures-avant/42-clone-cree.png",
+      "size": 117413,
+      "sha256": "d3f3a44c4a7ceace0a7c8768a289ebf8a778a27117a354a5687213e2f91f158c"
+    },
+    {
+      "path": "visuels/captures-avant/43-tableau-bord-final-bureau.png",
+      "size": 100746,
+      "sha256": "4313f38721870454ed26aa926e5ab62f8d310b9d23cc06c0a83e2860bd5c7c0f"
+    },
+    {
+      "path": "visuels/captures-avant/44-tableau-bord-mobile.png",
+      "size": 36607,
+      "sha256": "ac7d543c5cc59da131ce2ddcaba137a97df3becbcb9e42a950fe76cbd58c6250"
+    },
+    {
+      "path": "visuels/captures-avant/45-animations-mobile.png",
+      "size": 45181,
+      "sha256": "437e89e1bb1e3ce35c93e2df46b1e6050ce73f079987c9598941da695777a287"
+    },
+    {
+      "path": "visuels/captures-avant/46-creation-mobile.png",
+      "size": 48360,
+      "sha256": "30babe53ad1c07aad2cf9aa6287db70085728a96315707bffa658d9369dd2cd3"
+    },
+    {
+      "path": "visuels/captures-avant/47-formulaire-mobile.png",
+      "size": 39606,
+      "sha256": "2359a4afc31c5d10d6a37de83b5e25df20265baa5f536cbd0d761b26b85c8807"
+    },
+    {
+      "path": "visuels/captures-avant/48-sortie-saisie-mobile.png",
+      "size": 48143,
+      "sha256": "24362a5475eba900243884d87c91bc4b23e39d3c1fe9c878295b7db09fedc01f"
+    },
+    {
+      "path": "visuels/captures-avant/49-assistant-mobile.png",
+      "size": 42637,
+      "sha256": "97e3cef68a6d2e6362ce963703adc1bb2b163e868951b4c994f3c3359aa867ea"
+    },
+    {
+      "path": "visuels/captures-avant/50-configuration-mobile.png",
+      "size": 45920,
+      "sha256": "ec5b3a14113e829146f7b0930af9b70c32c616d1da5a0ddc43b3b16c80ebaa17"
+    },
+    {
+      "path": "visuels/captures-avant/51-invitations-mobile.png",
+      "size": 48245,
+      "sha256": "ab245ffd71b99407b3887f5cf7b1927952c30440c920cca9175c1fb886e40c75"
+    },
+    {
+      "path": "visuels/captures-avant/52-navigation-mobile.png",
+      "size": 30441,
+      "sha256": "e93710900aa09d8629d1e0f048bc429b06436fb215b9f9f0726fe284291f302b"
+    },
+    {
+      "path": "visuels/captures-avant/53-import-mobile.png",
+      "size": 46797,
+      "sha256": "969cbf5a70a7df2756e57a1e47826ca9d12a0d1700088affba0ad562ffb502d1"
+    },
+    {
+      "path": "visuels/captures-avant/54-fin-mobile.png",
+      "size": 43560,
+      "sha256": "7669f3c31dc30f19d4626402b1dd93c2511192b5135c15e2376cf51888dc917e"
+    },
+    {
+      "path": "visuels/captures-avant/55-notifications-mobile.png",
+      "size": 56296,
+      "sha256": "8e4618922fface482dfb7332d00430220b91ff75b38752479c1c272b20d723ed"
+    },
+    {
+      "path": "visuels/captures-avant/56-bilan-mobile.png",
+      "size": 44132,
+      "sha256": "67be1cb6e7d88d205c74781118c3fe8f1888dd770024168efcce18e59beeac6a"
+    },
+    {
+      "path": "visuels/captures-avant/57-details-commerce.png",
+      "size": 117711,
+      "sha256": "55b7cfa2e95e7c64ccb638912be986302c6e9e3f7a42b636994f43a3472c0018"
+    },
+    {
+      "path": "visuels/captures-avant/58-invitation-acceptee-existante.png",
+      "size": 97169,
+      "sha256": "794c46a9ee8a33377ea1f33cf9c9f3dc4b000bf00df880c8f5056fa4fb7b4cef"
+    },
+    {
+      "path": "visuels/captures-avant/59-flyer-publie.png",
+      "size": 454291,
+      "sha256": "46655c16547ffe2fc7e1218caf96e3ed8889e24b9658f82dd076c0aa5ff82fcf"
+    },
+    {
+      "path": "visuels/captures-avant/60-publication-bloquee.png",
+      "size": 115314,
+      "sha256": "2244c3ebbb05c4b93323623663a770c68c66f5f0e9d15d5ae8f501e7a2b5fdbb"
+    },
+    {
+      "path": "visuels/captures-avant/61-lot-enregistre.png",
+      "size": 112427,
+      "sha256": "1d0ff037b8fc016fb3bfce8cbde6a2996172bd9d8fb24bfe25b87a4e6c3c3104"
+    },
+    {
+      "path": "visuels/captures-avant/62-confirmation-cloture-detail.png",
+      "size": 124635,
+      "sha256": "c20d7e6940d7088e6f1cad3c0600cafae325854ed62c5467ef8bb85a58584e26"
+    },
+    {
+      "path": "visuels/captures-avant/63-gagnant-email-masque.png",
+      "size": 112206,
+      "sha256": "39e5e3c2e059a293406cb220aaa74273ffca0874ed9fce731f70f9e77dcae6fc"
+    },
+    {
+      "path": "visuels/comparatif-avant-apres.html",
+      "size": 40268,
+      "sha256": "4e1bd3705808be743cef99293c27f0627b4c1492bb924940f6284975b2f7bc89"
+    },
+    {
+      "path": "visuels/comparatif.css",
+      "size": 5852,
+      "sha256": "c1c1a16878e5f5d6b3f1b8bba5b09a5fadad0aeb5d01343746c05ffa78ec40b0"
+    },
+    {
+      "path": "visuels/comparatif.js",
+      "size": 1283,
+      "sha256": "89d23c9f1f03029d2024e897f3053b26beecf02ac21f5b03d04bfdfa27ff8e66"
+    },
+    {
+      "path": "visuels/maquettes-apres/A1-accueil-bureau.png",
+      "size": 112492,
+      "sha256": "3b61acd1d2553c3897fa211472fc518f38d13e41484f8adc986ee9d5179b8470"
+    },
+    {
+      "path": "visuels/maquettes-apres/A1-accueil-mobile.png",
+      "size": 81756,
+      "sha256": "d393742f032c30c9f0ca0ac76974ecff20ef42cedb34eb1fa8d42d1415f7cab8"
+    },
+    {
+      "path": "visuels/maquettes-apres/A1.html",
+      "size": 9984,
+      "sha256": "27efc3892cabb65af42e4979597dbb544ca7aa682ffccd0f84b389dcfd0fa680"
+    },
+    {
+      "path": "visuels/maquettes-apres/ajustements-v2.css",
+      "size": 1360,
+      "sha256": "3062352abb01faa9c0877c58067e6035063762535f2eb63385024db574fdb969"
+    },
+    {
+      "path": "visuels/maquettes-apres/B1-echec-bureau.png",
+      "size": 92872,
+      "sha256": "b8eca51a7ad4730c3ac44b2c11e6767cf1db781284e654a97f99960def59536d"
+    },
+    {
+      "path": "visuels/maquettes-apres/B1-echec-mobile.png",
+      "size": 63568,
+      "sha256": "fac9fedc2956b5f5bdf6d0080a03b7336e36646bb65e489d79555d3f47285ef2"
+    },
+    {
+      "path": "visuels/maquettes-apres/B1-enregistre-bureau.png",
+      "size": 88874,
+      "sha256": "185829adddf3f8dfa2f30cac5793659e2deb739d8aab17d6d0d92ab75357a684"
+    },
+    {
+      "path": "visuels/maquettes-apres/B1-enregistre-mobile.png",
+      "size": 57244,
+      "sha256": "efa351df172502402b6219783ffbdcf04fbf755648e41d5475f53d2670a38868"
+    },
+    {
+      "path": "visuels/maquettes-apres/B1-saisie-bureau.png",
+      "size": 95159,
+      "sha256": "d28a71aa40500ec4db76b5e00b7cbb67e0a75dc83ba4804cf91e24ba5943f5c7"
+    },
+    {
+      "path": "visuels/maquettes-apres/B1-saisie-mobile.png",
+      "size": 65102,
+      "sha256": "7de72f7fb42a7347e7da8fe3940a4d36275af3918a284e9ff605dd7c9827358b"
+    },
+    {
+      "path": "visuels/maquettes-apres/B1.html",
+      "size": 11256,
+      "sha256": "65f5c8791382f278e3d444a74e2283208978f38dba703b94b0ee9ce9ae8c1a7c"
+    },
+    {
+      "path": "visuels/maquettes-apres/B2-apercu-bureau.png",
+      "size": 98613,
+      "sha256": "c958c7ad677e079c41eb11cf78e70df036fa0d911522f434825be2ba8798a2fb"
+    },
+    {
+      "path": "visuels/maquettes-apres/B2-apercu-mobile.png",
+      "size": 65130,
+      "sha256": "81ebb02e302d25fec87153f8ca5506801db386e590a577374fa84d4bc6bb0cb8"
+    },
+    {
+      "path": "visuels/maquettes-apres/B2-demarrage-bureau.png",
+      "size": 92188,
+      "sha256": "5dc205afa54357a118297d503305a19215badd618102595bc042e62d8b096264"
+    },
+    {
+      "path": "visuels/maquettes-apres/B2-demarrage-mobile.png",
+      "size": 64593,
+      "sha256": "8f3145760e72b11c1903e434448b6679c7905f4485c7984ddca2a9d306f03080"
+    },
+    {
+      "path": "visuels/maquettes-apres/B2-dotation-bureau.png",
+      "size": 91189,
+      "sha256": "13e3298d702724ca986e6f4b7669f2dda7f9077e8f74dfe93bfa37dde0d0300e"
+    },
+    {
+      "path": "visuels/maquettes-apres/B2-dotation-mobile.png",
+      "size": 60810,
+      "sha256": "1b15263b34c7a5b9e8eaa8f532717af1fee3ced070db7c03a07b16acbf35e7ef"
+    },
+    {
+      "path": "visuels/maquettes-apres/B2-invitations-bureau.png",
+      "size": 91138,
+      "sha256": "d09a628b1675399990379c1fe00ff243bf3c2631f949c4fe41dd24588c94e709"
+    },
+    {
+      "path": "visuels/maquettes-apres/B2-invitations-mobile.png",
+      "size": 68226,
+      "sha256": "bf4f081292d1f205468a0d3b7c38dcb4d3b16df7b9e50f760f00831b159ddf87"
+    },
+    {
+      "path": "visuels/maquettes-apres/B2-publication-bureau.png",
+      "size": 99643,
+      "sha256": "bbccf5bcfc384295028184b72fdb8b980f52f8d59a82550898eb713a6f10107f"
+    },
+    {
+      "path": "visuels/maquettes-apres/B2-publication-mobile.png",
+      "size": 70518,
+      "sha256": "146c3219d1e62091277cd5a7221bf70022748feaa585c776f103b0a491801d7b"
+    },
+    {
+      "path": "visuels/maquettes-apres/B2.html",
+      "size": 13663,
+      "sha256": "e7893fba94dd03a1a4856a9f1f8b0fe8171c95c1467e09ac0b6e27feda806cfa"
+    },
+    {
+      "path": "visuels/maquettes-apres/B3-compatible-bureau.png",
+      "size": 92153,
+      "sha256": "80cf670edf6900359fd731a01dd009ababde5f9faf6b76acb52d813e19d7cc63"
+    },
+    {
+      "path": "visuels/maquettes-apres/B3-compatible-mobile.png",
+      "size": 60508,
+      "sha256": "d74e97fc3c97ed32ec8df9965cc316dfbced3aecc82bb8dfac7495037e6624b1"
+    },
+    {
+      "path": "visuels/maquettes-apres/B3-incompatible-bureau.png",
+      "size": 83931,
+      "sha256": "8f1c0a971a0a9e39426bcee3e132dbeff18b174f5fa57063cd89ee3e352a0f36"
+    },
+    {
+      "path": "visuels/maquettes-apres/B3-incompatible-mobile.png",
+      "size": 51821,
+      "sha256": "40d6853f363db029c3a7a48c18ab5978fa714b4559e95e335a881b39096fffcd"
+    },
+    {
+      "path": "visuels/maquettes-apres/B3.html",
+      "size": 9910,
+      "sha256": "85097ce9a3ab10ae327c20ce81aca38429f0f031bece4bb00e6d114662ed3518"
+    },
+    {
+      "path": "visuels/maquettes-apres/C1-demande-bureau.png",
+      "size": 93197,
+      "sha256": "acf29b8261ec30d94ae5f57bea0fb984fc72ecc2bc1015c3f7937720d68dbbf5"
+    },
+    {
+      "path": "visuels/maquettes-apres/C1-demande-mobile.png",
+      "size": 60334,
+      "sha256": "1ca2e050186474d5752f5264eced11497f30382da33e7a67611f9af72817214c"
+    },
+    {
+      "path": "visuels/maquettes-apres/C1-selection-bureau.png",
+      "size": 88817,
+      "sha256": "a9f35c40345a0462f1fecc0a877f5af7e28efa0d40b9d3dcb49470d7ddeb6db4"
+    },
+    {
+      "path": "visuels/maquettes-apres/C1-selection-mobile.png",
+      "size": 58562,
+      "sha256": "78b27cb009bcaf7ce15e3f9a18712f7c00dcd6c2dec387df84c48c6790a36d9d"
+    },
+    {
+      "path": "visuels/maquettes-apres/C1-suivi-bureau.png",
+      "size": 86023,
+      "sha256": "da51afaa26025ee2a535ffa26e3812787563b30f7171a99873d8b2c505d4839d"
+    },
+    {
+      "path": "visuels/maquettes-apres/C1-suivi-mobile.png",
+      "size": 53053,
+      "sha256": "96892ce4e947d9de2549d4dd2915db9b1b16812c8689d1e9f802af66fff259e6"
+    },
+    {
+      "path": "visuels/maquettes-apres/C1.html",
+      "size": 10914,
+      "sha256": "f725632a6809a550a233e3f1fea4c3fb3ac6c190b7ef41599d6de077807a4c0e"
+    },
+    {
+      "path": "visuels/maquettes-apres/C2-apercu-bureau.png",
+      "size": 97101,
+      "sha256": "27822ccb1541cdeceb6b842c19131a7a3132feb10bde9a20b5b90aad7e55d00e"
+    },
+    {
+      "path": "visuels/maquettes-apres/C2-apercu-mobile.png",
+      "size": 75748,
+      "sha256": "de0eca606e528a91569adc6fcb856083c1df6f9425b8f6851240c8234041ff31"
+    },
+    {
+      "path": "visuels/maquettes-apres/C2-colonnes-bureau.png",
+      "size": 99197,
+      "sha256": "6b462758c3060a907388128ef060028bc0eb2bd1f3483eca873580316d7d314c"
+    },
+    {
+      "path": "visuels/maquettes-apres/C2-colonnes-mobile.png",
+      "size": 79283,
+      "sha256": "6ad9b7f39002d2bfdeb77f7ed99806b80f8b506533525fd00a097926c906de58"
+    },
+    {
+      "path": "visuels/maquettes-apres/C2-comparaison-bureau.png",
+      "size": 84026,
+      "sha256": "e59a30dc5659220f8534681e0298def79c103cc220a41271c42da93adb5292e9"
+    },
+    {
+      "path": "visuels/maquettes-apres/C2-comparaison-mobile.png",
+      "size": 61275,
+      "sha256": "3a0b9a31e388dac7d7665364fe5c7d3f9817df3a30a365c1c1ebd8d01ae5fa9f"
+    },
+    {
+      "path": "visuels/maquettes-apres/C2-confirmation-bureau.png",
+      "size": 81288,
+      "sha256": "bfb06a10869d14a57bafbb07d8fb8a006e5012e1a32b9c51d1b5ae921440ba52"
+    },
+    {
+      "path": "visuels/maquettes-apres/C2-confirmation-mobile.png",
+      "size": 51695,
+      "sha256": "978876721ddc75fe6c964ef07ca874bca300af46893323d6bee66f07e348528a"
+    },
+    {
+      "path": "visuels/maquettes-apres/C2.html",
+      "size": 13396,
+      "sha256": "7dc06ee79d32bcb8ab9c51f9e2daa2df54f9a956b950675c6e47c1813823c1f6"
+    },
+    {
+      "path": "visuels/maquettes-apres/controle-bascule-mobile.png",
+      "size": 66260,
+      "sha256": "050698cb58a45f5643e0220fbb076188cdafbed66bdf07a4c4d2da723587983f"
+    },
+    {
+      "path": "visuels/maquettes-apres/controle-comparaison-bureau.png",
+      "size": 183650,
+      "sha256": "27142ba3db3f61b514f82290f0e2842da8681fc9a99d26539ad717fa79ede3a5"
+    },
+    {
+      "path": "visuels/maquettes-apres/controle-galerie-bureau.png",
+      "size": 149690,
+      "sha256": "fea73eb9c7f4e69a00f616c94620fe90132af88febe8e2458684cdda710fbaa1"
+    },
+    {
+      "path": "visuels/maquettes-apres/controle-galerie-mobile.png",
+      "size": 42197,
+      "sha256": "433024246155fab464e2c01b57e5537b25d3980234a8154b35bf8e339ed16847"
+    },
+    {
+      "path": "visuels/maquettes-apres/D1-apercu-bureau.png",
+      "size": 82533,
+      "sha256": "5ca7e214880d0a461bf4cfe6abc11a40770c949b69c29f6d9d3c3948d0e4ad4c"
+    },
+    {
+      "path": "visuels/maquettes-apres/D1-apercu-mobile.png",
+      "size": 53818,
+      "sha256": "35df0e1cde6efbb74eae17bd7ebc372fa98ee4715cfd96daae5c86635dbc0021"
+    },
+    {
+      "path": "visuels/maquettes-apres/D1-confirme-bureau.png",
+      "size": 80193,
+      "sha256": "097ab236d55680507a29ed8a5948326f7b663c72185b98f3f51db8e8353bd3e7"
+    },
+    {
+      "path": "visuels/maquettes-apres/D1-confirme-mobile.png",
+      "size": 50991,
+      "sha256": "d4829bffe54782d95a5e280bb5264cbb581787752ab5a8cf44e23cb4a237644d"
+    },
+    {
+      "path": "visuels/maquettes-apres/D1-incertain-bureau.png",
+      "size": 93203,
+      "sha256": "028c4ac7001f361f3ccd864efe32dacefff2389515939ababca20081ece2a0eb"
+    },
+    {
+      "path": "visuels/maquettes-apres/D1-incertain-mobile.png",
+      "size": 65129,
+      "sha256": "7ee8ffcd2065e3f5ee28f2db332b52f8f984d2523f1d0d6001a9c0c56c7ba64d"
+    },
+    {
+      "path": "visuels/maquettes-apres/D1-lecture-bureau.png",
+      "size": 86841,
+      "sha256": "39b4915c2824a0d94eabbc543dc26df47c395805e1c3a56df2a2371b3dc1b7b6"
+    },
+    {
+      "path": "visuels/maquettes-apres/D1-lecture-mobile.png",
+      "size": 60129,
+      "sha256": "62b901a168cf19a5af14188d0b45af7761065496052175edfb3635ef3ac5ee28"
+    },
+    {
+      "path": "visuels/maquettes-apres/D1-preparer-bureau.png",
+      "size": 82707,
+      "sha256": "75b5a85536d8f5fb024ff77a7b8e8488e5f8e448623219f7634890df857e7bf4"
+    },
+    {
+      "path": "visuels/maquettes-apres/D1-preparer-mobile.png",
+      "size": 54975,
+      "sha256": "5d917383f7aa36e5981262d2b658a2e6e4e32d69f65e6fa368f75dc776dd599e"
+    },
+    {
+      "path": "visuels/maquettes-apres/D1-refuse-bureau.png",
+      "size": 76129,
+      "sha256": "f22129fc99aeece6140ab073d9d7d753bcc0507fb3c621c744cf753e1208a9c6"
+    },
+    {
+      "path": "visuels/maquettes-apres/D1-refuse-mobile.png",
+      "size": 48121,
+      "sha256": "11bc8b9216077513c7c65b7e831f0d45613bc041e0a49bf287db18f78dcfe92c"
+    },
+    {
+      "path": "visuels/maquettes-apres/D1.html",
+      "size": 12998,
+      "sha256": "8af728fa2e4d9ba4ec797e22cbf64b4d4a0ff564fa3c8d683407e1f9cdce31cf"
+    },
+    {
+      "path": "visuels/maquettes-apres/D2-bilan-bureau.png",
+      "size": 82549,
+      "sha256": "3df66f544494fdc6db9d307e9cc919f678ab50e2664078230547fb247a78997b"
+    },
+    {
+      "path": "visuels/maquettes-apres/D2-bilan-mobile.png",
+      "size": 52327,
+      "sha256": "36bbad4b452bf405bb7686251f6ff917b3936cf547373b0802f616b329d87243"
+    },
+    {
+      "path": "visuels/maquettes-apres/D2-suivi-bureau.png",
+      "size": 80018,
+      "sha256": "5597329c3cb81ca03fa976847364c3587fb56686e10327699c45aa66c7f2b9a7"
+    },
+    {
+      "path": "visuels/maquettes-apres/D2-suivi-mobile.png",
+      "size": 49475,
+      "sha256": "da55f809823662ef60a217dfc0bcceff6be53472b5ef8e0befe62314ba2ea375"
+    },
+    {
+      "path": "visuels/maquettes-apres/D2.html",
+      "size": 9749,
+      "sha256": "cb3b9cfb4ae9a2399a1376bd2e10c7d2df104e0cad9473d2db767aa0525bed04"
+    },
+    {
+      "path": "visuels/maquettes-apres/E1-bilan-bureau.png",
+      "size": 86046,
+      "sha256": "e4a427dfd6e153cab0186a26ae06bcb877371a071eae650e9e71a73f76208eec"
+    },
+    {
+      "path": "visuels/maquettes-apres/E1-bilan-mobile.png",
+      "size": 57170,
+      "sha256": "5440f3d1c2028c42004d21840a7ec9edfc56444a76440da55f248bcb1a867294"
+    },
+    {
+      "path": "visuels/maquettes-apres/E1-confirmation-bureau.png",
+      "size": 92051,
+      "sha256": "538b81ba97f3eb4900fe2cd49798565bbd1d30b2f097cd62694b6ce240ef3c80"
+    },
+    {
+      "path": "visuels/maquettes-apres/E1-confirmation-mobile.png",
+      "size": 59664,
+      "sha256": "ee13932aff32b0705dbf7087199d3b702b901e32abbfc85b4d65aae2a3689d68"
+    },
+    {
+      "path": "visuels/maquettes-apres/E1-dossiers-bureau.png",
+      "size": 98956,
+      "sha256": "bb2d0951db598bd1985ffa601164f53d90122f5291d78f55a0419ba772c12f1e"
+    },
+    {
+      "path": "visuels/maquettes-apres/E1-dossiers-mobile.png",
+      "size": 69872,
+      "sha256": "9656bb6336af70445f4f9b804b9686175e5e0ce82c5ec5a4fbd7754f6e9eceac"
+    },
+    {
+      "path": "visuels/maquettes-apres/E1-periode-bureau.png",
+      "size": 97241,
+      "sha256": "38bf6a291daf1fb03a0b72ec977b944f17a2bbe720c9dd286cb10656a2b343b7"
+    },
+    {
+      "path": "visuels/maquettes-apres/E1-periode-mobile.png",
+      "size": 67686,
+      "sha256": "4bc450d3ba62ed9d6c238aa0782575926aabb23620778112fe844d7abb776924"
+    },
+    {
+      "path": "visuels/maquettes-apres/E1.html",
+      "size": 12942,
+      "sha256": "1bb8abfe36270e1eff0b9868635a4499bec9cb20af1243c775f4add03afdc386"
+    },
+    {
+      "path": "visuels/maquettes-apres/header-mark.svg",
+      "size": 1493,
+      "sha256": "d2b6590f76636f074e66493407649dc78ed002e6bb2c54b909305c53275b9583"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/A1-accueil-bureau.png",
+      "size": 110533,
+      "sha256": "7952387ece0dd573aa7ba0df9d7f62cd7f08e01f34a50a573780d1e879e3caec"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/A1-accueil-mobile.png",
+      "size": 80165,
+      "sha256": "1fa381bdd21ce03ca07c4000f7875e69e7e7356d6f9f1a87e94050d191fd3c3e"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/B1-echec-bureau.png",
+      "size": 90971,
+      "sha256": "21e4e1952c09c61f021a1917ed57be5265978ab7bcd799abe8a5a12984717266"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/B1-echec-mobile.png",
+      "size": 63447,
+      "sha256": "9fd6b73f481e3d71442fb3f17bee9026a88b8c4a608b069fb0ba9284738add5b"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/B1-enregistre-bureau.png",
+      "size": 87298,
+      "sha256": "c6a242d84ded7b46211b2819b36825a1820cd4963f35d9e87566dc4bc67e49b2"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/B1-enregistre-mobile.png",
+      "size": 56883,
+      "sha256": "110cfc9f899c7cbcdf51c7c762c74957382fa98fd0008bc3563806becd4fafba"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/B1-saisie-bureau.png",
+      "size": 90939,
+      "sha256": "74aef99cfc39fb6977cf2197dde49f2e048fe5471ba0aae0825074503b622a6f"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/B1-saisie-mobile.png",
+      "size": 62993,
+      "sha256": "bfe57727020b16865e51ff13ed84f63440ef49991554a2d7f46acb5101f50cde"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/B2-apercu-bureau.png",
+      "size": 97094,
+      "sha256": "45b7306b4cb5deae51b900bbfe4516dfd59284dc2ef18c1bdbddccdb4c055629"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/B2-apercu-mobile.png",
+      "size": 65155,
+      "sha256": "5bbcf76577f15fe32cdd74f5c16ecb3663c247fa37b23d0155cebe3a7ea19d17"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/B2-demarrage-bureau.png",
+      "size": 90746,
+      "sha256": "47021d8066033d5aa0675118d86f88703a8dd5932412d156c4f3a3d705fdebb5"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/B2-demarrage-mobile.png",
+      "size": 64628,
+      "sha256": "6345e64620ac84b6ce61fa8c5e399d62a65b23bafa79c1b23cd8c09b28bd19d7"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/B2-dotation-bureau.png",
+      "size": 89785,
+      "sha256": "e833d661e005daf29158393d3decb2eadd6544a4262a50ed6f0b9619681fa23b"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/B2-dotation-mobile.png",
+      "size": 60838,
+      "sha256": "760e8396f395cad0607be2ddb1c949c21daff968acbbe27566e457290409861e"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/B2-invitations-bureau.png",
+      "size": 89731,
+      "sha256": "19ffc880331390f24165d548221efb6fd7ee075ebef532e829cebf1abcb84d15"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/B2-invitations-mobile.png",
+      "size": 60814,
+      "sha256": "5b58b5e47cb8cf0aee3692250c988d4f9c303a57f29ded6679b772ea1c1cf071"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/B2-publication-bureau.png",
+      "size": 98069,
+      "sha256": "1725b32c02a8743f528d4c04b7d4289211a4ca4092590315a9e8c3a4e136e032"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/B2-publication-mobile.png",
+      "size": 70544,
+      "sha256": "7c455a986885eeb5f723cb9ab4e8ca4d1b28eb022f4e74f6028b3ef0f4ad14b1"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/B3-compatible-bureau.png",
+      "size": 90731,
+      "sha256": "2a21b56d90c159f26deaff660e620c3a346de515e30d64b74578fb30d1f4181d"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/B3-compatible-mobile.png",
+      "size": 60529,
+      "sha256": "3959d897bc69a071c2f9ae6faf19e07a4ba1826263afc18d7b1671de519ab500"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/B3-incompatible-bureau.png",
+      "size": 82520,
+      "sha256": "52a9042789d7a68695008d4d3321b20fe0d4417c7613cd57294b786fcbbd53ed"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/B3-incompatible-mobile.png",
+      "size": 51078,
+      "sha256": "c53b8985342afd7fde483634db29e9699d1b165f0b81107ca4e3b26feaa019be"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/C1-demande-bureau.png",
+      "size": 88503,
+      "sha256": "1adceba920902e62ef5708a29ec68d515f821823bd7b4c94b012851272274512"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/C1-demande-mobile.png",
+      "size": 57960,
+      "sha256": "28d963dd4a331549cabd0d3ba0e0e82c4afb5753f61be209573f673c3a6b44d5"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/C1-selection-bureau.png",
+      "size": 87302,
+      "sha256": "a9b8a1c407b188f5f7d64f8fb0252542975c8f69e732e060feb3638509ba310b"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/C1-selection-mobile.png",
+      "size": 58421,
+      "sha256": "5679074ee873c57312bb0e2478759a40c56b2cf36d0abf98a0b651b6071e704b"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/C1-suivi-bureau.png",
+      "size": 84592,
+      "sha256": "517a15687cc204743952d0f2137fe3a0b920566cfada2adf5ff22e96f4ce1e62"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/C1-suivi-mobile.png",
+      "size": 52716,
+      "sha256": "79a44bd75296999951ca1025c6c78cc418ad6d0410b5764e8023f11e09019c83"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/C2-apercu-bureau.png",
+      "size": 95640,
+      "sha256": "47d066940790a6d3aacfc58189facac71e311fc4da217e8f3c9ef13512e610bc"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/C2-apercu-mobile.png",
+      "size": 65031,
+      "sha256": "b6f3eef2b99c1d60942dc85e2805fa9f643594a29915cd93d09ffe1933f3ccfa"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/C2-colonnes-bureau.png",
+      "size": 97561,
+      "sha256": "aa73edca98ff65e590b0980160d23cbe24fdf89bceb8c921198c63f99636ef4a"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/C2-colonnes-mobile.png",
+      "size": 67293,
+      "sha256": "fb3c1fef0843c39b8ab8fb0b1cb4cf949d67073277c198ed09e914e7ef8ba3bf"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/C2-comparaison-bureau.png",
+      "size": 82642,
+      "sha256": "763ed6f163069d9de8ff5e89c607323840b05f3f928f81c1151a71ef0bb150d2"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/C2-comparaison-mobile.png",
+      "size": 53308,
+      "sha256": "ada77abd45184cd08c5383bcb15a693ccf56809e8d5ebc97cbde3bb6c29630e4"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/C2-confirmation-bureau.png",
+      "size": 79987,
+      "sha256": "55a213fb45248206f60652934a0b2a620e3f1635b2a0dfea02cdd555cf19c368"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/C2-confirmation-mobile.png",
+      "size": 51817,
+      "sha256": "441ff78d3261db5ebcdffec9236096badf48b241d9245be3ff14f9850b9317ba"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/D1-apercu-bureau.png",
+      "size": 81005,
+      "sha256": "e4914a02ebcfbe027288b241233d5204937ef35e69e41c4755cee827c01b5749"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/D1-apercu-mobile.png",
+      "size": 53841,
+      "sha256": "d2e68c23fa2ec6c22c11451be2a2ac659ef03933218b9f2d5bec593ba96e456d"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/D1-confirme-bureau.png",
+      "size": 77147,
+      "sha256": "b43b1ff3a98230623e6eed8b9fef98cea62d32b64057d48eb21c033e643b19ec"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/D1-confirme-mobile.png",
+      "size": 49316,
+      "sha256": "34221663da1f34d4df22505c5086801409758f57a34646c0d26934f908063283"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/D1-incertain-bureau.png",
+      "size": 84773,
+      "sha256": "5b4be8f236d64219953e4ed5fa16ca08168c22212801cbac017dd3f8db9557ae"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/D1-incertain-mobile.png",
+      "size": 57451,
+      "sha256": "95a30963a89922cae6deb603a3f0f86180061825d5898449cee22a044e5b35aa"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/D1-lecture-bureau.png",
+      "size": 85461,
+      "sha256": "64a0d5df6a985739367308af33bd7852a1d62e8a6343d08c8abb109ff294b10c"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/D1-lecture-mobile.png",
+      "size": 60154,
+      "sha256": "8cbfadbe91bb0954bb4a3a3cc0b1d62653aa8e39fe3cd368f20479c2752a8a07"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/D1-preparer-bureau.png",
+      "size": 81381,
+      "sha256": "e507dde5a7500b6715bf59395730dad144029ed7172fe0dbf33fa74e09b57110"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/D1-preparer-mobile.png",
+      "size": 55013,
+      "sha256": "b4e693bc4f41c23d7768736adcc76d914b7d3c80691fc7ed967636e4bbe8e841"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/D1-refuse-bureau.png",
+      "size": 74844,
+      "sha256": "fe01b6ce741ea4df0c7d4315b6c0ae8c3a14a92ddc6126cbed075d30c5552b42"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/D1-refuse-mobile.png",
+      "size": 48144,
+      "sha256": "7b87e827eee1f78e02b8b162be88eeb71162b419d572c07b17e90659dce87cce"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/D2-bilan-bureau.png",
+      "size": 84130,
+      "sha256": "16238995ff724dcf4e4913830a22ad57b78266d77fa94066aa513e5b27a3256c"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/D2-bilan-mobile.png",
+      "size": 55512,
+      "sha256": "63abca3cceab43541597c8aacd4c43c11c43af81e69026d471327edcfa7b0df1"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/D2-suivi-bureau.png",
+      "size": 78326,
+      "sha256": "761d8284a0d616cf96cc7f9593edffaef48e5bd7cd4596bcffbe02a61152dab4"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/D2-suivi-mobile.png",
+      "size": 49529,
+      "sha256": "fa81d9e5ee19fab7bcacc37f939750936c65ec8176ec4c098667043caadcf59d"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/E1-bilan-bureau.png",
+      "size": 84618,
+      "sha256": "4560dc02adc7dedf9ec74d9c98dd43bd678ef887f1f059f77e57a70a576237a5"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/E1-bilan-mobile.png",
+      "size": 57319,
+      "sha256": "aa738f09a06fba0601a17c488176279930d67b3ddefc0c56b0283526e1bdd161"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/E1-confirmation-bureau.png",
+      "size": 86438,
+      "sha256": "50c16b63ff160190fed642a81c7c1bacebf3f6569121866716ecba7341a66045"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/E1-confirmation-mobile.png",
+      "size": 56552,
+      "sha256": "8d343c73362943d28cefa1b9ef4970a551faa44fa5a4dcc71bc282c62987de56"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/E1-dossiers-bureau.png",
+      "size": 95880,
+      "sha256": "25b676d8ebda97bc01f03557fbc1cbc71d50d28705b54c3e623ae3e93162ad97"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/E1-dossiers-mobile.png",
+      "size": 69054,
+      "sha256": "18e5781da2f3400ab199fd4833bcf096ec0da6b526ab39d8fdb9980502a2b3e0"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/E1-periode-bureau.png",
+      "size": 94760,
+      "sha256": "faa994ee3cb276d67e3e59b1454c6c02ce1f28fe62c3a3bc2501526ea8bfce57"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/E1-periode-mobile.png",
+      "size": 66840,
+      "sha256": "a9759690cc4d8b89a19074a3db947f84eadc98a0ddeff47c8d93f3edaa48b2f1"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1/manifest-v1.json",
+      "size": 18827,
+      "sha256": "3f8e6f16698cc32cbbba6c58a60f6c700a2f553d7ffb56a7131edcebdc34e27e"
+    },
+    {
+      "path": "visuels/maquettes-apres/iterations/v1-sources.zip",
+      "size": 4181877,
+      "sha256": "16ac28024c697bf708105c154180bb6ab1a8aa196f7b34e29434edaadeb33677"
+    },
+    {
+      "path": "visuels/maquettes-apres/maquettes.css",
+      "size": 11452,
+      "sha256": "310b922482bf001eaa7e47cfeaf70d7f68ae0bd5a3d559475a3412e362c4a4d9"
+    },
+    {
+      "path": "visuels/maquettes-apres/maquettes.js",
+      "size": 2197,
+      "sha256": "a44d6fb81678f34dd1b19c80eac9044bb20bb6116949c1847f4bca1b1d1ddf83"
+    },
+    {
+      "path": "visuels/maquettes-apres/mesures-rendus.json",
+      "size": 10970,
+      "sha256": "19ac455850d5aa412bb82e4ca4c27ffbcc7f720d794ae57bc50134fb4918308a"
+    },
+    {
+      "path": "visuels/maquettes-apres/README.md",
+      "size": 4894,
+      "sha256": "429046cd3d1ec64c1ded7e6f80c40981d88e6becc59c05ef0c41e8cc3e4e98c6"
+    },
+    {
+      "path": "visuels/maquettes-apres/scenarios.json",
+      "size": 4872,
+      "sha256": "b8d1f8aae2db1e10ea7ddf02476db7b1710bfe24f94b18969b6af21631ffe5e2"
+    },
+    {
+      "path": "visuels/preuves-comparatif.json",
+      "size": 6948,
+      "sha256": "63e3e424d78147bf1e1f9f9a240cb591fd3cb8ce5633b3387b4e346fd04a3374"
+    },
+    {
+      "path": "workshop/arbitrages-maquettes.md",
+      "size": 7771,
+      "sha256": "0737b50a2b8f15797fab57b8eb0bb6b9a7021f7192743f3246b376213da13cea"
+    },
+    {
+      "path": "workshop/avis-independants-experts.md",
+      "size": 13975,
+      "sha256": "db6ae2eaa17786d310035f2c8c3e253db6dfbe7259fb9224495fcc4619713080"
+    },
+    {
+      "path": "workshop/avis-independants-metier-1.md",
+      "size": 12221,
+      "sha256": "b63aa9cb26f29893a100eb54bf2c015b7f74add172c1f92248ecbcf6df06d594"
+    },
+    {
+      "path": "workshop/avis-independants-metier-2.md",
+      "size": 11518,
+      "sha256": "c99bdba1c29d5df3c56989ca7fcbbd14aad28e304236c6f38e4c1a789f0bee38"
+    },
+    {
+      "path": "workshop/backlog-ux.md",
+      "size": 41534,
+      "sha256": "91aed0b3f53b425c0e735fce3e1dfb583645a4b1b76457c3abc5c3112086ea87"
+    },
+    {
+      "path": "workshop/bulletins-experts.json",
+      "size": 26924,
+      "sha256": "e403696766b31333787485531a7aff4aa8070531038de24631a81f82c832ff9e"
+    },
+    {
+      "path": "workshop/bulletins-metier-1.json",
+      "size": 22684,
+      "sha256": "186a48b762d1554fce99ca69c019bf6ca27b7e0d2ba31eae0b89637421d3a2f7"
+    },
+    {
+      "path": "workshop/bulletins-metier-2.json",
+      "size": 17518,
+      "sha256": "2d4bf6f60b43351052cdaab062b002d19b89b3c8e427725167184bf35640c2fc"
+    },
+    {
+      "path": "workshop/compte-rendu.md",
+      "size": 18395,
+      "sha256": "68c252764d9c856fd3fd6436007c9f229c5eaf9b1885a305e1a36799cce02db4"
+    },
+    {
+      "path": "workshop/controle-etape-2.md",
+      "size": 3786,
+      "sha256": "d7ab0cc392ef57a27ec9bf12a3760de01073293cd073cd6c9c8a18fcba375b5a"
+    },
+    {
+      "path": "workshop/controle-etape-3.md",
+      "size": 5955,
+      "sha256": "6618e46f9acc39831e32192f2f829af6dd5501b1668462a8435836c71bd9b1cf"
+    },
+    {
+      "path": "workshop/controle-interactions-maquettes.json",
+      "size": 4422,
+      "sha256": "41384dcc41b28929f762bfc0304047f402a994854e733cfce0c4015d115f440c"
+    },
+    {
+      "path": "workshop/details-orientations.json",
+      "size": 19933,
+      "sha256": "f6264aa15aedec45f52d5a051b9627bf1f3175021f95c4c8e833ce22cc529889"
+    },
+    {
+      "path": "workshop/manifest-etape-2-sha256.json",
+      "size": 17450,
+      "sha256": "5b47047910da585361a978a96cf92c0d13848453ac55886406dd434296ae1c89"
+    },
+    {
+      "path": "workshop/orientations-rejetees.md",
+      "size": 5783,
+      "sha256": "d719f00b5e6f6b4f1ae555cf5373c4e146a97a0bb405e334137c6fba72d76b51"
+    },
+    {
+      "path": "workshop/orientations-soumises.md",
+      "size": 6875,
+      "sha256": "544f5b60f977aaf4f635f2e558ca4dbfdd2f3bb865ba0a16a16eb20d0dadd0c4"
+    },
+    {
+      "path": "workshop/quick-wins.md",
+      "size": 2184,
+      "sha256": "8ac648fb5b9bfa34bd0701e4c6739ae191bb98753b6e248ae66bc3e9035aa51d"
+    },
+    {
+      "path": "workshop/rapport-executif.md",
+      "size": 12790,
+      "sha256": "4ede646b075aa2353ceca7cf6b0ea22648c3f5c184c8252a6ed0782a8f0b38f5"
+    },
+    {
+      "path": "workshop/resultats-votes.json",
+      "size": 2049,
+      "sha256": "d9a34074a6c4cbee839b6bc6540a75f95c1033cec770241d6e4625893235fd5e"
+    },
+    {
+      "path": "workshop/revue-maquettes-experts.json",
+      "size": 34591,
+      "sha256": "e6c71d69fc636f9fe6f9008ad1853f163a741f61762e21bde5e4eb1cf818cfa0"
+    },
+    {
+      "path": "workshop/revue-maquettes-metier-1.json",
+      "size": 31632,
+      "sha256": "4afb8577b7fb284cabb85ea154063942019a8a8f47318e23cb12ad6cac1d47a3"
+    },
+    {
+      "path": "workshop/revue-maquettes-metier-2.json",
+      "size": 26048,
+      "sha256": "1f70451b254a8df635526f627da350c42e2df9affd7f171488ec6df03db408eb"
+    },
+    {
+      "path": "workshop/revue-maquettes.md",
+      "size": 74409,
+      "sha256": "288fa50fe0c951ec33244be09de3408ed6d1fb32836efe6954e07ba91f29c6a4"
+    },
+    {
+      "path": "workshop/verification-maquettes-v2-experts.md",
+      "size": 7323,
+      "sha256": "51ac6377e520bf89d2ad2c933720364b621059adc35cca3532bbde8643083c38"
+    },
+    {
+      "path": "workshop/verification-maquettes-v2-metier-1.md",
+      "size": 6706,
+      "sha256": "b9584b5393e6dfac19724af397a83ba350c088437449f39ea37fc09569d1bca8"
+    },
+    {
+      "path": "workshop/verification-maquettes-v2-metier-2.md",
+      "size": 5236,
+      "sha256": "6c8db3961657399ed9cbd27542b14f08f1131d660b47c5ff832fa9483c32ddf5"
+    },
+    {
+      "path": "workshop/votes-et-arbitrages.md",
+      "size": 52671,
+      "sha256": "3995f1b93ae13570f34eb9984d7b12077198b1607a1c4a907ffe31f8d2bd65ab"
+    }
+  ]
+}

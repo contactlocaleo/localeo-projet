@@ -1,0 +1,189 @@
+{
+  "type": "correspondances-avant-apres",
+  "orientations": [
+    {
+      "orientation": "A1",
+      "observations": [
+        "AN-02",
+        "AN-19"
+      ],
+      "vote_simule": 12,
+      "capture_bureau": "captures-avant/02-tableau-bord-bureau.png",
+      "capture_mobile": "captures-avant/44-tableau-bord-mobile.png",
+      "ecran": "Tableau de bord — nouvelles avant les actions",
+      "annotation": "Les cartes jaunes occupent l’essentiel de la première vue, y compris pour des événements positifs.",
+      "maquette": "maquettes-apres/A1.html",
+      "rendu_bureau": "maquettes-apres/A1-accueil-bureau.png",
+      "rendu_mobile": "maquettes-apres/A1-accueil-mobile.png",
+      "etats": [
+        "accueil"
+      ]
+    },
+    {
+      "orientation": "B1",
+      "observations": [
+        "AN-03"
+      ],
+      "vote_simule": 12,
+      "capture_bureau": "captures-avant/05-tombola-informations.png",
+      "capture_mobile": "captures-avant/48-sortie-saisie-mobile.png",
+      "ecran": "Création — informations et sortie de saisie",
+      "annotation": "La capture bureau situe l’étape Informations ; la capture mobile montre le choix entre continuer et quitter sans enregistrer. La sauvegarde n’arrive qu’après les sept étapes (AN-03).",
+      "maquette": "maquettes-apres/B1.html",
+      "rendu_bureau": "maquettes-apres/B1-saisie-bureau.png",
+      "rendu_mobile": "maquettes-apres/B1-saisie-mobile.png",
+      "etats": [
+        "saisie",
+        "enregistre",
+        "echec"
+      ]
+    },
+    {
+      "orientation": "B2",
+      "observations": [
+        "AN-06",
+        "AN-07",
+        "AN-08",
+        "AN-09",
+        "AN-10",
+        "AN-15"
+      ],
+      "vote_simule": 12,
+      "capture_bureau": "captures-avant/14-brouillon-cree.png",
+      "capture_mobile": "captures-avant/49-assistant-mobile.png",
+      "ecran": "Assistant — préparation à compléter",
+      "annotation": "Le diagnostic « Demandes participation a envoyer » n’indique pas directement le geste à effectuer.",
+      "maquette": "maquettes-apres/B2.html",
+      "rendu_bureau": "maquettes-apres/B2-publication-bureau.png",
+      "rendu_mobile": "maquettes-apres/B2-publication-mobile.png",
+      "etats": [
+        "publication",
+        "demarrage",
+        "invitations",
+        "dotation",
+        "apercu"
+      ]
+    },
+    {
+      "orientation": "B3",
+      "observations": [
+        "AN-05"
+      ],
+      "vote_simule": 12,
+      "capture_bureau": "captures-avant/18-passeport-seuil.png",
+      "capture_mobile": null,
+      "ecran": "Passeport — mission et règles",
+      "annotation": "Capture réelle de l’étape 4 : le champ de seuil se trouve plus bas, hors du cadrage conservé. Le seuil de 4 après sélection de 2 commerces est attesté par AN-05 et le relevé DOM, pas par cette image seule.",
+      "maquette": "maquettes-apres/B3.html",
+      "rendu_bureau": "maquettes-apres/B3-compatible-bureau.png",
+      "rendu_mobile": "maquettes-apres/B3-compatible-mobile.png",
+      "etats": [
+        "compatible",
+        "incompatible"
+      ]
+    },
+    {
+      "orientation": "C1",
+      "observations": [
+        "AN-11"
+      ],
+      "vote_simule": 9,
+      "capture_bureau": "captures-avant/07-selection-commercants.png",
+      "capture_mobile": null,
+      "ecran": "Sélection des commerces",
+      "annotation": "La sélection existante ne montre pas de chemin individuel trouvé pendant l’exploration pour un commerce absent. Cela ne prouve pas l’absence de fonction dans tout Localeo.",
+      "maquette": "maquettes-apres/C1.html",
+      "rendu_bureau": "maquettes-apres/C1-selection-bureau.png",
+      "rendu_mobile": "maquettes-apres/C1-selection-mobile.png",
+      "etats": [
+        "selection",
+        "demande",
+        "suivi"
+      ]
+    },
+    {
+      "orientation": "C2",
+      "observations": [
+        "AN-12",
+        "AN-13",
+        "AN-14"
+      ],
+      "vote_simule": 9,
+      "capture_bureau": "captures-avant/23-import-apercu.png",
+      "capture_mobile": "captures-avant/53-import-mobile.png",
+      "ecran": "Import — vérifier les lignes",
+      "annotation": "Deux créations proposées pour des lignes similaires ; le mapping et ses limites sont documentés dans AN-12 à AN-14. La capture mobile montre l’espace d’import, pas le détail de l’aperçu.",
+      "maquette": "maquettes-apres/C2.html",
+      "rendu_bureau": "maquettes-apres/C2-apercu-bureau.png",
+      "rendu_mobile": "maquettes-apres/C2-apercu-mobile.png",
+      "etats": [
+        "apercu",
+        "colonnes",
+        "comparaison",
+        "confirmation"
+      ]
+    },
+    {
+      "orientation": "D1",
+      "observations": [
+        "AN-18"
+      ],
+      "vote_simule": 12,
+      "capture_bureau": "captures-avant/31-communication-echec-confirme.png",
+      "capture_mobile": null,
+      "ecran": "Communication — chargement impossible",
+      "annotation": "L’actualisation échoue aussi : deux réponses 500 sont consignées dans AN-18.",
+      "maquette": "maquettes-apres/D1.html",
+      "rendu_bureau": "maquettes-apres/D1-lecture-bureau.png",
+      "rendu_mobile": "maquettes-apres/D1-lecture-mobile.png",
+      "etats": [
+        "lecture",
+        "preparer",
+        "apercu",
+        "incertain",
+        "confirme",
+        "refuse"
+      ]
+    },
+    {
+      "orientation": "D2",
+      "observations": [
+        "AN-16",
+        "AN-17"
+      ],
+      "vote_simule": 12,
+      "capture_bureau": "captures-avant/25-suivi-animation-en-cours.png",
+      "capture_mobile": null,
+      "ecran": "Bilan atteint par « Consulter le suivi »",
+      "annotation": "AN-16 documente le détour : le bouton aboutit au bilan, puis un second lien ouvre le suivi opérationnel.",
+      "maquette": "maquettes-apres/D2.html",
+      "rendu_bureau": "maquettes-apres/D2-suivi-bureau.png",
+      "rendu_mobile": "maquettes-apres/D2-suivi-mobile.png",
+      "etats": [
+        "suivi",
+        "bilan"
+      ]
+    },
+    {
+      "orientation": "E1",
+      "observations": [
+        "AN-20",
+        "AN-21"
+      ],
+      "vote_simule": 12,
+      "capture_bureau": "captures-avant/35-fin-archivage.png",
+      "capture_mobile": "captures-avant/54-fin-mobile.png",
+      "ecran": "Fin et archivage — dossier restant",
+      "annotation": "Clôturée, terminée et archivée sont des étapes distinctes ; un dossier de lot reste à traiter. La confirmation de clôture est également visible dans la capture 62.",
+      "maquette": "maquettes-apres/E1.html",
+      "rendu_bureau": "maquettes-apres/E1-periode-bureau.png",
+      "rendu_mobile": "maquettes-apres/E1-periode-mobile.png",
+      "etats": [
+        "periode",
+        "confirmation",
+        "dossiers",
+        "bilan"
+      ]
+    }
+  ]
+}

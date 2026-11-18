@@ -1,5 +1,7 @@
 # Spécifications
 
+- **Réalisation E73 — 18 novembre 2026 : suites du workshop Animation**, [E73-EVO-WORKSHOP-UX-20261118](../roadmap/terminees/epic-73-animation-et-ou-coffrets-backlog.md#workshop-ux-20261118) : 11 orientations, 18 critères WA, spécification et implémentation locales ; [preuves et limites](epic-73-animation-et-ou-coffrets/verification-livraison.md#workshop-ux-20261118). Atelier prioritaire : PO-13 révisé et automatisation CAF retirée des travaux futurs. Recette humaine et déploiement non réalisés. Clôture historique conservée.
+
 - **Extension E78 — 17 novembre 2026 : préparation guidée**, [E78-EVO-PREPARATION-UX](epic-78-jeu-des-vitrines/parcours-regles.md#évolution-du-17-novembre-2026--préparation-guidée) : section Pro et parcours en quatre étapes, attentes commerçant/organisateur explicites, contrôles Animation regroupés ; PU-01 à PU-08, contrats métier existants conservés. Résultats dans le bilan E78, état En cours conservé.
 
 Mise à jour : **18 septembre 2026**. Les documents sont regroupés par fonctionnalité et EPIC ; les contributions backend et interfaces partagent le même dossier.
@@ -18,7 +20,7 @@ Commencer par le README du sujet, puis consulter ses règles, contrats et arbitr
 
 - **Extension E73 — 12 novembre 2026 : productivité quotidienne de l’organisateur**, [E73-EVO-ANIMATION-PRODUCTIVITE](epic-73-animation-et-ou-coffrets/ux-productivite-organisateur.md) : audit Animation bureau/mobile, sept lots et AP-01 à AP-22 ; recommandations fiables, continuité, listes bornées, accessibilité, préparation, gains/fin et comparaison. Sept lots implémentés, preuves locales et migration TEST v313 ; validation AP-22 partielle, clôture historique inchangée.
 
-- **Extension E73 — 12 novembre 2026 : clôture automatique et report de fin**, [E73-EVO-CLOTURE-AUTO](epic-73-animation-et-ou-coffrets/fin-animation-archives.md#évolution-du-12-novembre-2026--clôture-automatique-et-report-de-fin) : option active par défaut pour les nouvelles animations, rapport e-mail aux responsables actifs, report avant clôture avec Live/WebPush. Choix confirmés, 12 critères CAF et trois lots spécifiés ; aucune implémentation dans cette phase. Clôture historique inchangée.
+- **Extension E73 — 12 novembre 2026 : clôture automatique et report de fin**, [E73-EVO-CLOTURE-AUTO](epic-73-animation-et-ou-coffrets/fin-animation-archives.md#évolution-du-12-novembre-2026--clôture-automatique-et-report-de-fin) : option active par défaut pour les nouvelles animations, rapport e-mail aux responsables actifs, report avant clôture avec Live/WebPush. Historique de 12 critères CAF et trois lots spécifiés, non implémentés ; le 18 novembre, E73-WA-DEC-03 retire le volet automatique des travaux futurs, report/rapport indépendants à recadrer. Clôture historique inchangée.
 
 - **Extension E73 — 11 novembre 2026 : profil d'activité communale**, [E73-EVO-DYNAMISME-COMMUNE](epic-73-animation-et-ou-coffrets/perimetres-parcours-saas.md#évolution-du-11-novembre-2026--dynamisme-de-la-commune) : quatre axes et tendances sans score, pour l'organisation dans sa commune active. Critères DY-01 à DY-06 ; clôture historique E73 inchangée.
 

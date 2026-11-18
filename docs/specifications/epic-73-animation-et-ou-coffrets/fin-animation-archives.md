@@ -16,7 +16,7 @@ exceptionnel externe reste acquis ; les autres commandes de gestion restent gel�
 
 Complément du **12 novembre 2026 — E73-EVO-CLOTURE-AUTO** : voir la
 [spécification de clôture automatique et report de fin](#évolution-du-12-novembre-2026--clôture-automatique-et-report-de-fin).
-Cette extension est spécifiée, avec trois choix utilisateur confirmés ; elle n’est pas implémentée.
+Cette extension était spécifiée sans implémentation. Son volet automatique est retiré le 18 novembre par E73-WA-DEC-03 ; report et rapport indépendants restent à recadrer dans la section historique ci-dessous.
 
 Évolution du 11 novembre 2026. E73 conserve sa clôture historique ; les critères
 ci-dessous portent le nouveau comportement demandé et ses preuves propres.
@@ -241,6 +241,17 @@ l’utilisation des coffrets autonomes restent dans leur domaine propriétaire.
 Aucun déploiement ni réparation de données n’est autorisé par cette spécification.
 
 ## Évolution du 12 novembre 2026 — clôture automatique et report de fin
+
+**Arbitrage du 18 novembre 2026 — E73-WA-DEC-03 :** la primauté de
+l’atelier demandée par l’utilisateur retire la clôture programmée/automatique
+de la cible future. L’option activée par défaut (CAF-A1/CAF-01) et le déclenchement
+à échéance (CAF-02) ne sont plus à implémenter. Les composantes automatiques des
+autres critères sont à retirer lors du recadrage. Les décisions indépendantes
+CAF-A2/A3 (report autorisé, rapport aux responsables) ne sont pas annulées,
+mais leurs lots doivent être séparés de l’automatisation. La conception CAF
+ci-dessous est un **historique partiellement remplacé**, pas un plan exécutable
+en l’état. Aucun changement applicatif ni désactivation distante effectué.
+[Décision et périmètre courant](../../roadmap/terminees/epic-73-animation-et-ou-coffrets-backlog.md#workshop-ux-20261118).
 
 **E73-EVO-CLOTURE-AUTO** complète les critères FA sans les renuméroter. La demande
 porte sur le cadrage et la spécification. Aucun code, migration ou déclenchement

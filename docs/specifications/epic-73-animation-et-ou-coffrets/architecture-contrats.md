@@ -11,7 +11,14 @@ de domaine est compilée en prédicats SQL avant pagination, sans table de
 projection supplémentaire. Les quatre index v313 sont appliqués sur TEST.
 Les limites des mesures N/10N et de l’acceptation AP-22 figurent au bilan.
 
-Complément du **12 novembre 2026 — E73-EVO-CLOTURE-AUTO**, **contrats cibles
+**Mise à jour du 18 novembre — E73-WA-DEC-03 :** le volet de clôture automatique
+est retiré des travaux futurs conformément à la primauté de l’atelier.
+Le contrat cible CAF ci-dessous est historique et partiellement remplacé : ne
+pas ajouter son option activée par défaut ni le déclenchement automatique.
+Report de date et rapport aux responsables, indépendants, restent à recadrer
+dans les contrats existants. Voir le [cadrage courant](../../roadmap/terminees/epic-73-animation-et-ou-coffrets-backlog.md#workshop-ux-20261118).
+
+Complément du **12 novembre 2026 — E73-EVO-CLOTURE-AUTO**, **anciens contrats cibles
 non implémentés** : la [conception canonique](fin-animation-archives.md#évolution-du-12-novembre-2026--clôture-automatique-et-report-de-fin)
 étend le noyau de clôture et la commande existante de paramètres publiés.
 Le domaine Animation reste propriétaire de la période et du gel ; API, ERP
@@ -580,3 +587,39 @@ Les noms utilisent les projections ou jointures groupées existantes, sans requ�
 par ligne. Aucun nouveau champ persistant ni migration n’est nécessaire. Le
 générateur de démonstration ne change pas : ses organisations, communes et
 commandes alimentent les nouvelles lectures sans exigence supplémentaire.
+
+## Contrats du workshop du 18 novembre 2026 — D1 et F1
+
+WA-11/12 : la lecture des campagnes fournit `contexte_message` sous forme de texte,
+sans déclencher de transport. Le chargeur groupé peut fournir un contexte structuré
+aux notifications : le repository de campagnes le convertit explicitement pour son
+contrat existant. La réconciliation des commandes reste la source de confirmation ;
+une réponse perdue ne déclenche aucun renvoi automatique. Le défaut local de type
+est reproduit ; son identité avec le 500 distant reste à confirmer après livraison.
+
+WA-15/17 : les vues de liste sont des préférences durables, sans capacité d'accès.
+Elles appartiennent à une organisation, une commune et un auteur. Tout lecteur
+`animation:lire` habilité voit ses vues privées et les vues partagées de sa commune.
+L'auteur seul modifie/supprime sa vue, après nouvelle vérification transactionnelle
+session/appartenance/habilitation et réversibilité. Le départ d'un auteur ne donne
+aucun droit à sa vue ; les résultats restent rechargés sous les droits du lecteur.
+
+Contrat `/protected/animation-locale/vues-liste` : GET borné à 100 vues (plafond
+100 vues par organisation/commune), GET `/{id}`, PUT `/{id}` avec révision attendue
+(0 pour création, identifiant client stable), DELETE `/{id}?revision=n`. PUT rejoué
+à contenu identique retourne la version courante ; concurrence divergente : 409.
+Identifiant inconnu/hors périmètre : 404 ; non auteur : 403. Lectures `no-store`.
+Le nom est borné à 80 caractères. Filtres fermés : recherche 120, statut connu,
+modèle 100, alertes avec/sans/toutes, dates ISO ordonnées, archives booléen.
+Aucun curseur, sélection, résultat, identifiant de commerce ou secret n'est persisté.
+La sauvegarde/reprise est explicite ; réponse perdue : lecture de la même vue.
+L'application applique les filtres et remet la pagination à zéro, conserve le retour
+à la liste et propose la réinitialisation habituelle. Aucun cache local durable.
+
+Données : migration additive 326 `animation_vues_liste`, index portée/auteur,
+clés étrangères vers organisation/commune/gestionnaire. Pas de reprise de données
+ni valeurs par défaut fictives pour les organisations existantes. Aucun nouveau
+module commercial, notification ou traitement batch. Les jeux existants restent
+valides sans vue enregistrée ; sauvegarde/export de réversibilité à étendre à la
+table. Preuves prévues : validation domaine, partage/tenant/auteur/revocation,
+rejeu/concurrence et parcours navigateur avec filtres/retour/réinitialisation.

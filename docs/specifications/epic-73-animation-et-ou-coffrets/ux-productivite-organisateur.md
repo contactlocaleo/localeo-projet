@@ -1,5 +1,11 @@
 # E73 — Productivité quotidienne de l’organisateur
 
+**Décision ultérieure du 18 novembre 2026 :** l’atelier est prioritaire selon
+[E73-WA-DEC-01/02](../../roadmap/terminees/epic-73-animation-et-ou-coffrets-backlog.md#workshop-ux-20261118).
+PO-13 vise désormais le suivi opérationnel depuis « Consulter le suivi », avec
+Bilan accessible séparément. Cette nouvelle cible reste à réaliser ; la mention
+Bilan et les preuves du 17 novembre ci-dessous décrivent l’état antérieur.
+
 Complément du **17 novembre 2026** : [E73-EVO-PARCOURS-ORGANISATEUR](parcours-organisateur.md)
 précise les écarts après contre-expertise. **PO-13 remplace la destination de
 consultation ordinaire d'AP-01 par Bilan**, avec autorité serveur conservée ;
@@ -434,3 +440,24 @@ Le lot de clôture automatique peut modifier les faits temporels et le workflow 
 intégrer sa projection s’il est livré avant L1, sans reproduire son ordonnanceur.
 La recommandation restera fondée sur l’état courant, quelle que soit l’entrée
 ayant clôturé. Aucun autre audit historique n’est réputé clôturé par ce document.
+
+## Atelier du 18 novembre 2026 — spécification UI retenue
+
+Cette section applique A1, B2, B3, D2, E1 et G1 (E73-WA-01, 04–06, 13–14, 16–17).
+Les changements restent une présentation des faits et permissions du serveur.
+
+- **A1** : conserver filtres, pagination et retours ; présenter la file « À traiter » avant les notifications. PUBLICATION, PARTICIPATION_COMMERCANT_ACCEPTEE, COMMERCANT_PRET, CLOTURE et TIRAGE sont des confirmations ; ANTI_FRAUDE, PARTICIPATION_COMMERCANT_REFUSEE et RETRAIT_PARTICIPATION_COMMERCANT_DEMANDE appellent une attention. Un type inconnu reste une information. Chaque tonalité possède un libellé textuel ; aucune urgence temporelle inventée.
+- **B2** : afficher dès la création les trois étapes : préparer le brouillon (organisateur), recueillir les accords (commerçants), contrôler et publier (organisateur). L’accord à participer ne prouve pas l’activation du compte. La création et les aperçus n’envoient aucune invitation ; le QR opérationnel dépend de la publication. Les contrôles existants conservent leurs acteurs, raisons et actions.
+- **B3** : proposer initialement min(4, nombre de commerces sélectionnés), au minimum 1. Tant que le choix est automatique, la sélection l’adapte. Une modification du seuil par l’organisateur est marquée `seuilOrigine: manuel`, conservée lors des changements de sélection et sérialisable dans la préparation durable. Si elle devient incompatible, expliquer l’écart et proposer un ajustement explicite ; la suite demeure bloquée. La règle métier et sa validation serveur restent inchangées.
+- **D2** : la politique de domaine renvoie `live` pour CONSULTER_SUIVI, sans modifier `a_traiter`, droits ou motif. Bilan conserve sa rubrique distincte. Cet arbitrage remplace la destination Bilan de PO-13 pour cette action.
+- **E1** : expliquer fin de période, clôture manuelle, traitement des lots, terminaison et archivage. La confirmation de clôture précise qu’elle ne tire pas les gagnants et ne confirme aucune remise. Ne pas calculer de transition automatique dans l’interface ; seules les actions et états serveur commandent les possibilités.
+- **G1** : proposer au plus trois raccourcis mobiles de consultation adaptés à la phase serveur, tout en conservant le sélecteur complet et la protection des sorties. Aucun raccourci n’exécute une mutation ou n’accorde un droit. Les entrées de préparation déjà autorisées restent filtrées comme les rubriques existantes.
+
+Preuves attendues : tests de politique D2 et de seuil automatique/manuel, tests de tonalité, parcours navigateur bureau/mobile incluant changement de sélection, conservation de saisie et accès explicite au bilan. Les tests humains, téléphone physique et lecteur d’écran restent une recette distincte. Sans nouvelle migration, endpoint, fournisseur ni donnée de démonstration pour ces changements ; contrats partagés inchangés hors valeur de destination autorisée existante.
+
+### Première vérification locale UI du lot WA
+
+- `node --test tests/qualification.test.mjs tests/dashboard-notifications.test.mjs` : **6 réussites** (seuil automatique, choix manuel conservé et restauré, tonalités selon les types producteurs).
+- `py -3 scripts/validation/test_isolated.py tests/domain/animation_locale/test_recommandation_productivite.py -q` : **14 réussites**, destination `live` et caractère de consultation préservé.
+- `pnpm exec tsc --noEmit` et lint ciblé des fichiers UI du lot : **réussis** avant intégration des lots parallèles.
+- Les bancs `po-creation-continuite.mjs` (nouveau scénario passeport à 1280 et 390 pixels) et `po-organisateur.mjs` (suivi distinct du bilan) sont adaptés. Leur exécution et celle des assertions PostgreSQL de productivité restent à consigner dans la vérification intégrée ; ces adaptations seules ne prouvent pas les parcours.

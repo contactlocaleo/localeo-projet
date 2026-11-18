@@ -810,3 +810,73 @@ impact : les noms et relations existants sont réutilisés, sans nouveau champ
 persisté ni nouveau consentement. Les fixtures de recette sont enrichies.
 
 Les preuves sont consignées dans le [suivi de réalisation](suivi-implementation.md).
+# Complément d'exécution du workshop du 18 novembre 2026 — C1/C2
+
+Critères E73-WA-07 à E73-WA-10. Le référencement est propriétaire de la demande
+individuelle ; le domaine Imports conserve la décision de rapprochement.
+
+## Demander un commerçant manquant (C1)
+
+L'organisateur habilité à gérer les animations de la commune transmet une demande
+avec nom, adresse, commune, SIRET et email. Cette opération ne requiert pas le module
+Import. Une demande durable porte l'organisation, la commune, l'auteur, la version,
+la clé d'idempotence et un état DEMANDEE, ACCEPTEE ou REJETEE. Elle ne crée ni compte,
+ni invitation, ni participation. Une lecture bornée permet de retrouver son résultat
+après reconnexion ou réponse perdue ; une clé réutilisée avec un autre contenu est
+refusée. Les lectures restent sans effet et sans cache privé persistant.
+
+L'ERP expose les demandes aux acteurs autorisés à consulter l'onboarding et à gérer
+les périmètres communaux concernés. La décision exige onboarding.gerer et
+commercants:perimetres_gerer, CSRF, version courante, motif et clé d'idempotence.
+L'acceptation réutilise ReferencerCommercant sans initialisation d'accès, puis la
+transition canonique du périmètre Animation vers A_PREPARER. La demande acceptée
+indique la fiche créée ; elle n'annonce aucune activation. Le rejet conserve son
+motif. Les collisions fortes sont refusées et doivent être traitées explicitement.
+Les changements de droits ou de commune sont contrôlés de nouveau à chaque accès.
+
+Le droit existant utilisé est `animation:gerer_participations_commercants`, vérifié
+sur l'appartenance et l'habilitation courantes. Les routes organisateur
+`GET/POST /protected/referencement/demandes` déduisent organisation, auteur et
+commune de la session ; le client ne peut pas les choisir dans le corps. Le GET
+`/recus/{cle}` rapproche un envoi incertain. Les routes ERP sont
+`GET /internal/referencement/demandes` et `POST /{id}/decision`. Les listes utilisent
+un curseur lié au périmètre et 25 éléments par défaut (100 maximum). Les clés de
+création sont uniques par organisation/commune/auteur ; les décisions conservent
+leur clé, empreinte et acteur. La migration additive est `v325_demandes_referencement.sql`.
+L'ERP donne accès depuis « Commerçants » à une section repliable ; l'actualisation
+locale conserve les motifs saisis et les filtres de la liste principale.
+
+## Préparer et vérifier un import (C2)
+
+La création exige les valeurs nom, adresse, commune, SIRET et email, au-delà de la
+simple présence des colonnes. Une règle de domaine commune s'applique au plan, à
+sa confirmation et à l'exécution ; un ancien plan incomplet ne peut donc être
+confirmé ou exécuté. Les cellules vides des mises à jour continuent à conserver les
+valeurs existantes. Les aliases d'en-tête non ambigus sont proposés, sans remplacer
+un mapping enregistré ; l'utilisateur peut les corriger et doit les enregistrer.
+
+Les similitudes de nom et d'adresse normalisés entre lignes du même fichier sont
+des avertissements distincts des erreurs. Elles ne changent ni le statut PRETE,
+ni les candidats d'identité, ni la sélection humaine. Les collisions email/SIRET
+et les ambiguïtés fortes restent bloquantes. L'analyse est bornée aux 100 lignes du
+lot ; elle ne prétend pas rechercher une similarité approximative globale.
+
+## Preuves et impacts
+
+Preuves attendues : création incomplète refusée en aperçu et exécution, mise à jour
+vide préservée, similitude non bloquante et collision forte bloquante ; demande
+multi-tenant refusée, rejouabilité et conflit de clé, décision/version/rejet,
+acceptation sans accès ni invitation, formulaire et historique responsive.
+Migration additive dédiée aux demandes ; contrats API et consommateur Animation
+mis à jour ensemble. Le générateur n'a pas à créer une demande pour rendre un
+commerce éligible : son parcours canonique demeure inchangé. Les sauvegardes de
+démonstration doivent inclure la nouvelle table lorsque des demandes existent.
+La recette réelle avec organisateurs reste distincte des tests automatisés.
+
+Preuves locales du 18 novembre : 68 tests backend ciblés réussis (domaine import,
+demande et préparation, orchestration demande, contrats HTTP import/demande), puis
+11 tests frontend réussis (transport/idempotence/reçu/pagination et associations
+d'en-têtes). Le fichier PostgreSQL `test_demandes_referencement_postgres.py` prévoit
+les habilitations réelles, la concurrence, l'acceptation sans accès et le rejet ;
+son exécution est rapportée dans le bilan commun, pas présumée ici. La vérification
+visuelle des deux points d'entrée est intégrée à la recette UI commune.

@@ -1,0 +1,217 @@
+{
+  "type": "maquettes-isolees",
+  "version": 2,
+  "simulation": true,
+  "orientations": [
+    {
+      "id": "A1",
+      "title": "Donner la priorité aux actions attendues",
+      "priority": "P1",
+      "vote": 12,
+      "effort": "M",
+      "file": "A1.html",
+      "states": [
+        {
+          "key": "accueil",
+          "label": "Accueil priorisé"
+        }
+      ]
+    },
+    {
+      "id": "B1",
+      "title": "Sauvegarder avant la fin des sept étapes",
+      "priority": "P1",
+      "vote": 12,
+      "effort": "L",
+      "file": "B1.html",
+      "states": [
+        {
+          "key": "saisie",
+          "label": "Saisie interrompable"
+        },
+        {
+          "key": "enregistre",
+          "label": "Enregistré / reprise"
+        },
+        {
+          "key": "echec",
+          "label": "Échec de sauvegarde"
+        }
+      ]
+    },
+    {
+      "id": "B2",
+      "title": "Expliquer préparation, accords et publication",
+      "priority": "P1",
+      "vote": 12,
+      "effort": "M",
+      "file": "B2.html",
+      "states": [
+        {
+          "key": "publication",
+          "label": "Préparer la publication"
+        },
+        {
+          "key": "demarrage",
+          "label": "Démarrer"
+        },
+        {
+          "key": "invitations",
+          "label": "Invitations"
+        },
+        {
+          "key": "dotation",
+          "label": "Dotation"
+        },
+        {
+          "key": "apercu",
+          "label": "Aperçu / QR provisoire"
+        }
+      ]
+    },
+    {
+      "id": "B3",
+      "title": "Proposer un seuil de passeport cohérent",
+      "priority": "P1",
+      "vote": 12,
+      "effort": "S",
+      "file": "B3.html",
+      "states": [
+        {
+          "key": "compatible",
+          "label": "Seuil initial cohérent"
+        },
+        {
+          "key": "incompatible",
+          "label": "Sélection modifiée"
+        }
+      ]
+    },
+    {
+      "id": "C1",
+      "title": "Rendre trouvable l’ajout d’un commerce absent",
+      "priority": "P1",
+      "vote": 9,
+      "effort": "L",
+      "file": "C1.html",
+      "states": [
+        {
+          "key": "selection",
+          "label": "Commerce absent"
+        },
+        {
+          "key": "demande",
+          "label": "Demande individuelle"
+        },
+        {
+          "key": "suivi",
+          "label": "Suivi de la demande"
+        }
+      ]
+    },
+    {
+      "id": "C2",
+      "title": "Sécuriser la compréhension de l’import",
+      "priority": "P1",
+      "vote": 9,
+      "effort": "L",
+      "file": "C2.html",
+      "states": [
+        {
+          "key": "apercu",
+          "label": "Similitudes à examiner"
+        },
+        {
+          "key": "colonnes",
+          "label": "Colonnes reconnues"
+        },
+        {
+          "key": "comparaison",
+          "label": "Contrôle humain"
+        },
+        {
+          "key": "confirmation",
+          "label": "Avant confirmation"
+        }
+      ]
+    },
+    {
+      "id": "D1",
+      "title": "Rétablir et fiabiliser Communication",
+      "priority": "P0",
+      "vote": 12,
+      "effort": "M",
+      "file": "D1.html",
+      "states": [
+        {
+          "key": "lecture",
+          "label": "Échec de lecture"
+        },
+        {
+          "key": "preparer",
+          "label": "Service rétabli / préparer"
+        },
+        {
+          "key": "apercu",
+          "label": "Aperçu avant envoi"
+        },
+        {
+          "key": "incertain",
+          "label": "Résultat incertain"
+        },
+        {
+          "key": "confirme",
+          "label": "Résultat confirmé"
+        },
+        {
+          "key": "refuse",
+          "label": "Envoi refusé"
+        }
+      ]
+    },
+    {
+      "id": "D2",
+      "title": "Diriger le suivi vers le suivi opérationnel",
+      "priority": "P1",
+      "vote": 12,
+      "effort": "S",
+      "file": "D2.html",
+      "states": [
+        {
+          "key": "suivi",
+          "label": "Suivi opérationnel"
+        },
+        {
+          "key": "bilan",
+          "label": "Bilan distinct"
+        }
+      ]
+    },
+    {
+      "id": "E1",
+      "title": "Rendre explicite le chemin de fin",
+      "priority": "P1",
+      "vote": 12,
+      "effort": "M",
+      "file": "E1.html",
+      "states": [
+        {
+          "key": "periode",
+          "label": "Période terminée"
+        },
+        {
+          "key": "confirmation",
+          "label": "Confirmation définitive"
+        },
+        {
+          "key": "dossiers",
+          "label": "Après clôture / lots"
+        },
+        {
+          "key": "bilan",
+          "label": "Bilan / tâches restantes"
+        }
+      ]
+    }
+  ]
+}

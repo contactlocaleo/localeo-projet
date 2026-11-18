@@ -1,0 +1,19 @@
+/* Corrections locales issues de la revue simulée v1. */
+button.primary:disabled,button.primary:disabled:hover{background:#e8edf0;color:#526575;border-color:#c6d2d9;cursor:not-allowed}
+.filter-pair{display:flex;gap:16px;flex-wrap:wrap;justify-content:flex-end;margin-bottom:12px}.filter-pair .field{min-width:190px}
+.current-label{display:block;font-size:11px;font-weight:700;color:#07594f;margin-bottom:6px}
+.location-marker{font-size:13px;color:#07594f;margin:0 0 16px}
+.mobile-cell-label{display:none}
+.content>.state>.notice+.panel{margin-top:20px}
+@media(max-width:800px){
+ .filter-pair{justify-content:flex-start;gap:0 16px}.filter-pair .field{min-width:0;flex:1 1 150px}
+ .tablewrap .responsive{display:block;min-width:0;width:100%}
+ .responsive thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+ .responsive tbody{display:block;width:100%}
+ .responsive tbody tr{display:block;padding:14px;border-bottom:1px solid #c6d2d9}
+ .responsive tbody tr:last-child{border-bottom:0}
+ .responsive tbody td,.responsive tbody th{display:block;border:0;padding:7px 0;overflow-wrap:anywhere}
+ .responsive tbody th{background:transparent;font-size:14px}
+ .responsive .mobile-cell-label{display:block;font-size:11px;font-weight:650;color:#526575;margin-bottom:3px}
+ .responsive .check{padding:5px 0}.responsive select{max-width:100%}
+}

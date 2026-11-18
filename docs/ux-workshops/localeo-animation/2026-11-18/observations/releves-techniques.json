@@ -1,0 +1,88 @@
+{
+  "dateLocale": "2026-11-18",
+  "url": "https://test-animations.localeo.city",
+  "browser": "151.0.7922.34",
+  "desktop": {
+    "width": 1440,
+    "height": 1000
+  },
+  "mobile": {
+    "width": 390,
+    "height": 844,
+    "physicalDevice": false,
+    "touchEmulation": false
+  },
+  "largeurs": [
+    {
+      "screen": "tableau-bord",
+      "viewport": 390,
+      "document": 390
+    },
+    {
+      "screen": "animations",
+      "viewport": 390,
+      "document": 390
+    },
+    {
+      "screen": "creation-informations",
+      "viewport": 390,
+      "document": 390
+    },
+    {
+      "screen": "configuration",
+      "viewport": 390,
+      "document": 390
+    },
+    {
+      "screen": "invitations",
+      "viewport": 390,
+      "document": 390
+    },
+    {
+      "screen": "import",
+      "viewport": 390,
+      "document": 390
+    },
+    {
+      "screen": "fin",
+      "viewport": 390,
+      "document": 390
+    },
+    {
+      "screen": "bilan",
+      "viewport": 390,
+      "document": 390
+    }
+  ],
+  "httpErrors": [
+    {
+      "path": "/protected/animation-locale/animations/9f2eebc4-bde6-47e0-877f-1e8ff2a28d7b/campagnes-organisateur",
+      "status": 500
+    },
+    {
+      "path": "/protected/animation-locale/animations/9f2eebc4-bde6-47e0-877f-1e8ff2a28d7b/campagnes-organisateur",
+      "status": 500
+    }
+  ],
+  "createdDrafts": [
+    {
+      "type": "tombola",
+      "id": "9e7d3fe3-0046-4b92-9705-5c53ad2916da"
+    },
+    {
+      "type": "passeport",
+      "id": "d83a41f2-aeb4-42a9-8447-fedba0476a1e"
+    },
+    {
+      "type": "clone",
+      "id": "3f7df158-21ad-4b76-b233-a44e9ade9d79"
+    }
+  ],
+  "import": {
+    "source": "UX TEST 2026-11-18",
+    "file": "ux-test-2026-11-18.csv",
+    "rows": 2,
+    "confirmed": false
+  },
+  "publicationDisabledOnTombolaDraft": true
+}

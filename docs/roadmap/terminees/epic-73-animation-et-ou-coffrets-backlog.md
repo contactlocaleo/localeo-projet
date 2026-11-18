@@ -1,5 +1,196 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+<a id="workshop-ux-20261118"></a>
+## Évolution du 18 novembre 2026 — suites du workshop UX Animation
+
+**E73-EVO-WORKSHOP-UX-20261118 — spécification et réalisation locales.**
+Rattachement à l’EPIC 73 existante : mêmes acteurs, parcours et propriétaires
+métier que ses extensions AP/PO/SA. **Clôture historique Terminée conservée** ;
+aucune nouvelle epic numérotée, aucun compteur modifié. Le périmètre nouveau
+est réalisé localement, sans être assimilé à la livraison historique ni à une
+mise en production. La demande suivante a explicitement invoqué les skills
+`localeo-specifier-epic` et `localeo-implementer-epic` pour ce périmètre.
+Le [bilan WA](../../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md#workshop-ux-20261118)
+est l'état courant : critères automatisés, limites humaines et deux dettes
+préexistantes y sont distingués. Les sections de cadrage ci-dessous conservent
+leurs preuves initiales, datées avant réalisation.
+
+### Origine, preuves et décisions applicables
+
+- Demande du 18 novembre : analyser le workshop Localeo Animation du même jour,
+  identifier les évolutions/corrections arbitrées et les cadrer avec le skill
+  `localeo-creer-epic`. Le cadrage prolonge E73 ; il ne duplique pas son backlog.
+- [Rapport exécutif](../../ux-workshops/localeo-animation/2026-11-18/workshop/rapport-executif.md),
+  [votes nominatifs](../../ux-workshops/localeo-animation/2026-11-18/workshop/votes-et-arbitrages.md),
+  [backlog de l’atelier](../../ux-workshops/localeo-animation/2026-11-18/workshop/backlog-ux.md),
+  [constats AN](../../ux-workshops/localeo-animation/2026-11-18/observations/observations-factuelles.md),
+  [maquettes v2](../../ux-workshops/localeo-animation/2026-11-18/visuels/comparatif-avant-apres.html)
+  et [réserves de validation](../../ux-workshops/localeo-animation/2026-11-18/validation/risques-critiques.md).
+- 17 propositions et 204 votes **simulés** ; 11 adoptées : 1 P0, 8 P1, 2 P2.
+  La demande actuelle autorise leur inscription dans le programme de travail.
+  Elle n’est pas une recette de leurs maquettes ni une preuve de gain mesuré.
+- **E73-WA-DEC-01 — primauté de l’atelier :** interrogé sur le conflit D2/PO-13,
+  l’utilisateur répond : « il faut privilégier les retours de l'atelier à
+  l'existant si contrediction ». Cette décision explicite remplace les choix
+  contradictoires ci-dessous ; les règles non contredites restent applicables.
+- **E73-WA-DEC-02 — D2 :** « Consulter le suivi » doit ouvrir le suivi
+  opérationnel, avec un accès Bilan distinct. Cette cible remplace la destination
+  Bilan de la décision D2 du 17 novembre et de **PO-13**, dont l’identifiant est
+  conservé. Il s’agit d’un changement produit décidé, pas de la preuve que le
+  code conforme à l’ancienne décision était défectueux.
+- **E73-WA-DEC-03 — E2 :** le rejet par l’atelier de la clôture programmée prime
+  désormais sur l’activation automatique à échéance de CAF-A1/CAF-01/02. Ne pas
+  réaliser ce mécanisme ni son réglage activé par défaut. Clôture manuelle et
+  confirmation restent la cible de ce programme. Les exigences indépendantes
+  de rapport aux responsables et de report de date (CAF-A2/A3) ne sont pas
+  annulées : leur lot devra être recadré hors automatisation. La spécification
+  CAF historique reste conservée et annotée ; ses trois anciens lots ne sont
+  plus exécutables tels quels. Aucun mécanisme déjà déployé n’est désactivé ici.
+- **E73-WA-DEC-04 — portée C2 :** le texte voté exige de distinguer colonne
+  requise et cellule requise et de conserver les conflits forts. Il ne décide
+  pas de rendre SIRET/email facultatifs pour créer une fiche. Les obligations
+  E73-DEC-92/CA-42 restent applicables ; l’aperçu permissif AN-13 est un écart à
+  diagnostiquer, sans création effective démontrée.
+
+Le [registre des décisions](../../ux-workshops/localeo-animation/2026-11-18/validation/decisions.md)
+trace l’accord explicite D2 et la primauté globale ; il ne transforme pas les
+autres votes fictifs en approbations individuelles de maquettes.
+
+### Problème, acteurs et résultat attendu
+
+Associations de commerçants, communes et organisateurs doivent préparer,
+publier, suivre puis terminer une animation sans perdre leur travail ni
+confondre brouillon, accord, activation, publication et remise. L’exploration
+TEST constate notamment la sauvegarde tardive, un seuil passeport à corriger,
+un import peu explicite et deux erreurs 500 de Communication. Les réactions,
+bénéfices et notes heuristiques de l’atelier sont simulés.
+
+Exemple cible : une préparation interrompue peut être enregistrée explicitement
+puis reprise ; le diagnostic indique la prochaine action autorisée ; le suivi
+ouvre les opérations et le bilan reste accessible. Aucun délai de création
+« 5 à 10 minutes » n’est tenu pour acquis. Le commit déployé TEST n’est pas
+identifié : les réalisations locales AP/PO/SA ne prouvent ni leur déploiement
+ni l’existence actuelle de tous les écarts observés.
+
+### Périmètre retenu et rapprochement avec l’existant
+
+Efforts S/M/L relatifs, issus du workshop, à réestimer après inventaire ; pas
+des jours ni un engagement. « À réaliser » signifie traiter l’écart résiduel,
+en réutilisant l’existant et ses preuves quand elles sont encore applicables.
+
+| Atelier | Priorité / voix / effort | Travail retenu et qualification | Acquis à réutiliser / limite |
+| --- | --- | --- | --- |
+| A1 | P1 · 12/12 · M | Complément UX : actions avant nouvelles, succès/info/alerte distincts | AP-02/07/12, PO-17 ; pas de nouveau calcul d’urgence, commune/filtres conservés |
+| B1 | P1 · 12/12 · L | Évolution : brouillon incomplet durable dès modèle/nom/commune, reprise et échec explicites | AP-03/04, PO-07..11 et CU-05 protègent déjà la saisie ; une garde de sortie ou mémoire locale ne suffit pas à prouver la sauvegarde serveur |
+| B2 | P1 · 12/12 · M | Compléments résiduels : annoncer brouillon→accords→publication ; diagnostic acteur/action/raison/lien, dotation et aperçu | PO-01..06/17/19, SA-01, AP-13/14/17 ; vérifier la version TEST avant de refaire les blocs déjà réalisés. E78 PU-06/07 pour vitrines |
+| B3 | P1 · 12/12 · S | Correction ergonomique à qualifier : seuil initial atteignable et ajustement explicite après changement de sélection | Règles du moteur, origine automatique/manuelle du seuil, AP-14 ; AN-05/DOM, capture AVANT partielle |
+| C1 | P1 · 9/12 · L | Évolution d’entrée et de suivi : commerce absent → demande individuelle de référencement | OA-01..04, CA-43/DEC-99, Référencement/ERP et E68 ; vérifier droits et propriétaire, sans activation/participation/invitation implicites |
+| C2 | P1 · 9/12 · L | Mixte : préassociation des colonnes et libellés ; avertissement de similitude ; diagnostic des obligations en aperçu/confirmation | CA-42..45, DEC-91..104 ; contrôle humain, conflits email/SIRET préservés, aucune fusion ni création incomplète autorisée par un simple aperçu |
+| D1 | P0 · 12/12 · M provisoire | Correction : reproduire/diagnostiquer les 500 et rétablir lecture, préparation, aperçu, historique et résultats | CA-47..49, AP-06/07/14 ; droits, quotas, préférences et reprise sans double envoi ; panne locale observée, portée générale inconnue |
+| D2 | P1 · 12/12 · S | Évolution de destination explicitement arbitrée : suivi opérationnel et Bilan séparés | Remplace PO-13 selon DEC-02 ; conserver sa politique serveur commune et les définitions SA-04 |
+| E1 | P1 · 12/12 · M | Compléments UX : états de fin, confirmation, dossiers et acteur/action restants | AP-18..20, PO-25/26, SA-06/07, FA et GL déjà largement réalisés ; conserver information/remise/réception/consommation distinctes, sans ajouter CAF automatique |
+| F1 | P2 · 7/12 · M | Évolution ultérieure : vues filtrées sauvegardées et partagées dans l’organisation | AP-05/08, PO-09/10 conservent déjà le contexte ; partage nouveau, gain hypothétique ; aucune maquette livrée à l’étape 3 |
+| G1 | P2 · 10/12 · M | Complément ultérieur : raccourcis de tâches mobiles selon état/droits | AP-11/12, PO-20..24, CU-06, E78 PU-08 ; sélecteur complet conservé, bénéfice à tester ; aucune maquette d’étape 3 |
+
+**Exclusions de ce programme :** A2 personnalisation (0/12), B4 formulaire unique
+(4/12), C3 relances programmées (6/12), E2 clôture programmée (1/12), F2 calendrier
+(5/12), G2 visite guidée (4/12). Les risques sous-jacents demeurent. Pas de refonte
+globale, nouveau référentiel commerçant, modification des qualifications, fusion
+automatique, participation, publication ou notification implicite. Les sujets
+Localeo Pro/Live de workshops distincts ne sont pas intégrés par analogie.
+
+### Lots de réalisation à préparer
+
+| Lot | Contenu | Dépendance / résultat attendu |
+| --- | --- | --- |
+| WA-L0 | Inventaire du code/version et qualification D1/B3/C2 | Relier chaque constat à sa version ; reproduire sur données isolées ; ne pas annoncer un correctif déjà livré ou refaire un acquis local |
+| WA-L1 | D1 et écarts de validation C2 réellement reproduits | Corriger le comportement attendu avec preuves ; D1 P0 si Communication fait partie de l’ouverture |
+| WA-L2 | A1, B2, B3, D2, E1 et libellés/mapping C2 | Appliquer les différences UX retenues sur composants existants, y compris le remplacement explicite de PO-13 |
+| WA-L3 | B1, C1, similitudes C2 | Spécifier les contrats et refus, puis persistance/états/interfaces ; parties indépendantes poursuivables sans attendre tout le lot |
+| WA-L4 | F1 et G1, P2 | Après priorités P0/P1 et premiers retours ; cadrage propre du partage et des accès mobiles, sans les déclarer livrés par les neuf maquettes |
+| WA-L5 | Recette transverse et bilan | Parcours isolés de bout en bout, accessibilité et tests organisateurs ; documenter restant et limites, sans nouvelle campagne réelle |
+
+Le recadrage du solde CAF sans clôture automatique est une dépendance documentaire
+distincte ; il n’ajoute pas son coût au lot E1. Ce document ne lance aucun lot.
+
+### Critères d’acceptation complémentaires
+
+IDs **E73-WA-01 à E73-WA-18** stables. Ils s’ajoutent aux critères existants,
+sauf la destination de PO-13 explicitement remplacée. Preuves **à produire**.
+
+| Critère | Acteur/préconditions et action | Résultat observable et effets interdits |
+| --- | --- | --- |
+| E73-WA-01 · A1 | Organisateur autorisé, accueil avec actions et nouvelles | Actions et création avant nouvelles ; succès/info/alerte distingués par texte et repère ; toutes nouvelles accessibles, commune/filtres/navigation préservés |
+| E73-WA-02 · B1 | Modèle, nom et commune renseignés, préparation incomplète ; Enregistrer | Brouillon durable confirmé seulement après succès serveur ; aucune invitation/publication ; contrôles complets conservés au moment de publier |
+| E73-WA-03 · B1 | Brouillon enregistré puis fermeture/reconnexion, ou échec d’enregistrement | Reprise des valeurs réellement persistées et manquants explicites ; échec conserve la saisie, aucune annonce de succès inventée, droits revérifiés |
+| E73-WA-04 · B2 | Démarrer puis préparer une animation avec accords manquants | Résultat brouillon annoncé ; chaque blocage connu montre acteur, raison, action autorisée et accès ciblé ; accord et activation distincts, statut inconnu non inventé |
+| E73-WA-05 · B2 | Configurer les dotations puis consulter l’aperçu | Modes existants expliqués, responsable/consignes conservés ; aperçu et QR définitif après publication distincts ; aucune promesse de durée non mesurée |
+| E73-WA-06 · B3 | Passeport neuf avec deux commerces puis modification de sélection | Valeur initiale compatible ; choix manuel préservé ; incompatibilité signalée et ajustement explicite ; rejet serveur des configurations invalides |
+| E73-WA-07 · C1 | Organisateur recherche un commerce absent | Entrée explicite vers le circuit canonique identifié ; droits et responsable vérifiés ; aucun droit interne ERP transmis à l’organisateur |
+| E73-WA-08 · C1 | Soumettre puis consulter une demande autorisée, ou subir un refus | Résultat réel, état et prochaine action compréhensibles ; demande, éligibilité, activation et participation distinctes ; aucune invitation automatique ni délai inventé |
+| E73-WA-09 · C2 | Import du modèle et fichier incomplet | Colonnes reconnues préassociées et corrigeables ; obligations de colonne/valeur explicites ; erreurs de ligne ; valeurs requises pour création selon CA-42 contrôlées à l’aperçu et à l’exécution |
+| E73-WA-10 · C2 | Deux lignes de nom/adresse proches, avec ou sans identifiants forts | Similitude présentée comme doute à examiner ; contrôle humain, conflits forts conservés ; aucune fusion/rejet automatique fondé seulement sur similitude ; lignes/effets confirmés avant exécution |
+| E73-WA-11 · D1 | Reproduire les lectures ayant échoué puis traiter leur cause | Cause et portée documentées ; lecture rétablie et vérifiée dans le contexte concerné ; préparation/aperçu/historique testés, aucune panne globale supposée |
+| E73-WA-12 · D1 | Destinataires de test isolés ; réussite, refus, lecture échouée et issue d’envoi inconnue | États distincts et contexte conservé ; demande confirmée ne vaut ni distribution ni lecture ; vérification avant nouvel envoi, aucun rejeu automatique d’un résultat incertain |
+| E73-WA-13 · D2 | Animation en cours ; action Consulter le suivi | Suivi opérationnel directement ouvert ; Bilan accessible séparément ; destination commune conforme à PO-13 révisé, retour/contexte/droits conservés, définitions et dates exactes |
+| E73-WA-14 · E1 | Fin de période puis décision de clôture manuelle et traitement de lots | Fin de période/clôture/terminée/archives distinctes ; confirmation et conséquences explicites ; tâches/acteur connus visibles ; information, remise et consommation jamais confondues ; aucune programmation automatique ajoutée |
+| E73-WA-15 · F1 | Équipe d’une organisation sauvegarde et partage des filtres | Filtres visibles et réinitialisables, recherche courante préservée ; partage sans droit additionnel ni accès inter-organisation ; incompatibilité après révocation expliquée |
+| E73-WA-16 · G1 | Organisateur sur téléphone, animation avec tâches autorisées | Raccourcis selon état/droits, rubrique/contexte visibles ; sélecteur complet et retours conservés ; accès vérifiés sur appareil réel, clavier et lecteur d’écran |
+| E73-WA-17 · Transverse | Appels directs, droits retirés, répétition ou réponse obsolète sur parcours modifiés | Domaine backend propriétaire des validations/droits ; aucune activation/publication/envoi/remise implicite ; filtres/saisie/focus préservés lors des lectures locales, données privées retirées si accès perdu |
+| E73-WA-18 · Recette | Scénarios tombola/passeport, publication/préparation/suivi/fin sur jeu isolé | Preuves succès/refus/reprise et parcours réels recueillies ; tests avec organisateurs dont deux peu familiers du numérique ; durée active et attentes séparées, aucun gain ni autonomie déclarés sur votes simulés seuls |
+
+### Impacts initiaux à instruire
+
+| Sujet | Impact initial et sources |
+| --- | --- |
+| Applications et domaine | **Concernés** : Animation présente ; backend/domaines Animation et Référencement portent droits, brouillon, seuils, import et campagnes ; ERP traite les demandes canoniques C1. Pro et Live à examiner pour les contrats consommés et la recette bout en bout, sans nouvelle fonction imposée |
+| API et consommateurs | **Concernés / à spécifier** : brouillon partiel B1, demandes C1, aperçu C2, recommandation D2 ; réutiliser [modules/import/communication](../../specifications/epic-73-animation-et-ou-coffrets/modules-souscriptions-import-communication.md), [parcours organisateur](../../specifications/epic-73-animation-et-ou-coffrets/parcours-organisateur.md), OA et contrats documentaires existants ; diagnostic D1 avant changement d’API |
+| Persistance et migrations | **À examiner** : validation/persistance partielle B1, demande C1, préférences partagées F1, avertissements d’import ; aucune migration déduite d’un rendu, aucune suppression de données |
+| Démonstration et fixtures | **Concernés** : brouillons incomplets, demandes à examiner, similitudes/identifiants manquants, succès/refus/incertitude campagnes, états de fin et rôles ; générateur/restaurateur dans leur dépôt applicatif, transports factices, aucune génération distante implicite |
+| Documentation fonctionnelle | **Concernée** : AP/PO/SA/CU et guides création/import/communication/fin ; PO-13 remplacé, CAF automatique retiré du périmètre futur selon DEC-03 ; conserver historique et provenance des preuves |
+| Exploitation et livraison | **À examiner** : versions réelles TEST, cause D1, transport/quotas/reprise, erreurs et métriques sans données privées ; ordre backend/frontends selon contrats, opérations externes distinctes |
+| Performance | **À examiner** pour F1, rapprochements C2, lectures C1/B1/D1 ; bornes/pagination, nombre de requêtes, idempotence et concurrence selon risque ; ne pas déduire la capacité à 500 organisations de l’audit |
+| Coffrets, paiements et reversements | **Sans évolution demandée** : conserver leurs règles et accès ; ils ne sont concernés que si une régression de navigation/contrat est démontrée, pas de nouveau lot financier |
+
+### Questions techniques et passage à la spécification
+
+La direction produit D2 est résolue ; elle ne doit plus bloquer le cadrage.
+Restent à instruire : forme exacte du brouillon incomplet B1 et compatibilité,
+circuit/permission de demande individuelle C1, seuil et coût des similitudes C2,
+cause D1, stockage/droits des vues F1. Ces inconnues n’empêchent pas les
+compléments indépendants. Les critères retenus ne doivent pas être réduits
+pour faire passer un contrôle existant.
+
+Pour spécifier, enrichir les sources E73 existantes selon le sujet :
+[parcours organisateur](../../specifications/epic-73-animation-et-ou-coffrets/parcours-organisateur.md),
+[périmètres et parcours SaaS](../../specifications/epic-73-animation-et-ou-coffrets/perimetres-parcours-saas.md),
+[modules/import/communication](../../specifications/epic-73-animation-et-ou-coffrets/modules-souscriptions-import-communication.md),
+[fin et archives](../../specifications/epic-73-animation-et-ou-coffrets/fin-animation-archives.md).
+Conserver les invariants du [moteur](../../specifications/moteur-animation/localeo_animation_engine_spec.md)
+et les critères des dépendances E68/E78 ; ne pas créer une seconde spécification
+par application. La future recette compare versions déployées et locales ; les
+résultats AP/PO/SA antérieurs ne valident pas automatiquement les cibles WA.
+
+**Bilan historique du cadrage, avant la demande de spécification/implémentation.**
+Aucune modification applicative, aucun test métier ni déploiement exécuté.
+Les critères WA restent à réaliser et à prouver, avec leur recette humaine
+distincte. Contrôles du 18 novembre sur `localeo-projet`, base `7164846` avec
+les modifications documentaires présentes :
+
+- `py -3 scripts/check_guidance.py --document <backlog E73 et documents touchés>` :
+  118 guides, 2068 liens locaux, zéro erreur et zéro avertissement. Les onze
+  documents ciblés complètent les guides contrôlés par défaut.
+- `py -3 scripts/sync_documentation.py --check-sources` : 151 documents vérifiés.
+- `git diff --check` : succès. Les quatre dépôts applicatifs sont propres ;
+  aucun changement d’application ni de contrat OpenAPI généré.
+- Contrôle ciblé : 18 IDs WA uniques ; sur les 258 fichiers du manifeste de
+  préparation d’étape 4, seuls README et les quatre documents de décision
+  actualisés ont changé. Les 253 autres fichiers, dont captures, maquettes,
+  votes et rapports, sont inchangés. Archive Pro : 107 empreintes inchangées.
+- Revue documentaire indépendante : recouvrements AP/PO/SA et conflits D2,
+  E2/CAF, C2 examinés ; références résiduelles de destination/compatibilité et
+  contrats CAF corrigées. Aucun résultat de test applicatif déduit de cette revue.
+
 ## Évolution du 18 novembre 2026 — suivi Animation et Pro
 
 **E73-EVO-SUIVI-ANIMATION**, [SA-01 à SA-07](../../specifications/epic-73-animation-et-ou-coffrets/parcours-organisateur.md#évolution-du-18-novembre-2026--suivi-animation-et-pro) :
@@ -164,6 +355,10 @@ E73 reste Terminée pour sa clôture historique. Les changements documentaires
 E73-EVO-CLOTURE-AUTO préexistants restent un périmètre indépendant.
 
 ## Évolution du 12 novembre 2026 — clôture automatique et report de fin
+
+**Mise à jour du 18 novembre :** volet de clôture automatique retiré des travaux futurs selon E73-WA-DEC-03 ; report/rapport indépendants à recadrer. Les mentions de réalisation à faire ci-dessous décrivent le plan antérieur, conservé pour traçabilité.
+
+
 
 **E73-EVO-CLOTURE-AUTO** : option par animation, activée par défaut pour les
 nouvelles ; clôture à fin effective atteinte avec le workflow participant existant,

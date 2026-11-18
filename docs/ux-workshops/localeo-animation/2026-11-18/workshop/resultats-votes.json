@@ -1,0 +1,111 @@
+{
+  "simulation": true,
+  "validation_utilisateur": false,
+  "seuil": 7,
+  "participants": 12,
+  "nombre_votes": 204,
+  "resultats": {
+    "A1": {
+      "pour": 12,
+      "contre": 0,
+      "abstention": 0,
+      "statut": "ADOPTÉE"
+    },
+    "A2": {
+      "pour": 0,
+      "contre": 11,
+      "abstention": 1,
+      "statut": "REJETÉE"
+    },
+    "B1": {
+      "pour": 12,
+      "contre": 0,
+      "abstention": 0,
+      "statut": "ADOPTÉE"
+    },
+    "B2": {
+      "pour": 12,
+      "contre": 0,
+      "abstention": 0,
+      "statut": "ADOPTÉE"
+    },
+    "B3": {
+      "pour": 12,
+      "contre": 0,
+      "abstention": 0,
+      "statut": "ADOPTÉE"
+    },
+    "B4": {
+      "pour": 4,
+      "contre": 7,
+      "abstention": 1,
+      "statut": "REJETÉE"
+    },
+    "C1": {
+      "pour": 9,
+      "contre": 0,
+      "abstention": 3,
+      "statut": "ADOPTÉE"
+    },
+    "C2": {
+      "pour": 9,
+      "contre": 0,
+      "abstention": 3,
+      "statut": "ADOPTÉE"
+    },
+    "C3": {
+      "pour": 6,
+      "contre": 5,
+      "abstention": 1,
+      "statut": "NON ADOPTÉE"
+    },
+    "D1": {
+      "pour": 12,
+      "contre": 0,
+      "abstention": 0,
+      "statut": "ADOPTÉE"
+    },
+    "D2": {
+      "pour": 12,
+      "contre": 0,
+      "abstention": 0,
+      "statut": "ADOPTÉE"
+    },
+    "E1": {
+      "pour": 12,
+      "contre": 0,
+      "abstention": 0,
+      "statut": "ADOPTÉE"
+    },
+    "E2": {
+      "pour": 1,
+      "contre": 9,
+      "abstention": 2,
+      "statut": "REJETÉE"
+    },
+    "F1": {
+      "pour": 7,
+      "contre": 3,
+      "abstention": 2,
+      "statut": "ADOPTÉE"
+    },
+    "F2": {
+      "pour": 5,
+      "contre": 6,
+      "abstention": 1,
+      "statut": "REJETÉE"
+    },
+    "G1": {
+      "pour": 10,
+      "contre": 0,
+      "abstention": 2,
+      "statut": "ADOPTÉE"
+    },
+    "G2": {
+      "pour": 4,
+      "contre": 6,
+      "abstention": 2,
+      "statut": "REJETÉE"
+    }
+  }
+}
