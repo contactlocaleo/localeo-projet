@@ -1,5 +1,11 @@
 # Roadmap produit
 
+**18 novembre 2026 — E73-EVO-WORKSHOP-LIVE-20261118** :
+[six orientations Live retenues pour cadrage](terminees/epic-73-animation-et-ou-coffrets-backlog.md#workshop-live-20261118),
+B1/C1/D1/E1 P1 et A1/F1 P2 ; 18 critères WL, quatre lots de qualification,
+évolution/correction et recette. [Spécification et réalisation locales](../specifications/epic-73-animation-et-ou-coffrets/workshop-live-20261118.md), recette humaine ouverte ;
+aucune nouvelle epic, clôture historique E73 et compteurs inchangés.
+
 **Évolution du 7 novembre 2026 — E73-EVO-LIVE-ADHESION** : prochaine action
 personnelle, continuité inscription/carnet, UI ludique et retour utile dans Live.
 Les 13 recommandations de l’audit sont tracées en trois lots et 17 critères dans

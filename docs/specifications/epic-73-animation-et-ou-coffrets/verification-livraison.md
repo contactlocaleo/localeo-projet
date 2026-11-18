@@ -1,5 +1,18 @@
 # E73 — Vérification, migration et livraison
 
+<a id="workshop-live-20261118"></a>
+## Workshop Live — réalisation du 18 novembre 2026
+
+**E73-EVO-WORKSHOP-LIVE-20261118 : spécification et implémentation locales.**
+Les six orientations et 18 critères sont suivis dans le
+[bilan WL canonique](workshop-live-20261118.md#bilan-dexécution) : code et tests
+Marketplace, documentation Projet ; aucun changement d'API ni migration.
+Les essais habitants, le lecteur d'écran et le clavier virtuel sur appareil
+réel restent à qualifier. La [publication Git ensuite autorisée](workshop-live-20261118.md#publication-git-autorisée-le-18-novembre-2026)
+trace le commit Marketplace `29053df` poussé et la documentation associée ;
+aucun déploiement effectué pour WL.
+La livraison historique E73 et les opérations WA ci-dessous restent distinctes.
+
 <a id="workshop-ux-20261118"></a>
 ## Workshop UX Animation — réalisation du 18 novembre 2026
 

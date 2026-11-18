@@ -2,6 +2,11 @@
 
 [Retour à la roadmap](../README.md)
 
+**18 novembre 2026 — complément E73-WL** :
+[suites du workshop Live](epic-73-animation-et-ou-coffrets-backlog.md#workshop-live-20261118),
+six orientations, 18 critères ; [spécification et réalisation locales](../../specifications/epic-73-animation-et-ou-coffrets/workshop-live-20261118.md),
+recette humaine ouverte, sans réouverture de l'EPIC 73.
+
 64 EPIC terminées : 62 du tronc commun et deux identifiants applicatifs
 (EPIC-MARKETPLACE-18 et EPIC-PRES-CONTENU-001). Les EPIC 3 et 4 restent décrites
 dans la roadmap produit ; les 62 autres disposent chacune d'un fichier ci-dessous.

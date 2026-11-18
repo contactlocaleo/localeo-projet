@@ -1,5 +1,11 @@
 # E73 — Localeo Live, entrée unique des animations
 
+**Suites du workshop du 18 novembre 2026 :** la
+[spécification E73-WL](workshop-live-20261118.md) complète les comportements
+ci-dessous pour le programme, le carnet vide et l'issue QR refusé. Elle porte
+les preuves de continuité/lots/reprise et la correction de contraste, sans
+nouvelle règle métier. Les limites humaines sont conservées dans son bilan.
+
 ## Correctifs du 18 novembre 2026 — carnet, découverte et notification
 
 Suite aux observations du demandeur sur Localeo Live, ces décisions précisent

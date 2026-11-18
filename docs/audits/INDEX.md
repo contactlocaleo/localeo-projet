@@ -2,6 +2,8 @@
 
 Constats datés conservés par application. Un audit ancien ne décrit pas automatiquement l’état actuel.
 
+- [Localeo Live — arbitrages et actions du workshop du 18 novembre 2026](marketplace/localeo-live-workshop-arbitrages-2026-11-18.md) : six orientations prises en compte dans E73-WL, quatre P1 et A1/F1 P2 ; programme et carnet vide améliorés, QR refusé clarifié, contraste corrigé, continuité/lots/reprise qualifiés sur fixtures. Réalisation locale : 102 scénarios navigateur et 318 tests de sécurité réussis ; lecteur d'écran, clavier virtuel réel et essais habitants encore ouverts.
+
 - [Localeo Live — audit UX habitant et maquettes validées — 17 novembre 2026](marketplace/localeo-live-ux-habitant-maquettes-2026-11-17.md) : cinq parcours, décisions produit et direction artistique validées, deux planches conservées et exigence de mise en conformité stricte de l’application. Audit initial sans implémentation ni essai habitant ; mise en œuvre locale du 18 novembre et preuves reliées à E73-EVO-LIVE-MAQUETTES, avec maintien de l’en-tête et de ses outils explicitement accepté.
 
 - [Préparation des commerçants — Juste Prix et Jeu des vitrines — 17 novembre 2026](localeo-animation-pro-preparation-commercants-2026-11-17.md) : quatre orientations pour le parcours commerçant et son suivi par l'association, avec règles propres aux deux modèles et protocole à tester. Lecture de sources et scénarios fictifs ; aucun essai applicatif ou utilisateur pendant la séance.

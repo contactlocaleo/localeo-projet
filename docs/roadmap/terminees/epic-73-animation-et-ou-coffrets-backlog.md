@@ -1,5 +1,123 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+<a id="workshop-live-20261118"></a>
+## Évolution du 18 novembre 2026 — suites du workshop UX Live
+
+**E73-EVO-WORKSHOP-LIVE-20261118 — spécification et réalisation locales des six orientations.**
+L'utilisateur confirme le 18 novembre : « Retenir les six orientations, avec
+A1/F1 en P2 ». B1/C1/D1/E1 sont P1 ; aucun P0 établi. L'identifiant et le
+préfixe de critères **E73-WL** sont distincts du workshop Animation **E73-WA**
+et du workshop Pro **E80** ; recherche d'absence de collision effectuée avant ajout.
+
+L'EPIC 73 est réutilisée : mêmes parcours habitant, propriétaire métier et
+consommateur Live. **État produit historique : Terminée**, sans réouverture,
+nouvelle epic numérotée ni modification des compteurs. Cette extension reste
+suivie dans la [spécification et le bilan WL](../../specifications/epic-73-animation-et-ou-coffrets/workshop-live-20261118.md).
+La demande suivante a explicitement autorisé spécification et implémentation.
+Les compléments et corrections sont réalisés localement ; la recette humaine
+reste ouverte et la clôture historique ne vaut pas validation de cette extension.
+
+### Références et décisions
+
+- [Audit des arbitrages et recouvrements](../../audits/marketplace/localeo-live-workshop-arbitrages-2026-11-18.md).
+- [Workshop Live / Bouliac](../../ux-workshops/localeo-live/2026-11-18/README.md),
+  [orientations](../../ux-workshops/localeo-live/2026-11-18/workshop/backlog-ux.md),
+  [registre utilisateur](../../ux-workshops/localeo-live/2026-11-18/validation/decisions.md).
+- [Spécification canonique Live](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md) :
+  LM-01 à LM-11, correctifs LIVE-COR-01 à LIVE-COR-07 et preuves existantes.
+- [Principes UX et maquettes obligatoires](../../produit/live/principes-ux.md),
+  [convention des dates](../../architecture/transverse/affichage-dates.md).
+
+**E73-WL-DEC-01** : adoption utilisateur des six orientations pour leur cadrage,
+avec A1/F1 P2. Les 144 votes antérieurs sont simulés et restent distincts de
+cette décision. L'adoption ne constitue ni validation graphique détaillée des
+14 planches, ni autorisation déduite d'une mise en production.
+
+**E73-WL-DEC-02** : la portée retenue de B1/C1/E1/F1 est conditionnelle :
+vérifier les parcours, puis corriger seulement les écarts établis. Une preuve
+applicable de conformité satisfait le critère sans modification artificielle.
+Les états descriptifs des maquettes ne créent aucune nomenclature métier.
+
+### Problème et résultat attendu
+
+L'habitant doit comprendre les trois missions, conserver le contexte de son
+inscription, retrouver sa participation et ses gains, préparer leur utilisation
+et repérer les prochaines animations. Le workshop observe un programme dense
+et des parcours vides ; il ne prouve aucune rupture du parcours QR positif,
+aucune mauvaise remise ni aucun défaut du carnet rempli. L'amélioration de la
+compréhension demeure une hypothèse à mesurer avec des habitants.
+
+Exemple cible D1 : depuis le haut de Découvrir, accéder à Prochainement et
+comparer titre, dates, état, commune et conditions déterminantes avant d'ouvrir
+une fiche, sans traverser les descriptions longues des animations en cours.
+
+### Périmètre et lots
+
+| Lot | Orientations et portée | Dépendance / sortie attendue |
+| --- | --- | --- |
+| WL-L0 | Qualification de la version courante, couverture E73 et écarts B1/C1/E1/F1 | Données isolées et autorisées, QR valide, carnet rempli, lots ; matrice existant/preuve/écart, sans nouvelle génération sur environnement réel |
+| WL-L1 | D1 et corrections P1 B1/C1/E1 établies ; QW-2 et QW-3 inclus | Conception compatible avec les références validées ; états succès/refus/incertain ; corrections seulement après reproduction |
+| WL-L2 | A1 et F1 P2 ; QW-1 inclus | Texte utile et reprise sans doublon avec LM-04/05/06 ; peut réutiliser les preuves de WL-L0 |
+| WL-L3 | Recette transversale, accessibilité et compréhension habitant | Résultats réels, limites et restant consignés séparément des maquettes et votes |
+
+Exclusions : quatrième onglet, suppression de champs obligatoires, consommation
+par affichage de QR, grille mensuelle imposée, navigation à icônes seules,
+notifications exigées dès l'entrée. Pas de nouvelle règle d'inscription,
+de gain, de remise, de synchronisation de compte ou de clôture automatique.
+Le header et ses outils, les trois onglets, les corrections LIVE-COR et les
+droits existants sont conservés. D1 concerne Découvrir et ne remplace pas
+la priorité progression/résultat du parcours personnel LM-06.
+
+### Critères d'acceptation complémentaires
+
+Les IDs **E73-WL-01 à E73-WL-18** tracent les suites du workshop et leur recette.
+Ils complètent les critères LM sans les remplacer ; les correctifs du 18 novembre
+priment sur les anciennes formulations. Les résultats exécutés et leurs limites
+sont consignés dans le bilan WL ; le cadrage initial ne constituait pas une preuve.
+
+| Critère / source | Acteur, précondition et action | Résultat observable et effets interdits |
+| --- | --- | --- |
+| E73-WL-01 · A1, LM-01 | Habitant, carnet vide, lecture à 320 px et texte 200 % | Texte court reliant animations, lots et programme ; destinations existantes, action de découverte accessible ; aucun gain ni compte synchronisé promis |
+| E73-WL-02 · A1/D1 | Habitant ouvre Découvrir | Programme et accès aux animations à venir nommés explicitement ; trois onglets conservés, pas de nouvelle rubrique principale |
+| E73-WL-03 · B1, LM-04 | Jeu autorisé, QR valide, fiche, inscription et confirmation | Identité publique connue conservée et prochaine action explicite ; confirmation fondée sur réponse métier, sauvegarde d'accès distincte |
+| E73-WL-04 · B1, LM-04 | Lien invalide/expiré, erreur ou résultat d'inscription incertain | Erreur compréhensible, vérification/récupération et retour utiles ; aucun succès fabriqué, double envoi silencieux ni donnée personnelle révélée par un code inconnu |
+| E73-WL-05 · B1/F1, LM-04/05 | Inscription confirmée, fermeture puis retour ou récupération | Participation autorisée retrouvable, destination explicite ; échec de stockage expliqué, aucun accès d'un autre habitant |
+| E73-WL-06 · C1, LM-09 | Gagnant consulte les trois natures de gains et leurs états applicables | Disponibilité, remise, expiration, annulation et incertitude distinguées selon les faits du domaine ; pas de retrait proposé pour un état inutilisable |
+| E73-WL-07 · C1, LM-09 | Gagnant consulte un lot disponible ou des modalités incomplètes | Gain, état, échéance, lieu/mode et consignes disponibles avant action adaptée ; absence d'information explicite, jamais inventée ; aide existante accessible |
+| E73-WL-08 · C1, LM-10 | Ouvrir/fermer le bon, marquer comme vu puis relire après remise | Consultation et repère local ne consomment rien ; remise affichée seulement après confirmation métier ; autre appareil soumis à accès/récupération autorisés |
+| E73-WL-09 · D1, LM-03 | Habitant consulte le programme avec animations en cours/à venir | Prochainement accessible depuis le haut ; présentation compacte avec titre, période réelle, état et commune, manque de date explicite |
+| E73-WL-10 · D1 | Habitant compare les groupes temporels et ouvre une fiche | Ordre chronologique fondé sur les dates disponibles, affichage conforme à la convention Paris ; aucune clôture/statut métier déduit d'une date ; achat/restriction décisive visibles, détail complet conservé |
+| E73-WL-11 · D1 | Zéro, une ou plusieurs animations ; erreur de lecture ; fiche puis retour | Vide, erreur et résultat distincts ; commune, filtres applicables à Découvrir et position utile conservés ; aucun filtre interne du carnet réintroduit |
+| E73-WL-12 · E1, LM-11 | Parcourir les trois missions au clavier et lecteur d'écran | Noms/rôles, ordre du focus, messages et erreurs accessibles, aucune impasse ; preuves et obstacles effectivement reproduits consignés |
+| E73-WL-13 · E1, LM-11 | Petit écran 320 px, texte 200 %, redistribution et clavier virtuel | Contenu et commandes essentiels accessibles, focus visible et non masqué par navigation/clavier ; pas d'obligation nouvelle de tout tenir au premier écran |
+| E73-WL-14 · E1, LM-11 | Mesurer contrastes et cibles, notamment récupération QR | Résultats sur états normaux/erreur/focus consignés ; écarts confirmés corrigés ; cible Localeo de 44 px distinguée des seuils normatifs, aucune conformité globale déduite |
+| E73-WL-15 · E1/B1/C1 | Soumission invalide, chargement, panne et résultat incertain | Erreur et état annoncé, saisie/contexte utile conservés ; reprise compréhensible et absence de faux succès ; QR invalide sans inscription permet un retour vers la découverte existante |
+| E73-WL-16 · F1, LM-05/06 | Carnet rempli, participation en cours/achevée et résultat connu | Prochaine action adaptée aux faits confirmés ; état d'animation distinct du résultat personnel ; gain retrouvé dans Mes lots, sans confusion avec dotation à gagner |
+| E73-WL-17 · F1, LM-05, LIVE-COR-01/02 | Deux participations distinctes, fermeture/retour, lecture partielle ou refus | Identités et récupération préservées ; état inconnu explicite, aucune fusion, fraîcheur inventée ou permission de notifications imposée ; lectures bornées conservées |
+| E73-WL-18 · Recette commune | Habitants réels effectuent découverte, inscription/reprise et compréhension du lot | Consigner réponses « où, avant quand, comment », réussite/échec et difficultés ; comparer uniquement des états équivalents, sans taux ou gain de temps inventé ; tests automatisés et recette humaine séparés |
+
+### Impacts initiaux à instruire
+
+| Sujet | Impact initial et source à examiner |
+| --- | --- |
+| Applications et domaine propriétaire | Marketplace/Live concerné pour interface et recette. Backend propriétaire des inscriptions, droits, statuts, gains/remises ; lecture des contrats et fixtures à la spécification. Animation/Pro à examiner comme producteurs de publication/remise et supports de recette ; aucune nouvelle interface de gestion demandée. |
+| API et consommateurs | Réutilisation des contrats Live/Animation prévue, aucun changement arbitré. Vérifier que contexte, dates, consignes et état sont disponibles ; une donnée absente ne doit pas être fabriquée. Identifier producteur et consommateurs avant tout complément de contrat. |
+| Persistance, migrations et données existantes | Aucun besoin de nouveau stockage établi ; reprise via mécanismes existants. À examiner si un écart exige une modification ; préserver accès, anciennes données et retrait des favoris selon LIVE-COR-05. Aucune migration créée ici. |
+| Générateur et fixtures | Concernés par la couverture QR/inscription/lot/carnet rempli ; commencer par fixtures isolées des états requis. Examiner les jeux existants avant d'adapter le générateur applicatif ; aucune génération TEST/production implicite. |
+| Documentation fonctionnelle | Compléter la spécification Live et, si nécessaire, principes UX après comparaison des rendus. Le présent backlog porte les critères ; l'audit et le workshop restent les sources datées. |
+| Exploitation et déploiement | À examiner selon écarts réels : version Live/PWA et compatibilité serveur, relecture après retour, cache et diagnostic. Aucun envoi réel, configuration ou déploiement nécessaire au cadrage. |
+| Performance et coût | D1 peut affecter tri/chargement ; préserver pagination et bornes, ne pas trier globalement une page partielle en prétendant couvrir tout le programme. Si accès/requêtes/cadences changent, appliquer les contrôles de capacité pertinents ; aucun besoin de charge pour le présent texte. |
+
+### Passage à la spécification et réalisation
+
+L'existant, les contrats et les fixtures ont été examinés dans la
+[spécification WL](../../specifications/epic-73-animation-et-ou-coffrets/workshop-live-20261118.md) :
+aucune évolution backend ni migration nécessaire. Programme, texte du carnet
+vide et issue QR refusé améliorés ; défaut de contraste reproduit puis corrigé.
+La qualification utilise les parcours applicatifs et des fixtures isolées,
+sans assimiler les planches au produit. WL-18 et les composantes humaines de
+WL-12/13 restent à qualifier ; les limites antérieures LA/LP/LM restent indépendantes.
+
 <a id="workshop-ux-20261118"></a>
 ## Évolution du 18 novembre 2026 — suites du workshop UX Animation
 

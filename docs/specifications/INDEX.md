@@ -1,5 +1,7 @@
 # Spécifications
 
+- **E73 — workshop Live du 18 novembre 2026**, [spécification et bilan WL](epic-73-animation-et-ou-coffrets/workshop-live-20261118.md) : six orientations (B1/C1/D1/E1 P1, A1/F1 P2), programme compact, carnet vide, récupération QR et contraste ; réalisation locale, qualification humaine restant ouverte. Clôture historique conservée.
+
 - **EPIC 80 — parcours Animation dans Localeo Pro**, [spécification](epic-80-fiabilite-parcours-localeo-pro/README.md) et [bilan des critères](epic-80-fiabilite-parcours-localeo-pro/verification-livraison.md) : corrections vérifiées du scanner, de l'ordre des notifications et des dates du guide kit ; diagnostics et recette restants distingués.
 
 - **Réalisation E73 — 18 novembre 2026 : suites du workshop Animation**, [E73-EVO-WORKSHOP-UX-20261118](../roadmap/terminees/epic-73-animation-et-ou-coffrets-backlog.md#workshop-ux-20261118) : 11 orientations, 18 critères WA, spécification et implémentation locales ; [preuves et limites](epic-73-animation-et-ou-coffrets/verification-livraison.md#workshop-ux-20261118). Atelier prioritaire : PO-13 révisé et automatisation CAF retirée des travaux futurs. Recette humaine et déploiement non réalisés. Clôture historique conservée.

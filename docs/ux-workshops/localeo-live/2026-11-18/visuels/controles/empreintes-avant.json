@@ -1,0 +1,77 @@
+[
+  {
+    "file": "01-accueil-320x844.png",
+    "sha256": "a8fca043ec963133e13b7ae1fef6b36de2fbbbdce9789fb7d7d41c40d76c08a7",
+    "bytes": 30655
+  },
+  {
+    "file": "01-accueil-390x844.png",
+    "sha256": "06331d99dce70915c23e982ff4c14da351f1adda418d11c957d603232ee65938",
+    "bytes": 31078
+  },
+  {
+    "file": "01-accueil-430x844.png",
+    "sha256": "5ab5cc3b88bc01c1ae1c1cda95b22565cc8393008e5ec12ea47a84dcb8cb0525",
+    "bytes": 9690
+  },
+  {
+    "file": "02-decouvrir-bouliac-320x844.png",
+    "sha256": "4bc9eda7cc22207136db9636cb8ac22d0f2d133063be330a0ca162636a751d86",
+    "bytes": 96368
+  },
+  {
+    "file": "02-decouvrir-bouliac-390x844.png",
+    "sha256": "476473708f05891b45c97794751a7ab613d37b09e804c237cc5caf3f92c3a64c",
+    "bytes": 97274
+  },
+  {
+    "file": "02-decouvrir-bouliac-430x844.png",
+    "sha256": "38ac8b3a2f4b57075f4c8b4ce05c9f4a72ba7672c289e996d1ae27752daa31ef",
+    "bytes": 96458
+  },
+  {
+    "file": "03-detail-juste-prix-390x844.png",
+    "sha256": "6c6d9515ee847286e544463e159d0349f9089af4a3fac5283c9dbce40c1fb688",
+    "bytes": 82574
+  },
+  {
+    "file": "04-inscription-juste-prix-390x844.png",
+    "sha256": "7457750573beaf16fc59623cd28aec71692b59dc3781d5c6b7d1f3d0d1b4c82a",
+    "bytes": 55981
+  },
+  {
+    "file": "05-detail-vitrines-390x844.png",
+    "sha256": "4d39ae4baad6c4b6220b3f7396b9bca9e695e352b24a99cc892e0cbe25f01be1",
+    "bytes": 84685
+  },
+  {
+    "file": "06-detail-tombola-390x844.png",
+    "sha256": "1f5482c49669fd9145fba3bde37b69d4a5fd594b5703d57a40a23fc30c041678",
+    "bytes": 86601
+  },
+  {
+    "file": "07-participations-vides-390x844.png",
+    "sha256": "232e71446094da28d3b33056c2c23da98266fa2f3af61ce53b070b0e3f00987a",
+    "bytes": 35172
+  },
+  {
+    "file": "08-lots-vides-390x844.png",
+    "sha256": "a17f7d0f1006568f9b3880763843dc6308827029a37c23df6d12f4d371f3a075",
+    "bytes": 34177
+  },
+  {
+    "file": "09-retrouver-carnet-390x844.png",
+    "sha256": "2a4109be8a737bc23651665b88f44a335f57116dcd45eb0314ee281fe3d6b8fb",
+    "bytes": 35410
+  },
+  {
+    "file": "10-qr-invalide-390x844.png",
+    "sha256": "e4695ecc50294eb70ee1bbc9332efd1feda89fedd103bf64cab7bc3029c00ab1",
+    "bytes": 22704
+  },
+  {
+    "file": "11-retour-decouvrir-bouliac-390x844.png",
+    "sha256": "ed47e7e3d4735cf606b9be78bea7508d0422ecdc2353499b3e3e77c42a9f32a7",
+    "bytes": 97223
+  }
+]

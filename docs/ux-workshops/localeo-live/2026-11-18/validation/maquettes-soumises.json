@@ -1,0 +1,199 @@
+{
+  "date_presentation": "2026-11-18",
+  "timezone": "Europe/Paris",
+  "statut": "SOUMIS, NON VALIDE",
+  "files": [
+    {
+      "path": "visuels/maquettes-apres/assets/header-mark.svg",
+      "sha256": "d2b6590f76636f074e66493407649dc78ed002e6bb2c54b909305c53275b9583"
+    },
+    {
+      "path": "visuels/maquettes-apres/B1-confirmation-complet.png",
+      "sha256": "c0f32eeb6f8fccf9c3a607c482ba62a3611ccd4eef333871a373c9fd7ec18599"
+    },
+    {
+      "path": "visuels/maquettes-apres/B1-confirmation.html",
+      "sha256": "fdc9e068409b2af4c83cf08d2032f73b84fdeeec6e8bb6d46bc1e4b36c41bf73"
+    },
+    {
+      "path": "visuels/maquettes-apres/B1-confirmation.png",
+      "sha256": "371e396bfb1e64a9421860413ccf02eb59961624053a03e9d3a82b0dfe0c4995"
+    },
+    {
+      "path": "visuels/maquettes-apres/B1-incertain-complet.png",
+      "sha256": "fc36818d09dd0addbb686a728ab16bc29452fe573ecca6afe20489d1bc4e9d40"
+    },
+    {
+      "path": "visuels/maquettes-apres/B1-incertain.html",
+      "sha256": "9f6b685d30a7fc01aacd37b316afae5f4c69f8a6fafe4acf694becece2e22552"
+    },
+    {
+      "path": "visuels/maquettes-apres/B1-incertain.png",
+      "sha256": "86407725244f511283aec1956db84dce52a1bd204eab195b94c7bdf5509aae4d"
+    },
+    {
+      "path": "visuels/maquettes-apres/B1-inscription-complet.png",
+      "sha256": "3ecfe28713beb8706979a3de16f24360829444802707fb6a2833521b5a54b66f"
+    },
+    {
+      "path": "visuels/maquettes-apres/B1-inscription.html",
+      "sha256": "8c860398bdffea2bc408bc15eccdb8f3579753790feadee55a3f50c44c1cdd8e"
+    },
+    {
+      "path": "visuels/maquettes-apres/B1-inscription.png",
+      "sha256": "d1b7b39c66c9a62142a297f91f3d5b6318efba0ba46950f4ddec50be3c10fa81"
+    },
+    {
+      "path": "visuels/maquettes-apres/C1-bon-complet.png",
+      "sha256": "be4167bbf16cd053e1cd3002ea10fc6c29b5966c30aa53e3157b32a6db3d042c"
+    },
+    {
+      "path": "visuels/maquettes-apres/C1-bon.html",
+      "sha256": "25a952460caab69863e462238ccf21eba9986466e3e9c575a3a7d0570d3af644"
+    },
+    {
+      "path": "visuels/maquettes-apres/C1-bon.png",
+      "sha256": "a0d4d007f24c90b0822d84584cdd20c6a85c2d795d11eeaa5a2d13ced959d6d9"
+    },
+    {
+      "path": "visuels/maquettes-apres/C1-disponible-complet.png",
+      "sha256": "1dfd71f0e31db6839c18f793bec58c2871eab1fa0b152cb3a2ce1421ef90cacc"
+    },
+    {
+      "path": "visuels/maquettes-apres/C1-disponible.html",
+      "sha256": "475592fdf749efc83f0ed25201c2bdcdd8e79e76bfb33e8f5f0fa901c53e1eef"
+    },
+    {
+      "path": "visuels/maquettes-apres/C1-disponible.png",
+      "sha256": "09086768fa09806be2b3294d9c153d08661d5d000ef5d1d406be7815e0d3f411"
+    },
+    {
+      "path": "visuels/maquettes-apres/C1-expire-complet.png",
+      "sha256": "e78a5c4009f84a730d4ab4d6367cf5af561845731006c92241c9ca495de328c1"
+    },
+    {
+      "path": "visuels/maquettes-apres/C1-expire.html",
+      "sha256": "4afe398f12c3c2fa34d21e8f2513c7ee2eef6aa29bd9fa7c1944f247e494c8fe"
+    },
+    {
+      "path": "visuels/maquettes-apres/C1-expire.png",
+      "sha256": "7bb7e212796402dc072d888088cfcf7fa97c95ce05f67c38e019cd75aa65b08f"
+    },
+    {
+      "path": "visuels/maquettes-apres/C1-incertain-complet.png",
+      "sha256": "02ac857f8a65af805d4e6bbab9bec77e2535858c4e40ab725f29d7310ee4486a"
+    },
+    {
+      "path": "visuels/maquettes-apres/C1-incertain.html",
+      "sha256": "f0f51e424ca90dfde4875e0a4edf9f2684e1ec8e6220e39eb62903e1fab9d8fb"
+    },
+    {
+      "path": "visuels/maquettes-apres/C1-incertain.png",
+      "sha256": "0778ba8c2f57583ff4c86465b833bf1f8209353c6dd89e6a0e3d50969d34aac4"
+    },
+    {
+      "path": "visuels/maquettes-apres/C1-remis-complet.png",
+      "sha256": "6d5f432a5481d7b91cb7aa9700d6fa03e2d533ad6a4e508e4ace31c8c5b7fe04"
+    },
+    {
+      "path": "visuels/maquettes-apres/C1-remis.html",
+      "sha256": "dbb768be0d9f23565f72fa7bdbee6d52444bb149919d2b3786278576ad710cec"
+    },
+    {
+      "path": "visuels/maquettes-apres/C1-remis.png",
+      "sha256": "50296cd9a9042f41e98307a3d2234878cd10824d4ae48dfaef808006a0a5b2e9"
+    },
+    {
+      "path": "visuels/maquettes-apres/C1-revoque-complet.png",
+      "sha256": "3d0d5474ffdf65b16d9c639d05ba4220525274d213f876dccfcc59e9321739bd"
+    },
+    {
+      "path": "visuels/maquettes-apres/C1-revoque.html",
+      "sha256": "6c5921989d90ca8eee06b1177738ffcbc9c7a383e4c00c705dd77ee1b2e21424"
+    },
+    {
+      "path": "visuels/maquettes-apres/C1-revoque.png",
+      "sha256": "5f16662f03399a1395da8b859f826608dc93c178036b83a4cebdc9710a5d158e"
+    },
+    {
+      "path": "visuels/maquettes-apres/D1-erreur-complet.png",
+      "sha256": "1f8ca389dcf6943ac1913114862ec6266f3a32e18857efdfd7e8d43b44a41af6"
+    },
+    {
+      "path": "visuels/maquettes-apres/D1-erreur.html",
+      "sha256": "a24aa19920595d5db36c320ebf6368eec14b97bc2f23fb382bc0db1adc825d99"
+    },
+    {
+      "path": "visuels/maquettes-apres/D1-erreur.png",
+      "sha256": "aba33bc10ce3c17a26f3299d55d2f2be0f4e19ae6c559db3333f0a881add631d"
+    },
+    {
+      "path": "visuels/maquettes-apres/D1-programme-complet.png",
+      "sha256": "c581c01f29232d9442f55e68e44e1c0eddeee12889ac82a3b71b294ca73d8cb6"
+    },
+    {
+      "path": "visuels/maquettes-apres/D1-programme.html",
+      "sha256": "620fe06de1c14cd27e5422f0cd4f9d691b446157d429ce3f3e7ff4805acc9ef4"
+    },
+    {
+      "path": "visuels/maquettes-apres/D1-programme.png",
+      "sha256": "6e4c016e303b1204e6d6b951abc515ac588bac50a96b1738604a1c8033d1ef17"
+    },
+    {
+      "path": "visuels/maquettes-apres/D1-vide-complet.png",
+      "sha256": "f2a9aee142321342fa957088539c7fb77107c0c143174414e1e8b87101061b77"
+    },
+    {
+      "path": "visuels/maquettes-apres/D1-vide.html",
+      "sha256": "5ac595cd2ecab6ad57917fc309e0334ffd62eccca65455ed84c10137a3acb397"
+    },
+    {
+      "path": "visuels/maquettes-apres/D1-vide.png",
+      "sha256": "0a2addbced94b4dd05ac7b207b471bec0718d43ef098f756cb9be74e60a1cb3a"
+    },
+    {
+      "path": "visuels/maquettes-apres/E1-acces-invalide-complet.png",
+      "sha256": "763911325f06ff88fd1f685d9803961ead219fe39ffc7f568b590a95204c8a81"
+    },
+    {
+      "path": "visuels/maquettes-apres/E1-acces-invalide.html",
+      "sha256": "2881e3104117c5077e860f1239079fd65f01ef168ffca2387ad1b9a6de11b0c8"
+    },
+    {
+      "path": "visuels/maquettes-apres/E1-acces-invalide.png",
+      "sha256": "3ff8068187a3b0587b92d1e9f4dd73c51716960d9d4576295d4f1d09ef45ddb7"
+    },
+    {
+      "path": "visuels/maquettes-apres/E1-formulaire-erreur-complet.png",
+      "sha256": "779f8a2e3cd8fcc8aa419747a0e335cc3c44144c2b168d72e0ecf0203ba6f692"
+    },
+    {
+      "path": "visuels/maquettes-apres/E1-formulaire-erreur.html",
+      "sha256": "c95412c4e611ae38858bdee0f40e65df3677197feb2e2c6b56b338f96bff909a"
+    },
+    {
+      "path": "visuels/maquettes-apres/E1-formulaire-erreur.png",
+      "sha256": "c17637ddf501175c1aac6a080ebfda24efbe261765b68349fe921a5730f8ad82"
+    },
+    {
+      "path": "visuels/maquettes-apres/maquettes.css",
+      "sha256": "55e4a4dbb55738019aca49d71d56b6cb7086ce29deda82f7df7f77bcba6cbe77"
+    },
+    {
+      "path": "visuels/comparatif-avant-apres.html",
+      "sha256": "dfa7028e7e2a3693f5933dd2abf5509a0383e20eb958fc9b811b6543abb7e030"
+    },
+    {
+      "path": "visuels/comparatif.css",
+      "sha256": "bc9c6294031cacddab75e3027157886cf999cbe0d4eb1c12a15799b57288fe18"
+    },
+    {
+      "path": "visuels/comparatif.js",
+      "sha256": "4fcff212a56b55aa7238ecdb02b8f97d7988fe1e0b38b4bb6979a01ef6f18663"
+    },
+    {
+      "path": "visuels/reference-maquettes.md",
+      "sha256": "343ab69c7464dc68186811db0fc712e34e7e72ee98b04f6b069dcc671ed81bf4"
+    }
+  ]
+}

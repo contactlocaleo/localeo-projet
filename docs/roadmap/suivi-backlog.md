@@ -1,5 +1,12 @@
 # Suivi backlog
 
+**E73-EVO-WORKSHOP-LIVE-20261118 — 18 novembre 2026** :
+[cadrage canonique des six orientations retenues](terminees/epic-73-animation-et-ou-coffrets-backlog.md#workshop-live-20261118),
+18 critères E73-WL-01 à 18, quatre P1 et deux P2. Programme et texte complétés,
+QR refusé clarifié et contraste corrigé ; continuité/lots/reprise qualifiés par
+tests isolés. [Bilan local et limites humaines](../specifications/epic-73-animation-et-ou-coffrets/workshop-live-20261118.md#bilan-dexécution).
+Clôture historique E73 et compteurs conservés.
+
 **E73-EVO-LIVE-ADHESION — 7 novembre 2026** : 13 recommandations d’audit,
 17 critères complémentaires, trois lots implémentés localement ; qualification
 de charge LA-16 encore partielle. Les contrats,

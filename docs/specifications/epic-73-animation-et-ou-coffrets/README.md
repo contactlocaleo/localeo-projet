@@ -1,5 +1,9 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+**Workshop Live du 18 novembre 2026 — E73-WL** :
+[spécification, impacts et bilan des six orientations](workshop-live-20261118.md).
+Réalisation locale ; essais habitants et qualification sur appareils réels ouverts.
+
 **Cadrage du 18 novembre 2026 — E73-EVO-WORKSHOP-UX-20261118** :
 [onze orientations de l’atelier et E73-WA-01 à 18](../../roadmap/terminees/epic-73-animation-et-ou-coffrets-backlog.md#workshop-ux-20261118).
 Spécification détaillée et réalisation locales dans les sources existantes ;

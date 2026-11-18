@@ -1,0 +1,571 @@
+{
+  "date": "2026-11-18",
+  "scope": "Maquettes statiques uniquement",
+  "screens": [
+    {
+      "name": "B1-confirmation.html",
+      "width": 320,
+      "overflow": false,
+      "mainOverflow": false,
+      "navs": 3,
+      "minButton": 44
+    },
+    {
+      "name": "B1-confirmation.html",
+      "width": 390,
+      "overflow": false,
+      "mainOverflow": false,
+      "navs": 3,
+      "minButton": 44
+    },
+    {
+      "name": "B1-confirmation.html",
+      "width": 430,
+      "overflow": false,
+      "mainOverflow": false,
+      "navs": 3,
+      "minButton": 44
+    },
+    {
+      "name": "B1-incertain.html",
+      "width": 320,
+      "overflow": false,
+      "mainOverflow": false,
+      "navs": 3,
+      "minButton": 44
+    },
+    {
+      "name": "B1-incertain.html",
+      "width": 390,
+      "overflow": false,
+      "mainOverflow": false,
+      "navs": 3,
+      "minButton": 44
+    },
+    {
+      "name": "B1-incertain.html",
+      "width": 430,
+      "overflow": false,
+      "mainOverflow": false,
+      "navs": 3,
+      "minButton": 44
+    },
+    {
+      "name": "B1-inscription.html",
+      "width": 320,
+      "overflow": false,
+      "mainOverflow": false,
+      "navs": 3,
+      "minButton": 44
+    },
+    {
+      "name": "B1-inscription.html",
+      "width": 390,
+      "overflow": false,
+      "mainOverflow": false,
+      "navs": 3,
+      "minButton": 44
+    },
+    {
+      "name": "B1-inscription.html",
+      "width": 430,
+      "overflow": false,
+      "mainOverflow": false,
+      "navs": 3,
+      "minButton": 44
+    },
+    {
+      "name": "C1-bon.html",
+      "width": 320,
+      "overflow": false,
+      "mainOverflow": false,
+      "navs": 3,
+      "minButton": 44
+    },
+    {
+      "name": "C1-bon.html",
+      "width": 390,
+      "overflow": false,
+      "mainOverflow": false,
+      "navs": 3,
+      "minButton": 44
+    },
+    {
+      "name": "C1-bon.html",
+      "width": 430,
+      "overflow": false,
+      "mainOverflow": false,
+      "navs": 3,
+      "minButton": 44
+    },
+    {
+      "name": "C1-disponible.html",
+      "width": 320,
+      "overflow": false,
+      "mainOverflow": false,
+      "navs": 3,
+      "minButton": 44
+    },
+    {
+      "name": "C1-disponible.html",
+      "width": 390,
+      "overflow": false,
+      "mainOverflow": false,
+      "navs": 3,
+      "minButton": 44
+    },
+    {
+      "name": "C1-disponible.html",
+      "width": 430,
+      "overflow": false,
+      "mainOverflow": false,
+      "navs": 3,
+      "minButton": 44
+    },
+    {
+      "name": "C1-expire.html",
+      "width": 320,
+      "overflow": false,
+      "mainOverflow": false,
+      "navs": 3,
+      "minButton": 44
+    },
+    {
+      "name": "C1-expire.html",
+      "width": 390,
+      "overflow": false,
+      "mainOverflow": false,
+      "navs": 3,
+      "minButton": 44
+    },
+    {
+      "name": "C1-expire.html",
+      "width": 430,
+      "overflow": false,
+      "mainOverflow": false,
+      "navs": 3,
+      "minButton": 44
+    },
+    {
+      "name": "C1-incertain.html",
+      "width": 320,
+      "overflow": false,
+      "mainOverflow": false,
+      "navs": 3,
+      "minButton": 44
+    },
+    {
+      "name": "C1-incertain.html",
+      "width": 390,
+      "overflow": false,
+      "mainOverflow": false,
+      "navs": 3,
+      "minButton": 44
+    },
+    {
+      "name": "C1-incertain.html",
+      "width": 430,
+      "overflow": false,
+      "mainOverflow": false,
+      "navs": 3,
+      "minButton": 44
+    },
+    {
+      "name": "C1-remis.html",
+      "width": 320,
+      "overflow": false,
+      "mainOverflow": false,
+      "navs": 3,
+      "minButton": 44
+    },
+    {
+      "name": "C1-remis.html",
+      "width": 390,
+      "overflow": false,
+      "mainOverflow": false,
+      "navs": 3,
+      "minButton": 44
+    },
+    {
+      "name": "C1-remis.html",
+      "width": 430,
+      "overflow": false,
+      "mainOverflow": false,
+      "navs": 3,
+      "minButton": 44
+    },
+    {
+      "name": "C1-revoque.html",
+      "width": 320,
+      "overflow": false,
+      "mainOverflow": false,
+      "navs": 3,
+      "minButton": 44
+    },
+    {
+      "name": "C1-revoque.html",
+      "width": 390,
+      "overflow": false,
+      "mainOverflow": false,
+      "navs": 3,
+      "minButton": 44
+    },
+    {
+      "name": "C1-revoque.html",
+      "width": 430,
+      "overflow": false,
+      "mainOverflow": false,
+      "navs": 3,
+      "minButton": 44
+    },
+    {
+      "name": "D1-erreur.html",
+      "width": 320,
+      "overflow": false,
+      "mainOverflow": false,
+      "navs": 3,
+      "minButton": 44
+    },
+    {
+      "name": "D1-erreur.html",
+      "width": 390,
+      "overflow": false,
+      "mainOverflow": false,
+      "navs": 3,
+      "minButton": 44
+    },
+    {
+      "name": "D1-erreur.html",
+      "width": 430,
+      "overflow": false,
+      "mainOverflow": false,
+      "navs": 3,
+      "minButton": 44
+    },
+    {
+      "name": "D1-programme.html",
+      "width": 320,
+      "overflow": false,
+      "mainOverflow": false,
+      "navs": 3,
+      "minButton": 44
+    },
+    {
+      "name": "D1-programme.html",
+      "width": 390,
+      "overflow": false,
+      "mainOverflow": false,
+      "navs": 3,
+      "minButton": 44
+    },
+    {
+      "name": "D1-programme.html",
+      "width": 430,
+      "overflow": false,
+      "mainOverflow": false,
+      "navs": 3,
+      "minButton": 44
+    },
+    {
+      "name": "D1-vide.html",
+      "width": 320,
+      "overflow": false,
+      "mainOverflow": false,
+      "navs": 3,
+      "minButton": 44
+    },
+    {
+      "name": "D1-vide.html",
+      "width": 390,
+      "overflow": false,
+      "mainOverflow": false,
+      "navs": 3,
+      "minButton": 44
+    },
+    {
+      "name": "D1-vide.html",
+      "width": 430,
+      "overflow": false,
+      "mainOverflow": false,
+      "navs": 3,
+      "minButton": 44
+    },
+    {
+      "name": "E1-acces-invalide.html",
+      "width": 320,
+      "overflow": false,
+      "mainOverflow": false,
+      "navs": 3,
+      "minButton": 44
+    },
+    {
+      "name": "E1-acces-invalide.html",
+      "width": 390,
+      "overflow": false,
+      "mainOverflow": false,
+      "navs": 3,
+      "minButton": 44
+    },
+    {
+      "name": "E1-acces-invalide.html",
+      "width": 430,
+      "overflow": false,
+      "mainOverflow": false,
+      "navs": 3,
+      "minButton": 44
+    },
+    {
+      "name": "E1-formulaire-erreur.html",
+      "width": 320,
+      "overflow": false,
+      "mainOverflow": false,
+      "navs": 3,
+      "minButton": 44
+    },
+    {
+      "name": "E1-formulaire-erreur.html",
+      "width": 390,
+      "overflow": false,
+      "mainOverflow": false,
+      "navs": 3,
+      "minButton": 44
+    },
+    {
+      "name": "E1-formulaire-erreur.html",
+      "width": 430,
+      "overflow": false,
+      "mainOverflow": false,
+      "navs": 3,
+      "minButton": 44
+    },
+    {
+      "name": "B1-inscription",
+      "mode": "texte200%",
+      "width": 320,
+      "overflow": false,
+      "mainOverflow": false
+    },
+    {
+      "name": "C1-disponible",
+      "mode": "texte200%",
+      "width": 320,
+      "overflow": false,
+      "mainOverflow": false
+    },
+    {
+      "name": "D1-programme",
+      "mode": "texte200%",
+      "width": 320,
+      "overflow": false,
+      "mainOverflow": false
+    },
+    {
+      "name": "E1-formulaire-erreur",
+      "mode": "texte200%",
+      "width": 320,
+      "overflow": false,
+      "mainOverflow": false
+    }
+  ],
+  "gallery": [
+    {
+      "width": 320,
+      "id": "B1",
+      "afterVisible": true,
+      "beforeHidden": true
+    },
+    {
+      "width": 320,
+      "id": "B1",
+      "overflow": false,
+      "states": 3
+    },
+    {
+      "width": 320,
+      "id": "C1",
+      "afterVisible": true,
+      "beforeHidden": true
+    },
+    {
+      "width": 320,
+      "id": "C1",
+      "overflow": false,
+      "states": 6
+    },
+    {
+      "width": 320,
+      "id": "D1",
+      "afterVisible": true,
+      "beforeHidden": true
+    },
+    {
+      "width": 320,
+      "id": "D1",
+      "overflow": false,
+      "states": 3
+    },
+    {
+      "width": 320,
+      "id": "E1",
+      "afterVisible": true,
+      "beforeHidden": true
+    },
+    {
+      "width": 320,
+      "id": "E1",
+      "overflow": false,
+      "states": 2
+    },
+    {
+      "width": 390,
+      "id": "B1",
+      "afterVisible": true,
+      "beforeHidden": true
+    },
+    {
+      "width": 390,
+      "id": "B1",
+      "overflow": false,
+      "states": 3
+    },
+    {
+      "width": 390,
+      "id": "C1",
+      "afterVisible": true,
+      "beforeHidden": true
+    },
+    {
+      "width": 390,
+      "id": "C1",
+      "overflow": false,
+      "states": 6
+    },
+    {
+      "width": 390,
+      "id": "D1",
+      "afterVisible": true,
+      "beforeHidden": true
+    },
+    {
+      "width": 390,
+      "id": "D1",
+      "overflow": false,
+      "states": 3
+    },
+    {
+      "width": 390,
+      "id": "E1",
+      "afterVisible": true,
+      "beforeHidden": true
+    },
+    {
+      "width": 390,
+      "id": "E1",
+      "overflow": false,
+      "states": 2
+    },
+    {
+      "width": 430,
+      "id": "B1",
+      "afterVisible": true,
+      "beforeHidden": true
+    },
+    {
+      "width": 430,
+      "id": "B1",
+      "overflow": false,
+      "states": 3
+    },
+    {
+      "width": 430,
+      "id": "C1",
+      "afterVisible": true,
+      "beforeHidden": true
+    },
+    {
+      "width": 430,
+      "id": "C1",
+      "overflow": false,
+      "states": 6
+    },
+    {
+      "width": 430,
+      "id": "D1",
+      "afterVisible": true,
+      "beforeHidden": true
+    },
+    {
+      "width": 430,
+      "id": "D1",
+      "overflow": false,
+      "states": 3
+    },
+    {
+      "width": 430,
+      "id": "E1",
+      "afterVisible": true,
+      "beforeHidden": true
+    },
+    {
+      "width": 430,
+      "id": "E1",
+      "overflow": false,
+      "states": 2
+    },
+    {
+      "width": 1440,
+      "id": "B1",
+      "sideBySide": true
+    },
+    {
+      "width": 1440,
+      "id": "B1",
+      "overflow": false,
+      "states": 3
+    },
+    {
+      "width": 1440,
+      "id": "C1",
+      "sideBySide": true
+    },
+    {
+      "width": 1440,
+      "id": "C1",
+      "overflow": false,
+      "states": 6
+    },
+    {
+      "width": 1440,
+      "id": "D1",
+      "sideBySide": true
+    },
+    {
+      "width": 1440,
+      "id": "D1",
+      "overflow": false,
+      "states": 3
+    },
+    {
+      "width": 1440,
+      "id": "E1",
+      "sideBySide": true
+    },
+    {
+      "width": 1440,
+      "id": "E1",
+      "overflow": false,
+      "states": 2
+    }
+  ],
+  "errors": [],
+  "network": [],
+  "focusB1": {
+    "steps": 21,
+    "clipped": []
+  },
+  "finalE1": {
+    "width": 320,
+    "overflow": false,
+    "mainOverflow": false
+  }
+}
