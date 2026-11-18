@@ -1,5 +1,13 @@
 # E73 — Périmètres commerçants et parcours SaaS
 
+**Règle du 18 novembre 2026 :** la [gestion autonome des commerçants Animation](gestion-commercants-animation.md)
+remplace la validation Localeo préalable pour les commerces exclusivement Animation.
+Gestion partagée par les gestionnaires habilités de la commune ; création active
+sans dossier d'onboarding, invitation Pro explicite et participation distincte.
+OA-01/02 et DEC-54/99 restent historiques pour ce périmètre ; Coffrets conserve
+ses prérequis. Les contrôles de produits s'appliquent immédiatement à ces fiches,
+même dans une commune non encore basculée depuis le mode historique.
+
 ## Évolution du 11 novembre 2026 — E73-EVO-HABILITATIONS-ERP
 
 Demande : permettre à Localeo de comprendre, ajouter et retirer les habilitations

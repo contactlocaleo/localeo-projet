@@ -1,5 +1,21 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+## Évolution du 18 novembre 2026 — autonomie des commerçants Animation
+
+**E73-EVO-AUTONOMIE-COMMERCANTS**, spécifiée et implémentée localement.
+Preuves et limites consignées dans le bilan canonique ; aucun déploiement.
+Le gestionnaire crée et gère les commerces exclusivement Animation de sa commune
+sans validation Localeo, KYC, Stripe ni informations de facturation. La gestion
+est **partagée entre les gestionnaires habilités de la commune**, selon la réponse
+utilisateur. L'accès Pro personnel et l'accord à chaque animation restent séparés.
+
+Les critères **GCA-01 à GCA-10**, les contrats, impacts et preuves figurent dans la
+[source canonique](../../specifications/epic-73-animation-et-ou-coffrets/gestion-commercants-animation.md).
+Cette décision remplace le détour obligatoire par la validation ERP de DEC-54/99,
+OA-01/02 et WA-07/08 pour ce périmètre. Les contrôles Coffrets, droits commerciaux
+de l'import et historiques restent applicables ; aucune requalification automatique
+d'une fiche mixte ou non qualifiée. Clôture historique et compteurs inchangés.
+
 <a id="workshop-live-20261118"></a>
 ## Évolution du 18 novembre 2026 — suites du workshop UX Live
 

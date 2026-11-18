@@ -1,5 +1,11 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+**18 novembre 2026 — E73-EVO-AUTONOMIE-COMMERCANTS** :
+[gestion autonome des commerces Animation seule, GCA-01 à GCA-10](gestion-commercants-animation.md).
+Gestion partagée entre les gestionnaires habilités de la commune, sans validation
+Localeo ni onboarding financier. Spécification et implémentation demandées ;
+preuves propres à l'évolution dans cette source, clôture historique conservée.
+
 **Workshop Live du 18 novembre 2026 — E73-WL** :
 [spécification, impacts et bilan des six orientations](workshop-live-20261118.md).
 Réalisation locale ; essais habitants et qualification sur appareils réels ouverts.

@@ -6,6 +6,18 @@ consignés dans le suivi. La recette humaine et les vérifications sur l’hébe
 restent à réaliser ; ce compte rendu ne constitue pas une mise en service.
 **Aucun push, déploiement ou changement d’un environnement partagé n’a été effectué.**
 
+**Évolution du 18 novembre — commerces Animation autonomes.** Après livraison,
+ouvrir **Organiser → Commerçants**, puis **Ajouter un commerçant Animation**. Renseigner
+le nom, l'adresse, la catégorie, le SIRET et l'email de contact : le commerce
+Animation est immédiatement disponible, sans validation Localeo ni dossier
+financier. Tous les gestionnaires habilités de la commune peuvent modifier sa
+fiche, même depuis une autre organisation. Le bouton **Inviter dans Pro** est
+une action séparée ; il ne transfère pas un compte existant. **Retirer** ferme
+les nouvelles participations et conserve l'historique ; **Activer** permet le
+retour. Les commerces Coffrets ou mixtes gardent leur parcours habituel.
+La même gestion est accessible depuis **Ajouter ou gérer un commerçant Animation**
+dans la sélection des commerçants. Voir la [spécification et les preuves GCA](gestion-commercants-animation.md).
+
 Les chemins commençant par `/internal/` sont relatifs au backend de l’environnement
 qui sera déployé ultérieurement. Les autres accès indiquent les menus du portail
 Animation. Les noms de domaine réels et leur configuration ne sont pas présumés

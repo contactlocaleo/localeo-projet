@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Backend - contrat implemente EPIC 41",
     "description": "OpenAPI complet du backend, dont les parcours Animation locale. Genere hors ligne depuis le code local pour les integrations et les mocks ; cet instantane ne prouve pas son deploiement.",
-    "version": "1.0.0+cddef3d"
+    "version": "1.0.0+94d64b8"
   },
   "paths": {
     "/public/identite-acces/interne/connexion": {
@@ -98602,6 +98602,554 @@
         ]
       }
     },
+    "/protected/referencement/commercants-animation": {
+      "get": {
+        "tags": [
+          "Referencement"
+        ],
+        "summary": "Lister",
+        "operationId": "lister_protected_referencement_commercants_animation_get",
+        "parameters": [
+          {
+            "name": "recherche",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 200,
+              "default": "",
+              "title": "Recherche"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2048
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageCommercantsAnimationDTO"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Referencement"
+        ],
+        "summary": "Creer",
+        "operationId": "creer_protected_referencement_commercants_animation_post",
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FicheAnimationCommande"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FicheAnimationDTO"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/referencement/commercants-animation/categories": {
+      "get": {
+        "tags": [
+          "Referencement"
+        ],
+        "summary": "Categories",
+        "operationId": "categories_protected_referencement_commercants_animation_categories_get",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CategorieAnimationDTO"
+                  },
+                  "title": "Response Categories Protected Referencement Commercants Animation Categories Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/referencement/commercants-animation/recus/{cle}": {
+      "get": {
+        "tags": [
+          "Referencement"
+        ],
+        "summary": "Recu",
+        "operationId": "recu_protected_referencement_commercants_animation_recus__cle__get",
+        "parameters": [
+          {
+            "name": "cle",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Cle"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FicheAnimationDTO"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/referencement/commercants-animation/{commerce_id}": {
+      "get": {
+        "tags": [
+          "Referencement"
+        ],
+        "summary": "Detail",
+        "operationId": "detail_protected_referencement_commercants_animation__commerce_id__get",
+        "parameters": [
+          {
+            "name": "commerce_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Commerce Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FicheAnimationDTO"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Referencement"
+        ],
+        "summary": "Modifier",
+        "operationId": "modifier_protected_referencement_commercants_animation__commerce_id__patch",
+        "parameters": [
+          {
+            "name": "commerce_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Commerce Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModificationAnimationCommande"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FicheAnimationDTO"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/referencement/commercants-animation/{commerce_id}/{action}": {
+      "post": {
+        "tags": [
+          "Referencement"
+        ],
+        "summary": "Commander",
+        "operationId": "commander_protected_referencement_commercants_animation__commerce_id___action__post",
+        "parameters": [
+          {
+            "name": "commerce_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Commerce Id"
+            }
+          },
+          {
+            "name": "action",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "enum": [
+                "activer",
+                "retirer",
+                "inviter"
+              ],
+              "type": "string",
+              "title": "Action"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VersionsAnimationCommande"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FicheAnimationDTO"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
     "/protected/animation-locale/operations/{operation_id}/service-preparation": {
       "get": {
         "tags": [
@@ -147036,6 +147584,25 @@
         ],
         "title": "CatalogueResponse"
       },
+      "CategorieAnimationDTO": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "libelle"
+        ],
+        "title": "CategorieAnimationDTO"
+      },
       "ChampAttestationPayload": {
         "properties": {
           "champ": {
@@ -166605,6 +167172,201 @@
         ],
         "title": "FeuilleDTO"
       },
+      "FicheAnimationCommande": {
+        "properties": {
+          "nom": {
+            "type": "string",
+            "maxLength": 300,
+            "minLength": 1,
+            "title": "Nom"
+          },
+          "adresse": {
+            "type": "string",
+            "maxLength": 500,
+            "minLength": 1,
+            "title": "Adresse"
+          },
+          "categorie": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Categorie"
+          },
+          "siret": {
+            "type": "string",
+            "maxLength": 30,
+            "minLength": 14,
+            "title": "Siret"
+          },
+          "contact_email": {
+            "type": "string",
+            "maxLength": 320,
+            "minLength": 1,
+            "title": "Contact Email"
+          },
+          "contact_nom": {
+            "type": "string",
+            "maxLength": 200,
+            "title": "Contact Nom",
+            "default": ""
+          },
+          "contact_telephone": {
+            "type": "string",
+            "maxLength": 40,
+            "title": "Contact Telephone",
+            "default": ""
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 5000,
+            "title": "Description",
+            "default": ""
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "nom",
+          "adresse",
+          "categorie",
+          "siret",
+          "contact_email"
+        ],
+        "title": "FicheAnimationCommande"
+      },
+      "FicheAnimationDTO": {
+        "properties": {
+          "contract_version": {
+            "type": "string",
+            "const": "1",
+            "title": "Contract Version"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "commune_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Commune Id"
+          },
+          "nom": {
+            "type": "string",
+            "title": "Nom"
+          },
+          "adresse_postale": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Adresse Postale"
+          },
+          "categorie": {
+            "type": "string",
+            "title": "Categorie"
+          },
+          "siret": {
+            "type": "string",
+            "title": "Siret"
+          },
+          "contact_email": {
+            "type": "string",
+            "title": "Contact Email"
+          },
+          "contact_nom": {
+            "type": "string",
+            "title": "Contact Nom"
+          },
+          "contact_telephone": {
+            "type": "string",
+            "title": "Contact Telephone"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "version_perimetre": {
+            "type": "integer",
+            "title": "Version Perimetre"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          },
+          "etat_animation": {
+            "type": "string",
+            "enum": [
+              "A_PREPARER",
+              "ACTIF",
+              "RETIRE"
+            ],
+            "title": "Etat Animation"
+          },
+          "acces_pro": {
+            "type": "string",
+            "enum": [
+              "ABSENT",
+              "INVITE",
+              "INITIALISE"
+            ],
+            "title": "Acces Pro"
+          },
+          "actions_disponibles": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "MODIFIER",
+                "ACTIVER",
+                "RETIRER",
+                "INVITER"
+              ]
+            },
+            "type": "array",
+            "title": "Actions Disponibles"
+          },
+          "rejoue": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rejoue"
+          }
+        },
+        "type": "object",
+        "required": [
+          "contract_version",
+          "id",
+          "commune_id",
+          "nom",
+          "adresse_postale",
+          "categorie",
+          "siret",
+          "contact_email",
+          "contact_nom",
+          "contact_telephone",
+          "description",
+          "version",
+          "version_perimetre",
+          "statut",
+          "etat_animation",
+          "acces_pro",
+          "actions_disponibles"
+        ],
+        "title": "FicheAnimationDTO"
+      },
       "FichierExportPayload": {
         "properties": {
           "id": {
@@ -177172,6 +177934,79 @@
         ],
         "title": "ModificationAcces"
       },
+      "ModificationAnimationCommande": {
+        "properties": {
+          "nom": {
+            "type": "string",
+            "maxLength": 300,
+            "minLength": 1,
+            "title": "Nom"
+          },
+          "adresse": {
+            "type": "string",
+            "maxLength": 500,
+            "minLength": 1,
+            "title": "Adresse"
+          },
+          "categorie": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Categorie"
+          },
+          "siret": {
+            "type": "string",
+            "maxLength": 30,
+            "minLength": 14,
+            "title": "Siret"
+          },
+          "contact_email": {
+            "type": "string",
+            "maxLength": 320,
+            "minLength": 1,
+            "title": "Contact Email"
+          },
+          "contact_nom": {
+            "type": "string",
+            "maxLength": 200,
+            "title": "Contact Nom",
+            "default": ""
+          },
+          "contact_telephone": {
+            "type": "string",
+            "maxLength": 40,
+            "title": "Contact Telephone",
+            "default": ""
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 5000,
+            "title": "Description",
+            "default": ""
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Version"
+          },
+          "version_perimetre": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Version Perimetre"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "nom",
+          "adresse",
+          "categorie",
+          "siret",
+          "contact_email",
+          "version",
+          "version_perimetre"
+        ],
+        "title": "ModificationAnimationCommande"
+      },
       "ModificationHabilitation": {
         "properties": {
           "version": {
@@ -182229,6 +183064,45 @@
           "hasMore"
         ],
         "title": "PageCommentairesDTO"
+      },
+      "PageCommercantsAnimationDTO": {
+        "properties": {
+          "contract_version": {
+            "type": "string",
+            "const": "1",
+            "title": "Contract Version"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/FicheAnimationDTO"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          }
+        },
+        "type": "object",
+        "required": [
+          "contract_version",
+          "items",
+          "has_more",
+          "next_cursor"
+        ],
+        "title": "PageCommercantsAnimationDTO"
       },
       "PageCommercantsPayload": {
         "properties": {
@@ -207955,6 +208829,27 @@
           "expectedVersion"
         ],
         "title": "VersionServiceInput"
+      },
+      "VersionsAnimationCommande": {
+        "properties": {
+          "version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Version"
+          },
+          "version_perimetre": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Version Perimetre"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "version",
+          "version_perimetre"
+        ],
+        "title": "VersionsAnimationCommande"
       },
       "VersionsAttestationPayload": {
         "properties": {

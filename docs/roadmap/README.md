@@ -1,5 +1,13 @@
 # Roadmap par etat
 
+**18 novembre 2026 — E73-EVO-AUTONOMIE-COMMERCANTS** :
+[gestion autonome des commerces Animation seule](../specifications/epic-73-animation-et-ou-coffrets/gestion-commercants-animation.md),
+partagée entre gestionnaires habilités de la commune. Création, édition,
+activation/retrait et invitation Pro sans validation Localeo ni onboarding
+financier ; Coffrets et accords de participation distincts. Spécifiée et
+implémentée localement ; preuves et limites dans le bilan, sans déploiement.
+Clôture historique E73 conservée.
+
 **18 novembre 2026 — E73-EVO-WORKSHOP-LIVE-20261118** :
 [cadrage des suites du workshop Live](terminees/epic-73-animation-et-ou-coffrets-backlog.md#workshop-live-20261118),
 six orientations explicitement retenues, quatre P1 et A1/F1 en P2, 18 critères WL.
