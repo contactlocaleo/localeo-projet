@@ -25,6 +25,11 @@ de conception obligatoire, pas une simple source d’inspiration. La recette
 doit comparer le rendu aux maquettes et vérifier les parcours ; toute divergence
 doit être identifiée et faire l’objet d’un arbitrage explicite.
 
+**Arbitrage du 18 novembre 2026 :** l’en-tête Localeo et ses outils Messages
+et Menu sont conservés au-dessus du contenu. Leur présence et la hauteur
+supplémentaire, absentes des planches, sont explicitement acceptées par le
+demandeur et complètent la référence de conformité.
+
 La navigation reste **Mon carnet / Mes lots / Découvrir**. La consultation d’une
 commune et sa mémorisation sont distinctes. La reprise personnelle reste visible
 même dans un carnet rempli. Dans une participation en cours, progression et

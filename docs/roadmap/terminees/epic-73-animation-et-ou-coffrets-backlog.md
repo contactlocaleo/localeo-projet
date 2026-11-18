@@ -5,8 +5,8 @@
 **E73-EVO-LIVE-MAQUETTES** : mise en œuvre demandée des cinq parcours de
 l’audit habitant et de ses deux planches. [Spécification LM-01 à LM-11](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-17-novembre-2026--maquettes-habitant),
 contrats existants et réalisation locale suivie dans cette source. Clôture historique
-conservée ; vérifications applicatives, arbitrage de l’en-tête et qualification
-d’usage distincts.
+conservée ; maintien de l’en-tête et de ses outils explicitement accepté le
+18 novembre. Vérifications applicatives et qualification d’usage distinctes.
 
 ## Évolution du 17 novembre 2026 — six améliorations du parcours organisateur
 

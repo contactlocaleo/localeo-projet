@@ -3,7 +3,7 @@
 Évolution du **17 novembre 2026 — E73-EVO-LIVE-MAQUETTES** :
 [cinq parcours habitant, LM-01 à LM-11](localeo-live-entree-unique.md#évolution-du-17-novembre-2026--maquettes-habitant),
 mis en œuvre localement à partir des deux planches validées. Contrats, variantes,
-preuves et écart de composition soumis à arbitrage dans la même source ;
+preuves et maintien de l’en-tête explicitement accepté le 18 novembre dans la même source ;
 clôture historique conservée.
 
 Évolution du **17 novembre 2026 — E73-EVO-PARCOURS-ORGANISATEUR** :

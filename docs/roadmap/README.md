@@ -2,8 +2,9 @@
 
 **17 novembre 2026 — E73-EVO-LIVE-MAQUETTES** :
 [mise en conformité des cinq parcours habitant](../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-17-novembre-2026--maquettes-habitant),
-LM-01 à LM-11, implémentation locale de l’évolution de l’EPIC 73. Preuves et
-arbitrage de l’en-tête suivis dans la spécification ; clôture historique conservée.
+LM-01 à LM-11, implémentation locale de l’évolution de l’EPIC 73. Preuves dans
+la spécification ; maintien de l’en-tête et de ses outils explicitement accepté
+le 18 novembre. Clôture historique conservée.
 
 **17 novembre 2026 — E73-EVO-PARCOURS-ORGANISATEUR** :
 [six améliorations réalisées localement](../specifications/epic-73-animation-et-ou-coffrets/parcours-organisateur.md)

@@ -96,13 +96,16 @@ La date de tirage secondaire reste accessible en défilant à 320 px (LM-05).
 Les noms, tailles de contenus et captures diffèrent des données fictives des
 planches ; la comparaison conserve leurs priorités d’information et d’action.
 
-**Écart de composition soumis à arbitrage** : l’en-tête Localeo avec Messages
-et Menu reste au-dessus du contenu alors qu’il n’est pas représenté dans les
-planches. Il occupe une hauteur supplémentaire. La demande d’arbitrage porte
-sur son maintien ou le déplacement de ces outils vers un accès secondaire.
-Conformément au §2 de l’audit, cet écart n’est pas déclaré accepté et la
-conformité visuelle stricte n’est pas prononcée avant cette réponse. Les
-preuves fonctionnelles ci-dessous restent distinctes de cet arbitrage.
+**Arbitrage accepté le 18 novembre 2026** : le demandeur choisit de
+« Conserver l’en-tête et ses outils ». L’en-tête Localeo, Messages et Menu
+restent donc au-dessus du contenu, avec la hauteur supplémentaire correspondante,
+bien qu’ils ne soient pas représentés dans les planches. Cet écart de composition
+est explicitement accepté conformément au §2 de l’audit ; aucun déplacement
+vers un accès secondaire n’est demandé. La référence de conformité est celle
+des planches complétées par cet arbitrage. L’implémentation existante répond
+déjà à cette décision, sans changement applicatif ni nouvelle recette.
+Les preuves fonctionnelles et les limites de qualification restent celles
+consignées ci-dessous.
 
 Le commerce choisi est conservé dans les métadonnées de navigation, y compris
 pour le retour navigateur depuis les conditions. Ce repère contient seulement
@@ -136,8 +139,8 @@ unique. Le dernier changement applicatif porte sur la restauration du focus
 après vérification d’une visite ; cette portée est rejouée deux fois sur la
 version finale. Aucun échec identifié ne reste sans correction et reprise
 ciblée. Les captures des vues 5–8 de cette dernière tentative ont été relues,
-en complément des vues 1–4 des recettes précédentes. La conformité stricte
-reste soumise à l’arbitrage de composition ci-dessus.
+en complément des vues 1–4 des recettes précédentes. L’arbitrage de composition
+ci-dessus est résolu ; le maintien de l’en-tête est un écart accepté aux planches.
 
 Les essais antérieurs sont conservés, dont la tentative
 `2026-11-17T23-12-08-758Z-wfubNL`, interrompue pour contention de ressources

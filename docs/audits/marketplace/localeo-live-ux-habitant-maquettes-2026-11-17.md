@@ -10,7 +10,8 @@
 implémentation rattachées à **E73-EVO-LIVE-MAQUETTES**. Les
 [critères LM-01 à LM-11 et le bilan de réalisation](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-17-novembre-2026--maquettes-habitant)
 portent les changements, les preuves applicatives et les limites de cette
-mise en œuvre, dont l’arbitrage ouvert sur l’en-tête ajouté au-dessus des vues.
+mise en œuvre. Le maintien de l’en-tête Localeo, Messages et Menu est
+explicitement accepté le 18 novembre 2026 (voir §2).
 Le présent audit conserve les constats et preuves de sa séance
 initiale ; les essais habitants et physiques ne sont pas remplacés par la recette automatisée.
 
@@ -45,6 +46,14 @@ La future réalisation doit respecter les éléments suivants :
 - Continuité : un seul écran de participation évolue entre action, état incertain et confirmation. Les vues 5 à 7 ne sont pas un assistant imposant trois pages successives.
 
 **La recette devra comparer les rendus de l’application aux planches, et vérifier le comportement des parcours.** Une conformité fonctionnelle seule ne suffit pas à valider la conformité UX et artistique. Toute divergence de composition, navigation, priorité d’action ou direction graphique doit être identifiée et soumise à un arbitrage explicite avant d’être considérée comme acceptée.
+
+**Complément validé le 18 novembre 2026 — en-tête conservé :** à la question
+sur l’en-tête absent des planches, le demandeur répond « Conserver l’en-tête
+et ses outils ». L’en-tête Localeo avec Messages et Menu reste au-dessus du
+contenu. Sa présence et sa hauteur supplémentaire constituent un écart de
+composition explicitement accepté ; la référence de conformité comprend
+désormais cette décision. L’implémentation existante est conservée. Cet arbitrage
+de conception ne vaut pas essai habitant ou recette sur appareil physique.
 
 La conformité s’applique avec les données et droits réels. Les noms, dates, coordonnées, nombres de visites et lots figurant dans les images sont fictifs. L’achat requis illustre une condition à rendre visible ; il ne crée pas une obligation d’achat pour tous les modèles. Les modèles, états et écrans non représentés doivent être déclinés dans la même direction et revus avant leur validation. La taille du texte, l’accessibilité et l’adaptation aux petits écrans doivent conserver cette hiérarchie et l’accès à toutes les conditions nécessaires.
 
