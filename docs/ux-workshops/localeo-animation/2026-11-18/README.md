@@ -1,6 +1,6 @@
 # Localeo Animation — exploration et workshop UX du 18 novembre 2026
 
-**Statut du workshop : étapes 1 à 3 terminées ; étape 4 préparée, D2 validée fonctionnellement et huit décisions individuelles de maquette attendues. Maquettes et revue explicitement simulées.**
+**Statut courant : onze orientations autorisées, implémentées et poussées ; recette UX à valider. Aucune autorisation de développement encore attendue dans ce périmètre. D2 conserve sa validation fonctionnelle explicite. Maquettes et revue du workshop simulées.**
 
 **Suite explicitement demandée après le workshop :** les skills de spécification
 et d'implémentation ont été invoqués pour E73-EVO-WORKSHOP-UX-20261118.
@@ -100,19 +100,19 @@ Aucune nouvelle connexion à l’environnement TEST ni nouvelle action sur ses d
 **Fin de l’étape 3 :** propositions livrées sans validation ni implémentation. L’instruction ultérieure d’étape 4 autorise la préparation du dossier de décision ci-dessous.
 
 
-## Étape 4 — validation préparée, décisions attendues
+## Étape 4 — registre actualisé après réalisation
 
 Préparation le 2026-11-18T12:38:07+01:00. Le [prompt complet reçu](prompts/04-validation.md) est archivé. Cette instruction ne vaut pas accord sur les orientations.
 
 - [Dossier des neuf orientations à décider](validation/orientations-a-decider.md) : parcours, problème, conséquence, priorité, vote simulé, AVANT réel, APRÈS v2, bénéfice, effort et dépendances pour chaque ID.
 - [Risques critiques non résolus](validation/risques-critiques.md), séparés des décisions ; les rejets simulés ne suppriment pas les besoins associés.
-- [Registre des décisions](validation/decisions.md) : **1 validée fonctionnellement (D2), 0 à réviser, 0 reportée, 0 refusée, 8 en attente**. Date, commentaire et portée de D2 enregistrés ; aucune décision individuelle supplémentaire inventée pour les huit autres maquettes.
-- [Backlog d’implémentation potentiel](validation/backlog-implementation-potentiel.md) : catégories préparées et critères futurs, sans mise en œuvre.
+- [Registre des décisions](validation/decisions.md) : **11 réalisations autorisées, implémentées et poussées ; 11 recettes UX à valider**. D2 conserve sa validation de direction fonctionnelle ; aucun accord de recette inventé.
+- [Backlog réalisé](validation/backlog-implementation-potentiel.md) : objectifs et critères reliés au bilan canonique d’implémentation.
 - [Contrôle de préparation](validation/controle-preparation.md) ; [manifest de préparation](validation/manifest-preparation-sha256.json).
 
 Les votes, maquettes et captures de l’étape 3 restent inchangés. Son manifeste est historique : seuls README et prompt 04 évoluent parmi ses fichiers. Les nouvelles pièces sont dans `validation/`. Aucun test applicatif ni nouvelle connexion à l’environnement TEST à cette étape. Aucun code applicatif modifié.
 
-**Attente :** pour chaque ID, l’utilisateur peut choisir VALIDÉE, REFUSÉE, À RÉVISER ou REPORTÉE, avec commentaire et conditions éventuelles. Les ID non mentionnés resteront en attente. Les décisions seront enregistrées fidèlement avant arrêt, sans implémentation automatique. L’étape 4 n’est pas déclarée terminée tant que les décisions attendues ne sont pas reçues.
+**Reste à valider :** la recette UX du résultat, avec les choix VALIDÉE, REFUSÉE, À RÉVISER ou REPORTÉE et les conditions éventuelles. Le développement est réalisé et poussé ; les migrations TEST 324 à 326 sont appliquées. Le déploiement des nouvelles interfaces et la recette humaine ne sont pas attestés. Les choix de recette non exprimés restent À VALIDER.
 
 ## Suites cadrées le 18 novembre 2026
 
@@ -120,4 +120,4 @@ Les votes, maquettes et captures de l’étape 3 restent inchangés. Son manifes
 
 L’utilisateur privilégie explicitement l’atelier en cas de contradiction : D2 remplace la destination Bilan de PO-13 ; le volet de clôture automatique future E2/CAF est retiré, report/rapport indépendants à recadrer. Le registre trace D2 sans inventer huit validations individuelles supplémentaires. Les six propositions non retenues ne sont pas ajoutées au programme.
 
-Cadrage documentaire seulement : aucun code applicatif modifié. Les captures, maquettes, votes et rapports restent les preuves historiques. Les manifestes d’étape 3 et de préparation d’étape 4 décrivent leurs versions antérieures ; les documents de décision/README ont évolué après l’arbitrage.
+Au moment du cadrage initial seulement : aucun code applicatif modifié. La réalisation ultérieure est tracée dans le bilan canonique et le registre actualisé. Les captures, maquettes, votes et rapports restent les preuves historiques. Les manifestes d’étape 3 et de préparation d’étape 4 décrivent leurs versions antérieures ; les documents de décision/README ont évolué après l’arbitrage.

@@ -1,8 +1,8 @@
-# Backlog d’implémentation potentiel — aucune exécution
+# Backlog réalisé — recette UX à valider
 
-Préparé le 2026-11-18T12:38:07+01:00. Source de décision : [registre utilisateur](decisions.md). **État actualisé : D2 validée fonctionnellement, huit autres décisions individuelles en attente.** Le cadrage global des suites est maintenant porté par l’EPIC 73, sans implémentation dans cette phase. Les critères ci-dessous proviennent du backlog voté ; ils décrivent une recette future et aucun résultat déjà acquis.
+Préparé le 2026-11-18T12:38:07+01:00 ; actualisé le 18 novembre 2026. **Onze orientations autorisées, implémentées et poussées ; recette UX à valider.** Le [registre](decisions.md) distingue autorisation, réalisation et recette. Le [bilan canonique WA](../../../../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md#workshop-ux-20261118) porte les preuves exécutées et leurs limites. Les neuf fiches P0/P1 ci-dessous conservent les critères initiaux ; F1/G1 P2 sont également réalisés et tracés dans le bilan.
 
-## Orientations validées
+## Validation fonctionnelle spécifique
 
 **D2**, le 18 novembre : suivre l’atelier en cas de contradiction avec PO-13 ; ouvrir le suivi opérationnel, avec Bilan distinct. Voir le registre et E73-WA-13. La direction est validée, pas la recette.
 
@@ -18,19 +18,19 @@ Aucune décision reçue. L’attente n’est pas un report.
 
 Aucune décision reçue. Les rejets du workshop simulé ne sont pas des refus utilisateur.
 
-## Détail des candidats — D2 validée, huit décisions en attente
+## Détail des neuf orientations P0/P1 réalisées
 
 Périmètre : neuf P0/P1 de l’étape 3. F1 et G1 (P2 adoptées) restent dans le backlog historique, sans être assimilées à un report. Aucun sujet rejeté ou P3 ajouté. Ordre ci-dessous documentaire : aucune planification ni date engagée.
 
 ### D1 — Rétablir et fiabiliser Communication
 
-**Statut : EN ATTENTE DE DÉCISION.** Priorité P0, effort M provisoire. [Fiche](orientations-a-decider.md#d1) · [Maquette v2](../visuels/maquettes-apres/D1.html).
+**Réalisation : AUTORISÉE, IMPLÉMENTÉE ET POUSSÉE. Recette UX : À VALIDER.** Priorité P0, effort M provisoire. [Fiche](orientations-a-decider.md#d1) · [Maquette v2](../visuels/maquettes-apres/D1.html).
 
-**Travail potentiel après décision et cadrage :** Préparer et suivre une communication fiable, avec une conduite claire en cas d’erreur.
+**Objectif réalisé :** Préparer et suivre une communication fiable, avec une conduite claire en cas d’erreur.
 
 **Dépendances :** Endpoint campagnes-organisateur et chaîne d’envoi ; P0 pour un lancement autonome incluant Communication, pas une panne globale démontrée.
 
-**Preuves d’acceptation à produire ultérieurement :**
+**Critères de recette — preuves automatisées et limites dans le bilan canonique :**
 
 1. La cause est identifiée puis la lecture fonctionne sur le contexte ayant échoué et sur un jeu contrôlé pertinent.
 2. Préparation, aperçu, résultat d’envoi et historique sont vérifiés avec des destinataires exclusivement isolés.
@@ -39,13 +39,13 @@ Périmètre : neuf P0/P1 de l’étape 3. F1 et G1 (P2 adoptées) restent dans l
 
 ### A1 — Donner la priorité aux actions attendues
 
-**Statut : EN ATTENTE DE DÉCISION.** Priorité P1, effort M provisoire. [Fiche](orientations-a-decider.md#a1) · [Maquette v2](../visuels/maquettes-apres/A1.html).
+**Réalisation : AUTORISÉE, IMPLÉMENTÉE ET POUSSÉE. Recette UX : À VALIDER.** Priorité P1, effort M provisoire. [Fiche](orientations-a-decider.md#a1) · [Maquette v2](../visuels/maquettes-apres/A1.html).
 
-**Travail potentiel après décision et cadrage :** Identifier ce qui demande une intervention, puis accéder aux nouvelles.
+**Objectif réalisé :** Identifier ce qui demande une intervention, puis accéder aux nouvelles.
 
 **Dépendances :** Hiérarchie et sémantique des composants existants ; aucun nouveau calcul métier d’urgence.
 
-**Preuves d’acceptation à produire ultérieurement :**
+**Critères de recette — preuves automatisées et limites dans le bilan canonique :**
 
 1. À contexte et droits identiques, les actions existantes à traiter et Créer sont accessibles avant les nouvelles sur bureau et mobile.
 2. Succès, information et alerte ont un libellé et un repère distincts, sans dépendre seulement de la couleur.
@@ -53,13 +53,13 @@ Périmètre : neuf P0/P1 de l’étape 3. F1 et G1 (P2 adoptées) restent dans l
 
 ### B1 — Sauvegarder avant la fin des sept étapes
 
-**Statut : EN ATTENTE DE DÉCISION.** Priorité P1, effort L provisoire. [Fiche](orientations-a-decider.md#b1) · [Maquette v2](../visuels/maquettes-apres/B1.html).
+**Réalisation : AUTORISÉE, IMPLÉMENTÉE ET POUSSÉE. Recette UX : À VALIDER.** Priorité P1, effort L provisoire. [Fiche](orientations-a-decider.md#b1) · [Maquette v2](../visuels/maquettes-apres/B1.html).
 
-**Travail potentiel après décision et cadrage :** Préparer une animation en plusieurs sessions sans prétendre qu’elle est publiable.
+**Objectif réalisé :** Préparer une animation en plusieurs sessions sans prétendre qu’elle est publiable.
 
 **Dépendances :** Contrat de brouillon partiel à spécifier avec le backend ; droits, validation partielle et reprise. Pas une simple retouche de bouton.
 
-**Preuves d’acceptation à produire ultérieurement :**
+**Critères de recette — preuves automatisées et limites dans le bilan canonique :**
 
 1. Après modèle, nom et commune, une commande explicite enregistre un brouillon incomplet et confirme seulement la sauvegarde réellement réussie.
 2. Après fermeture et reconnexion, les champs enregistrés sont restitués et les éléments manquants sont listés.
@@ -68,13 +68,13 @@ Périmètre : neuf P0/P1 de l’étape 3. F1 et G1 (P2 adoptées) restent dans l
 
 ### B2 — Expliquer préparation, accords et publication
 
-**Statut : EN ATTENTE DE DÉCISION.** Priorité P1, effort M provisoire. [Fiche](orientations-a-decider.md#b2) · [Maquette v2](../visuels/maquettes-apres/B2.html).
+**Réalisation : AUTORISÉE, IMPLÉMENTÉE ET POUSSÉE. Recette UX : À VALIDER.** Priorité P1, effort M provisoire. [Fiche](orientations-a-decider.md#b2) · [Maquette v2](../visuels/maquettes-apres/B2.html).
 
-**Travail potentiel après décision et cadrage :** Savoir qui doit agir, pourquoi et où, sans promettre le délai de réponse de tiers.
+**Objectif réalisé :** Savoir qui doit agir, pourquoi et où, sans promettre le délai de réponse de tiers.
 
 **Dépendances :** Réutiliser les diagnostics et statuts canoniques ; vérifier les liens et les acteurs disponibles dans le contrat.
 
-**Preuves d’acceptation à produire ultérieurement :**
+**Critères de recette — preuves automatisées et limites dans le bilan canonique :**
 
 1. Avant de commencer, le parcours annonce le résultat brouillon, les prérequis d’accord et l’étape de publication.
 2. Chaque blocage affiché comprend une action, un acteur connu, une raison et un lien ciblé ; aucun statut d’activation n’est inventé.
@@ -84,13 +84,13 @@ Périmètre : neuf P0/P1 de l’étape 3. F1 et G1 (P2 adoptées) restent dans l
 
 ### B3 — Proposer un seuil de passeport cohérent
 
-**Statut : EN ATTENTE DE DÉCISION.** Priorité P1, effort S provisoire. [Fiche](orientations-a-decider.md#b3) · [Maquette v2](../visuels/maquettes-apres/B3.html).
+**Réalisation : AUTORISÉE, IMPLÉMENTÉE ET POUSSÉE. Recette UX : À VALIDER.** Priorité P1, effort S provisoire. [Fiche](orientations-a-decider.md#b3) · [Maquette v2](../visuels/maquettes-apres/B3.html).
 
-**Travail potentiel après décision et cadrage :** Démarrer avec une règle compatible et compréhensible.
+**Objectif réalisé :** Démarrer avec une règle compatible et compréhensible.
 
 **Dépendances :** Bornes du domaine à respecter ; estimation S seulement si le contrat existant suffit. Capture 18 insuffisante pour voir le champ inférieur.
 
-**Preuves d’acceptation à produire ultérieurement :**
+**Critères de recette — preuves automatisées et limites dans le bilan canonique :**
 
 1. Une nouvelle sélection de deux commerces propose un seuil compatible et explique ce qu’il signifie.
 2. Une modification de sélection qui invalide un seuil déjà choisi provoque un message et un ajustement explicite, jamais une modification silencieuse.
@@ -98,13 +98,13 @@ Périmètre : neuf P0/P1 de l’étape 3. F1 et G1 (P2 adoptées) restent dans l
 
 ### C1 — Rendre trouvable l’ajout d’un commerce absent
 
-**Statut : EN ATTENTE DE DÉCISION.** Priorité P1, effort L provisoire. [Fiche](orientations-a-decider.md#c1) · [Maquette v2](../visuels/maquettes-apres/C1.html).
+**Réalisation : AUTORISÉE, IMPLÉMENTÉE ET POUSSÉE. Recette UX : À VALIDER.** Priorité P1, effort L provisoire. [Fiche](orientations-a-decider.md#c1) · [Maquette v2](../visuels/maquettes-apres/C1.html).
 
-**Travail potentiel après décision et cadrage :** Lui donner un chemin explicite et un suivi de demande sans créer de compte actif implicite.
+**Objectif réalisé :** Lui donner un chemin explicite et un suivi de demande sans créer de compte actif implicite.
 
 **Dépendances :** Référentiel commerçants, droits de référencement et contrat backend ; périmètre à confirmer avant chiffrage ferme.
 
-**Preuves d’acceptation à produire ultérieurement :**
+**Critères de recette — preuves automatisées et limites dans le bilan canonique :**
 
 1. Le sélecteur expose une action pour un commerce absent et décrit le résultat d’une demande de référencement.
 2. Le parcours canonique existant est recherché et réutilisé ; son propriétaire et ses droits sont confirmés avant toute nouvelle fonction.
@@ -113,13 +113,13 @@ Périmètre : neuf P0/P1 de l’étape 3. F1 et G1 (P2 adoptées) restent dans l
 
 ### C2 — Sécuriser la compréhension de l’import
 
-**Statut : EN ATTENTE DE DÉCISION.** Priorité P1, effort L provisoire. [Fiche](orientations-a-decider.md#c2) · [Maquette v2](../visuels/maquettes-apres/C2.html).
+**Réalisation : AUTORISÉE, IMPLÉMENTÉE ET POUSSÉE. Recette UX : À VALIDER.** Priorité P1, effort L provisoire. [Fiche](orientations-a-decider.md#c2) · [Maquette v2](../visuels/maquettes-apres/C2.html).
 
-**Travail potentiel après décision et cadrage :** Réduire le travail mécanique et permettre une décision informée avant import.
+**Objectif réalisé :** Réduire le travail mécanique et permettre une décision informée avant import.
 
 **Dépendances :** Qualité des adresses, faux positifs, contrats d’aperçu et import ; code déployé non identifié. L vaut pour l’ensemble, pas seulement les libellés.
 
-**Preuves d’acceptation à produire ultérieurement :**
+**Critères de recette — preuves automatisées et limites dans le bilan canonique :**
 
 1. Les en-têtes reconnus du modèle sont préassociés, visibles, corrigeables et soumis à confirmation.
 2. Colonne requise et valeur requise sont distinguées, avec exemples et erreurs de ligne compréhensibles.
@@ -129,13 +129,13 @@ Périmètre : neuf P0/P1 de l’étape 3. F1 et G1 (P2 adoptées) restent dans l
 
 ### D2 — Diriger le suivi vers le suivi opérationnel
 
-**Statut : VALIDÉE fonctionnellement le 18 novembre.** Priorité P1, effort S provisoire. [Fiche](orientations-a-decider.md#d2) · [Maquette v2](../visuels/maquettes-apres/D2.html).
+**Direction fonctionnelle : VALIDÉE le 18 novembre. Réalisation : IMPLÉMENTÉE ET POUSSÉE. Recette UX : À VALIDER.** Priorité P1, effort S provisoire. [Fiche](orientations-a-decider.md#d2) · [Maquette v2](../visuels/maquettes-apres/D2.html).
 
-**Travail potentiel après décision et cadrage :** Accéder immédiatement à l’espace attendu.
+**Objectif réalisé :** Accéder immédiatement à l’espace attendu.
 
 **Dépendances :** Routes et états existants ; vérifier la navigation retour et les droits.
 
-**Preuves d’acceptation à produire ultérieurement :**
+**Critères de recette — preuves automatisées et limites dans le bilan canonique :**
 
 1. Sur une animation en cours, Consulter le suivi ouvre l’espace opérationnel attendu.
 2. Le bilan dispose d’un accès distinct et explicitement nommé.
@@ -143,22 +143,22 @@ Périmètre : neuf P0/P1 de l’étape 3. F1 et G1 (P2 adoptées) restent dans l
 
 ### E1 — Rendre explicite le chemin de fin
 
-**Statut : EN ATTENTE DE DÉCISION.** Priorité P1, effort M provisoire. [Fiche](orientations-a-decider.md#e1) · [Maquette v2](../visuels/maquettes-apres/E1.html).
+**Réalisation : AUTORISÉE, IMPLÉMENTÉE ET POUSSÉE. Recette UX : À VALIDER.** Priorité P1, effort M provisoire. [Fiche](orientations-a-decider.md#e1) · [Maquette v2](../visuels/maquettes-apres/E1.html).
 
-**Travail potentiel après décision et cadrage :** Savoir ce qui est fini, ce qui reste à faire et les effets de la prochaine action.
+**Objectif réalisé :** Savoir ce qui est fini, ce qui reste à faire et les effets de la prochaine action.
 
 **Dépendances :** Transitions du domaine et dossiers existants, droits ; aucune clôture ou remise automatique.
 
-**Preuves d’acceptation à produire ultérieurement :**
+**Critères de recette — preuves automatisées et limites dans le bilan canonique :**
 
 1. La fin de période est expliquée sans la confondre avec clôture métier ou archivage.
 2. La confirmation de clôture explique arrêt des inscriptions/validations et fixation des participants éligibles en langage courant, en conservant son caractère définitif.
 3. Les dossiers restants pointent vers l’action et le responsable quand il est connu ; aucun responsable n’est inventé.
 4. Information du gagnant, remise effective et enregistrement de remise restent distincts ; bilan et date de référence sont accessibles.
 
-## Organisation possible de la suite
+## Organisation initiale de la suite — historique avant réalisation
 
-Après décisions, conserver les catégories ci-dessus et les commentaires exacts. Pour les seules orientations validées, préparer le cadrage des contrats et critères, puis estimer les lots. D1 nécessite un diagnostic ; B1 et C1 nécessitent d’abord la clarification de leurs contrats. Les ajustements locaux D2/B3 restent candidats, sans contourner les validations serveur. Aucun ordre technique ferme n’est déduit de ce classement.
+Le paragraphe suivant conserve le plan initial, remplacé pour l’exécution par le bilan canonique WA. Après décisions, conserver les catégories ci-dessus et les commentaires exacts. Pour les seules orientations validées, préparer le cadrage des contrats et critères, puis estimer les lots. D1 nécessite un diagnostic ; B1 et C1 nécessitent d’abord la clarification de leurs contrats. Les ajustements locaux D2/B3 restent candidats, sans contourner les validations serveur. Aucun ordre technique ferme n’est déduit de ce classement.
 
 Périmètre futur possible : frontend Animation pour les présentations et parcours ; backend pour les règles, droits, brouillon partiel, référencement, import et Communication selon diagnostic. Les consommateurs commerçant, marketplace et traitements éventuels devront être identifiés si un contrat change ; aucun impact ni absence d’impact définitif n’est présumé ici.
 

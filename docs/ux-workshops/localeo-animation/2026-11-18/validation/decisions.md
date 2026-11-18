@@ -1,36 +1,44 @@
 # Registre des décisions utilisateur — Localeo Animation
 
-Préparé le 2026-11-18T12:38:07+01:00. **État initial : aucune décision utilisateur reçue.** Mise à jour du 18 novembre : arbitrage explicite D2 reçu et primauté de l’atelier en cas de contradiction ; les autres maquettes n’ont pas reçu de décision individuelle.
+Préparé le 2026-11-18T12:38:07+01:00. **État actualisé le 18 novembre 2026 : réalisation autorisée, onze orientations implémentées et poussées ; recette UX à valider.** Mise à jour demandée par l’utilisateur après clarification de la différence entre réalisation et validation du résultat.
 
 Référence : maquettes v2, [dossier des neuf orientations](orientations-a-decider.md), [risques critiques](risques-critiques.md).
 
-Choix possibles : **VALIDÉE / REFUSÉE / À RÉVISER / REPORTÉE**. En attendant votre réponse, la mention **EN ATTENTE DE DÉCISION** ne vaut aucun de ces choix. Les commentaires et conditions ci-dessous sont exclusivement ceux que vous formulerez ; les dépendances techniques restent dans les fiches.
+La demande ultérieure d’utiliser `localeo-specifier-epic` et `localeo-implementer-epic` a autorisé la réalisation du périmètre cadré. La demande suivante a autorisé commit, push et migrations TEST. **Aucune de ces onze orientations n’attend encore une autorisation de développement.**
 
-| ID | Statut | Date de décision | Commentaire utilisateur | Conditions utilisateur | Référence de la maquette |
-| --- | --- | --- | --- | --- | --- |
-| A1 | EN ATTENTE DE DÉCISION | Non connue | Non fourni | Non fournies | [v2 — A1](../visuels/maquettes-apres/A1.html) |
-| B1 | EN ATTENTE DE DÉCISION | Non connue | Non fourni | Non fournies | [v2 — B1](../visuels/maquettes-apres/B1.html) |
-| B2 | EN ATTENTE DE DÉCISION | Non connue | Non fourni | Non fournies | [v2 — B2](../visuels/maquettes-apres/B2.html) |
-| B3 | EN ATTENTE DE DÉCISION | Non connue | Non fourni | Non fournies | [v2 — B3](../visuels/maquettes-apres/B3.html) |
-| C1 | EN ATTENTE DE DÉCISION | Non connue | Non fourni | Non fournies | [v2 — C1](../visuels/maquettes-apres/C1.html) |
-| C2 | EN ATTENTE DE DÉCISION | Non connue | Non fourni | Non fournies | [v2 — C2](../visuels/maquettes-apres/C2.html) |
-| D1 | EN ATTENTE DE DÉCISION | Non connue | Non fourni | Non fournies | [v2 — D1](../visuels/maquettes-apres/D1.html) |
-| D2 | VALIDÉE | 2026-11-18 | Privilégier le suivi opérationnel de l’atelier au Bilan retenu précédemment | Accord sur la direction fonctionnelle ; Bilan distinct ; ne vaut pas recette de la maquette ou du code | [v2 — D2](../visuels/maquettes-apres/D2.html) |
-| E1 | EN ATTENTE DE DÉCISION | Non connue | Non fourni | Non fournies | [v2 — E1](../visuels/maquettes-apres/E1.html) |
+La validation du résultat UX reste distincte : elle pourra être **VALIDÉE / REFUSÉE / À RÉVISER / REPORTÉE**, avec commentaire et conditions explicites. Aucun accord de recette n’est déduit des votes simulés, des tests automatisés ou de la présente mise à jour.
+
+| ID | Décision de réalisation — 2026-11-18 | État de réalisation | Recette UX | Référence de la maquette |
+| --- | --- | --- | --- | --- |
+| A1 | AUTORISÉE — demande globale | IMPLÉMENTÉE ET POUSSÉE | À VALIDER | [v2 — A1](../visuels/maquettes-apres/A1.html) |
+| B1 | AUTORISÉE — demande globale | IMPLÉMENTÉE ET POUSSÉE | À VALIDER | [v2 — B1](../visuels/maquettes-apres/B1.html) |
+| B2 | AUTORISÉE — demande globale | IMPLÉMENTÉE ET POUSSÉE | À VALIDER | [v2 — B2](../visuels/maquettes-apres/B2.html) |
+| B3 | AUTORISÉE — demande globale | IMPLÉMENTÉE ET POUSSÉE | À VALIDER | [v2 — B3](../visuels/maquettes-apres/B3.html) |
+| C1 | AUTORISÉE — demande globale | IMPLÉMENTÉE ET POUSSÉE | À VALIDER | [v2 — C1](../visuels/maquettes-apres/C1.html) |
+| C2 | AUTORISÉE — demande globale | IMPLÉMENTÉE ET POUSSÉE | À VALIDER | [v2 — C2](../visuels/maquettes-apres/C2.html) |
+| D1 | AUTORISÉE — demande globale | IMPLÉMENTÉE ET POUSSÉE | À VALIDER | [v2 — D1](../visuels/maquettes-apres/D1.html) |
+| D2 | AUTORISÉE — direction fonctionnelle VALIDÉE explicitement | IMPLÉMENTÉE ET POUSSÉE | À VALIDER | [v2 — D2](../visuels/maquettes-apres/D2.html) |
+| E1 | AUTORISÉE — demande globale | IMPLÉMENTÉE ET POUSSÉE | À VALIDER | [v2 — E1](../visuels/maquettes-apres/E1.html) |
+| F1 | AUTORISÉE — demande globale, P2 | IMPLÉMENTÉE ET POUSSÉE | À VALIDER | Aucune maquette d’étape 3 ; bilan WA-15 |
+| G1 | AUTORISÉE — demande globale, P2 | IMPLÉMENTÉE ET POUSSÉE | À VALIDER | Aucune maquette d’étape 3 ; bilan WA-16 |
+
+Condition fonctionnelle D2 : « Consulter le suivi » ouvre le suivi opérationnel ; Bilan reste distinct. Aucun commentaire ni condition individuelle de recette reçu pour les onze orientations. Date de validation de recette : non connue.
 
 ## Synthèse
 
-- VALIDÉES : 1 (D2).
-- À RÉVISER : 0.
-- REPORTÉES : 0.
-- REFUSÉES : 0.
-- EN ATTENTE DE DÉCISION : 8 (A1, B1, B2, B3, C1, C2, D1, E1).
+- Réalisation autorisée, implémentée et poussée : **11 orientations** (9 P0/P1, 2 P2).
+- Autorisation de développement encore attendue dans ce périmètre : **0**.
+- Recette UX : **11 à valider**, aucune validation, révision, report ou refus de recette enregistré.
+- D2 conserve en plus sa validation explicite de direction fonctionnelle.
+- Base TEST : migrations **324 à 326 appliquées**, contrôle du schéma **READY**. Déploiement effectif des nouvelles interfaces non vérifié.
+
+Preuves : [bilan canonique WA](../../../../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md#workshop-ux-20261118). Commits poussés : projet `6cb62ed`, backend `5342a77f`, Animation `fe23313`, Pro `93794e4`.
 
 ## Historique
 
 Initialisation du registre à réception de l’instruction d’étape 4. Aucun choix, commentaire ou condition attribué à l’utilisateur. Aucune date de validation inventée.
 
-Après votre réponse, enregistrer fidèlement chaque décision, sa date connue et ses conditions ; laisser les ID non mentionnés en attente. Reporter la synthèse dans le [backlog potentiel](backlog-implementation-potentiel.md) et le README. Aucune mise en œuvre automatique ne suit cet enregistrement.
+À l’étape 4 initiale, huit orientations étaient en attente et D2 seule validée fonctionnellement. Les demandes ultérieures de spécification, réalisation puis commit/push ont autorisé et conduit à l’implémentation des onze orientations cadrées. Le libellé unique « EN ATTENTE DE DÉCISION » est remplacé par les trois états séparés ci-dessus. Le [backlog](backlog-implementation-potentiel.md) et le README reflètent cet état courant ; les manifestes antérieurs restent des preuves historiques.
 
 ## Arbitrage reçu le 18 novembre 2026 — cadrage des suites
 

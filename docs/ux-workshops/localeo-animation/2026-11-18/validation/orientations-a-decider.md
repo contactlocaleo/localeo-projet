@@ -1,28 +1,28 @@
-# Orientations à décider — Localeo Animation
+# Orientations réalisées — recette UX Localeo Animation
 
-Étape 4 préparée le 2026-11-18T12:38:07+01:00. **Mise à jour du 18 novembre : D2 validée fonctionnellement ; huit décisions individuelles encore attendues.**
+Étape 4 préparée le 2026-11-18T12:38:07+01:00 ; actualisée le 18 novembre. **Les neuf orientations P0/P1 sont implémentées et poussées après autorisation globale ; recette UX à valider. D2 conserve sa validation de direction fonctionnelle.**
 
 Version présentée : maquettes **v2** de l’étape 3, neuf orientations P0/P1 adoptées à au moins sept voix simulées sur douze. Les préférences de la revue ne constituent pas votre validation. Les conséquences et bénéfices restent des hypothèses d’usage sauf preuve explicitement indiquée.
 
-Pour chaque ID, choisir **VALIDÉE**, **REFUSÉE**, **À RÉVISER** ou **REPORTÉE**, puis préciser si nécessaire commentaire et conditions. Vous pouvez répondre par groupes ; une orientation non mentionnée reste **EN ATTENTE DE DÉCISION**. Le statut d’attente indique une absence de décision, pas un report.
+Pour la recette UX de chaque ID, choisir **VALIDÉE**, **REFUSÉE**, **À RÉVISER** ou **REPORTÉE**, avec commentaire et conditions. Une recette non évaluée reste **À VALIDER**. Ce statut ne suspend pas l’implémentation déjà réalisée et ne vaut pas report.
 
-[Registre à compléter après votre réponse](decisions.md) · [Risques critiques séparés](risques-critiques.md) · [Galerie comparative](../visuels/comparatif-avant-apres.html) · [Backlog potentiel](backlog-implementation-potentiel.md)
+[Registre de réalisation et de recette](decisions.md) · [Risques critiques séparés](risques-critiques.md) · [Galerie comparative](../visuels/comparatif-avant-apres.html) · [Backlog réalisé](backlog-implementation-potentiel.md)
 
 Efforts relatifs et provisoires : **S** = ajustement local ; **M** = plusieurs composants ou états ; **L** = parcours ou contrat partagé. Ce ne sont ni des jours ni un engagement de livraison.
 
 ## Synthèse
 
-| ID | Parcours | Priorité | Vote simulé POUR /12 | Effort | Décision utilisateur |
+| ID | Parcours | Priorité | Vote simulé POUR /12 | Effort | État courant |
 | --- | --- | --- | ---: | --- | --- |
-| [A1](#a1) | E — Pilotage global ; première prise en main | P1 | 12 | M | En attente |
-| [B1](#b1) | A — Création et reprise | P1 | 12 | L | En attente |
-| [B2](#b2) | A — Publication ; B — Préparation des commerçants | P1 | 12 | M | En attente |
-| [B3](#b3) | A — Paramétrage du passeport | P1 | 12 | S | En attente |
-| [C1](#c1) | B — Ajout individuel | P1 | 9 | L | En attente |
-| [C2](#c2) | B — Import et doublons | P1 | 9 | L | En attente |
-| [D1](#d1) | C — Suivi et communication | P0 | 12 | M | En attente |
-| [D2](#d2) | C — Suivi en cours | P1 | 12 | S | VALIDÉE (direction fonctionnelle) |
-| [E1](#e1) | D — Clôture, lots et bilan | P1 | 12 | M | En attente |
+| [A1](#a1) | E — Pilotage global ; première prise en main | P1 | 12 | M | Implémentée et poussée ; recette UX à valider |
+| [B1](#b1) | A — Création et reprise | P1 | 12 | L | Implémentée et poussée ; recette UX à valider |
+| [B2](#b2) | A — Publication ; B — Préparation des commerçants | P1 | 12 | M | Implémentée et poussée ; recette UX à valider |
+| [B3](#b3) | A — Paramétrage du passeport | P1 | 12 | S | Implémentée et poussée ; recette UX à valider |
+| [C1](#c1) | B — Ajout individuel | P1 | 9 | L | Implémentée et poussée ; recette UX à valider |
+| [C2](#c2) | B — Import et doublons | P1 | 9 | L | Implémentée et poussée ; recette UX à valider |
+| [D1](#d1) | C — Suivi et communication | P0 | 12 | M | Implémentée et poussée ; recette UX à valider |
+| [D2](#d2) | C — Suivi en cours | P1 | 12 | S | Implémentée et poussée ; direction validée ; recette UX à valider |
+| [E1](#e1) | D — Clôture, lots et bilan | P1 | 12 | M | Implémentée et poussée ; recette UX à valider |
 
 <a id="a1"></a>
 ## A1 — Donner la priorité aux actions attendues
