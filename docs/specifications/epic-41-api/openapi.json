@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Backend - contrat implemente EPIC 41",
     "description": "OpenAPI complet du backend, dont les parcours Animation locale. Genere hors ligne depuis le code local pour les integrations et les mocks ; cet instantane ne prouve pas son deploiement.",
-    "version": "1.0.0+20ec49c"
+    "version": "1.0.0+20ae453"
   },
   "paths": {
     "/public/identite-acces/interne/connexion": {
@@ -3743,7 +3743,7 @@
                 }
               }
             },
-            "description": "Unprocessable Content"
+            "description": "Unprocessable Entity"
           },
           "503": {
             "content": {
@@ -3831,7 +3831,7 @@
                 }
               }
             },
-            "description": "Unprocessable Content"
+            "description": "Unprocessable Entity"
           },
           "503": {
             "content": {
@@ -4540,7 +4540,7 @@
                 }
               }
             },
-            "description": "Unprocessable Content"
+            "description": "Unprocessable Entity"
           },
           "503": {
             "content": {
@@ -4602,7 +4602,7 @@
             }
           },
           "422": {
-            "description": "Unprocessable Content",
+            "description": "Unprocessable Entity",
             "content": {
               "application/json": {
                 "schema": {
@@ -4671,7 +4671,7 @@
             }
           },
           "422": {
-            "description": "Unprocessable Content",
+            "description": "Unprocessable Entity",
             "content": {
               "application/json": {
                 "schema": {
@@ -4789,7 +4789,7 @@
                 }
               }
             },
-            "description": "Unprocessable Content"
+            "description": "Unprocessable Entity"
           },
           "503": {
             "content": {
@@ -4877,7 +4877,7 @@
                 }
               }
             },
-            "description": "Unprocessable Content"
+            "description": "Unprocessable Entity"
           },
           "503": {
             "content": {
@@ -4953,7 +4953,7 @@
                 }
               }
             },
-            "description": "Unprocessable Content"
+            "description": "Unprocessable Entity"
           },
           "503": {
             "content": {
@@ -5102,7 +5102,7 @@
                 }
               }
             },
-            "description": "Unprocessable Content"
+            "description": "Unprocessable Entity"
           },
           "503": {
             "content": {
@@ -5230,7 +5230,7 @@
                 }
               }
             },
-            "description": "Unprocessable Content"
+            "description": "Unprocessable Entity"
           },
           "503": {
             "content": {
@@ -5434,7 +5434,7 @@
                 }
               }
             },
-            "description": "Unprocessable Content"
+            "description": "Unprocessable Entity"
           },
           "503": {
             "content": {
@@ -5522,7 +5522,7 @@
                 }
               }
             },
-            "description": "Unprocessable Content"
+            "description": "Unprocessable Entity"
           },
           "503": {
             "content": {
@@ -5697,7 +5697,7 @@
                 }
               }
             },
-            "description": "Unprocessable Content"
+            "description": "Unprocessable Entity"
           },
           "503": {
             "content": {
@@ -5872,7 +5872,7 @@
                 }
               }
             },
-            "description": "Unprocessable Content"
+            "description": "Unprocessable Entity"
           },
           "503": {
             "content": {
@@ -6047,7 +6047,7 @@
                 }
               }
             },
-            "description": "Unprocessable Content"
+            "description": "Unprocessable Entity"
           },
           "503": {
             "content": {
@@ -6156,7 +6156,7 @@
                 }
               }
             },
-            "description": "Unprocessable Content"
+            "description": "Unprocessable Entity"
           },
           "503": {
             "content": {
@@ -6265,7 +6265,7 @@
                 }
               }
             },
-            "description": "Unprocessable Content"
+            "description": "Unprocessable Entity"
           },
           "503": {
             "content": {
@@ -6374,7 +6374,7 @@
                 }
               }
             },
-            "description": "Unprocessable Content"
+            "description": "Unprocessable Entity"
           },
           "503": {
             "content": {
@@ -6483,7 +6483,7 @@
                 }
               }
             },
-            "description": "Unprocessable Content"
+            "description": "Unprocessable Entity"
           },
           "503": {
             "content": {
@@ -29683,7 +29683,7 @@
             }
           },
           "422": {
-            "description": "Unprocessable Content",
+            "description": "Unprocessable Entity",
             "content": {
               "application/json": {
                 "schema": {
@@ -29764,7 +29764,7 @@
             }
           },
           "422": {
-            "description": "Unprocessable Content",
+            "description": "Unprocessable Entity",
             "content": {
               "application/json": {
                 "schema": {
@@ -30072,7 +30072,7 @@
                 }
               }
             },
-            "description": "Unprocessable Content"
+            "description": "Unprocessable Entity"
           },
           "500": {
             "content": {
@@ -31273,7 +31273,7 @@
             }
           },
           "413": {
-            "description": "Content Too Large",
+            "description": "Request Entity Too Large",
             "content": {
               "application/json": {
                 "schema": {
@@ -31562,7 +31562,7 @@
                 }
               }
             },
-            "description": "Content Too Large"
+            "description": "Request Entity Too Large"
           },
           "415": {
             "content": {
@@ -51152,7 +51152,7 @@
                 }
               }
             },
-            "description": "Unprocessable Content"
+            "description": "Unprocessable Entity"
           },
           "500": {
             "content": {
@@ -51268,7 +51268,7 @@
                 }
               }
             },
-            "description": "Unprocessable Content"
+            "description": "Unprocessable Entity"
           }
         },
         "security": [
@@ -143500,7 +143500,7 @@
         "properties": {
           "file": {
             "type": "string",
-            "format": "binary",
+            "contentMediaType": "application/octet-stream",
             "title": "File"
           },
           "type_document": {
@@ -143617,7 +143617,7 @@
         "properties": {
           "file": {
             "type": "string",
-            "format": "binary",
+            "contentMediaType": "application/octet-stream",
             "title": "File"
           }
         },
@@ -143632,7 +143632,7 @@
           "files": {
             "items": {
               "type": "string",
-              "format": "binary"
+              "contentMediaType": "application/octet-stream"
             },
             "type": "array",
             "title": "Files"
@@ -143703,7 +143703,7 @@
         "properties": {
           "file": {
             "type": "string",
-            "format": "binary",
+            "contentMediaType": "application/octet-stream",
             "title": "File"
           },
           "nom": {
@@ -143728,7 +143728,7 @@
         "properties": {
           "file": {
             "type": "string",
-            "format": "binary",
+            "contentMediaType": "application/octet-stream",
             "title": "File"
           },
           "nom": {
@@ -143764,7 +143764,7 @@
         "properties": {
           "fichier": {
             "type": "string",
-            "format": "binary",
+            "contentMediaType": "application/octet-stream",
             "title": "Fichier"
           },
           "commune_id": {
@@ -143796,7 +143796,7 @@
         "properties": {
           "fichier": {
             "type": "string",
-            "format": "binary",
+            "contentMediaType": "application/octet-stream",
             "title": "Fichier"
           },
           "source_id": {
@@ -143861,7 +143861,7 @@
           },
           "file": {
             "type": "string",
-            "format": "binary",
+            "contentMediaType": "application/octet-stream",
             "title": "File"
           }
         },
@@ -143876,7 +143876,7 @@
         "properties": {
           "file": {
             "type": "string",
-            "format": "binary",
+            "contentMediaType": "application/octet-stream",
             "title": "File"
           },
           "invoiceNumber": {
@@ -143906,7 +143906,7 @@
         "properties": {
           "file": {
             "type": "string",
-            "format": "binary",
+            "contentMediaType": "application/octet-stream",
             "title": "File"
           },
           "invoiceNumber": {
@@ -143946,12 +143946,12 @@
           },
           "pdf": {
             "type": "string",
-            "format": "binary",
+            "contentMediaType": "application/octet-stream",
             "title": "Pdf"
           },
           "content": {
             "type": "string",
-            "format": "binary",
+            "contentMediaType": "application/octet-stream",
             "title": "Content"
           }
         },
@@ -143973,7 +143973,7 @@
           },
           "file": {
             "type": "string",
-            "format": "binary",
+            "contentMediaType": "application/octet-stream",
             "title": "File"
           }
         },
@@ -143988,7 +143988,7 @@
         "properties": {
           "file": {
             "type": "string",
-            "format": "binary",
+            "contentMediaType": "application/octet-stream",
             "title": "File"
           }
         },
@@ -152064,47 +152064,7 @@
         ],
         "title": "ContenuCommercantPasseport"
       },
-      "ContenuVitrine-Input": {
-        "properties": {
-          "instruction": {
-            "type": "string",
-            "maxLength": 2000,
-            "title": "Instruction",
-            "default": ""
-          },
-          "intruderDescription": {
-            "type": "string",
-            "maxLength": 1000,
-            "title": "Intruderdescription",
-            "default": ""
-          },
-          "placementInstructions": {
-            "type": "string",
-            "maxLength": 1000,
-            "title": "Placementinstructions",
-            "default": ""
-          },
-          "windowLocation": {
-            "type": "string",
-            "maxLength": 2000,
-            "title": "Windowlocation",
-            "default": ""
-          },
-          "challenge": {
-            "$ref": "#/components/schemas/DefiVitrine"
-          },
-          "correctChoiceId": {
-            "type": "string",
-            "maxLength": 64,
-            "title": "Correctchoiceid",
-            "default": ""
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "title": "ContenuVitrine"
-      },
-      "ContenuVitrine-Output": {
+      "ContenuVitrine": {
         "properties": {
           "instruction": {
             "type": "string",
@@ -156269,7 +156229,7 @@
           "initialisation": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/InitialisationGeneration-Input"
+                "$ref": "#/components/schemas/InitialisationGeneration"
               },
               {
                 "type": "null"
@@ -156343,7 +156303,7 @@
           "initialisation": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/InitialisationGeneration-Output"
+                "$ref": "#/components/schemas/InitialisationGeneration"
               },
               {
                 "type": "null"
@@ -156435,7 +156395,7 @@
           "initialisation": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/InitialisationGeneration-Input"
+                "$ref": "#/components/schemas/InitialisationGeneration"
               },
               {
                 "type": "null"
@@ -156509,7 +156469,7 @@
           "initialisation": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/InitialisationGeneration-Output"
+                "$ref": "#/components/schemas/InitialisationGeneration"
               },
               {
                 "type": "null"
@@ -156818,6 +156778,18 @@
             ],
             "title": "Prochaine Relance At"
           },
+          "motif_relance_interdite": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Motif Relance Interdite",
+            "description": "Motif serveur d'indisponibilité de la relance ; null lorsque actions.relancer est vraie."
+          },
           "retrait_demande_at": {
             "anyOf": [
               {
@@ -156846,7 +156818,8 @@
               "type": "boolean"
             },
             "type": "object",
-            "title": "Actions"
+            "title": "Actions",
+            "description": "Capacités serveur : accepter, refuser, retirer, confirmer_pret, relancer et annuler ; traiter_retrait est aussi présent pour la Chasse. relancer et annuler valent un booléen pour tous les modèles. Les commandes revérifient droits, état et version."
           },
           "contenu": {
             "anyOf": [
@@ -159030,6 +159003,18 @@
             ],
             "title": "Beneficiaire"
           },
+          "responsable_remise": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Responsable Remise",
+            "description": "Responsable enregistré dans le snapshot du lot externe ; null si absent ou autre nature."
+          },
           "quantite": {
             "type": "integer",
             "minimum": 1.0,
@@ -160445,7 +160430,7 @@
             "title": "Expectedrevision"
           },
           "vitrine": {
-            "$ref": "#/components/schemas/ContenuVitrine-Input"
+            "$ref": "#/components/schemas/ContenuVitrine"
           }
         },
         "additionalProperties": false,
@@ -160846,8 +160831,8 @@
                 "type": "string",
                 "enum": [
                   "ORGANISATEUR",
-                  "LOCALEO",
-                  "COMMERCANTS"
+                  "COMMERCANTS",
+                  "LOCALEO"
                 ]
               },
               {
@@ -160869,7 +160854,7 @@
         ],
         "title": "EtapeAssistantAnimation"
       },
-      "EtapeCommercante-Input": {
+      "EtapeCommercante": {
         "properties": {
           "lieu": {
             "$ref": "#/components/schemas/LieuCommercant"
@@ -160883,7 +160868,7 @@
           },
           "missionsProposees": {
             "items": {
-              "$ref": "#/components/schemas/MissionProposee-Input"
+              "$ref": "#/components/schemas/MissionProposee"
             },
             "type": "array",
             "maxItems": 2,
@@ -160893,48 +160878,7 @@
           "presentation": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/PresentationEtape-Input"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "lieu",
-          "titre",
-          "missionsProposees"
-        ],
-        "title": "EtapeCommercante"
-      },
-      "EtapeCommercante-Output": {
-        "properties": {
-          "lieu": {
-            "$ref": "#/components/schemas/LieuCommercant"
-          },
-          "titre": {
-            "type": "string",
-            "maxLength": 200,
-            "minLength": 1,
-            "pattern": "\\S",
-            "title": "Titre"
-          },
-          "missionsProposees": {
-            "items": {
-              "$ref": "#/components/schemas/MissionProposee-Output"
-            },
-            "type": "array",
-            "maxItems": 2,
-            "minItems": 1,
-            "title": "Missionsproposees"
-          },
-          "presentation": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/PresentationEtape-Output"
+                "$ref": "#/components/schemas/PresentationEtape"
               },
               {
                 "type": "null"
@@ -160986,7 +160930,7 @@
         ],
         "title": "EtapeExploitationPayload"
       },
-      "EtapeNonCommercante-Input": {
+      "EtapeNonCommercante": {
         "properties": {
           "lieu": {
             "anyOf": [
@@ -161060,102 +161004,7 @@
           "presentation": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/PresentationEtape-Input"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "lieu",
-          "titre",
-          "texteJoueur",
-          "consigne",
-          "interactionCommercant",
-          "consigneCommercant",
-          "defi"
-        ],
-        "title": "EtapeNonCommercante"
-      },
-      "EtapeNonCommercante-Output": {
-        "properties": {
-          "lieu": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/LieuPoi"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "titre": {
-            "type": "string",
-            "maxLength": 200,
-            "minLength": 1,
-            "pattern": "\\S",
-            "title": "Titre"
-          },
-          "texteJoueur": {
-            "type": "string",
-            "maxLength": 20000,
-            "minLength": 1,
-            "pattern": "\\S",
-            "title": "Textejoueur"
-          },
-          "consigne": {
-            "type": "string",
-            "maxLength": 20000,
-            "minLength": 1,
-            "pattern": "\\S",
-            "title": "Consigne"
-          },
-          "interactionCommercant": {
-            "type": "null",
-            "title": "Interactioncommercant"
-          },
-          "consigneCommercant": {
-            "type": "null",
-            "title": "Consignecommercant"
-          },
-          "defi": {
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/DefiQcm"
-              },
-              {
-                "$ref": "#/components/schemas/DefiInformation"
-              },
-              {
-                "$ref": "#/components/schemas/DefiAssociation"
-              },
-              {
-                "$ref": "#/components/schemas/DefiOrdre"
-              },
-              {
-                "$ref": "#/components/schemas/DefiTexte"
-              }
-            ],
-            "title": "Defi",
-            "discriminator": {
-              "propertyName": "type",
-              "mapping": {
-                "ASSOCIATION": "#/components/schemas/DefiAssociation",
-                "INFORMATION": "#/components/schemas/DefiInformation",
-                "ORDERING": "#/components/schemas/DefiOrdre",
-                "SINGLE_CHOICE": "#/components/schemas/DefiQcm",
-                "TEXT_INPUT": "#/components/schemas/DefiTexte"
-              }
-            }
-          },
-          "presentation": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/PresentationEtape-Output"
+                "$ref": "#/components/schemas/PresentationEtape"
               },
               {
                 "type": "null"
@@ -169974,59 +169823,7 @@
         ],
         "title": "Initialisation"
       },
-      "InitialisationGeneration-Input": {
-        "properties": {
-          "metadata": {
-            "$ref": "#/components/schemas/MetadonneesAnimation"
-          },
-          "organizer": {
-            "$ref": "#/components/schemas/OrganisateurAnimation"
-          },
-          "territory": {
-            "$ref": "#/components/schemas/TerritoireAnimation"
-          },
-          "schedule": {
-            "$ref": "#/components/schemas/PeriodeAnimation"
-          },
-          "registration": {
-            "$ref": "#/components/schemas/InscriptionAnimation"
-          },
-          "assets": {
-            "items": {
-              "$ref": "#/components/schemas/MediaEmbarque"
-            },
-            "type": "array",
-            "maxItems": 0,
-            "title": "Assets"
-          },
-          "rewards": {
-            "$ref": "#/components/schemas/RecompensesAnimation"
-          },
-          "themeVisuel": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/ThemeInitialisationGeneration"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "metadata",
-          "organizer",
-          "territory",
-          "schedule",
-          "registration",
-          "assets",
-          "rewards"
-        ],
-        "title": "InitialisationGeneration"
-      },
-      "InitialisationGeneration-Output": {
+      "InitialisationGeneration": {
         "properties": {
           "metadata": {
             "$ref": "#/components/schemas/MetadonneesAnimation"
@@ -174771,7 +174568,7 @@
             "title": "Id"
           },
           "contenu": {
-            "$ref": "#/components/schemas/MissionProposee-Output"
+            "$ref": "#/components/schemas/MissionProposee"
           },
           "conditions": {
             "items": {
@@ -174790,7 +174587,7 @@
         ],
         "title": "MissionCommercant"
       },
-      "MissionProposee-Input": {
+      "MissionProposee": {
         "properties": {
           "id": {
             "type": "string",
@@ -174877,116 +174674,7 @@
           "presentation": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/PresentationEtape-Input"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "id",
-          "titre",
-          "preparationCommercant",
-          "texteJoueur",
-          "consigne",
-          "interactionCommercant",
-          "consigneCommercant",
-          "defi"
-        ],
-        "title": "MissionProposee"
-      },
-      "MissionProposee-Output": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "maxLength": 64,
-            "minLength": 1,
-            "pattern": "\\S",
-            "title": "Id"
-          },
-          "titre": {
-            "type": "string",
-            "maxLength": 200,
-            "minLength": 1,
-            "pattern": "\\S",
-            "title": "Titre"
-          },
-          "preparationCommercant": {
-            "$ref": "#/components/schemas/PreparationCommercant"
-          },
-          "texteJoueur": {
-            "type": "string",
-            "maxLength": 20000,
-            "minLength": 1,
-            "pattern": "\\S",
-            "title": "Textejoueur"
-          },
-          "consigne": {
-            "type": "string",
-            "maxLength": 20000,
-            "minLength": 1,
-            "pattern": "\\S",
-            "title": "Consigne"
-          },
-          "interactionCommercant": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 20000,
-                "minLength": 1,
-                "pattern": "\\S"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Interactioncommercant"
-          },
-          "consigneCommercant": {
-            "type": "string",
-            "maxLength": 20000,
-            "minLength": 1,
-            "pattern": "\\S",
-            "title": "Consignecommercant"
-          },
-          "defi": {
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/DefiQcm"
-              },
-              {
-                "$ref": "#/components/schemas/DefiInformation"
-              },
-              {
-                "$ref": "#/components/schemas/DefiAssociation"
-              },
-              {
-                "$ref": "#/components/schemas/DefiOrdre"
-              },
-              {
-                "$ref": "#/components/schemas/DefiTexte"
-              }
-            ],
-            "title": "Defi",
-            "discriminator": {
-              "propertyName": "type",
-              "mapping": {
-                "ASSOCIATION": "#/components/schemas/DefiAssociation",
-                "INFORMATION": "#/components/schemas/DefiInformation",
-                "ORDERING": "#/components/schemas/DefiOrdre",
-                "SINGLE_CHOICE": "#/components/schemas/DefiQcm",
-                "TEXT_INPUT": "#/components/schemas/DefiTexte"
-              }
-            }
-          },
-          "presentation": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/PresentationEtape-Output"
+                "$ref": "#/components/schemas/PresentationEtape"
               },
               {
                 "type": "null"
@@ -187570,7 +187258,7 @@
             "title": "Resultat Source Id"
           },
           "resultat": {
-            "$ref": "#/components/schemas/ResultatGenerationChasse-Output"
+            "$ref": "#/components/schemas/ResultatGenerationChasse"
           },
           "positions": {
             "items": {
@@ -187920,7 +187608,7 @@
             "title": "Resultat Source Id"
           },
           "resultat": {
-            "$ref": "#/components/schemas/ResultatGenerationPasseport-Output"
+            "$ref": "#/components/schemas/ResultatGenerationPasseport"
           },
           "preparation_revision": {
             "type": "integer",
@@ -188152,34 +187840,7 @@
         ],
         "title": "PrerequisProduitPayload"
       },
-      "PresentationEtape-Input": {
-        "properties": {
-          "illustration": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/Illustration"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "themeVisuel": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/SurchargeThemeVisuel"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "title": "PresentationEtape"
-      },
-      "PresentationEtape-Output": {
+      "PresentationEtape": {
         "properties": {
           "illustration": {
             "anyOf": [
@@ -191422,7 +191083,7 @@
             "title": "Motif"
           },
           "vitrine": {
-            "$ref": "#/components/schemas/ContenuVitrine-Output"
+            "$ref": "#/components/schemas/ContenuVitrine"
           },
           "materiel": {
             "$ref": "#/components/schemas/MaterielVitrinePayload"
@@ -197953,7 +197614,7 @@
         ],
         "title": "ResultatFinalisationGenerationPayload"
       },
-      "ResultatGenerationChasse-Input": {
+      "ResultatGenerationChasse": {
         "properties": {
           "titre": {
             "type": "string",
@@ -197991,10 +197652,10 @@
             "items": {
               "anyOf": [
                 {
-                  "$ref": "#/components/schemas/EtapeCommercante-Input"
+                  "$ref": "#/components/schemas/EtapeCommercante"
                 },
                 {
-                  "$ref": "#/components/schemas/EtapeNonCommercante-Input"
+                  "$ref": "#/components/schemas/EtapeNonCommercante"
                 }
               ]
             },
@@ -198041,174 +197702,7 @@
         ],
         "title": "ResultatGenerationChasse"
       },
-      "ResultatGenerationChasse-Output": {
-        "properties": {
-          "titre": {
-            "type": "string",
-            "maxLength": 200,
-            "minLength": 1,
-            "pattern": "\\S",
-            "title": "Titre"
-          },
-          "synopsis": {
-            "type": "string",
-            "maxLength": 20000,
-            "minLength": 1,
-            "pattern": "\\S",
-            "title": "Synopsis"
-          },
-          "dureeEstimeeMinutes": {
-            "type": "integer",
-            "minimum": 1.0,
-            "title": "Dureeestimeeminutes"
-          },
-          "difficulte": {
-            "type": "string",
-            "maxLength": 80,
-            "minLength": 1,
-            "title": "Difficulte"
-          },
-          "introduction": {
-            "type": "string",
-            "maxLength": 20000,
-            "minLength": 1,
-            "pattern": "\\S",
-            "title": "Introduction"
-          },
-          "etapes": {
-            "items": {
-              "anyOf": [
-                {
-                  "$ref": "#/components/schemas/EtapeCommercante-Output"
-                },
-                {
-                  "$ref": "#/components/schemas/EtapeNonCommercante-Output"
-                }
-              ]
-            },
-            "type": "array",
-            "minItems": 1,
-            "title": "Etapes"
-          },
-          "conclusion": {
-            "type": "string",
-            "maxLength": 20000,
-            "minLength": 1,
-            "pattern": "\\S",
-            "title": "Conclusion"
-          },
-          "themeVisuel": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/ThemeVisuel"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "medias": {
-            "items": {
-              "$ref": "#/components/schemas/MediaEmbarque"
-            },
-            "type": "array",
-            "title": "Medias"
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "titre",
-          "synopsis",
-          "dureeEstimeeMinutes",
-          "difficulte",
-          "introduction",
-          "etapes",
-          "conclusion",
-          "medias"
-        ],
-        "title": "ResultatGenerationChasse"
-      },
-      "ResultatGenerationPasseport-Input": {
-        "properties": {
-          "type": {
-            "type": "string",
-            "const": "PASSEPORT_COMMERCANT",
-            "title": "Type"
-          },
-          "contractVersion": {
-            "type": "string",
-            "const": "1.0",
-            "title": "Contractversion"
-          },
-          "titre": {
-            "type": "string",
-            "maxLength": 200,
-            "minLength": 1,
-            "pattern": "\\S",
-            "title": "Titre"
-          },
-          "introduction": {
-            "type": "string",
-            "maxLength": 20000,
-            "minLength": 1,
-            "pattern": "\\S",
-            "title": "Introduction"
-          },
-          "consignes": {
-            "type": "string",
-            "maxLength": 20000,
-            "minLength": 1,
-            "pattern": "\\S",
-            "title": "Consignes"
-          },
-          "libelleProgression": {
-            "type": "string",
-            "maxLength": 200,
-            "minLength": 1,
-            "pattern": "\\S",
-            "title": "Libelleprogression"
-          },
-          "commercants": {
-            "items": {
-              "$ref": "#/components/schemas/ContenuCommercantPasseport"
-            },
-            "type": "array",
-            "title": "Commercants"
-          },
-          "themeVisuel": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/ThemeVisuel"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "medias": {
-            "items": {
-              "$ref": "#/components/schemas/MediaEmbarque"
-            },
-            "type": "array",
-            "title": "Medias"
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "type",
-          "contractVersion",
-          "titre",
-          "introduction",
-          "consignes",
-          "libelleProgression",
-          "commercants",
-          "medias"
-        ],
-        "title": "ResultatGenerationPasseport"
-      },
-      "ResultatGenerationPasseport-Output": {
+      "ResultatGenerationPasseport": {
         "properties": {
           "type": {
             "type": "string",
@@ -198922,7 +198416,7 @@
             "default": false
           },
           "initialisation": {
-            "$ref": "#/components/schemas/InitialisationGeneration-Input"
+            "$ref": "#/components/schemas/InitialisationGeneration"
           },
           "animation_id": {
             "anyOf": [
@@ -199816,10 +199310,10 @@
           "resultat": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/ResultatGenerationChasse-Input"
+                "$ref": "#/components/schemas/ResultatGenerationChasse"
               },
               {
-                "$ref": "#/components/schemas/ResultatGenerationPasseport-Input"
+                "$ref": "#/components/schemas/ResultatGenerationPasseport"
               }
             ],
             "title": "Resultat"

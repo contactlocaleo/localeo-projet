@@ -1,5 +1,224 @@
 # Parcours organisateur : préparer, publier, suivre et réutiliser
 
+## Évolution du 18 novembre 2026 — suivi Animation et Pro
+
+**E73-EVO-SUIVI-ANIMATION** applique les cinq améliorations de l’[audit de
+brainstorming du 17 novembre](../../audits/localeo-animation-pro-suivi-brainstorming-2026-11-17.md).
+Le demandeur a explicitement sélectionné ce rapport le 18 novembre : **message
+explicatif au scanner, sans nouvelle confirmation de sortie**. Le rapport
+« décisions UX » et son complément passeport restent distincts ; leur nouveau
+compteur de participations avec passage et la confirmation de sortie ne sont
+pas adoptés. La préparation commerçante fait partie du présent lot, mais pas
+la réorganisation du suivi des confirmations dans Animation.
+
+L’évolution conserve la clôture historique d’E73 et les preuves PO antérieures.
+Elle remplace seulement l’option expérimentale de filtre initial de fin (D7)
+par l’ouverture ordinaire sur **À résoudre**, avec accès à tous les dossiers.
+E56 reste propriétaire des décisions d’invitation et de préparation ; les
+contrats du moteur restent propriétaires des validations et de la qualification.
+
+### Critères et comportements SA
+
+| Critère | Existant → cible observable et refus à préserver |
+| --- | --- |
+| SA-01 — Publication | Blocage générique et détour par Invitations → afficher les commerçants en attente, leur situation, échéance et actions autorisées auprès du blocage, avec lien vers le suivi complet. Relance disponible ou prochaine possibilité connue ; annulation secondaire avec conséquence et confirmation. Une relance ne vaut pas réponse ; les conditions de publication sont relues après l’action, sans publication automatique. |
+| SA-02 — Invitations Pro | Entrée groupée → accès direct à chaque invitation présentée, avec nom de l’animation et échéance. Le lien n’accepte rien ; mission et décision restent dans le détail. Une liste importante reste navigable sans repousser le scanner, qui conserve sa priorité. |
+| SA-03 — Préparation Pro | Invitation acceptée disparue des tâches → « Préparer mon commerce — [animation] » lorsque le suivi est actif, la préparation non confirmée et l’action autorisée. Télécharger un kit ne termine pas cette tâche. Une lecture fraîche retire une préparation confirmée ailleurs. Sans suivi, les consignes restent accessibles depuis Préparation, sans tâche de confirmation ni état terrain inventé. |
+| SA-04 — Indicateurs | Libellés techniques seuls → questions et définitions courtes selon le modèle : inscriptions, parcours terminés/qualification, preuves ou passages. Ne pas renommer « Parcours commencés » en participations avec passage. Tombola : première validation effective qualifiante, validations ultérieures sans chance supplémentaire ; passeport : inscription distincte de fin ; Juste Prix : inscription distincte de réponse/qualification et passages configurables. Valeur absente = indisponible, jamais zéro ; date/source de chaque famille explicites. Aucun nouveau calcul métier. |
+| SA-05 — Résultat incertain | « Validation non confirmée » → « Le passage reste à vérifier. Il a peut-être été enregistré. Vérifiez le résultat avant de recommencer. » Vérification principale ; si sa lecture échoue, le résultat reste inconnu. Expliquer que quitter n’annule pas une validation éventuellement enregistrée. **Aucune nouvelle confirmation de sortie**, aucun renvoi automatique, aucune récupération après fermeture promise. Conserver reçu, clé et renvoi conditionnel existants. |
+| SA-06 — Fin | Ouverture ordinaire sur tous les dossiers → « À résoudre », sauf filtre/contexte explicite conservé. Lot et bénéficiaire identifient le dossier ; prochaine action disponible et acteur attendu seulement lorsque les données l’établissent. Responsable de remise connu pour lot externe, sinon acteur à confirmer. Information du gagnant, remise, réception et consommation du coffret restent distinctes. Clôturer un dossier conserve sa confirmation et ses conséquences. |
+| SA-07 — Continuité | À chaque actualisation locale, préserver écran, filtres, saisies et focus ; ignorer les réponses obsolètes. Échec de lecture explicite avec réessai, aucun blocage disparu artificiellement. Révocation/session expirée retire les données privées. Clavier, mobile 390 px et texte 200 % sur les parcours modifiés. |
+
+### Contrats, propriétaires et limites de coût
+
+Les domaines backend décident des relances, annulations, déclarations de
+préparation, validations et remises. Les nouvelles surfaces réutilisent les
+commandes autorisées, sans commande groupée ni notification supplémentaire.
+
+- **Publication :** réutiliser la liste paginée des demandes de participation,
+  filtrée `EN_ATTENTE` ou `A_ENVOYER` selon le blocage serveur, 25 demandes par
+  page, sans collecte exhaustive. Une invitation à envoyer renvoie vers le suivi
+  complet ; elle ne propose pas une relance. Son
+  contrôle d’accès organisateur reste requis. La projection expose les capacités
+  `actions.relancer` / `actions.annuler` issues des règles existantes également
+  pour Passeport/Tombola ; le motif d’indisponibilité et la prochaine relance
+  restent expliqués. Aucun calcul de délai ni droit supplémentaire dans la vue.
+- **Pro :** nom, échéance, suivi, `pret_at` et `actions.confirmer_pret` existent
+  dans la projection. Réutiliser les lectures d’accueil sans enrichissement HTTP
+  individuel ; borner la présentation et relire au retour visible. Le détail
+  confirme encore les droits avant toute commande. Les requêtes existantes ne
+  deviennent pas une nouvelle file exhaustive garantie.
+- **Indicateurs :** conserver les valeurs et dates des projections d’exploitation
+  existantes. Les agrégats différés ne sont pas présentés comme une lecture
+  instantanée ; aucune comparaison de dates différentes sans explication.
+- **Fin :** exposer dans le dossier autorisé le responsable de remise du lot
+  externe déjà enregistré dans son snapshot ; ne pas déduire un destinataire
+  à contacter de l’absence d’actions. Ce champ est additif et facultatif ; les
+  consommateurs plus anciens continuent à fonctionner.
+
+Aucune migration, index, cadence de polling ou écriture métier nouvelle n’est
+prévue. Les enrichissements utilisent les faits déjà chargés ; vérifier leur
+absence de N+1. Le nouveau bloc de publication charge au maximum une page à la
+fois, à l’ouverture et après action explicite. Budget structurel : une lecture
+HTTP paginée, nombre de requêtes SQL indépendant du nombre de lignes de la page,
+aucun chargement exhaustif. Si les projections existantes provoquent des lectures
+par demande, grouper ces lectures et mesurer N/10N avant de qualifier ce chemin.
+Une limite non mesurée demeure visible au bilan, sans promesse de capacité.
+
+### Lots, traçabilité et preuves prévues
+
+| Lot / critères | Preuves attendues | Contrats, documentation, démonstration et livraison |
+| --- | --- | --- |
+| A — SA-02/03/05/07, Pro | Invitations multiples, préparation active/arrêtée, kit seul, confirmation ailleurs, accès restreint, réponses obsolètes ; validation incertaine et vérification encore indisponible, sortie directe. Tests Vitest puis navigateur mobile/clavier. | Guide commerçant et README applicatif ; fixtures synthétiques, aucun changement de générateur ou de donnée requis. Contrats existants suffisants. |
+| B — SA-01/06/07, Backend et Animation | Relance autorisée/refusée, attente et réponse entre-temps, annulation confirmée ; droits, pages et coûts bornés ; fin filtrée, acteur connu/inconnu et action confirmée. Tests domaine/application/contrat puis parcours navigateur. | Projections additives, OpenAPI documentaire E41/E42 et contrats consommateurs à synchroniser selon leur portée. Guides organisateur/exploitation. Aucun changement de schéma ou scénario du générateur : fixtures couvrant les faits existants. Backend avant frontend pour les champs nouveaux. |
+| C — SA-04/07, Animation | Tombola, passeport et Juste Prix : chiffres distincts, zéro réel, donnée absente, dates distinctes ; ordre lisible sur téléphone et texte agrandi. | Définitions dans la présente source et aide de suivi ; aucune modification de qualification, tirage ou agrégat. Données synthétiques uniquement. |
+
+### Réalisation et bilan d’acceptation du 18 novembre 2026
+
+Les sources de départ sont Projet `caa3bb0`, Backend `56464443`, Animation
+`845d94a` et Pro `e60ce30`. Ces références et les contrôles locaux ne prouvent
+pas une version déployée. Les cinq améliorations sont implémentées et vérifiées
+localement, avec les limites de qualification d’usage ci-dessous.
+
+| Critères | Réalisation et preuve locale | Limite |
+| --- | --- | --- |
+| SA-01 | Bloc partagé `PublicationInvitations` dans les parcours manuel, workflow, Chasse et assistant. Lecture paginée, capacités serveur, relance et annulation confirmée, relecture du contrôle. Pour les invitations classiques, une commande perdue suspend seulement les nouvelles actions de l’invitation concernée ; relire sa situation ne confirme pas la commande perdue. La Chasse conserve son protocole versionné et son reçu. | Tests PostgreSQL et navigateur réussis ; API navigateur simulée, aucune relance réelle. |
+| SA-02/03 | Accès individuels, échéance sans heure artificielle, cinq tâches par page après le scanner. Une invitation non modifiable propose « Consulter ». Préparation fondée sur la capacité serveur ; consignes accessibles même sans suivi. | Lectures d’accueil existantes conservées, sans nouvelle garantie de file exhaustive. |
+| SA-04 | Questions et définitions propres aux modèles dans Exploitation et Bilan ; dates/source, données absentes et zéro distingués. Les trois modèles sont exercés au navigateur, ainsi que l’actualisation et les erreurs d’Exploitation. | Aucun nouveau compteur « personnes ayant joué » ou « participation avec passage ». Compréhension réelle des chiffres à tester. |
+| SA-05 | Message choisi, vérification principale et sortie directe. Les tests conservent le protocole de reçu et de renvoi conditionnel. | Aucune récupération après fermeture complète promise. |
+| SA-06 | Ouverture sur À résoudre, dossier identifié par lot/bénéficiaire, responsable de remise externe issu du snapshot existant ; clôture dans un détail secondaire confirmé. Filtre explicite, réessai après refus et données privées retirées vérifiés au navigateur. | Responsable absent présenté comme inconnu. Aucun état de réception/consommation déduit d’une remise. |
+| SA-07 | Générations de requêtes et contrôle de périmètre, erreurs avec réessai, retrait des données interdites, retour de focus lorsque son contrôle disparaît ou devient désactivé. | Recette synthétique et clavier ; essais physiques et compréhension utilisateur non réalisés. |
+
+**Pro :** passage final de `tests/e2e/suivi-animation.spec.js`,
+`attestations-moteur.spec.js`, `home-mobile.spec.js` et `animation-kit.spec.js` :
+**13/13**, aucun skip ni flaky, sortie 0. Le rapport et les captures sont dans
+`localeo-commercant/tmp/suivi-animation-4/`, avec `source-manifest.json` pour les
+empreintes. Les cinq fichiers Vitest ciblés — accueil, kit, lectures Animation,
+scan et contrats API — passent **60/60** ; journal
+`tmp/suivi-animation-3/vitest.log`. Commandes : `npm test --` suivi de ces fichiers
+et `npm run test:e2e --` suivi des quatre fichiers ci-dessus, `--workers=2`.
+Les captures finales de l’accueil 390 px et du scanner à texte 200 % ont été
+relues. L’émulation couvre aussi 1280 px, clavier, erreurs, révocation,
+confirmation ailleurs et réponses obsolètes. Le passage navigateur 2 avait
+échoué à **12/13** sur le focus du scanner, et Vitest à **59/60** sur le retrait
+de la dernière tâche : ces défauts ont été corrigés puis retestés. Les rapports
+antérieurs sont conservés, sans additionner leurs succès au passage final.
+Le commit Pro est `333b760`. Après régénération du contrat avec le SHA backend
+final, les **31 tests de contrats** ont été rejoués avec succès. Les empreintes
+confirment que seules les métadonnées `info.version` ont changé depuis la recette
+navigateur ; les sources applicatives et scénarios sont identiques. Cette
+vérification est consignée dans `tmp/suivi-animation-final-contract/verification.json`.
+
+**Animation (`80c4280`) :** `pnpm typecheck`, `pnpm lint` et les **382 tests** de `pnpm test`
+réussissent, sans skip. Build PWA final synthétique réussi, sans configuration
+opérateur, journal `tmp/suivi-animation-build-stable.log`. Les **31 tests de
+contrats ciblés** passent encore après régénération de `info.version`.
+Les recettes existantes Fin (**28 scénarios**, `tmp/fin-animation-captures-Dzlwyx/report.json`)
+et productivité (**20 scénarios**, `tmp/productivity-operations-report-SR43Ou/results.json`)
+réussissent après adaptation de l’accès secondaire à la clôture.
+
+`node tests/browser/suivi-animation.mjs` vérifie les composants réels et le client
+HTTP avec une API synthétique : **32/32 scénarios**, aucun skip, dans
+`tmp/suivi-animation-2026-11-18T06-59-32.126Z/report.json`. Publication manuelle,
+workflow, Chasse, assistant, pagination, permissions, refus, relecture échouée,
+réponse obsolète, focus, indicateurs des trois modèles et dossiers Fin sont
+couverts à 390/1280 px, avec passages à texte 200 %. La Chasse exige désormais
+dans le mock la version attendue et un reçu conforme ; refus `VERSION_OBSOLETE`,
+réponse perdue, reçu indisponible et disparition du blocage avant confirmation
+sont vérifiés. Le test Fin reproduit puis vérifie le réessai après un refus 403.
+
+Ce passage final utilise l’empreinte
+`79448d6b1c34fed8d5faa4be4feab0670d7ce7eb646c68a27b346c855d5f7ec8`.
+Il intègre le contrat à version backend finale, la largeur des alertes Chasse
+à texte 200 % et la suppression du nom mémorisé dans un retour d’incertitude
+après révocation d’accès. Les passages antérieurs de 32 puis cinq scénarios
+ciblés sont conservés, sans additionner leurs succès au passage final. Les
+captures publication, Chasse à 200 %, dossiers Fin et Bilan passeport ont été
+relues. Les tentatives antérieures, dont le sélecteur de pagination incorrect,
+restent disponibles avec leurs erreurs et leur contexte.
+À la préparation du commit, seules les fins de ligne CRLF du nouveau helper
+`followupMetrics.ts` ont été normalisées en LF pour satisfaire le contrôle Git,
+sans modification de texte ni de comportement. L’empreinte après normalisation
+est `21655b8bf5b83d4f9cf76376aea0c711406edb90dade74be891d6566226d77b2` ;
+`line-ending-normalization.json` accompagne le rapport navigateur.
+
+**Contrats :** ajout de `motif_relance_interdite`, des capacités classiques
+`relancer`/`annuler` et du champ nullable `responsable_remise`. Le backend garde
+l’autorité des commandes. E41/E42 et les contrats embarqués Animation/Pro sont
+régénérés depuis le producteur. Cette synchronisation rattrape aussi des écarts
+du générateur : consolidation de huit paires de schémas Input/Output en formes
+équivalentes après normalisation des références, sans ajout/retrait de route.
+L’exporteur Pro accepte désormais l’argument `plugins` du lanceur isolé backend ;
+les garde-fous de ce lanceur restent actifs. Livrer le backend avant les nouvelles
+interfaces ; un ancien producteur ne fournit pas les nouvelles capacités et
+laisse le responsable inconnu.
+
+**Backend (`20ae4539`) :** le passage final isolé réussit **912/912** tests,
+dont **169** tests domaine/application/API ciblés et **743** contrôles
+d’architecture, sans échec ni skip. Il couvre les capacités et leurs refus,
+la préparation, les politiques de publication, les dossiers Fin et les API
+Chasse. Lanceur : `.artifacts/python-e70/runtime/python.exe
+scripts/validation/test_isolated.py`. Journaux et JUnit :
+`.artifacts/e73-suivi-animation-final-03.{log,xml}` ; détail des commandes dans
+`.artifacts/e73-suivi-animation-bilan.md` du backend. Deux avertissements de
+dépréciation Starlette/httpx/anyio restent visibles, sans changement de dépendance.
+
+La recette PostgreSQL isolée de
+`tests/security/test_suivi_animation_lectures_postgres.py`,
+`test_fin_animation_lectures_postgres.py` et `test_fin_animation_postgres.py`
+passe **35/35**, sans skip. Elle couvre notamment droits, responsable connu ou
+absent, clôture/reçus, rollback, concurrence, coffret distinct de consommation
+et pagination sur 1 000 dossiers. Ce passage précède le dernier resserrement
+Publication ; le code Fin est inchangé depuis. Rapport
+`.artifacts/e73-suivi-animation-pg-tests-01.{log,xml}`.
+
+Le passage final Publication (`test_suivi_animation_lectures_postgres.py -k
+publication`) passe **3/3**, sans skip ; trois cas Fin sont explicitement
+désélectionnés car déjà vérifiés sur le même code. Rapport
+`.artifacts/e73-suivi-animation-pg-publication-02.{log,xml}` et plans
+`EXPLAIN (ANALYZE, BUFFERS)` dans `tmp/e73-suivi-animation-pg-publication-02/`.
+
+| Lecture locale | Volumes et pages | Résultat structurel |
+| --- | --- | --- |
+| Publication finale | 100 puis 1 000 demandes en attente ; ajout de 1 000 acceptées ; pages de 25 et 100 | **7 SELECT** dans chaque cas, aucune lecture de cohorte acceptée, racines hydratées au plus égales à la page ; réponses d’environ 31,1/124,4 ko. |
+| Fin | 10 puis 100 dossiers, pages de 1 et 10 ; régression existante à 1 000 dossiers, pages 1/10/50 | **11 SELECT** constants, racines au plus égales à la limite + 1. |
+
+La première mesure Publication comptait neuf SELECT mais conservait deux
+lectures inutiles des commerces acceptés : elle ne qualifie pas la version
+finale. Les temps locaux varient avec Windows/OneDrive et ne sont ni un SLA
+ni une preuve de débit hébergé. Aucun essai de charge mixte ou de trafic soutenu
+n’a été exécuté. La liste Pro multi-animations acceptées garde son chargement
+historique ; ce lot ne lui attribue pas le budget du nouveau bloc Publication.
+Le cluster PostgreSQL temporaire a été arrêté et cet arrêt vérifié.
+
+**Revue indépendante :** la frontière backend/contrats est relue sans écart
+bloquant. La revue a révélé l’absence de version dans la première intégration
+Chasse et une heure artificielle sur l’échéance civile. Le raccordement au
+protocole Chasse et l’affichage date seule sont corrigés, relus indépendamment
+et vérifiés au navigateur. Les doubles lectures, pertes de focus
+et états de réessai relevés pendant la recette restent tracés avec leurs essais.
+
+**Impacts :** guides commerçant/organisateur, catalogue de recette Animation,
+liens E56/Fin, roadmap et spécification actualisés. Aucune migration, nouveau
+paramètre de configuration ou activation Juste Prix. Le générateur de démonstration
+reste inchangé : les nouveaux affichages utilisent des faits existants, exercés
+par des fixtures synthétiques. Aucun nouvel envoi, polling, calcul métier ou
+commande en masse ; aucune campagne de débit soutenu justifiée par ce lot.
+
+Contrôles documentaires finaux : `python scripts/check_guidance.py` — **99 guides,
+1 344 liens, aucune erreur ni avertissement** ;
+`python scripts/sync_documentation.py --check-sources` — **151 documents vérifiés**.
+Les vérifications Git des quatre dépôts modifiés ne signalent plus d’erreur
+d’espacement. Les autres travaux documentaires présents avant ce lot sont
+conservés séparément.
+
+Les essais avec associations/commerçants et appareils physiques du rapport
+restent distincts des tests automatisés et ne sont pas réputés exécutés.
+Marketplace/Live, ERP et batchs ne reçoivent aucun nouveau comportement ; les
+effets acquis des lots et participations sont préservés. Aucun déploiement demandé.
+
+## Réalisation historique du 17 novembre 2026 — parcours organisateur
+
 Version du **17 novembre 2026** — **E73-EVO-PARCOURS-ORGANISATEUR**.
 
 **Implémentation locale du 17 novembre 2026 réalisée.** Les six lots de cette

@@ -1,5 +1,12 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+Évolution du **18 novembre 2026 — E73-EVO-SUIVI-ANIMATION** :
+[suivi Animation et Pro, SA-01 à SA-07](parcours-organisateur.md#évolution-du-18-novembre-2026--suivi-animation-et-pro),
+cinq améliorations du rapport de brainstorming sélectionné. Message explicatif
+au scanner sans nouvelle confirmation de sortie ; implémentation locale et
+preuves consignées, essais utilisateurs et physiques à réaliser. Clôture
+historique conservée.
+
 Évolution du **17 novembre 2026 — E73-EVO-LIVE-MAQUETTES** :
 [cinq parcours habitant, LM-01 à LM-11](localeo-live-entree-unique.md#évolution-du-17-novembre-2026--maquettes-habitant),
 mis en œuvre localement à partir des deux planches validées. Contrats, variantes,

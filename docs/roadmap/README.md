@@ -1,5 +1,14 @@
 # Roadmap par etat
 
+**18 novembre 2026 — E73-EVO-SUIVI-ANIMATION** :
+[cinq améliorations du suivi Animation et Pro](../specifications/epic-73-animation-et-ou-coffrets/parcours-organisateur.md#évolution-du-18-novembre-2026--suivi-animation-et-pro),
+issues du rapport de brainstorming explicitement choisi : publication nominative,
+reprise des invitations/préparations, définition des indicateurs, résultat
+incertain expliqué sans confirmation de sortie et dossiers de fin à résoudre.
+SA-01 à SA-07 implémentés localement ; preuves et limites de recette consignées
+dans la spécification. Clôture historique E73 conservée ; le complément passeport
+d’une autre séance n’est pas adopté. Essais utilisateurs et physiques à réaliser.
+
 **17 novembre 2026 — E73-EVO-LIVE-MAQUETTES** :
 [mise en conformité des cinq parcours habitant](../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-17-novembre-2026--maquettes-habitant),
 LM-01 à LM-11, implémentation locale de l’évolution de l’EPIC 73. Preuves dans

@@ -43,6 +43,13 @@ Après une erreur, **Réessayer** conserve la page ; si elle n'est plus disponib
 
 ## Coupure réseau et reprise
 
+Pour un passage Animation, **Le passage reste à vérifier** signifie qu’il a
+peut-être été enregistré. Utilisez **Vérifier le résultat** avant de recommencer.
+Si cette lecture échoue, le résultat reste inconnu. Quitter le scan n’annule
+pas une validation éventuellement enregistrée ; aucune confirmation de sortie
+supplémentaire n’est demandée. La reprise de cette vérification après fermeture
+complète de l’application n’est pas garantie.
+
 Si la validation est confirmée mais l'actualisation échoue, sa confirmation reste affichée. Utilisez « Actualiser l'état du coffret » ; les commandes restent bloquées jusqu'à cette vérification. Après rechargement de l'application, le contexte valide de ce compte peut être relu sans rejouer la validation.
 
 Si aucune confirmation n'arrive, l'opération peut avoir été traitée. Vérifiez l'état enregistré avant toute nouvelle tentative. En cas de doute persistant, contactez Localeo avec la référence affichée et l'heure de l'opération. N'envoyez pas le QR, le mot de passe ou le jeton de session au support.
@@ -52,6 +59,11 @@ Si aucune confirmation n'arrive, l'opération peut avoir été traitée. Vérifi
 L'annulation est proposée seulement si le serveur fournit les informations nécessaires et si le délai applicable le permet. Confirmez le motif demandé. Une lecture échouée après annulation impose elle aussi une actualisation avant de poursuivre. Pour une situation hors délai, utilisez le parcours support.
 
 ## Invitations Animation
+
+Depuis l’accueil, **À traiter** présente les invitations avec le nom de
+l’animation et l’échéance de réponse. Ouvrez directement la demande concernée.
+Les autres tâches restent accessibles par les pages de cette rubrique ;
+**Scanner un QR** garde sa place au-dessus. Ouvrir une invitation ne l’accepte pas.
 
 Consultez les dates et votre mission ; ouvrez « Présentation et règlement » pour
 les détails (pour une chasse : « Consulter le règlement et les détails de
@@ -66,6 +78,13 @@ prolongée doit être enregistrée par le partenaire ; l’application ne contou
 pas une échéance serveur.
 
 ## Préparer son commerce pour une animation
+
+Après acceptation, **Préparer mon commerce** apparaît dans **À traiter** lorsque
+le suivi est actif et que votre préparation reste à confirmer. Télécharger le
+kit ne termine pas cette tâche : installez les supports et informez l’équipe,
+puis confirmez **Je suis prêt**. Une actualisation tient compte d’une confirmation
+faite depuis un autre accès autorisé. Lorsque le suivi est désactivé, les
+consignes restent dans **Préparation des animations**, sans déclaration imposée.
 
 Ouvrez **Préparation des animations** dans le menu Pro, puis la participation
 acceptée à préparer. Vous pouvez aussi choisir **Ouvrir mon parcours de

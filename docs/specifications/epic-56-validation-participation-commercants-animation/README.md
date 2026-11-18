@@ -174,6 +174,11 @@ de ce nouveau périmètre.
 
 ## E56-UX-01 — préparation commerçant simplifiée (26 septembre 2026)
 
+Le suivi [E73-EVO-SUIVI-ANIMATION du 18 novembre 2026](../epic-73-animation-et-ou-coffrets/parcours-organisateur.md#évolution-du-18-novembre-2026--suivi-animation-et-pro)
+complète les accès depuis l’accueil Pro et la présentation des blocages de
+publication. SA-01 à SA-03 réutilisent les décisions et préparations E56 ;
+acceptation, téléchargement et confirmation restent des faits distincts.
+
 L’évolution rattachée au [backlog E56](../../roadmap/terminees/epic-56-validation-participation-commercants-animation-backlog.md)
 remplace les confirmations répétées par deux moments : accepter la participation,
 puis préparer le commerce et signaler qu’il est prêt. Elle s’applique aux demandes

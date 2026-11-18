@@ -89,6 +89,12 @@ Après **Clôturer**, traitez le tirage et les remises, puis ouvrez
 **Résultats → Fin et archivage**. Les compteurs couvrent toute
 l’animation, même si les dossiers occupent plusieurs pages.
 
+L’ouverture ordinaire présente **À résoudre** ; **Tous** permet de retrouver les
+dossiers déjà traités. Le lot et le bénéficiaire servent de repères. La prochaine
+action et le responsable de remise sont indiqués lorsqu’ils sont connus ;
+**Acteur à confirmer** signale une attribution inconnue, pas une tâche déduite
+pour le bénéficiaire. Une actualisation conserve le filtre choisi.
+
 - Un lot externe est traité après remise déclarée, ou clôture explicite du
   dossier avec un motif (refus, abandon…). Un simple contact ne suffit pas.
 - Un bon numérique est traité après utilisation ; clôturer son dossier révoque
@@ -160,6 +166,15 @@ son activation. Si le devis a expiré, demandez-en un nouveau. Au renouvellement
 les modules retenus couvrent la nouvelle période de 12 mois au tarif confirmé.
 
 ## Préparer et publier une animation
+
+Lorsqu’une réponse commerçante bloque la publication, le contrôle présente les
+demandes concernées par pages, avec les noms, échéances et actions disponibles
+selon vos droits. **Relancer** enregistre une demande de relance ; la réponse
+reste attendue. Si la relance n’est pas encore possible, son motif et la prochaine
+possibilité connue sont indiqués. **Annuler** reste une décision distincte,
+avec confirmation : la demande ne pourra plus recevoir de réponse. Le lien vers
+les invitations ouvre le suivi complet. Après une action, relisez les conditions :
+une relance ne permet pas à elle seule de publier.
 
 Après une erreur réseau de création, réessayer avec le formulaire inchangé :
 la même clé retrouve le même brouillon. Une modification constitue une nouvelle
@@ -264,6 +279,17 @@ Les données sources restent intactes. Les journaux techniques n'incluent pas
 les coordonnées, les corps d'erreur, les tokens ou les QR.
 
 ## Lire l'activité dans votre commune
+
+Dans le suivi d’une animation, choisissez le chiffre selon votre question :
+inscriptions enregistrées, parcours terminés, qualification pour le tirage ou
+validations effectives. Plusieurs validations peuvent concerner une même
+participation ; aucun de ces chiffres ne donne automatiquement un nombre de
+personnes physiques. Une inscription au passeport n’est pas un parcours terminé.
+Dans une tombola commerçante, la première validation effective qualifie ; les
+suivantes n’ajoutent pas de chance. Dans le Juste Prix, l’inscription ne prouve
+ni réponse ni qualification ; les passages dépendent de la configuration.
+Consultez la définition et la fraîcheur affichées. Une statistique différée n’est
+pas instantanée et une valeur indisponible n’est pas un zéro.
 
 Dans **Bilans**, ou dans le Bilan d'une animation, le bloc **Votre activité
 dans la commune** présente les douze derniers mois et les douze précédents :

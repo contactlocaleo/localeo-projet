@@ -1,5 +1,11 @@
 # Fin d’animation et archives — E73-EVO-FIN-ARCHIVES
 
+Évolution du **18 novembre 2026 — E73-EVO-SUIVI-ANIMATION** :
+[SA-06/07 et leurs preuves](parcours-organisateur.md#évolution-du-18-novembre-2026--suivi-animation-et-pro)
+adoptent l’ouverture ordinaire sur **À résoudre**, avec accès à tous les dossiers,
+prochaine action autorisée et acteur seulement lorsqu’il est établi. Les règles
+de fin, de remise et de consommation ci-dessous sont conservées.
+
 Évolution confirmée le **15 novembre 2026 — E73-EVO-GESTION-LOTS** :
 [gestion centralisée des lots et remises](gestion-lots-remises.md), y compris
 les archives, avec accès aux mêmes décisions. GL-ARB-03 complète la cible de
