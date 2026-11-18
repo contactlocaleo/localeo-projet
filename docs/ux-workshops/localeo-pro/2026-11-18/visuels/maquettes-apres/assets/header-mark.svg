@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 260" role="img" aria-label="Logo marque">
+  <defs>
+    <linearGradient id="sun" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ff9a1f"/>
+      <stop offset="100%" stop-color="#f28a2e"/>
+    </linearGradient>
+    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a8fe3"/>
+      <stop offset="100%" stop-color="#0b4fa2"/>
+    </linearGradient>
+  </defs>
+  <path d="M110 8C59 8 18 49 18 100c0 64 46 105 84 139 4 4 10 4 16 0 38-34 84-75 84-139 0-51-41-92-92-92z" fill="#f7f7f7" stroke="#d8d8d8" stroke-width="8"/>
+  <clipPath id="clip">
+    <path d="M110 26c-42 0-74 32-74 74 0 48 34 82 74 116 40-34 74-68 74-116 0-42-32-74-74-74z"/>
+  </clipPath>
+  <g clip-path="url(#clip)">
+    <rect x="0" y="0" width="220" height="130" fill="url(#sun)"/>
+    <rect x="0" y="130" width="220" height="130" fill="url(#blue)"/>
+    <path d="M-10 185c40-10 74-12 105-10 28 2 58 8 135 26v40H-10z" fill="#f6f6f6"/>
+    <path d="M-8 222c40-25 76-44 120-54 27-6 55-10 110-12v70H-8z" fill="#f6f6f6"/>
+  </g>
+  <path d="M72 110V84l38-29 38 29v26h15v-35h14v47h-21V90l-46-35-46 35v32z" fill="#f6f6f6" stroke="#f6f6f6" stroke-width="2"/>
+  <rect x="86" y="92" width="48" height="34" rx="2" fill="#0b4fa2"/>
+  <rect x="101" y="105" width="10" height="16" fill="#f6f6f6"/>
+  <rect x="113" y="105" width="10" height="16" fill="#f6f6f6"/>
+  <rect x="101" y="121" width="22" height="5" fill="#f28a2e"/>
+</svg>

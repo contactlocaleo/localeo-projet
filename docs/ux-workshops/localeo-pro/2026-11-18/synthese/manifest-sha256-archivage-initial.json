@@ -1,0 +1,544 @@
+{
+  "protocol": "LOCALEO-PRO-UX-1.0",
+  "generated_at": "2026-11-18T11:10:54.935888+01:00",
+  "excluded": [
+    "synthese/manifest-sha256.json"
+  ],
+  "files": [
+    {
+      "path": "observations/cartographie-parcours.md",
+      "size": 4458,
+      "sha256": "46ddfdbe390c75a503940f053a6ffef1b7695c421f665c6c2c8f124aa88ded44"
+    },
+    {
+      "path": "observations/inventaire-ecrans.md",
+      "size": 3615,
+      "sha256": "5cb1b97b6609a264d713605d3287aa9b0170c47f0bbebe2c3fabb3abd5d826c2"
+    },
+    {
+      "path": "observations/limitations.md",
+      "size": 4192,
+      "sha256": "78a195e9d79073040e2f38cc70c70c13acd147590062bc7240186eec29bfcecc"
+    },
+    {
+      "path": "observations/observations-factuelles.md",
+      "size": 5854,
+      "sha256": "d173fc880ea5a86971c7ea40243b15fe457895fa8b828a09a0db4752235b2dc0"
+    },
+    {
+      "path": "prompts/00-protocole-global.md",
+      "size": 4156,
+      "sha256": "60a5ce079f00d67c2809fa16bb75e29e344003f14409cffbe5494f6cc848d4cc"
+    },
+    {
+      "path": "prompts/01-exploration.md",
+      "size": 4974,
+      "sha256": "451a0c685fc8702640b5612aeed6e1ee3595c768b940013a2d0827fa4933e19d"
+    },
+    {
+      "path": "prompts/02-workshop.md",
+      "size": 9931,
+      "sha256": "c496604b58d5c236cb6bbc613b9dd0393e64ef22f70259ea1abcd83c5a24dc1e"
+    },
+    {
+      "path": "prompts/03-maquettes.md",
+      "size": 3491,
+      "sha256": "855be325d90c4e5af19f4cf562de6e6e5644031cad8ac4d0afed830c5be6a33b"
+    },
+    {
+      "path": "prompts/04-validation.md",
+      "size": 1804,
+      "sha256": "6281031515015b60f125ca30b313ea42cbb20e20272924883268784ae6d217c2"
+    },
+    {
+      "path": "prompts/05-archivage.md",
+      "size": 3580,
+      "sha256": "9ffcdcd2f2e6929dd7d12da70e29284a3c5b5a435ea5791dee80d7974f2f2452"
+    },
+    {
+      "path": "prompts/historique/01-exploration-initial.txt",
+      "size": 1876,
+      "sha256": "9d003dc5cf33e11a31e463248e54200586403ec763aa9c9d09816ffd0e85f86b"
+    },
+    {
+      "path": "prompts/provenance-et-versions.md",
+      "size": 4197,
+      "sha256": "d782c094d66d878ab0d32b4ca4e5223b760b3ce7820dd967242fdad42d1012b1"
+    },
+    {
+      "path": "prompts/README.md",
+      "size": 1064,
+      "sha256": "76035ade6277f7d8593457c289b981ae624762ac25b3b004feb42347dbfd3eaa"
+    },
+    {
+      "path": "prompts/RELANCER-WORKSHOP.md",
+      "size": 11789,
+      "sha256": "c40450dcd8a3ccc6946e18572b81027063c8b45f109604eb0cc6a1efada4fc27"
+    },
+    {
+      "path": "README.md",
+      "size": 18626,
+      "sha256": "16438775d7c333ddbd541f383589834604fbbcef1f99a4bdf851ecadb794ee04"
+    },
+    {
+      "path": "synthese/comparaison-precedent.md",
+      "size": 1838,
+      "sha256": "eb3560b7a2b8274ccd117d665d891e8eb4e8218e1501c48dc947b80073ad5f9e"
+    },
+    {
+      "path": "synthese/controle-archivage.md",
+      "size": 7925,
+      "sha256": "96a594ea8385ad17aed08d591843d323bb1fc174aa2697b6a3d750907a24dea6"
+    },
+    {
+      "path": "synthese/controle-galerie-archivage.json",
+      "size": 235,
+      "sha256": "0d21a893aa671b029c5b2db17ff3a54c374b1bf921efdadfb765df8bd25af5c8"
+    },
+    {
+      "path": "synthese/controle-integrite.json",
+      "size": 10257,
+      "sha256": "4d77b132adf8f2fb4baa30b11f1076fa0155614f7ffab3da19478a2352d5ec1b"
+    },
+    {
+      "path": "synthese/decisions-ux.md",
+      "size": 1890,
+      "sha256": "ab5b8754d5fbfc51874a4bee6c52a6dd2e680bd62e4e6097d02c0ee210f46728"
+    },
+    {
+      "path": "synthese/plan-tests-commercants.md",
+      "size": 10707,
+      "sha256": "43241cb0ea3786fa6567bfe5c675ffa3efd3d942f799fc37a427634e14f9a361"
+    },
+    {
+      "path": "synthese/roadmap-ux.md",
+      "size": 4521,
+      "sha256": "86a7cbe32a9770a66ecbe027ecd9533f5952a04eb20dd063f1e10ae51417b2fc"
+    },
+    {
+      "path": "validation/backlog-implementation-potentiel.md",
+      "size": 6319,
+      "sha256": "7eedab84110e96a9e8dd54a65a0a99a90910a0a6f83f6c9d404c4b5841b6ed96"
+    },
+    {
+      "path": "validation/decisions.md",
+      "size": 3237,
+      "sha256": "70a483b17cb2ab6b3239e90065d83d245236c810092eda6a4723dd17455fab98"
+    },
+    {
+      "path": "validation/orientations-a-decider.md",
+      "size": 9542,
+      "sha256": "03e401c111a7673cc41bf5cb8b07cca06b7e31816cfa9c641fba1703f6da467e"
+    },
+    {
+      "path": "validation/risques-ouverts.md",
+      "size": 6933,
+      "sha256": "1ae2be1fa01d5c002976cf693d0cccf54f9c09cda2dcb3c15f81739b7e289122"
+    },
+    {
+      "path": "visuels/arbitrages-maquettes.md",
+      "size": 10197,
+      "sha256": "46f5b114f26dc1af5438b7b8fc5f5269698b49aa1679b3077e653e5398b75b1a"
+    },
+    {
+      "path": "visuels/captures-avant/00-portail-fourni-mobile.png",
+      "size": 27329,
+      "sha256": "009ea84b4f1fe02c618eeadaa00abf42d2fb969a192127f26db5d3796c0fb2f8"
+    },
+    {
+      "path": "visuels/captures-avant/01-portail-fourni-refus-mobile.png",
+      "size": 29286,
+      "sha256": "b57bbeabea35c758bd3b7f0fc019fa2b99ce98b481a2f148eceb35f17a56e57c"
+    },
+    {
+      "path": "visuels/captures-avant/02-connexion-pro-mobile.png",
+      "size": 33921,
+      "sha256": "d2a2262dc696529a51689f81f8badc9d0e194420c0c171c02855fc68ac71c144"
+    },
+    {
+      "path": "visuels/captures-avant/03-accueil-pro-mobile.png",
+      "size": 61134,
+      "sha256": "471deedcf242bc820f15aa6099ebe180f7a5d0490fa1bf3f8061963508476b28"
+    },
+    {
+      "path": "visuels/captures-avant/04-scanner-mobile.png",
+      "size": 46274,
+      "sha256": "1b9eae313680326c98e19fa4607af3090afb8992ba93f60bea81a4249e3dd659"
+    },
+    {
+      "path": "visuels/captures-avant/05-animations-mobile.png",
+      "size": 68786,
+      "sha256": "ba0f37509305069b476a3dc770f6e8da2b9b2ae0932eca5f4a8a46707560d20c"
+    },
+    {
+      "path": "visuels/captures-avant/06-invitations-mobile.png",
+      "size": 113985,
+      "sha256": "ea7c1485a7fe44088b13dda93d41c09a357afbe892ce78568bf7b2d1c6229298"
+    },
+    {
+      "path": "visuels/captures-avant/07-preparation-mobile.png",
+      "size": 80872,
+      "sha256": "e205c019f9edda555a7278dad097c4a5d9b4a508a9994471fcc68ae1f4e6d301"
+    },
+    {
+      "path": "visuels/captures-avant/08-notifications-animation-mobile.png",
+      "size": 32650,
+      "sha256": "bce6022d718c475f1f5967b80e3422d950a59ec3f4c9482b97559917a02b3ea2"
+    },
+    {
+      "path": "visuels/captures-avant/09-notifications-generales-mobile.png",
+      "size": 151791,
+      "sha256": "9113c574349192f68963f36bd94e8de1919f924f566fcda4a3dbb376fe16c163"
+    },
+    {
+      "path": "visuels/captures-avant/10-accueil-pro-desktop.png",
+      "size": 94225,
+      "sha256": "bfb5ea395ec5d88add56ad5ebf6c2ac801bb9a292469e70f971ec0bc86a06038"
+    },
+    {
+      "path": "visuels/captures-avant/11-animations-desktop.png",
+      "size": 99375,
+      "sha256": "b151861a38785da559b0da180d3edc666c1c73786041bac83ac430653d3cc8cd"
+    },
+    {
+      "path": "visuels/captures-avant/12-scanner-desktop.png",
+      "size": 82561,
+      "sha256": "a4b3a52fa412c959e1151f962e4be17c6966a5efbe106704fb43e452c5a32d4e"
+    },
+    {
+      "path": "visuels/captures-avant/13-detail-vitrines-mobile.png",
+      "size": 176604,
+      "sha256": "d795004172f6db6d3b76f1ca5577d021ddbb15dbdac48ade6cfedce6b813f8d8"
+    },
+    {
+      "path": "visuels/captures-avant/14-detail-juste-prix-mobile.png",
+      "size": 61214,
+      "sha256": "64aac8949be48f99390755a0396a2ffe36965fdd2cf0d37cb7e85151b089c414"
+    },
+    {
+      "path": "visuels/captures-avant/15-detail-tombola-mobile.png",
+      "size": 57335,
+      "sha256": "7cf26a91d75df12cfd6b39cdcba0e9876a845f0d02dad53bde91f4d42d42d19a"
+    },
+    {
+      "path": "visuels/captures-avant/16-preparation-vitrines-mobile.png",
+      "size": 86962,
+      "sha256": "977dc70fbca0160935b536c08773908d35a9690a56813c9a33d87f3e33855415"
+    },
+    {
+      "path": "visuels/captures-avant/17-preparation-tombola-mobile.png",
+      "size": 56726,
+      "sha256": "6e6b58c917ef935b7f41fbdec47ff5771c55a378ab326f7b7237f46bb1b87d3f"
+    },
+    {
+      "path": "visuels/captures-avant/18-invitation-acceptee-mobile.png",
+      "size": 184405,
+      "sha256": "18d1993fab8925bedc50bee49e22d225617d9158948528cf918e426da2e5e708"
+    },
+    {
+      "path": "visuels/captures-avant/19-scanner-erreur-locale-mobile.png",
+      "size": 46163,
+      "sha256": "a05ad1d61e5d4d1d4667ff0c8331ceab9a0a3b0392ab564ec487dd7d878c925e"
+    },
+    {
+      "path": "visuels/captures-avant/20-retour-rechargement-mobile.png",
+      "size": 46274,
+      "sha256": "1b9eae313680326c98e19fa4607af3090afb8992ba93f60bea81a4249e3dd659"
+    },
+    {
+      "path": "visuels/captures-avant/21-guide-preparation-mobile.png",
+      "size": 101434,
+      "sha256": "8dfc7df745821624b6e338b01e780a11e16569064ed17191c2ef204d758e1b7b"
+    },
+    {
+      "path": "visuels/captures-avant/README.md",
+      "size": 2117,
+      "sha256": "51b0bf6a867608c056afc6000f41509b510c7f8caf412cb49b6a3b729b58fe40"
+    },
+    {
+      "path": "visuels/comparatif-avant-apres.html",
+      "size": 1877,
+      "sha256": "549dd7c96518a91b8c994b2ab80fd169c7ac857be4e89d2e25600ddd47addb1a"
+    },
+    {
+      "path": "visuels/controle-galerie/galerie-desktop.png",
+      "size": 72900,
+      "sha256": "fd3fb476c20e567c11b2f712fe50390a88d115e927db438ce87d1b0a62700172"
+    },
+    {
+      "path": "visuels/controle-galerie/galerie-kit-desktop.png",
+      "size": 90743,
+      "sha256": "369bc582e19824670188f2574ae8390cdc4ef6ae441ff035a79532b1bd35e6d7"
+    },
+    {
+      "path": "visuels/controle-galerie/galerie-mobile-apres.png",
+      "size": 43377,
+      "sha256": "2424e3d28e2f4bd6e0cc8d7245af7728ff8e7d0a81552bbdc6f47e476a442b42"
+    },
+    {
+      "path": "visuels/controle-galerie/galerie-mobile-avant.png",
+      "size": 33391,
+      "sha256": "18db01a4dcefe16dd888ca8325c06700fc42df8a553ad120cef79986098f0b0b"
+    },
+    {
+      "path": "visuels/controle-galerie/README.md",
+      "size": 2392,
+      "sha256": "42da9f82c2a4ae7b759f011dab2372e21c4131433bdff24183ea723e1761c74c"
+    },
+    {
+      "path": "visuels/controle-galerie/resultats.json",
+      "size": 609,
+      "sha256": "030ddc8fba0c318251cf0c659f36170a89b9bab82f41eb805b3c31ff4001832b"
+    },
+    {
+      "path": "visuels/galerie.css",
+      "size": 4429,
+      "sha256": "b06fd4513969f9ff18b2f5ca14d1044fa77e44f9eb2359a886eada2ceea2f621"
+    },
+    {
+      "path": "visuels/galerie.js",
+      "size": 4413,
+      "sha256": "fc589c40693c17efbdb274ba3b7e4e324dea2a30593fb03c9e6f61be829cd1f9"
+    },
+    {
+      "path": "visuels/maquettes-apres/assets/header-mark.svg",
+      "size": 1493,
+      "sha256": "d2b6590f76636f074e66493407649dc78ed002e6bb2c54b909305c53275b9583"
+    },
+    {
+      "path": "visuels/maquettes-apres/b1-confirmation-desktop.png",
+      "size": 56230,
+      "sha256": "85864a72341f9d3c99018a370d755ca47259dc4d5a2308b9225a1ceb403008f6"
+    },
+    {
+      "path": "visuels/maquettes-apres/b1-confirmation-mobile.png",
+      "size": 38826,
+      "sha256": "2b6a9d3fecf21240b8348622e0da6f2753e412821ae6af8ef8bec36458ea2ead"
+    },
+    {
+      "path": "visuels/maquettes-apres/b1-doublon-desktop.png",
+      "size": 54722,
+      "sha256": "aaa0992a853469773bb652faa334639fdd643c6cb0642fea94aca982c6c8b12c"
+    },
+    {
+      "path": "visuels/maquettes-apres/b1-doublon-mobile.png",
+      "size": 37757,
+      "sha256": "8b4c7e95e6801b2eb5c55f588b96c50e54e50ab6d87b32fcad6056f66c5c5839"
+    },
+    {
+      "path": "visuels/maquettes-apres/b1-erreur-desktop.png",
+      "size": 53826,
+      "sha256": "b5538c06cd2f9bbbfb3e4c1d71604b2b51fa1f23fcf4c4bfc7fd7b8eaa0be8e8"
+    },
+    {
+      "path": "visuels/maquettes-apres/b1-erreur-mobile.png",
+      "size": 36846,
+      "sha256": "6b95436ef2d24fcab95c69f4509229a185e3b93d52ad76af7a9d4d8c45f7f88e"
+    },
+    {
+      "path": "visuels/maquettes-apres/b1-incertain-desktop.png",
+      "size": 56552,
+      "sha256": "8b4e252f7e2145217cb56b718635b90b2058f72b1f4bc0cf0a252bfebcb886c5"
+    },
+    {
+      "path": "visuels/maquettes-apres/b1-incertain-mobile.png",
+      "size": 39580,
+      "sha256": "59493c1927a0916629820fb22161dd3525dfb6b76e60f9d5863f3218d400f0e1"
+    },
+    {
+      "path": "visuels/maquettes-apres/b1-refus-desktop.png",
+      "size": 55307,
+      "sha256": "e04bac5409c57eab60e4c6cf847fd331c96e7066765069bd1922083ddd674ff6"
+    },
+    {
+      "path": "visuels/maquettes-apres/b1-refus-mobile.png",
+      "size": 37799,
+      "sha256": "6f6b5f1a1d36a2d6dd6aff10b0622e322032ddf1423fc83f1e38052615900877"
+    },
+    {
+      "path": "visuels/maquettes-apres/b1-scan-desktop.png",
+      "size": 56948,
+      "sha256": "b469eaf9b71e374ad8684560f884f9ba0c63aa83af4819aa3ffc787222a7e0e9"
+    },
+    {
+      "path": "visuels/maquettes-apres/b1-scan-mobile.png",
+      "size": 39728,
+      "sha256": "979898d6fadab6f157d32bf813939742ce7e1af8614ac6fe127e3c4f2362159e"
+    },
+    {
+      "path": "visuels/maquettes-apres/b1-succes-desktop.png",
+      "size": 54637,
+      "sha256": "0bd13afa99b8f1d17e6ef5c981c9d8430843ab4cf5f84b4a992147de005ab5ec"
+    },
+    {
+      "path": "visuels/maquettes-apres/b1-succes-mobile.png",
+      "size": 37404,
+      "sha256": "91d6b24cb93ddb2c3f560279f2f8f63e86208a233a7ed7550aa3b0133b8d0941"
+    },
+    {
+      "path": "visuels/maquettes-apres/b1-toujours-inconnu-desktop.png",
+      "size": 61767,
+      "sha256": "ee0ae8dfe374d9f57808702ab9a973632986735df47e9b8394ab2228c87abef3"
+    },
+    {
+      "path": "visuels/maquettes-apres/b1-toujours-inconnu-mobile.png",
+      "size": 44494,
+      "sha256": "ec52130f77c734092f0bb0d36c97715a65dbc8d060a0bdc43013cd4409e11abb"
+    },
+    {
+      "path": "visuels/maquettes-apres/c1-action-desktop.png",
+      "size": 53552,
+      "sha256": "05d19003688ac4d6d9db33cac677e79f93add3d2e6dda269a1a267f44efd008b"
+    },
+    {
+      "path": "visuels/maquettes-apres/c1-action-mobile.png",
+      "size": 37109,
+      "sha256": "6e50a5d03241789a6c85f670074212f817e03c44454af410b7fbe9c8292c0579"
+    },
+    {
+      "path": "visuels/maquettes-apres/c1-notifications-desktop.png",
+      "size": 72572,
+      "sha256": "c48028933e542ef02674ae56e506918bb0391bce5fffabd0ed4058a99175dca6"
+    },
+    {
+      "path": "visuels/maquettes-apres/c1-notifications-mobile.png",
+      "size": 55081,
+      "sha256": "c1cba3185f53850f3a46b7757399734f7e10ca80fa359ff59365210dfd35ef66"
+    },
+    {
+      "path": "visuels/maquettes-apres/d1-accueil-desktop.png",
+      "size": 85423,
+      "sha256": "2d9d2727fe2e0ad898d0d75dee4b1c5ecf845d24ef49e59c5b891dc65d752fbb"
+    },
+    {
+      "path": "visuels/maquettes-apres/d1-accueil-mobile.png",
+      "size": 70503,
+      "sha256": "ffba20a7120331dae955bba0040d457b10424b3f0bbe8ea809aa656ab61129af"
+    },
+    {
+      "path": "visuels/maquettes-apres/d1-attente-desktop.png",
+      "size": 60754,
+      "sha256": "d891c50ccdcd59a81e7ace785fc57e273365638ccafb705bf5c513c78c4a6e4c"
+    },
+    {
+      "path": "visuels/maquettes-apres/d1-attente-mobile.png",
+      "size": 44085,
+      "sha256": "c2db97f43ff47f86bbf550cd29b1b11f678acda5c2bba5f9c69b97c447645a90"
+    },
+    {
+      "path": "visuels/maquettes-apres/d1-incomplet-desktop.png",
+      "size": 62119,
+      "sha256": "cc15a3304ff35ee52c6a4648697c3058cae046f152ea7f2d3c4732cc2530557b"
+    },
+    {
+      "path": "visuels/maquettes-apres/d1-incomplet-mobile.png",
+      "size": 46464,
+      "sha256": "f04ec79556c651c79a1062b830aa3c7ac6b99bfe8fc655cf67ff6f19bbf788ce"
+    },
+    {
+      "path": "visuels/maquettes-apres/d1-pret-desktop.png",
+      "size": 70167,
+      "sha256": "94ff8a2cfd4d016fcd42c8fa36aa8879d96097a272f1eebfcf04e1db842f5ead"
+    },
+    {
+      "path": "visuels/maquettes-apres/d1-pret-mobile.png",
+      "size": 52974,
+      "sha256": "d5a0d6176666993db4056948876fdf557974437a6fbb79578c2e9706a1f6ce23"
+    },
+    {
+      "path": "visuels/maquettes-apres/e1-kit-desktop.png",
+      "size": 90684,
+      "sha256": "2e8622c13f93d711b9eb30023395948cb63c23ad283b36aba605031184113a5a"
+    },
+    {
+      "path": "visuels/maquettes-apres/e1-kit-mobile.png",
+      "size": 72468,
+      "sha256": "710854d35d57e1fbe9f56a38e117b5216230494e08d3e39b34d5bda8bbba0010"
+    },
+    {
+      "path": "visuels/maquettes-apres/f1-interruption-desktop.png",
+      "size": 51096,
+      "sha256": "4734f2ee81957973944d1610b310ef8e5a3c21806681da42e1d28a6ca70058f9"
+    },
+    {
+      "path": "visuels/maquettes-apres/f1-interruption-mobile.png",
+      "size": 34428,
+      "sha256": "2479bd0c4e8a1d7f1b2183c2d2f4c4f5030dbab1abf5a04fdca64c94de7c352f"
+    },
+    {
+      "path": "visuels/maquettes-apres/f1-retour-desktop.png",
+      "size": 62388,
+      "sha256": "8f8860e4e5e0d04caf55af275037f58e68574512dde3febca4793faf7ee7783e"
+    },
+    {
+      "path": "visuels/maquettes-apres/f1-retour-mobile.png",
+      "size": 45972,
+      "sha256": "a67cc1ba6bd3abe9d14c2087d66a8b62229c8d26f74cfea2f3f6e1e416725719"
+    },
+    {
+      "path": "visuels/maquettes-apres/f1-session-desktop.png",
+      "size": 51215,
+      "sha256": "fbb1b7a89baa90a2a8ca61d2af3a8663cfbbf00e0e386237ca2ca9115d7c5776"
+    },
+    {
+      "path": "visuels/maquettes-apres/f1-session-mobile.png",
+      "size": 34170,
+      "sha256": "58f073d19a434c0aef314994a0b7c774f2b630671af2381aa76162a5f5d19e36"
+    },
+    {
+      "path": "visuels/maquettes-apres/prototype.css",
+      "size": 6833,
+      "sha256": "6448dc4982084682214715060e10943631382cf68f9b36808e75102dec38cad8"
+    },
+    {
+      "path": "visuels/maquettes-apres/prototype.html",
+      "size": 3017,
+      "sha256": "80fc91363648426a8ec829b593054fcce08e9d30bd675f4ea34723c1ae44ed0e"
+    },
+    {
+      "path": "visuels/maquettes-apres/README.md",
+      "size": 3109,
+      "sha256": "2d514e0c652debaa4f97c43fac6450e138399a2eda74bbc098d0cc273453521e"
+    },
+    {
+      "path": "visuels/maquettes-apres/scenarios.js",
+      "size": 21785,
+      "sha256": "3092e8e381712f91c3fed0385ff8803b1d5a198b51a22692f370d23b49a9f9f2"
+    },
+    {
+      "path": "visuels/revue-contradictoire.md",
+      "size": 10108,
+      "sha256": "523237f1bb17f85e7c5796fd9d8e5e096976498b004fde8de95e76ee1d52132e"
+    },
+    {
+      "path": "workshop/backlog-ux.md",
+      "size": 20585,
+      "sha256": "b93a206d378a8e8a063848f227382a872e665c91dbb0cc8bde519724f95e3a30"
+    },
+    {
+      "path": "workshop/compte-rendu.md",
+      "size": 33956,
+      "sha256": "86edf25dbb169d817d9663e42989eb150202a10d8d146b16e697eb926c6fb5df"
+    },
+    {
+      "path": "workshop/orientations-rejetees.md",
+      "size": 11284,
+      "sha256": "81723cc8f26678a4d18d3e44f72db651e05ab43e4f4c43016685010ec257a24f"
+    },
+    {
+      "path": "workshop/quick-wins.md",
+      "size": 2594,
+      "sha256": "0f968a2bb09472b251105b0c43a02cb406783a4ba9efe3514a7b8be85263037b"
+    },
+    {
+      "path": "workshop/rapport-executif.md",
+      "size": 14736,
+      "sha256": "0b9d86309965b94a9d215dc0ddf7f4baa3f05d95288ebd488b57f0e7ef5c0531"
+    },
+    {
+      "path": "workshop/votes-et-arbitrages.md",
+      "size": 28515,
+      "sha256": "03f785f1efa1427e89cb50d220683b53cc2901adf88c506a5b168868325b870c"
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+# Plan de tests avec des commerçants réels — à exécuter
+
+18 novembre 2026. **Plan préparé, aucun recrutement ni test réalisé.** Il complète la simulation ; il ne transforme pas les personas fictifs en participants réels. Depuis sa préparation, B1/C1/D1/E1/F1 ont été validées pour E80 dans le [registre](../validation/decisions.md). Les essais commerçants restent à réaliser.
+
+## Participants et dispositif
+
+Recruter cinq à sept commerçants réels aux activités et rythmes variés, **dont au moins deux se déclarant peu familiers du numérique**. Ne pas déduire cette aisance de l’âge. Inclure un usage intermittent, un commerce avec file et une personne travaillant avec un collègue. Repérer les besoins d’accessibilité ; proposer si possible un participant utilisant habituellement une aide technique, sans prétendre couvrir tous les handicaps avec ce seul groupe.
+
+Prévoir une séance individuelle de 45 à 60 minutes, adaptable à la fatigue, puis une seconde visite 7 à 14 jours plus tard pour le retour différé. Utiliser le téléphone habituel si compatible et autorisé, puis l’ordinateur pour la préparation et l’impression. Consigner appareil, navigateur, taille de texte, contexte de connexion et aide technique, sans identifiant personnel dans le dépôt. Participants pseudonymisés T01 à T07 ; T01/T02 désignent les deux personnes peu familières du numérique, après recrutement effectif seulement.
+
+Le modérateur donne la situation et le but, sans nommer le bouton ou le chemin. Il demande de penser à voix haute seulement si cela ne gêne pas la tâche. Il observe d’abord sans aider ; si la personne demande de l’aide ou reste bloquée, noter le point d’arrêt, donner une aide graduée et classer le résultat « avec aide ». Toute aide est enregistrée séparément du succès autonome.
+
+## Préparation du terrain et des données
+
+- Vérifier l’URL Pro de test dans les sources courantes ; référence historique : `https://test-commercant.localeo.city`. Le portail `https://test-animations.localeo.city` était celui de l’organisateur lors de cette exécution.
+- Utiliser exclusivement un compte et des QR de test expressément autorisés pour la séance, sans transaction réelle, sans notification à un commerçant non participant et sans donnée d’habitant réel. Demander les accès avant tout parcours authentifié s’ils ne sont pas fournis.
+- Préparer des cas distincts : QR valide, déjà validé, invalide, période non ouverte ; préparation incomplète, attente organisateur et prête ; notification informative et action encore ouverte après lecture ; kit connu. Les règles et résultats attendus doivent être vérifiés avant la séance.
+- Réserver les pertes de réponse, expirations et coupures à un dispositif de test contrôlé. Le responsable technique prépare et autorise ces états ; le modérateur n’improvise pas une panne ou un changement d’horloge sur l’environnement partagé.
+- Autoriser explicitement les écritures de recette nécessaires, dont validation de test et commande de préparation du kit. Si cela manque, suspendre le scénario et noter « non exécuté », sans substituer une animation graphique à une preuve métier.
+- Recueillir l’accord de participation et, séparément, d’enregistrement. Ne pas enregistrer la saisie des identifiants ni les valeurs QR. Couper ou masquer la capture avant ces étapes. Conserver notes pseudonymisées et résultats minimaux ; aucun secret ou donnée de contact dans les archives versionnées.
+
+## Huit scénarios réels
+
+Les mêmes tâches sont proposées aux deux participants peu familiers du numérique, avec des pauses et sans réduire silencieusement les critères. Les situations sont adaptées à l’activité réelle, mais les données manipulées restent de test.
+
+| ID / orientation | Tâche et consigne neutre à lire | Critères de réussite observables | Observations à recueillir |
+| --- | --- | --- | --- |
+| T-S1 · prise en main / A1, D1 | Depuis le support d’accès de test : « Votre commune vous invite à participer à une animation. Retrouvez votre espace et dites ce que vous pourriez y faire aujourd’hui. » | Rejoint Pro, se connecte, explique la destination de l’application ; retrouve validation et préparation sans indication du chemin. Compte déjà actif distingué d’une première activation. | Premier clic, hésitations de portail, compréhension des termes, aide demandée, point d’entrée conservé. |
+| T-S2 · B1 | « Une personne vous présente son code après avoir effectué l’action prévue par cette animation. Traitez son passage et dites-lui ce qui s’est passé. » QR de test valide. | Choisit le bon outil, reconnaît animation/étape, confirme volontairement ; annonce un résultat conforme au reçu serveur ; un seul effet enregistré. | Temps jusqu’au résultat, hésitations avant confirmation, lecture du contexte, cadrage caméra, assistance, formulation donnée au participant. |
+| T-S3 · B1 | « Cette autre personne présente ce code. Que faites-vous et que lui dites-vous ? » Présenter séparément un QR invalide, un doublon et un cas non ouvert, ordre alterné entre participants. | Distingue les trois états ; aucune nouvelle validation pour le doublon ou le refus ; demande le bon QR après rejet ; n’annonce pas un succès absent. | Confusion entre inscription/validation, interprétation des messages, répétition de clics, recours à l’aide, résultat final expliqué. |
+| T-S4 · B1/F1 | « Vous devez vous interrompre quelques instants pour accueillir un client. Reprenez ensuite ce que vous faisiez. » Deux variantes préparées : avant confirmation, puis après envoi avec réponse perdue. | Avant confirmation : aucune action enregistrée à tort. Après réponse perdue : vérifie l’état sans renvoyer aveuglément ; décrit l’incertitude si elle persiste ; pas de double effet. | Souvenir du stade atteint, action de reprise choisie, temps de récupération, besoin d’assistance et ce qui est annoncé à l’habitant. |
+| T-S5 · C1 | « Prenez connaissance des nouvelles de la commune et montrez ce qui vous demande encore une action. » Fournir information et tâche ; la tâche peut déjà être lue. | Distingue information et action ; retrouve la tâche encore ouverte même lue, puis rejoint la bonne animation ; n’assimile pas lecture et accomplissement. | Filtre choisi, rôle du PIN, mots compris, action déduite à tort, retour vers préparation, facilité à retrouver le contexte. |
+| T-S6 · D1 | « Vous participez à cette animation qui approche. Déterminez ce qui reste à préparer, par qui et pour quand. » Cas incomplet/attente/prêt distincts. | Identifie le bon responsable et la prochaine action autorisée ; distingue accord, installation et préparation terminée ; n’invente pas d’échéance absente ; interprète correctement période et compteurs. | Confusions de statuts, lecture des détails, besoin d’appeler l’organisateur, compréhension d’une date passée ou d’une fin à minuit. |
+| T-S7 · E1 | « Préparez les supports nécessaires pour votre boutique et expliquez à votre collègue comment accueillir les participants. » Kit de test dont téléchargement et impression sont autorisés. | Retrouve et ouvre le bon fichier, imprime selon consignes, place un QR lisible ; distingue QR d’inscription et QR personnel à valider ; indique la fin exacte ; n’assimile pas téléchargement et état prêt. | Temps de recherche, fichier attendu/réel, réglage d’impression, lisibilité et scan du QR de support, consignes oubliées, transmission au collègue, aide nécessaire. |
+| T-S8 · F1 | Lors du rendez-vous 7 à 14 jours après : « Reprenez votre participation à l’animation à partir de l’application, sans vos notes de la première séance. » Cas encore pertinent et session contrôlée. | Retrouve animation, période, état actuel et tâche restante après éventuelle reconnexion ; ne recommence pas une préparation terminée ; distingue ancien message et action actuelle. | Repères mémorisés, chemin de retour, contexte oublié, confiance exprimée, aide, effets de session et temps de reprise. Un rechargement le même jour ne valide pas ce scénario. |
+
+Une variante caméra refusée avec repli manuel est prévue dans T-S2/T-S3 si le compte et le dispositif l’autorisent. Noter le résultat séparément du scan nominal. Une file d’attente fictive peut être mise en scène sans clients réels pour T-S2/T-S4 ; elle ne remplace pas l’observation ultérieure en boutique.
+
+## Comparaison avant/après et mesures
+
+Le produit actuel permet de tester les parcours existants. Les maquettes permettent seulement d’évaluer compréhension, hiérarchie et prochain geste ; leurs boutons n’exécutent pas les validations métier. Après une éventuelle implémentation autorisée, reprendre les scénarios fonctionnels sur une version de test identifiée. Ne pas mélanger résultats d’une image et d’une application connectée.
+
+Pour une comparaison de compréhension avant/après, alterner l’ordre A/B et B/A entre participants et utiliser des cas équivalents mais distincts ; documenter l’effet d’apprentissage. Éviter de montrer la bonne réponse avant la tâche. Demander ensuite : « Qu’est-ce qui vous fait penser que c’est terminé ? », « Qu’est-ce qui reste à faire ? », « Qu’est-ce qui vous a posé difficulté ? ».
+
+Pour chaque tâche, consigner : réussite autonome / avec aide / échec / non exécuté ; temps observé et interruptions ; erreurs et conséquences ; détours ; aides ; état attendu et état final vérifié ; citation anonymisée ; capture expurgée si consentie ; version, date et environnement. Ne pas convertir un petit échantillon en taux représentatif de tous les commerçants.
+
+Critères essentiels : aucune fausse réussite annoncée, aucun double effet ni action non autorisée, possibilité de comprendre et d’achever le parcours essentiel. Un échec critique appelle analyse et nouvelle recette ; la majorité d’avis positifs ne l’annule pas. Aucun seuil arbitraire de quelques secondes n’est imposé : les temps servent à comparer et à identifier la gêne en caisse, puis à définir des objectifs justifiés.
+
+## Restitution prévue
+
+Produire dans une future session autorisée un tableau par scénario et participant pseudonymisé, les observations factuelles, limites, sévérités motivées et révisions proposées. Relier chaque écart à B1/C1/D1/E1/F1 ou à un nouveau constat. Conserver les échecs, abandons et scénarios non exécutés. Soumettre toute orientation nouvelle ou modifiée à la décision de l’utilisateur ; ne pas modifier automatiquement le produit.

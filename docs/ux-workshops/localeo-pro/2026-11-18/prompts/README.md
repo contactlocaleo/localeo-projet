@@ -1,0 +1,5 @@
+# Prompts des étapes 1 à 5 — archive finale
+
+`00-protocole-global.md` archive la demande utilisateur complète de l’étape 1, avec identifiants remplacés par `[CONFIDENTIEL]`. `01-exploration.md` reproduit désormais la même instruction complète appliquée à l’exploration : aucun second prompt utilisateur distinct n’avait été fourni. Son protocole résumé initial est préservé dans `historique/01-exploration-initial.txt`. `02-workshop.md` contient le prompt complet copié à l’identique depuis la pièce jointe. `03-maquettes.md`, `04-validation.md` et `05-archivage.md` conservent les instructions complètes fournies ensuite.
+
+La [provenance et les versions](provenance-et-versions.md) détaillent cette correction documentaire et les limites de transcription exacte. Le [prompt de relance autonome](RELANCER-WORKSHOP.md), version 1.0, est une instruction nouvelle préparée pour l’avenir, non exécutée ici. Aucun secret n’est nécessaire à sa lecture ; les accès autorisés devront être fournis pour une nouvelle exploration.

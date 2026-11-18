@@ -1,0 +1,439 @@
+{
+  "checked_at": "2026-11-18T11:10:28.463787+01:00",
+  "relative_links": 424,
+  "png_count": 62,
+  "images": [
+    {
+      "path": "visuels/captures-avant/00-portail-fourni-mobile.png",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "path": "visuels/captures-avant/01-portail-fourni-refus-mobile.png",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "path": "visuels/captures-avant/02-connexion-pro-mobile.png",
+      "width": 390,
+      "height": 887
+    },
+    {
+      "path": "visuels/captures-avant/03-accueil-pro-mobile.png",
+      "width": 390,
+      "height": 1364
+    },
+    {
+      "path": "visuels/captures-avant/04-scanner-mobile.png",
+      "width": 390,
+      "height": 1152
+    },
+    {
+      "path": "visuels/captures-avant/05-animations-mobile.png",
+      "width": 390,
+      "height": 1582
+    },
+    {
+      "path": "visuels/captures-avant/06-invitations-mobile.png",
+      "width": 390,
+      "height": 3041
+    },
+    {
+      "path": "visuels/captures-avant/07-preparation-mobile.png",
+      "width": 390,
+      "height": 1837
+    },
+    {
+      "path": "visuels/captures-avant/08-notifications-animation-mobile.png",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "path": "visuels/captures-avant/09-notifications-generales-mobile.png",
+      "width": 390,
+      "height": 3308
+    },
+    {
+      "path": "visuels/captures-avant/10-accueil-pro-desktop.png",
+      "width": 1440,
+      "height": 1035
+    },
+    {
+      "path": "visuels/captures-avant/11-animations-desktop.png",
+      "width": 1440,
+      "height": 1035
+    },
+    {
+      "path": "visuels/captures-avant/12-scanner-desktop.png",
+      "width": 1440,
+      "height": 1212
+    },
+    {
+      "path": "visuels/captures-avant/13-detail-vitrines-mobile.png",
+      "width": 390,
+      "height": 5054
+    },
+    {
+      "path": "visuels/captures-avant/14-detail-juste-prix-mobile.png",
+      "width": 390,
+      "height": 1587
+    },
+    {
+      "path": "visuels/captures-avant/15-detail-tombola-mobile.png",
+      "width": 390,
+      "height": 1521
+    },
+    {
+      "path": "visuels/captures-avant/16-preparation-vitrines-mobile.png",
+      "width": 390,
+      "height": 1902
+    },
+    {
+      "path": "visuels/captures-avant/17-preparation-tombola-mobile.png",
+      "width": 390,
+      "height": 1369
+    },
+    {
+      "path": "visuels/captures-avant/18-invitation-acceptee-mobile.png",
+      "width": 390,
+      "height": 5152
+    },
+    {
+      "path": "visuels/captures-avant/19-scanner-erreur-locale-mobile.png",
+      "width": 390,
+      "height": 1152
+    },
+    {
+      "path": "visuels/captures-avant/20-retour-rechargement-mobile.png",
+      "width": 390,
+      "height": 1152
+    },
+    {
+      "path": "visuels/captures-avant/21-guide-preparation-mobile.png",
+      "width": 390,
+      "height": 2353
+    },
+    {
+      "path": "visuels/controle-galerie/galerie-desktop.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "visuels/controle-galerie/galerie-kit-desktop.png",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "path": "visuels/controle-galerie/galerie-mobile-apres.png",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "path": "visuels/controle-galerie/galerie-mobile-avant.png",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "path": "visuels/maquettes-apres/b1-confirmation-desktop.png",
+      "width": 1440,
+      "height": 927
+    },
+    {
+      "path": "visuels/maquettes-apres/b1-confirmation-mobile.png",
+      "width": 390,
+      "height": 930
+    },
+    {
+      "path": "visuels/maquettes-apres/b1-doublon-desktop.png",
+      "width": 1440,
+      "height": 927
+    },
+    {
+      "path": "visuels/maquettes-apres/b1-doublon-mobile.png",
+      "width": 390,
+      "height": 930
+    },
+    {
+      "path": "visuels/maquettes-apres/b1-erreur-desktop.png",
+      "width": 1440,
+      "height": 927
+    },
+    {
+      "path": "visuels/maquettes-apres/b1-erreur-mobile.png",
+      "width": 390,
+      "height": 930
+    },
+    {
+      "path": "visuels/maquettes-apres/b1-incertain-desktop.png",
+      "width": 1440,
+      "height": 927
+    },
+    {
+      "path": "visuels/maquettes-apres/b1-incertain-mobile.png",
+      "width": 390,
+      "height": 930
+    },
+    {
+      "path": "visuels/maquettes-apres/b1-refus-desktop.png",
+      "width": 1440,
+      "height": 927
+    },
+    {
+      "path": "visuels/maquettes-apres/b1-refus-mobile.png",
+      "width": 390,
+      "height": 930
+    },
+    {
+      "path": "visuels/maquettes-apres/b1-scan-desktop.png",
+      "width": 1440,
+      "height": 999
+    },
+    {
+      "path": "visuels/maquettes-apres/b1-scan-mobile.png",
+      "width": 390,
+      "height": 1081
+    },
+    {
+      "path": "visuels/maquettes-apres/b1-succes-desktop.png",
+      "width": 1440,
+      "height": 927
+    },
+    {
+      "path": "visuels/maquettes-apres/b1-succes-mobile.png",
+      "width": 390,
+      "height": 930
+    },
+    {
+      "path": "visuels/maquettes-apres/b1-toujours-inconnu-desktop.png",
+      "width": 1440,
+      "height": 927
+    },
+    {
+      "path": "visuels/maquettes-apres/b1-toujours-inconnu-mobile.png",
+      "width": 390,
+      "height": 948
+    },
+    {
+      "path": "visuels/maquettes-apres/c1-action-desktop.png",
+      "width": 1440,
+      "height": 927
+    },
+    {
+      "path": "visuels/maquettes-apres/c1-action-mobile.png",
+      "width": 390,
+      "height": 930
+    },
+    {
+      "path": "visuels/maquettes-apres/c1-notifications-desktop.png",
+      "width": 1440,
+      "height": 1235
+    },
+    {
+      "path": "visuels/maquettes-apres/c1-notifications-mobile.png",
+      "width": 390,
+      "height": 1370
+    },
+    {
+      "path": "visuels/maquettes-apres/d1-accueil-desktop.png",
+      "width": 1440,
+      "height": 1158
+    },
+    {
+      "path": "visuels/maquettes-apres/d1-accueil-mobile.png",
+      "width": 390,
+      "height": 1761
+    },
+    {
+      "path": "visuels/maquettes-apres/d1-attente-desktop.png",
+      "width": 1440,
+      "height": 927
+    },
+    {
+      "path": "visuels/maquettes-apres/d1-attente-mobile.png",
+      "width": 390,
+      "height": 996
+    },
+    {
+      "path": "visuels/maquettes-apres/d1-incomplet-desktop.png",
+      "width": 1440,
+      "height": 927
+    },
+    {
+      "path": "visuels/maquettes-apres/d1-incomplet-mobile.png",
+      "width": 390,
+      "height": 1059
+    },
+    {
+      "path": "visuels/maquettes-apres/d1-pret-desktop.png",
+      "width": 1440,
+      "height": 969
+    },
+    {
+      "path": "visuels/maquettes-apres/d1-pret-mobile.png",
+      "width": 390,
+      "height": 1125
+    },
+    {
+      "path": "visuels/maquettes-apres/e1-kit-desktop.png",
+      "width": 1440,
+      "height": 1038
+    },
+    {
+      "path": "visuels/maquettes-apres/e1-kit-mobile.png",
+      "width": 390,
+      "height": 1693
+    },
+    {
+      "path": "visuels/maquettes-apres/f1-interruption-desktop.png",
+      "width": 1440,
+      "height": 927
+    },
+    {
+      "path": "visuels/maquettes-apres/f1-interruption-mobile.png",
+      "width": 390,
+      "height": 930
+    },
+    {
+      "path": "visuels/maquettes-apres/f1-retour-desktop.png",
+      "width": 1440,
+      "height": 938
+    },
+    {
+      "path": "visuels/maquettes-apres/f1-retour-mobile.png",
+      "width": 390,
+      "height": 1054
+    },
+    {
+      "path": "visuels/maquettes-apres/f1-session-desktop.png",
+      "width": 1440,
+      "height": 927
+    },
+    {
+      "path": "visuels/maquettes-apres/f1-session-mobile.png",
+      "width": 390,
+      "height": 930
+    }
+  ],
+  "votes": [
+    {
+      "id": "A1",
+      "POUR": 11,
+      "CONTRE": 0,
+      "ABSTENTION": 1,
+      "adopted": true
+    },
+    {
+      "id": "A2",
+      "POUR": 1,
+      "CONTRE": 11,
+      "ABSTENTION": 0,
+      "adopted": false
+    },
+    {
+      "id": "B1",
+      "POUR": 11,
+      "CONTRE": 1,
+      "ABSTENTION": 0,
+      "adopted": true
+    },
+    {
+      "id": "B2",
+      "POUR": 1,
+      "CONTRE": 11,
+      "ABSTENTION": 0,
+      "adopted": false
+    },
+    {
+      "id": "C1",
+      "POUR": 12,
+      "CONTRE": 0,
+      "ABSTENTION": 0,
+      "adopted": true
+    },
+    {
+      "id": "C2",
+      "POUR": 0,
+      "CONTRE": 12,
+      "ABSTENTION": 0,
+      "adopted": false
+    },
+    {
+      "id": "D1",
+      "POUR": 9,
+      "CONTRE": 0,
+      "ABSTENTION": 3,
+      "adopted": true
+    },
+    {
+      "id": "D2",
+      "POUR": 2,
+      "CONTRE": 10,
+      "ABSTENTION": 0,
+      "adopted": false
+    },
+    {
+      "id": "E1",
+      "POUR": 12,
+      "CONTRE": 0,
+      "ABSTENTION": 0,
+      "adopted": true
+    },
+    {
+      "id": "E2",
+      "POUR": 1,
+      "CONTRE": 11,
+      "ABSTENTION": 0,
+      "adopted": false
+    },
+    {
+      "id": "F1",
+      "POUR": 12,
+      "CONTRE": 0,
+      "ABSTENTION": 0,
+      "adopted": true
+    },
+    {
+      "id": "F2",
+      "POUR": 1,
+      "CONTRE": 10,
+      "ABSTENTION": 1,
+      "adopted": false
+    },
+    {
+      "id": "G1",
+      "POUR": 10,
+      "CONTRE": 0,
+      "ABSTENTION": 2,
+      "adopted": true
+    },
+    {
+      "id": "G2",
+      "POUR": 2,
+      "CONTRE": 8,
+      "ABSTENTION": 2,
+      "adopted": false
+    }
+  ],
+  "prompt02_identical": true,
+  "prompt02_sha256": "c496604b58d5c236cb6bbc613b9dd0393e64ef22f70259ea1abcd83c5a24dc1e",
+  "other_workshop_files_unchanged": 100,
+  "apps": {
+    "localeo-backend": {
+      "head": "23931f0d8a11202ac460af472c510e18bb672d4a",
+      "status": ""
+    },
+    "localeo-marketplace": {
+      "head": "db4dc57e6b2fd78f83a9d2981d181c0eb17c582d",
+      "status": ""
+    },
+    "localeo-commercant": {
+      "head": "333b7607b7c0e72e2a1b4133068d37d7fc7ca760",
+      "status": ""
+    },
+    "localeo-animation": {
+      "head": "80c42809ff751ba99895b4634180663609a365aa",
+      "status": ""
+    }
+  },
+  "failures": []
+}

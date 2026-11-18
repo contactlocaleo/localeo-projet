@@ -200,6 +200,9 @@ confirmation et un motif facultatif.
 Après acceptation, la préparation met le téléchargement du kit et la déclaration
 « Je suis prêt » en évidence. Le guide intégral reste dépliable, y compris ses
 consignes métier et supports privés : aucune ligne n’est filtrée selon son titre.
+Le [complément E80](../epic-80-fiabilite-parcours-localeo-pro/README.md)
+présente les bornes du guide en heure de Paris, sans changer les instants ni
+assimiler la fin à minuit à une journée entière supplémentaire.
 La lecture et le téléchargement ne constituent jamais une déclaration de
 préparation. Les droits backend et le suivi facultatif déterminent la présence
 de l’action. Le flyer séparé s’ouvre à la demande, selon ses droits existants.

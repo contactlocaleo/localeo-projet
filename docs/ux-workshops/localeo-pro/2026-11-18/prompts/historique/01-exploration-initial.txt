@@ -1,0 +1,11 @@
+# Protocole d’exploration exécuté
+
+Demande appliquée : explorer réellement Localeo Pro avec Playwright, sur smartphone puis ordinateur, pour les quatre missions du [protocole global](00-protocole-global.md). Le compte de test communiqué a été saisi en mémoire dans le navigateur automatisé ; il est représenté ici par `[CONFIDENTIEL]` / `[CONFIDENTIEL]`. Ne pas écrire les valeurs dans le dépôt, les captures ou les sorties enregistrées.
+
+1. Ouvrir l’URL communiquée, relever titre et formulaire, tenter la connexion avec le compte fourni, puis consigner le résultat. En cas de portail différent, vérifier l’URL Pro dans les sources canoniques avant de poursuivre.
+2. Ouvrir l’URL Pro documentée et tester la connexion sur mobile 390 × 844. Capturer l’écran de connexion vide, puis l’accueil chargé. Examiner navigation, action principale, invitations, animations et notifications.
+3. Parcourir en lecture seule scanner, liste et détails Animation, invitations, préparations, notifications, kit et guide. Capturer les écrans après chargement. Tester seulement un identifiant QR manifestement invalide, rejeté localement, sans confirmation ni écriture métier.
+4. Répéter accueil, liste Animation et scanner sur ordinateur 1440 × 900. Recharger une page authentifiée pour vérifier le retour immédiat ; qualifier séparément le retour après plusieurs jours, qui nécessite une observation différée.
+5. Lire les routes, composants, appels API, mécanismes QR, WebPush et spécifications ciblées. Classer les constats en `OBSERVÉ`, `DÉDUIT` ou `HYPOTHÈSE`, lier captures et lignes de code, et documenter les scénarios non accessibles sans QR de test ou action d’écriture.
+
+Ce protocole n’autorise ni atelier simulé, ni maquette, ni modification applicative. Les demandes des étapes 2 à 5 n’ont pas été fournies.

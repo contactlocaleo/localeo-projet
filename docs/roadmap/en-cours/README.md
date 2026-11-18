@@ -2,7 +2,9 @@
 
 [Retour à la roadmap](../README.md)
 
-Six EPIC sont classées en cours. Ce classement ne vaut ni clôture ni déploiement.
+Sept EPIC sont classées en cours. Ce classement ne vaut ni clôture ni déploiement.
+
+- [EPIC 80 — Fiabilité des parcours Animation dans Localeo Pro](epic-80-fiabilite-parcours-localeo-pro-backlog.md) : spécification et corrections locales du scanner, de la boîte Notifications et des dates du kit ; diagnostics, maquettes et recettes encore ouverts.
 
 - [EPIC 55 — Moteur commun et chasse au trésor](epic-55-chasse-tresor-commercante-backlog.md) :
   conception, arbitrages et suivi de livraison. La [spécification unique](../../specifications/moteur-animation/localeo_animation_engine_spec.md)

@@ -22,6 +22,9 @@ Les demandes de factures se consultent par pages. Utilisez la navigation de list
 4. Une transaction coffret utilisée exige un nouveau scan pour une autre prestation.
 
 Un conflit, un refus ou une validation « à contrôler » ne confirme pas la prestation. Ne traitez jamais un message d'erreur comme « déjà validé ».
+Si un QR n'est pas reconnu dans le scanner Animation, demandez le QR personnel
+du participant affiché dans Localeo Live. Le QR du flyer sert à l'inscription ;
+il ne valide pas le passage.
 
 ## Retrouver une validation
 
@@ -106,14 +109,18 @@ Après avoir accepté l’invitation, ouvrez l’animation ou l’invitation et 
 **Télécharger mon kit**. Le kit concerne uniquement votre commerce. Décompressez
 le fichier, ouvrez le mode opératoire et imprimez les supports destinés aux joueurs
 à taille réelle. Le guide contient les instructions réservées à votre équipe :
-ne l’affichez pas aux participants.
+ne l’affichez pas aux participants. Ses horaires sont indiqués en heure de Paris ;
+une fin à 0 h marque le début du jour affiché, sans inclure toute cette journée.
 
-Pour une chasse, le kit distingue deux documents :
+Pour une chasse, le kit distingue ces supports selon leur disponibilité :
 
 - **qr-lieu.pdf** : le QR de votre étape, à scanner depuis Localeo Live pour
   accéder au défi. Installez-le à l’endroit prévu dans votre commerce.
-- **flyer-joueurs.pdf** : le flyer dont le QR ouvre le support public autorisé
-  de la mission, ou l’inscription à l’animation. Il ne remplace pas le QR d’étape.
+- **flyer-animation.pdf**, lorsqu'il est disponible : le flyer officiel dont le
+  QR ouvre l'inscription. Il ne valide aucun passage et ne remplace pas le QR
+  d'étape.
+- **support-mission.pdf**, seulement si un support joueur est prévu : son QR
+  ouvre ce support pendant la période de jeu, sans valider de passage.
 
 Le QR d’étape est préparé automatiquement lorsque vous acceptez la mission.
 Pour une ancienne invitation déjà acceptée, le clic sur **Télécharger mon kit**
@@ -146,3 +153,7 @@ préparé pour un accès joueur par QR.
 Les options Finance ne sont visibles que lorsqu'elles sont activées. Les montants affichés proviennent du serveur. Une erreur de lecture n'indique pas l'absence de factures. N'émettez pas une nouvelle facture pour corriger une simple erreur d'affichage.
 
 Les listes d'animations, d'invitations et de notifications sont chargées intégralement. Si le chargement est incomplet, actualisez la page. « Contacter Localeo » permet de sélectionner un motif et d'envoyer un message ; attendez sa confirmation d'envoi.
+Dans Notifications, les messages Animation précèdent la section PIN lorsqu'elle
+est vide ; celle-ci reste dépliable et actualisable. Marquer un message comme lu
+ne termine ni une invitation ni une préparation : retrouvez les actions actuelles
+depuis l'accueil Pro.

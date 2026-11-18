@@ -1,0 +1,30 @@
+{
+  "checks": [
+    {
+      "width": 320,
+      "prototypeStates": 18,
+      "gallerySections": 5,
+      "allImageVariants": true
+    },
+    {
+      "width": 390,
+      "prototypeStates": 18,
+      "gallerySections": 5,
+      "allImageVariants": true
+    },
+    {
+      "width": 768,
+      "prototypeStates": 18,
+      "gallerySections": 5,
+      "allImageVariants": true
+    },
+    {
+      "width": 1440,
+      "prototypeStates": 18,
+      "gallerySections": 5,
+      "allImageVariants": true
+    }
+  ],
+  "failures": [],
+  "note": "Controles de rendu et de galerie uniquement, aucune recette applicative."
+}

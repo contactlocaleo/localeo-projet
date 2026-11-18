@@ -1,5 +1,7 @@
 # Spécifications
 
+- **EPIC 80 — parcours Animation dans Localeo Pro**, [spécification](epic-80-fiabilite-parcours-localeo-pro/README.md) et [bilan des critères](epic-80-fiabilite-parcours-localeo-pro/verification-livraison.md) : corrections vérifiées du scanner, de l'ordre des notifications et des dates du guide kit ; diagnostics et recette restants distingués.
+
 - **Réalisation E73 — 18 novembre 2026 : suites du workshop Animation**, [E73-EVO-WORKSHOP-UX-20261118](../roadmap/terminees/epic-73-animation-et-ou-coffrets-backlog.md#workshop-ux-20261118) : 11 orientations, 18 critères WA, spécification et implémentation locales ; [preuves et limites](epic-73-animation-et-ou-coffrets/verification-livraison.md#workshop-ux-20261118). Atelier prioritaire : PO-13 révisé et automatisation CAF retirée des travaux futurs. Recette humaine et déploiement non réalisés. Clôture historique conservée.
 
 - **Extension E78 — 17 novembre 2026 : préparation guidée**, [E78-EVO-PREPARATION-UX](epic-78-jeu-des-vitrines/parcours-regles.md#évolution-du-17-novembre-2026--préparation-guidée) : section Pro et parcours en quatre étapes, attentes commerçant/organisateur explicites, contrôles Animation regroupés ; PU-01 à PU-08, contrats métier existants conservés. Résultats dans le bilan E78, état En cours conservé.

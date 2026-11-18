@@ -1,5 +1,13 @@
 # Roadmap par etat
 
+**18 novembre 2026 — EPIC 80, En cours** :
+[fiabilité des parcours Animation dans Localeo Pro](en-cours/epic-80-fiabilite-parcours-localeo-pro-backlog.md),
+cadrage et [spécification](../specifications/epic-80-fiabilite-parcours-localeo-pro/README.md)
+de B1/C1/D1/E1/F1 à partir du workshop simulé. Message QR hors contexte,
+ordre de la boîte Notifications et dates brutes du guide corrigés localement.
+Écart des compteurs, kit physique, reprise et recette humaine encore à instruire ;
+les cinq décisions utilisateur sur les maquettes restent en attente.
+
 **18 novembre 2026 — E73-EVO-WORKSHOP-UX-20261118** :
 [cadrage des suites de l’atelier Animation](terminees/epic-73-animation-et-ou-coffrets-backlog.md#workshop-ux-20261118), 11 orientations retenues
 (1 P0, 8 P1, 2 P2), 18 critères WA et six lots. Corrections D1/B3/import,
