@@ -176,9 +176,15 @@ remplacent pas les trois rubriques habitantes.
 
 Dans une participation, placer progression confirmée et prochaine action avant
 historique et détails secondaires. Dans Mes lots, privilégier le gain, son état
-et son retrait plutôt que de grands compteurs. Dans Découvrir, rendre visibles
-la recherche et « Pour plus tard », même sans favori ; « Garder » et « Partager »
-associent une icône à un verbe. La sauvegarde d’une idée ne vaut pas inscription.
+et son retrait plutôt que de grands compteurs. Dans Découvrir, rendre visible
+la recherche et garder un partage public nommé. **Arbitrage du 18 novembre :**
+retirer l’ajout « Garder pour plus tard » ; les anciennes idées restent accessibles
+si elles existent, sans être assimilées à une inscription. Retirer les filtres
+internes du carnet, conserver les coffrets et les animations dans la même liste.
+L’état de l’animation se place en tête de vignette avec son pictogramme ; l’état
+personnel reste distinct. Les trois rubriques partagent leur ligne verte en tête.
+Les [correctifs canoniques](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#correctifs-du-18-novembre-2026--carnet-découverte-et-notification)
+précisent les lectures et la composition des cartes selon les maquettes validées.
 
 ## LIVE-UX-10 — Des pictogrammes utiles et de l'espace pour agir
 

@@ -32337,6 +32337,31 @@
             }
           },
           {
+            "name": "participation_ids",
+            "in": "query",
+            "required": false,
+            "description": "Sélection optionnelle de 1 à 50 identifiants de participation. Paramètre répété, filtré avant pagination dans les suivis autorisés de cette installation (jeton valide). Aucun accès supplémentaire ; une participation absente ne vaut ni clôture ni archivage.",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "minItems": 1,
+                  "maxItems": 50
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Participation Ids"
+            }
+          },
+          {
             "name": "moteurs_supportes",
             "in": "query",
             "required": false,

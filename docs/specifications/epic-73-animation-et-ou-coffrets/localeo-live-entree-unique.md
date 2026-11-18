@@ -1,5 +1,103 @@
 # E73 — Localeo Live, entrée unique des animations
 
+## Correctifs du 18 novembre 2026 — carnet, découverte et notification
+
+Suite aux observations du demandeur sur Localeo Live, ces décisions précisent
+**E73-EVO-LIVE-MAQUETTES** et remplacent les exigences incompatibles de LM-02,
+LM-05, CN-03, LC11 et PM-07. La clôture historique de l’epic reste inchangée.
+L’en-tête Localeo, Messages et Menu reste conservé selon l’arbitrage précédent.
+Avec cet en-tête et le statut désormais placé au-dessus du titre, à 320 × 568 px
+les actions restent dans le flux et peuvent nécessiter un défilement. La recette
+vérifie leur accès, leurs cibles et leur dégagement de la navigation basse après
+défilement ; l’ancienne contrainte de tout faire tenir au premier écran ne prime
+pas sur cette composition acceptée.
+
+| Repère | Comportement attendu | Preuve ciblée |
+| --- | --- | --- |
+| LIVE-COR-01 | Le carnet relit les participations effectivement affichées, indépendamment de leur classement serveur. Actualiser relit toutes les pages locales déjà ouvertes. Le retour visible, le focus ou la reconnexion déclenche une relecture après au moins 60 secondes, sans lecture concurrente. | Treize accès dans un ordre différent du serveur, clôture déplaçant une participation dans l’historique serveur, deux pages locales, réveils groupés, réponse tardive et remplacement d’installation. |
+| LIVE-COR-02 | Le statut de l’animation et son pictogramme figurent en tête de vignette : en cours, publiée, clôturée, terminée, annulée ou état à vérifier. Progression, qualification et résultat personnel restent distincts, sans remplacer ce statut. Aucune clôture déduite d’une date. | Clôturée avec résultat gagnant/non gagnant, animation en cours avec tirage annulé, refus et lecture absente sans fraîcheur inventée. |
+| LIVE-COR-03 | Vignettes blanches bordées : titre, commune/période disponibles, pictogramme de type à droite, statut personnel, tampons puis ouverture. Emplacements vides circulaires en pointillés et visites confirmées marquées ; aucune image de flyer recadrée à la place du symbole. Les flyers restent sur les fiches publiques. | Comparaison aux vues 1 et 4 de la planche, 320/390 px, texte 200 %, clavier. |
+| LIVE-COR-04 | Découvrir, Mon carnet et Mes lots partagent la ligne verte supérieure. Découvrir affiche « Voir ma participation » pour un accès connu ; avec plusieurs accès, la fiche permet toujours un choix explicite, sans sélection arbitraire. | Même libellé avec un/deux accès, destinations exactes, aucun POST d’inscription. |
+| LIVE-COR-05 | Retirer « Garder pour plus tard » et sa mention d’inscription des cartes et fiches. Les anciennes idées restent consultables et supprimables ; leur raccourci est absent s’il n’y en a pas. Le partage conserve seulement le lien public. | Absence d’ajout de favoris, ancien stockage préservé, partage sans token. |
+| LIVE-COR-06 | Retirer les filtres internes du carnet. Animations et coffrets restent tous accessibles dans la même liste ; historique et pagination restent disponibles. Les anciens paramètres de filtre ne masquent aucun objet. | Carnet mixte, navigation retour, accès exacts et aucun filtre Tout/Animations/Coffrets. |
+| LIVE-COR-07 | La notification de publication ouvre directement `/live/animations/{id}`. Le worker reconnaît aussi l’ancien `/animations/{UUID}` de même origine ; les origines externes et autres chemins restent refusés. | Réception puis clic, fenêtre Live existante et nouvel onglet, anciens/nouveaux liens et refus. |
+
+Le défaut de statut provenait de l’absence de réveil et du désalignement entre
+ordre local du carnet et pagination serveur. Le backend projetait déjà le statut
+du domaine Animation. La lecture ajoute `participation_ids`, paramètre de requête
+répété de **1 à 50 UUID**, facultatif, sur le tableau de bord existant. Le filtre
+est appliqué avant la pagination SQL et après les restrictions d’installation,
+de suivi et de token personnel valide. Il ne crée aucun droit. La réponse reste
+privée et non cachée ; une absence ne prouve ni clôture, ni archivage, ni révocation.
+Les curseurs filtrés lient sélection et moteurs par empreinte canonique bornée ;
+les anciens curseurs non filtrés restent lisibles. Les schémas canoniques E41/E42
+décrivent ce paramètre ; aucun contrat embarqué distinct ne couvre cette route.
+
+Live lit séquentiellement les participations de sa fenêtre locale, par groupes
+de 12, sans lecture individuelle par vignette. Une actualisation conserve les
+cartes, le défilement et le focus. Les remplacements révélés par un archivage
+sont relus dans une borne supplémentaire de 50 accès ; au-delà, leur état reste
+explicitement à vérifier. Un ancien serveur qui ignore le filtre ne déclenche
+pas une exploration exhaustive ; seuls les identifiants demandés sont fusionnés,
+et une réponse partielle ne devient pas un état frais pour les absents.
+
+Impacts : `localeo-marketplace` (lecture, présentation, worker et tests),
+`localeo-backend` (projection filtrée et lien de publication), `localeo-projet`
+(contrats et documentation). Aucun changement de domaine, de schéma SQL,
+de configuration, de consentement, de commande Animation/Pro ou de générateur :
+les données existantes suffisent et les tests utilisent des fixtures synthétiques.
+Pour livrer, installer le backend puis Live avec le nouveau service worker.
+Les notifications déjà affichées par l’ancien worker avec la seule URL `/live`
+ont perdu l’identifiant : leur destination ne peut pas être réparée rétroactivement.
+Les anciennes notifications encore en file avec l’UUID restent compatibles.
+
+### Vérification locale des correctifs
+
+- Backend : 15 tests ciblés de notification, 56 tests de lecture/contrat dont
+  un scénario PostgreSQL réel isolé, et 743 contrôles d’architecture réussis.
+  La base PostgreSQL temporaire a été arrêtée. La revue indépendante a fait
+  corriger la longueur du curseur ; sa borne est vérifiée avec 50 identifiants
+  et les six moteurs Live. Les exports OpenAPI hors ligne E41/E42 ont confirmé
+  le schéma canonique du paramètre, sans écraser ses précisions éditoriales.
+- Marketplace : 314 tests Node réussis, dont réception/clic Web Push, filtrage
+  des liens et sélection des fenêtres du carnet. ESLint du code, des tests et
+  des scripts réussi. La recette navigateur utilise le runner canonique isolé,
+  des API simulées et le port 18178 ; aucun fichier `.env` opérateur modifié.
+  Ses **130 scénarios distincts sont validés**, reprises ciblées comprises :
+  119 réussites lors de la passe large et 11 anciens attendus corrigés puis
+  vérifiés, sans skip. Les quatre régressions de fraîcheur (ordre serveur,
+  deux pages locales, réveil, archivage et réponse tardive) passent.
+  Captures inspectées à 320/390 px et texte 200 % ; le carnet utilise les
+  tampons ronds et le jeu conserve ses propres tampons.
+- Documentation : 99 guides, 1 344 liens locaux et 151 sources exportées
+  contrôlés sans erreur. Pas de modification des dépôts Animation ou Pro.
+
+Les rapports navigateur non versionnés restent dans `localeo-marketplace`,
+sous `test-results/visual-runs/` : passe large
+`2026-11-18T07-39-34-897Z-e54mCa`, reprises
+`2026-11-18T07-47-11-283Z-ENJQG1`, `2026-11-18T07-48-30-201Z-D1pTQU`
+et `2026-11-18T07-49-03-014Z-5k8jl4`. Chaque reprise conserve son lien
+`retryOf`, son empreinte des sources et son build isolé. Le rapprochement par
+fichier et intitulé ne laisse aucun scénario en échec. Les attentes retirées
+concernaient les filtres/favoris supprimés, la confusion entre tirage et cycle
+de l’animation, l’ouverture désormais volontaire du QR et l’ancien premier
+écran. Les lectures initiales du badge et de Mes lots sont distinguées du clic
+d’actualisation ; une seule lecture supplémentaire reste exigée. À 320 px,
+les contrôles de cible, de focus et de dégagement de la navigation sont conservés
+après défilement, y compris lorsque les consignes LM-09 précèdent le retrait.
+
+Un test voisin exécuté pendant le diagnostic,
+`test_participants_globaux_filtre_page_et_compteurs_identiquement`, reste en
+échec sur un double dépourvu de `scalar`. Son fichier et le lecteur global
+concerné sont identiques à HEAD ; cette dette préexistante est extérieure au
+tableau de bord Live et n’a pas été masquée par un skip ou une assertion moindre.
+Les fixtures obsolètes de deux tests d’acquittement Web Push ont, elles, été
+adaptées au lecteur réel `scalar`, sans modifier leur comportement attendu.
+
+Aucun déploiement, envoi réel de notification, essai PWA sur appareil physique
+ou test de compréhension avec des habitants n’a été exécuté. Le correctif local
+ne prouve pas encore l’état des animations du serveur utilisé par le demandeur.
+
 ## Évolution du 17 novembre 2026 — maquettes habitant
 
 **E73-EVO-LIVE-MAQUETTES** — évolution demandée après validation de

@@ -6,6 +6,14 @@
 
 **État de la séance du 17 novembre : conception validée, mise en conformité à réaliser.** Le présent travail formalise l’audit et conserve les images. Il ne constitue ni une implémentation, ni une recette applicative, ni une preuve de déploiement.
 
+**Arbitrages complémentaires du demandeur, le 18 novembre 2026 :** état de
+l’animation et pictogramme en tête de vignette, retrait de « Garder pour plus
+tard » et des filtres du carnet, ligne verte commune aux trois rubriques et
+libellé « Voir ma participation » dans Découvrir. Les deux planches restent
+conservées comme référence d’origine ; ces décisions explicites précisent leurs
+vues 1 et 4. Les [correctifs, contrats et preuves](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#correctifs-du-18-novembre-2026--carnet-découverte-et-notification)
+portent aussi la fraîcheur des statuts et le lien Web Push vers la fiche publiée.
+
 **Mise en œuvre locale le 18 novembre 2026 :** évolution, spécification et
 implémentation rattachées à **E73-EVO-LIVE-MAQUETTES**. Les
 [critères LM-01 à LM-11 et le bilan de réalisation](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-17-novembre-2026--maquettes-habitant)
