@@ -130,10 +130,12 @@ La route `POST /protected/gestion-reversement/reversements/campagnes-stripe/lanc
 
 `GET /protected/exploitation/commercants/me/webpush/abonnements`
 - liste les abonnements WebPush connus pour le commercant connecte.
+- chaque abonnement fournit `id`, `endpoint_hash` (SHA-256 de l'endpoint, en hexadecimal) et `actif` ; l'endpoint et les cles WebPush ne sont pas exposes. Le client compare l'empreinte de l'abonnement navigateur pour identifier l'appareil courant.
 
 `POST /protected/exploitation/commercants/me/webpush/abonnements`
 - enregistre l'abonnement navigateur de l'appareil courant.
 - corps attendu : `endpoint`, `keys`, `device_label` et `user_agent`.
+- la reponse fournit la meme empreinte `endpoint_hash`, sans renvoyer l'endpoint ni les cles.
 
 `DELETE /protected/exploitation/commercants/me/webpush/abonnements/{abonnement_id}`
 - supprime l'abonnement WebPush d'un appareil.
