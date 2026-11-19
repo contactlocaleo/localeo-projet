@@ -90,6 +90,81 @@ pagination, sans chargement exhaustif ; recherche et saisie restent montées.
 | GCA-08 | Double clic, réponse perdue, version obsolète et perte de droits ne produisent aucun effet supplémentaire | Idempotence, concurrence, rollback, lecture de reçu autorisée |
 | GCA-09 | Mobile/clavier, filtres/saisie/focus conservés, succès/refus/incertain compréhensibles | Recette navigateur 390/1280 px, petits écrans et zoom ; consommateurs des libellés |
 | GCA-10 | Sources et contrats synchronisés ; lectures bornées ; migration et démonstration examinées | OpenAPI producteur/embarqué, tests adaptateurs, mesures N/10N, liens et exports |
+| GCA-11 | Distinguer dernier mail d'initialisation, mot de passe défini et au moins une connexion réussie | Projection des preuves existantes, absence d'historique explicite, aucun secret exposé ; détail ci-dessous |
+
+## Correctif du 19 novembre 2026 — suivi de l'accès Pro
+
+Le seul résumé « invité / initialisé » ne permettait pas au gestionnaire de
+savoir où en était le nouveau commerçant. La liste présente désormais trois
+étapes indépendantes, actualisables avec la liste sans perdre recherche,
+saisie ni focus :
+
+- **Mail de création du mot de passe** : dernier email d'initialisation de ce
+  commerce, destinataire réel, demande et/ou envoi daté, attente, en cours,
+  envoyé, livré, ouverture signalée, échec temporaire/définitif ou annulation.
+  « Envoyé » indique explicitement que la livraison n'est pas confirmée.
+  Livraison/ouverture sont des signaux du service email, sans preuve de lecture
+  humaine. Aucun envoi retrouvé reste distinct d'un échec ou d'une livraison.
+- **Mot de passe** : défini ou pas encore défini, avec la date de configuration
+  lorsqu'elle existe ; la présence historique d'un mot de passe sans date
+  n'invente pas de date. Cette étape ne prouve aucune connexion.
+- **Connexion à Pro** : « Connecté au moins une fois » seulement si une dernière
+  connexion réussie est enregistrée, avec cette dernière date ; sinon « Aucune
+  connexion enregistrée ». Il ne s'agit pas de la date de première connexion.
+  Le verrouillage courant est signalé séparément et ne supprime pas l'historique.
+
+Le champ additif `suivi_acces` des fiches expose `email_initialisation`
+(`statut`, `destinataire`, `cree_le`, `envoye_le`), `mot_de_passe_defini`,
+`mot_de_passe_defini_le`, `derniere_connexion_le` et `acces_verrouille`.
+Il peut être absent/null dans les anciens reçus : l'interface indique alors
+un suivi indisponible et propose l'actualisation, sans inventer une étape.
+Les dates API sont UTC et l'affichage utilise l'heure de Paris.
+
+La projection réutilise les faits des domaines `identite_acces` et `exploitation`.
+Elle sélectionne le dernier email `INITIALISATION_ACCES_COMMERCANT`, rattaché
+par `source_type=COMMERCANT` et identifiant de commerce, avec un ordre total
+date/identifiant. Un autre email, une récupération de mot de passe, le changement
+du contact ou une ancienne invitation livrée ne remplace pas la preuve du dernier
+envoi. Jointure bornée à un email par commerce, index existant `source_id`, aucune
+requête supplémentaire par ligne. Les droits de commune et l'idempotence restent
+ceux de GCA-03/05/08 ; aucun corps d'email, lien, token, hash ou diagnostic
+fournisseur privé n'est exposé.
+
+Impacts : Backend, Animation et contrat E41 canonique/embarqué. Pro et
+Marketplace n'ont pas de changement de contrat consommé ; les écritures
+d'authentification restent existantes. Sans migration ni réparation de données :
+les faits sont déjà persistés. Sans changement de générateur/restauration :
+aucune nouvelle donnée stockée ; les fixtures de recette couvrent ces états.
+L'exploitation conserve les traitements d'envoi et de remontée des statuts
+existants ; un fournisseur sans confirmation laisse la livraison non confirmée.
+Aucun envoi réel ni déploiement n'est impliqué par les preuves locales.
+
+Preuves locales du correctif sur Backend `ef913e85`, Animation `d71be34` et
+Projet `dd14e11`, plus modifications non commitées :
+
+- Reproduction API avant correction : échec sur l'absence de `suivi_acces`.
+  Après correction, runner isolé backend sur `tests/architecture`,
+  `tests/domain/test_domain_dedicated_classes.py`,
+  `tests/application/use_cases/test_use_case_business_test_coverage.py`,
+  `tests/api/test_gestion_commercants_animation_api.py` et
+  `tests/application/use_cases/test_identite_acces_use_cases.py` : **789 réussis**.
+- `tests/security/test_gestion_commercants_animation_postgres.py`, via le même
+  runner avec PostgreSQL 18 local jetable explicite : **11 réussis**, sans skip.
+  Envoi/mot de passe/connexion indépendants, dernier renvoi en échec malgré
+  ancienne livraison, autre commerce/récupération ignorés, destinataire conservé,
+  permissions, idempotence et lecture N/10N sans requête par ligne vérifiés.
+- Animation : types et lint réussis, **391 tests Node réussis**, build isolé
+  `tmp/quality-build-DvxSDQ` réussi (avertissement de bundle > 500 ko).
+  `tests/browser/merchant-network.mjs` : API synthétique, 1280/390/320 px,
+  texte 200 %, états d'accès, conservation de saisie/focus et purge sur 403.
+  Rapport et captures examinées dans Animation :
+  `tmp/merchant-network-1795071372399/report.json`.
+  Le premier essai avait des accents altérés dans les assertions ajoutées au
+  banc ; encodage corrigé, assertions conservées et recette rejouée avec succès.
+- OpenAPI exporté hors ligne puis normalisé par le générateur E41 ; contrat
+  embarqué identique. Guides et 151 sources exportées contrôlés sans erreur.
+  Pas de recette connectée ni d'appareil physique ; aucune preuve de livraison
+  d'un email réel produite par cette recette.
 
 ## Impacts et lots
 

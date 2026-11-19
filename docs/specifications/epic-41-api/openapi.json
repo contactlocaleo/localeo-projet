@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Backend - contrat implemente EPIC 41",
     "description": "OpenAPI complet du backend, dont les parcours Animation locale. Genere hors ligne depuis le code local pour les integrations et les mocks ; cet instantane ne prouve pas son deploiement.",
-    "version": "1.0.0+94d64b8"
+    "version": "1.0.0+ef913e8"
   },
   "paths": {
     "/public/identite-acces/interne/connexion": {
@@ -162576,6 +162576,53 @@
         "type": "object",
         "title": "EmailBeneficiaireRequest"
       },
+      "EmailInitialisationAnimationDTO": {
+        "properties": {
+          "statut": {
+            "type": "string",
+            "enum": [
+              "A_ENVOYER",
+              "EN_COURS_ENVOI",
+              "ENVOYE",
+              "DELIVRE",
+              "OUVERT",
+              "ECHEC_TEMPORAIRE",
+              "ECHEC_DEFINITIF",
+              "ANNULE"
+            ],
+            "title": "Statut"
+          },
+          "destinataire": {
+            "type": "string",
+            "title": "Destinataire"
+          },
+          "cree_le": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Cree Le"
+          },
+          "envoye_le": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Envoye Le"
+          }
+        },
+        "type": "object",
+        "required": [
+          "statut",
+          "destinataire",
+          "cree_le",
+          "envoye_le"
+        ],
+        "title": "EmailInitialisationAnimationDTO"
+      },
       "EmettreFactureAssisteeRequest": {
         "properties": {
           "expectedVersion": {
@@ -167319,6 +167366,17 @@
               "INITIALISE"
             ],
             "title": "Acces Pro"
+          },
+          "suivi_acces": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SuiviAccesAnimationDTO"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Preuves de l'accès Pro : dernier email d'initialisation, mot de passe et dernière connexion réussie. Null pour un ancien reçu sans suivi. Un envoi ne prouve pas la livraison ; aucune date de première connexion n'est déduite."
           },
           "actions_disponibles": {
             "items": {
@@ -204263,6 +204321,61 @@
           "stripe_connect_eligible"
         ],
         "title": "StripeConnectOnboardingCommercantPayload"
+      },
+      "SuiviAccesAnimationDTO": {
+        "properties": {
+          "email_initialisation": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/EmailInitialisationAnimationDTO"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "mot_de_passe_defini": {
+            "type": "boolean",
+            "title": "Mot De Passe Defini"
+          },
+          "mot_de_passe_defini_le": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mot De Passe Defini Le"
+          },
+          "derniere_connexion_le": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Derniere Connexion Le"
+          },
+          "acces_verrouille": {
+            "type": "boolean",
+            "title": "Acces Verrouille"
+          }
+        },
+        "type": "object",
+        "required": [
+          "email_initialisation",
+          "mot_de_passe_defini",
+          "mot_de_passe_defini_le",
+          "derniere_connexion_le",
+          "acces_verrouille"
+        ],
+        "title": "SuiviAccesAnimationDTO"
       },
       "SuiviCommande": {
         "properties": {
