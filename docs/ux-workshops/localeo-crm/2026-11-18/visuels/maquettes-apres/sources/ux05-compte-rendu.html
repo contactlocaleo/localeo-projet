@@ -1,0 +1,43 @@
+<main id="contenu">
+  <p class="specimen-note">Planche de parcours : deux états successifs, avant puis après l’enregistrement du compte rendu.</p>
+  <p class="eyebrow">Après le rendez-vous · scénario fictif</p>
+  <h1 class="title">Consigner le résultat et préparer la suite</h1>
+  <p class="muted">Démonstration Localeo · 26 novembre 2026 · 10 h–10 h 30 · heure de Paris</p>
+
+  <section class="panel" aria-labelledby="contexte-titre">
+    <h2 id="contexte-titre" class="section-title">Commune — Val-des-Ormes (fictive)</h2>
+    <p>Dossier : <strong>Animation centre-bourg</strong> · Responsable du rendez-vous : <strong>Léa Bernard</strong></p>
+    <span class="badge">Compte rendu à enregistrer</span>
+  </section>
+
+  <section class="panel" aria-labelledby="cr-titre">
+    <h2 id="cr-titre" class="section-title">1. Compte rendu à enregistrer</h2>
+    <div class="field"><label for="compte-rendu">Compte rendu du rendez-vous <span aria-hidden="true">*</span> — obligatoire pour le déclarer réalisé</label><textarea id="compte-rendu" rows="4" readonly required>La commune souhaite approfondir l’organisation des animations du centre-bourg. La démonstration a permis de préciser les besoins. Prochaine discussion proposée : préciser le calendrier et les interlocuteurs à associer.</textarea></div>
+    <p class="muted">L’enregistrement du compte rendu permettra de marquer ce rendez-vous comme réalisé.</p>
+    <div class="actions"><button type="button" class="button primary" aria-disabled="true">Enregistrer le compte rendu et marquer réalisé</button><a class="button" href="ux05-agenda.html#rendez-vous">Revenir au rendez-vous</a></div>
+  </section>
+
+  <section class="panel" aria-labelledby="suite-titre">
+    <p class="eyebrow">État suivant · après confirmation de l’enregistrement</p>
+    <h2 id="suite-titre" class="section-title">2. Quelle suite donner ?</h2>
+    <p class="notice good"><strong>Compte rendu enregistré · rendez-vous réalisé.</strong> Aucune prochaine action n’a encore été créée.</p>
+    <p>Choisissez une suite utile au dossier. Les deux options ci-dessous sont alternatives.</p>
+    <div class="grid2">
+      <div>
+        <h3>Préparer une prochaine action</h3>
+        <p class="muted">Proposition à compléter puis à confirmer</p>
+        <div class="field"><label for="proposition-action">Action proposée</label><input id="proposition-action" value="Préciser le calendrier avec la commune" readonly></div>
+        <div class="field"><label for="proposition-dossier">Dossier concerné</label><input id="proposition-dossier" value="Animation centre-bourg" readonly></div>
+        <p class="muted">Vous choisirez le responsable, la date prévue et un éventuel rappel avant d’enregistrer cette action.</p>
+        <button type="button" class="button primary" aria-disabled="true">Compléter la prochaine action</button>
+      </div>
+      <div>
+        <h3>Ne pas planifier d’action maintenant</h3>
+        <p class="muted">Par exemple, si aucune suite n’est pertinente à ce stade.</p>
+        <div class="field"><label for="motif-suite">Explication à conserver dans le compte rendu</label><textarea id="motif-suite" rows="3" readonly placeholder="Précisez le contexte si vous ne prévoyez pas de suite."></textarea></div>
+        <p class="muted">Cette option ne clôture pas le dossier et n’ajoute pas de tâche.</p>
+        <button type="button" class="button" aria-disabled="true">Ajouter cette explication au compte rendu</button>
+      </div>
+    </div>
+  </section>
+</main>

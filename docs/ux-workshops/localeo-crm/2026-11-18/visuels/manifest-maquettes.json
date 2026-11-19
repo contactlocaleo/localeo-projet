@@ -1,0 +1,113 @@
+{
+  "nature": "Maquettes de conception ; pas captures produit",
+  "date": "2026-11-19",
+  "orientations": [
+    {
+      "id": "UX01",
+      "priorite": "P1",
+      "votes_pour": 12,
+      "effort": "M",
+      "titre": "Accueil et portée",
+      "observations": "O01–O02, O16",
+      "avant": "01-accueil-bureau.png",
+      "avant_complementaires": [],
+      "annotation": "Aujourd’hui, portée Mes actions : trois files vides ; les indicateurs partagés sont repliés en bas. Le volume collectif n’est pas visible dans cette capture.",
+      "scenes": [
+        "ux01-accueil",
+        "ux01-equipe",
+        "ux01-etats"
+      ],
+      "benefice": "Distinguer son activité de celle de l’équipe et ouvrir les priorités utiles."
+    },
+    {
+      "id": "UX02",
+      "priorite": "P1",
+      "votes_pour": 8,
+      "effort": "L",
+      "titre": "Situations à suivre",
+      "observations": "O09, O16 ; couverture du pilotage",
+      "avant": "14-fiche-avec-action-bureau.png",
+      "avant_complementaires": [
+        "01-accueil-bureau.png"
+      ],
+      "annotation": "Fiche de test : une prochaine action est affichée en haut, mais le dossier en bas reste sans prochaine action. Cela illustre la distinction des unités ; cette capture ne prouve pas l’absence d’une liste globale.",
+      "scenes": [
+        "ux02-risques",
+        "ux02-prospects"
+      ],
+      "benefice": "Retrouver les éléments à suivre sans additionner des catégories qui se recoupent."
+    },
+    {
+      "id": "UX03",
+      "priorite": "P1",
+      "votes_pour": 12,
+      "effort": "S",
+      "titre": "Responsabilités explicites",
+      "observations": "O04–O05, O17",
+      "avant": "09-creation-prospect-bureau.png",
+      "avant_complementaires": [
+        "11-fiche-prospect-test-bureau.png"
+      ],
+      "annotation": "Création d’un prospect avec premier dossier. Le champ Responsable est en fin de formulaire ; la fiche obtenue laisse le prospect non attribué. La confusion est une hypothèse, pas une erreur métier démontrée.",
+      "scenes": [
+        "ux03-responsabilites",
+        "ux03-creation"
+      ],
+      "benefice": "Comprendre qui suit la relation, qui porte le dossier et qui réalise l’action."
+    },
+    {
+      "id": "UX04",
+      "priorite": "P1",
+      "votes_pour": 12,
+      "effort": "M",
+      "titre": "Prochaine action rattachée",
+      "observations": "O08–O09",
+      "avant": "14-fiche-avec-action-bureau.png",
+      "avant_complementaires": [
+        "13-planifier-action-bureau.png"
+      ],
+      "annotation": "La zone Prochaine action concerne le prospect ; l’alerte Sans prochaine action reste visible dans la ligne du dossier. Aucun rattachement de tâche n’a été perdu.",
+      "scenes": [
+        "ux04-action",
+        "ux04-suivi"
+      ],
+      "benefice": "Savoir quel dossier avance et pourquoi une autre alerte reste active."
+    },
+    {
+      "id": "UX05",
+      "priorite": "P1",
+      "votes_pour": 12,
+      "effort": "M",
+      "titre": "Du rendez-vous à sa suite",
+      "observations": "O11–O12 ; limites de recette",
+      "avant": "04-agenda-bureau.png",
+      "avant_complementaires": [
+        "15-creation-rendez-vous-bureau.png"
+      ],
+      "annotation": "Agenda de la semaine du 16 au 22 novembre : un RDV annulé préexistant est affiché. Le nouveau RDV réservé pour le 26 novembre n’a pas été retrouvé pendant la recette interrompue. Aucune disparition n’est démontrée.",
+      "scenes": [
+        "ux05-confirmation",
+        "ux05-agenda",
+        "ux05-compte-rendu"
+      ],
+      "benefice": "Retrouver le bon rendez-vous, son contexte et sa prochaine étape."
+    }
+  ],
+  "captures_avant_sha256": {
+    "01-accueil-bureau.png": "2e32f0efeb04cbd57c0037a7da421ac2cd1acf41b3e84e27b578889ed07b4ab1",
+    "02-prospects-bureau.png": "1d3aaa0a643b928a7eff4af6d3b49ade5976d48564e5ef02b413f0bf559dd049",
+    "03-suivi-bureau.png": "2ba12c2d50ed8080656b1f06c5edef82ca9d7d4725381424227f90ce8b424840",
+    "04-agenda-bureau.png": "8dd8a183072512a0cb6efca55548bd189f123eb5c7d84d022c6e329265c8a302",
+    "05-rappels-bureau.png": "93964b398b1038cf68299fb12c451d3edb9d30b36224d43db31febfb279f0191",
+    "06-qualification-bureau.png": "115ece9515a9c59e3b44f29b2061f59ed3aa15474fd1d92e8718e17928167221",
+    "07-notifications-bureau.png": "540aaf350fdf7bbc3ce9a05b041ad17dab44a715e94d64fd2669e1542f98da3e",
+    "08-imports-bureau.png": "cc4309ed3abb6d750c17e66f0f1eb2cf7561afa60f2dd3d599760235b54d721b",
+    "09-creation-prospect-bureau.png": "c0979b7949bf36f91c1c3005785dd48d07cc61eb9a605a213095864c08f792f5",
+    "10-recherche-prospect-bureau.png": "477afec22cf74656eac51a14ce155be9b7bf33e3e9f821ff4ea6e8e4080ee305",
+    "11-fiche-prospect-test-bureau.png": "20a1f0abdd3005d5327b0c604b6c0e72b970da5d2e4829fad882527ed4993d51",
+    "12-ajout-contact-bureau.png": "77fd35f6301f56e1ff4f445fa174fedf0c414d5467de1227a98671c812d3bf31",
+    "13-planifier-action-bureau.png": "3c07291f369c5771e0dfa7515a78d2aeaa22216344361214781b158abeee74a8",
+    "14-fiche-avec-action-bureau.png": "dc90b45e25c7eab8d87030867b36a97b71f18f32ce2174ed78542b466886b950",
+    "15-creation-rendez-vous-bureau.png": "fd49e3cffb614d79424c32e4edc76dbf32af49f7262d08a1b29827490dbfc31d"
+  }
+}

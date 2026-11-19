@@ -1,0 +1,304 @@
+{
+  "nature": "Orientations de conception simulées, aucune modification produit autorisée",
+  "version": "v1 figée avant vote le 2026-11-19",
+  "orientations": [
+    {
+      "id": "UX01",
+      "atelier": "A",
+      "titre": "Rendre visible un résumé quotidien et collectif",
+      "parcours": "Accueil, priorités, suivi collectif",
+      "probleme": "L'accueil personnel vide et les indicateurs collectifs repliés ne donnent pas immédiatement l'état du portefeuille.",
+      "preuve": "OBSERVÉ O01–O02 ; DÉDUIT O16. Compréhension réelle : HYPOTHÈSE.",
+      "consequence": "Un nouvel utilisateur pourrait confondre aucune action personnelle et aucune activité collective.",
+      "solution": "Conserver Mes actions/Équipe, afficher un résumé compact de la portée sélectionnée (retards, actions du jour, prochains RDV) et un accès explicite aux indicateurs collectifs existants ; distinguer zéro, chargement et indisponibilité.",
+      "benefice": "Démarrer la journée avec des priorités et une portée compréhensibles.",
+      "criteres": [
+        "La portée, la période et le fuseau sont visibles pour chaque total ; un zéro personnel ne qualifie jamais le portefeuille collectif.",
+        "Chaque total ouvre la liste correspondante avec les mêmes filtres ; nombres et pagination sont cohérents sur un jeu de test contrôlé.",
+        "L'état vide explique la portée et permet d'ouvrir l'équipe ; aucun chargement ou échec ne devient un faux zéro."
+      ],
+      "effort": "M",
+      "priorite": "P1",
+      "confiance": "Moyenne",
+      "captures": [
+        "01",
+        "04",
+        "05"
+      ]
+    },
+    {
+      "id": "UX02",
+      "atelier": "B",
+      "titre": "Donner accès aux listes de risques du portefeuille",
+      "parcours": "Pilotage global et filtres",
+      "probleme": "Le repérage global des non attribués, sans suivi récent et dossiers stagnants n'est pas établi.",
+      "preuve": "HYPOTHÈSE de couverture insuffisante ; couverture-pilotage-commercial.md. O09, O16 ; filtre dossier sans action DÉDUIT du code.",
+      "consequence": "Des dossiers à risque pourraient rester hors du champ de la revue d'équipe.",
+      "solution": "Vérifier et rendre accessibles les vues existantes ; compléter seulement les manques pour non attribués, prospects sans action, dossiers sans action, sans interaction récente, sans évolution, retards et RDV à venir. Définir les populations et seuils avec le métier.",
+      "benefice": "Une revue de portefeuille vérifiable, avec des listes permettant d'agir.",
+      "criteres": [
+        "Chaque risque précise unité (prospect ou dossier), population, horizon et seuil ; pause justifiée et dossiers clos ont un traitement explicite.",
+        "Un jeu contrôlé couvre chaque risque, l'absence de risque et les cas de recouvrement ; total et liste concordent sur toutes les pages.",
+        "Les filtres responsable/équipe restent visibles ; les listes qui se recoupent ne sont pas additionnées comme un total de prospects uniques."
+      ],
+      "effort": "L",
+      "priorite": "P1",
+      "confiance": "Moyenne sur le besoin ; faible sur les fonctions manquantes",
+      "captures": [
+        "01",
+        "11",
+        "14"
+      ]
+    },
+    {
+      "id": "UX03",
+      "atelier": "C",
+      "titre": "Clarifier les responsables du prospect, du dossier et de l'action",
+      "parcours": "Création, qualification, affectation",
+      "probleme": "Le responsable requis à la création est celui du dossier ; le prospect peut rester non attribué.",
+      "preuve": "OBSERVÉ O04–O05 ; confusion HYPOTHÈSE O17.",
+      "consequence": "Une personne pourrait croire le prospect pris en charge alors que seule une opportunité l'est.",
+      "solution": "Nommer chaque rôle dans les formulaires et confirmations ; montrer le responsable du prospect et proposer son affectation explicite, sans copier silencieusement le propriétaire du dossier.",
+      "benefice": "Savoir qui suit la relation et qui porte chaque action.",
+      "criteres": [
+        "Création et récapitulatif distinguent les trois responsabilités ; aucun libellé isolé Responsable ne laisse son périmètre indéterminé.",
+        "Créer un dossier attribué sur prospect non attribué conserve ce choix et l'explique ; deux responsables différents restent possibles.",
+        "Lors d'une affectation, le récapitulatif indique quels objets changent et lesquels conservent leur responsable."
+      ],
+      "effort": "S",
+      "priorite": "P1",
+      "confiance": "Moyenne",
+      "captures": [
+        "09",
+        "11",
+        "13"
+      ]
+    },
+    {
+      "id": "UX04",
+      "atelier": "E",
+      "titre": "Expliciter le rattachement de la prochaine action",
+      "parcours": "Planifier une tâche, relancer, suivre un dossier",
+      "probleme": "Après création d'une action de prospect, son dossier reste Sans prochaine action.",
+      "preuve": "OBSERVÉ O08–O09 ; risque d'incompréhension DÉDUIT, pas preuve de perte d'action.",
+      "consequence": "Une alerte pourrait être ignorée comme un faux positif ou provoquer une tâche en doublon.",
+      "solution": "Afficher le périmètre de chaque action et permettre de choisir explicitement un dossier pertinent quand le parcours le permet ; depuis le dossier, garder son contexte. Expliquer pourquoi une alerte persiste.",
+      "benefice": "Des prochaines actions interprétables au bon niveau.",
+      "criteres": [
+        "Une action du prospect reste distincte d'une action de dossier ; aucun rattachement automatique ambigu.",
+        "Sur un prospect à deux dossiers, chaque création affiche son contexte avant confirmation ; la fiche et les listes montrent le même rattachement.",
+        "Le dossier sans tâche garde son alerte avec une explication, même si le prospect a une autre action ; action et rappel restent deux dates distinctes."
+      ],
+      "effort": "M",
+      "priorite": "P1",
+      "confiance": "Élevée sur l'état observé ; moyenne sur la solution",
+      "captures": [
+        "13",
+        "14"
+      ]
+    },
+    {
+      "id": "UX05",
+      "atelier": "D",
+      "titre": "Rendre vérifiable la continuité du rendez-vous jusqu'à la prochaine étape",
+      "parcours": "Réserver, retrouver, préparer, modifier, réaliser, relancer",
+      "probleme": "La réservation est prouvée, mais sa continuité dans l'agenda et après le rendez-vous n'est pas démontrée.",
+      "preuve": "OBSERVÉ O11–O12 ; code de modification/compte rendu présent ; UI non vérifiée, voir limitations.md.",
+      "consequence": "La confiance dans le suivi de bout en bout reste insuffisante pour un déploiement autonome.",
+      "solution": "Partir des commandes existantes ; garantir un accès explicite au rendez-vous confirmé et au bon jour d'agenda, puis préparation, compte rendu et proposition de prochaine action. Ajouter seulement les raccords absents après recette.",
+      "benefice": "Retrouver et poursuivre un rendez-vous sans recherche ni ressaisie inutile.",
+      "criteres": [
+        "La confirmation mène au rendez-vous enregistré et à sa période d'agenda, avec prospect, responsable, horaires et statut cohérents.",
+        "Modifier, reporter et annuler un RDV fictif préservent le contexte, contrôlent les disponibilités et laissent une trace ; refus conserve les saisies.",
+        "Réaliser exige le compte rendu prévu par le domaine et propose une prochaine action ou une absence motivée ; aucune tâche n'est créée silencieusement.",
+        "Le rappel interne et l'absence de message au prospect sont explicites ; réception et préférences sont vérifiées sur comptes de test."
+      ],
+      "effort": "M",
+      "priorite": "P1",
+      "confiance": "Faible sur le manque ; élevée sur la nécessité de recette",
+      "captures": [
+        "04",
+        "15"
+      ]
+    },
+    {
+      "id": "UX06",
+      "atelier": "C",
+      "titre": "Alléger visuellement la création sans retirer les règles métier",
+      "parcours": "Créer un prospect et son premier dossier",
+      "probleme": "La création regroupe informations de structure et premier dossier dans un long formulaire.",
+      "preuve": "OBSERVÉ O04, capture 09 ; effort cognitif HYPOTHÈSE.",
+      "consequence": "Une saisie occasionnelle peut paraître plus lourde que nécessaire.",
+      "solution": "Regrouper le minimum requis et l'objectif du premier dossier ; rendre les compléments progressifs et annoncer ce qui sera créé. Conserver commune, propriétaire de dossier et contrôle des ressemblances.",
+      "benefice": "Saisir le minimum utile sans rendre la qualification exhaustive obligatoire.",
+      "criteres": [
+        "Nom, commune et responsable de dossier sont repérables avec leur justification ; coordonnées et qualification restent facultatives selon règles existantes.",
+        "Annuler un complément ou rencontrer une erreur ne perd pas les champs saisis ; résumé avant enregistrement des objets créés.",
+        "Un doublon plausible déclenche le rapprochement existant, avec possibilité de consulter la fiche avant de confirmer une création distincte."
+      ],
+      "effort": "M",
+      "priorite": "P2",
+      "confiance": "Moyenne",
+      "captures": [
+        "09",
+        "12"
+      ]
+    },
+    {
+      "id": "UX07",
+      "atelier": "G",
+      "titre": "Remplacer la valeur null dans la dernière interaction",
+      "parcours": "Lire une fiche sans historique",
+      "probleme": "Le mot technique null apparaît sous Aucun échange consigné.",
+      "preuve": "OBSERVÉ O18.",
+      "consequence": "L'état vide paraît défectueux et peut diminuer la confiance.",
+      "solution": "Afficher un état vide unique et compréhensible quand aucune dernière interaction n'existe.",
+      "benefice": "Une fiche lisible dès sa création.",
+      "criteres": [
+        "Une fiche sans échange n'affiche ni null ni undefined ; elle indique Aucun échange consigné.",
+        "Une fiche avec échange affiche toujours sa date et son contenu utiles, sans masquer un état d'erreur distinct."
+      ],
+      "effort": "S",
+      "priorite": "P2",
+      "confiance": "Élevée",
+      "captures": [
+        "11",
+        "14"
+      ]
+    },
+    {
+      "id": "UX08",
+      "atelier": "G",
+      "titre": "Faciliter le retour aux résultats filtrés",
+      "parcours": "Recherche, consultation de fiche, retour à la liste",
+      "probleme": "La recherche et les filtres sont disponibles, mais leur conservation au retour et après action n'a pas été vérifiée.",
+      "preuve": "OBSERVÉ O03 ; risque de perte de contexte HYPOTHÈSE, pas bug établi.",
+      "consequence": "En cas de perte de contexte, les commerciaux répéteraient leur recherche.",
+      "solution": "Recetter puis, si nécessaire, compléter la conservation des filtres, page, position et focus après consultation et actualisation locale ; indiquer les filtres actifs.",
+      "benefice": "Traiter une série de prospects sans recommencer la navigation.",
+      "criteres": [
+        "Une recherche suivie de fiche/retour restitue termes, filtres, page et focus logique.",
+        "L'enregistrement d'une action actualise les données concernées sans effacer le formulaire ou la navigation.",
+        "Réinitialiser est explicite et ne modifie pas silencieusement la portée individuelle/équipe."
+      ],
+      "effort": "M",
+      "priorite": "P2",
+      "confiance": "Faible",
+      "captures": [
+        "02",
+        "10"
+      ]
+    },
+    {
+      "id": "UX09",
+      "atelier": "F",
+      "titre": "Rendre la transmission d'un dossier explicite",
+      "parcours": "Affecter, transmettre, reprendre un portefeuille",
+      "probleme": "Plusieurs responsables existent ; la propagation d'un transfert aux tâches et RDV n'a pas été observée.",
+      "preuve": "OBSERVÉ O05, O10–O11 ; risque de transfert incomplet HYPOTHÈSE.",
+      "consequence": "L'équipe pourrait supposer à tort que les engagements ont tous changé de responsable.",
+      "solution": "Présenter avant/après les responsabilités concernées et les engagements restant à l'ancien titulaire ; prévoir une note de transmission facultative et une trace, sans transfert global silencieux.",
+      "benefice": "Une reprise de dossier avec responsabilités explicites.",
+      "criteres": [
+        "Le transfert distingue prospect, dossier, tâches et RDV ; aucun objet n'est réattribué sans choix explicite autorisé.",
+        "Après confirmation, ancien/nouveau responsables et date sont consultables par les rôles autorisés.",
+        "Une action future et un RDV de test encore affectés à l'ancien titulaire sont signalés ; les erreurs n'effacent pas le contexte."
+      ],
+      "effort": "M",
+      "priorite": "P2",
+      "confiance": "Faible à moyenne",
+      "captures": [
+        "11",
+        "05",
+        "04"
+      ]
+    },
+    {
+      "id": "UX10",
+      "atelier": "C",
+      "titre": "Expliquer la qualification et les statuts au point d'usage",
+      "parcours": "Qualifier, prioriser, changer l'étape",
+      "probleme": "Potentiel, priorité, étape et Non calculé désignent des notions distinctes dont la compréhension n'est pas testée.",
+      "preuve": "OBSERVÉ O13, O06 ; confusion HYPOTHÈSE ; règles d'étapes DÉDUITES du code.",
+      "consequence": "Un prospect non calculé pourrait être pris pour un prospect sans intérêt.",
+      "solution": "Donner un exemple court pour potentiel/étape/priorité et expliquer Non calculé ; exposer les conséquences des transitions existantes, sans nouveau score opaque.",
+      "benefice": "Qualifier progressivement avec des termes compris.",
+      "criteres": [
+        "Non calculé signifie absence de calcul, sans équivalence visuelle avec faible potentiel.",
+        "Un exemple distingue état du prospect, étape du dossier et priorité ; les obligations de gain/pause/réouverture sont expliquées au moment utile.",
+        "La qualification manquante ne bloque pas une prise de note ou une prochaine action si le domaine ne l'exige pas."
+      ],
+      "effort": "S",
+      "priorite": "P2",
+      "confiance": "Moyenne",
+      "captures": [
+        "06",
+        "11"
+      ]
+    },
+    {
+      "id": "UX11",
+      "atelier": "E",
+      "titre": "Bloquer toute sortie de dossier sans prochaine action datée",
+      "parcours": "Clôture de consultation et suivi",
+      "probleme": "Une prochaine action peut manquer sur un dossier.",
+      "preuve": "OBSERVÉ O09 ; efficacité d'un blocage systématique HYPOTHÈSE.",
+      "consequence": "Sans contrôle, un dossier peut être oublié ; avec blocage, les utilisateurs peuvent saisir de fausses tâches.",
+      "solution": "Rendre une prochaine action datée obligatoire à chaque sortie de dossier, y compris dossiers en pause ou clos.",
+      "benefice": "Viser une couverture totale des dossiers par une échéance.",
+      "criteres": [
+        "Aucune sortie du dossier n'est possible sans tâche datée associée, quel que soit son statut.",
+        "Le blocage est testé sur pause, gain et perte ; effets de tâches factices mesurés avant décision d'implémentation."
+      ],
+      "effort": "L",
+      "priorite": "P2",
+      "confiance": "Faible",
+      "captures": [
+        "14"
+      ]
+    },
+    {
+      "id": "UX12",
+      "atelier": "F",
+      "titre": "Attribuer automatiquement les prospects non affectés à tour de rôle",
+      "parcours": "Affectation d'équipe",
+      "probleme": "Une fiche peut rester sans responsable du prospect.",
+      "preuve": "OBSERVÉ O05 ; pertinence d'une distribution automatique HYPOTHÈSE.",
+      "consequence": "La file des non attribués peut s'accumuler ; une mauvaise attribution peut méconnaître les territoires.",
+      "solution": "Répartir automatiquement tous les prospects non attribués à tour de rôle entre membres actifs, sans validation individuelle.",
+      "benefice": "Réduire le travail manuel de distribution.",
+      "criteres": [
+        "La répartition est traçable et équilibrée en nombre entre membres actifs.",
+        "Les effets sur territoires, absences et relations préexistantes sont explicitement évalués avant mise en production."
+      ],
+      "effort": "L",
+      "priorite": "P3",
+      "confiance": "Faible",
+      "captures": [
+        "11"
+      ]
+    },
+    {
+      "id": "UX13",
+      "atelier": "C",
+      "titre": "Exiger les coordonnées complètes et la qualification dès la création",
+      "parcours": "Créer et qualifier",
+      "probleme": "Une fiche initiale peut ne pas disposer de coordonnées ni de qualification.",
+      "preuve": "OBSERVÉ O04, O13 ; nécessité de complétude immédiate HYPOTHÈSE.",
+      "consequence": "Des fiches peu exploitables peuvent s'accumuler ; une obligation peut empêcher de noter un nouveau prospect.",
+      "solution": "Bloquer la création sans téléphone, e-mail, contact nommé et qualification complète.",
+      "benefice": "Viser des fiches immédiatement exploitables.",
+      "criteres": [
+        "Une création sans l'un des quatre éléments est refusée avec explication.",
+        "La proportion de prospects impossibles à saisir sans inventer une information est mesurée avant tout déploiement."
+      ],
+      "effort": "M",
+      "priorite": "P3",
+      "confiance": "Faible",
+      "captures": [
+        "09",
+        "06"
+      ]
+    }
+  ]
+}

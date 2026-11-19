@@ -1,0 +1,39 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>UX04 · Choix du rattachement · Maquette Localeo CRM</title><link rel="stylesheet" href="maquettes.css"></head><body>
+<div class="prototype"><span>MAQUETTE APRÈS · UX04 · données fictives · contrôles métier inactifs</span><span><a href="../comparatif-avant-apres.html#ux04">Retour au comparatif</a></span></div>
+<header class="topbar"><div class="brand">Localeo <b>CRM</b></div><div class="toplinks"><span class="button">Installer</span><span>Accueil ERP</span><span class="button">Applications ⌄</span></div></header>
+<div class="mobile-bar"><strong>Prospects</strong><span>☰ Menu</span></div><div class="layout"><aside class="sidebar"><p class="environment">Maquette · TEST fictif</p><nav aria-label="Navigation représentée"><div class="nav-item " ><span class="nav-icon" aria-hidden="true">⌂</span>Aujourd’hui</div><div class="nav-item current" aria-current=page><span class="nav-icon" aria-hidden="true">♧</span>Prospects</div><div class="nav-item " ><span class="nav-icon" aria-hidden="true">▤</span>Suivi</div><div class="nav-item " ><span class="nav-icon" aria-hidden="true">▦</span>Agenda</div><div class="nav-item " ><span class="nav-icon" aria-hidden="true">♧</span>Rappels</div><div class="nav-item " ><span class="nav-icon" aria-hidden="true">☷</span>Qualification</div><div class="nav-item " ><span class="nav-icon" aria-hidden="true">◇</span>Carte</div><div class="nav-item " ><span class="nav-icon" aria-hidden="true">♧</span>Notifications</div><div class="nav-item " ><span class="nav-icon" aria-hidden="true">↑</span>Imports</div><div class="nav-item " ><span class="nav-icon" aria-hidden="true">⚙</span>Préférences</div></nav></aside><main id="contenu">
+  <p class="eyebrow">Commune — Val-des-Ormes (fictive) / Actions</p>
+  <h1 class="title">Planifier une action</h1>
+  <p class="muted">Choisissez ce que cette action fait avancer.</p>
+
+  <section class="panel" aria-labelledby="action-scope">
+    <h2 id="action-scope" class="section-title">Cette action concerne</h2>
+    <div class="rows">
+      <label class="row"><input type="radio" name="scope" disabled><span><strong>Le prospect, sans dossier particulier</strong><br><span class="muted">Suivi général de la relation.</span></span></label>
+      <label class="row"><input type="radio" name="scope" checked disabled><span><strong>Un dossier de ce prospect</strong><br><span class="muted">L’action sera rattachée au dossier choisi ci-dessous.</span></span></label>
+    </div>
+    <label class="field" for="action-case">Dossier concerné
+      <input id="action-case" value="Animation centre-bourg" readonly>
+    </label>
+    <p class="muted">Autre dossier du prospect : Association commerçante.</p>
+  </section>
+
+  <section class="panel" aria-labelledby="action-detail">
+    <h2 id="action-detail" class="section-title">Action et rappel</h2>
+    <div class="formgrid">
+      <label class="field span2" for="action-title">Action à réaliser · obligatoire<input id="action-title" value="Préparer la démonstration" readonly></label>
+      <label class="field" for="action-kind">Type d’action<input id="action-kind" value="Préparation interne sans sollicitation" readonly></label>
+      <label class="field" for="action-owner">Responsable de l’action · obligatoire<input id="action-owner" value="Léa Bernard" readonly></label>
+      <label class="field" for="action-date">Action prévue le · heure de Paris<input id="action-date" value="20 novembre 2026 à 14 h 00" readonly><span class="muted">Quand Léa réalisera la préparation.</span></label>
+      <label class="field" for="reminder-date">Rappel interne le · heure de Paris<input id="reminder-date" value="20 novembre 2026 à 09 h 00" readonly><span class="muted">Quand rappeler cette action à Léa.</span></label>
+    </div>
+    <p class="notice">Le rappel est destiné à Léa. Aucun message n’est envoyé au prospect par ces champs.</p>
+  </section>
+  <div class="summary">
+    <strong>Une action pour Animation centre-bourg</strong>
+    <p>Léa Bernard · préparation le 20 novembre à 14 h · rappel à 9 h, heure de Paris.</p>
+    <p class="muted">Le dossier Association commerçante ne sera pas couvert par cette action.</p>
+  </div>
+  <div class="actions"><button type="button" class="button" aria-disabled="true">Annuler</button><button type="button" class="button primary" aria-disabled="true">Enregistrer cette action</button></div>
+</main>
+</div></body></html>

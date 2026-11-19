@@ -1,0 +1,577 @@
+{
+  "date_heure": "2026-11-19T07:45:09+01:00",
+  "algorithme": "SHA-256",
+  "exclusion_unique": "synthese/manifest-integrite.json (auto-référence)",
+  "fichiers": [
+    {
+      "chemin": "observations/cartographie-parcours.md",
+      "octets": 3110,
+      "sha256": "c08c67c34e4827bd0f995a211d32899a22898afcfe34a1c549742e5814fb3470"
+    },
+    {
+      "chemin": "observations/couverture-pilotage-commercial.md",
+      "octets": 3408,
+      "sha256": "a76d6db8437f220e449124d22ea3e5edf98143369c05fcf89307b047f79da15a"
+    },
+    {
+      "chemin": "observations/inventaire-ecrans.md",
+      "octets": 2374,
+      "sha256": "61acddb25f4dfa23a3ae242a2e794c882f9f73f6aaf5218aebe80e9ea2a05a4e"
+    },
+    {
+      "chemin": "observations/limitations.md",
+      "octets": 3013,
+      "sha256": "407dec5bd50214b55d50e1d3193bb0d8ad6510f17168356f3181cf2132d15eec"
+    },
+    {
+      "chemin": "observations/observations-factuelles.md",
+      "octets": 7914,
+      "sha256": "c8cb810e263cee93948cd93d4cfc14e63cb432b29c023ea6afb60d9450474da0"
+    },
+    {
+      "chemin": "prompts/00-protocole-global.md",
+      "octets": 128,
+      "sha256": "fcd8f99acc54806e2763773fcda447e5f064d6f0a795d1e95b9cf6b5edef96e2"
+    },
+    {
+      "chemin": "prompts/01-exploration.md",
+      "octets": 6041,
+      "sha256": "d9b4909e4710fb38c9fc44f4be81a53d1bdd91b29205e06531536e87f92288d4"
+    },
+    {
+      "chemin": "prompts/02-workshop.md",
+      "octets": 7638,
+      "sha256": "2a6ccfce7222dad9178c4d2fdff03ce588b82914fb70fd99401a89a95e7aa0a1"
+    },
+    {
+      "chemin": "prompts/03-maquettes.md",
+      "octets": 2983,
+      "sha256": "e9233db21aa8297f6d86414377b34693f778f4d8ccc9a48e3b47e9f1a95c1fc4"
+    },
+    {
+      "chemin": "prompts/04-validation.md",
+      "octets": 1701,
+      "sha256": "9faf645145c9e634f3aa52fcd52c1c9c4d88893cda808f5698b40d9459a743ae"
+    },
+    {
+      "chemin": "prompts/05-archivage.md",
+      "octets": 3477,
+      "sha256": "c87a4d945c3738c69c1d0370a1da8d7fcadd619f8293d399ac7e453037eebd0c"
+    },
+    {
+      "chemin": "prompts/06-relance.md",
+      "octets": 976,
+      "sha256": "fa4569571427ee9a99aa37ca035dcb4c4b530d5aee50de2a6dbffcf2cf47ebb8"
+    },
+    {
+      "chemin": "prompts/RELANCER-WORKSHOP.md",
+      "octets": 11760,
+      "sha256": "a60eebaebd989f691f38588c0a9da3afa62e19f0123deebc8f2dea86f8fade45"
+    },
+    {
+      "chemin": "README.md",
+      "octets": 12464,
+      "sha256": "fbc2fdf3284fff74b91740ad1a2263307235b527cc8469c31023779d23862d09"
+    },
+    {
+      "chemin": "synthese/controle-archivage.md",
+      "octets": 5730,
+      "sha256": "ff3ecbddf9d7396bc0d40d33646ae570cb244ecbb670c754f254312d14c31e57"
+    },
+    {
+      "chemin": "synthese/controle-final.json",
+      "octets": 8886,
+      "sha256": "7fdb110c158529d4e3872d00ab6f26d1dc2f03537214c35c7928bffaed674c7f"
+    },
+    {
+      "chemin": "synthese/plan-tests-utilisateurs.md",
+      "octets": 12064,
+      "sha256": "80c5ae9327e7fc064c4bc78344c85cdf67965931d05eb529289663eaf715da39"
+    },
+    {
+      "chemin": "synthese/provenance-prompts.md",
+      "octets": 3054,
+      "sha256": "e4d3bccef904240d2a74a57913559c99e4762dc45d736b2b4a5e0d0319aa638d"
+    },
+    {
+      "chemin": "synthese/roadmap-ux.md",
+      "octets": 4352,
+      "sha256": "192db044086f70320c788a217e71c4f479a74cd41e2e5df0bbe8eea793edf929"
+    },
+    {
+      "chemin": "validation/backlog-implementation-potentiel.md",
+      "octets": 9082,
+      "sha256": "d68a1f3ff327becae0f31ae87884e8a20ffec4a8cd4eb64fe62d3957150deda1"
+    },
+    {
+      "chemin": "validation/controle-preparation.json",
+      "octets": 5150,
+      "sha256": "10f584858d6570bff1823c491bd19555731bf3d0bfb562b9d52f8d935489a8f4"
+    },
+    {
+      "chemin": "validation/decisions.md",
+      "octets": 2694,
+      "sha256": "d2900b01c57f72691b8b78f4cf1ae23779647889fecb017f3276892c2dedeb98"
+    },
+    {
+      "chemin": "validation/dossier-decision.md",
+      "octets": 19626,
+      "sha256": "30ba75041197358acb8dc02e3ad105d3f4436165e1850a65fe53f1af45d3f8b9"
+    },
+    {
+      "chemin": "validation/risques-non-resolus.md",
+      "octets": 4617,
+      "sha256": "0a3e68593ac58fa8583f6d440cc01474ec1ad3af3db1296d916947b930c318ce"
+    },
+    {
+      "chemin": "visuels/arbitrages-complementaires.md",
+      "octets": 40201,
+      "sha256": "f2d34b0b929fdbcac5c0c2f25c061ad1099b1570cbedf3b08b97cb9cd53113af"
+    },
+    {
+      "chemin": "visuels/captures-avant/01-accueil-bureau.png",
+      "octets": 67954,
+      "sha256": "2e32f0efeb04cbd57c0037a7da421ac2cd1acf41b3e84e27b578889ed07b4ab1"
+    },
+    {
+      "chemin": "visuels/captures-avant/02-prospects-bureau.png",
+      "octets": 69839,
+      "sha256": "1d3aaa0a643b928a7eff4af6d3b49ade5976d48564e5ef02b413f0bf559dd049"
+    },
+    {
+      "chemin": "visuels/captures-avant/03-suivi-bureau.png",
+      "octets": 46299,
+      "sha256": "2ba12c2d50ed8080656b1f06c5edef82ca9d7d4725381424227f90ce8b424840"
+    },
+    {
+      "chemin": "visuels/captures-avant/04-agenda-bureau.png",
+      "octets": 84400,
+      "sha256": "8dd8a183072512a0cb6efca55548bd189f123eb5c7d84d022c6e329265c8a302"
+    },
+    {
+      "chemin": "visuels/captures-avant/05-rappels-bureau.png",
+      "octets": 99813,
+      "sha256": "93964b398b1038cf68299fb12c451d3edb9d30b36224d43db31febfb279f0191"
+    },
+    {
+      "chemin": "visuels/captures-avant/06-qualification-bureau.png",
+      "octets": 85154,
+      "sha256": "115ece9515a9c59e3b44f29b2061f59ed3aa15474fd1d92e8718e17928167221"
+    },
+    {
+      "chemin": "visuels/captures-avant/07-notifications-bureau.png",
+      "octets": 41782,
+      "sha256": "540aaf350fdf7bbc3ce9a05b041ad17dab44a715e94d64fd2669e1542f98da3e"
+    },
+    {
+      "chemin": "visuels/captures-avant/08-imports-bureau.png",
+      "octets": 35664,
+      "sha256": "cc4309ed3abb6d750c17e66f0f1eb2cf7561afa60f2dd3d599760235b54d721b"
+    },
+    {
+      "chemin": "visuels/captures-avant/09-creation-prospect-bureau.png",
+      "octets": 111331,
+      "sha256": "c0979b7949bf36f91c1c3005785dd48d07cc61eb9a605a213095864c08f792f5"
+    },
+    {
+      "chemin": "visuels/captures-avant/10-recherche-prospect-bureau.png",
+      "octets": 56330,
+      "sha256": "477afec22cf74656eac51a14ce155be9b7bf33e3e9f821ff4ea6e8e4080ee305"
+    },
+    {
+      "chemin": "visuels/captures-avant/11-fiche-prospect-test-bureau.png",
+      "octets": 81978,
+      "sha256": "20a1f0abdd3005d5327b0c604b6c0e72b970da5d2e4829fad882527ed4993d51"
+    },
+    {
+      "chemin": "visuels/captures-avant/12-ajout-contact-bureau.png",
+      "octets": 93615,
+      "sha256": "77fd35f6301f56e1ff4f445fa174fedf0c414d5467de1227a98671c812d3bf31"
+    },
+    {
+      "chemin": "visuels/captures-avant/13-planifier-action-bureau.png",
+      "octets": 126170,
+      "sha256": "3c07291f369c5771e0dfa7515a78d2aeaa22216344361214781b158abeee74a8"
+    },
+    {
+      "chemin": "visuels/captures-avant/14-fiche-avec-action-bureau.png",
+      "octets": 100824,
+      "sha256": "dc90b45e25c7eab8d87030867b36a97b71f18f32ce2174ed78542b466886b950"
+    },
+    {
+      "chemin": "visuels/captures-avant/15-creation-rendez-vous-bureau.png",
+      "octets": 122651,
+      "sha256": "fd49e3cffb614d79424c32e4edc76dbf32af49f7262d08a1b29827490dbfc31d"
+    },
+    {
+      "chemin": "visuels/comparatif-avant-apres.html",
+      "octets": 19573,
+      "sha256": "64b5160b7856ad75e201245dbd28746afbb862401b30f9a6b0016f88a4cc9bd2"
+    },
+    {
+      "chemin": "visuels/controle-galerie-bureau.png",
+      "octets": 131380,
+      "sha256": "6b1c8d87e777decb9fe93c7a11a1e3c6b555bc31b6fd7cea7c7dfa6be214868f"
+    },
+    {
+      "chemin": "visuels/controle-galerie-mobile.png",
+      "octets": 142966,
+      "sha256": "b829da32b59ba6a3c254d085c9f104b8dec5016409a3b08b18faf1dd52e185ca"
+    },
+    {
+      "chemin": "visuels/controle-galerie.json",
+      "octets": 1438,
+      "sha256": "7f5c13bb3ccdb8b72ab6a1cd6664da366c752765ab74ca38552c592ba2c1d710"
+    },
+    {
+      "chemin": "visuels/controle-livraison.json",
+      "octets": 673,
+      "sha256": "ef9137dad6acbd2d3e3dee814787db965af2714b2906f4641b0f87d52d2ae69d"
+    },
+    {
+      "chemin": "visuels/controle-rendus.json",
+      "octets": 3478,
+      "sha256": "c447f7ef79f8a4d5282dfe06abb19842703c8ffdeb2528099994076deb6d6123"
+    },
+    {
+      "chemin": "visuels/galerie.css",
+      "octets": 4884,
+      "sha256": "483931d0c7af1d0a33ed5b67a10767d374d4d0bcffbd00bbd4e2e232b829db4e"
+    },
+    {
+      "chemin": "visuels/galerie.js",
+      "octets": 1380,
+      "sha256": "7b83eb9b077e4ba9f57619fc68e0a7ae07343c6ddfa32c334b08ea005a8ba2d0"
+    },
+    {
+      "chemin": "visuels/inventaire-maquettes.md",
+      "octets": 7460,
+      "sha256": "62c88c92198e16c545cfa00e5486635e0baa373b5b5d92c10ea9c4971fb32ead"
+    },
+    {
+      "chemin": "visuels/manifest-maquettes.json",
+      "octets": 5371,
+      "sha256": "067caa1f08c06246c8b4503b5010d67f8fdcdbf12f18e7dd570c89bde3e2c2c3"
+    },
+    {
+      "chemin": "visuels/maquettes-apres/maquettes.css",
+      "octets": 8716,
+      "sha256": "cf8a58afbf682c223e8ec079c1bdc022692892e03a22465b2e93951678fc89ea"
+    },
+    {
+      "chemin": "visuels/maquettes-apres/sources/ux01-accueil.html",
+      "octets": 1960,
+      "sha256": "00733643e0a0880bf1e08ca64a51ddaca5a3ae157a6cc83d743e44e47ce1b76d"
+    },
+    {
+      "chemin": "visuels/maquettes-apres/sources/ux01-equipe.html",
+      "octets": 2841,
+      "sha256": "2b5f665e33f1d34802ce86be8a81a3b30cbaea787c89843015dd8765e4904218"
+    },
+    {
+      "chemin": "visuels/maquettes-apres/sources/ux01-etats.html",
+      "octets": 1027,
+      "sha256": "906e35fa3e75b7100fffb88d5ae0b4f91437f74339452a3ca4a85a8d61f90c16"
+    },
+    {
+      "chemin": "visuels/maquettes-apres/sources/ux02-prospects.html",
+      "octets": 1680,
+      "sha256": "59f1797ac6a638d2f703f9b2277d971e396f838d12036c7f21167470a81e25b7"
+    },
+    {
+      "chemin": "visuels/maquettes-apres/sources/ux02-risques.html",
+      "octets": 3602,
+      "sha256": "a5ee66f762b06dc8cbd80654c6f55e71b7358c834b33e05bdf443d5871a39ff3"
+    },
+    {
+      "chemin": "visuels/maquettes-apres/sources/ux03-creation.html",
+      "octets": 2486,
+      "sha256": "2b610315917d665b0791148e8d2975322bbf2029cf13a4038336c2ae4c193737"
+    },
+    {
+      "chemin": "visuels/maquettes-apres/sources/ux03-responsabilites.html",
+      "octets": 2229,
+      "sha256": "3ee68d5e46e4ebfe610fa332964b0f6caec6b00f570db6e733d7c1c3c16072db"
+    },
+    {
+      "chemin": "visuels/maquettes-apres/sources/ux04-action.html",
+      "octets": 2750,
+      "sha256": "22c906bcd9030412c74717b2fdb0b61f3ecb46bc219e9147e63c5dd83f82e7bd"
+    },
+    {
+      "chemin": "visuels/maquettes-apres/sources/ux04-suivi.html",
+      "octets": 2271,
+      "sha256": "0f35ca686a55b29dc9c2eb6c39cec9c8bdcf295673e0615bccc5774586671f0d"
+    },
+    {
+      "chemin": "visuels/maquettes-apres/sources/ux05-agenda.html",
+      "octets": 3177,
+      "sha256": "b06da29c5b814b51fefff72e3ae2547f758dd4763328fac5492031a424e63716"
+    },
+    {
+      "chemin": "visuels/maquettes-apres/sources/ux05-compte-rendu.html",
+      "octets": 3577,
+      "sha256": "be68d493c556b8d2d0a472ddd071e0bbd41e4990afc05a34292deb751356f43d"
+    },
+    {
+      "chemin": "visuels/maquettes-apres/sources/ux05-confirmation.html",
+      "octets": 2477,
+      "sha256": "279b7036733d7d91af0d88dfb151009dae8726cbef4cb787130697419f79c695"
+    },
+    {
+      "chemin": "visuels/maquettes-apres/ux01-accueil-bureau.png",
+      "octets": 79162,
+      "sha256": "eb2b3cedcd0e1e7c5a1ef27bfbd310b2de164dd57451603abc35835d1840bf98"
+    },
+    {
+      "chemin": "visuels/maquettes-apres/ux01-accueil-mobile.png",
+      "octets": 60587,
+      "sha256": "12c3b04a13a1b7c35e4e15b55eeeff302802597874b8c8cfa3c72e633a8fb91e"
+    },
+    {
+      "chemin": "visuels/maquettes-apres/ux01-accueil.html",
+      "octets": 3825,
+      "sha256": "efaac132c919fae3ceacf30457e92f05aeb579c2ab0aa1cd1899c913aa319329"
+    },
+    {
+      "chemin": "visuels/maquettes-apres/ux01-equipe-bureau.png",
+      "octets": 97808,
+      "sha256": "180e75c51db725639a9a66f90e6bccfda579c48b21c97836afbb1128b3aacaaa"
+    },
+    {
+      "chemin": "visuels/maquettes-apres/ux01-equipe-mobile.png",
+      "octets": 76381,
+      "sha256": "0454a0dedc82ea2cffa0f8499501017fac145e40453793efe1d8bcc48feb49ef"
+    },
+    {
+      "chemin": "visuels/maquettes-apres/ux01-equipe.html",
+      "octets": 4706,
+      "sha256": "f2557be3a65755aa51d00c2c6b52bcf2652710f051a2dd84f7d08ab002678300"
+    },
+    {
+      "chemin": "visuels/maquettes-apres/ux01-etats-bureau.png",
+      "octets": 59182,
+      "sha256": "4c4a327575c38b57b2d52341c8ed876be013e7ba78db498231987815995ba05c"
+    },
+    {
+      "chemin": "visuels/maquettes-apres/ux01-etats-mobile.png",
+      "octets": 38988,
+      "sha256": "0fed8682958423561bb261f5a854cf12bdc1838c878012b75b927838af88253e"
+    },
+    {
+      "chemin": "visuels/maquettes-apres/ux01-etats.html",
+      "octets": 2897,
+      "sha256": "28b102dca275b230addd051c0116ba40d251e709b7a593a7b4de74fb69f376d4"
+    },
+    {
+      "chemin": "visuels/maquettes-apres/ux02-prospects-bureau.png",
+      "octets": 74716,
+      "sha256": "26ae8c7e84898729060ba10ee347acd54e8c7057b03ad820683dfc82721ce96a"
+    },
+    {
+      "chemin": "visuels/maquettes-apres/ux02-prospects-mobile.png",
+      "octets": 53061,
+      "sha256": "8b4a323e75bf48e87027ba1171834ef39e3ed9a4e716f4c8ef574d93b5f1f7f4"
+    },
+    {
+      "chemin": "visuels/maquettes-apres/ux02-prospects.html",
+      "octets": 3537,
+      "sha256": "e3e09d60aa123e89c9b856165086fff7b794d5a454dabd41d2038fe4c52830bc"
+    },
+    {
+      "chemin": "visuels/maquettes-apres/ux02-risques-bureau.png",
+      "octets": 91997,
+      "sha256": "1799da606525248b4098e0ded59683e962ec3eb9842877729f8c54e353bc7651"
+    },
+    {
+      "chemin": "visuels/maquettes-apres/ux02-risques-mobile.png",
+      "octets": 61617,
+      "sha256": "755d52c713bbe40cb3d3abb9e5d2214a82ea4a0a9656644621949fdd4326b7e8"
+    },
+    {
+      "chemin": "visuels/maquettes-apres/ux02-risques.html",
+      "octets": 5462,
+      "sha256": "55faee3972f9b0774dc43dc031231812f1a8e558cb8d783362754c34b18a8d3a"
+    },
+    {
+      "chemin": "visuels/maquettes-apres/ux03-creation-bureau.png",
+      "octets": 80730,
+      "sha256": "ad4c8023543bbd9e8c0cad0858f5b6ba7b9532fdb02859cc4dd5f62055655274"
+    },
+    {
+      "chemin": "visuels/maquettes-apres/ux03-creation-mobile.png",
+      "octets": 58661,
+      "sha256": "3f22310e434d56e5406f58457b9154fed509114e55affb323c14f084edf65f5c"
+    },
+    {
+      "chemin": "visuels/maquettes-apres/ux03-creation.html",
+      "octets": 4382,
+      "sha256": "9784ce28d45938f7cc4305a15c94ab1b5067339ecdc319fd559539c0811047f0"
+    },
+    {
+      "chemin": "visuels/maquettes-apres/ux03-responsabilites-bureau.png",
+      "octets": 82019,
+      "sha256": "3c6743fa17c022bf28fbd8579b84e7837f44fbd8f1583526d8b205d41dfc1569"
+    },
+    {
+      "chemin": "visuels/maquettes-apres/ux03-responsabilites-mobile.png",
+      "octets": 57504,
+      "sha256": "3c5bd796c96d7ed11126bec0c66e6e441274484ff0b94b4b98c77b0e736a20c6"
+    },
+    {
+      "chemin": "visuels/maquettes-apres/ux03-responsabilites.html",
+      "octets": 4131,
+      "sha256": "d78912e92aac85bc8bfdcc1ae6b1be94badd6306e44a28b3907cab0ddc9fd503"
+    },
+    {
+      "chemin": "visuels/maquettes-apres/ux04-action-bureau.png",
+      "octets": 88839,
+      "sha256": "b7b3cb55513d6f34464e6a4f93cd83d30bcd2028eb65a07b70cb9f5f4aa99461"
+    },
+    {
+      "chemin": "visuels/maquettes-apres/ux04-action-mobile.png",
+      "octets": 66892,
+      "sha256": "481b3646555b95ee0225ccf64d24c52400fc3572f6f537346ff469c6052926c5"
+    },
+    {
+      "chemin": "visuels/maquettes-apres/ux04-action.html",
+      "octets": 4633,
+      "sha256": "5fabf12a603885a9739d1475523f5c55bee1f07237214c536d332305b3d27dbe"
+    },
+    {
+      "chemin": "visuels/maquettes-apres/ux04-suivi-bureau.png",
+      "octets": 92596,
+      "sha256": "7dd0f93443c81fbef8fb7662fb94c0197570754cc5f831285103ba7125536890"
+    },
+    {
+      "chemin": "visuels/maquettes-apres/ux04-suivi-mobile.png",
+      "octets": 67797,
+      "sha256": "8926a51a56e57ad777c64d1aab6a89c68a122c5ea2dbf1f88e8e702152ad9a76"
+    },
+    {
+      "chemin": "visuels/maquettes-apres/ux04-suivi.html",
+      "octets": 4161,
+      "sha256": "74e6e79345a081f6551fd108690401aaf79b4cff9192d689bcedbadf86772458"
+    },
+    {
+      "chemin": "visuels/maquettes-apres/ux05-agenda-bureau.png",
+      "octets": 97025,
+      "sha256": "0e7e8828bccf0cc892d63cfc94a0a35aa33824af6b8504dd6e84a7384c6c526b"
+    },
+    {
+      "chemin": "visuels/maquettes-apres/ux05-agenda-mobile.png",
+      "octets": 74498,
+      "sha256": "f3223cdcb4b27749382ad59ff036aef2ef40c1f9fa18e0493513deb0d1dbcf51"
+    },
+    {
+      "chemin": "visuels/maquettes-apres/ux05-agenda.html",
+      "octets": 5072,
+      "sha256": "583591806a27d58be864198b89452e500d8e3f601bc62246726ca01b580db4ff"
+    },
+    {
+      "chemin": "visuels/maquettes-apres/ux05-compte-rendu-bureau.png",
+      "octets": 116704,
+      "sha256": "70258595566939e8077effbc51f080d939ebd5d51fe8147a2563ee6bb8ed1945"
+    },
+    {
+      "chemin": "visuels/maquettes-apres/ux05-compte-rendu-mobile.png",
+      "octets": 93942,
+      "sha256": "b55446dda25cc37c6d0b975f3449148775a0870a67b7ccb108c4e2942229856f"
+    },
+    {
+      "chemin": "visuels/maquettes-apres/ux05-compte-rendu.html",
+      "octets": 5476,
+      "sha256": "d5eeef37d18b8eba338797ff495d52f6bde3acc5f7e47414521188189648da7c"
+    },
+    {
+      "chemin": "visuels/maquettes-apres/ux05-confirmation-bureau.png",
+      "octets": 89742,
+      "sha256": "4962c2aecf15b701b6f53d353d62d7264f0d8085bf79d197d1093af4de295aff"
+    },
+    {
+      "chemin": "visuels/maquettes-apres/ux05-confirmation-mobile.png",
+      "octets": 69745,
+      "sha256": "56b6805c4068642db2a0d9e3efccd7ac2d8aa4a040dbdb82edffdc3ffeb7adfb"
+    },
+    {
+      "chemin": "visuels/maquettes-apres/ux05-confirmation.html",
+      "octets": 4371,
+      "sha256": "d03ef1078e2cdd696d550b6bb511f3551881571ae5af3e27fbaa9bee2ad8ff8c"
+    },
+    {
+      "chemin": "visuels/parti-pris-visuel.md",
+      "octets": 2205,
+      "sha256": "6b381bb0dff41067d2d98156ac62883934c5b56fb5443ea709f3397a4595da9e"
+    },
+    {
+      "chemin": "visuels/revue-experts-preparation.md",
+      "octets": 11010,
+      "sha256": "0babde055c6c4dce830e20d1a71d90153aece18bfb9401d2d26b2fd0bd15e32f"
+    },
+    {
+      "chemin": "visuels/revue-simulee-experts.json",
+      "octets": 21841,
+      "sha256": "dfa52b27292c92b75ae07260eb15b4c0b803d255fe9829092bb682472313dbee"
+    },
+    {
+      "chemin": "visuels/revue-simulee-pilotage.json",
+      "octets": 11121,
+      "sha256": "b3fb17bca66431c3370a37ab19677f4d60271767dadfef7ecaa6cc7b34e2e4d0"
+    },
+    {
+      "chemin": "visuels/revue-simulee-terrain.json",
+      "octets": 12227,
+      "sha256": "b7cfc5467fb46b381229dfcd454d7f375dca7845d3fae24c1dbd1e645f27bac3"
+    },
+    {
+      "chemin": "workshop/backlog-ux.md",
+      "octets": 24074,
+      "sha256": "3384a4e40ed8053be4a291e9653df7536570fd8531f323ee578c1831271725ab"
+    },
+    {
+      "chemin": "workshop/compte-rendu.md",
+      "octets": 52444,
+      "sha256": "08b2a744e2e5df5001bb7a668ef350a5176e301c46cb68c7702d1bb367257e0f"
+    },
+    {
+      "chemin": "workshop/orientations-rejetees.md",
+      "octets": 7178,
+      "sha256": "5d87fdbcb0ee20f66fe240e3d10277549b779579c8355baf4a29cac7676fe01b"
+    },
+    {
+      "chemin": "workshop/quick-wins.md",
+      "octets": 2073,
+      "sha256": "5dc4537cc199768deaad0f1d1b182c294a37e685aee4c7e02c148787262bba67"
+    },
+    {
+      "chemin": "workshop/rapport-executif.md",
+      "octets": 10866,
+      "sha256": "6c865607dba84024bab73be59c5492ee7454f69a0914e76b2b234b9dccab07e6"
+    },
+    {
+      "chemin": "workshop/sources-simulation/experts.json",
+      "octets": 32174,
+      "sha256": "fa5181df2c7662415d95a9ca112a12ebb1ea615cfa21e052dbb8b5af9d2cf1e1"
+    },
+    {
+      "chemin": "workshop/sources-simulation/orientations-v1.json",
+      "octets": 17534,
+      "sha256": "c4deec49b6ea682607338856044128015e013e7518a463bab05be093cc349331"
+    },
+    {
+      "chemin": "workshop/sources-simulation/pilotage.json",
+      "octets": 19601,
+      "sha256": "347b99baefa22fdfd2bfd0f8666ff54e9f415ca2a07aa8cc4ef9be5419e9ff42"
+    },
+    {
+      "chemin": "workshop/sources-simulation/terrain.json",
+      "octets": 25231,
+      "sha256": "5689750451692e7eb63ad47cb089d6f1698f98e0beb6f79e0c9081012034b2d5"
+    },
+    {
+      "chemin": "workshop/votes-et-arbitrages.md",
+      "octets": 30752,
+      "sha256": "edf4bccebbd9cc18ce80029f6a8d99ec561c55ed79e826feed8ded96dce5b2e7"
+    }
+  ]
+}

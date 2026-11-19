@@ -1,0 +1,42 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>UX03 · Détail du bloc à la création · Maquette Localeo CRM</title><link rel="stylesheet" href="maquettes.css"></head><body>
+<div class="prototype"><span>MAQUETTE APRÈS · UX03 · données fictives · contrôles métier inactifs</span><span><a href="../comparatif-avant-apres.html#ux03">Retour au comparatif</a></span></div>
+<header class="topbar"><div class="brand">Localeo <b>CRM</b></div><div class="toplinks"><span class="button">Installer</span><span>Accueil ERP</span><span class="button">Applications ⌄</span></div></header>
+<div class="mobile-bar"><strong>Prospects</strong><span>☰ Menu</span></div><div class="layout"><aside class="sidebar"><p class="environment">Maquette · TEST fictif</p><nav aria-label="Navigation représentée"><div class="nav-item " ><span class="nav-icon" aria-hidden="true">⌂</span>Aujourd’hui</div><div class="nav-item current" aria-current=page><span class="nav-icon" aria-hidden="true">♧</span>Prospects</div><div class="nav-item " ><span class="nav-icon" aria-hidden="true">▤</span>Suivi</div><div class="nav-item " ><span class="nav-icon" aria-hidden="true">▦</span>Agenda</div><div class="nav-item " ><span class="nav-icon" aria-hidden="true">♧</span>Rappels</div><div class="nav-item " ><span class="nav-icon" aria-hidden="true">☷</span>Qualification</div><div class="nav-item " ><span class="nav-icon" aria-hidden="true">◇</span>Carte</div><div class="nav-item " ><span class="nav-icon" aria-hidden="true">♧</span>Notifications</div><div class="nav-item " ><span class="nav-icon" aria-hidden="true">↑</span>Imports</div><div class="nav-item " ><span class="nav-icon" aria-hidden="true">⚙</span>Préférences</div></nav></aside><main id="contenu">
+  <p class="specimen-note">Extrait ciblé du formulaire : les champs de nom, commune et coordonnées sont conservés hors de cette planche.</p>
+  <p class="eyebrow">Prospects / Nouveau prospect</p>
+  <h1 class="title">Les responsables à la création</h1>
+  <p class="muted">Commune — Val-des-Ormes (fictive) · Bordeaux</p>
+
+  <section class="panel" aria-labelledby="creation-roles">
+    <h2 id="creation-roles" class="section-title">Premier dossier</h2>
+    <label class="field" for="first-case">Titre du dossier
+      <input id="first-case" value="Animation centre-bourg" readonly>
+    </label>
+    <div class="formgrid">
+      <label class="field" for="case-owner">Responsable du dossier · obligatoire
+        <input id="case-owner" value="Léa Bernard" readonly aria-describedby="case-owner-help">
+        <span id="case-owner-help" class="muted">Pilote ce dossier commercial.</span>
+      </label>
+      <label class="field" for="new-prospect-owner">Responsable du prospect · facultatif
+        <input id="new-prospect-owner" value="Non attribué" readonly aria-describedby="new-owner-help">
+        <span id="new-owner-help" class="muted">Suit la relation globale avec la structure.</span>
+      </label>
+    </div>
+    <div class="notice"><strong>Le dossier sera attribué à Léa.</strong> Le prospect restera sans responsable de relation tant que vous n’en choisissez pas un.</div>
+    <button type="button" class="button" aria-disabled="true">Choisir un responsable du prospect</button>
+  </section>
+
+  <section class="summary" aria-labelledby="creation-summary">
+    <h2 id="creation-summary" class="section-title">À l’enregistrement</h2>
+    <div class="rows">
+      <div class="row"><div><strong>Prospect</strong><p class="muted">Commune — Val-des-Ormes (fictive)</p></div><span class="badge warn">Responsable non attribué</span></div>
+      <div class="row"><div><strong>Premier dossier</strong><p class="muted">Animation centre-bourg</p></div><strong>Léa Bernard</strong></div>
+      <div class="row"><div><strong>Actions</strong><p class="muted">Aucune action créée à cette étape</p></div><span class="muted">Responsable à choisir lors de la planification</span></div>
+    </div>
+  </section>
+  <div class="actions">
+    <button type="button" class="button" aria-disabled="true">Annuler</button>
+    <button type="button" class="button primary" aria-disabled="true">Enregistrer le prospect et son dossier</button>
+  </div>
+</main>
+</div></body></html>

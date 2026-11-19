@@ -1,0 +1,49 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>UX03 · Fiche et affectation explicite · Maquette Localeo CRM</title><link rel="stylesheet" href="maquettes.css"></head><body>
+<div class="prototype"><span>MAQUETTE APRÈS · UX03 · données fictives · contrôles métier inactifs</span><span><a href="../comparatif-avant-apres.html#ux03">Retour au comparatif</a></span></div>
+<header class="topbar"><div class="brand">Localeo <b>CRM</b></div><div class="toplinks"><span class="button">Installer</span><span>Accueil ERP</span><span class="button">Applications ⌄</span></div></header>
+<div class="mobile-bar"><strong>Prospects</strong><span>☰ Menu</span></div><div class="layout"><aside class="sidebar"><p class="environment">Maquette · TEST fictif</p><nav aria-label="Navigation représentée"><div class="nav-item " ><span class="nav-icon" aria-hidden="true">⌂</span>Aujourd’hui</div><div class="nav-item current" aria-current=page><span class="nav-icon" aria-hidden="true">♧</span>Prospects</div><div class="nav-item " ><span class="nav-icon" aria-hidden="true">▤</span>Suivi</div><div class="nav-item " ><span class="nav-icon" aria-hidden="true">▦</span>Agenda</div><div class="nav-item " ><span class="nav-icon" aria-hidden="true">♧</span>Rappels</div><div class="nav-item " ><span class="nav-icon" aria-hidden="true">☷</span>Qualification</div><div class="nav-item " ><span class="nav-icon" aria-hidden="true">◇</span>Carte</div><div class="nav-item " ><span class="nav-icon" aria-hidden="true">♧</span>Notifications</div><div class="nav-item " ><span class="nav-icon" aria-hidden="true">↑</span>Imports</div><div class="nav-item " ><span class="nav-icon" aria-hidden="true">⚙</span>Préférences</div></nav></aside><main id="contenu">
+  <p class="eyebrow">Prospects / Responsabilités</p>
+  <h1 class="title">Commune — Val-des-Ormes (fictive)</h1>
+  <p class="muted">Bordeaux · Prospect actif</p>
+
+  <section class="panel" aria-labelledby="roles-title">
+    <h2 id="roles-title" class="section-title">Qui suit quoi ?</h2>
+    <div class="rows">
+      <div class="row">
+        <div><strong>Responsable du prospect</strong><p class="muted">Suit la relation avec la structure, tous dossiers confondus.</p></div>
+        <span class="badge warn">Non attribué</span>
+      </div>
+      <div class="row">
+        <div><strong>Responsable du dossier</strong><p class="muted">Animation centre-bourg</p></div>
+        <strong>Léa Bernard</strong>
+      </div>
+      <div class="row">
+        <div><strong>Responsable de l’action</strong><p class="muted">Préparer la démonstration · 20 novembre, 14 h</p></div>
+        <strong>Léa Bernard</strong>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="assign-title">
+    <p class="eyebrow">Affectation du prospect</p>
+    <h2 id="assign-title" class="section-title">Confier le suivi de la relation</h2>
+    <label class="field" for="prospect-owner">Responsable du prospect
+      <input id="prospect-owner" value="Camille Martin" readonly aria-describedby="owner-help">
+    </label>
+    <p id="owner-help" class="muted">Camille suivra la relation globale avec cette structure.</p>
+    <div class="summary">
+      <h3>Récapitulatif de l’affectation</h3>
+      <div class="rows">
+        <div class="row"><span>Prospect</span><strong>Non attribué → Camille Martin</strong></div>
+        <div class="row"><span>Dossier Animation centre-bourg</span><strong>Léa Bernard · conservée</strong></div>
+        <div class="row"><span>Action de préparation</span><strong>Léa Bernard · conservée</strong></div>
+      </div>
+      <p>Cette affectation concerne uniquement le responsable du prospect.</p>
+    </div>
+    <div class="actions">
+      <button type="button" class="button" aria-disabled="true">Annuler</button>
+      <button type="button" class="button primary" aria-disabled="true">Attribuer le prospect à Camille</button>
+    </div>
+  </section>
+</main>
+</div></body></html>

@@ -49,6 +49,36 @@
             }
           },
           {
+            "name": "sans_responsable",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Sans Responsable"
+            }
+          },
+          {
+            "name": "sans_prochaine_action",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Sans Prochaine Action"
+            }
+          },
+          {
+            "name": "sans_interaction_recente",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Sans Interaction Recente"
+            }
+          },
+          {
             "name": "insee",
             "in": "query",
             "required": false,
@@ -1273,6 +1303,16 @@
               "type": "boolean",
               "default": false,
               "title": "Sans Prochaine Action"
+            }
+          },
+          {
+            "name": "sans_evolution",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Sans Evolution"
             }
           },
           {
@@ -10526,6 +10566,18 @@
                 "message"
               ]
             }
+          },
+          "code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Code stable optionnel pour identifier une erreur metier."
           }
         },
         "type": "object",
@@ -20764,6 +20816,23 @@
         "type": "http",
         "scheme": "bearer",
         "description": "Session commercant transmise via `Authorization: Bearer <session_token>`."
+      },
+      "AnimationSessionBearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Session organisateur Animation transmise via `Authorization: Bearer <session_token>` ; permissions et commune active contrôlées à chaque lecture."
+      },
+      "AnimationSessionCookie": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "__Host-localeo_animation",
+        "description": "Cookie HttpOnly de session Animation ; transport X-Animation-Session=cookie et origine du portail autorisée requis. Ce cookie ne donne aucun accès commerçant ou ERP."
+      },
+      "AnimationSessionTransport": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-Animation-Session",
+        "description": "Valeur `cookie` obligatoire avec le cookie Animation. La lecture GET ne demande pas le jeton CSRF d'une mutation."
       },
       "ManagementTokenBearer": {
         "type": "http",

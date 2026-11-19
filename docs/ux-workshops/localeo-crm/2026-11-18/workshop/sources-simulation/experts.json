@@ -1,0 +1,457 @@
+{
+  "nature": "Simulation de cinq profils experts, fondée sur les observations archivées ; aucun expert réel interrogé, aucun test utilisateur réel.",
+  "phase": "Avis initiaux conservés, réactions après confrontation des profils simulés, votes individuels sur orientations-v1 figées",
+  "participants": [
+    {
+      "id": "E1",
+      "nom": "Expert UX SaaS B2B simulé",
+      "profil": "Navigation, architecture de l’information, formulaires et cohérence",
+      "avis": {
+        "A": "O01 offre une entrée par le travail du jour compréhensible ; les indicateurs repliés O02 peuvent laisser le portefeuille invisible : je garderais les trois périodes et rendrais la portée personnelle ou collective plus explicite.",
+        "B": "La répartition des vues O16 oblige probablement à reconstruire le tableau d’ensemble ; je privilégie un résumé avec liens vers les listes existantes, pas un nouveau grand tableau de bord avant d’avoir ouvert les indicateurs actuels.",
+        "C": "La recherche et la création ont abouti O03–O04 ; la création mêle prospect et premier dossier, et O05/O17 suggèrent de nommer les deux responsabilités dès la saisie, tout en gardant les coordonnées facultatives.",
+        "D": "Le choix de disponibilités et la conservation des champs après refus O12 sont des forces ; une confirmation reliée à l’agenda et à la fiche rendrait la réservation plus continue, sous réserve de vérifier ce qui existe déjà.",
+        "E": "La séparation date d’action/rappel O08 est utile ; la divergence prospect/dossier O09 nécessite un libellé de portée visible au moment de planifier, sans réunir artificiellement des objets métier distincts.",
+        "F": "Les responsables des rappels et le filtre agenda O10–O11 donnent déjà des repères ; la lisibilité des deux propriétaires O05 est prioritaire avant d’ajouter une vue comparative des commerciaux.",
+        "G": "La fiche rassemble beaucoup d’éléments utiles O06 mais mérite une hiérarchie centrée sur la prochaine étape ; je souhaite ranger les fonctions secondaires après mesure de leur usage, sans supprimer à l’aveugle des entrées de navigation."
+      },
+      "reponses_debat": {
+        "A": "La demande d'E3 et de Thomas de voir le collectif est légitime ; je rejoins Julie pour conserver une page personnelle légère et un accès collectif explicite.",
+        "B": "Je rejoins Marc : ouvrir d'abord les indicateurs actuels évite de remplacer à tort une capacité existante ; les listes d'exceptions doivent rester directement accessibles.",
+        "C": "La préférence de Patrick pour une création courte renforce mon choix de détails progressifs ; l'exigence de traçabilité de Thomas n'impose pas tous les champs dès le départ.",
+        "D": "La confirmation explicite demandée par Patrick répond au besoin de continuité de Julie ; cette jonction doit être recettée avant de dessiner un nouveau parcours.",
+        "E": "Delphine veut du contexte et Thomas des définitions : ils rendent nécessaire le rattachement explicite, sans soutenir une obligation de tâche pour toute consultation.",
+        "F": "Sophie distingue bien les responsabilités et les actions restantes ; je préfère cette visibilité à la distribution rapide évoquée par E3.",
+        "G": "Je rejoins Sophie sur la conservation des imports accessibles et Julie sur le retour aux résultats ; simplifier ne justifie pas de cacher les outils de travail en série."
+      },
+      "votes": [
+        {
+          "orientation": "UX01",
+          "vote": "POUR",
+          "argument": "Le résumé compact respecte la portée et évite le tableau de bord surchargé que je redoutais ; P1 cohérent."
+        },
+        {
+          "orientation": "UX02",
+          "vote": "POUR",
+          "argument": "Les accès aux listes et la vérification préalable des vues existantes constituent un pilotage utile sans imposer un nouvel écran ; P1 conditionnel."
+        },
+        {
+          "orientation": "UX03",
+          "vote": "POUR",
+          "argument": "Les libellés et récapitulatifs des responsabilités corrigent une ambiguïté plausible à faible effort ; P1 pertinent."
+        },
+        {
+          "orientation": "UX04",
+          "vote": "POUR",
+          "argument": "Le contexte explicite prospect ou dossier traite précisément O09 sans modifier silencieusement le métier ; P1."
+        },
+        {
+          "orientation": "UX05",
+          "vote": "POUR",
+          "argument": "La recette puis les seuls raccords manquants rendent la continuité de réservation vérifiable ; P1 justifié par l'usage critique."
+        },
+        {
+          "orientation": "UX06",
+          "vote": "POUR",
+          "argument": "La saisie progressive conserve les règles et répond au formulaire long ; P2 convient à une hypothèse d'ergonomie."
+        },
+        {
+          "orientation": "UX07",
+          "vote": "POUR",
+          "argument": "Le défaut null est observé et l'état vide unique est une correction précise ; P2 rapide."
+        },
+        {
+          "orientation": "UX08",
+          "vote": "POUR",
+          "argument": "Vérifier la conservation avant d'intervenir protège le contexte de navigation sans présumer un défaut ; P2."
+        },
+        {
+          "orientation": "UX09",
+          "vote": "POUR",
+          "argument": "Le récapitulatif des objets transférés facilite la compréhension d'un relais ; P2 sans automatisme excessif."
+        },
+        {
+          "orientation": "UX10",
+          "vote": "POUR",
+          "argument": "Les exemples courts expliquent des notions distinctes sans rajouter un score ; P2 proportionné."
+        },
+        {
+          "orientation": "UX11",
+          "vote": "CONTRE",
+          "argument": "Bloquer toute sortie, y compris pause ou dossier clos, casse la consultation et pousse à inventer des tâches."
+        },
+        {
+          "orientation": "UX12",
+          "vote": "CONTRE",
+          "argument": "La répartition silencieuse ignore le contexte territorial et relationnel ; la traçabilité après coup ne suffit pas."
+        },
+        {
+          "orientation": "UX13",
+          "vote": "CONTRE",
+          "argument": "Quatre exigences simultanées empêchent de noter une découverte incomplète et contredisent la saisie progressive."
+        }
+      ]
+    },
+    {
+      "id": "E2",
+      "nom": "Expert CRM et Sales Operations simulé",
+      "profil": "Pipeline, qualification, opportunités, tâches et indicateurs",
+      "avis": {
+        "A": "Les périodes O01 répondent au quotidien ; je veux aussi connaître le nombre de dossiers actifs sans prochaine action et la portée des chiffres, car une page personnelle vide O02 ne prouve pas une activité collective saine.",
+        "B": "L’exhaustivité n’est pas établie dans la couverture archivée ; avant toute agrégation il faut définir prospect, dossier actif, interaction récente et stagnation, puis rapprocher les totaux des listes filtrées et des droits d’accès.",
+        "C": "O13 présente une qualification qui influence la priorité sans calcul validé pendant l’audit ; il faut rendre la provenance et la fraîcheur du potentiel lisibles et tester le rapprochement de doublons codé avant d’envisager une fusion automatique.",
+        "D": "Le moteur de créneaux O12 paraît protéger la planification ; le compte rendu obligatoire et la prochaine action sont repérés dans le code, donc je demande une recette du cycle complet plutôt qu’une nouvelle fonction supposée absente.",
+        "E": "O09 peut représenter deux niveaux de suivi légitimes ; je préfère un lien explicite de l’action au dossier pertinent à une règle qui considérerait chaque dossier couvert dès que le prospect possède une seule tâche.",
+        "F": "Les responsabilités prospect/dossier peuvent refléter une organisation saine ; conserver cette distinction avec une transmission tracée est préférable à une affectation automatique silencieuse au créateur.",
+        "G": "Les filtres existants O03 sont une base ; je soutiens des vues enregistrées simples et des définitions d’indicateurs avant des scores prédictifs, un Kanban généralisé ou des automatismes qui compliqueraient une équipe de dix personnes."
+      },
+      "reponses_debat": {
+        "A": "L'attente de Thomas de distinguer file personnelle et portefeuille sain confirme la nécessité de populations définies ; le résumé d'E3 ne doit pas additionner des unités différentes.",
+        "B": "La liste exploitable souhaitée par Sophie complète utilement les totaux de Marc ; je soutiens le contrôle de cohérence demandé par Thomas avant toute promesse d'exhaustivité.",
+        "C": "Je rejoins Sophie sur le rapprochement de ressemblances et Julie sur un score facultatif ; une fiche incomplète peut rester exploitable commercialement.",
+        "D": "La prudence de Delphine est pertinente : le code du compte rendu ne prouve pas le parcours ; tester la chaîne avant de la compléter évitera une fonction doublonnée.",
+        "E": "Thomas distingue retard, absence de tâche et absence d'interaction ; cette distinction prime sur une simple règle de prochaine action obligatoire pour tous les dossiers.",
+        "F": "Sophie et Marc confirment que transférer un dossier n'implique pas de transférer toutes ses actions ; une distribution automatique uniforme serait une règle métier nouvelle à justifier.",
+        "G": "L'envie de vues enregistrées de Marc m'intéresse, mais je rejoins Thomas pour prioriser définitions et responsabilités avant d'étendre les outils de confort."
+      },
+      "votes": [
+        {
+          "orientation": "UX01",
+          "vote": "POUR",
+          "argument": "Portée, unité et correspondance entre total et liste permettent une lecture commerciale fiable ; P1 utile."
+        },
+        {
+          "orientation": "UX02",
+          "vote": "POUR",
+          "argument": "Les seuils, populations et recouvrements sont explicitement définis ; cette condition rend le P1 de pilotage acceptable."
+        },
+        {
+          "orientation": "UX03",
+          "vote": "POUR",
+          "argument": "Conserver les trois responsabilités tout en les nommant protège l'organisation réelle ; P1."
+        },
+        {
+          "orientation": "UX04",
+          "vote": "POUR",
+          "argument": "Une action du prospect ne couvre pas automatiquement tous ses dossiers ; la solution garde cet invariant et mérite P1."
+        },
+        {
+          "orientation": "UX05",
+          "vote": "POUR",
+          "argument": "La recette du cycle existant et l'absence de tâche silencieuse sécurisent les engagements ; P1 conditionnel, pas refonte présumée."
+        },
+        {
+          "orientation": "UX06",
+          "vote": "ABSTENTION",
+          "argument": "Les règles sont préservées, mais le gain d'un regroupement du formulaire reste peu étayé ; je réserve l'arbitrage P2 à un essai de saisie."
+        },
+        {
+          "orientation": "UX07",
+          "vote": "POUR",
+          "argument": "Remplacer null sans confondre absence et erreur est une correction observée et limitée ; P2."
+        },
+        {
+          "orientation": "UX08",
+          "vote": "POUR",
+          "argument": "Une série de prospects doit conserver son contexte ; la recette conditionne correctement toute modification P2."
+        },
+        {
+          "orientation": "UX09",
+          "vote": "POUR",
+          "argument": "La transmission explicite et tracée sans propagation automatique préserve la distinction des engagements ; P2 adapté."
+        },
+        {
+          "orientation": "UX10",
+          "vote": "POUR",
+          "argument": "Expliquer Non calculé et les règles de transition protège la qualité du pipeline ; P2 concret."
+        },
+        {
+          "orientation": "UX11",
+          "vote": "CONTRE",
+          "argument": "La tâche obligatoire sur gain, perte ou pause détruit la signification des alertes et fabrique du bruit."
+        },
+        {
+          "orientation": "UX12",
+          "vote": "CONTRE",
+          "argument": "Un équilibre en nombre ne prouve ni adéquation des territoires ni charge réelle ; l'automatisme global n'est pas fondé."
+        },
+        {
+          "orientation": "UX13",
+          "vote": "CONTRE",
+          "argument": "La complétude obligatoire exclut des prospects légitimes et incite à inventer les données manquantes."
+        }
+      ]
+    },
+    {
+      "id": "E3",
+      "nom": "Responsable commercial simulé",
+      "profil": "Priorisation, relances, rendez-vous et productivité du portefeuille",
+      "avis": {
+        "A": "Les trois périodes O01 sont opérationnelles mais je voudrais voir immédiatement les rendez-vous proches et les urgences collectives ; contrairement à E1, un résumé portefeuille toujours visible me semble utile au manager si l’écran reste court.",
+        "B": "Je souhaite identifier les dossiers oubliés et sans responsable sans additionner plusieurs écrans O16 ; des accès directs aux exceptions commerciales ont plus de valeur immédiate que des graphiques décoratifs ou un classement des vendeurs.",
+        "C": "La création réussie O04 est une force ; je réduirais le renseignement initial au strict nécessaire et proposerais un propriétaire par défaut explicite, tout en admettant qu’une attribution au créateur peut être fausse dans un travail d’assistanat.",
+        "D": "Le créneau réservé O12 doit devenir facile à retrouver puis préparer ; je demande une recette de préparation, report et compte rendu, et un accès au dossier depuis le rendez-vous, sans conclure à une anomalie d’agenda à partir du délai d’outil.",
+        "E": "Les retards O10 sont visibles ; je veux distinguer les tâches réellement à traiter des rappels déjà dépassés et permettre une prochaine étape à l’issue du rendez-vous, après vérification des commandes existantes.",
+        "F": "La bascule Équipe O01 et les responsables O10 servent le pilotage ; je privilégie une liste de charges et d’actions non attribuées avec possibilité de transmission claire, mais sans mesurer la performance au seul volume d’interactions.",
+        "G": "Je favoriserais l’accès direct à appeler, préparer et planifier depuis une fiche O06 ; toute simplification doit préserver la traçabilité commerciale, et une semaine de mesure terrain serait préférable à la multiplication des champs obligatoires."
+      },
+      "reponses_debat": {
+        "A": "Julie ne veut pas des chiffres de manager sur sa page ; j'accepte un résumé compact de la portée choisie si l'accès au collectif reste immédiat.",
+        "B": "La demande de Patrick de comprendre pourquoi une fiche apparaît est juste ; les alertes doivent conduire à une action, pas servir uniquement mon reporting.",
+        "C": "Sophie saisit pour d'autres commerciaux : son exemple me fait renoncer à copier automatiquement le créateur comme responsable, tout en souhaitant une affectation explicite rapide.",
+        "D": "Marc demande de retrouver chaque réservation et Delphine sa préparation : ces vérifications passent avant une nouvelle fonctionnalité de planning.",
+        "E": "Je partage l'objectif de Thomas de ne rien oublier, mais l'objection d'E5 sur les tâches factices empêche de soutenir un blocage systématique.",
+        "F": "Sophie souligne les actions laissées à l'ancien titulaire ; rendre ces engagements visibles au transfert répond mieux à ma crainte d'oubli qu'une réaffectation de masse.",
+        "G": "Julie souhaite garder ses filtres et Sophie ses imports ; leur productivité justifie de conserver ces accès même avec une page d'accueil simplifiée."
+      },
+      "votes": [
+        {
+          "orientation": "UX01",
+          "vote": "POUR",
+          "argument": "Le compromis de résumé compact garde une lecture quotidienne et l'accès collectif ; c'est un P1 opérationnel."
+        },
+        {
+          "orientation": "UX02",
+          "vote": "POUR",
+          "argument": "La revue des dossiers à risque répond directement à la prévention des oublis ; P1 après vérification de l'existant."
+        },
+        {
+          "orientation": "UX03",
+          "vote": "POUR",
+          "argument": "Voir qui suit le prospect et qui porte le dossier évite un faux sentiment de prise en charge ; P1."
+        },
+        {
+          "orientation": "UX04",
+          "vote": "POUR",
+          "argument": "Comprendre pourquoi l'alerte persiste permet d'agir sans créer un doublon ; P1 commercial."
+        },
+        {
+          "orientation": "UX05",
+          "vote": "POUR",
+          "argument": "Retrouver puis poursuivre un rendez-vous est essentiel pour les commerciaux ; la recette et les raccords éventuels sont P1."
+        },
+        {
+          "orientation": "UX06",
+          "vote": "POUR",
+          "argument": "Réduire l'impression de lourdeur sans supprimer les informations requises facilite la saisie terrain ; P2."
+        },
+        {
+          "orientation": "UX07",
+          "vote": "POUR",
+          "argument": "Le null donne une impression de fiche cassée et sa correction est ciblée ; P2 à faire rapidement."
+        },
+        {
+          "orientation": "UX08",
+          "vote": "POUR",
+          "argument": "Le traitement en série des prospects gagne à conserver filtres et position ; le contrôle préalable rend P2 raisonnable."
+        },
+        {
+          "orientation": "UX09",
+          "vote": "POUR",
+          "argument": "Une transmission visible prévient les engagements oubliés ; P2 cohérent pour la prochaine tranche après les fondamentaux P1."
+        },
+        {
+          "orientation": "UX10",
+          "vote": "ABSTENTION",
+          "argument": "Les explications sont utiles mais leur niveau de détail doit rester très court ; j'attends un essai terrain pour prioriser cette orientation P2."
+        },
+        {
+          "orientation": "UX11",
+          "vote": "CONTRE",
+          "argument": "La discipline de suivi ne doit pas forcer un commercial à inventer une relance sur un dossier perdu ou en pause."
+        },
+        {
+          "orientation": "UX12",
+          "vote": "ABSTENTION",
+          "argument": "La distribution pourrait faire gagner du temps à une équipe homogène, mais territoires et absences n'ont pas été étudiés ; je ne soutiens pas encore ce P3."
+        },
+        {
+          "orientation": "UX13",
+          "vote": "CONTRE",
+          "argument": "Un commercial doit pouvoir noter un prospect avant de connaître son contact et toutes ses coordonnées."
+        }
+      ]
+    },
+    {
+      "id": "E4",
+      "nom": "Expert onboarding et accessibilité simulé",
+      "profil": "Utilisateurs occasionnels, lisibilité, compréhension et simplicité",
+      "avis": {
+        "A": "Les intitulés temporels O01 sont familiers ; l’état vide O02 doit dire clairement s’il manque des actions personnelles ou si le filtre est restreint, plutôt que de laisser une personne occasionnelle interpréter le silence.",
+        "B": "Un résumé global peut aider mais chaque indicateur devrait préciser sa population et offrir un accès compréhensible à la liste ; je m’oppose à l’affichage permanent de nombreux chiffres sans explication sous prétexte d’exhaustivité.",
+        "C": "O04/O05/O17 suggèrent un effort de vocabulaire sur le premier dossier et son responsable ; je conserverais la saisie progressive du contact O07 et testerais le formulaire au clavier avant d’en déclarer l’accessibilité satisfaisante.",
+        "D": "La conservation des champs après refus O12 évite une ressaisie pénible ; il reste à vérifier que l’erreur, le créneau et la confirmation sont compris au clavier et sur mobile, ces modalités n’ayant aucune preuve suffisante.",
+        "E": "O08 distingue deux dates qui peuvent être confondues par un novice ; un exemple concret de date d’action et de rappel ainsi qu’une portée prospect/dossier explicite aideraient davantage qu’une nouvelle couche de notifications.",
+        "F": "Deux responsables O05 peuvent être légitimes mais leur rôle doit être expliqué au point d’action ; je préfère des noms de rôle stables et une confirmation de transmission à un organigramme ou des indicateurs comparatifs supplémentaires.",
+        "G": "Le texte brut null O18 est un défaut visible à corriger rapidement ; je soutiens des états vides formulés simplement et une hiérarchie stable, sans transformer le timeout mobile en diagnostic d’inaccessibilité du produit."
+      },
+      "reponses_debat": {
+        "A": "Patrick demande un prochain geste et Nathalie une portée compréhensible ; leur besoin confirme qu'un état vide expliqué prime sur l'ajout de nombreux indicateurs.",
+        "B": "Thomas veut l'exhaustivité et Patrick peu de chiffres : je retiens des listes expliquées, mais je crains que sept catégories de risque simultanées dépassent le besoin d'un novice.",
+        "C": "Les coordonnées facultatives utiles à Sophie et Julie doivent rester telles quelles ; l'aide aux responsabilités demandée par Nathalie doit apparaître au moment de choisir.",
+        "D": "La confirmation claire demandée par Patrick doit aussi être perceptible au clavier ; l'absence de recette mobile reste une limite à lever, pas une preuve de défaut.",
+        "E": "Patrick et Nathalie ont besoin de comprendre les deux dates ; le rattachement du dossier et le résumé de rappel doivent être lisibles sans multiplier les notifications.",
+        "F": "La personne à contacter demandée par Patrick et les engagements restants de Sophie se rejoignent dans un récapitulatif simple de transmission.",
+        "G": "Je rejoins Nathalie contre un tutoriel imposé à chaque retour et Sophie pour une navigation stable ; corriger null ne nécessite aucune refonte."
+      },
+      "votes": [
+        {
+          "orientation": "UX01",
+          "vote": "POUR",
+          "argument": "L'état vide expliqué et la portée visible aident l'orientation sans surcharger la page ; P1."
+        },
+        {
+          "orientation": "UX02",
+          "vote": "ABSTENTION",
+          "argument": "La recette est indispensable mais le lot de listes est large et L ; je souhaite d'abord observer quels risques les novices savent réellement interpréter avant d'approuver l'ensemble P1."
+        },
+        {
+          "orientation": "UX03",
+          "vote": "POUR",
+          "argument": "Nommer les rôles au point d'action évite un vocabulaire implicite ; le faible effort et l'enjeu justifient P1."
+        },
+        {
+          "orientation": "UX04",
+          "vote": "POUR",
+          "argument": "Le périmètre visible et l'explication de l'alerte répondent à une situation concrète difficile à comprendre ; P1."
+        },
+        {
+          "orientation": "UX05",
+          "vote": "POUR",
+          "argument": "La confirmation et la continuité doivent être vérifiées avant usage autonome ; P1 conditionnel pertinent, avec recette accessible à ajouter au protocole transversal."
+        },
+        {
+          "orientation": "UX06",
+          "vote": "POUR",
+          "argument": "Les compléments progressifs réduisent la charge sans enlever des informations requises ; P2."
+        },
+        {
+          "orientation": "UX07",
+          "vote": "POUR",
+          "argument": "Un état vide en langage courant remplace un défaut technique observé ; P2 immédiatement compréhensible."
+        },
+        {
+          "orientation": "UX08",
+          "vote": "POUR",
+          "argument": "La restitution du focus et des filtres protège les utilisateurs occasionnels et au clavier ; P2 après recette."
+        },
+        {
+          "orientation": "UX09",
+          "vote": "POUR",
+          "argument": "Le récapitulatif explique ce qui change et ce qui reste à l'ancien titulaire ; P2 utile sans transfert implicite."
+        },
+        {
+          "orientation": "UX10",
+          "vote": "POUR",
+          "argument": "Des exemples au point d'usage aident à distinguer absence de calcul et faible intérêt ; P2 proportionné."
+        },
+        {
+          "orientation": "UX11",
+          "vote": "CONTRE",
+          "argument": "Un blocage de sortie retire le contrôle à la personne et pénalise la simple consultation, surtout occasionnelle."
+        },
+        {
+          "orientation": "UX12",
+          "vote": "CONTRE",
+          "argument": "Une attribution sans choix individuel risque de surprendre ceux qui découvrent ensuite la responsabilité ; P3 ne compense pas ce problème."
+        },
+        {
+          "orientation": "UX13",
+          "vote": "CONTRE",
+          "argument": "Exiger des données inconnues rend l'outil inutilisable au premier contact et augmente la charge de saisie."
+        }
+      ]
+    },
+    {
+      "id": "E5",
+      "nom": "UX researcher et facilitateur simulé",
+      "profil": "Scénarios, biais, contradictions et qualité des arbitrages",
+      "avis": {
+        "A": "O01/O02 décrivent un seul compte avec peu d’activité personnelle ; tester la compréhension avec un portefeuille crédible est indispensable avant de généraliser la première impression ou d’imposer des indicateurs visibles à tous.",
+        "B": "L’absence de preuve d’exhaustivité ne démontre pas une absence de capacité ; il faut rouvrir les indicateurs, stabiliser Suivi et confronter les totaux à un jeu de référence avant de voter un remplacement du pilotage.",
+        "C": "O17 est une hypothèse utile, O18 un défaut observé ; je mesurerais la compréhension des responsabilités et le taux de création sans erreur, en évitant de présenter notre préférence de vocabulaire comme une parole utilisateur.",
+        "D": "La réservation est prouvée mais retrouver, modifier, annuler et réaliser restent non vérifiés ; un protocole de bout en bout doit distinguer problème réseau, défaut fonctionnel et difficulté de compréhension.",
+        "E": "O09 rend plausible une confusion entre niveaux de suivi sans la mesurer ; comparer des tâches rattachées au prospect ou au dossier dans un scénario contrôlé est nécessaire avant d’exiger une prochaine action à chaque enregistrement.",
+        "F": "Le compte unique ne permet aucune conclusion sur l’équipe et les permissions ; deux utilisateurs de rôles différents doivent transmettre un dossier et vérifier qui voit quoi avant d’affirmer la collaboration prête pour dix personnes.",
+        "G": "Les sept personas restent une simulation et leurs votes une aide de conception ; j’adopterais d’abord les corrections étayées, puis un test réel des parcours critiques, sans attribuer au vote majoritaire la valeur d’une validation d’usage."
+      },
+      "reponses_debat": {
+        "A": "L'opposition entre E3 et Julie montre que le résumé doit être testé sur deux portées ; notre simulation ne démontre pas qu'une unique densité d'information convient à tous.",
+        "B": "La prudence de Marc sur l'existant et le contrôle de Thomas sont compatibles ; je refuse de transformer la capture Suivi en chargement en preuve d'un manque fonctionnel.",
+        "C": "Patrick et Nathalie expriment une hypothèse convergente sur les rôles, mais des personas simulés ne la confirment pas ; un scénario sans explication préalable est nécessaire.",
+        "D": "La demande de Delphine de vérifier avant la tournée rejoint Marc ; le délai d'outil doit rester séparé du jugement sur l'agenda et du diagnostic réseau.",
+        "E": "La prévention des oublis souhaitée par Thomas ne valide pas le blocage ; mesurer la création de tâches factices et les cas de pause est essentiel pour départager les propositions.",
+        "F": "Sophie et Marc détaillent des risques plausibles de transfert ; deux comptes de rôles différents devront les exercer pour distinguer incompréhension et permission réelle.",
+        "G": "Les préférences de Julie et Sophie plaident pour des scénarios de travail en série ; aucune de ces réactions simulées ne doit être utilisée comme mesure de productivité acquise."
+      },
+      "votes": [
+        {
+          "orientation": "UX01",
+          "vote": "POUR",
+          "argument": "Les critères mesurables sur portées et états évitent une refonte esthétique gratuite ; P1 à valider avec utilisateurs réels."
+        },
+        {
+          "orientation": "UX02",
+          "vote": "POUR",
+          "argument": "Le texte impose de vérifier l'existant puis les seuls manques, et précise les recouvrements ; j'approuve ce P1 conditionnel de couverture."
+        },
+        {
+          "orientation": "UX03",
+          "vote": "POUR",
+          "argument": "La différence des rôles est observée ; la solution reste ciblée et conserve les choix métier, P1 sous validation de compréhension."
+        },
+        {
+          "orientation": "UX04",
+          "vote": "POUR",
+          "argument": "Le cas à deux dossiers permet de tester l'hypothèse sans assimiler O09 à une perte ; P1 vérifiable."
+        },
+        {
+          "orientation": "UX05",
+          "vote": "POUR",
+          "argument": "La nécessité de recette est forte même si le manque est incertain ; P1 accepté exclusivement dans cet ordre de vérification puis complément éventuel."
+        },
+        {
+          "orientation": "UX06",
+          "vote": "ABSTENTION",
+          "argument": "Le formulaire long ne prouve pas un coût de saisie excessif ; je souhaite mesurer erreurs et compréhension avant de retenir ce lot P2."
+        },
+        {
+          "orientation": "UX07",
+          "vote": "POUR",
+          "argument": "Le défaut est directement observé et les critères couvrent vide, contenu et erreur ; P2 étayé."
+        },
+        {
+          "orientation": "UX08",
+          "vote": "POUR",
+          "argument": "L'orientation commence par une recette ciblée et n'affirme pas de régression ; P2 raisonnable pour une exigence de contexte."
+        },
+        {
+          "orientation": "UX09",
+          "vote": "ABSTENTION",
+          "argument": "Le risque est plausible mais le transfert n'a pas été exercé ; je réserve l'arbitrage du lot P2 avant une recette à deux comptes et une cartographie des traces existantes."
+        },
+        {
+          "orientation": "UX10",
+          "vote": "POUR",
+          "argument": "Les explications sont limitées et les critères évitent un blocage indu ; P2 testable par reformulation des notions."
+        },
+        {
+          "orientation": "UX11",
+          "vote": "CONTRE",
+          "argument": "L'efficacité du blocage est une hypothèse faible et sa règle inclut des dossiers clos où la tâche serait artificielle."
+        },
+        {
+          "orientation": "UX12",
+          "vote": "CONTRE",
+          "argument": "La distribution universelle est décidée avant la connaissance des territoires et absences ; mesurer ces effets après ne justifie pas le choix initial."
+        },
+        {
+          "orientation": "UX13",
+          "vote": "CONTRE",
+          "argument": "L'obligation générale n'est soutenue par aucune preuve d'utilité et risque de faire perdre des prospects non encore documentés."
+        }
+      ]
+    }
+  ],
+  "version_orientations": "v1 figée avant vote le 2026-11-19"
+}

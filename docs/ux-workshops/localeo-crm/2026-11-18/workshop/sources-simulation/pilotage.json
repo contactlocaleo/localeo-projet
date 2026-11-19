@@ -1,0 +1,276 @@
+{
+  "nature": "Simulation de personas fictifs fondée sur les preuves de l'étape 1 ; aucun entretien ou test utilisateur réel. Avis initiaux avant débat et vote.",
+  "participants": [
+    {
+      "id": "MAR",
+      "nom": "Marc",
+      "profil": "45 ans, responsable commercial ; vision du pipeline et prospects prioritaires.",
+      "avis": {
+        "A": "Les trois périodes d'Aujourd'hui donnent un bon point de départ (O01), mais les zéros de Mes actions et les indicateurs repliés ne me permettent pas de conclure à l'état de l'équipe (O02) ; je veux une portée explicitement rappelée.",
+        "B": "Je veux ouvrir une synthèse partagée puis les dossiers qui demandent attention ; avant d'ajouter un tableau, il faut tester les indicateurs et Suivi déjà présents, car leur exhaustivité n'a pas été établie (O16 et limites).",
+        "C": "Le nom, la commune et le premier dossier facilitent une entrée exploitable (O04) ; je veux distinguer responsable du prospect et responsable du dossier dès la création, sans forcer leur identité (O05/O17).",
+        "D": "Les disponibilités publiées et le refus sans perte de saisie sont rassurants (O12) ; je veux vérifier que chaque réservation se retrouve dans l'agenda, avec responsable, résultat et suite, avant de la recommander à dix collègues.",
+        "E": "Les badges d'échéance existent (O10), mais je veux comprendre si l'absence de prochaine action concerne le prospect ou un dossier particulier pour éviter une relance inutile (O09).",
+        "F": "Une transmission doit distinguer propriétaire du prospect, propriétaire du dossier et exécutant de l'action ; je privilégie une visibilité claire des rôles plutôt qu'une réaffectation automatique (O05/O09).",
+        "G": "Je préfère quelques filtres persistants du portefeuille à une multitude de nouveaux écrans ; une vue enregistrée sera utile si les filtres existants suffisent déjà (O03/O16)."
+      },
+      "reponses_debat": {
+        "A": "Je rejoins Julie pour garder la page personnelle légère ; le résumé de la portée sélectionnée et l'accès collectif explicite de UX01 me suffisent, sans imposer le tableau permanent préféré par E3.",
+        "B": "E5 a raison de demander un rapprochement des totaux ; je maintiens l'objectif de listes de risques, mais le travail commence par ouvrir et vérifier les capacités déjà présentes.",
+        "C": "Sophie et E3 rappellent que le créateur peut saisir pour autrui ; je renonce au propriétaire automatique et préfère des rôles nommés, avec affectation explicite et saisie progressive.",
+        "D": "Je suis d'accord avec E2 : les commandes de compte rendu existent dans le code ; l'enjeu prioritaire est une chaîne démontrée et des raccords éventuels, pas un deuxième module agenda.",
+        "E": "Thomas et E2 demandent des définitions avant les alertes ; je les rejoins, car obliger une action sur une affaire gagnée fabriquerait des tâches sans utilité.",
+        "F": "Sophie veut conserver des exécutants différents ; je soutiens une transmission explicitant les engagements restants, même si une distribution automatique paraîtrait plus rapide.",
+        "G": "Julie privilégie le retour filtré ; je reconnais sa valeur en traitement en série, mais je demande d'abord une preuve de perte de contexte avant d'engager un lot M."
+      },
+      "votes": [
+        {
+          "orientation": "UX01",
+          "vote": "POUR",
+          "argument": "Le résumé compact donne accès au collectif sans encombrer la vue personnelle ; sa priorité P1 convient au démarrage."
+        },
+        {
+          "orientation": "UX02",
+          "vote": "POUR",
+          "argument": "Une revue à dix personnes exige les listes de dossiers oubliés ; j'accepte L en P1 à condition de vérifier et réutiliser les vues existantes."
+        },
+        {
+          "orientation": "UX03",
+          "vote": "POUR",
+          "argument": "Le rôle du responsable choisi doit être évident pour éviter une fausse impression de prise en charge ; le petit effort mérite P1."
+        },
+        {
+          "orientation": "UX04",
+          "vote": "POUR",
+          "argument": "Comprendre pourquoi l'alerte d'un dossier persiste évite des doublons de relance et justifie P1."
+        },
+        {
+          "orientation": "UX05",
+          "vote": "POUR",
+          "argument": "Je dois pouvoir confier le cycle complet de rendez-vous à l'équipe ; la recette préalable et les seuls raccords manquants rendent P1 proportionné."
+        },
+        {
+          "orientation": "UX06",
+          "vote": "POUR",
+          "argument": "Une création organisée autour du minimum utile réduit l'abandon supposé sans retirer le contrôle des ressemblances ; P2 convient."
+        },
+        {
+          "orientation": "UX07",
+          "vote": "POUR",
+          "argument": "Le défaut null est démontré et sa correction courte en P2 améliore la confiance sans gros chantier."
+        },
+        {
+          "orientation": "UX08",
+          "vote": "ABSTENTION",
+          "argument": "Je soutiens l'intention, mais je ne priorise pas un lot M tant que le retour filtré n'a pas été essayé ; mon besoin manager est moins fréquent."
+        },
+        {
+          "orientation": "UX09",
+          "vote": "POUR",
+          "argument": "La transmission avec engagements restants rend la reprise de portefeuille contrôlable ; P2 laisse les urgences quotidiennes passer avant."
+        },
+        {
+          "orientation": "UX10",
+          "vote": "POUR",
+          "argument": "Les commerciaux doivent distinguer score et étape ; des aides brèves en P2 évitent une formation lourde."
+        },
+        {
+          "orientation": "UX11",
+          "vote": "CONTRE",
+          "argument": "Forcer une tâche sur une affaire close dégrade mes listes de priorités et encourage les échéances fictives."
+        },
+        {
+          "orientation": "UX12",
+          "vote": "CONTRE",
+          "argument": "Une rotation sans validation ignore territoires et relations ; je préfère une liste des non attribués et une distribution explicite."
+        },
+        {
+          "orientation": "UX13",
+          "vote": "CONTRE",
+          "argument": "Un nouveau contact de salon doit pouvoir être enregistré avec des données partielles ; cette obligation ferait perdre des opportunités."
+        }
+      ]
+    },
+    {
+      "id": "JUL",
+      "nom": "Julie",
+      "profil": "28 ans, commerciale connectée ; actions rapides, filtres et navigation.",
+      "avis": {
+        "A": "Aujourd'hui doit me permettre d'ouvrir immédiatement une action ; la structure par période me convient (O01), et je ne souhaite pas que des indicateurs de manager occupent toute ma page personnelle.",
+        "B": "Je préfère des raccourcis vers les listes déjà filtrées à un nouveau dashboard chargé ; les résultats de recherche fonctionnent (O03), mais les filtres sans responsable et inactivité restent à vérifier.",
+        "C": "Je veux créer vite avec le minimum utile puis compléter contacts et qualification ; les coordonnées facultatives et les champs progressifs du contact vont dans ce sens (O04/O07), sans rendre le score obligatoire.",
+        "D": "Je veux passer de la confirmation au rendez-vous puis revenir à la fiche sans me perdre ; l'absence de preuve de ce lien dans l'exploration appelle une recette, pas l'affirmation qu'il manque (O11/O12).",
+        "E": "La date de travail et la date de rappel sont utiles séparément (O08) ; je veux éviter plusieurs notifications pour une seule action et choisir la portée du rappel.",
+        "F": "Je veux voir qui agit et le dernier échange sur la fiche avant de contacter quelqu'un (O06) ; un changement de responsable ne devrait pas m'obliger à ressaisir le dossier.",
+        "G": "Je privilégie les retours aux listes avec recherche et filtres conservés, puis les actions courantes accessibles ; les raccourcis clavier seraient confortables mais leur absence n'est pas un blocage démontré."
+      },
+      "reponses_debat": {
+        "A": "E3 veut un portefeuille toujours visible ; j'accepte le compromis UX01 parce qu'il résume ma portée et ne remplace pas mes actions par les chiffres de l'équipe.",
+        "B": "Marc et Thomas veulent toutes les listes de risques ; je garde une réserve sur l'effort L tant que les filtres existants ne sont pas testés, même si E5 encadre justement cette vérification.",
+        "C": "Patrick et Sophie soutiennent la saisie progressive ; je les rejoins, tout en gardant le contrôle des ressemblances recommandé par E2 afin que la vitesse ne multiplie pas les fiches.",
+        "D": "E4 ajoute clavier et mobile à la recette ; cela me paraît plus utile qu'un nouvel agenda, puisque les créneaux et le refus conservant la saisie fonctionnent déjà dans le scénario observé.",
+        "E": "E3 insiste sur la prochaine étape ; je suis favorable à une proposition visible, mais pas au blocage universel qui m'obligerait à fabriquer une relance après chaque clôture.",
+        "F": "Thomas demande une transmission traçable et Sophie des tâches distinctes ; je les rejoins si le récapitulatif me permet de choisir sans réattribuer silencieusement toute la relation.",
+        "G": "Marc hésite sur le retour filtré faute de défaut démontré ; pour mon travail en série, je maintiens la recette et une correction conditionnelle en P2, sans déclarer aujourd'hui que le produit perd les filtres."
+      },
+      "votes": [
+        {
+          "orientation": "UX01",
+          "vote": "POUR",
+          "argument": "La portée sélectionnée et un résumé court préservent mon accueil opérationnel tout en évitant les faux zéros."
+        },
+        {
+          "orientation": "UX02",
+          "vote": "ABSTENTION",
+          "argument": "Je vois la valeur des listes mais l'effort L et l'incertitude des manques m'empêchent de soutenir ce lot P1 avant l'inventaire des filtres."
+        },
+        {
+          "orientation": "UX03",
+          "vote": "POUR",
+          "argument": "Nommer le responsable exact au point de saisie m'évite des vérifications avec les collègues ; S en P1 est pertinent."
+        },
+        {
+          "orientation": "UX04",
+          "vote": "POUR",
+          "argument": "Le rattachement explicite évite de recréer une action pour faire disparaître une alerte mal comprise."
+        },
+        {
+          "orientation": "UX05",
+          "vote": "POUR",
+          "argument": "Un lien vers le bon rendez-vous et son jour d'agenda accélère le travail ; j'approuve P1 avec recette de l'existant préalable."
+        },
+        {
+          "orientation": "UX06",
+          "vote": "POUR",
+          "argument": "Les compléments progressifs gardent la création rapide et la conservation des saisies m'évite des ressaisies."
+        },
+        {
+          "orientation": "UX07",
+          "vote": "POUR",
+          "argument": "Supprimer un texte technique avéré est un petit gain de lisibilité justifié en P2."
+        },
+        {
+          "orientation": "UX08",
+          "vote": "POUR",
+          "argument": "Je traite souvent plusieurs fiches d'une même recherche ; garantir filtres et position par une recette puis correction éventuelle mérite P2."
+        },
+        {
+          "orientation": "UX09",
+          "vote": "POUR",
+          "argument": "Le récapitulatif des engagements évite que ma tâche change de propriétaire à mon insu ; l'effort M reste secondaire en P2."
+        },
+        {
+          "orientation": "UX10",
+          "vote": "ABSTENTION",
+          "argument": "Je comprends déjà les notions de pipeline ; sans test de compréhension, je laisse les profils occasionnels arbitrer la valeur de ces aides P2."
+        },
+        {
+          "orientation": "UX11",
+          "vote": "CONTRE",
+          "argument": "Le blocage à chaque sortie casserait ma navigation et produirait des tâches uniquement pour pouvoir continuer."
+        },
+        {
+          "orientation": "UX12",
+          "vote": "CONTRE",
+          "argument": "Une rotation sans validation pourrait m'affecter une commune hors secteur ou pendant une absence, malgré un nombre équilibré."
+        },
+        {
+          "orientation": "UX13",
+          "vote": "CONTRE",
+          "argument": "Je ne peux pas connaître systématiquement contact, e-mail et téléphone dès le premier repérage ; je veux pouvoir compléter ensuite."
+        }
+      ]
+    },
+    {
+      "id": "THO",
+      "nom": "Thomas",
+      "profil": "42 ans, cofondateur et pilote commercial ; exhaustivité, rendez-vous et prévention des oublis.",
+      "avis": {
+        "A": "Je veux distinguer une file personnelle vide d'un portefeuille partagé sain ; les indicateurs repliés ne m'autorisent pas ce diagnostic aujourd'hui (O02), même si la bascule Équipe est présente (O01).",
+        "B": "Chaque total devrait annoncer sa portée, son unité et permettre de retrouver les éléments comptés ; je veux rapprocher prospects, dossiers et actions avant de parler d'exhaustivité (couverture-pilotage-commercial).",
+        "C": "Je veux une création légère mais traçable : commune, dossier, responsables explicites ; la détection de ressemblances repérée dans le code doit être testée avec de faux doublons avant de renforcer les champs obligatoires.",
+        "D": "La réservation est prometteuse (O12), mais je ne peux pas garantir une chaîne préparation, rendez-vous, compte rendu et prochaine étape tant que les commandes de fin de rendez-vous n'ont pas été exercées en UI.",
+        "E": "Une alerte sans définition précise crée du bruit : je veux séparer retard d'une action, absence d'action sur un dossier actif et absence d'interaction récente ; le désaccord prospect/dossier observé (O09) rend cette définition prioritaire.",
+        "F": "Je veux une vue d'équipe vérifiée avec responsables visibles et une transmission qui conserve l'historique ; les commandes existantes et un seul compte exploré ne démontrent pas encore ce fonctionnement collectif.",
+        "G": "Je refuse un chantier de CRM universel ; je financerais d'abord la compréhension des responsabilités et des actions, la fiabilité du parcours rendez-vous et la preuve que dix personnes peuvent suivre les mêmes règles."
+      },
+      "reponses_debat": {
+        "A": "Julie refuse un dashboard de manager sur sa page ; le compromis par portée de UX01 me convient si l'accès collectif est explicite et si les totaux ont un sens vérifiable.",
+        "B": "E5 rappelle qu'une couverture non démontrée n'est pas une absence produit ; j'approuve donc la vérification d'abord, tout en maintenant les listes de risques comme objectif P1 de pilotage.",
+        "C": "Sophie et Patrick privilégient la saisie légère ; je conserve les quelques règles métier de création et une trace des rôles, sans rendre toutes les coordonnées ou la qualification obligatoires.",
+        "D": "E2 et Delphine demandent la continuité jusqu'à la suite ; je soutiens la recette complète et les seuls raccords manquants, car une commande dans le code ne garantit pas un rendez-vous bien suivi.",
+        "E": "Marc veut pouvoir agir sur les urgences ; je partage ce besoin mais préfère les alertes définies d'E2 au blocage universel, qui transformerait des dossiers clos en fausses urgences.",
+        "F": "La rotation automatique pourrait accélérer la distribution, mais Sophie et E4 rappellent que responsabilités et engagements diffèrent ; je privilégie un transfert explicite et vérifiable.",
+        "G": "Julie et E1 veulent optimiser la navigation ; je laisse ces gains après la preuve des parcours critiques, sans confondre mon arbitrage budgétaire avec un rejet de leur utilité."
+      },
+      "votes": [
+        {
+          "orientation": "UX01",
+          "vote": "POUR",
+          "argument": "Un résumé dont la portée et les nombres sont vérifiables empêche une interprétation fausse de l'activité ; P1 est justifié."
+        },
+        {
+          "orientation": "UX02",
+          "vote": "POUR",
+          "argument": "L'exhaustivité des risques est indispensable au pilotage de dix personnes ; je finance P1 avec réemploi obligatoire des vues déjà suffisantes."
+        },
+        {
+          "orientation": "UX03",
+          "vote": "POUR",
+          "argument": "La responsabilité de la relation et celle du dossier doivent être explicites ; S en P1 traite un risque de compréhension concret."
+        },
+        {
+          "orientation": "UX04",
+          "vote": "POUR",
+          "argument": "Une alerte doit rester explicable lorsque le prospect a déjà une tâche ; le niveau de rattachement constitue un prérequis de pilotage."
+        },
+        {
+          "orientation": "UX05",
+          "vote": "POUR",
+          "argument": "Je ne peux pas considérer le CRM prêt pour une équipe sans preuve de la chaîne rendez-vous ; P1 conditionnel évite de recréer l'existant."
+        },
+        {
+          "orientation": "UX06",
+          "vote": "ABSTENTION",
+          "argument": "Je conserve les champs progressifs actuels mais l'effort cognitif n'est pas mesuré ; un lot M de réorganisation attendrait mon test terrain."
+        },
+        {
+          "orientation": "UX07",
+          "vote": "POUR",
+          "argument": "Le défaut est visible et circonscrit ; un correctif S en P2 est proportionné, même sans impact métier majeur."
+        },
+        {
+          "orientation": "UX08",
+          "vote": "ABSTENTION",
+          "argument": "La garantie de navigation est souhaitable, mais l'audit n'a pas constaté de perte ; je réserve mon engagement sur ce lot M après recette."
+        },
+        {
+          "orientation": "UX09",
+          "vote": "POUR",
+          "argument": "Les engagements conservés par l'ancien titulaire doivent être visibles pour éviter les oublis ; P2 organise la reprise sans automatisme opaque."
+        },
+        {
+          "orientation": "UX10",
+          "vote": "POUR",
+          "argument": "Distinguer Non calculé de faible potentiel protège les décisions de priorisation ; une aide S en P2 est un investissement mesuré."
+        },
+        {
+          "orientation": "UX11",
+          "vote": "CONTRE",
+          "argument": "Des prochaines actions imposées aux dossiers gagnés ou perdus fausseraient les indicateurs et ne prouveraient aucun suivi utile."
+        },
+        {
+          "orientation": "UX12",
+          "vote": "CONTRE",
+          "argument": "L'équilibre numérique ne suffit pas à répartir des territoires ou relations ; une distribution sans validation crée une responsabilité seulement apparente."
+        },
+        {
+          "orientation": "UX13",
+          "vote": "CONTRE",
+          "argument": "L'exhaustivité de coordonnées ne doit pas être obtenue au prix d'informations inventées ou de prospects non saisis ; la complétude progressive est préférable."
+        }
+      ]
+    }
+  ],
+  "phase": "Avis initiaux conservés ; confrontation simulée puis votes individuels sur orientations-v1 figées le 2026-11-19."
+}

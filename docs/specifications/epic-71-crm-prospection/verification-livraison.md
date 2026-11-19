@@ -2119,3 +2119,131 @@ sans configuration nouvelle ; les assets restent servis `no-store`. Syntaxe
 JavaScript, diff, guides/liens et sources exportées contrôlés. Ces preuves portent
 sur l’arbre local et des API synthétiques, sans vérification de la version déployée,
 charge PostgreSQL, génération réelle ou accès TEST. Aucun déploiement réalisé.
+
+
+<a id="workshop-crm-20261118"></a>
+
+## Suites du workshop CRM du 18 novembre — réalisation du 19 novembre 2026
+
+**Périmètre : UX01–UX05 validées, seuils UX02 confirmés à 30/60 jours**, correction
+UX07 et recette UX08 selon exigences existantes. [Conception et matrice](workshop-crm-20261118.md),
+[cadrage AUD-01 à 09](../../roadmap/en-cours/epic-71-crm-prospection-animation-coffrets-pro-backlog.md#audit-crm-20261118).
+Réalisation locale dans backend et projet ; E71 reste **En cours**. CA-01 à 84,
+CA-24 reporté et réserves historiques restent distincts de ces preuves.
+
+### Comportements réalisés
+
+- Résumé des trois groupes Aujourd’hui à la même portée et au même instant
+  serveur ; liens vers leurs groupes, zéro personnel expliqué et accès Équipe.
+- Pilotage : accès aux listes filtrées non attribuées, sans action au niveau
+  prospect/dossier, interaction absente depuis 30 jours et évolution d’étape
+  absente depuis 60 jours. Populations, pauses/clôtures et recouvrements annoncés.
+  Totaux et pages réutilisent les lectures SQL ; pas de calcul sur les lignes visibles.
+- Responsables prospect/premier dossier/dossier/action nommés ; absence de
+  propagation automatique expliquée. Rattachement de l’action explicite,
+  sélecteur de dossiers paginé avec sélection conservée et contexte dossier fixe.
+- Dernière interaction vide sans `null`, échange conservé, panne distincte avec
+  réessai local. Retour et recherche conservent les règles existantes.
+- Réservation/report : confirmation vers détail et jour Paris du rendez-vous
+  enregistré. Réalisation : compte rendu et suite facultative, vrai dossier
+  résolu avant saisie de la prochaine action. Aucun envoi prospect implicite.
+  Une réponse tardive après navigation n’insère pas sa confirmation dans la
+  nouvelle rubrique ; les conflits et réponses incertaines gardent leur protocole.
+
+### Contrôles exécutés et tentatives
+
+Depuis `localeo-backend`, la commande finale Python a utilisé le lanceur isolé
+avec une base PostgreSQL 18 **jetable locale**, utilisateur `audit_test`,
+port `55447`, base `localeo_audit_test` :
+
+```console
+py -3 scripts/validation/test_isolated.py --postgres-test-url postgresql+psycopg://audit_test@127.0.0.1:55447/localeo_audit_test tests/architecture tests/domain/test_domain_dedicated_classes.py tests/application/use_cases/test_use_case_business_test_coverage.py tests/api/test_crm_workshop_risques.py tests/api/test_crm_projection_api.py tests/application/test_crm_rendez_vous.py tests/domain/prospection/test_rendez_vous_dedicated.py tests/api/test_crm_rendez_vous_api.py tests/api/test_crm_responsable_prospect_api.py tests/integration/prospection/test_workshop_risques_postgres.py tests/integration/prospection/test_rendez_vous_demonstration.py tests/unit/test_demonstration_crm.py tests/security/test_crm_pwa.py -q -s --tb=short
+```
+
+**831 tests réussis, aucun skip, 4 avertissements de dépréciation de l’adaptateur
+SQLite datetime sous Python 3.14**. La première tentative sans cible PostgreSQL
+avait laissé quatre tests non exécutés ; la cible jetable explicite a permis
+leur exécution. Les doubles des tests de projections ont été complétés pour les
+méthodes d’enrichissement existantes ; assertions de confidentialité conservées.
+Les premiers défauts de fixtures SQL (identifiants et clé étrangère) ont été
+corrigés sans modification des contraintes ni affaiblissement des assertions.
+
+Les recettes navigateur utilisent le vrai shell, API synthétique, ports
+attribués automatiquement et aucune configuration opérateur :
+
+| Critères | Commande / preuve | Résultat local |
+| --- | --- | --- |
+| AUD-01/03/04/05/06/08/09 | `node tests/browser/crm-workshop.cjs` ; rapport `tmp/crm-workshop-hfhYir/resultat.json`, captures 320/390/1280 px | Réussi : portées, filtres transmis, vide/échange/erreur, deux dossiers, sélection paginée conservée, 409, action générale distincte, lecture seule et absence de débordement |
+| AUD-02/08/09 | `node tests/browser/crm-productivite.cjs` ; `tmp/crm-productivite-rP01gW` | Réussi : retour page 3/position/focus, panne locale, conflit et réponse incertaine, révocation, mobile et texte 200 % |
+| AUD-02 | `node tests/browser/crm-recherches-locales.cjs` ; `tmp/crm-recherches-locales-ZSY9k6` | 18 parcours réussis |
+| AUD-02 | `node tests/browser/crm-prospects-filtres.cjs` ; `tmp/crm-prospects-filtres-95l3Zb` | 11 scénarios réussis |
+| AUD-05/08 | `node tests/browser/crm-selecteurs.cjs` ; `tmp/crm-selecteurs-ui-fa324d2a` | Réussi : pagination des contacts/références, sélection conservée, preuve concurrente et CSRF |
+| AUD-05/07 | `node tests/browser/crm-rappels.cjs` | Réussi : dates Paris, erreurs/DST, report/rejeu, opt-out et révocation |
+| AUD-07/08/09 | `node tests/browser/crm-agenda.cjs` ; `tmp/crm-rdv-ui-964c6593` | Réussi : confirmation vers détail et bon jour/responsable, dossier conservé après réalisation, réponse tardive après navigation, report/annulation, 60 RDV et clavier/texte 200 % |
+| AUD-04/05/08 | `node tests/browser/crm-correctifs.cjs` ; `tmp/crm-qa` | Réussi : types, calendrier, note/correction, affectation du prospect et filtres de rappels ; panneaux repliés ouverts explicitement, pagination des responsables conservée pendant la recherche locale |
+| Parcours socle | `node tests/browser/crm.cjs` | Réussi : création atomique, notes, pause, sept largeurs, lecture seule et révocation |
+
+Les nouveaux libellés accessibles sont repris exactement dans les tests
+consommateurs, sans sélecteur permissif. Les rendus de pilotage à 390 px et de
+journée à 320 px ont été inspectés visuellement. Les captures sur API simulée
+ne prouvent ni la version TEST ni l’usage physique.
+
+### Capacité des nouveaux filtres
+
+`test_workshop_risques_postgres.py` vérifie cas positifs/négatifs, seuils inclusifs,
+traces techniques, pause/clôture, reconfirmation sans changement d’étape,
+propriétaires distincts, totaux et pages sans recouvrement. Les plans
+`EXPLAIN (ANALYZE, BUFFERS, FORMAT JSON)` proviennent du vrai SELECT de page.
+Rapport du passage groupé de 831 tests : `tmp/crm-workshop-risques-hgh8fcwl/mesures.json`.
+
+N = 1 000 prospects/dossiers, 10 000 événements et 4 000 tâches terminées ;
+10N = 10 000 prospects/dossiers, 100 000 événements et 40 000 tâches terminées.
+Page de 25, mémoire de page bornée et hydratations groupées. Budget prévu par le
+test : moins de 2 s, au plus 12 requêtes par lecture avec total.
+
+| Filtre | N, lecture avec total | 10N, lecture avec total | Requêtes |
+| --- | ---: | ---: | ---: |
+| Prospect non attribué | 17,8 ms | 15,2 ms | 7 |
+| Prospect sans action | 15,0 ms | 10,4 ms | 7 |
+| Sans interaction depuis 30 jours | 30,7 ms | 96,1 ms | 7 |
+| Sans évolution depuis 60 jours | 15,2 ms | 63,0 ms | 5 |
+
+Ce sont des mesures locales ponctuelles, sans percentile ni charge concurrente
+revendiqués. Aucun polling ni nouveau fan-out applicatif ; les filtres s’exécutent
+sur demande, par les lectures existantes. Les index existants sur organisations,
+événements et tâches satisfont ce jeu ; aucune migration ajoutée. Les budgets
+historiques à grande capacité et les essais sur l’environnement cible ne sont
+pas levés par ce test à 10 000 prospects.
+
+### Contrats, démonstration, exploitation et limites
+
+Quatre filtres GET optionnels additifs ; paramètres absents conservant la
+signature des curseurs existants. Contrat OpenAPI régénéré hors ligne depuis
+le backend ; guide, exploitation, README et exports documentaires actualisés.
+La génération récupère aussi les annotations et mécanismes de sécurité présents
+dans le schéma producteur courant ; aucune règle d’accès nouvelle dans ce lot.
+
+Aucune table, migration ou configuration nouvelle. Le générateur conserve ses
+scénarios de dossiers/RDV et son format ; tests de génération/restauration
+réussis. Les nouveaux cas de risques sont couverts par des fixtures de tests
+synthétiques, sans réécriture des données de démonstration ni des objets TEST.
+Les trois frontends publics/partenaires restent sans impact direct : la PWA
+CRM est servie par backend, sous les droits ERP existants.
+
+Livrer assets, code backend et bundle documentaire cohérents ; aucune activation,
+notification externe, migration TEST, suppression d’objets, commit, push ou
+opération de déploiement effectuée. La recette avec de vraies personnes et des
+appareils physiques, ainsi que la levée des risques de mise en service, restent
+à conduire séparément. L’archive du workshop et ses manifestes décrivent leur
+version initiale ; les décisions ultérieures sont datées, sans réécrire ces
+empreintes historiques.
+
+Contrôle complémentaire après précision des fixtures de seuils :
+`test_workshop_risques_postgres.py` et `tests/infrastructure/test_documentation.py`
+via le même lanceur et la même base jetable : **12 tests réussis**, aucun skip.
+Guides généraux et documents modifiés : aucune erreur ni avertissement ;
+`sync_documentation.py --check-sources` : **152 sources vérifiées**. Diff sans
+erreur d’espacement. PostgreSQL jetable arrêté après les tests ; les serveurs
+navigateurs se ferment avec leurs recettes. Aucun processus de cette tâche
+n’est laissé actif. Prochaine action éventuelle : recette humaine ou préparation
+de livraison sur demande ; aucune action distante engagée.

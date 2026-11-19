@@ -1,0 +1,46 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>UX05 · Agenda ciblé et préparation · Maquette Localeo CRM</title><link rel="stylesheet" href="maquettes.css"></head><body>
+<div class="prototype"><span>MAQUETTE APRÈS · UX05 · données fictives · contrôles métier inactifs</span><span><a href="../comparatif-avant-apres.html#ux05">Retour au comparatif</a></span></div>
+<header class="topbar"><div class="brand">Localeo <b>CRM</b></div><div class="toplinks"><span class="button">Installer</span><span>Accueil ERP</span><span class="button">Applications ⌄</span></div></header>
+<div class="mobile-bar"><strong>Agenda</strong><span>☰ Menu</span></div><div class="layout"><aside class="sidebar"><p class="environment">Maquette · TEST fictif</p><nav aria-label="Navigation représentée"><div class="nav-item " ><span class="nav-icon" aria-hidden="true">⌂</span>Aujourd’hui</div><div class="nav-item " ><span class="nav-icon" aria-hidden="true">♧</span>Prospects</div><div class="nav-item " ><span class="nav-icon" aria-hidden="true">▤</span>Suivi</div><div class="nav-item current" aria-current=page><span class="nav-icon" aria-hidden="true">▦</span>Agenda</div><div class="nav-item " ><span class="nav-icon" aria-hidden="true">♧</span>Rappels</div><div class="nav-item " ><span class="nav-icon" aria-hidden="true">☷</span>Qualification</div><div class="nav-item " ><span class="nav-icon" aria-hidden="true">◇</span>Carte</div><div class="nav-item " ><span class="nav-icon" aria-hidden="true">♧</span>Notifications</div><div class="nav-item " ><span class="nav-icon" aria-hidden="true">↑</span>Imports</div><div class="nav-item " ><span class="nav-icon" aria-hidden="true">⚙</span>Préférences</div></nav></aside><main id="contenu">
+  <p class="eyebrow">Agenda · données fictives</p>
+  <h1 class="title">Les rendez-vous de l’équipe</h1>
+  <p class="muted">Jeudi 26 novembre 2026 · heure de Paris</p>
+
+  <section class="panel" aria-label="Période et collaborateurs affichés">
+    <div class="formgrid">
+      <div class="field"><label for="agenda-date">Date</label><input id="agenda-date" type="text" value="26 novembre 2026" readonly></div>
+      <div class="field"><label for="agenda-vue">Vue</label><select id="agenda-vue" disabled><option>Jour</option></select></div>
+      <div class="field"><label for="agenda-equipe">Collaborateur</label><select id="agenda-equipe" disabled><option>Toute l’équipe</option></select></div>
+    </div>
+    <div class="actions"><button type="button" class="button" aria-disabled="true">Jour précédent</button><button type="button" class="button" aria-disabled="true">Aujourd’hui</button><button type="button" class="button" aria-disabled="true">Jour suivant</button></div>
+  </section>
+
+  <div class="grid2">
+    <section class="panel" aria-labelledby="jour-titre">
+      <h2 id="jour-titre" class="section-title">Jeudi 26 novembre</h2>
+      <p class="muted">1 rendez-vous · toute l’équipe · tous les résultats</p>
+      <article class="notice" aria-label="Rendez-vous sélectionné">
+        <p><strong>10 h–10 h 30</strong> <span class="badge good">Confirmé</span></p>
+        <h3><a href="#rendez-vous">Démonstration Localeo</a></h3>
+        <p>Commune — Val-des-Ormes (fictive)</p>
+        <p class="muted">Animation centre-bourg<br>Responsable du rendez-vous : Léa Bernard</p>
+        <span class="badge">Rendez-vous sélectionné</span>
+      </article>
+      <p class="muted">Les plages sans rendez-vous ne représentent pas les disponibilités de réservation.</p>
+      <button type="button" class="button" aria-disabled="true">Consulter les disponibilités</button>
+    </section>
+
+    <section class="panel" id="rendez-vous" aria-labelledby="detail-titre">
+      <p class="eyebrow">Rendez-vous sélectionné</p>
+      <h2 id="detail-titre">Démonstration Localeo</h2>
+      <p><strong>26 novembre · 10 h–10 h 30</strong><br><span class="muted">Heure de Paris · Léa Bernard</span></p>
+      <p><strong>Commune — Val-des-Ormes (fictive)</strong><br><span class="muted">Dossier : Animation centre-bourg</span></p>
+      <h3>Préparation</h3>
+      <p>Présenter le parcours d’animation du centre-bourg. Reprendre les besoins du dossier et préparer les questions sur les associations locales.</p>
+      <p class="notice">Rappel interne le 26 novembre à 9 h 30, destiné à Léa selon ses préférences. Aucun message au prospect.</p>
+      <div class="actions"><button type="button" class="button" aria-disabled="true">Voir la fiche prospect</button><button type="button" class="button" aria-disabled="true">Modifier</button><button type="button" class="button" aria-disabled="true">Reporter</button><button type="button" class="button" aria-disabled="true">Annuler</button></div>
+      <p><a href="ux05-compte-rendu.html">Explorer la scène après le rendez-vous →</a></p>
+    </section>
+  </div>
+</main>
+</div></body></html>

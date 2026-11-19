@@ -1,0 +1,77 @@
+{
+  "nature": "Contrôles locaux de galerie uniquement",
+  "checks": [
+    {
+      "id": "ux01",
+      "format": "bureau",
+      "scenes": 3,
+      "bascule_clavier": false,
+      "images": true
+    },
+    {
+      "id": "ux02",
+      "format": "bureau",
+      "scenes": 2,
+      "bascule_clavier": false,
+      "images": true
+    },
+    {
+      "id": "ux03",
+      "format": "bureau",
+      "scenes": 2,
+      "bascule_clavier": false,
+      "images": true
+    },
+    {
+      "id": "ux04",
+      "format": "bureau",
+      "scenes": 2,
+      "bascule_clavier": false,
+      "images": true
+    },
+    {
+      "id": "ux05",
+      "format": "bureau",
+      "scenes": 3,
+      "bascule_clavier": false,
+      "images": true
+    },
+    {
+      "id": "ux01",
+      "format": "mobile",
+      "scenes": 3,
+      "bascule_clavier": true,
+      "images": true
+    },
+    {
+      "id": "ux02",
+      "format": "mobile",
+      "scenes": 2,
+      "bascule_clavier": true,
+      "images": true
+    },
+    {
+      "id": "ux03",
+      "format": "mobile",
+      "scenes": 2,
+      "bascule_clavier": true,
+      "images": true
+    },
+    {
+      "id": "ux04",
+      "format": "mobile",
+      "scenes": 2,
+      "bascule_clavier": true,
+      "images": true
+    },
+    {
+      "id": "ux05",
+      "format": "mobile",
+      "scenes": 3,
+      "bascule_clavier": true,
+      "images": true
+    }
+  ],
+  "console_errors": [],
+  "no_javascript_fallback": true
+}

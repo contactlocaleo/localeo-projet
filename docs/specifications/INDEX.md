@@ -1,5 +1,7 @@
 # Spécifications
 
+**19 novembre 2026 — CRM :** [UX01–UX05 et suites de l’audit du 18 novembre](epic-71-crm-prospection/workshop-crm-20261118.md), spécification et réalisation locales ; seuils de risques 30/60 jours confirmés. [Bilan](epic-71-crm-prospection/verification-livraison.md#workshop-crm-20261118), EPIC 71 En cours.
+
 - **E73 — workshop Live du 18 novembre 2026**, [spécification et bilan WL](epic-73-animation-et-ou-coffrets/workshop-live-20261118.md) : six orientations (B1/C1/D1/E1 P1, A1/F1 P2), programme compact, carnet vide, récupération QR et contraste ; réalisation locale, qualification humaine restant ouverte. Clôture historique conservée.
 
 - **EPIC 80 — parcours Animation dans Localeo Pro**, [spécification](epic-80-fiabilite-parcours-localeo-pro/README.md) et [bilan des critères](epic-80-fiabilite-parcours-localeo-pro/verification-livraison.md) : corrections vérifiées du scanner, de l'ordre des notifications et des dates du guide kit ; diagnostics et recette restants distingués.

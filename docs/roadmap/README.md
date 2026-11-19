@@ -1,5 +1,14 @@
 # Roadmap par etat
 
+**19 novembre 2026 — suites de l’audit CRM du 18 novembre** :
+[UX01–UX05 spécifiées et réalisées localement](../specifications/epic-71-crm-prospection/workshop-crm-20261118.md)
+dans l’EPIC 71 **En cours**, après validation utilisateur. Résumé quotidien,
+pilotage du portefeuille, responsables et rattachements explicites, continuité
+RDV et état vide corrigé. Seuils confirmés : interaction 30 jours, évolution
+60 jours ; [preuves et réserves](../specifications/epic-71-crm-prospection/verification-livraison.md#workshop-crm-20261118).
+Critères AUD complémentaires sans modification des compteurs historiques ;
+aucun déploiement effectué.
+
 **18 novembre 2026 — EPIC 81, En cours** :
 [clarté des parcours publics Marketplace](en-cours/epic-81-parcours-ux-marketplace-20261118-backlog.md),
 cadrée à partir des sept orientations P0/P1 [validées par le propriétaire](../ux-workshops/marketplace/2026-11-18/validation/decisions.md).

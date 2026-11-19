@@ -1,5 +1,13 @@
 # EPIC 71 — Localeo CRM, prospection Animation et Coffrets
 
+**19 novembre 2026 — suites du workshop CRM du 18 novembre :**
+[conception des cinq orientations UX01–UX05](workshop-crm-20261118.md), validées
+par l’utilisateur, et correction de l’état vide. Seuils UX02 confirmés :
+30 jours sans interaction, 60 jours sans évolution d’étape ; pauses et clôtures
+exclues des alertes temporelles. Réalisation et preuves propres à cette évolution
+dans le [bilan](verification-livraison.md#workshop-crm-20261118), sans modification
+des 84 identifiants CA historiques ni clôture de l’epic entière.
+
 **E71-EVOL-10, 12 novembre 2026 :** [UX quotidienne et productivité](ux-productivite.md),
 issue de l’[audit TEST et code](../../audits/backend/localeo-crm-ux-productivite-2026-11-12.md).
 Six lots implémentés : continuité/navigation, fiche/journée, agenda, cibles/preuves,

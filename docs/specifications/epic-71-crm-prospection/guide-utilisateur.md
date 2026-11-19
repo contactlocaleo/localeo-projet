@@ -1,5 +1,35 @@
 # Prendre en main Localeo CRM
 
+## Nouveautés du 19 novembre 2026
+
+- **Aujourd’hui** résume les retards, actions du jour et actions à venir dans la
+  portée Mes actions ou Équipe. Chaque total mène à son groupe ; une journée
+  personnelle vide ne signifie pas que l’équipe n’a aucun engagement.
+- **Pilotage** (dans Plus sur téléphone) ouvre les listes de prospects non
+  attribués, prospects ou dossiers sans action, retards et agenda. Les listes se
+  recoupent : leurs totaux ne s’additionnent pas. Les filtres actifs restent
+  visibles et retirables dans les résultats.
+- Deux alertes temporelles sont disponibles : **sans interaction depuis 30
+  jours**, sur les prospects actifs, et **sans évolution d’étape depuis 60
+  jours**, sur les dossiers. Les pauses et dossiers clos sont exclus de ces
+  alertes ; un prospect dont tous les dossiers sont en pause ou clos n’entre
+  pas dans l’alerte d’interaction. Sans historique, le délai part de la création.
+  Les notes et échanges comptent comme interactions ; une simple affectation
+  ou action technique n’en est pas une. Modifier le titre ou reconfirmer la
+  même étape ne remet pas à zéro le délai d’évolution.
+- Le **responsable du premier dossier** ne devient pas automatiquement le
+  responsable du prospect. Vous pouvez attribuer celui-ci depuis sa fiche.
+  Dossiers, actions et rendez-vous conservent leurs responsables respectifs.
+- Dans **Planifier une action**, choisissez Prospect uniquement ou un dossier.
+  Depuis un dossier, son contexte est conservé. Une action générale ne retire
+  pas l’alerte Sans prochaine action d’un dossier ; les dates d’action et de
+  rappel restent distinctes. Les dossiers sont proposés par pages.
+- Après réservation ou report, la confirmation ouvre le **rendez-vous enregistré**
+  ou **son jour d’agenda**, en heure de Paris. Après réalisation et compte rendu,
+  la prochaine action reste facultative et conserve le dossier du RDV. Plus tard
+  ne crée aucune tâche. Les rappels sont internes, selon les préférences du
+  responsable ; aucun message n’est envoyé au prospect par ces opérations.
+
 [Spécification](README.md) · [Qualification structurée](qualification-structuree.md) · [Format CSV](import-carte.md) · [Exploitation](exploitation.md).
 
 Localeo CRM suit vos relations commerciales Animation et Coffrets. Il utilise votre compte interne Localeo. Une fiche représente une structure ; ses contacts, échanges et dossiers restent réunis même lorsqu’elle s’intéresse aux deux offres.

@@ -1,0 +1,152 @@
+{
+  "nature": "Revue SIMULÉE de quatre personas fictifs par IA sur captures de maquettes statiques ; aucun utilisateur réel, aucun test de tâche, aucune donnée commerciale réelle. Le même agent a produit les fragments UX03/UX04 : cette auto-relecture simulée ne constitue pas une validation indépendante ni une preuve utilisateur.",
+  "images_examinees": [
+    "maquettes-apres/ux01-accueil-bureau.png",
+    "maquettes-apres/ux02-risques-bureau.png",
+    "maquettes-apres/ux03-responsabilites-bureau.png",
+    "maquettes-apres/ux04-action-bureau.png",
+    "maquettes-apres/ux05-confirmation-bureau.png",
+    "maquettes-apres/ux04-suivi-mobile.png",
+    "maquettes-apres/ux03-creation-mobile.png"
+  ],
+  "participants": [
+    {
+      "id": "DEL",
+      "reponses": {
+        "etat": "SIMULATION — Je distingue ma file personnelle de l'équipe et je vois le rôle de chaque dossier ; je ne peux pas déduire l'exhaustivité du portefeuille de compteurs fictifs.",
+        "actions": "SIMULATION — Le dossier concerné et les deux dates sont explicités ; le second dossier reste justement signalé sans prochaine action.",
+        "qualification": "SIMULATION — Je comprends mieux qui suit la relation et qui porte une opportunité ; potentiel, statuts et qualité de qualification n'ont pas été refondus ni testés ici.",
+        "rendez_vous": "SIMULATION — Date, durée, responsable et accès au bon jour de l'agenda rendent la confirmation plus utile ; je n'ai pas exécuté le parcours de compte rendu.",
+        "oublis": "SIMULATION — L'explication de l'alerte persistante réduit une ambiguïté plausible ; la réception effective des rappels et la couverture de tous les dossiers restent à démontrer.",
+        "preference": "SIMULATION — Je préfère les propositions UX01, UX03, UX04 et UX05 ; je réserve mon choix sur UX02 tant que les définitions et les vues existantes ne sont pas rapprochées."
+      },
+      "preferences": {
+        "UX01": "APRES",
+        "UX02": "RESERVE",
+        "UX03": "APRES",
+        "UX04": "APRES",
+        "UX05": "APRES"
+      },
+      "arguments_par_orientation": {
+        "UX01": "La portée et l'état vide sont compréhensibles sans imposer les chiffres de l'équipe à mon accueil personnel.",
+        "UX02": "Les listes paraissent utiles, mais l'avant Suivi n'était pas stabilisé et le sens des filtres de dossier appliqués aux risques prospect reste à préciser.",
+        "UX03": "Je peux confier la relation à Camille tout en gardant Léa sur le dossier et sa préparation.",
+        "UX04": "Le rattachement et le second dossier non couvert restent visibles ; la distinction des deux dates est conservée.",
+        "UX05": "Les accès au rendez-vous, à sa date d'agenda et à la fiche soutiennent la préparation commerciale."
+      },
+      "reserves": [
+        "La fiche de suivi mobile s'étend sur environ deux hauteurs d'écran de 844 px ; le second dossier et son bouton demandent du défilement.",
+        "Le rendu statique ne démontre ni gain de temps ni fonctionnement des notifications."
+      ]
+    },
+    {
+      "id": "SOP",
+      "reponses": {
+        "etat": "SIMULATION — Les unités prospect et dossier sont distinguées et les compteurs de risques ouvrent une piste de travail ; la portée du filtre Responsable du dossier doit rester compréhensible sur une liste de prospects.",
+        "actions": "SIMULATION — Je peux lire quel dossier recevra la préparation et qui l'exécutera avant de confirmer, ce qui aide une saisie pour un collègue.",
+        "qualification": "SIMULATION — Les responsabilités à la création sont plus explicites et aucune complétude artificielle n'est imposée ; la maquette ne prouve pas le contrôle de doublons ni la qualification effective.",
+        "rendez_vous": "SIMULATION — La note de préparation et les références du rendez-vous sont réunies ; les commandes affichées ne prouvent pas les modifications ou annulations.",
+        "oublis": "SIMULATION — Les listes et l'alerte du dossier non couvert sont utiles pour une revue administrative, sous réserve de vérifier l'exactitude des totaux.",
+        "preference": "SIMULATION — Je préfère les cinq propositions visuelles pour mon travail de préparation et de suivi, avec réserves sur les filtres et la longueur des formulaires."
+      },
+      "preferences": {
+        "UX01": "APRES",
+        "UX02": "APRES",
+        "UX03": "APRES",
+        "UX04": "APRES",
+        "UX05": "APRES"
+      },
+      "arguments_par_orientation": {
+        "UX01": "L'état vide distingue clairement mes tâches de celles de l'équipe et donne une entrée vers le travail partagé.",
+        "UX02": "La liste détaillée des deux dossiers sans action est exploitable, contrairement à un chiffre isolé ; la comparaison ne prouve pas que l'ancien Suivi en était dépourvu.",
+        "UX03": "Le récapitulatif limite l'ambiguïté lorsque je crée un dossier pour Léa sans attribuer le prospect.",
+        "UX04": "Le choix du contexte, le responsable de l'action et le résumé des dates correspondent à une saisie administrative vérifiable.",
+        "UX05": "La préparation associée au rendez-vous peut m'éviter de reconstruire le contexte à partir de plusieurs informations."
+      },
+      "reserves": [
+        "La création mobile comporte de la répétition entre l'aide, l'avertissement et le récapitulatif ; cela pourrait rallonger les saisies en série.",
+        "Imports et filtres avancés doivent rester accessibles ; cette revue ne teste pas leur conservation.",
+        "La catégorie Sans interaction récente n'a pas encore de seuil défini : aucun total ne doit être présenté comme validé."
+      ]
+    },
+    {
+      "id": "PAT",
+      "reponses": {
+        "etat": "SIMULATION — Je comprends que mes zéros ne décrivent pas le travail de l'équipe ; le tableau de risques est plus détaillé que ce dont j'ai besoin pour commencer.",
+        "actions": "SIMULATION — Je sais quel dossier l'action concerne, mais le formulaire de planification occupe une longue page pour une seule préparation ; je garde une réserve sur sa rapidité.",
+        "qualification": "SIMULATION — Responsable du dossier et responsable du prospect ne désignent plus la même chose pour moi dans la lecture ; cela ne prouve pas que je saurais qualifier ou changer un statut.",
+        "rendez_vous": "SIMULATION — La date et le bouton vers le bon jour de l'agenda sont immédiats à comprendre ; je voudrais essayer cette navigation avant d'en dépendre en tournée.",
+        "oublis": "SIMULATION — Le second dossier sans action est expliqué, mais sur mobile je dois descendre après le résumé de la première action pour le trouver.",
+        "preference": "SIMULATION — Je préfère UX01, UX03 et UX05 ; je réserve ma préférence sur UX02 et UX04, trop détaillées pour juger leur facilité sans essai."
+      },
+      "preferences": {
+        "UX01": "APRES",
+        "UX02": "RESERVE",
+        "UX03": "APRES",
+        "UX04": "RESERVE",
+        "UX05": "APRES"
+      },
+      "arguments_par_orientation": {
+        "UX01": "Les phrases sur la file vide et le bouton Équipe donnent un prochain geste simple.",
+        "UX02": "Plusieurs catégories et définitions font concurrence à ma question immédiate : quelle fiche dois-je traiter maintenant ?",
+        "UX03": "Les trois rôles et le récapitulatif rendent l'affectation lisible sans attribuer tout le dossier à la même personne.",
+        "UX04": "Le contexte est mieux expliqué, mais la somme de textes, sections et résumé peut ralentir ma saisie ; je ne préfère pas encore l'ensemble à l'ancien formulaire.",
+        "UX05": "Le rendez-vous confirmé et l'accès au 26 novembre sont plus concrets qu'une confirmation sans suite visible."
+      },
+      "reserves": [
+        "UX04-action atteint environ 1 310 px en bureau sur cette capture ; le bouton final est sous le premier écran de 1 000 px.",
+        "La création mobile conserve un bouton final très bas ; ne pas déduire que sa lecture est simple de sa seule absence de débordement.",
+        "Réduire des répétitions serait un ajustement possible ; supprimer la distinction prospect/dossier changerait l'orientation et nécessiterait un nouveau vote."
+      ]
+    },
+    {
+      "id": "NAT",
+      "reponses": {
+        "etat": "SIMULATION — L'explication de Mes actions me permet de reprendre mes repères sans supposer que toute l'équipe est inactive.",
+        "actions": "SIMULATION — Je comprends mieux pourquoi Association commerçante reste en alerte malgré la préparation déjà prévue ; le contexte doit rester visible quand je reviens plus tard.",
+        "qualification": "SIMULATION — Les rôles à la création sont expliqués sur place, mais les notions de potentiel et de statut restent hors de cette amélioration.",
+        "rendez_vous": "SIMULATION — La confirmation me dit quand et avec qui le rendez-vous est prévu ; les actions ultérieures doivent encore être testées pour vérifier que je retrouve mes repères.",
+        "oublis": "SIMULATION — La distinction entre dossiers couverts et non couverts aide à interpréter les alertes ; elle ne garantit pas que je verrai l'alerte située plus bas sur mobile.",
+        "preference": "SIMULATION — Je préfère UX01, UX03, UX04 et UX05 pour leurs explications locales ; je reste réservée sur la densité d'UX02."
+      },
+      "preferences": {
+        "UX01": "APRES",
+        "UX02": "RESERVE",
+        "UX03": "APRES",
+        "UX04": "APRES",
+        "UX05": "APRES"
+      },
+      "arguments_par_orientation": {
+        "UX01": "La phrase sur la file personnelle vide évite de devoir mémoriser le sens du périmètre.",
+        "UX02": "Les unités sont nommées mais je dois encore comprendre plusieurs catégories, les filtres et les seuils à choisir avant de savoir quoi traiter.",
+        "UX03": "Les aides locales et le récapitulatif évitent de réapprendre les deux responsabilités entre mes connexions.",
+        "UX04": "L'explication de l'alerte persistante et les dates nommées rendent la situation cohérente dans la lecture.",
+        "UX05": "Les boutons vers le rendez-vous et le bon jour fournissent des repères concrets pour retrouver la réservation."
+      },
+      "reserves": [
+        "Sur mobile, les explications sont lisibles mais longues ; leur efficacité demande un test avec retour après une période sans connexion.",
+        "Le menu mobile est visible sous forme de représentation ; aucun test d'ouverture, clavier ou lecteur d'écran n'a été réalisé.",
+        "La préférence pour UX04 porte sur la compréhension, sans preuve de gain de vitesse."
+      ]
+    }
+  ],
+  "ecarts_substantiels": [],
+  "ajustements": [
+    {
+      "id": "AT01",
+      "orientation": "UX02",
+      "nature": "Clarification visuelle, sans modification du vote ni règle métier",
+      "constat": "Le filtre supérieur Responsable du dossier cohabite avec des catégories de risque au niveau prospect.",
+      "proposition": "Préciser la portée des filtres selon la catégorie active dans les états représentés ; ne pas laisser supposer qu'un filtre de dossier définit automatiquement le propriétaire d'un prospect.",
+      "limite": "Toute nouvelle règle de filtrage transversal ou modification des populations requerrait un arbitrage métier ; aucun changement de ce type n'est proposé par cette revue."
+    },
+    {
+      "id": "AT02",
+      "orientation": "UX03/UX04",
+      "nature": "Ajustement de densité à envisager",
+      "constat": "Les captures mobiles sont longues ; UX03-creation présente plusieurs formulations proches de l'absence d'affectation, et UX04-suivi place l'alerte du second dossier sous la prochaine action.",
+      "proposition": "Tester une réduction des répétitions et des espacements en conservant les rôles, les deux dates, les résumés et l'explication de l'alerte.",
+      "limite": "Aucun échec utilisateur ni durée de tâche n'est mesuré ; suppression d'un choix, automatisation d'un rattachement ou nouvelle obligation demanderait un vote."
+    }
+  ]
+}

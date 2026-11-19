@@ -1,0 +1,152 @@
+{
+  "nature": "Revue visuelle simulée par IA de cinq profils experts, le 19 novembre 2026, sur rendus v1 examinés via view_image. Aucun entretien, test utilisateur ni test fonctionnel. Les préférences de présentation ne sont pas un nouveau vote sur les orientations et ne prouvent pas leur efficacité réelle.",
+  "images_examinees": [
+    "maquettes-apres/ux01-accueil-bureau.png",
+    "maquettes-apres/ux01-equipe-bureau.png",
+    "maquettes-apres/ux02-risques-bureau.png",
+    "maquettes-apres/ux02-risques-mobile.png",
+    "maquettes-apres/ux03-responsabilites-bureau.png",
+    "maquettes-apres/ux03-creation-bureau.png",
+    "maquettes-apres/ux04-action-bureau.png",
+    "maquettes-apres/ux04-suivi-bureau.png",
+    "maquettes-apres/ux05-confirmation-bureau.png",
+    "maquettes-apres/ux05-compte-rendu-bureau.png",
+    "captures-avant/01-accueil-bureau.png",
+    "captures-avant/09-creation-prospect-bureau.png",
+    "captures-avant/11-fiche-prospect-test-bureau.png",
+    "captures-avant/13-planifier-action-bureau.png",
+    "captures-avant/14-fiche-avec-action-bureau.png",
+    "captures-avant/04-agenda-bureau.png",
+    "captures-avant/15-creation-rendez-vous-bureau.png"
+  ],
+  "documents_consultes": ["manifest-maquettes.json", "../workshop/backlog-ux.md", "../workshop/votes-et-arbitrages.md", "revue-experts-preparation.md"],
+  "participants": [
+    {
+      "id": "E1",
+      "reponses": {
+        "etat": "OBSERVÉ SUR MAQUETTE : UX01 rassemble trois nombres et explique directement qu'une file personnelle vide ne décrit pas le portefeuille collectif ; c'est un repère plus explicite que les trois blocs vides de la capture 01.",
+        "actions": "OBSERVÉ SUR MAQUETTE : UX01-équipe place retards puis journée puis rendez-vous, avec noms et heures ; les liens des compteurs sont toutefois collés aux périodes, ce qui nuit à leur lecture.",
+        "qualification": "UX03 distingue visuellement relation, dossier et action, puis montre l'effet ciblé de l'affectation ; la scène de création doit être annoncée comme extrait, car elle ne représente pas les autres champs de la capture 09. Aucune amélioration globale de qualification P2 n'est évaluée.",
+        "rendez_vous": "UX05-confirmation propose deux accès lisibles au rendez-vous et au bon jour, puis une préparation contextualisée ; dans le compte rendu, l'enregistrement principal et les deux suites ont besoin d'un état indiquant ce qui est sauvegardé.",
+        "oublis": "UX04-suivi explique précisément pourquoi Association commerçante reste sans prochaine action alors qu'Animation centre-bourg en possède une ; cette explication résout visuellement l'ambiguïté de présentation de la capture 14, sans démontrer la règle réelle.",
+        "preference": "Je préfère les présentations après sur bureau pour leurs portées et récapitulatifs explicites, sous correction des détails de lecture et de sauvegarde ; la page mobile UX02 reste longue avant le premier dossier."
+      },
+      "preferences": {"UX01": "APRES", "UX02": "APRES", "UX03": "APRES", "UX04": "APRES", "UX05": "APRES"},
+      "arguments_par_orientation": {
+        "UX01": "Le résumé et le message de portée sont plus compacts et plus explicites que les trois zones vides avant ; séparer les liens des périodes dans la scène équipe.",
+        "UX02": "La liste active, sa définition et ses deux résultats sont réunis sur bureau ; ma préférence concerne la présentation proposée, car aucune vue globale avant stabilisée ne permet une comparaison fonctionnelle.",
+        "UX03": "Le récapitulatif montre prospect modifié, dossier et action conservés ; la scène création doit porter une mention d'extrait ciblé pour préserver le périmètre.",
+        "UX04": "Le choix prospect ou dossier puis le résumé d'enregistrement donnent un contexte absent de la capture d'action avant ; le second dossier reste clairement non couvert.",
+        "UX05": "Les accès vers la date précise et la note de préparation rendent la continuité proposée lisible ; préciser les étapes de sauvegarde du compte rendu sans ajouter de fonction."
+      },
+      "reserves": ["L'inspection d'images ne teste aucun lien ni enregistrement.", "Le premier dossier de UX02 mobile apparaît vers 1000 pixels de hauteur ; la densité devra être éprouvée sur téléphone."]
+    },
+    {
+      "id": "E2",
+      "reponses": {
+        "etat": "UX02 sépare six prospects actifs, quatre dossiers ouverts et deux dossiers sans prochaine action ; la note de non-addition des catégories protège la lecture, mais ces nombres fictifs ne prouvent pas l'exhaustivité du CRM.",
+        "actions": "UX04 conserve deux dates et un responsable d'action nommé ; le périmètre Animation centre-bourg figure avant et après la confirmation, ce qui évite de confondre relation globale et dossier.",
+        "qualification": "La qualification commerciale reste hors du changement illustré ; UX03 clarifie la responsabilité du dossier sans imposer un score, un contact complet ou l'identité des propriétaires.",
+        "rendez_vous": "Le compte rendu obligatoire pour réaliser est cohérent avec les repères de code disponibles ; la prochaine action est une proposition séparée et aucune création automatique n'est annoncée. La conservation d'une explication sans action doit préciser sa portée de sauvegarde.",
+        "oublis": "UX02 garde Délai à choisir pour inactivité et stagnation, ce qui évite d'ériger un seuil arbitraire en règle ; la définition action future ouverte et les exclusions des pauses sont encore des hypothèses métier, y compris pour les actions en retard.",
+        "preference": "Je préfère les présentations après à titre de conception, car unités, propriétaires et rattachements sont plus explicites ; la préférence ne vaut pas accord métier sur les définitions de risque."
+      },
+      "preferences": {"UX01": "APRES", "UX02": "APRES", "UX03": "APRES", "UX04": "APRES", "UX05": "APRES"},
+      "arguments_par_orientation": {
+        "UX01": "Les périodes et la portée précèdent la lecture des nombres, et les lignes détaillées donnent un contexte aux totaux fictifs.",
+        "UX02": "Les unités et recouvrements sont visibles ; maintenir la confirmation métier des règles avant toute implémentation, notamment dossier avec tâche déjà en retard.",
+        "UX03": "L'affectation ne propage pas le changement du prospect aux engagements ; aucune transmission globale de UX09 n'est ajoutée.",
+        "UX04": "Les deux dossiers du même prospect ne sont pas artificiellement couverts par une tâche unique.",
+        "UX05": "Réalisation, compte rendu et prochaine action restent distincts ; la recette des fonctions existantes demeure nécessaire."
+      },
+      "reserves": ["Les règles d'exclusion des pauses justifiées et de tâche future ouverte ne sont pas validées par cette maquette.", "Le manifeste présente correctement UX05 comme continuité non prouvée ; aucune absence de capacité n'est démontrée."]
+    },
+    {
+      "id": "E3",
+      "reponses": {
+        "etat": "Sur UX01-équipe, je repère deux retards, trois actions du jour et un rendez-vous sur la période annoncée ; l'accueil personnel explique immédiatement pourquoi ses zéros ne décrivent pas l'équipe.",
+        "actions": "La scène équipe donne les noms, heures et dossiers dans les lignes, et UX04 affiche qui prépare la démonstration ; la priorité d'action est plus facile à déduire visuellement, sans temps de réalisation mesuré.",
+        "qualification": "Le prospect non attribué reste visible alors que le premier dossier est porté par Léa ; le choix explicite de Camille indique que la relation et l'opportunité peuvent appartenir à deux collègues. Aucun gain sur le calcul de qualification n'est revendiqué.",
+        "rendez_vous": "La confirmation réunit date, responsable, prospect et préparation ; les liens vers le rendez-vous et la semaine sont prometteurs pour le travail commercial, mais le compte rendu doit éviter de laisser croire qu'une prochaine action est déjà enregistrée.",
+        "oublis": "La liste des dossiers sans action et l'alerte expliquée sur le deuxième dossier donnent un point de départ à la revue commerciale ; les seuils de stagnation restent à décider et le fonctionnement réel n'est pas testé.",
+        "preference": "Je préfère les cinq présentations après pour une revue sur ordinateur, avec réserve sur la longueur mobile et sur la lisibilité de la sauvegarde de la suite du rendez-vous."
+      },
+      "preferences": {"UX01": "APRES", "UX02": "APRES", "UX03": "APRES", "UX04": "APRES", "UX05": "APRES"},
+      "arguments_par_orientation": {
+        "UX01": "La journée et le collectif ont chacun une portée identifiable, sans imposer tous les indicateurs au commercial individuel.",
+        "UX02": "Deux dossiers à traiter sont présentés avec responsables et accès explicites ; les totaux fictifs ne sont pas un état réel du portefeuille.",
+        "UX03": "Le récapitulatif montre qui reprend la relation et qui garde les engagements, sans affectation automatique.",
+        "UX04": "Le résumé final montre exactement le dossier couvert et celui qui reste à suivre.",
+        "UX05": "Préparation et suite commerciale se lisent dans le contexte du même prospect ; la séparation des sauvegardes reste à préciser."
+      },
+      "reserves": ["Cette préférence ne suffit pas à autoriser dix commerciaux à utiliser le produit en autonomie.", "Les scènes utilisent des données fictives différentes des captures avant ; aucun gain de productivité chiffré ne peut en être tiré."]
+    },
+    {
+      "id": "E4",
+      "reponses": {
+        "etat": "Le message personnel vide de UX01 explique la portée en langage courant et propose un prochain geste ; la scène équipe doit séparer les liens des légendes de période pour une lecture moins compacte.",
+        "actions": "Les mots En retard, Préparation interne et Responsable de l'action apportent des repères textuels indépendants de la couleur ; les contrôles gris étant inactifs dans la maquette, leur ergonomie interactive n'est pas jugée.",
+        "qualification": "Qui suit qui rend la distinction des rôles concrète ; la scène de création manque d'un avertissement d'extrait, car un novice pourrait croire que nom et commune ne sont plus à saisir. Ce point concerne le cadrage UX03, pas une refonte UX06.",
+        "rendez_vous": "La date et l'heure de Paris sont visibles, les accès de confirmation sont explicites ; les deux blocs du compte rendu demandent une instruction courte sur l'ordre et sur les informations effectivement sauvegardées.",
+        "oublis": "Le bloc Pourquoi cette alerte reste-t-elle visible de UX04 aide à comprendre une alerte persistante ; sur UX02 mobile, les filtres et explications repoussent le premier dossier sous la première hauteur d'écran.",
+        "preference": "Je préfère après pour UX01, UX03, UX04 et UX05, sous les clarifications signalées ; je réserve mon choix UX02 tant que la densité mobile et la compréhension des catégories ne sont pas éprouvées."
+      },
+      "preferences": {"UX01": "APRES", "UX02": "RESERVE", "UX03": "APRES", "UX04": "APRES", "UX05": "APRES"},
+      "arguments_par_orientation": {
+        "UX01": "L'état vide explique ce qu'il signifie et offre un accès équipe, amélioration textuelle visible.",
+        "UX02": "Le bureau est lisible mais la page mobile fait environ 1590 pixels et le premier dossier commence vers 1000 pixels ; aucune capture mobile avant ne permet de comparer.",
+        "UX03": "Les phrases distinguent relation, dossier et action ; signaler que création est une zone ciblée avant toute préférence sur le formulaire complet.",
+        "UX04": "Le rattachement précède les dates, et le résumé annonce l'autre dossier non couvert.",
+        "UX05": "La confirmation est claire ; la sauvegarde du compte rendu et de l'explication sans tâche doit être rendue moins ambiguë."
+      },
+      "reserves": ["Ni contraste calculé, ni parcours clavier, ni lecteur d'écran, ni changement dynamique de focus n'ont été testés.", "La longueur mobile est un constat de composition sur image, pas un défaut confirmé de l'application."]
+    },
+    {
+      "id": "E5",
+      "reponses": {
+        "etat": "La comparaison UX01 repose sur deux états personnels vides relativement comparables ; UX02 oppose une fiche avant à une liste après, ce qui autorise une appréciation de présentation mais pas une preuve de meilleure couverture.",
+        "actions": "Les responsables, dates et rattachements sont visibles dans UX04 ; aucune mesure de compréhension ou de réduction des erreurs n'a été réalisée, malgré la cohérence apparente du scénario.",
+        "qualification": "UX03 répond à l'hypothèse de confusion O17, sans démontrer qu'elle était vécue ; annoncer l'extrait de création empêchera de transformer la disparition de champs hors cadrage en amélioration UX06 non autorisée.",
+        "rendez_vous": "La confirmation et le compte rendu illustrent la continuité souhaitée, tandis que l'avant est un agenda sur une autre semaine ; l'absence de parcours complet avant m'empêche d'attribuer une supériorité fonctionnelle au nouveau dessin.",
+        "oublis": "Les listes définies, les unités et la note de recouvrement rendent l'hypothèse de pilotage examinable ; la maquette ne prouve ni les règles de comptage ni l'absence d'angles morts, et aucune notification n'a été reçue pendant cette revue.",
+        "preference": "Je préfère visuellement après sur UX01, UX03 et UX04 ; je garde une réserve UX02 et UX05 parce que les écrans avant ne documentent pas les mêmes états. Cette réserve ne signifie pas préférence pour l'ancien produit."
+      },
+      "preferences": {"UX01": "APRES", "UX02": "RESERVE", "UX03": "APRES", "UX04": "APRES", "UX05": "RESERVE"},
+      "arguments_par_orientation": {
+        "UX01": "Les états vides sont comparables et l'explication personnelle/collective est directement visible.",
+        "UX02": "L'avant n'est pas une liste globale stabilisée ; la conception semble utile mais la comparaison ne permet pas une préférence suffisamment étayée sur ce parcours.",
+        "UX03": "La distinction des rôles et les effets d'une affectation sont plus explicitement décrits, sous réserve d'annoncer le cadrage partiel de création.",
+        "UX04": "Le lien d'une tâche à un dossier et l'alerte persistante sont illustrés dans un cas à deux dossiers ; cela étaye une préférence de lisibilité, pas une réussite utilisateur.",
+        "UX05": "Les images proposent une chaîne dont l'état actuel n'a pas été recetté ; impossible de conclure à une amélioration fonctionnelle ni à un défaut existant."
+      },
+      "reserves": ["Les cinq préférences expertes ne constituent pas les douze voix de l'atelier ni une validation par des personnes réelles.", "Aucun nouvel arbitrage métier substantiel n'est accepté par cette revue ; si une règle est figée ultérieurement, son périmètre et un nouveau vote doivent être examinés."]
+    }
+  ],
+  "ecarts_substantiels": [],
+  "ajustements": [
+    {"id": "AJ-E01", "orientation": "UX01", "image": "maquettes-apres/ux01-equipe-bureau.png", "nature": "OBSERVÉ SUR MAQUETTE", "constat": "Les liens Voir les actions et Voir le rendez-vous sont immédiatement accolés aux périodes dans les trois cartes.", "ajustement": "Séparer lien et période par une ligne ou un espacement explicite, puis vérifier le rendu bureau et mobile.", "importance": "Correction locale de lisibilité", "nouveau_vote_orientation": false, "statut": "Demandé sur v1 ; correction non examinée"},
+    {"id": "AJ-E02", "orientation": "UX03", "image": "maquettes-apres/ux03-creation-bureau.png", "nature": "OBSERVÉ SUR MAQUETTE puis HYPOTHÈSE de compréhension", "constat": "La scène montre uniquement le premier dossier et ses propriétaires, avec un bouton Enregistrer le prospect et son dossier ; les autres champs de création ne sont pas représentés et le caractère d'extrait n'est pas indiqué dans l'image.", "ajustement": "Ajouter près du titre une mention d'extrait centré sur les responsabilités et préciser dans le comparatif que les champs et règles existants sont conservés. Ne pas revendiquer l'allègement UX06 P2.", "importance": "Clarification nécessaire du périmètre", "nouveau_vote_orientation": false, "statut": "Demandé sur v1 ; correction non examinée"},
+    {"id": "AJ-E03", "orientation": "UX05", "image": "maquettes-apres/ux05-compte-rendu-bureau.png", "nature": "OBSERVÉ SUR MAQUETTE puis HYPOTHÈSE de confusion", "constat": "Le compte rendu et la suite sont proposés dans deux blocs simultanés, avec plusieurs boutons de sauvegarde et aucune indication d'état entre les deux ; on ne sait pas visuellement si le compte rendu est déjà conservé en choisissant une suite.", "ajustement": "Préciser l'ordre proposé et la portée de chaque sauvegarde : compte rendu d'abord, puis action distincte ou ajout d'une explication au compte rendu. Montrer ou décrire l'état attendu avant de poursuivre, sans nouvelle obligation métier.", "importance": "Clarification nécessaire de continuité", "nouveau_vote_orientation": false, "statut": "Demandé sur v1 ; correction non examinée"},
+    {"id": "AJ-E04", "orientation": "UX02", "image": "maquettes-apres/ux02-risques-mobile.png", "nature": "OBSERVÉ SUR MAQUETTE", "constat": "Le premier dossier apparaît vers 1000 pixels de hauteur après les filtres et les définitions ; la note de caractère hypothétique des règles est en bas de page.", "ajustement": "Conserver une réserve explicite de densité mobile et la confirmation métier des définitions. Si le cadrage est ajusté, privilégier un résumé visible des filtres avec détails consultables ; ne pas retirer silencieusement les définitions ni prétendre avoir validé l'usage mobile.", "importance": "Réserve à tester ; optimisation facultative de présentation", "nouveau_vote_orientation": false, "statut": "Réserve maintenue sur v1"}
+  ],
+  "conclusion_perimetre": "Aucun écart substantiel aux orientations P1 relevé dans les images examinées si les clarifications AJ-E02 et AJ-E03 restent locales. Les définitions UX02 sont présentées comme à confirmer ; elles ne doivent pas devenir une règle métier validée. Aucune fusion des responsables, aucune obligation globale de prochaine action et aucune refonte de qualification P2 ne sont adoptées. Les réserves de comparaison et de mobile subsistent.",
+  "suivi_corrections": {
+    "date": "2026-11-19",
+    "nature": "Nouvelle inspection visuelle via view_image des quatre rendus corrigés ; aucune exécution fonctionnelle. Les avis et préférences initiaux sont conservés, sans nouveau vote.",
+    "images_reexaminees": [
+      "maquettes-apres/ux01-equipe-bureau.png",
+      "maquettes-apres/ux03-creation-bureau.png",
+      "maquettes-apres/ux05-compte-rendu-bureau.png",
+      "maquettes-apres/ux02-risques-mobile.png"
+    ],
+    "constats": [
+      {"ajustement": "AJ-E01", "statut": "Correction visuelle confirmée sur bureau", "preuve": "Les trois liens des compteurs ont chacun une ligne distincte de la période, avec espacement lisible ; le collage signalé n'est plus présent dans le rendu examiné.", "limite": "La variante mobile UX01 n'a pas été réexaminée dans ce suivi."},
+      {"ajustement": "AJ-E02", "statut": "Clarification de périmètre confirmée", "preuve": "Un bandeau au-dessus du titre précise Extrait ciblé du formulaire et la conservation hors planche des champs nom, commune et coordonnées ; la scène ne se présente plus comme un formulaire complet allégé.", "limite": "Le maintien des champs dans l'application future reste une exigence, pas un test réalisé."},
+      {"ajustement": "AJ-E03", "statut": "Clarification de continuité confirmée", "preuve": "La planche annonce deux états successifs ; le second est marqué après confirmation de l'enregistrement, avec Compte rendu enregistré, rendez-vous réalisé et aucune prochaine action encore créée. Les deux choix sont nommés alternatives et le bouton de droite indique Ajouter cette explication au compte rendu.", "limite": "La présentation clarifie le scénario ; aucune sauvegarde réelle ni capacité d'ajout au compte rendu n'est validée."},
+      {"ajustement": "AJ-E04", "statut": "Réserve mobile maintenue ; portée des filtres clarifiée", "preuve": "Le texte sous Filtrer précise que les filtres concernent les dossiers, tandis que prospects, actions et rendez-vous portent sur toute l'équipe avec leurs propres filtres. Le premier dossier reste loin dans la page, vers 1100 pixels ; les définitions à confirmer avec le métier restent en pied.", "limite": "L'ajout explicatif accroît la longueur de la page ; la préférence mobile et la compréhension des portées doivent être éprouvées avec des utilisateurs réels."}
+    ],
+    "nouveau_vote_orientation_necessaire": false,
+    "justification": "Les changements sont des corrections locales de lisibilité et de cadrage à l'intérieur de UX01, UX02, UX03 et UX05. Aucune nouvelle règle métier, fusion de responsabilités, obligation de tâche ou orientation P2 n'est ajoutée. Les réserves sur les définitions UX02, la comparaison UX05 et l'usage mobile restent actives.",
+    "conclusion": "Les trois clarifications nécessaires AJ-E01 à AJ-E03 sont visibles dans les rendus réexaminés. Aucun écart substantiel nouveau constaté. Les préférences initiales restent inchangées ; aucune validation d'utilisabilité réelle n'est produite."
+  }
+}

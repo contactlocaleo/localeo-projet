@@ -1,0 +1,173 @@
+{
+  "nature": "Contrôle local des maquettes, pas du CRM",
+  "captures": [
+    {
+      "page": "ux01-accueil.html",
+      "format": "bureau",
+      "width": 1440,
+      "overflow": false,
+      "height": 1000
+    },
+    {
+      "page": "ux01-equipe.html",
+      "format": "bureau",
+      "width": 1440,
+      "overflow": false,
+      "height": 1254
+    },
+    {
+      "page": "ux01-etats.html",
+      "format": "bureau",
+      "width": 1440,
+      "overflow": false,
+      "height": 1000
+    },
+    {
+      "page": "ux02-prospects.html",
+      "format": "bureau",
+      "width": 1440,
+      "overflow": false,
+      "height": 1000
+    },
+    {
+      "page": "ux02-risques.html",
+      "format": "bureau",
+      "width": 1440,
+      "overflow": false,
+      "height": 1000
+    },
+    {
+      "page": "ux03-creation.html",
+      "format": "bureau",
+      "width": 1440,
+      "overflow": false,
+      "height": 1132
+    },
+    {
+      "page": "ux03-responsabilites.html",
+      "format": "bureau",
+      "width": 1440,
+      "overflow": false,
+      "height": 1237
+    },
+    {
+      "page": "ux04-action.html",
+      "format": "bureau",
+      "width": 1440,
+      "overflow": false,
+      "height": 1313
+    },
+    {
+      "page": "ux04-suivi.html",
+      "format": "bureau",
+      "width": 1440,
+      "overflow": false,
+      "height": 1265
+    },
+    {
+      "page": "ux05-agenda.html",
+      "format": "bureau",
+      "width": 1440,
+      "overflow": false,
+      "height": 1071
+    },
+    {
+      "page": "ux05-compte-rendu.html",
+      "format": "bureau",
+      "width": 1440,
+      "overflow": false,
+      "height": 1379
+    },
+    {
+      "page": "ux05-confirmation.html",
+      "format": "bureau",
+      "width": 1440,
+      "overflow": false,
+      "height": 1106
+    },
+    {
+      "page": "ux01-accueil.html",
+      "format": "mobile",
+      "width": 390,
+      "overflow": false,
+      "height": 1420
+    },
+    {
+      "page": "ux01-equipe.html",
+      "format": "mobile",
+      "width": 390,
+      "overflow": false,
+      "height": 1892
+    },
+    {
+      "page": "ux01-etats.html",
+      "format": "mobile",
+      "width": 390,
+      "overflow": false,
+      "height": 964
+    },
+    {
+      "page": "ux02-prospects.html",
+      "format": "mobile",
+      "width": 390,
+      "overflow": false,
+      "height": 1282
+    },
+    {
+      "page": "ux02-risques.html",
+      "format": "mobile",
+      "width": 390,
+      "overflow": false,
+      "height": 1667
+    },
+    {
+      "page": "ux03-creation.html",
+      "format": "mobile",
+      "width": 390,
+      "overflow": false,
+      "height": 1464
+    },
+    {
+      "page": "ux03-responsabilites.html",
+      "format": "mobile",
+      "width": 390,
+      "overflow": false,
+      "height": 1551
+    },
+    {
+      "page": "ux04-action.html",
+      "format": "mobile",
+      "width": 390,
+      "overflow": false,
+      "height": 1628
+    },
+    {
+      "page": "ux04-suivi.html",
+      "format": "mobile",
+      "width": 390,
+      "overflow": false,
+      "height": 1538
+    },
+    {
+      "page": "ux05-agenda.html",
+      "format": "mobile",
+      "width": 390,
+      "overflow": false,
+      "height": 1782
+    },
+    {
+      "page": "ux05-compte-rendu.html",
+      "format": "mobile",
+      "width": 390,
+      "overflow": false,
+      "height": 2012
+    },
+    {
+      "page": "ux05-confirmation.html",
+      "format": "mobile",
+      "width": 390,
+      "overflow": false,
+      "height": 1549
+    }
+  ]
+}

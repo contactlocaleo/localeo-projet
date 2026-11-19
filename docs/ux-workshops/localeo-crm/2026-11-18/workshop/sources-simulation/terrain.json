@@ -1,0 +1,366 @@
+{
+  "nature": "SIMULATION de personas fictifs par IA ; avis initiaux, sans utilisateur réel, sans mesure de comportement et sans vote à ce stade.",
+  "participants": [
+    {
+      "id": "DEL",
+      "nom": "Delphine",
+      "profil": "52 ans, commerciale expérimentée auprès des communes et associations ; veut des relances, rendez-vous et opportunités lisibles.",
+      "avis": {
+        "A": "SIMULATION — Les trois périodes d'Aujourd'hui me donnent un bon point de départ, mais les compteurs personnels vides ne suffisent pas à me dire si mon portefeuille est réellement suivi (O01–O02).",
+        "B": "SIMULATION — Je veux retrouver les dossiers sans suite et les opportunités qui stagnent avec leur contexte, sans confondre absence d'action du dossier et tâche déjà planifiée sur le prospect (O09 ; couverture non vérifiée pour la stagnation).",
+        "C": "SIMULATION — Les contacts et l'historique réunis dans la fiche sont utiles pour préparer un appel ; je dois comprendre quel interlocuteur et quel dossier concernent mes notes avant d'ajouter des champs obligatoires (O06–O07).",
+        "D": "SIMULATION — Les créneaux disponibles et la conservation des saisies après refus sont rassurants ; avant d'en dépendre en tournée, je veux vérifier où retrouver le rendez-vous, son compte rendu et sa prochaine étape (O12, parcours non vérifiés).",
+        "E": "SIMULATION — Séparer le moment de l'action et celui du rappel correspond à mon besoin de préparation, à condition de voir clairement à quel dossier l'action répond (O08–O09).",
+        "F": "SIMULATION — Deux responsables peuvent être légitimes pour un même prospect, mais le relais doit indiquer qui reprend le dossier et qui maintient la relation globale (O05, hypothèse de compréhension).",
+        "G": "SIMULATION — Je conserverais les détails commerciaux dans la fiche, avec un accès direct à la prochaine action et au rendez-vous, plutôt que de multiplier les écrans à consulter avant chaque échange (O06, O16)."
+      },
+      "reponses_debat": {
+        "A": "SIMULATION — Je rejoins Julie sur la légèreté de la page personnelle ; le besoin de Marc peut être satisfait par une portée Équipe visible sans imposer ses chiffres à tout le monde.",
+        "B": "SIMULATION — La réserve d'E5 est juste : je soutiens des listes de risques seulement après vérification des vues existantes, avec les raisons d'apparition de chaque dossier.",
+        "C": "SIMULATION — Je rejoins Sophie sur la saisie progressive, mais un dossier rapidement créé doit garder un contexte commercial suffisant pour le prochain appel.",
+        "D": "SIMULATION — E2 rappelle que le compte rendu existe dans le code ; je demande surtout une continuité vérifiée, sans créer un second circuit de rendez-vous.",
+        "E": "SIMULATION — Je partage la prévention des oublis de Thomas, mais une tâche obligatoire sur un dossier clos produirait des faux engagements et du bruit.",
+        "F": "SIMULATION — La distribution rapide souhaitée par un manager ne doit pas ignorer une relation déjà établie avec une commune ; les responsabilités distinctes doivent rester visibles.",
+        "G": "SIMULATION — Patrick veut peu d'actions visibles ; j'accepte cette hiérarchie si les contacts, l'historique et les détails de préparation restent accessibles sans les ressaisir."
+      },
+      "votes": [
+        {
+          "orientation": "UX01",
+          "vote": "POUR",
+          "argument": "Le résumé compact respecte mes priorités quotidiennes tout en évitant de confondre ma file et l'équipe."
+        },
+        {
+          "orientation": "UX02",
+          "vote": "POUR",
+          "argument": "Les listes définies et reliées aux dossiers aideraient ma revue hebdomadaire ; la vérification préalable de l'existant évite un écran supplémentaire inutile."
+        },
+        {
+          "orientation": "UX03",
+          "vote": "POUR",
+          "argument": "Je dois savoir qui maintient la relation et qui suit une opportunité avant de rappeler une commune."
+        },
+        {
+          "orientation": "UX04",
+          "vote": "POUR",
+          "argument": "Le rattachement explicite empêche de croire qu'une tâche générale couvre tous les dossiers du prospect."
+        },
+        {
+          "orientation": "UX05",
+          "vote": "POUR",
+          "argument": "Retrouver le rendez-vous et sa suite est indispensable à ma préparation ; je soutiens la recette puis seulement les raccords manquants."
+        },
+        {
+          "orientation": "UX06",
+          "vote": "POUR",
+          "argument": "La création progressive garde les règles utiles tout en permettant de consigner une piste avant d'en connaître tous les détails."
+        },
+        {
+          "orientation": "UX07",
+          "vote": "POUR",
+          "argument": "Un état vide lisible évite de prendre une fiche neuve pour une fiche défectueuse, à faible effort."
+        },
+        {
+          "orientation": "UX08",
+          "vote": "ABSTENTION",
+          "argument": "Je ne peux pas juger la valeur de cet effort M sans constater une perte de contexte ; la recette reste utile."
+        },
+        {
+          "orientation": "UX09",
+          "vote": "POUR",
+          "argument": "Un dossier transmis avec ses engagements encore portés par l'ancien titulaire permet une reprise commerciale fiable."
+        },
+        {
+          "orientation": "UX10",
+          "vote": "POUR",
+          "argument": "Distinguer potentiel, priorité et étape m'aide à expliquer mes choix de suivi à mes collègues."
+        },
+        {
+          "orientation": "UX11",
+          "vote": "CONTRE",
+          "argument": "Une tâche imposée même après gain, perte ou pause produirait de fausses relances au lieu de prévenir les oublis."
+        },
+        {
+          "orientation": "UX12",
+          "vote": "CONTRE",
+          "argument": "La rotation automatique ignore mes relations existantes et les territoires, que l'équilibre en nombre ne remplace pas."
+        },
+        {
+          "orientation": "UX13",
+          "vote": "CONTRE",
+          "argument": "Je dois pouvoir noter une piste communale avant de connaître le bon contact et toutes ses coordonnées."
+        }
+      ]
+    },
+    {
+      "id": "SOP",
+      "nom": "Sophie",
+      "profil": "39 ans, assistante commerciale ; saisit les données, prépare les rendez-vous et assure le suivi administratif.",
+      "avis": {
+        "A": "SIMULATION — La portée Mes actions ou Équipe doit rester évidente pour que je ne prenne pas une liste personnelle vide pour une absence de travail collectif (O01–O02).",
+        "B": "SIMULATION — J'ai besoin d'une liste exploitable des fiches à compléter et des responsables manquants, car un total seul ne m'aide pas à corriger les dossiers ; cette couverture globale reste à vérifier.",
+        "C": "SIMULATION — Les coordonnées facultatives et le contact créé avec un seul identifiant permettent de saisir tôt ; je préfère une complétude progressive et une vérification des ressemblances à davantage de champs imposés (O04–O07, doublons déduits du code).",
+        "D": "SIMULATION — Pour préparer les dossiers de l'équipe, je veux retrouver le prospect, les notes et le responsable depuis le rendez-vous ; l'existence locale des commandes de modification ne suffit pas à garantir ce parcours.",
+        "E": "SIMULATION — Je veux distinguer une tâche administrative interne d'une relance au prospect et vérifier la date du rappel avant d'enregistrer, ce que le formulaire commence déjà à permettre (O08).",
+        "F": "SIMULATION — Une transmission doit préciser le propriétaire du prospect, celui du dossier et les actions restantes, sans affecter automatiquement toutes les tâches à la même personne (O05, O09).",
+        "G": "SIMULATION — Je garderais les imports et les filtres avancés accessibles pour le travail en série, même si l'accueil quotidien devient plus simple ; masquer ces outils pour tous me ferait perdre du temps (O03, O15)."
+      },
+      "reponses_debat": {
+        "A": "SIMULATION — Le résumé voulu par Marc m'aide à préparer l'équipe, mais je rejoins E4 : chaque total doit préciser sa portée et ouvrir la liste à traiter.",
+        "B": "SIMULATION — Patrick préfère peu de listes ; je garderais une entrée simple puis des filtres utiles aux travaux de complétude, sans les imposer à son quotidien.",
+        "C": "SIMULATION — Le propriétaire par défaut évoqué par E3 doit rester explicite : lors d'une saisie pour un collègue, le créateur n'est pas le commercial responsable.",
+        "D": "SIMULATION — Je rejoins Delphine sur la préparation et E5 sur les preuves : une recette de modification et de compte rendu est plus utile qu'un nouveau module supposé manquant.",
+        "E": "SIMULATION — Thomas veut éviter les oublis ; je préfère des listes d'exceptions définies à un blocage qui m'obligerait à créer une tâche factice sur un dossier clos.",
+        "F": "SIMULATION — L'affectation rapide est séduisante pour un lot, mais la demande de Marc de distinguer prospect, dossier et exécutant doit précéder toute automatisation.",
+        "G": "SIMULATION — Je soutiens l'accueil simple de Julie, à condition de conserver imports et filtres accessibles pour mon travail en série."
+      },
+      "votes": [
+        {
+          "orientation": "UX01",
+          "vote": "POUR",
+          "argument": "La portée explicite et les totaux ouvrant leurs listes m'aident à préparer le travail collectif sans interpréter des zéros personnels."
+        },
+        {
+          "orientation": "UX02",
+          "vote": "POUR",
+          "argument": "Des listes contrôlées de non attribués et de dossiers sans action donnent un travail de complétude concret, après vérification de l'existant."
+        },
+        {
+          "orientation": "UX03",
+          "vote": "POUR",
+          "argument": "La personne qui saisit n'est pas nécessairement celle qui suit le prospect ; les trois rôles doivent être nommés."
+        },
+        {
+          "orientation": "UX04",
+          "vote": "POUR",
+          "argument": "Le dossier cible visible évite de planifier une préparation au mauvais niveau lors d'une saisie pour autrui."
+        },
+        {
+          "orientation": "UX05",
+          "vote": "POUR",
+          "argument": "La continuité vérifiée entre fiche, rendez-vous et compte rendu est nécessaire pour préparer puis reprendre le suivi administratif."
+        },
+        {
+          "orientation": "UX06",
+          "vote": "POUR",
+          "argument": "Un minimum requis clair et les compléments progressifs accélèrent ma saisie sans supprimer les règles de qualité."
+        },
+        {
+          "orientation": "UX07",
+          "vote": "POUR",
+          "argument": "Remplacer null par un état vide clair évite une demande de support inutile au moment de créer une fiche."
+        },
+        {
+          "orientation": "UX08",
+          "vote": "POUR",
+          "argument": "La conservation des résultats et du focus est particulièrement utile pour traiter une série de dossiers, avec recette préalable."
+        },
+        {
+          "orientation": "UX09",
+          "vote": "POUR",
+          "argument": "Le récapitulatif des engagements qui restent à l'ancien titulaire évite une transmission administrative incomplète."
+        },
+        {
+          "orientation": "UX10",
+          "vote": "POUR",
+          "argument": "Des explications locales me permettent de saisir la qualification sans confondre absence de calcul et faible potentiel."
+        },
+        {
+          "orientation": "UX11",
+          "vote": "CONTRE",
+          "argument": "Je ne veux pas fabriquer une échéance pour pouvoir sortir d'un dossier déjà clos."
+        },
+        {
+          "orientation": "UX12",
+          "vote": "ABSTENTION",
+          "argument": "Une distribution de lots pourrait réduire mon travail manuel, mais le tour de rôle sans validation ne couvre pas mes critères de répartition ; je ne soutiens pas cette version."
+        },
+        {
+          "orientation": "UX13",
+          "vote": "CONTRE",
+          "argument": "Les quatre exigences bloqueraient la saisie initiale et inciteraient à compléter avec des données incertaines."
+        }
+      ]
+    },
+    {
+      "id": "PAT",
+      "nom": "Patrick",
+      "profil": "61 ans, commercial terrain expérimenté, peu à l'aise avec les CRM ; recherche des formulaires simples et des actions explicites.",
+      "avis": {
+        "A": "SIMULATION — Les mots En retard, Aujourd'hui et À venir sont immédiatement utiles ; lorsque tout est vide, un prochain geste explicite m'aiderait davantage qu'une série de zéros (O01–O02, hypothèse).",
+        "B": "SIMULATION — Je préfère quelques listes directement actionnables à un tableau de nombreux indicateurs ; je veux comprendre pourquoi une fiche apparaît avant de la traiter (O16, couverture partielle).",
+        "C": "SIMULATION — Je veux enregistrer les informations connues puis compléter la fiche ; le champ Responsable de la création doit dire clairement s'il concerne le prospect ou le dossier (O04–O05, O17).",
+        "D": "SIMULATION — Choisir un créneau proposé me convient ; après validation, je veux une confirmation avec la date et un accès évident au rendez-vous, dont la continuité vers l'agenda reste non vérifiée (O12).",
+        "E": "SIMULATION — Les deux dates peuvent être utiles mais demandent des libellés et un résumé très clairs, faute de quoi je pourrais croire que le rappel et l'action sont le même événement (O08, hypothèse).",
+        "F": "SIMULATION — Je veux identifier rapidement la personne à contacter sur un dossier partagé ; un changement de responsable devrait m'expliquer ce qui change pour mes tâches (O05, affectation non testée).",
+        "G": "SIMULATION — Je souhaite retrouver quelques actions courantes au même endroit, sans supprimer les détails utiles aux collègues ; le texte brut null devrait devenir une phrase compréhensible (O06, O18)."
+      },
+      "reponses_debat": {
+        "A": "SIMULATION — Je rejoins Julie et E4 : quelques urgences expliquées me suffisent, avec un accès au collectif sans transformer l'accueil en tableau de chiffres.",
+        "B": "SIMULATION — Les risques décrits par Thomas sont utiles, mais huit familles de listes peuvent dépasser mon besoin immédiat ; je veux d'abord comprendre et traiter mes propres actions.",
+        "C": "SIMULATION — Sophie veut garder la saisie progressive ; j'y adhère, car un responsable explicitement nommé m'aide davantage qu'un formulaire demandant toutes les coordonnées.",
+        "D": "SIMULATION — Je partage la demande d'E1 d'un accès direct après confirmation ; je ne demande pas de remplacer les commandes existantes avant de les avoir essayées.",
+        "E": "SIMULATION — Le besoin de prévention d'E3 ne justifie pas de bloquer ma sortie ; une explication du rappel et du dossier concerné est plus utile qu'une tâche imposée.",
+        "F": "SIMULATION — E2 défend des responsabilités distinctes ; cela me convient si les libellés me permettent de trouver rapidement la bonne personne, sans mécanisme automatique invisible.",
+        "G": "SIMULATION — Sophie a besoin des outils avancés ; je ne souhaite pas les supprimer, seulement garder mes actions courantes au premier niveau."
+      },
+      "votes": [
+        {
+          "orientation": "UX01",
+          "vote": "POUR",
+          "argument": "Le résumé reste compact et explique les états vides, ce qui m'aide à commencer sans interpréter plusieurs écrans."
+        },
+        {
+          "orientation": "UX02",
+          "vote": "ABSTENTION",
+          "argument": "Je comprends le besoin de l'équipe, mais je ne sais pas si l'effort L en P1 m'aidera plus que la clarification des actions déjà présentes."
+        },
+        {
+          "orientation": "UX03",
+          "vote": "POUR",
+          "argument": "Le mot Responsable accompagné du bon objet m'évite de croire que le prospect est attribué alors que seul son dossier l'est."
+        },
+        {
+          "orientation": "UX04",
+          "vote": "POUR",
+          "argument": "Voir le contexte avant confirmation m'aide à planifier une seule action au bon endroit."
+        },
+        {
+          "orientation": "UX05",
+          "vote": "POUR",
+          "argument": "Après avoir choisi un créneau, je veux retrouver directement mon rendez-vous ; la recette permettra d'abord de vérifier ce qui fonctionne déjà."
+        },
+        {
+          "orientation": "UX06",
+          "vote": "POUR",
+          "argument": "Repérer immédiatement le minimum à saisir rend la création moins intimidante sans supprimer les champs utiles."
+        },
+        {
+          "orientation": "UX07",
+          "vote": "POUR",
+          "argument": "Je comprends Aucun échange consigné ; null ne me dit pas si j'ai fait une erreur."
+        },
+        {
+          "orientation": "UX08",
+          "vote": "CONTRE",
+          "argument": "Je préfère différer cet effort M tant qu'aucune perte de contexte n'est montrée et concentrer le travail sur les formulaires et rendez-vous."
+        },
+        {
+          "orientation": "UX09",
+          "vote": "ABSTENTION",
+          "argument": "Le récapitulatif semble utile à une reprise de portefeuille, mais je ne peux pas mesurer sa priorité P2 sans essayer une transmission."
+        },
+        {
+          "orientation": "UX10",
+          "vote": "POUR",
+          "argument": "Des exemples courts sur les statuts m'évitent de solliciter un collègue à chaque utilisation."
+        },
+        {
+          "orientation": "UX11",
+          "vote": "CONTRE",
+          "argument": "Une obligation de date même sur un dossier clos me bloquerait et me pousserait à saisir une tâche sans sens."
+        },
+        {
+          "orientation": "UX12",
+          "vote": "CONTRE",
+          "argument": "Je ne veux pas découvrir qu'un prospect m'a été attribué sans tenir compte de ma tournée ni de ma disponibilité."
+        },
+        {
+          "orientation": "UX13",
+          "vote": "CONTRE",
+          "argument": "Je dois pouvoir enregistrer ce que je connais immédiatement et compléter après un premier échange."
+        }
+      ]
+    },
+    {
+      "id": "NAT",
+      "nom": "Nathalie",
+      "profil": "54 ans, utilisatrice occasionnelle ; souhaite retrouver ses repères sans mémoriser les règles du CRM.",
+      "avis": {
+        "A": "SIMULATION — Après plusieurs jours sans connexion, je veux savoir quelle portée est active et ce que signifient les listes vides avant de conclure que je n'ai rien à faire (O01–O02).",
+        "B": "SIMULATION — Des intitulés simples et une explication des alertes me sont nécessaires, notamment quand le prospect a une prochaine action et que son dossier affiche encore Sans prochaine action (O09).",
+        "C": "SIMULATION — La recherche et la fiche regroupée constituent de bons repères ; je veux des aides proches des statuts, du potentiel et des responsabilités pour ne pas devoir réapprendre ces notions (O03, O05–O06, O13).",
+        "D": "SIMULATION — Je souhaite retrouver la réservation depuis la fiche et l'agenda et reconnaître facilement un rendez-vous annulé ; l'édition et le compte rendu doivent encore être essayés avant de juger leur facilité (O11–O12).",
+        "E": "SIMULATION — Les badges En retard et À venir m'aident à trier, mais je veux voir clairement si une action m'appartient et ce qui se passera à la date du rappel (O08, O10 ; réception non testée).",
+        "F": "SIMULATION — Une distinction explicite entre responsable du prospect et du dossier m'éviterait de demander aux collègues qui doit agir ; la présence de deux rôles n'est pas en elle-même un défaut (O05, O17).",
+        "G": "SIMULATION — Je préfère des libellés cohérents et des explications courtes sur l'écran à un parcours d'accueil obligatoire à chaque retour ; les fonctionnalités secondaires peuvent rester dans une navigation stable (O16, hypothèse)."
+      },
+      "reponses_debat": {
+        "A": "SIMULATION — Je rejoins E4 sur les états vides ; le résumé réclamé par E3 doit rester dans la portée choisie pour ne pas me faire croire que les urgences de tous sont les miennes.",
+        "B": "SIMULATION — Thomas demande une couverture exhaustive ; je comprends son rôle, mais je préfère ne pas faire de toutes les listes de risques une priorité de mon parcours occasionnel.",
+        "C": "SIMULATION — Je rejoins Julie sur le minimum de saisie, avec les explications de rôles proposées par E1 pour ne pas devoir retenir les règles entre deux visites.",
+        "D": "SIMULATION — E5 distingue correctement fonctionnalité et preuve ; avant de réclamer un nouveau parcours, je veux essayer les commandes existantes avec des repères cohérents.",
+        "E": "SIMULATION — Patrick souligne le risque de confusion des dates ; je garderais les deux dates d'E2 avec une explication locale, sans ajouter de notification systématique.",
+        "F": "SIMULATION — La rapidité de distribution ne compense pas une responsabilité incomprise ; je soutiens E4 sur des noms de rôle stables et une confirmation explicite.",
+        "G": "SIMULATION — Sophie peut conserver ses outils avancés et Julie ses raccourcis, tandis que mes repères principaux restent stables avec des états vides compréhensibles."
+      },
+      "votes": [
+        {
+          "orientation": "UX01",
+          "vote": "POUR",
+          "argument": "Une portée explicite et un état vide expliqué me permettent de reprendre le CRM après une période d'absence."
+        },
+        {
+          "orientation": "UX02",
+          "vote": "CONTRE",
+          "argument": "Je ne soutiens pas encore l'effort L en P1 pour toutes ces listes, alors que les vues actuelles n'ont pas été vérifiées ; je priorise les repères essentiels."
+        },
+        {
+          "orientation": "UX03",
+          "vote": "POUR",
+          "argument": "Les trois rôles expliqués sur place m'évitent de réapprendre leur différence à chaque retour."
+        },
+        {
+          "orientation": "UX04",
+          "vote": "POUR",
+          "argument": "L'explication d'une alerte persistante m'aide à comprendre pourquoi une action de prospect ne couvre pas chaque dossier."
+        },
+        {
+          "orientation": "UX05",
+          "vote": "POUR",
+          "argument": "La continuité testée entre confirmation, agenda et fiche m'évite de mémoriser des chemins différents."
+        },
+        {
+          "orientation": "UX06",
+          "vote": "POUR",
+          "argument": "Des compléments progressifs et un récapitulatif clair me permettent de vérifier ce que je crée."
+        },
+        {
+          "orientation": "UX07",
+          "vote": "POUR",
+          "argument": "Un état vide en langage courant est nécessaire pour distinguer absence d'historique et anomalie."
+        },
+        {
+          "orientation": "UX08",
+          "vote": "ABSTENTION",
+          "argument": "La conservation semble souhaitable, mais je réserve mon avis sur cette priorité et cet effort tant que le comportement actuel n'est pas observé."
+        },
+        {
+          "orientation": "UX09",
+          "vote": "POUR",
+          "argument": "Le récapitulatif de transmission m'explique qui doit agir après un changement, même si je participe rarement au dossier."
+        },
+        {
+          "orientation": "UX10",
+          "vote": "POUR",
+          "argument": "Les exemples au point d'usage sont plus adaptés à mes retours occasionnels qu'un apprentissage initial à mémoriser."
+        },
+        {
+          "orientation": "UX11",
+          "vote": "CONTRE",
+          "argument": "Je pourrais croire devoir relancer un dossier clos simplement pour quitter son écran."
+        },
+        {
+          "orientation": "UX12",
+          "vote": "CONTRE",
+          "argument": "Une attribution sans validation risque de me laisser des prospects dont je ne comprends pas la responsabilité."
+        },
+        {
+          "orientation": "UX13",
+          "vote": "CONTRE",
+          "argument": "Ne pas connaître un téléphone ne doit pas m'empêcher de conserver une piste utile."
+        }
+      ]
+    }
+  ],
+  "phase": "Avis initiaux conservés, confrontation simulée puis votes sur orientations v1 figées ; aucune validation utilisateur réelle."
+}

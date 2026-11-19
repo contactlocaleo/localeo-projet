@@ -3,6 +3,7 @@
 ## Références : socle E71-EVOL-03 et extensions E71-EVOL-04/05/06/07/08/09/10
 
 - État produit : **En cours**, selon la [roadmap commune](../README.md).
+- **19 novembre 2026 — E71-CADRAGE-AUDIT-20261118 :** [analyse et cadrage des suites de l’audit CRM](#audit-crm-20261118). Cinq orientations validées et réalisées localement, seuils UX02 à 30/60 jours ; [conception](../../specifications/epic-71-crm-prospection/workshop-crm-20261118.md) et [preuves](../../specifications/epic-71-crm-prospection/verification-livraison.md#workshop-crm-20261118).
 - Cadrage initial : 2 octobre 2026 ; décisions/imports E71-EVOL-01 et E71-EVOL-02 du 9 octobre ; **recadrage du 3 novembre 2026** à la demande utilisateur.
 - [Spécification canonique V1.6](../../specifications/epic-71-crm-prospection/README.md), [format d'import et gabarit](../../specifications/epic-71-crm-prospection/import-carte.md).
 - **E71-EVOL-10, 12 novembre 2026 :** [audit UX et productivité](../../audits/backend/localeo-crm-ux-productivite-2026-11-12.md), [six lots spécifiés et implémentés](../../specifications/epic-71-crm-prospection/ux-productivite.md), preuves locales et réserves dans le bilan. CA-78 à 84 ajoutés : **84 identifiants, 83 actifs, CA-24 reporté**. Les écarts aux critères existants restent des corrections, pas des règles remplacées.
@@ -297,6 +298,142 @@ CA-01 à 59 restent stables ; total courant **61 IDs, 60 actifs, 1 reporté**.
 
 Les preuves sont prévues dans la spécification ; aucun test de ce nouveau rendu
 n’est annoncé exécuté. Les preuves historiques ne valident pas ces nouveaux libellés.
+
+<a id="audit-crm-20261118"></a>
+
+## Cadrage du 19 novembre 2026 — suites de l’audit CRM du 18 novembre
+
+**Identifiant : E71-CADRAGE-AUDIT-20261118**, recherché sans occurrence préalable
+dans les backlogs et spécifications communs et applicatifs. Ce cadrage prolonge
+l’EPIC 71 **En cours** : mêmes acteurs, PWA, domaine et parcours. Il ne crée pas
+une epic concurrente et ne modifie ni son état ni les compteurs de la roadmap.
+
+### Sources et portée des décisions
+
+- [Archive CRM du 18 novembre](../../ux-workshops/localeo-crm/2026-11-18/README.md), poursuivie le 19 novembre.
+- [Observations O01–O18](../../ux-workshops/localeo-crm/2026-11-18/observations/observations-factuelles.md), [limites](../../ux-workshops/localeo-crm/2026-11-18/observations/limitations.md) et [couverture du pilotage](../../ux-workshops/localeo-crm/2026-11-18/observations/couverture-pilotage-commercial.md).
+- [Treize orientations et critères proposés](../../ux-workshops/localeo-crm/2026-11-18/workshop/backlog-ux.md), [votes simulés](../../ux-workshops/localeo-crm/2026-11-18/workshop/votes-et-arbitrages.md) et [réserves visuelles](../../ux-workshops/localeo-crm/2026-11-18/visuels/arbitrages-complementaires.md).
+- [Registre utilisateur](../../ux-workshops/localeo-crm/2026-11-18/validation/decisions.md) : **UX01–UX05 VALIDÉES le 19 novembre 2026**, sur réponse explicite « Valider UX01–UX05, seuils UX02 à définir ». La validation ne vaut ni recette ni réalisation.
+- [Risques R01–R08](../../ux-workshops/localeo-crm/2026-11-18/validation/risques-non-resolus.md) et [backlog potentiel](../../ux-workshops/localeo-crm/2026-11-18/validation/backlog-implementation-potentiel.md).
+- Réutiliser la [conception E71-EVOL-10](../../specifications/epic-71-crm-prospection/ux-productivite.md), ses correctifs du 17 novembre et la [spécification RDV E71-EVOL-08](../../specifications/epic-71-crm-prospection/rendez-vous.md).
+
+**Conclusion d’arbitrage :** dix orientations ont été adoptées en simulation
+(cinq P1, cinq P2), trois rejetées en simulation. Les cinq P1 UX01–UX05 sont désormais
+validées par l’utilisateur ; UX06–UX10 ne reçoivent pas de validation nouvelle. Les exigences E71 antérieures restent
+applicables : leurs écarts avérés relèvent de corrections ; leurs zones non
+recettées demandent une preuve avant de conclure à une anomalie. Aucun P0,
+perte d’action ou panne mobile du produit n’est démontré par cet audit.
+
+### Problème, acteurs et résultat attendu
+
+Commerciaux internes et responsables d’équipe habilités doivent comprendre qui
+porte la relation, chaque dossier et chaque action, retrouver les engagements et
+interpréter leur portefeuille. L’audit observe des présentations ambiguës et un
+état vide défectueux ; il laisse plusieurs parcours incomplets en recette.
+
+Exemple : une action créée pour le prospect apparaît comme sa prochaine action,
+alors qu’un dossier reste « Sans prochaine action ». Ce résultat peut être
+correct : une action générale ne couvre pas automatiquement un dossier. La
+cible proposée explicite le rattachement et conserve les responsabilités
+distinctes. Autre exemple confirmé : une fiche sans échange affiche `null` ;
+la correction doit montrer un état vide compréhensible.
+
+### Classement des suites et recouvrements
+
+Les priorités ci-dessous reprennent l’atelier ; elles ne constituent pas un
+engagement de livraison. Les maquettes statiques illustrent les propositions.
+
+| Référence | Nature et couverture existante | Suite à instruire |
+| --- | --- | --- |
+| UX01 — résumé quotidien/équipe, P1 | Présentation proposée ; portée personnelle et compteurs déjà exigés par CA-06/22 et EVOL-10 L2 | Recetter les totaux/liens existants ; résumé compact validé, à spécifier |
+| UX02 — listes de risques, P1 | Manques hypothétiques ; dossiers sans action et distinction prospect/dossier déjà couverts par CA-07/22 | Inventorier les filtres réels avant ajout ; orientation validée ; populations à préciser et seuils à arbitrer. Sept réserves visuelles sur douze : maquette à éprouver |
+| UX03 — responsables, P1 | Responsables distincts observés O04–O05, confusion supposée O17 ; aucune attribution erronée démontrée | Clarification validée des formulaires et confirmations ; aucune copie implicite du responsable du dossier vers le prospect |
+| UX04 — rattachement d’action, P1 | O08–O09 ; distinction prospect/dossier conforme au modèle, CA-05/22 et EVOL-10 L2 à préserver | Explication et choix explicite de contexte validés ; ne pas supprimer l’alerte d’un dossier à cause d’une action générale |
+| UX05 — continuité RDV, P1 | CA-62 à 73 et CA-80 couvrent déjà agenda, report, réalisation et suite | Recetter le cycle existant et corriger les écarts reproduits ; raccords UX validés dans le périmètre UX05, à spécifier après recette, aucune nouvelle mécanique RDV par défaut |
+| UX06 — création progressive, P2 | Allègement proposé ; saisie minimale et rapprochement déjà couverts par CA-01/10 | Candidat ultérieur, hors lot prioritaire ; aucun nouveau champ obligatoire |
+| UX07 — `null` dans la dernière interaction, P2 | **Défaut de présentation observé O18**, dans la section de fiche couverte par CA-78/EVOL-10 L2 | Correction à préparer après reproduction sur la version visée ; aucun arbitrage métier nouveau requis |
+| UX08 — retour aux résultats, P2 | Risque hypothétique ; CA-07, EVOL-10 L1 et correctifs du 17 novembre portent déjà la conservation du contexte | Vérifier les preuves existantes et recetter le retour ; corriger uniquement une régression reproduite |
+| UX09 — transmission, P2 | Propagation non vérifiée ; responsabilités, réaffectations et droits existants à conserver | Candidat ultérieur ; pas de réattribution globale implicite des tâches/RDV |
+| UX10 — aide qualification/statuts, P2 | Compréhension non mesurée ; distinction potentiel/étape/priorité déjà définie dans E71 | Candidat d’aide contextuelle ultérieur, aucun nouveau score ni blocage de saisie |
+| UX11/12/13 | Rejetées en simulation ; aucune adoption utilisateur | Exclues du cadrage : sortie bloquée sans tâche, affectation automatique à tour de rôle, coordonnées/qualification complètes obligatoires |
+
+### Périmètre et lots
+
+1. **Lot A — correction et qualification de l’existant.** Reproduire UX07 ;
+   rapprocher les preuves actuelles pour UX08, les compteurs et le cycle RDV.
+   Corriger ensuite les seuls écarts aux exigences existantes effectivement
+   reproduits. Inclure version testée, deux comptes aux droits différents,
+   refus, mobile et clavier dans la recette concernée. Une couverture de test
+   absente ne devient pas automatiquement une fonctionnalité à développer.
+2. **Lot B — clarté des responsabilités et des actions, validé.** UX03 et
+   UX04 à spécifier, avec réutilisation des commandes existantes.
+3. **Lot C — accueil et pilotage, validé.** UX01 et UX02 à spécifier ;
+   définitions issues du lot B, populations et seuils UX02 explicitement arrêtés
+   avant toute nouvelle règle de risque. Réutiliser les listes et agrégats existants.
+4. **Lot D — compléments de continuité RDV, validé.** UX05 après spécification
+   et recette du lot A ; compléter les seuls raccords encore absents.
+
+UX06/09/10 restent des propositions P2 non engagées ; UX08 ne justifie pas une
+seconde implémentation de la conservation du contexte. Sont également exclus :
+nouveau moteur de scoring, campagne prospect, changement de droits, nettoyage
+des objets TEST, import réel et déploiement. Les risques R01–R08 restent ouverts
+tant que leurs preuves propres manquent ; les critères de clôture historiques
+de l’epic ne sont pas remplacés par l’avis simulé sur le pilote autonome.
+
+### Critères de cadrage et preuves attendues
+
+Les identifiants **E71-AUD-01 à 09** sont des repères de ce cadrage, pas des
+nouveaux CA actifs. Les CA-01 à 84 demeurent inchangés : **83 actifs et CA-24
+reporté**. Les critères UX01–UX05 validés sont à reprendre dans la spécification ;
+les seuils UX02 ont ensuite été confirmés à 30/60 jours et implémentés. Les preuves prévues ci-dessous sont désormais rapprochées des résultats
+locaux dans le bilan ; elles ne valent pas recette d’exploitation.
+
+| Repère | Acteur et préconditions | Action | Résultat observable et preuve à produire |
+| --- | --- | --- | --- |
+| E71-AUD-01 | Lecteur CRM, fiche sans échange puis fiche avec échange | Consulter Dernière interaction | Aucun `null`/`undefined` ; état « Aucun échange consigné » unique, date/contenu utiles conservés si échange ; erreur distincte. Reproduction puis vérification du rendu, rattachement CA-78 |
+| E71-AUD-02 | Lecteur avec recherche filtrée/paginée | Ouvrir fiche, revenir, actualiser et réessayer après erreur locale | Termes, filtres, page et focus logique conservés ; formulaire/navigation stables ; réponse obsolète ignorée, retrait d’accès purgeant les données. Réutiliser puis compléter preuves CA-07/EVOL-10 et convention commune |
+| E71-AUD-03 | Équipe fictive, actions et RDV connus, droits différents | Comparer Aujourd’hui, listes et agenda sur plusieurs pages | Portée, période Paris et unités explicites, totaux cohérents, chargement/échec jamais transformés en zéro. Recette CA-06/22/63/68 ; résumé UX01 validé à spécifier |
+| E71-AUD-04 | Gestionnaire, prospect non attribué et dossier attribué à un autre membre | Créer/consulter puis modifier une affectation | Prospect/dossier/action distincts, choix et objets affectés visibles ; aucune copie silencieuse, refus selon droits. Évolution UX03 validée à spécifier, preuve UI et commandes existantes |
+| E71-AUD-05 | Gestionnaire, prospect avec deux dossiers | Planifier au niveau prospect puis depuis un dossier | Contexte annoncé et identique en fiche/listes ; action générale ne couvre pas les deux dossiers, alerte restante expliquée ; action/rappel distincts, aucun doublon automatique. UX04 validée à spécifier, CA-05/22/60/61 conservés |
+| E71-AUD-06 | Gestionnaire, populations et seuils UX02 préalablement arbitrés | Ouvrir une liste de risques et changer de page/portée | Unité, horizon, pauses/clôtures et filtres explicites ; cas positif/négatif/recouvrement vérifiés, total concordant ; pas de somme de listes chevauchantes présentée comme population unique. UX02 validée ; dépend des définitions et seuils |
+| E71-AUD-07 | Collaborateurs habilités, créneaux fictifs et rappels internes de test | Réserver, retrouver la bonne période, valider, reporter, réaliser ; annuler un autre RDV | Prospect/responsable/statut cohérents ; conflit conservant la saisie, compte rendu et prochaine étape accessibles, aucune tâche ni sollicitation prospect implicite ; préférences/réception interne vérifiées. Recette CA-62 à 73/80, raccords UX05 validés à spécifier |
+| E71-AUD-08 | Deux comptes de permissions distinctes | Consulter/affecter puis tenter une commande interdite ou après révocation | Visibilité et commandes respectent les autorisations, engagements et historique conservés ; aucun droit nouveau. Recette ciblée R04 et critères d’accès existants |
+| E71-AUD-09 | Utilisateur sur version identifiée, réseau connu | Reprendre les parcours concernés sur mobile et au clavier | États chargement/erreur utilisables, navigation/focus conservés, absence de débordement bloquant ; origine d’un échec documentée. R05/R07, aucune panne produit déduite du timeout initial |
+
+### Impacts initiaux à instruire
+
+| Sujet | Conclusion et suite attendue |
+| --- | --- |
+| Applications / domaine | **Concerné : localeo-backend**, domaine prospection propriétaire des affectations, rattachements, échéances et transitions RDV ; application pour orchestration, PWA CRM pour présentation. Entrées API privées, UI CRM et workers de rappel à considérer selon le lot. Aucun changement métier décidé ici |
+| Autres dépôts applicatifs | **Sans modification directe identifiée** pour Marketplace, Pro et Animation : aucun parcours ni contrat public proposé ; ERP reste fournisseur des identités et droits CRM existants |
+| API / consommateurs | **À examiner** pour compteurs, populations de risque et filtres ; réutilisation prioritaire des API CRM. Si contrat modifié : source OpenAPI canonique dans ce dépôt, générateur et consommateur PWA dans backend ; pas de modification de contrat pendant le cadrage |
+| Persistance / migrations | **Sans migration identifiée pour UX07** et les libellés. **À examiner** pour les lots validés à spécifier ; ne pas déduire un besoin de table/colonne des maquettes ni réattribuer des données historiques |
+| Démonstration / fixtures | **Concerné** : scénarios backend avec aucun échange, prospect à deux dossiers, propriétaires distincts, populations de risques, pagination et cycle RDV. Vérifier la couverture du générateur avant de l’étendre ; données synthétiques et transports isolés |
+| Documentation fonctionnelle | **Concernée à la réalisation** : guide CRM, parcours/règles, UX-productivité, agenda et bilan dans le dossier E71 ; maintenir ce backlog comme cadrage unique. Archive d’audit et décisions conservées comme sources datées |
+| Exploitation / déploiement | **À examiner** : version locale versus TEST, recette des rappels, conditions mobile et budgets de lecture si requêtes/agrégats changent. Objets fictifs TEST encore présents : nettoyage séparé. Aucune activation ni opération distante dans ce cadrage |
+
+Invariants à préserver : responsabilités indépendantes ; une tâche couvre son
+contexte explicite ; aucune tâche/envoi/réaffectation implicite ; droits relus
+sur les commandes ; rappels internes selon préférences ; compteurs issus de la
+même population que les listes. Les routes et vues ne réimplémentent pas ces
+règles. Appliquer la [préservation du contexte](../../architecture/transverse/conventions-backoffice.md#recherche-et-actualisation-ciblée-des-résultats)
+et sélectionner les preuves via la [matrice d’architecture](../../architecture/transverse/controle-architecture.md).
+
+### Décisions complémentaires et réalisation
+
+- UX01–UX05 validées le 19 novembre 2026. Réponse complémentaire :
+  **« Interaction : 30 jours ; évolution : 60 jours »**, avec exclusion des
+  pauses justifiées et dossiers clos des alertes temporelles.
+- [Conception canonique](../../specifications/epic-71-crm-prospection/workshop-crm-20261118.md) :
+  populations, compatibilité, responsabilités, dates, contrats et preuves.
+- Lots A/B/C/D réalisés localement ; [bilan AUD et rapports](../../specifications/epic-71-crm-prospection/verification-livraison.md#workshop-crm-20261118).
+  Les tableaux de cadrage ci-dessus conservent les conditions initiales ; les
+  deux décisions utilisateur lèvent les attentes d’arbitrage UX01–UX05 et seuils.
+- UX06/09/10 restent hors de la réalisation ; UX07 est corrigé et UX08 recetté
+  selon l’exigence existante. Aucun nouvel arbitrage P2 déduit de la validation.
+
+L’EPIC 71 reste En cours. Aucun commit, push ni déploiement par cette réalisation ;
+les risques historiques de mise en service conservent leurs preuves propres.
 
 ## Impacts et limites
 

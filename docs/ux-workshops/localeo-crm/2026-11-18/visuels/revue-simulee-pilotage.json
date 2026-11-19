@@ -1,0 +1,114 @@
+{
+  "nature": "Revue simulée par IA de Marc, Julie et Thomas sur huit captures réellement ouvertes avec view_image. Aucun participant réel, aucune mesure d'usage ni validation d'adoption. Les améliorations perçues sont des hypothèses de conception ; les constats visuels concernent seulement les maquettes statiques.",
+  "images_examinees": [
+    "maquettes-apres/ux01-accueil-bureau.png",
+    "maquettes-apres/ux02-risques-bureau.png",
+    "maquettes-apres/ux03-responsabilites-bureau.png",
+    "maquettes-apres/ux04-action-bureau.png",
+    "maquettes-apres/ux05-confirmation-bureau.png",
+    "maquettes-apres/ux01-equipe-bureau.png",
+    "maquettes-apres/ux05-agenda-mobile.png",
+    "maquettes-apres/ux05-compte-rendu-bureau.png"
+  ],
+  "participants": [
+    {
+      "id": "MAR",
+      "reponses": {
+        "etat": "SIMULATION — La bascule Équipe et ses listes me donnent un état quotidien plus lisible : les deux retards, trois actions du jour et un rendez-vous correspondent aux lignes montrées. Cela ne prouve pas l'exhaustivité du CRM réel.",
+        "actions": "SIMULATION — Je vois le dossier et le responsable de chaque action d'équipe ; sur UX04, le récapitulatif précise que l'autre dossier reste découvert, ce qui rend la priorité compréhensible.",
+        "qualification": "SIMULATION — Les responsabilités sont mieux séparées, mais les statuts et le potentiel n'ont pas été refondus. Je ne prétends donc pas qualifier mieux grâce à ces seules cinq orientations P1.",
+        "rendez_vous": "SIMULATION — La confirmation affiche la date, Léa, le rappel interne et les deux accès utiles ; le compte rendu puis la suite proposée forment une continuité lisible. Les modifications et notifications ne sont pas testables sur ces images.",
+        "oublis": "SIMULATION — Les dossiers sans prochaine action deviennent repérables, avec une définition. Le risque d'oubli n'est pas éliminé : l'inactivité et la stagnation attendent encore un seuil métier.",
+        "preference": "SIMULATION — Je préfère les cinq propositions après, sous réserve de vérifier les totaux et de conserver les écrans existants qui remplissent déjà ces objectifs."
+      },
+      "preferences": {"UX01": "APRES", "UX02": "APRES", "UX03": "APRES", "UX04": "APRES", "UX05": "APRES"},
+      "arguments_par_orientation": {
+        "UX01": "La portée personnelle vide est distinguée de l'activité collective, et le résumé Équipe mène visuellement à des lignes identifiables.",
+        "UX02": "Les deux dossiers listés correspondent au total deux sur quatre et la non-addition des listes est annoncée ; la revue devient actionnable dans le scénario fictif.",
+        "UX03": "Le récapitulatif indique que seul le prospect passe à Camille ; Léa conserve dossier et action, sans transfert global silencieux.",
+        "UX04": "Le choix prospect ou dossier et la phrase sur Association commerçante rendent l'alerte future interprétable.",
+        "UX05": "La confirmation et le rendez-vous partagent date, durée et responsable ; le compte rendu ne prétend pas créer une tâche automatiquement."
+      },
+      "reserves": [
+        "Les totaux fictifs sont cohérents entre les vues examinées, mais aucun rapprochement avec une API ou les permissions réelles n'est démontré.",
+        "Les seuils d'inactivité et de stagnation doivent être arrêtés et testés avant de présenter le pilotage comme exhaustif.",
+        "La maquette ne prouve ni la livraison des rappels ni l'efficacité du compte rendu dans le produit déployé."
+      ]
+    },
+    {
+      "id": "JUL",
+      "reponses": {
+        "etat": "SIMULATION — Je comprends que mes trois zéros concernent mes responsabilités et que l'équipe a d'autres actions. La page personnelle reste centrée sur mon travail, ce qui répond à mon objection initiale au grand dashboard.",
+        "actions": "SIMULATION — L'action prévue le 20 novembre à 14 h et son rappel à 9 h sont distincts. Le formulaire est cependant haut : les boutons de confirmation viennent après de nombreuses explications.",
+        "qualification": "SIMULATION — La fiche de responsabilités m'aide à agir sur le bon périmètre, mais elle ne démontre aucun gain de vitesse de qualification. La création progressive et les aides de statut restent hors de cette sélection P1.",
+        "rendez_vous": "SIMULATION — Je préfère les accès explicites de confirmation ; sur mobile, l'agenda répète le titre, le prospect et le dossier avant le panneau de détail, ce qui augmente le défilement jusqu'à Modifier.",
+        "oublis": "SIMULATION — Les alertes expliquées peuvent éviter de recréer une tâche pour le mauvais dossier. Je reste réservée sur l'ajout de listes de risques tant que leur usage quotidien et les capacités existantes ne sont pas vérifiés.",
+        "preference": "SIMULATION — Après pour l'accueil, les rôles et les actions ; réserve sur la densité de UX02 et le parcours mobile de UX05. Je ne demande pas de revenir à une confirmation moins explicite."
+      },
+      "preferences": {"UX01": "APRES", "UX02": "RESERVE", "UX03": "APRES", "UX04": "APRES", "UX05": "RESERVE"},
+      "arguments_par_orientation": {
+        "UX01": "Le compromis par portée protège mon accueil léger tout en rendant l'équipe accessible.",
+        "UX02": "Les définitions sont utiles, mais le panneau de catégories et les filtres demandent une lecture supplémentaire ; les lignes Délai à choisir ne sont pas encore actionnables.",
+        "UX03": "Les rôles sont lisibles et l'affectation annoncée ne change pas mes tâches implicitement.",
+        "UX04": "Le contexte explicite vaut la place prise, sous réserve de vérifier la durée de saisie réelle et de conserver un résumé bref.",
+        "UX05": "Le contenu de confirmation progresse ; la capture mobile mesure visuellement plus de deux hauteurs d'écran usuelles, avec répétition du résumé avant les commandes. Aucun temps d'interaction n'est mesuré."
+      },
+      "reserves": [
+        "L'agenda mobile est lisible sans coupure horizontale visible, mais sa longueur et les répétitions appellent un essai de navigation réel.",
+        "Le lien vers le rendez-vous sélectionné peut faciliter l'accès direct ; sa mise au point du focus et son comportement tactile restent non vérifiés.",
+        "Aucun gain en nombre de clics ou en temps ne peut être conclu des boutons métier inactifs."
+      ]
+    },
+    {
+      "id": "THO",
+      "reponses": {
+        "etat": "SIMULATION — La portée Équipe, les échéances et le détail des compteurs améliorent ma lecture du scénario. Le rendez-vous du 26 novembre est correctement hors de la fenêtre du 19 au 25 de l'accueil.",
+        "actions": "SIMULATION — Je peux identifier le propriétaire d'une action, son dossier et son rappel ; j'apprécie que la même préparation ne fasse pas disparaître l'alerte d'un second dossier.",
+        "qualification": "SIMULATION — La clarification des responsabilités sécurise l'organisation du suivi. La qualité du potentiel, les transitions et la complétude de qualification ne sont pas démontrées par ces maquettes.",
+        "rendez_vous": "SIMULATION — Le rendez-vous a le même créneau de 30 minutes, le même responsable et le même rappel dans la confirmation et l'agenda. La proposition après rendez-vous garde une décision humaine sur la tâche.",
+        "oublis": "SIMULATION — La couverture visuelle est meilleure, mais des seuils non choisis et une population fictive ne prouvent pas la détection de tous les dossiers à risque d'une équipe de dix personnes.",
+        "preference": "SIMULATION — Après pour les quatre orientations aux responsabilités et parcours explicites ; réserve sur UX02 tant que les définitions et le rapprochement réel des listes ne sont pas validés."
+      },
+      "preferences": {"UX01": "APRES", "UX02": "RESERVE", "UX03": "APRES", "UX04": "APRES", "UX05": "APRES"},
+      "arguments_par_orientation": {
+        "UX01": "Les compteurs sont accompagnés de portée et d'horizon ; la fenêtre des prochains rendez-vous explique l'exclusion du 26 novembre.",
+        "UX02": "Je soutiens l'orientation votée, mais la vue reste partiellement définie : l'exclusion des pauses justifiées et les seuils d'ancienneté doivent être confirmés par le métier avant toute conclusion d'exhaustivité.",
+        "UX03": "L'affectation limitée au prospect respecte les rôles distincts ; le panneau n'introduit pas le transfert global UX09 non retenu pour cette phase.",
+        "UX04": "Les deux dates et le dossier concerné sont vérifiables dans le récapitulatif, sans rattachement automatique au second dossier.",
+        "UX05": "La réalisation reste liée au compte rendu et la prochaine action est explicitement à compléter puis confirmer ; il n'y a pas de tâche silencieuse ni d'envoi prospect annoncé."
+      },
+      "reserves": [
+        "Les règles de comptage illustrées sont des propositions, pas des invariants supplémentaires adoptés par ces images.",
+        "Le bouton Guide de prise en main sur l'accueil est secondaire : ne pas en déduire un nouveau chantier d'onboarding dans le lot P1.",
+        "La relation entre enregistrement du compte rendu puis ajout d'une explication sans action doit rester explicite au moment d'une future implémentation."
+      ]
+    }
+  ],
+  "ecarts_substantiels": [],
+  "ajustements": [
+    {
+      "id": "PIL-01",
+      "nature": "Détail de présentation observé sur la maquette",
+      "image": "maquettes-apres/ux01-equipe-bureau.png",
+      "constat": "Dans les trois compteurs, le lien et la précision de période apparaissent collés sur la même ligne.",
+      "recommandation": "Placer la période sur une ligne distincte ou ajouter un espacement explicite ; aucune orientation ni donnée ne change.",
+      "nouveau_vote_requis": false
+    },
+    {
+      "id": "PIL-02",
+      "nature": "Réserve ergonomique issue d'une inspection, effet utilisateur non mesuré",
+      "image": "maquettes-apres/ux05-agenda-mobile.png",
+      "constat": "La capture mobile empile filtres, résumé du rendez-vous et détail répété avant les commandes.",
+      "recommandation": "Tester d'abord l'accès direct au panneau sélectionné ; envisager un résumé plus compact sur mobile en gardant date, responsable et contexte visibles, sans supprimer d'information métier.",
+      "nouveau_vote_requis": false
+    },
+    {
+      "id": "PIL-03",
+      "nature": "Précision rédactionnelle proposée",
+      "image": "maquettes-apres/ux05-compte-rendu-bureau.png",
+      "constat": "Le bouton Conserver cette explication sans action ne précise pas à lui seul que l'explication complète le compte rendu, éventuellement déjà enregistré au bloc précédent.",
+      "recommandation": "Préciser Ajouter cette explication au compte rendu ; garder l'absence de tâche automatique et ne pas rendre le motif obligatoire par une nouvelle règle.",
+      "nouveau_vote_requis": false
+    }
+  ]
+}

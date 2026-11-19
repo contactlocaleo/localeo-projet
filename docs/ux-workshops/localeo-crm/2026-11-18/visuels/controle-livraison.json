@@ -1,0 +1,22 @@
+{
+  "nature": "Vérification documentaire et de rendus locaux, pas recette CRM",
+  "date": "2026-11-19",
+  "liens_controles": 504,
+  "liens_manquants": 0,
+  "captures_avant": 15,
+  "empreintes_avant_conservees": true,
+  "maquettes_html": 12,
+  "png_apres": 24,
+  "debordements_detectes": 0,
+  "orientations_P1_adoptees": 5,
+  "secrets_textuels": "aucune valeur fournie retrouvée",
+  "contrastes_palette": {
+    "163649/ffffff": 12.67,
+    "50677e/f5f7f9": 5.46,
+    "ffffff/086a62": 6.46,
+    "7b4600/fff0cc": 6.84,
+    "176548/e4f4e9": 6.16,
+    "075e72/ffffff": 7.36
+  },
+  "conformite_accessibilite": "non établie ; mesures de palette seulement"
+}

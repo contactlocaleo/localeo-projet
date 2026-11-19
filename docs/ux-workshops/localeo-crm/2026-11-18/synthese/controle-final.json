@@ -1,0 +1,335 @@
+{
+  "date_heure": "2026-11-19T07:45:09+01:00",
+  "statut": "ARCHIVE FINALISEE AVEC RESERVES ; WORKSHOP INCOMPLET",
+  "liens_locaux_controles": 675,
+  "liens_manquants": 0,
+  "json_valides": 14,
+  "guidance": "Guidance: 112 guides, 1671 local links, 0 errors, 0 warnings",
+  "anciens_workshops_dans_repertoire": 0,
+  "fichiers_preexistants_controles": 107,
+  "fichiers_preexistants_modifies_autorises": [
+    "README.md",
+    "prompts/05-archivage.md"
+  ],
+  "prompts_00_04_inchanges": true,
+  "prompts": {
+    "01-exploration.md": {
+      "sections": 10,
+      "present_complet": true
+    },
+    "02-workshop.md": {
+      "sections": 11,
+      "present_complet": true
+    },
+    "03-maquettes.md": {
+      "sections": 9,
+      "present_complet": true
+    },
+    "04-validation.md": {
+      "sections": 6,
+      "present_complet": true
+    },
+    "05-archivage.md": {
+      "sections": 9,
+      "present_complet": true
+    },
+    "00-protocole-global.md": {
+      "present_complet": false,
+      "motif": "Protocole distinct non fourni ; constat conservé"
+    }
+  },
+  "prompt02_identique_piece_jointe": true,
+  "propositions": 13,
+  "repartition_propositions": {
+    "P1": 5,
+    "P2": 6,
+    "P3": 2
+  },
+  "adoptees_simulation": 10,
+  "rejets_simulation": 3,
+  "participants_simules": 12,
+  "bulletins_argumentes": 156,
+  "votes": {
+    "UX01": {
+      "POUR": 12
+    },
+    "UX02": {
+      "POUR": 8,
+      "ABSTENTION": 3,
+      "CONTRE": 1
+    },
+    "UX03": {
+      "POUR": 12
+    },
+    "UX04": {
+      "POUR": 12
+    },
+    "UX05": {
+      "POUR": 12
+    },
+    "UX06": {
+      "POUR": 9,
+      "ABSTENTION": 3
+    },
+    "UX07": {
+      "POUR": 12
+    },
+    "UX08": {
+      "POUR": 7,
+      "ABSTENTION": 4,
+      "CONTRE": 1
+    },
+    "UX09": {
+      "POUR": 10,
+      "ABSTENTION": 2
+    },
+    "UX10": {
+      "POUR": 10,
+      "ABSTENTION": 2
+    },
+    "UX11": {
+      "CONTRE": 12
+    },
+    "UX12": {
+      "CONTRE": 10,
+      "ABSTENTION": 2
+    },
+    "UX13": {
+      "CONTRE": 12
+    }
+  },
+  "decisions_utilisateur_recues": 0,
+  "P1_en_attente": 5,
+  "scenarios_tests_reels_prevus_non_executes": 8,
+  "captures_avant": 15,
+  "maquettes_html": 12,
+  "png_apres": 24,
+  "captures_controle_galerie": 2,
+  "png_integrite_structure_crc_decompression": "41 PNG valides",
+  "dimensions_png": [
+    {
+      "fichier": "visuels/controle-galerie-bureau.png",
+      "largeur": 1326,
+      "hauteur": 993
+    },
+    {
+      "fichier": "visuels/controle-galerie-mobile.png",
+      "largeur": 358,
+      "hauteur": 2021
+    },
+    {
+      "fichier": "visuels/captures-avant/01-accueil-bureau.png",
+      "largeur": 1440,
+      "hauteur": 1000
+    },
+    {
+      "fichier": "visuels/captures-avant/02-prospects-bureau.png",
+      "largeur": 1440,
+      "hauteur": 1000
+    },
+    {
+      "fichier": "visuels/captures-avant/03-suivi-bureau.png",
+      "largeur": 1440,
+      "hauteur": 1000
+    },
+    {
+      "fichier": "visuels/captures-avant/04-agenda-bureau.png",
+      "largeur": 1440,
+      "hauteur": 1000
+    },
+    {
+      "fichier": "visuels/captures-avant/05-rappels-bureau.png",
+      "largeur": 1440,
+      "hauteur": 1000
+    },
+    {
+      "fichier": "visuels/captures-avant/06-qualification-bureau.png",
+      "largeur": 1440,
+      "hauteur": 1000
+    },
+    {
+      "fichier": "visuels/captures-avant/07-notifications-bureau.png",
+      "largeur": 1440,
+      "hauteur": 1000
+    },
+    {
+      "fichier": "visuels/captures-avant/08-imports-bureau.png",
+      "largeur": 1440,
+      "hauteur": 1000
+    },
+    {
+      "fichier": "visuels/captures-avant/09-creation-prospect-bureau.png",
+      "largeur": 1440,
+      "hauteur": 1000
+    },
+    {
+      "fichier": "visuels/captures-avant/10-recherche-prospect-bureau.png",
+      "largeur": 1440,
+      "hauteur": 1000
+    },
+    {
+      "fichier": "visuels/captures-avant/11-fiche-prospect-test-bureau.png",
+      "largeur": 1440,
+      "hauteur": 1000
+    },
+    {
+      "fichier": "visuels/captures-avant/12-ajout-contact-bureau.png",
+      "largeur": 1440,
+      "hauteur": 1000
+    },
+    {
+      "fichier": "visuels/captures-avant/13-planifier-action-bureau.png",
+      "largeur": 1440,
+      "hauteur": 1000
+    },
+    {
+      "fichier": "visuels/captures-avant/14-fiche-avec-action-bureau.png",
+      "largeur": 1440,
+      "hauteur": 1000
+    },
+    {
+      "fichier": "visuels/captures-avant/15-creation-rendez-vous-bureau.png",
+      "largeur": 1440,
+      "hauteur": 1000
+    },
+    {
+      "fichier": "visuels/maquettes-apres/ux01-accueil-bureau.png",
+      "largeur": 1440,
+      "hauteur": 1000
+    },
+    {
+      "fichier": "visuels/maquettes-apres/ux01-accueil-mobile.png",
+      "largeur": 390,
+      "hauteur": 1420
+    },
+    {
+      "fichier": "visuels/maquettes-apres/ux01-equipe-bureau.png",
+      "largeur": 1440,
+      "hauteur": 1254
+    },
+    {
+      "fichier": "visuels/maquettes-apres/ux01-equipe-mobile.png",
+      "largeur": 390,
+      "hauteur": 1892
+    },
+    {
+      "fichier": "visuels/maquettes-apres/ux01-etats-bureau.png",
+      "largeur": 1440,
+      "hauteur": 1000
+    },
+    {
+      "fichier": "visuels/maquettes-apres/ux01-etats-mobile.png",
+      "largeur": 390,
+      "hauteur": 964
+    },
+    {
+      "fichier": "visuels/maquettes-apres/ux02-prospects-bureau.png",
+      "largeur": 1440,
+      "hauteur": 1000
+    },
+    {
+      "fichier": "visuels/maquettes-apres/ux02-prospects-mobile.png",
+      "largeur": 390,
+      "hauteur": 1282
+    },
+    {
+      "fichier": "visuels/maquettes-apres/ux02-risques-bureau.png",
+      "largeur": 1440,
+      "hauteur": 1000
+    },
+    {
+      "fichier": "visuels/maquettes-apres/ux02-risques-mobile.png",
+      "largeur": 390,
+      "hauteur": 1667
+    },
+    {
+      "fichier": "visuels/maquettes-apres/ux03-creation-bureau.png",
+      "largeur": 1440,
+      "hauteur": 1132
+    },
+    {
+      "fichier": "visuels/maquettes-apres/ux03-creation-mobile.png",
+      "largeur": 390,
+      "hauteur": 1464
+    },
+    {
+      "fichier": "visuels/maquettes-apres/ux03-responsabilites-bureau.png",
+      "largeur": 1440,
+      "hauteur": 1237
+    },
+    {
+      "fichier": "visuels/maquettes-apres/ux03-responsabilites-mobile.png",
+      "largeur": 390,
+      "hauteur": 1551
+    },
+    {
+      "fichier": "visuels/maquettes-apres/ux04-action-bureau.png",
+      "largeur": 1440,
+      "hauteur": 1313
+    },
+    {
+      "fichier": "visuels/maquettes-apres/ux04-action-mobile.png",
+      "largeur": 390,
+      "hauteur": 1628
+    },
+    {
+      "fichier": "visuels/maquettes-apres/ux04-suivi-bureau.png",
+      "largeur": 1440,
+      "hauteur": 1265
+    },
+    {
+      "fichier": "visuels/maquettes-apres/ux04-suivi-mobile.png",
+      "largeur": 390,
+      "hauteur": 1538
+    },
+    {
+      "fichier": "visuels/maquettes-apres/ux05-agenda-bureau.png",
+      "largeur": 1440,
+      "hauteur": 1071
+    },
+    {
+      "fichier": "visuels/maquettes-apres/ux05-agenda-mobile.png",
+      "largeur": 390,
+      "hauteur": 1782
+    },
+    {
+      "fichier": "visuels/maquettes-apres/ux05-compte-rendu-bureau.png",
+      "largeur": 1440,
+      "hauteur": 1379
+    },
+    {
+      "fichier": "visuels/maquettes-apres/ux05-compte-rendu-mobile.png",
+      "largeur": 390,
+      "hauteur": 2012
+    },
+    {
+      "fichier": "visuels/maquettes-apres/ux05-confirmation-bureau.png",
+      "largeur": 1440,
+      "hauteur": 1106
+    },
+    {
+      "fichier": "visuels/maquettes-apres/ux05-confirmation-mobile.png",
+      "largeur": 390,
+      "hauteur": 1549
+    }
+  ],
+  "empreintes_avant_et_maquettes_etape4_conservees": true,
+  "valeurs_identifiants_fournis_absentes_des_fichiers_texte": true,
+  "revue_visuelle_15_avant": "Aucun identifiant de connexion relevé ; noms de collaborateurs et libellés commerciaux encore visibles notamment 04,05,09,14,15",
+  "absence_generale_donnees_sensibles": "NON CERTIFIEE : anonymisation partielle ; reprises dans galerie concernées",
+  "tests_crm_etape5": "aucun ; contrôles de rendus/interactions conservés de l’étape3",
+  "applications_git": {
+    "localeo-backend": "propre, aucune modification Git",
+    "localeo-marketplace": "propre, aucune modification Git",
+    "localeo-commercant": "propre, aucune modification Git",
+    "localeo-animation": "propre, aucune modification Git"
+  },
+  "limites": [
+    "Protocole global initial non fourni",
+    "Cinq décisions utilisateur manquantes",
+    "Recettes réelles incomplètes",
+    "Anonymisation partielle",
+    "Modèles exacts et raisonnement non établis",
+    "Aucun workshop précédent comparable"
+  ]
+}
