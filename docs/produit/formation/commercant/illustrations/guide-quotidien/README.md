@@ -27,4 +27,4 @@ La mise à jour du 29 septembre ajoute aussi un accès au PDF depuis Aide et con
 Lors d’une mise à jour, utiliser un profil de démonstration ou les fixtures locales explicitement signalées, relever la version et recapturer uniquement les zones utiles. Conserver les noms des fichiers, mettre à jour les légendes du [guide source](../../guide-quotidien-commercant.md), puis régénérer et contrôler visuellement les huit pages du PDF.
 
 
-Le générateur versionné est `localeo-commercant/scripts/generate-merchant-guide.py`. La génération, la synchronisation du livrable public et les vérifications suivent la [procédure Commerçant](../../../../../exploitation/commercant/mise-en-production.md#guide-commerçant-embarqué).
+Le générateur versionné est `localeo-commercant/scripts/generate-merchant-guide.py`. La génération, la synchronisation du livrable public et les vérifications suivent la [procédure Commerçant](../../../../../exploitation/deploiement/commercant/mise-en-production.md#guide-commerçant-embarqué).

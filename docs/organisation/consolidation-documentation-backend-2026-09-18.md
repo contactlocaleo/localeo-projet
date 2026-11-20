@@ -31,7 +31,7 @@ Le README backend a été réduit aux commandes et liens utiles : son historique
 - Générateurs PDF : sources et sorties centralisées, neuf sources de procédures vérifiables sans génération.
 - Tests du corpus transférés au projet ; tests backend autonomes avec fixtures.
 
-Le backend lit le dépôt voisin ou `LOCALEO_DOCUMENTATION_ROOT`. Pour un déploiement isolé, suivre le [guide du bundle](../exploitation/technique/reference-documentation-centralisee.md). Ce bundle est un artefact généré et ignoré par Git. Aucun bundle n’a été laissé dans le backend pendant cette migration.
+Le backend lit le dépôt voisin ou `LOCALEO_DOCUMENTATION_ROOT`. Pour un déploiement isolé, suivre le [guide du bundle](../exploitation/deploiement/reference-documentation-centralisee.md). Ce bundle est un artefact généré et ignoré par Git. Aucun bundle n’a été laissé dans le backend pendant cette migration.
 
 ## Vérifications et limites
 

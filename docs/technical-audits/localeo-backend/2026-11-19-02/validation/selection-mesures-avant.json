@@ -1,0 +1,35 @@
+{
+  "status": "PREPARED_NOT_EXECUTED",
+  "selection": [
+    "M01",
+    "M02",
+    "M06 reduced CSV",
+    "M-LIVE-01 new method"
+  ],
+  "unchanged_scenario_functions": [
+    {
+      "old": "harness-attempt03.py",
+      "new": "test_m01_m02.py",
+      "function": "async_measurements",
+      "ast_equal": true
+    },
+    {
+      "old": "harness-attempt03.py",
+      "new": "test_m01_m02.py",
+      "function": "lease_simulation",
+      "ast_equal": true
+    },
+    {
+      "old": "test_components.py",
+      "new": "test_csv.py",
+      "function": "csv_measurements",
+      "ast_equal": true
+    }
+  ],
+  "harness_sha256": {
+    "test_csv.py": "169f9f2dad1975ddb37aac9b853ca17930ec27787791811b1577d53562b8aa03",
+    "test_m01_m02.py": "16af41e5c72f0ca50dc1b4aec48fb424e709ebc19a2b4137f55430b3b9af0fbe",
+    "test_population.py": "02f01526860c8bc38d8b4ebd9d041b8cbf2d3ca3869dfa549727b380a32524d3"
+  },
+  "guard_launcher_sha256": "18605f2507d167ae144e94dacfcbba74c8aea4bae80d5be4809576e7682ec73d"
+}

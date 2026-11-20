@@ -1,0 +1,37 @@
+{
+  "step": 5,
+  "status": "prepared_pending_user_decisions",
+  "backend_sha": "7049e7fafc76f9119924f1082a5ee7457a175d85",
+  "backend_status": "",
+  "tracked_backend_files_checked": 3405,
+  "tracked_backend_changes": [],
+  "historical_inputs_checked": 32,
+  "historical_inputs_changed": [],
+  "raw_artifacts_unchanged": 14,
+  "required_files_sha256": {
+    "prompts/05-validation.md": "29ec9674aa1e9ea01aa06d75249ed5cc3cceab2ea7a1003ee55c3abbf056142f",
+    "recommandations/backlog-final.md": "ae621b55899226eacf75af76f6c1f07f3b4cdb1d76fb8715b9efbb7b730bcce7",
+    "recommandations/quick-wins.md": "934045483d8602de70904527e29718e8ac7afccb5183a7c987cf64c59e7948bf",
+    "recommandations/plan-optimisation.md": "1eeaa2d826153863e43863a64a1f0de2070b5337747bccc12c70e84c3ba68e97",
+    "validation/decisions.md": "9594ebc11eb033395e9d663b1de7e7a5bc27402e2df2c1c9c34bec3fd026fe45"
+  },
+  "decision_cards": 8,
+  "fields_per_card_checked": 16,
+  "source_line_references_checked": 33,
+  "proposed_classes": {
+    "A_conditional": 1,
+    "B": 7,
+    "C": 0,
+    "D": 0
+  },
+  "priorities": {
+    "P0": 0,
+    "P1": 2,
+    "P2": 6
+  },
+  "user_decisions_received": 0,
+  "pending_rows": 8,
+  "new_benchmarks": false,
+  "application_modifications": false,
+  "independent_review": "favorable; no blocking reservations; read-only"
+}

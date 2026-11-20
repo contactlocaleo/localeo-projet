@@ -54,6 +54,7 @@
         "guidance-tests",
         "documentation-tests",
         "quality-tests",
+        "render-release-tests",
         "codex-workflows",
         "codex-workflow-tests",
         "context-hook-tests",
@@ -70,6 +71,7 @@
         "guidance-tests",
         "documentation-tests",
         "quality-tests",
+        "render-release-tests",
         "codex-workflows",
         "codex-workflow-tests",
         "context-hook-tests",
@@ -107,6 +109,7 @@
         "guidance-tests",
         "documentation-tests",
         "quality-tests",
+        "render-release-tests",
         "codex-workflows",
         "codex-workflow-tests",
         "context-hook-tests",
@@ -209,6 +212,19 @@
         "argv": [
           "python",
           "scripts/check_codex_workflows.py"
+        ]
+      },
+      "render-release-tests": {
+        "repository": "localeo-projet",
+        "argv": [
+          "python",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_*render_release*.py"
         ]
       },
       "codex-workflow-tests": {

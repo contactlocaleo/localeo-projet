@@ -277,7 +277,7 @@ explicite du gestionnaire après sa remise effective.
   les modifications ERP préexistantes préservées. Aucun commit ou push réalisé
   pendant cette intervention ; sa trace documentaire est incluse dans la
   livraison Git du 12 novembre. Voir les
-  [consignes d’exploitation](../../exploitation/animation/deploiement-render.md#bilan-pdf-et-performance-de-diffusion--11-novembre-2026).
+  [consignes d’exploitation](../../exploitation/deploiement/animation/deploiement-render.md#bilan-pdf-et-performance-de-diffusion--11-novembre-2026).
 
 ## Correction du 11 novembre 2026 — archives hors du tableau de bord
 

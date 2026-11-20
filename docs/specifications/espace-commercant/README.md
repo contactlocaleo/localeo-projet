@@ -512,7 +512,7 @@ Principe :
 - Finance suit le contrat de l'Epic 50 ; ses quatre options sont désactivées dans la configuration de production jusqu'à recette et décision produit.
 - La CI utilise Node 22.19 ou ultérieur, npm ci, tests, build, scénarios Playwright/axe et Lighthouse local sans publication des rapports.
 
-Voir le [registre de remédiation](../../audits/commercant/remediation-preproduction-2026-09-06.md), le [guide de formation](../../produit/formation/commercant/guide-commercant.md) et le [guide de mise en production](../../exploitation/commercant/mise-en-production.md).
+Voir le [registre de remédiation](../../audits/commercant/remediation-preproduction-2026-09-06.md), le [guide de formation](../../produit/formation/commercant/guide-commercant.md) et le [guide de mise en production](../../exploitation/deploiement/commercant/mise-en-production.md).
 
 [Retour à l’index des spécifications](../INDEX.md)
 
@@ -522,7 +522,7 @@ Dans **Aide et contact**, un encart **Guide commerçant** précède les demandes
 
 Le livrable est public, illustré uniquement avec des données d’exemple et sans identifiants d’accès. Il est embarqué à `/guides/guide-quotidien-localeo-commercant.pdf` dans l’artefact frontend. Il ne requiert aucun appel à une API métier, aucun jeton dans son URL, aucune migration ni configuration supplémentaire. Le navigateur permet sa consultation, son téléchargement et son impression. L’accès réseau au PDF ne crée aucune garantie de consultation hors ligne dans la PWA.
 
-La [source éditable](../../produit/formation/commercant/guide-quotidien-commercant.md) et le [PDF canonique](../../../livrables/formation/commercant/guide-quotidien-localeo-commercant.pdf) restent dans le dépôt Projet. La copie embarquée est synchronisée et comparée à cette source selon la [procédure de livraison](../../exploitation/commercant/mise-en-production.md). Les libellés d’installation/mise à jour, la reprise de validation et les options conditionnelles de facturation y reflètent les fonctionnalités présentes.
+La [source éditable](../../produit/formation/commercant/guide-quotidien-commercant.md) et le [PDF canonique](../../../livrables/formation/commercant/guide-quotidien-localeo-commercant.pdf) restent dans le dépôt Projet. La copie embarquée est synchronisée et comparée à cette source selon la [procédure de livraison](../../exploitation/deploiement/commercant/mise-en-production.md). Les libellés d’installation/mise à jour, la reprise de validation et les options conditionnelles de facturation y reflètent les fonctionnalités présentes.
 
 ## Produit proposé pour le Juste Prix Local
 

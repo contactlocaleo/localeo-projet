@@ -35,7 +35,7 @@ Le commit backend concurrent Marketplace 3f8f2d2 a intégré une partie des verr
 - [Contrats corrigés](../../specifications/securisation-production/contrats-animation.md) : invariants métier, isolation, dates, paiements, exports et opérations asynchrones.
 - [Guide de formation et recette Animation](../../produit/formation/animation/guide-animation-preproduction.md).
 - [Authentification](../../specifications/identite-acces/session-animation.md), [EPIC 41](../../roadmap/terminees/epic-41-plateforme-animation-locale-mvp-backlog.md), [EPIC 53](../../roadmap/terminees/epic-53-tombola-locale-backlog.md), [contrats EPIC 46](../../specifications/epic-46-paiement-lots-animation/contrats-api.md).
-- [Déploiement](../../exploitation/animation/deploiement-render.md), variables d'environnement, Docker et CI frontend.
+- [Déploiement](../../exploitation/deploiement/animation/deploiement-render.md), variables d'environnement, Docker et CI frontend.
 - Backend : guide docs/ops/formation/guide-animation-preproduction.md, spécifications Finance EPIC 50, backlogs EPIC 41/53 et workflow .github/workflows/animation-audit.yml.
 
 Les statuts globaux des epics ne sont pas réinterprétés comme une validation de production.

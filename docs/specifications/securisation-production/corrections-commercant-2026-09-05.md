@@ -137,4 +137,4 @@ Déployer les routes backend avant le frontend. La migration HttpOnly (F14), les
 
 ## Complément F12 — Contrôle du déploiement réel
 
-La commande `npm run test:deployment` vérifie les en-têtes et le contrat des URL explicitement fournies. Voir [la procédure et ses limites](../../exploitation/commercant/verification-deploiement-audit.md). Les tests locaux couvrent ses refus et ses bornes ; son exécution en préproduction reste à effectuer avec les URL de cet environnement.
+La commande `npm run test:deployment` vérifie les en-têtes et le contrat des URL explicitement fournies. Voir [la procédure et ses limites](../../exploitation/deploiement/commercant/verification-deploiement-audit.md). Les tests locaux couvrent ses refus et ses bornes ; son exécution en préproduction reste à effectuer avec les URL de cet environnement.

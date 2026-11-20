@@ -56,7 +56,7 @@ Dernier complément PRO-005 : 3 scénarios de validation/sécurité réussis apr
 - [Architecture](../../architecture/frontends/commercant/architecture.md), [spécification courante](../../specifications/espace-commercant/README.md), [API](../../specifications/espace-commercant/contrats-api.md) et copies OpenAPI synchronisées.
 - [Epic 41](../../roadmap/terminees/epic-41-plateforme-animation-locale-mvp-backlog.md) et documents de validation/Finance actualisés dans les commits correspondants.
 - [Guide de formation commerçant](../../produit/formation/commercant/guide-commercant.md).
-- [Procédure de mise en production](../../exploitation/commercant/mise-en-production.md), avec ordre backend avant frontend, recette et critères d'arrêt.
+- [Procédure de mise en production](../../exploitation/deploiement/commercant/mise-en-production.md), avec ordre backend avant frontend, recette et critères d'arrêt.
 
 ## Conditions encore ouvertes pour le GO distant
 

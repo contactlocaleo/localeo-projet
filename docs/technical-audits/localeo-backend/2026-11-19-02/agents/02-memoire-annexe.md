@@ -1,0 +1,36 @@
+# Annexe — mémoire, bornes et observations secondaires
+
+Complément de [02-memoire.md](02-memoire.md). Même contexte de lecture statique et mêmes interdictions ; modèle exact et effort de raisonnement : INCONNU. Les chemins sont relatifs au backend. Aucune mesure exécutée.
+
+## Protections observées — ne pas les classer comme chargements sans borne
+
+| Parcours | Preuve source | Portée et limite de la conclusion |
+| --- | --- | --- |
+| Dépôt d'import commerçants | `app/api/imports_commercants_api.py:264` lit `MAX_OCTETS+1` ; `app/infrastructure/referencement/parseur_imports_commercants.py:13,32` fixe 2 000 000 octets | La copie du fichier existe, mais sa taille d'entrée est bornée. |
+| CSV et XLSX commerçants | Même parseur `:42-60`, `:63-137`, `:149-151` | CSV : 10 000 cellules, 50 colonnes, 8 000 caractères par cellule. XLSX : 200 entrées ZIP, 20 Mo décompressés cumulés déclarés, 10 Mo par membre, 20 feuilles, 10 000 cellules ; sélection importable de 100 lignes. Les limites XML s'appliquent avant `ET.fromstring` pour les octets et après construction pour les cellules. Le budget temps est coopératif, pas une interruption du parsing. |
+| Uploads communs | `app/security/uploads.py:41-71`, `read_upload_limited` | Lecture par blocs avec sentinelle à limite + 1. Conversion finale de `bytearray` vers `bytes` : copie bornée, pas une lecture arbitraire. |
+| Participants CSV classiques | `app/application/animation_locale/services/bilans_exports_animation.py:13,58-66` ; `app/infrastructure/persistence/repositories/lectures_bilans_animation_repository.py:138-142` | 10 000 lignes maximum ; refus au-delà via `limit+1`. Deux collections puis StringIO/UTF-8 : plusieurs représentations, mais plafond de lignes explicite. Les champs de grande taille seraient à contrôler séparément avant toute hausse de ce plafond. |
+| Participants CSV tombola email | `bilans_exports_animation.py:68-96` et `lectures_bilans_animation_repository.py:144-162` | Écriture dans `SpooledTemporaryFile` à seuil de 1 Mio, lecture DB par lots, réponse par morceaux de 65 536 octets. La génération se fait avant réponse pour conserver les erreurs HTTP normales. Ne pas proposer de remplacer ce chemin par `csv_bytes`. |
+| Bilan PDF | `bilans_exports_animation.py:104-150` | Agrégats SQL ; sources par pages de 100, collecte de commentaires/audit limitée à 10 000 lignes par collection. Rendu hors transaction. Limite en lignes, pas preuve d'un plafond strict de mémoire du moteur PDF. |
+| Population de clôture / preuves gelées | `animation_locale_repositories.py:1682-1715` ; `exploitation_animation_repository.py:112-135` | En-tête séparé, insertions par lots de 500. Cela ne rend pas tous les consommateurs bornés : voir MEM-03. |
+| Notifications de clôture et neutralisation | `notifications_localeo_live.py:15-33,138-157` | Installations distinctes par pages de 500 et insertions groupées. Évite la liste globale présente sur publication/résultat ; pas de constat générique « toutes les notifications chargent tout ». |
+| Résultats personnels et lots libres | `jeu_animation.py:441` ; `tirages_libres_repository.py:308-315,394-438` | Lecture personnelle limitée, pages gains/suppléants/suivi plafonnées à 100 ; ne pas étendre MEM-03 à ces parcours. |
+| Catalogue public et lots | `app/api/animation_locale_api.py:3870-3890,3950-3956` | Taille du catalogue plafonnée, lots publics paginés ; pas de preuve de matérialisation de tous les participants sur ces routes. |
+
+## Médias — coût borné mais copies évitables
+
+**Observation secondaire, FORTEMENT ÉTAYÉE PAR LE CODE.** `ServiceVisuelAnimationPublique.lire` (`app/application/animation_locale/services/visuel_animation_publique.py:29-49`) hydrate un seul média autorisé de Chasse en base64 avant de le décoder en binaire pour répondre en image. `contenu_generation.py:368-395` encode ce binaire en base64, appelle `_controler_media` (`:300-315`) qui le décode, réencode et valide le décodage image, puis le service public décode encore. Plusieurs représentations sont donc produites pour servir le même fichier. La limite média de 44 000 octets (`:308`) et l'objet JSON de 60 000 octets (`:302`) empêchent d'en faire ici un constat majeur de gros pic mémoire. Une lecture binaire autorisée avec contrôle d'empreinte déjà disponible éviterait ces copies ; elle doit préserver le filtrage des assets privés et la validation d'intégrité. Effort S/M, risque moyen d'exposition si l'autorisation était contournée ; aucun contrat HTTP à changer.
+
+**Observation secondaire, HYPOTHÈSE À VÉRIFIER.** Les stockages documentaire local/S3 ont une API `get` qui retourne le fichier entier (`app/infrastructure/storage/document_storage.py:60,109`). `contenu_generation.py:335-345` vérifie taille et empreinte après `get`. Si un objet de stockage est remplacé par un objet anormalement gros, la lecture alloue avant de refuser. Cela n'établit pas un problème sur les médias produits normalement : les écritures sont contrôlées et bornées. Vérifier le contrat du stockage, les métadonnées et la possibilité de lire au maximum taille attendue + 1 si ce scénario existe. Aucun accès stockage/réseau effectué.
+
+Les illustrations de flyer sont elles aussi bornées (`app/infrastructure/animation_locale/illustration_flyer.py:7-25`) : entrée 5 Mio, maximum 24 millions de pixels, puis miniature 2400 × 2400. Le contrôle en octets ne signifie pas faible taille décodée : une image proche du plafond pixels et ses transformations peuvent peser davantage, mais aucun défaut majeur n'est établi sans mesure de concurrence et des copies Pillow. Le renderer impose aussi `_MAX_HERO_PIXELS` (`flyer_animation_renderer.py:35,277-278`).
+
+## QR, participation et agrégations
+
+Le QR participant est construit pour un token résolu, avec un unique `BytesIO` (`app/application/animation_locale/services/participants_animation.py:243-249`). Les lectures de jeu autorisent un participant et chargent sa projection (`jeu_animation.py:89-97,363-461`) ; les médias sont filtrés avant hydratation. Les produits Juste Prix et vitrines sont tronqués à la page avant projection, mais leur configuration source peut déjà être en mémoire (`:465-549`) : la pagination du résultat seule n'est pas une preuve sur la taille de définition. Aucun chargement global de tous les participants établi sur le simple téléchargement QR.
+
+Les bilans passent par `lectures_bilans_animation.agregats` et SQL (`bilans_exports_animation.py:19-36` ; `lectures_bilans_animation_repository.py:74` borne les top commerces à 10). Les `.all()` sur ces résultats agrégés ne sont pas équivalents aux `.all()` d'une population ORM. Cette inspection ne prouve ni le plan SQL, ni la mémoire PostgreSQL, ni l'intégralité des autres tableaux de bord.
+
+## Contrôles futurs proportionnés
+
+Pour les quatre constats majeurs, mesurer séparément nombre d'objets/pages, mémoire maximale du processus et durée avec plusieurs tailles synthétiques et concurrence explicite. Tester les invariants de ciblage, déduplication, équité et rollback avant d'interpréter une baisse de mémoire comme une correction réussie. Aucune de ces exécutions n'a eu lieu dans cette mission. Les observations sur limites existantes sont des lectures de code, pas des validations de production.

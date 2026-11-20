@@ -1,0 +1,68 @@
+[
+  {
+    "target": "cpu",
+    "fork_turns": "none",
+    "message": "Lire et appliquer exactement le brief archivé D:/OneDrive/Bureau/Documents/GitHub/localeo-projet/docs/technical-audits/localeo-backend/2026-11-19-02/prompts/brief-cpu.md. Ce message et ce brief constituent la mission réellement transmise."
+  },
+  {
+    "target": "memoire",
+    "fork_turns": "none",
+    "message": "Lire et appliquer exactement le brief archivé D:/OneDrive/Bureau/Documents/GitHub/localeo-projet/docs/technical-audits/localeo-backend/2026-11-19-02/prompts/brief-memoire.md. Ce message et ce brief constituent la mission réellement transmise."
+  },
+  {
+    "target": "concurrence",
+    "fork_turns": "none",
+    "message": "Lire et appliquer exactement le brief archivé D:/OneDrive/Bureau/Documents/GitHub/localeo-projet/docs/technical-audits/localeo-backend/2026-11-19-02/prompts/brief-concurrence.md. Ce message et ce brief constituent la mission réellement transmise."
+  },
+  {
+    "target": "persistance",
+    "fork_turns": "none",
+    "message": "Lire et appliquer exactement le brief archivé D:/OneDrive/Bureau/Documents/GitHub/localeo-projet/docs/technical-audits/localeo-backend/2026-11-19-02/prompts/brief-persistance.md. Ce message et ce brief constituent la mission réellement transmise.",
+    "status": "Premier appel refusé (thread limit), même message réémis avec succès après finalisation mémoire."
+  },
+  {
+    "target": "api",
+    "fork_turns": "none",
+    "message": "Lire et appliquer exactement le brief archivé D:/OneDrive/Bureau/Documents/GitHub/localeo-projet/docs/technical-audits/localeo-backend/2026-11-19-02/prompts/brief-api.md. Ce message et ce brief constituent la mission réellement transmise."
+  },
+  {
+    "target": "persistance",
+    "type": "send_message",
+    "message": "Merci d'avoir signalé l'incident. Arrête cette analyse sans lire davantage d'archives, conserve une note d'incident uniquement dans agents/04-persistance-incident.md (commandes/motif/portée, sans conclusions). Ne produis pas le rapport principal 04-persistance.md ni son annexe : une nouvelle mission avec contexte neuf prendra la relève pour garantir la première analyse indépendante."
+  },
+  {
+    "target": "persistance_independante",
+    "fork_turns": "none",
+    "message": "Lire et appliquer exactement le brief archivé D:/OneDrive/Bureau/Documents/GitHub/localeo-projet/docs/technical-audits/localeo-backend/2026-11-19-02/prompts/brief-persistance.md. Ce message et ce brief constituent la mission réellement transmise. Contrainte de lecture supplémentaire : chaque recherche doit désigner explicitement des chemins absolus sous localeo-backend/app ou localeo-backend/sql ; ne pas rechercher depuis la racine documentaire, ne pas ouvrir les autres fichiers agents/ ni inventaire/. Les instructions README/AGENTS explicitement demandées restent à lire. Votre premier rapport indépendant possède exclusivement 04-persistance.md et 04-persistance-annexe.md."
+  },
+  {
+    "target": "concurrence",
+    "type": "send_message",
+    "message": "Les deux premières missions sont finalisées ; merci de finaliser ton rapport avec les preuves déjà établies et de garder les pistes moins certaines en annexe. Ne lis aucun rapport d'autrui. La dernière mission SRE commencera à ta fin pour respecter les trois slots."
+  },
+  {
+    "target": "sre",
+    "fork_turns": "none",
+    "message": "Lire et appliquer exactement le brief archivé D:/OneDrive/Bureau/Documents/GitHub/localeo-projet/docs/technical-audits/localeo-backend/2026-11-19-02/prompts/brief-sre.md. Ce message et ce brief constituent la mission réellement transmise."
+  },
+  {
+    "target": "sre",
+    "type": "send_message",
+    "message": "Les cinq autres premières analyses sont terminées. Merci de finaliser le rapport SRE avec les mécanismes déjà prouvés ; les hypothèses sans preuve de saturation restent explicitement conditionnelles. Aucun besoin de remplir cinq constats."
+  },
+  {
+    "target": "contradicteur",
+    "fork_turns": "none",
+    "message": "Lire et appliquer exactement le brief archivé D:/OneDrive/Bureau/Documents/GitHub/localeo-projet/docs/technical-audits/localeo-backend/2026-11-19-02/prompts/brief-contradicteur.md. Ce message et ce brief constituent la mission réellement transmise."
+  },
+  {
+    "target": "contradicteur",
+    "type": "send_message",
+    "message": "Mesures isolées maintenant achevées sans erreur : M01/M02, CSV réduit et domaine population. R01 témoin ERP p50 10,657/53,184/106,051 ms pour 1/5/10 avec 10 ms injectées, pas HTTP. M02 second rejeté +359/admis +361 en SQLite logique. CSV pic identique ancien à 10k : 5 494 404 octets. Nouveau M-LIVE-01 ne mesure que transitoires après tuple UUID préparé : pics environ 41 800 /656 100 /656 064 octets à1k/5k/10k (plateau capacité set), contrôles d'appartenance du harness inclus dans temps donc pas profil CPU pur du domaine. Aucune correction/avant-après. Merci de tenir compte de ces limites sans exécuter de mesure."
+  },
+  {
+    "target": "contradicteur",
+    "type": "send_message",
+    "message": "Orientation envisagée après mesure : sortir R05 du backlog principal et la conserver P3 différable en annexe (une seule copie, pic transitoire <0,7Mo à10k et aucun avant/après). La population complète reste une cause distincte à mesurer sur grandes jauges ; sélection réservoir hors quick win. Final envisagé 9 corrections R01/R02/R03/R04/R06/R07/R08/R09/R10, 2P1/7P2 ; R02 compteur conditionné intégrité/v283, R08 vue gains enrichis jointe/paginée et agrégats compatibles. Merci de contredire aussi ce déclassement si tu vois un risque de sous-estimation."
+  }
+]

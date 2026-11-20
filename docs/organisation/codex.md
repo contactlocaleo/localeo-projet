@@ -4,7 +4,7 @@ Ce guide décrit le fonctionnement local des cinq dépôts. Les [règles transve
 
 L’[audit du 17 novembre 2026](audit-contexte-codex-2026-11-17.md) réévalue les instructions, skills, mémoire, hooks, outils et délégation. Il conserve les preuves et limites de l’examen ; sa [mise en œuvre](audit-contexte-codex-2026-11-17.md#11-mise-en-œuvre-des-recommandations) distingue les changements réalisés des vérifications natives et comparatives restantes.
 
-Commencer par le [guide d'usage développement et correctif](utiliser-workflows-codex.md) pour les demandes types, les résultats attendus et la reprise d'une tâche. Le [cycle d'epic](cycle-epic.md), le [cycle de correctif](cycle-correctif.md) et la [préparation de livraison](preparer-livraison.md) décrivent les critères de passage et les preuves.
+Commencer par le [guide d'usage développement et correctif](utiliser-workflows-codex.md) pour les demandes types, les résultats attendus et la reprise d'une tâche. Le [cycle d'epic](cycle-epic.md), le [cycle de correctif](cycle-correctif.md) et la [préparation de livraison](../exploitation/deploiement/preparer-livraison.md) décrivent les critères de passage et les preuves.
 
 ## Charger le contexte utile
 
@@ -15,7 +15,7 @@ Codex découvre les `AGENTS.md` depuis la racine du dépôt jusqu'au répertoire
 | Règle métier ou transition | Spécification concernée, guide backend, [matrice d'architecture](../architecture/transverse/controle-architecture.md) | Invariant, propriétaire métier, cas nominal/refus et entrées affectées. |
 | API partagée | [Conventions API](../architecture/transverse/conventions-api-openapi.md), producteur et consommateurs réels | Contrat, accès et comportement des consommateurs ; génération distincte du déploiement. |
 | Interface/PWA | Sections utiles du README et guide local, parcours de la spécification | Test ciblé et, si le rendu change, contrôle visuel ; session/cache/permissions selon le périmètre. |
-| Déplacement/fusion de documents | [Index des spécifications](../specifications/INDEX.md), roadmap, [exports et lecteurs](../exploitation/technique/reference-documentation-centralisee.md) | Source canonique unique, liens entrants/sortants, contrat d'export et lecteurs préservés. |
+| Déplacement/fusion de documents | [Index des spécifications](../specifications/INDEX.md), roadmap, [exports et lecteurs](../exploitation/deploiement/reference-documentation-centralisee.md) | Source canonique unique, liens entrants/sortants, contrat d'export et lecteurs préservés. |
 | Exploitation/démonstration | Procédure de l'environnement et guide local des scripts | Cible explicite, effets de la commande connus et vérification propre à l'opération. |
 | Dates/horaires | [Affichage des dates](../architecture/transverse/affichage-dates.md) | Instants et dates civiles distingués, heure de Paris et transitions saisonnières selon le parcours. |
 | Identité d’en-tête | [Identité des applications](../architecture/transverse/identite-entetes-applications.md) | Symbole, nom et actions lisibles sur mobile, clavier et texte agrandi. |
@@ -38,8 +38,11 @@ Lire d'abord `git status` et le diff du périmètre ; rechercher les symboles/ch
 | [localeo-verifier-exigence](../../.agents/skills/localeo-verifier-exigence/SKILL.md) | Vérifier la couverture d'une exigence, des sources aux preuves de comportement | « Vérifie cette exigence dans les spécifications, le code et les tests ; expose les écarts. » |
 | [localeo-verifier-demonstration](../../.agents/skills/localeo-verifier-demonstration/SKILL.md) | Compatibilité des données générées avec le produit | « Vérifie le générateur après cette migration. » |
 | [localeo-preparer-deploiement](../../.agents/skills/localeo-preparer-deploiement/SKILL.md) | Rassembler versions, contrôles et procédures de livraison | « Prépare le dossier de livraison vers cet environnement. » |
+| [localeo-deployer](../../.agents/skills/localeo-deployer/SKILL.md) | Invocation explicite uniquement ; plan Render en lecture seule, sans exécuteur | « Utilise $localeo-deployer en mode plan pour préparer le déploiement sur test. » |
 
-Ils sont versionnables dans `.agents/skills` de **localeo-projet**. Leur nom et description permettent une sélection implicite ; le corps n'est chargé qu'à l'utilisation. Les dépôts applicatifs voisins ne les découvrent pas automatiquement. Pour une tâche transverse, démarrer dans `localeo-projet` avec accès aux dépôts concernés ; sinon lire explicitement la fiche par son chemin. Aucun skill global ni copie applicative n'est installé. [Découverte et portée des skills](https://learn.chatgpt.com/docs/build-skills).
+Ils sont versionnables dans `.agents/skills` de **localeo-projet**. Leur nom et description permettent une sélection implicite, sauf `localeo-deployer`, dont `agents/openai.yaml` impose `allow_implicit_invocation: false` ; le corps n'est chargé qu'à l'utilisation. Les dépôts applicatifs voisins ne les découvrent pas automatiquement. Pour une tâche transverse, démarrer dans `localeo-projet` avec accès aux dépôts concernés ; sinon lire explicitement la fiche par son chemin. Aucun skill global ni copie applicative n'est installé. [Découverte et portée des skills](https://learn.chatgpt.com/docs/build-skills).
+
+Le [pilote Render](../exploitation/deploiement/piloter-deploiement-render.md) est limité au mode plan. Le contrôle local détecte la perte de sa politique explicite ; il ne prouve ni l'activation native dans Codex ni une protection effective des comptes fournisseurs. L'exécuteur et l'approbation externe de production restent à construire.
 
 ## Profils de revue
 
@@ -118,7 +121,7 @@ concerné est indexé, y compris une suppression. Le script ne modifie pas l'ind
 et ne remplace pas la confiance native des hooks. Les deux installations de
 pré-commit appliquent ce contrôle conditionnel.
 
-La [CI documentaire](../../.github/workflows/documentation.yml) distingue les outils locaux et la validation des cinq dépôts à des références immuables. L'accès privé et les règles de branche doivent être configurés dans GitHub. Le [guide de livraison](preparer-livraison.md) décrit les preuves nécessaires ; ni une CI partielle ni l'existence d'un workflow ne prouvent la recette d'un environnement.
+La [CI documentaire](../../.github/workflows/documentation.yml) distingue les outils locaux et la validation des cinq dépôts à des références immuables. L'accès privé et les règles de branche doivent être configurés dans GitHub. Le [guide de livraison](../exploitation/deploiement/preparer-livraison.md) décrit les preuves nécessaires ; ni une CI partielle ni l'existence d'un workflow ne prouvent la recette d'un environnement.
 
 ## Entretenir les règles d'exécution personnelles
 

@@ -1,0 +1,157 @@
+{
+  "old_archive": {
+    "expected": 101,
+    "current": 101,
+    "changed_or_missing": [],
+    "added": []
+  },
+  "old_audits": {
+    "expected": 22,
+    "current": 22,
+    "changed_or_missing": [],
+    "added": []
+  },
+  "repos": {
+    "projet": {
+      "tracked_count": 1498,
+      "changed_or_missing": [],
+      "head": {
+        "code": 0,
+        "stdout": "f437465c577d3754b8743c6c48519f0d7606613e",
+        "stderr": ""
+      },
+      "status": {
+        "code": 0,
+        "stdout": "?? docs/technical-audits/\n?? docs/ux-workshops/localeo-crm/",
+        "stderr": ""
+      }
+    },
+    "backend": {
+      "tracked_count": 3405,
+      "changed_or_missing": [],
+      "head": {
+        "code": 0,
+        "stdout": "7049e7fafc76f9119924f1082a5ee7457a175d85",
+        "stderr": ""
+      },
+      "status": {
+        "code": 0,
+        "stdout": "",
+        "stderr": ""
+      }
+    },
+    "marketplace": {
+      "tracked_count": 774,
+      "changed_or_missing": [],
+      "head": {
+        "code": 0,
+        "stdout": "9527ebbfee23f7c5249ce4078c5c3f476da2d924",
+        "stderr": ""
+      },
+      "status": {
+        "code": 0,
+        "stdout": "",
+        "stderr": ""
+      }
+    },
+    "commercant": {
+      "tracked_count": 463,
+      "changed_or_missing": [],
+      "head": {
+        "code": 0,
+        "stdout": "c61f196774c477065dfc51ebb87fc1a02404329b",
+        "stderr": ""
+      },
+      "status": {
+        "code": 0,
+        "stdout": "",
+        "stderr": ""
+      }
+    },
+    "animation": {
+      "tracked_count": 706,
+      "changed_or_missing": [],
+      "head": {
+        "code": 0,
+        "stdout": "7688f1cea11bec8599bacbfaa512b265c36fed3a",
+        "stderr": ""
+      },
+      "status": {
+        "code": 0,
+        "stdout": "",
+        "stderr": ""
+      }
+    }
+  },
+  "old_benchmark_artifacts": {
+    "count": 14,
+    "errors": []
+  },
+  "current_benchmark_artifacts": {
+    "count": 18,
+    "errors": []
+  },
+  "current_measure_sources": {
+    "count": 5,
+    "errors": []
+  },
+  "deliverables": {
+    "required_count": 42,
+    "missing": []
+  },
+  "explicit_source_references": {
+    "checked": 167,
+    "errors": [
+      {
+        "document": "agents/03-concurrence-annexe.md",
+        "path": "app/infrastructure/persistence/db.py",
+        "line": "38",
+        "end": "48",
+        "error": "range",
+        "lines": 45
+      },
+      {
+        "document": "agents/03-concurrence.md",
+        "path": "app/application/dam/services/service_images.py",
+        "line": "12",
+        "end": "47",
+        "error": "range",
+        "lines": 41
+      },
+      {
+        "document": "agents/03-concurrence.md",
+        "path": "app/infrastructure/persistence/media_quota.py",
+        "line": "16",
+        "end": "35",
+        "error": "range",
+        "lines": 30
+      },
+      {
+        "document": "agents/05-api-annexe.md",
+        "path": "src/app/merchantImportsApi.ts",
+        "line": "23",
+        "end": "49",
+        "error": "range",
+        "lines": 47
+      },
+      {
+        "document": "agents/06-sre-annexe.md",
+        "path": "app/api/limitation_lectures_live.py",
+        "line": "6",
+        "end": "19",
+        "error": "range",
+        "lines": 18
+      }
+    ],
+    "scope": "full app/sql/src paths followed by line; shorthand references reviewed manually, line existence does not prove semantics"
+  },
+  "redacted_secret_scan": {
+    "files": 66,
+    "hits": [],
+    "limit": "targeted patterns, no secret values printed; not exhaustive certification"
+  },
+  "json_utf8": {
+    "errors": []
+  },
+  "success": false
+}

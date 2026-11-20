@@ -19,6 +19,10 @@
     {
       "name": "localeo-animation",
       "path": "../localeo-animation"
+    },
+    {
+      "name": "localeo-deploiement",
+      "path": "../localeo-deploiement"
     }
   ],
   "settings": {

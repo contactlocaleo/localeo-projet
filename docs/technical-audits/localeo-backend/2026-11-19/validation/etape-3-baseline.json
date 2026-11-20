@@ -1,0 +1,19 @@
+{
+  "date_locale": "2026-11-19",
+  "backend_sha": "7049e7fafc76f9119924f1082a5ee7457a175d85",
+  "sources_etape2_sha256": {
+    "01-cpu-annexe.md": "059d2f3a9c56e63e43536b41778f86e1e288cfd7cadfc910e667e72a750bb6b6",
+    "01-cpu.md": "c8671f72697e662417586b131e7fba8ddf2db613ef11501c0ab3d94efef69a7a",
+    "02-memoire-annexe.md": "cc79e6fff387c2eb902292990e11c329289943420d57ded02f1544e7850cd645",
+    "02-memoire.md": "682e8e8fadd189452f87e4a01e90961a103c87702a2762e76e0b4cd0c8299e07",
+    "03-concurrence-annexe.md": "5e9d02d11d983a78ec1411f1fb3bad24166dc0a5e323b9758f869480468c29b8",
+    "03-concurrence.md": "d50e2d3d1f53b21b246165ad05cd0448b2c73d919b6b88096711b608006cb9ae",
+    "04-persistance-annexe.md": "d56839deb51474e9fbe64f80f2910f5ad56afda38e67741c2d4aee31c3fa9d01",
+    "04-persistance.md": "abb3134f45f4e56da716fd651fa0e059a6417e24ec5f2b9a293d0208c8cc946c",
+    "05-api-annexe.md": "15d5dd1a357722c9e5aa10f420ef6fb4a9b5f62f656741d58172e2850f1e4cdc",
+    "05-api.md": "f0db2abbc857796bbed2a962f2648e751eafc7fb1e145bd3d1960c33d1723c31",
+    "06-sre-annexe.md": "2eb7f8ae5d826813d50d3ed28259da8ba6e4d5e95995f1794679d8df9e62ec62",
+    "06-sre.md": "f95c530912d5f5eb1904e8b5256d3e5a2d397d55bfcf6e30c4dacb296b714cb2"
+  },
+  "consigne": "aucun benchmark, aucune modification applicative ; vote simulé explicite ; contre-expert sans voix"
+}

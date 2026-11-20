@@ -1,0 +1,56 @@
+{
+  "missing_prompts": [],
+  "reconstructed_missing_prompts": false,
+  "verification": "Presence/hash + manual text concordance with the user messages in this conversation; original first five files unchanged",
+  "prompts": [
+    {
+      "path": "prompts/01-initialisation.md",
+      "bytes": 3695,
+      "sha256": "380ae6440c7de8a4f40ccd1df3c23f09d46c5a11fc4198ae31d38e722657de28",
+      "provenance": "user prompt from current conversation; manually checked",
+      "preserved_from_start_step6": true
+    },
+    {
+      "path": "prompts/02-agents.md",
+      "bytes": 3590,
+      "sha256": "73493dd5c0161da4099fe6d6b27773a3d78b57598ce418b3437547c4ebd4d17d",
+      "provenance": "user prompt from current conversation; manually checked",
+      "preserved_from_start_step6": true
+    },
+    {
+      "path": "prompts/03-contradiction.md",
+      "bytes": 4004,
+      "sha256": "9524d54056eafbbe0d6aa4ba35d01d8ee2e6f4846c88aa037ecda45b32aa4984",
+      "provenance": "user prompt from current conversation; manually checked",
+      "preserved_from_start_step6": true
+    },
+    {
+      "path": "prompts/04-benchmarks.md",
+      "bytes": 3129,
+      "sha256": "6dcc7a1c41b3ea0bb71adf86da441993e6584a1a77b447790f70a1af72902aa0",
+      "provenance": "user prompt from current conversation; manually checked",
+      "preserved_from_start_step6": true
+    },
+    {
+      "path": "prompts/05-validation.md",
+      "bytes": 2187,
+      "sha256": "29ec9674aa1e9ea01aa06d75249ed5cc3cceab2ea7a1003ee55c3abbf056142f",
+      "provenance": "user prompt from current conversation; manually checked",
+      "preserved_from_start_step6": true
+    },
+    {
+      "path": "prompts/06-archivage.md",
+      "bytes": 3097,
+      "sha256": "ee3b2ad1641b4d290c2ea511f846db458b540429950f6618ed0a0c5bcdd7921c",
+      "provenance": "user prompt from current conversation; manually checked",
+      "preserved_from_start_step6": false
+    },
+    {
+      "path": "prompts/RELANCER-AUDIT.md",
+      "bytes": 12650,
+      "sha256": "a3e7e6a428a4dae73925230cd0fc528cc51a90ad5eb3160b871aae6ade47ed57",
+      "provenance": "new reusable prompt authored at step6; not executed",
+      "preserved_from_start_step6": false
+    }
+  ]
+}

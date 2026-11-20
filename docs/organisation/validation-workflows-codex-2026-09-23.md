@@ -43,6 +43,6 @@ Pour les prochains essais, conserver le besoin et les versions des sources, rele
 ## Activation et limites restantes
 
 - La confiance native des hooks Codex se valide dans `/hooks` sur la définition exacte ; les commandes testées seules ne prouvent pas cette activation dans le client.
-- Les workflows GitHub doivent être publiés puis exécutés. Le contrôle documentaire transverse exige cinq SHAs et un accès privé en lecture `LOCALEO_WORKSPACE_READ_TOKEN`. Les protections de branche se configurent avec les noms réels des jobs, selon le [guide de livraison](preparer-livraison.md).
+- Les workflows GitHub doivent être publiés puis exécutés. Le contrôle documentaire transverse exige cinq SHAs et un accès privé en lecture `LOCALEO_WORKSPACE_READ_TOKEN`. Les protections de branche se configurent avec les noms réels des jobs, selon le [guide de livraison](../exploitation/deploiement/preparer-livraison.md).
 - La suite backend complète et les matrices Linux/Python CI n'ont pas été rejouées localement. La Marketplace présente un blocage local Playwright/teardown déjà documenté ; son job Linux reste à exécuter. ESLint sur tout le disque local rencontre des permissions sur des dossiers temporaires non versionnés.
 - Aucun déploiement, aucune validation de fournisseur réel, aucun commit ni push ne sont réalisés au titre de cette mise en place. Un manifeste préparatoire n'atteste pas la disponibilité d'une cible réelle.

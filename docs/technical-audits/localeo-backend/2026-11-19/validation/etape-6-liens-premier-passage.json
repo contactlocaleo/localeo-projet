@@ -1,0 +1,264 @@
+{
+  "mode": "working-tree",
+  "changed_only": false,
+  "repositories": [
+    "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet"
+  ],
+  "checked_guides": 156,
+  "checked_links": 3469,
+  "errors": [
+    {
+      "source": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\etape-6-verification.md",
+      "line": 34,
+      "destination": "etape-6-guidance.json",
+      "target": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\etape-6-guidance.json",
+      "reason": "missing_target"
+    },
+    {
+      "source": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\etape-6-verification.md",
+      "line": 34,
+      "destination": "etape-6-liens.json",
+      "target": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\etape-6-liens.json",
+      "reason": "missing_target"
+    },
+    {
+      "source": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\readme-avant-archivage.md",
+      "line": 11,
+      "destination": "inventaire/stack-technique.md",
+      "target": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\inventaire\\stack-technique.md",
+      "reason": "missing_target"
+    },
+    {
+      "source": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\readme-avant-archivage.md",
+      "line": 14,
+      "destination": "inventaire/architecture.md",
+      "target": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\inventaire\\architecture.md",
+      "reason": "missing_target"
+    },
+    {
+      "source": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\readme-avant-archivage.md",
+      "line": 14,
+      "destination": "inventaire/catalogue-api.md",
+      "target": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\inventaire\\catalogue-api.md",
+      "reason": "missing_target"
+    },
+    {
+      "source": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\readme-avant-archivage.md",
+      "line": 14,
+      "destination": "inventaire/flux-critiques.md",
+      "target": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\inventaire\\flux-critiques.md",
+      "reason": "missing_target"
+    },
+    {
+      "source": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\readme-avant-archivage.md",
+      "line": 15,
+      "destination": "inventaire/configuration-ressources.md",
+      "target": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\inventaire\\configuration-ressources.md",
+      "reason": "missing_target"
+    },
+    {
+      "source": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\readme-avant-archivage.md",
+      "line": 15,
+      "destination": "inventaire/limitations.md",
+      "target": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\inventaire\\limitations.md",
+      "reason": "missing_target"
+    },
+    {
+      "source": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\readme-avant-archivage.md",
+      "line": 16,
+      "destination": "inventaire/plan-orchestration-agents.md",
+      "target": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\inventaire\\plan-orchestration-agents.md",
+      "reason": "missing_target"
+    },
+    {
+      "source": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\readme-avant-archivage.md",
+      "line": 17,
+      "destination": "prompts/01-initialisation.md",
+      "target": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\prompts\\01-initialisation.md",
+      "reason": "missing_target"
+    },
+    {
+      "source": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\readme-avant-archivage.md",
+      "line": 17,
+      "destination": "validation/README.md",
+      "target": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\validation\\README.md",
+      "reason": "missing_target"
+    },
+    {
+      "source": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\readme-avant-archivage.md",
+      "line": 22,
+      "destination": "prompts/02-agents.md",
+      "target": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\prompts\\02-agents.md",
+      "reason": "missing_target"
+    },
+    {
+      "source": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\readme-avant-archivage.md",
+      "line": 24,
+      "destination": "agents/README.md",
+      "target": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\agents\\README.md",
+      "reason": "missing_target"
+    },
+    {
+      "source": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\readme-avant-archivage.md",
+      "line": 24,
+      "destination": "validation/etape-2-verification.md",
+      "target": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\validation\\etape-2-verification.md",
+      "reason": "missing_target"
+    },
+    {
+      "source": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\readme-avant-archivage.md",
+      "line": 26,
+      "destination": "prompts/03-contradiction.md",
+      "target": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\prompts\\03-contradiction.md",
+      "reason": "missing_target"
+    },
+    {
+      "source": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\readme-avant-archivage.md",
+      "line": 26,
+      "destination": "contradiction/consolidation.md",
+      "target": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\contradiction\\consolidation.md",
+      "reason": "missing_target"
+    },
+    {
+      "source": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\readme-avant-archivage.md",
+      "line": 26,
+      "destination": "contradiction/causes-racines.md",
+      "target": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\contradiction\\causes-racines.md",
+      "reason": "missing_target"
+    },
+    {
+      "source": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\readme-avant-archivage.md",
+      "line": 26,
+      "destination": "contradiction/contre-expertise.md",
+      "target": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\contradiction\\contre-expertise.md",
+      "reason": "missing_target"
+    },
+    {
+      "source": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\readme-avant-archivage.md",
+      "line": 26,
+      "destination": "contradiction/debats-et-votes.md",
+      "target": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\contradiction\\debats-et-votes.md",
+      "reason": "missing_target"
+    },
+    {
+      "source": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\readme-avant-archivage.md",
+      "line": 28,
+      "destination": "recommandations/backlog-preliminaire.md",
+      "target": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\recommandations\\backlog-preliminaire.md",
+      "reason": "missing_target"
+    },
+    {
+      "source": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\readme-avant-archivage.md",
+      "line": 28,
+      "destination": "recommandations/annexe-optimisations-secondaires.md",
+      "target": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\recommandations\\annexe-optimisations-secondaires.md",
+      "reason": "missing_target"
+    },
+    {
+      "source": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\readme-avant-archivage.md",
+      "line": 28,
+      "destination": "recommandations/plan-mesures.md",
+      "target": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\recommandations\\plan-mesures.md",
+      "reason": "missing_target"
+    },
+    {
+      "source": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\readme-avant-archivage.md",
+      "line": 28,
+      "destination": "validation/etape-3-controles.json",
+      "target": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\validation\\etape-3-controles.json",
+      "reason": "missing_target"
+    },
+    {
+      "source": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\readme-avant-archivage.md",
+      "line": 30,
+      "destination": "prompts/04-benchmarks.md",
+      "target": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\prompts\\04-benchmarks.md",
+      "reason": "missing_target"
+    },
+    {
+      "source": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\readme-avant-archivage.md",
+      "line": 30,
+      "destination": "benchmarks/protocole.md",
+      "target": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\benchmarks\\protocole.md",
+      "reason": "missing_target"
+    },
+    {
+      "source": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\readme-avant-archivage.md",
+      "line": 30,
+      "destination": "benchmarks/resultats.md",
+      "target": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\benchmarks\\resultats.md",
+      "reason": "missing_target"
+    },
+    {
+      "source": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\readme-avant-archivage.md",
+      "line": 30,
+      "destination": "benchmarks/profils-cpu.md",
+      "target": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\benchmarks\\profils-cpu.md",
+      "reason": "missing_target"
+    },
+    {
+      "source": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\readme-avant-archivage.md",
+      "line": 30,
+      "destination": "benchmarks/profils-memoire.md",
+      "target": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\benchmarks\\profils-memoire.md",
+      "reason": "missing_target"
+    },
+    {
+      "source": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\readme-avant-archivage.md",
+      "line": 30,
+      "destination": "benchmarks/limites.md",
+      "target": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\benchmarks\\limites.md",
+      "reason": "missing_target"
+    },
+    {
+      "source": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\readme-avant-archivage.md",
+      "line": 30,
+      "destination": "recommandations/backlog-mesure.md",
+      "target": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\recommandations\\backlog-mesure.md",
+      "reason": "missing_target"
+    },
+    {
+      "source": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\readme-avant-archivage.md",
+      "line": 30,
+      "destination": "validation/etape-4-verification.md",
+      "target": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\validation\\etape-4-verification.md",
+      "reason": "missing_target"
+    },
+    {
+      "source": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\readme-avant-archivage.md",
+      "line": 32,
+      "destination": "prompts/05-validation.md",
+      "target": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\prompts\\05-validation.md",
+      "reason": "missing_target"
+    },
+    {
+      "source": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\readme-avant-archivage.md",
+      "line": 32,
+      "destination": "recommandations/backlog-final.md",
+      "target": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\recommandations\\backlog-final.md",
+      "reason": "missing_target"
+    },
+    {
+      "source": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\readme-avant-archivage.md",
+      "line": 32,
+      "destination": "recommandations/quick-wins.md",
+      "target": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\recommandations\\quick-wins.md",
+      "reason": "missing_target"
+    },
+    {
+      "source": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\readme-avant-archivage.md",
+      "line": 32,
+      "destination": "recommandations/plan-optimisation.md",
+      "target": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\recommandations\\plan-optimisation.md",
+      "reason": "missing_target"
+    },
+    {
+      "source": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\readme-avant-archivage.md",
+      "line": 32,
+      "destination": "validation/decisions.md",
+      "target": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\validation\\decisions.md",
+      "reason": "missing_target"
+    }
+  ],
+  "warnings": []
+}

@@ -67,6 +67,56 @@ class WorkflowValidationTests(unittest.TestCase):
         self.skill.write_text('---\nname: example\ndescription: [not, a, string]\n---\nWorkflow.')
         self.assertEqual(len(validate(self.root)), 2)
 
+    def deployment_metadata(self):
+        skill = self.root / '.agents/skills/localeo-deployer/SKILL.md'
+        skill.parent.mkdir(parents=True)
+        skill.write_text('---\nname: localeo-deployer\ndescription: Plan a deployment\n---\nPlan only.', encoding='utf-8')
+        metadata = skill.parent / 'agents/openai.yaml'
+        metadata.parent.mkdir()
+        content = ('interface:\n  display_name: "Deployment"\n'
+                   '  short_description: "Prepare a read-only deployment plan"\n'
+                   '  default_prompt: "Use $localeo-deployer to plan."\n'
+                   'policy:\n  allow_implicit_invocation: false\n')
+        metadata.write_text(content, encoding='utf-8')
+        return metadata, content
+
+    def test_deployment_skill_requires_explicit_only_policy(self):
+        metadata, content = self.deployment_metadata()
+        self.assertEqual(validate(self.root), [])
+        for value in ('true', '"false"', 'null', '0', 'False', '{}'):
+            with self.subTest(value=value):
+                metadata.write_text(content.replace(': false', ': ' + value), encoding='utf-8')
+                self.assertTrue(any('localeo-deployer' in error for error in validate(self.root)))
+        for invalid in (content.split('policy:')[0], content.split('  allow_implicit')[0],
+                        content + '  allow_implicit_invocation: false\n',
+                        content + 'policy:\n  allow_implicit_invocation: false\n',
+                        content.replace('allow_implicit_invocation', 'allow_implicit_invocations')):
+            with self.subTest(invalid=invalid):
+                metadata.write_text(invalid, encoding='utf-8')
+                self.assertTrue(validate(self.root))
+        metadata.unlink()
+        self.assertTrue(any('policy.allow_implicit_invocation' in error for error in validate(self.root)))
+
+    def test_explicit_policy_validates_the_index_not_a_working_repair(self):
+        metadata, content = self.deployment_metadata()
+        metadata.write_text(content.replace(': false', ': true'), encoding='utf-8')
+        self.stage()
+        metadata.write_text(content, encoding='utf-8')
+        self.assertEqual(validate(self.root), [])
+        self.assertTrue(any('policy.allow_implicit_invocation' in error for error in validate(self.root, staged=True)))
+        self.git('add', '.agents/skills/localeo-deployer/agents/openai.yaml')
+        metadata.unlink()
+        self.assertEqual(validate(self.root, staged=True), [])
+        self.assertTrue(validate(self.root))
+
+    def test_deployment_policy_deleted_from_index_is_detected(self):
+        metadata, _ = self.deployment_metadata()
+        self.stage()
+        self.git('rm', '--cached', '.agents/skills/localeo-deployer/agents/openai.yaml')
+        self.assertTrue(metadata.exists())
+        self.assertEqual(validate(self.root), [])
+        self.assertTrue(any('policy.allow_implicit_invocation' in error for error in validate(self.root, staged=True)))
+
     def test_rejects_duplicate_discovery_fields_and_empty_handler_group(self):
         self.skill.write_text('---\nname: example\nname: example\ndescription: task\n---\nWorkflow.')
         data = json.loads(self.hooks.read_text())

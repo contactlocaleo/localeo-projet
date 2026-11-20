@@ -1,0 +1,50 @@
+[
+  {
+    "rapport": "01-cpu.md",
+    "constats": [
+      "CPU-01",
+      "CPU-02"
+    ],
+    "maximum_cinq": true,
+    "liens_source_lignes_verifies": 4,
+    "erreurs": [],
+    "controle_mecanisme": "sources relues directement par orchestrateur, par rapport, sans consolidation"
+  },
+  {
+    "rapport": "02-memoire.md",
+    "constats": [
+      "MEM-01",
+      "MEM-02",
+      "MEM-03",
+      "MEM-04"
+    ],
+    "maximum_cinq": true,
+    "liens_source_lignes_verifies": 17,
+    "erreurs": [],
+    "controle_mecanisme": "sources relues directement par orchestrateur, par rapport, sans consolidation"
+  },
+  {
+    "rapport": "03-concurrence.md",
+    "constats": [
+      "ASY-01",
+      "ASY-02",
+      "ASY-03"
+    ],
+    "maximum_cinq": true,
+    "liens_source_lignes_verifies": 13,
+    "erreurs": [],
+    "controle_mecanisme": "sources relues directement par orchestrateur, par rapport, sans consolidation"
+  },
+  {
+    "rapport": "04-persistance.md",
+    "constats": [
+      "DB-01",
+      "DB-02",
+      "DB-03"
+    ],
+    "maximum_cinq": true,
+    "liens_source_lignes_verifies": 13,
+    "erreurs": [],
+    "controle_mecanisme": "sources relues directement par orchestrateur, par rapport, sans consolidation"
+  }
+]

@@ -102,7 +102,7 @@ consommateurs. Cette organisation évite plusieurs sources concurrentes.
 Le [runner qualité](../../scripts/quality.py) possède déjà des rapports uniques,
 une publication atomique, des tentatives liées par empreinte, les états Git avant
 et après contrôle, le refus de preuves périmées ou liées à d'autres versions et
-un manifeste coordonné de préparation. Le [guide de livraison](../organisation/preparer-livraison.md)
+un manifeste coordonné de préparation. Le [guide de livraison](../exploitation/deploiement/preparer-livraison.md)
 distingue préparation, déploiement et recette de la cible.
 
 La CI backend comprend des tests PostgreSQL et une compatibilité démonstration

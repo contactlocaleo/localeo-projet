@@ -1,0 +1,127 @@
+{
+  "date_locale": "2026-11-19",
+  "backend_sha": "7049e7fafc76f9119924f1082a5ee7457a175d85",
+  "target": "offline local synthetic components; no HTTP/PostgreSQL",
+  "hardware": {
+    "cpu": "Intel Core i7-10510U",
+    "physical_cores": 4,
+    "logical_processors": 8,
+    "physical_ram_bytes": 17007263744,
+    "os": "Windows 11 10.0.26200"
+  },
+  "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+  "installed_versions": {
+    "sqlalchemy": "2.0.48",
+    "pytest": "8.4.2",
+    "psycopg": "3.3.3",
+    "fastapi": "0.128.8",
+    "starlette": "0.50.0",
+    "uvicorn": "0.41.0"
+  },
+  "retained_results": {
+    "M01": "results-attempt03.json",
+    "M02": "results-attempt03.json",
+    "M06": "results-attempt04.json"
+  },
+  "attempts": [
+    {
+      "id": 1,
+      "status": "failed_harness_before_measurements",
+      "evidence": "pytest.xml"
+    },
+    {
+      "id": 2,
+      "status": "failed_harness_dataclass",
+      "evidence": "results-attempt02.json"
+    },
+    {
+      "id": 3,
+      "status": "stopped_profile_time_threshold",
+      "evidence": "results-attempt03.json"
+    },
+    {
+      "id": 4,
+      "status": "success_reduced_csv_only",
+      "evidence": "results-attempt04.json"
+    }
+  ],
+  "source_sha256": {
+    "app/infrastructure/admin/admin.py": "0c1897f8e23a6aa9918066deece9ffb76a65d8e9784edf206b4321bd7ca488d0",
+    "app/application/exploitation/services/batchs.py": "6c9b4b553a6fc84a6b22d505f16820dcb3087c965633786c049f88fbe3b3f712",
+    "app/application/gestion_achats/services/export_financier.py": "f673f42a6900d9ba993035403d4c82725e2df721a5bf771d1275d617e836bc6d"
+  },
+  "artifact_root": "localeo-backend/tmp/performance-stage4-2026-11-19",
+  "artifacts": [
+    {
+      "path": "tmp/performance-stage4-2026-11-19/csv-10000-profile.txt",
+      "bytes": 1011,
+      "sha256": "ec0c352abf155597d6ddc5385d211149c2f4c7698c020261a50ba27b9bdc7cdb"
+    },
+    {
+      "path": "tmp/performance-stage4-2026-11-19/csv-10000.pstats",
+      "bytes": 1230,
+      "sha256": "89205b8eeafa52ee5ada0551eff351c7deaec9cd6afa542016b67eb4e3eccbaf"
+    },
+    {
+      "path": "tmp/performance-stage4-2026-11-19/harness-attempt01.py",
+      "bytes": 15655,
+      "sha256": "75aa94af2f864b947cbe0543fce2ebde0824f06816b4456bac28f4c90cc1b2b2"
+    },
+    {
+      "path": "tmp/performance-stage4-2026-11-19/harness-attempt02.py",
+      "bytes": 15694,
+      "sha256": "b19309368b9cca671c96272867830cfeca35cd347cfc9391910655bde07ce70e"
+    },
+    {
+      "path": "tmp/performance-stage4-2026-11-19/harness-attempt03.py",
+      "bytes": 15743,
+      "sha256": "c1782b180eaccdc6dfa6471c2761568609f5a17666c072966811f74c327d88eb"
+    },
+    {
+      "path": "tmp/performance-stage4-2026-11-19/pytest-attempt02.xml",
+      "bytes": 20910,
+      "sha256": "7f1818885cb582daca677c5f99c0889ba8fb1fb271a2499dfbd670c9ccfe5835"
+    },
+    {
+      "path": "tmp/performance-stage4-2026-11-19/pytest-attempt03.xml",
+      "bytes": 752,
+      "sha256": "cb8f22c421a4eafcbd061a3f881679089f9a51da5de982c1654a4ac44b8e3758"
+    },
+    {
+      "path": "tmp/performance-stage4-2026-11-19/pytest-attempt04.xml",
+      "bytes": 370,
+      "sha256": "80c79ed90f04e8793847e0a03f7e9ef66d19824c3e02b7660d2ab66a430ff1e1"
+    },
+    {
+      "path": "tmp/performance-stage4-2026-11-19/pytest.xml",
+      "bytes": 4061,
+      "sha256": "c82ea46dc7b48032dcf5c574475e96b30424e2a73e58bbfc8cde64711aaed4f1"
+    },
+    {
+      "path": "tmp/performance-stage4-2026-11-19/results-attempt02.json",
+      "bytes": 50644,
+      "sha256": "6b948b9608c5a694cf5a42b8efd1cbe8b6e61c889a1534851fc53ba68cb8c194"
+    },
+    {
+      "path": "tmp/performance-stage4-2026-11-19/results-attempt03.json",
+      "bytes": 51440,
+      "sha256": "4c0ee5661a82cc3faa5ca978675ddbc379767071d064175522d399335be64379"
+    },
+    {
+      "path": "tmp/performance-stage4-2026-11-19/results-attempt04.json",
+      "bytes": 19043,
+      "sha256": "76383ba7e9be883a0bbd9b8c38c0430aae41eb0c77c551b656b32f3e7a52d88b"
+    },
+    {
+      "path": "tmp/performance-stage4-2026-11-19/results.json",
+      "bytes": 51440,
+      "sha256": "4c0ee5661a82cc3faa5ca978675ddbc379767071d064175522d399335be64379"
+    },
+    {
+      "path": "tmp/performance-stage4-2026-11-19/test_components.py",
+      "bytes": 15727,
+      "sha256": "013412bce3e6c8bd4be7b4a44b2b1a2acc3b46a823bfca166ae99098842b1aad"
+    }
+  ],
+  "gains_apres_correction": "NON MESURÉS"
+}

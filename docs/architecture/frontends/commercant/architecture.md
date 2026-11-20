@@ -22,4 +22,4 @@ Les invitations conservent la clé d'une décision incertaine. Un enrichissement
 
 ## Livraison
 
-Le build refuse les cibles API/QR non conformes à la production connue. Les flags Finance restent explicitement désactivés avant recette produit. Le service worker gère les notifications sans cache API hors ligne. Les conditions d'exploitation ne sont pas prouvées par les seuls tests locaux : voir le [registre](../../../audits/commercant/remediation-preproduction-2026-09-06.md) et la [procédure](../../../exploitation/commercant/mise-en-production.md).
+Le build refuse les cibles API/QR non conformes à la production connue. Les flags Finance restent explicitement désactivés avant recette produit. Le service worker gère les notifications sans cache API hors ligne. Les conditions d'exploitation ne sont pas prouvées par les seuls tests locaux : voir le [registre](../../../audits/commercant/remediation-preproduction-2026-09-06.md) et la [procédure](../../../exploitation/deploiement/commercant/mise-en-production.md).

@@ -41,7 +41,7 @@ connue ; aucune attribution à des données distantes n’est affirmée.
 ### Livraison et preuves
 
 Appliquer **v249_onboard_progression_acquise.sql avant le nouveau backend** par
-la [procédure de migration](../../exploitation/technique/deployer-et-verifier-schema.md).
+la [procédure de migration](../../exploitation/deploiement/deployer-et-verifier-schema.md).
 La migration ajoute un champ JSON et initialise les anciens dossiers à partir
 de leurs compteurs existants, sans modifier pièces, checklist ni capacités.
 Un ancien maximum qui n’a jamais été conservé n’est pas reconstituable ; le

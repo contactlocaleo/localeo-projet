@@ -103,7 +103,7 @@ pip install -r requirements.txt && python scripts/documentation/prepare_document
 Laisser `LOCALEO_DOCUMENTATION_ROOT` non définie pour le chemin standard, ou la
 définir à `/opt/render/project/src/.runtime/documentation`. Redéployer puis vérifier
 le guide (200) et les deux supports disponibles. Définir cette variable seule ne
-crée pas le bundle. Voir la [procédure canonique](../../exploitation/technique/reference-documentation-centralisee.md).
+crée pas le bundle. Voir la [procédure canonique](../../exploitation/deploiement/reference-documentation-centralisee.md).
 
 L’endpoint readiness refuse la clé batch du fichier opérateur local (403) ; ce
 contrôle distant n’est pas validé. Les preuves de schéma sont la migration et la

@@ -1,0 +1,47 @@
+{
+  "backend_sha": "7049e7fafc76f9119924f1082a5ee7457a175d85",
+  "backend_status": "",
+  "tracked_files_checked": 3405,
+  "tracked_changes": [],
+  "required_files_missing": [],
+  "required_files_sha256": {
+    "prompts/04-benchmarks.md": "6dcc7a1c41b3ea0bb71adf86da441993e6584a1a77b447790f70a1af72902aa0",
+    "benchmarks/protocole.md": "9940c57f1553758825602af0615aac1203df952107d921f69fc715bdb610501c",
+    "benchmarks/resultats.md": "ee07bba687809c8e682a731706afd97662b0438a238816cc00e0dc24f4beaf8f",
+    "benchmarks/limites.md": "10ecbd37f4419bdb169bb157293944cf194e2655b3e3707f11dff3098689f0e5",
+    "benchmarks/profils-cpu.md": "052a5de40028ab4196f9c9f3f9de622adadb7daa3860d608f4494f0291659a49",
+    "benchmarks/profils-memoire.md": "353a2397852c53267ea9dab53d17e72961629cb18f70c6093e3bd2a013173b30",
+    "recommandations/backlog-mesure.md": "880829fafb9266b5056a4b14da35d9927af8f3bb8d73a985c0f18a2857cecc0f"
+  },
+  "source_line_references_checked": 31,
+  "raw_artifacts_sha256_checked": 14,
+  "retained_attempts": {
+    "M01": 3,
+    "M02": 3,
+    "M06": 4
+  },
+  "M01_rounds": 240,
+  "M06_timed_exports": 21,
+  "M06_allocation_trials": 9,
+  "main_orientations": 8,
+  "priority_counts": {
+    "P0": 0,
+    "P1": 2,
+    "P2": 6
+  },
+  "application_changes": false,
+  "specialist_reports_unchanged": 12,
+  "independent_review": "favorable; no blocking reservation; no execution by reviewer",
+  "guidance_all": {
+    "guides": 118,
+    "links": 1733,
+    "errors": 0,
+    "warnings": 0
+  },
+  "guidance_stage4": {
+    "guides": 103,
+    "links": 1519,
+    "errors": 0,
+    "warnings": 0
+  }
+}

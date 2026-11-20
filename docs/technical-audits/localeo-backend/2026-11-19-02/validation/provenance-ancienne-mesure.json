@@ -1,0 +1,121 @@
+[
+  {
+    "path": "app/infrastructure/admin/admin.py",
+    "kind": "source",
+    "expected": "0c1897f8e23a6aa9918066deece9ffb76a65d8e9784edf206b4321bd7ca488d0",
+    "actual": "0c1897f8e23a6aa9918066deece9ffb76a65d8e9784edf206b4321bd7ca488d0",
+    "ok": true
+  },
+  {
+    "path": "app/application/exploitation/services/batchs.py",
+    "kind": "source",
+    "expected": "6c9b4b553a6fc84a6b22d505f16820dcb3087c965633786c049f88fbe3b3f712",
+    "actual": "6c9b4b553a6fc84a6b22d505f16820dcb3087c965633786c049f88fbe3b3f712",
+    "ok": true
+  },
+  {
+    "path": "app/application/gestion_achats/services/export_financier.py",
+    "kind": "source",
+    "expected": "f673f42a6900d9ba993035403d4c82725e2df721a5bf771d1275d617e836bc6d",
+    "actual": "f673f42a6900d9ba993035403d4c82725e2df721a5bf771d1275d617e836bc6d",
+    "ok": true
+  },
+  {
+    "path": "tmp/performance-stage4-2026-11-19/csv-10000-profile.txt",
+    "kind": "artifact",
+    "expected": "ec0c352abf155597d6ddc5385d211149c2f4c7698c020261a50ba27b9bdc7cdb",
+    "actual": "ec0c352abf155597d6ddc5385d211149c2f4c7698c020261a50ba27b9bdc7cdb",
+    "ok": true
+  },
+  {
+    "path": "tmp/performance-stage4-2026-11-19/csv-10000.pstats",
+    "kind": "artifact",
+    "expected": "89205b8eeafa52ee5ada0551eff351c7deaec9cd6afa542016b67eb4e3eccbaf",
+    "actual": "89205b8eeafa52ee5ada0551eff351c7deaec9cd6afa542016b67eb4e3eccbaf",
+    "ok": true
+  },
+  {
+    "path": "tmp/performance-stage4-2026-11-19/harness-attempt01.py",
+    "kind": "artifact",
+    "expected": "75aa94af2f864b947cbe0543fce2ebde0824f06816b4456bac28f4c90cc1b2b2",
+    "actual": "75aa94af2f864b947cbe0543fce2ebde0824f06816b4456bac28f4c90cc1b2b2",
+    "ok": true
+  },
+  {
+    "path": "tmp/performance-stage4-2026-11-19/harness-attempt02.py",
+    "kind": "artifact",
+    "expected": "b19309368b9cca671c96272867830cfeca35cd347cfc9391910655bde07ce70e",
+    "actual": "b19309368b9cca671c96272867830cfeca35cd347cfc9391910655bde07ce70e",
+    "ok": true
+  },
+  {
+    "path": "tmp/performance-stage4-2026-11-19/harness-attempt03.py",
+    "kind": "artifact",
+    "expected": "c1782b180eaccdc6dfa6471c2761568609f5a17666c072966811f74c327d88eb",
+    "actual": "c1782b180eaccdc6dfa6471c2761568609f5a17666c072966811f74c327d88eb",
+    "ok": true
+  },
+  {
+    "path": "tmp/performance-stage4-2026-11-19/pytest-attempt02.xml",
+    "kind": "artifact",
+    "expected": "7f1818885cb582daca677c5f99c0889ba8fb1fb271a2499dfbd670c9ccfe5835",
+    "actual": "7f1818885cb582daca677c5f99c0889ba8fb1fb271a2499dfbd670c9ccfe5835",
+    "ok": true
+  },
+  {
+    "path": "tmp/performance-stage4-2026-11-19/pytest-attempt03.xml",
+    "kind": "artifact",
+    "expected": "cb8f22c421a4eafcbd061a3f881679089f9a51da5de982c1654a4ac44b8e3758",
+    "actual": "cb8f22c421a4eafcbd061a3f881679089f9a51da5de982c1654a4ac44b8e3758",
+    "ok": true
+  },
+  {
+    "path": "tmp/performance-stage4-2026-11-19/pytest-attempt04.xml",
+    "kind": "artifact",
+    "expected": "80c79ed90f04e8793847e0a03f7e9ef66d19824c3e02b7660d2ab66a430ff1e1",
+    "actual": "80c79ed90f04e8793847e0a03f7e9ef66d19824c3e02b7660d2ab66a430ff1e1",
+    "ok": true
+  },
+  {
+    "path": "tmp/performance-stage4-2026-11-19/pytest.xml",
+    "kind": "artifact",
+    "expected": "c82ea46dc7b48032dcf5c574475e96b30424e2a73e58bbfc8cde64711aaed4f1",
+    "actual": "c82ea46dc7b48032dcf5c574475e96b30424e2a73e58bbfc8cde64711aaed4f1",
+    "ok": true
+  },
+  {
+    "path": "tmp/performance-stage4-2026-11-19/results-attempt02.json",
+    "kind": "artifact",
+    "expected": "6b948b9608c5a694cf5a42b8efd1cbe8b6e61c889a1534851fc53ba68cb8c194",
+    "actual": "6b948b9608c5a694cf5a42b8efd1cbe8b6e61c889a1534851fc53ba68cb8c194",
+    "ok": true
+  },
+  {
+    "path": "tmp/performance-stage4-2026-11-19/results-attempt03.json",
+    "kind": "artifact",
+    "expected": "4c0ee5661a82cc3faa5ca978675ddbc379767071d064175522d399335be64379",
+    "actual": "4c0ee5661a82cc3faa5ca978675ddbc379767071d064175522d399335be64379",
+    "ok": true
+  },
+  {
+    "path": "tmp/performance-stage4-2026-11-19/results-attempt04.json",
+    "kind": "artifact",
+    "expected": "76383ba7e9be883a0bbd9b8c38c0430aae41eb0c77c551b656b32f3e7a52d88b",
+    "actual": "76383ba7e9be883a0bbd9b8c38c0430aae41eb0c77c551b656b32f3e7a52d88b",
+    "ok": true
+  },
+  {
+    "path": "tmp/performance-stage4-2026-11-19/results.json",
+    "kind": "artifact",
+    "expected": "4c0ee5661a82cc3faa5ca978675ddbc379767071d064175522d399335be64379",
+    "actual": "4c0ee5661a82cc3faa5ca978675ddbc379767071d064175522d399335be64379",
+    "ok": true
+  },
+  {
+    "path": "tmp/performance-stage4-2026-11-19/test_components.py",
+    "kind": "artifact",
+    "expected": "013412bce3e6c8bd4be7b4a44b2b1a2acc3b46a823bfca166ae99098842b1aad",
+    "actual": "013412bce3e6c8bd4be7b4a44b2b1a2acc3b46a823bfca166ae99098842b1aad",
+    "ok": true
+  }
+]

@@ -1,0 +1,15 @@
+﻿{
+    "cpu":  {
+                "Name":  "Intel(R) Core(TM) i7-10510U CPU @ 1.80GHz",
+                "NumberOfCores":  4,
+                "NumberOfLogicalProcessors":  8
+            },
+    "timezone":  "Europe/Paris",
+    "os":  {
+               "Caption":  "Microsoft Windows 11 Famille",
+               "Version":  "10.0.26200",
+               "FreePhysicalMemory":  2547224
+           },
+    "exclusive_machine":  false,
+    "ram_bytes":  17007263744
+}

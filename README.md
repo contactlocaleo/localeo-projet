@@ -36,7 +36,7 @@ python scripts/check_guidance.py
 
 Pour un changement des outils, ajouter leurs tests ciblés. Les contrôles `python scripts/check_workspace.py` et `python -m unittest discover -s tests` vérifient respectivement les cinq racines Git et l’ensemble des outils/corpus locaux. Le contrôle des destinations historiques est séparé : `python scripts/check_workspace.py --historical-migration` ; ses absences peuvent correspondre à des retraits ultérieurs légitimes. Ne pas confondre un contrôle de liens réussi avec une validation métier.
 
-Pour livrer le backend seul, préparer un bundle non versionné puis vérifier ses empreintes. Les commandes, chemins et modalités de déploiement sont dans le [guide de documentation centralisée](docs/exploitation/technique/reference-documentation-centralisee.md). Le synchroniseur refuse d’écraser un bundle modifié localement. La CI backend teste les lecteurs et le contrôle d’intégrité sur des fixtures indépendantes ; le bundle réel se vérifie lors de la préparation du déploiement.
+Pour livrer le backend seul, préparer un bundle non versionné puis vérifier ses empreintes. Les commandes, chemins et modalités de déploiement sont dans le [guide de documentation centralisée](docs/exploitation/deploiement/reference-documentation-centralisee.md). Le synchroniseur refuse d’écraser un bundle modifié localement. La CI backend teste les lecteurs et le contrôle d’intégrité sur des fixtures indépendantes ; le bundle réel se vérifie lors de la préparation du déploiement.
 
 ## Livrer une évolution
 

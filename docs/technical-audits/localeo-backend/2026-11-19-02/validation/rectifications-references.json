@@ -1,0 +1,50 @@
+[
+  {
+    "file": "agents/03-concurrence-annexe.md",
+    "before_sha256": "851955ac3b3e98ae9d96069b54c3f267861138867643d66f3b994214f0446031",
+    "after_sha256": "913d73f2f191e305f0cf1d1c86d744c1c53dab982db2f930dbbbcb514e1b99bf",
+    "applied": [
+      {
+        "old": "app/infrastructure/persistence/db.py:38-48",
+        "new": "app/infrastructure/persistence/db.py:33-45"
+      }
+    ]
+  },
+  {
+    "file": "agents/03-concurrence.md",
+    "before_sha256": "cf024dee5d3f60e6234ed9393ba6405123b524389014d5b871dac2c6bf96f2dd",
+    "after_sha256": "02e32cd721949255c672b5514452588d8a6c76e6835e4f9251e778416b5baa70",
+    "applied": [
+      {
+        "old": "app/application/dam/services/service_images.py:12-47",
+        "new": "app/application/dam/services/service_images.py:12-41"
+      },
+      {
+        "old": "app/infrastructure/persistence/media_quota.py:16-35",
+        "new": "app/infrastructure/persistence/media_quota.py:16-30"
+      }
+    ]
+  },
+  {
+    "file": "agents/05-api-annexe.md",
+    "before_sha256": "45c043e255bc5ebb7bcb83af78c3c62ce313b5f05cd896fa6ccea9b106c05b0e",
+    "after_sha256": "30c7c1623e5f0019604d5a70b8e1f4bed4183343b8f9118d69b934383dbee339",
+    "applied": [
+      {
+        "old": "src/app/merchantImportsApi.ts:23\u201349",
+        "new": "src/app/merchantImportsApi.ts:23\u201347"
+      }
+    ]
+  },
+  {
+    "file": "agents/06-sre-annexe.md",
+    "before_sha256": "87edcd419d2ff03c99175d35a5c8bb38cc90afd1b9376371d8aaa919f3567428",
+    "after_sha256": "e49e0cdb5cc70812de5a0e09b2c62f60270250fe21277aab3ea8c3a4df59b5e5",
+    "applied": [
+      {
+        "old": "app/api/limitation_lectures_live.py:6-19",
+        "new": "app/api/limitation_lectures_live.py:6-18"
+      }
+    ]
+  }
+]

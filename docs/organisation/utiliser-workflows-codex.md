@@ -9,7 +9,7 @@ Ce guide explique les demandes à formuler et les résultats à attendre. Le [gu
 3. Donner l'objectif, le comportement attendu et les contraintes connues. Il n'est pas nécessaire de recopier les règles du projet ni de citer tous les skills.
 4. Pour un nouveau sujet, ouvrir une conversation distincte. Pour poursuivre le même travail, garder la conversation ou fournir la note courte de reprise décrite plus bas.
 
-Les skills sont sélectionnés selon la demande ou appelés explicitement avec `$nom-du-skill`. Ils n'imposent pas de nouvelle confirmation pour une action déjà autorisée. Une question produit réellement bloquante reste une question : Codex ne doit pas inventer l'arbitrage.
+Les skills sont sélectionnés selon la demande ou appelés explicitement avec `$nom-du-skill`. Le pilote `localeo-deployer` exige une invocation explicite et ne propose actuellement que le mode plan. Les skills n'imposent pas de nouvelle confirmation pour une action déjà autorisée. Une question produit réellement bloquante reste une question : Codex ne doit pas inventer l'arbitrage.
 
 ## Exemple : du besoin à la livraison
 
@@ -47,9 +47,20 @@ Le lot de commit contient les fichiers et un message proposé ; la préparation 
 
 > Utilise $localeo-preparer-deploiement pour préparer la livraison de [epic/correctif] vers [environnement]. Assemble les versions, preuves, migrations, documents et procédures. Produis le dossier de préparation avec ses blocages éventuels.
 
-Résultat attendu : dossier traçable et [manifeste de préparation](preparer-livraison.md). Un rapport de tests local ne prouve ni un déploiement ni le bon fonctionnement de l'environnement cible.
+Résultat attendu : dossier traçable et [manifeste de préparation](../exploitation/deploiement/preparer-livraison.md). Un rapport de tests local ne prouve ni un déploiement ni le bon fonctionnement de l'environnement cible.
 
 Les demandes Git et exploitation sont distinctes. Exemples : « Commit les changements de cette epic dans chaque dépôt concerné », puis « Push ces commits ». Une demande explicite de déploiement doit identifier la cible ; les vérifications de la procédure s'appliquent alors.
+
+### 6. Préparer le plan Render
+
+> Utilise $localeo-deployer en mode plan pour préparer le déploiement sur test. Examine les quatre applications, les versions candidates et les blocages.
+
+Le [pilote Render](../exploitation/deploiement/piloter-deploiement-render.md) utilise
+l'inventaire déclaré (`test` suit `main`) et distingue celui-ci des observations
+fournisseurs. Sans manifeste, les HEAD sont seulement candidats. Les accès absents
+et les écarts DNS/configuration restent explicites ; aucune ressource n'est modifiée.
+Le rapport est conservé dans un nouveau dossier ignoré `.artifacts/deploiement/`.
+Le mode exécution et le verrou externe de production ne sont pas encore disponibles.
 
 ## Exemple : faire évoluer une epic existante
 

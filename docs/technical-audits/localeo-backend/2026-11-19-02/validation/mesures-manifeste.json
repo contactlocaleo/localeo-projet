@@ -1,0 +1,124 @@
+{
+  "backend_sha": "7049e7fafc76f9119924f1082a5ee7457a175d85",
+  "artifact_root": "localeo-backend/tmp/performance-audit-2026-11-19-02",
+  "artifacts": [
+    {
+      "path": "tmp/performance-audit-2026-11-19-02/csv-10000-profile.txt",
+      "bytes": 1004,
+      "sha256": "b99c2f51a955f20c48a086e2ebe9e3d55d36ed4696619ffb32feea4834c42d8e"
+    },
+    {
+      "path": "tmp/performance-audit-2026-11-19-02/csv-10000.pstats",
+      "bytes": 1225,
+      "sha256": "935d1c65f94a83ac45dc37bbdb5b629bd1bc82fbf29ef0f8827b72423755ef99"
+    },
+    {
+      "path": "tmp/performance-audit-2026-11-19-02/csv-10000.pstats.txt",
+      "bytes": 1140,
+      "sha256": "26c9a18e4ab3aa84e266856c41f4b0cc2c7dc37c244df8bc1de3a6f08b9312ef"
+    },
+    {
+      "path": "tmp/performance-audit-2026-11-19-02/csv.xml",
+      "bytes": 364,
+      "sha256": "f3b4df43246fe72eeb6c88017b5cc1a64cc04547568f80cc2aa4704912de4de5"
+    },
+    {
+      "path": "tmp/performance-audit-2026-11-19-02/generate_reports.py",
+      "bytes": 9792,
+      "sha256": "cfc4bf7040a6841ab783a8fa69b9a322b4778cac30254e7bdfe5239051997e38"
+    },
+    {
+      "path": "tmp/performance-audit-2026-11-19-02/inventory.py",
+      "bytes": 2826,
+      "sha256": "fb62d0cceaf609c9ca0e98fbf826b7be1bb76e87c990cc538e0792aad25b7e2f"
+    },
+    {
+      "path": "tmp/performance-audit-2026-11-19-02/m01-m02.xml",
+      "bytes": 368,
+      "sha256": "0f87edaa951fd40750a2ac4e9547c93e9badbd3737eb97479653c006f8787d4a"
+    },
+    {
+      "path": "tmp/performance-audit-2026-11-19-02/population-10000.pstats",
+      "bytes": 3479,
+      "sha256": "955e375a9941a7982313d4ff2fb4d59ea420ba177e0a379d18be23431377efa6"
+    },
+    {
+      "path": "tmp/performance-audit-2026-11-19-02/population-10000.pstats.txt",
+      "bytes": 1298,
+      "sha256": "6a59c8aabe803b27e62689ce94115731d1845300045f744e736ea50f7217e38b"
+    },
+    {
+      "path": "tmp/performance-audit-2026-11-19-02/population.xml",
+      "bytes": 370,
+      "sha256": "0dfad02161acd4de85e5da1c430196e0157681d2faa2a90ff0dcfbb7b41a5128"
+    },
+    {
+      "path": "tmp/performance-audit-2026-11-19-02/results-csv.json",
+      "bytes": 18928,
+      "sha256": "2dd095087c53ecb3b390ee9babceb129ae4224664b0b59b1dd2e63394ddf65ea"
+    },
+    {
+      "path": "tmp/performance-audit-2026-11-19-02/results-population.json",
+      "bytes": 14142,
+      "sha256": "b01934105baabe103d2d281a7d780b1dd0b74507a5f60265ea879925fe978f2a"
+    },
+    {
+      "path": "tmp/performance-audit-2026-11-19-02/results.json",
+      "bytes": 51441,
+      "sha256": "46ec6c863a8ab2b647c4e406482cc03241e6aa7adaaf6a0585c313e0fec6940e"
+    },
+    {
+      "path": "tmp/performance-audit-2026-11-19-02/static-routes.json",
+      "bytes": 326188,
+      "sha256": "96aefb06dc7d00de82749a09d5f7eef4d46ddfbf7ef005d94906a73e3c737488"
+    },
+    {
+      "path": "tmp/performance-audit-2026-11-19-02/test_csv.py",
+      "bytes": 16069,
+      "sha256": "169f9f2dad1975ddb37aac9b853ca17930ec27787791811b1577d53562b8aa03"
+    },
+    {
+      "path": "tmp/performance-audit-2026-11-19-02/test_m01_m02.py",
+      "bytes": 16096,
+      "sha256": "16af41e5c72f0ca50dc1b4aec48fb424e709ebc19a2b4137f55430b3b9af0fbe"
+    },
+    {
+      "path": "tmp/performance-audit-2026-11-19-02/test_population.py",
+      "bytes": 3410,
+      "sha256": "02f01526860c8bc38d8b4ebd9d041b8cbf2d3ca3869dfa549727b380a32524d3"
+    },
+    {
+      "path": "tmp/performance-audit-2026-11-19-02/verify_archive.py",
+      "bytes": 6689,
+      "sha256": "2f18ff97cf0f19eef1fef2dbbeb95d03b08037d165d28e11eea2476961735933"
+    }
+  ],
+  "source_sha256": {
+    "app/application/exploitation/services/batchs.py": "6c9b4b553a6fc84a6b22d505f16820dcb3087c965633786c049f88fbe3b3f712",
+    "app/application/gestion_achats/services/export_financier.py": "f673f42a6900d9ba993035403d4c82725e2df721a5bf771d1275d617e836bc6d",
+    "app/domaine/animation_locale/entities/tirage_animation.py": "6521879c7a7912c16d5f4ecef51375bb2ba03066aa731531108081ef3116cddb",
+    "app/infrastructure/admin/admin.py": "0c1897f8e23a6aa9918066deece9ffb76a65d8e9784edf206b4321bd7ca488d0",
+    "scripts/validation/test_isolated.py": "18605f2507d167ae144e94dacfcbba74c8aea4bae80d5be4809576e7682ec73d"
+  },
+  "commands": [
+    {
+      "command": "py -3.14 scripts/validation/test_isolated.py tmp/performance-audit-2026-11-19-02/test_m01_m02.py -q --junitxml=tmp/performance-audit-2026-11-19-02/m01-m02.xml --tb=short",
+      "returncode": 0,
+      "result": "1 passed",
+      "pytest_seconds": 9.72
+    },
+    {
+      "command": "py -3.14 scripts/validation/test_isolated.py tmp/performance-audit-2026-11-19-02/test_csv.py -q --junitxml=tmp/performance-audit-2026-11-19-02/csv.xml --tb=short",
+      "returncode": 0,
+      "result": "1 passed",
+      "pytest_seconds": 7.3
+    },
+    {
+      "command": "py -3.14 scripts/validation/test_isolated.py tmp/performance-audit-2026-11-19-02/test_population.py -q --junitxml=tmp/performance-audit-2026-11-19-02/population.xml --tb=short",
+      "returncode": 0,
+      "result": "1 passed",
+      "pytest_seconds": 2.54
+    }
+  ],
+  "gain_after_correction": "NON MESUR\u00c9"
+}

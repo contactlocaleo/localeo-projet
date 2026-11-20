@@ -25,7 +25,7 @@ Ouvrez un fichier pour commencer, ou utilisez un generateur de documentation plu
 - [Version implémentée](../../specifications/espace-commercant/README.md)
 - [Architecture actuelle](../../architecture/frontends/commercant/architecture.md)
 - [Guide de formation commerçant](../../produit/formation/commercant/guide-commercant.md)
-- [Procédure de mise en production](../../exploitation/commercant/mise-en-production.md)
+- [Procédure de mise en production](../../exploitation/deploiement/commercant/mise-en-production.md)
 - [Audit initial](../../audits/commercant/audit-preproduction-2026-09-06.md)
 - [Répartition frontend/backend et remédiations](../../audits/commercant/remediation-preproduction-2026-09-06.md)
 

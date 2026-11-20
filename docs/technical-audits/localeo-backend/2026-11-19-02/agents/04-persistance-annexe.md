@@ -1,0 +1,34 @@
+# Annexe indépendante — persistance / SQL
+
+Complément de [04-persistance.md](04-persistance.md). Lecture statique uniquement. Modèle exact : INCONNU ; effort de raisonnement : INCONNU. Aucun ancien rapport consulté, aucun code changé ni processus applicatif exécuté.
+
+## Protections présentes qui limitent la portée des constats
+
+- **Dashboard Live :** `app/application/animation_locale/services/tableau_de_bord_live.py`, `consulter`, borne la sélection à 50. `app/infrastructure/persistence/repositories/rappels_live_repository.py`, `precharger`, lignes 105–178, charge en groupe participant, animation, configuration, ville, exécution, validations et faits auxiliaires. Il conserve des références ORM fortes dans `session.info['live_dashboard_refs']` ; les appels `session.get` par carte peuvent donc réutiliser l’identity map. Le simple examen de la boucle `_items` ne suffit pas à affirmer un N+1. Les validations/faits associés peuvent varier en nombre, mais aucune absence de borne globale n’est attribuée au dashboard sur cette seule lecture.
+- **Tirages libres :** `app/infrastructure/persistence/repositories/tirages_libres_repository.py`, `membres_page` lignes 207–211 et `candidats_classement` lignes 243–247, plafonnent leurs lots à 500 ; `page_gains` lignes 394–404 plafonne à 100 + 1. Les suppléants utilisent une sélection bornée d’opérations et un latéral borné, lignes 406–429. PSQL-03 reste limité au tirage Coffrets de `ServiceTiragesAnimation.lancer`.
+- **Gel courant :** `app/application/animation_locale/services/exploitation_animation.py`, `_iter_participations` lignes 39–61 et `figer_population_dans_uow` lignes 202–261, lit par lots et vide les membres/provenances/preuves par seuil 500. Il conserve néanmoins une transaction exclusive couvrant toute la population : les lots bornent la mémoire, pas la durée de verrou. C’est une propriété à mesurer avant une très grande jauge, pas une hydratation complète prouvée du gel.
+- **Clôture des dossiers :** `app/infrastructure/persistence/repositories/fin_animation_repository.py`, `compteurs`, `operations`, `page`, utilise agrégations SQL et page `limit + 1` ; il ne développe pas une ligne par unité sans gagnant. Ne pas assimiler quantité de lots publiée et nombre d’objets hydratés.
+- **Gestion commerçants Animation :** `app/infrastructure/persistence/repositories/gestion_commercants_animation_repository.py`, `lister`, valide 1–100 résultats, applique curseur `(nom,id)` et limite SQL. Le dernier email est recherché par sous-requête corrélée limitée à un. Cela constitue une seule requête SQL applicative, sans preuve d’un N+1 de round trips.
+- **Imports :** `app/application/referencement/services/traitement_imports_commercants.py`, `travailler`, borne 1–100 lignes et un budget de 60 secondes maximum ; `traiter_ligne` ouvre une transaction par ligne et revalide les gardes. `app/infrastructure/persistence/repositories/preparation_import_commercant_repository.py`, `candidats`, borne branches/résultat à 101 et refuse l’excès. Une recherche volumineuse peut malgré tout coûter côté SQL ; aucune mesure ni plan ici ne permet d’en faire un constat majeur.
+
+## Observations secondaires
+
+### PSQL-S01 — Enrichissement email Coffrets par commerce
+
+**FORTEMENT ÉTAYÉ PAR LE CODE**, impact probablement limité par la taille des coffrets : `app/application/animation_locale/services/tirages_animation.py`, `_detail_email_gain`, lignes 52–70, boucle sur les prestations et appelle `uow.commercants.obtenir` pour chaque ligne. Dans `_distribuer_gain`, le contenu de `detail_gain['prestations']` est ensuite remplacé par les conditions d’activation (lignes 136–142) : ces lectures de commerces sont donc évitables pour ce premier envoi, sous réserve de vérifier les autres champs utilisés. `relancer`, lignes 338–382, utilise aussi cette fonction et a besoin du détail. Correction locale : permettre au helper d’utiliser directement les lignes de conditions lors du premier envoi, ou charger les commerçants par lot pour la relance. Effort S ; conserver le contenu contractuel et le snapshot d’activation. Ce point ne démontre pas un ralentissement général des tirages.
+
+### PSQL-S02 — Compteurs transactionnels partagés, contention possible
+
+**HYPOTHÈSE À VÉRIFIER** pour l’effet opérationnel : `sql/v283_e73_compteurs_lectures.sql`, `projeter_compteurs_progression` lignes 51–74 et `projeter_compteurs_validations` lignes 94–112, mettent à jour des lignes d’agrégats partagées par animation/état ou animation/commerce/statut. Les écritures concurrentes de participants distincts peuvent donc attendre la même ligne de compteur. La projection progression prend aussi explicitement `FOR UPDATE` et maintient le premier `observed_at`. Les agrégats offrent en contrepartie des lectures moins coûteuses. Aucun temps d’attente ni goulot démontré. Vérifier la concurrence avant tout partitionnement ; préserver exactitude transactionnelle et corrections. Effort M si une correction est justifiée, risque transverse lectures/dashboard et cohérence des compteurs.
+
+### PSQL-S03 — Listes historiques non bornées : consommateurs à distinguer
+
+`animation_locale_repositories.py` conserve des méthodes `lister` intégrales (participants, validations, tirages/gains, notifications), mais propose aussi des méthodes paginées. La présence du helper ne suffit pas à qualifier tous ses usages de parcours non bornés. Deux routes de détail Coffrets restent explicitement non paginées dans `animation_locale_api.py`, lignes 2722–2753, pour tirages et gains d’une animation ; priorité secondaire, dépend du nombre de lots/relances réels. Les détails sont enrichis en groupes par `lister_gains_par_tirages` et `details_gains`, ce qui réduit les round trips ; ne pas confondre volume hydraté et N+1.
+
+## Index et migrations effectivement examinés
+
+Lecture des occurrences pertinentes sous `sql` et des migrations ciblées : v159/v160 (participants/validations et unicité), v162 (populations/tirages/gains), v169/v282 (pages date/id), v272/v280 (flux historique commerçant), v283 (compteurs transactionnels), v288/v289 (Tombola et index de statut), v306/v313/v315/v319 (récupération et projections/recherche). Les recherches ne démontrent ni l’application des migrations ni les choix du planificateur. `sql/schema.sql` ne remplace pas la chaîne de migrations comme preuve de déploiement.
+
+## Traçabilité et limites
+
+Le brief archivé, les README/AGENTS demandés et exclusivement les sources courantes sous `localeo-backend/app` et `localeo-backend/sql` ont servi à l’exploration. Les recherches ont nommé explicitement ces chemins absolus. Aucun fichier des autres agents ni dossier inventaire ouvert. Seuls ce fichier et son rapport principal sont produits. Pas de contrôles métier exécutés, conformément à la mission ; les conclusions ne constituent aucune preuve de latence, de capacité ou de déploiement.

@@ -103,7 +103,7 @@ de déclarer le dossier `prepared_for_review`.
   normalisé selon le migrateur :
   `b43c591e5a57788b6179518795c1bcdb1b1b8ada086f3e004b7a1c78c78eacd2`.
   Sa présence et son checksum sur cible restent à contrôler selon la
-  [procédure schéma](../../exploitation/technique/deployer-et-verifier-schema.md).
+  [procédure schéma](../../exploitation/deploiement/deployer-et-verifier-schema.md).
 - Configurations à contrôler, sans valeurs privées :
   `LOCALEO_FEATURE_ATELIER_COFFRETS_ENABLED`, `LOCALEO_SCHEDULER_ENABLED`,
   `LOCALEO_DOCUMENTATION_ROOT`. Pas de nouveau fournisseur ni secret IA.

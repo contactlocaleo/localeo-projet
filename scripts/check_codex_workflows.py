@@ -11,6 +11,7 @@ import tomllib
 
 SESSION_SOURCES = ('startup', 'resume', 'clear', 'compact', 'fork')
 READ_ONLY_REVIEWERS = {'localeo-invariant-reviewer', 'localeo-contract-reviewer', 'localeo-ux-reviewer'}
+EXPLICIT_ONLY_SKILLS = {'localeo-deployer'}
 # Keep this scope aligned with scripts/git_pre_commit.cjs.
 WORKFLOW_INPUTS = re.compile(
     r'(?:AGENTS\.md|\.agents/skills/.*|\.codex/agents/.*\.toml|\.codex/hooks\.json|'
@@ -105,22 +106,36 @@ def validate(root: Path, *, staged: bool = False) -> list[str]:
             errors.append(f'{label}: corps trop volumineux ; utiliser des references ciblees')
         if not parts[2].strip():
             errors.append(f'{label}: corps vide')
-    # Optional metadata currently maintained here uses a deliberately small YAML
-    # subset: one interface mapping, three JSON-quoted scalar strings. Reject
-    # unsupported syntax rather than silently misreading YAML anchors or blocks.
+    # Deliberately small YAML subset: three quoted interface strings and an
+    # optional boolean invocation policy. Reject unknown/duplicate syntax.
+    invocation_policies = {}
     for file in source.matching(r'\.agents/skills/[^/]+/agents/openai\.yaml'):
         label = PurePosixPath(file).parts[2]
         try:
             lines = [line for line in source.read(file).decode('utf-8-sig').splitlines()
                      if line.strip() and not line.lstrip().startswith('#')]
-            if not lines or lines[0] != 'interface:':
-                raise ValueError('interface requise')
-            fields = {}
-            for line in lines[1:]:
-                match = re.fullmatch(r'  (display_name|short_description|default_prompt): (".*")', line)
-                if not match or match[1] in fields:
-                    raise ValueError('champ YAML invalide ou duplique')
-                fields[match[1]] = json.loads(match[2])
+            sections = {}
+            section = None
+            for line in lines:
+                if line in ('interface:', 'policy:'):
+                    section = line[:-1]
+                    if section in sections:
+                        raise ValueError('section YAML dupliquee')
+                    sections[section] = {}
+                    continue
+                if section == 'interface':
+                    match = re.fullmatch(r'  (display_name|short_description|default_prompt): (".*")', line)
+                    if not match or match[1] in sections[section]:
+                        raise ValueError('champ interface invalide ou duplique')
+                    sections[section][match[1]] = json.loads(match[2])
+                elif section == 'policy':
+                    match = re.fullmatch(r'  (allow_implicit_invocation): (true|false)', line)
+                    if not match or match[1] in sections[section]:
+                        raise ValueError('policy exige un booleen YAML non duplique')
+                    sections[section][match[1]] = match[2] == 'true'
+                else:
+                    raise ValueError('section YAML invalide')
+            fields = sections.get('interface', {})
             if set(fields) != {'display_name', 'short_description', 'default_prompt'} or not all(
                     isinstance(value, str) and value.strip() for value in fields.values()):
                 raise ValueError('trois chaines interface non vides requises')
@@ -128,8 +143,15 @@ def validate(root: Path, *, staged: bool = False) -> list[str]:
                 raise ValueError('short_description doit compter 25 a 64 caracteres')
             if f'${label}' not in fields['default_prompt'] or label not in names:
                 raise ValueError('default_prompt et skill doivent correspondre')
+            if 'policy' in sections:
+                if not sections['policy']:
+                    raise ValueError('policy vide')
+                invocation_policies[label] = sections['policy']['allow_implicit_invocation']
         except (OSError, ValueError, UnicodeError) as error:
             errors.append(f'{label}: metadonnees openai.yaml invalides : {error}')
+    for label in EXPLICIT_ONLY_SKILLS:
+        if f'.agents/skills/{label}/SKILL.md' in source.files and invocation_policies.get(label) is not False:
+            errors.append(f'{label}: openai.yaml doit imposer policy.allow_implicit_invocation: false')
     for file in source.matching(r'\.codex/agents/[^/]+\.toml'):
         label = PurePosixPath(file).stem
         try:

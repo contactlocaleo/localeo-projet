@@ -1167,7 +1167,7 @@ requise pour les liens. Données de démonstration inchangées et colonnes
 nullables compatibles ; génération complète non exécutée. Les clics antérieurs
 ne sont pas reconstitués ; les anciens liens/QR directs doivent être remplacés
 pour mesurer les ouvertures. Voir les
-[consignes d’exploitation](../../exploitation/animation/deploiement-render.md#bilan-pdf-et-performance-de-diffusion--11-novembre-2026).
+[consignes d’exploitation](../../exploitation/deploiement/animation/deploiement-render.md#bilan-pdf-et-performance-de-diffusion--11-novembre-2026).
 
 **Complément du 12 novembre 2026** : la migration v310 est désormais appliquée
 sur TEST après sauvegarde. La lecture précédemment en erreur réussit et la
@@ -1220,7 +1220,7 @@ reste en attente. Readiness Python sur la base distante : **185 contrôles,
 READY**, avec le code backend `3a55fae` et les flags par défaut ; ce résultat
 n’est pas celui de l’endpoint HTTP déployé. Les nouveaux objets ont aussi
 été contrôlés directement. Sauvegarde, empreintes et limites dans le
-[compte rendu d’exploitation](../../exploitation/animation/deploiement-render.md#application-sur-test-confirmée-le-11-novembre-2026).
+[compte rendu d’exploitation](../../exploitation/deploiement/animation/deploiement-render.md#application-sur-test-confirmée-le-11-novembre-2026).
 Aucune transition d’animation ni recette fonctionnelle distante réalisée.
 
 ## Correctif du 11 novembre 2026 — en-tête et navigation Animation
@@ -1314,7 +1314,7 @@ jetables de vérification. Aucun flag ni reclassement automatique d'animations
 historiques. E41/E42 sont régénérés ; Animation embarque le même E41.
 Pro exporte les mêmes chemins/schémas (huit différences éditoriales de
 titres/descriptions). Les empreintes du schéma Live sont synchronisées.
-Voir l'[ordre de livraison et repli](../../exploitation/animation/deploiement-render.md)
+Voir l'[ordre de livraison et repli](../../exploitation/deploiement/animation/deploiement-render.md)
 et la [recette de démonstration](../../exploitation/demonstration/realisation-recette.md).
 La recette humaine mobile, la migration TEST et le déploiement restent à réaliser.
 
@@ -4405,7 +4405,7 @@ La chasse reste dépendante de la readiness E55, indépendamment du module payé
 ## 4. Séquence de migration et d’ouverture
 
 1. Épingler les SHAs des cinq dépôts, l’empreinte des contrats et l’état des travaux locaux. Préparer le pilote **Martignas-sur-Jalle**, choisi le 18 octobre, après validation interne Localeo ; désigner le responsable technique et le responsable de vérification métier, inventorier les engagements et sources de sauvegarde.
-2. Sur copie jetable, tester les migrations additives avec [l’outil standard](../../../../localeo-backend/scripts/database/apply_migrations.py) ; aucune modification d’un SQL déjà appliqué. Vérifier interruption/reprise et checksums. La [procédure schéma](../../exploitation/technique/deployer-et-verifier-schema.md) demeure l’entrée opératoire.
+2. Sur copie jetable, tester les migrations additives avec [l’outil standard](../../../../localeo-backend/scripts/database/apply_migrations.py) ; aucune modification d’un SQL déjà appliqué. Vérifier interruption/reprise et checksums. La [procédure schéma](../../exploitation/deploiement/deployer-et-verifier-schema.md) demeure l’entrée opératoire.
 3. Préparer les instantanés commerciaux et appartenances à partir des faits, signaler ambiguïtés ; faire saisir les périmètres commerce manuellement dans l’ERP. Pas de proposition automatique. Capturer les engagements autorisés à continuer sans élargir les rôles.
 4. Déployer backend compatible en lecture, contrôles de readiness et workers comprenant les nouveaux types. Conserver fermées les nouvelles écritures/modules non vérifiés, sans couper les parcours historiques par un flag global.
 5. Livrer les lecteurs Animation, Pro, Marketplace/Live et ERP, leurs contrats embarqués et emails typés. Les versions anciennes/PWA en cache ne doivent pas pouvoir confirmer un nouveau type qu’elles ne savent pas présenter ; proposer mise à jour ou erreur explicite.

@@ -657,7 +657,7 @@ Contenu attendu :
 Conserver une source canonique dans la documentation de formation backoffice
 du dépôt projet, reliée au guide général et à la spécification E68. Sa publication
 doit passer par les lecteurs documentaires ERP et le bundle existants, selon la
-[procédure documentaire](../../exploitation/technique/reference-documentation-centralisee.md) :
+[procédure documentaire](../../exploitation/deploiement/reference-documentation-centralisee.md) :
 déclarer la source dans `documentation.exports.json`, fournir une entrée retrouvable
 depuis la documentation ERP et un accès contextuel depuis le dossier onboarding,
 contrôler les droits et tester sa lecture depuis un backend livré seul avec bundle.

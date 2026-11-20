@@ -1,0 +1,118 @@
+{
+  "date_locale": "2026-11-19",
+  "phase": "étape 2, vérification par rapport sans consolidation",
+  "agents_independants": 6,
+  "prevols_lecture_reussis": 6,
+  "rapports": [
+    {
+      "rapport": "agents/01-cpu.md",
+      "annexe": "agents/01-cpu-annexe.md",
+      "identifiants": [
+        "CPU-01",
+        "CPU-02"
+      ],
+      "nombre_majeurs": 2,
+      "statut_majeurs": "FORTEMENT ÉTAYÉ PAR LE CODE",
+      "mesure_performance_executee": false,
+      "contrat_preuve": "revu manuellement par orchestrateur, source relue pour chaque mécanisme",
+      "references_lignes_principal_et_annexe": 4,
+      "erreurs": [],
+      "sha256_principal": "c8671f72697e662417586b131e7fba8ddf2db613ef11501c0ab3d94efef69a7a",
+      "sha256_annexe": "059d2f3a9c56e63e43536b41778f86e1e288cfd7cadfc910e667e72a750bb6b6"
+    },
+    {
+      "rapport": "agents/02-memoire.md",
+      "annexe": "agents/02-memoire-annexe.md",
+      "identifiants": [
+        "MEM-01",
+        "MEM-02",
+        "MEM-03",
+        "MEM-04"
+      ],
+      "nombre_majeurs": 4,
+      "statut_majeurs": "FORTEMENT ÉTAYÉ PAR LE CODE",
+      "mesure_performance_executee": false,
+      "contrat_preuve": "revu manuellement par orchestrateur, source relue pour chaque mécanisme",
+      "references_lignes_principal_et_annexe": 28,
+      "erreurs": [],
+      "sha256_principal": "682e8e8fadd189452f87e4a01e90961a103c87702a2762e76e0b4cd0c8299e07",
+      "sha256_annexe": "cc79e6fff387c2eb902292990e11c329289943420d57ded02f1544e7850cd645"
+    },
+    {
+      "rapport": "agents/03-concurrence.md",
+      "annexe": "agents/03-concurrence-annexe.md",
+      "identifiants": [
+        "ASY-01",
+        "ASY-02",
+        "ASY-03"
+      ],
+      "nombre_majeurs": 3,
+      "statut_majeurs": "FORTEMENT ÉTAYÉ PAR LE CODE",
+      "mesure_performance_executee": false,
+      "contrat_preuve": "revu manuellement par orchestrateur, source relue pour chaque mécanisme",
+      "references_lignes_principal_et_annexe": 26,
+      "erreurs": [],
+      "sha256_principal": "d50e2d3d1f53b21b246165ad05cd0448b2c73d919b6b88096711b608006cb9ae",
+      "sha256_annexe": "5e9d02d11d983a78ec1411f1fb3bad24166dc0a5e323b9758f869480468c29b8"
+    },
+    {
+      "rapport": "agents/04-persistance.md",
+      "annexe": "agents/04-persistance-annexe.md",
+      "identifiants": [
+        "DB-01",
+        "DB-02",
+        "DB-03"
+      ],
+      "nombre_majeurs": 3,
+      "statut_majeurs": "FORTEMENT ÉTAYÉ PAR LE CODE",
+      "mesure_performance_executee": false,
+      "contrat_preuve": "revu manuellement par orchestrateur, source relue pour chaque mécanisme",
+      "references_lignes_principal_et_annexe": 13,
+      "erreurs": [],
+      "sha256_principal": "abb3134f45f4e56da716fd651fa0e059a6417e24ec5f2b9a293d0208c8cc946c",
+      "sha256_annexe": "d56839deb51474e9fbe64f80f2910f5ad56afda38e67741c2d4aee31c3fa9d01"
+    },
+    {
+      "rapport": "agents/05-api.md",
+      "annexe": "agents/05-api-annexe.md",
+      "identifiants": [
+        "API-01",
+        "API-02",
+        "API-03"
+      ],
+      "nombre_majeurs": 3,
+      "statut_majeurs": "FORTEMENT ÉTAYÉ PAR LE CODE",
+      "mesure_performance_executee": false,
+      "contrat_preuve": "revu manuellement par orchestrateur, source relue pour chaque mécanisme",
+      "references_lignes_principal_et_annexe": 4,
+      "erreurs": [],
+      "sha256_principal": "f0db2abbc857796bbed2a962f2648e751eafc7fb1e145bd3d1960c33d1723c31",
+      "sha256_annexe": "15d5dd1a357722c9e5aa10f420ef6fb4a9b5f62f656741d58172e2850f1e4cdc"
+    },
+    {
+      "rapport": "agents/06-sre.md",
+      "annexe": "agents/06-sre-annexe.md",
+      "identifiants": [
+        "SRE-01",
+        "SRE-02"
+      ],
+      "nombre_majeurs": 2,
+      "statut_majeurs": "FORTEMENT ÉTAYÉ PAR LE CODE",
+      "mesure_performance_executee": false,
+      "contrat_preuve": "revu manuellement par orchestrateur, source relue pour chaque mécanisme",
+      "references_lignes_principal_et_annexe": 4,
+      "erreurs": [],
+      "sha256_principal": "f95c530912d5f5eb1904e8b5256d3e5a2d397d55bfcf6e30c4dacb296b714cb2",
+      "sha256_annexe": "2eb7f8ae5d826813d50d3ed28259da8ba6e4d5e95995f1794679d8df9e62ec62"
+    }
+  ],
+  "erreurs": [],
+  "backend_sha_initial": "7049e7fafc76f9119924f1082a5ee7457a175d85",
+  "backend_sha_final": "7049e7fafc76f9119924f1082a5ee7457a175d85",
+  "backend_statut_final": "",
+  "fichiers_suivis_hors_dotenv_verifies": 3405,
+  "fichiers_dont_empreinte_a_change": [],
+  "consolidation_effectuee": false,
+  "benchmark_execute": false,
+  "test_metier_execute": false
+}

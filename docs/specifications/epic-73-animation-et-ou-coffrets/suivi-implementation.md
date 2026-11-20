@@ -111,7 +111,7 @@ actualisés. Les droits, résultats et qualifications restent décidés par le
 domaine backend. Le portail Pro n'est pas modifié. La migration additive
 **v287** précède le backend puis les deux frontends ; aucun tirage ni Push n'est
 déclenché par l'annonce d'une date. Voir le
-[guide de livraison](../../exploitation/animation/deploiement-render.md).
+[guide de livraison](../../exploitation/deploiement/animation/deploiement-render.md).
 
 Limites : tests navigateur avec API synthétiques, tests d'intégration sur
 PostgreSQL local jetable. Pas de déploiement, de caméra physique, de livraison

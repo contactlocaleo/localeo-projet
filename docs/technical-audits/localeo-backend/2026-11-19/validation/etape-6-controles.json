@@ -1,0 +1,191 @@
+{
+  "archive_status": "finalized_locally_pending_user_correction_decisions",
+  "inventory": {
+    "prompts": [
+      "prompts/01-initialisation.md",
+      "prompts/02-agents.md",
+      "prompts/03-contradiction.md",
+      "prompts/04-benchmarks.md",
+      "prompts/05-validation.md",
+      "prompts/06-archivage.md",
+      "prompts/RELANCER-AUDIT.md"
+    ],
+    "cartographie": [
+      "inventaire/architecture.md",
+      "inventaire/stack-technique.md",
+      "inventaire/catalogue-api.md",
+      "inventaire/flux-critiques.md",
+      "inventaire/configuration-ressources.md",
+      "inventaire/limitations.md",
+      "inventaire/plan-orchestration-agents.md"
+    ],
+    "rapports": [
+      "agents/01-cpu.md",
+      "agents/02-memoire.md",
+      "agents/03-concurrence.md",
+      "agents/04-persistance.md",
+      "agents/05-api.md",
+      "agents/06-sre.md"
+    ],
+    "annexes": [
+      "agents/01-cpu-annexe.md",
+      "agents/02-memoire-annexe.md",
+      "agents/03-concurrence-annexe.md",
+      "agents/04-persistance-annexe.md",
+      "agents/05-api-annexe.md",
+      "agents/06-sre-annexe.md"
+    ],
+    "consolidation": [
+      "contradiction/consolidation.md",
+      "contradiction/causes-racines.md",
+      "contradiction/contre-expertise.md",
+      "contradiction/debats-et-votes.md"
+    ],
+    "recommandations": [
+      "recommandations/backlog-preliminaire.md",
+      "recommandations/annexe-optimisations-secondaires.md",
+      "recommandations/plan-mesures.md",
+      "recommandations/backlog-mesure.md",
+      "recommandations/backlog-final.md",
+      "recommandations/quick-wins.md",
+      "recommandations/plan-optimisation.md"
+    ],
+    "benchmarks": [
+      "benchmarks/protocole.md",
+      "benchmarks/resultats.md",
+      "benchmarks/limites.md",
+      "benchmarks/profils-cpu.md",
+      "benchmarks/profils-memoire.md"
+    ],
+    "decisions": [
+      "validation/decisions.md"
+    ],
+    "synthese": [
+      "synthese/rapport-executif.md",
+      "synthese/roadmap-performance.md",
+      "synthese/comparaison-precedent.md"
+    ],
+    "index": [
+      "README.md"
+    ]
+  },
+  "missing": {
+    "prompts": [],
+    "cartographie": [],
+    "rapports": [],
+    "annexes": [],
+    "consolidation": [],
+    "recommandations": [],
+    "benchmarks": [],
+    "decisions": [],
+    "synthese": [],
+    "index": []
+  },
+  "required_files": 47,
+  "prompts_01_to_06": 6,
+  "original_prompts_changed": false,
+  "major_counts": {
+    "agents/01-cpu.md": 2,
+    "agents/02-memoire.md": 4,
+    "agents/03-concurrence.md": 3,
+    "agents/04-persistance.md": 3,
+    "agents/05-api.md": 3,
+    "agents/06-sre.md": 2
+  },
+  "source_findings": 17,
+  "consolidated_problems": 14,
+  "candidate_root_causes": 14,
+  "main_problem_causes": 8,
+  "annex_problem_causes": 6,
+  "proposed_corrections": 8,
+  "priorities": {
+    "P0": 0,
+    "P1": 2,
+    "P2": 6
+  },
+  "user_decisions_received": 0,
+  "existing_current_files_checked": 86,
+  "existing_current_files_changed": [
+    "README.md"
+  ],
+  "readme_previous_exact_snapshot_verified": true,
+  "previous_series_executions_found": 0,
+  "historical_backend_audit_files_preserved": 22,
+  "tracked_backend_files_unchanged": 3405,
+  "raw_artifacts_available_unchanged": 14,
+  "utf8_files_scanned": 101,
+  "json_parsing": "success",
+  "source_line_references_checked": 1771,
+  "secret_review": {
+    "method": "high-confidence pattern scan + targeted content/provenance review; no private env files read",
+    "rules": [
+      "private_key",
+      "provider_token",
+      "aws_access_key",
+      "jwt_literal",
+      "credentials_in_url",
+      "literal_secret_assignment"
+    ],
+    "candidate_count": 0,
+    "secret_values_printed": false,
+    "scope": "current audit directory only; not an exhaustive credential certification"
+  },
+  "repositories": {
+    "localeo-projet": {
+      "branch": "main",
+      "commit": "f437465c577d3754b8743c6c48519f0d7606613e",
+      "status": "?? docs/technical-audits/\n?? docs/ux-workshops/localeo-crm/"
+    },
+    "localeo-backend": {
+      "branch": "main",
+      "commit": "7049e7fafc76f9119924f1082a5ee7457a175d85",
+      "status": ""
+    },
+    "localeo-marketplace": {
+      "branch": "main",
+      "commit": "9527ebbfee23f7c5249ce4078c5c3f476da2d924",
+      "status": ""
+    },
+    "localeo-commercant": {
+      "branch": "main",
+      "commit": "c61f196774c477065dfc51ebb87fc1a02404329b",
+      "status": ""
+    },
+    "localeo-animation": {
+      "branch": "main",
+      "commit": "7688f1cea11bec8599bacbfaa512b265c36fed3a",
+      "status": ""
+    }
+  },
+  "new_application_tests_or_benchmarks": false,
+  "migrations_or_deployment_actions_executed": false,
+  "new_installs_commits_pushes": false,
+  "validation/etape-6-guidance.json": {
+    "guides": 118,
+    "links": 1758,
+    "errors": 0,
+    "warnings": 0
+  },
+  "validation/etape-6-liens.json": {
+    "guides": 155,
+    "links": 3436,
+    "errors": 0,
+    "warnings": 0
+  },
+  "readme_previous_snapshot_path": "validation/readme-avant-archivage.txt",
+  "independent_reviews": {
+    "history": "read-only; current mechanisms and non-comparability checked",
+    "archive": "favorable; no blocking reservations; no execution or writes by reviewer"
+  },
+  "archive_manifest": {
+    "path": "validation/manifest-archive.json",
+    "checksum_path": "validation/manifest-archive.sha256",
+    "self_excluded": true,
+    "verified_by_recalculation_after_generation": true
+  },
+  "first_link_pass": {
+    "errors": 36,
+    "status": "corrected snapshot extension and generated reports; final pass clean",
+    "evidence": "validation/etape-6-liens-premier-passage.json"
+  }
+}

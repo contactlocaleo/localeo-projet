@@ -1,0 +1,86 @@
+[
+  {
+    "command": [
+      "git",
+      "cat-file",
+      "-t",
+      "7049e7fafc76f9119924f1082a5ee7457a175d85"
+    ],
+    "returncode": 0,
+    "stdout": "commit",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--stat",
+      "7049e7fafc76f9119924f1082a5ee7457a175d85",
+      "HEAD"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--name-status",
+      "7049e7fafc76f9119924f1082a5ee7457a175d85",
+      "HEAD"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "git",
+      "status",
+      "--porcelain=v1"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "git",
+      "cat-file",
+      "-t",
+      "1b3e27c4755a441ddd9b99cd0ddf83887879e136"
+    ],
+    "returncode": 0,
+    "stdout": "commit",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "git",
+      "merge-base",
+      "--is-ancestor",
+      "1b3e27c4755a441ddd9b99cd0ddf83887879e136",
+      "HEAD"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--shortstat",
+      "1b3e27c4755a441ddd9b99cd0ddf83887879e136",
+      "HEAD",
+      "--",
+      "app/application/animation_locale",
+      "app/api/jeu_animation_api.py",
+      "app/api/localeo_live_api.py"
+    ],
+    "returncode": 0,
+    "stdout": "103 files changed, 4882 insertions(+), 370 deletions(-)",
+    "stderr": ""
+  }
+]

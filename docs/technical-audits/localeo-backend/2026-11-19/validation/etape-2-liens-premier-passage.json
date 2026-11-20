@@ -1,0 +1,19 @@
+{
+  "mode": "working-tree",
+  "changed_only": true,
+  "repositories": [
+    "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet"
+  ],
+  "checked_guides": 69,
+  "checked_links": 2105,
+  "errors": [
+    {
+      "source": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\etape-2-verification.md",
+      "line": 20,
+      "destination": "etape-2-liens.json",
+      "target": "D:\\OneDrive\\Bureau\\Documents\\GitHub\\localeo-projet\\docs\\technical-audits\\localeo-backend\\2026-11-19\\validation\\etape-2-liens.json",
+      "reason": "missing_target"
+    }
+  ],
+  "warnings": []
+}

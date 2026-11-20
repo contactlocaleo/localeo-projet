@@ -1,0 +1,23 @@
+{
+  "date_locale": "2026-11-19",
+  "timezone": "Europe/Paris",
+  "date_source": "contexte client",
+  "repositories": {
+    "localeo-projet": {
+      "branche": "main",
+      "commit": "f437465c577d3754b8743c6c48519f0d7606613e",
+      "statut_initial": "?? docs/ux-workshops/localeo-crm/"
+    },
+    "localeo-backend": {
+      "branche": "main",
+      "commit": "7049e7fafc76f9119924f1082a5ee7457a175d85",
+      "statut_initial": ""
+    }
+  },
+  "python_inventaire": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+  "modules_parses": 1329,
+  "routes_statiques": 1341,
+  "parsing_errors": [],
+  "unresolved_routers": [],
+  "routes_statiques_apres_expansion_manuelle": 1346
+}

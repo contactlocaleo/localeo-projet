@@ -2,6 +2,10 @@
   "schema_version": 1,
   "entries": [
     {
+      "path": "docs/ops/deploiement/README.md",
+      "source_path": "docs/exploitation/deploiement/README.md"
+    },
+    {
       "path": "docs/juridique/PLAN_PUBLICATION_DOCUMENTS_JURIDIQUES_2026-09-14.md",
       "source_path": "docs/juridique/PLAN_PUBLICATION_DOCUMENTS_JURIDIQUES_2026-09-14.md"
     },
@@ -399,7 +403,15 @@
     },
     {
       "path": "docs/ops/technique/deployer-et-verifier-schema.md",
-      "source_path": "docs/exploitation/technique/deployer-et-verifier-schema.md"
+      "source_path": "docs/exploitation/deploiement/deployer-et-verifier-schema.md"
+    },
+    {
+      "path": "docs/ops/technique/deployer-localeo-github-actions.md",
+      "source_path": "docs/exploitation/deploiement/deployer-localeo-github-actions.md"
+    },
+    {
+      "path": "docs/ops/technique/installer-executeur-test.md",
+      "source_path": "docs/exploitation/deploiement/installer-executeur-deploiement.md"
     },
     {
       "path": "docs/ops/technique/diagnostiquer-incident-backend.md",
@@ -503,7 +515,7 @@
     },
     {
       "path": "docs/ops/technique/reference-documentation-centralisee.md",
-      "source_path": "docs/exploitation/technique/reference-documentation-centralisee.md"
+      "source_path": "docs/exploitation/deploiement/reference-documentation-centralisee.md"
     },
     {
       "path": "docs/ops/technique/reference-scripts-backend.md",

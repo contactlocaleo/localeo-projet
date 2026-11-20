@@ -1,0 +1,6 @@
+interface:
+  display_name: "Localeo — plan de déploiement"
+  short_description: "Préparer un plan Render sans modifier les services"
+  default_prompt: "Utilise $localeo-deployer en mode plan pour préparer le déploiement vers l'environnement explicitement indiqué."
+policy:
+  allow_implicit_invocation: false
