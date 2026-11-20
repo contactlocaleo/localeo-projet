@@ -263,8 +263,7 @@ def evidence_template(root, request, request_hash):
 
 
 def prepare(root, request, *, request_hash, evidence=None, evidence_hash=None,
-            quality_report=None, bundle=None, demo_report=None, dataset=None, now=None,
-            simple=False):
+            quality_report=None, bundle=None, demo_report=None, dataset=None, now=None):
     """Recompute all local evidence; supplied receipts never confer authorization."""
     now = now or datetime.now(timezone.utc)
     validate_request(request)
@@ -347,9 +346,9 @@ def prepare(root, request, *, request_hash, evidence=None, evidence_hash=None,
     check_row(checks, "inputs.unchanged", all(path.is_file() and quality.digest(path) == input_hashes[key]
                                             for key, path in input_paths.items()))
     essential = essential_checks(applications)
-    blockers = [x["id"] for x in checks if x["status"] != "passed" and (not simple or x["id"] in essential)]
+    blockers = [x["id"] for x in checks if x["status"] != "passed" and x["id"] in essential]
     return {"schema_version": 1, "kind": "render_release_plan", "mode": "plan",
-            "profile": "simple" if simple else "strict",
+            "profile": "simple",
             "id": str(uuid.uuid4()), "created_at": now.isoformat(), "expires_at": (now + MAX_AGE).isoformat(),
             "environment": env, "workspace_id": workspace, "documentation_sha": request["documentation_sha"],
             "request_sha256": request_hash, "evidence_sha256": evidence_hash,
@@ -382,7 +381,31 @@ def output_directory(root, requested=None):
 
 def write_dossier(folder, manifest):
     path = folder / "manifest.json"
-    quality.AtomicReportWriter(path)(manifest)
+    deployment = {
+        "schema_version": 2,
+        "kind": "render_release_plan",
+        "created_at": manifest["created_at"],
+        "expires_at": manifest["expires_at"],
+        "environment": manifest["environment"],
+        "workspace_id": manifest["workspace_id"],
+        "documentation_sha": manifest["documentation_sha"],
+        "applications": {
+            name: {key: application[key] for key in ("repository", "sha", "service_id", "branch", "endpoints")}
+            for name, application in manifest["applications"].items()
+        },
+        "database": None,
+        "status": manifest["status"],
+        "blockers": manifest["blockers"],
+    }
+    if manifest["database"] is not None:
+        database = manifest["database"]
+        migration = database["migrations"]
+        deployment["database"] = {
+            "database_id": database["database_id"],
+            "migration_owner": database["migration_owner"],
+            "migrations": {key: migration[key] for key in ("runner_sha256", "files", "pending")},
+        }
+    quality.AtomicReportWriter(path)(deployment)
     fingerprint = quality.digest(path)
     with (folder / "manifest.sha256").open("x", encoding="ascii") as stream:
         stream.write(fingerprint + "  manifest.json\n")
@@ -390,13 +413,14 @@ def write_dossier(folder, manifest):
              "", "Préparation locale ; aucune autorisation ni exécution de déploiement.",
              "Les reçus importés restent déclaratifs. L'exécuteur devra les revérifier.", "",
              f"Empreinte SHA256 : `{fingerprint}`", ""]
-    shown = (essential_checks(manifest["applications"]) if manifest.get("profile") == "simple"
-             else {x["id"] for x in manifest["checks"]})
+    shown = essential_checks(manifest["applications"])
     lines.extend(("| Contrôle bloquant | Résultat |", "| --- | --- |"))
     lines.extend(f"| {x['id']} | {x['status']} |" for x in manifest["checks"] if x["id"] in shown)
-    if manifest.get("profile") == "simple":
-        optional = [x for x in manifest["checks"] if x["id"] not in shown and x["status"] != "passed"]
-        lines.extend(("", f"Observations facultatives non validées : {len(optional)} ; détails dans manifest.json."))
+    optional = [x for x in manifest["checks"] if x["id"] not in shown and x["status"] != "passed"]
+    lines.extend(("", f"Observations facultatives non validées : {len(optional)}."))
+    if optional:
+        lines.extend(("", "| Observation facultative | Résultat |", "| --- | --- |"))
+        lines.extend(f"| {x['id']} | {x['status']} |" for x in optional)
     with (folder / "plan.md").open("x", encoding="utf-8") as stream:
         stream.write("\n".join(lines) + "\n")
     return fingerprint
@@ -406,22 +430,17 @@ def verify(path, expected, now=None):
     sha(expected, 64)
     require(quality.digest(path) == expected, "Manifest digest mismatch")
     manifest = read_json(path)
-    require(manifest.get("schema_version") == 1 and manifest.get("kind") == "render_release_plan")
-    require(manifest.get("mode") == "plan" and manifest.get("environment") in BRANCHES)
-    require(all(manifest.get(key) is False for key in ("execution_available", "deployment_executed", "authorized", "production_ready")),
-            "Not an offline, unauthorized plan")
+    require(manifest.get("schema_version") == 2 and manifest.get("kind") == "render_release_plan")
+    require(manifest.get("environment") in BRANCHES)
+    require(set(manifest) == {"schema_version", "kind", "created_at", "expires_at", "environment",
+                              "workspace_id", "documentation_sha", "applications", "database", "status", "blockers"},
+            "Unexpected deployment attributes")
     require(manifest.get("status") in ("blocked", "prepared_for_review"))
     instant = now or datetime.now(timezone.utc)
     start, end = date(manifest["created_at"]), date(manifest["expires_at"])
     require(start <= instant < end and timedelta(0) < end - start <= MAX_AGE, "Manifest expired or invalid dates")
-    require(isinstance(manifest.get("checks"), list) and manifest["checks"])
-    require(all(isinstance(x, dict) and x.get("status") in ("passed", "failed", "not_run") for x in manifest["checks"]))
-    profile = manifest.get("profile", "strict")
-    require(profile in ("simple", "strict"))
-    essential = essential_checks(manifest.get("applications", {}))
-    failed = [x["id"] for x in manifest["checks"] if x["status"] != "passed"
-              and (profile == "strict" or x["id"] in essential)]
-    require(failed == manifest.get("blockers") and bool(failed) == (manifest["status"] == "blocked"))
+    require(isinstance(manifest.get("blockers"), list)
+            and bool(manifest["blockers"]) == (manifest["status"] == "blocked"))
     return manifest
 
 
@@ -443,7 +462,6 @@ def main(argv=None):
     plan.add_argument("--bundle", type=Path)
     plan.add_argument("--demo-report", type=Path)
     plan.add_argument("--dataset", type=Path)
-    plan.add_argument("--simple", action="store_true", help="Use the streamlined TEST/DEMO/PROD delivery profile")
     plan.add_argument("--output", type=Path)
     check = sub.add_parser("verify", help="Check supplied fingerprint and expiry only; no authorization or remote validation")
     check.add_argument("--manifest", type=Path, required=True)
@@ -479,7 +497,7 @@ def main(argv=None):
         manifest = prepare(root, request, request_hash=quality.digest(args.request), evidence=evidence,
                            evidence_hash=quality.digest(args.evidence) if args.evidence else None,
                            quality_report=args.quality_report, bundle=args.bundle, demo_report=args.demo_report,
-                           dataset=args.dataset, simple=args.simple)
+                           dataset=args.dataset)
         folder = output_directory(root, args.output)
         fingerprint = write_dossier(folder, manifest)
         print(f"{manifest['status']}: {folder / 'manifest.json'}\nsha256: {fingerprint}")

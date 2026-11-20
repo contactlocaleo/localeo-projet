@@ -230,7 +230,7 @@ class DossierTests(unittest.TestCase):
                 "automatic_blockers": ["SENSITIVE_INTERNAL_MESSAGE"] if blocked else [],
                 "status": "blocked" if blocked else "prepared_for_review"}
 
-    def test_init_plan_verify_offline_integration_produces_blocked_unauthorized_dossier(self):
+    def test_init_plan_verify_offline_integration_produces_unapproved_dossier(self):
         candidate = self.root / ".artifacts/deploiement/candidate"
         dossier = self.root / ".artifacts/deploiement/result"
         with patch.object(release.quality, "run_checks", side_effect=AssertionError("Tests must not execute")), \
@@ -240,16 +240,19 @@ class DossierTests(unittest.TestCase):
             template = release.read_json(candidate / "evidence.template.json")
             self.assertEqual(release.quality.digest(candidate / "request.json"), template["request_sha256"])
             self.assertTrue(all(value["status"] == "not_run" for value in template["reviews"].values()))
-            self.assertEqual(1, self.call("plan", "--request", candidate / "request.json",
+            self.assertEqual(0, self.call("plan", "--request", candidate / "request.json",
                                           "--evidence", candidate / "evidence.template.json", "--output", dossier))
             manifest_path = dossier / "manifest.json"
             manifest = release.read_json(manifest_path)
-            self.assertEqual("blocked", manifest["status"])
-            self.assertIn("quality.workspace", manifest["blockers"])
-            self.assertIn("ci.marketplace", manifest["blockers"])
+            self.assertEqual("prepared_for_review", manifest["status"])
+            self.assertEqual([], manifest["blockers"])
+            self.assertIn("ci.marketplace", (dossier / "plan.md").read_text(encoding="utf-8"))
             self.assertIsNone(manifest["database"])
-            for key in ("execution_available", "deployment_executed", "authorized", "production_ready"):
-                self.assertIs(manifest[key], False)
+            self.assertEqual(2, manifest["schema_version"])
+            self.assertEqual({"repository", "sha", "service_id", "branch", "endpoints"},
+                             set(manifest["applications"]["marketplace"]))
+            self.assertFalse({"execution_available", "deployment_executed", "authorized", "production_ready",
+                              "checks", "quality", "profile", "mode"} & set(manifest))
             self.assertNotIn("MUST_NOT_ESCAPE", manifest_path.read_text(encoding="utf-8"))
             self.assertEqual(0, self.call("verify", "--manifest", manifest_path,
                                           "--sha256", release.quality.digest(manifest_path)))
@@ -267,14 +270,14 @@ class DossierTests(unittest.TestCase):
     def test_preparation_reuses_quality_gate_without_copying_arbitrary_messages(self):
         with patch.object(release.quality, "prepare_release", return_value=self.local_report(blocked=True)) as local:
             manifest = release.prepare(self.root, self.request, request_hash=HASH, now=NOW)
-        self.assertEqual("blocked", manifest["status"])
-        self.assertIn("quality.workspace", manifest["blockers"])
+        self.assertEqual("prepared_for_review", manifest["status"])
+        self.assertEqual([], manifest["blockers"])
         self.assertNotIn("SENSITIVE_INTERNAL_MESSAGE", json.dumps(manifest))
         self.assertFalse(local.call_args.kwargs["demonstration_required"])
 
     def test_simple_profile_keeps_source_integrity_but_not_manual_receipts_as_blockers(self):
         with patch.object(release.quality, "prepare_release", return_value=self.local_report(blocked=True)):
-            manifest = release.prepare(self.root, self.request, request_hash=HASH, now=NOW, simple=True)
+            manifest = release.prepare(self.root, self.request, request_hash=HASH, now=NOW)
         self.assertEqual("simple", manifest["profile"])
         self.assertEqual([], manifest["blockers"])
         self.assertEqual("prepared_for_review", manifest["status"])
@@ -381,16 +384,18 @@ class DossierTests(unittest.TestCase):
         folder = release.output_directory(self.root)
         fingerprint = release.write_dossier(folder, manifest)
         path = folder / "manifest.json"
-        self.assertEqual(manifest["id"], release.verify(path, fingerprint, now=NOW)["id"])
+        compact = release.verify(path, fingerprint, now=NOW)
+        self.assertEqual(manifest["created_at"], compact["created_at"])
+        self.assertEqual(2, compact["schema_version"])
         for when in (NOW - timedelta(seconds=1), NOW + timedelta(hours=24)):
             with self.subTest(when=when), self.assertRaises(ValueError):
                 release.verify(path, fingerprint, now=when)
         path.write_bytes(path.read_bytes() + b" ")
         with self.assertRaisesRegex(ValueError, "digest mismatch"):
             release.verify(path, fingerprint, now=NOW)
-        for change in ({"authorized": True}, {"status": "prepared_for_review"},
+        for change in ({"authorized": True}, {"status": "blocked"},
                        {"expires_at": (NOW + timedelta(hours=25)).isoformat()}):
-            path.write_text(json.dumps({**manifest, **change}), encoding="utf-8")
+            path.write_text(json.dumps({**compact, **change}), encoding="utf-8")
             with self.subTest(change=change), self.assertRaises(ValueError):
                 release.verify(path, release.quality.digest(path), now=NOW)
 
