@@ -139,6 +139,11 @@ serveur. Le catalogue fermé reste la référence : il ne rend pas tout
 neutraliser une étape, régulariser une preuve, modifier les paramètres
 d'exploitation, clôturer le moteur et exécuter la conservation restent hors de
 cette ouverture. La publication continue par le parcours Animation habilité.
+
+Évolution du 20 novembre 2026 : le profil ADMIN ERP peut désormais clôturer le
+moteur avec `animation:cloturer`, versions et confirmation requises. Le profil
+EXPLOITATION ERP ne reçoit pas ce droit. Les autres restrictions ci-dessus
+demeurent en vigueur.
 Les formulaires de création commerçant/coffret exigent `catalogue.gerer`, comme
 leurs commandes ; le Lecteur consulte les fiches existantes.
 

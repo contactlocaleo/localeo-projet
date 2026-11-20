@@ -115,6 +115,11 @@ Routes implémentées localement, sous les préfixes privés existants `/protect
 | POST `/animations/{id}/juste-prix/exploitation/{action}` | suspendre/reprendre/cloturer/annuler, expectedRevision et motif ; reçu durable |
 | POST `/animations/{id}/juste-prix/cloture/poursuivre` | Droit de clôture ; un lot atomique de 100 maximum |
 
+Pour les surfaces internes, le profil ADMIN ERP peut utiliser le droit
+`animation:cloturer` pour les commandes de clôture et la clôture du moteur.
+Le profil EXPLOITATION ERP reste limité à la lecture. Les versions, la
+confirmation et le contrôle de périmètre restent exigés.
+
 La sous-liste personnelle cible est
 `GET /localeo-live/participations/{id}/juste-prix/produits`, avec limit/cursor et
 contrôle d'accès/capacités identique à l'enveloppe personnelle. Elle joint les
