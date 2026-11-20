@@ -15,6 +15,19 @@ Seul `plan` est disponible. Il autorise la lecture des sources et des métadonn�
 
 ## Construire le plan
 
+À chaque préparation disposant d'un accès Render, après `init` et avant `plan`,
+exécuter `scripts/render_configuration_review.py --request <request.json>
+--evidence <evidence.template.json> --output-dir <nouveau dossier ignoré> --live`.
+Le collecteur lit `RENDER_READ_API_KEY` dans son environnement, vérifie les
+services de la cible et filtre les valeurs avant d'écrire
+`evidence.with-render-configuration.json`. Passer ensuite ce reçu à
+`prepare_render_release.py plan --evidence`. Voir la
+[procédure de lecture Render](../../../docs/exploitation/deploiement/preparer-manifeste-render.md#lecture-des-noms-de-variables-render).
+Si l'accès manque ou échoue, garder la comparaison distante `not_run` et le
+dossier bloqué ; ne pas utiliser une clé collée dans la conversation ni la
+stocker dans Git. Une clé absente du service peut être optionnelle ou fournie
+par un groupe ; une clé hors catalogue n'est jamais supprimée automatiquement.
+
 Le [préparateur local du lot 3](../../../docs/exploitation/deploiement/preparer-manifeste-render.md)
 automatise le manifeste, les catalogues de clés et migrations, les contrôles de
 preuves et l'empreinte. Après sélection explicite de la cible et du périmètre,

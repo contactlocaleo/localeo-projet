@@ -189,7 +189,8 @@ def configuration(app, source, target, receipt, checks, now):
         sha(receipt["configuration_revision_sha256"], 64)
     sha(receipt["sha"])
     present, prepared, excluded = (names(receipt[key]) for key in ("present_keys", "prepared_keys", "not_applicable_keys"))
-    require(excluded <= known and not (excluded & prepared))
+    require(excluded <= known and prepared <= known and not (excluded & prepared)
+            and not (present & prepared))
     missing = sorted(known - present - prepared - excluded)
     passed = (fresh(receipt["observed_at"], now) and receipt["service_id"] == target["render_service_id_verified"]
               and receipt["sha"] == source.sha and receipt["reviewed"] and not missing)
