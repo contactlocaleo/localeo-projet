@@ -67,7 +67,8 @@ conjointe du backend et de ses ressources CRM.
 Depuis le menu **Applications** de l’ERP, choisissez **Localeo CRM**. L’adresse est `/internal/crm/` sur le même domaine backoffice. Si l’entrée manque, demandez à l’administrateur le droit **Consulter le CRM**. La gestion, les imports et la levée d’opposition disposent de droits distincts ; un accès ERP existant ne les ajoute pas automatiquement.
 
 Après activation du domaine dédié, vous pouvez ouvrir directement
-**https://test-crm.localeo.city** sur TEST, ou **https://crm.localeo.city** en
+**https://test-crm.localeo.city** sur TEST,
+**https://demo-crm.localeo.city** sur DEMO, ou **https://crm.localeo.city** en
 production. Les liens ERP y conduisent automatiquement une fois la configuration
 activée. Utilisez le même compte personnel que dans l'ERP ; une première connexion
 sur ce domaine est nécessaire. Vous retrouvez les mêmes prospects et droits.
