@@ -119,6 +119,14 @@ def check_row(checks, key, passed, present=True):
     checks.append({"id": key, "status": "passed" if passed else "failed" if present else "not_run"})
 
 
+def essential_checks(applications):
+    result = {"documentation.sha", "sources.unchanged", "inputs.unchanged"}
+    result.update(f"source.{app}" for app in applications)
+    if "backend" in applications:
+        result.update(("database.identity", "database.migrations"))
+    return result
+
+
 def expected_ci(app):
     return [(workflow, job) for workflow, jobs in CI[app].items() for job in jobs]
 
@@ -255,7 +263,8 @@ def evidence_template(root, request, request_hash):
 
 
 def prepare(root, request, *, request_hash, evidence=None, evidence_hash=None,
-            quality_report=None, bundle=None, demo_report=None, dataset=None, now=None):
+            quality_report=None, bundle=None, demo_report=None, dataset=None, now=None,
+            simple=False):
     """Recompute all local evidence; supplied receipts never confer authorization."""
     now = now or datetime.now(timezone.utc)
     validate_request(request)
@@ -337,8 +346,10 @@ def prepare(root, request, *, request_hash, evidence=None, evidence_hash=None,
     check_row(checks, "sources.unchanged", quality.snapshot(root, registry) == local["repositories"])
     check_row(checks, "inputs.unchanged", all(path.is_file() and quality.digest(path) == input_hashes[key]
                                             for key, path in input_paths.items()))
-    blockers = [x["id"] for x in checks if x["status"] != "passed"]
+    essential = essential_checks(applications)
+    blockers = [x["id"] for x in checks if x["status"] != "passed" and (not simple or x["id"] in essential)]
     return {"schema_version": 1, "kind": "render_release_plan", "mode": "plan",
+            "profile": "simple" if simple else "strict",
             "id": str(uuid.uuid4()), "created_at": now.isoformat(), "expires_at": (now + MAX_AGE).isoformat(),
             "environment": env, "workspace_id": workspace, "documentation_sha": request["documentation_sha"],
             "request_sha256": request_hash, "evidence_sha256": evidence_hash,
@@ -378,8 +389,14 @@ def write_dossier(folder, manifest):
     lines = ["# Plan Render", "", f"Cible : `{manifest['environment']}` — verdict : **{manifest['status']}**.",
              "", "Préparation locale ; aucune autorisation ni exécution de déploiement.",
              "Les reçus importés restent déclaratifs. L'exécuteur devra les revérifier.", "",
-             f"Empreinte SHA256 : `{fingerprint}`", "", "| Contrôle | Résultat |", "| --- | --- |"]
-    lines.extend(f"| {x['id']} | {x['status']} |" for x in manifest["checks"])
+             f"Empreinte SHA256 : `{fingerprint}`", ""]
+    shown = (essential_checks(manifest["applications"]) if manifest.get("profile") == "simple"
+             else {x["id"] for x in manifest["checks"]})
+    lines.extend(("| Contrôle bloquant | Résultat |", "| --- | --- |"))
+    lines.extend(f"| {x['id']} | {x['status']} |" for x in manifest["checks"] if x["id"] in shown)
+    if manifest.get("profile") == "simple":
+        optional = [x for x in manifest["checks"] if x["id"] not in shown and x["status"] != "passed"]
+        lines.extend(("", f"Observations facultatives non validées : {len(optional)} ; détails dans manifest.json."))
     with (folder / "plan.md").open("x", encoding="utf-8") as stream:
         stream.write("\n".join(lines) + "\n")
     return fingerprint
@@ -399,7 +416,11 @@ def verify(path, expected, now=None):
     require(start <= instant < end and timedelta(0) < end - start <= MAX_AGE, "Manifest expired or invalid dates")
     require(isinstance(manifest.get("checks"), list) and manifest["checks"])
     require(all(isinstance(x, dict) and x.get("status") in ("passed", "failed", "not_run") for x in manifest["checks"]))
-    failed = [x["id"] for x in manifest["checks"] if x["status"] != "passed"]
+    profile = manifest.get("profile", "strict")
+    require(profile in ("simple", "strict"))
+    essential = essential_checks(manifest.get("applications", {}))
+    failed = [x["id"] for x in manifest["checks"] if x["status"] != "passed"
+              and (profile == "strict" or x["id"] in essential)]
     require(failed == manifest.get("blockers") and bool(failed) == (manifest["status"] == "blocked"))
     return manifest
 
@@ -422,6 +443,7 @@ def main(argv=None):
     plan.add_argument("--bundle", type=Path)
     plan.add_argument("--demo-report", type=Path)
     plan.add_argument("--dataset", type=Path)
+    plan.add_argument("--simple", action="store_true", help="Use the streamlined TEST/DEMO/PROD delivery profile")
     plan.add_argument("--output", type=Path)
     check = sub.add_parser("verify", help="Check supplied fingerprint and expiry only; no authorization or remote validation")
     check.add_argument("--manifest", type=Path, required=True)
@@ -456,7 +478,8 @@ def main(argv=None):
         evidence = read_json(args.evidence) if args.evidence else None
         manifest = prepare(root, request, request_hash=quality.digest(args.request), evidence=evidence,
                            evidence_hash=quality.digest(args.evidence) if args.evidence else None,
-                           quality_report=args.quality_report, bundle=args.bundle, demo_report=args.demo_report, dataset=args.dataset)
+                           quality_report=args.quality_report, bundle=args.bundle, demo_report=args.demo_report,
+                           dataset=args.dataset, simple=args.simple)
         folder = output_directory(root, args.output)
         fingerprint = write_dossier(folder, manifest)
         print(f"{manifest['status']}: {folder / 'manifest.json'}\nsha256: {fingerprint}")

@@ -272,6 +272,17 @@ class DossierTests(unittest.TestCase):
         self.assertNotIn("SENSITIVE_INTERNAL_MESSAGE", json.dumps(manifest))
         self.assertFalse(local.call_args.kwargs["demonstration_required"])
 
+    def test_simple_profile_keeps_source_integrity_but_not_manual_receipts_as_blockers(self):
+        with patch.object(release.quality, "prepare_release", return_value=self.local_report(blocked=True)):
+            manifest = release.prepare(self.root, self.request, request_hash=HASH, now=NOW, simple=True)
+        self.assertEqual("simple", manifest["profile"])
+        self.assertEqual([], manifest["blockers"])
+        self.assertEqual("prepared_for_review", manifest["status"])
+        self.assertIn("ci.marketplace", [x["id"] for x in manifest["checks"] if x["status"] != "passed"])
+        folder = release.output_directory(self.root)
+        fingerprint = release.write_dossier(folder, manifest)
+        release.verify(folder / "manifest.json", fingerprint, now=NOW)
+
     def test_source_and_input_mutations_during_preparation_block_the_dossier(self):
         initial = self.local_report()
         app_example = self.apps["localeo-marketplace"] / ".env.example"
