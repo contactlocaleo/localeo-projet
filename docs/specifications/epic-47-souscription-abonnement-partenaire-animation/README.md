@@ -71,9 +71,10 @@ auditée, sans transaction fictive.
 - Un lien expiré est régénéré sur le même snapshot ; changer le prix impose une
   nouvelle souscription.
 - Les remboursements automatiques et changements d'offre sont hors MVP.
-- Après paiement, une preuve est envoyée au contact de facturation et conservée
-  dans un dossier permettant la production d'une facture conforme ; son format
-  fiscal doit être validé avant la mise en production.
+- Après paiement, une confirmation distincte de la facture est envoyée au
+  contact de facturation. Lorsque la facturation Localeo E50 est active, la
+  facture fiscale est émise par Localeo et disponible dans l'espace Animation ;
+  son activation reste soumise à la validation comptable et à la recette Stripe.
 - Le suivi du CA distingue abonnements encaissés HT, TTC, frais Stripe et nombre
   de gratuités ; la date de rattachement est `paid_at`.
 - La date de fin est visible dans la section abonnement. Le back-office et
@@ -404,6 +405,17 @@ convention comptable commune avec le CA coffrets.
 | `POST /internal/abonnements-plateforme/commandes/{id}/activer-gratuitement` | Valider une gratuité auditée |
 | `POST /internal/abonnements-plateforme/souscriptions/{id}/annuler` | Annuler avant paiement |
 | `GET /internal/abonnements-plateforme/ca` | Agréger les encaissements par période, offre, partenaire et commune |
+
+Pour une commande payante lorsque la facturation Localeo est activée, le corps
+de `POST /commandes` inclut `profil_facturation` en plus des champs historiques
+`raison_sociale`, `email_facturation` et `adresse_facturation`. Ce profil E50
+porte `buyerType`, `legalName`, `billingEmail` et `address` (`line1`,
+`postalCode`, `city`, `country`). L'email doit être identique à celui de la
+commande. `BUSINESS` exige `siren` ; `PUBLIC_ENTITY` exige `siret`,
+`chorusRecipientActive=true` et `chorusDirectoryCheckedAt`, ainsi que les codes
+requis par l'annuaire Chorus. Le webhook du paiement initial émet une facture
+Localeo par commune ; l'API de reprise contrôlée est décrite dans la
+[procédure d'exploitation](procedure-exploitation.md#facture-absente-après-paiement).
 
 Ces routes sont réservées à l'administration. Le parcours public ne reçoit
 qu'une page de retour informative ; il ne peut pas activer l'abonnement.

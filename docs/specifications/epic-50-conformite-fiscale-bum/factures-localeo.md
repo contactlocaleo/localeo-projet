@@ -99,6 +99,18 @@ conservant cette preuve dans l'audit. Elle est mise a disposition dans Localeo
 Animation et envoyee au contact de facturation. Pour une entite publique, elle
 alimente la meme file de depot manuel Chorus Pro que les autres factures.
 
+Pour la souscription initiale E47, le Checkout est un paiement unique : il ne
+produit pas d'evenement `invoice.paid` Stripe. Le webhook
+`checkout.session.completed` emet donc directement une facture Localeo par
+souscription/commune lorsque la facturation Localeo est active. Le formulaire ERP
+recueille avant le paiement le type d'acheteur, l'identite, l'adresse structuree
+et, pour une entite publique, les informations Chorus. La commande conserve ce
+profil avec les montants E47 en centimes ; le webhook ne reconstitue jamais une
+adresse fiscale depuis l'ancien champ libre. La reference PaymentIntent (ou la
+session Checkout si elle manque) garantit la reprise idempotente. Une erreur
+d'emission laisse le paiement et les droits acquis, mais inscrit
+`souscription_plateforme.facturation_a_reconcilier` dans l'audit.
+
 ## Cycle minimal
 
 ```text
