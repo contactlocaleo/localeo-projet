@@ -533,7 +533,7 @@ Le modèle reste inactif avant qualification de livraison. [Parcours et preuves 
 ## Préparation du jeu des vitrines — E78
 
 Depuis le 17 novembre 2026, **Préparation des animations** possède son entrée
-dans le menu Pro et l’onglet **Préparation** dans l’espace Animation. La liste
+dans le menu Pro et la rubrique **Préparation** dans l’espace Animation. La liste
 paginée présente les participations acceptées de la page ; elle donne accès au
 parcours propre à chaque animation, à son kit et aux invitations. Les anciens
 liens restent valides. Le jeu des vitrines guide en quatre étapes : prévoir
@@ -555,3 +555,19 @@ guide privé et support public : le QR public cible la vitrine, sans solution ni
 accès personnel. Après publication la préparation est figée ; signaler une anomalie
 à l’organisateur. Un reçu de commande ancien est suivi d’une lecture courante avant
 de réactiver les actions. [Parcours et preuves E78](../epic-78-jeu-des-vitrines/README.md).
+
+## Navigation et lisibilité des animations — 21 novembre 2026
+
+Les pages de liste de l’espace Animation regroupent leurs destinations
+**Invitations**, **Préparation**, **Mes animations** et **Notifications** dans
+l’en-tête. Sur mobile, elles sont accessibles par **Rubriques**, replié par
+défaut. Les catégories **En cours**, **À venir** et **Terminées** restent sur une
+ligne distincte ; un raccourci compact signale les invitations en attente sans
+repousser les animations sous un grand bandeau.
+
+La fiche d’une animation rapproche le scanner et l’accès à la préparation et
+présente la mission avant le kit sur mobile. Dans une préparation individuelle,
+le retour aux préparations et les étapes du parcours remplacent la navigation
+générale répétée. Les URL, filtres de catégorie, droits et commandes métier
+restent inchangés. Voir la [recette ergonomique](../../audits/ergonomie-gestion-pro-animation-2026-11-01.md#lisibilité-des-pages-animation-dans-pro--21-novembre-2026).
+

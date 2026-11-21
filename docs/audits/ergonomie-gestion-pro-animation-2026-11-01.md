@@ -1,5 +1,52 @@
 # Audit ergonomique — Localeo Pro et Localeo Animation
 
+## Lisibilité des pages Animation dans Pro — 21 novembre 2026
+
+Demande : réduire l’empilement des onglets sur mobile et PC pour remonter les
+informations utiles. Base Commerçant `f96bdff`, arbre propre avant intervention.
+Correctif Commerçant `7afabd2`, commité et poussé sur `main`.
+La reproduction locale à 320 px plaçait le titre de la première animation à
+677,7 px : en-tête, navigation sur deux lignes, grand encart d’invitations puis
+catégories occupaient presque tout le premier écran.
+
+Le correctif distingue les destinations et les catégories : navigation dans
+l’en-tête, **Rubriques** replié sur mobile, trois catégories sur une ligne et
+raccourci d’invitations compact. La mission précède le kit dans la fiche ; les
+actions scanner/préparation sont regroupées. Une préparation individuelle garde
+son retour et ses étapes sans répéter la navigation générale. Le changement de
+catégorie conserve aussi le focus clavier sur l’onglet actif.
+
+### Preuves locales
+
+- Reproduction avant correction : `animation-layout.spec.js --grep 320`, un
+  échec géométrique attendu et un succès à texte agrandi. Après correction :
+  **11/11** nouveaux scénarios, largeurs 320, 390, 1280 et 1440 px, clavier,
+  texte à 200 %, chargement/vide/erreur, retours et absence de commande à la
+  consultation. Le premier titre est désormais au-dessus de 420 px.
+- Recette navigateur élargie : **47/49 succès** avec `animation-layout`,
+  `animations`, `animation-kit`, `suivi-animation`, `e78-vitrines` et
+  `business-ux` (dont axe). Les deux échecs de `animation-kit` attendent un
+  ancien guide replié ; ils sont reproduits au même endroit sur `f96bdff` dans
+  un worktree isolé. Les assertions ne sont pas modifiées. La comparaison est
+  conservée localement dans `test-results/animation-kit-baseline`.
+- `npm test` : **695 tests réussis, 95 fichiers réussis** ; la commande sort en
+  échec car Vitest collecte `tests/release-receipt.test.cjs`, conçu pour Node.
+  Cette erreur de collecte est reproduite sur `f96bdff` ; le lanceur prévu
+  `npm run test:release-receipt` réussit ses **2/2** tests.
+- Build isolé du lanceur Playwright réussi. Captures finales examinées : liste
+  320/1280 px, détail et préparation 390 px, texte agrandi 320 px. Rapports et
+  captures locaux non versionnés dans `localeo-commercant/test-results/animation-ux-final` ;
+  reproduction initiale dans `test-results/animation-layout-before`.
+
+La [spécification commerçant](../specifications/espace-commercant/README.md#navigation-et-lisibilité-des-animations--21-novembre-2026)
+décrit le nouvel agencement. Sans impact sur les contrats/API, droits, règles
+backend, persistance, migrations ou générateur : seules la présentation et la
+gestion du focus changent, les données et commandes sont conservées. Aucun
+paramètre d’exploitation ni guide PDF à régénérer : ses accès restent valides.
+Recette sur navigateur Chromium avec données synthétiques ; pas de contrôle sur
+appareil physique ni de déploiement. Les limites de tests ci-dessus restent
+distinctes du correctif UX.
+
 ## Harmonisation sur Localeo CRM — 4 novembre 2026
 
 À la demande de l’utilisateur, la référence visuelle devient Localeo CRM.
