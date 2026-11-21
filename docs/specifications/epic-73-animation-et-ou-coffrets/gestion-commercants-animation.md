@@ -52,6 +52,39 @@ initialise lui-même son accès. Aucun rôle ERP n'est attribué au gestionnaire
   reste disponible. Les modifications de données communes d'un commerce devenu
   mixte sortent du présent droit de gestion Animation seule.
 
+## Correctif du 21 novembre 2026 — lisibilité de la liste
+
+La rubrique **Commerçants** présente un tableau de comparaison sur bureau :
+commerce (nom, catégorie et adresse), disponibilité pour les animations, accès
+Pro, contact et actions. Le suivi détaillé des trois preuves d’accès reste
+dépliable par commerce ; les erreurs d’envoi et le verrouillage restent visibles
+sans ouvrir les détails. Mot de passe défini et connexion enregistrée restent
+deux faits distincts, sans déduire la lecture humaine d’un email envoyé ou livré.
+
+Sous 768 px, les mêmes cellules deviennent des fiches : identité, disponibilité
+et accès Pro en priorité, contact dans les détails et actions accessibles sans
+défilement horizontal. La recherche, la pagination et l’actualisation restent
+ciblées ; une relecture conserve la saisie, le focus et le suivi déplié du
+commerce encore affiché. Le compteur décrit uniquement les commerces affichés
+sur la page, sans inventer le total du réseau. Sur tablette, le tableau conserve
+un défilement horizontal local et ses actions restent accessibles au clavier.
+
+Ce correctif précise GCA-03/09/11 et les règles ERP-UX-01/04/10. Les actions
+restent celles autorisées par le serveur, avec les confirmations et protections
+existantes. Seule Animation change de présentation ; sans changement API,
+migration, réparation de données, générateur de démonstration ou traitement ops.
+La recette locale utilise des commerces synthétiques, sans invitation réelle.
+
+Preuves locales du 21 novembre : `pnpm typecheck`, `pnpm lint`, `pnpm test`
+(396 tests réussis) et `node scripts/build-check.mjs` réussis dans Animation.
+Le banc `tests/browser/merchant-network.mjs`, avec `ANIMATION_TEST_DIST` pointant
+sur ce build isolé, vérifie les listes à 1440/1280/768/390/320 px, le texte à
+200 %, les détails au clavier, recherche/état vide et focus après relecture.
+Le parcours existant conserve ses contrôles d’invitation, retrait/réactivation,
+réponse perdue, erreur de lecture et révocation à 1280/390/320 px. Les captures
+sont examinées localement ; aucun essai sur appareil physique ni déploiement
+n’est déduit de cette recette.
+
 ## Propriétaires et contrat
 
 `referencement` porte l'éligibilité à la gestion autonome et l'ouverture du
