@@ -61,6 +61,13 @@ auditée, sans transaction fictive.
   catalogue est motivée et auditée par l'administrateur.
 - Le contact de facturation peut être distinct du premier gestionnaire.
 - L'invitation portail est envoyée après paiement ou gratuité validée.
+- Au référencement payant, le partenaire, le premier gestionnaire et ses
+  habilitations sont `EN_ATTENTE` : aucun accès n'est ouvert avant paiement.
+  La confirmation Stripe ouvre ces trois états ensemble et inscrit dans l'audit
+  la commande, le partenaire, les habilitations et l'origine `PAIEMENT_STRIPE`.
+  L'activation gratuite confirmée suit la même transition avec l'origine
+  `ACTIVATION_GRATUITE`. Une suspension administrative `SUSPENDU` ou
+  `SUSPENDUE` n'est jamais levée par un paiement ou un rejeu.
 - Un lien expiré est régénéré sur le même snapshot ; changer le prix impose une
   nouvelle souscription.
 - Les remboursements automatiques et changements d'offre sont hors MVP.
@@ -182,7 +189,7 @@ est flushe avant une seconde consommation dans la meme transaction.
 ### Souscription payante
 
 1. L'administrateur crée le partenaire, les rattachements territoriaux et le
-   premier gestionnaire en attente.
+   premier gestionnaire en attente, sans accès actif.
 2. Il choisit l'offre et confirme le prix proposé pour chaque commune.
 3. Le backend crée une souscription avec ses snapshots par commune.
 4. Le backend crée une Checkout Session à partir du prix persisté.
@@ -191,7 +198,7 @@ est flushe avant une seconde consommation dans la meme transaction.
 7. Le webhook signé retrouve la souscription par metadata et références.
 8. Le backend vérifie statut, montant, devise et unicité du paiement.
 9. La souscription passe à `PAYEE`, puis matérialise l'abonnement et les droits
-   de sa commune.
+   de sa commune ; les accès encore en attente sont activés et audités.
 10. L'invitation `INVITATION_GESTIONNAIRE_ANIMATION` est placée dans l'outbox.
 11. Le paiement alimente le suivi **Abonnements encaissés**.
 
