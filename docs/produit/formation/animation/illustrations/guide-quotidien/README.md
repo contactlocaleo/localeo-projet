@@ -42,3 +42,24 @@ Cette recette locale ne prouve pas un déploiement ou une recette sur appareil r
 Le PDF est rendu intégralement en PNG et relu visuellement après génération.
 Il faut recapturer les écrans affectés lorsqu'un parcours, un libellé, un état ou
 une action change, puis régénérer et synchroniser le guide.
+
+## Ajout du 22 novembre 2026 — produits du Juste Prix Local
+
+Les captures `juste-prix-produits-1024.png` et `juste-prix-produits-390.png`
+montrent le composant React réel **Produits et prix proposés**, cadré sur les
+compteurs de la page et la première proposition à examiner d'un commerce fictif.
+Base Git Animation `4960688`,
+avec le correctif d'approbation et de présentation du même lot. Le guide retient
+la variante 1 024 px dans son nouveau chapitre 5 ; la variante 390 px documente
+la présentation mobile. Cette édition du guide comporte treize chapitres.
+
+Depuis `localeo-animation`, avec les dépendances et Chromium installés :
+
+```console
+node tests/browser/juste-prix-products.mjs --guide-captures
+```
+
+Ce banc construit un build isolé, sert l'interface sur `127.0.0.1:8191` et simule les lectures et décisions
+avec des données synthétiques. Il ne contacte pas un environnement de production.
+Ces captures complètent celles du 21 novembre ; elles ne prouvent pas un
+déploiement distant.

@@ -1,6 +1,6 @@
 # Localeo Animation - Votre guide au quotidien
 
-<!-- Source canonique du PDF ; générateur dans localeo-animation/scripts/generate-animation-guide.py. Édition du 21 novembre 2026. Les captures montrent l'application réelle avec des données d'exemple, jamais des comptes de production. -->
+<!-- Source canonique du PDF ; générateur dans localeo-animation/scripts/generate-animation-guide.py. Édition du 22 novembre 2026. Les captures montrent l'application réelle avec des données d'exemple, jamais des comptes de production. -->
 
 ## 1 · Se repérer dans son espace
 
@@ -75,7 +75,21 @@ Lorsque ce suivi est activé, distinguez les commerces **prêts** de ceux encore
 
 > Pour le jeu des vitrines, vérifiez l'activité et les éléments proposés par chaque commerce. La disponibilité des rubriques et du suivi varie selon le modèle et la configuration choisie.
 
-## 5 · Construire une dotation compréhensible
+## 5 · Approuver les produits du Juste Prix Local
+
+**Objectif :** vérifier et approuver chaque proposition avant publication.
+
+![Produits et prix proposés distingue les propositions à examiner, leur prix TTC et les actions de décision. Les compteurs concernent la page affichée.](illustrations/guide-quotidien/juste-prix-produits-1024.png)
+
+1. Dans **Produits et prix proposés**, repérez les lignes **À examiner**. Vérifiez commerce, produit, description, unité ou format et **prix TTC**.
+2. Choisissez **Accepter la proposition** si tout est correct. Attendez la confirmation et le repère **Approuvé**.
+3. Sinon, choisissez **Demander une correction**, sélectionnez un motif et ajoutez les précisions utiles. **Autre motif** exige un texte. Envoyez la demande ; le commerce retrouve le motif dans son espace, corrige puis propose à nouveau.
+
+**À compléter** et **À corriger** attendent une action du commerçant. Utilisez l'actualisation de la section pour lire les dernières propositions ; les compteurs décrivent uniquement la page affichée. Une mention de consultation seule explique pourquoi les décisions sont indisponibles, par exemple après publication ou selon vos droits.
+
+> L'accord du commerce pour participer ne vaut pas approbation de son produit. Vous approuvez sa proposition sans modifier son prix à sa place. Si le résultat est incertain, vérifiez les propositions avant de recommencer.
+
+## 6 · Construire une dotation compréhensible
 
 **Objectif :** décrire ce que les habitants peuvent gagner et qui le remettra.
 
@@ -94,7 +108,7 @@ Lorsque ce suivi est activé, distinguez les commerces **prêts** de ceux encore
 
 > Changer de mode peut retirer des descriptions de lots déjà enregistrées. Lisez la confirmation. Un lot libre déclaré ne constitue pas un achat ou une remise déjà effectuée.
 
-## 6 · Vérifier puis publier
+## 7 · Vérifier puis publier
 
 **Objectif :** ouvrir une animation aux habitants après les contrôles requis.
 
@@ -111,7 +125,7 @@ Lorsque ce suivi est activé, distinguez les commerces **prêts** de ceux encore
 
 > Si l'envoi est interrompu, utilisez « Vérifier l'enregistrement » lorsqu'il est proposé. Un traitement en cours ou un résultat incertain ne doit pas être interprété comme un succès. Évitez de recommencer une opération financière sans vérifier son résultat.
 
-## 7 · Faire connaître l'animation et écrire aux participants
+## 8 · Faire connaître l'animation et écrire aux participants
 
 **Objectif :** distinguer les supports de découverte et les messages aux personnes déjà inscrites.
 
@@ -130,7 +144,7 @@ Pour une **tombola publique sur place**, affichez aussi le code du jour fourni d
 
 > Les dates de programmation sont exprimées en heure de Paris. Le quota, la fréquence et la fenêtre d'envoi sont contrôlés avant l'envoi. Relisez l'audience et le statut de la campagne plutôt que de supposer qu'elle a touché tout le monde.
 
-## 8 · Suivre l'activité pendant l'animation
+## 9 · Suivre l'activité pendant l'animation
 
 **Objectif :** comprendre la progression et intervenir avec les bonnes informations.
 
@@ -147,7 +161,7 @@ Vérifiez d'abord l'animation, le commerce, l'état du participant et la consign
 
 > Un résultat absent ou « non collecté » n'est pas une valeur zéro. Les statistiques précisent, lorsqu'elle est disponible, leur date d'observation. Les données présentées ici servent d'exemple pédagogique.
 
-## 9 · Clôturer au bon moment
+## 10 · Clôturer au bon moment
 
 **Objectif :** fermer réellement la participation puis préparer les opérations de fin.
 
@@ -164,7 +178,7 @@ La date de fin prévue informe les habitants. **Tant que l'animation n'est pas r
 
 > L'alerte vous demande de vérifier puis de clôturer ; elle ne le fait pas à votre place. Ne confondez pas une date échue, une inscription fermée explicitement et une clôture effective. Après l'échéance prévue, les paramètres d'exploitation ne sont plus modifiables : vérifiez les dates avant cette échéance.
 
-## 10 · Organiser le tirage et remettre les lots
+## 11 · Organiser le tirage et remettre les lots
 
 **Objectif :** suivre les gagnants et les remises jusqu'à leur résolution.
 
@@ -181,7 +195,7 @@ Une absence de réponse, un échec d'email ou une situation particulière peut l
 
 > Consultez **Fin de l'animation** pour retrouver les blocages, opérations en cours et unités non résolues. Résolvez-les avant de chercher à terminer ou archiver l'édition.
 
-## 11 · Lire le bilan et préparer une nouvelle édition
+## 12 · Lire le bilan et préparer une nouvelle édition
 
 **Objectif :** mesurer les résultats sans confondre absence d'information et absence d'activité.
 
@@ -198,7 +212,7 @@ Une nouvelle édition est un nouveau brouillon. Les dates, accords des commerça
 
 > Les objectifs servent de repères de lecture. Une mesure « non applicable » ou « non collectée » ne doit pas être remplacée mentalement par zéro. Les captures utilisent volontairement un petit jeu de données synthétiques.
 
-## 12 · Gérer son équipe et obtenir de l'aide
+## 13 · Gérer son équipe et obtenir de l'aide
 
 **Objectif :** retrouver les accès, les modules et une assistance adaptée à la situation.
 
@@ -211,4 +225,4 @@ Une nouvelle édition est un nouveau brouillon. Les dates, accords des commerça
 
 > Ne partagez ni mot de passe, ni PIN, ni QR secret. L'objectif de première réponse humaine du support est de deux jours ouvrés, avec une date cible indiquée dans la demande ; ce délai concerne la prise en charge, pas une promesse de résolution.
 
-Édition du **21 novembre 2026**. Interfaces illustrées sur ordinateur et mobile ; données de démonstration. Les intitulés et les actions peuvent varier selon le modèle, les droits et les modules.
+Édition du **22 novembre 2026**. Interfaces illustrées sur ordinateur et mobile ; données de démonstration. Les intitulés et les actions peuvent varier selon le modèle, les droits et les modules.

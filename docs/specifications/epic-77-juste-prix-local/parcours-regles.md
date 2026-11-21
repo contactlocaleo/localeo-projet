@@ -45,6 +45,31 @@ d'une version non consultée. La publication reverrouille et revérifie les rév
 Un commerce non prêt doit être complété ou exclu explicitement du brouillon ;
 pas d'exclusion silencieuse. Après exclusion, revérifier le seuil et les accords.
 
+### Correctif du 22 novembre 2026 — approbation et lisibilité
+
+La fiche Animation expose les permissions effectives dans la commune active,
+y compris lorsque le membre dispose du seul droit spécialisé d'approbation.
+Elle ne présente pas les permissions brutes d'autres communes. Les commandes
+conservent leur contrôle serveur des droits, de l'état et de la révision.
+
+La section compare commerce, produit, description, unité/format et prix TTC.
+Les repères visibles sont **À compléter**, **À examiner**, **À corriger** et
+**Approuvé**. Les compteurs portent explicitement sur la page courante, limitée
+à 25 propositions ; ils ne décrivent pas un total global. Les actions sont
+placées sur chaque proposition à examiner. La consultation seule indique sa
+raison, notamment après publication ou en l'absence de droit effectif.
+L'actualisation reste locale et préserve la navigation et le focus. Un résultat
+incertain appelle une vérification, sans répétition automatique de la décision.
+
+La recette couvre deux commerces ayant accepté et proposé un produit, le droit
+spécialisé seul, une autre commune, la lecture seule, l'approbation et la
+correction motivée, le conflit de révision et le résultat incertain, sur mobile
+et bureau au clavier. Le guide Animation et ses captures sont actualisés.
+Le guide Commerçant est sans impact : proposition, correction et nouvelle
+soumission restent identiques dans son application. Aucun changement de règle
+métier, de forme du contrat API, de migration, de générateur de démonstration
+ou de procédure d'exploitation n'est requis.
+
 Le récapitulatif montre N commerces retenus, un produit approuvé par commerce,
 les prix privés, la tolérance commune, le seuil entier 1..N, les passages, les
 dates, le règlement et la dotation. Les contrôles E56/E73 restent applicables.

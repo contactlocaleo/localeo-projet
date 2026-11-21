@@ -1,5 +1,72 @@
 # E77 — Bilan de réalisation locale
 
+## Correctif du 22 novembre 2026 — approbation dans Animation
+
+Bases vérifiées : Backend `9cff7f2e`, Animation `4960688`, Projet `08a7c10`,
+arbres initialement propres. La fiche renvoyait les permissions brutes de toutes
+les habilitations, alors que les commandes dérivent le droit Juste Prix du droit
+de modification dans la commune active. L'organisateur standard pouvait lire les
+produits, mais le frontend ne recevait pas son droit d'approbation. La projection
+réutilise désormais `permissions_animation_effectives`, comme les commandes ;
+le droit spécialisé explicite reste valable et les droits d'autres communes
+ne sont plus présentés comme actifs.
+
+La section conserve l'ordre et la pagination serveur, présente commerce,
+produit, prix TTC, format, prochaine action et statut, avec compteurs limités
+à la page. L'approbation et la correction motivée restent soumises à la révision
+lue ; chargement, consultation seule, refus et résultat incertain sont distincts.
+Le bouton d'actualisation conserve le focus pendant sa lecture et bloque les
+activations répétées. L'option correspondante du composant partagé est activée
+uniquement ici ; son comportement par défaut reste couvert par la recette actions.
+
+Preuves locales :
+
+- Backend : les quatre régressions de permissions échouent avant correction,
+  puis **79 tests ciblés** et **763 contrôles architecture/domaine/use cases**
+  réussissent. Le lot élargi conserve un échec préexistant :
+  `test_publication_recontrole_chasse_dans_transaction`, dont le double UoW ne
+  fournit pas `reversibilite`. Échec reproduit sur copie du fichier à `HEAD`,
+  sans modifier ni ignorer l'assertion.
+- Animation : `pnpm test` **397 succès**, `pnpm typecheck`, `pnpm lint` et
+  `node scripts/build-check.mjs` réussis. Le build isolé final est
+  `tmp/quality-build-jXAUXs` ; seul l'avertissement de taille des chunks demeure.
+- `node tests/browser/juste-prix-products.mjs --guide-captures` : **8 scénarios**,
+  dont actions à 320/390/1024/1280 px, texte 200 %, clavier, focus, pagination,
+  réessai de lecture, conflit, réponse perdue et lecture seule. Rapport final
+  `tmp/juste-prix-products-sj79bR`.
+- `node tests/browser/po-produits-permissions.mjs` : **8 scénarios** dans
+  l'application complète, pour droits standard effectifs, spécialisé seul,
+  lecteur et animation publiée à 390/1280 px ; rapport
+  `tmp/po-produits-permissions-SIxHFs`.
+- `node tests/browser/action-feedback.mjs` : **80 contrôles** des boutons et
+  formulaires réussis à 390/1280 px, comportement par défaut préservé.
+- Guide Animation : captures réelles synthétiques recadrées sur une proposition,
+  treize pages PDF rendues et relues, copie embarquée synchronisée et lien/fichier
+  servi vérifiés par `animation-guide.mjs --access-only`. Le guide Commerçant
+  ne change pas : ses procédures de proposition et correction restent identiques.
+- Liens et sources : `check_guidance.py --changed --all-markdown` et
+  `sync_documentation.py --check-sources` réussis ; `git diff --check` réussi
+  dans les trois dépôts.
+
+Aucun schéma, contrat embarqué, règle métier, migration, donnée distante,
+configuration ou générateur de démonstration n'est modifié. Les recettes utilisent
+des API synthétiques, sans lecture de secrets ni validation de produits réels.
+Livrer le correctif backend pour les permissions, puis Animation pour la nouvelle
+présentation. Ces preuves ne constituent pas une vérification de déploiement.
+
+Commandes backend exécutées depuis sa racine :
+
+```console
+py -3.14 scripts/validation/test_isolated.py tests/api/test_animation_detail_permissions.py tests/api/test_animation_publication_version.py tests/application/animation_locale/test_catalogue_chasse_t2.py::test_catalogue_cinq_types_et_detail_brouillon_conforme_api tests/application/animation_locale/test_alertes_animation.py tests/application/services/test_pilotage_tirage_libre_projection.py tests/application/services/test_autorisations_moteur.py tests/api/test_juste_prix_contract.py tests/domain/animation_locale/test_juste_prix_dedicated.py -q
+py -3.14 scripts/validation/test_isolated.py tests/architecture tests/domain/test_domain_dedicated_classes.py tests/application/use_cases/test_use_case_business_test_coverage.py -q
+```
+
+Le contrat HTTP Juste Prix et les refus de transport sont couverts par ce lot.
+Les tests de sécurité PostgreSQL n'ont pas été exécutés ; aucune lecture SQL,
+persistance ou règle de transaction ne change dans ce correctif.
+
+## Bilan initial du 13 novembre 2026
+
 13 novembre 2026. **En cours**, modèle inactif. Ce bilan décrit le code local
 non commité des cinq dépôts, les contrôles réellement exécutés et les réserves.
 Il ne prononce ni clôture, ni déploiement, ni activation commerciale.
