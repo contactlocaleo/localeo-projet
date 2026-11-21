@@ -110,6 +110,29 @@ uniquement le détail personnel habitant dans Live. Les scénarios synthétiques
 refus portent les preuves de cette évolution ; leur présence ne préjuge pas de
 leur exécution ou du déploiement.
 
+## Correctif du 21 novembre 2026 — passages restant à valider
+
+Complément à PE-01/03 et aux principes LIVE-UX-04/05/06/08 : une réponse réussie
+ne doit pas laisser croire qu’une étape exigeant un passage est déjà terminée.
+
+| Critère | Comportement observable attendu |
+| --- | --- |
+| **E73-PE-07** | Chasse, Vitrines et Juste Prix distinguent jeu résolu et passage restant à faire valider. La ligne affiche « Jeu résolu · Passage à faire valider », avec deux repères visibles et un nom accessible « Faire valider mon passage chez [commerce] ». Seule la comptabilisation serveur donne le tampon complet. La chasse utilise exclusivement les étapes révélées et les conditions manquantes autorisées ; l’absence d’attestation manquante ne prouve pas à elle seule qu’un passage facultatif a été effectué. |
+| **E73-PE-08** | Avant la liste, un rappel explique « Votre réponse est enregistrée. Pour compléter cette étape, faites valider votre passage par le commerçant. » et ouvre la première étape concernée. Plusieurs étapes utilisent le pluriel. Un aperçu paginé précise « Sur cette page » ; aucune autre page n’est chargée pour compter les passages. Une consigne générale rappelle les deux conditions lorsque les passages sont requis. Aucun rappel ne prétend remettre en cause une qualification déjà acquise. |
+| **E73-PE-09** | Le détail place les repères et la prochaine action près du titre. Quand seul le passage manque : « Jeu résolu ! Il reste à faire valider votre passage chez [commerce]. » et « Présentez votre QR personnel au commerçant pour qu’il valide votre passage. » Le bouton principal est « Présenter mon QR au commerçant » si le serveur le permet ; le PIN autorisé reste disponible. « Vérifier mon passage » et la fermeture du QR relisent le serveur sans créer de commande. Après réponse correcte, le détail reste sélectionné et présente ce prochain geste. |
+| **E73-PE-10** | Les autres conditions de chasse restent visibles, sans annoncer que seul le passage manque. Une réponse incorrecte définitive n’est pas présentée comme rattrapable par un passage. Passage déjà confirmé, absence de passage requis, suspension, clôture, indisponibilité QR et lecture incertaine gardent un message adapté, sans commande interdite ni validation anticipée. Navigation, brouillons et reprise explicite des commandes incertaines sont préservés. |
+
+Dépôts affectés : Marketplace/Live (présentation et tests), Projet (cette
+spécification et principes UX). Les contrats existants suffisent :
+`merchantProofRequired`, `trouve`, `passageValide`, `compte` et conditions
+manquantes des étapes de chasse. Aucune règle métier, migration, variable,
+notification ou évolution du générateur n’est nécessaire. Backend et miroirs
+embarqués inchangés. Les guides Commerçant et Animation ont été examinés :
+sans impact, car leurs écrans et procédures de validation restent identiques.
+Les scénarios `live-pending-passages.spec.cjs` et `pending-passages.test.cjs`
+portent les preuves ciblées ; les résultats exécutés restent distincts de
+leur présence et d’un déploiement distant.
+
 ## Correctif du 21 novembre 2026 — parcours commerçants d’un coup d’œil
 
 Référence initiale : les dispositions de navigation dans la même page et de

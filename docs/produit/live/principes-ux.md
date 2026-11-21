@@ -41,6 +41,19 @@ Les étapes futures de chasse restent masquées. Les détails d’exécution ne 
 plus développés dans la vue d’ensemble. Voir les
 [comportements et contrats E73](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-21-novembre-2026--parcours-et-pages-détape).
 
+**Passages restant à valider — 21 novembre 2026.** Lorsqu’un jeu exige aussi
+une validation commerçante, une bonne réponse affiche « Jeu résolu » et
+« Passage à faire valider » séparément. Le tampon complet reste réservé à
+l’étape comptabilisée par le serveur. Le parcours présente le passage manquant
+avant sa liste et ouvre le détail du commerce concerné ; un aperçu paginé
+précise « Sur cette page », sans inventer de total global. Le détail rapproche
+les deux repères du titre et propose « Présenter mon QR au commerçant », puis
+« Vérifier mon passage ». La fermeture du QR déclenche une lecture, jamais une
+validation locale. Une qualification déjà acquise ne devient pas conditionnelle
+aux étapes supplémentaires. Les états fermés, suspendus ou incertains ne
+proposent aucune action de validation interdite et gardent leur explication.
+Ces repères appliquent LIVE-UX-04, LIVE-UX-05, LIVE-UX-06 et LIVE-UX-08.
+
 Le bandeau supérieur du Marketplace donne un accès textuel direct « Live » au
 carnet, sur mobile et ordinateur, en utilisant l'origine Live configurée.
 Recherche, menu, marque et cibles de 44 px restent utilisables ; les actions
