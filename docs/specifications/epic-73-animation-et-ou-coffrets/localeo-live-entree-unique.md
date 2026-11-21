@@ -2335,3 +2335,42 @@ Conception et matrice d'impacts au [§14](localeo-live-adhesion-conception.md#14
 Les dix critères sont à vérifier sur la réalisation ; leur spécification ne
 constitue pas une preuve. Les réserves PM-R06, capacité LA-16/LP et essai physique
 restent indépendantes et ne sont pas closes par cette évolution.
+
+
+## Harmonisation visuelle Marketplace, Live et e-mails — 21 novembre 2026
+
+La décision utilisateur du 21 novembre prend la Marketplace comme référence
+publique et conserve la composition compacte de Live. Elle remplace les seules
+prescriptions de palette, polices et géométrie issues de l'alignement Pro du
+10 novembre ; elle ne modifie pas le statut de l'epic ni les réserves existantes.
+La [règle LIVE-UX-09](../../produit/live/principes-ux.md#live-ux-09--partager-la-marque-marketplace-avec-une-composition-compacte),
+la [signature publique](../../architecture/transverse/identite-entetes-applications.md#signature-publique-marketplace-live-et-e-mails--21-novembre-2026)
+et la [charte e-mail](../../architecture/transverse/charte-emails-localeo.md)
+portent la cible canonique.
+
+- **E73-HV-01** : DM Sans pour corps/contrôles et Oswald pour marque/titres courts,
+  avec échelle 25/18/15 px (23 px pour H1 mobile), corps/actions 14 px et champs
+  mobiles 16 px en unités relatives. Pas de grand hero ajouté à Live.
+- **E73-HV-02** : papier/encre/blanc et séparateurs Marketplace, action principale
+  orange à texte encre ; liens et actions secondaires lisibles en encre. Le vert
+  reste réservé aux validations réussies ; tickets et tampons conservent leur sens.
+- **E73-HV-03** : pictogramme Marketplace, bandeau encre, nom Live et TEST visibles,
+  cartes 4 px, panneaux 6 px et boutons 4 px. Carnet, découverte, participation,
+  inscription, QR, lots, récupération et messages partagent cette base. Le logo
+  fait partie du cache public PWA et son contenu participe à l'empreinte du build.
+- **E73-HV-04** : recette aux largeurs 320/390/1280 px, texte agrandi, clavier,
+  mouvement réduit, attente/erreur/refus et conservation des retours. Comparaison
+  des confirmations, accès et gains à 320/375/800 px dans la galerie e-mail,
+  avec images bloquées et QR longs. Le navigateur ne certifie pas les clients mail.
+
+Dépôts concernés : `localeo-marketplace` (présentation et preuves),
+`localeo-projet` (règles et suivi) et `localeo-backend` (fixture d'aperçu e-mail).
+Le renderer backend est déjà aligné ; vérifier ses aperçus sans envoi.
+API, droits, QR et liens personnels, règles du domaine,
+schémas et persistance sont sans impact car seuls des styles et un asset de
+signature changent. Aucune migration, configuration d'exploitation ni adaptation
+du générateur de démonstration n'est nécessaire. Les données fictives existantes
+servent à la recette. Pro, Animation et outils internes gardent leurs chartes.
+
+Les résultats exécutés et limites sont consignés dans la vérification de
+livraison ; les critères ci-dessus ne constituent pas une preuve à eux seuls.

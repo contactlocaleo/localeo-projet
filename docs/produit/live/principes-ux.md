@@ -159,20 +159,30 @@ dernier état connu du droit actuellement confirmé. Les QR, codes et actions
 sensibles attendent cette confirmation. Une commande conserve son formulaire
 et son résultat explicite ; elle n’est jamais relancée pour masquer une attente.
 
-## LIVE-UX-09 — Partager la lisibilité de Localeo Pro
+## LIVE-UX-09 — Partager la marque Marketplace avec une composition compacte
 
-**Orientation précisée le 10 novembre 2026.** Reprendre la typographie et les
-sections de [Localeo Pro](../../architecture/transverse/identite-entetes-applications.md#charte-des-espaces-de-gestion-internes--référence-crm) :
-police système, corps et actions 14 px, titres 25 / 18 / 15 px, titre principal
-23 px sur mobile à taille de texte standard. Employer des unités relatives
-pour conserver l’agrandissement du texte ; les champs mobiles restent à 16 px
-et les cibles tactiles à 44 px minimum.
+**Orientation révisée le 21 novembre 2026.** La référence visuelle de Live est
+la Marketplace ; cette décision remplace l'alignement sur Localeo Pro du
+10 novembre pour les polices, couleurs et finitions, tout en conservant sa
+lisibilité compacte : corps et actions 14 px, titres 25 / 18 / 15 px, titre
+principal 23 px sur mobile à taille de texte standard. Employer des unités
+relatives ; les champs mobiles restent à 16 px et les cibles tactiles à 44 px.
 
-Sections blanches bordées, angles de 12 px, actions de 9 px, fond clair
-`#f5f7f9`, texte `#183243`, secondaire `#526575`, action `#09685e` et bordure
-`#d8e1e7` forment la base commune. Le carnet conserve sa tranche, ses tampons,
-ses tickets et les couleurs sémantiques utiles. Les menus métier de Pro ne
-remplacent pas les trois rubriques habitantes.
+DM Sans porte le texte courant, les contrôles et la navigation ; Oswald porte
+la marque et les titres courts de page ou section. Réutiliser les polices
+auto-hébergées de la Marketplace. Fond papier `#f6f5f1`, encre `#082840`, surfaces
+blanches, secondaire `#586873` et séparateurs `#d7d9d8` constituent la base.
+Les actions principales sont orange `#f28a2e` avec texte encre ; les actions
+secondaires et liens restent encre. Le vert distingue les validations réussies,
+jamais une nouvelle famille de commandes. Cartes à 4 px, panneaux à 6 px et
+boutons à 4 px reprennent les tokens Marketplace ; les silhouettes de tickets,
+tampons, badges et repères de progression restent propres au carnet.
+
+La [signature publique](../../architecture/transverse/identite-entetes-applications.md#signature-publique-marketplace-live-et-e-mails--21-novembre-2026)
+reprend le pictogramme Marketplace sans déformation, le bandeau encre et la
+marque blanche avec « Live » identifié ; TEST reste visible. Conserver le
+carnet, ses trois destinations et la prochaine action immédiatement accessible.
+Les chartes de Pro, Animation et des outils internes restent inchangées.
 
 Dans une participation, placer progression confirmée et prochaine action avant
 historique et détails secondaires. Dans Mes lots, privilégier le gain, son état
@@ -182,7 +192,7 @@ retirer l’ajout « Garder pour plus tard » ; les anciennes idées restent acc
 si elles existent, sans être assimilées à une inscription. Retirer les filtres
 internes du carnet, conserver les coffrets et les animations dans la même liste.
 L’état de l’animation se place en tête de vignette avec son pictogramme ; l’état
-personnel reste distinct. Les trois rubriques partagent leur ligne verte en tête.
+personnel reste distinct. Les trois rubriques partagent leur ligne orange en tête, selon l’orientation du 21 novembre.
 Les [correctifs canoniques](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#correctifs-du-18-novembre-2026--carnet-découverte-et-notification)
 précisent les lectures et la composition des cartes selon les maquettes validées.
 

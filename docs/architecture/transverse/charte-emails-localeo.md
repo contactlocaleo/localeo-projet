@@ -42,6 +42,23 @@ frontend n'est requis pour servir le nouveau fichier. Le mot Localeo reste
 présent en texte lorsque les images sont bloquées. La signature de marque
 « Expériences locales à offrir » provient du header/footer de la marketplace.
 
+## Continuité avec Localeo Live — 21 novembre 2026
+
+Live adopte la référence Marketplace : encre, papier, action orange à texte
+encre, DM Sans et titres courts Oswald, avec une composition compacte adaptée
+au téléphone. Voir la [signature publique](identite-entetes-applications.md#signature-publique-marketplace-live-et-e-mails--21-novembre-2026)
+et [LIVE-UX-09](../../produit/live/principes-ux.md#live-ux-09--partager-la-marque-marketplace-avec-une-composition-compacte).
+Le rendu commun d'e-mail respecte déjà cette cible : colonne 640 px, bouton à
+rayon 4 px, logo carré et familles avec replis. Aucune nouvelle police distante
+ni réécriture des messages stockés n'est nécessaire. Le rendu exact dépend du
+client mail ; une différence de police de repli ne constitue pas à elle seule
+une rupture de contrat.
+
+La recette compare confirmations coffret et participation, récupération d'accès
+et notification de gain à leurs écrans de destination. Les QR, liens personnels,
+texte brut et pièces jointes gardent leur contrat ; les catégories des autres
+messages du renderer commun restent couvertes par la galerie existante.
+
 ## Composition commune
 
 Le document est une colonne de 640 pixels maximum, fluide sur mobile, avec

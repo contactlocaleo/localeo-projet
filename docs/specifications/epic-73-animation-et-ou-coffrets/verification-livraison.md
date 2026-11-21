@@ -4494,3 +4494,66 @@ Les bornes techniques de capture/lot et les durées de transaction des campagnes
 À l’implémentation, lancer le [runner isolé backend](../../../../localeo-backend/scripts/validation/test_isolated.py) sur tests domaine/application/API ciblés, puis tests PostgreSQL/concurrence et contrôles d’architecture selon le [guide backend](../../../../localeo-backend/AGENT.md). Les scénarios E73-T-* doivent être rattachés aux fichiers réels dans cette matrice avec commande, SHA/arbre, environnement et résultat. Les contrats générés et consommateurs doivent être contrôlés ensemble. La démonstration utilise le [runner de compatibilité](../../../../localeo-backend/scripts/validation/run_demo_compatibility_tests.py) et ses bases jetables.
 
 Lors de la rédaction initiale de la spécification, seuls les contrôles documentaires et la revue indépendante du [README](README.md) avaient été réalisés ; aucun contrôle applicatif ni déploiement n'avait été exécuté. Les preuves d'implémentation ajoutées depuis sont raccordées par lot ci-dessus et détaillées dans le [suivi de réalisation](suivi-implementation.md). Les exercices hébergés, la recette humaine et les déploiements restent non exécutés. Les travaux préexistants des dépôts voisins et du suivi moteur sont préservés.
+
+## Harmonisation publique — recette locale du 21 novembre 2026
+
+Les critères **E73-HV-01 à E73-HV-04** de la
+[décision visuelle](localeo-live-entree-unique.md#harmonisation-visuelle-marketplace-live-et-e-mails--21-novembre-2026)
+sont implémentés localement : tokens Marketplace dans Live, signature publique,
+typographie compacte, actions orange à texte encre, liens secondaires encre,
+tampons de validation verts et champs mobiles en unités relatives. Les règles
+sont corrigées dans leurs feuilles sources ; aucune route, règle du domaine,
+capacité personnelle ou donnée métier n'est modifiée.
+
+Arbres vérifiés : `localeo-marketplace` sur base `fbcfe40` avec modifications
+locales, `localeo-backend` sur base `d104a2ee` avec la fixture d'aperçu complétée,
+`localeo-projet` sur base `a9410b9` avec les règles et cette recette actualisées.
+Le backend de production ne change pas : son renderer est déjà aligné. La
+galerie manquait la valeur fictive `duree`, requise par `acces_animation.html` ;
+sa correction rétablit les trois tests de branding auparavant en échec.
+
+| Contrôle exécuté | Résultat et preuve |
+| --- | --- |
+| Comparaison initiale | 44 succès / 4 échecs avant modification ; build conservé dans `test-results/visual-runs/2026-11-21T11-57-20-177Z-fdWjJL`. Les échecs CN07 portent sur les raccourcis de découverte ; CN08/11 mesure 402,47 px pour une limite de 400 px à 320 px. Assertions conservées. |
+| Recette ciblée | **38 succès**, 0 échec, 0 skip dans `2026-11-21T12-16-35-478Z-yX8mqJ` : marque commune, menu/install/réglages, clavier, découverte, récupération, lots, carnet rempli, visite/QR, attente/confirmation et notifications avec texte agrandi. |
+| Champs et marque à texte 200 % | **6 succès**, 0 échec, 0 skip dans `2026-11-21T12-20-26-790Z-vR78zs` : les deux surfaces COFFRETS/ANIMATION à 320/390/1280 px ; champs de récupération 16 puis 32 px, sans débordement. |
+| Revue des états actifs | **8 succès**, 0 échec, 0 skip dans `2026-11-21T12-24-24-664Z-XzTJrB` : carnet, découverte, lots et fiche publique. Le fond actif hérité du CTA de carnet est remplacé par l'orange clair pour garder le texte encre lisible ; les icônes et liens neutres restants utilisent l'encre. |
+| Cache public PWA | **318 tests Node réussis**, 0 échec, 0 skip via `npm run test:security` : logo public ajouté au précache, empreinte sensible à ses octets, lecture hors connexion vérifiée et protections des ressources privées conservées. Un nouveau build de production et le scénario de marque ANIMATION à 320 px passent dans `2026-11-21T12-26-06-117Z-VLEZ9H` (**1 succès**). |
+| E-mails | **44 tests réussis** avec le lanceur backend isolé sur branding/préparation ; **25 aperçus, 75 contrôles Chromium** à 320/375/800 px, puis images bloquées. Aucun débordement, une enveloppe, logos carrés, boutons d'au moins 44 px, QR complets et carrés, aucune requête externe ni envoi. |
+| Documentation | `py -X utf8 scripts/check_guidance.py` et `py -X utf8 scripts/sync_documentation.py --check-sources` réussis après actualisation de cette recette. |
+| Analyse et compilation | ESLint des fichiers modifiés réussi ; compilation de production isolée par le lanceur visuel. `npm run lint` global bloqué par des répertoires locaux inaccessibles sous `output` puis `tmp` ; `npx eslint . --ignore-pattern 'output/**' --ignore-pattern 'tmp/**'` réussit sans modification de configuration. |
+
+Les commandes visuelles passent par `node scripts/run-visual-tests.cjs`, ports
+18174 à 18176 et builds/rapports distincts. Les commandes exactes, empreintes
+des sources, compteurs et captures sont dans chaque `run.json` / `results.json`.
+Deux tentatives intermédiaires ont été interrompues après diagnostic ; elles
+ne sont pas des suites réussies. Une reprise à 37 cas a donné 32 succès et
+5 échecs de rendu/attente ; les reprises ciblées ci-dessus couvrent ces cas,
+sans skip ni affaiblissement d'assertion. Le test d'en-tête ouvre désormais le
+menu existant pour vérifier installation/réglages et mesure les contrôles visibles.
+
+Le comparatif local est dans
+`localeo-marketplace/tmp/brand-harmony-20261121/index.html`, avec son inventaire
+de sources `sources.json`. Il inclut carnet rempli/vide, visite, confirmation,
+messages et lots, plus la référence Marketplace et les pages QR. Les deux
+scénarios de carnet rempli ont aussi été exécutés sur le build initial conservé
+(**2 succès**, diagnostic `2026-11-21T12-21-41-459Z-q75qwq`). Les sources de
+production de la Marketplace et du renderer e-mail sont conservées ; les
+captures ne sont pas enregistrées dans le dépôt documentaire.
+
+La galerie e-mail et son résultat sont dans
+`localeo-backend/tmp/email-harmony-20261121/` (`index.html`, `visual-results.json`,
+`captures/`). Le PNG du logo Marketplace et sa copie e-mail sont identiques,
+SHA-256 `f3ad28e2b4266aa1d61acba4a11455cac26afd8494facad8010464711ecacb94`.
+Ce contrôle navigateur ne certifie pas Gmail, Apple Mail ou Outlook.
+
+Une dette de test supplémentaire est reproduite sur le build initial : le
+transfert QR attend `/live/passeports` alors que l'application ouvre déjà
+`/live/carnet` (diagnostic `2026-11-21T12-17-38-060Z-MYaZGC`). Le cas de panne
+de stockage réussit sur ce même build et dans la recette à 38 cas. Les quatre
+échecs initiaux et cet attendu de navigation ne sont pas corrigés au titre de
+l'harmonisation. Le statut de l'epic et ses autres réserves restent inchangés.
+
+API, migrations, générateur de démonstration et configuration d'exploitation
+sont sans impact : changements de présentation et de fixture locale seulement.
+Aucun e-mail envoyé, commit, push ou déploiement effectué pendant cette recette.

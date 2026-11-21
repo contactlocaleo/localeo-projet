@@ -2044,7 +2044,7 @@ Ce complément précise les §7/9/10/11/12 sans changer leurs contrats métier.
 Le frontend présente les états confirmés par les domaines backend existants
 Animation, Lots et Coffrets ; il ne décide ni qualification, ni gain, ni remise.
 La prochaine action précède les informations secondaires. La référence visuelle
-est [LIVE-UX-09](../../produit/live/principes-ux.md#live-ux-09--partager-la-lisibilité-de-localeo-pro),
+est [LIVE-UX-09](../../produit/live/principes-ux.md#live-ux-09--partager-la-marque-marketplace-avec-une-composition-compacte),
 avec les marqueurs du carnet et les gratifications sur reçu confirmé conservés.
 
 | État | Présentation et comportement |
