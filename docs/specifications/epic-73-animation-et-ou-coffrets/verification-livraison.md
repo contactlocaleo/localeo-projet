@@ -4871,3 +4871,144 @@ migration, configuration ou générateur de démonstration : les dessins, leurs
 consommateurs visuels et les assertions de présentation évoluent seuls.
 Les deux dépôts modifiés sont `localeo-marketplace` et `localeo-projet`.
 Aucun commit, push ou déploiement ; la clôture historique d'E73 reste intacte.
+
+<a id="vignettes-carnet-cadeau-et-agenda"></a>
+
+## Vignettes carnet, cadeau et agenda — 21 novembre 2026
+
+**E73-EVO-LIVE-VIGNETTES**, [critères VP-01 à VP-05](localeo-live-entree-unique.md#e73-evo-live-vignettes).
+Implémentation locale dans Marketplace : reliure CSS des participations,
+bandeau cadeau réservé aux lots, feuillet jour/mois et période complète avec
+années dans Découvrir. Les symboles Papier doux sont réutilisés. Les actions
+principales des vignettes concernées utilisent le vert Live avec texte blanc,
+conformément au plan ; le HEAD de référence les affichait en orange Marketplace.
+L'assertion de couleur IA-06 évolue donc explicitement d'orange/encre à vert/blanc,
+sans supprimer les contrôles de hiérarchie, taille, outils, focus et état.
+
+### Référence avant changement
+
+Marketplace `7f39e73`, arbres initialement propres. Le premier lancement sur
+8174 échoue avant scénario (`EACCES`, dossier `2026-11-21T15-15-06-939Z-N3669B`).
+Reprise canonique sur 18174 : `2026-11-21T15-15-19-835Z-kxWE5q`, **34/34 réussis**,
+code 0, suites `live-iconography-premium`, `live-iconography-lots` et
+`live-unified-carnet`.
+
+Pour comparer exactement les nouvelles scènes aux trois largeurs et avec texte
+doublé, une archive du même HEAD a été extraite puis exécutée avec le lanceur
+canonique et le nouveau scénario de captures. **3/3 réussis**, code 0, port
+18176, `2026-11-21T15-19-44-971Z-BFNj0X`. Les artefacts ont été déplacés après
+arrêt sous `localeo-marketplace/test-results/paper-objects-reference/` ; les
+chemins absolus historiques du rapport désignent le dossier d'extraction initial.
+Les 18 captures restent dans `test-results/visual-runs/<run>/captures/` de cette
+archive, à comparer aux captures finales, sans environnement distant.
+
+### Réalisation et contrôles
+
+Première scène nouvelle : `2026-11-21T15-16-46-438Z-rnNZhU`, **3 échecs de
+fixture** : le champ local `etat` était éliminé par l'assainissement existant des
+participations. Correction de la fixture en `statut: TERMINEE`, sans modifier
+le stockage ou la règle de classement. Reprise `2026-11-21T15-18-26-063Z-hshOeJ` :
+**3/3 réussis**, code 0, et 18 captures à 320/390/1280 px, texte normal/doublé.
+Cette première reprise précède la finition du bandeau et des actions vertes.
+
+ESLint standard échoue à parcourir un ancien dossier de sortie protégé
+(`output/bum-politique/pytest-approval-1`), puis `tmp/address-architecture`.
+`npx eslint . --ignore-pattern output/ --ignore-pattern tmp/` réussit, code 0 :
+sources, tests et outils restent analysés, sans changement de configuration.
+
+Les campagnes intermédiaires sont conservées :
+
+- `2026-11-21T15-21-18-148Z-h5XeQ0` : 70 réussites et 20 échecs, code 1.
+  Deux assertions attendaient encore les anciennes couleurs ; neuf scénarios
+  de lots visaient un lien ambigu ; trois nouveaux tests vérifiaient le focus
+  sans avoir activé la modalité clavier. La première composition agenda
+  repoussait l'action à 390/1280 px ; elle a été compactée sans changer les
+  assertions de visibilité. Quatre scénarios carnet expirent ensuite au chargement.
+- `2026-11-21T15-24-18-905Z-wVdfoQ` : 16 réussites et trois échecs de focus
+  dans la nouvelle fixture. Le scénario effectue désormais Tab avant de
+  vérifier `:focus-visible` ; aucun style de focus n'a été supprimé.
+- `2026-11-21T15-26-50-095Z-tMJDaR` : cinq réussites, sept échecs, dont six
+  comptages de lectures lots et un carnet expirant au chargement.
+- `2026-11-21T15-30-08-834Z-a3NdCZ` : huit réussites, quatre échecs ; les trois
+  carnets expirent au chargement et l'action à 390 px dépasse encore de 1,9 px
+  la zone disponible. Dernier ajustement des espacements de 4 px, cible tactile
+  et textes conservés. Ces campagnes se chevauchaient sur le poste ; la reprise
+  finale est exécutée seule, sans augmenter les délais des assertions.
+
+La dette des sélecteurs lots est reproduite sur le HEAD archivé :
+`2026-11-21T15-25-27-263Z-wVxEIr`, code 1. La correction vise exactement
+« Voir mon lot » ou « Voir les consignes de retrait », selon l'état de la fixture,
+en conservant les assertions sur le focus, les lectures et les retours.
+Une nouvelle exécution de cette suite corrigée sur le HEAD archivé
+(`2026-11-21T15-27-43-900Z-B1X0L2`) reproduit six comptages à trois lectures
+au lieu des deux attendues. Les assertions de nombre ne sont pas augmentées.
+Cette campagne d'archive connaît aussi des expirations pendant les exécutions
+simultanées ; elle ne prouve pas à elle seule la cause de ces délais.
+
+### Captures et revue visuelle
+
+La campagne finale `2026-11-21T15-33-00-112Z-N00daR`, port 18175, est exécutée
+seule avec les dix suites ci-dessous. Les nouveaux scénarios réussissent aux
+trois largeurs : jour/mois Paris vérifié depuis un navigateur Los Angeles,
+dates civiles, date invalide ou absente, changement d'année, trois jeux,
+trois natures de gains, historique et texte doublé. Les assertions vérifient
+aussi les cibles ≥44 px, le focus clavier, l'absence de débordement et la
+séparation géométrique ruban/en-tête et feuillet/période à texte doublé.
+
+Le générateur existant `scripts/render-live-iconography.cjs` a produit
+**18 paires avant/après** dans `test-results/paper-objects-review/comparatif.html`.
+Inspection visuelle distincte des assertions : six planches avant puis six
+planches après, chacune montrant le début et la fin des trois rubriques, aux
+largeurs 320/390/1280 et en texte normal/doublé. Reliure et marge restent
+distinctes des états, le bandeau n'empiète pas sur titre ou badge, le feuillet
+reste lisible à côté des années complètes, les objets coffret/coupon/cadeau
+restent différenciés. Aucun nouveau chevauchement observé dans les vignettes.
+Les éléments fixes de navigation apparaissent dans les captures pleine page ;
+les assertions de viewport/focus complètent cette inspection statique.
+
+Une revue indépendante des extraits de code fournis ne relève aucun blocage ;
+sa limite est explicite : pas de lecture locale ou de tests par le relecteur.
+Son point de vigilance (feuillet et période à 320 px/texte doublé) est couvert
+par les captures inspectées et les assertions de géométrie. Aucune préférence
+habitant ni recette réelle avec lecteur d'écran n'est revendiquée.
+
+### Résultat final et limites
+
+**84 réussites, six échecs, zéro skip et zéro résultat flaky**, code 1,
+durée 7,2 minutes. Le rapport global reste **failed**, sans assimilation à
+une campagne verte. Les six échecs sont les comptages de lectures déjà
+reproduits sur le HEAD archivé : retour d'historique (320/390), retour du 26e
+lot (320/390), retour interrompu en 403/503. Les focus, positions et états
+vérifiés avant ces comptages réussissent. Les assertions de nombre restent
+intactes ; le diagnostic/correctif de cette dette d'accès est hors retouche visuelle.
+Les expirations de chargement constatées pendant les campagnes simultanées
+ne se reproduisent pas dans cette reprise isolée ; leurs rapports restent conservés.
+
+| Critères | Suites exécutées (`tests/visual/*.spec.cjs`) | Résultat final |
+| --- | --- | --- |
+| VP-01 à VP-04 | `live-paper-objects`, `live-iconography-premium` | 7/7 ; 18 captures comparables, clavier, géométrie et dates Paris |
+| VP-01, VP-02, VP-05 | `live-unified-carnet`, `live-carnet-refresh`, `live-iconography-lots`, `live-lots-mobile` | 40/40 ; participations, gains, états refusés/inconnus, fraîcheur, mises à jour et droits conservés |
+| VP-03 à VP-05 | `live-discovery-continuity`, `live-iconography-discovery`, `live-participation-discovery` | 34/34 ; recherche, filtres, pagination, retours, première action visible et symboles conservés |
+| VP-05 | `live-lots-continuity` | 3/9 ; six comptages préexistants en échec, autres assertions conservées |
+
+VP-01 à VP-04 sont vérifiés localement dans le périmètre décrit. VP-05 conserve
+la réserve explicite des six comptages ; aucune clôture complète ni conformité
+globale du reste d'E73 n'est déduite de ce travail. Les fichiers de scénario
+reprennent les assertions de nombre existantes, sans skip ni délai augmenté.
+
+Lint final réussi hors anciens dossiers de sorties protégés, code 0. Le Python
+du PATH est un alias Microsoft Store indisponible ; les contrôles sont exécutés
+avec `C:/Program Files/PostgreSQL/18/pgAdmin 4/python/python.exe` : 121 guides,
+1 840 liens, aucune erreur ni avertissement ; contrôle ciblé des six Markdown
+modifiés : 462 liens, aucune erreur ni avertissement ; 155 sources exportées
+vérifiées. Les liens ne prouvent pas les comportements navigateur.
+
+Le comparatif non versionné reste disponible dans le dépôt Marketplace :
+`test-results/paper-objects-review/comparatif.html` ; les PNG complets et les
+planches de revue y restent consultables. Les données affichées sont des fixtures.
+Les tests utilisent des API simulées et des accès synthétiques. Aucune API,
+règle métier, donnée, migration, configuration d'exploitation, permission ou
+générateur de démonstration modifié. Aucun appel, tri ou lot supplémentaire
+ne justifie une nouvelle campagne de capacité. Backend, Pro et Animation
+restent hors modification. Aucun commit, push ou déploiement ; essai habitant,
+lecteur d'écran et appareil physique non réalisés.

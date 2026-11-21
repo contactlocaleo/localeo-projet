@@ -2247,3 +2247,34 @@ la planche, restent coordonnés sans ajout d'illustration. La clé est désormai
 utilisée pour le lien personnel de reprise ; l'étoile reste disponible mais les
 gains affichent leur nature réelle. Aucun accès, API, donnée, migration, réglage
 d'exploitation ou générateur de démonstration n'est modifié par cette intégration.
+
+<a id="vignettes-carnet-cadeau-et-agenda"></a>
+
+## Vignettes carnet, cadeau et agenda — 21 novembre 2026
+
+**E73-EVO-LIVE-VIGNETTES**, [VP-01 à VP-05](localeo-live-entree-unique.md#e73-evo-live-vignettes).
+Thèse visuelle : trois objets papier reconnaissables, avec encre sombre, crème
+et détails abricot ; une seule métaphore par rubrique. La composition conserve
+identité, état utile et action principale, puis les informations secondaires.
+Les interactions gardent leurs retours et transitions existants, sans mouvement nouveau.
+
+- Carnet : marge de 22 px réservée à la reliure, trois attaches CSS, fond papier
+  clair ; le texte et les commandes commencent après la marge. La même page
+  s'applique aux participations historiques, avec leurs états connus ou à vérifier.
+  Coffrets et entrées publiques/favoris ne prennent pas cette reliure.
+- Lots : bandeau de 18 px en début de vignette, ruban et nœud décoratifs sans
+  texte ; ils occupent une rangée propre avant titre et badge Nouveau.
+  L'historique désature le bandeau sans désactiver ni atténuer les textes ou actions.
+  Le symbole de nature reste cadeau / coffret / coupon, jamais un faux QR.
+- Agenda : feuillet d'au moins 54 px de large et 48 px de haut, extensible avec
+  le texte, à côté de la période complète dans l'en-tête. Jour et mois sont
+  décoratifs et masqués aux lecteurs d'écran ; les éléments `time` donnent la
+  période complète. Les helpers Paris existants formatent les dates.
+  Le feuillet sans date utilise le calendrier neutre.
+
+Les actions principales des participations et des vignettes lots/découverte
+utilisent le token vert Live avec texte blanc ; les actions secondaires gardent
+leur traitement. Cette contextualisation répond à la direction validée du plan,
+alors que le HEAD de référence utilise l'orange Marketplace pour ces actions.
+La palette globale et les coffrets du carnet sont préservés. Aucun changement
+de formulaire, API, état, stockage, requête ou pagination n'est nécessaire.

@@ -2440,3 +2440,38 @@ réutilisées. Backend, Pro et Animation ne nécessitent aucune modification.
 
 [Conception](localeo-live-adhesion-conception.md#iconographie-premium)
 — [réalisation et preuves](verification-livraison.md#iconographie-premium-21-novembre-2026).
+
+<a id="e73-evo-live-vignettes"></a>
+
+## Évolution du 21 novembre 2026 — vignettes carnet, cadeau et agenda
+
+**E73-EVO-LIVE-VIGNETTES** : demande et plan validés pour renforcer les trois
+univers par des objets évocateurs sobres de la famille Papier doux. Cette
+évolution complète les maquettes du 17 novembre et IP-01 à IP-06 : elle précise
+la forme des vignettes sans remplacer la navigation ni la hiérarchie des actions.
+En ce moment / Prochainement restent le programme existant ; aucun calendrier
+navigable, filtre ou tri supplémentaire n'est ajouté.
+
+| Critère | Comportement observable attendu |
+| --- | --- |
+| **E73-VP-01** | Les participations actives et historiques de Mon carnet évoquent une page reliée : marge réservée, trois attaches décoratives et papier clair. Symbole propre au jeu, états, nouvelles, tampons confirmés et action restent présents. Coffrets et favoris conservent leur traitement. |
+| **E73-VP-02** | Mes lots évoque un cadeau personnel avec bandeau papier et ruban dans une zone dédiée. Coffret, coupon numérique et lot libre gardent leurs silhouettes, disponibilité, consignes et action. L'historique atténue seulement le décor ; aucun ruban ne prouve une disponibilité ou une remise. |
+| **E73-VP-03** | Dans l'en-tête de chaque animation à découvrir, le feuillet affiche jour/mois de début ; la période complète avec années reste adjacente. Une date absente ou invalide donne un calendrier neutre et « Début à préciser ». Les formateurs Paris existants gouvernent dates civiles et instants. Un événement en cours conserve sa vraie date de début. |
+| **E73-VP-04** | Décors exclus de l'arbre accessible, focus visible, cibles essentielles ≥44 px, aucune superposition ni débordement à 320/390/1280 px et texte doublé. Les actions principales des nouvelles vignettes utilisent le vert existant et un texte blanc contrasté ; aucun mouvement nouveau. |
+| **E73-VP-05** | Actualisation, accès personnels distincts, retours, filtres, pagination, positions et états vide/erreur/inconnu/périmé restent conservés. Captures avant/après des mêmes scènes, assertions automatiques et inspection visuelle sont consignées séparément. |
+
+Le frontend Marketplace possède uniquement ces représentations. Le domaine
+backend reste propriétaire des participations, validations, gains et remises :
+projections et actions existantes sont réutilisées sans interprétation nouvelle.
+Le vert des actions est contextualisé sur les vignettes concernées, sans modifier
+la palette globale Marketplace ni le traitement des coffrets du carnet.
+
+| Critères | Preuves | Documentation / contrat | Démonstration / fixtures | Exploitation / livraison |
+| --- | --- | --- | --- | --- |
+| VP-01 à VP-03 | `live-paper-objects.spec.cjs`, suites carnet/lots/découverte et captures comparables ; résultats au bilan lié ci-dessous | Présente évolution, conception et principes UX ; API inchangées, mêmes projections consommées | Fixtures synthétiques : trois jeux, trois natures de gain, historique et dates inconnues ; générateur sans impact car aucun schéma ou contenu obligatoire nouveau | Marketplace et Projet seuls ; aucune migration, variable ou procédure d'exploitation nouvelle |
+| VP-04 à VP-05 | Géométrie, texte doublé, clavier/focus, continuité et actualisation ; inspection distincte des captures | Hiérarchie et libellés d'action conservés ; période reformulée avec années explicites | API simulées, aucun environnement réel sollicité | Pas de campagne de charge : requêtes, cadence, bornes et volumes préservés ; livraison frontend indépendante |
+
+[Conception](localeo-live-adhesion-conception.md#vignettes-carnet-cadeau-et-agenda)
+— [preuves et limites](verification-livraison.md#vignettes-carnet-cadeau-et-agenda).
+Les preuves restent propres à cette évolution ; la clôture historique d'E73 et
+les autres réserves ne sont pas modifiées.

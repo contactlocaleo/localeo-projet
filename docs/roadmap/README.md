@@ -1,5 +1,11 @@
 # Roadmap par etat
 
+**21 novembre 2026 — E73-EVO-LIVE-VIGNETTES** : participations en pages reliées,
+gains en cadeaux personnels et programme en feuillets datés, selon le plan validé.
+[Critères VP-01 à VP-05](../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#e73-evo-live-vignettes)
+et [preuves locales](../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md#vignettes-carnet-cadeau-et-agenda).
+Évolution de présentation Marketplace/Live ; clôture historique E73 et compteurs conservés.
+
 **19 novembre 2026 — suites de l’audit CRM du 18 novembre** :
 [UX01–UX05 spécifiées et réalisées localement](../specifications/epic-71-crm-prospection/workshop-crm-20261118.md)
 dans l’EPIC 71 **En cours**, après validation utilisateur. Résumé quotidien,

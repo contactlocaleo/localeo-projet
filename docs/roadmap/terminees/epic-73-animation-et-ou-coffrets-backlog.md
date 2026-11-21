@@ -1507,3 +1507,13 @@ bon numérique distinct de la tombola et tampons fidèles aux validations réell
 Réalisation locale dans Marketplace ; recette et limites consignées au bilan.
 La clôture historique d’E73, ses réserves et les compteurs restent inchangés.
 Cette évolution n’atteste ni déploiement ni reconnaissance testée auprès d’habitants.
+
+## Évolution du 21 novembre 2026 — vignettes carnet, cadeau et agenda
+
+**E73-EVO-LIVE-VIGNETTES** : objets évocateurs sobres autorisés pour les trois
+rubriques Live : page reliée pour les participations, cadeau personnel pour les
+gains, feuillet daté pour le programme. [VP-01 à VP-05 et impacts](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#e73-evo-live-vignettes),
+[conception](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-adhesion-conception.md#vignettes-carnet-cadeau-et-agenda)
+et [preuves locales](../../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md#vignettes-carnet-cadeau-et-agenda).
+Cette évolution conserve les trois rubriques et leur fonctionnement, sans vue
+calendrier ni effet métier ; clôture historique et compteurs inchangés.

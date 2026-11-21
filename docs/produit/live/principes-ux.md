@@ -39,6 +39,13 @@ confirmée représentent des états d’un même écran. Pour un lot, disponibil
 consignes pratiques et action adaptée précèdent les éléments secondaires ;
 « Marquer comme vu » conserve un effet local distinct de la remise ou consommation.
 
+**Complément du 21 novembre 2026 — vignettes évocatrices :** les participations
+prennent la forme d'une page reliée, les gains d'un cadeau personnel et le
+programme de feuillets datés. La famille Papier doux, les actions principales
+vertes et la hiérarchie des informations restent la référence. Ce complément
+précise les maquettes sans créer de calendrier navigable ni de nouvel état métier :
+[E73-EVO-LIVE-VIGNETTES et critères VP-01 à VP-05](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#e73-evo-live-vignettes).
+
 Les textes et valeurs de démonstration ne créent aucune règle métier. Chaque
 déclinaison utilise les données, conditions et droits réels, préserve les états
 inconnus/refusés et reste accessible sur petit écran et avec texte agrandi.
