@@ -70,6 +70,54 @@ historiques : pas de nouvelle donnée ni adaptation du schéma de démonstration
 Une nouvelle attribution en démonstration suit les services ordinaires avec les
 téléphones synthétiques ; le transport reste explicitement neutralisé en test.
 
+## Correctif du 21 novembre 2026 — gestion de la dotation dans Animation
+
+La section **Dotation** commence par le mode enregistré et son état : modifiable,
+lecture seule, figé ou à vérifier selon la réponse serveur et les droits courants.
+Le choix du mode déjà complet reste dépliable via **Modifier le mode de dotation**,
+pour laisser la gestion des lots au premier plan. Un mode incomplet reste ouvert.
+Une modification non enregistrée est signalée ; l’avertissement de remplacement
+des descriptions et les protections de saisie restent applicables.
+
+Les lots externes sont comparables en tableau sur bureau, puis en fiches sous
+768 px : ordre et libellé, quantité d’exemplaires, responsable de la remise et
+actions. Les consignes détaillées se déplient par lot. **Ajouter un lot** est
+l’action principale auprès des compteurs ; enregistrer, modifier et retirer
+restent distincts, avec confirmation avant retrait. L’ouverture d’une saisie ou
+de cette confirmation place le focus sur son titre ; annuler revient à l’action
+déclenchante lorsque le lot est encore affiché.
+
+Pour les bons numériques, les commandes de stock et d’ordre précèdent la liste.
+Une barre indique le nombre d’exemplaires sélectionnés sur la page et permet
+d’effacer la sélection sans modifier les réservations. Choisir un modèle replie
+le catalogue et place le focus sur son stock ; les créations demandées, en cours
+et bloquées conservent leurs indications distinctes. La préparation d’affectation
+ou de libération reste une confirmation, sans écriture au seul choix. Une erreur
+de lecture du stock ne se présente plus comme un inventaire vide et propose une
+nouvelle lecture explicite.
+
+Cette correction de présentation précise les parcours US01/02/04/05/06 et les
+preuves UX ci-dessous. Les versions, actions autorisées, quantités, snapshots,
+gel, réservations, reçus et reprises restent ceux des contrats existants.
+Animation et cette source documentaire changent ; sans modification API,
+migration, réparation de données, générateur de démonstration ou traitement ops.
+Aucune invitation, attribution ou notification réelle n’est émise par la recette.
+
+Preuves locales : types, lint, 396 tests Node et build isolé Animation réussis.
+Le banc `tests/browser/dotation.mjs` couvre les lots externes, le mode non
+enregistré/abandonné, la consultation, la dotation à vérifier/figée, le retrait
+confirmé et la réponse perdue à 1280/768/390/320 px. Le banc
+`tests/browser/digital-prizes.mjs` couvre stock, sélection, affectation,
+libération, erreur/réessai, reprise et snapshots engagés à 1280/320 px.
+Le texte à 200 % est contrôlé sur les actions externes et le stock numérique ;
+les captures utiles sont prises sur le viewport pour rester inspectables.
+Les anciennes recettes `create` et `hunt-config` restent en échec avant et après
+ce correctif (Continuer désactivé ; champ Nom de la chasse masqué) : elles ne
+constituent pas des preuves validées de ces deux parcours. Comparaison effectuée
+avec le build pré-correctif `tmp/quality-build-qwTSUY`, sans modifier leurs
+assertions ni les règles produit. Aucun essai sur appareil physique ni
+déploiement n’est prouvé par ces recettes locales.
+
 ## Portée et statut
 
 Spécification cible du 17 octobre 2026, **non implémentée par ce document**. Les choix produit restent ceux du [backlog E73](../../roadmap/terminees/epic-73-animation-et-ou-coffrets-backlog.md), notamment DEC-01 à 03, 07, 10 à 12, 19, 33 à 51. Ce chapitre couvre US01, US02 et US04 à US10 ; les périmètres et droits résiduels sont définis dans [les parcours SaaS](perimetres-parcours-saas.md), les conventions communes dans [l’architecture](architecture-contrats.md), les preuves dans [la vérification de livraison](verification-livraison.md).
