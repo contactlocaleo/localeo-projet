@@ -1,5 +1,46 @@
 # E73 — Localeo Live, entrée unique des animations
 
+## Correctif du 21 novembre 2026 — parcours commerçants d’un coup d’œil
+
+Les participations à un passeport, une chasse, un jeu des vitrines ou un juste
+prix mettent en évidence les commerces et les découvertes du parcours, avant
+les détails de chaque défi. La collection de tampons et le compteur restent
+fondés sur la progression serveur ; les noms et états écrits rendent chaque
+repère compréhensible sans dépendre de sa couleur.
+
+- **Passeport** : liste directement visible à l’entrée, repères compacts reliés
+  sur mobile et répartis en colonnes sur ordinateur. Chaque commerce distingue
+  **Validée** et **À découvrir**, avec date réelle disponible, adresse, horaires
+  et préparation de la visite. Le QR reste avant la liste ; lors d’une visite
+  sélectionnée, les autres commerces restent accessibles dans leur panneau.
+- **Vitrines et juste prix** : aperçu des commerces de la page autorisée, avec
+  raccourcis vers les formulaires existants. **Comptabilisé**, **Passage à
+  valider**, **Réponse réussie**, **Réponse enregistrée · non réussie** et
+  **À découvrir** restent distincts. Une réponse incorrecte définitive ne
+  redevient pas un défi à rejouer. La pagination et le ciblage d’une vitrine
+  restent disponibles près de l’aperçu, avant les formulaires ; un aperçu paginé
+  annonce **Commerces de cette page**.
+- **Chasse** : seule l’étape courante autorisée est nommée. Son état indique
+  déplacement, défi ou validation attendue selon la projection. Les étapes
+  futures restent un compteur anonyme ; aucun annuaire ne sert à reconstruire
+  leur identité, leur position ou les lieux passés.
+
+Le juste prix enrichit les seuls identifiants de commerces présents sur sa page
+privée depuis le catalogue public : une lecture groupée de 25 identifiants au
+plus, sans collecte des autres pages, sous le budget HTTP partagé et annulée au
+changement de contexte. Un nom public absent laisse un repère explicite
+par produit. Les noms ne sont ni une preuve de visite ni une nouvelle source
+d’état personnel ; aucun ajout au stockage persistant.
+
+Les raccourcis focalisent le défi sans soumettre de réponse, sans démonter son
+formulaire ni perdre la saisie. Versions, refus d’accès, commandes, qualification
+et résultats gardent leurs propriétaires backend. Tombola et coffrets conservent
+leurs représentations propres. Ce correctif applique LIVE-UX-03/04/05/07/08, sans
+modifier les contrats, permissions, règles, migrations ou configuration.
+Les fixtures de recette sont synthétiques ; le générateur de démonstration
+n’exige aucun changement de données. Marketplace et Projet sont seuls affectés.
+Voir les [preuves locales](verification-livraison.md#parcours-commerçants-dun-coup-dœil).
+
 **Suites du workshop du 18 novembre 2026 :** la
 [spécification E73-WL](workshop-live-20261118.md) complète les comportements
 ci-dessous pour le programme, le carnet vide et l'issue QR refusé. Elle porte

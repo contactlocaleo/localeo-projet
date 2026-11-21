@@ -129,6 +129,7 @@ une empreinte vide. Une progression inconnue reste indiquée comme telle.
 | Expérience | Représentation attendue |
 | --- | --- |
 | Passeport commerçant | Tampons des visites validées, date réelle disponible et accès au QR avant la liste des visites. |
+| Vitrines et juste prix | Commerces de la page autorisée, découverte et réponse définitive distinctes ; une réussite avec passage manquant reste à faire valider. La comptabilisation confirmée se distingue de la qualification. |
 | Chasse | Progression visuelle et prochaine étape autorisée ; les lieux et indices futurs restent masqués. |
 | Tombola | Ticket de participation et état confirmé ; la représentation ne suggère pas un parcours de visites. |
 | Coffret | Prestations restantes et consommées, accès à leur utilisation et validité. |

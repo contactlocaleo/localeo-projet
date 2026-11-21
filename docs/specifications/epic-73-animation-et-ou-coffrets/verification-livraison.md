@@ -1,5 +1,82 @@
 # E73 — Vérification, migration et livraison
 
+## Parcours commerçants d’un coup d’œil
+
+Correctif demandé le 21 novembre 2026 ; bases Marketplace `8b5043c` et Projet
+`8c77dcd`, arbres initialement propres. L’attendu est décrit dans le
+[correctif de parcours](localeo-live-entree-unique.md#correctif-du-21-novembre-2026--parcours-commerçants-dun-coup-dœil).
+Correctif Marketplace `b5304b3`, commité et poussé sur `main`.
+
+La reproduction passeport à 320 px échoue avant intégration : aucun aperçu
+commun du parcours ; la capture montre les grands tampons sur deux lignes,
+le panneau intermédiaire puis le premier commerce près du bas d’écran.
+Tentative `2026-11-21T17-40-10-591Z-ogULb1`. Le port 8174 étant réservé par
+Windows, la recette utilise 8347. Une première composition à tampons inchangés
+plaçait encore le parcours à 603 px : elle a été corrigée en compactant le
+récapitulatif et en retirant le panneau redondant à l’entrée du passeport.
+La reprise passeport à 320/390/1280 px et texte doublé réussit **4/4** scénarios,
+avec aperçu au-dessus de 520 px et retours vers la même visite conservés
+(`2026-11-21T17-43-43-932Z-WYGOUU`).
+
+La revue indépendante en lecture confirme la séparation des états, la portée
+des pages et l’absence de reconstruction du futur chasse. Elle a fait préciser
+les libellés de l’étape courante selon `etatVue` : déplacement, défi, validation
+attendue ou fermeture. Le domaine exclut les étapes neutralisées de son compteur ;
+le nombre futur soustrait l’étape courante autorisée sans inventer de commerce.
+La pagination des vitrines et produits est rapprochée de l’aperçu, avant les
+formulaires ; leurs contrôles et la confirmation avant commande sont conservés.
+
+Contrôles déjà exécutés : sécurité **324/324**, lanceur isolé **13/13** et ESLint
+réussi avec exclusion des seuls anciens dossiers de sorties `output/` et `tmp/`.
+La commande brute `npm run lint` rencontre un dossier local protégé sous
+`output/bum-politique/pytest-approval-1` ; aucune configuration ESLint modifiée.
+Le build est celui du lanceur canonique, sans `.env` opérateur ni API réelle.
+
+Les deux scénarios historiques « lots prévus » (320/1280 px) attendent un ancien
+bouton **Voir les lots** absent du détail. Le même échec, à la même ligne 278,
+est reproduit sans modification sur `8b5043c` dans un worktree isolé, port 8357,
+campagne `2026-11-21T17-49-28-046Z-INgLKL` : **2/2 échecs**, délai de test
+inchangé de 90 s. Leurs assertions restent intactes. Rapports et traces de la
+comparaison copiés localement dans `localeo-marketplace/test-results/journey-lots-baseline`.
+
+Campagne élargie `2026-11-21T17-45-00-171Z-rrkgnR` : **93/98 réussites**, code 1,
+sans skip. Elle couvre `live-game`, `e78-vitrines`, `live-maquettes-habitant`,
+`live-merchant-journey`, `live-participation-confirmation` et
+`live-participation-mobile-flow`. Outre les deux scénarios lots, deux anciennes
+assertions de couleur active du carnet échouent au même endroit sur `8b5043c`
+(`2026-11-21T17-55-59-599Z-fwZ7aY`, copies dans
+`test-results/journey-colour-baseline`). Elles restent inchangées. Le cinquième
+échec attendait un tampon de 54 px : l’attendu est actualisé à 40 px pour le
+nouveau parcours compact, avec un contrôle supplémentaire de cible tactile
+≥44 px sur le résumé. Aucune assertion métier n’est affaiblie.
+
+Reprise sur les sources finales, après regroupement de la lecture des noms et
+remontée de la pagination : `2026-11-21T17-57-19-453Z-t3tcCA`, **24/24 réussites**,
+code 0, sans skip, en 1,5 minute. Commande :
+`node scripts/run-visual-tests.cjs --port 8347 tests/visual/live-merchant-journey.spec.cjs tests/visual/e78-vitrines.spec.cjs tests/visual/live-game.spec.cjs:574 --workers=1`.
+Les 17 nouveaux scénarios vérifient les quatre moteurs, 320/390/1280 px,
+texte doublé, états distincts, clavier, conservation des saisies, refus confirmé,
+pagination avant les formulaires, nom public absent et réponse tardive ignorée.
+Un cas à 25 commerces confirme **une seule requête groupée**, 25 identifiants
+filtrés et aucun commerce étranger affiché. La lecture ne soumet aucune commande.
+Les cinq parcours Vitrines existants et les deux rendus de registre passent aussi.
+
+Inspection distincte des captures : comparaison passeport avant/après à 320 px,
+liste PC, chasse 390 px, vitrines 320 px et juste prix 1280 px, puis passeport
+et vitrines à texte doublé sur 320 px. Les contrôles
+géométriques et de focus complètent ces captures pleine page, où les éléments
+fixes sont reproduits à la position de défilement. Rapports et PNG non versionnés
+dans `localeo-marketplace/test-results/visual-runs/`, sous les identifiants ci-dessus.
+
+Les principes LIVE-UX-03/04/05/07/08 sont appliqués : tampons confirmés et
+empreintes vides, états écrits, noms lisibles, cibles de 44 px, clavier, texte
+agrandi et retours conservés. Aucun scan Axe ni recette avec lecteur d’écran
+ou appareil physique revendiqués. Contrats, droits, commandes, qualification,
+persistance, migrations et générateur inchangés. Les noms des commerces du juste
+prix ajoutent une lecture publique groupée bornée (25 identifiants, budget HTTP
+partagé), annulée et ignorée au changement de contexte. Aucun déploiement ni
+réparation de donnée exécutés.
+
 ## Lisibilité des participations, dates et accès Live — 21 novembre 2026
 
 Correctif demandé sur les interfaces habitant, sans nouvelle epic. Base
