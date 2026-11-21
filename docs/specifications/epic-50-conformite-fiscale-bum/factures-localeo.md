@@ -42,6 +42,7 @@ Cette approche concilie :
 | Destinataire | type d'acteur, identifiant metier, raison sociale ou nom, adresse, SIRET et TVA intracommunautaire si applicables |
 | Lignes | libelle, quantite, prix unitaire HT, remise, taux TVA, montant TVA, total HT et TTC |
 | Totaux | total HT, total TVA par taux, total TTC, deja regle et net a payer |
+| Reglement | mode confirme par la source du paiement, lorsqu'il est connu |
 | Origine | identifiant et version du snapshot source, references Stripe ou campagne de reversement |
 | Secteur public | SIRET destinataire, code service, engagement juridique, commande, marche ou contrat |
 | Document | version du gabarit, cle de stockage, empreinte, date de generation et type MIME |
@@ -78,6 +79,9 @@ La facture porte sur la souscription Localeo vendue au partenaire. Elle est
 emise apres confirmation du paiement, a partir du snapshot de
 `SouscriptionPlateforme` defini par l'Epic 47 : offre et commune, periode,
 prix HT, taux et montant de TVA, TTC, devise et coordonnees de facturation.
+La ligne de prestation porte le libelle `Formule Locale animation <nom abonnement>` ;
+le nom de l'abonnement provient du snapshot de l'offre et la commune reste
+identifiable dans les references de la facture.
 
 Le webhook Stripe confirme le paiement mais Stripe ne devient pas une seconde
 source de numerotation fiscale. La reference Stripe est conservee comme preuve
@@ -98,6 +102,21 @@ La facture remplace la simple preuve de paiement comme document fiscal, tout en
 conservant cette preuve dans l'audit. Elle est mise a disposition dans Localeo
 Animation et envoyee au contact de facturation. Pour une entite publique, elle
 alimente la meme file de depot manuel Chorus Pro que les autres factures.
+
+Le PDF des nouvelles factures affiche `Facture acquittée` lorsque le net a payer
+est nul, ainsi que le mode de reglement lorsqu'il est connu : carte bancaire
+pour le Checkout de souscription, ou prelevement sur les sommes encaissees pour
+la commission. Un avoir n'est pas presente comme une facture acquittee. Les PDF
+deja emis restent inchanges ; le nouveau rendu porte la version de gabarit
+`LOCALEO_INVOICE_2026_11`.
+
+La liste de l'espace Animation lit `issueDate` et le total TTC
+`invoiceSnapshot.totals.totalIncludingTax` de la reponse E50. Les montants du
+contrat sont des chaines decimales en euros ; l'interface les convertit pour
+l'affichage. `amountToPay` est le solde restant : il vaut normalement `0.00`
+apres un paiement integral, sans que le montant facture soit nul. Une date ou un
+total absents doivent produire une erreur de lecture, jamais une facture affichee
+a 0 euro.
 
 Pour la souscription initiale E47, le Checkout est un paiement unique : il ne
 produit pas d'evenement `invoice.paid` Stripe. Le webhook

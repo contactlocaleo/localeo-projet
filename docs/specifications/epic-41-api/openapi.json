@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Backend - contrat implemente EPIC 41",
     "description": "OpenAPI complet du backend, dont les parcours Animation locale. Genere hors ligne depuis le code local pour les integrations et les mocks ; cet instantane ne prouve pas son deploiement.",
-    "version": "1.0.0+ef913e8"
+    "version": "1.0.0+eeb4791"
   },
   "paths": {
     "/public/identite-acces/interne/connexion": {
@@ -10787,6 +10787,36 @@
             }
           },
           {
+            "name": "sans_responsable",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Sans Responsable"
+            }
+          },
+          {
+            "name": "sans_prochaine_action",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Sans Prochaine Action"
+            }
+          },
+          {
+            "name": "sans_interaction_recente",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Sans Interaction Recente"
+            }
+          },
+          {
             "name": "insee",
             "in": "query",
             "required": false,
@@ -12011,6 +12041,16 @@
               "type": "boolean",
               "default": false,
               "title": "Sans Prochaine Action"
+            }
+          },
+          {
+            "name": "sans_evolution",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Sans Evolution"
             }
           },
           {
@@ -40153,7 +40193,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeConfirmee_PropositionProduitPayload_"
+                }
               }
             }
           },
@@ -40266,6 +40308,16 @@
                 }
               }
             }
+          },
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeEnCours"
+                }
+              }
+            },
+            "description": "Accepted"
           }
         },
         "security": [
@@ -40990,7 +41042,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/ResultatCloturesBatch"
+                }
               }
             }
           },
@@ -43465,7 +43519,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/ResultatCloturesBatch"
+                }
               }
             }
           },
@@ -45419,6 +45475,62 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/FacturerAbonnementAnimationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "AdminSessionCookie": []
+          }
+        ]
+      }
+    },
+    "/internal/conformite-fiscale/factures-localeo/abonnements-animation/{abonnement_id}/reprendre-facture-initiale": {
+      "post": {
+        "tags": [
+          "Factures Localeo"
+        ],
+        "summary": "Reprendre Facture Initiale Animation",
+        "operationId": "reprendre_facture_initiale_animation_internal_conformite_fiscale_factures_localeo_abonnements_animation__abonnement_id__reprendre_facture_initiale_post",
+        "parameters": [
+          {
+            "name": "abonnement_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Abonnement Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReprendreFactureInitialeRequest"
               }
             }
           }
@@ -118584,6 +118696,72 @@
         ]
       }
     },
+    "/protected/animation-locale/animations/{animation_id}/code-inscription-sur-place": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Consulter Code Inscription Sur Place",
+        "operationId": "consulter_code_inscription_sur_place",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CodeInscriptionSurPlacePayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
     "/protected/animation-locale/animations/{animation_id}/dotation": {
       "get": {
         "tags": [
@@ -128532,7 +128710,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeConfirmee_PropositionProduitPayload_"
+                }
               }
             }
           },
@@ -128645,6 +128825,16 @@
                 }
               }
             }
+          },
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeEnCours"
+                }
+              }
+            },
+            "description": "Accepted"
           }
         }
       }
@@ -129921,7 +130111,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeConfirmee_PropositionProduitPayload_"
+                }
               }
             }
           },
@@ -130034,6 +130226,16 @@
                 }
               }
             }
+          },
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommandeEnCours"
+                }
+              }
+            },
+            "description": "Accepted"
           }
         },
         "security": [
@@ -142854,6 +143056,21 @@
             "type": "boolean",
             "title": "Inscription Ouverte"
           },
+          "mode_inscription": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "LIVE_ET_QR",
+                  "QR_SUR_PLACE"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mode Inscription"
+          },
           "visuel_url": {
             "anyOf": [
               {
@@ -148306,6 +148523,26 @@
         ],
         "title": "CodeConsultationRequest"
       },
+      "CodeInscriptionSurPlacePayload": {
+        "properties": {
+          "code_jour": {
+            "type": "string",
+            "pattern": "^[0-9]{6}$",
+            "title": "Code Jour"
+          },
+          "date_locale": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+            "title": "Date Locale"
+          }
+        },
+        "type": "object",
+        "required": [
+          "code_jour",
+          "date_locale"
+        ],
+        "title": "CodeInscriptionSurPlacePayload"
+      },
       "CoffretCommande": {
         "properties": {
           "nom": {
@@ -149913,6 +150150,25 @@
         ],
         "title": "CommandeConfirmee[PreparationMutationPayload]"
       },
+      "CommandeConfirmee_PropositionProduitPayload_": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "CONFIRMEE",
+            "title": "Status"
+          },
+          "result": {
+            "$ref": "#/components/schemas/PropositionProduitPayload"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "result"
+        ],
+        "title": "CommandeConfirmee[PropositionProduitPayload]"
+      },
       "CommandeConfirmee_PropositionVitrinePayload_": {
         "properties": {
           "status": {
@@ -150776,6 +151032,18 @@
               }
             ],
             "title": "Adresse Facturation"
+          },
+          "profil_facturation": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Profil Facturation"
           },
           "confirmation_gratuite": {
             "anyOf": [
@@ -152823,6 +153091,21 @@
             "title": "Modele Code",
             "default": "PASSEPORT_COMMERCANT"
           },
+          "mode_inscription": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "LIVE_ET_QR",
+                  "QR_SUR_PLACE"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mode Inscription"
+          },
           "commercant_ids": {
             "items": {
               "type": "string",
@@ -152949,6 +153232,21 @@
             "type": "string",
             "title": "Modele Code",
             "default": "PASSEPORT_COMMERCANT"
+          },
+          "mode_inscription": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "LIVE_ET_QR",
+                  "QR_SUR_PLACE"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mode Inscription"
           },
           "commercant_ids": {
             "items": {
@@ -173141,6 +173439,30 @@
               }
             ],
             "title": "Source Diffusion Code"
+          },
+          "acces_qr": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 128
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Acces Qr"
+          },
+          "code_jour": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 6
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Code Jour"
           }
         },
         "additionalProperties": false,
@@ -178592,6 +178914,21 @@
               }
             ],
             "title": "Modele Code"
+          },
+          "mode_inscription": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "LIVE_ET_QR",
+                  "QR_SUR_PLACE"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mode Inscription"
           },
           "commercant_ids": {
             "anyOf": [
@@ -200271,6 +200608,20 @@
         ],
         "title": "ReporterRendezVous"
       },
+      "ReprendreFactureInitialeRequest": {
+        "properties": {
+          "billingSnapshot": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Billingsnapshot"
+          }
+        },
+        "type": "object",
+        "required": [
+          "billingSnapshot"
+        ],
+        "title": "ReprendreFactureInitialeRequest"
+      },
       "ReprendreGeneration": {
         "properties": {},
         "additionalProperties": false,
@@ -200791,6 +201142,30 @@
           "simulation"
         ],
         "title": "ResultatCampagnesBatch"
+      },
+      "ResultatCloturesBatch": {
+        "properties": {
+          "animations": {
+            "type": "integer",
+            "title": "Animations"
+          },
+          "cloturees": {
+            "type": "integer",
+            "title": "Cloturees"
+          },
+          "lots": {
+            "type": "integer",
+            "title": "Lots"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "animations",
+          "cloturees",
+          "lots"
+        ],
+        "title": "ResultatCloturesBatch"
       },
       "ResultatDiffusionOrganisateurBatch": {
         "properties": {
