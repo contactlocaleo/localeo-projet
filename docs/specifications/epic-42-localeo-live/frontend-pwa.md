@@ -55,6 +55,17 @@ des prochaines publications, dont les tombolas publiques, peuvent alors rejoindr
 les messages de Live selon la catégorie Animations. Les annonces passées ne sont
 pas recréées et les alertes du téléphone gardent leur activation distincte.
 
+Complément du **21 novembre 2026 — réception Push dans une page ouverte** : le
+service worker signale la réception aux fenêtres Live de la même origine, sans
+transmettre le contenu du message. La page visible actualise discrètement ses
+messages et son compteur, en conservant filtres et focus. Recevoir le Push ne
+marque aucun message comme lu et ne navigue pas ; seul le clic sur l’alerte
+conserve son parcours d’ouverture existant. Une fenêtre fermée ou inaccessible
+ne bloque pas la demande d’affichage de l’alerte au navigateur. L’acceptation du
+transport ne prouve toujours pas l’affichage effectif par Android ou iOS.
+Ce correctif de présentation n’ajoute ni contrat API, ni migration, ni règle de
+ciblage ; le générateur de démonstration est sans impact.
+
 Les [principes directeurs UX de Localeo Live](../../produit/live/principes-ux.md)
 guident les évolutions frontend. Pour la navigation et le carnet actuels, lire
 [E73-EVO-LIVE-CARNET-BORD et E73-EVO-LIVE-TAMPONS](../epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md) :
