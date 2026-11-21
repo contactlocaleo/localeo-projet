@@ -1,7 +1,8 @@
 # Roadmap par etat
 
-**21 novembre 2026 — E73-EVO-LIVE-VIGNETTES** : participations en pages reliées,
-gains en cadeaux personnels et programme en feuillets datés, selon le plan validé.
+**21 novembre 2026 — E73-EVO-LIVE-VIGNETTES** : carnet et gains en finition
+« Minimal contemporain », avec filets intérieurs et 22 px rendus au contenu
+du carnet ; programme en feuillets datés conservé, selon les plans validés.
 [Critères VP-01 à VP-05](../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#e73-evo-live-vignettes)
 et [preuves locales](../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md#vignettes-carnet-cadeau-et-agenda).
 Évolution de présentation Marketplace/Live ; clôture historique E73 et compteurs conservés.

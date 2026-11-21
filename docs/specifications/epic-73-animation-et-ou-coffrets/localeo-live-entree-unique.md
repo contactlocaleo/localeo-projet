@@ -2452,10 +2452,17 @@ la forme des vignettes sans remplacer la navigation ni la hiérarchie des action
 En ce moment / Prochainement restent le programme existant ; aucun calendrier
 navigable, filtre ou tri supplémentaire n'est ajouté.
 
+**Finition « Minimal contemporain », arbitrage complémentaire du 21 novembre :**
+le plan validé remplace la marge de reliure et les attaches par deux filets
+inférieurs, et le bandeau cadeau par un filet supérieur abricot. Les 22 px pris
+par la reliure sont rendus au contenu. VP-01 et VP-02 ci-dessous décrivent cette
+cible actualisée ; les premières compositions et leurs preuves restent dans
+la conception et le bilan historiques. Découvrir conserve son traitement.
+
 | Critère | Comportement observable attendu |
 | --- | --- |
-| **E73-VP-01** | Les participations actives et historiques de Mon carnet évoquent une page reliée : marge réservée, trois attaches décoratives et papier clair. Symbole propre au jeu, états, nouvelles, tampons confirmés et action restent présents. Coffrets et favoris conservent leur traitement. |
-| **E73-VP-02** | Mes lots évoque un cadeau personnel avec bandeau papier et ruban dans une zone dédiée. Coffret, coupon numérique et lot libre gardent leurs silhouettes, disponibilité, consignes et action. L'historique atténue seulement le décor ; aucun ruban ne prouve une disponibilité ou une remise. |
+| **E73-VP-01** | Les participations actives et historiques de Mon carnet utilisent une surface presque blanche et deux filets discrets à l'intérieur du bord inférieur. Reliure et attaches supprimées, marges identiques aux cartes ordinaires (16 px, 12 px sur petit mobile), soit 22 px récupérés. Symbole du jeu, états, nouvelles, tampons confirmés et action restent présents. Coffrets et favoris conservent leur traitement. |
+| **E73-VP-02** | Mes lots utilise un filet abricot de 2 px à l'intérieur du bord supérieur, sans bandeau, nœud ou rangée décorative. Les pictogrammes cadeau/coffret/coupon gardent leur emplacement sur fond transparent. Disponibilité, consignes et action restent présentes. L'historique atténue seulement les filets ; le décor ne prouve aucune disponibilité ni remise. |
 | **E73-VP-03** | Dans l'en-tête de chaque animation à découvrir, le feuillet affiche jour/mois de début ; la période complète avec années reste adjacente. Une date absente ou invalide donne un calendrier neutre et « Début à préciser ». Les formateurs Paris existants gouvernent dates civiles et instants. Un événement en cours conserve sa vraie date de début. |
 | **E73-VP-04** | Décors exclus de l'arbre accessible, focus visible, cibles essentielles ≥44 px, aucune superposition ni débordement à 320/390/1280 px et texte doublé. Les actions principales des nouvelles vignettes utilisent le vert existant et un texte blanc contrasté ; aucun mouvement nouveau. |
 | **E73-VP-05** | Actualisation, accès personnels distincts, retours, filtres, pagination, positions et états vide/erreur/inconnu/périmé restent conservés. Captures avant/après des mêmes scènes, assertions automatiques et inspection visuelle sont consignées séparément. |

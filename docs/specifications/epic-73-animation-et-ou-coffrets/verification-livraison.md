@@ -5012,3 +5012,54 @@ générateur de démonstration modifié. Aucun appel, tri ou lot supplémentaire
 ne justifie une nouvelle campagne de capacité. Backend, Pro et Animation
 restent hors modification. Aucun commit, push ou déploiement ; essai habitant,
 lecteur d'écran et appareil physique non réalisés.
+
+### Finition Minimal contemporain — 21 novembre 2026
+
+Plan complémentaire validé après la première livraison (`39ebd41` Marketplace,
+`866be0b` Projet) : supprimer la largeur réservée à la reliure et affiner les
+deux objets. Les preuves ci-dessus restent historiques ; cette finition
+actualise VP-01/VP-02, avec les mêmes invariants et limites fonctionnelles.
+
+Référence avant modification : `2026-11-21T15-55-44-783Z-sy9Qm5`, port 18175,
+**3/3 réussis**, code 0, 18 captures des trois rubriques à 320/390/1280 px,
+texte normal et doublé. Arbres initialement propres.
+
+Réalisation : les participations reprennent les marges ordinaires de 16/12 px
+et un double filet inférieur intérieur ; le lot conserve son pictogramme sur
+fond transparent, avec filet abricot supérieur de 2 px et sans rangée de ruban.
+Les filets sont atténués dans l'historique. Aucun élément de Découvrir modifié.
+Les assertions propres aux anciens décors sont remplacées par la mesure des
+marges normales et des 22 px récupérés, de la largeur de l'identité à texte
+normal/doublé et de l'absence de rangée décorative. Les assertions fonctionnelles
+et les comptages de lecture ne sont pas affaiblis.
+
+Campagne ciblée `2026-11-21T15-57-30-973Z-ra97g8`, port 18175 : **39/39 réussis**,
+zéro échec, skip ou flaky, code 0, durée 3,5 minutes. Suites `live-paper-objects`
+(3), `live-unified-carnet` (17), `live-lots-mobile` (6) et
+`live-iconography-lots` (13). Les marges des quatre participations, dont
+l'historique, correspondent aux cartes ordinaires et les 22 px sont récupérés,
+en texte normal/doublé. La largeur de l'identité utilise toute la zone de contenu.
+Les accès, états, tampons acquis, actions, erreurs et actualisations restent testés.
+Les campagnes de cette finition sont exécutées successivement, une seule à la fois.
+
+Inspection visuelle distincte : six planches comparatives montrent le début et
+la fin des deux rubriques à 320/390/1280 px et en texte normal/doublé. Les titres
+retrouvent l'espace de la reliure, les filets restent à l'intérieur des cartes
+et aucun nouveau chevauchement n'est observé. Les pictogrammes de lots restent
+distincts sur fond transparent et l'historique conserve des textes et actions
+pleinement lisibles. Les éléments fixes des captures pleine page conservent
+leur comportement ; aucune recette physique ou avec lecteur d'écran revendiquée.
+Galerie non versionnée : `localeo-marketplace/test-results/minimal-cards-review/comparatif.html`,
+18 paires générées par l'outil applicatif existant, dont les 12 paires carnet/lots
+inspectées et six paires Découvrir conservées par le scénario partagé.
+
+Lint réussi hors anciens dossiers protégés `output/` et `tmp/`, code 0 ; aucune
+configuration modifiée. Contrôles documentaires : 121 guides, 1 840 liens, puis
+six Markdown modifiés et 462 liens, sans erreur ni avertissement ; 155 sources
+exportées vérifiées. Le build isolé du lanceur correspond aux sources courantes.
+Les six comptages de lectures historiquement en échec ne sont pas rejoués par
+cette retouche de bordures : aucune lecture ni logique de restauration modifiée.
+API, données, migrations, permissions, configuration et générateur de
+démonstration sans impact ; aucun contrat ou champ consommé supplémentaire.
+Les deux dépôts modifiés restent Marketplace et Projet. Aucun commit, push,
+déploiement ou essai habitant réel pour cette finition.

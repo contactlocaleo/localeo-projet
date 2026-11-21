@@ -1517,3 +1517,6 @@ gains, feuillet daté pour le programme. [VP-01 à VP-05 et impacts](../../speci
 et [preuves locales](../../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md#vignettes-carnet-cadeau-et-agenda).
 Cette évolution conserve les trois rubriques et leur fonctionnement, sans vue
 calendrier ni effet métier ; clôture historique et compteurs inchangés.
+Finition complémentaire retenue : **Minimal contemporain**, sans reliure
+latérale ni bandeau cadeau ; filets intérieurs et 22 px rendus au carnet.
+Les critères VP-01/VP-02 sont actualisés ; les premières preuves restent historiques.

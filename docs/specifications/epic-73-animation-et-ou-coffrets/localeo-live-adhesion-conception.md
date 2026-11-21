@@ -2278,3 +2278,23 @@ leur traitement. Cette contextualisation répond à la direction validée du pla
 alors que le HEAD de référence utilise l'orange Marketplace pour ces actions.
 La palette globale et les coffrets du carnet sont préservés. Aucun changement
 de formulaire, API, état, stockage, requête ou pagination n'est nécessaire.
+
+### Finition Minimal contemporain — même séance du 21 novembre
+
+Le plan complémentaire validé remplace les deux premières compositions ci-dessus,
+conservées comme historique ; la composition Agenda reste courante.
+
+- Carnet : fond blanc, contour fin et double filet inférieur intérieur. Aucun
+  décor latéral ; retour aux marges ordinaires de 16 px et de 12 px sous 389 px.
+  Le contenu récupère exactement les 22 px auparavant réservés à la reliure.
+- Lots : suppression du bandeau de 18 px et du nœud, remplacés par un filet
+  abricot de 2 px dans le bord supérieur. Les pictogrammes gardent leurs tailles
+  et positions, avec suppression de l'aplat derrière leur emplacement.
+- Les filets sont des pseudo-éléments vides, non interactifs et sans place dans
+  le flux. Leurs couleurs sont atténuées dans l'historique, jamais le texte ou
+  les commandes. Aucun effet métallique, texture, ombre portée ou mouvement
+  nouveau. Angles, actions vertes, tampons et états restent identiques.
+
+Les critères VP-01 et VP-02 sont actualisés dans la spécification canonique.
+Cette finition reste une modification de présentation Marketplace et Projet,
+sans API, donnée, migration, configuration ni générateur de démonstration affecté.

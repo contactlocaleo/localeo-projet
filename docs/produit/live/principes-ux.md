@@ -40,8 +40,10 @@ consignes pratiques et action adaptée précèdent les éléments secondaires ;
 « Marquer comme vu » conserve un effet local distinct de la remise ou consommation.
 
 **Complément du 21 novembre 2026 — vignettes évocatrices :** les participations
-prennent la forme d'une page reliée, les gains d'un cadeau personnel et le
-programme de feuillets datés. La famille Papier doux, les actions principales
+évoquent un carnet, les gains un cadeau personnel et le programme des feuillets
+datés. La finition « Minimal contemporain » retenue ensuite utilise des surfaces
+presque blanches et de fins filets intérieurs pour carnet et lots, sans réserver
+de largeur au décor. La famille Papier doux, les actions principales
 vertes et la hiérarchie des informations restent la référence. Ce complément
 précise les maquettes sans créer de calendrier navigable ni de nouvel état métier :
 [E73-EVO-LIVE-VIGNETTES et critères VP-01 à VP-05](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#e73-evo-live-vignettes).
