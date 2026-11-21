@@ -1,5 +1,36 @@
 # E73 — Vérification, migration et livraison
 
+## Dotation unique dans la participation
+
+Correctif du 21 novembre 2026, base Marketplace `b5304b3`, arbre initialement
+propre ; correctif `31b5291` commité et poussé sur `main`.
+Le résumé **X lots prévus** et le bloc **Les lots à gagner** étaient
+montés dans le même détail. Le résumé est retiré de cette vue ; le bloc de détail
+public et le résumé de Mon carnet conservent leurs composants. Le message de
+refus public ne promet plus un résumé désormais absent.
+
+Reproduction navigateur à 320 px avant correction : échec attendu, un résumé
+encore trouvé au lieu de zéro (`2026-11-21T18-01-39-583Z-SfbPp0`). Après
+correction, `live-game.spec.cjs --grep "dotation unique"` réussit **2/2** cas
+à 320/1280 px (`2026-11-21T18-02-25-173Z-qnDcx7`) : un seul bloc, aucun appel
+public avant ouverture, lecture au clavier, noms/quantités, erreur de pagination
+503 sans perte de page puis refus public 403 sans contenu périmé ni promesse de
+résumé. Aucune commande de jeu envoyée. L’ancien libellé de test **Voir les lots**
+est remplacé par le libellé existant **Voir tous les lots** ; les contrôles de
+pagination et de refus sont conservés et complétés.
+
+Préservation du carnet : `live-unified-carnet.spec.cjs --grep dotation`, **2/2**
+à 320/1280 px (`2026-11-21T18-03-21-922Z-ZdgJGP`) ; ses noms/quantités restent
+visibles sans lecture publique par carte. Tests Node `live-planned-prizes` :
+**3/3**, ESLint ciblé et build isolé réussis. Captures du détail à 320/1280 px
+examinées : une seule section de lots. Rapports/PNG conservés localement sous
+`localeo-marketplace/test-results/visual-runs/`, sans versionnement des sorties.
+
+Sans impact sur les API, droits, données, règles de gain, migrations, générateur
+ou configuration : seul le montage d’un bloc et son message de refus changent.
+Build isolé avec API simulées ; aucune recette sur appareil physique ni aucun
+déploiement exécutés. [Décision fonctionnelle](localeo-live-entree-unique.md#correctif-du-11-novembre-2026--lots-annoncés-dans-le-carnet).
+
 ## Parcours commerçants d’un coup d’œil
 
 Correctif demandé le 21 novembre 2026 ; bases Marketplace `8b5043c` et Projet

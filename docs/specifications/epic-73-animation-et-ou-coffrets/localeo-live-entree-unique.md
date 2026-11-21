@@ -305,6 +305,16 @@ des changements Live ont été demandés après cette recette locale.
 
 ## Correctif du 11 novembre 2026 — lots annoncés dans le carnet
 
+**Précision du 21 novembre 2026 — détail de participation sans doublon :**
+dans une participation, conserver uniquement **Les lots à gagner**, ouvert à
+la demande avec descriptions publiques, quantités, pagination et réessai.
+Le résumé **X lots prévus** n’y est plus affiché. Cette décision remplace les
+mentions de résumé dans le détail personnel ci-dessous (LDOT-01/04) ; le résumé
+de **Mon carnet**, les fiches publiques et les gains personnels de **Mes lots**
+conservent leur présentation. Un refus du détail public ne prétend plus qu’un
+résumé reste visible dans la participation. API, droits et règles de dotation
+inchangés. Voir la [recette ciblée](verification-livraison.md#dotation-unique-dans-la-participation).
+
 Le bloc personnel **Mon bilan de parcours**, redondant avec l'avancement,
 est remplacé par **Les lots à gagner** pour tous les types d'animation. Le
 résumé de la dotation reste visible sans ouvrir ce bloc : dans chaque vignette
