@@ -42,7 +42,7 @@ Conserver le résultat dans la spécification, le suivi d'anomalie, la PR ou le 
 | Contrats et interfaces | Producteur, schéma, générateur et consommateurs restent-ils compatibles ? Les erreurs affichées décrivent-elles le refus réel ? |
 | Persistance et versions | Les données existantes nécessitent-elles une migration ou réparation ? Ne pas confondre un patch de code et une réparation exécutée. |
 | Démonstration et fixtures | Le défaut provient-il de données générées ou affecte-t-il génération, export, restauration, rôles ou parcours ? Vérifier les scénarios touchés. |
-| Documentation fonctionnelle | Le document décrit-il encore le comportement réel ? Corriger la source canonique lorsque nécessaire. |
+| Documentation fonctionnelle | Le document décrit-il encore le comportement réel ? Examiner les guides utilisateur Commerçant et Animation, actualiser ceux qui sont affectés avec leurs captures, PDF et copies embarquées selon la [procédure commune](maintenance-guides-utilisateurs.md), ou justifier l’absence d’impact. |
 | Exploitation | Les diagnostics, paramètres, reprises et vérifications après livraison changent-ils ? Actualiser la procédure applicable. |
 
 Indiquer « sans objet » avec la raison pour un impact absent. Une inconnue reste à examiner.

@@ -15,3 +15,5 @@ Lire le [guide transverse](../../../AGENTS.md), le guide de l'application concer
 6. Rapporter cause démontrée ou hypothèse restante, comportement corrigé, versions testées, commandes/résultats et limites. Une suite ignorée ou indisponible reste non exécutée. Ne pas annoncer un correctif déployé ni des données réparées sans réalisation vérifiée ; commit, push et déploiement suivent la demande courante.
 
 Pour un correctif d’interface, appliquer les conventions locales du parcours ; celles de [Localeo Animation](../../../../localeo-animation/AGENTS.md#conception-et-correction-dinterface) précisent largeur, hiérarchie et correction des CSS à leur source.
+
+À chaque correctif, examiner les guides utilisateur **Commerçant** et **Animation**. Actualiser dans la même livraison ceux dont le parcours, les libellés ou les règles visibles changent : source, captures affectées, PDF rendu et relu, copie embarquée et accès dans l’application. Suivre la [maintenance des guides](../../../docs/organisation/maintenance-guides-utilisateurs.md) ; justifier « sans impact » pour les guides inchangés.

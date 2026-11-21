@@ -16,6 +16,8 @@ Lire le [guide transverse](../../../AGENTS.md), le backlog ciblé, son dossier d
 
 Pour un contrat transverse complexe, confier une revue en lecture seule au profil `localeo-contract-reviewer`, avec fichiers précis et questions de compatibilité. Intégrer les constats avant de considérer la conception exploitable.
 
+Identifier les sections des guides utilisateur **Commerçant** et **Animation** qui devront évoluer avec les parcours spécifiés et prévoir leur [maintenance](../../../docs/organisation/maintenance-guides-utilisateurs.md) dans les critères de livraison. Une spécification seule ne décrit pas une fonction future comme déjà disponible dans le guide courant.
+
 Si la demande porte sur plusieurs lots, identifier leurs dépendances et les
 critères de chacun dans la source canonique. Appliquer la
 [reprise par lot](../../../docs/organisation/cycle-epic.md#reprendre-une-tâche-longue)

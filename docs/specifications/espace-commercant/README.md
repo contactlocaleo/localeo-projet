@@ -524,6 +524,13 @@ Le livrable est public, illustré uniquement avec des données d’exemple et sa
 
 La [source éditable](../../produit/formation/commercant/guide-quotidien-commercant.md) et le [PDF canonique](../../../livrables/formation/commercant/guide-quotidien-localeo-commercant.pdf) restent dans le dépôt Projet. La copie embarquée est synchronisée et comparée à cette source selon la [procédure de livraison](../../exploitation/deploiement/commercant/mise-en-production.md). Les libellés d’installation/mise à jour, la reprise de validation et les options conditionnelles de facturation y reflètent les fonctionnalités présentes.
 
+L’édition du **21 novembre 2026** actualise les captures et les parcours
+récents : accueil et tâches, scanner commun animations/lots/coffrets,
+préparation des animations, remise des lots, notifications et accès d’équipe.
+L’accès au PDF reste indépendant de la disponibilité de la messagerie
+d’assistance. La [maintenance des deux guides utilisateur](../../organisation/maintenance-guides-utilisateurs.md)
+fait partie des évolutions et correctifs affectant les parcours décrits.
+
 ## Produit proposé pour le Juste Prix Local
 
 Après acceptation de sa participation, le commerçant principal renseigne « Votre produit et son juste prix » : nom, description, unité/format, prix TTC en euros et visuel fourni facultatif sans prix visible. Enregistrer conserve le brouillon ; « Proposer à l’organisateur » soumet la version enregistrée. Une correction est motivée, une modification annule l’approbation ; après publication, produit et prix sont figés. Les salariés n’ont pas accès à cette préparation. Le jeu réutilise leur validation de passage selon les droits existants lorsqu’elle est requise.

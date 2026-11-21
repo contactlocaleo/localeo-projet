@@ -6,7 +6,11 @@ Guides PDF, prompts, visuels et prototypes produits. Les versions historiques re
 - [Plaquette commerciale Localeo Animation, version historique](communication/plaquette-commerciale-localeo-animation.pdf) : une page A4 du 6 novembre 2026 pour les communes et associations de commerçants ; [aperçu, contenu éditorial et sources](communication/README.md).
 - [Présentation commerciale Localeo Animation](communication/presentation-localeo-animation.pptx) : 12 diapositives modifiables avec notes orateur, pour les rendez-vous avec les collectivités et associations de commerçants.
 
-Guide actuel pour l’onboarding commerçant : [Votre guide au quotidien (8 pages illustrées)](formation/commercant/guide-quotidien-localeo-commercant.pdf), édition détaillée de septembre 2026, avec des captures de l’application de test. Il couvre accès, compte, page publique, prestations, validation, activité, reversements, animations, facturation, alertes et aide. [Source éditable](../docs/produit/formation/commercant/guide-quotidien-commercant.md). Les guides de prise en main v7 à v11 ci-dessous sont conservés comme versions historiques.
+Guide actuel Commerçant : [Votre guide au quotidien](formation/commercant/guide-quotidien-localeo-commercant.pdf), édition illustrée du 21 novembre 2026. Il couvre accès et accueil, compte et page publique, coffrets, scanner, invitations et préparation des animations, lots, activité, reversements, facturation, notifications et aide. [Source éditable](../docs/produit/formation/commercant/guide-quotidien-commercant.md). Les guides de prise en main v7 à v11 ci-dessous restent des versions historiques.
+
+Guide utilisateur Animation : [Organiser et piloter vos animations](formation/animation/guide-quotidien-localeo-animation.pdf), édition illustrée du 21 novembre 2026. Il accompagne la création, la préparation, les commerçants, les dotations, la publication, le suivi, la communication, la clôture et les résultats. [Source éditable](../docs/produit/formation/animation/guide-quotidien-animation.md).
+
+Ces guides sont distribués depuis leurs applications respectives. Leur [maintenance commune](../docs/organisation/maintenance-guides-utilisateurs.md) fait partie de chaque évolution qui affecte un parcours décrit.
 
 - [design/marketplace/hero-compositions/README.md](design/marketplace/hero-compositions/README.md)
 - [design/marketplace/hero-compositions/hero.html](design/marketplace/hero-compositions/hero.html)

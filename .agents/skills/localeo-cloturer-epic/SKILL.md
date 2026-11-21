@@ -15,6 +15,8 @@ Compléter le bilan existant avec le [noyau des preuves](../../../docs/organisat
 
 Renouveler les preuves affectées/manquantes et exécuter les contrôles requis. Depuis Projet, ajouter `python scripts/check_guidance.py --changed --all-markdown` au contrôle des guides pour les Markdown modifiés et les liens entrants après déplacement. Les exports/lecteurs suivent le noyau commun.
 
+Vérifier la [maintenance des guides utilisateur](../../../docs/organisation/maintenance-guides-utilisateurs.md) **Commerçant** et **Animation** : les parcours affectés sont actualisés, leurs PDF rendus et relus, les copies embarquées synchronisées et leurs accès vérifiés. Un guide affecté encore obsolète reste un travail requis avant clôture ; justifier l’absence d’impact pour les guides inchangés.
+
 ## Décider et appliquer
 
 Clôturer seulement si tous les critères sont vérifiés, les contrôles requis réussis et la documentation/les contrats cohérents, sans réserve invalidant l’acceptation. Une recette cible exigée ne se remplace pas par des tests locaux. Une dette prouvée sans impact reste explicite sans blocage artificiel. Si un critère est partiel, non satisfait ou non vérifiable, conserver statut et chemin, documenter les actions nécessaires et poursuivre les travaux indépendants ; ne pas introduire silencieusement un correctif substantiel pour forcer la clôture.

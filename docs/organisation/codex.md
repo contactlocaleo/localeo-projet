@@ -25,6 +25,13 @@ Lire d'abord `git status` et le diff du périmètre ; rechercher les symboles/ch
 
 ## Skills locaux, chargés selon la tâche
 
+Les guides utilisateur **Commerçant** et **Animation** se maintiennent avec
+chaque évolution qui affecte leurs parcours. La [procédure commune](maintenance-guides-utilisateurs.md)
+identifie sources, captures, PDF, copies embarquées et contrôles. Vérifier les
+deux guides à chaque changement, puis actualiser ceux qui sont affectés ou
+justifier l’absence d’impact ; les skills de correction, d’évolution,
+d’implémentation et de clôture rappellent cette exigence.
+
 | Skill | Usage | Exemple |
 | --- | --- | --- |
 | [localeo-documentation](../../.agents/skills/localeo-documentation/SKILL.md) | Migration, consolidation et audit documentaire avec consommateurs | « Utilise $localeo-documentation pour consolider les documents de cet epic. » |

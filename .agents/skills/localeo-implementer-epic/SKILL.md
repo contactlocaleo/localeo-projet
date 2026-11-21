@@ -22,6 +22,8 @@ chaque phase ; un lot bloqué n'empêche pas les lots indépendants. Garder les
 rapports de chaque tentative et relier une reprise, sans additionner les succès
 d'une ancienne version comme s'ils provenaient d'un passage final unique.
 
+À chaque évolution, vérifier les guides utilisateur **Commerçant** et **Animation**. Mettre à jour ceux qui sont affectés dans la même livraison : source, captures, PDF rendu et relu, copie embarquée et lien applicatif. Appliquer la [maintenance des guides](../../../docs/organisation/maintenance-guides-utilisateurs.md) ; justifier l’absence d’impact pour les autres.
+
 Pour une évolution UI significative, le profil `localeo-ux-reviewer` peut relire
 les parcours et leurs captures. Lorsqu'un libellé accessible change, rechercher
 ses consommateurs de test, vérifier le nom réellement exposé et rejouer les

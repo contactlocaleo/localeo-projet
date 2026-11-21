@@ -15,3 +15,5 @@ Lire le [guide transverse](../../../AGENTS.md) et le README du périmètre. Les 
 6. Rendre les déplacements, fusions et suppressions traçables dans le compte rendu demandé. Indiquer les dépôts affectés et les vérifications réelles. Créer un rapport dédié seulement pour une migration ou un audit qui le justifie. Commits, push et déploiements suivent la demande en cours.
 
 Pour un inventaire important, déléguer par dépôt avec des fichiers distincts. Conserver la décision de fusion et la vérification des références partagées dans une seule tâche d'intégration.
+
+Pour les guides utilisateur **Commerçant** et **Animation**, appliquer la [maintenance commune](../../../docs/organisation/maintenance-guides-utilisateurs.md) : conserver la source canonique, actualiser les captures et le PDF du parcours affecté, synchroniser sa copie embarquée et vérifier le lien dans l’application. Examiner l’impact sur les deux guides, même si un seul est modifié.

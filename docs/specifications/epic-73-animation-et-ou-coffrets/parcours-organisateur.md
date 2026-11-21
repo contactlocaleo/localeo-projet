@@ -782,3 +782,28 @@ Ces contrôles ne valident pas les appareils physiques ni le délai commercial.
 Serveurs/browser propres aux bancs et PostgreSQL jetable arrêtés à leur fin ;
 aucun processus métier partagé interrompu. Prochaine action : préparer cette
 qualification, puis une livraison distincte lorsqu'elle est demandée.
+
+## Guide utilisateur Animation - 21 novembre 2026
+
+Un [guide didactique illustré](../../../livrables/formation/animation/guide-quotidien-localeo-animation.pdf)
+accompagne le fonctionnement de la plateforme pour les organisateurs :
+repères d’accueil, création, commerçants et préparation, dotation, publication,
+communication, suivi, clôture, tirage, remise des lots, résultats et compte.
+Les actions conditionnelles sont présentées selon les rôles et modules.
+La [source éditable](../../produit/formation/animation/guide-quotidien-animation.md)
+et les illustrations sont canoniques dans Projet ; le générateur reste dans
+Animation et produit une copie PDF embarquée dans son frontend.
+
+Le guide est accessible depuis **Aide et support** et le **menu du compte**,
+au clavier comme sur mobile et ordinateur. Il s’ouvre dans un nouvel onglet
+annoncé, avec possibilité d’enregistrement ou d’impression par le lecteur.
+Son lien reste visible si le contexte ou la messagerie d’assistance échoue.
+Le fichier `/guides/guide-quotidien-localeo-animation.pdf` est servi comme un
+PDF réel ; son absence renvoie 404, sans HTML de repli SPA. Il ne contient ni
+identifiant d’accès ni QR exploitable et ne requiert aucune API métier.
+Ce support public n’ajoute pas de garantie de lecture hors ligne.
+
+La [maintenance commune](../../organisation/maintenance-guides-utilisateurs.md)
+impose de vérifier les guides Commerçant et Animation à chaque évolution,
+puis d’actualiser les parcours affectés avec captures, PDF relu, copie
+embarquée synchronisée et preuve d’accès depuis l’application.

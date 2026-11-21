@@ -1,30 +1,53 @@
 # Illustrations du guide quotidien commerçant
 
-Captures historiques réalisées le 26 septembre 2026 dans [Localeo Commerçant — test](https://test-commercant.localeo.city), version affichée `v1.0.0+d09fca1f`, avec le commerce fictif **Le Fournil des Tilleuls** du jeu de données installé.
+## Édition du 21 novembre 2026
 
-| Fichier | Vue illustrée |
+Le [guide source](../../guide-quotidien-commercant.md) et son PDF comportent **12 pages et 12 captures actuelles**. Elles proviennent du frontend React de Localeo Commerçant, base Git `74000ad` avec les modifications locales de maintenance du guide. La version synthétique affiche `v1.0.0+browser-` : il s’agit d’une recette locale, sans déploiement.
+
+Les écrans ont été ouverts dans Chromium avec des API simulées et le commerce fictif **La Maison des Saveurs**. Le navigateur utilise l’heure de Paris et une horloge fixée au 21 novembre 2026. Les requêtes externes sont bloquées ; aucun compte réel, secret, QR personnel réel ou jeu de données installé n’est utilisé. Les invitations, montants, salariés et réponses de jeu sont des exemples fabriqués pour la formation. Aucune action métier réelle n’est exécutée.
+
+Les captures sont réalisées directement dans l’application, sans redessiner ses écrans ni modifier ses libellés. Le script recadre la zone utile ou capture un composant entier afin de garder le texte lisible dans le PDF. Le viewport principal est de 1100 × 900 pixels, avec un facteur de pixels de 1,5.
+
+| Fichier actuel | Vue illustrée dans le guide |
 | --- | --- |
-| `01-accueil.png` | Accueil et accès aux principales rubriques |
-| `02-validation.png` | Prestation disponible après lecture d’un QR de coffret |
-| `03-animation.png` | Préparation et mission pour un passeport commerçant |
-| `04-reversements.png` | Sommes attendues et historique des versements |
-| `05-horaires.png` | Informations pratiques de la page publique |
-| `06-publication.png` | Enregistrement du brouillon ou demande de publication |
-| `08-activite.png` | Indicateurs d’activité, achats et prestations réalisées |
-| `10-alertes.png` | Activation des alertes d’achat dans Compte |
-| `11-facturation.png` | Navigation entre les rubriques de facturation |
-| `12-invitations.png` | Navigation entre invitations, animations et notifications |
-| `13-guide-aide.png` | Accès au guide dans Aide et contact (recette locale du 29 septembre 2026) |
+| `01-accueil.png` | Scanner principal et accès aux réglages des notifications |
+| `02-validation.png` | Prestation de coffret à valider et action de confirmation |
+| `05-horaires.png` | Page publique chargée : statut du brouillon, complétion et accroche |
+| `08-activite.png` | Indicateurs d’activité : achats, réalisations et montants |
+| `11-facturation.png` | Demande de facture : brut TTC, commission, net et état |
+| `12-invitations.png` | Invitation en attente avec organisateur, dates et échéance de réponse |
+| `13-guide-aide.png` | Guide PDF accessible dans Aide et contact |
+| `14-lot.png` | Lot entier, commerce de remise, validité et confirmation de remise |
+| `16-preparation.png` | Les trois repères du parcours de préparation |
+| `17-vitrines.png` | Relecture Vitrines : contenu public et réponse privée fictive |
+| `18-reglages.png` | État des notifications sur cet appareil et actualisation |
+| `19-equipe.png` | Accès salarié : compte, accès effectif, invitation et révocation |
 
-Ces captures sont recadrées depuis les écrans réels, sans modification des libellés. Les montants et noms sont des exemples. Aucun identifiant de connexion, mot de passe ou QR personnel n’est inclus. La consultation n’a validé aucune prestation et n’a modifié aucune participation ni aucun paiement.
+Les options Stripe, facturation, Chorus Pro, assistant d’émission, salariés et PIN sont présentées dans le texte comme dépendantes des droits et services disponibles. Une capture d’exemple ne prouve pas leur activation sur un environnement réel. La capture de réglages montre le cas où les notifications sont bloquées ; le guide explique aussi les autres états.
 
-L’édition du 29 septembre 2026 conserve huit pages et neuf captures. Les captures `04-reversements.png` et `10-alertes.png` restent disponibles comme illustrations complémentaires. La nouvelle capture `13-guide-aide.png` provient du frontend local courant, avec API simulée et données fictives ; elle ne représente pas une mise en production. Les anciennes captures sont conservées pour les écrans dont les éléments illustrés restent applicables.
+## Régénération et vérifications
 
-Les fonctionnalités ont été recoupées avec les routes et composants de l’application. Le profil capturé n’a aucune demande de facture ni invitation en attente : ces écrans de détail n’ont pas été mis en scène. Chorus Pro et l’assistant d’émission sont décrits comme options conditionnelles ; aucune capture ne prétend les montrer activés. Le parcours de connexion du guide suit l’écran actuel email/mot de passe, sans reprendre la carte QR mentionnée par d’anciens documents.
+Depuis le dépôt `localeo-commercant`, sans charger de configuration opérateur :
 
-La mise à jour du 29 septembre ajoute aussi un accès au PDF depuis Aide et contact dans `localeo-commercant`. Aucun contrat API, règle métier, migration, configuration ou générateur de données ne change. La préparation locale ne constitue pas un déploiement.
+```powershell
+$env:LOCALEO_TEST_DIST = 'tmp/guide-merchant-dist-refresh'
+node scripts/build-browser-tests.mjs
+node scripts/capture-merchant-guide.mjs --dist tmp/guide-merchant-dist-refresh
+py -3.14 scripts/generate-merchant-guide.py --preview-dir tmp/guide-refresh-merchant-pdf
+npm run guide:sync
+npm run guide:check
+node scripts/build-browser-tests.mjs
+node scripts/capture-merchant-guide.mjs --dist tmp/guide-merchant-dist-refresh --check-guide --verify-only
+```
 
-Lors d’une mise à jour, utiliser un profil de démonstration ou les fixtures locales explicitement signalées, relever la version et recapturer uniquement les zones utiles. Conserver les noms des fichiers, mettre à jour les légendes du [guide source](../../guide-quotidien-commercant.md), puis régénérer et contrôler visuellement les huit pages du PDF.
+Le serveur isolé des captures utilise le port **4181** et s’arrête en fin de commande. Les générateurs et fixtures exécutables restent dans le dépôt applicatif. Le manifeste local `tmp/guide-refresh-merchant-capture/provenance.json` relève les captures et requêtes simulées ; `verification.json` contient les résultats de recette. Les aperçus du PDF sont dans `tmp/guide-refresh-merchant-pdf`.
 
+Résultats de cette édition : build synthétique réussi, **12 pages et 12 signets**, pages rendues relues visuellement, copie embarquée identique au PDF canonique (`guide:check`). Les parcours de navigation et clavier, le PDF livré, l’absence de débordement et l’accessibilité Axe ont été vérifiés à **390 et 1440 pixels**, avec **zéro violation**. Le support répondait volontairement **HTTP 503** pendant cette recette : le guide restait accessible. Ces preuves locales ne constituent ni une recette sur appareil physique ni une vérification de déploiement.
 
-Le générateur versionné est `localeo-commercant/scripts/generate-merchant-guide.py`. La génération, la synchronisation du livrable public et les vérifications suivent la [procédure Commerçant](../../../../../exploitation/deploiement/commercant/mise-en-production.md#guide-commerçant-embarqué).
+Le nombre de pages et de signets dérive des sections de niveau 2 du Markdown : une section ouvre une page. Le générateur refuse un débordement sur une page supplémentaire au lieu de compresser le contenu. Après une évolution, recapturer les zones concernées, mettre à jour les légendes, régénérer, relire toutes les pages puis synchroniser le PDF. Voir la [procédure Commerçant](../../../../../exploitation/deploiement/commercant/mise-en-production.md#guide-commerçant-embarqué).
+
+## Illustrations historiques conservées
+
+Les fichiers `03-animation.png`, `04-reversements.png`, `06-publication.png` et `10-alertes.png` proviennent des captures historiques du 26 septembre 2026 sur TEST, version `v1.0.0+d09fca1f`, avec le commerce fictif **Le Fournil des Tilleuls**. Ils restent disponibles comme archives et ne sont pas utilisés dans le PDF actuel. Ils ne représentent pas l’interface de novembre.
+
+L’ancienne édition du 29 septembre comptait huit pages et neuf illustrations utilisées. L’édition de novembre remplace les captures encore utilisées et ajoute cinq vues ; les références anciennes à un profil sans invitation ni facture en attente ne décrivent donc pas les exemples actuels.
