@@ -21,6 +21,17 @@ une date civile reste inchangée. Les libellés relatifs serveur contenant des
 heures ou minutes ne remplacent plus cette date. La mention « heure de Paris »
 n'accompagne pas ces dates seules.
 
+**Exception demandée le 21 novembre 2026 :** la page de détail d’une étape du
+parcours personnel Live affiche aussi l’heure des preuves enregistrées : réponse
+confirmée, étape achevée, visite ou passage validé. Cette restitution utilise
+`Europe/Paris`, avec la mention « heure de Paris », indépendamment du fuseau
+de l’appareil et en tenant compte du changement été/hiver. Elle concerne les
+passeports, chasses, vitrines et juste prix ; leurs autres dates restent sans
+heure. Seul un horodatage réel de la preuve autorise cet affichage : une date
+civile, une valeur absente ou invalide ne reçoit aucune heure reconstruite. Le
+détail signale alors que la date et l’heure ne sont pas disponibles. Les instants
+historiques sans offset restent interprétés en UTC selon la convention commune.
+
 Cette règle de présentation ne modifie ni les instants API, ni les contrôles
 d'ouverture ou d'expiration, ni les horaires pratiques des commerces, ni les
 instants exportés dans l'agenda. Les composants partagés conservent leur

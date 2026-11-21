@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Live - API backend Epic 42",
     "description": "Vue OpenAPI 3.1 des contrats publics, editoriaux et techniques de Localeo Live.",
-    "version": "1.0.0+9a77a10"
+    "version": "1.0.0+40d5161"
   },
   "paths": {
     "/public/animation-locale/animations/{animation_id}/contact-public": {
@@ -3496,6 +3496,23 @@
                 }
               ],
               "title": "Cursor"
+            }
+          },
+          {
+            "name": "stepId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Stepid"
             }
           },
           {
@@ -63677,6 +63694,30 @@
             "type": "boolean",
             "title": "Reponseautorisee"
           },
+          "responseConfirmedAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Responseconfirmedat"
+          },
+          "passageValidatedAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Passagevalidatedat"
+          },
           "referencePriceCents": {
             "anyOf": [
               {
@@ -65082,6 +65123,13 @@
                 "type": "null"
               }
             ]
+          },
+          "etapes": {
+            "items": {
+              "$ref": "#/components/schemas/ResumeEtapeParticipant"
+            },
+            "type": "array",
+            "title": "Etapes"
           }
         },
         "additionalProperties": false,
@@ -72740,6 +72788,179 @@
                 "type": "null"
               }
             ]
+          },
+          "participantId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Participantid"
+          },
+          "definitionVersion": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Definitionversion"
+          },
+          "progressionVersion": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Progressionversion"
+          },
+          "exploitationRevision": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Exploitationrevision"
+          },
+          "etape": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/EtapeParticipant"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "achevee": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Achevee"
+          },
+          "reponse": {
+            "anyOf": [
+              {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/ReponsePrix"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ReponseQcm"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ReponseAssociation"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ReponseOrdre"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ReponseTexte"
+                  }
+                ],
+                "discriminator": {
+                  "propertyName": "type",
+                  "mapping": {
+                    "ASSOCIATION": "#/components/schemas/ReponseAssociation",
+                    "MONEY_ESTIMATE": "#/components/schemas/ReponsePrix",
+                    "ORDERING": "#/components/schemas/ReponseOrdre",
+                    "SINGLE_CHOICE": "#/components/schemas/ReponseQcm",
+                    "TEXT_INPUT": "#/components/schemas/ReponseTexte"
+                  }
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reponse"
+          },
+          "resolvedAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Resolvedat"
+          },
+          "confirmedAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Confirmedat"
+          },
+          "completedAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Completedat"
+          },
+          "qrValidatedAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Qrvalidatedat"
+          },
+          "passageValidatedAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Passagevalidatedat"
+          },
+          "medias": {
+            "items": {
+              "$ref": "#/components/schemas/MediaEmbarque"
+            },
+            "type": "array",
+            "title": "Medias"
           }
         },
         "additionalProperties": false,
@@ -73558,6 +73779,81 @@
           "status"
         ],
         "title": "ResultatWorkerGenerationPayload"
+      },
+      "ResumeEtapeParticipant": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "titre": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Titre"
+          },
+          "lieu": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/LieuPhysiqueJouable"
+              },
+              {
+                "$ref": "#/components/schemas/LieuVirtuelJouable"
+              }
+            ],
+            "title": "Lieu"
+          },
+          "achevee": {
+            "type": "boolean",
+            "title": "Achevee"
+          },
+          "resolution": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "REUSSITE",
+                  "AIDE",
+                  "CONFIRMATION",
+                  "DISPENSE"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Resolution"
+          },
+          "courante": {
+            "type": "boolean",
+            "title": "Courante"
+          },
+          "conditionsManquantes": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "QR_LIEU",
+                "RESOLUTION_DEFI",
+                "ATTESTATION_COMMERCANT"
+              ]
+            },
+            "type": "array",
+            "title": "Conditionsmanquantes"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "titre",
+          "lieu",
+          "achevee",
+          "courante",
+          "conditionsManquantes"
+        ],
+        "title": "ResumeEtapeParticipant"
       },
       "RetablissementVitrineInput": {
         "properties": {
@@ -81362,6 +81658,30 @@
           "reponseAutorisee": {
             "type": "boolean",
             "title": "Reponseautorisee"
+          },
+          "responseConfirmedAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Responseconfirmedat"
+          },
+          "passageValidatedAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Passagevalidatedat"
           },
           "pinAutorise": {
             "type": "boolean",

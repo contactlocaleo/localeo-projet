@@ -44,7 +44,78 @@ expiration d’accès. Les schémas documentaires sont générés depuis le back
 Les preuves propres au correctif sont conservées dans le
 [bilan E73](verification-livraison.md), sans modifier la clôture historique.
 
+## Évolution du 21 novembre 2026 — parcours et pages d’étape
+
+Cette évolution complète la lecture du parcours ci-dessous et **remplace les
+raccourcis vers des formulaires dans la même page**, la préparation d’une visite
+dans la vue d’ensemble et la restriction de la liste de chasse à sa seule étape
+courante. Les autres sections de la participation conservent leur agencement.
+
+| Critère | Comportement observable attendu |
+| --- | --- |
+| **E73-PE-01** | Passeport, chasse, vitrines et juste prix présentent une mission courte dans le bloc principal, puis progression, tampons et étapes autorisées dans « Le détail de mon parcours », dépliée par défaut et reprenant le style des autres sections. L’ensemble distingue étape à découvrir, réponse enregistrée, passage à valider et étape validée. Aucun formulaire d’étape n’est développé dans cette vue. « Votre parcours est à jour » et son texte explicatif sont supprimés. |
+| **E73-PE-02** | Chaque étape ouvre son détail dans la participation avec le paramètre `etape`, identifiant non secret. « Retour à mon parcours » apparaît en haut à gauche, avant titre, commerce ou lieu, informations pratiques et consigne. L’ouverture directe, le rechargement et le retour navigateur restent possibles avec l’accès personnel ; le retour restaure pagination, position et focus sur l’étape choisie. |
+| **E73-PE-03** | Une étape disponible affiche seulement les actions autorisées par le serveur et conserve les contrôles de réponse, QR et attestation commerçante. Après confirmation, le détail sélectionné reste affiché, même si la chasse ouvre l’étape suivante. Brouillons, clés d’idempotence et reprise explicite d’un résultat incertain restent préservés ; consulter ou revenir ne produit aucune commande. |
+| **E73-PE-04** | Une étape réalisée restitue l’action effectuée ou la réponse définitive enregistrée, son résultat et les horodatages de preuve disponibles. Les essais antérieurs restent masqués ; une réponse incorrecte définitive de vitrine ou juste prix reste consultable sans être rejouable. Date et heure des validations sont affichées en Europe/Paris selon l’exception de la convention commune ; aucune heure n’est fabriquée si la preuve ne porte pas d’horodatage. |
+| **E73-PE-05** | Les étapes futures de chasse restent cachées ; seules les étapes déjà révélées sont nommées. Étape inexistante ou étrangère, refus d’accès, changement de participation et incohérence de versions ne dévoilent ni contenu privé ni nouvelle action. Après clôture, l’historique autorisé reste consultable, les commandes restent fermées. Aucune solution privée n’est révélée au-delà des règles du moteur. |
+| **E73-PE-06** | À 320/390/1280 px, au clavier et avec texte doublé : liste et détail restent lisibles, retour explicite, cibles utilisables et absence de débordement horizontal. Les captures et vérifications fonctionnelles sont des preuves distinctes ; aucune recette distante n’est déduite d’une fixture locale. |
+
+Les lectures backend sont enrichies sans changer les règles métier. Le passeport
+réutilise `dateValidation`. Vitrines et juste prix exposent les horodatages
+`responseConfirmedAt` et `passageValidatedAt` ; le juste prix accepte aussi le
+filtre ciblé `stepId`, déjà disponible pour les vitrines. Les lectures de liste
+restent paginées et bornées, sans lecture de résultat par ligne.
+
+La chasse expose `etapes`, résumé des étapes courante et passées déjà révélées
+(`id`, titre, lieu autorisé, achèvement, résolution, état courant et conditions
+manquantes). La lecture personnelle du résultat d’étape restitue le contenu
+consultable, `reponse`, l’achèvement et les horodatages enregistrés de résolution,
+confirmation, achèvement, QR et passage, avec l’identité et les versions de la
+projection. La réponse restituée est la réponse réussie persistée, pas les essais
+précédents ; une résolution avec aide ne fabrique pas de réponse du joueur. Les
+anciens textes de chasse peuvent être normalisés tels qu’enregistrés : la saisie
+originale et sa casse ne sont pas reconstruites.
+
+Ces données restent propres à la participation et à son accès. Aucun token ou
+contenu supplémentaire n’est placé dans l’URL ; la navigation ne transporte que
+les repères de retour. Réponses privées, contenu narratif et historique chargés
+ne sont copiés ni dans le carnet durable ni dans un cache PWA. Les projections
+et lectures de détail restent privées et non mises en cache ; leurs versions et
+l’appartenance à la participation sont contrôlées avant affichage.
+
+Dépôts affectés : Backend (producteurs et contrats), Marketplace (lectures,
+présentation et contrats embarqués), Projet (sources canoniques), Animation et
+Commerçant (synchronisation des seuls contrats et manifestes embarqués). Le
+registre Commerçant conserve ses cinq moteurs, sans activer la tombola publique.
+Les contrats OpenAPI documentaires restent générés depuis le backend. Aucune migration ni
+nouvelle configuration ; le générateur de démonstration conserve ses preuves
+existantes, aucun champ de saisie obligatoire n’est ajouté. La date de clôture,
+la qualification, les permissions et les règles de révélation restent gouvernées
+par le domaine.
+
+Livrer les lectures backend avant le frontend Live qui les consomme. Les ajouts
+de contrat restent facultatifs pour les anciens lecteurs ; aucun historique
+manquant n’est reconstitué localement. Les repères de retour peuvent conserver
+la participation, la version de définition, l’étape, le défilement et une
+pagination bornée après rechargement ou détour par un commerce ; ils ne
+transportent aucune réponse ni capacité personnelle. Une commande d’estimation
+incertaine conserve uniquement son montant entier en centimes, ses versions et
+sa clé pour permettre une reprise explicite identique.
+
+Les guides **Commerçant** et **Animation** ont été examinés : sans impact, car
+leurs écrans, libellés et procédures ne changent pas ; la séparation concerne
+uniquement le détail personnel habitant dans Live. Les scénarios synthétiques
+`live-journey-pages.spec.cjs`, les contrôles des horodatages et réponses
+`live-step-history.test.cjs`, ainsi que les tests backend des projections et
+refus portent les preuves de cette évolution ; leur présence ne préjuge pas de
+leur exécution ou du déploiement.
+
 ## Correctif du 21 novembre 2026 — parcours commerçants d’un coup d’œil
+
+Référence initiale : les dispositions de navigation dans la même page et de
+présentation de la chasse ci-dessous sont remplacées par l’évolution
+« parcours et pages d’étape » ci-dessus. Les états, bornes et responsabilités
+restent applicables.
 
 Les participations à un passeport, une chasse, un jeu des vitrines ou un juste
 prix mettent en évidence les commerces et les découvertes du parcours, avant

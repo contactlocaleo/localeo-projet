@@ -19,8 +19,27 @@ gardent au moins 16 px avant « Voir ma participation » ou « Voir l’animatio
 Mes lots conserve « Marquer comme vu » pour un lot nouveau et le retire après
 confirmation locale. Les textes explicatifs de ce repère et « Vu sur cet
 appareil » disparaissent. Les états de retrait ou d'utilisation restent distincts.
-Toutes les dates de Live sont présentées sans heure, selon la
+Les dates de Live sont présentées sans heure, sauf les horodatages de validation
+consultés dans le détail personnel d’une étape, selon la
 [convention de dates](../../architecture/transverse/affichage-dates.md#présentation-live-sans-heure-21-novembre-2026).
+
+**Séparation du parcours et de ses étapes — 21 novembre 2026.** Le bloc principal
+affiche « Votre mission : … », avec un objectif court adapté au jeu. Passeport,
+chasse, vitrines et juste prix rassemblent progression, tampons et liste autorisée
+dans « Le détail de mon parcours », avec le style des autres sections et dépliée
+par défaut. La liste distingue étapes validées, réponses enregistrées, passages
+restant à valider et découvertes à faire. « Votre parcours est à jour » et son
+texte explicatif disparaissent ; les consignes restent sur l’étape concernée.
+
+La flèche d’une étape ouvre une page dédiée, avec « Retour à mon parcours » en
+haut à gauche. Une étape disponible présente ses seules actions autorisées ; une
+étape réalisée restitue la réponse définitive enregistrée ou l’action effectuée,
+son résultat et ses date et heure réelles en Europe/Paris. La confirmation garde
+cette page ouverte, même si la chasse a avancé. Le retour restaure page de liste,
+position et focus ; les brouillons et validations incertaines sont préservés.
+Les étapes futures de chasse restent masquées. Les détails d’exécution ne sont
+plus développés dans la vue d’ensemble. Voir les
+[comportements et contrats E73](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-21-novembre-2026--parcours-et-pages-détape).
 
 Le bandeau supérieur du Marketplace donne un accès textuel direct « Live » au
 carnet, sur mobile et ordinateur, en utilisant l'origine Live configurée.
@@ -130,7 +149,7 @@ une empreinte vide. Une progression inconnue reste indiquée comme telle.
 | --- | --- |
 | Passeport commerçant | Tampons des visites validées, date réelle disponible et accès au QR avant la liste des visites. |
 | Vitrines et juste prix | Commerces de la page autorisée, découverte et réponse définitive distinctes ; une réussite avec passage manquant reste à faire valider. La comptabilisation confirmée se distingue de la qualification. |
-| Chasse | Progression visuelle et prochaine étape autorisée ; les lieux et indices futurs restent masqués. |
+| Chasse | Progression visuelle, étapes déjà révélées et prochaine étape autorisée ; les lieux et indices futurs restent masqués. |
 | Tombola | Ticket de participation et état confirmé ; la représentation ne suggère pas un parcours de visites. |
 | Coffret | Prestations restantes et consommées, accès à leur utilisation et validité. |
 | Lot | Nature du gain, disponibilité confirmée et action pour l’utiliser ou le retirer. |
