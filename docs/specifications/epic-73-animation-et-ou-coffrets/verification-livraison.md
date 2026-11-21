@@ -1,5 +1,88 @@
 # E73 — Vérification, migration et livraison
 
+## Fin prévue distincte de la clôture effective
+
+Correctif du 21 novembre 2026, bases Backend `9a77a107`, Marketplace `31b5291`,
+Animation `577473b`, Commerçant `ce74198` et Projet `3c6034f`, arbres initialement
+propres. [Règle retenue](localeo-live-entree-unique.md#correctif-du-21-novembre-2026--date-prévue-et-clôture-effective).
+Le backend est commité et poussé sous `bfb4f02f`.
+Marketplace : `ee29713` ; synchronisation des contrats Animation : `343a6e0`
+et Commerçant : `ea81fc3`, également poussés sur `main`.
+
+La cause comporte deux parties : Live affichait directement le jour de la
+borne de fin exclusive ; le backend assimilait la fin prévue à une fermeture
+dans les inscriptions, commandes, scans, projections et filtres de preuves.
+La correction conserve la clôture comme décision de domaine, et aligne
+catalogue, QR, classement du carnet, priorités/rappels et conservation. Les
+preuves reçues après la fin prévue sont prises en compte avant le gel ; une
+preuve reçue dès la clôture effective est exclue. Les fermetures explicitement
+configurées, capacités, débuts, suspensions, versions et accès restent contrôlés.
+
+Reproductions rouges ciblées avant correction : le 20 novembre sélectionné
+était affiché au 21 dans Live ; une animation publiée avec début connu restait
+seulement « publiée » ; les tests backend refusaient les actions postérieures
+à la fin prévue. Le nouveau formateur conserve le dernier jour inclus de
+l’animation, sans modifier les instants ni décaler un horaire affiché.
+
+Backend : commande isolée documentée dans
+`tmp/closure-validation-commands.txt`, sélection incluant `tests/architecture`,
+classes de domaine, couverture des use cases, inscriptions, catalogue, QR,
+tombola, jeu, scans, priorités, conservation et adaptateurs : **1 040 réussis,
+aucun échec ni skip**, rapport `tmp/closure-final-results.xml`. Après ajout des
+dernières assertions de qualification/snapshot JP et Vitrines,
+`test_participation_apres_echeance.py` réussit **7/7**
+(`tmp/closure-snapshot-final-results.xml`). Les requêtes de classement,
+expiration d’accès et conservation sont exécutées sur SQLite en mémoire.
+La revue indépendante a signalé puis vérifié les corrections des projections,
+du classement, des rappels et de la conservation des animations encore ouvertes.
+
+La sélection élargie initiale comptait 2 198 réussites, 17 échecs et 7 skips
+existants. Six échecs attendaient l’ancien refus après fin prévue ; leurs
+assertions portent désormais sur la clôture effective. Onze autres échecs sont
+reproduits sur un worktree propre `9a77a107` (**11 échecs / 32 réussites**,
+`tmp/closure-baseline-results.xml`). Trois fixtures de périmètre commerçant
+des tests de scan touchés sont réparées avec l’objet de domaine réel.
+Les huit dettes restantes, hors sélection finale, concernent le catalogue
+historique, la publication de chasse, trois anciens tests de modification
+d’animation, le reçu unique de commande de lots et deux variantes de supports
+de commerce chasse. Aucun skip ajouté ni assertion métier affaiblie.
+
+Frontend : sécurité complète **331/331** avec concurrence de test bornée à
+deux (`tmp/closure-security.log`), puis ESLint ciblé réussi. La première
+exécution parallèle avait échoué sur le budget de performance de tri local ;
+le même test réussit sans changement d’assertion en exécution bornée. Les
+helpers vérifient notamment les dates d’hiver/été, changements d’heure,
+UTC naïf, offsets, dates civiles, début à venir, fin exacte et statuts terminaux.
+
+Recette navigateur finale :
+`node scripts/run-visual-tests.cjs --port 8347 tests/visual/e78-vitrines.spec.cjs tests/visual/live-unified-carnet.spec.cjs --grep "fin prévue|état à venir|mobile : brouillons" --workers=1`,
+**6/6 réussites**, aucun skip, en 53,1 secondes,
+`test-results/visual-runs/2026-11-21T18-42-05-114Z-FzKbBn`. Build complet isolé
+par le lanceur, API synthétiques et connexions non simulées bloquées.
+À 320/1280 px : fin au 20 novembre dans le carnet et le détail, information
+d’échéance atteinte, inscription publique proposée sans accès local existant,
+réponse Vitrines confirmée une fois, puis clôture effective affichée et nouvelles
+actions retirées. À 390 px : état à venir et contrôles désactivés. Le scénario
+adjacent de brouillon/revue/modification/annulation et réponse définitive
+incorrecte reste vert. Captures carnet, détail et état futur inspectées.
+Les premières tentatives attendaient une inscription malgré un accès personnel
+déjà présent, puis souffraient d’attentes de rendu avant la lecture initiale.
+Le banc distingue explicitement les contextes personnel/public et attend la
+réponse API initiale avant ses assertions de rendu ; délais et assertions métier
+conservés. La date du banc est fixée sans simuler les timers de l’application.
+
+Les contrats OpenAPI E41/E42 sont régénérés hors ligne ; le seul changement
+fonctionnel de schéma est `ResolutionInscriptionAnimationPayload.expire_at`
+nullable et facultatif. Le même composant généré est synchronisé dans les
+instantanés Animation et Commerçant ; égalité des quatre schémas vérifiée.
+Contrats Commerçant : **31/31** ; contrat de publication Animation : **1/1**.
+
+Aucune migration, réparation historique ni configuration supplémentaire.
+Le générateur continue à produire des dates prévues et des états effectifs :
+pas d’impact structurel sur ses données. Aucun essai sur base PostgreSQL,
+appareil physique, animation distante ou notification réelle, et aucun
+déploiement exécuté. Les rapports/captures locaux ne sont pas versionnés.
+
 ## Consultation des alertes de la liste Animation
 
 Correctif du 21 novembre 2026, base Animation `d2e3a50` et Projet `a6a978b`,

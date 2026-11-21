@@ -26,6 +26,14 @@ d'ouverture ou d'expiration, ni les horaires pratiques des commerces, ni les
 instants exportés dans l'agenda. Les composants partagés conservent leur
 présentation avec heure hors de Live, notamment la confirmation Marketplace.
 
+Les fins d’animation constituent des **bornes exclusives** : pour afficher le
+dernier jour inclus, retirer une milliseconde au timestamp avant de déterminer
+le jour de Paris, comme dans Animation et le flyer. Une valeur civile
+`YYYY-MM-DD` désigne déjà ce dernier jour et reste inchangée. Cette présentation
+spécifique ne s’applique pas aux expirations de lots/coffrets, ni aux messages,
+inscriptions et tirages. La fin prévue n’implique pas une clôture effective ;
+voir la [règle Live](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#correctif-du-21-novembre-2026--date-prévue-et-clôture-effective).
+
 ## Portée applicative
 
 - **Pro** : formateurs partagés, historique salarié, PIN, notifications, animations,

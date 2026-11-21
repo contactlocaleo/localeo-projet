@@ -1,5 +1,49 @@
 # E73 — Localeo Live, entrée unique des animations
 
+## Correctif du 21 novembre 2026 — date prévue et clôture effective
+
+La date de fin prévue ne clôture pas une animation. Après son démarrage, une
+animation encore **PUBLIEE** ou **EN_COURS** reste accessible aux inscriptions
+et au jeu jusqu’à sa clôture effective par l’organisateur ou par un traitement
+automatique. Cette décision remplace les anciennes règles qui assimilaient
+`date_fin` / `schedule.endsAt` à une fermeture implicite. Elle s’applique aux
+passeports, chasses, tombolas, vitrines et juste prix.
+
+Le backend reste propriétaire de l’ouverture : début du jeu, clôture engagée
+ou confirmée, annulation, suspension, accès personnel, capacité et fermeture
+d’inscription **explicitement** configurée restent contrôlés. Une fermeture
+`registration.closesAt` absente ne reprend plus implicitement la fin prévue.
+Les inscriptions classiques ouvertes à la publication restent possibles avant
+le début du jeu ; les validations et commandes de jeu attendent leur ouverture.
+Une inscription future ne produit pas de QR de jeu autorisé prématurément.
+
+Les preuves valides enregistrées après la date prévue comptent dans la
+progression et dans la population figée à la clôture. Les mêmes contrôles
+s’appliquent aux commandes Live, scans commerçants et validations PIN. La
+clôture conserve ses verrous, reçus, confirmations et gel transactionnel ;
+aucune réponse à un jeu clôturé ne peut être acceptée par un calcul local.
+La conservation des accès et des participations d’une animation encore ouverte
+ne doit pas être déclenchée par la seule fin prévue passée.
+
+Le détail personnel expose l’état de l’animation, distinct de l’achèvement du
+parcours : **à venir**, **en cours**, **clôturée**, **terminée** ou **annulée**.
+Carnet et fiche affichent une information lorsque l’échéance est passée mais
+que l’animation reste ouverte : **La date de fin prévue est atteinte.
+L’animation reste disponible jusqu’à sa clôture.** Un dernier état en mémoire
+reste signalé comme tel ; cette information ne crée aucune permission.
+
+La fin d’animation est une borne exclusive : le 20 novembre sélectionné dans
+Animation se termine à minuit Paris le 21. L’affichage habitant présente le
+dernier jour inclus, donc **20 novembre**, indépendamment du fuseau de
+l’appareil. Une date civile reste inchangée. Les dates d’inscription, messages,
+tirages, lots et coffrets conservent leur sémantique et leur précision API.
+
+Le contrat de résolution d’inscription accepte `expire_at:null` lorsqu’aucune
+expiration réelle n’est connue ; la fin prévue ne doit pas fabriquer une
+expiration d’accès. Les schémas documentaires sont générés depuis le backend.
+Les preuves propres au correctif sont conservées dans le
+[bilan E73](verification-livraison.md), sans modifier la clôture historique.
+
 ## Correctif du 21 novembre 2026 — parcours commerçants d’un coup d’œil
 
 Les participations à un passeport, une chasse, un jeu des vitrines ou un juste

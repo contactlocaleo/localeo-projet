@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Backend - contrat implemente EPIC 41",
     "description": "OpenAPI complet du backend, dont les parcours Animation locale. Genere hors ligne depuis le code local pour les integrations et les mocks ; cet instantane ne prouve pas son deploiement.",
-    "version": "1.0.0+eeb4791"
+    "version": "1.0.0+9a77a10"
   },
   "paths": {
     "/public/identite-acces/interne/connexion": {
@@ -200887,16 +200887,22 @@
             "title": "Ouverte"
           },
           "expire_at": {
-            "type": "string",
-            "format": "date-time",
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Expire At"
           }
         },
         "type": "object",
         "required": [
           "animation",
-          "ouverte",
-          "expire_at"
+          "ouverte"
         ],
         "title": "ResolutionInscriptionAnimationPayload"
       },
