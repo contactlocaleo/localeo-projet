@@ -1,5 +1,81 @@
 # E73 — Vérification, migration et livraison
 
+## Lisibilité des participations, dates et accès Live — 21 novembre 2026
+
+Correctif demandé sur les interfaces habitant, sans nouvelle epic. Base
+Marketplace `1555849`, Projet `ea37a96`, arbres initialement propres.
+Les [ajustements UX](../../produit/live/principes-ux.md#ajustements-de-lecture-21-novembre-2026)
+et la [présentation des dates Live](../../architecture/transverse/affichage-dates.md#présentation-live-sans-heure-21-novembre-2026)
+portent l'attendu courant.
+
+Causes : le message de fraîcheur vide du suivi réservait `3.2em`, le feedback
+général vide réservait encore `1.6em`, les échanges précédaient les aides et
+informations personnelles et restaient entièrement ouverts. Le retour de
+l'annuaire embarqué venait après les commandes Découvrir. Les CTA des cartes
+avaient une marge automatique sans minimum et les raccourcis de période
+pouvaient revenir à la ligne. Les dates utilisaient encore des formateurs avec
+heure ou les libellés relatifs du serveur ; l'entrée Live du Marketplace était
+accessible depuis le menu et le pied de page, sans accès direct dans le bandeau.
+
+Réalisation : suppression de la hauteur des messages vides, échanges en dernier
+et repliés avec résumé non-lu/brouillon/envoi à vérifier, fil profond ouvert et
+lecture suspendue à la fermeture. Retour avant le titre, espace minimal de
+16 px avant CTA et deux raccourcis côte à côte. Mes lots retire l'explication et
+l'état local verbeux ; l'action de repérage disparaît après stockage réussi,
+avec focus sur un titre persistant. Un formateur Live affiche le seul jour de
+Paris. Les composants partagés reçoivent ce formateur dans Live et conservent
+leur comportement hors Live. Le bandeau Marketplace utilise l'origine Live
+configurée et le carnet existant, avec repli local.
+
+Preuves : `npm run test:security`, **324/324 réussis**, sans skip. Les recettes
+utilisent `node scripts/run-visual-tests.cjs --port 18174`, un build isolé par
+campagne et un worker. Les rapports et captures restent non versionnés dans
+`localeo-marketplace/test-results/visual-runs/` ; chaque reprise référence sa
+précédente avec `--retry-of`.
+
+| Campagne du 21 novembre | Résultat exécuté | Lecture du résultat |
+| --- | --- | --- |
+| `17-08-24-019Z-NJQLev` | 99/107 réussis | Huit écarts : deux anciennes attentes avec heure, deux libellés de tests déjà divergents du code de base, quatre cibles de marque inférieures à 44 px. Tous repris. |
+| `17-16-48-768Z-S0c43C` | 16/19 réussis | Les treize cas Live sélectionnés et le contrôle historique du bandeau passent : dates, espace sous le suivi, lots et quatre moteurs. Deux nouveaux sélecteurs de menu devenaient introuvables après changement de libellé ; le bandeau débordait à 768 px avec texte doublé. Corrigés. |
+| `17-18-52-631Z-ckmgzN` | 5/5 réussis | Géométrie du bandeau conforme aux premières assertions, mais inspection PNG : texte Live dépassant sa cible à 200 %. Finition poursuivie. |
+| `17-20-06-865Z-Z6niX5` | 6/6 réussis | Bouton Live corrigé ; inspection PNG : largeur de marque encore insuffisante à 200 %. Largeur intrinsèque corrigée. |
+| `17-21-11-718Z-kSPOtH` | 3/6 réussis | La nouvelle mesure verticale d'une plage de texte incluait les métriques de la fonte Oswald au-delà de sa boîte de ligne. Mesure ajustée aux bornes horizontales ; tailles et non-chevauchement des cibles restent contrôlés. |
+| `17-22-11-664Z-gGYXFi` | **5/5 réussis**, code 0 | Bandeau final à 320/390/768/1280 px, texte 200 %, bornes du texte Live et de la marque, cibles 44 px, menu, recherche, clavier et origine configurée/repli local. |
+
+Les erreurs intermédiaires sont résolues ; aucun skip ni flaky. Les assertions
+de libellé antérieures sont remises en accord avec les sources de `1555849`
+(« visites à faire valider » et « Voir l’animation »), en conservant les nombres,
+destinations exactes et contrôles d'absence de commande. Les tests de lots
+vérifient toujours stockage refusé, persistance et synchronisation entre onglets.
+Les conversations couvrent repli/brouillon, réponse tardive cachée, lecture du
+bon fil, accès refusé, pagination, conflit, envoi incertain et garde de navigation.
+Les dates sont vérifiées depuis Los Angeles et Tokyo, avec confirmation
+Marketplace conservant ses heures et instants d'agenda inchangés.
+
+Inspection PNG effectuée sur participation et tombola à 390 px, Découvrir avec
+texte doublé, bandeau final à 320 px et à 390 px avec texte doublé. Elle confirme
+la suppression de la réserve vide sous le suivi et les échanges placés en fin,
+repliés ; les actions et textes du bandeau ne se chevauchent plus.
+Lint de `src` et des tests modifiés, `git diff --check` et builds isolés réussis.
+Le lint global n'est pas revendiqué : les anciens dossiers de sorties protégés
+restent exclus du contrôle ciblé. Contrôles documentaires : guides, liens des
+trois sources modifiées et empreintes des sources exportées vérifiés.
+
+Revue indépendante en lecture : aucun défaut concret introduit identifié sur
+les retours, brouillons, lectures cachées, gardes d'envoi, repères de lots et
+consommateurs des dates.
+
+Impacts : seuls Marketplace et Projet sont modifiés. Aucun contrat, champ API,
+permission, règle métier, traitement ni donnée persistée supplémentaire : les
+instants, exports agenda et bornes d'ouverture/expiration restent identiques.
+Aucune migration ni réparation, nouvelle configuration d'exploitation ou
+modification du générateur : la correction concerne les lecteurs et réutilise
+les fixtures existantes. Les horaires pratiques des commerces restent affichés.
+Les tests utilisent des API simulées ; essai habitant, lecteur d'écran, appareil
+Android réel et vérification distante ne sont pas exécutés. Le commit
+Marketplace `8b5043c` est poussé sur `main` ; la documentation accompagne ce
+correctif dans le dépôt Projet. Aucun déploiement lancé par cette intervention.
+
 <a id="workshop-live-20261118"></a>
 ## Workshop Live — réalisation du 18 novembre 2026
 

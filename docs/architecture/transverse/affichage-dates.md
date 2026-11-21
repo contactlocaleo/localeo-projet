@@ -12,6 +12,20 @@ artificielle. Une date absente ou invalide produit le libellé de remplacement d
 parcours. Les timestamps historiques sans offset suivent la convention UTC des
 contrats existants. Les dates avec offset conservent leur instant réel.
 
+## Présentation Live sans heure — 21 novembre 2026
+
+Sur demande utilisateur, **Localeo Live affiche uniquement la date**, y compris
+pour les inscriptions, validations, résultats, messages, actualités, échéances
+de lots et dernières lectures réussies. Le jour reste calculé dans `Europe/Paris` ;
+une date civile reste inchangée. Les libellés relatifs serveur contenant des
+heures ou minutes ne remplacent plus cette date. La mention « heure de Paris »
+n'accompagne pas ces dates seules.
+
+Cette règle de présentation ne modifie ni les instants API, ni les contrôles
+d'ouverture ou d'expiration, ni les horaires pratiques des commerces, ni les
+instants exportés dans l'agenda. Les composants partagés conservent leur
+présentation avec heure hors de Live, notamment la confirmation Marketplace.
+
 ## Portée applicative
 
 - **Pro** : formateurs partagés, historique salarié, PIN, notifications, animations,

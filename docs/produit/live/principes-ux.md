@@ -1,5 +1,32 @@
 # Principes directeurs UX de Localeo Live
 
+## Ajustements de lecture — 21 novembre 2026
+
+Le détail d'une participation rapproche le suivi du parcours du contenu suivant :
+un message de fraîcheur vide ne réserve pas de hauteur. « Mes échanges avec
+l’organisateur » termine le détail et reste replié par défaut. Son résumé garde
+visibles les réponses non lues, brouillons et envois à vérifier. Un lien vers
+une conversation précise ouvre directement le fil. Replier conserve la saisie
+et suspend l'acquittement des réponses cachées ; les gardes d'envoi incertain
+restent actives.
+
+Le retour contextuel de l'annuaire commerçants précède le titre « Découvrir »,
+en haut à gauche, avec la destination et la restauration du parcours conservées.
+Les raccourcis « En ce moment » et « Prochainement » partagent une ligne ; le
+texte agrandi peut se répartir à l'intérieur de chaque raccourci. Les cartes
+gardent au moins 16 px avant « Voir ma participation » ou « Voir l’animation ».
+
+Mes lots conserve « Marquer comme vu » pour un lot nouveau et le retire après
+confirmation locale. Les textes explicatifs de ce repère et « Vu sur cet
+appareil » disparaissent. Les états de retrait ou d'utilisation restent distincts.
+Toutes les dates de Live sont présentées sans heure, selon la
+[convention de dates](../../architecture/transverse/affichage-dates.md#présentation-live-sans-heure-21-novembre-2026).
+
+Le bandeau supérieur du Marketplace donne un accès textuel direct « Live » au
+carnet, sur mobile et ordinateur, en utilisant l'origine Live configurée.
+Recherche, menu, marque et cibles de 44 px restent utilisables ; les actions
+peuvent occuper une seconde ligne aux largeurs les plus étroites.
+
 **Référence de conception et de revue — 9 novembre 2026.** À appliquer à toute
 évolution de l’expérience habitant, sur le domaine Live et ses parcours servis
 depuis une autre origine. Cette référence pérennise l’orientation demandée :
