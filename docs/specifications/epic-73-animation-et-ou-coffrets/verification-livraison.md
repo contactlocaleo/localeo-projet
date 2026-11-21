@@ -1,5 +1,78 @@
 # E73 — Vérification, migration et livraison
 
+## Alertes organisateur : publication et clôture attendue
+
+Correctif du 21 novembre 2026, bases Backend `bfb4f02f`, Animation `343a6e0`
+et Projet `ffeac40`, arbres initialement propres.
+Correctifs Backend `40d5161d` et Animation `292f036`, commités et poussés sur `main`.
+[Comportement attendu](ux-productivite-organisateur.md#listes-animations-participants-et-validations).
+La publication créait une notification `PUBLICATION`, comptée comme alerte
+non lue par la liste, le suivi et le tableau de bord. Aucun signal spécifique
+ne représentait une date de fin atteinte sans clôture.
+
+Le producteur ne crée plus cette confirmation organisateur. Les lectures
+excluent les anciennes confirmations, y compris la cloche et ses compteurs,
+sans suppression de données. La politique de domaine ajoute une alerte
+`CLOTURE_ATTENDUE` unique et stable aux projections d’une animation encore
+ouverte à son échéance effective. Elle prend en compte les surcharges de
+dates, disparaît quand sa condition cesse et ne déclenche aucune écriture.
+Le filtre **Avec alertes** est appliqué avant pagination avec les mêmes faits.
+Une date absente ne devient pas une alerte et reste dans le filtre sans alerte.
+
+La fenêtre affiche l’explication et l’accès à **Publication et clôture**,
+sans commande automatique. Le tableau de bord ne permet pas de masquer cette
+alerte ; un ancien masquage local n’empêche pas son affichage. Les autres
+notifications conservent leur présentation, navigation et acquittement.
+
+Backend : dans un worktree propre `bfb4f02f`, le test de publication enrichi
+de l’assertion d’absence de notification organisateur échoue exactement sur
+la création de `PUBLICATION` (`tmp/alerts-publication-baseline.xml`). Le
+worktree a été retiré après reproduction. Sur le correctif, le lanceur isolé
+`py -3.14 scripts/validation/test_isolated.py` exécute les contrôles
+`tests/architecture`, l’inventaire des classes de domaine, la couverture des
+use cases et 19 fichiers ciblés : **866 tests réussis, aucun échec ni skip**
+(`tmp/alerts-final.xml`, `tmp/alerts-final.log`). Domaine pur, suivi, détail,
+tableau de bord et supervision vérifient le même signal et l’absence d’écriture.
+Les tests SQL SQLite vérifient le filtre avant limite, les compteurs et les
+anciennes publications ; les tests des notifications Live et commerçants
+restent réussis. L’égalité à l’échéance, les fuseaux, les états terminaux,
+l’absence de date et une clôture réelle malgré un statut encore actif sont couverts.
+
+La première sélection comportait 55 réussites et 6 échecs de fixtures : cinq
+doubles de tableau de bord ne fournissaient pas le repository de configuration
+désormais lu ; des UUID de test purement numériques rencontraient l’affinité
+numérique SQLite. Ces fixtures sont corrigées, sans assouplir les assertions.
+Le scénario PostgreSQL ajouté couvre le filtre paginé, les compteurs, une
+surcharge de fin future et le tableau de bord avec alerte synthétique. Il
+reste **non exécuté**, faute de base PostgreSQL jetable configurée pour cette
+recette ; les preuves SQLite ne valident pas les particularités PostgreSQL.
+
+Animation : `npm run typecheck`, `npm run lint` et `npm test` réussissent,
+**397 tests Node, aucun échec ni skip** (`tmp/alerts-node-tests.log`). La nouvelle
+assertion de présentation a d’abord échoué sur le type inconnu, classé
+Information, puis réussit avec **À traiter**. Build PWA complet isolé final
+via `node scripts/build-check.mjs` réussi (`tmp/alerts-build-final.log`), avec
+l’avertissement de taille de bundle supérieur à 500 ko.
+
+`node tests/browser/animation-list-alerts.mjs` réussit à **320/1280 px**, avec
+texte 200 %, instructions de clôture, lien workflow, absence d’acquittement
+inadapté, maintien des alertes commerçants et types inconnus, focus, erreurs,
+reprise et réponse tardive écartée. Capture finale :
+`tmp/animation-list-alerts-pqWmvp`. Le profil `WORKSPACE_CASE=dashboard` de
+`animation-workspace-ux.mjs` réussit **8 parcours** à 320/390/1600 px et texte
+200 %, sans écriture, sur build isolé
+`tmp/alerts-quality-dfde407b69c34006a68abfa3036c76f9` ; résultats/captures
+`tmp/alerts-dashboard-c85c6a78e2994a08a73e8d66a8764085`.
+Captures mobile/bureau inspectées. Les API sont synthétiques.
+
+Impacts : aucune forme de schéma API modifiée (`type` reste une chaîne),
+aucune migration ou réparation de données nécessaire, aucune configuration
+opérateur ou génération de démonstration modifiée. Les annonces habitantes
+Live et les notifications commerçants gardent leurs producteurs distincts.
+Aucune modification de leur interface, des droits de clôture, de l’édition des
+paramètres d’exploitation ou de l’ouverture des participations.
+Pas de déploiement ni de recette connectée sur environnement distant.
+
 ## Fin prévue distincte de la clôture effective
 
 Correctif du 21 novembre 2026, bases Backend `9a77a107`, Marketplace `31b5291`,

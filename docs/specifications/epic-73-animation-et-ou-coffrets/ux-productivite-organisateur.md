@@ -277,17 +277,40 @@ Pas de snapshot inter-pages garanti. L’ancienne route reste inchangée ; le
 frontend migre cette liste et ses archives, sans bascule cachée vers `listAll`.
 
 Correctif du 21 novembre 2026 : le compteur **X alertes** de chaque ligne ouvre
-une fenêtre avec les notifications non lues de cette seule animation, chargées
-à la demande via la lecture existante `/animations/{id}/live`. Chaque notification
+une fenêtre avec les points d’attention et notifications non lues de cette seule animation, chargés
+à la demande via la lecture existante `/animations/{id}/live`. Chaque alerte
 présente son titre, son message, une explication de traitement et un accès à la
 rubrique concernée. Les confirmations ne sont pas présentées comme des incidents ;
 un type ou une destination inconnus proposent la consultation de l’animation.
 La cible historique `commercants` rejoint **Invitations** (`participations`).
 La consultation ne marque rien comme lu ; la fenêtre explique l’usage de la
-cloche pour cela. Fermeture par bouton ou Échap, retour du focus au compteur,
+cloche pour les notifications persistées. Fermeture par bouton ou Échap, retour du focus au compteur,
 recherche et page conservées sans recharger la liste. Chargement, erreur avec
 réessai, refus d’accès et absence d’alerte sont distincts ; changement de contexte
 ou fermeture annulent la lecture et écartent toute réponse tardive.
+
+Complément du 21 novembre 2026 : la publication réussie ne crée aucune alerte
+organisateur. Les anciennes notifications `PUBLICATION` sont exclues des
+compteurs, du filtre **Avec alertes**, du suivi, du tableau de bord et de la
+cloche, sans supprimer leur historique stocké. Les annonces destinées aux
+habitants de Live et les notifications commerçants gardent leur propre diffusion.
+
+Une animation `PUBLIEE` ou `EN_COURS` dont la date de fin effective prévue est
+atteinte, sans clôture effective, présente une unique alerte **Clôture attendue**
+(`CLOTURE_ATTENDUE`). La date prend en compte les paramètres d’exploitation ;
+l’égalité à l’échéance déclenche l’alerte. Le backend partage cette règle entre
+liste, filtre avant pagination, détail, suivi et tableau de bord. Les droits de
+clôture ne conditionnent pas la visibilité du signal ; les commandes conservent
+leurs autorisations et validations. Le lecteur peut consulter **Publication et
+clôture** sans déclencher de commande.
+
+Cette alerte reflète la situation courante : calculée sans écriture lors des
+lectures, elle disparaît après clôture effective, annulation ou report à une
+date future. Elle ne s’acquitte pas depuis la cloche et ne peut pas être masquée
+localement sur le tableau de bord. Elle explique que la participation reste
+disponible jusqu’à la clôture et indique comment consulter les conditions de clôture.
+Une échéance future ou une animation déjà clôturée, terminée, archivée,
+annulée ou encore en préparation ne produit pas ce signal.
 
 Participants non publics et validations réutilisent
 `/lectures-globales/participants` et `/lectures-globales/validations` avec
