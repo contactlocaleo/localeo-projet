@@ -134,6 +134,13 @@ le carnet reste utilisable sans débordement horizontal ; le zoom et le texte
 agrandi restent possibles. L’illustration accompagne la progression sans repousser
 le premier geste utile sous une longue introduction.
 
+**Agencement précisé le 21 novembre 2026.** Utiliser 12 px de marge extérieure
+sous 390 px, puis 16 px, en évitant les encadrements et marges intérieures
+imbriqués. Sur bureau, adapter les colonnes jusqu'à une largeur de 1 240 px ;
+les formulaires restent limités à 640 px. Le texte agrandi peut réorganiser les
+blocs et les compteurs : conserver leurs valeurs et libellés plutôt que forcer
+une ligne au prix d'un débordement ou d'une troncature.
+
 ## LIVE-UX-08 — Préserver le chemin et les repères pendant l’attente
 
 Un objet ouvert depuis Mon carnet revient à Mon carnet, avec son filtre et un
@@ -225,6 +232,57 @@ compteurs zéro et phrases équivalentes ne remplacent pas cette orientation.
 Lecture incomplète, refus et panne restent distincts. Les comportements et
 preuves sont définis par [E73-EVO-LIVE-ICONOGRAPHIE](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#évolution-du-10-novembre-2026--iconographie-et-respiration-e73-evo-live-iconographie).
 
+## LIVE-UX-11 — Composer les fiches et parcours à partir du premier geste mobile
+
+**Orientation du 21 novembre 2026.** Les deux fiches publiques d'animation,
+Agenda et Live, partagent cette hiérarchie : retour ; état et commune ; titre ;
+objectif et dates ; compteurs publics ; conditions essentielles ; action
+principale et récupération d'accès ; « Comment jouer ? » ; lots ; lieux
+partenaires ; informations complémentaires et règlement. Viser 8 px entre
+le retour et le premier contenu, sans ajouter d'espace pour une information
+absente. Placer le visuel officiel après l'action principale ; un visuel absent
+ou défaillant ne réserve pas un grand emplacement vide.
+
+Présenter les participants, gagnants et lots dans une rangée commune de cellules
+équilibrées à taille de texte standard : pictogramme et nombre, puis libellé,
+avec séparateurs discrets. Masquer une mesure inconnue, conserver un zéro connu,
+ne calculer aucun chiffre métier manquant dans l'interface. Après clôture,
+employer « Lots prévus ». Les libellés peuvent occuper deux lignes et la rangée
+se réorganise avec texte agrandi. Les cartes de catalogue gardent leur propre
+présentation compacte ; la fiche ne répète pas les mêmes statistiques ailleurs.
+
+Le badge d'état associe couleur et texte ; dates, tampons, pictogrammes et étapes
+numérotées structurent l'information sans remplacer les consignes. Les conditions
+nécessaires à l'inscription précèdent toujours l'action. Supprimer les raccourcis
+redondants « Les lots » et « Les conditions » : présenter l'aperçu dans sa section,
+avec « Voir tous les lots » si nécessaire, et un volet « Conditions et règlement ».
+Le règlement reste également accessible depuis les conditions essentielles.
+Les actions s'adaptent à la situation réelle : inscription, reprise, choix d'une
+participation ou récupération d'accès ; champs, consentements et erreurs restent
+complets et proches de leur contexte.
+
+Dans Découvrir, réunir titre et actualisation sur une ligne, placer la recherche
+dans l'en-tête des résultats et regrouper commune, catégories et périodes sans
+répétitions. Dans le carnet et les coffrets, rapprocher identité, progression et
+prochaine action ; une dotation inconnue prend une ligne sobre. Dans une
+participation, progression et action utile précèdent les détails secondaires,
+avec un QR accessible et correctement dimensionné même pour un identifiant long.
+Dans Mes lots, compacter état et échéance, mutualiser les explications communes
+et donner un traitement secondaire à l'historique ; les avertissements propres
+à un lot restent visibles. Dans les messages, intégrer l'icône dans l'en-tête
+pour rendre sa largeur au corps ; compacter les filtres et distinguer date,
+animation et organisateur sans retirer le contenu.
+
+La recette compare les rendus avant/après à 320, 390 et 1 280 px, complétés à
+768 px pour les colonnes, puis avec texte à 200 %. Dans le cas nominal à
+390 × 844 px, l'action principale reste visible au-dessus de la navigation
+basse ; les titres longs et petits écrans gardent un défilement utilisable.
+Les mesures absentes, grandes valeurs, dates, visuels défaillants et états
+ouverts, futurs, clôturés ou indisponibles font partie des variantes. Préserver
+chargement, refus, erreurs, saisies, filtres, navigation et restauration du focus.
+La [recette E73](../../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md#optimisation-mobile-live--21-novembre-2026)
+distingue la cible de conception des preuves réellement exécutées.
+
 ## Application aux évolutions futures
 
 ### Première participation et continuité
@@ -236,7 +294,7 @@ s'adresse explicitement à qui a déjà participé. La confirmation nomme l'obje
 acquis et ouvre son prochain geste, puis Mon carnet. Une panne propose une
 reprise compréhensible sans répéter l'inscription.
 
-Le même vert d'action et les mêmes sections accompagnent ces étapes. Le livret
+Le même orange d'action et les mêmes sections accompagnent ces étapes. Le livret
 désigne le passeport, le ticket la tombola, le magasin un commerce ou une visite,
 le parcours la chasse, la boussole Découvrir et l'épingle la localisation.
 Une participation confirmée utilise une coche cerclée et son libellé ; le

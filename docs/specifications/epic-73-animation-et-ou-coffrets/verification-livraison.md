@@ -4557,3 +4557,91 @@ l'harmonisation. Le statut de l'epic et ses autres réserves restent inchangés.
 API, migrations, générateur de démonstration et configuration d'exploitation
 sont sans impact : changements de présentation et de fixture locale seulement.
 Aucun e-mail envoyé, commit, push ou déploiement effectué pendant cette recette.
+
+## Optimisation mobile Live — 21 novembre 2026
+
+Le correctif d'agencement est rattaché à E73 et aux principes
+[LIVE-UX-07, LIVE-UX-10 et LIVE-UX-11](../../produit/live/principes-ux.md#live-ux-11--composer-les-fiches-et-parcours-à-partir-du-premier-geste-mobile).
+Il conserve la signature Marketplace adoptée le même jour et ne modifie ni le
+statut de l'epic, ni les réserves des recettes antérieures.
+
+### Cible approuvée
+
+Les fiches Agenda et Live présentent retour, état/commune, titre, objectif/dates,
+compteurs, conditions essentielles, action principale/récupération, mode d'emploi,
+lots, partenaires puis informations complémentaires/règlement. Le retour se
+rapproche du premier contenu (8 px visés), le visuel officiel suit l'action
+principale, et les emplacements vides et raccourcis répétés vers lots/conditions
+disparaissent. L'aperçu des lots reste directement consultable et les conditions
+essentielles restent visibles avant l'inscription.
+
+Les trois compteurs occupent une rangée à taille de texte standard, avec nombre,
+pictogramme et libellé. Une mesure inconnue est masquée, un zéro connu conservé ;
+« Lots prévus » remplace « Lots à gagner » après clôture. Grandes valeurs et
+texte à 200 % ne sont pas tronqués ; le réagencement reste possible. Aucun chiffre
+absent du contrat public n'est inventé.
+
+Les marges extérieures sont de 12 px sous 390 px puis 16 px ; les colonnes
+s'adaptent jusqu'à 1 240 px et les formulaires restent limités à 640 px.
+Découvrir regroupe ses commandes avant les résultats ; carnet, coffrets et
+participation rapprochent progression et prochaine action ; lots et messages
+réduisent les répétitions et rendent de la largeur au contenu. Les avertissements,
+états et consentements existants restent présents.
+
+### Preuves attendues et impacts
+
+Comparer les rendus avant/après avec données fictives à 320/390/1 280 px et
+vérifier les colonnes à 768 px. Couvrir grandes valeurs, mesures absentes, titres
+longs, visuels absents ou défaillants, animations ouvertes/futures/clôturées et
+indisponibles ; vérifier texte 200 %, cibles de 44 px, contraste, clavier, focus,
+mouvement réduit et navigation basse. Sur la fixture nominale à 390 × 844 px,
+l'action principale précède les contenus secondaires et reste visible au-dessus
+de cette navigation. Vérifier QR longs, saisies conservées, chargement, erreurs,
+refus et restauration du contexte de retour avec les scénarios Playwright isolés.
+
+Applications concernées : présentation publique dans `localeo-marketplace` et
+documentation canonique dans `localeo-projet`. API, schémas, règles métier,
+migrations, configuration d'exploitation et générateur de démonstration sont
+sans impact : les données et décisions de droits restent celles du backend.
+Les accès personnels, QR et consentements conservent leurs contrats. Les e-mails
+et leurs gabarits ne sont pas modifiés par ce correctif.
+
+### Exécution locale et limites
+
+Bases : Marketplace `3ec94f6`, projet `1f682a9`, avec les changements locaux de
+ce correctif. Version applicative enregistrée : `27c8f84`. La révision explicite de FD-04 est dans le
+[correctif d'agencement](localeo-live-entree-unique.md#correctif-du-21-novembre-2026--agencement-mobile-des-parcours-live).
+Les anciennes URL Agenda redirigent vers Live ; le second gabarit est donc
+vérifié sur `/live/animations/:id/inscription` avec inscriptions fermées,
+sans rouvrir cette inscription ni ajouter de route.
+
+Les essais utilisent le lanceur `node scripts/run-visual-tests.cjs --port 18174`,
+avec `--workers=1`, build production isolé et API fictives interceptées. Les
+arguments complets, empreintes des sources, résultats JSON et captures restent
+dans chaque `test-results/visual-runs/<identifiant>/run.json` du dépôt applicatif.
+
+| Contrôle | Résultat et portée |
+| --- | --- |
+| Reproduction avant correction | Sur la base archivée `3ec94f6`, absence de rangée commune confirmée et captures conservées. Fiche Live : runs `2026-11-21T13-04-42-110Z-lwazAY` et `2026-11-21T13-08-34-804Z-DGi37P` (ce dernier dans le dossier baseline). Gabarit inscription fermée : `2026-11-21T13-13-11-863Z-uJBEh8`, 4 échecs attendus à 320/390/768/1280 px. Le passage intermédiaire `13-10-12-031Z-5F26G7` vérifiait encore des alias redirigés ; il ne prouve pas un second écran. |
+| Fiches et protections FD | `2026-11-21T13-14-16-886Z-hDV1C9` : **65/66**. Unique échec : ancienne assertion FD-09 imposant la conservation de la hauteur du flyer défaillant. Elle est remplacée par la disparition du grand emplacement, un repli compact et la stabilité de position/dimensions de l'action, conformément au plan ; ce nouveau scénario réussit dans le passage suivant. Accès précis, refus, états, revalidation, pagination, focus et retours contrôlés. |
+| Autres parcours mobiles | `2026-11-21T13-19-56-800Z-GvYAXA` : **75/76**. Carnet vide/rempli, Découvrir, lots/historique, messages, participation/QR, confirmation/incertitude, marque, contraste et texte agrandi réussis. Unique échec CN08/11 à 320 px : décalage du champ Prénom de **402,47 px**, limite de 400 px conservée. Le sous-titre redondant est retiré lorsque le contexte présente déjà l'objectif ; aucune condition, saisie ou déclaration n'est supprimée. |
+| Reprise formulaire, QR longs et deux gabarits | `2026-11-21T13-26-27-613Z-jCuTme` : **16/16**. CN08/11 réussit à 320/390/1280 px, avec limite formulaire 640 px et champs 16 px ; décalages respectifs **373,67 / 330,28 / 219,89 px**. Identifiant QR long intact, texte doublé de 14 à 28 px, absence de débordement et retour clavier à 320/390 px. Consultation et impression du QR Marketplace vérifiées pour le style partagé. Deux gabarits, marges exactes et texte agrandi réussis. |
+| Recette finale | `2026-11-21T13-28-03-723Z-QRnOdo` : **19/19**. Deux gabarits à 320/390/768/1280 px et texte 200 %, aperçu partagé de trois lots puis développement volontaire à 320/390/1280 px, quantité zéro conservée et quantité inconnue masquée. Inscriptions, déclarations, refus et reprise sans nouvelle demande réussis après le retrait du sous-titre redondant. |
+| Contrats sensibles | `npm run test:security` : **318/318**, aucun échec, annulation ou skip. |
+| Analyse statique | `npx eslint . --ignore-pattern 'output/**' --ignore-pattern 'tmp/**'` : code de sortie 0 ; seuls les dossiers locaux de sorties/travail sont exclus. `git diff --check` : code de sortie 0. |
+
+Les commandes documentaires `py -X utf8 scripts/check_guidance.py` et
+`py -X utf8 scripts/sync_documentation.py --check-sources` vérifient les guides,
+liens et sources exportées. **121 guides, 1 837 liens locaux, zéro erreur ni avertissement et 155 sources
+exportées vérifiées**, codes de sortie 0. Les deux échecs intermédiaires
+ci-dessus ont leur reprise ciblée réussie ; aucune assertion de droit, de
+concurrence, d'identité, de taille tactile ou de limite de 400 px n'a été retirée.
+
+La galerie reproductible est dans `localeo-marketplace/tmp/mobile-layout-20261121/`
+(`index.html`, `sources.json`, `make_gallery.py`), hors versionnement :
+**19 paires** à 320/390/768/1280 px. Chaque paire
+conserve ses chemins, dimensions et empreintes ; une capture ne transforme pas
+un passage en échec en succès. Les données sont fictives. Les tests Chromium ne
+constituent pas une recette sur appareils physiques, clavier virtuel ou lecteur
+d'écran humain. Aucun envoi d'e-mail, migration ni déploiement
+n'est réalisé dans ce correctif. Les statuts de roadmap restent inchangés.

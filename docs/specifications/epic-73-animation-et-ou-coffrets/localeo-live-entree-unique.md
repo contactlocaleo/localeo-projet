@@ -2374,3 +2374,30 @@ servent à la recette. Pro, Animation et outils internes gardent leurs chartes.
 
 Les résultats exécutés et limites sont consignés dans la vérification de
 livraison ; les critères ci-dessus ne constituent pas une preuve à eux seuls.
+
+
+## Correctif du 21 novembre 2026 — agencement mobile des parcours Live
+
+La demande approuvée révise explicitement **E73-FD-04** : les trois mesures
+publiques connues (participants, gagnants, lots) sont regroupées dans une rangée
+compacte sur les détails, plutôt qu'une métrique dominante suivie d'« En chiffres ».
+Un zéro connu reste affiché ; une mesure inconnue reste absente. Après clôture,
+« Lots prévus » décrit la dotation, sans annoncer de disponibilité restante.
+Cette révision ne s'applique pas aux cartes du catalogue, qui restent compactes.
+
+Les compositions FD-01/02/07 et les parcours PM suivent désormais
+[LIVE-UX-07 et LIVE-UX-11](../../produit/live/principes-ux.md#live-ux-11--composer-les-fiches-et-parcours-à-partir-du-premier-geste-mobile) :
+marges 12 px sous 390 px puis 16 px, largeur adaptée jusqu'à 1 240 px,
+formulaires de 640 px maximum, conditions essentielles avant l'action,
+visuel ensuite, aperçu des lots dans sa section et retrait des raccourcis répétés.
+Les grandes valeurs et le texte agrandi peuvent réorganiser la rangée.
+
+Les anciennes URL Agenda conservent leur redirection vers Live. Le gabarit
+public partagé encore utilisé sur l'inscription fermée reçoit les mêmes repères ;
+la recette doit atteindre ce gabarit, sans compter deux URL redirigées comme
+deux écrans distincts. Aucun nouveau chemin ni droit d'inscription n'est créé.
+Les critères d'accès, de fraîcheur, de refus, de retour et de pagination restent
+inchangés ; contrats, migrations et générateur de démonstration sont sans impact.
+
+La [recette locale](verification-livraison.md#optimisation-mobile-live--21-novembre-2026)
+consigne les versions, captures et contrôles exécutés, sans modifier les statuts.
