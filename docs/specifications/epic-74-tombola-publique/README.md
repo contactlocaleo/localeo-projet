@@ -108,6 +108,14 @@ Le retrait dans « Mes communes » enlève le suivi de cet appareil et synchroni
 
 L’e-mail de confirmation d’inscription, les anciennes vérifications, la récupération d’accès et les notifications transactionnelles du jeu restent dans leurs finalités. Le suivi commune n'active ni push, ni préférence organisateur, ni module Communication. Les communications facultatives existantes restent limitées à leur animation, à leurs droits et à leur fenêtre d'envoi.
 
+L’annonce d’une nouvelle tombola est déclenchée à sa **publication**, pas à la
+création du brouillon. Elle utilise le circuit commun des annonces d’animation :
+commune enregistrée dans les préférences de l’installation et catégorie Animations
+active. Dans les réglages Live, **Appliquer mes communes aux messages** permet
+d’enregistrer explicitement ce choix même sans Push ; les catégories refusées
+restent refusées. L’activation des alertes du téléphone reste distincte. Cette
+action concerne les prochaines publications, sans recréer les annonces passées.
+
 ## Préparation de l'implémentation
 
 Les six arbitrages sont résolus. La conception technique et les preuves sont détaillées dans les deux documents liés en tête. L’évolution d’inscription directe porte sur l’identité déclarée, la preuve de qualification, l’e-mail, les lecteurs et la compatibilité des anciens liens. Ses résultats de tests sont distingués des preuves historiques du parcours avec vérification.

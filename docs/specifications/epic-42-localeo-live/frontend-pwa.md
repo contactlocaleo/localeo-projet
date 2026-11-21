@@ -44,6 +44,17 @@ préférences serveur propose « Appliquer mes communes aux alertes ». Cette ac
 explicite réutilise la sauvegarde de préférences, conserve les catégories et
 n’exige pas de désactiver le Push ; aucune synchronisation à la seule lecture.
 
+Correctif du **21 novembre 2026 — annonces sans Push** : un écart confirmé entre
+communes locales et préférences serveur propose aussi
+« Appliquer mes communes aux messages », même sans abonnement Push ou lorsque
+le navigateur refuse les alertes. Sur un appareil déjà abonné, le libellé reste
+« Appliquer mes communes aux alertes ». Cette action explicite réutilise la
+sauvegarde de préférences, conserve les catégories refusées et ne demande aucune
+permission navigateur ; aucune synchronisation à la seule lecture. Les annonces
+des prochaines publications, dont les tombolas publiques, peuvent alors rejoindre
+les messages de Live selon la catégorie Animations. Les annonces passées ne sont
+pas recréées et les alertes du téléphone gardent leur activation distincte.
+
 Les [principes directeurs UX de Localeo Live](../../produit/live/principes-ux.md)
 guident les évolutions frontend. Pour la navigation et le carnet actuels, lire
 [E73-EVO-LIVE-CARNET-BORD et E73-EVO-LIVE-TAMPONS](../epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md) :
