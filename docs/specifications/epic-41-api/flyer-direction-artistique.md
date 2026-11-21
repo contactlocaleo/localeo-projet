@@ -93,7 +93,7 @@ La composition comprend :
   commercants participants` et `Je tente ma chance` ;
 - une mise en avant typographique des lots en bleu encre ;
 - un bloc final contraste, en encre sur le fond papier, comprenant le QR sur blanc, la consigne
-  `Scannez pour participer` et l'URL de secours ;
+  `Scannez pour participer`, sans URL imprimée en clair ;
 - un pied de page indiquant l'organisateur et les mentions obligatoires.
 
 Le visuel principal provient en priorite de l'asset principal valide de l'animation. A defaut, le moteur
@@ -119,7 +119,7 @@ Le gabarit injecte au minimum :
 - etapes publiques synthetisees du modele d'animation ;
 - libelle court des gains ;
 - visuel principal ou photographie de repli validee ;
-- QR et URL publique d'inscription ;
+- QR encodant l'URL publique d'inscription, sans impression de l'adresse ;
 - mentions utiles et reglementaires.
 
 Le renderer consomme les libelles prepares par le domaine : il conserve les dates de la periode en heure
@@ -129,7 +129,7 @@ ne doit pas ajouter un jour a la periode publique.
 
 Les textes longs sont bornes par le gabarit. Un depassement ne reduit jamais une information essentielle
 sous le seuil de lisibilite : le moteur adapte la composition ou retourne une erreur de validation
-actionnable. Le QR et l'URL de secours doivent rester utilisables, y compris avec un titre, une commune ou
+actionnable. Le QR doit rester utilisable, y compris avec un titre, une commune ou
 un nom d'organisateur longs.
 
 Le moteur ne tronque jamais un contenu avec des points de suspension. Un champ impossible a composer
@@ -169,8 +169,7 @@ poids sont verifies sur le flyer de reference ; la taille et la duree reelles de
 - sa taille imprimee est d'au moins 35 mm sur le format A4 ;
 - une zone de silence blanche conforme est preservee autour du code ;
 - le contraste est verifie automatiquement ;
-- l'URL complete, hors protocole, est affichee en solution de secours ; chemin, parametres et fragment
-  sont conserves, avec retour a la ligne si necessaire ;
+- l'URL reste encodée intégralement dans le QR, mais elle n'est pas imprimée en clair sur le PDF ni son aperçu PNG ;
 - un test de lecture sur telephone fait partie de la recette de chaque gabarit.
 
 ## Versionnement et regeneration
@@ -178,6 +177,8 @@ poids sont verifies sur le flyer de reference ; la taille et la duree reelles de
 La charte `LOCALEO_ANIMATION_MARKETPLACE_V4` porte un identifiant distinct de la version fonctionnelle de
 l'animation et de la version documentaire du PDF/PNG. Les documents generes doivent rester rattachables
 a la configuration, a la charte, aux assets et a l'URL d'inscription qui ont servi a leur production.
+La charte courante `LOCALEO_ANIMATION_MARKETPLACE_V6` retire l'URL imprimée ; ce changement rend les
+anciens flyers à régénérer. L'URL reste dans le QR et dans les données de préparation du portail.
 
 La publication genere le flyer final depuis la configuration publiee et la population participante figee.
 Une modification autorisee affectant une information visible, un asset, l'URL ou le QR declenche une
