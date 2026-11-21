@@ -2145,3 +2145,105 @@ autres applications et leurs générateurs n'ont aucun changement à consommer.
 Le rollback du frontend ne requiert pas de reprise de données. Livrer les
 sources Live et la documentation ; contrôler les parcours après déploiement
 sans confondre build local et version servie. Résultats réels à consigner au bilan.
+
+<a id="iconographie-premium"></a>
+
+## Iconographie premium — 21 novembre 2026
+
+Référence : [E73-IP-01 à IP-06](localeo-live-entree-unique.md#e73-evo-live-iconographie-premium).
+
+Le viewport reste de 24 unités ; la révision artistique 02 utilise un dessin
+de 48 unités ramené à cette taille, pour doser séparément contours et gravures.
+`LiveActivityIcon({ name, variant })`
+conserve ses noms historiques et le repli générique ; `variant` vaut `compact`
+par défaut ou `illustrative`. `LiveObjectGlyph` centralise les dessins d’objets ;
+les détails fins ne sont présents que dans la variante illustrative. Les SVG
+restent décoratifs et les libellés/actions portent l’accessibilité.
+
+Le ticket (`ticket`) représente la tombola, le coupon (`coupon`) le bon numérique,
+la carte (`route`) la chasse, la boussole (`compass`) Découvrir. Le passeport
+(`passport`), le carnet (`notebook`), le cadeau (`gift`) et le coffret (`box`)
+ont des silhouettes indépendantes. La vignette (`sticker`) sert de repère
+neutre pour une entrée de collection ou récupération sans type connu ;
+`stamp` expose la silhouette de l’empreinte pour la famille de référence.
+
+`LiveJourneyStamps` conserve la projection et ses conditions de rendu. Les
+couleurs des glyphes se déclinent en encre verte seulement dans un tampon
+validé ; le cercle vide du carnet ne reçoit aucun symbole. Les dimensions
+compactes 42 px et normales 64 px sont conservées. Les icônes de navigation
+restent à 22–24 px, les objets utilisent les dimensions de leurs conteneurs
+existants, jusqu’à 44 px ; les commandes conservent leurs cibles tactiles.
+
+`scripts/render-live-iconography.cjs`, dans le dépôt Marketplace, génère une
+planche HTML depuis les composants via Vite SSR et une galerie de captures
+appariées par scénario. Aucun endpoint de démonstration n’est ajouté à Live,
+aucune dépendance externe ni image distante. Les sorties restent dans le dépôt
+applicatif, hors versionnement. La recette utilise le lanceur visuel isolé,
+avec API simulées et captures dans le répertoire propre à chaque tentative.
+
+Aucune interface API publique ne change. L’ajout de `variant` est compatible
+avec les consommateurs existants. Le changement de l’attendu `ticket` vers
+`coupon` est limité aux tests des bons numériques, conformément à IP-01 ;
+les assertions de droits, de statut et de retrait sont conservées.
+
+**Révision artistique 02, 21 novembre :** demande utilisateur de rendre la
+planche encore plus premium. Les dessins gagnent des tranches de papier,
+plans pliés, couvertures encre et gravures fines. Le relief est vectoriel,
+sans filtre, texture bitmap ni mouvement. Les nuances claires et ombrées
+restent dans la palette papier/encre/orange ; dans un tampon validé, elles
+héritent de la palette de validation. Les états vides restent vides.
+
+La planche présente les dix objets agrandis, puis leurs variantes réelles à
+22/24/36/44 px. DM Sans et Oswald sont embarquées depuis les dépendances locales
+dans l’HTML autonome ; aucune police distante. Les empreintes de validation
+ont une section distincte. La planche précédente est conservée comme référence
+locale `planche-v1.html` / `planche-v1.png`, sans devenir une seconde spécification.
+
+**Direction retenue ensuite, 21 novembre : Papier doux.** L'utilisateur choisit
+la variante aux géométries arrondies, papier crème, abricot et encre adoucie.
+Sa finition 02 ajoute des détails de fabrication tonaux (coutures, chants,
+plis, gravures) aux formats illustratifs ; les compacts restent épurés.
+Le générateur Marketplace `scripts/render-live-iconography-soft.cjs` conserve
+la planche de travail et les comparaisons. À ce stade, le choix et les finitions
+concernent la direction artistique ; leur intégration aux composants Live reste
+à réaliser et à recetter en situation. Aucun état métier n'est créé par le dessin.
+
+**Déclinaison complémentaire Papier doux, 21 novembre :** la planche couvre
+aussi commerces, personnes, messages, accès, états et commandes. Les dessins
+d'objets reprennent les finitions illustratives ; flèches, fermeture, menu et
+confirmation gardent des tracés simples. Le générateur Marketplace
+`scripts/render-live-iconography-support.cjs` et la famille
+`scripts/live-soft-support.cjs` produisent 43 dessins complémentaires, dont la
+clé signalée comme réserve sans consommateur actuel. L'inventaire couvre aussi
+les SVG inline, les symboles typographiques et les repères du fil issus de
+`MarketplaceCueIcon`. Leurs usages et sources figurent dans l'export local
+`inventaire-complementaire.json` ; les alias boutique/commerce et animation/
+calendrier réutilisent les mêmes dessins. Le vrai QR et l'anneau de progression
+ne sont pas des illustrations à remplacer. L'étoile d'attribution ne présume pas
+de la disponibilité actuelle d'un lot. Cette extension reste une planche de
+conception, avec intégration et recette des parcours encore à réaliser.
+
+**Intégration autorisée ensuite, 21 novembre :** les 53 dessins de Papier doux
+sont centralisés dans `src/components/PaperSoftGlyph.jsx`, source applicative
+commune aux adaptateurs `LiveActivityIcon` et `MarketplaceCueIcon`. Les planches
+lisent ces composants via SSR Vite ; les anciens générateurs de proposition ne
+maintiennent plus une copie des tracés. La grille de dessin 48 est ramenée au
+viewport 24, avec finitions réservées à `illustrative` et palette contextualisable.
+Les tampons confirmés héritent de la couleur de validation ; leurs emplacements
+vides restent sans symbole. Les couleurs système restent utilisables en mode
+contraste forcé. Un nom inconnu se replie sur une information neutre.
+
+Les SVG et caractères décoratifs du Live (menu, installation, actualisation,
+flèches, coches, fermeture) utilisent la famille. Les libellés visibles et les
+noms accessibles conservent les actions ; les glyphes décoratifs sont masqués
+aux lecteurs d'écran. Les assertions qui attendaient un caractère de coche ou
+flèche portent sur le libellé exposé et, selon le scénario, le symbole SVG.
+Les métriques de progression et vrais QR restent inchangés.
+
+Marketplace conserve son adaptateur : commerce/lieu/animation correspondent à
+`store`/`pin`/`flag`, coffret à `box`, cadeau à `gift`, bon à `coupon`, date à
+`calendar`. Les repères simples de paiement sécurisé et d'expérience, absents de
+la planche, restent coordonnés sans ajout d'illustration. La clé est désormais
+utilisée pour le lien personnel de reprise ; l'étoile reste disponible mais les
+gains affichent leur nature réelle. Aucun accès, API, donnée, migration, réglage
+d'exploitation ou générateur de démonstration n'est modifié par cette intégration.

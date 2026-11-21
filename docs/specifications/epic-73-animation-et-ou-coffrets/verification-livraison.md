@@ -4645,3 +4645,229 @@ un passage en échec en succès. Les données sont fictives. Les tests Chromium 
 constituent pas une recette sur appareils physiques, clavier virtuel ou lecteur
 d'écran humain. Aucun envoi d'e-mail, migration ni déploiement
 n'est réalisé dans ce correctif. Les statuts de roadmap restent inchangés.
+
+<a id="iconographie-premium-21-novembre-2026"></a>
+
+## Iconographie premium — 21 novembre 2026
+
+Référence : **E73-EVO-LIVE-ICONOGRAPHIE-PREMIUM**,
+[critères IP-01 à IP-06](localeo-live-entree-unique.md#e73-evo-live-iconographie-premium).
+Bases avant modification : Marketplace `27c8f84`, projet `df5cafa`, arbres propres.
+Deux dépôts modifiés : Marketplace et projet. Aucun commit, push ou déploiement.
+
+### Réalisation et traçabilité
+
+| Critères | Réalisation et preuves |
+| --- | --- |
+| IP-01/02 | `LiveObjectGlyph`, `LiveActivityIcon` et CSS communs : dix objets vectoriels, deux détails optiques, compatibilité des appels existants. Consommateurs du carnet, catalogue, lots, récupération et participation ; coupon séparé dans `liveRewards.mjs`. Les utilitaires/messages utilisent la famille commune sans nouvelle action. |
+| IP-03 | `LiveJourneyStamps` : contours vides non validés, double cerclage et symbole uniquement sur preuve validée ; projection `journeyStampProjection` inchangée. Les tampons ronds et dentelés sont représentés dans la planche. Onze tests Node de projection, carnet et accès passent ; aucune qualification, remise ni progression recalculée. |
+| IP-04 | Recette Chromium à 320/390/1280 px, texte 200 %, focus, noms accessibles, cibles 44 px et contraste des contours. Réduction des mouvements activée ; aucun nouveau mouvement ajouté. |
+| IP-05 | Planche et galerie générées par `scripts/render-live-iconography.cjs` dans le dépôt applicatif. Sorties ignorées : `output/live-iconography-premium/`. Les captures avant/après correspondent aux mêmes scénarios simulés. |
+| IP-06 | Suites `live-iconography-discovery`, `live-iconography-lots`, `live-maquettes-habitant` et nouvelle suite `live-iconography-premium` : refus, attente, erreur, états inconnus, retours et présentation volontaire du bon conservés. Les trois attendus ticket→coupon des bons changent suivant IP-01 ; les assertions de droits et d’états restent intactes. |
+
+### Campagnes locales
+
+Lanceur canonique, port 8186, un worker, build production isolé, aucune API réelle.
+Les `run.json`, résultats JSON et captures sont conservés dans
+`localeo-marketplace/test-results/visual-runs/`.
+
+- Référence avant : `2026-11-21T13-46-29-834Z-2Ebp3x`, **37/37 réussis**.
+- Première recette : `2026-11-21T13-51-39-896Z-Uc1hDW`, **41/41 réussis**.
+  L’inspection des captures a ensuite précisé deux représentations : retirer
+  les symboles des tampons dentelés non validés, comme pour les ronds ; utiliser
+  le repère de participation pour « Mon inscription », qui concerne plusieurs moteurs.
+- Recette finale : `2026-11-21T13-55-02-879Z-LzhLsZ`, **41/41 réussis**,
+  zéro échec, skip ou interruption (code 0). Build production isolé réussi.
+  La galerie comporte **25 paires avant/après**, complétées par la planche
+  et les captures des trois familles dans Découvrir à 320/390/1280 px.
+
+`node --test tests/security/live-journey-stamps.test.cjs tests/security/live-audit-carnet.test.cjs`
+réussit : **11 tests**, zéro échec, annulation ou skip (code 0).
+Le lint global initial échoue avec `EPERM` sur des répertoires de sorties locaux
+`output/bum-politique/pytest-approval-1` puis `tmp/address-architecture`.
+La commande `npm run lint -- --ignore-pattern 'output/**' --ignore-pattern 'tmp/**'`
+contrôle les sources en excluant ces sorties, sans changer les règles ESLint.
+Elle réussit avec le code 0 ; `git diff --check` réussit dans les deux dépôts.
+Les contrôles documentaires `py -X utf8 scripts/check_guidance.py` et
+`py -X utf8 scripts/sync_documentation.py --check-sources` réussissent avec
+le code 0 : **121 guides, 1 838 liens, zéro erreur ni avertissement et
+155 documents exportés vérifiés**.
+
+### Revue et limites
+
+Inspection directe des captures par l’agent principal : planche aux tailles
+22/24/36/44 px, tampons 42/64 px, Découvrir à 390/1280 px, carnet à 390 px,
+confirmation à 320 px et lots à 320 px. Les paires d’objets restent distinctes,
+les actions nommées et les validations séparées des emplacements à compléter.
+Une revue indépendante sur extrait transmis a ciblé les formes proches,
+le fallback vignette et l’héritage des couleurs ; le sous-agent n’avait pas
+d’accès fichiers/captures. Elle ne constitue donc pas une revue indépendante
+du rendu. Aucun essai habitant, appareil physique ou lecteur d’écran humain.
+
+API, domaine, données, permissions, migrations, configuration et générateur
+sans impact : les SVG et leur présentation sont seuls modifiés. Aucun envoi
+ni appel d’écriture externe. Les règles de progression, retrait, fraîcheur,
+liens personnels, formulaire et navigation restent celles des parcours existants.
+Les statuts de roadmap et réserves historiques sont conservés.
+
+### Révision artistique 02 — planche et dessins affinés
+
+Nouvelle demande utilisateur du 21 novembre : rendre la planche encore plus
+premium. Les dix dessins sont retravaillés : couvertures encre, épaisseur des
+feuillets, pli des rubans, gravures et relief par plans vectoriels. Les silhouettes
+et noms des objets restent stables. Les tracés illustratifs utilisent 48 unités
+ramenées au viewport de 24 ; les détails compacts restent simplifiés.
+
+La planche présente désormais chaque objet en grand, puis à 22/24/36/44 px,
+avec les polices locales DM Sans/Oswald et une section distincte pour les
+empreintes. `planche-v1.html` et `planche-v1.png` conservent la première version
+locale ; `planche.html` et `planche.png` présentent la révision courante.
+Le contraste des tampons reste gouverné par les états existants, avec héritage
+de leur palette pour les nouveaux plans clairs/ombrés. Aucun nouvel état, appel
+API, changement de libellé métier ou de taille de commande.
+
+Inspection directe de la planche à 1320 et 320 px et du catalogue à 390 px :
+aucun débordement mobile, familles reconnaissables à petite taille, relief
+visible dans les vues agrandies. Le lint des sources hors sorties `output/`
+et `tmp/` réussit (code 0), ainsi que les contrôles documentaires (121 guides,
+1 838 liens, zéro erreur/avertissement, 155 sources). Cette appréciation du rendu
+ne remplace pas un essai habitant ; la validation reste locale, sans déploiement.
+
+La campagne `2026-11-21T14-05-47-876Z-RY8YOC` réussit : **41/41 tests visuels**,
+zéro échec ou skip, code 0. Même lanceur isolé et mêmes quatre suites que la
+recette précédente, avec les assertions de planche adaptées aux dix dessins
+agrandis supplémentaires. La galerie courante est régénérée en **25 paires**
+entre la référence initiale `13-46-29-834Z-2Ebp3x` et cette révision 02.
+Les sorties de chaque campagne antérieure restent dans leur dossier propre.
+
+### Proposition B — Papier doux, 21 novembre 2026
+
+Une seconde direction est proposée à la demande utilisateur : géométries plus
+arrondies, crème et abricot, encre adoucie, détails simplifiés. Les dix objets
+sont redessinés dans un générateur de proposition Marketplace distinct,
+`scripts/render-live-iconography-soft.cjs`. Il produit la planche dans
+`output/live-iconography-premium/variante-douce/`, avec tailles 22/24/36/44 px,
+comparaisons A/B et référence complète A autonome. Cette proposition ne remplace
+pas les composants applicatifs et n'emporte aucune décision d'adoption.
+
+Preuves locales : rendu inspecté en grand et à 320 px ; aucun débordement à
+320, 390 et 1280 px, ni à 320 px avec les tailles de texte doublées ; lien de
+comparaison avec focus visible et hauteur minimale de 44 px ; lint ciblé du
+générateur réussi. Le tampon représenté reste vide et sans signe de validation.
+Ces contrôles portent sur la planche, pas sur l'intégration de B aux parcours.
+Les tests applicatifs de la révision 02 restent les dernières preuves de l'UI
+intégrée ; aucune nouvelle campagne applicative n'est revendiquée pour B.
+La reconnaissance par les habitants et le choix artistique restent à évaluer.
+API, règles métier, données, migrations, configuration et générateur de
+démonstration sans impact : cette étape ne produit qu'une proposition visuelle.
+
+### Papier doux retenu — finition 02, 21 novembre 2026
+
+L'utilisateur préfère explicitement Papier doux et demande davantage de détails.
+La planche est affinée sur les dix objets : coutures des livrets, chants du papier,
+nervures de la vignette, topographie de la carte, plis du ruban, graduations et
+gravures. Ces finitions tonales sont réservées aux versions illustratives ; les
+dessins compacts restent identiques. Le tampon demeure vide, sans preuve ajoutée.
+Le choix artistique est acté ; cette itération porte sur la planche et ne modifie
+pas encore les composants de l'application.
+
+Le générateur `scripts/render-live-iconography-soft.cjs` produit la planche
+actualisée et trois comparaisons premier dessin / finition affinée. Les fichiers
+locaux `planche-v1.html` et `planche-v1.png` conservent la proposition précédente ;
+`details.png` montre les finitions en grand. Inspection visuelle du PNG complet
+et de la section détails réalisée. Contrôles de débordement réussis à 320, 390,
+1280 px et à 320 px avec texte doublé ; absence de finitions dans les SVG compacts
+vérifiée. La reconnaissance par des habitants reste non testée. Aucun changement
+d'API, données, règle métier, migration ou générateur de démonstration.
+
+### Papier doux — famille complémentaire, 21 novembre 2026
+
+Inventaire en lecture des usages Live, complété par une revue indépendante des
+consommateurs et des symboles inline. La proposition ajoute 43 dessins (42
+usages et une clé en réserve), répartis en lieux/personnes, messages/accès,
+états et commandes. Les dix objets précédents restent la référence artistique.
+Les symboles QR illustratifs ne remplacent pas les codes exploitables ; les
+indicateurs de progression restent gouvernés par leurs données.
+
+Sorties locales Marketplace dans `output/live-iconography-premium/variante-douce/` :
+`autres-icones.html`, PNG complet et quatre PNG par famille, inventaire JSON avec
+source d'usage et 86 SVG autonomes (compact/illustratif). Une section montre les
+présentations normale, active, désactivée, confirmée, erreur, inconnue et vide.
+Inspection visuelle des quatre familles réalisée. Aucun débordement à 320, 390
+et 1280 px, ni à 320 px avec texte doublé. Lint ciblé des deux nouveaux scripts
+réussi. Les tests des parcours applicatifs ne sont pas relancés : aucune source
+de production n'est modifiée dans cette étape. L'intégration de Papier doux et
+la reconnaissance par des habitants ne sont pas présentées comme acquises.
+Sans impact API, métier, données, migrations, ops ou génération de démonstration :
+seuls les outils de proposition graphique et leur suivi documentaire évoluent.
+
+Les captures finales sont dans `captures-complementaires/` et le compte rendu
+dans `controle-complementaire.json` : 43 entrées, 86 SVG, zéro finition fine en
+compact, focus visible et liens de navigation de 44 px minimum. Une tentative
+d'écrasement du PNG initial a échoué en écriture locale (`UNKNOWN`) ; le rendu
+et tous les contrôles ont ensuite réussi dans ce dossier distinct (code 0).
+Contrôles documentaires réussis : 121 guides, 1 838 liens, aucune erreur ni
+avertissement ; 155 sources exportées vérifiées.
+
+### Intégration Papier doux dans Live et Marketplace — 21 novembre 2026
+
+Demande d'intégration autorisée après choix de la planche. Les 53 SVG passent
+dans `PaperSoftGlyph`, commun au Live et aux repères pertinents du Marketplace.
+Les sorties de recette de cette étape sont dans
+`output/live-iconography-premium/integration-papier-doux/`. Les générateurs
+de planches lisent désormais les composants réels ; les variantes de proposition
+précédentes restent des preuves historiques, sans copie active des géométries.
+
+Conformité visuelle : les planches sont produites depuis les composants intégrés.
+Inspection des objets aux tailles 22/24/36/44 px, de Découvrir à 320 px, du carnet
+et de la visite confirmée à 390 px. Une revue indépendante a également inspecté
+la fiche publique, les lots à 320 px (dont les états vide, inconnu, expiré,
+annulé et refusé), la récupération à 390 px et les pages Marketplace de
+recherche et d'accueil. Aucun écart visuel actionnable observé sur ces captures.
+Les paires tombola/bon, passeport/carnet et cadeau/coffret restent distinctes.
+`comparatif.html` contient 33 paires avant/après des mêmes scénarios simulés,
+avec la campagne précédente `2026-11-21T14-05-47-876Z-RY8YOC` comme référence.
+
+Tests réussis : lint global hors sorties générées `output/` et `tmp/` (code 0),
+11 tests Node accès/carnet/projection des tampons, aucun skip. La campagne isolée
+`2026-11-21T14-31-50-793Z-9yU4AJ` termine à **103 réussis / 131**, zéro skip.
+Les quatre suites iconographie/découverte/lots/maquettes passent leurs **41
+scénarios** ; les **44 scénarios** de fiche publique et les **12 scénarios**
+Marketplace de découverte passent également. Les preuves couvrent notamment
+320/390/1280 px, texte à 200 %, contraste des contours, navigation nommée,
+focus, cibles de navigation de 44 px, progression inconnue et refus de lecture.
+
+Échecs et limites séparés : quatre attentes historiques de ville visaient encore
+`/animations` ; elles sont corrigées vers la destination publique canonique
+`/live/decouvrir`. Une assertion ajoutée à la fiche coffret attendait à tort un
+coupon absent de sa fixture ; elle est remplacée par la vérification du calendrier
+effectivement présent. Une autre exécution coffret a échoué sur délai de lecture.
+Les 22 autres échecs appartiennent à `live-detail-installation`,
+`live-habitant-audit-fixes` et `live-home-accesses`. La lecture du HEAD confirme
+notamment que leurs attentes d'entrée sur Mon carnet, d'ancienne action primaire
+et d'ancienne fiche personnelle précèdent cette refonte ; ces tests restent
+signalés en échec et ne sont ni ignorés ni affaiblis.
+La navigation « Mes communes » et l'ancien descriptif des lots sont également
+absents du HEAD. Le réessai après première lecture refusée attend à tort une
+actualisation au lieu du chargement initial. En revanche, l'échec du scénario
+de liaison de 51 anciens accès (attente de 49 succès au premier lot) reste
+**non diagnostiqué** : son calcul existe toujours dans le hook inchangé ; il
+n'est pas présenté comme une attente obsolète ni comme une preuve de conformité.
+
+Reprise ciblée terminée : `2026-11-21T14-48-38-052Z-uDa4KV`, port 8186,
+**27/27 scénarios réussis**, zéro skip, code 0 : ville/commerçant, coffret,
+iconographie, menu d'installation et navigation actuelle du carnet. Les six
+échecs Marketplace de la première campagne ne se reproduisent plus après les
+corrections d'attentes décrites ci-dessus, sans augmentation de délai. L'aide
+d'installation conserve le focus, Escape, les commandes de fermeture de 44 px
+et le comportement iOS/Android/bureau. La fiche coffret à 390 px a été inspectée.
+Lint final réussi (code 0). Aucun serveur ou build exécuté en parallèle.
+Contrôles documentaires finaux : 121 guides, 1 838 liens, aucune erreur ni
+avertissement ; 155 sources exportées vérifiées.
+
+La reconnaissance par de vrais habitants et une recette avec lecteur d'écran
+ne sont pas acquises. Aucun changement d'API, règle métier, accès, données,
+migration, configuration ou générateur de démonstration : les dessins, leurs
+consommateurs visuels et les assertions de présentation évoluent seuls.
+Les deux dépôts modifiés sont `localeo-marketplace` et `localeo-projet`.
+Aucun commit, push ou déploiement ; la clôture historique d'E73 reste intacte.

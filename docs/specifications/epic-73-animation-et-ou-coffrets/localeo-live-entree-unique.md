@@ -2401,3 +2401,42 @@ inchangés ; contrats, migrations et générateur de démonstration sont sans im
 
 La [recette locale](verification-livraison.md#optimisation-mobile-live--21-novembre-2026)
 consigne les versions, captures et contrôles exécutés, sans modifier les statuts.
+
+<a id="e73-evo-live-iconographie-premium"></a>
+
+## Évolution du 21 novembre 2026 — iconographie premium
+
+**E73-EVO-LIVE-ICONOGRAPHIE-PREMIUM**, demandée et autorisée pour une refonte
+complète. La qualité illustrative devient un critère de recette majeur,
+conformément à [LIVE-UX-12](../../produit/live/principes-ux.md#live-ux-12--une-iconographie-illustrative-et-distinctive).
+Cette décision complète IA-D01/IA-08 et remplace la représentation du bon
+numérique par un ticket dans IA-01 : le bon possède désormais un coupon distinct.
+Les anciennes preuves et la clôture d’E73 restent historiques.
+
+**Choix final et intégration autorisée, 21 novembre : Papier doux, finition 02.**
+La famille aux coins adoucis, crème/abricot et détails de fabrication est retenue
+pour Live. Elle est aussi partagée avec les repères pertinents du Marketplace :
+commerces, lieux, coffrets, cadeaux, bons numériques, calendrier, recherche,
+actualités et suivi. Les logos, photographies, graphismes éditoriaux et QR réels
+gardent leur rôle. Le périmètre de recette IP-02/IP-04/IP-05 comprend désormais
+les consommateurs Marketplace concernés (navigation, découverte, ville,
+commerçant, fiche coffret), sans extension des règles métier.
+
+| Critère | Comportement observable attendu |
+| --- | --- |
+| **E73-IP-01** | Famille SVG locale, papier/encre/orange, silhouettes distinctes : ticket à souche, passeport, carte de chasse, vignette au coin décollé, tampon, cadeau, carnet, boussole, coffret et coupon. Les paires tombola/bon, passeport/carnet, lot/coffret et chasse/découverte restent distinctes à petite taille. |
+| **E73-IP-02** | Versions compactes et illustratives d’une même famille, centralisées et intégrées aux écrans Live : navigation, carnet, découverte, fiches, participations, lots, récupération et états vides. Les utilitaires/messages restent sobres et cohérents. Les flyers ne sont pas remplacés. |
+| **E73-IP-03** | Tampons encrés et double cerclage pour les validations confirmées, empreintes à compléter sans coche ni couleur de succès. Compteurs, qualification, gain, résultat inconnu et prochains lieux de chasse restent gouvernés par les projections existantes. |
+| **E73-IP-04** | Navigation nommée, SVG décoratifs cachés aux lecteurs d’écran, focus visible, cibles essentielles ≥44 px, absence de débordement à 320/390/1280 px et texte à 200 %. Aucun mouvement nouveau ; contours lisibles indépendamment de l’aplat orange. |
+| **E73-IP-05** | Planche générée depuis les composants applicatifs aux tailles d’usage et comparatifs avant/après sur les mêmes scénarios. Inspection visuelle des captures distincte des assertions automatiques ; aucune préférence habitant prétendument mesurée. |
+| **E73-IP-06** | Tests ciblés découverte, lots et parcours habitant : état actif, attente, erreur, refus, inconnu, vide, désactivation et retours conservés. Un dessin ne confirme ni inscription, ni visite, ni gain, ni remise. |
+
+Dépôts affectés : Marketplace (SVG, consommateurs, tests, générateur de planche)
+et projet (principes, spécification, conception et suivi). Les interfaces partagées
+servant un parcours Live utilisent la même famille. API, schémas, droits,
+persistance, migrations, configuration ops et générateur de démonstration sont
+sans impact : seuls les dessins et leur présentation changent ; fixtures existantes
+réutilisées. Backend, Pro et Animation ne nécessitent aucune modification.
+
+[Conception](localeo-live-adhesion-conception.md#iconographie-premium)
+— [réalisation et preuves](verification-livraison.md#iconographie-premium-21-novembre-2026).

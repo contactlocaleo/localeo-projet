@@ -136,6 +136,13 @@ de l'organisation dans sa commune active, quatre axes et tendances sans note
 globale. [Périmètre et suivi](terminees/epic-73-animation-et-ou-coffrets-backlog.md#évolution-du-11-novembre-2026--dynamisme-de-la-commune).
 Clôture historique E73 et compteurs inchangés.
 
+**21 novembre 2026 — E73-EVO-LIVE-ICONOGRAPHIE-PREMIUM** : famille vectorielle
+Papier doux et variantes compactes intégrées localement à Live et aux repères
+communs du Marketplace, avec coupon distinct du ticket de tombola.
+Qualité visuelle élevée au rang de critère majeur.
+[Critères et suivi](terminees/epic-73-animation-et-ou-coffrets-backlog.md#évolution-du-21-novembre-2026--iconographie-premium).
+Preuves locales et limites au bilan ; clôture historique et compteurs inchangés.
+
 **10 novembre 2026 — E73-EVO-LIVE-ICONOGRAPHIE** : dix recommandations de
 l'audit iconographie/espacement spécifiées et implémentées localement dans Live.
 [Critères, conception et suivi](terminees/epic-73-animation-et-ou-coffrets-backlog.md#évolution-du-10-novembre-2026--iconographie-et-respiration).

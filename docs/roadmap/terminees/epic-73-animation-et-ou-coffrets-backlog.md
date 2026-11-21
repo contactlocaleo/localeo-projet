@@ -1495,3 +1495,15 @@ l'état de l'epic sont conservés. La réalisation et ses limites figurent dans 
 ## Passage à la spécification
 
 La cible est structurée en **38 US, 63 critères et neuf lots de travail**, avec **18 groupes d’arbitrages résolus et aucun ouvert recensé**. La [spécification détaillée V1](../../specifications/epic-73-animation-et-ou-coffrets/README.md) relie les US aux parcours, propriétaires de domaine, producteurs, consommateurs et contrats cibles ; sa [matrice de vérification](../../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md) couvre les 63 critères, les migrations, la démonstration, la conservation et la livraison progressive. Les matrices produit/module/souscription/périmètre/rôle, onboarding/import, dotation/gain, cycle des bons et communication sont précisées dans le dossier. Les tests métier restent prévus, non exécutés à cette phase ; les objectifs de reprise RPO 4 heures/RTO 8 heures restent à démontrer sur l’hébergement. Les mentions « à spécifier » des décisions et constats de cadrage ci-dessus datent de leur recueil ; ce dossier constitue leur développement canonique, sans duplication par application. Toute découverte bloquante lors de l’implémentation doit être explicitée sans modifier implicitement les arbitrages acquis.
+
+## Évolution du 21 novembre 2026 — iconographie premium
+
+**E73-EVO-LIVE-ICONOGRAPHIE-PREMIUM** : refonte vectorielle demandée sur toute
+l’UI Live. [Critères E73-IP-01 à IP-06](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#e73-evo-live-iconographie-premium),
+[conception](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-adhesion-conception.md#iconographie-premium)
+et [preuves locales](../../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md#iconographie-premium-21-novembre-2026).
+Famille illustrative papier/encre/orange, variantes compactes et détaillées,
+bon numérique distinct de la tombola et tampons fidèles aux validations réelles.
+Réalisation locale dans Marketplace ; recette et limites consignées au bilan.
+La clôture historique d’E73, ses réserves et les compteurs restent inchangés.
+Cette évolution n’atteste ni déploiement ni reconnaissance testée auprès d’habitants.

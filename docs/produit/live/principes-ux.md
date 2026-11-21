@@ -349,3 +349,41 @@ Ces principes concernent la présentation et ses preuves. Les règles de validat
 les permissions, les contrats API et les états produit gardent leurs propriétaires
 et leurs spécifications. Leur inscription ici n’exige aucune migration, activation
 ops ou modification du générateur de démonstration.
+
+## LIVE-UX-12 — Une iconographie illustrative et distinctive
+
+**Décision du 21 novembre 2026 — E73-EVO-LIVE-ICONOGRAPHIE-PREMIUM.**
+L’iconographie est une exigence majeure de qualité de Live. Une simple
+substitution de pictogrammes génériques ne suffit pas : les objets doivent
+être reconnaissables, soignés et cohérents aux tailles réellement utilisées.
+
+La famille vectorielle locale reprend papier, encre et orange de la signature
+Marketplace. Le vert reste réservé aux validations réussies. Deux niveaux de
+détail partagent une même silhouette : compact pour navigation et commandes,
+illustratif pour objets et états vides. Les libellés des destinations et gestes
+essentiels restent visibles ; aucune information ne dépend de la couleur seule.
+
+Ticket à souche pour tombola, livret pour passeport, carte pliée pour chasse,
+vignette au coin décollé pour collection, empreinte encrée pour tampon,
+cadeau avec ruban pour Mes lots, carnet relié pour Mon carnet, boussole pour
+Découvrir, boîte à couvercle pour coffret et coupon vertical pour bon numérique.
+Le coupon ne reprend pas le ticket de tombola, le carnet ne reprend pas le
+passeport, le coffret reste distinct du cadeau. Les repères génériques ne
+prétendent pas connaître un type d’animation absent.
+
+Les tampons pleins représentent uniquement une validation confirmée ; les
+empreintes à compléter et les états inconnus restent distincts. Les flyers
+personnalisés, textes, droits et actions gardent leur rôle. La refonte
+n’ajoute ni mouvement décoratif ni nouvel état métier.
+
+La direction retenue est **Papier doux, finition 02** : coins arrondis,
+papier crème, accent abricot et encre adoucie. Coutures, chants et gravures
+enrichissent les formats illustratifs ; les commandes compactes restent lisibles.
+Les repères communs du Marketplace utilisent les mêmes dessins et les mêmes
+distinctions entre objets, sans remplacer leurs visuels personnalisés.
+
+La recette compare la planche vectorielle et les écrans réels avant/après,
+à 320/390/1280 px, avec texte agrandi, navigation clavier et états dégradés.
+La reconnaissance par des habitants nécessite un essai distinct. Voir les
+[critères IP-01 à IP-06](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#e73-evo-live-iconographie-premium)
+et les [preuves locales](../../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md#iconographie-premium-21-novembre-2026).
