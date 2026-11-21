@@ -276,6 +276,19 @@ contrat ; durée 30 minutes, erreur 422 explicitement distinguée d’un refus 4
 Pas de snapshot inter-pages garanti. L’ancienne route reste inchangée ; le
 frontend migre cette liste et ses archives, sans bascule cachée vers `listAll`.
 
+Correctif du 21 novembre 2026 : le compteur **X alertes** de chaque ligne ouvre
+une fenêtre avec les notifications non lues de cette seule animation, chargées
+à la demande via la lecture existante `/animations/{id}/live`. Chaque notification
+présente son titre, son message, une explication de traitement et un accès à la
+rubrique concernée. Les confirmations ne sont pas présentées comme des incidents ;
+un type ou une destination inconnus proposent la consultation de l’animation.
+La cible historique `commercants` rejoint **Invitations** (`participations`).
+La consultation ne marque rien comme lu ; la fenêtre explique l’usage de la
+cloche pour cela. Fermeture par bouton ou Échap, retour du focus au compteur,
+recherche et page conservées sans recharger la liste. Chargement, erreur avec
+réessai, refus d’accès et absence d’alerte sont distincts ; changement de contexte
+ou fermeture annulent la lecture et écartent toute réponse tardive.
+
 Participants non publics et validations réutilisent
 `/lectures-globales/participants` et `/lectures-globales/validations` avec
 `animation_id` dans la fiche. Recherche préfixe existante, `qualifie/termine` ou

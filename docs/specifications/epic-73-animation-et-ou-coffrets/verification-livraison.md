@@ -1,5 +1,41 @@
 # E73 — Vérification, migration et livraison
 
+## Consultation des alertes de la liste Animation
+
+Correctif du 21 novembre 2026, base Animation `d2e3a50` et Projet `a6a978b`,
+arbres initialement propres. Le compteur était un paragraphe sans interaction ;
+la source est le nombre de notifications non lues, pas un nombre de blocages.
+Il ouvre désormais une fenêtre de détail et d’aide, avec accès à la rubrique
+concernée. [Comportement attendu](ux-productivite-organisateur.md#listes-animations-participants-et-validations).
+Correctif Animation `577473b`, commité et poussé sur `main`.
+
+Reproduction avec le composant de liste de `d2e3a50` chargé par le banc
+`node tests/browser/animation-list-alerts.mjs --baseline` : échec attendu à
+320 px, liste visible mais bouton de consultation absent, compteur statique
+**3 alerte(s)** (`tmp/animation-list-alerts-aGBYFW`). Les premières tentatives
+de banc avaient un refus HTTP local sur la racine du serveur : elles ne
+constituaient pas une reproduction ; ce défaut de banc a été corrigé.
+
+Sur le correctif final, `node tests/browser/animation-list-alerts.mjs` réussit
+à **320 et 1280 px**, avec captures normales et texte agrandi à 200 %
+(`tmp/animation-list-alerts-XNb957`). Le banc monte les vrais composants de
+liste, fenêtre et transport sur API synthétique : lecture à l’ouverture,
+instructions, confirmation sans fausse urgence, type inconnu, accès validations
+et invitations commerçants, focus retenu et restitué, recherche conservée sans
+relecture de liste, réessai 503, refus 403, réponse d’une autre animation rejetée,
+état vide et réponse tardive après changement de contexte écartée. Aucune
+écriture envoyée. Captures bureau/mobile et texte doublé inspectées.
+
+`pnpm typecheck`, `pnpm lint`, les deux tests Node `dashboard-notifications`
+et `notification-delete` (**2/2**), puis `node scripts/build-check.mjs`
+réussissent. Build complet final isolé `tmp/quality-build-Jv6fU8`, avec avertissement
+de taille de chunk, sans configuration opérateur.
+
+Sans modification des API, règles de lecture, droits, données, migrations,
+générateur ni configuration d’exploitation : l’interface réutilise le détail
+autorisé existant. Les autres applications restent inchangées. Pas de recette
+sur appareil physique, de données réelles ni de déploiement exécuté.
+
 ## Dotation unique dans la participation
 
 Correctif du 21 novembre 2026, base Marketplace `b5304b3`, arbre initialement
