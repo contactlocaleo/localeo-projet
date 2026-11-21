@@ -1825,6 +1825,17 @@ proposent aussi **Adresse et horaires**.
 | LM04 | Les filtres restent dans l'URL et le retour conserve le contexte animation, parcours ou liste. Après une erreur de page suivante, les résultats déjà chargés restent visibles et le réessai reprend cette page. Une réponse obsolète ne remplace pas un filtre plus récent. |
 | LM05 | Aucun lieu futur d'une chasse n'est révélé par l'annuaire ni par le filtre commerçant du catalogue. La chasse conserve le lieu courant autorisé et son itinéraire ; aucune nouvelle fiche publique d'un lieu secret n'est créée. |
 | LM06 | Sur mobile 320 px et bureau, les commandes restent accessibles et sans débordement horizontal. L'accès aux commerçants ne repousse pas la première action d'animation sous la navigation basse de l'accueil. |
+| LM07 | Depuis la fiche commerçant, « Ses animations » affiche près du titre un unique badge « Déjà inscrit » pour chaque animation disposant d’une participation avec accès personnel dans le carnet local. Les identifiants sont rapprochés selon la normalisation partagée. Plusieurs participations ne dupliquent pas le badge ; favoris, simples suivis et entrées sans accès ne le déclenchent pas. Le clic conserve la fiche publique et son retour au commerçant. |
+| LM08 | La section réutilise l’index des inscriptions de Découvrir et suit les ajouts, modifications et retraits du carnet, y compris entre onglets, sans consulter le détail de chaque animation. Pagination, ordre et focus restent stables. Carnet indisponible ou absence d’accès local n’affichent aucun « Non inscrit » ; la liste publique reste consultable. Le repère est propre à cette origine et cet appareil, sans accorder de droit d’accès. |
+
+**Correctif du 22 novembre 2026 — LM07/08.** Dépôts affectés : Marketplace/Live
+(présentation et tests) et Projet (critères et principes UX). Aucun changement
+d’API, de règle métier, de stockage, de migration, de configuration ou du
+générateur de démonstration. Les guides Commerçant et Animation ont été examinés :
+sans impact, leurs écrans et procédures restent identiques. Les scénarios
+`live-merchant-registrations.spec.cjs` couvrent le repère et ses mises à jour ;
+les tests partagés d’index des inscriptions portent la sélection des accès.
+Leur exécution locale reste distincte d’une vérification distante.
 
 ### Contrat et responsabilité
 

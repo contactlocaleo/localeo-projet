@@ -54,6 +54,17 @@ aux étapes supplémentaires. Les états fermés, suspendus ou incertains ne
 proposent aucune action de validation interdite et gardent leur explication.
 Ces repères appliquent LIVE-UX-04, LIVE-UX-05, LIVE-UX-06 et LIVE-UX-08.
 
+**Inscriptions depuis une fiche commerçant — 22 novembre 2026.** Dans « Ses
+animations », le badge partagé « Déjà inscrit » apparaît près du titre lorsqu’un
+accès personnel à cette animation est présent dans le carnet de cette origine
+et de cet appareil. Plusieurs participations donnent un seul badge. Favori,
+animation suivie et accès absent ne confirment pas une inscription. L’absence
+de badge ne devient pas un statut « Non inscrit ». La lecture locale est commune
+à la section et suit les modifications du carnet entre onglets, sans requête
+de détail par animation. Le clic ouvre la fiche publique existante ; le badge
+ne confère aucun droit et ne remplace pas la vérification de l’accès personnel.
+Pagination, contexte de retour et focus restent conservés (LIVE-UX-02/05/08).
+
 Le bandeau supérieur du Marketplace donne un accès textuel direct « Live » au
 carnet, sur mobile et ordinateur, en utilisant l'origine Live configurée.
 Recherche, menu, marque et cibles de 44 px restent utilisables ; les actions
