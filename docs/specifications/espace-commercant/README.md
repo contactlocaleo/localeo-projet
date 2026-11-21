@@ -570,4 +570,3 @@ présente la mission avant le kit sur mobile. Dans une préparation individuelle
 le retour aux préparations et les étapes du parcours remplacent la navigation
 générale répétée. Les URL, filtres de catégorie, droits et commandes métier
 restent inchangés. Voir la [recette ergonomique](../../audits/ergonomie-gestion-pro-animation-2026-11-01.md#lisibilité-des-pages-animation-dans-pro--21-novembre-2026).
-
