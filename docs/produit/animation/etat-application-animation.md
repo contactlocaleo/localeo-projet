@@ -167,7 +167,11 @@ consultation du bilan et gestion des actualités.
 | Offre | Prix catalogue HT | Durée | Usage | Modèle de service |
 | --- | ---: | --- | --- | --- |
 | Découverte | 390,00 € | 12 mois | Une première publication réussie | Clé en main |
-| Essentielle | 708,00 € | 12 mois | Animations sans quota au MVP | Plateforme autonome |
+| Essentielle | 708,00 € | 12 mois | 3 publications standard pour les nouvelles souscriptions et renouvellements | Plateforme autonome |
+
+Correction du 22 novembre 2026 : les abonnements actifs conservent leur quota
+acquis, y compris l'illimité Essentielle. `PLATEFORME_AUTONOME` décrit
+l'accompagnement, indépendamment du quota. La migration `v329` publie la version future.
 
 Le prix s'applique au couple **partenaire + commune**. Un référencement portant
 sur plusieurs communes crée une souscription distincte par commune, mais une
@@ -295,13 +299,13 @@ flyer et aux règles de validation.
 La publication vérifie atomiquement :
 
 - l'abonnement et le droit de publier ;
-- le quota disponible de l'offre Découverte ;
+- le quota disponible des droits acquis (Découverte : 1 ; nouvelle Essentielle : 3) ;
 - la configuration obligatoire ;
 - la présence de commerçants participants ;
 - le financement et la disponibilité des lots requis ;
 - la cohérence des dates et des règles du modèle.
 
-Le quota Découverte est consommé lors de la première publication réussie. Un
+Le quota des offres limitées est consommé lors de la première publication réussie. Un
 rejeu idempotent ne consomme pas un second crédit. L'annulation d'un brouillon
 avant paiement des lots libère toute consommation ou réservation éventuelle et
 le compteur affiché dans Localeo Animation est recalculé à partir des
@@ -495,7 +499,7 @@ ou versionnées, et non des variables d'environnement dispersées.
 4. Un webhook rejoué ne crée ni second abonnement ni second email.
 5. Une session Stripe obsolète ou une commande annulée passe en rapprochement.
 6. Une gratuité exige un motif et une confirmation explicite.
-7. Le quota Découverte est consommé une seule fois à la publication réussie.
+7. Le quota des offres limitées est consommé une seule fois à la publication réussie.
 8. Une animation sans commerçant ayant accepté ne peut pas être publiée.
 9. Le flyer ne contient que les commerçants participants figés à la publication.
 10. Une validation hors tenant, en double ou après clôture est refusée.

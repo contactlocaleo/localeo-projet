@@ -59,12 +59,13 @@ L'acteur, l'organisation et les communes sont dérivés de la session et contrô
 
 ### Catalogue initial et unités
 
-Conditions des forfaits confirmées le **31 octobre 2026**, avec ajout de Premium :
+Conditions des forfaits confirmées le **31 octobre 2026**, avec ajout de Premium,
+puis correction Essentielle le **22 novembre 2026** pour les ventes futures :
 
 | Code | Prix HT | Durée | Animations standard | Service |
 | --- | ---: | --- | --- | --- |
 | `DECOUVERTE` | 390 € | 12 mois | 1 | Clé en main existant |
-| `ESSENTIELLE` | 708 € | 12 mois | Illimitées | Plateforme autonome |
+| `ESSENTIELLE` | 708 € | 12 mois | 3 | Plateforme autonome |
 | `PREMIUM` | 1 490 € | 12 mois | Illimitées | Accompagnement standard de la plateforme, modèle `PLATEFORME_AUTONOME` |
 
 Premium ne comprend **aucun module payant** ni prestation supplémentaire
@@ -74,6 +75,13 @@ La migration backend `v285_catalogue_animation_premium.sql` ajoute l'offre
 historique et sa publication dans le catalogue versionné, sans modifier les
 conditions acquises. Une offre Premium personnalisée, désactivée ou déjà
 versionnée est conservée : ses conditions doivent être contrôlées avant ouverture.
+
+La [correction Essentielle du 22 novembre](../epic-47-souscription-abonnement-partenaire-animation/README.md#correction-du-22-novembre-2026--essentielle-limitée-à-3-animations)
+publie une version à 3 animations standard via `v329`. Les abonnements actifs,
+commandes et devis figés conservent leur ancien quota. Le mode
+`PLATEFORME_AUTONOME` décrit l'accompagnement, indépendamment de la capacité.
+Dans l'ERP, le plafond standard peut être saisi depuis une version illimitée ;
+l'aperçu et la confirmation portent exclusivement sur les futurs achats.
 
 | Élément | Prix initial HT | Période / capacité | Consommation |
 | --- | --- | --- | --- |

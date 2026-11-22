@@ -1,5 +1,63 @@
 # E73 — Vérification, migration et livraison
 
+## Essentielle à trois animations — 22 novembre 2026
+
+Correction sur bases Backend `c7ab12d` et Projet `76b669c`, arbres initialement
+propres. La [décision E47](../epic-47-souscription-abonnement-partenaire-animation/README.md#correction-du-22-novembre-2026--essentielle-limitée-à-3-animations)
+limite les nouvelles souscriptions et renouvellements à 3 publications standard
+par terme, en conservant les anciens engagements illimités. Aucun statut d'epic
+n'est modifié.
+
+Cause reproduite : l'exemple officiel Essentielle donnait `quota_animations=null`
+et le formulaire ERP n'affichait aucun champ pour une limite illimitée. Le nouveau
+test de références a échoué avant correction (`None != 3`). La migration `v329`
+publie une version future à 3 sans toucher aux versions/périodes acquises, et le
+formulaire permet désormais un plafond fini ou un champ vide pour l'illimité.
+Les quantités des modules Chasse et Communication restent obligatoires.
+
+Contrôles locaux, Python 3.14 et PostgreSQL 18 jetable sur `127.0.0.1:55449` :
+
+- Runner isolé : **862 réussites**, architecture, couverture domaine/use cases,
+  domaine des conditions acquises, ERP catalogue, runner des migrations et
+  régressions de souscription. Les quatre API PostgreSQL initialement ignorées
+  faute de cible ont ensuite été exécutées sur la base jetable : **4 réussites**.
+- Références : **49 réussites**, dont Essentielle à 3, Découverte à 1 et Premium
+  toujours illimité, sans changement de prix, durée ou service.
+- PostgreSQL : **11 réussites** dans
+  `tests/integration/test_essentielle_trois_animations_migration.py` ; **22** autres
+  dans la migration Premium et les droits/modules acquis, plus les **4 API**
+  ci-dessus. Nouvelles commandes E47 et devis de renouvellement à 3, ancienne
+  souscription illimitée encore utilisable au quatrième débit, refus du quatrième
+  nouveau débit, rejeu sans double consommation, chasse indépendante, migration
+  rejouée immédiatement, retrait/inactivité et dernière version personnalisée
+  malgré une offre mutable encore illimitée. Aucun Stripe, email ou SMS réel.
+  Passe finale combinée PostgreSQL/références : **86 réussites, zéro skip**,
+  rapport Backend `tmp/essentielle-final.xml`.
+- `node tests/browser/epic73-modules-erp.cjs` réussi à **320/1280 px**, API
+  synthétique : illimité → 3 → illimité, aperçu/commande identiques, confirmation
+  invalidée à la saisie, filtre et focus préservés, quotas des modules requis,
+  absence de débordement horizontal. Captures relues dans Backend
+  `tmp/epic73-modules-erp-1795367664448/`. `node --check` réussi.
+- Documentation : `check_guidance.py --changed --all-markdown` sans erreur ni
+  alerte ; `sync_documentation.py --check-sources` : **155 documents vérifiés**.
+  `git diff --check` réussi dans Backend et Projet.
+
+Commandes : `py -3.14 scripts/validation/test_isolated.py` avec les fichiers
+ci-dessus ; pour PostgreSQL, option
+`--postgres-test-url postgresql+psycopg://audit_test@127.0.0.1:55449/localeo_audit_test`.
+Les avertissements `datetime.utcnow/utcfromtimestamp` des services historiques
+restent présents ; aucun test ni garde-fou n'a été désactivé.
+
+Revue indépendante du SQL, des conditions et des consommateurs effectuée.
+Le verrou catalogue est identique à celui de la publication ERP ; sa concurrence
+est vérifiée par lecture du chemin et par les tests existants du compteur, sans
+nouveau banc concurrent de publication de version. Pas de nouvelle API, copie
+OpenAPI ou migration frontend ; guides Animation/Commerçant sans impact justifié
+dans E47. Démonstration : sélectionner une offre suffisante, aucun contournement
+ni génération sur cible. Recette lecteur d'écran, texte à 200 % et souscription
+sur environnement distant non exécutées. Migration distante non appliquée ;
+suivre la [procédure de configuration](../../exploitation/technique/configurer-epic-73.md#catalogue-essentielle-à-trois-animations--22-novembre-2026).
+
 ## Alertes organisateur : publication et clôture attendue
 
 Correctif du 21 novembre 2026, bases Backend `bfb4f02f`, Animation `343a6e0`

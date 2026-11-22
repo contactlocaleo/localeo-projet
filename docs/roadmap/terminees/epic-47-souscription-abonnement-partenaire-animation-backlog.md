@@ -16,6 +16,12 @@
 
 ## Objectif
 
+Évolution du 22 novembre 2026 : [Essentielle à 3 animations pour les nouvelles
+souscriptions et renouvellements](../../specifications/epic-47-souscription-abonnement-partenaire-animation/README.md#correction-du-22-novembre-2026--essentielle-limitée-à-3-animations).
+Les abonnements actifs et engagements déjà figés conservent leurs conditions.
+Les décisions et bilans historiques ci-dessous, dont l'illimité initial,
+gardent leur portée passée ; le statut terminé d'E47 ne change pas.
+
 Compléter le référencement d'un partenaire Animation par une souscription
 commerciale traçable et, lorsque le prix négocié est supérieur à zéro, par un
 paiement Stripe.

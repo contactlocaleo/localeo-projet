@@ -23,18 +23,64 @@ Les décisions non encore validées sont centralisées dans le
 
 ## Besoin retenu
 
-Le catalogue initial comprend deux offres :
+Le catalogue comprend les offres suivantes (Essentielle révisée le 22 novembre 2026 pour les ventes futures) :
 
 | Code | Prix HT initial | Contenu |
 |---|---:|---|
 | `DECOUVERTE` | 390,00 € | Une animation clé en main |
-| `ESSENTIELLE` | 708,00 € | Plateforme pendant un an, animations illimitées |
+| `ESSENTIELLE` | 708,00 € | Plateforme pendant un an, 3 animations standard |
 
 Extension confirmée le **31 octobre 2026** : `PREMIUM`, **1 490 € HT pour
 12 mois**, animations illimitées, accompagnement standard de la plateforme et
 aucun module payant inclus. Les conditions courantes et la publication du
 catalogue sont précisées dans la [spécification E73 des forfaits et modules](../epic-73-animation-et-ou-coffrets/modules-souscriptions-import-communication.md#catalogue-initial-et-unités).
 Cette extension ne modifie ni les ventes acquises ni le statut historique d'E47.
+
+### Correction du 22 novembre 2026 — Essentielle limitée à 3 animations
+
+Décision confirmée : les **nouvelles souscriptions et les renouvellements**
+Essentielle disposent de **3 publications standard par terme de 12 mois**.
+Les abonnements actifs conservent leurs conditions acquises, notamment l'ancien
+illimité. Les commandes et devis déjà figés ne sont pas réécrits ; leur activation
+continue d'utiliser leur instantané commercial. L'historique d'E47 reste inchangé.
+
+Le domaine `abonnements_plateforme` porte cette limite via `VersionCatalogue`,
+les droits inclus et le compteur `PUBLICATION_ANIMATION/TERME_SOUSCRIPTION`.
+Une première publication réussie débite un crédit ; son rejeu ne débite rien ;
+la quatrième publication est refusée après trois consommations non annulées.
+Les chasses conservent leur droit et leur compteur indépendants.
+
+La migration additive `v329_catalogue_essentielle_trois_animations.sql` publie
+la version future et aligne l'offre de référence utilisée par l'ERP. Elle
+préserve les versions antérieures, périodes, droits et usages, les offres
+désactivées ou retirées et les quotas déjà finis/personnalisés. Son rejeu immédiat ne
+publie pas une nouvelle version. Les autres propriétés commerciales sont conservées.
+Le runner versionné ne réexécute pas une migration appliquée ; ne pas relancer
+le SQL brut après une nouvelle décision de catalogue dans l'ERP.
+
+Dans **Catalogue Animation → Publier une nouvelle version**, le plafond standard
+est désormais saisissable même si la version courante est illimitée : `3`
+signifie trois publications sur le terme, un champ vide signifie illimité.
+L'aperçu compare les capacités avant/après ; une modification de saisie invalide
+la confirmation. Cela modifie le catalogue pour les futurs achats, jamais une
+souscription en cours. Les quotas Chasse et Communication restent obligatoires.
+
+`PLATEFORME_AUTONOME` décrit l'accompagnement : l'organisateur utilise lui-même
+la plateforme. Il ne signifie pas illimité et ne décide pas du quota. Le mode
+`CLE_EN_MAIN` de Découverte décrit une autre prestation d'accompagnement.
+
+Impacts : aucune API ni règle de consommation nouvelle, aucune copie OpenAPI à
+modifier ; migration de catalogue requise avant effet sur les ventes. Les guides
+Commerçant et Animation sont sans impact : aucun de leurs écrans/procédures ne
+change, ils ne promettent pas l'illimité Essentielle et présentent les quotas lus
+sur les droits acquis. Le générateur de démonstration exige au moins 11 animations :
+sélectionner Premium ou une offre de capacité suffisante ; ne pas relever le quota
+Essentielle pour contourner ce contrôle. Aucun jeu distant n'est régénéré.
+
+Preuves : tests PostgreSQL de migration, droits acquis, renouvellement, refus de
+la quatrième publication, rejeu et compteur chasse indépendant ; recette ERP
+320/1280 px des transitions illimité → 3 → illimité et de la confirmation.
+Les commandes et résultats de contrôle sont consignés avec la livraison E73.
 
 Le prix catalogue est paramétrable. Lors du référencement, l'administrateur
 peut saisir un prix propre à la souscription, y compris `0 €`, pour une
@@ -92,7 +138,7 @@ auditée, sans transaction fictive.
 
 Le domaine `animation_locale` ne doit connaître ni Checkout Session, ni
 PaymentIntent, ni calcul de TVA. Il demande seulement si une action est
-autorisée et, pour l'offre Découverte, consomme un quota par un use case
+autorisée et, pour une offre limitée (Découverte ou nouvelle Essentielle), consomme un quota par un use case
 idempotent.
 
 ## Challenge du modèle existant
@@ -121,7 +167,7 @@ habilitation. La cible validée introduit donc une racine
 | `prix_catalogue_ht_centimes` | entier | Positif ou nul pour une offre administrativement gratuite |
 | `devise` | texte | `EUR` au MVP |
 | `duree_mois` | entier nullable | `12` pour Découverte et Essentielle |
-| `quota_animations` | entier nullable | `1` pour Découverte, `NULL` pour illimité |
+| `quota_animations` | entier nullable | `1` pour Découverte, `3` pour la nouvelle Essentielle, `NULL` pour illimité acquis ou Premium |
 | `modele_service` | texte | `CLE_EN_MAIN` ou `PLATEFORME_AUTONOME` |
 | `active` | booléen | Une offre inactive n'est plus souscriptible |
 
@@ -161,7 +207,7 @@ références Stripe et le suivi financier, à condition de conserver exactement
 une racine parmi `achat_id`, `commande_achat_id` et
 `souscription_plateforme_id`.
 
-### Quota Découverte
+### Quotas Découverte et Essentielle
 
 Le quota ne doit pas être calculé par un simple nombre courant d'animations.
 Une consommation dédiée et idempotente est nécessaire :
