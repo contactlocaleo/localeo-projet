@@ -23,7 +23,7 @@
 | E81-CA-07 | Non vérifié | Aucune relecture de fiches ou droits visuels par des commerçants réels n'a eu lieu. |
 | E81-CA-08 | Protocole préparé, porte non levée | [Protocole TEST](recette-stripe-test.md) : isolation et innocuité des effets métier doivent être établies avant tout appel. |
 | E81-CA-09 | Non exécuté | Ni session Stripe ni paiement, retour, webhook ou état d'achat issus d'une recette EPIC 81 ; aucun succès n'est déduit des mocks. |
-| E81-CA-10 | Non exécuté | Les six scénarios avec de [vrais utilisateurs](../../ux-workshops/marketplace/2026-11-18/synthese/plan-tests-utilisateurs.md) restent à organiser. Les votes de l'atelier étaient simulés. |
+| E81-CA-10 | Non exécuté | Les six scénarios avec de [vrais utilisateurs](../../../ateliers/ux-workshops/marketplace/2026-11-18/synthese/plan-tests-utilisateurs.md) restent à organiser. Les votes de l'atelier étaient simulés. |
 
 ## Contrôles exécutés
 

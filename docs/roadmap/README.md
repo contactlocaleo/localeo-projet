@@ -24,7 +24,7 @@ aucun déploiement effectué.
 
 **18 novembre 2026 — EPIC 81, En cours** :
 [clarté des parcours publics Marketplace](en-cours/epic-81-parcours-ux-marketplace-20261118-backlog.md),
-cadrée à partir des sept orientations P0/P1 [validées par le propriétaire](../ux-workshops/marketplace/2026-11-18/validation/decisions.md).
+cadrée à partir des sept orientations P0/P1 [validées par le propriétaire](../../ateliers/ux-workshops/marketplace/2026-11-18/validation/decisions.md).
 Accueil mobile, promesse du coffret, cadeau, conditions avant achat et transition
 vers Live sont spécifiés et réalisés localement ; contenu de lancement et recette humaine restent à vérifier.
 La recette Stripe O-08 est une porte de preuve P0, sans panne démontrée et sans

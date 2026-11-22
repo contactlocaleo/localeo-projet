@@ -2,7 +2,7 @@
 
 ## Statut et provenance
 
-Spécification initiale du 18 novembre 2026. L'état produit est porté exclusivement par la [roadmap](../../roadmap/en-cours/epic-81-parcours-ux-marketplace-20261118-backlog.md). Les sept orientations P0/P1 ont été [validées par le propriétaire](../../ux-workshops/marketplace/2026-11-18/validation/decisions.md) ; cette validation UX ne prouve ni la conformité des textes, ni le paiement, ni une mise en production. Les [observations](../../ux-workshops/marketplace/2026-11-18/observations/observations-factuelles.md) concernent l'environnement TEST et les [maquettes](../../ux-workshops/marketplace/2026-11-18/visuels/comparatif-avant-apres.html) expriment l'intention visuelle. Le workshop a utilisé des votes simulés, sans test de vrais utilisateurs.
+Spécification initiale du 18 novembre 2026. L'état produit est porté exclusivement par la [roadmap](../../roadmap/en-cours/epic-81-parcours-ux-marketplace-20261118-backlog.md). Les sept orientations P0/P1 ont été [validées par le propriétaire](../../../ateliers/ux-workshops/marketplace/2026-11-18/validation/decisions.md) ; cette validation UX ne prouve ni la conformité des textes, ni le paiement, ni une mise en production. Les [observations](../../../ateliers/ux-workshops/marketplace/2026-11-18/observations/observations-factuelles.md) concernent l'environnement TEST et les [maquettes](../../../ateliers/ux-workshops/marketplace/2026-11-18/visuels/comparatif-avant-apres.html) expriment l'intention visuelle. Le workshop a utilisé des votes simulés, sans test de vrais utilisateurs.
 
 Périmètre : O-01, O-02, O-03, O-06 et O-07 comme améliorations de présentation de Marketplace ; O-05 comme contrôle et correction conditionnelle des contenus réellement publiés ; O-08 comme porte de recette isolée de Stripe, sans défaut constaté. O-04 P2, O-09 rejetée et O-10 non adoptée restent hors de cette réalisation. Aucun nouveau droit commercial, mode de réservation, paiement, notification ou engagement contractuel n'est décidé ici.
 
@@ -18,7 +18,7 @@ Périmètre : O-01, O-02, O-03, O-06 et O-07 comme améliorations de présentati
 | O-05 | Des noms et textes provisoires ont été vus en TEST ; aucune conclusion n'est établie pour l'environnement d'ouverture. | Inventorier cet environnement et corriger les contenus provisoires effectivement publiés, après validation éditoriale et des droits visuels. Si aucun n'y figure, classer le correctif P1 sans changement requis et poursuivre l'entretien P2. |
 | O-08 | L'audit s'est arrêté avant le bouton final. Le code lu indique que `POST /public/gestion-achats/paiements/initialiser` crée un achat et demande une session de paiement avant la redirection. | Établir d'abord l'innocuité des effets en TEST ; ensuite seulement, si autorisé et isolé, prouver initialisation, retour, annulation/échec et reprise. En l'absence de protocole sûr, ne pas appeler cette route et ne pas déclarer la porte franchie. |
 
-Les références de code de l'audit Stripe sont dans [le parcours documenté](../../ux-workshops/marketplace/2026-11-18/observations/parcours-achat-stripe.md). Elles devront être rapprochées de la version implémentée lors de la recette ; elles ne prouvent pas l'exécution d'un paiement.
+Les références de code de l'audit Stripe sont dans [le parcours documenté](../../../ateliers/ux-workshops/marketplace/2026-11-18/observations/parcours-achat-stripe.md). Elles devront être rapprochées de la version implémentée lors de la recette ; elles ne prouvent pas l'exécution d'un paiement.
 
 ## Architecture et invariants
 
@@ -51,7 +51,7 @@ Les changements de texte, de composition et de liens n'ajoutent en eux-mêmes ni
 | E81-CA-07 · O-05 | Partenaires : prestations, descriptions et droits visuels confirmés. | Relecture d'un échantillon par commerçants réels (prévu). | Données publiées et preuves de droits ; aucun texte de maquette considéré comme validé. | Procédure éditoriale avant publication. |
 | E81-CA-08 · O-08 | Backend : effets de l'initialisation maîtrisés avant appel. | Protocole d'isolement, idempotence, webhooks, envois et nettoyage documentés (prévu). | Contrat de paiement existant ; aucun changement présumé. | Porte bloquée tant que l'innocuité n'est pas établie. |
 | E81-CA-09 · O-08 | Backend/fournisseur : succès, annulation, reprise et état d'achat cohérents. | Recette TEST isolée et autorisée, traces séparées, anomalies corrigées puis revérifiées (prévu). | Procédure de recette et contrats de retour si modifiés. | Aucun paiement réel ; ouverture reportée si preuve manquante ou anomalie bloquante. |
-| E81-CA-10 · O-01/02/03/06/07 | Vrais visiteurs : comprennent l'offre et leurs actions. | Six scénarios du [plan utilisateur](../../ux-workshops/marketplace/2026-11-18/synthese/plan-tests-utilisateurs.md), profils variés (prévu). | Résultats à relier aux textes concernés. | Condition de qualification humaine, non couverte par les votes simulés. |
+| E81-CA-10 · O-01/02/03/06/07 | Vrais visiteurs : comprennent l'offre et leurs actions. | Six scénarios du [plan utilisateur](../../../ateliers/ux-workshops/marketplace/2026-11-18/synthese/plan-tests-utilisateurs.md), profils variés (prévu). | Résultats à relier aux textes concernés. | Condition de qualification humaine, non couverte par les votes simulés. |
 
 ## Points ouverts et limites de livraison
 

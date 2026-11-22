@@ -310,11 +310,11 @@ une epic concurrente et ne modifie ni son état ni les compteurs de la roadmap.
 
 ### Sources et portée des décisions
 
-- [Archive CRM du 18 novembre](../../ux-workshops/localeo-crm/2026-11-18/README.md), poursuivie le 19 novembre.
-- [Observations O01–O18](../../ux-workshops/localeo-crm/2026-11-18/observations/observations-factuelles.md), [limites](../../ux-workshops/localeo-crm/2026-11-18/observations/limitations.md) et [couverture du pilotage](../../ux-workshops/localeo-crm/2026-11-18/observations/couverture-pilotage-commercial.md).
-- [Treize orientations et critères proposés](../../ux-workshops/localeo-crm/2026-11-18/workshop/backlog-ux.md), [votes simulés](../../ux-workshops/localeo-crm/2026-11-18/workshop/votes-et-arbitrages.md) et [réserves visuelles](../../ux-workshops/localeo-crm/2026-11-18/visuels/arbitrages-complementaires.md).
-- [Registre utilisateur](../../ux-workshops/localeo-crm/2026-11-18/validation/decisions.md) : **UX01–UX05 VALIDÉES le 19 novembre 2026**, sur réponse explicite « Valider UX01–UX05, seuils UX02 à définir ». La validation ne vaut ni recette ni réalisation.
-- [Risques R01–R08](../../ux-workshops/localeo-crm/2026-11-18/validation/risques-non-resolus.md) et [backlog potentiel](../../ux-workshops/localeo-crm/2026-11-18/validation/backlog-implementation-potentiel.md).
+- [Archive CRM du 18 novembre](../../../ateliers/ux-workshops/localeo-crm/2026-11-18/README.md), poursuivie le 19 novembre.
+- [Observations O01–O18](../../../ateliers/ux-workshops/localeo-crm/2026-11-18/observations/observations-factuelles.md), [limites](../../../ateliers/ux-workshops/localeo-crm/2026-11-18/observations/limitations.md) et [couverture du pilotage](../../../ateliers/ux-workshops/localeo-crm/2026-11-18/observations/couverture-pilotage-commercial.md).
+- [Treize orientations et critères proposés](../../../ateliers/ux-workshops/localeo-crm/2026-11-18/workshop/backlog-ux.md), [votes simulés](../../../ateliers/ux-workshops/localeo-crm/2026-11-18/workshop/votes-et-arbitrages.md) et [réserves visuelles](../../../ateliers/ux-workshops/localeo-crm/2026-11-18/visuels/arbitrages-complementaires.md).
+- [Registre utilisateur](../../../ateliers/ux-workshops/localeo-crm/2026-11-18/validation/decisions.md) : **UX01–UX05 VALIDÉES le 19 novembre 2026**, sur réponse explicite « Valider UX01–UX05, seuils UX02 à définir ». La validation ne vaut ni recette ni réalisation.
+- [Risques R01–R08](../../../ateliers/ux-workshops/localeo-crm/2026-11-18/validation/risques-non-resolus.md) et [backlog potentiel](../../../ateliers/ux-workshops/localeo-crm/2026-11-18/validation/backlog-implementation-potentiel.md).
 - Réutiliser la [conception E71-EVOL-10](../../specifications/epic-71-crm-prospection/ux-productivite.md), ses correctifs du 17 novembre et la [spécification RDV E71-EVOL-08](../../specifications/epic-71-crm-prospection/rendez-vous.md).
 
 **Conclusion d’arbitrage :** dix orientations ont été adoptées en simulation

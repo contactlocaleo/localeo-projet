@@ -2,7 +2,7 @@
 
 ## Statut et décisions
 
-Spécification du 18 novembre 2026 liée au [backlog E80](../../roadmap/en-cours/epic-80-fiabilite-parcours-localeo-pro-backlog.md) et au [workshop Pro](../../ux-workshops/localeo-pro/2026-11-18/README.md). L'utilisateur a validé les cinq orientations B1/C1/D1/E1/F1 pour l'implémentation le même jour ; le [registre des décisions UX](../../ux-workshops/localeo-pro/2026-11-18/validation/decisions.md) distingue cette réponse des votes fictifs du workshop. Les règles métier et preuves restent celles des critères de l'epic.
+Spécification du 18 novembre 2026 liée au [backlog E80](../../roadmap/en-cours/epic-80-fiabilite-parcours-localeo-pro-backlog.md) et au [workshop Pro](../../../ateliers/ux-workshops/localeo-pro/2026-11-18/README.md). L'utilisateur a validé les cinq orientations B1/C1/D1/E1/F1 pour l'implémentation le même jour ; le [registre des décisions UX](../../../ateliers/ux-workshops/localeo-pro/2026-11-18/validation/decisions.md) distingue cette réponse des votes fictifs du workshop. Les règles métier et preuves restent celles des critères de l'epic.
 
 L'état produit relève uniquement de la [roadmap](../../roadmap/README.md). B1/C1/D1/E1/F1 sont le périmètre P1 ; A1/G1 P2 et les alternatives rejetées ne sont pas intégrées.
 

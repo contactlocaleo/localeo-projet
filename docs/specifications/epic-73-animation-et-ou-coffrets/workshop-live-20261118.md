@@ -6,7 +6,7 @@ Spécification du 18 novembre 2026, après adoption des six orientations puis
 demande explicite des phases spécification et implémentation.
 [Cadrage et 18 critères WL](../../roadmap/terminees/epic-73-animation-et-ou-coffrets-backlog.md#workshop-live-20261118),
 [audit](../../audits/marketplace/localeo-live-workshop-arbitrages-2026-11-18.md),
-[décision utilisateur](../../ux-workshops/localeo-live/2026-11-18/validation/decisions.md).
+[décision utilisateur](../../../ateliers/ux-workshops/localeo-live/2026-11-18/validation/decisions.md).
 État produit : E73 historiquement terminée ; extension suivie séparément.
 B1/C1/D1/E1 P1 ; A1/F1 P2. Ni compteurs ni clôture historique modifiés.
 

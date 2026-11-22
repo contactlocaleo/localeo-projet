@@ -56,15 +56,15 @@ Aucun déploiement effectué ; clôture historique E73 conservée.
 
 ## Sources et portée de l'analyse initiale
 
-- [Workshop Live / Bouliac](../../ux-workshops/localeo-live/2026-11-18/README.md),
+- [Workshop Live / Bouliac](../../../ateliers/ux-workshops/localeo-live/2026-11-18/README.md),
   identifié comme le workshop demandé (« localeo-livedu 2026-11-18 »).
-- [Observations O1 à O11 et déduction D1](../../ux-workshops/localeo-live/2026-11-18/observations/observations-factuelles.md),
-  [limites](../../ux-workshops/localeo-live/2026-11-18/observations/limitations.md),
-  [backlog des six orientations](../../ux-workshops/localeo-live/2026-11-18/workshop/backlog-ux.md),
-  [votes simulés](../../ux-workshops/localeo-live/2026-11-18/workshop/votes-et-arbitrages.md).
-- [Registre utilisateur actualisé](../../ux-workshops/localeo-live/2026-11-18/validation/decisions.md),
-  [précisions M01–M08](../../ux-workshops/localeo-live/2026-11-18/visuels/revue-contradictoire.md)
-  et [quick wins](../../ux-workshops/localeo-live/2026-11-18/workshop/quick-wins.md).
+- [Observations O1 à O11 et déduction D1](../../../ateliers/ux-workshops/localeo-live/2026-11-18/observations/observations-factuelles.md),
+  [limites](../../../ateliers/ux-workshops/localeo-live/2026-11-18/observations/limitations.md),
+  [backlog des six orientations](../../../ateliers/ux-workshops/localeo-live/2026-11-18/workshop/backlog-ux.md),
+  [votes simulés](../../../ateliers/ux-workshops/localeo-live/2026-11-18/workshop/votes-et-arbitrages.md).
+- [Registre utilisateur actualisé](../../../ateliers/ux-workshops/localeo-live/2026-11-18/validation/decisions.md),
+  [précisions M01–M08](../../../ateliers/ux-workshops/localeo-live/2026-11-18/visuels/revue-contradictoire.md)
+  et [quick wins](../../../ateliers/ux-workshops/localeo-live/2026-11-18/workshop/quick-wins.md).
 - [Référence UX obligatoire](../../produit/live/principes-ux.md) et
   [spécification Live E73](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md) :
   LM-01 à LM-11, puis correctifs LIVE-COR-01 à LIVE-COR-07 du 18 novembre.

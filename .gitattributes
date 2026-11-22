@@ -1,7 +1,7 @@
 * text=auto eol=lf
 # Preserve the exact bytes covered by the archived audit SHA-256 manifests.
-docs/technical-audits/localeo-backend/2026-11-19/** -text
-docs/technical-audits/localeo-backend/2026-11-19-02/** -text
+ateliers/technical-audits/localeo-backend/2026-11-19/** -text
+ateliers/technical-audits/localeo-backend/2026-11-19-02/** -text
 *.pdf binary
 *.png binary
 *.webp binary

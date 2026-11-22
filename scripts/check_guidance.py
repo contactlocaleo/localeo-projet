@@ -239,6 +239,7 @@ def check_guidance(root: Path, repos: list[Path] | None = None, *, documents: li
         else:
             result["errors"].append({"source": str(document), "reason": "document_not_git_visible"})
     deleted_paths = {state["repo"] / name for state in states for name in state["deleted"]}
+    impacted_targets = deleted_paths | {parent for deleted in deleted_paths for parent in deleted.parents}
     for state in states:
         repo = state["repo"]
         for name in sorted(state["guides"]):
@@ -255,8 +256,7 @@ def check_guidance(root: Path, repos: list[Path] | None = None, *, documents: li
                 result["errors"].append({"source": str(source), "reason": "read_error", "detail": str(error)})
                 continue
             targets = [(link, local_target(source, link.destination) if link.destination is not None else None) for link in links]
-            impacted = any(target is not None and any(deleted == target or target in deleted.parents for deleted in deleted_paths)
-                           for _, target in targets)
+            impacted = any(target is not None and target in impacted_targets for _, target in targets)
             if changed and name not in state["updates"] and not impacted:
                 continue
             result["checked_guides"] += 1

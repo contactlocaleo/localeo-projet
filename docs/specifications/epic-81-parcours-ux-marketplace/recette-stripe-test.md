@@ -1,6 +1,6 @@
 # E81-CA-08/09 — Protocole de recette de la frontière Stripe
 
-Ce document prépare la recette ; **aucun appel, achat, session, paiement ou webhook n'a été exécuté pour EPIC 81**. L'[audit initial](../../ux-workshops/marketplace/2026-11-18/observations/parcours-achat-stripe.md) s'arrêtait avant le bouton final. Le `POST /public/gestion-achats/paiements/initialiser` crée un achat et une session avant la redirection : une simple visite de la page Stripe n'est donc pas une lecture sans effet.
+Ce document prépare la recette ; **aucun appel, achat, session, paiement ou webhook n'a été exécuté pour EPIC 81**. L'[audit initial](../../../ateliers/ux-workshops/marketplace/2026-11-18/observations/parcours-achat-stripe.md) s'arrêtait avant le bouton final. Le `POST /public/gestion-achats/paiements/initialiser` crée un achat et une session avant la redirection : une simple visite de la page Stripe n'est donc pas une lecture sans effet.
 
 ## Conditions à établir avant le premier appel
 

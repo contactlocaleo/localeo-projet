@@ -2,7 +2,7 @@
 
 Conception du **19 novembre 2026**, puis réalisation locale dans la même
 demande ; preuves et limites dans le bilan. [Cadrage et critères E71-AUD-01 à 09](../../roadmap/en-cours/epic-71-crm-prospection-animation-coffrets-pro-backlog.md#audit-crm-20261118),
-[décision utilisateur UX01–UX05](../../ux-workshops/localeo-crm/2026-11-18/validation/decisions.md).
+[décision utilisateur UX01–UX05](../../../ateliers/ux-workshops/localeo-crm/2026-11-18/validation/decisions.md).
 L’EPIC 71 reste **En cours** ; CA-01 à 84 et leurs preuves historiques sont
 conservés. Les neuf critères AUD complètent la recette de cette évolution.
 

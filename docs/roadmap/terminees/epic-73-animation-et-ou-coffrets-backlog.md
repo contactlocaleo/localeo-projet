@@ -48,9 +48,9 @@ reste ouverte et la clôture historique ne vaut pas validation de cette extensio
 ### Références et décisions
 
 - [Audit des arbitrages et recouvrements](../../audits/marketplace/localeo-live-workshop-arbitrages-2026-11-18.md).
-- [Workshop Live / Bouliac](../../ux-workshops/localeo-live/2026-11-18/README.md),
-  [orientations](../../ux-workshops/localeo-live/2026-11-18/workshop/backlog-ux.md),
-  [registre utilisateur](../../ux-workshops/localeo-live/2026-11-18/validation/decisions.md).
+- [Workshop Live / Bouliac](../../../ateliers/ux-workshops/localeo-live/2026-11-18/README.md),
+  [orientations](../../../ateliers/ux-workshops/localeo-live/2026-11-18/workshop/backlog-ux.md),
+  [registre utilisateur](../../../ateliers/ux-workshops/localeo-live/2026-11-18/validation/decisions.md).
 - [Spécification canonique Live](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md) :
   LM-01 à LM-11, correctifs LIVE-COR-01 à LIVE-COR-07 et preuves existantes.
 - [Principes UX et maquettes obligatoires](../../produit/live/principes-ux.md),
@@ -166,12 +166,12 @@ leurs preuves initiales, datées avant réalisation.
 - Demande du 18 novembre : analyser le workshop Localeo Animation du même jour,
   identifier les évolutions/corrections arbitrées et les cadrer avec le skill
   `localeo-creer-epic`. Le cadrage prolonge E73 ; il ne duplique pas son backlog.
-- [Rapport exécutif](../../ux-workshops/localeo-animation/2026-11-18/workshop/rapport-executif.md),
-  [votes nominatifs](../../ux-workshops/localeo-animation/2026-11-18/workshop/votes-et-arbitrages.md),
-  [backlog de l’atelier](../../ux-workshops/localeo-animation/2026-11-18/workshop/backlog-ux.md),
-  [constats AN](../../ux-workshops/localeo-animation/2026-11-18/observations/observations-factuelles.md),
-  [maquettes v2](../../ux-workshops/localeo-animation/2026-11-18/visuels/comparatif-avant-apres.html)
-  et [réserves de validation](../../ux-workshops/localeo-animation/2026-11-18/validation/risques-critiques.md).
+- [Rapport exécutif](../../../ateliers/ux-workshops/localeo-animation/2026-11-18/workshop/rapport-executif.md),
+  [votes nominatifs](../../../ateliers/ux-workshops/localeo-animation/2026-11-18/workshop/votes-et-arbitrages.md),
+  [backlog de l’atelier](../../../ateliers/ux-workshops/localeo-animation/2026-11-18/workshop/backlog-ux.md),
+  [constats AN](../../../ateliers/ux-workshops/localeo-animation/2026-11-18/observations/observations-factuelles.md),
+  [maquettes v2](../../../ateliers/ux-workshops/localeo-animation/2026-11-18/visuels/comparatif-avant-apres.html)
+  et [réserves de validation](../../../ateliers/ux-workshops/localeo-animation/2026-11-18/validation/risques-critiques.md).
 - 17 propositions et 204 votes **simulés** ; 11 adoptées : 1 P0, 8 P1, 2 P2.
   La demande actuelle autorise leur inscription dans le programme de travail.
   Elle n’est pas une recette de leurs maquettes ni une preuve de gain mesuré.
@@ -198,7 +198,7 @@ leurs preuves initiales, datées avant réalisation.
   E73-DEC-92/CA-42 restent applicables ; l’aperçu permissif AN-13 est un écart à
   diagnostiquer, sans création effective démontrée.
 
-Le [registre des décisions](../../ux-workshops/localeo-animation/2026-11-18/validation/decisions.md)
+Le [registre des décisions](../../../ateliers/ux-workshops/localeo-animation/2026-11-18/validation/decisions.md)
 trace l’accord explicite D2 et la primauté globale ; il ne transforme pas les
 autres votes fictifs en approbations individuelles de maquettes.
 
