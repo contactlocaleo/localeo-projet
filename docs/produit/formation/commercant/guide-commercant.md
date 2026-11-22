@@ -65,7 +65,7 @@ L'annulation est proposée seulement si le serveur fournit les informations néc
 
 Depuis l’accueil, **À traiter** présente les invitations avec le nom de
 l’animation et l’échéance de réponse. Ouvrez directement la demande concernée.
-Les autres tâches restent accessibles par les pages de cette rubrique ;
+Les invitations suivantes restent accessibles par les pages de cette rubrique ;
 **Scanner un QR** garde sa place au-dessus. Ouvrir une invitation ne l’accepte pas.
 
 Consultez les dates et votre mission ; ouvrez « Présentation et règlement » pour
@@ -82,12 +82,24 @@ pas une échéance serveur.
 
 ## Préparer son commerce pour une animation
 
-Après acceptation, **Préparer mon commerce** apparaît dans **À traiter** lorsque
-le suivi est actif et que votre préparation reste à confirmer. Télécharger le
-kit ne termine pas cette tâche : installez les supports et informez l’équipe,
-puis confirmez **Je suis prêt**. Une actualisation tient compte d’une confirmation
-faite depuis un autre accès autorisé. Lorsque le suivi est désactivé, les
-consignes restent dans **Préparation des animations**, sans déclaration imposée.
+Après acceptation, le bloc **Préparation des animations**, sous le scanner de
+l’accueil, distingue **À préparer ou terminer** et **En attente de l’organisateur**.
+Chaque vue affiche son nombre de préparations et cinq éléments par page, avec
+l’état, la prochaine action et un accès au parcours concerné. Les préparatifs
+de contenu, de support ou d’installation restent visibles même sans suivi
+déclaratif. Les préparations confirmées sans autre tâche restent consultables
+dans la liste complète.
+
+Télécharger le kit ne termine pas la préparation : installez les supports et
+informez l’équipe, puis confirmez **Je suis prêt** lorsque cette action est
+proposée. **Préparation : confirmée** et la date de déclaration indiquent son
+enregistrement ; la finalisation est **Terminée**, même si **Animation : En cours**
+reste affiché. Sans bouton de confirmation, l’écran précise ce qui est déjà
+enregistré ou le blocage à traiter. Une actualisation tient compte d’une
+confirmation faite depuis un autre accès autorisé. Lorsque le suivi est
+désactivé, aucune déclaration nouvelle n’est demandée ; une déclaration déjà
+enregistrée reste visible. Si un autre préparatif manque, il conserve sa propre
+prochaine action sans effacer cette déclaration.
 
 Ouvrez **Préparation des animations** dans le menu Pro, puis la participation
 acceptée à préparer. Vous pouvez aussi choisir **Ouvrir mon parcours de

@@ -53,7 +53,7 @@ Les captures sont réalisées directement dans l’application, sans redessiner 
 
 | Fichier actuel | Vue illustrée dans le guide |
 | --- | --- |
-| `01-accueil.png` | Scanner principal et accès aux réglages des notifications |
+| `01-accueil.png` | Préparations de l’accueil : actions à terminer et attentes de l’organisateur |
 | `02-validation.png` | Prestation de coffret à valider et action de confirmation |
 | `05-horaires.png` | Page publique chargée : statut du brouillon, complétion et accroche |
 | `08-activite.png` | Indicateurs d’activité : achats, réalisations et montants |
@@ -61,7 +61,7 @@ Les captures sont réalisées directement dans l’application, sans redessiner 
 | `12-invitations.png` | Invitation en attente avec organisateur, dates et échéance de réponse |
 | `13-guide-aide.png` | Guide PDF accessible dans Aide et contact |
 | `14-lot.png` | Lot entier, commerce de remise, validité et confirmation de remise |
-| `16-preparation.png` | Parcours guidé : étape à traiter et étape consultée |
+| `16-preparation.png` | Animation en cours, préparation confirmée datée et finalisation terminée |
 | `17-vitrines.png` | Relecture Vitrines : contenu public et réponse privée fictive |
 | `18-reglages.png` | État des notifications sur cet appareil et actualisation |
 | `19-equipe.png` | Accès salarié : compte, accès effectif, invitation et révocation |
@@ -69,6 +69,30 @@ Les captures sont réalisées directement dans l’application, sans redessiner 
 Les options Stripe, facturation, Chorus Pro, assistant d’émission, salariés et PIN sont présentées dans le texte comme dépendantes des droits et services disponibles. Une capture d’exemple ne prouve pas leur activation sur un environnement réel. La capture de réglages montre le cas où les notifications sont bloquées ; le guide explique aussi les autres états.
 
 ## Régénération et vérifications
+
+Le complément du **22 novembre 2026** sur les préparations actualise les captures
+`01-accueil.png` et `16-preparation.png` depuis la base Pro `643a90a` avec les
+modifications locales du correctif. La première montre les vues **À préparer ou
+terminer** et **En attente de l’organisateur**, ainsi que la première tâche ; la
+seconde distingue **Animation : En cours**, **Préparation : confirmée**, la date
+de déclaration et la finalisation **Terminée**. Les sources Commerçant sont
+actualisées dans la même livraison. Le guide Animation ne change pas : aucune
+procédure ni aucun écran de son application n’est modifié par ce complément.
+
+Pour recapturer uniquement ces deux vues, utiliser le build isolé
+`tmp/guide-preparations-status-dist`, puis
+`node scripts/capture-merchant-guide.mjs --dist tmp/guide-preparations-status-dist --only 01-accueil,16-preparation`.
+Les paramètres de triage et de pagination sont appliqués aux réponses simulées
+avant sélection des lignes, comme dans le contrat serveur.
+
+La recette finale de ce complément réussit : **12 pages rendues et relues**,
+copies canonique/embarquée/servie identiques, navigation et clavier vérifiés à
+**390 et 1440 pixels**, assistance simulée indisponible (HTTP 503), **zéro
+violation Axe** et aucun débordement horizontal. Les empreintes du PDF sont
+restées stables avant et après la vérification finale. Les nouvelles captures
+d’iconographie apportées en parallèle ont été conservées dans le PDF ; une
+première vérification avait détecté sa régénération concurrente, puis le cycle
+final capture, rendu, synchronisation et vérification a été rejoué.
 
 Depuis le dépôt `localeo-commercant`, sans charger de configuration opérateur :
 

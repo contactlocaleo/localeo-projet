@@ -83,6 +83,43 @@ Le guide Animation est sans impact : ses écrans et procédures de préparation
 et de validation ne changent pas. Les résultats exécutés sont consignés dans
 le [bilan du correctif](bilan-realisation.md#correctif-du-22-novembre-2026--clarifier-la-préparation-commerçant), séparément des preuves historiques.
 
+### Complément du 22 novembre 2026 — confirmation et accès depuis l’accueil Pro
+
+Une déclaration « Je suis prêt » enregistrée reste identifiable dans les
+préparations : **Animation : En cours** décrit l’animation ; **Préparation :
+confirmée** et la date décrivent la déclaration. Sa désactivation ultérieure du
+suivi ne supprime pas cette preuve. La finalisation confirmée est marquée
+**Terminée**, sans « Étape actuelle ». Si un produit, support ou contrôle reste
+incomplet, la déclaration conserve sa date mais le résumé indique cet élément,
+sa prochaine action et son acteur ; elle ne suffit pas à effacer ce travail.
+À l’étape 3, « Je suis prêt » reste disponible seulement selon les droits
+serveur ; sinon la confirmation ou le motif d’indisponibilité est explicite.
+
+Sous le scanner, l’accueil Pro présente **Préparation des animations**, avec
+**À préparer ou terminer** et **En attente de l’organisateur**. Chaque entrée
+reprend le résumé commun et ouvre l’étape courante du détail. Les invitations
+restent dans **À traiter**. Les préparations confirmées sans autre action
+restent consultables dans la liste complète. Sans suivi, les préparatifs restent
+accessibles et aucune déclaration ni preuve de téléchargement n’est inventée.
+
+Le GET `/protected/animation-locale/commercants/me/preparations` ajoute
+`triage=toutes|a_faire|organisateur`, avec `toutes` par défaut. Les deux files de
+l’accueil demandent cinq éléments par page. L’acteur du résumé détermine le
+groupe ; l’historique et les préparations sans action sont exclus des files.
+Sélection et total sont calculés avant pagination, en stockage, selon le même
+ordre de projection que le détail ; aucun chargement exhaustif ni détail par
+ligne. Une erreur de lecture masque l’action et le compteur périmés, conserve
+les lignes autorisées et propose un réessai local. Les contrôles et le focus
+restent en place ; refus et changement de compte retirent les données privées.
+
+Impacts : Backend, Commerçant et Projet ; contrat OpenAPI canonique et embarqué
+actualisés. Aucune migration ni réparation automatique de données, aucun nouveau
+paramètre opérateur. Le générateur de démonstration conserve ses faits et
+commandes ; seules les fixtures de recette évoluent. Guide Commerçant actualisé
+avec captures, PDF rendu et copie embarquée ; guide Animation sans impact car
+ses écrans et règles de déclaration/contrôle ne changent pas. Backend à livrer
+avant le frontend ; aucune mise en service distante n’est implicite.
+
 ## 1. Créer une édition — CA-01/02
 
 Le gestionnaire habilité travaille dans son organisation et sa commune active.

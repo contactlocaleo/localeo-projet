@@ -570,3 +570,90 @@ doit être livré avant le nouveau consommateur Commerçant. Les contrôles sont
 locaux et synthétiques, sans base PostgreSQL ni appareil physique ; aucun
 déploiement ni changement de données réelles n’est réalisé. Les commits et
 push sont séparés dans Backend, Commerçant et Projet conformément à la demande.
+
+### Complément du 22 novembre — confirmation et accueil Pro
+
+Le signalement concerne une déclaration **Je suis prêt**, suivie d’un affichage
+« En cours » et d’une étape 3 sans nouvelle validation possible. Dans l’arbre
+local, le statut de l’animation et l’étape courante pouvaient entretenir cette
+ambiguïté ; une déclaration disparaissait aussi de l’affichage lorsque le suivi
+était ensuite désactivé. Trois nouveaux tests ont d’abord échoué sur ces
+affichages, avant correction. Le cas distant exact n’a pas été consulté.
+
+Le détail et la liste identifient maintenant **Animation : En cours** et
+**Préparation : confirmée**, avec date de déclaration. Une finalisation
+confirmée est **Terminée**, sans « Étape actuelle ». Un prérequis encore
+incomplet conserve sa priorité et sa prochaine action, avec la déclaration
+antérieure visible. La disponibilité de **Je suis prêt** reste décidée par le
+serveur ; une indisponibilité est expliquée sans contourner ses règles.
+
+L’accueil ne sélectionne plus les seules déclarations possibles parmi les
+invitations. Son bloc dédié sépare les actions du commerçant et les attentes
+de l’organisateur, par pages de cinq, depuis le filtre serveur `triage`.
+L’ordre et l’acteur de la projection sont communs au résumé et à la sélection
+SQL ; compte et filtre précèdent la pagination. La revue indépendante a relevé
+la conversion des dates naïves selon le fuseau PostgreSQL : elles sont désormais
+interprétées en UTC comme dans le domaine, les offsets explicites étant préservés.
+
+Versions de référence de ce complément : Backend `b7edf6e4`, Commerçant
+`643a90a4`, Projet `b8b62180`, avec modifications locales. Les arbres comportent
+aussi des travaux parallèles de pilotage et d’iconographie, préservés ; les
+preuves ci-dessous ne constituent pas leur recette exhaustive.
+
+Preuves déjà terminées :
+
+- Backend, lanceur isolé : **880 tests réussis, aucun échec, erreur ou skip**,
+  dont 108 ciblés et 772 contrôles d’architecture/recensement. Les 75 cas
+  repository couvrent SQLite et PostgreSQL local (38/37), avec fuseau de session
+  `Europe/Paris`, dates naïves/offsets, configuration effective, révisions et
+  neutralisations QR, sélection au-delà de cinquante animations, isolation et
+  filtre/compte avant pagination. Rapport backend :
+  `.artifacts/preparation-triage-pg-tu1upsam/pytest.xml` ; `result.json` confirme
+  `exit_code=0` et `stopped=true`. Cluster PostgreSQL 11 jetable port 33378 arrêté,
+  sans contact avec une base installée. Cette preuve ne qualifie pas une charge
+  soutenue en production.
+- Composants, guidage, kit, cache et accueil : **74 tests réussis dans 7 fichiers**,
+  avec `node node_modules/vitest/vitest.mjs run --pool=threads --maxWorkers=1 --testTimeout=20000`
+  et sélection de `AnimationPreparationPage`, `AnimationKitSection`,
+  `VitrinePreparation`, `preparationContracts`, `preparationQueries`,
+  `MerchantPreparationsHome` et `MerchantHomePage`. Le délai de 20 secondes est
+  propre à cette exécution locale ; la configuration des tests reste inchangée.
+- Parcours `preparation-status.spec.js` et `suivi-animation.spec.js` : **8 réussis**,
+  à 390/1280 px, clavier et texte 200 %, confirmation persistante après retour,
+  absence de double commande, téléchargement sans déclaration, sans suivi,
+  actualisation échouée puis reprise et révocation. Zéro violation Axe sur le
+  détail avec texte agrandi. Port isolé 4183 et build distinct pour
+  ne pas réutiliser le serveur 4173 d’une autre tâche.
+- Contrat consommé : **33 tests réussis** après export isolé de **1222 routes**.
+  Contrat E41 régénéré par son générateur officiel ; aucune nouvelle structure
+  de réponse ni nouvelle commande. Les autres consommateurs gardent leurs contrats.
+- Guide Commerçant : **12 pages rendues et relues**, captures affectées
+  actualisées, copie embarquée synchronisée. Navigation, clavier, PDF HTTP 200
+  identique, assistance HTTP 503, absence de débordement et Axe vérifiés à
+  390/1440 px. Empreinte canonique/embarquée/servie stable après coédition :
+  `c7a4bd22c0e3d9bf7cb7a437045d4278298d9d6a2e618339e83413c2dae501d0`.
+- Documentation : contrôle global des guides sans erreur ni avertissement,
+  **155 sources exportées vérifiées** ; contrôles ciblés des trois sources
+  du guide également réussis.
+
+Rapports et captures Pro : `tmp/preparation-status-reports/`,
+`tmp/preparation-status-results-final/`, `tmp/preparations-guide-final-pdf/`,
+`tmp/preparations-guide-proof-{before,after}.json` et
+`tmp/guide-refresh-merchant-capture/verification.json`. Les essais initiaux ont
+rencontré des timeouts de démarrage de workers et des dépassements de cinq
+secondes sur cet hôte chargé ; aucun skip ni assertion affaiblie n’a été ajouté.
+
+Sans migration, nouveau paramètre opérateur, réparation de données ou génération
+sur un environnement installé. Le guide Animation n’est pas affecté par ce lot,
+qui ne change pas ses écrans ni procédures. Backend à livrer avant Pro. Aucun
+déploiement manuel n’est effectué pour ce complément.
+
+Publication Git du **22 novembre 2026**, après demande explicite : Backend
+`c68e0100` et Commerçant `e27ffec` committés puis poussés sur `origin/main`, dans
+cet ordre. La documentation et le guide sont publiés dans un commit Projet
+séparé. Seul l’ajout du paramètre généré `triage` est indexé dans les contrats
+OpenAPI E41 et Pro ; les exports complets comportent aussi des modifications
+de pilotage et de génération étrangères à ce lot, conservées localement.
+Les autres travaux locaux Animation, pilotage et iconographie ne sont pas
+inclus dans ces commits. Les preuves ci-dessus restent celles de la recette
+locale ; aucun résultat de déploiement distant n’est revendiqué.

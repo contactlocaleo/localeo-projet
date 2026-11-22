@@ -6,13 +6,13 @@
 
 Localeo Commerçant, affiché **Localeo Pro** dans l’application, vous accompagne au comptoir et dans le suivi du commerce. Retrouvez ce guide dans **Aide et contact > Consulter le guide commerçant (PDF)**.
 
-![Le scanner est l’action principale ; Ouvrir les réglages permet de vérifier les notifications.](illustrations/guide-quotidien/01-accueil.png)
+![Sous le scanner, Préparation des animations distingue vos actions et les attentes de l’organisateur.](illustrations/guide-quotidien/01-accueil.png)
 
 ### Commencer votre journée
 
 1. Ouvrez le lien fourni par Localeo. Saisissez votre email et votre mot de passe, puis **Se connecter**. Vérifiez le nom du commerce en haut.
 2. Utilisez **Scanner un QR** pour une animation, un lot ou un coffret.
-3. Dans **À traiter**, ouvrez une invitation ou un préparatif pour agir sur l’animation concernée. Utilisez la pagination si plusieurs pages sont disponibles.
+3. Dans **À traiter**, répondez aux invitations. Sous le scanner, **Préparation des animations** distingue **À préparer ou terminer** et **En attente de l’organisateur**. Ouvrez la préparation concernée ; chaque vue présente cinq éléments par page.
 
 ### Retrouver une fonction
 
@@ -157,13 +157,13 @@ Utilisez le refus proposé et confirmez. Pour une chasse : **Autres choix > Refu
 
 **Préparation des animations** affiche **En cours et à venir**, y compris avant publication. Chaque ligne indique l’état, la prochaine tâche et qui doit agir. **Historique** retrouve les animations clôturées ou annulées.
 
-![Le parcours met en évidence l’étape à traiter et permet de consulter les autres étapes.](illustrations/guide-quotidien/16-preparation.png)
+![Animation en cours et préparation confirmée sont distinctes ; la déclaration reste datée et la finalisation est terminée.](illustrations/guide-quotidien/16-preparation.png)
 
 ### Les trois gestes essentiels
 
 1. Choisissez **Voir la préparation**, puis **Comprendre ma mission** pour relire mission et dates. La frise distingue **Étape actuelle** et **Étape consultée** ; changer d’étape conserve les saisies sans les enregistrer.
 2. **Télécharger mon kit** : ouvrez le ZIP et imprimez les supports utiles. Préparez objets, emplacement et conditions d’accueil indiqués.
-3. Dans **Finaliser la préparation**, choisissez **Je suis prêt**, si disponible, quand tout est installé. Attendez la confirmation : l’organisateur est informé. **Suivi de préparation non activé** signifie qu’aucune déclaration de ce suivi n’est attendue.
+3. Dans **Finaliser la préparation**, choisissez **Je suis prêt**, si disponible, quand tout est installé. **Préparation : confirmée**, sa date et **Terminée** confirment l’enregistrement ; l’animation peut rester **En cours**. Un bouton absent s’accompagne de l’état ou du blocage à traiter.
 
 ### Utiliser le bon support
 
@@ -175,7 +175,7 @@ Utilisez le refus proposé et confirmez. Pour une chasse : **Autres choix > Refu
 
 **Passeport :** suivez les conditions du passage ; validez le QR personnel si la mission le demande. **Chasse :** installez le QR de lieu et préparez la mission retenue. **Tombola :** suivez le rôle indiqué dans l’invitation ; ne supposez pas qu’un passage est à valider. Vitrines et Juste Prix sont détaillés page suivante.
 
-Une date de fin dépassée ne clôture pas à elle seule l’animation. Les actions disponibles restent celles autorisées par l’organisateur et la plateforme.
+**Suivi de préparation non activé** : aucune déclaration n’est demandée. Une déclaration déjà enregistrée reste visible. Si un autre préparatif manque, sa prochaine action reste indiquée séparément. Une date de fin dépassée ne clôture pas à elle seule l’animation.
 
 > Télécharger le kit ne déclare pas le commerce prêt. Après un doute, utilisez **Vérifier mon kit** ou **Vérifier ma confirmation** avant une nouvelle action.
 

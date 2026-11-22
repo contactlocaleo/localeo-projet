@@ -128086,6 +128086,21 @@
             }
           },
           {
+            "name": "triage",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "enum": [
+                "toutes",
+                "a_faire",
+                "organisateur"
+              ],
+              "type": "string",
+              "default": "toutes",
+              "title": "Triage"
+            }
+          },
+          {
             "name": "page",
             "in": "query",
             "required": false,
