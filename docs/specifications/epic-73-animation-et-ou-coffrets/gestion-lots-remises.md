@@ -105,6 +105,78 @@ ciblées couvrent les états et dotations ci-dessus. Le
 distingue les preuves exécutées des contrôles encore à produire ; aucune
 activation d’environnement n’est attestée par cette spécification.
 
+## Correctif du 22 novembre 2026 — Prioriser la logistique des retraits
+
+La page **Lots et remises** doit permettre de préparer les retraits sans ouvrir
+chaque dossier, tout en gardant une vision de l'utilisation des bons et des
+coffrets. La présentation évolue dans Localeo Animation ; les lectures, les
+commandes et leurs contrôles serveur restent inchangés.
+
+### Repérer le travail et son contexte
+
+La synthèse distingue **Retraits et distribution** (Lots externes à retirer,
+Coffrets à distribuer) et **Utilisation des bons et coffrets** (Bons à utiliser,
+Coffrets à utiliser). Ces quatre compteurs sont des raccourcis de filtre, pas
+des sélections de bénéficiaires ni des commandes. Leur état choisi est visible
+et annoncé ; **Tous les lots** permet de revenir à l'ensemble des états.
+
+La synthèse conserve une vue d'ensemble de tous les types et états, même quand
+la liste affiche une tâche précise. Elle prend en compte l'animation, la
+recherche, le lieu de remise et l'échéance, mais omet les filtres de tâche
+`nature`, `etat` et `rappel_possible`. Sa portée est expliquée à l'écran :
+« Vue d'ensemble : tous les types de lots et tous les états. Animation,
+recherche, lieu et échéance restent pris en compte. » Les compteurs portent sur
+l'ensemble du périmètre serveur, jamais seulement sur les lignes visibles.
+Une synthèse indisponible reste indisponible ; elle n'est pas remplacée par zéro.
+
+Choisir un compteur applique l'état correspondant et retire les filtres de
+nature ou de rappel qui pourraient le contredire. **Tous les lots** retire ces
+trois filtres de tâche. Dans les deux cas, les critères de contexte sont
+conservés, la pagination reprend au début et la sélection de rappel est purgée
+selon les règles existantes. Le filtre opérationnel choisi reste compréhensible
+près de la liste, y compris lorsque les filtres avancés sont repliés. Les
+raccourcis n’ouvrent pas automatiquement ce volet : sa position reste conservée.
+
+### Lire une ligne pour agir
+
+Le tableau compare cinq colonnes : sélection, bénéficiaire et lot (avec
+l'animation), statut et consommation, retrait et échéance (avec le dernier
+rappel), puis actions. Les informations de dossier et les limites de qualité
+restent consultables. Les coordonnées de retrait et les dates utiles sont
+proches ; une donnée manquante est indiquée sans reconstitution. Sur mobile,
+chaque valeur conserve son libellé et les actions restent accessibles.
+
+L'état principal dépend de la nature du gain : retrait pour un lot externe,
+utilisation pour un bon, distribution et consommation pour un coffret. Lorsque
+les quantités sont fiables, un coffret indique les prestations utilisées sur
+le total et celles qui restent ; sinon, la consommation est indéterminée, sans
+division ni zéro inventé. Distribution, remise et consommation restent des
+faits distincts : un envoi n'atteste pas le retrait, une prestation consommée
+ne signifie pas que tout le coffret l'est.
+
+L'action principale autorisée ressort sur la ligne ; détail, dossier et actions
+secondaires demeurent accessibles. Aucun bouton n'ajoute une consommation au nom
+du commerçant. Les confirmations, versions, clés d'idempotence et reprises de
+résultats incertains sont conservées. Une lecture locale maintient formulaire,
+filtres et focus ; elle ne remonte pas une page entière en chargement.
+
+### Impacts et preuves attendues
+
+Ce correctif précise **GL-01, GL-03, GL-04 et GL-15** : vérifier les quatre
+raccourcis et leur remise à zéro, les filtres de contexte conservés, les
+compteurs indépendants de la page, les données inconnues, les trois natures de
+gains et les actions conditionnelles. Recette bureau/mobile, clavier et texte
+agrandi, relecture locale, pagination et retour au dossier sont nécessaires.
+Les preuves exécutées sont consignées dans le [bilan](verification-livraison.md).
+**GL-16 reste partiel** ; cette retouche ne qualifie pas la capacité de la synthèse.
+
+Le guide Animation et ses captures sont affectés. Le guide Commerçant est sans
+impact : ses écrans et procédures de validation ne changent pas. Aucun changement
+de contrat API, backend, règle métier, migration, batch, exploitation ou générateur
+de démonstration n'est nécessaire ; seules les données fictives de recette sont
+adaptées aux états présentés. Aucun déploiement ni réparation de données n'est
+attesté par ce correctif.
+
 ## Existant vérifié et écart
 
 Sources locales examinées : backend `0c0c4028`, Animation `8afc492`,
@@ -166,11 +238,12 @@ de remise lorsqu’applicable, échéance avant une date, présence d’un rappe
 possible. Recherche par début de nom du bénéficiaire ou référence ; saisie
 privée conservée en mémoire, pas dans une URL ou un stockage persistant.
 Le filtre Animation réutilise un sélecteur paginé, archives comprises.
-Depuis la simplification du 15 novembre, le bloc est plus étroit et aligné à
-gauche : Animation et Recherche restent visibles, les autres critères sont
+Depuis la simplification du 15 novembre, les filtres sont alignés à gauche :
+Animation et Recherche restent visibles, les autres critères sont
 repliables dans « Filtres avancés » avec un compteur de critères actifs.
-Fermer ce volet ne modifie pas les filtres ; un indicateur qui applique un état
-ouvre le volet pour rendre ce critère visible.
+Fermer ce volet ne modifie pas les filtres. Depuis le correctif du 22 novembre,
+la tâche sélectionnée reste aussi visible près de la liste ; les raccourcis
+appliquent les règles de contexte décrites plus haut.
 
 **Intervenir.** L’action principale autorisée apparaît sur la ligne :
 « Enregistrer la remise », « Distribuer le coffret », « Envoyer un rappel »
@@ -215,8 +288,10 @@ autre unité. Aucun total ne mélange gains, prestations et stock sans gagnant.
 Les quatre compteurs principaux sont des populations de travail identifiées,
 pas des pourcentages d’une somme unique. Les états secondaires de distribution,
 dossier et consommation peuvent se recouvrir ; l’écran ne les additionne pas.
-Les filtres du résumé sont identiques à ceux de la liste, hors pagination ;
-le serveur rend la portée, la date d’observation et la couverture. Une donnée
+Depuis le correctif du 22 novembre, le résumé reprend les filtres de contexte
+de la liste, hors pagination et filtres de tâche (`nature`, `etat`,
+`rappel_possible`), afin de garder visibles les quatre populations de travail.
+Le serveur rend la portée, la date d’observation et la couverture. Une donnée
 projetée ancienne ne permet jamais une action que les faits actuels refusent.
 
 ## Rappels — règles retenues
@@ -514,7 +589,7 @@ de remise.
 | --- | --- | --- | --- |
 | GL-01 | Entrée Lots et remises dans Suivre l’activité, commune/organisation visibles, sans sélection obligatoire d’animation | Navigateur bureau/mobile, lecteur/gestionnaire, lien direct et retour | Guide Animation et navigation ; fixture deux animations |
 | GL-02 | Liste globale des trois natures, y compris Coffret sans instance et archives, gains courants distincts des remplacés | API/SQL : trois natures, deux communes/organisations, archive et ancien gagnant ; aucune fuite | E41, projection et données historiques |
-| GL-03 | Compteurs exacts selon leurs unités, filtrés et datés, aucune assimilation clôture/remise/e-mail/consommation | Domaine des faits et tests de projection : partiel, zéro inconnu, expiré, révoqué, refus, gain/bon doublon, stock sans gagnant | Définitions ci-dessus ; fixture de chaque état, couverture de projection |
+| GL-03 | Compteurs exacts selon leurs unités, filtrés par contexte et datés, indépendants de la pagination et des filtres de tâche ; aucune assimilation clôture/remise/e-mail/consommation | Domaine des faits et tests de projection : partiel, zéro inconnu, expiré, révoqué, refus, gain/bon doublon, stock sans gagnant ; navigateur : quatre populations encore visibles après choix d'une tâche | Définitions ci-dessus ; fixture de chaque état, portée expliquée et couverture de projection |
 | GL-04 | Filtres/recherche/pagination serveur bornés, sans chargement de toutes les animations, bénéficiaires ou pages | API et PostgreSQL N/10N, curseur périmé/autre tenant, 25/100, plans et absence N+1 | E41 ; index et mesures de capacité |
 | GL-05 | Remise externe et attestation par les commandes existantes, directement dans la nouvelle section | Domaine/application/API et navigateur : succès, annulation, motif, version, rollback et relecture | Dotation/fin ; scénario synthétique, audit existant |
 | GL-06 | Retrait exceptionnel d’un lot externe clos après archivage ; aucun élargissement à QR/PIN/Coffret | Non-régression du correctif du 14 novembre et navigateur depuis la liste globale | FA-04, historique et règles existantes conservés |

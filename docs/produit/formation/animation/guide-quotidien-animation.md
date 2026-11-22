@@ -178,22 +178,22 @@ La date de fin prévue informe les habitants. **Tant que l'animation n'est pas r
 
 > L'alerte vous demande de vérifier puis de clôturer ; elle ne le fait pas à votre place. Ne confondez pas une date échue, une inscription fermée explicitement et une clôture effective. Après l'échéance prévue, les paramètres d'exploitation ne sont plus modifiables : vérifiez les dates avant cette échéance.
 
-## 11 · Organiser le tirage et remettre les lots
+## 11 · Organiser le tirage et les retraits
 
-**Objectif :** suivre les gagnants et les remises jusqu'à leur résolution.
+**Objectif :** préparer les retraits et suivre l'utilisation des bons et coffrets.
 
-![Gagnants et remise des lots distingue l'attribution, le suivi de remise, l'email et les actions encore possibles.](illustrations/guide-quotidien/remise-1024.png)
+![Lots et remises rapproche le bénéficiaire, le lot, son état, le retrait et l'action disponible.](illustrations/guide-quotidien/lots-remises-1024.png)
 
-1. Après la clôture, consultez le **tirage** : vérifiez la population éligible, les lots et les éventuels blocages.
-2. Lancez ou confirmez l'opération uniquement lorsqu'elle est proposée. Un tirage en préparation n'est pas un tirage confirmé.
-3. Dans **Gagnants et remise des lots**, vérifiez chaque gagnant et les consignes associées.
-4. Pour un lot externe, organisez la remise hors Localeo puis renseignez le suivi disponible. Pour un bon numérique, le commerce désigné valide la remise dans son espace ; les coffrets suivent leur propre parcours d'utilisation.
+1. Après la clôture, vérifiez le **tirage**, les lots et les blocages. Lancez l'opération lorsqu'elle est proposée ; attendez sa confirmation.
+2. Ouvrez **Suivre l'activité → Lots et remises**. Choisissez **Lots externes à retirer** ou **Coffrets à distribuer** pour préparer la distribution. Les autres compteurs suivent les bons et coffrets à utiliser.
+3. Recherchez le bénéficiaire ou filtrez l'animation. Vérifiez lot, état, **retrait et échéance**, puis utilisez l'action proposée. Le détail présente historique et dossier. Un rappel exige sélection et confirmation explicites.
+4. **Tous les lots** quitte le filtre de tâche ; animation, recherche, lieu et échéance sont conservés. Actualisez la section pour lire les derniers états.
 
-### Quand un dossier reste en attente
+### Distinguer retrait et consommation
 
-Une absence de réponse, un échec d'email ou une situation particulière peut laisser un dossier à traiter. Les actions proposées peuvent permettre de reprendre un envoi ou de remplacer un gagnant avec un motif autorisé. Ne considérez pas une attribution ou un email envoyé comme une remise physique accomplie.
+Un lot externe se retire physiquement ; le commerce désigné valide un bon. Un coffret distribué peut être utilisé en plusieurs fois : lisez les prestations utilisées et restantes lorsqu'elles sont connues. Un email envoyé ne prouve pas une remise.
 
-> Consultez **Fin de l'animation** pour retrouver les blocages, opérations en cours et unités non résolues. Résolvez-les avant de chercher à terminer ou archiver l'édition.
+> Les compteurs couvrent tous les types et états du contexte choisi, indépendamment de la page et du filtre de tâche. Une information indisponible n'est pas zéro. Consultez **Fin de l'animation** pour résoudre les dossiers avant de terminer ou archiver.
 
 ## 12 · Lire le bilan et préparer une nouvelle édition
 

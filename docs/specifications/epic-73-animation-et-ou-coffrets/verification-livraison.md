@@ -5439,3 +5439,63 @@ API, données, migrations, permissions, configuration et générateur de
 démonstration sans impact ; aucun contrat ou champ consommé supplémentaire.
 Les deux dépôts modifiés restent Marketplace et Projet. Aucun commit, push,
 déploiement ou essai habitant réel pour cette finition.
+
+## Correctif du 22 novembre 2026 — logistique des lots et remises
+
+Demande : faciliter l’organisation des retraits depuis Localeo Animation,
+tout en gardant une visibilité sur les bons et les coffrets utilisés.
+[Cible et critères GL-01/03/04/15](gestion-lots-remises.md#correctif-du-22-novembre-2026--prioriser-la-logistique-des-retraits).
+Bases propres : Animation `9ba1e8c`, Projet `90b63fd` ; preuves sur ces bases
+avec les changements du correctif, avant les commits séparés demandés.
+Code et guide embarqué committés et poussés dans Animation : `464711e`.
+
+Le tableau précédent répétait distribution et consommation pour toutes les
+natures, ne montrait pas les quantités du coffret et repliait le retrait sur
+mobile. Il compare maintenant cinq colonnes : bénéficiaire/lot/animation,
+état et consommation, retrait/échéance/rappel, sélection et actions. Remise et
+distribution sont mises en évidence. Les actions autorisées, confirmations,
+versions, reçus, idempotence, pagination et restaurations restent les mêmes.
+
+La synthèse sépare retraits/distribution et utilisation des bons/coffrets.
+Elle conserve le contexte animation, recherche, lieu et échéance, en omettant
+les filtres de tâche nature, état et possibilité de rappel. Ouvrir une file
+ne masque donc pas les autres natures. La portée est expliquée à l’écran ;
+aucun compteur n’est recomposé depuis la page. Les raccourcis retirent les
+critères contradictoires et gardent les filtres avancés dans leur position.
+« Tous les lots » conserve le contexte. Les prestations encore utilisables
+proviennent directement du serveur, sans soustraction des consommations.
+
+La revue indépendante du diff n’a relevé aucun écart bloquant sur portée,
+confidentialité, données inconnues, droits et reprise. L’inspection visuelle a
+conduit à élargir la colonne Actions à 1024 px pour éviter des mots coupés.
+Le cadrage du guide a aussi été réduit aux deux premières lignes pour garder
+les libellés lisibles dans le PDF ; aucune capture n’est redessinée.
+
+| Contrôle exécuté dans Animation | Résultat |
+| --- | --- |
+| `pnpm typecheck`, `pnpm lint` | Réussis après les dernières modifications de l’interface. |
+| `pnpm test` | **400 tests réussis**, sans échec ni skip. Les trois nouveaux tests couvrent contexte de synthèse, critères contradictoires, consommation partielle et quantités inconnues. Les contrats, CSRF et reçus existants restent couverts. |
+| `node scripts/build-check.mjs` | Builds synthétiques isolés réussis, dernier `tmp/quality-build-ZhDZiQ`, contenant le PDF final. Avertissement de taille de chunk conservé. Aucune configuration opérateur utilisée. |
+| `ANIMATION_TEST_DIST=tmp/quality-build-fVJv7l node tests/browser/lots-remises.mjs` | **116 scénarios réussis** : 29 scénarios à 320/390/1280 px et texte 200 % à 1280 px. Remise, attestation, retrait exceptionnel, distribution incertaine, conflit/refus, rappels individuels/groupés et reçus, sélection, curseurs, contexte et erreurs locales. |
+| Après finitions : `ANIMATION_TEST_DIST=tmp/quality-build-ZhDZiQ node tests/browser/lots-remises.mjs logistics compact-filters navigation` | **12 scénarios réussis**, quatre rendus : retrait mobile déplié, quantités du coffret, inconnus, synthèse conservée pendant le choix d’état, retour Tous les lots, filtres avancés repliés, clavier/focus, actions lisibles et absence de débordement du contenu principal. |
+| `tests/browser/animation-guide.mjs --only=lots-remises --captures-only` sur le build `oOShOO` | **2 captures** à 1024/390 px, aucune requête inconnue, erreur navigateur ou écriture. Fixtures de session indépendantes de l’horloge ; données fictives, aucun QR exploitable. |
+| `py -3.14 scripts/generate-animation-guide.py --preview-dir tmp/lots-guide/pdf-pages`, `guide:sync`, `guide:check` | **13 pages** rendues et relues, page 11 inspectée en détail ; source, captures et copie PDF embarquée actualisées. |
+| `ANIMATION_TEST_DIST=tmp/quality-build-ZhDZiQ node tests/browser/animation-guide.mjs --access-only` | Accès au guide vérifié à 390/1024 px : clavier et nouvel onglet, HTTP 200, octets égaux au PDF canonique, PDF absent en 404 ; lien toujours accessible quand l’assistance répond HTTP 503. |
+| `py -3.14 scripts/check_guidance.py --changed --all-markdown`, `py -3.14 scripts/sync_documentation.py --check-sources` | Liens sans erreur ni avertissement ; **155 sources vérifiées**. `git diff --check` réussi dans les dépôts modifiés. |
+
+Rapports non versionnés : `tmp/gl-lots-ui-captures-yrksoj/report.json`,
+`tmp/gl-lots-ui-captures-0xUqE1/report.json`, `tmp/guide-lots-diagnostic/`,
+`tmp/guide-lots-access-final/` et `tmp/lots-guide/pdf-pages/` dans Animation.
+Le premier essai du banc guide avait révélé une expiration de session synthétique
+liée à l’horloge : la fixture expire désormais en 2099, sans modification de
+l’authentification réelle. Le sélecteur du filtre de tâche a été précisé dans
+la recette pour distinguer son option masquée de son libellé visible.
+
+Applications modifiées : **Animation et Projet**. Aucun changement de contrat
+API, règle de remise/consommation, migration ou configuration. Les données et
+commandes du générateur de démonstration restent inchangées ; seules les fixtures
+de recette UI évoluent. Guide Commerçant sans impact : ses écrans et procédures
+ne changent pas. **GL-16 reste partiel** : aucune qualification de capacité de
+la synthèse à forte volumétrie n’est revendiquée. Les preuves sont locales et
+synthétiques ; aucune opération réelle de retrait, aucun appareil physique ni
+déploiement ne sont attestés. Commits et push séparés selon la demande.
