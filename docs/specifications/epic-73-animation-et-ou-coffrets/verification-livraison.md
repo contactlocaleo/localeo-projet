@@ -1,5 +1,137 @@
 # E73 — Vérification, migration et livraison
 
+## Pilotage unifié des animations — 22 novembre 2026
+
+Évolution **E73-EVO-DASHBOARD-PILOTAGE**, critères
+[PIL-01 à PIL-12](ux-productivite-organisateur.md#évolution-du-22-novembre-2026--pilotage-unifié-des-animations).
+Bases Backend `b7edf6e4`, Animation `08aef5a`, Projet `b8b6218`.
+Intégration finale sur Backend `c68e0100`, Animation `5acced0` et Projet
+`89b97ed8` : les commits de préparation mobile et d'iconographie intervenus
+pendant les vérifications sont conservés comme ancêtres de cette livraison.
+Les bilans et la clôture historiques restent acquis ; ce lot ne les réécrit pas.
+
+Un seul écran associe période commune, quatre indicateurs, comparaison,
+évolution quotidienne et rapport paginé avec qualification de cohorte actuelle.
+La carte Utilisations sépare bons, coffrets distincts et prestations.
+L'export reprend les animations ayant eu une activité sur la période, sous plafond de
+10 000, et les mêmes bornes signées. Les trois priorités sont actuelles et
+indépendantes de la période ; leur lien ouvre la vraie liste À traiter.
+Les préférences personnelles de clôture sont conservées.
+
+### Architecture, confidentialité et capacité
+
+Le domaine résout les périodes civiles Paris et la comparaison, y compris les
+heures répétées/inexistantes. L'application autorise le périmètre et orchestre
+une transaction de lecture cohérente. Le repository agrège les faits confirmés
+existants sans charger de participant individuel. Les projections de qualification
+manquantes ou obsolètes produisent une indisponibilité explicite. La cohorte ne
+reconstruit pas une qualification historique.
+
+La première mesure à 10 000 animations a révélé une jointure de cohorte coûteuse.
+Le calcul est désormais limité aux 26 animations sélectionnées en SQL pour la
+page et aux lots de 250 pour le CSV. L'agrégat courant est partagé entre totaux
+et page, au lieu de recalculer deux fois les mêmes faits. Les séries ne lisent
+que les inscriptions et passages. Les premières mesures ayant échoué restent
+des constats de diagnostic, jamais des succès de capacité.
+
+Le CSV est préparé entièrement avant HTTP 200 dans un fichier temporaire
+avec déport disque au-delà de 1 Mio ; une erreur ne produit pas un succès
+partiel. Périmètre et droits sont revérifiés, jetons expirent à 30 minutes,
+formules de tableur neutralisées, aucune réponse ni identité habitant exportée.
+Les bornes signées figent la période, pas une version historique de la base.
+
+### Preuves du lot Pilotage
+
+- Backend isolé sur le worktree propre : **796 tests réussis**, architecture,
+  classes domaine, couverture use cases, périodes, orchestration, API et CSV,
+  via `scripts/validation/test_isolated.py`. Rapport
+  `tmp/pilotage-clean-backend.xml`. Les passes de l'agent se recouvrent :
+  elles ne s'ajoutent pas à ce nombre.
+- PostgreSQL jetable sur `127.0.0.1:55451` : passe finale **7 tests réussis**,
+  cinq fonctionnels pilotage, export 10 000 et HTTP. Six moteurs, cohorte exacte,
+  confirmations publiques, archives, projections obsolètes, corrections et trois
+  dotations, bornes/pagination/export et refus de périmètre couverts. Les anciens
+  scénarios quotidiens réutilisés ont aussi été exécutés (**18 réussites** dans
+  la sélection croisée antérieure). Aucun skip ni assertion affaiblie.
+- Banc HTTP ASGI/TestClient avec vrai Bearer, droits, UoW et PostgreSQL :
+  **20 lectures à 1 000 puis 10 000 animations/participants**, 12 requêtes SQL
+  constantes dont 3 analytiques ; p95 **420/388 ms**, p99 **737/407 ms**,
+  réponse **13,7 Kio**. Rapport final Backend
+  `tmp/dashboard-pilotage-backend-http-4445f50086c74de299d35878dfc13aaa.json`.
+  Les seuils API 1 s/2 s sont respectés dans ce banc. Il ne mesure ni socket,
+  réseau, hébergement, charge mixte ni p95 de rendu de la première page.
+- Export complet 10 000 animations : **3,563 s**, 45 requêtes repository
+  (5 fixes et 40 lots de 250). Rapport
+  `tmp/dashboard-pilotage-backend-capacite-10000-1a74138d32184cad90cd1dc1bf0dbcfd.json`.
+  Le premier banc HTTP échoué et le diagnostic SQL/cProfile sont conservés
+  sous `tmp/dashboard-pilotage-backend-http-595f34349a5b4cb69d56c66189293ebc.json`
+  et `tmp/dashboard-pilotage-backend-http-09224688607c4493a3844fdf88b27cc8.json`.
+  Ils ont conduit aux corrections décrites, sans modifier les budgets.
+- Animation, tests Node ciblés API pilotage/activité et préférences :
+  **13 réussites**, aucune erreur ni skip.
+- Après intégration Backend : **797 tests isolés réussis**, même sélection
+  architecture/domaine/application/API/CSV, rapport
+  `tmp/pilotage-integrated-backend.xml`. Ce rejeu remplace la preuve de la
+  sélection précédente pour l'arbre intégré ; les nombres ne s'additionnent pas.
+- Avant intégration UI : types, lint et build PWA isolé réussis ; recette
+  complète **4 profils** à 1280/390/320 px et texte 200 %, rapport
+  `tmp/dashboard-pilotage-ui-report-ImGv4I/report.json`. Profil critical
+  Pilotage ciblé **2 réussites**, rapport
+  `tmp/pilotage-critical-targeted/dashboard-pilotage-ui-report-V8YMvT/report.json`.
+  Session : cookie, actualisation, onglet, panne transitoire, expiration,
+  révocation, déconnexion et préflights réussis.
+  Ces recettes couvrent les lectures lentes/503 dans les deux sens de
+  pagination, conservation des cartes/table/focus et refus d'export tardif après
+  changement de page. Un sélecteur SVG ambigu du nouveau banc a été corrigé
+  pour viser le graphique, sans affaiblir son assertion.
+- Le socle navigateur global a échoué avant les scénarios Pilotage sur une
+  assertion de navigation préexistante : 14 destinations attendues pour 16
+  présentes. Il constatait aussi des mocks manquants de vues/préparations.
+  Rapport `tmp/dashboard-pilotage-critical-final-3/report.json`. L'assertion
+  est conservée ; cette passe n'est pas présentée comme verte. Les tests ciblés
+  Pilotage et session ci-dessus ont été exécutés séparément.
+- Interface intégrée sur `5acced0` : types et lint réussis ; build PWA
+  synthétique `tmp/dashboard-pilotage-integrated-build` réussi, sans dotenv.
+  Avertissement de taille de chunk principal supérieur à 500 ko conservé.
+  La recette Pilotage **4 profils** réussit à nouveau, rapport
+  `tmp/pilotage-integrated-browser/dashboard-pilotage-ui-report-aWZNIz/report.json`.
+  Les retours vers `/tableau-de-bord` et `/animations?a_traiter=true` sont
+  désormais préservés aussi par le helper de changement d'onglet ; tests de
+  navigation et API Pilotage **11 réussites**, variantes externes refusées.
+- Suite Node Animation complète sur l'arbre intégré : **424 tests réussis**,
+  zéro échec ni skip, exécution séquentielle pour borner les ressources.
+  Journal `tmp/pilotage-integrated-node.log`.
+- Contrats générés hors ligne depuis le Backend intégré : E41 **1 222 chemins**,
+  E42 **92 chemins**, copie Animation identique à E41, SHA-256
+  `7ac7b3cafaf54141c4d1e374a0055754fbd022c077cdd4fc87f2aa260fde0a92`.
+  La vue E42 garde ses routes publiques ; ses composants générés incluent les
+  nouveaux schémas privés sans modifier un consommateur Live.
+- Guide Animation intégré : six captures de la vraie interface à 1024/390 px,
+  API synthétique, aucun appel inconnu, erreur ou écriture ; **16 pages**
+  rendues et relues. Préparation mobile et iconographie précédemment commitées
+  sont conservées. Accès clavier/nouvel onglet, HTTP 200, contenu PDF et aide
+  avec assistance HTTP 503 réussis à 1024/390 px. Rapports Animation
+  `tmp/pilotage-integrated-guide-captures-3aGLnh/provenance.json` et
+  `tmp/pilotage-integrated-guide-access-QbgulY/provenance.json`.
+  PDF canonique, copie publique et copie servie identiques, SHA-256
+  `e8a8b59eb7fc435c805b1d043a0f9c73da3f00aa3f139f393d45e3c1273e5413`.
+
+### Impacts et limites
+
+Backend, Animation et Projet sont concernés. Les contrats historiques restent
+compatibles. Aucune migration, configuration, notification réelle, tâche planifiée
+ou génération sur cible n'est ajoutée. Guide Commerçant sans impact : aucun de
+ses écrans ou gestes de préparation/validation ne change dans ce lot. Live et
+ses consommateurs publics ne changent pas.
+
+Les arbres partagés contiennent des modifications concurrentes de préparation
+mobile, d'iconographie et de suivi commerçant. Les sources livrées sont isolées
+dans des worktrees propres sur les bases ci-dessus ; seuls les changements du
+pilotage, ses contrats et son guide sont préparés pour les commits. Aucun reset,
+stash ou écrasement des modifications concurrentes n'est pratiqué.
+La recette synthétique locale ne prouve ni déploiement ni comportement Render,
+réseau réel, téléphone physique ou lecteur d'écran matériel.
+
 ## Essentielle à trois animations — 22 novembre 2026
 
 Correction sur bases Backend `c7ab12d` et Projet `76b669c`, arbres initialement

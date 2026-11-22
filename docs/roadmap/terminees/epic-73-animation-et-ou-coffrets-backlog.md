@@ -1,5 +1,16 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+## Évolution du 22 novembre 2026 — pilotage unifié
+
+**E73-EVO-DASHBOARD-PILOTAGE**, implémentation demandée après validation de la
+proposition : période commune, quatre indicateurs, comparaison et courbe,
+résultats par animation avec qualification de cohorte, export CSV complet et
+trois priorités actuelles. Les [critères PIL-01 à PIL-12](../../specifications/epic-73-animation-et-ou-coffrets/ux-productivite-organisateur.md#évolution-du-22-novembre-2026--pilotage-unifié-des-animations)
+remplacent la présentation quotidienne/historique séparée, sans modifier les
+règles de participation ni les préférences personnelles de rappel. Backend,
+Animation et Projet concernés ; Guide Animation actualisé. Clôture et bilans
+historiques E73 conservés ; les preuves propres au lot figurent au bilan commun.
+
 ## Évolution du 22 novembre 2026 — tableau de bord quotidien
 
 **E73-EVO-DASHBOARD-JOUR**, réalisation et vérifications locales. Les critères

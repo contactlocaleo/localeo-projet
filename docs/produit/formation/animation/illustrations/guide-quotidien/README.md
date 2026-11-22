@@ -8,6 +8,71 @@ Animation, base `08aef5a` avec la nouvelle iconographie. La recette
 dossier de captures isolé. Le chapitre Dotation précise le raccourci
 **Lots** en configuration sur mobile.
 
+## Évolution du 22 novembre 2026 - pilotage unifié des animations
+
+Les captures `pilotage-indicateurs-1024.png`, `pilotage-resultats-1024.png` et
+`pilotage-priorites-1024.png`, avec leurs variantes `390`, remplacent les vues
+du tableau de bord dans les trois premiers chapitres. Elles montrent la vraie
+interface React avec une commune et des chiffres fictifs, sans donnée privée.
+
+Le guide distingue choix de période et indicateurs, résultats par animation et
+export CSV, puis priorités et rappels personnels. Cette édition comporte
+**seize chapitres**, avec une page par chapitre afin de conserver la lisibilité.
+Les captures historiques ci-dessous restent conservées comme archives de leur
+édition ; elles ne décrivent pas le tableau de bord courant.
+
+Depuis `localeo-animation`, avec Chromium et les dépendances du générateur :
+
+```powershell
+$env:ANIMATION_TEST_DIST = 'tmp/dashboard-pilotage-guides-build'
+node scripts/build-pwa-tests.mjs
+node tests/browser/dashboard-pilotage-guide.mjs
+py -3.14 scripts/generate-animation-guide.py --preview-dir tmp/dashboard-pilotage-guides-pdf
+npm run guide:sync
+npm run guide:check
+node scripts/build-pwa-tests.mjs
+node tests/browser/dashboard-pilotage-guide.mjs --access-only
+```
+
+Le premier build et la capture utilisent une API locale simulée vers
+`api.test.invalid`, une horloge pédagogique au 22 novembre 2026 à midi UTC et
+un port HTTP éphémère. Les fichiers `provenance.json` des rapports
+`localeo-animation/tmp/dashboard-pilotage-guides-captures-*` conservent le
+chemin exact du build, les largeurs et les requêtes inconnues éventuelles.
+Le second build incorpore le PDF final pour vérifier son accès et ses octets.
+Ces recettes locales ne prouvent aucun déploiement distant.
+
+Passe intégrée exécutée sur Animation `54efabe`, après reprise des évolutions
+de préparation mobile et d'iconographie de `main` (`5acced0`) : captures du
+build `tmp/dashboard-pilotage-integrated-build`, rapport
+`tmp/pilotage-integrated-guide-captures-3aGLnh`. Les trois zones sont prises
+à **1 024 et 390 px**, sans retouche du DOM, erreur navigateur, requête inconnue
+ni écriture. Les rappels sont dépliés par une action réelle dans l'interface.
+Les **seize pages** du PDF ont été rendues et relues, avec inspection détaillée
+des premiers chapitres et de la création mobile. Le build intégré sert
+la copie PDF finale synchronisée : HTTP 200, type PDF, contenu identique au canonique, accès
+clavier et nouvel onglet vérifiés à 1 024 et 390 px, y compris avec l'assistance
+en HTTP 503. Rapport d'accès :
+`tmp/pilotage-integrated-guide-access-QbgulY/provenance.json`.
+
+Cette passe utilise les checkouts propres `localeo-animation-pilotage-1795371720466`
+et `localeo-projet-pilotage-1795371720466`. La racine documentaire est transmise
+au banc par `ANIMATION_GUIDE_PROJECT_ROOT` et au générateur par `--project-root`.
+Le PDF est ensuite copié explicitement vers `public/guides` et le dossier
+`guides` du build servi, sans reconstruire ni modifier son JavaScript.
+Les chapitres et illustrations hors pilotage conservent les évolutions mobiles
+et iconographiques déjà livrées dans Projet `89b97ed`. Les nouvelles captures
+du pilotage utilisent également cette iconographie. La numérotation des seize
+chapitres reste continue. Les aperçus relus sont dans
+`tmp/pilotage-integrated-guide-pdf` ; le PDF canonique, la copie embarquée et
+le fichier servi partagent le SHA-256
+`e8a8b59eb7fc435c805b1d043a0f9c73da3f00aa3f139f393d45e3c1273e5413`.
+Le préfixe de rapport est fourni au banc par `ANIMATION_GUIDE_ARTIFACTS` afin
+d'isoler cette passe des autres recettes.
+
+La modification concerne l'espace organisateur. Le guide Commerçant est sans
+impact : ses parcours de scanner, préparation et activité ne changent pas.
+
 ## Ajout du 22 novembre 2026 - maximum de mauvaises réponses
 
 Les captures `mauvaises-reponses-1280.png` et `mauvaises-reponses-390.png`

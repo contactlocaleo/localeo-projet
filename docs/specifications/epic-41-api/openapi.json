@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Backend - contrat implemente EPIC 41",
     "description": "OpenAPI complet du backend, dont les parcours Animation locale. Genere hors ligne depuis le code local pour les integrations et les mocks ; cet instantane ne prouve pas son deploiement.",
-    "version": "1.0.0+2a9fd75"
+    "version": "1.0.0+523134a"
   },
   "paths": {
     "/public/identite-acces/interne/connexion": {
@@ -115910,6 +115910,258 @@
         ]
       }
     },
+    "/protected/animation-locale/dashboard-pilotage": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Consulter Dashboard Pilotage",
+        "operationId": "consulter_dashboard_pilotage_animation",
+        "parameters": [
+          {
+            "name": "periode",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "enum": [
+                "jour",
+                "7j",
+                "30j",
+                "personnalisee"
+              ],
+              "type": "string",
+              "default": "7j",
+              "title": "Periode"
+            }
+          },
+          {
+            "name": "date_debut",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Date Debut"
+            }
+          },
+          {
+            "name": "date_fin",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Date Fin"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 4096
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DashboardPilotagePayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Période ou curseur invalide/expiré",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/animation-locale/dashboard-pilotage/export.csv": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Exporter Dashboard Pilotage",
+        "operationId": "exporter_dashboard_pilotage_animation",
+        "parameters": [
+          {
+            "name": "periode",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "enum": [
+                "jour",
+                "7j",
+                "30j",
+                "personnalisee"
+              ],
+              "type": "string",
+              "default": "7j",
+              "title": "Periode"
+            }
+          },
+          {
+            "name": "date_debut",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Date Debut"
+            }
+          },
+          {
+            "name": "date_fin",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Date Fin"
+            }
+          },
+          {
+            "name": "snapshot",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4096,
+              "title": "Snapshot"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "text/csv": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Période/snapshot invalide ou expiré, ou plus de 10000 animations ayant une activité dans la période",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
     "/protected/animation-locale/dashboard-activite": {
       "get": {
         "tags": [
@@ -116470,6 +116722,16 @@
                 }
               ],
               "title": "Suivi Actif"
+            }
+          },
+          {
+            "name": "a_traiter",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "A Traiter"
             }
           },
           {
@@ -143788,6 +144050,115 @@
         ],
         "title": "AnimationParticipationLive"
       },
+      "AnimationPilotagePayload": {
+        "properties": {
+          "inscriptions": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Inscriptions"
+          },
+          "passages_valides": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Passages Valides"
+          },
+          "lots_retires": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Lots Retires"
+          },
+          "bons_utilises": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Bons Utilises"
+          },
+          "coffrets_utilises": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Coffrets Utilises"
+          },
+          "prestations_consommees": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Prestations Consommees"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "nom": {
+            "type": "string",
+            "title": "Nom"
+          },
+          "modele_code": {
+            "type": "string",
+            "title": "Modele Code"
+          },
+          "derniere_activite": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Derniere Activite"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          },
+          "cohorte_inscriptions": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Cohorte Inscriptions"
+          },
+          "cohorte_qualifies": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cohorte Qualifies"
+          },
+          "taux_qualification": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 100.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Taux Qualification"
+          },
+          "qualification_disponible": {
+            "type": "boolean",
+            "title": "Qualification Disponible"
+          }
+        },
+        "type": "object",
+        "required": [
+          "inscriptions",
+          "passages_valides",
+          "lots_retires",
+          "bons_utilises",
+          "coffrets_utilises",
+          "prestations_consommees",
+          "id",
+          "nom",
+          "modele_code",
+          "derniere_activite",
+          "statut",
+          "cohorte_inscriptions",
+          "cohorte_qualifies",
+          "taux_qualification",
+          "qualification_disponible"
+        ],
+        "title": "AnimationPilotagePayload"
+      },
       "AnimationPreparationCourantePayload": {
         "properties": {
           "id": {
@@ -153734,6 +154105,38 @@
         ],
         "title": "ComparaisonMesuresDTO"
       },
+      "ComparaisonPilotagePayload": {
+        "properties": {
+          "debut": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Debut"
+          },
+          "fin": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Fin"
+          },
+          "totaux": {
+            "$ref": "#/components/schemas/CompteursActiviteAnimationPayload"
+          },
+          "variations": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/VariationPilotagePayload"
+            },
+            "type": "object",
+            "title": "Variations"
+          }
+        },
+        "type": "object",
+        "required": [
+          "debut",
+          "fin",
+          "totaux",
+          "variations"
+        ],
+        "title": "ComparaisonPilotagePayload"
+      },
       "ComplementServiceInput": {
         "properties": {
           "expectedVersion": {
@@ -159170,6 +159573,96 @@
           "animations_a_action"
         ],
         "title": "DashboardPerformanceAnimationPayload"
+      },
+      "DashboardPilotagePayload": {
+        "properties": {
+          "periode": {
+            "type": "string",
+            "enum": [
+              "jour",
+              "7j",
+              "30j",
+              "personnalisee"
+            ],
+            "title": "Periode"
+          },
+          "debut": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Debut"
+          },
+          "fin": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Fin"
+          },
+          "observedAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Observedat"
+          },
+          "partielle": {
+            "type": "boolean",
+            "title": "Partielle"
+          },
+          "totaux": {
+            "$ref": "#/components/schemas/CompteursActiviteAnimationPayload"
+          },
+          "comparaison": {
+            "$ref": "#/components/schemas/ComparaisonPilotagePayload"
+          },
+          "series": {
+            "items": {
+              "$ref": "#/components/schemas/SeriePilotagePayload"
+            },
+            "type": "array",
+            "maxItems": 366,
+            "title": "Series"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/AnimationPilotagePayload"
+            },
+            "type": "array",
+            "maxItems": 100,
+            "title": "Items"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          },
+          "hasMore": {
+            "type": "boolean",
+            "title": "Hasmore"
+          },
+          "snapshot": {
+            "type": "string",
+            "title": "Snapshot"
+          }
+        },
+        "type": "object",
+        "required": [
+          "periode",
+          "debut",
+          "fin",
+          "observedAt",
+          "partielle",
+          "totaux",
+          "comparaison",
+          "series",
+          "items",
+          "nextCursor",
+          "hasMore",
+          "snapshot"
+        ],
+        "title": "DashboardPilotagePayload"
       },
       "DecisionActualisation": {
         "properties": {
@@ -205701,6 +206194,50 @@
         ],
         "title": "SelectionPriorite"
       },
+      "SeriePilotagePayload": {
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date",
+            "title": "Date"
+          },
+          "date_precedente": {
+            "type": "string",
+            "format": "date",
+            "title": "Date Precedente"
+          },
+          "inscriptions": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Inscriptions"
+          },
+          "passages_valides": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Passages Valides"
+          },
+          "inscriptions_precedentes": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Inscriptions Precedentes"
+          },
+          "passages_valides_precedents": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Passages Valides Precedents"
+          }
+        },
+        "type": "object",
+        "required": [
+          "date",
+          "date_precedente",
+          "inscriptions",
+          "passages_valides",
+          "inscriptions_precedentes",
+          "passages_valides_precedents"
+        ],
+        "title": "SeriePilotagePayload"
+      },
       "ServicePreparationPayload": {
         "properties": {
           "operationId": {
@@ -210454,6 +210991,31 @@
           "taux"
         ],
         "title": "VariationMesureDTO"
+      },
+      "VariationPilotagePayload": {
+        "properties": {
+          "delta": {
+            "type": "integer",
+            "title": "Delta"
+          },
+          "pourcentage": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pourcentage"
+          }
+        },
+        "type": "object",
+        "required": [
+          "delta",
+          "pourcentage"
+        ],
+        "title": "VariationPilotagePayload"
       },
       "Ventilation": {
         "properties": {

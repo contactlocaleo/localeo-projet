@@ -2,30 +2,54 @@
 
 <!-- Source canonique du PDF ; générateur dans localeo-animation/scripts/generate-animation-guide.py. Édition du 22 novembre 2026. Les captures montrent l'application réelle avec des données d'exemple, jamais des comptes de production. -->
 
-## 1 · Se repérer dans son espace
+## 1 · Piloter l'activité de ses animations
 
-**Objectif :** retrouver la bonne commune et les priorités de votre organisation.
+**Objectif :** comprendre l'activité de la commune sur une période commune.
 
-![Le tableau de bord présente l'activité du jour ou des sept derniers jours dans la commune active. Les chiffres sont fictifs.](illustrations/guide-quotidien/tableau-de-bord-1024.png)
+![Pilotage des animations rassemble les indicateurs et leur évolution sur les sept derniers jours. Les chiffres sont fictifs.](illustrations/guide-quotidien/pilotage-indicateurs-1024.png)
 
 1. Connectez-vous avec votre compte personnel. Acceptez, si nécessaire, l'invitation de votre organisation reçue par email.
 2. Vérifiez le nom de l'organisation et la **commune active** dans l'en-tête. Le changement de commune renouvelle les informations affichées.
-3. Dans **L’activité de vos animations**, choisissez **Aujourd’hui** ou **7 derniers jours**. Les chiffres couvrent toutes vos animations de la commune, même clôturées ou archivées.
-4. Ouvrez **Voir le détail par animation**, puis **Consulter le suivi** sur l'animation souhaitée. La pagination change la liste, pas les totaux.
-5. Utilisez **Actualiser** pour relire ce bloc. La période et la dernière actualisation indiquent quand les informations ont été relevées, en heure de Paris.
+3. Dans **Pilotage des animations**, **7 derniers jours** est sélectionné par défaut. Choisissez **Aujourd’hui**, **30 derniers jours** ou une période **Personnalisée** selon votre besoin.
+4. Pour une période personnalisée, indiquez le début et la fin : au maximum **366 jours**, sans date de fin future. Les jours sont calculés en heure de Paris.
+5. **Actualiser** relit les résultats de la période sélectionnée et revient à la première page. Vérifiez les bornes et la dernière actualisation avant de comparer les résultats.
 
-Les indicateurs distinguent inscriptions effectives, passages validés, lots retirés, bons utilisés et coffrets utilisés. Pour les coffrets, lisez aussi le nombre de prestations consommées : un même coffret peut servir plusieurs fois.
+Les quatre cartes distinguent **inscriptions confirmées**, **passages validés**, **lots retirés** et **utilisations**. Cette dernière détaille bons, coffrets distincts et prestations consommées. La comparaison porte sur la période précédente ; la courbe suit inscriptions et passages.
 
-## 2 · Lire et organiser ses priorités
+> Tous les statuts, y compris les animations clôturées et archivées, sont compris pour la commune active. La même période s'applique aux cartes, à la courbe, aux résultats par animation et à l'export.
+
+## 2 · Lire les résultats et les exporter
+
+**Objectif :** repérer les animations ayant eu une activité et comprendre leurs résultats.
+
+![Les résultats par animation présentent l'activité et la qualification des inscrits de la période. Exemple fictif.](illustrations/guide-quotidien/pilotage-resultats-1024.png)
+
+1. Consultez les **résultats par animation** pour retrouver les chiffres et ouvrir le suivi de l'animation souhaitée.
+2. Utilisez la pagination de **25 lignes**. Les pages suivantes et le retour du suivi conservent les bornes de lecture ; les totaux restent ceux de la période complète.
+3. La qualification représente l'état **actuellement connu des personnes inscrites ou confirmées pendant la période sélectionnée**. Elles peuvent avoir progressé depuis : ce n'est ni l'état reconstitué à la fin d'une période historique, ni le total des qualifiés de l'animation.
+4. Si cet état manque ou n'est plus à jour, la qualification est **indisponible**, pas égale à zéro. Actualisez ou consultez le suivi avant de conclure.
+
+### Exporter la période complète
+
+Choisissez **Exporter tous les résultats (CSV)** pour reprendre la période affichée et l'ensemble des résultats, pas seulement la page courante. Utilisez ce fichier pour partager ou analyser l'activité dans un tableur.
+
+Si l'export dépasse **10 000 animations**, il est refusé ; réduisez la période et recommencez. Aucune liste tronquée ne doit être prise pour un résultat complet.
+
+Après **30 minutes**, la lecture préparée pour l'export expire : utilisez **Actualiser**, vérifiez les nouvelles bornes puis demandez à nouveau le CSV. L'export ne change pas de période en silence.
+
+> La comparaison des cartes et de la courbe porte sur les événements enregistrés pendant les périodes, pas sur ce taux de qualification. Un coffret utilisé plusieurs fois compte comme un coffret distinct ; le détail des prestations montre son utilisation.
+
+## 3 · Lire et organiser ses priorités
 
 **Objectif :** retrouver les actions utiles et garder les rappels de son choix.
 
-![Les actions restent dans À traiter ; un rappel de clôture peut être masqué uniquement pour votre compte. Exemple fictif.](illustrations/guide-quotidien/alertes-tableau-de-bord-1024.png)
+![Le tableau de bord présente les priorités utiles et conserve les rappels de clôture personnels. Exemple fictif.](illustrations/guide-quotidien/pilotage-priorites-1024.png)
 
-1. Dans **À traiter**, ouvrez l'action proposée pour accéder au suivi ou à l'étape concernée de l'animation.
-2. Un rappel **Clôture attendue** signifie que la fin prévue est atteinte et que l'animation est encore ouverte. Consultez les conditions de clôture avant d'agir.
-3. Pour retirer seulement le bandeau, choisissez **Supprimer de mon tableau de bord**. Le masquage concerne votre compte, sur vos appareils ; les autres membres de l'équipe conservent leur rappel. L'animation reste dans **À traiter**.
-4. Pour revenir sur votre choix, utilisez **Annuler**, ou ouvrez **Alertes masquées** puis **Réafficher** sur le rappel souhaité. Utilisez la pagination si nécessaire.
+1. Consultez les **trois priorités au maximum**, puis **Voir toute la liste À traiter** pour la liste complète. Ces actions à mener aujourd'hui ne dépendent pas de la période des résultats.
+2. Dépliez **Rappels et autres alertes** pour retrouver les rappels personnels.
+3. **Clôture attendue** signifie que la fin prévue est atteinte et que l'animation est encore ouverte. Consultez les conditions avant d'agir.
+4. **Supprimer de mon tableau de bord** masque uniquement le bandeau pour votre compte, sur vos appareils. Les autres membres conservent leur rappel ; l'animation reste dans **À traiter**.
+5. Utilisez **Annuler**, ou **Alertes masquées** puis **Réafficher**, pour revenir sur votre choix. Utilisez la pagination si nécessaire.
 
 - Une nouvelle échéance dépassée peut produire un nouveau rappel.
 - Supprimer le bandeau ne clôture pas l'animation et ne valide aucune étape.
@@ -33,7 +57,7 @@ Les indicateurs distinguent inscriptions effectives, passages validés, lots ret
 
 > Les possibilités visibles dépendent de votre rôle, de vos communes autorisées et des modules disponibles. Une action absente ou refusée nécessite une vérification avec le responsable ou le support.
 
-## 3 · Choisir et créer une animation
+## 4 · Choisir et créer une animation
 
 **Objectif :** passer de votre idée à un brouillon, sans publier par erreur.
 
@@ -61,7 +85,7 @@ Si vous réduisez la sélection, un seuil devenu incompatible reste affiché **�
 
 > Lorsque Léo est proposé pour préparer une chasse ou un passeport, complétez son brief, sélectionnez les commerces et relisez la proposition avant de la valider. Une préparation générée reste à contrôler ; elle ne publie pas l'animation.
 
-## 4 · Régler les essais de Vitrines et Juste Prix
+## 5 · Régler les essais de Vitrines et Juste Prix
 
 **Objectif :** donner une règle claire aux joueurs avant le lancement.
 
@@ -81,7 +105,7 @@ Une étape invalide n'élimine pas automatiquement le joueur. Si le seuil de val
 
 > Exemple : avec un seuil de trois étapes sur quatre, une étape invalide laisse encore la possibilité de réussir les trois autres. Gardez distincts le maximum d'erreurs par étape et le seuil global de validation.
 
-## 5 · Constituer son réseau de commerces
+## 6 · Constituer son réseau de commerces
 
 **Objectif :** disposer de fiches exploitables et comprendre l'accès de chaque commerce.
 
@@ -100,7 +124,7 @@ Une étape invalide n'élimine pas automatiquement le joueur. Si le seuil de val
 
 > Un email envoyé ne prouve ni la création du mot de passe, ni l'accord du commerce pour participer. Ouvrez les détails de suivi avant de relancer une personne.
 
-## 6 · Préparer les commerçants et le parcours
+## 7 · Préparer les commerçants et le parcours
 
 **Objectif :** savoir qui doit agir avant le lancement et vérifier les supports terrain.
 
@@ -117,7 +141,7 @@ Lorsque ce suivi est activé, distinguez les commerces **prêts** de ceux encore
 
 > Pour le jeu des vitrines, vérifiez l'activité et les éléments proposés par chaque commerce. La disponibilité des rubriques et du suivi varie selon le modèle et la configuration choisie.
 
-## 7 · Approuver les produits du Juste Prix Local
+## 8 · Approuver les produits du Juste Prix Local
 
 **Objectif :** vérifier et approuver chaque proposition avant publication.
 
@@ -131,7 +155,7 @@ Lorsque ce suivi est activé, distinguez les commerces **prêts** de ceux encore
 
 > L'accord du commerce pour participer ne vaut pas approbation de son produit. Vous approuvez sa proposition sans modifier son prix à sa place. Si le résultat est incertain, vérifiez les propositions avant de recommencer.
 
-## 8 · Construire une dotation compréhensible
+## 9 · Construire une dotation compréhensible
 
 **Objectif :** décrire ce que les habitants peuvent gagner et qui le remettra.
 
@@ -150,7 +174,7 @@ Lorsque ce suivi est activé, distinguez les commerces **prêts** de ceux encore
 
 > Changer de mode peut retirer des descriptions de lots déjà enregistrées. Lisez la confirmation. Un lot libre déclaré ne constitue pas un achat ou une remise déjà effectuée.
 
-## 9 · Vérifier puis publier
+## 10 · Vérifier puis publier
 
 **Objectif :** ouvrir une animation aux habitants après les contrôles requis.
 
@@ -167,7 +191,7 @@ Lorsque ce suivi est activé, distinguez les commerces **prêts** de ceux encore
 
 > Si l'envoi est interrompu, utilisez « Vérifier l'enregistrement » lorsqu'il est proposé. Un traitement en cours ou un résultat incertain ne doit pas être interprété comme un succès. Évitez de recommencer une opération financière sans vérifier son résultat.
 
-## 10 · Faire connaître l'animation et écrire aux participants
+## 11 · Faire connaître l'animation et écrire aux participants
 
 **Objectif :** distinguer les supports de découverte et les messages aux personnes déjà inscrites.
 
@@ -186,7 +210,7 @@ Pour une **tombola publique sur place**, affichez aussi le code du jour fourni d
 
 > Les dates de programmation sont exprimées en heure de Paris. Le quota, la fréquence et la fenêtre d'envoi sont contrôlés avant l'envoi. Relisez l'audience et le statut de la campagne plutôt que de supposer qu'elle a touché tout le monde.
 
-## 11 · Suivre l'activité pendant l'animation
+## 12 · Suivre l'activité pendant l'animation
 
 **Objectif :** comprendre la progression et intervenir avec les bonnes informations.
 
@@ -203,7 +227,7 @@ Vérifiez d'abord l'animation, le commerce, l'état du participant et la consign
 
 > Un résultat absent ou « non collecté » n'est pas une valeur zéro. Les statistiques précisent, lorsqu'elle est disponible, leur date d'observation. Les données présentées ici servent d'exemple pédagogique.
 
-## 12 · Clôturer au bon moment
+## 13 · Clôturer au bon moment
 
 **Objectif :** fermer réellement la participation puis préparer les opérations de fin.
 
@@ -220,7 +244,7 @@ La date de fin prévue informe les habitants. **Tant que l'animation n'est pas r
 
 > L'alerte vous demande de vérifier puis de clôturer ; elle ne le fait pas à votre place. Ne confondez pas une date échue, une inscription fermée explicitement et une clôture effective. Après l'échéance prévue, les paramètres d'exploitation ne sont plus modifiables : vérifiez les dates avant cette échéance.
 
-## 13 · Organiser le tirage et les retraits
+## 14 · Organiser le tirage et les retraits
 
 **Objectif :** préparer les retraits et suivre l'utilisation des bons et coffrets.
 
@@ -237,7 +261,7 @@ Un lot externe se retire physiquement ; le commerce désigné valide un bon. Un 
 
 > Les compteurs couvrent tous les types et états du contexte choisi, indépendamment de la page et du filtre de tâche. Une information indisponible n'est pas zéro. Consultez **Fin de l'animation** pour résoudre les dossiers avant de terminer ou archiver.
 
-## 14 · Lire le bilan et préparer une nouvelle édition
+## 15 · Lire le bilan et préparer une nouvelle édition
 
 **Objectif :** mesurer les résultats sans confondre absence d'information et absence d'activité.
 
@@ -254,7 +278,7 @@ Une nouvelle édition est un nouveau brouillon. Les dates, accords des commerça
 
 > Les objectifs servent de repères de lecture. Une mesure « non applicable » ou « non collectée » ne doit pas être remplacée mentalement par zéro. Les captures utilisent volontairement un petit jeu de données synthétiques.
 
-## 15 · Gérer son équipe et obtenir de l'aide
+## 16 · Gérer son équipe et obtenir de l'aide
 
 **Objectif :** retrouver les accès, les modules et une assistance adaptée à la situation.
 

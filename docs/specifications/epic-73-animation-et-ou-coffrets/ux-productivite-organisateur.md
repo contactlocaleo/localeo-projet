@@ -575,6 +575,88 @@ agrandi. Les résultats exécutés et limites sont consignés au bilan après re
 Contrôles documentaires : `check_guidance.py` et
 `sync_documentation.py --check-sources` réussis. Les recettes utilisent des API
 synthétiques. La recette sur appareil physique et sur cible déployée reste à réaliser.
+## Évolution du 22 novembre 2026 — pilotage unifié des animations
+
+**E73-EVO-DASHBOARD-PILOTAGE**, proposition utilisateur approuvée pour
+implémentation. Cette évolution remplace la juxtaposition quotidienne/historique
+et les choix de présentation DJ-01 à DJ-03 ; les politiques de faits confirmés,
+droits, préférences personnelles et pagination DJ-04 à DJ-09 restent acquises.
+L'état terminé historique d'E73 et ses réserves ne changent pas.
+
+### Parcours et critères
+
+Le titre **Pilotage des animations** précède une période commune, quatre
+repères, une évolution inscriptions/passages, le rapport par animation et les
+priorités actuelles. Le bloc **Animations en cours et à venir**, les anciens
+indicateurs parallèles et le classement autonome de commerces disparaissent
+de cet écran. Les animations restent accessibles dans leur rubrique.
+
+| Critère | Comportement observable |
+| --- | --- |
+| E73-PIL-01 | Un seul pilotage, période **7 derniers jours** initiale ; **Aujourd'hui**, **30 derniers jours** et **Période personnalisée** disponibles. Les contrôles restent montés pendant les lectures locales ; le rapport conserve période, page, retour et focus depuis une animation. |
+| E73-PIL-02 | Les jours sont civils en Europe/Paris. Une période personnalisée inclut ses dates de début/fin, au plus 366 jours, sans date de fin future. `[début,fin[` utilise les minuits Paris, avec une fin limitée à l'instant de lecture pour le jour courant. Bornes et dernière actualisation sont affichées. |
+| E73-PIL-03 | Quatre cartes : inscriptions confirmées, passages validés, lots retirés, utilisations. La quatrième distingue **bons**, **coffrets distincts** et **prestations** ; ces unités ne sont jamais additionnées dans un total artificiel. Les faits sont ceux de DJ-06, sur toutes les animations autorisées de la commune, archives comprises. La période ne sélectionne pas les animations par leurs dates de jeu. |
+| E73-PIL-04 | Comparaison avec les jours calendaires précédents de même nombre ; si le dernier jour est partiel, même heure locale au dernier jour de référence. Bornes explicites et passage été/hiver conservés. Delta absolu et pourcentage disponibles ; pourcentage non calculé si référence nulle. Aucune comparaison économique ou qualification historique supposée. |
+| E73-PIL-05 | Une courbe lisible inscriptions/passages, journées sans événement incluses et série précédente alignée par position des jours. Légende, sens des couleurs et alternative de lecture accessibles ; pas de graphiques parallèles répétant les mêmes indicateurs. |
+| E73-PIL-06 | **Résultats par animation** : page de 25, uniquement les animations avec activité dans la période, activité la plus récente puis identifiant. Compteurs confirmés, qualification de cohorte et **Consulter le suivi** sur chaque ligne. Les totaux ne viennent jamais de la page. |
+| E73-PIL-07 | La cohorte réunit exactement les participations effectivement inscrites/confirmées dans la période. Le numérateur est leur qualification actuellement vérifiable ; le ratio reste par animation. Avec une projection absente/obsolète, `qualification_disponible=false`, nombre qualifié et taux nuls ; afficher l'indisponibilité, jamais zéro. Avec aucun inscrit dans la période, pas de taux inventé. |
+| E73-PIL-08 | **Exporter le rapport CSV** exporte toutes les lignes du même périmètre et des mêmes bornes signées, indépendamment de la page affichée. Maximum explicite 10 000 animations ; au-delà, refus avant envoi, sans troncature silencieuse. Noms et autres textes neutralisent les formules de tableur. Aucune identité habitant ou réponse personnelle dans le rapport. |
+| E73-PIL-09 | **À traiter maintenant** montre au plus trois animations et leur recommandation serveur, avec action directe et accès à la vraie file complète filtrée. La période analytique ne filtre pas ces actions actuelles. Aucune transition ni priorité n'est reconstruite localement. |
+| E73-PIL-10 | Masquage, Annuler et restauration des rappels de clôture conservent DJ-04/05 : confirmation serveur, portée personnelle et échéance. Les autres notifications restent accessibles ; une présentation compacte n'efface aucune notification ni situation métier. |
+| E73-PIL-11 | Premier chargement, actualisation, absence d'activité, erreur et refus sont distincts. Valeur indisponible n'est pas zéro. Changement de commune/période, réponses inversées, export expiré et reprise gardent un contexte cohérent ; aucun aperçu d'une autre commune. Recette 320/390/1280 px, clavier, texte 200 %. |
+| E73-PIL-12 | Agrégations et cohortes en stockage, lectures/mémoire bornées, aucun chargement de participants individuels ni requête par animation. Pages et export utilisent des bornes signées liées à acteur/organisation/commune/permissions. Routes historiques conservées ; contrats canoniques/Animation, guide illustré et preuves de capacité actualisés. |
+
+### Producteurs et contrats
+
+Le domaine résout les périodes Paris et la comparaison. L'application contrôle
+le périmètre, orchestre les lectures et l'export ; le repository agrège les faits
+persistés. L'éligibilité reste décidée par les propriétaires existants : les
+projections courantes exactes des moteurs sont vérifiées, pas recalculées dans
+le reporting. Une projection manquante ou périmée rend la qualification inconnue.
+Si l'heure de référence n'existe pas au passage à l'heure d'été, elle est
+reportée de la durée du saut (02:30 devient 03:30). Une heure répétée utilise
+la première occurrence. Les bornes UTC et leur affichage Paris sont cohérents.
+
+`GET /protected/animation-locale/dashboard-pilotage` reçoit
+`periode=jour|7j|30j|personnalisee` (défaut `7j`), les dates civiles pour la
+personnalisée, `limit` et `cursor`. La réponse comporte `debut/fin/observedAt`,
+`totaux`, `comparaison{debut,fin,totaux,variations}`, `series`, `items`,
+`nextCursor/hasMore` et `snapshot`. Les six compteurs restent explicites.
+Les variations portent `delta` et `pourcentage` nullable. Les lignes ajoutent
+statut, cohorte inscrite/qualifiée, taux nullable et disponibilité. Aucun fait
+de comptage n'est accepté depuis le navigateur.
+
+`GET /dashboard-pilotage/export.csv` réutilise le snapshot signé, périmètre et
+bornes de la lecture, valides 30 minutes. Changer de contexte, altérer ou réutiliser
+un snapshot expiré impose une relecture. Les droits et les corrections courantes
+sont relus : ce jeton fige des bornes, pas une version historique de la base.
+Réponses privées sans cache. Le CSV comporte les libellés et compteurs du rapport,
+avec des lectures par lots bornés. Le plafond ne transforme jamais un fichier
+partiel en export réussi.
+
+Le booléen compatible `a_traiter` est exposé sur la liste globale des animations
+pour accéder à la recommandation déjà calculée avant pagination. La vue Toutes
+reste inchangée par défaut ; une entrée explicite depuis le dashboard ouvre
+la file réelle, sans anciens filtres masqués qui réduiraient sa portée.
+
+### Impacts et preuves attendues
+
+Backend et Animation sont concernés, ainsi que les sources canoniques Projet.
+Le Guide Animation doit décrire période, comparaison, cohorte, export et
+priorités, avec captures réelles et PDF distribué actualisé. Guide Commerçant
+sans impact : ses écrans de préparation/validation et son guide ne changent pas.
+Marketplace/Live ne consomme pas cette lecture de pilotage privée.
+Aucune règle de participation, de consommation ou d'attribution de lot n'est
+modifiée. Le besoin d'index/migration se vérifie sur les plans SQL ; aucune
+réparation distante ou génération de données d'exploitation n'est implicite.
+
+Les critères PIL-01 à 12 demandent tests domaine des périodes, API/refus,
+PostgreSQL six moteurs/trois dotations, confirmations/corrections, cohorte,
+archives, pagination, comparaison et export, puis recette accessible de l'écran.
+Les budgets AP-22 restent : API p95 ≤ 1 s, p99 ≤ 2 s, première page utilisable
+p95 ≤ 2 s dans un banc déclaré. Une mesure locale absente n'est pas un succès de
+capacité. Les résultats et limites sont consignés dans la
+[vérification E73](verification-livraison.md).
 
 ## Évolution du 22 novembre 2026 — tableau de bord quotidien
 
