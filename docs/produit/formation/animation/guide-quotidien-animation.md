@@ -60,7 +60,27 @@ Si vous réduisez la sélection, un seuil devenu incompatible reste affiché **�
 
 > Lorsque Léo est proposé pour préparer une chasse ou un passeport, complétez son brief, sélectionnez les commerces et relisez la proposition avant de la valider. Une préparation générée reste à contrôler ; elle ne publie pas l'animation.
 
-## 4 · Constituer son réseau de commerces
+## 4 · Régler les essais de Vitrines et Juste Prix
+
+**Objectif :** donner une règle claire aux joueurs avant le lancement.
+
+![Le brouillon permet de choisir le maximum de mauvaises réponses par étape. Exemple fictif du Juste Prix Local, réglé sur trois erreurs.](illustrations/guide-quotidien/mauvaises-reponses-1280.png)
+
+### Choisir le maximum avant de publier
+
+Pour un **Jeu des vitrines** ou un **Juste Prix Local**, réglez **Mauvaises réponses maximum par étape** pendant la création ou dans la configuration du brouillon. Choisissez **1 à 10** ; la valeur initiale est **1**. Vérifiez que le règlement explique cette règle avant de publier.
+
+Une bonne réponse termine les essais de l'étape. Si le joueur atteint le maximum de mauvaises réponses, l'étape devient **invalide** : aucun nouvel essai, scan ou PIN commerçant ne peut la rattraper. Le réglage est **figé à la publication**.
+
+### Comprendre ce que voit le joueur dans Live
+
+Le formulaire indique les réponses restantes. Une étape épuisée porte un **tampon invalide** dans le parcours ; elle ne compte pas parmi les étapes réussies et ne demande plus de passage à valider.
+
+Une étape invalide n'élimine pas automatiquement le joueur. Si le seuil de validation est atteint, sa qualification est conservée. S'il reste assez d'étapes pour l'atteindre, le parcours peut continuer ; sinon, Live indique que la participation est **non qualifiable**.
+
+> Exemple : avec un seuil de trois étapes sur quatre, une étape invalide laisse encore la possibilité de réussir les trois autres. Gardez distincts le maximum d'erreurs par étape et le seuil global de validation.
+
+## 5 · Constituer son réseau de commerces
 
 **Objectif :** disposer de fiches exploitables et comprendre l'accès de chaque commerce.
 
@@ -79,7 +99,7 @@ Si vous réduisez la sélection, un seuil devenu incompatible reste affiché **�
 
 > Un email envoyé ne prouve ni la création du mot de passe, ni l'accord du commerce pour participer. Ouvrez les détails de suivi avant de relancer une personne.
 
-## 5 · Préparer les commerçants et le parcours
+## 6 · Préparer les commerçants et le parcours
 
 **Objectif :** savoir qui doit agir avant le lancement et vérifier les supports terrain.
 
@@ -96,7 +116,7 @@ Lorsque ce suivi est activé, distinguez les commerces **prêts** de ceux encore
 
 > Pour le jeu des vitrines, vérifiez l'activité et les éléments proposés par chaque commerce. La disponibilité des rubriques et du suivi varie selon le modèle et la configuration choisie.
 
-## 6 · Approuver les produits du Juste Prix Local
+## 7 · Approuver les produits du Juste Prix Local
 
 **Objectif :** vérifier et approuver chaque proposition avant publication.
 
@@ -110,7 +130,7 @@ Lorsque ce suivi est activé, distinguez les commerces **prêts** de ceux encore
 
 > L'accord du commerce pour participer ne vaut pas approbation de son produit. Vous approuvez sa proposition sans modifier son prix à sa place. Si le résultat est incertain, vérifiez les propositions avant de recommencer.
 
-## 7 · Construire une dotation compréhensible
+## 8 · Construire une dotation compréhensible
 
 **Objectif :** décrire ce que les habitants peuvent gagner et qui le remettra.
 
@@ -129,7 +149,7 @@ Lorsque ce suivi est activé, distinguez les commerces **prêts** de ceux encore
 
 > Changer de mode peut retirer des descriptions de lots déjà enregistrées. Lisez la confirmation. Un lot libre déclaré ne constitue pas un achat ou une remise déjà effectuée.
 
-## 8 · Vérifier puis publier
+## 9 · Vérifier puis publier
 
 **Objectif :** ouvrir une animation aux habitants après les contrôles requis.
 
@@ -146,7 +166,7 @@ Lorsque ce suivi est activé, distinguez les commerces **prêts** de ceux encore
 
 > Si l'envoi est interrompu, utilisez « Vérifier l'enregistrement » lorsqu'il est proposé. Un traitement en cours ou un résultat incertain ne doit pas être interprété comme un succès. Évitez de recommencer une opération financière sans vérifier son résultat.
 
-## 9 · Faire connaître l'animation et écrire aux participants
+## 10 · Faire connaître l'animation et écrire aux participants
 
 **Objectif :** distinguer les supports de découverte et les messages aux personnes déjà inscrites.
 
@@ -165,7 +185,7 @@ Pour une **tombola publique sur place**, affichez aussi le code du jour fourni d
 
 > Les dates de programmation sont exprimées en heure de Paris. Le quota, la fréquence et la fenêtre d'envoi sont contrôlés avant l'envoi. Relisez l'audience et le statut de la campagne plutôt que de supposer qu'elle a touché tout le monde.
 
-## 10 · Suivre l'activité pendant l'animation
+## 11 · Suivre l'activité pendant l'animation
 
 **Objectif :** comprendre la progression et intervenir avec les bonnes informations.
 
@@ -182,7 +202,7 @@ Vérifiez d'abord l'animation, le commerce, l'état du participant et la consign
 
 > Un résultat absent ou « non collecté » n'est pas une valeur zéro. Les statistiques précisent, lorsqu'elle est disponible, leur date d'observation. Les données présentées ici servent d'exemple pédagogique.
 
-## 11 · Clôturer au bon moment
+## 12 · Clôturer au bon moment
 
 **Objectif :** fermer réellement la participation puis préparer les opérations de fin.
 
@@ -199,7 +219,7 @@ La date de fin prévue informe les habitants. **Tant que l'animation n'est pas r
 
 > L'alerte vous demande de vérifier puis de clôturer ; elle ne le fait pas à votre place. Ne confondez pas une date échue, une inscription fermée explicitement et une clôture effective. Après l'échéance prévue, les paramètres d'exploitation ne sont plus modifiables : vérifiez les dates avant cette échéance.
 
-## 12 · Organiser le tirage et les retraits
+## 13 · Organiser le tirage et les retraits
 
 **Objectif :** préparer les retraits et suivre l'utilisation des bons et coffrets.
 
@@ -216,7 +236,7 @@ Un lot externe se retire physiquement ; le commerce désigné valide un bon. Un 
 
 > Les compteurs couvrent tous les types et états du contexte choisi, indépendamment de la page et du filtre de tâche. Une information indisponible n'est pas zéro. Consultez **Fin de l'animation** pour résoudre les dossiers avant de terminer ou archiver.
 
-## 13 · Lire le bilan et préparer une nouvelle édition
+## 14 · Lire le bilan et préparer une nouvelle édition
 
 **Objectif :** mesurer les résultats sans confondre absence d'information et absence d'activité.
 
@@ -233,7 +253,7 @@ Une nouvelle édition est un nouveau brouillon. Les dates, accords des commerça
 
 > Les objectifs servent de repères de lecture. Une mesure « non applicable » ou « non collectée » ne doit pas être remplacée mentalement par zéro. Les captures utilisent volontairement un petit jeu de données synthétiques.
 
-## 14 · Gérer son équipe et obtenir de l'aide
+## 15 · Gérer son équipe et obtenir de l'aide
 
 **Objectif :** retrouver les accès, les modules et une assistance adaptée à la situation.
 

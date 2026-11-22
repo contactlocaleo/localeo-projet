@@ -1,5 +1,11 @@
 # E78 — Vérification et livraison
 
+L'[évolution partagée des essais limités du 22 novembre](../epic-77-juste-prix-local/verification-livraison.md#livraison-des-essais-limités--22-novembre-2026)
+porte les preuves E77/E78-ESSAIS-01 à 08. Le budget configurable, le tampon
+invalide et la qualification conservée au seuil remplacent l'essai unique des
+nouvelles configurations ; les bilans et réserves historiques ci-dessous gardent
+leur portée. Aucun changement de statut de l'epic.
+
 Spécification du **15 novembre 2026**. Les seize critères restent ceux du
 [backlog canonique](../../roadmap/en-cours/epic-78-jeu-des-vitrines-backlog.md).
 Lire les [parcours](parcours-regles.md) et l'[architecture](architecture-contrats.md).

@@ -79,26 +79,28 @@ Rescannez le coffret et ouvrez **Prestations déjà validées**. Si **Annuler la
 
 ## 4 · Remettre un lot ou valider un passage
 
-Le scanner reconnaît le QR présenté. Vérifiez toujours le commerce, le contenu et l’état avant de confirmer.
+Vérifiez le commerce, le contenu et l’état du QR avant de confirmer.
 
 ![Le bon de lot précise le lot complet, sa validité et l’action Confirmer la remise du lot.](illustrations/guide-quotidien/14-lot.png)
 
 ### Remettre un lot gagné
 
-1. Demandez au gagnant d’ouvrir le QR de son lot dans Live. Ouvrez **Scanner** dans Pro.
-2. Vérifiez nom, description, commerce de remise et état **Lot à remettre**.
-3. Préparez la totalité du lot. Au moment de la remise, choisissez **Confirmer la remise du lot**, puis attendez la confirmation.
-4. Si le lot est déjà remis, expiré ou indisponible, suivez l’information affichée ; contactez l’organisateur si nécessaire.
+1. Ouvrez **Scanner** et scannez le QR du lot présenté dans Live.
+2. Vérifiez lot, commerce et état **Lot à remettre**.
+3. Remettez le lot entier, choisissez **Confirmer la remise du lot** et attendez la confirmation.
+4. Pour un lot remis, expiré ou indisponible, suivez l’information affichée ou contactez l’organisateur.
 
-Le bon porte sur le lot entier, dans le commerce désigné. Après une coupure, utilisez **Relire le résultat** ou le reçu proposé avant toute nouvelle action. L’**Historique des validations**, selon vos droits, permet de retrouver une remise ou une prestation.
+Après une coupure, utilisez **Relire le résultat** avant une nouvelle action. L’**Historique des validations** retrouve remises et prestations selon vos droits.
 
 ### Valider une étape Animation
 
-Relisez **Votre mission** dans l’animation. Lorsqu’elle demande une validation par votre commerce, scannez le **QR personnel du participant**. Vérifiez animation et étape, puis **Valider cette étape**. Attendez la confirmation.
+Si **Votre mission** demande une validation commerçante, scannez le **QR personnel du participant**. Vérifiez animation et étape, puis **Valider cette étape**. Attendez la confirmation.
 
-Après un résultat incertain, **Vérifier le résultat** est prioritaire. **Renvoyer la même validation** n’apparaît que si la reprise est autorisée. Quitter l’écran n’annule pas une validation éventuellement enregistrée.
+Pour **Vitrines** et **Juste Prix**, une étape **invalide** après épuisement des essais ne se rattrape ni par scan ni par PIN. Invitez le joueur à consulter son parcours dans Live.
 
-> Le QR public d’une affiche ouvre une animation ou un défi. Il ne remplace ni le QR personnel du joueur à valider, ni le QR du lot à remettre. Après la fin prévue, les validations peuvent rester ouvertes jusqu’à la clôture effective. Si le raccourci manque dans le détail, ouvrez Scanner depuis l’accueil ; le serveur vérifie les droits.
+Après un résultat incertain, **Vérifier le résultat** est prioritaire ; **Renvoyer la même validation** dépend de l’autorisation de reprise. Quitter l’écran n’annule pas une validation enregistrée.
+
+> Le QR public d’une affiche ne remplace ni le QR personnel du joueur ni celui du lot. Après la fin prévue, les validations peuvent rester ouvertes jusqu’à la clôture. Si le raccourci manque, ouvrez Scanner depuis l’accueil ; vos droits sont vérifiés.
 
 ## 5 · Suivre votre activité et vos versements
 

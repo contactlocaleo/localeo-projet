@@ -1,5 +1,34 @@
 # Illustrations du guide quotidien commerçant
 
+## Ajout du 22 novembre 2026 - étapes invalides de Vitrines et Juste Prix
+
+Le chapitre 4 explique qu'une étape invalide après épuisement des essais ne
+peut pas être rattrapée par scan ou PIN. Les captures existantes montrent les
+lots, la préparation et les validations habituelles, dont les écrans et gestes
+restent identiques : aucune de ces captures n'est affectée. Leur provenance
+ci-dessous est conservée. Le texte de la page 4 est resserré pour garder des
+caractères lisibles et les **douze pages**, sans modifier les autres procédures.
+
+Depuis `localeo-commercant` :
+
+```powershell
+py -3.14 scripts/generate-merchant-guide.py --preview-dir tmp/attempts-guides-merchant-pdf
+npm run guide:sync
+npm run guide:check
+$env:LOCALEO_TEST_DIST = 'tmp/attempts-guides-build-merchant'
+node scripts/build-browser-tests.mjs
+node scripts/capture-merchant-guide.mjs --dist tmp/attempts-guides-build-merchant --check-guide --verify-only
+```
+
+Les douze pages ont été rendues et relues, avec inspection détaillée de la
+page 4. La copie embarquée est identique au PDF canonique. La recette sur le
+port 4181 a réussi à 390 et 1440 px : navigation, focus clavier, HTTP 200,
+contenu du PDF, guide disponible malgré l'assistance en erreur et aucune
+violation Axe. Le manifeste de vérification est
+`localeo-commercant/tmp/guide-refresh-merchant-capture/verification.json`.
+Il s'agit d'une preuve locale sur build synthétique, base `036aea6`, sans
+déploiement distant ni compte réel. Les points d'accès aux guides sont inchangés.
+
 ## Édition du 22 novembre 2026
 
 Le [guide source](../../guide-quotidien-commercant.md) conserve **12 chapitres**.

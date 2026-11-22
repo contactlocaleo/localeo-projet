@@ -9,6 +9,11 @@ dans le [bilan de réalisation](bilan-realisation.md) : parcours et démonstrati
 vérifiés, qualification de charge soutenue ouverte ; modèle encore inactif.
 Les observations de spécification du 15 novembre sont conservées comme historique.
 
+L'[évolution du 22 novembre — limiter les mauvaises réponses](../epic-77-juste-prix-local/parcours-regles.md#évolution-du-22-novembre-2026--limiter-les-mauvaises-réponses-et-rendre-les-étapes-invalides-visibles)
+remplace l'essai unique initial pour les nouvelles configurations. Un budget
+d'erreurs épuisé invalide l'étape ; la qualification reste acquise si le seuil
+est atteint ailleurs. Les éditions déjà publiées gardent leurs règles.
+
 L’[évolution du 17 novembre : préparation guidée](parcours-regles.md#évolution-du-17-novembre-2026--préparation-guidée)
 ajoute PU-01 à PU-08 : espace dédié Pro, étapes commerçantes et contrôles
 Animation par acteur. Son [bilan propre](bilan-realisation.md#évolution-du-17-novembre-2026--préparation-guidée)

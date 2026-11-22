@@ -1,5 +1,21 @@
 # E73 — Localeo Live, entrée unique des animations
 
+## Évolution du 22 novembre 2026 — essais limités et étapes invalides
+
+Pour Juste Prix et Vitrines, les critères PE de suivi/parcours sont complétés par
+les [règles et critères E77/E78-ESSAIS-01 à 08](../epic-77-juste-prix-local/parcours-regles.md#évolution-du-22-novembre-2026--limiter-les-mauvaises-réponses-et-rendre-les-étapes-invalides-visibles).
+Le formulaire affiche le solde serveur, la dernière erreur invalide l'étape et
+son tampon ; aucun passage supplémentaire n'est proposé pour la rattraper.
+Une invalidité locale n'élimine pas la participation si le seuil est atteint
+ailleurs. Mon carnet, frise et détail indiquent l'impossibilité globale seulement
+si le serveur confirme que le seuil n'est plus atteignable. Anciennes définitions
+à un essai conservées ; aucune déduction depuis une page partielle du parcours.
+
+Ce lot remplace la promesse « une seule réponse définitive » des consignes FD
+pour les nouvelles configurations dotées d'un budget, tout en conservant la
+confirmation explicite de chaque réponse et la seule réponse terminale consultable.
+Refus, données incertaines, navigation, focus, brouillons et reçus restent protégés.
+
 ## Correctif du 22 novembre 2026 — cohérence des détails Live
 
 Complément aux critères PE, PM, LH et LS existants, sans changement métier.

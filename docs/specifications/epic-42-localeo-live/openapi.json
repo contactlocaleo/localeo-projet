@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Live - API backend Epic 42",
     "description": "Vue OpenAPI 3.1 des contrats publics, editoriaux et techniques de Localeo Live.",
-    "version": "1.0.0+dde4a75"
+    "version": "1.0.0+2a9fd75"
   },
   "paths": {
     "/public/animation-locale/animations/{animation_id}/contact-public": {
@@ -12498,6 +12498,72 @@
         ],
         "title": "ActiverInvitationAnimationRequest"
       },
+      "ActiviteAnimationPayload": {
+        "properties": {
+          "inscriptions": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Inscriptions"
+          },
+          "passages_valides": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Passages Valides"
+          },
+          "lots_retires": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Lots Retires"
+          },
+          "bons_utilises": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Bons Utilises"
+          },
+          "coffrets_utilises": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Coffrets Utilises"
+          },
+          "prestations_consommees": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Prestations Consommees"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "nom": {
+            "type": "string",
+            "title": "Nom"
+          },
+          "modele_code": {
+            "type": "string",
+            "title": "Modele Code"
+          },
+          "derniere_activite": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Derniere Activite"
+          }
+        },
+        "type": "object",
+        "required": [
+          "inscriptions",
+          "passages_valides",
+          "lots_retires",
+          "bons_utilises",
+          "coffrets_utilises",
+          "prestations_consommees",
+          "id",
+          "nom",
+          "modele_code",
+          "derniere_activite"
+        ],
+        "title": "ActiviteAnimationPayload"
+      },
       "ActiviteLocalePayload": {
         "properties": {
           "id": {
@@ -13670,6 +13736,46 @@
           "email_statut"
         ],
         "title": "AlertePayload"
+      },
+      "AlertesMasqueesDashboardPayload": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/NotificationAnimationPayload"
+            },
+            "type": "array",
+            "maxItems": 100,
+            "title": "Items"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          },
+          "hasMore": {
+            "type": "boolean",
+            "title": "Hasmore"
+          },
+          "observedAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Observedat"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "nextCursor",
+          "hasMore",
+          "observedAt"
+        ],
+        "title": "AlertesMasqueesDashboardPayload"
       },
       "AlertesPage": {
         "properties": {
@@ -24329,6 +24435,50 @@
         ],
         "title": "CompteurStatutSuivi"
       },
+      "CompteursActiviteAnimationPayload": {
+        "properties": {
+          "inscriptions": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Inscriptions"
+          },
+          "passages_valides": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Passages Valides"
+          },
+          "lots_retires": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Lots Retires"
+          },
+          "bons_utilises": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Bons Utilises"
+          },
+          "coffrets_utilises": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Coffrets Utilises"
+          },
+          "prestations_consommees": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Prestations Consommees"
+          }
+        },
+        "type": "object",
+        "required": [
+          "inscriptions",
+          "passages_valides",
+          "lots_retires",
+          "bons_utilises",
+          "coffrets_utilises",
+          "prestations_consommees"
+        ],
+        "title": "CompteursActiviteAnimationPayload"
+      },
       "CompteursDTO": {
         "properties": {
           "total": {
@@ -29222,6 +29372,71 @@
           "resultats"
         ],
         "title": "CycleGenerationPayload"
+      },
+      "DashboardActivitePayload": {
+        "properties": {
+          "periode": {
+            "type": "string",
+            "enum": [
+              "jour",
+              "7j"
+            ],
+            "title": "Periode"
+          },
+          "debut": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Debut"
+          },
+          "fin": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Fin"
+          },
+          "observedAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Observedat"
+          },
+          "totaux": {
+            "$ref": "#/components/schemas/CompteursActiviteAnimationPayload"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ActiviteAnimationPayload"
+            },
+            "type": "array",
+            "maxItems": 100,
+            "title": "Items"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          },
+          "hasMore": {
+            "type": "boolean",
+            "title": "Hasmore"
+          }
+        },
+        "type": "object",
+        "required": [
+          "periode",
+          "debut",
+          "fin",
+          "observedAt",
+          "totaux",
+          "items",
+          "nextCursor",
+          "hasMore"
+        ],
+        "title": "DashboardActivitePayload"
       },
       "DashboardBorneAnimationPayload": {
         "properties": {
@@ -48216,6 +48431,40 @@
         ],
         "title": "MappingCommande"
       },
+      "MasquageAlerteDashboardPayload": {
+        "properties": {
+          "version": {
+            "type": "string",
+            "title": "Version"
+          },
+          "masquee": {
+            "type": "boolean",
+            "title": "Masquee"
+          }
+        },
+        "type": "object",
+        "required": [
+          "version",
+          "masquee"
+        ],
+        "title": "MasquageAlerteDashboardPayload"
+      },
+      "MasquerAlerteDashboardInput": {
+        "properties": {
+          "version": {
+            "type": "string",
+            "maxLength": 4096,
+            "minLength": 1,
+            "title": "Version"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "version"
+        ],
+        "title": "MasquerAlerteDashboardInput"
+      },
       "MasquerProfilCommercantRequest": {
         "properties": {
           "motif_masquage": {
@@ -52692,6 +52941,16 @@
           "created_at": {
             "type": "string",
             "title": "Created At"
+          },
+          "masquage": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/MasquageAlerteDashboardPayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "additionalProperties": true,
@@ -64155,6 +64414,29 @@
             "type": "boolean",
             "title": "Reponseautorisee"
           },
+          "mauvaisesReponses": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Mauvaisesreponses",
+            "default": 0
+          },
+          "reponsesRestantes": {
+            "type": "integer",
+            "maximum": 10.0,
+            "minimum": 0.0,
+            "title": "Reponsesrestantes",
+            "default": 1
+          },
+          "etapeInvalide": {
+            "type": "boolean",
+            "title": "Etapeinvalide",
+            "default": false
+          },
+          "reponseDefinitive": {
+            "type": "boolean",
+            "title": "Reponsedefinitive",
+            "default": false
+          },
           "responseConfirmedAt": {
             "anyOf": [
               {
@@ -65172,6 +65454,18 @@
               1
             ],
             "title": "Chances"
+          },
+          "qualificationBloquee": {
+            "type": "boolean",
+            "title": "Qualificationbloquee",
+            "default": false
+          },
+          "etapesInvalides": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Etapesinvalides",
+            "default": 0
           }
         },
         "additionalProperties": false,
@@ -65235,6 +65529,18 @@
             "maximum": 100.0,
             "minimum": 0.0,
             "title": "Pourcentage"
+          },
+          "qualificationBloquee": {
+            "type": "boolean",
+            "title": "Qualificationbloquee",
+            "default": false
+          },
+          "etapesInvalides": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Etapesinvalides",
+            "default": 0
           }
         },
         "type": "object",
@@ -70240,8 +70546,10 @@
               "ANSWER_INCORRECT",
               "PRICE_FOUND",
               "PRICE_NOT_FOUND",
+              "PRICE_RETRY",
               "INTRUDER_FOUND",
               "INTRUDER_NOT_FOUND",
+              "INTRUDER_RETRY",
               "CONTENT_CONFIRMED",
               "HINT_OPENED",
               "HELP_APPLIED",
@@ -70638,6 +70946,25 @@
           "resultat"
         ],
         "title": "RecuLibre"
+      },
+      "RecuMasquageDashboardPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "masquee": {
+            "type": "boolean",
+            "title": "Masquee"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "masquee"
+        ],
+        "title": "RecuMasquageDashboardPayload"
       },
       "RecuNeutralisation": {
         "properties": {
@@ -82254,6 +82581,29 @@
           "reponseAutorisee": {
             "type": "boolean",
             "title": "Reponseautorisee"
+          },
+          "mauvaisesReponses": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Mauvaisesreponses",
+            "default": 0
+          },
+          "reponsesRestantes": {
+            "type": "integer",
+            "maximum": 10.0,
+            "minimum": 0.0,
+            "title": "Reponsesrestantes",
+            "default": 1
+          },
+          "etapeInvalide": {
+            "type": "boolean",
+            "title": "Etapeinvalide",
+            "default": false
+          },
+          "reponseDefinitive": {
+            "type": "boolean",
+            "title": "Reponsedefinitive",
+            "default": false
           },
           "responseConfirmedAt": {
             "anyOf": [

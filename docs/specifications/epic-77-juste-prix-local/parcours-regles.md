@@ -4,6 +4,65 @@ Lire les [décisions V1](README.md) et les
 [critères canoniques](../../roadmap/en-cours/epic-77-juste-prix-local-backlog.md).
 Tous les comportements ci-dessous sont des cibles à implémenter.
 
+## Évolution du 22 novembre 2026 — Limiter les mauvaises réponses et rendre les étapes invalides visibles
+
+Périmètre commun E77 Juste Prix et E78 Intrus des vitrines. Cette évolution
+remplace l'essai unique des décisions initiales pour les nouvelles configurations ;
+les définitions déjà publiées et leurs réponses terminales ne sont pas réécrites.
+
+L'organisateur choisit **Mauvaises réponses maximum par étape**, entier **1 à 10**,
+proposé à **1**, dans la création ou la configuration du brouillon. La règle est
+annoncée avant inscription et figée à publication. Une bonne réponse termine le
+jeu de l'étape. Une mauvaise réponse confirmée consomme un essai ; avant le maximum,
+l'habitant peut répondre à nouveau. La dernière mauvaise réponse invalide l'étape.
+Un scan ou un PIN ne peut plus la rattraper ; le serveur refuse cette validation.
+Un passage antérieur reste une preuve, sans convertir l'échec en réussite.
+
+**Choix utilisateur confirmé : conserver la qualification si le seuil reste
+atteint.** Une étape invalide ne compte pas dans ce seuil mais n'élimine pas
+automatiquement la participation. **Non qualifiable** apparaît uniquement si les
+étapes encore possibles ne permettent plus d'atteindre le seuil. Exemple : seuil
+3 sur 5, une étape invalide laisse 4 étapes possibles ; trois invalides rendent
+le seuil impossible. Trois étapes comptabilisées et une invalide conservent la
+qualification et l'unique chance au tirage.
+
+Live affiche le solde serveur **réponses restantes**, puis un tampon **Invalide**
+avec croix et texte à épuisement, distinct du tampon vide et de l'étape validée.
+Le détail terminal restitue la réponse personnelle définitive et ses dates
+disponibles ; les essais précédents restent masqués. Le carnet, la frise et le
+détail reprennent l'impossibilité globale issue du serveur, jamais d'une page
+partielle. Aucune solution avant clôture, aucun indice plus/moins sur un prix.
+QR/PIN et passages des autres étapes restent disponibles selon leurs conditions.
+
+Le domaine `animation_locale` porte budget et transitions. La configuration
+`regles.nombre_mauvaises_reponses_max` est compilée en `engineConfig.maxWrongAnswers` ;
+son absence historique vaut 1 et ne rouvre pas les échecs. Vitrines conserve
+`ONE_CONFIRMED_ANSWER` pour l'historique et utilise `LIMITED_WRONG_ANSWERS` pour
+la nouvelle règle. Le seuil et la chance unique ne changent pas.
+`EtatEtapeMoteur.erreurs` reste persisté dans le JSON de l'exécution ; les lignes
+de réponses définitives conservent leur unicité participant/commerce.
+
+Les lectures personnelles exposent `mauvaisesReponses`, `reponsesRestantes`,
+`etapeInvalide`, `reponseDefinitive`, `reponseAutorisee` ; le résumé global expose
+`qualificationBloquee` et `etapesInvalides`. Le contrat généré précise les
+enveloppes. Le client ne décrémente jamais localement et n'invente pas un état
+actuel après refus ou erreur de relecture. Verrous, versions, reçus idempotents,
+retour `etape`, pagination, focus, brouillons et reprises incertaines sont conservés.
+
+| Critère de l'évolution | Preuve attendue |
+| --- | --- |
+| E77/E78-ESSAIS-01 | Bornes 1/3/10, refus hors bornes, gel publié, historique sans paramètre à 1 |
+| E77/E78-ESSAIS-02 | Erreur puis succès, dernier essai correct, épuisement et refus ultérieur |
+| E77/E78-ESSAIS-03 | Rejeu, concurrence du dernier essai, version obsolète, coupure puis reçu sans double débit |
+| E77/E78-ESSAIS-04 | Passage avant/après, refus scan/PIN sur invalide, autres étapes, clôture/suspension |
+| E77/E78-ESSAIS-05 | Seuil atteint malgré invalide, encore atteignable ou impossible ; carnet/détail cohérents et pagination |
+| E77/E78-ESSAIS-06 | Isolation, solutions privées jusqu'à clôture, réponse finale/date, essais précédents masqués |
+| E77/E78-ESSAIS-07 | 320/390/1280 px, clavier, texte 200 %, refus/erreur/reprise, navigation et brouillons |
+| E77/E78-ESSAIS-08 | Contrats canoniques/embarqués, guides Animation/Commerçant et contrôles de livraison |
+
+La [vérification E77](verification-livraison.md) consigne les preuves de ce lot.
+Cette évolution ne modifie pas le statut des epics ni leurs bilans historiques.
+
 ## Préparer et approuver — CA-01 à 05
 
 L'organisateur habilité choisit « Le Juste Prix Local » dans le catalogue standard.

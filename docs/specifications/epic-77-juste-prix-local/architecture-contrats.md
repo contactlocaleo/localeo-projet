@@ -1,5 +1,24 @@
 # E77 — Architecture et contrats
 
+## Contrat des essais limités — 22 novembre 2026
+
+L'[évolution commune E77/E78](parcours-regles.md#évolution-du-22-novembre-2026--limiter-les-mauvaises-réponses-et-rendre-les-étapes-invalides-visibles)
+ajoute `maxWrongAnswers` (1..10, absence historique = 1) aux configurations
+figées. Les commandes existantes sont réutilisées avec leurs versions et clés.
+L'exécution persiste les erreurs non terminales ; la table de réponse finale
+conserve une seule ligne, au succès ou à la dernière erreur. Les verrous du
+participant et de l'exécution sérialisent les essais concurrents.
+
+Les projections personnelles d'étape ajoutent solde, erreurs et invalidité ;
+le résumé global et le carnet ajoutent impossibilité de qualification et nombre
+d'étapes invalides. Les constructeurs publics restent explicites et n'exposent
+pas les prix attendus, les autres participants ou les anciens essais. Aucun
+compteur n'est accepté depuis une commande du joueur. La qualification demeure
+la politique du seuil ; l'impossibilité mathématique est un fait de présentation
+calculé par le domaine. Les contrats JSON Schema/OpenAPI et les trois copies
+embarquées suivent les producteurs. Les sections V1 ci-dessous gardent leur
+portée historique lorsqu'elles imposent une seule réponse.
+
 Conception V1 du 13 novembre 2026, issue du
 [modèle transverse](../../architecture/templates/epic-architecture-template.md).
 Voir les [parcours](parcours-regles.md) et [preuves attendues](verification-livraison.md).

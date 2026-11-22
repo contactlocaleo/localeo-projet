@@ -1,5 +1,11 @@
 # E78 — Architecture et contrats
 
+L'[évolution des essais limités du 22 novembre](../epic-77-juste-prix-local/architecture-contrats.md#contrat-des-essais-limités--22-novembre-2026)
+complète les contrats V1 ci-dessous. La nouvelle `answerPolicy` est
+`LIMITED_WRONG_ANSWERS` avec `maxWrongAnswers` ; l'ancienne politique
+`ONE_CONFIRMED_ANSWER` conserve son sens. Les projections de solde et invalidité
+et la qualification au seuil suivent la même règle que Juste Prix.
+
 Conception du 15 novembre 2026 selon le
 [modèle transverse](../../architecture/templates/epic-architecture-template.md).
 Lire les [parcours](parcours-regles.md) et les [preuves prévues](verification-livraison.md).

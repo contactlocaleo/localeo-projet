@@ -1,5 +1,10 @@
 # E78 — Parcours et règles
 
+L'[évolution commune du 22 novembre — Limiter les mauvaises réponses et rendre les étapes invalides visibles](../epic-77-juste-prix-local/parcours-regles.md#évolution-du-22-novembre-2026--limiter-les-mauvaises-réponses-et-rendre-les-étapes-invalides-visibles)
+remplace les passages ci-dessous imposant un essai unique pour les nouvelles
+configurations. Les critères E77/E78-ESSAIS-01 à 08 portent ce lot ; les choix
+historiques conservent leur portée pour les éditions déjà publiées.
+
 Spécification du 15 novembre 2026. Lire les
 [décisions et la portée](README.md) et les
 [critères canoniques](../../roadmap/en-cours/epic-78-jeu-des-vitrines-backlog.md).

@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Backend - contrat implemente EPIC 41",
     "description": "OpenAPI complet du backend, dont les parcours Animation locale. Genere hors ligne depuis le code local pour les integrations et les mocks ; cet instantane ne prouve pas son deploiement.",
-    "version": "1.0.0+f623c41"
+    "version": "1.0.0+2a9fd75"
   },
   "paths": {
     "/public/identite-acces/interne/connexion": {
@@ -193747,6 +193747,29 @@
             "type": "boolean",
             "title": "Reponseautorisee"
           },
+          "mauvaisesReponses": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Mauvaisesreponses",
+            "default": 0
+          },
+          "reponsesRestantes": {
+            "type": "integer",
+            "maximum": 10.0,
+            "minimum": 0.0,
+            "title": "Reponsesrestantes",
+            "default": 1
+          },
+          "etapeInvalide": {
+            "type": "boolean",
+            "title": "Etapeinvalide",
+            "default": false
+          },
+          "reponseDefinitive": {
+            "type": "boolean",
+            "title": "Reponsedefinitive",
+            "default": false
+          },
           "responseConfirmedAt": {
             "anyOf": [
               {
@@ -194764,6 +194787,18 @@
               1
             ],
             "title": "Chances"
+          },
+          "qualificationBloquee": {
+            "type": "boolean",
+            "title": "Qualificationbloquee",
+            "default": false
+          },
+          "etapesInvalides": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Etapesinvalides",
+            "default": 0
           }
         },
         "additionalProperties": false,
@@ -194827,6 +194862,18 @@
             "maximum": 100.0,
             "minimum": 0.0,
             "title": "Pourcentage"
+          },
+          "qualificationBloquee": {
+            "type": "boolean",
+            "title": "Qualificationbloquee",
+            "default": false
+          },
+          "etapesInvalides": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Etapesinvalides",
+            "default": 0
           }
         },
         "type": "object",
@@ -199832,8 +199879,10 @@
               "ANSWER_INCORRECT",
               "PRICE_FOUND",
               "PRICE_NOT_FOUND",
+              "PRICE_RETRY",
               "INTRUDER_FOUND",
               "INTRUDER_NOT_FOUND",
+              "INTRUDER_RETRY",
               "CONTENT_CONFIRMED",
               "HINT_OPENED",
               "HELP_APPLIED",
@@ -211865,6 +211914,29 @@
           "reponseAutorisee": {
             "type": "boolean",
             "title": "Reponseautorisee"
+          },
+          "mauvaisesReponses": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Mauvaisesreponses",
+            "default": 0
+          },
+          "reponsesRestantes": {
+            "type": "integer",
+            "maximum": 10.0,
+            "minimum": 0.0,
+            "title": "Reponsesrestantes",
+            "default": 1
+          },
+          "etapeInvalide": {
+            "type": "boolean",
+            "title": "Etapeinvalide",
+            "default": false
+          },
+          "reponseDefinitive": {
+            "type": "boolean",
+            "title": "Reponsedefinitive",
+            "default": false
           },
           "responseConfirmedAt": {
             "anyOf": [

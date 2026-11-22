@@ -11,7 +11,7 @@ restent la référence d'acceptation. Implémentation locale dans les quatre app
 Chaque commerce retenu propose dans Pro un produit précis et son prix TTC.
 L'organisateur approuve la proposition, choisit une tolérance commune, un seuil
 de commerces réussis et l'exigence éventuelle de passages, puis publie une version
-figée. Dans Live, l'habitant confirme une seule estimation par commerce. Une
+figée. Dans Live, l'habitant dispose du budget d'erreurs publié par commerce. Une
 bonne réponse compte immédiatement, ou après validation commerçante si les
 passages sont requis. Atteindre le seuil ouvre une chance au tirage existant.
 
@@ -62,6 +62,10 @@ Animation : assistant, approbation et suivi. Pro : proposition du produit et
 passages, avec droits salariés conservés. Marketplace : parcours **Live** et
 liens d'accès, sans réouverture d'une surface animations dans Coffrets.
 
-Pas d'IA, de classement au plus proche, de plusieurs essais, de correction du
+L'[évolution du 22 novembre — limiter les mauvaises réponses](parcours-regles.md#évolution-du-22-novembre-2026--limiter-les-mauvaises-réponses-et-rendre-les-étapes-invalides-visibles)
+remplace l'essai unique initial pour les nouvelles configurations et conserve
+la qualification au seuil, même avec une autre étape invalide.
+
+Pas d'IA, de classement au plus proche, d'essais au-delà du budget publié, de correction du
 prix publié, d'achat requis ni de nouveau moteur de lots. Le générateur et les
 outils exécutables restent dans le backend ; les sources documentaires ici.

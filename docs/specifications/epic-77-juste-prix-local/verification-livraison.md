@@ -1,5 +1,139 @@
 # E77 — Vérification et livraison
 
+## Livraison des essais limités — 22 novembre 2026
+
+Évolution [E77/E78-ESSAIS-01 à 08](parcours-regles.md#évolution-du-22-novembre-2026--limiter-les-mauvaises-réponses-et-rendre-les-étapes-invalides-visibles),
+distincte du bilan V1 ci-dessous. Bases propres Backend `2a9fd752`, Animation
+`d72bb29`, Live `b91ee10`, Commerçant `036aea6` et Projet `a739c26`.
+Le choix utilisateur final conserve la qualification au seuil, même avec une
+autre étape invalide. Aucun statut d'epic n'est modifié.
+
+### Réalisation et impacts
+
+Backend : budget strict 1..10 dans le domaine, erreurs non terminales et reçu
+idempotent, refus d'attestation après invalidité ; réponse finale unique et
+horodatée ; projections personnelles et carnet calculées sur l'état complet.
+La compilation annonce le budget publié. Le règlement officiel est adapté en
+préparation puis figé ; une clause générée est remplacée exactement sans perdre
+les conditions personnalisées autour. Un règlement personnalisé contradictoire
+est refusé plutôt que tronqué ou publié silencieusement. Une réponse unique
+personnalisée reste cohérente avec un budget de 1 et n'est pas refusée.
+
+Animation : choix en création et édition du brouillon, lecture après publication,
+réglage conservé après refus d'enregistrement. Live : solde serveur, nouvelle
+tentative, réponse définitive, tampon invalide, distinction du seuil atteignable
+ou acquis, QR/PIN des autres étapes conservés. Les commandes et contrôles de
+versions existants sont réutilisés, sans répétition automatique d'une écriture.
+
+Pas de migration SQL : l'état JSON d'exécution porte déjà le compteur d'erreurs.
+Les définitions sans paramètre gardent 1 ; les réponses finales historiques ne
+sont pas rouvertes. Pas de migration de données, remise à zéro, configuration
+Render, secret, fournisseur ou tâche nouvelle. Le générateur de démonstration
+reste compatible avec son budget historique de 1 ; ses tests et une génération
+sur cible ne sont pas exécutés pour ce lot.
+
+Livrer le Backend avant les clients utilisant le nouveau réglage. Les contrats
+Pydantic sont exportés vers les trois consommateurs : **121 fichiers** par
+destination, manifeste Pro limité à ses cinq moteurs. OpenAPI canonique E41
+**1 220 chemins** et E42 **92 chemins** régénérées ; copie Animation identique.
+La copie OpenAPI Pro rattrape aussi quatre routes déjà livrées (activité/rappels
+du tableau de bord et lecture publique de coffret) : aucun chemin, schéma ou
+champ existant supprimé. Ce rattrapage n'implémente aucune nouvelle proposition
+de tableau de bord organisateur.
+
+### Preuves locales
+
+Les passes Backend utilisent `py -3.14 scripts/validation/test_isolated.py` ;
+PostgreSQL 18 jetable explicitement ciblé avec
+`--postgres-test-url postgresql+psycopg://audit_test@127.0.0.1:55450/localeo_audit_test`.
+Les passes ci-dessous se recouvrent et ne doivent pas être additionnées.
+
+| Sélection | Résultat |
+| --- | --- |
+| Architecture, classes du domaine et couverture des use cases obligatoires | 768 réussites |
+| Domaines E77/E78, contrats API existants, budget et page bornée | 107 réussites |
+| Kit, préparation commerçante et catalogue persistant | 50 réussites |
+| Nouveaux domaines/API/projections personnelles | 36 réussites |
+| Domaine après correction du règlement personnalisé | 32 réussites |
+| PostgreSQL limites et suites E77/E78 existantes | 31 réussites |
+| Nouvelle suite PostgreSQL finale | 8 réussites |
+| Contrôles supplémentaires création/modification/publication | 33 réussites, 4 échecs préexistants confirmés ci-dessous |
+| Animation Node complet | 410 réussites, zéro skip |
+| Animation registre et limites après synchronisation des contrats | 7 réussites |
+| Contrats API et registre Commerçant | 36 réussites |
+
+Les tests nouveaux sont dans Backend `test_reponses_limitees.py`,
+`test_reponses_limitees_contract.py`, `test_reponses_limitees_projections.py` et
+`test_reponses_limitees_postgres.py`. Ils couvrent les deux jeux, erreurs puis
+succès, dernier essai, rejeu, concurrence, réponse définitive/date, refus de PIN,
+étape ciblée intacte avec échecs hors page et résumé global du parcours complet.
+Seuil 3/5 : trois échecs rendent la qualification impossible ; une erreur et
+trois succès conservent l'éligibilité. Aucune solution ou réponse étrangère exposée.
+
+Animation : types, lint et build synthétique isolé réussis. Recette
+`tests/browser/qualification-threshold.mjs` enrichie : **12 profils** création et
+configuration (Passeport/Vitrines/Juste Prix, 320/390/1280 px et 200 % à 1280 px),
+API synthétique, clavier, plafond transmis une seule fois et conservé sur refus.
+Rapport `tmp/threshold-report-5SJ66m` ; le champ est absent du Passeport.
+Le build final `tmp/attempts-animation-final-build` inclut aussi les nouveaux
+contrats et le PDF synchronisé ; avertissement de taille de chunk inchangé.
+
+Live : **354 tests de sécurité réussis**, **34 scénarios navigateur réussis**,
+puis **2 smoke tests réussis** après recompilation finale avec le libellé exact
+sur le seuil inatteignable. Recette à 320/390/1280 px, clavier et texte 200 % :
+réponse réessayable puis réussite, maximum 1/3, invalidité, carnet, seuil encore
+atteignable ou acquis, passage avant réponse, clôture/suspension, lecture en
+échec, reçu incertain, pagination/saisie/focus, retour navigateur et refus.
+Les régressions Passeport/Chasse et leurs actions de passage passent également.
+Rapports `tmp/attempts-live-final/{results,run}.json` et
+`tmp/attempts-live-release/{results,run}.json`, captures relues. La première
+exécution interrompue pour lenteur locale reste marquée `interrupted` et n'est
+pas comptée comme réussite. Tous les processus Live sont arrêtés.
+
+`npx eslint . --ignore-pattern 'output/**' --ignore-pattern 'tmp/**'` réussit,
+ainsi que le lint des sources touchées. La commande brute `npm run lint` rencontre
+un `EPERM` dans l'ancien artefact local `output/bum-politique/pytest-approval-1` ;
+ce répertoire n'est ni du code livré, ni supprimé ou contourné par un changement
+de configuration du dépôt. Build de production isolé final Live réussi dans
+`tmp/attempts-live-build-release`, avec les contrats et le dernier libellé.
+
+Guides : sources, deux captures réelles 390/1280 et provenance actualisées,
+**15 pages Animation + 12 Commerçant** rendues et relues. Copies PDF identiques,
+contrôles `guide:check` réussis. Accès clavier, PDF HTTP 200 et aide indisponible
+vérifiés dans les vrais builds synthétiques : Animation 390/1024 px ; Commerçant
+390/1440 px avec Axe sans violation. Les captures Commerçant restent pertinentes,
+son nouveau conseil décrit le refus d'une étape invalide sans changer son scanner.
+
+Revue indépendante domaine/contrats puis Live effectuée en lecture : aucun
+défaut produit bloquant établi ; la preuve globale manquante recommandée est
+ajoutée au domaine, aux constructeurs, au carnet et aux lectures ciblées PostgreSQL.
+`check_guidance.py --changed --all-markdown` : 13 guides, 243 liens, aucune erreur
+ni alerte ; `sync_documentation.py --check-sources` : 155 documents vérifiés.
+Les vérifications indexées sont rejouées avant commit. Aucun déploiement inclus.
+
+### Échecs antérieurs vérifiés et limites
+
+Cinq échecs adjacents ont été rejoués dans un checkout détaché indépendant au
+HEAD Backend `2a9fd752` : **mêmes cinq échecs**, quatre réussites et deux tests PG
+non exécutés sans cible dans cette seule passe. Aucun skip ni assertion affaiblie.
+Rapport `tmp/attempts-baseline-1795370076882/baseline-reponses-limitees.txt`.
+
+- `test_modification_animation_en_cours.py` : trois scénarios attendent encore
+  l'ancien endpoint de changement de date après publication, désormais refusé
+  avec `PARAMETRES_EXPLOITATION_REQUIS`.
+- `test_catalogue_chasse_t2.py::test_publication_recontrole_chasse_dans_transaction` :
+  double sans port `reversibilite`.
+- `test_publication_classique_t4.py::test_catalogue_public_chasse_n_expose_pas_les_commerces_ni_le_flyer` :
+  double de résultat SQL sans `mappings`.
+
+Ces dettes indépendantes restent hors correctif. PostgreSQL 55450 est arrêté
+proprement ; aucun processus Backend de test restant. Aucune recette distante,
+preuve sur téléphone physique ou déploiement n'est attesté par ces contrôles.
+
+Commits applicatifs du lot : Backend `b7edf6e4`, Animation `08aef5a`,
+Marketplace/Live `a3641b1`. La copie de guide et les contrats Commerçant sont
+livrés séparément ; Projet porte les sources et preuves canoniques.
+
 V1 du 13 novembre 2026. Les vingt critères restent dans le
 [backlog](../../roadmap/en-cours/epic-77-juste-prix-local-backlog.md).
 La [conception](architecture-contrats.md) et les [parcours](parcours-regles.md)

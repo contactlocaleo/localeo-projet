@@ -1,5 +1,43 @@
 # Captures du guide utilisateur Animation
 
+## Ajout du 22 novembre 2026 - maximum de mauvaises réponses
+
+Les captures `mauvaises-reponses-1280.png` et `mauvaises-reponses-390.png`
+montrent la section réelle **Réponses des participants** dans la configuration
+d'un Juste Prix Local en brouillon. Le maximum de trois mauvaises réponses est
+un exemple fictif ; le même réglage existe pour le Jeu des vitrines. Base Git
+Animation `d72bb29`, avec les modifications du plan « Limiter les mauvaises
+réponses et rendre les étapes invalides visibles ». Aucun écran n'est redessiné.
+
+Le chapitre 4 explique le réglage de 1 à 10, sa fixation à la publication,
+l'épuisement des essais, le tampon invalide et le maintien de la qualification
+si le seuil est atteint. Cette édition comporte **quinze chapitres et pages**.
+Les quinze pages ont été rendues et relues, dont la nouvelle page 4 en détail.
+
+Depuis `localeo-animation`, avec Chromium installé :
+
+```powershell
+$env:ANIMATION_TEST_DIST = 'tmp/attempts-animation-build'
+node scripts/build-pwa-tests.mjs
+node tests/browser/wrong-answer-guide.mjs
+py -3.14 scripts/generate-animation-guide.py --preview-dir tmp/attempts-guides-animation-pdf
+npm run guide:sync
+npm run guide:check
+$env:ANIMATION_TEST_DIST = 'tmp/attempts-guides-build-animation'
+node scripts/build-pwa-tests.mjs
+$env:ANIMATION_GUIDE_ARTIFACTS = 'tmp/attempts-guides-access-animation'
+node tests/browser/animation-guide.mjs --access-only
+```
+
+Le banc de capture utilise un port éphémère, l'origine `api.test.invalid` et des
+API simulées, sans écriture métier ni accès réel. Sa provenance est dans
+`localeo-animation/tmp/attempts-guides-captures-fgQu40/provenance.json`.
+La recette d'accès utilise le port 4182 : lien visible et accessible au clavier,
+ouverture dans un nouvel onglet, HTTP 200, type PDF et contenu identique au
+canonique, y compris avec l'assistance en erreur. La copie PDF embarquée est
+identique au canonique. Ces preuves concernent un build local synthétique,
+sans démontrer un déploiement distant.
+
 ## Ajout du 22 novembre 2026 — tableau de bord quotidien
 
 Les captures `tableau-de-bord-1024.png`, `tableau-de-bord-390.png` et
