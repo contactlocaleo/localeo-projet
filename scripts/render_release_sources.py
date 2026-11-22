@@ -18,6 +18,7 @@ RUNNER_PATH = "scripts/database/apply_migrations.py"
 # Reviewed at backend 46cc89042a19ec2208fec6f54d9730693567efe9.
 REVIEWED_RUNNER_SHA256 = frozenset({
     "73bc0d9a6e0a54333128357d48c31d6a00c8a6ff6cbe55930eaf201d6516e697",
+    "a3e5ceba65d7a9129e27aea6b84715933e31b24491643458c9d203e5cd574acd",
 })
 MAX_BLOB_BYTES = 16 * 1024 * 1024
 HEX40 = re.compile(r"[0-9a-f]{40}\Z")
