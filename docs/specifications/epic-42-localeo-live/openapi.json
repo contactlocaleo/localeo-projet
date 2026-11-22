@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Live - API backend Epic 42",
     "description": "Vue OpenAPI 3.1 des contrats publics, editoriaux et techniques de Localeo Live.",
-    "version": "1.0.0+8c74b66"
+    "version": "1.0.0+7fe2c21"
   },
   "paths": {
     "/public/animation-locale/animations/{animation_id}/contact-public": {
@@ -76729,9 +76729,17 @@
             "title": "Type"
           },
           "occurred_at": {
-            "type": "string",
-            "format": "date-time",
-            "title": "Occurred At"
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Occurred At",
+            "description": "Instant de l’événement ; omis ou nul pour utiliser l’heure serveur de la commande."
           },
           "motif": {
             "type": "string",
@@ -76757,7 +76765,6 @@
         "required": [
           "expected_version",
           "type",
-          "occurred_at",
           "motif"
         ],
         "title": "SuiviCommande"

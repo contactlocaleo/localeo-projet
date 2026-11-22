@@ -105,6 +105,31 @@ ciblées couvrent les états et dotations ci-dessus. Le
 distingue les preuves exécutées des contrôles encore à produire ; aucune
 activation d’environnement n’est attestée par cette spécification.
 
+## Correctif du 22 novembre 2026 — Confirmation de remise et heure serveur
+
+Une confirmation immédiate **Enregistrer la remise** ne dépend pas de l'horloge
+de l'appareil. Localeo Animation omet `occurred_at` dans la commande de suivi
+externe ; le backend utilise alors son heure de commande pour l'événement et
+sa persistance. `occurred_at: null` a le même sens. Une date historique explicite
+conserve son fuseau obligatoire, sa normalisation UTC et le refus des dates
+futures par le domaine. L'empreinte idempotente porte l'intention initiale :
+relire ou rejouer la même commande ne redéfinit pas l'heure de la remise.
+
+Les versions, droits, périmètres et confirmations restent contrôlés. Le message
+« Les informations ont changé » est réservé aux codes de conflit de version.
+Une remise déjà enregistrée, un refus du gagnant, un remplacement ou un suivi
+invalide présentent leur raison propre. Un refus inconnu invite à actualiser
+sans affirmer que la version a changé. Aucun refus ne confirme une remise ni
+ne déclenche de répétition automatique.
+
+Le contrat est additif : livrer le backend acceptant la date omise avant
+l'interface qui l'omet. Les clients de suivi historique continuent à envoyer
+une date explicite. Ni migration, ni réparation des données, ni nouvelle
+configuration ou adaptation du générateur de démonstration ne sont nécessaires.
+Les guides Animation et Commerçant restent valables : actions, confirmations,
+reprise et procédures décrites sont inchangées ; l'heure technique et les
+messages d'erreur concernés n'y étaient pas détaillés.
+
 ## Correctif du 22 novembre 2026 — Prioriser la logistique des retraits
 
 La page **Lots et remises** doit permettre de préparer les retraits sans ouvrir

@@ -5499,3 +5499,43 @@ ne changent pas. **GL-16 reste partiel** : aucune qualification de capacité de
 la synthèse à forte volumétrie n’est revendiquée. Les preuves sont locales et
 synthétiques ; aucune opération réelle de retrait, aucun appareil physique ni
 déploiement ne sont attestés. Commits et push séparés selon la demande.
+
+### Correctif du 22 novembre 2026 — Confirmation immédiate de remise
+
+Cause locale reproduite : une heure navigateur future fait refuser le suivi
+externe par `SUIVI_INVALIDE`, même avec la version actuelle ; l'ancien affichage
+transformait ce refus 409 en conflit de version. L'identification du lot et de
+l'environnement du signalement reste attendue : cette reproduction ne prouve
+pas la cause du cas distant ni une remise réelle.
+
+Le backend accepte désormais `occurred_at` omis ou nul pour son heure serveur.
+L'empreinte reste calculée avant substitution et le reçu est relu avant toute
+nouvelle écriture. Animation omet la date pour une remise immédiate et distingue
+les motifs de refus. Les contrats canoniques E41/Live et les copies Animation/Pro
+sont régénérés ; la copie Animation est reprise depuis la source canonique,
+y compris les écarts antérieurs de synchronisation. Marketplace ne consomme
+pas cette commande protégée et ne possède pas cette copie OpenAPI générale.
+
+Preuves locales :
+
+- Avant correction : quatre échecs attendus sur omission/null côté backend ;
+  échec du test d'affichage du refus métier et du navigateur à horloge avancée.
+- Backend : **27 tests réussis**, couvrant schéma, orchestration et domaine,
+  dont heure serveur, dates explicites, futur refusé, version obsolète et rejeu
+  cinq minutes plus tard sans nouvelle écriture. **764 contrôles d'architecture
+  et couverture métier réussis**. Aucun changement des règles du domaine.
+- Animation : types, lint et **403 tests Node réussis** ; build isolé réussi.
+  **44 scénarios Chromium réussis**, à 320/390/1280 px et texte 200 % : remise
+  nominale/horloge avancée, conflit/relecture, refus d'accès, lecture seule,
+  retrait forcé, attestation, clôture, distribution incertaine/absente et rappel.
+- Pro : **33 tests de contrats réussis** sur la copie régénérée.
+- Revue indépendante des sources : aucun écart bloquant ; droits, version,
+  reçu et empreinte conservés. Les nouveaux tests d'orchestration isolent
+  l'autorisation ; le scénario navigateur de refus couvre son comportement UI.
+
+Impacts : Backend, Animation, Pro (copie de contrat seulement) et Projet.
+Guides utilisateur examinés, sans changement de procédure ou capture décrite.
+Aucune migration, donnée réparée, opération réelle de remise ou recette
+PostgreSQL de concurrence n'est exécutée. La livraison doit respecter l'ordre
+backend puis Animation ; les preuves synthétiques ne prouvent pas un parcours
+sur l'appareil utilisateur ni une livraison en production.

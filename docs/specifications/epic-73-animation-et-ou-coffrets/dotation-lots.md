@@ -300,7 +300,7 @@ Préfixe organisateur `P = /protected/animation-locale`. Les commandes ERP homol
 | `GET P/animations/{id}/gains` | Lecture autorisée | Union discriminée ; conserver la compatibilité Coffrets au déploiement coordonné |
 | `POST P/animations/{id}/gains/{gain_id}/remplacer` | Version gain, motif, référence de refus ou constat sans réponse | Consomme le prochain suppléant disponible ; refus si conditions non remplies |
 | `POST P/animations/{id}/gains/{gain_id}/retirer-au-sort` | Version, motif, confirmation distincte | Retirage complémentaire explicite uniquement si suppléance épuisée ; même population, aucun candidat déjà gagnant |
-| `POST P/animations/{id}/gains/{gain_id}/suivi-externe` | Version, événement `CONTACT/REPONSE/REFUS/INCIDENT/REMISE_DECLAREE/CORRECTION`, date, motif/détail | Journal externe ; aucun QR ni consommation terrain simulée |
+| `POST P/animations/{id}/gains/{gain_id}/suivi-externe` | Version, événement `CONTACT/REPONSE/REFUS/INCIDENT/REMISE_DECLAREE/CORRECTION`, date facultative, motif/détail | Journal externe ; sans date ou avec `occurred_at: null`, utiliser l'heure serveur de la commande ; une date explicite garde son fuseau obligatoire et ne peut être future. Aucun QR ni consommation terrain simulée |
 | `POST P/bons-lots/{id}/prolonger` | Version, `expires_at`, motif | Bon avec nouvelle échéance contrôlée |
 | `POST P/bons-lots/{id}/revoquer` | Version et motif | Révocation durable, pas de retour au stock |
 | `POST P/bons-lots/{id}/renvoyer` | Version et motif de renvoi | Opération email, même bon |
