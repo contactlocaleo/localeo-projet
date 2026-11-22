@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Backend - contrat implemente EPIC 41",
     "description": "OpenAPI complet du backend, dont les parcours Animation locale. Genere hors ligne depuis le code local pour les integrations et les mocks ; cet instantane ne prouve pas son deploiement.",
-    "version": "1.0.0+dde4a75"
+    "version": "1.0.0+f623c41"
   },
   "paths": {
     "/public/identite-acces/interne/connexion": {
@@ -115910,6 +115910,361 @@
         ]
       }
     },
+    "/protected/animation-locale/dashboard-activite": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Consulter Dashboard Activite",
+        "operationId": "consulter_dashboard_activite_animation",
+        "parameters": [
+          {
+            "name": "periode",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "enum": [
+                "jour",
+                "7j"
+              ],
+              "type": "string",
+              "default": "jour",
+              "title": "Periode"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 4096
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DashboardActivitePayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Période ou curseur invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/animation-locale/dashboard-alertes-masquees": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Lister Alertes Masquees Dashboard",
+        "operationId": "lister_alertes_masquees_dashboard_animation",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 4096
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AlertesMasqueesDashboardPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/animation-locale/dashboard-alertes/{alerte_id}/masquage": {
+      "put": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Masquer Alerte Dashboard",
+        "operationId": "masquer_alerte_dashboard_animation",
+        "parameters": [
+          {
+            "name": "alerte_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Alerte Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MasquerAlerteDashboardInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecuMasquageDashboardPayload"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Échéance obsolète : relire le bandeau",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Restaurer Alerte Dashboard",
+        "operationId": "restaurer_alerte_dashboard_animation",
+        "parameters": [
+          {
+            "name": "alerte_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Alerte Id"
+            }
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4096,
+              "title": "Version"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecuMasquageDashboardPayload"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Version invalide ou expirée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
     "/protected/animation-locale/lectures-globales/animations": {
       "get": {
         "tags": [
@@ -141476,6 +141831,72 @@
         ],
         "title": "ActiverInvitationAnimationRequest"
       },
+      "ActiviteAnimationPayload": {
+        "properties": {
+          "inscriptions": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Inscriptions"
+          },
+          "passages_valides": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Passages Valides"
+          },
+          "lots_retires": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Lots Retires"
+          },
+          "bons_utilises": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Bons Utilises"
+          },
+          "coffrets_utilises": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Coffrets Utilises"
+          },
+          "prestations_consommees": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Prestations Consommees"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "nom": {
+            "type": "string",
+            "title": "Nom"
+          },
+          "modele_code": {
+            "type": "string",
+            "title": "Modele Code"
+          },
+          "derniere_activite": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Derniere Activite"
+          }
+        },
+        "type": "object",
+        "required": [
+          "inscriptions",
+          "passages_valides",
+          "lots_retires",
+          "bons_utilises",
+          "coffrets_utilises",
+          "prestations_consommees",
+          "id",
+          "nom",
+          "modele_code",
+          "derniere_activite"
+        ],
+        "title": "ActiviteAnimationPayload"
+      },
       "ActiviteLocalePayload": {
         "properties": {
           "id": {
@@ -142648,6 +143069,46 @@
           "email_statut"
         ],
         "title": "AlertePayload"
+      },
+      "AlertesMasqueesDashboardPayload": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/NotificationAnimationPayload"
+            },
+            "type": "array",
+            "maxItems": 100,
+            "title": "Items"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          },
+          "hasMore": {
+            "type": "boolean",
+            "title": "Hasmore"
+          },
+          "observedAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Observedat"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "nextCursor",
+          "hasMore",
+          "observedAt"
+        ],
+        "title": "AlertesMasqueesDashboardPayload"
       },
       "AlertesPage": {
         "properties": {
@@ -153307,6 +153768,50 @@
         ],
         "title": "CompteurStatutSuivi"
       },
+      "CompteursActiviteAnimationPayload": {
+        "properties": {
+          "inscriptions": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Inscriptions"
+          },
+          "passages_valides": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Passages Valides"
+          },
+          "lots_retires": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Lots Retires"
+          },
+          "bons_utilises": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Bons Utilises"
+          },
+          "coffrets_utilises": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Coffrets Utilises"
+          },
+          "prestations_consommees": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Prestations Consommees"
+          }
+        },
+        "type": "object",
+        "required": [
+          "inscriptions",
+          "passages_valides",
+          "lots_retires",
+          "bons_utilises",
+          "coffrets_utilises",
+          "prestations_consommees"
+        ],
+        "title": "CompteursActiviteAnimationPayload"
+      },
       "CompteursDTO": {
         "properties": {
           "total": {
@@ -158200,6 +158705,71 @@
           "resultats"
         ],
         "title": "CycleGenerationPayload"
+      },
+      "DashboardActivitePayload": {
+        "properties": {
+          "periode": {
+            "type": "string",
+            "enum": [
+              "jour",
+              "7j"
+            ],
+            "title": "Periode"
+          },
+          "debut": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Debut"
+          },
+          "fin": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Fin"
+          },
+          "observedAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Observedat"
+          },
+          "totaux": {
+            "$ref": "#/components/schemas/CompteursActiviteAnimationPayload"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ActiviteAnimationPayload"
+            },
+            "type": "array",
+            "maxItems": 100,
+            "title": "Items"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          },
+          "hasMore": {
+            "type": "boolean",
+            "title": "Hasmore"
+          }
+        },
+        "type": "object",
+        "required": [
+          "periode",
+          "debut",
+          "fin",
+          "observedAt",
+          "totaux",
+          "items",
+          "nextCursor",
+          "hasMore"
+        ],
+        "title": "DashboardActivitePayload"
       },
       "DashboardBorneAnimationPayload": {
         "properties": {
@@ -177194,6 +177764,40 @@
         ],
         "title": "MappingCommande"
       },
+      "MasquageAlerteDashboardPayload": {
+        "properties": {
+          "version": {
+            "type": "string",
+            "title": "Version"
+          },
+          "masquee": {
+            "type": "boolean",
+            "title": "Masquee"
+          }
+        },
+        "type": "object",
+        "required": [
+          "version",
+          "masquee"
+        ],
+        "title": "MasquageAlerteDashboardPayload"
+      },
+      "MasquerAlerteDashboardInput": {
+        "properties": {
+          "version": {
+            "type": "string",
+            "maxLength": 4096,
+            "minLength": 1,
+            "title": "Version"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "version"
+        ],
+        "title": "MasquerAlerteDashboardInput"
+      },
       "MasquerProfilCommercantRequest": {
         "properties": {
           "motif_masquage": {
@@ -181670,6 +182274,16 @@
           "created_at": {
             "type": "string",
             "title": "Created At"
+          },
+          "masquage": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/MasquageAlerteDashboardPayload"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "additionalProperties": true,
@@ -199616,6 +200230,25 @@
           "resultat"
         ],
         "title": "RecuLibre"
+      },
+      "RecuMasquageDashboardPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "masquee": {
+            "type": "boolean",
+            "title": "Masquee"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "masquee"
+        ],
+        "title": "RecuMasquageDashboardPayload"
       },
       "RecuNeutralisation": {
         "properties": {

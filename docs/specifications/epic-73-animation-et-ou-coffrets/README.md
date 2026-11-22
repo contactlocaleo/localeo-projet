@@ -1,5 +1,11 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+**22 novembre 2026 — E73-EVO-DASHBOARD-JOUR** :
+[activité du jour/sept jours et rappels personnels, DJ-01 à DJ-09](ux-productivite-organisateur.md#évolution-du-22-novembre-2026--tableau-de-bord-quotidien).
+Implémentation locale réalisée : inscriptions effectives, passages, retraits et
+consommations, avec suppression/restauration personnelle des bandeaux de clôture.
+File « À traiter » et clôture historique E73 conservées ; [preuves propres au lot](verification-livraison.md#tableau-de-bord-quotidien--22-novembre-2026).
+
 **18 novembre 2026 — E73-EVO-AUTONOMIE-COMMERCANTS** :
 [gestion autonome des commerces Animation seule, GCA-01 à GCA-10](gestion-commercants-animation.md).
 Gestion partagée entre les gestionnaires habilités de la commune, sans validation

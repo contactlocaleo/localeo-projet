@@ -497,3 +497,82 @@ Preuves attendues : tests de politique D2 et de seuil automatique/manuel, tests 
 - `py -3 scripts/validation/test_isolated.py tests/domain/animation_locale/test_recommandation_productivite.py -q` : **14 réussites**, destination `live` et caractère de consultation préservé.
 - `pnpm exec tsc --noEmit` et lint ciblé des fichiers UI du lot : **réussis** avant intégration des lots parallèles.
 - Les bancs `po-creation-continuite.mjs` (nouveau scénario passeport à 1280 et 390 pixels) et `po-organisateur.mjs` (suivi distinct du bilan) sont adaptés. Leur exécution et celle des assertions PostgreSQL de productivité restent à consigner dans la vérification intégrée ; ces adaptations seules ne prouvent pas les parcours.
+
+## Évolution du 22 novembre 2026 — tableau de bord quotidien
+
+**E73-EVO-DASHBOARD-JOUR**, plan utilisateur validé, réalisation locale vérifiée.
+La clôture historique E73 et ses réserves restent inchangées. Cette évolution
+remplace, pour les seuls bandeaux personnels du tableau de bord, l'interdiction
+de masquage du rappel `CLOTURE_ATTENDUE` décrite plus haut. La situation métier,
+la file « À traiter », la liste et le détail des animations conservent ce signal.
+
+### Parcours et critères d'acceptation
+
+| Critère | Comportement observable |
+| --- | --- |
+| E73-DJ-01 | Le bloc compact « L’activité de vos animations » précède les actions du tableau de bord. « Aujourd’hui » est sélectionné initialement ; « 7 derniers jours » inclut aujourd'hui et les six jours civils précédents, en Europe/Paris, jusqu'à la lecture. Période et dernière actualisation sont visibles. |
+| E73-DJ-02 | Cinq repères : nouvelles inscriptions, passages validés, lots retirés, bons utilisés, coffrets utilisés. Le dernier indique aussi le nombre de prestations consommées. Les totaux couvrent toutes les animations autorisées de la commune active, y compris clôturées et archivées, indépendamment des filtres et pages historiques. |
+| E73-DJ-03 | « Voir le détail par animation » déplie la liste des animations ayant une activité, avec les mêmes compteurs et « Consulter le suivi ». Page de 25, maximum API 100 ; activité la plus récente puis identifiant pour départager. Les totaux ne sont jamais calculés depuis la page. Actualiser réinitialise les curseurs de ce seul bloc. |
+| E73-DJ-04 | « Supprimer de mon tableau de bord » masque le bandeau de clôture attendue après confirmation serveur, uniquement pour le compte connecté et cette échéance effective. « Annuler » et la liste paginée « Alertes masquées » restaurent ce rappel. La ligne « À traiter » demeure. Aucun changement de notification, de compteur d'alerte ou de clôture. |
+| E73-DJ-05 | La préférence est partagée entre appareils du même compte à la prochaine lecture, isolée par acteur, organisation et commune. Un nouveau dépassement d'une autre échéance produit un rappel visible. Un changement d'échéance concurrent refuse le masquage obsolète ; une restauration tardive ne touche pas une autre échéance. |
+| E73-DJ-06 | Les chiffres utilisent des faits confirmés et leurs dates réelles : inscription effective, passage VALIDEE, remise non corrigée, bon consommé non corrigé, validation de prestation non annulée. Une demande d'email, un renvoi, une anomalie, une correction annulant le fait ou une attestation administrative ne créent pas l'activité correspondante. |
+| E73-DJ-07 | Chargement, lecture confirmée vide, erreur et refus restent distincts. Une erreur n'affiche pas zéro. Une relecture conserve contrôles, dépliage et focus ; une réponse obsolète ou d'une autre commune est écartée. Navigation clavier, cibles de 44 px, 320/390/1280 px et texte 200 % sont vérifiés. |
+| E73-DJ-08 | Agrégation en stockage, aucun chargement exhaustif des participations ni appel par animation. Droits avant agrégation et pagination, curseur signé lié à l'acteur et au périmètre, bornes temporelles figées entre pages. Les préférences masquées sont exclues avant la limite de 50 bandeaux. |
+| E73-DJ-09 | Contrats canonique et embarqué synchronisés, migration additive vérifiée, Guide Animation illustré régénéré et servi à jour. Guide Commerçant sans impact : ses écrans et procédures sont inchangés. Aucun déploiement ni recette physique ne découle des preuves locales. |
+
+### Producteurs, contrats et données
+
+Backend reste propriétaire des droits et de la politique de masquage ;
+l'application orchestre transaction et ports, les repositories agrègent les
+faits et Animation présente les réponses. Le nouveau calcul ne réutilise pas
+les totaux historiques : ceux-ci ont leurs filtres de période d'animation et
+leur périmètre propres. Aucun changement de règle de participation ou de remise.
+
+Sous `/protected/animation-locale`, `GET /dashboard-activite` reçoit
+`periode=jour|7j`, `limit` (25, max 100) et `cursor`. Réponse : `periode`, `debut`,
+`fin`, `observedAt`, `totaux`, `items`, `nextCursor`, `hasMore`. Les compteurs
+`inscriptions`, `passages_valides`, `lots_retires`, `bons_utilises`,
+`coffrets_utilises`, `prestations_consommees` sont explicites, globaux et par
+animation. Chaque ligne porte `id`, `nom`, `modele_code`, `derniere_activite`.
+Les instants bornent la période en UTC après résolution des jours de Paris ;
+les pages suivantes gardent ces bornes. Elles relisent les droits et les faits
+actuels : une correction reste reflétée, sans promesse d'instantané historique.
+
+Pour la tombola publique, l'inscription effective utilise la preuve EMAIL_VERIFIE
+ou INSCRIPTION_DIRECTE et sa première confirmation ; les demandes restées en
+attente sont exclues. Les autres jeux utilisent `inscrit_at`. Les passages
+proviennent des validations `VALIDEE` et de `validated_at` ; une réponse à un jeu
+ou le scan d'un lieu ne constitue pas un passage supplémentaire. La remise
+utilise la projection corrigée `remise_at`/`remise_evenement_id`. Les consommations
+de bons corrigées sont exclues. Les prestations sont rattachées au gain par
+**instance** de coffret et non par modèle : compter distinctement les instances
+et les validations actives pendant la période. Une instance utilisée plusieurs
+jours compte une seule fois dans le total des sept jours. Aucun horaire manquant
+n'est reconstruit et aucune identité habitant n'est exposée par cet agrégat.
+
+L'alerte de clôture est synthétique : la suppression existante des notifications
+n'est pas réutilisée. Une préférence durable est unique par acteur/organisation/
+commune/animation/type/échéance effective, prenant les surcharges d'exploitation.
+Les alertes du dashboard borné portent le champ optionnel
+`masquage: {version, masquee}`. `PUT /dashboard-alertes/{id}/masquage` reçoit
+`{version}` ; `DELETE` sur cette route reçoit la version en query. Répéter la
+même intention est idempotent. Le PUT revalide l'alerte active et son échéance
+sous coordination avec les mutations d'animation ; contexte obsolète = 409.
+Le DELETE cible exactement l'échéance fournie, même si la préférence est déjà
+absente. `GET /dashboard-alertes-masquees` fournit `items/nextCursor/hasMore/
+observedAt`, limite 25/max 100. L'acteur vient de la session, permission
+`animation:lire` et protections CSRF existantes ; réponses privées sans cache.
+
+### Matrice de réalisation et preuves prévues
+
+| Critères | Preuves et impacts |
+| --- | --- |
+| DJ-01 à 03, 06, 08 | Tests domaine des périodes Paris, services/contrats, PostgreSQL six jeux et trois dotations, archives, confirmations, corrections, dédoublonnages et pagination. Mesures N/10N et plans PostgreSQL avec les budgets AP-22 existants : API p95 ≤ 1 s, p99 ≤ 2 s ; première page utilisable p95 ≤ 2 s dans le banc déclaré. Une mesure absente ne vaut pas acceptation de capacité. |
+| DJ-04, 05, 08 | Tests répétition, concurrence échéance/masquage, acteur/organisation/commune étrangers, restauration et filtrage avant LIMIT. Migration additive : préférences et index ; aucun préremplissage ni reprise de préférences locales historiques. |
+| DJ-07, 09 | Navigateur synthétique, types/lint/build isolés, sécurité/architecture backend, contrat exporté et consommateur, guide rendu intégralement et copie HTTP. Source canonique, captures et PDF Animation à actualiser ; Commerçant sans impact. |
+| Démonstration/exploitation | Pas de nouveau moteur, commande de participation, fournisseur, secret ni flag. Les données de démonstration existantes alimentent les nouveaux agrégats ; tester la migration et les lectures sur fixtures, sans génération sur une cible réelle. Livrer migration puis backend/contrat, puis Animation. Conserver la table de préférences lors d'un retour à l'ancien frontend. |
+
+Les résultats effectivement obtenus sont consignés dans le
+[bilan de l'évolution](verification-livraison.md#tableau-de-bord-quotidien--22-novembre-2026).
+Cette matrice décrit les contrôles attendus ; le bilan distingue leur exécution
+des qualifications de capacité et d'usage restant ouvertes sur cible réelle.

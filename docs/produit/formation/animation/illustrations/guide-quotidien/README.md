@@ -1,5 +1,38 @@
 # Captures du guide utilisateur Animation
 
+## Ajout du 22 novembre 2026 — tableau de bord quotidien
+
+Les captures `tableau-de-bord-1024.png`, `tableau-de-bord-390.png` et
+`alertes-tableau-de-bord-1024.png`, `alertes-tableau-de-bord-390.png` montrent
+le tableau de bord React réel, sur base Animation `bd64dcc` avec l'évolution
+E73-EVO-DASHBOARD-JOUR du même lot. L'API est simulée, les chiffres sont fictifs
+et l'horloge pédagogique reste fixée au 21 novembre 2026 à midi UTC. Aucun
+compte ou accès utilisable n'est exposé. Les deux premiers chapitres séparent
+l'activité de la gestion des rappels pour garder les caractères et captures
+lisibles ; cette édition comporte **quatorze chapitres**.
+
+Depuis `localeo-animation` :
+
+```powershell
+$env:ANIMATION_TEST_DIST = 'tmp/dashboard-guide-build'
+$env:ANIMATION_GUIDE_ARTIFACTS = 'tmp/dashboard-guide-captures-final'
+node scripts/build-pwa-tests.mjs
+node tests/browser/animation-guide.mjs --captures-only --only=tableau-de-bord
+py -3.14 scripts/generate-animation-guide.py --preview-dir tmp/dashboard-guide-preview-final
+npm run guide:sync
+node scripts/build-pwa-tests.mjs
+node tests/browser/animation-guide.mjs --access-only
+npm run guide:check
+```
+
+Port local 4182 ; build et rapports séparés du banc fonctionnel quotidien.
+Les captures remplacent seulement celles du tableau de bord et ajoutent les
+rappels personnels. Les autres images conservent leur provenance ci-dessous.
+Toutes les pages du PDF sont rendues et relues après génération ; la recette
+d'accès vérifie la copie PDF servie, ses liens et l'absence d'écriture métier.
+
+## Captures initiales du 21 novembre 2026
+
 Captures du 21 novembre 2026 : application React réelle de `localeo-animation`,
 base Git `292f036` avec les modifications du guide présentes dans le même lot.
 Elles ne sont ni des maquettes dessinées, ni des captures d'un environnement de

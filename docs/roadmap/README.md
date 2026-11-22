@@ -1,5 +1,11 @@
 # Roadmap par etat
 
+**22 novembre 2026 — E73-EVO-DASHBOARD-JOUR** :
+[tableau de bord quotidien, DJ-01 à DJ-09](../specifications/epic-73-animation-et-ou-coffrets/ux-productivite-organisateur.md#évolution-du-22-novembre-2026--tableau-de-bord-quotidien),
+réalisation et vérifications locales. Activité confirmée du jour/sept jours et
+masquage personnel des bandeaux de clôture, sans retirer la file « À traiter ».
+Clôture historique E73 conservée ; tests et livraison propres à l'évolution.
+
 **21 novembre 2026 — E73-EVO-LIVE-VIGNETTES** : carnet et gains en finition
 « Minimal contemporain », avec filets intérieurs et 22 px rendus au contenu
 du carnet ; programme en feuillets datés conservé, selon les plans validés.

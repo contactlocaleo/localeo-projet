@@ -1,5 +1,17 @@
 # EPIC 73 — Localeo Animation et/ou Coffrets
 
+## Évolution du 22 novembre 2026 — tableau de bord quotidien
+
+**E73-EVO-DASHBOARD-JOUR**, réalisation et vérifications locales. Les critères
+[DJ-01 à DJ-09](../../specifications/epic-73-animation-et-ou-coffrets/ux-productivite-organisateur.md#évolution-du-22-novembre-2026--tableau-de-bord-quotidien)
+couvrent activité confirmée du jour/sept jours, toutes animations de la commune,
+et masquage personnel réversible des bandeaux de clôture par échéance effective.
+Conserver les actions à traiter et les alertes métier. Backend, Animation et
+Projet affectés ; migration additive et Guide Animation actualisé. Les
+[preuves locales et limites](../../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md#tableau-de-bord-quotidien--22-novembre-2026)
+distinguent tests, microbancs et qualification sur cible restant à effectuer.
+Clôture historique et compteurs de l'epic inchangés ; preuves propres à ce lot.
+
 ## Évolution du 18 novembre 2026 — autonomie des commerçants Animation
 
 **E73-EVO-AUTONOMIE-COMMERCANTS**, spécifiée et implémentée localement.

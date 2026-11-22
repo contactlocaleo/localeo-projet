@@ -6,21 +6,34 @@
 
 **Objectif :** retrouver la bonne commune et les priorités de votre organisation.
 
-![Le tableau de bord affiche la commune active, les indicateurs et les actions à traiter. Les chiffres sont fictifs.](illustrations/guide-quotidien/tableau-de-bord-1024.png)
+![Le tableau de bord présente l'activité du jour ou des sept derniers jours dans la commune active. Les chiffres sont fictifs.](illustrations/guide-quotidien/tableau-de-bord-1024.png)
 
 1. Connectez-vous avec votre compte personnel. Acceptez, si nécessaire, l'invitation de votre organisation reçue par email.
 2. Vérifiez le nom de l'organisation et la **commune active** dans l'en-tête. Le changement de commune renouvelle les informations affichées.
-3. Depuis le **Tableau de bord**, ouvrez une action à traiter ou choisissez une rubrique dans la navigation.
+3. Dans **L’activité de vos animations**, choisissez **Aujourd’hui** ou **7 derniers jours**. Les chiffres couvrent toutes vos animations de la commune, même clôturées ou archivées.
+4. Ouvrez **Voir le détail par animation**, puis **Consulter le suivi** sur l'animation souhaitée. La pagination change la liste, pas les totaux.
+5. Utilisez **Actualiser** pour relire ce bloc. La période et la dernière actualisation indiquent quand les informations ont été relevées, en heure de Paris.
 
-### Comprendre les repères
+Les indicateurs distinguent inscriptions effectives, passages validés, lots retirés, bons utilisés et coffrets utilisés. Pour les coffrets, lisez aussi le nombre de prestations consommées : un même coffret peut servir plusieurs fois.
 
-- **À traiter** vous oriente vers l'étape suivante ; les indicateurs présentent l'activité observée.
-- **Clôture attendue** signifie que la fin prévue est atteinte et que l'animation est encore ouverte. Ouvrez l'alerte pour savoir comment la traiter.
+## 2 · Lire et organiser ses priorités
+
+**Objectif :** retrouver les actions utiles et garder les rappels de son choix.
+
+![Les actions restent dans À traiter ; un rappel de clôture peut être masqué uniquement pour votre compte. Exemple fictif.](illustrations/guide-quotidien/alertes-tableau-de-bord-1024.png)
+
+1. Dans **À traiter**, ouvrez l'action proposée pour accéder au suivi ou à l'étape concernée de l'animation.
+2. Un rappel **Clôture attendue** signifie que la fin prévue est atteinte et que l'animation est encore ouverte. Consultez les conditions de clôture avant d'agir.
+3. Pour retirer seulement le bandeau, choisissez **Supprimer de mon tableau de bord**. Le masquage concerne votre compte, sur vos appareils ; les autres membres de l'équipe conservent leur rappel. L'animation reste dans **À traiter**.
+4. Pour revenir sur votre choix, utilisez **Annuler**, ou ouvrez **Alertes masquées** puis **Réafficher** sur le rappel souhaité. Utilisez la pagination si nécessaire.
+
+- Une nouvelle échéance dépassée peut produire un nouveau rappel.
+- Supprimer le bandeau ne clôture pas l'animation et ne valide aucune étape.
 - Une confirmation de publication n'est pas une alerte organisateur nécessitant une action.
 
 > Les possibilités visibles dépendent de votre rôle, de vos communes autorisées et des modules disponibles. Une action absente ou refusée nécessite une vérification avec le responsable ou le support.
 
-## 2 · Choisir et créer une animation
+## 3 · Choisir et créer une animation
 
 **Objectif :** passer de votre idée à un brouillon, sans publier par erreur.
 
@@ -47,7 +60,7 @@ Si vous réduisez la sélection, un seuil devenu incompatible reste affiché **�
 
 > Lorsque Léo est proposé pour préparer une chasse ou un passeport, complétez son brief, sélectionnez les commerces et relisez la proposition avant de la valider. Une préparation générée reste à contrôler ; elle ne publie pas l'animation.
 
-## 3 · Constituer son réseau de commerces
+## 4 · Constituer son réseau de commerces
 
 **Objectif :** disposer de fiches exploitables et comprendre l'accès de chaque commerce.
 
@@ -66,7 +79,7 @@ Si vous réduisez la sélection, un seuil devenu incompatible reste affiché **�
 
 > Un email envoyé ne prouve ni la création du mot de passe, ni l'accord du commerce pour participer. Ouvrez les détails de suivi avant de relancer une personne.
 
-## 4 · Préparer les commerçants et le parcours
+## 5 · Préparer les commerçants et le parcours
 
 **Objectif :** savoir qui doit agir avant le lancement et vérifier les supports terrain.
 
@@ -83,7 +96,7 @@ Lorsque ce suivi est activé, distinguez les commerces **prêts** de ceux encore
 
 > Pour le jeu des vitrines, vérifiez l'activité et les éléments proposés par chaque commerce. La disponibilité des rubriques et du suivi varie selon le modèle et la configuration choisie.
 
-## 5 · Approuver les produits du Juste Prix Local
+## 6 · Approuver les produits du Juste Prix Local
 
 **Objectif :** vérifier et approuver chaque proposition avant publication.
 
@@ -97,7 +110,7 @@ Lorsque ce suivi est activé, distinguez les commerces **prêts** de ceux encore
 
 > L'accord du commerce pour participer ne vaut pas approbation de son produit. Vous approuvez sa proposition sans modifier son prix à sa place. Si le résultat est incertain, vérifiez les propositions avant de recommencer.
 
-## 6 · Construire une dotation compréhensible
+## 7 · Construire une dotation compréhensible
 
 **Objectif :** décrire ce que les habitants peuvent gagner et qui le remettra.
 
@@ -116,7 +129,7 @@ Lorsque ce suivi est activé, distinguez les commerces **prêts** de ceux encore
 
 > Changer de mode peut retirer des descriptions de lots déjà enregistrées. Lisez la confirmation. Un lot libre déclaré ne constitue pas un achat ou une remise déjà effectuée.
 
-## 7 · Vérifier puis publier
+## 8 · Vérifier puis publier
 
 **Objectif :** ouvrir une animation aux habitants après les contrôles requis.
 
@@ -133,7 +146,7 @@ Lorsque ce suivi est activé, distinguez les commerces **prêts** de ceux encore
 
 > Si l'envoi est interrompu, utilisez « Vérifier l'enregistrement » lorsqu'il est proposé. Un traitement en cours ou un résultat incertain ne doit pas être interprété comme un succès. Évitez de recommencer une opération financière sans vérifier son résultat.
 
-## 8 · Faire connaître l'animation et écrire aux participants
+## 9 · Faire connaître l'animation et écrire aux participants
 
 **Objectif :** distinguer les supports de découverte et les messages aux personnes déjà inscrites.
 
@@ -152,7 +165,7 @@ Pour une **tombola publique sur place**, affichez aussi le code du jour fourni d
 
 > Les dates de programmation sont exprimées en heure de Paris. Le quota, la fréquence et la fenêtre d'envoi sont contrôlés avant l'envoi. Relisez l'audience et le statut de la campagne plutôt que de supposer qu'elle a touché tout le monde.
 
-## 9 · Suivre l'activité pendant l'animation
+## 10 · Suivre l'activité pendant l'animation
 
 **Objectif :** comprendre la progression et intervenir avec les bonnes informations.
 
@@ -169,7 +182,7 @@ Vérifiez d'abord l'animation, le commerce, l'état du participant et la consign
 
 > Un résultat absent ou « non collecté » n'est pas une valeur zéro. Les statistiques précisent, lorsqu'elle est disponible, leur date d'observation. Les données présentées ici servent d'exemple pédagogique.
 
-## 10 · Clôturer au bon moment
+## 11 · Clôturer au bon moment
 
 **Objectif :** fermer réellement la participation puis préparer les opérations de fin.
 
@@ -186,7 +199,7 @@ La date de fin prévue informe les habitants. **Tant que l'animation n'est pas r
 
 > L'alerte vous demande de vérifier puis de clôturer ; elle ne le fait pas à votre place. Ne confondez pas une date échue, une inscription fermée explicitement et une clôture effective. Après l'échéance prévue, les paramètres d'exploitation ne sont plus modifiables : vérifiez les dates avant cette échéance.
 
-## 11 · Organiser le tirage et les retraits
+## 12 · Organiser le tirage et les retraits
 
 **Objectif :** préparer les retraits et suivre l'utilisation des bons et coffrets.
 
@@ -203,7 +216,7 @@ Un lot externe se retire physiquement ; le commerce désigné valide un bon. Un 
 
 > Les compteurs couvrent tous les types et états du contexte choisi, indépendamment de la page et du filtre de tâche. Une information indisponible n'est pas zéro. Consultez **Fin de l'animation** pour résoudre les dossiers avant de terminer ou archiver.
 
-## 12 · Lire le bilan et préparer une nouvelle édition
+## 13 · Lire le bilan et préparer une nouvelle édition
 
 **Objectif :** mesurer les résultats sans confondre absence d'information et absence d'activité.
 
@@ -220,7 +233,7 @@ Une nouvelle édition est un nouveau brouillon. Les dates, accords des commerça
 
 > Les objectifs servent de repères de lecture. Une mesure « non applicable » ou « non collectée » ne doit pas être remplacée mentalement par zéro. Les captures utilisent volontairement un petit jeu de données synthétiques.
 
-## 13 · Gérer son équipe et obtenir de l'aide
+## 14 · Gérer son équipe et obtenir de l'aide
 
 **Objectif :** retrouver les accès, les modules et une assistance adaptée à la situation.
 

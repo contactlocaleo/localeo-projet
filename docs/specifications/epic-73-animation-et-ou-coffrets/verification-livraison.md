@@ -5750,3 +5750,91 @@ sans impact : seules disposition et visibilité des raccourcis changent.
 Guides Commerçant et Animation examinés, sans impact : leurs écrans et leurs
 procédures ne changent pas. Pas de recette sur appareil physique ni de
 déploiement attesté.
+
+## Tableau de bord quotidien — 22 novembre 2026
+
+Réalisation locale **E73-EVO-DASHBOARD-JOUR**, critères DJ-01 à DJ-09 dans
+[la spécification de productivité](ux-productivite-organisateur.md#évolution-du-22-novembre-2026--tableau-de-bord-quotidien).
+Bases : Backend `f623c41`, Animation `bd64dcc`, Projet `2df6242`.
+
+Le bloc quotidien est indépendant des graphiques historiques : totaux des
+inscriptions effectives, passages validés, retraits et consommations sur toute
+la commune autorisée, archives comprises. Les bornes Paris restent figées dans
+les curseurs. La projection des validations ne compte ni anomalies ni annulations ;
+les confirmations de tombola publique ne comptent pas les demandes restées en
+attente. Le détail par animation conserve filtre, page et focus au retour du suivi.
+
+Le bandeau de clôture attendue peut être supprimé puis restauré pour son seul
+compte. La file « À traiter » et les autres signaux métier restent inchangés.
+La préférence serveur vise l'échéance effective ; le PUT relit droits, horloge,
+jeton et faits après acquisition des verrous. La revue indépendante a identifié
+ce contrôle après attente : correction intégrée et test d'expiration ajouté.
+L'exclusion des préférences intervient avant la limite des 50 bandeaux.
+
+### Preuves locales
+
+- **818 tests isolés réussis**, architecture, règles, services, API et contrôles
+  CSRF inclus : rapport Backend `.artifacts/dashboard-jour/isolated.xml`.
+- **12 tests PostgreSQL réussis**, y compris les six modèles, trois dotations,
+  corrections, dates Paris/été-hiver, isolation, répétition, restauration,
+  filtrage avant LIMIT et concurrence d'échéance. Même sélection rejouée avec
+  le runner prescrit `--migrate --require-concurrency` : **11 réussites**,
+  migration intégrale (**225 migrations jusqu'à v328**) et contraintes comprises. Rapports `postgres.xml`,
+  `migrations.xml` et manifeste dans `.artifacts/dashboard-jour/` ; ces passes
+  se recouvrent et ne représentent pas 23 scénarios distincts. Régression
+  productivité : **3 réussites**, son ancien scénario de volumétrie désélectionné
+  au profit du banc dédié ci-dessous. La première tentative concurrente avec
+  l'installation des migrations avait une erreur d'extension `gin_trgm_ops` ;
+  la reprise utilise une seconde base jetable, sans modification d'assertion.
+- **408 tests Node Animation réussis**, zéro échec ni skip, journal
+  `tmp/dashboard-daily-unit-final.log` ; types, lint et build PWA isolé réussis.
+- Navigateur Animation : **4 profils complets réussis** à 1280/390/320 px et
+  320 px avec texte 200 %, API synthétique, fuseau navigateur New York et dates
+  Paris vérifiées. Pagination, filtres historiques indépendants, retour/focus,
+  réponse obsolète, vide/erreur/refus, suppression après confirmation, Annuler,
+  version obsolète et restauration paginée. Dernier rapport
+  `tmp/dashboard-daily-report-kEoikr/report.json` et captures finales relues.
+  La dernière passe couvre aussi la reprise depuis la première page après
+  expiration d'un curseur des alertes masquées.
+  Ancienne recette dashboard **8/8 réussie**, rapport dans
+  `tmp/dashboard-daily-regression/animation-workspace-ux`.
+- Capacité locale : banc HTTP ASGI/TestClient avec vrai Bearer, session, droits,
+  UoW et SQL, **20 lectures à 1 000 puis 10 000 animations**, p95 **288/316 ms**,
+  maximum **294/322 ms**, dix requêtes SQL constantes (authentification et droits
+  compris). Le microbanc d'agrégation avec index v328 utilise une requête SQL,
+  au maximum 26 lignes lues pour 25 rendues, p95 **65/207 ms**, EXPLAIN ANALYZE
+  **9,9/183,5 ms**, pic Python **323 129/322 933 octets**. Rapports
+  `performance-http.json` et `performance.json`. Les premières mesures prises
+  pendant les autres contrôles ne sont pas les mesures finales. Ce banc local
+  n'inclut ni socket/réseau/hébergement, ni p95 de rendu ou mémoire navigateur,
+  ni trafic mixte : la qualification de capacité sur cible reste distincte.
+- OpenAPI générée hors ligne, **1 220 chemins** ; source canonique E41 et copie
+  Animation identiques, SHA-256
+  `e681ac2576331f93606588639aa23c893c5a4cc4aba296e342775400d8951240`.
+  La copie Animation rattrape aussi le contrat public de coffret déjà présent
+  dans Backend/Projet ; aucun chemin ni schéma existant n'est supprimé.
+- Guide Animation : source et quatre captures réelles actualisées ; **14 pages**
+  rendues et relues, copie embarquée identique, accès clavier et PDF HTTP vérifiés
+  à 1024/390 px dans `tmp/dashboard-guide-access-final`. La première génération
+  refusait le débordement en 14 pages pour 13 chapitres ; le contenu quotidien
+  et les rappels ont été répartis en deux chapitres, sans réduire les caractères.
+  La capture initialement trop courte a été recadrée avant génération finale.
+
+### Impacts et limites
+
+Migration additive `v328_dashboard_activite_et_alertes.sql` avant le backend et
+Animation ; ordre et vérifications dans le [guide de configuration](../../exploitation/technique/configurer-epic-73.md#tableau-de-bord-quotidien-et-rappels-personnels--22-novembre-2026).
+Pas de fournisseur, secret, notification réelle, flag ou job nouveau. Les
+fixtures couvrent les lectures des six jeux ; aucune génération sur cible réelle
+ni conversion des données historiques. Guide Commerçant sans impact : ses
+procédures, écrans et contrats de validation restent identiques.
+
+Projet comportait avant intervention 845 suppressions et un dossier non suivi,
+hors périmètre. Elles sont préservées et exclues des commits de ce lot. Le
+contrôle global sur cet arbre constate 17 liens absents liés à ces déplacements
+en cours, dans les ateliers et les index associés ; ils ne sont pas corrigés
+dans cette évolution. Les fichiers préparés pour le commit passent
+`check_guidance.py --staged --changed --all-markdown` (**aucune erreur ni
+alerte**) ; `sync_documentation.py --check-sources` valide
+**155 documents**. `git diff --check` réussit dans les trois dépôts.
+Aucun déploiement, recette sur téléphone physique ou mesure Render n'est attesté.
