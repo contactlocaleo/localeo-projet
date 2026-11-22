@@ -21,11 +21,11 @@ droits, approbations, installations, contrôles et barrières de publication.
 
 | Critère ajouté | Résultat observable et comportements préservés |
 | --- | --- |
-| PU-01 | Le compte principal accède à « Préparation des animations » depuis la navigation Pro et à « Préparation » dans l’espace Animation. La liste paginée présente les participations acceptées de la page et conserve l’accès aux invitations ; elle ne prétend pas connaître leur avancement détaillé sans lecture. |
-| PU-02 | Le parcours dédié rappelle animation, commune, dates et mission. Une invitation non acceptée renvoie à la consultation et à la décision existantes, sans accès au contenu de préparation. Les salariés ne gagnent aucun droit de contenu. |
-| PU-03 | Pour une vitrine, quatre étapes numérotées guident le commerçant : prévoir l’intrus et sa mise en place ; préparer emplacement, consigne et QCM ; relire puis enregistrer/proposer ; installer puis faire contrôler. Dans l’espace dédié, une étape est affichée à la fois ; les liens permettent de revenir librement aux autres étapes. Les actions de continuation déplacent le focus sans enregistrer ni perdre la saisie. Les accès historiques conservent une lecture continue des quatre étapes. |
-| PU-04 | La revue distingue la future présentation publique des informations privées, notamment la bonne réponse. Brouillon incomplet autorisé, envoi explicite de la version enregistrée, commentaire de correction et invalidation après modification sont conservés. La prochaine étape précise quand l’organisateur doit approuver ou contrôler. |
-| PU-05 | Les autres animations disposent de repères mission → supports/produit → mise en place, avec les composants E55/E56/E77 existants. Téléchargement de kit, déclaration « Je suis prêt » et proposition de produit gardent leurs droits et commandes. Aucun nouveau moteur ou suivi obligatoire. |
+| PU-01 | Le compte principal accède à « Préparation des animations » depuis la navigation Pro et à « Préparation » dans l’espace Animation. « En cours et à venir » présente par défaut les demandes courantes acceptées, y compris avant publication avec le repère « À préparer » ; « Historique » rassemble les animations clôturées, terminées, archivées ou annulées. Chaque ligne expose état de préparation, prochaine tâche et acteur depuis une lecture serveur groupée. Le filtre s’applique avant pagination et total ; une date de fin dépassée ne clôture pas une animation. Filtre et page sont conservés dans l’URL, position et focus restaurés au retour. |
+| PU-02 | Le parcours dédié rappelle animation, état courant, commune, dates et mission, puis prochaine action et étapes. Une invitation jamais acceptée conserve son parcours de décision, sans accès au contenu de préparation. Les salariés ne gagnent aucun droit de contenu. Une actualisation conserve navigation, formulaire, filtre et focus ; refus, conflit et lecture incertaine ne confirment aucun avancement. |
+| PU-03 | Pour une vitrine, quatre étapes numérotées guident le commerçant : prévoir l’intrus et sa mise en place ; préparer emplacement, consigne et QCM ; relire puis enregistrer/proposer ; installer puis faire contrôler. Une étape est affichée à la fois ; les liens permettent de consulter librement les autres étapes. L’étape métier à traiter ou en attente est distinguée de l’étape consultée. Les changements d’étape déplacent le focus sans enregistrer ni perdre la saisie ou les commandes incertaines. Les accès historiques conservent leurs droits propres. |
+| PU-04 | La revue distingue la future présentation publique des informations privées, notamment la bonne réponse. Brouillon incomplet autorisé, envoi explicite de la version enregistrée, commentaire de correction et invalidation après modification sont conservés. La prochaine tâche et son acteur distinguent contenu approuvé, installation attestée et contrôle de cette version ; « Prête » provient exclusivement de `materiel.pret`. |
+| PU-05 | Les autres animations proposent trois étapes guidées mission → produit/supports → finalisation, avec les composants E55/E56/E77 existants. Produit approuvé, support disponible et préparation déclarée restent des faits distincts ; ni la consultation ni le téléchargement ne cochent une préparation. Sans suivi, « Suivi de préparation non activé » est explicite. Téléchargement de kit, déclaration « Je suis prêt » et proposition de produit gardent leurs droits et commandes, y compris leurs refus après échéance. Aucun nouveau moteur ou suivi obligatoire. |
 | PU-06 | Dans Animation, la page distingue « À traiter par l’organisation », « En attente des commerçants » et « Prêtes ». Chaque commerce affiche la prochaine tâche et son acteur, les trois états contenu/installation/contrôle et le commentaire de correction éventuel. « Prête » provient exclusivement du fait serveur `materiel.pret`. |
 | PU-07 | Le contenu privé est consultable à la demande et dans la confirmation d’approbation/contrôle. Les actions restent contraintes par les habilitations et `allowedActions`. Confirmation terrain, motif de correction, révisions, reçus, conflit et absence de rejeu automatique restent inchangés. Les compteurs sont explicitement limités aux 25 éléments au maximum de la page. |
 | PU-08 | Parcours clavier et rendus 320/390/1280 px vérifiés, dont texte agrandi côté Animation. Chargement, erreur/reprise, refus, lecture seule et contexte obsolète ne deviennent jamais un état prêt. Les anciens liens et la mémoire privée limitée à la session restent fonctionnels. |
@@ -44,6 +44,39 @@ Marketplace/Live, migrations et exports OpenAPI ne sont pas modifiés : cette
 évolution présente des faits et commandes existants. Les résultats exécutés et
 limites sont consignés dans le [bilan de réalisation](bilan-realisation.md).
 La réserve de capacité/activation E78 demeure indépendante.
+
+### Correctif du 22 novembre 2026 — suivi des préparations Commerçant
+
+Les critères PU-01 à PU-05 ci-dessus remplacent la cible initiale de liste
+filtrée sur les invitations déjà chargées et de simples repères pour les autres
+jeux. Le bilan du 17 novembre ci-dessus reste historique : ce correctif touche
+désormais **Backend, Commerçant et Projet**.
+
+Les lectures dédiées de préparation composent les faits des domaines existants,
+avec les droits du compte principal : sélection des demandes courantes acceptées
+(ou acceptées avant une annulation de l’animation),
+filtre de cycle de vie avant pagination, métadonnées actuelles et résumé commun
+liste/détail. Les instantanés présentés lors des invitations sont conservés.
+Les propositions et supports sont lus en lot, sans GET de détail par ligne ni
+contenu privé dans la liste. Les contrats canoniques et embarqués sont actualisés.
+
+Le guidage distingue état métier et étape consultée, sans créer de preuve de
+lecture, de téléchargement ou d’installation. Aucun changement des règles de
+validation, de configuration ou de persistance ; aucune migration. Les fixtures
+de recette changent, mais le générateur de démonstration conserve ses données
+et commandes existantes. Livraison du backend avant le consommateur Commerçant.
+
+Les chargements et confirmations de Commerçant sont harmonisés dans toute
+l’application à leurs emplacements existants, sans nouvelles fenêtres bloquantes.
+Succès confirmé, refus, résultat incertain et état courant indisponible restent
+distincts. Les preuves attendues couvrent isolation et lectures bornées, filtres
+et pagination, états de chaque jeu, brouillons et reprises sans double commande,
+puis navigation clavier, texte agrandi et largeurs 320/390/1280 px.
+
+Le guide Commerçant est actualisé avec captures, PDF relu et copie embarquée.
+Le guide Animation est sans impact : ses écrans et procédures de préparation
+et de validation ne changent pas. Les résultats exécutés sont consignés dans
+le [bilan du correctif](bilan-realisation.md#correctif-du-22-novembre-2026--clarifier-la-préparation-commerçant), séparément des preuves historiques.
 
 ## 1. Créer une édition — CA-01/02
 

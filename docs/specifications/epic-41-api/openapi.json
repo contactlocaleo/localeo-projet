@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Backend - contrat implemente EPIC 41",
     "description": "OpenAPI complet du backend, dont les parcours Animation locale. Genere hors ligne depuis le code local pour les integrations et les mocks ; cet instantane ne prouve pas son deploiement.",
-    "version": "1.0.0+40d5161"
+    "version": "1.0.0+8c74b66"
   },
   "paths": {
     "/public/identite-acces/interne/connexion": {
@@ -127589,6 +127589,365 @@
         ]
       }
     },
+    "/protected/animation-locale/commercants/me/preparations": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Lister Mes Preparations Animation",
+        "operationId": "lister_mes_preparations_animation",
+        "parameters": [
+          {
+            "name": "vue",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "enum": [
+                "actives",
+                "historique"
+              ],
+              "type": "string",
+              "default": "actives",
+              "title": "Vue"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1,
+              "title": "Page"
+            }
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 50,
+              "title": "Page Size"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:animation`.",
+              "title": "Authorization"
+            },
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:animation`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagePreparationsCommercantPayload"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Demande invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentification requise",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Action non autorisée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ressource ou reçu introuvable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Version, aperçu ou état en conflit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Accès expiré",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Document trop volumineux",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Encodage non supporté",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Contenu invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Fréquence dépassée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Transaction indisponible, consulter le reçu",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/animation-locale/commercants/me/preparations/{demande_id}": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Consulter Ma Preparation Animation",
+        "operationId": "consulter_ma_preparation_animation",
+        "parameters": [
+          {
+            "name": "demande_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Demande Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:animation`.",
+              "title": "Authorization"
+            },
+            "description": "Session commercant au format `Bearer <token>` avec le scope `commercant:animation`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PreparationCommercantLecturePayload"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Demande invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentification requise",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Action non autorisée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ressource ou reçu introuvable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Version, aperçu ou état en conflit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Accès expiré",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Document trop volumineux",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Encodage non supporté",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Contenu invalide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Fréquence dépassée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Transaction indisponible, consulter le reçu",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
     "/protected/animation-locale/animations/{animation_id}/suivi-preparation": {
       "get": {
         "tags": [
@@ -142833,6 +143192,74 @@
           "ville"
         ],
         "title": "AnimationParticipationLive"
+      },
+      "AnimationPreparationCourantePayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "nom": {
+            "type": "string",
+            "title": "Nom"
+          },
+          "commune": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Commune"
+          },
+          "date_debut": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date Debut"
+          },
+          "date_fin": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date Fin"
+          },
+          "modele_code": {
+            "type": "string",
+            "title": "Modele Code"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "nom",
+          "commune",
+          "date_debut",
+          "date_fin",
+          "modele_code",
+          "statut"
+        ],
+        "title": "AnimationPreparationCourantePayload"
       },
       "AnimationPubliquePayload": {
         "properties": {
@@ -185559,6 +185986,27 @@
         ],
         "title": "PagePreneursEngagement"
       },
+      "PagePreparationsCommercantPayload": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/PreparationCommercantLecturePayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/PaginationPreparationsPayload"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "pagination"
+        ],
+        "title": "PagePreparationsCommercantPayload"
+      },
       "PagePreparationsManuellesPayload": {
         "properties": {
           "items": {
@@ -187455,6 +187903,34 @@
           "has_more"
         ],
         "title": "PaginationParticipantsEmailPayload"
+      },
+      "PaginationPreparationsPayload": {
+        "properties": {
+          "page": {
+            "type": "integer",
+            "title": "Page"
+          },
+          "page_size": {
+            "type": "integer",
+            "title": "Page Size"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          },
+          "next_cursor": {
+            "type": "null",
+            "title": "Next Cursor"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "page",
+          "page_size",
+          "total"
+        ],
+        "title": "PaginationPreparationsPayload"
       },
       "PaiementInitialisationRequest": {
         "properties": {
@@ -191015,6 +191491,29 @@
           "supportAFournir"
         ],
         "title": "PreparationCommercant"
+      },
+      "PreparationCommercantLecturePayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "animation": {
+            "$ref": "#/components/schemas/AnimationPreparationCourantePayload"
+          },
+          "preparation": {
+            "$ref": "#/components/schemas/ResumePreparationCommercantPayload"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "animation",
+          "preparation"
+        ],
+        "title": "PreparationCommercantLecturePayload"
       },
       "PreparationConfirmeePayload": {
         "properties": {
@@ -202473,6 +202972,134 @@
           "conditionsManquantes"
         ],
         "title": "ResumeEtapeParticipant"
+      },
+      "ResumePreparationCommercantPayload": {
+        "properties": {
+          "etat": {
+            "type": "string",
+            "enum": [
+              "A_COMPLETER",
+              "A_CORRIGER",
+              "ATTENTE_APPROBATION",
+              "INSTALLATION_A_CONFIRMER",
+              "CONTROLE_ATTENDU",
+              "SUPPORT_A_PREPARER",
+              "A_CONFIRMER",
+              "PREPARATION_DECLAREE",
+              "SANS_SUIVI",
+              "VITRINE_CONTROLEE",
+              "DECLARATION_INDISPONIBLE",
+              "INDISPONIBLE",
+              "HISTORIQUE"
+            ],
+            "title": "Etat"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "prochaine_action": {
+            "type": "string",
+            "title": "Prochaine Action"
+          },
+          "acteur": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "COMMERCANT",
+                  "ORGANISATEUR"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Acteur"
+          },
+          "etape_courante": {
+            "type": "integer",
+            "maximum": 4.0,
+            "minimum": 1.0,
+            "title": "Etape Courante"
+          },
+          "suivi_actif": {
+            "type": "boolean",
+            "title": "Suivi Actif"
+          },
+          "pret_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pret At"
+          },
+          "produit_statut": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Produit Statut"
+          },
+          "installation_confirmee": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Installation Confirmee"
+          },
+          "controle_confirme": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Controle Confirme"
+          },
+          "support_disponible": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Support Disponible"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "etat",
+          "libelle",
+          "prochaine_action",
+          "acteur",
+          "etape_courante",
+          "suivi_actif",
+          "pret_at",
+          "produit_statut",
+          "installation_confirmee",
+          "controle_confirme",
+          "support_disponible"
+        ],
+        "title": "ResumePreparationCommercantPayload"
       },
       "RetablissementVitrineInput": {
         "properties": {

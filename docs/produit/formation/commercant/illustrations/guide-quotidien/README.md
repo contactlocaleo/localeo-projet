@@ -1,10 +1,16 @@
 # Illustrations du guide quotidien commerçant
 
-## Édition du 21 novembre 2026
+## Édition du 22 novembre 2026
 
-Le [guide source](../../guide-quotidien-commercant.md) et son PDF comportent **12 pages et 12 captures actuelles**. Elles proviennent du frontend React de Localeo Commerçant, base Git `74000ad` avec les modifications locales de maintenance du guide. La version synthétique affiche `v1.0.0+browser-` : il s’agit d’une recette locale, sans déploiement.
+Le [guide source](../../guide-quotidien-commercant.md) conserve **12 chapitres**.
+Cette édition actualise le suivi de préparation : liste des animations actives
+ou historiques, état et acteur de la prochaine tâche, frise et distinction entre
+étape consultée et préparation confirmée. Les captures concernées sont produites
+depuis le frontend React, base Git `294393f` avec les modifications locales de
+ce correctif. La version synthétique affiche `v1.0.0+browser-` : il s’agit d’une
+recette locale, sans déploiement.
 
-Les écrans ont été ouverts dans Chromium avec des API simulées et le commerce fictif **La Maison des Saveurs**. Le navigateur utilise l’heure de Paris et une horloge fixée au 21 novembre 2026. Les requêtes externes sont bloquées ; aucun compte réel, secret, QR personnel réel ou jeu de données installé n’est utilisé. Les invitations, montants, salariés et réponses de jeu sont des exemples fabriqués pour la formation. Aucune action métier réelle n’est exécutée.
+Les écrans ont été ouverts dans Chromium avec des API simulées et le commerce fictif **La Maison des Saveurs**. Le navigateur utilise l’heure de Paris et une horloge fixée au 22 novembre 2026. Les requêtes externes sont bloquées ; aucun compte réel, secret, QR personnel réel ou jeu de données installé n’est utilisé. Les invitations, montants, salariés et réponses de jeu sont des exemples fabriqués pour la formation. Aucune action métier réelle n’est exécutée.
 
 Les captures sont réalisées directement dans l’application, sans redessiner ses écrans ni modifier ses libellés. Le script recadre la zone utile ou capture un composant entier afin de garder le texte lisible dans le PDF. Le viewport principal est de 1100 × 900 pixels, avec un facteur de pixels de 1,5.
 
@@ -18,7 +24,7 @@ Les captures sont réalisées directement dans l’application, sans redessiner 
 | `12-invitations.png` | Invitation en attente avec organisateur, dates et échéance de réponse |
 | `13-guide-aide.png` | Guide PDF accessible dans Aide et contact |
 | `14-lot.png` | Lot entier, commerce de remise, validité et confirmation de remise |
-| `16-preparation.png` | Les trois repères du parcours de préparation |
+| `16-preparation.png` | Parcours guidé : étape à traiter et étape consultée |
 | `17-vitrines.png` | Relecture Vitrines : contenu public et réponse privée fictive |
 | `18-reglages.png` | État des notifications sur cet appareil et actualisation |
 | `19-equipe.png` | Accès salarié : compte, accès effectif, invitation et révocation |
@@ -42,11 +48,26 @@ node scripts/capture-merchant-guide.mjs --dist tmp/guide-merchant-dist-refresh -
 
 Le serveur isolé des captures utilise le port **4181** et s’arrête en fin de commande. Les générateurs et fixtures exécutables restent dans le dépôt applicatif. Le manifeste local `tmp/guide-refresh-merchant-capture/provenance.json` relève les captures et requêtes simulées ; `verification.json` contient les résultats de recette. Les aperçus du PDF sont dans `tmp/guide-refresh-merchant-pdf`.
 
-Résultats de cette édition : build synthétique réussi, **12 pages et 12 signets**, pages rendues relues visuellement, copie embarquée identique au PDF canonique (`guide:check`). Les parcours de navigation et clavier, le PDF livré, l’absence de débordement et l’accessibilité Axe ont été vérifiés à **390 et 1440 pixels**, avec **zéro violation**. Le support répondait volontairement **HTTP 503** pendant cette recette : le guide restait accessible. Ces preuves locales ne constituent ni une recette sur appareil physique ni une vérification de déploiement.
+Les résultats exécutés de l’édition du 22 novembre sont relevés dans le
+[bilan du correctif](../../../../../specifications/epic-78-jeu-des-vitrines/bilan-realisation.md#correctif-du-22-novembre-2026--clarifier-la-préparation-commerçant).
+Les 12 captures ont été reproduites ; quatre images changent : validation
+coffret, remise de lot, frise de préparation et revue Vitrines. Les 12 pages
+du PDF ont été rendues et relues, avec inspection détaillée des pages 7/8.
+La copie embarquée est identique au PDF canonique. Navigation, clavier,
+PDF HTTP 200 et Axe sans violation ont été vérifiés à 390/1440 px, y compris
+avec l’assistance en erreur HTTP 503. Les manifests locaux de capture et de
+vérification conservent les résultats ; il s’agit de preuves locales synthétiques.
 
 Le nombre de pages et de signets dérive des sections de niveau 2 du Markdown : une section ouvre une page. Le générateur refuse un débordement sur une page supplémentaire au lieu de compresser le contenu. Après une évolution, recapturer les zones concernées, mettre à jour les légendes, régénérer, relire toutes les pages puis synchroniser le PDF. Voir la [procédure Commerçant](../../../../../exploitation/deploiement/commercant/mise-en-production.md#guide-commerçant-embarqué).
 
 ## Illustrations historiques conservées
+
+L’édition du 21 novembre 2026 reposait sur la base `74000ad` et comportait
+**12 pages, 12 captures et 12 signets**. Son build synthétique, la relecture des
+pages rendues, `guide:check` et les contrôles de navigation, clavier, HTTP et Axe
+à **390 et 1440 pixels** avaient réussi, sans violation Axe. L’assistance
+répondait volontairement HTTP 503 et le guide restait accessible. Ces résultats
+appartiennent à cette édition, sans prouver la recette du correctif courant.
 
 Les fichiers `03-animation.png`, `04-reversements.png`, `06-publication.png` et `10-alertes.png` proviennent des captures historiques du 26 septembre 2026 sur TEST, version `v1.0.0+d09fca1f`, avec le commerce fictif **Le Fournil des Tilleuls**. Ils restent disponibles comme archives et ne sont pas utilisés dans le PDF actuel. Ils ne représentent pas l’interface de novembre.
 

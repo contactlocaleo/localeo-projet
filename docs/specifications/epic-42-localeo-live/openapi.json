@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Live - API backend Epic 42",
     "description": "Vue OpenAPI 3.1 des contrats publics, editoriaux et techniques de Localeo Live.",
-    "version": "1.0.0+40d5161"
+    "version": "1.0.0+8c74b66"
   },
   "paths": {
     "/public/animation-locale/animations/{animation_id}/contact-public": {
@@ -14214,6 +14214,74 @@
           "ville"
         ],
         "title": "AnimationParticipationLive"
+      },
+      "AnimationPreparationCourantePayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "nom": {
+            "type": "string",
+            "title": "Nom"
+          },
+          "commune": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Commune"
+          },
+          "date_debut": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date Debut"
+          },
+          "date_fin": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date Fin"
+          },
+          "modele_code": {
+            "type": "string",
+            "title": "Modele Code"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "nom",
+          "commune",
+          "date_debut",
+          "date_fin",
+          "modele_code",
+          "statut"
+        ],
+        "title": "AnimationPreparationCourantePayload"
       },
       "AnimationPubliquePayload": {
         "properties": {
@@ -56940,6 +57008,27 @@
         ],
         "title": "PagePreneursEngagement"
       },
+      "PagePreparationsCommercantPayload": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/PreparationCommercantLecturePayload"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/PaginationPreparationsPayload"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "pagination"
+        ],
+        "title": "PagePreparationsCommercantPayload"
+      },
       "PagePreparationsManuellesPayload": {
         "properties": {
           "items": {
@@ -58836,6 +58925,34 @@
           "has_more"
         ],
         "title": "PaginationParticipantsEmailPayload"
+      },
+      "PaginationPreparationsPayload": {
+        "properties": {
+          "page": {
+            "type": "integer",
+            "title": "Page"
+          },
+          "page_size": {
+            "type": "integer",
+            "title": "Page Size"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          },
+          "next_cursor": {
+            "type": "null",
+            "title": "Next Cursor"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "page",
+          "page_size",
+          "total"
+        ],
+        "title": "PaginationPreparationsPayload"
       },
       "PaiementInitialisationRequest": {
         "properties": {
@@ -62396,6 +62513,29 @@
           "supportAFournir"
         ],
         "title": "PreparationCommercant"
+      },
+      "PreparationCommercantLecturePayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "animation": {
+            "$ref": "#/components/schemas/AnimationPreparationCourantePayload"
+          },
+          "preparation": {
+            "$ref": "#/components/schemas/ResumePreparationCommercantPayload"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "animation",
+          "preparation"
+        ],
+        "title": "PreparationCommercantLecturePayload"
       },
       "PreparationConfirmeePayload": {
         "properties": {
@@ -73854,6 +73994,134 @@
           "conditionsManquantes"
         ],
         "title": "ResumeEtapeParticipant"
+      },
+      "ResumePreparationCommercantPayload": {
+        "properties": {
+          "etat": {
+            "type": "string",
+            "enum": [
+              "A_COMPLETER",
+              "A_CORRIGER",
+              "ATTENTE_APPROBATION",
+              "INSTALLATION_A_CONFIRMER",
+              "CONTROLE_ATTENDU",
+              "SUPPORT_A_PREPARER",
+              "A_CONFIRMER",
+              "PREPARATION_DECLAREE",
+              "SANS_SUIVI",
+              "VITRINE_CONTROLEE",
+              "DECLARATION_INDISPONIBLE",
+              "INDISPONIBLE",
+              "HISTORIQUE"
+            ],
+            "title": "Etat"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "prochaine_action": {
+            "type": "string",
+            "title": "Prochaine Action"
+          },
+          "acteur": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "COMMERCANT",
+                  "ORGANISATEUR"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Acteur"
+          },
+          "etape_courante": {
+            "type": "integer",
+            "maximum": 4.0,
+            "minimum": 1.0,
+            "title": "Etape Courante"
+          },
+          "suivi_actif": {
+            "type": "boolean",
+            "title": "Suivi Actif"
+          },
+          "pret_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pret At"
+          },
+          "produit_statut": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Produit Statut"
+          },
+          "installation_confirmee": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Installation Confirmee"
+          },
+          "controle_confirme": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Controle Confirme"
+          },
+          "support_disponible": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Support Disponible"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "etat",
+          "libelle",
+          "prochaine_action",
+          "acteur",
+          "etape_courante",
+          "suivi_actif",
+          "pret_at",
+          "produit_statut",
+          "installation_confirmee",
+          "controle_confirme",
+          "support_disponible"
+        ],
+        "title": "ResumePreparationCommercantPayload"
       },
       "RetablissementVitrineInput": {
         "properties": {

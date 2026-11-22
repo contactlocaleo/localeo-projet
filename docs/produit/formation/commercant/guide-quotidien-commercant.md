@@ -1,6 +1,6 @@
 # Localeo Commerçant · Votre guide au quotidien
 
-<!-- Source canonique du PDF embarqué. Édition du 21 novembre 2026. Chaque section de niveau 2 ouvre une page. Captures du frontend actuel, API simulées et exemples fictifs : scripts/capture-merchant-guide.mjs dans localeo-commercant. -->
+<!-- Source canonique du PDF embarqué. Édition du 22 novembre 2026. Chaque section de niveau 2 ouvre une page. Captures du frontend actuel, API simulées et exemples fictifs : scripts/capture-merchant-guide.mjs dans localeo-commercant. -->
 
 ## 1 · Se connecter et se repérer
 
@@ -153,15 +153,15 @@ Utilisez le refus proposé et confirmez. Pour une chasse : **Autres choix > Refu
 
 ## 7 · Préparer votre commerce pour une animation
 
-**Préparation des animations** rassemble les participations acceptées, avec mission, dates, supports et actions autorisées.
+**Préparation des animations** affiche **En cours et à venir**, y compris avant publication. Chaque ligne indique l’état, la prochaine tâche et qui doit agir. **Historique** retrouve les animations clôturées ou annulées.
 
-![Le parcours distingue comprendre la mission, préparer le commerce et vérifier la mise en place.](illustrations/guide-quotidien/16-preparation.png)
+![Le parcours met en évidence l’étape à traiter et permet de consulter les autres étapes.](illustrations/guide-quotidien/16-preparation.png)
 
 ### Les trois gestes essentiels
 
-1. Ouvrez **Préparation des animations**, puis **Ouvrir la préparation**. Relisez mission et dates avec votre équipe.
+1. Choisissez **Voir la préparation**, puis **Comprendre ma mission** pour relire mission et dates. La frise distingue **Étape actuelle** et **Étape consultée** ; changer d’étape conserve les saisies sans les enregistrer.
 2. **Télécharger mon kit** : ouvrez le ZIP et imprimez les supports utiles. Préparez objets, emplacement et conditions d’accueil indiqués.
-3. Quand tout est installé, choisissez **Je suis prêt**, si disponible, et attendez la confirmation. L’organisateur est informé. Si le suivi est arrêté, les consignes peuvent rester consultables sans nouvelle confirmation.
+3. Dans **Finaliser la préparation**, choisissez **Je suis prêt**, si disponible, quand tout est installé. Attendez la confirmation : l’organisateur est informé. **Suivi de préparation non activé** signifie qu’aucune déclaration de ce suivi n’est attendue.
 
 ### Utiliser le bon support
 
@@ -173,7 +173,7 @@ Utilisez le refus proposé et confirmez. Pour une chasse : **Autres choix > Refu
 
 **Passeport :** suivez les conditions du passage ; validez le QR personnel si la mission le demande. **Chasse :** installez le QR de lieu et préparez la mission retenue. **Tombola :** suivez le rôle indiqué dans l’invitation ; ne supposez pas qu’un passage est à valider. Vitrines et Juste Prix sont détaillés page suivante.
 
-Dans le détail d’une animation en cours, scanner et préparation sont rapprochés. **Suivi chez votre commerce**, si présent, indique les validations et la dernière activité.
+Une date de fin dépassée ne clôture pas à elle seule l’animation. Les actions disponibles restent celles autorisées par l’organisateur et la plateforme.
 
 > Télécharger le kit ne déclare pas le commerce prêt. Après un doute, utilisez **Vérifier mon kit** ou **Vérifier ma confirmation** avant une nouvelle action.
 
@@ -181,7 +181,7 @@ Dans le détail d’une animation en cours, scanner et préparation sont rapproc
 
 Le compte principal prépare un contenu soumis à l’organisateur. L’approbation du contenu et l’installation réelle sont des étapes différentes.
 
-![Vitrines propose quatre étapes ; la relecture sépare contenu public et réponse privée.](illustrations/guide-quotidien/17-vitrines.png)
+![Vitrines distingue l’étape à traiter de l’étape consultée ; la relecture sépare public et privé.](illustrations/guide-quotidien/17-vitrines.png)
 
 ### Jeu des vitrines : avancer pas à pas
 
@@ -190,11 +190,11 @@ Le compte principal prépare un contenu soumis à l’organisateur. L’approbat
 3. **Relire et proposer :** vérifiez ce que verront les participants et ce qui reste privé. **Enregistrer mon brouillon** conserve le travail ; **Proposer à l’organisateur** soumet la version enregistrée.
 4. **Installer et faire contrôler :** après approbation, installez réellement cette version, attestez l’installation avec l’action proposée et faites contrôler sur place par l’organisateur.
 
-Si une correction est demandée, lisez le motif, corrigez, enregistrez et proposez à nouveau. L’état et la prochaine étape indiquent le travail restant. Gardez la solution et les consignes privées hors des supports publics.
+Si une correction est demandée, lisez le motif, corrigez, enregistrez et proposez à nouveau. La frise permet de relire sans perdre vos saisies ; elle distingue l’étape consultée du travail attendu. Gardez les solutions hors des supports publics.
 
 ### Juste Prix : présenter votre produit
 
-Dans **Votre produit et son juste prix**, renseignez nom, description, unité ou format et prix TTC en euros. Un éventuel visuel ne doit pas révéler le prix. Enregistrez, relisez puis **Proposer à l’organisateur**. Une correction ou une modification peut nécessiter une nouvelle approbation.
+Dans **Votre produit et son juste prix**, renseignez nom, description, unité ou format et prix TTC en euros. Le visuel ne doit pas révéler le prix. Enregistrez puis **Proposer à l’organisateur**. Suivez l’état et l’acteur indiqués : une correction ou modification nécessite une nouvelle approbation. Produit approuvé ne signifie pas commerce déclaré prêt.
 
 Après publication, contenu et réponses approuvées sont figés : signalez un problème à l’organisateur. Les salariés n’ont pas les actions de préparation du contenu ; ils utilisent le scanner selon leurs droits.
 

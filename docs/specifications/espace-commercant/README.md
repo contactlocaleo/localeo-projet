@@ -312,6 +312,35 @@ kit, puis déclarer le commerce prêt lorsque le serveur l’autorise. Règlemen
 guide complet et flyer séparé se consultent à la demande. L’accord de participation
 et la déclaration de préparation restent deux décisions distinctes.
 
+Depuis le 22 novembre 2026, **Préparation des animations** affiche par défaut
+**En cours et à venir**, y compris les participations acceptées avant publication,
+repérées **À préparer**. **Historique** donne accès aux animations clôturées,
+terminées, archivées ou annulées. Le cycle de vie serveur prévaut : dépasser la
+date de fin ne clôture pas une animation et ne modifie pas les droits de commande.
+Chaque ligne présente l’état de préparation, la prochaine tâche et son acteur.
+Les demandes courantes acceptées (y compris acceptées avant une annulation de
+l’animation) sont filtrées côté serveur avant pagination et
+calcul du total, sans requête de détail par animation. Les dates actuelles de
+préparation restent distinctes de l’instantané historique de l’invitation.
+
+Le détail rapproche identité, état et prochaine action, puis présente une frise
+guidée : quatre étapes pour Vitrines et trois pour les autres jeux, mission →
+produit ou supports → finalisation. L’étape consultée se distingue de l’étape
+métier à traiter ou en attente ; changer d’étape ne sauvegarde pas et conserve
+les brouillons. Produit approuvé, installation contrôlée et déclaration de
+préparation restent des faits distincts. La disponibilité du support d’une
+chasse ne prouve pas son installation ; consulter une consigne ou télécharger
+un kit ne confirme aucun préparatif. **Suivi de préparation non activé** est
+indiqué lorsque le suivi facultatif est absent.
+
+Le filtre et la pagination sont conservés dans l’URL ; le retour restaure
+position et focus. Une actualisation ne reconstruit que les résultats, en
+conservant navigation, filtres et saisies. Les erreurs, refus et lectures
+incertaines restent explicites, sans confirmer de préparation ni rejouer une
+commande. Les chargements et confirmations de toute l’application partagent
+une présentation harmonisée à leurs emplacements existants, sans nouvelle
+fenêtre bloquante et sans changement des règles de validation.
+
 Depuis E55-UX-12, le kit d’une chasse contient aussi `qr-lieu.pdf`, QR opaque
 `LQL1` du lieu à scanner dans Localeo Live. Ce document est distinct de
 `flyer-joueurs.pdf`, dont le QR URL ouvre le support explicitement autorisé
@@ -374,6 +403,8 @@ si le parcours ne comporte aucun lieu public.
 
 - `GET /protected/animation-locale/commercants/me/demandes-participation`
 - `GET /protected/animation-locale/commercants/me/demandes-participation/{id}`
+- `GET /protected/animation-locale/commercants/me/preparations`
+- `GET /protected/animation-locale/commercants/me/preparations/{demandeId}`
 - `POST /protected/animation-locale/commercants/me/demandes-participation/{id}/accepter`
 - `POST /protected/animation-locale/commercants/me/demandes-participation/{id}/refuser`
 - `POST /protected/animation-locale/commercants/me/demandes-participation/{id}/retirer`
@@ -393,6 +424,16 @@ pour « Tout marquer comme lu ». Le booléen historique `lue` reste accepté pa
 client uniquement si `lue_at` est absent de la réponse.
 
 La liste `/animations/invitations` affiche la commune, l'organisateur, les dates de l'animation, la date de réception (« Reçue le », issue de `premier_envoi_at`) et la date limite de réponse, y compris dans l'historique. Une relance ne remplace pas la date de réception initiale. La réponse paginée fournit un résumé `animation` (`id`, `nom`, `commune`, `date_debut`, `date_fin`) et `organisateur`, sans charger le détail de chaque invitation. Le nom, les dates et l'organisateur proviennent du contenu présenté lors de l'envoi ; les communes sont chargées en lot côté serveur. Le contenu complet reste réservé au détail autorisé.
+
+Les lectures dédiées de préparation sont réservées au compte principal et
+composent les faits des domaines existants, sans élargir les commandes autorisées.
+La liste reçoit `vue=actives|historique`, `page` et `page_size` (50 par défaut,
+100 au maximum), puis renvoie les demandes courantes acceptées, ou acceptées
+avant une annulation de l’animation, et leur résumé
+de préparation sans contenu privé. Liste et détail partagent cette projection ;
+les propositions, installations et supports nécessaires sont chargés en lot.
+Le détail garde les contrôles d’accès et de confidentialité propres à chaque
+contenu. Les anciens points d’entrée d’invitation et de commande sont conservés.
 
 ## 5. Architecture technique front
 
@@ -540,14 +581,19 @@ Le modèle reste inactif avant qualification de livraison. [Parcours et preuves 
 ## Préparation du jeu des vitrines — E78
 
 Depuis le 17 novembre 2026, **Préparation des animations** possède son entrée
-dans le menu Pro et la rubrique **Préparation** dans l’espace Animation. La liste
-paginée présente les participations acceptées de la page ; elle donne accès au
-parcours propre à chaque animation, à son kit et aux invitations. Les anciens
-liens restent valides. Le jeu des vitrines guide en quatre étapes : prévoir
+dans le menu Pro et la rubrique **Préparation** dans l’espace Animation. Depuis
+le 22 novembre, la liste paginée filtre côté serveur les participations courantes
+acceptées entre **En cours et à venir** et **Historique**, et présente état,
+prochaine tâche et acteur. Elle donne accès au parcours propre à chaque
+animation, à son kit et aux invitations. Les anciens liens restent valides.
+Le jeu des vitrines guide en quatre étapes : prévoir
 l’intrus et l’installation, préparer la question, relire/enregistrer/proposer,
 puis installer et faire contrôler. La revue distingue le futur contenu public
-de la solution et des consignes privées. Les autres animations conservent leurs
-kits, missions et produit Juste Prix avec des repères de préparation explicites.
+de la solution et des consignes privées. L’approbation du contenu, l’attestation
+d’installation et le contrôle de cette révision restent distincts : seul le fait
+serveur `materiel.pret` confirme une vitrine prête. Les autres animations suivent
+trois étapes, en conservant leurs kits, missions et produit Juste Prix. Le guidage
+ne transforme ni une consultation ni un téléchargement en préparation confirmée.
 Voir [PU-01 à PU-08](../epic-78-jeu-des-vitrines/parcours-regles.md#évolution-du-17-novembre-2026--préparation-guidée).
 
 Après acceptation de la participation, le compte principal retrouve la préparation

@@ -507,3 +507,66 @@ cette présentation. Les preuves sont locales et synthétiques ; recette sur
 appareil réel, déploiement, activation et qualification de capacité restent
 distincts. Ces preuves précèdent les commits et push demandés ensuite le
 17 novembre 2026 dans les dépôts concernés. Aucun déploiement n’est réalisé.
+
+## Correctif du 22 novembre 2026 — clarifier la préparation Commerçant
+
+Plan « Clarifier la préparation des animations dans Localeo Commerçant »,
+critères [PU-01 à PU-05](parcours-regles.md#évolution-du-17-novembre-2026--préparation-guidée).
+Bases propres : Backend `640d2cc2`, Commerçant `294393f`, Projet `518e426`.
+Les preuves ci-dessous portent sur ces bases avec les modifications du correctif.
+Code committé et poussé : Backend `8c74b666`, Commerçant `327e500`.
+
+La liste précédente filtrait les invitations déjà paginées et ne donnait pas
+leur avancement réel. Deux lectures dédiées exposent désormais le même résumé
+de préparation avec les métadonnées actuelles : filtre de cycle de vie en SQL
+avant pagination, 50 lignes par défaut, 100 au maximum, chargements groupés.
+Une date passée ne déplace pas une animation ouverte dans l’historique.
+Chaque ligne présente état, prochaine action et acteur. Le détail sépare étape
+consultée et étape attendue, maintient les éditeurs montés et relit les faits
+après une commande confirmée. Il masque les repères d’état actuel pendant une
+lecture ou un résultat incertain. Les retours de chargement et validation de
+Commerçant sont harmonisés à leur emplacement existant.
+
+La revue indépendante a identifié l’annulation réelle d’une animation : elle
+annule aussi la demande acceptée. Le filtre inclut cette ancienne acceptation
+dans l’historique, sans inclure une invitation jamais acceptée. Le test SQL
+exécute la transition de domaine et vérifie liste, détail et refus. La recette
+clavier a aussi détecté un focus demandé avant le commit de l’étape URL ; il
+attend désormais son affichage effectif. Les assertions de focus restent actives.
+Sur mobile, le détail Vitrines évite de répéter le rappel de prochaine action
+déjà présenté dans le résumé serveur.
+
+| Périmètre | Contrôle exécuté | Résultat |
+| --- | --- | --- |
+| Backend, projection/API/architecture | Lanceur isolé : nouveaux tests `test_preparations_commercant*`, API de suivi existante, `tests/architecture`, classes dédiées et couverture des use cases | **800 réussis** ; après ajout de la borne repository 100, les **5 tests SQL** sont repassés. Filtre avant pagination, résumé partagé, toutes familles de jeu, date passée, isolation, refus et absence de contenu privé. |
+| Frontière salariés | Même lanceur avec `tests/api/test_salaries_e72_cloture.py`, nouveaux tests et suivi existant | **156 réussis**, dont refus des nouvelles routes au salarié. 113 avertissements `datetime.utcnow` dans les tests existants, sans échec. |
+| Lectures bornées | Tests repository SQL réels sur SQLite en mémoire | **10 requêtes pour 1 ou 50 lignes** ; limite 100 indépendante de HTTP, pas de contenu produit privé ni secret QR sélectionné. Aucune preuve PostgreSQL revendiquée. |
+| Commerçant, composants et contrats | `npx vitest run` sur page de préparation, Vitrines, guards, Juste Prix, kit, normalisation, validation et deux fichiers de contrats API, `--maxWorkers=2` | **168 tests réussis, 18 fichiers**. Puis **33 tests de contrats** réussis après ajout des deux nouvelles lectures et **35 tests page/Vitrines** réussis après la dernière simplification visuelle. |
+| Parcours préparation | `npm run test:e2e -- tests/e2e/animation-preparation-guided.spec.js tests/e2e/e78-vitrines.spec.js --workers=2` | **19 scénarios réussis** : 320/390/1280 px, navigation clavier/focus, retour paginé, historique, accès direct/refus, brouillons, reçu incertain, absence de double commande et de confirmation au téléchargement. Axe sans violation sur liste et détail ; texte 200 % avec débordement contrôlé. |
+| Retours communs et sécurité scanner | `tests/e2e/validation-merchant-ux.spec.js` et `tests/e2e/validation-security.spec.js`, même commande Playwright | **15 scénarios réussis** : coffret, confirmation, refus avant ouverture, conflit, origine interdite, relecture échouée puis reprise sans rejouer, secret de réinitialisation. Le test de couleur d’avertissement suit la nouvelle palette ; ses assertions de refus et d’absence de commande restent identiques. |
+| Build et contrat | `node scripts/build-check.mjs`, `py -3.14 scripts/export-openapi.py` | Dernier build isolé réussi : `tmp/quality-build-Qt0S3L` ; contrat embarqué régénéré hors réseau depuis `8c74b666`, **1216 routes**. Avertissement d’import statique/dynamique `ValidationHistory` conservé. Aucun script `lint` ou `typecheck` n’est défini dans Commerçant. |
+| Guide Commerçant | Capture Chromium synthétique, génération/rendu PDF, `guide:sync`, `guide:check`, capture `--check-guide` | **12 pages et 12 captures** ; toutes les pages inspectées, détails des pages 7/8 relus. Quatre images affectées renouvelées. PDF embarqué identique ; HTTP 200, clavier et Axe sans violation à 390/1440 px, même avec assistance HTTP 503. |
+| Documentation | `py -3.14 scripts/check_guidance.py --changed --all-markdown`, `py -3.14 scripts/sync_documentation.py --check-sources` | Liens sans erreur ; **155 sources exportées vérifiées**. Contrats canoniques E41/E42 régénérés par leurs générateurs officiels. |
+
+La suite globale `npm test` a été tentée puis interrompue : un timeout a été
+observé dans `ValidationHistory.test.jsx`, et le fichier Node
+`tests/release-receipt.test.cjs` est également collecté par Vitest comme fichier
+sans test. Ces fichiers et la configuration de sélection sont inchangés ; la
+cause du timeout n’est pas qualifiée ici. La commande prévue pour le reçu,
+`npm run test:release-receipt`, réussit ses **2 tests Node**. Une seconde
+sélection large n’a pas abouti non plus avant interruption. Aucun succès global
+n’est annoncé ; les suites ciblées ci-dessus sont terminées et réussies.
+
+Les rapports, captures et rendus de travail restent dans le dépôt applicatif :
+`test-results/`, `tmp/preparation-guided/`, `tmp/preparation-guide/pdf-pages/`
+et `tmp/guide-refresh-merchant-capture/`. Les sources et illustrations publiées
+du guide restent canoniques dans Projet, avec une copie PDF embarquée dans Pro.
+
+Sans migration, nouvelle configuration ou changement des commandes métier.
+Les données et commandes du générateur de démonstration sont inchangées ; ses
+fixtures de recette UI ont été adaptées. Sans impact sur Marketplace/Live,
+Animation ou son guide : leurs écrans et procédures ne changent pas. Le backend
+doit être livré avant le nouveau consommateur Commerçant. Les contrôles sont
+locaux et synthétiques, sans base PostgreSQL ni appareil physique ; aucun
+déploiement ni changement de données réelles n’est réalisé. Les commits et
+push sont séparés dans Backend, Commerçant et Projet conformément à la demande.
