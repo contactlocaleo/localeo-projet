@@ -27,6 +27,8 @@ police système, titres de page 25 px (23 px sur mobile), sections 18 px et
 sous-sections 15 px, corps de travail 14 px selon la charte CRM du 4 novembre 2026.
 Les unités relatives accompagnent l'agrandissement du texte ;
 l'allègement des titres ne réduit pas les champs ou cibles tactiles.
+Les couleurs suivent la [déclinaison Pro et Animation du 22 novembre 2026](../../transverse/identite-entetes-applications.md#déclinaison-pro-et-animation--22-novembre-2026) :
+bleu nuit, orange et papier, avec les couleurs sémantiques des états conservées.
 Les [preuves du 3 novembre 2026](../../../audits/typographie-applications-gestion-2026-11-03.md)
 distinguent les essais locaux de la recette sur appareils physiques.
 

@@ -1,12 +1,89 @@
 # Captures du guide utilisateur Animation
 
-## 22 novembre 2026 - iconographie de gestion
+## Palette bleu nuit et orange du 22 novembre 2026
 
-Les illustrations concernées sont reprises depuis le build synthétique
-Animation, base `08aef5a` avec la nouvelle iconographie. La recette
-`tests/browser/animation-guide.mjs` utilise des données fictives et un
-dossier de captures isolé. Le chapitre Dotation précise le raccourci
-**Lots** en configuration sur mobile.
+Les illustrations de cette édition reprennent le fond papier, les actions bleues,
+la navigation pêche et les pictogrammes métier à accent orange de Pro et Animation.
+Les parcours et les états métier sont conservés. Les captures montrent la vraie
+application avec des données fictives et des API synthétiques, sans accès externe.
+
+Build : `localeo-animation/tmp/charte-animation-20261122`. Captures générales :
+`tmp/charte-animation-guide-20261122` ; Pilotage :
+`tmp/charte-animation-pilotage-guideA4bB56` ; Juste Prix :
+`tmp/juste-prix-products-2E0an8` ; préparation mobile :
+`tmp/charte-animation-hunt-guide` ; maximum d'essais :
+`tmp/attempts-guides-captures-4pJnQ0` ; seuil : `tmp/threshold-report-1IwSvs`.
+Le cadrage du seuil est une capture seule, sans exécution de commandes métier.
+Le banc des essais passe par le sélecteur réel « Règles » sur téléphone avant de
+capturer le champ, afin de respecter la navigation mobile existante.
+
+Commandes depuis Animation : `node scripts/build-pwa-tests.mjs`,
+`node tests/browser/animation-guide.mjs --captures-only`,
+`node tests/browser/dashboard-pilotage-guide.mjs`,
+`node tests/browser/juste-prix-products.mjs --guide-captures`,
+`node tests/browser/wrong-answer-guide.mjs` et le mode
+`HUNT_GUIDE_CAPTURE_ONLY=1` de `hunt-guided-workflow.mjs`.
+La génération PDF utilise `py -3.14 scripts/generate-animation-guide.py
+--preview-dir tmp/charte-animation-guide-pdf`, puis `npm run guide:sync` et
+`npm run guide:check`. Cette passe locale ne constitue pas un déploiement.
+
+Les seize pages ont été rendues dans `tmp/charte-animation-guide-pdf` et relues
+sur deux planches intégrales, avec la page 11 inspectée à sa taille de rendu.
+Le PDF canonique et sa copie embarquée partagent l'empreinte SHA-256
+`e8d25ff6de5cec507f2b65004360287793586373023fb67774006893410c329d`.
+Après reconstruction du même build, `animation-guide.mjs --access-only` a
+vérifié l'accès clavier, l'ouverture du guide, le type PDF et les octets servis
+à 390 et 1024 px, y compris quand l'assistance est indisponible. Les rapports
+`tmp/charte-animation-guide-access-final/requests-390.json` et
+`requests-1024.json` ne contiennent aucune requête inconnue, erreur navigateur
+ou écriture.
+
+La recette du cadre (`WORKSPACE_CASE=shell node
+tests/browser/animation-workspace-ux.mjs`) a réussi dix parcours dans
+`tmp/charte-animation-shell-complete/report.json` : 320, 390, 768, 1024, 1280
+et 1600 px, paysage 844 px, texte à 200 % sur 320, 1280 et 844 px.
+Navigation, clavier, notifications, compte et protection des saisies sont
+vérifiés sans mutation API. Les attentes de l'ancienne couleur du bandeau ont
+été remplacées par le bleu nuit ; les attentes de visibilité après navigation
+attendent le rendu React et la fixture de lecture de l'équipe est explicite.
+
+## Iconographie de gestion du 22 novembre 2026
+
+Les captures de Pilotage, Commerçants, Préparation, Configuration, Publication,
+Communication, Suivi, Juste Prix, Bilan et Aide ont été refaites dans le frontend
+React, base `08aef5a` avec les évolutions locales. L’extrait du tableau **Lots et
+remises** a lui aussi été reproduit et reste identique. Les deux captures
+recadrées sur les champs de seuil et de nombre d’essais gardent leurs repères.
+Les textes et les seize chapitres de l’édition Pilotage sont repris.
+
+Depuis `localeo-animation`, avec les API synthétiques et Chromium :
+
+```powershell
+$env:ANIMATION_TEST_DIST = 'tmp/management-icon-final-build'
+$env:ANIMATION_GUIDE_CAPTURE_ROOT = 'tmp/management-icon-guide-png'
+node scripts/build-pwa-tests.mjs
+node tests/browser/dashboard-pilotage-guide.mjs
+node tests/browser/juste-prix-products.mjs --guide-captures
+node tests/browser/animation-guide.mjs --captures-only --only=commercants,preparation,configuration,publication,communication,suivi,lots-remises,bilan,aide
+node tests/browser/animation-guide.mjs --captures-only --only=publication,aide
+py -3.14 scripts/generate-animation-guide.py --preview-dir tmp/management-icon-guide-pdf
+npm run guide:sync
+npm run guide:check
+```
+
+Les captures bureau du guide sont produites à 1024 px. La recette groupée
+s’arrête sur Dotation à 390 px. Les captures mobiles de Publication et Aide
+sont produites par la relance ciblée. Les rapports de ces deux exécutions sont
+dans `tmp/management-icon-guide-report-final` et
+`tmp/management-icon-guide-access-captures`. Les vues mobiles et bureau de
+Pilotage et Juste Prix proviennent de leurs propres recettes synthétiques.
+
+Les seize pages du PDF ont été rendues et relues. Le nouveau build
+`tmp/management-icon-guide-final-build` inclut le PDF synchronisé. La recette
+`node tests/browser/dashboard-pilotage-guide.mjs --access-only` a vérifié
+les liens, le clavier et le PDF effectivement servi à 390 et 1024 px, y compris
+quand l’assistance est indisponible. Le rapport est
+`tmp/dashboard-pilotage-guides-captures-UGpOIw/provenance.json`.
 
 ## Évolution du 22 novembre 2026 - pilotage unifié des animations
 
@@ -246,11 +323,11 @@ avec assistance HTTP 503 vérifiés à 390/1024 px par le mode `--access-only`.
 
 ## Ajout du 22 novembre 2026 — parcours mobile first
 
-`preparation-mobile-detail-390.png` illustre le chapitre 6 : sélecteur nommé,
+`preparation-mobile-detail-390.png` illustre le chapitre 7 : sélecteur nommé,
 étape Terrain et contrôles. Cadrage navigateur de 390 × 480 px, sans modification
 du DOM ni retouche. `animations-mobile-390.png` conserve la preuve de l'entrée
 Animations : première action visible à 390 × 844 sans défilement. La base Git
-Animation est `bb20ac9` pour la capture de liste, complétée par le lot mobile.
+Animation est `08aef5a`, complétée par le lot mobile first du répertoire de travail.
 
 Les captures proviennent de la vraie application avec API synthétiques,
 origine `api.test.invalid`, données fictives et ports HTTP locaux éphémères :
@@ -262,28 +339,27 @@ node tests/browser/hunt-guided-workflow.mjs
 $env:HUNT_GUIDE_CAPTURE_ONLY = '1'
 node tests/browser/hunt-guided-workflow.mjs
 Remove-Item Env:HUNT_GUIDE_CAPTURE_ONLY
-$env:ANIMATION_TEST_DIST = 'tmp/mobile-push-build'
+$env:ANIMATION_TEST_DIST = 'tmp/mobile-first-delivery-build'
 node scripts/build-pwa-tests.mjs
 node tests/browser/mobile-first-lists.mjs
 ```
 
 Sources des captures : `tmp/mobile-first-hunt-1795373098393` et
-`tmp/mobile-first-lists-7sWASH` dans Animation (recette isolée dans
-`tmp/mobile-push-o98dbd_h/localeo-animation`). Le mode de capture est annoncé
+`tmp/mobile-first-lists-AiyQ5s` dans Animation. Le mode de capture est annoncé
 `captured` ; la recette Chasse distincte a réussi 5 scénarios / 166 contrôles
 dans `tmp/mobile-first-hunt-1795373016340/report.json`. Les listes ont réussi
 5 scénarios, y compris texte 200 %, dans leur propre rapport.
 
-Le PDF comporte quinze pages. Elles ont toutes été rendues et relues, avec
-inspection détaillée des chapitres 3 et 6, puis la copie embarquée a été
-synchronisée et contrôlée. Les prévisualisations du lot isolé se trouvent dans
-`tmp/mobile-push-guide`.
+Le PDF comporte seize pages. Elles ont toutes été rendues et relues, avec
+inspection détaillée des chapitres 4 et 7, puis la copie embarquée a été
+synchronisée et contrôlée. Prévisualisations : `tmp/mobile-first-guide-preview`
+et nouveau rendu du PDF final dans `tmp/mobile-first-guide-final-render`.
 Cette recette locale ne qualifie ni appareils physiques ni environnement distant.
 
-Le build de recette `tmp/mobile-push-build` embarque le PDF actualisé.
+Le build final `tmp/mobile-first-verified-build` embarque le PDF actualisé.
 `tests/browser/animation-guide.mjs --access-only` a vérifié ses liens au clavier,
 son contenu servi identique au canonique et l'accès avec assistance indisponible
-à 390/1024 px. Rapports de requêtes dans `tmp/mobile-push-guide-access` (aucune
+à 390/1024 px. Rapports de requêtes : `tmp/mobile-first-guide-access` (aucune
 requête inconnue, erreur navigateur ou écriture).
 
 ## Ajout du 22 novembre 2026 - seuil de validation

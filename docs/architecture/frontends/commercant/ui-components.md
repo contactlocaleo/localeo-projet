@@ -6,18 +6,20 @@ La source des tokens et des styles est [src/styles.css](../../../../../localeo-c
 
 | Token | Valeur | Usage |
 | --- | --- | --- |
-| `--text`, `--muted` | `#183243`, `#526575` | Texte principal et secondaire |
-| `--bg`, `--paper` | `#f5f7f9` | Fond de travail |
+| `--text`, `--muted` | `#082840`, `#526575` | Texte principal et secondaire |
+| `--bg`, `--paper` | `#f6f5f1` | Fond de travail |
 | `--surface` | `#ffffff` | Surface |
-| `--accent`, `--accent-action` | `#09685e` | Action principale, texte blanc |
-| `--accent-soft`, `--accent-text` | `#e1f0ec`, `#07594f` | Navigation et sélection actives |
+| `--accent`, `--accent-action` | `#0b3d63` | Action principale, texte blanc |
+| `--accent-soft`, `--accent-text` | `#f9eee2`, `#0b3d63` | Navigation et sélection actives ; texte de navigation bleu nuit |
+| `--brand-accent`, `--brand-accent-readable` | `#f28a2e`, `#a85213` | Accents graphiques, puis petits textes et repères actifs |
+| `--management-icon-accent` | `var(--brand-accent)` | Aplat orange discret des pictogrammes métier |
 | `--line`, `--input-line` | `#d8e1e7`, `#a5b8c4` | Contours des surfaces et des champs |
-| `--focus` | `#b96913` | Focus clavier |
+| `--focus` | `#a85213` sur fond clair, `#f28a2e` dans le bandeau sombre | Focus clavier ; menus et dialogues clairs rétablissent la variante foncée |
 | `--font-body` | Police système sans empattement | Texte et titres de gestion |
 | `--font-display` | `var(--font-body)` | Même famille pour les titres |
 | `--radius-panel`, `--radius-button`, `--radius-field` | 12, 9, 7 px | Panneaux, actions et champs |
 
-La [charte CRM commune](../../transverse/identite-entetes-applications.md#charte-des-espaces-de-gestion-internes--référence-crm)
+La [déclinaison Pro et Animation du 22 novembre 2026](../../transverse/identite-entetes-applications.md#déclinaison-pro-et-animation--22-novembre-2026)
 est déclinée localement pour conserver l’indépendance des déploiements.
 La signature du bandeau conserve son fond bleu nuit et son accent orange.
 Les badges de statut et contenus personnalisables conservent leurs couleurs
@@ -31,7 +33,8 @@ adoptent cette hiérarchie. Les compteurs et codes opérationnels gardent leurs
 dimensions utiles. Voir les [repères typographiques de gestion](../../transverse/conventions-backoffice.md#typographie-des-applications-de-gestion)
 et le [suivi d’ergonomie commun](../../../audits/ergonomie-gestion-pro-animation-2026-11-01.md).
 
-Le [manifeste PWA](pwa.md#installation-et-manifeste) conserve encore ses anciennes couleurs de thème et de fond. Ne pas les prendre comme définition de la palette CSS actuelle.
+Le [manifeste PWA](pwa.md#installation-et-manifeste) reprend les couleurs de
+bandeau et de fond ; ses icônes d'installation sont conservées.
 
 ## Réutiliser les composants existants
 

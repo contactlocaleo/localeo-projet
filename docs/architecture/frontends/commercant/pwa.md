@@ -4,7 +4,10 @@
 
 Le manifeste `manifest.webmanifest` est servi en développement et généré au build par [vite.config.js](../../../../../localeo-commercant/vite.config.js). Il déclare `display: 'standalone'`, une orientation portrait et les icônes [192 px](../../../../../localeo-commercant/public/icon-192.png) et [512 px](../../../../../localeo-commercant/public/icon-512.png). Aucun fichier `icon.svg` n'est fourni.
 
-Au 18 septembre 2026, le manifeste conserve `theme_color: '#0078d4'` et `background_color: '#f5f9ff'`. Ces valeurs diffèrent des tokens de l'[interface actuelle](ui-components.md) ; cette description ne modifie pas la configuration de build.
+Depuis le 22 novembre 2026, le manifeste utilise `theme_color: '#082840'` et
+`background_color: '#f6f5f1'`, en cohérence avec l'[interface actuelle](ui-components.md).
+La métadonnée HTML `theme-color` reprend le même bleu nuit. Les icônes et le
+comportement d'installation sont conservés.
 
 [src/main.jsx](../../../../../localeo-commercant/src/main.jsx) enregistre `/sw.js` au chargement et laisse l'application utilisable si l'enregistrement échoue. L'interface d'installation est portée par [PwaInstallButton.jsx](../../../../../localeo-commercant/src/app/PwaInstallButton.jsx).
 

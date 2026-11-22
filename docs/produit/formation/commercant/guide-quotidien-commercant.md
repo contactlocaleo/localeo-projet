@@ -6,13 +6,13 @@
 
 Localeo Commerçant, affiché **Localeo Pro** dans l’application, vous accompagne au comptoir et dans le suivi du commerce. Retrouvez ce guide dans **Aide et contact > Consulter le guide commerçant (PDF)**.
 
-![Sous le scanner, Préparation des animations distingue vos actions et les attentes de l’organisateur.](illustrations/guide-quotidien/01-accueil.png)
+![Les alertes séparent préparation et déclaration à l’organisateur.](illustrations/guide-quotidien/01-accueil.png)
 
 ### Commencer votre journée
 
 1. Ouvrez le lien fourni par Localeo. Saisissez votre email et votre mot de passe, puis **Se connecter**. Vérifiez le nom du commerce en haut.
 2. Utilisez **Scanner un QR** pour une animation, un lot ou un coffret.
-3. Dans **À traiter**, répondez aux invitations. Sous le scanner, **Préparation des animations** distingue **À préparer ou terminer** et **En attente de l’organisateur**. Ouvrez la préparation concernée ; chaque vue présente cinq éléments par page.
+3. Dans **À traiter**, répondez aux invitations. Sous le scanner, **Préparation des animations** distingue **Mes actions** et **En attente de l’organisateur**. Les alertes séparent préparation et déclaration ; chaque vue présente cinq éléments par page.
 
 ### Retrouver une fonction
 
@@ -155,15 +155,15 @@ Utilisez le refus proposé et confirmez. Pour une chasse : **Autres choix > Refu
 
 ## 7 · Préparer votre commerce pour une animation
 
-**Préparation des animations** affiche **En cours et à venir**, y compris avant publication. Chaque ligne indique l’état, la prochaine tâche et qui doit agir. **Historique** retrouve les animations clôturées ou annulées.
+**Préparation des animations** affiche **En cours et à venir**. Chaque ligne sépare **Préparation** et **Déclaration à l’organisateur**, avec prochaine tâche et acteur. **Historique** retrouve les animations clôturées ou annulées.
 
-![Animation en cours et préparation confirmée sont distinctes ; la déclaration reste datée et la finalisation est terminée.](illustrations/guide-quotidien/16-preparation.png)
+![L’étape 2 montre la préparation terminée, tandis que la déclaration à l’organisateur reste une action distincte.](illustrations/guide-quotidien/16-preparation.png)
 
 ### Les trois gestes essentiels
 
-1. Choisissez **Voir la préparation**, puis **Comprendre ma mission** pour relire mission et dates. La frise distingue **Étape actuelle** et **Étape consultée** ; changer d’étape conserve les saisies sans les enregistrer.
-2. **Télécharger mon kit** : ouvrez le ZIP et imprimez les supports utiles. Préparez objets, emplacement et conditions d’accueil indiqués.
-3. Dans **Finaliser la préparation**, choisissez **Je suis prêt**, si disponible, quand tout est installé. **Préparation : confirmée**, sa date et **Terminée** confirment l’enregistrement ; l’animation peut rester **En cours**. Un bouton absent s’accompagne de l’état ou du blocage à traiter.
+1. Ouvrez **Voir la préparation**, puis **Comprendre ma mission** pour relire mission et dates. Changer d’étape conserve les saisies sans les enregistrer.
+2. À l’étape 2, téléchargez le kit, installez les supports et informez l’équipe. Pour passeport, tombola ou chasse, choisissez **J’ai terminé ma préparation**. L’état **Terminée** confirme l’enregistrement ; **Reprendre la préparation** permet de la remettre à faire.
+3. Dans **Informer l’organisateur**, choisissez **Je suis prêt**, si le suivi est actif. La déclaration enregistrée est datée. Elle reste indépendante de la préparation et du statut **En cours** de l’animation.
 
 ### Utiliser le bon support
 
@@ -175,9 +175,9 @@ Utilisez le refus proposé et confirmez. Pour une chasse : **Autres choix > Refu
 
 **Passeport :** suivez les conditions du passage ; validez le QR personnel si la mission le demande. **Chasse :** installez le QR de lieu et préparez la mission retenue. **Tombola :** suivez le rôle indiqué dans l’invitation ; ne supposez pas qu’un passage est à valider. Vitrines et Juste Prix sont détaillés page suivante.
 
-**Suivi de préparation non activé** : aucune déclaration n’est demandée. Une déclaration déjà enregistrée reste visible. Si un autre préparatif manque, sa prochaine action reste indiquée séparément. Une date de fin dépassée ne clôture pas à elle seule l’animation.
+Sans suivi activé, aucune déclaration n’est demandée. Une ancienne déclaration reste visible même si un préparatif doit être repris. Une mission ou un support changé peut rendre la préparation à revoir ; l’accueil signale l’action ou l’attente de l’organisateur.
 
-> Télécharger le kit ne déclare pas le commerce prêt. Après un doute, utilisez **Vérifier mon kit** ou **Vérifier ma confirmation** avant une nouvelle action.
+> Télécharger le kit et terminer l’étape 2 ne préviennent pas l’organisateur. Après un résultat incertain, vérifiez l’état avant une nouvelle action.
 
 ## 8 · Préparer Vitrines et Juste Prix
 
@@ -196,7 +196,7 @@ Si une correction est demandée, lisez le motif, corrigez, enregistrez et propos
 
 ### Juste Prix : présenter votre produit
 
-Dans **Votre produit et son juste prix**, renseignez nom, description, unité ou format et prix TTC en euros. Le visuel ne doit pas révéler le prix. Enregistrez puis **Proposer à l’organisateur**. Suivez l’état et l’acteur indiqués : une correction ou modification nécessite une nouvelle approbation. Produit approuvé ne signifie pas commerce déclaré prêt.
+À l’étape 2, dans **Votre produit et son juste prix**, renseignez nom, description, unité ou format et prix TTC en euros. Le visuel ne doit pas révéler le prix. Enregistrez puis **Proposer à l’organisateur**. La préparation reste en attente jusqu’à l’approbation, puis devient **Terminée**. Une correction ou modification exige une nouvelle approbation. La déclaration **Je suis prêt** reste séparée.
 
 Après publication, contenu et réponses approuvées sont figés : signalez un problème à l’organisateur. Les salariés n’ont pas les actions de préparation du contenu ; ils utilisent le scanner selon leurs droits.
 

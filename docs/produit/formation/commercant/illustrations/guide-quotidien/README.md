@@ -1,12 +1,77 @@
 # Illustrations du guide quotidien commerçant
 
-## 22 novembre 2026 - iconographie de gestion
+## E56-EVO-ETATS-PREPARATION — 22 novembre 2026
 
-Douze captures ont été reprises sur un build synthétique de Pro, base
-`643a90a` avec la nouvelle iconographie. Les vues d'accueil et de préparation
-illustrent les parcours décrits dans cette édition. La recette utilise
-`scripts/build-browser-tests.mjs` et `scripts/capture-merchant-guide.mjs`,
-avec un dossier de sortie isolé et des données fictives.
+Les captures **01-accueil.png** et **16-preparation.png** ont été recapturées
+depuis Localeo Pro, base Git `e27ffec` avec l’évolution locale. L’accueil montre
+l’alerte, la vue **Mes actions** et les deux états ; l’étape 2 présente **Préparation : Terminée** et
+**Déclaration à l’organisateur : À faire**. Les autres illustrations conservent
+la provenance de leur dernière capture ci-dessous.
+
+Le script applicatif utilise Chromium, le commerce fictif La Maison des
+Saveurs, des API synthétiques et l’heure de Paris fixée au 22 novembre 2026.
+Les requêtes externes sont bloquées. Aucun compte, QR utilisable ou jeu de
+données réel n’est sollicité. Le port 4283 et les builds sont isolés.
+
+Depuis `localeo-commercant`, commandes exécutées :
+
+```powershell
+$env:LOCALEO_TEST_DIST = 'tmp/preparation-dual-guide-mes-actions-dist'
+node scripts/build-browser-tests.mjs
+node scripts/capture-merchant-guide.mjs --dist tmp/preparation-dual-guide-mes-actions-dist --only 01-accueil,16-preparation --report-dir tmp/preparation-dual-guide-mes-actions-capture --port 4283
+py -3.14 scripts/generate-merchant-guide.py --preview-dir tmp/preparation-dual-guide-mes-actions-pdf
+npm run guide:sync
+npm run guide:check
+$env:LOCALEO_TEST_DIST = 'tmp/preparation-dual-guide-mes-actions-pdf-check-dist'
+node scripts/build-browser-tests.mjs
+node scripts/capture-merchant-guide.mjs --dist tmp/preparation-dual-guide-mes-actions-pdf-check-dist --check-guide --verify-only --report-dir tmp/preparation-dual-guide-mes-actions-capture --port 4283
+```
+
+Les **douze pages** ont été rendues et relues, sans débordement de texte ni
+changement de taille des caractères. Une première génération à treize pages
+a été refusée par le générateur avant remplacement du PDF ; le texte de la
+page 1 a été resserré, puis la version à douze pages a été validée. Le générateur
+conserve désormais les rendus de diagnostic lorsque `--preview-dir` est fourni,
+même si le nombre de pages est refusé.
+
+La copie embarquée est identique au PDF canonique. La recette a vérifié le lien
+applicatif, le focus clavier, HTTP 200 et les octets du PDF servi à **390 et
+1440 px**, avec l’assistance en erreur ; **aucune violation Axe**. Les rapports
+sont `tmp/preparation-dual-guide-mes-actions-capture/provenance.json` et `verification.json`.
+La même recette vérifie qu’une ancienne déclaration enregistrée sans
+attestation laisse la préparation à compléter à l’étape 2, à 390 et 1440 px.
+Cette passe finale inclut le style de résumé partagé dès l’accueil initial et
+le libellé **Mes actions**. L’état est en tête de l’étape 2 et la commande de
+confirmation suit les consignes du kit. Les sorties de la première
+passe sont conservées dans les dossiers `tmp/preparation-dual-guide-*` antérieurs.
+Cette preuve locale ne vaut pas recette connectée ou déploiement.
+
+## Iconographie de gestion du 22 novembre 2026
+
+Les douze vues du guide ont été recapturées depuis Localeo Pro sur la base
+`643a90a`, avec les évolutions locales. L’accueil montre les deux files sous
+**Préparation des animations**, et la page 7 conserve la déclaration datée et
+le statut **Préparation : confirmée**. Les libellés, états et montants observés
+proviennent de scénarios Chromium et d’API synthétiques.
+
+Depuis `localeo-commercant`, le build de capture est produit par
+`node scripts/build-browser-tests.mjs` avec `LOCALEO_TEST_DIST` défini vers
+`tmp/guide-iconography-pro-dist`. La commande
+`node scripts/capture-merchant-guide.mjs --dist tmp/guide-iconography-pro-dist`
+a été exécutée avec une copie locale du script, un port réservé (4281) et
+un dossier de sortie séparé. Son manifeste est
+`tmp/iconography-pro-guide/provenance.json`. Une recapture ciblée de l’accueil
+a utilisé le build `tmp/guide-iconography-pro-dist-final` et le port 4282.
+
+Le PDF est régénéré par
+`py -3.14 scripts/generate-merchant-guide.py --preview-dir tmp/iconography-pro-guide/pdf`
+puis synchronisé par `npm run guide:sync` et vérifié par `npm run guide:check`.
+Les douze pages ont été rendues et relues. Le build
+`tmp/guide-iconography-pro-pdf-check-dist` et les options
+`--check-guide --verify-only` ont vérifié les liens, le focus clavier et
+le PDF effectivement servi à 390 et 1440 px, y compris avec l’assistance
+indisponible. Axe n’a signalé aucune violation. Le rapport est
+`tmp/iconography-pro-guide/verification.json`.
 
 ## Ajout du 22 novembre 2026 - étapes invalides de Vitrines et Juste Prix
 
@@ -61,7 +126,7 @@ Les captures sont réalisées directement dans l’application, sans redessiner 
 | `12-invitations.png` | Invitation en attente avec organisateur, dates et échéance de réponse |
 | `13-guide-aide.png` | Guide PDF accessible dans Aide et contact |
 | `14-lot.png` | Lot entier, commerce de remise, validité et confirmation de remise |
-| `16-preparation.png` | Animation en cours, préparation confirmée datée et finalisation terminée |
+| `16-preparation.png` | Étape 2 terminée, déclaration à l’organisateur encore à faire |
 | `17-vitrines.png` | Relecture Vitrines : contenu public et réponse privée fictive |
 | `18-reglages.png` | État des notifications sur cet appareil et actualisation |
 | `19-equipe.png` | Accès salarié : compte, accès effectif, invitation et révocation |
@@ -120,6 +185,50 @@ avec l’assistance en erreur HTTP 503. Les manifests locaux de capture et de
 vérification conservent les résultats ; il s’agit de preuves locales synthétiques.
 
 Le nombre de pages et de signets dérive des sections de niveau 2 du Markdown : une section ouvre une page. Le générateur refuse un débordement sur une page supplémentaire au lieu de compresser le contenu. Après une évolution, recapturer les zones concernées, mettre à jour les légendes, régénérer, relire toutes les pages puis synchroniser le PDF. Voir la [procédure Commerçant](../../../../../exploitation/deploiement/commercant/mise-en-production.md#guide-commerçant-embarqué).
+
+## Habillage bleu nuit et orange — 22 novembre 2026
+
+Les douze captures utilisées par le PDF ont été reprises depuis le frontend Pro
+construit dans `tmp/charte-pro-20261122`, sur la base `e27ffec` et les
+modifications locales présentes. Elles montrent la palette bleu nuit, papier
+clair et pêche, ainsi que les icônes de gestion avec un accent orange. Les
+modifications de préparation et de déclaration déjà en cours sont conservées ;
+les étapes et les libellés pédagogiques restent applicables.
+
+Commande de capture :
+`node scripts/capture-merchant-guide.mjs --dist tmp/charte-pro-20261122 --report-dir tmp/charte-pro-guide-capture-final-20261122`.
+Le manifeste `provenance.json` de ce dossier conserve les routes, dimensions
+et appels simulés. Le serveur local du guide utilise le port réservé 4181,
+sans requête externe ni compte réel.
+
+Le PDF a été régénéré avec
+`py -3.14 scripts/generate-merchant-guide.py --preview-dir tmp/charte-pro-guide-pdf-20261122` :
+ses **12 pages** ont été rendues et relues, avec inspection détaillée des pages
+de préparation et Vitrines. `guide:sync` et `guide:check` confirment l'égalité
+de la copie embarquée. La recette finale du lien, du PDF servi, du clavier et
+de l'accessibilité à 390 et 1440 px est conservée dans
+`tmp/charte-pro-guide-verify-final-20261122/verification.json` ; l'assistance
+y répond volontairement HTTP 503 et Axe ne remonte aucune violation.
+
+Une mise à jour parallèle des captures de préparation a ensuite régénéré le
+guide. Deux tentatives ont été périmées par ces écritures concurrentes. Le
+contrôle final porte sur le PDF de 1 202 199 octets, SHA-256
+`37183d0e2eb3538a991b6d5ec0817c2b82e8409a2f454bb6de751a92b5adbbf3`.
+Ses 12 pages ont été rendues et relues dans
+`tmp/charte-pro-guide-snapshot-20261122-2`, sans écraser les captures ni
+relancer la génération canonique. Seule la copie statique du PDF du build
+local a été actualisée. La navigation, le clavier, l'accès HTTP au PDF et
+Axe ont réussi à 390 et 1440 px avec l'assistance indisponible ; rapport :
+`tmp/charte-pro-guide-verify-snapshot-20261122-2/verification.json`.
+Le relevé `snapshot.json` confirme les empreintes canonique, embarquée et
+servie identiques avant et après ce contrôle. Une édition remplacée après
+ce contrôle exige sa propre vérification.
+
+La recette visuelle complémentaire de l'accueil, du scanner et du formulaire
+de mot de passe couvre 320, 390 et 1280 px, avec texte à 100 et 200 % :
+**18 combinaisons sans violation Axe ni débordement horizontal**, captures et
+résultats dans `tmp/charte-pro-visual-final-20261122`. Ces preuves locales ne
+constituent pas une validation d'un déploiement.
 
 ## Illustrations historiques conservées
 

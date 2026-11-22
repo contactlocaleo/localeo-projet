@@ -1,5 +1,11 @@
 # Roadmap par etat
 
+**22 novembre 2026 — CHARTE-PRO-ANIMATION-20261122** : déclinaison de gestion
+bleu nuit, orange et papier pour Pro et Animation, avec pictogrammes communs.
+[Critères CPA-01 à CPA-04](../architecture/transverse/identite-entetes-applications.md#déclinaison-pro-et-animation--22-novembre-2026).
+Implémentation, recettes locales et guides PDF réalisés ; parcours et états
+métier conservés. Aucun déploiement effectué pour ce lot.
+
 **22 novembre 2026 — E73-EVO-ANIMATION-MOBILE-FIRST** : parcours complet
 Animations / Préparations, création et configuration par étape sur téléphone.
 [Critères MF-01 à MF-08](../specifications/epic-73-animation-et-ou-coffrets/ux-productivite-organisateur.md#évolution-du-22-novembre-2026--animations-et-préparations-mobile-first).
