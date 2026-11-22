@@ -83,23 +83,27 @@ pas une échéance serveur.
 ## Préparer son commerce pour une animation
 
 Après acceptation, le bloc **Préparation des animations**, sous le scanner de
-l’accueil, distingue **À préparer ou terminer** et **En attente de l’organisateur**.
+l’accueil, distingue **Mes actions** et **En attente de l’organisateur**.
 Chaque vue affiche son nombre de préparations et cinq éléments par page, avec
-l’état, la prochaine action et un accès au parcours concerné. Les préparatifs
+l’avancement, la déclaration à l’organisateur, la prochaine action et un accès au parcours concerné. Les préparatifs
 de contenu, de support ou d’installation restent visibles même sans suivi
-déclaratif. Les préparations confirmées sans autre tâche restent consultables
-dans la liste complète.
+déclaratif. Les préparations terminées ou **Non requises** restent consultables
+dans la liste complète. Elles apparaissent dans **Mes actions** si une déclaration
+à l’organisateur reste à envoyer.
 
 Télécharger le kit ne termine pas la préparation : installez les supports et
-informez l’équipe, puis confirmez **Je suis prêt** lorsque cette action est
-proposée. **Préparation : confirmée** et la date de déclaration indiquent son
-enregistrement ; la finalisation est **Terminée**, même si **Animation : En cours**
-reste affiché. Sans bouton de confirmation, l’écran précise ce qui est déjà
-enregistré ou le blocage à traiter. Une actualisation tient compte d’une
-confirmation faite depuis un autre accès autorisé. Lorsque le suivi est
-désactivé, aucune déclaration nouvelle n’est demandée ; une déclaration déjà
-enregistrée reste visible. Si un autre préparatif manque, il conserve sa propre
-prochaine action sans effacer cette déclaration.
+informez l’équipe selon les consignes. Pour un passeport, une tombola ou une chasse
+avec des préparatifs, choisissez à l’étape 2 **J’ai terminé ma préparation**.
+**Reprendre la préparation** permet de revenir au travail à faire. Pour le Juste Prix, la préparation devient
+**Terminée** après approbation du produit ; Vitrines conserve ses contrôles d’installation.
+
+Dans **Informer l’organisateur**, confirmez séparément **Je suis prêt** lorsque
+le suivi est activé. Cette déclaration datée notifie l’organisateur ; elle ne
+se confond ni avec l’avancement de préparation ni avec **Animation : En cours**.
+Sans suivi activé, aucune nouvelle déclaration n’est demandée. Une déclaration
+enregistrée reste visible même si un autre préparatif doit être repris. Une
+actualisation relit les changements d’un autre accès autorisé. Après une erreur
+ou un résultat incertain, vérifiez l’état avant toute nouvelle action.
 
 Ouvrez **Préparation des animations** dans le menu Pro, puis la participation
 acceptée à préparer. Vous pouvez aussi choisir **Ouvrir mon parcours de

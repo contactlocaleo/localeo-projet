@@ -16684,6 +16684,68 @@
         ],
         "title": "AuthentificationCommercantRequest"
       },
+      "AvancementPreparationCommercantPayload": {
+        "properties": {
+          "etat": {
+            "type": "string",
+            "enum": [
+              "A_COMPLETER",
+              "A_PROPOSER",
+              "A_CORRIGER",
+              "ATTENTE_ORGANISATEUR",
+              "TERMINEE",
+              "NON_REQUISE",
+              "INDISPONIBLE"
+            ],
+            "title": "Etat"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "prochaine_action": {
+            "type": "string",
+            "title": "Prochaine Action"
+          },
+          "acteur": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "COMMERCANT",
+                  "ORGANISATEUR"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Acteur"
+          },
+          "terminee_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Terminee At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "etat",
+          "libelle",
+          "prochaine_action",
+          "acteur",
+          "terminee_at"
+        ],
+        "title": "AvancementPreparationCommercantPayload"
+      },
       "AvancementPreparationPayload": {
         "properties": {
           "animationId": {
@@ -30484,6 +30546,44 @@
           "evaluations_brouillon_ids"
         ],
         "title": "DecisionsActualisationPayload"
+      },
+      "DeclarationPreparationCommercantPayload": {
+        "properties": {
+          "etat": {
+            "type": "string",
+            "enum": [
+              "NON_DEMANDEE",
+              "A_FAIRE",
+              "ENREGISTREE",
+              "INDISPONIBLE"
+            ],
+            "title": "Etat"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "pret_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pret At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "etat",
+          "libelle",
+          "pret_at"
+        ],
+        "title": "DeclarationPreparationCommercantPayload"
       },
       "DefiAssociation": {
         "properties": {
@@ -51228,6 +51328,33 @@
         },
         "type": "object",
         "title": "ModifierAnimationRequest"
+      },
+      "ModifierAvancementPreparationInput": {
+        "properties": {
+          "terminee": {
+            "type": "boolean",
+            "title": "Terminee"
+          },
+          "expectedVersion": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expectedversion"
+          },
+          "contextePreparation": {
+            "type": "string",
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Contextepreparation"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "terminee",
+          "expectedVersion",
+          "contextePreparation"
+        ],
+        "title": "ModifierAvancementPreparationInput"
       },
       "ModifierBrouillonFactureAssisteeRequest": {
         "properties": {
@@ -74983,6 +75110,25 @@
               }
             ],
             "title": "Support Disponible"
+          },
+          "avancement": {
+            "$ref": "#/components/schemas/AvancementPreparationCommercantPayload"
+          },
+          "declaration": {
+            "$ref": "#/components/schemas/DeclarationPreparationCommercantPayload"
+          },
+          "avancement_modifiable": {
+            "type": "boolean",
+            "title": "Avancement Modifiable"
+          },
+          "contexte_preparation": {
+            "type": "string",
+            "title": "Contexte Preparation"
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Version"
           }
         },
         "additionalProperties": false,
@@ -74998,7 +75144,12 @@
           "produit_statut",
           "installation_confirmee",
           "controle_confirme",
-          "support_disponible"
+          "support_disponible",
+          "avancement",
+          "declaration",
+          "avancement_modifiable",
+          "contexte_preparation",
+          "version"
         ],
         "title": "ResumePreparationCommercantPayload"
       },

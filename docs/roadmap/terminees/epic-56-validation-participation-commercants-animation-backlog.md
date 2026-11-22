@@ -4,6 +4,18 @@
 
 ## Synthese
 
+### Évolution du 22 novembre 2026 — E56-EVO-ETATS-PREPARATION
+
+Préparation effective et déclaration facultative à l’organisateur sont
+présentées séparément dans Pro, dans la liste, le détail et les alertes
+d’accueil. Le Juste Prix est terminé après approbation ; les jeux sans contenu
+à approuver reçoivent une confirmation propre à l’étape 2.
+Les [critères E56-EP-01 à EP-08 et le bilan](../../specifications/epic-56-validation-participation-commercants-animation/README.md#e56-evo-etats-preparation--préparation-et-déclaration-distinctes-22-novembre-2026)
+portent cette évolution, ses contrats, sa migration et ses preuves.
+Implémentation et vérifications ciblées locales réalisées ; la suite générale
+Pro a été interrompue et reste non validée. La clôture historique E56 est
+conservée ; les preuves propres à cette évolution ne valent pas activation distante.
+
 ### Évolution du 26 septembre 2026 — E56-UX-01, préparation commerçant simplifiée
 
 Le statut historique **Terminée** reste inchangé. Cette évolution de présentation

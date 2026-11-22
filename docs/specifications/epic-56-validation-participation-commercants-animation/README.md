@@ -244,3 +244,147 @@ visible ont été remplacées par les attentes E56-UX-01, en conservant les cont
 de droits et de contenu. Les erreurs réseau sont simulées et aucune recette avec
 un backend déployé n’est revendiquée. Pas de commit, push ni déploiement dans
 ce périmètre ; la clôture historique E56 et le statut E55 restent inchangés.
+
+## E56-EVO-ETATS-PREPARATION — préparation et déclaration distinctes (22 novembre 2026)
+
+Le statut historique **Terminée** de l’EPIC 56 est conservé. Cette évolution
+concerne le backend et **Localeo Pro**, côté commerçant. Elle remplace
+l’indicateur unique qui confondait contenu, attente d’approbation et déclaration
+facultative « Je suis prêt ». Le suivi organisateur Animation garde le sens
+déclaratif de `pret_at`.
+
+### Comportements et critères
+
+| Critère | Comportement attendu | Preuve ciblée |
+| --- | --- | --- |
+| E56-EP-01 | Liste et détail présentent séparément avancement de préparation et déclaration à l’organisateur, prochaine action et acteur ; l’étape 2 rend l’avancement immédiatement visible | Contrat de lecture, résumé Pro, liste → détail |
+| E56-EP-02 | Juste Prix distingue à compléter, à proposer, à corriger, attente organisateur et terminé après approbation ; modifier le produit exige une nouvelle approbation | Projection et parcours produit |
+| E56-EP-03 | Pour un passeport, une tombola ou une chasse avec des préparatifs, l’étape 2 propose « J’ai terminé ma préparation » et enregistre la date, l’acteur et le contexte. Une reprise explicite remet la préparation à faire. | Domaine, commande, persistance et parcours Pro |
+| E56-EP-04 | « Je suis prêt » reste indépendant, facultatif selon le suivi et daté ; terminer l’étape 2 ne notifie pas et ne modifie pas le démarrage | Non-effet sur `pret_at`, notification et garde de démarrage |
+| E56-EP-05 | L’accueil signale préparation restante, attente organisateur et déclaration manquante si suivi actif ; raisons cumulables sans doubler le compte d’une préparation | Parité projection/SQL, pagination et accueil |
+| E56-EP-06 | Mission, consigne ou support utile changé invalide la confirmation ; consultation, téléchargement et activation du suivi ne la confirment ni ne l’invalident ; un autre commerce ne rend pas la confirmation obsolète | Contexte ciblé, rejeu et suivi |
+| E56-EP-07 | Droits et concurrence vérifiés côté serveur ; aucun succès sur résultat incertain ; saisies, navigation et focus préservés | Refus/conflits, isolation, mobile/bureau |
+| E56-EP-08 | Guides et contrats synchronisés ; Vitrines conserve quatre étapes, installation et contrôle | Exports, guides rendus et régression |
+
+### Contrats, propriété et compatibilité
+
+Le domaine Animation, auprès de la demande de participation commerçant, possède
+la nouvelle confirmation. L’application orchestre chargement, transaction et
+audit ; la projection compose les faits sans autoriser une commande.
+
+Les lectures `/commercants/me/preparations` et `/{demande_id}` ajoutent
+`avancement`, `declaration`, version et contexte opaque de préparation ; les
+champs existants restent compatibles. La nouvelle commande
+`POST /commercants/me/preparations/{demande_id}/avancement` reçoit `terminee`,
+`expectedVersion` et `contextePreparation`, avec `Idempotency-Key`. Elle est
+réservée au compte principal propriétaire de la participation courante acceptée,
+pour les jeux sans contenu à approuver, avant échéance et dans une animation
+active. Version et contexte sont vérifiés atomiquement. Un reçu ancien ne
+constitue jamais une preuve de complétion du contexte actuel.
+
+La confirmation conserve date, acteur et contexte via une migration additive.
+Aucune ancienne déclaration n’est transformée en confirmation d’étape 2. Les
+changements utiles de mission, consigne ou support rendent la confirmation
+obsolète. L’empreinte est limitée à la mission/étape du commerce, son QR,
+thème/dates effectives et flyer officiel diffusable (version/empreinte) ; le
+contenu d’un autre commerce et le suivi facultatif seul ne l’invalident pas.
+Le contrat `/pret`, la
+notification transactionnelle `COMMERCANT_PRET` et la garde de démarrage restent
+inchangés. Une déclaration enregistrée peut coexister avec une préparation à
+revoir. Vitrines conserve ses faits d’installation et de contrôle.
+
+Les filtres d’accueil portent sur les deux axes, pas seulement sur l’acteur
+prioritaire historique. Filtrage et comptage distinct des préparations précèdent
+la pagination ; les lectures restent bornées et groupées, sans détail individuel
+supplémentaire par ligne. L’historique reste consultable sans alerte active.
+
+Pour le passeport, la tombola et la chasse, une consigne de mission explicite,
+un flyer officiel diffusé au commerce ou le QR d’une étape de chasse constituent
+des préparatifs à confirmer. En l’absence de préparatif, l’avancement est
+`NON_REQUISE` et la fiche reste consultable dans la liste complète. Une
+déclaration facultative ne compte que si elle est demandée et reste à envoyer.
+
+### Impacts et preuves de livraison
+
+| Critères | Documentation / consommateurs | Données / démonstration | Exploitation / preuves |
+| --- | --- | --- | --- |
+| EP-01/02/05 | E56 canonique, espace Commerçant, OpenAPI et contrat Pro actualisés | Fixtures : préparation, attentes et raisons cumulées | Réussi localement : projection/SQL, pagination, bornes et mobile/bureau ; rapports ci-dessous |
+| EP-03/04/06/07 | Commande Pro ; suivi organisateur conservé | Migration additive vérifiée ; aucun rattrapage depuis `pret_at` ; générateur compatible par champs nullable | Réussi localement : domaine, accès, version/contexte, idempotence et non-notification |
+| EP-08 | Guides Commerçant détaillé et quotidien actualisés : accueil, préparation et Juste Prix | Captures réelles sur API synthétique | Réussi : douze pages rendues/relues, égalité PDF et lien applicatif |
+
+**Guide Animation examiné : sans modification pour cette évolution.** Son suivi
+déclaratif organisateur conserve actions, libellés et règles. Marketplace, ERP
+et batchs ne consomment pas la nouvelle action commerçant ; aucun nouveau
+parcours ni configuration n’y est introduit. Les contrats documentaires sont
+régénérés par les outils backend.
+
+### Bilan local de l’évolution
+
+**Réalisation et vérifications ciblées locales terminées.** Le statut historique
+de l’EPIC 56 est conservé. La passe backend principale finale couvre **96 tests réussis**
+(domaine, indépendance de `/pret`, matrice des états, API stricte/rejeu/refus),
+rapport `localeo-backend/tmp/preparation-dual-primary-final.xml`, y compris le
+refus d’un compte salarié par la politique d’autorisation. Les contrôles
+d’architecture ont **772 tests réussis**, puis la passe finale de contrats de
+modules a **767 tests réussis**. La persistance et la migration passent
+**106 tests SQLite/PostgreSQL**, sans skip, dans
+`localeo-backend/tmp/preparation-dual-infra-final.xml`. Les trois tests
+consommateurs Animation du suivi et de publication sont réussis.
+Les passes antérieures ne sont pas additionnées à ces nombres.
+
+Côté Pro, les **92 tests unitaires ciblés** des six fichiers sont réussis,
+sans skip, dont le normaliseur, les deux états, l’accueil, le kit et le contrat
+OpenAPI de la nouvelle commande. Rapport :
+`localeo-commercant/tmp/preparation-dual-unit-targeted-final-rested.json`.
+Le rapport navigateur final unique confirme **10 scénarios réussis, zéro skip,
+zéro échec et zéro flaky** : sept parcours de préparation, deux de kit et un
+suivi sans déclaration facultative. Il couvre notamment Juste Prix,
+**Mes actions**, contexte obsolète, rechargement des consignes du nouveau
+contexte, conservation de l’étape consultée, mobile et texte agrandi. Build
+synthétique et Axe réussis ; captures finales relues. Rapport :
+`localeo-commercant/tmp/preparation-dual-ui-report-final-unified/results.json` ;
+captures : `localeo-commercant/tmp/preparation-dual-ui-results-final-unified`.
+
+**Limite de régression : la suite générale Pro a été interrompue après plus de
+douze minutes et n’est pas validée.** Un timeout du test d’accueil « Animation
+seule : accueil sans paiement, prestations ni requête financière » a été
+reproduit sur le HEAD antérieur
+`e27ffec8831f4252edd31af799a13c334ff9d33e`, observation dans
+`localeo-commercant/tmp/preparation-dual-baseline/observation.json`. Les autres
+timeouts de la première tentative ne sont pas qualifiés de préexistants.
+Deux anciennes assertions de présentation du kit ont été comparées à ce HEAD
+(`tmp/preparation-dual-kit-comparison.json` dans Pro), puis alignées sur les
+consignes déjà visibles. Les contrôles de téléchargement sans déclaration,
+QR, reprise et idempotence ont été conservés et passent dans le rapport final.
+
+Mesure locale PostgreSQL à 10/100 préparations : **11 lectures constantes** et
+**5 lignes hydratées** par page d’accueil. Les plans SQL de la page sont
+mesurés à **3,713/25,664 ms** ; les lectures complètes mesurent
+**1 240,211/1 690,820 ms** dans cette passe locale. Ces valeurs restent propres à une fixture de schéma
+allégé, pas une qualification de capacité en exploitation. Rapport :
+`localeo-backend/tmp/preparation-dual-infra-mesures-postgresql.json`.
+
+Pour EP-08, guide Commerçant source et captures accueil/étape 2
+actualisés ; PDF de douze pages rendu et relu, copie embarquée identique.
+La recette locale du lien a réussi à 390 et 1440 px : navigation, focus,
+assistance indisponible, HTTP 200, octets du PDF et zéro violation Axe.
+La fixture navigateur vérifie aussi qu’une déclaration déjà enregistrée sans
+nouvelle attestation laisse l’étape 2 à compléter, avec sa commande disponible.
+[Commandes et provenance](../../produit/formation/commercant/illustrations/guide-quotidien/README.md#e56-evo-etats-preparation--22-novembre-2026).
+Contrôles Projet exécutés : `py -3.14 scripts/check_guidance.py` (122 guides,
+1 868 liens, zéro erreur/avertissement) et
+`py -3.14 scripts/sync_documentation.py --check-sources` (155 documents).
+La migration `sql/v330_avancement_preparation_commercant.sql` ajoute trois
+colonnes nullable sans rattrapage et un contrôle de cohérence date/acteur/contexte.
+Inspection du générateur : la création des
+demandes dans `scripts/demonstration/generator.py` omet ces champs et `pret_at`,
+donc ne fabrique aucune attestation. Aucun changement de générateur ni aucune
+génération sur un environnement installé ; compatibilité de cette insertion
+inspectée, génération/restauration complète non exécutée dans ce périmètre.
+Ordre de livraison : appliquer **v330**, livrer le backend puis Localeo Pro.
+La coexistence avec les anciens consommateurs est conservée par les champs
+additifs ; aucune variable de configuration nouvelle. L’export des contrats
+canoniques et embarqués accompagne le code producteur/consommateur.
+Aucun déploiement, commit ou push déclenché.
+Les serveurs des recettes locales sont arrêtés. Aucune activation distante ni
+recette sur appareil réel ou avec un backend déployé n’est revendiquée.

@@ -162,7 +162,7 @@ Utilisez le refus proposé et confirmez. Pour une chasse : **Autres choix > Refu
 ### Les trois gestes essentiels
 
 1. Ouvrez **Voir la préparation**, puis **Comprendre ma mission** pour relire mission et dates. Changer d’étape conserve les saisies sans les enregistrer.
-2. À l’étape 2, téléchargez le kit, installez les supports et informez l’équipe. Pour passeport, tombola ou chasse, choisissez **J’ai terminé ma préparation**. L’état **Terminée** confirme l’enregistrement ; **Reprendre la préparation** permet de la remettre à faire.
+2. À l’étape 2, consultez le kit. Si votre mission comporte des préparatifs, réalisez-les puis choisissez **J’ai terminé ma préparation** pour un passeport, une tombola ou une chasse. **Reprendre la préparation** permet de la remettre à faire.
 3. Dans **Informer l’organisateur**, choisissez **Je suis prêt**, si le suivi est actif. La déclaration enregistrée est datée. Elle reste indépendante de la préparation et du statut **En cours** de l’animation.
 
 ### Utiliser le bon support
@@ -175,7 +175,7 @@ Utilisez le refus proposé et confirmez. Pour une chasse : **Autres choix > Refu
 
 **Passeport :** suivez les conditions du passage ; validez le QR personnel si la mission le demande. **Chasse :** installez le QR de lieu et préparez la mission retenue. **Tombola :** suivez le rôle indiqué dans l’invitation ; ne supposez pas qu’un passage est à valider. Vitrines et Juste Prix sont détaillés page suivante.
 
-Sans suivi activé, aucune déclaration n’est demandée. Une ancienne déclaration reste visible même si un préparatif doit être repris. Une mission ou un support changé peut rendre la préparation à revoir ; l’accueil signale l’action ou l’attente de l’organisateur.
+**Non requise** signifie qu’aucun préparatif n’est à confirmer. Sans suivi activé, aucune déclaration n’est demandée. La fiche et ses consignes restent accessibles dans **Toutes mes préparations et l’historique**. Une ancienne déclaration reste visible même si un préparatif doit être repris.
 
 > Télécharger le kit et terminer l’étape 2 ne préviennent pas l’organisateur. Après un résultat incertain, vérifiez l’état avant une nouvelle action.
 

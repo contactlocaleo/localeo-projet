@@ -317,7 +317,10 @@ Depuis le 22 novembre 2026, **Préparation des animations** affiche par défaut
 repérées **À préparer**. **Historique** donne accès aux animations clôturées,
 terminées, archivées ou annulées. Le cycle de vie serveur prévaut : dépasser la
 date de fin ne clôture pas une animation et ne modifie pas les droits de commande.
-Chaque ligne présente l’état de préparation, la prochaine tâche et son acteur.
+Chaque ligne présente séparément avancement de préparation et déclaration
+facultative à l’organisateur, avec prochaine tâche et acteur. Liste et détail
+partagent la projection courante ; les règles et contrats sont canoniques dans
+[E56-EVO-ETATS-PREPARATION](../epic-56-validation-participation-commercants-animation/README.md#e56-evo-etats-preparation--préparation-et-déclaration-distinctes-22-novembre-2026).
 Les demandes courantes acceptées (y compris acceptées avant une annulation de
 l’animation) sont filtrées côté serveur avant pagination et
 calcul du total, sans requête de détail par animation. Les dates actuelles de
@@ -325,13 +328,19 @@ préparation restent distinctes de l’instantané historique de l’invitation.
 
 Le détail rapproche identité, état et prochaine action, puis présente une frise
 guidée : quatre étapes pour Vitrines et trois pour les autres jeux, mission →
-produit ou supports → finalisation. L’étape consultée se distingue de l’étape
+produit ou supports → **Informer l’organisateur**. L’étape consultée se distingue de l’étape
 métier à traiter ou en attente ; changer d’étape ne sauvegarde pas et conserve
 les brouillons. Produit approuvé, installation contrôlée et déclaration de
 préparation restent des faits distincts. La disponibilité du support d’une
 chasse ne prouve pas son installation ; consulter une consigne ou télécharger
 un kit ne confirme aucun préparatif. **Suivi de préparation non activé** est
-indiqué lorsque le suivi facultatif est absent.
+indiqué lorsque le suivi facultatif est absent. Le Juste Prix est terminé après
+approbation du produit. Pour un passeport, une tombola ou une chasse, l’étape 2
+propose une confirmation explicite lorsqu’un préparatif est requis. Dans le
+cas contraire, **Non requise** laisse la fiche consultable dans la liste sans
+ajouter d’action de préparation à l’accueil. Les alertes d’accueil
+distinguent actions du commerçant, attentes organisateur et déclarations
+manquantes si le suivi est actif. Vitrines conserve installation et contrôle.
 
 Le filtre et la pagination sont conservés dans l’URL ; le retour restaure
 position et focus. Une actualisation ne reconstruit que les résultats, en
