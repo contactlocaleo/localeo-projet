@@ -1,5 +1,27 @@
 # E73 — Localeo Live, entrée unique des animations
 
+## Correctif du 22 novembre 2026 — cohérence des détails Live
+
+Complément aux critères PE, PM, LH et LS existants, sans changement métier.
+
+| Critère | Comportement observable attendu |
+| --- | --- |
+| **E73-PE-15** | La mission n’apparaît qu’une fois dans le bloc principal personnel. La frise et le parcours n’ajoutent pas un second objectif générique. L’obligation générale de passage reste dans cette mission ; un passage effectivement manquant, une régularisation, une clôture, une suspension ou une lecture incertaine gardent leur explication spécifique. Les six moteurs conservent leur suivi et les quatre parcours leur liste d’étapes. |
+| **E73-PM-10** | « Voir ma participation » est présenté en vert avec texte contrasté dans les cartes du carnet, les participations, Découvrir, la fiche publique et les tirages de Mes lots. Cible personnelle, navigation, pagination, retour et focus restent inchangés. |
+| **E73-PE-16** | « Les lots à gagner » et « Mes échanges avec l’organisateur » partagent le style de résumé des autres sections, avec icône et indicateur replier/déplier visible et utilisable au clavier. Les échanges restent en dernier et repliés par défaut ; badges, brouillons, envois incertains et acquittement des seuls messages réellement présentés sont préservés. |
+| **E73-LH-13** | Les accès commerçants depuis Animation et Découvrir ouvrent la même fiche Live, avec horaires publiés directement lisibles et absence explicite si manquants. Un refus public n’ouvre aucune autre fiche de repli. Aucun statut « ouvert maintenant » n’est déduit du texte. |
+| **E73-PE-17** | Dans les quatre parcours et l’aperçu des commerces de la fiche publique, « Y aller » ouvre l’itinéraire d’une adresse connue et autorisée sans ouvrir le détail ni lancer de commande. Le lien reste séparé du bouton d’étape. Les lieux virtuels et futurs de chasse restent exclus ; aucune adresse n’est fabriquée depuis le nom. Vitrines, Juste Prix et l’aperçu public enrichissent uniquement les identifiants affichés, en une lecture publique bornée, sans requête par ligne. La fiche publique de chasse n’enrichit ni ne révèle ses lieux. |
+| **E73-PE-18** | Chaque visite non validée du passeport propose à côté de l’itinéraire la présentation du QR personnel et une fenêtre de saisie PIN si l’action serveur l’autorise pour ce commerce. Une visite validée ne propose pas de nouvelle validation. Le QR conserve ses conditions de disponibilité ; sa fermeture relit le serveur sans validation locale anticipée. La fenêtre PIN prépare une seule intention au clic explicite, conserve le commerce, les versions, l’idempotence et la reprise incertaine ; fermer puis rouvrir ne crée pas une seconde demande. Clôture, suspension, refus ou lecture incertaine ne permettent aucune validation interdite. |
+| **E73-LS-11** | Dans Mes lots, l’état « À retirer » est remonté près du titre et mis en évidence une seule fois. Les autres états restent distincts ; une information locale ou une lecture non fraîche conserve « Dernier état connu » sans badge de disponibilité actuelle. Retrait, consommation et nouveauté locale restent indépendants. |
+
+Dépôts affectés : Marketplace/Live et Projet. Contrats, règles métier,
+stockage, migrations et générateur de démonstration sans impact : seuls la
+présentation et l’enrichissement public déjà disponible changent. Aucun
+paramètre d’exploitation ni nouvelle procédure de reprise. Guides Commerçant
+et Animation examinés, sans impact : leurs écrans et procédures ne changent pas.
+La fiche publique Marketplace utilisée par les coffrets reste hors de cette
+correction : son catalogue peut contenir des commerces sans animation Live.
+
 ## Correctif du 22 novembre 2026 — suivi commun et parcours Juste Prix
 
 Les six types d’animation partagent le même suivi personnel, dès l’inscription.

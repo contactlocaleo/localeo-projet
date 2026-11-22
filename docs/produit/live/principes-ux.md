@@ -1,5 +1,41 @@
 # Principes directeurs UX de Localeo Live
 
+## Cohérence de lecture et accès pratiques — 22 novembre 2026
+
+Les actions « Voir ma participation » utilisent le même bouton vert, avec
+texte contrasté, dans Mon carnet, Mes participations, Découvrir, la fiche
+publique et Mes lots. Leur destination personnelle et leur retour contextuel
+restent propres à la participation choisie.
+
+Le détail personnel présente sa mission une seule fois dans le bloc principal.
+La frise et le parcours ne répètent pas cet objectif. La nécessité générale
+d’un passage commerçant est intégrée à cette mission ; les rappels ciblant un
+passage réellement manquant restent visibles, ainsi que les explications de
+clôture, suspension, régularisation ou lecture incertaine. « Les lots à gagner »
+et « Mes échanges avec l’organisateur » reprennent le même résumé de section,
+avec une icône et un repère replier/déplier utilisable au clavier. Les échanges
+conservent leur position finale, leurs badges et leurs brouillons.
+
+Animation et Découvrir ouvrent une même fiche commerçant Live. Les horaires
+publiés y sont directement lisibles, avec leurs lignes et une absence explicite
+s’ils ne sont pas renseignés. Chaque commerce ou lieu physique déjà autorisé du
+parcours propose « Y aller » si son adresse est connue. Ce lien est distinct
+de l’ouverture du détail d’étape, ne valide rien et ne révèle aucun lieu futur.
+Le même raccourci accompagne les commerces de l’aperçu de la fiche publique,
+avec leurs seules adresses publiques ; une chasse garde ses lieux masqués.
+L’enrichissement public reste borné aux commerçants de la page autorisée, sans
+requête par ligne. Dans Mes lots, l’état « À retirer » est mis en évidence
+près du titre du lot ; un état ancien reste présenté comme dernier état connu.
+
+Dans le passeport, une visite restant à valider propose aussi « Présenter mon
+QR » et, uniquement si l’action est autorisée par le serveur pour ce commerce,
+« Faire valider par PIN » à côté de l’itinéraire. Le premier ouvre le QR
+personnel ; le second ouvre la saisie dans une fenêtre dédiée. Présenter ou
+fermer le QR ne confirme aucun passage : la fermeture relit la progression.
+La fenêtre PIN conserve les contrôles de version, la reprise d’une demande
+incertaine et l’absence de double validation. Fermeture, suspension, refus ou
+lecture incertaine n’accordent aucune nouvelle action.
+
 ## Consignes de la fiche publique — 22 novembre 2026
 
 « Comment jouer ? » décrit les gestes concrets des six moteurs actuels en

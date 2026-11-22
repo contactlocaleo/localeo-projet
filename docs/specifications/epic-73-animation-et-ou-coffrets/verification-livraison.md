@@ -5539,3 +5539,59 @@ Aucune migration, donnée réparée, opération réelle de remise ou recette
 PostgreSQL de concurrence n'est exécutée. La livraison doit respecter l'ordre
 backend puis Animation ; les preuves synthétiques ne prouvent pas un parcours
 sur l'appareil utilisateur ni une livraison en production.
+
+### Correctif du 22 novembre 2026 — Cohérence des détails Live et accès au passage
+
+Les résumés du suivi répétaient la mission et les actions personnelles utilisaient
+plusieurs styles. Live réutilise désormais un bouton vert commun et conserve une
+seule mission principale, avec les rappels ciblés de passage et les explications
+d’état. Les résumés des lots à gagner et des échanges partagent leur présentation,
+icône et repère replier/déplier. Les badges d’échange occupent une ligne adaptée
+sur petit écran ; les brouillons et acquittements restent indépendants du repli.
+
+Animation et Découvrir convergeaient déjà vers la même fiche commerçant Live.
+Les horaires publiés y disposent maintenant d’une section directement lisible.
+Les parcours ajoutent l’itinéraire des seuls lieux physiques connus et autorisés,
+avec un enrichissement public borné pour Vitrines, Juste Prix et l’aperçu public
+des commerces. La fiche publique de chasse ne révèle aucun lieu. L’état du lot
+est rapproché de son titre ; un état local ou ancien garde son incertitude.
+
+Sur le passeport, chaque visite restante conserve l’accès au QR personnel et
+propose directement le PIN si l’action serveur existe pour ce commerce. La
+fenêtre utilise le cycle de demande existant, avec préparation unique au clic,
+versions, effacement du PIN et reprise incertaine. Fermer le QR relit le passeport
+sans valider localement. La recette clavier a reproduit une perte de focus
+pendant cette lecture : le retour attend désormais sa fin et retrouve le bouton
+ou l’étape si la visite vient d’être validée, sans déplacer un utilisateur qui
+a déjà repris sa navigation.
+
+Impacts : Marketplace/Live et Projet uniquement. Aucun contrat, règle métier,
+stockage, migration, paramètre d’exploitation ou générateur modifié. Les guides
+Commerçant et Animation ont été examinés et restent sans impact : leurs écrans,
+procédures de validation et captures ne changent pas. Les données de recette
+sont synthétiques ; aucun passage ou retrait réel n’est exécuté, aucun appareil
+physique ni déploiement n’est attesté.
+
+Preuves locales de ce correctif (base Marketplace `e5e461e` et modifications
+de la livraison) :
+
+- **346 tests Node de sécurité réussis**, dont missions, états de suivi,
+  enrichissement borné des commerces et absence de lieu de chasse public.
+- Chromium isolé : **110 scénarios principaux réussis** sur les six moteurs,
+  parcours et pages d’étape, lots, horaires, échanges, navigation, refus et
+  lectures incertaines ; **21 scénarios PIN complémentaires réussis**,
+  **12 scénarios de cohérence publique/fiches commerçants réussis** et
+  **3 recettes finales de fenêtre PIN réussies** à 320/390/1280 px, dont texte
+  agrandi à 200 %. Ces lots se recouvrent ; ils ne constituent pas un total
+  de scénarios distincts. Captures relues : parcours, lots, sections et fenêtre PIN.
+- Les 10 anciens scénarios de retour PIN étaient bloqués avant toute validation
+  par une fixture incomplète et des routes ignorant les paramètres de requête,
+  déjà présents dans `HEAD`. Leur projection et leurs attentes de dates Live
+  sans heure sont synchronisées ; délais, refus, reçus et absence de rejeu
+  restent vérifiés. Aucun contrôle produit n’a été assoupli.
+- Builds de production isolés réussis. ESLint réussi sur `src`, `tests`,
+  `scripts` et `server.cjs` ; la commande globale rencontre `EPERM` sur des
+  répertoires temporaires `output` et `tmp`, exclus de cette exécution ciblée.
+- Contrôles Projet : guidance et sources exportées vérifiées, sans erreur.
+- **4 scénarios PIN réussis sous React StrictMode**, dont les trois largeurs
+  et la confirmation perdue : une seule préparation, aucun rejeu de confirmation.
