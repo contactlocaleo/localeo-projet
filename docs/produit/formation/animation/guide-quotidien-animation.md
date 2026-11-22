@@ -210,6 +210,21 @@ Pour une **tombola publique sur place**, affichez aussi le code du jour fourni d
 
 > Les dates de programmation sont exprimées en heure de Paris. Le quota, la fréquence et la fenêtre d'envoi sont contrôlés avant l'envoi. Relisez l'audience et le statut de la campagne plutôt que de supposer qu'elle a touché tout le monde.
 
+## 11 bis · Informer les abonnés de la commune
+
+**Objectif** Informer les personnes qui suivent votre commune dans Localeo Live.
+
+![Dans cet exemple, le message cible les appareils sans participation liée sur lesquels une activité a été enregistrée dans les 30 derniers jours.](illustrations/guide-quotidien/communication-communale-1024.png)
+
+1. Vérifiez la commune active. Dans **Suivre l’activité**, ouvrez **Communication communale** si votre module et vos droits l’autorisent.
+2. Créez un message avec un titre et un texte. Ajoutez si besoin un lien vers une page publique Localeo ou un site HTTPS. Vérifiez la destination affichée dans l’aperçu.
+3. Choisissez tous les abonnés, les personnes avec ou sans participation liée, ou combinez les critères de participation et d’activité. L’aperçu compte les appareils qui suivent la commune et ont activé **Infos de mes communes**.
+4. Confirmez **Envoyer maintenant**, puis consultez le bilan. Si l’envoi reste incertain, vérifiez son enregistrement depuis le même écran.
+
+### Lire le bilan
+
+Le compteur est partagé avec les messages envoyés depuis une animation. Le crédit est consommé au premier dépôt dans Live. Le bilan distingue les dépôts Live et les notifications push, qui dépendent aussi des réglages des appareils.
+
 ## 12 · Suivre l'activité pendant l'animation
 
 **Objectif :** comprendre la progression et intervenir avec les bonnes informations.

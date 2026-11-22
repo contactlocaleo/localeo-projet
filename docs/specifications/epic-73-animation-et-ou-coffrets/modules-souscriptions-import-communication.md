@@ -1,5 +1,8 @@
 # EPIC 73 — Modules, souscriptions, imports et communication
 
+L’[extension du 22 novembre 2026](#e73-evo-communication-communale) couvre
+les campagnes communales destinées à Localeo Live.
+
 ## Statut, périmètre et références
 
 Spécification cible du 17 octobre 2026, **à implémenter**. Elle détaille US03, US14 à 22, US27/28 et US34 du [backlog canonique](../../roadmap/terminees/epic-73-animation-et-ou-coffrets-backlog.md), notamment CA-12 à 14, CA-37 à 49, CA-54/55 et CA-61. Les décisions DEC-20 à 32, DEC-60 à 108, DEC-120 à 124 et DEC-135 à 137 s'appliquent intégralement. Les descriptions de stockage et les nouvelles routes ci-dessous sont des contrats proposés pour l'implémentation ; leur présence ici ne prouve ni une API déployée ni un paiement possible.
@@ -888,3 +891,73 @@ d'en-têtes). Le fichier PostgreSQL `test_demandes_referencement_postgres.py` pr
 les habilitations réelles, la concurrence, l'acceptation sans accès et le rejet ;
 son exécution est rapportée dans le bilan commun, pas présumée ici. La vérification
 visuelle des deux points d'entrée est intégrée à la recette UI commune.
+
+## E73-EVO-COMMUNICATION-COMMUNALE
+
+**22 novembre 2026.** Le module **Communication** permet aussi d’envoyer
+un message hors animation. L’organisateur utilise **Suivre l’activité →
+Communication communale** pour la commune active. Les campagnes de participants
+conservent leurs groupes, fenêtres et options de programmation. Les deux
+portées utilisent le droit `COMMUNICATION_PARTICIPANTS` et le même quota.
+
+### Parcours et données
+
+- Le gestionnaire habilité enregistre un titre, un texte et un lien facultatif
+  vers une page publique Localeo ou un site HTTPS. Il choisit tous les abonnés,
+  les abonnés avec ou sans participation liée dans la commune, ou un ciblage
+  personnalisé. Celui-ci combine par `ET` le critère de participation et une
+  activité de l’installation enregistrée dans les 7 ou 30 derniers jours.
+  Cette activité correspond aux opérations authentifiées qui actualisent
+  l’installation, dont les Réglages et le suivi des communes. Une ouverture
+  de Live ou une lecture de notification entre dans ce calcul uniquement si
+  elle déclenche une opération qui actualise l’installation.
+  Le filtre est conservé dans la campagne. Le gestionnaire voit les volumes
+  d’audience et de livraison. Une participation sans preuve personnelle valide
+  ne peut être associée à l’installation.
+- Le destinataire est une installation Live active qui suit la commune et a
+  explicitement activé **Infos de mes communes**. Le suivi d’une commune est
+  synchronisé après choix de l’habitant dans **Mes communes**. La préférence
+  est désactivée par défaut et reste indépendante de la permission système.
+  Deux appareils anonymes utilisés par une même personne comptent séparément.
+- L’aperçu présente des volumes estimés. Après confirmation de l’envoi
+  immédiat, le traitement fige son audience, vérifie le suivi, la préférence
+  et les droits avant les effets et publie dans la boîte Live existante. Un
+  retrait bloque les nouveaux dépôts et les push pas encore émis. Les messages
+  déjà déposés restent consultables. Le push exige l’abonnement actif.
+- Le message est signé par la commune. Le lien externe affiche son domaine
+  avant l’envoi et dans Live. Au clic sur le push, Live ouvre la destination
+  enregistrée, ou la boîte de notifications en l’absence de lien. Une
+  destination externe ne reçoit aucun identifiant ni jeton Localeo.
+
+### Responsabilités et livraison
+
+Le domaine Communication porte la portée, le contenu, les transitions et les
+conditions d’envoi. L’application orchestre les transactions et les reprises.
+Les adaptateurs sélectionnent les installations et produisent la boîte Live et
+les tâches de diffusion. Le dépôt et le premier débit sont atomiques. La limite
+communale par installation sur 24 heures utilise la politique configurable de
+la commune et un registre distinct des sollicitations par participant.
+
+Le contrat d’administration est ajouté sous
+`/protected/animation-locale/communes/{commune_id}/campagnes-organisateur` avec
+une projection de contexte et les commandes, reçus et lectures propres à
+cette portée. Les notifications communales restent de nature `NOTIFICATION`.
+Les nouveaux champs permettent de présenter la commune et le lien externe.
+La lecture du détail pour un clic est authentifiée par le secret de
+l’installation. Les contrats par animation continuent à exiger leur identifiant
+d’animation. La migration additive prépare les données et index requis avant
+activation du backend et des interfaces.
+
+### Critères et preuves de l’extension
+
+| Critère | Comportement attendu et propriétaire | Preuve et impact |
+| --- | --- | --- |
+| CC-01 | Accès au menu et aux commandes avec droit actif et habilitation dans la commune. Le backend refuse tout accès hors périmètre. | API et navigateur, accès conditionnel au portail, contrôle des routes directes et de l’isolation entre tenants. Contrat E41. |
+| CC-02 | L’audience communale repose sur le suivi, le choix explicite et les seuls filtres autorisés. Le domaine décide du ciblage à partir des faits projetés. | Requêtes PostgreSQL, validité de la preuve, refus des filtres invalides, activité aux bornes. Démonstration avec installation active sans participation ni push. |
+| CC-03 | L’aperçu ne débite rien. Un premier dépôt réussi débite le quota partagé. Le domaine et la transaction empêchent le double débit sous concurrence. | Dernier crédit disputé entre les deux portées, audience vide, retrait pendant traitement, rejeu et reprise. Contrats et restauration. |
+| CC-04 | Chaque campagne communale publie une seule notification par installation. Le backend applique la limite distincte par installation et n’élargit pas l’audience en reprise. | PostgreSQL et tests de reprise avec transport simulé. Rapport de volumes, diagnostic et purge. |
+| CC-05 | Live présente une notification privée, consultable sans push, avec un lien facultatif. Le transport vérifie le droit, la préférence et son abonnement avant envoi. | Contrat E42, régression des anciens clients, tests de clic et de lectures non autorisées. Notice Live et recette multi-appareils. |
+| CC-06 | Le portail permet de rédiger, prévisualiser, confirmer et lire le résultat en conservant le contexte et les repères. | Recette synthétique Animation sur ordinateur et téléphone, parcours clavier et vérification d’un reçu après une réponse incertaine. Guide Animation actualisé. |
+
+Voir le [bilan propre à l’extension](verification-livraison.md#communication-communale-22-novembre-2026)
+et la [procédure de campagne](../../exploitation/exploitation/communiquer-participants-animation.md#communication-communale).

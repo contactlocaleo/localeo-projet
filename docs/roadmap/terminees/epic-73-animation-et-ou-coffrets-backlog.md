@@ -1543,3 +1543,13 @@ calendrier ni effet métier ; clôture historique et compteurs inchangés.
 Finition complémentaire retenue : **Minimal contemporain**, sans reliure
 latérale ni bandeau cadeau ; filets intérieurs et 22 px rendus au carnet.
 Les critères VP-01/VP-02 sont actualisés ; les premières preuves restent historiques.
+
+## Évolution du 22 novembre 2026 — communication communale
+
+**E73-EVO-COMMUNICATION-COMMUNALE** étend le module Communication aux abonnés
+Live d’une commune, avec ou sans participation liée. Envoi immédiat vers Live
+et push facultatif, aperçu d’audience, lien public facultatif et crédit commun.
+L’autorisation est liée à la commune courante. La limite de sollicitation
+communale par installation est distincte de celle des campagnes d’animation.
+[Critères CC-01 à CC-06](../../specifications/epic-73-animation-et-ou-coffrets/modules-souscriptions-import-communication.md#e73-evo-communication-communale)
+et [bilan de l’extension](../../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md#communication-communale-22-novembre-2026).

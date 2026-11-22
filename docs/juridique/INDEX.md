@@ -19,7 +19,7 @@ Documents approuvés, catalogue de publication, intégrations et licences. Cette
 - [interne/Annexe E - Vérification DPF CCT - V1.pdf](<interne/Annexe E - Vérification DPF CCT - V1.pdf>)
 - [licences/fontes-localeo-marketplace.md](licences/fontes-localeo-marketplace.md)
 - [live/LOCALEO - Conditions Générales d'Utilisation Localeo Live - V1.pdf](<live/LOCALEO - Conditions Générales d'Utilisation Localeo Live - V1.pdf>)
-- [live/LOCALEO - Notice de confidentialité Localeo Live - V1.pdf](<live/LOCALEO - Notice de confidentialité Localeo Live - V1.pdf>)
+- [Notice de confidentialité de Localeo Live, version 1.1](<live/LOCALEO - Notice de confidentialité Localeo Live - V1.pdf>) — l’édition du 22 novembre 2026 décrit **Infos de mes communes**. La publication en ligne suit le [catalogue juridique](publication/catalogue.json).
 - [marketplace/LOCALEO - Conditions Générales de Vente Marketplace - V1.pdf](<marketplace/LOCALEO - Conditions Générales de Vente Marketplace - V1.pdf>)
 - [marketplace/LOCALEO - Formulaire de Rétractation Localeo - V1.pdf](<marketplace/LOCALEO - Formulaire de Rétractation Localeo - V1.pdf>)
 - [publication/frontends.md](publication/frontends.md)

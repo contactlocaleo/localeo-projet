@@ -6028,3 +6028,70 @@ dans cette évolution. Les fichiers préparés pour le commit passent
 alerte**) ; `sync_documentation.py --check-sources` valide
 **155 documents**. `git diff --check` réussit dans les trois dépôts.
 Aucun déploiement, recette sur téléphone physique ou mesure Render n'est attesté.
+
+## Communication communale, 22 novembre 2026
+
+[E73-EVO-COMMUNICATION-COMMUNALE et critères CC-01 à CC-06](modules-souscriptions-import-communication.md#e73-evo-communication-communale)
+
+La migration additive `v331_campagnes_communales.sql` introduit les données
+d’audience par installation, les reçus communaux et le suivi du transport.
+Appliquer cette migration avant la livraison du backend et des traitements,
+puis mettre à jour Animation et Marketplace/Live. Le registre de démonstration
+classe les trois tables en remplacement. L’exemple crée une installation
+active, abonnée à la commune, sans participation et sans abonnement Web Push.
+Il n’émet aucune campagne communale.
+Le contrôle du registre a aussi révélé que la table v328 des alertes masquées
+du tableau de bord n’avait pas de politique. Ses lignes sont remplacées avec
+les gestionnaires auxquels elles appartiennent.
+
+### Preuves locales
+
+- **CC-01 et CC-06 côté portail.** `node tests/browser/communication-communale.mjs`
+  réussit sur bureau et mobile avec API simulées. Sont vérifiés l’accès par
+  droits, le filtre combiné, l’aperçu, la confirmation, la lecture du reçu après
+  une perte de réponse et le bilan. La création à 390 px conserve le contexte
+  et tient dans la largeur disponible.
+- **Démonstration, CC-02 et CC-05.** Le runner isolé réussit 38 tests, dont
+  13 dans `tests/unit/test_demonstration_communication.py` et 25 dans le
+  contrôle du registre. Le scénario PostgreSQL ciblé
+  `test_communication_live_consentie_sans_push_et_relecture_personnelle`
+  réussit la génération, la restauration et la lecture authentifiée de
+  l’installation communale sans participation ni abonnement Push.
+  Le lancement de la recette de compatibilité complète a été interrompu
+  après un échec Vitrines dont la cause reste à qualifier.
+- **Compatibilité du module.** Le runner isolé réussit 93 tests de
+  non-régression des campagnes par animation, de la diffusion et de la
+  messagerie. Les générateurs hors ligne produisent les contrats E41 et E42,
+  avec dix routes protégées communales et une lecture de détail Live.
+- **CC-01 à CC-05 côté backend.** Le lot final réussit 21 tests, dont
+  huit scénarios PostgreSQL et le contrôle de couverture du domaine.
+  Ils couvrent notamment le ciblage combiné, le dépôt et sa
+  lecture privée, la concurrence pour le dernier crédit, l’interruption et
+  la reprise, le retrait avant Push ainsi que le transport incertain simulé.
+- **Volumes locaux.** Le temps cumulé d’une création suivie de l’aperçu était
+  de 670 ms avec 200 installations synthétiques et de 711 ms avec 2 000, sur
+  un passage local sous charge.
+
+Le contrôle transversal de conservation signale deux index manquants pour
+les rappels de lots dans le code et la migration v320 de la révision de départ.
+
+Le guide Commerçant n’est pas affecté. Ses écrans, procédures et règles
+de participation restent les mêmes. Les sections du guide Animation sur
+la communication couvrent désormais l’accès communal et le compteur partagé.
+Les 17 pages ont été rendues et relues. `npm run guide:sync` et
+`npm run guide:check` confirment l’identité de la copie embarquée.
+`node tests/browser/animation-guide.mjs --access-only` vérifie le PDF servi,
+son accès au clavier à 390 et 1 024 pixels et sa disponibilité lorsque le
+support répond 503.
+La [notice Live 1.1](<../../juridique/live/LOCALEO - Notice de confidentialité Localeo Live - V1.pdf>)
+détaille la préférence et le ciblage. Ses cinq pages ont été rendues et
+relues. Le convertisseur balisé retrouve le texte de l’édition précédente,
+les ajouts de cette édition et le lien de la section sur les droits.
+`publier_documents.py preparer` a qualifié les 12 documents du lot local.
+
+La recette de la cible TEST doit couvrir la compatibilité avec un ancien
+client Live, l’ouverture des liens dans une PWA, l’activation et le retrait
+des préférences ainsi que la reprise des traitements sur une audience figée.
+Les tests simulés ne démontrent aucune remise sur téléphone physique ni
+aucune capacité Render. Les étapes et la procédure de diagnostic sont dans le
+[guide d’exploitation](../../exploitation/exploitation/communiquer-participants-animation.md#communication-communale).

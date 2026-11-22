@@ -1,5 +1,10 @@
 # Roadmap par etat
 
+**22 novembre 2026 — E73-EVO-COMMUNICATION-COMMUNALE**. Le module Communication
+s’étend aux abonnés des communes dans Live. Envoi immédiat, ciblage par
+installation, lien facultatif et quota commun avec les campagnes d’animation.
+[Critères CC-01 à CC-06 et suivi](../specifications/epic-73-animation-et-ou-coffrets/modules-souscriptions-import-communication.md#e73-evo-communication-communale).
+
 **22 novembre 2026 — CHARTE-PRO-ANIMATION-20261122** : déclinaison de gestion
 bleu nuit, orange et papier pour Pro et Animation, avec pictogrammes communs.
 [Critères CPA-01 à CPA-04](../architecture/transverse/identite-entetes-applications.md#déclinaison-pro-et-animation--22-novembre-2026).

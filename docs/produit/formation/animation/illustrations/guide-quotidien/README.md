@@ -391,3 +391,31 @@ Le PDF mis à jour conserve treize chapitres et treize pages, rendues en PNG
 dans `localeo-animation/tmp/threshold-guide-preview/pages` puis relues, avec
 une inspection détaillée du chapitre 2. La génération et la synchronisation
 utilisent les commandes de maintenance ci-dessus.
+
+## Ajout du 22 novembre 2026 - communication communale
+
+Le chapitre **Informer les abonnés de la commune** utilise une capture du
+formulaire réel de Localeo Animation avec des données fictives. Le cadrage
+isole le message, le filtre personnalisé et le choix du lien dans la capture
+bureau de 1 024 × 1 200 pixels. La capture provient du banc navigateur
+Communication communale, depuis la sortie
+`localeo-animation/tmp/communal-campaigns-browser/communication-communale-1024.png`.
+
+Depuis `localeo-animation` :
+
+```powershell
+$env:ANIMATION_TEST_DIST = 'tmp/communal-campaigns-dist'
+node scripts/build-generation-tests.mjs
+node tests/browser/communication-communale.mjs
+```
+
+Le banc utilise des appels API simulés. Il vérifie l’accès, la rédaction,
+les filtres combinés, l’aperçu, le reçu après perte de réponse et le bilan
+au clavier sur ordinateur, ainsi que la création dans le menu mobile à
+390 pixels et les refus sans module ou sans autorisation.
+
+Les 17 pages du guide ont été rendues et relues. Après synchronisation et
+reconstruction, `node tests/browser/animation-guide.mjs --access-only`
+vérifie l’accès clavier à 390 et 1 024 pixels depuis le menu du compte et
+**Support**. Le PDF reste accessible quand le support répond 503. Le fichier
+servi en HTTP 200 est identique au PDF canonique.

@@ -1,5 +1,22 @@
 # Specification backend et API - Localeo Live
 
+## Communication communale — 22 novembre 2026
+
+`categories_activees.COMMUNICATION_COMMUNALE` correspond à **Infos de mes
+communes**. L’absence de clé signifie que le choix est désactivé. Une
+installation doit aussi être active et suivre la commune. L’abonnement Push
+reste une condition supplémentaire du transport sur l’appareil.
+
+La boîte d’une installation contient les messages communaux avec
+`nature=NOTIFICATION` et `categorie=COMMUNICATION_COMMUNALE`. Ils comportent
+le nom de la commune et éventuellement un lien externe. Le filtre par
+animation les écarte. Au clic sur un Push, la destination de la notification
+est accessible via
+`GET /public/localeo-live/installations/{installation_id}/messages/notifications/{notification_id}`
+avec le même en-tête `X-Localeo-Live-Secret` que la boîte Live. Les anciens
+clients accèdent à la liste de messages avec le schéma précédent.
+[Règles de ciblage et critères CC](../epic-73-animation-et-ou-coffrets/modules-souscriptions-import-communication.md#e73-evo-communication-communale)
+
 ## Messages organisateur — catégorie Animations, correction du 11 novembre 2026
 
 `categories_activees.ANIMATION` dans les préférences d’installation devient le

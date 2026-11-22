@@ -171,9 +171,9 @@
       "id": "confidentialite-live",
       "title": "Notice de confidentialité de Localeo Live",
       "language": "fr",
-      "version": "1.0",
+      "version": "1.1",
       "render_revision": "1",
-      "document_date": "2026-09-13",
+      "document_date": "2026-11-22",
       "effective_date": null,
       "surfaces": [
         "marketplace",
@@ -181,7 +181,7 @@
       ],
       "kind": "document",
       "source": "live/LOCALEO - Notice de confidentialité Localeo Live - V1.pdf",
-      "pdf_sha256": "89efc7c6c718fe2ad75445e46fcbca02f0b8454b112a9de716fb7a4a930e9bdc",
+      "pdf_sha256": "1379f3d34267657876eb1ca7141163edfab5df493f7e94596261e26a7e17fe56",
       "legacy_routes": [
         "/confidentialite-live"
       ],
