@@ -35,6 +35,17 @@ Animation et Commerçant restent conformes : leurs écrans et procédures ne
 changent pas. Aucune migration distante ni recette utilisateur connectée n'est
 attestée par les tests locaux ; les observations de TEST restent distinctes.
 
+**Observation TEST après push.** Backend `c7ab12ddd53eec2ca2fddeafb2a8f00895ab7211`
+est déclaré `live` par Render le 22 novembre à 17 h 05 min 59 s UTC, à la suite
+du déploiement automatique sur commit. La sonde publique `/sante` répond
+HTTP 200. La lecture SQL en lecture seule constate désormais la table et ses
+sept colonnes. La cause `UndefinedTable` est levée ; la page avec la session de
+l'utilisateur n'a pas été rejouée. `v328` n'est toujours pas enregistrée :
+le bootstrap ne constitue pas le reçu d'une migration. Le rattrapage versionné
+des index et du registre reste à exécuter par le circuit opérateur documenté,
+sans le remplacer par une écriture SQL manuelle. Aucun déclenchement manuel de
+déploiement ni migration distante n'a été réalisé pendant ce correctif.
+
 ## Correctif du 17 novembre 2026 — ouverture de la création depuis la liste
 
 **Signalement TEST.** Le bouton **Créer une animation** de la liste ouvre
