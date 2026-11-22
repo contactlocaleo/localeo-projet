@@ -2273,11 +2273,9 @@ Les interactions gardent leurs retours et transitions existants, sans mouvement 
   Le feuillet sans date utilise le calendrier neutre.
 
 Les actions principales des participations et des vignettes lots/découverte
-utilisent le token vert Live avec texte blanc ; les actions secondaires gardent
-leur traitement. Cette contextualisation répond à la direction validée du plan,
-alors que le HEAD de référence utilise l'orange Marketplace pour ces actions.
-La palette globale et les coffrets du carnet sont préservés. Aucun changement
-de formulaire, API, état, stockage, requête ou pagination n'est nécessaire.
+suivent la palette commune de [LIVE-UX-09](../../produit/live/principes-ux.md#live-ux-09--partager-la-marque-marketplace-avec-une-composition-compacte).
+Depuis le 22 novembre, elles utilisent le bleu Localeo à texte blanc, comme
+les actions principales des coffrets.
 
 ### Finition Minimal contemporain — même séance du 21 novembre
 
@@ -2293,7 +2291,8 @@ conservées comme historique ; la composition Agenda reste courante.
 - Les filets sont des pseudo-éléments vides, non interactifs et sans place dans
   le flux. Leurs couleurs sont atténuées dans l'historique, jamais le texte ou
   les commandes. Aucun effet métallique, texture, ombre portée ou mouvement
-  nouveau. Angles, actions vertes, tampons et états restent identiques.
+  nouveau. Angles, tampons et états restent identiques. Les actions suivent
+  la palette commune de Live.
 
 Les critères VP-01 et VP-02 sont actualisés dans la spécification canonique.
 Cette finition reste une modification de présentation Marketplace et Projet,

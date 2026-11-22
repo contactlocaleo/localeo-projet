@@ -22,8 +22,8 @@ unique itinéraire. La réduction ne change ni les droits ni la validation.
 
 ## Cohérence de lecture et accès pratiques — 22 novembre 2026
 
-Les actions « Voir ma participation » utilisent le même bouton vert, avec
-texte contrasté, dans Mon carnet, Mes participations, Découvrir, la fiche
+Les actions « Voir ma participation » utilisent le même bouton bleu à texte
+blanc dans Mon carnet, Mes participations, Découvrir, la fiche
 publique et Mes lots. Leur destination personnelle et leur retour contextuel
 restent propres à la participation choisie.
 
@@ -347,28 +347,31 @@ et son résultat explicite ; elle n’est jamais relancée pour masquer une atte
 
 ## LIVE-UX-09 — Partager la marque Marketplace avec une composition compacte
 
-**Orientation révisée le 21 novembre 2026.** La référence visuelle de Live est
-la Marketplace ; cette décision remplace l'alignement sur Localeo Pro du
-10 novembre pour les polices, couleurs et finitions, tout en conservant sa
-lisibilité compacte : corps et actions 14 px, titres 25 / 18 / 15 px, titre
+**Orientation révisée le 22 novembre 2026.** Live reprend les couleurs de
+Pro et Animation et conserve la typographie et les finitions Marketplace
+retenues le 21 novembre. La composition reste compacte avec un corps et des
+actions à 14 px, des titres à 25 / 18 / 15 px et un titre
 principal 23 px sur mobile à taille de texte standard. Employer des unités
 relatives ; les champs mobiles restent à 16 px et les cibles tactiles à 44 px.
 
 DM Sans porte le texte courant, les contrôles et la navigation ; Oswald porte
 la marque et les titres courts de page ou section. Réutiliser les polices
 auto-hébergées de la Marketplace. Fond papier `#f6f5f1`, encre `#082840`, surfaces
-blanches, secondaire `#586873` et séparateurs `#d7d9d8` constituent la base.
-Les actions principales sont orange `#f28a2e` avec texte encre ; les actions
-secondaires et liens restent encre. Le vert distingue les validations réussies,
-jamais une nouvelle famille de commandes. Cartes à 4 px, panneaux à 6 px et
+blanches, texte secondaire `#526575` et séparateurs `#d8e1e7` constituent la base.
+Les actions principales sont bleu Localeo `#0b3d63` à texte blanc et passent en
+bleu nuit au survol. Les liens utilisent le bleu Localeo. La navigation active
+associe le pêche `#f9eee2`, le texte encre et un repère orange foncé `#a85213`.
+L'orange vif `#f28a2e` souligne les repères graphiques et le focus sur bandeau
+sombre. Le focus sur fond clair utilise l'orange foncé. Le vert distingue les
+validations réussies. Cartes à 4 px, panneaux à 6 px et
 boutons à 4 px reprennent les tokens Marketplace ; les silhouettes de tickets,
 tampons, badges et repères de progression restent propres au carnet.
 
 La [signature publique](../../architecture/transverse/identite-entetes-applications.md#signature-publique-marketplace-live-et-e-mails--21-novembre-2026)
 reprend le pictogramme Marketplace sans déformation, le bandeau encre et la
-marque blanche avec « Live » identifié ; TEST reste visible. Conserver le
-carnet, ses trois destinations et la prochaine action immédiatement accessible.
-Les chartes de Pro, Animation et des outils internes restent inchangées.
+marque blanche avec « Live » en orange clair `#f5ad6e`. TEST reste visible.
+Conserver le carnet, ses trois destinations et la prochaine action immédiatement
+accessible.
 
 Dans une participation, placer progression confirmée et prochaine action avant
 historique et détails secondaires. Dans Mes lots, privilégier le gain, son état

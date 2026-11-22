@@ -40,8 +40,9 @@ destinations existantes et les protections contre l’abandon d’une saisie.
 La référence est la Marketplace et ses tokens, pas la charte CRM. Le bandeau
 est encre `#082840`, la marque blanche en Oswald et le nom de surface reste
 identifié (« Localeo Live » dans Live, catégories conservées dans les e-mails).
-Le nom Live est sans italique, en orange clair `#ffd8b5`, comme le nom de produit
-Marketplace. DM Sans porte les contrôles et les libellés utilitaires.
+Le nom Live est sans italique. Le nom de produit Marketplace est en orange
+clair `#ffd8b5` et Live reprend le ton Pro et Animation `#f5ad6e` depuis le
+22 novembre. DM Sans porte les contrôles et les libellés utilitaires.
 
 Le pictogramme est `public/icons/localeo-coffret-icon.png` dans le frontend et sa
 copie `app/infrastructure/email/templates/localeo.png` dans le backend : rapport
@@ -133,8 +134,9 @@ Ops utilise sa feuille unique `ops.css`, sans ancien bloc de styles en ligne.
 Les connexions internes consomment les mêmes tokens. Pro et Animation harmonisent
 leur cadre, leurs composants de gestion et leurs formulaires d’accès. La surface
 habitante Live a repris le 10 novembre 2026 la typographie et les sections de Pro.
-Depuis le 21 novembre, elle adopte la signature publique Marketplace et conserve
-sa composition compacte, son carnet, ses tampons, ses tickets et sa navigation.
+Depuis le 21 novembre, elle reprend la signature publique Marketplace. Depuis
+le 22 novembre, elle utilise la déclinaison de couleurs de Pro et Animation
+dans sa composition compacte.
 Voir [LIVE-UX-09](../../produit/live/principes-ux.md#live-ux-09--partager-la-marque-marketplace-avec-une-composition-compacte).
 
 Dans Pro et Animation, conserver les rubriques et raccourcis adaptés au métier,
@@ -167,6 +169,13 @@ logos et icônes d'installation sont conservés.
 | Accent graphique | Orange `#f28a2e` |
 | Petit texte orange et focus sur fond clair | Orange foncé `#a85213` |
 | Focus dans le bandeau sombre | Orange vif `#f28a2e` |
+
+**Extension à Localeo Live le 22 novembre 2026.** Live applique les mêmes
+couleurs aux actions, liens, repères et surfaces, avec le texte secondaire
+`#526575` et les bordures `#d8e1e7`. Le séparateur des trois rubriques reste
+orange et le manifeste PWA associe le bandeau bleu nuit au fond papier.
+La signature publique conserve son pictogramme, Oswald et DM Sans. Voir
+[LIVE-UX-09](../../produit/live/principes-ux.md#live-ux-09--partager-la-marque-marketplace-avec-une-composition-compacte).
 
 Séparer les tokens d'action, de navigation et d'accent des états métier.
 Les succès, attentes, avertissements, erreurs et résultats incertains gardent

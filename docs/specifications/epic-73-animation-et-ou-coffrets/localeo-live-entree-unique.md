@@ -23,7 +23,7 @@ Complément aux critères PE, PM, LH et LS existants, sans changement métier.
 | Critère | Comportement observable attendu |
 | --- | --- |
 | **E73-PE-15** | La mission n’apparaît qu’une fois dans le bloc principal personnel. La frise et le parcours n’ajoutent pas un second objectif générique. L’obligation générale de passage reste dans cette mission ; un passage effectivement manquant, une régularisation, une clôture, une suspension ou une lecture incertaine gardent leur explication spécifique. Les six moteurs conservent leur suivi et les quatre parcours leur liste d’étapes. |
-| **E73-PM-10** | « Voir ma participation » est présenté en vert avec texte contrasté dans les cartes du carnet, les participations, Découvrir, la fiche publique et les tirages de Mes lots. Cible personnelle, navigation, pagination, retour et focus restent inchangés. |
+| **E73-PM-10** | « Voir ma participation » utilise le bouton principal bleu à texte blanc dans les cartes du carnet, les participations, Découvrir, la fiche publique et les tirages de Mes lots. Cible personnelle, navigation, pagination, retour et focus restent inchangés. |
 | **E73-PE-16** | « Les lots à gagner » et « Mes échanges avec l’organisateur » partagent le style de résumé des autres sections, avec icône et indicateur replier/déplier visible et utilisable au clavier. Les échanges restent en dernier et repliés par défaut ; badges, brouillons, envois incertains et acquittement des seuls messages réellement présentés sont préservés. |
 | **E73-LH-13** | Les accès commerçants depuis Animation et Découvrir ouvrent la même fiche Live, avec horaires publiés directement lisibles et absence explicite si manquants. Un refus public n’ouvre aucune autre fiche de repli. Aucun statut « ouvert maintenant » n’est déduit du texte. |
 | **E73-PE-17** | Dans les quatre parcours et l’aperçu des commerces de la fiche publique, « Y aller » ouvre l’itinéraire d’une adresse connue et autorisée sans ouvrir le détail ni lancer de commande. Le lien reste séparé du bouton d’étape. Les lieux virtuels et futurs de chasse restent exclus ; aucune adresse n’est fabriquée depuis le nom. Vitrines, Juste Prix et l’aperçu public enrichissent uniquement les identifiants affichés, en une lecture publique bornée, sans requête par ligne. La fiche publique de chasse n’enrichit ni ne révèle ses lieux. |
@@ -2643,9 +2643,12 @@ portent la cible canonique.
 - **E73-HV-01** : DM Sans pour corps/contrôles et Oswald pour marque/titres courts,
   avec échelle 25/18/15 px (23 px pour H1 mobile), corps/actions 14 px et champs
   mobiles 16 px en unités relatives. Pas de grand hero ajouté à Live.
-- **E73-HV-02** : papier/encre/blanc et séparateurs Marketplace, action principale
-  orange à texte encre ; liens et actions secondaires lisibles en encre. Le vert
-  reste réservé aux validations réussies ; tickets et tampons conservent leur sens.
+- **E73-HV-02** (révisé le 22 novembre) : Live adopte les [couleurs de Pro et Animation](../../architecture/transverse/identite-entetes-applications.md#déclinaison-pro-et-animation--22-novembre-2026).
+  Actions principales bleu Localeo à texte blanc et survol bleu nuit, liens
+  bleus, navigation active pêche avec repère orange foncé. Les états métier,
+  tampons et tickets conservent leur sens. Les couleurs configurées du jeu
+  conservent leur priorité. Le manifeste et le bandeau du navigateur reprennent
+  le bleu nuit et l'écran de lancement utilise le fond papier.
 - **E73-HV-03** : pictogramme Marketplace, bandeau encre, nom Live et TEST visibles,
   cartes 4 px, panneaux 6 px et boutons 4 px. Carnet, découverte, participation,
   inscription, QR, lots, récupération et messages partagent cette base. Le logo
@@ -2756,7 +2759,7 @@ la conception et le bilan historiques. Découvrir conserve son traitement.
 | **E73-VP-01** | Les participations actives et historiques de Mon carnet utilisent une surface presque blanche et deux filets discrets à l'intérieur du bord inférieur. Reliure et attaches supprimées, marges identiques aux cartes ordinaires (16 px, 12 px sur petit mobile), soit 22 px récupérés. Symbole du jeu, états, nouvelles, tampons confirmés et action restent présents. Coffrets et favoris conservent leur traitement. |
 | **E73-VP-02** | Mes lots utilise un filet abricot de 2 px à l'intérieur du bord supérieur, sans bandeau, nœud ou rangée décorative. Les pictogrammes cadeau/coffret/coupon gardent leur emplacement sur fond transparent. Disponibilité, consignes et action restent présentes. L'historique atténue seulement les filets ; le décor ne prouve aucune disponibilité ni remise. |
 | **E73-VP-03** | Dans l'en-tête de chaque animation à découvrir, le feuillet affiche jour/mois de début ; la période complète avec années reste adjacente. Une date absente ou invalide donne un calendrier neutre et « Début à préciser ». Les formateurs Paris existants gouvernent dates civiles et instants. Un événement en cours conserve sa vraie date de début. |
-| **E73-VP-04** | Décors exclus de l'arbre accessible, focus visible, cibles essentielles ≥44 px, aucune superposition ni débordement à 320/390/1280 px et texte doublé. Les actions principales des nouvelles vignettes utilisent le vert existant et un texte blanc contrasté ; aucun mouvement nouveau. |
+| **E73-VP-04** | Décors exclus de l'arbre accessible, focus visible, cibles essentielles ≥44 px, aucune superposition ni débordement à 320/390/1280 px et texte doublé. Les actions principales des vignettes utilisent la palette Live définie par E73-HV-02. |
 | **E73-VP-05** | Actualisation, accès personnels distincts, retours, filtres, pagination, positions et états vide/erreur/inconnu/périmé restent conservés. Captures avant/après des mêmes scènes, assertions automatiques et inspection visuelle sont consignées séparément. |
 
 Le frontend Marketplace possède uniquement ces représentations. Le domaine
