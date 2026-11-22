@@ -99,3 +99,33 @@ rendues et relues ; la page 11 a été inspectée en détail. La copie embarqué
 est identique au PDF canonique. Le build `tmp/quality-build-ZhDZiQ` a servi le
 nouveau PDF : accès clavier, HTTP 200, contenu identique et aide disponible
 avec assistance HTTP 503 vérifiés à 390/1024 px par le mode `--access-only`.
+
+## Ajout du 22 novembre 2026 - seuil de validation
+
+La capture `seuil-validation-1280.png` cadre le champ réel **Seuil de validation**
+dans la configuration d'un Passeport commerçant : six commerces fictifs
+sélectionnés, choix de six validations. Base Git Animation `063c229`, avec
+le correctif du seuil du même lot. Le guide utilise ce cadrage au chapitre 2 ;
+l'ancienne illustration de l'Assistant reste conservée dans ce dossier.
+
+Depuis `localeo-animation`, le banc utilise un build synthétique, l'origine
+`api.test.invalid`, des API simulées et un port HTTP local alloué dynamiquement,
+sans dotenv opérateur :
+
+```powershell
+$env:ANIMATION_TEST_DIST = 'tmp/threshold-build'
+node scripts/build-pwa-tests.mjs
+node tests/browser/qualification-threshold.mjs
+```
+
+La capture de référence provient de
+`localeo-animation/tmp/threshold-report-16OWJ0/seuil-validation-1280.png`.
+Elle mesure 1 006 × 94 pixels, sans modification du DOM, donnée personnelle,
+QR ni secret. Le banc vérifie les trois jeux concernés à 320, 390 et 1 280 px
+ainsi qu'à 1 280 px avec texte agrandi à 200 %. Cette recette locale ne prouve
+pas un déploiement distant.
+
+Le PDF mis à jour conserve treize chapitres et treize pages, rendues en PNG
+dans `localeo-animation/tmp/threshold-guide-preview/pages` puis relues, avec
+une inspection détaillée du chapitre 2. La génération et la synchronisation
+utilisent les commandes de maintenance ci-dessus.

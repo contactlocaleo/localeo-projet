@@ -139,6 +139,44 @@ Regles de validation :
 
 Le nom technique `mission_commercant` est retenu. Le reglement reste fourni par `CatalogueModelesAnimation.reglement` et n'est pas duplique dans cette metadonnee.
 
+#### Seuil selon les commerçants sélectionnés — 22 novembre 2026
+
+En création et en modification, Localeo Animation propose les seuils entiers
+de **1 au nombre de commerçants sélectionnés**, dans les bornes du modèle
+(Passeport : 1 000 ; Vitrines et Juste Prix : 100). Sans commerce sélectionné,
+le choix est désactivé et invite à compléter la sélection. La borne ne dépend
+ni de la page du catalogue consultée ni des seuls commerces déjà acceptés.
+
+Le seuil proposé automatiquement pour un nouveau Passeport reste compatible
+avec sa sélection. Une valeur choisie ou restaurée n'est jamais diminuée
+silencieusement : si la sélection devient trop petite, elle reste affichée
+avec « à ajuster », un avertissement explique comment choisir un seuil compatible
+ou ajouter des commerces. La création du brouillon d'animation et l'enregistrement
+de la configuration sont bloqués tant que ce choix reste incompatible. La
+sauvegarde d'une préparation manuelle incomplète reste disponible.
+
+Cette aide de formulaire ne remplace pas la validation métier : le serveur
+conserve ses bornes, les droits et verrous, les brouillons historiques et le
+contrôle de publication sur les commerces effectivement acceptés. L'origine
+AUTO/MANUEL et le recalcul serveur à la publication restent inchangés.
+
+Le correctif touche Animation et Projet, sans changement d'API, de contrat
+embarqué, de stockage, de migration, de configuration ni de générateur de
+démonstration. Le guide Animation et son PDF distribué sont actualisés ; le
+guide Commerçant est sans impact, ses écrans et procédures ne changent pas.
+
+Preuves locales : la recette `tests/browser/qualification-threshold.mjs` échoue
+avant correction sur les choix d'un Passeport de six commerces. Après correction,
+les tests couvrent les trois modèles, la conservation du seuil après retrait
+et ajout, zéro/un/six commerces, le blocage sans écriture, l'envoi d'un seuil
+compatible et les refus serveur. Types, lint et les 401 tests Node réussissent.
+La recette Chromium réussit ses 12 cas, chacun en création et en configuration,
+avec des API synthétiques à 320/390/1280 px et avec texte agrandi à 200 %, contrôle
+clavier et captures. Une revue indépendante du formulaire ne relève aucun écart.
+Le build isolé réussit ; le PDF servi en HTTP est identique au PDF canonique.
+Les contrôles documentaires réussissent (122 guides, 1 856 liens, 155 sources).
+Ces preuves ne constituent pas une recette connectée ni un déploiement.
+
 ### 5.2 Separation des modeles API
 
 Le modele Pydantic unique actuel doit etre separe :

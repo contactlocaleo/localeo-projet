@@ -24,11 +24,19 @@
 
 **Objectif :** passer de votre idée à un brouillon, sans publier par erreur.
 
-![L'assistant rassemble les informations acquises, les contrôles restants et l'action utile pour continuer.](illustrations/guide-quotidien/assistant-1024.png)
+![Le seuil de validation propose de 1 à 6 validations pour les 6 commerçants sélectionnés dans cet exemple.](illustrations/guide-quotidien/seuil-validation-1280.png)
 
 1. Ouvrez **Animations**, puis l'action de création. Choisissez un modèle proposé dans votre offre.
 2. Renseignez le titre, la présentation, la période et la commune. Préparez le règlement et le mode de dotation.
 3. Enregistrez le brouillon puis retrouvez l'**Assistant** : il vous conduit vers les informations et accords encore nécessaires.
+
+### Régler le seuil de validation
+
+Pour un **Passeport commerçant**, un **Jeu des vitrines** ou un **Juste Prix**, sélectionnez d'abord les commerçants. Le **Seuil de validation** propose ensuite de **1 au nombre de commerçants sélectionnés** : par exemple, de 1 à 6 pour six commerces.
+
+Si vous réduisez la sélection, un seuil devenu incompatible reste affiché **à ajuster**. Choisissez explicitement une nouvelle valeur ou ajoutez des commerçants avant de continuer ; l'application ne remplace pas votre choix en silence.
+
+> Sélectionner un commerce ne vaut pas accord de sa part. À la publication, les contrôles vérifient aussi les commerces ayant accepté de participer. Consultez les blocages indiqués avant de publier.
 
 ### Quel principe de jeu ?
 
