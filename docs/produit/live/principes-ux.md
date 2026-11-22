@@ -1,5 +1,23 @@
 # Principes directeurs UX de Localeo Live
 
+## Consignes de la fiche publique — 22 novembre 2026
+
+« Comment jouer ? » décrit les gestes concrets des six moteurs actuels en
+trois repères maximum. Vitrines explique l’observation de la vitrine et le
+choix définitif de l’intrus ; Juste Prix explique la découverte du produit et
+l’estimation définitive. Un passage à faire valider est annoncé seulement si
+la règle publique le demande ; une règle absente ne devient ni une dispense
+ni une obligation. Les consignes n’accordent aucun droit de jeu.
+
+Les blocs de conditions vides et le texte « Conditions non renseignées »
+disparaissent. Les conditions essentielles réellement renseignées restent
+lisibles avant l’inscription ; les conditions complètes et le règlement
+disponible restent en fin de fiche. Une absence de règles structurées ne
+masque pas un règlement existant. La note « Dotation prévue, selon le
+règlement » est supprimée ; un aperçu paginé conserve seulement son repère
+de portée. « Où jouer ? » utilise le repère de localisation, distinct des
+pictogrammes de boutique des commerces présentés dessous.
+
 ## Suivi commun des participations — 22 novembre 2026
 
 Toute participation affiche dans son bloc principal une seule frise commune

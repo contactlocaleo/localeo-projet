@@ -4957,3 +4957,52 @@ fixtures de lecture sont mises en conformité. Déployer le backend avant Live
 ou de manière coordonnée. Le cas TCA distant, le téléphone physique et un
 lecteur d’écran réel ne sont pas recettés ; aucun déploiement manuel n’est
 lancé par ce correctif. Le statut historique de clôture E73 reste inchangé.
+
+## 22 novembre 2026 — expliquer les jeux dans la fiche publique Live
+
+Marketplace `e5e461e` corrige les repères **FD-01/05/06/07**. Le guide public
+n’avait pas de déclinaison Juste Prix/Vitrines : ces moteurs affichaient
+seulement « Découvrez les conditions du jeu ». Ils présentent maintenant
+trois gestes concrets, la réponse définitive et le passage commerçant selon
+la règle publique. Passeport, Tombola locale et Chasse précisent aussi leurs
+gestes, sans dévoiler les lieux futurs ni imposer de déplacement à une étape
+virtuelle. La Tombola publique conserve ses consignes d’inscription propres.
+
+Le conteneur de conditions essentielles vide et le texte « Conditions non
+renseignées » disparaissent, y compris dans l’introduction publique partagée.
+Les conditions renseignées restent visibles avant inscription ; les conditions
+complètes et le règlement disponible restent en fin de fiche. La normalisation
+existante du règlement est réutilisée pour conserver un règlement seul et
+masquer un accordéon entièrement vide. La note de dotation redondante est
+supprimée ; la portée des aperçus paginés reste indiquée. « Où jouer ? » utilise
+une épingle, les commerces conservent leur boutique.
+
+Preuves locales :
+
+- Reproduction unitaire avant correction : le nouveau test du guide échoue
+  sur un seul repère au lieu des trois gestes attendus. Après correction,
+  **9 tests ciblés réussis**, dont passage requis, facultatif et règle absente.
+- `npm run test:security` : **343 réussites** ;
+  `npx eslint src tests scripts server.cjs '*.config.*'` et `git diff --check` :
+  codes **0**. Builds de production isolés du lanceur navigateur réussis.
+- `live-public-detail-fd.spec.cjs` : première campagne
+  `2026-11-22T01-08-28-142Z-SUK6zC`, **53 réussites / 6 échecs** de sélecteur
+  ambigu entre deux résumés de règlement imbriqués. Le sélecteur cible désormais
+  le résumé direct, sans supprimer les contrôles clavier/règlement.
+  Reprise `2026-11-22T01-09-00-929Z-qRVCBx` : **15/15 réussites**.
+  Recapture Juste Prix avec la tolérance du DTO de test renseignée,
+  `2026-11-22T01-11-20-179Z-hn0UZR` : **6/6 réussites**.
+  Les 59 scénarios sont couverts par la campagne et les reprises, sans skip.
+- Recette à **320/390/1280 px**, avec texte doublé et clavier ; captures mobile
+  et bureau inspectées. Les scénarios existants vérifient règlement et ancres,
+  conditions réellement renseignées, pagination des lots, retour/focus des
+  commerces, refus, revalidation, changements d’identité et confidentialité.
+- Principes UX et critères de fiche publique actualisés ; contrôles de liens
+  et des **155 sources exportées** réussis.
+
+Impacts limités à Marketplace/Live et Projet. Aucune règle métier, API,
+migration, nouvelle requête, configuration ou génération de données modifiée.
+Guides Commerçant/Animation sans impact : leurs écrans et procédures ne changent
+pas. Tests navigateur sur API synthétiques, sans recette distante ni téléphone
+physique ; aucun déploiement manuel réalisé. La clôture historique E73 reste
+inchangée.

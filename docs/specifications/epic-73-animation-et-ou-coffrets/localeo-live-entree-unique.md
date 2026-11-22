@@ -2309,12 +2309,39 @@ LA-16. La clôture historique d’E73 et les critères précédents sont conserv
 | **E73-FD-11** | FD-11 | Tester découverte, accès personnel connu/manquant, futur, fermé, clôturé et refus public d’une animation annulée : libellé/action/aide correspondent aux seuls faits disponibles. Pas de section de résultat public en V1, faute de contrat qui l’expose ; un refus public reste générique. L’historique personnel peut afficher une annulation lorsqu’il en reçoit le fait autorisé. Une inscription future annoncée ouverte reste possible, sans QR personnel avant ouverture autorisée. |
 | **E73-FD-12** | FD-12 | Changement direct A→B, lectures lentes/inversées et retrait d’accès : contenu, liens, données locales et action appartiennent à la même identité validée ; aucune inscription B depuis un titre A. Première lecture avec ossature stable, focus du nouveau titre une fois, annulation et génération cohérentes. Une erreur personnelle ne détruit pas une fiche publique lisible et ne conserve pas de droit privé. |
 
-Les critères portent sur les quatre moteurs déjà pris en charge. Les nouveaux
-jeux futurs ne reçoivent pas un guide supposé : état générique et capacité
+Les critères portent sur les six moteurs pris en charge : les deux tombolas,
+Passeport, Chasse, Vitrines et Juste Prix. Les nouveaux jeux futurs ne reçoivent
+pas un guide supposé : état générique et capacité
 serveur conservés. Le rendu cible, la matrice des impacts et les scénarios
 de recette sont au §9 ; les résultats applicatifs et leurs limites figurent au
 [bilan de livraison](verification-livraison.md#évolution--e73-evo-live-fiche-9-novembre-2026).
 La réalisation locale ne constitue pas un déploiement sur TEST.
+
+**Correction du 22 novembre 2026 — consignes et blocs utiles (FD-01/05/06/07).**
+« Comment jouer ? » explique en trois repères maximum les gestes du moteur,
+plutôt que renvoyer seulement aux conditions. Juste Prix décrit produit,
+estimation puis confirmation définitive ; Vitrines décrit observation,
+intrus puis confirmation définitive. Une seule réponse définitive par commerce
+est annoncée pour ces deux jeux. Si `passages_requis` vaut `true`, la consigne
+demande, après une bonne réponse, de présenter le QR personnel au commerçant
+pour faire valider le passage ; à `false`, elle explique le suivi sans passage
+supplémentaire. Si la règle n’est pas publiée, la fiche renvoie aux validations
+demandées dans la participation sans inventer cette condition.
+
+Les conditions essentielles renseignées sont conservées avant inscription.
+Leur conteneur vide, le texte « Conditions non renseignées » et la note
+« Dotation prévue, selon le règlement » disparaissent. Les conditions complètes
+et le règlement disponible restent en fin de fiche ; seul un ensemble sans
+conditions ni règlement disparaît entièrement. La portée d’un aperçu de lots
+reste explicite. Le titre « Où jouer ? » porte un pictogramme de localisation,
+distinct des boutiques de ses lignes. Contrôler les trois largeurs
+320/390/1280 px, le clavier et le texte doublé ; préserver les ancres de
+règlement, la pagination des lots et le contexte de retour des commerçants.
+
+Correction de présentation uniquement dans Marketplace/Live, avec réutilisation
+de l’introduction publique partagée. Aucun changement de contrat, règle métier,
+migration, configuration ou générateur de démonstration. Guides Commerçant et
+Animation sans impact : leurs écrans et procédures ne changent pas.
 
 ## Évolution du 9 novembre 2026 — carnet personnel unifié (E73-EVO-LIVE-CARNET)
 
