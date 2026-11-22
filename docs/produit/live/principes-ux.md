@@ -13,6 +13,13 @@ cible de 44 px minimum. Le PIN autorisé garde son raccourci à la clé et sa fe
 de saisie. L'ouverture du détail reste une action séparée ; cliquer sur ces icônes
 n'ouvre pas l'étape et ne confirme aucune validation.
 
+Dans le passeport, les raccourcis restent à droite sur une seule ligne, y compris
+sur mobile. Ils ne passent jamais sous l'identité du commerce. La largeur réelle
+de la vignette détermine leur présence : si les raccourcis ne tiennent pas avec
+un nom lisible, seul le QR reste visible. Le PIN autorisé et l'itinéraire restent
+accessibles dans le détail de l'étape ; une visite déjà validée sans QR garde son
+unique itinéraire. La réduction ne change ni les droits ni la validation.
+
 ## Cohérence de lecture et accès pratiques — 22 novembre 2026
 
 Les actions « Voir ma participation » utilisent le même bouton vert, avec

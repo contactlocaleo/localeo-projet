@@ -5713,3 +5713,40 @@ Preuves de ce complément (base Marketplace `0fa31c1`, Projet `b832a8a`) :
 - ESLint `npx eslint src tests scripts server.cjs`, `git diff --check`, guidance
   et sources exportées Projet vérifiés sans erreur. Aucune preuve de paiement
   ou de déploiement réel n'est revendiquée.
+
+### Passeport : raccourcis sans retour à la ligne — 22 novembre 2026
+
+La règle mobile plaçait les raccourcis sous le commerce. La reproduction à
+320 px échoue avant correction sur leur position : le début des outils coïncide
+avec le bas de l'action principale. Une variante CSS propre au passeport les
+garde à droite, sur une seule ligne. Des requêtes de conteneur réservent la
+place nécessaire au commerce et conservent seulement le QR lorsque ses autres
+raccourcis ne tiennent plus. L'itinéraire et le PIN autorisé restent dans le
+détail de l'étape ; sans QR, l'itinéraire d'une visite validée reste visible.
+
+Preuves locales, sur les bases Marketplace `189bbcf` et Projet `a87ade6` :
+
+- Chromium, **18/18 scénarios réussis**, fichiers
+  `live-card-actions-layout.spec.cjs` et
+  `live-passport-direct-validation.spec.cjs`, via le runner canonique sur le
+  port 35120. Build de production isolé et rapport
+  `2026-11-22T15-23-06-901Z-EYavgO` dans Marketplace
+  `test-results/visual-runs/`. Largeurs 320/390/1280 px, texte à 200 %, clavier,
+  redimensionnement et captures relues. La première passe après correction
+  avait deux attentes devenues obsolètes de raccourcis secondaires visibles
+  sur mobile ; leur adaptation vérifie désormais le QR seul et le PIN dans
+  le détail, sans retirer les contrôles de validation.
+- QR : ouverture/fermeture et retour du focus, relecture serveur, absence de
+  commande et de tampon anticipé. PIN : confirmation dans le détail à
+  320/390 px et raccourci à 1280 px, refus et reprise incertaine sans double
+  commande. Clôture, suspension et échec de lecture interdisent toujours les
+  validations concernées.
+- **350/350 tests de sécurité Node**, ESLint ciblé, `git diff --check`,
+  `check_guidance.py` et `sync_documentation.py --check-sources` réussis.
+
+Impacts limités à Marketplace/Live et aux critères/principes UX Projet.
+Contrats, règles métier, stockage, migrations, générateur et exploitation
+sans impact : seules disposition et visibilité des raccourcis changent.
+Guides Commerçant et Animation examinés, sans impact : leurs écrans et leurs
+procédures ne changent pas. Pas de recette sur appareil physique ni de
+déploiement attesté.
