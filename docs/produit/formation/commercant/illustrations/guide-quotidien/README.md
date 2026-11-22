@@ -1,5 +1,13 @@
 # Illustrations du guide quotidien commerçant
 
+## 22 novembre 2026 - iconographie de gestion
+
+Douze captures ont été reprises sur un build synthétique de Pro, base
+`643a90a` avec la nouvelle iconographie. Les vues d'accueil et de préparation
+illustrent les parcours décrits dans cette édition. La recette utilise
+`scripts/build-browser-tests.mjs` et `scripts/capture-merchant-guide.mjs`,
+avec un dossier de sortie isolé et des données fictives.
+
 ## Ajout du 22 novembre 2026 - étapes invalides de Vitrines et Juste Prix
 
 Le chapitre 4 explique qu'une étape invalide après épuisement des essais ne

@@ -142,3 +142,29 @@ Les champs mobiles conservent une taille lisible de 16 px ; le corps de travail
 
 Les preuves locales et limites sont dans le
 [suivi d’harmonisation](../../roadmap/anomalies/backend.md#ano-interne-charte-crm-20261104--harmonisation-des-espaces-de-gestion).
+
+### Iconographie de gestion Pro et Animation
+
+Les deux applications utilisent le même dessin pour une même fonction. Les
+silhouettes distinguent en particulier le calendrier de la checklist de
+préparation, le scan QR du clavier PIN, les participants de l’équipe et le lot
+du coffret. Le registre SVG est livré localement dans chaque application pour
+préserver leurs déploiements indépendants.
+
+- Repères métier à 24–32 px : contour et aplat vert pétrole discret, sur la
+  grille de dessin de 24 × 24. Choisir une couleur de contour lisible sur le
+  fond du composant.
+- Navigation compacte, actions et états à 16–20 px : tracé monochrome. Le
+  pictogramme ne détermine ni la taille de la cible, ni le sens de l’action
+  porté par son libellé.
+- État confirmé, attente, attention, erreur et résultat incertain : coche,
+  horloge, triangle, croix encerclée et point d’interrogation. Conserver le
+  texte visible et la gravité propre à chaque état.
+- Masquer l’icône aux technologies d’assistance lorsqu’elle accompagne un
+  libellé. Une commande sans texte garde un nom accessible sur le contrôle.
+
+Pour relire les SVG au réel, exécuter `node scripts/render-management-icons.mjs`
+depuis [Localeo Animation](../../../../localeo-animation/README.md) avec son
+Chromium Playwright. La planche PNG/SVG et l’aperçu HTML aux tailles d’usage
+sont générés dans `tmp/iconographie-gestion/`. Comparer les registres des deux
+dépôts après une évolution commune.

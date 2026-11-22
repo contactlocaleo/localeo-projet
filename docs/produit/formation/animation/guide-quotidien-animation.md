@@ -136,7 +136,7 @@ Lorsque ce suivi est activé, distinguez les commerces **prêts** de ceux encore
 
 ![La dotation met en évidence le mode, l'état modifiable ou figé, les quantités et les actions sur les lots.](illustrations/guide-quotidien/configuration-1024.png)
 
-1. Dans **Configuration**, ouvrez **Dotation** et choisissez un mode disponible. Enregistrez le mode avant de gérer les lots.
+1. Dans **Configuration**, ouvrez **Dotation** sur ordinateur ou **Lots** sur mobile. Choisissez un mode disponible et enregistrez-le avant de gérer les lots.
 2. Pour des **lots libres remis hors Localeo**, ajoutez un intitulé, une quantité, un responsable de remise et des consignes concrètes. Vérifiez l'ordre des lots.
 3. Pour des **bons numériques**, préparez le modèle et le commerce de remise, puis créez les exemplaires dans le stock. Choisissez des exemplaires disponibles, leur ordre et confirmez leur affectation. Vérifiez la durée de validité : chaque bon se remet entièrement en une seule fois.
 4. Pour des **coffrets**, sélectionnez les coffrets et contrôlez leur financement dans les sections correspondantes avant publication.

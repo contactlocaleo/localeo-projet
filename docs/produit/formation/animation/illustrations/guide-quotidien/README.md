@@ -1,5 +1,13 @@
 # Captures du guide utilisateur Animation
 
+## 22 novembre 2026 - iconographie de gestion
+
+Les illustrations concernées sont reprises depuis le build synthétique
+Animation, base `08aef5a` avec la nouvelle iconographie. La recette
+`tests/browser/animation-guide.mjs` utilise des données fictives et un
+dossier de captures isolé. Le chapitre Dotation précise le raccourci
+**Lots** en configuration sur mobile.
+
 ## Ajout du 22 novembre 2026 - maximum de mauvaises réponses
 
 Les captures `mauvaises-reponses-1280.png` et `mauvaises-reponses-390.png`
