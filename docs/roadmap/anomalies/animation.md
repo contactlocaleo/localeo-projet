@@ -1,5 +1,40 @@
 # Registre des anomalies
 
+## Correctif du 22 novembre 2026 — HTTP 500 à l'ouverture du tableau de bord TEST
+
+**Cause démontrée.** La référence
+`LOC-ed029d12-ec74-47cf-b67a-356f177aea05` correspond le 22 novembre à 16 h 34 UTC
+à une lecture du tableau de bord historique échouant avec `UndefinedTable` sur
+`animation_masquages_alertes_dashboard`. Backend TEST exécutait `34ad08f1`.
+Les lectures Render et SQL confirment un bootstrap actif, une table absente et
+un registre des migrations arrêté à `v327`. Le nouveau modèle n'était chargé
+qu'à la première ouverture d'une UoW, après le `create_all` du démarrage.
+
+**Correction.** Le bootstrap enregistre ce modèle avant le DDL non-production.
+La production conserve son interdiction de DDL au démarrage. `v328` accepte
+une table précréée et des index existants ; les deux empreintes historiques
+LF/CRLF sont enregistrées explicitement dans le runner. Le schéma final et les
+préférences restent identiques. La readiness vérifie désormais la table, ses
+champs, sa contrainte et les trois index. Voir les
+[consignes de migration](../../exploitation/technique/configurer-epic-73.md#tableau-de-bord-quotidien-et-rappels-personnels--22-novembre-2026).
+
+**Preuves locales.** Le test de démarrage en processus neuf échoue d'abord sur
+l'absence du modèle ; les cas PostgreSQL reproduisent la collision avec la
+table précréée. Après correction : **96 tests ciblés**, **767 contrôles
+d'architecture et de couverture**, **13 tests PostgreSQL** réussis, sans skip.
+La migration est vérifiée sur table absente et précréée avec une préférence,
+en double exécution : préférence conservée, PK composite, quatre FK, contrainte
+et trois index présents, tableau historique lisible avec masquage personnel.
+Les tests de qualification des lectures à 1 000 et 10 000 animations restent
+verts. Rapports non versionnés Backend `tmp/dashboard-500-green-final.xml`,
+`tmp/dashboard-500-architecture.xml` et `tmp/dashboard-500-pg-green.xml`.
+
+**Impacts.** Backend et documentation d'exploitation uniquement. Aucun contrat
+API, écran, règle de participation ou jeu de démonstration modifié. Les guides
+Animation et Commerçant restent conformes : leurs écrans et procédures ne
+changent pas. Aucune migration distante ni recette utilisateur connectée n'est
+attestée par les tests locaux ; les observations de TEST restent distinctes.
+
 ## Correctif du 17 novembre 2026 — ouverture de la création depuis la liste
 
 **Signalement TEST.** Le bouton **Créer une animation** de la liste ouvre
