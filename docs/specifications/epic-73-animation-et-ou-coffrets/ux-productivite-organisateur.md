@@ -498,6 +498,7 @@ Preuves attendues : tests de politique D2 et de seuil automatique/manuel, tests 
 - `pnpm exec tsc --noEmit` et lint ciblé des fichiers UI du lot : **réussis** avant intégration des lots parallèles.
 - Les bancs `po-creation-continuite.mjs` (nouveau scénario passeport à 1280 et 390 pixels) et `po-organisateur.mjs` (suivi distinct du bilan) sont adaptés. Leur exécution et celle des assertions PostgreSQL de productivité restent à consigner dans la vérification intégrée ; ces adaptations seules ne prouvent pas les parcours.
 
+
 ## Évolution du 22 novembre 2026 — animations et préparations mobile first
 
 Référence **E73-EVO-ANIMATION-MOBILE-FIRST**. Le parcours complet est utilisable
@@ -508,7 +509,7 @@ les noms des étapes et dispersait sauvegarde et navigation.
 
 | Critère | Comportement attendu |
 | --- | --- |
-| MF-01 | Animations propose deux vues Animations / Préparations, accessibles avant les listes. `/animations?vue=preparations` ouvre directement la reprise. Les liens existants restent utilisables. |
+| MF-01 | Animations propose deux vues Animations / Préparations, accessibles avant les listes. `/animations?vue=preparations` ouvre directement la reprise. Les liens existants et la vue À traiter restent utilisables. |
 | MF-02 | Recherche visible sur mobile, filtres avancés dépliables avec compteur, prochaine action visible. La sélection mobile est explicite ; suppression limitée aux brouillons sélectionnés de la page et confirmée. |
 | MF-03 | La reprise présente nom, modèle et état. Les curseurs précédent/suivant restent bornés en mémoire ; réessayer conserve la page. Ouvrir puis revenir restaure page, position et focus, ou annonce un repositionnement. |
 | MF-04 | La configuration mobile expose une partie à la fois avec étape nommée et navigation précédent/suivant. Les parties inactives restent montées mais ne sont ni visibles ni accessibles au clavier. Changer de partie conserve les saisies et n’enregistre rien. |
@@ -544,37 +545,40 @@ agrandi. Les résultats exécutés et limites sont consignés au bilan après re
 ### Réalisation et preuves mobile first
 
 - MF-01 à 03 : recette `mobile-first-lists` réussie, 5 formats
-  (320/390/768/1440 px et texte 200 %), rapport
-  `tmp/mobile-first-lists-7sWASH/report.json`. Première action visible sans
+  (320/390/768/1440 px et texte 200 %), rapport Animation
+  `tmp/mobile-first-lists-AiyQ5s/report.json`. Première action visible sans
   défiler à 390 × 844, curseur après échec et retour focus vérifiés.
 - MF-04/07 : recette `preparation-section-navigation` réussie, 10 scénarios,
-  rapport `tmp/preparation-navigation-report-xW18zX/report.json` : parties
+  rapport `tmp/preparation-navigation-report-gkSfs7/report.json` : parties
   masquées, saisie conservée, Passeport/Tombola/Vitrines/Juste Prix, texte
   200 % et faible hauteur. À faible hauteur, les barres reviennent dans le
   document et la tâche sélectionnée reste atteignable.
 - MF-05/06/07 : Chasse réussie, 5 scénarios / 166 contrôles, rapport
-  `tmp/mobile-first-hunt-1795375668188/report.json` ; grandes étapes et
+  `tmp/mobile-first-hunt-1795373016340/report.json` ; grandes étapes et
   Retour/Avancer préservent la saisie, sortie annulée, refus 409 visible au pied
   et absence de renvoi automatique. 15 tests ciblés gardes/préparation réussis,
   dont six nouveaux sur la navigation retenue et l'exclusion des routes réservées
   de création/archives, y compris encodées. Sauvegarde manuelle :
   6 scénarios reprise/réponse perdue/conflit réussis, rapport
-  `tmp/mobile-push-manual/report.json`.
-- Le lot isolé passe le contrôle de types, le lint, le build synthétique et les
-  416 tests Node. Les rapports relatifs à Animation correspondent à
-  l'arbre de recette `tmp/mobile-push-o98dbd_h/localeo-animation`.
-  Les recettes complémentaires couvrent le clonage (31 scénarios), la
-  productivité (10 scénarios) et les alertes de liste.
-- MF-08 : source et captures Animation actualisées, quinze pages PDF rendues et
+  `tmp/mobile-first-manual-final/report.json`.
+- Types et lint globaux réussis ; builds synthétiques isolés réussis. La suite
+  complète à concurrence 2 a donné 416/418 succès ; deux rendus Audit ont échoué
+  pendant les modifications parallèles du chargeur JSON d'iconographie.
+  Après stabilisation de ce chargeur, les 9 tests Audit ont été rejoués avec
+  succès. Aucun skip ni assertion métier affaiblie. Les autres tests de cette
+  suite n'ont pas été rejoués après les dernières retouches CSS ciblées.
+- MF-08 : source et captures Animation actualisées, seize pages PDF rendues et
   relues, copie embarquée identique. Accès clavier et HTTP du PDF vérifiés à
-  390/1024 px avec aide indisponible, sur `tmp/mobile-push-build`.
-  Rapports dans `tmp/mobile-push-guide-access`. Provenance et commandes dans le
+  390/1024 px avec aide indisponible, sur `tmp/mobile-first-verified-build`,
+  rapports `tmp/mobile-first-guide-access`. Provenance et commandes dans le
   [README des illustrations](../../produit/formation/animation/illustrations/guide-quotidien/README.md#ajout-du-22-novembre-2026--parcours-mobile-first).
   Guide Commerçant examiné, sans parcours ou règle visible modifiés.
 
 Contrôles documentaires : `check_guidance.py` et
 `sync_documentation.py --check-sources` réussis. Les recettes utilisent des API
-synthétiques. La recette sur appareil physique et sur cible déployée reste à réaliser.
+synthétiques ; aucune recette sur appareil physique ou sur cible déployée,
+aucun commit, push ou déploiement effectué par ce lot.
+
 ## Évolution du 22 novembre 2026 — pilotage unifié des animations
 
 **E73-EVO-DASHBOARD-PILOTAGE**, proposition utilisateur approuvée pour
