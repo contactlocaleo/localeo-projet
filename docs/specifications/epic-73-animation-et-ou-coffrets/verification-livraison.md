@@ -5595,3 +5595,56 @@ de la livraison) :
 - Contrôles Projet : guidance et sources exportées vérifiées, sans erreur.
 - **4 scénarios PIN réussis sous React StrictMode**, dont les trois largeurs
   et la confirmation perdue : une seule préparation, aucun rejeu de confirmation.
+
+### Coffrets à découvrir dans Live
+
+Correctif du 22 novembre 2026, critères **E73-CD-01 à E73-CD-07**. Découvrir
+propose les coffrets par commune, les fiches commerçants proposent Ses coffrets,
+et les lots de type coffret ouvrent une présentation Live. Les droits d'achat,
+les instances personnelles et les parcours QR/PIN ne sont pas modifiés.
+
+Une dotation publique nécessite une lecture dédiée : le catalogue commercial
+exclut légitimement certains modèles distribués mais non vendables. Le nouveau
+lecteur réutilise la visibilité de l'animation et sa configuration publiée,
+contrôle le modèle offert dans la même commune et projette une page minimale.
+Un refus ne déclenche aucun repli commercial ou personnel. La revue indépendante
+a fait corriger le retour depuis une participation (section des lots refermée),
+la conservation de page/focus et la réponse HTTP 400 du contrat documentaire.
+
+Preuves locales, données synthétiques et lectures API simulées pour Chromium :
+
+- Backend : **32 tests ciblés réussis** (domaine sans ORM, orchestration,
+  pagination SQLAlchemy sur SQLite en mémoire, filtrage HTTP et refus).
+  Commande : `py -3.14 scripts/validation/test_isolated.py tests/application/services/test_coffret_lot_public.py tests/domain/commercialisation/services/test_consultation_lot_public.py tests/infrastructure/persistence/test_prestations_coffret_lot_public.py tests/api/test_coffret_lot_public.py -q --basetemp .artifacts/coffrets-animation-read-final`.
+- Backend : **782 contrôles architecture et régressions réussis**.
+  Commande : `py -3.14 scripts/validation/test_isolated.py tests/architecture tests/domain/test_domain_dedicated_classes.py tests/application/use_cases/test_use_case_business_test_coverage.py tests/application/services/test_catalogue_animations_publiques.py tests/application/use_cases/test_acces_public_coffret.py -q --basetemp .artifacts/coffrets-animation-read-architecture`.
+- Marketplace : **348 tests Node de sécurité réussis**, dont filtrage des retours
+  et conservation de la page de lots sans projection ni accès personnel.
+- Chromium isolé : **67 scénarios réussis**, puis **3 compléments réussis**
+  sur les onglets, la conservation du curseur et les communes invalides ou
+  inaccessibles. Catalogue, commerces, dotation publique et personnelle,
+  26e coffret, focus, rechargement, retour navigateur, refus sans repli, pagination
+  contextuelle et suivi des six moteurs sont couverts. Largeurs 320/390/1280 px,
+  clavier et texte à 200 %. Captures du détail et du catalogue relues séparément.
+  Exécutions isolées : `2026-11-22T09-21-12-176Z-2LQqDy` et
+  `2026-11-22T09-25-04-366Z-18NaXx`, rapports locaux dans Marketplace
+  `test-results/visual-runs/` ; builds de production isolés réussis.
+  Après ajustement du retour à la ligne des trois onglets sur petit écran,
+  **10 scénarios repris ont réussi**, sans nouveaux cas distincts :
+  `2026-11-22T09-25-53-204Z-uIPTv5`. Le texte agrandi conserve des libellés entiers
+  et une navigation sur plusieurs lignes ; captures finales relues.
+- ESLint réussi sur `src`, `tests`, `scripts` et `server.cjs`, ainsi que
+  `git diff --check`. Les assertions anciennes interdisant toute lecture de coffret
+  sur la fiche commerçant vérifient désormais le filtre serveur obligatoire.
+  Une attente « Modifier » déjà divergente du libellé « Changer » est synchronisée.
+  L'enregistrement technique existant de l'installation Live reste autorisé par
+  les fixtures ; aucune mutation de coffret ni d'achat n'est admise.
+- Contrats OpenAPI E41/E42 régénérés hors ligne ; guidance et sources exportées
+  vérifiées. Le nouveau DTO n'est consommé que par Live : aucun contrat embarqué
+  Animation/Commerçant ni schéma moteur à modifier. Guides opérateurs examinés,
+  sans impact sur leurs écrans et procédures. Aucun stockage, migration,
+  paramètre d'exploitation ou contenu obligatoire du générateur modifié.
+
+Limites : PostgreSQL non exécuté (pas de cible jetable fournie), aucun appareil
+physique, aucune donnée réelle ni déploiement vérifiés. Les liens personnels
+des coffrets gagnés restent distincts de cette présentation publique.

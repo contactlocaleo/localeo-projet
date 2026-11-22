@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Backend - contrat implemente EPIC 41",
     "description": "OpenAPI complet du backend, dont les parcours Animation locale. Genere hors ligne depuis le code local pour les integrations et les mocks ; cet instantane ne prouve pas son deploiement.",
-    "version": "1.0.0+7fe2c21"
+    "version": "1.0.0+dde4a75"
   },
   "paths": {
     "/public/identite-acces/interne/connexion": {
@@ -36937,6 +36937,125 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AnimationPubliquePayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/animation-locale/animations/{animation_id}/coffrets/{coffret_id}": {
+      "get": {
+        "tags": [
+          "Animation locale"
+        ],
+        "summary": "Consulter Coffret Lot Public Animation",
+        "description": "Modèle effectivement offert par une animation publique accessible. Sans données financières, instance ni accès personnel ; prestations actives paginées et ordonnées. Cette lecture ne confère aucun droit d’achat.",
+        "operationId": "consulter_coffret_lot_public_animation",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "coffret_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Coffret Id"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 32768
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "moteurs_supportes",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Moteurs Supportes"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CoffretLotPublicPayload"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Curseur de prestations invalide ou incompatible avec ce contexte.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Animation ou coffret offert non public, absent ou retiré.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
                 }
               }
             }
@@ -149774,6 +149893,144 @@
         ],
         "title": "CoffretInstancePrestationPayload"
       },
+      "CoffretLotPublicPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "nom": {
+            "type": "string",
+            "title": "Nom"
+          },
+          "type_coffret": {
+            "type": "string",
+            "title": "Type Coffret"
+          },
+          "ville_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Ville Id"
+          },
+          "image_uri": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Image Uri"
+          },
+          "image_alt": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Image Alt"
+          },
+          "accroche": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Accroche"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "promesse_garantie": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Promesse Garantie"
+          },
+          "contenu_indicatif": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Contenu Indicatif"
+          },
+          "nature_contenu_prestations": {
+            "type": "string",
+            "const": "INDICATIVE",
+            "title": "Nature Contenu Prestations",
+            "default": "INDICATIVE"
+          },
+          "duree_validite_jours": {
+            "type": "integer",
+            "title": "Duree Validite Jours"
+          },
+          "nombre_prestations": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Nombre Prestations"
+          },
+          "prestations": {
+            "items": {
+              "$ref": "#/components/schemas/PrestationCoffretLotPublicPayload"
+            },
+            "type": "array",
+            "maxItems": 100,
+            "title": "Prestations"
+          },
+          "prestations_next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Prestations Next Cursor"
+          },
+          "prestations_has_more": {
+            "type": "boolean",
+            "title": "Prestations Has More"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "nom",
+          "type_coffret",
+          "ville_id",
+          "duree_validite_jours",
+          "nombre_prestations",
+          "prestations",
+          "prestations_has_more"
+        ],
+        "title": "CoffretLotPublicPayload"
+      },
       "CoffretPrestationPayload": {
         "properties": {
           "ordre_presentation": {
@@ -192185,6 +192442,64 @@
           "disponible"
         ],
         "title": "PresentationQrParticipantLive"
+      },
+      "PrestationCoffretLotPublicPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "image_uri": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Image Uri"
+          },
+          "commercant_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Commercant Id"
+          },
+          "ordre_presentation": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ordre Presentation"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "libelle",
+          "commercant_id"
+        ],
+        "title": "PrestationCoffretLotPublicPayload"
       },
       "PrestationCommande": {
         "properties": {

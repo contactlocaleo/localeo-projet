@@ -2758,3 +2758,28 @@ la palette globale Marketplace ni le traitement des coffrets du carnet.
 — [preuves et limites](verification-livraison.md#vignettes-carnet-cadeau-et-agenda).
 Les preuves restent propres à cette évolution ; la clôture historique d'E73 et
 les autres réserves ne sont pas modifiées.
+
+## Correctif du 22 novembre 2026 — Coffrets à découvrir dans Live
+
+La demande corrige l'absence de coffrets dans Découvrir et les liens qui
+renvoyaient vers le parcours commercial Marketplace. Appliquer LIVE-UX-13.
+
+| Critère | Comportement attendu |
+| --- | --- |
+| E73-CD-01 | Découvrir comporte un onglet Coffrets. Une seule commune autorisée est lue à la fois, avec 12 coffrets par page et curseur serveur. Sans commune résolue, aucune lecture globale. Le changement de commune repart au début. |
+| E73-CD-02 | La fiche commerçant affiche Ses coffrets, filtrés côté serveur sur son identifiant ; ses animations et leurs inscriptions restent présentes. Aucune lecture de détail par ligne de catalogue. |
+| E73-CD-03 | Un coffret du catalogue ou un lot de type coffret ouvre `/live/coffrets/catalogue/{id}`. Description, promesse garantie et prestations indicatives restent distinctes. Aucun achat, paiement ni activation dans cette présentation. |
+| E73-CD-04 | Depuis une dotation, `animation_id` sélectionne exclusivement la lecture publique contextuelle : animation visible selon ses gardes existantes, configuration publiée, coffret actif de même commune effectivement prévu en quantité positive, dotation non libre et absence de blocage légal/fraude/sécurité. Aucun repli commercial ou personnel après refus. La commercialisation Stripe n'est pas une condition de cette lecture. |
+| E73-CD-05 | La lecture contextuelle renvoie uniquement la présentation publique et une page de prestations actives (25 par défaut, 100 maximum). Pas d'instance, QR, accès personnel, montant de reversement ou donnée habitant ; réponse `no-store`. L'enrichissement public des commerces reste borné à 25 identifiants autorisés par la page, sans lecture par étape ni lien vers une fiche non autorisée. |
+| E73-CD-06 | Retours Live avec commune, curseur, pagination des lots, section ouverte, position et focus conservés. Rechargement, retour navigateur, erreurs et refus ne réaffichent pas une ressource refusée. Les liens personnels de coffrets gagnés et les validations QR/PIN restent indépendants. |
+| E73-CD-07 | Recette à 320/390/1280 px, clavier, texte agrandi, états vide/chargement/indisponible ; tests de visibilité, isolation de dotation, pagination et projection minimale. |
+
+Applications affectées : Marketplace/Live et backend. Sources canoniques : cette
+spécification, principes UX et OpenAPI E41/E42. Le nouveau DTO public n'est pas
+consommé par Animation ou Commerçant ; leurs contrats embarqués et le registre
+moteur restent sans changement. Le catalogue commercial conserve ses conditions
+de vente. Aucun schéma, stockage habitant, migration, paramètre ops ou contenu
+obligatoire de démonstration nouveau. Les guides Commerçant et Animation ont été
+examinés et sont sans impact : leurs écrans et procédures ne changent pas.
+
+Voir les [preuves de livraison](verification-livraison.md#coffrets-à-découvrir-dans-live).

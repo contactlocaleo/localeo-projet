@@ -546,3 +546,21 @@ La recette compare la planche vectorielle et les écrans réels avant/après,
 La reconnaissance par des habitants nécessite un essai distinct. Voir les
 [critères IP-01 à IP-06](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#e73-evo-live-iconographie-premium)
 et les [preuves locales](../../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md#iconographie-premium-21-novembre-2026).
+
+## LIVE-UX-13 — Découvrir les coffrets sans quitter Live
+
+Découvrir propose Animations, Commerçants et Coffrets. Les coffrets sont filtrés
+par commune ; sans commune utilisable, inviter à en choisir une sans charger
+un catalogue global. La fiche commerçant propose « Ses coffrets », filtrés par
+ce commerce, à côté de ses animations.
+
+« Voir le coffret » ouvre une présentation dans Live, depuis ces listes ou les
+lots d'une animation. Le contenu garanti et les exemples de prestations restent
+distincts. Cette présentation ne propose ni achat ni activation ; le lien personnel
+d'un coffret gagné conserve son parcours d'ajout au carnet et d'utilisation.
+
+Un coffret de dotation se consulte dans le contexte de l'animation publique qui
+l'annonce, même sans commercialisation. Un refus ne déclenche aucune tentative
+de lecture commerciale ou privée. Les lots, instances, QR et données personnelles
+gardent leurs contrôles propres. Les retours conservent commune, page, section
+des lots, position et focus ; les lectures et enrichissements sont bornés.
