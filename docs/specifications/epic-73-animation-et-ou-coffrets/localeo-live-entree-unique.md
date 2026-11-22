@@ -1,5 +1,32 @@
 # E73 — Localeo Live, entrée unique des animations
 
+## Correctif du 22 novembre 2026 — suivi commun et parcours Juste Prix
+
+Les six types d’animation partagent le même suivi personnel, dès l’inscription.
+Le jeu des vitrines sert de référence à la liste des parcours, y compris celle
+du Passeport commerçant. Cette correction complète les critères PE-01 à PE-10.
+
+| Critère | Comportement observable attendu |
+| --- | --- |
+| **E73-PE-11** | Une seule frise « Inscrit → Qualifié → Tirage → Résultat » apparaît dans le bloc principal des deux tombolas, du Passeport, de la Chasse, de Vitrines et du Juste Prix, sans ouvrir une section et même avant qualification. Les états sans tirage, arrêtés ou incertains restent explicites ; aucune date ni aucun pourcentage ne crée un résultat. La prochaine action décrit le jeu réel et ne demande aucune validation interdite. |
+| **E73-PE-12** | Les quatre animations à parcours partagent une synthèse de progression et une liste d’étapes dans « Le détail de mon parcours », dépliée par défaut après le suivi principal. Chaque commerce ou lieu autorisé porte un état, un tampon et une ouverture vers son détail. Le tampon plein dépend de la comptabilisation serveur ; une bonne réponse avec passage manquant reste incomplète. Le Passeport applique ces mêmes repères aux visites. Les tombolas ne reçoivent pas de parcours artificiel. |
+| **E73-PE-13** | Après inscription Juste Prix, le carnet ouvre la liste des commerces, puis le produit choisi et son estimation. La page de produits retourne `participantId` avec les trois versions, sur une liste paginée comme sur le filtre `stepId`. Identité étrangère et versions incohérentes restent refusées. Confirmation, actualisation et retour conservent la participation, le détail choisi, la page et le focus, sans double commande. |
+| **E73-PE-14** | Les composants de suivi et parcours sont communs ; leurs consignes seules s’adaptent aux règles. Une lecture incertaine est annoncée comme dernier état connu. Tester les six moteurs et le Passeport explicitement à 320/390/1280 px, au clavier et avec texte agrandi, ainsi que les étapes futures masquées, réponses définitives incorrectes, passages manquants et clôture. |
+
+Cause du blocage Juste Prix identifiée dans les sources : la lecture des
+produits n’exposait pas `participantId`, alors que Live vérifie cette identité
+avant d’afficher liste ou détail. Le champ UUID devient obligatoire dans la
+projection de lecture, sans enlever ce contrôle ni changer les droits,
+commandes, règles métier ou données persistées. Les exports JSON Schema,
+manifestes embarqués et vues OpenAPI concernées sont synchronisés depuis le
+producteur. Version moteur `1.0` conservée ; aucune migration. Livraison backend
+avant Live ou coordonnée, sans contourner une réponse d’ancien backend.
+
+Guides Commerçant et Animation sans impact fonctionnel : leurs écrans et
+procédures de validation ne changent pas. Leurs copies de contrat sont uniquement
+synchronisées. Le cas distant « TCA » n’est pas une preuve de recette locale ;
+aucune donnée ni configuration d’exploitation n’est modifiée.
+
 ## Correctif du 21 novembre 2026 — date prévue et clôture effective
 
 La date de fin prévue ne clôture pas une animation. Après son démarrage, une

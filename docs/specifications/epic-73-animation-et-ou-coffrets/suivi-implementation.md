@@ -4888,3 +4888,72 @@ conservent leur texte historique ; les messages qui disposent de cette
 référence sont enrichis à la lecture. La remise et l’affichage Push sur appareil
 réel, la recette hébergée et le déploiement ne sont pas exécutés. La clôture
 historique de l’EPIC 73 reste inchangée.
+
+## 22 novembre 2026 — suivi commun des participations et parcours Juste Prix
+
+Critères [E73-PE-11 à PE-14](localeo-live-entree-unique.md#correctif-du-22-novembre-2026--suivi-commun-et-parcours-juste-prix).
+Commits applicatifs vérifiés : Backend `7fe2c211`, Marketplace/Live `b1d4ee9`,
+Animation `063c229` et Commerçant `ab64dfc`. Les deux derniers synchronisent
+uniquement leurs contrats embarqués.
+
+La page personnelle de produits Juste Prix omettait `participantId`, pourtant
+exigé par Live avant de montrer liste ou étape. Deux assertions de reproduction
+(liste et filtre `stepId`) échouaient sur ce champ absent. La projection autorisée
+le retourne désormais avec ses versions, sans retirer le contrôle côté Live.
+Le contrat UUID obligatoire, les trois exports moteur et les quatre vues
+OpenAPI concernées sont synchronisés. Version moteur `1.0` conservée.
+
+Les six animations affichent une seule frise dans le bloc principal dès
+l’inscription. Passeport, Chasse, Vitrines et Juste Prix partagent la synthèse
+et les tampons du parcours déplié, avec détails d’étape séparés. Les consignes
+Juste Prix/Vitrines remplacent les messages techniques. Le Passeport distingue
+son dernier état connu d’une validation actuelle après panne. La recette a
+aussi révélé les PIN de tombola locale masqués par la séparation des étapes :
+les seules actions serveur autorisées retrouvent l’overview, avec les gardes
+de fraîcheur, versions et occupation existantes. Une actualisation annonce
+le dernier état connu sans déplacer le QR ni réserver de blanc au repos.
+
+Preuves locales, sans API ni base d’exploitation :
+
+- Backend : **49 tests ciblés réussis**, via `test_isolated.py` sur
+  `test_jeu_api_t4.py`, `test_detail_etapes_live_contract.py`,
+  `test_detail_etapes_live.py` et `test_contrats_moteur_t1.py` ;
+  **764 contrôles d’architecture réussis**. Identité, accès mauvais/expiré,
+  participation étrangère et curseurs isolés couverts.
+- Exports moteur : `export_moteur_animation_contracts.py --check`,
+  **121 exports conformes par frontend**. Registres Marketplace/Animation :
+  **3 + 3 réussites** ; contrats et registre Commerçant : **36 réussites**.
+- Marketplace : `npm run test:security`, **342 réussites** ;
+  `npm run test:visual:runner`, **13 réussites** ;
+  `npx eslint src tests scripts server.cjs '*.config.*'`, code **0**.
+  Le lint global reste bloqué par `EPERM` dans les anciens dossiers locaux
+  `output/bum-politique/pytest-approval-1` et `tmp/address-architecture` ;
+  aucune règle ESLint ni permission n’est modifiée pour le contourner.
+- Navigateurs/builds de production isolés : campagne initiale
+  `2026-11-22T00-50-10-276Z-Q1ohZ4`, **107 réussites et 7 échecs**.
+  Les échecs PIN et déplacement pendant relecture sont corrigés ; les deux
+  délais d’ouverture du carnet ne se reproduisent pas dans la reprise.
+  Une écriture de rapport a également rencontré `EPERM` pendant cette campagne.
+  Reprise `2026-11-22T00-57-02-045Z-TqT6XV` : **60/60 réussites**, dont
+  suivi des six moteurs, parcours, Juste Prix confirmé, mobile et texte 200 %.
+  Reprise `2026-11-22T00-59-12-583Z-BlnIDg` : **17/18 réussites**,
+  PIN restaurés et clavier validés, déplacement QR restant alors à corriger.
+  Contrôles finaux après correction de fraîcheur et stabilité,
+  `2026-11-22T01-02-15-343Z-3ekbq9` : **11/11 réussites**, dont états des
+  six moteurs, panne Passeport, contraste des thèmes et QR stable.
+  Les reprises intermédiaires en échec restent conservées ; aucune assertion
+  de contraste, accès ou stabilité n’est supprimée et aucun test ignoré.
+- Captures inspectées à 320/390/1280 px, dont texte doublé et états de parcours.
+  Le test d’inscription Juste Prix ouvre le produit, confirme une estimation,
+  recharge et revient à la même ligne avec un seul envoi. Les suites de pages
+  d’étapes et passages couvrent pagination, réponses incorrectes définitives,
+  passages manquants, clôture, suspension et confidentialité des étapes futures.
+
+Impacts : principes UX et instructions Marketplace renforcés, critères E73
+et contrats documentés. Guides Commerçant/Animation sans impact : leurs écrans
+et procédures ne changent pas. Aucune migration, réparation de données,
+nouvelle configuration ni adaptation du générateur de démonstration ; les
+fixtures de lecture sont mises en conformité. Déployer le backend avant Live
+ou de manière coordonnée. Le cas TCA distant, le téléphone physique et un
+lecteur d’écran réel ne sont pas recettés ; aucun déploiement manuel n’est
+lancé par ce correctif. Le statut historique de clôture E73 reste inchangé.

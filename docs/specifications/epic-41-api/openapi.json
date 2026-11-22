@@ -186069,6 +186069,11 @@
       },
       "PageProduitsJustePrixParticipant": {
         "properties": {
+          "participantId": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Participantid"
+          },
           "items": {
             "items": {
               "$ref": "#/components/schemas/ProduitJustePrixParticipant"
@@ -186106,6 +186111,7 @@
         "additionalProperties": false,
         "type": "object",
         "required": [
+          "participantId",
           "items",
           "definitionVersion",
           "progressionVersion",

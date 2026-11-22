@@ -1,5 +1,30 @@
 # Principes directeurs UX de Localeo Live
 
+## Suivi commun des participations — 22 novembre 2026
+
+Toute participation affiche dans son bloc principal une seule frise commune
+« Inscrit → Qualifié → Tirage → Résultat », visible dès l’inscription sans
+déplier une section. Ses états, y compris absence de tirage, suspension,
+clôture et lecture incertaine, viennent des faits serveur. La prochaine action
+est adaptée au jeu : visites, étape de chasse, intrus ou estimation ; un
+message technique de confirmation ne remplace pas une consigne utile.
+
+Passeport commerçant, Chasse, Vitrines et Juste Prix utilisent la même
+présentation du parcours, sur le modèle de la liste des vitrines : mission
+dans le bloc principal, puis « Le détail de mon parcours » déplié par défaut,
+progression commune et liste des commerces ou lieux autorisés avec état,
+tampon et flèche vers le détail. Les tampons de synthèse sont des compteurs
+bornés de l’objectif, pas des étapes cachées ni une liste exhaustive inventée.
+Chaque ligne reçoit son tampon complet uniquement quand l’étape est
+comptabilisée par le serveur. Bonne réponse et passage requis restent deux
+faits distincts. Le passeport suit le même principe avec ses visites validées.
+
+Cette structure doit être vérifiée à chaque évolution des participations,
+pour tous les moteurs touchés et explicitement pour le passeport lors d’une
+évolution commune. Les tombolas conservent leur ticket sans parcours artificiel.
+Navigation, saisies, reprise incertaine, pagination et confidentialité des
+étapes futures restent préservées (E73-PE-11 à E73-PE-14).
+
 ## Ajustements de lecture — 21 novembre 2026
 
 Le détail d'une participation rapproche le suivi du parcours du contenu suivant :
