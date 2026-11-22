@@ -1,5 +1,18 @@
 # Principes directeurs UX de Localeo Live
 
+## Vignettes et raccourcis — 22 novembre 2026
+
+Les vignettes d'animation dans Découvrir et « Ses animations » placent le visuel
+Flyer configuré à droite du titre et des informations. Sans image ou après échec,
+le pictogramme du jeu conserve un emplacement compact ; aucune photo de repli
+n'est inventée. Les actions, dates et badges d'inscription restent lisibles.
+
+Dans le parcours, l'itinéraire et le QR personnel appartiennent à la vignette du
+commerce et utilisent des icônes seules, avec nom accessible, infobulle, focus et
+cible de 44 px minimum. Le PIN autorisé garde son raccourci à la clé et sa fenêtre
+de saisie. L'ouverture du détail reste une action séparée ; cliquer sur ces icônes
+n'ouvre pas l'étape et ne confirme aucune validation.
+
 ## Cohérence de lecture et accès pratiques — 22 novembre 2026
 
 Les actions « Voir ma participation » utilisent le même bouton vert, avec
@@ -556,11 +569,21 @@ ce commerce, à côté de ses animations.
 
 « Voir le coffret » ouvre une présentation dans Live, depuis ces listes ou les
 lots d'une animation. Le contenu garanti et les exemples de prestations restent
-distincts. Cette présentation ne propose ni achat ni activation ; le lien personnel
-d'un coffret gagné conserve son parcours d'ajout au carnet et d'utilisation.
+distincts. La sélection de commune commune à Découvrir suffit ; aucun second filtre
+n'est affiché sous « Les coffrets ». Le prix public est affiché lorsqu'il est
+renseigné, y compris zéro. « Acheter sur Marketplace » ouvre explicitement un
+nouvel onglet sur l'origine Marketplace configurée, sans accès personnel ni
+référent. Paiement et activation restent dans leurs parcours existants ; le lien
+personnel d'un coffret gagné conserve son ajout au carnet et son utilisation.
 
 Un coffret de dotation se consulte dans le contexte de l'animation publique qui
 l'annonce, même sans commercialisation. Un refus ne déclenche aucune tentative
 de lecture commerciale ou privée. Les lots, instances, QR et données personnelles
 gardent leurs contrôles propres. Les retours conservent commune, page, section
 des lots, position et focus ; les lectures et enrichissements sont bornés.
+
+Après une lecture contextuelle réussie seulement, une lecture commerciale séparée
+peut confirmer prix et disponibilité à l'achat. Elle ne remplace aucun contenu de
+dotation et ne se répète pas à chaque page de prestations. Un coffret non vendu
+reste consultable comme lot, sans action d'achat trompeuse. Une lecture incertaine
+ou une origine Marketplace absente n'accorde aucun raccourci d'achat.

@@ -5648,3 +5648,68 @@ Preuves locales, données synthétiques et lectures API simulées pour Chromium 
 Limites : PostgreSQL non exécuté (pas de cible jetable fournie), aucun appareil
 physique, aucune donnée réelle ni déploiement vérifiés. Les liens personnels
 des coffrets gagnés restent distincts de cette présentation publique.
+
+### Vignettes, raccourcis et prix des coffrets — 22 novembre 2026
+
+Complément demandé après la livraison des coffrets Live : les animations de
+Découvrir et de Ses animations utilisent une miniature Flyer à droite. Le
+parcours contient itinéraire, QR et PIN autorisé dans la vignette du commerce,
+avec icônes nommées, infobulles et cibles de 44 px. La fiche publique reprend
+l'itinéraire sous cette forme, sans fabriquer un accès personnel au QR.
+
+La commune ne se choisit plus deux fois dans Coffrets. Catalogue et détail
+affichent le prix public et une sortie explicite « Acheter sur Marketplace »
+dans un nouvel onglet. L'URL réutilise `LOCALEO_MARKETPLACE_PUBLIC_ORIGIN` et ne
+transmet que les identifiants publics du modèle et de la commune, sans référent.
+Pour un lot d'animation, une lecture commerciale séparée intervient après le
+succès de sa présentation contextuelle, une seule fois par détail/actualisation,
+sans se répéter à chaque page. Elle ne remplace ni le contenu du lot ni les
+gardes de contexte. Un refus de contexte interdit cette lecture ; un modèle
+non vendu garde sa présentation, sans proposition d'achat. Aucun prix absent
+n'est transformé en zéro. Paiement et activation restent dans leurs procédures.
+
+La reproduction avant correction a montré deux défauts attendus à 320 px :
+image absente de la carte et raccourci QR encore textuel. Les captures avec
+texte agrandi ont aussi révélé une ancienne règle générique des listes du
+passeport, qui réappliquait grille et bordure aux nouveaux raccourcis. Son
+périmètre est corrigé à la source ; les outils ont leur variante visuelle
+propre. Sur mobile, ils se répartissent dans une rangée à l'intérieur du même
+cadre pour laisser le nom du commerce lisible. Aucun contrôle de validation,
+reprise incertaine, focus, QR ou PIN n'est supprimé.
+
+Impacts : Marketplace/Live et Projet. Contrats, backend, stockage, migrations,
+générateur de démonstration et guides opérateurs Commerçant/Animation sans
+impact : données et procédures inchangées. Les profils de déploiement portent
+déjà la clé d'origine Marketplace ; aucune clé nouvelle ni vérification distante
+n'est nécessaire à la preuve locale. Sans origine utilisable, le prix reste
+visible et aucun lien d'achat n'est inventé. Aucun paiement réel, appareil
+physique ou déploiement attesté.
+
+Preuves de ce complément (base Marketplace `0fa31c1`, Projet `b832a8a`) :
+
+- **350 tests Node de sécurité réussis** via `npm run test:security`, dont prix
+  absent/zéro/invalide et construction d'URL limitée aux paramètres publics.
+- Chromium isolé : **96 scénarios distincts validés par les lots successifs**,
+  sur les sept fichiers `live-card-actions-layout`, `live-coffret-purchase`,
+  `live-coffret-discovery`, `live-passport-direct-validation`,
+  `live-common-participation-tracking`, `live-merchants` et `live-coffret-prizes`
+  (`tests/visual/*.spec.cjs`). La passe large
+  `2026-11-22T11-40-50-328Z-TU0Sia` a obtenu 95 succès et un dépassement de
+  l'attente de contenu de 5 secondes sur un coffret non commercialisé. Ce cas
+  avait passé le premier lot de 42 et a réussi à nouveau dans la reprise ciblée
+  **60/60**, `2026-11-22T11-45-05-292Z-OokleY`, sans modifier délai ni assertion.
+  La cause temporelle de cet incident isolé n'est pas établie.
+- Après la dernière correction des bordures héritées, **7/7 recettes de mise
+  en page** réussies dans `2026-11-22T11-47-53-866Z-ga29VP`. Photo à droite sur
+  Découvrir/Ses animations, outils contenus dans la vignette, clavier, icônes
+  de 44 px, largeurs 320/390/1280 px et texte à 200 % ; captures finales relues.
+  Les lots se recouvrent, leurs comptes ne s'additionnent pas. Rapports et
+  builds de production isolés dans Marketplace `test-results/visual-runs/`.
+- QR/PIN : ouverture/fermeture avec relecture, versions, refus, suspension,
+  clôture et reprise incertaine sans double commande ; suivi commun des six
+  moteurs conservé. Achat : nouvel onglet mocké, absence de référent et d'accès
+  privé, refus contextuel sans lecture commerciale, prix non disponible,
+  origine absente, pagination sans multiplication des lectures et actualisation.
+- ESLint `npx eslint src tests scripts server.cjs`, `git diff --check`, guidance
+  et sources exportées Projet vérifiés sans erreur. Aucune preuve de paiement
+  ou de déploiement réel n'est revendiquée.
