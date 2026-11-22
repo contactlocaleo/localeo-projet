@@ -39,9 +39,10 @@ Les indicateurs distinguent inscriptions effectives, passages validés, lots ret
 
 ![Le seuil de validation propose de 1 à 6 validations pour les 6 commerçants sélectionnés dans cet exemple.](illustrations/guide-quotidien/seuil-validation-1280.png)
 
-1. Ouvrez **Animations**, puis l'action de création. Choisissez un modèle proposé dans votre offre.
-2. Renseignez le titre, la présentation, la période et la commune. Préparez le règlement et le mode de dotation.
-3. Enregistrez le brouillon puis retrouvez l'**Assistant** : il vous conduit vers les informations et accords encore nécessaires.
+1. Ouvrez **Animations**, puis **Créer** sur téléphone (**Créer une animation** sur ordinateur). Pour retrouver une saisie enregistrée, choisissez **Préparations**, puis **Reprendre la préparation**. Les préparations plus anciennes restent accessibles avec **Suivant** et **Précédent**.
+2. Sur téléphone, avancez une étape à la fois. Le sélecteur nomme l'étape courante ; **Continuer** et **Précédent** permettent de naviguer. La commune active et le modèle restent visibles.
+3. Lorsque proposé, utilisez **Enregistrer la préparation** dans le pied d'actions, ou **Autres actions > Enregistrer et quitter**. Attendez la confirmation : continuer ne sauvegarde pas automatiquement et enregistrer ne publie rien.
+4. Après **Créer le brouillon**, retrouvez l'**Assistant**, qui indique les informations et accords encore nécessaires. Dans **Configuration**, changez de partie sans perdre votre saisie ; utilisez **Enregistrer** pour la confirmer.
 
 ### Régler le seuil de validation
 
@@ -103,11 +104,11 @@ Une étape invalide n'élimine pas automatiquement le joueur. Si le seuil de val
 
 **Objectif :** savoir qui doit agir avant le lancement et vérifier les supports terrain.
 
-![La préparation de l'animation regroupe les commerces concernés et leur état de préparation.](illustrations/guide-quotidien/preparation-1024.png)
+![Sur téléphone, le sélecteur nomme l'étape Terrain et les contrôles indiquent ce qu'il reste à vérifier.](illustrations/guide-quotidien/preparation-mobile-detail-390.png)
 
-1. Dans l'animation, ouvrez la rubrique de **préparation** et vérifiez les commerces sollicités et les réponses reçues.
+1. Dans l'animation, le sélecteur **Rubrique de l’animation** donne accès à **Invitations** et **Préparation terrain**. Vérifiez les commerces sollicités et les réponses reçues.
 2. Expliquez à chacun sa mission : accueillir les joueurs, présenter une vitrine ou un prix, valider un passage, installer un support ou remettre un lot selon le modèle.
-3. Pour une chasse ou un passeport préparé avec Léo, relisez le contenu, l'ordre des étapes et les lieux. Faites corriger les éléments signalés avant publication.
+3. Pour une chasse avec Léo, le sélecteur **Étape de préparation** nomme les étapes et leur état. Relisez parcours et lieux, puis contrôlez organisation, commerces, terrain et publication. Dépliez les **points à résoudre avant publication**. Pour un passeport assisté, relisez également les contenus avant de les valider.
 4. Contrôlez le règlement, les consignes et les supports à diffuser. Les validations de préparation ne remplacent pas la commande de publication.
 
 ### Utiliser le suivi de préparation

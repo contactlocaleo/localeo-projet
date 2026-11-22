@@ -179,6 +179,48 @@ est identique au PDF canonique. Le build `tmp/quality-build-ZhDZiQ` a servi le
 nouveau PDF : accès clavier, HTTP 200, contenu identique et aide disponible
 avec assistance HTTP 503 vérifiés à 390/1024 px par le mode `--access-only`.
 
+## Ajout du 22 novembre 2026 — parcours mobile first
+
+`preparation-mobile-detail-390.png` illustre le chapitre 6 : sélecteur nommé,
+étape Terrain et contrôles. Cadrage navigateur de 390 × 480 px, sans modification
+du DOM ni retouche. `animations-mobile-390.png` conserve la preuve de l'entrée
+Animations : première action visible à 390 × 844 sans défilement. La base Git
+Animation est `bb20ac9` pour la capture de liste, complétée par le lot mobile.
+
+Les captures proviennent de la vraie application avec API synthétiques,
+origine `api.test.invalid`, données fictives et ports HTTP locaux éphémères :
+
+```powershell
+$env:ANIMATION_TEST_DIST = 'tmp/mobile-first-release-build'
+node scripts/build-pwa-tests.mjs
+node tests/browser/hunt-guided-workflow.mjs
+$env:HUNT_GUIDE_CAPTURE_ONLY = '1'
+node tests/browser/hunt-guided-workflow.mjs
+Remove-Item Env:HUNT_GUIDE_CAPTURE_ONLY
+$env:ANIMATION_TEST_DIST = 'tmp/mobile-push-build'
+node scripts/build-pwa-tests.mjs
+node tests/browser/mobile-first-lists.mjs
+```
+
+Sources des captures : `tmp/mobile-first-hunt-1795373098393` et
+`tmp/mobile-first-lists-7sWASH` dans Animation (recette isolée dans
+`tmp/mobile-push-o98dbd_h/localeo-animation`). Le mode de capture est annoncé
+`captured` ; la recette Chasse distincte a réussi 5 scénarios / 166 contrôles
+dans `tmp/mobile-first-hunt-1795373016340/report.json`. Les listes ont réussi
+5 scénarios, y compris texte 200 %, dans leur propre rapport.
+
+Le PDF comporte quinze pages. Elles ont toutes été rendues et relues, avec
+inspection détaillée des chapitres 3 et 6, puis la copie embarquée a été
+synchronisée et contrôlée. Les prévisualisations du lot isolé se trouvent dans
+`tmp/mobile-push-guide`.
+Cette recette locale ne qualifie ni appareils physiques ni environnement distant.
+
+Le build de recette `tmp/mobile-push-build` embarque le PDF actualisé.
+`tests/browser/animation-guide.mjs --access-only` a vérifié ses liens au clavier,
+son contenu servi identique au canonique et l'accès avec assistance indisponible
+à 390/1024 px. Rapports de requêtes dans `tmp/mobile-push-guide-access` (aucune
+requête inconnue, erreur navigateur ou écriture).
+
 ## Ajout du 22 novembre 2026 - seuil de validation
 
 La capture `seuil-validation-1280.png` cadre le champ réel **Seuil de validation**

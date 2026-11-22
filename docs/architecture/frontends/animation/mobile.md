@@ -32,6 +32,32 @@ distinguent les essais locaux de la recette sur appareils physiques.
 
 ## Vérification automatisée
 
+### Animations et préparation mobile first
+
+La rubrique Animations expose les vues **Animations / Préparations** avant les
+listes. La recherche reste visible ; les filtres avancés et vues enregistrées
+se déplient. La sélection multiple est explicite sur téléphone. La reprise des
+préparations conserve des curseurs bornés, la position et le focus en mémoire.
+
+Sous 768 px, la configuration présente une partie à la fois ; les autres parties
+restent montées et sont masquées au clavier comme aux lecteurs d'écran. Le guide
+Chasse nomme les étapes et leurs états dans un sélecteur. Les déplacements entre
+panneaux retenus conservent les saisies, y compris dans l'historique navigateur ;
+quitter l'espace garde sa confirmation et une commande non confirmée bloque
+toute navigation. Cette exception de continuité est limitée aux coordonnées
+`preparation` et `parametres` d'une même animation/configuration.
+
+Les pieds d'actions rassemblent navigation et enregistrement explicite. Ils
+reviennent dans le flux à faible hauteur, avec le clavier ou lorsque leur taille
+dépasse 35 % de l'espace de travail disponible ; aucune sauvegarde ne découle
+d'un simple changement d'étape. Les erreurs restent près de la commande.
+
+Les recettes `mobile-first-lists.mjs`, `preparation-section-navigation.mjs`,
+`hunt-guided-workflow.mjs` et `wa-b1-preparations.mjs` utilisent un build fourni
+par `ANIMATION_TEST_DIST`, des API synthétiques et des ports éphémères.
+
+### Socle responsive
+
 Les tests de composants font partie de `npm test` : conservation des coordonnées
 masquées, des libellés, des actions désactivées, des sélections, des états vides et
 des tableaux de bureau.

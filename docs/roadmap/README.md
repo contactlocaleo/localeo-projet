@@ -1,5 +1,10 @@
 # Roadmap par etat
 
+**22 novembre 2026 — E73-EVO-ANIMATION-MOBILE-FIRST** : parcours complet
+Animations / Préparations, création et configuration par étape sur téléphone.
+[Critères MF-01 à MF-08](../specifications/epic-73-animation-et-ou-coffrets/ux-productivite-organisateur.md#évolution-du-22-novembre-2026--animations-et-préparations-mobile-first).
+Implémentation et recettes locales réalisées ; clôture historique E73 conservée.
+
 **22 novembre 2026 — E73-EVO-DASHBOARD-JOUR** :
 [tableau de bord quotidien, DJ-01 à DJ-09](../specifications/epic-73-animation-et-ou-coffrets/ux-productivite-organisateur.md#évolution-du-22-novembre-2026--tableau-de-bord-quotidien),
 réalisation et vérifications locales. Activité confirmée du jour/sept jours et

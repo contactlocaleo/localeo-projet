@@ -498,6 +498,84 @@ Preuves attendues : tests de politique D2 et de seuil automatique/manuel, tests 
 - `pnpm exec tsc --noEmit` et lint ciblé des fichiers UI du lot : **réussis** avant intégration des lots parallèles.
 - Les bancs `po-creation-continuite.mjs` (nouveau scénario passeport à 1280 et 390 pixels) et `po-organisateur.mjs` (suivi distinct du bilan) sont adaptés. Leur exécution et celle des assertions PostgreSQL de productivité restent à consigner dans la vérification intégrée ; ces adaptations seules ne prouvent pas les parcours.
 
+## Évolution du 22 novembre 2026 — animations et préparations mobile first
+
+Référence **E73-EVO-ANIMATION-MOBILE-FIRST**. Le parcours complet est utilisable
+sur téléphone, une étape à la fois. La clôture historique E73 est conservée.
+La liste possédait déjà des fiches mobiles ; les préparations enregistrées
+étaient placées après les résultats et la pagination. Le guide Chasse masquait
+les noms des étapes et dispersait sauvegarde et navigation.
+
+| Critère | Comportement attendu |
+| --- | --- |
+| MF-01 | Animations propose deux vues Animations / Préparations, accessibles avant les listes. `/animations?vue=preparations` ouvre directement la reprise. Les liens existants restent utilisables. |
+| MF-02 | Recherche visible sur mobile, filtres avancés dépliables avec compteur, prochaine action visible. La sélection mobile est explicite ; suppression limitée aux brouillons sélectionnés de la page et confirmée. |
+| MF-03 | La reprise présente nom, modèle et état. Les curseurs précédent/suivant restent bornés en mémoire ; réessayer conserve la page. Ouvrir puis revenir restaure page, position et focus, ou annonce un repositionnement. |
+| MF-04 | La configuration mobile expose une partie à la fois avec étape nommée et navigation précédent/suivant. Les parties inactives restent montées mais ne sont ni visibles ni accessibles au clavier. Changer de partie conserve les saisies et n’enregistre rien. |
+| MF-05 | Le guide Chasse expose noms et états des cinq étapes. La tâche et ses contrôles précèdent les blocages globaux dépliables. Une visite ne vaut jamais validation. |
+| MF-06 | Les actions de préparation et l’état d’enregistrement sont regroupés en pied. Enregistrer reste explicite ; Continuer n’enregistre rien. Conflit, résultat incertain, garde de sortie et confirmations restent actifs. |
+| MF-07 | À 320/390/768/1440 px, texte 200 % et faible hauteur, aucune barre ne masque le travail ou le focus, aucune page ne déborde horizontalement ; cibles 44 px et champs mobiles 16 px minimum. Le pied revient dans le flux si le clavier ou la hauteur l’exige. |
+| MF-08 | Guide Animation actualisé : source, captures de la vraie interface avec API synthétique, PDF entièrement rendu/relu, copie embarquée et accès vérifiés. Guide Commerçant examiné et impact justifié. |
+
+**Interfaces et invariants.** Aucune API, permission, règle de domaine ou donnée
+métier nouvelle. Les lectures passent par les clients existants ; les contextes
+UI sont bornés en mémoire et partitionnés par session/organisation/commune.
+La navigation conserve les retours internes autorisés. Les commandes et reçus,
+versions et contrôles serveur gardent leurs propriétaires actuels.
+
+MF-04 précise AP-03 pour les changements d'étape d'une même préparation Chasse :
+la saisie reste montée et conservée, y compris avec Précédent/Suivant navigateur ;
+aucune confirmation d'abandon n'est demandée pour ce seul déplacement interne.
+Une sortie vers une autre animation, une autre rubrique ou un autre périmètre
+garde la confirmation existante. Une commande en cours ou incertaine continue
+de bloquer la navigation, même interne.
+
+**Impacts.** Animation et Projet uniquement. Aucun changement backend,
+Marketplace/Live ou Pro ; le guide Commerçant conserve ses parcours, libellés
+et règles. Aucune migration ni adaptation des jeux de démonstration ou de la
+configuration de déploiement. Les travaux déjà en cours sur le pilotage et
+l’iconographie sont conservés, avec leurs propres preuves.
+
+**Preuves prévues.** Recettes `mobile-first-lists`, `preparation-section-navigation`,
+`hunt-guided-workflow` et `wa-b1-preparations` sur un build synthétique isolé,
+tests ciblés et chaîne types/lint/tests/build ; captures mobile/bureau et texte
+agrandi. Les résultats exécutés et limites sont consignés au bilan après recette.
+
+### Réalisation et preuves mobile first
+
+- MF-01 à 03 : recette `mobile-first-lists` réussie, 5 formats
+  (320/390/768/1440 px et texte 200 %), rapport
+  `tmp/mobile-first-lists-7sWASH/report.json`. Première action visible sans
+  défiler à 390 × 844, curseur après échec et retour focus vérifiés.
+- MF-04/07 : recette `preparation-section-navigation` réussie, 10 scénarios,
+  rapport `tmp/preparation-navigation-report-xW18zX/report.json` : parties
+  masquées, saisie conservée, Passeport/Tombola/Vitrines/Juste Prix, texte
+  200 % et faible hauteur. À faible hauteur, les barres reviennent dans le
+  document et la tâche sélectionnée reste atteignable.
+- MF-05/06/07 : Chasse réussie, 5 scénarios / 166 contrôles, rapport
+  `tmp/mobile-first-hunt-1795375668188/report.json` ; grandes étapes et
+  Retour/Avancer préservent la saisie, sortie annulée, refus 409 visible au pied
+  et absence de renvoi automatique. 15 tests ciblés gardes/préparation réussis,
+  dont six nouveaux sur la navigation retenue et l'exclusion des routes réservées
+  de création/archives, y compris encodées. Sauvegarde manuelle :
+  6 scénarios reprise/réponse perdue/conflit réussis, rapport
+  `tmp/mobile-push-manual/report.json`.
+- Le lot isolé passe le contrôle de types, le lint, le build synthétique et les
+  416 tests Node. Les rapports relatifs à Animation correspondent à
+  l'arbre de recette `tmp/mobile-push-o98dbd_h/localeo-animation`.
+  Les recettes complémentaires couvrent le clonage (31 scénarios), la
+  productivité (10 scénarios) et les alertes de liste.
+- MF-08 : source et captures Animation actualisées, quinze pages PDF rendues et
+  relues, copie embarquée identique. Accès clavier et HTTP du PDF vérifiés à
+  390/1024 px avec aide indisponible, sur `tmp/mobile-push-build`.
+  Rapports dans `tmp/mobile-push-guide-access`. Provenance et commandes dans le
+  [README des illustrations](../../produit/formation/animation/illustrations/guide-quotidien/README.md#ajout-du-22-novembre-2026--parcours-mobile-first).
+  Guide Commerçant examiné, sans parcours ou règle visible modifiés.
+
+Contrôles documentaires : `check_guidance.py` et
+`sync_documentation.py --check-sources` réussis. Les recettes utilisent des API
+synthétiques. La recette sur appareil physique et sur cible déployée reste à réaliser.
+
 ## Évolution du 22 novembre 2026 — tableau de bord quotidien
 
 **E73-EVO-DASHBOARD-JOUR**, plan utilisateur validé, réalisation locale vérifiée.
