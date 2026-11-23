@@ -1077,11 +1077,11 @@ objectifs ne sont pas retenues. La clôture historique E73 est conservée.
 
 #### Parcours et sens des mesures
 
-Un bloc **Votre activité dans la commune** est disponible dans **Bilans** et
-le **Bilan d'une animation**. Il annonce commune, organisation, périodes et
-périmètre. Il reste indépendant des filtres de type/date de la liste et des
-chiffres de l'édition ouverte : ce sont les données de l'organisation dans
-cette commune. Les autres organisations ne sont ni lues ni comparées.
+Le bloc **Votre activité dans la commune** est disponible dans la page générale
+**Bilans**. Il présente la commune, l’organisation, les périodes et le périmètre.
+Les filtres de type et de date de la liste sont indépendants du profil. Les
+indicateurs portent sur l’activité de l’organisation dans la commune active.
+Les autres organisations ne sont ni lues ni comparées.
 
 La fenêtre courante couvre les **douze derniers mois calendaires glissants**
 finissant à l'instant d'observation UTC, bornes incluses au début et exclues
@@ -1161,7 +1161,7 @@ capacité hébergée garantie sans campagne de charge représentative.
 | DY-01 | Commune/organisation explicites ; refus hors commune, session ou droit révoqué avant SQL ; tests application et HTTP | Contrat privé nouveau, aucun droit interorganisations |
 | DY-02 | Fenêtres adjacentes, bornes, 29 février, UTC naïf et archives ; publication non datée signalée ; tests domaine et PostgreSQL | Historiques non réécrits, anonymisation inchangée |
 | DY-03 | Quatre axes sans note ; hausse/baisse/stable/référence zéro et qualité partielle ; règle pure testée | Version de définition dans le DTO et méthode consultable |
-| DY-04 | Pictogrammes et libellés, valeurs/tendances, comparaison visible et méthode au clavier ; mobile/zoom 200 %, erreur/réessai ; données anciennes ignorées | Deux entrées Animation, pas d'écran public ni de modification PDF |
+| DY-04 | Pictogrammes et libellés, valeurs/tendances, comparaison visible et méthode au clavier ; mobile/zoom 200 %, erreur/réessai ; données anciennes ignorées | Page générale **Bilans**. Le bilan individuel affiche les résultats de son édition et ne charge pas le profil communal. |
 | DY-05 | Sortie et coût applicatif bornés ; requête SQL unique et tests de croissance N/10N, plans et index | Migration additive si nécessaire, aucune conservation nominative ajoutée |
 | DY-06 | Contrats générés synchronisés, documentation fonctionnelle/ops et démonstration examinées ; revue indépendante et preuves au bilan | Source canonique ici ; fixtures synthétiques, pas de génération sur TEST |
 
@@ -1170,6 +1170,13 @@ les résultats des preuves prévues ci-dessus, la revue indépendante et les
 limites de capacité sont dans le [bilan de livraison](verification-livraison.md#évolution--e73-evo-dynamisme-commune-11-novembre-2026).
 Aucune migration nouvelle : les index existants suffisent pour la recette
 locale, sans préjuger de la tenue en charge hébergée.
+
+#### Ajustement du 23 novembre 2026 — emplacement du profil communal
+
+Le retrait du profil communal du bilan individuel remplace l’affichage initial
+à deux emplacements. Le critère DY-04 est vérifié par
+`tests/browser/activity-profile.mjs`, qui couvre l’affichage dans **Bilans** et
+l’absence du bloc et de sa requête dans le bilan individuel.
 
 ## 8. Réversibilité et fermeture
 
