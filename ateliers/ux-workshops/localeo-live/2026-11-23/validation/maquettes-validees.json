@@ -1,0 +1,157 @@
+{
+  "version": "2026-11-23-maquettes-v1",
+  "date_decision": "2026-11-23",
+  "timezone": "Europe/Paris",
+  "protocole": "prompts/04-validation.md",
+  "decision_source": "prompts/04-decision-utilisateur.txt",
+  "orientations": {
+    "B1": [
+      "B1-fiche",
+      "B1-formulaire"
+    ],
+    "B3": [
+      "B3-qr",
+      "B3-confirmation",
+      "B3-reprise",
+      "B3-incertain",
+      "B3-invalide"
+    ],
+    "C1": [
+      "C1-disponible",
+      "C1-bon",
+      "C1-incertain",
+      "C1-remis",
+      "C1-expire",
+      "C1-annule",
+      "C1-lots"
+    ],
+    "D1": [
+      "D1-programme",
+      "D1-prochainement",
+      "D1-futur",
+      "D1-partiel"
+    ],
+    "D3": [
+      "D3-indisponible",
+      "D3-temporaire",
+      "D3-retour"
+    ],
+    "E1": [
+      "E1-refus",
+      "E1-recuperation",
+      "E1-erreur"
+    ]
+  },
+  "fichiers_maquettes_et_galerie": [
+    {
+      "path": "visuels/comparatif-avant-apres.html",
+      "sha256": "19ef357d8d6f93b3dc51a728ec7aad7901e564dbff682315b390da4eff66f489"
+    },
+    {
+      "path": "visuels/comparatif.css",
+      "sha256": "6d7d7c84df797f20b6214734ad8b75a1f379781093e4dfe9ef270a974fd9de68"
+    },
+    {
+      "path": "visuels/comparatif.js",
+      "sha256": "90b9ea0c2f2a9cf6911fd92c42ca820bda6c2a9e3eaa5059f269d74a9a089c05"
+    },
+    {
+      "path": "visuels/maquettes-apres/dm-sans-LICENSE.txt",
+      "sha256": "6fbd040a29c2037a765dfb9f2561e9965b5c95c6dcb5dce516089d63d5f17af7"
+    },
+    {
+      "path": "visuels/maquettes-apres/dm-sans.woff2",
+      "sha256": "9fea608a947e67020c33cad9a6fe3d60c54119dfb8cff87768a8117a15ed7543"
+    },
+    {
+      "path": "visuels/maquettes-apres/live.css",
+      "sha256": "7eed428eec74d65067a5d0242eec51cd769ab7c1c97903039fbd44e95ae173d8"
+    },
+    {
+      "path": "visuels/maquettes-apres/lots-accessibilite.js",
+      "sha256": "efc5ce5d99acf44ecaf8e6c2e3684702101118fc2344e899000541909551fba9"
+    },
+    {
+      "path": "visuels/maquettes-apres/marque-localeo.png",
+      "sha256": "f3ad28e2b4266aa1d61acba4a11455cac26afd8494facad8010464711ecacb94"
+    },
+    {
+      "path": "visuels/maquettes-apres/oswald-LICENSE.txt",
+      "sha256": "23916cdee678823c3c517c699cb2e043088de0d46c959eeaa168b54bb84534df"
+    },
+    {
+      "path": "visuels/maquettes-apres/oswald.woff2",
+      "sha256": "bd73278ee0c50041b91b4c03d1229e35b501637f46b6409e7da2d3a758446ea5"
+    },
+    {
+      "path": "visuels/maquettes-apres/participation.js",
+      "sha256": "7655d4ea55aba3798eac4af6cf43d274ba8b0bb248e4d0d8cf61993f57ab5e83"
+    },
+    {
+      "path": "visuels/maquettes-apres/planche.html",
+      "sha256": "574b3d1c2a4df06e33a219120726b279da919a0b463717b3631873fd2f30414f"
+    },
+    {
+      "path": "visuels/maquettes-apres/planche.js",
+      "sha256": "58a8bbd183ae6a1dfe505b8c4c16fbd4f5028d55bb84856c939f55bc42a98087"
+    },
+    {
+      "path": "visuels/maquettes-apres/programme.js",
+      "sha256": "7957ab3ec1b14035c9cfe3c98f24e118c4021308850879298564be1156695158"
+    }
+  ],
+  "captures_avant_referencees": [
+    {
+      "path": "visuels/captures-avant/20-programme-bouliac-390.png",
+      "sha256": "1fa0d142208ac84b2dced0912e48554e9babf6e2b0e58422af624c4261172915"
+    },
+    {
+      "path": "visuels/captures-avant/21-prochainement-clavier-390.png",
+      "sha256": "aade398a7ec95c138d02d6a45adde965064b3cf88e14501a708ac7520e948054"
+    },
+    {
+      "path": "visuels/captures-avant/27-programme-retabli-390.png",
+      "sha256": "173e32374ca352cf3365503e604d355526104b3c43aa9ae8e3d1064337a127f4"
+    },
+    {
+      "path": "visuels/captures-avant/31-fiche-qr-public-390.png",
+      "sha256": "d2acccca0b6a443e150589b1395a85af1ff6decd088d67c4129d2c29ad62db08"
+    },
+    {
+      "path": "visuels/captures-avant/34-lots-vides-390.png",
+      "sha256": "f7408e39207f2dc872221098ee679b702af115e2b6756a0cb878888f532cf894"
+    },
+    {
+      "path": "visuels/captures-avant/35-participations-vides-390.png",
+      "sha256": "9b506e8b5f3503f544aed645e3bf37feac4b3b3907dfe4bda4a0d3d79d77505b"
+    },
+    {
+      "path": "visuels/captures-avant/37-qr-refuse-focus-390.png",
+      "sha256": "0a408ceda2e7ebd5cff1e864b346a6dab33c101a5b0d2268f4812d28af7f8678"
+    },
+    {
+      "path": "visuels/captures-avant/40-recuperation-stable-390.png",
+      "sha256": "d2fe5016e174ce3de3432bb0e5bd8cf62c33d8b5315041d14ad61de8daaa1073"
+    },
+    {
+      "path": "visuels/captures-avant/41-formulaire-tombola-email-390.png",
+      "sha256": "2acda0d6004a5e10ef5e3f42fb3373f187125780b7e9e75e23c360684af6b038"
+    },
+    {
+      "path": "visuels/captures-avant/61-passeport-detail-390.png",
+      "sha256": "19858f65bfd46be4ffc4ca94483de8dc2b7a495258a12e7a2d7fe0163028e0a2"
+    },
+    {
+      "path": "visuels/captures-avant/63-tombola-inscription-action-390.png",
+      "sha256": "07498cce1f2142d61eb91db3522e5810f1265013388c82ca17c5af44671c2dfd"
+    },
+    {
+      "path": "visuels/captures-avant/66-programme-contre-verification-390.png",
+      "sha256": "9cc72317e2d5644c54254a034b03880e734050903dbc43cef6b81cb664856da5"
+    }
+  ],
+  "visuel_de_contexte_fourni": {
+    "path": "visuels/Live-meslots.jpg",
+    "sha256": "3c5ee928b1afd2330fa86753b193f22c0c3bb854b4f98efef69ae66c77decd76"
+  }
+}

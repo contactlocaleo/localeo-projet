@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Localeo Live · Comparatif UX de Bouliac</title>
+  <link rel="stylesheet" href="maquettes-apres/live.css">
+  <link rel="stylesheet" href="comparatif.css">
+  <script defer src="maquettes-apres/participation.js"></script>
+  <script defer src="maquettes-apres/lots-accessibilite.js"></script>
+  <script defer src="maquettes-apres/programme.js"></script>
+  <script defer src="comparatif.js"></script>
+</head>
+<body>
+  <header class="gallery-header">
+    <div class="gallery-width gallery-mark">
+      <img src="maquettes-apres/marque-localeo.png" alt="" width="40" height="40">
+      <strong>Localeo <em>Live</em></strong>
+      <span>Bouliac · 23 nov. 2026</span>
+    </div>
+  </header>
+  <main class="gallery-width gallery-main">
+    <div class="intro">
+      <h1>Comparatif avant / après</h1>
+      <p>Six orientations prioritaires du workshop simulé. Les planches APRÈS illustrent des états locaux.</p>
+    </div>
+    <nav id="orientations" class="orientations" aria-label="Orientations du workshop"></nav>
+    <section class="selection" aria-labelledby="title">
+      <div>
+        <p class="eyebrow" id="mission"></p>
+        <h2 id="title"></h2>
+        <p id="benefit" class="benefit"></p>
+      </div>
+      <dl class="metrics">
+        <div><dt>Priorité</dt><dd id="priority"></dd></div>
+        <div><dt>Vote simulé</dt><dd id="vote"></dd></div>
+        <div><dt>Effort</dt><dd id="effort"></dd></div>
+      </dl>
+      <div class="state-control">
+        <label for="state">État affiché</label>
+        <select id="state"></select>
+      </div>
+    </section>
+    <div class="compare-switch" role="group" aria-label="Version affichée">
+      <button type="button" data-side="before" aria-pressed="false">Avant</button>
+      <button type="button" data-side="after" aria-pressed="true">Après</button>
+    </div>
+    <div class="comparison" data-side="after">
+      <figure class="compare-column before">
+        <figcaption>
+          <div class="caption-heading">
+            <h3>Avant</h3><span id="kind" class="badge"></span>
+          </div>
+          <p id="before-note" class="caption-note"></p>
+          <a id="source" class="open" target="_blank" rel="noopener">Ouvrir la capture</a>
+        </figcaption>
+        <div class="preview">
+          <img id="capture" alt="" width="390" height="844" hidden>
+          <p id="missing" class="missing" hidden>Capture équivalente indisponible pour cet état.</p>
+        </div>
+        <a id="extra-source" class="open" target="_blank" rel="noopener" hidden></a>
+      </figure>
+      <figure class="compare-column after">
+        <figcaption>
+          <div class="caption-heading"><h3>Après</h3><span class="badge">Maquette</span></div>
+          <p id="after-note" class="caption-note"></p>
+          <a id="standalone" class="open" target="_blank" rel="noopener">Ouvrir la planche</a>
+        </figcaption>
+        <div class="preview">
+          <iframe id="mock" title="Planche de maquette Localeo Live"></iframe>
+        </div>
+      </figure>
+    </div>
+    <noscript><p>Activez JavaScript pour consulter les états du comparatif.</p></noscript>
+    <footer class="gallery-footer">
+      <a href="reference-maquettes.md">Références et conditions des planches</a>
+      <a href="revue-contradictoire.md">Revue contradictoire simulée</a>
+    </footer>
+  </main>
+</body>
+</html>

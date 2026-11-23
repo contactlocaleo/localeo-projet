@@ -1,0 +1,133 @@
+[
+  {
+    "file": "40-recuperation-stable-390.png",
+    "url": "https://test-live.localeo.city/live/retrouver-mon-carnet",
+    "body": "Localeo\nLive\nTEST\nMessages\nMenu\nRetrouver mon carnet\n\nVos participations et leurs lots associés, grâce à un lien par e-mail.\n\nE-mail utilisé pour vos inscriptions\nRecevoir mon lien personnel\n\nLes coffrets gardent leur récupération par lien personnel.\n\nJ’ai mon lien\nJ’ai un coffret\nJ’ai une sauvegarde\nRetour à mon carnet\nMon carnet\nMes lots\nDécouvrir"
+  },
+  {
+    "name": "juste-prix",
+    "url": "https://test-live.localeo.city/live/animations/b7c278b9-e325-4e34-bc8e-9c9772f7da42",
+    "actions": [
+      [
+        "←\nRetour aux animations",
+        "/live/decouvrir",
+        null
+      ],
+      [
+        "",
+        null,
+        "Actualiser l’animation"
+      ],
+      [
+        "Vérification de votre inscription…",
+        null,
+        null
+      ],
+      [
+        "Retrouver mon inscription",
+        null,
+        null
+      ],
+      [
+        "Partager",
+        null,
+        "Partager"
+      ],
+      [
+        "Adresse et horaires",
+        "/live/commercants/e22d92ce-84f9-4d2f-b0af-ffceaf65d733",
+        null
+      ],
+      [
+        "Tous les commerçants",
+        "/live/commercants?animation_id=b7c278b9-e325-4e34-bc8e-9c9772f7da42",
+        null
+      ],
+      [
+        "",
+        "/live/messages?animation_id=b7c278b9-e325-4e34-bc8e-9c9772f7da42",
+        null
+      ]
+    ],
+    "body": "Localeo\nLive\nTEST\nMessages\nMenu\n←\nRetour aux animations\nL’animation\nEn coursBouliac\nTest juste prix Local\n\nEstimez le prix proposé par chaque commerce. Réponses restantes à consulter dans chaque étape. Tolérance : 0,50 €. Seuil : 1 commerce réussi. Bonne réponse et passage validé dans le même commerce requis, dans l’ordre de votre choix pendant le jeu. Une chance au tirage après qualification, sans gain automatique.\n\n1 tampon à collecter\n\n15 nov. 2026 → 21 nov. 2026\n\nLa date de fin prévue est atteinte. L’animation reste disponible jusqu’à sa clôture.\n\nParticipants\n2\nGagnants\n0\nLots à gagner\n1\nVérification de votre inscription…\nRetrouver mon inscription\nPartager\nComment jouer ?\n1\nChoisissez un commerce dans votre parcours Live et découvrez son produit.\n2\nSaisissez puis confirmez votre estimation du prix. Consultez vos réponses restantes dans le détail de chaque étape.\n3\nAprès une bonne réponse, présentez votre QR personnel au commerçant pour faire valider votre passage.\nÀ gagner\nLot libre · quantité : 1\nBon achat garni\nOù jouer ?\nCommercant Thibaut Animation Seul\nAdresse et horaires\nTous les commerçants\nL’animation en détail\nConditions et règlement\nBesoin d’aide ?\nMon carnet\nMes lots\nDécouvrir"
+  },
+  {
+    "name": "tombola-email",
+    "url": "https://test-live.localeo.city/live/animations/7cb5e0a4-0e72-4cc7-bc69-6234e3bed5f3",
+    "actions": [
+      [
+        "←\nRetour aux animations",
+        "/live/decouvrir",
+        null
+      ],
+      [
+        "",
+        null,
+        "Actualiser l’animation"
+      ],
+      [
+        "Lire le règlement",
+        "#animation-conditions",
+        null
+      ],
+      [
+        "M’inscrire à cette animation",
+        "/live/animations/7cb5e0a4-0e72-4cc7-bc69-6234e3bed5f3/inscription",
+        null
+      ],
+      [
+        "Retrouver mon inscription",
+        null,
+        null
+      ],
+      [
+        "Partager",
+        null,
+        "Partager"
+      ],
+      [
+        "Tous les commerçants",
+        "/live/commercants?animation_id=7cb5e0a4-0e72-4cc7-bc69-6234e3bed5f3",
+        null
+      ],
+      [
+        "",
+        "/live/messages?animation_id=7cb5e0a4-0e72-4cc7-bc69-6234e3bed5f3",
+        null
+      ]
+    ],
+    "body": "Localeo\nLive\nTEST\nMessages\nMenu\n←\nRetour aux animations\nL’animation\nEn coursBouliac\nTombola publique marché de noel\n\nInscrivez-vous par email pour participer au tirage\n\n21 nov. 2026 → 23 nov. 2026\n\nParticipants\n0\nGagnants\n0\nLots à gagner\n5\n\nInscription : Obligatoire\n\nLire le règlement\nM’inscrire à cette animation\nRetrouver mon inscription\nPartager\nComment jouer ?\n1\nSaisissez votre email\n2\nRecevez la confirmation d’inscription\n3\nConservez votre accès personnel reçu par email\nÀ gagner\nLot libre · quantité : 5\nBon achat 10 euro\nOù jouer ?\n\nDécouvrez les partenaires publics et leurs informations pratiques dans l’annuaire.\n\nTous les commerçants\nL’animation en détail\nConditions et règlement\nBesoin d’aide ?\nMon carnet\nMes lots\nDécouvrir"
+  },
+  {
+    "file": "41-formulaire-tombola-email-390.png",
+    "url": "https://test-live.localeo.city/live/animations/7cb5e0a4-0e72-4cc7-bc69-6234e3bed5f3/inscription",
+    "body": "Localeo\nLive\nTEST\nMessages\nMenu\n←\nRetour à l’animation\nINSCRIPTION À L’ANIMATION\nTombola publique marché de noel\n\nUne inscription gratuite. Aucun achat ni visite chez un commerçant.\n\n1 validations chez les commerçants participants pour tenter de gagner.\n\nConditions et règlement de l’animation\n\nLes quatre champs ci-dessous sont obligatoires.\n\nNom\nPrénom\nAdresse e-mail\nTéléphone\nVos choix\nJ’accepte le règlement de l’animation. Obligatoire\nValider mon inscription\nAnnuler\n\nVos coordonnées sont transmises à l’organisateur uniquement pour gérer votre participation. Le suivi de la commune reste facultatif.\n\nMon carnet\nMes lots\nDécouvrir"
+  },
+  {
+    "name": "passeport",
+    "url": "https://test-live.localeo.city/live/animations/32202f76-cdb3-4dcf-8751-fb530e8acdec",
+    "actions": [
+      [
+        "←\nRetour aux animations",
+        "/live/decouvrir",
+        null
+      ],
+      [
+        "",
+        null,
+        "Actualiser l’animation"
+      ],
+      [
+        "Réessayer",
+        null,
+        null
+      ],
+      [
+        "Mes participations",
+        "/live/animations",
+        null
+      ]
+    ],
+    "body": "Localeo\nLive\nTEST\nMessages\nMenu\n←\nRetour aux animations\nL’animation\nAnimation indisponible\n\nCette animation n’est plus disponible dans le programme public.\n\nRéessayer\nMes participations\nMon carnet\nMes lots\nDécouvrir"
+  }
+]

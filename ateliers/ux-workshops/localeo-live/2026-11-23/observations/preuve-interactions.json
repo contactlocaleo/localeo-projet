@@ -1,0 +1,274 @@
+{
+  "started": "2026-11-23T06:49:41.227Z",
+  "screens": [
+    {
+      "file": "34-lots-vides-320.png",
+      "width": 320,
+      "url": "https://test-live.localeo.city/live/lots",
+      "body": "Localeo\nLive\nTEST\nMessages\nMenu\nMes lots\nAucun lot à utiliser ou retirer pour le moment\n\nVos prochains gains apparaîtront ici avec vos accès personnels.\n\nDécouvrir les animations\nRetrouver mon carnet\nBesoin d’aide ?\nMon carnet\nMes lots\nDécouvrir",
+      "view": {
+        "innerWidth": 320,
+        "docWidth": 320,
+        "y": 0,
+        "focus": "A"
+      }
+    },
+    {
+      "file": "35-participations-vides-320.png",
+      "width": 320,
+      "url": "https://test-live.localeo.city/live/animations",
+      "body": "Localeo\nLive\nTEST\nMessages\nMenu\nMon carnet\nMes coffrets\nMes participations\nListe de mes participations\nRetrouver mon carnet\n\nParticipations et lots, par e-mail.\n\nJ’ai mon lien\nJ’ai un coffret\nJ’ai une sauvegarde\nGardez vos participations ici\n\nChoisissez une animation et inscrivez-vous pour retrouver votre participation ici.\n\nDécouvrir les animations\nMon carnet\nMes lots\nDécouvrir",
+      "view": {
+        "innerWidth": 320,
+        "docWidth": 320,
+        "y": 0,
+        "focus": "BODY"
+      }
+    },
+    {
+      "file": "30-retour-navigateur-390.png",
+      "width": 390,
+      "url": "https://test-live.localeo.city/live/decouvrir",
+      "body": "Localeo\nLive\nTEST\nMessages\nMenu\nDécouvrir\nBouliac\nChanger\n⌄\nAnimations\nCommerçants\nCoffrets\nLe programme de vos communes\nEn ce moment\n10\nProchainement\n0\n\nDans cet aperçu\n\nEn ce moment\nRechercher\n\nAnimation en cours\n\nPartager\nTEST2-Tombola Delphine-05/11/2026\n\nTombola\n\nBouliac\n\n6\nnov.\n\nDu 6 nov. 2026 au 13 nov. 2026\n\nTombola.\nParticipez au tirage chez les commerçants\n\nÀ gagnerLot fictif de formation\n\nAchat requis · sans minimum · chez un partenaire.\n\nVoir l’animation\n\nAnimation en cours\n\nPartager\nTombolat des commercants de Noel\n\nTombola\n\nBouliac\n\n14\nnov.\n\nDu 14 nov. 2026 au 15 nov. 2026\n\nTombola.\nParticipez au tirage chez les commerçants\n\nÀ gagnerDegustation vin\n\nAchat requis · sans minimum · chez un partenaire.\n\nVoir l’animation\n\nAnimation en cours\n\nPartager\nTest juste prix Local\n\nLe Juste Prix Local\n\nBouliac\n\n15\nnov.\n\nDu 15 nov. 2026 au 21 nov. 2026\n\nEstimez le prix proposé par chaque commerce. Réponses restantes à consulter dans chaque étape. Tolérance : 0,50 €. Seuil : 1 commerce réussi. Bonne réponse et passage validé dans le même commerce requis, dans l’ordre de votre choix pendant le jeu. Une chance au tirage après qualification, sans gain automatique.\n\nLe Juste Prix Local.\n1 tampon à collecter\n\nÀ gagnerBon achat garni\n\nVoir l’animation\n\nAnimation en cours\n\nPartager\nTest jeu des vitrines\n\nLe jeu des vitrines\n\nBouliac\n\n18\nnov.\n\nDu 18 nov. 2026 au 20 nov. 2026\n\nUn intrus par vitrine · 2 à 6 choix. Réponses restantes à consulter dans chaque étape. Seuil : 1 vitrine réussie. Bonne réponse suffisante, sans passage à faire valider. Une chance au tirage après qualification, sans gain automatique. Aucun achat requis.\n\nLe jeu des vitrines.\n1 tampon à collecter\n\nÀ gagnerLot 1\n\nVoir l’animation\n\nAnimation en cours\n\nPartager\ntest tombola thibaut\n\nTombola\n\nBouliac\n\n19\nnov.\n\nDu 19 nov. 2026 au 22 nov. 2026\n\nTombola.\nParticipez au tirage chez les commerçants\n\nÀ gagnerlot 1\n\nAchat requis · sans minimum · chez un partenaire.\n\nVoir l’animation\n\nAnimation en cours\n\nPartager\nTest tombola Locale\n\nTombola\n\nBouliac\n\n19\nnov.\n\nDu 19 nov. 2026 au 22 nov. 2026\n\nTombola.\nParticipez au tirage chez les commerçants\n\nÀ gagnerPanier garni\n\nAchat requis · sans minimum · chez un partenaire.\n\nVoir l’animation\n\nAnimation en cours\n\nPartager\nTest de tombola publique\n\nTombola publique\n\nBouliac\n\n21\nnov.\n\nDu 21 nov. 2026 au 22 nov. 2026\n\nTombola publique.\nInscription sur place avec le QR et le code du jour\n\nÀ gagnerLot 1\n\nVoir l’animation\n\nAnimation en cours\n\nPartager\nTombola publique marché de noel\n\nTombola publique\n\nBouliac\n\n21\nnov.\n\nDu 21 nov. 2026 au 23 nov. 2026\n\nTombola publique.\nUne inscription par e-mail pour le tirage\n\nÀ gagnerBon achat 10 euro\n\nVoir l’animation\n\nAnimation en cours\n\nPartager\nPasseport commercant\n\nPasseport commerçant\n\nBouliac\n\n22\nnov.\n\nDu 22 nov. 2026 au 29 nov. 2026\n\nPasseport commerçant.\n2 visites à faire valider\n\nÀ gagnerTest de lot 1\n\nAchat requis · sans minimum · chez un partenaire, pendant l’animation.\n\nVoir l’animation\n\nAnimation en cours\n\nPartager\nJuste prix local TCA\n\nLe Juste Prix Local\n\nBouliac\n\n22\nnov.\n\nDu 22 nov. 2026 au 22 nov. 2026\n\nEstimez le prix proposé par chaque commerce. Réponses restantes à consulter dans chaque étape. Tolérance : 1,00 €. Seuil : 2 commerces réussis. Bonne réponse et passage validé dans le même commerce requis, dans l’ordre de votre choix pendant le jeu. Une chance au tirage après qualification, sans gain automatique.\n\nLe Juste Prix Local.\n2 tampons à collecter\n\nÀ gagnerLot 1\n\nVoir l’animation\nProchainement\n\nAucune animation à venir dans votre sélection. Modifier mes communes\n\nMon carnet\nMes lots\nDécouvrir",
+      "view": {
+        "innerWidth": 390,
+        "docWidth": 390,
+        "y": 0,
+        "focus": "BODY"
+      }
+    },
+    {
+      "file": "31-fiche-qr-public-390.png",
+      "width": 390,
+      "url": "https://test-live.localeo.city/live/animations/712eb795-d81f-431d-94eb-a18fe975be1d",
+      "body": "Localeo\nLive\nTEST\nMessages\nMenu\n←\nRetour aux animations\nL’animation\nEn coursBouliac\nTest de tombola publique\n\nSur place, scannez le QR et saisissez le code du jour affiché à côté\n\n21 nov. 2026 → 22 nov. 2026\n\nLa date de fin prévue est atteinte. L’animation reste disponible jusqu’à sa clôture.\n\nParticipants\n2\nGagnants\n0\nLots à gagner\n1\n\nInscription : Obligatoire\n\nLire le règlement\nVérification de votre inscription…\nRetrouver mon inscription\n\nInscription sur place. Inscription sur place par QR code et code du jour.\n\nPartager\nComment jouer ?\n1\nScannez le QR code sur place\n2\nSaisissez le code du jour et vos coordonnées\n3\nConservez votre accès reçu par email\nÀ gagner\nLot libre · quantité : 1\nLot 1\nOù jouer ?\n\nDécouvrez les partenaires publics et leurs informations pratiques dans l’annuaire.\n\nTous les commerçants\nL’animation en détail\nConditions et règlement\nBesoin d’aide ?\nMon carnet\nMes lots\nDécouvrir",
+      "view": {
+        "innerWidth": 390,
+        "docWidth": 390,
+        "y": 0,
+        "focus": "animation-public-title"
+      }
+    },
+    {
+      "file": "34-lots-vides-390.png",
+      "width": 390,
+      "url": "https://test-live.localeo.city/live/lots",
+      "body": "Localeo\nLive\nTEST\nMessages\nMenu\nMes lots\nAucun lot à utiliser ou retirer pour le moment\n\nVos prochains gains apparaîtront ici avec vos accès personnels.\n\nDécouvrir les animations\nRetrouver mon carnet\nBesoin d’aide ?\nMon carnet\nMes lots\nDécouvrir",
+      "view": {
+        "innerWidth": 390,
+        "docWidth": 390,
+        "y": 0,
+        "focus": "A"
+      }
+    },
+    {
+      "file": "35-participations-vides-390.png",
+      "width": 390,
+      "url": "https://test-live.localeo.city/live/animations",
+      "body": "Localeo\nLive\nTEST\nMessages\nMenu\nMon carnet\nMes coffrets\nMes participations\nListe de mes participations\nRetrouver mon carnet\n\nParticipations et lots, par e-mail.\n\nJ’ai mon lien\nJ’ai un coffret\nJ’ai une sauvegarde\nGardez vos participations ici\n\nChoisissez une animation et inscrivez-vous pour retrouver votre participation ici.\n\nDécouvrir les animations\nMon carnet\nMes lots\nDécouvrir",
+      "view": {
+        "innerWidth": 390,
+        "docWidth": 390,
+        "y": 0,
+        "focus": "BODY"
+      }
+    },
+    {
+      "file": "36-menu-390.png",
+      "width": 390,
+      "url": "https://test-live.localeo.city/live/carnet",
+      "body": "Localeo\nLive\nTEST\nMessages\nMenu\nRetrouver mon carnet\nRéglages\nInstaller Localeo Live\nLes coffrets\nMon carnet\nVotre carnet commence ici\nParcours\nCoffrets\n\nVos animations ici, vos gains dans Mes lots, les dates du programme dans Découvrir.\n\nDécouvrir les animations\n\nDéjà participé ?\n\nRetrouver mon carnet\nÀ propos de mon carnet\nMon carnet\nMes lots\nDécouvrir",
+      "view": {
+        "innerWidth": 390,
+        "docWidth": 390,
+        "y": 0,
+        "focus": "SUMMARY"
+      }
+    },
+    {
+      "file": "37-qr-refuse-focus-390.png",
+      "width": 390,
+      "url": "https://test-live.localeo.city/live/animations/ajouter/atelier-ux-code-invalide",
+      "body": "Localeo\nLive\nTEST\nMessages\nMenu\n Retour à mon carnet\nGarder ma participation\n\nCet accès n’est plus disponible. Retrouvez votre lien personnel.\n\nRetrouver mon accès\n\nPas encore inscrit ? Revenez à votre carnet pour découvrir les animations.\n\nMon carnet\nMes lots\nDécouvrir",
+      "view": {
+        "innerWidth": 390,
+        "docWidth": 390,
+        "y": 0,
+        "focus": "A"
+      }
+    },
+    {
+      "file": "38-qr-vers-recuperation-390.png",
+      "width": 390,
+      "url": "https://test-live.localeo.city/live/retrouver-mon-carnet",
+      "body": "Localeo\nLive\nTEST\nMessages\nMenu\nRetrouver mon carnet\n\nVos participations et leurs lots associés, grâce à un lien par e-mail.\n\nVérification des moyens de récupération…\n\nLes coffrets gardent leur récupération par lien personnel.\n\nJ’ai mon lien\nJ’ai un coffret\nJ’ai une sauvegarde\nRetour à mon carnet\nMon carnet\nMes lots\nDécouvrir",
+      "view": {
+        "innerWidth": 390,
+        "docWidth": 390,
+        "y": 0,
+        "focus": "BODY"
+      }
+    },
+    {
+      "file": "34-lots-vides-430.png",
+      "width": 430,
+      "url": "https://test-live.localeo.city/live/lots",
+      "body": "Localeo\nLive\nTEST\nMessages\nMenu\nMes lots\nAucun lot à utiliser ou retirer pour le moment\n\nVos prochains gains apparaîtront ici avec vos accès personnels.\n\nDécouvrir les animations\nRetrouver mon carnet\nBesoin d’aide ?\nMon carnet\nMes lots\nDécouvrir",
+      "view": {
+        "innerWidth": 430,
+        "docWidth": 430,
+        "y": 0,
+        "focus": "A"
+      }
+    },
+    {
+      "file": "35-participations-vides-430.png",
+      "width": 430,
+      "url": "https://test-live.localeo.city/live/animations",
+      "body": "Localeo\nLive\nTEST\nMessages\nMenu\nMon carnet\nMes coffrets\nMes participations\nListe de mes participations\nRetrouver mon carnet\n\nParticipations et lots, par e-mail.\n\nJ’ai mon lien\nJ’ai un coffret\nJ’ai une sauvegarde\nGardez vos participations ici\n\nChoisissez une animation et inscrivez-vous pour retrouver votre participation ici.\n\nDécouvrir les animations\nMon carnet\nMes lots\nDécouvrir",
+      "view": {
+        "innerWidth": 430,
+        "docWidth": 430,
+        "y": 0,
+        "focus": "BODY"
+      }
+    }
+  ],
+  "events": [
+    {
+      "width": 320,
+      "calendarFocus": "live-period-A_VENIR"
+    },
+    {
+      "width": 320,
+      "key": "email",
+      "actions": [
+        [
+          "←\nRetour aux animations",
+          "/live/decouvrir",
+          null
+        ]
+      ]
+    },
+    {
+      "width": 320,
+      "key": "email",
+      "back": "https://test-live.localeo.city/live/decouvrir",
+      "scroll": 0
+    },
+    {
+      "width": 390,
+      "calendarFocus": "live-period-A_VENIR"
+    },
+    {
+      "width": 390,
+      "key": "qr-public",
+      "actions": [
+        [
+          "←\nRetour aux animations",
+          "/live/decouvrir",
+          null
+        ],
+        [
+          "Lire le règlement",
+          "#animation-conditions",
+          null
+        ],
+        [
+          "Vérification de votre inscription…",
+          null,
+          null
+        ],
+        [
+          "Retrouver mon inscription",
+          null,
+          null
+        ],
+        [
+          "Partager",
+          null,
+          "Partager"
+        ],
+        [
+          "Tous les commerçants",
+          "/live/commercants?animation_id=712eb795-d81f-431d-94eb-a18fe975be1d",
+          null
+        ],
+        [
+          "L’animation en détail",
+          null,
+          null
+        ],
+        [
+          "Conditions et règlement",
+          null,
+          null
+        ],
+        [
+          "Besoin d’aide ?",
+          null,
+          null
+        ]
+      ]
+    },
+    {
+      "width": 390,
+      "key": "qr-public",
+      "back": "https://test-live.localeo.city/live/decouvrir",
+      "scroll": 0
+    },
+    {
+      "width": 390,
+      "key": "email",
+      "actions": [
+        [
+          "←\nRetour aux animations",
+          "/live/decouvrir",
+          null
+        ]
+      ]
+    },
+    {
+      "width": 390,
+      "key": "email",
+      "back": "https://test-live.localeo.city/live/decouvrir",
+      "scroll": 0
+    },
+    {
+      "width": 390,
+      "key": "passeport",
+      "actions": [
+        [
+          "←\nRetour aux animations",
+          "/live/decouvrir",
+          null
+        ]
+      ]
+    },
+    {
+      "width": 390,
+      "key": "passeport",
+      "back": "https://test-live.localeo.city/live/decouvrir",
+      "scroll": 0
+    },
+    {
+      "width": 390,
+      "qrRecover": [
+        "rgb(255, 255, 255)",
+        "rgb(11, 61, 99)",
+        44
+      ],
+      "recovery": "https://test-live.localeo.city/live/retrouver-mon-carnet"
+    },
+    {
+      "width": 430,
+      "calendarFocus": "live-period-A_VENIR"
+    },
+    {
+      "width": 430,
+      "step": "fiche et action email",
+      "error": "TimeoutError: locator.click: Timeout 8500ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('a.live-discovery__join[href*=\"7cb5e0a4\"]')\u001b[22m\n"
+    }
+  ],
+  "finished": "2026-11-23T06:50:49.655Z"
+}

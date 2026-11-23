@@ -1,0 +1,314 @@
+{
+  "started": "2026-11-23T06:47:23.026Z",
+  "timezone": "Europe/Paris",
+  "screens": [
+    {
+      "width": 320,
+      "file": "01-carnet-320.png",
+      "url": "https://test-live.localeo.city/live/carnet",
+      "view": {
+        "x": 0,
+        "y": 0,
+        "innerWidth": 320,
+        "docWidth": 320,
+        "focus": "LocaleoLiveTESTMessagesMenuRetrouver mon carnetRéglagesInstaller Localeo LiveLes coffretsMon carnetL"
+      },
+      "headings": [
+        "Mon carnet",
+        "Votre carnet commence ici"
+      ],
+      "body": "Localeo\nLive\nTEST\nMessages\nMenu\nMon carnet\nVotre carnet commence ici\nParcours\nCoffrets\n\nVos animations ici, vos gains dans Mes lots, les dates du programme dans Découvrir.\n\nDécouvrir les animations\n\nDéjà participé ?\n\nRetrouver mon carnet\nÀ propos de mon carnet\nMon carnet\nMes lots\nDécouvrir"
+    },
+    {
+      "width": 390,
+      "file": "01-carnet-390.png",
+      "url": "https://test-live.localeo.city/live/carnet",
+      "view": {
+        "x": 0,
+        "y": 0,
+        "innerWidth": 390,
+        "docWidth": 390,
+        "focus": "LocaleoLiveTESTMessagesMenuRetrouver mon carnetRéglagesInstaller Localeo LiveLes coffretsMon carnetV"
+      },
+      "headings": [
+        "Mon carnet",
+        "Votre carnet commence ici"
+      ],
+      "body": "Localeo\nLive\nTEST\nMessages\nMenu\nMon carnet\nVotre carnet commence ici\nParcours\nCoffrets\n\nVos animations ici, vos gains dans Mes lots, les dates du programme dans Découvrir.\n\nDécouvrir les animations\n\nDéjà participé ?\n\nRetrouver mon carnet\nÀ propos de mon carnet\nMon carnet\nMes lots\nDécouvrir"
+    },
+    {
+      "width": 390,
+      "file": "02-choisir-bouliac-390.png",
+      "url": "https://test-live.localeo.city/live/decouvrir",
+      "view": {
+        "x": 0,
+        "y": 0,
+        "innerWidth": 390,
+        "docWidth": 390,
+        "focus": ""
+      },
+      "headings": [
+        "Découvrir",
+        "Choisir ma commune",
+        "Le programme de vos communes"
+      ],
+      "body": "Localeo\nLive\nTEST\nMessages\nMenu\nDécouvrir\n\nDes animations près de chez vous.\nUn carnet pour suivre vos aventures.\n\nChoisir ma commune\n\nRetrouvez les animations près de chez vous.\n\nRechercher une commune\n\n2 caractères minimum\n\nBouliac\n33270\nSuivre\nAutour de moi\nMes communes et ma localisation\nAnimations\nCommerçants\nCoffrets\nLe programme de vos communes\nRechercher\nMon carnet\nMes lots\nDécouvrir"
+    },
+    {
+      "width": 390,
+      "file": "12-calendrier-390.png",
+      "url": "https://test-live.localeo.city/live/decouvrir",
+      "view": {
+        "x": 0,
+        "y": 0,
+        "innerWidth": 390,
+        "docWidth": 390,
+        "focus": "LocaleoLiveTESTMessagesMenuRechercher une animationRetrouver mon carnetRéglagesInstaller Localeo Liv"
+      },
+      "headings": [
+        "Découvrir",
+        "Le programme de vos communes",
+        "En ce moment",
+        "Prochainement"
+      ],
+      "body": "Localeo\nLive\nTEST\nMessages\nMenu\nDécouvrir\nBouliac\nChanger\n⌄\nAnimations\nCommerçants\nCoffrets\nLe programme de vos communes\nEn ce moment\n—\nProchainement\n—\n\nDans cet aperçu\n\nChargement des animations…\n\nEn ce moment\nRechercher\n\nLecture du programme…\n\nProchainement\n\nLecture du programme…\n\nMon carnet\nMes lots\nDécouvrir"
+    },
+    {
+      "width": 430,
+      "file": "01-carnet-430.png",
+      "url": "https://test-live.localeo.city/live/carnet",
+      "view": {
+        "x": 0,
+        "y": 0,
+        "innerWidth": 430,
+        "docWidth": 430,
+        "focus": "LocaleoLiveTESTMessagesMenuRetrouver mon carnetRéglagesInstaller Localeo LiveLes coffretsMon carnetV"
+      },
+      "headings": [
+        "Mon carnet",
+        "Votre carnet commence ici"
+      ],
+      "body": "Localeo\nLive\nTEST\nMessages\nMenu\nMon carnet\nVotre carnet commence ici\nParcours\nCoffrets\n\nVos animations ici, vos gains dans Mes lots, les dates du programme dans Découvrir.\n\nDécouvrir les animations\n\nDéjà participé ?\n\nRetrouver mon carnet\nÀ propos de mon carnet\nMon carnet\nMes lots\nDécouvrir"
+    }
+  ],
+  "events": [
+    {
+      "width": 320,
+      "nav": "/",
+      "http": 200,
+      "chain": [
+        "/"
+      ]
+    },
+    {
+      "width": 320,
+      "step": "accueil",
+      "error": "TimeoutError: locator.click: Timeout 9500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('link', { name: 'D?couvrir les animations' })\u001b[22m\n"
+    },
+    {
+      "width": 320,
+      "nav": "/live/decouvrir",
+      "http": 200,
+      "chain": [
+        "/live/decouvrir"
+      ]
+    },
+    {
+      "width": 320,
+      "step": "programme",
+      "error": "TimeoutError: locator.waitFor: Timeout 9500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('link', { name: 'Voir l?animation' }).first() to be visible\u001b[22m\n"
+    },
+    {
+      "width": 320,
+      "nav": "/live/participations",
+      "http": 200,
+      "chain": [
+        "/live/participations"
+      ]
+    },
+    {
+      "width": 320,
+      "nav": "/live/carnet",
+      "http": 200,
+      "chain": [
+        "/live/carnet"
+      ]
+    },
+    {
+      "width": 320,
+      "reload": "https://test-live.localeo.city/live/retrouver-mon-carnet",
+      "heading": [
+        "Retrouver mon carnet"
+      ]
+    },
+    {
+      "width": 320,
+      "nav": "/live/animations/ajouter/atelier-ux-code-invalide",
+      "http": 200,
+      "chain": [
+        "/live/animations/ajouter/atelier-ux-code-invalide"
+      ]
+    },
+    {
+      "width": 320,
+      "nav": "/live/calendrier",
+      "http": 200,
+      "chain": [
+        "/live/calendrier"
+      ]
+    },
+    {
+      "width": 390,
+      "nav": "/",
+      "http": 200,
+      "chain": [
+        "/"
+      ]
+    },
+    {
+      "width": 390,
+      "step": "accueil",
+      "error": "TimeoutError: locator.click: Timeout 9500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('link', { name: 'D?couvrir les animations' })\u001b[22m\n"
+    },
+    {
+      "width": 390,
+      "nav": "/live/decouvrir",
+      "http": 200,
+      "chain": [
+        "/live/decouvrir"
+      ]
+    },
+    {
+      "width": 390,
+      "step": "programme",
+      "error": "TimeoutError: locator.waitFor: Timeout 9500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('link', { name: 'Voir l?animation' }).first() to be visible\u001b[22m\n"
+    },
+    {
+      "width": 390,
+      "nav": "/live/participations",
+      "http": 200,
+      "chain": [
+        "/live/participations"
+      ]
+    },
+    {
+      "width": 390,
+      "nav": "/live/carnet",
+      "http": 200,
+      "chain": [
+        "/live/carnet"
+      ]
+    },
+    {
+      "width": 390,
+      "reload": "https://test-live.localeo.city/live/retrouver-mon-carnet",
+      "heading": [
+        "Retrouver mon carnet"
+      ]
+    },
+    {
+      "width": 390,
+      "nav": "/live/animations/ajouter/atelier-ux-code-invalide",
+      "http": 200,
+      "chain": [
+        "/live/animations/ajouter/atelier-ux-code-invalide"
+      ]
+    },
+    {
+      "width": 390,
+      "nav": "/live/calendrier",
+      "http": 200,
+      "chain": [
+        "/live/calendrier"
+      ]
+    },
+    {
+      "width": 390,
+      "nav": "/live/carnet",
+      "http": 200,
+      "chain": [
+        "/live/carnet"
+      ]
+    },
+    {
+      "width": 390,
+      "step": "menu mobile",
+      "error": "TimeoutError: locator.click: Timeout 9500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Menu', exact: true })\u001b[22m\n"
+    },
+    {
+      "width": 390,
+      "nav": "/live/decouvrir",
+      "http": 200,
+      "chain": [
+        "/live/decouvrir"
+      ]
+    },
+    {
+      "width": 430,
+      "nav": "/",
+      "http": 200,
+      "chain": [
+        "/"
+      ]
+    },
+    {
+      "width": 430,
+      "step": "accueil",
+      "error": "TimeoutError: locator.click: Timeout 9500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('link', { name: 'D?couvrir les animations' })\u001b[22m\n"
+    },
+    {
+      "width": 430,
+      "nav": "/live/decouvrir",
+      "http": 200,
+      "chain": [
+        "/live/decouvrir"
+      ]
+    },
+    {
+      "width": 430,
+      "step": "programme",
+      "error": "TimeoutError: locator.waitFor: Timeout 9500ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('link', { name: 'Voir l?animation' }).first() to be visible\u001b[22m\n"
+    },
+    {
+      "width": 430,
+      "nav": "/live/participations",
+      "http": 200,
+      "chain": [
+        "/live/participations"
+      ]
+    },
+    {
+      "width": 430,
+      "nav": "/live/carnet",
+      "http": 200,
+      "chain": [
+        "/live/carnet"
+      ]
+    },
+    {
+      "width": 430,
+      "reload": "https://test-live.localeo.city/live/retrouver-mon-carnet",
+      "heading": [
+        "Retrouver mon carnet"
+      ]
+    },
+    {
+      "width": 430,
+      "nav": "/live/animations/ajouter/atelier-ux-code-invalide",
+      "http": 200,
+      "chain": [
+        "/live/animations/ajouter/atelier-ux-code-invalide"
+      ]
+    },
+    {
+      "width": 430,
+      "nav": "/live/calendrier",
+      "http": 200,
+      "chain": [
+        "/live/calendrier"
+      ]
+    }
+  ],
+  "chromium": "151.0.7922.34",
+  "finished": "2026-11-23T06:49:06.910Z"
+}

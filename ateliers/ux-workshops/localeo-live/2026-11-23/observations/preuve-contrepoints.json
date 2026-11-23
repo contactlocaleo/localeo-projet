@@ -1,0 +1,61 @@
+{
+  "screens": [
+    {
+      "file": "61-passeport-detail-390.png",
+      "url": "https://test-live.localeo.city/live/animations/32202f76-cdb3-4dcf-8751-fb530e8acdec",
+      "body": "Localeo\nLive\nTEST\nMessages\nMenu\n←\nRetour aux animations\nL’animation\nAnimation indisponible\n\nCette animation n’est plus disponible dans le programme public.\n\nRéessayer\nMes participations\nMon carnet\nMes lots\nDécouvrir",
+      "y": 0
+    },
+    {
+      "file": "62-passeport-apres-reessai-390.png",
+      "url": "https://test-live.localeo.city/live/animations/32202f76-cdb3-4dcf-8751-fb530e8acdec",
+      "body": "Localeo\nLive\nTEST\nMessages\nMenu\n←\nRetour aux animations\nL’animation\nAnimation indisponible\n\nCette animation n’est plus disponible dans le programme public.\n\nRéessayer\nMes participations\nMon carnet\nMes lots\nDécouvrir",
+      "y": 0
+    },
+    {
+      "file": "63-tombola-inscription-action-390.png",
+      "url": "https://test-live.localeo.city/live/animations/7cb5e0a4-0e72-4cc7-bc69-6234e3bed5f3",
+      "body": "Localeo\nLive\nTEST\nMessages\nMenu\n←\nRetour aux animations\nL’animation\nEn coursBouliac\nTombola publique marché de noel\n\nInscrivez-vous par email pour participer au tirage\n\n21 nov. 2026 → 23 nov. 2026\n\nParticipants\n0\nGagnants\n0\nLots à gagner\n5\n\nInscription : Obligatoire\n\nLire le règlement\nM’inscrire à cette animation\nRetrouver mon inscription\nPartager\nComment jouer ?\n1\nSaisissez votre email\n2\nRecevez la confirmation d’inscription\n3\nConservez votre accès personnel reçu par email\nÀ gagner\nLot libre · quantité : 5\nBon achat 10 euro\nOù jouer ?\n\nDécouvrez les partenaires publics et leurs informations pratiques dans l’annuaire.\n\nTous les commerçants\nL’animation en détail\nConditions et règlement\nBesoin d’aide ?\nMon carnet\nMes lots\nDécouvrir",
+      "y": 0
+    },
+    {
+      "file": "64-tombola-champs-obligatoires-390.png",
+      "url": "https://test-live.localeo.city/live/animations/7cb5e0a4-0e72-4cc7-bc69-6234e3bed5f3/inscription",
+      "body": "Localeo\nLive\nTEST\nMessages\nMenu\n←\nRetour à l’animation\n\nVérification de votre inscription…\n\nINSCRIPTION À L’ANIMATION\nTombola publique marché de noel\n\nUne inscription gratuite. Aucun achat ni visite chez un commerçant.\n\n1 validations chez les commerçants participants pour tenter de gagner.\n\nConditions et règlement de l’animation\n\nLes quatre champs ci-dessous sont obligatoires.\n\nNom\nPrénom\nAdresse e-mail\nTéléphone\nVos choix\nJ’accepte le règlement de l’animation. Obligatoire\nValider mon inscription\nAnnuler\n\nVos coordonnées sont transmises à l’organisateur uniquement pour gérer votre participation. Le suivi de la commune reste facultatif.\n\nMon carnet\nMes lots\nDécouvrir",
+      "y": 32
+    },
+    {
+      "file": "66-programme-contre-verification-390.png",
+      "url": "https://test-live.localeo.city/live/decouvrir",
+      "body": "Localeo\nLive\nTEST\nMessages\nMenu\nDécouvrir\nBouliac\nChanger\n⌄\nAnimations\nCommerçants\nCoffrets\nLe programme de vos communes\nEn ce moment\n—\nProchainement\n—\n\nDans cet aperçu · Aperçu partiel\n\nEn ce moment\nRechercher\n\nLes animations de votre sélection ne sont pas toutes disponibles. Trop de requetes. Reessayez plus tard. (request_id: LOC-2d0847dd-3be5-4b69-80c0-8eb012ad2b7c)\n\nRéessayer / afficher la suite\nProchainement\n\nLes animations de votre sélection ne sont pas toutes disponibles. Trop de requetes. Reessayez plus tard. (request_id: LOC-6d7a6cc5-8163-4d44-b64a-343dcaadac70)\n\nRéessayer / afficher la suite\nActualiser le catalogue\nMon carnet\nMes lots\nDécouvrir",
+      "y": 0
+    },
+    {
+      "file": "65-coffrets-entree-390.png",
+      "url": "https://test-live.localeo.city/live/decouvrir/coffrets?commune=b754f248-95a9-54bb-883f-595009b637b5",
+      "body": "Localeo\nLive\nTEST\nMessages\nMenu\nDécouvrir\nBouliac\nChanger\n⌄\nAnimations\nCommerçants\nCoffrets\nLes coffrets\nUne promenade fleurie\n\nUne composition végétale d'une valeur de 32 €, dont les variétés sont choisies en boutique. Deux cafés ou infusions et deux douceurs maison, selon la sélection du jour.\n\n2 exemples d’expériences · Valable 90 jours\n\nPrix : 59,90 €\n\nVoir le coffret\nMon carnet\nMes lots\nDécouvrir",
+      "y": 0
+    }
+  ],
+  "events": [
+    {
+      "path": "/public/animation-locale/animations/32202f76-cdb3-4dcf-8751-fb530e8acdec",
+      "status": 404
+    },
+    {
+      "path": "/public/animation-locale/animations/32202f76-cdb3-4dcf-8751-fb530e8acdec",
+      "status": 404
+    },
+    {
+      "formBack": "https://test-live.localeo.city/live/animations/7cb5e0a4-0e72-4cc7-bc69-6234e3bed5f3"
+    },
+    {
+      "path": "/public/animation-locale/animations/recherche",
+      "status": 429
+    },
+    {
+      "path": "/public/animation-locale/animations/recherche",
+      "status": 429
+    }
+  ]
+}
