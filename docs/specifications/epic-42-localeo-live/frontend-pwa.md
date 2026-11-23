@@ -430,3 +430,29 @@ applications Animation et Commerçant. Les protections serveur restent
 inchangées. Livrer le bundle Marketplace ; la version réellement déployée et
 la cause exacte d'invalidation de cet appareil ne sont pas connues. Aucun
 commit, push, déploiement ou effacement du carnet effectué pour ce correctif.
+## Invitation à préparer Localeo Live — 23 novembre 2026
+
+**E42-EVO-LIVE-INVITATION.** L’installation et les alertes étaient accessibles
+depuis le menu et les réglages. Live propose désormais les actions utiles
+directement à l’entrée dans les écrans principaux.
+
+| Critère | Comportement attendu |
+| --- | --- |
+| E42-INV-01 | Mon carnet et Découvrir peuvent présenter une invitation, y compris après la redirection de l’accueil. Les liens directs d’ajout et de participation, les fiches et les confirmations restent accessibles sans cette invitation. Si l’habitant commence à utiliser l’écran avant la fin de la vérification, la réponse tardive ne lui prend pas le focus. |
+| E42-INV-02 | Le bloc d’installation est présent si le mode application ou la confirmation d’installation du navigateur n’est pas détecté. Le bouton utilise l’invite native ou l’aide existante. Sur iPhone et iPad, l’aide explique l’ajout depuis Safari et l’ouverture par l’icône. |
+| E42-INV-03 | Le bloc notifications distingue l’autorisation du navigateur de la présence d’un abonnement Web Push. Il oriente vers « Alertes sur mon téléphone » quand les notifications sont inactives ou que l’abonnement utilise une ancienne clé VAPID connue, et explique le déblocage si elles sont refusées. Sur iPhone et iPad hors mode application, il indique de passer d’abord par l’écran d’accueil si le service est configuré. Un état inconnu, un service désactivé ou un navigateur incompatible ne déclenche aucune demande d’activation. La vérification est en lecture seule. L’activation reste un clic explicite dans Réglages. |
+| E42-INV-04 | « Plus tard », la fermeture et Échap reportent l’invitation de sept jours dans ce navigateur. Sans stockage local, la fermeture est mémorisée pour la page en cours. L’aide et l’invitation se succèdent dans une seule fenêtre à la fois, avec navigation au clavier et restitution du focus. |
+
+La décision d’affichage appartient au frontend Marketplace/Live. Elle réutilise
+la configuration publique et les réglages Web Push existants. Le report contient
+uniquement une date locale au navigateur. Les guides Commerçant et Animation
+décrivent les parcours professionnels et l’envoi de messages, qui gardent les
+mêmes gestes et conditions. Les contrats API, l’exploitation, les migrations et
+le générateur de démonstration sont hors périmètre de cette évolution d’interface.
+
+Les critères E42-INV-01 à E42-INV-04 sont couverts par
+`tests/visual/live-setup-prompt.spec.cjs` dans Marketplace, avec les suites
+d’installation et de notifications existantes en régression. La recette native
+reste à confirmer sur iPhone ou iPad et sur un navigateur compatible avec
+l’installation directe. Appliquer LIVE-UX-05, LIVE-UX-07 et LIVE-UX-08 pour les
+actions, la lisibilité mobile et la continuité du parcours.

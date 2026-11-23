@@ -4,6 +4,13 @@
 
 ## Synthese
 
+### Évolution du 23 novembre 2026 — E42-EVO-LIVE-INVITATION
+
+Mon carnet et Découvrir invitent l’habitant à installer Localeo Live ou à activer
+les notifications sur cet appareil selon l’état détecté. L’installation et les
+alertes restent facultatives. Le report dure sept jours.
+[Critères E42-INV-01 à E42-INV-04 et recette](../../specifications/epic-42-localeo-live/frontend-pwa.md#invitation-à-préparer-localeo-live--23-novembre-2026).
+
 ### Évolution du 29 septembre 2026 — PWA-20260929
 
 L'installation de Live rejoint le header et conserve une aide Safari iOS ou navigateur Android. Le retour dans l'application vérifie les nouvelles versions ; le report d'une proposition conserve un bouton permettant de la retrouver. [Critères, impacts, preuves et limites communs aux sept PWA](../../specifications/installation-mise-a-jour-pwa.md). Cette évolution conserve la clôture historique de l'EPIC et la protection des saisies entre onglets.
