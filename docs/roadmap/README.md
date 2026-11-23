@@ -1,5 +1,7 @@
 # Roadmap par etat
 
+**23 novembre 2026 — E76 en cours.** L’accès client depuis l’ERP et Localeo Support, l’import pour un gestionnaire et l’historique des interventions sont en recette locale. [Résultats et conditions d’activation](../specifications/epic-76-impersonification-support-pro-animation/verification-livraison.md).
+
 **22 novembre 2026 — E73-EVO-COMMUNICATION-COMMUNALE**. Le module Communication
 s’étend aux abonnés des communes dans Live. Envoi immédiat, ciblage par
 installation, lien facultatif et quota commun avec les campagnes d’animation.
@@ -238,8 +240,8 @@ après ajout des EPIC 77 à 79 le 6 novembre 2026.
 | Etat | Epics | Dossier |
 | --- | ---: | --- |
 | Terminees | 64 | [terminees/](terminees/README.md) |
-| A faire | 9 | [a-faire/](a-faire/README.md) |
-| En cours | 8 | [en-cours/](en-cours/README.md) |
+| A faire | 8 | [a-faire/](a-faire/README.md) |
+| En cours | 9 | [en-cours/](en-cours/README.md) |
 | Abandonnees | 2 | [abandonnees/](abandonnees/README.md) |
 | Fusionnee | 1 | Epic 61 reprise dans l'[Epic 60](terminees/epic-60-vision-360-commercialisation-backlog.md) |
 
@@ -363,12 +365,12 @@ prix après clôture, passages dans les deux ordres, incident sans modification
 des règles publiées et inclusion au forfait standard. Quatre arbitrages résolus,
 preuves prévues ; état **À faire**, sans implémentation.
 
-Le 1er novembre, l'[EPIC 76 — Impersonification support Pro et Animation](a-faire/epic-76-impersonification-support-pro-animation-backlog.md)
+Le 1er novembre, l'[EPIC 76 — Impersonification support Pro et Animation](en-cours/epic-76-impersonification-support-pro-animation-backlog.md)
 cadre l'ouverture depuis l'ERP d'une session temporaire dans le contexte d'un
 compte client : cible explicite, droits bornés, bandeau support, révocation et
 double attribution opérateur/cible. Dix-huit critères cibles ; consultation par
 défaut et intervention explicite/tracée validées le 1er novembre. Habilitations,
-actions et modalités restent à arbitrer. État **À faire**, sans implémentation.
+actions et modalités ont été arrêtées le 23 novembre dans la spécification. L’EPIC est **en cours**.
 
 Le 22 octobre, l'[EPIC 75 — Mots croisés assistés par l’IA](a-faire/epic-75-mots-croises-assistes-ia-backlog.md)
 cadre un nouveau jeu payant sur le modèle de la chasse : préparation assistée,
@@ -431,7 +433,7 @@ précise la provenance et les divergences historiques conservées.
 | 73 | Terminée | [Animation et/ou Coffrets](terminees/epic-73-animation-et-ou-coffrets-backlog.md) : 38 US, 63 critères et extensions vérifiés techniquement le 1er novembre 2026 selon E73-DEC-CLOTURE-TESTS ; preuves et activation séparées dans le bilan. |
 | 74 | En cours | [Tombola publique](en-cours/epic-74-tombola-publique-backlog.md) : inscription immédiate avec quatre coordonnées obligatoires, trois modes de lots, quota standard et suivi commune Live ; 8 US, 16 critères ; [revue de clôture du 13 novembre](../specifications/epic-74-tombola-publique/verification.md#revue-de-clôture--13-novembre-2026), stockage navigateur indisponible et capacité restant à traiter ; v289 appliquée à TEST le 3 novembre |
 | 75 | A faire | [Mots croisés assistés par l’IA](a-faire/epic-75-mots-croises-assistes-ia-backlog.md) : [spécification V1](../specifications/epic-75-mots-croises-assistes-ia/README.md) du 4 novembre ; 8 US, 18 critères, neuf arbitrages résolus ; module indépendant, IA externe/import, grille validée et passages commerçants obligatoires ; tests prévus, sans implémentation |
-| 76 | A faire | [Impersonification support Pro et Animation](a-faire/epic-76-impersonification-support-pro-animation-backlog.md) : accès temporaire depuis ERP, 18 critères cibles ; consultation par défaut et intervention explicite/tracée retenues, droits, actions et modalités à arbitrer, sans implémentation |
+| 76 | En cours | [Impersonification support Pro et Animation](en-cours/epic-76-impersonification-support-pro-animation-backlog.md), [spécification](../specifications/epic-76-impersonification-support-pro-animation/README.md) : accès ERP et Localeo Support, import de commerçants comme recette transverse, double attribution et historique client. 18 critères, réalisation et recette locales en cours. |
 | 77 | En cours | [Le Juste Prix Local](en-cours/epic-77-juste-prix-local-backlog.md) : [spécification V1 du 13 novembre](../specifications/epic-77-juste-prix-local/README.md), 8 US et 20 critères cibles ; proposition Pro et approbation, estimation unique, tolérance commune, seuil pour le tirage et passages paramétrables ; quatre arbitrages résolus, forfait standard ; implémentation locale et preuves au bilan, capacité complète et recette intégrée restant à qualifier |
 | 78 | En cours | [Le jeu des vitrines](../specifications/epic-78-jeu-des-vitrines/README.md) : spécification du 15 novembre, 6 US et 16 critères ; QCM unique, préparation Pro/contrôle terrain, qualification E77 avec/sans passages, offre standard ; sept arbitrages résolus ; parcours et démo vérifiés, charge soutenue non qualifiée ([bilan](../specifications/epic-78-jeu-des-vitrines/bilan-realisation.md)), modèle inactif |
 | 79 | A faire | [Escape Game assisté par l’IA](a-faire/epic-79-escape-game-assiste-ia-backlog.md) : 7 US et 18 critères cibles ; préparation IA selon le processus de la chasse E55, validation avant publication, terrain commune/commerces et progression sur un téléphone confirmés ; quatre arbitrages résolus, quatre ouverts, sans implémentation |

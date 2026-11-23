@@ -1,5 +1,17 @@
 # Captures du guide utilisateur Animation
 
+## Historique des interventions du 23 novembre 2026
+
+Captures Chromium de la rubrique **Interventions de Localeo** avec des données fictives sur la base Git `4852017` et les modifications E76. Les vues de 1024 et 390 pixels montrent le suivi du lot de vingt lignes.
+
+```powershell
+$env:ANIMATION_TEST_SUPPORT='true'
+$env:ANIMATION_TEST_DIST='tmp/e76-guide/dist'
+$env:ANIMATION_GUIDE_ARTIFACTS='tmp/e76-guide/recette'
+node scripts/build-generation-tests.mjs
+node tests/browser/animation-guide.mjs --only=interventions --captures-only
+```
+
 ## 23 novembre 2026 - sélecteur de période du tableau de bord
 
 `pilotage-indicateurs-1024.png` et `pilotage-indicateurs-390.png` montrent le

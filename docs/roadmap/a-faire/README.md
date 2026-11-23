@@ -4,14 +4,12 @@ Spécifications V1 du 5 octobre : [E70 — PIN](../../specifications/epic-70-val
 
 [Retour à la roadmap](../README.md)
 
-Neuf EPIC sont classées à faire. Les bilans techniques et réserves de chaque backlog restent conservés.
+Huit EPIC sont classées à faire. Les bilans techniques et réserves de chaque backlog restent conservés.
 
 - [EPIC 79 — Escape Game assisté par l’IA](epic-79-escape-game-assiste-ia-backlog.md) : préparation IA et validation avant publication selon le processus de la chasse E55, jeu dans la commune/commerces guidé par Live et un téléphone confirmés ; 7 US, 18 critères cibles, quatre arbitrages ouverts.
 
 L’[EPIC 78 — Le jeu des vitrines](../en-cours/epic-78-jeu-des-vitrines-backlog.md) est en cours depuis le 16 novembre 2026 ; preuves locales et réserves dans son bilan.
 
-
-- [EPIC 76 — Impersonification support Pro et Animation](epic-76-impersonification-support-pro-animation-backlog.md) : session temporaire depuis ERP, droits bornés, double attribution et sortie ; 18 critères cibles, consultation par défaut et intervention explicite/tracée retenues ; droits, actions et modalités à arbitrer.
 
 - [EPIC 54 — Calendrier de l'Avent local](epic-54-calendrier-avent-local-backlog.md)
 - [EPIC 75 — Mots croisés assistés par l’IA](epic-75-mots-croises-assistes-ia-backlog.md) : nouveau jeu payant sur le modèle de la chasse, préparation et contrôle de grille, parcours mobile et lots ; 8 US, 18 critères cibles, arbitrages ouverts.

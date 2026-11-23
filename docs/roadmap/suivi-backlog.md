@@ -26,13 +26,13 @@ Mise à jour du classement : 2026-11-16 — E78 en cours ; historique du 6 novem
 Évolution transverse du 29 septembre 2026 : [PWA-20260929 — installation et mise à jour](../specifications/installation-mise-a-jour-pwa.md), appliquée aux sept PWA existantes. Les états et clôtures historiques des EPIC restent inchangés ; preuves locales et recette appareil sont distinguées dans la spécification.
 
 - Identifiants EPIC suivis : 82 ; 79 du tronc commun et 3 identifiants applicatifs distincts.
-- EPICs a faire : 9 ; EPICs en cours : 6 (EPIC-55, EPIC-68, EPIC-71, EPIC-74, EPIC-77 et EPIC-78).
+- EPICs a faire : 8 ; EPICs en cours : 7 (EPIC-55, EPIC-68, EPIC-71, EPIC-74, EPIC-76, EPIC-77 et EPIC-78).
 - EPICs fusionnees : 1 (EPIC-61 vers EPIC-60).
 - EPICs terminees : 64 (62 du tronc commun et 2 applicatives) ; EPICs abandonnees : 2.
 - US / PRD detaillees dans le tableau historique : 415, jusqu'a `EPIC-45`.
 - Source prioritaire : fichier backlog dedie quand disponible, sinon `product-roadmap.md`.
-- Référence de pilotage : EPIC-55, EPIC-68, EPIC-71, EPIC-74, EPIC-77 et EPIC-78 sont en cours. EPIC-70 et EPIC-72 sont terminées sur tests. EPIC-65 est terminée après revue des dix critères ; EPIC-69 après validation CA-18 ; EPIC-66 après confirmation utilisateur. EPIC-54, EPIC-58, EPIC-62,
-  EPIC-64, EPIC-67, EPIC-75, EPIC-76, EPIC-79 et EPIC-MARKETPLACE-54 sont à faire. EPIC-47 est terminée,
+- Référence de pilotage : EPIC-55, EPIC-68, EPIC-71, EPIC-74, EPIC-76, EPIC-77 et EPIC-78 sont en cours. EPIC-70 et EPIC-72 sont terminées sur tests. EPIC-65 est terminée après revue des dix critères ; EPIC-69 après validation CA-18 ; EPIC-66 après confirmation utilisateur. EPIC-54, EPIC-58, EPIC-62,
+  EPIC-64, EPIC-67, EPIC-75, EPIC-79 et EPIC-MARKETPLACE-54 sont à faire. EPIC-47 est terminée,
   clôture produit confirmée. EPIC-05 et EPIC-12 sont abandonnées ;
   EPIC-61 est fusionnée dans EPIC-60. Les autres EPIC du tronc commun sont terminées.
 - Classement et motifs : [index de la roadmap](README.md).
@@ -44,8 +44,8 @@ Mise à jour du classement : 2026-11-16 — E78 en cours ; historique du 6 novem
 
 | Etat | Nombre |
 | --- | ---: |
-| A faire | 9 |
-| En cours | 6 |
+| A faire | 8 |
+| En cours | 7 |
 | Abandonne | 2 |
 | Fusionnee | 1 |
 | Termine | 64 |
@@ -83,11 +83,7 @@ seuil de commerces réussis donnant accès au tirage. Passages paramétrables ;
 quatre arbitrages résolus : tolérance commune, résultat immédiat puis prix après
 clôture, deux ordres de passage et forfait standard. Implémentation locale et vérification ; activation distincte.
 
-Nouvelle entrée à faire : [EPIC-76 — Impersonification support Pro et Animation](a-faire/epic-76-impersonification-support-pro-animation-backlog.md),
-18 critères cibles ; accès temporaire depuis ERP, compte et contexte explicites,
-droits bornés, bandeau, fin/révocation et double attribution. Consultation par
-défaut et intervention explicite/tracée validées le 1er novembre ; habilitations,
-actions et modalités à arbitrer ; aucun développement engagé.
+En cours — [EPIC-76 — Impersonification support Pro et Animation](en-cours/epic-76-impersonification-support-pro-animation-backlog.md). Les 18 critères et le bilan local sont suivis dans la spécification.
 
 Terminée le 1er novembre 2026 selon E73-DEC-CLOTURE-TESTS : [EPIC-73 — Animation et/ou Coffrets](terminees/epic-73-animation-et-ou-coffrets-backlog.md),
 cadrage des 14–15 octobre, 38 US et 63 critères ; dotation libre, animations standard/à la carte,
@@ -132,7 +128,7 @@ des PRD-251 à PRD-260 de l'EPIC 35 ne couvre pas cette nouvelle epic.
 
 | Epic | Objet | Niveau de preparation |
 | --- | --- | --- |
-| EPIC-76 | Impersonification support Pro et Animation depuis ERP | Cadrage initial, 18 critères cibles ; consultation par défaut et intervention explicite/tracée retenues ; droits, actions et modalités à arbitrer avant leur spécification |
+| EPIC-76 | Impersonification support Pro et Animation | [Spécification](../specifications/epic-76-impersonification-support-pro-animation/README.md), 18 critères. Accès ERP et Localeo Support, import de commerçants comme recette transverse et historique client. |
 | EPIC-54 | Calendrier de l'Avent local | Arbitrages et conception technique a finaliser |
 | EPIC-55 | Chasse au tresor commercante | Arbitrages et conception technique a finaliser |
 | EPIC-58 | Filtre annuel global Animation | Cadrage et conception disponibles ; arbitrages a valider |
@@ -683,7 +679,7 @@ anciennes US restent historiques.
 | EPIC-73 | Terminée | [backlog](terminees/epic-73-animation-et-ou-coffrets-backlog.md) ; 38 US, 63 critères, dix-huit arbitrages résolus, aucun ouvert recensé ; lots libres externes/numériques, modules (import, chasse, Web Push) et compléments SaaS (autonomie, accompagnement, valeur/coûts, réversibilité/reprise), cadrage des 14–15 octobre 2026 |
 | EPIC-74 | En cours | [backlog](en-cours/epic-74-tombola-publique-backlog.md) ; tombola publique standard sans commerçant, QR de participation, supports de stand et audience future ; 8 US, 16 critères cibles, cadrage du 22 octobre et implémentation locale suivie depuis le 3 novembre 2026 |
 | EPIC-75 | A faire | [backlog](a-faire/epic-75-mots-croises-assistes-ia-backlog.md) ; mots croisés assistés par l’IA, jeu payant sur le modèle de la chasse ; 8 US, 18 critères cibles, neuf groupes d’arbitrages dont un résolu ; décisions du 23 octobre : indices chez les commerçants, préparation Localeo validée par l’organisateur, grille correcte obligatoire pour le tirage |
-| EPIC-76 | A faire | [backlog](a-faire/epic-76-impersonification-support-pro-animation-backlog.md) ; session support temporaire depuis ERP vers Pro et Animation, 18 critères cibles ; consultation par défaut et intervention explicite/tracée retenues ; droits, actions et modalités à arbitrer |
+| EPIC-76 | En cours | [Backlog](en-cours/epic-76-impersonification-support-pro-animation-backlog.md) et [spécification](../specifications/epic-76-impersonification-support-pro-animation/README.md). Session temporaire en consultation puis intervention explicite, 18 critères, réalisation et recette locales en cours. |
 | EPIC-77 | En cours | [backlog](en-cours/epic-77-juste-prix-local-backlog.md), [spécification V1 du 13 novembre](../specifications/epic-77-juste-prix-local/README.md) ; 8 US et 20 critères cibles, proposition Pro et approbation, estimation unique, tolérance commune, seuil pour le tirage et passages paramétrables ; quatre arbitrages résolus, forfait standard ; implémentation locale, preuves et réserves au bilan |
 | EPIC-78 | En cours | [backlog](en-cours/epic-78-jeu-des-vitrines-backlog.md) ; Le jeu des vitrines, 6 US et 16 critères cibles ; intrus dans les vitrines, Noël/Pâques et autres thèmes, préparation et Live mobile ; sept arbitrages résolus ; implémentation locale, modèle inactif |
 | EPIC-79 | A faire | [backlog](a-faire/epic-79-escape-game-assiste-ia-backlog.md) ; Escape Game assisté par l’IA, 7 US et 18 critères cibles ; préparation IA et validation selon la chasse E55, terrain avec Live et un téléphone confirmés ; quatre arbitrages résolus et quatre ouverts |

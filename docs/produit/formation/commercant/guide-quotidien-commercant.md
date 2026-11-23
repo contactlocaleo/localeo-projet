@@ -1,6 +1,6 @@
 # Localeo Commerçant · Votre guide au quotidien
 
-<!-- Source canonique du PDF embarqué. Édition du 22 novembre 2026. Chaque section de niveau 2 ouvre une page. Captures du frontend actuel, API simulées et exemples fictifs : scripts/capture-merchant-guide.mjs dans localeo-commercant. -->
+<!-- Source canonique du PDF embarqué. Édition du 23 novembre 2026. Chaque section de niveau 2 ouvre une page. Captures du frontend actuel, API simulées et exemples fictifs : scripts/capture-merchant-guide.mjs dans localeo-commercant. -->
 
 ## 1 · Se connecter et se repérer
 
@@ -44,13 +44,13 @@ Dans **Compte**, modifiez prénom, nom ou téléphone, puis **Enregistrer**. Pou
 2. Renseignez spécialités, ambiance, informations pratiques, horaires et liens utiles. Séparez spécialités et ambiances par des virgules.
 3. Ajoutez l’image principale, le portrait et jusqu’à trois photos d’ambiance : JPEG, PNG ou WebP, 5 Mo maximum par image. Attendez la fin du chargement.
 4. Vérifiez l’aperçu. **Enregistrer le brouillon** conserve votre travail ; **Enregistrer et envoyer en validation** transmet la demande à Localeo.
-5. Dans **Demandes**, consultez statut et commentaires ; corrigez puis renvoyez si nécessaire.
+5. Suivez l’avis de modération dans **Demandes**, le travail du support dans **Interventions de Localeo** (chapitre 13).
 
 ### Consulter une prestation
 
 Dans **Prestations**, recherchez par nom ou coffret, puis sélectionnez l’offre. Consultez description, statut et montant reversé. Si elle est **Modifiable**, corrigez nom ou description puis **Enregistrer les modifications**. En **Lecture seule**, contactez Localeo. L’ajout d’une offre et la modification de son montant passent aussi par Localeo.
 
-> Enregistrer un brouillon ne publie pas vos changements. Attendez la validation de Localeo avant de les considérer comme visibles par les visiteurs.
+> Vos changements deviennent publics après validation par Localeo.
 
 ## 3 · Valider une prestation de coffret
 
@@ -300,3 +300,13 @@ Dans **Compte > Mon contrat**, téléchargez le contrat ; actualisez-le ou conta
 **Mot de passe oublié :** depuis la connexion, demandez le lien avec votre email, ouvrez-le, saisissez et confirmez le nouveau mot de passe. Si **Préparer mon compte commerçant** apparaît, complétez les informations demandées ; les fonctions autorisées apparaîtront après activation.
 
 > Sur un appareil partagé, déconnectez-vous après utilisation. Ne transmettez jamais mot de passe, PIN, lien de réinitialisation ou QR personnel d’un client à l’assistance.
+
+## 13 · Relire une intervention sur votre page publique
+
+Lorsque cette rubrique est activée, ouvrez **Interventions de Localeo** depuis le menu. Après la fin d’une intervention, vous pouvez retrouver les actions réalisées pour votre compte pendant 180 jours.
+
+![Le commerce retrouve la soumission à modération, le nom de l’opérateur et la référence du dossier.](illustrations/guide-quotidien/20-interventions.png)
+
+1. Repérez la date, l’opérateur, le commerce et la référence du dossier.
+2. **Enregistrement du brouillon de la page publique** indique que le support a enregistré le contenu. Une soumission refusée laisse le brouillon disponible dans **Ma page publique**.
+3. **Soumission de la page publique à modération** indique que le support a transmis la demande. Dans **Ma page publique → Demandes**, suivez la décision de Localeo avant de vérifier la page publiée.

@@ -20,14 +20,14 @@ E72 — accès salariés est terminée le 1er novembre 2026 selon E72-DEC-CLOTUR
 
 ## État global consolidé au 16 novembre 2026
 
-Le tronc commun comprend 79 identifiants : 62 epics terminees, 8 a faire,
-6 en cours, 2 abandonnees et 1 fusionnee. L'Epic 61 est absorbee par l'Epic 60.
+Le tronc commun comprend 79 identifiants : 62 epics terminees, 7 a faire,
+7 en cours, 2 abandonnees et 1 fusionnee. L'Epic 61 est absorbee par l'Epic 60.
 Les documents sont ranges par etat dans l'[index de la roadmap](README.md).
 
 | Etat | Epics |
 | --- | --- |
-| A faire | `EPIC-54`, `EPIC-58`, `EPIC-62`, `EPIC-64`, `EPIC-67`, `EPIC-75`, `EPIC-76`, `EPIC-79` |
-| En cours | `EPIC-55`, `EPIC-68`, `EPIC-71`, `EPIC-74`, `EPIC-77`, `EPIC-78` |
+| A faire | `EPIC-54`, `EPIC-58`, `EPIC-62`, `EPIC-64`, `EPIC-67`, `EPIC-75`, `EPIC-79` |
+| En cours | `EPIC-55`, `EPIC-68`, `EPIC-71`, `EPIC-74`, `EPIC-76`, `EPIC-77`, `EPIC-78` |
 | Termine | 62 epics : toutes les autres epics de `EPIC-01` a `EPIC-60`, et `EPIC-63`/`EPIC-65`/`EPIC-66`/`EPIC-69`/`EPIC-70`/`EPIC-72`/`EPIC-73`, hors `EPIC-05` et `EPIC-12` |
 | Abandonne | `EPIC-05` : QR commercant remplace par l'Epic 10 ; `EPIC-12` : flux manuel decommissionne par l'Epic 39 |
 | Fusionnee | `EPIC-61` dans `EPIC-60` ; non comptee comme terminee |
@@ -41,7 +41,7 @@ un seul fichier par sujet. Trois identifiants applicatifs complètent ce tronc :
 | [EPIC-MARKETPLACE-54](a-faire/epic-marketplace-54-harmonisation-identite-visuelle-marketplace-backlog.md) | Identité visuelle ; distinct du calendrier de l'Avent 54 | À faire (classement courant ; implémentation locale documentée, revue et recette attendues) |
 | [EPIC-PRES-CONTENU-001](terminees/epic-animation-edition-prestations.md) | Édition directe des prestations ; le futur sas reste dans l'EPIC 62 | Terminée (parcours existant) |
 
-Le total consolidé est de **82 identifiants : 64 terminés, 11 à faire, 5 en cours,
+Le total consolidé est de **82 identifiants : 64 terminés, 8 à faire, 7 en cours,
 2 abandonnés et 1 fusionné**. L'ancien numéro local Marketplace 53 (pagination)
 est rattaché à l'EPIC 57, sans ajouter d'identifiant ni le confondre avec la tombola.
 
@@ -76,12 +76,10 @@ Derniere evolution suivie :
   les deux ordres, incidents sans révision silencieuse et forfait standard.
   Quatre arbitrages résolus ; état En cours. Implémentation locale dans les quatre applications ; preuves, limites et conditions d’activation au bilan.
 
-- [EPIC 76 — Impersonification support Pro et Animation](a-faire/epic-76-impersonification-support-pro-animation-backlog.md) :
-  cadrage du 1er novembre, 18 critères cibles ; accès temporaire depuis ERP dans
-  le contexte du compte sélectionné, droits bornés, bandeau, fin/révocation et
-  audit opérateur/cible. Consultation par défaut et intervention explicite/tracée
-  validées le 1er novembre ; habilitations, actions et modalités à arbitrer.
-  État À faire, sans implémentation.
+- [EPIC 76 — Impersonification support Pro et Animation](en-cours/epic-76-impersonification-support-pro-animation-backlog.md).
+  La [spécification](../specifications/epic-76-impersonification-support-pro-animation/README.md) fixe l’accès depuis l’ERP et Localeo Support,
+  les interventions autorisées, l’import de commerçants comme recette transverse et
+  l’historique lisible par le compte représenté. État En cours, 18 critères.
 
 - [EPIC 75 — Mots croisés assistés par l’IA](a-faire/epic-75-mots-croises-assistes-ia-backlog.md) :
   cadrage du 22 octobre, 8 US et 18 critères cibles ; nouveau jeu payant sur le modèle

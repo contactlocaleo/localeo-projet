@@ -1,0 +1,98 @@
+# EPIC 76 — Sessions support dans Localeo Pro et Animation
+
+Spécification du 23 novembre 2026. Le [backlog canonique](../../roadmap/en-cours/epic-76-impersonification-support-pro-animation-backlog.md) conserve les arbitrages et les identifiants des 18 critères. La [roadmap commune](../../roadmap/README.md) donne l’état produit.
+
+## Parcours opérateur
+
+1. Dans l’ERP, **Ouvrir une session support** apparaît parmi les actions des fiches commerçant et organisation, y compris lorsqu’on arrive depuis une souscription Animation. Dans **Localeo Support**, l’entrée **Accès client** ouvre une recherche paginée de commerçants et d’organisations. Les deux entrées utilisent le même sélecteur et la même confirmation. Depuis une fiche, le rattachement est prérempli. Si plusieurs comptes sont éligibles, l’opérateur choisit explicitement le compte.
+2. La confirmation affiche l’application, l’environnement, le compte représenté, son rattachement et les actions accessibles. L’opérateur saisit un motif et peut lier la référence de la demande reçue. Le serveur exige une réauthentification de l’opérateur ERP pour l’ouverture et contrôle le compte et le rattachement. Une demande déjà reçue permet d’intervenir sans approbation supplémentaire dans Localeo.
+3. La session s’ouvre en **Consultation**. Le bandeau permanent affiche l’opérateur, le compte représenté, le commerce ou l’organisation, l’environnement, le mode, l’échéance et **Quitter le support**. La confirmation **Passer en intervention** présente les actions accessibles et leurs effets. Le changement est tracé.
+4. La sortie volontaire ramène à la fiche ou à la recherche d’origine si la session ERP est valide. Préserver les filtres, la position et le focus lors du retour. Si la session expire ou est révoquée, indiquer la cause et bloquer les opérations suivantes, y compris dans un ancien onglet.
+
+La capacité dédiée fait partie de la matrice fixe [E69](../epic-69-acces-internes/permissions-surfaces.md). Administrateur, Backoffice et Backoffice + Finance peuvent ouvrir une session et passer en intervention. Lecteur, Finance seul et les comptes clients ne reçoivent pas cette capacité. L’accès au journal global et la révocation administrative exigent l’habilitation administrateur correspondante. L’opérateur peut toujours quitter sa propre session.
+
+## Écrans et opérations autorisés
+
+| Application et écran | Consultation | Intervention |
+| --- | --- | --- |
+| Animation, import du réseau de commerçants | Consulter les flux, lots, lignes, reçus et rapports accessibles dans l’organisation et la commune sélectionnées. Télécharger le modèle. | Choisir ou créer un flux, déposer le fichier, configurer les colonnes, produire l’aperçu, résoudre les lignes, confirmer et reprendre un lot selon ses transitions existantes. |
+| Animation, actualités | Consulter la liste et ouvrir l’éditeur d’un brouillon accessible. | Créer ou modifier un brouillon. Le serveur rejette la programmation ou la publication, y compris un champ d’état qui les demanderait via une commande d’édition. Une actualité déjà publiée ne peut pas être modifiée. |
+| Pro, page publique du commerce | Consulter le brouillon, son aperçu et l’état de modération dans la limite du périmètre du compte. | Enregistrer le brouillon et le soumettre à la modération de Localeo. Afficher séparément le résultat de l’enregistrement et celui de la soumission. Si la soumission échoue, conserver le brouillon enregistré. La décision de publication suit la modération existante. |
+
+La liste s’applique aussi aux appels directs et aux liens profonds. Chaque lecture doit être sans effet métier en consultation. En intervention, un droit ordinaire du compte ne suffit pas si l’opération ne figure pas dans le tableau. Les paiements, la gestion d’équipe et les autres écrans du client restent hors de la session support.
+
+### Recette de référence — Import pour un gestionnaire
+
+Le fichier habituel contient environ **20 commerçants**, le plus gros attendu **100 commerçants**. Dans les deux cas, l’opérateur dépose le fichier entier une seule fois et suit un seul lot. La recette E76-CA-10 couvre un fichier valide de 20 lignes puis un de 100, en respectant le plafond E73 de 2 000 000 octets par fichier. Vérifier séparément les refus à 101 lignes de données et à 2 000 001 octets, avant toute écriture de fiche et sans troncature. L’en-tête est exclu du décompte.
+
+1. Chaque fichier concerne une seule commune. L’opérateur ouvre Animation pour le gestionnaire et son organisation, choisit la commune autorisée avant le dépôt et passe en intervention. L’écran de dépôt affiche l’organisation et la commune. Le lot reste rattaché à cette commune si l’opérateur change ensuite de contexte.
+2. Il choisit ou crée le flux, dépose le fichier et règle la correspondance des colonnes. L’aperçu distingue les créations, mises à jour et lignes à résoudre. Si une résolution crée une demande de correction sensible, annoncer cet effet avant confirmation de la résolution et tracer la demande. La décision reste dans le circuit ERP existant.
+3. Il confirme le plan affiché. La confirmation rappelle le nom de la commune du lot. Le lot est accepté pour traitement et le suivi affiche son état courant jusqu’au résultat. Préserver les contrôles existants de version, droits, doublons, provenance et idempotence. Une réponse incertaine conduit à consulter le reçu avant toute nouvelle commande. L’import ne crée aucun compte actif et n’envoie aucune invitation automatique.
+4. Le lot confirmé continue après la sortie ou l’expiration de la session, sous les contrôles habituels du gestionnaire, de la commune et du module. Une révocation administrative ou un retrait d’habilitation de l’opérateur suspend le restant à la prochaine frontière de transaction. Les lignes déjà validées restent acquises. Une reprise exige une autorisation actuelle et porte l’attribution propre à cette commande.
+
+Le domaine Référencement conserve les règles du lot et de ses lignes. Le [contrat d’import E73](../epic-73-animation-et-ou-coffrets/modules-souscriptions-import-communication.md) reste la référence pour le fonctionnement ordinaire.
+
+## Architecture, autorisations et contrats
+
+- **État et droits.** Le domaine Identité/Accès possède la délégation, son mode, ses échéances et sa révocation. Il borne une session à une application, un environnement, un compte et un rattachement. L’application résout l’opérateur et le compte représenté côté serveur. Elle contrôle leurs droits actuels et l’action demandée avant d’appeler le service métier. Une consultation ne peut produire que les écritures nécessaires à la session et à son audit.
+- **Échange et durée.** Émettre un code à usage unique, de courte durée, lié à la session ERP et à la destination autorisée. L’échange invalide le code de manière atomique et délivre un justificatif support distinct. La session expire après 30 minutes au plus ou 15 minutes sans interaction. Le polling et les lectures automatiques ne repoussent pas l’échéance. Une fin de session ERP ferme l’accès interactif. Un retrait d’accès, une désactivation de cible ou un changement de droits s’applique aux requêtes suivantes.
+- **Isolation.** Charger les modules en entrant dans l’espace support et utiliser un espace de routes dédié. Le contexte est sélectionné explicitement par onglet et sépare les caches, les requêtes en cours et les réponses tardives. Adapter les contrôles d’origine et de CSRF au transport support qui les requiert. Préserver le cookie Animation et le jeton Pro des parcours ordinaires. Une requête support échouée ne se replie jamais sur une session client. Recharger un onglet ne change ni sa cible ni son mode. La PWA ne met en cache ni données privées support ni justificatif.
+- **Frontière transactionnelle.** Sérialiser la validation d’une commande support avec la révocation. Quand le retrait est effectif avant validation, refuser la commande. Une mutation validée conserve son effet et sa double attribution. Pour un import asynchrone, conserver dans l’engagement du lot la référence de la commande, de l’opérateur et de la session support. Le worker traite uniquement le plan validé sous identité technique et vérifie la suspension avant la transaction de ligne suivante. Préserver les contrôles existants sur la cible.
+- **Contrats.** Décrire dans l’OpenAPI canonique les échanges ERP et support pour la recherche, l’ouverture, l’échange, le contexte, le changement de mode, la fin, la révocation et les historiques. Documenter les erreurs distinctes de refus, d’expiration et de conflit. Le backend est producteur, l’ERP et Localeo Support consomment les commandes internes et les applications les routes support et le récapitulatif client. Régénérer la [source canonique](../epic-41-api/openapi.json) et les contrats embarqués concernés par leurs générateurs lors de l’implémentation. Conserver les DTO, statuts et clés d’idempotence de l’import ordinaire. La file de modération Pro doit afficher la provenance d’une soumission déléguée.
+
+**Alerte de conception.** Le dépôt d’import vérifie actuellement l’identifiant transmis comme celui d’une vraie session Animation. Introduire un principal délégué explicite pour le parcours E76 et réutiliser les contrôles existants du compte représenté. Si une mise en œuvre impose de modifier les contrôles d’authentification ordinaires, de charger une dépendance partout, d’ajouter du coût aux parcours courants ou de dupliquer une règle métier, suspendre le changement concerné. Présenter les composants atteints, la preuve disponible et l’option de réduction du périmètre avant d’étendre le changement.
+
+## Audit et historique client
+
+Le journal serveur relie ouverture, lecture d’un dossier, changement de mode, commande, résultat, refus et fin de session. Il consigne l’opérateur, le compte représenté, l’application, l’environnement, le rattachement, le motif, l’horodatage et la référence de ressource ou d’opération. Il conserve le code de résultat sans copier les justificatifs, fichiers et contenus sensibles. Associer l’audit de succès à l’écriture métier. Persister un refus indépendamment d’une transaction annulée. L’ERP offre une recherche paginée par opérateur, cible, période ou session.
+
+Après une session passée en intervention, le compte représenté retrouve dans Localeo une chronologie indiquant **qui a agi pour lui, quand, sur quel dossier et avec quel résultat**. Pour l’import, elle présente la référence du lot, son état et les compteurs de lignes, avec accès au dossier si l’utilisateur dispose encore du droit. Le résultat d’un traitement en cours est actualisé depuis son suivi. Une session restée en consultation alimente le journal interne. L’historique client est une projection des mêmes faits, dont sont exclus les motifs et notes internes, le contenu du fichier et les détails sensibles des refus. Si la projection échoue, signaler l’incident dans l’ERP et permettre sa reprise sans rejouer l’action métier.
+
+Pour les imports Animation, **Interventions de Localeo** est l’unique entrée client pour lire le récapitulatif. Depuis celui-ci, un lien **Voir le lot** ouvre le détail de l’import sous réserve des droits actuels. La navigation entre les deux écrans va du récapitulatif vers le lot.
+
+Chaque gestionnaire disposant actuellement du droit de consulter les imports de l’organisation **et** de la commune du lot voit le récapitulatif des actions sur ce lot. Il peut identifier le compte représenté et l’opérateur intervenant. Le serveur applique cette règle à la liste et au détail à chaque lecture, y compris pour le compte représenté. Un retrait de droit retire cet accès. Dans une session portant sur plusieurs dossiers ou types d’action, le droit de consulter un import donne accès aux seules entrées relatives aux lots autorisés.
+
+Le récapitulatif reste consultable dans **Interventions de Localeo** pendant **180 jours à compter de la fin de la session d’intervention**, sous réserve des droits du lecteur. Pour un import, le fichier et le rapport détaillé expirent 30 jours après la fin ou l’abandon du lot selon E73. Leur expiration laisse le résumé lisible avec la date, l’opérateur, le compte représenté et les compteurs de lignes. En recette, vérifier sa consultation après expiration du rapport et son retrait de la liste et du détail à l’échéance des 180 jours.
+
+Inscrire la durée client au registre de conservation avant activation PROD. Le journal d’audit interne E76 suit la [règle commune des journaux de sécurité ordinaires (T8)](../identite-acces/conservation-validations-acces.md) : **12 mois calendaires au maximum à compter de la date serveur de chaque événement**, avec application de tout délai opérationnel plus court prévu pour les traces comparables. Une consultation ou un export ne reporte pas l’échéance. En cas d’incident ou de litige justifié, seuls les éléments nécessaires relèvent de la procédure commune de gel. En recette, vérifier que la purge existante couvre les événements E76 et leurs copies gérées à l’échéance, ainsi que le retrait des éléments concernés après levée du gel.
+
+## Performance et livraison
+
+| Parcours | Borne et preuve à produire avant activation |
+| --- | --- |
+| Navigation et travail ordinaires | Zéro appel réseau ou requête SQL de support supplémentaires. Aucun chargement initial du module support. Comparer les p95 avant et après à charge identique, puis en charge mixte pendant un import support. Seuil de recette proposé : dégradation maximale de 5 %. |
+| Recherche de cible, journal ERP et historique client | Paginer en stockage et indexer selon le périmètre, les filtres et l’ordre de lecture. Comparer plans, volumes lus et temps avec le volume de référence puis à 10× ce volume. |
+| Import confirmé | Réemployer les limites du worker et ses transactions par ligne. Mesurer l’effet du contrôle de révocation sur le débit et la contention, en même temps que les parcours ordinaires. |
+
+Prévoir des migrations additives pour les sessions, leur audit et la provenance des commandes asynchrones. Préserver les données historiques existantes. Adapter les fixtures et vérifier le générateur et la restauration avec un opérateur autorisé et un refusé, deux organisations, des communes distinctes, des comptes Pro principal et salarié et des droits de module différents. Les données de démonstration ne créent aucune session support active.
+
+Livrer l’activation par environnement désactivée par défaut. Appliquer les migrations, livrer le backend et les consommateurs compatibles, puis activer sur TEST pour la recette. Documenter le diagnostic, la révocation, la suspension des imports et la reprise de l’historique. Avant PROD, produire les preuves de sécurité, de charge et de traçabilité, et confirmer la conservation. Marketplace et Live sont hors du parcours. Vérifier l’isolation des sessions sur leurs origines voisines.
+
+À la livraison, compléter la section **Préparer votre page publique** du [guide Commerçant](../../produit/formation/commercant/guide-quotidien-commercant.md) et la section **Constituer son réseau de commerces** du [guide Animation](../../produit/formation/animation/guide-quotidien-animation.md). Décrire l’historique client et les effets visibles sur chaque parcours. Mettre à jour aussi l’aide ERP/Support. Appliquer la [maintenance des guides](../../organisation/maintenance-guides-utilisateurs.md) aux sources, captures, PDF et copies embarquées.
+
+## Matrice de recette
+
+Le [bilan de réalisation et de vérification](verification-livraison.md) rassemble les résultats locaux, les paramètres d’activation et les contrôles de livraison.
+
+La matrice ci-dessous décrit les preuves attendues. La recette ERP applique les [règles UX des pages de gestion](../../architecture/transverse/conventions-backoffice.md#ux-des-pages-de-gestion-erp), en particulier le dossier, la visibilité de l’action, les deux modes, la confirmation et le retour au contexte (ERP-UX-02/03/05/07/08).
+
+| Critère | Propriétaire et preuve prévue | Impacts ou fixtures |
+| --- | --- | --- |
+| E76-CA-01 | ERP et Support. Entrées visibles sur bureau et mobile, contexte prérempli, choix explicite entre comptes. | Aide ERP, dossiers Pro et Animation avec plusieurs comptes. |
+| E76-CA-02 | Identité/Accès. Matrice par profil, réauthentification et refus par API directe ou origine non autorisée. | Contrat interne, fixtures Admin, Backoffice, Backoffice + Finance, Lecteur et Finance. |
+| E76-CA-03 | Identité/Accès. Motif manquant, compte désactivé, rattachement retiré et environnement différent. | Contrat d’ouverture et fixtures de cibles non éligibles. |
+| E76-CA-04 | Identité/Accès. Échange nominal, expiré, rejoué et vers une autre destination. Contrôle des journaux. | Contrat d’échange et configuration d’origines. |
+| E76-CA-05 | Pro et Identité/Accès. Page publique visible selon les capacités, refus pour un salarié non habilité. | Contrat Pro, guide Commerçant, fixtures principal/salarié et périmètres. |
+| E76-CA-06 | Animation et Identité/Accès. Refus interorganisation et intercommune, module absent, lien profond. | Contrat Animation, guide Animation, deux organisations et plusieurs communes. |
+| E76-CA-07 | Interfaces. Bandeau, contraste, clavier, zoom, mobile, rechargement et erreurs. | Guides et captures des applications. |
+| E76-CA-08 | Identité/Accès et domaines métier. Écriture directe, lecture avec effet métier et tentative de consommation refusées en consultation. | Fixtures avec droits métier et preuve d’absence d’effets. |
+| E76-CA-09 | Identité/Accès. Confirmation, intersection des droits, audit et nouvelle session en consultation. | Contrat de transition et journal ERP. |
+| E76-CA-10 | Référencement, Actualités et Page publique. Import complet, résultat incertain, brouillon, soumission et refus des opérations hors liste. | Contrats consommateurs, fixtures de lots et de brouillons, audit de modération. |
+| E76-CA-11 | Identité/Accès et interfaces. Coexistence de deux onglets support et d’une session normale, réponses tardives et PWA. | Scénarios de navigateur et contrôle des caches. |
+| E76-CA-12 | Identité/Accès et ERP. Sortie, inactivité, durée maximale, perte ERP et retour au contexte. | Aide opérateur, horloge contrôlée. |
+| E76-CA-13 | Identité/Accès et services métier. Révocation et retrait de droit, compte, rattachement ou module. | Fixtures modifiables, procédure de révocation. |
+| E76-CA-14 | Application et audit. Double attribution des succès, lectures, refus, reprise de lot et traitement technique. | Persistance d’audit et provenance de la commande. |
+| E76-CA-15 | ERP. Recherche paginée et filtrée, habilitation et trace d’un refus après rollback. | Index, vérification de volumétrie, aide ERP. |
+| E76-CA-16 | Identité/Accès et Référencement. Faire concourir révocation et commande ou ligne. Vérifier suspension, reprise et absence de double effet. | Base isolée, procédure de diagnostic et reprise. |
+| E76-CA-17 | Audit et espaces clients. Depuis **Interventions de Localeo**, un second gestionnaire habilité retrouve le récapitulatif et suit **Voir le lot** jusqu’au bon import. Vérifier le filtrage en liste et en détail après changement de commune, d’organisation ou de droit, la chronologie, l’état du lot et la reprise de projection. | Deux gestionnaires habilités pour la même commune, autre commune et autre organisation, retrait de droit. Guides, contrat client, registre de conservation. |
+| E76-CA-18 | Backend et interfaces. Tests unitaires, d’intégration, de contrat, navigateur et mesures en charge mixte. | Générateur et restauration, contrats synchronisés, activation TEST et dossier de preuves. |

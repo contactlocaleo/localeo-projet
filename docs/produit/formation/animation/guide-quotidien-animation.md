@@ -116,6 +116,8 @@ Une étape invalide n'élimine pas automatiquement le joueur. Si le seuil de val
 3. Invitez le commerçant à rejoindre son espace lorsque cette action est proposée. Suivez séparément l'envoi du mail et l'initialisation de l'accès.
 4. Pour un volume important, l'import est proposé uniquement avec l'autorisation et le module correspondants. Contrôlez son résultat avant d'exploiter les fiches.
 
+Après un import réalisé pour votre commune par le support, ouvrez **Mon organisation → Interventions de Localeo**, puis **Voir le lot** pour suivre son traitement. Ce parcours est détaillé au chapitre 17.
+
 ### Trois notions à distinguer
 
 - La fiche du commerce décrit l'établissement.
@@ -307,3 +309,21 @@ Une nouvelle édition est un nouveau brouillon. Les dates, accords des commerça
 > Ne partagez ni mot de passe, ni PIN, ni QR secret. L'objectif de première réponse humaine du support est de deux jours ouvrés, avec une date cible indiquée dans la demande ; ce délai concerne la prise en charge, pas une promesse de résolution.
 
 Édition du **23 novembre 2026**. Les illustrations montrent l’interface sur ordinateur et mobile avec des données de démonstration. Les intitulés et les actions peuvent varier selon le modèle, les droits et les modules.
+
+## 17 · Relire une intervention du support
+
+Lorsque cette rubrique est activée, ouvrez **Mon organisation → Interventions de Localeo**. Après la fin d’une intervention, la chronologie indique le nom de l’opérateur Localeo, le compte représenté, la commune, la date et le résultat de chaque action.
+
+![Le gestionnaire retrouve la référence du lot, le résultat de l’import et le lien vers son suivi.](illustrations/guide-quotidien/interventions-1024.png)
+
+### Suivre un import
+
+1. Repérez la **Confirmation de l’import** et la référence du lot. La confirmation accepte le plan de traitement.
+2. Lisez l’état courant et le nombre de lignes effectivement traitées. **Voir le lot** ouvre le dossier dans la commune active si vous disposez du droit d’import.
+3. Retrouvez le détail et le rapport dans le dossier. Le fichier et le rapport sont disponibles jusqu’à 30 jours après la fin ou l’abandon du lot.
+
+### Retrouver un brouillon d’actualité
+
+La chronologie personnelle indique la création ou la modification d’un brouillon réalisée pour votre compte. Retrouvez le texte dans **Actualités** de l’animation. Vous gardez la main sur sa diffusion.
+
+Les interventions restent consultables pendant 180 jours après leur fin. Un gestionnaire habilité à l’import pour la même organisation et la même commune peut consulter les opérations sur les lots concernés.

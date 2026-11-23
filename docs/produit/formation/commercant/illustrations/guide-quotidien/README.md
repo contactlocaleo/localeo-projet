@@ -1,5 +1,16 @@
 # Illustrations du guide quotidien commerçant
 
+## Historique des interventions du 23 novembre 2026
+
+Captures Chromium de la rubrique **Interventions de Localeo** avec des données fictives sur la base Git `2dc3397` et les modifications E76. La capture `20-interventions.png` présente la soumission du brouillon par Localeo.
+
+```powershell
+$env:LOCALEO_TEST_SUPPORT='true'
+$env:LOCALEO_TEST_DIST='tmp/e76-guide/dist'
+node scripts/build-browser-tests.mjs
+node scripts/capture-merchant-guide.mjs --dist tmp/e76-guide/dist --report-dir tmp/e76-guide/recette --port 4376 --only 20-interventions
+```
+
 ## E56-EVO-ETATS-PREPARATION — 22 novembre 2026
 
 Les captures **01-accueil.png** et **16-preparation.png** ont été recapturées

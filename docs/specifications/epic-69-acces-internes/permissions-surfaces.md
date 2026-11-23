@@ -21,6 +21,7 @@ conversion vers les scopes techniques des batchs. B+F est leur union ; les refus
 | `onboarding.gerer` | Non | Oui | Non | Oui | Dossiers, pièces, préparation, transitions conformes au domaine |
 | `support.consulter` | Oui | Oui | Non | Oui | Consultation métier du support ; aucun accès général par Finance |
 | `support.gerer` | Non | Oui | Non | Oui | Traitement métier du support |
+| `support.session` | Non | Oui | Non | Oui | Ouvrir une session déléguée et passer en intervention après réauthentification. Le journal global et la révocation administrative exigent `audit.global`. |
 | `finance.support.consulter` | Non | Non | Oui | Oui | Projection de demandes financières autorisées uniquement, jamais alias de `support.consulter` |
 | `atelier.consulter` | Oui | Oui | Non | Oui | Préparation existante et médias autorisés, pas de génération implicite |
 | `atelier.gerer` | Non | Oui | Non | Oui | Génération IA, préparation et création de coffret ; coûts IA ne sont pas des commandes de mouvement de fonds PSP |

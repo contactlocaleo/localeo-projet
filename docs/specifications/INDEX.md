@@ -1,5 +1,7 @@
 # Spécifications
 
+- **EPIC 76 — Sessions support dans Localeo Pro et Animation**, [spécification](epic-76-impersonification-support-pro-animation/README.md). Accès ERP et Localeo Support, import de commerçants comme recette transverse, historique client et garde-fous de sécurité et de charge.
+
 - **E73 — Communication communale**, [critères CC-01 à CC-06](epic-73-animation-et-ou-coffrets/modules-souscriptions-import-communication.md#e73-evo-communication-communale) et [bilan](epic-73-animation-et-ou-coffrets/verification-livraison.md#communication-communale-22-novembre-2026). Envoi immédiat aux abonnés Live de la commune et quota partagé.
 
 **19 novembre 2026 — CRM :** [UX01–UX05 et suites de l’audit du 18 novembre](epic-71-crm-prospection/workshop-crm-20261118.md), spécification et réalisation locales ; seuils de risques 30/60 jours confirmés. [Bilan](epic-71-crm-prospection/verification-livraison.md#workshop-crm-20261118), EPIC 71 En cours.

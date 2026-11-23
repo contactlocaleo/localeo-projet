@@ -2,7 +2,9 @@
 
 [Retour à la roadmap](../README.md)
 
-Huit EPIC sont classées en cours. Ce classement ne vaut ni clôture ni déploiement.
+Neuf EPIC sont classées en cours. Ce classement ne vaut ni clôture ni déploiement.
+
+- [EPIC 76 — Impersonification support Pro et Animation](epic-76-impersonification-support-pro-animation-backlog.md) et [spécification](../../specifications/epic-76-impersonification-support-pro-animation/README.md). Session temporaire depuis l’ERP ou Localeo Support, import de commerçants comme recette transverse, double attribution et historique client. 18 critères.
 
 - [EPIC 81 — Clarté des parcours publics Marketplace](epic-81-parcours-ux-marketplace-20261118-backlog.md) : accueil, fiche et achat-cadeau, navigation vers Live réalisés localement ; catalogue d'ouverture, recette Stripe TEST et tests avec de vrais utilisateurs encore ouverts.
 
