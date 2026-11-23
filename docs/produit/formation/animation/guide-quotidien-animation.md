@@ -1,6 +1,6 @@
 # Localeo Animation - Votre guide au quotidien
 
-<!-- Source canonique du PDF ; générateur dans localeo-animation/scripts/generate-animation-guide.py. Édition du 22 novembre 2026. Les captures montrent l'application réelle avec des données d'exemple, jamais des comptes de production. -->
+<!-- Source canonique du PDF ; générateur dans localeo-animation/scripts/generate-animation-guide.py. Édition du 23 novembre 2026. Les captures montrent l'application réelle avec des données d'exemple, jamais des comptes de production. -->
 
 ## 1 · Piloter l'activité de ses animations
 
@@ -12,7 +12,7 @@
 2. Vérifiez le nom de l'organisation et la **commune active** dans l'en-tête. Le changement de commune renouvelle les informations affichées.
 3. Dans **Pilotage des animations**, **7 derniers jours** est sélectionné par défaut. Choisissez **Aujourd’hui**, **30 derniers jours** ou une période **Personnalisée** selon votre besoin.
 4. Pour une période personnalisée, indiquez le début et la fin : au maximum **366 jours**, sans date de fin future. Les jours sont calculés en heure de Paris.
-5. **Actualiser** relit les résultats de la période sélectionnée et revient à la première page. Vérifiez les bornes et la dernière actualisation avant de comparer les résultats.
+5. **Actualiser** relit les résultats de la période sélectionnée et revient à la première page.
 
 Les quatre cartes distinguent **inscriptions confirmées**, **passages validés**, **lots retirés** et **utilisations**. Cette dernière détaille bons, coffrets distincts et prestations consommées. La comparaison porte sur la période précédente ; la courbe suit inscriptions et passages.
 
@@ -35,7 +35,7 @@ Choisissez **Exporter tous les résultats (CSV)** pour reprendre la période aff
 
 Si l'export dépasse **10 000 animations**, il est refusé ; réduisez la période et recommencez. Aucune liste tronquée ne doit être prise pour un résultat complet.
 
-Après **30 minutes**, la lecture préparée pour l'export expire : utilisez **Actualiser**, vérifiez les nouvelles bornes puis demandez à nouveau le CSV. L'export ne change pas de période en silence.
+Après **30 minutes**, la lecture préparée pour l'export expire. Cliquez sur **Actualiser** pour relire la période sélectionnée, puis demandez à nouveau le CSV.
 
 > La comparaison des cartes et de la courbe porte sur les événements enregistrés pendant les périodes, pas sur ce taux de qualification. Un coffret utilisé plusieurs fois compte comme un coffret distinct ; le détail des prestations montre son utilisation.
 
@@ -306,4 +306,4 @@ Une nouvelle édition est un nouveau brouillon. Les dates, accords des commerça
 
 > Ne partagez ni mot de passe, ni PIN, ni QR secret. L'objectif de première réponse humaine du support est de deux jours ouvrés, avec une date cible indiquée dans la demande ; ce délai concerne la prise en charge, pas une promesse de résolution.
 
-Édition du **22 novembre 2026**. Interfaces illustrées sur ordinateur et mobile ; données de démonstration. Les intitulés et les actions peuvent varier selon le modèle, les droits et les modules.
+Édition du **23 novembre 2026**. Les illustrations montrent l’interface sur ordinateur et mobile avec des données de démonstration. Les intitulés et les actions peuvent varier selon le modèle, les droits et les modules.

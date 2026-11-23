@@ -1,5 +1,21 @@
 # Captures du guide utilisateur Animation
 
+## 23 novembre 2026 - sélecteur de période du tableau de bord
+
+`pilotage-indicateurs-1024.png` et `pilotage-indicateurs-390.png` montrent le
+sélecteur de période et les indicateurs avec des données fictives. Depuis
+Animation, sur la base `e3957eb` complétée par la retouche du tableau de bord :
+
+```powershell
+$env:ANIMATION_TEST_DIST = 'tmp/pilotage-text-20261123-build'
+$env:ANIMATION_GUIDE_CAPTURE_ROOT = 'tmp/pilotage-text-guide-captures'
+New-Item -ItemType Directory -Force $env:ANIMATION_GUIDE_CAPTURE_ROOT | Out-Null
+node scripts/build-pwa-tests.mjs
+node tests/browser/dashboard-pilotage-guide.mjs
+```
+
+Copier les deux captures `pilotage-indicateurs` depuis le dossier de sortie.
+
 ## Palette bleu nuit et orange du 22 novembre 2026
 
 Les illustrations de cette édition reprennent le fond papier, les actions bleues,
