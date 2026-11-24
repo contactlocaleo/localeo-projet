@@ -1,5 +1,10 @@
 # Roadmap par etat
 
+**24 novembre 2026 — E56-EVO-ACHAT-PASSEPORT.** En préparation d’un Passeport
+commerçant, choisir **Achat requis** ou **Visite sans achat** et appliquer la
+même condition à la mission, au règlement et à Localeo Live.
+[Critères E56-AP-01 à AP-04](../specifications/epic-56-validation-participation-commercants-animation/README.md#e56-evo-achat-passeport--condition-dachat-du-passeport-24-novembre-2026).
+
 **23 novembre 2026 — E76 en cours.** L’accès client depuis l’ERP et Localeo Support, l’import pour un gestionnaire et l’historique des interventions sont en recette locale. [Résultats et conditions d’activation](../specifications/epic-76-impersonification-support-pro-animation/verification-livraison.md).
 
 **22 novembre 2026 — E73-EVO-COMMUNICATION-COMMUNALE**. Le module Communication

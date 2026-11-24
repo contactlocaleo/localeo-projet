@@ -4,6 +4,14 @@
 
 ## Synthese
 
+### Évolution du 24 novembre 2026 — E56-EVO-ACHAT-PASSEPORT
+
+L’organisateur choisit **Achat requis** ou **Visite sans achat** pour les
+passages d’un Passeport commerçant en préparation. La mission, le règlement
+et les conditions publiques reprennent la même condition. Les [critères
+E56-AP-01 à AP-04 et vérifications](../../specifications/epic-56-validation-participation-commercants-animation/README.md#e56-evo-achat-passeport--condition-dachat-du-passeport-24-novembre-2026)
+suivent cette évolution après la clôture historique.
+
 ### Évolution du 22 novembre 2026 — E56-EVO-ETATS-PREPARATION
 
 Préparation effective et déclaration facultative à l’organisateur sont

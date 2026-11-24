@@ -388,3 +388,95 @@ canoniques et embarqués accompagne le code producteur/consommateur.
 Aucun déploiement, commit ou push déclenché.
 Les serveurs des recettes locales sont arrêtés. Aucune activation distante ni
 recette sur appareil réel ou avec un backend déployé n’est revendiquée.
+
+## E56-EVO-ACHAT-PASSEPORT — condition d’achat du Passeport (24 novembre 2026)
+
+Le modèle standard sur TEST exigeait un achat sans montant minimum à chaque
+passage. L’organisateur pouvait régler le seuil de validation et adapter la
+mission destinée aux commerçants. Le règlement et les conditions publiques
+reprenaient la condition d’achat du modèle.
+
+L’organisateur choisit désormais une condition commune à tous les passages du
+Passeport, à la création et en configuration. **Achat requis** conserve la
+règle historique, avec un achat sans montant minimum. **Visite sans achat**
+autorise le commerçant à valider le passage à l’occasion d’une simple visite.
+Dans les deux cas, le commerçant atteste le passage par le circuit de
+validation habituel. Un passage validé par commerce compte vers le seuil.
+Les autres clauses du règlement sont conservées. Une clause d’achat
+explicitement incompatible avec le choix fait refuser l’enregistrement.
+
+### Critères et preuves attendues
+
+| Critère | Comportement attendu | Vérification |
+| --- | --- | --- |
+| E56-AP-01 | À la création et en configuration, le gestionnaire autorisé voit les deux options. **Achat requis** est prérempli. La valeur choisie est conservée après enregistrement et reprise. | Parcours navigateur à la création, reprise de préparation et modification d’un brouillon, sur téléphone et ordinateur. |
+| E56-AP-02 | Le domaine du Passeport porte le choix sous `regles.achat_requis`, un booléen. Une configuration historique sans ce champ conserve la règle d’achat applicable. L’édition respecte les droits existants. La publication vérifie la version de configuration et fige la condition acceptée. | Tests de normalisation, charge utile invalide, version de publication obsolète et refus après publication. |
+| E56-AP-03 | La condition choisie apparaît dans la mission communiquée au commerçant, le règlement et les conditions publiées dans Localeo Live. Le changement invalide les accords portant sur la condition précédente. L’organisateur renvoie les invitations concernées pour recueillir l’accord sur la version qui sera publiée. | Vérifier les deux valeurs dans les documents communiqués. Simuler un accord, changer de condition, puis vérifier le nouvel envoi et le nouvel accord. |
+| E56-AP-04 | Chaque validation effective reste une attestation par un commerçant autorisé. Le seuil, l’unicité de la validation par commerce et les chances suivent les règles du Passeport. | Tests du moteur et des refus existants, avec un seuil franchi sous les deux conditions. |
+
+### Impacts de livraison
+
+| Périmètre | Vérification prévue |
+| --- | --- |
+| Domaine et parcours | Le backend produit les textes à partir de la condition stockée. Animation saisit et relit le choix. Pro et Live restituent les consignes et le règlement fournis par le serveur. Le [contrat du moteur Passeport](../moteur-animation/localeo_animation_engine_spec.md#431-configuration-et-invariants-du-passeport) conserve la qualification actuelle. |
+| Données et démonstration | Le choix est stocké dans les règles JSON de la configuration existante. Tester la lecture d’une configuration ancienne, la conservation des instantanés déjà publiés et la cohérence des textes d’un Passeport démo avec sa condition. |
+| Guides | Actualiser les guides Animation et Commerçant et leurs copies distribuées. Le premier décrit le réglage dans le portail et le second précise ce que le commerçant vérifie au moment de valider. |
+| Exploitation | Livrer le backend puis le portail Animation et le guide embarqué de Localeo Pro. Vérifier deux Passeports avec les deux conditions et comparer l’invitation à la fiche et au règlement publics après publication sur un environnement de recette. |
+
+### Vérifications des consommateurs
+
+- Live (`f12035d`) : neuf tests réussis avec
+  `node --test tests/security/live-public-detail-presentation.test.cjs`, dont
+  la restitution des conditions publiques d’achat et des textes sans achat.
+- Pro (`f5c8fd5`) : 183 tests réussis avec
+  `npm test -- src/features/animations/contracts.test.js src/features/animations/pages/ParticipationRequestDetailPage.test.jsx src/features/animations/AnimationPages.test.jsx`.
+  La lecture des invitations, du règlement et de la mission utilise les
+  champs déjà fournis par le serveur.
+
+### Recette locale de l’organisateur
+
+- Animation (`475e063` avec les modifications de cette évolution). `pnpm typecheck`,
+  `pnpm lint`, `pnpm test` et la construction avec `scripts/build-pwa-tests.mjs`
+  réussis. La suite Node compte 431 réussites.
+- `tests/browser/qualification-threshold.mjs` réussit les douze combinaisons du
+  Passeport, du Jeu des vitrines et du Juste Prix à 320, 390 et 1 280 px et à
+  1 280 px avec le texte à 200 %. Le scénario parcourt les deux formulaires,
+  vérifie le choix au clavier, le PATCH suivi d’une relecture et la requête de
+  création à partir du récapitulatif. `tests/manual-preparation.test.mjs` vérifie
+  aussi la sérialisation et la reprise du choix sans achat.
+- Le guide Animation a été régénéré, ses dix-huit pages rendues et relues.
+  `pnpm guide:check` et `tests/browser/animation-guide.mjs --access-only`
+  confirment la copie embarquée et l’accès au PDF depuis le build local.
+- Les treize pages du guide Commerçant ont été rendues et relues. L’illustration
+  du chapitre 7 montre la navigation et les états de préparation. Le contrôle
+  `guide:check` et `scripts/capture-merchant-guide.mjs --check-guide --verify-only`
+  confirment le PDF et son accès à 390 et 1 440 px depuis le build synthétique.
+
+### Recette locale du backend
+
+- Backend (`47293b1d` avec les modifications de cette évolution). Le lanceur
+  `scripts/validation/test_isolated.py` valide les deux conditions et le refus
+  après publication dans `test_achat_passeport.py`. Les tests ciblés de
+  préparation manuelle, d’invitations, de catalogue public et de lecture Pro
+  passent dans la même campagne de 103 tests. `test_publication_api_t3.py`
+  ajoute 14 vérifications du contrat de publication, dont la version exigée.
+  Les 783 contrôles d’architecture et de couverture des classes de domaine
+  passent avec le même lanceur isolé.
+- `test_seuil_qualification_audit.py` vérifie les deux conditions et le cas
+  historique, ainsi que l’exclusion des doublons et des commerces hors du
+  parcours. Le scénario PostgreSQL de `test_generation_animation_postgres.py`
+  couvre la conservation du choix lors de la réutilisation d’un template.
+- Le générateur utilise le mode **Visite sans achat** pour les nouveaux
+  Passeports de démonstration et produit le règlement et la version associés.
+  Le test `test_generator_links_publications_executions_and_consents_to_the_current_model`
+  l’a vérifié sur une fixture isolée. Le champ étant stocké dans les règles
+  JSON existantes, aucune migration SQL n’est requise.
+- La campagne de démonstration sur PostgreSQL 18 jetable a terminé dix cas
+  avec succès et reproduit l’échec préexistant de Vitrines Pâques avec passage
+  sur `47293b1d`. Le scénario de réinstallation/restauration a été interrompu
+  au bout d’une vingtaine de minutes de campagne et les deux derniers cas
+  restent non exécutés. Le journal local est dans
+  `localeo-backend/tmp/passeport-achat-demo/exit.txt`. Les serveurs sont arrêtés.
+  Dans la suite unitaire élargie, l’échec de
+  `test_proofs_require_a_participating_merchant_and_an_open_period` est aussi
+  reproduit sur `47293b1d`.

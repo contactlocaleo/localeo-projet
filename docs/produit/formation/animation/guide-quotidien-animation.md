@@ -61,7 +61,7 @@ Après **30 minutes**, la lecture préparée pour l'export expire. Cliquez sur *
 
 **Objectif :** passer de votre idée à un brouillon, sans publier par erreur.
 
-![Le seuil de validation propose de 1 à 6 validations pour les 6 commerçants sélectionnés dans cet exemple.](illustrations/guide-quotidien/seuil-validation-1280.png)
+![Ce Passeport d’exemple autorise la validation des visites sans achat.](illustrations/guide-quotidien/achat-passeport-1280.png)
 
 1. Ouvrez **Animations**, puis **Créer** sur téléphone (**Créer une animation** sur ordinateur). Pour retrouver une saisie enregistrée, choisissez **Préparations**, puis **Reprendre la préparation**. Les préparations plus anciennes restent accessibles avec **Suivant** et **Précédent**.
 2. Sur téléphone, avancez une étape à la fois. Le sélecteur nomme l'étape courante ; **Continuer** et **Précédent** permettent de naviguer. La commune active et le modèle restent visibles.
@@ -75,6 +75,8 @@ Pour un **Passeport commerçant**, un **Jeu des vitrines** ou un **Juste Prix**,
 Si vous réduisez la sélection, un seuil devenu incompatible reste affiché **à ajuster**. Choisissez explicitement une nouvelle valeur ou ajoutez des commerçants avant de continuer ; l'application ne remplace pas votre choix en silence.
 
 > Sélectionner un commerce ne vaut pas accord de sa part. À la publication, les contrôles vérifient aussi les commerces ayant accepté de participer. Consultez les blocages indiqués avant de publier.
+
+Dans **Mission & règles** à la création ou dans **Configuration → Règles** du brouillon, réglez **Achat pour valider un passage**. Choisissez **Achat requis** (sans montant minimum) ou **Visite sans achat**. Le commerçant valide le passage sur place dans les deux cas. Après un changement, renvoyez les invitations déjà envoyées. Le choix est figé à la publication.
 
 ### Quel principe de jeu ?
 

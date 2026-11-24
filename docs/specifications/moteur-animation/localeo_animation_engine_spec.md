@@ -292,6 +292,8 @@ Le renderer montre les tampons/visites, le seuil et l'état de qualification. Le
 | Qualification | `n` commerces distincts validés, `s` requis : progression `min(100, 100*n/s)`, éligibilité `n >= s`, une chance si éligible, zéro sinon. Première validation = première date effective applicable. |
 | Annulation | Recalcul selon les règles Passeport existantes, sans inventer de dispense globale de chasse ; populations déjà gelées non modifiées silencieusement. |
 
+Depuis l’[évolution E56-EVO-ACHAT-PASSEPORT](../epic-56-validation-participation-commercants-animation/README.md#e56-evo-achat-passeport--condition-dachat-du-passeport-24-novembre-2026), l’organisateur choisit l’achat requis ou la visite sans achat en préparation. Cette condition est commune aux commerces de l’édition et figure dans la version proposée au commerçant et publiée dans Live. Le moteur continue de compter les validations effectives des commerces autorisés dans les deux cas.
+
 #### 4.3.2 Commandes, état et rendu du Passeport
 
 L'état spécifique contient les références des validations effectives par commerce, leur date, le compteur et la qualification calculée. Il ne contient pas de `currentStepId`. Les états fonctionnels affichés sont « inscrit / aucun passage », « en progression » et « qualifié » ; les états de clôture/tirage proviennent du socle.

@@ -1,6 +1,6 @@
 # Localeo Commerçant · Votre guide au quotidien
 
-<!-- Source canonique du PDF embarqué. Édition du 23 novembre 2026. Chaque section de niveau 2 ouvre une page. Captures du frontend actuel, API simulées et exemples fictifs : scripts/capture-merchant-guide.mjs dans localeo-commercant. -->
+<!-- Source canonique du PDF embarqué. Édition du 24 novembre 2026. Chaque section de niveau 2 ouvre une page. Captures du frontend actuel, API simulées et exemples fictifs : scripts/capture-merchant-guide.mjs dans localeo-commercant. -->
 
 ## 1 · Se connecter et se repérer
 
@@ -173,7 +173,7 @@ Utilisez le refus proposé et confirmez. Pour une chasse : **Autres choix > Refu
 
 ### Adapter l’accueil au jeu
 
-**Passeport :** suivez les conditions du passage ; validez le QR personnel si la mission le demande. **Chasse :** installez le QR de lieu et préparez la mission retenue. **Tombola :** suivez le rôle indiqué dans l’invitation ; ne supposez pas qu’un passage est à valider. Vitrines et Juste Prix sont détaillés page suivante.
+Pour un **Passeport**, consultez la mission. Vérifiez l’achat, sans montant minimum, s’il est requis. Sinon, la visite suffit. Dans les deux cas, scannez le QR personnel. En **Chasse**, installez le QR de lieu et préparez la mission retenue. En **Tombola**, suivez le rôle de l’invitation. Vitrines et Juste Prix sont détaillés page suivante.
 
 **Non requise** signifie qu’aucun préparatif n’est à confirmer. Sans suivi activé, aucune déclaration n’est demandée. La fiche et ses consignes restent accessibles dans **Toutes mes préparations et l’historique**. Une ancienne déclaration reste visible même si un préparatif doit être repris.
 

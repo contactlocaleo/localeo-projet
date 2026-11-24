@@ -430,6 +430,24 @@ QR ni secret. Le banc vérifie les trois jeux concernés à 320, 390 et 1 280 px
 ainsi qu'à 1 280 px avec texte agrandi à 200 %. Cette recette locale ne prouve
 pas un déploiement distant.
 
+## Actualisation du 24 novembre 2026 - condition d’achat du Passeport
+
+Le cadrage `achat-passeport-1280.png` montre le champ **Achat pour valider un
+passage**, avec **Visite sans achat** sélectionné. Il provient de la
+configuration d’un brouillon fictif à 1 280 px, sur la base
+Animation `475e063` avec l’évolution locale de la condition d’achat. Le même
+banc vérifie la modification au clavier et le choix pendant la création.
+
+```powershell
+$env:ANIMATION_TEST_DIST = 'tmp/passport-purchase-build'
+node scripts/build-pwa-tests.mjs
+node tests/browser/qualification-threshold.mjs
+```
+
+Le fichier est produit dans le dossier `tmp/threshold-report-*` annoncé par
+le scénario. Il cadre le champ réel sans modifier le DOM, avec des données
+fictives, sans QR ni identifiant de participant.
+
 Le PDF mis à jour conserve treize chapitres et treize pages, rendues en PNG
 dans `localeo-animation/tmp/threshold-guide-preview/pages` puis relues, avec
 une inspection détaillée du chapitre 2. La génération et la synchronisation
