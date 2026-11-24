@@ -54,20 +54,19 @@ Dans **Prestations**, recherchez par nom ou coffret, puis sélectionnez l’offr
 
 ## 3 · Valider une prestation de coffret
 
-Le même scanner lit les QR des coffrets, des animations et des lots. Pour un coffret, vérifiez ce que votre commerce doit fournir.
+Les deux méthodes ci-dessous sont aussi valables pour les QR d’animation et de lot.
 
 ![À valider nomme la prestation de votre commerce et présente l’action de confirmation.](illustrations/guide-quotidien/02-validation.png)
 
 ### Scanner, vérifier, confirmer
 
-1. Ouvrez **Scanner**, autorisez la caméra et présentez le QR du client devant l’objectif.
-2. Vérifiez coffret, validité et prestation à remettre. Seules vos prestations autorisées proposent une validation.
-3. Choisissez une seule fois **Valider la prestation**. Attendez la confirmation de réussite avant de considérer l’action comme enregistrée.
-4. Utilisez **Scanner un autre QR** pour la personne suivante. Pour une autre prestation du même coffret, scannez à nouveau son QR.
+1. Scannez avec l’**appareil photo du téléphone**, ouvrez le lien et connectez-vous si demandé. Pour un ancien QR, ouvrez **Scanner** dans Pro et utilisez sa caméra.
+2. Vérifiez le coffret, sa validité et la prestation à remettre, puis choisissez **Valider la prestation**. Attendez la confirmation.
+3. Utilisez **Scanner un autre QR** pour poursuivre. Pour une autre prestation du même coffret, scannez à nouveau son QR.
 
 ### Caméra ou réseau indisponible ?
 
-Vérifiez l’autorisation caméra du navigateur ; utilisez **Réinitialiser l’appareil photo** si proposé. Si vous disposez de la valeur du QR, saisissez-la dans **Identifiant du QR code**, puis **Analyser le QR**. Demandez au client d’agrandir un QR flou.
+Dans Pro, vérifiez l’autorisation caméra ou utilisez **Réinitialiser l’appareil photo**. Vous pouvez aussi saisir l’**Identifiant du QR code**, puis choisir **Analyser le QR**.
 
 Après une coupure, privilégiez **Vérifier le résultat** : la validation a pu être enregistrée. Si la réussite est confirmée mais la fiche reste ancienne, **Actualiser l’état du coffret** relit l’état sans valider à nouveau.
 
@@ -85,7 +84,7 @@ Vérifiez le commerce, le contenu et l’état du QR avant de confirmer.
 
 ### Remettre un lot gagné
 
-1. Ouvrez **Scanner** et scannez le QR du lot présenté dans Live.
+1. Scannez le QR du lot présenté dans Live avec l’appareil photo du téléphone ou avec **Scanner** dans Pro.
 2. Vérifiez lot, commerce et état **Lot à remettre**.
 3. Remettez le lot entier, choisissez **Confirmer la remise du lot** et attendez la confirmation.
 4. Pour un lot remis, expiré ou indisponible, suivez l’information affichée ou contactez l’organisateur.
@@ -94,7 +93,7 @@ Après une coupure, utilisez **Relire le résultat** avant une nouvelle action. 
 
 ### Valider une étape Animation
 
-Si **Votre mission** demande une validation commerçante, scannez le **QR personnel du participant**. Vérifiez animation et étape, puis **Valider cette étape**. Attendez la confirmation.
+Si **Votre mission** demande une validation commerçante, scannez le **QR personnel du participant** avec l’appareil photo du téléphone ou dans Pro. Vérifiez animation et étape, puis **Valider cette étape**. Attendez la confirmation.
 
 Pour **Vitrines** et **Juste Prix**, une étape **invalide** après épuisement des essais ne se rattrape ni par scan ni par PIN. Invitez le joueur à consulter son parcours dans Live.
 

@@ -1,5 +1,7 @@
 # Roadmap par etat
 
+**24 novembre 2026 — EPIC 82, À faire.** [Scan QR depuis l’appareil photo avec Localeo Pro](a-faire/epic-82-scan-qr-externe-localeo-pro-backlog.md). Accès direct à l’action pour coffrets, participations et bons numériques après connexion si nécessaire. Confirmation explicite et scanner historique conservés.
+
 **24 novembre 2026 — E56-EVO-ACHAT-PASSEPORT.** En préparation d’un Passeport
 commerçant, choisir **Achat requis** ou **Visite sans achat** et appliquer la
 même condition à la mission, au règlement et à Localeo Live.
@@ -239,13 +241,12 @@ Le bilan conserve la dette préexistante de lecture bornée et les actions de li
 
 Classement consolidé le 18 septembre 2026, complété le 22 octobre par les EPIC 74 et 75. Les backlogs des applications sont
 réunis dans les dossiers d'état, avec un seul fichier par EPIC. Le suivi inclut
-les 79 identifiants du tronc commun et trois identifiants applicatifs distincts,
-après ajout des EPIC 77 à 79 le 6 novembre 2026.
+les 82 identifiants du tronc commun et trois identifiants applicatifs distincts.
 
 | Etat | Epics | Dossier |
 | --- | ---: | --- |
 | Terminees | 64 | [terminees/](terminees/README.md) |
-| A faire | 8 | [a-faire/](a-faire/README.md) |
+| A faire | 9 | [a-faire/](a-faire/README.md) |
 | En cours | 9 | [en-cours/](en-cours/README.md) |
 | Abandonnees | 2 | [abandonnees/](abandonnees/README.md) |
 | Fusionnee | 1 | Epic 61 reprise dans l'[Epic 60](terminees/epic-60-vision-360-commercialisation-backlog.md) |
@@ -443,6 +444,7 @@ précise la provenance et les divergences historiques conservées.
 | 78 | En cours | [Le jeu des vitrines](../specifications/epic-78-jeu-des-vitrines/README.md) : spécification du 15 novembre, 6 US et 16 critères ; QCM unique, préparation Pro/contrôle terrain, qualification E77 avec/sans passages, offre standard ; sept arbitrages résolus ; parcours et démo vérifiés, charge soutenue non qualifiée ([bilan](../specifications/epic-78-jeu-des-vitrines/bilan-realisation.md)), modèle inactif |
 | 79 | A faire | [Escape Game assisté par l’IA](a-faire/epic-79-escape-game-assiste-ia-backlog.md) : 7 US et 18 critères cibles ; préparation IA selon le processus de la chasse E55, validation avant publication, terrain commune/commerces et progression sur un téléphone confirmés ; quatre arbitrages résolus, quatre ouverts, sans implémentation |
 | 81 | En cours | [Clarté des parcours publics Marketplace](en-cours/epic-81-parcours-ux-marketplace-20261118-backlog.md) : sept orientations UX P0/P1 validées, cinq améliorations de présentation réalisées localement ; contrôle du catalogue d'ouverture, recette Stripe TEST et tests humains ouverts. |
+| 82 | À faire | [Scan QR depuis l’appareil photo avec Localeo Pro](a-faire/epic-82-scan-qr-externe-localeo-pro-backlog.md) : trois familles de QR clients, reprise après connexion et scanner historique préservé. |
 | Autres identifiants du tronc commun | Terminees | Statut produit consolide conserve ; les anciennes mentions de stories a faire ne rouvrent pas ces epics. |
 
 Les changements des Epics 5, 12 et 47 corrigent des incoherences entre les

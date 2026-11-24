@@ -10,6 +10,8 @@ Déploiement : backend d'abord, frontend ensuite ; aucun fallback par URL. Le li
 
 Tests : `tests/security/test_merchant_animation_scan.py` et `test_validation_qr_body.py`. Complète les conventions API Epic 41 et l'exploitation des Epics 2/5 sans rouvrir leur statut produit.
 
+[E82 — Scan depuis l’appareil photo](../epic-82-scan-qr-externe-localeo-pro/README.md) ajoute un lien optique vers Pro. Le jeton voyage dans un fragment retiré dès l’arrivée et le transport API conserve le corps JSON authentifié.
+
 
 ## Lisibilité du résultat Coffret — 9 octobre 2026
 

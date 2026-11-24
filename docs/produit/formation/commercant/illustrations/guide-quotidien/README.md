@@ -1,5 +1,22 @@
 # Illustrations du guide quotidien commerçant
 
+## Scan depuis l’appareil photo — E82, 24 novembre 2026
+
+La capture **02-validation.png** montre une prestation prête à confirmer
+après arrivée par le lien du QR. Chromium utilise un commerce et un QR
+fictifs, des API simulées et l’accès réseau local uniquement.
+
+Depuis `localeo-commercant` :
+
+```powershell
+$env:LOCALEO_TEST_DIST = 'tmp/e82-guide-dist'
+node scripts/build-browser-tests.mjs
+node scripts/capture-merchant-guide.mjs --dist tmp/e82-guide-dist --report-dir tmp/e82-guide-capture --port 4220 --only 02-validation
+py -3.14 scripts/generate-merchant-guide.py --preview-dir tmp/e82-guide-final
+npm run guide:sync
+npm run guide:check
+```
+
 ## Historique des interventions du 23 novembre 2026
 
 Captures Chromium de la rubrique **Interventions de Localeo** avec des données fictives sur la base Git `2dc3397` et les modifications E76. La capture `20-interventions.png` présente la soumission du brouillon par Localeo.

@@ -1,5 +1,7 @@
 # Suivi backlog
 
+**24 novembre 2026 — [EPIC 82, scan QR depuis l’appareil photo avec Localeo Pro](a-faire/epic-82-scan-qr-externe-localeo-pro-backlog.md).** Critères E82-CA-01 à E82-CA-07. Ouverture directe après connexion éventuelle, confirmation explicite et non-régression de **Scanner**. État **À faire** selon la [roadmap commune](README.md).
+
 **E73-EVO-WORKSHOP-LIVE-20261118 — 18 novembre 2026** :
 [cadrage canonique des six orientations retenues](terminees/epic-73-animation-et-ou-coffrets-backlog.md#workshop-live-20261118),
 18 critères E73-WL-01 à 18, quatre P1 et deux P2. Programme et texte complétés,

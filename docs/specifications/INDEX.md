@@ -1,5 +1,7 @@
 # Spécifications
 
+- **EPIC 82 — Scan QR depuis l’appareil photo avec Localeo Pro**, [conception et recette](epic-82-scan-qr-externe-localeo-pro/README.md). Coffret, participant Animation et bon numérique, confirmation explicite et scanner historique préservé.
+
 - **EPIC 76 — Sessions support dans Localeo Pro et Animation**, [spécification](epic-76-impersonification-support-pro-animation/README.md). Accès ERP et Localeo Support, import de commerçants comme recette transverse, historique client et garde-fous de sécurité et de charge.
 
 - **E73 — Communication communale**, [critères CC-01 à CC-06](epic-73-animation-et-ou-coffrets/modules-souscriptions-import-communication.md#e73-evo-communication-communale) et [bilan](epic-73-animation-et-ou-coffrets/verification-livraison.md#communication-communale-22-novembre-2026). Envoi immédiat aux abonnés Live de la commune et quota partagé.
@@ -122,6 +124,7 @@ Commencer par le README du sujet, puis consulter ses règles, contrats et arbitr
 
 | 78 | [Le jeu des vitrines](epic-78-jeu-des-vitrines/README.md) | En cours | Backend/ERP, Animation, Commerçant, Marketplace/Live ; démonstration et exploitation |
 | 81 | [Clarté des parcours publics Marketplace](epic-81-parcours-ux-marketplace/README.md) | À faire | Marketplace/Live ; backend pour contrats et recette achat, contenu éditorial conditionnel |
+| 82 | [Scan QR depuis l’appareil photo avec Localeo Pro](epic-82-scan-qr-externe-localeo-pro/README.md) | À faire | Backend, Commerçant, Animation et Live pour les supports QR |
 
 ## Contrats et historique
 

@@ -1,5 +1,7 @@
 # Roadmap produit
 
+**24 novembre 2026 — [EPIC 82, scan QR depuis l’appareil photo avec Localeo Pro](a-faire/epic-82-scan-qr-externe-localeo-pro-backlog.md).** Ouverture directe vers l’action à confirmer pour Coffret, participation Animation et bon numérique. Le parcours **Scanner** de Pro reste disponible avec les deux formats de QR. État **À faire** selon la [roadmap commune](README.md).
+
 **18 novembre 2026 — E73-EVO-WORKSHOP-LIVE-20261118** :
 [six orientations Live retenues pour cadrage](terminees/epic-73-animation-et-ou-coffrets-backlog.md#workshop-live-20261118),
 B1/C1/D1/E1 P1 et A1/F1 P2 ; 18 critères WL, quatre lots de qualification,

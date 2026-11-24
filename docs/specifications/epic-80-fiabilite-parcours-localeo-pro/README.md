@@ -23,6 +23,8 @@ L'état produit relève uniquement de la [roadmap](../../roadmap/README.md). B1/
 3. **Kit :** seul le commerce de la demande acceptée et courante accède aux supports autorisés. Le domaine vérifie cet accès et la diffusion du flyer ; le service applicatif assemble les consignes et le rendu. Le téléchargement ne confirme pas prêt (`E80-CA-10..11`).
 4. **Session :** après changement de compte ou expiration, aucun état privé d'un autre compte, QR ou jeton ne survit dans la navigation. L'API contrôle droits et périmètre ; Pro invalide ses caches et présente la reprise (`E80-CA-12`).
 
+Le [scan externe E82](../epic-82-scan-qr-externe-localeo-pro/README.md) utilise un fragment optique retiré dès l’arrivée. La connexion ne reprend que cette nouvelle entrée détenue en mémoire. Les règles E80 de reprise d’une action interrompue et de lecture du reçu continuent de s’appliquer.
+
 ## Contrats, données et compatibilité
 
 Producteur des lectures et commandes Animation : `localeo-backend`. Contrats canoniques et schémas OpenAPI restent dans `localeo-projet` ; l'OpenAPI embarqué consommé par Pro est `localeo-commercant/api/localeo-openapi.json`. Aucun champ, endpoint ou erreur n'est ajouté pour les corrections de texte, ordre et dates du présent lot ; aucun export de contrat n'est donc requis. Si le diagnostic de C1/D1/F1 établit un manque de projection, le producteur et tous ses consommateurs devront être spécifiés et testés ensemble avant extension. La liste paginée ne doit jamais être assimilée au total global sans un total fiable.
