@@ -1,5 +1,7 @@
 # Illustrations du guide quotidien commerçant
 
+La capture `12-invitations.png` du 24 novembre 2026 illustre l’invitation d’une association voisine avec des données fictives. Depuis le dépôt Commerçant, utiliser le build local documenté puis `node scripts/capture-merchant-guide.mjs --dist tmp/e84-guide-pro --only 12-invitations`.
+
 ## Scan depuis l’appareil photo — E82, 24 novembre 2026
 
 La capture **02-validation.png** montre une prestation prête à confirmer

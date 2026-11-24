@@ -1,5 +1,21 @@
 # E73 — Gestion autonome des commerçants Animation
 
+## Adhérents hors commune — 24 novembre 2026
+
+**E73-EVO-ADHERENTS-HORS-COMMUNE** étend la saisie manuelle et l’import au réseau d’une association. Une souscription garde sa commune de pilotage. Le CEJ de Martignas peut référencer ses adhérents de Saint-Jean-d’Illac avec leur véritable adresse, puis les inviter à son animation. L’association valide elle-même le rattachement. Localeo traite les rapprochements ambigus et les corrections d’identité.
+
+La [nouvelle epic 84](../../roadmap/en-cours/epic-84-adherents-hors-commune-animation-backlog.md) reprend ces critères et porte la cible HC-01 à HC-09. Pour HC-04, elle prévoit de rendre une fiche complète sélectionnable dès la confirmation de l’import lorsque les conditions d’activation Animation sont satisfaites. Le tableau ci-dessous conserve la règle de préparation initiale.
+
+| Critère | Comportement attendu |
+| --- | --- |
+| HC-01 | Dans **Commerçants**, un gestionnaire habilité choisit la commune réelle de l’établissement. Une création hors commune ou le rapprochement certain d’une fiche existante enregistre un lien entre organisation, commune de pilotage et établissement. Le réseau communal historique reste partagé dans sa commune et le lien supplémentaire est propre à l’organisation. |
+| HC-02 | Dans **Import commerçants**, un même fichier CSV ou XLSX peut contenir des lignes de plusieurs communes. Les droits Import sont vérifiés sur le lot de la commune de pilotage. L’aperçu distingue la création d’une fiche et le rattachement d’une fiche existante. Les deux opérations utilisent la commune réelle de la ligne. |
+| HC-03 | Un rattachement à une fiche existante exige une identité cohérente (commune, SIRET, email). Une ambiguïté ou une correction d’identité est signalée pour vérification Localeo avec une réponse qui protège les données de la fiche. Les autres lignes valides peuvent suivre la confirmation partielle habituelle. Un réimport ou un rejeu conserve une seule fiche et un seul lien. |
+| HC-04 | Rattacher une fiche existante autorise la sélection dans le réseau de l’association. Les coordonnées globales, les identifiants Pro, les droits Coffrets et les rattachements des autres organisations restent protégés. Retirer le lien agit sur ce réseau. Une nouvelle fiche issue d’import suit la préparation et l’activation habituelles. |
+| HC-05 | L’organisateur peut sélectionner et inviter le commerce éligible. Le commerçant retrouve son invitation dans Pro et décide pour chaque animation. Après publication, Live propose la même animation depuis sa commune de pilotage et les communes publiées des commerces ayant une participation acceptée et courante. Une recherche sur les deux villes donne un seul résultat. |
+
+Le domaine Référencement porte le rattachement au réseau, Animation porte l’accord à chaque événement. La création de fiche, le rapprochement et l’ajout du lien doivent être atomiques. L’import recontrôle les faits à l’application de chaque ligne. La migration est additive, avec une relation vide pour les données historiques. La souscription, la facturation et le stock de Coffrets conservent leurs propriétaires et leur portée.
+
 Évolution du **18 novembre 2026 — E73-EVO-AUTONOMIE-COMMERCANTS**.
 Spécification et implémentation demandées ; la clôture historique E73 est conservée.
 Le bilan ci-dessous distingue les preuves locales de la mise en service.

@@ -101402,7 +101402,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/FicheAnimationCommande"
+                "$ref": "#/components/schemas/CreationAnimationCommande"
               }
             }
           }
@@ -147185,6 +147185,247 @@
           }
         }
       }
+    },
+    "/protected/referencement/commercants-animation/communes": {
+      "get": {
+        "tags": [
+          "Referencement"
+        ],
+        "summary": "Communes",
+        "operationId": "communes_protected_referencement_commercants_animation_communes_get",
+        "parameters": [
+          {
+            "name": "recherche",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 160,
+              "title": "Recherche"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CommuneReseauDTO"
+                  },
+                  "title": "Response Communes Protected Referencement Commercants Animation Communes Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/referencement/commercants-animation/{commerce_id}/apercu-detachement": {
+      "get": {
+        "tags": [
+          "Referencement"
+        ],
+        "summary": "Apercu Detachement",
+        "operationId": "apercu_detachement_protected_referencement_commercants_animation__commerce_id__apercu_detachement_get",
+        "parameters": [
+          {
+            "name": "commerce_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Commerce Id"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApercuDetachementDTO"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/referencement/commercants-animation/{commerce_id}/detacher": {
+      "post": {
+        "tags": [
+          "Referencement"
+        ],
+        "summary": "Detacher",
+        "operationId": "detacher_protected_referencement_commercants_animation__commerce_id__detacher_post",
+        "parameters": [
+          {
+            "name": "commerce_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Commerce Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DetachementAnimationCommande"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FicheAnimationDTO"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
     }
   },
   "components": {
@@ -161892,6 +162133,11 @@
           "creations": {
             "type": "integer",
             "title": "Creations"
+          },
+          "rattachements": {
+            "type": "integer",
+            "title": "Rattachements",
+            "default": 0
           },
           "mises_a_jour": {
             "type": "integer",
@@ -177877,6 +178123,46 @@
             "format": "uuid",
             "title": "Commune Id"
           },
+          "commune_nom": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Commune Nom"
+          },
+          "rattachement_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rattachement Id"
+          },
+          "resultat_reseau": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "CREATION",
+                  "RATTACHEMENT",
+                  "DETACHEMENT",
+                  "DEJA_REFERENCE"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Resultat Reseau"
+          },
           "nom": {
             "type": "string",
             "title": "Nom"
@@ -177934,7 +178220,8 @@
             "enum": [
               "A_PREPARER",
               "ACTIF",
-              "RETIRE"
+              "RETIRE",
+              "NON_DEMANDE"
             ],
             "title": "Etat Animation"
           },
@@ -177943,7 +178230,8 @@
             "enum": [
               "ABSENT",
               "INVITE",
-              "INITIALISE"
+              "INITIALISE",
+              "NON_COMMUNIQUE"
             ],
             "title": "Acces Pro"
           },
@@ -177965,7 +178253,8 @@
                 "MODIFIER",
                 "ACTIVER",
                 "RETIRER",
-                "INVITER"
+                "INVITER",
+                "DETACHER"
               ]
             },
             "type": "array",
@@ -185568,6 +185857,28 @@
             "type": "integer",
             "title": "Numero"
           },
+          "commune_reconnue": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Commune Reconnue"
+          },
+          "activation_animation_prevue": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Activation Animation Prevue"
+          },
           "statut": {
             "type": "string",
             "enum": [
@@ -185591,7 +185902,8 @@
                 "enum": [
                   "CREATION",
                   "MISE_A_JOUR",
-                  "INCHANGE"
+                  "INCHANGE",
+                  "RATTACHEMENT"
                 ]
               },
               {
@@ -213370,6 +213682,17 @@
             "type": "boolean",
             "title": "Cree"
           },
+          "selectionnable_animation": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Selectionnable Animation"
+          },
           "plan_version": {
             "anyOf": [
               {
@@ -223089,6 +223412,231 @@
           "preparation"
         ],
         "title": "PreparationPayload"
+      },
+      "ApercuDetachementDTO": {
+        "properties": {
+          "rattachement_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Rattachement Id"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/InvitationDetachementDTO"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          }
+        },
+        "type": "object",
+        "required": [
+          "rattachement_id",
+          "items",
+          "next_cursor"
+        ],
+        "title": "ApercuDetachementDTO"
+      },
+      "CommuneReseauDTO": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "nom": {
+            "type": "string",
+            "title": "Nom"
+          },
+          "code_postal": {
+            "type": "string",
+            "title": "Code Postal"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "nom",
+          "code_postal"
+        ],
+        "title": "CommuneReseauDTO"
+      },
+      "CreationAnimationCommande": {
+        "properties": {
+          "nom": {
+            "type": "string",
+            "maxLength": 300,
+            "minLength": 1,
+            "title": "Nom"
+          },
+          "adresse": {
+            "type": "string",
+            "maxLength": 500,
+            "minLength": 1,
+            "title": "Adresse"
+          },
+          "categorie": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Categorie"
+          },
+          "siret": {
+            "type": "string",
+            "maxLength": 30,
+            "minLength": 14,
+            "title": "Siret"
+          },
+          "contact_email": {
+            "type": "string",
+            "maxLength": 320,
+            "minLength": 1,
+            "title": "Contact Email"
+          },
+          "contact_nom": {
+            "type": "string",
+            "maxLength": 200,
+            "title": "Contact Nom",
+            "default": ""
+          },
+          "contact_telephone": {
+            "type": "string",
+            "maxLength": 40,
+            "title": "Contact Telephone",
+            "default": ""
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 5000,
+            "title": "Description",
+            "default": ""
+          },
+          "commune_commerce_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Commune Commerce Id"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "nom",
+          "adresse",
+          "categorie",
+          "siret",
+          "contact_email"
+        ],
+        "title": "CreationAnimationCommande"
+      },
+      "DetachementAnimationCommande": {
+        "properties": {
+          "version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Version"
+          },
+          "version_perimetre": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Version Perimetre"
+          },
+          "rattachement_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Rattachement Id"
+          },
+          "invitations_confirmees": {
+            "items": {
+              "$ref": "#/components/schemas/InvitationDetachementCommande"
+            },
+            "type": "array",
+            "title": "Invitations Confirmees"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "version",
+          "version_perimetre",
+          "rattachement_id"
+        ],
+        "title": "DetachementAnimationCommande"
+      },
+      "InvitationDetachementCommande": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "A_ENVOYER",
+              "EN_ATTENTE"
+            ],
+            "title": "Statut"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "statut"
+        ],
+        "title": "InvitationDetachementCommande"
+      },
+      "InvitationDetachementDTO": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "A_ENVOYER",
+              "EN_ATTENTE"
+            ],
+            "title": "Statut"
+          },
+          "animation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animation Id"
+          },
+          "animation_nom": {
+            "type": "string",
+            "title": "Animation Nom"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "statut",
+          "animation_id",
+          "animation_nom"
+        ],
+        "title": "InvitationDetachementDTO"
       }
     },
     "securitySchemes": {

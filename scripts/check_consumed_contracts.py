@@ -17,6 +17,7 @@ SCOPES = {
         '/protected/gestion-commercants')),
     'animation': ('../localeo-animation/src/imports/openapi.json', (
         '/protected/animation-locale', '/public/identite-acces/animation',
+        '/protected/referencement/commercants-animation', '/protected/referencement/imports-commercants',
         '/protected/identite-acces/animation', '/public/credits-achat-b2b')),
 }
 

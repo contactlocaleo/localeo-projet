@@ -2,7 +2,9 @@
 
 [Retour à la roadmap](../README.md)
 
-Neuf EPIC sont classées en cours. Ce classement ne vaut ni clôture ni déploiement.
+Dix EPIC sont classées en cours. Ce classement ne vaut ni clôture ni déploiement.
+
+- [EPIC 84 — Inviter les adhérents hors commune à une animation](epic-84-adherents-hors-commune-animation-backlog.md). [Spécification et recette](../../specifications/epic-84-adherents-hors-commune-animation/README.md).
 
 - [EPIC 76 — Impersonification support Pro et Animation](epic-76-impersonification-support-pro-animation-backlog.md) et [spécification](../../specifications/epic-76-impersonification-support-pro-animation/README.md). Session temporaire depuis l’ERP ou Localeo Support, import de commerçants comme recette transverse, double attribution et historique client. 18 critères.
 

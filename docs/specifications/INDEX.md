@@ -125,6 +125,7 @@ Commencer par le README du sujet, puis consulter ses règles, contrats et arbitr
 | 78 | [Le jeu des vitrines](epic-78-jeu-des-vitrines/README.md) | En cours | Backend/ERP, Animation, Commerçant, Marketplace/Live ; démonstration et exploitation |
 | 81 | [Clarté des parcours publics Marketplace](epic-81-parcours-ux-marketplace/README.md) | À faire | Marketplace/Live ; backend pour contrats et recette achat, contenu éditorial conditionnel |
 | 82 | [Scan QR depuis l’appareil photo avec Localeo Pro](epic-82-scan-qr-externe-localeo-pro/README.md) | À faire | Backend, Commerçant, Animation et Live pour les supports QR |
+| 84 | [Adhérents hors commune dans Localeo Animation](epic-84-adherents-hors-commune-animation/README.md) | En cours | Backend, Animation, Commerçant et Marketplace/Live |
 
 ## Contrats et historique
 

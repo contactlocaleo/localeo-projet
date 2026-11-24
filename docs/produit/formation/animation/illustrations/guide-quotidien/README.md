@@ -1,5 +1,7 @@
 # Captures du guide utilisateur Animation
 
+Les captures E84 du 24 novembre 2026 montrent la liste **Commerçants** et un import dont les lignes portent sur Valmont et Beaulieu. Les données sont fictives. Les fichiers intégrés sont `commercants-1024.png`, `import-colonnes-1024.png` et `import-apercu-1024.png`. Utiliser la commande ci-dessous avec `--only=commercants,import-colonnes,import-apercu` pour les reproduire à 1024 et 390 pixels.
+
 ## Import des commerçants du 24 novembre 2026
 
 `import-colonnes-1024.png` montre la reconnaissance du séparateur et les cinq

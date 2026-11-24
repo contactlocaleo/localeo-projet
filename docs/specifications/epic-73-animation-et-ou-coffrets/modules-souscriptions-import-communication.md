@@ -288,6 +288,8 @@ Le port de paiement transmet des faits typés (référence externe, commande, de
 
 ## 6. Import opérationnel de commerçants
 
+L’[évolution des adhérents hors commune](gestion-commercants-animation.md#adhérents-hors-commune--24-novembre-2026) précise CA-42 à CA-45. Le lot et sa permission demeurent dans la commune de pilotage. Une ligne peut créer un établissement dans sa commune réelle ou rattacher un établissement identifié au réseau de l’organisation. HC-02 à HC-04 précisent l’aperçu, la confirmation et la reprise de ces lignes.
+
 ### Écran et fichier
 
 Parcours : commune/souscription → modèle ou fichier → choix de feuille XLSX → association des colonnes → aperçu → résolution → confirmation des lignes valides → progression → rapport/reprise. Présenter séparément créations, mises à jour, inchangés, conflits, erreurs et corrections sensibles en attente Localeo. Aucun bouton d'activation de commerce n'est ajouté au portail organisateur.

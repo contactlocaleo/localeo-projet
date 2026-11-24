@@ -1,5 +1,7 @@
 # Suivi backlog
 
+**24 novembre 2026 — EPIC 84, En cours.** [Adhérents hors commune dans Localeo Animation](en-cours/epic-84-adherents-hors-commune-animation-backlog.md). Le backlog porte les critères HC-01 à HC-09 et la recette du CEJ.
+
 **24 novembre 2026 — [EPIC 82, scan QR depuis l’appareil photo avec Localeo Pro](a-faire/epic-82-scan-qr-externe-localeo-pro-backlog.md).** Critères E82-CA-01 à E82-CA-07. Ouverture directe après connexion éventuelle, confirmation explicite et non-régression de **Scanner**. État **À faire** selon la [roadmap commune](README.md).
 
 **E73-EVO-WORKSHOP-LIVE-20261118 — 18 novembre 2026** :
@@ -27,27 +29,24 @@ Mise à jour du classement : 2026-11-16 — E78 en cours ; historique du 6 novem
 
 Évolution transverse du 29 septembre 2026 : [PWA-20260929 — installation et mise à jour](../specifications/installation-mise-a-jour-pwa.md), appliquée aux sept PWA existantes. Les états et clôtures historiques des EPIC restent inchangés ; preuves locales et recette appareil sont distinguées dans la spécification.
 
-- Identifiants EPIC suivis : 82 ; 79 du tronc commun et 3 identifiants applicatifs distincts.
-- EPICs a faire : 8 ; EPICs en cours : 7 (EPIC-55, EPIC-68, EPIC-71, EPIC-74, EPIC-76, EPIC-77 et EPIC-78).
+- 86 identifiants EPIC suivis, dont 83 du tronc commun et 3 identifiants applicatifs distincts.
+- 9 EPIC à faire et 10 en cours.
 - EPICs fusionnees : 1 (EPIC-61 vers EPIC-60).
 - EPICs terminees : 64 (62 du tronc commun et 2 applicatives) ; EPICs abandonnees : 2.
 - US / PRD detaillees dans le tableau historique : 415, jusqu'a `EPIC-45`.
 - Source prioritaire : fichier backlog dedie quand disponible, sinon `product-roadmap.md`.
-- Référence de pilotage : EPIC-55, EPIC-68, EPIC-71, EPIC-74, EPIC-76, EPIC-77 et EPIC-78 sont en cours. EPIC-70 et EPIC-72 sont terminées sur tests. EPIC-65 est terminée après revue des dix critères ; EPIC-69 après validation CA-18 ; EPIC-66 après confirmation utilisateur. EPIC-54, EPIC-58, EPIC-62,
-  EPIC-64, EPIC-67, EPIC-75, EPIC-79 et EPIC-MARKETPLACE-54 sont à faire. EPIC-47 est terminée,
-  clôture produit confirmée. EPIC-05 et EPIC-12 sont abandonnées ;
-  EPIC-61 est fusionnée dans EPIC-60. Les autres EPIC du tronc commun sont terminées.
+- Référence de pilotage · [EPIC à faire](a-faire/README.md), [EPIC en cours](en-cours/README.md) et [EPIC terminées](terminees/README.md).
 - Classement et motifs : [index de la roadmap](README.md).
 - Le tableau detaille des US ci-dessous reste un historique consolide. Pour les
-  epics 46 a 79, les backlogs dedies portent le detail et le tableau `Sources
+  epics 46 à 84, les backlogs dédiés portent le détail et le tableau `Sources
   consolidees` porte l'etat global courant.
 
 ### Repartition des EPICs par etat retenu
 
 | Etat | Nombre |
 | --- | ---: |
-| A faire | 8 |
-| En cours | 7 |
+| A faire | 9 |
+| En cours | 10 |
 | Abandonne | 2 |
 | Fusionnee | 1 |
 | Termine | 64 |
@@ -685,3 +684,7 @@ anciennes US restent historiques.
 | EPIC-77 | En cours | [backlog](en-cours/epic-77-juste-prix-local-backlog.md), [spécification V1 du 13 novembre](../specifications/epic-77-juste-prix-local/README.md) ; 8 US et 20 critères cibles, proposition Pro et approbation, estimation unique, tolérance commune, seuil pour le tirage et passages paramétrables ; quatre arbitrages résolus, forfait standard ; implémentation locale, preuves et réserves au bilan |
 | EPIC-78 | En cours | [backlog](en-cours/epic-78-jeu-des-vitrines-backlog.md) ; Le jeu des vitrines, 6 US et 16 critères cibles ; intrus dans les vitrines, Noël/Pâques et autres thèmes, préparation et Live mobile ; sept arbitrages résolus ; implémentation locale, modèle inactif |
 | EPIC-79 | A faire | [backlog](a-faire/epic-79-escape-game-assiste-ia-backlog.md) ; Escape Game assisté par l’IA, 7 US et 18 critères cibles ; préparation IA et validation selon la chasse E55, terrain avec Live et un téléphone confirmés ; quatre arbitrages résolus et quatre ouverts |
+| EPIC-80 | En cours | [Fiabilité des parcours Animation dans Localeo Pro](en-cours/epic-80-fiabilite-parcours-localeo-pro-backlog.md) |
+| EPIC-81 | En cours | [Clarté des parcours publics Marketplace](en-cours/epic-81-parcours-ux-marketplace-20261118-backlog.md) |
+| EPIC-82 | À faire | [Scan QR depuis l’appareil photo avec Localeo Pro](a-faire/epic-82-scan-qr-externe-localeo-pro-backlog.md) |
+| EPIC-84 | En cours | [Adhérents hors commune dans Localeo Animation](en-cours/epic-84-adherents-hors-commune-animation-backlog.md), critères HC-01 à HC-09. |

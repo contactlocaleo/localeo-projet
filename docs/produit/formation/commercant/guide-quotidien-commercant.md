@@ -129,7 +129,7 @@ Dans **Compte > Stripe Connect**, si proposé, choisissez **Configurer mon compt
 
 ## 6 · Répondre aux invitations Animation
 
-L’invitation présente votre mission et les conditions d’accueil. Consultez-les avant de vous engager.
+Une association d’une commune voisine peut vous inviter. Pour votre première connexion, ouvrez l’email d’accès Pro. Vous décidez ensuite pour chaque animation.
 
 ![La liste distingue les invitations reçues et leur échéance ; Consulter la demande ouvre votre mission.](illustrations/guide-quotidien/12-invitations.png)
 

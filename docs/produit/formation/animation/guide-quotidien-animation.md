@@ -111,14 +111,14 @@ Une étape invalide n'élimine pas automatiquement le joueur. Si le seuil de val
 
 **Objectif :** disposer de fiches exploitables et comprendre l'accès de chaque commerce.
 
-![La liste des commerçants distingue les coordonnées, les états et les actions disponibles.](illustrations/guide-quotidien/commercants-1024.png)
+![Les deux établissements ont une adresse dans leur commune réelle. La liste indique leur disponibilité pour les animations et leur accès Pro.](illustrations/guide-quotidien/commercants-1024.png)
 
 1. Ouvrez **Commerçants**. Recherchez un établissement avant de créer une nouvelle fiche.
-2. Vérifiez le nom, l'adresse, les coordonnées de contact et la catégorie. Utilisez les actions de la ligne pour compléter la fiche.
+2. Pour un adhérent extérieur, utilisez **Choisir une autre commune**. Recherchez par nom ou code postal et sélectionnez la commune de son magasin. Si la commune, le SIRET et l’email correspondent à une fiche existante, elle rejoint votre réseau.
 3. Invitez le commerçant à rejoindre son espace lorsque cette action est proposée. Suivez séparément l'envoi du mail et l'initialisation de l'accès.
 4. Pour un volume important, ouvrez **Import commerçants** si vous avez le module et l’autorisation. Les chapitres 18 et 19 décrivent la préparation et la vérification d’un import.
 
-Après un import réalisé pour votre commune par le support, ouvrez **Mon organisation → Interventions de Localeo**, puis **Voir le lot** pour suivre son traitement. Ce parcours est détaillé au chapitre 17.
+Pour retirer un adhérent extérieur, relisez les invitations concernées avant de confirmer. Les invitations en attente sont annulées. Ses participations déjà acceptées se gèrent depuis chaque animation.
 
 ### Trois notions à distinguer
 
@@ -134,10 +134,10 @@ Après un import réalisé pour votre commune par le support, ouvrez **Mon organ
 
 ![Sur téléphone, le sélecteur nomme l'étape Terrain et les contrôles indiquent ce qu'il reste à vérifier.](illustrations/guide-quotidien/preparation-mobile-detail-390.png)
 
-1. Dans l'animation, le sélecteur **Rubrique de l’animation** donne accès à **Invitations** et **Préparation terrain**. Vérifiez les commerces sollicités et les réponses reçues.
+1. Dans **Invitations**, choisissez les commerces éligibles de la commune et les adhérents extérieurs de votre réseau. Suivez leurs réponses dans le même dossier.
 2. Expliquez à chacun sa mission : accueillir les joueurs, présenter une vitrine ou un prix, valider un passage, installer un support ou remettre un lot selon le modèle.
 3. Pour une chasse avec Léo, le sélecteur **Étape de préparation** nomme les étapes et leur état. Relisez parcours et lieux, puis contrôlez organisation, commerces, terrain et publication. Dépliez les **points à résoudre avant publication**. Pour un passeport assisté, relisez également les contenus avant de les valider.
-4. Contrôlez le règlement, les consignes et les supports à diffuser. Les validations de préparation ne remplacent pas la commande de publication.
+4. Vérifiez les préparatifs, puis publiez. Live propose aussi l’animation dans l’agenda des communes publiées où un commerce participe avec un accord valide.
 
 ### Utiliser le suivi de préparation
 
@@ -354,5 +354,5 @@ Corrigez les erreurs avant de confirmer les lignes prêtes.
 
 1. Lisez le bilan et utilisez les filtres pour retrouver les lignes concernées. Ouvrez le détail d’une ligne pour lire la valeur source et la correction proposée.
 2. Dans **Catégories à associer**, choisissez une catégorie Localeo ou **Laisser la catégorie vide**. Cliquez sur **Enregistrer les équivalences**, puis reconstruisez l’aperçu. Le choix s’applique à toutes les occurrences du libellé dans ce lot.
-3. Corrigez les autres valeurs dans le fichier et redéposez-le dans le même flux si nécessaire. Répartissez une voie trop longue entre l’adresse et un complément. Pour créer des fiches dans une autre commune autorisée, préparez un lot pour cette commune.
-4. Sélectionnez les lignes prêtes et confirmez-les. Si vous écartez des lignes, validez l’import partiel. La confirmation place le lot en attente de traitement. Consultez le résultat et le rapport dans **Import commerçants**.
+3. Un fichier peut réunir des adhérents de plusieurs communes. Vérifiez la commune reconnue sur chaque ligne. En cas d’identité ambiguë, confiez la vérification à Localeo et confirmez les autres lignes prêtes.
+4. Après traitement, consultez le résultat et le rapport. **Sélectionnable pour une animation** indique que vous pouvez inviter ce commerce. **À compléter** indique qu’il reste une action sur la fiche. L’import n’envoie aucun email de première connexion. Pour ouvrir l’accès personnel, utilisez l’invitation Pro depuis **Commerçants**.

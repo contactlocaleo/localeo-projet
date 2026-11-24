@@ -1,5 +1,7 @@
 # Roadmap par etat
 
+**24 novembre 2026 — EPIC 84, En cours.** [Adhérents hors commune dans Localeo Animation](en-cours/epic-84-adherents-hors-commune-animation-backlog.md). L’epic reprend l’évolution E73-EVO-ADHERENTS-HORS-COMMUNE et porte les neuf critères HC-01 à HC-09.
+
 **24 novembre 2026 — EPIC 82, À faire.** [Scan QR depuis l’appareil photo avec Localeo Pro](a-faire/epic-82-scan-qr-externe-localeo-pro-backlog.md). Accès direct à l’action pour coffrets, participations et bons numériques après connexion si nécessaire. Confirmation explicite et scanner historique conservés.
 
 **24 novembre 2026 — E56-EVO-ACHAT-PASSEPORT.** En préparation d’un Passeport
@@ -241,13 +243,13 @@ Le bilan conserve la dette préexistante de lecture bornée et les actions de li
 
 Classement consolidé le 18 septembre 2026, complété le 22 octobre par les EPIC 74 et 75. Les backlogs des applications sont
 réunis dans les dossiers d'état, avec un seul fichier par EPIC. Le suivi inclut
-les 82 identifiants du tronc commun et trois identifiants applicatifs distincts.
+les 83 identifiants du tronc commun et trois identifiants applicatifs distincts.
 
 | Etat | Epics | Dossier |
 | --- | ---: | --- |
 | Terminees | 64 | [terminees/](terminees/README.md) |
 | A faire | 9 | [a-faire/](a-faire/README.md) |
-| En cours | 9 | [en-cours/](en-cours/README.md) |
+| En cours | 10 | [en-cours/](en-cours/README.md) |
 | Abandonnees | 2 | [abandonnees/](abandonnees/README.md) |
 | Fusionnee | 1 | Epic 61 reprise dans l'[Epic 60](terminees/epic-60-vision-360-commercialisation-backlog.md) |
 
@@ -445,6 +447,7 @@ précise la provenance et les divergences historiques conservées.
 | 79 | A faire | [Escape Game assisté par l’IA](a-faire/epic-79-escape-game-assiste-ia-backlog.md) : 7 US et 18 critères cibles ; préparation IA selon le processus de la chasse E55, validation avant publication, terrain commune/commerces et progression sur un téléphone confirmés ; quatre arbitrages résolus, quatre ouverts, sans implémentation |
 | 81 | En cours | [Clarté des parcours publics Marketplace](en-cours/epic-81-parcours-ux-marketplace-20261118-backlog.md) : sept orientations UX P0/P1 validées, cinq améliorations de présentation réalisées localement ; contrôle du catalogue d'ouverture, recette Stripe TEST et tests humains ouverts. |
 | 82 | À faire | [Scan QR depuis l’appareil photo avec Localeo Pro](a-faire/epic-82-scan-qr-externe-localeo-pro-backlog.md) : trois familles de QR clients, reprise après connexion et scanner historique préservé. |
+| 84 | En cours | [Adhérents hors commune dans Localeo Animation](en-cours/epic-84-adherents-hors-commune-animation-backlog.md). Saisie, import, participation en magasin, agendas Live et renouvellement du réseau. |
 | Autres identifiants du tronc commun | Terminees | Statut produit consolide conserve ; les anciennes mentions de stories a faire ne rouvrent pas ces epics. |
 
 Les changements des Epics 5, 12 et 47 corrigent des incoherences entre les
