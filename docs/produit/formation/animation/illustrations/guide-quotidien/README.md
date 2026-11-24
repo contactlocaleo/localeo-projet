@@ -1,5 +1,34 @@
 # Captures du guide utilisateur Animation
 
+## Import des commerçants du 24 novembre 2026
+
+`import-colonnes-1024.png` montre la reconnaissance du séparateur et les cinq
+champs obligatoires. `import-apercu-1024.png` montre les résultats de deux
+lignes, dont une catégorie à résoudre. Les captures proviennent de
+l’application Animation sur la base `15d3bab` avec la mise à jour de l’import,
+dans Chromium et avec des données fictives. La même recette contrôle le rendu
+à 390 px et la lecture des exemples sans commande d’écriture.
+
+Depuis `localeo-animation` :
+
+```powershell
+$env:ANIMATION_TEST_SUPPORT = 'true'
+$env:ANIMATION_TEST_DIST = 'tmp/import-guide-build'
+$env:ANIMATION_GUIDE_CAPTURE_ROOT = 'tmp/import-guide-captures'
+$env:ANIMATION_GUIDE_ARTIFACTS = 'tmp/import-guide-report'
+node scripts/build-generation-tests.mjs
+node tests/browser/animation-guide.mjs --only=import-colonnes,import-apercu --captures-only
+```
+
+Copier les captures à 1024 px dans ce dossier, régénérer le PDF et vérifier
+la copie embarquée selon la [procédure commune](../../../../../organisation/maintenance-guides-utilisateurs.md).
+
+Les 20 pages rendues dans `tmp/import-guide-pdf-final` ont été relues. Après
+synchronisation, refaire le build et relancer le scénario sans
+`--captures-only` pour vérifier les liens au clavier et les octets du PDF
+servi, y compris quand l’assistance est indisponible. Les rapports de la
+passe finale à 390 et 1024 px sont dans `tmp/import-guide-final-report`.
+
 ## Historique des interventions du 24 novembre 2026
 
 Les captures `interventions-1024.png` et `interventions-390.png` montrent la modification d’une animation en brouillon et le suivi d’un import de vingt lignes. Elles utilisent Chromium, des données fictives et la révision Animation `77e2db2` avec l’évolution E76.

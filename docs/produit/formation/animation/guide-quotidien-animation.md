@@ -116,7 +116,7 @@ Une étape invalide n'élimine pas automatiquement le joueur. Si le seuil de val
 1. Ouvrez **Commerçants**. Recherchez un établissement avant de créer une nouvelle fiche.
 2. Vérifiez le nom, l'adresse, les coordonnées de contact et la catégorie. Utilisez les actions de la ligne pour compléter la fiche.
 3. Invitez le commerçant à rejoindre son espace lorsque cette action est proposée. Suivez séparément l'envoi du mail et l'initialisation de l'accès.
-4. Pour un volume important, l'import est proposé uniquement avec l'autorisation et le module correspondants. Contrôlez son résultat avant d'exploiter les fiches.
+4. Pour un volume important, ouvrez **Import commerçants** si vous avez le module et l’autorisation. Les chapitres 18 et 19 décrivent la préparation et la vérification d’un import.
 
 Après un import réalisé pour votre commune par le support, ouvrez **Mon organisation → Interventions de Localeo**, puis **Voir le lot** pour suivre son traitement. Ce parcours est détaillé au chapitre 17.
 
@@ -333,3 +333,26 @@ La chronologie personnelle indique la création ou la modification d’un brouil
 Repérez **Modification d’une animation en brouillon** dans votre chronologie personnelle. L’entrée indique le résultat et la référence du dossier. Dans **Animations**, ouvrez le brouillon concerné pour vérifier son nom, sa description et ses dates.
 
 Les interventions restent consultables pendant 180 jours après leur fin. Un gestionnaire habilité à l’import pour la même organisation et la même commune peut consulter les opérations sur les lots concernés.
+
+## 18 · Associer les colonnes d’un import
+
+Vérifiez quelles colonnes du fichier alimenteront les fiches.
+
+1. Vérifiez la **commune active**, puis ouvrez **Import commerçants**. Téléchargez le modèle Excel ou CSV. Le modèle CSV est en UTF-8 et utilise le point-virgule. Préparez jusqu’à 100 lignes de données et 2 Mo par fichier.
+2. Choisissez le flux correspondant à votre source et déposez le fichier. Pour un classeur, choisissez la feuille à importer. Vérifiez la ligne d’en-tête et, pour un CSV, le séparateur détecté.
+
+![Les cinq champs obligatoires et les exemples de cellules aident à repérer une mauvaise association.](illustrations/guide-quotidien/import-colonnes-1024.png)
+
+3. Vérifiez les cinq associations obligatoires et leurs exemples. Dépliez **Champs facultatifs** pour compléter le mapping ou **Colonnes ignorées** pour vérifier ce qui restera de côté.
+4. Cliquez sur **Enregistrer l’association des colonnes**, puis sur **Prévisualiser les changements**.
+
+## 19 · Vérifier l’aperçu d’un import
+
+Corrigez les erreurs avant de confirmer les lignes prêtes.
+
+![Le bilan de l’aperçu distingue les lignes prêtes, les conflits et les erreurs à corriger.](illustrations/guide-quotidien/import-apercu-1024.png)
+
+1. Lisez le bilan et utilisez les filtres pour retrouver les lignes concernées. Ouvrez le détail d’une ligne pour lire la valeur source et la correction proposée.
+2. Dans **Catégories à associer**, choisissez une catégorie Localeo ou **Laisser la catégorie vide**. Cliquez sur **Enregistrer les équivalences**, puis reconstruisez l’aperçu. Le choix s’applique à toutes les occurrences du libellé dans ce lot.
+3. Corrigez les autres valeurs dans le fichier et redéposez-le dans le même flux si nécessaire. Répartissez une voie trop longue entre l’adresse et un complément. Pour créer des fiches dans une autre commune autorisée, préparez un lot pour cette commune.
+4. Sélectionnez les lignes prêtes et confirmez-les. Si vous écartez des lignes, validez l’import partiel. La confirmation place le lot en attente de traitement. Consultez le résultat et le rapport dans **Import commerçants**.

@@ -65659,6 +65659,200 @@
         ]
       }
     },
+    "/protected/referencement/imports-commercants/{lot_id}/colonnes": {
+      "get": {
+        "tags": [
+          "Referencement"
+        ],
+        "summary": "Lire Colonnes",
+        "operationId": "lire_colonnes_protected_referencement_imports_commercants__lot_id__colonnes_get",
+        "parameters": [
+          {
+            "name": "lot_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Lot Id"
+            }
+          },
+          {
+            "name": "feuille",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 160,
+              "title": "Feuille"
+            }
+          },
+          {
+            "name": "ligne_entete",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "title": "Ligne Entete"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ColonnesSourceDTO"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/referencement/imports-commercants/{lot_id}/categories": {
+      "get": {
+        "tags": [
+          "Referencement"
+        ],
+        "summary": "Lire Categories",
+        "operationId": "lire_categories_protected_referencement_imports_commercants__lot_id__categories_get",
+        "parameters": [
+          {
+            "name": "lot_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Lot Id"
+            }
+          },
+          {
+            "name": "recherche",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 160,
+              "default": "",
+              "title": "Recherche"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 1024
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoriesImportDTO"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
     "/protected/referencement/imports-commercants/{lot_id}/lignes": {
       "get": {
         "tags": [
@@ -144024,6 +144218,254 @@
         }
       }
     },
+    "/protected/sessions-support/animation/imports-commercants/{lot_id}/colonnes": {
+      "get": {
+        "tags": [
+          "Sessions support – imports commerçants"
+        ],
+        "summary": "Colonnes",
+        "operationId": "colonnes_protected_sessions_support_animation_imports_commercants__lot_id__colonnes_get",
+        "parameters": [
+          {
+            "name": "lot_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Lot Id"
+            }
+          },
+          {
+            "name": "feuille",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 160,
+              "title": "Feuille"
+            }
+          },
+          {
+            "name": "ligne_entete",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "title": "Ligne Entete"
+            }
+          },
+          {
+            "name": "X-Support-Onglet",
+            "in": "header",
+            "required": true,
+            "description": "Sélecteur d’onglet obtenu à l’échange, associé au cookie HttpOnly de cet onglet.",
+            "schema": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ColonnesSourceDTO"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Preuve absente, terminée ou expirée.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Origine, capacité, mode ou action refusés.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflit de version ou d'idempotence.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Ressource arrivée à échéance.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/protected/sessions-support/animation/imports-commercants/{lot_id}/categories": {
+      "get": {
+        "tags": [
+          "Sessions support – imports commerçants"
+        ],
+        "summary": "Categories",
+        "operationId": "categories_protected_sessions_support_animation_imports_commercants__lot_id__categories_get",
+        "parameters": [
+          {
+            "name": "lot_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Lot Id"
+            }
+          },
+          {
+            "name": "recherche",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 160,
+              "default": "",
+              "title": "Recherche"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 1024
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "X-Support-Onglet",
+            "in": "header",
+            "required": true,
+            "description": "Sélecteur d’onglet obtenu à l’échange, associé au cookie HttpOnly de cet onglet.",
+            "schema": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoriesImportDTO"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Preuve absente, terminée ou expirée.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Origine, capacité, mode ou action refusés.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflit de version ou d'idempotence.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Ressource arrivée à échéance.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/protected/sessions-support/animation/imports-commercants/{lot_id}/lignes": {
       "get": {
         "tags": [
@@ -156156,6 +156598,34 @@
         ],
         "title": "CatalogueResponse"
       },
+      "CategorieAAssocierDTO": {
+        "properties": {
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "lignes": {
+            "type": "integer",
+            "title": "Lignes"
+          },
+          "choix": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CategorieDTO"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "libelle",
+          "lignes"
+        ],
+        "title": "CategorieAAssocierDTO"
+      },
       "CategorieAnimationDTO": {
         "properties": {
           "id": {
@@ -156174,6 +156644,78 @@
           "libelle"
         ],
         "title": "CategorieAnimationDTO"
+      },
+      "CategorieDTO": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "libelle"
+        ],
+        "title": "CategorieDTO"
+      },
+      "CategoriesImportDTO": {
+        "properties": {
+          "contract_version": {
+            "type": "string",
+            "const": "1",
+            "title": "Contract Version",
+            "default": "1"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/CategorieDTO"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More"
+          },
+          "actions_disponibles": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Actions Disponibles"
+          },
+          "categories_a_associer": {
+            "items": {
+              "$ref": "#/components/schemas/CategorieAAssocierDTO"
+            },
+            "type": "array",
+            "title": "Categories A Associer"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "has_more",
+          "categories_a_associer"
+        ],
+        "title": "CategoriesImportDTO"
       },
       "ChampAttestationPayload": {
         "properties": {
@@ -158370,6 +158912,80 @@
           "libelle"
         ],
         "title": "ColonneDTO"
+      },
+      "ColonneExempleDTO": {
+        "properties": {
+          "index": {
+            "type": "integer",
+            "title": "Index"
+          },
+          "libelle": {
+            "type": "string",
+            "title": "Libelle"
+          },
+          "exemples": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Exemples"
+          }
+        },
+        "type": "object",
+        "required": [
+          "index",
+          "libelle",
+          "exemples"
+        ],
+        "title": "ColonneExempleDTO"
+      },
+      "ColonnesSourceDTO": {
+        "properties": {
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "feuille": {
+            "type": "string",
+            "title": "Feuille"
+          },
+          "ligne_entete": {
+            "type": "integer",
+            "title": "Ligne Entete"
+          },
+          "separateur_csv": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  ";",
+                  ",",
+                  "\t"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Separateur Csv"
+          },
+          "colonnes": {
+            "items": {
+              "$ref": "#/components/schemas/ColonneExempleDTO"
+            },
+            "type": "array",
+            "title": "Colonnes"
+          }
+        },
+        "type": "object",
+        "required": [
+          "version",
+          "feuille",
+          "ligne_entete",
+          "separateur_csv",
+          "colonnes"
+        ],
+        "title": "ColonnesSourceDTO"
       },
       "CommandeBon": {
         "properties": {
@@ -185008,6 +185624,20 @@
             "type": "array",
             "title": "Champs"
           },
+          "valeurs_source": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Valeurs Source"
+          },
           "erreurs": {
             "items": {
               "$ref": "#/components/schemas/ErreurDTO"
@@ -185527,6 +186157,21 @@
             },
             "type": "object",
             "title": "Mapping"
+          },
+          "associations_categories": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Associations Categories"
           },
           "plan_version": {
             "anyOf": [
@@ -186302,6 +186947,27 @@
             "type": "object",
             "maxProperties": 14,
             "title": "Mapping"
+          },
+          "associations_categories": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "propertyNames": {
+              "maxLength": 8000,
+              "minLength": 1
+            },
+            "type": "object",
+            "maxProperties": 100,
+            "title": "Associations Categories",
+            "description": "Libellés du fichier associés à une catégorie Localeo. Une valeur nulle ignore ce libellé."
           }
         },
         "additionalProperties": false,

@@ -602,9 +602,11 @@ Préfixe `R = /protected/referencement/imports-commercants`. `POST R` multipart 
 | Route | Commande ou lecture |
 | --- | --- |
 | GET `R/modele?format=xlsx|csv` | Modèle sans données personnelles, cinq champs obligatoires/cinq facultatifs |
-| PUT `R/{id}/mapping` | `expected_version`, feuille, ligne d'en-tête, mapping champ→colonne ; nouvelle version |
+| GET `R/{id}/colonnes` | Feuille et ligne d’en-tête demandées, version du lot, séparateur CSV et deux exemples courts par colonne |
+| GET `R/{id}/categories` | Catégories Localeo recherchables et paginées, libellés à associer et choix enregistrés pour le lot |
+| PUT `R/{id}/mapping` | `expected_version`, feuille, ligne d'en-tête, mapping champ→colonne et `associations_categories` facultatif ; nouvelle version |
 | POST `R/{id}/previsualiser` | `expected_version` ; construit plan/version et résultats paginés |
-| GET `R/{id}` et `R/{id}/lignes` | État, progression, compteurs et décisions de champ ; valeurs autorisées seulement |
+| GET `R/{id}` et `R/{id}/lignes` | État, progression, compteurs et décisions de champ ; valeurs source selon le droit et la conservation du lot |
 | POST `R/{id}/resolutions` | `expected_version`, `plan_version`, choix de rapprochement et `ligne_id/champ/choix: LOCALEO|SOURCE` ; corrections sensibles en attente Localeo |
 | POST `R/{id}/confirmer` | `expected_version`, `plan_version`, `ligne_ids`, `accepter_import_partiel` ; 202, plan figé ; 409 `PLAN_OBSOLETE`, `CONFLITS_NON_RESOLUS`, `IMPORT_SOURCE_OCCUPEE` |
 | POST `R/{id}/reprendre` | `expected_version` ; 202 même traitement uniquement lignes techniques restantes |
@@ -871,6 +873,30 @@ des avertissements distincts des erreurs. Elles ne changent ni le statut PRETE,
 ni les candidats d'identité, ni la sélection humaine. Les collisions email/SIRET
 et les ambiguïtés fortes restent bloquantes. L'analyse est bornée aux 100 lignes du
 lot ; elle ne prétend pas rechercher une similarité approximative globale.
+
+### Colonnes, catégories et diagnostic de l'aperçu
+
+Le modèle CSV UTF-8 avec BOM sépare les colonnes par le point-virgule.
+Le lecteur détecte le point-virgule, la virgule ou la tabulation et refuse un
+en-tête ambigu. Le réglage d'une feuille ou d'une ligne d'en-tête relit les
+colonnes du fichier privé, le séparateur CSV et deux exemples courts par colonne.
+Cette lecture est sans écriture, soumise aux droits du lot et à l'expiration de
+la source. Le mapping enregistré reste disponible jusqu'à enregistrement d'un
+nouveau réglage.
+
+Un libellé de catégorie non reconnu peut être associé explicitement à une
+catégorie existante ou laissé vide pour toutes ses occurrences dans le lot.
+Le serveur valide l'équivalence sur la source et le référentiel. Elle est
+versionnée avec le mapping et appliquée de la même façon à l'aperçu, la
+confirmation et l'exécution. Une valeur laissée vide conserve la valeur locale
+en mise à jour et laisse une création en préparation. Une vérification ERP
+fige aussi les équivalences. Les lots existants démarrent sans équivalences.
+
+L'aperçu présente l'action proposée et les erreurs par ligne, avec les valeurs
+source autorisées en détail. Le contrôle postal conserve sa limite de 38
+caractères par ligne après normalisation ; les compléments peuvent être associés
+séparément. Les sites commençant par `www.` sont complétés en `https://` avant
+validation. La création reste limitée à la commune du lot.
 
 ## Preuves et impacts
 
