@@ -1,6 +1,6 @@
 # Localeo Animation - Votre guide au quotidien
 
-<!-- Source canonique du PDF ; générateur dans localeo-animation/scripts/generate-animation-guide.py. Édition du 23 novembre 2026. Les captures montrent l'application réelle avec des données d'exemple, jamais des comptes de production. -->
+<!-- Source canonique du PDF ; générateur dans localeo-animation/scripts/generate-animation-guide.py. Édition du 24 novembre 2026. Les captures montrent l'application réelle avec des données d'exemple, jamais des comptes de production. -->
 
 ## 1 · Piloter l'activité de ses animations
 
@@ -308,13 +308,13 @@ Une nouvelle édition est un nouveau brouillon. Les dates, accords des commerça
 
 > Ne partagez ni mot de passe, ni PIN, ni QR secret. L'objectif de première réponse humaine du support est de deux jours ouvrés, avec une date cible indiquée dans la demande ; ce délai concerne la prise en charge, pas une promesse de résolution.
 
-Édition du **23 novembre 2026**. Les illustrations montrent l’interface sur ordinateur et mobile avec des données de démonstration. Les intitulés et les actions peuvent varier selon le modèle, les droits et les modules.
+Édition du **24 novembre 2026**. Les illustrations montrent l’interface sur ordinateur et mobile avec des données de démonstration. Les intitulés et les actions peuvent varier selon le modèle, les droits et les modules.
 
 ## 17 · Relire une intervention du support
 
 Lorsque cette rubrique est activée, ouvrez **Mon organisation → Interventions de Localeo**. Après la fin d’une intervention, la chronologie indique le nom de l’opérateur Localeo, le compte représenté, la commune, la date et le résultat de chaque action.
 
-![Le gestionnaire retrouve la référence du lot, le résultat de l’import et le lien vers son suivi.](illustrations/guide-quotidien/interventions-1024.png)
+![La chronologie indique la référence de l’animation modifiée et donne accès au suivi du lot importé.](illustrations/guide-quotidien/interventions-1024.png)
 
 ### Suivre un import
 
@@ -325,5 +325,9 @@ Lorsque cette rubrique est activée, ouvrez **Mon organisation → Interventions
 ### Retrouver un brouillon d’actualité
 
 La chronologie personnelle indique la création ou la modification d’un brouillon réalisée pour votre compte. Retrouvez le texte dans **Actualités** de l’animation. Vous gardez la main sur sa diffusion.
+
+### Vérifier une modification de votre animation
+
+Repérez **Modification d’une animation en brouillon** dans votre chronologie personnelle. L’entrée indique le résultat et la référence du dossier. Dans **Animations**, ouvrez le brouillon concerné pour vérifier son nom, sa description et ses dates.
 
 Les interventions restent consultables pendant 180 jours après leur fin. Un gestionnaire habilité à l’import pour la même organisation et la même commune peut consulter les opérations sur les lots concernés.

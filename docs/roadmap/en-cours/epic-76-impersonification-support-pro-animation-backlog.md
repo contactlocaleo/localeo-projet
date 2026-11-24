@@ -129,6 +129,8 @@ La [matrice de recette](../../specifications/epic-76-impersonification-support-p
 
 ## Arbitrages
 
+**24 novembre 2026 — E76-CA-06, E76-CA-08 et E76-CA-10.** La session déléguée Animation donnait accès aux imports et aux brouillons d’actualités. L’onglet **Animations** ajoute la consultation des fiches à tous les statuts dans le périmètre représenté et l’édition versionnée du nom, de la description et des dates au seul statut **Brouillon**, après confirmation de l’intervention et selon les droits actuels. La [spécification](../../specifications/epic-76-impersonification-support-pro-animation/README.md#écrans-et-opérations-autorisés) décrit les refus et la recette.
+
 | Arbitrage | Décision retenue |
 | --- | --- |
 | E76-ARB-01 — Consultation ou intervention | Validé le 1er novembre 2026. Consultation par défaut et intervention explicite et tracée. |

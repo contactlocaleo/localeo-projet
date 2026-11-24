@@ -53,3 +53,15 @@ Dans **Localeo Support → Accès client**, le journal administrateur permet de 
 L’historique est reconstruit à la lecture. Actualiser cette vue relit les traces et le suivi du lot. Les motifs internes restent réservés au journal d’administration. Le récapitulatif client est visible pendant 180 jours après la fin de session. Les pièces détaillées suivent les 30 jours du lot terminal. Le journal interne suit la [conservation T8](../identite-acces/conservation-validations-acces.md) et ses procédures de gel. Confirmer l’inscription de la projection client dans le registre avant PROD.
 
 En cas d’échec de la projection, rechercher `historique.indisponible` dans le journal ERP. Si la base ne peut pas recevoir l’événement, le backend le signale dans son journal applicatif. Le bouton **Réessayer** du compte concerné reconstruit la vue à partir des faits déjà validés.
+
+## Évolution du 24 novembre 2026 — Fiches Animation et édition des brouillons
+
+Les vérifications locales portent sur les arbres de travail issus de Backend `57f8df5a`, Animation `77e2db2` et Projet `371cee8`.
+
+| Critères | Preuves locales |
+| --- | --- |
+| E76-CA-06, 08, 09, 10, 14 | 22 tests ciblés au total avec PostgreSQL 18 jetable. Le test des fiches lit les huit statuts, vérifie le périmètre de la session et l’absence de transition lors de la lecture d’une animation publiée. Le PATCH refuse le mode Consultation, un droit absent dans le rôle ou l’habilitation communale, les autres statuts, un champ de publication, une version obsolète et le changement de corps lors d’un rejeu. La commande nominale persiste une seule nouvelle version et un seul succès dans le journal. |
+| E76-CA-01, 07, 09, 10, 12, 17 | Recettes Chromium ERP et Animation à 390 et 1 280 px sur des API simulées. L’opérateur retrouve une archive, conserve sa recherche en passant en intervention, relit un conflit, enregistre la correction du brouillon puis retourne à l’ERP. Le scénario du guide vérifie la visibilité de l’intervention personnelle et l’accès au PDF à 390 et 1 024 px. |
+| E76-CA-18 | 782 contrôles Backend d’architecture, de domaine et de couverture. TypeScript, lint, build et 430 tests Animation réussis. Les 27 chemins sous `/protected/sessions-support/` et leurs schémas concordent dans les exports canonique et embarqué. |
+
+L’évolution utilise les statuts, configurations et traces E76 existants. Elle ne requiert aucune migration ni adaptation des données de démonstration. Le guide Animation, son PDF et sa copie embarquée décrivent l’historique. Le parcours Pro garde ses opérations existantes. La recette sur un environnement livré et la mesure de charge restent à faire.

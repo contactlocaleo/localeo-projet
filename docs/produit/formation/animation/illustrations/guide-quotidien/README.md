@@ -1,5 +1,20 @@
 # Captures du guide utilisateur Animation
 
+## Historique des interventions du 24 novembre 2026
+
+Les captures `interventions-1024.png` et `interventions-390.png` montrent la modification d’une animation en brouillon et le suivi d’un import de vingt lignes. Elles utilisent Chromium, des données fictives et la révision Animation `77e2db2` avec l’évolution E76.
+
+```powershell
+$env:ANIMATION_TEST_SUPPORT='true'
+$env:ANIMATION_TEST_DIST='tmp/e76-animation-history-guide/dist'
+$env:ANIMATION_GUIDE_ARTIFACTS='tmp/e76-animation-history-guide/capture-report'
+$env:ANIMATION_GUIDE_CAPTURE_ROOT='tmp/e76-animation-history-guide/captures'
+node scripts/build-generation-tests.mjs
+node tests/browser/animation-guide.mjs --only=interventions --captures-only
+```
+
+Copier les deux captures dans le dossier d’illustrations. Régénérer et vérifier le guide Animation selon la [procédure commune](../../../../../organisation/maintenance-guides-utilisateurs.md).
+
 ## Historique des interventions du 23 novembre 2026
 
 Captures Chromium de la rubrique **Interventions de Localeo** avec des données fictives sur la base Git `4852017` et les modifications E76. Les vues de 1024 et 390 pixels montrent le suivi du lot de vingt lignes.

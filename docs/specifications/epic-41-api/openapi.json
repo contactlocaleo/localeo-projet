@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Backend - contrat implemente EPIC 41",
     "description": "OpenAPI complet du backend, dont les parcours Animation locale. Genere hors ligne depuis le code local pour les integrations et les mocks ; cet instantane ne prouve pas son deploiement.",
-    "version": "1.0.0+282a9db"
+    "version": "1.0.0+57f8df5"
   },
   "paths": {
     "/public/identite-acces/interne/connexion": {
@@ -145969,6 +145969,17 @@
             }
           },
           {
+            "name": "recherche",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 150,
+              "default": "",
+              "title": "Recherche"
+            }
+          },
+          {
             "name": "X-Support-Onglet",
             "in": "header",
             "required": true,
@@ -146022,6 +146033,231 @@
           },
           "410": {
             "description": "Ressource arrivée à échéance.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/protected/sessions-support/animation/animations/{animation_id}": {
+      "get": {
+        "tags": [
+          "Sessions support – édition"
+        ],
+        "summary": "Consulter Animation",
+        "operationId": "consulter_animation_protected_sessions_support_animation_animations__animation_id__get",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "X-Support-Onglet",
+            "in": "header",
+            "required": true,
+            "description": "Sélecteur d’onglet obtenu à l’échange, associé au cookie HttpOnly de cet onglet.",
+            "schema": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DetailAnimationSupport"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Preuve absente, terminée ou expirée.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Origine, capacité, mode ou action refusés.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflit de version ou d'idempotence.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Ressource arrivée à échéance.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Animation introuvable dans le périmètre de la session.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Sessions support – édition"
+        ],
+        "summary": "Modifier Animation",
+        "operationId": "modifier_animation_protected_sessions_support_animation_animations__animation_id__patch",
+        "parameters": [
+          {
+            "name": "animation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Animation Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
+          },
+          {
+            "name": "X-Support-Onglet",
+            "in": "header",
+            "required": true,
+            "description": "Sélecteur d’onglet obtenu à l’échange, associé au cookie HttpOnly de cet onglet.",
+            "schema": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModifierAnimationSupport"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DetailAnimationSupport"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Preuve absente, terminée ou expirée.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Origine, capacité, mode ou action refusés.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflit de version ou d'idempotence.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Ressource arrivée à échéance.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Animation introuvable dans le périmètre de la session.",
             "content": {
               "application/json": {
                 "schema": {
@@ -151137,12 +151373,22 @@
           "nom": {
             "type": "string",
             "title": "Nom"
+          },
+          "reference": {
+            "type": "string",
+            "title": "Reference"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
           }
         },
         "type": "object",
         "required": [
           "id",
-          "nom"
+          "nom",
+          "reference",
+          "statut"
         ],
         "title": "AnimationSupport"
       },
@@ -161877,6 +162123,7 @@
               "enum": [
                 "IMPORT",
                 "ACTUALITE_BROUILLON",
+                "ANIMATION_BROUILLON",
                 "PAGE_BROUILLON",
                 "PAGE_SOUMETTRE"
               ]
@@ -163572,6 +163819,7 @@
               "enum": [
                 "IMPORT",
                 "ACTUALITE_BROUILLON",
+                "ANIMATION_BROUILLON",
                 "PAGE_BROUILLON",
                 "PAGE_SOUMETTRE"
               ]
@@ -169272,6 +169520,86 @@
           "reponse"
         ],
         "title": "DepotResultatGenerationInput"
+      },
+      "DetailAnimationSupport": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "nom": {
+            "type": "string",
+            "title": "Nom"
+          },
+          "reference": {
+            "type": "string",
+            "title": "Reference"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          },
+          "modele_code": {
+            "type": "string",
+            "title": "Modele Code"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "configuration_disponible": {
+            "type": "boolean",
+            "title": "Configuration Disponible"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "date_debut": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date Debut"
+          },
+          "date_fin": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date Fin"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "nom",
+          "reference",
+          "statut",
+          "modele_code",
+          "version",
+          "configuration_disponible",
+          "description",
+          "date_debut",
+          "date_fin"
+        ],
+        "title": "DetailAnimationSupport"
       },
       "DetailAudit": {
         "properties": {
@@ -188526,6 +188854,68 @@
         },
         "type": "object",
         "title": "ModifierAnimationRequest"
+      },
+      "ModifierAnimationSupport": {
+        "properties": {
+          "version_attendue": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Version Attendue"
+          },
+          "nom": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nom"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "date_debut": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date Debut"
+          },
+          "date_fin": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date Fin"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "version_attendue"
+        ],
+        "title": "ModifierAnimationSupport"
       },
       "ModifierAvancementPreparationInput": {
         "properties": {
