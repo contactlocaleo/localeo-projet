@@ -1,5 +1,7 @@
 # EPIC 76 — Accès support par impersonification à Localeo Pro et Animation
 
+Le 23 novembre 2026, le paramètre des trois services est harmonisé sur `LOCALEO_SESSIONS_SUPPORT_ENABLED`. Pour E76-CA-18, vérifier que la compilation Animation affiche l’historique avec `true` et le masque avec `false` ou quand la clé est absente. Voir les [consignes d’activation](../../specifications/epic-76-impersonification-support-pro-animation/verification-livraison.md#périmètre-et-activation).
+
 ## Références
 
 - Identifiant **EPIC-76**, disponible après recherche dans la roadmap commune et les namespaces applicatifs le **1er novembre 2026**.

@@ -6,10 +6,12 @@ Les quatre dépôts concernés sont le backend, qui sert aussi l’ERP et Locale
 
 1. Appliquer dans cet ordre les migrations additives `v332_sessions_support.sql` et `v333_imports_delegues.sql`. La première crée les sessions et leur journal, la seconde la provenance des imports. Les lots ordinaires existants conservent une provenance support nulle.
 2. Livrer le backend et les deux consommateurs compatibles. Configurer les origines HTTPS d’ERP, d’Animation et de Pro pour le même environnement. Le backend résout ces origines avec `LOCALEO_ERP_URL`, `LOCALEO_ANIMATION_PORTAIL_URL` et `LOCALEO_FRONT_COMMERCANT_ANIMATION_INVITATION_URL_TEMPLATE`. Les cookies dédiés sont sécurisés et SameSite Strict. Prévoir des origines du même site pour les déploiements utilisant ces cookies.
-3. Pour la recette, activer `LOCALEO_SESSIONS_SUPPORT_ENABLED=true` au démarrage du backend, `VITE_SESSIONS_SUPPORT_ENABLED=true` à la compilation d’Animation et `LOCALEO_SESSIONS_SUPPORT_ENABLED=true` à celle de Pro. L’import conserve son activation E73 et son worker habituel. Les valeurs par défaut désactivent le parcours.
+3. Pour la recette, définir `LOCALEO_SESSIONS_SUPPORT_ENABLED=true` dans les trois TARGET. Le backend lit la valeur au démarrage. Animation et Pro la lisent pendant leur compilation pour afficher **Interventions de Localeo**. L’import conserve son activation E73 et son worker habituel. Les valeurs par défaut désactivent le parcours.
 4. Pour arrêter une intervention ou un import délégué en cours, révoquer la session dans le journal ERP. Pour désactiver l’ensemble du parcours, retirer les activations et relivrer les services concernés. Conserver les migrations et les traces pendant leur durée réglementaire.
 
 ## Preuves locales
+
+Pour E76-CA-18, les trois builds Animation vérifient que le module d’historique est inclus avec `LOCALEO_SESSIONS_SUPPORT_ENABLED=true` et exclu avec `false` ou lorsque la clé est absente. La recette Chromium avec une API simulée vérifie **Interventions de Localeo** et **Voir le lot** à 390 et 1 024 px.
 
 | Critères | Contrôles et résultats |
 | --- | --- |
