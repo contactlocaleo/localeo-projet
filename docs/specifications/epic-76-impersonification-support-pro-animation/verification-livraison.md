@@ -65,3 +65,15 @@ Les vérifications locales portent sur les arbres de travail issus de Backend `5
 | E76-CA-18 | 782 contrôles Backend d’architecture, de domaine et de couverture. TypeScript, lint, build et 430 tests Animation réussis. Les 27 chemins sous `/protected/sessions-support/` et leurs schémas concordent dans les exports canonique et embarqué. |
 
 L’évolution utilise les statuts, configurations et traces E76 existants. Elle ne requiert aucune migration ni adaptation des données de démonstration. Le guide Animation, son PDF et sa copie embarquée décrivent l’historique. Le parcours Pro garde ses opérations existantes. La recette sur un environnement livré et la mesure de charge restent à faire.
+
+## Évolution du 24 novembre 2026 — Recherche et journal d’Accès client
+
+| Critères | Preuves locales |
+| --- | --- |
+| E76-CA-01, 02, 12 | La recette Chromium `node tests/browser/epic76-acces-client.cjs` vérifie les résultats groupés, les homonymes, un compte dans plusieurs communes, la sélection depuis une fiche, le retour sur la page et le compte exacts, la protection de la saisie et le maintien du focus. Le réessai conserve la recherche. La réauthentification refusée conserve le motif, tandis que le retrait du droit efface les résultats. |
+| E76-CA-13, 14, 15 | Chromium vérifie les dernières actions, les détails et la chronologie d’une session, le retour avec filtres et focus, les deux changements d’heure de Paris depuis un navigateur configuré à Los Angeles et la révocation après la fin de la session. Les cas d’annulation, de réponse non confirmée, de lecture obsolète, de perte d’accès et de désactivation sont couverts. Les tests HTTP isolés vérifient la projection historique, l’attribution au véritable auteur, le refus sans session et les filtres paginés. |
+| E76-CA-18 | Captures Chromium inspectées à 320, 390 et 1 280 px et avec texte à 200 %. Le clavier, les libellés longs et les zones d’action sont vérifiés sur données synthétiques. L’export OpenAPI hors ligne confirme la mise à jour du modèle `EntreeJournalSupport`. Les tests du cycle PWA vérifient la protection et la version des scripts. |
+
+Le lanceur `scripts/validation/test_isolated.py` a exécuté les suites journal, sécurité E76, domaine des sessions et cycle PWA avec PostgreSQL 18 jetable. Les 46 tests ont réussi. Dans Projet, `scripts/check_guidance.py` et `scripts/sync_documentation.py --check-sources` ont réussi.
+
+La projection utilise les données déjà chargées par la jointure du journal. La liste conserve la taille de page et le tri existants. Le chargement initial intervient à l’ouverture de l’onglet, sans interrogation périodique. Le schéma de données et le générateur de démonstration s’appliquent tels quels. L’aide opérateur décrit les nouvelles vues internes. Les guides Commerçant et Animation décrivent toujours le parcours client actuel. La recette de ce lot a été réalisée en local.

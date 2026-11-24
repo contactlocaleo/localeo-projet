@@ -172859,6 +172859,54 @@
               }
             ],
             "title": "Revocation"
+          },
+          "libelle_cible": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Libelle Cible",
+            "description": "Libellé du compte enregistré à l’ouverture de la session."
+          },
+          "libelle_rattachement": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Libelle Rattachement",
+            "description": "Nom du commerce ou de l’organisation à l’ouverture."
+          },
+          "libelle_commune": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Libelle Commune",
+            "description": "Nom de la commune à l’ouverture de la session."
+          },
+          "nom_operateur": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nom Operateur",
+            "description": "Nom enregistré à l’ouverture si l’acteur de l’événement est l’opérateur de la session."
           }
         },
         "type": "object",
