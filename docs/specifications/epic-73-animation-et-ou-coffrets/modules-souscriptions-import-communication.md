@@ -344,6 +344,20 @@ Création : fiche **à vérifier**, demande Animation soumise à Localeo ERP, au
 
 Fichiers et rapports privés, téléchargements authentifiés avec droits revérifiés, aucune URL publique persistante. Les artefacts sont supprimés 30 jours après la fin ou l'abandon ; une reprise technique qui n'est pas terminale ne déclenche pas ce délai. Les fiches/provenances/audits ne sont pas supprimés avec le fichier. Leur rattachement aux politiques existantes figure dans la matrice de conservation de livraison ; sauvegardes, gels et purge ne se traitent pas par suppression locale opportuniste. L'expiration du module ne supprime pas les fiches ni leur historique.
 
+#### E73-EVO-IMPORT-TRAITEMENT-PORTAIL
+
+Le 25 novembre 2026, le suivi des imports Animation reçoit une action explicite de lancement sur les lots confirmés. Le droit de traiter reste vérifié sur l’organisation et la commune du lot. L’engagement et l’application des lignes restent propriétaires du traitement Référencement, partagé avec le lanceur d’exploitation.
+
+| Critère | Comportement et preuve attendus |
+| --- | --- |
+| IT-01 | Sur un lot confirmé, y compris avant cette évolution, l’organisateur habilité voit **Lancer le traitement**. Seules les lignes du plan confirmé de ce lot sont appliquées, avec les contrôles et effets existants. Vérifier le traitement réel avec une base jetable et le parcours depuis le détail sur mobile et bureau. |
+| IT-02 | `POST /protected/referencement/imports-commercants/{lot_id}/traiter` reçoit `expected_version` et `Idempotency-Key`. La commande versionnée est enregistrée avant un passage borné du worker, et le `202` renvoie la projection relue du lot. Une lecture ne déclenche aucun traitement et le rejeu du même reçu n’applique aucune ligne supplémentaire. Vérifier les refus de périmètre, version et état, ainsi que le rejeu. |
+| IT-03 | Si le lot reste en cours à l’issue d’un passage ou après interruption, **Poursuivre le traitement** permet un nouveau passage ciblé. Les lignes réussies restent acquises et le rapport devient accessible à l’état terminal. En mode intervention, un opérateur autorisé à importer pour le compte représenté peut également lancer ou poursuivre le lot confirmé de son organisation et de sa commune. La consultation conserve la lecture seule et chaque commande déléguée est attribuée à l’intervention. [Périmètre Support](../epic-76-impersonification-support-pro-animation/README.md#écrans-et-opérations-autorisés) |
+
+Le lancement est indisponible si le droit requis est déjà échu avant la demande. Si ce droit expire après l’acceptation de la commande et avant l’engagement, le worker suspend le lot.
+
+L’extension ajoute une opération au contrat existant sans migration, paramètre d’environnement ni modification des données de démonstration. Le parcours et le guide Animation évoluent. Le guide Commerçant concerne les établissements. La nouvelle commande s’utilise dans Animation, y compris depuis l’intervention ouverte par le support.
+
 ## 7. Messages organisateur, Live et Web Push
 
 La [messagerie privée habitant–organisateur](messages-habitants.md), évolution

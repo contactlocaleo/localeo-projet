@@ -1553,3 +1553,12 @@ L’autorisation est liée à la commune courante. La limite de sollicitation
 communale par installation est distincte de celle des campagnes d’animation.
 [Critères CC-01 à CC-06](../../specifications/epic-73-animation-et-ou-coffrets/modules-souscriptions-import-communication.md#e73-evo-communication-communale)
 et [bilan de l’extension](../../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md#communication-communale-22-novembre-2026).
+
+## Évolution du 25 novembre 2026 — traitement des imports depuis Animation
+
+**E73-EVO-IMPORT-TRAITEMENT-PORTAIL** complète l’import de commerçants.
+Le gestionnaire habilité peut lancer puis poursuivre le traitement du lot
+confirmé depuis son détail. Un opérateur support peut effectuer les mêmes gestes en intervention pour le gestionnaire et la commune autorisés. Le parcours s’appuie sur le worker Référencement
+existant et couvre aussi les lots antérieurs déjà confirmés.
+[Critères IT-01 à IT-03](../../specifications/epic-73-animation-et-ou-coffrets/modules-souscriptions-import-communication.md#e73-evo-import-traitement-portail)
+et [preuves locales](../../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md#traitement-des-imports-depuis-animation--25-novembre-2026).
