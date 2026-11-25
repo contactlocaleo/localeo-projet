@@ -441,36 +441,35 @@ avec des données synthétiques. Il ne contacte pas un environnement de producti
 Ces captures complètent celles du 21 novembre ; elles ne prouvent pas un
 déploiement distant.
 
-## Ajout du 22 novembre 2026 — logistique des lots et remises
+## Logistique des lots et remises — captures actualisées le 25 novembre 2026
 
 Les captures `lots-remises-1024.png` et `lots-remises-390.png` présentent la
 liste globale **Lots et remises** : bénéficiaires, états, lieux de retrait,
-utilisation des bons et coffrets et actions disponibles. Les données sont fictives ; aucun QR, PIN ou contact réel n'est
-utilisé. Base Git Animation `9ba1e8c`, avec le correctif d'ergonomie du même lot.
-La variante 1 024 px remplace la vue de remise par animation au chapitre 11 du
-guide ; l'ancienne capture reste conservée. Les treize chapitres sont maintenus.
-La zone bureau de 736 × 394 pixels cadre les en-têtes et les deux premières
-lignes pour rester lisible dans le PDF. La capture mobile de 390 × 840 pixels
-montre la première fiche, son retrait et son action, sans modifier le DOM.
+utilisation des bons et coffrets et actions disponibles. La recette utilise
+des données fictives. Base Git Animation `4a86877` avec l’alignement de la
+liste sur Tirages. Au chapitre « Organiser le tirage et les retraits »,
+la capture bureau de 702 × 440 pixels cadre les en-têtes et les deux premières
+lignes. La capture mobile de 390 × 772 pixels va du titre de liste au bas de
+la première fiche, avec le lieu de retrait et l’action de remise.
 
 La capture s'effectue avec le banc applicatif et les API simulées décrits plus
 haut, dans le build isolé du guide sur `127.0.0.1:4182` :
 
 ```powershell
-$env:ANIMATION_TEST_DIST = 'tmp/guide-animation-dist-current'
+$env:ANIMATION_TEST_DIST = 'tmp/alignement-suivi-lots'
 node scripts/build-pwa-tests.mjs
 node tests/browser/animation-guide.mjs --only=lots-remises --captures-only
 ```
 
-La génération et le
-second build servent ensuite à relire toutes les pages du PDF et à vérifier la
-copie servie depuis l'application. Les commandes et résultats de cette passe
-sont consignés dans le
-[bilan de livraison E73](../../../../../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md).
-Cette preuve locale ne constitue pas une recette sur appareil physique ni un
-déploiement distant.
+Les 22 pages du guide versionné ont été rendues. La page 16, « Organiser
+le tirage et les retraits », contient la nouvelle capture. Le texte, les
+signets, les liens et les 21 autres pages correspondent au PDF de référence.
+La copie embarquée dans Animation est identique au PDF canonique. L'accès
+depuis l'application a été vérifié à 390 et 1 024 px.
 
-Passe exécutée : captures depuis `tmp/quality-build-oOShOO`, aucun appel
+Le [bilan de livraison E73](../../../../../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md)
+conserve les preuves de la première livraison. Passe du 22 novembre avec
+l’ancien cadrage : captures depuis `tmp/quality-build-oOShOO`, aucun appel
 inconnu, aucune erreur navigateur ni écriture. Les treize pages du PDF ont été
 rendues et relues ; la page 11 a été inspectée en détail. La copie embarquée
 est identique au PDF canonique. Le build `tmp/quality-build-ZhDZiQ` a servi le
