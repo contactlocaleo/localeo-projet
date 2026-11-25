@@ -1,311 +1,301 @@
-# Localeo Commerçant · Votre guide au quotidien
+# Localeo Pro · Votre guide au quotidien
 
-<!-- Source canonique du PDF embarqué. Édition du 24 novembre 2026. Chaque section de niveau 2 ouvre une page. Captures du frontend actuel, API simulées et exemples fictifs : scripts/capture-merchant-guide.mjs dans localeo-commercant. -->
+<!-- Source canonique du PDF embarqué. Édition du 25 novembre 2026. Chaque section de niveau 2 ouvre une page. Captures de Localeo Pro avec des exemples fictifs. -->
 
-## 1 · Se connecter et se repérer
+<!-- Sommaire : Prendre en main Localeo Pro -->
 
-Localeo Commerçant, affiché **Localeo Pro** dans l’application, vous accompagne au comptoir et dans le suivi du commerce. Retrouvez ce guide dans **Aide et contact > Consulter le guide commerçant (PDF)**.
+## 1 · Ouvrir votre espace et retrouver vos tâches
 
-![Les alertes séparent préparation et déclaration à l’organisateur.](illustrations/guide-quotidien/01-accueil.png)
+1. Ouvrez le lien fourni par Localeo. Saisissez votre adresse email et votre mot de passe, puis choisissez **Se connecter**.
+2. Vérifiez le nom du commerce en haut de l’écran. Si vous utilisez un accès salarié, vous arrivez au scanner.
+3. Depuis **Accueil**, utilisez **Scanner un QR** si un client est devant vous. Ouvrez **À traiter** pour répondre aux invitations.
+4. Dans **Préparation des animations**, ouvrez **Mes actions** pour voir ce qui vous revient. **En attente de l’organisateur** vous aide à retrouver les dossiers qu’il doit traiter.
 
-### Commencer votre journée
+![Depuis l’accueil, Mes actions distingue les préparatifs à terminer et la déclaration à envoyer à l’organisateur.](illustrations/guide-quotidien/01-accueil.png)
 
-1. Ouvrez le lien fourni par Localeo. Saisissez votre email et votre mot de passe, puis **Se connecter**. Vérifiez le nom du commerce en haut.
-2. Utilisez **Scanner un QR** pour une animation, un lot ou un coffret.
-3. Dans **À traiter**, répondez aux invitations. Sous le scanner, **Préparation des animations** distingue **Mes actions** et **En attente de l’organisateur**. Les alertes séparent préparation et déclaration ; chaque vue présente cinq éléments par page.
+### Retrouver les autres rubriques
 
-### Retrouver une fonction
+Sur ordinateur, ouvrez le menu latéral. Sur téléphone, **Plus** donne accès aux rubriques au-delà d’**Accueil**, **Scanner** et **Activité**. Dans **Animations**, **Rubriques** donne accès aux invitations, aux préparations, à vos animations et aux notifications.
 
-- **Votre commerce :** Compte, Ma page publique et Prestations (page 2).
-- **Au comptoir :** coffrets (page 3), lots et passages Animation (page 4).
-- **Votre suivi :** activité et reversements (page 5), facturation (page 11).
-- **Vos animations :** invitations et préparation (pages 6 à 8).
-- **Votre équipe :** notifications (page 9), salariés et PIN (page 10), aide (page 12).
+Les rubriques disponibles dépendent des services du commerce et de votre accès. Gardez une connexion Internet pour enregistrer vos actions.
 
-Sur ordinateur, utilisez le menu latéral. Sur téléphone, **Accueil**, **Scanner**, **Activité** et **Plus** restent à portée de main ; **Plus** ouvre les autres rubriques. Dans Animations, **Rubriques** déplie Invitations, Préparation, Mes animations et Notifications.
+### Installer Localeo Pro sur votre téléphone
 
-**Installer :** choisissez **Installer** en haut. Sur iPhone/iPad, utilisez Safari > Partager > Sur l’écran d’accueil. Avant **Mettre à jour**, enregistrez votre action : l’application se recharge après votre accord.
+Choisissez **Installer** si ce bouton apparaît. Sur iPhone ou iPad, ouvrez Localeo Pro dans Safari, puis **Partager** et **Sur l’écran d’accueil**. Avant de choisir **Mettre à jour**, terminez et enregistrez l’action en cours.
 
-> Captures de l’application avec des exemples fictifs. Les rubriques et actions dépendent des produits, options et droits du compte. Une connexion Internet est nécessaire pour enregistrer une action.
+## 2 · Créer une clé d’accès et vous connecter
 
-## 2 · Présenter votre commerce
+Si l’option apparaît, votre appareil peut vous reconnaître par votre visage, votre empreinte ou son code. Le titulaire et les salariés peuvent utiliser une clé.
 
-Des coordonnées à jour et des informations pratiques fiables facilitent la visite des clients.
+1. Connectez-vous avec votre mot de passe. Choisissez **Activer ma clé d’accès**, ou ouvrez **Mes clés d’accès** dans le menu du compte.
+2. Sur un appareil ou dans un gestionnaire de clés que vous contrôlez, choisissez **Créer ma clé d’accès**. Saisissez votre mot de passe si Localeo Pro le demande, puis confirmez sur l’appareil. Attendez le message **Clé d’accès activée**.
 
-![Ma page publique indique l’état du brouillon et ce qu’il reste à compléter avant validation.](illustrations/guide-quotidien/05-horaires.png)
+![Dans Mes clés d’accès, repérez Créer ma clé d’accès.](illustrations/guide-quotidien/22-creation-cle.png)
 
-### Corriger vos coordonnées
+3. À la connexion suivante, choisissez **Se connecter avec une clé d’accès** et confirmez sur votre appareil. Votre espace s’ouvre, ou le scanner si vous êtes salarié.
 
-Dans **Compte**, modifiez prénom, nom ou téléphone, puis **Enregistrer**. Pour changer l’email, contactez Localeo. Dans **Adresse du commerce**, renseignez voie ou lieu-dit, code postal et localité, puis **Enregistrer l’adresse**. Si le résultat est incertain, choisissez **Recharger l’adresse enregistrée** avant une nouvelle action.
+![À la prochaine connexion, le bouton de connexion avec une clé se trouve au-dessus du formulaire.](illustrations/guide-quotidien/21-connexion-cle.png)
 
-### Préparer votre page publique
+Utilisez votre mot de passe si la clé est indisponible ou perdue. En cas de doute après la création, vérifiez la liste dans **Mes clés d’accès**.
 
-1. Ouvrez **Ma page publique**. Complétez accroche, présentation, histoire du commerce et mot du commerçant.
-2. Renseignez spécialités, ambiance, informations pratiques, horaires et liens utiles. Séparez spécialités et ambiances par des virgules.
-3. Ajoutez l’image principale, le portrait et jusqu’à trois photos d’ambiance : JPEG, PNG ou WebP, 5 Mo maximum par image. Attendez la fin du chargement.
-4. Vérifiez l’aperçu. **Enregistrer le brouillon** conserve votre travail ; **Enregistrer et envoyer en validation** transmet la demande à Localeo.
-5. Suivez l’avis de modération dans **Demandes**, le travail du support dans **Interventions de Localeo** (chapitre 13).
+<!-- Sommaire : Accueillir les clients au comptoir -->
 
-### Consulter une prestation
+## 3 · Valider la prestation d’un client
 
-Dans **Prestations**, recherchez par nom ou coffret, puis sélectionnez l’offre. Consultez description, statut et montant reversé. Si elle est **Modifiable**, corrigez nom ou description puis **Enregistrer les modifications**. En **Lecture seule**, contactez Localeo. L’ajout d’une offre et la modification de son montant passent aussi par Localeo.
+Demandez au client le QR de son coffret et vérifiez que la prestation concerne votre commerce.
 
-> Vos changements deviennent publics après validation par Localeo.
+1. Scannez le QR avec l’appareil photo du téléphone. Ouvrez le lien et connectez-vous à Localeo Pro si demandé.
+2. Vérifiez le nom du coffret, sa validité et la prestation que vous devez fournir.
+3. Choisissez **Valider la prestation**. Attendez le message qui confirme l’enregistrement. Pour traiter un autre QR, choisissez **Scanner un autre QR**. Pour une autre prestation du même coffret, scannez de nouveau le QR du coffret.
 
-## 3 · Valider une prestation de coffret
+![Sous À valider, vérifiez l’offre de votre commerce avant de choisir Valider la prestation.](illustrations/guide-quotidien/02-validation.png)
 
-Les deux méthodes ci-dessous sont aussi valables pour les QR d’animation et de lot.
+### Si le scan ou la connexion pose problème
 
-![À valider nomme la prestation de votre commerce et présente l’action de confirmation.](illustrations/guide-quotidien/02-validation.png)
+Pour un ancien QR, ouvrez **Scanner** dans Pro et utilisez sa caméra. Si elle ne démarre pas, vérifiez son autorisation ou utilisez **Réinitialiser l’appareil photo**. Vous pouvez aussi saisir l’**Identifiant du QR code**, puis choisir **Analyser le QR**.
 
-### Scanner, vérifier, confirmer
+Après une coupure, choisissez **Vérifier le résultat** avant de recommencer. Si l’enregistrement est confirmé et que la fiche tarde à se mettre à jour, choisissez **Actualiser l’état du coffret**.
 
-1. Scannez avec l’**appareil photo du téléphone**, ouvrez le lien et connectez-vous si demandé. Pour un ancien QR, ouvrez **Scanner** dans Pro et utilisez sa caméra.
-2. Vérifiez le coffret, sa validité et la prestation à remettre, puis choisissez **Valider la prestation**. Attendez la confirmation.
-3. Utilisez **Scanner un autre QR** pour poursuivre. Pour une autre prestation du même coffret, scannez à nouveau son QR.
+### Si vous avez validé la mauvaise prestation
 
-### Caméra ou réseau indisponible ?
+Rescannez le coffret et ouvrez **Prestations déjà validées**. Si **Annuler la validation** apparaît, indiquez le motif, cochez la confirmation puis choisissez **Confirmer l’annulation**. Cette possibilité dépend du délai et de vos droits. Sinon, contactez Localeo avec la référence affichée.
 
-Dans Pro, vérifiez l’autorisation caméra ou utilisez **Réinitialiser l’appareil photo**. Vous pouvez aussi saisir l’**Identifiant du QR code**, puis choisir **Analyser le QR**.
+## 4 · Remettre un lot à un gagnant
 
-Après une coupure, privilégiez **Vérifier le résultat** : la validation a pu être enregistrée. Si la réussite est confirmée mais la fiche reste ancienne, **Actualiser l’état du coffret** relit l’état sans valider à nouveau.
+Demandez au gagnant le bon de lot affiché dans Localeo Live, l’espace des participants.
 
-### Corriger une erreur
+1. Scannez le QR du bon avec l’appareil photo du téléphone ou avec **Scanner** dans Pro. Vérifiez le commerce de remise, le contenu et l’état **Lot à remettre**.
+2. Choisissez **Confirmer la remise du lot**. Attendez que **Lot remis** s’affiche, puis remettez le lot entier.
 
-Rescannez le coffret et ouvrez **Prestations déjà validées**. Si **Annuler la validation** apparaît, indiquez le motif, cochez la confirmation puis **Confirmer l’annulation**. Cette action dépend du délai et des droits autorisés. Sinon, contactez Localeo avec la référence affichée.
+![Le bon indique le contenu du lot, sa validité et le bouton de confirmation.](illustrations/guide-quotidien/14-lot.png)
 
-> Un refus, une erreur ou un résultat à vérifier ne confirme jamais une prestation. Ne répétez pas une validation dont le résultat est incertain.
+### Si vous ne pouvez pas confirmer la remise
 
-## 4 · Remettre un lot ou valider un passage
+Après une coupure, choisissez **Relire le résultat** et renvoyez la validation uniquement si l’écran le propose après vérification. Si le bon est déjà utilisé, expiré ou indisponible, lisez le message affiché et contactez l’organisateur si besoin. Selon vos droits, la remise apparaît dans l’**Historique des validations**.
 
-Vérifiez le commerce, le contenu et l’état du QR avant de confirmer.
+## 5 · Valider le passage d’un joueur
 
-![Le bon de lot précise le lot complet, sa validité et l’action Confirmer la remise du lot.](illustrations/guide-quotidien/14-lot.png)
+Vérifiez que votre mission prévoit la validation du passage. Demandez au joueur son QR personnel dans Localeo Live.
 
-### Remettre un lot gagné
+1. Scannez le **QR personnel du participant** avec l’appareil photo du téléphone ou avec **Scanner** dans Pro.
+2. Vérifiez le nom de l’animation et de l’étape, puis choisissez **Valider cette étape**.
+3. Attendez le message **Étape validée** avant de passer au joueur suivant.
 
-1. Scannez le QR du lot présenté dans Live avec l’appareil photo du téléphone ou avec **Scanner** dans Pro.
-2. Vérifiez lot, commerce et état **Lot à remettre**.
-3. Remettez le lot entier, choisissez **Confirmer la remise du lot** et attendez la confirmation.
-4. Pour un lot remis, expiré ou indisponible, suivez l’information affichée ou contactez l’organisateur.
+![Vérifiez le participant et l’étape chez votre commerce avant de choisir Valider cette étape.](illustrations/guide-quotidien/23-valider-passage.png)
 
-Après une coupure, utilisez **Relire le résultat** avant une nouvelle action. L’**Historique des validations** retrouve remises et prestations selon vos droits.
+### Si le résultat est incertain ou la validation impossible
 
-### Valider une étape Animation
+Après une coupure, choisissez **Vérifier le résultat**. Renvoyez la validation uniquement si l’écran le propose après vérification. Retrouvez les opérations auxquelles vous avez accès dans l’**Historique des validations**.
 
-Si **Votre mission** demande une validation commerçante, scannez le **QR personnel du participant** avec l’appareil photo du téléphone ou dans Pro. Vérifiez animation et étape, puis **Valider cette étape**. Attendez la confirmation.
+Pour Vitrines et Juste Prix, un joueur qui a utilisé tous ses essais doit consulter son parcours dans Live. Cette étape reste fermée au scan et à la validation par PIN. Les validations peuvent rester ouvertes après la fin prévue, jusqu’à la clôture de l’animation.
 
-Pour **Vitrines** et **Juste Prix**, une étape **invalide** après épuisement des essais ne se rattrape ni par scan ni par PIN. Invitez le joueur à consulter son parcours dans Live.
+> Le QR d’une affiche sert au public. Demandez au joueur son QR personnel pour valider un passage.
 
-Après un résultat incertain, **Vérifier le résultat** est prioritaire ; **Renvoyer la même validation** dépend de l’autorisation de reprise. Quitter l’écran n’annule pas une validation enregistrée.
+<!-- Sommaire : Participer aux animations -->
 
-> Le QR public d’une affiche ne remplace ni le QR personnel du joueur ni celui du lot. Après la fin prévue, les validations peuvent rester ouvertes jusqu’à la clôture. Si le raccourci manque, ouvrez Scanner depuis l’accueil ; vos droits sont vérifiés.
+## 6 · Répondre à une invitation
 
-## 5 · Suivre votre activité et vos versements
+Vous pouvez recevoir une invitation d’une association de votre commune ou d’une commune voisine. Si Localeo Pro est nouveau pour vous, ouvrez d’abord l’email d’accès reçu.
 
-**Mon activité** explique l’utilisation des coffrets. **Reversements** permet de retrouver sommes dues et versements effectués.
+1. Dans **À traiter**, ouvrez l’invitation. Vous pouvez aussi passer par **Animations**, puis **Invitations**. Sur téléphone, ouvrez **Rubriques** pour trouver cette liste.
+2. Choisissez **Consulter la demande**. Vérifiez l’organisateur, la commune, les dates et la date limite pour répondre.
+3. Lisez votre mission et les préparatifs. Dépliez **Présentation et règlement**. Vérifiez que vous êtes disponible et que vous pouvez réaliser la mission.
+4. Choisissez **Accepter la participation** et attendez la confirmation. Vous retrouvez votre participation dans **Mes animations**.
 
-![Les indicateurs séparent les achats, les prestations réalisées et les montants liés à cette activité.](illustrations/guide-quotidien/08-activite.png)
+![Consulter la demande ouvre la mission. La liste affiche aussi l’échéance pour répondre.](illustrations/guide-quotidien/12-invitations.png)
 
-### Choisir la bonne période
+### Si c’est une chasse au trésor
 
-Ouvrez **Mon activité**, ou **Activité** sur téléphone. Choisissez dates, regroupement **Jour**, **Semaine** ou **Mois**, et éventuellement une prestation. Cliquez sur **Appliquer** ; **Réinitialiser** retrouve une vue plus large.
+Choisissez une mission si plusieurs sont proposées. Lisez **Ce que liront les participants chez vous** et les préparatifs. Cochez **Je peux réaliser cette mission et tous les préparatifs ci-dessus.**, puis choisissez **Accepter cette mission**. Vous pouvez alors accéder au kit et commencer votre préparation.
 
-- **Prestations achetées :** vos offres présentes dans les coffrets achetés.
-- **Prestations à réaliser :** celles encore disponibles pour une visite.
-- **Prestations réalisées / Montant généré :** ce qui a été validé.
-- **Revenu potentiel restant :** une estimation des prestations restant à réaliser.
-- **Montant à recevoir / Déjà reçu :** les sommes liées à cette activité.
+### Si vous devez refuser ou vous retirer
 
-Le graphique compare achats et consommations. **Par prestation et version** détaille les offres concernées.
+Confirmez le refus proposé. Pour une chasse, ouvrez **Autres choix > Refuser la participation**. Après acceptation, utilisez **Retirer ma participation** si le bouton apparaît. Après publication, l’organisateur peut devoir traiter votre demande. Vérifiez l’état dans **Mes animations** avant de considérer le retrait effectif.
 
-### Retrouver ou configurer un versement
+Après une coupure, choisissez **Vérifier ma décision**. Si le délai de réponse est dépassé, demandez à l’organisateur s’il peut le prolonger.
 
-Dans **Reversements**, consultez les sommes en attente et les douze derniers mois. Les statuts distinguent attente de campagne, blocage à régulariser, versement en cours, effectué ou en échec. Sur téléphone, ouvrez **Détails du mouvement**. Suivi bancaire et tentatives précédentes, si disponibles, aident à comprendre un retard.
+## 7 · Préparer votre commerce et prévenir l’organisateur
 
-Dans **Compte > Stripe Connect**, si proposé, choisissez **Configurer mon compte Stripe** ou **Reprendre la configuration**. Complétez les informations chez Stripe ; de retour dans Localeo, **Synchroniser mon compte**, puis vérifiez statut et autorisations de ventes et reversements.
+Une fois votre invitation acceptée, ouvrez **Préparation des animations**. Les deux états vous indiquent ce que vous avez préparé et si vous avez prévenu l’organisateur.
 
-> Une prestation achetée n’est pas encore réalisée. Le revenu potentiel n’est pas une somme versée. Les reversements suivent les campagnes Localeo ; cette page ne déclenche pas de paiement.
+1. Choisissez **Voir la préparation**, puis **Comprendre ma mission**. Relisez les dates et les consignes.
+2. À l’étape 2, ouvrez le kit et réalisez les préparatifs demandés. Pour un passeport, une tombola ou une chasse, choisissez **J’ai terminé ma préparation** si l’action est proposée. Vérifiez que la préparation est indiquée comme terminée.
+3. Si l’organisateur demande une déclaration, ouvrez **Informer l’organisateur**, puis choisissez **Je suis prêt**. Vérifiez que la déclaration est datée et enregistrée.
 
-## 6 · Répondre aux invitations Animation
+![La préparation est terminée. La ligne Déclaration à l’organisateur indique encore À faire.](illustrations/guide-quotidien/16-preparation.png)
 
-Une association d’une commune voisine peut vous inviter. Pour votre première connexion, ouvrez l’email d’accès Pro. Vous décidez ensuite pour chaque animation.
+### Choisir le support adapté
 
-![La liste distingue les invitations reçues et leur échéance ; Consulter la demande ouvre votre mission.](illustrations/guide-quotidien/12-invitations.png)
+- **Guide privé** pour les consignes de l’équipe, à garder au comptoir.
+- **Flyer joueurs** pour faire connaître l’animation ou donner accès à l’inscription.
+- **QR de lieu** pour une chasse au trésor, à installer à votre étape. Le joueur le scanne dans Live pour ouvrir le défi.
 
-### Examiner puis décider
+Pour un passeport, vérifiez si votre mission demande un achat. Lorsqu’il est requis, aucun montant minimum ne s’applique. Pour une tombola, suivez la mission de l’invitation. Pour une vitrine ou un produit, consultez **Préparer votre vitrine ou proposer votre produit**.
 
-1. Depuis **À traiter**, ouvrez l’invitation, ou choisissez **Animations > Invitations**. Sur mobile, utilisez **Rubriques**.
-2. Ouvrez **Consulter la demande**. Vérifiez animation, commune, organisateur, dates, réception et date limite de réponse.
-3. Lisez mission et préparatifs ; dépliez **Présentation et règlement**. Vérifiez votre disponibilité et le matériel nécessaire.
-4. Pour une invitation classique, **Accepter la participation**, puis attendez la confirmation.
+### Vérifier ou reprendre votre préparation
 
-### Pour une chasse au trésor
+Si une tâche doit être reprise, utilisez **Reprendre la préparation**. Une ancienne déclaration peut rester visible. **Non requise** indique qu’aucun préparatif n’est à confirmer. Vous retrouvez les fiches des animations clôturées ou annulées dans **Historique**.
 
-Choisissez votre mission si plusieurs sont proposées. Lisez **Ce que liront les participants chez vous** et tous les préparatifs. Cochez **Je peux réaliser cette mission et tous les préparatifs ci-dessus.**, puis **Accepter cette mission**. Le kit devient accessible ; le commerce n’est pas encore déclaré prêt.
+## 8 · Préparer votre vitrine ou proposer votre produit
 
-### Refuser ou signaler un empêchement
+Ouvrez votre fiche de préparation avec le compte principal. L’organisateur examine votre proposition avant que vous puissiez terminer les préparatifs concernés.
 
-Utilisez le refus proposé et confirmez. Pour une chasse : **Autres choix > Refuser la participation** ; le motif est facultatif. Après acceptation, consultez contact et suivi. **Retirer ma participation**, si proposé, peut nécessiter le traitement de l’organisateur après publication. Vérifiez l’état avant de considérer le retrait effectif.
+### Pour le Jeu des vitrines
 
-**Mes animations** classe vos participations en **En cours**, **À venir** et **Terminées**. Les catégories restent distinctes des rubriques. Ouvrez le détail pour retrouver mission, scanner et préparation.
+1. Dans **Prévoir la vitrine**, décrivez l’objet intrus et son installation.
+2. Dans **Préparer la question**, saisissez la consigne publique, l’emplacement, deux à six choix différents et la bonne réponse. Gardez la solution pour votre équipe et l’organisateur.
+3. Dans **Relire et proposer**, vérifiez ce que verront les joueurs. Choisissez **Enregistrer mon brouillon**, puis **Proposer à l’organisateur**.
+4. Après approbation, installez la version acceptée. Confirmez l’installation avec le bouton proposé et faites-la vérifier sur place par l’organisateur. Regardez la prochaine étape affichée pour savoir si votre préparation est terminée.
 
-> Après une coupure, utilisez **Vérifier ma décision** avant de recommencer. Pour une échéance de réponse dépassée, contactez l’organisateur : lui seul peut la prolonger.
+![À la relecture, vérifiez la consigne publique et la réponse privée. La frise indique ce qui reste à faire.](illustrations/guide-quotidien/17-vitrines.png)
 
-## 7 · Préparer votre commerce pour une animation
+### Pour le Juste Prix
 
-**Préparation des animations** affiche **En cours et à venir**. Chaque ligne sépare **Préparation** et **Déclaration à l’organisateur**, avec prochaine tâche et acteur. **Historique** retrouve les animations clôturées ou annulées.
+1. À l’étape 2, ouvrez **Votre produit et son juste prix**. Saisissez le nom, la description, le format ou l’unité et le prix TTC en euros. Choisissez une image sur laquelle le prix ne se voit pas.
+2. Enregistrez, puis choisissez **Proposer à l’organisateur**. La préparation reste en attente jusqu’à son accord, puis passe à **Terminée**.
+3. Si l’organisateur vous le demande, utilisez aussi **Je suis prêt** pour lui envoyer votre déclaration.
 
-![L’étape 2 montre la préparation terminée, tandis que la déclaration à l’organisateur reste une action distincte.](illustrations/guide-quotidien/16-preparation.png)
+### Si le contenu doit être corrigé
 
-### Les trois gestes essentiels
+Lisez le motif, corrigez, enregistrez et proposez de nouveau. La frise permet de relire d’autres étapes sans perdre votre saisie. Après publication, signalez les corrections à l’organisateur. Les salariés utilisent le scanner selon leurs droits.
 
-1. Ouvrez **Voir la préparation**, puis **Comprendre ma mission** pour relire mission et dates. Changer d’étape conserve les saisies sans les enregistrer.
-2. À l’étape 2, consultez le kit. Si votre mission comporte des préparatifs, réalisez-les puis choisissez **J’ai terminé ma préparation** pour un passeport, une tombola ou une chasse. **Reprendre la préparation** permet de la remettre à faire.
-3. Dans **Informer l’organisateur**, choisissez **Je suis prêt**, si le suivi est actif. La déclaration enregistrée est datée. Elle reste indépendante de la préparation et du statut **En cours** de l’animation.
+<!-- Sommaire : Gérer votre commerce et votre équipe -->
 
-### Utiliser le bon support
+## 9 · Mettre à jour la page publique de votre commerce
 
-- **Guide privé :** consignes de votre équipe, à garder au comptoir.
-- **Flyer joueurs :** accès à l’animation, au support public ou à l’inscription.
-- **QR de lieu d’une chasse :** à installer à votre étape. Le joueur le scanne dans Live pour ouvrir le défi. Il est distinct du flyer et du QR personnel.
+1. Ouvrez **Ma page publique**. Complétez l’accroche, la présentation, l’histoire et le mot du commerçant.
+2. Renseignez les informations utiles aux clients, notamment les horaires et les liens. Séparez les spécialités et les ambiances par des virgules.
+3. Ajoutez une image principale, un portrait et jusqu’à trois photos d’ambiance. Utilisez JPEG, PNG ou WebP, jusqu’à 5 Mo par image. Attendez la fin du chargement.
+4. Vérifiez l’aperçu, puis choisissez **Enregistrer et envoyer en validation**. Suivez la décision dans **Demandes**. Après approbation, vérifiez le résultat sur votre page publique.
 
-### Adapter l’accueil au jeu
+![Ma page publique indique l’état du brouillon et les éléments restant à compléter.](illustrations/guide-quotidien/05-horaires.png)
 
-Pour un **Passeport**, consultez la mission. Vérifiez l’achat, sans montant minimum, s’il est requis. Sinon, la visite suffit. Dans les deux cas, scannez le QR personnel. En **Chasse**, installez le QR de lieu et préparez la mission retenue. En **Tombola**, suivez le rôle de l’invitation. Vitrines et Juste Prix sont détaillés page suivante.
+**Enregistrer le brouillon** conserve votre travail pour plus tard. Si Localeo a préparé la page avec vous, consultez **Retrouver une intervention de Localeo sur votre page**.
 
-**Non requise** signifie qu’aucun préparatif n’est à confirmer. Sans suivi activé, aucune déclaration n’est demandée. La fiche et ses consignes restent accessibles dans **Toutes mes préparations et l’historique**. Une ancienne déclaration reste visible même si un préparatif doit être repris.
+### Mettre à jour l’adresse et vos coordonnées
 
-> Télécharger le kit et terminer l’étape 2 ne préviennent pas l’organisateur. Après un résultat incertain, vérifiez l’état avant une nouvelle action.
+Dans **Compte**, corrigez le nom, le prénom ou le téléphone, puis choisissez **Enregistrer**. Pour changer l’adresse de connexion, contactez Localeo. Dans **Adresse du commerce**, saisissez la voie ou le lieu-dit, le code postal et la localité, puis choisissez **Enregistrer l’adresse**. En cas de doute, utilisez **Recharger l’adresse enregistrée**.
 
-## 8 · Préparer Vitrines et Juste Prix
+### Vérifier ou corriger une prestation
 
-Le compte principal prépare un contenu soumis à l’organisateur. L’approbation du contenu et l’installation réelle sont des étapes différentes.
+Dans **Prestations**, cherchez par nom ou par coffret. Ouvrez la fiche pour lire sa description, son statut et le montant reversé. Si elle est **Modifiable**, changez son nom ou sa description, choisissez **Enregistrer les modifications** et relisez la fiche. Pour une offre en **Lecture seule**, un ajout ou un changement de montant, contactez Localeo.
 
-![Vitrines distingue l’étape à traiter de l’étape consultée ; la relecture sépare public et privé.](illustrations/guide-quotidien/17-vitrines.png)
+## 10 · Consulter votre activité et retrouver un versement
 
-### Jeu des vitrines : avancer pas à pas
+1. Ouvrez **Mon activité**, ou **Activité** sur téléphone.
+2. Choisissez les dates et un affichage par **Jour**, **Semaine** ou **Mois**. Choisissez une prestation si vous souhaitez l’isoler, puis sélectionnez **Appliquer**.
+3. Comparez les prestations achetées, celles à réaliser et celles déjà validées. **Par prestation et version** donne le détail des offres. Pour élargir la recherche, choisissez **Réinitialiser**.
 
-1. **Prévoir la vitrine :** décrivez l’intrus et son installation dans votre commerce.
-2. **Préparer la question :** renseignez consigne publique, emplacement, deux à six choix distincts et bonne réponse privée.
-3. **Relire et proposer :** vérifiez ce que verront les participants et ce qui reste privé. **Enregistrer mon brouillon** conserve le travail ; **Proposer à l’organisateur** soumet la version enregistrée.
-4. **Installer et faire contrôler :** après approbation, installez réellement cette version, attestez l’installation avec l’action proposée et faites contrôler sur place par l’organisateur.
+![Vérifiez la période avant de lire les achats, les prestations réalisées et les montants du tableau.](illustrations/guide-quotidien/08-activite.png)
 
-Si une correction est demandée, lisez le motif, corrigez, enregistrez et proposez à nouveau. La frise permet de relire sans perdre vos saisies ; elle distingue l’étape consultée du travail attendu. Gardez les solutions hors des supports publics.
+### Retrouver un versement
 
-### Juste Prix : présenter votre produit
+Dans **Reversements**, ouvrez la somme qui vous intéresse parmi les versements en attente et les mouvements des douze derniers mois. Sur téléphone, choisissez **Détails du mouvement**. Vérifiez si elle attend une campagne de paiement, si elle est bloquée, en cours, versée ou en échec. Le suivi bancaire et les tentatives précédentes, quand ils sont affichés, peuvent expliquer un retard.
 
-À l’étape 2, dans **Votre produit et son juste prix**, renseignez nom, description, unité ou format et prix TTC en euros. Le visuel ne doit pas révéler le prix. Enregistrez puis **Proposer à l’organisateur**. La préparation reste en attente jusqu’à l’approbation, puis devient **Terminée**. Une correction ou modification exige une nouvelle approbation. La déclaration **Je suis prêt** reste séparée.
+**Revenu potentiel restant** estime ce que les prestations encore à réaliser pourraient rapporter. Pour savoir ce qui a effectivement été versé, consultez **Déjà reçu** ou **Reversements**. Localeo organise les campagnes de versement.
 
-Après publication, contenu et réponses approuvées sont figés : signalez un problème à l’organisateur. Les salariés n’ont pas les actions de préparation du contenu ; ils utilisent le scanner selon leurs droits.
+### Si vous devez configurer les versements avec Stripe
 
-> Enregistrer, proposer, approuver, installer et contrôler ne sont pas interchangeables. Suivez la prochaine étape affichée avant de considérer la préparation terminée.
+Dans **Compte > Stripe Connect**, choisissez **Configurer mon compte Stripe** ou **Reprendre la configuration** si proposé. Complétez les informations chez Stripe. À votre retour, choisissez **Synchroniser mon compte** et vérifiez le statut et les autorisations de vente et de reversement.
 
-## 9 · Recevoir et retrouver les notifications
+## 11 · Fournir une facture demandée
 
-Les messages dans Pro et les alertes du téléphone sont complémentaires. L’autorisation d’un appareil ne vaut pas pour les autres.
+Ouvrez **Facturation** si cette rubrique est disponible. Choisissez les demandes unitaires ou groupées. Sur téléphone, vous pouvez déplier **Rechercher et filtrer**.
 
-![Réglages indique l’état des notifications sur cet appareil et l’action adaptée pour l’actualiser ou l’activer.](illustrations/guide-quotidien/18-reglages.png)
+1. Ouvrez la demande. Vérifiez les prestations, les montants et le statut. Pour un groupe, relisez toutes les lignes.
+2. Choisissez **Accuser réception**, puis **Démarrer le traitement** lorsque ces actions sont proposées.
+3. Préparez votre facture dans votre outil habituel. Reprenez le montant brut TTC à facturer. Le montant net affiché tient compte de la commission.
+4. Dans **Déposer votre facture**, ajoutez le PDF de 10 Mo maximum, son numéro et sa date.
+5. Choisissez **Fournir la facture**. Attendez la confirmation et vérifiez l’état **Facture fournie**.
 
-### Activer les alertes sur votre appareil
+![Avant de préparer votre PDF, repérez le montant brut TTC à facturer dans la demande.](illustrations/guide-quotidien/11-facturation.png)
+
+### Corriger la demande ou utiliser une autre option
+
+Avant le dépôt, **Annuler la demande** peut être proposé. Pour une demande groupée déjà fournie, **Créer une correction distincte** permet, si disponible, de créer un avoir ou une facture corrective et de préciser le motif. La facture d’origine reste consultable.
+
+Dans **Factures Localeo**, utilisez **Télécharger le PDF** pour les commissions et avoirs disponibles. L’assistant de facturation permet de préparer un brouillon, de le relire puis de choisir **Émettre la facture**. Si **Chorus Pro** est proposé, lisez et acceptez le mandat avant un dépôt. Une révocation conserve les preuves antérieures.
+
+## 12 · Lire vos messages et activer les alertes
+
+1. Ouvrez **Notifications**. Pour les messages liés à une animation, vous pouvez aussi passer par **Animations > Notifications**.
+2. Utilisez les filtres si nécessaire, puis ouvrez le message avec **Voir la demande** ou **Voir l’animation**.
+3. Après lecture, choisissez **Marquer comme lue**. Vous pouvez aussi tout marquer comme lu ou supprimer un message après confirmation.
+
+### Recevoir les alertes sur cet appareil
 
 1. Ouvrez **Réglages > Notifications de cet appareil**.
-2. Choisissez **Activer les notifications**, si proposé, puis autorisez-les dans le navigateur ou le téléphone.
-3. Vérifiez **Activées sur cet appareil**. Répétez sur chaque appareil utilisé.
-4. Si elles sont bloquées, autorisez Localeo Pro dans les réglages du navigateur ou du téléphone, revenez dans Pro et **Actualiser l’état**.
+2. Choisissez **Activer les notifications** si proposé, puis donnez l’autorisation dans le navigateur ou sur le téléphone.
+3. Vérifiez que **Activées sur cet appareil** s’affiche. Répétez sur chaque appareil sur lequel vous voulez être alerté.
 
-Sur iPhone/iPad, installez d’abord l’application depuis Safari puis ouvrez-la depuis son icône. Si le navigateur ne permet pas les notifications, vos messages restent consultables dans Pro.
+![Dans Réglages, vérifiez l’état des notifications et utilisez Actualiser l’état après avoir changé l’autorisation de l’appareil.](illustrations/guide-quotidien/18-reglages.png)
 
-### Choisir les alertes d’achat de coffrets
+Sur iPhone ou iPad, installez Pro depuis Safari puis ouvrez-le depuis son icône pour activer les notifications. Si l’autorisation est bloquée, corrigez-la dans les réglages de l’appareil ou du navigateur, revenez dans Pro et choisissez **Actualiser l’état**. Vos messages restent disponibles dans Pro.
 
-Si disponible, **Recevoir les alertes d’achat de coffrets** ajoute les achats contenant une de vos offres aux alertes des appareils abonnés du compte. Ce choix ne remplace pas l’activation de chaque appareil. La désactivation d’un appareil conserve les autres abonnements.
+**Recevoir les alertes d’achat de coffrets**, si proposé, prévient vos appareils abonnés lorsqu’un coffret acheté contient une de vos offres. Lors de la visite, validez la prestation avec le QR du client. Selon vos droits, les validations par PIN sont aussi signalées dans les notifications.
 
-### Consulter les messages dans Pro
+## 13 · Donner un accès à un membre de votre équipe
 
-Ouvrez **Notifications**, ou **Animations > Notifications**. Filtrez puis **Voir la demande** ou **Voir l’animation**. Après lecture : **Marquer comme lue** ou **Tout marquer comme lu**. Pour retirer un message : **Supprimer**, puis **Confirmer la suppression**. Les notifications de validation par PIN sont aussi disponibles selon vos droits.
-
-> Une alerte d’achat indique qu’un coffret contient une de vos offres. Elle ne confirme aucune prestation et ne remplace jamais le scan lors de la visite.
-
-## 10 · Organiser les accès de votre équipe
-
-Le responsable dispose des accès salariés et de la validation par PIN selon les options et droits du commerce.
-
-![Accès salariés distingue le compte activé, l’accès effectif et la remise de l’invitation par email.](illustrations/guide-quotidien/19-equipe.png)
-
-### Inviter un salarié
+Si l’option est disponible, chaque salarié peut se connecter avec son propre accès.
 
 1. Ouvrez **Accès salariés** et vérifiez que l’option est activée.
-2. Renseignez l’email puis **Inviter le salarié**. La personne reçoit un lien pour créer son mot de passe personnel.
-3. Relisez la liste : le compte peut rester **À activer par le salarié** même si l’email est envoyé. **Compte activé** et **Accès disponible** sont deux informations distinctes.
-4. Renvoyez ou annulez l’invitation si nécessaire. Pour retirer l’accès, **Révoquer cet accès**, puis confirmez pour la bonne personne. Après un doute, **Actualiser la liste**.
+2. Saisissez l’adresse email du salarié et choisissez **Inviter le salarié**.
+3. Le salarié ouvre son invitation et crée son mot de passe. Une fois la démarche terminée, vérifiez que **Compte activé** et **Accès disponible** s’affichent sur sa ligne.
 
-Le salarié utilise ses identifiants et les actions autorisées de scanner, reçu et historique. Il ne gère pas le compte principal, les finances ni le contenu des préparations Animation. Ne partagez pas le mot de passe du responsable.
+![La liste sépare l’envoi de l’invitation, l’activation du compte et l’état de l’accès.](illustrations/guide-quotidien/19-equipe.png)
 
-### Validation par PIN, si activée
+Le salarié utilise le scanner, les reçus et son historique selon ses droits. Vous pouvez renvoyer ou annuler l’invitation, ou choisir **Révoquer cet accès** si la personne quitte votre équipe. Vérifiez le nom avant de confirmer, puis utilisez **Actualiser la liste** en cas de doute. Un compte activé peut afficher un accès suspendu.
 
-Dans **Validation par PIN**, vérifiez votre mot de passe et choisissez la durée proposée avant **Générer le PIN**. Le code n’est affiché qu’une fois : conservez-le à l’abri des regards puis **Masquer le PIN**. **Remplacer le PIN** invalide l’ancien code ; **Invalider le PIN et désactiver** arrête ce mode.
+### Utiliser un PIN au comptoir, si proposé
 
-Lorsque le parcours le propose, saisissez vous-même le PIN sur le téléphone du client pour la prestation ou le passage autorisé. Attendez le résultat ; le scanner QR reste disponible. Consultez notifications et historique pour contrôler les validations.
+Dans **Validation par PIN**, vérifiez votre mot de passe, choisissez la durée et sélectionnez **Générer le PIN**. Le code s’affiche une seule fois. Gardez-le à l’abri des regards, puis choisissez **Masquer le PIN**.
 
-> Un compte salarié activé peut avoir un accès suspendu. Le PIN ne donne aucun droit supplémentaire ; ne le communiquez pas aux clients. Après un résultat incertain, actualisez l’état.
+Lorsque l’option apparaît sur le téléphone du client, saisissez vous-même le PIN pour la prestation ou le passage autorisé. Attendez la confirmation et vérifiez l’historique si le résultat est incertain. **Remplacer le PIN** rend l’ancien inutilisable. **Invalider le PIN et désactiver** arrête ce mode.
 
-## 11 · Traiter les demandes de facture
+## 14 · Retrouver une intervention de Localeo sur votre page
 
-**Facturation** apparaît si le service est activé. Choisissez demandes unitaires ou groupées ; sur téléphone, dépliez **Rechercher et filtrer** si nécessaire.
+Si le support a préparé votre page publique, ouvrez **Interventions de Localeo** depuis le menu lorsque la rubrique est disponible. Vous pouvez retrouver chaque intervention pendant 180 jours après sa fin.
 
-![La demande distingue le brut TTC à facturer, la commission et le net reversé avant le dépôt du document.](illustrations/guide-quotidien/11-facturation.png)
+1. Repérez le commerce, la date, le nom de la personne qui est intervenue et la référence du dossier.
+2. Si vous voyez **Enregistrement du brouillon de la page publique**, ouvrez **Ma page publique** pour retrouver le travail enregistré. Le brouillon reste accessible si l’envoi pour validation a été refusé.
+3. Si vous voyez **Soumission de la page publique à modération**, ouvrez **Demandes** dans **Ma page publique** pour suivre la décision. Après approbation, vérifiez votre page publique.
 
-### Fournir votre facture
+![Dans l’intervention, repérez l’action réalisée pour votre page et la référence du dossier.](illustrations/guide-quotidien/20-interventions.png)
 
-1. Ouvrez la demande et vérifiez prestations, montants et statut.
-2. Choisissez **Accuser réception**, puis **Démarrer le traitement**, lorsque proposé.
-3. Préparez la facture dans votre outil habituel. Le brut TTC à facturer est distinct du net reversé après commission.
-4. Dans **Déposer votre facture**, ajoutez un PDF de 10 Mo maximum, son numéro et sa date.
-5. **Fournir la facture**, attendez la confirmation puis vérifiez **Facture fournie**.
+## 15 · Demander de l’aide et suivre la réponse
 
-**Demandée**, **Réception accusée** et **En traitement** indiquent le travail restant. Pour une demande groupée, contrôlez toutes les lignes avant de transmettre.
+1. Ouvrez **Aide et contact** et choisissez le motif adapté.
+2. Décrivez votre demande. Si une opération vous pose problème, indiquez le geste, l’heure et la référence du coffret ou de la prestation si vous l’avez.
+3. Choisissez **Envoyer** une fois et attendez la confirmation. Ouvrez **Mes demandes** pour lire la réponse. Utilisez **Répondre** pour poursuivre l’échange au même endroit.
 
-### Corriger ou télécharger
+![Dans Aide et contact, le lien vers le guide PDF précède le formulaire de demande.](illustrations/guide-quotidien/13-guide-aide.png)
 
-Avant fourniture, **Annuler la demande** est proposé selon l’état. Une demande groupée fournie peut proposer **Créer une correction distincte** : choisissez avoir ou facture corrective et indiquez le motif. Le document d’origine reste distinct.
+Pour une question sur une mission, un lot ou les règles d’une animation, contactez son organisateur. Si le formulaire est indisponible, utilisez les coordonnées reçues à l’ouverture de votre compte.
 
-Dans **Factures Localeo**, si disponible, téléchargez commissions et avoirs avec **Télécharger le PDF**. L’assistant facultatif permet de créer/reprendre un brouillon, vérifier les informations puis **Émettre la facture**. Si **Chorus Pro** est proposé, lisez et acceptez le mandat avant un dépôt. Sa révocation conserve les preuves antérieures.
+### Retrouver ce guide ou votre contrat
 
-> Une page indisponible ne signifie pas qu’aucune facture n’existe. Relisez la demande ou contactez Localeo avant de créer un nouveau document.
+Dans **Aide et contact**, choisissez **Consulter le guide commerçant (PDF)**. Il s’ouvre dans un nouvel onglet, même lorsque la messagerie est indisponible. Téléchargez-le si vous souhaitez le lire sans connexion ou l’imprimer.
 
-## 12 · Obtenir de l’aide et sécuriser votre espace
+Dans **Compte > Mon contrat**, récupérez votre contrat. S’il manque, actualisez la page ou contactez Localeo. Pour une demande au support, le menu du commerce vous permet de copier votre identifiant.
 
-Le guide reste accessible même si le service de messagerie ne répond pas.
+## 16 · Retrouver et protéger votre accès
 
-![Aide et contact propose le guide PDF avant le formulaire de demande à Localeo.](illustrations/guide-quotidien/13-guide-aide.png)
+### Si vous avez oublié votre mot de passe
 
-### Retrouver ce guide
+1. Sur l’écran de connexion, choisissez **Mot de passe oublié**. Saisissez votre adresse email dans **Login** et choisissez **Demander le lien**.
+2. Ouvrez le lien reçu, saisissez votre nouveau mot de passe et confirmez-le.
+3. Reconnectez-vous pour vérifier que vous retrouvez votre espace. Si **Préparer mon compte commerçant** s’affiche, renseignez les informations demandées. Les fonctions auxquelles vous avez droit apparaîtront après activation.
 
-Ouvrez **Aide et contact > Consulter le guide commerçant (PDF)**. Il s’ouvre dans un nouvel onglet ; utilisez le lecteur pour télécharger ou imprimer le PDF. Gardez une copie si vous souhaitez le lire sans connexion.
+![Dans Recevoir un lien, saisissez l’adresse email de votre compte puis choisissez Demander le lien.](illustrations/guide-quotidien/24-mot-de-passe-oublie.png)
 
-### Poser une question et suivre une réponse
+Si vous êtes salarié, choisissez **Récupérer un accès salarié** sur l’écran de connexion.
 
-1. Choisissez le motif adapté dans **Aide et contact**.
-2. Décrivez l’action souhaitée, le problème et son heure. Ajoutez une référence coffret ou prestation si disponible, sans QR personnel ni information confidentielle.
-3. Choisissez **Envoyer** une seule fois puis attendez la confirmation.
-4. Dans **Mes demandes**, ouvrez le fil ; utilisez **Répondre** pour poursuivre au même endroit.
+### Si vous avez perdu une clé d’accès
 
-Si le formulaire est indisponible, utilisez le contact remis lors de votre onboarding. Pour une mission, un lot ou une règle d’animation, contactez d’abord son organisateur.
+Connectez-vous avec votre mot de passe. Dans **Mes clés d’accès**, retirez la clé perdue en confirmant avec votre mot de passe. Les sessions ouvertes avec cette clé sont fermées. Si le résultat est incertain, vérifiez la liste avant de recommencer. Une réinitialisation du mot de passe par email retire toutes vos clés. Vous pouvez en créer une nouvelle ensuite.
 
-### Protéger vos accès
+### Pour changer votre mot de passe ou quitter un appareil partagé
 
-Dans **Compte > Mon contrat**, téléchargez le contrat ; actualisez-le ou contactez Localeo s’il manque. Le menu du commerce permet de copier l’identifiant pour le support, modifier le mot de passe et se déconnecter. Après un changement de mot de passe, reconnectez-vous : les sessions ouvertes sont fermées.
+Utilisez le menu du compte pour changer votre mot de passe ou vous déconnecter. Un changement de mot de passe ferme les sessions ouvertes : reconnectez-vous ensuite. Sur un appareil partagé, déconnectez-vous après chaque utilisation.
 
-**Mot de passe oublié :** depuis la connexion, demandez le lien avec votre email, ouvrez-le, saisissez et confirmez le nouveau mot de passe. Si **Préparer mon compte commerçant** apparaît, complétez les informations demandées ; les fonctions autorisées apparaîtront après activation.
-
-> Sur un appareil partagé, déconnectez-vous après utilisation. Ne transmettez jamais mot de passe, PIN, lien de réinitialisation ou QR personnel d’un client à l’assistance.
-
-## 13 · Relire une intervention sur votre page publique
-
-Lorsque cette rubrique est activée, ouvrez **Interventions de Localeo** depuis le menu. Après la fin d’une intervention, vous pouvez retrouver les actions réalisées pour votre compte pendant 180 jours.
-
-![Le commerce retrouve la soumission à modération, le nom de l’opérateur et la référence du dossier.](illustrations/guide-quotidien/20-interventions.png)
-
-1. Repérez la date, l’opérateur, le commerce et la référence du dossier.
-2. **Enregistrement du brouillon de la page publique** indique que le support a enregistré le contenu. Une soumission refusée laisse le brouillon disponible dans **Ma page publique**.
-3. **Soumission de la page publique à modération** indique que le support a transmis la demande. Dans **Ma page publique → Demandes**, suivez la décision de Localeo avant de vérifier la page publiée.
+> Gardez pour vous votre mot de passe, votre PIN et votre lien de réinitialisation. Gardez aussi confidentiel le QR personnel d’un client.

@@ -1,5 +1,23 @@
 # Illustrations du guide quotidien commerçant
 
+## Captures de l’édition du 25 novembre 2026
+
+`23-valider-passage.png` montre le passage d’un joueur avant confirmation, à
+720 px. `24-mot-de-passe-oublie.png` montre le formulaire **Recevoir un lien**,
+à 640 px. Les deux captures proviennent du frontend Pro sur la base Git
+`6e92f40` avec les changements locaux, sous Chromium et avec des exemples
+fictifs. Les requêtes externes sont bloquées.
+
+Depuis `localeo-commercant` :
+
+```powershell
+$env:LOCALEO_TEST_DIST = 'tmp/guide-edition-20261125/capture-dist'
+node scripts/build-browser-tests.mjs
+node scripts/capture-merchant-guide.mjs --dist tmp/guide-edition-20261125/capture-dist --report-dir tmp/guide-edition-20261125/capture-report --port 45181 --only 23-valider-passage,24-mot-de-passe-oublie
+```
+
+## Invitation du 24 novembre 2026
+
 La capture `12-invitations.png` du 24 novembre 2026 illustre l’invitation d’une association voisine avec des données fictives. Depuis le dépôt Commerçant, utiliser le build local documenté puis `node scripts/capture-merchant-guide.mjs --dist tmp/e84-guide-pro --only 12-invitations`.
 
 ## Scan depuis l’appareil photo — E82, 24 novembre 2026
@@ -18,6 +36,26 @@ py -3.14 scripts/generate-merchant-guide.py --preview-dir tmp/e82-guide-final
 npm run guide:sync
 npm run guide:check
 ```
+
+## Clés d’accès du 24 novembre 2026
+
+Les captures **21-connexion-cle.png** et **22-creation-cle.png** montrent le bouton de connexion par clé d’accès et la création depuis **Mes clés d’accès**. Elles proviennent du frontend Pro sur la base Git `2ccb8da` et les modifications locales WebAuthn, en Chromium à 640 px. Le service de disponibilité, la session et la liste de clés utilisent des réponses synthétiques. Les requêtes externes sont bloquées.
+
+Depuis `localeo-commercant` :
+
+```powershell
+$env:LOCALEO_TEST_DIST = 'tmp/pro-passkeys-guide-capture-dist'
+node scripts/build-browser-tests.mjs
+node scripts/capture-merchant-guide.mjs --dist tmp/pro-passkeys-guide-capture-dist --report-dir tmp/pro-passkeys-guide-capture --port 5191 --only 21-connexion-cle,22-creation-cle
+py -3.14 scripts/generate-merchant-guide.py --preview-dir tmp/pro-passkeys-guide-pdf-final
+npm run guide:sync
+npm run guide:check
+$env:LOCALEO_TEST_DIST = 'tmp/pro-passkeys-guide-check-dist'
+node scripts/build-browser-tests.mjs
+node scripts/capture-merchant-guide.mjs --dist tmp/pro-passkeys-guide-check-dist --check-guide --verify-only --report-dir tmp/pro-passkeys-guide-capture --port 5191
+```
+
+Les quatorze pages ont été rendues et relues. Le contrôle à 390 et 1440 px a vérifié le lien applicatif, le focus clavier et les octets du PDF servi malgré l’assistance indisponible. Axe n’a signalé aucune violation sur la page d’aide. Les rapports locaux `provenance.json` et `verification.json` sont dans `tmp/pro-passkeys-guide-capture`.
 
 ## Historique des interventions du 23 novembre 2026
 
