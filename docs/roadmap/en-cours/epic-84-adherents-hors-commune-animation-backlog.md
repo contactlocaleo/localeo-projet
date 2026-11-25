@@ -24,6 +24,8 @@ Le CEJ conserve une seule souscription, une commune de pilotage et un dossier pa
 
 **25 novembre 2026 · HC-03-ERP.** Pour instruire une vérification d’identité, le support Localeo peut retrouver un établissement par son SIRET dans la liste Commerçants de l’ERP. La recherche par nom ou login et les habilitations de consultation restent applicables. [Parcours et preuves](../../specifications/epic-84-adherents-hors-commune-animation/README.md#recherche-par-siret-dans-lerp)
 
+**25 novembre 2026 · HC-04-SÉLECTION.** À la création d’une animation, le gestionnaire parcourt directement les commerces locaux et les adhérents extérieurs de son réseau. Une case décochée à l’ouverture permet de restreindre la liste à la commune de pilotage. Le filtre préserve les choix déjà effectués et le compteur indique les adhérents sélectionnés hors commune. [Sélection à la création](../../specifications/epic-84-adherents-hors-commune-animation/README.md#sélection-à-la-création)
+
 ## Recette de référence
 
 1. Préparer trois commerces fictifs : un commerce local à Martignas, un adhérent extérieur à Saint-Jean-d’Illac et un commerce de Saint-Jean-d’Illac extérieur au CEJ.

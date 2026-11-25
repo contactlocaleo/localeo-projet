@@ -106692,6 +106692,7 @@
           "Animation locale"
         ],
         "summary": "Lister Commercants",
+        "description": "Un curseur incompatible avec les filtres renvoie HTTP 422 et le code CURSEUR_INVALIDE. Reprendre sans curseur.",
         "operationId": "lister_commercants_protected_animation_locale_selecteurs_preparation_commercants_get",
         "parameters": [
           {
@@ -106783,6 +106784,18 @@
               ],
               "title": "Eligible"
             }
+          },
+          {
+            "name": "uniquement_commune",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "description": "Limiter la liste aux établissements domiciliés dans la commune de pilotage.",
+              "default": false,
+              "title": "Uniquement Commune"
+            },
+            "description": "Limiter la liste aux établissements domiciliés dans la commune de pilotage."
           }
         ],
         "responses": {
@@ -107951,6 +107964,7 @@
           "Animation locale"
         ],
         "summary": "Lister Commercants",
+        "description": "Un curseur incompatible avec les filtres renvoie HTTP 422 et le code CURSEUR_INVALIDE. Reprendre sans curseur.",
         "operationId": "lister_commercants_internal_animation_locale_selecteurs_preparation_commercants_get",
         "parameters": [
           {
@@ -108042,6 +108056,18 @@
               ],
               "title": "Eligible"
             }
+          },
+          {
+            "name": "uniquement_commune",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "description": "Limiter la liste aux établissements domiciliés dans la commune de pilotage.",
+              "default": false,
+              "title": "Uniquement Commune"
+            },
+            "description": "Limiter la liste aux établissements domiciliés dans la commune de pilotage."
           }
         ],
         "responses": {
@@ -161601,7 +161627,8 @@
           "metadata": {
             "additionalProperties": true,
             "type": "object",
-            "title": "Metadata"
+            "title": "Metadata",
+            "description": "Les sélecteurs renseignent commune_id (UUID) et commune_nom avec la commune réelle de l'établissement."
           },
           "adresse_postale": {
             "anyOf": [

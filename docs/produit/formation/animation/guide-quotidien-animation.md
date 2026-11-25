@@ -87,6 +87,19 @@ Dans **Mission & règles** à la création ou dans **Configuration → Règles**
 
 > Lorsque Léo est proposé pour préparer une chasse ou un passeport, complétez son brief, sélectionnez les commerces et relisez la proposition avant de la valider. Une préparation générée reste à contrôler ; elle ne publie pas l'animation.
 
+## 4 bis · Choisir les commerces à solliciter
+
+Pendant la création d’une animation, ouvrez **Commerçants à solliciter**. Vous y retrouvez les commerces de la commune et les adhérents de votre réseau installés ailleurs.
+
+1. Parcourez la liste par ordre alphabétique. La commune figure sous le nom de chaque commerce. Pour une longue liste, faites défiler les résultats ou choisissez **Afficher la suite**. Si vous connaissez le début du nom, saisissez-le puis choisissez **Rechercher**.
+2. Cochez les commerces que vous voulez solliciter. Vérifiez le nombre de commerces sélectionnés avant de continuer.
+
+![La case de filtre est décochée. Repérez la commune sous chaque nom avant de choisir les commerces.](illustrations/guide-quotidien/selection-reseau-creation.png)
+
+### Afficher seulement les commerces de votre commune
+
+Cochez **Uniquement les commerces de Bouliac** si Bouliac est votre commune. Le compteur indique combien de commerces sélectionnés sont hors commune. Décochez le filtre pour les retrouver avec leur case toujours cochée.
+
 ## 5 · Régler les essais de Vitrines et Juste Prix
 
 **Objectif :** donner une règle claire aux joueurs avant le lancement.

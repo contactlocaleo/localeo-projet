@@ -1,5 +1,27 @@
 # Captures du guide utilisateur Animation
 
+## Choix des commerces pendant la création du 25 novembre 2026
+
+`selection-reseau-creation.png` illustre le geste **Choisir les commerces à
+solliciter**. La case de restriction à la commune est décochée. Les noms de
+commune sous les établissements permettent de repérer un adhérent extérieur.
+La capture utilise l’écran de création de Localeo Animation sur la base
+`3189f02`, avec le filtre du réseau et des commerces fictifs.
+
+Depuis `localeo-animation`, la recette utilise un build isolé, des réponses
+API simulées et un serveur HTTP local sur port éphémère.
+
+```powershell
+$env:ANIMATION_TEST_DIST = 'tmp/selection-reseau-guide-dist'
+$env:ANIMATION_BROWSER_ARTIFACTS = 'tmp/selection-reseau-guide-captures'
+node scripts/build-generation-tests.mjs
+node tests/browser/po-creation-continuite.mjs
+```
+
+Le scénario `merchant-network` produit `network-guide-1280.png` dans le
+répertoire des captures. Ce cadrage du formulaire à 1 280 px est repris
+sous le nom `selection-reseau-creation.png`.
+
 ## Pagination du réseau de commerçants du 25 novembre 2026
 
 `commercants-1280.png` montre la deuxième page d’un réseau fictif de
