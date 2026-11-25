@@ -1,5 +1,7 @@
 # Roadmap produit
 
+**24 novembre 2026 — [EPIC 83, clés d’accès dans Localeo Pro](en-cours/epic-83-cles-acces-localeo-pro-backlog.md).** Connexion sans saisie d’identifiant pour les titulaires et les salariés, avec pilotage par environnement dans Ops. Implémentation locale et preuves dans la [spécification](../specifications/epic-83-cles-acces-localeo-pro/README.md), recette physique et activation à mener.
+
 **24 novembre 2026 — EPIC 84, En cours.** [Adhérents hors commune dans Localeo Animation](en-cours/epic-84-adherents-hors-commune-animation-backlog.md). Une association invite ses adhérents extérieurs depuis sa souscription et les habitants retrouvent l’animation dans les agendas des communes participantes.
 
 **24 novembre 2026 — [EPIC 82, scan QR depuis l’appareil photo avec Localeo Pro](a-faire/epic-82-scan-qr-externe-localeo-pro-backlog.md).** Ouverture directe vers l’action à confirmer pour Coffret, participation Animation et bon numérique. Le parcours **Scanner** de Pro reste disponible avec les deux formats de QR. État **À faire** selon la [roadmap commune](README.md).

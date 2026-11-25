@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Backend - contrat implemente EPIC 41",
     "description": "OpenAPI complet du backend, dont les parcours Animation locale. Genere hors ligne depuis le code local pour les integrations et les mocks ; cet instantane ne prouve pas son deploiement.",
-    "version": "1.0.0+57f8df5"
+    "version": "1.0.0+ab963a0"
   },
   "paths": {
     "/public/identite-acces/interne/connexion": {
@@ -54807,6 +54807,565 @@
         ]
       }
     },
+    "/public/identite-acces/commercants/auth/passkeys/etat": {
+      "get": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Etat Passkeys Pro",
+        "operationId": "etat_passkeys_pro_public_identite_acces_commercants_auth_passkeys_etat_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EtatPasskeysProPayload"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Erreur de validation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/identite-acces/commercants/auth/passkeys/connexion/options": {
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Options Connexion Passkey Pro",
+        "operationId": "options_connexion_passkey_pro_public_identite_acces_commercants_auth_passkeys_connexion_options_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OptionsConnexionPasskeyProRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OptionsPasskeyProPayload"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/identite-acces/commercants/auth/passkeys/connexion/verifier": {
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Verifier Connexion Passkey Pro",
+        "operationId": "verifier_connexion_passkey_pro_public_identite_acces_commercants_auth_passkeys_connexion_verifier_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerificationPasskeyProRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InitialiserSessionCommercantPayload"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/protected/identite-acces/commercants/auth/passkeys": {
+      "get": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Lister Passkeys Pro",
+        "operationId": "lister_passkeys_pro_protected_identite_acces_commercants_auth_passkeys_get",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListePasskeysProPayload"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/protected/identite-acces/commercants/auth/passkeys/inscription/options": {
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Options Inscription Passkey Pro",
+        "operationId": "options_inscription_passkey_pro_protected_identite_acces_commercants_auth_passkeys_inscription_options_post",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OptionsInscriptionPasskeyProRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OptionsPasskeyProPayload"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/protected/identite-acces/commercants/auth/passkeys/inscription/verifier": {
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Verifier Inscription Passkey Pro",
+        "operationId": "verifier_inscription_passkey_pro_protected_identite_acces_commercants_auth_passkeys_inscription_verifier_post",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InscriptionPasskeyProRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClePasskeyProPayload"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/protected/identite-acces/commercants/auth/passkeys/{id}/retirer": {
+      "post": {
+        "tags": [
+          "Identite acces"
+        ],
+        "summary": "Retirer Passkey Pro",
+        "operationId": "retirer_passkey_pro_protected_identite_acces_commercants_auth_passkeys__id__retirer_post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RetraitPasskeyProRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RetraitPasskeyProPayload"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/protected/documentaire/commercants/documents": {
       "get": {
         "tags": [
@@ -101496,6 +102055,77 @@
         ]
       }
     },
+    "/protected/referencement/commercants-animation/communes": {
+      "get": {
+        "tags": [
+          "Referencement"
+        ],
+        "summary": "Communes",
+        "operationId": "communes_protected_referencement_commercants_animation_communes_get",
+        "parameters": [
+          {
+            "name": "recherche",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 160,
+              "title": "Recherche"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CommuneReseauDTO"
+                  },
+                  "title": "Response Communes Protected Referencement Commercants Animation Communes Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
     "/protected/referencement/commercants-animation/recus/{cle}": {
       "get": {
         "tags": [
@@ -101679,6 +102309,176 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/ModificationAnimationCommande"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FicheAnimationDTO"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/referencement/commercants-animation/{commerce_id}/apercu-detachement": {
+      "get": {
+        "tags": [
+          "Referencement"
+        ],
+        "summary": "Apercu Detachement",
+        "operationId": "apercu_detachement_protected_referencement_commercants_animation__commerce_id__apercu_detachement_get",
+        "parameters": [
+          {
+            "name": "commerce_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Commerce Id"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApercuDetachementDTO"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CommercantSessionBearer": []
+          }
+        ]
+      }
+    },
+    "/protected/referencement/commercants-animation/{commerce_id}/detacher": {
+      "post": {
+        "tags": [
+          "Referencement"
+        ],
+        "summary": "Detacher",
+        "operationId": "detacher_protected_referencement_commercants_animation__commerce_id__detacher_post",
+        "parameters": [
+          {
+            "name": "commerce_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Commerce Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128,
+              "title": "Idempotency-Key"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Session Animation au format `Bearer <token>`.",
+              "title": "Authorization"
+            },
+            "description": "Session Animation au format `Bearer <token>`."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DetachementAnimationCommande"
               }
             }
           }
@@ -147185,247 +147985,6 @@
           }
         }
       }
-    },
-    "/protected/referencement/commercants-animation/communes": {
-      "get": {
-        "tags": [
-          "Referencement"
-        ],
-        "summary": "Communes",
-        "operationId": "communes_protected_referencement_commercants_animation_communes_get",
-        "parameters": [
-          {
-            "name": "recherche",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "minLength": 2,
-              "maxLength": 160,
-              "title": "Recherche"
-            }
-          },
-          {
-            "name": "Authorization",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Session Animation au format `Bearer <token>`.",
-              "title": "Authorization"
-            },
-            "description": "Session Animation au format `Bearer <token>`."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/CommuneReseauDTO"
-                  },
-                  "title": "Response Communes Protected Referencement Commercants Animation Communes Get"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "CommercantSessionBearer": []
-          }
-        ]
-      }
-    },
-    "/protected/referencement/commercants-animation/{commerce_id}/apercu-detachement": {
-      "get": {
-        "tags": [
-          "Referencement"
-        ],
-        "summary": "Apercu Detachement",
-        "operationId": "apercu_detachement_protected_referencement_commercants_animation__commerce_id__apercu_detachement_get",
-        "parameters": [
-          {
-            "name": "commerce_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid",
-              "title": "Commerce Id"
-            }
-          },
-          {
-            "name": "cursor",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "format": "uuid"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Cursor"
-            }
-          },
-          {
-            "name": "Authorization",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Session Animation au format `Bearer <token>`.",
-              "title": "Authorization"
-            },
-            "description": "Session Animation au format `Bearer <token>`."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApercuDetachementDTO"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "CommercantSessionBearer": []
-          }
-        ]
-      }
-    },
-    "/protected/referencement/commercants-animation/{commerce_id}/detacher": {
-      "post": {
-        "tags": [
-          "Referencement"
-        ],
-        "summary": "Detacher",
-        "operationId": "detacher_protected_referencement_commercants_animation__commerce_id__detacher_post",
-        "parameters": [
-          {
-            "name": "commerce_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid",
-              "title": "Commerce Id"
-            }
-          },
-          {
-            "name": "Idempotency-Key",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "minLength": 8,
-              "maxLength": 128,
-              "title": "Idempotency-Key"
-            }
-          },
-          {
-            "name": "Authorization",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Session Animation au format `Bearer <token>`.",
-              "title": "Authorization"
-            },
-            "description": "Session Animation au format `Bearer <token>`."
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/DetachementAnimationCommande"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/FicheAnimationDTO"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "CommercantSessionBearer": []
-          }
-        ]
-      }
     }
   },
   "components": {
@@ -152588,6 +153147,41 @@
         ],
         "title": "ApercuCorrectionPreuvePayload"
       },
+      "ApercuDetachementDTO": {
+        "properties": {
+          "rattachement_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Rattachement Id"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/InvitationDetachementDTO"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          }
+        },
+        "type": "object",
+        "required": [
+          "rattachement_id",
+          "items",
+          "next_cursor"
+        ],
+        "title": "ApercuDetachementDTO"
+      },
       "ApercuDotationPubliquePayload": {
         "properties": {
           "nature": {
@@ -157680,6 +158274,31 @@
         ],
         "title": "CiblesAttestationPayload"
       },
+      "ClePasskeyProPayload": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "created_at"
+        ],
+        "title": "ClePasskeyProPayload"
+      },
       "ClesPush": {
         "properties": {
           "p256dh": {
@@ -161896,6 +162515,30 @@
         ],
         "title": "CommuneProchePayload"
       },
+      "CommuneReseauDTO": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "nom": {
+            "type": "string",
+            "title": "Nom"
+          },
+          "code_postal": {
+            "type": "string",
+            "title": "Code Postal"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "nom",
+          "code_postal"
+        ],
+        "title": "CommuneReseauDTO"
+      },
       "CommuneSyntheseAnimationsPayload": {
         "properties": {
           "id": {
@@ -165937,6 +166580,79 @@
           "permissions"
         ],
         "title": "CreationAcces"
+      },
+      "CreationAnimationCommande": {
+        "properties": {
+          "nom": {
+            "type": "string",
+            "maxLength": 300,
+            "minLength": 1,
+            "title": "Nom"
+          },
+          "adresse": {
+            "type": "string",
+            "maxLength": 500,
+            "minLength": 1,
+            "title": "Adresse"
+          },
+          "categorie": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Categorie"
+          },
+          "siret": {
+            "type": "string",
+            "maxLength": 30,
+            "minLength": 14,
+            "title": "Siret"
+          },
+          "contact_email": {
+            "type": "string",
+            "maxLength": 320,
+            "minLength": 1,
+            "title": "Contact Email"
+          },
+          "contact_nom": {
+            "type": "string",
+            "maxLength": 200,
+            "title": "Contact Nom",
+            "default": ""
+          },
+          "contact_telephone": {
+            "type": "string",
+            "maxLength": 40,
+            "title": "Contact Telephone",
+            "default": ""
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 5000,
+            "title": "Description",
+            "default": ""
+          },
+          "commune_commerce_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Commune Commerce Id"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "nom",
+          "adresse",
+          "categorie",
+          "siret",
+          "contact_email"
+        ],
+        "title": "CreationAnimationCommande"
       },
       "CreationConversationInput": {
         "properties": {
@@ -170382,6 +171098,40 @@
           "reponse"
         ],
         "title": "DepotResultatGenerationInput"
+      },
+      "DetachementAnimationCommande": {
+        "properties": {
+          "version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Version"
+          },
+          "version_perimetre": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Version Perimetre"
+          },
+          "rattachement_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Rattachement Id"
+          },
+          "invitations_confirmees": {
+            "items": {
+              "$ref": "#/components/schemas/InvitationDetachementCommande"
+            },
+            "type": "array",
+            "title": "Invitations Confirmees"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "version",
+          "version_perimetre",
+          "rattachement_id"
+        ],
+        "title": "DetachementAnimationCommande"
       },
       "DetailAnimationSupport": {
         "properties": {
@@ -174933,6 +175683,31 @@
         ],
         "title": "EtatFinAnimationPayload"
       },
+      "EtatPasskeysProPayload": {
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "title": "Enabled"
+          },
+          "origin": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Origin"
+          }
+        },
+        "type": "object",
+        "required": [
+          "enabled",
+          "origin"
+        ],
+        "title": "EtatPasskeysProPayload"
+      },
       "EtatPin": {
         "properties": {
           "mode_actif": {
@@ -178044,67 +178819,6 @@
           "libelle"
         ],
         "title": "FeuilleDTO"
-      },
-      "FicheAnimationCommande": {
-        "properties": {
-          "nom": {
-            "type": "string",
-            "maxLength": 300,
-            "minLength": 1,
-            "title": "Nom"
-          },
-          "adresse": {
-            "type": "string",
-            "maxLength": 500,
-            "minLength": 1,
-            "title": "Adresse"
-          },
-          "categorie": {
-            "type": "string",
-            "format": "uuid",
-            "title": "Categorie"
-          },
-          "siret": {
-            "type": "string",
-            "maxLength": 30,
-            "minLength": 14,
-            "title": "Siret"
-          },
-          "contact_email": {
-            "type": "string",
-            "maxLength": 320,
-            "minLength": 1,
-            "title": "Contact Email"
-          },
-          "contact_nom": {
-            "type": "string",
-            "maxLength": 200,
-            "title": "Contact Nom",
-            "default": ""
-          },
-          "contact_telephone": {
-            "type": "string",
-            "maxLength": 40,
-            "title": "Contact Telephone",
-            "default": ""
-          },
-          "description": {
-            "type": "string",
-            "maxLength": 5000,
-            "title": "Description",
-            "default": ""
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "nom",
-          "adresse",
-          "categorie",
-          "siret",
-          "contact_email"
-        ],
-        "title": "FicheAnimationCommande"
       },
       "FicheAnimationDTO": {
         "properties": {
@@ -183977,6 +184691,40 @@
         ],
         "title": "InscriptionAnimationPayload"
       },
+      "InscriptionPasskeyProRequest": {
+        "properties": {
+          "challenge_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Challenge Id"
+          },
+          "credential": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/JsonValue"
+            },
+            "type": "object",
+            "title": "Credential"
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 80
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name"
+          }
+        },
+        "type": "object",
+        "required": [
+          "challenge_id",
+          "credential"
+        ],
+        "title": "InscriptionPasskeyProRequest"
+      },
       "InscriptionTombolaPubliquePayload": {
         "properties": {
           "statut": {
@@ -184242,6 +184990,65 @@
           "statut_session"
         ],
         "title": "InvalidationSessionCommercantPayload"
+      },
+      "InvitationDetachementCommande": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "A_ENVOYER",
+              "EN_ATTENTE"
+            ],
+            "title": "Statut"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "statut"
+        ],
+        "title": "InvitationDetachementCommande"
+      },
+      "InvitationDetachementDTO": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "A_ENVOYER",
+              "EN_ATTENTE"
+            ],
+            "title": "Statut"
+          },
+          "animation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animation Id"
+          },
+          "animation_nom": {
+            "type": "string",
+            "title": "Animation Nom"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "statut",
+          "animation_id",
+          "animation_nom"
+        ],
+        "title": "InvitationDetachementDTO"
       },
       "InvitationEquipeCommande": {
         "properties": {
@@ -184615,6 +185422,7 @@
         ],
         "title": "JourneePayload"
       },
+      "JsonValue": {},
       "KitAnimationPayload": {
         "properties": {
           "animationId": {
@@ -186247,6 +187055,22 @@
           "pagination"
         ],
         "title": "ListeAnimationsPubliquesPayload"
+      },
+      "ListePasskeysProPayload": {
+        "properties": {
+          "keys": {
+            "items": {
+              "$ref": "#/components/schemas/ClePasskeyProPayload"
+            },
+            "type": "array",
+            "title": "Keys"
+          }
+        },
+        "type": "object",
+        "required": [
+          "keys"
+        ],
+        "title": "ListePasskeysProPayload"
       },
       "LiveAnimationPayload": {
         "properties": {
@@ -193243,6 +194067,52 @@
           "active"
         ],
         "title": "OptionInput"
+      },
+      "OptionsConnexionPasskeyProRequest": {
+        "properties": {},
+        "additionalProperties": false,
+        "type": "object",
+        "title": "OptionsConnexionPasskeyProRequest"
+      },
+      "OptionsInscriptionPasskeyProRequest": {
+        "properties": {
+          "password": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 1024
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Password"
+          }
+        },
+        "type": "object",
+        "title": "OptionsInscriptionPasskeyProRequest"
+      },
+      "OptionsPasskeyProPayload": {
+        "properties": {
+          "challenge_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Challenge Id"
+          },
+          "options": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/JsonValue"
+            },
+            "type": "object",
+            "title": "Options"
+          }
+        },
+        "type": "object",
+        "required": [
+          "challenge_id",
+          "options"
+        ],
+        "title": "OptionsPasskeyProPayload"
       },
       "OrdonnanceurBatchPayload": {
         "properties": {
@@ -214489,6 +215359,33 @@
         ],
         "title": "RetraitModule"
       },
+      "RetraitPasskeyProPayload": {
+        "properties": {
+          "revoked_current_session": {
+            "type": "boolean",
+            "title": "Revoked Current Session"
+          }
+        },
+        "type": "object",
+        "required": [
+          "revoked_current_session"
+        ],
+        "title": "RetraitPasskeyProPayload"
+      },
+      "RetraitPasskeyProRequest": {
+        "properties": {
+          "password": {
+            "type": "string",
+            "maxLength": 1024,
+            "title": "Password"
+          }
+        },
+        "type": "object",
+        "required": [
+          "password"
+        ],
+        "title": "RetraitPasskeyProRequest"
+      },
       "ReutilisationTemplateGenerationPayload": {
         "properties": {
           "animationId": {
@@ -221096,6 +221993,28 @@
         ],
         "title": "VerificationMissionPayload"
       },
+      "VerificationPasskeyProRequest": {
+        "properties": {
+          "challenge_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Challenge Id"
+          },
+          "credential": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/JsonValue"
+            },
+            "type": "object",
+            "title": "Credential"
+          }
+        },
+        "type": "object",
+        "required": [
+          "challenge_id",
+          "credential"
+        ],
+        "title": "VerificationPasskeyProRequest"
+      },
       "VerificationPoiPayload": {
         "properties": {
           "id": {
@@ -223412,231 +224331,6 @@
           "preparation"
         ],
         "title": "PreparationPayload"
-      },
-      "ApercuDetachementDTO": {
-        "properties": {
-          "rattachement_id": {
-            "type": "string",
-            "format": "uuid",
-            "title": "Rattachement Id"
-          },
-          "items": {
-            "items": {
-              "$ref": "#/components/schemas/InvitationDetachementDTO"
-            },
-            "type": "array",
-            "title": "Items"
-          },
-          "next_cursor": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "uuid"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Next Cursor"
-          }
-        },
-        "type": "object",
-        "required": [
-          "rattachement_id",
-          "items",
-          "next_cursor"
-        ],
-        "title": "ApercuDetachementDTO"
-      },
-      "CommuneReseauDTO": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid",
-            "title": "Id"
-          },
-          "nom": {
-            "type": "string",
-            "title": "Nom"
-          },
-          "code_postal": {
-            "type": "string",
-            "title": "Code Postal"
-          }
-        },
-        "type": "object",
-        "required": [
-          "id",
-          "nom",
-          "code_postal"
-        ],
-        "title": "CommuneReseauDTO"
-      },
-      "CreationAnimationCommande": {
-        "properties": {
-          "nom": {
-            "type": "string",
-            "maxLength": 300,
-            "minLength": 1,
-            "title": "Nom"
-          },
-          "adresse": {
-            "type": "string",
-            "maxLength": 500,
-            "minLength": 1,
-            "title": "Adresse"
-          },
-          "categorie": {
-            "type": "string",
-            "format": "uuid",
-            "title": "Categorie"
-          },
-          "siret": {
-            "type": "string",
-            "maxLength": 30,
-            "minLength": 14,
-            "title": "Siret"
-          },
-          "contact_email": {
-            "type": "string",
-            "maxLength": 320,
-            "minLength": 1,
-            "title": "Contact Email"
-          },
-          "contact_nom": {
-            "type": "string",
-            "maxLength": 200,
-            "title": "Contact Nom",
-            "default": ""
-          },
-          "contact_telephone": {
-            "type": "string",
-            "maxLength": 40,
-            "title": "Contact Telephone",
-            "default": ""
-          },
-          "description": {
-            "type": "string",
-            "maxLength": 5000,
-            "title": "Description",
-            "default": ""
-          },
-          "commune_commerce_id": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "uuid"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Commune Commerce Id"
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "nom",
-          "adresse",
-          "categorie",
-          "siret",
-          "contact_email"
-        ],
-        "title": "CreationAnimationCommande"
-      },
-      "DetachementAnimationCommande": {
-        "properties": {
-          "version": {
-            "type": "integer",
-            "minimum": 1.0,
-            "title": "Version"
-          },
-          "version_perimetre": {
-            "type": "integer",
-            "minimum": 1.0,
-            "title": "Version Perimetre"
-          },
-          "rattachement_id": {
-            "type": "string",
-            "format": "uuid",
-            "title": "Rattachement Id"
-          },
-          "invitations_confirmees": {
-            "items": {
-              "$ref": "#/components/schemas/InvitationDetachementCommande"
-            },
-            "type": "array",
-            "title": "Invitations Confirmees"
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "version",
-          "version_perimetre",
-          "rattachement_id"
-        ],
-        "title": "DetachementAnimationCommande"
-      },
-      "InvitationDetachementCommande": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid",
-            "title": "Id"
-          },
-          "statut": {
-            "type": "string",
-            "enum": [
-              "A_ENVOYER",
-              "EN_ATTENTE"
-            ],
-            "title": "Statut"
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "id",
-          "statut"
-        ],
-        "title": "InvitationDetachementCommande"
-      },
-      "InvitationDetachementDTO": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid",
-            "title": "Id"
-          },
-          "statut": {
-            "type": "string",
-            "enum": [
-              "A_ENVOYER",
-              "EN_ATTENTE"
-            ],
-            "title": "Statut"
-          },
-          "animation_id": {
-            "type": "string",
-            "format": "uuid",
-            "title": "Animation Id"
-          },
-          "animation_nom": {
-            "type": "string",
-            "title": "Animation Nom"
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "id",
-          "statut",
-          "animation_id",
-          "animation_nom"
-        ],
-        "title": "InvitationDetachementDTO"
       }
     },
     "securitySchemes": {

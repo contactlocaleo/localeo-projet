@@ -1,5 +1,7 @@
 # Roadmap par etat
 
+**24 novembre 2026 — EPIC 83, En cours.** [Clés d’accès dans Localeo Pro](en-cours/epic-83-cles-acces-localeo-pro-backlog.md). Connexion WebAuthn réalisée localement pour les titulaires et les salariés. La recette sur appareils physiques et l’activation par environnement restent à mener.
+
 **24 novembre 2026 — EPIC 84, En cours.** [Adhérents hors commune dans Localeo Animation](en-cours/epic-84-adherents-hors-commune-animation-backlog.md). L’epic reprend l’évolution E73-EVO-ADHERENTS-HORS-COMMUNE et porte les neuf critères HC-01 à HC-09.
 
 **24 novembre 2026 — EPIC 82, À faire.** [Scan QR depuis l’appareil photo avec Localeo Pro](a-faire/epic-82-scan-qr-externe-localeo-pro-backlog.md). Accès direct à l’action pour coffrets, participations et bons numériques après connexion si nécessaire. Confirmation explicite et scanner historique conservés.
@@ -447,6 +449,7 @@ précise la provenance et les divergences historiques conservées.
 | 79 | A faire | [Escape Game assisté par l’IA](a-faire/epic-79-escape-game-assiste-ia-backlog.md) : 7 US et 18 critères cibles ; préparation IA selon le processus de la chasse E55, validation avant publication, terrain commune/commerces et progression sur un téléphone confirmés ; quatre arbitrages résolus, quatre ouverts, sans implémentation |
 | 81 | En cours | [Clarté des parcours publics Marketplace](en-cours/epic-81-parcours-ux-marketplace-20261118-backlog.md) : sept orientations UX P0/P1 validées, cinq améliorations de présentation réalisées localement ; contrôle du catalogue d'ouverture, recette Stripe TEST et tests humains ouverts. |
 | 82 | À faire | [Scan QR depuis l’appareil photo avec Localeo Pro](a-faire/epic-82-scan-qr-externe-localeo-pro-backlog.md) : trois familles de QR clients, reprise après connexion et scanner historique préservé. |
+| 83 | En cours | [Clés d’accès dans Localeo Pro](en-cours/epic-83-cles-acces-localeo-pro-backlog.md) : connexion sans saisie du mot de passe, gestion des clés et bascule Ops réalisées localement, recette et activation par cible à mener. |
 | 84 | En cours | [Adhérents hors commune dans Localeo Animation](en-cours/epic-84-adherents-hors-commune-animation-backlog.md). Saisie, import, participation en magasin, agendas Live et renouvellement du réseau. |
 | Autres identifiants du tronc commun | Terminees | Statut produit consolide conserve ; les anciennes mentions de stories a faire ne rouvrent pas ces epics. |
 

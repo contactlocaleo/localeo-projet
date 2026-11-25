@@ -1,5 +1,7 @@
 # Suivi backlog
 
+**24 novembre 2026 — [EPIC 83, clés d’accès dans Localeo Pro](en-cours/epic-83-cles-acces-localeo-pro-backlog.md).** Critères CL-01 à CL-06. Parcours Pro et bascule Ops réalisés localement, recette sur appareils physiques et mise en service encore ouvertes.
+
 **24 novembre 2026 — EPIC 84, En cours.** [Adhérents hors commune dans Localeo Animation](en-cours/epic-84-adherents-hors-commune-animation-backlog.md). Le backlog porte les critères HC-01 à HC-09 et la recette du CEJ.
 
 **24 novembre 2026 — [EPIC 82, scan QR depuis l’appareil photo avec Localeo Pro](a-faire/epic-82-scan-qr-externe-localeo-pro-backlog.md).** Critères E82-CA-01 à E82-CA-07. Ouverture directe après connexion éventuelle, confirmation explicite et non-régression de **Scanner**. État **À faire** selon la [roadmap commune](README.md).
@@ -687,4 +689,5 @@ anciennes US restent historiques.
 | EPIC-80 | En cours | [Fiabilité des parcours Animation dans Localeo Pro](en-cours/epic-80-fiabilite-parcours-localeo-pro-backlog.md) |
 | EPIC-81 | En cours | [Clarté des parcours publics Marketplace](en-cours/epic-81-parcours-ux-marketplace-20261118-backlog.md) |
 | EPIC-82 | À faire | [Scan QR depuis l’appareil photo avec Localeo Pro](a-faire/epic-82-scan-qr-externe-localeo-pro-backlog.md) |
+| EPIC-83 | En cours | [Clés d’accès dans Localeo Pro](en-cours/epic-83-cles-acces-localeo-pro-backlog.md), critères CL-01 à CL-06. |
 | EPIC-84 | En cours | [Adhérents hors commune dans Localeo Animation](en-cours/epic-84-adherents-hors-commune-animation-backlog.md), critères HC-01 à HC-09. |

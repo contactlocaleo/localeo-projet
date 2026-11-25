@@ -2,9 +2,11 @@
 
 [Retour à la roadmap](../README.md)
 
-Dix EPIC sont classées en cours. Ce classement ne vaut ni clôture ni déploiement.
+Onze EPIC sont classées en cours. Ce classement ne vaut ni clôture ni déploiement.
 
 - [EPIC 84 — Inviter les adhérents hors commune à une animation](epic-84-adherents-hors-commune-animation-backlog.md). [Spécification et recette](../../specifications/epic-84-adherents-hors-commune-animation/README.md).
+
+- [EPIC 83 — Clés d’accès dans Localeo Pro](epic-83-cles-acces-localeo-pro-backlog.md). Connexion WebAuthn réalisée localement pour les titulaires et les salariés, activation par environnement dans Ops et recette sur appareils physiques à réaliser.
 
 - [EPIC 76 — Impersonification support Pro et Animation](epic-76-impersonification-support-pro-animation-backlog.md) et [spécification](../../specifications/epic-76-impersonification-support-pro-animation/README.md). Session temporaire depuis l’ERP ou Localeo Support, import de commerçants comme recette transverse, double attribution et historique client. 18 critères.
 
