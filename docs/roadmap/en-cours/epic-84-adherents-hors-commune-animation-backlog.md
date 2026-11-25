@@ -22,6 +22,8 @@ Le CEJ conserve une seule souscription, une commune de pilotage et un dossier pa
 | HC-08 · Retrait | Avant confirmation, le gestionnaire voit quelles invitations en attente du CEJ seront annulées. Le retrait du réseau conserve les participations acceptées, la fiche partagée, le compte Pro, les Coffrets et les liens avec les autres associations. Si le dernier commerce participant d’une ville extérieure quitte ensuite l’animation, celle-ci disparaît de l’agenda de cette ville. |
 | HC-09 · Renouvellement | Au renouvellement de la souscription pour le même partenaire et la même commune de pilotage, le gestionnaire retrouve ses adhérents et peut les sélectionner pour de nouvelles invitations selon leur éligibilité. |
 
+**25 novembre 2026 · HC-03-ERP.** Pour instruire une vérification d’identité, le support Localeo peut retrouver un établissement par son SIRET dans la liste Commerçants de l’ERP. La recherche par nom ou login et les habilitations de consultation restent applicables. [Parcours et preuves](../../specifications/epic-84-adherents-hors-commune-animation/README.md#recherche-par-siret-dans-lerp)
+
 ## Recette de référence
 
 1. Préparer trois commerces fictifs : un commerce local à Martignas, un adhérent extérieur à Saint-Jean-d’Illac et un commerce de Saint-Jean-d’Illac extérieur au CEJ.

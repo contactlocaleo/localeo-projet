@@ -125,8 +125,11 @@ là pour ce premier essai ; les étapes ci-dessous accompagnent la préparation.
 1. **Qualifier le besoin.** Le commerce souhaite-t-il participer aux animations,
    proposer des prestations Coffrets, ou les deux ? Identifie l’interlocuteur,
    la commune et les coordonnées utiles.
-2. **Rechercher l’existant.** Vérifie qu’une fiche ou un dossier n’existe pas
-   déjà. Utilise le parcours de référencement autorisé pour un nouveau commerce.
+2. **Rechercher l’existant.** Dans la liste **Commerçants**, saisis le nom, le
+   login ou les 14 chiffres du **SIRET** de l’établissement, puis choisis
+   **Rechercher**. Si tu recherches un commerce hors commune, laisse le filtre
+   **Commune** sur **Toutes les communes**. Si la recherche ne renvoie aucune
+   fiche, vérifie les filtres avant d’utiliser le parcours de référencement.
 3. **Lire la Synthèse.** Elle présente le compte, les coordonnées, le dossier,
    les produits demandés ou ouverts et les points à traiter.
 4. **Ouvrir la bonne rubrique de la fiche.** Référencement pour les informations ;

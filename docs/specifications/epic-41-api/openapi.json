@@ -7096,6 +7096,19 @@
               ],
               "title": "Etatproduit"
             }
+          },
+          {
+            "name": "siret",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 40,
+              "description": "SIRET exact de l’établissement, 14 chiffres avec espaces facultatifs.",
+              "default": "",
+              "title": "Siret"
+            },
+            "description": "SIRET exact de l’établissement, 14 chiffres avec espaces facultatifs."
           }
         ],
         "responses": {
