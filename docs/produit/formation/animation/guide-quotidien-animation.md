@@ -1,6 +1,6 @@
 # Localeo Animation - Votre guide au quotidien
 
-<!-- Source canonique du PDF ; générateur dans localeo-animation/scripts/generate-animation-guide.py. Édition du 24 novembre 2026. Les captures montrent l'application réelle avec des données d'exemple, jamais des comptes de production. -->
+<!-- Source canonique du PDF ; générateur dans localeo-animation/scripts/generate-animation-guide.py. Édition du 25 novembre 2026. Les captures montrent l'application réelle avec des données d'exemple, jamais des comptes de production. -->
 
 ## 1 · Piloter l'activité de ses animations
 
@@ -355,4 +355,20 @@ Corrigez les erreurs avant de confirmer les lignes prêtes.
 1. Lisez le bilan et utilisez les filtres pour retrouver les lignes concernées. Ouvrez le détail d’une ligne pour lire la valeur source et la correction proposée.
 2. Dans **Catégories à associer**, choisissez une catégorie Localeo ou **Laisser la catégorie vide**. Cliquez sur **Enregistrer les équivalences**, puis reconstruisez l’aperçu. Le choix s’applique à toutes les occurrences du libellé dans ce lot.
 3. Un fichier peut réunir des adhérents de plusieurs communes. Vérifiez la commune reconnue sur chaque ligne. En cas d’identité ambiguë, confiez la vérification à Localeo et confirmez les autres lignes prêtes.
-4. Après traitement, consultez le résultat et le rapport. **Sélectionnable pour une animation** indique que vous pouvez inviter ce commerce. **À compléter** indique qu’il reste une action sur la fiche. L’import n’envoie aucun email de première connexion. Pour ouvrir l’accès personnel, utilisez l’invitation Pro depuis **Commerçants**.
+4. Sélectionnez les lignes prêtes, cochez la confirmation de relecture, puis choisissez **Confirmer l’import des lignes choisies**. Vérifiez que le lot indique **En attente de démarrage**.
+
+## 20 · Lancer l’import et récupérer le rapport
+
+Dans **Historique des imports**, ouvrez le lot qui indique **En attente de démarrage**.
+
+1. Choisissez **Lancer le traitement** pour appliquer les lignes confirmées.
+2. Suivez les compteurs. Quand le lot est terminé, ouvrez le bilan et choisissez **Télécharger le rapport CSV**.
+3. Vérifiez le résultat des fiches. **Sélectionnable pour une animation** indique que le commerce peut être invité. Pour une fiche **À compléter**, lisez l’action attendue.
+
+![Le lot confirmé affiche le bouton de lancement et le nombre de lignes restant à traiter.](illustrations/guide-quotidien/import-traitement-1024.png)
+
+Si le support agit à votre demande, il peut aussi lancer ou poursuivre ce lot en mode intervention. Retrouvez ses actions dans **Interventions de Localeo**.
+
+### Si le traitement semble arrêté
+
+Si le lot affiche encore **Traitement en cours**, choisissez **Poursuivre le traitement**, même lorsque **Restantes** affiche zéro. **Actualiser cet import** relit le résultat. Une fois l’import terminé, utilisez **Inviter dans Pro** depuis **Commerçants** si vous souhaitez envoyer l’email de première connexion d’un commerçant.

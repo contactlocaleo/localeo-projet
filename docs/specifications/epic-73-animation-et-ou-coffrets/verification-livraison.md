@@ -6095,3 +6095,40 @@ des préférences ainsi que la reprise des traitements sur une audience figée.
 Les tests simulés ne démontrent aucune remise sur téléphone physique ni
 aucune capacité Render. Les étapes et la procédure de diagnostic sont dans le
 [guide d’exploitation](../../exploitation/exploitation/communiquer-participants-animation.md#communication-communale).
+
+## Traitement des imports depuis Animation — 25 novembre 2026
+
+- **IT-01 et IT-03.** Le [scénario navigateur](../../../../localeo-animation/tests/browser/merchant-imports.mjs)
+  exerce le lancement au clavier depuis un lot confirmé, la poursuite du même lot,
+  le rapport final et l’absence d’action en lecture seule. Les 45 scénarios
+  d’import réussissent à 320, 390 et 1 280 px. Sur PostgreSQL jetable, la
+  [recette du worker](../../../../localeo-backend/tests/security/test_imports_commercants_postgres.py)
+  couvre le ciblage, le rejeu avec la même clé, les versions obsolètes,
+  la poursuite après limite de temps, la finalisation et un échec tardif.
+- **IT-02.** Les 12 tests du client d’import et de son contrat HTTP passent.
+  L’opération et ses schémas de référence ont été vérifiés sur l’OpenAPI généré
+  hors ligne depuis le backend. L’opération est également présente dans la
+  copie embarquée par Animation. La suite backend d’architecture, de domaine,
+  de routes et de sécurité des sessions totalise 935 tests réussis.
+- Le [guide Animation](../../produit/formation/animation/guide-quotidien-animation.md)
+  présente la nouvelle action avec une capture du lot confirmé. Les 21 pages
+  ont été rendues et relues. L’accès au PDF embarqué est vérifié à 390 et
+  1 024 px. Le guide Commerçant ne couvre pas ce parcours d’organisateur.
+
+Le lancement est vérifié localement. La recette sur TEST consiste à ouvrir
+un lot déjà confirmé, lancer le traitement, contrôler le nombre de lignes
+appliquées et télécharger le rapport lorsque le lot est terminé.
+
+Pour la recette déléguée, ouvrir **Import de commerçants** en consultation
+et vérifier que le lot confirmé est lisible. Passer en intervention pour
+la même organisation et la même commune. Vérifier que **Lancer le traitement**
+est proposé, puis que **Poursuivre le traitement** dépend de l’état renvoyé.
+Contrôler le reçu et l’attribution du traitement dans le journal de l’intervention.
+Utiliser un lot de recette pour exercer l’écriture. [Parcours support de référence](../epic-76-impersonification-support-pro-animation/README.md#recette-de-référence--import-pour-un-gestionnaire)
+
+Les 27 tests locaux API et PostgreSQL ont réussi. Ils couvrent le lancement
+par le support sur le lot ciblé, le rejeu de la commande avec la même clé,
+la conservation de l’engagement pris à la confirmation et le contrôle de sa
+révocation. Le parcours navigateur support a réussi en consultation et en
+intervention à 390 et 1 280 px. Pour l’organisateur, 45 scénarios ont réussi
+à 320, 390 et 1 280 px, soit 620 vérifications.

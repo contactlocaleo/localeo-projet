@@ -1,5 +1,29 @@
 # Captures du guide utilisateur Animation
 
+## Lancement du traitement d’un import du 25 novembre 2026
+
+`import-traitement-1024.png` montre un lot fictif confirmé, ses compteurs et
+le bouton **Lancer le traitement**. La capture est issue de l’application
+Animation sur la base `e35e1ba` complétée par l’action de lancement. La recette
+exécute le même contrôle dans Chromium à 390 px et 1 024 px.
+
+Depuis `localeo-animation` :
+
+```powershell
+$env:ANIMATION_TEST_SUPPORT = 'true'
+$env:ANIMATION_TEST_DIST = 'tmp/import-traitement-guide-build'
+$env:ANIMATION_GUIDE_CAPTURE_ROOT = 'tmp/import-traitement-guide-captures'
+$env:ANIMATION_GUIDE_ARTIFACTS = 'tmp/import-traitement-guide-capture-report'
+node scripts/build-generation-tests.mjs
+node tests/browser/animation-guide.mjs --only=import-traitement --captures-only
+```
+
+Copier la capture à 1 024 px dans ce dossier, puis suivre la
+[procédure commune](../../../../../organisation/maintenance-guides-utilisateurs.md)
+pour régénérer et synchroniser le PDF. Après reconstruction du build local,
+le scénario `node tests/browser/animation-guide.mjs --access-only` vérifie le
+lien du guide et les octets servis à 390 et 1 024 px.
+
 Les captures E84 du 24 novembre 2026 montrent la liste **Commerçants** et un import dont les lignes portent sur Valmont et Beaulieu. Les données sont fictives. Les fichiers intégrés sont `commercants-1024.png`, `import-colonnes-1024.png` et `import-apercu-1024.png`. Utiliser la commande ci-dessous avec `--only=commercants,import-colonnes,import-apercu` pour les reproduire à 1024 et 390 pixels.
 
 ## Import des commerçants du 24 novembre 2026
