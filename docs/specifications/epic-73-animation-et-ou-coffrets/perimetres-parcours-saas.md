@@ -592,6 +592,29 @@ Actualités reste contrôlée et l’accès direct interdit reste expliqué.
 Le chargement différé d’une rubrique garde la navigation et les actions
 affichées ; aucune écriture ni transition n’est exécutée par le menu.
 
+#### Évolution du 25 novembre 2026 — liens des points d’attention
+
+**E73-EVO-LIENS-POINTS-ATTENTION** rend les cartes rouges et orange de
+**Préparer mon animation** cliquables. Chaque carte affiche sa destination et
+peut être ouverte au clavier. Les informations communes restent consultables
+dans la synthèse.
+
+- **PA-01**. Le lien vise la rubrique du contrôle, y compris quand le message
+  figure dans plusieurs étapes. L’échéance de réponse ouvre le calendrier, les
+  réponses ouvrent les invitations, les vérifications sur place ouvrent Terrain
+  et les contrôles de dotation ouvrent les lots. Pour un diagnostic sans
+  destination déterminée ou dépendant de Localeo, le lien ouvre l’aide de l’édition.
+- **PA-02**. La navigation place le focus à destination et permet de revenir
+  au contrôle. L’ouverture est une consultation. Toute écriture utilise les
+  commandes, droits et confirmations de l’écran cible.
+- **PA-03**. Les deux sévérités sont vérifiées en navigateur, sur bureau et
+  mobile. Le guide Animation explique le geste et illustre la synthèse à jour.
+
+Les liens concernent l’organisateur dans Animation. L’interface réutilise les
+réponses API, les routes, la configuration d’exploitation et les jeux de
+démonstration existants. Localeo Pro utilise ses propres rubriques pour les
+gestes des commerçants.
+
 ### Identification et détail d’une participation — 11 novembre 2026
 
 Dans les gagnants, le suivi des gains (Coffrets, lots externes, bons numériques)

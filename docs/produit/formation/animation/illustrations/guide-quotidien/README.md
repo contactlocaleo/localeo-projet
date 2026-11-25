@@ -1,5 +1,23 @@
 # Captures du guide utilisateur Animation
 
+## Points d’attention de l’Assistant du 25 novembre 2026
+
+`assistant-1024.png` et `assistant-390.png` montrent un règlement manquant et
+un avertissement sur la présentation, ainsi que les liens vers leurs rubriques.
+La capture de bureau figure dans le geste **Vérifier puis publier**.
+Elle provient de l’interface Animation sur la base `3189f02`, avec cette
+évolution et des réponses API fictives.
+
+Depuis `localeo-animation`, générer la capture et vérifier les destinations
+au clavier et au clic sur un serveur local à port éphémère.
+
+```powershell
+$env:ANIMATION_TEST_DIST = 'tmp/assistant-attention-guide-dist'
+$env:ANIMATION_GUIDE_CAPTURE_ROOT = 'tmp/assistant-attention-captures'
+node scripts/build-generation-tests.mjs
+node tests/browser/animation-guide.mjs --only=assistant --captures-only
+```
+
 ## Choix des commerces pendant la création du 25 novembre 2026
 
 `selection-reseau-creation.png` illustre le geste **Choisir les commerces à

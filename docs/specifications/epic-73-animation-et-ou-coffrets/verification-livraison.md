@@ -6132,3 +6132,25 @@ la conservation de l’engagement pris à la confirmation et le contrôle de sa
 révocation. Le parcours navigateur support a réussi en consultation et en
 intervention à 390 et 1 280 px. Pour l’organisateur, 45 scénarios ont réussi
 à 320, 390 et 1 280 px, soit 620 vérifications.
+
+## Liens des points d’attention — 25 novembre 2026
+
+Les [critères PA-01 à PA-03](perimetres-parcours-saas.md#évolution-du-25-novembre-2026--liens-des-points-dattention) ont été vérifiés en local avec des réponses API fictives.
+
+- **PA-01**. `pnpm test` a réussi ses 437 tests. Les contrôles de navigation
+  couvrent la déduplication, les destinations par modèle, les avertissements
+  et l’aide contextualisée. `assistant-guidance-ux.mjs` a réussi 48 scénarios,
+  dont 320 px et texte agrandi à 200 %.
+- **PA-02**. `animation-guide.mjs --only=assistant --captures-only` vérifie
+  les deux liens, le focus, le retour et l’absence d’écriture à 390 et 1 024 px.
+  `hunt-preparation.mjs --assistant-only` vérifie Calendrier et Terrain à 390
+  et 1 280 px. La recette Chasse complète échoue ensuite sur la visibilité du
+  champ « Nom de la chasse » après l’ouverture d’Organisation et lots. Le
+  même échec est reproduit avec la recette et un build antérieurs à l’évolution.
+- **PA-03**. Toutes les pages du guide Animation ont été rendues et relues. Les
+  signets, la copie embarquée et l’accès au PDF depuis Animation
+  ont été vérifiés avec `pnpm guide:check` et `animation-guide.mjs --access-only`.
+  La mise à jour du guide porte sur le parcours organisateur dans Animation.
+
+`pnpm typecheck`, `pnpm lint` et le build isolé `build-generation-tests.mjs`
+ont réussi.

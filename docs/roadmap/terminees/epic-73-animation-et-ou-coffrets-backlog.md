@@ -1562,3 +1562,9 @@ confirmé depuis son détail. Un opérateur support peut effectuer les mêmes ge
 existant et couvre aussi les lots antérieurs déjà confirmés.
 [Critères IT-01 à IT-03](../../specifications/epic-73-animation-et-ou-coffrets/modules-souscriptions-import-communication.md#e73-evo-import-traitement-portail)
 et [preuves locales](../../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md#traitement-des-imports-depuis-animation--25-novembre-2026).
+
+## Évolution du 25 novembre 2026 — liens des points d’attention
+
+**E73-EVO-LIENS-POINTS-ATTENTION** ouvre la rubrique utile depuis les cartes
+rouges et orange de **Préparer mon animation**.
+[Critères PA-01 à PA-03](../../specifications/epic-73-animation-et-ou-coffrets/perimetres-parcours-saas.md#évolution-du-25-novembre-2026--liens-des-points-dattention) et [preuves locales](../../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md#liens-des-points-dattention--25-novembre-2026).

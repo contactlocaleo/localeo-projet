@@ -197,10 +197,10 @@ Lorsque ce suivi est activé, distinguez les commerces **prêts** de ceux encore
 
 **Objectif :** ouvrir une animation aux habitants après les contrôles requis.
 
-![Publication et clôture centralise le contrôle de préparation, les blocages et les transitions disponibles.](illustrations/guide-quotidien/publication-1024.png)
+![Dans Préparer mon animation, les cartes indiquent la rubrique à ouvrir.](illustrations/guide-quotidien/assistant-1024.png)
 
 1. Revenez à l'**Assistant** ou à **Publication et clôture** pour consulter les contrôles à jour.
-2. Traitez chaque point bloquant dans la rubrique indiquée : règlement, données du jeu, accords, dotation ou financement selon le cas.
+2. Dans **Préparer mon animation**, sélectionnez une carte rouge ou orange pour ouvrir la rubrique indiquée. Dépliez **Autres points à vérifier** pour afficher les suivants. Traitez les blocages signalés.
 3. Relisez les avertissements et vérifiez la présentation destinée aux habitants. Un contrôle réussi ne publie pas automatiquement.
 4. Utilisez **Publier** lorsqu'il est proposé, puis confirmez. Attendez la confirmation à l'écran et vérifiez le nouvel état.
 
