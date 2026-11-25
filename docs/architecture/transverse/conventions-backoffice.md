@@ -59,6 +59,31 @@ privée concernée. Un changement réel de rubrique ou de contexte peut reconstr
 la page. Les composants restent propres à chaque application ; la règle commune
 porte sur le comportement observable.
 
+### Pagination des listes de gestion
+
+- Afficher le nombre total de résultats autorisés pour la recherche et les
+  filtres actifs, ainsi que la position « Page X sur Y ». Calculer Y à partir
+  du total serveur et de la taille de page. Afficher le total zéro et un état
+  vide quand la recherche ne renvoie rien.
+- Proposer les actions **Première page**, **Page précédente** et **Page
+  suivante** près des résultats, à un endroit accessible sur mobile sans
+  traverser toute la page. Nommer les boutons, y compris ceux à icône seule,
+  et rendre les actions impossibles aux bornes. Pendant un chargement, garder
+  le focus et annoncer le résultat de la lecture.
+- Une nouvelle recherche ou un nouveau filtre repart de la première page.
+  Garder le dernier résultat confirmé si un changement de page échoue et
+  permettre de réessayer la lecture. Si une actualisation rend la page
+  courante inaccessible, revenir à une page valide de la même recherche.
+- Compter et paginer côté serveur sur le même périmètre autorisé. Dimensionner
+  le calcul du total selon la volumétrie. Si le contrat ne permet pas un total
+  fiable, afficher les informations disponibles et expliquer cette limite
+  dans la spécification du parcours.
+  [Conventions de performance](performance-volumetrie.md#p02--pagination-côté-serveur-et-curseurs-stables)
+
+Vérifier les listes vides, à une page et à plusieurs pages, les bornes, la
+recherche depuis une page suivante et le réessai. Jouer le parcours sur mobile
+et au clavier.
+
 ### UX des pages de gestion ERP
 
 Ces règles s’appliquent à toute création ou évolution d’un écran métier ERP,

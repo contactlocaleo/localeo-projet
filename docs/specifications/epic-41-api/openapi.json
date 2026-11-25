@@ -195724,6 +195724,12 @@
               }
             ],
             "title": "Next Cursor"
+          },
+          "total": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Total",
+            "description": "Nombre de commerces accessibles correspondant à la recherche, toutes pages confondues."
           }
         },
         "type": "object",
@@ -195731,7 +195737,8 @@
           "contract_version",
           "items",
           "has_more",
-          "next_cursor"
+          "next_cursor",
+          "total"
         ],
         "title": "PageCommercantsAnimationDTO"
       },

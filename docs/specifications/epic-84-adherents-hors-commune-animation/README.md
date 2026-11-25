@@ -12,6 +12,12 @@ Dans **Commerçants**, le formulaire propose la commune active et son code posta
 
 La gestion utilise la session Animation, sa commune courante et les contrôles de permission existants. Sous `/protected/referencement/commercants-animation`, la recherche des communes aide à renseigner la destination. Les lectures de liste et de détail retournent la commune réelle et les actions autorisées. Les écritures conservent les contrôles de version et d’idempotence.
 
+La liste **Commerçants** affiche le total correspondant à la recherche, la
+page courante sur le nombre de pages et les boutons première, précédente et
+suivante. Elle lit jusqu’à 25 fiches à la fois. Une nouvelle recherche repart
+de la première page. L’actualisation relit la page courante et revient à la
+première si elle a disparu entre-temps.
+
 Le lot d’import porte sur le périmètre autorisé de son initiateur. Sa commune de pilotage est distincte de la commune de chaque ligne. Le serveur résout la commune et la catégorie, vérifie l’identité puis propose création, rattachement, complétion ou vérification. Le CEJ peut confirmer les lignes prêtes. Une confirmation acceptée engage un traitement différé : le résultat d’une ligne n’est acquis qu’après validation de sa transaction. Le worker revérifie les faits et les droits applicables. Il ne cumule pas les privilèges d’organisations différentes.
 
 Une création complète, avec une catégorie reconnue et les champs obligatoires renseignés, ouvre le seul produit Animation. Une création sans catégorie reste en préparation. Un rapprochement sur une fiche existante respecte ses droits de produit et sa suspension éventuelle. Le résultat distingue la disponibilité pour une animation et le besoin de complétion. La création, l’activation Animation et le rattachement d’une ligne réussissent ensemble. L’import et ses reprises ne créent aucun identifiant Pro, jeton d’initialisation ou email sortant. L’invitation à initialiser l’accès personnel reste une commande explicite.
@@ -28,7 +34,7 @@ Live projette l’animation publiée dans la commune de pilotage et les communes
 
 ### Contrats consommés par Animation
 
-- Gestion du réseau : `GET /protected/referencement/commercants-animation/communes` accepte une recherche. Le formulaire transmet `commune_commerce_id` à la création. Les réponses de gestion portent `commune_nom` et, pour un lien extérieur, `rattachement_id`. Les contacts d’une fiche partagée suivent la projection autorisée pour le gestionnaire.
+- Gestion du réseau : `GET /protected/referencement/commercants-animation` renvoie `total` pour toutes les pages de la recherche dans le réseau autorisé. La continuation conserve le curseur et l’ordre par nom puis identifiant. `GET /protected/referencement/commercants-animation/communes` accepte une recherche. Le formulaire transmet `commune_commerce_id` à la création. Les réponses de gestion portent `commune_nom` et, pour un lien extérieur, `rattachement_id`. Les contacts d’une fiche partagée suivent la projection autorisée pour le gestionnaire.
 - Import : les lignes ajoutent `commune_reconnue` et `activation_animation_prevue` dans l’aperçu. Le résultat inclut `selectionnable_animation`, constat à l’application de la ligne. Une valeur absente ou nulle indique que l’ancien rapport ne fournit pas cette information. Le rapport CSV restitue la disponibilité Animation. Une reprise d’un ancien lot déjà confirmé garde la décision de préparation enregistrée dans son plan.
 - Retrait : `GET /{commerce_id}/apercu-detachement` sous la racine de gestion retourne le rattachement et une page d’invitations à envoyer ou en attente (identité de l’animation, libellé, statut). Le client transmet à `POST /{commerce_id}/detacher` le lien, les versions et les couples identifiant/statut qu’il a présentés. Si l’ensemble a évolué, le serveur refuse la confirmation. Le gestionnaire relance **Détacher** pour consulter le nouvel aperçu.
 - Sélecteur : la réponse enrichit les métadonnées des fiches avec la commune réelle. Les clients peuvent afficher la localité postale en présence d’une réponse antérieure. Les adresses de participation, les inscriptions et le contrat des notifications habitantes conservent leur forme.

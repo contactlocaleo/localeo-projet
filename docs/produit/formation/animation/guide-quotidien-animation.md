@@ -111,7 +111,9 @@ Une étape invalide n'élimine pas automatiquement le joueur. Si le seuil de val
 
 **Objectif :** disposer de fiches exploitables et comprendre l'accès de chaque commerce.
 
-![Les deux établissements ont une adresse dans leur commune réelle. La liste indique leur disponibilité pour les animations et leur accès Pro.](illustrations/guide-quotidien/commercants-1024.png)
+![Les deux établissements ont une adresse dans leur commune réelle. La liste indique leur disponibilité pour les animations et leur accès Pro.](illustrations/guide-quotidien/commercants-1280.png)
+
+Le total affiché correspond à votre recherche. Au-dessus de la liste, utilisez **Première page**, **Précédente** ou **Suivante**. « 2 / 2 » indique la deuxième page sur deux.
 
 1. Ouvrez **Commerçants**. Recherchez un établissement avant de créer une nouvelle fiche.
 2. Pour un adhérent extérieur, utilisez **Choisir une autre commune**. Recherchez par nom ou code postal et sélectionnez la commune de son magasin. Si la commune, le SIRET et l’email correspondent à une fiche existante, elle rejoint votre réseau.

@@ -8,6 +8,7 @@ Ce dossier documente les choix communs a plusieurs EPIC.
 | --- | --- |
 | Affichage, saisie, tri ou échéance de dates/horaires | [Affichage des dates](affichage-dates.md) |
 | Logo, nom, actions ou adaptation mobile d’un en-tête | [Identité des en-têtes](identite-entetes-applications.md) |
+| Liste de gestion, recherche ou changement de page | [Pagination des listes de gestion](conventions-backoffice.md#pagination-des-listes-de-gestion) |
 | Règle, contrat, lecture ou commande | [Matrice de contrôles](controle-architecture.md) pour sélectionner les conventions et preuves |
 
 ## Documents
