@@ -77,3 +77,9 @@ L’évolution utilise les statuts, configurations et traces E76 existants. Elle
 Le lanceur `scripts/validation/test_isolated.py` a exécuté les suites journal, sécurité E76, domaine des sessions et cycle PWA avec PostgreSQL 18 jetable. Les 46 tests ont réussi. Dans Projet, `scripts/check_guidance.py` et `scripts/sync_documentation.py --check-sources` ont réussi.
 
 La projection utilise les données déjà chargées par la jointure du journal. La liste conserve la taille de page et le tri existants. Le chargement initial intervient à l’ouverture de l’onglet, sans interrogation périodique. Le schéma de données et le générateur de démonstration s’appliquent tels quels. L’aide opérateur décrit les nouvelles vues internes. Les guides Commerçant et Animation décrivent toujours le parcours client actuel. La recette de ce lot a été réalisée en local.
+
+## Correctif du 26 novembre 2026 — Import de commerçants hors commune
+
+Le test PostgreSQL `test_import_delegue_reconnait_communes_exterieures_sans_accents` reproduit le refus à la prévisualisation d’un commerce de « MERIGNAC (33700) » dans un lot piloté à Martignas-sur-Jalle. L’analyse reconnaît désormais la commune avec le libellé du référentiel, « Mérignac ». Elle signale les homonymes sans précision et les communes inconnues. Après confirmation, la fiche porte sa commune réelle et le rattachement appartient au réseau de la session support. La preuve couvre E76-CA-10, E76-CA-14 et le [lot mixte E84](../epic-84-adherents-hors-commune-animation/README.md#saisie-import-et-éligibilité).
+
+L’import ordinaire et l’import délégué utilisent la même recherche, avec les fonctions natives de PostgreSQL 18 et le référentiel existant. Dans l’aperçu, le message d’une commune non reconnue invite à vérifier son nom officiel ou son code INSEE. Les guides Animation et Commerçant décrivent les parcours actuels, dont la vérification de la commune reconnue par ligne dans le guide Animation.
