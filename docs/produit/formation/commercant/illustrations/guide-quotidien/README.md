@@ -1,5 +1,18 @@
 # Illustrations du guide quotidien commerçant
 
+## Invitation du 26 novembre 2026
+
+`12-invitations.png` montre la mission, son explication et l’accès au règlement
+dans le détail d’une invitation. La capture est issue de Pro à 1 100 px sous
+Chromium, sur la base `ac604a6` avec le correctif local. Les données sont
+fictives et les requêtes externes bloquées.
+
+```powershell
+$env:LOCALEO_TEST_DIST = 'tmp/mission-ux-20261126/browser-dist'
+node scripts/build-browser-tests.mjs
+node scripts/capture-merchant-guide.mjs --dist tmp/mission-ux-20261126/browser-dist --report-dir tmp/mission-ux-20261126/guide-capture --port 46181 --only 12-invitations
+```
+
 ## Captures de l’édition du 25 novembre 2026
 
 `23-valider-passage.png` montre le passage d’un joueur avant confirmation, à
@@ -15,10 +28,6 @@ $env:LOCALEO_TEST_DIST = 'tmp/guide-edition-20261125/capture-dist'
 node scripts/build-browser-tests.mjs
 node scripts/capture-merchant-guide.mjs --dist tmp/guide-edition-20261125/capture-dist --report-dir tmp/guide-edition-20261125/capture-report --port 45181 --only 23-valider-passage,24-mot-de-passe-oublie
 ```
-
-## Invitation du 24 novembre 2026
-
-La capture `12-invitations.png` du 24 novembre 2026 illustre l’invitation d’une association voisine avec des données fictives. Depuis le dépôt Commerçant, utiliser le build local documenté puis `node scripts/capture-merchant-guide.mjs --dist tmp/e84-guide-pro --only 12-invitations`.
 
 ## Scan depuis l’appareil photo — E82, 24 novembre 2026
 

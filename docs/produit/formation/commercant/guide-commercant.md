@@ -1,6 +1,6 @@
 # Guide commerçant — validation et incidents réseau
 
-Pour l’onboarding et l’usage quotidien, remettre le [guide pédagogique illustré](../../../../livrables/formation/commercant/guide-quotidien-localeo-commercant.pdf), édition du 21 novembre 2026, dont la [source éditable](guide-quotidien-commercant.md) est maintenue ici. Le présent document conserve les détails de validation et de reprise d’incident.
+Pour l’onboarding et l’usage quotidien, remettre le guide pédagogique illustré. Le présent document conserve les détails de validation et de reprise d’incident. [Guide pédagogique (PDF)](../../../../livrables/formation/commercant/guide-quotidien-localeo-commercant.pdf) · [Source éditable](guide-quotidien-commercant.md).
 
 ## Connexion
 
@@ -68,11 +68,10 @@ l’animation et l’échéance de réponse. Ouvrez directement la demande conce
 Les invitations suivantes restent accessibles par les pages de cette rubrique ;
 **Scanner un QR** garde sa place au-dessus. Ouvrir une invitation ne l’accepte pas.
 
-Consultez les dates et votre mission ; ouvrez « Présentation et règlement » pour
-les détails (pour une chasse : « Consulter le règlement et les détails de
-l’animation »). S’il y a plusieurs missions, choisissez celle que vous pouvez
-réaliser. Pour une chasse, lisez tous les préparatifs affichés puis cochez l’accord
-unique. Le bouton d’acceptation enregistre directement votre décision.
+Vérifiez les dates, puis lisez **L’animation et votre mission** et **Explication
+détaillée**. Ouvrez **Règlement de l’animation** avant de répondre. Pour une
+chasse, choisissez la mission que vous pouvez réaliser, lisez ses préparatifs
+puis cochez l’accord. Le bouton d’acceptation enregistre votre décision.
 
 Le refus et le retrait demandent une confirmation ; leur motif reste facultatif.
 Après une erreur réseau, utilisez « Vérifier ma décision » avant de retenter.
@@ -144,9 +143,9 @@ effectue la préparation nécessaire avant le téléchargement, sans nouvelle é
 à remplir. Si cette action échoue ou reste incertaine, suivez le message de reprise
 affiché ; ne multipliez pas les clics. Une simple consultation ne prépare rien.
 
-Le bouton **Voir le guide de préparation** permet aussi de consulter toutes les
-consignes dans l’application. Les informations complémentaires restent repliées
-pour laisser visibles votre mission et les actions utiles.
+Dans l’invitation acceptée ou la fiche de l’animation, ouvrez **Voir le guide de
+préparation** pour lire les consignes propres au kit. Dans le parcours de
+préparation, retrouvez-les à l’étape des supports.
 
 Préparez les objets éventuels indiqués dans votre mission et installez les
 supports à l’emplacement convenu. Les accès peuvent être indisponibles avant

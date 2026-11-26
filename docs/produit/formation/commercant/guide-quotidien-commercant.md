@@ -1,6 +1,6 @@
 # Localeo Pro · Votre guide au quotidien
 
-<!-- Source canonique du PDF embarqué. Édition du 25 novembre 2026. Chaque section de niveau 2 ouvre une page. Captures de Localeo Pro avec des exemples fictifs. -->
+<!-- Source canonique du PDF embarqué. Édition du 26 novembre 2026. Chaque section de niveau 2 ouvre une page. Captures de Localeo Pro avec des exemples fictifs. -->
 
 <!-- Sommaire : Prendre en main Localeo Pro -->
 
@@ -99,14 +99,14 @@ Vous pouvez recevoir une invitation d’une association de votre commune ou d’
 
 1. Dans **À traiter**, ouvrez l’invitation. Vous pouvez aussi passer par **Animations**, puis **Invitations**. Sur téléphone, ouvrez **Rubriques** pour trouver cette liste.
 2. Choisissez **Consulter la demande**. Vérifiez l’organisateur, la commune, les dates et la date limite pour répondre.
-3. Lisez votre mission et les préparatifs. Dépliez **Présentation et règlement**. Vérifiez que vous êtes disponible et que vous pouvez réaliser la mission.
+3. Lisez **L’animation et votre mission**, puis **Explication détaillée**. Ouvrez **Règlement de l’animation** avant de répondre.
 4. Choisissez **Accepter la participation** et attendez la confirmation. Vous retrouvez votre participation dans **Mes animations**.
 
-![Consulter la demande ouvre la mission. La liste affiche aussi l’échéance pour répondre.](illustrations/guide-quotidien/12-invitations.png)
+![Le rappel indique votre rôle. Les préparatifs figurent dans Explication détaillée.](illustrations/guide-quotidien/12-invitations.png)
 
 ### Si c’est une chasse au trésor
 
-Choisissez une mission si plusieurs sont proposées. Lisez **Ce que liront les participants chez vous** et les préparatifs. Cochez **Je peux réaliser cette mission et tous les préparatifs ci-dessus.**, puis choisissez **Accepter cette mission**. Vous pouvez alors accéder au kit et commencer votre préparation.
+Choisissez une mission si plusieurs sont proposées. Dans l’explication, lisez les préparatifs et ouvrez **Ce que liront les participants chez vous**. Cochez **Je peux réaliser cette mission et tous les préparatifs ci-dessus.** Choisissez ensuite **Accepter cette mission**.
 
 ### Si vous devez refuser ou vous retirer
 
@@ -118,7 +118,7 @@ Après une coupure, choisissez **Vérifier ma décision**. Si le délai de répo
 
 Une fois votre invitation acceptée, ouvrez **Préparation des animations**. Les deux états vous indiquent ce que vous avez préparé et si vous avez prévenu l’organisateur.
 
-1. Choisissez **Voir la préparation**, puis **Comprendre ma mission**. Relisez les dates et les consignes.
+1. Choisissez **Voir la préparation**, puis **Comprendre ma mission**. Relisez votre rôle et les préparatifs.
 2. À l’étape 2, ouvrez le kit et réalisez les préparatifs demandés. Pour un passeport, une tombola ou une chasse, choisissez **J’ai terminé ma préparation** si l’action est proposée. Vérifiez que la préparation est indiquée comme terminée.
 3. Si l’organisateur demande une déclaration, ouvrez **Informer l’organisateur**, puis choisissez **Je suis prêt**. Vérifiez que la déclaration est datée et enregistrée.
 

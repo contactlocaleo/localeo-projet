@@ -296,6 +296,19 @@ Les demandes de participation sont séparées des animations déjà acceptées. 
 
 Le détail d'une demande restitue la version présentée par le backend : organisateur, commune, dates, description, règlement et sa version, mission du commerçant, consignes, contraintes pratiques, contact et date limite de réponse.
 
+L’invitation, la fiche de l’animation et **Comprendre ma mission** présentent la
+mission en deux blocs. **L’animation et votre mission** rappelle le rôle du
+commerçant sous les informations de l’animation. **Explication détaillée**
+regroupe la description, les consignes et les préparatifs, avec une occurrence
+par texte identique. Pour le Juste Prix Local, l’explication indique que
+l’organisateur approuve le produit avant publication. Pour une chasse, le choix
+se fait dans le rappel. Les préparatifs, l’aperçu joueur et l’accord sont dans
+l’explication. Pour le Jeu des vitrines, la mission est consultable sous
+**Mission et supports complémentaires** dans le parcours de préparation.
+Le volet **Règlement de l’animation** donne accès au texte et à sa version avant
+la réponse. Sur les écrans qui affichent la mission et le kit, le volet **Voir
+le guide de préparation** donne accès aux consignes propres aux supports.
+
 Le commerçant peut :
 
 - accepter directement avec un engagement explicite visible, sans écran de confirmation supplémentaire ; pour une chasse, confirmer globalement les préparatifs affichés de la mission choisie (accord non précoché) ;
