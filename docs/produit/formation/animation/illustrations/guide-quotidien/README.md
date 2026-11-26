@@ -1,5 +1,19 @@
 # Captures du guide utilisateur Animation
 
+## Liste des animations et navigation locale du 26 novembre 2026
+
+Les vues de cette édition du guide proviennent du portail Animation après la révision `1d7eaf1`. Les captures de la liste, de la gestion des vues, de la publication, de la clôture, du tirage et du bilan utilisent les mêmes données fictives sur ordinateur et téléphone. Dans la [liste des animations](liste-animations-1024.png), on repère la recherche, la vue et la prochaine action. La [fenêtre de gestion des vues](vues-enregistrees-1024.png) présente les opérations de gestion. La [navigation de Clôture](navigation-cloture-1024.png) montre l’accès direct aux deux rubriques. Le [tirage avant clôture](tirage-avant-cloture-1024.png) présente le raccourci vers la revue.
+
+Rejouer depuis le dépôt Animation sur le serveur de recette local.
+
+```powershell
+$env:ANIMATION_TEST_DIST = 'tmp/v2-guide/dist'
+$env:ANIMATION_GUIDE_ARTIFACTS = 'tmp/v2-guide/run'
+$env:ANIMATION_GUIDE_CAPTURE_ROOT = 'tmp/v2-guide/captures'
+node scripts/build-generation-tests.mjs
+node tests/browser/animation-guide.mjs --only=liste-animations,publication,cloture,tirage-avant-cloture,tirage,bilan --captures-only
+```
+
 ## Parcours de l’édition du 26 novembre 2026
 
 Les gestes de publication, de communication, de suivi des participants, de clôture, de tirage et de bilan utilisent les écrans de la refonte locale, sur la base Animation `892895e`. Les noms, les participants et le message de l’historique sont fictifs. Les captures `navigation-edition`, `publication`, `communication`, `suivi`, `cloture`, `tirage` et `bilan` proviennent du portail à 1024 et 390 px. Le scénario utilise un serveur local à port éphémère et des lectures API simulées.

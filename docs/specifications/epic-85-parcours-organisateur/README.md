@@ -63,6 +63,16 @@ Clôture expose les indicateurs disponibles, les blocages éventuels et la confi
 
 En cas de destination retirée au rôle ou inapplicable au modèle, la fiche explique l’indisponibilité et offre un retour autorisé. Elle protège toute saisie en cours avant changement de cible. En lecture seule, le gestionnaire retrouve les informations permises et le résultat d’une opération déjà effectuée.
 
+### Passer d’une vue à l’autre dans une rubrique
+
+Dès qu’une rubrique contient plusieurs vues, sa navigation locale les nomme toutes, y compris la première. Clôture donne accès à **Clôture des participations** et **Fin et archivage**. Tirage donne accès à **Tirage au sort** et **Gains et remises**. La première entrée de Communication est **Messages aux participants**. Bilan regroupe les résultats, objectifs, origines des inscriptions, commentaires, comparaison et historique au même niveau. L’état courant reste repérable pendant ces consultations. Sur téléphone les destinations restent accessibles dans un seul sélecteur. Les droits, la lecture seule et l’applicabilité du tirage déterminent les entrées proposées.
+
+Une recommandation du bandeau mène à la même revue que le raccourci placé auprès d’un blocage. Par exemple, « Vérifier la clôture » dans Tirage ouvre la revue de cette édition. La confirmation définitive se trouve dans le formulaire qui explique ses conséquences. Avant le gel, le tirage affiche les lots connus et indique que les effectifs seront disponibles après clôture. En présence d’un tirage confirmé avec zéro gagnant, Gains et remises en rend compte. Les lots sans gagnant ont leur propre dossier de justification.
+
+### Retrouver une animation dans la liste
+
+La barre au-dessus des résultats réunit recherche, choix de vue et filtres. Les critères appliqués peuvent être retirés individuellement. Une vue enregistrée s’applique depuis le sélecteur. Sa création, sa modification, son partage et sa suppression passent par « Gérer les vues ». Le menu d’une ligne contient le clonage et laisse sa place à la prochaine action. La sélection des brouillons fait apparaître les actions groupées. Le retour d’une fiche retrouve les critères, la page et la ligne concernée. Sur les jeux de recette, deux éditions complètes doivent être visibles à 1280 × 800 et la première avec sa prochaine action à 390 × 800.
+
 ## Contenu commun des écrans de gestion
 
 | Composant | Règle de présentation et d’usage |
