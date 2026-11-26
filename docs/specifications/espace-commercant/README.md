@@ -296,15 +296,16 @@ Les demandes de participation sont séparées des animations déjà acceptées. 
 
 Le détail d'une demande restitue la version présentée par le backend : organisateur, commune, dates, description, règlement et sa version, mission du commerçant, consignes, contraintes pratiques, contact et date limite de réponse.
 
-L’invitation, la fiche de l’animation et **Comprendre ma mission** présentent la
+L’invitation, la fiche de l’animation et l’étape **Ma mission** présentent la
 mission en deux blocs. **L’animation et votre mission** rappelle le rôle du
 commerçant sous les informations de l’animation. **Explication détaillée**
 regroupe la description, les consignes et les préparatifs, avec une occurrence
 par texte identique. Pour le Juste Prix Local, l’explication indique que
 l’organisateur approuve le produit avant publication. Pour une chasse, le choix
 se fait dans le rappel. Les préparatifs, l’aperçu joueur et l’accord sont dans
-l’explication. Pour le Jeu des vitrines, la mission est consultable sous
-**Mission et supports complémentaires** dans le parcours de préparation.
+l’explication. Dans le parcours dédié, **Explication détaillée** est fermée
+par défaut. Pour le Jeu des vitrines, la mission se consulte dans **Mission,
+règlement et contact**.
 Le volet **Règlement de l’animation** donne accès au texte et à sa version avant
 la réponse. Sur les écrans qui affichent la mission et le kit, le volet **Voir
 le guide de préparation** donne accès aux consignes propres aux supports.
@@ -339,9 +340,10 @@ l’animation) sont filtrées côté serveur avant pagination et
 calcul du total, sans requête de détail par animation. Les dates actuelles de
 préparation restent distinctes de l’instantané historique de l’invitation.
 
-Le détail rapproche identité, état et prochaine action, puis présente une frise
-guidée : quatre étapes pour Vitrines et trois pour les autres jeux, mission →
-produit ou supports → **Informer l’organisateur**. L’étape consultée se distingue de l’étape
+Le détail rapproche identité, états et prochaine action, puis présente
+**Avancement de la préparation**. Quatre étapes guident Vitrines et trois
+guident les autres jeux, de **Ma mission** à **Déclaration**.
+L’étape consultée se distingue de l’étape
 métier à traiter ou en attente ; changer d’étape ne sauvegarde pas et conserve
 les brouillons. Produit approuvé, installation contrôlée et déclaration de
 préparation restent des faits distincts. La disponibilité du support d’une
@@ -353,7 +355,10 @@ propose une confirmation explicite lorsqu’un préparatif est requis. Dans le
 cas contraire, **Non requise** laisse la fiche consultable dans la liste sans
 ajouter d’action de préparation à l’accueil. Les alertes d’accueil
 distinguent actions du commerçant, attentes organisateur et déclarations
-manquantes si le suivi est actif. Vitrines conserve installation et contrôle.
+manquantes si le suivi est actif. Vitrines distingue l’approbation du contenu,
+l’installation attestée et le contrôle sur place. L’aide, les exemples et
+l’accès au règlement sont repliés par défaut. Voir les [critères PL-01 à
+PL-04](../epic-78-jeu-des-vitrines/parcours-regles.md#évolution-du-26-novembre-2026--lisibilité-de-la-préparation-pro).
 
 Le filtre et la pagination sont conservés dans l’URL ; le retour restaure
 position et focus. Une actualisation ne reconstruit que les résultats, en

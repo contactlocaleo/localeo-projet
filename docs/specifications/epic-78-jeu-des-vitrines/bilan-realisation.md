@@ -657,3 +657,51 @@ de pilotage et de génération étrangères à ce lot, conservées localement.
 Les autres travaux locaux Animation, pilotage et iconographie ne sont pas
 inclus dans ces commits. Les preuves ci-dessus restent celles de la recette
 locale ; aucun résultat de déploiement distant n’est revendiqué.
+
+## Évolution du 26 novembre 2026 — lisibilité de la préparation Pro
+
+[E78-EVO-PREPARATION-LISIBLE](parcours-regles.md#évolution-du-26-novembre-2026--lisibilité-de-la-préparation-pro)
+porte sur la fiche guidée dans Commerçant et sa documentation dans Projet.
+La recette locale utilise Commerçant `b8f5e47` avec le diff de l’évolution,
+Chromium et des API simulées.
+
+| Critère | Réalisation et preuve |
+| --- | --- |
+| PL-01 | `PreparationOverview` affiche les états serveur, le motif disponible et la prochaine action. Les parcours `preparation-status.spec.js` et `e78-vitrines.spec.js` distinguent correction, approbation, déclaration, installation et contrôle. |
+| PL-02 | `PreparationProgress` sépare l’étape à traiter de celle consultée et coche les faits confirmés. La suite navigateur couvre la navigation et l’absence de confirmation au téléchargement. Le test composant vérifie l’historique annulé sans étape active. |
+| PL-03 | Les éditeurs, les consignes de mission et le kit utilisent des volets natifs fermés au départ. Les scénarios Vitrines et Juste Prix vérifient l’ouverture, la saisie, le choix de l’intrus et la relecture publique et privée. |
+| PL-04 | Les parcours passent par les liens directs et le clavier, avec conservation du brouillon, de l’étape et du focus pendant la relecture. La recette inspecte le détail à 320, 390 et 1 280 px et contrôle le texte agrandi à 320 px. La revue indépendante a identifié deux cas de lectures concurrentes. Les tests d’éditeur couvrent désormais réponse tardive et conflit conservé jusqu’à la vérification explicite. |
+
+Sur demande d’actualisation, la fiche relit le résumé et l’invitation, suivis
+pour Vitrines et Juste Prix d’une lecture de l’éditeur déjà autorisé. Les
+lectures de liste et leur pagination gardent leur contrat et leur coût.
+La préparation et ses commandes restent sous la responsabilité du backend.
+Le périmètre utilise les données, droits, migrations, configuration et jeu de
+démonstration existants.
+
+Le [guide Commerçant](../../produit/formation/commercant/guide-quotidien-commercant.md)
+a deux captures actualisées. Ses 17 pages ont été rendues et relues. La copie
+embarquée est identique au PDF canonique, et son accès depuis **Aide et contact**
+a été vérifié à 390 et 1 440 px, y compris avec le support indisponible.
+Le guide Animation porte sur les gestes de l’organisateur et reste applicable
+aux écrans Animation utilisés pour l’approbation et le contrôle.
+
+Exécutions locales du 26 novembre 2026
+
+- Playwright a validé les **42 scénarios** des sept suites `preparation-status`,
+  `animation-preparation-guided`, `e78-vitrines`, `juste-prix-product`,
+  `suivi-animation`, `animation-kit` et `merchant-guide`. Rapport dans
+  `localeo-commercant/tmp/preparation-pro-final-report/results.json`.
+- Vitest a validé les **51 tests ciblés** de `VitrinePreparation`,
+  `JustePrixProduct` et `AnimationPreparationPage`.
+- La suite Vitest complète a validé **773 tests dans 102 fichiers** avec
+  `npm test -- --exclude 'tmp/**' --reporter=dot --silent`. Les copies
+  temporaires de dépôts dans `tmp` sont exclues de la collecte. Lors du
+  passage précédent, lancé en parallèle de Chromium, le scénario salarié
+  « Révoquer cet accès » a dépassé son délai de cinq secondes. Les cinq tests
+  de son fichier ont réussi isolément avant la dernière exécution complète.
+- Le build Vite de recette, `npm run guide:check` et la vérification
+  `--check-guide --verify-only` ont réussi. Les 16 destinations du sommaire
+  et les 16 liens de retour du PDF ont été vérifiés.
+- `scripts/check_guidance.py` et `scripts/sync_documentation.py --check-sources`
+  ont validé les liens de Projet et les 155 sources exportées.

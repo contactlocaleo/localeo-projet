@@ -96,7 +96,7 @@ avec des préparatifs, choisissez à l’étape 2 **J’ai terminé ma préparat
 **Reprendre la préparation** permet de revenir au travail à faire. Pour le Juste Prix, la préparation devient
 **Terminée** après approbation du produit ; Vitrines conserve ses contrôles d’installation.
 
-Dans **Informer l’organisateur**, confirmez séparément **Je suis prêt** lorsque
+Dans **Déclaration**, confirmez séparément **Je suis prêt** lorsque
 le suivi est activé. Cette déclaration datée notifie l’organisateur ; elle ne
 se confond ni avec l’avancement de préparation ni avec **Animation : En cours**.
 Sans suivi activé, aucune nouvelle déclaration n’est demandée. Une déclaration
@@ -109,6 +109,12 @@ acceptée à préparer. Vous pouvez aussi choisir **Ouvrir mon parcours de
 préparation** depuis l’invitation ou la fiche de l’animation. La liste est
 paginée : les participations des autres pages restent accessibles avec
 **Page suivante**.
+
+**Avancement de la préparation** montre l’étape à traiter et permet d’ouvrir
+les autres étapes. Les états et la prochaine action se lisent au-dessus de la
+frise. Le **Retour de l’organisateur** précise l’état de votre proposition,
+avec le motif si des corrections sont demandées. Utilisez les volets d’aide
+de chaque étape pour afficher les consignes ou les exemples.
 
 Pour le **jeu des vitrines**, avancez dans les quatre étapes : décrire l’intrus
 et sa mise en place, préparer la question et les choix, relire puis proposer,

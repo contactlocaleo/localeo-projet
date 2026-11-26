@@ -116,11 +116,11 @@ Après une coupure, choisissez **Vérifier ma décision**. Si le délai de répo
 
 ## 7 · Préparer votre commerce et prévenir l’organisateur
 
-Une fois votre invitation acceptée, ouvrez **Préparation des animations**. Les deux états vous indiquent ce que vous avez préparé et si vous avez prévenu l’organisateur.
+Une fois votre invitation acceptée, ouvrez **Préparation des animations**, puis **Voir la préparation**. En haut, retrouvez l’état de vos préparatifs, votre déclaration et la prochaine action. Touchez une étape dans **Avancement de la préparation** pour la consulter.
 
-1. Choisissez **Voir la préparation**, puis **Comprendre ma mission**. Relisez votre rôle et les préparatifs.
-2. À l’étape 2, ouvrez le kit et réalisez les préparatifs demandés. Pour un passeport, une tombola ou une chasse, choisissez **J’ai terminé ma préparation** si l’action est proposée. Vérifiez que la préparation est indiquée comme terminée.
-3. Si l’organisateur demande une déclaration, ouvrez **Informer l’organisateur**, puis choisissez **Je suis prêt**. Vérifiez que la déclaration est datée et enregistrée.
+1. Dans **Ma mission**, relisez votre rôle. Ouvrez **Explication détaillée** pour consulter les consignes.
+2. Dans **Supports et équipe**, téléchargez le kit. Pour un passeport, une tombola ou une chasse, choisissez **J’ai terminé ma préparation** après les préparatifs, si l’action est proposée.
+3. Si l’organisateur demande une déclaration, ouvrez **Déclaration**, puis choisissez **Je suis prêt**. Vérifiez que la déclaration est datée et enregistrée.
 
 ![La préparation est terminée. La ligne Déclaration à l’organisateur indique encore À faire.](illustrations/guide-quotidien/16-preparation.png)
 
@@ -134,30 +134,30 @@ Pour un passeport, vérifiez si votre mission demande un achat. Lorsqu’il est 
 
 ### Vérifier ou reprendre votre préparation
 
-Si une tâche doit être reprise, utilisez **Reprendre la préparation**. Une ancienne déclaration peut rester visible. **Non requise** indique qu’aucun préparatif n’est à confirmer. Vous retrouvez les fiches des animations clôturées ou annulées dans **Historique**.
+Utilisez **Actualiser l’état** pour relire le suivi. Si une tâche doit être reprise, utilisez **Reprendre la préparation**. Une ancienne déclaration peut rester visible. **Non requise** indique qu’aucun préparatif n’est à confirmer. Les animations clôturées ou annulées figurent dans **Historique**.
 
 ## 8 · Préparer votre vitrine ou proposer votre produit
 
-Ouvrez votre fiche de préparation avec le compte principal. L’organisateur examine votre proposition avant que vous puissiez terminer les préparatifs concernés.
+Ouvrez la préparation avec le compte principal. Le **Retour de l’organisateur** indique si votre proposition attend son accord, est approuvée ou demande des corrections.
 
 ### Pour le Jeu des vitrines
 
-1. Dans **Prévoir la vitrine**, décrivez l’objet intrus et son installation.
-2. Dans **Préparer la question**, saisissez la consigne publique, l’emplacement, deux à six choix différents et la bonne réponse. Gardez la solution pour votre équipe et l’organisateur.
-3. Dans **Relire et proposer**, vérifiez ce que verront les joueurs. Choisissez **Enregistrer mon brouillon**, puis **Proposer à l’organisateur**.
-4. Après approbation, installez la version acceptée. Confirmez l’installation avec le bouton proposé et faites-la vérifier sur place par l’organisateur. Regardez la prochaine étape affichée pour savoir si votre préparation est terminée.
+1. Dans **Vitrine**, décrivez l’intrus et son installation. Ces informations restent privées.
+2. Dans **Question**, saisissez la consigne, l’emplacement et deux à six choix différents. Cochez **Intrus** en face de la bonne réponse.
+3. Dans **Proposition**, relisez les parties publique et privée. Choisissez **Enregistrer mon brouillon**, puis **Proposer à l’organisateur**.
+4. Après approbation, ouvrez **Installation** et confirmez la mise en place. L’état **Contrôle sur place** indique si l’organisateur l’a vérifiée.
 
-![À la relecture, vérifiez la consigne publique et la réponse privée. La frise indique ce qui reste à faire.](illustrations/guide-quotidien/17-vitrines.png)
+![À la relecture, vérifiez la consigne publique et la réponse privée avant d’envoyer votre proposition.](illustrations/guide-quotidien/17-vitrines.png)
 
 ### Pour le Juste Prix
 
-1. À l’étape 2, ouvrez **Votre produit et son juste prix**. Saisissez le nom, la description, le format ou l’unité et le prix TTC en euros. Choisissez une image sur laquelle le prix ne se voit pas.
-2. Enregistrez, puis choisissez **Proposer à l’organisateur**. La préparation reste en attente jusqu’à son accord, puis passe à **Terminée**.
+1. Dans **Produit et supports**, saisissez le nom, la description, le format et le prix TTC. Pour ajouter une image sans prix visible, ouvrez **Ajouter un visuel (facultatif)**.
+2. Enregistrez, puis choisissez **Proposer à l’organisateur**. La préparation passe à **Terminée** après son accord.
 3. Si l’organisateur vous le demande, utilisez aussi **Je suis prêt** pour lui envoyer votre déclaration.
 
 ### Si le contenu doit être corrigé
 
-Lisez le motif, corrigez, enregistrez et proposez de nouveau. La frise permet de relire d’autres étapes sans perdre votre saisie. Après publication, signalez les corrections à l’organisateur. Les salariés utilisent le scanner selon leurs droits.
+Lisez le motif en haut de la fiche. Corrigez, enregistrez et proposez de nouveau. Les volets d’aide s’ouvrent à la demande et la frise conserve votre saisie d’une étape à l’autre.
 
 <!-- Sommaire : Gérer votre commerce et votre équipe -->
 

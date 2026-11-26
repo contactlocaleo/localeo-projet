@@ -34,6 +34,12 @@ Les CA-01 à CA-16, décisions métier, statut En cours et réserves d’activat
 restent inchangés. Implémentation et preuves propres à cette évolution dans le
 [bilan](../../specifications/epic-78-jeu-des-vitrines/bilan-realisation.md).
 
+### Lisibilité de la préparation Pro — 26 novembre 2026
+
+**E78-EVO-PREPARATION-LISIBLE** donne la priorité aux états, au retour de
+l’organisateur et à la prochaine action. La frise et le formulaire guidé sont
+précisés dans les [critères PL-01 à PL-04](../../specifications/epic-78-jeu-des-vitrines/parcours-regles.md#évolution-du-26-novembre-2026--lisibilité-de-la-préparation-pro).
+
 ## Problème, acteurs et résultat attendu
 
 Les décorations saisonnières peuvent devenir un parcours ludique de découverte

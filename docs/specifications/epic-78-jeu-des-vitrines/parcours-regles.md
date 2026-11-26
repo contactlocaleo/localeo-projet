@@ -120,6 +120,30 @@ avec captures, PDF rendu et copie embarquée ; guide Animation sans impact car
 ses écrans et règles de déclaration/contrôle ne changent pas. Backend à livrer
 avant le frontend ; aucune mise en service distante n’est implicite.
 
+### Évolution du 26 novembre 2026 — lisibilité de la préparation Pro
+
+**E78-EVO-PREPARATION-LISIBLE** complète PU-02 à PU-05 et PU-08. La fiche
+dédiée répartissait l’état courant, les actions et les explications entre
+plusieurs blocs. Les repères de la frise **Avancement de l’animation** servent
+de référence pour la préparation du commerce.
+
+| Critère | Résultat attendu |
+| --- | --- |
+| PL-01 | En tête, le commerçant lit le statut de préparation, le retour de l’organisateur pour un produit ou une vitrine, et sa propre déclaration. Une vitrine distingue l’approbation du contenu, l’installation et le contrôle. Une correction montre son motif quand il est disponible. La prochaine action et son acteur sont visibles. |
+| PL-02 | La frise relie les étapes et distingue celle à traiter de celle consultée. Une coche repose sur un fait serveur. Ouvrir une étape ou télécharger un kit conserve tous les états métier. L’historique reste consultable sans étape active. |
+| PL-03 | Une étape à la fois donne la priorité à ses champs et à son action. L’aide, les exemples, la mission complémentaire et l’accès au règlement sont repliés par défaut. À la relecture, les contenus public et privé sont visibles. Enregistrement et envoi restent explicites. |
+| PL-04 | La navigation et la relecture ciblée conservent l’étape consultée, la saisie et le focus. Chargement, refus et résultat incertain restent distincts d’une confirmation. La frise et le formulaire sont utilisables au clavier, sur téléphone et avec le texte agrandi. |
+
+Périmètre Commerçant et Projet. Le détail exploite les deux axes et les faits
+`produit_statut`, `installation_confirmee` et `controle_confirme` de la lecture
+existante. Les éditeurs réutilisent leurs lectures pour le motif et leurs
+commandes versionnées. Guide quotidien Commerçant à actualiser avec captures
+et PDF. Le guide Animation décrit les gestes de l’organisateur, dont les écrans
+et les actions sont hors périmètre. Contrats, configuration, migrations et
+générateur de démonstration sont sans impact, car les données et commandes
+restent celles de la préparation existante. Les preuves sont suivies dans le
+[bilan de réalisation](bilan-realisation.md#évolution-du-26-novembre-2026--lisibilité-de-la-préparation-pro).
+
 ## 1. Créer une édition — CA-01/02
 
 Le gestionnaire habilité travaille dans son organisation et sa commune active.

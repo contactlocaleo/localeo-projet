@@ -1,5 +1,19 @@
 # Illustrations du guide quotidien commerçant
 
+## Préparation des animations du 26 novembre 2026
+
+`16-preparation.png` montre les deux états et la frise lorsque la préparation
+est terminée et que la déclaration reste à faire. `17-vitrines.png` montre
+la relecture des parties publique et privée. Les captures proviennent de Pro
+à 1 100 px sous Chromium, sur la base `b8f5e47` avec l’évolution locale,
+des données fictives et les requêtes externes bloquées.
+
+```powershell
+$env:LOCALEO_TEST_DIST = 'tmp/preparation-pro-guide-dist'
+node scripts/build-browser-tests.mjs
+node scripts/capture-merchant-guide.mjs --dist tmp/preparation-pro-guide-dist --only 16-preparation,17-vitrines --report-dir tmp/preparation-pro-guide-capture --port 4318
+```
+
 ## Invitation du 26 novembre 2026
 
 `12-invitations.png` montre la mission, son explication et l’accès au règlement
