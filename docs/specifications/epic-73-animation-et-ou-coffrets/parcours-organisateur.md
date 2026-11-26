@@ -3,10 +3,7 @@
 **Arbitrage du 18 novembre 2026 — suites du workshop Animation :**
 [E73-WA-DEC-01/02 et WA-13](../../roadmap/terminees/epic-73-animation-et-ou-coffrets-backlog.md#workshop-ux-20261118)
 remplacent la destination de **PO-13** et de la décision **D2** ci-dessous.
-« Consulter le suivi » doit désormais ouvrir le suivi opérationnel ; Bilan
-conserve un accès distinct. Les anciennes preuves locales attestent l’ancienne
-cible Bilan, pas la conformité à cette nouvelle décision. Changement cadré,
-non implémenté à ce titre ; les autres décisions et critères restent applicables.
+Dans la fiche livrée par E85, une édition publiée ou en cours ouvre **Participation**. Bilan conserve son accès direct. Les anciens liens vers une rubrique précise retrouvent cette rubrique. La recette du nouveau parcours figure dans le [bilan de vérification E85](../epic-85-parcours-organisateur/verification-livraison.md).
 
 ## Évolution du 18 novembre 2026 — suivi Animation et Pro
 

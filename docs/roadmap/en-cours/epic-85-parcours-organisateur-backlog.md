@@ -74,13 +74,13 @@ Dans la Chasse au trésor, l’organisateur commence par une demande accompagné
 
 ## Organisation de la fiche et de ses onglets
 
-La fiche utilise la largeur disponible. Son en-tête garde le nom de l’édition, la commune, l’état métier et le prochain geste autorisé. Un repère horizontal distingue l’étape en cours de la rubrique consultée. Ainsi, lire une fiche participant pendant une édition ouverte conserve le repère « En cours ». Une action qui conduit à une autre rubrique ouvre directement sa destination.
+La fiche utilise la largeur disponible. Son en-tête garde le nom de l’édition, la commune, l’état métier et le prochain geste autorisé. Une seule barre permet de passer d’une étape à l’autre et distingue l’étape en cours de la rubrique consultée. Le menu Actions regroupe les gestes secondaires de l’édition. Ainsi, lire une fiche participant pendant une édition ouverte conserve le repère « En cours ». Une action qui conduit à une autre rubrique ouvre directement sa destination.
 
 | Destination ou tâche | Contenu regroupé | Geste facilité |
 | --- | --- | --- |
 | Préparation | Assistant, configuration, invitations et préparation terrain selon le modèle | Reprendre le dernier point bloquant, identifier qui doit intervenir et revenir à la revue. |
 | Publication | Conditions, contrôles, aperçu et blocages | Corriger l’élément concerné, revenir à la revue, puis publier explicitement. |
-| Suivi | Activité de l’édition, participants, validations et incidents applicables | Passer d’un indicateur à la liste correspondante puis au dossier, en conservant les critères au retour. |
+| Participation | Tableau des participants, qualifications, validations et incidents applicables | Passer d’un indicateur à la liste correspondante puis au dossier, en conservant les critères au retour. |
 | Communication, accessible pendant le travail | Communication, messages habitants, actualités, flyer, liens et QR de diffusion | Accéder au support ou à la conversation dans la même édition, selon les droits. |
 | Clôture et fin | Fermeture des participations, population figée, dossiers à résoudre, fin et archivage | Distinguer « Clôturer », « Terminer » et « Archiver ». Reprendre un dossier depuis le contrôle qui le signale. |
 | Tirage et gains | Aperçu du tirage applicable, confirmation, résultat, gains et remise selon la dotation | Consulter les effets avant confirmation puis ouvrir la prochaine action sur un gain. |

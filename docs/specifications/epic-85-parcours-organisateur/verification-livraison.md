@@ -44,3 +44,20 @@ Les sept contrôles PostgreSQL de démonstration sur les dotations et la fin son
 Les contrôles unitaires transversaux du générateur présentent huit échecs également reproduits sur une copie du commit backend `f90e965f`, avant modifications. Sept viennent d’une fixture de génération dépourvue de session. Le huitième concerne une preuve de passage que le test attend de voir refuser. Les fichiers du générateur concernés ne sont pas modifiés par E85.
 
 Les contrôles ci-dessus sont locaux. Le déploiement et la revue comparative avec des gestionnaires constituent des opérations distinctes. L’epic reste en cours.
+
+
+## Refonte de la fiche du 26 novembre 2026
+
+La barre de navigation indique l’étape métier pendant les consultations transversales. Une édition active ouvre Participation. La liste des participants, les validations applicables, l’historique des messages, la confirmation d’une clôture et le résultat du tirage se consultent dans la même édition. Les libellés de confirmation et les indicateurs du bilan suivent les données et capacités renvoyées par le serveur.
+
+| Objet vérifié | Contrôle local |
+| --- | --- |
+| Orientation | Ouverture par statut, liens directs historiques, lecture seule, menu Actions et retour du focus. [Banc des rubriques](../../../../localeo-animation/tests/browser/animation-workspace-ux.mjs) |
+| Participation | Populations, filtres, retour du dossier et présentation des premières lignes sur ordinateur. [Parcours des modèles](../../../../localeo-animation/tests/browser/e85-parcours-modeles.mjs) |
+| Communication | Quota, brouillon, aperçu, aide, clavier et lecture seule sur trois largeurs. [Recette des communications](../../../../localeo-animation/tests/browser/communication-ux.mjs) |
+| Attribution | Lots libres avec zéro éligible, coffrets insuffisants, consultation sans droit d’écriture et commande dont le résultat est incertain. [Banc dotation](../../../../localeo-animation/tests/browser/dotation.mjs) |
+| Bilan | Mesures connues, couverture partielle, satisfaction, exports et conservation du dernier résultat lors d’une erreur de lecture. [Contrôles du bilan](../../../../localeo-animation/tests/browser/bilan-visual-checks.mjs) |
+
+Les douze parcours continus réussissent à 1280 × 800 et 390 × 800, de la création à la réouverture de l’archive. Sur les six modèles, la première participation est entièrement visible à 1280 × 800 dans le scénario nominal. Le banc dotation couvre douze combinaisons de scénario et de largeur pour les confirmations, leurs blocages et les commandes incertaines. Le banc du bilan passe sur huit configurations, y compris avec texte agrandi. La suite unitaire Animation compte 437 tests réussis.
+
+La livraison concerne le portail Animation et le guide Animation. Elle réutilise les règles et les contrats existants. Aucune migration ni adaptation du générateur de démonstration, du portail Commerçant ou des procédures d’exploitation n’est requise. Les recettes locales emploient des éditions synthétiques. La comparaison chronométrée avec des gestionnaires reste à réaliser.

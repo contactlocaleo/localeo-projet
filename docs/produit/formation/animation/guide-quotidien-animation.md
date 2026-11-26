@@ -1,6 +1,6 @@
 # Localeo Animation - Votre guide au quotidien
 
-<!-- Source canonique du PDF. Générateur dans localeo-animation/scripts/generate-animation-guide.py. Édition du 25 novembre 2026. Les captures montrent l’application réelle avec des données fictives. -->
+<!-- Source canonique du PDF. Générateur dans localeo-animation/scripts/generate-animation-guide.py. Édition du 26 novembre 2026. Les captures montrent l’application réelle avec des données fictives. -->
 
 <!-- Sommaire : Prendre en main votre espace -->
 
@@ -58,7 +58,7 @@ Préparez un nom, des dates et le type de jeu que vous souhaitez organiser. Vous
 
 1. Ouvrez **Animations**, puis **Créer** sur téléphone ou **Créer une animation** sur ordinateur. Vérifiez la commune et choisissez le modèle de jeu.
 2. Renseignez les informations demandées. Sur téléphone, **Continuer** et **Précédent** permettent de passer d’une étape à l’autre.
-3. Choisissez **Créer le brouillon**, puis confirmez. Le brouillon s’ouvre avec l’**Assistant**, qui montre ce qu’il reste à préparer.
+3. Choisissez **Créer le brouillon**, puis confirmez. Le brouillon s’ouvre dans **Préparation**. L’assistant montre ce qu’il reste à préparer. Le menu **Actions** de l’en-tête regroupe les opérations disponibles sur cette édition.
 
 ![Dans l’Assistant du brouillon, ouvrez la rubrique indiquée sur chaque point d’attention.](illustrations/guide-quotidien/assistant-1024.png)
 
@@ -164,9 +164,11 @@ Une **Dotation figée** indique qu’un engagement ou une publication a déjà �
 
 Ouvrez le brouillon dont vous voulez rendre la présentation accessible aux habitants.
 
-1. Depuis l’édition, ouvrez **Publication** pour revoir les contrôles. Chaque blocage indique le point à résoudre.
+1. Dans la barre des étapes, choisissez **Publication**. Le repère d’état indique où en est l’animation, même lorsque vous consultez une autre étape. Repérez les blocages avant de publier.
 2. Dans **Préparer mon animation**, sélectionnez une carte rouge ou orange pour ouvrir la rubrique indiquée. Dépliez **Autres points à vérifier** pour afficher les suivants. Traitez les blocages, puis relisez la présentation destinée aux habitants.
 3. Choisissez **Publier l’animation**, puis confirmez. Attendez la confirmation et vérifiez que l’état devient **Publiée** ou **En cours** si le jeu est ouvert.
+
+![L’indication Étape actuelle reste sur Préparation pendant que vous consultez Publication. Sur téléphone, touchez le nom de la rubrique pour ouvrir la navigation.](illustrations/guide-quotidien/navigation-edition-1024.png)
 
 ![La revue de publication présente les conditions à remplir avant de confirmer.](illustrations/guide-quotidien/publication-1024.png)
 
@@ -182,10 +184,10 @@ Une fois la présentation prête, vérifiez les supports à diffuser. Si votre o
 
 1. Dans **Flyers**, ouvrez le support de l’animation et vérifiez son contenu, le lien d’inscription et le QR avant de le diffuser. Refaites le support si ses renseignements ont changé et que l’action est proposée.
 2. Pour savoir d’où viennent les inscriptions, nommez vos supports dans les sources de diffusion. Par exemple, « Affiche mairie » pourra apparaître dans le bilan.
-3. Pour contacter des personnes déjà inscrites, ouvrez **Communication**, puis **Nouveau message**. Choisissez les destinataires, rédigez le texte et vérifiez l’aperçu.
-4. Envoyez ou programmez le message. Consultez l’historique pour vérifier le résultat de l’envoi.
+3. Ouvrez **Communication**. Vérifiez les **Crédits disponibles** puis choisissez **Nouveau message**. Dans la fenêtre de rédaction, choisissez les destinataires, rédigez le texte et relisez l’aperçu dans Live.
+4. Choisissez **Enregistrer le brouillon**, puis **Calculer l’aperçu des destinataires**. Vérifiez l’audience avant de confirmer l’envoi ou la programmation. Pour en suivre le résultat, ouvrez le message dans l’historique.
 
-![Dans Communication, vérifiez le crédit d’envoi et retrouvez les messages dans l’historique.](illustrations/guide-quotidien/communication-1024.png)
+![Le quota figure au-dessus de l’historique. Ouvrez un message pour reprendre un brouillon ou suivre sa diffusion.](illustrations/guide-quotidien/communication-1024.png)
 
 ### Selon la situation
 
@@ -211,11 +213,11 @@ Les envois depuis une animation et depuis la commune utilisent le même crédit,
 
 Ouvrez l’animation concernée dans la bonne commune. Pour aider une personne, munissez-vous du nom ou de la référence de sa participation.
 
-1. Ouvrez **Suivi**. Lisez l’unité et le périmètre du chiffre qui vous intéresse, puis ouvrez son détail lorsqu’un lien est proposé.
-2. Dans **Participants**, recherchez la personne et ouvrez son dossier. Vérifiez sa progression et les réponses affichées selon le jeu.
-3. Si elle vous signale un problème de visite, ouvrez **Validations** et vérifiez si le passage a été validé. Actualisez la rubrique si vous attendez un résultat.
+1. Ouvrez **Participation**. Les indicateurs présentent la situation de l’animation. La liste des participants se trouve sur le même écran.
+2. Recherchez la personne ou filtrez les résultats. Ouvrez son dossier et vérifiez sa progression et les réponses affichées selon le jeu.
+3. Pour vérifier un passage en commerce, choisissez **Validations** dans **Suivi de la participation**. Revenez à **Participants** pour retrouver les dossiers. La tombola publique recueille les inscriptions sans passage en commerce.
 
-![La rubrique Participants conserve le repère de déroulement au-dessus des filtres, du tableau et de sa pagination.](illustrations/guide-quotidien/participants-1600.png)
+![Dans Participation, passez des participants aux validations et ouvrez le dossier de la personne recherchée.](illustrations/guide-quotidien/suivi-1024.png)
 
 ### Si vous devez intervenir sur le parcours
 
@@ -258,7 +260,7 @@ Au-delà de 10 000 animations, raccourcissez la période pour pouvoir exporter. 
 Clôturez l’animation quand vous souhaitez fermer la participation.
 
 1. Vérifiez les dates et l’activité. Si **Clôture attendue** apparaît sur votre tableau de bord, ouvrez l’animation concernée.
-2. Ouvrez **Clôture** ou choisissez **Vérifier la clôture**. Examinez les qualifiés et les conditions de fermeture. Lisez les effets, puis choisissez **Confirmer la clôture** si vous souhaitez fermer le jeu.
+2. Ouvrez **Clôture**. Dans **Vérifier la clôture**, contrôlez le nombre de qualifiés et les conditions de fermeture. Lisez les effets, puis choisissez **Confirmer la clôture** si vous souhaitez fermer le jeu.
 3. Vérifiez l’état **Clôturée** avant de passer au tirage ou aux autres opérations de fin.
 
 ![Sur téléphone, vérifiez les conséquences de la fermeture avant de la confirmer.](illustrations/guide-quotidien/cloture-390.png)
@@ -271,7 +273,7 @@ La date annoncée aux habitants est un repère. Tant que la clôture n’est pas
 
 Attendez la clôture et vérifiez que les lots et les dossiers attendus sont prêts.
 
-1. Choisissez **Préparer le tirage**. Vérifiez les personnes éligibles et les lots. Vous pouvez encore annuler. **Confirmer le tirage** engage l’attribution.
+1. Ouvrez **Tirage**, puis **Préparer le tirage**. Vérifiez les personnes éligibles et les lots. Vous pouvez encore annuler. **Confirmer le tirage** engage l’attribution. Si personne n’est éligible et que le jeu l’autorise, le bouton indique **Enregistrer un tirage sans gagnant**.
 2. Si le tirage est en cours ou si la réponse tarde, vérifiez son état dans cette rubrique. Depuis le résultat, ouvrez les gains. Pour retrouver les lots de plusieurs éditions, ouvrez **Lots et remises**.
 3. Recherchez le bénéficiaire ou filtrez par animation. Vérifiez le lieu, la date limite et l’état du lot, puis utilisez l’action proposée. Après la remise, actualisez et vérifiez l’état enregistré.
 
@@ -287,8 +289,8 @@ Un lot externe se retire au lieu indiqué. Le commerce désigné valide un bon. 
 
 Une fois l’animation passée, retrouvez les chiffres à partager et les éléments à garder pour la prochaine édition.
 
-1. Dans l’animation, ouvrez **Résultats et objectifs**. Lisez les inscriptions, parcours, passages et lots remis lorsque ces mesures sont disponibles.
-2. Vérifiez la période, la date d’observation et les données couvertes. Consultez les sources de diffusion et les retours recueillis s’ils figurent dans le bilan.
+1. Ouvrez **Bilan**. Dans **Résultats et objectifs**, lisez les inscriptions, les parcours, les passages et les lots remis lorsque ces mesures sont disponibles.
+2. Vérifiez la période, la date d’observation et les données couvertes. Pour partager les chiffres, utilisez **Exporter le bilan** si ce bouton est disponible.
 3. Après avoir réglé les derniers dossiers, utilisez les actions proposées pour terminer ou archiver l’édition. Vous pourrez relire une archive selon vos droits.
 
 ![Le bilan rapproche les résultats et les objectifs. Vérifiez quelles mesures sont disponibles.](illustrations/guide-quotidien/bilan-1024.png)
