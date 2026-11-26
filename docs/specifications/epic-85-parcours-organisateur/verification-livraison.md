@@ -91,3 +91,18 @@ Neuf scénarios PostgreSQL du parcours transversal vérifient notamment la même
 Le banc local a parcouru des listes de 1 000 et 10 000 éditions. Avec 10 000 éditions et un cache chaud, la lecture d’une page de 25 a pris au maximum 47 ms sur cinq essais et la file d’actions 179 ms. Ces mesures concernent l’adaptateur PostgreSQL local, hors HTTP. [Banc reproductible](../../../../localeo-backend/tests/security/test_productivite_animation_postgres.py)
 
 Les preuves navigateur utilisent une API synthétique et les preuves transactionnelles une base PostgreSQL locale. Les parcours de ce lot restent à observer avec des gestionnaires sur l’environnement publié.
+
+## E85-EVO-01 — Refonte de la navigation et de la préparation
+
+| Critères | Preuves locales |
+| --- | --- |
+| CA-13 · Navigation par état | Douze parcours complets couvrent les six modèles à 390 et 1280 px. La frise et les anciens liens passent 39 scénarios à 320, 390 et 1280 px. La recette des retours et des alertes couvre 21 scénarios organisateur, 20 scénarios de productivité et 68 écrans d’alertes. |
+| CA-14 · Visuel et QR | La recette PostgreSQL vérifie l’ajout et le retrait de l’illustration, l’Assistant, les visuels de configuration, l’isolation entre éditions et l’accès public au QR après publication. Le banc de personnalisation du flyer passe 184 contrôles sur trois modes de dotation. Le parcours intégré à 320 et 1280 px vérifie le focus sur l’illustration, l’ajout, le retour au contrôle relu et le retrait. |
+| CA-15 · Liste et réemploi | Vues enregistrées 9/9, dont zoom à 200 %, et clonage 31/31, dont Archives et restauration du focus. |
+| CA-16 · Création et lot libre | Douze parcours de création manuelle, huit scénarios de sauvegarde et reprise avec verrouillage du modèle, et cinq scénarios Chasse. Dotation 12/12, plus quatre scénarios avec texte agrandi à 200 %. |
+
+Le portail passe 441 tests, TypeScript, ESLint et le build. Côté backend, 791 contrôles d’architecture et 36 tests de la sélection PostgreSQL passent. Les suites backend élargies présentent cinq échecs dans des doubles ou des assertions historiques. La comparaison avec `HEAD` confirme que les chemins en cause sont inchangés. Les suites élargies restent à rejouer sur `HEAD` pour confirmer cette attribution.
+
+Le [guide Animation](../../../livrables/formation/animation/guide-quotidien-localeo-animation.pdf) compte 26 pages rendues et relues. Ses 25 liens de sommaire et 25 liens de retour sont vérifiés. La copie embarquée est identique. Le profil et l’assistance servent le PDF contrôlé à 390 et 1 024 px, y compris lorsque la lecture des demandes d’assistance échoue. Le guide Commerçant reste applicable aux gestes de consultation du flyer et d’utilisation des QR.
+
+La livraison réutilise les contrats API, le stockage et la configuration de déploiement. Le test `test_complete_dataset_relations` sur PostgreSQL 18 jetable confirme les dix visuels distincts rattachés aux éditions générées et les deux préparations prévues sans image. La boucle de correction s’appuie sur Backend et Animation. La recette a utilisé des API synthétiques et PostgreSQL local. L’EPIC 85 est en cours.

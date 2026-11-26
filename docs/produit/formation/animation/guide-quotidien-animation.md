@@ -44,7 +44,9 @@ Dans **Animations**, recherchez le nom d’une édition. Sa ligne indique son st
 
 ### Enregistrer une vue pour la prochaine fois
 
-Réglez d’abord vos filtres. Ouvrez **Gérer les vues** à côté de **Vue**, choisissez **Nouvelle vue**, donnez-lui un nom, puis choisissez **Enregistrer les filtres actuels**. Si vous la partagez, elle devient accessible aux membres autorisés de votre organisation dans cette commune. Pour la renommer, choisissez-la dans **Choisir une vue**, modifiez son nom et cliquez sur **Mettre à jour cette vue**. Vous retrouvez ensuite son nom dans **Vue**.
+Réglez d’abord vos filtres. Choisissez **Enregistrer les filtres actuels**, donnez un nom à la vue, puis choisissez **Enregistrer la vue**. Si vous la partagez, elle devient accessible aux membres autorisés de votre organisation dans cette commune. Retrouvez ensuite son nom dans **Vue**.
+
+Ouvrez **Gérer les vues** pour voir lesquelles sont privées ou partagées. Choisissez **Modifier** sur une vue si l’action est disponible, puis **Mettre à jour cette vue**. Si vous voulez aussi remplacer ses filtres, sélectionnez l’option qui reprend ceux de la liste.
 
 ## 4 · Ajouter un commerce et lui ouvrir l’accès à Pro
 
@@ -71,8 +73,8 @@ Pour ajouter plusieurs commerces, utilisez **Import commerçants** si vous y ave
 Préparez un nom, des dates et le type de jeu que vous souhaitez organiser. Vous pourrez compléter votre projet avant de le publier.
 
 1. Ouvrez **Animations**, puis **Créer** sur téléphone ou **Créer une animation** sur ordinateur. Vérifiez la commune et choisissez le modèle de jeu.
-2. Renseignez les informations demandées. Sur téléphone, **Continuer** et **Précédent** permettent de passer d’une étape à l’autre.
-3. Choisissez **Créer le brouillon**, puis confirmez. Le brouillon s’ouvre dans **Préparation**. L’assistant montre ce qu’il reste à préparer. Le menu **Actions** de l’en-tête regroupe les opérations disponibles sur cette édition.
+2. Renseignez les informations demandées. **Continuer** et **Précédent** permettent de passer d’une étape à l’autre. Si vous hésitez sur la suite, ouvrez **Comprendre les étapes** avec le bouton **?** dans l’en-tête. Une fois la saisie commencée, revenez au catalogue si vous souhaitez créer une animation avec un autre modèle.
+3. Choisissez **Créer le brouillon**, puis confirmez. La création n’envoie aucune invitation et ne publie rien. Le brouillon s’ouvre dans **Préparation**. L’assistant montre ce qu’il reste à préparer. Pour une actualité ou un message à rédiger à l’avance, restez dans **Préparation** et ouvrez la rubrique proposée selon vos droits.
 
 ![Dans l’Assistant du brouillon, ouvrez la rubrique indiquée sur chaque point d’attention.](illustrations/guide-quotidien/assistant-1024.png)
 
@@ -163,10 +165,10 @@ Après publication ou avec un accès en consultation seule, vous pouvez relire l
 Décidez ce que les habitants pourront gagner et qui assurera la remise des lots.
 
 1. Dans **Configuration**, ouvrez **Dotation** sur ordinateur ou **Lots** sur téléphone. Choisissez le mode de remise, puis enregistrez.
-2. Pour des **lots libres remis hors Localeo**, indiquez le nom de chaque lot, la quantité, la personne chargée de la remise et les consignes de retrait.
-3. Vérifiez que les lots, les quantités et leur ordre sont corrects dans la liste.
+2. Pour des **lots libres remis hors Localeo**, choisissez **Ajouter un lot**. Dans **Lot à gagner**, indiquez le libellé et la quantité. Dans **Remise au gagnant**, indiquez qui remet le lot et comment le récupérer. Par exemple, « À retirer à l’accueil de la mairie du lundi au vendredi ».
+3. Vérifiez l’aperçu de l’ordre d’attribution, choisissez **Enregistrer ce lot**, puis relisez les lots et les quantités dans la liste.
 
-![La rubrique Dotation montre le mode choisi, les quantités et les actions disponibles.](illustrations/guide-quotidien/configuration-1024.png)
+![Précisez ce que le gagnant recevra et comment il pourra le récupérer.](illustrations/guide-quotidien/lot-libre-1024.png)
 
 ### Si vous offrez des bons ou des coffrets
 
@@ -178,13 +180,19 @@ Une **Dotation figée** indique qu’un engagement ou une publication a déjà �
 
 Ouvrez le brouillon dont vous voulez rendre la présentation accessible aux habitants.
 
-1. Dans la barre des étapes, ouvrez **Publication**, puis **Revue de publication**. Le repère d’état indique où en est l’animation, même lorsque vous consultez une autre étape. Repérez les blocages avant de publier.
+1. Ouvrez **Publication**, puis **Revue de publication**. L’état de l’édition reste visible même lorsque vous consultez une autre rubrique. Repérez les blocages avant de publier.
 2. Dans **Préparer mon animation**, sélectionnez une carte rouge ou orange pour ouvrir la rubrique indiquée. Dépliez **Autres points à vérifier** pour afficher les suivants. Traitez les blocages, puis relisez la présentation destinée aux habitants.
 3. Choisissez **Publier l’animation**, puis confirmez. Revenez dans **Revue de publication** pour relire le reçu. Vous y retrouvez l’état et, lorsqu’elle est disponible, la date de publication effective. Pour une animation en cours, choisissez **Ouvrir le suivi de la participation**.
 
-![La revue de publication présente les conditions à remplir avant de confirmer.](illustrations/guide-quotidien/publication-1024.png)
+![La frise indique l’étape actuelle. Juste en dessous, ouvrez la rubrique que vous voulez consulter.](illustrations/guide-quotidien/navigation-edition-1024.png)
 
 ![Après publication, ouvrez le suivi depuis le reçu de l’édition.](illustrations/guide-quotidien/recu-publication-1024.png)
+
+### Compléter le brouillon avant de publier
+
+Si le contrôle propose **Ajouter un visuel**, ouvrez-le. Dans **Flyer**, choisissez une image personnalisée et sélectionnez **Enregistrer l’illustration**. Revenez au contrôle pour vérifier que l’avertissement a disparu. Vous pouvez publier avec l’illustration par défaut si les autres contrôles sont satisfaits.
+
+Si votre édition prévoit un tirage, vérifiez sa **Date annoncée du tirage** dans les réglages de préparation. Vous pouvez aussi y fixer des objectifs. Les objectifs sont figés à la publication.
 
 ### Si la confirmation tarde
 
@@ -196,12 +204,12 @@ Utilisez **Vérifier l’enregistrement** si l’action est proposée. Tant que 
 
 Une fois la présentation prête, vérifiez les supports à diffuser. Si votre organisation dispose de **Communication**, vous pouvez aussi écrire aux participants dans Localeo Live.
 
-1. Dans **Flyers**, ouvrez le support de l’animation et vérifiez son contenu, le lien d’inscription et le QR avant de le diffuser. Refaites le support si ses renseignements ont changé et que l’action est proposée.
-2. Pour savoir d’où viennent les inscriptions, nommez vos supports dans les sources de diffusion. Par exemple, « Affiche mairie » pourra apparaître dans le bilan.
+1. Ouvrez **Publication → Supports de diffusion → Flyer**. Générez ou ouvrez le PDF et vérifiez son contenu, le lien d’inscription et le QR avant de le diffuser. Régénérez le flyer si ses renseignements ont changé et que l’action est proposée.
+2. Dans **Liens et QR de diffusion**, donnez un nom au support, par exemple « Affiche mairie », puis choisissez **Créer le lien de diffusion**. Vous pouvez copier le lien ou télécharger son QR. Préparez vos supports en brouillon et partagez-les lorsque l’édition est accessible au public. Vous retrouverez les inscriptions attribuées à ce support dans le bilan.
 3. Dans **Communication**, choisissez **Messages aux participants**. Vérifiez les **Crédits disponibles** puis choisissez **Nouveau message**. Dans la fenêtre de rédaction, choisissez les destinataires, rédigez le texte et relisez l’aperçu dans Live.
 4. Choisissez **Enregistrer le brouillon**, puis **Calculer l’aperçu des destinataires**. Vérifiez l’audience avant de confirmer l’envoi ou la programmation. Pour en suivre le résultat, ouvrez le message dans l’historique.
 
-![Le quota figure au-dessus de l’historique. Ouvrez un message pour reprendre un brouillon ou suivre sa diffusion.](illustrations/guide-quotidien/communication-1024.png)
+![Dans Supports de diffusion, ouvrez le flyer ou les liens et QR par canal.](illustrations/guide-quotidien/supports-diffusion-1024.png)
 
 ### Selon la situation
 
@@ -313,7 +321,7 @@ Une fois l’animation passée, retrouvez les chiffres à partager et les élém
 
 ### Repartir de l’édition précédente
 
-Dans la liste **Animations**, ouvrez **Autres actions** sur la ligne de l’édition et choisissez **Cloner l’animation** si cette action est disponible. Relisez les éléments repris avant de créer le nouveau brouillon. Vérifiez ses dates, les accords des commerçants, les préparatifs et les lots avant de publier. Les résultats et les gagnants restent associés à l’édition d’origine. Dans le bilan, **non applicable** indique une mesure sans objet pour ce jeu. **Non collectée** indique que le chiffre est inconnu.
+Dans **Animations** ou **Archives**, choisissez **Cloner** sous le nom de l’édition si l’action est proposée. Relisez les éléments repris avant de créer le nouveau brouillon. Vérifiez ses dates, les accords des commerçants, les préparatifs et les lots avant de publier. Les résultats et les gagnants restent associés à l’édition d’origine. Dans le bilan, **non applicable** indique une mesure sans objet pour ce jeu. **Non collectée** indique que le chiffre est inconnu.
 
 <!-- Sommaire : Importer des commerces et obtenir de l’aide -->
 

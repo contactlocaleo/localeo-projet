@@ -56,6 +56,8 @@ conditionnel. Une modification concurrente ne doit pas publier un rendu annoncé
 à jour sur des faits devenus obsolètes. Les PDF déjà imprimés ne sont pas modifiés :
 le gestionnaire doit télécharger et diffuser la nouvelle version.
 
+### Illustration personnalisée
+
 L'image est rattachée à l'animation. Depuis le correctif du **31 octobre 2026**,
 les blocs de présentation de Localeo Live reprennent aussi cette illustration
 personnalisée, uniquement lorsque l'animation est visible du public. Sans image
@@ -68,6 +70,8 @@ téléchargée et aucun accès global au DAM n'est ouvert. PNG, JPEG et WebP son
 acceptés dans la limite de **5 Mio** ; le serveur vérifie le contenu décodé,
 borne les dimensions et neutralise les métadonnées. L'image est recadrée dans
 le bloc existant, sans déformer le logo ni masquer le QR d'inscription.
+
+Depuis l’évolution [E85-EVO-01](../../roadmap/en-cours/epic-85-parcours-organisateur-backlog.md#e85-evo-01--fiche-et-préparation-du-26-novembre-2026), la validation de publication considère aussi l’illustration personnalisée active de l’édition. Le backend lit le document rattaché à l’édition après contrôle de son périmètre, sans charger l’image. Un visuel de configuration déjà reconnu continue de satisfaire le contrôle. L’absence de tout visuel reconnu produit l’avertissement facultatif `AUCUN_ASSET_PERSONNALISE`. Après retrait confirmé du dernier visuel, l’avertissement redevient visible. Depuis l’Assistant ou la revue, **Ajouter un visuel** ouvre l’éditeur du flyer et propose de revenir au contrôle pour le relire. La correction ne change ni l’éditeur du visuel de jeu, ni les autorisations de diffusion publique.
 
 Le contrat ajoute sous `/protected/animation-locale/animations/{animation_id}` :
 

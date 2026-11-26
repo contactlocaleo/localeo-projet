@@ -1,5 +1,22 @@
 # Captures du guide utilisateur Animation
 
+## Fiche et préparation E85-EVO-01 du 26 novembre 2026
+
+La recette utilise le portail Animation construit depuis la base `a0a3f3d` avec l’évolution locale E85, et des réponses API fictives. La liste présente **Cloner** sous le nom de l’édition. La [gestion des vues](vues-enregistrees-1024.png) montre une vue modifiable et une vue partagée en consultation. L’[aide à la création](creation-aide-1024.png) décrit la préparation, les accords et la publication. La [frise et la navigation](navigation-edition-1024.png) sont visibles dans la revue du brouillon. Le [formulaire de lot libre](lot-libre-1024.png) montre ce que gagne le participant et comment il le récupère. Les [supports de diffusion](supports-diffusion-1024.png) présentent les outils accessibles avant publication.
+
+Depuis le dépôt Animation, construire l’application puis lancer Chromium sur un serveur local à port éphémère. Reprendre les captures relues depuis le dossier de recette.
+
+```powershell
+$env:ANIMATION_TEST_SUPPORT = 'true'
+$env:ANIMATION_TEST_DIST = 'tmp/e85-refonte-guide-build'
+$env:ANIMATION_GUIDE_CAPTURE_ROOT = 'tmp/e85-refonte-guide-captures'
+$env:ANIMATION_GUIDE_ARTIFACTS = 'tmp/e85-refonte-guide-report'
+node scripts/build-generation-tests.mjs
+node tests/browser/animation-guide.mjs --only=liste-animations,assistant,configuration,lot-libre,creation-aide,publication,supports-diffusion,recu-publication,communication,suivi,cloture,tirage,bilan --captures-only
+```
+
+Après génération et synchronisation du guide, reconstruire le même build et jouer `node tests/browser/animation-guide.mjs --access-only` pour vérifier le lien et les octets servis à 390 et 1 024 px.
+
 ## Décisions du gestionnaire du 26 novembre 2026
 
 Les captures ci-dessous proviennent du portail Animation construit depuis la base `a464ae9` avec les évolutions locales de pilotage et de pictogrammes. Le tableau de bord de Valmont et ses éditions utilisent des données fictives. La [file du jour](pilotage-priorites-1024.png) montre une clôture à vérifier et trois lots à justifier. Le [reçu de publication](recu-publication-1024.png) donne accès au suivi. La [liste des participants](suivi-1024.png), le [quota des messages](communication-390.png), la [revue de clôture](cloture-390.png), le [tirage avant clôture](tirage-avant-cloture-1024.png) et le [bilan](bilan-1024.png) illustrent les opérations de l’édition.

@@ -74,19 +74,19 @@ Dans la Chasse au trésor, l’organisateur commence par une demande accompagné
 
 ## Organisation de la fiche et de ses onglets
 
-La fiche utilise la largeur disponible. Son en-tête garde le nom de l’édition, la commune, l’état métier et le prochain geste autorisé. Une seule barre permet de passer d’une étape à l’autre et distingue l’étape en cours de la rubrique consultée. Le menu Actions regroupe les gestes secondaires de l’édition. Ainsi, lire une fiche participant pendant une édition ouverte conserve le repère « En cours ». Une action qui conduit à une autre rubrique ouvre directement sa destination.
+La fiche utilise la largeur disponible. Son en-tête garde le nom de l’édition, la commune, l’état métier et le prochain geste autorisé. Une frise en lecture seule identifie l’étape en cours. La navigation présente séparément les rubriques utilisables. Ainsi, lire une fiche participant pendant une édition ouverte conserve le repère « En cours ». Une action qui conduit à une autre rubrique ouvre directement sa destination.
 
 | Destination ou tâche | Contenu regroupé | Geste facilité |
 | --- | --- | --- |
-| Préparation | Assistant, configuration, invitations et préparation terrain selon le modèle | Reprendre le dernier point bloquant, identifier qui doit intervenir et revenir à la revue. |
-| Publication | Conditions, contrôles, aperçu et blocages | Corriger l’élément concerné, revenir à la revue, puis publier explicitement. |
+| Préparation | Assistant, configuration, objectifs, date annoncée du tirage, invitations et terrain selon le modèle. Actualités et messages à préparer en brouillon selon les droits. | Reprendre le dernier point bloquant, identifier qui doit intervenir et revenir à la revue. |
+| Publication | Conditions, contrôles, aperçu, blocages et supports de diffusion | Corriger l’élément concerné, revenir à la revue, puis publier explicitement. Préparer le flyer, les liens et QR de diffusion selon les droits. |
 | Participation | Tableau des participants, qualifications, validations et incidents applicables | Passer d’un indicateur à la liste correspondante puis au dossier, en conservant les critères au retour. |
-| Communication, accessible pendant le travail | Communication, messages habitants, actualités, flyer, liens et QR de diffusion | Accéder au support ou à la conversation dans la même édition, selon les droits. |
+| Communication, accessible après publication selon les droits | Messages aux participants, messages habitants et actualités | Reprendre un brouillon de message ou sa diffusion, une conversation ou une actualité de la même édition. |
 | Clôture et fin | Fermeture des participations, population figée, dossiers à résoudre, fin et archivage | Distinguer « Clôturer », « Terminer » et « Archiver ». Reprendre un dossier depuis le contrôle qui le signale. |
 | Tirage et gains | Aperçu du tirage applicable, confirmation, résultat, gains et remise selon la dotation | Consulter les effets avant confirmation puis ouvrir la prochaine action sur un gain. |
 | Bilan et historique | Indicateurs autorisés à la phase courante, bilan final, comparaison et audit | Comprendre les chiffres et leur périmètre, puis retrouver le détail ou l’archive avec les droits requis. |
 
-Cette table affecte une destination aux rubriques existantes. Sur téléphone, la proposition privilégie l’étape courante et les accès directs. La recette prévoit une comparaison avec le dispositif E73, qui propose jusqu’à trois raccourcis mobiles et un sélecteur complet. Le choix final doit permettre d’atteindre les rubriques secondaires au clavier et au toucher, sans imposer le détour onglet → liste déroulante pour l’action principale.
+Cette table affecte une destination aux rubriques existantes. En brouillon, seules Préparation et Publication sont proposées dans la navigation principale. Sur téléphone, le statut reste visible avec un seul sélecteur de rubriques. Les accès directs conservent le dossier, le contexte et le prochain geste autorisé.
 
 ## Couverture des modèles
 
@@ -131,6 +131,16 @@ Les six modèles ci-dessous ont une stratégie implémentée. Leur ouverture dé
 | E85-CA-10 | Tester les dotations Coffrets, lots libres et bons numériques, puis une édition avec un dossier non résolu. | Les contrôles portent sur la dotation réelle. Après le tirage, la prochaine action concerne l’envoi, la remise ou le retrait approprié. Terminer puis archiver suit les conditions de fin existantes. |
 | E85-CA-11 | Parcourir au clavier et au toucher la même fiche à 320 et 390 px, sur grand écran et avec texte agrandi à 200 %. | Étape et sélection ont un libellé lisible en plus de leur couleur. Les valeurs gardent leur en-tête sur mobile. Le gestionnaire peut atteindre chaque action autorisée et lire son retour sans défilement horizontal de la page. |
 | E85-CA-12 | Revue d’usage avec plusieurs animations à des étapes différentes. Depuis la liste filtrée, repérer une publication en attente, traiter un incident sur une autre édition, puis retrouver une édition clôturée prête au tirage. | Pour chaque tâche, vérifier que le gestionnaire identifie l’édition, l’étape et le motif d’intervention, atteint l’action appropriée, comprend son résultat et retrouve sa liste filtrée. Comparer au trajet actuel les détours et les hésitations avant confirmation. Corriger les confusions d’étape ou de commande avant validation. |
+| E85-CA-13 | Ouvrir un brouillon, un lien historique, puis une édition publiée, clôturée et terminale. | La frise décrit l’état confirmé. Les rubriques de préparation restent accessibles en brouillon. Les liens historiques atteignent la revue, le bilan ou l’explication adaptée. Le prochain geste est unique. |
+| E85-CA-14 | En brouillon, suivre le conseil facultatif, ajouter et retirer une illustration, retrouver le flyer et préparer un QR de diffusion. | Le contrôle relu reflète le visuel courant. Les droits de modification et les conditions d’accès du public sont préservés. Le formulaire de génération et le QR terrain restent accessibles à leur emplacement prévu. |
+| E85-CA-15 | Enregistrer puis gérer une vue, appliquer un filtre et cloner une édition éligible depuis la liste. | La portée privée ou partagée est lisible. Le clonage est visible depuis la ligne et le retour restaure le contexte. La liste conserve la prochaine action et les commandes groupées. |
+| E85-CA-16 | Créer ou reprendre une préparation, ouvrir l’aide, saisir un lot libre et revenir à la liste. | Le modèle se fixe au premier changement métier ou à la reprise. L’aide et la confirmation indiquent les effets de la création. Le lot explique la remise et l’ordre, garde la saisie après refus, puis rend le focus au retour. |
+
+### E85-EVO-01 — Fiche et préparation du 26 novembre 2026
+
+L’évolution sépare la frise et la navigation, réduit les rubriques en brouillon, regroupe le flyer et les QR par canal dans Publication et remplace l’ancienne rubrique **Publication et clôture** par ses destinations de travail. Elle remplace également le clonage en menu de ligne, la création de vues dans leur popin de gestion, le changement permanent de modèle et l’aide dépliable dans la création. La saisie des lots libres externes explicite le lot, sa remise et l’ordre d’attribution. Voir [les comportements cibles](../../specifications/epic-85-parcours-organisateur/README.md) et [la recette E85-CA-13 à 16](../../specifications/epic-85-parcours-organisateur/recette.md).
+
+Le backend étend le calcul de l’avertissement de visuel en réutilisant l’illustration courante du flyer. Les commandes, droits, routes et structures API existants s’appliquent. Le stockage existant suffit. Les gestes dans Pro et Live restent ceux du flyer actuel. La recette de démonstration utilise une édition illustrée et une édition sans visuel pour vérifier la lecture de l’avertissement par le portail. Le guide Animation et sa copie distribuée suivent les libellés et parcours de cette évolution.
 
 ## Impacts et passage à la spécification
 

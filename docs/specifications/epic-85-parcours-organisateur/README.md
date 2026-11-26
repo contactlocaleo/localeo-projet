@@ -4,7 +4,7 @@ Spécification du 25 novembre 2026. **État produit : En cours.** Le gestionnair
 
 | Pour travailler sur… | Document de référence |
 | --- | --- |
-| Le périmètre et les engagements E85-CA-01 à 12 | [Cadrage et critères d’acceptation](../../roadmap/en-cours/epic-85-parcours-organisateur-backlog.md) |
+| Le périmètre et les engagements E85-CA-01 à 16 | [Cadrage et critères d’acceptation](../../roadmap/en-cours/epic-85-parcours-organisateur-backlog.md) |
 | Les règles et les écrans propres à chaque jeu | [Parcours détaillés des six modèles implémentés et des trois modèles en projet](modeles.md) |
 | Les recommandations, les droits, les refus et la reprise d’une opération | [Architecture et compatibilité](architecture.md) |
 | Les scénarios à exécuter et la revue avec des gestionnaires | [Matrice de recette et lots](recette.md) |
@@ -21,7 +21,7 @@ La liste des animations répond à « Où est mon édition ? ». Depuis une list
 
 ## Lire et utiliser la fiche
 
-Sur ordinateur, le nom, la commune et la période identifient l’édition. Le repère horizontal utilise la largeur disponible et indique textuellement l’étape en cours. Le titre de la zone de travail désigne séparément la **rubrique consultée**. Une gestionnaire peut ainsi lire « Étape en cours : Déroulement » tout en examinant « Validations ». Le style reprend les titres, boutons, couleurs d’état et composants de gestion de Localeo Animation.
+Sur ordinateur, le nom, la commune et la période identifient l’édition. La frise en lecture seule présente les étapes confirmées par le serveur. Elle indique en toutes lettres l’étape actuelle et distingue les étapes franchies et à venir. Le statut métier reste visible même si la frise est indisponible. Sur téléphone, le statut et le sélecteur de rubriques restent distincts. Le titre de la zone de travail désigne la **rubrique consultée**. Une gestionnaire peut ainsi lire « En cours » tout en examinant « Validations ».
 
 L’en-tête porte le prochain geste permis pour l’édition. Quand la destination est déjà ouverte, la zone de travail porte l’action précise au point de décision, à côté de ses effets. Une même commande apparaît une seule fois dans cette vue. Les verbes annoncent le geste réel. « Voir les participants », « Vérifier la clôture » et « Préparer le tirage » ouvrent une lecture. « Publier l’animation », « Confirmer la clôture » et « Confirmer le tirage » engagent l’opération présentée.
 
@@ -42,24 +42,35 @@ Depuis la fiche, une action ou un lien vers un dossier atteint sa destination en
 
 La date, la consultation d’une rubrique et le succès d’un envoi ne font pas avancer à eux seuls l’édition. Le tirage et les remises sont des tâches de la phase de clôture. Une édition annulée affiche son état propre et les lectures autorisées. [Cycle et règles de fin E73](../epic-73-animation-et-ou-coffrets/fin-animation-archives.md)
 
+### Préparer un brouillon et sa dotation
+
+Le modèle peut être corrigé tant que seul son choix a été fait. La première modification métier fixe le choix pour la préparation en cours. Une préparation enregistrée se reprend avec son modèle. **Retour aux animations** permet de retrouver le catalogue avec la protection de saisie habituelle. **Précédent** reste un geste local au formulaire.
+
+Dans la création, **Comprendre les étapes** ouvre l’aide depuis le bouton « ? ». L’aide présente les accords seulement pour les modèles qui sollicitent les commerçants. La confirmation **Créer le brouillon** précise que la création n’envoie aucune invitation et ne publie rien.
+
+Dans la création et la configuration d’un lot libre remis hors Localeo, **Lot à gagner** regroupe le libellé et la quantité initiale de 1. **Remise au gagnant** rassemble le responsable et les consignes de retrait. L’aperçu aide à vérifier l’ordre d’attribution. Une validation refusée préserve la saisie et le retour à la liste des lots restaure le focus.
+
 ## Retrouver les rubriques actuelles
 
-La cartographie couvre les 18 destinations actuelles. Les regroupements ci-dessous organisent les liens et le contenu. Les tâches principales et les dossiers signalés s’ouvrent directement. Un ancien accès conserve l’édition, la destination et, le cas échéant, le dossier demandé. [Navigation existante](../../../../localeo-animation/src/app/components/AnimationDetailNavigation.tsx)
+Les regroupements ci-dessous organisent les liens et le contenu. Les tâches principales et les dossiers signalés s’ouvrent directement. Un ancien accès conserve l’édition et rejoint la destination autorisée correspondante. [Navigation](../../../../localeo-animation/src/app/components/AnimationDetailNavigation.tsx)
 
-Sur grand écran, **Préparation, Publication, Participation, Clôture et Tirage** forment une navigation commune. Communication et Bilan sont accessibles à côté des étapes pendant toute leur période de disponibilité. Le statut de l’édition et la rubrique consultée ont chacun un repère visuel et accessible. Sur téléphone, un seul sélecteur donne accès aux mêmes destinations. Le menu Actions de l’en-tête regroupe les gestes secondaires. Si aucun tirage ne s’applique, la clôture donne accès à la suite autorisée.
+En brouillon, dans une édition configurée ou prête à publier, la navigation principale propose **Préparation** et **Publication**. Préparation donne accès aux objectifs et à la date annoncée du tirage dans les réglages applicables, aux invitations et au terrain selon le modèle, ainsi qu’aux actualités et messages à préparer selon les droits. Publication réunit **Revue de publication** et **Supports de diffusion**. À partir de la publication, Participation, Clôture, Tirage, Communication et Bilan apparaissent selon l’état, le modèle et les droits. Si aucun tirage ne s’applique, la clôture donne accès à la suite autorisée. Sur téléphone, un seul sélecteur donne accès aux mêmes destinations.
 
 Participation réunit la liste des participants, les qualifications et, pour les modèles concernés, les validations. Une participation et une preuve gardent leurs propres détails et filtres. Les incidents actifs apparaissent avant la liste. Dans Communication, le quota et les messages envoyés aux participants précèdent les outils complémentaires. « Nouveau message » ouvre le formulaire avec aperçu et protection de la saisie. Les messages reçus des habitants conservent leur propre destination.
+
+Les supports peuvent être préparés en brouillon selon les droits existants. L’usage public d’un lien ou d’un QR de diffusion dépend de la visibilité de l’édition et de sa configuration publiée. Le QR terrain reste accessible depuis sa préparation. Le contrôle facultatif de visuel reconnaît une illustration personnalisée du flyer active sur cette édition ou un visuel déjà déclaré dans sa configuration. Relire le contrôle après ajout ou retrait confirmé. [Règle du visuel et lecture du flyer](../epic-73-animation-et-ou-coffrets/flyers-contextualises.md#illustration-personnalisée)
 
 Clôture expose les indicateurs disponibles, les blocages éventuels et la confirmation. Pendant le gel par lots du Juste Prix et du Jeu des vitrines, seul l’avancement confirmé est présenté. Pour les lots libres, si le serveur autorise le tirage avec zéro éligible et zéro gagnant possible, la confirmation s’intitule « Enregistrer un tirage sans gagnant ». La règle d’attribution des coffrets reste celle du moteur. Bilan présente la période, les données disponibles, la progression comparable et l’export PDF ou CSV. La fin de gestion marque le passage au bilan définitif.
 
 | Espace de travail | Identifiant actuel → contenu proposé | Accès utile en situation |
 | --- | --- | --- |
 | Préparation | `assistant` → préparation guidée · `configuration` → réglages de l’édition · `participations` → invitations commerçants · `preparation` → terrain | Ouvrir la correction ou l’accord depuis son contrôle. Afficher les tâches commerçantes pour les modèles concernés. |
-| Publication ou clôture | `workflow` → revue de publication ou revue de clôture | Un lien de publication ou de clôture désigne la bonne revue. L’ancien lien générique présente le contrôle pertinent pour l’état lu, avec accès à son contexte. |
+| Publication ou clôture | `workflow` → revue de publication, revue de clôture ou bilan selon l’état | Ouvrir la publication avant clôture, la clôture lorsqu’elle est recommandée ou confirmée, et le bilan pour une édition terminée, archivée ou annulée. |
+| Supports de diffusion | `flyer` → Flyer · `diffusion` → Liens et QR de diffusion | Retrouver chaque outil dans **Publication → Supports de diffusion**, y compris après publication. Depuis le contrôle de visuel, **Ajouter un visuel** ouvre l’éditeur d’illustration du flyer et conserve le retour à la revue. |
 | Participation | `live` → suivi de la participation · `participants` → participants · `validations` → validations | L’indicateur mène à sa liste déjà filtrée. Un incident identifié mène à sa situation métier. |
-| Communication | `communication` → communication · `messages-habitants` → messages habitants · `actualites` → actualités · `flyer` → flyer · `diffusion` → liens et QR de diffusion | Retrouver directement la conversation, la publication ou le support autorisé, puis revenir à la tâche en cours. |
+| Communication | `communication` → messages aux participants · `messages-habitants` → messages habitants · `actualites` → actualités | Avant publication, les entrées qui permettent de préparer une actualité ou un message rejoignent Préparation. Une destination réservée au suivi explique quand elle s’ouvre et propose une rubrique utile dans la même édition. |
 | Tirage et gains | `tirage` → préparation, état ou résultat · `gains` → gains et remises | La recommandation « tirages » résout la rubrique « Tirage » de l’édition. Le résultat confirmé donne accès aux gains. |
-| Fin et bilan | `fin` → dossiers de fin et archivage · `bilan` → bilan disponible à la phase consultée · `audit` → historique autorisé | Un contrôle de fin ouvre le dossier. Le bilan indique la période et le caractère provisoire ou final de la lecture. |
+| Fin et bilan | `fin` → dossiers de fin et archivage · `bilan` → bilan disponible à la phase consultée · `bilan-objectifs` → objectifs · `audit` → historique autorisé | Un contrôle de fin ouvre le dossier. Le bilan indique la période et le caractère provisoire ou final de la lecture. En brouillon, l’ancien lien vers les objectifs rejoint leur réglage. |
 
 En cas de destination retirée au rôle ou inapplicable au modèle, la fiche explique l’indisponibilité et offre un retour autorisé. Elle protège toute saisie en cours avant changement de cible. En lecture seule, le gestionnaire retrouve les informations permises et le résultat d’une opération déjà effectuée.
 
@@ -71,7 +82,7 @@ Une recommandation du bandeau mène à la même revue que le raccourci placé au
 
 ### Retrouver une animation dans la liste
 
-La barre au-dessus des résultats réunit recherche, choix de vue et filtres. Les critères appliqués peuvent être retirés individuellement. Une vue enregistrée s’applique depuis le sélecteur. Sa création, sa modification, son partage et sa suppression passent par « Gérer les vues ». Le menu d’une ligne contient le clonage et laisse sa place à la prochaine action. La sélection des brouillons fait apparaître les actions groupées. Le retour d’une fiche retrouve les critères, la page et la ligne concernée. Sur les jeux de recette, deux éditions complètes doivent être visibles à 1280 × 800 et la première avec sa prochaine action à 390 × 800.
+La barre au-dessus des résultats réunit recherche, choix de vue et filtres. Les critères appliqués peuvent être retirés individuellement. Une vue enregistrée s’applique depuis le sélecteur. **Enregistrer les filtres actuels** ouvre la création. **Gérer les vues** présente les vues privées et partagées et les actions autorisées pour chacune. Le remplacement des filtres d’une vue est explicite. **Cloner** s’affiche sous le nom des éditions éligibles dans Animations et Archives. La prochaine action reste dédiée au travail sur l’édition en cours. La sélection des brouillons fait apparaître les actions groupées. Le retour d’une consultation ou du clonage retrouve les critères, la page et la ligne concernée. Sur les jeux de recette, deux éditions complètes doivent être visibles à 1280 × 800 et la première avec sa prochaine action à 390 × 800.
 
 ### Repérer les interventions du jour
 
