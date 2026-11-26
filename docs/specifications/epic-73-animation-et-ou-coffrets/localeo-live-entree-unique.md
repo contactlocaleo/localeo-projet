@@ -1,5 +1,64 @@
 # E73 — Localeo Live, entrée unique des animations
 
+## E73-EVO-LIVE-CARNET-NOTIFICATIONS
+
+**26 novembre 2026.** L’habitant peut faire le tri dans Localeo Live. Il
+masque une animation ou un lot et choisit de le réafficher depuis **Retrouver
+mon carnet**, sur le même appareil. Dans **Notifications**, il peut supprimer
+les entrées lues ou non lues dont il n’a plus besoin.
+
+| Critère | Comportement observable attendu |
+| --- | --- |
+| **E73-LCN-01** | **Masquer** retire une carte de **Mon carnet**, de l’ancienne liste de participations ou de **Mes lots**, historique compris. Une participation est reconnue par son accès exact, même si une autre concerne la même animation. Le masquage conserve les inscriptions, les brouillons, les liens personnels et les usages autorisés. Les lots d’une participation masquée restent visibles et les favoris de Découvrir suivent leur parcours existant. |
+| **E73-LCN-02** | Un lot peut être masqué indépendamment de son animation. Un bon présent dans le navigateur et côté serveur forme un seul lot. Un coffret gagné disparaît à la fois de **Mes lots** et de la liste du carnet pour la même instance, y compris si elle est distribuée après le masquage. Une autre instance du même coffret reste distincte. Le badge **Mes lots** exclut les gains masqués et le réaffichage rend leur repère vu ou non vu. |
+| **E73-LCN-03** | **Retrouver mon carnet** propose **Éléments masqués sur cet appareil** et **Réafficher** pour chaque élément. Le geste rend l’élément éligible à l’affichage normal, sous les droits et états courants. Réouverture et actualisation conservent le masque. La preuve par e-mail, le lien personnel et l’import d’une sauvegarde retrouvent des accès indépendamment de leur visibilité locale. |
+| **E73-LCN-04** | Dans **Notifications**, **Supprimer** est une action distincte de lire et d’ouvrir. Après confirmation, l’entrée est absente de la liste, y compris avec filtre, et des compteurs du centre, de la cloche et des vignettes. Supprimer un avis de réponse conserve la réponse et le repère de lecture dans son fil personnel. Une réponse ultérieure garde son propre avis. La liste d’une autre installation conserve ses entrées. |
+| **E73-LCN-05** | Le retrait est autorisé pour une installation et une entrée précises. Il est confirmé une seule fois, même si la demande est répétée. Les lectures ultérieures et les réponses tardives respectent ce retrait. Avec un backend antérieur, Marketplace présente la boîte avec les actions disponibles. Les erreurs de stockage et de commande restent visibles et permettent une reprise. |
+
+**Carnet.** La préférence d’affichage appartient au navigateur et à son
+origine. IndexedDB conserve les clés typées, la correspondance du gain avec sa
+ressource exacte et le libellé utile au réaffichage. Les contrôles d’accès
+continuent à lire la bibliothèque. Le passeport personnel du coffret expose
+`gain_animation_id` après vérification du lien d’accès. Cette valeur désigne
+le gain de l’instance exacte ou vaut `null` pour un coffret sans gain associé.
+Le carnet peut ainsi appliquer le choix local dès l’ajout par lien, même si la
+liste des lots est encore en cours de lecture. La sauvegarde v1 conserve les accès et
+l’effacement global efface aussi les préférences de visibilité. Un état où tous
+les éléments sont masqués donne accès à la récupération et laisse atteindre la
+suite en cas de lecture partielle. Ce lot complète LS-08, LS-11 et LS-12, ainsi
+que CN-10 pour la distinction entre retrouver un accès et réafficher un objet.
+
+**Notifications.** `DELETE /public/localeo-live/installations/{installation_id}/messages/{nature}/{message_id}`
+utilise `X-Localeo-Live-Secret`, sans corps. `nature` vaut `NOTIFICATION`,
+`ORGANISATEUR` ou `CONVERSATION`. `204` confirme le retrait et sa répétition si
+la cible reste autorisée. `401` signale l’installation invalide, `404` une
+entrée absente ou hors accès. Le backend conserve une marque par installation
+et par source, éliminée lorsqu’une de ces références est purgée. La messagerie
+Live applique la visibilité aux lecteurs et compteurs avant pagination, sans
+modifier le reçu de lecture, le message source ou les bilans de diffusion. Une
+ancienne alerte communale qui ouvre l’entrée retirée affiche l’indisponibilité.
+Cette évolution complète LS-10 et le repère d’avis MH-06. Le fil personnel
+garde son propre état de lecture.
+
+**Présentation et reprise.** Appliquer LIVE-UX-02, LIVE-UX-05, LIVE-UX-07 et
+LIVE-UX-08. Après l’action confirmée, annoncer le résultat et rendre le focus
+à l’élément voisin, ou à un repère stable si la liste est vide. Garder la page
+et les filtres. Une commande incertaine permet une reprise explicite sur la
+même installation. Un refus de l’installation retire immédiatement les données
+privées affichées. Sans canal entre onglets, le retour au premier plan relit
+la première page avec les filtres courants. La suite est accessible par la
+pagination. La suppression confirmée dans l’onglet actif conserve les autres
+cartes et pages chargées.
+
+**Livraison.** Migration additive, puis backend, puis Marketplace. Le centre
+affiche **Supprimer** lorsque la configuration Live indique
+`capacites.suppression_notifications = 1`. La nouvelle table suit les tables
+Live dans le registre de démonstration. Aucun jeu de données supplémentaire
+n’est requis pour les parcours existants. Les gestes des guides Pro et Animation
+restent applicables : la préférence est celle de l’habitant, et les échanges,
+la remise des lots et les bilans de message des gestionnaires suivent leurs
+règles courantes. [Recette et preuves du lot](verification-livraison.md#carnet-et-notifications-live--26-novembre-2026).
+
 ## Évolution du 22 novembre 2026 — essais limités et étapes invalides
 
 Pour Juste Prix et Vitrines, les critères PE de suivi/parcours sont complétés par

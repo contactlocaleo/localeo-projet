@@ -1,5 +1,9 @@
 # Specifications Epic 42 - Localeo Live
 
+L’évolution [E73-EVO-LIVE-CARNET-NOTIFICATIONS](../epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#e73-evo-live-carnet-notifications)
+ajoute le masquage du carnet, le réaffichage depuis **Retrouver mon carnet** et
+le retrait d’une entrée des notifications sur l’installation courante.
+
 L'évolution [E73-EVO-MESSAGES-HABITANTS](../epic-73-animation-et-ou-coffrets/messages-habitants.md)
 du 15 novembre ajoute des conversations privées depuis la participation :
 motif/message, réponses et relances, indicateur non lu serveur. Accès personnel

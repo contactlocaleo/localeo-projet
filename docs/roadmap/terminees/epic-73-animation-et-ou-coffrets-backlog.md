@@ -1584,3 +1584,12 @@ et [preuves locales](../../specifications/epic-73-animation-et-ou-coffrets/verif
 éditions non archivées et permet de consulter les archives seules ou toutes les
 éditions. Les listes et leurs synthèses suivent le périmètre recherché.
 [Périmètre et critères SAA-01 à SAA-04](../../specifications/epic-73-animation-et-ou-coffrets/ux-productivite-organisateur.md#évolution-du-26-novembre-2026--filtre-des-animations-dans-suivre-lactivité).
+
+## Évolution du 26 novembre 2026 — carnet et notifications Live
+
+**E73-EVO-LIVE-CARNET-NOTIFICATIONS** permet à l’habitant de masquer puis
+réafficher une participation ou un lot dans Live, indépendamment de son accès
+personnel. Le centre permet de retirer une entrée sur l’installation courante.
+[Critères E73-LCN-01 à 05](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#e73-evo-live-carnet-notifications)
+et [preuves propres à l’évolution](../../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md#carnet-et-notifications-live--26-novembre-2026).
+La clôture historique d’E73 reste la référence pour la livraison initiale.

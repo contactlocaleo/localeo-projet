@@ -1,5 +1,10 @@
 # Roadmap par etat
 
+**26 novembre 2026 — E73-EVO-LIVE-CARNET-NOTIFICATIONS.** Les habitants peuvent
+masquer une animation ou un lot puis le réafficher à la demande. Ils peuvent
+supprimer une entrée lue ou non lue du centre de notifications sur leur appareil.
+[Critères et recette](../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#e73-evo-live-carnet-notifications).
+
 **26 novembre 2026 — E73-EVO-LIVE-ENSEIGNES-PEINTES.** Intégration dans Live des
 huit pictogrammes choisis pour la navigation, les commerces, les animations
 et les lots. [Décision et critères](../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#e73-evo-live-enseignes-peintes)

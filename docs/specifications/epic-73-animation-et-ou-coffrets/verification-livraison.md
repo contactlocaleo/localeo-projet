@@ -1,5 +1,60 @@
 # E73 — Vérification, migration et livraison
 
+## Carnet et notifications Live — 26 novembre 2026
+
+Évolution [E73-EVO-LIVE-CARNET-NOTIFICATIONS](localeo-live-entree-unique.md#e73-evo-live-carnet-notifications).
+
+| Critère | Comportement et propriétaire | Preuves attendues | Impacts |
+| --- | --- | --- | --- |
+| LCN-01 à LCN-03 | Préférence de visibilité du carnet dans Marketplace. Les états et capacités de participation, de bon et de coffret restent ceux des services existants. | Stockage durable, actions accessibles, reprise sans e-mail et sélection individuelle. Deux inscriptions à la même animation, lots courant et historique, bon local et distant et coffret lié après distribution. Liens directs, erreur de stockage et pagination après masquage. | IndexedDB et sauvegarde v1. Les accès exportés restent présents. Pas de données supplémentaires à générer. |
+| LCN-04 à LCN-05 | Visibilité de la boîte par installation dans le backend. La lecture du fil personnel conserve son repère propre. | Contrat HTTP, trois sources et deux installations, répétition, refus, purge, pagination et compteurs. Focus, actualisation avec filtre, réponse tardive et maintien de l’accès au fil. | Migration additive, présence dans le registre démo, contrats E41/E42 et consommateur Marketplace. Déploiement dans l’ordre décrit au [guide E73](../../exploitation/technique/configurer-epic-73.md#carnet-et-notifications-live). |
+
+Les guides Commerçant et Animation sont relus sur les gestes de remise des
+lots, de communication et de réponse aux habitants. Ils ne décrivent pas la
+gestion par l’habitant de son carnet ou de la cloche. La réponse reste visible
+dans sa participation et les compteurs de diffusion décrivent toujours les
+envois. Les sources et PDF applicatifs n’évoluent donc pas pour ce lot.
+
+### Résultats de vérification
+
+- Backend `94867b11` avec les changements de ce lot, Python 3.14 et dépendances
+  verrouillées. Le lanceur isolé confirme 153 tests sur les API, le registre
+  et la readiness (`.artifacts/lcn-20261126/api.xml`). Le contrôle suivant
+  confirme 804 tests sur le passeport, les contrats, la commande et
+  l’architecture (`.artifacts/lcn-20261126/api-passeport-architecture.xml`).
+- PostgreSQL 18 jetable, migration complète incluant `v338`. Les 53 tests
+  des retraits, des lectures du centre, des diffusions, des compteurs et des
+  récompenses passent (`.artifacts/lcn-20261126/postgres-final.xml`). Deux pages
+  utilisent 10 requêtes SQL à 100 comme à 1 000 notifications par installation,
+  moitié retirées. Les six plans de lecture par volume sont conservés dans
+  `.artifacts/live-retraits-*.json`. Les mesures concernent le scénario SQL local.
+- La restauration PostgreSQL du jeu de conversations conserve le retrait de
+  l’avis et les repères du fil. Restaurer le jeu initial rétablit une table
+  de retraits vide (`.artifacts/lcn-20261126/demo-messages-final.xml`). Les
+  clés étrangères des trois sources sont vérifiées en fin de transaction,
+  ce qui permet de conserver les liens pendant le chargement. Le passage
+  complet du runner avant cette correction a aussi relevé un refus de
+  validation dans le scénario Vitrines Pâques et trois tables de passkeys
+  Pro absentes du registre (`tmp/lcn-demo-20261126-a/results.xml`).
+- Marketplace `d65f626` avec les changements de ce lot. 33 tests Node
+  réussis sur IndexedDB, la sauvegarde, la récupération, les projections
+  du carnet et les messages. Le lint passe dans la copie isolée de recette.
+- Les 27 scénarios ciblés de Chromium passent sur les trois exécutions
+  `2026-11-26T20-18-38-998Z-8wVxvK`,
+  `2026-11-26T20-22-18-583Z-5KSkbs` et
+  `2026-11-26T20-25-38-308Z-HbEQaX`. Ils couvrent les bons numériques,
+  les inscriptions distinctes, le masquage et le réaffichage à 320, 390 et
+  1 280 px ainsi que les dix scénarios de suppression des notifications.
+  Les reprises à 320 et 390 px vérifient le focus, le compteur, l’instance
+  achetée du même catalogue et les liens restés valides. Le délai d’attente
+  des assertions a été ajusté dans les copies de recette pour le démarrage
+  local du navigateur. Rapports et captures dans
+  `test-results/e73-lcn-20261126/` de Marketplace.
+- Le test historique « filtrer les non-lus et une animation » échoue aussi
+  sur le commit Marketplace `d65f626` seul. L’assertion attend le lien Réglages
+  quand le filtre d’animation est sélectionné. Le code de base présente ce
+  lien dans la vue globale (rapport `2026-11-26T20-02-33-666Z-DhD8KK`).
+
 ## Pilotage unifié des animations — 22 novembre 2026
 
 Évolution **E73-EVO-DASHBOARD-PILOTAGE**, critères

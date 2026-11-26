@@ -1,5 +1,7 @@
 # Spécifications
 
+- **E73 — Carnet et notifications Live**, [critères LCN-01 à LCN-05](epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#e73-evo-live-carnet-notifications) et [recette](epic-73-animation-et-ou-coffrets/verification-livraison.md#carnet-et-notifications-live--26-novembre-2026). Masquage réversible des éléments du carnet et suppression d’une entrée de notifications sur l’installation courante.
+
 - **EPIC 85 — Parcours organisateur dans Localeo Animation**, En cours. Du choix du modèle à la publication, au suivi, à la clôture, au tirage applicable et aux remises. [Spécification, maquettes et recette par modèle](epic-85-parcours-organisateur/README.md)
 
 - **EPIC 83 — Clés d’accès dans Localeo Pro**, [spécification et preuves locales](epic-83-cles-acces-localeo-pro/README.md). Connexion WebAuthn et activation par environnement dans Localeo Ops.
