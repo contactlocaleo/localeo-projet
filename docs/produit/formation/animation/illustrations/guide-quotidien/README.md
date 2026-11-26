@@ -1,5 +1,19 @@
 # Captures du guide utilisateur Animation
 
+## Statut dans la liste Animations du 26 novembre 2026
+
+Le portail construit depuis la base `764b06c` avec le correctif local affiche le badge **En cours** avant les dates dans la [liste sur ordinateur](liste-animations-1024.png), dans la [liste sur téléphone](liste-animations-390.png) et à [l’arrivée dans la rubrique](accueil-animations-390.png). La recette utilise les données fictives de Valmont.
+
+Depuis le dépôt Animation, construire l’application et capturer la liste sur un port local éphémère.
+
+```powershell
+$env:ANIMATION_TEST_DIST = 'tmp/status-list/build'
+$env:ANIMATION_GUIDE_CAPTURE_ROOT = 'tmp/status-list/captures'
+$env:ANIMATION_GUIDE_ARTIFACTS = 'tmp/status-list/guide'
+node scripts/build-pwa-tests.mjs
+node tests/browser/animation-guide.mjs --only=liste-animations --captures-only
+```
+
 ## Repères de création, clôture et remise du 26 novembre 2026
 
 Le portail Animation est construit depuis la base `8d7e0e1` avec les corrections locales, sur des données fictives. [L’aide de l’étape Dotation](aide-dotation-1280.png) montre le modèle près du titre **Nouvelle animation** et l’encart **Pour continuer**. Dans [la fiche avant l’échéance](navigation-cloture-1024.png), **Clôture** donne directement accès à la revue. [La confirmation de remise](remise-1024.png) montre le motif, la date facultative et la confirmation de la remise au gagnant. Les captures de l’onglet **Gains et remises** s’arrêtent avant l’enregistrement.

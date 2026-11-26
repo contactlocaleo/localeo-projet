@@ -34,7 +34,7 @@ Dans **Rappels et autres alertes**, choisissez **Supprimer de mon tableau de bor
 
 ## 3 · Retrouver une animation et réutiliser ses filtres
 
-Dans **Animations**, recherchez le nom d’une édition. Sa ligne indique son statut, le motif d’une intervention éventuelle et la prochaine action disponible. Vous retrouvez le même statut en ouvrant la fiche.
+Dans **Animations**, recherchez le nom d’une édition. Repérez le badge **Statut**, par exemple **En cours**, avant la période. La ligne indique aussi la prochaine action et le motif d’une intervention éventuelle. Vous retrouvez le même statut en ouvrant la fiche.
 
 Au-dessus de la liste, **Préparations** ouvre vos travaux à reprendre et **Mes archives** ouvre les éditions archivées.
 
@@ -42,7 +42,7 @@ Au-dessus de la liste, **Préparations** ouvre vos travaux à reprendre et **Mes
 2. Ouvrez l’édition par son nom, ou choisissez sa prochaine action pour rejoindre le dossier concerné. **Retour aux animations** vous ramène à la même page avec vos critères.
 3. Pour retrouver une sélection habituelle, choisissez son nom dans **Vue**. **À traiter** affiche les animations qui demandent une intervention.
 
-![Utilisez la recherche et la vue, puis choisissez la prochaine action sur la ligne de l’animation.](illustrations/guide-quotidien/liste-animations-1024.png)
+![Le badge En cours apparaît avant les dates. La prochaine action permet d’ouvrir le dossier concerné.](illustrations/guide-quotidien/liste-animations-1024.png)
 
 ### Enregistrer une vue pour la prochaine fois
 
