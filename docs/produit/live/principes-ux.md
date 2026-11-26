@@ -381,8 +381,12 @@ la recherche et garder un partage public nommé. **Arbitrage du 18 novembre :**
 retirer l’ajout « Garder pour plus tard » ; les anciennes idées restent accessibles
 si elles existent, sans être assimilées à une inscription. Retirer les filtres
 internes du carnet, conserver les coffrets et les animations dans la même liste.
-L’état de l’animation se place en tête de vignette avec son pictogramme ; l’état
-personnel reste distinct. Les trois rubriques partagent leur ligne orange en tête, selon l’orientation du 21 novembre.
+L’état de l’animation se place en tête de vignette avec son pictogramme.
+Dans Découvrir, le badge « Animation en cours » utilise un fond ocre clair
+et le badge « Animation à venir » un fond bleu ardoise clair. La distinction
+s’appuie aussi sur les libellés et les pictogrammes. L’état personnel reste
+distinct. Les trois rubriques partagent leur ligne orange en tête, selon
+l’orientation du 21 novembre.
 Les [correctifs canoniques](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#correctifs-du-18-novembre-2026--carnet-découverte-et-notification)
 précisent les lectures et la composition des cartes selon les maquettes validées.
 
