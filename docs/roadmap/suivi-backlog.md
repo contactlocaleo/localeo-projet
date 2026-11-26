@@ -1,8 +1,10 @@
 # Suivi backlog
 
-**24 novembre 2026 — [EPIC 83, clés d’accès dans Localeo Pro](en-cours/epic-83-cles-acces-localeo-pro-backlog.md).** Critères CL-01 à CL-06. Parcours Pro et bascule Ops réalisés localement, recette sur appareils physiques et mise en service encore ouvertes.
+**25 novembre 2026 — EPIC 85, En cours.** Douze critères couvrent le parcours organisateur et sa recette sur les modèles implémentés. [Backlog et maquettes](en-cours/epic-85-parcours-organisateur-backlog.md)
 
 **24 novembre 2026 — EPIC 84, En cours.** [Adhérents hors commune dans Localeo Animation](en-cours/epic-84-adherents-hors-commune-animation-backlog.md). Le backlog porte les critères HC-01 à HC-09 et la recette du CEJ.
+
+**24 novembre 2026 — [EPIC 83, clés d’accès dans Localeo Pro](en-cours/epic-83-cles-acces-localeo-pro-backlog.md).** Critères CL-01 à CL-06. Parcours Pro et bascule Ops réalisés localement, recette sur appareils physiques et mise en service encore ouvertes.
 
 **24 novembre 2026 — [EPIC 82, scan QR depuis l’appareil photo avec Localeo Pro](a-faire/epic-82-scan-qr-externe-localeo-pro-backlog.md).** Critères E82-CA-01 à E82-CA-07. Ouverture directe après connexion éventuelle, confirmation explicite et non-régression de **Scanner**. État **À faire** selon la [roadmap commune](README.md).
 
@@ -31,8 +33,8 @@ Mise à jour du classement : 2026-11-16 — E78 en cours ; historique du 6 novem
 
 Évolution transverse du 29 septembre 2026 : [PWA-20260929 — installation et mise à jour](../specifications/installation-mise-a-jour-pwa.md), appliquée aux sept PWA existantes. Les états et clôtures historiques des EPIC restent inchangés ; preuves locales et recette appareil sont distinguées dans la spécification.
 
-- 86 identifiants EPIC suivis, dont 83 du tronc commun et 3 identifiants applicatifs distincts.
-- 9 EPIC à faire et 10 en cours.
+- 88 identifiants EPIC suivis, dont 85 du tronc commun et 3 identifiants applicatifs distincts.
+- 9 EPIC à faire et 12 en cours.
 - EPICs fusionnees : 1 (EPIC-61 vers EPIC-60).
 - EPICs terminees : 64 (62 du tronc commun et 2 applicatives) ; EPICs abandonnees : 2.
 - US / PRD detaillees dans le tableau historique : 415, jusqu'a `EPIC-45`.
@@ -40,7 +42,7 @@ Mise à jour du classement : 2026-11-16 — E78 en cours ; historique du 6 novem
 - Référence de pilotage · [EPIC à faire](a-faire/README.md), [EPIC en cours](en-cours/README.md) et [EPIC terminées](terminees/README.md).
 - Classement et motifs : [index de la roadmap](README.md).
 - Le tableau detaille des US ci-dessous reste un historique consolide. Pour les
-  epics 46 à 84, les backlogs dédiés portent le détail et le tableau `Sources
+  epics 46 à 85, les backlogs dédiés portent le détail et le tableau `Sources
   consolidees` porte l'etat global courant.
 
 ### Repartition des EPICs par etat retenu
@@ -48,7 +50,7 @@ Mise à jour du classement : 2026-11-16 — E78 en cours ; historique du 6 novem
 | Etat | Nombre |
 | --- | ---: |
 | A faire | 9 |
-| En cours | 10 |
+| En cours | 12 |
 | Abandonne | 2 |
 | Fusionnee | 1 |
 | Termine | 64 |
@@ -691,3 +693,4 @@ anciennes US restent historiques.
 | EPIC-82 | À faire | [Scan QR depuis l’appareil photo avec Localeo Pro](a-faire/epic-82-scan-qr-externe-localeo-pro-backlog.md) |
 | EPIC-83 | En cours | [Clés d’accès dans Localeo Pro](en-cours/epic-83-cles-acces-localeo-pro-backlog.md), critères CL-01 à CL-06. |
 | EPIC-84 | En cours | [Adhérents hors commune dans Localeo Animation](en-cours/epic-84-adherents-hors-commune-animation-backlog.md), critères HC-01 à HC-09. |
+| EPIC-85 | En cours | [Parcours organisateur et maquettes](en-cours/epic-85-parcours-organisateur-backlog.md), critères E85-CA-01 à E85-CA-12. |

@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Escape Game assisté par l’IA · Localeo Animation</title><link rel="stylesheet" href="interface.css"></head><body>
+<header><strong>Localeo <em>Animation</em></strong><span>Latresne</span><small>Maquette interactive</small></header>
+<main><noscript>Activez JavaScript pour parcourir cette maquette.</noscript></main>
+<script type="application/json" id="scenario">
+{
+  "id": "escape-game",
+  "name": "Escape Game assisté par l’IA",
+  "title": "Le secret de la place",
+  "dates": [
+    "2026-12-01",
+    "2026-12-14"
+  ],
+  "operation": "Transmettre le brief de l’Escape Game",
+  "intro": "Ce modèle en projet reprend la préparation accompagnée de la chasse. La progression se déroule sur un téléphone, seul ou en famille.",
+  "settings": [
+    [
+      "Lieux de l’exemple",
+      "Place du marché et librairie"
+    ],
+    [
+      "Support",
+      "Localeo Live sur un téléphone"
+    ],
+    [
+      "Scénario proposé",
+      "Le secret de la place · version 2"
+    ],
+    [
+      "Récompense, essais et incidents",
+      "Arbitrages ouverts dans E79"
+    ]
+  ],
+  "prep": [
+    {
+      "title": "Préparer et importer le scénario",
+      "context": "Le brief précise le thème, les lieux et le public. Le préparateur traite la proposition par la voie manuelle outillée et effectue l’import contrôlé.",
+      "action": "Consulter la proposition importée",
+      "result": "L’organisateur retrouve la version 2 du récit et l’énigme de la librairie."
+    },
+    {
+      "title": "Simuler les énigmes avant acceptation",
+      "context": "Le gestionnaire parcourt l’aperçu depuis la place du marché jusqu’à la finale du coffre virtuel.",
+      "action": "Accepter le scénario relu",
+      "result": "La finale est atteignable dans le scénario proposé. La réussite narrative reste indépendante d’une éventuelle récompense."
+    },
+    {
+      "title": "Vérifier les lieux et les consignes",
+      "context": "Le gestionnaire vérifie l’accès à la place et à la librairie, l’accord du commerce et les consignes qui accompagnent son énigme.",
+      "action": "Consulter les préparatifs du terrain",
+      "result": "Les deux lieux et le kit de la librairie sont prêts dans cette simulation de publication."
+    }
+  ],
+  "brief": "Préparer Le secret de la place, une mission jouable en famille sur un téléphone. Tester les énigmes, leurs dépendances et la finale.",
+  "assisted": true,
+  "prospect": true,
+  "cases": [
+    {
+      "phase": "Préparation",
+      "title": "Compléter le brief de la mission",
+      "context": "Le gestionnaire a choisi le thème et le public, mais l’accès à un lieu du scénario reste à préciser.",
+      "action": "Identifier les éléments manquants",
+      "result": "Le brouillon conserve le thème, le public et l’objectif. Le lieu et l’accord requis sont signalés pour compléter le brief avant sa préparation par Localeo."
+    },
+    {
+      "phase": "Préparation",
+      "title": "Revoir une finale inaccessible après import",
+      "context": "Le préparateur a importé une proposition issue du traitement manuel assisté par l’IA. Une énigme renvoie à un élément absent.",
+      "action": "Voir le contrôle de jouabilité",
+      "result": "Le contrôle localise le prérequis manquant. La version peut être corrigée puis contrôlée de nouveau. Accepter une version corrigée reste distinct de la publier."
+    },
+    {
+      "phase": "Publication",
+      "title": "Contrôler les changements et les préparatifs terrain",
+      "context": "Une énigme approuvée a été modifiée. Le kit public et les consignes privées de la librairie doivent correspondre à la version proposée.",
+      "action": "Examiner les éléments à revalider",
+      "result": "La revue localise les contenus modifiés, les accords et le contrôle du matériel. La simulation jusqu’à la finale précède la publication explicite de la version retenue."
+    },
+    {
+      "phase": "Suivi",
+      "title": "Retrouver la progression après interruption",
+      "context": "Une famille joue sur un seul téléphone. La réponse du réseau manque après la résolution d’une énigme.",
+      "action": "Lire la dernière progression confirmée",
+      "result": "La reprise retrouve les éléments déjà débloqués, les indices acquis et l’objectif courant. Une relecture ne crée pas un second fragment ou un essai supplémentaire."
+    },
+    {
+      "phase": "Suivi",
+      "title": "Identifier les règles d’aide et de passage à définir",
+      "context": "Le gestionnaire souhaite expliquer le nombre d’essais, l’accès aux indices et l’éventuelle preuve de passage à la librairie.",
+      "action": "Consulter les arbitrages du jeu",
+      "result": "Les formes d’énigmes, le parcours et les preuves relèvent d’E79-ARB-05. Les essais, le temps et les indices relèvent d’E79-ARB-06. L’exemple ne fixe aucune valeur pour la future édition."
+    },
+    {
+      "phase": "Suivi",
+      "title": "Documenter un lieu inaccessible pendant le jeu",
+      "context": "Une librairie du parcours est indisponible après publication. Le gestionnaire doit savoir quelle version et quelles parties sont concernées.",
+      "action": "Consulter la situation de l’incident",
+      "result": "Le constat reste rattaché au lieu et à la version jouée. E79-ARB-08 doit définir le traitement, l’information des joueurs et les conditions de reprise ou de nouvelle édition."
+    }
+  ],
+  "publish": {
+    "title": "Publier la mission préparée",
+    "lead": "Vérifiez la version, le matériel et les accords. Dans cette édition exploratoire, une personne ou une famille suit une même progression sur un téléphone avec Localeo Live.",
+    "columns": [
+      "Préparatif",
+      "Élément vérifié",
+      "État"
+    ],
+    "rows": [
+      [
+        "Scénario accepté",
+        "Version 2",
+        "Prêt"
+      ],
+      [
+        "Kit de la librairie",
+        "Consignes du commerce",
+        "Prêt"
+      ],
+      [
+        "Parcours dans la commune",
+        "Accès à la place et à la librairie",
+        "Vérifié"
+      ]
+    ],
+    "metrics": [
+      [
+        2,
+        "Lieux vérifiés"
+      ],
+      [
+        1,
+        "Commerce partenaire"
+      ]
+    ],
+    "action": "Confirmer la publication de la mission",
+    "effect": "La version 2 est figée pour la partie. Les joueurs peuvent ouvrir leur mission depuis Localeo Live.",
+    "next": "Suivre les parties"
+  },
+  "follow": {
+    "title": "Localiser les parties encore en cours",
+    "lead": "L’exemple utilise un parcours linéaire à deux énigmes. Les embranchements, les éventuelles preuves de passage, les essais et l’accès aux indices restent à arbitrer pour ce modèle.",
+    "columns": [
+      "Progression",
+      "Parties",
+      "Repère"
+    ],
+    "rows": [
+      [
+        "Sur la place",
+        "5",
+        "Première énigme"
+      ],
+      [
+        "À la librairie",
+        "6",
+        "Deuxième énigme"
+      ],
+      [
+        "Finale réussie",
+        "13",
+        "Coffre virtuel ouvert"
+      ]
+    ],
+    "metrics": [
+      [
+        24,
+        "Parties commencées"
+      ],
+      [
+        11,
+        "Parties en cours"
+      ]
+    ],
+    "action": "Examiner l’étape de la librairie",
+    "effect": "Six parties en sont à la librairie. Le gestionnaire peut vérifier la disponibilité du lieu. Le traitement d’un incident sur une édition publiée reste à définir dans E79.",
+    "next": "Examiner la fin de période"
+  },
+  "close": {
+    "title": "Relire les progressions en fin de période",
+    "lead": "La période est arrivée à son terme. Les compteurs portent sur des parties suivies sur un téléphone, y compris lorsqu’une famille a joué ensemble.",
+    "columns": [
+      "Situation",
+      "Parties",
+      "Lecture"
+    ],
+    "rows": [
+      [
+        "Finale réussie",
+        "13",
+        "Mission accomplie"
+      ],
+      [
+        "Partie inachevée",
+        "11",
+        "Finale à atteindre"
+      ],
+      [
+        "Total des parties commencées",
+        "24",
+        "Une progression par téléphone dans l’exemple"
+      ]
+    ],
+    "metrics": [
+      [
+        24,
+        "Parties commencées"
+      ],
+      [
+        13,
+        "Finales réussies"
+      ]
+    ],
+    "action": "Consulter le décompte de fin",
+    "effect": "À la fin de la période, treize finales sont réussies. Ces réussites restent des résultats de jeu.",
+    "next": "Voir le résultat de la mission"
+  },
+  "communication": "Dans Live, l’habitant retrouve sa mission et l’étape atteinte sur son téléphone.",
+  "prepPreview": {
+    "at": 1,
+    "columns": [
+      "Élément",
+      "Version proposée",
+      "Contrôle"
+    ],
+    "rows": [
+      [
+        "Brief et lieux autorisés",
+        "Place du marché et librairie",
+        "Vérifiés"
+      ],
+      [
+        "Énigme de la librairie",
+        "Version 2",
+        "Relue"
+      ],
+      [
+        "Finale du coffre virtuel",
+        "Version 2",
+        "Atteignable dans l’aperçu"
+      ]
+    ]
+  },
+  "finalAction": "Examiner la fin de la mission",
+  "finalQuestion": "Valider la revue des parties ?",
+  "finalButton": "Terminer la revue des parties",
+  "finalStatus": "Fin de période examinée",
+  "finalNote": "La revue conserve la progression des parties et les réussites narratives. Les effets métier de fin et de récompense relèvent des arbitrages E79."
+}
+</script>
+<script src="deroulement.js"></script>
+<script src="tirage.js"></script>
+<script src="interface.js"></script>
+</body></html>

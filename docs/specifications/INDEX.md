@@ -1,5 +1,7 @@
 # Spécifications
 
+- **EPIC 85 — Parcours organisateur dans Localeo Animation**, En cours. Du choix du modèle à la publication, au suivi, à la clôture, au tirage applicable et aux remises. [Spécification, maquettes et recette par modèle](epic-85-parcours-organisateur/README.md)
+
 - **EPIC 83 — Clés d’accès dans Localeo Pro**, [spécification et preuves locales](epic-83-cles-acces-localeo-pro/README.md). Connexion WebAuthn et activation par environnement dans Localeo Ops.
 
 - **EPIC 82 — Scan QR depuis l’appareil photo avec Localeo Pro**, [conception et recette](epic-82-scan-qr-externe-localeo-pro/README.md). Coffret, participant Animation et bon numérique, confirmation explicite et scanner historique préservé.
@@ -129,6 +131,7 @@ Commencer par le README du sujet, puis consulter ses règles, contrats et arbitr
 | 82 | [Scan QR depuis l’appareil photo avec Localeo Pro](epic-82-scan-qr-externe-localeo-pro/README.md) | À faire | Backend, Commerçant, Animation et Live pour les supports QR |
 | 83 | [Clés d’accès dans Localeo Pro](epic-83-cles-acces-localeo-pro/README.md) | En cours | Backend Identité et accès, Localeo Pro, Localeo Ops |
 | 84 | [Adhérents hors commune dans Localeo Animation](epic-84-adherents-hors-commune-animation/README.md) | En cours | Backend, Animation, Commerçant et Marketplace/Live |
+| 85 | [Parcours organisateur dans Localeo Animation](epic-85-parcours-organisateur/README.md) | En cours | Animation et backend ERP |
 
 ## Contrats et historique
 

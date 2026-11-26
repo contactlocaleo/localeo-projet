@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jeu des vitrines · Localeo Animation</title><link rel="stylesheet" href="interface.css"></head><body>
+<header><strong>Localeo <em>Animation</em></strong><span>Latresne</span><small>Maquette interactive</small></header>
+<main><noscript>Activez JavaScript pour parcourir cette maquette.</noscript></main>
+<script type="application/json" id="scenario">
+{
+  "id": "vitrines",
+  "name": "Jeu des vitrines",
+  "title": "Les intrus du centre-ville",
+  "dates": [
+    "2026-12-01",
+    "2026-12-14"
+  ],
+  "operation": "Créer le brouillon du jeu des vitrines",
+  "intro": "Quatre commerces installent chacun un intrus. Le gestionnaire approuve les défis et contrôle sur place leur installation.",
+  "settings": [
+    [
+      "Vitrines retenues",
+      "4"
+    ],
+    [
+      "Seuil",
+      "2 intrus trouvés dans 2 commerces distincts"
+    ],
+    [
+      "Passages",
+      "Requis chez chacun des deux commerces"
+    ],
+    [
+      "Contrôle matériel",
+      "Version approuvée sur place"
+    ]
+  ],
+  "prep": [
+    {
+      "title": "Recueillir les quatre accords",
+      "context": "La librairie, l’Atelier des fleurs, la Maison des thés et Optique du Centre reçoivent la mission de préparer leur vitrine.",
+      "action": "Vérifier les commerces engagés",
+      "result": "Les quatre commerces ont accepté leur mission de préparation."
+    },
+    {
+      "title": "Approuver les quatre défis",
+      "context": "Les commerçants proposent leur intrus, la question correspondante et les réponses. Le gestionnaire relit le contenu avant installation.",
+      "action": "Examiner les versions approuvées",
+      "result": "Chaque vitrine dispose d’un défi approuvé dont la solution reste privée."
+    },
+    {
+      "title": "Contrôler la dernière installation",
+      "context": "Les quatre commerces ont attesté l’installation. Trois vitrines ont été vérifiées sur place. La librairie est la dernière visite.",
+      "action": "Confirmer le contrôle de la librairie",
+      "result": "Le contrôle porte sur l’installation du défi approuvé. Les quatre vitrines sont prêtes pour publication."
+    }
+  ],
+  "assisted": false,
+  "prospect": false,
+  "cases": [
+    {
+      "phase": "Préparation",
+      "title": "Faire corriger la proposition d’une vitrine",
+      "context": "Après accord sur la mission, le préparateur enregistre l’intrus, l’emplacement, la consigne, le QCM et sa solution privée. L’organisateur lit la révision soumise.",
+      "action": "Demander une correction motivée",
+      "result": "Le motif est transmis au commerce concerné. Une nouvelle version devra être proposée et approuvée. Les droits du préparateur et de l’organisateur restent distincts."
+    },
+    {
+      "phase": "Publication",
+      "title": "Distinguer approbation, pose et contrôle",
+      "context": "Le défi de la librairie est approuvé. Le commerce atteste la pose. L’organisateur contrôle ensuite le dispositif réellement installé pour la version approuvée.",
+      "action": "Vérifier la version et l’installation",
+      "result": "Une nouvelle attestation de pose ou un changement de placement invalide le contrôle précédent. La publication reste bloquée tant que le contrôle requis de cette installation manque."
+    },
+    {
+      "phase": "Suivi",
+      "title": "Lire la qualification après une réponse erronée",
+      "context": "Le nombre de mauvaises réponses autorisées, entre 1 et 10, a été annoncé avant inscription. La bonne réponse clôt l’étape. La dernière réponse erronée l’invalide.",
+      "action": "Consulter la progression de la participation",
+      "result": "Un passage au même commerce ne transforme pas une erreur définitive en réussite. Le joueur peut atteindre le seuil avec les autres vitrines. Le serveur indique si cette qualification reste possible."
+    },
+    {
+      "phase": "Suivi",
+      "title": "Suspendre après le déplacement d’un intrus",
+      "context": "La librairie signale que l’intrus visible a été déplacé. Le gestionnaire consigne la vitrine touchée et le motif de suspension.",
+      "action": "Examiner le dossier de suspension",
+      "result": "La suspension bloque les nouvelles réponses et les validations de passage. Les acquis restent consultables. Si un autre incident est signalé, chacun des incidents bloquants exige son propre contrôle."
+    },
+    {
+      "phase": "Suivi",
+      "title": "Recontrôler puis reprendre pendant la période",
+      "context": "La librairie a rétabli le dispositif à l’identique. Un contrôle réalisé avant l’incident se trouve déjà dans l’historique.",
+      "action": "Vérifier les contrôles du cycle courant",
+      "result": "La reprise explicite exige un nouveau contrôle des vitrines affectées pour chaque incident bloquant de ce cycle. Le jeu peut reprendre dans la période avec la définition publiée et la progression conservée."
+    },
+    {
+      "phase": "Clôture",
+      "title": "Traiter un incident encore ouvert à l’échéance",
+      "context": "Dans cette variante, la période de jeu est terminée alors que l’édition est encore suspendue. La librairie ne peut plus rétablir le dispositif à temps.",
+      "action": "Examiner l’annulation de l’édition",
+      "result": "Le gestionnaire habilité peut annuler et préparer une nouvelle édition si nécessaire. La reprise et la clôture ordinaire sont indisponibles. Aucune réponse, chance ni preuve n’est transférée à l’édition suivante."
+    }
+  ],
+  "publish": {
+    "title": "Publier le jeu des vitrines",
+    "lead": "Les joueurs doivent trouver l’intrus dans deux vitrines. Cette édition demande aussi un passage validé chez chacun des deux commerçants.",
+    "columns": [
+      "Contrôle",
+      "Choix de l’édition",
+      "État"
+    ],
+    "rows": [
+      [
+        "Vitrines retenues",
+        "4 défis approuvés",
+        "Prêtes"
+      ],
+      [
+        "Contrôles terrain",
+        "4 installations vérifiées",
+        "À jour"
+      ],
+      [
+        "Seuil de qualification",
+        "2 commerces distincts",
+        "Vérifié"
+      ],
+      [
+        "Passages",
+        "Requis au même commerce",
+        "Règle affichée"
+      ]
+    ],
+    "metrics": [
+      [
+        4,
+        "Vitrines prêtes"
+      ],
+      [
+        2,
+        "Vitrines requises"
+      ],
+      [
+        1,
+        "Chance par qualifié"
+      ]
+    ],
+    "action": "Confirmer la publication du jeu",
+    "effect": "Le jeu est publié. Les questions sont accessibles aux joueurs. Les solutions du corrigé restent privées pendant le jeu.",
+    "next": "Suivre les vitrines"
+  },
+  "follow": {
+    "title": "Reprendre après un incident en vitrine",
+    "lead": "Le jeu a été suspendu après le déplacement de l’intrus à la librairie. Le dispositif a été rétabli à l’identique et un nouveau contrôle a été consigné pour cet incident. La période est encore ouverte.",
+    "columns": [
+      "Vitrine",
+      "Contrôle",
+      "Situation"
+    ],
+    "rows": [
+      [
+        "Librairie du Bourg",
+        "Revérifiée après incident",
+        "Dispositif rétabli"
+      ],
+      [
+        "Atelier des fleurs",
+        "Vérifiée",
+        "Aucun incident"
+      ],
+      [
+        "Maison des thés",
+        "Vérifiée",
+        "Aucun incident"
+      ],
+      [
+        "Optique du Centre",
+        "Vérifiée",
+        "Aucun incident"
+      ]
+    ],
+    "metrics": [
+      [
+        4,
+        "Vitrines"
+      ],
+      [
+        1,
+        "Incident contrôlé"
+      ],
+      [
+        0,
+        "Incident à contrôler"
+      ]
+    ],
+    "action": "Confirmer la reprise après contrôle",
+    "effect": "L’édition reprend avec les mêmes vitrines, réponses et règles. Les joueurs peuvent poursuivre avec leur progression conservée.",
+    "next": "Examiner la clôture"
+  },
+  "close": {
+    "title": "Clôturer le jeu des vitrines",
+    "lead": "La période s’est achevée après la reprise. Deux intrus trouvés avec passage validé au même commerce qualifient le joueur pour le tirage.",
+    "columns": [
+      "Situation finale",
+      "Participants",
+      "Décision"
+    ],
+    "rows": [
+      [
+        "Seuil et passages atteints",
+        "16",
+        "Éligibles"
+      ],
+      [
+        "Intrus trouvés, passages manquants",
+        "3",
+        "Hors tirage"
+      ],
+      [
+        "Seuil de réussites non atteint",
+        "9",
+        "Hors tirage"
+      ],
+      [
+        "Aucune réponse",
+        "2",
+        "Hors tirage"
+      ]
+    ],
+    "metrics": [
+      [
+        30,
+        "Inscrits"
+      ],
+      [
+        16,
+        "Éligibles"
+      ],
+      [
+        14,
+        "Hors tirage"
+      ]
+    ],
+    "action": "Confirmer la clôture du jeu",
+    "effect": "Les qualifications sont figées pour les 16 joueurs. Le corrigé des vitrines devient consultable par les participants autorisés.",
+    "next": "Ouvrir le tirage"
+  },
+  "communication": "Les joueurs consultent les questions. Les solutions restent privées pendant le jeu.",
+  "prepPreview": {
+    "at": 2,
+    "columns": [
+      "Vitrine",
+      "Installation",
+      "Contrôle terrain"
+    ],
+    "rows": [
+      [
+        "Librairie du Bourg",
+        "Attestée",
+        "À confirmer"
+      ],
+      [
+        "Atelier des fleurs",
+        "Attestée",
+        "Vérifiée"
+      ],
+      [
+        "Maison des thés",
+        "Attestée",
+        "Vérifiée"
+      ],
+      [
+        "Optique du Centre",
+        "Attestée",
+        "Vérifiée"
+      ]
+    ]
+  }
+}
+</script>
+<script src="deroulement.js"></script>
+<script src="tirage.js"></script>
+<script src="interface.js"></script>
+</body></html>

@@ -1,0 +1,644 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Parcours des animations · Maquette Localeo Animation</title>
+  <style>body { margin: 0; }</style>
+</head>
+<body>
+<div id="localeo-parcours" lang="fr">
+  <header class="bar"><strong>Localeo <em>Animation</em></strong><span>Latresne</span><small>Maquette interactive</small></header>
+  <main class="content"></main>
+  <div class="sr" role="status" aria-live="polite"></div>
+</div>
+<style>
+#localeo-parcours{--bleu:#0b314d;--navy:#103f60;--orange:#a94d0b;--paper:#fff;--sand:#f6f5f1;--line:#d9e1e5;--muted:#4e6574;background:var(--sand);color:var(--bleu);font:14px/1.5 system-ui,"Segoe UI",sans-serif;container-type:inline-size;border:1px solid #d3dadc;border-radius:10px;overflow:hidden;color-scheme:light}
+#localeo-parcours *{box-sizing:border-box}#localeo-parcours [hidden]{display:none!important}
+#localeo-parcours :is(button,input,select){font:inherit;color:inherit}#localeo-parcours button{cursor:pointer}#localeo-parcours button:disabled{cursor:default;opacity:.5}
+#localeo-parcours :is(button,input,select):focus-visible,#localeo-parcours [tabindex="-1"]:focus-visible{outline:3px solid #cf6822;outline-offset:2px}
+#localeo-parcours .bar{display:flex;gap:18px;align-items:center;color:white;background:#092b43;padding:13px clamp(14px,3vw,35px)}
+#localeo-parcours .bar strong{font-size:20px;letter-spacing:-.6px}#localeo-parcours .bar em{font-style:normal;color:#ffae65}#localeo-parcours .bar span{font-size:13px;border-left:1px solid #74909c;padding-left:18px}#localeo-parcours .bar small{margin-left:auto;color:#e7eff2}
+#localeo-parcours .content{padding:clamp(14px,2.5vw,32px);min-width:0}
+#localeo-parcours :is(h1,h2,h3,p){margin:0;color:inherit}#localeo-parcours h1{font-size:clamp(23px,3vw,34px);letter-spacing:-.8px;line-height:1.17}
+#localeo-parcours h2{font-size:21px;line-height:1.26;letter-spacing:-.3px}#localeo-parcours .sub{margin-top:5px;color:var(--muted)}
+#localeo-parcours .group{margin-top:22px}#localeo-parcours .group h2{font-size:16px;margin-bottom:8px}
+#localeo-parcours .catalog{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:9px;overflow:hidden}
+#localeo-parcours .model{display:grid;grid-template-columns:1fr auto;align-items:center;gap:4px 16px;padding:15px 18px;border:0;text-align:left;background:white;color:var(--bleu)}
+#localeo-parcours .model:hover{background:#fdf5eb}#localeo-parcours .model:focus-visible{outline-offset:-3px}
+#localeo-parcours .model b{font-size:16px}#localeo-parcours .model small{color:var(--muted);font-size:13px;grid-column:1}#localeo-parcours .arrow{grid-column:2;grid-row:1/3;font-size:20px;color:var(--orange)}
+#localeo-parcours .crumbs{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-bottom:12px;color:var(--muted);font-size:13px}#localeo-parcours .textbutton{border:0;background:transparent;color:var(--navy);padding:4px 0;text-decoration:underline;text-underline-offset:3px}
+#localeo-parcours .frame{background:white;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+#localeo-parcours .steps{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));padding:0;border-bottom:1px solid var(--line);background:#fafbf9}
+#localeo-parcours .step{background:transparent;border:0;border-bottom:3px solid transparent;display:flex;gap:6px;justify-content:center;align-items:center;padding:15px 2px;color:var(--muted);font-size:13px}
+#localeo-parcours .step span{display:grid;place-items:center;border:1px solid #9baeb7;border-radius:100%;height:21px;min-width:21px;font-size:12px}
+#localeo-parcours .step[aria-current]{background:#fcf1e6;border-color:var(--orange);font-weight:700;color:#823b0a}#localeo-parcours .step[aria-current] span{background:#994509;border-color:#994509;color:white}
+#localeo-parcours .step:focus-visible{outline-offset:-4px}#localeo-parcours .name{margin:0 0 17px}
+#localeo-parcours .inner{padding:clamp(14px,2vw,25px)}#localeo-parcours .phase{color:var(--orange);font-size:12px;font-weight:650;margin-bottom:5px}
+#localeo-parcours .brief{max-width:85ch;margin-top:6px;color:var(--muted)}
+#localeo-parcours .metrics{display:flex;flex-wrap:wrap;gap:12px 0;margin:18px 0;padding:13px 0;border-block:1px solid var(--line)}
+#localeo-parcours .measure{padding:0 20px;border-right:1px solid var(--line);min-width:110px}#localeo-parcours .measure:first-child{padding-left:0}#localeo-parcours .measure:last-child{border-right:0}
+#localeo-parcours .measure b{display:block;font-size:22px;line-height:1.2;font-variant-numeric:tabular-nums}#localeo-parcours .measure small{color:var(--muted);font-size:12px}
+#localeo-parcours .tools,#localeo-parcours .controls{display:flex;align-items:end;flex-wrap:wrap;gap:10px}#localeo-parcours .tools{margin-bottom:12px}
+#localeo-parcours .tools label{display:grid;gap:3px;font-size:12px;font-weight:620}#localeo-parcours .tools :is(select,input){height:36px;padding:5px 8px;background:white;border:1px solid #9fb0bc;border-radius:5px;max-width:100%}
+#localeo-parcours .grid{width:100%;border-collapse:collapse;text-align:left}#localeo-parcours .grid :is(th,td){padding:10px;border-bottom:1px solid var(--line);overflow-wrap:anywhere}#localeo-parcours .grid th{background:#edf2f4;font-size:12px}#localeo-parcours .grid td{font-size:13px}#localeo-parcours .grid td:first-child{font-weight:600}
+#localeo-parcours .pager{display:flex;gap:7px;flex-wrap:wrap;align-items:center;color:var(--muted);font-size:12px;margin:10px 0}#localeo-parcours .count{margin-right:auto}
+#localeo-parcours .btn{border:1px solid #b5c3ca;border-radius:6px;padding:8px 12px;background:white;font-weight:600}
+#localeo-parcours .btn:hover:enabled{background:#f1f5f7}#localeo-parcours .primary{background:var(--navy);border-color:var(--navy);color:white}#localeo-parcours .primary:hover:enabled{background:var(--bleu)}
+#localeo-parcours .controls{margin-top:18px;align-items:center}#localeo-parcours .receipt{padding:14px 16px;margin-top:16px;border-left:3px solid #2d7263;background:#edf7f2}
+#localeo-parcours .check{padding:14px 16px;background:#fff6e9;border-left:3px solid var(--orange);margin-top:16px}#localeo-parcours .check p{margin:3px 0 9px;color:var(--muted)}
+#localeo-parcours .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}#localeo-parcours .empty{padding:14px;background:#f7f9fa}#localeo-parcours .compact{font-size:12px}
+@container(max-width:700px){#localeo-parcours .steps{grid-template-columns:repeat(3,minmax(0,1fr))}#localeo-parcours .step{padding:9px 2px}#localeo-parcours .catalog{grid-template-columns:1fr}}
+@container(max-width:500px){#localeo-parcours .bar{gap:9px;padding:10px 12px}#localeo-parcours .bar span{padding-left:9px}#localeo-parcours .bar small{font-size:10px}#localeo-parcours .step{min-height:44px;font-size:12px;gap:3px}#localeo-parcours .inner{padding:12px}#localeo-parcours .measure{min-width:0;padding:0 8px;flex:1}#localeo-parcours .measure b{font-size:18px}#localeo-parcours .measure small{font-size:11px}#localeo-parcours :is(.btn,.tools select,.tools input,.textbutton){min-height:44px}#localeo-parcours .grid thead{position:absolute;clip-path:inset(50%);width:1px;height:1px;overflow:hidden}#localeo-parcours .grid,#localeo-parcours .grid tbody,#localeo-parcours .grid tr{display:block}#localeo-parcours .grid tr{padding:8px 0;border-bottom:1px solid var(--line)}#localeo-parcours .grid td{display:grid;grid-template-columns:minmax(64px,34%) 1fr;gap:10px;border:0;padding:3px 0}#localeo-parcours .grid td:before{content:attr(data-col);color:var(--muted);font-weight:400;font-size:12px}#localeo-parcours .pager .count{width:100%}#localeo-parcours .tools label{width:100%}#localeo-parcours .controls .btn{width:100%;text-align:center}}
+</style>
+<script>
+(()=>{
+const participation = [
+  {
+    id: "passeport", name: "Passeport commerçant", title: "Le passeport des bonnes adresses",
+    steps: [
+      {
+        title: "Régler le seuil du passeport",
+        lead: "Cette édition propose une visite sans achat, dans l’ordre choisi par chaque habitant. Trois commerces distincts sur quatre suffisent pour obtenir une chance.",
+        columns: ["Commerce", "Accord sur les conditions", "Validation sur place"],
+        rows: [["Librairie du Bourg", "Accepté", "QR participant"], ["Les Halles", "Accepté", "QR participant"], ["Atelier des Saveurs", "Accepté", "QR participant"], ["Maison du pain", "Accepté", "QR participant"]],
+        metrics: [[4, "Commerces engagés"], [3, "Tampons requis"]],
+        action: "Enregistrer le seuil de 3 tampons", effect: "Le passeport demandera un tampon dans trois des quatre commerces. La visite sans achat figure dans les consignes de l’édition.", next: "Vérifier la publication"
+      },
+      {
+        title: "Publier le passeport",
+        lead: "La fiche Live présente les quatre adresses, le seuil de trois tampons et la visite sans achat. Les lots seront remis en mairie.",
+        columns: ["Élément à publier", "Valeur retenue", "Contrôle"],
+        rows: [["Communes et dates", "Latresne · 1 au 14 décembre", "Vérifié"], ["Parcours libre", "3 commerces distincts sur 4", "Atteignable"], ["Conditions de visite", "Sans achat", "Accords reçus"], ["Dotation", "2 paniers du marché", "Modalités de remise renseignées"]],
+        metrics: [[4, "Accords reçus"], [2, "Paniers prévus"]],
+        action: "Confirmer la publication du passeport", effect: "Le passeport est publié. La fiche Live et le QR de diffusion sont disponibles pour les quatre commerces.", next: "Suivre les passages"
+      },
+      {
+        title: "Suivre les tampons par participant",
+        lead: "Un commerce peut compter une seule fois pour un même passeport. Les personnes à deux tampons sont à une visite de la qualification.",
+        columns: ["Participant · extrait", "Commerces distincts", "Progression"],
+        rows: [["Camille Martin", "3 sur 4", "Qualifiée"], ["Jules Leroy", "2 sur 4", "En progression"], ["Inès Robin", "4 sur 4", "Qualifiée"], ["Noé Petit", "0 sur 4", "Aucun passage"], ["Zoé Vidal", "2 sur 4", "En progression"], ["Léon Rey", "1 sur 4", "En progression"]],
+        metrics: [[20, "Inscrits"], [8, "Qualifiés"], [4, "À un tampon du seuil"]],
+        action: "Voir les passages de Jules Leroy", effect: "Jules a obtenu ses tampons aux Halles et à la Maison du pain. Une visite validée à la Librairie du Bourg ou à l’Atelier des Saveurs complétera son passeport.", next: "Examiner la clôture"
+      },
+      {
+        title: "Clôturer les passages du passeport",
+        lead: "À la confirmation, les inscriptions et les validations seront fermées. Les huit passeports ayant atteint le seuil formeront la population du tirage.",
+        columns: ["Passeports", "Nombre", "Au tirage"],
+        rows: [["Seuil atteint", "8", "Une chance chacun"], ["Un ou deux tampons", "10", "Hors tirage"], ["Aucun passage", "2", "Hors tirage"]],
+        metrics: [[20, "Inscrits"], [8, "Éligibles"], [2, "Paniers à attribuer"]],
+        action: "Confirmer la clôture du passeport", effect: "Les passages sont fermés. La liste des huit participants éligibles est figée pour le tirage.", next: "Préparer le tirage"
+      },
+      {
+        title: "Tirer les deux paniers du marché",
+        lead: "Deux lots libres, un panier maximum par gagnant. Les huit passeports qualifiés ont chacun la même chance.",
+        columns: ["Lot", "Remise", "État avant tirage"],
+        rows: [["Panier du marché · 1", "Accueil de la mairie", "À attribuer"], ["Panier du marché · 2", "Accueil de la mairie", "À attribuer"]],
+        metrics: [[8, "Participants éligibles"], [2, "Lots libres"]],
+        action: "Confirmer le tirage des deux paniers", effect: "Camille Martin et Inès Robin gagnent chacune un panier. Les deux dossiers de remise sont ouverts.", next: "Voir le bilan après les remises"
+      },
+      {
+        title: "Lire le bilan du passeport",
+        lead: "Après le retrait des deux paniers, le gestionnaire a terminé l’édition. Le bilan conserve la répartition des passeports selon leur avancement.",
+        columns: ["Indicateur", "Résultat", "Lecture"],
+        rows: [["Passeports inscrits", "20", "Toute l’édition"], ["Seuil atteint", "8 sur 20", "40 % des inscrits"], ["Passeports en progression", "10", "Un ou deux tampons"], ["Paniers remis", "2 sur 2", "Retraits constatés"]],
+        metrics: [[20, "Inscrits"], [8, "Passeports qualifiés"], [2, "Paniers remis"]],
+        action: "Consulter le détail des remises", effect: "Les dossiers de Camille Martin et d’Inès Robin indiquent chacun un panier remis en mairie.", next: "Revoir la préparation"
+      }
+    ]
+  },
+  {
+    id: "tombola-locale", name: "Tombola locale", title: "La tombola des commerces",
+    steps: [
+      {
+        title: "Préparer les commerces de la tombola",
+        lead: "Le premier achat confirmé par un commerce participant qualifie l’habitant. Aucun montant minimum. Le personnel valide le passage avec le QR du participant.",
+        columns: ["Commerce", "Accord", "Consigne de caisse"],
+        rows: [["Épicerie du Pont", "Accepté", "Disponible"], ["Librairie du Bourg", "Accepté", "Disponible"], ["Maison du pain", "Accepté", "Disponible"], ["Atelier du Marché", "Accepté", "Disponible"]],
+        metrics: [[4, "Commerces engagés"], [1, "Achat requis"]],
+        action: "Consulter la consigne de caisse", effect: "Après l’achat, le commerce valide le QR de l’habitant. Le premier achat confirmé donne une chance. Les autres passages restent visibles dans le suivi.", next: "Contrôler la publication"
+      },
+      {
+        title: "Publier la tombola des commerces",
+        lead: "L’édition présente ses dates, ses quatre commerces et deux Coffrets réservés. La fiche publique explique la règle d’une chance par participant.",
+        columns: ["Contrôle", "Valeur", "État"],
+        rows: [["Dates", "1 au 14 décembre", "Vérifié"], ["Accords", "4 commerces sur 4", "Complet"], ["Dotation", "2 Coffrets découverte", "Réservés"], ["Règlement", "Achat confirmé sans minimum", "Prêt"]],
+        metrics: [[4, "Accords reçus"], [2, "Coffrets réservés"]],
+        action: "Confirmer la publication de la tombola", effect: "La tombola est publiée. Ses supports de diffusion permettent aux habitants de s’inscrire et de présenter leur QR lors d’un achat.", next: "Suivre les achats confirmés"
+      },
+      {
+        title: "Distinguer achats et chances au tirage",
+        lead: "Les commerces ont confirmé 27 passages. Ils correspondent à 18 personnes qualifiées. Chaque personne conserve une seule chance.",
+        columns: ["Participant · extrait", "Achats validés", "Chance au tirage"],
+        rows: [["Nina Robert", "3 commerces", "1 chance"], ["Paul David", "1 commerce", "1 chance"], ["Lina Aubert", "2 commerces", "1 chance"], ["Adam Garnier", "Aucun", "En attente d’un achat"], ["Louise Giraud", "1 commerce", "1 chance"], ["Eli Moreau", "Aucun", "En attente d’un achat"]],
+        metrics: [[32, "Inscrits"], [27, "Achats validés"], [18, "Qualifiés"]],
+        action: "Consulter les validations de Nina Robert", effect: "Épicerie du Pont, Librairie du Bourg, puis Maison du pain. Nina a été qualifiée dès son premier achat.", next: "Vérifier les éligibles"
+      },
+      {
+        title: "Clôturer les validations en commerce",
+        lead: "Les 18 participants ayant au moins un achat confirmé pourront participer. La clôture arrête toute nouvelle inscription et validation.",
+        columns: ["Population", "Personnes", "Situation"],
+        rows: [["Avec achat confirmé", "18", "Une chance chacun"], ["Inscrits sans achat confirmé", "14", "Hors tirage"]],
+        metrics: [[32, "Inscrits"], [18, "Éligibles"], [2, "Coffrets réservés"]],
+        action: "Confirmer la clôture des validations", effect: "Les 18 éligibles sont figés. Les commerces ne peuvent plus valider d’achat pour cette édition.", next: "Préparer le tirage Coffrets"
+      },
+      {
+        title: "Attribuer les deux Coffrets réservés",
+        lead: "Le tirage utilise la liste figée à la clôture. Deux personnes distinctes recevront chacune un Coffret découverte.",
+        columns: ["Coffret", "Quantité", "État avant tirage"],
+        rows: [["Découverte · exemplaire 1", "1", "Réservé pour l’édition"], ["Découverte · exemplaire 2", "1", "Réservé pour l’édition"]],
+        metrics: [[18, "Éligibles"], [2, "Coffrets à gagner"]],
+        action: "Confirmer le tirage des Coffrets", effect: "Le tirage désigne Nina Robert et Paul David. Le suivi des Coffrets permet ensuite de consulter la distribution de leurs gains.", next: "Voir le bilan de l’édition terminée"
+      },
+      {
+        title: "Lire le bilan de la tombola locale",
+        lead: "Les deux dossiers de gain sont résolus et le gestionnaire a terminé l’édition. Le bilan rapproche activité des commerces et qualification.",
+        columns: ["Indicateur", "Total", "Périmètre"],
+        rows: [["Inscriptions", "32", "Habitants inscrits"], ["Achats confirmés", "27", "Passages enregistrés"], ["Personnes qualifiées", "18", "Au moins un achat"], ["Coffrets attribués", "2", "Deux bénéficiaires"]],
+        metrics: [[4, "Commerces participants"], [27, "Achats confirmés"], [2, "Gagnants"]],
+        action: "Consulter la répartition par commerce", effect: "Épicerie du Pont · 9 achats. Librairie du Bourg · 8. Maison du pain · 6. Atelier du Marché · 4.", next: "Revoir la préparation"
+      }
+    ]
+  },
+  {
+    id: "tombola-publique", name: "Tombola publique", title: "Le rendez-vous du marché",
+    steps: [
+      {
+        title: "Préparer l’inscription sur le marché",
+        lead: "Deux accès existent. Cette édition utilise le QR sur place et le code du jour. Le mode standard permet aussi l’inscription directe depuis la fiche Live.",
+        columns: ["Élément", "Choix de l’édition", "Usage"],
+        rows: [["Accès", "Sur place", "QR de diffusion et code du jour"], ["Formulaire", "Identité et coordonnées", "Accepter le règlement"], ["Dotation", "2 bons numériques", "Retrait à l’Épicerie du Pont"], ["Flyer", "QR d’inscription", "Code du jour affiché séparément"]],
+        metrics: [[1, "Lieu de diffusion"], [2, "Bons prévus"]],
+        action: "Vérifier le parcours d’inscription", effect: "La fiche Agenda présente l’animation. Le QR de diffusion ouvre le formulaire avec le champ code du jour. Le code change à minuit, heure de Paris.", next: "Vérifier le flyer et publier"
+      },
+      {
+        title: "Publier le QR du marché",
+        lead: "Le flyer peut rester affiché pendant l’édition. À côté du QR, l’équipe du marché affiche séparément le code valable aujourd’hui.",
+        columns: ["Support", "Contenu", "Vérification"],
+        rows: [["Flyer imprimé", "QR de diffusion", "Formulaire accessible"], ["Panneau au stand", "Code du jour", "Affichage prévu"], ["Fiche Agenda", "Présentation et dates", "Accès sur place indiqué"], ["Règlement", "Une chance par adresse e-mail", "Disponible à l’inscription"]],
+        metrics: [[1, "Flyer prêt"], [2, "Bons numériques"]],
+        action: "Confirmer la publication de la tombola", effect: "La fiche est publiée. Le gestionnaire peut afficher le QR et le code du jour sur le stand du marché.", next: "Consulter les inscriptions"
+      },
+      {
+        title: "Suivre les inscriptions directes",
+        lead: "Un formulaire validé donne immédiatement une chance par adresse e-mail. Les trois anciennes demandes encore en attente restent identifiables.",
+        columns: ["Participant · extrait", "Inscription", "Situation"],
+        rows: [["Alice Durand", "Formulaire validé", "Qualifiée"], ["Tom Mercier", "Formulaire validé", "Qualifié"], ["Lou Morel", "Ancienne demande", "En attente"], ["Eva Faure", "Formulaire validé", "Qualifiée"], ["Gabriel Leclerc", "Formulaire validé", "Qualifié"], ["Maël Girard", "Ancienne demande", "En attente"]],
+        metrics: [[24, "Inscriptions"], [21, "Qualifiées"], [3, "En attente"]],
+        action: "Examiner la demande de Lou Morel", effect: "Lou a une ancienne demande en attente. Une inscription explicite pendant la période ouverte peut la compléter. Le gestionnaire ne peut pas qualifier cette adresse manuellement.", next: "Préparer la clôture"
+      },
+      {
+        title: "Fermer le formulaire et figer les inscriptions",
+        lead: "Seules les 21 inscriptions qualifiées auront une chance au tirage. Les trois anciennes demandes en attente resteront hors de la liste figée.",
+        columns: ["Groupe", "Personnes", "À la clôture"],
+        rows: [["Inscriptions qualifiées", "21", "Incluses dans le tirage"], ["Anciennes demandes en attente", "3", "Hors tirage"]],
+        metrics: [[24, "Inscriptions"], [21, "Éligibles"], [2, "Bons à attribuer"]],
+        action: "Confirmer la clôture des inscriptions", effect: "Le formulaire est fermé. La population de 21 participants est figée et le tirage peut être préparé.", next: "Préparer le tirage des bons"
+      },
+      {
+        title: "Tirer les deux bons du marché",
+        lead: "Chaque bon permet un retrait à l’Épicerie du Pont. Le passage chez ce commerce intervient après le gain.",
+        columns: ["Bon numérique", "Retrait", "État avant tirage"],
+        rows: [["Panier de saison · bon 1", "Épicerie du Pont", "À attribuer"], ["Panier de saison · bon 2", "Épicerie du Pont", "À attribuer"]],
+        metrics: [[21, "Participants éligibles"], [2, "Bons numériques"]],
+        action: "Confirmer le tirage des deux bons", effect: "Alice Durand et Tom Mercier gagnent chacun un bon. Leur QR personnel de retrait est disponible dans Mes lots.", next: "Voir le bilan après les retraits"
+      },
+      {
+        title: "Lire le bilan de la tombola publique",
+        lead: "Le commerce a enregistré les deux retraits, puis le gestionnaire a terminé l’édition. Les gagnants sont compris dans les 21 qualifiés.",
+        columns: ["Indicateur", "Total", "Ce qui est compté"],
+        rows: [["Inscriptions", "24", "21 qualifiées et 3 anciennes en attente"], ["Qualifiés", "21", "Une chance par adresse"], ["Gagnants", "2", "Parmi les 21 qualifiés"], ["Bons retirés", "2 sur 2", "Retraits enregistrés par le commerce"]],
+        metrics: [[24, "Inscriptions"], [2, "Gagnants"], [2, "Retraits enregistrés"]],
+        action: "Consulter les retraits des bons", effect: "Les bons d’Alice Durand et de Tom Mercier ont chacun un retrait enregistré à l’Épicerie du Pont.", next: "Revoir la préparation"
+      }
+    ]
+  }
+];
+
+const terrain = [
+  {
+    id: 'chasse', name: 'Chasse au trésor commerçante', title: 'Halloween à Latresne · Les préparatifs de la lanterne',
+    steps: [
+      {
+        title: 'Préparer le support du château',
+        lead: 'Les trois commerces ont accepté leur mission et installent leurs propres supports. L’organisateur prépare les QR des lieux publics, dont celui du château de la Salargue.',
+        columns: ['Lieu', 'Mission retenue', 'Préparation'],
+        rows: [['Lisons sous la pluie', 'Les pages du conte', 'Accord confirmé'], ['Mirga', 'Le festin des fantômes', 'Accord confirmé'], ['Mode de Biche', 'La silhouette de Prune', 'Accord confirmé'], ['Château de la Salargue', 'Le mot de la lanterne', 'Support à préparer']],
+        metrics: [[3, 'Commerces engagés'], [3, 'Missions acceptées'], [2, 'Lieux publics']],
+        action: 'Préparer le QR du château', effect: 'Le support du château est prêt dans cette simulation. Son QR sera actif à la publication. L’organisateur peut ouvrir la revue de publication indépendamment de cette préparation.', next: 'Vérifier la publication'
+      },
+      {
+        title: 'Publier le parcours vérifié',
+        lead: 'Relisez le circuit dans son ordre de jeu. Chaque commerce accueille le joueur pour une mission et valide son passage.',
+        columns: ['Contrôle', 'Valeur retenue', 'État'],
+        rows: [['Commerces engagés', '3 sur 3 requis', 'Seuil atteint'], ['Invitations', '3 réponses reçues', 'Traitées'], ['Parcours', 'Récit, défis et finale', 'Relu'], ['Revue de publication', 'Contrôles de l’édition', 'Publication autorisée']],
+        metrics: [[6, 'Positions du récit'], [3, 'Commerces retenus'], [0, 'Invitation en attente']],
+        action: 'Confirmer la publication de la chasse', effect: 'La chasse est publiée. Les joueurs découvrent les lieux à mesure qu’ils avancent dans le récit.', next: 'Suivre les parcours'
+      },
+      {
+        title: 'Repérer les passages à régulariser',
+        lead: 'Une joueuse a terminé le récit, mais un passage a été annulé. Consultez le dossier pour savoir quelle preuve manque.',
+        columns: ['Joueur', 'Progression narrative', 'Qualification'],
+        rows: [['Ana Roy', 'Finale terminée', 'Passage à régulariser'], ['Jules Blanc', 'Finale terminée', 'Qualifié'], ['Mila Vidal', 'Chez Mirga', 'En cours'], ['Noé Lamy', 'Finale terminée', 'Qualifié']],
+        metrics: [[24, 'Joueurs inscrits'], [15, 'Récits terminés'], [14, 'Joueurs qualifiés']],
+        action: 'Consulter le passage d’Ana Roy', effect: 'Chez Mirga, le défi est réussi et le passage a été annulé. Une attestation valide pendant la période de jeu permet de régulariser le dossier.', next: 'Examiner la clôture'
+      },
+      {
+        title: 'Clôturer la chasse',
+        lead: 'La période de jeu est terminée. Une chance revient à chaque joueur ayant terminé les étapes requises avec toutes les preuves attendues.',
+        columns: ['Situation finale', 'Joueurs', 'Décision'],
+        rows: [['Parcours et preuves complets', '14', 'Éligibles'], ['Parcours terminé, preuve absente', '1', 'Hors tirage'], ['Parcours en cours', '7', 'Hors tirage'], ['Parcours non commencé', '2', 'Hors tirage']],
+        metrics: [[24, 'Inscrits'], [14, 'Éligibles'], [10, 'Hors tirage']],
+        action: 'Confirmer la clôture de la chasse', effect: 'La clôture est confirmée. Les 14 joueurs éligibles composent la liste définitive du tirage.', next: 'Ouvrir le tirage'
+      },
+      {
+        title: 'Tirer les lots de la chasse',
+        lead: 'La liste des 14 joueurs est figée. Quatre lots externes sont disponibles. Cette édition limite les gains à un lot par joueur.',
+        columns: ['Lot', 'Quantité', 'Remise prévue'],
+        rows: [['Le livre des contes', '1', 'À la librairie'], ['Panier des saveurs', '1', 'Chez Mirga'], ['Écharpe d’automne', '1', 'Chez Mode de Biche'], ['Lanterne décorative', '1', 'À la mairie']],
+        metrics: [[14, 'Joueurs éligibles'], [4, 'Lots disponibles'], [1, 'Chance par joueur']],
+        action: 'Confirmer le tirage des quatre lots', effect: 'Quatre joueurs distincts ont été tirés au sort. Les attributions sont enregistrées et les lots sont à remettre.', next: 'Lire le bilan de la chasse'
+      },
+      {
+        title: 'Lire le bilan de la chasse',
+        lead: 'Lisez ensemble la progression dans le récit, les preuves de passage et les gains. Une finale terminée peut encore comporter un passage manquant.',
+        columns: ['Indicateur', 'Résultat', 'Périmètre'],
+        rows: [['Récits terminés', '15', '24 inscrits'], ['Toutes preuves réunies', '14', '15 récits terminés'], ['Gagnants', '4', '14 joueurs éligibles'], ['Lots remis', '4', '4 lots attribués']],
+        metrics: [[24, 'Inscrits'], [14, 'Qualifiés'], [4, 'Gagnants']],
+        action: 'Consulter les remises enregistrées', effect: 'Les trois commerces ont remis chacun un lot. La mairie a enregistré la remise de la lanterne. Les quatre dossiers sont résolus.', next: 'Revoir la préparation'
+      }
+    ]
+  },
+  {
+    id: 'prix', name: 'Juste Prix Local', title: 'Le juste prix des artisans',
+    steps: [
+      {
+        title: 'Examiner le dernier produit proposé',
+        lead: 'L’épicerie propose un pot de miel de 250 g à 8,50 €. Le prix de référence et la présentation du produit sont consultables par l’organisation.',
+        columns: ['Produit', 'Commerce', 'Proposition'],
+        rows: [['Miel de fleurs · 250 g', 'Épicerie du Pont', 'À accepter'], ['Tasse en grès · pièce', 'Atelier Argile', 'Acceptée'], ['Pain de campagne · 500 g', 'Fournil du Bourg', 'Acceptée'], ['Bougie ambrée · 120 g', 'Maison Cire', 'Acceptée']],
+        metrics: [[4, 'Commerces engagés'], [3, 'Produits acceptés'], [1, 'Proposition à examiner']],
+        action: 'Accepter le pot de miel proposé', effect: 'La proposition de l’épicerie est acceptée pour cette édition. Les quatre produits sont prêts pour la revue de publication.', next: 'Vérifier les règles de jeu'
+      },
+      {
+        title: 'Publier les règles du Juste Prix',
+        lead: 'Pour cette édition, deux produits trouvés dans deux commerces différents donnent une chance au tirage. Le passage doit être validé dans chacun de ces commerces.',
+        columns: ['Réglage', 'Choix de l’édition', 'Affichage joueur'],
+        rows: [['Produits', '4 références acceptées', 'Désignation et unité'], ['Tolérance', '0,50 € autour du prix', 'Annoncée avant inscription'], ['Qualification', '2 commerces sur 4', 'Progression sur 2'], ['Passage en boutique', 'Requis au même commerce', 'Indiqué dans la règle']],
+        metrics: [[4, 'Produits prêts'], [2, 'Commerces requis'], [1, 'Chance par qualifié']],
+        action: 'Confirmer la publication du Juste Prix', effect: 'Le jeu est publié. Les joueurs voient les produits et les règles. Les prix de référence restent privés pendant le jeu.', next: 'Suivre les estimations'
+      },
+      {
+        title: 'Suivre les estimations et les passages',
+        lead: 'Une estimation dans la tolérance compte lorsque le passage correspondant est validé. Le détail indique au gestionnaire ce qui manque au joueur.',
+        columns: ['Participant', 'Commerces comptabilisés', 'Situation'],
+        rows: [['Lina Roux', '1 sur 2', 'Passage manquant'], ['Marc Noël', '2 sur 2', 'Qualifié'], ['Éva Faure', '0 sur 2', 'En cours'], ['Nils Adam', '3 pour un seuil de 2', 'Qualifié']],
+        metrics: [[28, 'Participants inscrits'], [64, 'Estimations enregistrées'], [12, 'Qualifiés']],
+        action: 'Consulter la progression de Lina Roux', effect: 'Lina a trouvé deux prix. Son passage au Fournil est validé et son passage à l’épicerie reste à valider pendant la période de jeu.', next: 'Examiner la clôture'
+      },
+      {
+        title: 'Clôturer les estimations',
+        lead: 'La période est terminée. Vérifiez le décompte avant de figer les qualifications et de rendre le corrigé accessible aux participants autorisés.',
+        columns: ['Situation finale', 'Participants', 'Accès au tirage'],
+        rows: [['Seuil et passages validés', '12', 'Une chance chacun'], ['Seuil possible, passage manquant', '4', 'Hors tirage'], ['Réussites insuffisantes', '10', 'Hors tirage'], ['Aucune estimation', '2', 'Hors tirage']],
+        metrics: [[28, 'Inscrits'], [12, 'Éligibles'], [16, 'Hors tirage']],
+        action: 'Confirmer la clôture du Juste Prix', effect: 'Les 12 qualifications sont figées. Les participants autorisés peuvent consulter les prix exacts des quatre produits dans Live.', next: 'Ouvrir le tirage'
+      },
+      {
+        title: 'Tirer les lots entre les qualifiés',
+        lead: 'Les douze qualifiés participent à chances égales. Les écarts de prix ont servi à vérifier la tolérance. Le tirage décide des gains.',
+        columns: ['Lot', 'Quantité', 'Remise prévue'],
+        rows: [['Coffret de miel', '1', 'Épicerie du Pont'], ['Duo de tasses', '1', 'Atelier Argile'], ['Panier du boulanger', '1', 'Fournil du Bourg'], ['Bougie de saison', '1', 'Maison Cire']],
+        metrics: [[12, 'Qualifiés'], [4, 'Lots disponibles'], [1, 'Chance par qualifié']],
+        action: 'Confirmer le tirage des quatre lots', effect: 'Quatre lots sont attribués à quatre gagnants. Les gains sont consultables dans leur carnet, rubrique Mes lots.', next: 'Lire le bilan du Juste Prix'
+      },
+      {
+        title: 'Lire le bilan des estimations',
+        lead: 'Le bilan montre combien d’estimations ont été enregistrées et combien de joueurs ont atteint le seuil avec les passages requis.',
+        columns: ['Mesure', 'Résultat', 'Périmètre'],
+        rows: [['Estimations enregistrées', '64', '4 produits'], ['Estimations dans la tolérance', '36', '64 estimations'], ['Participants qualifiés', '12', '28 inscrits'], ['Lots attribués', '4', '4 lots proposés']],
+        metrics: [[64, 'Estimations'], [36, 'Prix trouvés'], [4, 'Gagnants']],
+        action: 'Consulter le corrigé de l’édition', effect: 'Miel de fleurs 8,50 € · Tasse en grès 14,00 € · Pain de campagne 4,20 € · Bougie ambrée 11,00 €. Ces références sont celles de l’édition clôturée.', next: 'Revoir la préparation'
+      }
+    ]
+  },
+  {
+    id: 'vitrines', name: 'Jeu des vitrines', title: 'Les intrus du centre-ville',
+    steps: [
+      {
+        title: 'Contrôler la dernière installation',
+        lead: 'La librairie a installé l’intrus approuvé. Sur place, vérifiez son emplacement, sa visibilité et sa correspondance avec le défi validé.',
+        columns: ['Vitrine', 'Installation', 'Contrôle terrain'],
+        rows: [['Librairie du Bourg', 'Attestée', 'À confirmer'], ['Atelier des fleurs', 'Attestée', 'Vérifiée'], ['Maison des thés', 'Attestée', 'Vérifiée'], ['Optique du Centre', 'Attestée', 'Vérifiée']],
+        metrics: [[4, 'Défis approuvés'], [4, 'Installations attestées'], [1, 'Contrôle à effectuer']],
+        action: 'Confirmer le contrôle de la librairie', effect: 'L’installation de la librairie est vérifiée pour la version approuvée du défi. Les quatre vitrines sont prêtes.', next: 'Vérifier la publication'
+      },
+      {
+        title: 'Publier le jeu des vitrines',
+        lead: 'Les joueurs doivent trouver l’intrus dans deux vitrines. Cette édition demande aussi un passage validé chez chacun des deux commerçants.',
+        columns: ['Contrôle', 'Choix de l’édition', 'État'],
+        rows: [['Vitrines retenues', '4 défis approuvés', 'Prêtes'], ['Contrôles terrain', '4 installations vérifiées', 'À jour'], ['Seuil de qualification', '2 commerces distincts', 'Vérifié'], ['Passages', 'Requis au même commerce', 'Règle affichée']],
+        metrics: [[4, 'Vitrines prêtes'], [2, 'Vitrines requises'], [1, 'Chance par qualifié']],
+        action: 'Confirmer la publication du jeu', effect: 'Le jeu est publié. Les questions sont accessibles aux joueurs. Les solutions du corrigé restent privées pendant le jeu.', next: 'Suivre les vitrines'
+      },
+      {
+        title: 'Reprendre après un incident en vitrine',
+        lead: 'Le jeu a été suspendu après le déplacement de l’intrus à la librairie. Le dispositif a été rétabli à l’identique et un nouveau contrôle a été consigné pour cet incident. La période est encore ouverte.',
+        columns: ['Vitrine', 'Contrôle', 'Situation'],
+        rows: [['Librairie du Bourg', 'Revérifiée après incident', 'Dispositif rétabli'], ['Atelier des fleurs', 'Vérifiée', 'Aucun incident'], ['Maison des thés', 'Vérifiée', 'Aucun incident'], ['Optique du Centre', 'Vérifiée', 'Aucun incident']],
+        metrics: [[4, 'Vitrines'], [1, 'Incident contrôlé'], [0, 'Incident à contrôler']],
+        action: 'Confirmer la reprise du jeu', effect: 'L’édition reprend avec les mêmes vitrines, réponses et règles. Les joueurs peuvent poursuivre avec leur progression conservée.', next: 'Examiner la clôture'
+      },
+      {
+        title: 'Clôturer le jeu des vitrines',
+        lead: 'La période s’est achevée après la reprise. Deux intrus trouvés avec passage validé au même commerce qualifient le joueur pour le tirage.',
+        columns: ['Situation finale', 'Participants', 'Décision'],
+        rows: [['Seuil et passages atteints', '16', 'Éligibles'], ['Intrus trouvés, passages manquants', '3', 'Hors tirage'], ['Seuil de réussites non atteint', '9', 'Hors tirage'], ['Aucune réponse', '2', 'Hors tirage']],
+        metrics: [[30, 'Inscrits'], [16, 'Éligibles'], [14, 'Hors tirage']],
+        action: 'Confirmer la clôture du jeu', effect: 'Les qualifications sont figées pour les 16 joueurs. Le corrigé des vitrines devient consultable par les participants autorisés.', next: 'Ouvrir le tirage'
+      },
+      {
+        title: 'Attribuer les lots du jeu des vitrines',
+        lead: 'Seize joueurs ont atteint le seuil. Chacun dispose d’une chance, quel que soit le nombre de vitrines réussies au-delà du seuil.',
+        columns: ['Lot', 'Quantité', 'Retrait'],
+        rows: [['Roman illustré', '1', 'Librairie du Bourg'], ['Bouquet de saison', '1', 'Atelier des fleurs'], ['Assortiment de thés', '1', 'Maison des thés'], ['Étui à lunettes', '1', 'Optique du Centre']],
+        metrics: [[16, 'Joueurs éligibles'], [4, 'Lots disponibles'], [1, 'Chance par joueur']],
+        action: 'Confirmer le tirage des quatre lots', effect: 'Le tirage est confirmé. Les quatre gagnants disposent chacun d’une attribution et d’un lieu de retrait.', next: 'Lire le bilan des vitrines'
+      },
+      {
+        title: 'Lire le bilan des vitrines',
+        lead: 'Comparez les réponses enregistrées aux intrus trouvés. La qualification tient également compte des passages en boutique.',
+        columns: ['Vitrine', 'Réponses enregistrées', 'Intrus trouvés'],
+        rows: [['Librairie du Bourg', '23', '17'], ['Atelier des fleurs', '21', '15'], ['Maison des thés', '18', '12'], ['Optique du Centre', '16', '10']],
+        metrics: [[54, 'Intrus trouvés'], [16, 'Joueurs qualifiés'], [4, 'Gagnants']],
+        action: 'Consulter les chiffres de participation', effect: '30 personnes inscrites, 28 ont répondu et 16 ont atteint le seuil avec les passages requis. Quatre lots ont été attribués.', next: 'Revoir la préparation'
+      }
+    ]
+  }
+];
+
+const futurs = [
+  {
+    id: 'escape-game', name: 'Escape Game assisté par l’IA', title: 'Le secret de la place',
+    steps: [
+      {
+        title: 'Relire la mission avant son essai sur le terrain',
+        lead: 'Le préparateur a importé et contrôlé la proposition issue du brief. L’aperçu permet de parcourir les énigmes jusqu’à la finale avant d’accepter cette version.',
+        columns: ['Élément', 'Version proposée', 'Contrôle'],
+        rows: [['Brief et lieux autorisés', 'Place du marché et librairie', 'Vérifiés'], ['Énigme de la librairie', 'Version 2', 'Relue'], ['Finale du coffre virtuel', 'Version 2', 'Atteignable dans l’aperçu']],
+        metrics: [[2, 'Lieux du scénario'], [1, 'Version à accepter']],
+        action: 'Accepter la version 2', effect: 'La version 2 est acceptée dans cet exemple. Le gestionnaire doit encore contrôler la préparation sur place et publier.',
+        next: 'Vérifier la publication'
+      },
+      {
+        title: 'Publier la mission préparée',
+        lead: 'Vérifiez la version, le matériel et les accords. Dans cette édition exploratoire, une personne ou une famille suit une même progression sur un téléphone avec Localeo Live.',
+        columns: ['Préparatif', 'Élément vérifié', 'État'],
+        rows: [['Scénario accepté', 'Version 2', 'Prêt'], ['Kit de la librairie', 'Consignes du commerce', 'Prêt'], ['Parcours dans la commune', 'Accès à la place et à la librairie', 'Vérifié']],
+        metrics: [[2, 'Lieux vérifiés'], [1, 'Commerce partenaire']],
+        action: 'Confirmer la publication de la mission', effect: 'La version 2 est figée pour la partie. Les joueurs peuvent ouvrir leur mission depuis Localeo Live.',
+        next: 'Suivre les parties'
+      },
+      {
+        title: 'Localiser les parties encore en cours',
+        lead: 'L’exemple utilise un parcours linéaire à deux énigmes. Les embranchements, les éventuelles preuves de passage, les essais et l’accès aux indices restent à arbitrer pour ce modèle.',
+        columns: ['Progression', 'Parties', 'Repère'],
+        rows: [['Sur la place', '5', 'Première énigme'], ['À la librairie', '6', 'Deuxième énigme'], ['Finale réussie', '13', 'Coffre virtuel ouvert']],
+        metrics: [[24, 'Parties commencées'], [11, 'Parties en cours']],
+        action: 'Examiner l’étape de la librairie', effect: 'Six parties en sont à la librairie. Le gestionnaire peut vérifier la disponibilité du lieu. Le traitement d’un incident sur une édition publiée reste à définir dans E79.',
+        next: 'Examiner la fin de période'
+      },
+      {
+        title: 'Relire les progressions en fin de période',
+        lead: 'La période est arrivée à son terme. Les compteurs portent sur des parties suivies sur un téléphone, y compris lorsqu’une famille a joué ensemble.',
+        columns: ['Situation', 'Parties', 'Lecture'],
+        rows: [['Finale réussie', '13', 'Mission accomplie'], ['Partie inachevée', '11', 'Finale à atteindre'], ['Total des parties commencées', '24', 'Une progression par téléphone dans l’exemple']],
+        metrics: [[24, 'Parties commencées'], [13, 'Finales réussies']],
+        action: 'Consulter le décompte de fin', effect: 'À la fin de la période, treize finales sont réussies. Ces réussites restent des résultats de jeu.',
+        next: 'Voir le résultat de la mission'
+      },
+      {
+        title: 'Consulter les réussites de la mission',
+        lead: 'Le coffre ouvert marque la réussite narrative. La formule commerciale, une éventuelle qualification au tirage et les récompenses restent à décider dans E79.',
+        columns: ['Résultat', 'Valeur', 'Interprétation'],
+        rows: [['Coffres virtuels ouverts', '13', 'Finales réussies'], ['Parties inachevées', '11', 'Progression partielle'], ['Dotation de cet exemple', 'Aucune', 'Réussite narrative seule']],
+        metrics: [[13, 'Missions réussies'], [0, 'Lot dans cet exemple']],
+        action: 'Lire le résultat de la finale', effect: 'Le résultat joué est « Mission accomplie ». Aucune attribution de lot n’est simulée dans cette version du scénario.',
+        next: 'Consulter le bilan du jeu'
+      },
+      {
+        title: 'Lire le bilan de la mission',
+        lead: 'Comparez les parties commencées, les passages d’une énigme à la suivante et les réussites finales pour préparer une prochaine édition.',
+        columns: ['Repère', 'Parties', 'Progression'],
+        rows: [['Début du jeu', '24', 'Mission commencée'], ['Énigme de la librairie atteinte', '19', 'Deuxième lieu'], ['Coffre virtuel ouvert', '13', 'Mission réussie']],
+        metrics: [[24, 'Parties commencées'], [13, 'Finales réussies']],
+        action: 'Examiner la progression entre les lieux', effect: 'Dix-neuf parties ont atteint la librairie. Treize ont résolu la finale. Le gestionnaire peut comparer ces deux étapes lors de la prochaine préparation.',
+        next: 'Revoir la préparation'
+      }
+    ]
+  },
+  {
+    id: 'mots-croises', name: 'Mots croisés assistés par IA', title: 'Les mots du quartier',
+    steps: [
+      {
+        title: 'Relire la grille proposée', lead: 'Localeo a préparé la grille à partir du brief. Relisez les définitions et leur répartition avant de donner votre accord sur cette version.',
+        columns: ['Élément à relire', 'Repère', 'État'],
+        rows: [['Module Mots croisés', 'Droit de publication', 'Disponible'], ['Demande transmise à Localeo', 'Thème et difficulté', 'Proposition reçue'], ['Grille proposée', 'Version 2 · 12 mots', 'À relire'], ['Fiches des commerces', 'Définitions sur place', 'Version 2']],
+        metrics: [[12, 'Mots proposés'], [3, 'Commerces concernés']], action: 'Accepter la grille version 2', effect: 'Grille version 2 approuvée. Les préparatifs des commerces seront contrôlés sur cette version.', next: 'Vérifier la publication'
+      },
+      {
+        title: 'Vérifier la publication de la grille', lead: 'La grille, les accords et les fiches des commerces doivent correspondre à la même version. La confirmation engage le droit de publication affiché.',
+        columns: ['Contrôle', 'Détail', 'État'],
+        rows: [['Grille', 'Version 2', 'Approuvée'], ['Supports des commerces', '3 fiches de définitions', 'Prêtes'], ['Dotation et dates', 'Lot et période vérifiés', 'Conformes'], ['Module Mots croisés', '1 publication', 'Disponible']],
+        metrics: [[3, 'Commerces prêts'], [1, 'Publication à consommer']], action: 'Confirmer la publication', effect: 'Publication simulée et droit de publication consommé une fois. Le lien Live et son QR sont disponibles.', next: 'Ouvrir le suivi'
+      },
+      {
+        title: 'Suivre les grilles et les visites', lead: 'Une grille correcte et les passages requis ouvrent une chance au tirage. Une grille remplie peut encore être incorrecte.',
+        columns: ['Participation', 'Grille', 'Commerces visités'],
+        rows: [['Camille M.', 'Correcte', '3 sur 3 · Qualifiée'], ['Léa B.', 'Correcte', '2 sur 3 · En cours'], ['Paul D.', 'À corriger', '3 sur 3 · En cours']],
+        metrics: [[28, 'Inscrits'], [16, 'Grilles correctes'], [12, 'Qualifiés']], action: 'Consulter le dossier de Léa', effect: 'Léa a validé sa grille. Son dernier passage attesté suffira pour la qualifier, sans nouvelle vérification de la grille.', next: 'Examiner la clôture'
+      },
+      {
+        title: 'Clôturer la grille', lead: 'À la clôture, seules les qualifications acquises avant la fermeture entrent dans le tirage.',
+        columns: ['État au terme du jeu', 'Personnes', 'Conséquence'],
+        rows: [['Grille correcte et visites complètes', '12', 'Éligibles'], ['Grille correcte, visites incomplètes', '4', 'Hors tirage'], ['Grille non validée correcte', '12', 'Hors tirage']],
+        metrics: [[28, 'Inscrits'], [12, 'Éligibles']], action: 'Confirmer la clôture de la grille', effect: 'Population figée à 12 personnes. Les réponses et les passages enregistrés restent consultables selon les droits.', next: 'Consulter le tirage'
+      },
+      {
+        title: 'Tirer le lot parmi les qualifiés', lead: 'La même liste figée sert à vérifier le nombre de personnes éligibles et à confirmer le tirage du lot.',
+        columns: ['Élément', 'Valeur', 'État'],
+        rows: [['Population', '12 personnes', 'Figée'], ['Dotation', 'Panier du quartier', 'À attribuer'], ['Tirage', '1 attribution', 'Prêt']],
+        metrics: [[12, 'Personnes éligibles'], [1, 'Lot à attribuer']], action: 'Confirmer le tirage du panier', effect: 'Attribution confirmée dans la simulation. Le panier du quartier rejoint les lots à remettre.', next: 'Lire le bilan'
+      },
+      {
+        title: 'Lire le bilan des mots croisés', lead: 'Comparez les grilles correctes, les passages complets et les qualifications pour comprendre où les joueurs se sont arrêtés.',
+        columns: ['Indicateur', 'Personnes', 'Lecture'],
+        rows: [['Inscriptions', '28', 'Participants uniques'], ['Grille correcte', '16', 'Vérification réussie'], ['Qualification', '12', 'Grille et visites complètes']],
+        metrics: [[28, 'Inscrits'], [12, 'Qualifiés'], [1, 'Lot attribué']], action: 'Examiner l’écart de qualification', effect: 'Quatre personnes ont validé leur grille sans terminer les visites requises.', next: 'Revoir la préparation'
+      }
+    ]
+  },
+  {
+    id: 'avent', name: 'Calendrier de l’Avent local', title: 'Les fenêtres du centre-ville',
+    steps: [
+      {
+        title: 'Préparer les cases du calendrier', lead: 'Une seule édition réunit les journées. Cet extrait illustre trois cases. La durée, les conditions de participation et la limite de gains restent à arbitrer.',
+        columns: ['Case', 'Commerce du jour', 'Dotation'],
+        rows: [['4 décembre', 'Librairie du Bourg', 'Coffret Lecture'], ['5 décembre', 'Atelier des Saveurs', 'Coffret Gourmand'], ['6 décembre', 'Épicerie du Pont', 'À vérifier']],
+        metrics: [[3, 'Cases dans cet extrait'], [1, 'Dotation à vérifier']], action: 'Vérifier la case du 6 décembre', effect: 'Le coffret Découverte de l’épicerie a été vérifié dans cet exemple.', next: 'Examiner la publication'
+      },
+      {
+        title: 'Vérifier le calendrier avant publication', lead: 'Le gestionnaire publie le calendrier depuis une seule fiche. Il peut identifier la journée concernée lorsqu’un commerce, un contenu ou une dotation manque.',
+        columns: ['Case contrôlée', 'Commerce et contenu', 'Coffret'],
+        rows: [['4 décembre', 'Prêts', 'Réservé'], ['5 décembre', 'Prêts', 'Réservé'], ['6 décembre', 'Prêts', 'Réservé']],
+        metrics: [[3, 'Cases de l’extrait contrôlées'], [0, 'Blocage dans cet exemple']], action: 'Confirmer la publication du calendrier', effect: 'Calendrier publié dans la simulation. Les ouvertures et les résultats se suivent ensuite case par case.', next: 'Voir les journées'
+      },
+      {
+        title: 'Suivre la journée en cours', lead: 'Le 5 décembre, le gestionnaire suit la case ouverte pendant que le résultat de la veille et les cases à venir restent visibles.',
+        columns: ['Case', 'État', 'Suivi'],
+        rows: [['4 décembre · Librairie', 'Tirée', 'Coffret envoyé'], ['5 décembre · Atelier', 'Ouverte', '34 participations'], ['6 décembre · Épicerie', 'Programmée', 'Ouverture à venir']],
+        metrics: [[1, 'Case ouverte'], [34, 'Participations du jour']], action: 'Consulter la case du 5 décembre', effect: 'Atelier des Saveurs · 34 participations rattachées à cette journée · Coffret Gourmand réservé.', next: 'Voir la clôture du jour'
+      },
+      {
+        title: 'Vérifier la clôture du 5 décembre', lead: 'Chaque journée fige sa propre population. La case suivante conserve sa période et sa dotation.',
+        columns: ['Case', 'Population', 'État'],
+        rows: [['4 décembre', '29 participations', 'Tirage terminé'], ['5 décembre', '34 participations', 'Clôturée'], ['6 décembre', 'À constituer', 'Programmée']],
+        metrics: [[34, 'Participations figées le 5'], [1, 'Tirage du jour à suivre']], action: 'Vérifier la population du 5 décembre', effect: 'La population consultée concerne uniquement le 5 décembre. La clôture de cette case laisse le calendrier ouvert.', next: 'Voir le résultat quotidien'
+      },
+      {
+        title: 'Consulter le résultat de la case', lead: 'Chaque attribution reste attachée à sa journée. La fréquence des traitements et les modalités de reprise figurent parmi les arbitrages du modèle.',
+        columns: ['Case', 'Lot', 'État de distribution'],
+        rows: [['4 décembre', 'Coffret Lecture', 'Envoyé'], ['5 décembre', 'Coffret Gourmand', 'Attribué · Envoi à suivre'], ['6 décembre', 'Coffret Découverte', 'À venir']],
+        metrics: [[1, 'Coffret attribué le 5'], [1, 'Envoi à suivre']], action: 'Consulter l’attribution du 5 décembre', effect: 'Tirage du 5 décembre confirmé. Le Coffret Gourmand est attribué et son envoi reste à suivre.', next: 'Comparer les journées'
+      },
+      {
+        title: 'Comparer les journées du calendrier', lead: 'Le bilan global additionne les participations quotidiennes. Une personne peut participer à plusieurs journées.',
+        columns: ['Case terminée', 'Participations', 'Coffrets envoyés'],
+        rows: [['4 décembre · Librairie', '29', '1'], ['5 décembre · Atelier', '34', '1'], ['6 décembre · Épicerie', '27', '1']],
+        metrics: [[90, 'Participations sur les trois cases'], [3, 'Coffrets envoyés']], action: 'Consulter le bilan du 5 décembre', effect: 'Atelier des Saveurs · 34 participations et un coffret envoyé. Les autres journées restent accessibles dans le même calendrier.', next: 'Revoir la préparation'
+      }
+    ]
+  }
+];
+
+const root=document.getElementById('localeo-parcours');
+const main=root.querySelector('main');
+const status=root.querySelector('[role=status]');
+const models=[...participation,...terrain,...futurs];
+const stages=['Préparation','Publication','Suivi','Clôture','Tirage','Bilan'];
+const standard=m=>!futurs.includes(m);
+const commands=[
+  null,
+  ['Publier l’animation','La fiche et les supports de cette édition seront publiés.'],
+  null,
+  ['Clôturer l’animation','Les inscriptions et les validations seront fermées. La population éligible sera figée.'],
+  ['Préparer le tirage','Le tirage attribuera les lots de cette édition aux participants de la liste figée.'],
+  null
+];
+for(const m of models){
+  m.steps.forEach((s,i)=>{
+    const command=commands[i];
+    if(command && s.action.startsWith('Confirmer')){
+      s.confirmLabel=s.action;
+      [s.action,s.confirmText]=command;
+    }
+  });
+}
+const summaries={
+  passeport:'Passages dans des commerces distincts et seuil de qualification.',
+  'tombola-locale':'Premier achat validé en commerce et chance unique au tirage.',
+  'tombola-publique':'Inscription directe depuis une affiche ou un lien public.',
+  chasse:'Récit, missions des commerces et supports des lieux publics.',
+  prix:'Produits, prix de référence et estimations des participants.',
+  vitrines:'Intrus en vitrine, installations et reprise après incident.',
+  'mots-croises':'Version de grille, fiches indices et passages chez les commerçants.',
+  avent:'Cases quotidiennes, participations et tirage propre à chaque journée.',
+  'escape-game':'Contrôle du scénario, progression dans les énigmes et réussite de la mission.'
+};
+const records=new Map();
+let model=null,stage=0,confirming=false;
+const esc=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const button=(action,label,cls='btn',attrs='')=>'<button type="button" class="'+cls+'" data-action="'+action+'" '+attrs+'>'+esc(label)+'</button>';
+const current=()=>model.steps[stage];
+function state(){
+  const key=model.id+'/'+stage;
+  if(!records.has(key))records.set(key,{done:false,q:'',filter:'',page:0});
+  return records.get(key);
+}
+function catalogue(focusId){
+  model=null;confirming=false;status.textContent='';
+  function group(title,items){
+    return '<section class="group"><h2>'+title+'</h2><div class="catalog">'+items.map(m=>'<button type="button" class="model" data-model="'+m.id+'"><b>'+esc(m.name)+'</b><small>'+esc(summaries[m.id])+'</small><span class="arrow" aria-hidden="true">→</span></button>').join('')+'</div></section>';
+  }
+  main.innerHTML='<h1>Parcours des animations</h1><p class="sub">Choisissez une animation pour parcourir ses écrans de gestion. Les éditions et les actions sont simulées.</p>'+group('Modèles du catalogue standard',models.filter(m=>!futurs.includes(m)))+group('Modèles en projet',futurs);
+  if(focusId)main.querySelector('[data-model="'+focusId+'"]')?.focus();
+}
+function openStage(n,focus){
+  stage=n;confirming=false;status.textContent='';
+  const labels=model.id==='escape-game'?['Préparation','Publication','Suivi','Clôture','Résultats','Bilan']:stages;
+  const s=current(), r=state(), states=[...new Set(s.rows.map(row=>row[2]))];
+  const canFilter=states.length>1 && states.length<s.rows.length;
+  main.innerHTML='<div class="crumbs">'+button('home','← Tous les modèles','textbutton')+'<span aria-hidden="true">/</span>'+esc(model.name)+(futurs.includes(model)?' · Modèle en projet':'')+'</div><h1 class="name">'+esc(model.title)+'</h1>'+
+  '<section class="frame"><nav class="steps" aria-label="Écrans du parcours">'+labels.map((l,i)=>'<button type="button" class="step" data-stage="'+i+'" '+(i===n?'aria-current="page"':'')+'><span aria-hidden="true">'+(i+1)+'</span>'+l+'</button>').join('')+'</nav><section class="inner"><div class="phase">'+esc(labels[n])+' · Écran '+(n+1)+' sur 6</div><h2 tabindex="-1">'+esc(s.title)+'</h2><p class="brief">'+esc(s.lead)+'</p><div class="snapshot"><div class="metrics">'+s.metrics.map(([value,label])=>'<div class="measure"><b>'+esc(value)+'</b><small>'+esc(label)+'</small></div>').join('')+'</div>'+
+  '<div class="tools" '+(s.rows.length>4||canFilter?'':'hidden')+'>'+(s.rows.length>4?'<label>Rechercher dans la liste<input type="search" data-query value="'+esc(r.q)+'"></label>':'')+(canFilter?'<label>'+esc(s.columns[2])+'<select data-filter><option value="">Tout afficher</option>'+states.map(v=>'<option '+(r.filter===v?'selected':'')+'>'+esc(v)+'</option>').join('')+'</select></label>':'')+'</div>'+
+  '<div class="results"></div><div class="pager"><span class="count" aria-live="polite"></span><div class="controls-page">'+button('first','Première page','btn compact')+' '+button('prev','Précédente','btn compact')+' '+button('nextPage','Suivante','btn compact')+'</div></div></div>'+
+  '<div class="actionbox"></div></section></section>';
+  updateList();updateAction();
+  if(focus)main.querySelector('h2').focus({preventScroll:true});
+}
+function updateList(){
+  const s=current(),r=state();
+  const normalize=v=>String(v).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('fr');
+  const list=s.rows.filter(row=>(!r.filter||row[2]===r.filter)&&row.some(v=>normalize(v).includes(normalize(r.q.trim()))));
+  const pageCount=Math.max(1,Math.ceil(list.length/4));r.page=Math.min(r.page,pageCount-1);
+  const shown=list.slice(r.page*4,r.page*4+4);
+  main.querySelector('.results').innerHTML=shown.length?'<table class="grid" aria-label="'+esc(s.title)+'"><thead><tr>'+s.columns.map(v=>'<th scope="col">'+esc(v)+'</th>').join('')+'</tr></thead><tbody>'+shown.map(row=>'<tr>'+row.map((v,i)=>'<td data-col="'+esc(s.columns[i])+'">'+esc(v)+'</td>').join('')+'</tr>').join('')+'</tbody></table>':'<p class="empty">Aucun résultat pour ces critères.</p>';
+  main.querySelector('.count').textContent=list.length+' résultat'+(list.length>1?'s':'')+(pageCount>1?' · Page '+(r.page+1)+' sur '+pageCount:'');
+  main.querySelector('.controls-page').hidden=pageCount<=1;
+  for(const [a,off] of [['first',r.page===0],['prev',r.page===0],['nextPage',r.page>=pageCount-1]]){
+    const b=main.querySelector('[data-action="'+a+'"]');b.setAttribute('aria-disabled',String(off));b.style.opacity=off?'.45':'1';
+  }
+}
+function updateAction(){
+  const s=current(),r=state(),box=main.querySelector('.actionbox');
+  main.querySelector('.snapshot').hidden=r.done;
+  main.querySelector('.brief').hidden=r.done;
+  const next=stage<5?button('forward',s.next||stages[stage+1],r.done?'btn primary':'textbutton'):button('home','Revenir aux modèles',r.done?'btn primary':'textbutton');
+  if(r.archivePrompt){box.innerHTML='<section class="check"><strong>Archiver cette édition terminée ?</strong><p>Elle restera consultable dans Mes archives avec son bilan.</p>'+button('archive','Confirmer l’archivage','btn primary')+' '+button('cancelArchive','Annuler')+'</section>';return}
+  if(r.archived){box.innerHTML='<div class="receipt" role="status">Édition archivée. Le bilan est conservé dans Animations → Mes archives.</div><div class="controls">'+button('home','Revenir aux modèles','btn primary')+' '+button('replay','Revoir le bilan','textbutton')+'</div>';return}
+  if(r.done && stage===4 && standard(model)){
+    if(r.finished){box.innerHTML='<div class="receipt" role="status">Édition terminée. Le bilan est disponible.</div><div class="controls">'+button('forward','Consulter le bilan','btn primary')+'</div>';return}
+    if(r.settled){box.innerHTML='<section class="check"><strong>Terminer l’animation ?</strong><p>Dans cet exemple, tous les dossiers de gain ont désormais été résolus. Terminer fige la gestion et ouvre le bilan.</p>'+button('finish','Terminer l’animation','btn primary')+' '+button('cancelFinish','Retour aux attributions')+'</section>';return}
+    box.innerHTML='<div class="receipt" role="status">'+esc(s.effect)+'</div><div class="controls">'+button('settled','Voir la fin après résolution des dossiers','btn primary')+' '+button('replay','Revoir le tirage','textbutton')+'</div>';return
+  }
+  if(r.done){box.innerHTML='<div class="receipt" role="status">'+esc(s.effect)+'</div><div class="controls">'+(stage===5&&standard(model)?button('archivePrompt','Archiver l’édition terminée','btn primary')+' '+button('home','Revenir aux modèles','textbutton'):next)+' '+button('replay','Revoir cet écran','textbutton')+'</div>';return}
+  if(confirming){box.innerHTML='<section class="check"><strong>'+esc(s.action)+' ?</strong><p>'+esc(s.confirmText||'Confirmez cette action pour cette édition de démonstration.')+'</p>'+button('commit',s.confirmLabel||s.action,'btn primary')+' '+button('cancel','Annuler')+'</section>';return}
+  box.innerHTML='<div class="controls">'+button('act',s.action,'btn primary')+'</div>';
+}
+root.addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b||b.getAttribute('aria-disabled')==='true')return;
+  if(b.dataset.model){model=models.find(m=>m.id===b.dataset.model);openStage(0,true);return}
+  if(b.dataset.stage!==undefined){openStage(Number(b.dataset.stage),true);return}
+  const a=b.dataset.action;
+  if(a==='home'){catalogue(model.id);return}
+  if(a==='forward'){openStage(stage+1,true);return}
+  const r=state();
+  if(['first','prev','nextPage'].includes(a)){r.page=a==='first'?0:r.page+(a==='prev'?-1:1);updateList();return}
+  if(a==='settled'){r.settled=true}
+  else if(a==='cancelFinish'){r.settled=false}
+  else if(a==='finish'){r.settled=false;r.finished=true;openStage(5,true);return}
+  else if(a==='archivePrompt'){r.archivePrompt=true}
+  else if(a==='archive'){r.archived=true;r.archivePrompt=false}
+  else if(a==='cancelArchive'){r.archivePrompt=false}
+  else if(a==='act'&&current().confirmLabel){confirming=true}
+  else if(a==='act'||a==='commit'){r.done=true;confirming=false}
+  else if(a==='cancel'){confirming=false}
+  else if(a==='replay'){r.done=false;r.archived=false;r.settled=false}
+  updateAction();main.querySelector('.actionbox button')?.focus({preventScroll:true});
+});
+root.addEventListener('input',e=>{if(e.target.matches('[data-query]')){state().q=e.target.value;state().page=0;updateList()}});
+root.addEventListener('change',e=>{if(e.target.matches('[data-filter]')){state().filter=e.target.value;state().page=0;updateList()}});
+catalogue();
+})();
+</script>
+</body></html>

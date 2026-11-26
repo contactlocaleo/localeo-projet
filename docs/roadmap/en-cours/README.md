@@ -2,7 +2,9 @@
 
 [Retour à la roadmap](../README.md)
 
-Onze EPIC sont classées en cours. Ce classement ne vaut ni clôture ni déploiement.
+Douze EPIC sont classées en cours. Ce classement ne vaut ni clôture ni déploiement.
+
+- [EPIC 85 — Simplifier la gestion de chaque modèle d’animation](epic-85-parcours-organisateur-backlog.md). Navigation par étape, action du tirage, listes et métriques homogènes. Maquettes interactives et captures intégrées.
 
 - [EPIC 84 — Inviter les adhérents hors commune à une animation](epic-84-adherents-hors-commune-animation-backlog.md). [Spécification et recette](../../specifications/epic-84-adherents-hors-commune-animation/README.md).
 

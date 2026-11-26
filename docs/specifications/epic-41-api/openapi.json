@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Backend - contrat implemente EPIC 41",
     "description": "OpenAPI complet du backend, dont les parcours Animation locale. Genere hors ligne depuis le code local pour les integrations et les mocks ; cet instantane ne prouve pas son deploiement.",
-    "version": "1.0.0+ab963a0"
+    "version": "1.0.0+f90e965"
   },
   "paths": {
     "/public/identite-acces/interne/connexion": {
@@ -40555,6 +40555,16 @@
               ],
               "title": "Eligible"
             }
+          },
+          {
+            "name": "avec_total",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Avec Total"
+            }
           }
         ],
         "responses": {
@@ -42673,6 +42683,16 @@
                 }
               ],
               "title": "Eligible"
+            }
+          },
+          {
+            "name": "avec_total",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Avec Total"
             }
           }
         ],
@@ -133573,6 +133593,16 @@
               ],
               "title": "Eligible"
             }
+          },
+          {
+            "name": "avec_total",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Avec Total"
+            }
           }
         ],
         "responses": {
@@ -136428,6 +136458,16 @@
                 }
               ],
               "title": "Eligible"
+            }
+          },
+          {
+            "name": "avec_total",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Avec Total"
             }
           }
         ],
@@ -151795,6 +151835,17 @@
       },
       "AnimationDetailPayload": {
         "properties": {
+          "tirage_applicable": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tirage Applicable"
+          },
           "animation": {
             "$ref": "#/components/schemas/AnimationDetailSummaryPayload"
           },
@@ -163123,6 +163174,17 @@
             "type": "integer",
             "title": "Commerces Reussis"
           },
+          "total_filtre": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total Filtre"
+          },
           "observed_at": {
             "anyOf": [
               {
@@ -163322,6 +163384,17 @@
           "commerces_reussis": {
             "type": "integer",
             "title": "Commerces Reussis"
+          },
+          "total_filtre": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total Filtre"
           },
           "observed_at": {
             "anyOf": [
@@ -178202,6 +178275,11 @@
           "revision": {
             "type": "integer",
             "title": "Revision"
+          },
+          "reprise_disponible": {
+            "type": "boolean",
+            "title": "Reprise Disponible",
+            "default": false
           }
         },
         "additionalProperties": false,

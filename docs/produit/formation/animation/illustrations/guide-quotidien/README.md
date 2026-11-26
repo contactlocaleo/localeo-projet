@@ -1,5 +1,9 @@
 # Captures du guide utilisateur Animation
 
+## Parcours organisateur du 25 novembre 2026
+
+Les images du pilotage des priorités, de la publication, du suivi, de la revue de clôture mobile et du tirage illustrent les gestes 2, 11, 14, 17 et 18. Elles proviennent du portail sur la base `658836e` avec les modifications locales E85 et des données fictives. Les captures utilisent le build de test isolé, les scénarios `tests/browser/dashboard-pilotage-guide.mjs` et `tests/browser/animation-guide.mjs --only=publication,cloture,tirage,suivi --captures-only`. La capture pleine largeur de Participants provient du scénario Participants de `tests/browser/animation-workspace-ux.mjs`, à 1600 px. Les tests vérifient les lectures simulées et l’absence d’écriture.
+
 ## Points d’attention de l’Assistant du 25 novembre 2026
 
 `assistant-1024.png` et `assistant-390.png` montrent un règlement manquant et

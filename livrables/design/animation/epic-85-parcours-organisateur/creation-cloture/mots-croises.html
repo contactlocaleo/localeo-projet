@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mots croisés assistés par IA · Localeo Animation</title><link rel="stylesheet" href="interface.css"></head><body>
+<header><strong>Localeo <em>Animation</em></strong><span>Latresne</span><small>Maquette interactive</small></header>
+<main><noscript>Activez JavaScript pour parcourir cette maquette.</noscript></main>
+<script type="application/json" id="scenario">
+{
+  "id": "mots-croises",
+  "name": "Mots croisés assistés par IA",
+  "title": "Les mots du quartier",
+  "dates": [
+    "2026-12-01",
+    "2026-12-14"
+  ],
+  "operation": "Transmettre le brief de la grille",
+  "intro": "Dans ce modèle en projet, la grille est préparée par Localeo puis soumise à l’organisateur avant la mise en place des fiches indices.",
+  "settings": [
+    [
+      "Grille de l’exemple",
+      "12 mots · version 2"
+    ],
+    [
+      "Commerces concernés",
+      "3"
+    ],
+    [
+      "Qualification",
+      "Grille entièrement correcte et tous les passages requis"
+    ],
+    [
+      "Droit affiché",
+      "1 publication disponible"
+    ]
+  ],
+  "prep": [
+    {
+      "title": "Suivre la préparation par Localeo",
+      "context": "Le brief décrit le thème, la difficulté et les trois commerces concernés. La proposition fait l’objet d’un import contrôlé.",
+      "action": "Ouvrir la grille proposée",
+      "result": "La version 2 offre un aperçu des douze mots, de leurs définitions et de la répartition des fiches."
+    },
+    {
+      "title": "Approuver la version de la grille",
+      "context": "Le gestionnaire relit les définitions et vérifie la cohérence de la grille proposée.",
+      "action": "Accepter la grille version 2",
+      "result": "Cette version sert de référence pour les préparatifs des commerces."
+    },
+    {
+      "title": "Vérifier les fiches des commerces",
+      "context": "Les accords, les trois fiches de définitions et la grille doivent porter sur la version approuvée.",
+      "action": "Relire les préparatifs de publication",
+      "result": "Les trois commerces sont prêts et le droit de publication disponible figure dans la revue."
+    }
+  ],
+  "brief": "Préparer une grille sur les mots du quartier, avec les fiches indices à répartir chez les commerces engagés.",
+  "assisted": true,
+  "prospect": true,
+  "cases": [
+    {
+      "phase": "Préparation",
+      "title": "Vérifier le module avant d’envoyer le brief",
+      "context": "Un paiement pour le module Mots croisés est encore en attente. Les crédits d’une chasse sont visibles pour la même commune.",
+      "action": "Consulter les droits du module",
+      "result": "La revue indique le droit acquis pour Mots croisés et son quota. Le paiement en attente et les crédits de chasse n’ouvrent aucun droit de publication pour cette grille."
+    },
+    {
+      "phase": "Préparation",
+      "title": "Reprendre un brief incomplet",
+      "context": "Le thème est défini. Le gestionnaire doit encore préciser le public et les commerces souhaités pour que Localeo prépare la grille.",
+      "action": "Ouvrir les éléments à compléter",
+      "result": "Le brouillon conserve le thème et signale les valeurs manquantes. Une fois le contrôle réussi, un envoi explicite crée une demande unique, identifiable même après une coupure."
+    },
+    {
+      "phase": "Préparation",
+      "title": "Demander une correction de la grille",
+      "context": "Dans la proposition reçue, une définition ne convient pas au public. Le gestionnaire peut la relire sous forme de grille ou de liste accessible.",
+      "action": "Consulter la correction demandée",
+      "result": "Le motif accompagne la demande à Localeo. La version corrigée repasse par les contrôles, la revue de l’organisateur et les préparatifs des commerces concernés."
+    },
+    {
+      "phase": "Publication",
+      "title": "Identifier une fiche commerce d’une ancienne révision",
+      "context": "La grille version 2 est approuvée. Une fiche à distribuer chez le fleuriste correspond encore à la version 1.",
+      "action": "Voir le préparatif bloquant",
+      "result": "La publication attend la fiche correspondant à la révision retenue et sa confirmation. Les supports destinés aux joueurs contiennent les indices et préservent les solutions."
+    },
+    {
+      "phase": "Suivi",
+      "title": "Distinguer grille remplie, grille correcte et passage manquant",
+      "context": "Un joueur a rempli toutes les cases et terminé les visites. La vérification du dernier enregistrement signale une grille à corriger.",
+      "action": "Lire l’état de qualification",
+      "result": "Le dossier garde les passages attestés. Le joueur peut corriger sa grille pendant l’ouverture. La vérification ne révèle aucune lettre correcte et la qualification exige les deux conditions."
+    },
+    {
+      "phase": "Suivi",
+      "title": "Traiter une erreur dans une grille publiée",
+      "context": "Une définition publiée est signalée. L’organisateur consulte la version figée et le diagnostic du retrait temporaire.",
+      "action": "Examiner les suites du diagnostic",
+      "result": "Une reprise à l’identique conserve la grille jouée. Si une autre grille est nécessaire, l’annulation motivée et la nouvelle édition restent distinctes. Les chances ne se transfèrent pas et un crédit de remplacement doit être explicitement accordé."
+    },
+    {
+      "phase": "Clôture",
+      "title": "Vérifier une attestation après la fermeture",
+      "context": "Une dernière visite a été préparée hors ligne. Elle parvient au serveur après la clôture de l’édition.",
+      "action": "Consulter l’heure et la qualification retenues",
+      "result": "Le serveur refuse l’attestation tardive. L’historique reste consultable et la liste figée retient les qualifications acquises avant la fermeture."
+    }
+  ],
+  "publish": {
+    "title": "Vérifier la publication de la grille",
+    "lead": "La grille, les accords et les fiches des commerces doivent correspondre à la même version. La confirmation engage le droit de publication affiché.",
+    "columns": [
+      "Contrôle",
+      "Détail",
+      "État"
+    ],
+    "rows": [
+      [
+        "Grille",
+        "Version 2",
+        "Approuvée"
+      ],
+      [
+        "Supports des commerces",
+        "3 fiches de définitions",
+        "Prêtes"
+      ],
+      [
+        "Dotation et dates",
+        "Lot et période vérifiés",
+        "Conformes"
+      ],
+      [
+        "Module Mots croisés",
+        "1 publication",
+        "Disponible"
+      ]
+    ],
+    "metrics": [
+      [
+        3,
+        "Commerces prêts"
+      ],
+      [
+        1,
+        "Publication à consommer"
+      ]
+    ],
+    "action": "Confirmer la publication",
+    "effect": "Publication simulée et droit de publication consommé une fois. Le lien Live et son QR sont disponibles.",
+    "next": "Ouvrir le suivi"
+  },
+  "follow": {
+    "title": "Suivre les grilles et les visites",
+    "lead": "Une grille correcte et les passages requis ouvrent une chance au tirage. Une grille remplie peut encore être incorrecte.",
+    "columns": [
+      "Participation",
+      "Grille",
+      "Commerces visités"
+    ],
+    "rows": [
+      [
+        "Camille M.",
+        "Correcte",
+        "3 sur 3 · Qualifiée"
+      ],
+      [
+        "Léa B.",
+        "Correcte",
+        "2 sur 3 · En cours"
+      ],
+      [
+        "Paul D.",
+        "À corriger",
+        "3 sur 3 · En cours"
+      ]
+    ],
+    "metrics": [
+      [
+        28,
+        "Inscrits"
+      ],
+      [
+        16,
+        "Grilles correctes"
+      ],
+      [
+        12,
+        "Qualifiés"
+      ]
+    ],
+    "action": "Consulter le dossier de Léa",
+    "effect": "Léa a validé sa grille. Son dernier passage attesté suffira pour la qualifier, sans nouvelle vérification de la grille.",
+    "next": "Examiner la clôture"
+  },
+  "close": {
+    "title": "Clôturer la grille",
+    "lead": "À la clôture, seules les qualifications acquises avant la fermeture entrent dans le tirage.",
+    "columns": [
+      "État au terme du jeu",
+      "Personnes",
+      "Conséquence"
+    ],
+    "rows": [
+      [
+        "Grille correcte et visites complètes",
+        "12",
+        "Éligibles"
+      ],
+      [
+        "Grille correcte, visites incomplètes",
+        "4",
+        "Hors tirage"
+      ],
+      [
+        "Grille non validée correcte",
+        "12",
+        "Hors tirage"
+      ]
+    ],
+    "metrics": [
+      [
+        28,
+        "Inscrits"
+      ],
+      [
+        12,
+        "Éligibles"
+      ]
+    ],
+    "action": "Confirmer la clôture de la grille",
+    "effect": "Population figée à 12 personnes. Les réponses et les passages enregistrés restent consultables selon les droits.",
+    "next": "Consulter le tirage"
+  },
+  "communication": "Chaque commerce reçoit les fiches indices correspondant à la version approuvée de la grille.",
+  "prepPreview": {
+    "at": 1,
+    "columns": [
+      "Élément à relire",
+      "Repère",
+      "État"
+    ],
+    "rows": [
+      [
+        "Module Mots croisés",
+        "Droit de publication",
+        "Disponible"
+      ],
+      [
+        "Demande transmise à Localeo",
+        "Thème et difficulté",
+        "Proposition reçue"
+      ],
+      [
+        "Grille proposée",
+        "Version 2 · 12 mots",
+        "À relire"
+      ],
+      [
+        "Fiches des commerces",
+        "Définitions sur place",
+        "Version 2"
+      ]
+    ]
+  }
+}
+</script>
+<script src="deroulement.js"></script>
+<script src="tirage.js"></script>
+<script src="interface.js"></script>
+</body></html>

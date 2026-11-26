@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fiche détaillée · Maquette Localeo Animation</title>
+  <style>body { margin: 0; }</style>
+</head>
+<body>
+<div id="localeo-maquettes">
+  <div class="atelier">
+    <label>Modèle d’animation <select id="lm-modele"></select></label>
+    <label>Format <select id="lm-format"><option>Ordinateur</option><option>Téléphone</option></select></label>
+    <small>Maquettes · Données de démonstration</small>
+  </div>
+  <div class="cadre"><div class="surface">
+    <header class="top"><strong>Localeo <em>Animation</em></strong><span>⌖ &nbsp; Latresne</span></header>
+    <div class="layout">
+      <aside aria-label="Menu général, aperçu"><small>ORGANISER</small><p>Tableau de bord</p><p class="selected">Animations</p><p>Modèles</p><p>Commerçants</p><hr><small>SUIVRE L’ACTIVITÉ</small><p>Participants</p><p>Validations</p><p>Tirages</p><p>Lots et remises</p><p>Bilans</p></aside>
+      <section class="fiche" aria-label="Fiche de l’animation">
+        <header class="identity"><div><small id="lm-type"></small><h2 id="lm-titre"></h2></div><span id="lm-statut" class="pill"></span></header>
+        <div class="mobilephase"></div><ol class="track" aria-label="Cycle de vie de l’édition"></ol>
+        <nav class="rubriques" aria-label="Rubriques de l’édition"></nav>
+        <main class="body"></main>
+      </section>
+    </div>
+  </div></div>
+</div>
+<style>
+#localeo-maquettes{font:14px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif;color:#082840;--ink:#082840;--navy:#0b3d63;--orange:#ba5a11;--line:#d8e1e7;--soft:#f9eee2;--muted:#526575;color-scheme:light}
+#localeo-maquettes *{box-sizing:border-box}#localeo-maquettes .atelier{display:flex;align-items:end;gap:13px;flex-wrap:wrap;padding:8px 2px 15px}#localeo-maquettes .atelier small{margin-left:auto;background:#eef2f5;padding:5px 9px;border-radius:5px;color:#344958}
+#localeo-maquettes label{font-size:12px;font-weight:600;display:grid;gap:4px}#localeo-maquettes :is(select,input,button){font:inherit;color:inherit}#localeo-maquettes :is(select,input){background:#fff;border:1px solid #a5b8c4;padding:8px 10px;border-radius:7px;max-width:100%;min-width:0}#localeo-maquettes button{background:white;border:1px solid var(--line);border-radius:7px;padding:8px 12px;cursor:pointer}#localeo-maquettes button:hover:enabled{border-color:#8195a4;background:#eef2f5}#localeo-maquettes button:disabled{opacity:.5;cursor:default}#localeo-maquettes :focus-visible{outline:3px solid #cf6819;outline-offset:2px}
+#localeo-maquettes .cadre{background:#e6ebee;border:1px solid var(--line);border-radius:9px;overflow:hidden}#localeo-maquettes .surface{container-type:inline-size;background:#f6f5f1;width:100%;margin:auto}#localeo-maquettes .cadre.phone .surface{max-width:390px}#localeo-maquettes .top{background:var(--ink);color:white;padding:13px 17px;display:flex;gap:23px;align-items:center}#localeo-maquettes .top strong{font-size:18px;letter-spacing:-.6px;color:white}#localeo-maquettes .top em{font-style:normal;color:#ffa352}#localeo-maquettes .top span{border:1px solid #516878;padding:5px 9px;border-radius:5px;font-size:12px}
+#localeo-maquettes .layout{display:grid;grid-template-columns:145px minmax(0,1fr)}#localeo-maquettes aside{background:white;border-right:1px solid var(--line);padding:17px 8px;color:#40576a}#localeo-maquettes small{font-size:11px;color:var(--muted)}#localeo-maquettes aside small{font-size:10px;letter-spacing:.6px;font-weight:650;padding:0 7px}#localeo-maquettes aside p{font-size:12px;padding:8px;margin:2px 0}#localeo-maquettes aside .selected{background:var(--soft);border-radius:6px;box-shadow:inset 3px 0 var(--orange);font-weight:650;color:var(--ink)}#localeo-maquettes hr{border:0;border-top:1px solid var(--line);margin:13px 0}
+#localeo-maquettes .fiche{min-width:0}#localeo-maquettes .identity{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:15px 20px;background:white}#localeo-maquettes h2,#localeo-maquettes h3,#localeo-maquettes h4{margin:0;color:var(--ink);line-height:1.25}#localeo-maquettes h2{font-size:21px}#localeo-maquettes h3{font-size:20px}#localeo-maquettes h4{font-size:15px}#localeo-maquettes .pill{font-size:12px;display:inline-block;background:#e1f0ec;color:#07594f;padding:4px 8px;border-radius:5px;white-space:normal}#localeo-maquettes .warn{background:#fff0d9;color:#804317}
+#localeo-maquettes .track{background:white;display:flex;margin:0;padding:12px 14px;list-style:none}#localeo-maquettes .track li{position:relative;flex:1;text-align:center;display:grid;justify-items:center;gap:4px;font-size:12px;color:var(--muted)}#localeo-maquettes .track li:before{content:"";height:2px;background:var(--line);position:absolute;right:50%;width:100%;top:9px}#localeo-maquettes .track li:first-child:before{display:none}#localeo-maquettes .track i{display:grid;place-items:center;z-index:1;width:20px;height:20px;border-radius:100%;border:2px solid #a5b8c4;background:white;font:600 12px system-ui}#localeo-maquettes .track .done i{color:white;background:#237561;border-color:#237561}#localeo-maquettes .track :is(.done,.current):before{background:#237561}#localeo-maquettes .track .current i{background:#ed852b;border-color:#9b4609}#localeo-maquettes .track .current b{color:#873c05}#localeo-maquettes .track small{color:#873c05;font-size:10px}
+#localeo-maquettes .rubriques{background:white;border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:2px;padding:0 12px}#localeo-maquettes .rubriques button{font-size:12px;border:0;border-radius:0;padding:10px 8px;background:transparent}#localeo-maquettes .rubriques [aria-current=page]{box-shadow:inset 0 -3px var(--orange);font-weight:700}
+#localeo-maquettes .body{padding:20px;min-width:0;min-height:360px}#localeo-maquettes .sub{margin:4px 0 13px;color:var(--muted);font-size:13px}#localeo-maquettes .metrics{margin:14px 0;display:flex;gap:12px;border-block:1px solid var(--line);padding:12px 0}#localeo-maquettes .metrics div{flex:1}#localeo-maquettes .metrics strong{display:block;font-size:22px;font-variant-numeric:tabular-nums}#localeo-maquettes .metrics span{font-size:12px;color:var(--muted)}
+#localeo-maquettes .tools,#localeo-maquettes .foot{display:flex;flex-wrap:wrap;align-items:end;gap:8px;margin:13px 0}#localeo-maquettes .tools label:first-child{flex:1;min-width:min(180px,100%)}#localeo-maquettes .rows{width:100%;border-collapse:collapse;background:white}#localeo-maquettes :is(td,th){text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);font-size:13px}#localeo-maquettes th{background:#eef2f5;font-size:12px}#localeo-maquettes .link{border:0;background:transparent;color:var(--navy);text-decoration:underline;text-underline-offset:3px}#localeo-maquettes .foot{justify-content:flex-end;align-items:center;font-size:12px}#localeo-maquettes .panel{background:white;border:1px solid var(--line);padding:15px;border-radius:8px;margin:12px 0}#localeo-maquettes .panel p{margin:6px 0 10px}#localeo-maquettes .attention{border-left:3px solid var(--orange)}#localeo-maquettes .primary{color:white;background:var(--navy);border-color:var(--navy);font-weight:600}#localeo-maquettes .primary:hover:enabled{background:var(--ink)}#localeo-maquettes .mobilephase{display:none}#localeo-maquettes .stack{display:grid;gap:9px}#localeo-maquettes .detailrow{display:flex;align-items:center;justify-content:space-between;gap:8px;padding-block:9px;border-bottom:1px solid var(--line)}
+@container(max-width:660px){#localeo-maquettes .layout{grid-template-columns:minmax(0,1fr)}#localeo-maquettes aside{display:none}#localeo-maquettes .identity,#localeo-maquettes .body{padding:14px}#localeo-maquettes .identity{flex-wrap:wrap}#localeo-maquettes .track{display:none}#localeo-maquettes .track.open{display:grid;grid-template-columns:1fr;background:white;gap:6px}#localeo-maquettes .track.open li{grid-template-columns:20px auto 1fr;justify-items:start;align-items:center;text-align:left}#localeo-maquettes .track li:before{display:none}#localeo-maquettes .mobilephase{display:flex;align-items:center;justify-content:space-between;padding:6px 14px;background:white;color:#873c05;font-size:12px}#localeo-maquettes .rubriques{padding:0 6px}#localeo-maquettes .rows,#localeo-maquettes .rows tbody,#localeo-maquettes .rows tr{display:block}#localeo-maquettes .rows thead{display:none}#localeo-maquettes .rows tr{padding:8px;border-bottom:1px solid var(--line)}#localeo-maquettes .rows td{display:flex;justify-content:space-between;align-items:center;gap:8px;border:0;padding:3px 0}#localeo-maquettes .rows td:before{content:attr(data-label);color:var(--muted);font-size:12px}#localeo-maquettes .rows td:first-child{font-weight:650}#localeo-maquettes :is(button,select,input){min-height:44px}}
+</style>
+<script>
+(()=>{
+const root=document.getElementById('localeo-maquettes'), q=s=>root.querySelector(s);
+const models=[
+ {name:'Passeport commerçant',title:'Le passeport des bonnes adresses',phase:2,start:'Participants',total:20,qualified:8,metric:'Parcours terminés',value:9,subject:'Commerces invités',items:['Librairie du Bourg','Les Halles','Atelier des Saveurs'],task:'Recueillir les accords des commerces',reason:'Chaque commerce confirme sa participation et reçoit ses consignes.',criterion:'Atteindre le seuil de passages prévu au règlement.'},
+ {name:'Tombola locale',title:'La tombola des commerces',phase:3,start:'Tirage',total:32,qualified:18,metric:'Passages validés',value:27,subject:'Commerces participants',items:['Épicerie du Pont','Maison du pain','Atelier du Marché'],task:'Vérifier les points de validation',reason:'Les commerces doivent pouvoir enregistrer le premier passage qualifiant.',criterion:'Le premier passage validé donne une chance au tirage.'},
+ {name:'Tombola publique',title:'Le rendez-vous du marché',phase:2,start:'Participants',total:24,qualified:21,metric:'En attente',value:3,subject:'Inscription publique',items:['Formulaire d’inscription','Règlement','Affiche avec QR code'],task:'Vérifier le parcours d’inscription',reason:'Le participant scanne le QR, renseigne ses coordonnées et accepte le règlement.',criterion:'Une inscription directe qualifiée donne une chance au tirage.'},
+ {name:'Chasse au trésor commerçante',title:'Les lanternes de Latresne',phase:0,start:'Préparation',total:0,qualified:0,metric:'Étapes du parcours',value:5,subject:'Supports des lieux publics',items:['Place de la mairie','La halle','Le jardin public'],task:'Préparer le QR de la halle',reason:'L’organisateur prépare les QR des lieux publics. Les commerces installent les supports de leur kit.',criterion:'La qualification exige les étapes et les preuves requises par le parcours publié.'},
+ {name:'Juste Prix Local',title:'Le juste prix des artisans',phase:0,start:'Préparation',total:0,qualified:0,metric:'Estimations',value:0,subject:'Produits et prix proposés',items:['Pain au levain','Confiture de saison','Panier de découverte'],task:'Examiner la proposition de l’épicerie',reason:'Vérifiez le produit, son unité et son prix de référence avant de l’approuver.',criterion:'La qualification dépend des estimations, du seuil et des passages configurés.'},
+ {name:'Jeu des vitrines',title:'Les intrus du centre-ville',phase:2,start:'Suivi',total:16,qualified:6,metric:'Intrus trouvés',value:19,subject:'Contrôles des vitrines',items:['Librairie du Bourg','Épicerie du Pont','Atelier des Saveurs'],task:'Contrôler les installations sur place',reason:'Chaque vitrine approuvée nécessite un contrôle de son installation.',criterion:'Les réussites et, si requis, les passages doivent correspondre au même commerce.'}
+];
+const steps=['Préparation','Publication','Déroulement','Clôture','Fin d’édition'];
+const zones=['Préparation','Publication','Suivi','Participants','Communication','Clôture','Tirage','Bilan'];
+const status=['En préparation','À publier','En cours','Clôturée','Terminée'];
+const names=['Camille Martin','Léa Bernard','Sam Diallo','Alex Robin','Lou Petit','Noé Durand','Emma Morel','Inès Robert'];
+const store=models.map(()=>({reviewed:false,draw:'ready',incident:'suspended'}));
+let index=0,zone=models[0].start,page=0,search='',filter='',detail=null,expanded=false,confirm=false;
+const el=q('.body'),m=()=>models[index],st=()=>store[index];
+const escape=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const btn=(act,label,cls='',extra='')=>'<button type="button" data-action="'+act+'" class="'+cls+'" '+extra+'>'+label+'</button>';
+const pill=(s,w=false)=>'<span class="pill '+(w?'warn':'')+'">'+s+'</span>';
+const head=(title,desc)=>'<h3>'+title+'</h3><p class="sub">'+desc+'</p>';
+const metrics=items=>'<div class="metrics">'+items.map(([v,l])=>'<div><strong>'+escape(v)+'</strong><span>'+l+'</span></div>').join('')+'</div>';
+const panel=(title,body,action='',attention=false)=>'<div class="panel '+(attention?'attention':'')+'"><h4>'+title+'</h4><p>'+body+'</p>'+action+'</div>';
+function activate(next){zone=next;confirm=false;detail=null;page=0;search='';filter='';render();}
+function layout(){
+ const x=m();q('#lm-type').textContent='Latresne · '+x.name;q('#lm-titre').textContent=x.title;q('#lm-statut').textContent=status[x.phase];
+ q('.track').classList.toggle('open',expanded);
+ q('.track').innerHTML=steps.map((s,i)=>'<li class="'+(i===x.phase?'current':i<x.phase?'done':'')+'" '+(i===x.phase?'aria-current="step"':'')+'><i aria-hidden="true">'+(i<x.phase?'✓':i===x.phase?'●':'')+'</i><b>'+s+'</b>'+(i===x.phase?'<small>Étape actuelle</small>':'')+'</li>').join('');
+ q('.mobilephase').innerHTML='<b>Étape actuelle · '+steps[x.phase]+'</b>'+btn('expand',expanded?'Masquer les étapes':'Voir les étapes','link','aria-expanded="'+expanded+'"');
+ q('.rubriques').innerHTML=zones.map(z=>btn('zone',z,'','data-zone="'+z+'" '+(zone===z?'aria-current="page"':''))).join('');
+}
+function people(){
+ const x=m(),exact=[4,5].includes(index);
+ const all=Array.from({length:x.total},(_,i)=>({id:i,name:index===2?'Contact '+String(i+1).padStart(2,'0'):(names[i]||'Participant '+String(i+1).padStart(2,'0')),ref:'PART-'+String(i+1).padStart(3,'0'),email:'contact'+String(i+1).padStart(2,'0')+'@exemple.invalid',state:i<x.qualified?'Qualifié':index===2?'En attente':'Inscrit'}));
+ if(detail!==null){const r=all[detail];return head('Détail de la participation',x.title)+btn('back','← Retour aux participants','link')+panel(r.name,r.ref+' · '+r.state)+panel('Qualification',x.criterion);}
+ const term=search.trim().toLowerCase();
+ const found=all.filter(r=>(!filter||r.state===filter)&&(!term||(exact?r.ref.toLowerCase()===term:index===2?r.email.startsWith(term)||r.ref.toLowerCase()===term:[r.name,r.ref].some(v=>v.toLowerCase().includes(term)))));
+ const slice=found.slice(page*4,page*4+4),pages=Math.max(1,Math.ceil(found.length/4));
+ return head('Participants','Participations de cette édition')+metrics([[x.total,'Inscrits · édition'],[x.qualified,'Qualifiés · édition']])+
+ '<form class="tools"><label>'+(exact?'Référence exacte':index===2?'Début de l’e-mail ou référence complète':'Nom ou référence')+'<input name="query" type="search" value="'+escape(search)+'" placeholder="'+(exact?'PART-001':index===2?'contact01 ou PART-001':'Rechercher')+'"></label><label>État<select name="state">'+['','Qualifié',index===2?'En attente':'Inscrit'].map(v=>'<option value="'+v+'" '+(v===filter?'selected':'')+'>'+(v||'Tous les états')+'</option>').join('')+'</select></label><button type="submit">Appliquer</button>'+((search||filter)?btn('clear','Effacer','link'):'')+'</form>'+
+ (slice.length?'<table class="rows"><thead><tr>'+['Participant','Référence','État','Action'].map(l=>'<th>'+l+'</th>').join('')+'</tr></thead><tbody>'+slice.map(r=>'<tr><td data-label="Participant">'+r.name+'</td><td data-label="Référence">'+r.ref+'</td><td data-label="État">'+pill(r.state,r.state!=='Qualifié')+'</td><td data-label="">'+btn('person','Voir le détail','link','data-id="'+r.id+'" aria-label="Voir le détail de '+r.name+'"')+'</td></tr>').join('')+'</tbody></table>':panel('Aucune participation',search||filter?'Aucun résultat pour ces critères.':x.phase<2?'La liste sera alimentée après publication.':'Aucune participation enregistrée.'))+
+ (pages>1?'<div class="foot">'+btn('first','Première', '',page?'':'disabled')+btn('prev','Précédente','',page?'':'disabled')+'<span>Page '+(page+1)+' sur '+pages+'</span>'+btn('next','Suivante','',page+1<pages?'':'disabled')+'</div>':'');
+}
+const huntSupports=new Set();
+function huntPreparation(){
+ const x=m();
+ if(detail!==null){
+   const ready=huntSupports.has(detail);
+   return head(x.items[detail],x.subject)+btn('back','← Retour aux supports','link')+
+     panel(ready?'Support préparé':'QR du lieu public',x.phase>=2?'Le QR de ce lieu est actif depuis la publication.':'Le QR devient actif à la publication.',!ready?btn('hunt-support','Préparer le QR de ce lieu','primary'):'');
+ }
+ return head(x.subject,x.reason)+'<div class="panel">'+x.items.map((name,i)=>'<div class="detailrow">'+btn('prepitem',name,'link','data-id="'+i+'"')+pill(huntSupports.has(i)?'Support préparé':'Support disponible')+'</div>').join('')+'</div>'+
+   panel('Revue de publication','Le parcours a été relu et les accords requis ont été reçus dans cet exemple. Les supports peuvent aussi être préparés depuis la fiche.',btn('zone','Consulter la publication','primary','data-zone="Publication"'));
+}
+function preparation(){
+ const x=m(),opened=detail!==null,edit=x.phase<2,s=st();
+ if(index===3)return huntPreparation();
+ if(opened){const item=x.items[detail];return head(item,x.subject)+btn('back','← Retour à la préparation','link')+panel(index===4?'Proposition du commerce':'Contrôle de préparation',index===4?'Prix de référence proposé · 4,50 € pour 250 g.':x.reason)+
+ (edit&&detail===1&&!s.reviewed?panel(confirm?'Confirmer la vérification ?':'Décision attendue',confirm?'Cette action valide cet élément dans la maquette.':x.task,confirm?btn('review','Confirmer','primary')+' '+btn('cancel','Annuler'):btn('confirm',index===4?'Approuver la proposition':'Valider le contrôle','primary'),true):pill(edit?'Vérifié':'Validé avant publication'));}
+ return head(x.subject,edit?x.reason:'Configuration publiée de cette édition.')+(edit?panel(s.reviewed?'Contrôles terminés':x.task,s.reviewed?'Les éléments présentés ont été vérifiés.':x.reason,s.reviewed?'':btn('prepitem','Ouvrir le point à traiter','primary','data-id="1"'),!s.reviewed):'')+
+ '<div class="panel"><h4>'+ (index===4?'Propositions':'Éléments de préparation')+'</h4>'+x.items.map((name,i)=>'<div class="detailrow">'+btn('prepitem',name,'link','data-id="'+i+'"')+pill(edit&&i===1&&!s.reviewed?'À vérifier':'Validé',edit&&i===1&&!s.reviewed)+'</div>').join('')+'</div>';
+}
+function decision(){
+ const x=m(),s=st();if(x.phase!==3)return head('Tirage','Fin d’édition')+panel('Tirage à venir',x.phase===0?'La publication puis la clôture précèdent le tirage.':'Les participations sont encore ouvertes. La clôture fixera la population éligible.',btn('follow','Consulter le suivi','link'));
+ if(s.draw==='done')return head('Tirage confirmé','Résultat de la simulation')+metrics([[2,'Gagnants'],[2,'Lots attribués']])+panel('Remise des lots','Deux lots sont à remettre aux gagnants.',btn('awards',detail===null?'Voir les attributions':'Masquer les attributions','link'))+(detail!==null?panel('Attributions','Camille Martin · Panier local<br>Léa Bernard · Bon découverte'):'');
+ if(!x.qualified)return head('Tirage','Population éligible figée')+panel('Aucun participant éligible','Aucune attribution à effectuer dans cet exemple.');
+ return head(confirm?'Confirmer le tirage':'Tirage des lots libres',confirm?'Vérifiez les attributions avant de confirmer.':'Animation clôturée · Population éligible figée')+metrics([[x.qualified,'Participants éligibles'],[2,'Lots disponibles']])+panel(confirm?'Confirmation du tirage':'Prêt pour le tirage',confirm?'Deux gagnants seront désignés parmi les '+x.qualified+' participants éligibles.':'Un lot au maximum par participant. Les gagnants seront désignés à la confirmation.',confirm?btn('draw','Confirmer le tirage','primary')+' '+btn('cancel','Annuler'):btn('confirm','Préparer le tirage','primary'),confirm);
+}
+function follow(){
+ const x=m(),s=st();if(x.phase<2)return head('Suivi de l’animation','Avant publication')+panel('Édition en préparation',x.reason,btn('prep','Reprendre la préparation','primary'));
+ const vit=index===5, incident=vit&&s.incident!=='open'&&x.phase===2;
+ const checking=s.incident==='suspended';
+ const incidentAction=checking?(confirm?'Confirmer le rétablissement':'Vérifier le rétablissement'):(confirm?'Confirmer la reprise':'Reprendre le jeu');
+ const incidentMessage=checking?(confirm?'Confirmez que le support a été remis à sa place et contrôlé à la Librairie du Bourg.':'La vitrine de la librairie doit être contrôlée avant la reprise.'):'La vitrine est rétablie. Les participations peuvent reprendre après confirmation.';
+ return head('Suivi de l’animation',x.name)+(incident?panel(checking?'Jeu suspendu · Vitrine déplacée':'Contrôle terrain enregistré',incidentMessage,btn('incident',incidentAction,'primary')+(confirm?' '+btn('cancel','Annuler'):''),true):'')+metrics([[x.total,'Inscrits'],[x.value,x.metric],[x.qualified,'Qualifiés']])+panel('Qualification au tirage',x.criterion,btn('participants','Voir les participants','link'));
+}
+function render(){
+ layout();let body;
+ if(zone==='Participants')body=people();else if(zone==='Préparation')body=preparation();else if(zone==='Tirage')body=decision();else if(zone==='Suivi')body=follow();
+ else if(zone==='Publication'){
+ const x=m(),s=st();body=head('Publication','Contrôles de cette édition')+(x.phase>=2?panel('Animation publiée','Les participants peuvent consulter le support de diffusion.',btn('com','Consulter les supports','link')):index!==3&&!s.reviewed?panel('Un contrôle reste à valider',x.task,btn('prep','Ouvrir la préparation','primary'),true):panel(confirm?'Confirmer la publication ?':'Prête à publier','La publication ouvre les inscriptions à cette édition de démonstration.',confirm?btn('publish','Confirmer la publication','primary')+' '+btn('cancel','Annuler'):btn('confirm','Publier l’animation','primary')));
+ }
+ else if(zone==='Clôture'){
+ const x=m(),s=st();body=head('Clôture','Fin des participations')+(x.phase<2?panel('Édition en préparation','La clôture sera disponible après le déroulement de cette édition.'):x.phase>=3?panel('Population figée',x.qualified+' participants éligibles au tirage.',btn('lot','Consulter le tirage','primary')):index===5&&s.incident!=='open'?panel('Édition suspendue','Pendant la période de jeu, contrôlez la vitrine puis confirmez la reprise. Si la période expire pendant la suspension, l’édition doit être annulée.',btn('follow','Ouvrir le suivi','primary'),true):panel(confirm?'Confirmer la clôture ?':'Clôturer cette édition','Les nouvelles participations seront fermées. La population éligible sera figée. Le tirage se prépare séparément.',confirm?btn('close','Confirmer la clôture','primary')+' '+btn('cancel','Annuler'):btn('confirm','Préparer la clôture','primary'),confirm));
+ }
+ else if(zone==='Communication')body=head('Communication','Supports de cette édition')+panel('Affiche et QR de diffusion',m().phase===0?'Brouillon à relire avant publication.':'Support de participation disponible.',btn('preview',detail===null?'Voir le contenu du support':'Fermer l’aperçu','link'))+(detail!==null?panel(m().title,m().criterion):'');
+ else body=head('Bilan de l’édition','Indicateurs de démonstration · Toute l’édition')+(m().phase<2?panel('Édition en préparation','Les mesures de participation seront disponibles pendant le déroulement.'):metrics([[m().total,'Participants inscrits'],[m().qualified,'Qualifiés au tirage']])+panel('Lecture des résultats',m().criterion,btn('participants','Consulter les participants','link')));
+ el.innerHTML=body;
+}
+q('#lm-modele').innerHTML=models.map((x,i)=>'<option value="'+i+'">'+x.name+'</option>').join('');
+q('#lm-modele').onchange=e=>{index=Number(e.target.value);expanded=false;activate(m().start)};
+q('#lm-format').onchange=e=>q('.cadre').classList.toggle('phone',e.target.value==='Téléphone');
+root.addEventListener('submit',e=>{e.preventDefault();const f=new FormData(e.target);search=String(f.get('query')||'');filter=String(f.get('state')||'');page=0;render();el.querySelector('[name=query]')?.focus();});
+root.addEventListener('click',e=>{const b=e.target.closest('button[data-action]');if(!b)return;const a=b.dataset.action, id=Number(b.dataset.id);
+ if(a==='zone'){activate(b.dataset.zone);q('[aria-current=page]')?.focus();return}
+ if(['participants','follow','prep','com','lot'].includes(a)){activate({participants:'Participants',follow:'Suivi',prep:'Préparation',com:'Communication',lot:'Tirage'}[a]);return}
+ if(a==='expand')expanded=!expanded;if(a==='confirm')confirm=true;if(a==='cancel')confirm=false;
+ if(a==='person'||a==='prepitem')detail=id;if(a==='back')detail=null;if(a==='clear'){search='';filter='';page=0;}
+ if(a==='hunt-support'&&index===3&&detail!==null)huntSupports.add(detail);
+ if(a==='next')page++;if(a==='prev')page--;if(a==='first')page=0;
+ if(a==='review'){st().reviewed=true;confirm=false;detail=null;}if(a==='draw'){st().draw='done';confirm=false;}
+ if(a==='publish'){m().phase=2;confirm=false;}if(a==='close'){m().phase=3;confirm=false;}
+ if(a==='incident'){if(confirm){st().incident=st().incident==='suspended'?'checked':'open';confirm=false;}else confirm=true;}
+ if(a==='awards'||a==='preview')detail=detail===null?0:null;
+ render();const target=root.querySelector('[data-action="'+a+'"]:not(:disabled)')||el.querySelector('button:not(:disabled)');target?.focus({preventScroll:true});
+});
+render();
+})();
+</script>
+</body></html>

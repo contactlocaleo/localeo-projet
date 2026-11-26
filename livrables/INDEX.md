@@ -2,13 +2,15 @@
 
 Guides PDF, prompts, visuels et prototypes produits. Les versions historiques restent identifiables.
 
+- [Parcours de gestion par modèle](design/animation/epic-85-parcours-organisateur/creation-cloture/index.html), [déroulement, clôture et tirage](design/animation/epic-85-parcours-organisateur/creation-cloture/exploitation.html), [synthèse jusqu’au bilan](design/animation/epic-85-parcours-organisateur/parcours.html) et [fiche détaillée](design/animation/epic-85-parcours-organisateur/fiche.html). Les captures du tirage et les critères de recette figurent dans l’[EPIC 85](../docs/roadmap/en-cours/epic-85-parcours-organisateur-backlog.md).
+
 - [Plaquette commerciale unique Localeo](communication/plaquette-commerciale-localeo.pdf) : deux pages A4 recto verso, édition du 10 novembre 2026 ; écosystème, animations au premier plan, coffrets et marketplace en complément, bénéfices pour les quatre acteurs. [Aperçus et sources](communication/README.md).
 - [Plaquette commerciale Localeo Animation, version historique](communication/plaquette-commerciale-localeo-animation.pdf) : une page A4 du 6 novembre 2026 pour les communes et associations de commerçants ; [aperçu, contenu éditorial et sources](communication/README.md).
 - [Présentation commerciale Localeo Animation](communication/presentation-localeo-animation.pptx) : 12 diapositives modifiables avec notes orateur, pour les rendez-vous avec les collectivités et associations de commerçants.
 
 Guide actuel Commerçant : [Votre guide au quotidien](formation/commercant/guide-quotidien-localeo-commercant.pdf), édition illustrée du 21 novembre 2026. Il couvre accès et accueil, compte et page publique, coffrets, scanner, invitations et préparation des animations, lots, activité, reversements, facturation, notifications et aide. [Source éditable](../docs/produit/formation/commercant/guide-quotidien-commercant.md). Les guides de prise en main v7 à v11 ci-dessous restent des versions historiques.
 
-Guide utilisateur Animation : [Organiser et piloter vos animations](formation/animation/guide-quotidien-localeo-animation.pdf), édition illustrée du 21 novembre 2026. Il accompagne la création, la préparation, les commerçants, les dotations, la publication, le suivi, la communication, la clôture et les résultats. [Source éditable](../docs/produit/formation/animation/guide-quotidien-animation.md).
+Le [guide quotidien Localeo Animation](formation/animation/guide-quotidien-localeo-animation.pdf), édition illustrée du 25 novembre 2026, propose un sommaire cliquable pour retrouver les gestes de la création d’une animation jusqu’au bilan, en passant par les commerçants, les lots et la communication. [Source éditable](../docs/produit/formation/animation/guide-quotidien-animation.md).
 
 Ces guides sont distribués depuis leurs applications respectives. Leur [maintenance commune](../docs/organisation/maintenance-guides-utilisateurs.md) fait partie de chaque évolution qui affecte un parcours décrit.
 

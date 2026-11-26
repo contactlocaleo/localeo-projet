@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Juste Prix Local · Localeo Animation</title><link rel="stylesheet" href="interface.css"></head><body>
+<header><strong>Localeo <em>Animation</em></strong><span>Latresne</span><small>Maquette interactive</small></header>
+<main><noscript>Activez JavaScript pour parcourir cette maquette.</noscript></main>
+<script type="application/json" id="scenario">
+{
+  "id": "prix",
+  "name": "Juste Prix Local",
+  "title": "Le juste prix des artisans",
+  "dates": [
+    "2026-12-01",
+    "2026-12-14"
+  ],
+  "operation": "Créer le brouillon du Juste Prix",
+  "intro": "Chaque commerce propose un produit avec son unité et son prix de référence. Le gestionnaire prépare les règles d’estimation et de passage.",
+  "settings": [
+    [
+      "Commerces et produits",
+      "4 commerces, 1 produit par commerce"
+    ],
+    [
+      "Seuil",
+      "2 commerces distincts"
+    ],
+    [
+      "Tolérance",
+      "0,50 € autour du prix"
+    ],
+    [
+      "Passage en magasin",
+      "Requis dans chaque commerce retenu pour la qualification"
+    ]
+  ],
+  "prep": [
+    {
+      "title": "Inviter les commerces à proposer un produit",
+      "context": "L’épicerie, l’Atelier Argile, le Fournil du Bourg et la Maison Cire sont sélectionnés.",
+      "action": "Relire les missions acceptées",
+      "result": "Les quatre commerces contribuent chacun à leur propre proposition de produit."
+    },
+    {
+      "title": "Vérifier les références proposées",
+      "context": "Trois produits sont acceptés. L’épicerie propose un miel de fleurs de 250 g à 8,50 €. Le prix reste réservé à la préparation.",
+      "action": "Accepter la proposition de l’épicerie",
+      "result": "Les quatre références sont acceptées avec leur unité et leur prix."
+    },
+    {
+      "title": "Relire la règle de qualification",
+      "context": "L’édition retient deux commerces distincts et un passage validé dans chacun de ceux dont l’estimation compte.",
+      "action": "Vérifier seuil, tolérance et passages",
+      "result": "La règle publique indique deux commerces et une tolérance de 0,50 €. Les prix exacts restent privés pendant le jeu."
+    }
+  ],
+  "assisted": false,
+  "prospect": false,
+  "cases": [
+    {
+      "phase": "Préparation",
+      "title": "Paramétrer les règles du Juste Prix",
+      "context": "Quatre commerces proposent chacun un produit. Le gestionnaire configure la tolérance, le seuil, les éventuels passages dans les mêmes commerces et le maximum de mauvaises réponses par étape, de 1 à 10.",
+      "action": "Relire la règle avant publication",
+      "result": "La fiche affiche la règle qui sera annoncée avant l’inscription. Une fois publiée, la version fige ces paramètres. Une ancienne édition dépourvue de maximum conserve un seul essai erroné."
+    },
+    {
+      "phase": "Préparation",
+      "title": "Demander la correction d’un produit",
+      "context": "Une commerçante ayant accepté son invitation propose un pot de miel avec un prix, mais l’unité annoncée prête à confusion. Le gestionnaire consulte la révision proposée.",
+      "action": "Demander une correction motivée",
+      "result": "Le commentaire revient à la commerçante. Elle corrige et repropose le produit. L’organisateur devra approuver la nouvelle révision. Un conflit de version invite à relire le dossier."
+    },
+    {
+      "phase": "Suivi",
+      "title": "Distinguer essai restant et étape invalide",
+      "context": "Une participante s’est trompée. Tant qu’il lui reste un essai, elle peut estimer à nouveau sans indication de prix supérieur ou inférieur. Le dernier essai erroné invalide cette étape.",
+      "action": "Consulter la progression autorisée",
+      "result": "Une étape invalide ne se rattrape pas par scan ou PIN. Le statut « Non qualifiable » n’apparaît que si les autres étapes ne peuvent plus suffire. Une qualification déjà acquise par les autres produits conserve sa chance."
+    },
+    {
+      "phase": "Suivi",
+      "title": "Diagnostiquer un prix de référence erroné",
+      "context": "Après publication, un commerce signale un prix de référence erroné. Le gestionnaire consigne le motif, examine l’incident et suspend l’édition si nécessaire.",
+      "action": "Examiner les possibilités de reprise",
+      "result": "Une reprise dans la période exige le dispositif publié à l’identique. Si le prix doit changer, l’édition doit être annulée puis une nouvelle édition corrigée préparée. Les réponses et chances de l’ancienne édition ne sont pas transférées."
+    },
+    {
+      "phase": "Clôture",
+      "title": "Ouvrir le corrigé au bon moment",
+      "context": "La date de fin est passée et le tirage reste en attente. Les prix de référence doivent être réservés aux participants autorisés jusqu’au bon état métier.",
+      "action": "Vérifier l’état de clôture",
+      "result": "La clôture confirmée fige les qualifications et ouvre le corrigé aux participants autorisés. Une suspension, une annulation ou la seule échéance du calendrier ne déclenche pas la révélation."
+    }
+  ],
+  "publish": {
+    "title": "Publier les règles du Juste Prix",
+    "lead": "Pour cette édition, deux produits trouvés dans deux commerces différents donnent une chance au tirage. Le passage doit être validé dans chacun de ces commerces.",
+    "columns": [
+      "Réglage",
+      "Choix de l’édition",
+      "Affichage joueur"
+    ],
+    "rows": [
+      [
+        "Produits",
+        "4 références acceptées",
+        "Désignation et unité"
+      ],
+      [
+        "Tolérance",
+        "0,50 € autour du prix",
+        "Annoncée avant inscription"
+      ],
+      [
+        "Qualification",
+        "2 commerces sur 4",
+        "Progression sur 2"
+      ],
+      [
+        "Passage en boutique",
+        "Requis au même commerce",
+        "Indiqué dans la règle"
+      ]
+    ],
+    "metrics": [
+      [
+        4,
+        "Produits prêts"
+      ],
+      [
+        2,
+        "Commerces requis"
+      ],
+      [
+        1,
+        "Chance par qualifié"
+      ]
+    ],
+    "action": "Confirmer la publication du Juste Prix",
+    "effect": "Le jeu est publié. Les joueurs voient les produits et les règles. Les prix de référence restent privés pendant le jeu.",
+    "next": "Suivre les estimations"
+  },
+  "follow": {
+    "title": "Suivre les estimations et les passages",
+    "lead": "Une estimation dans la tolérance compte lorsque le passage correspondant est validé. Le détail indique au gestionnaire ce qui manque au joueur.",
+    "columns": [
+      "Participant",
+      "Commerces comptabilisés",
+      "Situation"
+    ],
+    "rows": [
+      [
+        "Lina Roux",
+        "1 sur 2",
+        "Passage manquant"
+      ],
+      [
+        "Marc Noël",
+        "2 sur 2",
+        "Qualifié"
+      ],
+      [
+        "Éva Faure",
+        "0 sur 2",
+        "En cours"
+      ],
+      [
+        "Nils Adam",
+        "3 pour un seuil de 2",
+        "Qualifié"
+      ]
+    ],
+    "metrics": [
+      [
+        28,
+        "Participants inscrits"
+      ],
+      [
+        64,
+        "Estimations enregistrées"
+      ],
+      [
+        12,
+        "Qualifiés"
+      ]
+    ],
+    "action": "Consulter la progression de Lina Roux",
+    "effect": "Lina a trouvé deux prix. Son passage au Fournil est validé et son passage à l’épicerie reste à valider pendant la période de jeu.",
+    "next": "Examiner la clôture"
+  },
+  "close": {
+    "title": "Clôturer les estimations",
+    "lead": "La période est terminée. Vérifiez le décompte avant de figer les qualifications et de rendre le corrigé accessible aux participants autorisés.",
+    "columns": [
+      "Situation finale",
+      "Participants",
+      "Accès au tirage"
+    ],
+    "rows": [
+      [
+        "Seuil et passages validés",
+        "12",
+        "Une chance chacun"
+      ],
+      [
+        "Seuil possible, passage manquant",
+        "4",
+        "Hors tirage"
+      ],
+      [
+        "Réussites insuffisantes",
+        "10",
+        "Hors tirage"
+      ],
+      [
+        "Aucune estimation",
+        "2",
+        "Hors tirage"
+      ]
+    ],
+    "metrics": [
+      [
+        28,
+        "Inscrits"
+      ],
+      [
+        12,
+        "Éligibles"
+      ],
+      [
+        16,
+        "Hors tirage"
+      ]
+    ],
+    "action": "Confirmer la clôture du Juste Prix",
+    "effect": "Les 12 qualifications sont figées. Les participants autorisés peuvent consulter les prix exacts des quatre produits dans Live.",
+    "next": "Ouvrir le tirage"
+  },
+  "communication": "Le support explique la tolérance et les règles de passage. Les prix de référence restent privés pendant le jeu.",
+  "prepPreview": {
+    "at": 1,
+    "columns": [
+      "Produit",
+      "Commerce",
+      "Proposition"
+    ],
+    "rows": [
+      [
+        "Miel de fleurs · 250 g",
+        "Épicerie du Pont",
+        "À accepter"
+      ],
+      [
+        "Tasse en grès · pièce",
+        "Atelier Argile",
+        "Acceptée"
+      ],
+      [
+        "Pain de campagne · 500 g",
+        "Fournil du Bourg",
+        "Acceptée"
+      ],
+      [
+        "Bougie ambrée · 120 g",
+        "Maison Cire",
+        "Acceptée"
+      ]
+    ]
+  }
+}
+</script>
+<script src="deroulement.js"></script>
+<script src="tirage.js"></script>
+<script src="interface.js"></script>
+</body></html>

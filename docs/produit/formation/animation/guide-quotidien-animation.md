@@ -1,93 +1,76 @@
 # Localeo Animation - Votre guide au quotidien
 
-<!-- Source canonique du PDF ; générateur dans localeo-animation/scripts/generate-animation-guide.py. Édition du 25 novembre 2026. Les captures montrent l'application réelle avec des données d'exemple, jamais des comptes de production. -->
+<!-- Source canonique du PDF. Générateur dans localeo-animation/scripts/generate-animation-guide.py. Édition du 25 novembre 2026. Les captures montrent l’application réelle avec des données fictives. -->
 
-## 1 · Piloter l'activité de ses animations
+<!-- Sommaire : Prendre en main votre espace -->
 
-**Objectif :** comprendre l'activité de la commune sur une période commune.
+## 1 · Vous connecter et choisir votre commune
 
-![Pilotage des animations rassemble les indicateurs et leur évolution sur les sept derniers jours. Les chiffres sont fictifs.](illustrations/guide-quotidien/pilotage-indicateurs-1024.png)
+Prenez l’email d’invitation de votre organisation si vous ouvrez Localeo Animation pour la première fois.
 
-1. Connectez-vous avec votre compte personnel. Acceptez, si nécessaire, l'invitation de votre organisation reçue par email.
-2. Vérifiez le nom de l'organisation et la **commune active** dans l'en-tête. Le changement de commune renouvelle les informations affichées.
-3. Dans **Pilotage des animations**, **7 derniers jours** est sélectionné par défaut. Choisissez **Aujourd’hui**, **30 derniers jours** ou une période **Personnalisée** selon votre besoin.
-4. Pour une période personnalisée, indiquez le début et la fin : au maximum **366 jours**, sans date de fin future. Les jours sont calculés en heure de Paris.
-5. **Actualiser** relit les résultats de la période sélectionnée et revient à la première page.
+1. Suivez le lien de l’invitation pour activer votre accès. Si votre compte est déjà actif, connectez-vous avec votre compte personnel.
+2. Vérifiez le nom de votre organisation et la commune indiquée en haut de l’écran.
+3. Si vous gérez plusieurs communes, choisissez celle sur laquelle vous voulez travailler. Vérifiez que son nom s’affiche et que la liste des animations correspond à cette commune.
 
-Les quatre cartes distinguent **inscriptions confirmées**, **passages validés**, **lots retirés** et **utilisations**. Cette dernière détaille bons, coffrets distincts et prestations consommées. La comparaison porte sur la période précédente ; la courbe suit inscriptions et passages.
+![En haut de l’écran, vérifiez la commune avant d’ouvrir ou de créer une animation.](illustrations/guide-quotidien/animations-mobile-390.png)
 
-> Tous les statuts, y compris les animations clôturées et archivées, sont compris pour la commune active. La même période s'applique aux cartes, à la courbe, aux résultats par animation et à l'export.
+### Si une commune ou une action manque
 
-## 2 · Lire les résultats et les exporter
+Les communes et les actions disponibles dépendent de vos autorisations et des services activés pour votre organisation. Demandez au responsable de vérifier votre accès si vous ne trouvez pas ce dont vous avez besoin.
 
-**Objectif :** repérer les animations ayant eu une activité et comprendre leurs résultats.
+## 2 · Retrouver les tâches à faire aujourd’hui
 
-![Les résultats par animation présentent l'activité et la qualification des inscrits de la période. Exemple fictif.](illustrations/guide-quotidien/pilotage-resultats-1024.png)
+Sur votre tableau de bord, ouvrez les tâches qui demandent votre attention, comme la vérification d’une animation arrivée à sa date de fin.
 
-1. Consultez les **résultats par animation** pour retrouver les chiffres et ouvrir le suivi de l'animation souhaitée.
-2. Utilisez la pagination de **25 lignes**. Les pages suivantes et le retour du suivi conservent les bornes de lecture ; les totaux restent ceux de la période complète.
-3. La qualification représente l'état **actuellement connu des personnes inscrites ou confirmées pendant la période sélectionnée**. Elles peuvent avoir progressé depuis : ce n'est ni l'état reconstitué à la fin d'une période historique, ni le total des qualifiés de l'animation.
-4. Si cet état manque ou n'est plus à jour, la qualification est **indisponible**, pas égale à zéro. Actualisez ou consultez le suivi avant de conclure.
+1. Consultez les priorités affichées dans **Pilotage des animations**. Le tableau de bord montre jusqu’à trois tâches.
+2. Lisez le nom, la commune, l’étape et le motif. Ouvrez l’action proposée pour atteindre directement le dossier, ou choisissez **Voir toute la liste À traiter**.
+3. Dans la fiche, l’étape reste visible quand vous consultez une autre rubrique. Sur téléphone, ouvrez **Toutes les rubriques** pour les retrouver. Revenez à la liste pour reprendre vos filtres et votre page.
 
-### Exporter la période complète
+![Choisissez une priorité ou ouvrez la liste complète des animations à traiter.](illustrations/guide-quotidien/pilotage-priorites-1024.png)
 
-Choisissez **Exporter tous les résultats (CSV)** pour reprendre la période affichée et l'ensemble des résultats, pas seulement la page courante. Utilisez ce fichier pour partager ou analyser l'activité dans un tableur.
+### Masquer un rappel pour vous seul
 
-Si l'export dépasse **10 000 animations**, il est refusé ; réduisez la période et recommencez. Aucune liste tronquée ne doit être prise pour un résultat complet.
+Dans **Rappels et autres alertes**, choisissez **Supprimer de mon tableau de bord**. La tâche reste dans **À traiter** et vos collègues gardent leur rappel. Pour l’afficher de nouveau, utilisez **Annuler** ou ouvrez **Alertes masquées** et choisissez **Réafficher**. Une nouvelle échéance dépassée peut déclencher un nouveau rappel.
 
-Après **30 minutes**, la lecture préparée pour l'export expire. Cliquez sur **Actualiser** pour relire la période sélectionnée, puis demandez à nouveau le CSV.
+## 3 · Ajouter un commerce et lui ouvrir l’accès à Pro
 
-> La comparaison des cartes et de la courbe porte sur les événements enregistrés pendant les périodes, pas sur ce taux de qualification. Un coffret utilisé plusieurs fois compte comme un coffret distinct ; le détail des prestations montre son utilisation.
+Préparez le nom, l’adresse, le numéro SIRET et l’email de contact du commerce.
 
-## 3 · Lire et organiser ses priorités
+1. Dans **Commerçants**, recherchez d’abord l’établissement. S’il manque, choisissez **Ajouter un commerçant Animation**.
+2. Renseignez sa fiche et sa catégorie, puis choisissez **Créer le commerce Animation**. Vérifiez que la fiche apparaît dans le réseau de votre commune.
+3. Sur la fiche, choisissez **Inviter dans Pro** si l’action est disponible, puis confirmez l’envoi. Suivez l’envoi de l’email et l’ouverture de l’accès. Pour connaître la réponse à une invitation à jouer, consultez le dossier de l’animation.
 
-**Objectif :** retrouver les actions utiles et garder les rappels de son choix.
+Le total affiché correspond à votre recherche. Au-dessus de la liste, utilisez **Première page**, **Précédente** ou **Suivante**. « 2 / 2 » indique la deuxième page sur deux.
 
-![Le tableau de bord présente les priorités utiles et conserve les rappels de clôture personnels. Exemple fictif.](illustrations/guide-quotidien/pilotage-priorites-1024.png)
+![La liste indique si vous pouvez sélectionner le commerce pour une animation et s’il a accès à Pro.](illustrations/guide-quotidien/commercants-1280.png)
 
-1. Consultez les **trois priorités au maximum**, puis **Voir toute la liste À traiter** pour la liste complète. Ces actions à mener aujourd'hui ne dépendent pas de la période des résultats.
-2. Dépliez **Rappels et autres alertes** pour retrouver les rappels personnels.
-3. **Clôture attendue** signifie que la fin prévue est atteinte et que l'animation est encore ouverte. Consultez les conditions avant d'agir.
-4. **Supprimer de mon tableau de bord** masque uniquement le bandeau pour votre compte, sur vos appareils. Les autres membres conservent leur rappel ; l'animation reste dans **À traiter**.
-5. Utilisez **Annuler**, ou **Alertes masquées** puis **Réafficher**, pour revenir sur votre choix. Utilisez la pagination si nécessaire.
+### Pour un commerce d’une autre commune
 
-- Une nouvelle échéance dépassée peut produire un nouveau rappel.
-- Supprimer le bandeau ne clôture pas l'animation et ne valide aucune étape.
-- Une confirmation de publication n'est pas une alerte organisateur nécessitant une action.
+Choisissez **Choisir une autre commune**, recherchez la ville du magasin par nom ou code postal, puis validez **Ajouter au réseau Animation**. Si la commune, le SIRET et l’email correspondent à une fiche existante, celle-ci rejoint votre réseau. Pour détacher un commerce, relisez les invitations concernées avant de confirmer. Les invitations en attente sont annulées et les participations déjà acceptées se gèrent dans chaque animation.
 
-> Les possibilités visibles dépendent de votre rôle, de vos communes autorisées et des modules disponibles. Une action absente ou refusée nécessite une vérification avec le responsable ou le support.
+Pour ajouter plusieurs commerces, utilisez **Import commerçants** si vous y avez accès.
 
-## 4 · Choisir et créer une animation
+<!-- Sommaire : Préparer et publier une animation -->
 
-**Objectif :** passer de votre idée à un brouillon, sans publier par erreur.
+## 4 · Créer un brouillon d’animation
 
-![Ce Passeport d’exemple autorise la validation des visites sans achat.](illustrations/guide-quotidien/achat-passeport-1280.png)
+Préparez un nom, des dates et le type de jeu que vous souhaitez organiser. Vous pourrez compléter votre projet avant de le publier.
 
-1. Ouvrez **Animations**, puis **Créer** sur téléphone (**Créer une animation** sur ordinateur). Pour retrouver une saisie enregistrée, choisissez **Préparations**, puis **Reprendre la préparation**. Les préparations plus anciennes restent accessibles avec **Suivant** et **Précédent**.
-2. Sur téléphone, avancez une étape à la fois. Le sélecteur nomme l'étape courante ; **Continuer** et **Précédent** permettent de naviguer. La commune active et le modèle restent visibles.
-3. Lorsque proposé, utilisez **Enregistrer la préparation** dans le pied d'actions, ou **Autres actions > Enregistrer et quitter**. Attendez la confirmation : continuer ne sauvegarde pas automatiquement et enregistrer ne publie rien.
-4. Après **Créer le brouillon**, retrouvez l'**Assistant**, qui indique les informations et accords encore nécessaires. Dans **Configuration**, changez de partie sans perdre votre saisie ; utilisez **Enregistrer** pour la confirmer.
+1. Ouvrez **Animations**, puis **Créer** sur téléphone ou **Créer une animation** sur ordinateur. Vérifiez la commune et choisissez le modèle de jeu.
+2. Renseignez les informations demandées. Sur téléphone, **Continuer** et **Précédent** permettent de passer d’une étape à l’autre.
+3. Choisissez **Créer le brouillon**, puis confirmez. Le brouillon s’ouvre avec l’**Assistant**, qui montre ce qu’il reste à préparer.
 
-### Régler le seuil de validation
+![Dans l’Assistant du brouillon, ouvrez la rubrique indiquée sur chaque point d’attention.](illustrations/guide-quotidien/assistant-1024.png)
 
-Pour un **Passeport commerçant**, un **Jeu des vitrines** ou un **Juste Prix**, sélectionnez d'abord les commerçants. Le **Seuil de validation** propose ensuite de **1 au nombre de commerçants sélectionnés** : par exemple, de 1 à 6 pour six commerces.
+### Reprendre plus tard
 
-Si vous réduisez la sélection, un seuil devenu incompatible reste affiché **à ajuster**. Choisissez explicitement une nouvelle valeur ou ajoutez des commerçants avant de continuer ; l'application ne remplace pas votre choix en silence.
+Utilisez **Enregistrer la préparation** ou **Autres actions**, puis **Enregistrer et quitter**, si ces actions sont proposées. Attendez la confirmation. Pour reprendre, ouvrez **Préparations**, puis **Reprendre la préparation**. Dans un brouillon déjà créé, changez de partie dans **Configuration** et choisissez **Enregistrer** pour garder vos modifications.
 
-> Sélectionner un commerce ne vaut pas accord de sa part. À la publication, les contrôles vérifient aussi les commerces ayant accepté de participer. Consultez les blocages indiqués avant de publier.
+### Choisir un jeu
 
-Dans **Mission & règles** à la création ou dans **Configuration → Règles** du brouillon, réglez **Achat pour valider un passage**. Choisissez **Achat requis** (sans montant minimum) ou **Visite sans achat**. Le commerçant valide le passage sur place dans les deux cas. Après un changement, renvoyez les invitations déjà envoyées. Le choix est figé à la publication.
+Une tombola publique accepte des inscriptions à distance ou sur place selon le mode choisi. La tombola des commerces s’appuie sur les validations prévues. Le Passeport et la chasse invitent à suivre un parcours. Vitrines et Juste Prix proposent des questions chez les commerçants. Si Léo est proposé, décrivez votre projet, choisissez les commerces et relisez sa proposition avant de l’accepter.
 
-### Quel principe de jeu ?
-
-- **Tombola publique :** inscription par email ; selon le mode choisi, à distance ou sur place avec le QR et le code du jour.
-- **Tombola des commerces :** participation liée aux validations prévues par l'animation.
-- **Passeport commerçant** et **chasse au trésor :** progression dans un parcours de commerces ou de lieux.
-- **Jeu des vitrines** et **Juste Prix :** réponses aux activités proposées chez les commerçants.
-
-> Lorsque Léo est proposé pour préparer une chasse ou un passeport, complétez son brief, sélectionnez les commerces et relisez la proposition avant de la valider. Une préparation générée reste à contrôler ; elle ne publie pas l'animation.
-
-## 4 bis · Choisir les commerces à solliciter
+## 5 · Choisir les commerces à solliciter
 
 Pendant la création d’une animation, ouvrez **Commerçants à solliciter**. Vous y retrouvez les commerces de la commune et les adhérents de votre réseau installés ailleurs.
 
@@ -100,279 +83,253 @@ Pendant la création d’une animation, ouvrez **Commerçants à solliciter**. V
 
 Cochez **Uniquement les commerces de Bouliac** si Bouliac est votre commune. Le compteur indique combien de commerces sélectionnés sont hors commune. Décochez le filtre pour les retrouver avec leur case toujours cochée.
 
-## 5 · Régler les essais de Vitrines et Juste Prix
+## 6 · Fixer le nombre de visites et choisir si un achat est requis
 
-**Objectif :** donner une règle claire aux joueurs avant le lancement.
+Pour un Passeport commerçant, un Jeu des vitrines ou un Juste Prix, fixez le nombre de passages à réussir pour pouvoir prétendre aux lots.
 
-![Le brouillon permet de choisir le maximum de mauvaises réponses par étape. Exemple fictif du Juste Prix Local, réglé sur trois erreurs.](illustrations/guide-quotidien/mauvaises-reponses-1280.png)
+1. Sélectionnez les commerces du parcours. À la création, ouvrez **Mission & règles**. Le nom du seuil dépend du jeu. Pour un brouillon déjà créé, ouvrez **Configuration**, puis **Règles** et repérez **Seuil de validation**.
+2. Choisissez le nombre de passages à réussir et enregistrez. Par exemple, avec six commerces, vous pouvez demander trois passages sur les six.
 
-### Choisir le maximum avant de publier
+![Le seuil vous permet de choisir combien de passages sont nécessaires pour réussir le parcours.](illustrations/guide-quotidien/seuil-validation-1280.png)
 
-Pour un **Jeu des vitrines** ou un **Juste Prix Local**, réglez **Mauvaises réponses maximum par étape** pendant la création ou dans la configuration du brouillon. Choisissez **1 à 10** ; la valeur initiale est **1**. Vérifiez que le règlement explique cette règle avant de publier.
+3. Si le réglage **Achat pour valider un passage** est proposé, choisissez **Visite sans achat** ou **Achat requis**. Dans les deux cas, le commerçant valide le passage sur place. L’achat requis s’applique sans montant minimum.
 
-Une bonne réponse termine les essais de l'étape. Si le joueur atteint le maximum de mauvaises réponses, l'étape devient **invalide** : aucun nouvel essai, scan ou PIN commerçant ne peut la rattraper. Le réglage est **figé à la publication**.
+![Ici, un joueur peut faire valider son passage sans achat.](illustrations/guide-quotidien/achat-passeport-1280.png)
 
-### Comprendre ce que voit le joueur dans Live
+### Si vous changez la liste des commerces ou la règle d’achat
 
-Le formulaire indique les réponses restantes. Une étape épuisée porte un **tampon invalide** dans le parcours ; elle ne compte pas parmi les étapes réussies et ne demande plus de passage à valider.
+Un seuil trop élevé est marqué **à ajuster** si vous retirez des commerces. Corrigez-le ou ajoutez des commerces. Si vous changez la règle d’achat, renvoyez les invitations pour que les commerces reçoivent la consigne à jour. Le choix est fixé à la publication. Avant de publier, vérifiez que suffisamment de commerces ont accepté de participer.
 
-Une étape invalide n'élimine pas automatiquement le joueur. Si le seuil de validation est atteint, sa qualification est conservée. S'il reste assez d'étapes pour l'atteindre, le parcours peut continuer ; sinon, Live indique que la participation est **non qualifiable**.
+## 7 · Régler les essais au Jeu des vitrines ou au Juste Prix
 
-> Exemple : avec un seuil de trois étapes sur quatre, une étape invalide laisse encore la possibilité de réussir les trois autres. Gardez distincts le maximum d'erreurs par étape et le seuil global de validation.
+Choisissez le nombre d’erreurs permis à chaque étape avant de publier votre jeu.
 
-## 6 · Constituer son réseau de commerces
+1. Pendant la création ou dans la configuration du brouillon, ouvrez **Règles** et repérez **Mauvaises réponses maximum par étape**.
+2. Choisissez de 1 à 10. Le premier choix proposé est 1.
+3. Enregistrez, vérifiez la valeur affichée et indiquez-la dans le règlement. Une fois l’animation publiée, ce choix est fixé.
 
-**Objectif :** disposer de fiches exploitables et comprendre l'accès de chaque commerce.
+![Dans cet exemple, le joueur peut donner jusqu’à trois mauvaises réponses à chaque étape.](illustrations/guide-quotidien/mauvaises-reponses-1280.png)
 
-![Les deux établissements ont une adresse dans leur commune réelle. La liste indique leur disponibilité pour les animations et leur accès Pro.](illustrations/guide-quotidien/commercants-1280.png)
+### Si un joueur atteint le maximum
 
-Le total affiché correspond à votre recherche. Au-dessus de la liste, utilisez **Première page**, **Précédente** ou **Suivante**. « 2 / 2 » indique la deuxième page sur deux.
+Localeo Live affiche les réponses restantes. Une bonne réponse termine les essais. Quand le joueur atteint le maximum d’erreurs, Live marque l’étape **invalide** et bloque les essais, le scan et le code commerçant pour cette étape. Le joueur reste qualifié s’il a déjà atteint le seuil. Il peut poursuivre si les autres étapes lui permettent encore de l’atteindre.
 
-1. Ouvrez **Commerçants**. Recherchez un établissement avant de créer une nouvelle fiche.
-2. Pour un adhérent extérieur, utilisez **Choisir une autre commune**. Recherchez par nom ou code postal et sélectionnez la commune de son magasin. Si la commune, le SIRET et l’email correspondent à une fiche existante, elle rejoint votre réseau.
-3. Invitez le commerçant à rejoindre son espace lorsque cette action est proposée. Suivez séparément l'envoi du mail et l'initialisation de l'accès.
-4. Pour un volume important, ouvrez **Import commerçants** si vous avez le module et l’autorisation. Les chapitres 18 et 19 décrivent la préparation et la vérification d’un import.
+## 8 · Inviter les commerces et vérifier leurs préparatifs
 
-Pour retirer un adhérent extérieur, relisez les invitations concernées avant de confirmer. Les invitations en attente sont annulées. Ses participations déjà acceptées se gèrent depuis chaque animation.
+Dans le brouillon de l’animation, préparez les consignes que chaque commerce devra suivre avant le lancement.
 
-### Trois notions à distinguer
+1. Ouvrez **Invitations**, sélectionnez les commerces de la commune ou les adhérents extérieurs de votre réseau, puis envoyez les invitations.
+2. Expliquez la mission de chacun. Par exemple, accueillir les joueurs et valider leur passage, présenter une vitrine, afficher un support ou remettre un lot.
+3. Revenez dans **Invitations** pour vérifier les réponses. Si le suivi de préparation est activé, actualisez-le et repérez les commerces indiqués comme **prêts**. Relancez ceux dont vous attendez encore les préparatifs.
 
-- La fiche du commerce décrit l'établissement.
-- Son **accès Pro** indique sa capacité à se connecter à Localeo Commerçant.
-- Son **accord pour une animation** se suit dans le dossier de cette animation.
+![Sur téléphone, ouvrez l’étape Terrain pour parcourir les vérifications de la chasse.](illustrations/guide-quotidien/preparation-mobile-detail-390.png)
 
-> Un email envoyé ne prouve ni la création du mot de passe, ni l'accord du commerce pour participer. Ouvrez les détails de suivi avant de relancer une personne.
+### Pour une chasse ou un passeport préparé avec Léo
 
-## 7 · Préparer les commerçants et le parcours
+Dans **Étape de préparation**, relisez les lieux, le parcours et les contenus proposés. Ouvrez les **points à résoudre avant publication** et traitez-les. Si l’application propose un démarrage forcé, lisez ses conséquences et indiquez le motif demandé avant de confirmer. Pour le Jeu des vitrines, vérifiez aussi les activités préparées par les commerces.
 
-**Objectif :** savoir qui doit agir avant le lancement et vérifier les supports terrain.
+## 9 · Approuver les produits du Juste Prix
 
-![Sur téléphone, le sélecteur nomme l'étape Terrain et les contrôles indiquent ce qu'il reste à vérifier.](illustrations/guide-quotidien/preparation-mobile-detail-390.png)
+Attendez que les commerces aient proposé leurs produits, puis vérifiez-les dans le brouillon.
 
-1. Dans **Invitations**, choisissez les commerces éligibles de la commune et les adhérents extérieurs de votre réseau. Suivez leurs réponses dans le même dossier.
-2. Expliquez à chacun sa mission : accueillir les joueurs, présenter une vitrine ou un prix, valider un passage, installer un support ou remettre un lot selon le modèle.
-3. Pour une chasse avec Léo, le sélecteur **Étape de préparation** nomme les étapes et leur état. Relisez parcours et lieux, puis contrôlez organisation, commerces, terrain et publication. Dépliez les **points à résoudre avant publication**. Pour un passeport assisté, relisez également les contenus avant de les valider.
-4. Vérifiez les préparatifs, puis publiez. Live propose aussi l’animation dans l’agenda des communes publiées où un commerce participe avec un accord valide.
+1. Ouvrez **Produits et prix proposés** et repérez les propositions **À examiner**.
+2. Vérifiez le commerce, le produit, sa description, son format ou son unité et le prix toutes taxes comprises (**prix TTC**).
+3. Choisissez **Accepter la proposition** si elle est correcte. Attendez la confirmation et le repère **Approuvé** avant de passer à la suivante.
 
-### Utiliser le suivi de préparation
+![Vérifiez le produit et son prix avant d’accepter la proposition du commerçant.](illustrations/guide-quotidien/juste-prix-produits-1024.png)
 
-Lorsque ce suivi est activé, distinguez les commerces **prêts** de ceux encore attendus. Actualisez la section pour lire les dernières réponses. Une éventuelle action de démarrage forcé exige de comprendre et confirmer le motif demandé.
+### Si une proposition doit changer
 
-> Pour le jeu des vitrines, vérifiez l'activité et les éléments proposés par chaque commerce. La disponibilité des rubriques et du suivi varie selon le modèle et la configuration choisie.
+Choisissez **Demander une correction**, donnez le motif et ajoutez des précisions. Avec **Autre motif**, le texte est obligatoire. Le commerçant pourra corriger sa proposition puis la renvoyer. Les états **À compléter** et **À corriger** signalent une action attendue du commerce. Actualisez la rubrique pour vérifier les dernières réponses. Les compteurs sont ceux de la page affichée.
 
-## 8 · Approuver les produits du Juste Prix Local
+Après publication ou avec un accès en consultation seule, vous pouvez relire les propositions. En cas de doute sur une décision envoyée, vérifiez d’abord son état.
 
-**Objectif :** vérifier et approuver chaque proposition avant publication.
+## 10 · Préparer les lots à gagner
 
-![Produits et prix proposés distingue les propositions à examiner, leur prix TTC et les actions de décision. Les compteurs concernent la page affichée.](illustrations/guide-quotidien/juste-prix-produits-1024.png)
+Décidez ce que les habitants pourront gagner et qui assurera la remise des lots.
 
-1. Dans **Produits et prix proposés**, repérez les lignes **À examiner**. Vérifiez commerce, produit, description, unité ou format et **prix TTC**.
-2. Choisissez **Accepter la proposition** si tout est correct. Attendez la confirmation et le repère **Approuvé**.
-3. Sinon, choisissez **Demander une correction**, sélectionnez un motif et ajoutez les précisions utiles. **Autre motif** exige un texte. Envoyez la demande ; le commerce retrouve le motif dans son espace, corrige puis propose à nouveau.
+1. Dans **Configuration**, ouvrez **Dotation** sur ordinateur ou **Lots** sur téléphone. Choisissez le mode de remise, puis enregistrez.
+2. Pour des **lots libres remis hors Localeo**, indiquez le nom de chaque lot, la quantité, la personne chargée de la remise et les consignes de retrait.
+3. Vérifiez que les lots, les quantités et leur ordre sont corrects dans la liste.
 
-**À compléter** et **À corriger** attendent une action du commerçant. Utilisez l'actualisation de la section pour lire les dernières propositions ; les compteurs décrivent uniquement la page affichée. Une mention de consultation seule explique pourquoi les décisions sont indisponibles, par exemple après publication ou selon vos droits.
+![La rubrique Dotation montre le mode choisi, les quantités et les actions disponibles.](illustrations/guide-quotidien/configuration-1024.png)
 
-> L'accord du commerce pour participer ne vaut pas approbation de son produit. Vous approuvez sa proposition sans modifier son prix à sa place. Si le résultat est incertain, vérifiez les propositions avant de recommencer.
+### Si vous offrez des bons ou des coffrets
 
-## 9 · Construire une dotation compréhensible
+Pour des **bons numériques**, préparez le modèle et le commerce de remise. Créez les bons dans le stock, sélectionnez les exemplaires disponibles dans le bon ordre et confirmez leur affectation. Vérifiez leur durée de validité. Chaque bon s’utilise en une seule fois. Pour des **coffrets**, sélectionnez-les et vérifiez leur financement avant la publication.
 
-**Objectif :** décrire ce que les habitants peuvent gagner et qui le remettra.
+Une **Dotation figée** indique qu’un engagement ou une publication a déjà été enregistré. Si vous changez de mode, lisez la confirmation avant d’agir. Certaines descriptions de lots peuvent être retirées.
 
-![La dotation met en évidence le mode, l'état modifiable ou figé, les quantités et les actions sur les lots.](illustrations/guide-quotidien/configuration-1024.png)
+## 11 · Publier une animation
 
-1. Dans **Configuration**, ouvrez **Dotation** sur ordinateur ou **Lots** sur mobile. Choisissez un mode disponible et enregistrez-le avant de gérer les lots.
-2. Pour des **lots libres remis hors Localeo**, ajoutez un intitulé, une quantité, un responsable de remise et des consignes concrètes. Vérifiez l'ordre des lots.
-3. Pour des **bons numériques**, préparez le modèle et le commerce de remise, puis créez les exemplaires dans le stock. Choisissez des exemplaires disponibles, leur ordre et confirmez leur affectation. Vérifiez la durée de validité : chaque bon se remet entièrement en une seule fois.
-4. Pour des **coffrets**, sélectionnez les coffrets et contrôlez leur financement dans les sections correspondantes avant publication.
+Ouvrez le brouillon dont vous voulez rendre la présentation accessible aux habitants.
 
-### Lire les états avant d'agir
+1. Depuis l’édition, ouvrez **Publication** pour revoir les contrôles. Chaque blocage indique le point à résoudre.
+2. Dans **Préparer mon animation**, sélectionnez une carte rouge ou orange pour ouvrir la rubrique indiquée. Dépliez **Autres points à vérifier** pour afficher les suivants. Traitez les blocages, puis relisez la présentation destinée aux habitants.
+3. Choisissez **Publier l’animation**, puis confirmez. Attendez la confirmation et vérifiez que l’état devient **Publiée** ou **En cours** si le jeu est ouvert.
 
-- **Modifiable :** vous pouvez préparer les informations selon vos droits.
-- **Dotation figée :** un engagement ou une publication a déjà été enregistré ; seules les actions encore proposées sont possibles.
-- **À vérifier :** consultez l'explication et contactez Localeo si nécessaire.
+![La revue de publication présente les conditions à remplir avant de confirmer.](illustrations/guide-quotidien/publication-1024.png)
 
-> Changer de mode peut retirer des descriptions de lots déjà enregistrées. Lisez la confirmation. Un lot libre déclaré ne constitue pas un achat ou une remise déjà effectuée.
+### Si la confirmation tarde
 
-## 10 · Vérifier puis publier
+Utilisez **Vérifier l’enregistrement** si l’action est proposée. Tant que le résultat est incertain, vérifiez son état avant de recommencer, surtout si l’action engage une somme. Une fois publiée, l’animation peut aussi apparaître dans l’agenda Live des communes publiées où un commerce participe avec un accord valide.
 
-**Objectif :** ouvrir une animation aux habitants après les contrôles requis.
+<!-- Sommaire : Communiquer et suivre l’activité -->
 
-![Dans Préparer mon animation, les cartes indiquent la rubrique à ouvrir.](illustrations/guide-quotidien/assistant-1024.png)
+## 12 · Faire connaître votre animation et écrire aux inscrits
 
-1. Revenez à l'**Assistant** ou à **Publication et clôture** pour consulter les contrôles à jour.
-2. Dans **Préparer mon animation**, sélectionnez une carte rouge ou orange pour ouvrir la rubrique indiquée. Dépliez **Autres points à vérifier** pour afficher les suivants. Traitez les blocages signalés.
-3. Relisez les avertissements et vérifiez la présentation destinée aux habitants. Un contrôle réussi ne publie pas automatiquement.
-4. Utilisez **Publier** lorsqu'il est proposé, puis confirmez. Attendez la confirmation à l'écran et vérifiez le nouvel état.
+Une fois la présentation prête, vérifiez les supports à diffuser. Si votre organisation dispose de **Communication**, vous pouvez aussi écrire aux participants dans Localeo Live.
 
-### Suivre les états
+1. Dans **Flyers**, ouvrez le support de l’animation et vérifiez son contenu, le lien d’inscription et le QR avant de le diffuser. Refaites le support si ses renseignements ont changé et que l’action est proposée.
+2. Pour savoir d’où viennent les inscriptions, nommez vos supports dans les sources de diffusion. Par exemple, « Affiche mairie » pourra apparaître dans le bilan.
+3. Pour contacter des personnes déjà inscrites, ouvrez **Communication**, puis **Nouveau message**. Choisissez les destinataires, rédigez le texte et vérifiez l’aperçu.
+4. Envoyez ou programmez le message. Consultez l’historique pour vérifier le résultat de l’envoi.
 
-**Brouillon / Configurée** : préparation. **Publiée** : publication enregistrée, éventuellement avant le début. **En cours** : animation ouverte. **Clôturée** : participation fermée ; les opérations de fin restent à traiter.
+![Dans Communication, vérifiez le crédit d’envoi et retrouvez les messages dans l’historique.](illustrations/guide-quotidien/communication-1024.png)
 
-> Si l'envoi est interrompu, utilisez « Vérifier l'enregistrement » lorsqu'il est proposé. Un traitement en cours ou un résultat incertain ne doit pas être interprété comme un succès. Évitez de recommencer une opération financière sans vérifier son résultat.
+### Selon la situation
 
-## 11 · Faire connaître l'animation et écrire aux participants
+Pour une tombola publique sur place, affichez aussi le code du jour. Il change à minuit, heure de Paris. La programmation utilise la même heure. Les destinataires reçoivent le message dans Live. L’alerte sur leur appareil dépend de leurs préférences et de leurs accès.
 
-**Objectif :** distinguer les supports de découverte et les messages aux personnes déjà inscrites.
+## 13 · Envoyer un message aux abonnés de votre commune
 
-![La rubrique Communication montre les droits, les quotas et l'historique des messages de l'animation.](illustrations/guide-quotidien/communication-1024.png)
+Vérifiez la commune active. Vous devez disposer de l’accès à **Communication communale**.
 
-1. Vérifiez le **flyer**, le lien d'inscription et le QR de l'animation avant de les diffuser. Régénérez un support si les informations ont changé et que l'action est disponible.
-2. Dans les sources de diffusion, identifiez vos supports, par exemple « Affiche mairie ». Le bilan pourra distinguer les inscriptions attribuées à ces sources.
-3. Ouvrez **Communication**, puis **Nouveau message** si votre module, vos droits et votre quota l'autorisent.
-4. Choisissez le groupe de participants, rédigez un message utile, utilisez l'aperçu puis envoyez ou programmez. Contrôlez le résultat dans l'historique.
+1. Dans **Suivre l’activité**, ouvrez **Communication communale**, puis créez un message. Renseignez le titre et le texte.
+2. Choisissez qui informer et lisez l’aperçu. Celui-ci indique combien d’appareils suivent la commune et ont activé **Infos de mes communes**.
+3. Confirmez **Envoyer maintenant**, puis ouvrez le bilan. Vérifiez le nombre de messages déposés dans Live et le nombre d’alertes envoyées aux appareils.
 
-### Ce que signifie l'envoi
+![L’aperçu indique combien d’appareils sont concernés par les critères choisis.](illustrations/guide-quotidien/communication-communale-1024.png)
 
-Les messages sont adressés dans Localeo Live. Une notification navigateur dépend aussi des préférences et de l'accès des destinataires. Un message reçu dans Live ne garantit pas une alerte affichée sur chaque téléphone.
+### Si vous voulez préciser le public ou ajouter un lien
 
-Pour une **tombola publique sur place**, affichez aussi le code du jour fourni dans l'animation. Il change à minuit, heure de Paris : le QR seul ne permet pas de s'inscrire.
+Vous pouvez envoyer à tous les abonnés, choisir ceux qui ont ou non une participation liée, ou combiner ce choix avec l’activité récente. Un lien peut mener à une page publique Localeo ou à un site dont l’adresse commence par « https:// ». Vérifiez sa destination dans l’aperçu.
 
-> Les dates de programmation sont exprimées en heure de Paris. Le quota, la fréquence et la fenêtre d'envoi sont contrôlés avant l'envoi. Relisez l'audience et le statut de la campagne plutôt que de supposer qu'elle a touché tout le monde.
+Les envois depuis une animation et depuis la commune utilisent le même crédit, débité dès le premier message déposé dans Live. Si l’envoi reste incertain, vérifiez son enregistrement sur le même écran.
 
-## 11 bis · Informer les abonnés de la commune
+## 14 · Vérifier la progression d’un participant
 
-**Objectif** Informer les personnes qui suivent votre commune dans Localeo Live.
+Ouvrez l’animation concernée dans la bonne commune. Pour aider une personne, munissez-vous du nom ou de la référence de sa participation.
 
-![Dans cet exemple, le message cible les appareils sans participation liée sur lesquels une activité a été enregistrée dans les 30 derniers jours.](illustrations/guide-quotidien/communication-communale-1024.png)
+1. Ouvrez **Suivi**. Lisez l’unité et le périmètre du chiffre qui vous intéresse, puis ouvrez son détail lorsqu’un lien est proposé.
+2. Dans **Participants**, recherchez la personne et ouvrez son dossier. Vérifiez sa progression et les réponses affichées selon le jeu.
+3. Si elle vous signale un problème de visite, ouvrez **Validations** et vérifiez si le passage a été validé. Actualisez la rubrique si vous attendez un résultat.
 
-1. Vérifiez la commune active. Dans **Suivre l’activité**, ouvrez **Communication communale** si votre module et vos droits l’autorisent.
-2. Créez un message avec un titre et un texte. Ajoutez si besoin un lien vers une page publique Localeo ou un site HTTPS. Vérifiez la destination affichée dans l’aperçu.
-3. Choisissez tous les abonnés, les personnes avec ou sans participation liée, ou combinez les critères de participation et d’activité. L’aperçu compte les appareils qui suivent la commune et ont activé **Infos de mes communes**.
-4. Confirmez **Envoyer maintenant**, puis consultez le bilan. Si l’envoi reste incertain, vérifiez son enregistrement depuis le même écran.
+![La rubrique Participants conserve le repère de déroulement au-dessus des filtres, du tableau et de sa pagination.](illustrations/guide-quotidien/participants-1600.png)
 
-### Lire le bilan
+### Si vous devez intervenir sur le parcours
 
-Le compteur est partagé avec les messages envoyés depuis une animation. Le crédit est consommé au premier dépôt dans Live. Le bilan distingue les dépôts Live et les notifications push, qui dépendent aussi des réglages des appareils.
+Vérifiez le commerce et la consigne attendue avant d’agir. Selon le jeu et vos droits, des actions peuvent être proposées sur une étape ou un justificatif. Lisez les conséquences affichées avant de confirmer. Une donnée **non collectée** ou indisponible reste inconnue. Vérifiez la date de relevé quand elle est indiquée.
 
-## 12 · Suivre l'activité pendant l'animation
+## 15 · Consulter l’activité de votre commune sur une période
 
-**Objectif :** comprendre la progression et intervenir avec les bonnes informations.
+Sur **Pilotage des animations**, suivez l’activité de la commune sélectionnée, y compris les animations clôturées ou archivées.
 
-![Le suivi réunit les compteurs et l'activité ; la navigation permet d'ouvrir les participants et les validations.](illustrations/guide-quotidien/suivi-1024.png)
+1. Vérifiez la commune en haut de l’écran. La vue s’ouvre sur les **7 derniers jours**.
+2. Choisissez **Aujourd’hui**, **7 derniers jours** ou **30 derniers jours**. Vérifiez la période affichée avant de lire les chiffres.
+3. Lisez les **inscriptions confirmées**, les **passages validés**, les **lots retirés** et les **utilisations**. La courbe montre l’évolution des inscriptions et des passages. Les cartes comparent la période à la précédente.
 
-1. Ouvrez **Suivre l'animation** pour consulter l'activité et la progression disponible pour votre modèle.
-2. Retrouvez une personne dans **Participants** ; ouvrez son dossier pour comprendre son état, ses réponses ou sa progression selon le jeu.
-3. Consultez les **Validations** pour les passages et les éléments disponibles. Un compteur de parcours commencés n'est pas nécessairement un nombre de passages validés.
-4. Actualisez la section concernée plutôt que de quitter une saisie ou de recharger toute l'application.
+![Le sélecteur fixe la période commune aux chiffres, à la courbe, aux résultats et à l’export.](illustrations/guide-quotidien/pilotage-indicateurs-1024.png)
 
-### Réagir à une difficulté terrain
+### Choisir d’autres dates
 
-Vérifiez d'abord l'animation, le commerce, l'état du participant et la consigne attendue. Pour les modèles concernés, les outils d'exploitation peuvent proposer des actions sur une étape ou une preuve. Lisez leurs conséquences et les confirmations ; elles dépendent de vos droits et de l'état du jeu.
+Dans **Personnalisée**, saisissez le début et la fin, sur 366 jours au plus et avec une fin au plus tard aujourd’hui. Les jours suivent l’heure de Paris. **Actualiser** relit la période choisie et revient à la première page de résultats. Le chiffre des coffrets compte chaque coffret une seule fois. Le détail des prestations montre ses utilisations.
 
-> Un résultat absent ou « non collecté » n'est pas une valeur zéro. Les statistiques précisent, lorsqu'elle est disponible, leur date d'observation. Les données présentées ici servent d'exemple pédagogique.
+## 16 · Télécharger les résultats des animations
 
-## 13 · Clôturer au bon moment
+Depuis **Pilotage des animations**, vérifiez la période avant de partager les chiffres avec votre équipe.
 
-**Objectif :** fermer réellement la participation puis préparer les opérations de fin.
+1. Dans **Résultats par animation**, repérez les animations qui ont eu une activité. Passez à la page suivante si nécessaire. Les résultats apparaissent par groupes de 25 et le total couvre toute la période.
+2. Choisissez **Exporter tous les résultats (CSV)**. Le fichier couvre toutes les pages pour la période choisie.
+3. Ouvrez le fichier dans votre tableur et vérifiez que vous avez les résultats de la période attendue.
 
-![Sur mobile, le suivi et les actions restent accessibles depuis la rubrique sélectionnée dans l'animation.](illustrations/guide-quotidien/publication-390.png)
+![Retrouvez les résultats de chaque animation et le bouton pour télécharger la période complète.](illustrations/guide-quotidien/pilotage-resultats-1024.png)
 
-1. Vérifiez la période prévue et l'activité avant de clôturer. Si la date de fin prévue est atteinte, consultez l'alerte **Clôture attendue**.
-2. Ouvrez **Publication et clôture**, ou le raccourci donné par l'alerte. Lisez les conditions et les conséquences de l'action proposée.
-3. Confirmez la **clôture** lorsque vous souhaitez fermer la participation et que le serveur l'autorise.
-4. Contrôlez l'état obtenu puis passez au tirage et aux dossiers de fin selon le modèle.
+### Lire la colonne Qualification de la cohorte
 
-### Fin prévue et clôture réelle
+Elle indique combien de personnes remplissent aujourd’hui les conditions parmi les inscrits ou confirmés de la période. Elle tient compte de leur progression depuis cette période. Pour connaître la situation de l’animation dans son ensemble, ouvrez son suivi. Si la colonne indique **indisponible**, commencez par actualiser.
 
-La date de fin prévue informe les habitants. **Tant que l'animation n'est pas réellement clôturée par l'organisateur ou automatiquement, elle peut rester accessible à la participation**, sous réserve des autres conditions d'accès. Live informe que l'échéance prévue est atteinte.
+Au-delà de 10 000 animations, raccourcissez la période pour pouvoir exporter. Si la lecture préparée a expiré après 30 minutes, choisissez **Actualiser** puis demandez de nouveau le fichier.
 
-> L'alerte vous demande de vérifier puis de clôturer ; elle ne le fait pas à votre place. Ne confondez pas une date échue, une inscription fermée explicitement et une clôture effective. Après l'échéance prévue, les paramètres d'exploitation ne sont plus modifiables : vérifiez les dates avant cette échéance.
+<!-- Sommaire : Terminer l’animation et remettre les lots -->
 
-## 14 · Organiser le tirage et les retraits
+## 17 · Clôturer une animation
 
-**Objectif :** préparer les retraits et suivre l'utilisation des bons et coffrets.
+Clôturez l’animation quand vous souhaitez fermer la participation.
 
-![Lots et remises rapproche le bénéficiaire, le lot, son état, le retrait et l'action disponible.](illustrations/guide-quotidien/lots-remises-1024.png)
+1. Vérifiez les dates et l’activité. Si **Clôture attendue** apparaît sur votre tableau de bord, ouvrez l’animation concernée.
+2. Ouvrez **Clôture** ou choisissez **Vérifier la clôture**. Examinez les qualifiés et les conditions de fermeture. Lisez les effets, puis choisissez **Confirmer la clôture** si vous souhaitez fermer le jeu.
+3. Vérifiez l’état **Clôturée** avant de passer au tirage ou aux autres opérations de fin.
 
-1. Après la clôture, vérifiez le **tirage**, les lots et les blocages. Lancez l'opération lorsqu'elle est proposée ; attendez sa confirmation.
-2. Ouvrez **Suivre l'activité → Lots et remises**. Choisissez **Lots externes à retirer** ou **Coffrets à distribuer** pour préparer la distribution. Les autres compteurs suivent les bons et coffrets à utiliser.
-3. Recherchez le bénéficiaire ou filtrez l'animation. Vérifiez lot, état, **retrait et échéance**, puis utilisez l'action proposée. Le détail présente historique et dossier. Un rappel exige sélection et confirmation explicites.
-4. **Tous les lots** quitte le filtre de tâche ; animation, recherche, lieu et échéance sont conservés. Actualisez la section pour lire les derniers états.
+![Sur téléphone, vérifiez les conséquences de la fermeture avant de la confirmer.](illustrations/guide-quotidien/cloture-390.png)
 
-### Distinguer retrait et consommation
+### Quand la date prévue est passée
 
-Un lot externe se retire physiquement ; le commerce désigné valide un bon. Un coffret distribué peut être utilisé en plusieurs fois : lisez les prestations utilisées et restantes lorsqu'elles sont connues. Un email envoyé ne prouve pas une remise.
+La date annoncée aux habitants est un repère. Tant que la clôture n’est pas effective, des habitants peuvent encore participer selon les conditions d’accès. Le rappel **Clôture attendue** vous signale la situation. Après l’échéance prévue, il n’est plus possible de modifier les paramètres d’exploitation. Vérifiez les dates avant cette échéance.
 
-> Les compteurs couvrent tous les types et états du contexte choisi, indépendamment de la page et du filtre de tâche. Une information indisponible n'est pas zéro. Consultez **Fin de l'animation** pour résoudre les dossiers avant de terminer ou archiver.
+## 18 · Tirer au sort et suivre la remise des lots
 
-## 15 · Lire le bilan et préparer une nouvelle édition
+Attendez la clôture et vérifiez que les lots et les dossiers attendus sont prêts.
 
-**Objectif :** mesurer les résultats sans confondre absence d'information et absence d'activité.
+1. Choisissez **Préparer le tirage**. Vérifiez les personnes éligibles et les lots. Vous pouvez encore annuler. **Confirmer le tirage** engage l’attribution.
+2. Si le tirage est en cours ou si la réponse tarde, vérifiez son état dans cette rubrique. Depuis le résultat, ouvrez les gains. Pour retrouver les lots de plusieurs éditions, ouvrez **Lots et remises**.
+3. Recherchez le bénéficiaire ou filtrez par animation. Vérifiez le lieu, la date limite et l’état du lot, puis utilisez l’action proposée. Après la remise, actualisez et vérifiez l’état enregistré.
 
-![Le bilan présente les résultats disponibles, les objectifs et la couverture des mesures.](illustrations/guide-quotidien/bilan-1024.png)
+![La revue indique la population et les lots avant de confirmer l’attribution.](illustrations/guide-quotidien/tirage-1024.png)
 
-1. Ouvrez **Résultats et objectifs**. Comparez les inscriptions, parcours, passages et lots remis lorsque ces mesures sont disponibles.
-2. Lisez la période, la date d'observation et la couverture des données. Consultez les sources de diffusion et les retours recueillis lorsqu'ils sont proposés.
-3. Après résolution des dossiers de fin, utilisez les transitions proposées pour terminer ou archiver l'édition. Une archive conserve un accès de consultation selon vos droits.
-4. Pour recommencer, utilisez le **clonage / la nouvelle édition** lorsque cette action est disponible. Vérifiez le contenu repris et les points à revalider.
+### Suivre les retraits ou envoyer un rappel
 
-### Réutiliser ne signifie pas republier
+Un lot externe se retire au lieu indiqué. Le commerce désigné valide un bon. Pour un coffret, lisez les prestations utilisées et celles qui restent lorsqu’elles sont connues. Pour un rappel, sélectionnez les destinataires et confirmez l’envoi. L’email et la remise sont suivis séparément.
 
-Une nouvelle édition est un nouveau brouillon. Les dates, accords des commerçants, préparatifs, dotations et contrôles doivent être vérifiés pour cette édition. Les anciens résultats et gagnants ne constituent pas ceux de la nouvelle animation.
+**Tous les lots** enlève le filtre de tâche et garde la recherche, le lieu, l’animation et l’échéance. Les compteurs couvrent le contexte entier. Ouvrez **Fin de l’animation** pour résoudre les dossiers restants.
 
-> Les objectifs servent de repères de lecture. Une mesure « non applicable » ou « non collectée » ne doit pas être remplacée mentalement par zéro. Les captures utilisent volontairement un petit jeu de données synthétiques.
+## 19 · Faire le bilan et préparer une nouvelle édition
 
-## 16 · Gérer son équipe et obtenir de l'aide
+Une fois l’animation passée, retrouvez les chiffres à partager et les éléments à garder pour la prochaine édition.
 
-**Objectif :** retrouver les accès, les modules et une assistance adaptée à la situation.
+1. Dans l’animation, ouvrez **Résultats et objectifs**. Lisez les inscriptions, parcours, passages et lots remis lorsque ces mesures sont disponibles.
+2. Vérifiez la période, la date d’observation et les données couvertes. Consultez les sources de diffusion et les retours recueillis s’ils figurent dans le bilan.
+3. Après avoir réglé les derniers dossiers, utilisez les actions proposées pour terminer ou archiver l’édition. Vous pourrez relire une archive selon vos droits.
 
-![Le guide PDF reste accessible dans Aide et support, ainsi que dans le menu du compte.](illustrations/guide-quotidien/aide-390.png)
+![Le bilan rapproche les résultats et les objectifs. Vérifiez quelles mesures sont disponibles.](illustrations/guide-quotidien/bilan-1024.png)
 
-1. Dans le menu du compte, ouvrez **Compte et équipe** pour vérifier votre organisation, vos accès et la sécurité du compte. Le responsable peut inviter des collaborateurs et déléguer des communes et autorisations.
-2. Consultez **Abonnement** et les modules proposés pour connaître l'offre, les quotas et les possibilités disponibles. Les actions d'achat et de gestion dépendent de droits distincts.
-3. Retrouvez ce guide dans **Aide et support** ou **Mon compte et documents → Guide Animation (PDF)**. Le PDF s'ouvre dans un nouvel onglet et peut être téléchargé depuis votre lecteur.
-4. Pour une difficulté, ouvrez une demande au support : indiquez l'animation, la situation, l'heure du constat et le résultat attendu. Retrouvez les réponses sur la même demande.
+### Repartir de l’édition précédente
 
-> Ne partagez ni mot de passe, ni PIN, ni QR secret. L'objectif de première réponse humaine du support est de deux jours ouvrés, avec une date cible indiquée dans la demande ; ce délai concerne la prise en charge, pas une promesse de résolution.
+Choisissez **Nouvelle édition** si l’action est disponible, relisez ce qui est repris et créez le nouveau brouillon. Vérifiez ses dates, les accords des commerçants, les préparatifs et les lots avant de publier. Les résultats et les gagnants restent associés à l’édition d’origine. Dans le bilan, **non applicable** indique une mesure sans objet pour ce jeu. **Non collectée** indique que le chiffre est inconnu.
 
-Édition du **24 novembre 2026**. Les illustrations montrent l’interface sur ordinateur et mobile avec des données de démonstration. Les intitulés et les actions peuvent varier selon le modèle, les droits et les modules.
+<!-- Sommaire : Importer des commerces et obtenir de l’aide -->
 
-## 17 · Relire une intervention du support
+## 20 · Préparer un fichier de commerces à importer
 
-Lorsque cette rubrique est activée, ouvrez **Mon organisation → Interventions de Localeo**. Après la fin d’une intervention, la chronologie indique le nom de l’opérateur Localeo, le compte représenté, la commune, la date et le résultat de chaque action.
+Vérifiez la commune active et assurez-vous d’avoir accès à **Import commerçants**.
 
-![La chronologie indique la référence de l’animation modifiée et donne accès au suivi du lot importé.](illustrations/guide-quotidien/interventions-1024.png)
+1. Ouvrez **Import commerçants** et téléchargez le modèle Excel ou CSV. Préparez un fichier d’au plus 100 lignes de données et 2 Mo. Le modèle CSV utilise des points-virgules et l’encodage UTF-8.
+2. Choisissez le type d’import, puis déposez votre fichier. Pour un classeur Excel, indiquez la feuille à utiliser. Vérifiez la ligne qui contient les titres des colonnes et, pour un CSV, le séparateur reconnu.
+3. Pour chacun des cinq champs obligatoires, comparez la colonne proposée aux exemples du fichier. Choisissez **Enregistrer l’association des colonnes**, puis **Prévisualiser les changements**. Attendez l’aperçu des lignes.
 
-### Suivre un import
+![Les exemples sous chaque colonne vous aident à vérifier que les données iront dans le bon champ.](illustrations/guide-quotidien/import-colonnes-1024.png)
 
-1. Repérez la **Confirmation de l’import** et la référence du lot. La confirmation accepte le plan de traitement.
-2. Lisez l’état courant et le nombre de lignes effectivement traitées. **Voir le lot** ouvre le dossier dans la commune active si vous disposez du droit d’import.
-3. Retrouvez le détail et le rapport dans le dossier. Le fichier et le rapport sont disponibles jusqu’à 30 jours après la fin ou l’abandon du lot.
+### Ajouter d’autres renseignements
 
-### Retrouver un brouillon d’actualité
+Ouvrez **Champs facultatifs** pour associer des colonnes supplémentaires. Dans **Colonnes ignorées**, vérifiez les renseignements qui ne seront pas repris dans les fiches.
 
-La chronologie personnelle indique la création ou la modification d’un brouillon réalisée pour votre compte. Retrouvez le texte dans **Actualités** de l’animation. Vous gardez la main sur sa diffusion.
+## 21 · Vérifier et confirmer les lignes à importer
 
-### Vérifier une modification de votre animation
+Ouvrez l’aperçu. Vérifiez les commerces prêts à être ajoutés ou mis à jour avant de confirmer.
 
-Repérez **Modification d’une animation en brouillon** dans votre chronologie personnelle. L’entrée indique le résultat et la référence du dossier. Dans **Animations**, ouvrez le brouillon concerné pour vérifier son nom, sa description et ses dates.
+1. Lisez le bilan des lignes prêtes et des erreurs. Si le fichier contient des adhérents de plusieurs communes, vérifiez la commune reconnue pour chaque commerce.
+2. Sélectionnez les lignes prêtes, cochez la confirmation de relecture, puis choisissez **Confirmer l’import des lignes choisies**.
+3. Vérifiez que le lot indique **En attente de démarrage**. Vous pouvez alors lancer le traitement des lignes confirmées.
 
-Les interventions restent consultables pendant 180 jours après leur fin. Un gestionnaire habilité à l’import pour la même organisation et la même commune peut consulter les opérations sur les lots concernés.
+![L’aperçu distingue les lignes prêtes de celles qui demandent une correction.](illustrations/guide-quotidien/import-apercu-1024.png)
 
-## 18 · Associer les colonnes d’un import
+### Si certaines lignes posent problème
 
-Vérifiez quelles colonnes du fichier alimenteront les fiches.
+Ouvrez une ligne pour lire la valeur et la correction proposée. Dans **Catégories à associer**, choisissez une catégorie Localeo ou **Laisser la catégorie vide**, puis **Enregistrer les équivalences** et refaites l’aperçu. Le même choix vaut pour toutes les lignes du lot portant ce libellé.
 
-1. Vérifiez la **commune active**, puis ouvrez **Import commerçants**. Téléchargez le modèle Excel ou CSV. Le modèle CSV est en UTF-8 et utilise le point-virgule. Préparez jusqu’à 100 lignes de données et 2 Mo par fichier.
-2. Choisissez le flux correspondant à votre source et déposez le fichier. Pour un classeur, choisissez la feuille à importer. Vérifiez la ligne d’en-tête et, pour un CSV, le séparateur détecté.
+Si l’identité d’un commerce est ambiguë, confiez la vérification à Localeo. Vous pouvez confirmer les autres lignes prêtes en acceptant l’import partiel. Les lignes écartées figureront dans le rapport.
 
-![Les cinq champs obligatoires et les exemples de cellules aident à repérer une mauvaise association.](illustrations/guide-quotidien/import-colonnes-1024.png)
-
-3. Vérifiez les cinq associations obligatoires et leurs exemples. Dépliez **Champs facultatifs** pour compléter le mapping ou **Colonnes ignorées** pour vérifier ce qui restera de côté.
-4. Cliquez sur **Enregistrer l’association des colonnes**, puis sur **Prévisualiser les changements**.
-
-## 19 · Vérifier l’aperçu d’un import
-
-Corrigez les erreurs avant de confirmer les lignes prêtes.
-
-![Le bilan de l’aperçu distingue les lignes prêtes, les conflits et les erreurs à corriger.](illustrations/guide-quotidien/import-apercu-1024.png)
-
-1. Lisez le bilan et utilisez les filtres pour retrouver les lignes concernées. Ouvrez le détail d’une ligne pour lire la valeur source et la correction proposée.
-2. Dans **Catégories à associer**, choisissez une catégorie Localeo ou **Laisser la catégorie vide**. Cliquez sur **Enregistrer les équivalences**, puis reconstruisez l’aperçu. Le choix s’applique à toutes les occurrences du libellé dans ce lot.
-3. Un fichier peut réunir des adhérents de plusieurs communes. Vérifiez la commune reconnue sur chaque ligne. En cas d’identité ambiguë, confiez la vérification à Localeo et confirmez les autres lignes prêtes.
-4. Sélectionnez les lignes prêtes, cochez la confirmation de relecture, puis choisissez **Confirmer l’import des lignes choisies**. Vérifiez que le lot indique **En attente de démarrage**.
-
-## 20 · Lancer l’import et récupérer le rapport
+## 22 · Lancer l’import et récupérer le rapport
 
 Dans **Historique des imports**, ouvrez le lot qui indique **En attente de démarrage**.
 
@@ -387,3 +344,31 @@ Si le support agit à votre demande, il peut aussi lancer ou poursuivre ce lot e
 ### Si le traitement semble arrêté
 
 Si le lot affiche encore **Traitement en cours**, choisissez **Poursuivre le traitement**, même lorsque **Restantes** affiche zéro. **Actualiser cet import** relit le résultat. Une fois l’import terminé, utilisez **Inviter dans Pro** depuis **Commerçants** si vous souhaitez envoyer l’email de première connexion d’un commerçant.
+
+## 23 · Gérer votre équipe et demander de l’aide
+
+Dans le menu du compte, ouvrez **Compte et équipe** pour vérifier l’organisation, les accès et la sécurité du compte.
+
+1. Si vous gérez l’équipe, invitez un collaborateur et choisissez les communes et les actions qui lui sont nécessaires. Revenez à l’équipe pour vérifier son accès.
+2. Pour connaître les services et le crédit d’envoi de votre organisation, ouvrez **Abonnement**. Les actions proposées dépendent de vos autorisations.
+3. Pour retrouver ce PDF, ouvrez **Aide et support** ou **Mon compte et documents**, puis **Guide Animation (PDF)**. Il s’ouvre dans un nouvel onglet.
+4. Si vous êtes bloqué, ouvrez une demande dans **Aide et support**. Indiquez l’animation, ce que vous avez observé, l’heure et le résultat attendu. Suivez la réponse dans la même demande.
+
+![Dans Aide et support, le guide PDF reste accessible pour relire un parcours.](illustrations/guide-quotidien/aide-390.png)
+
+Gardez vos mots de passe, codes et QR secrets pour vous. La demande indique la date cible de la première réponse humaine, en principe sous deux jours ouvrés. La résolution peut prendre plus de temps.
+
+## 24 · Vérifier une intervention de Localeo
+
+Si Localeo est intervenu à votre demande et que la rubrique est disponible, ouvrez **Mon organisation**, puis **Interventions de Localeo**.
+
+1. Après la fin de l’intervention, repérez la date, la commune et le nom de la personne de Localeo. Vérifiez le compte concerné et le résultat indiqué.
+2. Ouvrez le dossier concerné pour relire ce qui a été changé. Pour une animation en brouillon, vérifiez son nom, sa description et ses dates dans **Animations**.
+
+![L’historique indique l’animation concernée et propose un accès au dossier d’import.](illustrations/guide-quotidien/interventions-1024.png)
+
+### Si Localeo a confirmé un import ou préparé une actualité
+
+La **Confirmation de l’import** valide les lignes choisies avant traitement. Pour connaître le nombre de lignes appliquées, ouvrez **Voir le lot** dans la commune active si vous disposez du droit d’import. Le fichier et le rapport sont disponibles jusqu’à 30 jours après la fin ou l’abandon du lot. Un gestionnaire habilité peut consulter les opérations d’import de sa propre organisation et commune.
+
+Un brouillon d’actualité est disponible dans **Actualités** de l’animation. Vérifiez son contenu avant de décider de le diffuser. Les interventions restent consultables pendant 180 jours après leur fin.

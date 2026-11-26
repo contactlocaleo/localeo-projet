@@ -1,8 +1,10 @@
 # Roadmap par etat
 
-**24 novembre 2026 — EPIC 83, En cours.** [Clés d’accès dans Localeo Pro](en-cours/epic-83-cles-acces-localeo-pro-backlog.md). Connexion WebAuthn réalisée localement pour les titulaires et les salariés. La recette sur appareils physiques et l’activation par environnement restent à mener.
+**25 novembre 2026 — EPIC 85, En cours.** Refonte du parcours organisateur, de la création à la publication, au suivi quotidien, à la clôture et au tirage au sort. Des repères communs aux six modèles implémentés aident le gestionnaire à retrouver l’animation qui demande son intervention et à agir directement. Trois modèles en projet illustrent les extensions possibles. [Spécification et recette](../specifications/epic-85-parcours-organisateur/README.md) · [Cadrage et maquettes](en-cours/epic-85-parcours-organisateur-backlog.md)
 
 **24 novembre 2026 — EPIC 84, En cours.** [Adhérents hors commune dans Localeo Animation](en-cours/epic-84-adherents-hors-commune-animation-backlog.md). L’epic reprend l’évolution E73-EVO-ADHERENTS-HORS-COMMUNE et porte les neuf critères HC-01 à HC-09.
+
+**24 novembre 2026 — EPIC 83, En cours.** [Clés d’accès dans Localeo Pro](en-cours/epic-83-cles-acces-localeo-pro-backlog.md). Connexion WebAuthn réalisée localement pour les titulaires et les salariés. La recette sur appareils physiques et l’activation par environnement restent à mener.
 
 **24 novembre 2026 — EPIC 82, À faire.** [Scan QR depuis l’appareil photo avec Localeo Pro](a-faire/epic-82-scan-qr-externe-localeo-pro-backlog.md). Accès direct à l’action pour coffrets, participations et bons numériques après connexion si nécessaire. Confirmation explicite et scanner historique conservés.
 
@@ -245,13 +247,13 @@ Le bilan conserve la dette préexistante de lecture bornée et les actions de li
 
 Classement consolidé le 18 septembre 2026, complété le 22 octobre par les EPIC 74 et 75. Les backlogs des applications sont
 réunis dans les dossiers d'état, avec un seul fichier par EPIC. Le suivi inclut
-les 83 identifiants du tronc commun et trois identifiants applicatifs distincts.
+les 85 identifiants du tronc commun et trois identifiants applicatifs distincts.
 
 | Etat | Epics | Dossier |
 | --- | ---: | --- |
 | Terminees | 64 | [terminees/](terminees/README.md) |
 | A faire | 9 | [a-faire/](a-faire/README.md) |
-| En cours | 10 | [en-cours/](en-cours/README.md) |
+| En cours | 12 | [en-cours/](en-cours/README.md) |
 | Abandonnees | 2 | [abandonnees/](abandonnees/README.md) |
 | Fusionnee | 1 | Epic 61 reprise dans l'[Epic 60](terminees/epic-60-vision-360-commercialisation-backlog.md) |
 
@@ -451,6 +453,7 @@ précise la provenance et les divergences historiques conservées.
 | 82 | À faire | [Scan QR depuis l’appareil photo avec Localeo Pro](a-faire/epic-82-scan-qr-externe-localeo-pro-backlog.md) : trois familles de QR clients, reprise après connexion et scanner historique préservé. |
 | 83 | En cours | [Clés d’accès dans Localeo Pro](en-cours/epic-83-cles-acces-localeo-pro-backlog.md) : connexion sans saisie du mot de passe, gestion des clés et bascule Ops réalisées localement, recette et activation par cible à mener. |
 | 84 | En cours | [Adhérents hors commune dans Localeo Animation](en-cours/epic-84-adherents-hors-commune-animation-backlog.md). Saisie, import, participation en magasin, agendas Live et renouvellement du réseau. |
+| 85 | En cours | [Parcours organisateur et maquettes](en-cours/epic-85-parcours-organisateur-backlog.md). Refonte des onglets et du contenu des fiches d’animation. |
 | Autres identifiants du tronc commun | Terminees | Statut produit consolide conserve ; les anciennes mentions de stories a faire ne rouvrent pas ces epics. |
 
 Les changements des Epics 5, 12 et 47 corrigent des incoherences entre les

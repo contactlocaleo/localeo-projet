@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Passeport commerçant · Localeo Animation</title><link rel="stylesheet" href="interface.css"></head><body>
+<header><strong>Localeo <em>Animation</em></strong><span>Latresne</span><small>Maquette interactive</small></header>
+<main><noscript>Activez JavaScript pour parcourir cette maquette.</noscript></main>
+<script type="application/json" id="scenario">
+{
+  "id": "passeport",
+  "name": "Passeport commerçant",
+  "title": "Le passeport des bonnes adresses",
+  "dates": [
+    "2026-12-01",
+    "2026-12-14"
+  ],
+  "operation": "Créer le brouillon du passeport",
+  "intro": "Les habitants visitent les commerces de Latresne dans l’ordre de leur choix et présentent leur QR pour obtenir leurs tampons.",
+  "settings": [
+    [
+      "Commerces sélectionnés",
+      "4"
+    ],
+    [
+      "Seuil",
+      "3 commerces distincts"
+    ],
+    [
+      "Condition retenue",
+      "Visite sans achat"
+    ],
+    [
+      "Dotation",
+      "2 paniers du marché à retirer en mairie"
+    ]
+  ],
+  "prep": [
+    {
+      "title": "Fixer la règle du passeport",
+      "context": "Les quatre adresses participent à un parcours libre. L’organisateur souhaite demander trois visites distinctes.",
+      "action": "Enregistrer le seuil et la visite sans achat",
+      "result": "La mission et le règlement présentent la même condition. Le seuil est atteignable dans la sélection."
+    },
+    {
+      "title": "Recueillir les accords sur la mission",
+      "context": "La librairie, Les Halles, l’Atelier des Saveurs et la Maison du pain reçoivent l’invitation avec les dates, la mission et la règle de passage.",
+      "action": "Consulter les quatre réponses",
+      "result": "Les quatre commerces ont accepté la version proposée. Ils peuvent contribuer au seuil de trois adresses."
+    },
+    {
+      "title": "Préparer les deux paniers",
+      "context": "La mairie assure la remise des deux paniers du marché.",
+      "action": "Vérifier les modalités de remise",
+      "result": "Le lieu et les consignes de retrait sont renseignés pour les deux exemplaires."
+    }
+  ],
+  "assisted": false,
+  "prospect": false,
+  "cases": [
+    {
+      "phase": "Préparation",
+      "title": "Ajuster un seuil devenu impossible",
+      "context": "Le brouillon exige trois commerces distincts. Après retrait d’une adresse de la sélection, il n’en reste que deux.",
+      "action": "Examiner le seuil à ajuster",
+      "result": "Le seuil de trois reste affiché. Ajouter une adresse ou choisir explicitement un seuil compatible permet d’enregistrer la configuration. Au moment de publier, seuls les commerces effectivement acceptés peuvent rendre le seuil atteignable."
+    },
+    {
+      "phase": "Préparation",
+      "title": "Changer la condition d’achat après les premiers accords",
+      "context": "Dans le brouillon, les commerces ont accepté une visite sans achat. L’organisateur veut désormais demander un achat.",
+      "action": "Relire la mission et les invitations à renvoyer",
+      "result": "La mission et le règlement reprennent « Achat requis ». Les accords portant sur la condition précédente sont invalidés. Les commerces concernés doivent recevoir la nouvelle invitation et y répondre."
+    },
+    {
+      "phase": "Publication",
+      "title": "Traiter la dernière invitation en attente",
+      "context": "Trois commerces ont accepté pour un seuil de trois. Une quatrième demande envoyée attend encore une réponse.",
+      "action": "Consulter la demande en attente",
+      "result": "L’organisateur peut attendre, relancer selon les conditions affichées ou annuler la sollicitation en attente. Une fois les demandes traitées, il revient aux contrôles de publication."
+    },
+    {
+      "phase": "Suivi",
+      "title": "Comprendre un tampon qui ne fait pas avancer le passeport",
+      "context": "Le participant s’est inscrit dans Live et présente son QR une deuxième fois dans un commerce dont le passage a déjà été validé.",
+      "action": "Consulter les commerces déjà validés",
+      "result": "Ce commerce compte une seule fois. Le dossier affiche les commerces distincts acquis et le seuil restant. Le joueur peut choisir librement le prochain commerce participant."
+    },
+    {
+      "phase": "Clôture",
+      "title": "Vérifier le décompte après l’annulation d’un passage",
+      "context": "Avant la clôture, un des trois passages d’un participant a été annulé. Son passeport exige trois commerces distincts.",
+      "action": "Consulter les preuves effectives",
+      "result": "Deux commerces restent comptés. Le participant perd sa qualification tant que le seuil n’est plus atteint. La clôture fige la population établie à partir des validations effectives."
+    }
+  ],
+  "publish": {
+    "title": "Publier le passeport",
+    "lead": "La fiche Live présente les quatre adresses, le seuil de trois tampons et la visite sans achat. Les lots seront remis en mairie.",
+    "columns": [
+      "Élément à publier",
+      "Valeur retenue",
+      "Contrôle"
+    ],
+    "rows": [
+      [
+        "Communes et dates",
+        "Latresne · 1 au 14 décembre",
+        "Vérifié"
+      ],
+      [
+        "Parcours libre",
+        "3 commerces distincts sur 4",
+        "Atteignable"
+      ],
+      [
+        "Conditions de visite",
+        "Sans achat",
+        "Accords reçus"
+      ],
+      [
+        "Dotation",
+        "2 paniers du marché",
+        "Modalités de remise renseignées"
+      ]
+    ],
+    "metrics": [
+      [
+        4,
+        "Accords reçus"
+      ],
+      [
+        2,
+        "Paniers prévus"
+      ]
+    ],
+    "action": "Confirmer la publication du passeport",
+    "effect": "Le passeport est publié. La fiche Live et le QR de diffusion sont disponibles pour les quatre commerces.",
+    "next": "Suivre les passages"
+  },
+  "follow": {
+    "title": "Suivre les tampons par participant",
+    "lead": "Un commerce peut compter une seule fois pour un même passeport. Les personnes à deux tampons sont à une visite de la qualification.",
+    "columns": [
+      "Participant · extrait",
+      "Commerces distincts",
+      "Progression"
+    ],
+    "rows": [
+      [
+        "Camille Martin",
+        "3 sur 4",
+        "Qualifiée"
+      ],
+      [
+        "Jules Leroy",
+        "2 sur 4",
+        "En progression"
+      ],
+      [
+        "Inès Robin",
+        "4 sur 4",
+        "Qualifiée"
+      ],
+      [
+        "Noé Petit",
+        "0 sur 4",
+        "Aucun passage"
+      ],
+      [
+        "Zoé Vidal",
+        "2 sur 4",
+        "En progression"
+      ],
+      [
+        "Léon Rey",
+        "1 sur 4",
+        "En progression"
+      ]
+    ],
+    "metrics": [
+      [
+        20,
+        "Inscrits"
+      ],
+      [
+        8,
+        "Qualifiés"
+      ],
+      [
+        4,
+        "À un tampon du seuil"
+      ]
+    ],
+    "action": "Voir les passages de Jules Leroy",
+    "effect": "Jules a obtenu ses tampons aux Halles et à la Maison du pain. Une visite validée à la Librairie du Bourg ou à l’Atelier des Saveurs complétera son passeport.",
+    "next": "Examiner la clôture"
+  },
+  "close": {
+    "title": "Clôturer les passages du passeport",
+    "lead": "À la confirmation, les inscriptions et les validations seront fermées. Les huit passeports ayant atteint le seuil formeront la population du tirage.",
+    "columns": [
+      "Passeports",
+      "Nombre",
+      "Au tirage"
+    ],
+    "rows": [
+      [
+        "Seuil atteint",
+        "8",
+        "Une chance chacun"
+      ],
+      [
+        "Un ou deux tampons",
+        "10",
+        "Hors tirage"
+      ],
+      [
+        "Aucun passage",
+        "2",
+        "Hors tirage"
+      ]
+    ],
+    "metrics": [
+      [
+        20,
+        "Inscrits"
+      ],
+      [
+        8,
+        "Éligibles"
+      ],
+      [
+        2,
+        "Paniers à attribuer"
+      ]
+    ],
+    "action": "Confirmer la clôture du passeport",
+    "effect": "Les passages sont fermés. La liste des huit participants éligibles est figée pour le tirage.",
+    "next": "Préparer le tirage"
+  },
+  "communication": "La fiche et les supports présentent les commerces, la règle de passage et le seuil.",
+  "prepPreview": {
+    "at": 1,
+    "columns": [
+      "Commerce",
+      "Accord sur les conditions",
+      "Validation sur place"
+    ],
+    "rows": [
+      [
+        "Librairie du Bourg",
+        "Accepté",
+        "QR participant"
+      ],
+      [
+        "Les Halles",
+        "Accepté",
+        "QR participant"
+      ],
+      [
+        "Atelier des Saveurs",
+        "Accepté",
+        "QR participant"
+      ],
+      [
+        "Maison du pain",
+        "Accepté",
+        "QR participant"
+      ]
+    ]
+  }
+}
+</script>
+<script src="deroulement.js"></script>
+<script src="tirage.js"></script>
+<script src="interface.js"></script>
+</body></html>

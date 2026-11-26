@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Chasse au trésor commerçante · Localeo Animation</title><link rel="stylesheet" href="interface.css"></head><body>
+<header><strong>Localeo <em>Animation</em></strong><span>Latresne</span><small>Maquette interactive</small></header>
+<main><noscript>Activez JavaScript pour parcourir cette maquette.</noscript></main>
+<script type="application/json" id="scenario">
+{
+  "id": "chasse",
+  "name": "Chasse au trésor commerçante",
+  "title": "Halloween à Latresne · Les préparatifs de la lanterne",
+  "dates": [
+    "2026-10-24",
+    "2026-10-31"
+  ],
+  "operation": "Transmettre la demande de création de la chasse",
+  "intro": "Le partenaire demande une chasse accompagnée sur le thème d’Halloween. La préparation du récit et des supports précède la publication de l’édition.",
+  "settings": [
+    [
+      "Commune",
+      "Latresne"
+    ],
+    [
+      "Parcours",
+      "6 positions du récit"
+    ],
+    [
+      "Commerces",
+      "Lisons sous la pluie, Mirga et Mode de Biche"
+    ],
+    [
+      "Lieux publics",
+      "Ancienne gare et château de la Salargue"
+    ]
+  ],
+  "prep": [
+    {
+      "title": "Relire la chasse préparée",
+      "context": "La demande précise le public, le thème et les lieux autorisés. Le préparateur Localeo a contrôlé et importé le récit proposé.",
+      "action": "Examiner le récit et les supports",
+      "result": "L’organisateur retrouve les six positions du parcours, les défis et la finale dans l’aperçu de l’édition."
+    },
+    {
+      "title": "Recueillir les missions des trois commerces",
+      "context": "Chaque commerce reçoit les missions proposées pour son étape et présente sa décision.",
+      "action": "Vérifier les missions acceptées",
+      "result": "Lisons sous la pluie, Mirga et Mode de Biche disposent chacun de la mission retenue et des consignes de validation."
+    },
+    {
+      "title": "Préparer les QR des lieux publics",
+      "context": "Les trois commerces ont accepté leur mission et installent leurs propres supports. L’organisateur prépare les QR des lieux publics, dont celui du château de la Salargue.",
+      "action": "Préparer le QR du château",
+      "result": "Le support du château est prêt dans cette simulation. Son QR sera actif à la publication. L’organisateur peut ouvrir la revue de publication indépendamment de cette préparation.",
+      "optional": true
+    }
+  ],
+  "brief": "Créer une chasse d’Halloween à Latresne. Relier trois commerces et les lieux publics du récit autour de la lanterne.",
+  "assisted": true,
+  "prospect": false,
+  "cases": [
+    {
+      "phase": "Préparation",
+      "title": "Demander un parcours à préparer",
+      "context": "Le brouillon contient le thème Halloween, le public, les lieux retenus et les commerces pressentis. L’organisateur relit son brief avant de le transmettre au service de préparation.",
+      "action": "Consulter la demande transmise",
+      "result": "La demande est en attente du service Localeo. Le dépôt et les contrôles du fichier se font dans l’ERP. Le parcours reçu apparaît ensuite dans Configuration."
+    },
+    {
+      "phase": "Préparation",
+      "title": "Relire le parcours reçu",
+      "context": "Le parcours proposé contient le récit, les étapes dans leur ordre de visite, les aides et les missions candidates des commerces. Un aperçu permet de vérifier ce qu’un joueur verra.",
+      "action": "Valider le parcours et continuer",
+      "result": "La relecture est enregistrée. L’espace Commerces s’ouvre. Les invitations attendent encore l’envoi explicite du gestionnaire."
+    },
+    {
+      "phase": "Préparation",
+      "title": "Adapter le parcours après un refus",
+      "context": "Un commerce a décliné sa mission. Le gestionnaire retrouve depuis l’invitation le commerce et l’étape concernés.",
+      "action": "Revoir la mission refusée",
+      "result": "Le dossier permet d’adapter l’étape et de solliciter l’accord nécessaire sur le parcours révisé. Seules les missions acceptées peuvent être retenues pour la publication."
+    },
+    {
+      "phase": "Publication",
+      "title": "Répartir les supports avant diffusion",
+      "context": "Le château est un lieu public. Ses supports QR relèvent de l’organisation. Chaque commerce récupère et installe le support de son propre kit. Certaines éditions activent aussi le suivi des commerces prêts.",
+      "action": "Consulter les supports du parcours",
+      "result": "Le gestionnaire peut préparer ou télécharger le QR du château. Les QR deviennent actifs à publication. Consulter un support ne valide aucune visite terrain et ne déclare aucun commerce prêt."
+    },
+    {
+      "phase": "Suivi",
+      "title": "Aider un joueur bloqué sur une énigme",
+      "context": "Une mauvaise réponse laisse le joueur sur l’étape actuelle. L’indice et l’aide à la résolution deviennent accessibles sur demande dans Live.",
+      "action": "Vérifier les conditions de passage",
+      "result": "Le dossier distingue l’énigme et les preuves exigées. Recourir à l’aide ne fournit aucune attestation commerçante et n’autorise pas un scan anticipé d’une étape future."
+    },
+    {
+      "phase": "Suivi",
+      "title": "Traiter un lieu devenu inaccessible",
+      "context": "Pendant le jeu, un lieu ferme et empêche la poursuite du parcours. Le gestionnaire habilité examine l’impact d’une neutralisation globale et son motif avant confirmation.",
+      "action": "Examiner les effets de la neutralisation",
+      "result": "Si elle est autorisée et confirmée, l’étape est dispensée pour tous, et le parcours rejoint la prochaine étape requise. Les acquis et l’historique sont conservés. Aucune preuve fictive n’est créée. La dernière étape requise ne peut être supprimée."
+    },
+    {
+      "phase": "Clôture",
+      "title": "Vérifier une attestation annulée",
+      "context": "Une joueuse a atteint la finale. Avant la fermeture, une attestation requise a été annulée à la suite d’une correction tracée. Son dossier indique l’étape à régulariser.",
+      "action": "Relire la qualification",
+      "result": "Un nouveau scan autorisé, pendant la période, peut régulariser la preuve de cette étape déjà atteinte. Le récit acquis est conservé. À clôture, seuls les dossiers réunissant toutes les conditions effectives figurent au tirage."
+    }
+  ],
+  "publish": {
+    "title": "Publier le parcours vérifié",
+    "lead": "Relisez le circuit dans son ordre de jeu. Chaque commerce accueille le joueur pour une mission et valide son passage.",
+    "columns": [
+      "Contrôle",
+      "Valeur retenue",
+      "État"
+    ],
+    "rows": [
+      [
+        "Commerces engagés",
+        "3 sur 3 requis",
+        "Seuil atteint"
+      ],
+      [
+        "Invitations",
+        "3 réponses reçues",
+        "Traitées"
+      ],
+      [
+        "Parcours",
+        "Récit, défis et finale",
+        "Relu"
+      ],
+      [
+        "Revue de publication",
+        "Contrôles de l’édition",
+        "Publication autorisée"
+      ]
+    ],
+    "metrics": [
+      [
+        6,
+        "Positions du récit"
+      ],
+      [
+        3,
+        "Commerces retenus"
+      ],
+      [
+        0,
+        "Invitation en attente"
+      ]
+    ],
+    "action": "Confirmer la publication de la chasse",
+    "effect": "La chasse est publiée. Les joueurs découvrent les lieux à mesure qu’ils avancent dans le récit.",
+    "next": "Suivre les parcours"
+  },
+  "follow": {
+    "title": "Repérer les passages à régulariser",
+    "lead": "Une joueuse a terminé le récit, mais un passage a été annulé. Consultez le dossier pour savoir quelle preuve manque.",
+    "columns": [
+      "Joueur",
+      "Progression narrative",
+      "Qualification"
+    ],
+    "rows": [
+      [
+        "Ana Roy",
+        "Finale terminée",
+        "Passage à régulariser"
+      ],
+      [
+        "Jules Blanc",
+        "Finale terminée",
+        "Qualifié"
+      ],
+      [
+        "Mila Vidal",
+        "Chez Mirga",
+        "En cours"
+      ],
+      [
+        "Noé Lamy",
+        "Finale terminée",
+        "Qualifié"
+      ]
+    ],
+    "metrics": [
+      [
+        24,
+        "Joueurs inscrits"
+      ],
+      [
+        15,
+        "Récits terminés"
+      ],
+      [
+        14,
+        "Joueurs qualifiés"
+      ]
+    ],
+    "action": "Consulter le passage d’Ana Roy",
+    "effect": "Chez Mirga, le défi est réussi et le passage a été annulé. Une attestation valide pendant la période de jeu permet de régulariser le dossier.",
+    "next": "Examiner la clôture"
+  },
+  "close": {
+    "title": "Clôturer la chasse",
+    "lead": "La période de jeu est terminée. Une chance revient à chaque joueur ayant terminé les étapes requises avec toutes les preuves attendues.",
+    "columns": [
+      "Situation finale",
+      "Joueurs",
+      "Décision"
+    ],
+    "rows": [
+      [
+        "Parcours et preuves complets",
+        "14",
+        "Éligibles"
+      ],
+      [
+        "Parcours terminé, preuve absente",
+        "1",
+        "Hors tirage"
+      ],
+      [
+        "Parcours en cours",
+        "7",
+        "Hors tirage"
+      ],
+      [
+        "Parcours non commencé",
+        "2",
+        "Hors tirage"
+      ]
+    ],
+    "metrics": [
+      [
+        24,
+        "Inscrits"
+      ],
+      [
+        14,
+        "Éligibles"
+      ],
+      [
+        10,
+        "Hors tirage"
+      ]
+    ],
+    "action": "Confirmer la clôture de la chasse",
+    "effect": "La clôture est confirmée. Les 14 joueurs éligibles composent la liste définitive du tirage.",
+    "next": "Ouvrir le tirage"
+  },
+  "communication": "Le gestionnaire prépare les supports des lieux publics. Chaque commerce installe les supports de son propre kit.",
+  "prepPreview": {
+    "at": 2,
+    "columns": [
+      "Lieu",
+      "Mission retenue",
+      "Préparation"
+    ],
+    "rows": [
+      [
+        "Lisons sous la pluie",
+        "Les pages du conte",
+        "Accord confirmé"
+      ],
+      [
+        "Mirga",
+        "Le festin des fantômes",
+        "Accord confirmé"
+      ],
+      [
+        "Mode de Biche",
+        "La silhouette de Prune",
+        "Accord confirmé"
+      ],
+      [
+        "Château de la Salargue",
+        "Le mot de la lanterne",
+        "Support à préparer"
+      ]
+    ]
+  }
+}
+</script>
+<script src="deroulement.js"></script>
+<script src="tirage.js"></script>
+<script src="interface.js"></script>
+</body></html>

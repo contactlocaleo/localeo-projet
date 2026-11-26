@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Tombola locale · Localeo Animation</title><link rel="stylesheet" href="interface.css"></head><body>
+<header><strong>Localeo <em>Animation</em></strong><span>Latresne</span><small>Maquette interactive</small></header>
+<main><noscript>Activez JavaScript pour parcourir cette maquette.</noscript></main>
+<script type="application/json" id="scenario">
+{
+  "id": "tombola-locale",
+  "name": "Tombola locale",
+  "title": "La tombola des commerces",
+  "dates": [
+    "2026-12-01",
+    "2026-12-14"
+  ],
+  "operation": "Créer le brouillon de la tombola",
+  "intro": "Quatre commerces de Latresne participent. Le premier achat confirmé donne une chance à chaque habitant inscrit.",
+  "settings": [
+    [
+      "Commerces invités",
+      "4"
+    ],
+    [
+      "Qualification",
+      "Premier achat validé sans minimum"
+    ],
+    [
+      "Chance",
+      "1 par personne qualifiée"
+    ],
+    [
+      "Dotation",
+      "2 Coffrets découverte"
+    ]
+  ],
+  "prep": [
+    {
+      "title": "Préparer la consigne de caisse",
+      "context": "Le personnel des quatre commerces doit savoir quand scanner le QR de l’habitant.",
+      "action": "Enregistrer la mission de validation",
+      "result": "La mission indique de valider le QR après un achat sans montant minimum. Le règlement explique la chance unique."
+    },
+    {
+      "title": "Vérifier les engagements des commerces",
+      "context": "L’épicerie, la librairie, la Maison du pain et l’Atelier du Marché ont reçu leur invitation.",
+      "action": "Lire les quatre accords",
+      "result": "Les quatre commerces ont accepté les conditions de l’édition."
+    },
+    {
+      "title": "Constituer la dotation Coffrets",
+      "context": "Le partenaire a retenu deux Coffrets découverte pour le tirage final.",
+      "action": "Vérifier la réservation des exemplaires",
+      "result": "Les deux Coffrets financés sont réservés à cette édition et apparaissent dans la revue de publication."
+    }
+  ],
+  "assisted": false,
+  "prospect": false,
+  "cases": [
+    {
+      "phase": "Préparation",
+      "title": "Préparer une mission de validation d’achat",
+      "context": "La commune prépare une tombola dans ses commerces. La mission doit expliquer au personnel de caisse le geste demandé après un achat.",
+      "action": "Relire la consigne avant invitation",
+      "result": "Le commerce scanne le QR du participant après l’achat. Aucun ticket ni montant ne sont recueillis. Cette condition figure dans la mission présentée avec le règlement et les dates."
+    },
+    {
+      "phase": "Publication",
+      "title": "Vérifier les engagements avant de publier",
+      "context": "Une épicerie a refusé et une librairie a accepté. Le dernier commerce invité n’a pas encore répondu.",
+      "action": "Examiner les réponses à traiter",
+      "result": "Seuls les commerces ayant accepté participent. La demande encore en attente doit être traitée. La publication vérifie ensuite la participation effective, les autres prérequis et la dotation de l’édition."
+    },
+    {
+      "phase": "Publication",
+      "title": "Comprendre un blocage de financement des Coffrets",
+      "context": "Pour cette édition avec deux Coffrets, la préparation des commerces est terminée. Le contrôle financier de la dotation reste en attente.",
+      "action": "Consulter le dossier des Coffrets",
+      "result": "L’organisateur vérifie le financement et la réservation des exemplaires avant de reprendre la publication. Un avertissement sur l’absence de prestation chez un commerce participant reste informatif."
+    },
+    {
+      "phase": "Suivi",
+      "title": "Distinguer l’inscription de l’achat qualifiant",
+      "context": "Une habitante inscrite retrouve son QR dans Live. Aucun commerce participant n’a encore validé son achat.",
+      "action": "Voir les preuves de qualification",
+      "result": "Elle est inscrite avec zéro chance. Son premier achat confirmé lui donne une chance. Une validation dans un autre commerce enrichit les statistiques en conservant cette chance unique."
+    },
+    {
+      "phase": "Clôture",
+      "title": "Relire la qualification après une validation annulée",
+      "context": "Avant la clôture, la seule validation d’achat d’un participant a été annulée.",
+      "action": "Contrôler les achats toujours effectifs",
+      "result": "Sans autre validation effective, le participant cesse d’être éligible. S’il conserve un achat validé dans un autre commerce participant, sa chance est conservée. La population figée reprend la situation confirmée à la clôture."
+    }
+  ],
+  "publish": {
+    "title": "Publier la tombola des commerces",
+    "lead": "L’édition présente ses dates, ses quatre commerces et deux Coffrets réservés. La fiche publique explique la règle d’une chance par participant.",
+    "columns": [
+      "Contrôle",
+      "Valeur",
+      "État"
+    ],
+    "rows": [
+      [
+        "Dates",
+        "1 au 14 décembre",
+        "Vérifié"
+      ],
+      [
+        "Accords",
+        "4 commerces sur 4",
+        "Complet"
+      ],
+      [
+        "Dotation",
+        "2 Coffrets découverte",
+        "Réservés"
+      ],
+      [
+        "Règlement",
+        "Achat confirmé sans minimum",
+        "Prêt"
+      ]
+    ],
+    "metrics": [
+      [
+        4,
+        "Accords reçus"
+      ],
+      [
+        2,
+        "Coffrets réservés"
+      ]
+    ],
+    "action": "Confirmer la publication de la tombola",
+    "effect": "La tombola est publiée. Ses supports de diffusion permettent aux habitants de s’inscrire et de présenter leur QR lors d’un achat.",
+    "next": "Suivre les achats confirmés"
+  },
+  "follow": {
+    "title": "Distinguer achats et chances au tirage",
+    "lead": "Les commerces ont confirmé 27 passages. Ils correspondent à 18 personnes qualifiées. Chaque personne conserve une seule chance.",
+    "columns": [
+      "Participant · extrait",
+      "Achats validés",
+      "Chance au tirage"
+    ],
+    "rows": [
+      [
+        "Nina Robert",
+        "3 commerces",
+        "1 chance"
+      ],
+      [
+        "Paul David",
+        "1 commerce",
+        "1 chance"
+      ],
+      [
+        "Lina Aubert",
+        "2 commerces",
+        "1 chance"
+      ],
+      [
+        "Adam Garnier",
+        "Aucun",
+        "En attente d’un achat"
+      ],
+      [
+        "Louise Giraud",
+        "1 commerce",
+        "1 chance"
+      ],
+      [
+        "Eli Moreau",
+        "Aucun",
+        "En attente d’un achat"
+      ]
+    ],
+    "metrics": [
+      [
+        32,
+        "Inscrits"
+      ],
+      [
+        27,
+        "Achats validés"
+      ],
+      [
+        18,
+        "Qualifiés"
+      ]
+    ],
+    "action": "Consulter les validations de Nina Robert",
+    "effect": "Épicerie du Pont, Librairie du Bourg, puis Maison du pain. Nina a été qualifiée dès son premier achat.",
+    "next": "Vérifier les éligibles"
+  },
+  "close": {
+    "title": "Clôturer les validations en commerce",
+    "lead": "Les 18 participants ayant au moins un achat confirmé pourront participer. La clôture arrête toute nouvelle inscription et validation.",
+    "columns": [
+      "Population",
+      "Personnes",
+      "Situation"
+    ],
+    "rows": [
+      [
+        "Avec achat confirmé",
+        "18",
+        "Une chance chacun"
+      ],
+      [
+        "Inscrits sans achat confirmé",
+        "14",
+        "Hors tirage"
+      ]
+    ],
+    "metrics": [
+      [
+        32,
+        "Inscrits"
+      ],
+      [
+        18,
+        "Éligibles"
+      ],
+      [
+        2,
+        "Coffrets réservés"
+      ]
+    ],
+    "action": "Confirmer la clôture des validations",
+    "effect": "Les 18 éligibles sont figés. Les commerces ne peuvent plus valider d’achat pour cette édition.",
+    "next": "Préparer le tirage Coffrets"
+  },
+  "communication": "La fiche et le flyer précisent comment s’inscrire et présenter le QR après un achat.",
+  "prepPreview": {
+    "at": 1,
+    "columns": [
+      "Commerce",
+      "Accord",
+      "Consigne de caisse"
+    ],
+    "rows": [
+      [
+        "Épicerie du Pont",
+        "Accepté",
+        "Disponible"
+      ],
+      [
+        "Librairie du Bourg",
+        "Accepté",
+        "Disponible"
+      ],
+      [
+        "Maison du pain",
+        "Accepté",
+        "Disponible"
+      ],
+      [
+        "Atelier du Marché",
+        "Accepté",
+        "Disponible"
+      ]
+    ]
+  }
+}
+</script>
+<script src="deroulement.js"></script>
+<script src="tirage.js"></script>
+<script src="interface.js"></script>
+</body></html>

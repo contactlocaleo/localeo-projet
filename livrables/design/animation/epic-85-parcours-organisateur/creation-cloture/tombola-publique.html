@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Tombola publique · Localeo Animation</title><link rel="stylesheet" href="interface.css"></head><body>
+<header><strong>Localeo <em>Animation</em></strong><span>Latresne</span><small>Maquette interactive</small></header>
+<main><noscript>Activez JavaScript pour parcourir cette maquette.</noscript></main>
+<script type="application/json" id="scenario">
+{
+  "id": "tombola-publique",
+  "name": "Tombola publique",
+  "title": "Le rendez-vous du marché",
+  "dates": [
+    "2026-12-01",
+    "2026-12-14"
+  ],
+  "operation": "Créer le brouillon de la tombola publique",
+  "intro": "L’organisateur prépare une inscription directe sur le marché. Un commerce intervient au retrait des bons gagnés.",
+  "settings": [
+    [
+      "Accès retenu",
+      "QR sur place et code du jour"
+    ],
+    [
+      "Qualification",
+      "Inscription validée avec règlement accepté"
+    ],
+    [
+      "Dotation",
+      "2 bons numériques"
+    ],
+    [
+      "Retrait",
+      "Épicerie du Pont"
+    ]
+  ],
+  "prep": [
+    {
+      "title": "Choisir le mode sur place",
+      "context": "Le stand du marché affichera un QR de diffusion et un code du jour.",
+      "action": "Enregistrer le mode sur place",
+      "result": "Le formulaire s’ouvrira depuis le QR. La fiche Agenda présentera le lieu et les dates."
+    },
+    {
+      "title": "Affecter les bons au commerce de remise",
+      "context": "Les deux bons numériques gagnés seront retirés à l’Épicerie du Pont.",
+      "action": "Vérifier les deux bons et leur commerce",
+      "result": "La dotation identifie l’épicerie comme lieu de retrait. L’inscription de l’habitant suffit à sa qualification."
+    },
+    {
+      "title": "Relire le support et le règlement",
+      "context": "Le flyer porte le QR permanent. Un panneau séparé au stand accueillera le code du jour.",
+      "action": "Vérifier les consignes du stand",
+      "result": "Le règlement précise une chance par adresse e-mail. Le panneau est prêt pour l’affichage du code valable à la date de Paris."
+    }
+  ],
+  "assisted": false,
+  "prospect": false,
+  "cases": [
+    {
+      "phase": "Préparation",
+      "title": "Choisir comment les habitants s’inscrivent",
+      "context": "L’organisateur prépare son marché et hésite entre une inscription depuis la fiche Live et un accès par QR sur place.",
+      "action": "Comparer les deux accès",
+      "result": "« Localeo Live et QR code » permet l’inscription depuis la fiche ou le QR. « Sur place par QR code et code du jour » réserve le formulaire au QR de diffusion avec le code du jour. Le choix reste modifiable en brouillon et se fige à la publication."
+    },
+    {
+      "phase": "Publication",
+      "title": "Publier une tombola avec des lots remis par la mairie",
+      "context": "La commune n’a invité aucun commerce. Elle fournit elle-même les lots et prévoit une remise en mairie.",
+      "action": "Consulter la revue de publication",
+      "result": "Dates, droits, quota standard, règlement et disponibilité des lots sont contrôlés. L’absence de commerce est compatible avec cette dotation. Si un bon numérique est choisi, son commerce de remise relève de la dotation."
+    },
+    {
+      "phase": "Suivi",
+      "title": "Dépanner un code du jour refusé",
+      "context": "Le formulaire s’ouvre depuis le QR du flyer. Le code écrit sur le panneau est celui de la veille.",
+      "action": "Relire le code du jour",
+      "result": "Le gestionnaire retrouve le code à six chiffres valable à la date de Paris et le réaffiche à côté du QR. Le participant peut alors valider le formulaire et le règlement. Le scan seul ne crée aucune chance."
+    },
+    {
+      "phase": "Suivi",
+      "title": "Aider une personne déjà inscrite qui ne retrouve pas son e-mail",
+      "context": "Son formulaire a été accepté pendant l’ouverture. Elle a une chance, même si le message donnant accès à sa participation ne lui est pas encore parvenu.",
+      "action": "Consulter les consignes de récupération",
+      "result": "L’habitant peut utiliser « Retrouver ma participation » selon le délai proposé. Réinscrire l’adresse ne crée aucune chance supplémentaire. L’accès personnel est envoyé à l’adresse concernée."
+    },
+    {
+      "phase": "Clôture",
+      "title": "Distinguer les anciennes attentes de la population figée",
+      "context": "Avant fermeture des inscriptions, certaines anciennes demandes n’ont jamais été confirmées.",
+      "action": "Examiner les statuts avant clôture",
+      "result": "Une nouvelle inscription explicite pendant l’ouverture peut qualifier une ancienne attente. Après fermeture, aucune attente ne peut être qualifiée. Les gagnants sont déjà inclus dans les qualifiés du bilan."
+    }
+  ],
+  "publish": {
+    "title": "Publier le QR du marché",
+    "lead": "Le flyer peut rester affiché pendant l’édition. À côté du QR, l’équipe du marché affiche séparément le code valable aujourd’hui.",
+    "columns": [
+      "Support",
+      "Contenu",
+      "Vérification"
+    ],
+    "rows": [
+      [
+        "Flyer imprimé",
+        "QR de diffusion",
+        "Formulaire accessible"
+      ],
+      [
+        "Panneau au stand",
+        "Code du jour",
+        "Affichage prévu"
+      ],
+      [
+        "Fiche Agenda",
+        "Présentation et dates",
+        "Accès sur place indiqué"
+      ],
+      [
+        "Règlement",
+        "Une chance par adresse e-mail",
+        "Disponible à l’inscription"
+      ]
+    ],
+    "metrics": [
+      [
+        1,
+        "Flyer prêt"
+      ],
+      [
+        2,
+        "Bons numériques"
+      ]
+    ],
+    "action": "Confirmer la publication de la tombola",
+    "effect": "La fiche est publiée. Le gestionnaire peut afficher le QR et le code du jour sur le stand du marché.",
+    "next": "Consulter les inscriptions"
+  },
+  "follow": {
+    "title": "Suivre les inscriptions directes",
+    "lead": "Un formulaire validé donne immédiatement une chance par adresse e-mail. Les trois anciennes demandes encore en attente restent identifiables.",
+    "columns": [
+      "Participant · extrait",
+      "Inscription",
+      "Situation"
+    ],
+    "rows": [
+      [
+        "Alice Durand",
+        "Formulaire validé",
+        "Qualifiée"
+      ],
+      [
+        "Tom Mercier",
+        "Formulaire validé",
+        "Qualifié"
+      ],
+      [
+        "Lou Morel",
+        "Ancienne demande",
+        "En attente"
+      ],
+      [
+        "Eva Faure",
+        "Formulaire validé",
+        "Qualifiée"
+      ],
+      [
+        "Gabriel Leclerc",
+        "Formulaire validé",
+        "Qualifié"
+      ],
+      [
+        "Maël Girard",
+        "Ancienne demande",
+        "En attente"
+      ]
+    ],
+    "metrics": [
+      [
+        24,
+        "Inscriptions"
+      ],
+      [
+        21,
+        "Qualifiées"
+      ],
+      [
+        3,
+        "En attente"
+      ]
+    ],
+    "action": "Examiner la demande de Lou Morel",
+    "effect": "Lou a une ancienne demande en attente. Une inscription explicite pendant la période ouverte peut la compléter. Le gestionnaire ne peut pas qualifier cette adresse manuellement.",
+    "next": "Préparer la clôture"
+  },
+  "close": {
+    "title": "Fermer le formulaire et figer les inscriptions",
+    "lead": "Seules les 21 inscriptions qualifiées auront une chance au tirage. Les trois anciennes demandes en attente resteront hors de la liste figée.",
+    "columns": [
+      "Groupe",
+      "Personnes",
+      "À la clôture"
+    ],
+    "rows": [
+      [
+        "Inscriptions qualifiées",
+        "21",
+        "Incluses dans le tirage"
+      ],
+      [
+        "Anciennes demandes en attente",
+        "3",
+        "Hors tirage"
+      ]
+    ],
+    "metrics": [
+      [
+        24,
+        "Inscriptions"
+      ],
+      [
+        21,
+        "Éligibles"
+      ],
+      [
+        2,
+        "Bons à attribuer"
+      ]
+    ],
+    "action": "Confirmer la clôture des inscriptions",
+    "effect": "Le formulaire est fermé. La population de 21 participants est figée et le tirage peut être préparé.",
+    "next": "Préparer le tirage des bons"
+  },
+  "communication": "Dans cet exemple sur place, le QR du stand et le code du jour donnent accès à l’inscription. La fiche publique renseigne les dates et le lieu.",
+  "prepPreview": {
+    "at": 0,
+    "columns": [
+      "Élément",
+      "Choix de l’édition",
+      "Usage"
+    ],
+    "rows": [
+      [
+        "Accès",
+        "Sur place",
+        "QR de diffusion et code du jour"
+      ],
+      [
+        "Formulaire",
+        "Identité et coordonnées",
+        "Accepter le règlement"
+      ],
+      [
+        "Dotation",
+        "2 bons numériques",
+        "Retrait à l’Épicerie du Pont"
+      ],
+      [
+        "Flyer",
+        "QR d’inscription",
+        "Code du jour affiché séparément"
+      ]
+    ]
+  }
+}
+</script>
+<script src="deroulement.js"></script>
+<script src="tirage.js"></script>
+<script src="interface.js"></script>
+</body></html>

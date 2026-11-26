@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Calendrier de l’Avent local · Localeo Animation</title><link rel="stylesheet" href="interface.css"></head><body>
+<header><strong>Localeo <em>Animation</em></strong><span>Latresne</span><small>Maquette interactive</small></header>
+<main><noscript>Activez JavaScript pour parcourir cette maquette.</noscript></main>
+<script type="application/json" id="scenario">
+{
+  "id": "avent",
+  "name": "Calendrier de l’Avent local",
+  "title": "Les fenêtres du centre-ville",
+  "dates": [
+    "2026-12-01",
+    "2026-12-24"
+  ],
+  "operation": "Créer le projet de calendrier",
+  "intro": "Un seul calendrier regroupe les journées. Les 24 jours de cette démonstration illustrent une programmation possible. La durée du modèle reste à arbitrer.",
+  "settings": [
+    [
+      "Période de l’exemple",
+      "Du 1er au 24 décembre"
+    ],
+    [
+      "Portée des participations et des gains",
+      "Une case à la fois"
+    ],
+    [
+      "Extrait présenté en suivi",
+      "4, 5 et 6 décembre"
+    ],
+    [
+      "Bilan",
+      "Résultats par journée et ensemble du calendrier"
+    ]
+  ],
+  "prep": [
+    {
+      "title": "Programmer toutes les journées de l’édition",
+      "context": "Chaque journée de l’exemple doit retrouver sa date, son commerce mis en avant et son contenu dans le même calendrier.",
+      "action": "Vérifier les 24 cases programmées",
+      "result": "L’aperçu présente les journées du 1er au 24 décembre. Les 4, 5 et 6 mettent en avant la Librairie du Bourg, l’Atelier des Saveurs et l’Épicerie du Pont."
+    },
+    {
+      "title": "Affecter les dotations aux cases",
+      "context": "Le 4 décembre propose le Coffret Lecture et le 5 le Coffret Gourmand. L’organisateur vérifie également le coffret Découverte du 6.",
+      "action": "Relire la répartition de toute l’édition",
+      "result": "Chaque case de l’exemple a sa dotation identifiée. Les coffrets restent rattachés à la journée prévue."
+    },
+    {
+      "title": "Relire le calendrier complet",
+      "context": "Le gestionnaire parcourt les périodes, les contenus et les réservations de toutes les journées avant la revue de publication.",
+      "action": "Consulter l’aperçu du calendrier",
+      "result": "Une seule édition regroupe les cases vérifiées. La fiche de suivi pourra ouvrir chaque journée dans ce même contexte."
+    }
+  ],
+  "assisted": false,
+  "prospect": true,
+  "cases": [
+    {
+      "phase": "Préparation",
+      "title": "Définir la période et les règles du calendrier",
+      "context": "Le gestionnaire prépare une seule édition et organise ses cases par date. Le nombre de cases, la condition de participation et la limite de gains restent à arbitrer.",
+      "action": "Examiner les règles en discussion",
+      "result": "La revue identifie les décisions CAL-ARB-01 à CAL-ARB-05 à traduire dans le règlement avant de présenter le parcours aux habitants."
+    },
+    {
+      "phase": "Publication",
+      "title": "Repérer une case sans coffret réservé",
+      "context": "Dans le scénario proposé, le 6 décembre dispose d’un commerce et d’un contenu. Sa dotation manque encore.",
+      "action": "Ouvrir la case incomplète",
+      "result": "La revue désigne le 6 décembre et le coffret à réserver. Le cadrage prévoit de reprendre le contrôle de complétude avant publication."
+    },
+    {
+      "phase": "Suivi",
+      "title": "Relier une visite au jour et au commerce",
+      "context": "Le projet prévoit une inscription au calendrier puis une activité rattachée à chaque case. Le même commerce peut participer à plusieurs animations.",
+      "action": "Lire le contexte de la visite",
+      "result": "L’exemple identifie la case du 5 décembre et son commerce. Le nombre de participations admises, les horaires et la condition d’achat dépendent des arbitrages E54."
+    },
+    {
+      "phase": "Clôture",
+      "title": "Identifier une journée dont la clôture est en retard",
+      "context": "Dans ce scénario prospectif, une case a dépassé son horaire prévu tandis que la suivante commence. L’heure et le mode de déclenchement restent à décider.",
+      "action": "Consulter le traitement de la journée",
+      "result": "Le dossier distingue la fermeture attendue, la population de la case et le dernier traitement connu. Le créneau et la reprise relèvent des arbitrages CAL-ARB-06, 07 et 10."
+    }
+  ],
+  "publish": {
+    "title": "Vérifier le calendrier avant publication",
+    "lead": "Le gestionnaire publie le calendrier depuis une seule fiche. Il peut identifier la journée concernée lorsqu’un commerce, un contenu ou une dotation manque.",
+    "columns": [
+      "Case contrôlée",
+      "Commerce et contenu",
+      "Coffret"
+    ],
+    "rows": [
+      [
+        "4 décembre",
+        "Prêts",
+        "Réservé"
+      ],
+      [
+        "5 décembre",
+        "Prêts",
+        "Réservé"
+      ],
+      [
+        "6 décembre",
+        "Prêts",
+        "Réservé"
+      ]
+    ],
+    "metrics": [
+      [
+        3,
+        "Cases de l’extrait contrôlées"
+      ],
+      [
+        0,
+        "Blocage dans cet exemple"
+      ]
+    ],
+    "action": "Confirmer la publication du calendrier",
+    "effect": "Calendrier publié dans la simulation. Les ouvertures et les résultats se suivent ensuite case par case.",
+    "next": "Voir les journées"
+  },
+  "follow": {
+    "title": "Suivre la journée en cours",
+    "lead": "Le 5 décembre, le gestionnaire suit la case ouverte pendant que le résultat de la veille et les cases à venir restent visibles.",
+    "columns": [
+      "Case",
+      "État",
+      "Suivi"
+    ],
+    "rows": [
+      [
+        "4 décembre · Librairie",
+        "Tirée",
+        "Coffret envoyé"
+      ],
+      [
+        "5 décembre · Atelier",
+        "Ouverte",
+        "34 participations"
+      ],
+      [
+        "6 décembre · Épicerie",
+        "Programmée",
+        "Ouverture à venir"
+      ]
+    ],
+    "metrics": [
+      [
+        1,
+        "Case ouverte"
+      ],
+      [
+        34,
+        "Participations du jour"
+      ]
+    ],
+    "action": "Consulter la case du 5 décembre",
+    "effect": "Atelier des Saveurs · 34 participations rattachées à cette journée · Coffret Gourmand réservé.",
+    "next": "Voir la clôture du jour"
+  },
+  "close": {
+    "title": "Vérifier la clôture du 5 décembre",
+    "lead": "La fenêtre de participation de cette journée vient de se terminer. Vérifiez son périmètre avant d’en consulter le tirage. La commande de confirmation illustre une hypothèse de gestion E54.",
+    "metrics": [
+      [
+        34,
+        "Participations du jour"
+      ],
+      [
+        1,
+        "Coffret réservé"
+      ]
+    ],
+    "columns": [
+      "Journée",
+      "Commerce mis en avant",
+      "Situation"
+    ],
+    "rows": [
+      [
+        "4 décembre",
+        "Librairie",
+        "Envoi effectué"
+      ],
+      [
+        "5 décembre",
+        "Atelier des Saveurs",
+        "34 participations à figer"
+      ],
+      [
+        "6 décembre",
+        "Épicerie",
+        "Prochaine case"
+      ]
+    ],
+    "effect": "Les 34 participations du 5 décembre sont figées. Le Coffret Gourmand reste rattaché à cette journée. Le calendrier se poursuit."
+  },
+  "communication": "Le contenu de la case ouverte est présenté séparément des cases à venir. Les modalités d’exposition des cases futures restent à arbitrer.",
+  "prepPreview": {
+    "at": 1,
+    "columns": [
+      "Case",
+      "Commerce du jour",
+      "Dotation"
+    ],
+    "rows": [
+      [
+        "4 décembre",
+        "Librairie du Bourg",
+        "Coffret Lecture"
+      ],
+      [
+        "5 décembre",
+        "Atelier des Saveurs",
+        "Coffret Gourmand"
+      ],
+      [
+        "6 décembre",
+        "Épicerie du Pont",
+        "À vérifier"
+      ]
+    ]
+  },
+  "finalAction": "Examiner la clôture de la case",
+  "finalQuestion": "Confirmer la clôture de la case du 5 décembre ?",
+  "finalButton": "Confirmer la clôture de cette case",
+  "finalStatus": "Case du 5 décembre clôturée",
+  "finalNote": "Seule la population du 5 décembre sera figée. Les autres journées poursuivent leur cycle dans le même calendrier."
+}
+</script>
+<script src="deroulement.js"></script>
+<script src="tirage.js"></script>
+<script src="interface.js"></script>
+</body></html>

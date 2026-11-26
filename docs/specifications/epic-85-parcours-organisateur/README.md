@@ -1,0 +1,81 @@
+# EPIC 85 — Piloter une animation de sa création à sa fin
+
+Spécification du 25 novembre 2026. **État produit : En cours.** Le gestionnaire doit pouvoir repérer l’édition qui demande son intervention, agir dans le bon dossier et retrouver ses autres animations. Sur une tombola clôturée, cela signifie passer directement de « Préparer le tirage » aux personnes éligibles et aux lots, puis du résultat confirmé au premier gain à traiter.
+
+| Pour travailler sur… | Document de référence |
+| --- | --- |
+| Le périmètre et les engagements E85-CA-01 à 12 | [Cadrage et critères d’acceptation](../../roadmap/en-cours/epic-85-parcours-organisateur-backlog.md) |
+| Les règles et les écrans propres à chaque jeu | [Parcours détaillés des six modèles implémentés et des trois modèles en projet](modeles.md) |
+| Les recommandations, les droits, les refus et la reprise d’une opération | [Architecture et compatibilité](architecture.md) |
+| Les scénarios à exécuter et la revue avec des gestionnaires | [Matrice de recette et lots](recette.md) |
+| Les comportements implémentés et les vérifications locales | [Bilan par critère](verification-livraison.md) |
+| Manipuler les écrans | [Fiche large](../../../livrables/design/animation/epic-85-parcours-organisateur/fiche.html) · [Parcours par modèle](../../../livrables/design/animation/epic-85-parcours-organisateur/creation-cloture/index.html) · [Accès direct au suivi, à la clôture, au tirage et aux gains](../../../livrables/design/animation/epic-85-parcours-organisateur/creation-cloture/exploitation.html) · [Planches](../../../livrables/design/animation/epic-85-parcours-organisateur/creation-cloture/planches/index.html) |
+
+## Commencer sa journée
+
+Le tableau de bord répond à « Quelle édition demande mon attention ? ». Chaque entrée d’intervention identifie l’édition et la commune, l’étape métier, le motif vérifié et le geste accessible. Une attente d’accord commerçant précise qui peut agir dès que cette information est connue. Un incident renvoie à son dossier quand la source l’identifie. Une date échue invite à contrôler la clôture selon les capacités reçues. Les archives se consultent depuis « Mes archives ».
+
+La liste des animations répond à « Où est mon édition ? ». Depuis une liste filtrée, le nom ouvre la fiche et son action ouvre directement la destination annoncée. Le responsable qui peut publier arrive à la même revue depuis la ligne, le tableau de bord ou l’en-tête. Un lecteur peut consulter les faits autorisés. Une édition sans intervention connue reste trouvable dans sa liste, avec sa situation réelle.
+
+**Exemple de reprise.** La gestionnaire filtre les éditions de sa commune, ouvre une publication en attente et retrouve l’invitation concernée. Après sa relance, le contrôle continue d’indiquer l’attente d’un accord. De retour dans sa liste, elle examine un incident sur une seconde édition, puis prépare le tirage d’une troisième. Chaque retour retrouve les critères, la page et l’entrée d’origine. Si une action fait sortir une ligne du filtre, le retour l’explique et replace le focus dans les résultats restants.
+
+## Lire et utiliser la fiche
+
+Sur ordinateur, le nom, la commune et la période identifient l’édition. Le repère horizontal utilise la largeur disponible et indique textuellement l’étape en cours. Le titre de la zone de travail désigne séparément la **rubrique consultée**. Une gestionnaire peut ainsi lire « Étape en cours : Déroulement » tout en examinant « Validations ». Le style reprend les titres, boutons, couleurs d’état et composants de gestion de Localeo Animation.
+
+L’en-tête porte le prochain geste permis pour l’édition. Quand la destination est déjà ouverte, la zone de travail porte l’action précise au point de décision, à côté de ses effets. Une même commande apparaît une seule fois dans cette vue. Les verbes annoncent le geste réel. « Voir les participants », « Vérifier la clôture » et « Préparer le tirage » ouvrent une lecture. « Publier l’animation », « Confirmer la clôture » et « Confirmer le tirage » engagent l’opération présentée.
+
+Depuis la fiche, une action ou un lien vers un dossier atteint sa destination en une activation. Le repère d’étape se maintient pendant les consultations secondaires. La navigation ordinaire conserve les destinations d’ouverture E73 liées à l’état et aux droits, notamment l’accès au bilan d’une édition active. Un lien explicite vers une rubrique ou un dossier autorisé prévaut sur cette destination par défaut. [Règles d’entrée de la fiche](../epic-73-animation-et-ou-coffrets/parcours-organisateur.md)
+
+## De la création à l’archive
+
+| Situation | Informations et geste du gestionnaire | Résultat observable et suite |
+| --- | --- | --- |
+| Choix du modèle | Depuis le catalogue de la commune, lire la mécanique et le mode d’accès. Choisir une création autonome ou transmettre la demande accompagnée prévue pour ce modèle. | La création confirmée identifie l’édition et ouvre sa préparation. La demande transmise affiche son reçu et sa suite connue. Le lien vers l’édition devient disponible lorsqu’elle existe et que son accès est permis. |
+| Préparation | Reprendre le travail à l’élément utile. Voir les prérequis satisfaits, les points en attente, l’acteur concerné et le lien vers la correction. Distinguer préparation terrain, invitations et conditions de publication. | Après modification, la revue relit le contrôle concerné. Les informations déjà saisies sont conservées. Les préparatifs facultatifs restent accessibles. |
+| Revue et publication | Lire la présentation destinée au public, la période, les contrôles et leurs motifs. Le responsable peut corriger un blocage puis revenir au même contrôle. « Publier l’animation » engage la publication lorsque le serveur l’autorise. | La réussite affiche l’édition publiée et la période. Le suivi s’ouvre directement. Lors d’un refus, le motif actualisé reste associé au contrôle concerné. |
+| Déroulement | Lire l’activité et les faits propres au jeu. Un indicateur ouvre la population qu’il mesure. Depuis la liste, ouvrir un participant, une validation ou un incident. Voir la preuve disponible, l’état et le geste permis. | Après un geste, relire le dossier et les agrégats affectés. Un gestionnaire peut revenir à sa recherche ou retrouver la prochaine intervention. Les dossiers sensibles conservent leurs restrictions de visibilité. |
+| Revue de clôture | Voir ce que la fermeture interrompt, la règle d’éligibilité, les décomptes disponibles et les cas à examiner. Ouvrir un dossier, revenir, puis annuler ou choisir « Confirmer la clôture ». Une clôture anticipée, lorsqu’elle est autorisée, reste secondaire et annonce sa conséquence. | La clôture confirmée ferme les participations et validations selon le modèle et fige la population. Le reçu distingue ce qui est figé de ce qui reste à traiter. Selon les capacités, il propose le tirage, un résultat existant ou la fin. |
+| Tirage applicable | « Préparer le tirage » ouvre la revue dans l’édition clôturée. Présenter la population figée, les lots ou exemplaires mobilisables, les conditions de dotation et le nombre d’attributions possibles lorsqu’il est établi. Un manque de financement, une population vide ou une opération en cours reçoit son état explicite. | Revenir ou annuler la revue préserve les lots. « Confirmer le tirage » lance la commande appropriée. Le résultat distingue attribution confirmée, traitement en cours et réponse à vérifier. Une réouverture retrouve l’opération ou son résultat. |
+| Gains et remises | Depuis les attributions, ouvrir un dossier. Le gestionnaire voit le lot, la situation de l’envoi, de la remise ou du retrait, la prochaine action autorisée et son acteur lorsqu’il est établi. Les données du bénéficiaire suivent les droits du lecteur. | Le retour retrouve les dossiers à résoudre et leurs statuts relus. Une notification envoyée et une remise enregistrée ont des libellés distincts. Un dossier déjà résolu reste consultable dans l’historique. |
+| Fin, bilan et archive | Ouvrir les contrôles de fin. Chaque blocage mène au dossier concerné, y compris une unité sans gagnant à justifier. Lorsque la capacité est ouverte, « Terminer l’animation » fige la gestion selon E73. « Archiver l’animation » est une décision ultérieure explicite. | Le bilan final et l’historique sont consultables selon les droits. L’archive disparaît du tableau de bord opérationnel et reste accessible dans « Mes archives ». Les gains acquis et les justificatifs conservent leurs règles d’accès. |
+
+La date, la consultation d’une rubrique et le succès d’un envoi ne font pas avancer à eux seuls l’édition. Le tirage et les remises sont des tâches de la phase de clôture. Une édition annulée affiche son état propre et les lectures autorisées. [Cycle et règles de fin E73](../epic-73-animation-et-ou-coffrets/fin-animation-archives.md)
+
+## Retrouver les rubriques actuelles
+
+La cartographie couvre les 18 destinations actuelles. Les regroupements ci-dessous organisent les liens et le contenu. Les tâches principales et les dossiers signalés s’ouvrent directement. Un ancien accès conserve l’édition, la destination et, le cas échéant, le dossier demandé. [Navigation existante](../../../../localeo-animation/src/app/components/AnimationDetailNavigation.tsx)
+
+Sur grand écran, la rangée de navigation reprend les entrées de la maquette large dans cet ordre : **Préparation, Publication, Suivi, Participants, Communication, Clôture, Tirage, Bilan**. Chaque entrée visible ouvre immédiatement son contenu. Les rubriques secondaires apparaissent comme des liens nommés à l’endroit où elles servent : « Validations » auprès de l’activité, « Messages habitants » dans Communication, « Gains et remises » auprès du résultat et des dossiers de fin, « Historique » dans Bilan. Un lien direct ou un retour ouvre aussi ces rubriques en conservant leur titre propre. Si le modèle ne prévoit aucun tirage, la navigation omet cette entrée et la clôture donne accès à la fin applicable. [Maquette de la fiche large](../../../livrables/design/animation/epic-85-parcours-organisateur/fiche.html)
+
+| Espace de travail | Identifiant actuel → contenu proposé | Accès utile en situation |
+| --- | --- | --- |
+| Préparation | `assistant` → préparation guidée · `configuration` → réglages de l’édition · `participations` → invitations commerçants · `preparation` → terrain | Ouvrir la correction ou l’accord depuis son contrôle. Afficher les tâches commerçantes pour les modèles concernés. |
+| Publication ou clôture | `workflow` → revue de publication ou revue de clôture | Un lien de publication ou de clôture désigne la bonne revue. L’ancien lien générique présente le contrôle pertinent pour l’état lu, avec accès à son contexte. |
+| Suivi | `live` → activité de l’édition · `participants` → participants · `validations` → validations | L’indicateur mène à sa liste déjà filtrée. Un incident identifié mène à sa situation métier. |
+| Communication | `communication` → communication · `messages-habitants` → messages habitants · `actualites` → actualités · `flyer` → flyer · `diffusion` → liens et QR de diffusion | Retrouver directement la conversation, la publication ou le support autorisé, puis revenir à la tâche en cours. |
+| Tirage et gains | `tirage` → préparation, état ou résultat · `gains` → gains et remises | La recommandation « tirages » résout la rubrique « Tirage » de l’édition. Le résultat confirmé donne accès aux gains. |
+| Fin et bilan | `fin` → dossiers de fin et archivage · `bilan` → bilan disponible à la phase consultée · `audit` → historique autorisé | Un contrôle de fin ouvre le dossier. Le bilan indique la période et le caractère provisoire ou final de la lecture. |
+
+En cas de destination retirée au rôle ou inapplicable au modèle, la fiche explique l’indisponibilité et offre un retour autorisé. Elle protège toute saisie en cours avant changement de cible. En lecture seule, le gestionnaire retrouve les informations permises et le résultat d’une opération déjà effectuée.
+
+## Contenu commun des écrans de gestion
+
+| Composant | Règle de présentation et d’usage |
+| --- | --- |
+| Métriques | Placer les valeurs liées à la tâche avant la liste concernée. Nommer l’unité, la période ou la population. Distinguer « inscrits », « qualifiés » et « gains remis ». Un zéro confirmé s’affiche comme zéro. Une lecture indisponible affiche son état. Le lien de détail reprend exactement le périmètre annoncé. |
+| Recherche et filtres | Conserver le même ordre de lecture, un libellé visible par champ, les critères actifs et un moyen de les effacer. À la modification d’un filtre, revenir à la première page des résultats. Une requête ancienne arrivée en retard ne remplace jamais les résultats de la recherche courante. |
+| Tableau | Donner à chaque colonne un en-tête. Mettre l’identité du dossier en premier, puis les preuves ou valeurs comparables, l’état en texte et son action. Un lien identifiable ouvre le dossier au clavier. Les colonnes métier varient avec le modèle, leur ordre d’usage reste stable. |
+| Pagination | Sur une liste paginée de gestion, présenter plage affichée, total filtré, page et commandes disponibles. Une dernière page disparue après une action ramène à la dernière page valide. Une lecture à curseur sans total conserve des commandes adaptées à son contrat. L’écart éventuel au CA-06 doit être résolu pour toute liste incluse dans sa recette. [Contrats et périmètre des totaux](architecture.md) |
+| Retour et fraîcheur | Conserver édition, recherche, filtres, page et point de focus entre liste et dossier. Afficher la date d’observation si elle est fournie et utile à la décision. Une action réussie relit les seuls résultats affectés. |
+| Lecture partielle ou en erreur | À la première lecture, signaler le chargement. Après une erreur, conserver la saisie et identifier les dernières données affichées le cas échéant. Distinguer « aucune participation », « aucun résultat pour ces filtres », accès refusé et incident de lecture. Un seul réessai pour la zone affectée, tel que « Réessayer le chargement des participants ». Une relecture ne rejoue aucune écriture. |
+
+Appliquer les [conventions de gestion communes](../../architecture/transverse/conventions-backoffice.md) aux participants, validations, invitations, gains, historique et listes transversales touchées. Les photos, références confidentielles et justificatifs ne sont affichés que dans les dossiers et phases qui les autorisent.
+
+## Téléphone, clavier et arbitrage d’usage
+
+La proposition à évaluer conserve sur téléphone l’identité de l’édition, son étape, le titre consulté et le geste principal. « Toutes les rubriques » ouvre en une fois la liste des destinations autorisées, regroupées sous des intertitres. Le choix d’une destination la charge directement. La fermeture rend le focus au bouton d’ouverture. Sur ordinateur, l’espace disponible sert d’abord au travail en cours, notamment à la comparaison des colonnes. Les destinations fréquentes restent accessibles par des liens nommés.
+
+À 320 et 390 px et avec texte agrandi à 200 %, les lignes se replient en couples libellé–valeur si la comparaison en colonnes ne tient plus. Chaque action garde le contexte de sa ligne. Le repère se compacte en une étape nommée et sa position. Le focus reste visible, l’ordre de tabulation suit la tâche, la sélection se lit indépendamment de la couleur et les retours de commande sont annoncés. Après annulation, le focus revient au déclencheur. Après confirmation, il atteint le reçu ou son titre.
+
+**Décision à valider en usage.** Comparer cette entrée secondaire avec les raccourcis et le sélecteur complet E73 sur trois tâches : retrouver les messages habitants, reprendre un gain, revenir à une liste filtrée. Relever détours, hésitations, erreurs d’édition et compréhension de l’effet avant confirmation. Si « Toutes les rubriques » masque un geste quotidien, donner un accès direct à ce geste à l’endroit où le besoin apparaît. Les maquettes illustrent la proposition avec des données fictives. La validation repose sur la [recette comparative](recette.md).
