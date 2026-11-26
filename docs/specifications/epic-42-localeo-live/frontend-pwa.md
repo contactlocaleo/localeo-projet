@@ -295,6 +295,27 @@ ouverte et applique les conditions habituelles. Le clic utilise une
 destination autorisée du même site et conserve la lecture des destinations
 historiques.
 
+#### Lot libre gagné
+
+Le traitement d’un gain libre confirmé dépose une notification personnelle
+par attribution et par installation suivant cette participation avec un
+accès valide. Le dépôt dans Live respecte la catégorie **Animations**. Le
+transport Web Push exige aussi un abonnement actif et relit la liaison, la
+préférence et l’attribution avant l’envoi. L’e-mail et le Web Push ont chacun
+leur traitement d’envoi.
+
+Le clic ouvre les consignes du lot dans **Mon carnet** si l’accès personnel
+est toujours disponible sur l’installation. La notification et son lien ne
+contiennent aucun token, code de retrait ou QR. La confirmation par e-mail
+utilise séparément le lien personnel reçu par le gagnant. Si le suivi ou sa
+preuve expire, la notification personnelle disparaît des lectures du carnet.
+
+La recette PostgreSQL vérifie le passage du tirage confirmé à l’acceptation
+par un fournisseur simulé, la déduplication des intentions et le retrait
+d’une preuve avant transport. La lecture privée est aussi contrôlée après
+révocation. [Tirage et transport](../../../../localeo-backend/tests/security/test_tirages_libres_postgres.py)
+· [Messages personnels](../../../../localeo-backend/tests/security/test_rappels_lots_live_postgres.py)
+
 ### Bibliotheque locale et confiance
 
 - ajout d'un coffret avec son token de consultation depuis la vue detaillee ou le raccourci de l'email, et ajout automatique d'une participation apres inscription ;

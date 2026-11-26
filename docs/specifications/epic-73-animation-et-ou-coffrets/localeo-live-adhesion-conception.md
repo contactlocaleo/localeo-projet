@@ -278,7 +278,7 @@ pas une attestation de déploiement. La clôture historique E73 reste conservée
 | Référence | Décision | Effet sur la préparation précédente |
 | --- | --- | --- |
 | LA-T01 | Accueil composé à partir de fenêtres bornées existantes, avec couverture explicite. | Pas de projection de classement global ni d’historique de dernière activité. Les 50 premiers suivis ne sont pas présentés comme les plus prioritaires de toute l’installation. |
-| LA-T02 | Nouvelle lecture publique `/animations/recherche`, réutilisant les prédicats du catalogue, sans total exhaustif. | L’ancienne route, son format et ses consommateurs restent compatibles. Le service de recherche existant qui calcule un total n’est pas appelé tel quel par la nouvelle route. |
+| LA-T02 | Lecture publique `/animations/recherche`, avec les prédicats du catalogue et un total filtré sur demande. | L’ancienne route, son format et ses consommateurs restent compatibles. |
 | LA-T03 | Présence de messages non lus par animation, via une lecture dédiée `EXISTS`. | Pas de compteur calculé en parcourant la messagerie, ni d’utilisation du compteur global comme compteur de l’animation. |
 | LA-T04 | Contact d’aide facultatif, explicitement publié par l’organisateur ; sous-ressource versionnée dédiée. | Une vraie capacité de contact public est développée, avec état vide pour les anciennes animations ; aucun contact privé n’est recyclé. |
 | LA-T05 | Pour les chasses, réutilisation du lieu courant autorisé ; complément pratique personnel à la demande. | L’annuaire public continue d’exclure les chasses ; pas de divulgation de lieux futurs. |
@@ -455,13 +455,12 @@ pour publication, abonnement, visibilité communale, moteur supporté et dotatio
 | `statut_public` | `EN_COURS` ou `A_VENIR`, facultatif : les deux. Pas de clôturées dans cette recherche de découverte ; les anciennes routes de détail restent disponibles selon leurs règles. |
 | `periode` | `TOUTES` (défaut), `AUJOURDHUI`, `WEEKEND`. Fenêtre Paris résolue par le serveur, bornes UTC inclus/exclus. Chevauchement strict `debut < fin_fenetre` et `fin > debut_fenetre`. |
 | `page_size`, `cursor` | 12 par défaut, 1–50 ; curseur opaque signé/versionné, 1024 caractères maximum. Pas d’offset. `moteurs_supportes` reprend le contrat existant. |
+| `inclure_total` | `false` par défaut. `true` demande le total initial du périmètre filtré et visible, avant application du curseur. |
 
 Réponse 200 : `items` (DTO public existant), `count` (page), `page_size`,
 `next_cursor`, `has_more`, `as_of` et `periode_resolue` (null pour TOUTES, sinon
-`{debut, fin, fuseau: "Europe/Paris"}`). Pas de `total` exhaustif. Une page vide
-est légitime ; `next_cursor` est null lorsqu’il n’y a plus de résultat.
-L’adaptateur Live dédié conserve ce format, sans alimenter un normaliseur ancien
-qui attendrait un total. Les autres usages de `fetchPublicAnimations` sont conservés.
+`{debut, fin, fuseau: "Europe/Paris"}`). Le champ `total` contient l’effectif
+demandé ou `null`. Une page vide est légitime et `next_cursor` vaut `null` à la fin.
 
 Ordre total : rang EN_COURS puis A_VENIR évalué à `as_of`, date de début effective,
 UUID croissants. Le curseur contient dernier triplet, `as_of`, fenêtre résolue,
@@ -479,9 +478,12 @@ selon l’erreur de catalogue existante ; surcharge : 429 avec `Retry-After`, sa
 requêtes répétées en boucle. Réponse publique sans donnée personnelle, cache HTTP
 `no-store` pour éviter une ancienne visibilité servie après retrait.
 
-Implémentation SQL : nouvelle méthode de page sans COUNT, réutilisant
-`_requete_base`/`_requete_visible`, sélection `limit + 1`, enrichissement groupé
-de cette page. Réutiliser `nom_recherche` et les index B-tree/trigrammes de v276,
+La page SQL réutilise `_requete_base` et `_requete_visible`, sélectionne
+`limit + 1` et enrichit uniquement cette page. La lecture demandant le total
+ajoute un comptage SQL avec ces mêmes prédicats, sans chargement des objets.
+Le curseur signé conserve cette valeur pour les pages suivantes. Une
+actualisation depuis le début reprend le comptage et la visibilité des cartes.
+Réutiliser `nom_recherche` et les index B-tree/trigrammes de v276,
 pas le `nom ILIKE` non normalisé du chemin historique. Aucun nouveau moteur de
 recherche. Tester plans sur dates effectives/surcharges et filtres communaux ;
 si un index additionnel est nécessaire, l’ajouter par migration vérifiée.

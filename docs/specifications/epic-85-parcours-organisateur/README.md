@@ -57,7 +57,7 @@ Les regroupements ci-dessous organisent les liens et le contenu. Les tâches pri
 | État de l’édition | Rubriques utiles selon le modèle et les droits |
 | --- | --- |
 | Brouillon, configurée ou prête à publier | **Préparation** et **Publication**. Préparation donne accès aux objectifs, à la date annoncée du tirage, aux invitations et au terrain applicables ainsi qu’aux contenus à préparer. Publication réunit **Revue de publication** et **Supports de diffusion**. |
-| Publiée ou en cours | **Participation**, **Exploitation**, **Publication** et **Communication**. **Clôture** apparaît lorsqu’elle est recommandée ou qu’une fermeture est engagée. Une clôture anticipée autorisée reste une action secondaire. Les résultats et objectifs courants se consultent via **Bilan provisoire** dans Participation. |
+| Publiée ou en cours | **Participation**, **Exploitation**, **Publication**, **Communication** et **Clôture**. La revue de clôture est accessible depuis les rubriques dès la publication. La confirmation et la possibilité de clore avant l’échéance dépendent des capacités du serveur. Les résultats et objectifs courants se consultent via **Bilan provisoire** dans Participation. |
 | Clôturée | **Tirage** pour les éditions concernées, accès aux gains et aux dossiers de fin, et **Bilan**. La clôture dirige vers la suite applicable au jeu. |
 | Terminée ou archivée | **Bilan** en premier, puis les lectures historiques autorisées. |
 | Annulée | Résumé de l’annulation et lectures autorisées. |
@@ -89,6 +89,8 @@ En cas de destination retirée au rôle ou inapplicable au modèle, la fiche exp
 Dès qu’une rubrique contient plusieurs vues, sa navigation locale les nomme toutes, y compris la première. Après clôture, **Fin et archivage** est accessible dans **Tirage** pour les jeux qui le prévoient et dans **Clôture** pour les autres. **Tirage** donne aussi accès à **Tirage au sort** et **Gains et remises**. La première entrée de Communication est **Messages aux participants**. Bilan regroupe les résultats, objectifs, origines des inscriptions, commentaires, comparaison et historique au même niveau. L’état courant reste repérable pendant ces consultations. Sur téléphone les destinations restent accessibles dans un seul sélecteur. Les droits, la lecture seule et l’applicabilité du tirage déterminent les entrées proposées.
 
 Une recommandation du bandeau mène à la même revue que le raccourci placé auprès d’un blocage. Par exemple, « Vérifier la clôture » depuis un ancien lien de tirage ouvre la revue de cette édition. La confirmation définitive se trouve dans le formulaire qui explique ses conséquences. En présence d’un tirage confirmé avec zéro gagnant, Gains et remises en rend compte. Les lots sans gagnant ont leur propre dossier de justification.
+
+Dans **Gains et remises**, un lot externe attribué dont la remise reste à déclarer propose **Déclarer la remise du lot** aux gestionnaires autorisés. La confirmation explicite, le motif et, au besoin, la date passée alimentent le même suivi versionné du gain. La prise de contact reste accessible à part. Les bons numériques conservent leur geste de remise par QR ou PIN.
 
 ### Retrouver une animation dans la liste
 

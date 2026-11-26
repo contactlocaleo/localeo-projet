@@ -4133,6 +4133,18 @@
               ],
               "title": "Moteurs Supportes"
             }
+          },
+          {
+            "name": "inclure_total",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "description": "Inclure le total des résultats correspondant aux filtres.",
+              "default": false,
+              "title": "Inclure Total"
+            },
+            "description": "Inclure le total des résultats correspondant aux filtres."
           }
         ],
         "responses": {
@@ -70947,6 +70959,19 @@
           "count": {
             "type": "integer",
             "title": "Count"
+          },
+          "total": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total",
+            "description": "Effectif initial des résultats autorisés et filtrés, fourni si demandé et conservé entre les pages."
           },
           "page_size": {
             "type": "integer",

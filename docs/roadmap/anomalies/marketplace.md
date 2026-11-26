@@ -27,6 +27,29 @@ destinations externes écartées. Le banc navigateur simule le clic avec une
 La vérification de l’activation du service worker mis à jour et du clic sur une
 notification système attend un essai sur un téléphone après livraison sur la cible.
 
+Le 26 novembre, sur TEST, deux tombolas publiques sont devenues accessibles et
+le traitement Web Push Live a renvoyé des réponses 200 autour des publications.
+Les journaux consultés n’indiquent ni le nombre d’installations ciblées pour ces
+éditions ni une remise à un appareil précis. L’absence rapportée reste à
+reproduire sur un appareil abonné qui suit la commune.
+
+### Correctifs locaux du 26 novembre 2026 — découverte, carnet et lot libre
+
+Découvrir utilisait le nombre de cartes de la page courante et pouvait faire
+redescendre le compteur lors du chargement suivant. La recherche renvoie à la
+demande le total filtré de la première lecture. Les cartes suivantes
+s’ajoutent au défilement et le bouton reste utilisable au clavier.
+
+Après l’acceptation d’une demande de tombola publique, Mon carnet affiche
+immédiatement un repère local avec les données publiques de l’édition. Le lien
+personnel envoyé par e-mail reste requis pour ouvrir la participation. Cette
+participation remplace le repère au moment de son ajout.
+
+Le lien personnel d’un lot externe arrive dans **Mes lots**, sur les
+consignes de retrait. Les liens déjà envoyés vers l’ancienne page restent
+utilisables. Le gain libre confirmé alimente aussi les notifications des
+installations autorisées. [Contrats et parcours de la tombola publique](../../specifications/epic-74-tombola-publique/architecture-contrats.md) · [Notifications Live](../../specifications/epic-42-localeo-live/frontend-pwa.md)
+
 ### Correctif du 14 novembre 2026 — annonce de publication plus humaine
 
 La notification de nouvelle animation présentait une succession de libellés

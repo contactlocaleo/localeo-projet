@@ -74,11 +74,11 @@ Pour ajouter plusieurs commerces, utilisez **Import commerçants** si vous y ave
 
 Préparez un nom, des dates et le type de jeu que vous souhaitez organiser. Vous pourrez compléter votre projet avant de le publier.
 
-1. Ouvrez **Animations**, puis **Créer** sur téléphone ou **Créer une animation** sur ordinateur. Vérifiez la commune et choisissez le modèle de jeu.
-2. Renseignez les informations demandées. **Continuer** et **Précédent** permettent de passer d’une étape à l’autre. Si vous hésitez sur la suite, ouvrez **Comprendre les étapes** avec le bouton **?** dans l’en-tête. Une fois la saisie commencée, revenez au catalogue si vous souhaitez créer une animation avec un autre modèle.
+1. Ouvrez **Animations**, puis **Créer** sur téléphone ou **Créer une animation** sur ordinateur. Vérifiez la commune et choisissez le modèle. Retrouvez son nom à côté de **Nouvelle animation**.
+2. Renseignez les informations demandées. L’encart **Pour continuer** indique ce qu’il reste à compléter dans l’étape. **Continuer** et **Précédent** permettent de passer d’une étape à l’autre. Pour relire le déroulement, ouvrez **Comprendre les étapes** avec le bouton **?**. Une fois la saisie commencée, revenez au catalogue si vous souhaitez choisir un autre modèle.
 3. Choisissez **Créer le brouillon**, puis confirmez. La création n’envoie aucune invitation et ne publie rien. Le brouillon s’ouvre dans **Préparation**. L’assistant montre ce qu’il reste à préparer. Pour une actualité ou un message à rédiger à l’avance, restez dans **Préparation** et ouvrez la rubrique proposée selon vos droits.
 
-![Dans l’Assistant du brouillon, ouvrez la rubrique indiquée sur chaque point d’attention.](illustrations/guide-quotidien/assistant-1024.png)
+![Le modèle choisi reste visible près du titre. L’encart Pour continuer indique les informations à compléter.](illustrations/guide-quotidien/aide-dotation-1280.png)
 
 ### Reprendre plus tard
 
@@ -303,11 +303,11 @@ Au-delà de 10 000 animations, raccourcissez la période pour pouvoir exporter. 
 
 Clôturez l’animation quand vous souhaitez fermer la participation.
 
-1. Vérifiez les dates et l’activité. Lorsque la clôture est attendue, choisissez **Vérifier la clôture** dans **À traiter aujourd’hui** ou ouvrez **Clôture** depuis la fiche. Pour fermer l’édition plus tôt, utilisez la clôture anticipée si elle vous est proposée.
+1. Ouvrez **Clôture** depuis la fiche de l’animation publiée ou en cours pour vérifier les dates et l’activité. Lorsque la clôture est attendue, **Vérifier la clôture** est aussi proposé dans **À traiter aujourd’hui**. Une fermeture anticipée est possible si vos droits et l’état de l’édition le permettent.
 2. Dans **Clôture**, contrôlez le nombre de qualifiés et les conditions de fermeture. Lisez les effets, puis choisissez **Confirmer la clôture** si vous souhaitez fermer le jeu.
 3. Vérifiez l’état **Clôturée**. Ouvrez **Fin et archivage** pour retrouver les dossiers à régler. Selon votre jeu, cette vue se trouve dans **Tirage** ou **Clôture**.
 
-![La rubrique Clôture apparaît lorsque la fermeture est attendue.](illustrations/guide-quotidien/navigation-cloture-1024.png)
+![Ouvrez Clôture depuis les rubriques de la fiche pour relire les conditions avant toute confirmation.](illustrations/guide-quotidien/navigation-cloture-1024.png)
 
 ![Sur téléphone, vérifiez les conséquences de la fermeture avant de la confirmer.](illustrations/guide-quotidien/cloture-390.png)
 
@@ -321,13 +321,13 @@ Attendez la clôture et vérifiez que les lots et les dossiers attendus sont pr�
 
 1. Après clôture, ouvrez **Tirage → Tirage au sort** si cette rubrique est proposée pour votre jeu. Vérifiez la date annoncée, le nombre de personnes éligibles et les lots. Vous pouvez encore annuler. **Confirmer le tirage** engage l’attribution. Si personne n’est éligible et que le jeu l’autorise, le bouton indique **Enregistrer un tirage sans gagnant**.
 2. Si le tirage est en cours ou si la réponse tarde, vérifiez son état dans cette rubrique. Ouvrez **Gains et remises** pour retrouver les gagnants. **Tirage au sort** permet de revenir au résultat. Pour retrouver les lots de plusieurs éditions, ouvrez **Lots et remises**.
-3. Recherchez le bénéficiaire ou filtrez par animation. Vérifiez le lieu, la date limite et l’état du lot, puis utilisez l’action proposée. Après la remise, actualisez et vérifiez l’état enregistré.
+3. Pour un lot remis hors Localeo, ouvrez **Voir le détail du gain**, puis choisissez **Déclarer la remise du lot** si l’action est proposée. Saisissez un motif et, si besoin, la date de la remise. Cochez la confirmation de remise au gagnant, puis choisissez **Confirmer la remise**. Vérifiez que la remise est enregistrée.
 
-![Dans cet exemple, une personne est éligible pour deux lots. Vérifiez le nombre de gagnants possibles avant de confirmer.](illustrations/guide-quotidien/tirage-1024.png)
+![Vérifiez le gagnant dans le détail du gain. Dans le formulaire, indiquez le motif et confirmez la remise effective.](illustrations/guide-quotidien/remise-1024.png)
 
 ### Suivre les retraits ou envoyer un rappel
 
-Un lot externe se retire au lieu indiqué. Le commerce désigné valide un bon. Pour un coffret, lisez les prestations utilisées et celles qui restent lorsqu’elles sont connues. Pour un rappel, sélectionnez les destinataires et confirmez l’envoi. L’email et la remise sont suivis séparément.
+Un lot externe se retire au lieu indiqué. Le commerce désigné valide un bon numérique avec son QR ou son PIN. Pour un coffret, lisez les prestations utilisées et celles qui restent lorsqu’elles sont connues. Pour un rappel, sélectionnez les destinataires et confirmez l’envoi. L’email et la remise sont suivis séparément.
 
 **Tous les lots** enlève le filtre de tâche et garde les autres critères. Après un tirage confirmé sans gagnant, **Fin et archivage** indique combien de lots restent à justifier. Ouvrez le dossier, choisissez **Justifier les lots sans gagnant** et saisissez le motif. Vérifiez la quantité avant de confirmer. Le dossier passe alors à **Justifié**.
 

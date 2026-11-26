@@ -1,5 +1,23 @@
 # Captures du guide utilisateur Animation
 
+## Repères de création, clôture et remise du 26 novembre 2026
+
+Le portail Animation est construit depuis la base `8d7e0e1` avec les corrections locales, sur des données fictives. [L’aide de l’étape Dotation](aide-dotation-1280.png) montre le modèle près du titre **Nouvelle animation** et l’encart **Pour continuer**. Dans [la fiche avant l’échéance](navigation-cloture-1024.png), **Clôture** donne directement accès à la revue. [La confirmation de remise](remise-1024.png) montre le motif, la date facultative et la confirmation de la remise au gagnant. Les captures de l’onglet **Gains et remises** s’arrêtent avant l’enregistrement.
+
+Depuis le dépôt Animation, utiliser les réponses synthétiques du guide et de la création manuelle.
+
+```powershell
+$env:ANIMATION_TEST_DIST = 'tmp/nov26-ux/build'
+$env:ANIMATION_BROWSER_ARTIFACTS = 'tmp/nov26-ux/creation'
+$env:ANIMATION_GUIDE_CAPTURE_ROOT = 'tmp/nov26-ux/guide-captures'
+$env:ANIMATION_GUIDE_ARTIFACTS = 'tmp/nov26-ux/guide-report'
+node scripts/build-generation-tests.mjs
+node tests/browser/po-creation-continuite.mjs
+node tests/browser/animation-guide.mjs --only=cloture,remise,exploitation,suivi --captures-only
+```
+
+Reprendre les captures relues, régénérer et synchroniser le PDF. Reconstruire ensuite le build avec la copie synchronisée et vérifier les liens et les octets servis avec `node tests/browser/animation-guide.mjs --access-only`.
+
 ## Rubriques selon l’état de l’édition E85-EVO-02 du 26 novembre 2026
 
 Le portail construit sur la base `29c71f3` avec E85-EVO-02 utilise les données fictives de Valmont. La [liste des animations](liste-animations-1024.png) affiche **Préparations** près de **Mes archives**. La [revue du brouillon](navigation-edition-1024.png) montre les vues de Publication sous leur rubrique. Après publication, [Exploitation sur ordinateur](exploitation-1024.png) et [son sélecteur sur téléphone](exploitation-390.png) donnent accès aux réglages et à la configuration publiée. Le [suivi](suivi-1024.png) présente l’objectif courant et **Bilan provisoire**. La [clôture attendue](navigation-cloture-1024.png) ajoute la rubrique dédiée. Un [ancien lien vers le tirage](tirage-avant-cloture-1024.png) affiche la condition de fermeture.
