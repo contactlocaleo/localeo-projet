@@ -1568,3 +1568,12 @@ et [preuves locales](../../specifications/epic-73-animation-et-ou-coffrets/verif
 **E73-EVO-LIENS-POINTS-ATTENTION** ouvre la rubrique utile depuis les cartes
 rouges et orange de **Préparer mon animation**.
 [Critères PA-01 à PA-03](../../specifications/epic-73-animation-et-ou-coffrets/perimetres-parcours-saas.md#évolution-du-25-novembre-2026--liens-des-points-dattention) et [preuves locales](../../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md#liens-des-points-dattention--25-novembre-2026).
+
+## Évolution du 26 novembre 2026 — suppression d’une alerte depuis son détail
+
+**E73-EVO-SUPPRESSION-ALERTE-POPIN** ajoute **Supprimer l’alerte** dans la
+fenêtre ouverte par le compteur d’une animation. La commande existante
+supprime la notification choisie et le portail actualise la liste et la
+cloche. Le rappel calculé de clôture conserve son geste métier.
+[Critères AP-08a à AP-08c](../../specifications/epic-73-animation-et-ou-coffrets/ux-productivite-organisateur.md#évolution-du-26-novembre-2026--suppression-dune-alerte-depuis-son-détail)
+et [preuves locales](../../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md#suppression-alerte-popin-26-novembre-2026).

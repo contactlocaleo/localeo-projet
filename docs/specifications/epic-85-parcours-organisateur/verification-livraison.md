@@ -126,3 +126,36 @@ La relecture du [guide Commerçant](../../produit/formation/commercant/guide-quo
 Le modèle choisi apparaît à côté de **Nouvelle animation**. Les informations demandées avant de poursuivre sont présentées dans l’encart **Pour continuer**. La revue **Clôture** s’ouvre depuis la fiche dès la publication, y compris avant l’échéance. **Gains et remises** distingue la déclaration d’une remise de lot externe des autres événements de suivi.
 
 Chromium confirme 12 parcours de création, 29 parcours organisateur et huit configurations de navigation, dont texte à 200 %. La déclaration de remise passe dix scénarios à 320 et 1 280 px. Ces scénarios couvrent la confirmation, le refus du lot, le conflit de version, la lecture seule et le reçu après perte de réponse. Le guide Animation et sa copie embarquée ont été actualisés et relus. L’accès au PDF passe à 390 et 1 024 px. [Déclaration de remise](../../../../localeo-animation/tests/browser/dotation.mjs) · [Guide dans l’application](../../../../localeo-animation/tests/browser/animation-guide.mjs)
+
+<a id="e85-evo-03-priorite-remise"></a>
+
+## E85-EVO-03 — Priorité à la remise du lot
+
+La recette E85-CA-20 part d’Animation `a69d11c` et des modifications
+locales. Le build avant cette évolution reproduit le formulaire de suivi
+affiché d’emblée à 320 px. Après l’évolution, l’ouverture donne la priorité
+à la déclaration de remise. La commande secondaire ouvre le suivi sur demande.
+
+- Le [banc Dotation](../../../../localeo-animation/tests/browser/dotation.mjs)
+  passe 20 parcours ciblés à 320 et 1 280 px. Les cas remise et refus sont
+  rejoués avec l’annulation au clavier et le retour du focus, puis à 320 px
+  avec texte à 200 %. Les cas de conflit de version et de réponse perdue
+  conservent les saisies et la vérification du reçu.
+- Les scénarios ciblés du [banc Bons numériques](../../../../localeo-animation/tests/browser/digital-prizes.mjs)
+  et du [banc Productivité](../../../../localeo-animation/tests/browser/productivity-operations.mjs)
+  valident le suivi d’un bon, la reprise d’une page de gains, la saisie pendant
+  la relecture de l’historique et le reçu après réponse perdue. Les deux bancs
+  complets s’arrêtent aussi sur la version de départ, respectivement sur une
+  sélection de stock désactivée et sur le filtre de recherche des participants
+  masqué. Les scénarios de suivi ont été rejoués séparément.
+- Les 442 tests de `pnpm test`, TypeScript, ESLint et le build isolé passent.
+  Les formes de commande, droits et reçus viennent du contrat existant.
+  La recette s’appuie sur des réponses API synthétiques. Les données de
+  démonstration disponibles suffisent à alimenter le détail du gain.
+- Le [guide Animation](../../../livrables/formation/animation/guide-quotidien-localeo-animation.pdf)
+  présente les deux actions et la confirmation de remise en page 22. Les
+  captures du choix initial à 390 et 1 024 px se trouvent dans le rapport de
+  recette. Les 28 pages du PDF et ses 54 liens internes ont été vérifiés.
+  La copie embarquée correspond au PDF canonique et son accès dans le build
+  a été vérifié aux deux largeurs. Le guide Commerçant couvre la remise par
+  le Scanner de Pro, qui relève d’un autre parcours.

@@ -1,5 +1,31 @@
 # Captures du guide utilisateur Animation
 
+## Actions du détail d’un gain du 26 novembre 2026
+
+Le portail construit depuis la base `a69d11c` avec l’évolution locale affiche **Déclarer la remise du lot** avant **Ajouter un suivi** sur un gain externe fictif. La recette vérifie les boutons à l’ouverture et capture la [confirmation de remise](remise-1024.png) à 390 et 1 024 px avant enregistrement. Le PDF illustre la confirmation. Les captures de la barre d’actions sont produites par la même recette.
+
+```powershell
+$env:ANIMATION_TEST_DIST = 'tmp/guide-priorite-remise-build'
+$env:ANIMATION_GUIDE_CAPTURE_ROOT = 'tmp/guide-priorite-remise-outputs'
+$env:ANIMATION_GUIDE_ARTIFACTS = 'tmp/guide-priorite-remise-report'
+node scripts/build-pwa-tests.mjs
+node tests/browser/animation-guide.mjs --only=remise --captures-only
+```
+
+## Suppression depuis le détail d’une alerte du 26 novembre 2026
+
+Le portail construit depuis la base `a69d11c` avec l’évolution locale affiche l’action **Supprimer l’alerte** dans le [détail d’une notification](suppression-alerte-1024.png). La recette ouvre la fenêtre depuis le compteur d’une édition fictive de Valmont et s’arrête au moment du choix de l’action. Elle vérifie cet accès à 390 et 1 024 px.
+
+Depuis le dépôt Animation, construire le portail et capturer le détail sur un port éphémère.
+
+```powershell
+$env:ANIMATION_TEST_DIST = 'tmp/guide-alertes-build'
+$env:ANIMATION_GUIDE_CAPTURE_ROOT = 'tmp/guide-alertes-captures'
+$env:ANIMATION_GUIDE_ARTIFACTS = 'tmp/guide-alertes-capture-report'
+node scripts/build-pwa-tests.mjs
+node tests/browser/animation-guide.mjs --only=suppression-alerte --captures-only
+```
+
 ## Statut dans la liste Animations du 26 novembre 2026
 
 Le portail construit depuis la base `764b06c` avec le correctif local affiche le badge **En cours** avant les dates dans la [liste sur ordinateur](liste-animations-1024.png), dans la [liste sur téléphone](liste-animations-390.png) et à [l’arrivée dans la rubrique](accueil-animations-390.png). La recette utilise les données fictives de Valmont.

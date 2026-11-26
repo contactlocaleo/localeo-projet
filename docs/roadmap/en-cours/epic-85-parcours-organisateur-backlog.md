@@ -138,6 +138,7 @@ Les six modèles ci-dessous ont une stratégie implémentée. Leur ouverture dé
 | E85-CA-17 | Ouvrir **Préparations** depuis l’en-tête de la liste, reprendre un travail et revenir avec un filtre et une recherche actifs. | Les accès à **Préparations** et **Mes archives** sont visibles. Les liens existants et le retour navigateur conservent le parcours. Le retour restaure le contexte filtré et le focus pertinent. |
 | E85-CA-18 | Ouvrir la fiche aux différentes étapes, sur ordinateur et téléphone. | Les rubriques visibles suivent l’état, le modèle et les droits. La navigation secondaire désigne sa rubrique parente. Les liens directs autorisés continuent de fonctionner. Avant clôture, le bilan provisoire se consulte depuis Participation et le lien historique Tirage explique le prérequis. |
 | E85-CA-19 | Retrouver les réglages encore ouverts après publication et examiner la configuration de l’édition. | **Exploitation** rassemble les réglages applicables et la lecture de la configuration publiée. L’interface suit les droits et les champs modifiables décidés côté serveur. Après clôture, les actions encore autorisées restent disponibles dans leur rubrique. |
+| E85-CA-20 | Ouvrir le détail d’un gain et choisir le geste à effectuer. | **Déclarer la remise du lot** est l’action principale d’un lot externe à remettre lorsque le serveur la permet. **Ajouter un suivi** ouvre sa saisie à la demande. Les deux formulaires sont distincts et leur annulation rend le focus à leur commande. |
 
 ### E85-EVO-01 — Fiche et préparation du 26 novembre 2026
 
@@ -148,6 +149,13 @@ Le backend étend le calcul de l’avertissement de visuel en réutilisant l’i
 ### E85-EVO-02 — Rubriques adaptées à la situation de l’édition du 26 novembre 2026
 
 Cette évolution rend la liste des éditions directement accessible, avec **Préparations** près de **Mes archives**. La fiche distingue la rubrique principale de ses vues. Une fois publiée, l’édition propose **Exploitation** pour ses réglages et sa configuration publiée. Avant clôture, le bilan reste une lecture contextuelle de Participation. **Tirage** et **Bilan** rejoignent la navigation principale après la fermeture effective et selon le modèle et les droits. Les statuts et capacités du serveur restent les sources de référence. Les fixtures et éditions existantes couvrent la validation de cette navigation. [Comportements cibles](../../specifications/epic-85-parcours-organisateur/README.md#retrouver-les-rubriques-actuelles) · [Recette E85-CA-17 à 19](../../specifications/epic-85-parcours-organisateur/recette.md)
+
+### E85-EVO-03 — Priorité à la remise du lot du 26 novembre 2026
+
+**Traiter ce gain** ouvre l’état de la remise et ses actions. Auparavant le
+formulaire de suivi était affiché à l’ouverture. La déclaration d’une remise
+effective devient le geste principal. Le suivi s’ouvre séparément à la demande.
+[Parcours cible](../../specifications/epic-85-parcours-organisateur/README.md#passer-dune-vue-à-lautre-dans-une-rubrique) · [Recette E85-CA-20](../../specifications/epic-85-parcours-organisateur/recette.md) · [Preuves locales](../../specifications/epic-85-parcours-organisateur/verification-livraison.md#e85-evo-03-priorite-remise)
 
 ## Impacts et passage à la spécification
 

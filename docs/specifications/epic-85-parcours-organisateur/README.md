@@ -90,7 +90,14 @@ Dès qu’une rubrique contient plusieurs vues, sa navigation locale les nomme t
 
 Une recommandation du bandeau mène à la même revue que le raccourci placé auprès d’un blocage. Par exemple, « Vérifier la clôture » depuis un ancien lien de tirage ouvre la revue de cette édition. La confirmation définitive se trouve dans le formulaire qui explique ses conséquences. En présence d’un tirage confirmé avec zéro gagnant, Gains et remises en rend compte. Les lots sans gagnant ont leur propre dossier de justification.
 
-Dans **Gains et remises**, un lot externe attribué dont la remise reste à déclarer propose **Déclarer la remise du lot** aux gestionnaires autorisés. La confirmation explicite, le motif et, au besoin, la date passée alimentent le même suivi versionné du gain. La prise de contact reste accessible à part. Les bons numériques conservent leur geste de remise par QR ou PIN.
+Dans **Gains et remises**, le détail d’un lot externe attribué dont la remise
+reste à déclarer présente **Déclarer la remise du lot** en premier lorsque
+l’action est autorisée. La remise effective est enregistrée après
+**Confirmer la remise**, avec un motif et une date passée facultative.
+**Ajouter un suivi** ouvre une saisie secondaire pour consigner un événement.
+Les deux formulaires s’ouvrent sur demande, chacun à son tour. Leur annulation
+ramène aux actions du gain avec le focus sur la commande utilisée.
+Les bons numériques se remettent par QR ou PIN.
 
 ### Retrouver une animation dans la liste
 

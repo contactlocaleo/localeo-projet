@@ -6174,3 +6174,31 @@ d’actualités confirme les icônes des filtres Commerçants et Coffrets.
 
 ESLint ciblé et contrôles des liens et des sources documentaires réussis.
 La recette utilise Chromium et des réponses API synthétiques.
+
+<a id="suppression-alerte-popin-26-novembre-2026"></a>
+
+## Suppression d’une alerte depuis son détail — 26 novembre 2026
+
+Les [critères AP-08a à AP-08c](ux-productivite-organisateur.md#évolution-du-26-novembre-2026--suppression-dune-alerte-depuis-son-détail)
+sont vérifiés sur Animation à partir de `a69d11c` avec les modifications locales.
+Le [banc de la liste](../../../../localeo-animation/tests/browser/animation-list-alerts.mjs)
+réussit à 320 et 1 280 px dans Chromium avec des réponses API synthétiques.
+Il couvre la lecture seule, la suppression après réponse 204, le refus 403,
+les activations répétées pendant la commande, le rafraîchissement du compteur
+et le signal d’actualisation envoyé à la cloche. La suppression de la dernière notification conserve les
+filtres et restitue le focus à la recherche lorsque le compteur disparaît.
+Le rappel **Clôture attendue** conserve l’action de clôture. Résultats sous
+`tmp/animation-list-alerts-RNoGah/results.json`.
+
+`pnpm typecheck`, `pnpm lint`, les 442 tests de `pnpm test` et
+`node scripts/build-check.mjs` ont réussi. La commande de notification, ses
+protections serveur et le générateur de données réutilisent les contrats et
+données existants. Le parcours relève de l’interface organisateur.
+
+Le [guide Animation](../../../livrables/formation/animation/guide-quotidien-localeo-animation.pdf)
+présente le geste au sommaire et en page 5. La capture utilise l’application
+avec une notification fictive à 390 et 1 024 px. Les 28 pages rendues et les
+liens du PDF ont été vérifiés. `guide:check` confirme l’égalité des copies et
+`animation-guide.mjs --access-only` valide l’accès au PDF servi dans le build.
+Le guide Commerçant décrit les notifications propres à Pro et sa copie passe
+également le contrôle de synchronisation.

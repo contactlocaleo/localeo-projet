@@ -283,9 +283,9 @@ présente son titre, son message, une explication de traitement et un accès à 
 rubrique concernée. Les confirmations ne sont pas présentées comme des incidents ;
 un type ou une destination inconnus proposent la consultation de l’animation.
 La cible historique `commercants` rejoint **Invitations** (`participations`).
-La consultation ne marque rien comme lu ; la fenêtre explique l’usage de la
-cloche pour les notifications persistées. Fermeture par bouton ou Échap, retour du focus au compteur,
-recherche et page conservées sans recharger la liste. Chargement, erreur avec
+La consultation ne marque rien comme lu. La fermeture par bouton ou Échap
+rend le focus au compteur. Recherche et page sont conservées sans relire la
+liste lors d’une consultation seule. Chargement, erreur avec
 réessai, refus d’accès et absence d’alerte sont distincts ; changement de contexte
 ou fermeture annulent la lecture et écartent toute réponse tardive.
 
@@ -740,3 +740,25 @@ Les résultats effectivement obtenus sont consignés dans le
 [bilan de l'évolution](verification-livraison.md#tableau-de-bord-quotidien--22-novembre-2026).
 Cette matrice décrit les contrôles attendus ; le bilan distingue leur exécution
 des qualifications de capacité et d'usage restant ouvertes sur cible réelle.
+
+## Évolution du 26 novembre 2026 — suppression d’une alerte depuis son détail
+
+**E73-EVO-SUPPRESSION-ALERTE-POPIN** permet de supprimer une notification
+depuis **Alertes** dans la liste des animations. L’action remplace le détour
+par la cloche et l’actualisation manuelle lorsqu’un gestionnaire souhaite
+retirer la notification.
+
+| Critère | Résultat attendu |
+| --- | --- |
+| AP-08a | **Supprimer l’alerte** cible la notification choisie dans la fenêtre. Après confirmation du serveur, la notification disparaît de la fenêtre et le compteur de la liste ainsi que la cloche sont actualisés. **Clôture attendue** conserve **Consulter la clôture** et suit l’état de l’animation. |
+| AP-08b | La lecture de la page conserve la recherche, les filtres et la page lorsqu’elle existe encore. Après une suppression, le titre de la fenêtre reçoit le focus. À la fermeture, le focus revient au compteur s’il existe encore ou à la recherche. |
+| AP-08c | Une suppression en cours bloque les activations répétées. Si le serveur refuse la suppression ou si la réponse est incertaine, la notification reste affichée avec un message. Les réponses d’un contexte quitté sont écartées. |
+
+La commande existante `DELETE /notifications/{notification_id}` conserve la
+permission `animation:lire`, la session et la protection CSRF. Le serveur
+borne la suppression au partenaire et à la commune active. La lecture
+`/animations/{id}/live` et le compteur paginé gardent leurs contrats. Cette
+évolution du portail utilise les données déjà disponibles, sans migration,
+configuration ou génération de démonstration supplémentaire. Le guide
+Animation documente le geste. Les notifications propres à Commerçant gardent
+leur parcours.

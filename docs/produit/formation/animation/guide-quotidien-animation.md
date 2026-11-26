@@ -50,6 +50,16 @@ Réglez d’abord vos filtres. Choisissez **Enregistrer les filtres actuels**, d
 
 Ouvrez **Gérer les vues** pour voir lesquelles sont privées ou partagées. Choisissez **Modifier** sur une vue si l’action est disponible, puis **Mettre à jour cette vue**. Si vous voulez aussi remplacer ses filtres, sélectionnez l’option qui reprend ceux de la liste.
 
+## 3 bis · Supprimer une notification d’une animation
+
+1. Dans **Animations**, choisissez le compteur **1 alerte** ou **X alertes** sur la ligne de l’édition.
+2. Lisez le détail de la notification. Choisissez **Supprimer l’alerte** sur celle que vous souhaitez retirer.
+3. Attendez le message **Alerte supprimée.** La notification disparaît de la fenêtre et le compteur de la liste filtrée s’actualise.
+
+![Dans le détail de la notification, choisissez Supprimer l’alerte sous le message.](illustrations/guide-quotidien/suppression-alerte-1024.png)
+
+Pour le rappel automatique **Clôture attendue**, choisissez **Consulter la clôture** pour voir les actions proposées selon vos droits.
+
 ## 4 · Ajouter un commerce et lui ouvrir l’accès à Pro
 
 Préparez le nom, l’adresse, le numéro SIRET et l’email de contact du commerce.
@@ -321,11 +331,13 @@ Attendez la clôture et vérifiez que les lots et les dossiers attendus sont pr�
 
 1. Après clôture, ouvrez **Tirage → Tirage au sort** si cette rubrique est proposée pour votre jeu. Vérifiez la date annoncée, le nombre de personnes éligibles et les lots. Vous pouvez encore annuler. **Confirmer le tirage** engage l’attribution. Si personne n’est éligible et que le jeu l’autorise, le bouton indique **Enregistrer un tirage sans gagnant**.
 2. Si le tirage est en cours ou si la réponse tarde, vérifiez son état dans cette rubrique. Ouvrez **Gains et remises** pour retrouver les gagnants. **Tirage au sort** permet de revenir au résultat. Pour retrouver les lots de plusieurs éditions, ouvrez **Lots et remises**.
-3. Pour un lot remis hors Localeo, ouvrez **Voir le détail du gain**, puis choisissez **Déclarer la remise du lot** si l’action est proposée. Saisissez un motif et, si besoin, la date de la remise. Cochez la confirmation de remise au gagnant, puis choisissez **Confirmer la remise**. Vérifiez que la remise est enregistrée.
+3. Pour un lot remis hors Localeo, ouvrez le gain avec **Voir le détail du gain** ou **Traiter ce gain**. Choisissez **Déclarer la remise du lot** si l’action est proposée. Saisissez le motif et, si besoin, la date. Cochez la confirmation de remise au gagnant, puis choisissez **Confirmer la remise** pour enregistrer la remise effective.
 
 ![Vérifiez le gagnant dans le détail du gain. Dans le formulaire, indiquez le motif et confirmez la remise effective.](illustrations/guide-quotidien/remise-1024.png)
 
 ### Suivre les retraits ou envoyer un rappel
+
+Choisissez **Ajouter un suivi** lorsque l’action est proposée. Renseignez le formulaire et choisissez **Enregistrer le suivi** pour consigner un événement dans l’historique du gain.
 
 Un lot externe se retire au lieu indiqué. Le commerce désigné valide un bon numérique avec son QR ou son PIN. Pour un coffret, lisez les prestations utilisées et celles qui restent lorsqu’elles sont connues. Pour un rappel, sélectionnez les destinataires et confirmez l’envoi. L’email et la remise sont suivis séparément.
 
