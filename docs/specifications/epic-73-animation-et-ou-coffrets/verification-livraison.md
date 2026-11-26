@@ -6154,3 +6154,23 @@ Les [critères PA-01 à PA-03](perimetres-parcours-saas.md#évolution-du-25-nove
 
 `pnpm typecheck`, `pnpm lint` et le build isolé `build-generation-tests.mjs`
 ont réussi.
+
+<a id="enseignes-peintes-live-26-novembre-2026"></a>
+
+## Enseignes peintes dans Live — 26 novembre 2026
+
+La [décision E73-EVO-LIVE-ENSEIGNES-PEINTES](localeo-live-entree-unique.md#e73-evo-live-enseignes-peintes)
+s’appuie sur la planche affinée choisie par l’utilisateur. La planche locale
+et les exports SVG sont générés depuis les composants de production.
+
+Les 45 scénarios Playwright des suites `live-iconography-premium`,
+`live-iconography-discovery`, `live-iconography-lots` et
+`live-coffret-discovery` ont réussi. Ils couvrent les dessins compacts et
+illustratifs, les cartes, les états, le clavier, le texte à 200 % et le rendu
+à 320, 390 et 1 280 px. La planche vérifie aussi le rendu en couleurs forcées
+et l’usage des dessins de contraste hors du contexte Live. Les captures de
+Découvrir et de Mes lots à 320 px ont été relues. Le test ciblé du fil
+d’actualités confirme les icônes des filtres Commerçants et Coffrets.
+
+ESLint ciblé et contrôles des liens et des sources documentaires réussis.
+La recette utilise Chromium et des réponses API synthétiques.

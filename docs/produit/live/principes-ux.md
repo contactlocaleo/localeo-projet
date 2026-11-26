@@ -547,7 +547,7 @@ essentiels restent visibles ; aucune information ne dépend de la couleur seule.
 
 Ticket à souche pour tombola, livret pour passeport, carte pliée pour chasse,
 vignette au coin décollé pour collection, empreinte encrée pour tampon,
-cadeau avec ruban pour Mes lots, carnet relié pour Mon carnet, boussole pour
+cadeau avec ruban pour Mes lots, carnet relié pour Mon carnet, panneau pour
 Découvrir, boîte à couvercle pour coffret et coupon vertical pour bon numérique.
 Le coupon ne reprend pas le ticket de tombola, le carnet ne reprend pas le
 passeport, le coffret reste distinct du cadeau. Les repères génériques ne
@@ -558,11 +558,14 @@ empreintes à compléter et les états inconnus restent distincts. Les flyers
 personnalisés, textes, droits et actions gardent leur rôle. La refonte
 n’ajoute ni mouvement décoratif ni nouvel état métier.
 
-La direction retenue est **Papier doux, finition 02** : coins arrondis,
-papier crème, accent abricot et encre adoucie. Coutures, chants et gravures
-enrichissent les formats illustratifs ; les commandes compactes restent lisibles.
-Les repères communs du Marketplace utilisent les mêmes dessins et les mêmes
-distinctions entre objets, sans remplacer leurs visuels personnalisés.
+La direction **Enseignes peintes**, retenue le 26 novembre, associe brique,
+safran, bleu ardoise et ivoire sur huit pictogrammes de Live. Le panneau
+directionnel, l’auvent rayé et le carnet relié évoquent la vie de quartier.
+Le dessin compact privilégie la silhouette. Des tranches et des reflets
+apportent du relief au format illustratif. Les tampons de validation, les
+commandes, les repères Marketplace et le mode à couleurs forcées reposent
+sur **Papier doux**. Voir la
+[décision Enseignes peintes](../../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#e73-evo-live-enseignes-peintes).
 
 La recette compare la planche vectorielle et les écrans réels avant/après,
 à 320/390/1280 px, avec texte agrandi, navigation clavier et états dégradés.

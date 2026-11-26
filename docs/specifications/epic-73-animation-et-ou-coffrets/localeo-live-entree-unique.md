@@ -2736,6 +2736,33 @@ réutilisées. Backend, Pro et Animation ne nécessitent aucune modification.
 [Conception](localeo-live-adhesion-conception.md#iconographie-premium)
 — [réalisation et preuves](verification-livraison.md#iconographie-premium-21-novembre-2026).
 
+<a id="e73-evo-live-enseignes-peintes"></a>
+
+## Évolution du 26 novembre 2026 — Enseignes peintes dans Live
+
+**E73-EVO-LIVE-ENSEIGNES-PEINTES.** La planche affinée est retenue pour les
+icônes de Mon carnet, Mes lots, Découvrir, Commerçants, Tombola, Chasse au
+trésor, Coffret et Bon numérique. Elle donne un relief léger aux formats
+illustratifs et simplifie les détails pour les tailles compactes.
+
+- **E73-IP-01 et IP-02.** Les huit dessins utilisent la palette brique,
+  safran, bleu ardoise et ivoire. Découvrir adopte un panneau directionnel.
+  La planche générée repose sur les mêmes composants que les écrans de Live.
+- **E73-IP-03 et IP-04.** Les tampons conservent leur dessin d’état. Les
+  libellés, le focus et l’état actif portent le sens de la navigation.
+  Le mode à couleurs forcées utilise les dessins de contraste existants.
+- **E73-IP-05 et IP-06.** Vérifier la planche, la navigation, la découverte,
+  les commerces et les gains sur les largeurs prévues, avec texte agrandi.
+  Vérifier les repères des vues partagées hors de Live et les tampons.
+
+Marketplace et Projet portent cette évolution de présentation. Les contrats,
+la persistance, la configuration d’exploitation et le générateur de
+démonstration sont sans impact. Les guides Animation et Commerçant décrivent
+les gestes des équipes de gestion. La modification concerne la consultation
+par les habitants dans Live.
+
+[Recette de l’évolution](verification-livraison.md#enseignes-peintes-live-26-novembre-2026)
+
 <a id="e73-evo-live-vignettes"></a>
 
 ## Évolution du 21 novembre 2026 — vignettes carnet, cadeau et agenda

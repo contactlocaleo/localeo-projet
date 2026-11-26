@@ -1,5 +1,9 @@
 # Roadmap par etat
 
+**26 novembre 2026 — E73-EVO-LIVE-ENSEIGNES-PEINTES.** Intégration dans Live des
+huit pictogrammes choisis pour la navigation, les commerces, les animations
+et les lots. [Décision et critères](../specifications/epic-73-animation-et-ou-coffrets/localeo-live-entree-unique.md#e73-evo-live-enseignes-peintes)
+
 **25 novembre 2026 — EPIC 85, En cours.** Refonte du parcours organisateur, de la création à la publication, au suivi quotidien, à la clôture et au tirage au sort. Des repères communs aux six modèles implémentés aident le gestionnaire à retrouver l’animation qui demande son intervention et à agir directement. Trois modèles en projet illustrent les extensions possibles. [Spécification et recette](../specifications/epic-85-parcours-organisateur/README.md) · [Cadrage et maquettes](en-cours/epic-85-parcours-organisateur-backlog.md)
 
 **24 novembre 2026 — EPIC 84, En cours.** [Adhérents hors commune dans Localeo Animation](en-cours/epic-84-adherents-hors-commune-animation-backlog.md). L’epic reprend l’évolution E73-EVO-ADHERENTS-HORS-COMMUNE et porte les neuf critères HC-01 à HC-09.
