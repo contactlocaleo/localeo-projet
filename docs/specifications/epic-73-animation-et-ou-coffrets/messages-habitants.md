@@ -99,8 +99,9 @@ le même composant avec filtre d'animation imposé, y compris pour une édition
 terminée/archivée. Les données et le brouillon ne suivent pas un changement de
 commune, d'organisation ou de session.
 
-La liste paginée propose **À traiter / Répondus / Tous**, le motif et, en global,
-un filtre d'animation choisi par nom dans le sélecteur existant. Chaque ligne
+La liste paginée propose **À traiter / Répondus / Tous** et le motif. La boîte
+globale propose le [filtre Animations de Suivre l’activité](ux-productivite-organisateur.md#évolution-du-26-novembre-2026--filtre-des-animations-dans-suivre-lactivité)
+et la sélection d'une édition par nom. Chaque ligne
 montre animation, participant identifié sans adresse email, motif, dernière
 activité et état. Le détail rend le contexte visible avant le formulaire.
 Les pages/retours/filtres sont conservés en mémoire ; les messages restent privés.

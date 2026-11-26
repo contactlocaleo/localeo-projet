@@ -1577,3 +1577,10 @@ supprime la notification choisie et le portail actualise la liste et la
 cloche. Le rappel calculé de clôture conserve son geste métier.
 [Critères AP-08a à AP-08c](../../specifications/epic-73-animation-et-ou-coffrets/ux-productivite-organisateur.md#évolution-du-26-novembre-2026--suppression-dune-alerte-depuis-son-détail)
 et [preuves locales](../../specifications/epic-73-animation-et-ou-coffrets/verification-livraison.md#suppression-alerte-popin-26-novembre-2026).
+
+## Évolution du 26 novembre 2026 — filtre des animations dans Suivre l’activité
+
+**E73-EVO-SUIVI-ARCHIVES** ouvre les rubriques de suivi des animations sur les
+éditions non archivées et permet de consulter les archives seules ou toutes les
+éditions. Les listes et leurs synthèses suivent le périmètre recherché.
+[Périmètre et critères SAA-01 à SAA-04](../../specifications/epic-73-animation-et-ou-coffrets/ux-productivite-organisateur.md#évolution-du-26-novembre-2026--filtre-des-animations-dans-suivre-lactivité).

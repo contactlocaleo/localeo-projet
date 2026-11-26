@@ -6202,3 +6202,29 @@ liens du PDF ont été vérifiés. `guide:check` confirme l’égalité des copi
 `animation-guide.mjs --access-only` valide l’accès au PDF servi dans le build.
 Le guide Commerçant décrit les notifications propres à Pro et sa copie passe
 également le contrôle de synchronisation.
+
+## Filtre des animations dans Suivre l’activité — 26 novembre 2026
+
+[E73-EVO-SUIVI-ARCHIVES](ux-productivite-organisateur.md#évolution-du-26-novembre-2026--filtre-des-animations-dans-suivre-lactivité)
+a été vérifiée sur PostgreSQL local jetable et dans Chromium avec des API
+synthétiques. Les contrôles portent sur les modifications locales.
+
+| Critères | Preuves exécutées |
+| --- | --- |
+| SAA-01 | Les bancs Animation `global-read` (6 scénarios), `animation-read-filter-ux` (16), `tirages-global` (7), `lots-remises archive-scope filters force` (12), `messages-habitants` (18), `flyer-navigation` (3) et `activity-profile` (4) réussissent. Ils couvrent les sept vues à 390 et 1 280 px, le focus, la reprise en première page, les autres critères et les réponses tardives. Certains parcours couvrent aussi 320 px et le texte à 200 %. |
+| SAA-02 | Quatre tests PostgreSQL réussis. Le nouveau `test_perimetre_suivi_animations_postgres.py` vérifie Participants, Validations, Flyers et Bilans, avec deux états d’édition, une organisation étrangère, une page de taille 1, les synthèses et le rejet d’un curseur d’un autre périmètre. Les tests Tirages, Lots et remises et Messages habitants couvrent leurs lectures filtrées, dont le stock sans gagnant. Rapport `tmp/suivi-archives-postgres-valide.log` dans Backend. |
+| SAA-03 | `public-tombola` réussit à trois largeurs, et `global-read` exerce le lecteur spécialisé depuis une archive. Le test API valide les trois valeurs et le refus d’une valeur inconnue. `check_consumed_contracts.py` compare 436 opérations Animation et 70 Commerçant sans écart. |
+| SAA-04 | Le chapitre de suivi global figure en page 18 du guide Animation. Les 29 pages ont été rendues et relues. Les 27 chapitres précédents ont gardé leur contenu visuel, hors pagination. `guide:check` et `animation-guide.mjs --only=participants-global` vérifient le PDF synchronisé et servi depuis le build synthétique à 390 et 1 024 px. Le guide Commerçant couvre des gestes propres à Pro, hors de ces rubriques. |
+
+`pnpm typecheck`, `pnpm lint`, les 442 tests de `pnpm test` et le build PWA
+synthétique ont réussi. Côté backend, 801 tests d’API ciblés et d’architecture
+ont réussi. Deux scénarios historiques de `test_lectures_globales_animation_postgres.py`
+échouent au même endroit avec le lecteur de référence `275c1be4`. Leur fixture
+omet la table `animation_qualifications_reconstruction`. Le nouveau scénario
+utilise la migration existante dans son schéma jetable.
+
+Le filtre réutilise le statut et les index existants. Le lecteur Flyers
+applique le périmètre avant chaque page et renvoie le nom et les dates, ce qui
+évite une seconde collecte du catalogue. La recherche et les compteurs Flyers
+chargent les pages du périmètre côté client. La recette locale n’inclut pas de
+mesure de capacité sous charge.

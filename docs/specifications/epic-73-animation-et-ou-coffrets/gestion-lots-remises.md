@@ -243,11 +243,11 @@ Producteurs confirmés dans le backend :
 ## Parcours organisateur
 
 **Entrée.** La page `/lots-remises` affiche « Lots et remises », l’organisation,
-la commune active et la portée « Gains des animations, archives incluses ».
+la commune active et le [filtre Animations de Suivre l’activité](ux-productivite-organisateur.md#évolution-du-26-novembre-2026--filtre-des-animations-dans-suivre-lactivité).
 Elle est accessible depuis le menu de bureau et **Plus → Suivre l’activité**
 sur mobile. Aucun choix préalable d’animation n’est obligatoire.
 
-**Pilotage.** Un résumé daté précède les filtres et la liste. Les quatre repères
+**Pilotage.** Un résumé daté suit le choix du périmètre et précède les filtres de la liste. Les quatre repères
 principaux sont **Lots externes à retirer**, **Bons à utiliser**, **Coffrets à
 distribuer**, **Coffrets à utiliser**. Chaque valeur ouvre son filtre. Les coffrets
 à utiliser distinguent « jamais utilisés » et « utilisation commencée ».
@@ -262,7 +262,7 @@ Filtres serveur : nature, état opérationnel, animation facultative, commerce
 de remise lorsqu’applicable, échéance avant une date, présence d’un rappel
 possible. Recherche par début de nom du bénéficiaire ou référence ; saisie
 privée conservée en mémoire, pas dans une URL ou un stockage persistant.
-Le filtre Animation réutilise un sélecteur paginé, archives comprises.
+Le filtre **Animation** réutilise un sélecteur paginé dans le périmètre choisi.
 Depuis la simplification du 15 novembre, les filtres sont alignés à gauche :
 Animation et Recherche restent visibles, les autres critères sont
 repliables dans « Filtres avancés » avec un compteur de critères actifs.

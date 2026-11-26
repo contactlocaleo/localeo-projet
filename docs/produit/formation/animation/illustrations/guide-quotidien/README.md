@@ -1,5 +1,21 @@
 # Captures du guide utilisateur Animation
 
+## Filtrer les participants de plusieurs éditions le 26 novembre 2026
+
+Le portail construit depuis la base Animation `bc1c9ae` avec l’évolution
+E73-EVO-SUIVI-ARCHIVES affiche **Actives** dans le filtre **Animations**.
+Le cadrage montre aussi le choix d’une édition dans **Animation**, sur
+[ordinateur](participants-global-1024.png) et [téléphone](participants-global-390.png).
+Les participants et éditions sont fictifs. Le PDF utilise la capture à 1 024 px.
+
+```powershell
+$env:ANIMATION_TEST_DIST = 'tmp/suivi-archives-guide-build'
+$env:ANIMATION_GUIDE_CAPTURE_ROOT = 'tmp/suivi-archives-captures-reprise'
+$env:ANIMATION_GUIDE_ARTIFACTS = 'tmp/suivi-archives-guide-report-reprise'
+node scripts/build-pwa-tests.mjs
+node tests/browser/animation-guide.mjs --only=participants-global --captures-only
+```
+
 ## Actions du détail d’un gain du 26 novembre 2026
 
 Le portail construit depuis la base `a69d11c` avec l’évolution locale affiche **Déclarer la remise du lot** avant **Ajouter un suivi** sur un gain externe fictif. La recette vérifie les boutons à l’ouverture et capture la [confirmation de remise](remise-1024.png) à 390 et 1 024 px avant enregistrement. Le PDF illustre la confirmation. Les captures de la barre d’actions sont produites par la même recette.

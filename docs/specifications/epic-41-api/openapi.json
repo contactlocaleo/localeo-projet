@@ -89104,6 +89104,29 @@
               ],
               "title": "Date Fin"
             }
+          },
+          {
+            "name": "perimetre_animations",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "actives",
+                    "archivees",
+                    "toutes"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Périmètre des animations autorisées. Actives exclut les archives, archivées les sélectionne, toutes réunit les deux.",
+              "title": "Perimetre Animations"
+            },
+            "description": "Périmètre des animations autorisées. Actives exclut les archives, archivées les sélectionne, toutes réunit les deux."
           }
         ],
         "responses": {
@@ -90683,6 +90706,29 @@
               ],
               "title": "Moteurs Supportes"
             }
+          },
+          {
+            "name": "perimetre_animations",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "actives",
+                    "archivees",
+                    "toutes"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Périmètre des animations autorisées. Actives exclut les archives, archivées les sélectionne, toutes réunit les deux.",
+              "title": "Perimetre Animations"
+            },
+            "description": "Périmètre des animations autorisées. Actives exclut les archives, archivées les sélectionne, toutes réunit les deux."
           }
         ],
         "responses": {
@@ -90894,6 +90940,29 @@
               ],
               "title": "Statut"
             }
+          },
+          {
+            "name": "perimetre_animations",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "actives",
+                    "archivees",
+                    "toutes"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Périmètre des animations autorisées. Actives exclut les archives, archivées les sélectionne, toutes réunit les deux.",
+              "title": "Perimetre Animations"
+            },
+            "description": "Périmètre des animations autorisées. Actives exclut les archives, archivées les sélectionne, toutes réunit les deux."
           }
         ],
         "responses": {
@@ -91197,6 +91266,29 @@
               "default": "",
               "title": "Recherche"
             }
+          },
+          {
+            "name": "perimetre_animations",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "actives",
+                    "archivees",
+                    "toutes"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Périmètre des animations autorisées. Actives exclut les archives, archivées les sélectionne, toutes réunit les deux.",
+              "title": "Perimetre Animations"
+            },
+            "description": "Périmètre des animations autorisées. Actives exclut les archives, archivées les sélectionne, toutes réunit les deux."
           }
         ],
         "responses": {
@@ -91471,6 +91563,29 @@
               "default": "",
               "title": "Recherche"
             }
+          },
+          {
+            "name": "perimetre_animations",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "actives",
+                    "archivees",
+                    "toutes"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Périmètre des animations autorisées. Actives exclut les archives, archivées les sélectionne, toutes réunit les deux.",
+              "title": "Perimetre Animations"
+            },
+            "description": "Périmètre des animations autorisées. Actives exclut les archives, archivées les sélectionne, toutes réunit les deux."
           }
         ],
         "responses": {
@@ -95402,6 +95517,29 @@
               ],
               "title": "Motif"
             }
+          },
+          {
+            "name": "perimetre_animations",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "actives",
+                    "archivees",
+                    "toutes"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Périmètre des animations autorisées. Actives exclut les archives, archivées les sélectionne, toutes réunit les deux.",
+              "title": "Perimetre Animations"
+            },
+            "description": "Périmètre des animations autorisées. Actives exclut les archives, archivées les sélectionne, toutes réunit les deux."
           }
         ],
         "responses": {
@@ -120268,6 +120406,29 @@
               "title": "Authorization"
             },
             "description": "Session Animation au format `Bearer <token>`."
+          },
+          {
+            "name": "perimetre_animations",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "actives",
+                    "archivees",
+                    "toutes"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Périmètre des animations autorisées. Actives exclut les archives, archivées les sélectionne, toutes réunit les deux.",
+              "title": "Perimetre Animations"
+            },
+            "description": "Périmètre des animations autorisées. Actives exclut les archives, archivées les sélectionne, toutes réunit les deux."
           }
         ],
         "responses": {
@@ -121148,6 +121309,29 @@
               "title": "Authorization"
             },
             "description": "Session Animation au format `Bearer <token>`."
+          },
+          {
+            "name": "perimetre_animations",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "actives",
+                    "archivees",
+                    "toutes"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Périmètre des animations autorisées. Actives exclut les archives, archivées les sélectionne, toutes réunit les deux.",
+              "title": "Perimetre Animations"
+            },
+            "description": "Périmètre des animations autorisées. Actives exclut les archives, archivées les sélectionne, toutes réunit les deux."
           }
         ],
         "responses": {
@@ -130598,6 +130782,29 @@
               "title": "Authorization"
             },
             "description": "Session Animation au format `Bearer <token>`."
+          },
+          {
+            "name": "perimetre_animations",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "actives",
+                    "archivees",
+                    "toutes"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Périmètre des animations autorisées. Actives exclut les archives, archivées les sélectionne, toutes réunit les deux.",
+              "title": "Perimetre Animations"
+            },
+            "description": "Périmètre des animations autorisées. Actives exclut les archives, archivées les sélectionne, toutes réunit les deux."
           }
         ],
         "responses": {
@@ -130606,7 +130813,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PageAnimationPayload_FlyerAnimationPayload_"
+                  "$ref": "#/components/schemas/PageAnimationPayload_FlyerListeAnimationPayload_"
                 }
               }
             }
@@ -130942,6 +131149,29 @@
               "title": "Authorization"
             },
             "description": "Session Animation au format `Bearer <token>`."
+          },
+          {
+            "name": "perimetre_animations",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "actives",
+                    "archivees",
+                    "toutes"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Périmètre des animations autorisées. Actives exclut les archives, archivées les sélectionne, toutes réunit les deux.",
+              "title": "Perimetre Animations"
+            },
+            "description": "Périmètre des animations autorisées. Actives exclut les archives, archivées les sélectionne, toutes réunit les deux."
           }
         ],
         "responses": {
@@ -180998,6 +181228,212 @@
         ],
         "title": "FlyerAnimationPayload"
       },
+      "FlyerListeAnimationPayload": {
+        "properties": {
+          "modele_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modele Code"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "animation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Animation Id"
+          },
+          "statut": {
+            "type": "string",
+            "title": "Statut"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "preview_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Preview Url"
+          },
+          "download_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Download Url"
+          },
+          "generated_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Generated At"
+          },
+          "accroche": {
+            "type": "string",
+            "title": "Accroche"
+          },
+          "url_inscription": {
+            "type": "string",
+            "title": "Url Inscription"
+          },
+          "nombre_lots": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nombre Lots"
+          },
+          "nombre_commercants": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nombre Commercants"
+          },
+          "mode_dotation": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mode Dotation"
+          },
+          "gestion_libre": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Gestion Libre"
+          },
+          "libelle_dotation": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Libelle Dotation"
+          },
+          "illustration_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Illustration Url"
+          },
+          "illustration_personnalisee_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Illustration Personnalisee Url"
+          },
+          "animation_version": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Animation Version"
+          },
+          "animation_nom": {
+            "type": "string",
+            "title": "Animation Nom"
+          },
+          "commune_nom": {
+            "type": "string",
+            "title": "Commune Nom"
+          },
+          "date_debut": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date Debut"
+          },
+          "date_fin": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date Fin"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "animation_id",
+          "statut",
+          "version",
+          "accroche",
+          "url_inscription",
+          "animation_nom",
+          "commune_nom",
+          "date_debut",
+          "date_fin"
+        ],
+        "title": "FlyerListeAnimationPayload"
+      },
       "ForcerPreparationInput": {
         "properties": {
           "motif": {
@@ -195383,11 +195819,11 @@
         ],
         "title": "PageAnimationPayload[DemandeParticipationCommercantPayload]"
       },
-      "PageAnimationPayload_FlyerAnimationPayload_": {
+      "PageAnimationPayload_FlyerListeAnimationPayload_": {
         "properties": {
           "items": {
             "items": {
-              "$ref": "#/components/schemas/FlyerAnimationPayload"
+              "$ref": "#/components/schemas/FlyerListeAnimationPayload"
             },
             "type": "array",
             "title": "Items"
@@ -195401,7 +195837,7 @@
           "items",
           "pagination"
         ],
-        "title": "PageAnimationPayload[FlyerAnimationPayload]"
+        "title": "PageAnimationPayload[FlyerListeAnimationPayload]"
       },
       "PageAnimationPayload_NotificationAnimationPayload_": {
         "properties": {

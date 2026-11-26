@@ -263,7 +263,17 @@ Dans **Participation**, ouvrez **Bilan provisoire** pour lire les chiffres dispo
 
 Vérifiez le commerce et la consigne attendue avant d’agir sur une étape ou un justificatif. Si vous devez supprimer une participation et disposez de ce droit, ouvrez le menu d’actions de la personne concernée. Relisez son identité et les conséquences affichées avant de confirmer.
 
-## 16 · Modifier les réglages d’une animation publiée
+## 16 · Rechercher dans plusieurs éditions
+
+1. Ouvrez **Suivre l’activité → Participants**. Le filtre **Animations** est réglé sur **Actives**. Il affiche les éditions non archivées, y compris celles déjà clôturées ou terminées.
+2. Choisissez **Archivées** pour retrouver une ancienne édition ou **Toutes** pour chercher dans les deux groupes.
+3. Pour chercher dans une seule édition, choisissez-la dans **Animation**, puis recherchez le nom ou la référence du participant dans la liste.
+
+![Le filtre Animations détermine les éditions disponibles dans le champ Animation et les participants affichés.](illustrations/guide-quotidien/participants-global-1024.png)
+
+Validations, Tirages, Lots et remises, Messages habitants, Flyers et Bilans proposent aussi le filtre **Animations**.
+
+## 17 · Modifier les réglages d’une animation publiée
 
 Ouvrez l’édition dans la bonne commune. Les réglages disponibles dépendent du jeu, de vos droits et de l’état de l’animation.
 
@@ -277,7 +287,7 @@ Ouvrez l’édition dans la bonne commune. Les réglages disponibles dépendent 
 
 Pour un jeu avec tirage, retrouvez l’annonce de sa date dans **Tirage**. Si vous devez retirer le contact public et disposez de ce droit, ouvrez **Publication**, puis **Contact public**.
 
-## 17 · Consulter l’activité de votre commune sur une période
+## 18 · Consulter l’activité de votre commune sur une période
 
 Sur **Pilotage des animations**, suivez l’activité de la commune sélectionnée, y compris les animations clôturées ou archivées.
 
@@ -291,7 +301,7 @@ Sur **Pilotage des animations**, suivez l’activité de la commune sélectionn�
 
 Dans **Personnalisée**, saisissez le début et la fin, sur 366 jours au plus et avec une fin au plus tard aujourd’hui. Les jours suivent l’heure de Paris. **Actualiser** relit la période choisie et revient à la première page de résultats. Le chiffre des coffrets compte chaque coffret une seule fois. Le détail des prestations montre ses utilisations.
 
-## 18 · Télécharger les résultats des animations
+## 19 · Télécharger les résultats des animations
 
 Depuis **Pilotage des animations**, vérifiez la période avant de partager les chiffres avec votre équipe.
 
@@ -309,7 +319,7 @@ Au-delà de 10 000 animations, raccourcissez la période pour pouvoir exporter. 
 
 <!-- Sommaire : Terminer l’animation et remettre les lots -->
 
-## 19 · Clôturer une animation
+## 20 · Clôturer une animation
 
 Clôturez l’animation quand vous souhaitez fermer la participation.
 
@@ -325,7 +335,7 @@ Clôturez l’animation quand vous souhaitez fermer la participation.
 
 La date annoncée aux habitants est un repère. Tant que la clôture n’est pas effective, des habitants peuvent encore participer selon les conditions d’accès. Le rappel **Clôture attendue** vous signale la situation. Après l’échéance prévue, il n’est plus possible de modifier les paramètres d’exploitation. Vérifiez les dates avant cette échéance.
 
-## 20 · Tirer au sort et suivre la remise des lots
+## 21 · Tirer au sort et suivre la remise des lots
 
 Attendez la clôture et vérifiez que les lots et les dossiers attendus sont prêts.
 
@@ -343,7 +353,7 @@ Un lot externe se retire au lieu indiqué. Le commerce désigné valide un bon n
 
 **Tous les lots** enlève le filtre de tâche et garde les autres critères. Après un tirage confirmé sans gagnant, **Fin et archivage** indique combien de lots restent à justifier. Ouvrez le dossier, choisissez **Justifier les lots sans gagnant** et saisissez le motif. Vérifiez la quantité avant de confirmer. Le dossier passe alors à **Justifié**.
 
-## 21 · Faire le bilan et préparer une nouvelle édition
+## 22 · Faire le bilan et préparer une nouvelle édition
 
 Après clôture, ouvrez **Bilan** pour retrouver les chiffres à partager et les éléments à garder pour la prochaine édition.
 
@@ -359,7 +369,7 @@ Dans **Animations** ou **Mes archives**, choisissez **Cloner** sous le nom de l�
 
 <!-- Sommaire : Importer des commerces et obtenir de l’aide -->
 
-## 22 · Préparer un fichier de commerces à importer
+## 23 · Préparer un fichier de commerces à importer
 
 Vérifiez la commune active et assurez-vous d’avoir accès à **Import commerçants**.
 
@@ -373,7 +383,7 @@ Vérifiez la commune active et assurez-vous d’avoir accès à **Import commer�
 
 Ouvrez **Champs facultatifs** pour associer des colonnes supplémentaires. Dans **Colonnes ignorées**, vérifiez les renseignements qui ne seront pas repris dans les fiches.
 
-## 23 · Vérifier et confirmer les lignes à importer
+## 24 · Vérifier et confirmer les lignes à importer
 
 Ouvrez l’aperçu. Vérifiez les commerces prêts à être ajoutés ou mis à jour avant de confirmer.
 
@@ -389,7 +399,7 @@ Ouvrez une ligne pour lire la valeur et la correction proposée. Dans **Catégor
 
 Si l’identité d’un commerce est ambiguë, confiez la vérification à Localeo. Vous pouvez confirmer les autres lignes prêtes en acceptant l’import partiel. Les lignes écartées figureront dans le rapport.
 
-## 24 · Lancer l’import et récupérer le rapport
+## 25 · Lancer l’import et récupérer le rapport
 
 Dans **Historique des imports**, ouvrez le lot qui indique **En attente de démarrage**.
 
@@ -405,7 +415,7 @@ Si le support agit à votre demande, il peut aussi lancer ou poursuivre ce lot e
 
 Si le lot affiche encore **Traitement en cours**, choisissez **Poursuivre le traitement**, même lorsque **Restantes** affiche zéro. **Actualiser cet import** relit le résultat. Une fois l’import terminé, utilisez **Inviter dans Pro** depuis **Commerçants** si vous souhaitez envoyer l’email de première connexion d’un commerçant.
 
-## 25 · Gérer votre équipe et demander de l’aide
+## 26 · Gérer votre équipe et demander de l’aide
 
 Dans le menu du compte, ouvrez **Compte et équipe** pour vérifier l’organisation, les accès et la sécurité du compte.
 
@@ -418,7 +428,7 @@ Dans le menu du compte, ouvrez **Compte et équipe** pour vérifier l’organisa
 
 Gardez vos mots de passe, codes et QR secrets pour vous. La demande indique la date cible de la première réponse humaine, en principe sous deux jours ouvrés. La résolution peut prendre plus de temps.
 
-## 26 · Vérifier une intervention de Localeo
+## 27 · Vérifier une intervention de Localeo
 
 Si Localeo est intervenu à votre demande et que la rubrique est disponible, ouvrez **Mon organisation**, puis **Interventions de Localeo**.
 

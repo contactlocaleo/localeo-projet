@@ -316,8 +316,8 @@ Participants non publics et validations réutilisent
 `/lectures-globales/participants` et `/lectures-globales/validations` avec
 `animation_id` dans la fiche. Recherche préfixe existante, `qualifie/termine` ou
 `statut`, `synthese/allowedActions/actualisation/observedAt` conservés. La lecture
-globale peut inclure des archives ; le dashboard les exclut : préciser les
-périmètres, ne pas modifier leur sens pour aligner artificiellement les chiffres.
+globale propose le [périmètre des animations de Suivre l’activité](#évolution-du-26-novembre-2026--filtre-des-animations-dans-suivre-lactivité).
+Le tableau de bord exclut les archives conformément à son propre périmètre.
 
 Pour la tombola publique, étendre `GET /animations/{id}/participants-page` par
 `recherche` (120 caractères max) : préfixe d’e-mail insensible à la casse ou
@@ -762,3 +762,40 @@ borne la suppression au partenaire et à la commune active. La lecture
 configuration ou génération de démonstration supplémentaire. Le guide
 Animation documente le geste. Les notifications propres à Commerçant gardent
 leur parcours.
+
+## Évolution du 26 novembre 2026 — filtre des animations dans Suivre l’activité
+
+**E73-EVO-SUIVI-ARCHIVES** remplace la recherche globale qui pouvait inclure
+des archives dès l’ouverture. Le filtre **Animations** propose **Actives**,
+**Archivées** et **Toutes** dans
+Participants, Validations, Tirages, Lots et remises, Messages habitants, Flyers
+et Bilans. Le choix initial et la réinitialisation affichent les animations
+actives. Les animations clôturées ou terminées restent actives pour ce filtre
+tant que leur état serveur diffère de `ARCHIVEE`. Les autres critères et les
+habilitations de chaque rubrique déterminent toujours les données visibles.
+
+**Communication communale** concerne les abonnés de la commune et ses
+campagnes ont la portée `COMMUNE`, sans animation de rattachement. Le profil
+historique « Votre activité dans la commune » de Bilans conserve sa mesure
+communale indépendante, décrite dans son encart.
+
+| Critère | Comportement et propriétaire | Preuve attendue |
+| --- | --- | --- |
+| SAA-01 | Les sept rubriques ouvrent sur le périmètre Actives. Le changement de périmètre conserve les autres critères, remet la pagination au début et efface l’animation individuelle éventuellement sélectionnée. Le catalogue de sélection suit le périmètre choisi. | Navigateur à 390 et 1 280 px, recherche combinée, focus, résultat vide et réponse obsolète. |
+| SAA-02 | Les adaptateurs de lecture appliquent le statut de l’animation autorisée avant toute pagination, aux listes et à leurs synthèses. Les curseurs d’un périmètre filtré sont liés au choix. | Tests API et PostgreSQL avec éditions mixtes, tenant étranger, compteurs et petite taille de page. |
+| SAA-03 | La fiche d’une édition s’ouvre avec son propre périmètre, y compris depuis une archive. Les voies de consultation historiques, les actions et les transitions conservent leurs droits. | Lecture directe d’une archive et tests des consommateurs rétrocompatibles. |
+| SAA-04 | Le guide Animation explique où changer le périmètre et montre le filtre Participants. Le parcours Commerçant conserve son propre historique de participations. | Capture synthétique, PDF rendu, copie synchronisée et fichier vérifié via le lien du portail. |
+
+Les lecteurs globaux du portail acceptent `perimetre_animations=actives|archivees|toutes`.
+Sans le paramètre, les listes historiques conservent toutes leurs éditions
+autorisées. Le catalogue `/animations` conserve son booléen `archives` par
+défaut et applique le périmètre explicite lorsqu’il est fourni. Les nouvelles
+requêtes combinent ce périmètre avec les filtres existants. La synthèse des
+lots, le stock sans gagnant et la synthèse des bilans utilisent le même
+périmètre que leur liste.
+
+Le statut appartient à l’agrégat Animation. L’évolution utilise les données
+existantes sans migration, configuration ni nouveau scénario de génération
+de démonstration. Les fixtures locales mêlent plusieurs états d’animation.
+Livrer le backend qui accepte le filtre avant le portail qui l’envoie.
+[Preuves de l’évolution](verification-livraison.md#filtre-des-animations-dans-suivre-lactivité--26-novembre-2026).
