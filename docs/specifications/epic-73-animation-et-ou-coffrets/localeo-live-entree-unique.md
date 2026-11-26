@@ -2095,6 +2095,13 @@ un nouveau point d’entrée UI n’autorise aucune campagne supplémentaire.
 | Contact de support public → aide Live | Nouveau contact facultatif dédié, publication explicite, sous-ressource de gestion versionnée et lectures publique/personnelle filtrées ; stockage et droits fixés aux §3.3/3.4. Aucun réemploi d’une coordonnée privée. Le repli sans contact ne remplace pas le développement du contact publiable. |
 | Analytics → événements de parcours | Événements et enums fermés définis au §4.1 ; identité éphémère et collecte désactivée conservées. Pas de mesure de rétention inter-appareils ; tests transport désactivé/refus sans fournisseur réel. |
 
+Les projections personnelles de **Mes lots**, du bon et de la participation
+exposent `remise_at`, un instant UTC facultatif. Il provient de la déclaration
+de remise en vigueur pour un lot externe ou de la validation en vigueur pour
+un bon numérique. Le lien personnel d’attribution d’un lot externe expose le
+même instant. Une correction retire l’horodatage de la remise annulée. Les
+lots remis affichent « Retiré le » avec cet instant en heure de Paris.
+
 L’annuaire public exclut actuellement toutes les chasses. Pour LA-11, conserver
 l’itinéraire du lieu déjà autorisé par le parcours ; une fiche plus complète de
 ce lieu utilise la lecture personnelle dédiée du §3.4, pas le retrait de l’exclusion

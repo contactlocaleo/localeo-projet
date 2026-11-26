@@ -119,7 +119,8 @@ Mes lots conserve « Marquer comme vu » pour un lot nouveau et le retire après
 confirmation locale. Les textes explicatifs de ce repère et « Vu sur cet
 appareil » disparaissent. Les états de retrait ou d'utilisation restent distincts.
 Les dates de Live sont présentées sans heure, sauf les horodatages de validation
-consultés dans le détail personnel d’une étape, selon la
+consultés dans le détail personnel d’une étape et les retraits confirmés
+affichés dans l’historique et le détail du lot, selon la
 [convention de dates](../../architecture/transverse/affichage-dates.md#présentation-live-sans-heure-21-novembre-2026).
 
 **Séparation du parcours et de ses étapes — 21 novembre 2026.** Le bloc principal

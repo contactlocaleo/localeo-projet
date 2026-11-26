@@ -32,6 +32,11 @@ civile, une valeur absente ou invalide ne reçoit aucune heure reconstruite. Le
 détail signale alors que la date et l’heure ne sont pas disponibles. Les instants
 historiques sans offset restent interprétés en UTC selon la convention commune.
 
+Live affiche aussi la date et l’heure de Paris d’un retrait confirmé à partir
+de `remise_at` dans l’historique et le détail personnel du lot. Si l’horodatage
+est absent, invalide ou limité à une date civile, l’interface affiche
+« Date et heure de retrait indisponibles. ».
+
 Cette règle de présentation ne modifie ni les instants API, ni les contrôles
 d'ouverture ou d'expiration, ni les horaires pratiques des commerces, ni les
 instants exportés dans l'agenda. Les composants partagés conservent leur

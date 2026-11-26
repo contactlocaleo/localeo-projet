@@ -18620,6 +18620,18 @@
             "format": "date-time",
             "title": "Expires At"
           },
+          "remise_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Remise At"
+          },
           "libelle": {
             "type": "string",
             "title": "Libelle"
@@ -42759,6 +42771,18 @@
             ],
             "title": "Statut Remise"
           },
+          "remise_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Remise At"
+          },
           "etat_bon": {
             "type": "string",
             "enum": [
@@ -43012,6 +43036,18 @@
               "REMISE_DECLAREE"
             ],
             "title": "Statut Remise"
+          },
+          "remise_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Remise At"
           },
           "email_statut": {
             "type": "string",
@@ -43304,6 +43340,18 @@
           "animation_nom": {
             "type": "string",
             "title": "Animation Nom"
+          },
+          "remise_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Remise At"
           }
         },
         "type": "object",
@@ -71351,6 +71399,18 @@
               }
             ],
             "title": "Expires At"
+          },
+          "remise_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Remise At"
           },
           "coffret_instance_id": {
             "anyOf": [
