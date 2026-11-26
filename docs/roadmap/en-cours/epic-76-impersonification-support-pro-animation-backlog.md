@@ -48,6 +48,7 @@ Une action de support ne doit jamais être attribuée au seul utilisateur repré
 - Entrées ERP visibles depuis le commerçant et l'organisation/souscription Animation, et entrée **Accès client** dans Localeo Support. Sélection explicite du compte lorsqu'il y en a plusieurs.
 - Identification de l'application, de l'environnement, du compte, du commerce ou de l'organisation et du motif d'assistance avant ouverture.
 - Consultation des écrans Pro et Animation retenus pour le support, avec droits, modules, souscriptions et état de préparation de la cible.
+- Suppression individuelle d’un lot d’import depuis Animation en intervention explicite, sous l’autorisation Import commerçants courante et les règles de conservation E73.
 - Session distincte, limitée dans le temps, révocable ; bandeau permanent et sortie simple sur PC et mobile.
 - Audit des ouvertures, refus, changements de mode, interventions et fins de session, avec opérateur et cible.
 - Preuves unitaires, d'intégration et fonctionnelles pour les deux applications, y compris appels API directs et sessions concurrentes.
@@ -56,7 +57,7 @@ Une action de support ne doit jamais être attribuée au seul utilisateur repré
 
 **E76-ARB-01, validé le 1er novembre 2026** — consultation par défaut, puis mode
 intervention explicite et tracé. Les habilitations, actions et modalités retenues
-le 23 novembre sont détaillées dans les arbitrages E76-ARB-02 à 04.
+le 23 et le 26 novembre sont détaillées dans les arbitrages E76-ARB-02 à 05.
 
 1. L'opérateur choisit **Ouvrir une session support** dans le dossier ERP ou passe par **Accès client** dans Localeo Support.
 2. Une confirmation récapitule application, environnement, compte, rattachement,
@@ -77,6 +78,7 @@ le 23 novembre sont détaillées dans les arbitrages E76-ARB-02 à 04.
 - Pas de connexion automatique d'un salarié en tant que commerçant principal, ni d'un membre organisateur en tant que propriétaire.
 - Pas de session support hors ligne ni de délégation en cascade. Aucun droit ERP interne n'est transporté comme droit client.
 - Les interventions sont limitées à la liste de la spécification. Les actes administratifs ERP existants gardent leurs propres autorisations.
+- Aucune suppression d’import en consultation ni aucun retour arrière des fiches/provenances déjà appliquées ; un gel de conservation et un traitement `EN_COURS` empêchent la suppression.
 
 ### Contraintes existantes à préserver
 
@@ -114,16 +116,17 @@ La [matrice de recette](../../specifications/epic-76-impersonification-support-p
 | E76-CA-16 | Session active, action en vol | Fait concourir expiration/révocation et commande métier | Une règle de priorité est spécifiée et testée ; aucune nouvelle action n'est autorisée après retrait effectif. Les effets déjà validés et leur double attribution sont conservés, sans rejeu implicite lors de la reprise. |
 | E76-CA-17 | Opérateur intervenant à la suite d'une demande reçue | Termine une session passée en intervention | Le récapitulatif indique qui a agi, pour quel compte, quand, sur quel dossier et avec quel résultat. Pour un import Animation, les gestionnaires ayant actuellement le droit de consulter les imports de l’organisation et de la commune du lot peuvent le lire. Si le récapitulatif échoue, l'ERP le signale et permet sa reprise sans rejouer les actes. |
 | E76-CA-18 | Environnement isolé, profils internes et cibles représentatives | Exécute les suites unitaires, intégration et parcours fonctionnels des deux applications | Succès, refus, frontières de droits, isolation des sessions, retraits concurrents et audit sont couverts. Les parcours client ordinaires et ERP restent opérationnels ; les simulations et contrôles externes non exécutés sont distingués. |
+| E76-CA-19 | Opérateur autorisé, session support en intervention, lot dans l’organisation et la commune représentées | Supprime un lot hors `EN_COURS`, sans gel de conservation | Le droit Import courant est recontrôlé côté serveur. L’entrée et les lectures détaillées/rapport deviennent inaccessibles ; le CSV et les valeurs de ligne sont purgés avec reprise idempotente en cas d’erreur. Fiches, provenance, tombstone, reçus nécessaires et audits sont conservés. Consultation, hors périmètre, droit retiré, version obsolète, traitement concurrent et gel actif sont refusés. |
 
 ## Impacts à instruire
 
 | Sujet | Impact initial et source à examiner |
 | --- | --- |
-| Applications et domaine propriétaire | **Concernés :** backend (domaine Identité/Accès, orchestration, ERP, contrôles des services métier), Pro et Animation (session, navigation, bandeau et erreurs). Marketplace/Live **sans modification fonctionnelle prévue**, car hors cibles ; isolation des sessions sur domaines voisins à examiner. |
-| API et consommateurs | **Concernés :** ouverture/transfert/fin/révocation, contexte de session, commandes et audit. Producteur backend ; consommateurs ERP, Pro, Animation. Définir les contrats documentaires canoniques puis les contrats embarqués des consommateurs, sans accepter d'identité opérateur déclarée librement par le navigateur. |
-| Persistance, migrations et données existantes | **À examiner :** représentation de la délégation, révocation, durée, motif et double attribution des actions ; migration éventuelle, compatibilité avec les historiques existants et conservation. Ne pas réécrire les anciennes attributions utilisateur. |
+| Applications et domaine propriétaire | **Concernés :** backend (Identité/Accès, Référencement, orchestration, audit et contrôles des services métier), Pro et Animation (session, navigation, bandeau, historique et retours). Marketplace/Live **sans modification fonctionnelle prévue**, car hors cibles ; isolation des sessions sur domaines voisins à examiner. |
+| API et consommateurs | **Concernés :** ouverture/transfert/fin/révocation, contexte de session, commandes et audit, plus la commande de suppression import exposée par la route support. Producteur backend ; consommateurs ERP, Pro, Animation. Définir les contrats documentaires canoniques puis les contrats embarqués des consommateurs, sans accepter d'identité opérateur déclarée librement par le navigateur. |
+| Persistance, migrations et données existantes | **Concernées :** délégation, révocation, double attribution et tombstone de lot ; migration additive, purge réessayable des artefacts/instantanés et compatibilité des reçus, FK, provenance et audit. Ne pas supprimer les effets métier acquis ni réécrire les anciennes attributions. |
 | Générateur de démonstration et fixtures | **Concernés :** opérateur autorisé/interdit, deux commerces, compte principal/salarié, Animation seule/Coffrets/mixte, deux organisations et droits organisateur différents. Générateur/restaurateur à examiner dans le backend ; aucune création réelle dans ce cadrage. |
-| Documentation fonctionnelle | **Concernée :** guides ERP/support, Pro et Animation ; expliquer finalité, entrée, limites, mode, durée et sortie, ainsi que l'information du client. Source unique dans ce dépôt, lecteurs/bundle ERP à vérifier lors de publication. |
+| Documentation fonctionnelle | **Concernée :** guides ERP/support, Pro et Animation ; expliquer finalité, entrée, limites, mode, durée et sortie, ainsi que l'information du client. Source unique dans ce dépôt, lecteurs/bundle ERP à vérifier lors de publication. Le geste de suppression est documenté avec les limites de conservation E73. |
 | Exploitation et déploiement | **Concernés :** origines HTTPS, session/cookies/PWA, activation par environnement, révocation d'urgence, traces et conservation. Migrations et ordre backend/ERP puis consommateurs à spécifier ; aucune variable, durée ou valeur de secret inventée comme configuration déjà existante. |
 | Performance et volumétrie | **Concernées :** contrôle de droits à chaque requête, persistance/audit, recherche paginée et purge. Budgets, bornes, index et preuves N/10N/charge mixte à définir selon la [convention transverse](../../architecture/transverse/performance-volumetrie.md). |
 
@@ -137,6 +140,7 @@ La [matrice de recette](../../specifications/epic-76-impersonification-support-p
 | E76-ARB-02 — Habilitations | Validé le 23 novembre 2026. Administrateur, Backoffice et Backoffice + Finance après réauthentification ERP. Lecteur et Finance seul sont exclus. |
 | E76-ARB-03 — Actions d'intervention | Validé le 23 novembre 2026. Animation : parcours d'import de commerçants et enregistrement d'un brouillon d'actualité. Pro : enregistrement du brouillon de page publique et soumission à modération. La consultation couvre les écrans utiles à ces parcours. L'import complet sert de recette transverse. |
 | E76-ARB-04 — Durée et information | Validé le 23 novembre 2026. 30 minutes au maximum ou 15 minutes d'inactivité. Motif obligatoire, référence facultative, demande déjà reçue suffisante. Récapitulatif client consultable pendant 180 jours après la fin de l’intervention selon les droits de lecture de CA-17. La révocation explicite suspend les lignes restantes d'un import lancé. Le journal interne suit la règle commune T8, avec un plafond de 12 mois calendaires par événement. |
+| E76-ARB-05 — Suppression d’un import | Validé le 26 novembre 2026. En intervention seulement, et sous droit Import courant sur le même lot/organisation/commune, un opérateur peut supprimer individuellement tout import sauf `EN_COURS` et tout import sous gel de conservation. La commande versionnée/idempotente masque le lot, purge le CSV et les valeurs de lignes immédiatement avec reprise durable, et rend détail/rapport indisponibles. Elle ne supprime ni fiche commerçant, ni provenance utile, ni audits ; un tombstone et les reçus nécessaires restent. |
 
 ## Préparation de l’implémentation
 

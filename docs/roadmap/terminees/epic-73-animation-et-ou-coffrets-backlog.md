@@ -1585,6 +1585,19 @@ et [preuves locales](../../specifications/epic-73-animation-et-ou-coffrets/verif
 éditions. Les listes et leurs synthèses suivent le périmètre recherché.
 [Périmètre et critères SAA-01 à SAA-04](../../specifications/epic-73-animation-et-ou-coffrets/ux-productivite-organisateur.md#évolution-du-26-novembre-2026--filtre-des-animations-dans-suivre-lactivité).
 
+## Évolution du 26 novembre 2026 — suppression de l’historique des imports
+
+**E73-EVO-SUPPRESSION-HISTORIQUE-IMPORT** permet aux gestionnaires habilités
+de retirer un lot de leur historique et de purger son CSV ainsi que les valeurs
+de lignes, sans annuler les fiches commerçants déjà créées/modifiées ni leur
+provenance. Tous les états sauf `EN_COURS` sont supprimables hors gel de
+conservation ; un tombstone et les audits/idempotences nécessaires restent.
+Le détail et le rapport deviennent inaccessibles. Depuis le support, la
+suppression n’est autorisée qu’en intervention explicite et avec les droits
+courants de la cible.
+[Critères SIH-01 à SIH-04](../../specifications/epic-73-animation-et-ou-coffrets/modules-souscriptions-import-communication.md#e73-evo-suppression-historique-import) et [critère E76-CA-19](../../specifications/epic-76-impersonification-support-pro-animation/README.md#matrice-de-recette).
+Cette évolution conserve la clôture historique d’E73 et ses autres réserves.
+
 ## Évolution du 26 novembre 2026 — carnet et notifications Live
 
 **E73-EVO-LIVE-CARNET-NOTIFICATIONS** permet à l’habitant de masquer puis

@@ -272,32 +272,24 @@ synchronisation, refaire le build et relancer le scénario sans
 servi, y compris quand l’assistance est indisponible. Les rapports de la
 passe finale à 390 et 1024 px sont dans `tmp/import-guide-final-report`.
 
-## Historique des interventions du 24 novembre 2026
+## Historique des interventions actualisé le 26 novembre 2026
 
-Les captures `interventions-1024.png` et `interventions-390.png` montrent la modification d’une animation en brouillon et le suivi d’un import de vingt lignes. Elles utilisent Chromium, des données fictives et la révision Animation `77e2db2` avec l’évolution E76.
+Les captures `interventions-1024.png` et `interventions-390.png` montrent la modification d’une animation en brouillon, le suivi d’un import terminé et la trace d’un import supprimé sans compteurs ni détails. Elles utilisent Chromium et des données fictives, avec les évolutions locales sur la base Animation `c4879ce`.
 
 ```powershell
 $env:ANIMATION_TEST_SUPPORT='true'
-$env:ANIMATION_TEST_DIST='tmp/e76-animation-history-guide/dist'
-$env:ANIMATION_GUIDE_ARTIFACTS='tmp/e76-animation-history-guide/capture-report'
-$env:ANIMATION_GUIDE_CAPTURE_ROOT='tmp/e76-animation-history-guide/captures'
+$env:ANIMATION_TEST_DIST='tmp/suppression-guide-intervention-build'
+$env:ANIMATION_GUIDE_ARTIFACTS='tmp/suppression-guide-intervention-report'
+$env:ANIMATION_GUIDE_CAPTURE_ROOT='tmp/suppression-guide-intervention-captures'
 node scripts/build-generation-tests.mjs
 node tests/browser/animation-guide.mjs --only=interventions --captures-only
 ```
 
-Copier les deux captures dans le dossier d’illustrations. Régénérer et vérifier le guide Animation selon la [procédure commune](../../../../../organisation/maintenance-guides-utilisateurs.md).
+Copier les deux captures relues dans le dossier d’illustrations. Régénérer le PDF et vérifier sa copie embarquée selon la [procédure commune](../../../../../organisation/maintenance-guides-utilisateurs.md).
 
-## Historique des interventions du 23 novembre 2026
+## Ancienne provenance des captures d’interventions du 23 novembre 2026
 
-Captures Chromium de la rubrique **Interventions de Localeo** avec des données fictives sur la base Git `4852017` et les modifications E76. Les vues de 1024 et 390 pixels montrent le suivi du lot de vingt lignes.
-
-```powershell
-$env:ANIMATION_TEST_SUPPORT='true'
-$env:ANIMATION_TEST_DIST='tmp/e76-guide/dist'
-$env:ANIMATION_GUIDE_ARTIFACTS='tmp/e76-guide/recette'
-node scripts/build-generation-tests.mjs
-node tests/browser/animation-guide.mjs --only=interventions --captures-only
-```
+La première version montrait uniquement la modification d’un brouillon et le suivi d’un import de vingt lignes, sur la base Animation `4852017` avec E76. Les fichiers distribués ont été remplacés le 26 novembre par les captures décrites plus haut, qui incluent la trace d’un import supprimé.
 
 ## 23 novembre 2026 - sélecteur de période du tableau de bord
 
@@ -751,3 +743,20 @@ reconstruction, `node tests/browser/animation-guide.mjs --access-only`
 vérifie l’accès clavier à 390 et 1 024 pixels depuis le menu du compte et
 **Support**. Le PDF reste accessible quand le support répond 503. Le fichier
 servi en HTTP 200 est identique au PDF canonique.
+
+## Suppression d’un import d’essai le 26 novembre 2026
+
+La capture [bureau](import-suppression-1024.png) montre la confirmation de suppression depuis l’historique d’un import fictif. Elle provient de l’application Animation construite sur la base Git `c4879ce`, avec les modifications locales de suppression, et d’un scénario navigateur à API synthétiques. La recette a aussi capturé l’écran à 390 px dans `localeo-animation/tmp/suppression-guide-captures/import-suppression-390.png`.
+
+Depuis `localeo-animation`, reconstruire et capturer le scénario :
+
+```powershell
+$env:ANIMATION_TEST_SUPPORT = 'true'
+$env:ANIMATION_TEST_DIST = 'tmp/suppression-guide-20261126-build'
+$env:ANIMATION_GUIDE_CAPTURE_ROOT = 'tmp/suppression-guide-captures'
+$env:ANIMATION_GUIDE_ARTIFACTS = 'tmp/suppression-guide-report'
+node scripts/build-generation-tests.mjs
+node tests/browser/animation-guide.mjs --only=import-suppression --captures-only
+```
+
+La capture utilisée par le PDF est copiée sans retouche depuis ce dossier. Les deux largeurs ont été relues avant la génération du guide.

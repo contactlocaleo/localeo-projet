@@ -407,13 +407,17 @@ Dans **Historique des imports**, ouvrez le lot qui indique **En attente de déma
 2. Suivez les compteurs. Quand le lot est terminé, ouvrez le bilan et choisissez **Télécharger le rapport CSV**.
 3. Vérifiez le résultat des fiches. **Sélectionnable pour une animation** indique que le commerce peut être invité. Pour une fiche **À compléter**, lisez l’action attendue.
 
-![Le lot confirmé affiche le bouton de lancement et le nombre de lignes restant à traiter.](illustrations/guide-quotidien/import-traitement-1024.png)
-
 Si le support agit à votre demande, il peut aussi lancer ou poursuivre ce lot en mode intervention. Retrouvez ses actions dans **Interventions de Localeo**.
 
 ### Si le traitement semble arrêté
 
 Si le lot affiche encore **Traitement en cours**, choisissez **Poursuivre le traitement**, même lorsque **Restantes** affiche zéro. **Actualiser cet import** relit le résultat. Une fois l’import terminé, utilisez **Inviter dans Pro** depuis **Commerçants** si vous souhaitez envoyer l’email de première connexion d’un commerçant.
+
+### Supprimer un import d’essai
+
+Dans **Historique des imports**, choisissez **Supprimer l’import**, puis confirmez. Le CSV et les détails de lignes sont supprimés ; les fiches commerçants créées ou modifiées, leur provenance et les traces d’audit restent conservées. Attendez la fin de tout traitement avant de supprimer un lot. **Suppression en cours** signifie que le CSV est encore en nettoyage. Le support réalise cette action à votre demande en mode intervention.
+
+![La confirmation distingue les données supprimées des fiches commerçants conservées.](illustrations/guide-quotidien/import-suppression-1024.png)
 
 ## 26 · Gérer votre équipe et demander de l’aide
 
@@ -433,9 +437,13 @@ Gardez vos mots de passe, codes et QR secrets pour vous. La demande indique la d
 Si Localeo est intervenu à votre demande et que la rubrique est disponible, ouvrez **Mon organisation**, puis **Interventions de Localeo**.
 
 1. Après la fin de l’intervention, repérez la date, la commune et le nom de la personne de Localeo. Vérifiez le compte concerné et le résultat indiqué.
-2. Ouvrez le dossier concerné pour relire ce qui a été changé. Pour une animation en brouillon, vérifiez son nom, sa description et ses dates dans **Animations**.
+2. Ouvrez le dossier concerné si ses détails sont encore disponibles. Pour une animation en brouillon, vérifiez son nom, sa description et ses dates dans **Animations**.
 
-![L’historique indique l’animation concernée et propose un accès au dossier d’import.](illustrations/guide-quotidien/interventions-1024.png)
+![L’historique indique les modifications d’animation et garde la trace d’un import supprimé.](illustrations/guide-quotidien/interventions-1024.png)
+
+### Si Localeo a supprimé un import d’essai
+
+L’historique conserve **Suppression d’un import** et le numéro du lot, sans lien vers ses détails, fichiers ni compteurs. Les fiches commerçants créées ou modifiées, leur provenance et les traces d’audit restent conservées.
 
 ### Si Localeo a confirmé un import ou préparé une actualité
 
