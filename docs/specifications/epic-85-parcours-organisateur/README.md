@@ -4,7 +4,7 @@ Spécification du 25 novembre 2026. **État produit : En cours.** Le gestionnair
 
 | Pour travailler sur… | Document de référence |
 | --- | --- |
-| Le périmètre et les engagements E85-CA-01 à 16 | [Cadrage et critères d’acceptation](../../roadmap/en-cours/epic-85-parcours-organisateur-backlog.md) |
+| Le périmètre et les engagements E85-CA-01 à 19 | [Cadrage et critères d’acceptation](../../roadmap/en-cours/epic-85-parcours-organisateur-backlog.md) |
 | Les règles et les écrans propres à chaque jeu | [Parcours détaillés des six modèles implémentés et des trois modèles en projet](modeles.md) |
 | Les recommandations, les droits, les refus et la reprise d’une opération | [Architecture et compatibilité](architecture.md) |
 | Les scénarios à exécuter et la revue avec des gestionnaires | [Matrice de recette et lots](recette.md) |
@@ -15,7 +15,7 @@ Spécification du 25 novembre 2026. **État produit : En cours.** Le gestionnair
 
 Le tableau de bord répond à « Quelle édition demande mon attention ? ». Chaque entrée d’intervention identifie l’édition et la commune, l’étape métier, le motif vérifié et le geste accessible. Une attente d’accord commerçant précise qui peut agir dès que cette information est connue. Un incident renvoie à son dossier quand la source l’identifie. Une date échue invite à contrôler la clôture selon les capacités reçues. Les archives se consultent depuis « Mes archives ».
 
-La liste des animations répond à « Où est mon édition ? ». Depuis une liste filtrée, le nom ouvre la fiche et son action ouvre directement la destination annoncée. Le responsable qui peut publier arrive à la même revue depuis la ligne, le tableau de bord ou l’en-tête. Un lecteur peut consulter les faits autorisés. Une édition sans intervention connue reste trouvable dans sa liste, avec sa situation réelle.
+La liste des animations répond à « Où est mon édition ? ». Elle s’ouvre sur les éditions accessibles et propose **Préparations** à côté de **Mes archives**. Préparations ouvre les travaux enregistrés avant la création définitive d’un brouillon. Depuis une liste filtrée, le nom ouvre la fiche et son action ouvre directement la destination annoncée. Le responsable qui peut publier arrive à la même revue depuis la ligne, le tableau de bord ou l’en-tête. Un lecteur peut consulter les faits autorisés. Une édition sans intervention connue reste trouvable dans sa liste, avec sa situation réelle.
 
 **Exemple de reprise.** La gestionnaire filtre les éditions de sa commune, ouvre une publication en attente et retrouve l’invitation concernée. Après sa relance, le contrôle continue d’indiquer l’attente d’un accord. De retour dans sa liste, elle examine un incident sur une seconde édition, puis prépare le tirage d’une troisième. Chaque retour retrouve les critères, la page et l’entrée d’origine. Si une action fait sortir une ligne du filtre, le retour l’explique et replace le focus dans les résultats restants.
 
@@ -25,7 +25,7 @@ Sur ordinateur, le nom, la commune et la période identifient l’édition. La f
 
 L’en-tête porte le prochain geste permis pour l’édition. Quand la destination est déjà ouverte, la zone de travail porte l’action précise au point de décision, à côté de ses effets. Une même commande apparaît une seule fois dans cette vue. Les verbes annoncent le geste réel. « Voir les participants », « Vérifier la clôture » et « Préparer le tirage » ouvrent une lecture. « Publier l’animation », « Confirmer la clôture » et « Confirmer le tirage » engagent l’opération présentée.
 
-Depuis la fiche, une action ou un lien vers un dossier atteint sa destination en une activation. Le repère d’étape se maintient pendant les consultations secondaires. L’ouverture ordinaire d’une édition publiée ou en cours mène à Participation. Bilan reste accessible directement pendant le déroulement. Un lien explicite vers une rubrique ou un dossier autorisé prévaut sur cette destination par défaut. [Règles d’entrée de la fiche](../epic-73-animation-et-ou-coffrets/parcours-organisateur.md)
+Depuis la fiche, une action ou un lien vers un dossier atteint sa destination en une activation. Le repère d’étape se maintient pendant les consultations secondaires. L’ouverture ordinaire d’une édition publiée ou en cours mène à Participation. Depuis cette rubrique, **Bilan provisoire** donne accès aux résultats et aux objectifs autorisés pendant le déroulement. Un lien explicite vers une rubrique ou un dossier autorisé prévaut sur la destination par défaut. [Règles d’entrée de la fiche](../epic-73-animation-et-ou-coffrets/parcours-organisateur.md)
 
 ## De la création à l’archive
 
@@ -54,9 +54,19 @@ Dans la création et la configuration d’un lot libre remis hors Localeo, **Lot
 
 Les regroupements ci-dessous organisent les liens et le contenu. Les tâches principales et les dossiers signalés s’ouvrent directement. Un ancien accès conserve l’édition et rejoint la destination autorisée correspondante. [Navigation](../../../../localeo-animation/src/app/components/AnimationDetailNavigation.tsx)
 
-En brouillon, dans une édition configurée ou prête à publier, la navigation principale propose **Préparation** et **Publication**. Préparation donne accès aux objectifs et à la date annoncée du tirage dans les réglages applicables, aux invitations et au terrain selon le modèle, ainsi qu’aux actualités et messages à préparer selon les droits. Publication réunit **Revue de publication** et **Supports de diffusion**. À partir de la publication, Participation, Clôture, Tirage, Communication et Bilan apparaissent selon l’état, le modèle et les droits. Si aucun tirage ne s’applique, la clôture donne accès à la suite autorisée. Sur téléphone, un seul sélecteur donne accès aux mêmes destinations.
+| État de l’édition | Rubriques utiles selon le modèle et les droits |
+| --- | --- |
+| Brouillon, configurée ou prête à publier | **Préparation** et **Publication**. Préparation donne accès aux objectifs, à la date annoncée du tirage, aux invitations et au terrain applicables ainsi qu’aux contenus à préparer. Publication réunit **Revue de publication** et **Supports de diffusion**. |
+| Publiée ou en cours | **Participation**, **Exploitation**, **Publication** et **Communication**. **Clôture** apparaît lorsqu’elle est recommandée ou qu’une fermeture est engagée. Une clôture anticipée autorisée reste une action secondaire. Les résultats et objectifs courants se consultent via **Bilan provisoire** dans Participation. |
+| Clôturée | **Tirage** pour les éditions concernées, accès aux gains et aux dossiers de fin, et **Bilan**. La clôture dirige vers la suite applicable au jeu. |
+| Terminée ou archivée | **Bilan** en premier, puis les lectures historiques autorisées. |
+| Annulée | Résumé de l’annulation et lectures autorisées. |
+
+Sur ordinateur, les vues d’une rubrique apparaissent dans une bande distincte qui nomme leur rubrique parente. Sur téléphone, un sélecteur unique groupe les destinations sous leur rubrique parente. La frise reste un repère d’état indépendant.
 
 Participation réunit la liste des participants, les qualifications et, pour les modèles concernés, les validations. Une participation et une preuve gardent leurs propres détails et filtres. Les incidents actifs apparaissent avant la liste. Dans Communication, le quota et les messages envoyés aux participants précèdent les outils complémentaires. « Nouveau message » ouvre le formulaire avec aperçu et protection de la saisie. Les messages reçus des habitants conservent leur propre destination.
+
+**Exploitation** rassemble **Réglages d’exploitation** et **Configuration publiée**. Les réglages présentent les dates et inscriptions, le contact public et la date annoncée du tirage selon le modèle et les actions permises par le serveur. La configuration publiée se consulte en lecture seule. Après clôture, la date annoncée se retrouve dans Tirage lorsqu’il s’applique. Le retrait du contact public reste accessible via Publication selon les capacités reçues.
 
 Les supports peuvent être préparés en brouillon selon les droits existants. L’usage public d’un lien ou d’un QR de diffusion dépend de la visibilité de l’édition et de sa configuration publiée. Le QR terrain reste accessible depuis sa préparation. Le contrôle facultatif de visuel reconnaît une illustration personnalisée du flyer active sur cette édition ou un visuel déjà déclaré dans sa configuration. Relire le contrôle après ajout ou retrait confirmé. [Règle du visuel et lecture du flyer](../epic-73-animation-et-ou-coffrets/flyers-contextualises.md#illustration-personnalisée)
 
@@ -64,21 +74,21 @@ Clôture expose les indicateurs disponibles, les blocages éventuels et la confi
 
 | Espace de travail | Identifiant actuel → contenu proposé | Accès utile en situation |
 | --- | --- | --- |
-| Préparation | `assistant` → préparation guidée · `configuration` → réglages de l’édition · `participations` → invitations commerçants · `preparation` → terrain | Ouvrir la correction ou l’accord depuis son contrôle. Afficher les tâches commerçantes pour les modèles concernés. |
+| Préparation et Exploitation | `assistant` → préparation guidée · `configuration` → réglages du brouillon ou configuration publiée · `participations` → invitations commerçants · `preparation` → terrain · `exploitation` → réglages d’exploitation | Ouvrir la correction ou l’accord depuis son contrôle. Les anciennes destinations de préparation mènent aux lectures autorisées après publication. L’ancien accès aux paramètres dans Participation rejoint Exploitation. |
 | Publication ou clôture | `workflow` → revue de publication, revue de clôture ou bilan selon l’état | Ouvrir la publication avant clôture, la clôture lorsqu’elle est recommandée ou confirmée, et le bilan pour une édition terminée, archivée ou annulée. |
 | Supports de diffusion | `flyer` → Flyer · `diffusion` → Liens et QR de diffusion | Retrouver chaque outil dans **Publication → Supports de diffusion**, y compris après publication. Depuis le contrôle de visuel, **Ajouter un visuel** ouvre l’éditeur d’illustration du flyer et conserve le retour à la revue. |
 | Participation | `live` → suivi de la participation · `participants` → participants · `validations` → validations | L’indicateur mène à sa liste déjà filtrée. Un incident identifié mène à sa situation métier. |
 | Communication | `communication` → messages aux participants · `messages-habitants` → messages habitants · `actualites` → actualités | Avant publication, les entrées qui permettent de préparer une actualité ou un message rejoignent Préparation. Une destination réservée au suivi explique quand elle s’ouvre et propose une rubrique utile dans la même édition. |
-| Tirage et gains | `tirage` → préparation, état ou résultat · `gains` → gains et remises | La recommandation « tirages » résout la rubrique « Tirage » de l’édition. Le résultat confirmé donne accès aux gains. |
+| Tirage et gains | `tirage` → préparation, état ou résultat · `gains` → gains et remises | Après fermeture effective, la recommandation « tirages » ouvre la rubrique. Avant cette fermeture, le lien direct explique le prérequis et propose la revue de clôture lorsqu’elle est permise. Le résultat confirmé donne accès aux gains. |
 | Fin et bilan | `fin` → dossiers de fin et archivage · `bilan` → bilan disponible à la phase consultée · `bilan-objectifs` → objectifs · `audit` → historique autorisé | Un contrôle de fin ouvre le dossier. Le bilan indique la période et le caractère provisoire ou final de la lecture. En brouillon, l’ancien lien vers les objectifs rejoint leur réglage. |
 
 En cas de destination retirée au rôle ou inapplicable au modèle, la fiche explique l’indisponibilité et offre un retour autorisé. Elle protège toute saisie en cours avant changement de cible. En lecture seule, le gestionnaire retrouve les informations permises et le résultat d’une opération déjà effectuée.
 
 ### Passer d’une vue à l’autre dans une rubrique
 
-Dès qu’une rubrique contient plusieurs vues, sa navigation locale les nomme toutes, y compris la première. Clôture donne accès à **Clôture des participations** et **Fin et archivage**. Tirage donne accès à **Tirage au sort** et **Gains et remises**. La première entrée de Communication est **Messages aux participants**. Bilan regroupe les résultats, objectifs, origines des inscriptions, commentaires, comparaison et historique au même niveau. L’état courant reste repérable pendant ces consultations. Sur téléphone les destinations restent accessibles dans un seul sélecteur. Les droits, la lecture seule et l’applicabilité du tirage déterminent les entrées proposées.
+Dès qu’une rubrique contient plusieurs vues, sa navigation locale les nomme toutes, y compris la première. Après clôture, **Fin et archivage** est accessible dans **Tirage** pour les jeux qui le prévoient et dans **Clôture** pour les autres. **Tirage** donne aussi accès à **Tirage au sort** et **Gains et remises**. La première entrée de Communication est **Messages aux participants**. Bilan regroupe les résultats, objectifs, origines des inscriptions, commentaires, comparaison et historique au même niveau. L’état courant reste repérable pendant ces consultations. Sur téléphone les destinations restent accessibles dans un seul sélecteur. Les droits, la lecture seule et l’applicabilité du tirage déterminent les entrées proposées.
 
-Une recommandation du bandeau mène à la même revue que le raccourci placé auprès d’un blocage. Par exemple, « Vérifier la clôture » dans Tirage ouvre la revue de cette édition. La confirmation définitive se trouve dans le formulaire qui explique ses conséquences. Avant le gel, le tirage affiche les lots connus et indique que les effectifs seront disponibles après clôture. En présence d’un tirage confirmé avec zéro gagnant, Gains et remises en rend compte. Les lots sans gagnant ont leur propre dossier de justification.
+Une recommandation du bandeau mène à la même revue que le raccourci placé auprès d’un blocage. Par exemple, « Vérifier la clôture » depuis un ancien lien de tirage ouvre la revue de cette édition. La confirmation définitive se trouve dans le formulaire qui explique ses conséquences. En présence d’un tirage confirmé avec zéro gagnant, Gains et remises en rend compte. Les lots sans gagnant ont leur propre dossier de justification.
 
 ### Retrouver une animation dans la liste
 

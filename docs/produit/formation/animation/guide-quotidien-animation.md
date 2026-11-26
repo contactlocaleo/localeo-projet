@@ -36,6 +36,8 @@ Dans **Rappels et autres alertes**, choisissez **Supprimer de mon tableau de bor
 
 Dans **Animations**, recherchez le nom d’une édition. Sa ligne indique son statut, le motif d’une intervention éventuelle et la prochaine action disponible. Vous retrouvez le même statut en ouvrant la fiche.
 
+Au-dessus de la liste, **Préparations** ouvre vos travaux à reprendre et **Mes archives** ouvre les éditions archivées.
+
 1. Pour restreindre la liste, ouvrez **Filtres** et choisissez vos critères, par exemple le modèle ou la période. Les critères actifs restent visibles. Retirez-en un pour élargir la recherche.
 2. Ouvrez l’édition par son nom, ou choisissez sa prochaine action pour rejoindre le dossier concerné. **Retour aux animations** vous ramène à la même page avec vos critères.
 3. Pour retrouver une sélection habituelle, choisissez son nom dans **Vue**. **À traiter** affiche les animations qui demandent une intervention.
@@ -80,7 +82,7 @@ Préparez un nom, des dates et le type de jeu que vous souhaitez organiser. Vous
 
 ### Reprendre plus tard
 
-Utilisez **Enregistrer la préparation** ou **Autres actions**, puis **Enregistrer et quitter**, si ces actions sont proposées. Attendez la confirmation. Pour reprendre, ouvrez **Préparations**, puis **Reprendre la préparation**. Dans un brouillon déjà créé, changez de partie dans **Configuration** et choisissez **Enregistrer** pour garder vos modifications.
+Utilisez **Enregistrer la préparation** ou **Autres actions**, puis **Enregistrer et quitter**, si ces actions sont proposées. Attendez la confirmation. Pour reprendre, ouvrez **Préparations** en haut de la liste **Animations**, puis **Reprendre la préparation** en face du projet. Dans un brouillon déjà créé, ouvrez **Préparation → Configuration** et choisissez **Enregistrer** pour garder vos modifications.
 
 ### Choisir un jeu
 
@@ -184,7 +186,7 @@ Ouvrez le brouillon dont vous voulez rendre la présentation accessible aux habi
 2. Dans **Préparer mon animation**, sélectionnez une carte rouge ou orange pour ouvrir la rubrique indiquée. Dépliez **Autres points à vérifier** pour afficher les suivants. Traitez les blocages, puis relisez la présentation destinée aux habitants.
 3. Choisissez **Publier l’animation**, puis confirmez. Revenez dans **Revue de publication** pour relire le reçu. Vous y retrouvez l’état et, lorsqu’elle est disponible, la date de publication effective. Pour une animation en cours, choisissez **Ouvrir le suivi de la participation**.
 
-![La frise indique l’étape actuelle. Juste en dessous, ouvrez la rubrique que vous voulez consulter.](illustrations/guide-quotidien/navigation-edition-1024.png)
+![La frise indique l’étape actuelle. Sous les rubriques, une bande indique les vues de la rubrique sélectionnée.](illustrations/guide-quotidien/navigation-edition-1024.png)
 
 ![Après publication, ouvrez le suivi depuis le reçu de l’édition.](illustrations/guide-quotidien/recu-publication-1024.png)
 
@@ -194,9 +196,11 @@ Si le contrôle propose **Ajouter un visuel**, ouvrez-le. Dans **Flyer**, choisi
 
 Si votre édition prévoit un tirage, vérifiez sa **Date annoncée du tirage** dans les réglages de préparation. Vous pouvez aussi y fixer des objectifs. Les objectifs sont figés à la publication.
 
+Après publication, les réglages encore accessibles et la configuration publiée se retrouvent dans **Exploitation**. Sur téléphone, le sélecteur regroupe les vues sous leur rubrique.
+
 ### Si la confirmation tarde
 
-Utilisez **Vérifier l’enregistrement** si l’action est proposée. Tant que le résultat est incertain, vérifiez son état avant de recommencer, surtout si l’action engage une somme. Une fois publiée, l’animation peut aussi apparaître dans l’agenda Live des communes publiées où un commerce participe avec un accord valide.
+Utilisez **Vérifier l’enregistrement** si l’action est proposée. Tant que le résultat est incertain, vérifiez son état avant de recommencer, surtout si l’action engage une somme. Une fois publiée, l’animation peut aussi apparaître dans l’agenda Live des communes publiées où un commerce participe avec un accord valide. Les habitants qui reçoivent l’alerte de publication sur leur appareil peuvent l’ouvrir pour rejoindre la fiche et s’inscrire si les inscriptions sont ouvertes.
 
 <!-- Sommaire : Communiquer et suivre l’activité -->
 
@@ -241,11 +245,29 @@ Ouvrez l’animation concernée dans la bonne commune. Pour aider une personne, 
 
 ![Dans Participation, passez des participants aux validations et ouvrez le dossier de la personne recherchée.](illustrations/guide-quotidien/suivi-1024.png)
 
+### Consulter les résultats pendant l’animation
+
+Dans **Participation**, ouvrez **Bilan provisoire** pour lire les chiffres disponibles et les comparer aux objectifs. Vérifiez leur période et leur date d’observation avant de les partager. Après clôture, retrouvez-les dans **Bilan**.
+
 ### Si vous devez intervenir sur le parcours
 
 Vérifiez le commerce et la consigne attendue avant d’agir sur une étape ou un justificatif. Si vous devez supprimer une participation et disposez de ce droit, ouvrez le menu d’actions de la personne concernée. Relisez son identité et les conséquences affichées avant de confirmer.
 
-## 16 · Consulter l’activité de votre commune sur une période
+## 16 · Modifier les réglages d’une animation publiée
+
+Ouvrez l’édition dans la bonne commune. Les réglages disponibles dépendent du jeu, de vos droits et de l’état de l’animation.
+
+1. Ouvrez **Exploitation → Réglages d’exploitation**. Dans **Dates et inscriptions**, examinez la période et la capacité d’accueil avant de modifier un champ autorisé.
+2. Indiquez le motif demandé et lisez les effets affichés. Après **Enregistrer les paramètres**, vérifiez les valeurs enregistrées et les supports de diffusion à régénérer.
+3. Retrouvez **Contact d’aide des habitants** et **Annoncer la date du tirage** lorsque votre édition les propose. **Configuration publiée** permet de relire les informations utilisées lors de la publication.
+
+![Dans Exploitation, choisissez de modifier les réglages permis ou de relire la configuration publiée.](illustrations/guide-quotidien/exploitation-1024.png)
+
+### Après la clôture
+
+Pour un jeu avec tirage, retrouvez l’annonce de sa date dans **Tirage**. Si vous devez retirer le contact public et disposez de ce droit, ouvrez **Publication**, puis **Contact public**.
+
+## 17 · Consulter l’activité de votre commune sur une période
 
 Sur **Pilotage des animations**, suivez l’activité de la commune sélectionnée, y compris les animations clôturées ou archivées.
 
@@ -259,7 +281,7 @@ Sur **Pilotage des animations**, suivez l’activité de la commune sélectionn�
 
 Dans **Personnalisée**, saisissez le début et la fin, sur 366 jours au plus et avec une fin au plus tard aujourd’hui. Les jours suivent l’heure de Paris. **Actualiser** relit la période choisie et revient à la première page de résultats. Le chiffre des coffrets compte chaque coffret une seule fois. Le détail des prestations montre ses utilisations.
 
-## 17 · Télécharger les résultats des animations
+## 18 · Télécharger les résultats des animations
 
 Depuis **Pilotage des animations**, vérifiez la période avant de partager les chiffres avec votre équipe.
 
@@ -277,15 +299,15 @@ Au-delà de 10 000 animations, raccourcissez la période pour pouvoir exporter. 
 
 <!-- Sommaire : Terminer l’animation et remettre les lots -->
 
-## 18 · Clôturer une animation
+## 19 · Clôturer une animation
 
 Clôturez l’animation quand vous souhaitez fermer la participation.
 
-1. Vérifiez les dates et l’activité. Si la fin prévue est dépassée, choisissez **Vérifier la clôture** dans **À traiter aujourd’hui**. Cette action ouvre la revue.
-2. Dans **Clôture**, choisissez **Clôture des participations**. Contrôlez le nombre de qualifiés et les conditions de fermeture. Lisez les effets, puis choisissez **Confirmer la clôture** si vous souhaitez fermer le jeu.
-3. Vérifiez l’état **Clôturée**. Sous **Clôture**, ouvrez **Fin et archivage** pour retrouver les dossiers à régler. **Clôture des participations** vous ramène directement à la revue.
+1. Vérifiez les dates et l’activité. Lorsque la clôture est attendue, choisissez **Vérifier la clôture** dans **À traiter aujourd’hui** ou ouvrez **Clôture** depuis la fiche. Pour fermer l’édition plus tôt, utilisez la clôture anticipée si elle vous est proposée.
+2. Dans **Clôture**, contrôlez le nombre de qualifiés et les conditions de fermeture. Lisez les effets, puis choisissez **Confirmer la clôture** si vous souhaitez fermer le jeu.
+3. Vérifiez l’état **Clôturée**. Ouvrez **Fin et archivage** pour retrouver les dossiers à régler. Selon votre jeu, cette vue se trouve dans **Tirage** ou **Clôture**.
 
-![Les deux entrées de Clôture donnent accès à la fermeture des participations et aux dossiers de fin.](illustrations/guide-quotidien/navigation-cloture-1024.png)
+![La rubrique Clôture apparaît lorsque la fermeture est attendue.](illustrations/guide-quotidien/navigation-cloture-1024.png)
 
 ![Sur téléphone, vérifiez les conséquences de la fermeture avant de la confirmer.](illustrations/guide-quotidien/cloture-390.png)
 
@@ -293,11 +315,11 @@ Clôturez l’animation quand vous souhaitez fermer la participation.
 
 La date annoncée aux habitants est un repère. Tant que la clôture n’est pas effective, des habitants peuvent encore participer selon les conditions d’accès. Le rappel **Clôture attendue** vous signale la situation. Après l’échéance prévue, il n’est plus possible de modifier les paramètres d’exploitation. Vérifiez les dates avant cette échéance.
 
-## 19 · Tirer au sort et suivre la remise des lots
+## 20 · Tirer au sort et suivre la remise des lots
 
 Attendez la clôture et vérifiez que les lots et les dossiers attendus sont prêts.
 
-1. Dans **Tirage**, choisissez **Tirage au sort**. Si les participations sont encore ouvertes, **Vérifier la clôture** ouvre la revue. Après la clôture, vérifiez le nombre de personnes éligibles et les lots. Vous pouvez encore annuler. **Confirmer le tirage** engage l’attribution. Si personne n’est éligible et que le jeu l’autorise, le bouton indique **Enregistrer un tirage sans gagnant**.
+1. Après clôture, ouvrez **Tirage → Tirage au sort** si cette rubrique est proposée pour votre jeu. Vérifiez la date annoncée, le nombre de personnes éligibles et les lots. Vous pouvez encore annuler. **Confirmer le tirage** engage l’attribution. Si personne n’est éligible et que le jeu l’autorise, le bouton indique **Enregistrer un tirage sans gagnant**.
 2. Si le tirage est en cours ou si la réponse tarde, vérifiez son état dans cette rubrique. Ouvrez **Gains et remises** pour retrouver les gagnants. **Tirage au sort** permet de revenir au résultat. Pour retrouver les lots de plusieurs éditions, ouvrez **Lots et remises**.
 3. Recherchez le bénéficiaire ou filtrez par animation. Vérifiez le lieu, la date limite et l’état du lot, puis utilisez l’action proposée. Après la remise, actualisez et vérifiez l’état enregistré.
 
@@ -309,23 +331,23 @@ Un lot externe se retire au lieu indiqué. Le commerce désigné valide un bon. 
 
 **Tous les lots** enlève le filtre de tâche et garde les autres critères. Après un tirage confirmé sans gagnant, **Fin et archivage** indique combien de lots restent à justifier. Ouvrez le dossier, choisissez **Justifier les lots sans gagnant** et saisissez le motif. Vérifiez la quantité avant de confirmer. Le dossier passe alors à **Justifié**.
 
-## 20 · Faire le bilan et préparer une nouvelle édition
+## 21 · Faire le bilan et préparer une nouvelle édition
 
-Une fois l’animation passée, retrouvez les chiffres à partager et les éléments à garder pour la prochaine édition.
+Après clôture, ouvrez **Bilan** pour retrouver les chiffres à partager et les éléments à garder pour la prochaine édition.
 
 1. Dans **Bilan**, choisissez **Résultats**. Lisez les inscriptions, les parcours, les passages et les lots remis. Pour un jeu avec tirage, **Tirage à venir** ou **Tirage en cours** indique que le résultat se fait attendre. **Tirage confirmé · 0 gagnant** signifie que le tirage a eu lieu.
 2. Vérifiez la période, la date d’observation et les données couvertes. Pour comparer deux éditions, choisissez **Comparaison**. Revenez à **Résultats** pour retrouver les chiffres et **Exporter le bilan**.
-3. Après avoir réglé les derniers dossiers, utilisez les actions proposées pour terminer ou archiver l’édition. Vous pourrez relire une archive selon vos droits.
+3. Après avoir réglé les derniers dossiers, utilisez les actions proposées pour terminer ou archiver l’édition. Dans **Mes archives**, ouvrez le nom de l’édition pour retrouver son bilan selon vos droits.
 
 ![Cette édition a réuni trois inscrits. Le tirage est confirmé et personne n’a gagné de lot.](illustrations/guide-quotidien/bilan-1024.png)
 
 ### Repartir de l’édition précédente
 
-Dans **Animations** ou **Archives**, choisissez **Cloner** sous le nom de l’édition si l’action est proposée. Relisez les éléments repris avant de créer le nouveau brouillon. Vérifiez ses dates, les accords des commerçants, les préparatifs et les lots avant de publier. Les résultats et les gagnants restent associés à l’édition d’origine. Dans le bilan, **non applicable** indique une mesure sans objet pour ce jeu. **Non collectée** indique que le chiffre est inconnu.
+Dans **Animations** ou **Mes archives**, choisissez **Cloner** sous le nom de l’édition si l’action est proposée. Relisez les éléments repris avant de créer le nouveau brouillon. Vérifiez ses dates, les accords des commerçants, les préparatifs et les lots avant de publier. Les résultats et les gagnants restent associés à l’édition d’origine. Dans le bilan, **non applicable** indique une mesure sans objet pour ce jeu. **Non collectée** indique que le chiffre est inconnu.
 
 <!-- Sommaire : Importer des commerces et obtenir de l’aide -->
 
-## 21 · Préparer un fichier de commerces à importer
+## 22 · Préparer un fichier de commerces à importer
 
 Vérifiez la commune active et assurez-vous d’avoir accès à **Import commerçants**.
 
@@ -339,7 +361,7 @@ Vérifiez la commune active et assurez-vous d’avoir accès à **Import commer�
 
 Ouvrez **Champs facultatifs** pour associer des colonnes supplémentaires. Dans **Colonnes ignorées**, vérifiez les renseignements qui ne seront pas repris dans les fiches.
 
-## 22 · Vérifier et confirmer les lignes à importer
+## 23 · Vérifier et confirmer les lignes à importer
 
 Ouvrez l’aperçu. Vérifiez les commerces prêts à être ajoutés ou mis à jour avant de confirmer.
 
@@ -355,7 +377,7 @@ Ouvrez une ligne pour lire la valeur et la correction proposée. Dans **Catégor
 
 Si l’identité d’un commerce est ambiguë, confiez la vérification à Localeo. Vous pouvez confirmer les autres lignes prêtes en acceptant l’import partiel. Les lignes écartées figureront dans le rapport.
 
-## 23 · Lancer l’import et récupérer le rapport
+## 24 · Lancer l’import et récupérer le rapport
 
 Dans **Historique des imports**, ouvrez le lot qui indique **En attente de démarrage**.
 
@@ -371,7 +393,7 @@ Si le support agit à votre demande, il peut aussi lancer ou poursuivre ce lot e
 
 Si le lot affiche encore **Traitement en cours**, choisissez **Poursuivre le traitement**, même lorsque **Restantes** affiche zéro. **Actualiser cet import** relit le résultat. Une fois l’import terminé, utilisez **Inviter dans Pro** depuis **Commerçants** si vous souhaitez envoyer l’email de première connexion d’un commerçant.
 
-## 24 · Gérer votre équipe et demander de l’aide
+## 25 · Gérer votre équipe et demander de l’aide
 
 Dans le menu du compte, ouvrez **Compte et équipe** pour vérifier l’organisation, les accès et la sécurité du compte.
 
@@ -384,7 +406,7 @@ Dans le menu du compte, ouvrez **Compte et équipe** pour vérifier l’organisa
 
 Gardez vos mots de passe, codes et QR secrets pour vous. La demande indique la date cible de la première réponse humaine, en principe sous deux jours ouvrés. La résolution peut prendre plus de temps.
 
-## 25 · Vérifier une intervention de Localeo
+## 26 · Vérifier une intervention de Localeo
 
 Si Localeo est intervenu à votre demande et que la rubrique est disponible, ouvrez **Mon organisation**, puis **Interventions de Localeo**.
 

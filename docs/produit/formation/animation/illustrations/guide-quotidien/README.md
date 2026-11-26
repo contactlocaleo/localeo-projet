@@ -1,5 +1,22 @@
 # Captures du guide utilisateur Animation
 
+## Rubriques selon l’état de l’édition E85-EVO-02 du 26 novembre 2026
+
+Le portail construit sur la base `29c71f3` avec E85-EVO-02 utilise les données fictives de Valmont. La [liste des animations](liste-animations-1024.png) affiche **Préparations** près de **Mes archives**. La [revue du brouillon](navigation-edition-1024.png) montre les vues de Publication sous leur rubrique. Après publication, [Exploitation sur ordinateur](exploitation-1024.png) et [son sélecteur sur téléphone](exploitation-390.png) donnent accès aux réglages et à la configuration publiée. Le [suivi](suivi-1024.png) présente l’objectif courant et **Bilan provisoire**. La [clôture attendue](navigation-cloture-1024.png) ajoute la rubrique dédiée. Un [ancien lien vers le tirage](tirage-avant-cloture-1024.png) affiche la condition de fermeture.
+
+Depuis le dépôt Animation, construire le portail de test et lancer Chromium sur un port local éphémère avec les réponses synthétiques du guide.
+
+```powershell
+$env:ANIMATION_TEST_SUPPORT = 'true'
+$env:ANIMATION_TEST_DIST = 'tmp/e85-evo2-guide-build'
+$env:ANIMATION_GUIDE_CAPTURE_ROOT = 'tmp/e85-evo2-guide-captures'
+$env:ANIMATION_GUIDE_ARTIFACTS = 'tmp/e85-evo2-guide-report'
+node scripts/build-generation-tests.mjs
+node tests/browser/animation-guide.mjs --only=liste-animations,assistant,preparation,configuration,publication,supports-diffusion,recu-publication,communication,suivi,exploitation,cloture,tirage-avant-cloture,tirage,remise,bilan --captures-only
+```
+
+Après relecture des captures, construire le guide avec `py -3.14 scripts/generate-animation-guide.py --preview-dir tmp/e85-evo2-guide-pages`. Synchroniser le PDF avec `npm run guide:sync`, vérifier la copie avec `npm run guide:check`, reconstruire dans `tmp/e85-evo2-guide-access` et exécuter `node tests/browser/animation-guide.mjs --access-only` avec ce build.
+
 ## Fiche et préparation E85-EVO-01 du 26 novembre 2026
 
 La recette utilise le portail Animation construit depuis la base `a0a3f3d` avec l’évolution locale E85, et des réponses API fictives. La liste présente **Cloner** sous le nom de l’édition. La [gestion des vues](vues-enregistrees-1024.png) montre une vue modifiable et une vue partagée en consultation. L’[aide à la création](creation-aide-1024.png) décrit la préparation, les accords et la publication. La [frise et la navigation](navigation-edition-1024.png) sont visibles dans la revue du brouillon. Le [formulaire de lot libre](lot-libre-1024.png) montre ce que gagne le participant et comment il le récupère. Les [supports de diffusion](supports-diffusion-1024.png) présentent les outils accessibles avant publication.

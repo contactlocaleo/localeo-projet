@@ -286,6 +286,15 @@ archivés et ne renvoie aucune notification déjà remise au téléphone.
 Les messages rédigés par l'organisateur et les autres événements conservent
 leur texte propre.
 
+Un clic sur l’alerte Web Push ouvre directement la fiche de l’animation dans
+Live. Une fiche déjà ouverte reprend le focus. Sinon Live réutilise une
+fenêtre ouverte lorsque le navigateur peut la rediriger. Si la recherche de
+fenêtre, la redirection ou le retour au premier plan échoue, Live tente une
+ouverture directe vers la même fiche. La fiche indique si l’inscription est
+ouverte et applique les conditions habituelles. Le clic utilise une
+destination autorisée du même site et conserve la lecture des destinations
+historiques.
+
 ### Bibliotheque locale et confiance
 
 - ajout d'un coffret avec son token de consultation depuis la vue detaillee ou le raccourci de l'email, et ajout automatique d'une participation apres inscription ;

@@ -3,7 +3,7 @@
 **Arbitrage du 18 novembre 2026 — suites du workshop Animation :**
 [E73-WA-DEC-01/02 et WA-13](../../roadmap/terminees/epic-73-animation-et-ou-coffrets-backlog.md#workshop-ux-20261118)
 remplacent la destination de **PO-13** et de la décision **D2** ci-dessous.
-Dans la fiche livrée par E85, une édition publiée ou en cours ouvre **Participation**. Bilan conserve son accès direct. Les anciens liens vers une rubrique précise retrouvent cette rubrique. La recette du nouveau parcours figure dans le [bilan de vérification E85](../epic-85-parcours-organisateur/verification-livraison.md).
+Dans la fiche E85, une édition publiée ou en cours ouvre **Participation**, avec un accès contextuel au **Bilan provisoire** selon les droits. La rubrique principale **Bilan** apparaît après clôture. Les liens directs retrouvent la vue adaptée à l’état de l’édition et aux droits du gestionnaire. [Navigation actuelle](../epic-85-parcours-organisateur/README.md#retrouver-les-rubriques-actuelles) · [Vérification E85](../epic-85-parcours-organisateur/verification-livraison.md)
 
 ## Évolution du 18 novembre 2026 — suivi Animation et Pro
 

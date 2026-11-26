@@ -7,6 +7,26 @@ Les accents et formulations des anciennes notes sont normalisés sans changer le
 
 ## Signalement identifié
 
+### Correctif du 26 novembre 2026 — clic sur l’alerte de publication d’une animation
+
+Le clic sur l’alerte de publication pouvait laisser Live sur sa page précédente
+ou ne rien ouvrir. Le serveur fournit déjà la fiche de l’animation dans le
+payload Web Push. Le service worker ignorait la fenêtre rendue par la redirection
+et s’arrêtait si le navigateur refusait cette redirection. Le clic vérifie
+désormais la fenêtre qui atteint la fiche et tente une ouverture directe si la
+réutilisation échoue. La fiche applique les règles habituelles d’inscription.
+[Comportement de l’annonce Live](../../specifications/epic-42-localeo-live/frontend-pwa.md#annonce-dune-nouvelle-animation--formulation-du-14-novembre-2026)
+
+La vérification locale passe 369 tests de sécurité, 22 tests serveur et six
+scénarios Chromium. Le banc du service worker couvre la fiche déjà ouverte, la
+réutilisation, l’ouverture directe après échec, les liens historiques et les
+destinations externes écartées. Le banc navigateur simule le clic avec une
+édition fictive et vérifie les inscriptions ouvertes et fermées sur la fiche.
+[Service worker](../../../../localeo-marketplace/tests/security/live-push-navigation.test.cjs) · [Fiche et inscription](../../../../localeo-marketplace/tests/visual/live-publication-push.spec.cjs)
+
+La vérification de l’activation du service worker mis à jour et du clic sur une
+notification système attend un essai sur un téléphone après livraison sur la cible.
+
 ### Correctif du 14 novembre 2026 — annonce de publication plus humaine
 
 La notification de nouvelle animation présentait une succession de libellés
