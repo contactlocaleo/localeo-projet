@@ -184,6 +184,10 @@ Les décisions du 13 novembre résolvent les quatre arbitrages, sans modifier le
 | E77-CA-19 | Client Live ancien ou requête manipulée | Appeler le jeu, accéder à un autre commerce ou demander le prix de référence | Compatibilité explicite, droits et contrôles serveur ; pas de solution dans un DTO public ni de repli vers les règles d'un autre moteur ; aucune régression des jeux existants |
 | E77-CA-20 | Jeux synthétiques et implémentation future | Exécuter tests domaine, intégration et parcours PC/mobile | Preuves des deux modes, limites/tolérance, seuil, réponse unique, concurrence/reprise, autorisations, confidentialité, tirage, pagination et capacité ; contrôles non exécutés distincts des réussites |
 
+**E77-CA-18a (26 novembre 2026).** L’organisateur peut consulter le nombre de
+commerces participants sans proposition soumise pour toute son animation.
+Voir le [périmètre du compteur](../../specifications/epic-77-juste-prix-local/parcours-regles.md#évolution-du-26-novembre-2026--commerces-sans-proposition-soumise).
+
 ## Impacts à instruire
 
 Le tableau conserve l'analyse initiale du cadrage. Les impacts désormais

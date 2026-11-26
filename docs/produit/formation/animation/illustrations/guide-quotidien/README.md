@@ -760,3 +760,14 @@ node tests/browser/animation-guide.mjs --only=import-suppression --captures-only
 ```
 
 La capture utilisée par le PDF est copiée sans retouche depuis ce dossier. Les deux largeurs ont été relues avant la génération du guide.
+
+## Suivi des produits du Juste Prix Local le 26 novembre 2026
+
+Les captures montrent le total des commerces sans proposition soumise et les
+compteurs de la page. Le scénario utilise trois commerces fictifs qui doivent
+encore envoyer leur produit et deux propositions à examiner. Les captures
+proviennent du composant Animation sur la base `c1fef0e` avec le compteur global,
+à 1 024 et 390 px. [Bureau](juste-prix-produits-1024.png) et [mobile](juste-prix-produits-390.png).
+
+Depuis `localeo-animation`, relancer `node tests/browser/juste-prix-products.mjs --guide-captures`
+pour reproduire ces captures à partir de l’API simulée.

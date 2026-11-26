@@ -135,6 +135,35 @@ dates, le règlement et la dotation. Les contrôles E56/E73 restent applicables.
 Les prix du magasin et les modifications ultérieures de sa fiche ne changent
 jamais la référence publiée.
 
+### Évolution du 26 novembre 2026 — commerces sans proposition soumise
+
+**E77-CA-18a.** Dans **Produits et prix proposés**, l’organisateur voit le nombre
+de commerces participants sans proposition soumise pour toute l’animation.
+Parmi les commerces configurés dont l’invitation courante est acceptée, le
+compteur inclut les commerces sans fiche et ceux dont la proposition est à
+compléter. Les propositions à examiner, approuvées ou à corriger sont déjà
+reçues. Les trois compteurs d’état restent propres à la page affichée.
+**Actualiser** relit le compteur avec la liste, en conservant la partie et le
+focus. Zéro est affiché lorsque le serveur le confirme.
+
+Le backend ajoute l’entier `commercants_sans_proposition` à la réponse privée
+`GET /protected/animation-locale/animations/{animation_id}/juste-prix/produits`,
+sous le droit de consultation existant. Le total est indépendant du curseur,
+de la taille de page et du filtre de statut. Un portail mis à jour qui reçoit
+encore l’ancienne réponse affiche la liste seule. Le calcul en base s’appuie
+sur les invitations courantes et les statuts existants. Les transitions de
+proposition et d’approbation, les données stockées et la configuration
+d’exploitation ne nécessitent aucune adaptation. Le générateur de démonstration
+fournit déjà les données utilisées par le calcul.
+
+Les tests couvrent l’absence de fiche, le brouillon, les autres statuts, les
+commerces hors périmètre et la consultation sur plusieurs pages. La recette
+Animation couvre le total, son actualisation, les réponses d’une ancienne API
+et le rendu mobile et bureau. [Preuves de vérification](verification-livraison.md#vérification-du-compteur-e77-ca-18a-le-26-novembre-2026).
+
+Le guide Animation explique le compteur. Le guide Commerçant continue de décrire
+les gestes de préparation et d’envoi dans Pro. [Guide Animation](../../produit/formation/animation/guide-quotidien-animation.md).
+
 ## Participer dans Live — CA-06 à 10 et 14
 
 La fiche publique annonce avant inscription : produit à deviner, seuil,

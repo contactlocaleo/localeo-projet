@@ -239,6 +239,26 @@ dotations E73. Réutiliser notamment les suites existantes
 et les tests de registres et contrats des trois frontends. Leur existence ne
 vaut pas exécution ni couverture E77.
 
+## Vérification du compteur E77-CA-18a le 26 novembre 2026
+
+- Backend `862f6af5` avec le compteur local. Les tests isolés de
+  `tests/api/test_juste_prix_contract.py`,
+  `tests/domain/animation_locale/test_juste_prix_dedicated.py` et
+  `tests/application/test_contrats_moteur_t1.py` passent (65 tests).
+  `tests/security/test_juste_prix_postgres.py` passe sur PostgreSQL jetable
+  (12 tests), dont le changement de total après envoi, les pages filtrées et
+  les refus hors commune. Les contrôles d’architecture passent (793 tests).
+- L’agrégat ajoute une lecture scalaire avec les index existants. Sur PostgreSQL
+  18 local, quatre profils de 100 lectures avec variation des autres éditions
+  et de l’historique des invitations donnent 0,408 à 0,946 ms d’exécution SQL
+  et un p95 de 4,85 à 13,98 ms pour l’appel au dépôt. La mesure porte sur le
+  dépôt seul. Le budget HTTP authentifié et la charge mixte restent à mesurer.
+- Animation `c1fef0e` avec le compteur local. `node tests/browser/juste-prix-products.mjs`
+  passe sur Chromium, avec actualisation, navigation entre pages, zéro confirmé,
+  lecture seule et réponse d’une ancienne version. Le PDF du guide est relu,
+  synchronisé et son accès testé à 390 et 1 024 px avec
+  `node tests/browser/animation-guide.mjs --only=aide` sur le build synthétique.
+
 ## Lots de réalisation et livraison
 
 | Lot | Contenu / critères | Dépendances et sortie attendue |

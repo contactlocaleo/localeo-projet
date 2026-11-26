@@ -199162,13 +199162,20 @@
               }
             ],
             "title": "Next Cursor"
+          },
+          "commercants_sans_proposition": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Commercants Sans Proposition",
+            "description": "Nombre de commerces configurés ayant accepté l’invitation courante et dont la proposition est absente ou à compléter, pour toute l’animation indépendamment de la pagination et du statut filtré."
           }
         },
         "additionalProperties": false,
         "type": "object",
         "required": [
           "items",
-          "next_cursor"
+          "next_cursor",
+          "commercants_sans_proposition"
         ],
         "title": "PageProduitsPayload"
       },

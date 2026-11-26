@@ -160,7 +160,7 @@ Dans **Étape de préparation**, relisez les lieux, le parcours et les contenus 
 
 Attendez que les commerces aient proposé leurs produits, puis vérifiez-les dans le brouillon.
 
-1. Ouvrez **Produits et prix proposés** et repérez les propositions **À examiner**.
+1. Ouvrez **Produits et prix proposés**. Le total des commerces sans proposition soumise inclut les commerces qui ont accepté l’invitation et doivent encore envoyer leur produit. Repérez ensuite les propositions **À examiner**.
 2. Vérifiez le commerce, le produit, sa description, son format ou son unité et le prix toutes taxes comprises (**prix TTC**).
 3. Choisissez **Accepter la proposition** si elle est correcte. Attendez la confirmation et le repère **Approuvé** avant de passer à la suivante.
 
@@ -168,7 +168,7 @@ Attendez que les commerces aient proposé leurs produits, puis vérifiez-les dan
 
 ### Si une proposition doit changer
 
-Choisissez **Demander une correction**, donnez le motif et ajoutez des précisions. Avec **Autre motif**, le texte est obligatoire. Le commerçant pourra corriger sa proposition puis la renvoyer. Les états **À compléter** et **À corriger** signalent une action attendue du commerce. Actualisez la rubrique pour vérifier les dernières réponses. Les compteurs sont ceux de la page affichée.
+Choisissez **Demander une correction**, donnez le motif et ajoutez des précisions. Avec **Autre motif**, le texte est obligatoire. Le commerçant pourra corriger sa proposition puis la renvoyer. Les états **À compléter** et **À corriger** signalent une action attendue du commerce. Actualisez la rubrique pour vérifier les dernières réponses. Les trois compteurs d’état concernent la page affichée.
 
 Après publication ou avec un accès en consultation seule, vous pouvez relire les propositions. En cas de doute sur une décision envoyée, vérifiez d’abord son état.
 
