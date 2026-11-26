@@ -1,5 +1,24 @@
 # Captures du guide utilisateur Animation
 
+## Décisions du gestionnaire du 26 novembre 2026
+
+Les captures ci-dessous proviennent du portail Animation construit depuis la base `a464ae9` avec les évolutions locales de pilotage et de pictogrammes. Le tableau de bord de Valmont et ses éditions utilisent des données fictives. La [file du jour](pilotage-priorites-1024.png) montre une clôture à vérifier et trois lots à justifier. Le [reçu de publication](recu-publication-1024.png) donne accès au suivi. La [liste des participants](suivi-1024.png), le [quota des messages](communication-390.png), la [revue de clôture](cloture-390.png), le [tirage avant clôture](tirage-avant-cloture-1024.png) et le [bilan](bilan-1024.png) illustrent les opérations de l’édition.
+
+Depuis le dépôt Animation, reproduire les écrans sur le serveur local, puis copier les captures relues depuis le dossier de recette.
+
+```powershell
+$env:ANIMATION_TEST_DIST = 'tmp/decisions-guide/dist'
+$env:ANIMATION_GUIDE_CAPTURE_ROOT = 'tmp/decisions-guide/captures'
+$env:ANIMATION_GUIDE_ARTIFACTS = 'tmp/decisions-guide/edition'
+node scripts/build-generation-tests.mjs
+node tests/browser/animation-guide.mjs --only=assistant,liste-animations,preparation,configuration,publication,recu-publication,communication,suivi,cloture,tirage-avant-cloture,tirage,remise,bilan --captures-only
+$env:ANIMATION_GUIDE_ARTIFACTS = 'tmp/decisions-guide/dashboard-run-'
+node tests/browser/dashboard-pilotage-guide.mjs
+$env:ANIMATION_BROWSER_ARTIFACTS = 'tmp/decisions-guide/hunt'
+$env:HUNT_GUIDE_CAPTURE_ONLY = '1'
+node tests/browser/hunt-guided-workflow.mjs
+```
+
 ## Liste des animations et navigation locale du 26 novembre 2026
 
 Les vues de cette édition du guide proviennent du portail Animation après la révision `1d7eaf1`. Les captures de la liste, de la gestion des vues, de la publication, de la clôture, du tirage et du bilan utilisent les mêmes données fictives sur ordinateur et téléphone. Dans la [liste des animations](liste-animations-1024.png), on repère la recherche, la vue et la prochaine action. La [fenêtre de gestion des vues](vues-enregistrees-1024.png) présente les opérations de gestion. La [navigation de Clôture](navigation-cloture-1024.png) montre l’accès direct aux deux rubriques. Le [tirage avant clôture](tirage-avant-cloture-1024.png) présente le raccourci vers la revue.

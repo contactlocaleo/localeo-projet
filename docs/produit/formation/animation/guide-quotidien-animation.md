@@ -22,8 +22,8 @@ Les communes et les actions disponibles dépendent de vos autorisations et des s
 
 Sur votre tableau de bord, ouvrez les tâches qui demandent votre attention, comme la vérification d’une animation arrivée à sa date de fin.
 
-1. Consultez les priorités affichées dans **Pilotage des animations**. Le tableau de bord montre jusqu’à trois tâches.
-2. Lisez le nom, la commune, l’étape et le motif. Ouvrez l’action proposée pour atteindre directement le dossier, ou choisissez **Voir toute la liste À traiter**.
+1. Dans **Pilotage des animations**, commencez par **À traiter aujourd’hui**. Ce bloc présente jusqu’à trois interventions pour la commune. Il garde les mêmes tâches quand vous changez la période des chiffres.
+2. Lisez le nom de l’édition et la raison de l’intervention. Une fin prévue dépassée invite à **Vérifier la clôture**. Si des lots restent à justifier après le tirage, **Ouvrir le dossier** affiche le dossier concerné. Pour retrouver les autres interventions, choisissez **Voir toute la liste À traiter**.
 3. Dans la fiche, l’étape reste visible quand vous consultez une autre rubrique. Sur téléphone, ouvrez **Toutes les rubriques** pour les retrouver. Revenez à la liste pour reprendre vos filtres et votre page.
 
 ![Choisissez une priorité ou ouvrez la liste complète des animations à traiter.](illustrations/guide-quotidien/pilotage-priorites-1024.png)
@@ -34,7 +34,7 @@ Dans **Rappels et autres alertes**, choisissez **Supprimer de mon tableau de bor
 
 ## 3 · Retrouver une animation et réutiliser ses filtres
 
-Dans **Animations**, recherchez le nom d’une édition. Sa ligne indique l’étape en cours et la prochaine action disponible.
+Dans **Animations**, recherchez le nom d’une édition. Sa ligne indique son statut, le motif d’une intervention éventuelle et la prochaine action disponible. Vous retrouvez le même statut en ouvrant la fiche.
 
 1. Pour restreindre la liste, ouvrez **Filtres** et choisissez vos critères, par exemple le modèle ou la période. Les critères actifs restent visibles. Retirez-en un pour élargir la recherche.
 2. Ouvrez l’édition par son nom, ou choisissez sa prochaine action pour rejoindre le dossier concerné. **Retour aux animations** vous ramène à la même page avec vos critères.
@@ -180,11 +180,11 @@ Ouvrez le brouillon dont vous voulez rendre la présentation accessible aux habi
 
 1. Dans la barre des étapes, ouvrez **Publication**, puis **Revue de publication**. Le repère d’état indique où en est l’animation, même lorsque vous consultez une autre étape. Repérez les blocages avant de publier.
 2. Dans **Préparer mon animation**, sélectionnez une carte rouge ou orange pour ouvrir la rubrique indiquée. Dépliez **Autres points à vérifier** pour afficher les suivants. Traitez les blocages, puis relisez la présentation destinée aux habitants.
-3. Choisissez **Publier l’animation**, puis confirmez. Attendez la confirmation et vérifiez que l’état devient **Publiée** ou **En cours** si le jeu est ouvert.
-
-![L’indication Étape actuelle reste sur Préparation pendant que vous consultez Publication. Sur téléphone, touchez le nom de la rubrique pour ouvrir la navigation.](illustrations/guide-quotidien/navigation-edition-1024.png)
+3. Choisissez **Publier l’animation**, puis confirmez. Revenez dans **Revue de publication** pour relire le reçu. Vous y retrouvez l’état et, lorsqu’elle est disponible, la date de publication effective. Pour une animation en cours, choisissez **Ouvrir le suivi de la participation**.
 
 ![La revue de publication présente les conditions à remplir avant de confirmer.](illustrations/guide-quotidien/publication-1024.png)
+
+![Après publication, ouvrez le suivi depuis le reçu de l’édition.](illustrations/guide-quotidien/recu-publication-1024.png)
 
 ### Si la confirmation tarde
 
@@ -228,14 +228,14 @@ Les envois depuis une animation et depuis la commune utilisent le même crédit,
 Ouvrez l’animation concernée dans la bonne commune. Pour aider une personne, munissez-vous du nom ou de la référence de sa participation.
 
 1. Ouvrez **Participation**. Les indicateurs présentent la situation de l’animation. La liste des participants se trouve sur le même écran.
-2. Recherchez la personne ou filtrez les résultats. Ouvrez son dossier et vérifiez sa progression et les réponses affichées selon le jeu.
+2. Recherchez la personne ou filtrez les résultats. Vérifiez le nom ou la référence et, si besoin, les coordonnées masquées. Choisissez **Voir le participant** pour lire son dossier et sa progression.
 3. Pour vérifier un passage en commerce, choisissez **Validations** dans **Suivi de la participation**. Revenez à **Participants** pour retrouver les dossiers. La tombola publique recueille les inscriptions sans passage en commerce.
 
 ![Dans Participation, passez des participants aux validations et ouvrez le dossier de la personne recherchée.](illustrations/guide-quotidien/suivi-1024.png)
 
 ### Si vous devez intervenir sur le parcours
 
-Vérifiez le commerce et la consigne attendue avant d’agir. Selon le jeu et vos droits, des actions peuvent être proposées sur une étape ou un justificatif. Lisez les conséquences affichées avant de confirmer. Une donnée **non collectée** ou indisponible reste inconnue. Vérifiez la date de relevé quand elle est indiquée.
+Vérifiez le commerce et la consigne attendue avant d’agir sur une étape ou un justificatif. Si vous devez supprimer une participation et disposez de ce droit, ouvrez le menu d’actions de la personne concernée. Relisez son identité et les conséquences affichées avant de confirmer.
 
 ## 16 · Consulter l’activité de votre commune sur une période
 
@@ -273,7 +273,7 @@ Au-delà de 10 000 animations, raccourcissez la période pour pouvoir exporter. 
 
 Clôturez l’animation quand vous souhaitez fermer la participation.
 
-1. Vérifiez les dates et l’activité. Si **Clôture attendue** apparaît sur votre tableau de bord, ouvrez l’animation concernée.
+1. Vérifiez les dates et l’activité. Si la fin prévue est dépassée, choisissez **Vérifier la clôture** dans **À traiter aujourd’hui**. Cette action ouvre la revue.
 2. Dans **Clôture**, choisissez **Clôture des participations**. Contrôlez le nombre de qualifiés et les conditions de fermeture. Lisez les effets, puis choisissez **Confirmer la clôture** si vous souhaitez fermer le jeu.
 3. Vérifiez l’état **Clôturée**. Sous **Clôture**, ouvrez **Fin et archivage** pour retrouver les dossiers à régler. **Clôture des participations** vous ramène directement à la revue.
 
@@ -299,17 +299,17 @@ Attendez la clôture et vérifiez que les lots et les dossiers attendus sont pr�
 
 Un lot externe se retire au lieu indiqué. Le commerce désigné valide un bon. Pour un coffret, lisez les prestations utilisées et celles qui restent lorsqu’elles sont connues. Pour un rappel, sélectionnez les destinataires et confirmez l’envoi. L’email et la remise sont suivis séparément.
 
-**Tous les lots** enlève le filtre de tâche et garde la recherche, le lieu, l’animation et l’échéance. Les compteurs couvrent le contexte entier. Ouvrez **Fin de l’animation** pour résoudre les dossiers restants.
+**Tous les lots** enlève le filtre de tâche et garde les autres critères. Après un tirage confirmé sans gagnant, **Fin et archivage** indique combien de lots restent à justifier. Ouvrez le dossier, choisissez **Justifier les lots sans gagnant** et saisissez le motif. Vérifiez la quantité avant de confirmer. Le dossier passe alors à **Justifié**.
 
 ## 20 · Faire le bilan et préparer une nouvelle édition
 
 Une fois l’animation passée, retrouvez les chiffres à partager et les éléments à garder pour la prochaine édition.
 
-1. Dans **Bilan**, choisissez **Résultats**. Lisez les inscriptions, les parcours, les passages et les lots remis lorsque ces mesures sont disponibles.
+1. Dans **Bilan**, choisissez **Résultats**. Lisez les inscriptions, les parcours, les passages et les lots remis. Pour un jeu avec tirage, **Tirage à venir** ou **Tirage en cours** indique que le résultat se fait attendre. **Tirage confirmé · 0 gagnant** signifie que le tirage a eu lieu.
 2. Vérifiez la période, la date d’observation et les données couvertes. Pour comparer deux éditions, choisissez **Comparaison**. Revenez à **Résultats** pour retrouver les chiffres et **Exporter le bilan**.
 3. Après avoir réglé les derniers dossiers, utilisez les actions proposées pour terminer ou archiver l’édition. Vous pourrez relire une archive selon vos droits.
 
-![Le bilan rapproche les résultats et les objectifs. Vérifiez quelles mesures sont disponibles.](illustrations/guide-quotidien/bilan-1024.png)
+![Cette édition a réuni trois inscrits. Le tirage est confirmé et personne n’a gagné de lot.](illustrations/guide-quotidien/bilan-1024.png)
 
 ### Repartir de l’édition précédente
 

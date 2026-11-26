@@ -3,7 +3,7 @@
   "info": {
     "title": "Localeo Backend - contrat implemente EPIC 41",
     "description": "OpenAPI complet du backend, dont les parcours Animation locale. Genere hors ligne depuis le code local pour les integrations et les mocks ; cet instantane ne prouve pas son deploiement.",
-    "version": "1.0.0+f90e965"
+    "version": "1.0.0+4c74f60"
   },
   "paths": {
     "/public/identite-acces/interne/connexion": {
@@ -152006,6 +152006,18 @@
               }
             ]
           },
+          "publication_effective_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Publication Effective At"
+          },
           "version": {
             "type": "integer",
             "minimum": 1.0,
@@ -163129,6 +163141,18 @@
       },
       "CompteursFinAnimationPayload": {
         "properties": {
+          "unites_en_attente_attribution": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Unites En Attente Attribution"
+          },
           "dossiers_non_resolus": {
             "type": "integer",
             "minimum": 0.0,
@@ -175927,6 +175951,24 @@
       },
       "EtatFinAnimationPayload": {
         "properties": {
+          "etat_tirage": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "A_VENIR",
+                  "EN_COURS",
+                  "CONFIRME",
+                  "NON_APPLICABLE",
+                  "INDISPONIBLE"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Etat Tirage"
+          },
           "animation_id": {
             "type": "string",
             "format": "uuid",
@@ -189403,6 +189445,24 @@
       },
       "MesuresAnimationDTO": {
         "properties": {
+          "etatTirage": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "A_VENIR",
+                  "EN_COURS",
+                  "CONFIRME",
+                  "NON_APPLICABLE",
+                  "INDISPONIBLE"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Etattirage"
+          },
           "animationId": {
             "type": "string",
             "format": "uuid",
@@ -210757,6 +210817,29 @@
             "type": "string",
             "format": "date-time",
             "title": "Observe Le"
+          },
+          "quantite": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Quantite"
+          },
+          "dossier_ref": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Dossier Ref"
           }
         },
         "type": "object",

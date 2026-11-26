@@ -73,10 +73,19 @@ Une recommandation du bandeau mène à la même revue que le raccourci placé au
 
 La barre au-dessus des résultats réunit recherche, choix de vue et filtres. Les critères appliqués peuvent être retirés individuellement. Une vue enregistrée s’applique depuis le sélecteur. Sa création, sa modification, son partage et sa suppression passent par « Gérer les vues ». Le menu d’une ligne contient le clonage et laisse sa place à la prochaine action. La sélection des brouillons fait apparaître les actions groupées. Le retour d’une fiche retrouve les critères, la page et la ligne concernée. Sur les jeux de recette, deux éditions complètes doivent être visibles à 1280 × 800 et la première avec sa prochaine action à 390 × 800.
 
+### Repérer les interventions du jour
+
+Le tableau de bord de la commune ouvre sur **À traiter aujourd’hui**, avant le choix de la période et les mesures d’activité. Il présente jusqu’à trois recommandations dans l’ordre du serveur. Chaque intervention nomme l’édition, le motif connu et le geste disponible. Une lecture confirmée sans intervention affiche « Aucune intervention à traiter aujourd’hui ». La première action reste visible à 390 × 800 et à 1280 × 800.
+
+La liste et le bandeau partagent le libellé du statut métier. Le gestionnaire peut consulter une autre rubrique tout en repérant l’étape actuelle. Pour une clôture attendue, la date de fin prévue accompagne l’accès à la revue. Une recommandation liée à un seul dossier ouvre celui-ci. Si plusieurs dossiers restent à traiter, elle ouvre la liste filtrée de l’édition. Revenir à la liste ou au tableau de bord restitue le point de départ.
+
+Avant l’attribution, Fin et archivage distingue les lots encore attribuables des lots définitivement sans gagnant. Seuls les seconds peuvent faire l’objet d’une justification lorsqu’elle est autorisée. Le reçu de publication présente la date effective si elle est connue et un accès au suivi autorisé. La ligne d’un participant propose sa consultation et réserve la suppression au menu de la ligne. Le bilan précise si le tirage est à venir, en cours ou confirmé. Il garde un zéro confirmé et signale explicitement une lecture indisponible.
+
 ## Contenu commun des écrans de gestion
 
 | Composant | Règle de présentation et d’usage |
 | --- | --- |
+| Pictogrammes | Reprendre les pictogrammes de gestion du portail pour identifier les mesures, les états et les actions dans les onglets. Associer chaque pictogramme à un libellé visible et conserver le même sens sur téléphone. Les icônes d’accompagnement sont ignorées par les lecteurs d’écran. |
 | Métriques | Placer les valeurs liées à la tâche avant la liste concernée. Nommer l’unité, la période ou la population. Distinguer « inscrits », « qualifiés » et « gains remis ». Un zéro confirmé s’affiche comme zéro. Une lecture indisponible affiche son état. Le lien de détail reprend exactement le périmètre annoncé. |
 | Recherche et filtres | Conserver le même ordre de lecture, un libellé visible par champ, les critères actifs et un moyen de les effacer. À la modification d’un filtre, revenir à la première page des résultats. Une requête ancienne arrivée en retard ne remplace jamais les résultats de la recherche courante. |
 | Tableau | Donner à chaque colonne un en-tête. Mettre l’identité du dossier en premier, puis les preuves ou valeurs comparables, l’état en texte et son action. Un lien identifiable ouvre le dossier au clavier. Les colonnes métier varient avec le modèle, leur ordre d’usage reste stable. |

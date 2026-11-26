@@ -10,7 +10,7 @@ Guides PDF, prompts, visuels et prototypes produits. Les versions historiques re
 
 Le [guide quotidien Localeo Pro](formation/commercant/guide-quotidien-localeo-commercant.pdf), édition illustrée du 25 novembre 2026, propose un sommaire cliquable pour retrouver les gestes du comptoir, la préparation des animations et la gestion du commerce. [Source éditable](../docs/produit/formation/commercant/guide-quotidien-commercant.md). Les guides de prise en main v7 à v11 ci-dessous restent des versions historiques.
 
-Le [guide quotidien Localeo Animation](formation/animation/guide-quotidien-localeo-animation.pdf), édition illustrée du 25 novembre 2026, propose un sommaire cliquable pour retrouver les gestes de la création d’une animation jusqu’au bilan, en passant par les commerçants, les lots et la communication. [Source éditable](../docs/produit/formation/animation/guide-quotidien-animation.md).
+Le [guide quotidien Localeo Animation](formation/animation/guide-quotidien-localeo-animation.pdf), édition illustrée du 26 novembre 2026, couvre les interventions du jour, la création, la publication, le suivi des participants, les dossiers de lots et le bilan. [Source éditable](../docs/produit/formation/animation/guide-quotidien-animation.md).
 
 Ces guides sont distribués depuis leurs applications respectives. Leur [maintenance commune](../docs/organisation/maintenance-guides-utilisateurs.md) fait partie de chaque évolution qui affecte un parcours décrit.
 
